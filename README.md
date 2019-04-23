@@ -16,6 +16,7 @@ I suggest having screens in their own .rpy file if you originaly indended to bun
 to the screen to a minimum.
 
 How to Install:
+
     1. Download a .zip file from the master branch.
     2. Extract the contents of the .zip into the Lab Rats 2/game/ folder.
     3. Launch Lab Rats 2 and load up a save or start fresh.
