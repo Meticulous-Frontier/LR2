@@ -29,6 +29,7 @@ label opinion_edit_label(person_choice):
             $ degree = 2
 
     "Speaker" "Does the player know about [the_person.name]'s opinion?"
+# This should show.
     menu:
         "Yes":
             $ discovered = True
