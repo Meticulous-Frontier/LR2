@@ -11,6 +11,7 @@ label opinion_edit_label(person_choice):
     $ opinion = str(renpy.input("Opinion:"))
 
     "Speaker" "What is [the_person.name]'s thoughts on the opinion?"
+# This should also show
 
     menu:
         "Hate":
