@@ -25,8 +25,3 @@ How to Install:
     6. Hit the Mod Initialization button and click through any messages.
     7. Done. Any mods present that use the Mod Core should now be activated.
 
-Git Flow: # I have no idea what I am talking about here.
-    
-    1. Clone a branch.
-    2. Make and commit changes.
-    3. Do a merge request.
