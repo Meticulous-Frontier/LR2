@@ -9,11 +9,12 @@
       # Make the_person the_person.willpower be affected by choices made through dialogue and not only during final calculation.
       # Create additional actions and labels
       # Create a serum that gives a "Receptive" role. Instead of handing it out to everyone.
+# NOTE: Do checks against the_person.willpower and confirm changes in the_person.willpower with calc_will()
 
 init -1 python:
 
     # Thematic lists NOTE: These lists should be appendable from within the game
-    exhib_list = ["naked", "nude"] # Showing off, not nescessary connected to sluttiness
+    exhib_list = ["naked", "nude", "topless", "underwear"] # Showing off, not nescessary connected to sluttiness
     voyer_list = ["spying"] # Observing lewd acts
     sub_list = ["submissive"] # Submissive behavior
     preg_list = ["pregnant"] # Pregnancy or pregnancy play
@@ -33,40 +34,50 @@ init -1 python:
         if the_person.willpower < 0:
             the_person.willpower = 0
 
-    def change_power(amount, add_to_log = True):
-        mc.power += amount
-        if mc.power < 0:
-            mc.power = 0
+        log_string = ""
+        log_string_total = ""
+        if amount > 0:
+            log_string = "+" + str(amount) + " Willpower"
+            log_string_total = str(the_person.willpower) + " Total Willpower"
+        else:
+            log_string = str(amount) + " Willpower"
+            log_string_total = str(the_person.willpower) + " Total Willpower"
 
+        if add_to_log and amount != 0:
+            mc.log_event(the_person.name + ": " + log_string, "float_text_blue")
+            mc.log_event(the_person.name + ": " + log_string_total, "float_text_blue")
+        return the_person.willpower
+#    def change_power(amount, add_to_log = True):
+#        mc.power += amount
+#        if mc.power < 0:
+#            mc.power = 0
+
+    def add_opinion(opinion, degree, discovered, add_to_log = True):
+        opinion = opinion
+        degree = degree
+        discovered = discovered
+        the_person.opinions[opinion] = [degree, discovered]
+
+        log_string = str(opinion) + " changed"
+        if add_to_log:
+            mc.log_event("Opinion: " + log_string, "float_text_green")
 
     def calc_power():
         mc.power = 0
 
         mc.power += int(mc.charisma*5) # Positive character modifiers
         mc.power += int(mc.current_stamina*1.5)
-
-
         return mc.power
 
-    def calc_willpower(): # Base calculation.
-                          # The goal for the player is to bring the the_person.willpower below their suggest_power.
-        the_person.willpower = 0
+    def calc_will(add_to_log = True): # Base calculation. Run this once.
 
-        the_person.willpower += int(the_person.focus * 10)
-        the_person.willpower += int(the_person.happiness * 0.2)
+        the_person.willpower = int(the_person.focus * 10 + the_person.happiness * 0.2 - the_person.obedience * 0.1 - the_person.love * 0.2 - the_person.suggestibility * 0.5)
 
-        the_person.willpower -= int(the_person.obedience * 0.1)
-        the_person.willpower -= int(the_person.love * 0.2)
-        the_person.willpower -= int(the_person.suggestibility * 0.5)
-
-        if people_nearby > 1: # If there are more people than just the target.
-            the_person.willpower += int(len(mc.location.people)*5)
-
-        if opinion != None: # If the opinion is not set yet it will not be in the calculation
-            if any(srchstr in opinion for srchstr in exhib_list): # Check if opinion is in a list
-                    if the_person in mc.business.get_employee_list(): # Check if the person is employeed
-                        if corporate_enforced_nudity_policy.is_owned():
-                            the_person.willpower -= 10
+#        if opinion != None: # If the opinion is not set yet it will not be in the calculation
+#            if any(srchstr in opinion for srchstr in exhib_list): # Check if opinion is in a list
+#                    if the_person in mc.business.get_employee_list(): # Check if the person is employeed
+#                        if corporate_enforced_nudity_policy.is_owned():
+#                            the_person.willpower -= 10
 
         # Personality checks
 
@@ -77,6 +88,13 @@ init -1 python:
 #            if the_person in mc.business.get_employee_list():
 #                if the_person.calculate_base_salary() < the_person.salary:
 #                    the_person.willpower -= 2
+        if the_person.willpower < 0:
+            the_person.willpower = 0
+
+        log_string = str(the_person.willpower) + " Willpower"
+
+        if add_to_log:
+            mc.log_event(the_person.name + ": " + log_string, "float_text_blue")
         return the_person.willpower
 
 #$ authority_employees = 65 + (mc.charisma*5) + (the_person.obedience * 0.1) + (the_person.suggestibility * 0.5) - (the_person.focus * 10) # Baseline for employed characters. Will take policies into consideration.
@@ -89,91 +107,202 @@ init -1 python:
 
 
 label influence_opinion_start_label(the_person): # This is the setup phase that you have to get through.
-
+                                                 # We want to set up the setting and allow for choices to tackle them for better or worse results.
+                                                 # Do mood checks, relation to player character, opinion checks, personality checks.
+                                                 # calc_will() sets the baseline for the character after that use change_willpower(amount) to add and remove.
+                                                 # NOTE: Need to add ways to fail before the final segment.
     $ opinion = None
     $ degree = None
     $ discovered = None
     $ people_nearby = len(mc.location.people)
-    $ the_person.willpower = calc_willpower()
-    $ mc.power = calc_power()
+    $ the_person.willpower = 0
+    $ the_person.willpower = calc_will()
 
     # Pre-check to let the player know base information about the scenario.
-    if mc.power > the_person.willpower:
+    if calc_power() > the_person.willpower:
         "Speaker" "You feel confident that you will be able to sway their opinion..."
 
-    elif mc.power < the_person.willpower:
+    elif calc_power() < the_person.willpower:
         "Speaker" "[the_person.name] seems to have a sturdy mentality at the moment, proceed with caution"
 
     else: # Happens if their willpower is equal to your power.
         "Speaker" "This can go either way, don't mess up."
 
-    if len(mc.location.people) > 1:
-
+    if len(mc.location.people) > 1: # Check if there are other people nearby and fortify their willpower based on how many.
+        $ change_willpower(len(mc.location.people)*5)
         "Speaker" "There are [people_nearby] other people around you that might interfer with the process."
         "Speaker" "Try bringing [the_person.name] to a more secluded area?"
 
         menu:
             "Yes":
-                $ people_nearby = 0
-                $ calc_willpower() # Run the calculation after making considerable changes.
+                $ change_willpower(-len(mc.location.people)*5) # Run the calculation after making considerable changes.
                 "Speaker" "You bring [the_person.name] away from the others"
-                if mc.power > the_person.willpower:
+                if calc_power() > the_person.willpower:
 
                     "Speaker" "Having isolated the target it is now both more focused and pliable."
 
                 else: # Might want to assume that a certain personality or opinion makes them uncomfortable being away from others thus it was a mistake luring them away. Hate and unhappiness might also play into it.
-                    "Speaker" "[the_person.name] seems to be uncomfortable with being alone in your presence ."
+                    if the_person.love < 0:
+                        $ the_person.draw_person(emotion = "sad")
+                        "Speaker" "[the_person.name] seems to be uncomfortable with being alone in your presence ."
+
             "No":
                 pass
 
+            "Back":
+                return
 
+    call influence_opinion_middle_label()
 
-
-
+label influence_opinion_middle_label():
     # Have the player input an opinion then run checks on how the_person reacts to it.
-    # Reset the opinion variable upon exiting the encounter for it to not preemtively bring it into the calculation.
     "Speaker" "Type an opinion e.g 'sculpting garden gnomes' then hit enter to proceed "
     $ opinion = str(renpy.input("Opinion:"))
 
-    "Speaker" "What is [the_person.name]'s thoughts on the opinion?"
+    if any(srchstr in opinion for srchstr in exhib_list): # This checks any keyword.
+        if any(srchstr in opinion for srchstr in the_person.sexy_opinions): # This is limited to exact matches.
+            $ change_willpower(-5)
+            "Speaker" "[the_person.name] already has similar opinions making it easier to convince her."
+        "Speaker" "This is in exhib_list"
 
+    if any(srchstr in opinion for srchstr in voyer_list):
+        if any(srchstr in opinion for srchstr in the_person.sexy_opinions):
+            $ change_willpower(-5)
+            "Speaker" "[the_person.name] already has similar opinions making it easier to convince her."
+        "Speaker" "This is in voyer_list"
 
+    if any(srchstr in opinion for srchstr in sub_list):
+        if any(srchstr in opinion for srchstr in the_person.sexy_opinions):
+            $ change_willpower(-5)
+            "Speaker" "[the_person.name] already has similar opinions making it easier to convince her."
+        "Speaker" "This is in sub_list"
+
+    if any(srchstr in opinion for srchstr in preg_list):
+        if any(srchstr in opinion for srchstr in the_person.sexy_opinions):
+            $ change_willpower(-5)
+            "Speaker" "[the_person.name] already has similar opinions making it easier to convince her."
+        "Speaker" "This is in preg_list"
+
+    if any(srchstr in opinion for srchstr in dom_list):
+        if any(srchstr in opinion for srchstr in the_person.sexy_opinions):
+            $ change_willpower(-5)
+            "Speaker" "[the_person.name] already has similar opinions making it easier to convince her."
+        "Speaker" "This is in dom_list"
+
+    if any(srchstr in opinion for srchstr in sadist_list):
+        if any(srchstr in opinion for srchstr in the_person.sexy_opinions):
+            $ change_willpower(-5)
+            "Speaker" "[the_person.name] already has similar opinions making it easier to convince her."
+        "Speaker" "This is in sadist_list"
+
+    "Speaker" "How do you want [the_person.name] to feel about [opinion]?"
     menu:
         "Hate":
             $ degree = -2
+            if opinion in the_person.sexy_opinions: # Avoids errors.
+
+                if the_person.sexy_opinions[opinion][0] == -1:
+                    $ change_willpower(+5)
+                    "Speaker" "[the_person.name] dislikes [opinion], so it is going to be difficult to change her mind."
+
+                if the_person.sexy_opinions[opinion][0] == 1:
+                    $ change_willpower(+10)
+                    "Speaker" "[the_person.name] likes [opinion], so it is going to be difficult to change her mind."
+
+                if the_person.sexy_opinions[opinion][0] == 2:
+                    $ change_willpower(+15)
+                    "Speaker" "[the_person.name] loves [opinion], so it is going to be difficult to change her mind."
 
         "Dislike":
             $ degree = -1
+            if opinion in the_person.sexy_opinions: # Avoids errors.
+
+                if the_person.sexy_opinions[opinion][0] == -2:
+                    $ change_willpower(+5)
+                    "Speaker" "[the_person.name] hates [opinion], so it is going to be difficult to change her mind."
+
+                if the_person.sexy_opinions[opinion][0] == 1:
+                    $ change_willpower(+5)
+                    "Speaker" "[the_person.name] likes [opinion], so it is going to be difficult to change her mind."
+
+                if the_person.sexy_opinions[opinion][0] == 2:
+                    $ change_willpower(+10)
+                    "Speaker" "[the_person.name] loves [opinion], so it is going to be difficult to change her mind."
 
         "Neutral": #This will not display, can be used to "remove" an opinion without the need for additional code.
             $ degree = 0
+            if opinion in the_person.sexy_opinions: # Avoids errors.
+                if the_person.sexy_opinions[opinion][0] == -2:
+                    $ change_willpower(+10)
+                    "Speaker" "[the_person.name] hates [opinion], so it is going to be difficult to change her mind."
 
+                if the_person.sexy_opinions[opinion][0] == -1:
+                    $ change_willpower(+5)
+                    "Speaker" "[the_person.name] dislikes [opinion], so it is going to be difficult to change her mind."
+
+                if the_person.sexy_opinions[opinion][0] == 1:
+                    $ change_willpower(+5)
+                    "Speaker" "[the_person.name] likes [opinion], so it is going to be difficult to change her mind."
+
+                if the_person.sexy_opinions[opinion][0] == 2:
+                    $ change_willpower(+10)
+                    "Speaker" "[the_person.name] loves [opinion], so it is going to be difficult to change her mind."
         "Like":
             $ degree = 1
+            if opinion in the_person.sexy_opinions: # Avoids errors.
+                if the_person.sexy_opinions[opinion][0] == -2:
+                    $ change_willpower(+10)
+                    "Speaker" "[the_person.name] hates [opinion], so it is going to be difficult to change her mind."
+
+                if the_person.sexy_opinions[opinion][0] == -1:
+                    $ change_willpower(+5)
+                    "Speaker" "[the_person.name] dislikes [opinion], so it is going to be difficult to change her mind."
+
+                if the_person.sexy_opinions[opinion][0] == 2:
+                    $ change_willpower(+10)
+                    "Speaker" "[the_person.name] loves [opinion], so it is going to be difficult to change her mind."
+
+
 
         "Love":
             $ degree = 2
+            if opinion in the_person.sexy_opinions: # Avoids errors.
 
-    "Speaker" "Does the player know about [the_person.name]'s opinion?"
+                if the_person.sexy_opinions[opinion][0] == -2:
+                    $ change_willpower(+15)
+                    "Speaker" "[the_person.name] hates [opinion], so it is going to be difficult to change her mind."
 
-    menu:
-        "Yes":
-            $ discovered = True
+                if the_person.sexy_opinions[opinion][0] == -1:
+                    $ change_willpower(+10)
+                    "Speaker" "[the_person.name] dislikes [opinion], so it is going to be difficult to change her mind."
 
-        "No":
-            $ discovered = False
-
-
-
+                if the_person.sexy_opinions[opinion][0] == 1:
+                    $ change_willpower(+5)
+                    "Speaker" "[the_person.name] likes [opinion], so it is going to be difficult to change her mind."
 
 
 
-    if mc.power > the_person.willpower:
+#    "Speaker" "Does the player know about [the_person.name]'s opinion?" NOTE: Might as well assume yes, because the player is determining it.
+#
+#    menu:
+#        "Yes":
+#            $ discovered = True
+#
+#        "No":
+#            $ discovered = False
+
+    call influence_opinion_end_label
+
+
+
+
+label influence_opinion_end_label():
+
+    if calc_power() > the_person.willpower:
         "Speaker" "You succeed at making the changes"
-        $ the_person.opinions[opinion] = [degree, discovered]
-
-    if the_person.willpower > mc.power :
+        $ add_opinion(opinion, degree, discovered)
+    elif calc_will() > calc_power() :
         "Speaker" "[the_person.name]'s mind rejects your suggestions"
     else:
         "Speaker" "You are at a stalemate, try changing your approach"
-    return
+    jump game_loop
