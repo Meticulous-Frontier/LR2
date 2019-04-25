@@ -21,13 +21,6 @@ init -1 python:
     dom_list = ["dominant"] # Domimant behavior
     sadist_list = [] # Sadistic behavior
 
-    #def suggest_training():
-    #    training_progress = training_progress
-    #    if training_progress == 10:
-    #        return "No more stages"
-    #    else:
-    #        training_progress += 1
-    #        return training_progress
 
     def change_willpower(amount, add_to_log = True):
         the_person.willpower += amount
@@ -47,10 +40,6 @@ init -1 python:
             mc.log_event(the_person.name + ": " + log_string, "float_text_blue")
             mc.log_event(the_person.name + ": " + log_string_total, "float_text_blue")
         return the_person.willpower
-#    def change_power(amount, add_to_log = True):
-#        mc.power += amount
-#        if mc.power < 0:
-#            mc.power = 0
 
     def add_opinion(opinion, degree, discovered, add_to_log = True):
         opinion = opinion
@@ -73,21 +62,6 @@ init -1 python:
 
         the_person.willpower = int(the_person.focus * 10 + the_person.happiness * 0.2 - the_person.obedience * 0.1 - the_person.love * 0.2 - the_person.suggestibility * 0.5)
 
-#        if opinion != None: # If the opinion is not set yet it will not be in the calculation
-#            if any(srchstr in opinion for srchstr in exhib_list): # Check if opinion is in a list
-#                    if the_person in mc.business.get_employee_list(): # Check if the person is employeed
-#                        if corporate_enforced_nudity_policy.is_owned():
-#                            the_person.willpower -= 10
-
-        # Personality checks
-
-        # Opinion checks
-
-        # Salary check
-#        if approach == "authority":
-#            if the_person in mc.business.get_employee_list():
-#                if the_person.calculate_base_salary() < the_person.salary:
-#                    the_person.willpower -= 2
         if the_person.willpower < 0:
             the_person.willpower = 0
 
@@ -96,11 +70,6 @@ init -1 python:
         if add_to_log:
             mc.log_event(the_person.name + ": " + log_string, "float_text_blue")
         return the_person.willpower
-
-#$ authority_employees = 65 + (mc.charisma*5) + (the_person.obedience * 0.1) + (the_person.suggestibility * 0.5) - (the_person.focus * 10) # Baseline for employed characters. Will take policies into consideration.
-#$ authority = 50 + (mc.charisma*5) + (the_person.obedience * 0.1) + (the_person.suggestibility * 0.5) - (the_person.focus * 10) # Baseline if trying to speak to their obedience, will take personality and likes into consideration.
-#$ emotional = 50 + (mc.charisma*5) + (the_person.love * 0.2) + (the_person.suggestibility * 0.5) - (the_person.focus * 10) # Baseline if using "emotional manipulation" aka love stat. Will take personality and likes into consideration.
-#$ accusing = 50 + (mc.charisma*5) + (the_person.obedience * 0.1) + (the_person.suggestibility * 0.5) - (the_person.happiness * 0.1) # Baseline if being accusing and trying to "correct" their wrong thinking. Given a bonus if target is "unhappy" / "depressed"
 
 init -1 python:
     pass
