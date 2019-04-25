@@ -1,8 +1,8 @@
 init -1 python: # Declare variables to use
 
     # Create the room(s) I want to use.
-    mall_salon = Room("salon", "Hair Salon", [], Image("Salon_Background.png"), [], [], [], True, [], None, False)
-    business_salon = Room("salon", "Hair Salon", [], Image("Salon_Background.png"), [], [], [], True, [], None, False)
+    mall_salon = Room("salon", "Hair Salon", [], Image("Mods/mods/Room/images/Salon_Background.png"), [], [], [], True, [], None, False)
+    business_salon = Room("salon", "Hair Salon", [], Image("Mods/mods/Room/images/Salon_Background.png"), [], [], [], True, [], None, False)
 
 
 
