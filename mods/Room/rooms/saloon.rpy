@@ -23,11 +23,10 @@ init 2 python: # Room creation
     if mall_salon not in mod_rooms_append:
         mod_rooms_append.append(mall_salon)
 
-    for objects in mall_salon.objects:
-        if objects not in mall_salon.objects:
-            mall_saloon.add_object(make_floor())
-            mall_saloon.add_object(make_wall())
-            mall_saloon.add_object(make_chair())
-            mall_saloon.add_object(make_desk())
-            mall_saloon.add_object(make_table())
-            mall_saloon.add_object(make_window())
+    if object not in mall_salon.objects:
+        mall_salon.add_object(make_floor())
+        mall_salon.add_object(make_wall())
+        mall_salon.add_object(make_chair())
+        mall_salon.add_object(make_desk())
+        mall_salon.add_object(make_table())
+        mall_salon.add_object(make_window())
