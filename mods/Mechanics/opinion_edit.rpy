@@ -259,7 +259,7 @@ label influence_opinion_middle_label():
 #
 #        "No":
 #            $ discovered = False
-
+    $ discovered = True
     call influence_opinion_end_label
 
 
