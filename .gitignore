@@ -41,6 +41,9 @@ htmlcov/
 nosetests.xml
 coverage.xml
 
+# Visual Studio Code
+*.code-workspace
+
 # Translations
 *.mo
 *.pot
