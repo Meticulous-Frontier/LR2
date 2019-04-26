@@ -76,4 +76,5 @@ label influence_opinion_end_label():
         "Speaker" "[the_person.name]'s mind rejects your suggestions"
     else:
         "Speaker" "You are at a stalemate, try changing your approach"
+    $ renpy.scene("Active")
     jump game_loop
