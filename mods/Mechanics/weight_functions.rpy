@@ -54,5 +54,5 @@ init -1 python:
 
     def get_person_weight_string(the_person):
         check_person_weight_attribute(the_person)
-        weight = __builtin__.round(the_person.weight, 1)
+        weight = __builtin__.round(the_person.weight * 2.205, 1)
         return str(weight)
