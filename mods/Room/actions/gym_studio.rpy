@@ -26,7 +26,7 @@ label gym_training_mod_init_label:
     python:
         gym.background_image = Image("Mods/mods/Room/images/Gym_Background.jpg") #As long a there is a mall background for the gym, replace it with our gym background
 
-        train_in_gym_action = Action("Schedule a gym session.", gym_requirement, "select_person_for_gym", menu_tooltip = "Bring a person to the gym to train their body.")
+        train_in_gym_action = Action("Schedule a gym session. {image=gui/heart/Time_Advance.png}", gym_requirement, "select_person_for_gym", menu_tooltip = "Bring a person to the gym to train their body.")
 
         # Always check if the room is somehow already added.
         # I want to enter it from the gym.
@@ -67,25 +67,25 @@ label select_person_for_gym_response(person_choice):
     $ the_person = person_choice
     
     if the_person.personality == bimbo_personality:
-        the_person.name "Cumming right away, [mc.name]!"
+        the_person.char "Cumming right away, [mc.name]!"
     elif the_person.obedience > 120:
-        the_person.name "Yes, Sir. I am on my way."
+        the_person.char "Yes, Sir. I am on my way."
     elif the_person.sluttiness > 30:
-        the_person.name "Yes, [mc.name]. I am on my way."
+        the_person.char "Yes, [mc.name]. I am on my way."
     elif the_person.sluttiness > the_person.obedience:
-        the_person.name "Yes, [mc.name], are you going to train me personally?"
+        the_person.char "Yes, [mc.name], are you going to train me personally?"
     elif the_person.happiness < 100 and the_person.love > 20:
         $ the_person.draw_person(emotion = "happy")
-        the_person.name "Thanks for the attention, [mc.name]."
+        the_person.char "Thanks for the attention, [mc.name]."
         $ the_person.change_happiness(+10)
     elif the_person.happiness < 100:
         $ the_person.draw_person(emotion = "sad")
-        the_person.name "I'm not in the mood for gym session, right now."
+        the_person.char "I'm not in the mood for gym session, right now."
         $ the_person.change_obedience(-2)
         $renpy.scene("Active")
         return
     else:
-        the_person.name "Sounds good, I'll be right there [mc.name]."
+        the_person.char "Sounds good, I'll be right there [mc.name]."
         $ the_person.change_happiness(+10)
     # End of respones
     call train_in_gym(the_person) from _call_train_in_gym_person_for_gym

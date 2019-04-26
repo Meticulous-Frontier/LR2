@@ -1,3 +1,5 @@
+## Mom NTR Crisis Mod by Tristimdorion
+# Based on the Pilotus13 Vanilla extension
 init -1 python:
     mom_ntr_mod_init = False
     mom_ntr_mod_weight = 5
@@ -59,20 +61,22 @@ label mom_ntr_crisis_action:
         pass
     $ finishes.append ("usual")
     ## Submission check for additional lines related to that
-    if the_person.get_opinion_score("being submissive") > 0:
-        $ submission = 1
-    else:
-        $ submission = 0
+    $ submissive = the_person.get_opinion_score("being submissive") > 0
     ## Love of BJ for additional scene at the beginning and maybe some additional scenes/dialog along the way
-    if the_person.get_opinion_score("giving blowjobs") > 0:
-        $ bj = 1
-    else:
-        $ bj = 0
+    $ bj = the_person.get_opinion_score("giving blowjobs") > 0
     ## Determine what type of encounter it is
     if the_person.sluttiness >= 60:
         $ encounter = renpy.random.randint (1,2)
     else:
         $ encounter = 1
+
+    $ change_scene_display(bedroom)
+    show screen person_info_ui(the_person)
+    $ man_name = get_random_male_name()
+    $ wife_name = get_random_name()
+    while wife_name is the_person.name: ## Just to avoid stupid duplications
+        $ wife_name = get_random_name()
+
     ## Now determine how many clothes mom will take off
     if the_person.sluttiness < 30:
         $ clothes_number = renpy.random.randint (1,3) ## so it will be random from 1 to 3
@@ -80,12 +84,12 @@ label mom_ntr_crisis_action:
         $ clothes_number = renpy.random.randint (1,4) ## so it will be random from 1 to 4
     else:
         $ clothes_number = renpy.random.randint (2,4) ## so it will be random from 2 to 4
+    
+    $ detected = renpy.random.randint(0,2) == 1 #33% chance of detection.
+    ## Now determine how many clothes mom will take off
     if encounter is 1: ## a scene with one man
-        if bj is 1:
-            $ change_scene_display(bedroom)
+        if bj:
             $ the_person.draw_person(position = "blowjob", special_modifier="blowjob") 
-            show screen person_info_ui(the_person)
-            $ man_name = get_random_male_name()
             "You take a look inside the room and your eyes widen. You see your mom sitting in front of an unknown man, sucking his cock."
             "By the look on man's face you can tell that he is also quite surprised."
             "As they go on, you seem to recognise him. It's [man_name], one of mom's colleagues. You might have seen him on some corporate events."
@@ -100,10 +104,8 @@ label mom_ntr_crisis_action:
             "Mom just smiles then gets up embraces and kiss her man passionately."
             "You are unsure what to do here."
         else:
-            $ change_scene_display(bedroom)
             $ the_person.draw_person(position = "kissing", emotion = "happy") 
             show screen person_info_ui(the_person)
-            $ man_name = get_random_male_name()
             "You see your mom embracing some man, kissing him deeply."
             the_person.char "Oh [man_name], you are so nice. I had a wonderful evening!"
             "Now, when you heard the name, you recognize the man. It's [man_name], one of your mom colleagues."
@@ -121,7 +123,7 @@ label mom_ntr_crisis_action:
                         man_name "Yes, [the_person.name]. I lost control. Sorry. See you in the office."
                         "You go back to your room and through half-closed door you see [man_name] leaving the house, clearly dissapointed how things went."
                     else:
-                        if bj is 1:
+                        if bj:
                             man_name "What the fuck, [the_person.name]?! You have been flirting aroung me the whole evening, brought me to your room, sucked me off and now thinking of stopping here?"
                         else:
                             man_name "Oh, no, [the_person.name]. You have been flirting aroung me the whole evening, brought me to your room and now thinking of stopping here?"
@@ -133,53 +135,43 @@ label mom_ntr_crisis_action:
                             man_name "I think you be better without [mom_clothing.name]..."
                             $ the_person.draw_animated_removal (mom_clothing, position = "stand3", emotion = "sad")
                             "He takes off mom's [mom_clothing.name] and throws it on a floor."
-                            if submission is 1:
-                                "Mom just keep standing there, accepted her fate, while [man_name] undresses her."
+                            if submissive:
+                                "Mom just keep standing there, accepting her fate, while [man_name] undresses her."
                             else:
                                 the_person.char "Please, [man_name]. Don't do it. I'm so ashamed..."
                                 man_name "Why don't you just shut up, [the_person.name]? It will make life easier for both of us?"
                         if clothes_number >1:
                             $ mom_clothing = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True, exclude_feet = True)
-                            if mom_clothing is None:
-                                pass
-                            else:
+                            if not mom_clothing is None:
                                 the_person.char "Not my [mom_clothing.name]..."
                                 $ the_person.draw_animated_removal (mom_clothing, position = "stand3", emotion = "sad")
                                 "You watch as your mom's [mom_clothing.name] also being taken off despite her objections."
-                                if submission is 1:
+                                if submissive:
                                     "Mom just keep standing there, with blank face while [man_name] undresses her."
                                 else:
                                     the_person.char "Please stop, [man_name]. You can't see me like this."
                                     man_name "I can and I will. Didn't I say for you to shut up? Suggest you do it."
-                        else:
-                            pass
                         if clothes_number >2:
                             $ mom_clothing = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True, exclude_feet = True)
-                            if mom_clothing is None:
-                                pass
-                            else:
+                            if not mom_clothing is None:
                                 man_name "You're not going to need this either, [the_person.name]. Trust me."
                                 $ the_person.draw_animated_removal (mom_clothing, position = "stand3", emotion = "sad")
                                 "[man_name] rips off her [mom_clothing.name], his hands are all over mom's body."
-                                if submission is 1:
+                                if submissive:
                                     "Mom just keep standing there, [man_name] can undress her like a doll."
                                 else:
                                     the_person.char "No, I beg you, [man_name]. I feel so naked..."
                                     man_name "One more word and it would be even worse. There will be pain involved."
-                        else:
-                            pass
                         if clothes_number >3:
                             $ mom_clothing = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True, exclude_feet = True)
-                            if mom_clothing is None:
-                                pass
-                            else:
+                            if not mom_clothing is None:
                                 $ the_person.draw_animated_removal (mom_clothing, position = "stand3", emotion = "sad")
                                 "[man_name] continues even further. Now mom is almost naked."
-                                if submission is 1:
+                                if submissive:
                                     "Completely broken, mom does not care what [man_name] will see"
                                 else:
                                     "Afraid to anger him further, mom just stands there, sobbing."
-                        if bj is 1:
+                        if bj:
                             man_name "Now it is much better! Just get on your knees, [the_person.name]. You have already done this, so get back to it, you cock-loving whore."
                         else:
                             man_name "Now it is much better! Just get on your knees, [the_person.name]. I know you have dreamed of sucking my cock for a long time."
@@ -190,7 +182,7 @@ label mom_ntr_crisis_action:
                         "She can't resist [man_name]'s urging and starts to suck him off."
                         man_name "That's is, bitch! You like to suck my cock, don't you? Just too afraid to declare it in open."
                         man_name "If I knew you are so good at it, I have done it with you long time ago."
-                        if bj is 1:
+                        if bj:
                             "Mom keeps sucking [man_name], and he clearly enjoys it. She also seems to get aroused a little."
                         else:
                             "Mom keeps sucking [man_name], as he clearly enjoys it."
@@ -199,7 +191,7 @@ label mom_ntr_crisis_action:
                             $ the_person.draw_person(position = "doggy")
                             "[the_person.name] has lost all will to resist and obeys [man_name]'s orders. She gets on the bed, displaying her ass in front of the [man_name]."
                             man_name "Good girl! You're already soaking wet, bitch. Did you know that?"
-                            if submission is 1:
+                            if submissive:
                                 the_person.char "Oh, [man_name], just shut up and fuck me!"
                                 the_person.char "I like when a man is rough. You see I'm already wet."
                                 the_person.char "So please, [man_name], fuck me hard. Don't stop at anything. Make me scream like a bitch."
@@ -210,7 +202,7 @@ label mom_ntr_crisis_action:
                                 man_name "My dear [the_person.name], you should have thought on this before flirting with me and taking me here."
                                 man_name "Now we are alone, undressed, you are on all fours, I have a rock hard erection and you expect me to stop? You've got another thing coming!"
                             "You see as [man_name] in one thrust enter's your mom pussy."
-                            if submission is 1:
+                            if submissive:
                                 the_person.char "Fuck, yes! Please, [man_name], fuck me. Fuck me hard!"
                                 man_name "You are really a slut, [the_person.name]. Like being railed from behind?"
                                 the_person.char "Yes. Yes. Do me! Fuck my pussy, [man_name]!"
@@ -250,14 +242,12 @@ label mom_ntr_crisis_action:
                                 "Mom get's up and smiles."
                                 the_person.char "How about a shower, [man_name]?"
                                 "They both go into the bathroom and you decide to get back to your room."
-                                if submission is 1 or the_person.sluttiness > 60:
+                                if submissive or the_person.sluttiness > 60:
                                     "Some time later at night you awoke again by the screams coming from mom's room."
                                     the_person.char "Take me with your hard dick, [man_name]. I want to feel it again. I beg you, rape me again!"
                                     man_name "Aren't you a cock-hungry whore, [the_person.name]? Now lay on the table. I want to see your boobs this time, see them jump."
                                     the_person.char "Of course, [man_name]. You can take me however you want. Just keep covering your slut body with your hot sperm."
                                     "It seems that mom now does not wish the encounter to end as her screams and [man_name] moans keep on..."
-                                else:
-                                    pass
                             elif finish == "inside":
                                 "While it seemed rough at the beginning, mom seems to enjoy at least part of it, as she gets more and more turned on."
                                 the_person.char "Please, [man_name], cum inside me. I'm on a pill, so don't worry. I just want to feel your warmth in me."
@@ -274,14 +264,12 @@ label mom_ntr_crisis_action:
                                 the_person.char "No need to be so rough. The last part was really not bad, I agree."
                                 the_person.char "How about a shower, [man_name]?"
                                 "They both go into the bathroom and you decide to get back to your room."
-                                if submission is 1 or the_person.sluttiness > 60:
+                                if submissive or the_person.sluttiness > 60:
                                     "Some time later at night you awoke again by the screams coming from the kitchen."
                                     the_person.char "Take me with your hard dick, [man_name]. I want to feel it again. I beg you, rape me again!"
                                     man_name "Aren't you a cock-hungry whore, [the_person.name]? Now lay on the table. I want to see your boobs this time, watch them bounce as I fuck you."
                                     the_person.char "Of course, [man_name]. You can take me however you want. Just keep filling me with your cum!."
                                     "It seems that mom now does not wish the encounter to end as her screams and [man_name] moans keep on..."
-                                else:
-                                    pass
                             elif finish == "drink":
                                 "While it seemed rough at the beginning, mom seems to enjoy at least part of it. She gets off his cock and drops to her knees."
                                 $ the_person.draw_person(position = "blowjob")
@@ -291,15 +279,13 @@ label mom_ntr_crisis_action:
                                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                 "Mom opens her mouth wide and [man_name] drives his hard penis into it."
                                 "She starts sucking while playing with man's balls."
-                                if submission is 1:
+                                if submissive:
                                     man_name "No slacking off for you, whore!"
                                     "He grabs mom's head and impales it with his thing."
                                     "It goes all the way inside with man's ball hitting mom's jaw."
                                     man_name "I bet you love being face fucked, [the_person.name]. And today you are my own personal slut."
                                     "Mom can't say anything but she makes no intentions to protest against [man_name]'s actions."
                                     "You never expected to see your mom being fucked like porn actresses from all those films."
-                                else:
-                                    pass
                                 "[man_name] can't hold for much longer and he starts cumming into mom's mouth."
                                 $ the_person.cum_in_mouth()
                                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
@@ -317,7 +303,7 @@ label mom_ntr_crisis_action:
                                 the_person.char "Well, maybe so... Still, no need for such rude words after such a wonderful final."
                                 the_person.char "How about a shower, [man_name]?"
                                 "They both go into the bathroom and you decide to get back to your room."
-                                if submission is 1  or the_person.sluttiness > 60:
+                                if submissive or the_person.sluttiness > 60:
                                     "Some time later at night you awoke again by the screams coming from the kitchen."
                                     the_person.char "Take me with your hard dick, [man_name]. I want to feel it again. I beg you, rape me again!"
                                     man_name "Aren't you a cock-hungry whore, [the_person.name]? Now lay on the table. I want to see your boobs this time, watch them bounce as I fuck you."
@@ -326,7 +312,7 @@ label mom_ntr_crisis_action:
                                 else:
                                     pass
                             elif finish == "usual":     
-                                if submission is 1  or the_person.sluttiness > 60:
+                                if submissive or the_person.sluttiness > 60:
                                     "Mom seems to already have several orgasms as her screams are now loud. She clearly don't care or understand that you or Lily may come to investigate."
                                     the_person.char "Yeeeeees! Fuck! Tear me apart, [man_name]! I'm your bitch tonight that need a proper fuck! Do it!"
                                     "The man keeps pumping her and slapping her already red ass. With each slap, [the_person.name] moans with pleasure."
@@ -379,7 +365,7 @@ label mom_ntr_crisis_action:
                                 "Mom get's up and smiles."
                                 the_person.char "How about a shower, [man_name]?"
                                 "They both go into the bathroom and you decide to get back to your room."
-                                if submission is 1 or the_person.sluttiness > 60:
+                                if submissive or the_person.sluttiness > 60:
                                     "Some time later at night you awoke again by the noise coming from mom's room."
                                     the_person.char "Mrmh... Blgrhm..."
                                     man_name "That's it, [the_person.name]. Take it into your slutty mouth!"
@@ -396,15 +382,13 @@ label mom_ntr_crisis_action:
                                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                 "Mom opens her mouth wide and [man_name] drives his hard penis into it."
                                 "She starts sucking while playing with man's balls."
-                                if submission is 1:
+                                if submissive:
                                     man_name "No slacking off for you, whore!"
                                     "He grabs mom's head and impales it woth his thing."
                                     "It goes all the way inside with man's ball hitting mom's jaw."
                                     man_name "I bet you love being face fucked, [the_person.name]. And today you are my own personal slut."
                                     "Mom can't say anything but she makes no intentions to protest against [man_name] actions."
                                     "You never expected to see your mom being fucked like porn actresses from all those films."
-                                else:
-                                    pass
                                 "[man_name] can't hold for much longer and he starts cumming into mom's mouth."
                                 $ the_person.cum_in_mouth()
                                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
@@ -422,21 +406,19 @@ label mom_ntr_crisis_action:
                                 the_person.char "Well, maybe so... Still, no need for such rude words after such a wonderful final."
                                 the_person.char "How about a shower, [man_name]?"
                                 "They both go into the bathroom and you decide to get back to your room."
-                                if submission is 1 or the_person.sluttiness > 60:
+                                if submissive or the_person.sluttiness > 60:
                                     "Some time later at night you awoke again by the noise coming from mom's room."
                                     the_person.char "Mrmh... Blgrhm..."
                                     man_name "That's it, [the_person.name]. Take it into your slutty mouth!"
                                     "Seems [man_name] liked the idea of face fucking your mom. She doesn't seem to object."
                                     "It seems that mom now does not wish the encounter to end as her and [man_name] moans keep on..."
-                                else:
-                                    pass
                             elif finish == "usual":
                                 man_name "Oh, yes, [the_person.name]. You suck so good. How about I fill you cute mouth with my sperm?"
                                 "She doesn't seem to object, just keep going until [man_name] grins and starts ejaculating into her mouth."
                                 $ the_person.cum_in_mouth()
                                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                 man_name "Oh, fuck! [the_person.name], you really dried me up!"
-                                if submission is 1 or the_person.sluttiness > 60:
+                                if submissive or the_person.sluttiness > 60:
                                     $ the_person.draw_person(position = "blowjob", emotion = "happy")
                                     "She looks up to him and smiles."
                                     the_person.char "Well, sometimes I don't mind being a little rough with."
@@ -454,49 +436,35 @@ label mom_ntr_crisis_action:
                                     "You rush back to your room to avoid being seen."
                 else:
                     the_person.char "Oh, [man_name]. You clearly have some plans for tonight, don't you?."
-                    if bj is 1:
+                    if bj:
                         "She strokes his penis a little."
                     else:
                         "She caresses the buldge on his pants."
                     the_person.char "I like those plans, as well as my little friend here. Now let me help you get rid of those clothes."
                     "You see them helping each other to get a little more naked."
                     $ mom_clothing = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True, exclude_feet = True)
-                    if mom_clothing is None:
-                        pass
-                    else:
+                    if not mom_clothing is None:
                         man_name "I think you be better without [mom_clothing.name]..."
                         $ the_person.draw_animated_removal (mom_clothing, position = "kissing")
                         "He takes off mom's [mom_clothing.name] and throws it on a nearby chair."
                     if clothes_number >1:
                         $ mom_clothing = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True, exclude_feet = True)
-                        if mom_clothing is None:
-                            pass
-                        else:
+                        if not mom_clothing is None:
                             the_person.char "I like the touch of your soft hands, [man_name]."
                             $ the_person.draw_animated_removal (mom_clothing, position = "kissing")
                             "You watch as your mom's [mom_clothing.name] also getting off. [man_name]'s hand are softly caressing [the_person.name] naked skin."
-                    else:
-                        pass
                     if clothes_number >2:
                         $ mom_clothing = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True, exclude_feet = True)
-                        if mom_clothing is None:
-                            pass
-                        else:
+                        if not mom_clothing is None:
                             the_person.char "Ooooh, [man_name], you are really turning me on with your touches."
                             $ the_person.draw_animated_removal (mom_clothing, position = "kissing")
                             "[man_name] takes off her [mom_clothing.name], his hands are all over mom's body."
-                    else:
-                        pass
                     if clothes_number >3:
                         $ mom_clothing = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True, exclude_feet = True)
-                        if mom_clothing is None:
-                            pass
-                        else:
+                        if not mom_clothing is None:
                             the_person.char "I don't mind go even more naked, [man_name]. Please, take off my [mom_clothing.name] with that magical hands of yours."
                             $ the_person.draw_animated_removal (mom_clothing, position = "kissing")
                             "He grants her wish, caressing now open parts of her body."
-                    else:
-                        pass
                     $ the_person.sluttiness += 2
                     "Now with both of them pretty naked, you clearly see where it will go."
                     the_person.char "Well, I thing we are both ready for action. So, let's do it!"
@@ -511,23 +479,19 @@ label mom_ntr_crisis_action:
                             man_name "God, [the_person.name], you are really tight there!"
                             "Mom hands caress [man_name]'s back. Then she breakes the kiss to have some air."
                             the_person.char "Yes! Do me! I like the way you do it! Fuck me further!"
-                            if submission is 1:
+                            if submissive:
                                 the_person.char "Harder, I beg you. I love being owned."
                                 $ the_person.discover_opinion("being submissive")
                                 "[man_name] increases his amplitude. Now with each move he presses [the_person.name] against the bed, producing heavy squeaking sound."
-                            else:
-                                pass
-                            $ arouusal_plus = renpy.random.randint (10,50)
-                            $ the_person.change_arousal (arouusal_plus)
-                            $ rand_detect = renpy.random.randint(0,2) #33% chance of detection.
-                            $ hidden = 1
+                            $ arousal_plus = renpy.random.randint (10,50)
+                            $ the_person.change_arousal (arousal_plus)
                             menu:
                                 "Keep hiding...":
-                                    $ hidden = 1
+                                    $ hidden = True
                                 "Don't hide...":
-                                    $ hidden = 0
+                                    $ hidden = False
                             
-                            if rand_detect == 1 or hidden == 0:
+                            if detected or not hidden:
                                 "Mom turns her head and see that the door is slightly open and you standing there."
                                 if the_person.sluttiness >=50 or the_person.get_opinion_score("public sex") > 0 or the_person.arousal > 35:
                                     the_person.char "[mc.name], don't just stay there, come on in. Mom will help you relax as well."
@@ -543,13 +507,11 @@ label mom_ntr_crisis_action:
                                     while the_person.arousal < 100:
                                         "[man_name] thrusts his dick into your mom pussy. It goes in and out with a wet sound. Clearly mom is having great time."
                                         the_person.char "Please, [man_name], more. Do me! Do me!"
-                                        if submission is 1:
+                                        if submissive:
                                             the_person.char "Harder. Pin me down with that great thing of yours! I want a rough fuck!"
-                                        else:
-                                            pass
                                         "As she gets more and more turned on, the speed of her hand on your cock also increases."
-                                        $ arouusal_plus = renpy.random.randint (10,50)
-                                        $ the_person.change_arousal (arouusal_plus)
+                                        $ arousal_plus = renpy.random.randint (10,50)
+                                        $ the_person.change_arousal (arousal_plus)
                                     "After being fucked by [man_name] for quite some time, mom seems to be closing to orgasm."
                                     the_person.char "Oh, God! I'm cumming! Fuck me! Fuck me more! Fuck me a fast as you can, [man_name]!"
                                     "He starts to pump your mom with some ferocity, fully buring his dick in her."
@@ -562,9 +524,6 @@ label mom_ntr_crisis_action:
                                         $ the_person.draw_person(position = "blowjob")
                                         "She pushes him backwards. With a wet sound his dick leaves her pussy. [the_person.name] gets on her knees in front of [man_name] cock."
                                         the_person.char "Would you like to cover my face with your hot cum? I doubt that your wife allows you to do this!"
-                                        $ wife_name = get_random_name()
-                                        while wife_name is the_person.name: ## Just to avoid stupid duplications
-                                            $ wife_name = get_random_name()
                                         man_name "No, [wife_name] never allows anything in bed. Sometimes I really hate it!"
                                         the_person.char "Well, thats your chance to try something new, [man_name]!"
                                         "She looks into [man_name]'s eyes while jerking your cocks with both hands."
@@ -586,7 +545,7 @@ label mom_ntr_crisis_action:
                                         $ the_person.draw_person(position = "stand2", emotion = "happy")
                                         "Mom stands up from the floor and smiles."
                                         the_person.char "Now go to your room, dear. Me and [man_name] need to take a bath."
-                                        if submission is 1 or the_person.sluttiness > 60:
+                                        if submissive or the_person.sluttiness > 60:
                                             "You go back to your bedroom accompanied by screams from mom's room."
                                             the_person.char "Do me again, [man_name]. Fuck me harder! Shower your whore's face again!"
                                             man_name "On your face, slut!"
@@ -615,7 +574,7 @@ label mom_ntr_crisis_action:
                                         "As mom starts walking towards bathroom, you see several white drops falling on the floor."
                                         "While she walks past [man_name], he places his hand on her butt."
                                         the_person.char "First - the shower. Then we will see, dear."
-                                        if submission is 1  or the_person.sluttiness > 60:
+                                        if submissive  or the_person.sluttiness > 60:
                                             "You go back to your bedroom accompanied by screams from mom's room."
                                             the_person.char "Do me again, [man_name]. It feels so good to be filled with your semen!"
                                             man_name "Take it all in, [the_person.name]!"
@@ -628,9 +587,6 @@ label mom_ntr_crisis_action:
                                         $ the_person.draw_person(position = "blowjob")
                                         "She pushes him backwards. With a wet sound his dick leaves her pussy. [the_person.name] gets on her knees in front of [man_name] cock."
                                         the_person.char "I want to taste your hot cum. Don't think that your wife allows you to do this!"
-                                        $ wife_name = get_random_name()
-                                        while wife_name is the_person.name: ## Just to avoid stupid duplications
-                                            $ wife_name = get_random_name()
                                         man_name "No, [wife_name] never allows anything in bed, she is so prudish and boring at times."
                                         the_person.char "Well, thats your chance to try something new, [man_name]!"
                                         $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
@@ -658,7 +614,7 @@ label mom_ntr_crisis_action:
                                         $ the_person.draw_person(position = "stand2", emotion = "happy")
                                         "Mom stands up from the floor and smiles."
                                         the_person.char "Now go to your room, dear. Me and [man_name] need to take a bath."
-                                        if submission is 1  or the_person.sluttiness > 60:
+                                        if submissive  or the_person.sluttiness > 60:
                                             "You go back to your bedroom accompanied by screams from mom's room."
                                             the_person.char "Fuck me again, [man_name]. Take me however you wish. Just let me taste your sweet cum again, I beg you!"
                                             man_name "Suck it, bitch, or no sweets for you!"
@@ -680,7 +636,7 @@ label mom_ntr_crisis_action:
                                         "Mom stands up from the bed and smiles."
                                         the_person.char "Didn't that turn you on, dear?"
                                         the_person.char "Now go to your room, [mc.name]. Me and [man_name] need to take a bath."
-                                        if submission is 1  or the_person.sluttiness > 60:
+                                        if submissive  or the_person.sluttiness > 60:
                                             "You go back to your bedroom accompanied by screams from mom's room."
                                             the_person.char "Take me again, [man_name]. Bang me with your amazing big thing!"
                                             man_name "Turn around, [the_person.name]. I want you from behind."
@@ -698,13 +654,13 @@ label mom_ntr_crisis_action:
                                 while the_person.arousal < 100:
                                         "[man_name] thrusts his dick into your mom pussy. It goes in and out with a wet sound. Clearly mom is having great time."
                                         the_person.char "Please, [man_name], more. Do me! Do me! Fuck me! Fuck your [the_person.name]!"
-                                        if submission is 1:
+                                        if submissive:
                                             the_person.char "Harder! Slam your dick in me, [man_name]. I love being fucked roughly!"
                                         else:
                                             pass
                                         "As she gets more and more turned on, her screams get louder and louder."
-                                        $ arouusal_plus = renpy.random.randint (10,50)
-                                        $ the_person.change_arousal (arouusal_plus)
+                                        $ arousal_plus = renpy.random.randint (10,50)
+                                        $ the_person.change_arousal (arousal_plus)
                                 "After being fucked by [man_name] for quite some time, mom seems to be closing to orgasm."
                                 the_person.char "Oh, God! I'm cumming! Fuck me! Fuck me more! Fuck me at full speed, [man_name]!"
                                 "He starts to pump your mom with some ferocity, fully buring his dick in her."
@@ -717,9 +673,6 @@ label mom_ntr_crisis_action:
                                     $ the_person.draw_person(position = "blowjob")
                                     "She pushes him backwards. With a wet sound his dick leaves her pussy. [the_person.name] gets on her knees in front of [man_name] cock."
                                     the_person.char "Would you like to cover my face with your hot cum? I doubt that your wife allows you to do this!"
-                                    $ wife_name = get_random_name()
-                                    while wife_name is the_person.name: ## Just to avoid stupid duplications
-                                        $ wife_name = get_random_name()
                                     man_name "No, [wife_name] never allows anything in bed. Sometimes I really hate it!"
                                     the_person.char "Well, thats your chance to try something new, [man_name]!"
                                     "She looks into [man_name]'s eyes while jerking him with both hands."
@@ -740,7 +693,7 @@ label mom_ntr_crisis_action:
                                     $ the_person.draw_person(position = "walking_away", emotion = "happy")
                                     "You see them walking away to bathroom. Some white drops fall on the floor."
                                     "[man_name]'s hand is on mom's ass, but she does not object. As they close the door, you see that mom caresses his balls while his dick shows signs of returning to life."
-                                    if submission is 1  or the_person.sluttiness > 60:
+                                    if submissive  or the_person.sluttiness > 60:
                                         "You go back to your bedroom accompanied by screams from mom's room."
                                         the_person.char "Do me again, [man_name]. Fuck me harder! Shower your whore's face again!"
                                         man_name "On your face, slut!"
@@ -765,7 +718,7 @@ label mom_ntr_crisis_action:
                                     the_person.char "Now I need to take a bath. Then we will see"
                                     $ the_person.draw_person(position = "walking_away")
                                     "As mom walks towards bathroom, you see several white drops falling on the floor."
-                                    if submission is 1 or the_person.sluttiness > 60:
+                                    if submissive or the_person.sluttiness > 60:
                                         "You go back to your bedroom accompanied by screams from mom's room."
                                         the_person.char "Do me again, [man_name]. It feels so good to be filled with your semen!"
                                         man_name "Take it all in, [the_person.name]!"
@@ -778,9 +731,6 @@ label mom_ntr_crisis_action:
                                     $ the_person.draw_person(position = "blowjob")
                                     "She pushes him backwards. With a wet sound his dick leaves her pussy. [the_person.name] gets on her knees in front of [man_name] cock."
                                     the_person.char "I want to taste your hot cum. Don't think that your wife allows you to do this!"
-                                    $ wife_name = get_random_name()
-                                    while wife_name is the_person.name: ## Just to avoid stupid duplications
-                                        $ wife_name = get_random_name()
                                     man_name "No, [wife_name] never allows anything in bed, she is so prudent and boring at times."
                                     the_person.char "Well, thats your chance to try something new, [man_name]!"
                                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
@@ -801,7 +751,7 @@ label mom_ntr_crisis_action:
                                     $ the_person.draw_person(position = "walking_away")
                                     "You see them walking away to bathroom."
                                     "[man_name]'s hand is on mom's ass, but she does not object. As they close the door, you see that mom caresses his balls while his dick shows signs of returning to life."
-                                    if submission is 1 or the_person.sluttiness > 60:
+                                    if submissive or the_person.sluttiness > 60:
                                         "You go back to your bedroom accompanied by screams from mom's room."
                                         the_person.char "Fuck me again, [man_name]. Take me however you wish. Just let me taste your sweet cum again, I beg you!"
                                         man_name "Suck it, bitch, or no sweets for you!"
@@ -816,7 +766,7 @@ label mom_ntr_crisis_action:
                                     "Mom closes the tip with her hand so that no sperm would be split around."
                                     man_name "Ow, fuck! That was great!"
                                     the_person.char "Indeed, [man_name]! It was great!"
-                                    if submission is 1:
+                                    if submissive:
                                          the_person.char "I guess you like when a girl allows you to be rough, don't you? I too like feel owned by a man while he fucks me."
                                          man_name "Yes, it is a wonderful feeling. I really turns me on. Wish I could do it with my wife..."
                                     man_name "Thanks, [the_person.name]. I really needed that."
@@ -824,7 +774,7 @@ label mom_ntr_crisis_action:
                                     "Mom stands up from the bed and smiles."
                                     the_person.char "Didn't that event paid off, dear?"
                                     the_person.char "Now go to bath, [man_name]. I will join you shortly."
-                                    if submission is 1  or the_person.sluttiness > 60:
+                                    if submissive  or the_person.sluttiness > 60:
                                         "You go back to your bedroom accompanied by screams from mom's room."
                                         the_person.char "Take me again, [man_name]. Bang me with your amazing big thing!"
                                         man_name "Turn around, [the_person.name]. I want you from behind."
@@ -843,24 +793,22 @@ label mom_ntr_crisis_action:
                             "[man_name] speeds up, pumping your mom wet vagina while plaing with her tits."
                             "Mom hand is working on her clit while she is being railed from behind."
                             the_person.char "Yes! Do me! I like the way you do it!"
-                            if submission is 1:
+                            if submissive:
                                 the_person.char "Harder! Smash your body up my ass! I want you to be rough with your [the_person.name]. You own me today!"
                                 $ the_person.discover_opinion("being submissive")
                             else:
                                 pass
-                            $ arouusal_plus = renpy.random.randint (10,50)
-                            $ the_person.change_arousal (arouusal_plus)
+                            $ arousal_plus = renpy.random.randint (10,50)
+                            $ the_person.change_arousal (arousal_plus)
                             "[man_name] caresses mom's ass."
                             man_name "You ass is so great, [the_person.name]! I wish I could do this more often."
                             the_person.char "Who knows, [man_name]. If you do good now, then... So come on,nail me with your dick."
-                            $ rand_detect = renpy.random.randint(0,2)
-                            $ hidden = 1
                             menu:
                                 "Keep hiding...":
-                                    $ hidden = 1
+                                    $ hidden = True
                                 "Don't hide...":
-                                    $ hidden = 0
-                            if rand_detect == 1 or hidden == 0:
+                                    $ hidden = False
+                            if detected or not hidden:
                                 "In a mirror next to the bed Mom sees that the door is slightly open and you standing there."
                                 if the_person.sluttiness >=50 or the_person.get_opinion_score("public sex") > 0 or the_person.arousal > 35:
                                     the_person.char "[mc.name], don't just stay there, come on in. Mom will help you relax as well."
@@ -876,19 +824,19 @@ label mom_ntr_crisis_action:
                                     while the_person.arousal < 100:
                                         "[man_name] thrusts his dick into your mom pussy. With each move you mom moans. Clearly she is having great time."
                                         the_person.char "Please, [man_name], more. Do me! Do me!"
-                                        if submission is 1:
+                                        if submissive:
                                             the_person.char "Slap my ass, [man_name]. Your [the_person.name] has been a bad girl and needs spanking!"
                                             "[man_name] does as she requests and slaps her buttocks. Mom moans while sucking you."
                                         else:
                                             pass
                                         "As she gets more and more turned on, the speed of her lips on your cock also increases."
-                                        $ arouusal_plus = renpy.random.randint (10,50)
-                                        $ the_person.change_arousal (arouusal_plus)
+                                        $ arousal_plus = renpy.random.randint (10,50)
+                                        $ the_person.change_arousal (arousal_plus)
                                     "After being fucked by [man_name] for quite some time, mom seems to be closing to orgasm."
                                     the_person.char "Oh, God! I'm cumming! Fuck me! Fuck me more! Fuck me as fast as you can, [man_name]!"
                                     "He starts to pump your mom with some ferocity, his balls slam to mom clit. And there is a loud sound as he slaps into her ass."
                                     the_person.char "Yes! Yes! That's it! I love it, [man_name]!"
-                                    if submission is 1:
+                                    if submissive:
                                         the_person.char "You own me tonight, Master [man_name]!"
                                     else:
                                         pass
@@ -899,9 +847,6 @@ label mom_ntr_crisis_action:
                                         $ the_person.draw_person(position = "blowjob")
                                         "She pushes him backwards. With a wet sound his dick leaves her pussy. [the_person.name] gets on her knees in front of [man_name] cock."
                                         the_person.char "Would you like to cover my face with your hot cum? I doubt that your wife allows you to do this!"
-                                        $ wife_name = get_random_name()
-                                        while wife_name is the_person.name: ## Just to avoid stupid duplications
-                                            $ wife_name = get_random_name()
                                         man_name "No, [wife_name] never allows anything in bed. Sometimes I really hate it! Never had a blowjob from her.."
                                         the_person.char "Well, thats your chance to try something new, [man_name]!"
                                         "She looks into [man_name]'s eyes while jerking your cocks with both hands."
@@ -924,7 +869,7 @@ label mom_ntr_crisis_action:
                                         "Mom stands up from the floor and smiles."
                                         the_person.char "Now go to your room, dear. Me and [man_name] need to take a bath."
                                         "As you turn to leave, you see [man_name]'s balls being caressed by your mom and his thing starting to rise."
-                                        if submission is 1 or the_person.sluttiness > 60:
+                                        if submissive or the_person.sluttiness > 60:
                                             "You go back to your bedroom accompanied by screams from mom's room."
                                             the_person.char "Do me again, [man_name]. Fuck me harder! Shower your whore's face again!"
                                             man_name "On your face, slut!"
@@ -952,7 +897,7 @@ label mom_ntr_crisis_action:
                                         $ the_person.draw_person(position = "walking_away")
                                         "As mom starts walking towards bathroom, you see several white drops falling on the floor."
                                         "While she walks past [man_name], he places his hand on her butt."
-                                        if submission is 1 or the_person.sluttiness > 60:
+                                        if submissive or the_person.sluttiness > 60:
                                             "You go back to your bedroom accompanied by screams from mom's room."
                                             the_person.char "Do me again, [man_name]. It feels so good to be filled with your semen!"
                                             man_name "Take it all in, [the_person.name]!"
@@ -965,9 +910,6 @@ label mom_ntr_crisis_action:
                                         $ the_person.draw_person(position = "blowjob")
                                         "She pushes him backwards. With a wet sound his dick leaves her pussy. [the_person.name] turns around and gets on her knees in front of [man_name] cock."
                                         the_person.char "I want to taste your hot cum. Don't think that your wife allows you to do this!"
-                                        $ wife_name = get_random_name()
-                                        while wife_name is the_person.name: ## Just to avoid stupid duplications
-                                            $ wife_name = get_random_name()
                                         man_name "No, [wife_name] never allows anything in bed. Even take her from behind, like I did you."
                                         the_person.char "Well, that's your chance to try something new, [man_name]!"
                                         $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
@@ -995,7 +937,7 @@ label mom_ntr_crisis_action:
                                         $ the_person.draw_person(position = "stand2", emotion = "happy")
                                         "Mom stands up from the floor and smiles."
                                         the_person.char "Now go to your room, dear. Me and [man_name] need to take a bath."
-                                        if submission is 1 or the_person.sluttiness > 60:
+                                        if submissive or the_person.sluttiness > 60:
                                             "You go back to your bedroom accompanied by screams from mom's room."
                                             the_person.char "Fuck me again, [man_name]. Take me however you wish. Just let me taste your sweet cum again, I beg you!"
                                             man_name "Suck it, bitch, or no sweets for you!"
@@ -1017,7 +959,7 @@ label mom_ntr_crisis_action:
                                         "Mom stands up from the bed and smiles."
                                         the_person.char "Didn't that turn you on, dear?"
                                         the_person.char "Now go to your room, [mc.name]. Me and [man_name] need to take a bath."
-                                        if submission is 1  or the_person.sluttiness > 60:
+                                        if submissive  or the_person.sluttiness > 60:
                                             "You go back to your bedroom accompanied by screams from mom's room."
                                             the_person.char "Take me again, [man_name]. Bang me with your amazing big thing!"
                                             man_name "Turn around, [the_person.name]. I want you from behind."
@@ -1035,13 +977,13 @@ label mom_ntr_crisis_action:
                                 while the_person.arousal < 100:
                                     "[man_name] thrusts his dick into your mom pussy. As he slaps her ass, she moans."
                                     the_person.char "Please, [man_name], more. Do me!"
-                                    if submission is 1:
+                                    if submissive:
                                         the_person.char "Fuck me like a dog! I wanna be your bitch tonight. Fuck your whore [the_person.name]."
                                     else:
                                         pass
                                     "As she gets more and more turned on, her screams get louder and louder."
-                                    $ arouusal_plus = renpy.random.randint (10,50)
-                                    $ the_person.change_arousal (arouusal_plus)
+                                    $ arousal_plus = renpy.random.randint (10,50)
+                                    $ the_person.change_arousal (arousal_plus)
                                 "After being fucked by [man_name] for quite some time, mom seems to be closing to orgasm."
                                 the_person.char "Oh, God! I'm cumming! Fuck me! Fuck me more! Fuck me as hard as you can, [man_name]!"
                                 "He starts to pump your mom with some ferocity, fully buring his dick in her. His balls smash agains mom pussy."
@@ -1053,9 +995,6 @@ label mom_ntr_crisis_action:
                                     $ the_person.draw_person(position = "blowjob")
                                     "She pushes him backwards. You see mom's juices dripping on the floor. [the_person.name] gets on her knees in front of [man_name] cock."
                                     the_person.char "Would you like to cover my face with your hot cum? I doubt that your wife allows you to do this!"
-                                    $ wife_name = get_random_name()
-                                    while wife_name is the_person.name:
-                                        $ wife_name = get_random_name()
                                     man_name "No, [wife_name] never allows anything in bed. I wish I could fuck her just like I did you."
                                     the_person.char "Well, that's your chance to try something new, [man_name]!"
                                     "She looks into [man_name]'s eyes while jerking him with both hands."
@@ -1079,7 +1018,7 @@ label mom_ntr_crisis_action:
                                     $ the_person.draw_person(position = "walking_away", emotion = "happy")
                                     "You see them walking away to bathroom. Some white drops fall on the floor."
                                     "[man_name]'s hand is on mom's ass, but she does not object. As they close the door, you see that mom caresses his balls while his dick shows signs of returning to life."
-                                    if submission is 1 or the_person.sluttiness > 60:
+                                    if submissive or the_person.sluttiness > 60:
                                         "You go back to your bedroom accompanied by screams from mom's room."
                                         the_person.char "Do me again, [man_name]. Fuck me harder! Shower your whore's face again!"
                                         man_name "On your face, slut!"
@@ -1104,7 +1043,7 @@ label mom_ntr_crisis_action:
                                     the_person.char "Now I need to take a bath. Then we will see"
                                     $ the_person.draw_person(position = "walking_away")
                                     "As mom walks towards bathroom, you see several white drops falling on the floor."
-                                    if submission is 1  or the_person.sluttiness > 60:
+                                    if submissive  or the_person.sluttiness > 60:
                                         "You go back to your bedroom accompanied by screams from mom's room."
                                         the_person.char "Do me again, [man_name]. It feels so good to be filled with your semen!"
                                         man_name "Take it all in, [the_person.name]!"
@@ -1117,9 +1056,6 @@ label mom_ntr_crisis_action:
                                     $ the_person.draw_person(position = "blowjob")
                                     "She pushes him backwards. With a wet sound his dick leaves her pussy. [the_person.name] turns around and gets on her knees in front of [man_name] cock."
                                     the_person.char "I want to taste your hot cum. Don't think that your wife allows you to do this!"
-                                    $ wife_name = get_random_name()
-                                    while wife_name is the_person.name: ## Just to avoid stupid duplications
-                                        $ wife_name = get_random_name()
                                     man_name "No, [wife_name] never allows anything in bed. Even take her from behind, like I did you."
                                     the_person.char "Well, that's your chance to try something new, [man_name]!"
                                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
@@ -1141,7 +1077,7 @@ label mom_ntr_crisis_action:
                                     $ the_person.draw_person(position = "stand2", emotion = "happy")
                                     "Mom stands up from the floor and smiles."
                                     the_person.char "Now go to shower. I will join you shortly."
-                                    if submission is 1 or the_person.sluttiness > 60:
+                                    if submissive or the_person.sluttiness > 60:
                                         "You go back to your bedroom accompanied by screams from mom's room."
                                         the_person.char "Fuck me again, [man_name]. Take me however you wish. Just let me taste your sweet cum again, I beg you!"
                                         man_name "Suck it, bitch, or no sweets for you!"
@@ -1161,7 +1097,7 @@ label mom_ntr_crisis_action:
                                     "Mom stands up from the bed and smiles."
                                     the_person.char "Didn't that event paid off, dear?"
                                     the_person.char "Now go to bath, [man_name]. I will join you shortly."
-                                    if submission is 1  or the_person.sluttiness > 60:
+                                    if submissive  or the_person.sluttiness > 60:
                                         "You go back to your bedroom accompanied by screams from mom's room."
                                         the_person.char "Take me again, [man_name]. Bang me with your amazing big thing!"
                                         man_name "Turn around, [the_person.name]. I want you from behind."
@@ -1179,19 +1115,17 @@ label mom_ntr_crisis_action:
                             "[the_person.name] takes cock in her mouth and starts sucking."
                             "[man_name] paces his hands on her head slighty regulating the speed."
                             man_name "It feels great, [the_person.name]. I like the way you do it!"
-                            $ arouusal_plus = renpy.random.randint (10,50)
-                            $ the_person.change_arousal (arouusal_plus)
+                            $ arousal_plus = renpy.random.randint (10,50)
+                            $ the_person.change_arousal (arousal_plus)
                             "Mom takes [man_name]'s dick out of her mouth, looks at his eyes."
                             the_person.char "I really like it, [man_name]. It feels great in my mouth."
                             "Then she get's back to suck it."
-                            $ rand_detect = renpy.random.randint(0,2)
-                            $ hidden = 1
                             menu:
                                 "Keep hiding...":
-                                    $ hidden = 1
+                                    $ hidden = True
                                 "Don't hide...":
-                                    $ hidden = 0
-                            if rand_detect == 1 or hidden == 0:
+                                    $ hidden = False
+                            if detected or not hidden:
                                 "Mom turns her head a little and see that the door is slightly open and you standing there."
                                 if the_person.sluttiness >=50 or the_person.get_opinion_score("public sex") > 0 or the_person.arousal > 35:
                                     "Mom takes [man_name]'s dick out of her mouth."
@@ -1203,14 +1137,14 @@ label mom_ntr_crisis_action:
                                     while the_person.arousal < 100:
                                         "[the_person.name] keeps sucking his dick. You notice that she is rubbing her clit with her free hand."
                                         man_name "Oh, thats great, [the_person.name]! You are great at sucking cocks."
-                                        if submission is 1:
+                                        if submissive:
                                             "[the_person.name] grabs [man_name]'s ass and impales her mouth on his cock. His ball hit mom's jaw."
                                             man_name "Ow, that feels so good, [the_person.name]!"
                                         else:
                                             pass
                                         "As she gets more and more turned on, her mouns get louder and louder."
-                                        $ arouusal_plus = renpy.random.randint (10,50)
-                                        $ the_person.change_arousal (arouusal_plus)
+                                        $ arousal_plus = renpy.random.randint (10,50)
+                                        $ the_person.change_arousal (arousal_plus)
                                     "[the_person.name] takes guys cock out and looks up."
                                     the_person.char "Oh. I get so turned on with a cock im my mouth. I'm cumming!"
                                     "She get's back to his dick as her body shivers with orgasm."
@@ -1219,9 +1153,6 @@ label mom_ntr_crisis_action:
                                     if finish == "facial":
                                         "She takes his dick out of her mouth."
                                         the_person.char "Would you like to cover my face with your hot cum? I doubt that your wife allows you to do this!"
-                                        $ wife_name = get_random_name()
-                                        while wife_name is the_person.name: ## Just to avoid stupid duplications
-                                            $ wife_name = get_random_name()
                                         man_name "No, [wife_name] never allows anything in bed. I wish I could make her blow me."
                                         the_person.char "Well, that's your chance to try something new, [man_name]!"
                                         "She looks into [man_name]'s eyes while jerking him with both hands."
@@ -1247,7 +1178,7 @@ label mom_ntr_crisis_action:
                                         "Mom stands up from the floor and smiles."
                                         the_person.char "Now go to your room, dear. Me and [man_name] need to take a bath."
                                         "As you turn to leave, you see [man_name]'s balls being caressed by your mom and his thing starting to rise."
-                                        if submission is 1 or the_person.sluttiness > 60:
+                                        if submissive or the_person.sluttiness > 60:
                                             "You go back to your bedroom accompanied by incomprehensive loud blabbering from mom's room."
                                             the_person.char "Mrmh... Blgrhm..."
                                             man_name "That's it, [wife_name]. My bitch want a shower?"
@@ -1258,9 +1189,6 @@ label mom_ntr_crisis_action:
                                         $ the_person.reset_arousal()
                                     elif finish == "drink":
                                         the_person.char "I want to taste your hot cum. Don't think that your wife allows you to do this!"
-                                        $ wife_name = get_random_name()
-                                        while wife_name is the_person.name: ## Just to avoid stupid duplications
-                                            $ wife_name = get_random_name()
                                         man_name "No, [wife_name] never blows me. It pisses me off, now that I know how good it is."
                                         the_person.char "Well, that's your chance to try something new, [man_name]!"
                                         $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
@@ -1288,7 +1216,7 @@ label mom_ntr_crisis_action:
                                         $ the_person.draw_person(position = "stand2", emotion = "happy")
                                         "Mom stands up from the floor and smiles."
                                         the_person.char "Now go to your room, dear. Me and [man_name] need to take a bath."
-                                        if submission is 1 or the_person.sluttiness > 60:
+                                        if submissive or the_person.sluttiness > 60:
                                             "You go back to your bedroom accompanied by incomprehensive loud blabbering from mom's room."
                                             the_person.char "Mrmh... Blgrhm..."
                                             man_name "That's it, [wife_name]. Take it into your slutty mouth! Like the taste. whore?"
@@ -1323,14 +1251,14 @@ label mom_ntr_crisis_action:
                                 while the_person.arousal < 100:
                                     "[the_person.name] keeps sucking his dick. You notice that she is rubbing her clit with a free hand."
                                     man_name "Oh, thats great, [the_person.name]! Your mouth is so sweet and nice."
-                                    if submission is 1:
+                                    if submissive:
                                         "[the_person.name] grabs [man_name]'s ass and impales her mouth on his cock. His ball hit mom's jaw."
                                         man_name "Ow, that feels so good, [the_person.name]!"
                                     else:
                                         pass
                                     "As she gets more and more turned on, her mouns get louder and louder."
-                                    $ arouusal_plus = renpy.random.randint (10,50)
-                                    $ the_person.change_arousal (arouusal_plus)
+                                    $ arousal_plus = renpy.random.randint (10,50)
+                                    $ the_person.change_arousal (arousal_plus)
                                 "[the_person.name] takes guys cock out and looks up."
                                 the_person.char "Oh. I get so turned on with a cock im my mouth. I'm cumming!"
                                 "She get's back to his dick as her body shivers with orgasm."
@@ -1338,9 +1266,6 @@ label mom_ntr_crisis_action:
                                 if finish == "facial":
                                     "She takes his dick out of her mouth."
                                     the_person.char "Would you like to cover my face with your hot cum? I doubt that your wife allows you to do this!"
-                                    $ wife_name = get_random_name()
-                                    while wife_name is the_person.name: ## Just to avoid stupid duplications
-                                        $ wife_name = get_random_name()
                                     man_name "No, [wife_name] never do anything like that. I wish I could make her blow me."
                                     the_person.char "Well, that's your chance to try something new, [man_name]!"
                                     "She looks into [man_name]'s eyes while jerking him with both hands."
@@ -1365,7 +1290,7 @@ label mom_ntr_crisis_action:
                                     "Mom stands up from the floor and smiles."
                                     the_person.char "Now we need to take a bath."
                                     "As you turn to leave, you see [man_name]'s balls being caressed by your mom and his thing starting to rise."
-                                    if submission is 1 or the_person.sluttiness > 60:
+                                    if submissive or the_person.sluttiness > 60:
                                         "You go back to your bedroom accompanied by incomprehensive loud blabbering from mom's room."
                                         the_person.char "Mrmh... Blgrhm..."
                                         man_name "That's it, [wife_name]. You look great with this."
@@ -1375,9 +1300,6 @@ label mom_ntr_crisis_action:
                                     $ the_person.reset_arousal()
                                 elif finish == "drink":
                                     the_person.char "I want to taste your hot cum. Don't think that your wife allows you to do this!"
-                                    $ wife_name = get_random_name()
-                                    while wife_name is the_person.name: ## Just to avoid stupid duplications
-                                        $ wife_name = get_random_name()
                                     man_name "No, [wife_name] never blows me. It pisses me off, now that I know how good it is."
                                     the_person.char "Well, that's your chance to try something new, [man_name]!"
                                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
@@ -1398,7 +1320,7 @@ label mom_ntr_crisis_action:
                                     $ the_person.draw_person(position = "stand2", emotion = "happy")
                                     "Mom stands up from the floor and smiles."
                                     the_person.char "Now go to shower. I will join you shortly."
-                                    if submission is 1 or the_person.sluttiness > 60:
+                                    if submissive or the_person.sluttiness > 60:
                                         "You go back to your bedroom accompanied by incomprehensive loud blabbering from mom's room."
                                         the_person.char "Mrmh... Blgrhm..."
                                         man_name "That's it, [wife_name]. A proper wife should like her man taste!"
@@ -1425,15 +1347,16 @@ label mom_ntr_crisis_action:
             "Get back to bed.":
                 "You decide that it is wrong to interfere into mom's private life so you go back to your room to sleep."
     elif encounter is 2: ##For a scene with 2 men
-        ## let's create wives names here, just not to insert that in every scene it is required
-        if bj is 1:
-            $ change_scene_display(bedroom)
-            $ the_person.draw_person(position = "blowjob", special_modifier="blowjob") 
-            show screen person_info_ui(the_person)
-            $ man_name = get_random_male_name()
+        $ man_name2 = get_random_male_name()       
+        while man_name is man_name2: ## Just to make sure that names don't match or it will look stupid
             $ man_name2 = get_random_male_name()
-            while man_name is man_name2: ## Just to make sure that names don't match or it will look stupid
-                $ man_name2 = get_random_male_name()
+        $ wife_name2 = get_random_name()
+        while wife_name2 is (the_person.char or wife_name): ## Just to avoid stupid duplications
+            $ wife_name2 = get_random_name()
+
+        ## let's create wives names here, just not to insert that in every scene it is required
+        if bj:
+            $ the_person.draw_person(position = "blowjob", special_modifier="blowjob") 
             "You take a look inside the room and your eyes widen. You see two men sitting on a bed with their cocks out of their pants."
             "Your mom is on her knees in front of them, sucking one cock and jerking the other."
             "By the look on men's faces you can tell that them are also quite surprised. One of them is clearly not very comfortable with the situation."
@@ -1450,11 +1373,7 @@ label mom_ntr_crisis_action:
             "It seems that mom is having fun with her colleagues, [man_name] and [man_name2]."
             "You are unsure what to do here."
         else:
-            $ change_scene_display(bedroom)
             $ the_person.draw_person(position = "kissing", emotion = "happy") 
-            show screen person_info_ui(the_person)
-            $ man_name = get_random_male_name()
-            $ man_name2 = get_random_male_name()
             "You see your mom embracing two men, kissing them deeply."
             the_person.char "Oh guys, you are so nice. I had a wonderful evening! Thanks for driving me home, [man_name]."
             man_name "Not a problem, [the_person.name]. I'm glad that [man_name2] joined us."
@@ -1466,54 +1385,40 @@ label mom_ntr_crisis_action:
                 "You decide to see what they are up to."
                 "They go on kissing. After a while [man_name] places his hands on mom's ass, slightly caressing it, while [man_name2] is fondling her tits."
                 the_person.char "Oh, [man_name]. You clearly have some plans for tonight, don't you?."
-                if bj is 1:
+                if bj:
                     "She strokes their cocks a little."
                 else:  
                     "She caresses their crouches."
                 the_person.char "I like that plans, as well as yours little friends there. How about we get more comfortable by getting rid of those clothes?"
                 $ mom_clothing = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True, exclude_feet = True)
-                if mom_clothing is None:
-                    pass
-                else:
+                if not mom_clothing is None:
                     $ the_person.draw_animated_removal (mom_clothing, position = "kissing")
                     man_name "That's a nice [mom_clothing.name] you have, [the_person.name]. I wonder how will you look without it."
                     "He takes off mom's [mom_clothing.name] and throws it on a nearby chair."
                 if clothes_number >1:
                     $ mom_clothing = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True, exclude_feet = True)
-                    if mom_clothing is None:
-                        pass
-                    else:
+                    if not mom_clothing is None:
                         the_person.char "I like the touch of your soft hands, [man_name]."
                         $ the_person.draw_animated_removal (mom_clothing, position = "kissing")
                         man_name2 "Let me help you too. Your [mom_clothing.name] need to go off, don't you agree?"
-                else:
-                    pass
                 if clothes_number >2:
                     $ mom_clothing = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True, exclude_feet = True)
-                    if mom_clothing is None:
-                        pass
-                    else:
+                    if not mom_clothing is None:
                         the_person.char "Ooooh, [man_name2], you are really turning me on with your touches."
                         $ the_person.draw_animated_removal (mom_clothing, position = "kissing")
                         if the_person.outfit.vagina_available():
                             "[man_name] takes off her [mom_clothing.name], while [man_name2] plays with her open pussy."
                         else:
                             "[man_name] takes off her [mom_clothing.name], while [man_name2] and [the_person.name] kiss passionately."
-                else:
-                    pass
                 if clothes_number >3:
                     $ mom_clothing = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True, exclude_feet = True)
-                    if mom_clothing is None:
-                        pass
-                    else:
+                    if not mom_clothing is None:
                         the_person.char "I don't mind go even more naked, guys. Who would like to take my [mom_clothing.name] next?"
                         $ the_person.draw_animated_removal (mom_clothing, position = "kissing")
                         if the_person.outfit.vagina_available():
                             "[man_name2] grants her wish, while [man_name] fingers her open pussy."
                         else:
                             "[man_name2] grants her wish, while [the_person.name] caresses [man_name2]'s crouch."
-                else:
-                    pass
                 $ the_person.sluttiness += 2
                 "Now with all of them pretty naked, you clearly see where it will go."
                 the_person.char "Oh, guys, I feel so horny around you. Let's have some fun!"
@@ -1524,8 +1429,8 @@ label mom_ntr_crisis_action:
                         the_person.char "Alright, who's wanna be the first to bang your colleague?"
                         man_name "I've been in the company longer than any of you, so it would only be fair that I go first."
                         "He comes up to the table, kneels in front of it and starts licking [the_person.name]'s pussy."
-                        $ arouusal_plus = renpy.random.randint (5,20)
-                        $ the_person.change_arousal (arouusal_plus)
+                        $ arousal_plus = renpy.random.randint (5,20)
+                        $ the_person.change_arousal (arousal_plus)
                         the_person.char "Oh yes, [man_name]! It feels so great."
                         "[man_name] kisses her clit than stands up."
                         man_name "One big dick for [the_person.name] coming right up!"
@@ -1538,24 +1443,20 @@ label mom_ntr_crisis_action:
                         while the_person.arousal < 60:
                             "[man_name] moves his dick in your mom pussy. It goes in and out with a wet sound. Clearly mom is having great time."
                             the_person.char "Please, [man_name], more. Bang me like you always wanted!"
-                            if submission is 1:
+                            if submissive:
                                 the_person.char "Harder. I want a rough fuck! Nail me more!"
-                            else:
-                                pass
                             "As she gets more and more turned on, the speed of her hand on [man_name2]'s cock also increases."
-                            $ arouusal_plus = renpy.random.randint (10,50)
-                            $ the_person.change_arousal (arouusal_plus)
+                            $ arousal_plus = renpy.random.randint (10,50)
+                            $ the_person.change_arousal (arousal_plus)
                         the_person.char "Oh, [man_name], you are so great, but I want to feel [man_name2] inside too!"
                         man_name "Oh, [the_person.name]... I hope you will take care of me in a meantime."
                         "[man_name] takes his cock out off her. You see mom's juices flowing out of her. She is clearly enjoying this."
-                        $ rand_detect = renpy.random.randint(0,2)
-                        $ hidden = 1
                         menu:
                             "Keep hiding...":
-                                $ hidden = 1
+                                $ hidden = True
                             "Don't hide...":
-                                    $ hidden = 0
-                        if rand_detect == 1 or hidden == 0:
+                                $ hidden = False
+                        if detected or not hidden:
                             "While men are changing positions, mom turns her head and see that the door is slightly open and you standing there."
                             if the_person.sluttiness >=70 or the_person.get_opinion_score("public sex") > 0:
                                 the_person.char "[mc.name], don't just stay there, come on it. Mom will help you relax as well."
@@ -1567,13 +1468,13 @@ label mom_ntr_crisis_action:
                                 while the_person.arousal < 100:
                                     "[man_name2] keeps doing your mom. His hip are smashing into your mom's."
                                     the_person.char "Yes, [man_name2]! Fuck me more. I feel so good now."
-                                    if submission is 1:
+                                    if submissive:
                                         the_person.char "Rougher! Do me harder! Fuck my brains out, I beg you!"
                                     else:
                                         pass
                                     "As she gets more and more turned on, she strokes your dicks faster and faster."
-                                    $ arouusal_plus = renpy.random.randint (10,50)
-                                    $ the_person.change_arousal (arouusal_plus)
+                                    $ arousal_plus = renpy.random.randint (10,50)
+                                    $ the_person.change_arousal (arousal_plus)
                                 "After being fucked by [man_name2] for quite some time, mom seems to be closing to orgasm."
                                 the_person.char "Oh, God! I'm cumming! Fuck me! Fuck me more! Do me more, [man_name2]!"
                                 "He starts to pump your mom real fast, his balls are smashing against mom's ass."
@@ -1589,12 +1490,6 @@ label mom_ntr_crisis_action:
                                     the_person.char "[man_name], [mc.name], come here!"
                                     "Both of you come closer. Now your mom is on her knees with three erected dicks in front of her."
                                     the_person.char "Would you like to cover my face with your hot cum? I doubt that your wives allows you to do this!"
-                                    $ wife_name = get_random_name()
-                                    while wife_name is the_person.name: ## Just to avoid stupid duplications
-                                        $ wife_name = get_random_name()
-                                    $ wife_name2 = get_random_name()
-                                    while wife_name2 is (the_person.name or wife_name): ## Just to avoid stupid duplications
-                                        $ wife_name2 = get_random_name()
                                     man_name "No, [wife_name] would never suggest anything like that..."
                                     man_name2 "I once proposed this to [wife_name2]. She called me a pervert who is watching too much porn."
                                     the_person.char "Well, now you can try the stuff from those movies yourselves!"
@@ -1620,7 +1515,7 @@ label mom_ntr_crisis_action:
                                     $ the_person.draw_person(position = "stand2", emotion = "happy")
                                     "Mom stands up from the floor and smiles."
                                     the_person.char "Now go to your room, dear. Me and the boys need to take a bath."
-                                    if submission is 1 or the_person.sluttiness > 70:
+                                    if submissive or the_person.sluttiness > 70:
                                         "You go back to your bedroom accompanied by screams from mom's room."
                                         the_person.char "Do me again, [man_name]. Fuck me harder! Harder! Ahhh... More, please, do me more!"
                                         man_name2 "Now I want to take this bitch from behind. Get on all fours, [the_person.name]."
@@ -1655,7 +1550,7 @@ label mom_ntr_crisis_action:
                                     "While she walks past [man_name], he places his hand on her butt."
                                     the_person.char "First - the shower. Then we will see, dear."
                                     man_name2 "Wait for me!"
-                                    if submission is 1  or the_person.sluttiness > 70:
+                                    if submissive  or the_person.sluttiness > 70:
                                         "You go back to your bedroom accompanied by screams from mom's room."
                                         the_person.char "Do me again, [man_name]. Fuck me harder! Harder! Ahhh... Fill me with cum!"
                                         man_name2 "Oh, [the_person.name], I'm gonna fill you so much that it will come from your ears!"
@@ -1670,12 +1565,6 @@ label mom_ntr_crisis_action:
                                     the_person.char "[man_name], [mc.name], come here!"
                                     "Both of you come closer. Now your mom is on her knees with three erected dicks in front of her."
                                     the_person.char "I want to taste your hot cum. Don't think that your wife allows you to do this!"
-                                    $ wife_name = get_random_name()
-                                    while wife_name is the_person.name: ## Just to avoid stupid duplications
-                                        $ wife_name = get_random_name()
-                                    $ wife_name2 = get_random_name()
-                                    while wife_name2 is (the_person.name or wife_name): ## Just to avoid stupid duplications
-                                        $ wife_name2 = get_random_name()
                                     man_name2 "No, [wife_name2] never allows anything other than missionary with a condom, she is so prudent and boring at times."
                                     man_name "I asked [wife_name] once for a bj. She tried but it was awful and she called it disgusting..."
                                     the_person.char "Well, thats your chance to try something new, guys!"
@@ -1709,7 +1598,7 @@ label mom_ntr_crisis_action:
                                     $ the_person.draw_person(position = "stand2", emotion = "happy")
                                     "Mom stands up from the floor and smiles."
                                     the_person.char "Now go to your room, dear. Me and guys need to take a bath."
-                                    if submission is 1  or the_person.sluttiness > 70:
+                                    if submissive  or the_person.sluttiness > 70:
                                         "You go back to your bedroom accompanied by screams from mom's room."
                                         the_person.char "Do me again, [man_name]. Fuck me harder! Harder! Ahhh... Let me drink your cum!"
                                         man_name2 "Open up your mouth, slut!  You gonna be feed with some hot stuff!"
@@ -1744,13 +1633,11 @@ label mom_ntr_crisis_action:
                                     "[man_name2] puts his dick into your mom pussy. By the look on mom's face she is clearly having great time."
                                     "While being pumped by [man_name2], she grabs [man_name] cock and strokes him."
                                     the_person.char "Please, [man_name2], more. Fuck me! Fuck your [the_person.name]!"
-                                    if submission is 1:
+                                    if submissive:
                                         the_person.char "Harder! Slam your dick in me, [man_name2]. I love being fucked roughly!"
-                                    else:
-                                        pass
                                     "As she gets more and more turned on, her screams get louder and louder."
-                                    $ arouusal_plus = renpy.random.randint (10,50)
-                                    $ the_person.change_arousal (arouusal_plus)
+                                    $ arousal_plus = renpy.random.randint (10,50)
+                                    $ the_person.change_arousal (arousal_plus)
                             "After being fucked by [man_name2] for quite some time, mom seems to be closing to orgasm."
                             the_person.char "Oh, God! I'm cumming! Fuck me! Keep doing this, [man_name2]!"
                             "He starts to pump your mom faster and faster, fully buring his dick in her."
@@ -1766,12 +1653,6 @@ label mom_ntr_crisis_action:
                                 the_person.char "Come here, [man_name]."
                                 "He comes over. Now mom is sitting on the floor with two dicks up to her face."
                                 the_person.char "Would you like to cover my face with your hot cum? I doubt that your wives allows you to do this!"
-                                $ wife_name = get_random_name()
-                                while wife_name is the_person.name: ## Just to avoid stupid duplications
-                                    $ wife_name = get_random_name()
-                                $ wife_name2 = get_random_name()
-                                while wife_name2 is (the_person.name or wife_name): ## Just to avoid stupid duplications
-                                    $ wife_name2 = get_random_name()
                                 man_name2 "No, [wife_name2] is not into lewd stuff. It's so boring. I wish to see [wife_name2] in sperm, just like in those movies."
                                 man_name "I once came on [wife_name] belly. She called me a prevert and didn't spoke to me for a week!"
                                 the_person.char "Well, thats your chance to try something new, guys! Just like the movies."
@@ -1794,7 +1675,7 @@ label mom_ntr_crisis_action:
                                 $ the_person.draw_person(position = "walking_away", emotion = "happy")
                                 "You see them walking away to bathroom. Some white drops fall on the floor."
                                 "Both men hands are on mom's ass, but she does not object. As they close the door, you see that mom caresses their balls while dicks show signs of returning to life."
-                                if submission is 1  or the_person.sluttiness > 70:
+                                if submissive  or the_person.sluttiness > 70:
                                     "You go back to your bedroom accompanied by screams from mom's room."
                                     the_person.char "Do me again, [man_name]. Fuck me harder! Harder! Ahhh... More, please, do me more!"
                                     man_name "On your face, [wife_name]! Looking good bitch!"
@@ -1825,7 +1706,7 @@ label mom_ntr_crisis_action:
                                 the_person.char "Now I need to take a bath. Then we will see"
                                 $ the_person.draw_person(position = "walking_away")
                                 "As mom walks towards bathroom, you see several white drops falling on the floor."
-                                if submission is 1 or the_person.sluttiness > 70:
+                                if submissive or the_person.sluttiness > 70:
                                     "You go back to your bedroom accompanied by screams from mom's room."
                                     the_person.char "Do me again, [man_name]. Fuck me harder! Harder! Ahhh... Cum in me! I want to be filled."
                                     man_name2 "Spread wide and receive my load as well!"
@@ -1840,12 +1721,6 @@ label mom_ntr_crisis_action:
                                 the_person.char "Come here, [man_name]."
                                 "He comes over. Now mom is sitting on the floor with two dicks up to her face."
                                 the_person.char "I want to taste your hot cum. Don't think that your wife allows you to do this!"
-                                $ wife_name = get_random_name()
-                                while wife_name is the_person.name: ## Just to avoid stupid duplications
-                                    $ wife_name = get_random_name()
-                                $ wife_name2 = get_random_name()
-                                while wife_name2 is (the_person.name or wife_name): ## Just to avoid stupid duplications
-                                    $ wife_name2 = get_random_name()
                                 man_name2 "No, [wife_name2] hates oral sex. It is so frustrating."
                                 man_name "I once asked [wife_name] for a blowjob. She said if I ever ask this again she will file a divorce!"
                                 the_person.char "Well, thats your chance to experience the feeling, guys!"
@@ -1873,7 +1748,7 @@ label mom_ntr_crisis_action:
                                 $ the_person.draw_person(position = "walking_away")
                                 "You see them walking away to bathroom."
                                 "[man_name]'s hand is on mom's ass, and [man_name2] caresses her between the legs, but she does not object. As they enter bathroom, men's dicks show signs of returning to life."
-                                if submission is 1 or the_person.sluttiness > 70:
+                                if submissive or the_person.sluttiness > 70:
                                     "You go back to your bedroom accompanied by screams from mom's room."
                                     the_person.char "Do me again, [man_name]. Fuck me harder! Harder! Ahhh... Give it to me! I want to drink it all!"
                                     man_name2 "Like the taste, bitch? Aren't you a cum-gulping whore, [the_person.name]?"
@@ -1887,7 +1762,7 @@ label mom_ntr_crisis_action:
                                 "[man_name2] pulls out his cock and finishes on your mom belly."
                                 man_name2 "Ow, fuck! That was great!"
                                 the_person.char "Indeed, [man_name2]! It was great!"
-                                if submission is 1:
+                                if submissive:
                                      the_person.char "I guess you like when a girl allows you to be rough, don't you? I too like feel owned by a man while he fucks me."
                                      man_name2 "Yes, it is a wonderful feeling. I really turns me on. Wish I could do it with my wife..."
                                 man_name2 "Thanks, [the_person.name]. I really needed that."
@@ -1910,35 +1785,33 @@ label mom_ntr_crisis_action:
                         man_name2 "Shit, [the_person.name]... I could only dream of anal. And you butt is so sweet."
                         "He comes up to the table, takes a tube of lubricant, pours some on his dick, then fingers mom's ass with it."
                         the_person.char "Thanks, [man_name2]. I'm ready. Put it in me."
-                        $ arouusal_plus = renpy.random.randint (5,20)
-                        $ the_person.change_arousal (arouusal_plus)
+                        $ arousal_plus = renpy.random.randint (5,20)
+                        $ the_person.change_arousal (arousal_plus)
                         "[man_name2] comes from behind and starts to slowly push against mom's ass." 
                         the_person.char "Keep going, [man_name2]. It feels so pleasant."
                         "The man is now fully inside [the_person.name]'s ass."
                         the_person.char "Ahhh, fuck! That feels so good, guys!"
                         "Men start to slowly move. Mom kiss [man_name] with a passion, while [man_name2] is caressing her buttocks."
                         the_person.char "Ohh, guys! You make me feel so good!"
-                        if submission is 1:
+                        if submissive:
                             the_person.char "Harder! Nail me with your cocks. I want you to be rough with your [the_person.name]. I'm your fuck toy today!"
                             $ the_person.discover_opinion("being submissive")
                         else:
                             pass
                         "You just can't believe your eyes - mom gets screwed by two men at once!"
-                        $ rand_detect = renpy.random.randint(0,2)
-                        $ hidden = 1
                         menu:
                             "Keep hiding...":
-                                $ hidden = 1
+                                $ hidden = True
                             "Don't hide...":
-                                $ hidden = 0
-                        if rand_detect == 1 or hidden == 0:
+                                $ hidden = False
+                        if detected or not hidden:
                             if the_person.sluttiness >=70 or the_person.get_opinion_score("public sex") > 0:
                                 "Mom raises her head and in the mirror next to bed sees that the door is slightly open and you standing there."
                                 the_person.char "[mc.name], don't just stay there, come on it. Mom will help you relax as well."
                                 man_name2 "Wow, [the_person.name]! Two of us not enough for you?"
-                                if submission is 1:
+                                if submissive:
                                     the_person.char "I want two of you to fuck me real hard so that I would scream like mad. I don't want to wake Lily so I need something to shut my mouth."
-                                    man_name "Wanna a rough fuck, [the_person.char]? Can do!"
+                                    man_name "Wanna a rough fuck, [the_person.name]? Can do!"
                                 else:
                                     the_person.char "My house, my rules. So, come on [mc.name]. I will help you relax."
                                 "You stand on the bed in front of mom and she starts sucking your dick."
@@ -1948,7 +1821,7 @@ label mom_ntr_crisis_action:
                                     "[man_name2] and [man_name] keep fucking [the_person.name] two ways."
                                     the_person.char "Mhmhmmmmh..."
                                     "Your cock in mom's mouth prevents her from saying anything, she can only moan. On her face you see a mixture of pain and pleasure."
-                                    if submission is 1:
+                                    if submissive:
                                         "She pulls her head away from you."
                                         the_person.char "Oh God! Fuck me! Fuck! Fuck!"
                                         "Afraid that she would wake up Lily, you grab her head and impale her wide open mouth on your dick."
@@ -1956,8 +1829,8 @@ label mom_ntr_crisis_action:
                                     else:
                                         pass
                                     "As she gets more and more turned on, she sucks your dick faster and faster."
-                                    $ arouusal_plus = renpy.random.randint (10,50)
-                                    $ the_person.change_arousal (arouusal_plus)
+                                    $ arousal_plus = renpy.random.randint (10,50)
+                                    $ the_person.change_arousal (arousal_plus)
                                 "After being fucked by three of you for quite some time, mom seems to be closing to orgasm."
                                 the_person.char "Oh, God! I'm cumming! Fuck me! Fuck me more! Fill my holes!"
                                 "Both men start to pump your mom real fast, their bodies slamming into her."
@@ -1974,12 +1847,6 @@ label mom_ntr_crisis_action:
                                     the_person.char "[man_name], [man_name2], [mc.name], come here!"
                                     "Three of you come closer. Now your mom is on her knees with three erected dicks in front of her."
                                     the_person.char "Would you like to cover my face with your hot cum? I doubt that your wives allows you to do this!"
-                                    $ wife_name = get_random_name()
-                                    while wife_name is the_person.name: ## Just to avoid stupid duplications
-                                        $ wife_name = get_random_name()
-                                    $ wife_name2 = get_random_name()
-                                    while wife_name2 is (the_person.name or wife_name): ## Just to avoid stupid duplications
-                                        $ wife_name2 = get_random_name()
                                     man_name "No, [wife_name] would never suggest anything like that..."
                                     man_name2 "I once proposed this to [wife_name2]. She called me a pervert who is watching too much porn."
                                     the_person.char "Well, now you can try the stuff from those movies yourselves!"
@@ -2005,7 +1872,7 @@ label mom_ntr_crisis_action:
                                     $ the_person.draw_person(position = "stand2", emotion = "happy")
                                     "Mom stands up from the floor and smiles."
                                     the_person.char "Now go to your room, dear. Me and the boys need to take a bath."
-                                    if submission is 1 or the_person.sluttiness > 70:
+                                    if submissive or the_person.sluttiness > 70:
                                         "You go back to your bedroom accompanied by screams from mom's room."
                                         the_person.char "Do me again, [man_name]. Take my ass!"
                                         man_name "We are out of lubricant, so suck me for a while,[the_person.name]."
@@ -2040,7 +1907,7 @@ label mom_ntr_crisis_action:
                                     "While she walks past [man_name], he places his hand on her butt."
                                     the_person.char "First - the shower. Then we will see, dear."
                                     man_name2 "Wait for me!"
-                                    if submission is 1  or the_person.sluttiness > 70:
+                                    if submissive  or the_person.sluttiness > 70:
                                         "You go back to your bedroom accompanied by screams from mom's room."
                                         the_person.char "Do me again, guys. Fuck me more! Ahhh... Fill me with cum!"
                                         man_name2 "Oh, [the_person.name], now we will fill both your holes!"
@@ -2055,12 +1922,6 @@ label mom_ntr_crisis_action:
                                     the_person.char "[man_name], [man_name2], [mc.name], come here!"
                                     "Three of you come closer. Now your mom is on her knees with three erected dicks in front of her."
                                     the_person.char "I want to taste your hot cum. Don't think that your wife allows you to do this!"
-                                    $ wife_name = get_random_name()
-                                    while wife_name is the_person.name: ## Just to avoid stupid duplications
-                                        $ wife_name = get_random_name()
-                                    $ wife_name2 = get_random_name()
-                                    while wife_name2 is (the_person.name or wife_name): ## Just to avoid stupid duplications
-                                        $ wife_name2 = get_random_name()
                                     man_name2 "No, [wife_name2] never allows anything other than missionary with a condom, she is so prudent and boring at times."
                                     man_name "I asked [wife_name] once for a bj. She tried but it was awful and she called it disgusting..."
                                     the_person.char "Well, thats your chance to try something new, guys!"
@@ -2094,7 +1955,7 @@ label mom_ntr_crisis_action:
                                     $ the_person.draw_person(position = "stand2", emotion = "happy")
                                     "Mom stands up from the floor and smiles."
                                     the_person.char "Now go to your room, dear. Me and guys need to take a bath."
-                                    if submission is 1  or the_person.sluttiness > 70:
+                                    if submissive  or the_person.sluttiness > 70:
                                         "You go back to your bedroom accompanied by screams from mom's room."
                                         the_person.char "Take me again, guys. Fuck me however you want! My ass and pussy are all yours! Just let me drink your semen!"
                                         man_name2 "Open up your mouth, slut!  You gonna be feed with some hot stuff!"
@@ -2119,7 +1980,7 @@ label mom_ntr_crisis_action:
                                     "Mom stands up from the bed and smiles."
                                     the_person.char "Didn't that turn you on, dear?"
                                     the_person.char "Now go to your room, [mc.name]. Me and colleagues need to take a bath."
-                                    if submission is 1  or the_person.sluttiness > 70:
+                                    if submissive  or the_person.sluttiness > 70:
                                         "You go back to your bedroom accompanied by screams from mom's room."
                                         the_person.char "Take me again, guys, please. I really liked your hard things in me at once!"
                                         man_name2 "You are sex hungry slut, [the_person.name]."
@@ -2138,13 +1999,13 @@ label mom_ntr_crisis_action:
                             while the_person.arousal < 100:
                                 "[man_name2] and [man_name] keep fucking [the_person.name] two ways."
                                 the_person.char "More, please. Fuck me more!"
-                                if submission is 1:
+                                if submissive:
                                     the_person.char "Harder! Rip me apart! Take me roughly!"
                                 else:
                                     pass
                                 "As she gets more and more turned on, her screams get louder and louder."
-                                $ arouusal_plus = renpy.random.randint (10,50)
-                                $ the_person.change_arousal (arouusal_plus)
+                                $ arousal_plus = renpy.random.randint (10,50)
+                                $ the_person.change_arousal (arousal_plus)
                             "After being fucked by two men at once for quite some time, mom seems to be closing to orgasm."
                             the_person.char "Oh, God! I'm cumming! Fuck me! Fuck me more! Fill my holes!"
                             "Men start to pump your mom real fast, their bodies slamming into her."
@@ -2159,12 +2020,6 @@ label mom_ntr_crisis_action:
                                 $ the_person.draw_person(position = "blowjob")
                                 "She pushes them backwards. [the_person.name] gets on her knees on the bed. Men come up to her, stroking their cocks."
                                 the_person.char "Would you like to cover my face with your hot cum? I doubt that your wives allows you to do this!"
-                                $ wife_name = get_random_name()
-                                while wife_name is the_person.name: ## Just to avoid stupid duplications
-                                    $ wife_name = get_random_name()
-                                $ wife_name2 = get_random_name()
-                                while wife_name2 is (the_person.name or wife_name): ## Just to avoid stupid duplications
-                                    $ wife_name2 = get_random_name()
                                 man_name2 "No, [wife_name2] is not into lewd stuff. It's so boring. I wish to see [wife_name2] in sperm, just like in those movies."
                                 man_name "I once came on [wife_name] belly. She called me a prevert and didn't spoke to me for a week!"
                                 the_person.char "Well, thats your chance to try something new, guys! Just like the movies."
@@ -2187,7 +2042,7 @@ label mom_ntr_crisis_action:
                                 $ the_person.draw_person(position = "walking_away", emotion = "happy")
                                 "You see them walking away to bathroom. Some white drops fall on the floor."
                                 "Both men hands are on mom's ass, but she does not object. As they close the door, you see that mom caresses their balls while dicks show signs of returning to life."
-                                if submission is 1  or the_person.sluttiness > 70:
+                                if submissive  or the_person.sluttiness > 70:
                                     "You go back to your bedroom accompanied by screams from mom's room."
                                     the_person.char "Do me again, [man_name]. Fuck me any way you want! Harder! And spray it all over me!"
                                     man_name "On your face, [wife_name]! Looking good bitch!"
@@ -2216,7 +2071,7 @@ label mom_ntr_crisis_action:
                                 the_person.char "Now I need to take a bath. Then we will see on having more fun."
                                 $ the_person.draw_person(position = "walking_away")
                                 "As mom walks towards bathroom, you see several white drops falling on the floor."
-                                if submission is 1 or the_person.sluttiness > 70:
+                                if submissive or the_person.sluttiness > 70:
                                     "You go back to your bedroom accompanied by screams from mom's room."
                                     the_person.char "Take me again, guys. Fuck me hard! Use my holes to your pleasure. Cum in me! I want to be filled."
                                     man_name2 "Spread wide and receive my load as well!"
@@ -2232,12 +2087,6 @@ label mom_ntr_crisis_action:
                                 the_person.char "[man_name], [man_name2], come here!"
                                 "Both of them come closer. Now your mom is on her knees with two hard dicks in front of her."
                                 the_person.char "I want to taste your hot cum. Don't think that your wife allows you to do this!"
-                                $ wife_name = get_random_name()
-                                while wife_name is the_person.name: ## Just to avoid stupid duplications
-                                    $ wife_name = get_random_name()
-                                $ wife_name2 = get_random_name()
-                                while wife_name2 is (the_person.name or wife_name): ## Just to avoid stupid duplications
-                                    $ wife_name2 = get_random_name()
                                 man_name2 "No, [wife_name2] never allows anything other than missionary with a condom, she is so prudent and boring at times."
                                 man_name "I asked [wife_name] once for a bj. She tried but it was awful and she called it disgusting..."
                                 the_person.char "Well, thats your chance to try something new, guys!"
@@ -2266,7 +2115,7 @@ label mom_ntr_crisis_action:
                                 the_person.char "Such a sweet taste. Now for a bath."
                                 "You see them walking away to bathroom."
                                 "[man_name]'s hand is on mom's ass, and [man_name2] caresses her between the legs, but she does not object. As they enter bathroom, men's dicks show signs of returning to life."
-                                if submission is 1 or the_person.sluttiness > 70:
+                                if submissive or the_person.sluttiness > 70:
                                     "You go back to your bedroom accompanied by screams from mom's room."
                                     the_person.char "Take my ass again, [man_name2]. Fuck me more! Ahhh... Give it to me! I want to drink it all!"
                                     man_name2 "Like the taste, bitch? Aren't you a cum-gulping whore, [the_person.name]?"
@@ -2279,7 +2128,7 @@ label mom_ntr_crisis_action:
                                 "[man_name] pulls out his cock and finishes on your mom belly."
                                 man_name "Ow, fuck! That was great!"
                                 the_person.char "Indeed, [man_name]! It was great! I also liked having you two in me."
-                                if submission is 1:
+                                if submissive:
                                      the_person.char "I guess I just like being used this way. I  like feel owned by men whilethey fuck me."
                                      man_name "Yes, it is a wonderful feeling. I really turns me on. Wish I could do it with my wife..."
                                 man_name "Thanks, [the_person.name]. I really needed that."
@@ -2291,7 +2140,7 @@ label mom_ntr_crisis_action:
                                 "Mom stands up from the bed and smiles."
                                 the_person.char "Didn't that event went great?"
                                 the_person.char "Now go to bath, guys. I will join you shortly."
-                                if submission is 1  or the_person.sluttiness > 70:
+                                if submissive  or the_person.sluttiness > 70:
                                     "You go back to your bedroom accompanied by screams from mom's room."
                                     the_person.char "Take me again, guys, please. I really liked your hard things in me at once!"
                                     man_name2 "You are sex hungry slut, [the_person.name]."
@@ -2312,16 +2161,14 @@ label mom_ntr_crisis_action:
                         man_name "It feels great, [the_person.name]. I like the way you do it!"
                         man_name2 "How about me also having the pleasure?"
                         "[the_person.name] begins to suck [man_name2]'s cock, while jerking [man_name]."
-                        $ arouusal_plus = renpy.random.randint (10,50)
-                        $ the_person.change_arousal (arouusal_plus)
-                        $ rand_detect = renpy.random.randint(0,2)
-                        $ hidden = 1
+                        $ arousal_plus = renpy.random.randint (10,50)
+                        $ the_person.change_arousal (arousal_plus)
                         menu:
                             "Keep hiding...":
-                                $ hidden = 1
+                                $ hidden = True
                             "Don't hide...":
-                                $ hidden = 0
-                        if rand_detect == 1 or hidden == 0:
+                                $ hidden = False
+                        if detected or not hidden:
                             "Mom turns her head and see that the door is slightly open and you standing there."
                             if the_person.sluttiness >=70 or the_person.get_opinion_score("public sex") > 0:
                                 "Mom takes [man_name2]'s dick out of her mouth."
@@ -2333,12 +2180,6 @@ label mom_ntr_crisis_action:
                                 $ finish = get_random_from_list(finishes)
                                 if finish == "facial":
                                     the_person.char "Would you like to cover my face with your hot cum? I doubt that your wives allows you to do this!"
-                                    $ wife_name = get_random_name()
-                                    while wife_name is the_person.name: ## Just to avoid stupid duplications
-                                        $ wife_name = get_random_name()
-                                    $ wife_name2 = get_random_name()
-                                    while wife_name2 is (the_person.name or wife_name): ## Just to avoid stupid duplications
-                                        $ wife_name2 = get_random_name()
                                     man_name2 "No, [wife_name2] is not into lewd stuff. It's so boring. I wish to see [wife_name2] in sperm, just like in those movies."
                                     man_name "I once came on [wife_name] belly. She called me a prevert and didn't spoke to me for a week!"
                                     the_person.char "Well, thats your chance to try something new, guys! Just like the movies."
@@ -2365,7 +2206,7 @@ label mom_ntr_crisis_action:
                                     $ the_person.draw_person(position = "walking_away", emotion = "happy")
                                     "You see them walking away to bathroom. Some white drops fall on the floor."
                                     "Both men hands are on mom's ass, but she does not object. As they close the door, you see that mom caresses their balls while dicks show signs of returning to life."
-                                    if submission is 1  or the_person.sluttiness > 70:
+                                    if submissive  or the_person.sluttiness > 70:
                                         "You go back to your bedroom accompanied by screams from mom's room."
                                         the_person.char "Oh, you are naughty gyus! Want some more? Well, why not? As long as you promise to cum on me."
                                         man_name "On your face, [wife_name]! Looking good bitch!"
@@ -2376,12 +2217,6 @@ label mom_ntr_crisis_action:
                                     $ the_person.reset_arousal()
                                 elif finish == "drink":
                                     the_person.char "I want to taste your hot cum. Don't think that your wife allows you to do this!"
-                                    $ wife_name = get_random_name()
-                                    while wife_name is the_person.name: ## Just to avoid stupid duplications
-                                        $ wife_name = get_random_name()
-                                    $ wife_name2 = get_random_name()
-                                    while wife_name2 is (the_person.name or wife_name): ## Just to avoid stupid duplications
-                                        $ wife_name2 = get_random_name()
                                     man_name2 "No, [wife_name2] never allows anything other than missionary with a condom, she is so prudent and boring at times."
                                     man_name "I asked [wife_name] once for a bj. She tried but it was awful and she called it disgusting..."
                                     the_person.char "Well, thats your chance to try something new, guys!"
@@ -2415,7 +2250,7 @@ label mom_ntr_crisis_action:
                                     $ the_person.draw_person(position = "stand2", emotion = "happy")
                                     "Mom stands up from the floor and smiles."
                                     the_person.char "Now go to your room, dear. Me and guys need to take a bath."
-                                    if submission is 1  or the_person.sluttiness > 70:
+                                    if submissive  or the_person.sluttiness > 70:
                                         "You go back to your bedroom accompanied by screams from mom's room."
                                         the_person.char "Want more of my mouth? Well, okay if you let me drink your cum!"
                                         man_name2 "Open up your mouth, slut!  You gonna be feed with some hot stuff!"
@@ -2435,7 +2270,7 @@ label mom_ntr_crisis_action:
                                     "Mom stands up from the bed and smiles."
                                     the_person.char "Didn't that event went great?"
                                     the_person.char "Now go to bath, guys. I will join you shortly."
-                                    if submission is 1  or the_person.sluttiness > 70:
+                                    if submissive  or the_person.sluttiness > 70:
                                         "You go back to your bedroom accompanied by screams from mom's room."
                                         man_name2 "How about another blowjob, [the_person.name]?"
                                         man_name "I would not mind as well."
@@ -2453,12 +2288,6 @@ label mom_ntr_crisis_action:
                             $ finish = get_random_from_list(finishes)
                             if finish == "facial":
                                 the_person.char "Would you like to cover my face with your hot cum? I doubt that your wives allows you to do this!"
-                                $ wife_name = get_random_name()
-                                while wife_name is the_person.name: ## Just to avoid stupid duplications
-                                    $ wife_name = get_random_name()
-                                $ wife_name2 = get_random_name()
-                                while wife_name2 is (the_person.name or wife_name): ## Just to avoid stupid duplications
-                                    $ wife_name2 = get_random_name()
                                 man_name2 "No, [wife_name2] is not into lewd stuff. It's so boring. I wish to see [wife_name2] in sperm, just like in those movies."
                                 man_name "I once came on [wife_name] belly. She called me a prevert and didn't spoke to me for a week!"
                                 the_person.char "Well, thats your chance to try something new, guys! Just like the movies."
@@ -2481,7 +2310,7 @@ label mom_ntr_crisis_action:
                                 $ the_person.draw_person(position = "walking_away", emotion = "happy")
                                 "You see them walking away to bathroom. Some white drops fall on the floor."
                                 "Both men hands are on mom's ass, but she does not object. As they close the door, you see that mom caresses their balls while dicks show signs of returning to life."
-                                if submission is 1  or the_person.sluttiness > 70:
+                                if submissive  or the_person.sluttiness > 70:
                                     "You go back to your bedroom accompanied by talk from mom's room."
                                     the_person.char "Oh, you are naughty gyus! Want some more? Well, why not? As long as you promise to cum on me."
                                     man_name "On your face, [wife_name]! Looking good bitch!"
@@ -2492,12 +2321,6 @@ label mom_ntr_crisis_action:
                                 $ the_person.reset_arousal()
                             elif finish == "drink":
                                 the_person.char "I want to taste your hot cum. Don't think that your wife allows you to do this!"
-                                $ wife_name = get_random_name()
-                                while wife_name is the_person.name: ## Just to avoid stupid duplications
-                                    $ wife_name = get_random_name()
-                                $ wife_name2 = get_random_name()
-                                while wife_name2 is (the_person.name or wife_name): ## Just to avoid stupid duplications
-                                    $ wife_name2 = get_random_name()
                                 man_name2 "No, [wife_name2] hates oral sex. It is so frustrating."
                                 man_name "I once asked [wife_name] for a blowjob. She said if I ever ask this again she will file a divorce!"
                                 the_person.char "Well, thats your chance to experience the feeling, guys!"
@@ -2525,7 +2348,7 @@ label mom_ntr_crisis_action:
                                 $ the_person.draw_person(position = "walking_away")
                                 "You see them walking away to bathroom."
                                 "[man_name]'s hand is on mom's ass, and [man_name2] caresses her between the legs, but she does not object. As they enter bathroom, men's dicks show signs of returning to life."
-                                if submission is 1 or the_person.sluttiness > 70:
+                                if submissive or the_person.sluttiness > 70:
                                     "You go back to your bedroom accompanied by screams from mom's room."
                                     the_person.char "Want more of my mouth? Well, okay if you let me drink your cum!"
                                     man_name2 "Open up your mouth, slut!  You gonna be feed with some hot stuff!"
@@ -2542,7 +2365,7 @@ label mom_ntr_crisis_action:
                                 "Mom stands up from the bed and smiles."
                                 the_person.char "Didn't that event went great?"
                                 the_person.char "Now go to bath, guys. I will join you shortly."
-                                if submission is 1  or the_person.sluttiness > 70:
+                                if submissive  or the_person.sluttiness > 70:
                                     "You go back to your bedroom accompanied by screams from mom's room."
                                     man_name2 "How about another blowjob, [the_person.name]?"
                                     man_name "I would not mind as well."

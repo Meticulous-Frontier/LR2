@@ -20,7 +20,7 @@ label anorexia_serum_mod_init_label():
     # "Initiating Anorexia Serum Mod Initialization"
     python:
         anorexia_serum_trait = SerumTrait(name = "Anorexia Serum",
-            desc = "Decrease target subject body mass, using peptide YY3-36 as a serum component acts on hypothalamic feeding centers to inhibit hunger and food intake.",
+            desc = "Decrease target subject body mass, using peptide YY3-36 as a serum component that acts on the hypothalamic feeding centers to inhibit hunger and calorie intake.",
             positive_slug = "-$15 Value, 20% Chance/Turn to reduce body mass by 200 grams",
             negative_slug = "+125 Serum Research",
             value_added = -15,

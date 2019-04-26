@@ -1,4 +1,5 @@
-## Town walk event
+## Town walk Crisis Mod by Tristimdorion
+# Based on the Pilotus13 Vanilla extension
 init -1 python:
     town_walk_mod_init = False
     town_walk_mod_weight = 5
@@ -52,7 +53,7 @@ label town_walk_crisis_action:
     "There is a glass of water right near the window. This is a good opportunity to test a serum for free."
     menu:
         "Add a dose of serum to [the_person.name]'s drink.":
-            call give_serum(the_person) from _call_give_serum_P13N1
+            call give_serum(the_person) from _call_give_serum_town_walk_1
             "You quickly retreat away from the window."           
         "Keep watching.":
             "You decide not to risk being seen and stay away from her sight"
@@ -169,8 +170,7 @@ label town_walk_crisis_action:
 
     hide screen person_info_ui
     $ the_person.reset_arousal()
-    $ the_person.outfit = the_person.planned_outfit.get_copy() #Make sure to reset their outfits so they're dressed properly.
-    $ renpy.scene()
+    $ the_person.reset_outfit() #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)
     $ renpy.scene("Active")
     return

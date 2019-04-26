@@ -34,12 +34,12 @@ label train_in_gym(the_person):
         $ the_person.change_happiness(+10)
         $ the_person.change_love(+5)
         $ slut_report = the_person.change_slut_temp(5)
-        the_person.name "Wow, i'm really feeling healthier now, and a little turned on...would you mind?"
+        the_person.char "Wow, i'm really feeling healthier now, and a little turned on...would you mind?"
         if the_person.sluttiness > 10:
             menu:
                 "Have Sex" if mc.current_stamina > 0:
                     mc.name "Lets go to the shower room."
-                    the_person.name "Lead the way, [mc.name]."
+                    the_person.char "Lead the way, [mc.name]."
                     $ change_scene_display(gym_shower)
 
                     call fuck_person(the_person) from _call_fuck_person_gym_training
@@ -51,13 +51,13 @@ label train_in_gym(the_person):
                     mc.name "Sorry [the_person.name], another time."
                     $ the_person.change_happiness(-10)
 
-    the_person.name "Thank you, [mc.name]."
+    the_person.char "Thank you, [mc.name]."
     mc.name "Bye [the_person.name], see you next time."
 
     $ mc.business.funds -= 40
 
     hide screen person_info_ui
-    $ the_person.outfit = the_person.planned_outfit.get_copy() #Make sure to reset their outfits so they're dressed properly.
+    $ the_person.reset_outfit() #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)
     $ renpy.scene("Active")
     return

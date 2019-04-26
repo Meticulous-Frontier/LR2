@@ -1,4 +1,5 @@
-## Shower event
+## Morning Shower Crisis Mod by Tristimdorion
+# Based on the Pilotus13 Vanilla extension
 init -1 python:
     shower_mod_init = False
     shower_mod_weight = 5
@@ -119,14 +120,18 @@ label shower_crisis_action:
                 "You quickly take off your clothes and step into the shower."
                 "[the_person.name] stands still as you hug her from behind. Your erect dick pushing against her bottom."
                 the_person.char "Ow, I feel that someone is happy to see me. Why don't you slide it in?"
+                # move to shower for fucking, then go back to original location
+                $ current_location = mc.location
+                $ mc.location = home_shower
                 call fuck_person(the_person) from _call_fuck_person_shower
+                $ mc.location = current_location
         "Join her. (disabled)" if not mc.current_stamina > 0:
             pass
         "Walk away":
             "You decide not to disturb her and just walk away."
     hide screen person_info_ui
     $ the_person.reset_arousal()
-    $ the_person.outfit = the_person.planned_outfit.get_copy() #Make sure to reset their outfits so they're dressed properly.
+    $ the_person.reset_outfit() #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)
     $ renpy.scene("Active")
     return
