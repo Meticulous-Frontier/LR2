@@ -21,7 +21,6 @@ init -1 python:
     dom_list = ["dominant"] # Domimant behavior
     sadist_list = [] # Sadistic behavior
 
-    degree = None
 
     def change_willpower(amount, add_to_log = True): #Logs change in willpower and shows new total.
         the_person.willpower += amount
