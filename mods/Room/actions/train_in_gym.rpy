@@ -33,6 +33,7 @@ label train_in_gym(the_person):
         $ the_person.draw_person(the_person.body_type)
         $ the_person.change_happiness(+10)
         $ the_person.change_love(+5)
+        $ the_person.change_arousal(25)
         $ slut_report = the_person.change_slut_temp(5)
         the_person.char "Wow, i'm really feeling healthier now, and a little turned on...would you mind?"
         if the_person.sluttiness > 10:
@@ -43,14 +44,13 @@ label train_in_gym(the_person):
                     $ change_scene_display(gym_shower)
 
                     call fuck_person(the_person) from _call_fuck_person_gym_training
-
-                    $ the_person.reset_arousal()
                 "Have Sex (disabled)" if not mc.current_stamina > 0:
                     pass
                 "Another Time":
                     mc.name "Sorry [the_person.name], another time."
                     $ the_person.change_happiness(-10)
 
+    $ the_person.reset_arousal()
     the_person.char "Thank you, [mc.name]."
     mc.name "Bye [the_person.name], see you next time."
 
