@@ -6,8 +6,9 @@
 init -1 python:
     ##PC Function Variables
     ps_mod_core_init = False
-    ps_mod_core_version = 0.15
+    ps_mod_core_version = 0.16
     mod_list = []
+    mod_options_list = []
 
 init 2 python:
     def PS_mod_core_init_requirement():
@@ -72,6 +73,17 @@ label pc_loop:
                 "[init_count] new mods initialized"
                 $ init_count = 0
         
+        "Mod Options":
+            python:
+                mod_options_tuple = []
+                for mod_options in mod_options_list:
+                    mod_options_tuple.append(mod_options)
+                mod_options_tuple.append(["Back","Back"])
+                mod_options_choice = renpy.display_menu(mod_options_tuple,True,"Choice")
+                if not mod_options_choice == "Back":
+                    renpy.jump(mod_options_choice)
+                else:
+                    renpy.jump("pc_loop")
 
         "Turn off PC":
             return

@@ -21,6 +21,7 @@ init 2 python: # Definitions
 
 
     def import_wardrobe(wardrobe, xml_filename): # This is a rewrite of the wardrobe_from_xml function written by Vren.
+                                                 # Wardrobe should be who's / what wardrobe you want to import into. e.g for main character it is mc.designed_wardrobe
         wardrobe = wardrobe
         file_path = os.path.abspath(os.path.join(config.basedir, "game"))
         file_path = os.path.join(file_path,"wardrobes")

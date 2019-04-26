@@ -24,3 +24,4 @@ How to Install:
     5. Go to the player's bedroom and use the PC via the "Do something..." menu.
     6. Hit the Mod Initialization button and click through any messages.
     7. Done. Any mods present that use the Mod Core should now be activated.
+

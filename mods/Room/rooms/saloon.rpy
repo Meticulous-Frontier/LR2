@@ -1,8 +1,8 @@
 init -1 python: # Declare variables to use
 
     # Create the room(s) I want to use.
-    mall_salon = Room("salon", "Hair Salon", [], Image("Salon_Background.png"), [], [], [], True, [], None, False)
-    business_salon = Room("salon", "Hair Salon", [], Image("Salon_Background.png"), [], [], [], True, [], None, False)
+    mall_salon = Room("salon", "Hair Salon", [], Image("Mods/mods/Room/images/Salon_Background.png"), [], [], [], True, [], None, False)
+    business_salon = Room("salon", "Hair Salon", [], Image("Mods/mods/Room/images/Salon_Background.png"), [], [], [], True, [], None, False)
 
 
 
@@ -11,7 +11,7 @@ init -1 python: # Declare variables to use
 init 2 python: # Room creation
 
     # Wardrobe for employees in the salon
-    salon_wardrobe = wardrobe_from_xml("Salon_Wardrobe")    
+    salon_wardrobe = wardrobe_from_xml("Salon_Wardrobe")
 
 
     # Always check if the room or action is somehow added already before proceeding.
@@ -22,3 +22,11 @@ init 2 python: # Room creation
     # I want to enter it from the mall.
     if mall_salon not in mod_rooms_append:
         mod_rooms_append.append(mall_salon)
+
+    if object not in mall_salon.objects:
+        mall_salon.add_object(make_floor())
+        mall_salon.add_object(make_wall())
+        mall_salon.add_object(make_chair())
+        mall_salon.add_object(make_desk())
+        mall_salon.add_object(make_table())
+        mall_salon.add_object(make_window())
