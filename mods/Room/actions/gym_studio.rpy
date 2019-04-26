@@ -59,7 +59,6 @@ label select_person_for_gym():
             renpy.say("", "After some time you get a response...")
 
     call select_person_for_gym_response(person_choice)# What to do if "Back" was not the choice taken.
-    call advance_time from _call_advance_time_gym_training
     jump game_loop # Return to the game_loop or a label that will bring you back to the game loop    
     
     
@@ -89,4 +88,5 @@ label select_person_for_gym_response(person_choice):
         $ the_person.change_happiness(+10)
     # End of respones
     call train_in_gym(the_person) from _call_train_in_gym_person_for_gym
+    call advance_time from _call_advance_time_gym_training
     
