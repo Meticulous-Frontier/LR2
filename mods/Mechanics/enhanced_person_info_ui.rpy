@@ -100,6 +100,12 @@ init 2:
                 vbox:
                     textbutton "Detailed Information" action Show("person_info_detailed",the_person=the_person) style "textbutton_style" text_style "textbutton_text_style"
 
+                    textbutton "Age: [the_person.age]":
+                        ysize 28
+                        text_style "menu_text_style"
+                        action NullAction()
+                        sensitive True
+
                     $ person_height = height_to_string(the_person.height)
                     textbutton "Height: [person_height]":
                         ysize 28
@@ -111,7 +117,6 @@ init 2:
                     textbutton "Cup size: [the_person.tits]":
                         ysize 28
                         text_style "menu_text_style"
-                        tooltip "The girls bra cup size."
                         action NullAction()
                         sensitive True
 
@@ -120,6 +125,5 @@ init 2:
                         textbutton "Weight: [weight] lbs":
                             ysize 28
                             text_style "menu_text_style"
-                            tooltip "The characters weight."
                             action NullAction()
                             sensitive True

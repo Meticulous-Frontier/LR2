@@ -24,6 +24,12 @@ label train_in_gym(the_person):
     $ the_person.draw_person()
 
     $ change = renpy.random.random() * 4 # Maximum change is 4 kg
+
+    if change < 2:
+        "You and [the_person.name] spend a few hours working out."
+    else:
+        "You put [the_person.name] through a vigorous training session."
+
     $ body_changed = change_person_weight(the_person, -change, 100)
     $ new_weight = get_person_weight_string(the_person)
 

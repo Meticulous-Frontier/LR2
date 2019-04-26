@@ -12,11 +12,11 @@ init -1 python:
     def check_person_weight_attribute(the_person):
         if not hasattr(the_person, "weight"):
             if (the_person.body_type == "thin_body"):
-                setattr(the_person, "weight", 60)
+                setattr(the_person, "weight", 60 * person.height)   # default weight thin body
             elif (the_person.body_type == "standard_body"):
-                setattr(the_person, "weight", 75)
+                setattr(the_person, "weight", 75 * person.height)   # default weight standard body
             else:
-                setattr(the_person, "weight", 90)
+                setattr(the_person, "weight", 90 * person.height)   # default weight curvy body
         return
 
     # Returns True when the persons body type has changed; otherwise False
@@ -29,25 +29,31 @@ init -1 python:
         if renpy.random.randint(0, 100) <= chance:
             the_person.weight += amount
         
+        # maximum and minimum weight are dependant on height
+        max_weight = the_person.height * 100
+        min_weight = the_person.height * 50
+        switch_point_low = the_person.height * 68
+        switch_point_high = the_person.height * 83
+
         if (amount > 0):
-            if the_person.weight > 72 and the_person.body_type == "thin_body":
+            if the_person.weight > switch_point_low + 3 and the_person.body_type == "thin_body":
                 the_person.body_type = "standard_body"
                 return True
-            if the_person.weight > 87 and the_person.body_type == "standard_body":
+            if the_person.weight > switch_point_high + 3 and the_person.body_type == "standard_body":
                 the_person.body_type = "curvy_body"
                 return True
-            if the_person.weight > 100: #Maximum weight
-                the_person.weight = 100
+            if the_person.weight > max_weight: #Maximum weight
+                the_person.weight = max_weight
             return False
 
         if (amount < 0):
-            if the_person.weight < 50:  #Minimum weight
-                the_person.weight = 50
+            if the_person.weight < min_weight:  #Minimum weight
+                the_person.weight = min_weight
                 return False
-            if the_person.weight < 63 and the_person.body_type == "standard_body":
+            if the_person.weight < switch_point_low - 3 and the_person.body_type == "standard_body":
                 the_person.body_type = "thin_body"        
                 return True
-            if the_person.weight < 78 and the_person.body_type == "curvy_body":
+            if the_person.weight < switch_point_high - 3 and the_person.body_type == "curvy_body":
                 the_person.body_type = "standard_body"
                 return True
             return False
