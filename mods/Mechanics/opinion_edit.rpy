@@ -32,7 +32,7 @@ init -1 python:
         if amount > 0:
             log_string = "+" + str(amount) + " Willpower " + "= " + str(the_person.willpower) + " Total"
         else:
-            log_string = "-" + str(amount) + " Willpower " + "= " + str(the_person.willpower) + " Total"
+            log_string = str(amount) + " Willpower " + "= " + str(the_person.willpower) + " Total"
 
         if add_to_log and amount != 0:
             mc.log_event(the_person.name + ": " + log_string, "float_text_blue")
