@@ -7,15 +7,15 @@ init 2 python:
     hijacklist = []
     # Keep track of the old callback so it can still be called
     original_label_callback = config.label_callback
-    # Hijack the beginning of the class_selection label (which is not called or jumped to)
+    # Hijack the config label callback function
     def hijack_label_callback(label, abnormal):
         # Make sure to call the original label callback too
         if not original_label_callback is None:
             original_label_callback(label, abnormal)
 
+        # loop hijacked labels an jump to mod label
         for hijack in hijacklist:
-            # Jump to Mod setup choice and tutorial
-            if label == hijack[0]:
+            if label == hijack[0]:  # base game label called
                 renpy.jump(hijack[1])
             
     config.label_callback = hijack_label_callback
