@@ -49,16 +49,10 @@ label mom_ntr_crisis_action:
     $ finishes = []
     if the_person.get_opinion_score("being covered in cum") > 0 or the_person.get_opinion_score("cum facials") > 0:
         $ finishes.append ("facial")
-    else:
-        pass
     if the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("risking getting pregnant") > 0:
         $ finishes.append ("inside")
-    else:
-        pass
     if the_person.get_opinion_score("giving blowjobs") > 0 or the_person.get_opinion_score("drinking cum") > 0:
         $ finishes.append ("drink")
-    else:
-        pass
     $ finishes.append ("usual")
     ## Submission check for additional lines related to that
     $ submissive = the_person.get_opinion_score("being submissive") > 0
