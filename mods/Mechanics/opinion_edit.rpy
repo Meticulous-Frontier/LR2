@@ -21,7 +21,6 @@ init -1 python:
     dom_list = ["dominant"] # Domimant behavior
     sadist_list = [] # Sadistic behavior
 
-
     def change_willpower(amount, add_to_log = True): #Logs change in willpower and shows new total.
         the_person.willpower += amount
         if the_person.willpower < 0:
@@ -38,13 +37,19 @@ init -1 python:
             mc.log_event(the_person.name + ": " + log_string, "float_text_blue")
         return the_person.willpower
 
-    def add_opinion(opinion, degree, discovered, add_to_log = True): # Gives a message stating the opinion has been changed.
+    def add_opinion(opinion, degree, discovered, add_to_log = True, opinion_type = 0): # Gives a message stating the opinion has been changed.
 
         opinion = opinion
         degree = degree
         discovered = discovered
+        opinion_type = opinion_type # 0 for normal, 1 for sexy.
 
-        the_person.opinions[opinion] = [degree, discovered]
+        if opinion_type == 0:
+            the_person.opinions[opinion] = [degree, discovered]
+
+        elif opinion_type == 1:
+
+            the_person.sexy_opinions[opinion] = [degree, discovered]
 
         if degree == -2:
             log_string = "Hates " + str(opinion)
