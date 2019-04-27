@@ -20,15 +20,15 @@ init 2 python:
     business_basement.append(rd_division_basement)
     business_basement.append(office_basement)
 
-    for room in business_basement: # These rooms should become accessable through gameplay.
-        room.accessable = False
+#    for room in business_basement: # These rooms should become accessable through gameplay.
+#        room.accessable = True
 
     for room in business_basement: # Add the rooms to the list that enables the elevator. This depends on having the Room Manager present.
 
         if room not in mod_rooms_append:
             mod_rooms_append.append(room)
 
-    for room in business_basement: # I want all of the rooms in the basement to be accessable from the business lobby.
+#    for room in business_basement: # I want all of the rooms in the basement to be accessable from the business lobby.
                                    # Modifications and further pathways can be altered later, if I for example want to install a direct elevator into the main office and into the dungeon.
-        if room not in mod_rooms_lobby:
-            mod_rooms_lobby.append(room)
+#        if room not in mod_rooms_lobby:
+#            mod_rooms_lobby.append(room)
