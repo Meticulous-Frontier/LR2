@@ -7,6 +7,6 @@ init -2 python:
         return imagePath
 
     def propImage(imagePath):
-        imagePath = Image("Mods/mods/Room/images" + imagePath + ".png")
+        imagePath = Image("Mods/mods/Room/images/props/" + imagePath + ".png")
 
         return imagePath
