@@ -11,11 +11,14 @@ init -1 python:
         all_people = all_people_in_the_game(excluded_people)
         return get_random_from_list(all_people)
 
-    def learn_home(self):
+    def learn_home(self): # Adds the_person.home to mc.known_home_locations allowing it to be visited without having to go through date label
         if not self.home in mc.known_home_locations:
             mc.known_home_locations.append(self.home)
             return True # Returns true if it succeeds
-        return False # Retirns false otherwise, so it can be used for checks.
+        return False # Returns false otherwise, so it can be used for checks.
+
+    # Adds learn_home function to the_person.
+    Person.learn_home = learn_home
 
     # Strips down the person to a clothing their are comfortable with
     # optional: clothing_message narrator voice after each item use '##clothing##'' in message for clothing item stripped, use '##person_name##' for self nanme.
@@ -45,5 +48,41 @@ init -1 python:
     # Monkey wrench Person class to have reset outfit function
     Person.reset_outfit = reset_outfit
 
-    # Adds learn_home function to the_person.
-    Person.learn_home = learn_home
+    def add_opinion(self, opinion, degree, discovered, sexy_opinion = False, add_to_log = True): # Gives a message stating the opinion has been changed.
+
+        opinion = opinion
+        degree = degree
+        discovered = discovered
+        sexy_opinion = sexy_opinion # False for normal, True for Sexy
+
+        if sexy_opinion == False:
+            self.opinions[opinion] = [degree, discovered]
+
+            if opinion not in opinions_list: # Appends to the opinion pool
+                opinions_list.append(opinion)
+
+        elif sexy_opinion == True:
+            self.sexy_opinions[opinion] = [degree, discovered]
+
+            if opinion not in sexy_opinions_list: # Appends to the opinion pool
+                sexy_opinions_list.append(opinion)
+        if degree == -2:
+            log_string = "Hates " + str(opinion)
+
+        elif degree == -1:
+            log_string = "Dislikes " + str(opinion)
+
+        elif degree == 0:
+            log_string = "Indifferent to " + str(opinion)
+
+        elif degree == 1:
+            log_string = "Likes " + str(opinion)
+
+        elif degree == 2:
+            log_string = "Loves " + str(opinion)
+
+        if add_to_log:
+            mc.log_event(self.name + ": " + log_string, "float_text_green")
+        return
+    # Adds a function that edits and adds opinions. It also appends to the vanilla opinion pool.
+    Person.add_opinion = add_opinion
