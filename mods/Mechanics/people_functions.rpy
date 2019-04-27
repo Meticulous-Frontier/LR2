@@ -24,7 +24,7 @@ init -1 python:
     # optional: clothing_message narrator voice after each item use '##clothing##'' in message for clothing item stripped, use '##person_name##' for self nanme.
     # note: at least 1 item gets removed regardsless of sluttiness
     def strip_outfit_to_max_sluttiness(self, top_layer_first = True, exclude_feet = True, narrator_message = None):
-        strip_choice = self.outfit.remove_random_any(top_layer_first, exclude_feet, do_not_remove = True)
+        strip_choice = self.outfit.remove_random_upper(top_layer_first, exclude_feet, do_not_remove = True)
         if not narrator_message is None:
             narrator_message = narrator_message.replace("##person_name##", self.name)
         while not strip_choice is None:
@@ -32,7 +32,9 @@ init -1 python:
             if not narrator_message is None:
                 renpy.say(None, narrator_message.replace("##clothing##", strip_choice.name))
             if self.judge_outfit(self.outfit):
-                strip_choice = self.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+                strip_choice = self.outfit.remove_random_upper(top_layer_first, exclude_feet, do_not_remove = True)
+                if strip_choice is None:
+                    strip_choice = self.outfit.remove_random_any(top_layer_first, exclude_feet, do_not_remove = True)
             else:
                 strip_choice = None
         return

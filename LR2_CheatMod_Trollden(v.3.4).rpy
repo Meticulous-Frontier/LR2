@@ -394,7 +394,7 @@ screen cmoc():
                 textbutton "Oral: [the_person.sex_skills[Oral]]" action SetDict(the_person.sex_skills, "Oral", the_person.sex_skills["Oral"] +1) alternate SetDict(the_person.sex_skills, "Oral", the_person.sex_skills["Oral"] -1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
                 textbutton "Vaginal: [the_person.sex_skills[Vaginal]]" action SetDict(the_person.sex_skills, "Vaginal", the_person.sex_skills["Vaginal"] +1) alternate SetDict(the_person.sex_skills, "Vaginal", the_person.sex_skills["Vaginal"] -1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
                 textbutton "Anal: [the_person.sex_skills[Anal]]" action SetDict(the_person.sex_skills, "Anal", the_person.sex_skills["Anal"] +1) alternate SetDict(the_person.sex_skills, "Anal", the_person.sex_skills["Anal"] -1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
-                textbutton "Arousal: [the_person.arousal]" action SetField(the_person,"arousal", the_person.arousal + 50) alternate SetField(the_person,"arousal", the_person.arousal - 50) style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                textbutton "Arousal: [the_person.arousal]" action SetField(the_person,"arousal", the_person.arousal + 25) alternate SetField(the_person,"arousal", the_person.arousal - 25) style "cheatbutton_style" text_style "cheattext_style" xsize 220
 
             vbox: # the_person relations
                 textbutton "Relations" action NullAction() style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
@@ -404,7 +404,7 @@ screen cmoc():
                 textbutton "Suggestibility: [the_person.suggestibility]" action SetField(the_person, "suggestibility", the_person.suggestibility + 50) alternate SetField(the_person, "suggestibility", the_person.suggestibility - 50) style "cheatbutton_style" text_style "cheattext_style" xsize 220
                 textbutton "Sluttiness: [the_person.sluttiness]" action SetField(the_person, "sluttiness", the_person.sluttiness + 10) alternate SetField(the_person, "sluttiness", the_person.sluttiness - 10) style "cheatbutton_style" text_style "cheattext_style" xsize 220
                 textbutton "Core Sluttiness: [the_person.core_sluttiness]" action SetField(the_person, "core_sluttiness", the_person.core_sluttiness + 10) alternate SetField(the_person, "core_sluttiness", the_person.core_sluttiness - 10) style "cheatbutton_style" text_style "cheattext_style" xsize 220
-                textbutton "Obedience: [the_person.obedience]" action SetField(the_person, "obedience", the_person.obedience + 50) alternate SetField(the_person, "obedience", the_person.obedience - 50) style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                textbutton "Obedience: [the_person.obedience]" action SetField(the_person, "obedience", the_person.obedience + 25) alternate SetField(the_person, "obedience", the_person.obedience - 25) style "cheatbutton_style" text_style "cheattext_style" xsize 220
 
     frame: # Bottom frame
         background im.Scale("Goal_Frame_1.png", 1165, 200) # Scales the image to a size fitting the frame it is contained within
@@ -574,10 +574,10 @@ screen cmc(): # Cheats for business / company
         hbox:
             xalign 0.02
             vbox:
-                textbutton "Funds: $[mc.business.funds]" action SetField(mc.business, "funds", mc.business.funds + 10000000) alternate SetField(mc.business, "funds", mc.business.funds - 10000000)  style "cheatbutton_style" text_style "textbutton_text_style" xsize 230
-                textbutton "Supplies: [mc.business.supply_count]" action SetField(mc.business, "supply_count", mc.business.supply_count + 10000000) alternate SetField(mc.business, "supply_count", mc.business.supply_count - 10000000)  style "cheatbutton_style" text_style "textbutton_text_style" xsize 230
-                textbutton "Effectivity: [mc.business.team_effectiveness]" action [SetField(mc.business, "team_effectiveness", mc.business.team_effectiveness + 1000), SetField(mc.business, "effectiveness_cap", mc.business.team_effectiveness + 1000)] alternate [SetField(mc.business, "team_effectiveness", mc.business.team_effectiveness - 1000), SetField(mc.business, "effectiveness_cap", mc.business.team_effectiveness - 1000)]  style "cheatbutton_style" text_style "textbutton_text_style" xsize 230
-                textbutton "Marketability: [mc.business.marketability]" action SetField(mc.business, "marketability", mc.business.marketability + 1000) alternate SetField(mc.business, "marketability", mc.business.marketability - 1000)  style "cheatbutton_style" text_style "textbutton_text_style" xsize 230
+                textbutton "Funds: $[mc.business.funds]" action SetField(mc.business, "funds", mc.business.funds + 10000) alternate SetField(mc.business, "funds", mc.business.funds - 10000)  style "cheatbutton_style" text_style "textbutton_text_style" xsize 230
+                textbutton "Supplies: [mc.business.supply_count]" action SetField(mc.business, "supply_count", mc.business.supply_count + 10000) alternate SetField(mc.business, "supply_count", mc.business.supply_count - 10000)  style "cheatbutton_style" text_style "textbutton_text_style" xsize 230
+                textbutton "Effectivity: [mc.business.team_effectiveness]" action [SetField(mc.business, "team_effectiveness", mc.business.team_effectiveness + 100), SetField(mc.business, "effectiveness_cap", mc.business.team_effectiveness + 100)] alternate [SetField(mc.business, "team_effectiveness", mc.business.team_effectiveness - 100), SetField(mc.business, "effectiveness_cap", mc.business.team_effectiveness - 100)]  style "cheatbutton_style" text_style "textbutton_text_style" xsize 230
+                textbutton "Marketability: [mc.business.marketability]" action SetField(mc.business, "marketability", mc.business.marketability + 100) alternate SetField(mc.business, "marketability", mc.business.marketability - 100)  style "cheatbutton_style" text_style "textbutton_text_style" xsize 230
     frame: # Bottom frame
         background im.Scale("Goal_Frame_1.png", 1165, 200) # Scales the image to a size fitting the frame it is contained within
         xsize 1165
@@ -639,7 +639,9 @@ screen cmw(): # Cheats affecting the general world
                 textbutton "Crisis & Events" action ToggleVariable("cml") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "List of crisis and events"
 
                 if cml:
-                    textbutton "Next Page: [cmlpage]" action [If(cmlpage == 3, true = SetVariable("cmlpage", cmlpage - 2), false = SetVariable("cmlpage", cmlpage + 1))] alternate [If(cmlpage == 1, true = SetVariable("cmlpage", cmlpage + 2), false = SetVariable("cmlpage", cmlpage - 1))] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "Shift through pages"
+                    $ total_pages = 3 
+                    textbutton "Next Page: [cmlpage]" action [If(cmlpage == total_pages, true = SetVariable("cmlpage", cmlpage - total_pages + 1), false = SetVariable("cmlpage", cmlpage + 1))] alternate [If(cmlpage == 1, true = SetVariable("cmlpage", cmlpage + total_pages - 1), false = SetVariable("cmlpage", cmlpage - 1))] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "Shift through pages"
+
             if cml == True and cmlpage == 1: # Page 1 Work Related Crisis Events
                 vbox:
                     textbutton "Work Crisis" action NullAction() style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "Crisis in your company"
@@ -703,10 +705,17 @@ screen cmw(): # Cheats affecting the general world
 
                     textbutton "Pay to Strip" action Call("pay_strip_scene", the_person) style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "pay_strip_scene"
                     textbutton "Dinner Date" action Call("dinner_date", the_person) style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "dinner_date"
+                    textbutton "Mom NTR" action Call("mom_ntr_action_description") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Mom NTR Event"
+                    textbutton "Sister NTR" action Call("sister_ntr_action_description") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Sister NTR Event"
+                    textbutton "Shower Scenes" action Call("shower_action_description") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Shower Spy Event"
 
-            #if cml and cmlpage == 4: # Page 4
+                vbox:
+                    textbutton "Sister Phone" action Call("sister_phone_action_description") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Your sister sends messages to your phone"
+                    textbutton "Town Walk" action Call("town_walk_action_description") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Taking an afternoon stroll through town"
+                    textbutton "Going to the Gym" action Call("select_person_for_gym") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Give an employee a training session at the gym"
 
+            # if cml == True and cmlpage == 4: # Page 4
 
-            #if cml and cmlpage == 5: # Page 5 If you want to add additional pages modify the "Next Page" text button as well!
+            # if cml == True and cmlpage == 5: # Page 5 If you want to add additional pages modify the "Next Page" text button as well!
 
 # Screens - End
