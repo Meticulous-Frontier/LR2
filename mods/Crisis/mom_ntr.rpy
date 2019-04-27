@@ -546,7 +546,6 @@ label mom_ntr_crisis_action:
                                             "Screams go on long into the night..."
                                         else:
                                             "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                        $ the_person.reset_arousal()
                                     elif finish == "inside":
                                         the_person.char "Yes! Do it, [man_name]! I want you to fill me."
                                         $ the_person.cum_in_vagina()
@@ -575,7 +574,6 @@ label mom_ntr_crisis_action:
                                             "Screams go on long into the night..."
                                         else:
                                             "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                        $ the_person.reset_arousal()
                                     elif finish == "drink":
                                         the_person.char "Hold it, [man_name]! I have a better idea."
                                         $ the_person.draw_person(position = "blowjob")
@@ -616,7 +614,6 @@ label mom_ntr_crisis_action:
                                             "Screams go on long into the night..."
                                         else:
                                             "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                        $ the_person.reset_arousal()
                                     elif finish == "usual":
                                         "[man_name] pulls out his cock, mom grabs it and starts stroking. In a few moments the man begins to cum."
                                         "Mom closes the tip with her hand so that no sperm would be split around."
@@ -638,7 +635,6 @@ label mom_ntr_crisis_action:
                                             "Screams go on long into the night..."
                                         else:
                                             "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                        $ the_person.reset_arousal()
                                 else:
                                     $ the_person.happiness -= 5
                                     $ the_person.draw_person(position = "missionary", emotion = "angry")
@@ -694,7 +690,6 @@ label mom_ntr_crisis_action:
                                         "Screams go on long into the night..."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                    $ the_person.reset_arousal()
                                 elif finish == "inside":
                                     the_person.char "Yes! Do it, [man_name]! I want you to fill me."
                                     $ the_person.cum_in_vagina()
@@ -719,7 +714,6 @@ label mom_ntr_crisis_action:
                                         "Screams go on long into the night..."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                    $ the_person.reset_arousal()
                                 elif finish == "drink":
                                     the_person.char "Hold it, [man_name]! I have a better idea."
                                     $ the_person.draw_person(position = "blowjob")
@@ -753,7 +747,6 @@ label mom_ntr_crisis_action:
                                         "Screams go on long into the night..."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                    $ the_person.reset_arousal()
                                 elif finish == "usual":
                                     $ the_person.draw_person(position = "missionary", emotion = "happy")
                                     "[man_name] pulls out his cock, mom grabs it and starts stroking. In a few moments the man begins to cum."
@@ -776,7 +769,6 @@ label mom_ntr_crisis_action:
                                         "Screams go on long into the night..."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                    $ the_person.reset_arousal()
                         "Mom poses next to bed..." if the_person.outfit.vagina_available():
                             $ the_person.draw_person(position = "standing_doggy")
                             "You see as mom turns back and poses on her bed spreading her legs, inviting [man_name] to enter her from behind."
@@ -870,7 +862,6 @@ label mom_ntr_crisis_action:
                                             "Screams go on long into the night..."
                                         else:
                                             "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                        $ the_person.reset_arousal()
                                     elif finish == "inside":
                                         the_person.char "Yes! Do it, [man_name]! I want you to fill me."
                                         $ the_person.cum_in_vagina()
@@ -898,7 +889,6 @@ label mom_ntr_crisis_action:
                                             "Screams go on long into the night..."
                                         else:
                                             "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                        $ the_person.reset_arousal()
                                     elif finish == "drink":
                                         the_person.char "Hold it, [man_name]! I have a better idea."
                                         $ the_person.draw_person(position = "blowjob")
@@ -939,7 +929,6 @@ label mom_ntr_crisis_action:
                                             "Screams go on long into the night..."
                                         else:
                                             "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                        $ the_person.reset_arousal()
                                     elif finish == "usual":
                                         $ the_person.draw_person(position = "standing_doggy")
                                         "[man_name] pulls out his cock and starts stroking it with mom's buttocks."
@@ -961,7 +950,6 @@ label mom_ntr_crisis_action:
                                             "Screams go on long into the night..."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                        $ the_person.reset_arousal()
                                 else:
                                     $ the_person.happiness -= 5
                                     $ the_person.draw_person(position = "back_peek", emotion = "angry")
@@ -1019,7 +1007,6 @@ label mom_ntr_crisis_action:
                                         "Screams go on long into the night..."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                    $ the_person.reset_arousal()
                                 elif finish == "inside":
                                     the_person.char "Yes! Do it, [man_name]! I want you to fill me."
                                     $ the_person.cum_in_vagina()
@@ -1044,7 +1031,6 @@ label mom_ntr_crisis_action:
                                         "Screams go on long into the night..."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                    $ the_person.reset_arousal()
                                 elif finish == "drink":
                                     the_person.char "Hold it, [man_name]! I have a better idea."
                                     $ the_person.draw_person(position = "blowjob")
@@ -1079,7 +1065,6 @@ label mom_ntr_crisis_action:
                                         "Screams go on long into the night..."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                    $ the_person.reset_arousal()
                                 elif finish == "usual":
                                     $ the_person.draw_person(position = "standing_doggy")
                                     "[man_name] pulls out his cock and starts stroking it with mom's buttocks."
@@ -1099,7 +1084,6 @@ label mom_ntr_crisis_action:
                                         "Screams go on long into the night..."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                    $ the_person.reset_arousal()
                         "Mom gets on her knees...":
                             $ the_person.draw_person(position = "blowjob")
                             "You see as mom gets on her knees, taking down [man_name]'s underwear."
@@ -1180,7 +1164,6 @@ label mom_ntr_crisis_action:
                                             "Seems [man_name] liked the idea of roleplaying with face-fucking your mom. She doesn't seem to object."
                                         else:
                                             "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                        $ the_person.reset_arousal()
                                     elif finish == "drink":
                                         the_person.char "I want to taste your hot cum. Don't think that your wife allows you to do this!"
                                         man_name "No, [wife_name] never blows me. It pisses me off, now that I know how good it is."
@@ -1217,7 +1200,6 @@ label mom_ntr_crisis_action:
                                             "Seems [man_name] liked the idea of roleplaying with feeding your mom. She doesn't seem to object."
                                         else:
                                             "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                        $ the_person.reset_arousal()
                                     elif finish == "usual":
                                         "Mom take his penis out of her mouth and looks up to him."
                                         the_person.char "Yes! Please cum on my brest. It's easier to clean than furniture around."
@@ -1235,7 +1217,6 @@ label mom_ntr_crisis_action:
                                         "Mom stands up from the floor and smiles."
                                         the_person.char "Now go to your room, dear. Me and [man_name] need to take a bath."
                                         "You go back to your bedroom accompanied by shower sounds from mom's room."
-                                        $ the_person.reset_arousal()
                                 else:
                                     $ the_person.happiness -= 5
                                     $ the_person.draw_person(position = "blowjob", emotion = "angry")
@@ -1291,7 +1272,6 @@ label mom_ntr_crisis_action:
                                         "Seems [man_name] liked the idea of roleplaying with cumming on your mom. She doesn't seem to object."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                    $ the_person.reset_arousal()
                                 elif finish == "drink":
                                     the_person.char "I want to taste your hot cum. Don't think that your wife allows you to do this!"
                                     man_name "No, [wife_name] never blows me. It pisses me off, now that I know how good it is."
@@ -1321,7 +1301,6 @@ label mom_ntr_crisis_action:
                                         "Seems [man_name] liked the idea of roleplaying with feeding your mom. She doesn't seem to object."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                    $ the_person.reset_arousal()
                                 elif finish == "usual":
                                     "Mom take his penis out of her mouth and looks up to him."
                                     the_person.char "Yes! Please cum on my breasts. It's easier to clean than the furniture."
@@ -1337,7 +1316,6 @@ label mom_ntr_crisis_action:
                                     the_person.char "I really like the taste of big john, [man_name]."
                                     the_person.char "Now go the bathroom, I will join shortly."
                                     "You go back to your bedroom accompanied by shower sounds from mom's room."
-                                    $ the_person.reset_arousal()
             "Get back to bed.":
                 "You decide that it is wrong to interfere into mom's private life so you go back to your room to sleep."
     elif encounter is 2: ##For a scene with 2 men
@@ -1516,7 +1494,6 @@ label mom_ntr_crisis_action:
                                         "It seems that men are planning to fuck [the_person.name] all the night..."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans and men's laughter from mom's room."
-                                    $ the_person.reset_arousal()
                                 elif finish == "inside":
                                     the_person.char "Yes! Do it, [man_name2]! I want you to fill me."
                                     $ the_person.cum_in_vagina()
@@ -1551,7 +1528,6 @@ label mom_ntr_crisis_action:
                                         "It seems that men are planning to fuck [the_person.name] all the night..."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans and bed sqeaking from mom's room."
-                                    $ the_person.reset_arousal()
                                 elif finish == "drink":
                                     the_person.char "Hold it, [man_name]! I have a better idea."
                                     $ the_person.draw_person(position = "blowjob")
@@ -1599,7 +1575,6 @@ label mom_ntr_crisis_action:
                                         "It seems that men are planning to fuck [the_person.name] all the night..."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans and gulping sounds from mom's room."
-                                    $ the_person.reset_arousal()
                                 elif finish == "usual":
                                     $ the_person.cum_on_stomach()
                                     $ the_person.draw_person(position = "missionary", emotion = "happy")
@@ -1616,7 +1591,6 @@ label mom_ntr_crisis_action:
                                     the_person.char "Didn't that turn you on, dear?"
                                     the_person.char "Now go to your room, [mc.name]. Me and colleagues need to take a bath."
                                     "You go back to your bedroom accompanied by shower sounds from mom's room."
-                                    $ the_person.reset_arousal()
                             else:
                                 $ the_person.happiness -= 5
                                 $ the_person.draw_person(position = "missionary", emotion = "angry")
@@ -1677,7 +1651,6 @@ label mom_ntr_crisis_action:
                                     "It seems the guys liked role-playing with [the_person.name] as their fuck doll."
                                 else:
                                     "You go back to your bedroom and while drifting to sleep you hear quiet moans and bed sqeaks from mom's room."
-                                $ the_person.reset_arousal()
                             elif finish == "inside":
                                 the_person.char "Yes! Do it, [man_name2]! I want you to fill me."
                                 $ the_person.cum_in_vagina()
@@ -1707,7 +1680,6 @@ label mom_ntr_crisis_action:
                                     "Seems that men just foun out a warm and comfortable place for them, as they seem to do [the_person.name] all night long."
                                 else:
                                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                $ the_person.reset_arousal()
                             elif finish == "drink":
                                 the_person.char "Hold it, [man_name2]! I have a better idea."
                                 $ the_person.draw_person(position = "blowjob")
@@ -1749,7 +1721,6 @@ label mom_ntr_crisis_action:
                                     "It seems mom's mouth gonna keep them awake for a while..."
                                 else:
                                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                $ the_person.reset_arousal()
                             elif finish == "usual":
                                 $ the_person.cum_on_stomach()
                                 $ the_person.draw_person(position = "missionary", emotion = "happy")
@@ -1769,7 +1740,6 @@ label mom_ntr_crisis_action:
                                 the_person.char "Didn't that event paid off, dear?"
                                 the_person.char "Now go to bath, guys. I will join you shortly."
                                 "You go back to your bedroom accompanied by shower sounds from mom's room."
-                                $ the_person.reset_arousal()        
                     "Mom shows on the bed..." if the_person.outfit.vagina_available() and (the_person.sluttiness > 70 or the_person.get_opinion_score("anal sex") > 0):
                         the_person.char "Alright, I have an idea of how we all can have fun. Please, [man_name], lie on the bed."
                         "The man does so. From where you stand you can see how hard he is."
@@ -1874,7 +1844,6 @@ label mom_ntr_crisis_action:
                                         "It seems that men are planning to fuck [the_person.name] all the night..."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans and men's laughter from mom's room."
-                                    $ the_person.reset_arousal()
                                 elif finish == "inside":
                                     the_person.char "Yes! Do it, [man_name]! I want you to fill me."
                                     $ the_person.cum_in_vagina()
@@ -1908,7 +1877,6 @@ label mom_ntr_crisis_action:
                                         "It seems that men are planning to fuck [the_person.name]'s holes all the night..."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans and bed sqeaking from mom's room."
-                                    $ the_person.reset_arousal()
                                 elif finish == "drink":
                                     the_person.char "Hold it, guys! I have a better idea."
                                     $ the_person.draw_person(position = "blowjob")
@@ -1957,7 +1925,6 @@ label mom_ntr_crisis_action:
                                         "It seems that men are planning to use [the_person.name] as cum dump all the night..."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans and guliong sounds from mom's room."
-                                    $ the_person.reset_arousal()
                                 elif finish == "usual":
                                     $ the_person.cum_on_stomach()
                                     "[man_name] pulls out his cock and finishes on your mom belly."
@@ -1982,7 +1949,6 @@ label mom_ntr_crisis_action:
                                         "It seems that men are planning to have some more fun with your mom..."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans and guliong sounds from mom's room."
-                                    $ the_person.reset_arousal()
                             else:
                                 $ the_person.happiness -= 5
                                 the_person.char "[mc.name]! Don't spy on your mom! Get beck to your room now!"
@@ -2044,7 +2010,6 @@ label mom_ntr_crisis_action:
                                     "It seems the guys liked role-playing with [the_person.name] as their fuck doll."
                                 else:
                                     "You go back to your bedroom and while drifting to sleep you hear quiet moans and bed sqeaks from mom's room."
-                                $ the_person.reset_arousal()
                             elif finish == "inside":
                                 the_person.char "Yes! Do it, [man_name]! I want you to fill me."
                                 $ the_person.cum_in_vagina()
@@ -2073,7 +2038,6 @@ label mom_ntr_crisis_action:
                                     "Seems that men liked to fill mom with sperm, as they seem to do [the_person.name] all night long."
                                 else:
                                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                $ the_person.reset_arousal()
                             elif finish == "drink":
                                 the_person.char "Hold it, [man_name2]! I have a better idea."
                                 $ the_person.draw_person(position = "blowjob")
@@ -2116,7 +2080,6 @@ label mom_ntr_crisis_action:
                                     "It seems mom's mouth gonna keep them awake for a while..."
                                 else:
                                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                $ the_person.reset_arousal()
                             elif finish == "usual":
                                 $ the_person.cum_on_stomach()
                                 "[man_name] pulls out his cock and finishes on your mom belly."
@@ -2142,7 +2105,6 @@ label mom_ntr_crisis_action:
                                     "It seems that men are planning to have some more fun with your mom..."
                                 else:
                                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                $ the_person.reset_arousal()
                     "Mom gets on her knees":
                         $ the_person.draw_person(position = "blowjob")
                         "You see as mom gets on her knees, taking down [man_name]'s underwear."
@@ -2208,7 +2170,6 @@ label mom_ntr_crisis_action:
                                         "It seems the guys liked role-playing with [the_person.name] as their sperm dump."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans and bed sqeaks from mom's room."
-                                    $ the_person.reset_arousal()
                                 elif finish == "drink":
                                     the_person.char "I want to taste your hot cum. Don't think that your wife allows you to do this!"
                                     man_name2 "No, [wife_name2] never allows anything other than missionary with a condom, she is so prudent and boring at times."
@@ -2251,7 +2212,6 @@ label mom_ntr_crisis_action:
                                         "It seems that men are planning to cum in [the_person.name]'s mouth all the night..."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans and gulping sounds from mom's room."
-                                    $ the_person.reset_arousal()
                                 elif finish == "usual":
                                     "Mom takes [man_name2]'s cock out of her mouth and starts jerking him off, while you and [man_name] are helping yourselves."
                                     man_name2 "Ow, fuck! That feels great!"
@@ -2271,7 +2231,6 @@ label mom_ntr_crisis_action:
                                         "It seems that men are planning to have some more fun with your mom..."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                    $ the_person.reset_arousal()
                             else:
                                 $ the_person.happiness -= 5
                                 $ the_person.draw_person(position = "blowjob", emotion = "angry")
@@ -2312,7 +2271,6 @@ label mom_ntr_crisis_action:
                                     "It seems the guys liked role-playing with [the_person.name] as their sperm dump."
                                 else:
                                     "You go back to your bedroom and while drifting to sleep you hear quiet moans and bed sqeaks from mom's room."
-                                $ the_person.reset_arousal()
                             elif finish == "drink":
                                 the_person.char "I want to taste your hot cum. Don't think that your wife allows you to do this!"
                                 man_name2 "No, [wife_name2] hates oral sex. It is so frustrating."
@@ -2349,7 +2307,6 @@ label mom_ntr_crisis_action:
                                     "It seems that men are planning to cum in [the_person.name]'s mouth all the night..."
                                 else:
                                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                $ the_person.reset_arousal()
                             elif finish == "usual":
                                 "Mom takes [man_name2]'s cock out of her mouth and starts jerking him off, while [man_name] is caressing her boobs."
                                 man_name2 "Ow, fuck! That feels great!"
@@ -2366,10 +2323,12 @@ label mom_ntr_crisis_action:
                                     "It seems that men are planning to have some more fun with your mom..."
                                 else:
                                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from mom's room."
-                                $ the_person.reset_arousal()
             "Get back to bed.":
                 "You decide that it is wrong to interfere into mom's private life so you go back to your room to sleep."               
     hide screen person_info_ui
     $ the_person.sluttiness += 5
+    $ the_person.reset_arousal()
+    $ the_person.reset_outfit() #Make sure to reset her outfit so she is dressed properly.
+    $ change_scene_display(mc.location)
     $ renpy.scene("Active")
     return
