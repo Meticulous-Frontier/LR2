@@ -17,36 +17,12 @@ init -1 python:
         else:
             return False
 
-    def is_day(dayname): # Can probably make this better..?
+    def is_day(day_name):
+        if dayname in day_names:           
+            return day % 7 == day_names.index(dayname)
+        return False
 
-        if str(dayname) == "Monday" and day%7 == 0:
-            return True
-        if str(dayname) == "Tuesday" and day%7 == 1:
-            return True
-        if str(dayname) == "Wednesday" and day%7 == 2:
-            return True
-        if str(dayname) == "Thursday" and day%7 == 3:
-            return True
-        if str(dayname) == "Friday" and day%7 == 4:
-            return True
-        if str(dayname) == "Saturday" and day%7 == 5:
-            return True
-        if str(dayname) == "Sunday" and day%7 == 6:
-            return True
-        else:
-            return False
-
-    def is_time(time_name): # Can probably make this better..?
-
-        if str(time_name) == "Early Morning" and time_of_day == 0:
-            return True
-        if str(time_name) == "Morning" and time_of_day == 1:
-            return True
-        if str(time_name) == "Afternoon" and time_of_day == 2:
-            return True
-        if str(time_name) == "Evening" and time_of_day == 3:
-            return True
-        if str(time_name) == "Night" and time_of_day == 4:
-            return True
-        else:
-            return False
+    def is_time(time_name):
+        if time_name in time_names:
+            return time_of_day == time_names.index(time_name)
+        return False
