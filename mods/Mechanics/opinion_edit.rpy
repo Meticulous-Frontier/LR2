@@ -20,6 +20,7 @@ init -1 python:
     preg_list = ["pregnant"] # Pregnancy or pregnancy play
     dom_list = ["dominant"] # Domimant behavior
     sadist_list = [] # Sadistic behavior
+#    lewd_list = [] # Keywords that are considered sexual, to determine if something is to be thrown into sexy_opinions_list or opinions_list
 
     def change_willpower(amount, add_to_log = True): #Logs change in willpower and shows new total.
         the_person.willpower += amount
