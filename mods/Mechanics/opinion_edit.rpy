@@ -37,38 +37,7 @@ init -1 python:
             mc.log_event(the_person.name + ": " + log_string, "float_text_blue")
         return the_person.willpower
 
-    def add_opinion(opinion, degree, discovered, add_to_log = True, opinion_type = 0): # Gives a message stating the opinion has been changed.
-
-        opinion = opinion
-        degree = degree
-        discovered = discovered
-        opinion_type = opinion_type # 0 for normal, 1 for sexy.
-
-        if opinion_type == 0:
-            the_person.opinions[opinion] = [degree, discovered]
-
-        elif opinion_type == 1:
-
-            the_person.sexy_opinions[opinion] = [degree, discovered]
-
-        if degree == -2:
-            log_string = "Hates " + str(opinion)
-
-        elif degree == -1:
-            log_string = "Dislikes " + str(opinion)
-
-        elif degree == 0:
-            log_string = "Indifferent to " + str(opinion)
-
-        elif degree == 1:
-            log_string = "Likes " + str(opinion)
-
-        elif degree == 2:
-            log_string = "Loves " + str(opinion)
-
-        if add_to_log:
-            mc.log_event(the_person.name + ": " + log_string, "float_text_green")
-
+    #
     def calc_power():
         mc.power = 0
 
