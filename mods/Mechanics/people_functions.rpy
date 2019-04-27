@@ -11,6 +11,12 @@ init -1 python:
         all_people = all_people_in_the_game(excluded_people)
         return get_random_from_list(all_people)
 
+    def learn_home(self):
+        if not self.home in mc.known_home_locations:
+            mc.known_home_locations.append(self.home)
+            return True # Returns true if it succeeds
+        return False # Retirns false otherwise, so it can be used for checks.
+
     # Strips down the person to a clothing their are comfortable with
     # optional: clothing_message narrator voice after each item use '##clothing##'' in message for clothing item stripped, use '##person_name##' for self nanme.
     # note: at least 1 item gets removed regardsless of sluttiness
@@ -28,12 +34,16 @@ init -1 python:
                 strip_choice = None
         return
 
+
     # Monkey wrench Person class to have automatic strip function
     Person.strip_outfit_to_max_sluttiness = strip_outfit_to_max_sluttiness
 
     def reset_outfit(self):
         self.outfit = self.planned_outfit.get_copy()
         return
-    
+
     # Monkey wrench Person class to have reset outfit function
     Person.reset_outfit = reset_outfit
+
+    # Adds learn_home function to the_person.
+    Person.learn_home = learn_home
