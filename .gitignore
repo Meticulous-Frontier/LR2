@@ -45,6 +45,7 @@ coverage.xml
 =======
 # Visual Studio Code
 *.code-workspace
+.vscode/**
 
 >>>>>>> 621414ff3ae1764e3bb26d364f316da37dd784d3
 # Translations
