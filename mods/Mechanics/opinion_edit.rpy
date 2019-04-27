@@ -107,87 +107,33 @@ label influence_opinion_input_label():
     menu:
         "Hate":
             $ degree = -2
-            if opinion in the_person.sexy_opinions: # Avoids errors.
-
-                if the_person.sexy_opinions[opinion][0] == -1:
-                    $ change_willpower(+5)
-                    "Speaker" "[the_person.name] dislikes [opinion], so it is going to be difficult to change her mind."
-
-                if the_person.sexy_opinions[opinion][0] == 1:
-                    $ change_willpower(+10)
-                    "Speaker" "[the_person.name] likes [opinion], so it is going to be difficult to change her mind."
-
-                if the_person.sexy_opinions[opinion][0] == 2:
-                    $ change_willpower(+15)
-                    "Speaker" "[the_person.name] loves [opinion], so it is going to be difficult to change her mind."
-
         "Dislike":
             $ degree = -1
-            if opinion in the_person.sexy_opinions: # Avoids errors.
-
-                if the_person.sexy_opinions[opinion][0] == -2:
-                    $ change_willpower(+5)
-                    "Speaker" "[the_person.name] hates [opinion], so it is going to be difficult to change her mind."
-
-                if the_person.sexy_opinions[opinion][0] == 1:
-                    $ change_willpower(+5)
-                    "Speaker" "[the_person.name] likes [opinion], so it is going to be difficult to change her mind."
-
-                if the_person.sexy_opinions[opinion][0] == 2:
-                    $ change_willpower(+10)
-                    "Speaker" "[the_person.name] loves [opinion], so it is going to be difficult to change her mind."
-
         "Neutral": #This will not display, can be used to "remove" an opinion without the need for additional code.
             $ degree = 0
-            if opinion in the_person.sexy_opinions: # Avoids errors.
-                if the_person.sexy_opinions[opinion][0] == -2:
-                    $ change_willpower(+10)
-                    "Speaker" "[the_person.name] hates [opinion], so it is going to be difficult to change her mind."
-
-                if the_person.sexy_opinions[opinion][0] == -1:
-                    $ change_willpower(+5)
-                    "Speaker" "[the_person.name] dislikes [opinion], so it is going to be difficult to change her mind."
-
-                if the_person.sexy_opinions[opinion][0] == 1:
-                    $ change_willpower(+5)
-                    "Speaker" "[the_person.name] likes [opinion], so it is going to be difficult to change her mind."
-
-                if the_person.sexy_opinions[opinion][0] == 2:
-                    $ change_willpower(+10)
-                    "Speaker" "[the_person.name] loves [opinion], so it is going to be difficult to change her mind."
         "Like":
             $ degree = 1
-            if opinion in the_person.sexy_opinions: # Avoids errors.
-                if the_person.sexy_opinions[opinion][0] == -2:
-                    $ change_willpower(+10)
-                    "Speaker" "[the_person.name] hates [opinion], so it is going to be difficult to change her mind."
-
-                if the_person.sexy_opinions[opinion][0] == -1:
-                    $ change_willpower(+5)
-                    "Speaker" "[the_person.name] dislikes [opinion], so it is going to be difficult to change her mind."
-
-                if the_person.sexy_opinions[opinion][0] == 2:
-                    $ change_willpower(+10)
-                    "Speaker" "[the_person.name] loves [opinion], so it is going to be difficult to change her mind."
-
-
-
         "Love":
             $ degree = 2
-            if opinion in the_person.sexy_opinions: # Avoids errors.
+        "Back":
+            return
 
-                if the_person.sexy_opinions[opinion][0] == -2:
-                    $ change_willpower(+15)
-                    "Speaker" "[the_person.name] hates [opinion], so it is going to be difficult to change her mind."
+    if not the_person.get_opinion_topic(opinion) is None:
+        python:
+            score = the_person.get_opinion_score(opinion)
+            degrees = [-2,-1,0,1,2]
+            change = abs(degrees.index(score) - degrees.index(degree)) # How far is the degree away from current opinion (max 4 steps)
+            cur_score = opinion_score_to_string(score) 
+            change_willpower(change * 5)
 
-                if the_person.sexy_opinions[opinion][0] == -1:
-                    $ change_willpower(+10)
-                    "Speaker" "[the_person.name] dislikes [opinion], so it is going to be difficult to change her mind."
-
-                if the_person.sexy_opinions[opinion][0] == 1:
-                    $ change_willpower(+5)
-                    "Speaker" "[the_person.name] likes [opinion], so it is going to be difficult to change her mind."
-
+        if change == 1: # small change
+            "Speaker" "[the_person.name] [cur_score] [opinion], so she will put up not much resistance."
+        elif change == 2: # medium change
+            "Speaker" "[the_person.name] [cur_score] [opinion], so she will put up a little resistance."
+        elif change == 3: # large change
+            "Speaker" "[the_person.name] [cur_score] [opinion], so she will put up some resistance."
+        elif change == 4: # very large change
+            "Speaker" "[the_person.name] [cur_score)] [opinion], so she will put up a lot of resistance."
 
 
 #    "Speaker" "Does the player know about [the_person.name]'s opinion?" NOTE: Might as well assume yes, because the player is determining it.
