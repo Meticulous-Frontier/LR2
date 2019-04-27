@@ -28,13 +28,13 @@ label influence_opinion_start_label(person): # This is the setup phase that you 
     $ discovered = None
     $ people_nearby = len(mc.location.people)
     $ person.willpower = calculate_wilpower(person)
-    $ mc_wilpower = player_willpower()
+    $ mc.power = player_willpower()
 
     # Pre-check to let the player know base information about the scenario.
-    if mc_wilpower > person.willpower:
+    if mc.power > person.willpower:
         "Speaker" "You feel confident that you will be able to sway their opinion..."
 
-    elif mc_wilpower < person.willpower:
+    elif mc.power < person.willpower:
         "Speaker" "[person.name] seems to have a sturdy mentality at the moment, proceed with caution"
 
     else: # Happens if their willpower is equal to your power.
@@ -65,10 +65,10 @@ label influence_opinion_start_label(person): # This is the setup phase that you 
 
     call influence_opinion_input_label(person) # Takes input and returns
 
-    if mc_wilpower > person.willpower:
+    if mc.power > person.willpower:
         "Speaker" "You succeed at making the changes"
         $ person.add_opinion(opinion, degree, discovered)
-    elif person.willpower > mc_wilpower :
+    elif person.willpower > mc.power :
         "Speaker" "[person.name]'s mind rejects your suggestions"
     else:
         "Speaker" "You are at a stalemate, try changing your approach"
