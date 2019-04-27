@@ -98,7 +98,7 @@ init 2:
                         sensitive True
 
                 vbox:
-                    textbutton "Detailed Information" action Show("person_info_detailed",person=person) style "textbutton_style" text_style "textbutton_text_style"
+                    textbutton "Detailed Information" action Show("person_info_detailed",the_person=person) style "textbutton_style" text_style "textbutton_text_style"
 
                     textbutton "Age: [person.age]":
                         ysize 28
