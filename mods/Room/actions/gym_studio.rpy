@@ -27,22 +27,18 @@ label gym_training_mod_init_label:
         gym.background_image = Image("Mods/mods/Room/images/Gym_Background.jpg") #As long a there is a mall background for the gym, replace it with our gym background
 
         train_in_gym_action = Action("Schedule a gym session. {image=gui/heart/Time_Advance.png}", gym_requirement, "select_person_for_gym", menu_tooltip = "Bring a person to the gym to train their body.")
-
-        # Always check if the room is somehow already added.
-        # I want to enter it from the gym.
-        if gym_shower not in mod_rooms_gym:
-            mod_rooms_gym.append(gym_shower)
-
-        # I want to enable NPC pathing
-        if gym_shower not in list_of_places:
-            list_of_places.append(gym_shower)
-            
+      
         # Always check if the action is somehow already added.
         # Enables the train_in_gym_action for the gym.
         if train_in_gym_action not in gym.actions:
             gym.actions.append(train_in_gym_action)
 
-        gym_training_mod_init = True           
+        # add gym shower to active places
+        list_of_places.append(gym_shower)
+        gym.link_locations_two_way(gym_shower)
+
+        gym_training_mod_init = True
+
     return
        
 label select_person_for_gym():

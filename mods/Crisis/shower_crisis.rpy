@@ -23,12 +23,16 @@ init 2 python:
 label shower_mod_init_label():
     python:
         shower_crisis = Action("Shower Crisis",shower_crisis_requirement,"shower_action_description")
-
+       
         if not shower_crisis in morning_crisis_list[0]:
             morning_crisis_list.append([shower_crisis,shower_mod_weight])   
         
         shower_mod_init = True
-    
+
+        # add home shower to active places
+        list_of_places.append(home_shower)
+        hall.link_locations_two_way(home_shower)
+
     #if shower_mod_init:
     #    "Shower Mod Initialization is complete."
     return

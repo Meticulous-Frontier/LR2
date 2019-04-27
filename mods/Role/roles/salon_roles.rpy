@@ -10,8 +10,8 @@ init 2 python:
 
     #salon_in_business_action = Action() # Opens a salon room in the business itself.
 
-    def cut_hair_requirement(the_person):
-        for role in the_person.special_role:
+    def cut_hair_requirement(person):
+        for role in person.special_role:
             if cut_hair_action in role.actions:
                 return True
         else:
@@ -23,9 +23,9 @@ init 2 python:
     if cut_hair_action not in salon_manager_role.actions:
         salon_manager_role.actions.append(cut_hair_action)
 
-label cut_hair_label(the_person):
-    "You ask [the_person.name] if you can change their style up a bit."
-    $ the_person.draw_person()
-    the_person.name "Sure, I don't see why not. You paying for it?"
-    call hair_style(the_person)
+label cut_hair_label(person):
+    "You ask [person.name] if you can change their style up a bit."
+    $ person.draw_person()
+    person.name "Sure, I don't see why not. You paying for it?"
+    call hair_style(person)
     return

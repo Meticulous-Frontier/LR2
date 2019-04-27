@@ -1,8 +1,8 @@
 init -1 python: # Declare variables to use
 
     # Create the room(s) I want to use.
-    mall_salon = Room("salon", "Hair Salon", [], Image("Mods/mods/Room/images/Salon_Background.jpg"), [], [], [], True, [], None, False)
-    business_salon = Room("salon", "Hair Salon", [], Image("Mods/mods/Room/images/Salon_Background.jpg"), [], [], [], True, [], None, False)
+    mall_salon = Room("salon", "Hair Salon", [], room_background_image("Salon_Background.png"), [], [], [], True, [0.4,0.3], None, True)
+    business_salon = Room("salon", "Hair Salon", [], room_background_image("Salon_Background.png"), [], [], [], True, [], None, False)
 
     # Note that the class Room have a bunch of useful variables already for restricting access, adding objects etc.
 
@@ -28,3 +28,5 @@ init 2 python: # Room creation
         mall_salon.add_object(make_desk())
         mall_salon.add_object(make_table())
         mall_salon.add_object(make_window())
+
+

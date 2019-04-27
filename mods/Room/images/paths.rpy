@@ -1,12 +1,8 @@
 # Just a small function so you don't have to write the full path every time you make a room.
 # For background images just input bgImage("Background_Name")
 init -2 python:
-    def bgImage(imagePath):
-        imagePath = Image("Mods/mods/Room/images/" + imagePath + ".jpg")
+    def room_background_image(name):
+        return Image("Mods/mods/Room/images/" + name)
 
-        return imagePath
-
-    def propImage(imagePath):
-        imagePath = Image("Mods/mods/Room/images" + imagePath + ".png")
-
-        return imagePath
+    def prop_image(name):
+        return Image("Mods/mods/Room/images/props/" + name)

@@ -3,9 +3,9 @@
 init -1 python:
     anorexia_serum_mod_init = False
 
-    def anorexia_serum_on_turn(the_person, add_to_log):
-        change_person_weight(the_person, -.2, 20)
-        return
+    def anorexia_serum_on_turn(person, add_to_log):
+        return person.change_weight(amount = -.2, chance = 20)
+        
 
 init 2 python:
     def anorexia_serum_mod_init_requirement():

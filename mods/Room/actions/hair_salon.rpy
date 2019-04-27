@@ -43,7 +43,7 @@ label hair_salon_mod_init_label():
             salon_manager_created = True
     python:
 
-        salon_action = Action("Schedule a hair dressing appointment for your employee.", salon_requirement, "salon_label",
+        salon_action = Action("Schedule a haircut.", salon_requirement, "salon_label",
             menu_tooltip = "Change the hair style and hair color of the employee.")
 
         # Always check if the room is somehow already added.
@@ -59,11 +59,10 @@ label hair_salon_mod_init_label():
         # I want to enable NPC pathing
         if mall_salon not in list_of_places:
             list_of_places.append(mall_salon)
-        # mall_salon.link_locations_two_way(mall)
-
-
+            mall_salon.link_locations_two_way(mall)
 
         hair_salon_mod_init = True
+
 
     if hair_salon_mod_init:
         "Hair salon opened in the mall."
@@ -73,8 +72,6 @@ label hair_salon_mod_init_label():
 # Mod - Start
 
 init 2 python:
-
-
 
     def salon_requirement():
         if time_of_day == 4: # Can be removed
@@ -102,7 +99,7 @@ label salon_label():
     "Select who the appointment is for."
     python: # First we select which employee we want
 
-            tuple_list = format_person_list(mc.business.get_employee_list(), draw_hearts = True) #The list of people to show. e.g mc.location.people
+            tuple_list = format_person_list(all_people_in_the_game([mc]), draw_hearts = True)  #The list of people to show. e.g mc.location.people
             tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
             person_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
 

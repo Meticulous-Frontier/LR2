@@ -22,22 +22,24 @@ init -1 python:
     sadist_list = [] # Sadistic behavior
 #    lewd_list = [] # Keywords that are considered sexual, to determine if something is to be thrown into sexy_opinions_list or opinions_list
 
-    def change_willpower(amount, add_to_log = True): #Logs change in willpower and shows new total.
-        the_person.willpower += amount
-        if the_person.willpower < 0:
-            the_person.willpower = 0
+    def change_willpower(self, amount, add_to_log = True): #Logs change in willpower and shows new total.
+        self.willpower += amount
+        if self.willpower < 0:
+            self.willpower = 0
 
         log_string = ""
         log_string_total = ""
         if amount > 0:
-            log_string = "+" + str(amount) + " Willpower " + "= " + str(the_person.willpower) + " Total"
+            log_string = "+" + str(amount) + " Willpower " + "= " + str(person.willpower) + " Total"
         else:
-            log_string = str(amount) + " Willpower " + "= " + str(the_person.willpower) + " Total"
+            log_string = str(amount) + " Willpower " + "= " + str(person.willpower) + " Total"
 
         if add_to_log and amount != 0:
-            mc.log_event(the_person.name + ": " + log_string, "float_text_blue")
-        return the_person.willpower
+            mc.log_event(person.name + ": " + log_string, "float_text_blue")
+        return person.willpower
 
+    # attach to person object
+    Person.change_willpower = change_willpower
     #
     def calc_power():
         mc.power = 0
@@ -69,37 +71,37 @@ label influence_opinion_input_label():
 
     if any(srchstr in opinion for srchstr in exhib_list): # This checks any keyword.
         if any(srchstr in opinion for srchstr in the_person.sexy_opinions): # This is limited to exact matches.
-            $ change_willpower(-5)
+            $ the_person.change_willpower(-5)
             "Speaker" "[the_person.name] already has similar opinions making it easier to convince her."
         "Speaker" "This is in exhib_list"
 
     if any(srchstr in opinion for srchstr in voyer_list):
         if any(srchstr in opinion for srchstr in the_person.sexy_opinions):
-            $ change_willpower(-5)
+            $ the_person.change_willpower(-5)
             "Speaker" "[the_person.name] already has similar opinions making it easier to convince her."
         "Speaker" "This is in voyer_list"
 
     if any(srchstr in opinion for srchstr in sub_list):
         if any(srchstr in opinion for srchstr in the_person.sexy_opinions):
-            $ change_willpower(-5)
+            $ the_person.change_willpower(-5)
             "Speaker" "[the_person.name] already has similar opinions making it easier to convince her."
         "Speaker" "This is in sub_list"
 
     if any(srchstr in opinion for srchstr in preg_list):
         if any(srchstr in opinion for srchstr in the_person.sexy_opinions):
-            $ change_willpower(-5)
+            $ the_person.change_willpower(-5)
             "Speaker" "[the_person.name] already has similar opinions making it easier to convince her."
         "Speaker" "This is in preg_list"
 
     if any(srchstr in opinion for srchstr in dom_list):
         if any(srchstr in opinion for srchstr in the_person.sexy_opinions):
-            $ change_willpower(-5)
+            $ the_person.change_willpower(-5)
             "Speaker" "[the_person.name] already has similar opinions making it easier to convince her."
         "Speaker" "This is in dom_list"
 
     if any(srchstr in opinion for srchstr in sadist_list):
         if any(srchstr in opinion for srchstr in the_person.sexy_opinions):
-            $ change_willpower(-5)
+            $ the_person.change_willpower(-5)
             "Speaker" "[the_person.name] already has similar opinions making it easier to convince her."
         "Speaker" "This is in sadist_list"
 
@@ -124,7 +126,7 @@ label influence_opinion_input_label():
             degrees = [-2,-1,0,1,2]
             change = abs(degrees.index(score) - degrees.index(degree)) # How far is the degree away from current opinion (max 4 steps)
             cur_score = opinion_score_to_string(score) 
-            change_willpower(change * 5)
+            the_person.change_willpower(change * 5)
 
         if change == 1: # small change
             "Speaker" "[the_person.name] [cur_score] [opinion], so she will put up not much resistance."
