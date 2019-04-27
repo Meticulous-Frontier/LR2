@@ -20,25 +20,35 @@ init -1 python:
     # Adds learn_home function to the_person.
     Person.learn_home = learn_home
 
-    # Strips down the person to a clothing their are comfortable with
-    # optional: clothing_message narrator voice after each item use '##clothing##'' in message for clothing item stripped, use '##person_name##' for self nanme.
-    # note: at least 1 item gets removed regardsless of sluttiness
+    # Strips down the person to a clothing their are comfortable with (starting with top, before bottom)
+    # optional: clothing_message narrator voice after each item use '##clothing##'' in message for clothing item stripped, use '##person_name##' for self name.
+    #           Can be an array of messages for variation in message per clothing item
+    # note: at least 1 item gets removed regardsless of sluttiness 
     def strip_outfit_to_max_sluttiness(self, top_layer_first = True, exclude_feet = True, narrator_message = None):
-        strip_choice = self.outfit.remove_random_upper(top_layer_first, exclude_feet, do_not_remove = True)
-        if not narrator_message is None:
-            narrator_message = narrator_message.replace("##person_name##", self.name)
+        # internal function to strip top clothing first.
+        def get_strip_choice_upper_first(person, top_layer_first = True, exclude_feet = True, do_not_remove = True):
+            strip_choice = person.outfit.remove_random_upper(top_layer_first, do_not_remove)
+            if strip_choice is None:
+                strip_choice = person.outfit.remove_random_any(top_layer_first, exclude_feet, do_not_remove)
+            return strip_choice
+        def get_narrator_message(message):
+            if isinstance(message, basestring):
+                return message
+            else:
+                msg_choice_index = renpy.random.randint(1,len(message))
+                return message[msg_choice_index - 1]           
+
+        strip_choice = get_strip_choice_upper_first(self, top_layer_first, exclude_feet, do_not_remove = True)
         while not strip_choice is None:
             self.draw_animated_removal(strip_choice)
-            if not narrator_message is None:
-                renpy.say(None, narrator_message.replace("##clothing##", strip_choice.name))
+            if narrator_message:
+                message = get_narrator_message(narrator_message)
+                renpy.say(None, message.replace("##person_name##", self.name).replace("##clothing##", strip_choice.name))
             if self.judge_outfit(self.outfit):
-                strip_choice = self.outfit.remove_random_upper(top_layer_first, exclude_feet, do_not_remove = True)
-                if strip_choice is None:
-                    strip_choice = self.outfit.remove_random_any(top_layer_first, exclude_feet, do_not_remove = True)
+                strip_choice = get_strip_choice_upper_first(self, top_layer_first, exclude_feet, do_not_remove = True)
             else:
                 strip_choice = None
         return
-
 
     # Monkey wrench Person class to have automatic strip function
     Person.strip_outfit_to_max_sluttiness = strip_outfit_to_max_sluttiness
@@ -50,41 +60,36 @@ init -1 python:
     # Monkey wrench Person class to have reset outfit function
     Person.reset_outfit = reset_outfit
 
-    def add_opinion(self, opinion, degree, discovered, sexy_opinion = False, add_to_log = True): # Gives a message stating the opinion has been changed.
-
+    def add_opinion(self, opinion, degree, discovered = None, sexy_opinion = False, add_to_log = True): # Gives a message stating the opinion has been changed.
         opinion = opinion
         degree = degree
         discovered = discovered
         sexy_opinion = sexy_opinion # False for normal, True for Sexy
 
+        if discovered is None and opinion in self.opinions[0]:  # we passed None for discovered so use existing discovered info
+            discovered = self.opinions[opinion][1]
+
+        if discovered is None and opinion in self.sexy_opinions[0]: # we passed None for discovered so use existing discovered info
+            discovered = self.sexy_opinions[opinion][1]
+        
+        if discovered is None: # we didn't find any discovery information for opinion, so it's new and we passed None, so default set to false
+            discovered = False
+
         if sexy_opinion == False:
             self.opinions[opinion] = [degree, discovered]
 
-            if opinion not in opinions_list: # Appends to the opinion pool
+            if opinion not in opinions_list: # Appends to the opinion pool #TODO: should we add this to the game pool here? Prevents person specific opinions...
                 opinions_list.append(opinion)
 
         elif sexy_opinion == True:
             self.sexy_opinions[opinion] = [degree, discovered]
 
-            if opinion not in sexy_opinions_list: # Appends to the opinion pool
+            if opinion not in sexy_opinions_list: # Appends to the opinion pool #TODO: should we add this to the game pool here? Prevents person specific opinions...
                 sexy_opinions_list.append(opinion)
-        if degree == -2:
-            log_string = "Hates " + str(opinion)
-
-        elif degree == -1:
-            log_string = "Dislikes " + str(opinion)
-
-        elif degree == 0:
-            log_string = "Indifferent to " + str(opinion)
-
-        elif degree == 1:
-            log_string = "Likes " + str(opinion)
-
-        elif degree == 2:
-            log_string = "Loves " + str(opinion)
 
         if add_to_log:
-            mc.log_event(self.name + ": " + log_string, "float_text_green")
+            mc.log_event(self.name + " " + opinion_score_to_string(degree) + " " + str(opinion), "float_text_green")
         return
+
     # Adds a function that edits and adds opinions. It also appends to the vanilla opinion pool.
     Person.add_opinion = add_opinion

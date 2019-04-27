@@ -59,28 +59,9 @@ label town_walk_crisis_action:
             "You decide not to risk being seen and stay away from her sight"
     the_person.char "I shoud get dresed for lunch. Don't have much time..."
     
-    $ spy_clothing = the_person.outfit.get_copy()    
-    $ the_clothing = spy_clothing.remove_random_any(top_layer_first = True, exclude_feet = True) #Remove something from our spy outfit.
-    $ removed_clothing = False
-    while the_clothing and the_person.judge_outfit(spy_clothing, temp_sluttiness_boost = 0): 
-        #This will loop over and over until she is out of things to remove OR nolonger can strip something that is appropriate.
-        #Note: there can be some variation in this event depending on if the upper or lower was randomly checked first.
-        $ the_person.draw_animated_removal(the_clothing) #Draw the item being removed from our current outfit
-        $ the_person.outfit = spy_clothing.get_copy() #Swap our current outfit out for the spy outfit.
-        $ random_strip_descrip = renpy.random.randint(0,4)
-        $ removed_clothing = True
-        if random_strip_descrip == 0:
-            "[the_person.name] takes off her [the_clothing.name] and throws it on the bed."
-        elif random_strip_descrip == 1:
-            "[the_person.name] keeps going and drops her [the_clothing.name]."
-        elif random_strip_descrip == 2:
-            "[the_person.name] strips off her [the_clothing.name] and tosses it to the side."
-        elif random_strip_descrip == 3:
-            "[the_person.name] removes her [the_clothing.name] and drops it to the floor."
-        else: # random_strip_descrip == 4:
-            "[the_person.name] quickly slides off her [the_clothing.name] and leaves it on the ground."
-        $ the_clothing = spy_clothing.remove_random_any(top_layer_first = True, exclude_feet = True)
-    
+    $ random_strip_messages = ["##person_name## takes off her ##clothing## and throws it on the bed.", "##person_name## keeps going and drops her ##clothing##.","##person_name## strips off her ##clothing## and tosses it to the side.", "##person_name## removes her ##clothing## and drops it to the floor.", "##person_name## quickly slides off her ##clothing## and leaves it on the ground."]
+    $ the_person.strip_outfit_to_max_sluttiness(narrator_message = random_strip_messages)
+   
     if the_person.outfit.vagina_available():
         "You see that [the_person.name] also studies her pussy."
         if the_person.age <=30:

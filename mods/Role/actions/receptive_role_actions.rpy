@@ -71,7 +71,7 @@ label influence_opinion_end_label():
 
     if calc_power() > the_person.willpower:
         "Speaker" "You succeed at making the changes"
-        $ add_opinion(opinion, degree, discovered)
+        $ the_person.add_opinion(opinion, degree, discovered)
     elif calc_will() > calc_power() :
         "Speaker" "[the_person.name]'s mind rejects your suggestions"
     else:
