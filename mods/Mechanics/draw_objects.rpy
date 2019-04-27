@@ -41,7 +41,7 @@ init -2 python:
     config.context_clear_layers.append("10")
 
 
-
+    
     #config.menu_clear_layers.append(custom_layers)
     #config.context_clear_layers.append(custom_layers)
 
