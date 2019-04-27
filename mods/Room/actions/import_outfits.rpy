@@ -9,17 +9,6 @@ init -1 python:
 
 init 2 python: # Definitions
 
-    def inWorld():
-
-           inworld = []
-           for place in list_of_places:
-               for people in place.people:
-                   if not people in inworld:
-                       inworld.append(people)
-           return inworld
-
-
-
     def import_wardrobe(wardrobe, xml_filename): # This is a rewrite of the wardrobe_from_xml function written by Vren.
                                                  # Wardrobe should be who's / what wardrobe you want to import into. e.g for main character it is mc.designed_wardrobe
         wardrobe = wardrobe
@@ -109,11 +98,10 @@ label import_wardrobe_label():
 #label import_wardrobe_input():
 #    pass
 label give_wardrobe_label():
-    $ inWorld()
     "Select who to give clothes"
     python: # First we select which employee we want
 
-            tuple_list = format_person_list(inWorld(), draw_hearts = True) #The list of people to show. e.g mc.location.people
+            tuple_list = format_person_list(all_people_in_the_game(), draw_hearts = True) #The list of people to show. e.g mc.location.people
             tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
             person_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
 
@@ -127,7 +115,7 @@ label give_wardrobe_label():
     jump game_loop # Return to the game_loop or a label that will bring you back to the game loop
 
 label give_wardrobe_input(person_choice):
-    $ the_person = person_choice
+
     $ the_person.draw_person()
 
     "Speaker" "Enter the file name e.g Lily_Wardrobe then hit enter to import to [the_person.name]'s wardrobe"

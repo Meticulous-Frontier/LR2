@@ -53,6 +53,7 @@ label security_room_introduction_label():
     $ new_location = _return
     $ elevator_entrance_lobby = False
     $ security_room_discovered = True
-
     "Speaker" "[security_room_discovered]" #debug
+    call change_location(new_location) # Runs the scene change.
+
     return

@@ -32,3 +32,18 @@ init 2 python:
                                    # Modifications and further pathways can be altered later, if I for example want to install a direct elevator into the main office and into the dungeon.
 #        if room not in mod_rooms_lobby:
 #            mod_rooms_lobby.append(room)
+
+    for room in business_basement:
+        if object not in room.objects:
+            m_division_basement.add_object(make_desk())
+            m_division_basement.add_object(make_chair())
+            m_division_basement.add_object(make_floor())
+
+            p_division_basement.add_object(make_table())
+
+            rd_division_basement.add_object(make_chair())
+            rd_division_basement.add_object(make_floor())
+            rd_division_basement.add_object(make_desk())
+            rd_division_basement.add_object(make_table())
+
+            office_basement.add_object(make_bed())

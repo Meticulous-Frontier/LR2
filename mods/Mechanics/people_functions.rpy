@@ -1,5 +1,5 @@
 init -1 python:
-    def all_people_in_the_game(excluded_people = None): # Pass excluded_people as array of people [mc, lily]
+    def all_people_in_the_game(excluded_people = []): # Pass excluded_people as array of people [mc, lily]
         all_people = []
         for location in list_of_places:
             for person in location.people:
