@@ -38,7 +38,7 @@ init -1 python:
         mc.power += int(mc.current_stamina*1.5)
         return mc.power
 
-    def calculate_wilpower(person): # Calculates willpower for person
+    def calculate_willpower(person): # Calculates willpower for person
         willpower = int(person.focus * 10 + person.happiness * 0.2 - person.obedience * 0.1 - person.love * 0.2 - person.suggestibility * 0.5)
 
         if willpower < 0:
@@ -51,7 +51,7 @@ init -1 python:
         if (person is mc):
             message += str(person.power)
         else:
-            message += str(person.willpower)          
+            message += str(person.willpower)
         message += " Willpower"
         mc.log_event(message, "float_text_blue")
         return
@@ -122,7 +122,7 @@ label influence_opinion_input_label(person):
             score = person.get_opinion_score(opinion)
             degrees = [-2,-1,0,1,2]
             change = abs(degrees.index(score) - degrees.index(degree)) # How far is the degree away from current opinion (max 4 steps)
-            cur_score = opinion_score_to_string(score) 
+            cur_score = opinion_score_to_string(score)
             person.change_willpower(change * 5)
 
         if change == 1: # small change
