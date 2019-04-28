@@ -50,3 +50,6 @@ init -1 python:
         if time_name in time_names:
             return time_of_day == time_names.index(time_name)
         return False
+
+    def time_of_day_string():
+        return time_names[time_of_day].lower()

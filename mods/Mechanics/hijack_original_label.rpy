@@ -4,7 +4,7 @@
 # your code to any base game code, without changing the original game code.
 
 init 2 python:
-    hijacklist = []
+    hijack_list = []
     # Keep track of the old callback so it can still be called
     original_label_callback = config.label_callback
     # Hijack the config label callback function
@@ -14,14 +14,19 @@ init 2 python:
             original_label_callback(label, abnormal)
 
         # loop hijacked labels an jump to mod label
-        for hijack in hijacklist:
+        for hijack in hijack_list:
             if label == hijack[0]:  # base game label called
-                renpy.jump(hijack[1])
+                renpy.call(hijack[1])
             
     config.label_callback = hijack_label_callback
     
     def add_label_hijack(orginal_label_name, hijack_label_name):
-        hijacklist.append([orginal_label_name, hijack_label_name])
+        hijack_list.append([orginal_label_name, hijack_label_name])
+
+    def remove_label_hijack(orginal_label_name):
+        if orginal_label_name in hijack_list[0]:
+            item_index = hijack_list[0].index(orginal_label_name)
+            del hijack_list[item_index]
 
 #label advance_time_extra:
 #    "Testing hijack"

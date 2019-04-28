@@ -7,7 +7,7 @@ init -1 python:
                     all_people.append(person)
         return all_people
 
-    def get_random_person_in_the_game(excluded_people = None): # Pass excluded_people as array of people [mc, lily]
+    def get_random_person_in_the_game(excluded_people = []): # Pass excluded_people as array of people [mc, lily]
         all_people = all_people_in_the_game(excluded_people)
         return get_random_from_list(all_people)
 
