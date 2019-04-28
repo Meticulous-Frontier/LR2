@@ -116,6 +116,7 @@ label give_wardrobe_label():
 
 label give_wardrobe_input(person_choice):
 
+    $ the_person = person_choice
     $ the_person.draw_person()
 
     "Speaker" "Enter the file name e.g Lily_Wardrobe then hit enter to import to [the_person.name]'s wardrobe"
