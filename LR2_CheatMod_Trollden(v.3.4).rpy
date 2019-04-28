@@ -713,7 +713,8 @@ screen cmw(): # Cheats affecting the general world
                     textbutton "Sister Phone" action Call("sister_phone_action_description") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Your sister sends messages to your phone"
                     textbutton "Town Walk" action Call("town_walk_action_description") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Taking an afternoon stroll through town"
                     textbutton "Going to the Gym" action Call("select_person_for_gym") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Give an employee a training session at the gym"
-
+                    textbutton "Business Meeting" action Call("business_meeting_action") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Taking an afternoon stroll through town"
+                    
             # if cml == True and cmlpage == 4: # Page 4
 
             # if cml == True and cmlpage == 5: # Page 5 If you want to add additional pages modify the "Next Page" text button as well!
