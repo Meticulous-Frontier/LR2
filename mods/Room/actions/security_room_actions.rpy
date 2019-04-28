@@ -1,4 +1,5 @@
 # I'll want to use transition into using appendable Action lists when the content is laid down.
+# TODO: A) Make a requirement fo reach room or B) Find a way to display Cost only while requirement is met
 init -1 python:
     security_actions = []
     cctv_actions = []
