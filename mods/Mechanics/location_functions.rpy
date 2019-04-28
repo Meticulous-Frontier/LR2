@@ -25,6 +25,10 @@ init -1 python:
             tuple_list.append([tuple_string, room])
         return tuple_list
 
+    def advance_time():
+        renpy.call("advance_time")
+        return
+
     def is_public():
         if mc.location.public == True:
             return True
