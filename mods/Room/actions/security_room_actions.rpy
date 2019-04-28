@@ -1,92 +1,173 @@
 # I'll want to use transition into using appendable Action lists when the content is laid down.
+init -1 python:
+    security_actions = []
+    cctv_actions = []
+    investigation_actions = []
 
 init 3 python:
 
-    def security_overview_requirment():
+
+    def security_overview_requirement():
         return True
 
-    security_overview_action = Action("Security Overview", security_overview_requirment, "security_overview",
+    security_overview_action = Action("Security Overview", security_overview_requirement, "security_overview",
     menu_tooltip = "Oversee your business, employees plus more.")
-
     m_division_basement.actions.append(security_overview_action)
+
+
+
+
+
+    def investigation_requirement():
+        return True
+
+    investigate_employee_action = Action("Investigate an employee", investigation_requirement, "investigate_employee_label",
+        menu_tooltip = "Find out information about the selected person.")
+    security_actions.append(investigate_employee_action)
+
+    investigation_opinions_action = Action("Find opinions", investigation_requirement, "investigation_opinions_label",
+        menu_tooltip = "Find the likes and dislikes of a person")
+    investigation_actions.append(investigation_opinions_action)
+
+    investigation_home_action = Action("Find home location.", investigation_requirement, "investigation_home_label",
+        menu_tooltip = "Adds the home location to the list of known homes.")
+    investigation_actions.append(investigation_home_action)
+
+    def cctv_requirement():
+        return True
+
+    cctv_action = Action("Watch CCTV", cctv_requirement, "cctv_label",
+        menu_tooltip = "Check what's happening via the CCTV system.")
+    security_actions.append(cctv_action)
+
+    def observation_requirement():
+        return True
+
+    rd_division_observation_action = Action("Observe the [rd_division.formalName]", observation_requirement, "rd_division_observation_label",
+        menu_tooltip = "See what's going on in [rd_division.formalName]")
+    cctv_actions.append(rd_division_observation_action)
+
+    m_division_observation_action = Action("Observe the [m_division.formalName]", observation_requirement, "m_division_observation_label",
+        menu_tooltip = "See what's going on in [m_division.formalName]")
+    cctv_actions.append(m_division_observation_action)
+
+
+
+
+
 
 label security_overview():
 
-    $ create_room_label_list()
-    $ m_division.labels.append("m_division_observation")
-    $ rd_division.labels.append("rd_division_observation")
 
-    $ business_rooms = [m_division, p_division, rd_division, office, lobby]
+#    "You seat yourself at the control panel."
+#    "From here you can run investigations, watch the CCTV... (tooltip)Unlock more options by investing."
 
-    "You seat yourself at the control panel."
-    "From here you can run investigations, watch the CCTV... (tooltip)Unlock more options by investing."
-    menu security_menu:
+    python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+            security_options = []
+            for act in security_actions:
+                security_options.append(act)
+            security_options.append("Back")
+            act_choice = call_formated_action_choice(security_options)
 
-        # NOTE: Rework to be using call_formated_action_choice and display as a modular list.
+            if act_choice == "Back":
+                renpy.jump("game_loop")
+            else:
+                act_choice.call_action()
 
-        "Watch CCTV":
-            "Select location to observe"
-            python:
-                    the_rooms = []
-                    for room in business_rooms:
-                        the_rooms.append(room)
 
-                    tuple_list = format_rooms(the_rooms, "Observe: ")
 
-                    tuple_list.append(["Back","Back"])
-                    room_choice = renpy.display_menu(tuple_list,True,"Choice")
-                    if room_choice == "Back":
-                        renpy.jump("security_menu")
+label cctv_label():
+    "Select location to observe"
+    python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+            cctv_options = []
+            for act in cctv_actions:
+                cctv_options.append(act)
+            cctv_options.append("Back")
+            act_choice = call_formated_action_choice(cctv_options)
 
-                    for observ in room_choice.labels:
-                        renpy.call(observ)
+            if act_choice == "Back":
+                renpy.jump("security_overview")
+            else:
+                act_choice.call_action()
 
-        "Investigate an employee":
-            "Select who you want to investigate"
-            python: # First we select which employee we want
-
-                    tuple_list = format_person_list(mc.business.get_employee_list(), draw_hearts = True) #The list of people to show. e.g mc.location.people
-                    tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
-                    person_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
-
-                    if person_choice == "Back":
-                        renpy.jump("security_menu") # Where to go if you hit "Back".
-        #            else:
-        #                renpy.say("","You send a shipment of clothes to " + person_choice.name) #Add flavor text to what is about to happen. e.g "You tell the_person to go visit Starbuck for training".
-        #                renpy.say("", "Delivery has been made")
-
-            call investigate_person(person_choice)# What to do if "Back" was not the choice taken.
-#            jump game_loop # Return to the game_loop or a label that will bring you back to the game loop
-
-        "Back":
-            return
-
-label rd_division_observation(): # TODO: This is being called due to an error in return, figure out where.
+label rd_division_observation_label(): # TODO: This is being called due to an error in return, figure out where.
     "Research Division"
-    return
-label m_division_observation():
+    jump cctv_label
+
+label m_division_observation_label():
     "Marketing division"
-    return
+    jump cctv_label
+
+label investigate_employee_label():
+    "Select who you want to investigate"
+    python: # First we select which employee we want
+
+            tuple_list = format_person_list(mc.business.get_employee_list(), draw_hearts = True) #The list of people to show. e.g mc.location.people
+            tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
+            person_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
+
+            if person_choice == "Back":
+                renpy.jump("security_overview") # Where to go if you hit "Back".
+
+    call investigate_person(person_choice)# What to do if "Back" was not the choice taken.
+
+
+
 
 label investigate_person(person_choice):
     $ the_person = person_choice
-    menu: # NOTE: Rework to be using call_formated_action_choice and display as a modular list.
-        "Find home {image=gui/heart/Time_Advance.png}" if the_person.home not in mc.known_home_locations:
-            "You use Gowgl possible locations and find a match"
-            $ learn_home(the_person)
-            $ advance_time()
-            return
 
-        "Find home (disabled) \n{size=22}Already known{/size}" if the_person.home in mc.known_home_locations:
-            pass
+    python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+            investigative_options = []
+            for act in investigation_actions:
+                investigative_options.append(act)
+            investigative_options.append("Back")
+            act_choice = call_formated_action_choice(investigative_options)
 
-        "Investigate opinions {image=gui/heart/Time_Advance.png}" if the_person.get_random_opinion(False, True): # TODO: Add a disabled slug if all opinions are CURRENTLY discovered.
-            $ the_person.discover_opinion(the_person.get_random_opinion(False, True))
-            "You discover something about [the_person.char]"
-            $ advance_time()
-            return
+            if act_choice == "Back":
+                renpy.jump("security_overview")
+            else:
+                act_choice.call_action()
 
-        "Investigate opinions (disabled) \n{size=22}All opinions known{/size}" if the_person.get_random_opinion(False, True) == None:
-            pass
-        "Back":
-            return
+
+
+
+label investigation_home_label():
+    "You conveniently find [the_person.name]'s adress in the yellow pages."
+    $ learn_home(the_person)
+    $ advance_time()
+    call investigate_person(the_person)
+
+label investigation_opinions_label():
+
+    $ the_person.discover_opinion(the_person.get_random_opinion(False, True))
+    "You discover something about [the_person.name]"
+    $ advance_time()
+    call investigate_person(the_person)
+
+
+
+
+
+
+
+
+
+
+#    menu: # NOTE: Rework to be using call_formated_action_choice and display as a modular list.
+#        "Find home {image=gui/heart/Time_Advance.png}" if the_person.home not in mc.known_home_locations:
+#
+#
+#        "Find home (disabled) \n{size=22}Already known{/size}" if the_person.home in mc.known_home_locations:
+#            pass
+#
+#        "Investigate opinions {image=gui/heart/Time_Advance.png}" if the_person.get_random_opinion(False, True): # TODO: Add a disabled slug if all opinions are CURRENTLY discovered.
+#            $ the_person.discover_opinion(the_person.get_random_opinion(False, True))
+#            "You discover something about [the_person.char]"
+#            $ advance_time()
+#            return
+#
+#        "Investigate opinions (disabled) \n{size=22}All opinions known{/size}" if the_person.get_random_opinion(False, True) == None:
+#            pass
+#        "Back":
+#            jump investigate_employee_label
