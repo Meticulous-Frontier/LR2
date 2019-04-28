@@ -27,7 +27,7 @@ label influence_opinion_start_label(person): # This is the setup phase that you 
     $ degree = None
     $ discovered = None
     $ people_nearby = len(mc.location.people)
-    $ person.willpower = calculate_wilpower(person)
+    $ person.willpower = calculate_willpower(person)
     $ mc.power = player_willpower()
 
     # Pre-check to let the player know base information about the scenario.
@@ -43,12 +43,12 @@ label influence_opinion_start_label(person): # This is the setup phase that you 
     if len(mc.location.people) > 1: # Check if there are other people nearby and fortify their willpower based on how many.
         "Speaker" "There are [people_nearby] other people around you that might interfer with the process."
         "Speaker" "Try bringing [person.name] to a more secluded area?"
-        
+
         menu:
             "Yes":
                 "Speaker" "You bring [person.name] away from the others"
                 "Speaker" "Having isolated the target it is now both more focused and pliable."
-                
+
                 # Might want to assume that a certain personality or opinion makes them uncomfortable being away from others thus it was a mistake luring them away. Hate and unhappiness might also play into it.
                 if person.love < 30:
                     $ person.change_willpower(10)   # she becomes more stubborn
@@ -57,7 +57,7 @@ label influence_opinion_start_label(person): # This is the setup phase that you 
 
             "No":
                 $ person.change_willpower(people_nearby * 5)    # persons nearby will interfere with influence
-                
+
                 pass
 
             "Back":
