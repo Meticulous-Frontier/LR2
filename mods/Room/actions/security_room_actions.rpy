@@ -16,11 +16,13 @@ init 3 python: # Put this behind a mod init to ensure compatability
 
 
     def investigation_requirement():
-        return True
+        if len(mc.business.get_employee_list()) > 0:
+            return True
+        return "No employees"
 
-    investigate_employee_action = Action("Investigate an employee", investigation_requirement, "investigate_employee_label",
+    investigation_employee_action = Action("Investigate an employee", investigation_requirement, "investigation_employee_label",
         menu_tooltip = "Find out information about the selected person.")
-    security_actions.append(investigate_employee_action)
+    security_actions.append(investigation_employee_action)
 
     def investigation_opinion_requirement():
         if the_person.get_random_opinion(False, True) == None:
@@ -28,7 +30,7 @@ init 3 python: # Put this behind a mod init to ensure compatability
         else:
             return True
 
-    investigation_opinions_action = Action("Find opinions", investigation_opinion_requirement, "investigation_opinions_label",
+    investigation_opinions_action = Action("Find opinions. {image=gui/heart/Time_Advance.png}", investigation_opinion_requirement, "investigation_opinions_label",
         menu_tooltip = "Find the likes and dislikes of a person")
     investigation_actions.append(investigation_opinions_action)
 
@@ -37,8 +39,8 @@ init 3 python: # Put this behind a mod init to ensure compatability
             return "Home discovered"
         else:
             return True
-            
-    investigation_home_action = Action("Find home location.", investigation_home_requirement, "investigation_home_label",
+
+    investigation_home_action = Action("Find home location. {image=gui/heart/Time_Advance.png}", investigation_home_requirement, "investigation_home_label",
         menu_tooltip = "Adds the home location to the list of known homes.")
     investigation_actions.append(investigation_home_action)
 
@@ -145,7 +147,7 @@ label office_observation_label():
     "[office.formalName]"
     jump cctv_label
 
-label investigate_employee_label():
+label investigation_employee_label():
     "Select who you want to investigate"
     python: # First we select which employee we want
 
@@ -217,4 +219,4 @@ label investigation_opinions_label():
 #        "Investigate opinions (disabled) \n{size=22}All opinions known{/size}" if the_person.get_random_opinion(False, True) == None:
 #            pass
 #        "Back":
-#            jump investigate_employee_label
+#            jump investigation_employee_label
