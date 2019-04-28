@@ -4,7 +4,7 @@ init -1 python:
     cctv_actions = []
     investigation_actions = []
 
-init 3 python:
+init 3 python: # Put this behind a mod init to ensure compatability
 
 
     def security_overview_requirement():
@@ -13,9 +13,6 @@ init 3 python:
     security_overview_action = Action("Security Overview", security_overview_requirement, "security_overview",
     menu_tooltip = "Oversee your business, employees plus more.")
     m_division_basement.actions.append(security_overview_action)
-
-
-
 
 
     def investigation_requirement():
@@ -43,15 +40,25 @@ init 3 python:
     def observation_requirement():
         return True
 
-    rd_division_observation_action = Action("Observe the [rd_division.formalName]", observation_requirement, "rd_division_observation_label",
-        menu_tooltip = "See what's going on in [rd_division.formalName]")
-    cctv_actions.append(rd_division_observation_action)
-
     m_division_observation_action = Action("Observe the [m_division.formalName]", observation_requirement, "m_division_observation_label",
-        menu_tooltip = "See what's going on in [m_division.formalName]")
+        menu_tooltip = "See what's going on in ")
     cctv_actions.append(m_division_observation_action)
 
+    p_division_observation_action = Action("Observe the [p_division.formalName]", observation_requirement, "p_division_observation_label",
+        menu_tooltip = "See what's going on in ")
+    cctv_actions.append(p_division_observation_action)
 
+    rd_division_observation_action = Action("Observe the [rd_division.formalName]", observation_requirement, "rd_division_observation_label",
+        menu_tooltip = "See what's going on in ")
+    cctv_actions.append(rd_division_observation_action)
+
+    s_division_observation_action = Action("Observe the Supply Division", observation_requirement, "s_division_observation_label",
+        menu_tooltip = "See what's going on in ")
+    cctv_actions.append(s_division_observation_action)
+
+    office_observation_action = Action("Observe the [office.formalName]", observation_requirement, "office_observation_label",
+        menu_tooltip = "See what's going on in ")
+    cctv_actions.append(office_observation_action)
 
 
 
@@ -90,12 +97,40 @@ label cctv_label():
             else:
                 act_choice.call_action()
 
-label rd_division_observation_label(): # TODO: This is being called due to an error in return, figure out where.
-    "Research Division"
-    jump cctv_label
 
 label m_division_observation_label():
-    "Marketing division"
+    $ randint = renpy.random.randint(1, 5)
+    "[m_division.formalName]"
+
+    if randint == 1:
+        "Var 1"
+    elif randint == 2:
+        "Var 2"
+    elif randint == 3:
+        "Var 3"
+    elif randint == 4:
+        "Var 4"
+    elif randint == 5:
+        "Var 5"
+    else:
+        "Nani!?"
+
+    jump cctv_label
+
+label p_division_observation_label():
+    "[p_division.formalName]"
+    jump cctv_label
+
+label rd_division_observation_label():
+    "[rd_division.formalName]"
+    jump cctv_label
+
+label s_division_observation_label():
+    "Supply Division"
+    jump cctv_label
+
+label office_observation_label():
+    "[office.formalName]"
     jump cctv_label
 
 label investigate_employee_label():
