@@ -1,5 +1,8 @@
 init -1 python:
     purchasable_room = []
+    t1_cost = 10000
+    t2_cost = 50000
+    t3_cost = 100000
 
     purchase_rooms_mod_init = False
 
@@ -23,7 +26,7 @@ label purchase_rooms_mod_init_label():
     return
 
 # Categorized rooms into tiers for their cost.
-# TODO: Make it so you are not deducted for repeated purchases of the same room.
+# TODO: Show different disabled message if room purchased
 init 2 python:
 
     def purchase_rooms_requirement():
@@ -33,23 +36,17 @@ init 2 python:
         menu_tooltip = "Purchase rooms and facilities")
 
     def room_tier_1():
-        t1_cost = 10000
         if mc.business.funds >= t1_cost:
-            mc.business.funds -= t1_cost
             return True
         return "Requires: " + str(t1_cost)
 
     def room_tier_2():
-        t2_cost = 50000
         if mc.business.funds >= t2_cost:
-            mc.business.funds -= t2_cost
             return True
         return "Requires: " + str(t2_cost)
 
     def room_tier_3():
-        t3_cost = 100000
         if mc.business.funds >= t3_cost:
-            mc.business.funds -= t3_cost
             return True
         return "Requires: " + str(t3_cost)
 
@@ -90,23 +87,27 @@ label purchase_rooms():
 # Tier 1 Rooms
 label purchase_dungeon_room(): #Enables the dugneon.
     if office_basement not in mod_rooms_lobby:
+        $ mc.business.funds -= t1_cost
         $ mod_rooms_lobby.append(office_basement)
     jump purchase_rooms
 
 # Tier 2 Rooms
 label purchase_security_room(): #Enables the security room.
     if m_division_basement not in mod_rooms_lobby:
+        $ mc.business.funds -= t2_cost
         $ mod_rooms_lobby.append(m_division_basement)
     jump purchase_rooms
 
 label purchase_machinery_room(): #Enables the machinery room
     if p_division_basement not in mod_rooms_lobby:
+        $ mc.business.funds -= t2_cost
         $ mod_rooms_lobby.append(p_division_basement)
     jump purchase_rooms
 
 # Tier 3 Rooms
 label purchase_biotech_room(): #Enables the biotech lab
     if rd_division_basement not in mod_rooms_lobby:
+        $ mc.business.funds -= t3_cost
         $ mod_rooms_lobby.append(rd_division_basement)
     jump purchase_rooms
 
