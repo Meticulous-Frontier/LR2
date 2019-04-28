@@ -52,21 +52,21 @@ init 2 python:
 
 
     # Tier 1 Rooms
-    purchase_dungeon_room = Action("Install Dungeon Room", room_tier_1, "purchase_dungeon_room",
+    purchase_dungeon_room = Action("Install Dungeon Room {image=gui/heart/Time_Advance.png}", room_tier_1, "purchase_dungeon_room",
         menu_tooltip = "Unlocks the dungeon below the main office") #requirment_args have to be contained in a list.
     purchasable_room.append(purchase_dungeon_room)
 
     # Tier 2 Rooms
-    purchase_security_room = Action("Install Security Room", room_tier_2, "purchase_security_room",
+    purchase_security_room = Action("Install Security Room {image=gui/heart/Time_Advance.png}", room_tier_2, "purchase_security_room",
         menu_tooltip = "Opens a new division in the basement, accessed through the lobby elevator") #requirment_args have to be contained in a list.
     purchasable_room.append(purchase_security_room)
 
-    purchase_machinery_room = Action("Install Machinery Room", room_tier_2, "purchase_machinery_room",
+    purchase_machinery_room = Action("Install Machinery Room {image=gui/heart/Time_Advance.png}", room_tier_2, "purchase_machinery_room",
         menu_tooltip = "Opens a new division in the basement, accessed through the lobby elevator") #requirment_args have to be contained in a list.
     purchasable_room.append(purchase_machinery_room)
 
     # Tier 3 Rooms
-    purchase_biotech_room = Action("Install Biotech Room", room_tier_3, "purchase_biotech_room",
+    purchase_biotech_room = Action("Install Biotech Room {image=gui/heart/Time_Advance.png}", room_tier_3, "purchase_biotech_room",
         menu_tooltip = "Opens a new division in the basement, accessed through the lobby elevator") #requirment_args have to be contained in a list.
     purchasable_room.append(purchase_biotech_room)
 
@@ -89,6 +89,7 @@ label purchase_dungeon_room(): #Enables the dugneon.
     if office_basement not in mod_rooms_lobby:
         $ mc.business.funds -= t1_cost
         $ mod_rooms_lobby.append(office_basement)
+        $ advance_time()
     jump purchase_rooms
 
 # Tier 2 Rooms
@@ -96,12 +97,14 @@ label purchase_security_room(): #Enables the security room.
     if m_division_basement not in mod_rooms_lobby:
         $ mc.business.funds -= t2_cost
         $ mod_rooms_lobby.append(m_division_basement)
+        $ advance_time()
     jump purchase_rooms
 
 label purchase_machinery_room(): #Enables the machinery room
     if p_division_basement not in mod_rooms_lobby:
         $ mc.business.funds -= t2_cost
         $ mod_rooms_lobby.append(p_division_basement)
+        $ advance_time()
     jump purchase_rooms
 
 # Tier 3 Rooms
@@ -109,6 +112,7 @@ label purchase_biotech_room(): #Enables the biotech lab
     if rd_division_basement not in mod_rooms_lobby:
         $ mc.business.funds -= t3_cost
         $ mod_rooms_lobby.append(rd_division_basement)
+        $ advance_time()
     jump purchase_rooms
 
 #label purchase_dungeon_room(): #Enables the dugneon.
