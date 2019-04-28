@@ -52,22 +52,22 @@ init 2 python:
 
 
     # Tier 1 Rooms
-    purchase_dungeon_room = Action("Install Dungeon Room {image=gui/heart/Time_Advance.png}", room_tier_1, "purchase_dungeon_room",
-        menu_tooltip = "Unlocks the dungeon below the main office") #requirment_args have to be contained in a list.
+    purchase_dungeon_room = Action("Install Private Dungeon {image=gui/heart/Time_Advance.png}\n {size=22}Costs: [t1_cost]{/size}", room_tier_1, "purchase_dungeon_room",
+        menu_tooltip = "Unlocks a private Dungeon under the main office...") #requirment_args have to be contained in a list.
     purchasable_room.append(purchase_dungeon_room)
 
     # Tier 2 Rooms
-    purchase_security_room = Action("Install Security Room {image=gui/heart/Time_Advance.png}", room_tier_2, "purchase_security_room",
-        menu_tooltip = "Opens a new division in the basement, accessed through the lobby elevator") #requirment_args have to be contained in a list.
+    purchase_security_room = Action("Install Security Room {image=gui/heart/Time_Advance.png}\n {size=22}Costs: [t2_cost]{/size}", room_tier_2, "purchase_security_room",
+        menu_tooltip = "Unlocks a Security Room for non- nefarious purposes...") #requirment_args have to be contained in a list.
     purchasable_room.append(purchase_security_room)
 
-    purchase_machinery_room = Action("Install Machinery Room {image=gui/heart/Time_Advance.png}", room_tier_2, "purchase_machinery_room",
-        menu_tooltip = "Opens a new division in the basement, accessed through the lobby elevator") #requirment_args have to be contained in a list.
+    purchase_machinery_room = Action("Install Machinery Room {image=gui/heart/Time_Advance.png}\n {size=22}Costs: [t2_cost]{/size}", room_tier_2, "purchase_machinery_room",
+        menu_tooltip = "Unlocks a Machinery for the creation of stuff...") #requirment_args have to be contained in a list.
     purchasable_room.append(purchase_machinery_room)
 
     # Tier 3 Rooms
-    purchase_biotech_room = Action("Install Biotech Room {image=gui/heart/Time_Advance.png}", room_tier_3, "purchase_biotech_room",
-        menu_tooltip = "Opens a new division in the basement, accessed through the lobby elevator") #requirment_args have to be contained in a list.
+    purchase_biotech_room = Action("Install Biotech Lab {image=gui/heart/Time_Advance.png}\n {size=22}Costs: [t3_cost]{/size}", room_tier_3, "purchase_biotech_room",
+        menu_tooltip = "Unlocks the Biotech Lab for genetic manipulation...") #requirment_args have to be contained in a list.
     purchasable_room.append(purchase_biotech_room)
 
 label purchase_rooms():
