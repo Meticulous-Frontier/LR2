@@ -22,11 +22,23 @@ init 3 python: # Put this behind a mod init to ensure compatability
         menu_tooltip = "Find out information about the selected person.")
     security_actions.append(investigate_employee_action)
 
-    investigation_opinions_action = Action("Find opinions", investigation_requirement, "investigation_opinions_label",
+    def investigation_opinion_requirement():
+        if the_person.get_random_opinion(False, True) == None:
+            return "All opinions discovered"
+        else:
+            return True
+
+    investigation_opinions_action = Action("Find opinions", investigation_opinion_requirement, "investigation_opinions_label",
         menu_tooltip = "Find the likes and dislikes of a person")
     investigation_actions.append(investigation_opinions_action)
 
-    investigation_home_action = Action("Find home location.", investigation_requirement, "investigation_home_label",
+    def investigation_home_requirement():
+        if the_person.home in mc.known_home_locations:
+            return "Home discovered"
+        else:
+            return True
+            
+    investigation_home_action = Action("Find home location.", investigation_home_requirement, "investigation_home_label",
         menu_tooltip = "Adds the home location to the list of known homes.")
     investigation_actions.append(investigation_home_action)
 
