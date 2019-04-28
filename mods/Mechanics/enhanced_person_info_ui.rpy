@@ -12,7 +12,7 @@ init 2:
                 elif person.situational_sluttiness[situation][0] < 0:
                     negative_effects += get_coloured_arrow(-1)+get_red_heart(-person.situational_sluttiness[situation][0])+" - " + person.situational_sluttiness[situation][1] + "\n"
             formatted_tooltip += positive_effects + negative_effects
-            formatted_tooltip += "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is easier to raise but drops slowly over time. Core sluttiness (" + get_gold_heart(20) + ") is permanent, but can only be created by using serum to raise suggestability or by making a girl climax."
+            formatted_tooltip += "The higher a girl's sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is easier to raise but drops slowly over time. Core sluttiness (" + get_gold_heart(20) + ") is permanent, but can only be created by using serum to raise suggestability or by making the girl climax."
 
             positive_effects = ""
             negative_effects = ""
@@ -72,14 +72,14 @@ init 2:
                     textbutton "Love: [person.love]":
                         ysize 28
                         text_style "menu_text_style"
-                        tooltip "Girls who love you will be more willing to have sex when you're in private (as long as they aren't family) and be more devoted to you. Girls who hate you will have a lower effective sluttiness regardless of the situation."
+                        tooltip "Girls who love you will be more willing to have sex when you are in private (as long as they are not family) and be more devoted to you. Girls who hate you will have a lower effective sluttiness regardless of the situation."
                         action NullAction()
                         sensitive True
 
                     textbutton "Suggestibility: [person.suggestibility]%":
                         ysize 28
                         text_style "menu_text_style"
-                        tooltip "How likely this character is to increase her core sluttiness. Every time chunk there is a [person.suggestibility]% chance to change 1 point of temporary sluttiness (" + get_red_heart(5) + ") into core sluttiness (" + get_gold_heart(5) + ") as long as temporary sluttiness is higher."
+                        tooltip "How likely this character is to have an increase to her core sluttiness. Every time chunk there is a [person.suggestibility]% chance to change 1 point of temporary sluttiness (" + get_red_heart(5) + ") into core sluttiness (" + get_gold_heart(5) + ") as long as the temporary sluttiness is higher."
                         action NullAction()
                         sensitive True
 
