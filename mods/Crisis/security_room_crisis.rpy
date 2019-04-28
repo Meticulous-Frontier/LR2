@@ -1,3 +1,7 @@
+# Enables the security room.
+# Requirements for it to trigger are hard to achieve, might want to change it so it triggers on a specific day akin to the sister_intro_crisis
+# To avoid having to start a new game it might be possible to base it of the current [day] + rand.int().
+
 init -1 python:
 
     security_room_discovered = False
@@ -5,8 +9,7 @@ init -1 python:
 init 2 python:
 
 
-    def security_room_introduction_requirments(done):
-        #Want it to run once.: # Room has to exist.
+    def security_room_introduction_requirments(done): #Runs once.
         if room_manager_mod_init == True:
             if done == False:
                 if mc.location == lobby and mc.business.is_open_for_business() == False: # Visit lobby during afterhours or weekends.
@@ -19,7 +22,7 @@ init 2 python:
 
 label security_room_introduction_label():
 
-    if is_time("Early Morning"):
+    if is_time("Early Morning"): # NOTE: Decide on what variations I want. If switching to it triggering on a specific day this is not nescessary
         if  mc.business.is_weekend():
             "There's not a whole lot to do early on in the weekends so you decide to explore the great elevator of secrets and mystery in the lobby"
         else:
@@ -34,6 +37,7 @@ label security_room_introduction_label():
     "..."
     "Doesn't seem to work..."
 
+    # NOTE: This must be rewritten into something else, anything else, really.
     "You put your hands inbetween the gap of the door and pry it open. Hopefully the panel inside works"
     "Once inside the elevator you look for the 'Close Door' button, should be a simple task, but there are a surprising amount of buttons to press"
     "On the bottom row of buttons there are a couple that stands out to you"
