@@ -41,7 +41,7 @@ label train_in_gym(person):
         $ person.change_love(+5)
         $ person.change_arousal(25)
         $ slut_report = person.change_slut_temp(5)
-        person.char "Wow, i'm really feeling healthier now, and a little turned on...would you mind?"
+        person.char "Wow, I'm really feeling healthier now, and a little turned on... would you mind?"
         if person.sluttiness > 10:
             menu:
                 "Have Sex" if mc.current_stamina > 0:
@@ -50,7 +50,7 @@ label train_in_gym(person):
                     $ change_scene_display(gym_shower)
 
                     call fuck_person(person) from _call_fuck_person_gym_training
-                "Have Sex (disabled)" if not mc.current_stamina > 0:
+                "Have Sex (disabled)\n {size=22}Requires: Stamina{/size}" if not mc.current_stamina > 0:
                     pass
                 "Another Time":
                     mc.name "Sorry [person.name], another time."
