@@ -30,7 +30,7 @@ label train_in_gym(person):
     else:
         "You put [person.name] through a vigorous training session."
 
-    $ body_changed = person.change_weight(person, amount = -change, chance = 100)
+    $ body_changed = person.change_weight(-change, 100)
     $ new_weight = get_person_weight_string(person)
 
     "After the training session [person.name] weighs [new_weight] lbs."
