@@ -1,44 +1,23 @@
 ## Mom NTR Crisis Mod by Tristimdorion
 # Based on the Pilotus13 Vanilla extension
 init -1 python:
-    mom_ntr_mod_init = False
     mom_ntr_mod_weight = 5
 
 init 2 python:
-    def mom_ntr_mod_init_requirement():
-        if mom_ntr_mod_init == False:
-            return True
-        return False
-
-    def mom_ntr_crisis_requirement():
+    def mom_ntr_mod_requirement():
         if mc_asleep() and day % 7 is not 4: # not on Friday nights
             if mom.sluttiness >=10:
                 return True
         return False
 
-    mom_ntr_mod_init_event = Action("Mom NTR Mod Initialization Event", mom_ntr_mod_init_requirement, "mom_ntr_mod_init_label")
-    
-    if not mom_ntr_mod_init_event in mod_list:
-        mod_list.append(mom_ntr_mod_init_event)
-        
-label mom_ntr_mod_init_label:
-    python:
-        mom_ntr_crisis = Action("Mom NTR Crisis",mom_ntr_crisis_requirement,"mom_ntr_action_description")
-
-        if not mom_ntr_crisis in crisis_list[0]:
-            crisis_list.append([mom_ntr_crisis,mom_ntr_mod_weight])
-        
-        mom_ntr_mod_init = True
-    
-    #if mom_ntr_mod_init:
-    #    "Mom NTR Mod Initialization is complete."
-    return
+    mom_ntr_mod = Mod("Mom NTR Crisis",mom_ntr_mod_requirement,"mom_ntr_action_description", menu_tooltip = "At night you hear strange sounds out of your mom's bedroom")
+    crisis_list.append([mom_ntr_mod.action, mom_ntr_mod_weight])
 
 label mom_ntr_action_description:
-    call mom_ntr_crisis_action from _call_mom_ntr_crisis_action_1
+    call mom_ntr_mod_action from _call_mom_ntr_mod_action_1
     return
     
-label mom_ntr_crisis_action:
+label mom_ntr_mod_action:
     ## Mom having her private life
     $ the_person = mom
     "Some time late in the night, you're awoken by some noise down the hallway."

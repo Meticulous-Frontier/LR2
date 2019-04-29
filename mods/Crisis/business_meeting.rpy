@@ -1,37 +1,17 @@
 ## Business Meeting Crisis Mod by Tristimdorion
 init -1 python:
-    business_meeting_init = False
     business_meeting_weight = 5
 
 init 2 python:
-    def business_meeting_init_requirement():
-        if business_meeting_init == False:
-            return True
-        return False
-
     def business_lunchcrisis_requirement():
         if not mc.business.is_weekend(): 
             if time_of_day > 1 or time_of_day < 4: # only during morning afternoon or evening
                 return True
         return False
 
-    business_meeting_init_event = Action("Business Meeting Mod Initialization Event", business_meeting_init_requirement, "business_meeting_init_label")
-
-    if not business_meeting_init_event in mod_list:
-        mod_list.append(business_meeting_init_event)
-        
-label business_meeting_init_label:
-    python:
-        business_lunchcrisis = Action("Business Meeting Crisis",business_lunchcrisis_requirement,"business_meeting_action_description")
-
-        if not business_lunchcrisis in crisis_list[0]:
-            crisis_list.append([business_lunchcrisis,business_meeting_weight])
-    
-        business_meeting_init = True
-    
-    #if business_meeting_init:
-    #    "Town Walk Mod Initialization is complete."
-    return
+    business_lunchcrisis = Mod("Business Meeting Crisis", business_lunchcrisis_requirement, "business_meeting_action_description",
+        menu_tooltip = "An employee wants to discuss some business with you.")
+    crisis_list.append([business_lunchcrisis.action, business_meeting_weight])
 
 label business_meeting_action_description:
     call business_meeting_action from _call_business_meeting_action_1

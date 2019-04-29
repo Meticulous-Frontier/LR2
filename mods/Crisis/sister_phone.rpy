@@ -1,14 +1,8 @@
 ## Sister Phone Crisis Mod by Tristimdorion
 init -1 python:
-    sister_phone_mod_init = False
     sister_phone_mod_weight = 5
 
-init 2 python:
-    def sister_phone_mod_init_requirement():
-        if sister_phone_mod_init == False:
-            return True
-        return False
-
+init 3 python:
     def sister_phone_crisis_requirement():
         if not mc_at_home() and not (time_of_day == 0 or time_of_day == 4): #She always sents you text while you're not at home for the middle part of the day
             if not lily in mc.location.people: #Obviously don't do it if she's right there with you.
@@ -16,23 +10,8 @@ init 2 python:
                     return True
         return False
 
-    sister_phone_mod_init_event = Action("Sister Phone Mod Initialization Event", sister_phone_mod_init_requirement, "sister_phone_mod_init_label")
-
-    if not sister_phone_mod_init_event in mod_list:
-        mod_list.append(sister_phone_mod_init_event)
-
-label sister_phone_mod_init_label:
-    python:
-        sister_phone_crisis = Action("Sister Phone Message",sister_phone_crisis_requirement,"sister_phone_action_description")
-
-        if not sister_phone_crisis in crisis_list[0]:
-            crisis_list.append([sister_phone_crisis,sister_phone_mod_weight])
-
-        sister_phone_mod_init = True
-
-    #if sister_phone_mod_init:
-    #    "Sister Phone Mod Initialization is complete."
-    return
+    sister_phone_crisis = Mod("Sister Phone Message",sister_phone_crisis_requirement,"sister_phone_action_description", menu_tooltip = "Your sister sends you phone messages")
+    crisis_list.append([sister_phone_crisis.action, sister_phone_mod_weight])
 
 label sister_phone_action_description:
     call sister_phone_crisis_action from _call_sister_phone_crisis_action_1

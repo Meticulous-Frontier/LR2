@@ -1,15 +1,6 @@
 ## Sister NTR Crisis Mod by Tristimdorion
 # Based on the Pilotus13 Vanilla extension
-init -1 python:
-    sister_ntr_mod_init = False
-    sister_ntr_mod_weight = 5
-
-init 2 python:
-    def sister_ntr_mod_init_requirement():
-        if sister_ntr_mod_init == False:
-            return True
-        return False
-
+init 3 python:
     def sister_ntr_crisis_requirement():
         if mc_asleep():
             if lily.sluttiness >=5:
@@ -25,23 +16,8 @@ init 2 python:
                 positions.append ("anal")
         return get_random_from_list(positions)    
 
-    sister_ntr_mod_init_event = Action("Sister NTR Mod Initialization Event", sister_ntr_mod_init_requirement, "sister_ntr_mod_init_label")
-
-    if not sister_ntr_mod_init_event in mod_list:
-        mod_list.append(sister_ntr_mod_init_event)
-
-label sister_ntr_mod_init_label:
-    python:
-        sister_ntr_crisis = Action("Sister NTR Crisis",sister_ntr_crisis_requirement,"sister_ntr_action_description")
-
-        if not sister_ntr_crisis in crisis_list[0]:
-            crisis_list.append([sister_ntr_crisis,sister_ntr_mod_weight])
-
-        sister_ntr_mod_init = True
-
-    #if sister_ntr_mod_init:
-    #    "Sister NTR Mod Initialization is complete."
-    return
+    sister_ntr_mod = Mod("Sister NTR Crisis",sister_ntr_crisis_requirement,"sister_ntr_action_description",menu_tooltip = "At night you hear strange sounds out of your sister's bedroom")
+    crisis_list.append([sister_ntr_mod.action, 5])
 
 label sister_ntr_action_description:
     call sister_ntr_crisis_action from _call_sister_ntr_crisis_action_1

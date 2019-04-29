@@ -28,6 +28,7 @@ init 2 python:
             item_index = hijack_list[0].index(orginal_label_name)
             del hijack_list[item_index]
 
+
 #label advance_time_extra:
 #    "Testing hijack"
 #    return

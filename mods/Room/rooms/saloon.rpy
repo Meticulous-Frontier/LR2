@@ -8,10 +8,6 @@ init -1 python: # Declare variables to use
 
 init 2 python: # Room creation
 
-    # Wardrobe for employees in the salon
-    salon_wardrobe = wardrobe_from_xml("Salon_Wardrobe")
-
-
     # Always check if the room or action is somehow added already before proceeding.
     # I want the Elevator to be accessable.
     if mall_salon not in mod_rooms_mall:

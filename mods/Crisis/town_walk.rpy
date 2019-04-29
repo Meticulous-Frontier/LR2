@@ -1,38 +1,17 @@
 ## Town walk Crisis Mod by Tristimdorion
 # Based on the Pilotus13 Vanilla extension
 init -1 python:
-    town_walk_mod_init = False
     town_walk_mod_weight = 5
 
 init 2 python:
-    def town_walk_mod_init_requirement():
-        if town_walk_mod_init == False:
-            return True
-        return False
-
     def town_walk_crisis_requirement():
         if not mc.business.is_weekend(): # we only take a lunch break on weekdays
             if time_of_day == 2:
                 return True
         return False
 
-    town_walk_mod_init_event = Action("Town Walk Mod Initialization Event", town_walk_mod_init_requirement, "town_walk_mod_init_label")
-
-    if not town_walk_mod_init_event in mod_list:
-        mod_list.append(town_walk_mod_init_event)
-        
-label town_walk_mod_init_label:
-    python:
-        town_walk_crisis = Action("Town Walk Crisis",town_walk_crisis_requirement,"town_walk_action_description")
-
-        if not town_walk_crisis in crisis_list[0]:
-            crisis_list.append([town_walk_crisis,town_walk_mod_weight])
-    
-        town_walk_mod_init = True
-    
-    #if town_walk_mod_init:
-    #    "Town Walk Mod Initialization is complete."
-    return
+    town_walk_crisis = Mod("Town Walk Crisis",town_walk_crisis_requirement,"town_walk_action_description", menu_tooltip = "On occasion you take an afternoon stroll through town, someone did not close their bedroom curtains.")
+    crisis_list.append([town_walk_crisis.action, town_walk_mod_weight])
 
 label town_walk_action_description:
     call town_walk_crisis_action from _call_town_walk_crisis_action_1

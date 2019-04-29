@@ -1,14 +1,6 @@
 # Gym Studio Mod by Tristimdorion
 # Requires ParadigmShift's Mod Core for initialization.
-init -1 python:
-    gym_training_mod_init = False
-
-init 2 python:
-    def gym_training_mod_init_requirement():
-        if gym_training_mod_init == False:
-            return True
-        return False
-    
+init 3 python:
     def gym_requirement():
         if time_of_day == 4: # Can be removed
             return "Closed for the night."
@@ -17,29 +9,17 @@ init 2 python:
         else:
             return True
 
-    gym_training_mod_init_event = Action("Gym Training Mod Initialization Event", gym_training_mod_init_requirement, "gym_training_mod_init_label")
-
-    if gym_training_mod_init_event not in mod_list:
-        mod_list.append(gym_training_mod_init_event)
-        
-label gym_training_mod_init_label:
-    python:
+    # the gym is initialized by prior to starting a new game, so we need to do this in this initialization function
+    def gym_initialization(self):
         gym.background_image = Image("Mods/mods/Room/images/Gym_Background.jpg") #As long a there is a mall background for the gym, replace it with our gym background
-
-        train_in_gym_action = Action("Schedule a gym session. {image=gui/heart/Time_Advance.png}", gym_requirement, "select_person_for_gym", menu_tooltip = "Bring a person to the gym to train their body.")
-      
-        # Always check if the action is somehow already added.
-        # Enables the train_in_gym_action for the gym.
-        if train_in_gym_action not in gym.actions:
-            gym.actions.append(train_in_gym_action)
-
         # add gym shower to active places
         list_of_places.append(gym_shower)
         gym.link_locations_two_way(gym_shower)
+        gym.actions.append(self.action)
+        return
 
-        gym_training_mod_init = True
-
-    return
+    train_in_gym_action = Mod("Schedule Gym Session {image=gui/heart/Time_Advance.png}", gym_requirement, "select_person_for_gym", 
+        initialization = gym_initialization, menu_tooltip = "Bring a person to the gym to train their body.")
        
 label select_person_for_gym():
     "Select who the gym session is for"

@@ -1,77 +1,19 @@
 # Mall hair salon mod by Trollden.
-# Requires ParadigmShift's Mod Core for initialization.
 # Do whatever you want with it.
-
-
 # Initialization segment - Start
 
-init -1 python:
-    hair_salon_mod_init = False
-    salon_manager_created = False
-
 init 2 python:
+    def create_salon_manager():
+        # Wardrobe for employees in the salon
+        salon_wardrobe = wardrobe_from_xml("Salon_Wardrobe")
+        global salon_manager
+        salon_manager = create_random_person(age = renpy.random.randint(21,30), body_type = "thin_body", personality = wild_personality, job = "Hair Stylist", starting_wardrobe = salon_wardrobe)
 
-    def hair_salon_mod_init_requirement():
-        if hair_salon_mod_init == False:
-            return True
-        return False
-
-    hair_salon_mod_init_action = Action("Add [salon_action]", hair_salon_mod_init_requirement, "hair_salon_mod_init_label",
-        menu_tooltip = "Activates the mod")
-
-    if hair_salon_mod_init_action not in mod_list:
-        mod_list.append(hair_salon_mod_init_action)
-
-
-label hair_salon_mod_init_label():
-    python:
-
-        # I want to populate the salon with a person.
-        if salon_manager_created == False:
-            salon_manager = create_random_person(age = renpy.random.randint(21,30), job = "Hair Stylist", starting_wardrobe = salon_wardrobe)
-
-            # We want whoever the salon_manager is to be in the salon during work hours.
-            salon_manager.schedule[1] = mall_salon
-            salon_manager.schedule[2] = mall_salon
-            salon_manager.schedule[3] = mall_salon
-
-            # Place the character so it is in a room in the world.
-            mall_salon.add_person(salon_manager)
-            if salon_manager_role not in salon_manager.special_role:
-                salon_manager.special_role.append(salon_manager_role)
-
-            salon_manager_created = True
-    python:
-
-        salon_action = Action("Schedule a haircut.", salon_requirement, "salon_label",
-            menu_tooltip = "Change the hair style and hair color of the employee.")
-
-        # Always check if the room is somehow already added.
-        # Enables the elevator.
-        if mall_salon not in mod_rooms_mall:
-            mod_rooms_mall.append(mall_salon)
-
-        # Always check if the action is somehow already added.
-        # Enables the salon_action for the salon.
-        if salon_action not in mall_salon.actions:
-            mall_salon.actions.append(salon_action)
-
-        # I want to enable NPC pathing
-        if mall_salon not in list_of_places:
-            list_of_places.append(mall_salon)
-            mall_salon.link_locations_two_way(mall)
-
-        hair_salon_mod_init = True
-
-
-    if hair_salon_mod_init:
-        "Hair salon opened in the mall."
-    return
-
-# Initilization segment - End
-# Mod - Start
-
-init 2 python:
+        # We want whoever the salon_manager is to be in the salon during work hours.
+        salon_manager.schedule[1] = mall_salon
+        salon_manager.schedule[2] = mall_salon
+        salon_manager.schedule[3] = mall_salon
+        return
 
     def salon_requirement():
         if time_of_day == 4: # Can be removed
@@ -84,6 +26,33 @@ init 2 python:
             return "Not enough funds."
         else:
             return True
+    
+    def hair_salon_mod_initialization(self):
+        create_salon_manager()
+        # Place the character so it is in a room in the world.
+        mall_salon.add_person(salon_manager)
+        salon_manager.special_role.append(salon_manager_role)   
+
+        # Always check if the room is somehow already added.
+        # Enables the elevator.
+        if mall_salon not in mod_rooms_mall:
+            mod_rooms_mall.append(mall_salon)
+
+        # Always check if the action is somehow already added.
+        # Enables the salon_action for the salon.
+        if salon_action not in mall_salon.actions:
+            mall_salon.actions.append(self.action)
+
+        # I want to enable NPC pathing
+        if mall_salon not in list_of_places:
+            list_of_places.append(mall_salon)
+            mall_salon.link_locations_two_way(mall)
+        return
+
+
+    salon_action = Mod("Schedule a haircut", salon_requirement, "salon_label", initialization = hair_salon_mod_initialization, menu_tooltip = "Change a persons hair style and color.")
+
+# Initilization segment - End
 
 label salon_label():
 

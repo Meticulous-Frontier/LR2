@@ -2,13 +2,7 @@
 # Use it as you see fit
 # Requires Mod Core by ParadigmShift
 
-
-init -1 python:
-    import_wardrobe_mod_init = False
-
-
-init 2 python: # Definitions
-
+init -2 python: # Definitions
     def import_wardrobe(wardrobe, xml_filename): # This is a rewrite of the wardrobe_from_xml function written by Vren.
                                                  # Wardrobe should be who's / what wardrobe you want to import into. e.g for main character it is mc.designed_wardrobe
         wardrobe = wardrobe
@@ -36,59 +30,34 @@ init 2 python: # Definitions
             wardrobe.add_overwear_set(outfit_from_xml(outfit_element))
         return return_wardrobe
 
-
-
-init 2 python: # Requirements to activate the mod via Mod Core
-
-    def import_wardrobe_mod_init_requirement():
-        if import_wardrobe_mod_init == False:
-            return True
-        return False
-
-    import_wardrobe_mod_init_action = Action("Add [import_wardrobe_action]", import_wardrobe_mod_init_requirement, "import_wardrobe_mod_init_label",
-        menu_tooltip = "Activates the mod")
-    mod_list.append(import_wardrobe_mod_init_action)
-
-label import_wardrobe_mod_init_label(): # Initilization label for Mod Core
-    python:
-        import_wardrobe_action = Action("Import Wardrobe from XML", import_wardrobe_requirement, "import_wardrobe_label",
-            menu_tooltip = "Type the name of the XML file to import, case sensitive")
-
-        give_wardrobe_action = Action("Give Wardrobe from XML", import_wardrobe_requirement, "give_wardrobe_label",
-            menu_tooltip = "Type the name of the XML file to give from, case sensitive")
-
-        give_uniform_action = Action("Give Uniforms from XML", give_uniform_requirement, "give_uniform_label",
-            menu_tooltip = "Type the name of the XML file to give from, case sensitive")
-
-        if import_wardrobe_action not in bedroom.actions: # Bedroom
-            bedroom.actions.append(import_wardrobe_action)
-        if give_wardrobe_action not in clothing_store.actions: # Clothing Store
-            clothing_store.actions.append(give_wardrobe_action)
-        if give_uniform_action not in office.actions: # Office
-            office.actions.append(give_uniform_action)
-
-        import_wardrobe_mod_init = True
-
-    if import_wardrobe_mod_init == True:
-        "Import Wardrobe Enabled"
-
-    return
-
-init 2 python: # Requirements for the mod's actions.
-
+init 2 python:
     def import_wardrobe_requirement():
-
-        if import_wardrobe_mod_init:
-            return True
-        return False
+        return True
 
     def give_uniform_requirement():
-
-        if import_wardrobe_mod_init and strict_uniform_policy.is_owned():
+        if strict_uniform_policy.is_owned():
             return True
         else:
             return "Requires: [strict_uniform_policy.name] or higher"
-        return False
+
+    def import_wardrobe_mod_initialization(self):
+        bedroom.actions.append(self.action)
+        return
+    def give_wardrobe_mod_initialization(self):
+        clothing_store.actions.append(self.action)
+        return
+    def give_uniform_mod_initialization(self):
+        office.actions.append(self.action)
+        return
+
+    import_wardrobe_action = Mod("Import Wardrobe from XML", import_wardrobe_requirement, "import_wardrobe_label", 
+        initialization = import_wardrobe_mod_initialization, menu_tooltip = "Type the name of the XML file to import, case sensitive")
+
+    give_wardrobe_action = Mod("Give Wardrobe from XML", import_wardrobe_requirement, "give_wardrobe_label",
+        initialization = give_wardrobe_mod_initialization, menu_tooltip = "Type the name of the XML file to give from, case sensitive")
+
+    give_uniform_action = Mod("Give Uniforms from XML", give_uniform_requirement, "give_uniform_label",
+        initialization = give_uniform_mod_initialization, menu_tooltip = "Type the name of the XML file to give from, case sensitive")
 
 label import_wardrobe_label():
     "Speaker" "Enter the file name e.g Lily_Wardrobe then hit enter to import to your wardrobe"

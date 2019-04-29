@@ -1,41 +1,22 @@
 ## Morning Shower Crisis Mod by Tristimdorion
 # Based on the Pilotus13 Vanilla extension
 init -1 python:
-    shower_mod_init = False
     shower_mod_weight = 5
     
 init 2 python:
-    def shower_mod_init_requirement():
-        if shower_mod_init == False:
-            return True
-        return False
-
     def shower_crisis_requirement():
         if mc_at_home() and time_of_day == 0:
             return True
         return False
 
-    shower_mod_init_event = Action("Shower Mod Initialization Event", shower_mod_init_requirement, "shower_mod_init_label")
-    
-    if not shower_mod_init_event in mod_list:
-        mod_list.append(shower_mod_init_event)
-
-label shower_mod_init_label():
-    python:
-        shower_crisis = Action("Shower Crisis",shower_crisis_requirement,"shower_action_description")
-       
-        if not shower_crisis in morning_crisis_list[0]:
-            morning_crisis_list.append([shower_crisis,shower_mod_weight])   
-        
-        shower_mod_init = True
-
+    def shower_mod_initialization(self):
         # add home shower to active places
         list_of_places.append(home_shower)
         hall.link_locations_two_way(home_shower)
+        return
 
-    #if shower_mod_init:
-    #    "Shower Mod Initialization is complete."
-    return
+    shower_crisis = Mod("Shower Crisis", shower_crisis_requirement,"shower_action_description", initialization = shower_mod_initialization, menu_tooltip = "In the morning you notice the door to shower is open and someone is in there.")
+    morning_crisis_list.append([shower_crisis.action, shower_mod_weight])   
     
 ### Create Action Label
 label shower_action_description:

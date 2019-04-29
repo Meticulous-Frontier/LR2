@@ -1,22 +1,7 @@
 ## Cougar personality Mod by Tristimdorion
 
-init 1 python:
-    cougar_personality = Personality("cougar", default_prefix = "cougar", #Cougar style personality
-    common_likes = ["skirts", "small talk", "Mondays", "the weekend", "the colour red", "makeup", "sports", "flirting", "HR work"],
-    common_sexy_likes = ["doggy style sex", "giving blowjobs", "getting head", "anal sex", "public sex", "skimpy outfits", "anal sex", "showing her tits", "showing her ass", "taking control", "not wearing underwear", "creampies", "drinking cum", "cum facials"],
-    common_dislikes = ["Mondays", "the colour pink", "supply work", "conservative outfits", "work uniforms", "pants"],
-    common_sexy_dislikes = ["being submissive", "being fingered", "missionary style sex", "risking getting pregnant"])
-
-    # added to personalities prior to initalization of new games
-    list_of_personalities.append(cougar_personality)
-
-init 500 python:
-    add_label_hijack("normal_start", "correct_personality_age")
-
-# make the woman in the game the right age for their personality
-# this used on the startup of the game (called ONCE)
-label correct_personality_age:
-    python:
+init -1 python:
+    def correct_personality_age():
         for person in all_people_in_the_game(excluded_people = [mc, lily, mom]):
             if person.personality == cougar_personality:
                 if person.age < 40: # split age for cougars
@@ -28,6 +13,24 @@ label correct_personality_age:
                     # mc.log_event("Changed " + person.name + " is " + str(person.age), "float_text_grey")
 
         remove_label_hijack("generate_premade_list")
+
+init 1 python:
+    cougar_personality = Personality("cougar", default_prefix = "cougar", #Cougar style personality
+    common_likes = ["skirts", "small talk", "Mondays", "the weekend", "the colour red", "makeup", "sports", "flirting", "HR work"],
+    common_sexy_likes = ["doggy style sex", "giving blowjobs", "getting head", "anal sex", "public sex", "skimpy outfits", "anal sex", "showing her tits", "showing her ass", "taking control", "not wearing underwear", "creampies", "drinking cum", "cum facials"],
+    common_dislikes = ["Mondays", "the colour pink", "supply work", "conservative outfits", "work uniforms", "pants"],
+    common_sexy_dislikes = ["being submissive", "being fingered", "missionary style sex", "risking getting pregnant"])
+
+    # added to personalities prior to initalization of new games
+    list_of_personalities.append(cougar_personality)
+
+init 500 python:
+    add_label_hijack("normal_start", "correct_personality_age_action")
+
+# make the woman in the game the right age for their personality
+# this used on the startup of the game (called ONCE)
+label correct_personality_age_action:
+    $ correct_personality_age()
     return    
 
 label cougar_greetings(the_person):
