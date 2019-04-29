@@ -10,7 +10,7 @@ init -1 python:
 init 2 python:
     m_division_basement = Room("security", "Security Room", [], room_background_image("Security_Background.jpg"), [],[],[], False, [], None, False)
     p_division_basement = Room("machinery", "Machinery Room", [], office_background, [], [], [], False, [], None, False)
-    rd_division_basement = Room("secret lab", "Biotechnology Lab", [], lab_background, [], [], [], False, [], None, False)
+    rd_division_basement = Room("biotech", "Biotechnology Lab", [], room_background_image("Biotech_Background.jpg"), [], [], [], False, [], None, False)
     office_basement = Room("dungeon", "Dungeon", [], bar_background, [],[],[], False,[], None, False)
 
 #    room = Room("", "", [], background_image, [], [], [], False, [], None, False)
