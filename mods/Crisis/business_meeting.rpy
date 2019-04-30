@@ -35,13 +35,23 @@ label business_meeting_action:
 
     call business_meeting_introduction(the_person) from _call_business_meeting_introduction_1
     call business_meeting_flirtation(the_person) from _call_business_meeting_flirtation_1
-    call business_meeting_arrousal(the_person) from _call_business_meeting_arrousal_1
-    call business_meeting_seduction(the_person) from _call_business_meeting_seduction_1
+    if (the_person.sluttiness > 20):
+        call business_meeting_arrousal(the_person) from _call_business_meeting_arrousal_1
+        if (the_person.sluttiness > 40):
+            call business_meeting_seduction(the_person) from _call_business_meeting_seduction_1
+        else:
+            $ the_person.change_happiness(5)
+            "After a while she wraps her her story."
+    else:
+        $ the_person.change_happiness(5)
+        "She finishes up her proposal."
+
+    $ the_person.reset_outfit() #Make sure to reset her outfit so she is dressed properly.
+
     call business_meeting_end(the_person) from _call_business_meeting_end_1
 
     hide screen person_info_ui
     $ the_person.reset_arousal()
-    $ the_person.reset_outfit() #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)
     $ renpy.scene("Active")
     return
@@ -54,24 +64,55 @@ label business_meeting_introduction(person):
     return
 
 label business_meeting_flirtation(person):
+    person.char "Thank you for taking the time to listen to my proposal....."
     if person.sluttiness > 10:
-        pass
+        "While talking about her new business plan, you suddenly feel her bare foot moving up and down your leg."
+    else:
+        "You mind wanders off while she is talking..."
     return
 
 label business_meeting_arrousal(person):
-    if person.sluttiness > 20:
-        pass
+    if person.sluttiness > 30:
+        "She moves up to your crotch and unzips your pants with her feet."
+        person.char "Oh my, it seems my proposal got you all exited."
+    else:
+        person.char "Perhaps we could continue this 'meeting', when we are in a more private setting?"
     return
 
 
 label business_meeting_seduction(person):
-    if person.sluttiness > 40:
-        pass
+    if person.sluttiness > 50:
+        person.char "I'm sorry, it seems i've dropped something..."
+        "She slides under the table grabbing your exposed cock looking up at you with a smile."
+        $ person.change_arousal(15)
+        menu:
+            "Continue" if  mc.current_stamina > 0:
+                call fuck_person(person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_business_meeting
+            "Continue. (disabled)" if not mc.current_stamina > 0:
+                pass
+            "Not now":
+                mc.name "I'm sorry [person.name], i've got another meeting to attend."
+                $ person.change_happiness(-5)
+    else:
+        "After while she stops rubbing your exposed member."
+        person.char "I see you have some other business to take care off."
     return
 
 label business_meeting_end(person):
     if person.obedience > 140:
-        the_person.char "Thank you for your time, Sir!"
+        person.char "Thank you for your time, Sir!"
     else:
-        the_person.char "Thank you for the meeting."
+        person.char "Thank you for the meeting."
+
+    if person.sluttiness < 30:
+        "You thank [person.name] for her time and that you will look into the matter."
+    else:
+        mc.name "Thank you [person.name], this was very illuminating."
+
+    $ the_person.draw_person(position="walking_away")
+
+    if person.sluttiness < 30:
+        "You watch her walking away." 
+    else:
+        "After contemplating what just happend, you go back to work."
     return

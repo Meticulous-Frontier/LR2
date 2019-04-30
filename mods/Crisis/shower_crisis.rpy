@@ -93,13 +93,7 @@ label shower_crisis_action:
         "Join her." if mc.current_stamina > 0:
             "You decide to use this opportunity and join her."
             mc.name "The door was not closed, how about we shower together, [the_person.name]?"
-            if the_person.sluttiness <=15 or the_person.arousal < 35:
-                $ the_person.draw_person(position = "back_peek", emotion = "angry")
-                "[the_person.name] quickly turns her head, you see the rage on her face."
-                the_person.char "What the fuck, [mc.name]? Can't you see I'm naked here? Get lost, you perv!"
-                "You quickly leave the bathroom."
-                $ the_person.happiness -= 5
-            else:
+            if the_person.sluttiness > 70 or the_person.arousal > 35:
                 $ the_person.draw_person(position = "back_peek", emotion = "happy")
                 "[the_person.name] turns her head when she hears your voice. You see her smile."
                 the_person.char "Well, that sounds lika a plan, [mc.name]. Come on, get in here."
@@ -111,6 +105,12 @@ label shower_crisis_action:
                 $ mc.location = home_shower
                 call fuck_person(the_person) from _call_fuck_person_shower
                 $ mc.location = current_location
+            else:
+                $ the_person.draw_person(position = "back_peek", emotion = "angry")
+                "[the_person.name] quickly turns her head, you see the rage on her face."
+                the_person.char "What the fuck, [mc.name]? Can't you see I'm naked here? Get lost, you perv!"
+                "You quickly leave the bathroom."
+                $ the_person.happiness -= 5
         "Join her. (disabled)" if not mc.current_stamina > 0:
             pass
         "Walk away":
