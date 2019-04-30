@@ -65,7 +65,7 @@ init -1 python:
 
 init 2 python:
     class Mod(renpy.store.object):
-        def __init__(self, name, requirement, effect, args = None, requirement_args = None, menu_tooltip = None, initialization = None, enabled = True):
+        def __init__(self, name, requirement, effect, args = None, requirement_args = None, menu_tooltip = None, initialization = None, category="Misc", enabled = True):
             self.name = name
             self.requirement = requirement
             self.effect = effect
@@ -74,6 +74,7 @@ init 2 python:
             self.menu_tooltip = menu_tooltip
             self.initialization = initialization
             self.enabled = enabled
+            self.category = category
            
             game_mod_list.append(self)
 
@@ -121,18 +122,44 @@ label activate_mod_core:
 
 label show_mod_settings:
     python:
+        global active_category
         tuple_list = []
         for mod in game_mod_list:
-            tuple_string = mod.name + "\n Active: " + str(mod.enabled)
-            tuple_list.append([tuple_string, mod])
+            has_category = False
+            for cat in tuple_list:
+                if mod.category == cat[1].category:
+                    has_category = True
 
+            if not has_category:
+                tuple_string = "Category: " + mod.category
+                tuple_list.append([tuple_string, mod])
+
+        tuple_list = sorted(tuple_list, key=lambda x: x[0])
+        tuple_list.append(["Back","Back"])
+        category_choice = renpy.display_menu(tuple_list, True, "Choice")
+
+        if category_choice == "Back":
+            renpy.jump("game_loop")
+        else:
+            active_category = category_choice.category
+            renpy.jump("change_mod_category")
+    return
+
+label change_mod_category():
+    python:
+        tuple_list = []
+        for mod in game_mod_list:
+            if (mod.category == active_category):
+                tuple_string = mod.name + "\n Active: " + str(mod.enabled)
+                tuple_list.append([tuple_string, mod])
+
+        tuple_list = sorted(tuple_list, key=lambda x: x[0])
         tuple_list.append(["Back","Back"])
         mod_choice = renpy.display_menu(tuple_list, True, "Choice")
 
         if mod_choice == "Back":
-            renpy.jump("game_loop")
+            renpy.jump("show_mod_settings")
         else:
             mod_choice.toggle_enabled()
-            renpy.jump("show_mod_settings")
+            renpy.jump("change_mod_category")
     return
-    

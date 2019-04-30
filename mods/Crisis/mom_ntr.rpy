@@ -10,7 +10,8 @@ init 2 python:
                 return True
         return False
 
-    mom_ntr_mod = Mod("Mom NTR Crisis",mom_ntr_mod_requirement,"mom_ntr_action_description", menu_tooltip = "At night you hear strange sounds out of your mom's bedroom")
+    mom_ntr_mod = Mod("Mom NTR Crisis",mom_ntr_mod_requirement,"mom_ntr_action_description", 
+        menu_tooltip = "At night you hear strange sounds out of your mom's bedroom", category = "NTR")
     crisis_list.append([mom_ntr_mod.action, mom_ntr_mod_weight])
 
 label mom_ntr_action_description:

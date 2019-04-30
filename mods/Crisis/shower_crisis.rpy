@@ -15,7 +15,8 @@ init 2 python:
         hall.link_locations_two_way(home_shower)
         return
 
-    shower_crisis = Mod("Shower Crisis", shower_crisis_requirement,"shower_action_description", initialization = shower_mod_initialization, menu_tooltip = "In the morning you notice the door to shower is open and someone is in there.")
+    shower_crisis = Mod("Shower Crisis", shower_crisis_requirement,"shower_action_description", initialization = shower_mod_initialization, 
+        menu_tooltip = "In the morning you notice the door to shower is open and someone is in there.", category="Home")
     morning_crisis_list.append([shower_crisis.action, shower_mod_weight])   
     
 ### Create Action Label
