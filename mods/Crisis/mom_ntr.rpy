@@ -12,7 +12,7 @@ init 2 python:
 
     mom_ntr_mod = Mod("Mom NTR Crisis",mom_ntr_mod_requirement,"mom_ntr_action_description", 
         menu_tooltip = "At night you hear strange sounds out of your mom's bedroom", category = "NTR")
-    crisis_list.append([mom_ntr_mod.action, mom_ntr_mod_weight])
+    crisis_list.append([mom_ntr_mod, mom_ntr_mod_weight])
 
 label mom_ntr_action_description:
     call mom_ntr_mod_action from _call_mom_ntr_mod_action_1

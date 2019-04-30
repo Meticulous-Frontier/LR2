@@ -11,7 +11,7 @@ init 2 python:
 
     business_lunchcrisis = Mod("Business Meeting Crisis", business_lunchcrisis_requirement, "business_meeting_action_description",
         menu_tooltip = "An employee wants to discuss some business with you.", category = "Business")
-    crisis_list.append([business_lunchcrisis.action, business_meeting_weight])
+    crisis_list.append([business_lunchcrisis, business_meeting_weight])
 
 label business_meeting_action_description:
     call business_meeting_action from _call_business_meeting_action_1

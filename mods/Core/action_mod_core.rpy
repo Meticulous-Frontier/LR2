@@ -18,18 +18,18 @@
     #     # add gym shower to active places
     #     list_of_places.append(gym_shower)
     #     gym.link_locations_two_way(gym_shower)
-    #     gym.actions.append(self.action)
+    #     gym.actions.append(self)
     #     return
 
     # train_in_gym_action = Mod("Schedule Gym Session {image=gui/heart/Time_Advance.png}", gym_requirement, "select_person_for_gym", initialization = gym_initialization,  menu_tooltip = "Bring a person to the gym to train their body.")
 
 init -2 python:
-    game_mod_list = []
+    action_mod_list = []
 
 init -1 python:
     def is_mod_enabled(action_name):
         is_enabled = True
-        for mod in game_mod_list:
+        for mod in action_mod_list:
             if mod.name == action_name:
                 is_enabled = mod.enabled
         return is_enabled
@@ -64,40 +64,16 @@ init -1 python:
     Action.is_disabled_slug_shown = is_disabled_slug_shown
 
 init 2 python:
-    class Mod(renpy.store.object):
+    class Mod(Action):
         def __init__(self, name, requirement, effect, args = None, requirement_args = None, menu_tooltip = None, initialization = None, category="Misc", enabled = True):
-            self.name = name
-            self.requirement = requirement
-            self.effect = effect
-            self.args = args
-            self.requirement_args = requirement_args
-            self.menu_tooltip = menu_tooltip
             self.initialization = initialization
             self.enabled = enabled
             self.category = category
+
+            Action.__init__(self, name, requirement, effect, args, requirement_args, menu_tooltip)
            
-            game_mod_list.append(self)
-
-            self.action = Action(name, requirement, effect, args, requirement_args, menu_tooltip)
-        
-        def __cmp__(self, other): ##This and __hash__ are defined so that I can use "if Mod in List" and have it find identical actions that are different instances.
-            if type(other) is Mod:
-                if self.name == other.name and self.requirement == other.requirement and self.effect == other.effect and self.args == other.args:
-                    return 0
-                else:
-                    if self.__hash__() < other.__hash__(): #Use hash values to break ties.
-                        return -1
-                    else:
-                        return 1
-            else:
-                if self.__hash__() < other.__hash__(): #Use hash values to break ties.
-                    return -1
-                else:
-                    return 1
-
-        def __hash__(self):
-            return hash((self.name,self.requirement,self.effect))
-
+            action_mod_list.append(self)
+      
         def initialize(self):
             if not self.initialization is None:
                 self.initialization(self)
@@ -105,26 +81,29 @@ init 2 python:
         def toggle_enabled(self):
             self.enabled = not self.enabled
 
-    def mod_settings_requirement():
+    def action_mod_settings_requirement():
         return True
 
-init 500 python:
-    add_label_hijack("normal_start", "activate_mod_core")
+init 5 python:
+    add_label_hijack("normal_start", "activate_action_mod_core")
 
-label activate_mod_core:
+label activate_action_mod_core(stack):
     python:
-        for mod in game_mod_list:
+        for mod in action_mod_list:
             mod.initialize()
 
-        mod_options_action = Action("Mod Settings", mod_settings_requirement, "show_mod_settings", menu_tooltip = "Enable or disable mods")
-        bedroom.actions.append(mod_options_action)
+        action_mod_options_action = Action("MOD Settings", action_mod_settings_requirement, "show_action_mod_settings", menu_tooltip = "Enable or disable mods")
+        bedroom.actions.append(action_mod_options_action)
+        
+        # continue on the hijack stack if needed
+        execute_hijack_call(stack)
     return
 
-label show_mod_settings:
+label show_action_mod_settings:
     python:
-        global active_category
+        global active_action_mod_category
         tuple_list = []
-        for mod in game_mod_list:
+        for mod in action_mod_list:
             has_category = False
             for cat in tuple_list:
                 if mod.category == cat[1].category:
@@ -139,27 +118,32 @@ label show_mod_settings:
         category_choice = renpy.display_menu(tuple_list, True, "Choice")
 
         if category_choice == "Back":
-            renpy.jump("game_loop")
+            act_choice = call_formated_action_choice(mc.location.actions + ["Back"])
+
+            if act_choice == "Back":
+                renpy.jump("game_loop")
+            else:
+                act_choice.call_action()
         else:
-            active_category = category_choice.category
+            active_action_mod_category = category_choice.category
             renpy.jump("change_mod_category")
     return
 
-label change_mod_category():
+label change_mod_category:
     python:
         tuple_list = []
-        for mod in game_mod_list:
-            if (mod.category == active_category):
-                tuple_string = mod.name + "\n Active: " + str(mod.enabled)
-                tuple_list.append([tuple_string, mod])
+        for action_mod in action_mod_list:
+            if (action_mod.category == active_action_mod_category):
+                tuple_string = action_mod.name + "\n Active: " + str(action_mod.enabled)
+                tuple_list.append([tuple_string, action_mod])
 
         tuple_list = sorted(tuple_list, key=lambda x: x[0])
         tuple_list.append(["Back","Back"])
-        mod_choice = renpy.display_menu(tuple_list, True, "Choice")
+        action_mod_choice = renpy.display_menu(tuple_list, True, "Choice")
 
-        if mod_choice == "Back":
-            renpy.jump("show_mod_settings")
+        if action_mod_choice == "Back":
+            renpy.jump("show_action_mod_settings")
         else:
-            mod_choice.toggle_enabled()
+            action_mod_choice.toggle_enabled()
             renpy.jump("change_mod_category")
     return

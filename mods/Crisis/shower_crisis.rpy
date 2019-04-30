@@ -17,7 +17,7 @@ init 2 python:
 
     shower_crisis = Mod("Shower Crisis", shower_crisis_requirement,"shower_action_description", initialization = shower_mod_initialization, 
         menu_tooltip = "In the morning you notice the door to shower is open and someone is in there.", category="Home")
-    morning_crisis_list.append([shower_crisis.action, shower_mod_weight])   
+    morning_crisis_list.append([shower_crisis, shower_mod_weight])   
     
 ### Create Action Label
 label shower_action_description:

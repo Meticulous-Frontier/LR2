@@ -41,7 +41,7 @@ init 2 python:
         # Always check if the action is somehow already added.
         # Enables the salon_action for the salon.
         if salon_action not in mall_salon.actions:
-            mall_salon.actions.append(self.action)
+            mall_salon.actions.append(self)
 
         # I want to enable NPC pathing
         if mall_salon not in list_of_places:

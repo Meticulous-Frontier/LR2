@@ -12,7 +12,7 @@ init 3 python:
 
     sister_phone_crisis = Mod("Sister Phone Message",sister_phone_crisis_requirement,"sister_phone_action_description", 
         menu_tooltip = "Your sister sends you phone messages", category="Home")
-    crisis_list.append([sister_phone_crisis.action, sister_phone_mod_weight])
+    crisis_list.append([sister_phone_crisis, sister_phone_mod_weight])
 
 label sister_phone_action_description:
     call sister_phone_crisis_action from _call_sister_phone_crisis_action_1

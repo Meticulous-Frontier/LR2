@@ -12,7 +12,7 @@ init 2 python:
 
     town_walk_crisis = Mod("Town Walk Crisis",town_walk_crisis_requirement,"town_walk_action_description", 
         menu_tooltip = "On occasion you take an afternoon stroll through town, someone did not close their bedroom curtains.")
-    crisis_list.append([town_walk_crisis.action, town_walk_mod_weight])
+    crisis_list.append([town_walk_crisis, town_walk_mod_weight])
 
 label town_walk_action_description:
     call town_walk_crisis_action from _call_town_walk_crisis_action_1

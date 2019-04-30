@@ -41,13 +41,13 @@ init 2 python:
             return "Requires: [strict_uniform_policy.name] or higher"
 
     def import_wardrobe_mod_initialization(self):
-        bedroom.actions.append(self.action)
+        bedroom.actions.append(self)
         return
     def give_wardrobe_mod_initialization(self):
-        clothing_store.actions.append(self.action)
+        clothing_store.actions.append(self)
         return
     def give_uniform_mod_initialization(self):
-        office.actions.append(self.action)
+        office.actions.append(self)
         return
 
     import_wardrobe_action = Mod("Import Wardrobe from XML", import_wardrobe_requirement, "import_wardrobe_label", 
