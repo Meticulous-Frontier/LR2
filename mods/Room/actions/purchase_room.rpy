@@ -1,21 +1,20 @@
 init -1 python:
-    purchasable_room = []
+    purchasable_room = [] # Should this be put in an hijack as well?
     t1_cost = 10000
     t2_cost = 50000
     t3_cost = 100000
 
-    purchase_rooms_mod_init = False
+init 3 python:
+    def purchase_rooms_requirement():
+        return True
 
-init 2 python:
-    def purchase_rooms_mod_requirement():
-        if purchase_rooms_mod_init == False:
-            return True
-        return False
+    def purchase_rooms_initialization(self):
+        office.actions.append(self)
 
-    purchase_rooms_mod_init_action = Action("Purchase Rooms Enabler", purchase_rooms_mod_requirement, "purchase_rooms_mod_init_label",
-        menu_tooltip = "Enables the mod")
-    if not purchase_rooms_mod_init_action in mod_list:
-        mod_list.append(purchase_rooms_mod_init_action)
+
+    purchase_rooms = ActionMod("Purchase Rooms", purchase_rooms_requirement, "purchase_rooms", initialization = purchase_rooms_initialization,
+        menu_tooltip = "Purchase rooms and facilities", category = "Business")
+
 
 label purchase_rooms_mod_init_label():
     python:
@@ -29,11 +28,7 @@ label purchase_rooms_mod_init_label():
 # TODO: Show different disabled message if room purchased
 init 2 python:
 
-    def purchase_rooms_requirement():
-        return True
 
-    purchase_rooms = Action("Purchase Rooms", purchase_rooms_requirement, "purchase_rooms",
-        menu_tooltip = "Purchase rooms and facilities")
 
     def room_tier_1():
         if mc.business.funds >= t1_cost:
