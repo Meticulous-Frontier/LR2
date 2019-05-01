@@ -23,9 +23,9 @@ label business_meeting_action:
     $ day_part = time_of_day_string()
 
     if (mc.location ==  the_place):
-        "You're hard at work in the [day_part], when [the_person.name] asks you over to discuss some plans."
+        "You're hard at work in the [day_part], when [the_person.possessive_title] asks you over to discuss some plans."
     else:
-        "You're hard at work in the [day_part], when [the_person.name] calls you on your phone to discuss some plans."
+        "You're hard at work in the [day_part], when [the_person.possessive_title] calls you on your phone to discuss some plans."
 
     "You meet up in an empty office of the [the_place.name] department."
 
@@ -60,7 +60,7 @@ label business_meeting_introduction(person):
     if person.obedience > 140:
         person.char "Hello Sir, thank you for meeting me on such short notice."
     else:
-        person.char "Hi [mc.name], thank you for the meeting."
+        person.char "Hi [person.mc_title], thank you for the meeting."
     return
 
 label business_meeting_flirtation(person):
@@ -91,7 +91,7 @@ label business_meeting_seduction(person):
             "Continue. (disabled)" if not mc.current_stamina > 0:
                 pass
             "Not now":
-                mc.name "I'm sorry [person.name], i've got another meeting to attend."
+                mc.name "I'm sorry [person.possessive_title], i've got another meeting to attend."
                 $ person.change_happiness(-5)
     else:
         "After while she stops rubbing your exposed member."
@@ -107,7 +107,7 @@ label business_meeting_end(person):
     if person.sluttiness < 30:
         "You thank [person.name] for her time and that you will look into the matter."
     else:
-        mc.name "Thank you [person.name], this was very illuminating."
+        mc.name "Thank you [person.possessive_title], this was very illuminating."
 
     $ the_person.draw_person(position="walking_away")
 

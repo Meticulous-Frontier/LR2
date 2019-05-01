@@ -37,32 +37,32 @@ label shower_crisis_action:
     $ change_scene_display(home_shower)
     show screen person_info_ui(the_person)
     $ the_person.draw_person(position = "walking_away")
-    "You see [the_person.name] is standing in front of a mirror, getting ready for a shower."
+    "You see [the_person.possessive_title] is standing in front of a mirror, getting ready for a shower."
     $ shower_clothing = the_person.outfit.remove_random_any(top_layer_first = True)
     while shower_clothing is not None:
-        "You see [the_person.name] undressing, taking off her [shower_clothing.name]"
+        "You see [the_person.possessive_title] undressing, taking off her [shower_clothing.name]"
         $ the_person.draw_animated_removal(shower_clothing, position = "walking_away")
         $ shower_clothing = the_person.outfit.remove_random_any(top_layer_first = True)
     "Now completely nude, she gets into the shower."
     "You see the water running down her chest."
     $ the_person.draw_person(position = "stand3", emotion = "happy")
-    "[the_person.name] turns around, with the water now going on her back and firm ass."
+    "[the_person.possessive_title] turns around, with the water now going on her back and firm ass."
     if the_person == mom:
-        "You can't help but admire your mom's great body and tits."
+        "You can't help but admire [the_person.possessive_title]'s great body and tits."
         "Just as this thought flashes through your mind, she starts rubbing her boobs."
     else:
-        "You can't help but admire your sister's slim body and perky tits."
+        "You can't help but admire [the_person.possessive_title]'s slim body and perky tits."
         "Just as this thought flashes through your mind, she starts rubbing her breasts, pinching her small nipples."
     $ arousal_plus = renpy.random.randint (10,50)
     $ the_person.change_arousal(arousal_plus)
     if the_person.sluttiness >=50 or the_person.get_opinion_score("masturbating") > 0 or the_person.arousal > 35:
-        "The warmth of the water and her caresses seem to turn [the_person.name] on."
+        "The warmth of the water and her caresses seem to turn [the_person.possessive_title] on."
         $ the_person.draw_person(position = "missionary")
         "She sits on the shower floor, spreads her legs and begins to masturbate with her hand."
         while the_person.arousal < 100:
             $ random_mast_descrip = renpy.random.randint(0,4)
             if random_mast_descrip == 0:
-                "[the_person.name] rubs her clit and her moans grow louder."
+                "[the_person.possessive_title] rubs her clit and her moans grow louder."
             elif random_mast_descrip == 1:
                 "As she gets more and more turned on, her hand is moving faster and faster."
             elif random_mast_descrip == 2:
@@ -72,12 +72,12 @@ label shower_crisis_action:
                 "She slow pushes a finger in her rectum..."
                 the_person.char "Mmmm, yes, make me your little anal slut."
             else:
-                "[the_person.name] pinches her nipples hard, wincing from exitement and pain."           
+                "[the_person.possessive_title] pinches her nipples hard, wincing from exitement and pain."           
             $ arousal_plus = renpy.random.randint (20,35)
             $ the_person.change_arousal (arousal_plus)
         the_person.char "Shit, I'm cumming!"
         $ the_person.draw_person(position = "missionary", emotion = "orgasm")
-        "You see [the_person.name]'s body shiver as she reaches orgasm."
+        "You see [the_person.possessive_title]'s body shiver as she reaches orgasm."
         the_person.char "Wow, that was intense. Need to be quieter or someone might just hear me."
         $ the_person.draw_person(position = "walking_away")
         "She gets up and returns to washing her body."
@@ -92,13 +92,13 @@ label shower_crisis_action:
     menu:
         "Join her." if mc.current_stamina > 0:
             "You decide to use this opportunity and join her."
-            mc.name "The door was not closed, how about we shower together, [the_person.name]?"
+            mc.name "The door was not closed, how about we shower together, [the_person.title]?"
             if the_person.sluttiness > 70 or the_person.arousal > 35:
                 $ the_person.draw_person(position = "back_peek", emotion = "happy")
-                "[the_person.name] turns her head when she hears your voice. You see her smile."
-                the_person.char "Well, that sounds lika a plan, [mc.name]. Come on, get in here."
+                "[the_person.possessive_title] turns her head when she hears your voice. You see her smile."
+                the_person.char "Well, that sounds lika a plan, [the_person.mc_title]. Come on, get in here."
                 "You quickly take off your clothes and step into the shower."
-                "[the_person.name] stands still as you hug her from behind. Your erect dick pushing against her bottom."
+                "[the_person.possessive_title] stands still as you hug her from behind. Your erect dick pushing against her bottom."
                 the_person.char "Ow, I feel that someone is happy to see me. Why don't you slide it in?"
                 # move to shower for fucking, then go back to original location
                 $ current_location = mc.location
@@ -107,8 +107,8 @@ label shower_crisis_action:
                 $ mc.location = current_location
             else:
                 $ the_person.draw_person(position = "back_peek", emotion = "angry")
-                "[the_person.name] quickly turns her head, you see the rage on her face."
-                the_person.char "What the fuck, [mc.name]? Can't you see I'm naked here? Get lost, you perv!"
+                "[the_person.possessive_title] quickly turns her head, you see the rage on her face."
+                the_person.char "What the fuck, [the_person.mc_title]? Can't you see I'm naked here? Get lost, you perv!"
                 "You quickly leave the bathroom."
                 $ the_person.happiness -= 5
         "Join her. (disabled)" if not mc.current_stamina > 0:

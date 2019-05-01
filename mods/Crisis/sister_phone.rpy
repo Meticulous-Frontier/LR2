@@ -11,7 +11,7 @@ init 3 python:
         return False
 
     sister_phone_crisis = ActionMod("Sister Phone Message",sister_phone_crisis_requirement,"sister_phone_action_description", 
-        menu_tooltip = "Your sister sends you phone messages", category="Home")
+        menu_tooltip = "[the_person.possessive_title] sends you phone messages", category="Home")
     crisis_list.append([sister_phone_crisis, sister_phone_mod_weight])
 
 label sister_phone_action_description:
@@ -26,7 +26,7 @@ label sister_phone_crisis_action:
     if the_person.love < lowest_stat:
         $ lowest_stat = lily.love
 
-    "While you're going about your day you get a text from your sister."
+    "While you're going about your day you get a text from [the_person.possessive_title]."
     if lowest_stat >= 100:
         #Both love and sluttiness are very high, she sends you super slutty selfies and says she can't wait till you come home, fuck her, and make her your girl.
         $ ran_num = renpy.random.randint(1,3) #Used to determine which varient we use to avoid spamming the player with the exact same texts.
@@ -35,24 +35,24 @@ label sister_phone_crisis_action:
                 $ the_person.outfit = lingerie_wardrobe.pick_random_outfit()
                 $ the_person.draw_person(position = "missionary", emotion = "happy")
                 "Her first message is a selfie of herself lying down on your bed in lingerie."
-                the_person.char "I can't wait until you come home and give me what I need. I wish I could spend every minute of every day worshiping your cock like a good little sister should."
+                the_person.char "I can't wait until you come home and give me what I need. I wish I could spend every minute of every day worshiping your cock like a [the_person.possessive_title] should."
             else:
                 the_person.char "It's so hard not to talk about you at school. The other girls are gossiping and I just want to tell them how good it feels when you try and breed me..."
-                the_person.char "My pussy full of your warm cum, knowing that I can take care of you the way only a good sister could."
-                the_person.char "I think I'm going to go touch myself in the bathroom. I hope you are having a great day too big brother!"
+                the_person.char "My pussy full of your warm cum, knowing that I can take care of you the way only a [the_person.possessive_title] could."
+                the_person.char "I think I'm going to go touch myself in the bathroom. I hope you are having a great day too [the_person.mc_title]!"
         elif ran_num == 2:
             python:
                 for i in range(3):
                     the_person.outfit.remove_random_upper(top_layer_first = True)
                     the_person.outfit.remove_random_lower(top_layer_first = True)
-            the_person.char "Hi big brother, I hope I'm not interrupting your busy work day. This is just a quick reminder..."
+            the_person.char "Hi [the_person.mc_title], I hope I'm not interrupting your busy work day. This is just a quick reminder..."
             $ the_person.draw_person(emotion = "happy")
-            "You get a selfie from your sister naked in front of her bedroom mirror."
-            the_person.char "That your little sister wants to feel you inside her tonight. Don't stay out too late!"
+            "You get a selfie from [the_person.possessive_title] naked in front of her bedroom mirror."
+            the_person.char "That your [the_person.possessive_title] wants to feel you inside her tonight. Don't stay out too late!"
         else:
             $ the_person.outfit = lingerie_wardrobe.pick_random_outfit()
             $ the_person.draw_person(position = "blowjob", emotion = "happy")
-            "Your sister sends you a picture of herself sitting on her knees wearing some lingerie."
+            "[the_person.possessive_title] sends you a picture of herself sitting on her knees wearing some lingerie."
             the_person.char "I can't wait to see you. So I can suck your big dick, like the good little cocksucker that I am."
 
     elif lowest_stat >= 80:
@@ -66,7 +66,7 @@ label sister_phone_crisis_action:
                         the_person.outfit.remove_random_upper(top_layer_first = True)
                         the_person.outfit.remove_random_lower(top_layer_first = True)
                 $ the_person.draw_person(position = "standing_doggy")
-                "Your sister sends you a selfie her bedroom naked and bent over her bed."
+                "[the_person.possessive_title] sends you a selfie her bedroom naked and bent over her bed."
             else:
                 the_person.char "I'm stuck here at school and all I can think about is you. Wish you were here..."
                 python:
@@ -74,7 +74,7 @@ label sister_phone_crisis_action:
                         the_person.outfit.remove_random_upper(top_layer_first = True)
                         the_person.outfit.remove_random_lower(top_layer_first = True)
                 $ the_person.draw_person(position = "standing_doggy")
-                "Your sister sends you a selfie of herself in the school bathroom, naked and bending over the sink."
+                "[the_person.possessive_title] sends you a selfie of herself in the school bathroom, naked and bending over the sink."
 
         else:
             if mc.business.is_weekend():
@@ -87,14 +87,14 @@ label sister_phone_crisis_action:
         $ ran_num = renpy.random.randint(1,4) #Used to determine which varient we use to avoid spamming the player with the exact same texts.
         if ran_num == 1:
             if mc.business.is_weekend():
-                the_person.char "I was just about to get in the shower and I thought you might like a peek. Love you big brother!"
+                the_person.char "I was just about to get in the shower and I thought you might like a peek. Love you [the_person.mc_title]!"
                 python:
                     for i in range(3):
                         the_person.outfit.remove_random_upper(top_layer_first = True)
                         if the_person.outfit.panties_covered: #If we get down to her panties keep them on, because that's sexier.
                             the_person.outfit.remove_random_lower(top_layer_first = True)
                 $ the_person.draw_person(emotion = "happy")
-                "Your sister sends you a picture of herself stripped down in front of her bedroom mirror."
+                "[the_person.possessive_title] sends you a picture of herself stripped down in front of her bedroom mirror."
 
             else:
                 the_person.char "I thought you might be stressed so I snuck away from school to take this for you."
@@ -104,7 +104,7 @@ label sister_phone_crisis_action:
                         if the_person.outfit.panties_covered:
                             the_person.outfit.remove_random_lower(top_layer_first = True)
                 $ the_person.draw_person(emotion = "happy")
-                "Your sister sends you a picture of herself stripped down in the park."
+                "[the_person.possessive_title] sends you a picture of herself stripped down in the park."
                 the_person.char "I've got to get back to class. I hope nobody noticed me gone!"
 
         elif ran_num == 2:
@@ -114,17 +114,17 @@ label sister_phone_crisis_action:
                     the_person.outfit.remove_random_upper(top_layer_first = True)
                     the_person.outfit.remove_random_lower(top_layer_first = True)
             $ the_person.draw_person(emotion = "happy")
-            "Your sister sends you a picture of herself stripped naked in front of her bathroom mirror."
+            "[the_person.possessive_title] sends you a picture of herself stripped naked in front of her bathroom mirror."
         elif ran_num == 3:
             the_person.char "I've been trying on underwear all day. Would you like a peek?"
 
-            "Your sister doesn't wait for a reply and starts sending selfies."
+            "[the_person.possessive_title] doesn't wait for a reply and starts sending selfies."
             python:
                 for i in range(3):
                     the_person.outfit = the_person.wardrobe.get_random_appropriate_underwear(lowest_stat)
                     the_person.draw_person(emotion = "happy")
                     renpy.say("","")
-            the_person.char "I hope you think your little sis looks sexy in her underwear ;)"
+            the_person.char "I hope you think your [the_person.possessive_title] looks sexy in her underwear ;)"
         else:
             python:
                 while not the_person.outfit.tits_visible():
@@ -150,21 +150,21 @@ label sister_phone_crisis_action:
             $ the_person.outfit.remove_random_upper(top_layer_first = True)
             $ the_person.draw_person(emotion = "happy")
             if mc.business.is_weekend():
-                "Your sister sends you a selfie without her shirt on. The background looks like her bedroom."
+                "[the_person.possessive_title] sends you a selfie without her shirt on. The background looks like her bedroom."
             else:
-                "Your sister sends you a sends you a selfie without her shirt on. It looks like it was taken in a bathroom of her school."
+                "[the_person.possessive_title] sends you a sends you a selfie without her shirt on. It looks like it was taken in a bathroom of her school."
 
         elif ran_num == 2:
             if mc.business.is_weekend():
-                the_person.char "I wish you were here spending time with me. Maybe this will convince you your sister is a cool person to hang out with!"
+                the_person.char "I wish you were here spending time with me. Maybe this will convince you [the_person.possessive_title] is a cool person to hang out with!"
                 $ the_person.outfit.remove_random_upper(top_layer_first = True)
                 $ the_person.draw_person(emotion = "happy")
-                "Your sister sends you a selfie from her bedroom without her shirt on."
+                "[the_person.possessive_title] sends you a selfie from her bedroom without her shirt on."
             else:
                 the_person.char "I'm busy here at school but I really wish I could be spending time with you instead. Do you think I'm pretty enough to spend time with ;)"
                 $ the_person.outfit.remove_random_upper(top_layer_first = True)
                 $ the_person.draw_person(emotion = "happy")
-                "Your sister sends you a selfie without her shirt on. It looks like it's taken in the bathroom of her school."
+                "[the_person.possessive_title] sends you a selfie without her shirt on. It looks like it's taken in the bathroom of her school."
 
         else:
             $ the_clothing = the_person.outfit.remove_random_upper(top_layer_first = True, do_not_remove = True)
@@ -173,14 +173,14 @@ label sister_phone_crisis_action:
                 the_person.char "It looks like my [the_clothing.name] didn't like being in the wash, it's gone all see-through."
                 $ the_person.draw_person(emotion = "happy")
                 if the_clothing.underwear:
-                    "You get a selfie from your sister wearing a slightly transparent bra."
+                    "You get a selfie from [the_person.possessive_title] wearing a slightly transparent bra."
                 else:
-                    "You get a selfie from your sister wearing a slightly transparent top."
+                    "You get a selfie from [the_person.possessive_title] wearing a slightly transparent top."
                 the_person.char "Oh well, I can still wear it when I'm doing chores around the house. Hope your day is going better, love you!"
             else:
                 the_person.char "I've looked everywhere, but I just can't find my favourite bra!"
                 $ the_person.draw_person(emotion = "default")
-                "Your sister sends you a short video of herself walking around your home. Her bare tits bounce with each step."
+                "[the_person.possessive_title] sends you a short video of herself walking around your home. Her bare tits bounce with each step."
                 the_person.char "You don't happen to know where it is, do you? I'm wandering around looking for it and it's getting chilly!"
 
     elif lowest_stat >= 20:
@@ -188,45 +188,45 @@ label sister_phone_crisis_action:
         $ ran_num = renpy.random.randint(1,5) #Used to determine which varient we use to avoid spamming the player with the exact same texts.
         if ran_num == 1:
             the_person.char "I hope I'm not interrupting, I just wanted to say hi and check in. I'm stuck here at school but wish I could spend more time with you."
-            the_person.char "Have a great day, see you later tonight. Love, sis."
+            the_person.char "Have a great day, see you later tonight. Love, [the_person.possessive_title]."
 
         elif ran_num == 2:
-            the_person.char "I hope you are having a great day big brother! Imagining you out there working so hard makes me prouder than you can imagine!"
-            the_person.char "I'm looking forward to seeing you at home tonight. Love, sis."
+            the_person.char "I hope you are having a great day [the_person.mc_title]! Imagining you out there working so hard makes me prouder than you can imagine!"
+            the_person.char "I'm looking forward to seeing you at home tonight. Love, [the_person.possessive_title]."
 
         elif ran_num == 3:
             the_person.char "I hope you aren't busy, I was thinking about you and just wanted to say hi!"
             $ the_person.draw_person(emotion = "happy")
             if mc.business.is_weekend():
-                "Your sister sends you a selfie she took in the living room of your house."
+                "[the_person.possessive_title] sends you a selfie she took in the living room of your house."
             else:
-                "Your sister sends you a selfie she took from the bathroom at school."
+                "[the_person.possessive_title] sends you a selfie she took from the bathroom at school."
         elif ran_num == 4:
             the_person.char "I'm always sending selfies to my friends, so I hope you like me sending them to you too!"
             $ the_person.draw_person(emotion = "happy")
             if mc.business.is_weekend():
-                "Your sister sends you a selfie she took in the living room of your house."
+                "[the_person.possessive_title] sends you a selfie she took in the living room of your house."
             else:
-                "Your sister sends you a selfie she took in the bathroom at school."
+                "[the_person.possessive_title] sends you a selfie she took in the bathroom at school."
         else:
-            the_person.char "All your hard work has inspired me big brother, I'm going out for a walk to stay in shape!"
+            the_person.char "All your hard work has inspired me [the_person.mc_title], I'm going out for a walk to stay in shape!"
             $ the_person.draw_person(emotion = "happy")
-            "Your sister sends you a short video she took of herself outside. She's keeping up a brisk walk and seems slightly out of breath."
+            "[the_person.possessive_title] sends you a short video she took of herself outside. She's keeping up a brisk walk and seems slightly out of breath."
             if not the_person.outfit.wearing_bra and the_person.has_large_tits:
-                "She doesn't seem to realise it but it's very obvious your sister isn't wearing a bra under her shirt. Her sizeable breasts heave up and down with each step."
+                "She doesn't seem to realise it but it's very obvious [the_person.possessive_title] isn't wearing a bra under her shirt. Her sizeable breasts heave up and down with each step."
 
     else:
         #Sends you normal sisterly texts.
         $ ran_num = renpy.random.randint(1,3) #Used to determine which varient we use to avoid spamming the player with the exact same texts.
         if ran_num == 1:
-            the_person.char "I hope I'm not interrupting your busy day big brother. I just wanted to let you know that I'm proud of you and you're doing great work."
+            the_person.char "I hope I'm not interrupting your busy day [the_person.mc_title]. I just wanted to let you know that I'm proud of you and you're doing great work."
             the_person.char "Keep it up! See you at dinner ;)"
 
         elif ran_num == 2:
-            the_person.char "Remember that your sister loves you! Have a great day!"
+            the_person.char "Remember that [the_person.possessive_title] loves you! Have a great day!"
 
         else:
-            the_person.char "Hi big brother, I'm just checking in to make sure you're doing okay."
+            the_person.char "Hi [the_person.mc_title], I'm just checking in to make sure you're doing okay."
             "It's so sweet of her to think of you."
 
     $ the_person.reset_outfit() #Make sure to reset her outfit so she is dressed properly.

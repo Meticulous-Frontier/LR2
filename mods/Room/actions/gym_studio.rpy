@@ -31,7 +31,7 @@ label select_person_for_gym():
         if person_choice == "Back":
             renpy.jump("game_loop") # Where to go if you hit "Back".
         else:
-            renpy.say("","You send a text message to " + person_choice.name + " about a gym session.")
+            renpy.say("","You send a text message to " + person_choice.title + " about a gym session.")
             renpy.say("", "After some time you get a response...")
 
     call select_person_for_gym_response(person_choice)# What to do if "Back" was not the choice taken.
@@ -42,16 +42,16 @@ label select_person_for_gym_response(person_choice):
     $ the_person = person_choice
     
     if the_person.personality == bimbo_personality:
-        the_person.char "Cumming right away, [mc.name]!"
+        the_person.char "Cumming right away, [the_person.mc_title]!"
     elif the_person.obedience > 120:
         the_person.char "Yes, Sir. I am on my way."
     elif the_person.sluttiness > 30:
-        the_person.char "Yes, [mc.name]. I am on my way."
+        the_person.char "Yes, [the_person.mc_title]. I am on my way."
     elif the_person.sluttiness > the_person.obedience:
-        the_person.char "Yes, [mc.name], are you going to train me personally?"
+        the_person.char "Yes, [the_person.mc_title], are you going to train me personally?"
     elif the_person.happiness < 100 and the_person.love > 20:
         $ the_person.draw_person(emotion = "happy")
-        the_person.char "Thanks for the attention, [mc.name]."
+        the_person.char "Thanks for the attention, [the_person.mc_title]."
         $ the_person.change_happiness(+10)
     elif the_person.happiness < 100:
         $ the_person.draw_person(emotion = "sad")
@@ -60,7 +60,7 @@ label select_person_for_gym_response(person_choice):
         $renpy.scene("Active")
         return
     else:
-        the_person.char "Sounds good, I'll be right there [mc.name]."
+        the_person.char "Sounds good, I'll be right there [the_person.mc_title]."
         $ the_person.change_happiness(+10)
     # End of respones
     call train_in_gym(the_person) from _call_train_in_gym_person_for_gym

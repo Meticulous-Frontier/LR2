@@ -26,14 +26,14 @@ label train_in_gym(person):
     $ change = renpy.random.random() * 4 # Maximum change is 4 kg
 
     if change < 2:
-        "You and [person.name] spend a few hours working out."
+        "You and [person.possessive_title] spend a few hours working out."
     else:
-        "You put [person.name] through a vigorous training session."
+        "You put [person.possessive_title] through a vigorous training session."
 
     $ body_changed = person.change_weight(-change, 100)
     $ new_weight = get_person_weight_string(person)
 
-    "After the training session [person.name] weighs [new_weight] lbs."
+    "After the training session [person.possessive_title] weighs [new_weight] lbs."
 
     if body_changed:
         $ person.draw_person(person.body_type)
@@ -46,7 +46,7 @@ label train_in_gym(person):
             menu:
                 "Have Sex" if mc.current_stamina > 0:
                     mc.name "Lets go to the shower room."
-                    person.char "Lead the way, [mc.name]."
+                    person.char "Lead the way, [person.mc_title]."
                     $ change_scene_display(gym_shower)
 
                     call fuck_person(person) from _call_fuck_person_gym_training
@@ -57,8 +57,8 @@ label train_in_gym(person):
                     $ person.change_happiness(-10)
 
     $ person.reset_arousal()
-    person.char "Thank you, [mc.name]."
-    mc.name "Bye [person.name], see you next time."
+    person.char "Thank you, [person.mc_title]."
+    mc.name "Bye [person.possessive_title], see you next time."
 
     $ mc.business.funds -= 40
 
