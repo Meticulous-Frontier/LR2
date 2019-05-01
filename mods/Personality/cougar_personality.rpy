@@ -2,11 +2,26 @@
 
 init 1400 python:
     def cougar_titles(person):
-        return person.name
+        valid_titles = [the_person.name]
+        if the_person.love > 25:
+            valid_titles.append("Cougar")
+        return valid_titles
     def cougar_possessive_titles(the_person):
-        return "Your milf"
+        valid_titles = relaxed_titles(the_person)
+        if the_person.sluttiness > 60:
+            valid_possessive_titles.append("Your slutty cougar")
+        if the_person.sluttiness > 100:
+            valid_possessive_titles.append("Your cum-dump cougar")
+        return valid_titles
     def cougar_player_titles(the_person):
-        return mc.name
+        valid_player_titles = [mc.name]
+        if the_person.happiness < 70:
+            valid_player_titles.append("Litle boy")
+        if the_person.love > 25:
+            valid_player_titles.append("Darling")
+        if the_person.sluttiness > 60
+            valid_player_titles.append("Young stud")
+        return valid_player_titles
 
     cougar_personality = Personality("cougar", default_prefix = "cougar", #Cougar style personality
         common_likes = ["skirts", "small talk", "Mondays", "the weekend", "the colour red", "makeup", "sports", "flirting", "HR work"],
