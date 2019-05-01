@@ -14,16 +14,6 @@ init 3 python:
 
     purchase_rooms = ActionMod("Purchase Rooms", purchase_rooms_requirement, "purchase_rooms", initialization = purchase_rooms_initialization,
         menu_tooltip = "Purchase rooms and facilities", category = "Business")
-
-
-label purchase_rooms_mod_init_label():
-    python:
-        office.actions.append(purchase_rooms)
-        purchase_rooms_mod_init = True
-    if purchase_rooms_mod_init == True:
-        "Purchasable rooms added to office"
-    return
-
 # Categorized rooms into tiers for their cost.
 # TODO: Show different disabled message if room purchased
 init 2 python:
