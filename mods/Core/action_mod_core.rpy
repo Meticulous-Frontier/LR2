@@ -81,10 +81,6 @@ init 2 python:
 
         def toggle_enabled(self):
             self.enabled = not self.enabled
-        
-        def getinstances(self):
-            for instance in self._instances:
-                yield instance()
 
     def action_mod_settings_requirement():
         return True
