@@ -5,7 +5,7 @@ init -1 python:
 init 2 python:
     def business_lunchcrisis_requirement():
         if not mc.business.is_weekend(): 
-            if time_of_day > 1 or time_of_day < 4: # only during morning afternoon or evening
+            if time_of_day > 1 and time_of_day < 4: # only during morning afternoon or evening
                 return True
         return False
 
@@ -41,7 +41,7 @@ label business_meeting_action:
             call business_meeting_seduction(the_person) from _call_business_meeting_seduction_1
         else:
             $ the_person.change_happiness(5)
-            "After a while she wraps her her story."
+            "After a while she wraps up her story."
     else:
         $ the_person.change_happiness(5)
         "She finishes up her proposal."
