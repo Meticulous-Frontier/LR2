@@ -59,7 +59,7 @@ init python: # This space is reserved for definitions used to simplify the code
 
     def cheat_serum_traits(): # Researches all the traits in list_of_traits
         for trait in list_of_traits:
-            if trait.tier =< mc.business.research_tier:
+            if trait.tier <= mc.business.research_tier:
                 trait.researched = True
 
     def cheat_default_person(): # Ensures that a person with valid attributes is always set
@@ -640,7 +640,7 @@ screen cmw(): # Cheats affecting the general world
                 textbutton "Crisis & Events" action ToggleVariable("cml") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "List of crisis and events"
 
                 if cml:
-                    $ total_pages = 3 
+                    $ total_pages = 3
                     textbutton "Next Page: [cmlpage]" action [If(cmlpage == total_pages, true = SetVariable("cmlpage", cmlpage - total_pages + 1), false = SetVariable("cmlpage", cmlpage + 1))] alternate [If(cmlpage == 1, true = SetVariable("cmlpage", cmlpage + total_pages - 1), false = SetVariable("cmlpage", cmlpage - 1))] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "Shift through pages"
 
             if cml == True and cmlpage == 1: # Page 1 Work Related Crisis Events
@@ -715,7 +715,7 @@ screen cmw(): # Cheats affecting the general world
                     textbutton "Town Walk" action Call("town_walk_action_description") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Taking an afternoon stroll through town"
                     textbutton "Going to the Gym" action Call("select_person_for_gym") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Give an employee a training session at the gym"
                     textbutton "Business Meeting" action Call("business_meeting_action") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Taking an afternoon stroll through town"
-                    
+
             # if cml == True and cmlpage == 4: # Page 4
 
             # if cml == True and cmlpage == 5: # Page 5 If you want to add additional pages modify the "Next Page" text button as well!
