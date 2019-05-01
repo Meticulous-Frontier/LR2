@@ -19,7 +19,7 @@ init 1400 python:
             valid_player_titles.append("Litle boy")
         if the_person.love > 25:
             valid_player_titles.append("Darling")
-        if the_person.sluttiness > 60
+        if the_person.sluttiness > 60:
             valid_player_titles.append("Young stud")
         return valid_player_titles
 
