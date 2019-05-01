@@ -59,6 +59,7 @@ init python: # This space is reserved for definitions used to simplify the code
 
     def cheat_serum_traits(): # Researches all the traits in list_of_traits
         for trait in list_of_traits:
+            if trait.tier =< mc.business.research_tier:
                 trait.researched = True
 
     def cheat_default_person(): # Ensures that a person with valid attributes is always set
@@ -610,7 +611,7 @@ screen cmc(): # Cheats for business / company
                 hbox:
                     vbox:
                         textbutton "Research Tier: [mc.business.research_tier]" action SetField(mc.business, "research_tier", mc.business.research_tier + 1) alternate SetField(mc.business, "research_tier", mc.business.research_tier - 1) style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "If set to 3 or higher you unlock the requirement to research advanced serums"
-                        textbutton "Unlock all traits" action Function(cheat_serum_traits) style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "Unlocks all traits without the need to research them"
+                        textbutton "Unlock all traits" action Function(cheat_serum_traits) style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "Unlocks all traits in your current or lower research tier without the need to research them"
 screen cmw(): # Cheats affecting the general world
     zorder 49
     frame: # Top Frame
