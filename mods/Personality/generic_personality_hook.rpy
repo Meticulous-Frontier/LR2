@@ -1,5 +1,11 @@
+# Genric Personality Hook by Tristimdorion
 # overrides the default make person function in the game
 # so we can add / change person characteristics based on custom personalities.
+
+# Use the Hijack Original Label function to add your own features to any new personality
+# Note that the function will have a parameter "person" that contains the random created person
+#   init 5 python:
+#       add_label_hijack("update_random_person", "your_custom_personality_function")
 
 init 1 python:
     # This will be called in game when a person is created orginal function in script.rpy

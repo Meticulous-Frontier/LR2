@@ -1,7 +1,11 @@
-## Hijack Original Label
+## Hijack Original Label by Tristimdorion
 # If you want run your MOD label after an an in game label you just need to call
 # the add_label_hijack method, since we store all hijacked labels, you can attach
 # your code to any base game code, without changing the original game code.
+
+# Make sure you append following lines, so you don't break the hijack functionality
+#         # continue on the hijack stack if needed
+#         execute_hijack_call(stack)
 
 init 2 python:
     hijack_list = []

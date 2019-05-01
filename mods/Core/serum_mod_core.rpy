@@ -1,5 +1,38 @@
+# SERUM MOD CORE by Tristimdorion
+# Its used for adding new SerumTraits to the game
+# Create a SerumTraitMod class, it has the same parameters as the VREN Action class.
+# SerumTraitMod is added to save games when not present, the matching is based on the name property, so make sure it's unique (and don't change it between releases)
+
+### TEMPLATE ###
+# init -1 python:
+#     def anorexia_serum_on_turn(person, add_to_log):
+#         return person.change_weight(amount = -.2, chance = 20)       
+
+# # any label that starts with serum_mod is added to the serum mod list
+# label serum_mod_anorexia_serum_trait(stack):
+#     python:
+#         anorexia_serum_trait = SerumTraitMod(name = "Anorexia Serum",
+#             desc = "Decrease target subject body mass, using peptide YY3-36 as a serum component that acts on the hypothalamic feeding centers to inhibit hunger and calorie intake.",
+#             positive_slug = "-$15 Value, 20% Chance/Turn to reduce body mass by 200 grams",
+#             negative_slug = "+125 Serum Research",
+#             value_added = -15,
+#             research_added = 125,
+#             base_side_effect_chance = 20,
+#             on_turn = anorexia_serum_on_turn,
+#             requires = basic_med_app,
+#             tier = 1,
+#             research_needed = 500)
+
+#         # enable serum and append to mod_list
+#         anorexia_serum_trait.initialize()
+
+#         # continue on the hijack stack if needed
+#         execute_hijack_call(stack)
+#     return
+
 init 5 python:
     add_label_hijack("normal_start", "activate_serum_mod_core")
+    add_label_hijack("after_load", "update_serum_mod_core")
 
 init 2 python:
     class SerumTraitMod(SerumTrait):
@@ -19,9 +52,19 @@ init 2 python:
             # store the instance in class static    
             self._instances.add(self)
 
+        # check if SerumMod class is already in the game append if needed and update serum_mod_list / list_of_traits list
         def initialize(self):
-            serum_mod_list.append(self)
-            self.toggle_enabled()
+            remove_list = []
+            for serum_mod in self._instances:
+                if not serum_mod.name == self.name:
+                    serum_mod_list.append(self)
+                    self.toggle_enabled()
+                else:
+                    remove_list.append(serum_mod)
+            
+            # remove existing serum mods from instance list
+            for serum_mod in remove_list:
+                self._instances.remove(serum_mod)
 
         def toggle_enabled(self):
             self.enabled = not self.enabled
@@ -35,19 +78,30 @@ init 2 python:
     def serum_mod_settings_requirement():
         return True
 
+    # find all serum mods, and append the creation to the stack
+    def append_serum_mods_to_stack(stack):
+        for game_label in renpy.get_all_labels():
+            if game_label.startswith("serum_mod_"):
+                stack.append(game_label)
+        return stack
+
 label activate_serum_mod_core(stack):
     # define here using $ so it gets stored in save game
     $ serum_mod_list = []
     python:
-        # find all serum mods, and append the creation to the stack
-        for game_label in renpy.get_all_labels():
-            if game_label.startswith("serum_mod_"):
-                stack.append(game_label)
+        stack = append_serum_mods_to_stack(stack)
 
         # initalize configuration from bedroom
         serum_mod_options_action = Action("Serum MOD Settings", serum_mod_settings_requirement, "show_serum_mod_settings", menu_tooltip = "Enable or disable serum")
         bedroom.actions.append(serum_mod_options_action)
 
+        # continue on the hijack stack if needed
+        execute_hijack_call(stack)
+    return
+
+label update_serum_mod_core(stack):
+    python:
+        stack = append_serum_mods_to_stack(stack)
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return

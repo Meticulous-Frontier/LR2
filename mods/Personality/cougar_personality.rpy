@@ -1,4 +1,6 @@
 ## Cougar personality Mod by Tristimdorion
+# All girls in town older than 40 get this personality trait 
+# See generic_personality_hook.rpy for more information
 
 init 1400 python:
     def cougar_titles(person):
@@ -41,10 +43,12 @@ init 5 python:
 label correct_personality_age_action(stack):
     python:
         for person in all_people_in_the_game(excluded_people = [mc, lily, mom]):
+            # make cougars personalities the right age
             if person.personality == cougar_personality:
                 if person.age < 40: # split age for cougars
                     person.age = renpy.random.randint(40, 55)
                     # mc.log_event("Cougar " + person.name + " is " + str(person.age), "float_text_grey")
+            # make sure other personalities are not older than 40
             if person.personality != cougar_personality:
                 if person.age > 40: # split age for cougars
                     person.age = renpy.random.randint(18, 40)
