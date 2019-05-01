@@ -10,7 +10,7 @@ init 2 python:
                 return True
         return False
 
-    town_walk_crisis = Mod("Town Walk Crisis",town_walk_crisis_requirement,"town_walk_action_description", 
+    town_walk_crisis = ActionMod("Town Walk Crisis",town_walk_crisis_requirement,"town_walk_action_description", 
         menu_tooltip = "On occasion you take an afternoon stroll through town, someone did not close their bedroom curtains.")
     crisis_list.append([town_walk_crisis, town_walk_mod_weight])
 

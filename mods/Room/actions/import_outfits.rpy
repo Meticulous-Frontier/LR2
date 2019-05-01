@@ -50,13 +50,13 @@ init 2 python:
         office.actions.append(self)
         return
 
-    import_wardrobe_action = Mod("Import Wardrobe from XML", import_wardrobe_requirement, "import_wardrobe_label", 
+    import_wardrobe_action = ActionMod("Import Wardrobe from XML", import_wardrobe_requirement, "import_wardrobe_label", 
         initialization = import_wardrobe_mod_initialization, menu_tooltip = "Type the name of the XML file to import, case sensitive")
 
-    give_wardrobe_action = Mod("Give Wardrobe from XML", import_wardrobe_requirement, "give_wardrobe_label",
+    give_wardrobe_action = ActionMod("Give Wardrobe from XML", import_wardrobe_requirement, "give_wardrobe_label",
         initialization = give_wardrobe_mod_initialization, menu_tooltip = "Type the name of the XML file to give from, case sensitive")
 
-    give_uniform_action = Mod("Give Uniforms from XML", give_uniform_requirement, "give_uniform_label",
+    give_uniform_action = ActionMod("Give Uniforms from XML", give_uniform_requirement, "give_uniform_label",
         initialization = give_uniform_mod_initialization, menu_tooltip = "Type the name of the XML file to give from, case sensitive")
 
 label import_wardrobe_label():

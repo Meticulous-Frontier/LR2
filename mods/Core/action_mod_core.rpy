@@ -21,10 +21,7 @@
     #     gym.actions.append(self)
     #     return
 
-    # train_in_gym_action = Mod("Schedule Gym Session {image=gui/heart/Time_Advance.png}", gym_requirement, "select_person_for_gym", initialization = gym_initialization,  menu_tooltip = "Bring a person to the gym to train their body.")
-
-init -2 python:
-    action_mod_list = []
+    # train_in_gym_action = ActionMod("Schedule Gym Session {image=gui/heart/Time_Advance.png}", gym_requirement, "select_person_for_gym", initialization = gym_initialization,  menu_tooltip = "Bring a person to the gym to train their body.")
 
 init -1 python:
     def is_mod_enabled(action_name):
@@ -64,22 +61,30 @@ init -1 python:
     Action.is_disabled_slug_shown = is_disabled_slug_shown
 
 init 2 python:
-    class Mod(Action):
+    class ActionMod(Action):
+        # store instances of mod
+        _instances = set()
+
         def __init__(self, name, requirement, effect, args = None, requirement_args = None, menu_tooltip = None, initialization = None, category="Misc", enabled = True):
             self.initialization = initialization
             self.enabled = enabled
             self.category = category
 
             Action.__init__(self, name, requirement, effect, args, requirement_args, menu_tooltip)
-           
-            action_mod_list.append(self)
-      
+
+            # store the instance in class static
+            self._instances.add(self)
+
         def initialize(self):
             if not self.initialization is None:
                 self.initialization(self)
 
         def toggle_enabled(self):
             self.enabled = not self.enabled
+        
+        def getinstances(self):
+            for instance in self._instances:
+                yield instance()
 
     def action_mod_settings_requirement():
         return True
@@ -88,9 +93,12 @@ init 5 python:
     add_label_hijack("normal_start", "activate_action_mod_core")
 
 label activate_action_mod_core(stack):
+    # define here using $ so it gets stored in save game
+    $ action_mod_list = []
     python:
-        for mod in action_mod_list:
-            mod.initialize()
+        for action_mod in ActionMod._instances:
+            action_mod_list.append(action_mod)
+            action_mod.initialize()
 
         action_mod_options_action = Action("MOD Settings", action_mod_settings_requirement, "show_action_mod_settings", menu_tooltip = "Enable or disable mods")
         bedroom.actions.append(action_mod_options_action)

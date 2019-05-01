@@ -50,7 +50,7 @@ init 2 python:
         return
 
 
-    salon_action = Mod("Schedule a haircut", salon_requirement, "salon_label", initialization = hair_salon_mod_initialization, 
+    salon_action = ActionMod("Schedule a haircut", salon_requirement, "salon_label", initialization = hair_salon_mod_initialization, 
         menu_tooltip = "Change a persons hair style and color.", category="Mall")
 
 # Initilization segment - End

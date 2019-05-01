@@ -10,7 +10,7 @@ init 3 python:
                     return True
         return False
 
-    sister_phone_crisis = Mod("Sister Phone Message",sister_phone_crisis_requirement,"sister_phone_action_description", 
+    sister_phone_crisis = ActionMod("Sister Phone Message",sister_phone_crisis_requirement,"sister_phone_action_description", 
         menu_tooltip = "Your sister sends you phone messages", category="Home")
     crisis_list.append([sister_phone_crisis, sister_phone_mod_weight])
 

@@ -18,7 +18,7 @@ init 3 python:
         gym.actions.append(self)
         return
 
-    train_in_gym_action = Mod("Schedule Gym Session {image=gui/heart/Time_Advance.png}", gym_requirement, "select_person_for_gym", 
+    train_in_gym_action = ActionMod("Schedule Gym Session {image=gui/heart/Time_Advance.png}", gym_requirement, "select_person_for_gym", 
         initialization = gym_initialization, menu_tooltip = "Bring a person to the gym to train their body.", category="Mall")
        
 label select_person_for_gym():

@@ -9,7 +9,7 @@ init 2 python:
                 return True
         return False
 
-    business_lunchcrisis = Mod("Business Meeting Crisis", business_lunchcrisis_requirement, "business_meeting_action_description",
+    business_lunchcrisis = ActionMod("Business Meeting Crisis", business_lunchcrisis_requirement, "business_meeting_action_description",
         menu_tooltip = "An employee wants to discuss some business with you.", category = "Business")
     crisis_list.append([business_lunchcrisis, business_meeting_weight])
 
