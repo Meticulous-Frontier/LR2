@@ -57,7 +57,6 @@ init 2 python:
             remove_list = []
             for serum_mod in self._instances:
                 if not in_serum_mod_list(serum_mod.name):
-                    renpy.say("", "Adding " + self.name)
                     serum_mod_list.append(self)
                     self.toggle_enabled()
                 else: # already exists remove 
@@ -107,7 +106,6 @@ label activate_serum_mod_core(stack):
     return
 
 label update_serum_mod_core(stack):
-    "Update Serum Mods"
     python:
         stack = append_serum_mods_to_stack(stack)
         # continue on the hijack stack if needed
