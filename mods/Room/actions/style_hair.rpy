@@ -92,184 +92,182 @@ init -1 python:
 #    list_of_hairs.append()
 
 label hair_colors(person):
-        $ page = 1
-        $ leave = 0
-        while(leave ==0):
 
-            menu:
-                "Choose a hair color for [person.name], currently has [person.hair_colour] hair"
-                # Page 1, four elements per page
-                "Blond" if page == 1:
-                    $ person.hair_colour = "blond"
-                    $ salon_redraw_hair()
+    python:
+        page = 1
+        leave = False
 
-                "Brown" if page == 1:
-                    $ person.hair_colour = "brown"
-                    $ salon_redraw_hair()
+    "[person.name], currently has [person.hair_colour] hair, choose new color."
+    while not leave:
+        menu:
+            # Page 1, four elements per page
+            "Blond" if page == 1:
+                $ person.hair_colour = "blond"
+                $ salon_redraw_hair()
 
-                "Black" if page == 1:
-                    $ person.hair_colour = "black"
-                    $ salon_redraw_hair()
+            "Brown" if page == 1:
+                $ person.hair_colour = "brown"
+                $ salon_redraw_hair()
 
-                "Red" if page == 1:
-                    $ person.hair_colour = "red"
-                    $ salon_redraw_hair()
+            "Black" if page == 1:
+                $ person.hair_colour = "black"
+                $ salon_redraw_hair()
 
-                # Page 2
-                "Hot Pink" if page == 2:
-                    $ person.hair_colour = "hot pink"
-                    $ salon_redraw_hair()
+            "Red" if page == 1:
+                $ person.hair_colour = "red"
+                $ salon_redraw_hair()
 
-                "Alt Blond" if page == 2:
-                    $ person.hair_colour = "alt blond"
-                    $ salon_redraw_hair()
+            # Page 2
+            "Hot Pink" if page == 2:
+                $ person.hair_colour = "hot pink"
+                $ salon_redraw_hair()
 
-                "Sky Blue" if page == 2:
-                    $ person.hair_colour = "sky blue"
-                    $ salon_redraw_hair()
+            "Alt Blond" if page == 2:
+                $ person.hair_colour = "alt blond"
+                $ salon_redraw_hair()
 
-                "Grey" if page == 2:
-                    $ person.hair_colour = "light grey"
-                    $ salon_redraw_hair()
+            "Sky Blue" if page == 2:
+                $ person.hair_colour = "sky blue"
+                $ salon_redraw_hair()
 
-                # Page 3
-                "Fire Red" if page == 3:
-                    $ person.hair_colour = "fire red"
-                    $ salon_redraw_hair()
+            "Grey" if page == 2:
+                $ person.hair_colour = "light grey"
+                $ salon_redraw_hair()
 
-                "Knight Red" if page == 3:
-                    $ person.hair_colour = "knight red"
-                    $ salon_redraw_hair()
+            # Page 3
+            "Fire Red" if page == 3:
+                $ person.hair_colour = "fire red"
+                $ salon_redraw_hair()
 
-                "Purple" if page == 3:
-                    $ person.hair_colour = "purple"
-                    $ salon_redraw_hair()
+            "Knight Red" if page == 3:
+                $ person.hair_colour = "knight red"
+                $ salon_redraw_hair()
 
-                "Dark Grey" if page == 3:
-                    $ person.hair_colour = "dark grey"
-                    $ salon_redraw_hair()
+            "Purple" if page == 3:
+                $ person.hair_colour = "purple"
+                $ salon_redraw_hair()
 
-                #Page 4
+            "Dark Grey" if page == 3:
+                $ person.hair_colour = "dark grey"
+                $ salon_redraw_hair()
 
-                "Turquoise" if page == 4:
-                    $ person.hair_colour = "turquoise"
-                    $ salon_redraw_hair()
+            #Page 4
 
-                "Lime" if page == 4:
-                    $ person.hair_colour = "lime green"
-                    $ salon_redraw_hair()
+            "Turquoise" if page == 4:
+                $ person.hair_colour = "turquoise"
+                $ salon_redraw_hair()
 
-                "Mango" if page == 4:
-                    $ person.hair_colour = "mango"
-                    $ salon_redraw_hair()
+            "Lime" if page == 4:
+                $ person.hair_colour = "lime green"
+                $ salon_redraw_hair()
 
-                "Ocean" if page == 4:
-                    $ person.hair_colour = "ocean"
-                    $ salon_redraw_hair()
+            "Mango" if page == 4:
+                $ person.hair_colour = "mango"
+                $ salon_redraw_hair()
 
-                #Page 5
+            "Ocean" if page == 4:
+                $ person.hair_colour = "ocean"
+                $ salon_redraw_hair()
 
-                "Pulp" if page == 5:
-                    $ person.hair_colour = "pulp"
-                    $ salon_redraw_hair()
+            #Page 5
 
-                "Saturated" if page == 5:
-                    $ person.hair_colour = "saturated"
-                    $ salon_redraw_hair()
+            "Pulp" if page == 5:
+                $ person.hair_colour = "pulp"
+                $ salon_redraw_hair()
 
-                "Emerald" if page == 5:
-                    $ person.hair_colour = "emerald"
-                    $ salon_redraw_hair()
+            "Saturated" if page == 5:
+                $ person.hair_colour = "saturated"
+                $ salon_redraw_hair()
 
-                "Light Brown" if page == 5:
-                    $ person.hair_colour = "light brown"
-                    $ salon_redraw_hair()
+            "Emerald" if page == 5:
+                $ person.hair_colour = "emerald"
+                $ salon_redraw_hair()
 
-                "Next page":
-                    if page < 5:
-                        $ page += 1
-                    else:
-                        $ page = 1
-                "Back.":
-                    return
+            "Light Brown" if page == 5:
+                $ person.hair_colour = "light brown"
+                $ salon_redraw_hair()
+
+            "Next page":
+                if page < 5:
+                    $ page += 1
+                else:
+                    $ page = 1
+            "Back.":
+                return
 
 #"" if page == :
 #    $ person.hair_colour = ""
 #    $ salon_redraw_hair()
 label hair_style(person):
 
-    $ hair_style_check = person.hair_style #If hair_style_check is different than person.hair_style it means a "purchase" has been made.
-    $ hair_color_check = person.hair_colour
+    python:
+        hair_style_check = person.hair_style #If hair_style_check is different than person.hair_style it means a "purchase" has been made.
+        hair_color_check = person.hair_colour
 
-    $ salon_style_cost = int(60)
-    $ salon_dye_cost = int(30)
+        salon_style_cost = int(60)
+        salon_dye_cost = int(30)
 
-    $ salon_total_cost = salon_style_cost + salon_dye_cost
+        salon_total_cost = salon_style_cost + salon_dye_cost
 
+        page = 1
+        leave = False
 
-    $ page = 1
-    $ leave = 0
-    while(leave == 0):
-                menu:
-                    "Choose hair style, [person.name] currently has [person.hair_style.name]"
-                    # Page 1, have four elements per page
-                    "Short hair" if page == 1:
-                        $ person.hair_style = short_hair
-                        $ salon_redraw_hair()
+    "[person.name] currently has [person.hair_style.name], choose new style."
+    while not leave:
+        menu:
+            # Page 1, have four elements per page
+            "Short hair" if page == 1:
+                $ person.hair_style = short_hair
+                $ salon_redraw_hair()
 
-                    "Twin Ponytails" if page == 1:
-                        $ person.hair_style = twintail
-                        $ salon_redraw_hair()
+            "Twin Ponytails" if page == 1:
+                $ person.hair_style = twintail
+                $ salon_redraw_hair()
 
-                    "Ponytail" if page == 1:
-                        $ person.hair_style = ponytail
-                        $ salon_redraw_hair()
+            "Ponytail" if page == 1:
+                $ person.hair_style = ponytail
+                $ salon_redraw_hair()
 
-                    "Messy Ponytail" if page == 1:
-                        $ person.hair_style = messy_ponytail
-                        $ salon_redraw_hair()
+            "Messy Ponytail" if page == 1:
+                $ person.hair_style = messy_ponytail
+                $ salon_redraw_hair()
 
-                    # Page 2
-                    "Shaved Side Hair" if page == 2:
-                        $ person.hair_style = shaved_side_hair
-                        $ salon_redraw_hair()
+            "Shaved Side Hair" if page == 1:
+                $ person.hair_style = shaved_side_hair
+                $ salon_redraw_hair()
 
-                    "Long Hair" if page == 2:
-                        $ person.hair_style = long_hair
-                        $ salon_redraw_hair()
+            # Page 2
+            "Long Hair" if page == 2:
+                $ person.hair_style = long_hair
+                $ salon_redraw_hair()
 
-                    "Bow Hair" if page == 2:
-                        $ person.hair_style = bow_hair
-                        $ salon_redraw_hair()
+            "Bow Hair" if page == 2:
+                $ person.hair_style = bow_hair
+                $ salon_redraw_hair()
 
-                    "Messy Short Hair" if page == 2:
-                        $ person.hair_style = messy_short_hair
-                        $ salon_redraw_hair()
+            "Messy Short Hair" if page == 2:
+                $ person.hair_style = messy_short_hair
+                $ salon_redraw_hair()
 
-                    # Page 3
-                    "Messy Long Hair" if page == 3:
-                        $ person.hair_style = messy_hair
-                        $ salon_redraw_hair()
+            "Messy Long Hair" if page == 2:
+                $ person.hair_style = messy_hair
+                $ salon_redraw_hair()
 
-                    # Throwing in a couple of empty buttons to keep formating.
-                    "" if page == 3:
-                        pass
-                    "" if page == 3:
-                        pass
-                    "" if page == 3:
-                        pass
+            "Bobbed Hair" if page == 2:
+                $ person.hair_style = bobbed_hair
+                $ salon_redraw_hair()
 
-                    "Hair color selection...":
-                        call hair_colors(person)
+            "Change Hair Color":
+                call hair_colors(person)
 
-                    "Next page":
-                        if page < 3:
-                            $ page += 1
-                        else:
-                            $ page = 1
+            "Next page":
+                if page < 2:
+                    $ page += 1
+                else:
+                    $ page = 1
 
-                    "Back":
-                        $ leave = 1
-                        call salon_checkout() #Will return here if nothing qualifies
-                        $renpy.scene("Active")
-                        jump game_loop
+            "Leave Salon":
+                $ leave = True
+                call salon_checkout() #Will return here if nothing qualifies
+                $renpy.scene("Active")
+                jump game_loop
