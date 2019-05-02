@@ -10,6 +10,12 @@
 # If you do not have the mod core you can append the elevator_action yourself to the rooms you want it in with Roomname.actions.append(room_manager_action)
 
 # If you want characters other than the main character and defined characters to be able to roam the rooms make sure they are set to public with room.public = True
+
+init -1 python:
+    mod_rooms_append = [] # Rooms appended to this list will have the room_manager_action automatically appended to them so that you can access it via "Do something..."
+                              # It updates on first time startup of the mod and whenever an elevator / bus is entered so you can append to it whenever as long as at least ONE location
+                              # With access to the screen already exist.
+
 init 2 python:
     add_label_hijack("normal_start", "activate_room_manager")
 
@@ -19,9 +25,13 @@ init 3 python:
         for room in mod_rooms_append:
             if action not in room.actions:
                 room.actions.append(action)
+
+    def room_manager_initialization(self):
+        mod_room_manager_append(room_manager_action) # Appends the action to any room in the mod_rooms_append list.
+                                   #This is also done whenever accessing any entry points so a restart of the mod isn't required.
         return
 
-    room_manager_action = ActionMod("Enter the elevator", room_manager_action_requirement, "room_manager_action_label",
+    room_manager_action = ActionMod("Enter the elevator", room_manager_action_requirement, "room_manager_action_label", initialization = room_manager_initialization,
         menu_tooltip = "Visit rooms on different floors", category = "Misc")
 
         # Room(name,formalName,connections,background_image,objects,people,actions,public,map_pos, tutorial_label = None, visible = True)
@@ -88,19 +98,18 @@ label activate_room_manager(stack):
 
     $ mod_rooms = [] #Append to this list with room_mods.append(room_name) to have it show up in any of the elevators
 
-    # Return mod room lists (Copies of default mod room lists).
-    #mod_rooms_mall_return = [] # Do not touch these lists. They are checking towards the default mod lists in mod_rooms_return() and are automatically appended.
-
-    $ mod_rooms_append = [] # Rooms appended to this list will have the room_manager_action automatically appended to them so that you can access it via "Do something..."
+#    $ mod_rooms_append = [] # Rooms appended to this list will have the room_manager_action automatically appended to them so that you can access it via "Do something..."
                           # It updates on first time startup of the mod and whenever an elevator / bus is entered so you can append to it whenever as long as at least ONE location
                           # With access to the screen already exist.
-    $ mod_rooms_append.append(mall)
-    $ mod_rooms_append.append(downtown)
-    $ mod_rooms_append.append(hall)
-    $ mod_rooms_append.append(lobby)
 
-    # Enable the action in the custom elevator room.
-    $ mod_rooms_append.append(elevator)
+    if mall not in mod_rooms_append:
+        $ mod_rooms_append.append(mall)
+        $ mod_rooms_append.append(downtown)
+        $ mod_rooms_append.append(hall)
+        $ mod_rooms_append.append(lobby)
+
+        # Enable the action in the custom elevator room.
+        $ mod_rooms_append.append(elevator)
 
     # Have the default hubs always be available from within themselves.
     # Got to append them here as the rooms do not exist on list creation.
@@ -124,9 +133,9 @@ label activate_room_manager(stack):
 #        .append()
 #        .append()
 #        .append()
+#    $ mod_room_manager_append(room_manager_action) # Appends the action to any room in the mod_rooms_append list.
+                           #This is also done whenever accessing any entry points so a restart of the mod isn't required.
 
-    $ mod_room_manager_append(room_manager_action) # Appends the action to any room in the mod_rooms_append list.
-                               #This is also done whenever accessing any entry points so a restart of the mod isn't required.
     $ execute_hijack_call(stack)
     return
 
@@ -136,8 +145,7 @@ init 2 python: # Requirement for the elevator action to show in "Do something...
         return True
 
 label room_manager_action_label(): # What happens when you "Enter the elevator"
-    python:
-        mod_room_manager_append(room_manager_action) # Adds the action to any new room in the mod_rooms_append list that does not already have it.
+    $ mod_room_manager_append(room_manager_action) # Adds the action to any new room in the mod_rooms_append list that does not already have it. NOTE: having this enabled duplicates the action due to it being checked on the loading of saves now.
     if room_manager_tutorial == False: # Set to True if the player does not wish to see the message (ever) again.
         "Speaker" "This elevator acts as a hub for rooms added to the game via mods"
         "Speaker" "If you want a room to show up in the elevator do mod_rooms.append(room_name)"
