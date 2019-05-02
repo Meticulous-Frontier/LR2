@@ -204,11 +204,6 @@ label hair_style(person):
         hair_style_check = person.hair_style #If hair_style_check is different than person.hair_style it means a "purchase" has been made.
         hair_color_check = person.hair_colour
 
-        salon_style_cost = int(60)
-        salon_dye_cost = int(30)
-
-        salon_total_cost = salon_style_cost + salon_dye_cost
-
         page = 1
         leave = False
 
@@ -266,7 +261,5 @@ label hair_style(person):
                 else:
                     $ page = 1
 
-            "Leave Salon":
-                call salon_checkout() #Will return here if nothing qualifies
-                $renpy.scene("Active")
-                jump game_loop
+            "Finished":
+                return

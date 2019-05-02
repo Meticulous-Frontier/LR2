@@ -27,5 +27,7 @@ label cut_hair_label(person):
     "You ask [person.name] if you can change their style up a bit."
     $ person.draw_person()
     person.name "Sure, I don't see why not. You paying for it?"
-    call hair_style(person)
+    $renpy.scene("Active")
+    call salon_checkout
+    $renpy.scene("Active")
     return
