@@ -459,6 +459,7 @@ screen cmoc():
                         textbutton "Twin Ponytails" action [SetField(the_person,"hair_style", twintail), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                         textbutton "Long Hair" action [SetField(the_person,"hair_style", long_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                         textbutton "Bow Hair" action [SetField(the_person,"hair_style", bow_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        textbutton "Bobbed Hair" action [SetField(the_person,"hair_style", bobbed_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
 
             if capp and capphc: # Hair Color Options
                 hbox:
