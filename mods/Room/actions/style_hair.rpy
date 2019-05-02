@@ -267,7 +267,6 @@ label hair_style(person):
                     $ page = 1
 
             "Leave Salon":
-                $ leave = True
                 call salon_checkout() #Will return here if nothing qualifies
                 $renpy.scene("Active")
                 jump game_loop
