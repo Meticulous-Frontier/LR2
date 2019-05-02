@@ -73,8 +73,10 @@ label purchase_rooms():
 label purchase_dungeon_room(): #Enables the dugneon.
     if office_basement not in mod_rooms_lobby:
         $ mc.business.funds -= t1_cost
+
         $ mod_rooms_lobby.append(office_basement)
         $ mod_rooms_append.append(office_basement) # Gives an escape through the elevator
+
         $ advance_time()
 
     jump purchase_rooms
@@ -82,26 +84,36 @@ label purchase_dungeon_room(): #Enables the dugneon.
 # Tier 2 Rooms
 label purchase_security_room(): #Enables the security room.
     if m_division_basement not in mod_rooms_lobby:
+
         $ mc.business.funds -= t2_cost
+
         $ mod_rooms_lobby.append(m_division_basement)
         $ mod_rooms_append.append(m_division_basement) # Gives an escape through the elevator
+        $ m_division_basement.actions.append(security_overview_action)
+
         $ advance_time()
     jump purchase_rooms
 
 label purchase_machinery_room(): #Enables the machinery room
     if p_division_basement not in mod_rooms_lobby:
         $ mc.business.funds -= t2_cost
+
         $ mod_rooms_lobby.append(p_division_basement)
         $ mod_rooms_append.append(p_division_basement) # Gives an escape through the elevator
+
         $ advance_time()
     jump purchase_rooms
 
 # Tier 3 Rooms
 label purchase_biotech_room(): #Enables the biotech lab
     if rd_division_basement not in mod_rooms_lobby:
+
         $ mc.business.funds -= t3_cost
+
+        $ rd_division_basement.actions.append(biotech_action)
         $ mod_rooms_lobby.append(rd_division_basement)
         $ mod_rooms_append.append(rd_division_basement) # Gives an escape through the elevator
+
         $ advance_time()
     jump purchase_rooms
 
