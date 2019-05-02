@@ -53,12 +53,12 @@ label train_in_gym(person):
                 "Have Sex (disabled)\n {size=22}Requires: Stamina{/size}" if not mc.current_stamina > 0:
                     pass
                 "Another Time":
-                    mc.name "Sorry [person.name], another time."
+                    mc.name "Sorry [person.title], another time."
                     $ person.change_happiness(-10)
 
     $ person.reset_arousal()
     person.char "Thank you, [person.mc_title]."
-    mc.name "Bye [person.possessive_title], see you next time."
+    mc.name "Bye [person.title], see you next time."
 
     $ mc.business.funds -= 40
 
