@@ -9,7 +9,7 @@ init 3 python:
 
     biotech_action = Action("Do things in the lab", biotech_lab_requirement, "biotechs",
         menu_tooltip = "Do stuff")
-    rd_division_basement.actions.append(biotech_action)
+    
 
     def gene_modification_requirement():
         return True
