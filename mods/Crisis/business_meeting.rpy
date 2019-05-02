@@ -41,14 +41,24 @@ label business_meeting_action:
             call business_meeting_seduction(the_person) from _call_business_meeting_seduction_1
         else:
             $ the_person.change_happiness(5)
-            "After a while she wraps up her story."
+            "After a while [the_person.title] wraps up her story."
     else:
         $ the_person.change_happiness(5)
-        "She finishes up her proposal."
+        "[the_person.title] finishes up her proposal."
 
     $ the_person.reset_outfit() #Make sure to reset her outfit so she is dressed properly.
 
     call business_meeting_end(the_person) from _call_business_meeting_end_1
+
+    $ improvement_chance = renpy.random.randint(0, 100)
+    if improvement_chance < 40:
+        $ hr_employee = get_random_from_list(mc.business.hr_team)
+        if hr_employee == the_person:
+            "You give [the_person.title] a call and tell her that she can implement the changes you discussed."
+        else:
+            "You make a call to [hr_employee.title] from HR to implement some of the changes you discussed with [the_person.title]"
+        $ mc.business.team_effectiveness += 1
+        "The changes incease your business effectivity by one percent."
 
     hide screen person_info_ui
     $ the_person.reset_arousal()
@@ -84,7 +94,7 @@ label business_meeting_seduction(person):
     if person.sluttiness > 50:
         person.char "I'm sorry, it seems i've dropped something..."
         "She slides under the table grabbing your exposed cock looking up at you with a smile."
-        $ person.change_arousal(15)
+        $ person.change_arousal(25)
         menu:
             "Continue" if  mc.current_stamina > 0:
                 call fuck_person(person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_business_meeting
@@ -94,7 +104,7 @@ label business_meeting_seduction(person):
                 mc.name "I'm sorry [person.possessive_title], i've got another meeting to attend."
                 $ person.change_happiness(-5)
     else:
-        "After while she stops rubbing your exposed member."
+        "After while [person.title] stops rubbing your exposed member."
         person.char "I see you have some other business to take care off."
     return
 
@@ -102,17 +112,17 @@ label business_meeting_end(person):
     if person.obedience > 140:
         person.char "Thank you for your time, Sir!"
     else:
-        person.char "Thank you for the meeting."
+        person.char "Thank you for the meeting, [person.mc_title]!"
 
     if person.sluttiness < 30:
-        "You thank [person.name] for her time and that you will look into the matter."
+        "You thank [person.title] for her time and that you will look into the matter."
     else:
         mc.name "Thank you [person.possessive_title], this was very illuminating."
 
     $ the_person.draw_person(position="walking_away")
 
     if person.sluttiness < 30:
-        "You watch her walking away." 
+        "You watch her walking away, deciding what to do next." 
     else:
-        "After contemplating what just happend, you go back to work."
+        "After contemplating what just happend, you decide what to do next."
     return
