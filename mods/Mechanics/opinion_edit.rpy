@@ -22,42 +22,6 @@ init -1 python:
     sadist_list = [] # Sadistic behavior
 #    lewd_list = [] # Keywords that are considered sexual, to determine if something is to be thrown into sexy_opinions_list or opinions_list
 
-    def change_willpower(self, amount, add_to_log = True): #Logs change in willpower and shows new total.
-        self.willpower += amount
-        if self.willpower < 0:
-            self.willpower = 0
-        return person.willpower
-
-    # attach to person object
-    Person.change_willpower = change_willpower
-    #
-    def player_willpower():
-        mc.power = 0
-
-        mc.power += int(mc.charisma*5) # Positive character modifiers
-        mc.power += int(mc.current_stamina*1.5)
-        return mc.power
-
-    def calculate_willpower(person): # Calculates willpower for person
-        willpower = int(person.focus * 10 + person.happiness * 0.2 - person.obedience * 0.1 - person.love * 0.2 - person.suggestibility * 0.5)
-
-        if willpower < 0:
-            willpower = 0
-        return willpower
-
-    # log will power to event log in ui
-    def log_willpower(person):
-        message = person.name + ": "
-        if (person is mc):
-            message += str(person.power)
-        else:
-            message += str(person.willpower)
-        message += " Willpower"
-        mc.log_event(message, "float_text_blue")
-        return
-
-init -1 python:
-    pass
 
 label influence_opinion_input_label(person):
     # Have the player input an opinion then run checks on how person reacts to it.

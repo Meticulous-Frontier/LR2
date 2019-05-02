@@ -56,10 +56,11 @@ init 2 python:
         def initialize(self):
             remove_list = []
             for serum_mod in self._instances:
-                if not serum_mod.name == self.name:
+                if not in_serum_mod_list(serum_mod.name):
+                    renpy.say("", "Adding " + self.name)
                     serum_mod_list.append(self)
                     self.toggle_enabled()
-                else:
+                else: # already exists remove 
                     remove_list.append(serum_mod)
             
             # remove existing serum mods from instance list
@@ -74,6 +75,12 @@ init 2 python:
             else:
                 if self in list_of_traits:
                     list_of_traits.remove(self)
+
+    def in_serum_mod_list(serum_name):
+        for serum_mod in serum_mod_list:
+            if serum_mod.name == serum_name:
+                return True
+        return False
 
     def serum_mod_settings_requirement():
         return True
@@ -100,6 +107,7 @@ label activate_serum_mod_core(stack):
     return
 
 label update_serum_mod_core(stack):
+    "Update Serum Mods"
     python:
         stack = append_serum_mods_to_stack(stack)
         # continue on the hijack stack if needed

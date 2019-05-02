@@ -17,7 +17,6 @@ init -1 python:
                 room.labels = []
 
 
-
     def format_rooms(list_of_rooms, flavor = ""): # This can be kept as it formats rooms in a list for menu display.
         tuple_list = []
         for room in list_of_rooms:
