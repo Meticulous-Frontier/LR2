@@ -114,6 +114,8 @@ label purchase_biotech_room(): #Enables the biotech lab
         $ mod_rooms_lobby.append(rd_division_basement)
         $ mod_rooms_append.append(rd_division_basement) # Gives an escape through the elevator
 
+        $ list_of_places.append(rd_division_basement)
+
         $ advance_time()
     jump purchase_rooms
 
