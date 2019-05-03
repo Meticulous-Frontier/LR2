@@ -3,15 +3,15 @@ init -1 python:
     business_meeting_weight = 5
 
 init 2 python:
-    def business_lunchcrisis_requirement():
+    def business_meeting_requirement():
         if not mc.business.is_weekend(): 
             if time_of_day > 1 and time_of_day < 4: # only during morning afternoon or evening
                 return True
         return False
 
-    business_lunchcrisis = ActionMod("Business Meeting Crisis", business_lunchcrisis_requirement, "business_meeting_action_description",
+    business_meeting_action = ActionMod("Business Meeting Crisis", business_meeting_requirement, "business_meeting_action_description",
         menu_tooltip = "An employee wants to discuss some business with you.", category = "Business")
-    crisis_list.append([business_lunchcrisis, business_meeting_weight])
+    crisis_list.append([business_meeting_action, business_meeting_weight])
 
 label business_meeting_action_description:
     call business_meeting_action from _call_business_meeting_action_1
