@@ -27,28 +27,41 @@ label coffee_break_action:
     $ list_of_possible_people.remove(person_two)
     $ person_three = get_random_from_list(list_of_possible_people)
 
-    mc.name "As you are walking around the office, you see several employees at the coffee machine."
+    mc.name "As you are walking around the office, you see several employees at the coffee machine. They haven't noticed you, but you can hear what they are saying."
     $ person_one.draw_person(emotion = "default")
-    person_one.char "Telling a story."
-    $ person_two.draw_person(character_placement = character_center) #TODO: Build in better support for multi character drawing.
-    person_two.char "Listening"
-    $ person_three.draw_person(character_placement = character_left)
-    person_three.char "Listening"
+    person_one.char "Don't you think [the_person.mc_title] is really good looking."
+    $ person_two.draw_person(emotion = "default", character_placement = character_center_flipped) #TODO: Build in better support for multi character drawing.
+    person_two.char "I like how his butt flexes in his pants."
+    $ person_three.draw_person(emotion = "default", character_placement = character_left_flipped)
+    person_three.char "To be honest, I much more prefer the other side."
 
+    $ person_one.draw_person(emotion = "happy")
     $ person_two.draw_person(emotion = "happy")
-    person_two.char "Starts smiling"
-
     $ person_three.draw_person(emotion = "happy")
-    person_three.char "Starts laughing"
+    "The girls start lauging at [person_three.title]'s last remark."
 
-    person_three.char "That was very funny [person_one.name], but I have to get back to work."
-    $ person_three.draw_person(position = "walking_away")
-    person_two.char "Oh, she's such a stickler for rules."
-    $ person_three.reset_placement()
+    person_one.char "That was very funny [person_one.name], but I have to get back to work."
+    $ person_one.draw_person(position = "walking_away")
+    "[person_three.title] walks off to her workstation."
+    # remove person 1 from scene
+    $ person_one.clear_scene()
 
-    person_one.char "I don't mind seeing her go."
+    if person_two.sluttiness > 40:
+        #TODO: Make a three some with remaining girls
 
-    $ person_one.reset_placement()
-    $ person_two.reset_placement()
+        person_two.char "Oh, she's such a stickler for rules."
+        person_one.char "I don't mind seeing her go."
+    
+    else:
+        $ person_two.draw_person(character_placement = character_center)
+        person_two.char "Yeah, we better get going too."
+        $ person_two.draw_person(position = "walking_away")
+        $ person_three.draw_person(position = "walking_away")
 
+        "You watch [person_two.title] and [person_three.title] walk away together."
+
+    # remove person 2 from scene
+    $ person_two.clear_scene()
+    # remove person 3 from scene
+    $ person_three.clear_scene()
     return 

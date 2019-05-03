@@ -176,25 +176,30 @@ init -1:
         # attach to person object
         Person.change_willpower = change_willpower
 
-        ## ACTIVATE SCENE (used by DrawPerson Enhanced)
-        def activate_scene(self):
-            active_scene = "Active"
-            if self.last_placement == character_center:
-                active_scene = "Active2"
-            if self.last_placement == character_left:
-                active_scene = "Active3"
-            renpy.scene(active_scene)
-            return active_scene
-        # add scene action function for character placement
-        Person.activate_scene = activate_scene
+        ## change person placement on the screen
+        def change_placement(self, character_placement = None):
+            if character_placement is None:
+                character_placement = character_right
 
-        ## Reset person placement to original right position
-        def reset_placement(self):
-            activate_scene(self)
-            self.last_placement = character_right
+            if not self.last_placement is None and self.last_placement != character_placement: # we change location so clear current location.
+                old_scene_layer = current_scene_layer(self.last_placement)
+                renpy.scene(old_scene_layer)  
 
+            active_scene_layer = current_scene_layer(character_placement)
+            renpy.scene(active_scene_layer) # Clear current screen position for placement
+
+            self.last_placement = character_placement
+            return active_scene_layer
         # add extra function for charater placement
-        Person.reset_placement = reset_placement
+        Person.change_placement = change_placement
+
+        # removes person from scene
+        def clear_scene(self):
+            active_scene = current_scene_layer(self.last_placement)
+            self.last_placement = None
+            renpy.scene(active_scene)           
+        
+        Person.clear_scene = clear_scene
 
         def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, character_placement = None): #Draw the person, standing as default if they aren't standing in any other position.
             if position is None:
@@ -207,10 +212,8 @@ init -1:
 
             if character_placement is None: # make sure we don't need to pass the position with each draw
                 character_placement = self.last_placement or character_right
-            else:
-                self.last_placement = character_placement
 
-            active_scene = activate_scene(self)
+            active_scene = self.change_placement(character_placement)
 
             displayable_list.append(self.body_images.generate_item_displayable(self.body_type,self.tits,position)) #Add the body displayable
             displayable_list.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier)) #Get the face displayable
@@ -232,6 +235,7 @@ init -1:
             final_image = Composite(*composite_list) # Create a composite image using all of the displayables
 
             renpy.show(self.name,at_list=[character_placement, scale_person(self.height)],layer=active_scene,what=final_image,tag=self.name)
+            renpy.scene
 
         # replace the default draw_person function of the person class
         Person.draw_person = draw_person_enhanced
@@ -279,17 +283,46 @@ init -1:
             mc.log_event(message, "float_text_blue")
             return
 
+        # get scene layer for placement position
+        def current_scene_layer(character_placement):
+            active_scene = "Active"
+            if character_placement == character_center or character_placement == character_center_flipped:
+                active_scene = "Active2"
+            if character_placement == character_left or character_placement == character_left_flipped:
+                active_scene = "Active3"
+            return active_scene
+
 #########################################
 # Transormation for character_placement #
 #########################################
-        
+
+    transform character_right_flipped():
+        yalign 1.0
+        yanchor 1.0
+        xalign 1.0
+        xanchor 1.0
+        xzoom -1
+
     transform character_center():
         yalign 1.0
         yanchor 1.0
         xalign 0.75
         xanchor 1.0
 
+    transform character_center_flipped():
+        yalign 1.0
+        yanchor 1.0
+        xalign 0.75
+        xanchor 1.0
+        xzoom -1
+
     transform character_left():
+        yalign 1.0
+        yanchor 1.0
+        xalign 0.5
+        xanchor 1.0
+
+    transform character_left_flipped():
         yalign 1.0
         yanchor 1.0
         xalign 0.5
