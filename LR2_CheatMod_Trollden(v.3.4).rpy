@@ -716,6 +716,7 @@ screen cmw(): # Cheats affecting the general world
                     textbutton "Town Walk" action Call("town_walk_action_description") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Taking an afternoon stroll through town"
                     textbutton "Going to the Gym" action Call("select_person_for_gym") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Give an employee a training session at the gym"
                     textbutton "Business Meeting" action Call("business_meeting_action") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Taking an afternoon stroll through town"
+                    textbutton "Coffee Break" action Call("coffee_break_action") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip ""
 
             # if cml == True and cmlpage == 4: # Page 4
 

@@ -1,8 +1,8 @@
 init -1 python:
     def change_scene_display(the_location): #Switch displayed location and background image
-        renpy.scene()
+        renpy.scene("Active")
         renpy.show(the_location.name, what=the_location.background_image)
-        return
+        return   
 
     def assign_room_label(room, label_name): # Call labels through renpy.call(room.labels[0]) or through a for loop.
         if label_name not in room.labels:    # NOTE: This can be considered a useless function OR a shortcut to calling labels without having to go through Actions.
