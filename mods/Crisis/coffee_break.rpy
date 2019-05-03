@@ -10,7 +10,7 @@ init 2 python:
                     return True
         return False
 
-    coffee_break_action = ActionMod("Business Meeting Crisis", coffee_break_requirement, "coffee_break_action_description",
+    coffee_break_action = ActionMod("Coffee Break Crisis", coffee_break_requirement, "coffee_break_action_description",
         menu_tooltip = "A group of employees is having a coffee break.", category = "Business")
     crisis_list.append([coffee_break_action, coffee_break_weight])
 
