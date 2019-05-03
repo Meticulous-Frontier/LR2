@@ -9,7 +9,7 @@ init 3 python:
 
     biotech_action = Action("Do things in the lab", biotech_lab_requirement, "biotechs",
         menu_tooltip = "Do stuff")
-    
+
 
     def gene_modification_requirement():
         return True
@@ -109,6 +109,8 @@ label clone_person():
             $ clone.schedule[2] = rd_division_basement
             $ clone.schedule[3] = rd_division_basement
             $ clone.schedule[4] = rd_division_basement
+
+            $ clone.special_role.append(clone_role)
 
             $ rd_division_basement.add_person(clone) #Create rooms for the clones to inhabit until a schedule is given (through being hired or player input)
 
