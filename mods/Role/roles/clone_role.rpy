@@ -30,6 +30,16 @@ init 1 python:
     if clone_schedule not in clone_role.actions:
         clone_role.actions.append(clone_schedule)
 
+    def clone_hire_requirement(person):
+        if person not in mc.business.get_employee_list():
+            return True
+
+    clone_hire = Action("Employ clone", clone_hire_requirement, "clone_hire",
+        menu_tooltip = "Hire the clone to work for you in your business.")
+
+    if clone_hire not in clone_role.actions:
+        clone_role.actions.append(clone_hire)
+
 label clone_rename(person):
     "You tell [person.title] that it is to be renamed."
     menu clone_rename_menu:
@@ -129,3 +139,35 @@ label clone_schedule(person):
         "Back":
             return
     jump clone_schedule
+
+label clone_hire(person):
+    "You complete the nessesary paperwork and hire [person.title]. What division do you assign them to?"
+    menu:
+        "Research and Development.":
+            $ mc.business.add_employee_research(person)
+            $ mc.location.move_person(person, mc.business.r_div)
+            $ person.set_work([1,2,3], mc.business.r_div)
+
+        "Production.":
+            $ mc.business.add_employee_production(person)
+            $ mc.location.move_person(person, mc.business.p_div)
+            $ person.set_work([1,2,3], mc.business.p_div)
+
+        "Supply Procurement.":
+            $ mc.business.add_employee_supply(person)
+            $ mc.location.move_person(person, mc.business.s_div)
+            $ person.set_work([1,2,3], mc.business.s_div)
+
+        "Marketing.":
+            $ mc.business.add_employee_marketing(person)
+            $ mc.location.move_person(person, mc.business.m_div)
+            $ person.set_work([1,2,3], mc.business.m_div)
+
+        "Human Resources.":
+            $ mc.business.add_employee_hr(person)
+            $ mc.location.move_person(person, mc.business.h_div)
+            $ person.set_work([1,2,3], mc.business.h_div)
+
+        "Back":
+            return
+    $ person.special_role.append(employee_role)
