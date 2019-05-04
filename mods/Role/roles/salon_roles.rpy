@@ -27,11 +27,18 @@ label cut_hair_label(person):
     python:
         hair_style_check = person.hair_style #If hair_style_check is different than person.hair_style it means a "purchase" has been made.
         hair_color_check = person.hair_colour
-    "You ask [person.title] if you can change their style up a bit."
+    "You ask [person.title] if she could change her hairstyle a bit."
     $ person.draw_person()
-    person.char "Sure, I don't see why not. Let me get my kit."
-    call screen hair_creator(the_person)
+    person.char "Sure, [person.mc_title], I don't see why not. Let me get my kit."
+    $ renpy.screen("Active")  # remove old draw, too make room for mannequin
+    call screen hair_creator(person)
     $ person.draw_person(position = "stand2")
-    person.char "Better now?"
+    if hair_style_check != person.hair_style or hair_color_check != person.hair_colour: # Anything was changed
+        person.char "Better now?"
+        $ person.draw_person(emotion = "happy")
+        mc.name "You look wonderfull, [person.possessive_title]!"
+    else:
+        person.char "It seems you prefered my old look, [the_person.mc_title]."
+
     $renpy.scene("Active")
     return
