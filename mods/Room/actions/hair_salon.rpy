@@ -26,7 +26,7 @@ init 2 python:
         if day%7 == 6: # Can be removed
             return "Closed on Sundays."
 
-        elif time_of_day == 1:
+        elif time_of_day == 0:
             return "Opens in the morning."
 
         elif time_of_day == 4: # Can be removed
