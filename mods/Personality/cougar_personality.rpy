@@ -4,24 +4,24 @@
 
 init 1400 python:
     def cougar_titles(person):
-        valid_titles = [the_person.name]
-        if the_person.love > 25:
+        valid_titles = reserved_titles(person)
+        if person.love > 25:
             valid_titles.append("Cougar")
         return valid_titles
-    def cougar_possessive_titles(the_person):
-        valid_titles = relaxed_titles(the_person)
-        if the_person.sluttiness > 60:
+    def cougar_possessive_titles(person):
+        valid_titles = relaxed_titles(person)
+        if person.sluttiness > 60:
             valid_possessive_titles.append("Your slutty cougar")
-        if the_person.sluttiness > 100:
+        if person.sluttiness > 100:
             valid_possessive_titles.append("Your cum-dump cougar")
         return valid_titles
-    def cougar_player_titles(the_person):
-        valid_player_titles = [mc.name]
-        if the_person.happiness < 70:
+    def cougar_player_titles(person):
+        valid_player_titles = reserved_player_titles(person)
+        if person.happiness < 70:
             valid_player_titles.append("Litle boy")
-        if the_person.love > 25:
+        if person.love > 25:
             valid_player_titles.append("Darling")
-        if the_person.sluttiness > 60:
+        if person.sluttiness > 60:
             valid_player_titles.append("Young stud")
         return valid_player_titles
 
