@@ -14,6 +14,8 @@ init 1400 python:
             valid_possessive_titles.append("Your slutty cougar")
         if person.sluttiness > 100:
             valid_possessive_titles.append("Your cum-dump cougar")
+        if person.sluttiness > 100 and person.sex_skills["Anal"] >= 4:
+            valid_possessive_titles.append("Your anal cumslut cougar")
         return valid_titles
     def cougar_player_titles(person):
         valid_player_titles = reserved_player_titles(person)

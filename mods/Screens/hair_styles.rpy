@@ -39,7 +39,7 @@ screen hair_creator(person): ##Pass a completely blank outfit instance for a new
     $ mannequin.height = person.height
     $ mannequin.hair_style = person.hair_style
     $ mannequin.tits = person.tits
-    $ mannequin.outfit = person.outfit
+    $ mannequin.set_outfit(person.outfit)
     $ mannequin.idle_pose = person.idle_pose
     $ mannequin.body_images = person.body_images
     $ mannequin.draw_person(emotion="happy")

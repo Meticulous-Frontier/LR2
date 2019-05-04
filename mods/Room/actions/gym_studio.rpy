@@ -4,8 +4,10 @@ init 3 python:
     def gym_requirement():
         if time_of_day == 4: # Can be removed
             return "Closed for the night."
+        elif time_of_day == 0:
+            return "Opens in the morning."
         elif mc.business.funds < 40: # $40 per session.
-            return "Not enough money."
+            return "Requires $40."
         else:
             return True
 

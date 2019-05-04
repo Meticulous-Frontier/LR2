@@ -33,7 +33,7 @@ init 2 python:
             return "Closed for the night."
 
         elif mc.business.funds < 100: # $60 for hair cut, $30 for dye. You wont be spending your last money on haircuts.
-            return "Not enough funds."
+            return "Requires $90."
         else:
             return True
 
@@ -81,11 +81,11 @@ label salon_label():
     python: # First we select which employee we want
         tuple_list = format_person_list(all_people_in_the_game([mc]), draw_hearts = True)  #The list of people to show. e.g mc.location.people
         tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
+        renpy.scene("Active") # Had a rare occurence of a person being drawn although no choice being made.
         person_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
 
         if person_choice == "Back":
             renpy.jump("game_loop") # Where to go if you hit "Back".
-            renpy.scene("Active") # Had a rare occurence of a person being drawn although no choice being made.
         else:
             renpy.say("","You send a message to " + person_choice.name + " about the appointment.") #Add flavor text to what is about to happen. e.g "You tell the_person to go visit Starbuck for training".
             renpy.say("", "After some time you get a response...")
@@ -130,10 +130,11 @@ label salon_response(person_choice): # How does the_person respond to a company 
     else:
         person.char "Sounds good, I'll be right there [person.mc_title]."
 
+    $ renpy.scene("Active")
     call screen hair_creator(person) # This is the "store" / "salon" part of the mod. TODO: Find a different way to check for changes in hair color
-    $renpy.scene("Active")
+    $ renpy.scene("Active")
     call salon_checkout() #Will return here if nothing qualifies
-    $renpy.scene("Active")
+    $ renpy.scene("Active")
     return
 
 

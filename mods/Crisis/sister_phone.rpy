@@ -32,7 +32,7 @@ label sister_phone_crisis_action:
         $ ran_num = renpy.random.randint(1,3) #Used to determine which varient we use to avoid spamming the player with the exact same texts.
         if ran_num == 1:
             if mc.business.is_weekend():
-                $ the_person.outfit = lingerie_wardrobe.pick_random_outfit()
+                $ the_person.set_outfit(lingerie_wardrobe.pick_random_outfit())
                 $ the_person.draw_person(position = "missionary", emotion = "happy")
                 "Her first message is a selfie of herself lying down on your bed in lingerie."
                 the_person.char "I can't wait until you come home and give me what I need. I wish I could spend every minute of every day worshiping your cock like a [the_person.possessive_title] should."
@@ -50,7 +50,7 @@ label sister_phone_crisis_action:
             "You get a selfie from [the_person.possessive_title] naked in front of her bedroom mirror."
             the_person.char "That your [the_person.possessive_title] wants to feel you inside her tonight. Don't stay out too late!"
         else:
-            $ the_person.outfit = lingerie_wardrobe.pick_random_outfit()
+            $ the_person.set_outfit(lingerie_wardrobe.pick_random_outfit())
             $ the_person.draw_person(position = "blowjob", emotion = "happy")
             "[the_person.possessive_title] sends you a picture of herself sitting on her knees wearing some lingerie."
             the_person.char "I can't wait to see you. So I can suck your big dick, like the good little cocksucker that I am."
@@ -121,7 +121,7 @@ label sister_phone_crisis_action:
             "[the_person.possessive_title] doesn't wait for a reply and starts sending selfies."
             python:
                 for i in range(3):
-                    the_person.outfit = the_person.wardrobe.get_random_appropriate_underwear(lowest_stat)
+                    the_person.set_outfit(the_person.wardrobe.get_random_appropriate_underwear(lowest_stat))
                     the_person.draw_person(emotion = "happy")
                     renpy.say("","")
             the_person.char "I hope you think your [the_person.possessive_title] looks sexy in her underwear ;)"
