@@ -178,10 +178,12 @@ init -1:
 
         ## change person placement on the screen
         def change_placement(self, character_placement = None):
+            clear_old_position = True
             if character_placement is None:
                 character_placement = character_right
+                clear_old_position = False
 
-            if not self.last_placement is None and self.last_placement != character_placement: # we change location so clear current location.
+            if clear_old_position and not self.last_placement is None and self.last_placement != character_placement: # we change location so clear current location.
                 old_scene_layer = current_scene_layer(self.last_placement)
                 renpy.scene(old_scene_layer)  
 
