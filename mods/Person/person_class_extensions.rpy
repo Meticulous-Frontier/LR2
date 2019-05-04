@@ -14,7 +14,7 @@ init -1:
         # Returns True when the persons height has changed; otherwise False
         # chance is probability percentage that height change for amount will occur (used by serums)
         def change_height(self, amount, chance):
-            if amount == 0 or (height == .8 and amount < 0) or (height == 1 and amount > 0):
+            if amount == 0 or (self.height == .8 and amount < 0) or (self.height == 1 and amount > 0):
                 return False
 
             if renpy.random.randint(0, 100) <= chance:

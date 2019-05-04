@@ -204,6 +204,16 @@ label cougar_seduction_accept_alone(the_person):
         the_person.char "Oh [the_person.mc_title], I'm so glad I make you feel this way. Come on, let's get started!"
     return
 
+label cougar_sex_responses(the_person):
+    if the_person.sluttiness > 50:
+        if the_person.obedience > 130:
+            the_person.char "Oh... Please [the_person.mc_title], keep doing that to me!"
+        else:
+            the_person.char "Ah yes, that's it boy, give it to [the_person.possessive_title]!"
+    else:
+        "[the_person.title] closes her eyes."
+        the_person.char "Yes [the_person.mc_title], just like that!"
+    return    
 
 label cougar_seduction_refuse(the_person):
     if the_person.sluttiness < 20:
