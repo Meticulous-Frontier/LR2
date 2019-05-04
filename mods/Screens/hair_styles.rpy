@@ -1,4 +1,4 @@
-init -1 python:
+init -2 python:
     mannequin = None
 
 screen hair_creator(person): ##Pass a completely blank outfit instance for a new outfit, or an already existing instance to load an old one.\
@@ -7,13 +7,24 @@ screen hair_creator(person): ##Pass a completely blank outfit instance for a new
     #zorder 0
     default catagory_selected = "Hair Style"
 
-    default demo_outfit = person.hair_style.get_copy()
+    default hair_style_colour_palette = [ 
+        ["blond", [0.84,0.75,0.47,1]], 
+        ["brown", [0.73,0.43,0.24,1]],
+        ["black", [0.1,0.09,0.08,1]],
+        ["red", [0.3,0.05,0.05,1]],
+        ["hot pink", [1,0.5,0.8,1]],
+        ["sky blue", [0.4,0.5,0.9,1]], 
+        ["alt blond", [0.882, 0.733, 0.580,1]],
+        ["light grey", [0.866, 0.835, 0.862,1]],
+        ["fire red", [0.909, 0.368, 0.368,1]],
+        ["knight red", [0.745, 0.117, 0.235,1]]
+        ]
 
-    if mannequin == None:
+    if mannequin is None:
         $ mannequin = create_random_person()
+    
     $ mannequin.body_type = person.body_type
     $ mannequin.face_style = person.face_style
-    $ mannequin.skin = person.skin
     $ mannequin.expression_images = person.expression_images
     $ mannequin.height = person.height
     $ mannequin.hair_style = person.hair_style
@@ -21,28 +32,24 @@ screen hair_creator(person): ##Pass a completely blank outfit instance for a new
     $ mannequin.outfit = person.outfit
     $ mannequin.idle_pose = person.idle_pose
     $ mannequin.body_images = person.body_images
-    $ renpy.scene("Active")
+    $ mannequin.draw_person(emotion="happy")
 
-
-
-    $ mannequin.draw_person()
-
-
-    $ valid_catagories = ["Hair Style"] #Holds the valid list of catagories strings to be shown at the top.
-
+    default valid_catagories = ["Hair Style"] #Holds the valid list of catagories strings to be shown at the top.
+   
     $ catagories_mapping = {
-        #"Hair Color": [list_of_hairs]
-        "Hair Style": [hair_styles]}
+        "Hair Style": [hair_styles]
+    }
 
     default bar_select = 0 # 0 is nothing selected, 1 is red, 2 is green, 3 is blue, and 4 is alpha
 
     default selected_colour = "colour" #If secondary we are alterning the patern colour. When changed it updates the colour of the clothing item. Current values are "colour" and "colour_pattern"
-    default current_r = 1.0
-    default current_g = 1.0
-    default current_b = 1.0
-    default current_a = 1.0
+    default current_r = person.hair_style.colour[0]
+    default current_g = person.hair_style.colour[1]
+    default current_b = person.hair_style.colour[2]
+    default current_a = person.hair_style.colour[3]
 
-    default selected_clothing = person.hair_style.get_copy()
+    default selected_hair_colour = person.hair_colour
+    default selected_hair_style = person.hair_style
 
     hbox: #The main divider between the new item adder and the current outfit view.
         xpos 15
@@ -70,7 +77,9 @@ screen hair_creator(person): ##Pass a completely blank outfit instance for a new
                             text_align(0.5,0.5)
                             text_anchor(0.5,0.5)
                             xysize (220, 60)
-                            action [SetScreenVariable("catagory_selected",catagory), SetScreenVariable("selected_clothing", selected_clothing), SetScreenVariable("selected_colour", "colour")] #Set the clothing to None when you change catagories to avoid breaking the clothing add function assignment
+                            action [SetScreenVariable("catagory_selected",catagory),
+                                SetField(mannequin, "hair_style", selected_hair_style),
+                                SetScreenVariable("selected_colour", "colour")] #Set the clothing to None when you change catagories to avoid breaking the clothing add function assignment
 
                 vbox:
                     spacing 15
@@ -84,22 +93,24 @@ screen hair_creator(person): ##Pass a completely blank outfit instance for a new
                             yminimum 480
                             background "#888888"
                             vbox:
-                                #THIS IS WHERE ITEM CHOICES ARE SHOWN
                                 if catagory_selected in catagories_mapping:
-                                #    $ valid_check = catagories_mapping[catagory_selected][1]
-                                #    $ apply_method = catagories_mapping[catagory_selected][2]
-                                    $ cloth_list_length = len(catagories_mapping[catagory_selected][0])
-                                    for cloth in catagories_mapping[catagory_selected][0]:
-                                        textbutton cloth.name:
+                                    #    $ valid_check = catagories_mapping[catagory_selected][1]
+                                    #    $ apply_method = catagories_mapping[catagory_selected][2]
+                                    #    $ cloth_list_length = len(catagories_mapping[catagory_selected][0])
+                                    for hair_style_item in catagories_mapping[catagory_selected][0]:
+                                        textbutton hair_style_item.name:
                                             style "textbutton_style"
                                             text_style "textbutton_text_style"
-
-
                                             background "#1a45a1"
                                             hover_background "#3a65c1"
                                             xfill True
                                             sensitive True
-                                            action [SetScreenVariable("selected_clothing", cloth), SetScreenVariable("selected_colour", "colour"), SetField(mannequin, "hair_style", selected_clothing), Function(renpy.scene, "Active"), Function(mannequin.draw_person)]
+                                            action [
+                                                SetScreenVariable("selected_colour", "colour"), 
+                                                SetScreenVariable("selected_hair_style", hair_style_item),
+                                                SetField(hair_style_item, "colour", [current_r, current_g, current_b, current_a]),
+                                                SetField(mannequin, "hair_style", hair_style_item),
+                                                Function(mannequin.draw_person)]
 
                     frame:
                         #THIS IS WHERE SELECTED ITEM OPTIONS ARE SHOWN
@@ -107,8 +118,8 @@ screen hair_creator(person): ##Pass a completely blank outfit instance for a new
                         background "#888888"
                         vbox:
                             spacing 10
-                            if selected_clothing is not None:
-                                text selected_clothing.name style "textbutton_text_style"
+                            if selected_hair_style is not None:
+                                text selected_hair_style.name style "textbutton_text_style"
 
                                 hbox:
                                     spacing -5 #We will manually handle spacing so we can have our colour predictor frames
@@ -122,16 +133,10 @@ screen hair_creator(person): ##Pass a completely blank outfit instance for a new
                                             background "#1a45a1"
                                             hover_background "#3a65c1"
                                         sensitive True
-                                        if selected_colour == "colour_pattern": #Hopefully will support patterns for hairs
-                                            action [SetField(selected_clothing,"colour_pattern",[current_r,current_g,current_b,current_a]), SetScreenVariable("selected_colour","colour"), SetScreenVariable("current_r",selected_clothing.colour[0]), SetScreenVariable("current_g",selected_clothing.colour[1]), SetScreenVariable("current_b",selected_clothing.colour[2]), SetScreenVariable("current_a",selected_clothing.colour[3])]
-                                        else:
-                                            action NullAction()
+                                        action NullAction()
 
                                     frame:
-                                        if selected_colour == "colour":
-                                            background Color(rgb=(current_r,current_g,current_b,current_a))
-                                        else:
-                                            background Color(rgb=(selected_clothing.colour[0], selected_clothing.colour[1], selected_clothing.colour[2]))
+                                        background Color(rgb=(current_r,current_g,current_b,current_a))
                                         xysize (45,45)
                                         yanchor 0.5
                                         yalign 0.5
@@ -219,21 +224,26 @@ screen hair_creator(person): ##Pass a completely blank outfit instance for a new
                                         text "Translucent" style "menu_text_style" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
                                         xysize (120, 40)
                                         action SetScreenVariable("current_a", 0.8)
-                                hbox:
-                                    spacing 5
-                                    xalign 0.5
-                                    xanchor 0.5
-                                    for count, a_colour in __builtin__.enumerate(persistent.colour_palette):
-                                        frame:
-                                            background "#aaaaaa"
-                                            button:
-                                                background Color(rgb=(a_colour[0], a_colour[1], a_colour[2]))
-                                                xysize (40,40)
-                                                sensitive True
-                                                action [SetScreenVariable("current_r", a_colour[0]), SetScreenVariable("current_g", a_colour[1]), SetScreenVariable("current_b", a_colour[2]), SetScreenVariable("current_a", a_colour[3])]
-                                                alternate Function(update_colour_palette, count, current_r, current_g, current_b, current_a)
+                                for block_count, hair_colour_list in __builtin__.enumerate(split_list_in_blocks(hair_style_colour_palette, 10)):
+                                    hbox:
+                                        spacing 5
+                                        xalign 0.5
+                                        xanchor 0.5
+                                        yanchor (block_count * .1)
+                                        for count, hair_colour in __builtin__.enumerate(hair_colour_list):
+                                            frame:
+                                                background "#aaaaaa"
+                                                button:
+                                                    background Color(rgb=(hair_colour[1][0], hair_colour[1][1], hair_colour[1][2]))
+                                                    xysize (40,40)
+                                                    sensitive True
+                                                    action [
+                                                        SetScreenVariable("selected_hair_colour", hair_colour[0]),
+                                                        SetScreenVariable("current_r", hair_colour[1][0]), SetScreenVariable("current_g", hair_colour[1][1]), SetScreenVariable("current_b", hair_colour[1][2]), SetScreenVariable("current_a", hair_colour[1][3])]
+                                                    # We use a fixed pallette of hair colours
+                                                    # alternate Function(update_colour_palette, count, current_r, current_g, current_b, current_a)
 
-                        if selected_clothing:
+                        if selected_hair_style:
                             textbutton "Dye Hair":
                                 style "textbutton_style"
                                 text_style "textbutton_text_style"
@@ -244,8 +254,11 @@ screen hair_creator(person): ##Pass a completely blank outfit instance for a new
                                 xanchor 0.5
                                 yanchor 1.0
                                 sensitive True
-                                action [SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]), SetField(mannequin, "hair_style", selected_clothing), Function(renpy.scene, "Active"), Function(mannequin.draw_person)]
-                                #hovered [SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]), SetField(mannequin, "hair_style", selected_clothing), Function(mannequin.draw_person)]
+                                action [SetField(selected_hair_style, "colour", [current_r,current_g,current_b,current_a]), 
+                                    SetField(mannequin, "hair_colour", selected_hair_colour),
+                                    SetField(mannequin, "hair_style", selected_hair_style), 
+                                    Function(mannequin.draw_person)]
+                                #hovered [SetField(selected_hair_style, selected_colour,[current_r,current_g,current_b,current_a]), SetField(mannequin, "hair_style", selected_hair_style), Function(mannequin.draw_person)]
 
 
         vbox:
@@ -264,12 +277,12 @@ screen hair_creator(person): ##Pass a completely blank outfit instance for a new
                         vbox:
                             spacing 5 #TODO: Add a viewport here too.
                             button:
-                                background Color(rgb = (selected_clothing.colour[0], selected_clothing.colour[1], selected_clothing.colour[2]))
+                                background Color(rgb = (selected_hair_style.colour[0], selected_hair_style.colour[1], selected_hair_style.colour[2]))
                                 xysize (380, 40)
                                 action NullAction()
                                 xalign 0.5
                                 yalign 0.0
-                                text selected_clothing.name xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 style "outfit_style"
+                                text selected_hair_style.name xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 style "outfit_style"
 
 
 
@@ -285,7 +298,8 @@ screen hair_creator(person): ##Pass a completely blank outfit instance for a new
                         xalign 0.5
                         xanchor 0.5
                         spacing 50
-                        textbutton "Save Haircut" action [SetField(person,"hair_style", selected_clothing), Function(person.draw_person), Return] style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 xysize (155,80)
+                        textbutton "Save Haircut" action [SetField(person, "hair_style", selected_hair_style), SetField(person, "hair_colour", selected_hair_colour),
+                            Function(person.draw_person), Return] style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 xysize (155,80)
                         textbutton "Abandon Design" action Return style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 xysize (185,80)
 #    fixed: #TODO: Move this to it's own screen so it can be shown anywhere
 #        pos (1450,0)

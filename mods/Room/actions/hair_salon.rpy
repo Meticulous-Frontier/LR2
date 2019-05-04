@@ -23,11 +23,14 @@ init 2 python:
         return
 
     def salon_requirement():
-        if time_of_day == 4: # Can be removed
-            return "Closed for the night."
-
-        elif day%7 == 6: # Can be removed
+        if day%7 == 6: # Can be removed
             return "Closed on Sundays."
+
+        elif time_of_day == 1:
+            return "Opens in the morning."
+            
+        elif time_of_day == 4: # Can be removed
+            return "Closed for the night."
 
         elif mc.business.funds < 100: # $60 for hair cut, $30 for dye. You wont be spending your last money on haircuts.
             return "Not enough funds."
@@ -63,6 +66,7 @@ init 2 python:
 # Initilization segment - End
 
 label salon_label():
+    $ renpy.scene("Active")
 
 #    python:
 
