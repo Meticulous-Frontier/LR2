@@ -12,7 +12,7 @@ init 2 python:
         # Wardrobe for employees in the salon
         salon_wardrobe = wardrobe_from_xml("Salon_Wardrobe")
         global salon_manager
-        salon_manager = create_random_person(name = "Ophelia", last_name = "von Friseur", height = .9, age = renpy.random.randint(21,30), body_type = "thin_body", 
+        salon_manager = create_random_person(name = "Ophelia", last_name = "von Friseur", height = .9, age = renpy.random.randint(21,30), body_type = "thin_body",
             personality = wild_personality, job = "Hair Stylist", starting_wardrobe = salon_wardrobe, eyes="blue", start_sluttiness = 10,
             title = "Ophelia", possessive_title = "My stylist", mc_title = mc.name)
 
@@ -33,7 +33,7 @@ init 2 python:
             return "Not enough funds."
         else:
             return True
-    
+
     def hair_salon_mod_initialization(self):
         # Always check if the room is somehow already added.
         # Enables the elevator.
@@ -49,7 +49,7 @@ init 2 python:
         if mall_salon not in list_of_places:
             # Place the character so it is in a room in the world.
             create_salon_manager()
-            salon_manager.special_role.append(salon_manager_role)   
+            salon_manager.special_role.append(salon_manager_role)
             mall_salon.add_person(salon_manager)
             # Add to map
             list_of_places.append(mall_salon)
@@ -57,7 +57,7 @@ init 2 python:
         return
 
 
-    salon_action = ActionMod("Schedule a haircut", salon_requirement, "salon_label", initialization = hair_salon_mod_initialization, 
+    salon_action = ActionMod("Schedule a haircut", salon_requirement, "salon_label", initialization = hair_salon_mod_initialization,
         menu_tooltip = "Change a persons hair style and color.", category="Mall")
 
 # Initilization segment - End
@@ -93,8 +93,8 @@ label salon_response(person_choice): # How does the_person respond to a company 
     $ the_person.draw_person()
 
     python:
-        hair_style_check = person.hair_style #If hair_style_check is different than person.hair_style it means a "purchase" has been made.
-        hair_color_check = person.hair_colour
+        hair_style_check = the_person.hair_style #If hair_style_check is different than person.hair_style it means a "purchase" has been made.
+        hair_color_check = the_person.hair_colour
 
     # $ hair_style_request = get_random_from_list(hair_styles)
     # $ hair_color_request = get_random_hair_colour()
@@ -121,7 +121,7 @@ label salon_response(person_choice): # How does the_person respond to a company 
     else:
         the_person.char "Sounds good, I'll be right there [the_person.mc_title]."
 
-    call hair_style(the_person) # This is the "store" / "salon" part of the mod.
+    call screen hair_creator(the_person) # This is the "store" / "salon" part of the mod. TODO: Find a different way to check for changes in hair color
     $renpy.scene("Active")
     call salon_checkout() #Will return here if nothing qualifies
     $renpy.scene("Active")
@@ -151,11 +151,11 @@ label salon_checkout():
         mc.name "That will be me..."
         $ mc.business.funds -= salon_dye_cost
         "You complete the transaction and $[salon_dye_cost] has been deducted from the company's credit card."
-    else:           
+    else:
         $ the_person.change_happiness(-5)
         $ the_person.draw_person(emotion = "angry")
-        if the_person.location == mall_salon:
-            the_person.char "What a waste of my time, [the_person.mc_name]!"
+        if the_person.happiness < 100:
+            the_person.char "What a waste of my time, [the_person.mc_title]!"
         else:
-            the_person.char "Did you call me over here for nothing, [the_person.mc_name]!?"
+            the_person.char "Did you call me over here for nothing, [the_person.mc_title]!?"
     return
