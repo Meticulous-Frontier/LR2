@@ -4,7 +4,7 @@ init -1 python:
 
 init 2 python:
     def coffee_break_requirement():
-        if not mc.business.is_weekend(): 
+        if not mc.business.is_weekend():
             if time_of_day > 1 and time_of_day < 4: # only during morning afternoon or evening
                 if len(mc.business.get_requirement_employee_list(slut_required = 0)) >= 3:
                     return True
@@ -17,7 +17,7 @@ init 2 python:
 label coffee_break_action_description:
     call coffee_break_action from _call_coffee_break_action_1
     return
-    
+
 label coffee_break_action:
     #Generate list of people with poor obedience
     $ list_of_possible_people = mc.business.get_requirement_employee_list(slut_required = 0)
@@ -38,7 +38,7 @@ label coffee_break_action:
     $ person_one.draw_person(emotion = "happy")
     $ person_two.draw_person(emotion = "happy")
     $ person_three.draw_person(emotion = "happy")
-    "The girls start lauging at [person_three.title]'s last remark."
+    "The girls start laughing at [person_three.title]'s last remark."
 
     person_one.char "That was very funny [person_one.name], but I have to get back to work."
     $ person_one.draw_person(position = "walking_away")
@@ -51,7 +51,7 @@ label coffee_break_action:
 
         person_two.char "Oh, she's such a stickler for rules."
         person_one.char "I don't mind seeing her go."
-    
+
     else:
         $ person_two.draw_person(character_placement = character_center)
         person_two.char "Yeah, we better get going too."
@@ -64,4 +64,4 @@ label coffee_break_action:
     $ person_two.clear_scene()
     # remove person 3 from scene
     $ person_three.clear_scene()
-    return 
+    return
