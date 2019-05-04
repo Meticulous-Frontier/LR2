@@ -17,7 +17,17 @@ screen hair_creator(person): ##Pass a completely blank outfit instance for a new
         ["alt blond", [0.882, 0.733, 0.580,1]],
         ["light grey", [0.866, 0.835, 0.862,1]],
         ["fire red", [0.909, 0.368, 0.368,1]],
-        ["knight red", [0.745, 0.117, 0.235,1]]
+        ["knight red", [0.745, 0.117, 0.235,1]],
+        ["purple" , [0.686, 0.156, 0.686,1]],
+        ["dark grey" , [0.705, 0.690, 0.709,1]],
+        ["turquoise" , [0.435, 0.807, 0.788,1]],
+        ["lime green" , [0.647, 0.854, 0.564,1]],
+        ["mango" , [0.894, 0.737, 0.466,1]],
+        ["ocean" , [0.188, 0.494, 0.611,1]],
+        ["pulp" , [0.643, 0.439, 0.541,1]],
+        ["saturated" , [0.905, 0.898, 0.513,1]],
+        ["emerald" , [0.098, 0.721, 0.541,1]],
+        ["light brown" , [0.658, 0.537, 0.380,1]]
         ]
 
     if mannequin is None:
