@@ -41,8 +41,8 @@ label train_in_gym(person):
         $ person.change_love(+5)
         $ person.change_arousal(25)
         $ slut_report = person.change_slut_temp(5)
-        person.char "Wow, I'm really feeling healthier now, and a little turned on... would you mind?"
         if person.sluttiness > 20:
+            person.char "Wow, these gym sessions make me feel just great, somehow I get turned on too... would you mind?"
             menu:
                 "Have Sex" if mc.current_stamina > 0:
                     mc.name "Lets go to the shower room."
@@ -55,7 +55,8 @@ label train_in_gym(person):
                 "Another Time":
                     mc.name "Sorry [person.title], another time."
                     $ person.change_happiness(-10)
-
+        else:
+            person.char "Amazing, these gym session are really paying off."
     $ person.reset_arousal()
     person.char "Thank you, [person.mc_title]."
     mc.name "Bye [person.title], see you next time."
