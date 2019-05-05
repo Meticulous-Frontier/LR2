@@ -12,7 +12,7 @@ init 2 python:
     def shower_mod_initialization(self):
         # add home shower to active places
         list_of_places.append(home_shower)
-        hall.link_locations_two_way(home_shower)
+        home_shower.link_locations(hall)
         return
 
     shower_crisis = ActionMod("Shower Crisis", shower_crisis_requirement,"shower_action_description", initialization = shower_mod_initialization, 

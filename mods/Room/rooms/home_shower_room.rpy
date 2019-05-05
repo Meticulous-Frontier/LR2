@@ -9,4 +9,6 @@ init 3 python: # Room creation
     home_shower.add_object(make_floor())
 
     # Always check if the room or action is somehow added already before proceeding.
-    # I want the Elevator to be accessable.
+    # I don't want it accessable from the Elevator.
+    #if home_shower not in mod_rooms_hall:
+    #    mod_rooms_hall.append(home_shower)

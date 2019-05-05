@@ -1,25 +1,29 @@
 ## Cougar personality Mod by Tristimdorion
+# All girls in town older than 40 get this personality trait 
+# See generic_personality_hook.rpy for more information
 
 init 1400 python:
     def cougar_titles(person):
-        valid_titles = [the_person.name]
-        if the_person.love > 25:
+        valid_titles = reserved_titles(person)
+        if person.love > 25:
             valid_titles.append("Cougar")
         return valid_titles
-    def cougar_possessive_titles(the_person):
-        valid_titles = relaxed_titles(the_person)
-        if the_person.sluttiness > 60:
+    def cougar_possessive_titles(person):
+        valid_titles = relaxed_titles(person)
+        if person.sluttiness > 60:
             valid_possessive_titles.append("Your slutty cougar")
-        if the_person.sluttiness > 100:
+        if person.sluttiness > 100:
             valid_possessive_titles.append("Your cum-dump cougar")
+        if person.sluttiness > 100 and person.sex_skills["Anal"] >= 4:
+            valid_possessive_titles.append("Your anal cumslut cougar")
         return valid_titles
-    def cougar_player_titles(the_person):
-        valid_player_titles = [mc.name]
-        if the_person.happiness < 70:
+    def cougar_player_titles(person):
+        valid_player_titles = reserved_player_titles(person)
+        if person.happiness < 70:
             valid_player_titles.append("Litle boy")
-        if the_person.love > 25:
+        if person.love > 25:
             valid_player_titles.append("Darling")
-        if the_person.sluttiness > 60:
+        if person.sluttiness > 60:
             valid_player_titles.append("Young stud")
         return valid_player_titles
 
@@ -41,10 +45,12 @@ init 5 python:
 label correct_personality_age_action(stack):
     python:
         for person in all_people_in_the_game(excluded_people = [mc, lily, mom]):
+            # make cougars personalities the right age
             if person.personality == cougar_personality:
                 if person.age < 40: # split age for cougars
                     person.age = renpy.random.randint(40, 55)
                     # mc.log_event("Cougar " + person.name + " is " + str(person.age), "float_text_grey")
+            # make sure other personalities are not older than 40
             if person.personality != cougar_personality:
                 if person.age > 40: # split age for cougars
                     person.age = renpy.random.randint(18, 40)
@@ -200,6 +206,16 @@ label cougar_seduction_accept_alone(the_person):
         the_person.char "Oh [the_person.mc_title], I'm so glad I make you feel this way. Come on, let's get started!"
     return
 
+label cougar_sex_responses(the_person):
+    if the_person.sluttiness > 50:
+        if the_person.obedience > 130:
+            the_person.char "Oh... Please [the_person.mc_title], keep doing that to me!"
+        else:
+            the_person.char "Ah yes, that's it boy, give it to [the_person.possessive_title]!"
+    else:
+        "[the_person.title] closes her eyes."
+        the_person.char "Yes [the_person.mc_title], just like that!"
+    return    
 
 label cougar_seduction_refuse(the_person):
     if the_person.sluttiness < 20:

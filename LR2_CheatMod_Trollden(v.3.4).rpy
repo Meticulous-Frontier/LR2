@@ -208,67 +208,67 @@ init python: # This space is reserved for definitions used to simplify the code
 
         the_person.draw_person(the_person.hair_style)
 
-    def cheat_redraw_face(): # Redraws the face with the matching skin colour
-        if the_person.face_style == "Face_1": # Variations of Face Style 1
-            if the_person.skin == "white":
-                 the_person.expression_images = Expression("default","white","Face_1")
+    def cheat_redraw_face(person): # Redraws the face with the matching skin colour
+        if person.face_style == "Face_1": # Variations of Face Style 1
+            if person.skin == "white":
+                 person.expression_images = Expression("default","white","Face_1")
 
-            elif the_person.skin == "tan":
-                 the_person.expression_images = Expression("default","tan","Face_1")
+            elif person.skin == "tan":
+                 person.expression_images = Expression("default","tan","Face_1")
 
-            elif the_person.skin == "black":
-                 the_person.expression_images = Expression("default","black","Face_1")
+            elif person.skin == "black":
+                 person.expression_images = Expression("default","black","Face_1")
 
-        elif the_person.face_style == "Face_2": # Variations of Face Style 2
-            if the_person.skin == "white":
-                 the_person.expression_images = Expression("default","white","Face_2")
+        elif person.face_style == "Face_2": # Variations of Face Style 2
+            if person.skin == "white":
+                 person.expression_images = Expression("default","white","Face_2")
 
-            elif the_person.skin == "tan":
-                 the_person.expression_images = Expression("default","tan","Face_2")
+            elif person.skin == "tan":
+                 person.expression_images = Expression("default","tan","Face_2")
 
-            elif the_person.skin == "black":
-                 the_person.expression_images = Expression("default","black","Face_2")
+            elif person.skin == "black":
+                 person.expression_images = Expression("default","black","Face_2")
 
-        elif the_person.face_style == "Face_3": # Variations of Face Style 3
-            if the_person.skin == "white":
-                 the_person.expression_images = Expression("default","white","Face_3")
+        elif person.face_style == "Face_3": # Variations of Face Style 3
+            if person.skin == "white":
+                 person.expression_images = Expression("default","white","Face_3")
 
-            elif the_person.skin == "tan":
-                 the_person.expression_images = Expression("default","tan","Face_3")
+            elif person.skin == "tan":
+                 person.expression_images = Expression("default","tan","Face_3")
 
-            elif the_person.skin == "black":
-                 the_person.expression_images = Expression("default","black","Face_3")
+            elif person.skin == "black":
+                 person.expression_images = Expression("default","black","Face_3")
 
-        elif the_person.face_style == "Face_4": # Variations of Face Style 4
-            if the_person.skin == "white":
-                 the_person.expression_images = Expression("default","white","Face_4")
+        elif person.face_style == "Face_4": # Variations of Face Style 4
+            if person.skin == "white":
+                 person.expression_images = Expression("default","white","Face_4")
 
-            elif the_person.skin == "tan":
-                 the_person.expression_images = Expression("default","tan","Face_4")
+            elif person.skin == "tan":
+                 person.expression_images = Expression("default","tan","Face_4")
 
-            elif the_person.skin == "black":
-                 the_person.expression_images = Expression("default","black","Face_4")
+            elif person.skin == "black":
+                 person.expression_images = Expression("default","black","Face_4")
 
-        elif the_person.face_style == "Face_5": # Variations of Face Style 5
-            if the_person.skin == "white":
-                 the_person.expression_images = Expression("default","white","Face_5")
+        elif person.face_style == "Face_5": # Variations of Face Style 5
+            if person.skin == "white":
+                 person.expression_images = Expression("default","white","Face_5")
 
-            elif the_person.skin == "tan":
-                 the_person.expression_images = Expression("default","tan","Face_5")
+            elif person.skin == "tan":
+                 person.expression_images = Expression("default","tan","Face_5")
 
-            elif the_person.skin == "black":
-                 the_person.expression_images = Expression("default","black","Face_5")
+            elif person.skin == "black":
+                 person.expression_images = Expression("default","black","Face_5")
 
-        elif the_person.face_style == "Face_6": # Variations of Face Style 6
-            if the_person.skin == "white":
-                 the_person.expression_images = Expression("default","white","Face_6")
+        elif person.face_style == "Face_6": # Variations of Face Style 6
+            if person.skin == "white":
+                 person.expression_images = Expression("default","white","Face_6")
 
-            elif the_person.skin == "tan":
-                 the_person.expression_images = Expression("default","tan","Face_6")
+            elif person.skin == "tan":
+                 person.expression_images = Expression("default","tan","Face_6")
 
-            elif the_person.skin == "black":
-                 the_person.expression_images = Expression("default","black","Face_6")
-        the_person.draw_person(the_person.face_style) # Always redraw the face_style
+            elif person.skin == "black":
+                 person.expression_images = Expression("default","black","Face_6")
+        person.draw_person(person.face_style) # Always redraw the face_style
 
     def cheat_redraw_breasts(): # Redraws the breasts / tits
         the_person.draw_person(the_person.tits)
@@ -459,6 +459,7 @@ screen cmoc():
                         textbutton "Twin Ponytails" action [SetField(the_person,"hair_style", twintail), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                         textbutton "Long Hair" action [SetField(the_person,"hair_style", long_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                         textbutton "Bow Hair" action [SetField(the_person,"hair_style", bow_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        textbutton "Bobbed Hair" action [SetField(the_person,"hair_style", bobbed_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
 
             if capp and capphc: # Hair Color Options
                 hbox:
@@ -478,13 +479,13 @@ screen cmoc():
             if capp and cappf: # Face Type Options
                 hbox:
                     vbox: # Column 1
-                        textbutton "Face Type 1" action [SetField(the_person,"face_style", "Face_1"), Function(cheat_redraw_face)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Face Type 2" action [SetField(the_person,"face_style", "Face_2"), Function(cheat_redraw_face)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Face Type 3" action [SetField(the_person,"face_style", "Face_3"), Function(cheat_redraw_face)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        textbutton "Face Type 1" action [SetField(the_person,"face_style", "Face_1"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        textbutton "Face Type 2" action [SetField(the_person,"face_style", "Face_2"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        textbutton "Face Type 3" action [SetField(the_person,"face_style", "Face_3"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                     vbox: # Column 2
-                        textbutton "Face Type 4" action [SetField(the_person,"face_style", "Face_4"), Function(cheat_redraw_face)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Face Type 5" action [SetField(the_person,"face_style", "Face_5"), Function(cheat_redraw_face)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Face Type 6" action [SetField(the_person,"face_style", "Face_6"), Function(cheat_redraw_face)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        textbutton "Face Type 4" action [SetField(the_person,"face_style", "Face_4"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        textbutton "Face Type 5" action [SetField(the_person,"face_style", "Face_5"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        textbutton "Face Type 6" action [SetField(the_person,"face_style", "Face_6"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
 
             if capp and cappt: # Breast Size Options
                 hbox:
@@ -715,6 +716,7 @@ screen cmw(): # Cheats affecting the general world
                     textbutton "Town Walk" action Call("town_walk_action_description") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Taking an afternoon stroll through town"
                     textbutton "Going to the Gym" action Call("select_person_for_gym") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Give an employee a training session at the gym"
                     textbutton "Business Meeting" action Call("business_meeting_action") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Taking an afternoon stroll through town"
+                    textbutton "Coffee Break" action Call("coffee_break_action") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip ""
 
             # if cml == True and cmlpage == 4: # Page 4
 

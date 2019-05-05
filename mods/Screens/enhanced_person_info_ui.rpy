@@ -37,14 +37,18 @@ init 2:
                 yalign 0.3
                 spacing 100
                 vbox:
-                    text person.name style "menu_text_style" font person.char.what_args["font"] color person.char.what_args["color"] size 40
+                    if person.title:
+                        text person.title style "menu_text_style" size 40
+                    else:
+                        text "???" style "menu_text_style" font person.char.what_args["font"] color person.char.what_args["color"] size 40
+                    
                     if mc.business.get_employee_title(person) == "None":
                         text "     Job: Not employed." style "menu_text_style"
                     else:
                         text "     Job: " + mc.business.get_employee_title(person) style "menu_text_style"
 
-                    for role in person.special_role:
-                        text "       - " + role.role_name style "menu_text_style" size 14
+                        for role in person.special_role:
+                            text "       - " + role.role_name style "menu_text_style" size 14
 
                 vbox:
                     if person.arousal > 0:

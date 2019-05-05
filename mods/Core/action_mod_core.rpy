@@ -1,7 +1,8 @@
-# MOD CORE by Tristimdorion
-# Create a Mod class, it has the same parameters as the VREN Action class\
-# Attach the mod.action to any action list in the game.
-# If you need some extra initialization after the game has started pass an initialization function
+# ACTION MOD CORE by Tristimdorion
+# Create a ActionMod class, it has the same parameters as the VREN Action class.
+# Attach the ActionMod object to any action list in the game.
+# If you need some extra initialization after the game has started pass an initialization function (None is default)
+# ActionMod is added to save games when not present, the matching is based on the name property, so make sure it's unique (and don't change it between releases)
 
 ### TEMPLATE ###
 #init 3 python:
@@ -26,9 +27,9 @@
 init -1 python:
     def is_mod_enabled(action_name):
         is_enabled = True
-        for mod in action_mod_list:
-            if mod.name == action_name:
-                is_enabled = mod.enabled
+        for action_mod in action_mod_list:
+            if action_mod.name == action_name:
+                is_enabled = action_mod.enabled
         return is_enabled
 
 
@@ -72,9 +73,9 @@ init 2 python:
 
             Action.__init__(self, name, requirement, effect, args, requirement_args, menu_tooltip)
 
-            # store the instance in class static
+            # store the instance in class static    
             self._instances.add(self)
-
+                    
         def initialize(self):
             if not self.initialization is None:
                 self.initialization(self)
@@ -85,19 +86,54 @@ init 2 python:
     def action_mod_settings_requirement():
         return True
 
+    def is_in_action_mod_list(action_name):
+        for action_mod in action_mod_list:
+            if action_mod.name == action_name:
+                return True
+        return False
+
+    # check all ActionMod classes in the game and make sure we have one instance of each and update the action_mod_list
+    def append_and_initialize_action_mods():
+        remove_list = []
+        for action_mod in ActionMod._instances:
+            if not is_in_action_mod_list(action_mod.name):
+                action_mod_list.append(action_mod)
+                action_mod.initialize()
+            else:
+                remove_list.append(action_mod)
+        
+        # remove existing action mods from instance list
+        for action_mod in remove_list:
+            ActionMod._instances.remove(action_mod)
+
+        return
+
 init 5 python:
-    add_label_hijack("normal_start", "activate_action_mod_core")
+    add_label_hijack("normal_start", "activate_action_mod_core")  
+    add_label_hijack("after_load", "update_action_mod_core")
+
+# as long as VREN doesn't use this, we need to add a dummy label for hijacking purposes 
+# NOTE: this label gets called after the hijack labels have been triggered
+label after_load:
+    return
 
 label activate_action_mod_core(stack):
     # define here using $ so it gets stored in save game
     $ action_mod_list = []
     python:
-        for action_mod in ActionMod._instances:
-            action_mod_list.append(action_mod)
-            action_mod.initialize()
+        append_and_initialize_action_mods()
 
         action_mod_options_action = Action("MOD Settings", action_mod_settings_requirement, "show_action_mod_settings", menu_tooltip = "Enable or disable mods")
         bedroom.actions.append(action_mod_options_action)
+        
+        # continue on the hijack stack if needed
+        execute_hijack_call(stack)
+    return
+
+# called after loading a save game
+label update_action_mod_core(stack):
+    python:
+        append_and_initialize_action_mods()
         
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
