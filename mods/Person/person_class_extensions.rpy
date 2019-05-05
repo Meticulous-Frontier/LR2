@@ -206,6 +206,10 @@ init -1:
         def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, character_placement = None): #Draw the person, standing as default if they aren't standing in any other position.
             if position is None:
                 position = self.idle_pose
+            
+            # Hack for updating the hair colour based on the name of the hair colour when the colour is black but the name is not.
+            if (self.hair_colour != "black" and self.hair_style.colour == [0.1,0.09,0.08,1]):
+                update_hair_colour(self)
 
             displayable_list = [] # We will be building up a list of displayables passed to us by the various objects on the person (their body, clothing, etc.)
 

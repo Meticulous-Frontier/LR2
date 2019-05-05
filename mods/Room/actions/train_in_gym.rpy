@@ -42,7 +42,7 @@ label train_in_gym(person):
         $ person.change_arousal(25)
         $ slut_report = person.change_slut_temp(5)
         person.char "Wow, I'm really feeling healthier now, and a little turned on... would you mind?"
-        if person.sluttiness > 10:
+        if person.sluttiness > 20:
             menu:
                 "Have Sex" if mc.current_stamina > 0:
                     mc.name "Lets go to the shower room."
