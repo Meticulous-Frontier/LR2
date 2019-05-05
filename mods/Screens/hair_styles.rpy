@@ -70,14 +70,14 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                             xysize (220, 60)
                             action [SetScreenVariable("catagory_selected",catagory),
                                 SetScreenVariable("selected_colour", "colour")]
-                    textbutton old_hair_colour:
-                        style "textbutton_style"
-                        text_style "textbutton_text_style"
-                        xysize (220, 60)
-                    textbutton old_hair_style.name:
-                        style "textbutton_style"
-                        text_style "textbutton_text_style"
-                        xysize (220, 60)
+                    # textbutton old_hair_colour:
+                    #     style "textbutton_style"
+                    #     text_style "textbutton_text_style"
+                    #     xysize (220, 60)
+                    # textbutton old_hair_style.name:
+                    #     style "textbutton_style"
+                    #     text_style "textbutton_text_style"
+                    #     xysize (220, 60)
 
                 vbox:
                     spacing 15
