@@ -30,8 +30,9 @@ label cut_hair_label(person):
     "You ask [person.title] if she could change her hairstyle a bit."
     $ person.draw_person()
     person.char "Sure, [person.mc_title], I don't see why not. Let me get my kit."
-    $ renpy.screen("Active")  # remove old draw, too make room for mannequin
-    call screen hair_creator(person)
+
+    call screen hair_creator(person, hair_style_check, hair_color_check)
+
     $ person.draw_person(position = "stand2")
     if hair_style_check != person.hair_style or hair_color_check != person.hair_colour: # Anything was changed
         person.char "Better now?"
@@ -40,5 +41,5 @@ label cut_hair_label(person):
     else:
         person.char "It seems you prefered my old look, [the_person.mc_title]."
 
-    $renpy.scene("Active")
+    $ renpy.scene("Active")
     return

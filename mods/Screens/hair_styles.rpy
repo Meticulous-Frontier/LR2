@@ -1,10 +1,5 @@
-init -2 python:
-    mannequin = None
-
-screen hair_creator(person): ##Pass a completely blank outfit instance for a new outfit, or an already existing instance to load an old one.\
-    #add "Paper_Background.png"
+screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person and the variables holding the current hair style
     modal True
-    #zorder 0
     default catagory_selected = "Hair Style"
 
     default hair_style_colour_palette = [ 
@@ -16,33 +11,19 @@ screen hair_creator(person): ##Pass a completely blank outfit instance for a new
         ["sky blue", [0.4,0.5,0.9,1]], 
         ["alt blond", [0.882, 0.733, 0.580,1]],
         ["light grey", [0.866, 0.835, 0.862,1]],
-        ["fire red", [0.909, 0.368, 0.368,1]],
+        ["ash brown", [0.590, 0.473, 0.379,1]],
         ["knight red", [0.745, 0.117, 0.235,1]],
-        ["purple" , [0.686, 0.156, 0.686,1]],
-        ["dark grey" , [0.705, 0.690, 0.709,1]],
+        ["platinum blonde" , [0.789, 0.746, 0.691,1]],
+        ["golden blonde" , [0.895, 0.781, 0.656,1]],
         ["turquoise" , [0.435, 0.807, 0.788,1]],
         ["lime green" , [0.647, 0.854, 0.564,1]],
-        ["mango" , [0.894, 0.737, 0.466,1]],
-        ["ocean" , [0.188, 0.494, 0.611,1]],
+        ["strawberry blonde" , [0.644, 0.418, 0.273,1]],
+        ["light auburn" , [0.566, 0.332, 0.238,1]],
         ["pulp" , [0.643, 0.439, 0.541,1]],
         ["saturated" , [0.905, 0.898, 0.513,1]],
         ["emerald" , [0.098, 0.721, 0.541,1]],
-        ["light brown" , [0.658, 0.537, 0.380,1]]
+        ["light brown" , [0.652, 0.520, 0.414,1]]
         ]
-
-    if mannequin is None:
-        $ mannequin = create_random_person()
-    
-    $ mannequin.body_type = person.body_type
-    $ mannequin.face_style = person.face_style
-    $ mannequin.expression_images = person.expression_images
-    $ mannequin.height = person.height
-    $ mannequin.hair_style = person.hair_style
-    $ mannequin.tits = person.tits
-    $ mannequin.set_outfit(person.outfit)
-    $ mannequin.idle_pose = person.idle_pose
-    $ mannequin.body_images = person.body_images
-    $ mannequin.draw_person(emotion="happy")
 
     default valid_catagories = ["Hair Style"] #Holds the valid list of catagories strings to be shown at the top.
    
@@ -88,8 +69,15 @@ screen hair_creator(person): ##Pass a completely blank outfit instance for a new
                             text_anchor(0.5,0.5)
                             xysize (220, 60)
                             action [SetScreenVariable("catagory_selected",catagory),
-                                SetField(mannequin, "hair_style", selected_hair_style),
-                                SetScreenVariable("selected_colour", "colour")] #Set the clothing to None when you change catagories to avoid breaking the clothing add function assignment
+                                SetScreenVariable("selected_colour", "colour")]
+                    textbutton old_hair_colour:
+                        style "textbutton_style"
+                        text_style "textbutton_text_style"
+                        xysize (220, 60)
+                    textbutton old_hair_style.name:
+                        style "textbutton_style"
+                        text_style "textbutton_text_style"
+                        xysize (220, 60)
 
                 vbox:
                     spacing 15
@@ -119,8 +107,8 @@ screen hair_creator(person): ##Pass a completely blank outfit instance for a new
                                                 SetScreenVariable("selected_colour", "colour"), 
                                                 SetScreenVariable("selected_hair_style", hair_style_item),
                                                 SetField(hair_style_item, "colour", [current_r, current_g, current_b, current_a]),
-                                                SetField(mannequin, "hair_style", hair_style_item),
-                                                Function(mannequin.draw_person)]
+                                                SetField(person, "hair_style", hair_style_item),
+                                                Function(person.draw_person)]
 
                     frame:
                         #THIS IS WHERE SELECTED ITEM OPTIONS ARE SHOWN
@@ -150,6 +138,20 @@ screen hair_creator(person): ##Pass a completely blank outfit instance for a new
                                         xysize (45,45)
                                         yanchor 0.5
                                         yalign 0.5
+
+                                    textbutton "Dye Hair":
+                                        style "textbutton_style"
+                                        text_style "textbutton_text_style"
+                                        background "#1a45a1"
+                                        hover_background "#3a65c1"
+                                        sensitive True
+                                        xoffset 20
+                                        action [
+                                            SetField(selected_hair_style, "colour", [current_r,current_g,current_b,current_a]), 
+                                            SetField(person, "hair_colour", selected_hair_colour),
+                                            SetField(person, "hair_style", selected_hair_style), 
+                                            Function(person.draw_person)
+                                        ]
 
                                 hbox:
                                     spacing 10
@@ -249,28 +251,13 @@ screen hair_creator(person): ##Pass a completely blank outfit instance for a new
                                                     sensitive True
                                                     action [
                                                         SetScreenVariable("selected_hair_colour", hair_colour[0]),
-                                                        SetScreenVariable("current_r", hair_colour[1][0]), SetScreenVariable("current_g", hair_colour[1][1]), SetScreenVariable("current_b", hair_colour[1][2]), SetScreenVariable("current_a", hair_colour[1][3])]
+                                                        SetScreenVariable("current_r", hair_colour[1][0]), SetScreenVariable("current_g", hair_colour[1][1]), SetScreenVariable("current_b", hair_colour[1][2]), SetScreenVariable("current_a", hair_colour[1][3]),
+                                                        SetField(selected_hair_style, "colour", [hair_colour[1][0], hair_colour[1][1], hair_colour[1][2], hair_colour[1][3]]), 
+                                                        SetField(person, "hair_colour", hair_colour[0]),
+                                                        SetField(person, "hair_style", selected_hair_style), 
+                                                        Function(person.draw_person)
+                                                    ]
                                                     # We use a fixed pallette of hair colours
-                                                    # alternate Function(update_colour_palette, count, current_r, current_g, current_b, current_a)
-
-                        if selected_hair_style:
-                            textbutton "Dye Hair":
-                                style "textbutton_style"
-                                text_style "textbutton_text_style"
-                                background "#1a45a1"
-                                hover_background "#3a65c1"
-                                xalign 0.5
-                                yalign 1.0
-                                xanchor 0.5
-                                yanchor 1.0
-                                sensitive True
-                                action [SetField(selected_hair_style, "colour", [current_r,current_g,current_b,current_a]), 
-                                    SetField(mannequin, "hair_colour", selected_hair_colour),
-                                    SetField(mannequin, "hair_style", selected_hair_style), 
-                                    Function(mannequin.draw_person)]
-                                #hovered [SetField(selected_hair_style, selected_colour,[current_r,current_g,current_b,current_a]), SetField(mannequin, "hair_style", selected_hair_style), Function(mannequin.draw_person)]
-
-
         vbox:
             spacing 15
             frame:
@@ -308,12 +295,5 @@ screen hair_creator(person): ##Pass a completely blank outfit instance for a new
                         xalign 0.5
                         xanchor 0.5
                         spacing 50
-                        textbutton "Save Haircut" action [SetField(person, "hair_style", selected_hair_style), SetField(person, "hair_colour", selected_hair_colour),
-                            Function(person.draw_person), Return] style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 xysize (155,80)
-                        textbutton "Abandon Design" action Return style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 xysize (185,80)
-#    fixed: #TODO: Move this to it's own screen so it can be shown anywhere
-#        pos (1450,0)
-
-        #add mannequin_average
-    #    for cloth in demo_outfit.generate_draw_list(None,"stand3"):
-        #    add cloth
+                        textbutton "Save Haircut" action [Return] style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 xysize (155,80)
+                        textbutton "Abandon Design" action [SetField(person, "hair_colour", old_hair_colour), SetField(person, "hair_style", old_hair_style), Return] style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 xysize (185,80)

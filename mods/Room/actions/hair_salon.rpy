@@ -130,13 +130,10 @@ label salon_response(person_choice): # How does the_person respond to a company 
     else:
         person.char "Sounds good, I'll be right there [person.mc_title]."
 
-    $ renpy.scene("Active")
-    call screen hair_creator(person) # This is the "store" / "salon" part of the mod. TODO: Find a different way to check for changes in hair color
-    $ renpy.scene("Active")
+    call screen hair_creator(person, hair_style_check, hair_color_check) # This is the "store" / "salon" part of the mod. TODO: Find a different way to check for changes in hair color
     call salon_checkout() #Will return here if nothing qualifies
     $ renpy.scene("Active")
     return
-
 
 label salon_checkout():
     # Check if any changes was made before leaving.
