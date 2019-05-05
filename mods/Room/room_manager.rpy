@@ -12,164 +12,140 @@
 # If you want characters other than the main character and defined characters to be able to roam the rooms make sure they are set to public with room.public = True
 
 init -1 python:
-    room_manager_mod_init = False
-    room_manager_tutorial = False
-
-    # Default mod room lists
-    # Player's home.
-    elevator_entrance_kitchen = False   # These variables are turned to True if for example "mc.location in mod_rooms_mall" when calling the elevator.
-    mod_rooms_kitchen = []              # This is done in the screen room_manager in the form of: if elevator_entrance_mall == True: -> display rooms in mod_rooms_mall
-                                        # They also determine if the rooms belonging to the corresponding list should be displayed or not.
-
-    elevator_entrance_mom_bedroom = False # If this variable is True then the list below it will be shown.
-    mod_rooms_mom_bedroom = []
-
-    elevator_entrance_sister_bedroom = False
-    mod_rooms_sister_bedroom = []
-
-    elevator_entrance_player_bedroom = False
-    mod_rooms_player_bedroom = []
-
-    elevator_entrance_hall = False
-    mod_rooms_hall = []
-
-    # Downtown.
-    bus_entrance = False
-    mod_rooms_bus = []
-
-    # Mall.
-    elevator_entrance_mall = False
-    mod_rooms_mall = []
-
-    elevator_entrance_office_store = False
-    mod_rooms_office_store = []
-
-    elevator_entrance_clothing_store = False
-    mod_rooms_clothing_store = []
-
-    elevator_entrance_sex_store = False
-    mod_rooms_sex_store = []
-
-    elevator_entrance_home_store = False
-    mod_rooms_home_store = []
-
-    elevator_entrance_gym = False
-    mod_rooms_gym = []
-
-    # Business
-    elevator_entrance_lobby = False
-    mod_rooms_lobby = []
-
-    elevator_entrance_office = False #This is the same room as the supply division
-    mod_rooms_office = []
-
-    elevator_entrance_rd_division = False
-    mod_rooms_rd_division = []
-
-    elevator_entrance_p_division = False
-    mod_rooms_p_division = []
-
-    elevator_entrance_m_division = False
-    mod_rooms_m_division = []
-
-    mod_rooms = [] #Append to this list with room_mods.append(room_name) to have it show up in any of the elevators
-
-    # Return mod room lists (Copies of default mod room lists).
-    #mod_rooms_mall_return = [] # Do not touch these lists. They are checking towards the default mod lists in mod_rooms_return() and are automatically appended.
-
     mod_rooms_append = [] # Rooms appended to this list will have the room_manager_action automatically appended to them so that you can access it via "Do something..."
-                          # It updates on first time startup of the mod and whenever an elevator / bus is entered so you can append to it whenever as long as at least ONE location
-                          # With access to the screen already exist.
+                              # It updates on first time startup of the mod and whenever an elevator / bus is entered so you can append to it whenever as long as at least ONE location
+                              # With access to the screen already exist.
 
+init 2 python:
+    add_label_hijack("normal_start", "activate_room_manager")
 
-init 2 python: # Requirements to activate the mod via Mod Core
-
-    def room_manager_mod_init_requirement():
-        if room_manager_mod_init == False:
-            return True
-        return False
-
-    room_manager_mod_init_action = Action("Add [room_manager_action]", room_manager_mod_init_requirement, "room_manager_mod_init_label",
-        menu_tooltip = "Activates the mod")
-    mod_list.append(room_manager_mod_init_action)
-
+init 3 python:
     def mod_room_manager_append(action): # Make sure you input a valid action. e.g sleep_action
         action = action
         for room in mod_rooms_append:
             if action not in room.actions:
                 room.actions.append(action)
 
-#    def mod_room_return():
-#        for room in mod_rooms_mall:
-#            if room not in mod_rooms_mall_return:
-#                mod_rooms_mall_return.append(room)
-
-label room_manager_mod_init_label(): # Initilization label for Mod Core
-
-    python:
-
-        room_manager_action = Action("Enter the elevator", room_manager_action_requirement, "room_manager_action_label",
-            menu_tooltip = "Visit rooms on different floors")
-
-        # Room(name,formalName,connections,background_image,objects,people,actions,public,map_pos, tutorial_label = None, visible = True)
-        elevator = Room("elevator", "Elevator", [], apartment_background, [],[],[], False,[], None, False) # Create a custom room that can be put to use for generic events and such.
-
-#        mall.actions.append(room_manager_action) # Make the action appear in the "Do something..." menu for the room.
-#        lobby.actions.append(room_manager_action)
-#        hall.actions.append(room_manager_action)
-#        downtown.actions.append(room_manager_action)
-
-        room_manager_mod_init = True
-
-        # Enable the actions in default rooms.
-        mod_rooms_append.append(mall)
-        mod_rooms_append.append(downtown)
-        mod_rooms_append.append(hall)
-        mod_rooms_append.append(lobby)
-
-        # Enable the action in the custom elevator room.
-        mod_rooms_append.append(elevator)
-
-        # Have the default hubs always be available from within themselves.
-        # Got to append them here as the rooms do not exist on list creation.
-        mod_rooms_mall.append(mall)
-        mod_rooms_bus.append(downtown)
-        mod_rooms_hall.append(hall)
-        mod_rooms_lobby.append(lobby)
-        mod_rooms_mom_bedroom.append(mom_bedroom)
-        mod_rooms_sister_bedroom.append(lily_bedroom)
-        mod_rooms_player_bedroom.append(bedroom)
-        mod_rooms_office_store.append(office_store)
-        mod_rooms_clothing_store.append(clothing_store)
-        mod_rooms_sex_store.append(sex_store)
-        mod_rooms_home_store.append(home_store)
-        mod_rooms_gym.append(gym)
-        mod_rooms_office.append(office)
-        mod_rooms_rd_division.append(rd_division)
-        mod_rooms_p_division.append(p_division)
-        mod_rooms_m_division.append(m_division)
-#        .append()
-#        .append()
-#        .append()
-#        .append()
-
+    def room_manager_initialization(self):
         mod_room_manager_append(room_manager_action) # Appends the action to any room in the mod_rooms_append list.
                                    #This is also done whenever accessing any entry points so a restart of the mod isn't required.
+        return
 
-    if room_manager_mod_init: # If no error is thrown so far, the installation was a success.
-        "Room manager installed"
+    room_manager_action = ActionMod("Enter the elevator", room_manager_action_requirement, "room_manager_action_label", initialization = room_manager_initialization,
+        menu_tooltip = "Visit rooms on different floors", category = "Misc")
+
+        # Room(name,formalName,connections,background_image,objects,people,actions,public,map_pos, tutorial_label = None, visible = True)
+    elevator = Room("elevator", "Elevator", [], apartment_background, [],[],[], False,[], None, False) # Create a custom room that can be put to use for generic events and such.
+
+label activate_room_manager(stack):
+    $ room_manager_tutorial = False
+    # Default mod room lists
+    # Player's home.
+    $ elevator_entrance_kitchen = False   # These variables are turned to True if for example "mc.location in mod_rooms_mall" when calling the elevator.
+    $ mod_rooms_kitchen = []              # This is done in the screen room_manager in the form of: if elevator_entrance_mall == True: -> display rooms in mod_rooms_mall
+                                        # They also determine if the rooms belonging to the corresponding list should be displayed or not.
+
+    $ elevator_entrance_mom_bedroom = False # If this variable is True then the list below it will be shown.
+    $ mod_rooms_mom_bedroom = []
+
+    $ elevator_entrance_sister_bedroom = False
+    $ mod_rooms_sister_bedroom = []
+
+    $ elevator_entrance_player_bedroom = False
+    $ mod_rooms_player_bedroom = []
+
+    $ elevator_entrance_hall = False
+    $ mod_rooms_hall = []
+
+    # Downtown.
+    $ bus_entrance = False
+    $ mod_rooms_bus = []
+
+    # Mall.
+    $ elevator_entrance_mall = False
+    $ mod_rooms_mall = []
+
+    $ elevator_entrance_office_store = False
+    $ mod_rooms_office_store = []
+
+    $ elevator_entrance_clothing_store = False
+    $ mod_rooms_clothing_store = []
+
+    $ elevator_entrance_sex_store = False
+    $ mod_rooms_sex_store = []
+
+    $ elevator_entrance_home_store = False
+    $ mod_rooms_home_store = []
+
+    $ elevator_entrance_gym = False
+    $ mod_rooms_gym = []
+
+    # Business
+    $ elevator_entrance_lobby = False
+    $ mod_rooms_lobby = []
+
+    $ elevator_entrance_office = False #This is the same room as the supply division
+    $ mod_rooms_office = []
+
+    $ elevator_entrance_rd_division = False
+    $ mod_rooms_rd_division = []
+
+    $ elevator_entrance_p_division = False
+    $ mod_rooms_p_division = []
+
+    $ elevator_entrance_m_division = False
+    $ mod_rooms_m_division = []
+
+    $ mod_rooms = [] #Append to this list with room_mods.append(room_name) to have it show up in any of the elevators
+
+#    $ mod_rooms_append = [] # Rooms appended to this list will have the room_manager_action automatically appended to them so that you can access it via "Do something..."
+                          # It updates on first time startup of the mod and whenever an elevator / bus is entered so you can append to it whenever as long as at least ONE location
+                          # With access to the screen already exist.
+
+    if mall not in mod_rooms_append:
+        $ mod_rooms_append.append(mall)
+        $ mod_rooms_append.append(downtown)
+        $ mod_rooms_append.append(hall)
+        $ mod_rooms_append.append(lobby)
+
+        # Enable the action in the custom elevator room.
+        $ mod_rooms_append.append(elevator)
+
+    # Have the default hubs always be available from within themselves.
+    # Got to append them here as the rooms do not exist on list creation.
+    $ mod_rooms_mall.append(mall)
+    $ mod_rooms_bus.append(downtown)
+    $ mod_rooms_hall.append(hall)
+    $ mod_rooms_lobby.append(lobby)
+    $ mod_rooms_mom_bedroom.append(mom_bedroom)
+    $ mod_rooms_sister_bedroom.append(lily_bedroom)
+    $ mod_rooms_player_bedroom.append(bedroom)
+    $ mod_rooms_office_store.append(office_store)
+    $ mod_rooms_clothing_store.append(clothing_store)
+    $ mod_rooms_sex_store.append(sex_store)
+    $ mod_rooms_home_store.append(home_store)
+    $ mod_rooms_gym.append(gym)
+    $ mod_rooms_office.append(office)
+    $ mod_rooms_rd_division.append(rd_division)
+    $ mod_rooms_p_division.append(p_division)
+    $ mod_rooms_m_division.append(m_division)
+#        .append()
+#        .append()
+#        .append()
+#        .append()
+#    $ mod_room_manager_append(room_manager_action) # Appends the action to any room in the mod_rooms_append list.
+                           #This is also done whenever accessing any entry points so a restart of the mod isn't required.
+
+    $ execute_hijack_call(stack)
     return
+
 
 init 2 python: # Requirement for the elevator action to show in "Do something..." if it has been appended to the room.
     def room_manager_action_requirement():
-        if room_manager_mod_init == True:
-            return True
-        else:
-            return False
+        return True
 
 label room_manager_action_label(): # What happens when you "Enter the elevator"
-    python:
-        mod_room_manager_append(room_manager_action) # Adds the action to any new room in the mod_rooms_append list that does not already have it.
+    $ mod_room_manager_append(room_manager_action) # Adds the action to any new room in the mod_rooms_append list that does not already have it. NOTE: having this enabled duplicates the action due to it being checked on the loading of saves now.
     if room_manager_tutorial == False: # Set to True if the player does not wish to see the message (ever) again.
         "Speaker" "This elevator acts as a hub for rooms added to the game via mods"
         "Speaker" "If you want a room to show up in the elevator do mod_rooms.append(room_name)"

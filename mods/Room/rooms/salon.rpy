@@ -8,15 +8,6 @@ init -1 python: # Declare variables to use
 
 init 2 python: # Room creation
 
-    # Always check if the room or action is somehow added already before proceeding.
-    # I want the Elevator to be accessable.
-    if mall_salon not in mod_rooms_mall:
-        mod_rooms_mall.append(mall_salon)
-
-    # I want to enter it from the mall.
-    if mall_salon not in mod_rooms_append:
-        mod_rooms_append.append(mall_salon)
-
     if object not in mall_salon.objects:
         mall_salon.add_object(make_floor())
         mall_salon.add_object(make_wall())

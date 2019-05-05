@@ -13,7 +13,7 @@ init 3 python: # Put this behind a mod init to ensure compatability
 
     security_overview_action = Action("Security Overview", security_overview_requirement, "security_overview",
     menu_tooltip = "Oversee your business, employees plus more.")
-    m_division_basement.actions.append(security_overview_action)
+
 
 
     def investigation_requirement():

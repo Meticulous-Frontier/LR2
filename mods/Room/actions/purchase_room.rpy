@@ -1,39 +1,24 @@
 init -1 python:
-    purchasable_room = []
+    purchasable_room = [] # Should this be put in an hijack as well?
     t1_cost = 10000
     t2_cost = 50000
     t3_cost = 100000
 
-    purchase_rooms_mod_init = False
+init 3 python:
+    def purchase_rooms_requirement():
+        return True
 
-init 2 python:
-    def purchase_rooms_mod_requirement():
-        if purchase_rooms_mod_init == False:
-            return True
-        return False
+    def purchase_rooms_initialization(self):
+        office.actions.append(self)
 
-    purchase_rooms_mod_init_action = Action("Purchase Rooms Enabler", purchase_rooms_mod_requirement, "purchase_rooms_mod_init_label",
-        menu_tooltip = "Enables the mod")
-    if not purchase_rooms_mod_init_action in mod_list:
-        mod_list.append(purchase_rooms_mod_init_action)
 
-label purchase_rooms_mod_init_label():
-    python:
-        office.actions.append(purchase_rooms)
-        purchase_rooms_mod_init = True
-    if purchase_rooms_mod_init == True:
-        "Purchasable rooms added to office"
-    return
-
+    purchase_rooms = ActionMod("Purchase Rooms", purchase_rooms_requirement, "purchase_rooms", initialization = purchase_rooms_initialization,
+        menu_tooltip = "Purchase rooms and facilities", category = "Business")
 # Categorized rooms into tiers for their cost.
 # TODO: Show different disabled message if room purchased
 init 2 python:
 
-    def purchase_rooms_requirement():
-        return True
 
-    purchase_rooms = Action("Purchase Rooms", purchase_rooms_requirement, "purchase_rooms",
-        menu_tooltip = "Purchase rooms and facilities")
 
     def room_tier_1():
         if mc.business.funds >= t1_cost:
@@ -88,30 +73,49 @@ label purchase_rooms():
 label purchase_dungeon_room(): #Enables the dugneon.
     if office_basement not in mod_rooms_lobby:
         $ mc.business.funds -= t1_cost
+
         $ mod_rooms_lobby.append(office_basement)
+        $ mod_rooms_append.append(office_basement) # Gives an escape through the elevator
+
         $ advance_time()
+
     jump purchase_rooms
 
 # Tier 2 Rooms
 label purchase_security_room(): #Enables the security room.
     if m_division_basement not in mod_rooms_lobby:
+
         $ mc.business.funds -= t2_cost
+
         $ mod_rooms_lobby.append(m_division_basement)
+        $ mod_rooms_append.append(m_division_basement) # Gives an escape through the elevator
+        $ m_division_basement.actions.append(security_overview_action)
+
         $ advance_time()
     jump purchase_rooms
 
 label purchase_machinery_room(): #Enables the machinery room
     if p_division_basement not in mod_rooms_lobby:
         $ mc.business.funds -= t2_cost
+
         $ mod_rooms_lobby.append(p_division_basement)
+        $ mod_rooms_append.append(p_division_basement) # Gives an escape through the elevator
+
         $ advance_time()
     jump purchase_rooms
 
 # Tier 3 Rooms
 label purchase_biotech_room(): #Enables the biotech lab
     if rd_division_basement not in mod_rooms_lobby:
+
         $ mc.business.funds -= t3_cost
+
+        $ rd_division_basement.actions.append(biotech_action)
         $ mod_rooms_lobby.append(rd_division_basement)
+        $ mod_rooms_append.append(rd_division_basement) # Gives an escape through the elevator
+
+        $ list_of_places.append(rd_division_basement)
+
         $ advance_time()
     jump purchase_rooms
 
