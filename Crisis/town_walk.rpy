@@ -6,8 +6,9 @@ init -1 python:
 init 2 python:
     def town_walk_crisis_requirement():
         if not mc.business.is_weekend(): # we only take a lunch break on weekdays
-            if time_of_day == 2:
-                return True
+            if mc.is_at_work():
+                if time_of_day == 2:
+                    return True
         return False
 
     town_walk_crisis = ActionMod("Town Walk Crisis",town_walk_crisis_requirement,"town_walk_action_description", 
