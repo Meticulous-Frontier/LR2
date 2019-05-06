@@ -20,29 +20,30 @@ init 3 python:
         gym.actions.append(self)
         return
 
-    train_in_gym_action = ActionMod("Schedule Gym Session {image=gui/heart/Time_Advance.png}", gym_requirement, "select_person_for_gym", 
+    train_in_gym_action = ActionMod("Schedule Gym Session {image=gui/heart/Time_Advance.png}", gym_requirement, "select_person_for_gym",
         initialization = gym_initialization, menu_tooltip = "Bring a person to the gym to train their body.", category="Mall")
-       
+
 label select_person_for_gym():
     "Select who the gym session is for"
-    python: # First we select which person we want to train with
-        tuple_list = format_person_list(all_people_in_the_game([mc]), draw_hearts = True) #The list of people to show. e.g mc.location.people
-        tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
-        person_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
+    while True:
+        python: # First we select which person we want to train with
+            tuple_list = format_person_list(all_people_in_the_game([mc]), draw_hearts = True) #The list of people to show. e.g mc.location.people
+            tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
+            person_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
 
         if person_choice == "Back":
-            renpy.jump("game_loop") # Where to go if you hit "Back".
+            return # Where to go if you hit "Back".
         else:
-            renpy.say("","You send a text message to " + person_choice.title + " about a gym session.")
-            renpy.say("", "After some time you get a response...")
+            "You send a text message to [person_choice.title] about a gym session."
+            "After some time you get a response..."
 
-    call select_person_for_gym_response(person_choice)# What to do if "Back" was not the choice taken.
-    jump game_loop # Return to the game_loop or a label that will bring you back to the game loop    
-    
-    
+            call select_person_for_gym_response(person_choice)# What to do if "Back" was not the choice taken.
+
+
+
 label select_person_for_gym_response(person_choice):
     $ the_person = person_choice
-    
+
     if the_person.personality == bimbo_personality:
         the_person.char "Cumming right away, [the_person.mc_title]!"
     elif the_person.obedience > 120:
@@ -67,4 +68,3 @@ label select_person_for_gym_response(person_choice):
     # End of respones
     call train_in_gym(the_person) from _call_train_in_gym_person_for_gym
     call advance_time from _call_advance_time_gym_training
-    

@@ -50,7 +50,7 @@ init 2 python:
         office.actions.append(self)
         return
 
-    import_wardrobe_action = ActionMod("Import Wardrobe from XML", import_wardrobe_requirement, "import_wardrobe_label", 
+    import_wardrobe_action = ActionMod("Import Wardrobe from XML", import_wardrobe_requirement, "import_wardrobe_label",
         initialization = import_wardrobe_mod_initialization, menu_tooltip = "Type the name of the XML file to import, case sensitive")
 
     give_wardrobe_action = ActionMod("Give Wardrobe from XML", import_wardrobe_requirement, "give_wardrobe_label",
@@ -68,20 +68,18 @@ label import_wardrobe_label():
 #    pass
 label give_wardrobe_label():
     "Select who to give clothes"
-    python: # First we select which employee we want
+    while True:
+        python: # First we select which employee we want
 
-            tuple_list = format_person_list(all_people_in_the_game(), draw_hearts = True) #The list of people to show. e.g mc.location.people
-            tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
-            person_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
+                tuple_list = format_person_list(all_people_in_the_game(), draw_hearts = True) #The list of people to show. e.g mc.location.people
+                tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
+                person_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
 
-            if person_choice == "Back":
-                renpy.jump("game_loop") # Where to go if you hit "Back".
-#            else:
-#                renpy.say("","You send a shipment of clothes to " + person_choice.name) #Add flavor text to what is about to happen. e.g "You tell the_person to go visit Starbuck for training".
-#                renpy.say("", "Delivery has been made")
+        if person_choice == "Back":
+            return # Where to go if you hit "Back".
+        else:
+            call give_wardrobe_input(person_choice)# What to do if "Back" was not the choice taken.
 
-    call give_wardrobe_input(person_choice)# What to do if "Back" was not the choice taken.
-    jump game_loop # Return to the game_loop or a label that will bring you back to the game loop
 
 label give_wardrobe_input(person_choice):
 

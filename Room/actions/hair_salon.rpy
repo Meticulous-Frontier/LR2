@@ -64,20 +64,20 @@ label salon_label():
 
 
     "Select who the appointment is for."
-    python: # First we select which employee we want
-        tuple_list = format_person_list(all_people_in_the_game([mc]), draw_hearts = True)  #The list of people to show. e.g mc.location.people
-        tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
-        renpy.scene("Active") # Had a rare occurence of a person being drawn although no choice being made.
-        person_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
+    while True:
+        python: # First we select which employee we want
+            tuple_list = format_person_list(all_people_in_the_game([mc]), draw_hearts = True)  #The list of people to show. e.g mc.location.people
+            tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
+            renpy.scene("Active") # Had a rare occurence of a person being drawn although no choice being made.
+            person_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
 
         if person_choice == "Back":
-            renpy.jump("game_loop") # Where to go if you hit "Back".
+            return # Where to go if you hit "Back".
         else:
-            renpy.say("","You send a message to " + person_choice.name + " about the appointment.") #Add flavor text to what is about to happen. e.g "You tell the_person to go visit Starbuck for training".
-            renpy.say("", "After some time you get a response...")
+            "You send a message to [person_choice.name] about the appointment."
+            "After some time you get a response..."
+            call salon_response(person_choice)# What to do if "Back" was not the choice taken.
 
-    call salon_response(person_choice)# What to do if "Back" was not the choice taken.
-    jump game_loop # Return to the game_loop or a label that will bring you back to the game loop
 
 label salon_response(person_choice): # How does the_person respond to a company paid haircut?
     $ person = person_choice
