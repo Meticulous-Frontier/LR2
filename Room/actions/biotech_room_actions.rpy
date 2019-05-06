@@ -71,9 +71,9 @@ label clone_person():
             if person_choice == "Back":
                 renpy.jump("gene_modifications") # Where to go if you hit "Back".
 
-    $ the_person = person_choice
-    $ the_person.draw_person(emotion = "default")
-    "Do you wish to clone [the_person.name]?"
+    $ person = person_choice
+    $ person.draw_person(emotion = "default")
+    "Do you wish to clone [person.name]?"
     menu:
         "Yes":
             jump cloning_process
@@ -82,10 +82,10 @@ label clone_person():
             jump clone_person
     menu cloning_process:
         "Give the clone a name":
-            $ clone_name = str(renpy.input("Name: ", the_person.name))
-            $ clone_last_name = str(renpy.input("Last name: ", the_person.last_name))
+            $ clone_name = str(renpy.input("Name: ", person.name))
+            $ clone_last_name = str(renpy.input("Last name: ", person.last_name))
         "Age":
-            $ clone_age = int(renpy.input("Age: ", the_person.age))
+            $ clone_age = int(renpy.input("Age: ", person.age))
             if clone_age < 18:
                 $ clone_age = 18
 
@@ -94,15 +94,15 @@ label clone_person():
         "Begin production:{image=gui/heart/Time_Advance.png} \n{size=22}Name: [clone_name] [clone_last_name], Age: [clone_age]{/size}":
 
             if clone_name == None:
-                $ clone_name = the_person.name
+                $ clone_name = person.name
             if clone_last_name == None:
-                $ clone_last_name = the_person.last_name
+                $ clone_last_name = person.last_name
             if clone_age == None:
-                $ clone_age = the_person.age
+                $ clone_age = person.age
 
-            $ clone = create_random_person(name = clone_name, last_name = clone_last_name, age = clone_age, body_type = the_person.body_type, face_style = the_person.face_style, tits = the_person.tits, height = the_person.height, hair_colour = the_person.hair_colour, hair_style = the_person.hair_style, skin = the_person.skin, eyes = the_person.eyes, job = None,
-                personality = the_person.personality, custom_font = None, name_color = None, dial_color = None, starting_wardrobe = the_person.wardrobe, stat_array = None, skill_array = None, sex_array = None,
-                start_sluttiness = the_person.sluttiness, start_obedience = the_person.obedience, start_happiness = the_person.happiness, start_love = the_person.love, start_home = None, title = "Clone", possessive_title = "Your creation", mc_title = "Creator")
+            $ clone = create_random_person(name = clone_name, last_name = clone_last_name, age = clone_age, body_type = person.body_type, face_style = person.face_style, tits = person.tits, height = person.height, hair_colour = person.hair_colour, hair_style = person.hair_style, skin = person.skin, eyes = person.eyes, job = None,
+                personality = person.personality, custom_font = None, name_color = None, dial_color = None, starting_wardrobe = person.wardrobe, stat_array = None, skill_array = None, sex_array = None,
+                start_sluttiness = person.sluttiness, start_obedience = person.obedience, start_happiness = person.happiness, start_love = person.love, start_home = None, title = "Clone", possessive_title = "Your creation", mc_title = "Creator")
 
             $ clone.schedule[0] = rd_division_basement
             $ clone.schedule[1] = rd_division_basement
@@ -131,133 +131,65 @@ label modify_person():
             if person_choice == "Back":
                 renpy.jump("gene_modifications") # Where to go if you hit "Back".
 
-    $ the_person = person_choice
-    $ the_person.draw_person(emotion = "default")
-    "Do you wish to modify [the_person.name]?"
-    menu:
-        "Yes":
-            jump modification_process
-        "No":
-            $renpy.scene("Active")
-            jump modify_person
-
+    $ person = person_choice
+    $ person.draw_person(emotion = "default")
     menu modification_process:
-        "Change body: [the_person.body_type]":
-            menu modification_body:
-                "Thin Body":
-                    $ the_person.body_type = "thin_body"
-                    $ cheat_redraw_face()
-                    $ cheat_redraw_body()
+        "Change body: [person.body_type]":
+            python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+                    body_types = []
+                    for n in list_of_body_types:
+                        body_types.append(n)
+                    body_types.append("Back")
+                    body_choice = renpy.display_menu(simple_list_format(body_types, n, string = "Body Type: "),True,"Choice")
 
-                "Standard Body":
-                    $ the_person.body_type = "standard_body"
-                    $ cheat_redraw_face()
-                    $ cheat_redraw_body()
+                    if body_choice == "Back":
+                        renpy.jump("modification_process")
+                    else:
+                        person.body_type = body_choice
+                        person.draw_person()
+            jump modification_process
+        "Change skin: [person.skin]":
 
-                "Curvy Body":
-                    $ the_person.body_type = "curvy_body"
-                    $ cheat_redraw_face()
-                    $ cheat_redraw_body()
-                "Back":
-                    jump modification_process
-            jump modification_body
-        "Change skin: [the_person.skin]":
-            menu modification_skin:
-                "White Skin":
-                    $ the_person.skin = "white"
-                    $ the_person.body_images = white_skin
-                    $ cheat_redraw_face()
-                    $ cheat_redraw_body()
+            python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+                    skin_styles = [x[0] for x in list_of_skins]
 
-                "Tan Skin":
-                    $ the_person.skin = "tan"
-                    $ person_choice.body_images = tan_skin
-                    $ cheat_redraw_face()
-                    $ cheat_redraw_body()
+                    skin_styles.append("Back")
+                    skin_choice = renpy.display_menu(simple_list_format(skin_styles, x[0], string = "Skin Type: "),True,"Choice")                    
+                    if skin_choice == "Back":
+                        renpy.jump("modification_process")
+                    else:
+                        person.skin = skin_choice
+                        person.match_skin(skin_choice)
+                        person.draw_person()
+            jump modification_process
+        "Change face: [person.face_style]":
 
-                "Black Skin":
-                    $ the_person.skin = "black"
-                    $ person_choice.body_images = black_skin
-                    $ cheat_redraw_face()
-                    $ cheat_redraw_body()
+            python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+                    face_styles = []
+                    for face in list_of_faces:
+                        face_styles.append(face)
+                    face_styles.append("Back")
+                    face_choice = renpy.display_menu(simple_list_format(face_styles, face, string = "Face Type: "),True,"Choice")
 
-                "Back":
-                    jump modification_process
-            jump modification_skin
-        "Change face: [the_person.face_style]":
-            menu modification_face:
-                "Face Style 1":
-                    $ the_person.face_style = "Face_1"
-                    $ cheat_redraw_face()
+                    if face_choice == "Back":
+                        renpy.jump("modification_process")
+                    else:
+                        person.face_style = face_choice
+                        person.match_skin(person.skin)
+                        person.draw_person()
+            jump modification_process
+        "Change breast size: [person.tits]":
+            python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+                    cup_sizes = [x[0] for x in list_of_tits]
+                    cup_sizes.append("Back")
+                    cup_choice = renpy.display_menu(simple_list_format(cup_sizes, x[0], string = "Cup Size: "),True,"Choice")
 
-                "Face Style 2":
-                    $ the_person.face_style = "Face_2"
-                    $ cheat_redraw_face()
-
-                "Face Style 3":
-                    $ the_person.face_style = "Face_3"
-                    $ cheat_redraw_face()
-
-                "Face Style 4":
-                    $ the_person.face_style = "Face_4"
-                    $ cheat_redraw_face()
-
-                "Face Style 5":
-                    $ the_person.face_style = "Face_5"
-                    $ cheat_redraw_face()
-
-                "Face Style 6":
-                    $ the_person.face_style = "Face_6"
-                    $ cheat_redraw_face()
-
-                "Back":
-                    jump modification_process
-            jump modification_face
-        "Change breast size: [the_person.tits]":
-            menu modification_tits:
-                "Set cup size A":
-                    $ the_person.tits = "A"
-                    $ the_person.draw_person(the_person)
-
-                "Set cup size AA":
-                    $ the_person.tits = "AA"
-                    $ the_person.draw_person(the_person)
-
-                "Set cup size B":
-                    $ the_person.tits = "B"
-                    $ the_person.draw_person(the_person)
-
-                "Set cup size C":
-                    $ the_person.tits = "C"
-                    $ the_person.draw_person(the_person)
-
-                "Set cup size D":
-                    $ the_person.tits = "D"
-                    $ the_person.draw_person(the_person)
-
-                "Set cup size DD":
-                    $ the_person.tits = "DD"
-                    $ the_person.draw_person(the_person)
-
-                "Set cup size DDD":
-                    $ the_person.tits = "DDD"
-                    $ the_person.draw_person(the_person)
-
-                "Set cup size E":
-                    $ the_person.tits = "E"
-                    $ the_person.draw_person(the_person)
-
-                "Set cup size F":
-                    $ the_person.tits = "F"
-                    $ the_person.draw_person(the_person)
-
-                "Set cup size FF":
-                    $ the_person.tits = "FF"
-                    $ the_person.draw_person(the_person)
-
-                "Back":
-                    jump modification_process
-            jump modification_tits
+                    if cup_choice == "Back":
+                        renpy.jump("modification_process")
+                    else:
+                        person.tits = cup_choice
+                        person.draw_person()
+            jump modification_process
         "Back":
             jump modify_person
     jump modification_process
