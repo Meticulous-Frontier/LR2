@@ -280,11 +280,10 @@ init -1:
 
         # log will power to event log in ui
         def log_willpower(person):
-            message = (person.title or person.name) + ": "
             if (person is mc):
-                message += str(person.power)
+                message = "Your: " + str(person.power)
             else:
-                message += str(person.willpower)
+                message = (person.title or person.name) + ": " + str(person.willpower)
             message += " Willpower"
             mc.log_event(message, "float_text_blue")
             return

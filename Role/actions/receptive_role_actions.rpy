@@ -12,12 +12,6 @@ init 2 python: # Define actions and requirements for the actual mod here.
         menu_tooltip = "Influence an opinion")
 
 
-
-
-
-
-
-
 label influence_opinion_start_label(person): # This is the setup phase that you have to get through.
                                                  # We want to set up the setting and allow for choices to tackle them for better or worse results.
                                                  # Do mood checks, relation to player character, opinion checks, personality checks.
@@ -74,4 +68,4 @@ label influence_opinion_start_label(person): # This is the setup phase that you 
         "Speaker" "You are at a stalemate, try changing your approach"
 
     $ renpy.scene("Active")
-    jump game_loop
+    return
