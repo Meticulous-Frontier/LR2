@@ -1,24 +1,24 @@
 ## Cougar personality Mod by Tristimdorion
-# All girls in town older than 40 get this personality trait 
+# All girls in town older than 40 get this personality trait
 # See generic_personality_hook.rpy for more information
 
 init 1400 python:
     def cougar_titles(person):
-        valid_titles = reserved_titles(person)
+        valid_titles = [reserved_titles(person)]
         if person.love > 25:
             valid_titles.append("Cougar")
         return valid_titles
     def cougar_possessive_titles(person):
-        valid_titles = relaxed_titles(person)
+        valid_possessive_titles = [relaxed_titles(person)]
         if person.sluttiness > 60:
             valid_possessive_titles.append("Your slutty cougar")
         if person.sluttiness > 100:
             valid_possessive_titles.append("Your cum-dump cougar")
         if person.sluttiness > 100 and person.sex_skills["Anal"] >= 4:
             valid_possessive_titles.append("Your anal cumslut cougar")
-        return valid_titles
+        return valid_possessive_titles
     def cougar_player_titles(person):
-        valid_player_titles = reserved_player_titles(person)
+        valid_player_titles = [reserved_player_titles(person)]
         if person.happiness < 70:
             valid_player_titles.append("Litle boy")
         if person.love > 25:
@@ -58,7 +58,7 @@ label correct_personality_age_action(stack):
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
-    return    
+    return
 
 label cougar_greetings(the_person):
     if the_person.obedience > 130:
@@ -215,7 +215,7 @@ label cougar_sex_responses(the_person):
     else:
         "[the_person.title] closes her eyes."
         the_person.char "Yes [the_person.mc_title], just like that!"
-    return    
+    return
 
 label cougar_seduction_refuse(the_person):
     if the_person.sluttiness < 20:
