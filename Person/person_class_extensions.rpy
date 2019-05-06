@@ -10,6 +10,24 @@ init -2 python:
 
 init -1:
     python:
+
+
+        ## MATCH SKIN COLOR
+        # Matches skin, body, face and expression images based on input of skin color
+        def match_skin(self, color):
+            self.skin = str(color)
+            if self.skin == "white":
+                self.body_images = white_skin
+            elif self.skin == "tan":
+                self.body_images = tan_skin
+            elif self.skin == "black":
+                self.body_images = black_skin
+            self.expression_images = Expression("default", self.skin, self.face_style)
+            return
+        Person.match_skin = match_skin
+
+
+
         ## CHANGE HEIGHT EXTENSION
         # Returns True when the persons height has changed; otherwise False
         # chance is probability percentage that height change for amount will occur (used by serums)
@@ -24,12 +42,12 @@ init -1:
 
             if self.height > 1:
                 self.height == 1
-            
+
             if self.height < .8:
                 self.height = .8
-            
+
             return True
-        
+
         # attach change height function to the Person class
         Person.change_height = change_height
 
@@ -43,7 +61,7 @@ init -1:
 
             if renpy.random.randint(0, 100) <= chance:
                 self.weight += amount
-            
+
             # maximum and minimum weight are dependant on height
             max_weight = self.height * 100
             min_weight = self.height * 50
@@ -66,13 +84,13 @@ init -1:
                     self.weight = min_weight
                     return False
                 if self.weight < switch_point_low - 3 and self.body_type == "standard_body":
-                    self.body_type = "thin_body"        
+                    self.body_type = "thin_body"
                     return True
                 if self.weight < switch_point_high - 3 and self.body_type == "curvy_body":
                     self.body_type = "standard_body"
                     return True
                 return False
-        
+
         # attach change weight function to the Person class
         Person.change_weight = change_weight
 
@@ -90,7 +108,7 @@ init -1:
         # Strips down the person to a clothing their are comfortable with (starting with top, before bottom)
         # optional: clothing_message narrator voice after each item use '##clothing##'' in message for clothing item stripped, use '##person_name##' for self name.
         #           Can be an array of messages for variation in message per clothing item
-        # note: at least 1 item gets removed regardsless of sluttiness 
+        # note: at least 1 item gets removed regardsless of sluttiness
         def strip_outfit_to_max_sluttiness(self, top_layer_first = True, exclude_feet = True, narrator_message = None):
             # internal function to strip top clothing first.
             def get_strip_choice_upper_first(person, top_layer_first = True, exclude_feet = True, do_not_remove = True):
@@ -103,7 +121,7 @@ init -1:
                     return message
                 else:
                     msg_choice_index = renpy.random.randint(1,len(message))
-                    return message[msg_choice_index - 1]           
+                    return message[msg_choice_index - 1]
 
             strip_choice = get_strip_choice_upper_first(self, top_layer_first, exclude_feet, do_not_remove = True)
             while not strip_choice is None:
@@ -142,7 +160,7 @@ init -1:
 
             if discovered is None and opinion in self.sexy_opinions[0]: # we passed None for discovered so use existing discovered info
                 discovered = self.sexy_opinions[opinion][1]
-            
+
             if discovered is None: # we didn't find any discovery information for opinion, so it's new and we passed None, so default set to false
                 discovered = False
 
@@ -185,7 +203,7 @@ init -1:
 
             if clear_old_position and not self.last_placement is None and self.last_placement != character_placement: # we change location so clear current location.
                 old_scene_layer = current_scene_layer(self.last_placement)
-                renpy.scene(old_scene_layer)  
+                renpy.scene(old_scene_layer)
 
             active_scene_layer = current_scene_layer(character_placement)
             renpy.scene(active_scene_layer) # Clear current screen position for placement
@@ -199,14 +217,14 @@ init -1:
         def clear_scene(self):
             active_scene = current_scene_layer(self.last_placement)
             self.last_placement = None
-            renpy.scene(active_scene)           
-        
+            renpy.scene(active_scene)
+
         Person.clear_scene = clear_scene
 
         def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, character_placement = None): #Draw the person, standing as default if they aren't standing in any other position.
             if position is None:
                 position = self.idle_pose
-            
+
             # Hack for updating the hair colour based on the name of the hair colour when the colour is black but the name is not.
             if (self.hair_colour != "black" and self.hair_style.colour == [0.1,0.09,0.08,1]):
                 update_hair_colour(self)
@@ -334,4 +352,3 @@ init -1:
         xalign 0.5
         xanchor 1.0
         xzoom -1
-
