@@ -10,6 +10,13 @@ init -2 python:
     # search as lambda could be a lambda ==> x: x.name == 'searchname'
     def find_in_list(search, list):
         for item in list:
-            if search(item): 
+            if search(item):
                 return item
         return None
+
+    def simple_list_format(list_to_format, what_to_format, string = ""): # Returns a simple list for use in generic menus. Extensive use in the Biotech Actions.
+        tuple_list = []                                                    # NOTE: Needed a generic list setup, this seems to cover most usecases I came across.
+        for what_to_format in list_to_format:
+            tuple_string = str(string) + str(what_to_format)
+            tuple_list.append([tuple_string, what_to_format])
+        return tuple_list
