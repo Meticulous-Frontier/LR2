@@ -1,4 +1,4 @@
-# Actions for the receptive role in suggestibility_roles.rpy
+# Actions for the receptive role in suggestable_role.rpy
 
 init 2 python: # Define actions and requirements for the actual mod here.
 
@@ -67,5 +67,10 @@ label influence_opinion_start_label(person): # This is the setup phase that you 
     else:
         "Speaker" "You are at a stalemate, try changing your approach"
 
-    $ renpy.scene("Active")
+    python:
+        if suggestable_role in person.special_role:
+            person.special_role.remove(suggestable_role)
+            mc.log_event((person.title or person.name) + " is no longer suggestable.", "float_text_blue")
+
+        renpy.scene("Active")
     return

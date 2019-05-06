@@ -177,7 +177,7 @@ init -1:
                     sexy_opinions_list.append(opinion)
 
             if add_to_log:
-                mc.log_event(self.name + " " + opinion_score_to_string(degree) + " " + str(opinion), "float_text_green")
+                mc.log_event((self.title or self.name) + " " + opinion_score_to_string(degree) + " " + str(opinion), "float_text_green")
             return
 
         # Adds a function that edits and adds opinions. It also appends to the vanilla opinion pool.

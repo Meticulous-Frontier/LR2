@@ -25,20 +25,17 @@ init 3 python:
 
 label select_person_for_gym():
     "Select who the gym session is for"
-    while True:
-        python: # First we select which person we want to train with
-            tuple_list = format_person_list(all_people_in_the_game([mc]), draw_hearts = True) #The list of people to show. e.g mc.location.people
-            tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
-            person_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
+    python: # First we select which person we want to train with
+        tuple_list = format_person_list(all_people_in_the_game([mc]), draw_hearts = True) #The list of people to show. e.g mc.location.people
+        tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
+        person_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
 
-        if person_choice == "Back":
-            return # Where to go if you hit "Back".
-        else:
-            "You send a text message to [person_choice.title] about a gym session."
-            "After some time you get a response..."
+    if person_choice != "Back":
+        "You send a text message to [person_choice.title] about a gym session."
+        "After some time you get a response..."
 
-            call select_person_for_gym_response(person_choice)# What to do if "Back" was not the choice taken.
-
+        call select_person_for_gym_response(person_choice)# What to do if "Back" was not the choice taken.
+    return # Go back to main menu
 
 
 label select_person_for_gym_response(person_choice):
