@@ -42,22 +42,22 @@ init 1 python:
 
 label clone_rename(person):
     "You tell [person.title] that it is to be renamed."
-    menu clone_rename_menu:
-        "Name: [person.name]":
-            $ clone_name = str(renpy.input("Name: ", person.name))
-            $ person.name = clone_name
+    while True:
+        menu clone_rename_menu:
+            "Name: [person.name]":
+                $ clone_name = str(renpy.input("Name: ", person.name))
+                $ person.name = clone_name
 
-        "Last name: [person.last_name]":
-            $ clone_last_name = str(renpy.input("Last name: ", person.last_name))
-            $ person.last_name = clone_last_name
+            "Last name: [person.last_name]":
+                $ clone_last_name = str(renpy.input("Last name: ", person.last_name))
+                $ person.last_name = clone_last_name
 
-        "Title: [person.title]":
-            $ clone_title = str(renpy.input("Title: ", person.title))
-            $ person.title = clone_title
+            "Title: [person.title]":
+                $ clone_title = str(renpy.input("Title: ", person.title))
+                $ person.title = clone_title
 
-        "Back: ":
-            return
-    jump clone_rename_menu
+            "Back: ":
+                return
 
 label clone_recall(person):
     "You order [person.title] back to [rd_division_basement.name]"
@@ -72,73 +72,81 @@ label clone_schedule(person):
     menu clone_schedule_menu:
 
         "Early Morning: [person.schedule[0].name]":
+
             python: # First we select which employee we want
 
                     tuple_list = format_rooms(list_of_places) #TODO: Create a list that excludes homes not in mc.known_home_locations
                     tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
                     room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
 
-                    if room_choice == "Back":
-                        renpy.jump("gene_modifications") # Where to go if you hit "Back".
+            if room_choice == "Back":
+                return
+            else:
+                $ person.schedule[0] = room_choice
+                return
 
-                    person.schedule[0] = room_choice
-            jump clone_schedule_menu
 
         "Morning: [person.schedule[1].name]":
-            python: # First we select which employee we want
+            while True:
+                python: # First we select which employee we want
 
-                    tuple_list = format_rooms(list_of_places) #TODO: Create a list that excludes homes not in mc.known_home_locations
-                    tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
-                    room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
+                        tuple_list = format_rooms(list_of_places) #TODO: Create a list that excludes homes not in mc.known_home_locations
+                        tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
+                        room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
 
-                    if room_choice == "Back":
-                        renpy.jump("gene_modifications") # Where to go if you hit "Back".
-
-                    person.schedule[1] = room_choice
-            jump clone_schedule_menu
+                if room_choice == "Back":
+                    return
+                else:
+                    $ person.schedule[1] = room_choice
+                    return
 
         "Afternoon: [person.schedule[2].name]":
-            python: # First we select which employee we want
+            while True:
+                python: # First we select which employee we want
 
-                    tuple_list = format_rooms(list_of_places) #TODO: Create a list that excludes homes not in mc.known_home_locations
-                    tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
-                    room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
+                        tuple_list = format_rooms(list_of_places) #TODO: Create a list that excludes homes not in mc.known_home_locations
+                        tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
+                        room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
 
-                    if room_choice == "Back":
-                        renpy.jump("gene_modifications") # Where to go if you hit "Back".
+                if room_choice == "Back":
+                    return # Where to go if you hit "Back".
+                else:
+                    $ person.schedule[2] = room_choice
+                    return
 
-                    person.schedule[2] = room_choice
-            jump clone_schedule_menu
 
         "Evening: [person.schedule[3].name]":
-            python: # First we select which employee we want
+            while True:
+                python: # First we select which employee we want
 
-                    tuple_list = format_rooms(list_of_places) #TODO: Create a list that excludes homes not in mc.known_home_locations
-                    tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
-                    room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
+                        tuple_list = format_rooms(list_of_places) #TODO: Create a list that excludes homes not in mc.known_home_locations
+                        tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
+                        room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
 
-                    if room_choice == "Back":
-                        renpy.jump("gene_modifications") # Where to go if you hit "Back".
+                if room_choice == "Back":
+                    return # Where to go if you hit "Back".
+                else:
+                    $ person.schedule[3] = room_choice
+                    return
 
-                    person.schedule[3] = room_choice
-            jump clone_schedule_menu
 
         "Night: [person.schedule[4].name]":
-            python: # First we select which employee we want
+            while True:
+                python: # First we select which employee we want
 
-                    tuple_list = format_rooms(list_of_places) #TODO: Create a list that excludes homes not in mc.known_home_locations
-                    tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
-                    room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
+                        tuple_list = format_rooms(list_of_places) #TODO: Create a list that excludes homes not in mc.known_home_locations
+                        tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
+                        room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
 
-                    if room_choice == "Back":
-                        renpy.jump("gene_modifications") # Where to go if you hit "Back".
+                if room_choice == "Back":
+                    return # Where to go if you hit "Back".
+                else:
+                    $ person.schedule[4] = room_choice
+                    return
 
-                    person.schedule[4] = room_choice
-            jump clone_schedule_menu
 
         "Back":
             return
-    jump clone_schedule
 
 label clone_hire(person):
     "You complete the nessesary paperwork and hire [person.title]. What division do you assign them to?"
