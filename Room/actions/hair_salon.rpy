@@ -8,20 +8,6 @@ init 2 python:
 
     salon_total_cost = salon_style_cost + salon_dye_cost
 
-    def create_salon_manager():
-        # Wardrobe for employees in the salon
-        salon_wardrobe = wardrobe_from_xml("Salon_Wardrobe")
-        global salon_manager
-        salon_manager = create_random_person(name = "Ophelia", last_name = "von Friseur", height = .9, age = renpy.random.randint(21,30), body_type = "thin_body",
-            personality = wild_personality, job = "Hair Stylist", starting_wardrobe = salon_wardrobe, eyes="blue", start_sluttiness = 10,
-            title = "Ophelia", possessive_title = "My stylist", mc_title = mc.name)
-
-        # We want whoever the salon_manager is to be in the salon during work hours.
-        salon_manager.schedule[1] = mall_salon
-        salon_manager.schedule[2] = mall_salon
-        salon_manager.schedule[3] = mall_salon
-        return
-
     def salon_requirement():
         if day%7 == 6: # Can be removed
             return "Closed on Sundays."
