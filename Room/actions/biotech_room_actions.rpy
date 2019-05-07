@@ -1,6 +1,7 @@
 init -1 python:
     biotech_actions = []
     gene_modifications = []
+    body_modifications = []
 
 init 3 python:
 
@@ -31,6 +32,27 @@ init 3 python:
         menu_tooltip = "Modify the appearance of a person through magic, not science")
     gene_modifications.append(modify_person)
 
+    def change_body_requirement():
+        return True
+    change_body = Action("Change body: [the_person.body_type]", change_body_requirement, "change_body",
+        menu_tooltip = "Modify [the_person.title]'s body type.")
+    body_modifications.append(change_body)
+
+    def change_skin_requirement():
+        return True
+    change_skin = Action("Change skin: [the_person.skin]", change_skin_requirement, "change_skin",
+        menu_tooltip = "Modify [the_person.title]'s skin tone.")
+    body_modifications.append(change_skin)
+    def change_face_requirement():
+        return True
+    change_face = Action("Change face: [the_person.face_style]", change_face_requirement, "change_face",
+        menu_tooltip = "Modify [the_person.title]'s face style.")
+    body_modifications.append(change_face)
+    def change_breasts_requirement():
+        return True
+    change_breasts = Action("Change breasts: [the_person.tits]", change_breasts_requirement, "change_breasts",
+        menu_tooltip = "Modify [the_person.title]'s cup size.")
+    body_modifications.append(change_breasts)
 label biotechs():
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
@@ -132,6 +154,7 @@ label modify_person():
                 person_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
 
         if person_choice == "Back":
+
             return # Where to go if you hit "Back".
         else:
             $ person = person_choice
@@ -139,64 +162,76 @@ label modify_person():
             call modification_process(person)
 
 label modification_process(person):
-    menu:
-        "Change body: [person.body_type]":
-            while True:
-                python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-                        body_types = []
-                        for n in list_of_body_types:
-                            body_types.append(n)
-                        body_types.append("Back")
-                        body_choice = renpy.display_menu(simple_list_format(body_types, n, string = "Body Type: "),True,"Choice")
+    while True:
+        python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+                body_modification_options = []
+                for act in body_modifications:
+                    body_modification_options.append(act)
+                body_modification_options.append("Back")
+                act_choice = call_formated_action_choice(body_modification_options)
 
-                if body_choice == "Back":
-                    return
-                else:
-                    $ person.body_type = body_choice
-                    $ person.draw_person()
-
-        "Change skin: [person.skin]":
-            while True:
-                python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-                        skin_styles = [x[0] for x in list_of_skins]
-
-                        skin_styles.append("Back")
-                        skin_choice = renpy.display_menu(simple_list_format(skin_styles, x[0], string = "Skin Type: "),True,"Choice")
-                if skin_choice == "Back":
-                    return
-                else:
-                    $ person.skin = skin_choice
-                    $ person.match_skin(skin_choice)
-                    $ person.draw_person()
-
-        "Change face: [person.face_style]":
-            while True:
-                python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-                        face_styles = []
-                        for face in list_of_faces:
-                            face_styles.append(face)
-                        face_styles.append("Back")
-                        face_choice = renpy.display_menu(simple_list_format(face_styles, face, string = "Face Type: "),True,"Choice")
-
-                if face_choice == "Back":
-                    return
-                else:
-                    $ person.face_style = face_choice
-                    $ person.match_skin(person.skin)
-                    $ person.draw_person()
-
-        "Change breast size: [person.tits]":
-            while True:
-                python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-                        cup_sizes = [x[0] for x in list_of_tits]
-                        cup_sizes.append("Back")
-                        cup_choice = renpy.display_menu(simple_list_format(cup_sizes, x[0], string = "Cup Size: "),True,"Choice")
-
-                if cup_choice == "Back":
-                    return
-                else:
-                    $ person.tits = cup_choice
-                    $ person.draw_person()
-
-        "Back":
+        if act_choice == "Back":
+            $ renpy.scene("Active")
             return
+        else:
+            $ act_choice.call_action()
+
+label change_body():
+    while True:
+        python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+                body_types = []
+                for n in list_of_body_types:
+                    body_types.append(n)
+                body_types.append("Back")
+                body_choice = renpy.display_menu(simple_list_format(body_types, n, string = "Body Type: "),True,"Choice")
+
+        if body_choice == "Back":
+            return
+        else:
+            $ person.body_type = body_choice
+            $ person.draw_person()
+
+label change_skin():
+    while True:
+        python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+                skin_styles = [x[0] for x in list_of_skins]
+
+                skin_styles.append("Back")
+                skin_choice = renpy.display_menu(simple_list_format(skin_styles, x[0], string = "Skin Type: "),True,"Choice")
+        if skin_choice == "Back":
+            return
+        else:
+            $ person.skin = skin_choice
+            $ person.match_skin(skin_choice)
+            $ person.draw_person()
+
+label change_face():
+
+    while True:
+        python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+                face_styles = []
+                for face in list_of_faces:
+                    face_styles.append(face)
+                face_styles.append("Back")
+                face_choice = renpy.display_menu(simple_list_format(face_styles, face, string = "Face Type: "),True,"Choice")
+
+        if face_choice == "Back":
+            return
+        else:
+            $ person.face_style = face_choice
+            $ person.match_skin(person.skin)
+            $ person.draw_person()
+
+label change_breasts():
+
+    while True:
+        python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+                cup_sizes = [x[0] for x in list_of_tits]
+                cup_sizes.append("Back")
+                cup_choice = renpy.display_menu(simple_list_format(cup_sizes, x[0], string = "Cup Size: "),True,"Choice")
+
+        if cup_choice == "Back":
+            return
+        else:
+            $ person.tits = cup_choice
+            $ person.draw_person()
