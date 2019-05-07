@@ -58,8 +58,8 @@ label business_meeting_action:
             "You give [the_person.title] a call and tell her that she can implement the changes you discussed."
         else:
             "You make a call to [hr_employee.title] from HR to implement some of the changes you discussed with [the_person.title]"
-        $ mc.business.team_effectiveness += 1
-        $ mc.log_event("Company Efficiency: " + str(mc.business.team_effectiveness) + "%", "float_text_grey")
+        $ mc.business.effectiveness_cap += 1
+        $ mc.log_event("Company Efficiency: " + str(mc.business.effectiveness_cap) + "%", "float_text_grey")
         "The changes incease your business effectivity by one percent."
 
     hide screen person_info_ui
