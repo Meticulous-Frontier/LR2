@@ -34,24 +34,24 @@ init 3 python:
 
     def change_body_requirement():
         return True
-    change_body = Action("Change body: [the_person.body_type]", change_body_requirement, "change_body",
-        menu_tooltip = "Modify [the_person.title]'s body type.")
+    change_body = Action("Change body: [person.body_type]", change_body_requirement, "change_body",
+        menu_tooltip = "Modify [person.title]'s body type.")
     body_modifications.append(change_body)
 
     def change_skin_requirement():
         return True
-    change_skin = Action("Change skin: [the_person.skin]", change_skin_requirement, "change_skin",
-        menu_tooltip = "Modify [the_person.title]'s skin tone.")
+    change_skin = Action("Change skin: [person.skin]", change_skin_requirement, "change_skin",
+        menu_tooltip = "Modify [person.title]'s skin tone.")
     body_modifications.append(change_skin)
     def change_face_requirement():
         return True
-    change_face = Action("Change face: [the_person.face_style]", change_face_requirement, "change_face",
-        menu_tooltip = "Modify [the_person.title]'s face style.")
+    change_face = Action("Change face: [person.face_style]", change_face_requirement, "change_face",
+        menu_tooltip = "Modify [person.title]'s face style.")
     body_modifications.append(change_face)
     def change_breasts_requirement():
         return True
-    change_breasts = Action("Change breasts: [the_person.tits]", change_breasts_requirement, "change_breasts",
-        menu_tooltip = "Modify [the_person.title]'s cup size.")
+    change_breasts = Action("Change breasts: [person.tits]", change_breasts_requirement, "change_breasts",
+        menu_tooltip = "Modify [person.title]'s cup size.")
     body_modifications.append(change_breasts)
 label biotechs():
     while True:
