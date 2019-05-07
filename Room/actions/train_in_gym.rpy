@@ -21,19 +21,29 @@ label train_in_gym(person):
         $ person.outfit = gym_clothes_sexy.get_copy()
     else:
         $ person.outfit = gym_clothes.get_copy()
-    $ person.draw_person()
+    $ person.draw_person(emotion="default")
 
-    $ change = renpy.random.random() * 4 # Maximum change is 4 kg
+    $ change = renpy.random.random() * 4 # Maximum change is 4 pounds
 
-    if change < 2:
+    if change < 1:
+        "You decide to take a yoga class with [person.possessive_title]."
+        person.char "This stretching is good my flexibilty."
+        if person.sluttiness > 20:
+            $ person.draw_person(emotion="happy")
+            "There is a subtle undertone in that remark that makes you smile."
+    elif change < 2.5:
         "You and [person.possessive_title] spend a few hours working out."
     else:
         "You put [person.possessive_title] through a vigorous training session."
+        if person.sluttiness > 20:
+            $ person.draw_person(emotion = "angry")
+            person.char "It seems you have plans with my body, [person.mc_title]."
+            "If she only knew what dirty things you have her doing in your mind."
 
     $ body_changed = person.change_weight(-change, 100)
     $ new_weight = get_person_weight_string(person)
 
-    "After the training session [person.possessive_title] weighs [new_weight] lbs."
+    "After the session [person.possessive_title] weighs [new_weight] lbs."
 
     if body_changed:
         $ person.draw_person(person.body_type)

@@ -1,5 +1,6 @@
 # Gym Studio Mod by Tristimdorion
-# Requires ParadigmShift's Mod Core for initialization.
+# The gym session is available in the gym studio for all known characters.
+
 init 3 python:
     def gym_requirement():
         if time_of_day == 4: # Can be removed
@@ -11,7 +12,7 @@ init 3 python:
         else:
             return True
 
-    # the gym is initialized by prior to starting a new game, so we need to do this in this initialization function
+    # the gym is initialized when the action mod is loaded and also links the gym_shower to the gym
     def gym_initialization(self):
         gym.background_image = Image(room_background_image("Gym_Background.jpg")) #As long a there is a mall background for the gym, replace it with our gym background
         # add gym shower to active places
@@ -26,9 +27,9 @@ init 3 python:
 label select_person_for_gym():
     "Select who the gym session is for"
     python: # First we select which person we want to train with
-        tuple_list = format_person_list(all_people_in_the_game([mc]), draw_hearts = True) #The list of people to show. e.g mc.location.people
+        tuple_list = format_person_list(all_people_in_the_game([mc]), draw_hearts = True) #The list of people available for a gym session
         tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
-        person_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
+        person_choice = renpy.display_menu(tuple_list,True,"Choice")
 
     if person_choice != "Back":
         "You send a text message to [person_choice.title] about a gym session."
@@ -39,26 +40,28 @@ label select_person_for_gym():
 
 
 label select_person_for_gym_response(person_choice):
+    # link the selected person to the_person global object (linked to person info UI)
     $ the_person = person_choice
 
-    if the_person.personality == bimbo_personality:
-        the_person.char "Cumming right away, [the_person.mc_title]!"
-    elif the_person.obedience > 120:
-        the_person.char "Yes, Sir. I am on my way."
-    elif the_person.sluttiness > 30:
-        the_person.char "Yes, [the_person.mc_title]. I am on my way."
-    elif the_person.sluttiness > the_person.obedience:
-        the_person.char "Yes, [the_person.mc_title], are you going to train me personally?"
-    elif the_person.happiness < 100 and the_person.love > 20:
-        $ the_person.draw_person(emotion = "happy")
-        the_person.char "Thanks for the attention, [the_person.mc_title]."
-        $ the_person.change_happiness(+10)
-    elif the_person.happiness < 100:
+    if the_person.happiness < 100 or obedience < 80:
         $ the_person.draw_person(emotion = "sad")
         the_person.char "I'm not in the mood for gym session, right now."
         $ the_person.change_obedience(-2)
         $renpy.scene("Active")
         return
+
+    if the_person.personality == bimbo_personality:
+        the_person.char "Cumming right away, [the_person.mc_title]!"
+    elif the_person.obedience > 140:
+        the_person.char "Yes, Sir. I am on my way."
+    elif the_person.sluttiness > 30:
+        the_person.char "Yes, [the_person.mc_title]. I am on my way."
+    elif the_person.sluttiness > the_person.obedience:
+        the_person.char "Yes, [the_person.mc_title], are you going to train me personally?"
+    elif the_person.happiness < 120 and the_person.love > 20:
+        $ the_person.draw_person(emotion = "happy")
+        the_person.char "Thanks for the attention, [the_person.mc_title]."
+        $ the_person.change_happiness(+10)
     else:
         the_person.char "Sounds good, I'll be right there [the_person.mc_title]."
         $ the_person.change_happiness(+10)
