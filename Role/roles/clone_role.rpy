@@ -1,6 +1,7 @@
 init 1 python:
     clone_role = Role("Clone", [])
 
+
     def clone_rename_requirement(person):
         if person in rd_division_basement.people:
             return True
@@ -40,6 +41,38 @@ init 1 python:
     if clone_hire not in clone_role.actions:
         clone_role.actions.append(clone_hire)
 
+    # Schedule Actions
+    schedule_actions_list = []
+    def schedule_early_morning_requirement():
+        return True
+    schedule_early_morning = Action("Early Morning: [person.schedule[0].formalName]", schedule_early_morning_requirement, "schedule_early_morning",
+        menu_tooltip = "Schedule where [person.title] should be during the Early Morning.")
+    schedule_actions_list.append(schedule_early_morning)
+
+    def schedule_morning_requirement():
+        return True
+    schedule_morning = Action("Morning: [person.schedule[1].formalName]", schedule_morning_requirement, "schedule_morning",
+        menu_tooltip = "Schedule where [person.title] should be during the Morning.")
+    schedule_actions_list.append(schedule_morning)
+
+    def schedule_afternoon_requirement():
+        return True
+    schedule_afternoon = Action("Afternoon: [person.schedule[2].formalName]", schedule_afternoon_requirement, "schedule_afternoon",
+        menu_tooltip = "Schedule where [person.title] should be during the Afternoon.")
+    schedule_actions_list.append(schedule_afternoon)
+
+    def schedule_evening_requirement():
+        return True
+    schedule_evening = Action("Evening: [person.schedule[3].formalName]", schedule_evening_requirement, "schedule_evening",
+        menu_tooltip = "Schedule where [person.title] should be during the Evening.")
+    schedule_actions_list.append(schedule_evening)
+
+    def schedule_night_requirement():
+        return True
+    schedule_night = Action("Night: [person.schedule[4].formalName]", schedule_night_requirement, "schedule_night",
+        menu_tooltip = "Schedule where [person.title] should be during the Night.")
+    schedule_actions_list.append(schedule_night)
+
 label clone_rename(person):
     "You tell [person.title] that it is to be renamed."
     while True:
@@ -70,23 +103,19 @@ label clone_recall(person):
 label clone_schedule(person):
     "You decide where [person.title] should be at throughout the day."
     while True:
-        menu clone_schedule_menu:
+        python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+                schedule_options = []
+                for act in schedule_actions_list:
+                    schedule_options.append(act)
+                schedule_options.append("Back")
+                act_choice = call_formated_action_choice(schedule_options)
 
-            "Early Morning: [person.schedule[0].name]":
-                call clone_schedule_early_morning
-            "Morning: [person.schedule[1].name]":
-                call clone_schedule_morning
-            "Afternoon: [person.schedule[2].name]":
-                call clone_schedule_afternoon
-            "Evening: [person.schedule[3].name]":
-                call clone_schedule_evening
-            "Night: [person.schedule[4].name]":
-                call clone_schedule_night
-            "Back":
-                return
-    return
+        if act_choice == "Back":
+            return
+        else:
+            $ act_choice.call_action()
 
-label clone_schedule_early_morning():
+label schedule_early_morning():
 
     python: # First we select which employee we want
 
@@ -100,7 +129,7 @@ label clone_schedule_early_morning():
         $ person.schedule[0] = room_choice
         return
 
-label clone_schedule_morning():
+label schedule_morning():
 
 
     python: # First we select which employee we want
@@ -115,7 +144,7 @@ label clone_schedule_morning():
         $ person.schedule[1] = room_choice
         return
 
-label clone_schedule_afternoon():
+label schedule_afternoon():
 
     python: # First we select which employee we want
 
@@ -131,7 +160,7 @@ label clone_schedule_afternoon():
 
 
 
-label clone_schedule_evening():
+label schedule_evening():
 
     python: # First we select which employee we want
 
@@ -147,7 +176,7 @@ label clone_schedule_evening():
 
 
 
-label clone_schedule_night():
+label schedule_night():
     python: # First we select which employee we want
 
             tuple_list = format_rooms(list_of_places) #TODO: Create a list that excludes homes not in mc.known_home_locations
