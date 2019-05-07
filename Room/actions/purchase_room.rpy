@@ -78,6 +78,8 @@ label purchase_dungeon_room(): #Enables the dugneon.
         $ mod_rooms_lobby.append(office_basement)
         $ mod_rooms_append.append(office_basement) # Gives an escape through the elevator
 
+        $ list_of_places.append(office_basement)
+
         $ advance_time()
 
     return
@@ -93,6 +95,8 @@ label purchase_security_room(): #Enables the security room.
         $ mod_rooms_append.append(m_division_basement) # Gives an escape through the elevator
         $ m_division_basement.actions.append(security_overview_action)
 
+        $ list_of_places.append(m_division_basement)
+
         $ advance_time()
     return
 
@@ -103,6 +107,8 @@ label purchase_machinery_room(): #Enables the machinery room
 
         $ mod_rooms_lobby.append(p_division_basement)
         $ mod_rooms_append.append(p_division_basement) # Gives an escape through the elevator
+
+        $ list_of_places.append(p_division_basement)
 
         $ advance_time()
     return
