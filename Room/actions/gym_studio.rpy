@@ -43,7 +43,7 @@ label select_person_for_gym_response(person_choice):
     # link the selected person to the_person global object (linked to person info UI)
     $ the_person = person_choice
 
-    if the_person.happiness < 100 or obedience < 80:
+    if the_person.happiness < 100 or the_person.obedience < 80:
         $ the_person.draw_person(emotion = "sad")
         the_person.char "I'm not in the mood for gym session, right now."
         $ the_person.change_obedience(-2)
