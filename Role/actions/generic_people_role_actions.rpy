@@ -1,31 +1,13 @@
 # NOTE: Not sure where to place these actions yet. Basically actions that could fit on any person regardless of role.
-init 3 python:
+init -1 python:
+    apply_mandatory_roles = []
 
-    def generic_people_actions_requirement():
-        True
-
-    def generic_people_actions_initialization(self):
-        renpy.call("generic_people_actions_creation")
-        if schedule_person not in generic_people_role.actions:
-            generic_people_role.actions.append(schedule_person)
-        for act in follower_actions:
-            if act not in generic_people_role.actions:
-                generic_people_role.actions.append(act)
-        for act in person_utility_actions:
-            if act not in generic_people_role.actions:
-                generic_people_role.actions.append(act)
-        if generic_people_role not in apply_mandatory_roles:
-            apply_mandatory_roles.append(generic_people_role)
-        return
-
-
-    generic_people_actions = ActionMod("Generic People Actions", generic_people_actions_requirement, "generic_people_actions_dummy", initialization = generic_people_actions_initialization,
-        menu_tooltip = "Gives extra actions for all people in their Special Role Actions...", category = "Role Actions")
-
+init 2 python:
     # Definitions
     # Schedule Person
     def schedule_person_requirement(person):
-        return True
+        if person.obedience >= 130:
+            return True
     def schedule_early_morning_requirement():
         return True
     def schedule_morning_requirement():
@@ -35,12 +17,16 @@ init 3 python:
     def schedule_evening_requirement():
         return True
     def schedule_night_requirement():
-        return True
+        if person.obedience >=150:
+            return True
+        else:
+            return "Requires: 150 Obedience"
 
     # Follow Me
     def start_follow_requirement(person):
         if person not in list_of_followers:
-            return True
+            if person.obedience >= 110:
+                return True
     def stop_follow_requirement(person):
         if person in list_of_followers:
             return True
@@ -52,71 +38,72 @@ init 3 python:
 
     # Rename Person
     def rename_person_requirement(person):
-        return True
+        if person.obedience >= 150:
+            return True
 
-
-
-label generic_people_actions_dummy():
-    return
-
-label generic_people_actions_creation():
-    $ apply_mandatory_roles = []
     # Schedule Person | Allows you to modify the schedule of the_person. Change requirement to be dependent on obedience?
-    $ schedule_actions_list = [] # NOTE: Use this list to display all the schedule actions.
+    schedule_actions_list = [] # NOTE: Use this list to display all the schedule actions.
 
-    $ schedule_person = Action("Schedule clone", schedule_person_requirement, "schedule_menu",
+    schedule_person = Action("Schedule [person.title]", schedule_person_requirement, "schedule_menu",
         menu_tooltip = "Schedule where the target should be throughout the day.")
 
-    $ schedule_early_morning = Action("Early Morning: [person.schedule[0].formalName]", schedule_early_morning_requirement, "schedule_early_morning",
+    schedule_early_morning = Action("Early Morning: [person.schedule[0].formalName]", schedule_early_morning_requirement, "schedule_early_morning",
         menu_tooltip = "Schedule where the target should be during the Early Morning.")
-    $ schedule_actions_list.append(schedule_early_morning)
+    schedule_actions_list.append(schedule_early_morning)
 
 
-    $ schedule_morning = Action("Morning: [person.schedule[1].formalName]", schedule_morning_requirement, "schedule_morning",
+    schedule_morning = Action("Morning: [person.schedule[1].formalName]", schedule_morning_requirement, "schedule_morning",
         menu_tooltip = "Schedule where the target should be during the Morning.")
-    $ schedule_actions_list.append(schedule_morning)
+    schedule_actions_list.append(schedule_morning)
 
 
-    $ schedule_afternoon = Action("Afternoon: [person.schedule[2].formalName]", schedule_afternoon_requirement, "schedule_afternoon",
+    schedule_afternoon = Action("Afternoon: [person.schedule[2].formalName]", schedule_afternoon_requirement, "schedule_afternoon",
         menu_tooltip = "Schedule where the target should be during the Afternoon.")
-    $ schedule_actions_list.append(schedule_afternoon)
+    schedule_actions_list.append(schedule_afternoon)
 
 
-    $ schedule_evening = Action("Evening: [person.schedule[3].formalName]", schedule_evening_requirement, "schedule_evening",
+    schedule_evening = Action("Evening: [person.schedule[3].formalName]", schedule_evening_requirement, "schedule_evening",
         menu_tooltip = "Schedule where the target should be during the Evening.")
-    $ schedule_actions_list.append(schedule_evening)
+    schedule_actions_list.append(schedule_evening)
 
 
-    $ schedule_night = Action("Night: [person.schedule[4].formalName]", schedule_night_requirement, "schedule_night",
+    schedule_night = Action("Night: [person.schedule[4].formalName]", schedule_night_requirement, "schedule_night",
         menu_tooltip = "Schedule where the target should be during the Night.")
-    $ schedule_actions_list.append(schedule_night)
+    schedule_actions_list.append(schedule_night)
 
     # Follow Me | Allows you to put a person in a list_of_followers that comes along with you upon every location change (follow normal schedule on time advance, might want to remove them from the list during that, although they will come back if not)
-    $ list_of_followers = []
-    $ follower_actions = []
+    list_of_followers = []
+    follower_actions = []
 
-    $ start_follow = Action("Follow me.", start_follow_requirement, "start_follow",
+    start_follow = Action("Follow me.", start_follow_requirement, "start_follow",
         menu_tooltip = "Have the target follow you around.")
-    $ follower_actions.append(start_follow)
+    follower_actions.append(start_follow)
 
-    $ stop_follow = Action("Stop following me.", stop_follow_requirement, "stop_follow",
+    stop_follow = Action("Stop following me.", stop_follow_requirement, "stop_follow",
         menu_tooltip = "Have the target stop following.")
-    $ follower_actions.append(stop_follow)
+    follower_actions.append(stop_follow)
 
     # Hire Person | Allows you to hire a person if they are not already hired. (Moves them to the appropriate division, no duplicates)
-    $ person_utility_actions = []
-    $ hire_person = Action("Employ [the_person.title]", hire_person_requirement, "hire_person",
-        menu_tooltip = "Hire the the target to work for you in your business.")
-    $ person_utility_actions.append(hire_person)
+    person_utility_actions = []
+    hire_person = Action("Employ [the_person.title]\n Costs: $300", hire_person_requirement, "hire_person",
+        menu_tooltip = "Hire the the target to work for you in your business. Costs $300")
+    person_utility_actions.append(hire_person)
     # Rename Person | Opens a menu that allows you to change first and last name plus a (non- appended) custom the_person.title
-    $ rename_person = Action("Rename [the_person.title]", rename_person_requirement, "rename_person",
+    rename_person = Action("Rename [the_person.title]", rename_person_requirement, "rename_person",
         menu_tooltip = "Give the [the_person.title] a new name")
-    $ person_utility_actions.append(rename_person)
+    person_utility_actions.append(rename_person)
 
     # Setup
     if generic_people_role not in apply_mandatory_roles:
-        $ apply_mandatory_roles.append(generic_people_role)
-    return
+        apply_mandatory_roles.append(generic_people_role)
+    if schedule_person not in generic_people_role.actions:
+        generic_people_role.actions.append(schedule_person)
+    for act in follower_actions:
+        if act not in generic_people_role.actions:
+            generic_people_role.actions.append(act)
+    for act in person_utility_actions:
+        if act not in generic_people_role.actions:
+            generic_people_role.actions.append(act)
 label rename_person(person):
     "You tell [person.possessive_title] that you are giving her a new name."
     while True:
@@ -146,6 +133,15 @@ label rename_person(person):
 
 # Hire Person Labels
 label hire_person(person):
+    if mc.business.funds < 300:
+        "Hiring [person.title] will cost you $300 and put you in debt due to low funds."
+    else:
+        "Hiring [person.title] will cost you $300, do you wish to proceed?"
+    menu:
+        "Yes":
+            pass
+        "No":
+            return
     "You complete the nessesary paperwork and hire [person.title]. What division do you assign them to?"
     menu:
         "Research and Development.":
@@ -175,7 +171,7 @@ label hire_person(person):
 
         "Back":
             return
-
+    $ mc.business.pay(-300)
     $ person.special_role.append(employee_role)
     $ work_station_destination = mc.business.get_employee_workstation(the_person).formalName
     "[person.title] heads over to the [work_station_destination]..."
