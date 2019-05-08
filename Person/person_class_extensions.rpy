@@ -281,6 +281,65 @@ init -1:
         Person.draw_person = draw_person_enhanced
         Person.last_placement = None
 
+        def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, special_modifier = None, character_placement = None): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
+            #Note: this function includes a call to remove_clothing, it is not needed seperately.
+            if position is None:
+                position = self.idle_pose
+
+            bottom_displayable = [] #Displayables under the piece of clothing being removed.
+            top_displayable = []
+
+            if emotion is None:
+                emotion = self.get_emotion()
+
+            if character_placement is None: # make sure we don't need to pass the position with each draw
+                character_placement = self.last_placement or character_right
+
+            active_scene = current_scene_layer(character_placement)
+
+            renpy.scene(active_scene) # clear layer for new draw action
+            # mc.log_event(self.title + " scene: " + active_scene, "float_text_green")
+
+            bottom_displayable.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier)) #Get the face displayable, also always under clothing.
+
+            bottom_displayable.append(self.body_images.generate_item_displayable(self.body_type,self.tits,position))  #Body is always under clothing
+            size_render = renpy.render(bottom_displayable[1], 10, 10, 0, 0) #We need a render object to check the actual size of the body displayable so we can build our composite accordingly.
+            the_size = size_render.get_size()
+            x_size = __builtin__.int(the_size[0])
+            y_size = __builtin__.int(the_size[1])
+
+            bottom_clothing, split_clothing, top_clothing = self.outfit.generate_split_draw_list(the_clothing, self, position, emotion, special_modifier) #Gets a split list of all of our clothing items.
+            #We should remember that middle item can be None.
+            for item in bottom_clothing:
+                bottom_displayable.append(item)
+
+            for item in top_clothing:
+                top_displayable.append(item)
+
+            top_displayable.append(self.hair_style.generate_item_displayable("standard_body",self.tits,position)) #Hair is always on top
+
+            #Now we build our two composites, one for the bottom image and one for the top.
+            composite_bottom_params = [(x_size,y_size)]
+            for display in bottom_displayable:
+                composite_bottom_params.append((0,0))
+                composite_bottom_params.append(display)
+
+            composite_top_params = [(x_size,y_size)]
+            for display in top_displayable:
+                composite_top_params.append((0,0))
+                composite_top_params.append(display)
+
+            final_bottom = Composite(*composite_bottom_params)
+            final_top = Composite(*composite_top_params)
+
+            renpy.show("Bottom Composite", at_list=[character_placement, scale_person(self.height)], layer=active_scene, what=final_bottom, tag=self.name+"Bottom")
+            if split_clothing: #Only show this if we actually had something returned to us.
+                renpy.show("Removed Item", at_list=[character_placement, scale_person(self.height), clothing_fade], layer=active_scene, what=split_clothing, tag=self.name+"Middle")
+                self.outfit.remove_clothing(the_clothing)
+            renpy.show("Top Composite", at_list=[character_placement, scale_person(self.height)], layer=active_scene, what=final_top, tag=self.name+"Top")        
+        
+        Person.draw_animated_removal = draw_animated_removal_enhanced
+
     #######################################
     # HELPER METHODS FOR CLASS EXTENSIONS #
     #######################################
