@@ -11,7 +11,7 @@ init -2 python:
 init -1:
     python:
 
-        def change_location(self, new_location):
+        def change_location(self, new_location): # Overwrites change_location to have a list of followers follow you around. Will go to scheduled room on time advance.
             self.location = new_location
             for location in list_of_places:
                 for person in location.people:
@@ -19,6 +19,14 @@ init -1:
                         location.move_person(person, new_location)
         MainCharacter.change_location = change_location
 
+
+
+        def location(self): # Check what location a person is in e.g the_person.location() == downtown. Use to trigger events?
+            for location in list_of_places:
+                if self in location.people:
+                    return location
+
+        Person.location = location
 
         ## MATCH SKIN COLOR
         # Matches skin, body, face and expression images based on input of skin color
