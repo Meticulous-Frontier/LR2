@@ -48,6 +48,19 @@ init 2 python:
         menu_tooltip = "Schedule where [person.title] should be during the Night.")
     schedule_actions_list.append(schedule_night)
 
+    list_of_followers = []
+    def start_follow_requirement(person):
+        if person not in list_of_followers:
+            return True
+    start_follow = Action("Follow me.", start_follow_requirement, "start_follow",
+        menu_tooltip = "Have [the_person.title] follow you around.", requirement_args = the_person)
+
+    def stop_follow_requirement(person):
+        if person in list_of_followers:
+            return True
+    stop_follow = Action("Stop following me.", stop_follow_requirement, "stop_follow",
+        menu_tooltip = "Have [the_person.title] stop following.", requirement_args = the_person)
+
     # Rename Person Labels
 label rename_person(person):
     "You tell [person.possessive_title] that you are giving her a new name."
@@ -180,3 +193,13 @@ label schedule_night():
     else:
         $ person.schedule[4] = room_choice
         return
+
+    # Follower Labels
+label start_follow(person):
+    "You tell [the_person.title] to follow you around."
+    $ list_of_followers.append(the_person)
+    return
+label stop_follow(person):
+    "You tell [the_person.title] to stop following you around."
+    $ list_of_followers.remove(the_person)
+    return
