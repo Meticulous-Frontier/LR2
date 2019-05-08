@@ -47,7 +47,8 @@ init 2:
                     else:
                         text "     Job: " + mc.business.get_employee_title(person) style "menu_text_style"
 
-                        for role in person.special_role:
+                    for role in person.special_role:
+                        if not role.role_name is None:
                             text "       - " + role.role_name style "menu_text_style" size 14
 
                 vbox:
