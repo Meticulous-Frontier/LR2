@@ -40,7 +40,7 @@ init 2 python:
         if mc.business.funds < t2_cost:
             return "Requires: " + str(t2_cost)
         return True
-        
+
     def room_tier_3(roomname):
         if len(filter(lambda x: x.name == roomname, list_of_places)) == 1:
             return "Already owned"
@@ -66,11 +66,11 @@ init 2 python:
 
     # Tier 2 Rooms
     purchase_security_room_action = Action("Install Security Room {image=gui/heart/Time_Advance.png}\n {size=22}Costs: [t2_cost]{/size}", room_tier_2, "purchase_security_room",
-        menu_tooltip = "Unlocks a Security Room for non- nefarious purposes...", requirement_args = ["security"]) 
+        menu_tooltip = "Unlocks a Security Room for non- nefarious purposes...", requirement_args = ["security"])
     purchasable_rooms_list.append(purchase_security_room_action)
 
     purchase_machinery_room_action = Action("Install Machinery Room {image=gui/heart/Time_Advance.png}\n {size=22}Costs: [t2_cost]{/size}", room_tier_2, "purchase_machinery_room",
-        menu_tooltip = "Unlocks a Machinery for the creation of stuff...", requirement_args = ["machinery"]) 
+        menu_tooltip = "Unlocks a Machinery for the creation of stuff...", requirement_args = ["machinery"])
     purchasable_rooms_list.append(purchase_machinery_room_action)
 
     # Tier 3 Rooms
@@ -100,6 +100,7 @@ label purchase_dungeon_room(): #Enables the dugneon.
 
     $ mc.business.pay(- t1_cost)
 
+    $ office_basement.actions.append(dungeon_action)
     $ mod_rooms_lobby.append(office_basement)
     $ mod_rooms_append.append(office_basement) # Gives an escape through the elevator
 
@@ -137,7 +138,7 @@ label purchase_machinery_room(): #Enables the machinery room
     "[p_division_basement.formalName] accessable from the elevator in [lobby.formalName]"
     if p_division_basement in mod_rooms_lobby:
         return  # room already exists exit
-        
+
     $ mc.business.pay(- t2_cost)
 
     $ mod_rooms_lobby.append(p_division_basement)
