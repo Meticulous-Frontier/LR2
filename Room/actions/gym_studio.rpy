@@ -26,10 +26,9 @@ init 3 python:
 
 label select_person_for_gym():
     "Select who the gym session is for"
-    python: # First we select which person we want to train with
-        tuple_list = format_person_list(all_people_in_the_game([mc]), draw_hearts = True) #The list of people available for a gym session
-        tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
-        person_choice = renpy.display_menu(tuple_list,True,"Choice")
+    $ tuple_list = all_people_in_the_game([mc]) + ["Back"]
+    call screen person_choice(tuple_list, draw_hearts = True)
+    $ person_choice = _return
 
     if person_choice != "Back":
         "You send a text message to [person_choice.title] about a gym session."

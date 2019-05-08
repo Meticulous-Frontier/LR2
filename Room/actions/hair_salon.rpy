@@ -52,32 +52,16 @@ init 2 python:
 # Initilization segment - End
 
 label salon_label():
-    $ renpy.scene("Active")
-
-#    python:
-
-#    # Run an update in case of new characters in the world. NOTE: See if Vren make changes to how roles are displayed.
-#        for room in list_of_places:                               I want unnamed roles to be invisible.
-#            for person in room.people:
-#                if salon_patron not in person.special_role:
-#                    person.special_role.append(salon_patron)
-
-
     "Select who the appointment is for."
-    while True:
-        python: # First we select which employee we want
-            tuple_list = format_person_list(all_people_in_the_game([mc]), draw_hearts = True)  #The list of people to show. e.g mc.location.people
-            tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
-            renpy.scene("Active") # Had a rare occurence of a person being drawn although no choice being made.
-            person_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
+    $ tuple_list = all_people_in_the_game([mc]) + ["Back"]
+    call screen person_choice(tuple_list, draw_hearts = True)
+    $ person_choice = _return
 
-        if person_choice == "Back":
-            return # Where to go if you hit "Back".
-        else:
-            "You send a message to [person_choice.name] about the appointment."
-            "After some time you get a response..."
-            call salon_response(person_choice)# What to do if "Back" was not the choice taken.
-
+    if person_choice != "Back":
+        "You send a message to [person_choice.name] about the appointment."
+        "After some time you get a response..."
+        call salon_response(person_choice)# What to do if "Back" was not the choice taken.
+    return # Where to go if you hit "Back".
 
 label salon_response(person_choice): # How does the_person respond to a company paid haircut?
     $ person = person_choice
@@ -86,9 +70,6 @@ label salon_response(person_choice): # How does the_person respond to a company 
     python:
         hair_style_check = person.hair_style #If hair_style_check is different than person.hair_style it means a "purchase" has been made.
         hair_color_check = person.hair_colour
-
-    # $ hair_style_request = get_random_from_list(hair_styles)
-    # $ hair_color_request = get_random_hair_colour()
 
     # Add responses here: Currently just placeholders.
     # We don't need repsonse that vary by sluttiness / obedience anymore
