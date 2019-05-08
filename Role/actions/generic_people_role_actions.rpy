@@ -1,7 +1,7 @@
 # NOTE: Not sure where to place these actions yet. Basically actions that could fit on any person regardless of role.
-init -1 python:
-    apply_mandatory_roles = []
-
+init 5 python:
+    add_label_hijack("normal_start", "activate_generic_role_actions")
+    add_label_hijack("after_load", "update_generic_role_actions")
 init 2 python:
     # Definitions
     # Schedule Person
@@ -41,69 +41,107 @@ init 2 python:
         if person.obedience >= 150:
             return True
 
+label activate_generic_role_actions(stack):
+    $ apply_mandatory_roles = []
     # Schedule Person | Allows you to modify the schedule of the_person. Change requirement to be dependent on obedience?
-    schedule_actions_list = [] # NOTE: Use this list to display all the schedule actions.
+    $ schedule_actions_list = [] # NOTE: Use this list to display all the schedule actions.
 
-    schedule_person = Action("Schedule [person.title]", schedule_person_requirement, "schedule_menu",
+    $ schedule_person = Action("Schedule [the_person.title]", schedule_person_requirement, "schedule_menu",
         menu_tooltip = "Schedule where the target should be throughout the day.")
 
-    schedule_early_morning = Action("Early Morning: [person.schedule[0].formalName]", schedule_early_morning_requirement, "schedule_early_morning",
+    $ schedule_early_morning = Action("Early Morning", schedule_early_morning_requirement, "schedule_early_morning",
         menu_tooltip = "Schedule where the target should be during the Early Morning.")
-    schedule_actions_list.append(schedule_early_morning)
+    $ schedule_actions_list.append(schedule_early_morning)
 
 
-    schedule_morning = Action("Morning: [person.schedule[1].formalName]", schedule_morning_requirement, "schedule_morning",
+    $ schedule_morning = Action("Morning", schedule_morning_requirement, "schedule_morning",
         menu_tooltip = "Schedule where the target should be during the Morning.")
-    schedule_actions_list.append(schedule_morning)
+    $ schedule_actions_list.append(schedule_morning)
 
 
-    schedule_afternoon = Action("Afternoon: [person.schedule[2].formalName]", schedule_afternoon_requirement, "schedule_afternoon",
+    $ schedule_afternoon = Action("Afternoon", schedule_afternoon_requirement, "schedule_afternoon",
         menu_tooltip = "Schedule where the target should be during the Afternoon.")
-    schedule_actions_list.append(schedule_afternoon)
+    $ schedule_actions_list.append(schedule_afternoon)
 
 
-    schedule_evening = Action("Evening: [person.schedule[3].formalName]", schedule_evening_requirement, "schedule_evening",
+    $ schedule_evening = Action("Evening", schedule_evening_requirement, "schedule_evening",
         menu_tooltip = "Schedule where the target should be during the Evening.")
-    schedule_actions_list.append(schedule_evening)
+    $ schedule_actions_list.append(schedule_evening)
 
 
-    schedule_night = Action("Night: [person.schedule[4].formalName]", schedule_night_requirement, "schedule_night",
+    $ schedule_night = Action("Night", schedule_night_requirement, "schedule_night",
         menu_tooltip = "Schedule where the target should be during the Night.")
-    schedule_actions_list.append(schedule_night)
+    $ schedule_actions_list.append(schedule_night)
 
     # Follow Me | Allows you to put a person in a list_of_followers that comes along with you upon every location change (follow normal schedule on time advance, might want to remove them from the list during that, although they will come back if not)
-    list_of_followers = []
-    follower_actions = []
+    $ list_of_followers = []
+    $ follower_actions = []
 
-    start_follow = Action("Follow me.", start_follow_requirement, "start_follow",
+    $ start_follow = Action("Follow me.", start_follow_requirement, "start_follow",
         menu_tooltip = "Have the target follow you around.")
-    follower_actions.append(start_follow)
+    $ follower_actions.append(start_follow)
 
-    stop_follow = Action("Stop following me.", stop_follow_requirement, "stop_follow",
+    $ stop_follow = Action("Stop following me.", stop_follow_requirement, "stop_follow",
         menu_tooltip = "Have the target stop following.")
-    follower_actions.append(stop_follow)
+    $ follower_actions.append(stop_follow)
 
     # Hire Person | Allows you to hire a person if they are not already hired. (Moves them to the appropriate division, no duplicates)
-    person_utility_actions = []
-    hire_person = Action("Employ [the_person.title]\n Costs: $300", hire_person_requirement, "hire_person",
+    $ person_utility_actions = []
+    $ hire_person = Action("Employ [the_person.title]\n Costs: $300", hire_person_requirement, "hire_person",
         menu_tooltip = "Hire the the target to work for you in your business. Costs $300")
-    person_utility_actions.append(hire_person)
+    $ person_utility_actions.append(hire_person)
     # Rename Person | Opens a menu that allows you to change first and last name plus a (non- appended) custom the_person.title
-    rename_person = Action("Rename [the_person.title]", rename_person_requirement, "rename_person",
+    $ rename_person = Action("Rename [the_person.title]", rename_person_requirement, "rename_person",
         menu_tooltip = "Give the [the_person.title] a new name")
-    person_utility_actions.append(rename_person)
+    $ person_utility_actions.append(rename_person)
 
     # Setup
-    if generic_people_role not in apply_mandatory_roles:
-        apply_mandatory_roles.append(generic_people_role)
-    if schedule_person not in generic_people_role.actions:
-        generic_people_role.actions.append(schedule_person)
-    for act in follower_actions:
-        if act not in generic_people_role.actions:
-            generic_people_role.actions.append(act)
-    for act in person_utility_actions:
-        if act not in generic_people_role.actions:
-            generic_people_role.actions.append(act)
+    python:
+        if generic_people_role not in apply_mandatory_roles:
+            apply_mandatory_roles.append(generic_people_role)
+        if schedule_person not in generic_people_role.actions:
+            generic_people_role.actions.append(schedule_person)
+        for act in follower_actions:
+            if act not in generic_people_role.actions:
+                generic_people_role.actions.append(act)
+        for act in person_utility_actions:
+            if act not in generic_people_role.actions:
+                generic_people_role.actions.append(act)
+
+    $ execute_hijack_call(stack)
+    return
+
+label update_generic_role_actions(stack):
+
+    if schedule_early_morning in schedule_actions_list:
+        $ schedule_actions_list.remove(schedule_early_morning)
+        $ schedule_actions_list.append(schedule_early_morning)
+    if schedule_morning in schedule_actions_list:
+        $ schedule_actions_list.remove(schedule_morning)
+        $ schedule_actions_list.append(schedule_morning)
+    if schedule_afternoon in schedule_actions_list:
+        $ schedule_actions_list.remove(schedule_afternoon)
+        $ schedule_actions_list.append(schedule_afternoon)
+    if schedule_evening in schedule_actions_list:
+        $ schedule_actions_list.remove(schedule_evening)
+        $ schedule_actions_list.append(schedule_evening)
+    if schedule_night in schedule_actions_list:
+        $ schedule_actions_list.remove(schedule_night)
+        $ schedule_actions_list.append(schedule_night)
+
+    if schedule_person in generic_people_role.actions:
+        $ generic_people_role.actions.remove(schedule_person)
+        $ generic_people_role.actions.append(schedule_person)
+
+    if hire_person in generic_people_role.actions:
+        $ generic_people_role.actions.remove(hire_person)
+        $ generic_people_role.actions.append(hire_person)
+    if rename_person in generic_people_role.actions:
+        $ generic_people_role.actions.remove(rename_person)
+        $ generic_people_role.actions.append(rename_person)
+
+    $ execute_hijack_call(stack)
+    return
 label rename_person(person):
     "You tell [person.possessive_title] that you are giving her a new name."
     while True:
@@ -173,14 +211,14 @@ label hire_person(person):
             return
     $ mc.business.pay(-300)
     $ person.special_role.append(employee_role)
-    $ work_station_destination = mc.business.get_employee_workstation(the_person).formalName
+    $ work_station_destination = mc.business.get_employee_workstation(person).formalName
     "[person.title] heads over to the [work_station_destination]..."
     return
 
 
     # Schedule Person Labels
 
-label schedule_menu(person):
+label schedule_menu(person): # TODO: Find a way to handle "None" instances of schedule to display formalName on Action.
     "You decide where [person.title] should be at throughout the day."
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
@@ -207,6 +245,7 @@ label schedule_early_morning():
         return
     else:
         $ person.schedule[0] = room_choice
+        "Early Morning Schedule Set: [room_choice.formalName]"
         return
 
 label schedule_morning():
@@ -222,6 +261,7 @@ label schedule_morning():
         return
     else:
         $ person.schedule[1] = room_choice
+        "Morning Schedule Set: [room_choice.formalName]"
         return
 
 label schedule_afternoon():
@@ -236,6 +276,7 @@ label schedule_afternoon():
         return # Where to go if you hit "Back".
     else:
         $ person.schedule[2] = room_choice
+        "Afternoon Schedule Set: [room_choice.formalName]"
         return
 
 
@@ -252,6 +293,7 @@ label schedule_evening():
         return # Where to go if you hit "Back".
     else:
         $ person.schedule[3] = room_choice
+        "Evening Schedule Set: [room_choice.formalName]"
         return
 
 
@@ -267,14 +309,15 @@ label schedule_night():
         return # Where to go if you hit "Back".
     else:
         $ person.schedule[4] = room_choice
+        "Night Schedule Set: [room_choice.formalName]"
         return
 
     # Follower Labels
 label start_follow(person):
-    "You tell [the_person.title] to follow you around."
+    "You tell [person.title] to follow you around."
     $ list_of_followers.append(the_person)
     return
 label stop_follow(person):
-    "You tell [the_person.title] to stop following you around."
+    "You tell [person.title] to stop following you around."
     $ list_of_followers.remove(the_person)
     return
