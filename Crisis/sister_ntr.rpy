@@ -6,8 +6,9 @@ init -1 python:
 init 3 python:
     def sister_ntr_crisis_requirement():
         if mc_asleep():
-            if lily.sluttiness >=5:
-                return True
+            if not mc.business.is_weekend():
+                if lily.sluttiness >=5:
+                    return True
         return False
 
     def select_position(the_person):

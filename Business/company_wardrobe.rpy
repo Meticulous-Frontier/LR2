@@ -22,21 +22,21 @@ label append_company_wardrobe:
     menu:
         "Primary Color Red":
             python:
-                upper_color = [.7, .1, .1, .9]
+                upper_color = [.6, .1, .1, .9]
                 under_color = [.9, .9, .9, .8]
-                upper_color_dim = [.6, 0, 0, .8]
+                upper_color_dim = [.55, .15, 0.1, .9]
 
         "Primary Color Yellow":
             python:
-                upper_color = [.9, .8, .1, .9]
-                under_color = [.1, .1, .1, .8]                
-                upper_color_dim = [.9, .8, 0, .8]
+                upper_color = [.8, .7, .1, .9]
+                under_color = [.15, .15, .15, .8]                
+                upper_color_dim = [.7, .6, 0, .9]
 
         "Primary Color Blue":
             python:
-                upper_color = [.2, .2, .7, .9]
-                under_color = [.9, .8, .1, .8]                
-                upper_color_dim = [0.1, 0.1, .6, .8]
+                upper_color = [.1, .15, .55, .9]
+                under_color = [.8, .7, .1, .8]                
+                upper_color_dim = [0, 0.05, .45, .9]
 
     python:
         lower_color = [.1, .1, .1, .9]
