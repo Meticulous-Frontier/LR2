@@ -11,6 +11,14 @@ init -2 python:
 init -1:
     python:
 
+        def change_location(self, new_location):
+            self.location = new_location
+            for location in list_of_places:
+                for person in location.people:
+                    if person in list_of_followers:
+                        location.move_person(person, new_location)
+        MainCharacter.change_location = change_location
+
 
         ## MATCH SKIN COLOR
         # Matches skin, body, face and expression images based on input of skin color
