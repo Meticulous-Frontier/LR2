@@ -1,7 +1,7 @@
 init -1 python:
-    # Pass excluded_people as array of people [mc, lily] 
+    # Pass excluded_people as array of people [mc, lily]
     # automatically excludes people you have not met / talked too (name is ???)
-    def all_people_in_the_game(excluded_people = []): 
+    def all_people_in_the_game(excluded_people = []):
         all_people = []
         for location in list_of_places:
             for person in location.people:
@@ -13,3 +13,15 @@ init -1 python:
     def get_random_person_in_the_game(excluded_people = []): # Pass excluded_people as array of people [mc, lily]
         all_people = all_people_in_the_game(excluded_people)
         return get_random_from_list(all_people)
+
+    def run_turn(self):
+        self.listener_system.fire_event("time_advance")
+        self.change_arousal(-20)
+        for location in list_of_places:
+            for person in location.people:
+                for role in apply_mandatory_roles:
+                    if role not in person.special_role:
+                        person.special_role.append(role)
+        return
+
+    MainCharacter.run_turn = run_turn
