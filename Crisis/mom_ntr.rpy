@@ -6,7 +6,7 @@ init -1 python:
 init 2 python:
     def mom_ntr_mod_requirement():
         if mc_asleep() and day % 7 is not 4: # not on Friday nights
-            if mom.sluttiness >=10:
+            if mom.sluttiness >=20:
                 return True
         return False
 
@@ -52,9 +52,9 @@ label mom_ntr_mod_action:
         $ wife_name = get_random_name()
 
     ## Now determine how many clothes mom will take off
-    if the_person.sluttiness < 30:
+    if the_person.sluttiness < 40:
         $ clothes_number = renpy.random.randint (1,3) ## so it will be random from 1 to 3
-    elif the_person.sluttiness < 60:
+    elif the_person.sluttiness < 80:
         $ clothes_number = renpy.random.randint (1,4) ## so it will be random from 1 to 4
     else:
         $ clothes_number = renpy.random.randint (2,4) ## so it will be random from 2 to 4
@@ -88,7 +88,7 @@ label mom_ntr_mod_action:
             "Keep looking.":
                 "You decide to see what they are up to."
                 "They go on kissing. After a while [man_name] places his hands on [the_person.possessive_title]'s ass, slightly caressing it."
-                if the_person.sluttiness <= 20 or (the_person.get_opinion_score("taking control") > 0 and the_person.sluttiness <= 35):
+                if the_person.sluttiness <= 30 or (the_person.get_opinion_score("taking control") > 0 and the_person.sluttiness <= 45):
                     "[the_person.possessive_title] seems to be taken aback by [man_name] actions."
                     the_person.char "No, [man_name]. We are colleagues, we should not cross some lines."
                     the_person.char "It's late. Thanks for the wonderful evening. See you in the office."

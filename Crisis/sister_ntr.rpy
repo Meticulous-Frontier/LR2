@@ -6,8 +6,8 @@ init -1 python:
 init 3 python:
     def sister_ntr_crisis_requirement():
         if mc_asleep():
-            if not mc.business.is_weekend():
-                if lily.sluttiness >=5:
+            if not (time_of_day == 4 or time_of_day == 5):  # not on friday or saturday night, conflicts with story
+                if lily.sluttiness >= 25:
                     return True
         return False
 
@@ -57,7 +57,7 @@ label sister_ntr_crisis_action:
     $ man_name = get_random_male_name()
 
     if encounter is 1: ## a scene with one man
-        if the_person.sluttiness < 25:
+        if the_person.sluttiness < 40:
             $ the_person.draw_person(position = "kissing", emotion = "happy") 
             "You see [the_person.possessive_title] kissing a young man. On the table there are some college books lying aroung. Seems they decided to take a break from studying."
             the_person.char "Oh, [man_name]. You are so sweet - agreeing to help me with homework. I could not done this myself!"
@@ -171,7 +171,7 @@ label sister_ntr_crisis_action:
                     man_name "Ow, fuck! That was great!"
                     $ the_person.draw_person(position = "missionary", emotion = "happy")
                     the_person.char "Yeah, [man_name]! It was great! We really should have done this sooner!"
-                    the_person.char "Now I go wash my hands and then we have to finish the tasks. Don't wanna get bad grade on that test."
+                    the_person.char "Now I go wash my hands and then we go back to our books. I don't want to fail this test."
                     "You go back to you room to finally have some sleep."
                     if submissive or the_person.sluttiness > 60:
                         "While trying to sleep, you hear some loud noises from outside the bedroom."
@@ -254,7 +254,7 @@ label sister_ntr_crisis_action:
                     man_name "Take it all, [the_person.name]. Get you protein coctail of the day!"
                     $ the_person.draw_person(position = "blowjob", emotion = "happy")
                     "His weakened dick falls out from [the_person.possessive_title]'s mouth. She looks up and smiles. She swallows the sperm, but you still see traces of it."
-                    the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of cola and then we have to finish the tasks. Don't wanna get bad grade on that test."
+                    the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of cola and then we go back to our books. I don't want to fail this test."
                     "You go back to you room to finally have some sleep."
                     if submissive or the_person.sluttiness > 60:
                         "While trying to sleep, you hear some loud noises from outside the bedroom."
@@ -326,7 +326,7 @@ label sister_ntr_crisis_action:
                     "After few seconds [man_name] gets off from [the_person.possessive_title]. You see a trace of his white liquid dripping from her pussy."
                     man_name "What a nice view! [the_person.name] [the_person.last_name] fucked and creampied."
                     "She spreads her legs even more to show her cum drenched pussy."
-                    the_person.char "Hope you like the view. Now I go wash myself and then we have to finish the tasks. Don't wanna get bad grade on that test."
+                    the_person.char "Hope you like the view. Now I go wash myself and then we go back to our books. I don't want to fail this test."
                     "You go back to you room to finally have some sleep."
                     if submissive or the_person.sluttiness > 60:
                         "While trying to sleep, you hear some loud noises from outside the bedroom."
@@ -366,7 +366,7 @@ label sister_ntr_crisis_action:
                     "[the_person.possessive_title] grabs the tip with her hand so that no sperm would spill."
                     man_name "Ow, fuck! That was great!"
                     the_person.char "Yeah, [man_name]! It was great! We really should have done this sooner!"
-                    the_person.char "Now I go wash my hands and then we have to finish the tasks. Don't wanna get bad grade on that test."
+                    the_person.char "Now I go wash my hands and then we go back to our books. I don't want to fail this test."
                     "You go back to you room to finally have some sleep."
                     if submissive or the_person.sluttiness > 60:
                         "While trying to sleep, you hear some loud noises from outside the bedroom."
@@ -440,7 +440,7 @@ label sister_ntr_crisis_action:
                     man_name "Ow, fuck! That was great!"
                     $ the_person.draw_person(position = "blowjob", emotion = "happy")
                     the_person.char "Yeah, [man_name]! It was great! We really should have done this sooner!"
-                    the_person.char "Now I go wash my hands and then we have to finish the tasks. Don't wanna get bad grade on that test."
+                    the_person.char "Now I go wash my hands and then we go back to our books. I don't want to fail this test."
                     "You go back to you room to finally have some sleep."
                     if submissive or the_person.sluttiness > 60:
                         "While trying to sleep, you hear some loud noises from outside the bedroom."
@@ -495,7 +495,7 @@ label sister_ntr_crisis_action:
                 the_person.char "Do I look cute this way?"
                 man_name "You look like a real porn actress, [the_person.name]."
                 man_name2 "Our little coed just got her sperm bath. What a view!"
-                the_person.char "I loved that too. Now I go wash my face and then we have to finish the tasks. Don't wanna get bad grade on that test."
+                the_person.char "I loved that too. Now I go wash my face and then we have to study. I need a straigh A on that test."
                 "You go back to you room to finally have some sleep."
                 if submissive or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from outside the bedroom."
@@ -555,7 +555,7 @@ label sister_ntr_crisis_action:
                 "You see [man_name2] body shrugs as he starts to shoot his load into your little sister mouth."
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
                 "She gulps and looks up to men with a broad simle."
-                the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of water and then we have to finish the tasks. Don't wanna get bad grade on that test."
+                the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of water and then we have to study. I need a straigh A on that test."
                 "You go back to you room to finally have some sleep."
                 if submissive or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from outside the bedroom."
@@ -573,7 +573,7 @@ label sister_ntr_crisis_action:
                 the_person.char "Yeah, [man_name]! It was great! We really should have done this sooner!"
                 man_name2 "Help me too, [the_person.name]."
                 "She grabs his dick and strokes it for a while. Once he reaches an orgasm, [the_person.possessive_title] closes the tip with a hand so that the semen won't stain anything."
-                the_person.char "You really fucked me good, guys! Now I go wash my hands and then we have to finish the tasks. Don't wanna get bad grade on that test."
+                the_person.char "You really fucked me good, guys! Now I go wash my hands and then we have to get back to studying. I don't want a bad grade on that test."
                 "You go back to you room to finally have some sleep."
                 if submissive or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from outside the bedroom."
@@ -648,7 +648,7 @@ label sister_ntr_crisis_action:
                 $ the_person.cum_in_vagina()
                 $ the_person.draw_person(position = "standing_doggy")
                 "After both men shot their loads into [the_person.possessive_title], you see sperm flowing out of her vagina and down on her legs."
-                the_person.char "Hope you like the view. Now I go wash myself and then we have to finish the tasks. Don't wanna get bad grade on that test."
+                the_person.char "Hope you like the view. Now I go wash myself and then we have to get back to studying. I don't want a bad grade on that test.."
                 "You go back to you room to finally have some sleep."
                 if submissive or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from outside the bedroom."
@@ -683,7 +683,7 @@ label sister_ntr_crisis_action:
                 "You see [man_name2] body convulse as he shoots his load into your little sister mouth."
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
                 "She gulps and looks up to men with a broad simle."
-                the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of water and then we have to finish the tasks. Don't wanna get bad grade on that test."
+                the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of water and then we have to study. I need a straigh A on that test."
                 "You go back to you room to finally have some sleep."
                 if submissive or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from outside the bedroom."
@@ -865,7 +865,7 @@ label sister_ntr_crisis_action:
                 the_person.char "Do I look cute this way?"
                 man_name "You look like a real porn actress, [the_person.name]."
                 man_name2 "Our little coed just got her sperm bath. What a view!"
-                the_person.char "I loved that too. Now I go wash my face and then we have to finish the tasks. Don't wanna get bad grade on that test."
+                the_person.char "I loved that too. Now I go wash my face and then we go back to our books. I don't want to fail this test."
                 "You go back to you room to finally have some sleep."
                 if submissive or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from outside the bedroom."
