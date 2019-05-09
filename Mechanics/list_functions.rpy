@@ -20,17 +20,3 @@ init -2 python:
             tuple_string = str(string) + str(what_to_format)
             tuple_list.append([tuple_string, what_to_format])
         return tuple_list
-
-    def format_person_list(list_of_people, draw_hearts = False):  # Re-added this incase we dont want to redo all the lists (removed from game in v0.16.1)
-
-        tuple_list = []
-        for person in list_of_people:
-            tuple_string = format_titles(person)
-
-            if draw_hearts:
-                tuple_string += "\n"
-                tuple_string += get_heart_image_list(person)
-
-            tuple_list.append([
-                tuple_string,person])
-        return tuple_list

@@ -53,24 +53,20 @@ label dungeon_action():
 
 label train_slave():
     while True:
-        python: # First we select which employee we want
-
-                tuple_list = format_person_list(all_people_in_the_game(), draw_hearts = True) #The list of people to show. e.g mc.location.people
-                tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
-                person_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
+        $ tuple_list = office_basement.people + ["Back"]
+        call screen person_choice(tuple_list, draw_hearts = True)
+        $ person_choice = _return        
 
         if person_choice == "Back":
             return # Where to go if you hit "Back".
         else:
-            $ the_person = person_choice
             if person_choice.obedience < 130:
                 "[the_person.title] needs more obedience first"
-            elif person_choice not in office_basement.people:
-                "[the_person.title] has to be in [office_basement.formalName]"
             else:
-                call train_slave_menu(the_person)
+                call train_slave_menu(person_choice)
 
-label train_slave_menu(person = the_person):
+label train_slave_menu(person_choice = the_person): # default to the person when called from action choice
+    $ the_person = person_choice
     $ the_person.draw_person()
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.

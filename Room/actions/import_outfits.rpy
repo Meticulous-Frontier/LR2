@@ -69,21 +69,17 @@ label import_wardrobe_label():
 label give_wardrobe_label():
     "Select who to give clothes"
     while True:
-        python: # First we select which employee we want
-
-                tuple_list = format_person_list(all_people_in_the_game(), draw_hearts = True) #The list of people to show. e.g mc.location.people
-                tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
-                person_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
+        $ tuple_list = all_people_in_the_game([mc]) + ["Back"]
+        call screen person_choice(tuple_list, draw_hearts = True)
+        $ person_choice = _return        
 
         if person_choice == "Back":
             return # Where to go if you hit "Back".
         else:
             call give_wardrobe_input(person_choice)# What to do if "Back" was not the choice taken.
 
-
-label give_wardrobe_input(person_choice):
-
-    $ the_person = person_choice
+label give_wardrobe_input(person = the_person): # when called from action default to the person
+    $ the_person = person
     $ the_person.draw_person()
 
     "Speaker" "Enter the file name e.g Lily_Wardrobe then hit enter to import to [the_person.name]'s wardrobe"

@@ -88,21 +88,17 @@ label clone_person():
     $ clone_age = None
 
     while True:
-        python: # First we select which employee we want
-
-                tuple_list = format_person_list(all_people_in_the_game(), draw_hearts = True) #The list of people to show. e.g mc.location.people
-                tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
-                person_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
+        $ tuple_list = all_people_in_the_game([mc]) + ["Back"]
+        call screen person_choice(tuple_list, draw_hearts = True)
+        $ person_choice = _return
 
         if person_choice == "Back":
             return # Where to go if you hit "Back".
         else:
-            $ person = person_choice
-            $ person.draw_person(emotion = "default")
+            call cloning_process(person_choice)
 
-            call cloning_process(person)
-
-label cloning_process(person):
+label cloning_process(person = the_person): # default to the_person when not passed as parameter   
+    $ person.draw_person(emotion = "default")
     while True:
         menu:
 
@@ -139,7 +135,7 @@ label cloning_process(person):
 
                 $ rd_division_basement.add_person(clone) #Create rooms for the clones to inhabit until a schedule is given (through being hired or player input)
 
-                "[clone_name] [clone_last_name] created..."
+                "[clone.name] [clone.last_name] created..."
                 $ advance_time()
                 return
             "Back":
@@ -147,21 +143,17 @@ label cloning_process(person):
 
 label modify_person():
     while True:
-        python: # First we select which employee we want
-
-                tuple_list = format_person_list(all_people_in_the_game(), draw_hearts = True) #The list of people to show. e.g mc.location.people
-                tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
-                person_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
+        $ tuple_list = all_people_in_the_game([mc]) + ["Back"]
+        call screen person_choice(tuple_list, draw_hearts = True)
+        $ person_choice = _return        
 
         if person_choice == "Back":
-
             return # Where to go if you hit "Back".
         else:
-            $ person = person_choice
-            $ person.draw_person(emotion = "default")
-            call modification_process(person)
+            call modification_process(person_choice)
 
-label modification_process(person):
+label modification_process(person = the_person): # when called without specific person use the_person variable
+    $ person.draw_person(emotion = "default")
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
                 body_modification_options = []
@@ -194,10 +186,10 @@ label change_body():
 label change_skin():
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-                skin_styles = [x[0] for x in list_of_skins]
+            skin_styles = [x[0] for x in list_of_skins]
 
-                skin_styles.append("Back")
-                skin_choice = renpy.display_menu(simple_list_format(skin_styles, x[0], string = "Skin Type: "),True,"Choice")
+            skin_styles.append("Back")
+            skin_choice = renpy.display_menu(simple_list_format(skin_styles, x[0], string = "Skin Type: "),True,"Choice")
         if skin_choice == "Back":
             return
         else:
@@ -206,7 +198,6 @@ label change_skin():
             $ person.draw_person()
 
 label change_face():
-
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
                 face_styles = []
@@ -223,7 +214,6 @@ label change_face():
             $ person.draw_person()
 
 label change_breasts():
-
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
                 cup_sizes = [x[0] for x in list_of_tits]

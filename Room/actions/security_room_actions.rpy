@@ -153,19 +153,14 @@ label office_observation_label():
 label investigation_employee_label():
     "Select who you want to investigate"
     while True:
-        python: # First we select which employee we want
-
-                tuple_list = format_person_list(mc.business.get_employee_list(), draw_hearts = True) #The list of people to show. e.g mc.location.people
-                tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
-                person_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
+        $ tuple_list = all_people_in_the_game([mc]) + ["Back"]
+        call screen person_choice(tuple_list, draw_hearts = True)
+        $ person_choice = _return        
 
         if person_choice == "Back":
             return # Where to go if you hit "Back".
-
-        call investigate_person(person_choice)# What to do if "Back" was not the choice taken.
-
-
-
+        else:
+            call investigate_person(person_choice)# What to do if "Back" was not the choice taken.
 
 label investigate_person(person_choice = the_person): # Need to default to the_person for return calls.
     $ the_person = person_choice
@@ -181,8 +176,6 @@ label investigate_person(person_choice = the_person): # Need to default to the_p
             return
         else:
             $ act_choice.call_action()
-
-
 
 label investigation_home_label():
     "You conveniently find [the_person.name]'s adress in the yellow pages."
