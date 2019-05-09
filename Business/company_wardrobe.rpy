@@ -11,7 +11,7 @@ init 3 python:
         return
 
     company_wardrobe_action = ActionMod("Add Company Wardrobe", company_wardrobe_requirement, "append_company_wardrobe", initialization = company_wardrobe_initialization,  
-        menu_tooltip = "Adds a collection of over- and underwear for your company to your outfit manager.", category = "Business")
+        menu_tooltip = "Adds a collection of over- and underwear for your company to your outfit manager.", category = "Wardrobe")
 
 label append_company_wardrobe:
     if mc.designed_wardrobe.has_outfit_with_name("[mc.business.name] - Sexy Uniform"):

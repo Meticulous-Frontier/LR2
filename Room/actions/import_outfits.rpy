@@ -51,13 +51,13 @@ init 2 python:
         return
 
     import_wardrobe_action = ActionMod("Import Wardrobe from XML", import_wardrobe_requirement, "import_wardrobe_label",
-        initialization = import_wardrobe_mod_initialization, menu_tooltip = "Type the name of the XML file to import, case sensitive")
+        initialization = import_wardrobe_mod_initialization, menu_tooltip = "Type the name of the XML file to import, case sensitive", category = "Wardrobe")
 
     give_wardrobe_action = ActionMod("Give Wardrobe from XML", import_wardrobe_requirement, "give_wardrobe_label",
-        initialization = give_wardrobe_mod_initialization, menu_tooltip = "Type the name of the XML file to give from, case sensitive")
+        initialization = give_wardrobe_mod_initialization, menu_tooltip = "Type the name of the XML file to give from, case sensitive", category = "Wardrobe")
 
     give_uniform_action = ActionMod("Give Uniforms from XML", give_uniform_requirement, "give_uniform_label",
-        initialization = give_uniform_mod_initialization, menu_tooltip = "Type the name of the XML file to give from, case sensitive")
+        initialization = give_uniform_mod_initialization, menu_tooltip = "Type the name of the XML file to give from, case sensitive", category = "Wardrobe")
 
 label import_wardrobe_label():
     "Speaker" "Enter the file name e.g Lily_Wardrobe then hit enter to import to your wardrobe"
