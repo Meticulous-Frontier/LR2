@@ -17,10 +17,15 @@ to the screen to a minimum.
 
 How to Install:
 
-    1. Download a .zip file from the master branch.
-    2. Extract the contents of the .zip into the Lab Rats 2/game/ folder.
+    1. Download a .zip file from the master branch or develop branch if you feel adventurous.
+    2. Extract the contents of the .zip into the Lab Rats 2/game/ folder. (you should get a Mods folder in your game folder)
     3. Launch Lab Rats 2 and load up a save or start fresh.
-    4. Skip time or play normally until the crisis event telling you about a computer in your bedroom is done.
+	4. The main mods will be available in your bedroom right away (split between Mod Settings and Serum Mods).
+    4. When adding ParadigmShift ModCore based Mods, skip time or play normally until the crisis event telling you about a computer in your bedroom is done.
     5. Go to the player's bedroom and use the PC via the "Do something..." menu.
-    6. Hit the Mod Initialization button and click through any messages.
-    7. Done. Any mods present that use the Mod Core should now be activated.
+    6. Hit the Mod Initialization button to initialize ParadigmShift mods and click through any messages.
+    7. Done. 
+	
+All mods should now be available for the player, some add extra features, some add extra locations or extra actions while in a location.
+
+You also get access to the Trollden CheatMod by pressing 'Z' in game.
