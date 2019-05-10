@@ -66,7 +66,7 @@ label sister_ntr_crisis_action:
             "They go back to kissing. [man_name] moves his hands to [the_person.possessive_title] butt and starts caressing it."
             the_person.char "Mmmmm... Your hands are so gentle..."
             "You see [man_name] starts to undress [the_person.possessive_title]."
-            $ the_person.strip_outfit_to_max_sluttiness(narrator_message = "He takes off her ##clothing## and throws it on a chair.")
+            $ the_person.strip_outfit_to_max_sluttiness(narrator_messages = "He takes off [the_person.possessive_title]'s [strip_choice.name] and throws it on a chair.")
             the_person.char "Hold it there, [man_name]. I'm not ready for this. Hope you understand."
             "You see a glimpse of dissapointment on man's face, but he regains himself."
             man_name "Sorry, [the_person.name]. I understand."
@@ -79,7 +79,7 @@ label sister_ntr_crisis_action:
             $ the_person.sluttiness += 2
             "You get back to your room and don't even hear from door closing as you fall asleep just as you head touches the pillow."
         else:
-            $ the_person.strip_outfit_to_max_sluttiness(the_person)
+            $ the_person.strip_outfit_to_max_sluttiness()
             $ position = select_position(the_person)
             $ the_person.change_arousal (75)
             if position == "missionary":

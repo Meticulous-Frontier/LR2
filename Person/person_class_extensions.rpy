@@ -122,34 +122,47 @@ init -1:
 
         ## STRIP OUTFIT TO MAX SLUTTINES EXTENSION
         # Strips down the person to a clothing their are comfortable with (starting with top, before bottom)
-        # optional: clothing_message narrator voice after each item use '##clothing##'' in message for clothing item stripped, use '##person_name##' for self name.
-        #           Can be an array of messages for variation in message per clothing item
-        # note: at least 1 item gets removed regardsless of sluttiness
-        def strip_outfit_to_max_sluttiness(self, top_layer_first = True, exclude_feet = True, narrator_message = None):
-            # internal function to strip top clothing first.
-            def get_strip_choice_upper_first(person, top_layer_first = True, exclude_feet = True, do_not_remove = True):
-                strip_choice = person.outfit.remove_random_upper(top_layer_first, do_not_remove)
+        # narrator_messages: narrator voice after each item of clothing stripped, use '[person.<title>]' for titles and '[strip_choice.name]' for clothing item.
+            # Can be an array of messages for variation in message per clothing item or just a single string or None for silent stripping
+        def strip_outfit_to_max_sluttiness(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, narrator_messages = None, character_placement = None, temp_sluttiness_increase = 0):
+            # internal function to strip top clothing first.           
+            def get_strip_choice_upper_first(outfit, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True):
+                strip_choice = outfit.remove_random_upper(top_layer_first)
                 if strip_choice is None:
-                    strip_choice = person.outfit.remove_random_any(top_layer_first, exclude_feet, do_not_remove)
+                    strip_choice = outfit.remove_random_any(top_layer_first, exclude_upper, exclude_lower, exclude_feet)
                 return strip_choice
-            def get_narrator_message(message):
-                if isinstance(message, basestring):
-                    return message
-                else:
-                    msg_choice_index = renpy.random.randint(1,len(message))
-                    return message[msg_choice_index - 1]
 
-            strip_choice = get_strip_choice_upper_first(self, top_layer_first, exclude_feet, do_not_remove = True)
-            while not strip_choice is None:
-                self.draw_animated_removal(strip_choice)
-                if narrator_message:
-                    message = get_narrator_message(narrator_message)
-                    renpy.say(None, message.replace("##person_name##", self.name).replace("##clothing##", strip_choice.name))
-                if self.judge_outfit(self.outfit):
-                    strip_choice = get_strip_choice_upper_first(self, top_layer_first, exclude_feet, do_not_remove = True)
+            def get_messages(narrator_messages):
+                messages = []
+                if not narrator_messages:
+                    pass
+                elif not isinstance(narrator_messages, list):
+                    messages = [narrator_messages]
                 else:
-                    strip_choice = None
-            return
+                    messages = narrator_messages
+                return messages
+            
+            messages = get_messages(narrator_messages)
+            msg_count = len(messages)
+
+            test_outfit = the_person.outfit.get_copy()
+            removed_something = False
+
+            strip_choice = get_strip_choice_upper_first(test_outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet)
+            while strip_choice and self.judge_outfit(test_outfit, temp_sluttiness_increase):
+                self.draw_animated_removal(strip_choice, character_placement = character_placement) #Draw the strip choice being removed from our current outfit
+                self.outfit = test_outfit.get_copy() #Swap our current outfit out for the test outfit.
+                if msg_count > 0:   # do we need to show a random message and replace titles and outfit name
+                    msg_idx = renpy.random.randint(1, msg_count)
+                    msg = messages[msg_idx - 1]
+                    msg = msg.replace("[the_person.possessive_title]", self.possessive_title).replace("[the_person.title]", self.title).replace("[the_person.mc_title]", self.mc_title).replace("[strip_choice.name]", strip_choice.name)
+                    renpy.say(None, msg)
+                else:
+                    renpy.pause(1) # if no message to show, wait a short while before automatically continue stripping
+
+                strip_choice = get_strip_choice_upper_first(test_outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet)
+
+            return removed_something
 
         # Monkey wrench Person class to have automatic strip function
         Person.strip_outfit_to_max_sluttiness = strip_outfit_to_max_sluttiness

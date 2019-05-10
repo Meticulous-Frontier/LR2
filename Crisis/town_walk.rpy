@@ -40,8 +40,13 @@ label town_walk_crisis_action:
             "You decide not to risk being seen and stay away from her sight"
     the_person.char "I shoud get dresed for lunch. Don't have much time..."
     
-    $ random_strip_messages = ["##person_name## takes off her ##clothing## and throws it on the bed.", "##person_name## keeps going and drops her ##clothing##.","##person_name## strips off her ##clothing## and tosses it to the side.", "##person_name## removes her ##clothing## and drops it to the floor.", "##person_name## quickly slides off her ##clothing## and leaves it on the ground."]
-    $ the_person.strip_outfit_to_max_sluttiness(narrator_message = random_strip_messages)
+    $ the_person.strip_outfit_to_max_sluttiness(narrator_messages = [
+        "[the_person.possessive_title] takes off her [strip_choice.name] and throws it on the bed.", 
+        "[the_person.possessive_title] keeps going and drops her [strip_choice.name].",
+        "[the_person.possessive_title] strips off her [strip_choice.name] and tosses it to the side.", 
+        "[the_person.possessive_title] removes her [strip_choice.name] and drops it to the floor.", 
+        "[the_person.possessive_title] quickly slides off her [strip_choice.name] and leaves it on the ground."
+        ])
    
     if the_person.outfit.vagina_available():
         "You see that [the_person.possessive_title] also studies her pussy."
@@ -107,14 +112,8 @@ label town_walk_crisis_action:
         "Join her." if mc.current_stamina > 0:
             "You decide to use this opportunity and join her."
             mc.name "I was passing by, heard some noise  and decided to investigate. All this robberies, you know..."
-            mc.name "And I see that that you indeed require some attention, [the_person.possessive_title]. Should I join?"
-            if the_person.sluttiness <= 30 or the_person.arousal < 50:
-                $ the_person.draw_person(position = "stand4", emotion = "angry")
-                "[the_person.possessive_title] quickly turns around on hearing your voice. You see that she is not glad to see you."
-                the_person.char "The fuck are you doing, Mr. [mc.last_name]? You can't just spy on people in their homes! Get out of here or I'll call the police!"
-                "You quickly leave the area."
-                $ the_person.happiness -= 5
-            else:
+            mc.name "And I see that that you indeed require some attention, [the_person.title]. Should I join?"
+            if the_person.sluttiness > 50 or the_person.arousal > 50:
                 $ the_person.draw_person(position = "stand5", emotion = "happy")
                 "[the_person.possessive_title] turns around on hearing your voice. You see her smile."
                 if (the_person.love) > 30:
@@ -123,6 +122,12 @@ label town_walk_crisis_action:
                     the_person.char "Well, that seems to be a good idea, Mr. [mc.last_name]. Come on, get inside."
                 "You quickly climb inside through the window."
                 call fuck_person(the_person) from _call_fuck_person_P13S2
+            else:
+                $ the_person.draw_person(position = "stand4", emotion = "angry")
+                "[the_person.possessive_title] quickly turns around on hearing your voice. You see that she is not glad to see you."
+                the_person.char "The fuck are you doing, Mr. [mc.last_name]? You can't just spy on people in their homes! Get out of here or I'll call the police!"
+                "You quickly leave the area."
+                $ the_person.happiness -= 5
         "Join her. (disabled)" if not mc.current_stamina > 0:
             pass
         "Walk away":
