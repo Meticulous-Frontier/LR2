@@ -34,8 +34,5 @@ label store_basement_rooms(stack):
         $ rd_division_basement.add_object(make_floor())
         $ rd_division_basement.add_object(make_desk())
         $ rd_division_basement.add_object(make_table())
-
-    if object not in office_basement.objects:
-        $ office_basement.add_object(make_bed())
     $ execute_hijack_call(stack)
     return
