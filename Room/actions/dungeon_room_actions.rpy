@@ -1,3 +1,14 @@
+# TODO: Encourage players to unlock the "Follow Me" command to bring people to the Dungeon for situational bonuses from the objects in the Room.
+#       Balance how much of a bonus the objects give. Right now it's a sluttiness_modifier = 10, obedience_modifier = 20 for the lowest tier, "the_bdsmbed" which is +10 obedience from a normal bed.
+# TODO: Create a "Slave" role that can be unlocked at high obedience. It should make sure that "Generic People Actions" are always available.
+# TODO: Make a "Strip" Action that can be used to a) Strip person of clothing and B) Change their planned outfit to the stripped state if the player wants.
+# TODO: Create a short story resulting in an expensive Serum trait that enables the "Slave" role, inherently skipping the common requirements for certain Actions.
+#       Something as simple as 1st Slave reveal short text, then the same on 2nd and finally the third reveals a short text and that you have somehow come to the conclusion
+#       That you know how to chemically induce the "Slave" behavior.
+# TODO: Find and implement interesting Actions exclusive to the Room or the Role so that it doesn't become meaningless filler content.
+#       Increasing obedience seems to be relatively easy in the base game, so having obedience boosts seem redundant. What about converting some obedience into sluttiness?
+#       See whats possible in regards to using Role "Slave" to temporary increase the obedience of other People in the same room if the MainCharacter is present AND has interacted with the "Slave".
+# NOTE: Current actions seem pointless and can't see how they could be interesting without extensive story writing work even if fleshed out.
 init -1 python:
     dungeon_actions = []
     slave_training_actions = []
@@ -30,7 +41,7 @@ init 3 python:
     slave_training_actions.append(sex_slave_action)
 
     def appoint_slave_requirement():
-        if the_person.obedience >= 500:
+        if person.obedience >= 500:
             return True
         else:
             return "Requires: 500 Obedience"
@@ -55,7 +66,7 @@ label train_slave():
     while True:
         $ tuple_list = office_basement.people + ["Back"]
         call screen person_choice(tuple_list, draw_hearts = True)
-        $ person_choice = _return        
+        $ person_choice = _return
 
         if person_choice == "Back":
             return # Where to go if you hit "Back".
