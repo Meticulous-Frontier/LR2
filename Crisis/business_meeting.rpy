@@ -69,20 +69,16 @@ label business_meeting_action:
     return
 
 label business_meeting_introduction(person):
-    if person.obedience > 140:
-        person.char "Hello Sir, thank you for meeting me on such short notice."
-    else:
-        person.char "Hi [person.mc_title], thank you for the meeting."
+    person.char "Hello [person.mc_title], thank you for meeting me on such short notice."
+    person.char "I have been thinking about some ways to improve the streamlining of the company."
     return
 
 label business_meeting_flirtation(person):
-    person.char "Thank you for taking the time to listen to my proposal....."
     if person.sluttiness > 15:
         $ feet = person.outfit.remove_random_feet(top_layer_first = True, do_not_remove = True)
         if feet:
-            $ person.outfit.remove_clothing(feet)
-            $ person.draw_person(position="sitting")
-        "While talking about her new business plan, you suddenly feel her bare foot moving up and down your leg."
+            $ person.draw_animated_removal(feet, position="sitting", emotion="default")
+        "While talking about her proposal, you suddenly feel her bare foot moving up and down your leg."
     else:
         "You mind wanders off while she is talking..."
     return
@@ -90,30 +86,23 @@ label business_meeting_flirtation(person):
 label business_meeting_arrousal(person):
     if person.sluttiness > 30:
         "She moves up to your crotch and unzips your pants with her feet, sliding with her foot over you growing bulge."
-        if person.obedience > 140:
-            person.char "Sir, it seems you need some personal attention."
-        else:
-            person.char "Oh my [person.mc_title], it seems my proposal got you all exited."
+        person.char "Oh my [person.mc_title], it seems my proposal got you all exited."
     else:
-        if person.obedience > 140:
-            person.char "Perhaps we should continue this another time, Sir?"
-        else:
-            person.char "Perhaps we could discuss this matter in a more private setting?"
+        person.char "Perhaps we could discuss this matter in a more private setting, [person.mc_title]?"
     return
-
 
 label business_meeting_seduction(person):
     if person.sluttiness > 50:
         $ top_clothing = person.outfit.remove_random_upper(top_layer_first = True, do_not_remove = True)
         if top_clothing:
             "After talking for a while she takes off her [top_clothing.name]."
-            $ person.outfit.remove_clothing(top_clothing)
-            $ person.draw_person(position="sitting")            
+            $ person.draw_animated_removal(top_clothing, position="sitting", emotion="default")
             person.char "This should help you focus, [person.mc_title]."
             "You can't help but admire [person.possessive_title] boldness."
 
         person.char "I'm sorry, it seems i've dropped something..."
         "[person.possessive_title] slides under the table grabbing your now exposed cock looking up at you with a smile."
+        $ person.draw_person(position = "blowjob")
         $ person.change_arousal(25)
         menu:
             "Continue" if  mc.current_stamina > 0:
@@ -121,7 +110,9 @@ label business_meeting_seduction(person):
             "Continue. (disabled)" if not mc.current_stamina > 0:
                 pass
             "Not now":
-                mc.name "I'm sorry [person.possessive_title], i've got another meeting to attend."
+                mc.name "I'm sorry [person.title], i've got another meeting to attend."
+                $ person.draw_person(position = "stand4", emotion="sad")
+                "[person.possessive_title] stands up with a disappointed look on her face."
                 $ person.change_happiness(-5)
     else:
         "After while [person.title] stops rubbing your exposed member."
@@ -129,22 +120,21 @@ label business_meeting_seduction(person):
     return
 
 label business_meeting_end(person):
-    if person.obedience > 140:
-        if person.sluttiness < 40:
-            person.char "Thank you for your time, Sir!"
-        else:
-            person.char "Thank you, Sir, I'm always happy to serve you or the business!"
+    if person.sluttiness < 20:
+        person.char "Thank you for the meeting, [person.mc_title]!"
+    elif person.sluttiness < 40:
+        person.char "Thank you, [person.mc_title], I'm always happy to serve you or the business!"
     else:
-        if person.sluttiness < 40:
-            person.char "Thank you for the meeting, [person.mc_title]!"
-        else:
-            person.char "Thank you for giving me the personal attention I needed, [person.mc_title]!"
+        person.char "Thank you for giving me the personal attention I needed, [person.mc_title]!"
 
 
     if person.sluttiness < 40:
         "You thank [person.title] for her time and that you will look into the matter."
     else:
         mc.name "You did well [person.title], this was very productive and relaxing."
+
+    if person.sluttiness > 50:
+        "[person.possessive_title] puts on her clothes and walks away."
 
     $ the_person.draw_person(position="walking_away")
 
