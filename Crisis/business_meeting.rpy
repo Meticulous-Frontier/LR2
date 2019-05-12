@@ -10,15 +10,12 @@ init 2 python:
                     return True
         return False
 
-    business_meeting_action = ActionMod("Business Meeting Crisis", business_meeting_requirement, "business_meeting_action_description",
+    business_meeting_action = ActionMod("Business Meeting Crisis", business_meeting_requirement, "business_meeting_action_label",
         menu_tooltip = "An employee wants to discuss some business with you.", category = "Business")
     crisis_list.append([business_meeting_action, business_meeting_weight])
 
-label business_meeting_action_description:
-    call business_meeting_action from _call_business_meeting_action_1
-    return
-    
-label business_meeting_action:
+   
+label business_meeting_action_label:
     $ the_person = get_random_from_list(mc.business.get_employee_list())
     $ the_place = mc.business.get_employee_workstation(the_person)
     $ day_part = time_of_day_string()

@@ -10,15 +10,11 @@ init 3 python:
                     return True
         return False
 
-    sister_phone_crisis = ActionMod("Sister Phone Message",sister_phone_crisis_requirement,"sister_phone_action_description", 
+    sister_phone_crisis_action = ActionMod("Sister Phone Message",sister_phone_crisis_requirement,"sister_phone_crisis_action_label", 
         menu_tooltip = "[the_person.possessive_title] sends you phone messages", category="Home")
-    crisis_list.append([sister_phone_crisis, sister_phone_mod_weight])
+    crisis_list.append([sister_phone_crisis_action, sister_phone_mod_weight])
 
-label sister_phone_action_description:
-    call sister_phone_crisis_action from _call_sister_phone_crisis_action_1
-    return
-
-label sister_phone_crisis_action:
+label sister_phone_crisis_action_label:
     #TODO: have a way of saving and reviewing selfies in the future.
     #TODO: Have a proper weekday/weekend schedule for people and use that to determine when sister is at home, at work, or out on the town.
     $ the_person = lily

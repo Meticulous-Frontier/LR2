@@ -11,15 +11,11 @@ init 2 python:
                     return True
         return False
 
-    town_walk_crisis = ActionMod("Town Walk Crisis",town_walk_crisis_requirement,"town_walk_action_description", 
+    town_walk_crisis_action = ActionMod("Town Walk Crisis",town_walk_crisis_requirement,"town_walk_crisis_action_label", 
         menu_tooltip = "On occasion you take an afternoon stroll through town, someone did not close their bedroom curtains.")
-    crisis_list.append([town_walk_crisis, town_walk_mod_weight])
+    crisis_list.append([town_walk_crisis_action, town_walk_mod_weight])
 
-label town_walk_action_description:
-    call town_walk_crisis_action from _call_town_walk_crisis_action_1
-    return
-    
-label town_walk_crisis_action:
+label town_walk_crisis_action_label:
     ## You spy on a neighbour during your town walk activities
     $ exclude_list = [mom, lily, mc] # exclude family and MC
     if mc.business.is_open_for_business() and not mc.business.is_weekend(): # exclude employees working on weekdays

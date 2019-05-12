@@ -11,15 +11,11 @@ init 2 python:
                         return True
         return False
 
-    coffee_break_action = ActionMod("Coffee Break Crisis", coffee_break_requirement, "coffee_break_action_description",
+    coffee_break_action = ActionMod("Coffee Break Crisis", coffee_break_requirement, "coffee_break_action_label",
         menu_tooltip = "A group of employees is having a coffee break.", category = "Business")
     crisis_list.append([coffee_break_action, coffee_break_weight])
 
-label coffee_break_action_description:
-    call coffee_break_action from _call_coffee_break_action_1
-    return
-
-label coffee_break_action:
+label coffee_break_action_label:
     #Generate list of people with poor obedience
     $ list_of_possible_people = mc.business.get_requirement_employee_list(slut_required = 20)
     $ person_one = get_random_from_list(list_of_possible_people)

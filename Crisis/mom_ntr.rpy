@@ -10,15 +10,11 @@ init 2 python:
                 return True
         return False
 
-    mom_ntr_mod = ActionMod("Mom NTR Crisis",mom_ntr_mod_requirement,"mom_ntr_action_description", 
+    mom_ntr_mod_action = ActionMod("Mom NTR Crisis",mom_ntr_mod_requirement,"mom_ntr_mod_action_label", 
         menu_tooltip = "At night you hear strange sounds out of your mom's bedroom", category = "NTR")
-    crisis_list.append([mom_ntr_mod, mom_ntr_mod_weight])
-
-label mom_ntr_action_description:
-    call mom_ntr_mod_action from _call_mom_ntr_mod_action_1
-    return
-    
-label mom_ntr_mod_action:
+    crisis_list.append([mom_ntr_mod_action, mom_ntr_mod_weight])
+   
+label mom_ntr_mod_action_label:
     ## Mom having her private life
     $ the_person = mom
     "Some time late in the night, you're awoken by some noise down the hallway."

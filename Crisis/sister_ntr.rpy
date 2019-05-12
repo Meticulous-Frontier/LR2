@@ -20,15 +20,11 @@ init 3 python:
                 positions.append ("anal")
         return get_random_from_list(positions)    
 
-    sister_ntr_mod = ActionMod("Sister NTR Crisis",sister_ntr_crisis_requirement,"sister_ntr_action_description",
+    sister_ntr_mod_action = ActionMod("Sister NTR Crisis",sister_ntr_crisis_requirement,"sister_ntr_crisis_action_label",
         menu_tooltip = "At night you hear strange sounds out of your sister's bedroom", category = "NTR")
-    crisis_list.append([sister_ntr_mod, sister_ntr_mod_weight])
+    crisis_list.append([sister_ntr_mod_action, sister_ntr_mod_weight])
 
-label sister_ntr_action_description:
-    call sister_ntr_crisis_action from _call_sister_ntr_crisis_action_1
-    return
-
-label sister_ntr_crisis_action:
+label sister_ntr_crisis_action_label:
     ## Lily studing with her friends
     $ the_person = lily
     "While to fall asleep, you're disturbed by some noise down the hallway."
