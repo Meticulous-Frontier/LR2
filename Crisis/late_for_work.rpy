@@ -20,11 +20,11 @@ label late_for_work_action_label:
 
     "As you are walking through the main corridor you spot [the_person.possessive_title] rushing through the entrance doors."
     
-    $ the_person.draw_person(position="stand3", emotion="default")
     if the_person.sluttiness > 20:
         $ the_person.cum_on_tits()
+        $ the_person.draw_person(position="stand3", emotion="default")
         the_person.char "I'm sorry [the_person.mc_title], my boyfriend needed some personal attention when he dropped me off at the office."
-        $ upper_clothing = the_person.outfict.get_upper_visible()
+        $ upper_clothing = the_person.outfit.get_upper_ordered()[-1]
         menu:
             "Lecture Her On Being Late":
                 $ the_person.draw_person(emotion = 'sad')
@@ -53,6 +53,7 @@ label late_for_work_action_label:
     elif the_person.sluttiness > 40:
         $ the_person.cum_on_face()
         $ the_person.cum_on_tits()
+        $ the_person.draw_person(position="stand3", emotion="default")
         the_person.char "Sorry [the_person.mc_title], a client caught me in the parking lot and wanted to have a business meeting in his car. You can let marketing know I made the sale."
         mc.name "Well, it sure does look like it was a productive meeting. Go clean yourself up before you get back to work. I don't want you dripping that all over the building."
         if the_person.get_opinion_score("cum facials") > 0:
@@ -67,6 +68,7 @@ label late_for_work_action_label:
         $ mc.business.funds += 250
 
     else:
+        $ the_person.draw_person(position="stand3", emotion="default")
         menu:
             "Lecture Her On Being Late":
                 $ the_person.draw_person(emotion = 'sad')

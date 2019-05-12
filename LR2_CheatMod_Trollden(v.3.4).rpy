@@ -707,16 +707,17 @@ screen cmw(): # Cheats affecting the general world
 
                     textbutton "Pay to Strip" action Call("pay_strip_scene", the_person) style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "pay_strip_scene"
                     textbutton "Dinner Date" action Call("dinner_date", the_person) style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "dinner_date"
-                    textbutton "Mom NTR" action Call("mom_ntr_action_description") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Mom NTR Event"
-                    textbutton "Sister NTR" action Call("sister_ntr_action_description") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Sister NTR Event"
-                    textbutton "Shower Scenes" action Call("shower_action_description") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Shower Spy Event"
+                    textbutton "Mom NTR" action Call("mom_ntr_mod_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Mom NTR Event"
+                    textbutton "Sister NTR" action Call("sister_ntr_crisis_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Sister NTR Event"
+                    textbutton "Shower Scenes" action Call("shower_crisis_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Shower Spy Event"
 
                 vbox:
-                    textbutton "Sister Phone" action Call("sister_phone_action_description") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Your sister sends messages to your phone"
-                    textbutton "Town Walk" action Call("town_walk_action_description") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Taking an afternoon stroll through town"
+                    textbutton "Sister Phone" action Call("sister_phone_crisis_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Your sister sends messages to your phone"
+                    textbutton "Town Walk" action Call("town_walk_crisis_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Taking an afternoon stroll through town"
                     textbutton "Going to the Gym" action Call("select_person_for_gym") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Give an employee a training session at the gym"
-                    textbutton "Business Meeting" action Call("business_meeting_action") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Taking an afternoon stroll through town"
-                    textbutton "Coffee Break" action Call("coffee_break_action") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip ""
+                    textbutton "Business Meeting" action Call("business_meeting_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Taking an afternoon stroll through town"
+                    textbutton "Coffee Break" action Call("coffee_break_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip ""
+                    textbutton "Late for Work" action Call("late_for_work_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip ""
 
             # if cml == True and cmlpage == 4: # Page 4
 
