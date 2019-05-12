@@ -716,8 +716,12 @@ screen cmw(): # Cheats affecting the general world
                     textbutton "Town Walk" action Call("town_walk_crisis_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Taking an afternoon stroll through town"
                     textbutton "Going to the Gym" action Call("select_person_for_gym") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Give an employee a training session at the gym"
                     textbutton "Business Meeting" action Call("business_meeting_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Taking an afternoon stroll through town"
-                    textbutton "Coffee Break" action Call("coffee_break_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip ""
-                    textbutton "Late for Work" action Call("late_for_work_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip ""
+                    textbutton "Coffee Break" action Call("coffee_break_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Some girls have a coffe break in the office"
+                    textbutton "Late for Work" action Call("late_for_work_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "An employee is late for work in the morning"
+
+                vbox:
+                    textbutton "Mall Introduction" action Call("mall_introduction_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "A friend introduces a stranger in the mall"
+
 
             # if cml == True and cmlpage == 4: # Page 4
 

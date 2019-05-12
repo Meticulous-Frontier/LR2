@@ -42,8 +42,6 @@ init -1:
             return
         Person.match_skin = match_skin
 
-
-
         ## CHANGE HEIGHT EXTENSION
         # Returns True when the persons height has changed; otherwise False
         # chance is probability percentage that height change for amount will occur (used by serums)
@@ -109,6 +107,14 @@ init -1:
 
         # attach change weight function to the Person class
         Person.change_weight = change_weight
+
+        def is_employee(self):
+            employment_title = mc.business.get_employee_title(self)
+            if employment_title != "None":
+                return True
+            return False
+
+        Person.is_employee = is_employee
 
         ## LEARN HOME EXTENSION
         def learn_home(self): # Adds the_person.home to mc.known_home_locations allowing it to be visited without having to go through date label
