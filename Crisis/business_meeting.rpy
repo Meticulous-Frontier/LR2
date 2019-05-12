@@ -6,7 +6,7 @@ init 2 python:
     def business_meeting_requirement():
         if not mc.business.is_weekend():
             if mc.is_at_work():
-                if time_of_day > 1 and time_of_day < 4: # only during morning afternoon or evening
+                if time_of_day > 0 and time_of_day < 4: # only during morning afternoon or evening
                     return True
         return False
 

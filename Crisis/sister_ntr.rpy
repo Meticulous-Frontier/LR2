@@ -6,7 +6,7 @@ init -1 python:
 init 3 python:
     def sister_ntr_crisis_requirement():
         if mc_asleep():
-            if not (time_of_day == 4 or time_of_day == 5):  # not on friday or saturday night, conflicts with story
+            if not (day % 7 == 4 or day % 7 == 5):  # not on friday or saturday night, conflicts with story
                 if lily.sluttiness >= 25:
                     return True
         return False
