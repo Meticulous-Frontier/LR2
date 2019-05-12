@@ -47,7 +47,7 @@ label late_for_work_action_label:
                 $ the_person.change_obedience(-2)
                 $ the_person.change_happiness(2)
 
-        $ the_person.draw_person(emotion = 'walking_away')
+        $ the_person.draw_person(position = 'walking_away')
         "[the_person.possessive_title] rushes to the ladies room to cleanup."
 
     elif the_person.sluttiness > 40:
@@ -63,7 +63,7 @@ label late_for_work_action_label:
         else:
             the_person.char "Of Course [the_person.mc_title]."
         
-        $ the_person.draw_person(emotion = 'walking_away')
+        $ the_person.draw_person(position = 'walking_away')
         "The client wires the money to your company account, but must have forgot to actually placed an order."
         $ mc.business.funds += 250
 
@@ -84,7 +84,7 @@ label late_for_work_action_label:
                 $ the_person.change_obedience(-2)
                 $ the_person.change_happiness(2)
 
-        $ the_person.draw_person(emotion = 'walking_away')
+        $ the_person.draw_person(position = 'walking_away')
         "[the_person.possessive_title] quietly rushes to her desk."
     
     $ the_person.clear_scene()
