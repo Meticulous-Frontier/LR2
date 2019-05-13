@@ -14,7 +14,7 @@ init 2 python:
         menu_tooltip = "An employee wants to discuss some business with you.", category = "Business")
     crisis_list.append([business_meeting_action, business_meeting_weight])
 
-   
+
 label business_meeting_action_label:
     $ the_person = get_random_from_list(mc.business.get_employee_list())
     $ the_place = mc.business.get_employee_workstation(the_person)
@@ -76,6 +76,7 @@ label business_meeting_flirtation(person):
         if feet:
             $ person.draw_animated_removal(feet, position="sitting", emotion="default")
         "While talking about her proposal, you suddenly feel her bare foot moving up and down your leg."
+        "You shoot [person.title] a quick glance. Your eyes meet, and you give her a quick wink and a smile."
     else:
         "You mind wanders off while she is talking..."
     return
@@ -136,7 +137,7 @@ label business_meeting_end(person):
     $ the_person.draw_person(position="walking_away")
 
     if person.sluttiness < 40:
-        "You watch her walking away, deciding what to do next." 
+        "You watch her walking away, deciding what to do next."
     else:
         "After contemplating what just happend, you decide what to do next."
     return
