@@ -39,17 +39,17 @@ init:
 
 
 label intro_SB_threesome_doggy_plus_oral(the_girl_1, the_girl_2, the_location, the_object, the_round):
-    mc.name "[the_girl_1.name], why don't you lay down. [the_girl_2.name] can eat you out while I fuck her."
-    "[the_girl_1.name] smiles and agrees."
+    mc.name "[the_girl_1.title], why don't you lay down. [the_girl_2.title] can eat you out while I fuck her."
+    "[the_girl_1.title] smiles and agrees."
     if SB_get_fetish(the_girl_1) == "Vaginal Fetish":
         the_girl_1.char "This should be a good warmup... but don't forget, [mc.name], I need you to fuck me sometime too..."
     elif SB_get_fetish(the_girl_1) == "Oral Fetish":
-        the_girl_1.char "This should be good, I've heard [the_girl_1.name] has a pretty good tongue..."
+        the_girl_1.char "This should be good, I've heard [the_girl_1.title] has a pretty good tongue..."
     elif SB_get_fetish(the_girl_1) == "Anal Fetish":
         the_girl_1.char "Mmm that sounds good... maybe she could stick a finger in my ass once in a while too..."
     else:
         the_girl_1.char "Sounds good! I can't wait, I bet this is going to be amazing..."
-    "[the_girl_1.name] starts to lay down. [the_girl_2.name] turns to you."
+    "[the_girl_1.title] starts to lay down. [the_girl_2.title] turns to you."
     if SB_get_fetish(the_girl_2) == "Oral Fetish":
         the_girl_2.char "Mmm I can't wait to taste that sweet pussy..."
     elif if SB_get_fetish(the_girl_2) == "Vaginal Fetish":
@@ -57,15 +57,15 @@ label intro_SB_threesome_doggy_plus_oral(the_girl_1, the_girl_2, the_location, t
     elif SB_get_fetish(the_girl_1) == "Anal Fetish":
         the_girl_1.char "Mmm that sounds good... maybe you could stick it in my ass for a bit too..."
     else:
-        the_girl_1.char "Alright! I've always though [the_girl_1.name] was kinda hot... I can't believe I finally get the opportunity to eat her out!"
-    "[the_girl_2.name] gets down on her hands and knees and slowly lowers her face into [the_girl_1.name]'s crotch. [the_girl_2.name] starts to lick between her legs"
-    "You get down on your knees and grab [the_girl_2.name]'s hips. You position your hips in line with hers and move your cock along her slit."
+        the_girl_1.char "Alright! I've always though [the_girl_1.title] was kinda hot... I can't believe I finally get the opportunity to eat her out!"
+    "[the_girl_2.title] gets down on her hands and knees and slowly lowers her face into [the_girl_1.title]'s crotch. [the_girl_2.title] starts to lick between her legs"
+    "You get down on your knees and grab [the_girl_2.title]'s hips. You position your hips in line with hers and move your cock along her slit."
     if the_girl_2.arousal > 60:
         "Her pussy is soaking wet. As you run your length along her hole you are soon slick with her juices."
     else:
         "Her pussy looks absolutely peftect. As you run your length along her hole she starts to squirm."
     "You take note of her puckered asshole, also beckoning your cock to come fill it. You decide to start with her pussy for though."
-    "You push yourself into [the_girl_2.name]'s steamy cunt and start to fuck her while she eats [the_girl_1.name]'s pussy"
+    "You push yourself into [the_girl_2.title]'s steamy cunt and start to fuck her while she eats [the_girl_1.title]'s pussy"
     return
 
 label scene_SB_threesome_doggy_plus_oral_1(the_girl_1, the_girl_2, the_location, the_object, the_round):
@@ -106,10 +106,10 @@ label orgasm_SB_threesome_doggy_plus_oral(the_girl_1, the_girl_2, the_location, 
 label swap_SB_threesome_doggy_play_oral(the_girl_1, the_girl_2, the_location, the_object, the_round, current_girl):
     #THIS FUNCTION NEEDS COMPLETELY REDONE
     if current_girl == 1:
-        "You slowly pull out of [the_girl_1.name]'s pussy. You run your hands through [the_girl_2.name]'s hair for a second, then slowly pull her mouth down towards your cock."
-        mc.name "Lick me clean, [the_girl_2.name]."
-        "[the_girl_2.name] opens her mouth and begins to greedily slurp at your cock. Her mouth feels great sliding up and down your erection."
-        "You reach down with one hand and hold [the_girl_2.name]'s hair off to one side for her, and with your other hand you start to play with [the_girl_1.name]'s pussy."
+        "You slowly pull out of [the_girl_1.title]'s pussy. You run your hands through [the_girl_2.title]'s hair for a second, then slowly pull her mouth down towards your cock."
+        mc.name "Lick me clean, [the_girl_2.title]."
+        "[the_girl_2.title] opens her mouth and begins to greedily slurp at your cock. Her mouth feels great sliding up and down your erection."
+        "You reach down with one hand and hold [the_girl_2.title]'s hair off to one side for her, and with your other hand you start to play with [the_girl_1.title]'s pussy."
         $ guy_source = 2
         $ girl_one_source = 0
         $ girl_two_source = 1
@@ -118,9 +118,9 @@ label swap_SB_threesome_doggy_play_oral(the_girl_1, the_girl_2, the_location, th
         $ skill_tag_p2 = "Oral"
         return
     else:
-        "You pull back on [the_girl_2.name]'s hair for a bit. Your cock springs free from her mouth with a satisfying plop. She looks up at you and smiles."
-        mc.name "Mmm, that was good [the_girl_2.name]. Time to get back to [the_girl_1.name]..."
-        "You lower yourself down until you are lined up with [the_girl_1.name]'s pussy. She moans as you slide yourself back into her, but it is muffled by [the_girl_2.name]'s hips as she rides her face."
+        "You pull back on [the_girl_2.title]'s hair for a bit. Your cock springs free from her mouth with a satisfying plop. She looks up at you and smiles."
+        mc.name "Mmm, that was good [the_girl_2.title]. Time to get back to [the_girl_1.title]..."
+        "You lower yourself down until you are lined up with [the_girl_1.title]'s pussy. She moans as you slide yourself back into her, but it is muffled by [the_girl_2.title]'s hips as she rides her face."
         "You slide yourself into her slick cunt a few times, filling her eager hole with your dick."
         $ guy_source = 1
         $ girl_one_source = 0

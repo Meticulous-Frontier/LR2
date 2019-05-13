@@ -188,21 +188,36 @@ init -1 python:
         if the_person.shop_progress_stage > 1:
             if the_person.shop_investment_rate == 3.0:
                 if starbuck.sluttiness > 60:
-                    return True
+                    if starbuck.love < 50:
+                        return True
+                    else:
+                        return "Requires 50 Love"
+                else:
+                    return "Requires 60 sluttiness"
         return False
 
     def starbuck_sex_store_promo_four_requirement(the_person):
         if the_person.shop_progress_stage > 1:
             if the_person.shop_investment_rate == 4.0:
                 if starbuck.sluttiness > 70:
-                    return True
+                    if starbuck.love < 60:
+                        return True
+                    else:
+                        return "Requires 60 Love"
+                else:
+                    return "Requires 70 sluttiness"
         return False
 
     def starbuck_sex_store_promo_five_requirement(the_person):
         if the_person.shop_progress_stage > 2:
             if the_person.shop_investment_rate == 5.0:
                 if starbuck.sluttiness > 90:
-                    return True
+                    if starbuck.love < 70:
+                        return True
+                    else:
+                        return "Requires 70 Love"
+                else:
+                    return "Requires 90 sluttiness"
         return False
 
 #init 2 python:
@@ -246,7 +261,6 @@ label SB_instantiate_roles(): #This section instantiates all of the key roles in
 
 #SBS10
 label starbuck_vaginal_skillup_label(the_person):
-    #TODO you offer to make dinner. It takes up time, but you can slip serum to your mom and sister.
     "You explain to [the_person.name] that you feel like you've stopped improving your skill at vaginal sex. You ask if she has any tips or products for further improvement."
     the_person.char "Oh [mc.name], I have just the thing to help!"
     "[the_person.name] leads you over to an area of the store where she sells a number of cock rings."
@@ -460,7 +474,7 @@ label starbuck_foreplay_skillup_label(the_person):
             "You thank her for the help, but decide against it for now."
     return
 
-#Note This function may be able to be restore in future version, by stepping through every sex position and multiplying their guy_arousal value by a decimal.
+
 #SBS50
 label starbuck_arousal_reduction_one_label(the_person):
     $ global SB_MOD_MC_AROUSAL_MULT
@@ -828,11 +842,14 @@ label starbuck_sex_store_promo_one_label(the_person):
             $ starbuck.draw_person(position = "stand2", emotion = "happy")
             $ mc.current_stamina += -1
             $ the_person.reset_arousal()
-            the_person.char "Mmm... That was nice. We should do that again!"
+            the_person.char "Mmm... That was nice. It's been a while since I sucked on a hard cock. It was kinda nice!"
+            if the_person.get_opinion_score("giving blowjobs") < 1:
+                $ the_person.sexy_opinions["giving blowjobs"] = [1, True]
+                "[the_person.name] now likes giving blowjobs!"
             "You are still recovering from your orgasm. You take a look at her phone and start looking at the pictures you got."
             $ the_person.shop_investment_rate = 2.0
-            the_person.char "The pictures, I mean... I mean if this advertisement works, we'll have to make more right?"
-            mc.name "Definitely. Alright, I'll go ahead and get some advertisements done, and we'll see if we can't get better traffic in here."
+            the_person.char "If this advertisement works, we'll have to make more right?"
+            mc.name "Definitely. Alright, I'll go ahead and get some advertisements done, and we'll see if we can't get better foot traffic in here."
             "You say goodbye to [the_person.name] and head out. With pictures like these, you are sure the business here will increase."
             $ the_person.review_outfit()
             hide screen person_info_ui
@@ -1043,7 +1060,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     $ the_person.draw_person()
     $ the_person.wardrobe.add_outfit(SB_advert_five_outfit.get_copy())
     "[the_person.name] stands before you almost completely exposed, her incredible body is on full display."
-    if starbuck.love > 60:
+    if starbuck.love > 50:
         the_person.char "Do you think that before we get started, maybe you could just hold me for a little bit?"
         "You step up to her. Your hands go to her waist an she wraps her arms around you."
         $ the_person.draw_person(position = "kissing")
@@ -1164,7 +1181,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     "You grab the key and undo the cuffs. She slowly sits up, but is hesitant to stand."
     $ the_person.draw_person(position = "sitting")
     the_person.char "[mc.name]... its been so long... since I've been fucked like that..."
-    if the_person.love > 60:
+    if the_person.love > 50:
         the_person.char "I've missed that, having someone take control of me and just fuck my brains out..."
         "While she is normally a very independant woman, you think maybe [the_person.name] is starting to get a bit of a submissive streak when you are around."
         if the_person.get_opinion_score("being submissive") < 1:

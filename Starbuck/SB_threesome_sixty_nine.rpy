@@ -40,8 +40,8 @@ init:
 
 
 label intro_SB_threesome_sixty_nine(the_girl_1, the_girl_2, the_location, the_object, the_round, current_girl):
-    mc.name "[the_girl_1.name], why don't you lay down. [the_girl_2.name] can get on top of you and you can eat her out while I fuck you."
-    "[the_girl_1.name] smiles and agrees."
+    mc.name "[the_girl_1.title], why don't you lay down. [the_girl_2.title] can get on top of you and you can eat her out while I fuck you."
+    "[the_girl_1.title] smiles and agrees."
     if SB_get_fetish(the_girl_1) == "Vaginal Fetish":
         the_girl_1.char "Mmm I can't wait to feel you sliding into me..."
     elif SB_get_fetish(the_girl_1) == "Oral Fetish":
@@ -50,15 +50,15 @@ label intro_SB_threesome_sixty_nine(the_girl_1, the_girl_2, the_location, the_ob
         the_girl_1.char "Mmm that sounds good... maybe you could stick a finger in my ass once in a while too..."
     else:
         the_girl_1.char "Sounds good! I can't wait, I bet this is going to be amazing..."
-    "[the_girl_1.name] starts to lay down. [the_girl_2.name] turns to you."
+    "[the_girl_1.title] starts to lay down. [the_girl_2.title] turns to you."
     if SB_get_fetish(the_girl_2) == "Oral Fetish":
-        the_girl_2.char "This should be good, I've heard [the_girl_1.name] has a pretty good tongue..."
+        the_girl_2.char "This should be good, I've heard [the_girl_1.title] has a pretty good tongue..."
     elif SB_get_fetish(the_girl_2) == "Vaginal Fetish":
         the_girl_2.char "This should be a good warmup... but don't forget, [mc.name], I need you to fuck me sometime too..."
     else:
         the_girl_2.char "Sounds good! Don't forget to change it up once in a while... I'd be glad to take a turn sucking you off..."
-    "[the_girl_2.name] climbs on top of the other girl and slowly lowers her pussy down onto her face. She moans as [the_girl_1.name] starts to lick between her legs"
-    "You get down on your knees and spread [the_girl_1.name]'s legs. You position your hips in line with hers and move your cock along her slit."
+    "[the_girl_2.title] climbs on top of the other girl and slowly lowers her pussy down onto her face. She moans as [the_girl_1.title] starts to lick between her legs"
+    "You get down on your knees and spread [the_girl_1.title]'s legs. You position your hips in line with hers and move your cock along her slit."
     if the_girl_2.arousal > 60:
         "Her pussy is soaking wet. As you run your length along her hole you are soon slick with her juices."
     else:
@@ -69,29 +69,29 @@ label intro_SB_threesome_sixty_nine(the_girl_1, the_girl_2, the_location, the_ob
 #Girl 1 = missionary, Girl 2 = oral#
 label scene_SB_threesome_sixty_nine_1(the_girl_1, the_girl_2, the_location, the_object, the_round, current_girl):
     if current_girl == 1:
-        "You run your hands along [the_girl_1.name]'s hips as you fuck her. You can see her hands groping [the_girl_2.name]'s ass cheeks as she pleasures her with her tongue."
+        "You run your hands along [the_girl_1.title]'s hips as you fuck her. You can see her hands groping [the_girl_2.title]'s ass cheeks as she pleasures her with her tongue."
         if the_girl_2.has_large_tits() :
             if the_girl_2.outfit.tits_available():
-                "In front of you, you can see [the_girl_2.name]'s huge tits heaving up and down as she slowly rocks her hips back and forth across [the_girl_1.name]'s tongue."
+                "In front of you, you can see [the_girl_2.title]'s huge tits heaving up and down as she slowly rocks her hips back and forth across [the_girl_1.title]'s tongue."
             else:
                 $top_clothing = the_girl_2.outfit.get_upper_ordered()[-1]
-                "In front of you, you can see [the_girl_2.name]'s huge tits heaving up and down, barely contained in her [top_clothing.name] as she slowly rocks her hips back and forth across [the_girl_1.name]'s tongue."
+                "In front of you, you can see [the_girl_2.title]'s huge tits heaving up and down, barely contained in her [top_clothing.name] as she slowly rocks her hips back and forth across [the_girl_1.title]'s tongue."
                 "You decide they've been contained for too long."
                 while not the_girl_2.outfit.tits_available():    #If covered up, have her take her top off
                     $ the_clothing = the_girl_2.outfit.get_upper_ordered()[-1]
-                    "You take off [the_girl_2.name]'s [the_clothing.name]"
+                    "You take off [the_girl_2.title]'s [the_clothing.name]"
                     $ the_girl_2.outfit.remove_clothing(the_clothing)
                     $ SB_threesome_sixty_nine.redraw_scene(the_girl_1, the_girl_2)
         else:
             if the_girl_2.outfit.tits_available():
-                "In front of you, you can see [the_girl_2.name]'s perky tits swaying up and down as she slowly rocks her hips back and forth across [the_girl_1.name]'s tongue."
+                "In front of you, you can see [the_girl_2.title]'s perky tits swaying up and down as she slowly rocks her hips back and forth across [the_girl_1.title]'s tongue."
             else:
                 $top_clothing = the_girl_2.outfit.get_upper_ordered()[-1]
-                "In front of you, you can see [the_girl_2.name]'s perky tits swaying up and down as she slowly rocks her hips back and forth across [the_girl_1.name]'s tongue."
+                "In front of you, you can see [the_girl_2.title]'s perky tits swaying up and down as she slowly rocks her hips back and forth across [the_girl_1.title]'s tongue."
                 "They look great in her [top_clothing.name], but you decide they've been contained for too long."
                 while not the_girl_2.outfit.tits_available():    #If covered up, have her take her top off
                     $ the_clothing = the_girl_2.outfit.get_upper_ordered()[-1]
-                    "You take off [the_girl_2.name]'s [the_clothing.name]"
+                    "You take off [the_girl_2.title]'s [the_clothing.name]"
                     $ the_girl_2.outfit.remove_clothing(the_clothing)
                     $ SB_threesome_sixty_nine.redraw_scene(the_girl_1, the_girl_2)
 
@@ -258,50 +258,50 @@ label orgasm_SB_threesome_sixty_nine(the_girl_1, the_girl_2, the_location, the_o
     $ SB_threesome_sixty_nine.redraw_scene(the_girl_1, the_girl_2)
     if current_girl == 1:
         if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
-            "You can feel [the_girl_1.name] trembling beneath you. [the_girl_2.name] opens her mouth and moans as [the_girl_1.name] licks her in just the right spot."
+            "You can feel [the_girl_1.title] trembling beneath you. [the_girl_2.title] opens her mouth and moans as [the_girl_1.title] licks her in just the right spot."
             $ the_girl_2.call_dialogue("climax_responses")
-            "[the_girl_1.name] is moaning loudly but it all gets muffled as [the_girl_2.name] grinds against her face roughly."
-            "They both orgasm. [the_girl_1.name]'s cunt pulses around your cock as she cums, while [the_girl_2.name] moans and closes her eyes."
-            "As they start to wind down, you continue fucking [the_girl_2.name]'s now considerably slicker pussy."
+            "[the_girl_1.title] is moaning loudly but it all gets muffled as [the_girl_2.title] grinds against her face roughly."
+            "They both orgasm. [the_girl_1.title]'s cunt pulses around your cock as she cums, while [the_girl_2.title] moans and closes her eyes."
+            "As they start to wind down, you continue fucking [the_girl_2.title]'s now considerably slicker pussy."
             return
 
         elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
-            "You can feel [the_girl_1.name] trembling beneath you. She moans loudly but its muffled by [the_girl_2.name] grinding her pussy in her face."
+            "You can feel [the_girl_1.title] trembling beneath you. She moans loudly but its muffled by [the_girl_2.title] grinding her pussy in her face."
             "She orgasms, per pussy quivering around your cock. You grab her hips and give a few extra rough thrusts."
             "You don't even both to slow down. As [the_girl_1.title] comes down from her orgasm you continue your relentless fucking."
             return
 
         elif the_girl_2.arousal > 100:   #Just girl 2 orgasms
-            "[the_girl_2.name] opens her mouth and moans as [the_girl_1.name] licks her in just the right spot."
+            "[the_girl_2.title] opens her mouth and moans as [the_girl_1.title] licks her in just the right spot."
             $ the_girl_2.call_dialogue("climax_responses")
-            "[the_girl_2.name] grinds her pussy against the other girl's face as she orgasms."
+            "[the_girl_2.title] grinds her pussy against the other girl's face as she orgasms."
 
     elif current_girl == 2:
         if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
-            "You can feel [the_girl_1.name] trembling as you finger her. [the_girl_2.name]moans around your cock as [the_girl_1.name] licks her in just the right spot."
+            "You can feel [the_girl_1.title] trembling as you finger her. [the_girl_2.title]moans around your cock as [the_girl_1.title] licks her in just the right spot."
             $ the_girl_2.call_dialogue("climax_responses")
-            "[the_girl_1.name] is moaning loudly but it all gets muffled as [the_girl_2.name] grinds against her face roughly."
-            "They both orgasm. [the_girl_1.name]'s cunt quivers around yourfingers as she cums, while [the_girl_2.name] moans and closes her eyes."
-            "As they start to wind down, you put your hand on the back of [the_girl_2.name]'s head and remind her to keep sucking."
+            "[the_girl_1.title] is moaning loudly but it all gets muffled as [the_girl_2.title] grinds against her face roughly."
+            "They both orgasm. [the_girl_1.title]'s cunt quivers around yourfingers as she cums, while [the_girl_2.title] moans and closes her eyes."
+            "As they start to wind down, you put your hand on the back of [the_girl_2.title]'s head and remind her to keep sucking."
             return
         elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
-            "You can feel [the_girl_1.name] trembling at your touch. She moans loudly but its muffled by [the_girl_2.name] grinding her pussy in her face."
+            "You can feel [the_girl_1.title] trembling at your touch. She moans loudly but its muffled by [the_girl_2.title] grinding her pussy in her face."
             "She orgasms, per pussy quivering around your fingers. You thrust them into her roughly."
             "As [the_girl_1.title] comes down from her orgasm you continue stimulating her with your hand."
             return
 
         elif the_girl_2.arousal > 100:   #Just girl 2 orgasms
-            "[the_girl_2.name] moans around your cock as [the_girl_1.name] licks her in just the right spot."
+            "[the_girl_2.title] moans around your cock as [the_girl_1.title] licks her in just the right spot."
             "She grinds her pussy against the other girl's face as she orgasms."
     return
 
 #Girl 1 = missionary, Girl 2 = oral#
 label swap_SB_threesome_sixty_nine(the_girl_1, the_girl_2, the_location, the_object, the_round, current_girl):
     if current_girl == 1:
-        "You slowly pull out of [the_girl_1.name]'s pussy. You run your hands through [the_girl_2.name]'s hair for a second, then slowly pull her mouth down towards your cock."
-        mc.name "Lick me clean, [the_girl_2.name]."
-        "[the_girl_2.name] opens her mouth and begins to greedily slurp at your cock. Her mouth feels great sliding up and down your erection."
-        "You reach down with one hand and hold [the_girl_2.name]'s hair off to one side for her, and with your other hand you start to play with [the_girl_1.name]'s pussy."
+        "You slowly pull out of [the_girl_1.title]'s pussy. You run your hands through [the_girl_2.title]'s hair for a second, then slowly pull her mouth down towards your cock."
+        mc.name "Lick me clean, [the_girl_2.title]."
+        "[the_girl_2.title] opens her mouth and begins to greedily slurp at your cock. Her mouth feels great sliding up and down your erection."
+        "You reach down with one hand and hold [the_girl_2.title]'s hair off to one side for her, and with your other hand you start to play with [the_girl_1.title]'s pussy."
         $ guy_source = 2
         $ girl_one_source = 0
         $ girl_two_source = 1
@@ -310,9 +310,9 @@ label swap_SB_threesome_sixty_nine(the_girl_1, the_girl_2, the_location, the_obj
         $ skill_tag_p2 = "Oral"
         return
     else:
-        "You pull back on [the_girl_2.name]'s hair for a bit. Your cock springs free from her mouth with a satisfying plop. She looks up at you and smiles."
-        mc.name "Mmm, that was good [the_girl_2.name]. Time to get back to [the_girl_1.name]..."
-        "You lower yourself down until you are lined up with [the_girl_1.name]'s pussy. She moans as you slide yourself back into her, but it is muffled by [the_girl_2.name]'s hips as she rides her face."
+        "You pull back on [the_girl_2.title]'s hair for a bit. Your cock springs free from her mouth with a satisfying plop. She looks up at you and smiles."
+        mc.name "Mmm, that was good [the_girl_2.title]. Time to get back to [the_girl_1.title]..."
+        "You lower yourself down until you are lined up with [the_girl_1.title]'s pussy. She moans as you slide yourself back into her, but it is muffled by [the_girl_2.title]'s hips as she rides her face."
         "You slide yourself into her slick cunt a few times, filling her eager hole with your dick."
         $ guy_source = 1
         $ girl_one_source = 0

@@ -1,5 +1,5 @@
 init -3 python:
-    FETISH_DEBUG_MODE = True #A basic cheat mode, makes it easy to test fetish serums
+    FETISH_DEBUG_MODE = False #A basic cheat mode, makes it easy to test fetish serums
     FETISH_OPINION_MAX = 2
     FETISH_SEX_SKILL_MAX = 5
     FETISH_SKILL_RAISE_CHANCE = 8
