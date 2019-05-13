@@ -13,7 +13,8 @@ init 1 python:
         common_likes = ["skirts", "small talk", "the colour blue", "makeup"],
         common_sexy_likes = ["lingerie","taking control",  "doggy style sex", "creampies"],
         common_dislikes = ["working", "conservative outfits", "research work", "production work"],
-        common_sexy_dislikes = [ "masturbating", "giving handjobs"])
+        common_sexy_dislikes = [ "masturbating", "giving handjobs"],
+        titles_function = starbuck_titles, possessive_titles_function = starbuck_possessive_titles, player_titles_function = starbuck_player_titles)
 
 
         #global starbuck_role
@@ -188,7 +189,7 @@ init -1 python:
         if the_person.shop_progress_stage > 1:
             if the_person.shop_investment_rate == 3.0:
                 if starbuck.sluttiness > 60:
-                    if starbuck.love < 50:
+                    if starbuck.love > 50:
                         return True
                     else:
                         return "Requires 50 Love"
@@ -200,7 +201,7 @@ init -1 python:
         if the_person.shop_progress_stage > 1:
             if the_person.shop_investment_rate == 4.0:
                 if starbuck.sluttiness > 70:
-                    if starbuck.love < 60:
+                    if starbuck.love > 60:
                         return True
                     else:
                         return "Requires 60 Love"
@@ -212,7 +213,7 @@ init -1 python:
         if the_person.shop_progress_stage > 2:
             if the_person.shop_investment_rate == 5.0:
                 if starbuck.sluttiness > 90:
-                    if starbuck.love < 70:
+                    if starbuck.love > 70:
                         return True
                     else:
                         return "Requires 70 Love"
@@ -1832,3 +1833,20 @@ label starbuck_being_watched(the_person, the_watcher, the_position):
         "[the_person.name] seems more comfortable [the_position.verb]ing you with [the_watcher.name] around."
 
     return
+init python:
+    def starbuck_titles(person):
+        valid_titles = [reserved_titles(person)]
+        valid_titles.append("Starbuck")
+        valid_titles.append("Cara")
+        return valid_titles
+    def starbuck_possessive_titles(person):
+        valid_possessive_titles = [relaxed_titles(person)]
+        if person.sluttiness > 60:
+            valid_possessive_titles.append("Your slutty business partner")
+        if person.sluttiness > 100 and person.sex_skills["Anal"] >= 4:
+            valid_possessive_titles.append("Your buttslut")
+        return valid_possessive_titles
+    def starbuck_player_titles(person):
+        valid_player_titles = [reserved_player_titles(person)]
+        valid_player_titles.append("Business Partner")
+        return valid_player_titles

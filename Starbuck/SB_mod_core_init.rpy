@@ -29,13 +29,21 @@ label SB_fetish_mod_init_label():
 label SB_mod_options_menu():
     "This is a test of the SB mod options menu. A menu should be displayed after this."
     menu:
-        "Option 1":
-            $ mod_option_test_choice = "1"
-        "Option 2":
-            $ mod_option_test_choice = "2"
+        "Sex Shop Investment Returns":
+            "This mod changes how much return on investment you get from the sex shop, for difficulty purposes."
+            menu:
+                "Lucrative (Easy)":
+                    $starbuck.shop_difficulty_value = 2.0
+                    "Shop returns are now lucrative."
+                "Average (Normal)":
+                    $starbuck.shop_difficulty_value = 1.0
+                    "Shop returns are now normal."
+                "Poor (Hard)":
+                    $starbuck.shop_difficulty_value = 0.5
+                    "Shop returns are now poor."
         "Return":
             ###Returns to PC menu
             $ renpy.jump("pc_loop")
-    "You have chosen option [mod_option_test_choice]"
+    #"You have chosen option [mod_option_test_choice]"
     ###Loop the menu
     $ renpy.jump("SB_mod_options_menu")

@@ -10,6 +10,7 @@ init -1 python:
         shop_invest_two_max = 20000
         shop_invest_three_max = 30000
         shop_owner_relationship_stage = 0
+        shop_difficulty_value = 1.0
 
         def run_day(self):
             if self.shop_progress_stage > 0:
@@ -25,10 +26,10 @@ init -1 python:
         def calc_investment_return(self):
             investment_return = 0
             if self.shop_progress_stage > 0:
-                investment_return += 30
-                investment_return += int (self.shop_stage_one_investment_total * self.shop_investment_rate * 0.01)
+                investment_return += (30 * self.shop_difficulty_value)
+                investment_return += int (self.shop_stage_one_investment_total * self.shop_investment_rate * 0.01 * self.shop_difficulty_value)
             if self.shop_progress_stage > 1:
-                investment_return += int (self.shop_stage_two_investment_total * self.shop_investment_rate * 0.006)
+                investment_return += int (self.shop_stage_two_investment_total * self.shop_investment_rate * 0.006 * self.shop_difficulty_value)
             if self.shop_progress_stage > 2:
-                investment_return += int (self.shop_stage_three_investment_total * self.shop_investment_rate * 0.004)
+                investment_return += int (self.shop_stage_three_investment_total * self.shop_investment_rate * 0.004 * self.shop_difficulty_value)
             return investment_return
