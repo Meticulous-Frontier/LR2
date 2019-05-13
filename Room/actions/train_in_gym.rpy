@@ -43,7 +43,7 @@ label train_in_gym(person):
     $ body_changed = person.change_weight(-change, 100)
     $ new_weight = get_person_weight_string(person)
 
-    "After the session [person.possessive_title] weighs [new_weight] lbs."
+    "After the session [person.possessive_title] weighs [new_weight]."
 
     if body_changed:
         $ person.draw_person(person.body_type)

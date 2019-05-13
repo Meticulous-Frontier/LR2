@@ -125,7 +125,7 @@ init 2:
 
                     if hasattr(person, "weight"):
                         $ weight = get_person_weight_string(person)
-                        textbutton "Weight: [weight] lbs":
+                        textbutton "Weight: [weight]":
                             ysize 28
                             text_style "menu_text_style"
                             action NullAction()
