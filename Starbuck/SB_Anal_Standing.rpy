@@ -15,7 +15,7 @@ init:
         #SB_anal_standing.link_positions_two_way(doggy, "transition_SB_anal_standing_doggy", "transition_doggy_SB_anal_standing")
 
 label intro_SB_anal_standing(the_girl, the_location, the_object, the_round):
-    "With you arms wrapped around [the_girl.name], you make out for a bit with her back to the [the_object.name]"
+    "With you arms wrapped around [the_girl.title], you make out for a bit with her back to the [the_object.name]"
     "You turn her around, and she leans over [the_object.name], presenting her ass to you."
     mc.name "That's it, [the_girl.name], I'm going to fuck your ass today."
     if SB_get_fetish(the_girl) == "Anal Fetish":
