@@ -197,7 +197,7 @@ label change_mod_category:
         tuple_list = []
         for action_mod in action_mod_list:
             if (action_mod.category == active_action_mod_category):
-                tuple_string = action_mod.name + "\n Active: " + str(action_mod.enabled)
+                tuple_string = action_mod.name + "\n Active: " + str(action_mod.enabled) + " (tooltip)" + action_mod.menu_tooltip
                 tuple_list.append([tuple_string, action_mod])
 
         tuple_list = sorted(tuple_list, key=lambda x: x[0])

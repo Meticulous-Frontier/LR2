@@ -147,7 +147,7 @@ label change_serum_mod_tier:
         tuple_list = []
         for serum_mod in serum_mod_list:
             if (serum_mod.tier == active_serum_mod_tier):
-                tuple_string = serum_mod.name + "\n Active: " + str(serum_mod.enabled)
+                tuple_string = serum_mod.name + "\n Active: " + str(serum_mod.enabled) + " (tooltip)" + serum_mod.desc
                 tuple_list.append([tuple_string, serum_mod])
 
         tuple_list = sorted(tuple_list, key=lambda x: x[0])
