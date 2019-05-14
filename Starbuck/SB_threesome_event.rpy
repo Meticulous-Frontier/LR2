@@ -60,7 +60,7 @@ label SB_fetish_vaginal_family_threesome_label():
     "You put your hands on her hips and draw [the_person_one.title] into your arms. She looks up into your eyes, her hesitation melting away."
     $ SB_draw_two_person_scene(person_one = the_person_one, person_two = the_person_two, one_pos_x = 0.7, one_position = "kissing", two_position = "sitting")
     "Your lips lock together in a passionate kiss. [the_person_one.title]'s body melts into yours in surrender, even as your mom looks on."
-    the_person_two.char "Oh my... [the_person.mc_title]... [the_person_one.title]..."
+    the_person_two.char "Oh my... [the_person_two.mc_title]... [the_person_one.title]..."
     "You move your hands down [the_person_one.title]'s waist and around to her butt. You give both cheeks a squeeze."
     "She presses her body against yours and sighs."
     the_person_one.char "Mmm... I can't wait for you to fuck me..."

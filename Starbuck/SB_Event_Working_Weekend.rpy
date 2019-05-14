@@ -120,7 +120,7 @@ label SB_working_weekend_crisis_label():
                 $ mc.current_stamina += -1
                 "Eventually, [the_person.title] gets up. She says goodbye after giving you a quick kiss"
                 return
-            "How about a blowjob?.\n{size=22}Requires Stamina{/size} (disabled)" if mc.current_stamina == 0:
+            "How about a blowjob?\n{size=22}Requires Stamina{/size} (disabled)" if mc.current_stamina == 0:
                 pass
             "Just Talk":
                 "You decide to take the opportunity to learn a little more about [the_person.title]."

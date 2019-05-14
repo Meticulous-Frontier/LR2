@@ -54,7 +54,7 @@ label intro_SB_threesome_sixty_nine(the_person_1, the_person_2, the_location, th
     if SB_get_fetish(the_person_2) == "Oral Fetish":
         the_person_2.char "This should be good, I've heard [the_person_1.title] has a pretty good tongue..."
     elif SB_get_fetish(the_person_2) == "Vaginal Fetish":
-        the_person_2.char "This should be a good warmup... but don't forget, [the_person.mc_title], I need you to fuck me sometime too..."
+        the_person_2.char "This should be a good warmup... but don't forget, [the_person_2.mc_title], I need you to fuck me sometime too..."
     else:
         the_person_2.char "Sounds good! Don't forget to change it up once in a while... I'd be glad to take a turn sucking you off..."
     "[the_person_2.title] climbs on top of the other girl and slowly lowers her pussy down onto her face. She moans as [the_person_1.title] starts to lick between her legs"

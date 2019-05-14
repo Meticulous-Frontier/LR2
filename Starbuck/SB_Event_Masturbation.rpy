@@ -19,7 +19,7 @@ init 2 python:
                     for person in mc.business.get_employee_list():
                         if person.get_opinion_score("masturbating") > 0:
                             return True
-                        elif person.sluttiness > 80:
+                        elif person.sluttiness > 50:
                             return True
         return False
 
@@ -31,7 +31,7 @@ label SB_caught_masturbating_crisis_label():
     python:
         masturbating_people = []
         for person in mc.business.get_employee_list():
-            if person.get_opinion_score("masturbating") > 0 or  person.sluttiness > 80:
+            if person.get_opinion_score("masturbating") > 0 or person.sluttiness > 50:
                 masturbating_people.append(person)
         the_person = get_random_from_list(masturbating_people)
 
@@ -205,7 +205,7 @@ label SB_caught_masturbating_crisis_label():
                              $ the_person.change_slut_temp(5)
                              #show screen float_up_screen(["-5 Happiness","+5 Obedience"],["float_text_yellow","float_text_grey","float_text_pink"])    ###OLD code
                              "You finish up your walk and return back to your previous work"
-                   else: #She is slutty
+                   elif the_person.sluttiness < 60:#She is a bit slutty
                         "[the_person.title] is stunned. You can see the conflict in her eyes. She just got caught masturbating at work, by her boss of all people."
                         "Sensing her conflict, you decide to give her a bit of encouragement. You reach down and begin to stroke yourself through your slacks."
                         $ the_person.draw_person(position = "missionary")
@@ -221,7 +221,7 @@ label SB_caught_masturbating_crisis_label():
                             the_person.char "Does it excite you, [the_person.mc_title]? To see me here, touching myself like this...?"
                             "You can tell tell she likes having an audience."
                             mc.name "Of course, [the_person.title]. And you like having someone here to watch you, don't you?"
-                            "[the_person.title] doesn't respond with words, but moans at your words. It is clear she enjoys when other watch her doing sexual things..."
+                            "[the_person.title] doesn't respond with words, but moans at your words. It is clear she enjoys when others watch her doing sexual things..."
                             $ the_person.discover_opinion("public sex")
                         else :
                             "[the_person.title]'s cheeks are flush with arousal. She closes her eyes and concentrates on whatever fantasy she is lost in"
@@ -238,10 +238,73 @@ label SB_caught_masturbating_crisis_label():
                         #show screen float_up_screen(["+5 Happiness","+5 Obedience","+2 Core Sluttiness" ],["float_text_yellow","float_text_grey","float_text_pink"])
                         "You decide to give [the_person.title] a chance to recover. You nod at her and then back out of the room."
                         "You finish up your walk and return back to your previous work"
+                   else: #She is very slutty
+                       the_person.char "Oh [the_person.mc_title]! Thank god, I could really use your help here..."
+                       if the_person.outfit.vagina_available() == False:
+                           "[the_person.possessive_title] begins to pull off her clothes."
+                           python:
+                               for clothing in the_person.outfit.get_lower_ordered():
+                                    the_person.outfit.remove_clothing(clothing)
+                                    the_person.draw_person(position = "doggy")
+                                    renpy.say("","")
+                       the_person.char "Could you just give me a little quickie? I'm all warmed up, you could just stick it in right now..."
+                       menu:
+                           "Fuck her" if mc.current_stamina > 0:
+                               mc.name "Sure, I could go for a quick fuck right now."
+                               "You quickly pull your pants down. [the_person.title] is wiggling her ass back and forth, waiting for you."
+                               "You rub the tip of your penis against [the_person.title]'s cunt. She is already soaking wet."
+                               "When you're ready you push forward, slipping your shaft deep inside of [the_person.possessive_title]. She moans and quivers as you start to pump in and out."
+                               call sex_description(the_person, doggy, make_floor(), round = 1, private = True, girl_in_charge = False) from _call_sex_sb_event_masturbation_010
+                               if the_person.arousal > 130:
+                                   "[the_person.possessive_title] is exhausted. She came so hard, it is all she can do to pant and catch her breath."
+                                   $ the_person.change_happiness(5)
+                                   $ the_person.change_obedience(5)
+                                   $ the_person.change_slut_core(2)
+                                   $ the_person.change_slut_temp(5)
+                               else:
+                                   "[the_person.possessive_title] quickly recovers after you finish."
+                                   $ the_person.change_happiness(3)
+                                   $ the_person.change_slut_temp(3)
+                               the_person.char "Mmmm, thanks [the_person.mc_title]! That was just what I needed..."
+                               "You decide to give [the_person.title] a chance to recover. You make yourself decent, then leave the room, closing the door on the way out."
+                               "You finish up your walk and return back to your previous work"
+                           "Fuck her\n{size=22}Requires Stamina{/size} (disabled)" if mc.current_stamina == 0:
+                               pass
+
+                           "Just watch":
+                               mc.name "I'm afraid I can't right now, but that's okay, I'm definitely enjoying the view."
+                               "She looks back at you. You can see the hunger in her eyes."
+                               the_person.char "Ok [the_person.mc_title], but if you change your mind..."
+                               "[the_person.possessive_title] continues rubbing her exposed pussy. Once in a while she peeks back at you to see if you are still watching."
+                               $ the_person.change_arousal(20)
+
+                               if the_person.get_opinion_score("public sex") > 0:
+                                   "[the_person.title]'s cheeks are flush with arousal. She peeks back and stares straight into your eyes as she continues to touch herself."
+                                   the_person.char "Does it excite you, [the_person.mc_title]? To see me here, touching myself like this...?"
+                                   "You can tell tell she likes having an audience."
+                                   mc.name "Of course, [the_person.title]. And you like having someone here to watch you, don't you?"
+                                   "[the_person.title] moans. It is clear she enjoys when others watch her doing sexual things..."
+                                   $ the_person.discover_opinion("public sex")
+                               else :
+                                   "[the_person.title]'s cheeks are flush with arousal. She closes her eyes and concentrates on whatever fantasy she is lost in"
+                                   "Her breathing gets ragged as she nears the finish line."
+                               $ the_person.change_arousal(20)
+                               the_person.char "Oh fuck... I'm gonna cum!"
+                               "[the_person.title] whimpers and her eyes glaze over as she cums. Her legs spasm and she gasps for air"
+                               "Catching her breath, [the_person.title] leans forward, leaving her ass up in the air. It is clear that masturbating in front of her boss has left a lasting impression."
+                               $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "doggy")
+                               $ the_person.change_happiness(5)
+                               $ the_person.change_obedience(5)
+                               $ the_person.change_slut_core(2)
+                               $ the_person.change_slut_temp(3)
+                               #show screen float_up_screen(["+5 Happiness","+5 Obedience","+2 Core Sluttiness" ],["float_text_yellow","float_text_grey","float_text_pink"])
+                               "You decide to give [the_person.title] a chance to recover. You nod to her and then back out of the room."
+                               "You finish up your walk and return back to your previous work"
+
              $ the_person.reset_arousal()
              $ the_person.review_outfit()
         "Keep walking":
             "You decide to give [the_person.title] some privacy. As quietly as you can, you close the door behind you and continue walking"
-
+    hide screen person_info_ui
     $ renpy.scene("Active")
     return
