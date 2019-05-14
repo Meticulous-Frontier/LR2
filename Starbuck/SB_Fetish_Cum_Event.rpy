@@ -57,7 +57,7 @@ init 1 python:
 label SB_fetish_cum_label(the_person):
     #$ the_person = FETISH_cum_EVENT_TARGET
     "You are just finishing up with with some work before you grab some lunch. You hear a friendly voice greet you as a you pull our your packed lunch from your desk."
-    the_person.char "Hey [mc.name]! That sure looks good!"
+    the_person.char "Hey [the_person.mc_title]! That sure looks good!"
     #$ the_person.outfit = SB_cum_outfit.get_copy()
     $ the_person.draw_person()
     show screen person_info_ui(the_person)
@@ -66,35 +66,35 @@ label SB_fetish_cum_label(the_person):
     the_person.char "So, I forgot to pack a lunch today, and I'm pretty hungry, so I was wondering if, you know..."
     "Her hand travels down to your crotch. She begins to stroke you as she continues..."
     the_person.char "... if maybe while you were eating your lunch, I could bother you for a salty snack."
-    "[the_person.name] looks at you with hopeful eyes."
+    "[the_person.title] looks at you with hopeful eyes."
     the_person.char "I could get down under your desk! If anyone walks by they won't even know!"
     menu:
         "Help yourself" if mc.current_stamina > 0:  #This begins the sex scene
             mc.name "I suppose I could help you out with that. Are you sure you don't want to share any of my lunch?"
-            the_person.char "Oh! That's okay, [mc.name]."
-            "[the_person.name] lowers her voice and whispers huskily in your ear."
+            the_person.char "Oh! That's okay, [the_person.mc_title]."
+            "[the_person.title] lowers her voice and whispers huskily in your ear."
             the_person.char "I'm not sure what is going on with me but... lately... I've just been craving your cum so bad..."
             "You aren't surprised, it's been a while since you started giving her the serum for increased cum enjoyment."
             the_person.char "I feel like I'm going crazy..."
             if the_person.outfit.tits_available():
-                "You check out [the_person.name]. Her delicious looking tits are on full display."
+                "You check out [the_person.title]. Her delicious looking tits are on full display."
             else:
-                "You check out [the_person.name]. You decide it might be easier to get off if you have a little more skin to look at while she sucks you."
+                "You check out [the_person.title]. You decide it might be easier to get off if you have a little more skin to look at while she sucks you."
                 mc.name "Hey, before you get under the desk, why don't you get your tits out? It'd be great to have something to look at..."
-                "[the_person.name] smiles wide"
+                "[the_person.title] smiles wide"
                 the_person.char "Of course! Let me get this off for you..."
                 while not the_person.outfit.tits_available():
                     $ the_clothing = the_person.outfit.get_upper_ordered()[-1]
-                    "[the_person.name] takes off her [the_clothing.name]"
+                    "[the_person.title] takes off her [the_clothing.name]"
                     $ the_person.draw_animated_removal(the_clothing)
-            "[the_person.name] gropes her breasts with both hands, looking for your approval."
+            "[the_person.title] gropes her breasts with both hands, looking for your approval."
             mc.name "Mmm, that looks great. I think I'll eat my lunch now..."
-            "[the_person.name] giggles."
+            "[the_person.title] giggles."
             the_person.char "Mmm... me too!"
-            "[the_person.name] quickly gets down underneath your desk, before you sit down."
+            "[the_person.title] quickly gets down underneath your desk, before you sit down."
             $ the_person.draw_person(position = "blowjob")
             "She immediately gets to work, pulling your dick out of your pants. You quickly feel the soft, velvet mouth wrapped around you."
-            "[the_person.name] begins bobbing her head up and down eagerly, hungry for your delicious cum."
+            "[the_person.title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
             "You should be careful where you cum. It is likely her fetish may develop based on where you cum!"
             ###cum Scene, standing variant###
             call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_SBC10
@@ -113,24 +113,24 @@ label SB_fetish_cum_label(the_person):
                         the_person.sexy_opinions["cum facials"] = [FETISH_OPINION_VALUE, True]
                         the_person.sexy_opinions["being covered in cum"] = [FETISH_OPINION_VALUE, True]
                         SB_give_cum_external_role(the_person)
-            "[the_person.name] is moaning ecstatically below your desk."
+            "[the_person.title] is moaning ecstatically below your desk."
             if SB_get_fetish(the_person) == "External Cum Fetish":
-                "Glancing down, you see [the_person.name] running her hands along her face, then down to her chest. She is rubbing your cum into her skin."
+                "Glancing down, you see [the_person.title] running her hands along her face, then down to her chest. She is rubbing your cum into her skin."
                 the_person.char "Mmm... it feels so good! That first splash is always the best..."
             elif SB_get_fetish(the_person) == "Internal Cum Fetish":
-                "Glancing down, you see [the_person.name] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
+                "Glancing down, you see [the_person.title] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
                 the_person.char "Mmm... it's all inside me now... right where it belongs!"
-            "[the_person.name] stands up."
+            "[the_person.title] stands up."
             $ the_person.draw_person()
-            the_person.char "Wow, that was amazing, [mc.name]. I don't know what has been coming over me lately..."
-            "[the_person.name] blushes and pauses..."
+            the_person.char "Wow, that was amazing, [the_person.mc_title]. I don't know what has been coming over me lately..."
+            "[the_person.title] blushes and pauses..."
             mc.name "Did you get what you were hoping for?"
             "You tease her."
             the_person.char "Oh, I think I'm good for today... but I'm sure it won't be long until I get hungry again..."
             "She's been under the influence of your serums for a while now... you wonder if she's developed an cum fetish..."
-            "[the_person.name] runs her hand through her hair. She licks her lips and smiles at you."
-            the_person.char "Thanks again, [mc.name]. We should do this again... and soon."
-            "You wave goodbye to [the_person.name] and finish eating your lunch."
+            "[the_person.title] runs her hand through her hair. She licks her lips and smiles at you."
+            the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
+            "You wave goodbye to [the_person.title] and finish eating your lunch."
             hide screen person_info_ui
             $ SB_CALCULATE_RANDOM_EVENT_RATE()
             $ FETISH_CUM_EVENT_INUSE = False
@@ -182,46 +182,46 @@ label SB_fetish_cum_dosage_label():
     "*KNOCK KNOCK*"
     $ the_person.draw_person()
     show screen person_info_ui(the_person)
-    "You look up and see [the_person.name] at your door."
+    "You look up and see [the_person.title] at your door."
     if mc.business.is_open_for_business():
-        mc.name "Hello [the_person.name], come in."
-        "[the_person.name] walks into your office."
-        the_person.char "Hey [mc.name]. So... I saw you walk into your office a minute ago and I was just thinking that its been a while..."
+        mc.name "Hello [the_person.title], come in."
+        "[the_person.title] walks into your office."
+        the_person.char "Hey [the_person.mc_title]. So... I saw you walk into your office a minute ago and I was just thinking that its been a while..."
         mc.name "A while since what?"
-        "[the_person.name] stutters for a second."
+        "[the_person.title] stutters for a second."
         the_person.char "...A while since you let me have your cum, so I thought..."
-        "[the_person.name] voice trails off. It seems she is craving some of your cum again."
+        "[the_person.title] voice trails off. It seems she is craving some of your cum again."
     else:
         "You are surprised to see her, since the business is closed."
-        mc.name "Hello [the_person.name], come in."
-        "[the_person.name] walks into your office."
-        the_person.char "Oh [mc.name]! Thank goodness you are here, you are just the man I wanted to see."
+        mc.name "Hello [the_person.title], come in."
+        "[the_person.title] walks into your office."
+        the_person.char "Oh [the_person.mc_title]! Thank goodness you are here, you are just the man I wanted to see."
         the_person.char "You know how much I need your cum... so I was wondering... want to take a five minute break? I promise I won't be a bother!"
     menu:
         "Suck me off" if mc.current_stamina > 0:
-            the_person.char "Yes! Oh thank you [mc.name]!"
-            "[the_person.name] walks over to you and immediately drops down on her knees. You consider asking her to strip down a bit, but she is already stroking your cock."
+            the_person.char "Yes! Oh thank you [the_person.mc_title]!"
+            "[the_person.title] walks over to you and immediately drops down on her knees. You consider asking her to strip down a bit, but she is already stroking your cock."
             $ the_person.draw_person(position = "blowjob")
             ###cum Scene, standing variant###
             call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), skip_intro = False, girl_in_charge = True) from _call_fuck_person_SBC20
             $ the_person.reset_arousal()
             ###Reset Arousal
-            the_person.char "Oh my god, thank you [mc.name]... I wish I could make you cum again... but I know you're a busy a man..."
-            "[the_person.name] starts to get up. Her hunger for cum satisfied for now."
-            the_person.char "Thanks again, [mc.name]. Don't hesitate to ask if you ever need to be... you know... serviced."
-            "You wave goodbye to [the_person.name] as she leaves your office. Damn that was good!"
+            the_person.char "Oh my god, thank you [the_person.mc_title]... I wish I could make you cum again... but I know you're a busy a man..."
+            "[the_person.title] starts to get up. Her hunger for cum satisfied for now."
+            the_person.char "Thanks again, [the_person.mc_title]. Don't hesitate to ask if you ever need to be... you know... serviced."
+            "You wave goodbye to [the_person.title] as she leaves your office. Damn that was good!"
         "No Thanks":
-            "[the_person.name] is caught completely off gaurd by your refusal."
+            "[the_person.title] is caught completely off gaurd by your refusal."
             $ the_person.change_obedience(-10)
             $ the_person.change_happiness(-10)
             the_person.char "Oh!... Okay... Well... hey I understand... Maybe some other time yeah?"
-            "[the_person.name] quickly sulks off. Maybe you should've?"
+            "[the_person.title] quickly sulks off. Maybe you should've?"
         "Too Tired" if mc.current_stamina == 0:
-            "[the_person.name] is surprised by your answer."
+            "[the_person.title] is surprised by your answer."
             $ the_person.change_obedience(-5)
             $ the_person.change_happiness(-5)
             the_person.char "Oh! I'm sorry... I know you work so hard around here. Maybe tomorrow then?"
-            "[the_person.name] quickly sulks off."
+            "[the_person.title] quickly sulks off."
     return
 
 #SBC3
@@ -276,7 +276,7 @@ label SB_fetish_mom_cum_label():
             $ the_person.sexy_opinions["cum facials"] = [FETISH_OPINION_VALUE, True]
             $ the_person.sexy_opinions["being covered in cum"] = [FETISH_OPINION_VALUE, True]
             $ SB_give_cum_external_role(the_person)
-            "Slowly recovering, you look at [the_person.name]'s cum covered face. Her eyes are closed and she is absentmindedly playing with some of the cum that is starting to run down her neck."
+            "Slowly recovering, you look at [the_person.title]'s cum covered face. Her eyes are closed and she is absentmindedly playing with some of the cum that is starting to run down her neck."
     the_person.char "Oh... I needed that so bad... you have no idea."
     $ the_person.reset_arousal()
     "[the_person.possessive_title] slowly crawls up the bed and lays down next to you. You put your arm around her."
@@ -349,7 +349,7 @@ label SB_fetish_lily_cum_label():
     "You see [the_person.title] reach down with one hand and start to touch herself. She runs her tongue up and down your shaft a few times."
     the_person.char "It's like I'm thirsty... but no amount of water I drink makes my thirst go away... Only when I think about drinking your sweet cum do I feel any better..."
     "[the_person.possessive_title] opens her mouth and starts to suck you off. You feel her soft, velvet mouth wrapped around you."
-    "[the_person.name] begins bobbing her head up and down eagerly, hungry for your delicious cum."
+    "[the_person.title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
     "You should be careful where you cum. It is likely her fetish may develop based on where you cum!"
     call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_SBC40
     $ the_person.reset_arousal()
@@ -370,10 +370,10 @@ label SB_fetish_lily_cum_label():
     $ FETISH_CUM_EVENT_INUSE = False
     "[the_person.title] is moaning ecstatically. You start to worry that your mom might hear."
     if SB_get_fetish(the_person) == "External Cum Fetish":
-        "Glancing down, you see [the_person.name] running her hands along her face, then down to her chest. She is rubbing your cum into her skin."
+        "Glancing down, you see [the_person.title] running her hands along her face, then down to her chest. She is rubbing your cum into her skin."
         the_person.char "Mmm... it feels so good! That first splash is always the best..."
     elif SB_get_fetish(the_person) == "Internal Cum Fetish":
-        "Glancing down, you see [the_person.name] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
+        "Glancing down, you see [the_person.title] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
         the_person.char "Mmm... it's all inside me now... right where it belongs!"
     $ the_person.draw_person(position = "kissing")
     "[the_person.possessive_title] stands up and hugs you."
@@ -432,8 +432,8 @@ label SB_fetish_shower_cum_label():
     the_person.char "I'm sorry, I know I shouldn't approach you like this... but I can't help myself this morning! Give me your cum please!"
     "[the_person.title] looks up at your from her knees. She looks you right in the eyes as she leans foward and slides her lips over the tip of your dick."
     call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_SBC50
-    the_person.char "Oh my god, thank you [mc.name]. I needed that so bad."
-    "[the_person.name] stands up. Her hunger for cum satisfied for now."
+    the_person.char "Oh my god, thank you [the_person.mc_title]. I needed that so bad."
+    "[the_person.title] stands up. Her hunger for cum satisfied for now."
     $ the_person.draw_person(position = "stand4")
     the_person.char "Okay... I'm going to hop out and let your finish showering now. Please give me more cum soon!"
     "[the_person.title] gets out. You finish up with your shower, balls empty and ready for the day!"

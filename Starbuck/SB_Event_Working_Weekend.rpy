@@ -46,7 +46,7 @@ label SB_working_weekend_crisis_label():
     "You can tell by the look on her face that [the_person.title] is also surprised to see you."
     if the_person.sluttiness < SB_LOW_SLUT_VALUE:
         #if she is not slutty at all
-        the_person.char "Oh hey there [mc.name], I didn't expect to see you here! I just stopped by because I forgot something in my desk. Are you... working? You know its the weekend right?"
+        the_person.char "Oh hey there [the_person.mc_title], I didn't expect to see you here! I just stopped by because I forgot something in my desk. Are you... working? You know its the weekend right?"
         "You can tell by the look on her face that she is impressed by your work ethic. You consider the chance to impress on her the values of the company in this one on one situation."
         menu:
             "Stress the importance of obedience.":
@@ -82,12 +82,12 @@ label SB_working_weekend_crisis_label():
         "[the_person.title]'s voice takes a bit of a sulty tone at the end of that statement. Is she flirting with you?"
         mc.name "Yes, [the_person.title], of course I do... but... it IS rather boring around here. I'd be grateful for a bit of company while I'm working"
         "[the_person.title] smiles at you. And was that a wink?"
-        the_person.char "Oh! [mc.name], I was about to go out, but seeing you here still working on the weekend, I'd be glad to stay here with you a bit and give you a bit of a... distraction for a bit."
+        the_person.char "Oh! [the_person.mc_title], I was about to go out, but seeing you here still working on the weekend, I'd be glad to stay here with you a bit and give you a bit of a... distraction for a bit."
         "The suggestion in her voice is apparent with the last statement. You briefly consider her offer before making a request..."
         menu:
             "How about a blowjob?\n{size=22}Modifiers: +20 Sluttiness, +5 Obedience{/size}" if mc.current_stamina > 0:
                 "[the_person.title] smiles."
-                the_person.char "Oh [mc.name], you work so hard. Don't worry, I'll take care of you."
+                the_person.char "Oh [the_person.mc_title], you work so hard. Don't worry, I'll take care of you."
                 if not the_person.outfit.tits_available():    #If covered up, have her take her top off
                     the_person.char "Here... let me take this off. I bet that will help ease some of your stress."
                     $ the_clothing = the_person.outfit.get_upper_ordered()[-1]
@@ -164,7 +164,7 @@ label SB_working_weekend_crisis_label():
 
         #IF she is a little slutty,
     else:  #If she is REALLY slutty
-        the_person.char "Oh hey [mc.name]! Are you here all by yourself?"
+        the_person.char "Oh hey [the_person.mc_title]! Are you here all by yourself?"
         "You give her a quick nod as your finish up what you were doing."
         "Seeing that you are here all by yourself, [the_person.title] grabs a chair and sits close to you."
         $ the_person.draw_person(position = "sitting")
@@ -174,7 +174,7 @@ label SB_working_weekend_crisis_label():
             "Strip for me":
                 mc.name "Hey, I'm almost done with this, but I tell you what. Why don't you give me a show while I finish and then maybe when I'm done I'll take you up on that."
                 "[the_person.title] smiles mischieviously at you, before nodding."
-                the_person.char "I can do that, [mc.name]... I hope you like the show!"
+                the_person.char "I can do that, [the_person.mc_title]... I hope you like the show!"
                 $ the_person.change_slut_temp(5)
                 call SB_free_strip_scene(the_person) from _SB_free_strip_scene_3
 
