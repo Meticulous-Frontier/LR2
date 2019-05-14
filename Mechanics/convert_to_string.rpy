@@ -21,3 +21,14 @@ init -1 python:
         else:
             kg = __builtin__.round(person.weight, 1)
             return str(kg) + " kg"
+
+    def time_of_day_string():
+        return time_names[time_of_day].lower()
+
+    def person_body_shame_string(person, pronoun = "girl"):
+        if person.body_type == "curvy_body":
+            return "plump " + pronoun
+        elif person.body_type == "standard_body":
+            return "curvy " + pronoun
+        else:
+            return "skinny " + pronoun

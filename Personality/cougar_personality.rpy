@@ -70,18 +70,14 @@ label cougar_greetings(the_person):
         if the_person.sluttiness > 60:
             the_person.char "Hello [the_person.mc_title], how has your day been? I was... thinking about you, that's all."
         else:
-            if time_of_day == 0 or time_of_day == 1:
-                the_person.char "Good morning, young man!"
-            elif time_of_day == 1 or time_of_day == 2:
-                the_person.char "Good afternoon, young man!"
-            else:
-                the_person.char "Good evening, young man!"
+            $ day_part = time_of_day_string()
+            the_person.char "Good [day_part], [the_person.mc_title]!"
     return
 
 label cougar_clothing_accept(the_person):
     if the_person.obedience > 140:
         the_person.char "Well, if you think I have got the body for it then I'm not going to argue."
-        the_person.char "Thank you for the clothes, hunny."
+        the_person.char "Thank you for the outfit, [the_person.mc_title]."
     else:
         the_person.char "Oh that's a nice combination! I'll show it to my friends later and see what they think."
     return
@@ -105,7 +101,7 @@ label cougar_clothing_review(the_person):
         the_person.char "Turn around [the_person.mc_title], I'm really not looking ladylike right now. Just give me a moment to get dressed..."
     else:
         if the_person.sluttiness > 50:
-            the_person.char "Oh, my young man, I shouldn't be seen like this... Just give me a moment and I'll get dressed."
+            the_person.char "Oh [the_person.mc_title], I shouldn't be seen like this... Just give me a moment and I'll get dressed."
         else:
             the_person.char "Oh [the_person.mc_title], I'm not decent! Turn around now, I need to cover myself!"
     return
@@ -114,7 +110,7 @@ label cougar_strip_reject(the_person):
     if the_person.obedience > 130:
         the_person.char "I know it would make your day [the_person.mc_title], but I don't think I should take anything else off. I'm a lady, after all."
     elif the_person.obedience < 70:
-        the_person.char "Not yet sweety. You just need to relax and let auntie take care of you."
+        the_person.char "Not yet sweety. You just need to relax and let [the_person.title] take care of you."
     else:
         the_person.char "Don't touch that [the_person.mc_title]. Could you imagine if it came off? I could be your mother, we shouldn't do this."
     return
@@ -175,20 +171,20 @@ label cougar_seduction_response(the_person):
     else:
         if the_person.sluttiness > 50:
             the_person.char "Well, how about you let me take care of you for a change?"
-        elif the_person.sluttiness > 10:
+        elif the_person.sluttiness > 20:
             the_person.char "What do you mean [the_person.mc_title]? Do you want to spend some time with me?"
         else:
-            the_person.char "I'm not sure I understand. What do you need young man?"
+            the_person.char "I'm not sure I understand. What do you need [the_person.mc_title]?"
     return
 
 label cougar_seduction_accept_crowded(the_person):
-    if the_person.sluttiness < 20:
+    if the_person.sluttiness < 35:
         "[the_person.possessive_title] pinches your ass cheek, whispering.."
         the_person.char "You can't say things like that in public [the_person.mc_title]! Think of my reputation."
         "She looks around quickly to see if anyone heard you, then takes your hand in hers."
         the_person.char "Come on, I'm sure we can find a quiet place were you can take care of me."
 
-    elif the_person.sluttiness < 50:
+    elif the_person.sluttiness < 70:
         "[the_person.possessive_title] smiles and devours your body with her eyes, making sure nobody around you notices."
         the_person.char "Okay, but we need to be careful. I don't think people would understand our relationship. Let's find someplace quiet."
 
@@ -197,10 +193,10 @@ label cougar_seduction_accept_crowded(the_person):
     return
 
 label cougar_seduction_accept_alone(the_person):
-    if the_person.sluttiness < 20:
+    if the_person.sluttiness < 35:
         the_person.char "I can't believe I'm saying this... I'll play along for now, but you better not disappoint me."
         mc.name "Of course [the_person.title], I promise."
-    elif the_person.sluttiness < 50:
+    elif the_person.sluttiness < 70:
         the_person.char "Oh [the_person.mc_title], what kind woman would I be if I said no? Come on, let's enjoy ourselves."
     else:
         the_person.char "Oh [the_person.mc_title], I'm so glad I make you feel this way. Come on, let's get started!"
@@ -211,21 +207,19 @@ label cougar_sex_responses(the_person):
         if the_person.obedience > 130:
             the_person.char "Oh... Please [the_person.mc_title], keep doing that to me!"
         else:
-            the_person.char "Ah yes, that's it boy, give it to [the_person.possessive_title]!"
+            the_person.char "Ah yes, that's it [the_person.mc_title], give it to [the_person.possessive_title]!"
     else:
-        "[the_person.title] closes her eyes."
+        "[the_person.possessive_title] closes her eyes."
         the_person.char "Yes [the_person.mc_title], just like that!"
     return
 
 label cougar_seduction_refuse(the_person):
-    if the_person.sluttiness < 20:
+    if the_person.sluttiness < 30:
         the_person.char "Oh my god, what are you saying [the_person.mc_title]! Don't you think I'm a little too old for you? I'm sure you can't handle me..."
-
-    elif the_person.sluttiness < 50:
+    elif the_person.sluttiness < 60:
         the_person.char "I'm sorry [the_person.mc_title], but we really shouldn't do this anymore. It's just... not going to happen."
-
     else:
-        the_person.char "I'm sorry young man, I know how much you like to spend time with me, but now isn't a good time for me. I'll make it up to you though, I promise."
+        the_person.char "I'm sorry [the_person.mc_title], I know how much you like to spend time with me, but now isn't a good time for me. I'll make it up to you though, I promise."
     return
 
 label cougar_flirt_response(the_person):
@@ -247,26 +241,27 @@ label cougar_flirt_response(the_person):
 label cougar_cum_face(the_person):
     if the_person.obedience > 130:
         if the_person.sluttiness > 50:
-            the_person.char "Ah... do you like to see my face covered [the_person.mc_title]? I hope you had a good time."
+            $ pronoun = person_body_shame_string(the_person, "litlle cum slut")
+            the_person.char "Ah... do you like to see my face covered [the_person.mc_title]? Am I your good [pronoun]?"
         else:
-            the_person.char "Oh, it's everywhere! Next time be more careful, I'm doing this for you."
+            the_person.char "Oh, it's everywhere! Next time be more careful, I'm only doing this for you."
     else:
         if the_person.sluttiness > 70:
             the_person.char "Oh, yes [the_person.mc_title], I'm covered with your load!"
         else:
-            the_person.char "Boy, next time don't mess up my makeup like this."
+            the_person.char "[the_person.mc_title], next time don't mess up my makeup like this."
             "She pulls out a tissue and wipes her face quickly"
     return
 
 label cougar_cum_mouth(the_person):
     if the_person.obedience > 130:
         if the_person.sluttiness > 50:
-            the_person.char "It seems I did a good job, right [the_person.mc_title]?"
+            the_person.char "It seems I did a good job, you have a wonderfull taste [the_person.mc_title]."
         else:
-            the_person.char "I'm not sure I'm really into this, I'll try for you [the_person.mc_title]."
+            the_person.char "I'm not sure I'm really into this, I'll try to like it for you [the_person.mc_title]."
     else:
         if the_person.sluttiness > 70:
-            the_person.char "Mmm, you taste great [the_person.mc_title], you can dump your load in my mouth anytime..."
+            the_person.char "Mmm, you taste great [the_person.mc_title], you can fill my mouth with your load anytime..."
         else:
             "She spits your cum on the floor..."
             the_person.char "Give me a little heads up next time, [the_person.mc_title]."
@@ -285,7 +280,6 @@ label cougar_sex_strip(the_person):
         else:
             the_person.char "Oh [the_person.mc_title], you make me feel so young again!"
             the_person.char "I realy need to take some more off."
-
     else:
         if the_person.arousal < 50:
             the_person.char "I'm really horny, I bet you want to see some more of me."
@@ -302,40 +296,41 @@ label cougar_suprised_exclaim(the_person):
 label cougar_talk_busy(the_person):
     if the_person.obedience > 120:
         the_person.char "I'm sorry [the_person.mc_title], but I'm busy. Could we talk later?"
-        the_person.char "Maybe we can go on a date!"
+        the_person.char "Maybe you could take me somewhere nice."
     else:
-        the_person.char "I'm sorry [the_person.mc_title], we will have to talk later."
+        the_person.char "I'm sorry [the_person.mc_title], we will have to chit-chat later."
     return
 
 label cougar_sex_watch(the_person, the_sex_person, the_position):
     if the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
-        the_person.char "[the_person.mc_title]! Why don't you want me to watch that!"
+        the_person.char "[the_person.mc_title]! Why do you want me to watch that!"
         $ the_person.change_obedience(-2)
         $ the_person.change_happiness(-1)
         "[the_person.possessive_title] looks away while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:
-        $ the_person.draw_person()
+        $ the_person.draw_person(emotion = "sad")
         $ the_person.change_happiness(-1)
-        the_person.char "[the_person.mc_title]! Could you at least try a private place?"
+        the_person.char "[the_person.mc_title]! Could you at least try a more private place?"
         "[the_person.possessive_title] tries to avert her gaze while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement:
-        $ the_person.draw_person()
+        $ the_person.draw_person(emotion = "default")
         the_person.char "[the_person.mc_title], Why are you doing this here..."
         $ change_report = the_person.change_slut_temp(1)
         "[the_person.possessive_title] looks in another direction, but she keeps glancing at you and [the_sex_person.name]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
-        $ the_person.draw_person()
-        the_person.char "Oh my, [the_person.mc_title]? You certainly know what you are doing..."
+        $ the_person.draw_person(emotion = "happy")
+        the_person.char "Oh my, [the_person.mc_title]? You might want to teach me that someday..."
         $ change_report = the_person.change_slut_temp(2)
         "[the_person.possessive_title] studies [the_sex_person.name] while you [the_position.verb] her."
 
     else:
         $ the_person.draw_person(emotion = "happy")
-        the_person.char "She deserves more [the_person.mc_title], give that slut what she wants."
+        $ pronoun = person_body_shame_string(the_sex_person, "slut")
+        the_person.char "You can do better [the_person.mc_title], give that little [pronoun] what she needs."
         "[the_person.possessive_title] watches you eagerly while [the_position.verb]ing [the_sex_person.name]."
 
     return
@@ -394,15 +389,14 @@ label cougar_work_enter_greeting(the_person):
             "Smiling at you while looking at your crotch, slowly turning back to her work."
         else:
             "[the_person.possessive_title] gives you warm smile."
-            the_person.char "Hello sir, good to see you!"
-
+            the_person.char "Hello [the_person.mc_title], good to see you!"
     else:
         if the_person.obedience < 90:
             "[the_person.possessive_title] glances up from her work."
             the_person.char "Hey, how's it going?"
         else:
             "[the_person.possessive_title] looks at you when you enter the room."
-            the_person.char "Hello sir, let me know if you help."
+            the_person.char "Hello [the_person.mc_title], let me know if you need any help."
     return
 
 label cougar_date_seduction(the_person): #TODO: Change this to be different.
