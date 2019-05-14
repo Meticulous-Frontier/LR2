@@ -131,12 +131,7 @@ label show_serum_mod_settings:
         category_choice = renpy.display_menu(tuple_list, True, "Choice")
 
         if category_choice == "Back":
-            act_choice = call_formated_action_choice(mc.location.actions + ["Back"])
-
-            if act_choice == "Back":
-                renpy.jump("game_loop")
-            else:
-                act_choice.call_action()
+            renpy.return_statement()
         else:
             active_serum_mod_tier = category_choice.tier
             renpy.jump("change_serum_mod_tier")

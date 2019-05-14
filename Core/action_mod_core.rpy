@@ -181,12 +181,7 @@ label show_action_mod_settings:
         category_choice = renpy.display_menu(tuple_list, True, "Choice")
 
         if category_choice == "Back":
-            act_choice = call_formated_action_choice(mc.location.actions + ["Back"])
-
-            if act_choice == "Back":
-                renpy.jump("game_loop")
-            else:
-                act_choice.call_action()
+            renpy.return_statement()
         else:
             active_action_mod_category = category_choice.category
             renpy.jump("change_mod_category")
