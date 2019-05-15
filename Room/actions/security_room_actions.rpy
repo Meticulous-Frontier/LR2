@@ -153,7 +153,7 @@ label office_observation_label():
 label investigation_employee_label():
     "Select who you want to investigate"
     while True:
-        $ tuple_list = all_people_in_the_game([mc]) + ["Back"]
+        $ tuple_list = known_people_in_the_game([mc]) + ["Back"]
         call screen person_choice(tuple_list, draw_hearts = True)
         $ person_choice = _return        
 

@@ -1,6 +1,6 @@
 ## Sister Phone Crisis Mod by Tristimdorion
 init -1 python:
-    sister_phone_mod_weight = 5
+    sister_phone_mod_weight = 7     # Short filler event (equal chance as mom selfie)
 
 init 3 python:
     def sister_phone_crisis_requirement():

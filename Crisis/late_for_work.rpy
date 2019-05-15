@@ -1,6 +1,6 @@
 ## Late for Work Crisis Mod by Tristimdorion
 init -1 python:
-    late_for_work_weight = 5
+    late_for_work_weight = 10   # Increase weight because it only occurs in one timeslot.
 
 init 2 python:
     def late_for_work_requirement():

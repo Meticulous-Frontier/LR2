@@ -1,13 +1,13 @@
 ## Town walk Crisis Mod by Tristimdorion
 # Based on the Pilotus13 Vanilla extension
 init -1 python:
-    town_walk_mod_weight = 5   # Due to limited time window we give it a higher probability
+    town_walk_mod_weight = 10   # Due to limited time window we give it a higher probability
 
 init 2 python:
     def town_walk_crisis_requirement():
         if not mc.business.is_weekend(): # we only take a lunch break on weekdays
             if mc.is_at_work():
-                if time_of_day ==1 or time_of_day == 2:
+                if time_of_day == 2:
                     return True
         return False
 
@@ -21,8 +21,11 @@ label town_walk_crisis_action_label:
     if mc.business.is_open_for_business() and not mc.business.is_weekend(): # exclude employees working on weekdays
         $ exclude_list.append(mc.business.get_employee_list())
 
-    $ the_person = get_random_person_in_the_game(excluded_people=exclude_list)
-    "While walking around the town, you see that the window in [the_person.possessive_title]'s house is open you get closer and peek inside."
+    $ the_person = get_random_known_person_in_the_game(excluded_people=exclude_list)
+    if the_person is None: # this could be no one
+        return
+
+    "You decided to take a walk during your lunch break, you see that the window in [the_person.possessive_title]'s house is open you get closer and peek inside."
     $ change_scene_display(bedroom)
     show screen person_info_ui(the_person)
     $ the_person.draw_person(position = "walking_away")
