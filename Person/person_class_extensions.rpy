@@ -173,15 +173,6 @@ init -1:
         # Monkey wrench Person class to have automatic strip function
         Person.strip_outfit_to_max_sluttiness = strip_outfit_to_max_sluttiness
 
-        ## RESET OUTFIT EXTENSION
-        # Restores the outfit the person was wearing prior to an event (if changed by event)
-        def reset_outfit(self):
-            self.outfit = self.planned_outfit.get_copy()
-            return
-
-        # Adds reset_outfit function to Person class
-        Person.reset_outfit = reset_outfit
-
         ## ADD OPINION EXTENSION
         ## Adds add_opinion function to Person class
         def add_opinion(self, opinion, degree, discovered = None, sexy_opinion = False, add_to_log = True): # Gives a message stating the opinion has been changed.

@@ -134,7 +134,7 @@ label town_walk_crisis_action_label:
 
     hide screen person_info_ui
     $ the_person.reset_arousal()
-    $ the_person.reset_outfit() #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)
     $ renpy.scene("Active")
     return
