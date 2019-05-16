@@ -54,7 +54,7 @@ label SB_fetish_vaginal_label(the_person):
     show screen person_info_ui(the_person)
     ###Draw the girl###
     "You quickly open the door and invite her inside."
-    "To avoid any situations with your mom or sister, you quickly invite her to your room."
+    "To avoid any situations with [mom.possessive_title] or [lily.possessive_title], you quickly invite her to your room."
     "Once you close your door, [the_person.possessive_title] quickly turns and embraces you."
     the_person.char "Oh, [the_person.mc_title], I'm sorry to just come over without asking like this but... I was at home... by myself... and I just..."
     "She stumbles over her words for a second."
@@ -169,9 +169,9 @@ label SB_fetish_vaginal_label(the_person):
 #SBV2
 label SB_fetish_vaginal_event_label(the_person):
     if the_person == mom:
-        "You hear a knock on your door. You hear your mother's sweet and familiar voice from the other side."
+        "You hear a knock on your door. You hear [the_person.possessive_title]'s sweet and familiar voice from the other side."
         show screen person_info_ui(the_person)
-        the_person.char "Hey honey, its mommy..."
+        the_person.char "Hey honey, its [the_person.possessive_title]..."
         "You invite [the_person.possessive_title] in. You immediately start to get aroused when you see what she is wearing."
         $ the_person.outfit = SB_vaginal_outfit.get_copy()
         $ the_person.draw_person()
@@ -182,7 +182,7 @@ label SB_fetish_vaginal_event_label(the_person):
         the_person.char "Your physical needs, I mean..."
         menu:
             "Let's fuck!":
-                mc.name "Thanks mom! Yeah, it has been a pretty long day... It would be great to blow off some steam..."
+                mc.name "Thanks [the_person.title]! Yeah, it has been a pretty long day... It would be great to blow off some steam..."
                 "[the_person.possessive_title] gives you a lusty look. She smiles and bounces slightly on your bed."
                 $ the_person.change_slut_temp(2)
                 the_person.char "Excellent! Now don't think of me as your mom, just think of me as your private, slutty milf. I'll do wahtever your cock wants me to do, okay?"
@@ -204,7 +204,7 @@ label SB_fetish_vaginal_event_label(the_person):
                     the_person.char "Sweet dreams."
                 $ the_person.reset_arousal()
                 $ the_person.clear_situational_obedience("crisis_stuff")
-                mc.name "Wait! Hey mom why don't you, ya know, sleep in here tonight?"
+                mc.name "Wait! Hey [the_person.title] why don't you, ya know, sleep in here tonight?"
                 the_person.char "Oh? I mean... I suppose that would be okay"
             "Let's fuck!\n{size=22}Requires Stamina{/size} (disabled)" if mc.current_stamina == 0:
                     pass
@@ -228,7 +228,7 @@ label SB_fetish_vaginal_event_label(the_person):
             "Strip Tease":
                 mc.name "That sounds good [the_person.title]... why don't you give me a show before we go to bed?"
                 "[the_person.possessive_title] smiles at you."
-                the_person.char "Aww, does my brother wanna see his sister get naked for him? What a pervert!"
+                the_person.char "Aww, does my [the_person.mc_name] wanna see his [the_person.title] get naked for him? What a pervert!" # NOTE: Names wont make sense, but everything else will.
                 "[the_person.possessive_title] winks at you before beginning her routine."
                 call SB_free_strip_scene(the_person) from _SB_free_strip_scene_2
                 mc.name "Damn [the_person.title], you are really getting good at that."
@@ -265,7 +265,7 @@ label SB_fetish_vaginal_event_label(the_person):
         show screen person_info_ui(the_person)
         ###Draw the girl###
         "You quickly open the door and invite her inside."
-        "To avoid any situations with your mom or sister, you quickly invite her to your room."
+        "To avoid any situations with [mom.possessive_title] or [lily.possessive_title], you quickly invite her to your room."
         "Once you close your door, [the_person.possessive_title] quickly turns and embraces you."
         "You wrap your arms around her and start to makeout."
         $ the_person.draw_person(position = "kissing")
@@ -310,7 +310,7 @@ label SB_fetish_vaginal_event_label(the_person):
 #SBV3
 label SB_fetish_mom_vaginal_label(the_person):
     "You are just starting to drift off to sleep, when you hear a knock at your door."
-    the_person.char "Hey Honey... its mommy... can I come in?"
+    the_person.char "Hey Honey... its [the_person.title]... can I come in?"
     show screen person_info_ui(the_person)
     "It is unusual for her to come around this time of night."
     mc.name "Sure thing [the_person.title]."
@@ -323,23 +323,23 @@ label SB_fetish_mom_vaginal_label(the_person):
     the_person.char "Well... as you know we've been spending a lot of time together lately. We've also been doing all sorts of... other things..."
     "[the_person.possessive_title] stumbles over her words for a second before resuming."
     the_person.char "Now, I'm not gonna say all things we've been doing are okay but... I mean if we're going to do them anyway... Can I sleep in here tonight honey? With you?"
-    "You are surprised by the question. It has been a while since you started exposing your mother to the serums you've been crafting."
+    "You are surprised by the question. It has been a while since you started exposing [the_person.possessive_title] to the serums you've been crafting."
     "While she is still a bit conflicted, it appears she is finally coming to terms with her new found sex drive."
-    mc.name "That sounds great mom. Come lay down!"
-    "You scoot yourself to one side of your bed and let your mother lay down next to you."
+    mc.name "That sounds great [the_person.title]. Come lay down!"
+    "You scoot yourself to one side of your bed and let [the_person.possessive_title] lay down next to you."
     $ the_person.draw_person(position = "missionary")
-    "Your mother lays down and you quickly cuddle up with her, enjoying each other's warmth and intimacy."
+    "[the_person.possessive_title] lays down and you quickly cuddle up with her, enjoying each other's warmth and intimacy."
     the_person.char "Oh [the_person.mc_title]... It has been so nice being close to you lately..."
-    "Your mother begins to rub her hand along your chest. Her touch feels amazing. You reach a hand over and begin to grope one of her breasts in return."
+    "[the_person.possessive_title] begins to rub her hand along your chest. Her touch feels amazing. You reach a hand over and begin to grope one of her breasts in return."
     $ the_person.change_arousal(10)
     the_person.char "[the_person.mc_title]... why can't I stop thinking about you? I know its wrong but I just..."
     "She stops rubbing your chest and her hand slowly drops down to your crotch. She begins to rub your rapidly rising erection through your clothes."
     the_person.char "I just can't stop thinking about your cock... When you put it in me I feel so good."
     "Feeling the moment is right, you move your lips to hers and begin to make out. Your tongues dance around each other in unison."
     $ the_person.change_arousal(10)
-    "Mom begins to pull off your clothes. It isn't long until you are naked, your flesh now against hers."
+    "[the_person.mc_title] begins to pull off your clothes. It isn't long until you are naked, your flesh now against hers."
     the_person.char "[the_person.mc_title]! Please, I need you inside me again. Will you please... make love to me?"
-    "You moan into her mouth and quickly prepare yourself to penetrate your mother."
+    "You moan into her mouth and quickly prepare yourself to penetrate [the_person.possessive_title]."
     $ the_person.sex_skills["Vaginal"] = 6
     ###Sex scene, missionary###   ###TODO: consider writing a variant of this because the default intro is going to be confusing###
     call sex_description(the_person, missionary , make_bed(), 0, private = True) from _call_sex_description_SBV30
@@ -347,8 +347,8 @@ label SB_fetish_mom_vaginal_label(the_person):
     $ the_person.reset_arousal()
     #$ the_person.SB_fetish = "vaginal sex"
     $ the_person.sexy_opinions["vaginal sex"] = [FETISH_OPINION_VALUE, True]
-    "That night, after fucking your mother, you share your bed together. As you fall asleep, you consider the implications of what happened. "
-    "It is clear that your mother is now firmy under the influence of your serums and has developed a fetish for vaginal sex."
+    "That night, after fucking [the_person.possessive_title], you share your bed together. As you fall asleep, you consider the implications of what happened. "
+    "It is clear that [the_person.possessive_title] is now firmy under the influence of your serums and has developed a fetish for vaginal sex."
     "Her naked flesh soft up against yours gives you many sexy dreams that night."
     python:
         SB_give_vaginal_role(the_person)
@@ -366,11 +366,11 @@ label SB_fetish_lily_vaginal_label(the_person):
     the_person.char "Hey [the_person.mc_title]... Are you still up? Can I come in for a bit?"
     show screen person_info_ui(the_person)
     "[the_person.possessive_title] almost never comes to your room, unless she needs something."
-    mc.name "Sure thing sis."
+    mc.name "Sure thing [the_person.title]."
     $ the_person.outfit = SB_vaginal_lily_outfit.get_copy()
     $ the_person.draw_person()
     "[the_person.possessive_title] slowly opens your door and walks in."
-    mc.name "Hey sis, looking great! Are you going out tonight?"
+    mc.name "Hey [the_person.title], looking great! Are you going out tonight?"
     "[the_person.possessive_title] stutters for a second."
     the_person.char "Well [the_person.mc_title], its been nice having some extra spending money, ya know? With the extra tasks you've been giving me..."
     "[the_person.possessive_title] stumbles over her words for a second before resuming."
@@ -380,7 +380,7 @@ label SB_fetish_lily_vaginal_label(the_person):
     "She looks at you in surprise."
     the_person.char "No! No its not that. Anyway, I was just wondering if maybe tonight, I could strip for you again, but this time like, not for money but, just for fun?"
     "Wow! You definitely weren't expecting this. Not yet anyway. Your serums must be really effecting her, if she's here to strip for you!"
-    mc.name "That sounds great sis!"
+    mc.name "That sounds great [the_person.title]!"
     "While she is still a bit conflicted, it appears she is finally coming to terms with her new found sex drive."
     "You sit down at the edge of your bed and watch as she begins the show."
 
@@ -398,7 +398,7 @@ label SB_fetish_lily_vaginal_label(the_person):
     "Feeling the moment is right, you move your lips to hers and begin to make out. Your tongues dance around each other in unison."
     $ the_person.change_arousal(10)
     "[the_person.possessive_title] begins to pull off your clothes. It isn't long until you are naked, your flesh now against hers."
-    the_person.char "[the_person.mc_title]! Please, I need you inside me again. Fuck me bro!!!"
+    the_person.char "[the_person.mc_title]! Please, I need you inside me again. Fuck me [the_person.mc_name]!!!"
     "You moan into her mouth and quickly prepare yourself to penetrate [the_person.possessive_title]."
     $ the_person.sex_skills["Vaginal"] = 6
     ###Sex scene, missionary###   ###TODO: consider writing a variant of this because the default intro is going to be confusing###
@@ -505,16 +505,16 @@ label SB_fetish_vaginal_recurring_label():
     $ the_person = get_random_from_list(meets_fetish_list)
 
     if the_person == mom:
-        "Before going to bed, you hear a knock on your door. You hear your mother's sweet and familiar voice from the other side."
+        "Before going to bed, you hear a knock on your door. You hear [the_person.possessive_title]'s sweet and familiar voice from the other side."
         show screen person_info_ui(the_person)
-        the_person.char "Hey honey, its mommy... I was just wondering if I could come in for a bit?"
+        the_person.char "Hey honey, its [the_person.title]... I was just wondering if I could come in for a bit?"
         "You invite [the_person.possessive_title] in. You immediately start to get aroused when you see what she is wearing."
         $ the_person.outfit = SB_vaginal_outfit.get_copy()
         $ the_person.draw_person()
         the_person.char "So... I was wondering... is it okay if I sleep in here with you again tonight?"
         menu:
             "Not tonight":
-                mc.name "Sorry mom... I had a long day and I'm pretty wore out... maybe tomorrow?"
+                mc.name "Sorry [the_person.title]... I had a long day and I'm pretty wore out... maybe tomorrow?"
                 "She is clearly disappointed."
                 the_person.char "Okay... see you in the morning I guess?"
                 "You head for bed, looking forward to a restful night's sleep."
@@ -621,7 +621,7 @@ label SB_fetish_vaginal_lily_recurring_label():
         "Strip first":
             mc.name "That sounds good [the_person.title]... why don't you give me a show before we go to bed?"
             "[the_person.possessive_title] smiles at you."
-            the_person.char "Aww, does my brother wanna see his sister get naked for him? What a pervert!"
+            the_person.char "Aww, does my [the_person.mc_name] wanna see his [the_person.title] get naked for him? What a pervert!"
             "[the_person.possessive_title] winks at you before beginning her routine."
             call SB_free_strip_scene(the_person) from _SB_free_strip_scene_70
             mc.name "Damn [the_person.title], you are really getting good at that."
@@ -644,7 +644,7 @@ label SB_fetish_vaginal_lily_recurring_label():
         "[the_person.possessive_title] resumes kissing you. You grab her ass with both hands and pick her up. She grinds her crotch into you."
         $ the_person.change_arousal(20)
         the_person.char "I need you so bad, just do me right here, up against the wall!"
-        "You quickly pin your helpless sister to the wall. She wraps her legs around you and sighs as you sink your cock into her greedy cunt."
+        "You quickly pin your helpless [the_person.title] to the wall. She wraps her legs around you and sighs as you sink your cock into her greedy cunt."
         call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBV71
         $ the_person.reset_arousal()
     elif  the_person.get_opinion_score("missionary style sex") > 2:

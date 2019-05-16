@@ -76,7 +76,7 @@ label scene_SB_doggy_standing_1(the_person, the_location, the_object, the_round)
                 "[the_person.possessive_title] responds quietly."
                 the_person.char "Just you, [the_person.mc_title]. I don't know why but it just feels so good... so right when you dominate me..."
                 if the_person == mom:
-                    the_person.char "It makes mommy so happy to serve you like this... To be your milfy slut!"
+                    the_person.char "It makes [the_person.title] so happy to serve you like this... To be [the_person.possessive_title]!"
                 "You give her pussy a few rough thrusts before bottoming out again."
                 mc.name "That's right bitch, you're my little fuckhole. I'll bend you over and fuck you anytime I please."
                 $ the_person.discover_opinion("being submissive")

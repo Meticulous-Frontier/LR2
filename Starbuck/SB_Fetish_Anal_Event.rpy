@@ -451,106 +451,106 @@ label SB_free_strip_scene(the_person):
 #SBA4
 label SB_mom_anal_pay_label(the_person):
     $ renpy.show(bedroom.name,what=bedroom.background_image)
-    "You're getting ready for bed when your mother calls from downstairs."
+    "You're getting ready for bed when [the_person.possessive_title] calls from downstairs."
     the_person.char "[the_person.mc_title], could we talk for a moment?"
     mc.name "Sure, down in a second."
     show screen person_info_ui(the_person)
     $ renpy.show(kitchen.name,what=kitchen.background_image)
     $ the_person.draw_person(position = "sitting")
-    "Mom is sitting at the kitchen table, a collection of bills laid out in front of her."
+    "[the_person.possessive_title] is sitting at the kitchen table, a collection of bills laid out in front of her."
     "She is fidgeting a bit. You can tell she is a little nervous about something."
     the_person.char "[the_person.mc_title], I'm really sorry about this. Some things have come up around the house that need repair but I'm not sure have the money to have the work done..."
     the_person.char "I know that you've been working so hard at your new business and I'm so proud of you, and I'm happy we've been so close lately."
     the_person.char "I wouldn't feel right about just taking your hard earned money though, so I was hoping we could make a deal..."
-    mc.name "What sort of deal Mom?"
+    mc.name "What sort of deal [the_person.title]?"
     the_person.char "Well, I was thinking... we could make a deal where, instead of just stripping for you, we could do other things too."
     "You think about her proposal. It has been a while now since you started giving her your serums to test."
     mc.name "What kind of things do you have in mind, Mom?"
-    "Mom stumbles over her words for a second. You can tell this is difficult for her to say, but her urges are getting the better of her."
+    "[the_person.possessive_title] stumbles over her words for a second. You can tell this is difficult for her to say, but her urges are getting the better of her."
     the_person.char "Well, after I get done stripping, I could please you, in whatever way you want..."
-    "Mom blushes and looks down at the ground as she finishes her sentence."
+    "[the_person.possessive_title] blushes and looks down at the ground as she finishes her sentence."
     the_person.char "I could even stick it, back there, in my ass the way you like it..."
-    "Your mom has been exposed to your serums enough, you know that she probably wants it anal too. You decide to push the issue a bit."
+    "[the_person.possessive_title] has been exposed to your serums enough, you know that she probably wants it anal too. You decide to push the issue a bit."
     mc.name "You mean the way you like it?"
-    "Mom's cheeks turn even redder and she looks up at you."
+    "[the_person.possessive_title]'s cheeks turn even redder and she looks up at you."
     the_person.char "I'm sorry honey I just... I can't explain it, but lately I just find myself constantly fantasizing..."
     "She stops herself before she says too much."
     the_person.char "The bills are just really starting to pile up. I'm sorry, I know its wrong but, I promise I'll make it good for you!"
     menu:
         "Strip and ride me. -$1000" if mc.business.funds >= 1000:
             $ mc.business.funds += -1000
-            "Mom smiles wide when you give her the money."
+            "[the_person.possessive_title] smiles wide when you give her the money."
             the_person.char "Thank you [the_person.mc_title]! Now, are you ready a show?"
             call SB_free_strip_scene(the_person) from _call_SB_free_strip_scene_SBA40
-            "Now that she is naked, your mom quickly grabs your hand and leads you to her bedroom. When you get to her bed, she shoves you down on your back."
+            "Now that she is naked, [the_person.possessive_title] quickly grabs your hand and leads you to her bedroom. When you get to her bed, she shoves you down on your back."
             $ renpy.show(mom_bedroom.name,what=mom_bedroom.background_image)
             the_person.char "Oh god, I need this so bad honey. You just lay back and let momma take care of you now."
-            "You mom quickly strips you down. She reaches into her nightstand and grabs some lube. She hands it to you."
+            "[the_person.possessive_title] quickly strips you down. She reaches into her nightstand and grabs some lube. She hands it to you."
             the_person.char "Here! Can you get me, you know... ready?"
             $ the_person.draw_person(position = "back_peek")
-            "Mom turns away from you. You squirt a liberal amount of lube onto your hand and then reach up between her supple ass cheeks and spread it around her tight asshole."
+            "[the_person.possessive_title] turns away from you. You squirt a liberal amount of lube onto your hand and then reach up between her supple ass cheeks and spread it around her tight asshole."
             "You start to work one finger into her. She moans and starts to push back against you. When you push a second finger into her she gasps."
             $ the_person.change_arousal(15)
             the_person.char "Oh [the_person.mc_title], I've been thinking about this all week... I'm sorry I brought money into this... I won't ask you for money again!"
             #Cowgirl pose#
             $ the_person.draw_person(position = "cowgirl")
-            the_person.char "Now, just let mommy take care of you. I'm gonna stick it into my most intimate hole now..."
-            "Mom goes slow, but steadily slides down, impaling her sphincter on your throbbing erection. She bottoms out and moans loudly."
+            the_person.char "Now, just let [the_person.title] take care of you. I'm gonna stick it into my most intimate hole now..."
+            "[the_person.possessive_title] goes slow, but steadily slides down, impaling her sphincter on your throbbing erection. She bottoms out and moans loudly."
             call sex_description(the_person, SB_anal_cowgirl, make_bed(), 1, private= True, girl_in_charge = True) from _call_sex_description_SBA41
             if the_person.arousal > 100:
                 the_person.char "Oh god, I came so hard..."
-                "Mom collapses onto the bed next to you, exhausted from her anal cowgirl ride."
+                "[the_person.possessive_title] collapses onto the bed next to you, exhausted from her anal cowgirl ride."
             else:
                 the_person.char "Mmm, that was so good, thank you [the_person.mc_title]..."
-                "Your mom rolls off you and lays down on the bed next to you."
+                "[the_person.possessive_title] rolls off you and lays down on the bed next to you."
             $ the_person.reset_arousal()
-            "You start to get up to go to your room, but your mom calls out to you as you start to get up."
-            the_person.char "[the_person.mc_title]? Why don't you just stay in here tonight? Mommy loves you... its okay!"
+            "You start to get up to go to your room, but [the_person.possessive_title] calls out to you as you start to get up."
+            the_person.char "[the_person.mc_title]? Why don't you just stay in here tonight? [the_person.title] loves you... its okay!"
             "You slip back into bed next to her."
             $ SB_give_anal_role(the_person)
             $ SB_CALCULATE_RANDOM_EVENT_RATE()
             $ FETISH_ANAL_EVENT_INUSE = False
-            "Your mom has already fallen asleep. You can hear her murmuring in her dreams about taking stuff in her ass."
+            "[the_person.possessive_title] has already fallen asleep. You can hear her murmuring in her dreams about taking stuff in her ass."
             "It seems your serums have given her an anal fetish!"
             "You cuddle up behind her and enjoy the heat of her soft flesh as you slowly drift off to sleep."
 
             call SB_process_overnight_no_events() from _SB_process_overnight_no_events_SBA42
             $ the_person.outfit = SB_anal_nude_outfit.get_copy()
-            "The next morning, you slowly wake up. The bed next to you is cold. You look around and see your mom getting ready for the day in the bathroom."
+            "The next morning, you slowly wake up. The bed next to you is cold. You look around and see [the_person.possessive_title] getting ready for the day in the bathroom."
             $ mc.change_location(mom_bedroom)
             #Position peek back
             $ the_person.draw_person(position = "walking_away")
-            "You walk up behind your mom and wrap your arms around her. She arches her back against you as your hands roam across her chest."
+            "You walk up behind [the_person.possessive_title] and wrap your arms around her. She arches her back against you as your hands roam across her chest."
             the_person.char "Good morning sleepy head..."
-            "You mom starts to tremble at your touch."
+            "[the_person.possessive_title] starts to tremble at your touch."
             the_person.char "Look, about last night... I'm sorry I asked for money in exchange for... the wonderful thing we did afterword. I promise I won't do that again!"
             the_person.char "I know that we have this tradition that... every Friday night I work on the budget and things have been really tight lately."
-            the_person.char "I was thinking we should start a new tradition! Every Friday night... Why don't we just plan on doing what we did. It will be something forward to look forward to with the stress of each week."
-            "Mom begins to grind her hips up against you, nestling your now quickly hardening dick between her ass cheeks."
+            the_person.char "I was thinking we should start a new tradition! Every Friday night... Why don't we just plan on doing what we did. It will be something to look forward to with the stress of each week."
+            "[the_person.title] begins to grind her hips up against you, nestling your now quickly hardening dick between her ass cheeks."
             the_person.char "Plus... god I just can't stop fantasizing about you... sticking it in me... back there."
             "You grab her hips and start to grind against her. Her breathing starts to get a bit heavier."
-            the_person.char "Honey, last night mommy took care of you. Do you think this morning, you could take care of me?"
+            the_person.char "[the_person.mc_title], last night [the_person.title] took care of you. Do you think this morning, you could take care of me?"
             "You smile to yourself."
             mc.name "Are you asking me to fuck you in your ass?"
             the_person.char "Yes... Please! Please [the_person.mc_title]! I don't know why I keep feeling this way, but I need you in my ass!"
             "You pick her up from behind and take her back to the bed. You throw her on the bed. She quickly gets on her hands and knees and starts wiggling her ass at you."
             #Draw doggystyle
             $ the_person.draw_person(position = "doggy")
-            "You grab the lube leftover from the night before. You quickly apply another glob to mom's back side. You apply some more to your cock until it is good and slick."
+            "You grab the lube leftover from the night before. You quickly apply another glob to [the_person.title]'s back side. You apply some more to your cock until it is good and slick."
             "You get yourself lined up with your mom's back passage. You slowly begin your anal penetration."
             the_person.char "That's it [the_person.mc_title]! Fuck me good!"
             call sex_description(the_person, SB_doggy_anal, make_bed(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBA43
             $ mc.current_stamina += -1
             if the_person.arousal > 100:
-                "Mom lays there on the bed, speechless from your anal plundering."
+                "[the_person.title] lays there on the bed, speechless from your anal plundering."
             else:
-                "Mom lays there on the bed"
+                "[the_person.title] lays there on the bed"
             $ the_person.reset_arousal()
             mc.name "So... every friday night? I think I could get used to that..."
-            "You can see your mom's body quiver slightly at your words."
+            "You can see [the_person.possessive_title]'s body quiver slightly at your words."
             mc.name "BUT, I am a man. I may have needs more often then that. Be ready for me with that amazing ass of yours anytime."
-            "Your mom meekly responds."
-            the_person.char "Yes honey. You know it will be... take my ass, whenever you want. I'll be ready!"
+            "[the_person.possessive_title] meekly responds."
+            the_person.char "Yes [the_person.mc_title]. You know it will be... take my ass, whenever you want. I'll be ready!"
             $ SB_mom_weekly_anal_action = Action("mom friday anal ", SB_mom_anal_pay_requirement, "SB_mom_anal_friday_label", the_person)
             $ mc.business.mandatory_crises_list.append(SB_mom_weekly_anal_action)
             hide screen person_info_ui
@@ -560,8 +560,8 @@ label SB_mom_anal_pay_label(the_person):
             pass
 
         "Not this week.":
-            mc.name "Sorry Mom, but I'm tight on cash right now as well. Maybe next week, okay?"
-            "Your mom nods and turns back to her bills."
+            mc.name "Sorry [the_person.title], but I'm tight on cash right now as well. Maybe next week, okay?"
+            "[the_person.possessive_title] nods and turns back to her bills."
             the_person.char "I understand sweetheart. Now don't let me keep you, I'm sure you were up to something important."
             $ SB_mom_weekly_pay_action = Action("mom anal pay", SB_mom_anal_pay_requirement, "SB_mom_anal_pay_label", the_person)
             $ mc.business.mandatory_crises_list.append(SB_mom_weekly_pay_action)
@@ -574,78 +574,78 @@ label SB_mom_anal_pay_label(the_person):
 #SBA50
 label SB_mom_anal_friday_label(the_person):
     $ renpy.show(bedroom.name,what=bedroom.background_image)
-    "You're hanging out in your room when you here your mom call form her room."
+    "You're hanging out in your room when you here [the_person.possessive_title] call form her room."
     the_person.char "[the_person.mc_title], are you home? It's Friday night! Can you come to my room?"
     mc.name "Sure, down in a second."
     show screen person_info_ui(the_person)
     $ renpy.show(mom_bedroom.name,what=mom_bedroom.background_image)
     $ the_person.outfit = lingerie_wardrobe.pick_random_outfit()
     $ the_person.draw_person(position = "stand4")
-    "Mom is standing next to her bed. You quickly shut her door and lock it."
+    "[the_person.title] is standing next to her bed. You quickly shut her door and lock it."
     the_person.char "[the_person.mc_title]! Hey, it time for our Friday night date! Are you ready for your show and, well you know what comes afterword..."
-    "Mom smiles wide, waiting for your response."
+    "[the_person.title] smiles wide, waiting for your response."
     menu:
         "Strip and ride me." if mc.current_stamina > 0:
 
-            "You sit down on the bed. Mom walks over to you."
+            "You sit down on the bed. [the_person.title] walks over to you."
             the_person.char "Remember, no touching! Atleast during this part. Now, are you ready a show?"
             call SB_free_strip_scene(the_person) from _call_SB_free_strip_scene_SBA50
-            "Now that she is naked, your mom pushes you over, back on to the bed."
-            "You mom quickly strips you down. She reaches into her nightstand and grabs some lube. She hands it to you."
+            "Now that she is naked, [the_person.possessive_title] pushes you over, back on to the bed."
+            "[the_person.possessive_title] quickly strips you down. She reaches into her nightstand and grabs some lube. She hands it to you."
             the_person.char "Here! Can you get me, you know... ready?"
             #facing away pose#
             $ the_person.draw_person(position = "back_peek")
-            "Mom turns away from you. You squirt a liberal amount of lube onto your hand and then reach up between her supple ass cheeks and spread it around her tight asshole."
+            "[the_person.title] turns away from you. You squirt a liberal amount of lube onto your hand and then reach up between her supple ass cheeks and spread it around her tight asshole."
             "You start to work one finger into her. She moans and starts to push back against you. When you push a second finger into her she gasps."
             $ the_person.change_arousal(15)
             the_person.char "Oh god, I need this so bad honey. You just lay back and let momma take care of you now."
             #Cowgirl pose#
             $ the_person.draw_person(position = "cowgirl")
-            the_person.char "Now, just let mommy take care of you. I'm gonna stick it into my most intimate hole now..."
-            "Mom goes slow, but steadily slides down, impaling her sphincter on your throbbing erection. She bottoms out and moans loudly."
+            the_person.char "Now, just let [the_person.title] take care of you. I'm gonna stick it into my most intimate hole now..."
+            "[the_person.title] goes slow, but steadily slides down, impaling her sphincter on your throbbing erection. She bottoms out and moans loudly."
             $ mc.current_stamina += -1
             call sex_description(the_person, SB_anal_cowgirl, make_bed(), 1, private= True, girl_in_charge = True) from _call_sex_description_SBA51
             if the_person.arousal > 100:
                 the_person.char "Oh god, I came so hard..."
-                "Mom collapses onto the bed next to you, exhausted from her anal cowgirl ride."
+                "[the_person.title] collapses onto the bed next to you, exhausted from her anal cowgirl ride."
             else:
                 the_person.char "Mmm, that was so good, thank you [the_person.mc_title]..."
-                "Your mom rolls off you and lays down on the bed next to you."
+                "[the_person.possessive_title] rolls off you and lays down on the bed next to you."
             $ the_person.reset_arousal()
 
             "You cuddle up behind her and enjoy the heat of her soft flesh as you slowly drift off to sleep."
 
             call SB_process_overnight_no_events() from _SB_process_overnight_no_events_SBA52
             $ the_person.outfit = SB_anal_nude_outfit.get_copy()
-            "The next morning, you slowly wake up. The bed next to you is cold. You look around and see your mom getting ready for the day in the bathroom."
+            "The next morning, you slowly wake up. The bed next to you is cold. You look around and see [the_person.possessive_title] getting ready for the day in the bathroom."
             $ mc.change_location(mom_bedroom)
             #Position peek back
             $ the_person.draw_person(position = "walking_away")
-            "You walk up behind your mom and wrap your arms around her. She arches her back against you as your hands roam across her chest."
+            "You walk up behind [the_person.possessive_title] and wrap your arms around her. She arches her back against you as your hands roam across her chest."
             the_person.char "Good morning sleepy head..."
-            "You mom starts to tremble at your touch."
+            "[the_person.possessive_title] starts to tremble at your touch."
             the_person.char "I love being so close to you... and so intimate..."
-            "Mom begins to grind her hips up against you, nestling your now quickly hardening dick between her ass cheeks."
+            "[the_person.title] begins to grind her hips up against you, nestling your now quickly hardening dick between her ass cheeks."
             the_person.char "I just want you to fuck my ass, all weekend long! Is there really anything wrong with that?"
             "You grab her hips and start to grind against her. Her breathing starts to get a bit heavier."
-            the_person.char "Honey, last night mommy took care of you. Do you think this morning, you could take care of me?"
+            the_person.char "Honey, last night [the_person.title] took care of you. Do you think this morning, you could take care of me?"
             "You smile to yourself."
-            mc.name "of course Mommy. I'll fuck you in the ass, just the way you like it."
+            mc.name "Of course [the_person.title]. I'll fuck you in the ass, just the way you like it."
             the_person.char "Yes... Please! Please [the_person.mc_title]! Fuck me in the ass!"
             "You pick her up from behind and take her back to the bed. You throw her on the bed. She quickly gets on her hands and knees and starts wiggling her ass at you."
             #Draw doggystyle
             $ the_person.draw_person(position = "doggy")
-            "You grab the lube leftover from the night before. You quickly apply another glob to mom's back side. You apply some more to your cock until it is good and slick."
-            "You get yourself lined up with your mom's back passage. You slowly begin your anal penetration."
+            "You grab the lube leftover from the night before. You quickly apply another glob to [the_person.mc_title]'s back side. You apply some more to your cock until it is good and slick."
+            "You get yourself lined up with [the_person.possessive_title]'s back passage. You slowly begin your anal penetration."
             the_person.char "That's it [the_person.mc_title]! Fuck me good!"
             call sex_description(the_person, SB_doggy_anal, make_bed(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBA53
             if the_person.arousal > 100:
-                "Mom lays there on the bed, speechless from your anal plundering."
+                "[the_person.mc_title] lays there on the bed, speechless from your anal plundering."
             else:
-                "Mom lays there on the bed"
+                "[the_person.mc_title] lays there on the bed"
             $ the_person.reset_arousal()
-            mc.name "Mmm, thanks mom. That ass is amazing. Next friday, right?"
-            the_person.char "Yes honey. But don't feel like you HAVE to wait to take my ass. We can do it whenever you want. I'll be ready!"
+            mc.name "Mmm, thanks [the_person.mc_title]. That ass is amazing. Next friday, right?"
+            the_person.char "Yes [the_person.mc_title]. But don't feel like you HAVE to wait to take my ass. We can do it whenever you want. I'll be ready!"
             $ SB_mom_weekly_anal_action = Action("mom friday anal ", SB_mom_anal_pay_requirement, "SB_mom_anal_friday_label", the_person)
             $ mc.business.mandatory_crises_list.append(SB_mom_weekly_anal_action)
             $ the_person.review_outfit()
@@ -656,8 +656,8 @@ label SB_mom_anal_friday_label(the_person):
             pass
 
         "Not this week.":
-            mc.name "Sorry Mom, work was hell and I'm exhausted. Maybe next week, okay?"
-            "Your mom frowns."
+            mc.name "Sorry [the_person.mc_title], work was hell and I'm exhausted. Maybe next week, okay?"
+            "[the_person.possessive_title] frowns."
             the_person.char "I understand sweetheart. Now don't let me keep you, I'm sure you were up to something important."
             $ SB_mom_weekly_anal_action = Action("mom friday anal ", SB_mom_anal_pay_requirement, "SB_mom_anal_friday_label", the_person)
             $ mc.business.mandatory_crises_list.append(SB_mom_weekly_anal_action)
@@ -668,8 +668,8 @@ label SB_mom_anal_friday_label(the_person):
 
 #SBA60
 label SB_lily_anal_dp_fetish_label(the_person):
-    "As you are finishing up with work for the day, you get a text on your phone. It is from Lily, your sister."
-    the_person.char "Hey bro! Can you do me a favor? I meet me at the mall when you get off work. I need your help with something..."
+    "As you are finishing up with work for the day, you get a text on your phone. It is from Lily, [the_person.possessive_title]."
+    the_person.char "Hey [the_person.mc_name]! Can you do me a favor? Meet me at the mall when you get off work. I need your help with something..."
     "You let her know you'll be there. You quickly finish up with your work and head over to the mall."
     $ renpy.show(mall.name,what=mall.background_image)
     "When you get to the mall, you look around for a minute, then spot Lily. She waves to you then comes running over to you, giving you a big hug."
@@ -679,7 +679,7 @@ label SB_lily_anal_dp_fetish_label(the_person):
     mc.name "Are you sure you need me for this?"
     "She gives you a mischevious smile."
     the_person.char "Definitely! Don't worry, you'll be glad you came when you see where we are going."
-    "Lily grabs you by the hand and leads you into the mall. It seems any inhibition she might have previously had being seen with her brother has vanished after being corrupted by your serums."
+    "Lily grabs you by the hand and leads you into the mall. It seems any inhibition she might have previously had being seen with her [the_person.mc_name] has vanished after being corrupted by your serums."
     "You are almost surprised when she leads you into the sex shop. The owner greets you as you walk in."
     if starbuck.sluttiness > 50 or starbuck.love > 30:
         $ starbuck.draw_person(emotion = "happy")
@@ -720,7 +720,7 @@ label SB_lily_anal_dp_fetish_label(the_person):
     "You get yourself naked as well. On a nearby shelf you spot a bulk size bottle of intimate lube."
     "[the_person.possessive_title] gets down on her knees and starts to secure the toy to your cock."
     $ the_person.draw_person(position = "blowjob")
-    mc.name "Mmm, you look amazing on your knees Sis."
+    mc.name "Mmm, you look amazing on your knees [the_person.title]."
     "[the_person.possessive_title] looks up at you."
     the_person.char "Yeah, you like it anytime I'm near your dick. Trust me, I'd love to blow you, but I've got something else in mind..."
     $ the_person.draw_person(position = "doggy")
@@ -733,7 +733,7 @@ label SB_lily_anal_dp_fetish_label(the_person):
     the_person.char "Oh! That feels good... but I'm ready for you. Let me have it [the_person.mc_title]!"
     "You use your hand to line yourself cock up with her puckered hole. She reaches down and grabs the dildo and lines it up with her pussy."
     "With one slow, smooth motion, you push your cock past her well lubed sphincter. It goes in with a small pop, and then you continue with a slow thrust until your cock is buried in her ass."
-    the_person.char "Fuck! Holy hell... Bro that is intense! I've never felt... I'm so full!!!"
+    the_person.char "Fuck! Holy hell... [the_person.mc_name] that is intense! I've never felt... I'm so full!!!"
     "Going tantalizingly slow, you pull yourself mostly out, then back into her buttery smooth back door."
     the_person.char "Okay... Go slow... but I'm ready!"
     call sex_description(the_person, SB_doggy_anal_dildo_dp, make_floor(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBA60
@@ -745,7 +745,7 @@ label SB_lily_anal_dp_fetish_label(the_person):
         "She looks back at you and smiles"
     the_person.char "[the_person.mc_title]... That felt amazing. I'm not sure though... are we going to able to keep this from mom? I don't think I can stay quiet enough when I'm getting fucked in both holes like that..."
     "You give her a reassuring smile."
-    mc.name "Don't worry sis, we'll be careful."
+    mc.name "Don't worry [the_person.title], we'll be careful."
     the_person.char "Good... because lately I've just been craving you so bad. We don't have to always use the strap on but, god just thinking about you fucking my ass gets me so hot."
     $ SB_give_anal_role(the_person)
     $ SB_CALCULATE_RANDOM_EVENT_RATE()

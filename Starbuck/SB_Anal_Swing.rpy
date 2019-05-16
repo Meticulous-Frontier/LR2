@@ -30,15 +30,15 @@ label intro_SB_anal_swing(the_person, the_location, the_object, the_round):
 
     if SB_get_fetish(the_person) == "Anal Fetish":
         if the_person == mom:
-            "You work your cock up and down your mom's slit a few times, her wetness lubricating it."
+            "You work your cock up and down [the_person.possessive_title]'s slit a few times, her wetness lubricating it."
             "You lean forward and whisper into her ear."
-            mc.name "Mommy... your little boy is about to fuck your ass now, just the way you like."
+            mc.name "[the_person.title]... your [the_person.mc_name] is about to fuck your ass now, just the way you like."
             "Her body shudders from your dirty talk. She wiggles her ass back up against you."
-            the_person.char "Do it honey. Mommy is ready for you!"
+            the_person.char "Do it honey. [the_person.title] is ready for you!"
         elif the_person == lily:
-            "You work your cock up and down your sister's slit a few times, her wetness lubricating it."
+            "You work your cock up and down [the_person.possessive_title]'s slit a few times, her wetness lubricating it."
             "You lean forward and whisper into her ear."
-            mc.name "Hey sis, your big brother is about to fuck your ass now, just the way you like."
+            mc.name "Hey [the_person.title], your [the_person.mc_name] is about to fuck your ass now, just the way you like."
             "Her body shudders from your dirty talk. She wiggles her ass back up against you."
             the_person.char "Do it! Stick it in me, you know I can take it!"
         elif the_person == starbuck:
@@ -80,9 +80,9 @@ label scene_SB_anal_swing_1(the_person, the_location, the_object, the_round):
     if SB_get_fetish(the_person) == "Anal Fetish":           #Anal fetish
         "After a particularly hard bounce, [the_person.possessive_title] moans ecstatically."
         if the_person == mom:
-            the_person.char "That's it honey, fuck mommy harder! Tie me up and hang me from a swing and pound mommy's ass any way you want! It feels so good!"
+            the_person.char "That's it honey, fuck [the_person.title] harder! Tie me up and hang me from a swing and pound [the_person.title]'s ass any way you want! It feels so good!"
         elif the_person == lily:
-            the_person.char "That's it bro! Fuck me harder! I'm your slutty little sister, hanging from a swing just to please you!"
+            the_person.char "That's it [the_person.mc_name]! Fuck me harder! I'm [the_person.possessive_title], hanging from a swing just to please you!"
         elif the_person == starbuck:
             the_person.char "Yes! Don't let up! I think about you stringing me up like this everytime I see the swing in the store."
         else:

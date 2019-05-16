@@ -368,7 +368,7 @@ label SB_fetish_lily_cum_label():
                 the_person.sexy_opinions["being covered in cum"] = [FETISH_OPINION_VALUE, True]
                 SB_give_cum_external_role(the_person)
     $ FETISH_CUM_EVENT_INUSE = False
-    "[the_person.possessive_title] is moaning ecstatically. You start to worry that your mom might hear."
+    "[the_person.possessive_title] is moaning ecstatically. You start to worry that [mom.possessive_title] might hear."
     if SB_get_fetish(the_person) == "External Cum Fetish":
         "Glancing down, you see [the_person.possessive_title] running her hands along her face, then down to her chest. She is rubbing your cum into her skin."
         the_person.char "Mmm... it feels so good! That first splash is always the best..."

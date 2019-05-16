@@ -10,7 +10,7 @@ init 3 python:
                     return True
         return False
 
-    sister_phone_crisis_action = ActionMod("Sister Phone Message",sister_phone_crisis_requirement,"sister_phone_crisis_action_label", 
+    sister_phone_crisis_action = ActionMod("Sister Phone Message",sister_phone_crisis_requirement,"sister_phone_crisis_action_label",
         menu_tooltip = "[the_person.possessive_title] sends you phone messages", category="Home")
     crisis_list.append([sister_phone_crisis_action, sister_phone_mod_weight])
 
@@ -142,7 +142,7 @@ label sister_phone_crisis_action_label:
         #Sends you teasing pictures (ie. no shirt or something) and talks about how much she loves you.
         $ ran_num = renpy.random.randint(1,3) #Used to determine which varient we use to avoid spamming the player with the exact same texts.
         if ran_num == 1:
-            the_person.char "You're such a hard worker big bro. Here's a little gift from the girl who loves you most in the world!"
+            the_person.char "You're such a hard worker [the_person.mc_title]. Here's a little gift from the girl who loves you most in the world!"
             $ the_person.outfit.remove_random_upper(top_layer_first = True)
             $ the_person.draw_person(emotion = "happy")
             if mc.business.is_weekend():

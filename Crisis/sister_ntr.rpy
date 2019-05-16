@@ -21,7 +21,7 @@ init 3 python:
         return get_random_from_list(positions)
 
     sister_ntr_mod_action = ActionMod("Sister NTR Crisis",sister_ntr_crisis_requirement,"sister_ntr_crisis_action_label",
-        menu_tooltip = "At night you hear strange sounds out of your sister's bedroom", category = "NTR")
+        menu_tooltip = "At night you hear strange sounds out of [lily.possessive_title]'s bedroom", category = "NTR")
     crisis_list.append([sister_ntr_mod_action, sister_ntr_mod_weight])
 
 label sister_ntr_crisis_action_label:
@@ -691,7 +691,7 @@ label sister_ntr_crisis_action_label:
                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
             elif finish == "usual":
                 "[man_name] pulls out his cock, [the_person.possessive_title] grabs it and starts stroking. In a few moments the man begins to cum."
-                "[the_person.possessive_title] encloses the tip of his cock with her hand, mom should not find any sperm stains."
+                "[the_person.possessive_title] encloses the tip of his cock with her hand, [mom.title] should not find any sperm stains."
                 man_name "Ow, fuck! That was great!"
                 the_person.char "Yeah, [man_name]! It was great! We really should have done this sooner!"
                 man_name2 "Help me too, [the_person.name]."
