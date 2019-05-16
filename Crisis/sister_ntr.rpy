@@ -18,7 +18,7 @@ init 3 python:
             positions.append ("wall")
             if the_person.get_opinion_score("anal sex") > 0 or the_person.sluttiness > 70:
                 positions.append ("anal")
-        return get_random_from_list(positions)    
+        return get_random_from_list(positions)
 
     sister_ntr_mod_action = ActionMod("Sister NTR Crisis",sister_ntr_crisis_requirement,"sister_ntr_crisis_action_label",
         menu_tooltip = "At night you hear strange sounds out of your sister's bedroom", category = "NTR")
@@ -54,7 +54,7 @@ label sister_ntr_crisis_action_label:
 
     if encounter is 1: ## a scene with one man
         if the_person.sluttiness < 40:
-            $ the_person.draw_person(position = "kissing", emotion = "happy") 
+            $ the_person.draw_person(position = "kissing", emotion = "happy")
             "You see [the_person.possessive_title] kissing a young man. On the table there are some college books lying aroung. Seems they decided to take a break from studying."
             the_person.char "Oh, [man_name]. You are so sweet - agreeing to help me with homework. I could not done this myself!"
             "Now you recognise the man - it is [man_name], [the_person.possessive_title]'s coed."
@@ -121,7 +121,7 @@ label sister_ntr_crisis_action_label:
                     the_person.char "Yes! Do it, [man_name]! I want you to fill me. Don't worry, I'm on the pill."
                     $ the_person.cum_in_vagina()
                     $ the_person.draw_person(position = "missionary", emotion = "happy")
-                    "After a few hard thrusts, [man_name] starts spilling his semen into your little sister."
+                    "After a few hard thrusts, [man_name] starts spilling his semen into [the_person.possessive_title]."
                     the_person.char "Yes, [man_name]! I want it in me!"
                     "After few seconds [man_name] gets off from [the_person.possessive_title]. You see a trace of his white liquid dripping from her pussy."
                     man_name "What a nice view! [the_person.name] [the_person.last_name] fucked and creampied."
@@ -219,7 +219,7 @@ label sister_ntr_crisis_action_label:
                     the_person.char "Yes! Do it, [man_name]! I want you to fill me. Don't worry, I'm on the pill."
                     $ the_person.cum_in_vagina()
                     $ the_person.draw_person(position = "against_wall", emotion = "happy")
-                    "After a few hard thrusts, [man_name] starts spilling his semen into your little sister."
+                    "After a few hard thrusts, [man_name] starts spilling his semen into [the_person.possessive_title]."
                     the_person.char "Yes, [man_name]! I want it in me!"
                     "After few seconds [man_name] gets off from [the_person.possessive_title]. You see a trace of his white liquid dripping from her pussy."
                     man_name "What a nice view! [the_person.name] [the_person.last_name] fucked and creampied."
@@ -317,7 +317,7 @@ label sister_ntr_crisis_action_label:
                     $ the_person.cum_in_vagina()
                     $ the_person.draw_person(position = "standing_doggy")
                     "The man take his cock from [the_person.possessive_title] ass and sticks it into her vagina."
-                    "After a few hard thrusts, [man_name] starts spilling his semen into your little sister."
+                    "After a few hard thrusts, [man_name] starts spilling his semen into [the_person.possessive_title]."
                     the_person.char "Yes, [man_name]! I want it in me!"
                     "After few seconds [man_name] gets off from [the_person.possessive_title]. You see a trace of his white liquid dripping from her pussy."
                     man_name "What a nice view! [the_person.name] [the_person.last_name] fucked and creampied."
@@ -506,7 +506,7 @@ label sister_ntr_crisis_action_label:
                 the_person.char "Yes! Do it, [man_name]! I want you to fill me. Don't worry, I'm on the pill."
                 $ the_person.cum_in_vagina()
                 $ the_person.draw_person(position = "missionary", emotion = "happy")
-                "After a few hard thrusts, [man_name] starts spilling his semen into your little sister."
+                "After a few hard thrusts, [man_name] starts spilling his semen into [the_person.possessive_title]."
                 the_person.char "Yes, [man_name]! I want it in me!"
                 "After few seconds [man_name] gets off from [the_person.possessive_title]. You see a trace of his white liquid dripping from her pussy."
                 man_name "What a nice view! [the_person.name] [the_person.last_name] fucked and creampied."
@@ -548,7 +548,7 @@ label sister_ntr_crisis_action_label:
                 man_name2 "Shit, your mouth is so good! I'm gonna expode right now!"
                 $ the_person.cum_in_mouth()
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
-                "You see [man_name2] body shrugs as he starts to shoot his load into your little sister mouth."
+                "You see [man_name2] body shrugs as he starts to shoot his load into [the_person.possessive_title] mouth."
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
                 "She gulps and looks up to men with a broad simle."
                 the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of water and then we have to study. I need a straigh A on that test."
@@ -632,7 +632,7 @@ label sister_ntr_crisis_action_label:
                 the_person.char "Yes! Do it, [man_name]! I want you to fill me. Don't worry, I'm on the pill."
                 $ the_person.cum_in_vagina()
                 $ the_person.draw_person(position = "standing_doggy")
-                "After a few hard thrusts, [man_name] starts spilling his semen into your little sister."
+                "After a few hard thrusts, [man_name] starts spilling his semen into [the_person.possessive_title]."
                 the_person.char "Yes, [man_name]! I want it in me!"
                 "After few seconds [man_name] gets off from [the_person.possessive_title]. You see a trace of his white liquid dripping from her pussy."
                 man_name "What a nice view! [the_person.name] [the_person.last_name] fucked and creampied."
@@ -676,7 +676,7 @@ label sister_ntr_crisis_action_label:
                 man_name2 "Shit, your mouth is so good! I'm gonna expode right now!"
                 $ the_person.cum_in_mouth()
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
-                "You see [man_name2] body convulse as he shoots his load into your little sister mouth."
+                "You see [man_name2] body convulse as he shoots his load into [the_person.possessive_title] mouth."
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
                 "She gulps and looks up to men with a broad simle."
                 the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of water and then we have to study. I need a straigh A on that test."
@@ -759,7 +759,7 @@ label sister_ntr_crisis_action_label:
                 the_person.char "Yes! Do it, guys! I want you to fill me. Don't worry, I'm on the pill."
                 $ the_person.cum_in_vagina()
                 $ the_person.draw_person(position = "doggy")
-                "After a few hard thrusts, both men start spilling his semen into your little sister holes."
+                "After a few hard thrusts, both men start spilling his semen into [the_person.possessive_title] holes."
                 the_person.char "Yes! I want it in me! Fill me with cum!"
                 "After few seconds they both get off inside [the_person.possessive_title]. You see a trace of their love juice dripping from her pussy and anus."
                 man_name "What a nice view! Our school slut got fucked in both holes and creampied."
@@ -796,7 +796,7 @@ label sister_ntr_crisis_action_label:
                 man_name2 "Shit, your mouth is so good! I'm gonna expode right now!"
                 $ the_person.cum_in_mouth()
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
-                "You see [man_name2] body shiver as he starts to shoot his load into your little sister mouth."
+                "You see [man_name2] body shiver as he starts to shoot his load into [the_person.possessive_title] mouth."
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
                 "She also gulps his load down and looks up to men with a broad simle."
                 the_person.char "Such a wonderful taste, [man_name2]! Now I'll get a glass of water and then we go back to our books. I don't want to fail this test."
@@ -889,7 +889,7 @@ label sister_ntr_crisis_action_label:
                 man_name2 "Shit, your mouth is so good! I'm gonna expode right now!"
                 $ the_person.cum_in_mouth()
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
-                "You see [man_name2] body shrugs as he starts to shoot his load into your little sister mouth."
+                "You see [man_name2] body shrugs as he starts to shoot his load into [the_person.possessive_title] mouth."
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
                 "She gulps and looks up to men with a broad simle."
                 the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of water and then we have to finish the tasks. Don't wanna get bad grade on that test."
