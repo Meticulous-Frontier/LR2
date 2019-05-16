@@ -107,31 +107,26 @@ init python: # This space is reserved for definitions used to simplify the code
 
         if the_person.job == "Researcher":
             mc.business.add_employee_research(the_person) # Add the_person to the employee overview
-            mc.business.r_div.add_person(the_person) # Add the_person to the r_div (research division)
             the_person.set_work([1,2,3], mc.business.r_div) # Set their schedule and work location
             the_person.special_role.append(employee_role) # Append the employee_role to enable corresponding special actions
 
         elif the_person.job =="Production":
             mc.business.add_employee_production(the_person)
-            mc.business.p_div.add_person(the_person)
             the_person.set_work([0,1,2,3,4], mc.business.p_div)
             the_person.special_role.append(employee_role)
 
         elif the_person.job == "Supply":
             mc.business.add_employee_supply(the_person)
-            mc.business.s_div.add_person(the_person)
             the_person.set_work([1,2,3], mc.business.s_div)
             the_person.special_role.append(employee_role)
 
         elif the_person.job == "Marketing":
             mc.business.add_employee_marketing(the_person)
-            mc.business.m_div.add_person(the_person)
             the_person.set_work([1,2,3], mc.business.m_div)
             the_person.special_role.append(employee_role)
 
         elif the_person.job == "Human Resources":
             mc.business.add_employee_hr(the_person)
-            mc.business.h_div.add_person(the_person)
             the_person.set_work([1,2,3], mc.business.h_div)
             the_person.special_role.append(employee_role)
 
