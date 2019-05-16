@@ -271,7 +271,7 @@ label starbuck_vaginal_skillup_label(the_person):
     the_person.char "DEFINITELY. If you can afford it, [the_person.mc_title], it will help take your girl's orgasms to the next level..."
     menu:
         "Purchase ($5000)":
-            $ mc.business.funds += -5000
+            $ mc.business.pay(-5000)
             $ mc.sex_skills["Vaginal"] = 10
             the_person.char "Oh! I'll ring this right up. You won't regret it, [the_person.mc_title]!"
             if the_person.sluttiness > 70:
@@ -326,7 +326,7 @@ label starbuck_anal_skillup_label(the_person):
     the_person.char "DEFINITELY. If you can afford it, [the_person.mc_title], it will help take butt play to the next level..."
     menu:
         "Purchase ($8000)":
-            $ mc.business.funds += -8000
+            $ mc.business.pay(-8000)
             $ mc.sex_skills["Anal"] = 10
             the_person.char "Oh! I'll ring this right up. You won't regret it, [the_person.mc_title]!"
             if the_person.sluttiness > 90:
@@ -379,7 +379,7 @@ label starbuck_oral_skillup_label(the_person):
     the_person.char "DEFINITELY. If you can afford it, [the_person.mc_title], it will help you make your girl orgasm over and over again..."
     menu:
         "Purchase ($2500)":
-            $ mc.business.funds += -2500
+            $ mc.business.pay(-2500)
             $ mc.sex_skills["Oral"] = 10
             the_person.char "Oh! I'll ring this right up. You won't regret it, [the_person.mc_title]!"
             if the_person.sluttiness > 45:
@@ -435,7 +435,7 @@ label starbuck_foreplay_skillup_label(the_person):
     the_person.char "DEFINITELY. If you can afford it, [the_person.mc_title], it will help take your girl's orgasms to the next level..."
     menu:
         "Purchase ($1000)":
-            $ mc.business.funds += -1000
+            $ mc.business.pay(-1000)
             $ mc.sex_skills["Foreplay"] = 10
             the_person.char "Oh! I'll ring this right up. You won't regret it, [the_person.mc_title]!"
             if the_person.sluttiness > 30:
@@ -489,7 +489,7 @@ label starbuck_arousal_reduction_one_label(the_person):
     the_person.char "Perfect to last just a bit longer, no matter when you have sex that day!"
     menu:
         "Purchase ($500)":
-            $ mc.business.funds += -500
+            $ mc.business.pay(-500)
             $ SB_MOD_MC_AROUSAL_MULT = SB_MOD_MC_AROUSAL_1ST_MULT
             the_person.char "Oh! I'll ring this right up. You won't regret it, [the_person.mc_title]!"
             "[the_person.possessive_title] hands you your purchase after she rings you up. She smiles at you and blushes a bit."
@@ -513,7 +513,7 @@ label starbuck_arousal_reduction_two_label(the_person):
     the_person.char "They've done numerous double blind studies. Almost all men who took it daily found they lasted longer in bed!"
     menu:
         "Purchase ($5000)":
-            $ mc.business.funds += -5000
+            $ mc.business.pay(-5000)
             $ SB_MOD_MC_AROUSAL_MULT = SB_MOD_MC_AROUSAL_2ND_MULT
             the_person.char "Oh! I'll ring this right up. You won't regret it, [the_person.mc_title]!"
             "[the_person.possessive_title] hands you your purchase after she rings you up. She smiles at you and blushes a bit."
@@ -532,7 +532,7 @@ label starbuck_sex_store_investment_one_label(the_person):
     menu:
         "Invest $1000":
             "You discuss with [the_person.possessive_title] for a while what the terms of your investment are. Once you are both happy, you write her a check from your business account."
-            $ mc.business.funds += (-1000)
+            $ mc.business.pay(-1000)
             $ the_person.change_happiness (20)
             $ the_person.change_obedience (5)
             the_person.char "Don't worry, [the_person.mc_title]! You won't regret this!"
@@ -571,7 +571,7 @@ label starbuck_sex_store_investment_two_label(the_person):
     menu:
         "Invest $5000":
             "You discuss with [the_person.possessive_title] for a while what the terms of your investment are. Once you are both happy, you write her a check from your business account."
-            $ mc.business.funds += (-5000)
+            $ mc.business.pay(-5000)
             $ the_person.change_happiness (20)
             $ the_person.change_love (5)
             $ the_person.change_obedience (5)
@@ -625,7 +625,7 @@ label starbuck_sex_store_investment_three_label(the_person):
                     the_person.char "Wow... that's nice to hear! I'm interesting in spending more time with you in the future too."
             else:
                 mc.name "Of course, we'll keep things perfectly professional..."
-            $ mc.business.funds += (-15000)
+            $ mc.business.pay(-15000)
             $ the_person.change_happiness (20)
             $ the_person.change_love (10)
             $ the_person.change_obedience (10)
