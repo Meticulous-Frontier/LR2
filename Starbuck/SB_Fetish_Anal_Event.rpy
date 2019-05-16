@@ -669,7 +669,7 @@ label SB_mom_anal_friday_label(the_person):
 #SBA60
 label SB_lily_anal_dp_fetish_label(the_person):
     "As you are finishing up with work for the day, you get a text on your phone. It is from Lily, [the_person.possessive_title]."
-    the_person.char "Hey [the_person.mc_name]! Can you do me a favor? Meet me at the mall when you get off work. I need your help with something..."
+    the_person.char "Hey [the_person.mc_title]! Can you do me a favor? Meet me at the mall when you get off work. I need your help with something..."
     "You let her know you'll be there. You quickly finish up with your work and head over to the mall."
     $ renpy.show(mall.name,what=mall.background_image)
     "When you get to the mall, you look around for a minute, then spot Lily. She waves to you then comes running over to you, giving you a big hug."
@@ -679,7 +679,7 @@ label SB_lily_anal_dp_fetish_label(the_person):
     mc.name "Are you sure you need me for this?"
     "She gives you a mischevious smile."
     the_person.char "Definitely! Don't worry, you'll be glad you came when you see where we are going."
-    "Lily grabs you by the hand and leads you into the mall. It seems any inhibition she might have previously had being seen with her [the_person.mc_name] has vanished after being corrupted by your serums."
+    "Lily grabs you by the hand and leads you into the mall. It seems any inhibition she might have previously had being seen with her [the_person.mc_title] has vanished after being corrupted by your serums."
     "You are almost surprised when she leads you into the sex shop. The owner greets you as you walk in."
     if starbuck.sluttiness > 50 or starbuck.love > 30:
         $ starbuck.draw_person(emotion = "happy")
@@ -733,7 +733,7 @@ label SB_lily_anal_dp_fetish_label(the_person):
     the_person.char "Oh! That feels good... but I'm ready for you. Let me have it [the_person.mc_title]!"
     "You use your hand to line yourself cock up with her puckered hole. She reaches down and grabs the dildo and lines it up with her pussy."
     "With one slow, smooth motion, you push your cock past her well lubed sphincter. It goes in with a small pop, and then you continue with a slow thrust until your cock is buried in her ass."
-    the_person.char "Fuck! Holy hell... [the_person.mc_name] that is intense! I've never felt... I'm so full!!!"
+    the_person.char "Fuck! Holy hell... [the_person.mc_title] that is intense! I've never felt... I'm so full!!!"
     "Going tantalizingly slow, you pull yourself mostly out, then back into her buttery smooth back door."
     the_person.char "Okay... Go slow... but I'm ready!"
     call sex_description(the_person, SB_doggy_anal_dildo_dp, make_floor(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBA60

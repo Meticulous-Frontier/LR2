@@ -44,7 +44,7 @@ label sister_phone_crisis_action_label:
             the_person.char "Hi [the_person.mc_title], I hope I'm not interrupting your busy work day. This is just a quick reminder..."
             $ the_person.draw_person(emotion = "happy")
             "You get a selfie from [the_person.possessive_title] naked in front of her bedroom mirror."
-            the_person.char "That your [the_person.possessive_title] wants to feel you inside her tonight. Don't stay out too late!"
+            the_person.char "That [the_person.possessive_title] wants to feel you inside her tonight. Don't stay out too late!"
         else:
             $ the_person.set_outfit(lingerie_wardrobe.pick_random_outfit())
             $ the_person.draw_person(position = "blowjob", emotion = "happy")
@@ -120,7 +120,7 @@ label sister_phone_crisis_action_label:
                     the_person.set_outfit(the_person.wardrobe.get_random_appropriate_underwear(lowest_stat))
                     the_person.draw_person(emotion = "happy")
                     renpy.say("","")
-            the_person.char "I hope you think your [the_person.possessive_title] looks sexy in her underwear ;)"
+            the_person.char "I hope you think [the_person.possessive_title] looks sexy in her underwear ;)"
         else:
             python:
                 while not the_person.outfit.tits_visible():

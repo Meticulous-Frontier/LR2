@@ -67,13 +67,13 @@ label train_in_gym(person):
                     $ person.change_happiness(-10)
         else:
             person.char "Amazing, these gym session are really paying off."
-    $ person.reset_arousal()
     person.char "Thank you, [person.mc_title]."
     mc.name "Bye [person.title], see you next time."
 
     $ mc.business.funds -= 40
 
     hide screen person_info_ui
+    $ person.reset_arousal()
     $ person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)
     $ renpy.scene("Active")

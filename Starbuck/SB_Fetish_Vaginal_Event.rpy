@@ -228,7 +228,7 @@ label SB_fetish_vaginal_event_label(the_person):
             "Strip Tease":
                 mc.name "That sounds good [the_person.title]... why don't you give me a show before we go to bed?"
                 "[the_person.possessive_title] smiles at you."
-                the_person.char "Aww, does my [the_person.mc_name] wanna see his [the_person.title] get naked for him? What a pervert!" # NOTE: Names wont make sense, but everything else will.
+                the_person.char "Aww, does my [the_person.mc_title] wanna see his [the_person.title] get naked for him? What a pervert!" # NOTE: Names wont make sense, but everything else will.
                 "[the_person.possessive_title] winks at you before beginning her routine."
                 call SB_free_strip_scene(the_person) from _SB_free_strip_scene_2
                 mc.name "Damn [the_person.title], you are really getting good at that."
@@ -238,7 +238,7 @@ label SB_fetish_vaginal_event_label(the_person):
                 $ mc.current_stamina += -1
                 call fuck_person(the_person) from _call_fuck_person_SBV21
                 if the_person.arousal >= 100:
-                    "Your [the_person.possessive_title] needs a few minutes to lie down when you're finished. Bit by bit her breathing slows down."
+                    "[the_person.possessive_title] needs a few minutes to lie down when you're finished. Bit by bit her breathing slows down."
                     $ the_person.change_happiness(5)
                     the_person.char "Oh god [the_person.mc_title], your dick is sooooo good..."
                 else:
@@ -398,7 +398,7 @@ label SB_fetish_lily_vaginal_label(the_person):
     "Feeling the moment is right, you move your lips to hers and begin to make out. Your tongues dance around each other in unison."
     $ the_person.change_arousal(10)
     "[the_person.possessive_title] begins to pull off your clothes. It isn't long until you are naked, your flesh now against hers."
-    the_person.char "[the_person.mc_title]! Please, I need you inside me again. Fuck me [the_person.mc_name]!!!"
+    the_person.char "[the_person.mc_title]! Please, I need you inside me again. Fuck me [the_person.mc_title]!!!"
     "You moan into her mouth and quickly prepare yourself to penetrate [the_person.possessive_title]."
     $ the_person.sex_skills["Vaginal"] = 6
     ###Sex scene, missionary###   ###TODO: consider writing a variant of this because the default intro is going to be confusing###
@@ -621,7 +621,7 @@ label SB_fetish_vaginal_lily_recurring_label():
         "Strip first":
             mc.name "That sounds good [the_person.title]... why don't you give me a show before we go to bed?"
             "[the_person.possessive_title] smiles at you."
-            the_person.char "Aww, does my [the_person.mc_name] wanna see his [the_person.title] get naked for him? What a pervert!"
+            the_person.char "Aww, does my [the_person.mc_title] wanna see his [the_person.title] get naked for him? What a pervert!"
             "[the_person.possessive_title] winks at you before beginning her routine."
             call SB_free_strip_scene(the_person) from _SB_free_strip_scene_70
             mc.name "Damn [the_person.title], you are really getting good at that."
