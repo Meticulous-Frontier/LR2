@@ -61,6 +61,7 @@ label business_meeting_action_label:
 
     hide screen person_info_ui
     $ the_person.reset_arousal()
+    $ the_person.review_outfit()
     $ change_scene_display(mc.location)
     $ renpy.scene("Active")
     return

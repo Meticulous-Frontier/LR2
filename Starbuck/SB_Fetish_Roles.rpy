@@ -306,7 +306,7 @@ label SB_lily_anal_in_room_label(the_person):
     "You give [the_person.possessive_title] a quick proposition."
     mc.name "Hey [the_person.title]. What do you say we get out that strap on again?"
     "[the_person.possessive_title] looks at you and smiles."
-    the_person.char "Mmm that sounds pretty good [the_person.mc_name]... Here, let me take a couple... precautions."
+    the_person.char "Mmm that sounds pretty good [the_person.mc_title]... Here, let me take a couple... precautions."
     "[the_person.possessive_title] walks over and closes her door and locks it. She turns on some music and turns the volume up."
     the_person.char "Don't want mom to find out..."
     $ the_person.draw_person(position = "standing_doggy")
@@ -322,12 +322,12 @@ label SB_lily_anal_in_room_label(the_person):
                 the_person.draw_person(position = "standing_doggy")
                 renpy.say("","")
         mc.name "Mmmm, [the_person.title], your ass looks amazing. I can't wait to see that hole stretched around my cock..."
-    the_person.char "Ah! Here it is. I know I can't wait, you know I love when you fuck me in the ass [the_person.mc_name]."
+    the_person.char "Ah! Here it is. I know I can't wait, you know I love when you fuck me in the ass [the_person.mc_title]."
     "[the_person.possessive_title] hands you a bottle of lube and the dildo, then heads over to her bed and gets on her hands and knees with her ass in the air."
     $ the_person.draw_person(position = "doggy")
     "You put the dildo on and lube yourself up. You get behind [the_person.possessive_title] on the bed and start to line yourself up."
     "You cock sinks easily into her greedy back passage. She is so accustomed to being fucked anally now she accomodates you easily."
-    the_person.char "Oh thank god... I was starting to consider jumping you in the middle of the night. You know I need your cock in my ass [the_person.mc_name]..."
+    the_person.char "Oh thank god... I was starting to consider jumping you in the middle of the night. You know I need your cock in my ass [the_person.mc_title]..."
     the_person.char "Now fuck me good! I'm ready for it!"
     call sex_description(the_person, SB_doggy_anal_dildo_dp, make_bed(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBR50
     $ the_person.reset_arousal()

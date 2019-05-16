@@ -46,7 +46,7 @@ label SB_fetish_vaginal_family_threesome_label():
     $ SB_draw_two_person_scene(person_one = the_person_one, person_two = the_person_two, one_pos_x = 0.7, two_emotion = "angry")
     hide screen person_info_ui
     show screen SB_two_person_info_ui(the_person_two, the_person_one)
-    the_person_two.char "Is that... [the_person_one.name]!?! What are you... why are you naked in your [the_person_two.mc_name]'s room?" #NOTE: the_person_one doesn't nescessarily know the_person_two's title for the MC, but still somewhat makes sense.
+    the_person_two.char "Is that... [the_person_one.name]!?! What are you... why are you naked in your [the_person_two.mc_title]'s room?" #NOTE: the_person_one doesn't nescessarily know the_person_two's title for the MC, but still somewhat makes sense.
     "[the_person_two.possessive_title] is shocked to discover that you and [the_person_one.possessive_title] are in your room, clearly about to get busy."
     the_person_one.char "Mom! Nothing was... wait... what are you wearing?"
     "[the_person_two.possessive_title] quickly realizes that [the_person_one.possessive_title] is here... doing exactly what she was coming here to do. Her cheeks turn red with embarassment."
