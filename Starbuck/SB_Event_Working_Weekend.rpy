@@ -40,10 +40,10 @@ label SB_working_weekend_crisis_label():
 
     "Even though it is the weekend, you find yourself working."
     "Deep in thought, and with the company normally desserted, it takes you by surprise when you see movement out of the corner of your eye."
-    "Looking aside, you see [the_person.title]."
+    "Looking aside, you see [the_person.possessive_title]."
     $ the_person.draw_person()
     show screen person_info_ui(the_person)
-    "You can tell by the look on her face that [the_person.title] is also surprised to see you."
+    "You can tell by the look on her face that [the_person.possessive_title] is also surprised to see you."
     if the_person.sluttiness < SB_LOW_SLUT_VALUE:
         #if she is not slutty at all
         the_person.char "Oh hey there [the_person.mc_title], I didn't expect to see you here! I just stopped by because I forgot something in my desk. Are you... working? You know its the weekend right?"
@@ -52,7 +52,7 @@ label SB_working_weekend_crisis_label():
             "Stress the importance of obedience.":
                 mc.name "It is no accident that this place is accomplishing great things. The work I am trying to do requires many long hours, but also organization and commitment to procedures."
                 mc.name "A highly organised workplace is important, especially in a lab setting. I need employees who are able to listen to my instructions and follow them."
-                "[the_person.title] nods in agreement."
+                "[the_person.possessive_title] nods in agreement."
                 mc.name "You are doing a great job so far, [the_person.title], can I count on you to listen and obey the tasks I set out for you?"
                 $ the_person.change_obedience(10)
                 the_person.char "Yes, absolutely. I'll do everything I can to make sure this business is successful."
@@ -60,7 +60,7 @@ label SB_working_weekend_crisis_label():
             "Stress the importance of satisfaction.":
                 mc.name "I've worked hard to build this place into what it is. Even though it is the weekend, I can't help but come out here and work on improving the business in anyway I can..."
                 mc.name "But it can be easy to burn yourself out in this line of business. Pay might not always be great and the hours might be long, but a good attitude is key."
-                "[the_person.title] nods in agreement."
+                "[the_person.possessive_title] nods in agreement."
                 mc.name "You are doing a great job for me so far, [the_person.title], but take care of yourself, and don't let yourself get burned out."
                 $ the_person.change_happiness(10)
                 the_person.char "Yes sir, I do enjoy being here."
@@ -68,39 +68,39 @@ label SB_working_weekend_crisis_label():
             "Stress the importance of work hard, play hard.":
                 mc.name "Yes, it is true that I work late into the days and even on the weekends, but that doesn't mean that I'm all business."
                 mc.name "It is important though, that when you work heard, you can also play hard."
-                "[the_person.title] nods in agreement."
+                "[the_person.possessive_title] nods in agreement."
                 mc.name "You are doing a great job for me so far, [the_person.title]. Maybe some time we should play hard together?"
                 $ the_person.change_slut_temp(10)
                 $ the_person.change_slut_core(5)
                 the_person.char "Oh! I suppose I might be up for something like that, sometime anyway."
 
-        "After a minute of chit chat, [the_person.title] eventually says goodbye and walks out of the room."
+        "After a minute of chit chat, [the_person.possessive_title] eventually says goodbye and walks out of the room."
     elif the_person.sluttiness < SB_HIGH_SLUT_VALUE:
-        "Before you can respond, [the_person.title] pulls up a chair and sits beside you."
+        "Before you can respond, [the_person.possessive_title] pulls up a chair and sits beside you."
         $ the_person.draw_person(position = "sitting")
         the_person.char "Wow, your dedication to this place is pretty incredible... Don't you ever do something... you know, to blow off steam?"
-        "[the_person.title]'s voice takes a bit of a sulty tone at the end of that statement. Is she flirting with you?"
+        "[the_person.possessive_title]'s voice takes a bit of a sulty tone at the end of that statement. Is she flirting with you?"
         mc.name "Yes, [the_person.title], of course I do... but... it IS rather boring around here. I'd be grateful for a bit of company while I'm working"
-        "[the_person.title] smiles at you. And was that a wink?"
+        "[the_person.possessive_title] smiles at you. And was that a wink?"
         the_person.char "Oh! [the_person.mc_title], I was about to go out, but seeing you here still working on the weekend, I'd be glad to stay here with you a bit and give you a bit of a... distraction for a bit."
         "The suggestion in her voice is apparent with the last statement. You briefly consider her offer before making a request..."
         menu:
             "How about a blowjob?\n{size=22}Modifiers: +20 Sluttiness, +5 Obedience{/size}" if mc.current_stamina > 0:
-                "[the_person.title] smiles."
+                "[the_person.possessive_title] smiles."
                 the_person.char "Oh [the_person.mc_title], you work so hard. Don't worry, I'll take care of you."
                 if not the_person.outfit.tits_available():    #If covered up, have her take her top off
                     the_person.char "Here... let me take this off. I bet that will help ease some of your stress."
                     $ the_clothing = the_person.outfit.get_upper_ordered()[-1]
-                    "[the_person.title] takes off her [the_clothing.name]"
+                    "[the_person.possessive_title] takes off her [the_clothing.name]"
                     $ the_person.draw_animated_removal(the_clothing)
-                "Your eyes wander down to [the_person.title]'s tits."
+                "Your eyes wander down to [the_person.possessive_title]'s tits."
                 if the_person.outfit.tits_available():
                     if the_person.get_opinion_score("showing her tits") > 0:
-                        "You can see a blush in [the_person.title]'s cheeks. She likes to show off her [the_person.tit_size] tits!"
+                        "You can see a blush in [the_person.possessive_title]'s cheeks. She likes to show off her [the_person.tit_size] tits!"
                         $ the_person.discover_opinion("showing her tits")
                         $ the_person.change_slut_core(2)
                         $ the_person.change_slut_temp(5)
-                "You back your chair up and move it to the side while [the_person.title] gets down on her knees in front of you."
+                "You back your chair up and move it to the side while [the_person.possessive_title] gets down on her knees in front of you."
                 $ the_person.draw_person(position = "blowjob")
                 $ the_person.add_situational_slut("seduction_approach",20)
                 $ the_person.add_situational_obedience("seduction_approach", 5)
@@ -118,12 +118,12 @@ label SB_working_weekend_crisis_label():
                 $ the_person.clear_situational_slut("seduction_approach")
                 $ the_person.clear_situational_obedience("seduction_approach")
                 $ mc.current_stamina += -1
-                "Eventually, [the_person.title] gets up. She says goodbye after giving you a quick kiss"
+                "Eventually, [the_person.possessive_title] gets up. She says goodbye after giving you a quick kiss"
                 return
             "How about a blowjob?\n{size=22}Requires Stamina{/size} (disabled)" if mc.current_stamina == 0:
                 pass
             "Just Talk":
-                "You decide to take the opportunity to learn a little more about [the_person.title]."
+                "You decide to take the opportunity to learn a little more about [the_person.possessive_title]."
                 "You chit chat about various things. You decide to probe a little further about her interests."
                 $ SB_discover_opinion_count = 0
                 menu:
@@ -160,34 +160,34 @@ label SB_working_weekend_crisis_label():
 
 
 
-                "You chat with [the_person.title]for a bit longer, but eventually she says goodbye and leaves."
+                "You chat with [the_person.possessive_title]for a bit longer, but eventually she says goodbye and leaves."
 
         #IF she is a little slutty,
     else:  #If she is REALLY slutty
         the_person.char "Oh hey [the_person.mc_title]! Are you here all by yourself?"
         "You give her a quick nod as your finish up what you were doing."
-        "Seeing that you are here all by yourself, [the_person.title] grabs a chair and sits close to you."
+        "Seeing that you are here all by yourself, [the_person.possessive_title] grabs a chair and sits close to you."
         $ the_person.draw_person(position = "sitting")
         the_person.char "Wow, your dedication to this place is pretty sexy... would you like to maybe... blow off a little steam?"
-        "[the_person.title] begins to rub your crotch through your pants. You are almost done with your previous task, maybe you could get her to do something while you finish up..."
+        "[the_person.possessive_title] begins to rub your crotch through your pants. You are almost done with your previous task, maybe you could get her to do something while you finish up..."
         menu:
             "Strip for me":
                 mc.name "Hey, I'm almost done with this, but I tell you what. Why don't you give me a show while I finish and then maybe when I'm done I'll take you up on that."
-                "[the_person.title] smiles mischieviously at you, before nodding."
+                "[the_person.possessive_title] smiles mischieviously at you, before nodding."
                 the_person.char "I can do that, [the_person.mc_title]... I hope you like the show!"
                 $ the_person.change_slut_temp(5)
                 call SB_free_strip_scene(the_person) from _SB_free_strip_scene_3
 
             "Just Talk":
                 $ SEXUAL_TOPIC_COUNTER = 0
-                "While her offer is tempting, you decide to take the opportunity to learn a little more about [the_person.title]"
+                "While her offer is tempting, you decide to take the opportunity to learn a little more about [the_person.possessive_title]"
                 mc.name "Sorry, I can't while I'm in the middle of this, but maybe you could stay and talk to me for a little while."
-                "[the_person.title] is clearly disappointed, so you decide to keep the topic of conversation sexual to keep her interested."
+                "[the_person.possessive_title] is clearly disappointed, so you decide to keep the topic of conversation sexual to keep her interested."
                 "What do you ask about?"
                 menu:
                     "Positions":
                         mc.name "So, how do you feel about different sex positions, [the_person.title]?"
-                        "[the_person.title] smiles when she realizes you are going to keep the topic interesting."
+                        "[the_person.possessive_title] smiles when she realizes you are going to keep the topic interesting."
                         the_person.char "Well..."
                         #$ SEXUAL_TOPIC_COUNTER =SB_get_and_print_opinion(the_person, "missionary style sex")
                         if the_person.get_opinion_score("missionary style sex") > 1:
@@ -236,7 +236,7 @@ label SB_working_weekend_crisis_label():
 
                     "Sex types":
                         mc.name "So, how do you feel about different sex types, [the_person.title]?"
-                        "[the_person.title] smiles when she realizes you are going to keep the topic interesting."
+                        "[the_person.possessive_title] smiles when she realizes you are going to keep the topic interesting."
                         if the_person.get_opinion_score("vaginal sex") > 1:
                             the_person.char "I actually LOVE vaginal sex."
                             $ SEXUAL_TOPIC_COUNTER += 1
@@ -296,7 +296,7 @@ label SB_working_weekend_crisis_label():
 
                     "Cum":
                         mc.name "So, how do you feel about cum, [the_person.title]?"
-                        "[the_person.title] smiles when she realizes you are going to keep the topic interesting."
+                        "[the_person.possessive_title] smiles when she realizes you are going to keep the topic interesting."
                         if the_person.get_opinion_score("creampies") > 1:
                             the_person.char "I actually LOVE when guys cum inside me."
                             $ SEXUAL_TOPIC_COUNTER += 1
@@ -369,7 +369,7 @@ label SB_working_weekend_crisis_label():
 
                     "Sexy Clothing":
                         mc.name "So, how do you feel about sexy clothing and outfits, [the_person.title]?"
-                        "[the_person.title] smiles when she realizes you are going to keep the topic interesting."
+                        "[the_person.possessive_title] smiles when she realizes you are going to keep the topic interesting."
                         if the_person.get_opinion_score("skimpy outfits") > 1:
                             the_person.char "I actually LOVE skimpy outfits."
                             $ SEXUAL_TOPIC_COUNTER += 1
@@ -471,7 +471,7 @@ label SB_working_weekend_crisis_label():
 
                     "Other Kinks":
                         mc.name "So, do you have any kinks, [the_person.title]? Something that might be more fun for me to know about?"
-                        "[the_person.title] smiles when she realizes you are going to keep the topic interesting."
+                        "[the_person.possessive_title] smiles when she realizes you are going to keep the topic interesting."
                         if the_person.get_opinion_score("masturbating") > 1:
                             the_person.char "I actually LOVE masturbating."
                             $ SEXUAL_TOPIC_COUNTER += 1
@@ -548,20 +548,20 @@ label SB_working_weekend_crisis_label():
                     the_person.char "So I guess you could say I don't have a lot of strong feelings about that."
                 else:
                     the_person.char "So I guess you could say I have a lot of opinions on that."
-                "You chat with [the_person.title] for a little longer. Eventually she says goodbye and heads out."
+                "You chat with [the_person.possessive_title] for a little longer. Eventually she says goodbye and heads out."
                 return #TODO Make sure this returns correctly
-        "You are just finishing up with your work, and now [the_person.title] is here, naked, in your office."
+        "You are just finishing up with your work, and now [the_person.possessive_title] is here, naked, in your office."
         $ the_person_two = get_random_from_list(mc.business.get_employee_list())
         if the_person == the_person_two:
             "You're pretty sure she's ready for next step if you are ready."
         elif the_person_two.sluttiness > SB_HIGH_SLUT_VALUE :  #Someone walks in, threesome opportunity#
-            "You walk over to [the_person.title]. She wraps her arms around you as you roughly grab her ass and pick her up. She's grinding herself against you as you carry her over to your desk."
-            "[the_person.title] is just pulling your cock out when you hear a cough from the doorway."
+            "You walk over to [the_person.possessive_title]. She wraps her arms around you as you roughly grab her ass and pick her up. She's grinding herself against you as you carry her over to your desk."
+            "[the_person.possessive_title] is just pulling your cock out when you hear a cough from the doorway."
             the_person_two.char "Wow, looks like you guys are getting ready for some fun!"
             hide screen person_info_ui
             show screen SB_two_person_info_ui(the_person_two, the_person)
             $ SB_draw_two_person_scene(person_one = the_person, person_two = the_person_two, two_pos_x = 0.7, one_position = "missionary")
-            "You turn and see [the_person_two.title] standing in the doorway. You aren't sure how long she has been standing there."
+            "You turn and see [the_person_two.possessive_title] standing in the doorway. You aren't sure how long she has been standing there."
             the_person_two.char "This is so sexy... [the_person_two.mc_title], can I join? Please!?! You won't regret it!"
             "Dumbfounded, you can only nod."
             the_person_two.char "Yes! Oh just give me one second!!!"
@@ -572,17 +572,17 @@ label SB_working_weekend_crisis_label():
                 $ SB_draw_two_person_scene(person_one = the_person, person_two = the_person_two, two_pos_x = 0.7, one_position = "missionary")
                 "You watch as [the_person_two.possessive_title] take off her [strip_choice.name]."
                 $ strip_choice = the_person_two.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-            "Now naked, she walks over to you and [the_person.title]."
+            "Now naked, she walks over to you and [the_person.possessive_title]."
             the_person_two.char "Okay, how do you want to do this?"
             call SB_threesome_description(the_person, the_person_two, SB_threesome_sixty_nine, make_desk(), 0, private = True, girl_in_charge = False) from _SB_EVENT_THREESOME_WEEKEND_SB10
-            "Wow, you just had sex with [the_person.title] and [the_person_two.title]! You can't believe how lucky you are."
-            "Eventually, [the_person_two.title] gets up."
+            "Wow, you just had sex with [the_person.possessive_title] and [the_person_two.possessive_title]! You can't believe how lucky you are."
+            "Eventually, [the_person_two.possessive_title] gets up."
             $ SB_draw_two_person_scene(person_one = the_person, person_two = the_person_two, two_pos_x = 0.7, one_position = "missionary")
             the_person_two.char "Mmm... wow... I guess I should stop by on the weekend more often..."
             $ SB_draw_two_person_scene(person_one = the_person, person_two = the_person_two, two_pos_x = 0.7, two_position = "walking_away", one_position = "missionary")
             "[the_person_two.possessive_title] turns and starts to walk out."
             if the_person.arousal > 100:  #She  came
-                "You get up and make yourself presentable again. [the_person.title] lays there for a while, recovering from her orgasm."
+                "You get up and make yourself presentable again. [the_person.possessive_title] lays there for a while, recovering from her orgasm."
                 $ the_person.change_slut_core(2)
                 $ the_person.change_slut_temp(5)
                 $ the_person.change_love(5)
@@ -596,19 +596,19 @@ label SB_working_weekend_crisis_label():
             return
         menu:
             "Fuck her on your desk" if mc.current_stamina > 0:
-                "You walk over to [the_person.title]. She wraps her arms around you as you roughly grab her ass and pick her up. She's grinding herself against you as you carry her over to your desk."
+                "You walk over to [the_person.possessive_title]. She wraps her arms around you as you roughly grab her ass and pick her up. She's grinding herself against you as you carry her over to your desk."
                 "When her ass runs up against the desk, she reaches down and begins unzipping your pants."
                 "She pulls your your dick out and lays back. She lines you up with her pussy and push yourself into her."
                 call sex_description(the_person, missionary, make_desk(), 1, private = True) from _call_sex_description_SB15
 
                 if the_person.arousal > 100:  #She  came
-                    "You get up and make yourself presentable again. [the_person.title] lays there for a while, recovering from her orgasm."
+                    "You get up and make yourself presentable again. [the_person.possessive_title] lays there for a while, recovering from her orgasm."
                     $ the_person.change_slut_core(2)
                     $ the_person.change_slut_temp(5)
                     $ the_person.change_love(5)
                     $ mc.current_stamina += -1
                 else:   #She didn't cum
-                    "You get up and make yourself presentable again. [the_person.title] lays there for a bit, clearly disappointed she didn't orgasm."
+                    "You get up and make yourself presentable again. [the_person.possessive_title] lays there for a bit, clearly disappointed she didn't orgasm."
                     $ the_person.change_slut_temp(5)
                     $ the_person.change_happiness(-5)
                     $ mc.current_stamina += -1
@@ -618,14 +618,14 @@ label SB_working_weekend_crisis_label():
                 pass
             "Thank her for the show":
                 mc.name "Thanks for that very pleasant distraction, [the_person.title], but I need to get back to work now."
-                "[the_person.title] can barely hide their disappointment. There's a hint of anger in their voice when they reply."
+                "[the_person.possessive_title] can barely hide their disappointment. There's a hint of anger in their voice when they reply."
                 the_perosn.char "Wow, really? After I stripped for you? Okay then, hope you day goes better than mine..."
                 $ the_person.change_slut_temp(5)
                 $ the_person.change_slut_core(2)
                 $ the_person.change_happiness(-5)
                 $ the_person.change_love(-15)
                 return
-        "Eventually, [the_person.title] gets up. She says goodbye after giving you a peck on the cheek and is soon walking out the door."
+        "Eventually, [the_person.possessive_title] gets up. She says goodbye after giving you a peck on the cheek and is soon walking out the door."
 
 
 

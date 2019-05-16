@@ -52,18 +52,18 @@ label intro_SB_threesome_sixty_nine(the_person_1, the_person_2, the_location, th
         the_person_1.char "Sounds good! I can't wait, I bet this is going to be amazing..."
     "[the_person_1.title] starts to lay down. [the_person_2.title] turns to you."
     if SB_get_fetish(the_person_2) == "Oral Fetish":
-        the_person_2.char "This should be good, I've heard [the_person_1.title] has a pretty good tongue..."
+        the_person_2.char "This should be good, I've heard [the_person_1.name] has a pretty good tongue..."
     elif SB_get_fetish(the_person_2) == "Vaginal Fetish":
         the_person_2.char "This should be a good warmup... but don't forget, [the_person_2.mc_title], I need you to fuck me sometime too..."
     else:
         the_person_2.char "Sounds good! Don't forget to change it up once in a while... I'd be glad to take a turn sucking you off..."
-    "[the_person_2.title] climbs on top of the other girl and slowly lowers her pussy down onto her face. She moans as [the_person_1.title] starts to lick between her legs"
+    "[the_person_2.title] climbs on top of [the_person_1.title] and slowly lowers her pussy down onto her face. She moans as [the_person_1.title] starts to lick between her legs"
     "You get down on your knees and spread [the_person_1.title]'s legs. You position your hips in line with hers and move your cock along her slit."
     if the_person_2.arousal > 60:
         "Her pussy is soaking wet. As you run your length along her hole you are soon slick with her juices."
     else:
-        "Her pussy looks absolutely peftect. As you run your length along her hole she starts to squirm."
-    "You push yourself into [the_person_1.possessive_title]'s steamy cunt and start to fuck her while [the_person_2.title] rides on her face."
+        "Her pussy looks absolutely perfect. As you run your length along her hole she starts to squirm."
+    "You push yourself into [the_person_1.title]'s steamy cunt and start to fuck her while [the_person_2.title] rides on her face."
     return
 
 #Girl 1 = missionary, Girl 2 = oral#
@@ -109,7 +109,7 @@ label scene_SB_threesome_sixty_nine_1(the_person_1, the_person_2, the_location, 
                 pass
         "While you give attention to [the_person_2.possessive_title]'s tits, you never stop pistoning your cock in and out of [the_person_1.title]'s slick pussy."
     else:
-        "You rest one hand on [the_person_2.title]'s head, guiding her as she sucks you off. With you other hand you continue to finger fuck [the_person_1.possessive_title]."
+        "You rest one hand on [the_person_2.title]'s head, guiding her as she sucks you off. With you other hand you continue to finger fuck [the_person_1.title]."
         if the_person_2.get_opinion_score("giving blowjobs") > 0:
             "You can see that [the_person_2.title] is really moving her hips back and forth roughly on [the_person_1.title]'s face. She gets off on having a dick in her mouth!"
             $the_person_2.change_arousal(the_person_2.get_opinion_score("giving blowjobs") * 3)
@@ -135,14 +135,14 @@ label scene_SB_threesome_sixty_nine_1(the_person_1, the_person_2, the_location, 
 
 label scene_SB_threesome_sixty_nine_2(the_person_1, the_person_2, the_location, the_object, the_round, current_girl):
     if current_girl == 1:
-        "[the_person_1.possessive_title]'s whole body is jostling forward and backward as you fuck her roughly. Her tight pussy feels silky smooth around your dick."
+        "[the_person_1.title]'s whole body is jostling forward and backward as you fuck her roughly. Her tight pussy feels silky smooth around your dick."
         "You lean forward and grab the back of [the_person_2.title]'s head, bring her in for a kiss. Your tongues meet together and you start to make out on top of [the_person_1.title]."
         "You decide its time for [the_person_2.possessive_title] to put her mouth to better use."
         "You pull back from making out with [the_person_2.title]."
         mc.name "I think [the_person_1.title] needs a little more attention..."
         "You grab [the_person_2.possessive_title]'s head by her hair and start to pull her head downwards. You pull out of [the_person_1.title]'s pussy partially to give her room to work."
         "She starts to lap at [the_person_1.title]'s cunt. You can feel her tongue brushing up against you cock."
-        "You give [the_person_1.possessive_title] a few slow thrusts, making sure to give [the_person_2.title] room to work."
+        "You give [the_person_1.title] a few slow thrusts, making sure to give [the_person_2.title] room to work."
         the_person_1.char "Mmmm..."
         "Muffled moans come from [the_person_1.title]. Your cock is buried deep inside her while [the_person_2.possessive_title] licks and sucks at her clit."
         $ the_person_1.change_arousal(the_person_2.sex_skills["Oral"] * 2)
@@ -151,7 +151,7 @@ label scene_SB_threesome_sixty_nine_2(the_person_1, the_person_2, the_location, 
         "[the_person_2.title]'s mouth pops off you for a second. She starts to run her tongue up and down the length of your shaft."
         "The view is incredible. [the_person_2.possessive_title] is service you while she rides [the_person_1.title]'s face."
         "You can't believe how lucky you are."
-        "You push your fingers deep into [the_person_1.possessive_title]. She moans into [the_person_2.title]'s pussy, who in turn moans around your cock."
+        "You push your fingers deep into [the_person_1.title]. She moans into [the_person_2.title]'s pussy, who in turn moans around your cock."
         "The vibrations from the moaning set off an incredible wave of pleasure in your amazing love triangle."
         "[the_person_2.title] opens her mouth wide and takes your cock back into her mouth again, wrapping her velvet tongue and lips around your erection."
 
@@ -163,14 +163,14 @@ label outro_SB_threesome_sixty_nine(the_person_1, the_person_2, the_location, th
         mc.name "Oh fuck I'm gonna cum!"
         menu:
             "Cum inside [the_person_1.title].":
-                "You thrust yourself deep inside of [the_person_1.possessive_title]'s cunt as you climax."
+                "You thrust yourself deep inside of [the_person_1.title]'s cunt as you climax."
                 if the_person_1.arousal > 100:
                     "Your cock bursting deep inside her triggers another orgasm for [the_person_1.title]. She is moaning non stop."
                     $ the_person_1.change_happiness(5)
                 $ the_person_1.cum_in_vagina()
                 if SB_get_fetish(the_person_2) == "External Cum Fetish" or SB_get_fetish(the_person_2) == "Internal Cum Fetish":
                     the_person_2.char "Hey! No fair! I want some of that!"
-                    "As you slowly pull out of [the_person_1.possessive_title], a trickle of your cum starts to escape her."
+                    "As you slowly pull out of [the_person_1.title], a trickle of your cum starts to escape her."
                     "[the_person_2.title] immediately moves her head down to [the_person_1.title]'s pussy and starts to lick up the cum leaking out."
                     "Desperate for more of your cum, she sticks her tongue deep into [the_person_1.title]."
                     if the_person_2.outfit.can_add_accessory(mouth_cum):
@@ -182,8 +182,8 @@ label outro_SB_threesome_sixty_nine(the_person_1, the_person_2, the_location, th
                         "Getting a dose of your cum triggers another orgasm in [the_person_2.possessive_title]. Her body twitches as orgasm goes through it."
                     "When she finally sits up, you can see traces of your cum on the corners of [the_person_2.title]'s mouth."
                 else:
-                    "As you slowly pull out of [the_person_1.possessive_title], a trickle of your cum starts to escape her."
-                "You give a sigh, deeply contented with having dumped your load inside of [the_person_1.possessive_title]."
+                    "As you slowly pull out of [the_person_1.title], a trickle of your cum starts to escape her."
+                "You give a sigh, deeply contented with having dumped your load inside of [the_person_1.title]."
 
             "Cum on [the_person_2.title]'s face.":
                 "You pull out of [the_person_1.title] and grab the back of [the_person_2.title]'s head, bringing it toward your cock."
@@ -193,7 +193,7 @@ label outro_SB_threesome_sixty_nine(the_person_1, the_person_2, the_location, th
                 $ SB_threesome_sixty_nine.redraw_scene(the_person_1, the_person_2)
                 if SB_get_fetish(the_person_1) == "External Cum Fetish":
                     "You can see [the_person_1.title]'s pupils dilate as you fulfil her cum fetish."
-                    "[the_person_1.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her face. She moans lewdly."
+                    "[the_person_1.title] revels in bliss as your dick sprays jet after jet of seed across her face. She moans lewdly."
                     "She truly is addicted to your cum."
                 "Some of your cum runs down off [the_person_1.title]'s face and onto [the_person_2.title]'s belly."
                 $ the_person_1.cum_on_stomach()
@@ -228,7 +228,7 @@ label outro_SB_threesome_sixty_nine(the_person_1, the_person_2, the_location, th
                 $ SB_threesome_sixty_nine.redraw_scene(the_person_1, the_person_2)
                 if SB_get_fetish(the_person_1) == "External Cum Fetish":
                     "You can see [the_person_1.title]'s pupils dilate as you fulfil her cum fetish."
-                    "[the_person_1.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her face. She moans lewdly."
+                    "[the_person_1.title] revels in bliss as your dick sprays jet after jet of seed across her face. She moans lewdly."
                     "She truly is addicted to your cum."
                 "Some of your cum runs down off [the_person_1.title]'s face and onto [the_person_2.title]'s belly."
                 $ the_person_1.cum_on_stomach()

@@ -40,16 +40,16 @@ init:
 
 label intro_SB_threesome_doggy_plus_oral(the_person_1, the_person_2, the_location, the_object, the_round):
     mc.name "[the_person_1.title], why don't you lay down. [the_person_2.title] can eat you out while I fuck her."
-    "[the_person_1.title] smiles and agrees."
+    "[the_person_1.possessive_title] smiles and agrees."
     if SB_get_fetish(the_person_1) == "Vaginal Fetish":
-        the_person_1.char "This should be a good warmup... but don't forget, [the_person.mc_title], I need you to fuck me sometime too..."
+        the_person_1.char "This should be a good warmup... but don't forget, [the_person_1.mc_title], I need you to fuck me sometime too..."
     elif SB_get_fetish(the_person_1) == "Oral Fetish":
-        the_person_1.char "This should be good, I've heard [the_person_1.title] has a pretty good tongue..."
+        the_person_1.char "This should be good, I've heard [the_person_2.title] has a pretty good tongue..."
     elif SB_get_fetish(the_person_1) == "Anal Fetish":
         the_person_1.char "Mmm that sounds good... maybe she could stick a finger in my ass once in a while too..."
     else:
         the_person_1.char "Sounds good! I can't wait, I bet this is going to be amazing..."
-    "[the_person_1.title] starts to lay down. [the_person_2.title] turns to you."
+    "[the_person_1.possessive_title] starts to lay down. [the_person_2.possessive_title] turns to you."
     if SB_get_fetish(the_person_2) == "Oral Fetish":
         the_person_2.char "Mmm I can't wait to taste that sweet pussy..."
     elif if SB_get_fetish(the_person_2) == "Vaginal Fetish":
@@ -57,15 +57,15 @@ label intro_SB_threesome_doggy_plus_oral(the_person_1, the_person_2, the_locatio
     elif SB_get_fetish(the_person_1) == "Anal Fetish":
         the_person_1.char "Mmm that sounds good... maybe you could stick it in my ass for a bit too..."
     else:
-        the_person_1.char "Alright! I've always though [the_person_1.title] was kinda hot... I can't believe I finally get the opportunity to eat her out!"
-    "[the_person_2.title] gets down on her hands and knees and slowly lowers her face into [the_person_1.title]'s crotch. [the_person_2.title] starts to lick between her legs"
-    "You get down on your knees and grab [the_person_2.title]'s hips. You position your hips in line with hers and move your cock along her slit."
+        the_person_2.char "Alright! I've always thought [the_person_1.title] was kinda hot... I can't believe I finally get the opportunity to eat her out!"
+    "[the_person_2.possessive_title] gets down on her hands and knees and slowly lowers her face into [the_person_1.possessive_title]'s crotch. [the_person_2.possessive_title] starts to lick between her legs"
+    "You get down on your knees and grab [the_person_2.possessive_title]'s hips. You position your hips in line with hers and move your cock along her slit."
     if the_person_2.arousal > 60:
         "Her pussy is soaking wet. As you run your length along her hole you are soon slick with her juices."
     else:
-        "Her pussy looks absolutely peftect. As you run your length along her hole she starts to squirm."
-    "You take note of her puckered asshole, also beckoning your cock to come fill it. You decide to start with her pussy for though."
-    "You push yourself into [the_person_2.title]'s steamy cunt and start to fuck her while she eats [the_person_1.title]'s pussy"
+        "Her pussy looks absolutely perfect. As you run your length along her hole she starts to squirm."
+    "You take note of her puckered asshole, also beckoning your cock to come fill it. You decide to start with her pussy first though."
+    "You push yourself into [the_person_2.possessive_title]'s steamy cunt and start to fuck her while she eats [the_person_1.possessive_title]'s pussy"
     return
 
 label scene_SB_threesome_doggy_plus_oral_1(the_person_1, the_person_2, the_location, the_object, the_round):
@@ -106,10 +106,10 @@ label orgasm_SB_threesome_doggy_plus_oral(the_person_1, the_person_2, the_locati
 label swap_SB_threesome_doggy_play_oral(the_person_1, the_person_2, the_location, the_object, the_round, current_girl):
     #THIS FUNCTION NEEDS COMPLETELY REDONE
     if current_girl == 1:
-        "You slowly pull out of [the_person_1.title]'s pussy. You run your hands through [the_person_2.title]'s hair for a second, then slowly pull her mouth down towards your cock."
+        "You slowly pull out of [the_person_1.possessive_title]'s pussy. You run your hands through [the_person_2.possessive_title]'s hair for a second, then slowly pull her mouth down towards your cock."
         mc.name "Lick me clean, [the_person_2.title]."
-        "[the_person_2.title] opens her mouth and begins to greedily slurp at your cock. Her mouth feels great sliding up and down your erection."
-        "You reach down with one hand and hold [the_person_2.title]'s hair off to one side for her, and with your other hand you start to play with [the_person_1.title]'s pussy."
+        "[the_person_2.possessive_title] opens her mouth and begins to greedily slurp at your cock. Her mouth feels great sliding up and down your erection."
+        "You reach down with one hand and hold [the_person_2.possessive_title]'s hair off to one side for her, and with your other hand you start to play with [the_person_1.possessive_title]'s pussy."
         $ guy_source = 2
         $ girl_one_source = 0
         $ girl_two_source = 1
@@ -118,9 +118,9 @@ label swap_SB_threesome_doggy_play_oral(the_person_1, the_person_2, the_location
         $ skill_tag_p2 = "Oral"
         return
     else:
-        "You pull back on [the_person_2.title]'s hair for a bit. Your cock springs free from her mouth with a satisfying plop. She looks up at you and smiles."
+        "You pull back on [the_person_2.possessive_title]'s hair for a bit. Your cock springs free from her mouth with a satisfying plop. She looks up at you and smiles."
         mc.name "Mmm, that was good [the_person_2.title]. Time to get back to [the_person_1.title]..."
-        "You lower yourself down until you are lined up with [the_person_1.title]'s pussy. She moans as you slide yourself back into her, but it is muffled by [the_person_2.title]'s hips as she rides her face."
+        "You lower yourself down until you are lined up with [the_person_1.possessive_title]'s pussy. She moans as you slide yourself back into her, but it is muffled by [the_person_2.possessive_title]'s hips as she rides her face."
         "You slide yourself into her slick cunt a few times, filling her eager hole with your dick."
         $ guy_source = 1
         $ girl_one_source = 0
