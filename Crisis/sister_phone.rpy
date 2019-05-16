@@ -34,7 +34,7 @@ label sister_phone_crisis_action_label:
                 the_person.char "I can't wait until you come home and give me what I need. I wish I could spend every minute of every day worshiping your cock like a [the_person.possessive_title] should."
             else:
                 the_person.char "It's so hard not to talk about you at school. The other girls are gossiping and I just want to tell them how good it feels when you try and breed me..."
-                the_person.char "My pussy full of your warm cum, knowing that I can take care of you the way only a [the_person.possessive_title] could."
+                the_person.char "My pussy full of your warm cum, knowing that I can take care of you the way only [the_person.possessive_title] could."
                 the_person.char "I think I'm going to go touch myself in the bathroom. I hope you are having a great day too [the_person.mc_title]!"
         elif ran_num == 2:
             python:
