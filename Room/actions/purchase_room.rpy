@@ -4,9 +4,9 @@ init -2 python:
 
 init -1 python:
     purchasable_rooms_list = []
-    t1_cost = 10000
-    t2_cost = 50000
-    t3_cost = 100000
+    t1_cost = 5000
+    t2_cost = 10000
+    t3_cost = 20000
 
 init 3 python:
     def purchase_rooms_requirement():
