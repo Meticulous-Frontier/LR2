@@ -200,7 +200,7 @@ label scene_SB_doggy_anal_2(the_person, the_location, the_object, the_round):
                 elif the_person.get_opinion_score("anal sex") > 0:
                     "Despite having no leverage, [the_person.possessive_title] wriggles her ass against you as best as she can. Even with no room to move, her love for anal sex drives her to milk your cock"
                     "You lower your face down behind her head and whisper into her ear."
-                    mc.name "Mmm, is rear entry is how you like it, slut? Don't worry, this won't be the last time you feel my cock ravage your back door."
+                    mc.name "Mmm, so rear entry is how you like it, slut? Don't worry, this won't be the last time you feel my cock ravage your back door."
                     "You can see goosebumps all over [the_person.possessive_title]'s skin. You wonder how many times you can make her cum before you blow your load."
                     $ the_person.change_slut_temp(2)
                 elif the_person.sluttiness > 100:

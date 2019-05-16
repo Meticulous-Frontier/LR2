@@ -37,6 +37,7 @@ label mall_introduction_action_label:
         known_person.draw_person(position = "stand4", emotion = "happy", character_placement = character_center_flipped)
         stranger.draw_person(position = "stand3", emotion = "default", character_placement = character_right)
 
+    hide screen person_info_ui
     known_person.char "Oh, hello [known_person.mc_title], how nice to see you here."
     mc.name "Hello [known_person.title], nice to see you too."
 

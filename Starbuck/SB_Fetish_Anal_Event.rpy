@@ -711,7 +711,7 @@ label SB_lily_anal_dp_fetish_label(the_person):
     "Lily quickly speaks up."
     the_person.char "That would be great! Come one [the_person.mc_title]!"
     $ the_person.draw_person(position = "walking_away")
-    "[the_person.possessive_title] grabs your hand and you follow Starbuck to the backroom. It has a familiar smell of body fluids and sweat."
+    "[the_person.possessive_title] grabs your hand and you follow her to the backroom. It has a familiar smell of body fluids and sweat."
     $ the_person.draw_person(position = "stand4")
     "Come on [the_person.mc_title], I can't wait to feel you fuck me with this thing on..."
     "[the_person.possessive_title] quickly strips, eager to get started."
@@ -738,7 +738,7 @@ label SB_lily_anal_dp_fetish_label(the_person):
     the_person.char "Okay... Go slow... but I'm ready!"
     call sex_description(the_person, SB_doggy_anal_dildo_dp, make_floor(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBA60
     if the_person.arousal > 150:
-        "[the_person.possessive_title] is sweaty, heaving mess. You know she orgasmed multiple times from the intense sensations of the double penetration."
+        "[the_person.possessive_title] is a sweaty, heaving mess. You know she orgasmed multiple times from the intense sensations of the double penetration."
         "She looks back at you in awe."
     elif the_person.arousal > 100:
         "[the_person.possessive_title] is laying on the floor, exhausted from the intensity of the double penetration."
@@ -746,12 +746,12 @@ label SB_lily_anal_dp_fetish_label(the_person):
     the_person.char "[the_person.mc_title]... That felt amazing. I'm not sure though... are we going to able to keep this from mom? I don't think I can stay quiet enough when I'm getting fucked in both holes like that..."
     "You give her a reassuring smile."
     mc.name "Don't worry [the_person.title], we'll be careful."
-    the_person.char "Good... because lately I've just been craving you so bad. We don't have to always use the strap on but, god just thinking about you fucking my ass gets me so hot."
+    the_person.char "Good... because lately I've just been craving you so bad. We don't have to always use the strap on. But just thinking about you fucking my ass makes me so horny."
     $ SB_give_anal_role(the_person)
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ FETISH_ANAL_EVENT_INUSE = False
     #TODO come back and change other events involving lily to account for her anal fetish.
-    "It is pretty clear from the way she got off while you were fucking her and the way she was talking afterword, your sister has developed an anal fetish!"
+    "It is pretty clear from the way she got off while you were fucking her and the way she was talking afterwards, you're convinced [the_person.possessive_title] has developed an anal fetish!"
     $ mc.change_location(sex_store)
     "After you both clean up, you leave the back room of the sex shop."
     $ starbuck.draw_person(emotion = "happy")

@@ -236,7 +236,7 @@ label SB_fetish_mom_cum_label():
     show screen person_info_ui(the_person)
     "You look down and discover that [the_person.possessive_title] is between your legs. She has pulled your underwear down and is sucking you off."
     mc.name "[the_person.title]? What are you..."
-    "[the_person.possessive_title] inerrupts you."
+    "[the_person.possessive_title] interrupts you."
     the_person.char "Shhh, just lay back. I need your cum right now. I couldn't sleep, I was craving you so bad."
     "You lay back, [the_person.possessive_title] continues to suck you off."
     "Your mind is racing. You've been giving her your serums for a while now. Maybe she has developed a fetish for your cum?"
