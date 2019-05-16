@@ -20,9 +20,12 @@ init 3 python:
     biotech_actions.append(gene_modification)
 
     def clone_person_requirement():
-        return True
+        if not time_of_day == 4:
+            return True
+        else:
+            return "Too late."
 
-    clone_person = Action("Clone a person", clone_person_requirement, "clone_person",
+    clone_person = Action("Clone a person {image=gui/heart/Time_Advance.png}", clone_person_requirement, "clone_person",
         menu_tooltip = "Create a near identical clone of the targeted person")
     gene_modifications.append(clone_person)
 
@@ -33,13 +36,19 @@ init 3 python:
     gene_modifications.append(modify_person)
 
     def change_body_requirement():
-        return True
+        if hypothyroidism_serum_trait.researched and anorexia_serum_trait.researched:
+            return True
+        else:
+            return "Requires: [hypothyroidism_serum_trait.name] and [anorexia_serum_trait.name]"
     change_body = Action("Change body: [person.body_type]", change_body_requirement, "change_body",
         menu_tooltip = "Modify [person.title]'s body type.")
     body_modifications.append(change_body)
 
     def change_skin_requirement():
-        return True
+        if pigment_serum_trait.researched:
+            return True
+        else:
+            return "Requires: [pigment_serum_trait.name]"
     change_skin = Action("Change skin: [person.skin]", change_skin_requirement, "change_skin",
         menu_tooltip = "Modify [person.title]'s skin tone.")
     body_modifications.append(change_skin)
@@ -49,7 +58,10 @@ init 3 python:
         menu_tooltip = "Modify [person.title]'s face style.")
     body_modifications.append(change_face)
     def change_breasts_requirement():
-        return True
+        if breast_enhancement.researched and breast_reduction.researched:
+            return True
+        else:
+            return "Requires: [breast_enhancement.name] and [breast_reduction.name]"
     change_breasts = Action("Change breasts: [person.tits]", change_breasts_requirement, "change_breasts",
         menu_tooltip = "Modify [person.title]'s cup size.")
     body_modifications.append(change_breasts)
@@ -97,7 +109,7 @@ label clone_person():
         else:
             call cloning_process(person_choice)
 
-label cloning_process(person = the_person): # default to the_person when not passed as parameter   
+label cloning_process(person = the_person): # default to the_person when not passed as parameter
     $ person.draw_person(emotion = "default")
     while True:
         menu:
@@ -135,7 +147,7 @@ label cloning_process(person = the_person): # default to the_person when not pas
 
                 $ rd_division_basement.add_person(clone) #Create rooms for the clones to inhabit until a schedule is given (through being hired or player input)
 
-                "[clone.name] [clone.last_name] created..."
+                "[clone.name] [clone.last_name] created and is now awaiting you in [rd_division_basement.formalName]"
                 $ advance_time()
                 return
             "Back":
@@ -145,7 +157,7 @@ label modify_person():
     while True:
         $ tuple_list = known_people_in_the_game([mc]) + ["Back"]
         call screen person_choice(tuple_list, draw_hearts = True)
-        $ person_choice = _return        
+        $ person_choice = _return
 
         if person_choice == "Back":
             return # Where to go if you hit "Back".
