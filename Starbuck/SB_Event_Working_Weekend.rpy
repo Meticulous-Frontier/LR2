@@ -96,7 +96,7 @@ label SB_working_weekend_crisis_label():
                 "Your eyes wander down to [the_person.possessive_title]'s tits."
                 if the_person.outfit.tits_available():
                     if the_person.get_opinion_score("showing her tits") > 0:
-                        "You can see a blush in [the_person.possessive_title]'s cheeks. She likes to show off her [the_person.tit_size] tits!"
+                        "You can see a blush in [the_person.possessive_title]'s cheeks. She likes to show off her [the_person.tits] tits!"
                         $ the_person.discover_opinion("showing her tits")
                         $ the_person.change_slut_core(2)
                         $ the_person.change_slut_temp(5)

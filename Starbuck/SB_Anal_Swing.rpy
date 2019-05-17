@@ -117,7 +117,7 @@ label scene_SB_anal_swing_2(the_person, the_location, the_object, the_round):
 
         mc.name "Mmm, you tits are amazing."
         if the_person.get_opinion_score("showing her tits") > 0:
-            "You can see a blush in [the_person.possessive_title]'s cheeks. She likes to show off her [the_person.tit_size] tits!"
+            "You can see a blush in [the_person.possessive_title]'s cheeks. She likes to show off her [the_person.tits] tits!"
             $ the_person.discover_opinion("showing her tits")
             $ the_person.change_arousal(5)
     "You roll each of nipples between your thump and index fingers. [the_person.possessive_title] arches her back and moans."
