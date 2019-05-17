@@ -166,6 +166,7 @@ label SB_fetish_anal_staylate_event_label(the_person):
             "You say goodbye to her as she walks out your office door."
             $ FETISH_ANAL_EVENT_INUSE = False
             $ SB_CALCULATE_RANDOM_EVENT_RATE()
+            hide screen person_info_ui
             return
         "Fuck Her Ass\n{size=22}Requires Stamina{/size} (disabled)" if mc.current_stamina == 0:
             pass
@@ -193,7 +194,6 @@ label SB_fetish_anal_staylate_event_label(the_person):
                 the_person.char "God... that felt so fucking good..."
                 $ the_person.change_obedience(5)
                 $ the_person.change_happiness(5)
-
             else:
                 the_person.char "Okay... I guess we're done already?"
                 "[the_person.possessive_title] seems disappointed she didn't finish."
@@ -204,7 +204,6 @@ label SB_fetish_anal_staylate_event_label(the_person):
             "You say goodbye to her as she walks out your office door. She walks a bit funny, clearly uncomfortable after the spanking she received."
             $ FETISH_ANAL_EVENT_INUSE = False
             $ SB_CALCULATE_RANDOM_EVENT_RATE()
-            return
         "Fuck Her Ass\n{size=22}Requires Stamina{/size} (disabled)" if mc.current_stamina == 0:
             pass
         "Send her home":
@@ -217,8 +216,8 @@ label SB_fetish_anal_staylate_event_label(the_person):
             $ the_person.change_obedience(10)
             $ FETISH_ANAL_EVENT_INUSE = False
             $ SB_CALCULATE_RANDOM_EVENT_RATE()
-            hide screen person_info_ui
-            return
+
+    hide screen person_info_ui
     return
 
 init 2 python:
@@ -547,12 +546,8 @@ label SB_mom_anal_pay_label(the_person):
             the_person.char "Yes [the_person.mc_title]. You know it will be... take my ass, whenever you want. I'll be ready!"
             $ SB_mom_weekly_anal_action = Action("mom friday anal ", SB_mom_anal_pay_requirement, "SB_mom_anal_friday_label", the_person)
             $ mc.business.mandatory_crises_list.append(SB_mom_weekly_anal_action)
-            hide screen person_info_ui
-            return
-
         "Strip and ride me. -$1000 (disabled)" if mc.business.funds <1000:
             pass
-
         "Not this week.":
             mc.name "Sorry [the_person.title], but I'm tight on cash right now as well. Maybe next week, okay?"
             "[the_person.possessive_title] nods and turns back to her bills."
@@ -560,8 +555,12 @@ label SB_mom_anal_pay_label(the_person):
             $ SB_mom_weekly_pay_action = Action("mom anal pay", SB_mom_anal_pay_requirement, "SB_mom_anal_pay_label", the_person)
             $ mc.business.mandatory_crises_list.append(SB_mom_weekly_pay_action)
             $ the_person.review_outfit()
-            hide screen person_info_ui
-            pass
+
+    hide screen person_info_ui
+    $ the_person.reset_arousal()
+    $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
+    $ change_scene_display(mc.location)
+    $ renpy.scene("Active")
 
     return
 
@@ -642,21 +641,20 @@ label SB_mom_anal_friday_label(the_person):
             the_person.char "Yes [the_person.mc_title]. But don't feel like you HAVE to wait to take my ass. We can do it whenever you want. I'll be ready!"
             $ SB_mom_weekly_anal_action = Action("mom friday anal ", SB_mom_anal_pay_requirement, "SB_mom_anal_friday_label", the_person)
             $ mc.business.mandatory_crises_list.append(SB_mom_weekly_anal_action)
-            $ the_person.review_outfit()
-            hide screen person_info_ui
-            return
-
         "Strip and ride me. -$200 (disabled)" if mc.business.funds <100:
             pass
-
         "Not this week.":
             mc.name "Sorry [the_person.mc_title], work was hell and I'm exhausted. Maybe next week, okay?"
             "[the_person.possessive_title] frowns."
             the_person.char "I understand sweetheart. Now don't let me keep you, I'm sure you were up to something important."
             $ SB_mom_weekly_anal_action = Action("mom friday anal ", SB_mom_anal_pay_requirement, "SB_mom_anal_friday_label", the_person)
             $ mc.business.mandatory_crises_list.append(SB_mom_weekly_anal_action)
-            hide screen person_info_ui
-            pass
+
+    hide screen person_info_ui
+    $ the_person.reset_arousal()
+    $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
+    $ change_scene_display(mc.location)
+    $ renpy.scene("Active")
 
     return
 

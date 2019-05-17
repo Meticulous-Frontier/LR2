@@ -89,7 +89,7 @@ label scene_SB_anal_standing_1(the_person, the_location, the_object, the_round):
     else:
         "Fucking her hard, [the_person.possessive_title] moans, matching each hip movement of yours with movement of her own."
         the_person.char "Oh god, you fuck me so good, I can barely keep up!"
-        "[the_person.possessive_title] reaches back with one hand and pulls an ass cheek back, giving you a great view of her booty hole stretched wide to accomodate you."
+        "[the_person.possessive_title] reaches back with one hand and pulls her ass cheek back, giving you a great view of her booty hole stretched wide to accomodate you."
         "Buried deep inside, you stir your hips in a circular motion. Her rectum quivers in response."
     menu:
         "Kneed her ass":

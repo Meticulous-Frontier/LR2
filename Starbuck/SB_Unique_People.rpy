@@ -852,9 +852,6 @@ label starbuck_sex_store_promo_one_label(the_person):
             the_person.char "If this advertisement works, we'll have to make more right?"
             mc.name "Definitely. Alright, I'll go ahead and get some advertisements done, and we'll see if we can't get better foot traffic in here."
             "You say goodbye to [the_person.possessive_title] and head out. With pictures like these, you are sure the business here will increase."
-            $ the_person.review_outfit()
-            hide screen person_info_ui
-            return
         "Want a real dick? \nRequires: Stamina (disabled)" if mc.current_stamina == 0:
             pass
         "Give her some privacy":
@@ -863,8 +860,12 @@ label starbuck_sex_store_promo_one_label(the_person):
             "You say goodbye to [the_person.possessive_title] and head out. With pictures like these, you are sure the business here will increase."
             $ the_person.review_outfit()
             $ the_person.shop_investment_rate = 2.0
-            hide screen person_info_ui
-            return
+
+    hide screen person_info_ui
+    $ the_person.reset_arousal()
+    $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
+    $ change_scene_display(mc.location)
+    $ renpy.scene("Active")            
     return #Toy modeling, ends in blowjob
 
 #SBS80
@@ -1008,9 +1009,6 @@ label starbuck_sex_store_promo_two_label(the_person):
             $ the_person.reset_arousal()
             "You chat with her for a few minutes about the details of setting up a review site, but eventually its time to say goodbye."
             the_person.char "Thanks again for everything [the_person.mc_title]. Don't be a stranger now!"
-            $ the_person.review_outfit()
-            hide screen person_info_ui
-            return
         "Fuck Her \nRequires: Stamina (disabled)" if mc.current_stamina == 0:
             pass
         "Refuse":  #Lol really? I guess some people may not have the stamina.
@@ -1023,12 +1021,12 @@ label starbuck_sex_store_promo_two_label(the_person):
             $ the_person.change_happiness(-5)
             $ the_person.change_slut_core(5)
             $ the_person.change_slut_temp(5)
-            $ the_person.reset_arousal()
-            $ the_person.review_outfit()
-            hide screen person_info_ui
-            return
 
-
+    hide screen person_info_ui
+    $ the_person.reset_arousal()
+    $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
+    $ change_scene_display(mc.location)
+    $ renpy.scene("Active")
     return #Masturbation, ends in sex
 
 #SBS90
@@ -1198,10 +1196,13 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     $ the_person.draw_person(position = "walking_away")
     the_person.char "I'm gonna go get cleaned up now... Get to work on that video!"
     $ the_person.shop_investment_rate = 4.0
-    $ the_person.review_outfit()
     hide screen person_info_ui
+    $ the_person.reset_arousal()
+    $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
     "You grab the camera, and start looking at the footage. The first thing you do is copy it on a thumb drive, for you to enjoy at a later date."
     "You head out to start work on the advertisement video."
+    $ change_scene_display(mc.location)
+    $ renpy.scene("Active")
     return
 
 
@@ -1507,14 +1508,12 @@ label starbuck_intro():
         "[starbuck.name] considers for a moment."
         starbuck.char "Well, I really want the stock to be good, quality product. I'd say I could probably get everything setup for a basic shop for... say $1000?"
         "That seems pretty reasonable. You decide to consider investing. You should talk to Starbuck again if you decide to invest in the shop!"
-        return
     elif (starbuck.shop_progress_stage) == 0:
         starbuck.char "Hello there sir! Welcome to Starbuck's Sex Shop! I'm Starbuck!"
         "You introduce yourself. [starbuck.name] begins talking to you excitedly about the items in the shop."
         starbuck.char "We've only just opened recently, so stock is fairly limited, but please take a look around!"
         "You smile at [starbuck.name] and promise to take a look."
         starbuck.char "Sounds great, [the_person.mc_title]! I'll be here if you have any questions!"
-        hide screen person_info_ui
     elif (starbuck.shop_progress_stage) == 1:
         starbuck.char "Hey there, [the_person.mc_title]! Its good to see you!"
         if the_person.sluttiness > 60:
@@ -1522,7 +1521,6 @@ label starbuck_intro():
             the_person.char "I was just thinking about you. Anything I can help you with?"
         else:
             the_person.char "Is there anything I can help you with?"
-        hide screen person_info_ui
     elif (starbuck.shop_progress_stage) == 2:
         starbuck.char "[the_person.mc_title]! I'm so glad to see you! This place is starting to do really well, thanks to you!"
         if the_person.sluttiness > 60:
@@ -1530,7 +1528,6 @@ label starbuck_intro():
             the_person.char "I don't think I could ever repay you, is there anything I can help you with?"
         else:
             the_person.char "Is there anything I can help you with?"
-        hide screen person_info_ui
     elif (starbuck.shop_progress_stage) == 3:
         starbuck.char "[the_person.mc_title]! Thanks for checking in! Thing are going amazing here, all thanks to you and your generous investments!"
         if the_person.sluttiness > 60:
@@ -1538,7 +1535,7 @@ label starbuck_intro():
             the_person.char "I'll be forever in your debt. Is there anything I can help you with?"
         else:
             the_person.char "Is there anything I can help you with?"
-        hide screen person_info_ui
+    hide screen person_info_ui
     return
 ####Starbuck Unique Personality####
 

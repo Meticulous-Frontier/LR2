@@ -63,7 +63,7 @@ label scene_SB_doggy_standing_1(the_person, the_location, the_object, the_round)
     else:
         "Fucking her hard, [the_person.possessive_title] moans, matching each hip movement of yours with movement of her own."
         the_person.char "Oh god, you fuck me so good, I can barely keep up!"
-        "[the_person.possessive_title] reaches back with one hand and pulls an ass cheek back, giving you a great view of her pussy stretched wide to accomodate you."
+        "[the_person.possessive_title] reaches back with one hand and pulls her ass cheek back, giving you a great view of her pussy stretched wide to accomodate you."
         "Buried deep inside, you give her ass a smack. Her pussy trembles and caresses you in response."
     menu:
         "Spank her":

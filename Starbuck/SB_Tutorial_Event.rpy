@@ -1,7 +1,10 @@
 label SB_tutorial_event():
+    python:
+        unknown, known = get_people_with_status()
+        if len(known) == 0:
+            renpy.return_statement()
 
-    $ other_people = [person for person in mc.location.people]
-    $ the_person = get_random_from_list(other_people)
+    $ the_person = get_random_from_list(known)
 
     $ the_person.draw_person()
     show screen person_info_ui(the_person)
@@ -22,12 +25,16 @@ label SB_tutorial_event():
             the_person.char "It was great seeing you! Take care [the_person.mc_title]!"
             $ the_person.change_happiness(5)
 
+    hide screen person_info_ui
+    $ change_scene_display(mc.location)
+    $ renpy.scene("Active")    
     return
 
 init 2 python:
     def SB_tutorial_event_requirement():
-        if mc.location == mall:
-            if (len(mc.location.people) > 0):
+        if mc.location in [mall, mall_salon, gym, home_store, clothing_store, sex_store]:
+            unknown, known = get_people_with_status()
+            if (len(known) > 0):
                 return True
         return False
 

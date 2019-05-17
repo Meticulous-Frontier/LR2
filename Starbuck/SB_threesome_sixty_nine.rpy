@@ -278,7 +278,7 @@ label orgasm_SB_threesome_sixty_nine(the_person_1, the_person_2, the_location, t
 
     elif current_girl == 2:
         if the_person_1.arousal > 100 and the_person_2.arousal > 100:  #Both girls orgasm#
-            "You can feel [the_person_1.title] trembling as you finger her. [the_person_2.title]moans around your cock as [the_person_1.title] licks her in just the right spot."
+            "You can feel [the_person_1.title] trembling as you finger her. [the_person_2.title] moans around your cock as [the_person_1.title] licks her in just the right spot."
             $ the_person_2.call_dialogue("climax_responses")
             "[the_person_1.title] is moaning loudly but it all gets muffled as [the_person_2.title] grinds against her face roughly."
             "They both orgasm. [the_person_1.title]'s cunt quivers around yourfingers as she cums, while [the_person_2.title] moans and closes her eyes."

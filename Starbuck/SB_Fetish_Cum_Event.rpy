@@ -131,19 +131,20 @@ label SB_fetish_cum_label(the_person):
             "[the_person.possessive_title] runs her hand through her hair. She licks her lips and smiles at you."
             the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
             "You wave goodbye to [the_person.possessive_title] and finish eating your lunch."
-            hide screen person_info_ui
             $ SB_CALCULATE_RANDOM_EVENT_RATE()
             $ FETISH_CUM_EVENT_INUSE = False
-            $ the_person.reset_arousal()
         "Help Yourself\n{size=22}Requires Stamina{/size} (disabled)" if mc.current_stamina == 0:
             pass
         "Refuse":
             the_person.char "I'm sorry to hear that..." #TODO finish this
             $ SB_CALCULATE_RANDOM_EVENT_RATE()
             $ FETISH_CUM_EVENT_INUSE = False
-            hide screen person_info_ui
 
     hide screen person_info_ui
+    $ the_person.reset_arousal()
+    $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
+    $ change_scene_display(mc.location)
+    $ renpy.scene("Active")
     return
 
 init 2 python:
@@ -307,13 +308,11 @@ label SB_fetish_mom_cum_label():
     "[the_person.possessive_title] leave your room. Wow! What a night!"
     "You grab some clothes and head for the shower."
 
-    $ the_person.reset_arousal()
     hide screen person_info_ui
-
-
-
-
-
+    $ the_person.reset_arousal()
+    $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
+    $ change_scene_display(mc.location)
+    $ renpy.scene("Active")
     return
 
 
@@ -390,14 +389,16 @@ label SB_fetish_lily_cum_label():
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ FETISH_CUM_EVENT_INUSE = False
     "[the_person.possessive_title] gets out. You finish up with your shower, balls empty and ready for the day!"
-    $ the_person.reset_arousal()
     hide screen person_info_ui
+    $ the_person.reset_arousal()
+    $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
+    $ change_scene_display(mc.location)
+    $ renpy.scene("Active")
     python:
         for morn_event in morning_crisis_list:
             if morn_event[0].name == "Sister Cum Fetish":
-                renpy.say("","DEBUG: Succesfully located shower, attempting removal and replacement.")
+                #renpy.say("","DEBUG: Succesfully located shower, attempting removal and replacement.")
                 morning_crisis_list.remove(morn_event)
-
     return
 
 #SBC5
@@ -407,11 +408,11 @@ label SB_fetish_shower_cum_label():
 
         if SB_get_fetish(mom) == "Internal Cum Fetish":
             meets_fetish_list.append(mom)
-        elif SB_get_fetish(person) == "External Cum Fetish":
+        elif SB_get_fetish(mom) == "External Cum Fetish":
             meets_fetish_list.append(mom)
-        if SB_get_fetish(mom) == "Internal Cum Fetish":
+        if SB_get_fetish(lily) == "Internal Cum Fetish":
             meets_fetish_list.append(lily)
-        elif SB_get_fetish(person) == "External Cum Fetish":
+        elif SB_get_fetish(lily) == "External Cum Fetish":
             meets_fetish_list.append(lily)
 
     $ the_person = get_random_from_list(meets_fetish_list)
@@ -437,5 +438,11 @@ label SB_fetish_shower_cum_label():
     $ the_person.draw_person(position = "stand4")
     the_person.char "Okay... I'm going to hop out and let your finish showering now. Please give me more cum soon!"
     "[the_person.possessive_title] gets out. You finish up with your shower, balls empty and ready for the day!"
-    $ the_person.reset_arousal()
+
     hide screen person_info_ui
+    $ the_person.reset_arousal()
+    $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
+    $ change_scene_display(mc.location)
+    $ renpy.scene("Active")
+
+    return

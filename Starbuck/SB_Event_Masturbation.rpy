@@ -305,6 +305,8 @@ label SB_caught_masturbating_crisis_label():
              $ the_person.review_outfit()
         "Keep walking":
             "You decide to give [the_person.possessive_title] some privacy. As quietly as you can, you close the door behind you and continue walking"
+
     hide screen person_info_ui
+    $ change_scene_display(mc.location)
     $ renpy.scene("Active")
     return
