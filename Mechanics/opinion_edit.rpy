@@ -96,7 +96,7 @@ label influence_opinion_input_label(person):
         elif change == 3: # large change
             "Speaker" "[person.name] [cur_score] [opinion], so she will put up some resistance."
         elif change == 4: # very large change
-            "Speaker" "[person.name] [cur_score)] [opinion], so she will put up a lot of resistance."
+            "Speaker" "[person.name] [cur_score] [opinion], so she will put up a lot of resistance."
 
     $ log_willpower(person)
 
