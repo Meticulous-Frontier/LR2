@@ -371,23 +371,17 @@ label SB_free_strip_scene(the_person):
         # High obedience characters are more willing to be told to strip down (althoug they still expect to be paid for it)
         # Low obedience characters will strip off less when told but can be left to run the show on their own and will remove some.
         python:
-            SB_local_counter = 0
             for item in the_person.outfit.get_unanchored():
                 test_outfit = the_person.outfit.get_copy()
                 test_outfit.remove_clothing(item)
-                new_willingness = the_person.sluttiness + (5*the_person.get_opinion_score("not wearing anything")) - test_outfit.slut_requirement
-                    #They're willing to strip it off.
-                price = 0 # Default value
 
                 display_string = "Strip " + item.name
 
-                menu_list.append([display_string, [item,price]])
-                SB_local_counter += 1
-
+                menu_list.append([display_string, [item, 0]])
 
             menu_list.append(["Just watch.","Watch"])
             menu_list.append(["Tell her to pose.","Pose"])
-            if SB_local_counter == 0:
+            if the_person.outfit.vagina_visible() and the_person.outfit.tits_visible():
                 menu_list.append(["Finish the show.","Finish"])
 
         $ strip_choice = renpy.display_menu(menu_list,True,"Choice")

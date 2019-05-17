@@ -18,10 +18,10 @@ label intro_SB_anal_cowgirl(the_person, the_location, the_object, the_round):
     the_person.char "Lie down for me, I want to be on top."
     "You lie down on the [the_object.name] and undo your pants. [the_person.possessive_title] swings a leg over your body and straddles you."
     the_person.char "I'm gonna put it in my ass. Lets get you lubed up first though..."
-    if the_person.outfit.vagina_visible:
+    if the_person.outfit.vagina_visible():
         "She leans back and grinds herself against you. The shaft of your cock rubs against the lips of her pussy."
     else:
-        $ blocking_item = the_person.outift.get_visible_lower()[0]
+        $ blocking_item = the_person.outift.get_lower_visible()[0]
         "She leans back and grinds herself against you. Underneath her [blocking_item.name] you can feel the lips of her pussy sliding along the length of your shaft."
     "She grinds up against you for several seconds, until your cock glides pleasingly along her wet slit."
     the_person.char "Ready?"
@@ -68,7 +68,7 @@ label scene_SB_anal_cowgirl_2(the_person, the_location, the_object, the_round):
             "[the_person.possessive_title] reaches down and grabs your hands. She brings them up to her tits and plants them there."
             "She moans and grinds your hands into her breasts, then puts her hands on your chest and focuses on fucking you."
         else:
-            $ the_clothing = the_person.outfit.get_visible_upper[0]
+            $ the_clothing = the_person.outfit.get_upper_visible()[0]
             "Her large tits are barely contained by her [the_clothing.name]. You watch them bounce around as she fucks you vigorously."
             menu:
                 "Pull her [the_clothing.name] off.":
@@ -91,13 +91,13 @@ label scene_SB_anal_cowgirl_2(the_person, the_location, the_object, the_round):
 
 
     else:
-        if the_person.outfit.tits_visible:
+        if the_person.outfit.tits_visible():
             "She reaches up and grabs onto one of her own small tits, squeezing it while she rides you."
             the_person.char "Ah!"
             "You decide to get in on the action. You reach up and grab her other breast."
             "She moans as you rub and tweak her breasts. She puts her hands on your chest and focuses on fucking you."
         else:
-            $ the_clothing = the_person.outfit.get_visible_upper[0]
+            $ the_clothing = the_person.outfit.get_upper_visible()[0]
             "She reaches up and grabs onto one of her small tits through her [the_clothing.name]. She kneeds it through the fabric and moans loudly while she rides you."
             the_person.char "Ah!"
             menu:
