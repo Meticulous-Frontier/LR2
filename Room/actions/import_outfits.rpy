@@ -8,7 +8,7 @@ init -2 python: # Definitions
         wardrobe = wardrobe
         file_path = os.path.abspath(os.path.join(config.basedir, "game"))
         file_path = os.path.join(file_path,"wardrobes")
-        file_name = os.path.join(file_path, xml_filename + ".xml")
+        file_name = os.path.join(file_path, xml_filename)
 
         if not os.path.isfile(file_name):
             return Wardrobe("xml_filename") #If there is no wardrobe present we return an empty wardrobe with the name of our file.
@@ -71,7 +71,7 @@ label give_wardrobe_label():
     while True:
         $ tuple_list = known_people_in_the_game([mc]) + ["Back"]
         call screen person_choice(tuple_list, draw_hearts = True)
-        $ person_choice = _return        
+        $ person_choice = _return
 
         if person_choice == "Back":
             return # Where to go if you hit "Back".
