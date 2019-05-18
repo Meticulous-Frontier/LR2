@@ -12,6 +12,9 @@
 #
 ################################################################################################
 
+init -1 python:
+    one_on_one_weight = 5
+
 init 2 python:
     # increases affection for trained job (if not maxed)
     def increase_job_affection(person, job_description):
@@ -31,7 +34,7 @@ init 2 python:
 
     one_on_one_action = ActionMod("One on One Training", one_on_one_training_requirement, "SB_one_on_one_label",
         menu_tooltip = "You give an employee on the job training.", category = "Business")
-    crisis_list.append([one_on_one_action, one_on_one_training_requirement])
+    crisis_list.append([one_on_one_action, one_on_one_weight])
 
 label SB_one_on_one_label():
     python:
