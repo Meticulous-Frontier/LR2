@@ -45,7 +45,7 @@ label town_walk_crisis_action_label:
         "[the_person.possessive_title] strips off her [strip_choice.name] and tosses it to the side.", 
         "[the_person.possessive_title] removes her [strip_choice.name] and drops it to the floor.", 
         "[the_person.possessive_title] quickly slides off her [strip_choice.name] and leaves it on the ground."
-        ])
+        ], temp_sluttiness_increase = 20)
    
     if the_person.outfit.vagina_available():
         "You see that [the_person.possessive_title] also studies her pussy."
