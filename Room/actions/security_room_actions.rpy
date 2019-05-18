@@ -116,8 +116,11 @@ label cctv_label():
 
 
 label m_division_observation_label():
-    $ randint = renpy.random.randint(1, 5)
     "[m_division.formalName]"
+    if len(m_division.people) < 1:
+        "CCTV" "No one is around and nothing of interested seems to be going on."
+
+    $ randint = renpy.random.randint(1, 5)
 
     if randint == 1:
         "Var 1"
@@ -136,18 +139,28 @@ label m_division_observation_label():
 
 label p_division_observation_label():
     "[p_division.formalName]"
+    if len(m_division.people) < 1:
+        "CCTV" "No one is around and nothing of interested seems to be going on."
     return
 
 label rd_division_observation_label():
     "[rd_division.formalName]"
+    if len(m_division.people) < 1:
+        "CCTV" "No one is around and nothing of interested seems to be going on."
+
     return
 
 label s_division_observation_label():
     "Supply Division"
+    if len(m_division.people) < 1:
+        "CCTV" "No one is around and nothing of interested seems to be going on."
+
     return
 
 label office_observation_label():
     "[office.formalName]"
+    if len(m_division.people) < 1:
+        "CCTV" "No one is around and nothing of interested seems to be going on."
     return
 
 label investigation_employee_label():
@@ -155,7 +168,7 @@ label investigation_employee_label():
     while True:
         $ tuple_list = known_people_in_the_game([mc]) + ["Back"]
         call screen person_choice(tuple_list, draw_hearts = True)
-        $ person_choice = _return        
+        $ person_choice = _return
 
         if person_choice == "Back":
             return # Where to go if you hit "Back".
