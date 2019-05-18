@@ -2,13 +2,13 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
     modal True
     default catagory_selected = "Hair Style"
 
-    default hair_style_colour_palette = [ 
-        ["blond", [0.84,0.75,0.47,1]], 
+    default hair_style_colour_palette = [
+        ["blond", [0.84,0.75,0.47,1]],
         ["brown", [0.73,0.43,0.24,1]],
         ["black", [0.1,0.09,0.08,1]],
         ["red", [0.3,0.05,0.05,1]],
         ["hot pink", [1,0.5,0.8,1]],
-        ["sky blue", [0.4,0.5,0.9,1]], 
+        ["sky blue", [0.4,0.5,0.9,1]],
         ["alt blond", [0.882, 0.733, 0.580,1]],
         ["light grey", [0.866, 0.835, 0.862,1]],
         ["ash brown", [0.590, 0.473, 0.379,1]],
@@ -26,7 +26,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
         ]
 
     default valid_catagories = ["Hair Style"] #Holds the valid list of catagories strings to be shown at the top.
-   
+
     $ catagories_mapping = {
         "Hair Style": [hair_styles]
     }
@@ -104,7 +104,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                             xfill True
                                             sensitive True
                                             action [
-                                                SetScreenVariable("selected_colour", "colour"), 
+                                                SetScreenVariable("selected_colour", "colour"),
                                                 SetScreenVariable("selected_hair_style", hair_style_item),
                                                 SetField(hair_style_item, "colour", [current_r, current_g, current_b, current_a]),
                                                 SetField(person, "hair_style", hair_style_item),
@@ -147,9 +147,9 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                         sensitive True
                                         xoffset 20
                                         action [
-                                            SetField(selected_hair_style, "colour", [current_r,current_g,current_b,current_a]), 
+                                            SetField(selected_hair_style, "colour", [current_r,current_g,current_b,current_a]),
                                             SetField(person, "hair_colour", selected_hair_colour),
-                                            SetField(person, "hair_style", selected_hair_style), 
+                                            SetField(person, "hair_style", selected_hair_style),
                                             Function(person.draw_person)
                                         ]
 
@@ -251,10 +251,13 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                                     sensitive True
                                                     action [
                                                         SetScreenVariable("selected_hair_colour", hair_colour[0]),
-                                                        SetScreenVariable("current_r", hair_colour[1][0]), SetScreenVariable("current_g", hair_colour[1][1]), SetScreenVariable("current_b", hair_colour[1][2]), SetScreenVariable("current_a", hair_colour[1][3]),
-                                                        SetField(selected_hair_style, "colour", [hair_colour[1][0], hair_colour[1][1], hair_colour[1][2], hair_colour[1][3]]), 
+                                                        SetScreenVariable("current_r", hair_colour[1][0]),
+                                                        SetScreenVariable("current_g", hair_colour[1][1]),
+                                                        SetScreenVariable("current_b", hair_colour[1][2]),
+                                                        SetScreenVariable("current_a", hair_colour[1][3]),
+                                                        SetField(selected_hair_style, "colour", [hair_colour[1][0], hair_colour[1][1], hair_colour[1][2], hair_colour[1][3]]),
                                                         SetField(person, "hair_colour", hair_colour[0]),
-                                                        SetField(person, "hair_style", selected_hair_style), 
+                                                        SetField(person, "hair_style", selected_hair_style),
                                                         Function(person.draw_person)
                                                     ]
                                                     # We use a fixed pallette of hair colours
