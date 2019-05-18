@@ -127,7 +127,7 @@ label coffee_break_food_delivery_label(person_one, person_two, person_three):
         winner_one.char "No I didn't. And you know the rules!"
         $ loser.draw_person(emotion = "angry")
         loser.char "Fine, I'll do it but only my top and if I get it a third time in a row I swear..."
-        $ loser.strip_outfit_to_max_sluttiness(exclude_lower = True)
+        $ loser.strip_outfit_to_max_sluttiness(exclude_lower = True, temp_sluttiness_increase = 20)
         "[loser.possessive_title] sheepishly walks down the lobby trying to cover her breasts."
         $ loser.draw_person(position = 'walking_away')
         "The other girls stand back and watch, giggling amongst themselves."
