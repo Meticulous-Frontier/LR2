@@ -49,7 +49,7 @@ init 1 python:
         #global starbuck_role
         global starbuck
         starbuck = Sex_Shop_Owner( name = "Starbuck", last_name = "Thrace", age = 32, body_type = "curvy_body", tits="E",  height = 0.95,  body_images = white_skin, expression_images = Expression("Starbuck\'s Expression Set", "white", "Face_4"), hair_colour="blond", hair_style = messy_short_hair.get_copy(), skin="white" , \
-            eyes = "brown", job = "Sex Shop Owner", wardrobe = starbuck_wardrobe, personality = starbuck_personality, stat_list = [3,4,3],  skill_list = [1,1,4,2,1],  sluttiness = 42,  obedience = -22, suggest = 0, sex_list = [3,3,4,4], love = 0, happiness = 119, \
+            eyes = "brown", job = "Sex Shop Owner", wardrobe = starbuck_wardrobe, personality = starbuck_personality, stat_list = [3,4,3],  skill_list = [1,1,4,2,1],  sluttiness = 42,  obedience = -22, suggest = 0, sex_list = [3,3,4,4], love = 0, happiness = 100, \
             home = start_home, font = get_random_font(), work = None, name_color = "#ff2c2c", dialogue_color = "#ff2c2c" , face_style = "Face_4", special_role = None)
 
 #def __init__(self,name,last_name,age,body_type,tits,height,body_images,expression_images,hair_colour,hair_style,skin,eyes,job,wardrobe,personality,stat_list,skill_list,
