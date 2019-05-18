@@ -74,7 +74,7 @@ label train_in_gym(person):
 
     hide screen person_info_ui
     $ person.reset_arousal()
-    $ person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
+    $ person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)
     $ renpy.scene("Active")
     return

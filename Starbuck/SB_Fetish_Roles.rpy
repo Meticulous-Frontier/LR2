@@ -210,7 +210,7 @@ label SB_fetish_vaginal_mom_kitchen_label(the_person):
         "[the_person.possessive_title] remains silent. She knows that even while preparing dinner, you may come use her for your pleasure at any time."
 
     $ the_person.reset_arousal()
-    $ the_person.review_outfit()
+    $ the_person.review_outfit(show_review_message = False)
     "As [the_person.possessive_title] continues dinner preparation, you take a quick look around. It doesn't look like Lily noticed anything happened between you and [the_person.possessive_title]."
     return
 
@@ -297,7 +297,7 @@ label SB_fetish_anal_mom_kitchen_label(the_person):
         "[the_person.possessive_title] remains silent. She knows that even while preparing dinner, you may come use her for your pleasure at any time."
 
     $ the_person.reset_arousal()
-    $ the_person.review_outfit()
+    $ the_person.review_outfit(show_review_message = False)
     "As [the_person.possessive_title] continues dinner preparation, you take a quick look around. It doesn't look like Lily noticed anything happened between you and [the_person.possessive_title]."
     return
 
@@ -333,5 +333,5 @@ label SB_lily_anal_in_room_label(the_person):
     $ the_person.reset_arousal()
     the_person.char "Yes... Thanks [the_person.mc_title]... Don't be a stranger now!"
     "[the_person.possessive_title] wiggles her ass back and forth a bit, still lying face down on her bed. You politely excuse yourself."
-    $ the_person.review_outfit()
+    $ the_person.review_outfit(show_review_message = False)
     return

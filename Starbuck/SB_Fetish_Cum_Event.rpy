@@ -142,7 +142,7 @@ label SB_fetish_cum_label(the_person):
 
     hide screen person_info_ui
     $ the_person.reset_arousal()
-    $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)
     $ renpy.scene("Active")
     return
@@ -310,7 +310,7 @@ label SB_fetish_mom_cum_label():
 
     hide screen person_info_ui
     $ the_person.reset_arousal()
-    $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)
     $ renpy.scene("Active")
     return
@@ -391,7 +391,7 @@ label SB_fetish_lily_cum_label():
     "[the_person.possessive_title] gets out. You finish up with your shower, balls empty and ready for the day!"
     hide screen person_info_ui
     $ the_person.reset_arousal()
-    $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)
     $ renpy.scene("Active")
     python:
@@ -441,7 +441,7 @@ label SB_fetish_shower_cum_label():
 
     hide screen person_info_ui
     $ the_person.reset_arousal()
-    $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)
     $ renpy.scene("Active")
 

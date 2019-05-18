@@ -225,6 +225,6 @@ label sister_phone_crisis_action_label:
             the_person.char "Hi [the_person.mc_title], I'm just checking in to make sure you're doing okay."
             "It's so sweet of her to think of you."
 
-    $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     $renpy.scene("Active")
     return

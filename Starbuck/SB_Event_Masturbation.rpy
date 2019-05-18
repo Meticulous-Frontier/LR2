@@ -302,7 +302,7 @@ label SB_caught_masturbating_crisis_label():
                                "You finish up your walk and return back to your previous work"
 
              $ the_person.reset_arousal()
-             $ the_person.review_outfit()
+             $ the_person.review_outfit(show_review_message = False)
         "Keep walking":
             "You decide to give [the_person.possessive_title] some privacy. As quietly as you can, you close the door behind you and continue walking"
 

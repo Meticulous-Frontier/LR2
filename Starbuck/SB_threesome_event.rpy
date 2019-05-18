@@ -84,10 +84,10 @@ label SB_fetish_vaginal_family_threesome_label():
     hide screen SB_two_person_info_ui
 
     $ the_person_one.reset_arousal()
-    $ the_person_one.review_outfit() #Make sure to reset her outfit so she is dressed properly.
+    $ the_person_one.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
 
     $ the_person_two.reset_arousal()
-    $ the_person_two.review_outfit() #Make sure to reset her outfit so she is dressed properly.
+    $ the_person_two.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
 
     $ change_scene_display(mc.location)
     $ renpy.scene("Active")

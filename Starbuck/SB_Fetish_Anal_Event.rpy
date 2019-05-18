@@ -554,11 +554,11 @@ label SB_mom_anal_pay_label(the_person):
             the_person.char "I understand sweetheart. Now don't let me keep you, I'm sure you were up to something important."
             $ SB_mom_weekly_pay_action = Action("mom anal pay", SB_mom_anal_pay_requirement, "SB_mom_anal_pay_label", the_person)
             $ mc.business.mandatory_crises_list.append(SB_mom_weekly_pay_action)
-            $ the_person.review_outfit()
+            $ the_person.review_outfit(show_review_message = False)
 
     hide screen person_info_ui
     $ the_person.reset_arousal()
-    $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)
     $ renpy.scene("Active")
 
@@ -652,7 +652,7 @@ label SB_mom_anal_friday_label(the_person):
 
     hide screen person_info_ui
     $ the_person.reset_arousal()
-    $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)
     $ renpy.scene("Active")
 

@@ -142,7 +142,7 @@ label coffee_break_food_delivery_label(person_one, person_two, person_three):
         $ winner_two.change_happiness(2)
         "Although not professional, you can't help but smile and enjoy the situation."
 
-    $ loser.review_outfit()  # makes sure she's properly dressed again.
+    $ loser.review_outfit(show_review_message = False)  # makes sure she's properly dressed again.
     $ loser.clear_scene()
     $ winner_one.clear_scene()
     $ winner_two.clear_scene()

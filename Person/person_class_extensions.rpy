@@ -247,6 +247,18 @@ init -1:
 
         Person.clear_scene = clear_scene
 
+        def review_outfit_enhanced(self, show_review_message = True):
+            if self.should_wear_uniform():
+                self.wear_uniform()#Reset uniform
+#                self.call_uniform_review() #TODO: actually impliment this call, but only when her outfit significantly differs from the real uniform.
+
+            elif self.outfit.slut_requirement > self.sluttiness:
+                self.outfit = self.planned_outfit.get_copy()
+                if show_review_message:
+                    self.call_dialogue("clothing_review")
+
+        Person.review_outfit = review_outfit_enhanced
+
         def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, character_placement = None): #Draw the person, standing as default if they aren't standing in any other position.
             if position is None:
                 position = self.idle_pose

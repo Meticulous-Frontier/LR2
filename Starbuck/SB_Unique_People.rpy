@@ -299,7 +299,7 @@ label starbuck_vaginal_skillup_label(the_person):
                         else:
                             the_person.char "Thanks for the fuck!"
                             $ the_person.reset_arousal()
-                            $ the_person.review_outfit()
+                            $ the_person.review_outfit(show_review_message = False)
                             "You leave [the_person.possessive_title] to get cleaned up and get back to work."
 
                     "No thanks":
@@ -354,7 +354,7 @@ label starbuck_anal_skillup_label(the_person):
                         else:
                             the_person.char "Thanks for the fuck!"
                             $ the_person.reset_arousal()
-                            $ the_person.review_outfit()
+                            $ the_person.review_outfit(show_review_message = False)
                         "You leave [the_person.possessive_title] to get cleaned up and get back to work."
 
                     "No thanks":
@@ -409,7 +409,7 @@ label starbuck_oral_skillup_label(the_person):
                         else:
                             the_person.char "Thanks for the fuck!"
                             $ the_person.reset_arousal()
-                            $ the_person.review_outfit()
+                            $ the_person.review_outfit(show_review_message = False)
                         "You leave [the_person.possessive_title] to get cleaned up and get back to work."
 
                     "No thanks":
@@ -463,7 +463,7 @@ label starbuck_foreplay_skillup_label(the_person):
                         else:
                             the_person.char "Thanks for the fuck!"
                             $ the_person.reset_arousal()
-                            $ the_person.review_outfit()
+                            $ the_person.review_outfit(show_review_message = False)
                             "You leave [the_person.possessive_title] to get cleaned up and get back to work."
 
                     "No thanks":
@@ -858,12 +858,12 @@ label starbuck_sex_store_promo_one_label(the_person):
             "You decide to give her some time to yourself. You use her phone to forward all the pictures you took to your account."
             mc.name "Okay, those should be good. I'll go ahead and get some advertisements done, and we'll see if we can't get better traffic in here."
             "You say goodbye to [the_person.possessive_title] and head out. With pictures like these, you are sure the business here will increase."
-            $ the_person.review_outfit()
+            $ the_person.review_outfit(show_review_message = False)
             $ the_person.shop_investment_rate = 2.0
 
     hide screen person_info_ui
     $ the_person.reset_arousal()
-    $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)
     $ renpy.scene("Active")            
     return #Toy modeling, ends in blowjob
@@ -1024,7 +1024,7 @@ label starbuck_sex_store_promo_two_label(the_person):
 
     hide screen person_info_ui
     $ the_person.reset_arousal()
-    $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)
     $ renpy.scene("Active")
     return #Masturbation, ends in sex
@@ -1198,7 +1198,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     $ the_person.shop_investment_rate = 4.0
     hide screen person_info_ui
     $ the_person.reset_arousal()
-    $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     "You grab the camera, and start looking at the footage. The first thing you do is copy it on a thumb drive, for you to enjoy at a later date."
     "You head out to start work on the advertisement video."
     $ change_scene_display(mc.location)
@@ -1354,7 +1354,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     "[the_person.possessive_title] starts to walk away. She is walking a little funny."
     $ the_person.shop_investment_rate = 5.0
     $ the_person.reset_arousal()
-    $ the_person.review_outfit()
+    $ the_person.review_outfit(show_review_message = False)
     hide screen person_info_ui
     "You head out to start work on the advertisement video."
 
