@@ -1,18 +1,6 @@
 # Actions for the receptive role in suggestable_role.rpy
 
-init 2 python: # Define actions and requirements for the actual mod here.
-
-    def influence_opinion_requirement(person): # Shows only if person has been affected by suggestibility serum.
-        if person.suggestibility > 0:
-            return True
-        else:
-            return False
-
-    influence_opinion = Action("Influence an opinion", influence_opinion_requirement, "influence_opinion_start_label",
-        menu_tooltip = "Influence an opinion")
-
-
-label influence_opinion_start_label(person): # This is the setup phase that you have to get through.
+label influence_opinion_label(person): # This is the setup phase that you have to get through.
                                                  # We want to set up the setting and allow for choices to tackle them for better or worse results.
                                                  # Do mood checks, relation to player character, opinion checks, personality checks.
                                                  # calc_will() sets the baseline for the character after that use change_willpower(amount) to add and remove.
@@ -67,10 +55,8 @@ label influence_opinion_start_label(person): # This is the setup phase that you 
     else:
         "Speaker" "You are at a stalemate, try changing your approach"
 
-    python:
-        if suggestable_role in person.special_role:
-            person.special_role.remove(suggestable_role)
-            mc.log_event((person.title or person.name) + " is no longer suggestable.", "float_text_blue")
+    $ person.special_role.remove(suggestable_role)
+    $ mc.log_event((person.title or person.name) + " is no longer suggestable.", "float_text_blue")
 
-        renpy.scene("Active")
+    $ renpy.scene("Active")
     return

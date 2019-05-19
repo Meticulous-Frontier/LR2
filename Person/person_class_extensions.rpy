@@ -175,36 +175,39 @@ init -1:
 
         ## ADD OPINION EXTENSION
         ## Adds add_opinion function to Person class
-        def add_opinion(self, opinion, degree, discovered = None, sexy_opinion = False, add_to_log = True): # Gives a message stating the opinion has been changed.
-            opinion = opinion
-            degree = degree
-            discovered = discovered
-            sexy_opinion = sexy_opinion # False for normal, True for Sexy
+        def add_opinion(self, topic, degree, discovered = None, sexy_opinion = None, add_to_log = True): # Gives a message stating the opinion has been changed.
+            if topic in self.opinions:  # we passed None for discovered so use existing discovered info
+                if sexy_opinion is None:
+                    sexy_opinion = False
+                if discovered is None:
+                    discovered = self.opinions[topic][1]
 
-            if discovered is None and opinion in self.opinions[0]:  # we passed None for discovered so use existing discovered info
-                discovered = self.opinions[opinion][1]
-
-            if discovered is None and opinion in self.sexy_opinions[0]: # we passed None for discovered so use existing discovered info
-                discovered = self.sexy_opinions[opinion][1]
+            if topic in self.sexy_opinions: # we passed None for discovered so use existing discovered info
+                if sexy_opinion is None:
+                    sexy_opinion = True
+                if discovered is None:
+                    discovered = self.sexy_opinions[topic][1]
 
             if discovered is None: # we didn't find any discovery information for opinion, so it's new and we passed None, so default set to false
                 discovered = False
+            if sexy_opinion is None:
+                if topic in sexy_opinions_list: # We did't find the topic in existing opinions for person, check global list if it is sexy
+                    sexy_opinion = True               
+                sexy_opinion = False
 
-            if sexy_opinion == False:
-                self.opinions[opinion] = [degree, discovered]
+            if sexy_opinion:
+                self.sexy_opinions[topic] = [degree, discovered]
 
-                if opinion not in opinions_list: # Appends to the opinion pool #TODO: should we add this to the game pool here? Prevents person specific opinions...
-                    opinions_list.append(opinion)
-
-            elif sexy_opinion == True:
-                self.sexy_opinions[opinion] = [degree, discovered]
-
-                if opinion not in sexy_opinions_list: # Appends to the opinion pool #TODO: should we add this to the game pool here? Prevents person specific opinions...
-                    sexy_opinions_list.append(opinion)
+                if topic not in sexy_opinions_list: # Appends to the opinion pool #TODO: should we add this to the game pool here? Prevents person specific opinions...
+                    sexy_opinions_list.append(topic)
+            else:
+                self.opinions[topic] = [degree, discovered]
+                if topic not in opinions_list: # Appends to the opinion pool #TODO: should we add this to the game pool here? Prevents person specific opinions...
+                    opinions_list.append(topic)
 
             if add_to_log:
-                mc.log_event((self.title or self.name) + " " + opinion_score_to_string(degree) + " " + str(opinion), "float_text_green")
-            return
+                mc.log_event((self.title or self.name) + " " + opinion_score_to_string(degree) + " " + str(topic), "float_text_green")
+
         # Adds a function that edits and adds opinions. It also appends to the vanilla opinion pool.
         Person.add_opinion = add_opinion
 
