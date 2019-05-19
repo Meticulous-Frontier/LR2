@@ -205,9 +205,65 @@ init -1:
             if add_to_log:
                 mc.log_event((self.title or self.name) + " " + opinion_score_to_string(degree) + " " + str(opinion), "float_text_green")
             return
-
         # Adds a function that edits and adds opinions. It also appends to the vanilla opinion pool.
         Person.add_opinion = add_opinion
+
+        ## Increase the opinion on a specific topic (opinion)
+        def increase_opinion_score(self, topic, add_to_log = True):
+            sexy_opinion = False
+            if topic in sexy_opinions_list:
+                sexy_opinion = True
+            elif not topic in opinions_list:               
+                return # unknown opinion, so exit function
+            
+            score = 0
+            if sexy_opinion:
+                score = self.sexy_opinions[topic][0]
+            else:
+                score = self.opinions[topic][0]
+
+            if score < 2:
+                score += 1
+
+            if sexy_opinion:
+                self.sexy_opinions[topic][0] = score
+            else:
+                self.opinions[topic][0] = score
+
+            if add_to_log:
+                mc.log_event("Positive: " + (self.title or self.name) + " " + opinion_score_to_string(score) + " " + str(topic), "float_text_green")
+            return
+        # Add increase opininion function to person class
+        Person.increase_opinion_score = increase_opinion_score
+    
+        ## Decrease the opinion on a specific topic (opinion)
+        def decrease_opinion_score(self, topic, add_to_log = True):
+            sexy_opinion = False
+            if topic in sexy_opinions_list:
+                sexy_opinion = True
+            elif not topic in opinions_list:               
+                return # unknown opinion, so exit function
+            
+            score = 0
+            if sexy_opinion:
+                score = self.sexy_opinions[topic][0]
+            else:
+                score = self.opinions[topic][0]
+
+            if score > -2:
+                score -= 1
+
+            if sexy_opinion:
+                self.sexy_opinions[topic][0] = score
+            else:
+                self.opinions[topic][0] = score
+
+            if add_to_log:
+                mc.log_event("Negative: " + (self.title or self.name) + " " + opinion_score_to_string(score) + " " + str(topic), "float_text_green")
+            return
+        # Add decrease opininion function to person class
+        Person.decrease_opinion_score = decrease_opinion_score
+
 
         ## CHANGE WILLPOWER EXTENSION
         # changes the willpower of a person by set amount

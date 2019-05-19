@@ -17,6 +17,8 @@ label SB_fetish_vaginal_family_threesome_label():
     $ the_person_one = lily
     $ the_person_two = mom
 
+    $ mc.change_location(bedroom) #Make sure we're in our bedroom.
+
     "Before going to bed, you hear a knock on your door. You hear [the_person_one.possessive_title] from the other side of the door."
     show screen person_info_ui(the_person_one)
     the_person_one.char "Hey [the_person_one.mc_title], you still up? I was just wondering if I could come in for a bit?"
