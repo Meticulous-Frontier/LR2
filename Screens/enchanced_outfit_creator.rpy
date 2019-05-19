@@ -10,19 +10,24 @@
 #            self.outfits.append(new_outfit)
 #
 #    Wardrobe.add_outfit = add_outfit
-
+init -1 python:
+    def get_catagory(cloth, valid_catagories, catagories_mapping):
+        for catagory in valid_catagories:
+            if cloth in catagories_mapping[catagory][0]:
+                quick_catagory = catagory
 init 2:
-
     $ import_selection = False # Decides if the import viewport is showing
-
+    $ quick_catagory = None
     screen outfit_creator(starting_outfit, target_wardrobe = mc.designed_wardrobe): ##Pass a completely blank outfit instance for a new outfit, or an already existing instance to load an old one.\
+
         add "Paper_Background.png"
         modal True
         zorder 100
         default catagory_selected = "Panties"
         default mannequin = True
 
-
+        default compare_outfit = starting_outfit # Have a non- copy available for checks.
+        default colour_cloth = None # A variable to fetch the copy of selected_clothing.get_copy()
         if target_wardrobe == mc.designed_wardrobe: # Always make copies if MC Wardrobe
             default demo_outfit = starting_outfit.get_copy()
         else:
@@ -88,7 +93,7 @@ init 2:
                                 text_align(0.5,0.5)
                                 text_anchor(0.5,0.5)
                                 xysize (220, 60)
-                                action [SetScreenVariable("catagory_selected",catagory), SetScreenVariable("selected_clothing", None), SetScreenVariable("selected_colour", "colour"), If(selected_clothing is not None, Function(demo_outfit.remove_clothing, selected_clothing))] #Set the clothing to None when you change catagories to avoid breaking the clothing add function assignments
+                                action [SetScreenVariable("catagory_selected",catagory), SetScreenVariable("selected_clothing", None), SetScreenVariable("selected_colour", "colour"), If(selected_clothing is not None and not starting_outfit.has_clothing(selected_clothing), Function(demo_outfit.remove_clothing, selected_clothing))] #Set the clothing to None when you change catagories to avoid breaking the clothing add function assignments
                     vbox:
                         spacing 15
                         viewport:
@@ -110,21 +115,47 @@ init 2:
                                             textbutton cloth.name:
                                                 style "textbutton_style"
                                                 text_style "textbutton_text_style"
-                                                if valid_check(starting_outfit, cloth):
+
+
+
+
                                                     background "#1a45a1"
                                                     hover_background "#3a65c1"
+
+                                                if valid_check(starting_outfit, cloth) or selected_clothing in catagories_mapping[catagory_selected][0]:
+
+                                                    background "#1a45a1"
+                                                    hover_background "#3a65c1"
+
                                                 else:
                                                     background "#444444"
                                                     hover_background "#444444"
-                                                xfill True
-                                                sensitive valid_check(starting_outfit, cloth)
-                                                action SetScreenVariable("selected_clothing", cloth), SetScreenVariable("selected_colour", "colour")
-                                                hovered [
-                                                If(selected_clothing, [Function(demo_outfit.remove_clothing, selected_clothing), Function(apply_method, demo_outfit, cloth)],
-                                                Function(apply_method, demo_outfit, cloth)),
-                                                Show("mannequin", None, demo_outfit)]
-                                                unhovered [If(cloth is selected_clothing, NullAction(), Function(demo_outfit.remove_clothing, cloth)), If(selected_clothing is not None and not demo_outfit.has_clothing(selected_clothing), Function(apply_method, demo_outfit, selected_clothing))]
 
+                                                xfill True
+                                                #sensitive valid_check(starting_outfit, cloth)
+                                                action [
+                                                SensitiveIf(valid_check(starting_outfit, cloth) or selected_clothing in catagories_mapping[catagory_selected][0]),
+                                                SetScreenVariable("selected_clothing", cloth),
+                                                SetScreenVariable("selected_colour", "colour"),
+                                                ]
+
+                                                hovered [
+                                                SensitiveIf(valid_check(starting_outfit, cloth) or selected_clothing in catagories_mapping[catagory_selected][0]),
+                                                If(selected_clothing and selected_clothing in catagories_mapping[catagory_selected][0],
+                                                [Function(demo_outfit.remove_clothing, selected_clothing), # Remove then apply
+                                                Function(apply_method, demo_outfit, cloth)],
+                                                Function(apply_method, demo_outfit, cloth)), # Just remove
+                                                Show("mannequin", None, demo_outfit)
+                                                ]
+
+                                                unhovered [
+                                                SensitiveIf(valid_check(starting_outfit, cloth) or selected_clothing in catagories_mapping[catagory_selected][0]),
+                                                If(cloth is selected_clothing and selected_clothing in catagories_mapping[catagory_selected][0],
+                                                NullAction(),
+                                                Function(demo_outfit.remove_clothing, cloth)),
+                                                If(selected_clothing is not None and not demo_outfit.has_clothing(selected_clothing),
+                                                Function(apply_method, demo_outfit, selected_clothing))
+                                                ]
                         frame:
                             #THIS IS WHERE SELECTED ITEM OPTIONS ARE SHOWN
                             xysize (605, 480)
@@ -349,11 +380,16 @@ init 2:
 
                                     action [ # NOTE: We are no longer interested in the demo outfit so view the final outfit
                                     SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
-                                    Function(apply_method, starting_outfit, selected_clothing), Show("mannequin", None, starting_outfit)]
+                                    Function(apply_method, starting_outfit, selected_clothing)
+                                    Function(apply_method, starting_outfit, selected_clothing),
+                                    Show("mannequin", None, starting_outfit),
+                                    SetScreenVariable("selected_clothing", None)]
 
 
                                     hovered [
-                                    Function(apply_method, demo_outfit, selected_clothing)
+                                    Function(apply_method, demo_outfit, selected_clothing),
+                                    SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
+                                    Show("mannequin", None, demo_outfit)
                                     ]
 
 
@@ -383,13 +419,14 @@ init 2:
                                             background Color(rgb = (cloth.colour[0], cloth.colour[1], cloth.colour[2]))
                                             xysize (380, 40)
                                             action [ # NOTE: Left click makes more sense for selection than right clicking
-                                            SetScreenVariable("selected_clothing", cloth),
+                                            ToggleScreenVariable("selected_clothing", true_value = cloth, false_value = None),
                                             SetScreenVariable("current_r",cloth.colour[0]),
                                             SetScreenVariable("current_g",cloth.colour[1]),
                                             SetScreenVariable("current_b",cloth.colour[2]),
                                             SetScreenVariable("current_a",cloth.colour[3]),
-                                            Function(apply_method, demo_outfit, cloth.get_copy()),
-                                            Show("mannequin", None, starting_outfit) # Make sure it is showing the correct outfit
+                                        #    SetScreenVariable("demo_outfit", starting_outfit.get_copy()),
+                                        #    Function(apply_method, demo_outfit, cloth.get_copy()),
+                                            Show("mannequin", None, demo_outfit) # Make sure it is showing the correct outfit
 
                                             ]
                                             alternate [Function(starting_outfit.remove_clothing, cloth),Function(demo_outfit.remove_clothing, cloth)]
