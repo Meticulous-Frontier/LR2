@@ -48,16 +48,15 @@ label business_meeting_action_label:
 
     call business_meeting_end(the_person) from _call_business_meeting_end_1
 
-    $ improvement_chance = renpy.random.randint(0, 100)
-    if improvement_chance < 40:
-        $ hr_employee = get_random_from_list(mc.business.hr_team)
-        if hr_employee == the_person:
-            "You give [the_person.title] a call and tell her that she can implement the changes you discussed."
-        else:
-            "You make a call to [hr_employee.title] from HR to implement some of the changes you discussed with [the_person.title]"
-        $ mc.business.effectiveness_cap += 1
-        $ mc.log_event("Company Efficiency: " + str(mc.business.effectiveness_cap) + "%", "float_text_grey")
-        "The changes incease your business effectivity by one percent."
+    $ change = renpy.random.randint(1, 3)
+    $ hr_employee = get_random_from_list(mc.business.hr_team)
+    if hr_employee == the_person:
+        "You give [the_person.title] a call and tell her that she can implement the changes you discussed."
+    else:
+        "You make a call to [hr_employee.title] from HR to implement some of the changes you discussed with [the_person.title]"
+    $ mc.business.effectiveness_cap += change
+    #$ mc.log_event("Company Efficiency: " + str(mc.business.effectiveness_cap) + "%", "float_text_grey")
+    "The changes inceased your business effectivity by [change]%%."
 
     hide screen person_info_ui
     $ the_person.reset_arousal()
