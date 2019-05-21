@@ -52,8 +52,10 @@ label business_meeting_action_label:
     $ hr_employee = get_random_from_list(mc.business.hr_team)
     if hr_employee == the_person:
         "You give [the_person.title] a call and tell her that she can implement the changes you discussed."
+    elif hr_employee is None:
+        "You decide to implement the changes you discussed with [the_person.title]."
     else:
-        "You make a call to [hr_employee.title] from HR to implement some of the changes you discussed with [the_person.title]"
+        "You make a call to [hr_employee.title] from HR to implement some of the changes you discussed with [the_person.title]."
     $ mc.business.effectiveness_cap += change
     #$ mc.log_event("Company Efficiency: " + str(mc.business.effectiveness_cap) + "%", "float_text_grey")
     "The changes inceased your business effectivity by [change]%%."
