@@ -307,9 +307,11 @@ init -1:
         Person.clear_scene = clear_scene
 
         def review_outfit_enhanced(self, show_review_message = True):
+            self.outfit.remove_all_cum()
+
             if self.should_wear_uniform():
                 self.wear_uniform()#Reset uniform
-#                self.call_uniform_review() #TODO: actually impliment this call, but only when her outfit significantly differs from the real uniform.
+            # self.call_uniform_review() #TODO: actually impliment this call, but only when her outfit significantly differs from the real uniform.
 
             elif self.outfit.slut_requirement > self.sluttiness:
                 self.outfit = self.planned_outfit.get_copy()

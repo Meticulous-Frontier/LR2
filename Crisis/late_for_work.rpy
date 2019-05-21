@@ -39,7 +39,7 @@ label late_for_work_action_label:
 
         $ the_person.draw_person(position = 'walking_away')
         "[the_person.possessive_title] quietly rushes to her desk."
-    if the_person.sluttiness < 80:
+    elif the_person.sluttiness < 80:
         $ the_person.cum_on_tits()
         $ the_person.draw_person(position="stand3", emotion="default")
         the_person.char "I'm sorry [the_person.mc_title], my boyfriend needed some personal attention when he dropped me off at the office."
