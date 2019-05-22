@@ -28,4 +28,8 @@ init 1 python:
             person.age = renpy.random.randint(40, 55)
         elif person.age > 40: # not cougar but old, that sounds wrong, fix it
             person.age = renpy.random.randint(18, 40)
+
+        # A person could have dialog even if we don't know her
+        if person.possessive_title is None:
+            person.set_possessive_title("The unknown woman")
         return

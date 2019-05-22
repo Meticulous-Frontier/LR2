@@ -1,19 +1,23 @@
 # Overrides the default advance time function in the game
 # it adds a increased chance for a crisis to occur when more time passed without a crisis
 # it adds a way of preventing the same crisis popping up over and over, whilst others never get triggered by remembering a set of occured events
-
 init 5 python:
     global crisis_chance
     global morning_crisis_chance
 
+    global crisis_base_chance
+    global morning_crisis_base_chance
+
+    crisis_base_chance = 8
+    morning_crisis_base_chance = 4
+
     crisis_tracker = []
     morning_crisis_tracker = []
 
-    crisis_chance = 10
-    morning_crisis_chance = 5
+    crisis_chance = crisis_base_chance
+    morning_crisis_chance = morning_crisis_base_chance
 
     config.label_overrides["advance_time"] = "advance_time_enhanced"
-
 
 label advance_time_enhanced:
     # 1) Turns are processed _before_ the time is advanced.
@@ -56,7 +60,7 @@ label advance_time_enhanced:
 
     if renpy.random.randint(0,100) < crisis_chance: #ie. run crisis at set chance.
         python:
-            while len(crisis_tracker) > (len(crisis_list) // (5.0/3)): # release old tracked events
+            while len(crisis_tracker) > (len(crisis_list) // 3): # release old tracked events
                 del crisis_tracker[0]
 
             possible_crisis_list = []
@@ -72,7 +76,7 @@ label advance_time_enhanced:
 
         if the_crisis:
             #$ mc.log_event("General [[" + str(len(possible_crisis_list)) + "]: " + the_crisis.name, "float_text_grey")
-            $ crisis_chance = 10
+            $ crisis_chance = crisis_base_chance
             $ crisis_tracker.append([c[0] for c in crisis_list].index(the_crisis)) # add crisis index to recent crisis list
             $ the_crisis.call_action()
     else:
@@ -127,7 +131,7 @@ label advance_time_enhanced:
 
             if the_morning_crisis:
                 #$ mc.log_event("Morning: [[" + str(len(possible_morning_crises)) + "] : " +  the_morning_crisis.name, "float_text_grey")
-                $ morning_crisis_chance = 5
+                $ morning_crisis_chance = morning_crisis_base_chance
                 $ morning_crisis_tracker.append([c[0] for c in morning_crisis_list].index(the_morning_crisis)) # add crisis index to recent crisis list
                 $ the_morning_crisis.call_action()
         else:

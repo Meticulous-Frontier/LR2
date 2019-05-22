@@ -72,9 +72,17 @@ label append_company_wardrobe:
         mc.save_design(normalu, normalu.name, outfit_type = uniform_mode)
 
         normalu = Outfit("[mc.business.name] - Slutty Underwear")
-        normalu.add_upper(corset.get_copy(), under_color)
         normalu.add_lower(tiny_g_string.get_copy(), under_color)
         normalu.add_feet(garter_with_fishnets.get_copy(), under_color)
+        normalu.add_accessory(heavy_eye_shadow.get_copy(), [0,0,0,.8])
+        normalu.add_accessory(light_eye_shadow.get_copy(), upper_color)
+        mc.save_design(normalu, normalu.name, outfit_type = uniform_mode)
+
+        normalu = Outfit("[mc.business.name] - Commando Underwear")
+        normalu.add_feet(fishnets.get_copy(), under_color)
+        normalu.add_accessory(heavy_eye_shadow.get_copy(), [0,0,0,.8])
+        normalu.add_accessory(light_eye_shadow.get_copy(), upper_color)
+        normalu.add_accessory(lipstick.get_copy(), [0.6,0.1,0.1,0.8])
         mc.save_design(normalu, normalu.name, outfit_type = uniform_mode)
 
         uniform_mode = "over"
@@ -119,6 +127,16 @@ label append_company_wardrobe:
         normalf.add_accessory(lipstick.get_copy(), [0.6,0.1,0.1,0.8])
         mc.save_design(normalf, normalf.name, outfit_type = uniform_mode)
 
+        normalf = Outfit("[mc.business.name] - Normal Pants Uniform")
+        normalf.add_upper(bralette.get_copy(), under_color)
+        normalf.add_upper(dress_shirt.get_copy(), upper_color)
+        normalf.add_upper(vest.get_copy(), lower_color)
+        normalf.add_lower(cute_panties.get_copy(), under_color)
+        normalf.add_lower(suitpants.get_copy(), lower_color)
+        normalf.add_feet(slips.get_copy(), upper_color)
+        normalf.add_accessory(lipstick.get_copy(), [0.6,0.1,0.1,0.8])
+        mc.save_design(normalf, normalf.name, outfit_type = uniform_mode)
+
         normalf = Outfit("[mc.business.name] - Sexy Uniform")
         normalf.add_upper(business_vest.get_copy(), upper_color)
         normalf.add_lower(lace_panties.get_copy(), under_color)
@@ -128,10 +146,19 @@ label append_company_wardrobe:
         normalf.add_accessory(light_eye_shadow.get_copy(), [0.1,0.2,0.7,.9])
         normalf.add_accessory(lipstick.get_copy(), [0.6,0.1,0.1,0.8])
         mc.save_design(normalf, normalf.name, outfit_type = uniform_mode)
-        
+
+        normalf = Outfit("[mc.business.name] - Fitness Uniform")
+        normalf.add_upper(sweater.get_copy(), upper_color)
+        normalf.add_lower(lace_panties.get_copy(), under_color)
+        normalf.add_lower(leggings.get_copy(), lower_color)
+        normalf.add_feet(sneakers.get_copy(), upper_color)
+        normalf.add_accessory(light_eye_shadow.get_copy(), [0.1,0.2,0.7,.9])
+        normalf.add_accessory(lipstick.get_copy(), [0.6,0.1,0.1,0.8])
+        mc.save_design(normalf, normalf.name, outfit_type = uniform_mode)
+
         normalf = Outfit("[mc.business.name] - Slutty Uniform")
         normalf.add_upper(two_part_dress.get_copy(), lower_color)
-        normalf.add_upper(business_vest.get_copy(), upper_color)
+        normalf.add_upper(vest.get_copy(), upper_color)
         normalf.add_feet(fishnets.get_copy(), under_color)
         normalf.add_feet(high_heels.get_copy(), upper_color)
         normalf.add_accessory(wide_choker.get_copy(), upper_color_dim)

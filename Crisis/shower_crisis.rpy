@@ -64,10 +64,19 @@ label shower_crisis_action_label:
                 "She pushes 3 fingers inside, making a deep gutteral noice."
                 the_person.char "Ahh, yes. Fuck me hard and deep."
             elif random_mast_descrip == 3:
-                "She slow pushes a finger in her rectum..."
-                the_person.char "Mmmm, yes, make me your little anal slut."
+                if the_person.get_opinion_score("anal sex") > 0:
+                    "She slow pushes a finger in her rectum..."
+                    the_person.char "Mmmm, yes, make me your little anal slut."
+                else:
+                    "[the_person.possessive_title] moves two fingers along her labia, quitly moaning with pleasure."
             else:
-                "[the_person.possessive_title] pinches her nipples hard, wincing from exitement and pain."           
+                if the_person.get_opinion_score("being submissive") > 0:
+                    "[the_person.possessive_title] pinches her nipples hard, wincing from exitement and pain."
+                else:
+                    if the_person.has_large_tits():
+                        "With one hand she softly squeezes her large breast."
+                    else:
+                        "With one hand she squeezes het perky little breast."
             $ arousal_plus = renpy.random.randint (20,35)
             $ the_person.change_arousal (arousal_plus)
         the_person.char "Shit, I'm cumming!"

@@ -1,3 +1,6 @@
+init -2 python:
+    gym_session_cost = 40
+
 init 2 python:
     #Create Gym Outfits
     gym_clothes = Outfit("Gym Clothes")
@@ -70,7 +73,10 @@ label train_in_gym(person):
     person.char "Thank you, [person.mc_title]."
     mc.name "Bye [person.title], see you next time."
 
-    $ mc.business.funds -= 40
+    $ person.draw_person(position="walking_away")
+    
+    $ mc.business.pay(-gym_session_cost)
+    "You pay for the gym session and $ [gym_session_cost] has been deducted from the company's credit card."
 
     hide screen person_info_ui
     $ person.reset_arousal()

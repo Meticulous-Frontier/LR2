@@ -25,10 +25,6 @@
     # train_in_gym_action = ActionMod("Schedule Gym Session {image=gui/heart/Time_Advance.png}", gym_requirement, "select_person_for_gym", initialization = gym_initialization,  menu_tooltip = "Bring a person to the gym to train their body.")
 
 init -1 python:
-    global use_imperial_system
-
-    use_imperial_system = True
-
     def is_mod_enabled(action_name):
         is_enabled = True
         for action_mod in action_mod_list:
@@ -96,12 +92,6 @@ init 2 python:
                 return True
         return False
 
-    def metric_system_requirement():
-        return use_imperial_system
-
-    def imperial_system_requirement():
-        return not use_imperial_system
-
     # check all ActionMod classes in the game and make sure we have one instance of each and update the action_mod_list
     def append_and_initialize_action_mods():
         remove_list = []
@@ -117,10 +107,6 @@ init 2 python:
             ActionMod._instances.remove(action_mod)
 
         return
-
-    metric_system_action = Action("Use metric system", metric_system_requirement, "change_to_metric_system_label", menu_tooltip = "Switch to the metric system of meters and kilograms")
-    imperial_system_action = Action("Use imperial system", imperial_system_requirement, "change_to_imperial_system_label", menu_tooltip = "Switch to the imperial system of feet and pounds")
-
 
 init 5 python:
     add_label_hijack("normal_start", "activate_action_mod_core")  
@@ -140,9 +126,6 @@ label activate_action_mod_core(stack):
         action_mod_options_action = Action("MOD Settings", action_mod_settings_requirement, "show_action_mod_settings", menu_tooltip = "Enable or disable mods")
         bedroom.actions.append(action_mod_options_action)
 
-        bedroom.actions.append(metric_system_action)
-        bedroom.actions.append(imperial_system_action)
-
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return
@@ -151,12 +134,6 @@ label activate_action_mod_core(stack):
 label update_action_mod_core(stack):
     python:
         append_and_initialize_action_mods()
-        
-        if not metric_system_action in bedroom.actions:
-            bedroom.actions.append(metric_system_action)
-
-        if not imperial_system_action in bedroom.actions:
-            bedroom.actions.append(imperial_system_action)
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
@@ -204,12 +181,4 @@ label change_mod_category:
         else:
             action_mod_choice.toggle_enabled()
             renpy.jump("change_mod_category")
-    return
-
-label change_to_metric_system_label:
-    $ use_imperial_system = False
-    return
-
-label change_to_imperial_system_label:
-    $ use_imperial_system = True
     return

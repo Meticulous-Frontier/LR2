@@ -20,7 +20,26 @@ label late_for_work_action_label:
 
     "As you are walking through the main corridor you spot [the_person.possessive_title] rushing through the entrance doors."
     
-    if the_person.sluttiness > 20:
+    if the_person.sluttiness < 40:
+        $ the_person.draw_person(position="stand3", emotion="default")
+        menu:
+            "Lecture Her On Being Late":
+                $ the_person.draw_person(emotion = 'sad')
+                mc.name "Do you know what time we start here [the_person.title]?"
+                the_person.char "Sorry [the_person.mc_title], I missed my bus."
+                mc.name "I don't care what you have to do, but I need you to be here on time. Now get going..."
+                $ the_person.change_obedience(3)
+                $ the_person.change_happiness(-2)
+
+            "Let it slide":
+                $ the_person.draw_person(emotion = 'happy')
+                mc.name "Well, ok, now quickly run along [the_person.title]."
+                $ the_person.change_obedience(-2)
+                $ the_person.change_happiness(2)
+
+        $ the_person.draw_person(position = 'walking_away')
+        "[the_person.possessive_title] quietly rushes to her desk."
+    elif the_person.sluttiness < 80:
         $ the_person.cum_on_tits()
         $ the_person.draw_person(position="stand3", emotion="default")
         the_person.char "I'm sorry [the_person.mc_title], my boyfriend needed some personal attention when he dropped me off at the office."
@@ -49,8 +68,7 @@ label late_for_work_action_label:
 
         $ the_person.draw_person(position = 'walking_away')
         "[the_person.possessive_title] rushes to the ladies room to cleanup."
-
-    elif the_person.sluttiness > 40:
+    else:
         $ the_person.cum_on_face()
         $ the_person.cum_on_tits()
         $ the_person.draw_person(position="stand3", emotion="default")
@@ -65,27 +83,8 @@ label late_for_work_action_label:
         
         $ the_person.draw_person(position = 'walking_away')
         "The client wires the money to your company account, but must have forgot to actually placed an order."
-        $ mc.business.funds += 250
-
-    else:
-        $ the_person.draw_person(position="stand3", emotion="default")
-        menu:
-            "Lecture Her On Being Late":
-                $ the_person.draw_person(emotion = 'sad')
-                mc.name "Do you know what time we start here [the_person.title]?"
-                the_person.char "Sorry [the_person.mc_title], I missed my bus."
-                mc.name "I don't care what you have to do, but I need you to be here on time. Now get going..."
-                $ the_person.change_obedience(3)
-                $ the_person.change_happiness(-2)
-
-            "Let it slide":
-                $ the_person.draw_person(emotion = 'happy')
-                mc.name "Well, ok, now quickly run along [the_person.title]."
-                $ the_person.change_obedience(-2)
-                $ the_person.change_happiness(2)
-
-        $ the_person.draw_person(position = 'walking_away')
-        "[the_person.possessive_title] quietly rushes to her desk."
+        $ mc.business.pay(250)
     
     $ the_person.clear_scene()
+    $ the_person.review_outfit(show_review_message = False)
     return
