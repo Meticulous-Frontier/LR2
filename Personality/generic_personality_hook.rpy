@@ -31,5 +31,5 @@ init 1 python:
 
         # A person could have dialog even if we don't know her
         if person.possessive_title is None:
-            person.set_possessive_title("The unkown woman")
+            person.set_possessive_title("The unknown woman")
         return
