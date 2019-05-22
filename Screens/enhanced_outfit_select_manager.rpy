@@ -20,7 +20,7 @@ init 2:
                         viewport:
                             scrollbars "vertical"
                             xsize 225
-                            ysize 425
+                            ysize 750
                             mousewheel True
                             vbox:
                                 spacing 0
