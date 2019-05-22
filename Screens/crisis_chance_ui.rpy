@@ -1,14 +1,6 @@
-screen crisis_chance_setting():
+screen crisis_chance_setting(disabled):
     modal True
     zorder 49
-
-    default disabled = 0
-    python:
-        # how many crisis events are disabled?
-        for action_mod in action_mod_list:
-            if not action_mod.enabled:
-                disabled += 1
-
 
     default current_crisis_base_chance = crisis_base_chance
     default current_morning_crisis_base_chance = morning_crisis_base_chance
