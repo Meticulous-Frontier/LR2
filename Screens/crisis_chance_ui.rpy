@@ -2,6 +2,14 @@ screen crisis_chance_setting():
     modal True
     zorder 49
 
+    default disabled = 0
+    python:
+        # how many crisis events are disabled?
+        for action_mod in action_mod_list:
+            if not action_mod.enabled:
+                disabled += 1
+
+
     default current_crisis_base_chance = crisis_base_chance
     default current_morning_crisis_base_chance = morning_crisis_base_chance
 
@@ -14,7 +22,7 @@ screen crisis_chance_setting():
 
         vbox:
             yalign 0.1
-            text "Crisis Event [[Total: " + str(len(crisis_list)) + "]" style "textbutton_text_style"
+            text "Crisis Event [[Total: " + str(len(crisis_list) - disabled) + "]" style "textbutton_text_style"
             hbox:
                 bar value ScreenVariableValue("current_crisis_base_chance", 100.0, step = 1.0) range 100 xsize 800 ysize 45 style style.slider
                 yalign 1.0

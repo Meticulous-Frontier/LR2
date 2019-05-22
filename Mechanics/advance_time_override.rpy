@@ -60,7 +60,13 @@ label advance_time_enhanced:
 
     if renpy.random.randint(0,100) < crisis_chance: #ie. run crisis at set chance.
         python:
-            while len(crisis_tracker) > (len(crisis_list) // 3): # release old tracked events
+            # how many crisis events are disabled?
+            disabled = 0
+            for action_mod in action_mod_list:
+                if not action_mod.enabled:
+                    disabled += 1
+
+            while len(crisis_tracker) > ((len(crisis_list) - disabled) // 2): # release old tracked events
                 del crisis_tracker[0]
 
             possible_crisis_list = []
