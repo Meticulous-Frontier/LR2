@@ -159,11 +159,11 @@ init 2 python:
 
         return False
 
-    SB_fetish_cum_dosage_crisis = Action("cum Fetish Dosage Crisis",SB_fetish_cum_dosage_requirement,"SB_fetish_cum_dosage_label")
-    crisis_list.append([SB_fetish_cum_dosage_crisis,10])
+    SB_fetish_cum_dosage_crisis = Action("Cum Fetish Dosage Crisis",SB_fetish_cum_dosage_requirement,"SB_fetish_cum_dosage_label")
+    crisis_list.append([SB_fetish_cum_dosage_crisis, 5])
 
     SB_fetish_shower_cum = Action("Shower Surprise", SB_fetish_shower_cum_requirement, "SB_fetish_shower_cum_label")
-    morning_crisis_list.append([SB_fetish_shower_cum, 8])
+    morning_crisis_list.append([SB_fetish_shower_cum, 5])
 
 
 #SBC2

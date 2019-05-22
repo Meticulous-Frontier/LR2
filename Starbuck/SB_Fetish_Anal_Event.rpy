@@ -230,8 +230,8 @@ init 2 python:
 
         return False
 
-    SB_fetish_anal_recurring_crisis = Action("anal Fetish Recurring Crisis",SB_fetish_anal_recurring_requirement,"SB_fetish_anal_recurring_label")
-    crisis_list.append([SB_fetish_anal_recurring_crisis,10])
+    SB_fetish_anal_recurring_crisis = Action("Anal Fetish Recurring Crisis",SB_fetish_anal_recurring_requirement,"SB_fetish_anal_recurring_label")
+    crisis_list.append([SB_fetish_anal_recurring_crisis, 5])
 
     def SB_mom_anal_pay_requirement():
         if time_of_day == 4 and day%7 == 4: #It is the end of the day on friday

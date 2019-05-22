@@ -479,7 +479,7 @@ init 2 python:
         return False
 
     SB_fetish_vaginal_recurring_crisis = Action("Vaginal Fetish Recurring Crisis",SB_fetish_vaginal_recurring_requirement,"SB_fetish_vaginal_recurring_label")
-    crisis_list.append([SB_fetish_vaginal_recurring_crisis,10])
+    crisis_list.append([SB_fetish_vaginal_recurring_crisis, 5])
     #SB_fetish_vaginal_crisis = Action("Vaginal Fetish Crisis", SB_fetish_vaginal_requirement,"SB_fetish_vaginal_label")
 
     def SB_fetish_vaginal_lily_recurring_requirement():
@@ -491,7 +491,7 @@ init 2 python:
         return False
 
     SB_fetish_vaginal_lily_recurring_crisis = Action("Vaginal Fetish lily Recurring Crisis",SB_fetish_vaginal_lily_recurring_requirement,"SB_fetish_vaginal_lily_recurring_label")
-    crisis_list.append([SB_fetish_vaginal_recurring_crisis,10])
+    crisis_list.append([SB_fetish_vaginal_lily_recurring_crisis, 5])
 
 #SBV6
 label SB_fetish_vaginal_recurring_label():

@@ -18,7 +18,7 @@ init 2 python:
         return False
 
     SB_working_weekend_crisis = Action("SB Working Weekend Crisis",SB_working_weekend_requirement,"SB_working_weekend_crisis_label")
-    crisis_list.append([SB_working_weekend_crisis,9])  #7 to match mom's texts
+    crisis_list.append([SB_working_weekend_crisis,5])  #7 to match mom's texts
 
 
 
