@@ -1,11 +1,14 @@
 #init -1 python: #TODO: Go through everything again so that it uses copies where it should and remove instances where it shouldn't.
                       # I want outfits to be editable without forcing commitet changes upon `selected_clothing`
                       # Right now, this seems to only be a problem when editing a `Person`'s wardrobe since the MC Wardrobe always use copies anyway.
-
+                      # Fix issue with hitting "Abandon" when using Outfit Manager through "Add Outfit" for a Person, seems to be coming from the fact it does not give the expected return of "No Return".
+                      # Best solution would be for Vren to change that in the main script so all the outfit screen expect the same return.
+                      # Figure out why and fix actions only running certain functions on every second press.
+                      # Add logic for the instances where multiple cloth items from a catagory can be applied so it displays properly at all times. (no known issues with the end result, just display)
 
 init -1 python:
 
-    def in_outfit(self, cloth_name):
+    def in_outfit(self, cloth_name): # Checks if the clothing item exists in the outfit by name to account for instances where copies are used.
         for cloth in self.upper_body + self.lower_body + self.feet + self.accessories:
             if cloth.name == cloth_name:
                 return True
@@ -13,7 +16,7 @@ init -1 python:
             return False
     Outfit.in_outfit = in_outfit
 
-    def get_catagory(item):
+    def get_catagory(item): # Should re-write this function if possible.
         cloth_master_list = [
         panties_list + neckwear_list + bracelet_list + rings_list +
         earings_list + shoes_list + bra_list + pants_list + skirts_list +
@@ -192,7 +195,7 @@ init 2:
                                                 If(cloth is selected_clothing and selected_clothing in catagories_mapping[catagory_selected][0],
                                                 NullAction(),
                                                 Function(demo_outfit.remove_clothing, cloth)),
-                                                If(selected_clothing is not None and not demo_outfit.has_clothing(selected_clothing),
+                                                If(selected_clothing is not None,
                                                 Function(apply_method, demo_outfit, selected_clothing))
                                                 ]
                         frame:
@@ -390,7 +393,7 @@ init 2:
                                                     xysize (40,40)
                                                     sensitive True
                                                     action [
-                                                    SetScreenVariable("selected_colour","colour"),
+
                                                     SetScreenVariable("current_r", a_colour[0]),
                                                     SetScreenVariable("current_g", a_colour[1]),
                                                     SetScreenVariable("current_b", a_colour[2]),
@@ -422,8 +425,8 @@ init 2:
                                     and selected_clothing in catagories_mapping[catagory_selected][0]
                                     or starting_outfit.in_outfit(selected_clothing.name)]),
 
-                                    SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
-                                    If(starting_outfit is not None and starting_outfit.in_outfit(selected_clothing.name),
+                                    SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]), #Make sure color is updated
+                                    If(starting_outfit is not None and starting_outfit.in_outfit(selected_clothing.name) or selected_from_outfit in catagories_mapping[catagory_selected][0],
                                     [Function(starting_outfit.remove_clothing, selected_from_outfit),
                                     Function(apply_method, starting_outfit, selected_clothing)],
                                     Function(apply_method, starting_outfit, selected_clothing)),
@@ -470,7 +473,7 @@ init 2:
                                                     background Color(rgb = (cloth.colour[0], cloth.colour[1], cloth.colour[2]))
                                                     xysize (380, 40)
                                                     action [ # NOTE: Left click makes more sense for selection than right clicking
-                
+
                                                     SetScreenVariable("selected_from_outfit", cloth),
                                                     SetScreenVariable("catagory_selected", get_catagory(cloth)),
                                                     SetScreenVariable("selected_clothing", cloth),
@@ -530,11 +533,15 @@ init 2:
                                 spacing 10
                                 vbox:
                                     textbutton "Save Outfit" style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 action [
-                                    If(target_wardrobe is mc.designed_wardrobe, Return(starting_outfit),
-                                    [Return(starting_outfit)]), # <--- Function(target_wardrobe.add_outfit, starting_outfit), TODO: Get this to work without making duplicates and forcing changes.
+                                    If(target_wardrobe is mc.designed_wardrobe, Return(starting_outfit.get_copy()),
+                                    [Return(starting_outfit)]), #TODO: Commit changes to a person only when using the "Save Outfit", right now the changes are not saved to the Wardrobe only Outfit.copy
                                     Hide("mannequin"),
                                     Hide("outfit_creator")]
-                                    textbutton "Abandon Design" action [If(target_wardrobe is mc.designed_wardrobe, [Return("Not_New")]), SetScreenVariable("starting_wardrobe", compare_outfit), Hide("mannequin"), Hide("outfit_creator")] style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5
+                                    textbutton "Abandon Design" action [
+                                    If(target_wardrobe is mc.designed_wardrobe, [
+                                    Return("Not_New")]),
+                                    SetScreenVariable("starting_wardrobe", compare_outfit), # This doesn't really do anything at the moment. I'm thinking that an easy way of reseting the starting_outfit to be compare_outfit which is a copy of starting_outfit could be a good way of dealing with accidental commits and discarding unwanted changes.
+                                    Hide("mannequin"), Hide("outfit_creator")] style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5
                                     #textbutton "Get Catagory [catagory_name]" style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 action NullAction()
                         vbox:
                             textbutton "Import Design" action ToggleVariable("import_selection") style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 xsize 250 xanchor 0.0
