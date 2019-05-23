@@ -7,24 +7,28 @@ init 1400 python:
         valid_titles = [reserved_titles(person)]
         if person.love > 25:
             valid_titles.append("Cougar")
+        if person.sluttiness > 70:
+            valid_titles.append("Old Bitch")
+        if person.sluttiness > 100 and the_person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
+            valid_titles.append("Anal Harlot")
         return valid_titles
     def cougar_possessive_titles(person):
         valid_possessive_titles = [relaxed_titles(person)]
         if person.sluttiness > 60:
             valid_possessive_titles.append("Your slutty cougar")
-        if person.sluttiness > 100:
+        if person.sluttiness > 100 and (the_person.get_opinion_score("drinking cum") > 0 or the_person.get_opinion_score("being covered in cum") > 0):
             valid_possessive_titles.append("Your cum-dump cougar")
-        if person.sluttiness > 100 and person.sex_skills["Anal"] >= 4:
-            valid_possessive_titles.append("Your anal cumslut cougar")
+        if person.sluttiness > 100 and the_person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
+            valid_possessive_titles.append("Your anal minx")
         return valid_possessive_titles
     def cougar_player_titles(person):
         valid_player_titles = [reserved_player_titles(person)]
         if person.happiness < 70:
-            valid_player_titles.append("Litle boy")
+            valid_player_titles.append("Litle Boy")
         if person.love > 25:
             valid_player_titles.append("Darling")
         if person.sluttiness > 60:
-            valid_player_titles.append("Young stud")
+            valid_player_titles.append("Young Stud")
         return valid_player_titles
 
     cougar_personality = Personality("cougar", default_prefix = "cougar", #Cougar style personality
