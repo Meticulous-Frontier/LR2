@@ -8,6 +8,8 @@
 
 init -1 python:
 
+
+
     def in_outfit(self, cloth_name): # Checks if the clothing item exists in the outfit by name to account for instances where copies are used.
         for cloth in self.upper_body + self.lower_body + self.feet + self.accessories:
             if cloth.name == cloth_name:
@@ -50,7 +52,7 @@ init -1 python:
 init 2:
     $ import_selection = False # Decides if the import viewport is showing
 
-    screen outfit_creator(starting_outfit, target_wardrobe = mc.designed_wardrobe): ##Pass a completely blank outfit instance for a new outfit, or an already existing instance to load an old one.\
+    screen outfit_creator(starting_outfit, target_wardrobe = mc.designed_wardrobe): ##Pass a completely blank outfit instance for a new outfit, or an already existing instance to load an old one.| This overrides the default outfit creation screen
 
         add "Paper_Background.png"
         modal True
@@ -58,14 +60,13 @@ init 2:
         default catagory_selected = "Panties"
         default mannequin = True
 
+
         default quick_catagory = None # Used to get catagory of the item
         default selected_from_outfit = None # Used to temporarily remember what clothing you have selected from starting_outfit if any
-        default compare_outfit = starting_outfit.get_copy() # Have a non- copy available for checks.
+        default compare_outfit = starting_outfit.get_copy() # Have a non- altered copy available for checks.
         default colour_cloth = None # A variable to fetch the copy of selected_clothing.get_copy()
-        if target_wardrobe == mc.designed_wardrobe: # Always make copies if MC Wardrobe
-            default demo_outfit = starting_outfit.get_copy()
-        else:
-            default demo_outfit = starting_outfit.get_copy() # We usually want to directly manipulate their outfit
+        default demo_outfit = starting_outfit.get_copy()
+
 
         $ valid_catagories = ["Panties", "Bras", "Pants", "Skirts", "Dresses", "Shirts", "Socks", "Shoes", "Facial", "Rings", "Bracelets", "Neckwear"] #Holds the valid list of catagories strings to be shown at the top.
 
@@ -158,9 +159,6 @@ init 2:
                                                 style "textbutton_style"
                                                 text_style "textbutton_text_style"
 
-
-
-
                                                     background "#1a45a1"
                                                     hover_background "#3a65c1"
 
@@ -174,7 +172,7 @@ init 2:
                                                     hover_background "#444444"
 
                                                 xfill True
-                                                #sensitive valid_check(starting_outfit, cloth)
+
                                                 action [
                                                 SensitiveIf(valid_check(starting_outfit, cloth) or selected_clothing in catagories_mapping[catagory_selected][0]),
                                                 SetScreenVariable("selected_clothing", cloth),
@@ -347,7 +345,10 @@ init 2:
                                                         xsize 70
                                                         ysize 50
 
-                                                bar value ScreenVariableValue("current_b", 1.0) xsize 120 ysize 45 style style.slider unhovered [SetScreenVariable("current_b",__builtin__.round(current_b,2)), SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])]
+                                                bar value ScreenVariableValue("current_b", 1.0) xsize 120 ysize 45 style style.slider unhovered [
+                                                SetScreenVariable("current_b",__builtin__.round(current_b,2)),
+                                                SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])
+                                                ]
 
                                     text "Transparency: " style "menu_text_style"
                                     hbox:
@@ -359,7 +360,10 @@ init 2:
                                                 background "#1a45a1"
                                             text "Normal" style "menu_text_style" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
                                             xysize (120, 40)
-                                            action [SetScreenVariable("current_a", 1.0),SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])]
+                                            action [
+                                            SetScreenVariable("current_a", 1.0),
+                                            SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])
+                                            ]
 
                                         button:
                                             if current_a == 0.95:
@@ -368,7 +372,10 @@ init 2:
                                                 background "#1a45a1"
                                             text "Sheer" style "menu_text_style" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
                                             xysize (120, 40)
-                                            action [SetScreenVariable("current_a", 0.95), SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])]
+                                            action [
+                                            SetScreenVariable("current_a", 0.95),
+                                            SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])
+                                            ]
 
                                         button:
                                             if current_a == 0.8:
@@ -377,9 +384,10 @@ init 2:
                                                 background "#1a45a1"
                                             text "Translucent" style "menu_text_style" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
                                             xysize (120, 40)
-                                            action [SetScreenVariable("current_a", 0.8), SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])]
-
-                                                            #[SetField(cloth,"colour",[current_r,current_g,current_b,current_a]), Function(apply_method, demo_outfit, cloth)]
+                                            action [
+                                            SetScreenVariable("current_a", 0.8),
+                                            SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])
+                                            ]
 
                                     hbox:
                                         spacing 5
@@ -400,11 +408,13 @@ init 2:
                                                     SetScreenVariable("current_a", a_colour[3]),
                                                     SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
                                                     ]
-                                                    alternate Function(update_colour_palette, count, current_r, current_g, current_b, current_a)
+                                                    alternate [
+                                                    Function(update_colour_palette, count, current_r, current_g, current_b, current_a)
+                                                    ]
 
 
 
-                            #TODO: Change this "Add" butotn to "Remove" when you're selecting something that is arleady part of the outfit.
+                            # TODO: Have it say "Replace" when adding to a slot already filled.
                             if selected_clothing:
                                 textbutton "Add to Outfit":
                                     style "textbutton_style"
@@ -415,9 +425,6 @@ init 2:
                                     yalign 1.0
                                     xanchor 0.5
                                     yanchor 1.0
-                                    #sensitive [
-                                    #valid_check(starting_outfit, selected_clothing)
-                                    #
 
                                     action [
                                     SensitiveIf([
@@ -431,7 +438,7 @@ init 2:
                                     Function(apply_method, starting_outfit, selected_clothing)],
                                     Function(apply_method, starting_outfit, selected_clothing)),
                                     Show("mannequin", None, starting_outfit),
-                                    SetScreenVariable("selected_clothing", None)] # NOTE: We are no longer interested in the demo outfit so view the final outfit
+                                    SetScreenVariable("selected_clothing", None)] # NOTE: We are no longer interested in the demo outfit so view the final outfit, starting_outfit
 
 
                                     hovered [
@@ -480,15 +487,15 @@ init 2:
                                                     If(selected_clothing is cloth, SetScreenVariable("selected_clothing", None)),
                                                     If(demo_outfit.has_clothing(cloth) and selected_clothing is cloth,
                                                     [Function(demo_outfit.remove_clothing, cloth), #Remove the cloth
-                                                    Function(apply_method, demo_outfit, cloth)]), # Add the copy of clot
-                                                    Function(apply_method, demo_outfit, cloth),  # Add the copy of clot
+                                                    Function(apply_method, demo_outfit, cloth)]), # Add the copy of cloth
+                                                    Function(apply_method, demo_outfit, cloth),  # Add the copy of cloth
                                                     SetScreenVariable("current_r",cloth.colour[0]),
                                                     SetScreenVariable("current_g",cloth.colour[1]),
                                                     SetScreenVariable("current_b",cloth.colour[2]),
                                                     SetScreenVariable("current_a",cloth.colour[3]),
-                                                #    SetScreenVariable("demo_outfit", starting_outfit.get_copy()),
-                                                #    Function(apply_method, demo_outfit, cloth.get_copy()),
-                                                    Show("mannequin", None, demo_outfit) # Make sure it is showing the correct outfit
+
+
+                                                    Show("mannequin", None, demo_outfit) # Make sure it is showing the correct outfit during changes, demo_outfit is a copy of starting_outfit
 
                                                     ]
                                                     alternate [
@@ -539,10 +546,10 @@ init 2:
                                     Hide("outfit_creator")]
                                     textbutton "Abandon Design" action [
                                     If(target_wardrobe is mc.designed_wardrobe, [
-                                    Return("Not_New")]),
-                                    SetScreenVariable("starting_wardrobe", compare_outfit), # This doesn't really do anything at the moment. I'm thinking that an easy way of reseting the starting_outfit to be compare_outfit which is a copy of starting_outfit could be a good way of dealing with accidental commits and discarding unwanted changes.
+                                    Return("Not_New")]), # Solves default creation errors, but load outfit expects "No Return" instead so that will throw an error.
+                                    SetScreenVariable("starting_wardrobe", compare_outfit), # This doesn't really do anything at the moment. I'm thinking that an easy way of reseting the starting_outfit to be compare_outfit which is a copy of starting_outfit could be a good way of dealing with accidental commits and discarding unwanted changes. Without the need of further logic.
                                     Hide("mannequin"), Hide("outfit_creator")] style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5
-                                    #textbutton "Get Catagory [catagory_name]" style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 action NullAction()
+
                         vbox:
                             textbutton "Import Design" action ToggleVariable("import_selection") style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 xsize 250 xanchor 0.0
                             if import_selection:
@@ -553,13 +560,6 @@ init 2:
                                     vbox:
                                         for n in os.listdir("game/wardrobes/"):
                                             textbutton n action [Show("import_outfit_manager", None, target_wardrobe, n)] style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 xanchor 0.0
-
-
-
-
-
-
-
 
         imagebutton:
             auto "/tutorial_images/restart_tutorial_%s.png"
