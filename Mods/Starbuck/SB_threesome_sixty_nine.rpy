@@ -191,15 +191,15 @@ label outro_SB_threesome_sixty_nine(the_person_1, the_person_2, the_location, th
                 "Your orgasm erupts and you begin spraying cum across her face."
                 $ the_person_2.cum_on_face()
                 $ SB_threesome_sixty_nine.redraw_scene(the_person_1, the_person_2)
-                if SB_get_fetish(the_person_1) == "External Cum Fetish":
-                    "You can see [the_person_1.title]'s pupils dilate as you fulfil her cum fetish."
-                    "[the_person_1.title] revels in bliss as your dick sprays jet after jet of seed across her face. She moans lewdly."
+                if SB_get_fetish(the_person_2) == "External Cum Fetish":
+                    "You can see [the_person_2.title]'s pupils dilate as you fulfil her cum fetish."
+                    "[the_person_2.title] revels in bliss as your dick sprays jet after jet of seed across her face. She moans lewdly."
                     "She truly is addicted to your cum."
-                "Some of your cum runs down off [the_person_1.title]'s face and onto [the_person_2.title]'s belly."
+                "Some of your cum runs down off [the_person_2.title]'s face and onto [the_person_1.title]'s belly."
                 $ the_person_1.cum_on_stomach()
                 $ SB_threesome_sixty_nine.redraw_scene(the_person_1, the_person_2)
-                if SB_get_fetish(the_person_2) == "External Cum Fetish":
-                    "[the_person_2.possessive_title]'s body quivers as your cum splashes down onto her. She runs her hands through your cum and rubs it into her belly."
+                if SB_get_fetish(the_person_1) == "External Cum Fetish":
+                    "[the_person_1.possessive_title]'s body quivers as your cum splashes down onto her. She runs her hands through your cum and rubs it into her belly."
                 "You give a sigh. Two girls covered in your cum is an amazing sight to behold."
 
     else:
@@ -226,15 +226,15 @@ label outro_SB_threesome_sixty_nine(the_person_1, the_person_2, the_location, th
                 "Your orgasm erupts and you begin spraying cum across her face."
                 $ the_person_2.cum_on_face()
                 $ SB_threesome_sixty_nine.redraw_scene(the_person_1, the_person_2)
-                if SB_get_fetish(the_person_1) == "External Cum Fetish":
-                    "You can see [the_person_1.title]'s pupils dilate as you fulfil her cum fetish."
-                    "[the_person_1.title] revels in bliss as your dick sprays jet after jet of seed across her face. She moans lewdly."
+                if SB_get_fetish(the_person_2) == "External Cum Fetish":
+                    "You can see [the_person_2.title]'s pupils dilate as you fulfil her cum fetish."
+                    "[the_person_2.title] revels in bliss as your dick sprays jet after jet of seed across her face. She moans lewdly."
                     "She truly is addicted to your cum."
-                "Some of your cum runs down off [the_person_1.title]'s face and onto [the_person_2.title]'s belly."
+                "Some of your cum runs down off [the_person_2.title]'s face and onto [the_person_1.title]'s belly."
                 $ the_person_1.cum_on_stomach()
                 $ SB_threesome_sixty_nine.redraw_scene(the_person_1, the_person_2)
-                if SB_get_fetish(the_person_2) == "External Cum Fetish":
-                    "[the_person_2.possessive_title]'s body quivers as your cum splashes down onto her. She runs her hands through your cum and rubs it into her belly."
+                if SB_get_fetish(the_person_1) == "External Cum Fetish":
+                    "[the_person_1.possessive_title]'s body quivers as your cum splashes down onto her. She runs her hands through your cum and rubs it into her belly."
                 "You give a sigh. Two girls covered in your cum is an amazing sight to behold."
 
     return
