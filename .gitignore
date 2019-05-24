@@ -43,6 +43,7 @@ coverage.xml
 
 # Visual Studio Code
 *.code-workspace
+.vscode/**
 
 # Translations
 *.mo
@@ -57,10 +58,23 @@ docs/_build/
 # PyBuilder
 target/
 
+# Exclude Game Folders
+animation/
+cache/
+gui/
+images/
+OpenGL/
+saves/
+shader/
+wardrobes/
+# Files from Game Folder
+*.*
+!.gitignore
+!README.md
+
+# Include Mods Root Folder Files
+!Mods/**
+
 # Ren'Py
-errors.txt
-*/tmp/*
-log.txt
-*/game/saves/
-traceback.txt
+**/*.txt
 project.json
