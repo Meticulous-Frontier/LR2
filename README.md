@@ -18,7 +18,7 @@ to the screen to a minimum.
 How to Install:
 
     1. Download a .zip file from the master branch or develop branch if you feel adventurous.
-    2. Extract the contents of the .zip into the Lab Rats 2/game/ folder. (you should get a Mods folder in your game folder)
+    2. Extract the contents of the .zip into the "Lab Rats 2/game/" folder. (you should get a Mods folder in your game folder)
     3. Launch Lab Rats 2 and load up a save or start fresh.
 	4. The main mods will be available in your bedroom right away (split between Mod Settings and Serum Mods).
     4. When adding ParadigmShift ModCore based Mods, skip time or play normally until the crisis event telling you about a computer in your bedroom is done.
