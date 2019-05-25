@@ -234,7 +234,7 @@ init -1:
                 self.opinions[topic][0] = score
 
             if add_to_log:
-                mc.log_event("Positive: " + (self.title or self.name) + " " + opinion_score_to_string(score) + " " + str(topic), "float_text_green")
+                mc.log_event((self.title or self.name) + " " + opinion_score_to_string(score) + " " + str(topic), "float_text_green")
             return
         # Add increase opininion function to person class
         Person.increase_opinion_score = increase_opinion_score
@@ -262,7 +262,7 @@ init -1:
                 self.opinions[topic][0] = score
 
             if add_to_log:
-                mc.log_event("Negative: " + (self.title or self.name) + " " + opinion_score_to_string(score) + " " + str(topic), "float_text_green")
+                mc.log_event((self.title or self.name) + " " + opinion_score_to_string(score) + " " + str(topic), "float_text_green")
             return
         # Add decrease opininion function to person class
         Person.decrease_opinion_score = decrease_opinion_score

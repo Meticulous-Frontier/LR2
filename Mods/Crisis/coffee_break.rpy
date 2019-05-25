@@ -11,6 +11,16 @@ init 2 python:
                         return True
         return False
 
+    def has_opinion(person, topic):
+        return not person.get_opinion_topic(topic) is None
+
+    def update_opinion(person, topic):
+        if has_opinion(person, topic):
+            person.increase_opinion_score(topic)
+        else:
+            person.add_opinion(topic, 1, sexy_opinion = True)
+        return
+
     coffee_break_action = ActionMod("Coffee Break Crisis", coffee_break_requirement, "coffee_break_action_label",
         menu_tooltip = "A group of employees is having a coffee break.", category = "Business")
     crisis_list.append([coffee_break_action, coffee_break_weight])
@@ -177,16 +187,67 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
         person_two.char "Oh, she's such a stickler for rules."
         person_three.char "Why don't we go break some rules together in the supply closet?"
 
-        # if (person_two.sluttiness > 50):
-        #     #TODO: supply closet action
-            
+        if person_two.sluttiness > 60 and person_three.sluttiness > 60:
+            $ person_two.draw_person(position = "walking_away")
+            $ person_three.draw_person(position = "walking_away")
 
-        # else:
-        person_two.char "Another time, [person_three.name], let's get back to work."
-        $ person_two.draw_person(position = "walking_away")
-        $ person_three.draw_person(position = "walking_away")
+            "You decide to follow them at a discrete distance."
+            "As soon as they enter the supply closet you peek through the side window where [person_two.possessive_title] starts kissing [person_three.possessive_title]."
 
-        "[person_two.title] grabs [person_three.title] by her arm and they are off."
+            $ person_two.draw_person(position = "kissing")
+            $ person_three.draw_person(position = "kissing")
+
+            "What's your next move?"
+            menu:
+                "Walk away":
+                    $ change_scene_display(mc.location)
+                    $ person_two.clear_scene()
+                    $ person_three.clear_scene()
+                    return
+                "Join them":
+                    mc.name "Hello girls... mind if I join your little party?"
+                    $ person_two.draw_person(position = "stand_3")
+                    $ person_three.draw_person(position = "stand_4")
+                    person_three.char "Oh my, hello [person_three.mc_title], we didn't see you there."
+                    "You tell the girls to take off their clothes." 
+                    $ person_two.strip_outfit_to_max_sluttiness(temp_sluttiness_increase = 40, character_placement = character_center_flipped)
+                    $ person_three.strip_outfit_to_max_sluttiness(temp_sluttiness_increase = 40)
+
+                    $ person_two.clear_scene()
+                    $ person_three.clear_scene()
+
+                    hide screen person_info_ui
+                    show screen SB_two_person_info_ui(person_two, person_three)                   
+
+                    $ SB_draw_two_person_scene(person_one = person_two, person_two = person_three, one_pos_x = 0.7, one_position = "stand_3", two_position = "stand_4")
+
+                    call SB_threesome_description(person_two, person_three, SB_threesome_sixty_nine, make_floor(), 0, private = True, girl_in_charge = False)
+                    $ SB_draw_two_person_scene(person_one = person_two, person_two = person_three, one_pos_x = 0.7)
+                    person_two.char "Wow...this was...really good actually... You can join us anytime you want boss..."                   
+                    $ SB_draw_two_person_scene(person_one = person_two, person_two = person_three, one_pos_x = 0.7, one_position = "walking_away", two_position = "walking_away")
+                    "They pickup their clothes and leave you feeling very proud of yourself."
+
+                    hide screen SB_two_person_info_ui
+
+                    $ update_opinion(person_two, "threesomes")
+                    $ person_two.reset_arousal()
+                    $ person_two.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+
+                    $ update_opinion(person_three, "threesomes")
+                    $ person_three.reset_arousal()
+                    $ person_three.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+
+                    $ change_scene_display(mc.location)
+                    $ renpy.scene("Active")
+
+                    "Amazing you just fucked two of your employees, wondering if other girls in your company might also be up for this."
+                    return
+        else:
+            person_two.char "Another time, [person_three.name], let's get back to work."
+            $ person_two.draw_person(position = "walking_away")
+            $ person_three.draw_person(position = "walking_away")
+
+            "[person_two.title] grabs [person_three.title] by her arm and they are off."
     else:
         person_two.char "Yeah, we better get going too."
         $ person_two.draw_person(position = "walking_away")
