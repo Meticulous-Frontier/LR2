@@ -10,7 +10,7 @@ init 2 python:
                     return True
         return False
 
-    late_for_work_action = ActionMod("Late for Work Crisis", late_for_work_requirement, "late_for_work_action_label",
+    late_for_work_action = ActionMod("Late for Work", late_for_work_requirement, "late_for_work_action_label",
         menu_tooltip = "An employee is late for work.", category = "Business")
     crisis_list.append([late_for_work_action, late_for_work_weight])
 
