@@ -41,7 +41,7 @@ init 2 python:
         if person.obedience >= 150:
             return True
 
-label activate_generic_role_actions(stack):
+label initialize_generic_roles:
     $ apply_mandatory_roles = []
     # Schedule Person | Allows you to modify the schedule of the_person. Change requirement to be dependent on obedience?
     $ schedule_actions_list = [] # NOTE: Use this list to display all the schedule actions.
@@ -107,11 +107,24 @@ label activate_generic_role_actions(stack):
         for act in person_utility_actions:
             if act not in generic_people_role.actions:
                 generic_people_role.actions.append(act)
+    return
 
+
+label activate_generic_role_actions(stack):
+    call initialize_generic_roles() from _call_initialize_generic_roles_activate
     $ execute_hijack_call(stack)
     return
 
 label update_generic_role_actions(stack):
+    python:
+        unmodded = False
+        try:
+            schedule_actions_list
+        except NameError:
+            unmodded = True
+
+    if unmodded:
+        call initialize_generic_roles() from _call_initialize_generic_roles_update
 
     if schedule_early_morning in schedule_actions_list:
         $ schedule_actions_list.remove(schedule_early_morning)
@@ -142,6 +155,7 @@ label update_generic_role_actions(stack):
 
     $ execute_hijack_call(stack)
     return
+
 label rename_person(person):
     "You tell [person.possessive_title] that you are giving her a new name."
     while True:

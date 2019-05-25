@@ -91,14 +91,15 @@ init 2 python:
                 stack.append(game_label)
         return stack
 
+    # Serum Mod
+    serum_mod_options_action = Action("Serum MOD Settings", serum_mod_settings_requirement, "show_serum_mod_settings", menu_tooltip = "Enable or disable serum")
+
 label activate_serum_mod_core(stack):
-    # define here using $ so it gets stored in save game
     $ serum_mod_list = []
     python:
         stack = append_serum_mods_to_stack(stack)
 
         # initalize configuration from bedroom
-        serum_mod_options_action = Action("Serum MOD Settings", serum_mod_settings_requirement, "show_serum_mod_settings", menu_tooltip = "Enable or disable serum")
         bedroom.actions.append(serum_mod_options_action)
 
         # continue on the hijack stack if needed
@@ -107,7 +108,21 @@ label activate_serum_mod_core(stack):
 
 label update_serum_mod_core(stack):
     python:
+        unmodded = False
+        try:
+            serum_mod_list
+        except NameError:
+            unmodded = True
+
+    if unmodded:
+        $ serum_mod_list = []
+        
+    python:
         stack = append_serum_mods_to_stack(stack)
+
+        if not serum_mod_options_action in bedroom.actions:
+            bedroom.actions.append(serum_mod_options_action)
+
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return

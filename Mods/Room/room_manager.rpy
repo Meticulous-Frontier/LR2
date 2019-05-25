@@ -18,6 +18,7 @@ init -1 python:
 
 init 2 python:
     add_label_hijack("normal_start", "activate_room_manager")
+    add_label_hijack("after_load", "update_room_manager")
 
 init 3 python:
     def mod_room_manager_append(action): # Make sure you input a valid action. e.g sleep_action
@@ -32,12 +33,12 @@ init 3 python:
         return
 
     room_manager_action = ActionMod("Enter the elevator", room_manager_action_requirement, "room_manager_action_label", initialization = room_manager_initialization,
-        menu_tooltip = "Visit rooms on different floors", category = "Misc")
+        menu_tooltip = "Visit rooms on different floors", category = "Misc", priority = 1)
 
         # Room(name,formalName,connections,background_image,objects,people,actions,public,map_pos, tutorial_label = None, visible = True)
     elevator = Room("elevator", "Elevator", [], apartment_background, [],[],[], False,[], None, False) # Create a custom room that can be put to use for generic events and such.
 
-label activate_room_manager(stack):
+label initialize_room_manager():
     $ room_manager_tutorial = False
     # Default mod room lists
     # Player's home.
@@ -135,10 +136,27 @@ label activate_room_manager(stack):
 #        .append()
 #    $ mod_room_manager_append(room_manager_action) # Appends the action to any room in the mod_rooms_append list.
                            #This is also done whenever accessing any entry points so a restart of the mod isn't required.
+    return
+
+label activate_room_manager(stack):
+    call initialize_room_manager() from _call_initialize_room_manager_activate
 
     $ execute_hijack_call(stack)
     return
 
+label update_room_manager(stack):
+    python:
+        unmodded = False
+        try:
+            mod_rooms_append
+        except NameError:
+            unmodded = True
+
+    if unmodded:
+        call initialize_room_manager() from _call_initialize_room_manager_update
+
+    $ execute_hijack_call(stack)
+    return
 
 init 2 python: # Requirement for the elevator action to show in "Do something..." if it has been appended to the room.
     def room_manager_action_requirement():
