@@ -66,10 +66,11 @@ init 2 python:
         # store instances of mod
         _instances = set()
 
-        def __init__(self, name, requirement, effect, args = None, requirement_args = None, menu_tooltip = None, initialization = None, category="Misc", enabled = True):
+        def __init__(self, name, requirement, effect, args = None, requirement_args = None, menu_tooltip = None, initialization = None, category="Misc", enabled = True, priority = 10):
             self.initialization = initialization
             self.enabled = enabled
             self.category = category
+            self.priority = priority
 
             Action.__init__(self, name, requirement, effect, args, requirement_args, menu_tooltip)
 
@@ -98,7 +99,6 @@ init 2 python:
         for action_mod in ActionMod._instances:
             if not is_in_action_mod_list(action_mod.name):
                 action_mod_list.append(action_mod)
-                action_mod.initialize()
             else:
                 remove_list.append(action_mod)
         
@@ -106,7 +106,15 @@ init 2 python:
         for action_mod in remove_list:
             ActionMod._instances.remove(action_mod)
 
+        # initialize mods       
+        for action_mod in sorted(ActionMod._instances, key = lambda x: x.priority):
+            action_mod.initialize()
+
         return
+
+    # mod settings action
+    action_mod_options_action = Action("MOD Settings", action_mod_settings_requirement, "show_action_mod_settings", menu_tooltip = "Enable or disable mods")
+
 
 init 5 python:
     add_label_hijack("normal_start", "activate_action_mod_core")  
@@ -123,7 +131,6 @@ label activate_action_mod_core(stack):
     python:
         append_and_initialize_action_mods()
 
-        action_mod_options_action = Action("MOD Settings", action_mod_settings_requirement, "show_action_mod_settings", menu_tooltip = "Enable or disable mods")
         bedroom.actions.append(action_mod_options_action)
 
         # continue on the hijack stack if needed
@@ -133,7 +140,20 @@ label activate_action_mod_core(stack):
 # called after loading a save game
 label update_action_mod_core(stack):
     python:
+        unmodded = False
+        try:
+            action_mod_list
+        except NameError:
+            unmodded = True
+
+    if unmodded:
+        $ action_mod_list = []
+
+    python:
         append_and_initialize_action_mods()
+
+        if not action_mod_options_action in bedroom.actions:
+            bedroom.actions.append(action_mod_options_action)
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)

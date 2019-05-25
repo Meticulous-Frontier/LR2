@@ -24,11 +24,6 @@ init 2 python:
             return True
 
     def hair_salon_mod_initialization(self):
-        # Always check if the room is somehow already added.
-        # Enables the elevator.
-        if mall_salon not in mod_rooms_mall:
-            mod_rooms_mall.append(mall_salon)
-
         # Always check if the action is somehow already added.
         # Enables the salon_action for the salon.
         if salon_action not in mall_salon.actions:
