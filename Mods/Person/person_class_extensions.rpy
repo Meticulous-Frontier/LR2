@@ -130,7 +130,7 @@ init -1:
         # Strips down the person to a clothing their are comfortable with (starting with top, before bottom)
         # narrator_messages: narrator voice after each item of clothing stripped, use '[person.<title>]' for titles and '[strip_choice.name]' for clothing item.
             # Can be an array of messages for variation in message per clothing item or just a single string or None for silent stripping
-        def strip_outfit_to_max_sluttiness(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, narrator_messages = None, character_placement = None, temp_sluttiness_increase = 0):
+        def strip_outfit_to_max_sluttiness(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, narrator_messages = None, character_placement = None, temp_sluttiness_boost = 0):
             # internal function to strip top clothing first.           
             def get_strip_choice_upper_first(outfit, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True):
                 strip_choice = outfit.remove_random_upper(top_layer_first)
@@ -151,11 +151,11 @@ init -1:
             messages = get_messages(narrator_messages)
             msg_count = len(messages)
 
-            test_outfit = the_person.outfit.get_copy()
+            test_outfit = self.outfit.get_copy()
             removed_something = False
 
             strip_choice = get_strip_choice_upper_first(test_outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet)
-            while strip_choice and self.judge_outfit(test_outfit, temp_sluttiness_increase):
+            while strip_choice and self.judge_outfit(test_outfit, temp_sluttiness_boost):
                 self.draw_animated_removal(strip_choice, character_placement = character_placement) #Draw the strip choice being removed from our current outfit
                 self.outfit = test_outfit.get_copy() #Swap our current outfit out for the test outfit.
                 if msg_count > 0:   # do we need to show a random message and replace titles and outfit name
@@ -234,7 +234,7 @@ init -1:
                 self.opinions[topic][0] = score
 
             if add_to_log:
-                mc.log_event("Positive: " + (self.title or self.name) + " " + opinion_score_to_string(score) + " " + str(topic), "float_text_green")
+                mc.log_event((self.title or self.name) + " " + opinion_score_to_string(score) + " " + str(topic), "float_text_green")
             return
         # Add increase opininion function to person class
         Person.increase_opinion_score = increase_opinion_score
@@ -262,7 +262,7 @@ init -1:
                 self.opinions[topic][0] = score
 
             if add_to_log:
-                mc.log_event("Negative: " + (self.title or self.name) + " " + opinion_score_to_string(score) + " " + str(topic), "float_text_green")
+                mc.log_event((self.title or self.name) + " " + opinion_score_to_string(score) + " " + str(topic), "float_text_green")
             return
         # Add decrease opininion function to person class
         Person.decrease_opinion_score = decrease_opinion_score

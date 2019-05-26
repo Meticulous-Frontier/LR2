@@ -636,7 +636,7 @@ screen cmw(): # Cheats affecting the general world
                 textbutton "Crisis & Events" action ToggleVariable("cml") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "List of crisis and events"
 
                 if cml:
-                    $ total_pages = 3
+                    $ total_pages = 4
                     textbutton "Next Page: [cmlpage]" action [If(cmlpage == total_pages, true = SetVariable("cmlpage", cmlpage - total_pages + 1), false = SetVariable("cmlpage", cmlpage + 1))] alternate [If(cmlpage == 1, true = SetVariable("cmlpage", cmlpage + total_pages - 1), false = SetVariable("cmlpage", cmlpage - 1))] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "Shift through pages"
 
             if cml == True and cmlpage == 1: # Page 1 Work Related Crisis Events
@@ -711,14 +711,19 @@ screen cmw(): # Cheats affecting the general world
                     textbutton "Town Walk" action Call("town_walk_crisis_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Taking an afternoon stroll through town"
                     textbutton "Going to the Gym" action Call("select_person_for_gym") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Give an employee a training session at the gym"
                     textbutton "Business Meeting" action Call("business_meeting_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Taking an afternoon stroll through town"
-                    textbutton "Coffee Break" action Call("coffee_break_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Some girls have a coffe break in the office"
-                    textbutton "Late for Work" action Call("late_for_work_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "An employee is late for work in the morning"
+                    textbutton "Coffee Break" action Call("coffee_break_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Some girls have a coffe break in the office (Chit Chat)"
+                    textbutton "Coffee Break 2" action Call("coffee_break2_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Some girls have a coffe break in the office (Food Delivery)"
 
                 vbox:
+                    textbutton "Late for Work" action Call("late_for_work_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "An employee is late for work in the morning"
                     textbutton "Mall Introduction" action Call("mall_introduction_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "A friend introduces a stranger in the mall"
 
 
-            # if cml == True and cmlpage == 4: # Page 4
+            if cml == True and cmlpage == 4: # Page 4
+                vbox:
+                    textbutton "StarBuck" action NullAction() style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 tooltip ""
+                    textbutton "One on One Training" action Call("SB_one_on_one_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "An employee is asking for a one on one training session"
+
 
             # if cml == True and cmlpage == 5: # Page 5 If you want to add additional pages modify the "Next Page" text button as well!
 

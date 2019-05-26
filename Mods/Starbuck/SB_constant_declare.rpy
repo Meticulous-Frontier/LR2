@@ -4,11 +4,14 @@ init -3 python:
     FETISH_SEX_SKILL_MAX = 5
     FETISH_SKILL_RAISE_CHANCE = 8
     FETISH_DEVELOPMENT_CHANCE = 18
-    FETISH_BASIC_OPINION_LIST = ["giving handjobs", "being fingered", "not wearing underwear", "not wearing anything", "showing her tits", "big dicks"]
-    FETISH_ANAL_OPINION_LIST = ["anal sex", "showing her ass","being submissive"]
+    FETISH_BASIC_OPINION_LIST = ["giving handjobs", "being fingered", "kissing", "masturbating", "big dicks"]
+    FETISH_ANAL_OPINION_LIST = ["anal sex", "showing her ass", "being submissive"]
     FETISH_ORAL_OPINION_LIST = ["giving blowjobs", "getting head", "drinking cum"]
     FETISH_VAGINAL_OPINION_LIST = ["doggy style sex", "missionary style sex", "sex standing up", "vaginal sex",]
     FETISH_CUM_OPINION_LIST = ["drinking cum", "creampies", "cum facials", "being covered in cum", "risking getting pregnant"]
+    #suggestion add exhibitionist fetish and move some of the basic fetishes to this one
+    FETISH_EXHIBITION_OPINION_LIST = ["not wearing underwear", "not wearing anything", "showing her tits", "showing her ass", "public sex", "lingerie", "skimpy outfits", "skimpy uniforms" ]
+
     FETISH_EVENT_TARGET = None
     #global FETISH_VAGINAL_EVENT_INUSE, FETISH_ANAL_EVENT_INUSE
     FETISH_VAGINAL_EVENT_INUSE = False

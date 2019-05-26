@@ -38,26 +38,35 @@ init -1:
             the_person.change_slut_temp(15, add_to_log)
 
         def submission_function_on_turn(the_person, add_to_log):
-                the_person.change_obedience(3, add_to_log)
+            the_person.change_obedience(3, add_to_log)
 
         def fetish_basic_function_on_turn(the_person, add_to_log):
-                fetish_random_roll_1 = renpy.random.randint(0,100)
-                fetish_random_roll_2 = renpy.random.randint(0,100)
+            fetish_random_roll_1 = renpy.random.randint(0,100)
+            fetish_random_roll_2 = renpy.random.randint(0,100)
 
-                #the_person.sex_skills["Foreplay"] += 1
+            #the_person.sex_skills["Foreplay"] += 1
 
-                #the_person.sexy_opinions["kissing"] = [2, True]
-                if fetish_random_roll_1 < FETISH_SKILL_RAISE_CHANCE:
-                    if the_person.sex_skills["Foreplay"] < FETISH_SEX_SKILL_MAX:
-                        the_person.sex_skills["Foreplay"] += 1
+            #the_person.sexy_opinions["kissing"] = [2, True]
+            if fetish_random_roll_1 < FETISH_SKILL_RAISE_CHANCE:
+                if the_person.sex_skills["Foreplay"] < FETISH_SEX_SKILL_MAX:
+                    the_person.sex_skills["Foreplay"] += 1
 
-                if fetish_random_roll_2 < FETISH_DEVELOPMENT_CHANCE:
-                    SB_random_fetish_key = get_random_from_list( FETISH_BASIC_OPINION_LIST)
-                    SB_random_opinion = the_person.get_opinion_score(SB_random_fetish_key)
-                    if SB_random_opinion < FETISH_SEX_SKILL_MAX:
-                        SB_random_opinion += 1
-                        the_person.sexy_opinions[SB_random_fetish_key] = [SB_random_opinion, True]
+            if fetish_random_roll_2 < FETISH_DEVELOPMENT_CHANCE:
+                SB_random_fetish_key = get_random_from_list( FETISH_BASIC_OPINION_LIST)
+                SB_random_opinion = the_person.get_opinion_score(SB_random_fetish_key)
+                if SB_random_opinion < FETISH_SEX_SKILL_MAX:
+                    SB_random_opinion += 1
+                    the_person.sexy_opinions[SB_random_fetish_key] = [SB_random_opinion, True]
 
+        def fetish_exhibition_on_turn(the_person, add_to_log):
+            fetish_random_roll_2 = renpy.random.randint(0,100)
+
+            if fetish_random_roll_2 < FETISH_DEVELOPMENT_CHANCE:
+                SB_random_fetish_key = get_random_from_list( FETISH_EXHIBITION_OPINION_LIST)
+                SB_random_opinion = the_person.get_opinion_score(SB_random_fetish_key)
+                if SB_random_opinion < FETISH_SEX_SKILL_MAX:
+                    SB_random_opinion += 1
+                    the_person.sexy_opinions[SB_random_fetish_key] = [SB_random_opinion, True]
 
         def fetish_oral_function_on_turn(the_person, add_to_log):
                 fetish_random_roll_1 = renpy.random.randint(0,100)
@@ -324,6 +333,28 @@ label SB_instantiate_serum_traits(): #Creates all of the default LR2 serum trait
         #     is_side_effect = a_bool)
             )
 
+        fetish_exhibition_ther = SerumTrait(name = "Exhibitionism Fetish Therapy",
+             desc = "Over time, increases the need to behave in an extravagant way in order to attract attention.",
+             positive_slug = "Slowly increases exhibionistic behaviour, +$5 Value",
+             negative_slug = "+100 Serum Research, +100 Production Cost",
+             value_added = 5,
+             research_added = 100 * FETISH_RESEARCH_PERCENT,
+        #     slots_added = a_number,
+             production_added = FETISH_PRODUCTION_COST,
+        #     duration_added = a_number,
+             base_side_effect_chance = 20,
+        #     on_apply = submission_function_on_apply,
+        #     on_remove = submission_function_on_remove,
+             on_turn = fetish_exhibition_on_turn,
+        #     on_day = a_function,
+             requires = [fetish_basic_ther],
+             tier = FETISH_RESEARCH_BASE_TIER,
+             start_researched =  False,
+             research_needed = 500 * FETISH_RESEARCH_PERCENT,
+        #     exclude_tags = [list_of_other_tags],
+        #     is_side_effect = a_bool)
+            )
+
         fetish_oral_ther = SerumTrait(name = "Oral Fetish Therapy",
              desc = "Over time, increases general positivity towards Oral Sex.",
              positive_slug = "Slowly increases oral sexual opinions, Slowly increases Oral skill, +$5 Value",
@@ -486,6 +517,7 @@ label SB_instantiate_serum_traits(): #Creates all of the default LR2 serum trait
         list_of_traits.append(sub_ther)
         list_of_traits.append(ovulation_ther)
         list_of_traits.append(fetish_basic_ther)
+        list_of_traits.append(fetish_exhibition_ther)
         list_of_traits.append(fetish_oral_ther)
         list_of_traits.append(fetish_vaginal_ther)
         list_of_traits.append(fetish_anal_ther)

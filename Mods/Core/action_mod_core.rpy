@@ -87,9 +87,9 @@ init 2 python:
     def action_mod_settings_requirement():
         return True
 
-    def is_in_action_mod_list(action_name):
-        for action_mod in action_mod_list:
-            if action_mod.name == action_name:
+    def is_in_action_mod_list(action_mod):
+        for am in action_mod_list:
+            if am.effect == action_mod.effect:
                 return True
         return False
 
@@ -97,7 +97,7 @@ init 2 python:
     def append_and_initialize_action_mods():
         remove_list = []
         for action_mod in ActionMod._instances:
-            if not is_in_action_mod_list(action_mod.name):
+            if not is_in_action_mod_list(action_mod):
                 action_mod_list.append(action_mod)
             else:
                 remove_list.append(action_mod)

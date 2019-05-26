@@ -19,7 +19,7 @@ init 2 python:
                     return True
         return False
 
-    mall_introduction_action = ActionMod("Mall Introduction Crisis", mall_introduction_requirement, "mall_introduction_action_label",
+    mall_introduction_action = ActionMod("Mall Introduction", mall_introduction_requirement, "mall_introduction_action_label",
         menu_tooltip = "You meet a stranger and a friend introduces you.", category = "Mall")
     crisis_list.append([mall_introduction_action, mall_introduction_weight])
 

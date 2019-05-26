@@ -15,7 +15,7 @@ init 2 python:
         home_shower.link_locations(hall)
         return
 
-    shower_crisis_action = ActionMod("Shower Crisis", shower_crisis_requirement,"shower_crisis_action_label", initialization = shower_mod_initialization, 
+    shower_crisis_action = ActionMod("Morning Shower", shower_crisis_requirement,"shower_crisis_action_label", initialization = shower_mod_initialization, 
         menu_tooltip = "In the morning you notice the door to shower is open and someone is in there.", category="Home")
     morning_crisis_list.append([shower_crisis_action, shower_mod_weight])   
     
