@@ -82,7 +82,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                     loser.char "Aww you're no fun, [loser.mc_title]. If he makes me pay this time it's your fault."
 
             "You watch as [loser.possessive_title] strips down."
-            $ loser.strip_outfit_to_max_sluttiness()
+            $ loser.strip_outfit_to_max_sluttiness(temp_sluttiness_boost = 40)
             # TODO: Figure out how to keep the cum on the face, just calling the cum_on_face() method does not work ????
             "She gives you a wink and turns around to pickup the food."
             $ loser.draw_person(position = 'walking_away')

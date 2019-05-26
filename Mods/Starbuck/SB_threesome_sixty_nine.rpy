@@ -103,7 +103,7 @@ label scene_SB_threesome_sixty_nine_1(the_person_1, the_person_2, the_location, 
             "Suck her nipples." if the_person_2.outfit.tits_available():
                 "You lean forward and run your tongue all around one of [the_person_2.title]'s nipples."
                 the_person_2.char "Oh! [the_person_2.mc_title]! That feels good!."
-                "You suck one of [the_person_2.possessive_title] into your mouth. You flip it up and down with your tongue a few times."
+                "You suck one of [the_person_2.possessive_title]'s nipples into your mouth. You flip it up and down with your tongue a few times."
                 $the_person_2.change_arousal(mc.sex_skills["Oral"])
             "Suck her nipples.\n{size=22}Obstucted by Clothing{/size} (disabled)" if not the_person_2.outfit.tits_available():
                 pass
