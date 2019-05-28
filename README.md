@@ -18,7 +18,7 @@ to the screen to a minimum.
 How to Install:
 
     1. Download a .zip file from the master branch.
-    2. Extract the contents of the .zip into the Lab Rats 2/game/ folder.
+    2. Extract Mods folder contents of the .zip into the Lab Rats 2/game/ folder.
     3. Launch Lab Rats 2 and load up a save or start fresh.
     4. Skip time or play normally until the crisis event telling you about a computer in your bedroom is done.
     5. Go to the player's bedroom and use the PC via the "Do something..." menu.
