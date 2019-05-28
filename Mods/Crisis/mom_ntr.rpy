@@ -730,7 +730,7 @@ label mom_ntr_mod_action_label:
                                     man_name "Ow, fuck! That was great!"
                                     the_person.char "Indeed, [man_name]! It was great!"
                                     if submissive:
-                                         the_person.char "I guess you like when a girl allows you to be rough, don't you? I too like feel owned by a man while he fucks me."
+                                         the_person.char "I guess you like it when a girl allows you to be rough, don't you? I like feeling owned by a man while he fucks me."
                                          man_name "Yes, it is a wonderful feeling. I really turns me on. Wish I could do it with my wife..."
                                     man_name "Thanks, [the_person.name]. I really needed that."
                                     $ the_person.draw_person(position = "stand2", emotion = "happy")
@@ -1704,7 +1704,7 @@ label mom_ntr_mod_action_label:
                                 man_name2 "Ow, fuck! That was great!"
                                 the_person.char "Indeed, [man_name2]! It was great!"
                                 if submissive:
-                                     the_person.char "I guess you like when a girl allows you to be rough, don't you? I too like how it feels being owned by a man while he fucks me."
+                                     the_person.char "I guess you like it when a girl allows you to be rough, don't you? I like feeling owned by a man while he fucks me."
                                      man_name2 "Yes, it is a wonderful feeling. It really turns me on. Wish I could do this with my wife..."
                                 man_name2 "Thanks, [the_person.name]. I really needed that."
                                 man_name "I'm cumming too!"
