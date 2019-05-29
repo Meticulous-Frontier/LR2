@@ -109,8 +109,7 @@ init 2:
                         action NullAction()
                         sensitive True
 
-                    $ person_height = height_to_string(person.height)
-                    textbutton "Height: [person_height]":
+                    textbutton "Height: " + height_to_string(person.height):
                         ysize 28
                         text_style "menu_text_style"
                         tooltip "The length of the person in feet and inches."
@@ -124,8 +123,7 @@ init 2:
                         sensitive True
 
                     if hasattr(person, "weight"):
-                        $ weight = get_person_weight_string(person)
-                        textbutton "Weight: [weight]":
+                        textbutton "Weight: " + get_person_weight_string(person):
                             ysize 28
                             text_style "menu_text_style"
                             action NullAction()
