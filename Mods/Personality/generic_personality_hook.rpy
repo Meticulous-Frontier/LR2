@@ -16,8 +16,8 @@ init 1 python:
             return_character = get_premade_character()
 
         if return_character is None: #Either we aren't getting a premade, or we are out of them.
-            # Use full height range of person object
-            return_character = create_random_person(height = 0.8 + (renpy.random.random()/5))
+            # Use larger height range of person object (not full)
+            return_character = create_random_person(height = 0.825 + (renpy.random.random()/7))
 
         update_random_person(return_character)
 
@@ -25,8 +25,9 @@ init 1 python:
 
     # change the random person based other characteristics of personality
     def update_random_person(person):
-        if (person.personality == cougar_personality):  # this can be applied to any random person, but the age could be to low, fix that here
+        if person.personality.personality_type_prefix == "cougar":  # this can be applied to any random person, but the age could be to low, fix that here
             person.age = renpy.random.randint(40, 55)
+            #mc.log_event((person.title or person.name) + " age change to " + str(person.age), "float_gray_text")
         elif person.age > 40: # not cougar but old, that sounds wrong, fix it
             person.age = renpy.random.randint(18, 40)
 
