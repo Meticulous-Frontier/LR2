@@ -12,7 +12,7 @@ init 1 python:
         starbuck_personality = Personality("starbuck", default_prefix = "relaxed",
         common_likes = ["skirts", "small talk", "the colour blue", "makeup"],
         common_sexy_likes = ["lingerie","taking control",  "doggy style sex", "creampies"],
-        common_dislikes = ["working", "conservative outfits", "research work", "production work"],
+        common_dislikes = ["working", "research work", "production work"],
         common_sexy_dislikes = [ "masturbating", "giving handjobs"],
         titles_function = starbuck_titles, possessive_titles_function = starbuck_possessive_titles, player_titles_function = starbuck_player_titles)
 
@@ -49,7 +49,7 @@ init 1 python:
         #global starbuck_role
         global starbuck
         starbuck = Sex_Shop_Owner( name = "Starbuck", last_name = "Thrace", age = 32, body_type = "curvy_body", tits="E",  height = 0.95,  body_images = white_skin, expression_images = Expression("Starbuck\'s Expression Set", "white", "Face_4"), hair_colour="blond", hair_style = messy_short_hair.get_copy(), skin="white" , \
-            eyes = "brown", job = "Sex Shop Owner", wardrobe = starbuck_wardrobe, personality = starbuck_personality, stat_list = [3,4,3],  skill_list = [1,1,4,2,1],  sluttiness = 42,  obedience = -22, suggest = 0, sex_list = [3,3,4,4], love = 0, happiness = 100, \
+            eyes = "brown", job = "Sex Shop Owner", wardrobe = starbuck_wardrobe, personality = starbuck_personality, stat_list = [3,4,3],  skill_list = [1,1,4,2,1],  sluttiness = 42,  obedience = -22, suggest = 0, sex_list = [3,3,4,4], love = 0, happiness = 119, \
             home = start_home, font = get_random_font(), work = None, name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", special_role = None)
 
 #def __init__(self,name,last_name,age,body_type,tits,height,body_images,expression_images,hair_colour,hair_style,skin,eyes,job,wardrobe,personality,stat_list,skill_list,
