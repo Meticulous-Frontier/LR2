@@ -40,7 +40,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                 frame:
                     background "#1a45a1aa"
                     xsize 325
-                    ysize 450
+                    ysize 250
                     vbox:
                         text "Main Stats" style "menu_text_style" size 22
                         text "Charisma: [the_person.charisma]" style "menu_text_style"
@@ -49,7 +49,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                 frame:
                     background "#1a45a1aa"
                     xsize 325
-                    ysize 450
+                    ysize 250
                     vbox:
                         text "Work Skills" style "menu_text_style" size 22
                         text "HR Skill: [the_person.hr_skill]" style "menu_text_style"
@@ -61,7 +61,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                 frame:
                     background "#1a45a1aa"
                     xsize 325
-                    ysize 450
+                    ysize 250
                     vbox:
                         text "Sex Skills" style "menu_text_style" size 22
                         text "Foreplay Skill: " + str(the_person.sex_skills["Foreplay"]) style "menu_text_style"
@@ -72,7 +72,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                 frame:
                     background "#1a45a1aa"
                     xsize 325
-                    ysize 450
+                    ysize 250
                     vbox:
                         text "Current Status" style "menu_text_style" size 22
                         text "Happiness: [the_person.happiness]" style "menu_text_style"
@@ -83,7 +83,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                 frame:
                     background "#1a45a1aa"
                     xsize 325
-                    ysize 450
+                    ysize 250
                     vbox:
                         text "Currently Affected By:" style "menu_text_style" size 22
                         if not the_person.serum_effects:
@@ -101,52 +101,52 @@ init 2: # Need to allow for None name roles in this screen as well.
                 frame:
                     background "#1a45a1aa"
                     xsize 415
-                    ysize 200
+                    ysize 400
                     vbox:
                         text "Loves" style "menu_text_style" size 22
                         for opinion in master_opinion_dict:
                             if master_opinion_dict[opinion][0] == 2:
                                 if master_opinion_dict[opinion][1]:
-                                    text "   " + opinion style "menu_text_style"
+                                    text "   " + opinion.title() style "menu_text_style"
                                 else:
                                     text "   ????" style "menu_text_style"
 
                 frame:
                     background "#1a45a1aa"
                     xsize 415
-                    ysize 200
+                    ysize 400
                     vbox:
                         text "Likes" style "menu_text_style" size 22
                         for opinion in master_opinion_dict:
                             if master_opinion_dict[opinion][0] == 1:
                                 if master_opinion_dict[opinion][1]:
-                                    text "   " + opinion style "menu_text_style"
+                                    text "   " + opinion.title() style "menu_text_style"
                                 else:
                                     text "   ????" style "menu_text_style"
 
                 frame:
                     background "#1a45a1aa"
                     xsize 415
-                    ysize 200
+                    ysize 400
                     vbox:
                         text "Dislikes" style "menu_text_style" size 22
                         for opinion in master_opinion_dict:
                             if master_opinion_dict[opinion][0] == -1:
                                 if master_opinion_dict[opinion][1]:
-                                    text "   " + opinion style "menu_text_style"
+                                    text "   " + opinion.title() style "menu_text_style"
                                 else:
                                     text "   ????" style "menu_text_style"
 
                 frame:
                     background "#1a45a1aa"
                     xsize 415
-                    ysize 200
+                    ysize 400
                     vbox:
                         text "Hates" style "menu_text_style" size 22
                         for opinion in master_opinion_dict:
                             if master_opinion_dict[opinion][0] == -2:
                                 if master_opinion_dict[opinion][1]:
-                                    text "   " + opinion style "menu_text_style"
+                                    text "   " + opinion.title() style "menu_text_style"
                                 else:
                                     text "   ????" style "menu_text_style"
 
