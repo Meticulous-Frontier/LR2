@@ -16,7 +16,8 @@ init 1 python:
             return_character = get_premade_character()
 
         if return_character is None: #Either we aren't getting a premade, or we are out of them.
-            return_character = create_random_person()
+            # Use full height range of person object
+            return_character = create_random_person(height = 0.8 + (renpy.random.random()/5))
 
         update_random_person(return_character)
 
