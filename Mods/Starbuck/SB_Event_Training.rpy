@@ -62,7 +62,7 @@ label SB_one_on_one_label():
             "You explain to [the_person.possessive_title] the ins and outs of HR work. You do it in pretty broad terms, but it seems like she gets the hang of it pretty quickly."
             $ change_amount = renpy.random.randint(1,(mc.hr_skill - the_person.hr_skill))
             $ the_person.hr_skill += change_amount
-            $ mc.log_event("[the_person.title]: +[change_amount] HR Skill", "float_text_grey")
+            $ mc.log_event(the_person.title + ": +[change_amount] HR Skill", "float_text_grey")
             $ increase_job_affection(the_person, "HR work")
             #show screen float_up_screen(["+[change_amount] HR Skill"],["float_text_grey"])
 
@@ -70,7 +70,7 @@ label SB_one_on_one_label():
             "You do some hands on with [the_person.possessive_title], showing her various methods for securing the different chemicals required for serum production."
             $ change_amount = renpy.random.randint(1,(mc.supply_skill - the_person.supply_skill))
             $ the_person.supply_skill += change_amount
-            $ mc.log_event("[the_person.title]: +[change_amount] Supply skill", "float_text_grey")
+            $ mc.log_event(the_person.title + ": +[change_amount] Supply skill", "float_text_grey")
             $ increase_job_affection(the_person, "supply work")
             #show screen float_up_screen(["+[change_amount] Supply Skill"],["float_text_grey"])
 
@@ -78,7 +78,7 @@ label SB_one_on_one_label():
             "You spend some time with [the_person.possessive_title], giving all kind of advice on the art of the sale. It's not just all about good deals, but making people understand they need the product you offer."
             $ change_amount = renpy.random.randint(1,(mc.market_skill - the_person.market_skill))
             $ the_person.market_skill += change_amount
-            $ mc.log_event("[the_person.title]: +[change_amount] Marketing skill", "float_text_grey")
+            $ mc.log_event(the_person.title + ": +[change_amount] Marketing skill", "float_text_grey")
             $ increase_job_affection(the_person, "marketing work")
             #show screen float_up_screen(["+[change_amount] Marketing Skill"],["float_text_grey"])
 
@@ -86,7 +86,7 @@ label SB_one_on_one_label():
             "You talk with [the_person.possessive_title] about various chemicals and scientific methods, and how they apply do different portions of the brain."
             $ change_amount = renpy.random.randint(1,(mc.research_skill - the_person.research_skill))
             $ the_person.research_skill += change_amount
-            $ mc.log_event("[the_person.title]: +[change_amount] Researching skill", "float_text_grey")
+            $ mc.log_event(the_person.title + ": +[change_amount] Researching skill", "float_text_grey")
             $ increase_job_affection(the_person, "research work")
             #show screen float_up_screen(["+[change_amount] Researching Skill"],["float_text_grey"])
 
@@ -94,7 +94,7 @@ label SB_one_on_one_label():
             "You share some insights withh [the_person.possessive_title] about the chemical processes and reactions between common serum elements."
             $ change_amount = renpy.random.randint(1,(mc.production_skill - the_person.production_skill))
             $ the_person.production_skill += change_amount
-            $ mc.log_event("[the_person.title]: +[change_amount] Production skill", "float_text_grey")
+            $ mc.log_event(the_person.title + ": +[change_amount] Production skill", "float_text_grey")
             $ increase_job_affection(the_person, "production work")
             #show screen float_up_screen(["+[change_amount] Production Skill"],["float_text_grey"])
 
