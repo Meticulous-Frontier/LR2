@@ -1,14 +1,5 @@
 init -1:
     python:
-
-        def change_location(self, new_location): # Overwrites change_location to have a list of followers follow you around. Will go to scheduled room on time advance.
-            self.location = new_location
-            for location in list_of_places:
-                for person in location.people:
-                    if person in list_of_followers:
-                        location.move_person(person, new_location)
-        MainCharacter.change_location = change_location
-
         def location(self): # Check what location a person is in e.g the_person.location() == downtown. Use to trigger events?
             for location in list_of_places:
                 if self in location.people:
@@ -280,7 +271,7 @@ init -1:
 
         Person.review_outfit = review_outfit_enhanced
 
-        def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, character_placement = None): #Draw the person, standing as default if they aren't standing in any other position.
+        def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, character_placement = None, from_scene = False): #Draw the person, standing as default if they aren't standing in any other position.
             if position is None:
                 position = self.idle_pose
 
@@ -293,6 +284,10 @@ init -1:
 
             if character_placement is None: # make sure we don't need to pass the position with each draw
                 character_placement = character_right
+
+            # if normal draw person call, clear scene
+            if not from_scene:
+                renpy.scene("Active")
 
             displayable_list = [] # We will be building up a list of displayables passed to us by the various objects on the person (their body, clothing, etc.)
             displayable_list.append(self.body_images.generate_item_displayable(self.body_type,self.tits,position)) #Add the body displayable

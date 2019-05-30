@@ -44,6 +44,7 @@ init -2 python:
             for actor in self.actors:
                 actor.draw_actor()
 
+        # helper function for strip and animated removal functions
         def draw_scene_without(self, person):
             renpy.scene("Active")
             actor_missing = find_in_list(lambda x: x.person is person, self.actors)
@@ -69,4 +70,4 @@ init -2 python:
                 character_placement = character_right
 
         def draw_actor(self):
-            self.person.draw_person(position = self.position, emotion = self.emotion, special_modifier = self.special_modifier, character_placement = self.character_placement)
+            self.person.draw_person(position = self.position, emotion = self.emotion, special_modifier = self.special_modifier, character_placement = self.character_placement, from_scene = True)
