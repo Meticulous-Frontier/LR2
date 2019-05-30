@@ -34,8 +34,10 @@ label mall_introduction_action_label:
         known_person = get_random_from_list(known_people)
         stranger = get_random_from_list(strangers)
 
-        known_person.draw_person(position = "stand4", emotion = "happy", character_placement = character_center_flipped)
-        stranger.draw_person(position = "stand3", emotion = "default", character_placement = character_right)
+        scene_manager = Scene()
+
+        scene_manager.add_actor(known_person, position = "stand4", emotion = "happy", character_placement = character_center_flipped)
+        scene_manager.add_actor(stranger, position = "stand3")
 
     hide screen person_info_ui
     known_person.char "Oh, hello [known_person.mc_title], how nice to see you here."
@@ -60,7 +62,7 @@ label mall_introduction_action_label:
         known_person.char "And this is my friend, [title_choice]."
 
     mc.name "It's a pleasure to meet you, [stranger.title]."
-    $ stranger.draw_person(emotion = "happy")
+    $ scene_manager.update_actor(stranger, emotion = "happy")
     $ stranger.change_love(5)
     stranger.char "The pleasure is all mine, [stranger.mc_title]."
 
@@ -81,14 +83,12 @@ label mall_introduction_action_label:
 
     mc.name "It was great meeting you both, until next time."
     
-    $ known_person.draw_person(position = "walking_away")
-    $ stranger.draw_person(position = "back_peek")
+    $ scene_manager.update_actor(stranger, position = "back_peek")
+    $ scene_manager.update_actor(known_person, position = "walking_away")
 
     "[stranger.title] looks back at you smiling."
 
-    $ stranger.clear_scene()
-    $ known_person.clear_scene()
-
+    $ renpy.scene("Active")
     return
 
 

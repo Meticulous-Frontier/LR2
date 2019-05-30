@@ -1,13 +1,3 @@
-init -2 python:
-    config.layers.insert(2,"Active2") ## The "Active" layer is used to display the girls images when you talk to them. The next two lines signal it is to be hidden when you bring up the menu and when you change contexts (like calling a screen)
-    config.menu_clear_layers.append("Active2")
-    config.context_clear_layers.append("Active2")
-
-    config.layers.insert(3,"Active3") ## The "Active" layer is used to display the girls images when you talk to them. The next two lines signal it is to be hidden when you bring up the menu and when you change contexts (like calling a screen)
-    config.menu_clear_layers.append("Active3")
-    config.context_clear_layers.append("Active3")
-
-
 init -1:
     python:
 
@@ -18,8 +8,6 @@ init -1:
                     if person in list_of_followers:
                         location.move_person(person, new_location)
         MainCharacter.change_location = change_location
-
-
 
         def location(self): # Check what location a person is in e.g the_person.location() == downtown. Use to trigger events?
             for location in list_of_places:
@@ -130,7 +118,8 @@ init -1:
         # Strips down the person to a clothing their are comfortable with (starting with top, before bottom)
         # narrator_messages: narrator voice after each item of clothing stripped, use '[person.<title>]' for titles and '[strip_choice.name]' for clothing item.
             # Can be an array of messages for variation in message per clothing item or just a single string or None for silent stripping
-        def strip_outfit_to_max_sluttiness(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, narrator_messages = None, character_placement = None, temp_sluttiness_boost = 0):
+        # scene manager parameter is filled from that class so that all people present in scene are drawn
+        def strip_outfit_to_max_sluttiness(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, narrator_messages = None, character_placement = None, temp_sluttiness_boost = 0, position = None, emotion = None, scene_manager = None):
             # internal function to strip top clothing first.           
             def get_strip_choice_upper_first(outfit, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True):
                 strip_choice = outfit.remove_random_upper(top_layer_first)
@@ -156,7 +145,7 @@ init -1:
 
             strip_choice = get_strip_choice_upper_first(test_outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet)
             while strip_choice and self.judge_outfit(test_outfit, temp_sluttiness_boost):
-                self.draw_animated_removal(strip_choice, character_placement = character_placement) #Draw the strip choice being removed from our current outfit
+                self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
                 self.outfit = test_outfit.get_copy() #Swap our current outfit out for the test outfit.
                 if msg_count > 0:   # do we need to show a random message and replace titles and outfit name
                     msg_idx = renpy.random.randint(1, msg_count)
@@ -279,40 +268,11 @@ init -1:
         # attach to person object
         Person.change_willpower = change_willpower
 
-        ## change person placement on the screen
-        def change_placement(self, character_placement = None):
-            clear_old_position = True
-            if character_placement is None:
-                character_placement = character_right
-                clear_old_position = False
-
-            if clear_old_position and not self.last_placement is None and self.last_placement != character_placement: # we change location so clear current location.
-                old_scene_layer = current_scene_layer(self.last_placement)
-                renpy.scene(old_scene_layer)
-
-            active_scene_layer = current_scene_layer(character_placement)
-            renpy.scene(active_scene_layer) # Clear current screen position for placement
-
-            self.last_placement = character_placement
-            return active_scene_layer
-        # add extra function for charater placement
-        Person.change_placement = change_placement
-
-        # removes person from scene
-        def clear_scene(self):
-            active_scene = current_scene_layer(self.last_placement)
-            self.last_placement = None
-            renpy.scene(active_scene)
-
-        Person.clear_scene = clear_scene
-
         def review_outfit_enhanced(self, show_review_message = True):
             self.outfit.remove_all_cum()
 
             if self.should_wear_uniform():
                 self.wear_uniform()#Reset uniform
-            # self.call_uniform_review() #TODO: actually impliment this call, but only when her outfit significantly differs from the real uniform.
-
             elif self.outfit.slut_requirement > self.sluttiness:
                 self.outfit = self.planned_outfit.get_copy()
                 if show_review_message:
@@ -328,16 +288,13 @@ init -1:
             if (self.hair_colour != "black" and self.hair_style.colour == [0.1,0.09,0.08,1]):
                 update_hair_colour(self)
 
-            displayable_list = [] # We will be building up a list of displayables passed to us by the various objects on the person (their body, clothing, etc.)
-
             if emotion is None:
                 emotion = self.get_emotion()
 
             if character_placement is None: # make sure we don't need to pass the position with each draw
-                character_placement = self.last_placement or character_right
+                character_placement = character_right
 
-            active_scene = self.change_placement(character_placement)
-
+            displayable_list = [] # We will be building up a list of displayables passed to us by the various objects on the person (their body, clothing, etc.)
             displayable_list.append(self.body_images.generate_item_displayable(self.body_type,self.tits,position)) #Add the body displayable
             displayable_list.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier)) #Get the face displayable
 
@@ -357,14 +314,12 @@ init -1:
 
             final_image = Composite(*composite_list) # Create a composite image using all of the displayables
 
-            renpy.show(self.name,at_list=[character_placement, scale_person(self.height)],layer=active_scene,what=final_image,tag=self.name)
-            renpy.scene
+            renpy.show(self.name,at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=self.name)
 
         # replace the default draw_person function of the person class
         Person.draw_person = draw_person_enhanced
-        Person.last_placement = None
 
-        def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, special_modifier = None, character_placement = None): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
+        def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, special_modifier = None, character_placement = None, scene_manager = None): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
             #Note: this function includes a call to remove_clothing, it is not needed seperately.
             if position is None:
                 position = self.idle_pose
@@ -376,12 +331,11 @@ init -1:
                 emotion = self.get_emotion()
 
             if character_placement is None: # make sure we don't need to pass the position with each draw
-                character_placement = self.last_placement or character_right
+                character_placement = character_right
 
-            active_scene = current_scene_layer(character_placement)
-
-            renpy.scene(active_scene) # clear layer for new draw action
-            # mc.log_event(self.title + " scene: " + active_scene, "float_text_green")
+            renpy.scene("Active") # clear layer for new draw action
+            if not scene_manager is None:   # when we are called from the scenemanager we have to draw the other characters
+                scene_manager.draw_scene_without(self)
 
             bottom_displayable.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier)) #Get the face displayable, also always under clothing.
 
@@ -415,11 +369,11 @@ init -1:
             final_bottom = Composite(*composite_bottom_params)
             final_top = Composite(*composite_top_params)
 
-            renpy.show("Bottom Composite", at_list=[character_placement, scale_person(self.height)], layer=active_scene, what=final_bottom, tag=self.name+"Bottom")
+            renpy.show("Bottom Composite", at_list=[character_placement, scale_person(self.height)], layer="Active", what=final_bottom, tag=self.name+"Bottom")
             if split_clothing: #Only show this if we actually had something returned to us.
-                renpy.show("Removed Item", at_list=[character_placement, scale_person(self.height), clothing_fade], layer=active_scene, what=split_clothing, tag=self.name+"Middle")
+                renpy.show("Removed Item", at_list=[character_placement, scale_person(self.height), clothing_fade], layer="Active", what=split_clothing, tag=self.name+"Middle")
                 self.outfit.remove_clothing(the_clothing)
-            renpy.show("Top Composite", at_list=[character_placement, scale_person(self.height)], layer=active_scene, what=final_top, tag=self.name+"Top")        
+            renpy.show("Top Composite", at_list=[character_placement, scale_person(self.height)], layer="Active", what=final_top, tag=self.name+"Top")        
         
         Person.draw_animated_removal = draw_animated_removal_enhanced
 
@@ -463,15 +417,6 @@ init -1:
             message += " Willpower"
             mc.log_event(message, "float_text_blue")
             return
-
-        # get scene layer for placement position
-        def current_scene_layer(character_placement):
-            active_scene = "Active"
-            if character_placement == character_center or character_placement == character_center_flipped:
-                active_scene = "Active2"
-            if character_placement == character_left or character_placement == character_left_flipped:
-                active_scene = "Active3"
-            return active_scene
 
 #########################################
 # Transormation for character_placement #

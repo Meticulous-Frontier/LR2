@@ -40,9 +40,12 @@ label coffee_break_action_label:
     return
 
 label coffee_break_chit_chat_label(person_one, person_two, person_three):
-    $ person_one.draw_person(emotion = "default", character_placement = character_left_flipped)
-    $ person_two.draw_person(emotion = "default", character_placement = character_center_flipped)
-    $ person_three.draw_person(emotion = "default")
+    python:
+        scene_manager = Scene()
+        scene_manager.add_actor(person_one, emotion="default", character_placement = character_left_flipped)
+        scene_manager.add_actor(person_two, emotion="default", character_placement = character_center_flipped)
+        scene_manager.add_actor(person_three, emotion="default")
+        scene_manager.draw_scene()
 
     if person_one.sluttiness > 40 and person_three.sluttiness > 40:
         person_one.char "Don't you think [the_person.mc_title] has a nice bulge in his pants."
@@ -53,49 +56,56 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
         person_two.char "I like how his butt flexes in his pants."
         person_three.char "To be honest, I much more prefer the other side."
 
-    $ person_one.draw_person(emotion = "happy")
-    $ person_two.draw_person(emotion = "happy")
-    $ person_three.draw_person(emotion = "happy")
+    python:
+        scene_manager.update_actor(person_one, emotion="happy")
+        scene_manager.update_actor(person_two, emotion="happy")
+        scene_manager.update_actor(person_three, emotion="happy")
+
     "The girls start laughing at [person_three.title]'s last remark."
 
     person_one.char "That was very funny [person_three.name], but I have to get back to work."
-    $ person_one.draw_person(position = "walking_away")
+
+    $ scene_manager.update_actor(person_one, position = "walking_away")
+
     "[person_one.title] walks off to her workstation."
     # remove person 1 from scene
-    $ person_one.clear_scene()
+    $ scene_manager.remove_actor(person_one)
 
     if person_two.sluttiness > 40 and person_three.sluttiness > 40:
         person_two.char "Oh, she's such a stickler for rules."
         person_three.char "Why don't we go break some rules together in the supply closet?"
 
         if person_two.sluttiness > 60 and person_three.sluttiness > 60:
-            $ person_two.draw_person(position = "walking_away")
-            $ person_three.draw_person(position = "walking_away")
+            $ scene_manager.update_actor(person_two, position = "walking_away")
+            $ scene_manager.update_actor(person_three, position = "walking_away")
 
             "You decide to follow them at a discrete distance."
             "As soon as they enter the supply closet you peek through the side window where [person_two.possessive_title] starts kissing [person_three.possessive_title]."
 
-            $ person_two.draw_person(position = "kissing")
-            $ person_three.draw_person(position = "kissing")
+            $ scene_manager.update_actor(person_two, position = "kissing")
+            $ scene_manager.update_actor(person_three, position = "kissing")
 
             "What's your next move?"
             menu:
                 "Walk away":
-                    $ change_scene_display(mc.location)
-                    $ person_two.clear_scene()
-                    $ person_three.clear_scene()
+                    python:
+                        change_scene_display(mc.location)
+                        scene_manager.remove_actor(person_two)
+                        scene_manager.remove_actor(person_three)
                     return
                 "Join them":
                     mc.name "Hello girls... mind if I join your little party?"
-                    $ person_two.draw_person(position = "stand_3")
-                    $ person_three.draw_person(position = "stand_4")
+                    $ scene_manager.update_actor(person_two, position = "stand_3")
+                    $ scene_manager.update_actor(person_three, position = "stand_4")
                     person_three.char "Oh my, hello [person_three.mc_title], we didn't see you there."
                     "You tell the girls to take off their clothes." 
-                    $ person_two.strip_outfit_to_max_sluttiness(temp_sluttiness_boost = 40, character_placement = character_center_flipped)
-                    $ person_three.strip_outfit_to_max_sluttiness(temp_sluttiness_boost = 40)
 
-                    $ person_two.clear_scene()
-                    $ person_three.clear_scene()
+                    python:
+                        scene_manager.strip_actor_outfit_to_max_sluttiness(person_two, temp_sluttiness_boost = 40)
+                        scene_manager.strip_actor_outfit_to_max_sluttiness(person_three, temp_sluttiness_boost = 40)
+
+                        scene_manager.remove_actor(person_two)
+                        scene_manager.remove_actor(person_three)
 
                     # switch to SB ui
                     hide screen person_info_ui
@@ -127,19 +137,22 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                     return
         else:
             person_two.char "Another time, [person_three.name], let's get back to work."
-            $ person_two.draw_person(position = "walking_away")
-            $ person_three.draw_person(position = "walking_away")
+
+            $ scene_manager.update_actor(person_two, position = "walking_away")
+            $ scene_manager.update_actor(person_three, position = "walking_away")
 
             "[person_two.title] grabs [person_three.title] by her arm and they walk down the corridor."
     else:
         person_two.char "Yeah, we better get going too."
-        $ person_two.draw_person(position = "walking_away")
-        $ person_three.draw_person(position = "walking_away")
+        $ scene_manager.update_actor(person_two, position = "walking_away")
+        $ scene_manager.update_actor(person_three, position = "walking_away")
 
         "You watch [person_two.title] and [person_three.title] walk away together."
 
-    # remove person 2 from scene
-    $ person_two.clear_scene()
-    # remove person 3 from scene
-    $ person_three.clear_scene()
+    # clear scene
+    python:
+        scene_manager.remove_actor(person_two)
+        scene_manager.remove_actor(person_three)
+        renpy.scene("Active")
+
     return
