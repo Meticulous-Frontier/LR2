@@ -87,31 +87,44 @@ label append_company_wardrobe:
 
         uniform_mode = "over"
 
-        normalo = Outfit("[mc.business.name] - Normal Uniform")
+        normalo = Outfit("[mc.business.name] - Normal Overwear")
         normalo.add_lower(pencil_skirt.get_copy(), lower_color)
         normalo.add_upper(dress_shirt.get_copy(), upper_color)
         normalo.add_feet(slips.get_copy(), upper_color)
         mc.save_design(normalo, normalo.name, outfit_type = uniform_mode)
 
-        normalo = Outfit("[mc.business.name] - Relaxed Uniform")
+        normalo = Outfit("[mc.business.name] - Pants Overwear")
+        normalo.add_upper(dress_shirt.get_copy(), upper_color)
+        normalo.add_upper(vest.get_copy(), lower_color)
+        normalo.add_lower(suitpants.get_copy(), lower_color)
+        normalo.add_feet(slips.get_copy(), upper_color)
+        mc.save_design(normalo, normalo.name, outfit_type = uniform_mode)
+
+        normalo = Outfit("[mc.business.name] - Relaxed Overwear")
         normalo.add_lower(pencil_skirt.get_copy(), lower_color)
         normalo.add_upper(lace_crop_top.get_copy(), upper_color)
         normalo.add_feet(boot_heels.get_copy(), upper_color)
         mc.save_design(normalo, normalo.name, outfit_type = uniform_mode)
 
-        normalo = Outfit("[mc.business.name] - Sexy Uniform")
+        normalo = Outfit("[mc.business.name] - Sexy Overwear")
         normalo.add_lower(pencil_skirt.get_copy(), lower_color)
         normalo.add_upper(business_vest.get_copy(), upper_color)
         normalo.add_feet(boot_heels.get_copy(), upper_color)
         mc.save_design(normalo, normalo.name, outfit_type = uniform_mode)
 
-        normalo = Outfit("[mc.business.name] - Provocative Uniform")
+        normalo = Outfit("[mc.business.name] - Fitness Overwear")
+        normalo.add_upper(sweater.get_copy(), upper_color)
+        normalo.add_lower(leggings.get_copy(), lower_color)
+        normalo.add_feet(sneakers.get_copy(), upper_color)
+        mc.save_design(normalo, normalo.name, outfit_type = uniform_mode)
+
+        normalo = Outfit("[mc.business.name] - Provocative Overwear")
         normalo.add_lower(belted_skirt.get_copy(), lower_color)
         normalo.add_upper(belted_top.get_copy(), upper_color)
         normalo.add_feet(high_heels.get_copy(), upper_color)
         mc.save_design(normalo, normalo.name, outfit_type = uniform_mode)
 
-        normalo = Outfit("[mc.business.name] - Risque Uniform")
+        normalo = Outfit("[mc.business.name] - Risque Overwear")
         normalo.add_lower(mini_skirt.get_copy(), lower_color)
         normalo.add_upper(business_vest.get_copy(), upper_color)
         normalo.add_feet(high_heels.get_copy(), upper_color)
