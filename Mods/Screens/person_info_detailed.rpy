@@ -23,14 +23,18 @@ init 2: # Need to allow for None name roles in this screen as well.
                     text "[the_person.name] [the_person.last_name]" style "menu_text_style" size 30 xalign 0.5 yalign 0.5 yanchor 0.5 color the_person.char.who_args["color"] font the_person.char.what_args["font"]
                     if not mc.business.get_employee_title(the_person) == "None":
                         text "Position: " + mc.business.get_employee_title(the_person) + " ($[the_person.salary]/day)" style "menu_text_style" xalign 0.5 yalign 0.5 yanchor 0.5
-                    $ role_string = "Special Roles: "
 
-                    if the_person.special_role: # NOTE: This is a temporary workaround to prevent errors due to NoneType Role Name. Will not scale.
-                        if not the_person.special_role[0].role_name is None:
-                            $ role_string += the_person.special_role[0].role_name
-                        for role in the_person.special_role[1::]:
-                            if not role.role_name is None:
-                                $ role_string += ", " + role.role_name
+                    python:
+                        role_string = "Special Roles: "
+                        if the_person.special_role: # NOTE: This is a temporary workaround to prevent errors due to NoneType Role Name. Will not scale.
+                            first = True
+                            for role in the_person.special_role:
+                                if not role.role_name in [generic_people_role.role_name]: # Hide generic role
+                                    if not first:
+                                        role_string += ", "
+                                    role_string += role.role_name
+                                    first = False
+
                     text role_string style "menu_text_style" xalign 0.5 yalign 0.5 yanchor 0.5
             hbox:
                 xsize 1750

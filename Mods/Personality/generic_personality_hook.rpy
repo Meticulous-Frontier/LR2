@@ -39,10 +39,10 @@ init 1 python:
 
     # bind the generic people role actions to the people in the game
     def update_person_roles(person):
-        # Adds mandatory roles to person
-        for role in apply_mandatory_roles:
-            if role not in person.special_role:
-                person.special_role.append(role)        
+        # Adds mandatory roles to person (use name to find since object compare does not work (not implemented in Role class))
+        if find_in_list(lambda x: x.role_name == generic_people_role.role_name, person.special_role) is None:
+            person.special_role.append(generic_people_role)
+        return
 
 label activate_generic_personality(stack):
     python:

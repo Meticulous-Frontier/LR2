@@ -46,8 +46,8 @@ init 2:
                         text "     Job: " + mc.business.get_employee_title(person) style "menu_text_style"
 
                     for role in person.special_role:
-                        if not role.role_name is None:
-                            text "       - " + role.role_name style "menu_text_style" size 14
+                        if not role.role_name in [generic_people_role.role_name]:   # Hide generic role
+                            text "       - " + role.role_name  style "menu_text_style" size 14
 
                 vbox:
                     if person.arousal > 0:
