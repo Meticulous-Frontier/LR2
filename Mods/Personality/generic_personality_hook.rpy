@@ -20,6 +20,7 @@ init 1 python:
             return_character = create_random_person(height = 0.825 + (renpy.random.random()/7))
 
         update_random_person(return_character)
+        update_person_roles(return_character)
 
         return return_character
 
@@ -36,10 +37,18 @@ init 1 python:
             person.set_possessive_title("The unknown woman")
         return
 
+    # bind the generic people role actions to the people in the game
+    def update_person_roles(person):
+        # Adds mandatory roles to person
+        for role in apply_mandatory_roles:
+            if role not in person.special_role:
+                person.special_role.append(role)        
+
 label activate_generic_personality(stack):
     python:
         for person in all_people_in_the_game():
             update_random_person(person)
+            update_person_roles(person)
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
@@ -49,8 +58,8 @@ label update_generic_personality(stack):
     python:
         for person in all_people_in_the_game():
             update_random_person(person)
+            update_person_roles(person)
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return
-
