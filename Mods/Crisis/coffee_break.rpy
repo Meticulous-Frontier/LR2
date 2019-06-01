@@ -95,8 +95,8 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                     return
                 "Join them":
                     mc.name "Hello girls... mind if I join your little party?"
-                    $ scene_manager.update_actor(person_two, position = "stand_3")
-                    $ scene_manager.update_actor(person_three, position = "stand_4")
+                    $ scene_manager.update_actor(person_two, position = "stand3")
+                    $ scene_manager.update_actor(person_three, position = "stand4")
                     person_three.char "Oh my, hello [person_three.mc_title], we didn't see you there."
                     "You tell the girls to take off their clothes." 
 
@@ -111,7 +111,7 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                     hide screen person_info_ui
                     show screen SB_two_person_info_ui(person_two, person_three)                   
 
-                    $ SB_draw_two_person_scene(person_one = person_two, person_two = person_three, one_pos_x = 0.7, one_position = "stand_3", two_position = "stand_4")
+                    $ SB_draw_two_person_scene(person_one = person_two, person_two = person_three, one_pos_x = 0.7, one_position = "stand3", two_position = "stand4")
 
                     call SB_threesome_description(person_two, person_three, SB_threesome_sixty_nine, make_floor(), 0, private = True, girl_in_charge = False)
                     $ SB_draw_two_person_scene(person_one = person_two, person_two = person_three, one_pos_x = 0.7)
