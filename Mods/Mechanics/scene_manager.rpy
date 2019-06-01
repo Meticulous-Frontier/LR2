@@ -61,13 +61,13 @@ init -2 python:
             self.character_placement = character_placement
 
             if position is None:
-                position = person.idle_pose
+                self.position = person.idle_pose
 
             if emotion is None:
-                emotion = person.get_emotion()
+                self.emotion = person.get_emotion()
 
             if character_placement is None:
-                character_placement = character_right
+                self.character_placement = character_right
 
         def draw_actor(self):
             self.person.draw_person(position = self.position, emotion = self.emotion, special_modifier = self.special_modifier, character_placement = self.character_placement, from_scene = True)
