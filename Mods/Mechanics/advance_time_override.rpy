@@ -66,7 +66,7 @@ label advance_time_enhanced:
                 if not action_mod.enabled:
                     disabled += 1
 
-            while len(crisis_tracker) > ((len(crisis_list) - disabled) // 2): # release old tracked events
+            while len(crisis_tracker) > ((len(crisis_list) - disabled) // 3): # release old tracked events
                 del crisis_tracker[0]
 
             possible_crisis_list = []
@@ -118,6 +118,22 @@ label advance_time_enhanced:
 
         call screen end_of_day_update() # We have to keep this outside of a python block, because the renpy.call_screen function does not properly fade out the text bar.
         $ mc.business.clear_messages()
+
+        #Now we run mandatory morning crises. Nearly identical to normal crises, but these always trigger at the start of the day (ie when you wake up and before you have control of your character.)
+        $ count = 0
+        $ max = len(mc.business.mandatory_morning_crises_list)
+        $ clear_list = []
+        while count < max: #We need to keep this in a renpy loop, because a return call will always return to the end of an entire python block.
+            $crisis = mc.business.mandatory_morning_crises_list[count]
+            if crisis.is_action_enabled():
+                $ crisis.call_action()
+                $ renpy.scene("Active")
+                $ clear_list.append(crisis)
+            $ count += 1
+        $ renpy.show(mc.location.name,what=mc.location.background_image) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
+        python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
+            for crisis in clear_list:
+                mc.business.mandatory_morning_crises_list.remove(crisis) #Clean up the list.
 
         if renpy.random.randint(0,100) < morning_crisis_chance: #ie. run crisis at set chance.
             python:

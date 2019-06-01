@@ -3,27 +3,24 @@
 init 2:
     screen map_manager():
         add "Paper_Background.png"
+        modal True
         zorder 100
-        #TODO: figure out why the line drawing is SO SLOW!
-        #UPDATE: Directly drawing to canvases requires software rendering instead of hardware, which makes it much slower. Possible solutions include:
-        # A) Just creating a static map. Boring.
-        # B) Passing the list of places and having Vren_Line do all of the lines at the same time. Batch processing them may be significantly faster.
-        # C) Processing the map image one on initialization and saving it, then just calling it as an image when the map is shown. This doesn't play well with live updating the map.
-        # D) Create a "line" graphic and simply place and stretch it to go between location A and B on the map. Alternatively, take a short line segment and tile it as needed.
-        # D seems to be the option suggested by PyTom, so that's likely what I'll do. (Hello intrepid code reader who has discovered these notes!)
-        # for place in list_of_places: #Draw the background
-        #     for connected in place.connections:
-        #         if mc.location == place and place.visible and connected.visible: #This is an acceptable hack to get reasonable performance.
-        #             add Vren_Line([int(place.map_pos[0]*1920),int(place.map_pos[1]*1080)],[int(connected.map_pos[0]*1920),int(connected.map_pos[1]*1080)],4,"#117bff") #Draw a white line between each location
+
+        $ x_size_percent = 0.07
+        $ y_size_percent = 0.145
 
         for place in list_of_places: #Draw the text buttons over the background
             if place.visible:
+                $ hex_x = x_size_percent * place.map_pos[0]
+                $ hex_y = y_size_percent * place.map_pos[1]
+                if place.map_pos[0] % 2 == 1:
+                    $ hex_y += y_size_percent/2
                 if not place == mc.location:
                     frame:
                         background None
                         xysize [171,150]
                         anchor [0.0,0.0]
-                        align place.map_pos
+                        align (hex_x,hex_y)
                         imagebutton:
                             anchor [0.5,0.5]
                             auto "gui/LR2_Hex_Button_%s.png"
@@ -37,7 +34,7 @@ init 2:
                         background None
                         xysize [171,150]
                         anchor [0.0,0.0]
-                        align place.map_pos
+                        align (hex_x,hex_y)
                         imagebutton:
                             anchor [0.5,0.5]
                             idle "gui/LR2_Hex_Button_Alt_idle.png"
@@ -48,12 +45,18 @@ init 2:
 
             ##TODO: add a sub map to housing_map_manager() so we can go to people's homes
 
+        $ xy_pos = [7,4]
+        $ hex_x = x_size_percent * xy_pos[0]
+        $ hex_y = y_size_percent * xy_pos[1]
+        if xy_pos[0] % 2 == 1:
+            $ hex_y += y_size_percent/2
+
         if mc.location in mc.known_home_locations:
             frame:
                 background None
                 xysize [171,150]
                 anchor [0.0,0.0]
-                align [0.6,0.45]
+                align (hex_x,hex_y)
                 imagebutton:
                     anchor [0.5,0.5]
                     idle "gui/LR2_Hex_Button_Alt_idle.png"
@@ -66,7 +69,7 @@ init 2:
                 background None
                 xysize [171,150]
                 anchor [0.0,0.0]
-                align [0.6,0.45]
+                align (hex_x, hex_y)
                 imagebutton:
                     anchor [0.5,0.5]
                     auto "gui/LR2_Hex_Button_%s.png"

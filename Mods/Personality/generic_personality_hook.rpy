@@ -29,7 +29,7 @@ init 1 python:
         if person.personality.personality_type_prefix == "cougar":  # this can be applied to any random person, but the age could be to low, fix that here
             person.age = renpy.random.randint(40, 55)
             #mc.log_event((person.title or person.name) + " age change to " + str(person.age), "float_gray_text")
-        elif person not in list_of_unique_characters + [mom, lily, stephanie] and person.age > 40: # not cougar but old, that sounds wrong, fix it
+        elif person not in list_of_unique_characters + [mom, lily, aunt, cousin, stephanie] and person.age > 40: # not cougar but old, that sounds wrong, fix it
             person.age = renpy.random.randint(18, 40)
 
         # A person could have dialog even if we don't know her

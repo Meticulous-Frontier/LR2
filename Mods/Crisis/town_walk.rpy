@@ -17,7 +17,7 @@ init 2 python:
 
 label town_walk_crisis_action_label:
     ## You spy on a neighbour during your town walk activities
-    $ exclude_list = [mom, lily, mc] # exclude family and MC
+    $ exclude_list = [mom, lily, aunt, cousin, mc] # exclude family and MC
     if mc.business.is_open_for_business() and not mc.business.is_weekend(): # exclude employees working on weekdays
         $ exclude_list.append(mc.business.get_employee_list())
 

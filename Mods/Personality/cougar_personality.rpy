@@ -48,7 +48,7 @@ init 5 python:
 # this used on the startup of the game (called ONCE)
 label correct_personality_age_action(stack):
     python:
-        for person in all_people_in_the_game(excluded_people = [mc, lily, mom, stephanie] + list_of_unique_characters):
+        for person in all_people_in_the_game(excluded_people = [mc, lily, mom, aunt, cousin, stephanie] + list_of_unique_characters):
             # make cougars personalities the right age
             if person.personality == cougar_personality:
                 if person.age < 40: # split age for cougars
