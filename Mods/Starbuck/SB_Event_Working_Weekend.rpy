@@ -619,7 +619,7 @@ label SB_working_weekend_crisis_label():
             "Thank her for the show":
                 mc.name "Thanks for that very pleasant distraction, [the_person.title], but I need to get back to work now."
                 "[the_person.possessive_title] can barely hide their disappointment. There's a hint of anger in their voice when they reply."
-                the_perosn.char "Wow, really? After I stripped for you? Okay then, hope you day goes better than mine..."
+                the_person.char "Wow, really? After I stripped for you? Okay then, hope you day goes better than mine..."
                 $ the_person.change_slut_temp(5)
                 $ the_person.change_slut_core(2)
                 $ the_person.change_happiness(-5)
