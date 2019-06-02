@@ -247,6 +247,23 @@ init -1:
         # Add decrease opininion function to person class
         Person.decrease_opinion_score = decrease_opinion_score
 
+        # Change Multple Stats for a person at once (less lines of code, better readability)
+        def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut_temp = None, slut_core = None, add_to_log = True):
+            if not obedience is None:
+                self.change_obedience(obedience, add_to_log)
+            if not happiness is None:
+                self.change_happiness(happiness, add_to_log)
+            if not arousal is None:
+                self.change_arousal(arousal, add_to_log)
+            if not love is None:
+                self.change_love(love, add_to_log)
+            if not slut_temp is None:
+                self.change_slut_temp(slut_temp, add_to_log)
+            if not slut_core is None:
+                self.change_slut_core(slut_core, add_to_log)
+            return
+
+        Person.change_stats = change_stats
 
         ## CHANGE WILLPOWER EXTENSION
         # changes the willpower of a person by set amount
@@ -412,40 +429,3 @@ init -1:
             message += " Willpower"
             mc.log_event(message, "float_text_blue")
             return
-
-#########################################
-# Transormation for character_placement #
-#########################################
-
-    transform character_right_flipped():
-        yalign 1.0
-        yanchor 1.0
-        xalign 1.0
-        xanchor 1.0
-        xzoom -1
-
-    transform character_center():
-        yalign 1.0
-        yanchor 1.0
-        xalign 0.75
-        xanchor 1.0
-
-    transform character_center_flipped():
-        yalign 1.0
-        yanchor 1.0
-        xalign 0.75
-        xanchor 1.0
-        xzoom -1
-
-    transform character_left():
-        yalign 1.0
-        yanchor 1.0
-        xalign 0.5
-        xanchor 1.0
-
-    transform character_left_flipped():
-        yalign 1.0
-        yanchor 1.0
-        xalign 0.5
-        xanchor 1.0
-        xzoom -1

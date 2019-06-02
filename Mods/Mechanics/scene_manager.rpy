@@ -71,3 +71,41 @@ init -2 python:
 
         def draw_actor(self):
             self.person.draw_person(position = self.position, emotion = self.emotion, special_modifier = self.special_modifier, character_placement = self.character_placement, from_scene = True)
+
+
+##########################################
+# Transformation for character_placement #
+##########################################
+init -1:
+    transform character_right_flipped():
+        yalign 1.0
+        yanchor 1.0
+        xalign 1.0
+        xanchor 1.0
+        xzoom -1
+
+    transform character_center():
+        yalign 1.0
+        yanchor 1.0
+        xalign 0.75
+        xanchor 1.0
+
+    transform character_center_flipped():
+        yalign 1.0
+        yanchor 1.0
+        xalign 0.75
+        xanchor 1.0
+        xzoom -1
+
+    transform character_left():
+        yalign 1.0
+        yanchor 1.0
+        xalign 0.5
+        xanchor 1.0
+
+    transform character_left_flipped():
+        yalign 1.0
+        yanchor 1.0
+        xalign 0.5
+        xanchor 1.0
+        xzoom -1

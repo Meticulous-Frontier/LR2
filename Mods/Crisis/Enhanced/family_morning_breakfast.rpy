@@ -84,11 +84,8 @@ label family_morning_breakfast_enhanced_label():
         mom.char "No problem, I'm just happy to spend my morning relaxing with my two favourite people!"
         "You enjoy a relaxing breakfast bonding with your mother and lily. [mom.possessive_title] seems particularly happy she gets to spend time with you."
         "Neither [lily.title] or [mom.possessive_title] seem to think it's strange to relax in their underwear."
-        $ lily.change_love(3)
-        $ lily.change_slut_temp(3)
-        $ mom.change_love(3)
-        $ mom.change_slut_temp(3)
-        $ mom.change_happiness(10)
+        $ lily.change_stats(love = 3, slut_temp = 3)
+        $ mom.change_stats(love = 3, slut_temp = 3, happiness = 10)
         "When you're done you help [mom.possessive_title] put the dirty dishes away and get on with your day."
 
     elif mom_slutty and not sis_slutty:
@@ -125,10 +122,8 @@ label family_morning_breakfast_enhanced_label():
 
                 "Side with [lily.title].":
                     mc.name "I actually think [lily.title] is right, this is a little weird. Could you go put something on, for our sakes?"
-                    $ lily.change_obedience(-2)
-                    $ lily.change_slut_temp(2)
-                    $ mom.change_obedience(5)
-                    $ mom.change_slut_temp(5)
+                    $ lily.change_stats(obedience = -2, slut_temp = 2)
+                    $ mom.change_stats(obedience = 5, slut_temp = 5)
                     mom.char "Oh you two, you're so silly. Fine, I'll be back in a moment. [lily.title], could you watch the eggs?"
                     $ scene_manager.remove_actor(mom)
                     $ scene_manager.update_actor(lily, position = "walking_away", character_placement = character_left_flipped)
@@ -171,9 +166,7 @@ label family_morning_breakfast_enhanced_label():
             $ scene_manager.update_actor(mom, position = "walking_away", emotion = None)
             "[mom.possessive_title] sighs loudly and turns back to the stove."
             mom.char "Fine! You're so stubborn [lily.name], I don't know how I survive around here!"
-            $ lily.change_obedience(-2)
-            $ lily.change_happiness(10)
-            $ lily.change_slut_temp(3)
+            $ lily.change_stats(obedience = -2, happiness = 10, slut_temp = 3)
             $ mom.change_obedience(10)
             $ scene_manager.update_actor(lily, emotion = "happy")
             "[lily.possessive_title] looks at you, obviously pleased with herself, and winks."
@@ -188,8 +181,7 @@ label family_morning_breakfast_enhanced_label():
             $ scene_manager.update_actor(mom, position = "walking_away", emotion = "sad")
             mom.char "I don't know how I manage to survive with you two around!"
             $ lily.outfit = lily.planned_outfit.get_copy()
-            $ lily.change_obedience(10)
-            $ lily.change_happiness(-5)
+            $ lily.change_stats(obedience = 10, happiness = -5)
             $ mom.change_obedience(-2)
             $ scene_manager.add_actor(lily, position = "sitting")
             "[lily.possessive_title] is back by the time Mom starts to plate breakfast. She sits down and starts to eat without saying anything."
@@ -207,8 +199,7 @@ label family_morning_breakfast_enhanced_label():
         $ scene_manager.update_actor(mom, position = "sitting")
         mom.char "Go ahead, eat up!"
         $ lily.change_love(3)
-        $ mom.change_love(3)
-        $ mom.change_happiness(5)
+        $ mom.change_stats(love = 3, happiness = 5)
         "You enjoy a relaxing breakfast bonding with [mom.possessive_title] and [lily.name]. [mom.possessive_title] seems particularly happy she gets to spend time with you."
         "When you're done you help [mom.possessive_title] put the dirty dishes away and get on with your day."
 
