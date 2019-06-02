@@ -149,7 +149,7 @@ label scene_SB_threesome_sixty_nine_2(the_person_1, the_person_2, the_location, 
 
     else:
         "[the_person_2.title]'s mouth pops off you for a second. She starts to run her tongue up and down the length of your shaft."
-        "The view is incredible. [the_person_2.possessive_title] is service you while she rides [the_person_1.title]'s face."
+        "The view is incredible. [the_person_2.possessive_title] is servicing you while she rides [the_person_1.title]'s face."
         "You can't believe how lucky you are."
         "You push your fingers deep into [the_person_1.title]. She moans into [the_person_2.title]'s pussy, who in turn moans around your cock."
         "The vibrations from the moaning set off an incredible wave of pleasure in your amazing love triangle."
