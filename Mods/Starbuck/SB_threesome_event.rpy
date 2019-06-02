@@ -37,9 +37,9 @@ label SB_fetish_vaginal_family_threesome_label():
             $ the_person_one.change_happiness(-5)
             return
         "Strip first":
-            mc.name "That sounds good [the_person.title]... why don't you give me a show before we go to bed?"
+            mc.name "That sounds good [the_person_one.title]... why don't you give me a show before we go to bed?"
             "[the_person_one.possessive_title] smiles at you."
-            the_person_one.char "Aww, does my [the_person_one.mc_title] wanna see his [the_person.title] get naked for him? What a pervert!"
+            the_person_one.char "Aww, does my [the_person_one.mc_title] wanna see his [the_person_one.title] get naked for him? What a pervert!"
             "[the_person_one.possessive_title] winks at you before beginning her routine."
             call SB_free_strip_scene(the_person_one) from _SB_free_strip_scene_SBT_10
             mc.name "Damn [the_person_one.title], you are really getting good at that..."
