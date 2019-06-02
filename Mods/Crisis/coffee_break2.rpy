@@ -139,9 +139,5 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
         $ winner_two.change_happiness(2)
         "Although not professional, you can't help but smile and enjoy the situation."
 
-    python:
-        scene_manager.remove_actor(winner_one)
-        scene_manager.remove_actor(winner_two)
-        loser.review_outfit(show_review_message = False)  # makes sure she's properly dressed again.
-        renpy.scene("Active")
+    $ scene_manager.clear_scene()
     return

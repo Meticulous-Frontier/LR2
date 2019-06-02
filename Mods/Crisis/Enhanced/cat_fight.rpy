@@ -261,14 +261,7 @@ label cat_fight_crisis_enhanced_label():
                     $ scene_manager.update_actor(loser, position = "walking_away")                   
                     "[winner.title] leaves and you get back to work."
 
-    python:
-        # cleanup scene and reset actors
-        person_one.reset_arousal()
-        person_one.review_outfit(show_review_message = False)
-
-        person_two.reset_arousal()
-        person_two.review_outfit(show_review_message = False)
-        renpy.scene("Active")
+    $ scene_manager.clear_scene()
     return
 
 

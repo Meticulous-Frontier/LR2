@@ -150,9 +150,5 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
         "You watch [person_two.title] and [person_three.title] walk away together."
 
     # clear scene
-    python:
-        scene_manager.remove_actor(person_two)
-        scene_manager.remove_actor(person_three)
-        renpy.scene("Active")
-
+    $ scene_manager.clear_scene()
     return

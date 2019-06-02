@@ -203,8 +203,5 @@ label family_morning_breakfast_enhanced_label():
         "You enjoy a relaxing breakfast bonding with [mom.possessive_title] and [lily.name]. [mom.possessive_title] seems particularly happy she gets to spend time with you."
         "When you're done you help [mom.possessive_title] put the dirty dishes away and get on with your day."
 
-    python:
-        renpy.scene("Active")
-        mom.review_outfit(show_review_message = False)
-        lily.review_outfit(show_review_message = False)
+    $ scene_manager.clear_scene()
     return

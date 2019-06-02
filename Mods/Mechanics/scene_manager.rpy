@@ -7,6 +7,12 @@ init -2 python:
             self.actors.append(Actor(person, position, emotion, special_modifier, character_placement))
             self.draw_scene()
 
+        # Removes all actors from the scene
+        def clear_scene(self):
+            people_in_scene = [actor.person for actor in self.actors]
+            for person in people_in_scene:
+                self.remove_actor(person)
+
         def update_actor(self, person, position = None, emotion = None, special_modifier = None, character_placement = None):
             actor = find_in_list(lambda x: x.person is person, self.actors)
             if actor is None:
@@ -33,13 +39,24 @@ init -2 python:
                 #mc.log_event("Remove clothing " + actor.person.title, "gray_float_text")
                 actor.person.draw_animated_removal(the_clothing, position = actor.position, emotion = actor.emotion, special_modifier = actor.special_modifier, character_placement = actor.character_placement, scene_manager = self)
 
+        # removes specific actor from scene
         def remove_actor(self, person):
             actor_to_remove = find_in_list(lambda x: x.person is person, self.actors)
             if not actor_to_remove is None:
+                # reset actor clothing and arousal
+                actor_to_remove.person.review_outfit(show_review_message = False)
+                actor_to_remove.person.reset_arousal()
                 self.actors.remove(actor_to_remove)
                 self.draw_scene()
 
         def draw_scene(self):
+            renpy.hide_screen("person_info_ui")
+            renpy.hide_screen("multi_person_info_ui")
+            if len(self.actors) > 1:
+                renpy.show_screen("multi_person_info_ui", self.actors)
+            elif len(self.actors) == 1:
+                renpy.show_screen("person_info_ui", self.actors[0].person)
+
             renpy.scene("Active")
             for actor in self.actors:
                 actor.draw_actor()
@@ -59,6 +76,7 @@ init -2 python:
             self.emotion = emotion
             self.special_modifier = special_modifier
             self.character_placement = character_placement
+            self.sort_order = 2
 
             if position is None:
                 self.position = person.idle_pose
@@ -68,6 +86,11 @@ init -2 python:
 
             if character_placement is None:
                 self.character_placement = character_right
+
+            if character_placement == character_center or character_placement == character_center_flipped:
+                self.sort_order = 1
+            if character_placement == character_left or character_placement == character_left_flipped:
+                self.sort_order = 0
 
         def draw_actor(self):
             self.person.draw_person(position = self.position, emotion = self.emotion, special_modifier = self.special_modifier, character_placement = self.character_placement, from_scene = True)

@@ -88,7 +88,7 @@ label mall_introduction_action_label:
 
     "[stranger.title] looks back at you smiling."
 
-    $ renpy.scene("Active")
+    $ scene_manager.clear_scene()
     return
 
 
