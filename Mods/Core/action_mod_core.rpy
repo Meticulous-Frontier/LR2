@@ -25,18 +25,10 @@
     # train_in_gym_action = ActionMod("Schedule Gym Session {image=gui/heart/Time_Advance.png}", gym_requirement, "select_person_for_gym", initialization = gym_initialization,  menu_tooltip = "Bring a person to the gym to train their body.")
 
 init -1 python:
-    def is_mod_enabled(action_name):
-        is_enabled = True
-        for action_mod in action_mod_list:
-            if action_mod.name == action_name:
-                is_enabled = action_mod.enabled
-        return is_enabled
-
-
     def is_action_enabled(self, extra_args = None):
-        is_enabled = is_mod_enabled(self.name)
-        if not is_enabled:
-            return False
+        if hasattr(self, "enabled"):
+            if not self.enabled:
+                return False
 
         requirement_return = self.check_requirement(extra_args)
         if isinstance(requirement_return, basestring):
@@ -47,9 +39,9 @@ init -1 python:
             return requirement_return
 
     def is_disabled_slug_shown(self, extra_args = None): # Returns true if this action is not enabled but should show something when it is disabled.
-        is_enabled = is_mod_enabled(self.name)
-        if not is_enabled:
-            return False
+        if hasattr(self, "enabled"):
+            if not self.enabled:
+                return False
 
         requirement_return = self.check_requirement(extra_args)
         if isinstance(requirement_return, basestring):
@@ -60,6 +52,18 @@ init -1 python:
     # Monkeywrench the action method overrides in the Action class
     Action.is_action_enabled = is_action_enabled
     Action.is_disabled_slug_shown = is_disabled_slug_shown
+
+    # BUGFIX MAIN CODE: The action functions are called wrong and the count has wrong indention level, so only 1 role gets checked.
+    def valid_role_actions_enhanced(self):
+        count = 0
+        for role in self.special_role:
+            for act in role.actions:
+                if act.is_action_enabled(extra_args = self) or act.is_disabled_slug_shown(extra_args = self): #We should also check if a non-action disabled slug would be available so that the player can check what the requirement would be.
+                    count += 1
+        return count
+
+    Person.valid_role_actions = valid_role_actions_enhanced
+
 
 init 2 python:
     class ActionMod(Action):
