@@ -8,6 +8,8 @@ init 2 python:
     def schedule_person_requirement(person):
         if person.obedience >= 130:
             return True
+        return False
+
     def schedule_early_morning_requirement():
         return True
     def schedule_morning_requirement():
@@ -27,19 +29,24 @@ init 2 python:
         if person not in list_of_followers:
             if person.obedience >= 110:
                 return True
+        return False
+
     def stop_follow_requirement(person):
         if person in list_of_followers:
             return True
+        return False
 
     # Hire Person Requirements
     def hire_person_requirement(person):
         if person not in mc.business.get_employee_list():
             return True
+        return False
 
     # Rename Person Requirements
     def rename_person_requirement(person):
         if person.obedience >= 150:
             return True
+        return False
 
     # Schedule Actions
     schedule_person_action = Action("Schedule [the_person.title]", schedule_person_requirement, "schedule_menu", menu_tooltip = "Schedule where the person should be throughout the day.")
@@ -134,7 +141,11 @@ label hire_person(person):
         "Back":
             return
     $ mc.business.pay(-300)
+
+    $ person.event_triggers_dict["employed_since"] = day
+    $ mc.business.listener_system.fire_event("new_hire", the_person = person)
     $ person.special_role.append(employee_role)
+
     $ work_station_destination = mc.business.get_employee_workstation(person).formalName
     "[person.title] heads over to the [work_station_destination]..."
     return
