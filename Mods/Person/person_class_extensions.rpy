@@ -296,10 +296,8 @@ init -1:
             if (self.hair_colour != "black" and self.hair_style.colour == [0.1,0.09,0.08,1]):
                 update_hair_colour(self)
 
-            if not emotion is None:
-                self.current_emotion = emotion
             if emotion is None:
-                emotion = self.current_emotion or self.get_emotion()
+                emotion = self.get_emotion()
 
             if character_placement is None: # make sure we don't need to pass the position with each draw
                 character_placement = character_right
@@ -332,7 +330,6 @@ init -1:
 
         # replace the default draw_person function of the person class
         Person.draw_person = draw_person_enhanced
-        Person.current_emotion = None
 
         def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, special_modifier = None, character_placement = None, scene_manager = None): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
             #Note: this function includes a call to remove_clothing, it is not needed seperately.
@@ -342,10 +339,8 @@ init -1:
             bottom_displayable = [] #Displayables under the piece of clothing being removed.
             top_displayable = []
 
-            if not emotion is None:
-                self.current_emotion = emotion
             if emotion is None:
-                emotion = self.current_emotion or self.get_emotion()
+                emotion = self.get_emotion()
 
             if character_placement is None: # make sure we don't need to pass the position with each draw
                 character_placement = character_right
