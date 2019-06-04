@@ -4,6 +4,39 @@ init 2 python:
     # Follow Me | Allows you to put a person in a list_of_followers that comes along with you upon every location change (follow normal schedule on time advance, might want to remove them from the list during that, although they will come back if not)
     list_of_followers = []
 
+    # Build a location list where the person can be scheduled.
+    def build_schedule_location_list(person):
+        possible_locations = []
+
+        def add_location(location, add_when_not_visible = False):
+            if location.visible or add_when_not_visible:
+                if not location in possible_locations:
+                    possible_locations.append(location)
+
+        # person home
+        add_location(person.home, add_when_not_visible = True)
+        # add the mall and all its connections
+        add_location(mall)
+        for c in mall.connections:
+            add_location(c)
+        # add employee locations
+        if person.is_employee():
+            add_location(lobby)
+            for c in lobby.connections:
+                add_location(c)
+        # special character mom and lily locations
+        if person in [mom, lily]:
+            add_location(hall)
+            for c in hall.connections:
+                add_location(c)
+        # special character aunt and cousing locations
+        if person in [aunt, cousin]:
+            add_location(aunt_apartment)
+            for c in aunt_apartment.connections:
+                add_location(c)
+
+        return possible_locations
+
     # Schedule Person Requirements
     def schedule_person_requirement(person):
         if person.obedience >= 130:
@@ -166,13 +199,11 @@ label schedule_menu(person): # TODO: Find a way to handle "None" instances of sc
         if act_choice == "Back":
             return
         else:
-            $ act_choice.call_action()
+            $ act_choice.call_action(person)
 
-label schedule_early_morning():
-
-    python: # First we select which employee we want
-
-        tuple_list = format_rooms(list_of_places) #TODO: Create a list that excludes homes not in mc.known_home_locations
+label schedule_early_morning(person):
+    python:
+        tuple_list = format_rooms(build_schedule_location_list(person))
         tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
         room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
 
@@ -183,12 +214,9 @@ label schedule_early_morning():
         "Early Morning Schedule Set: [room_choice.formalName]"
         return
 
-label schedule_morning():
-
-
-    python: # First we select which employee we want
-
-        tuple_list = format_rooms(list_of_places) #TODO: Create a list that excludes homes not in mc.known_home_locations
+label schedule_morning(person):
+    python:
+        tuple_list = format_rooms(build_schedule_location_list(person))
         tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
         room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
 
@@ -199,11 +227,9 @@ label schedule_morning():
         "Morning Schedule Set: [room_choice.formalName]"
         return
 
-label schedule_afternoon():
-
-    python: # First we select which employee we want
-
-        tuple_list = format_rooms(list_of_places) #TODO: Create a list that excludes homes not in mc.known_home_locations
+label schedule_afternoon(person):
+    python:
+        tuple_list = format_rooms(build_schedule_location_list(person))
         tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
         room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
 
@@ -214,13 +240,9 @@ label schedule_afternoon():
         "Afternoon Schedule Set: [room_choice.formalName]"
         return
 
-
-
-label schedule_evening():
-
-    python: # First we select which employee we want
-
-        tuple_list = format_rooms(list_of_places) #TODO: Create a list that excludes homes not in mc.known_home_locations
+label schedule_evening(person):
+    python:
+        tuple_list = format_rooms(build_schedule_location_list(person))
         tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
         room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
 
@@ -231,12 +253,9 @@ label schedule_evening():
         "Evening Schedule Set: [room_choice.formalName]"
         return
 
-
-
-label schedule_night():
-    python: # First we select which employee we want
-
-        tuple_list = format_rooms(list_of_places) #TODO: Create a list that excludes homes not in mc.known_home_locations
+label schedule_night(person):
+    python:
+        tuple_list = format_rooms(build_schedule_location_list(person))
         tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
         room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
 
@@ -247,7 +266,7 @@ label schedule_night():
         "Night Schedule Set: [room_choice.formalName]"
         return
 
-    # Follower Labels
+# Follower Labels
 label start_follow(person):
     "You tell [person.title] to follow you around."
     $ list_of_followers.append(the_person)
