@@ -1,34 +1,5 @@
 # Import outfits by Trollden
 # Use it as you see fit
-# Requires Mod Core by ParadigmShift
-
-init -2 python: # Definitions
-    def import_wardrobe(wardrobe, xml_filename): # This is a rewrite of the wardrobe_from_xml function written by Vren.
-                                                 # Wardrobe should be who's / what wardrobe you want to import into. e.g for main character it is mc.designed_wardrobe
-        wardrobe = wardrobe
-        file_path = os.path.abspath(os.path.join(config.basedir, "game"))
-        file_path = os.path.join(file_path,"wardrobes")
-        file_name = os.path.join(file_path, xml_filename)
-
-        if not os.path.isfile(file_name):
-            return Wardrobe("xml_filename") #If there is no wardrobe present we return an empty wardrobe with the name of our file.
-
-        wardrobe_tree = ET.parse(file_name)
-        tree_root = wardrobe_tree.getroot()
-
-        return_wardrobe = Wardrobe(tree_root.attrib["name"])
-        for outfit_element in tree_root.find("FullSets"):
-
-            wardrobe.add_outfit(outfit_from_xml(outfit_element))
-
-        for outfit_element in tree_root.find("UnderwearSets"):
-
-            wardrobe.add_underwear_set(outfit_from_xml(outfit_element))
-
-        for outfit_element in tree_root.find("OverwearSets"):
-
-            wardrobe.add_overwear_set(outfit_from_xml(outfit_element))
-        return return_wardrobe
 
 init 2 python:
     def import_wardrobe_requirement():

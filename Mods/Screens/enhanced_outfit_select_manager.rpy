@@ -42,7 +42,7 @@ init 2:
                                     ysize 750
                                     xsize 225
                                     vbox:
-                                        for n in os.listdir("game/wardrobes/"):
+                                        for n in get_xml_files_from_path(["game/wardrobes/", "game/Mods/Wardrobes/"]):
                                             textbutton n action [Show("import_outfit_manager", None, target_wardrobe, n)] style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 xanchor 0.0
 
             if show_sets:
