@@ -89,7 +89,7 @@ init 2 python:
         def toggle_enabled(self):
             self.enabled = not self.enabled
             if not self.on_enabled_changed is None:
-                self.on_enabled_changed()
+                self.on_enabled_changed(self.enabled)
 
     def action_mod_settings_requirement():
         return True
