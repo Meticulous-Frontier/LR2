@@ -70,11 +70,12 @@ init 2 python:
         # store instances of mod
         _instances = set()
 
-        def __init__(self, name, requirement, effect, args = None, requirement_args = None, menu_tooltip = None, initialization = None, category="Misc", enabled = True, priority = 10):
+        def __init__(self, name, requirement, effect, args = None, requirement_args = None, menu_tooltip = None, initialization = None, category="Misc", enabled = True, priority = 10, on_enabled_changed = None):
             self.initialization = initialization
             self.enabled = enabled
             self.category = category
             self.priority = priority
+            self.on_enabled_changed = on_enabled_changed
 
             Action.__init__(self, name, requirement, effect, args, requirement_args, menu_tooltip)
 
@@ -87,6 +88,8 @@ init 2 python:
 
         def toggle_enabled(self):
             self.enabled = not self.enabled
+            if not self.on_enabled_changed is None:
+                self.on_enabled_changed()
 
     def action_mod_settings_requirement():
         return True

@@ -330,6 +330,8 @@ init -1:
 
         # replace the default draw_person function of the person class
         Person.draw_person = draw_person_enhanced
+        # add location to store original personality
+        Person.original_personality = None
 
         def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, special_modifier = None, character_placement = None, scene_manager = None): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
             #Note: this function includes a call to remove_clothing, it is not needed seperately.
