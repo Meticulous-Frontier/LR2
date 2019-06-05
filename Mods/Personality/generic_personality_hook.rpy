@@ -26,7 +26,10 @@ init 1 python:
 
     # change the random person based other characteristics of personality
     def update_random_person(person):
-        update_cougar_personality(person)
+        # turn cougars on or off
+        cougar_mod = find_in_list(lambda x: x.effect == cougar_personality_action.effect, ActionMod._instances)
+        enabled = not (cougar_mod is None or not cougar_mod.enabled)
+        update_cougar_personality(person, enabled)
         # A person could have dialog even if we don't know her
         if person.possessive_title is None:
             person.set_possessive_title("The unknown woman")
@@ -39,11 +42,9 @@ init 1 python:
             person.special_role.append(generic_people_role)
         return
 
-    def update_cougar_personality(person):
+    def update_cougar_personality(person, enabled):
         # change personality to cougar if we meet age requirement
-        cougar_mod = find_in_list(lambda x: x.effect == cougar_personality_action.effect, ActionMod._instances)
-
-        if not cougar_mod is None and cougar_mod.enabled:
+        if enabled:
             if person not in list_of_unique_characters + [mom, lily, aunt, cousin, stephanie] and person.age > 45:
                 if not person.personality is cougar_personality:
                     person.original_personality = person.personality
@@ -63,6 +64,12 @@ init 1 python:
 
 label activate_generic_personality(stack):
     python:
+        # add one bimbo to the game (on start of game)
+        a_bimbo = create_random_person(age=renpy.random.randint(25, 35), tits="DD", body_type = "standard_body", face_style = "Face_4", skin = "tan",
+            hair_colour = "platinum blonde", hair_style = messy_hair, eyes = "blue", personality = bimbo_personality)
+        a_bimbo.home.add_person(a_bimbo)
+
+        # update characters in game
         for person in all_people_in_the_game():
             update_random_person(person)
             update_person_roles(person)
@@ -73,10 +80,11 @@ label activate_generic_personality(stack):
 
 label update_generic_personality(stack):
     python:
-        # fix for old save games:
+        # fix for old save games (can be removed in future):
         if not find_in_list(lambda x: x.personality_type_prefix == cougar_personality.personality_type_prefix, list_of_personalities) is None:
             list_of_personalities.remove(cougar_personality)
 
+        # update characters in game (save game)
         for person in all_people_in_the_game():
             update_random_person(person)
             update_person_roles(person)

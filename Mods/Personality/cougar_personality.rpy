@@ -6,9 +6,9 @@ init 3 python:
     def cougar_personality_requirement():
         return True
 
-    def change_cougar_personality_enabled():
+    def change_cougar_personality_enabled(enabled):       
         for person in all_people_in_the_game():
-            update_cougar_personality(person)
+            update_cougar_personality(person, enabled)
         return
 
     cougar_personality_action = ActionMod("Cougar Personality", cougar_personality_requirement, "cougar_personality_dummy_label", menu_tooltip = "Enable or disable the cougar personality.", category="Personality", on_enabled_changed = change_cougar_personality_enabled)
