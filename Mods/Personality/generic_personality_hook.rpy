@@ -38,7 +38,7 @@ init 1 python:
     # bind the generic people role actions to the people in the game
     def update_person_roles(person):
         # Adds mandatory roles to person (use name to find since object compare does not work (not implemented in Role class))
-        if find_in_list(lambda x: x.role_name == generic_people_role.role_name, person.special_role) is None:
+        if find_in_list(lambda x: x == generic_people_role, person.special_role) is None:
             person.special_role.append(generic_people_role)
         return
 
@@ -46,14 +46,14 @@ init 1 python:
         # change personality to cougar if we meet age requirement
         if enabled:
             if person not in list_of_unique_characters + [mom, lily, aunt, cousin, stephanie] and person.age > 45:
-                if not person.personality is cougar_personality:
+                if not person.personality == cougar_personality:
                     person.original_personality = person.personality
                     person.personality = cougar_personality
                     # mc.log_event((person.title or person.name) + "  A:" + str(person.age) + ": " + person.personality.personality_type_prefix, "float_text_grey")
         else:
-            if person.personality is cougar_personality:
+            if person.personality == cougar_personality:
                 if person not in list_of_unique_characters + [mom, lily, aunt, cousin, stephanie]:
-                    if not (person.original_personality is None or person.original_personality.personality_type_prefix == "cougar"):
+                    if not (person.original_personality is None or person.original_personality == cougar_personality):
                          person.personality = person.original_personality
                     else:
                         new_personality = get_random_from_list(list_of_personalities)
@@ -81,7 +81,7 @@ label activate_generic_personality(stack):
 label update_generic_personality(stack):
     python:
         # fix for old save games (can be removed in future):
-        if not find_in_list(lambda x: x.personality_type_prefix == cougar_personality.personality_type_prefix, list_of_personalities) is None:
+        if not find_in_list(lambda x: x == cougar_personality, list_of_personalities) is None:
             list_of_personalities.remove(cougar_personality)
 
         # update characters in game (save game)
