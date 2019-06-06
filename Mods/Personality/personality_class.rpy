@@ -48,7 +48,7 @@ init -1 python:
             else:
                 self.common_sexy_dislikes = []
 
-        def __cmp__(self,other): ##This and __hash__ are defined so that I can use "if Action in List" and have it find identical actions that are different instances.
+        def __cmp__(self,other): # Compare on personality type prefix when comparing to another personality otherwise use hash function
             if isinstance(other, Personality):
                 if self.personality_type_prefix == other.personality_type_prefix:
                     return 0

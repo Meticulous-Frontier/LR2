@@ -8,7 +8,7 @@ init -1 python:
             self.role_name = role_name
             self.actions = actions # A list of actions that can be taken. These actions are shown when you talk to a person with this role if their requirement is met.
         
-        def __cmp__(self,other): ##This and __hash__ are defined so that I can use "if Action in List" and have it find identical actions that are different instances.
+        def __cmp__(self,other): # Compare on role_name when comparing to another role otherwise use hash function
             if isinstance(other, Role):
                 if self.role_name == other.role_name:
                     return 0
