@@ -257,7 +257,7 @@ init 2:
                                     style "textbutton_style"
                                     text_style "serum_text_style"
                                     xalign 0.5
-                                    xsize 500
+                                    xsize 520
                                     action NullAction()
 
                                 hbox:
@@ -269,7 +269,7 @@ init 2:
                                             text_style "serum_text_style"
                                             xalign 0.5
 
-                                            xsize 225
+                                            xsize 260
 
                                             action NullAction()
 
@@ -280,7 +280,7 @@ init 2:
                                             text_style "serum_text_style"
                                             xalign 0.5
 
-                                            xsize 225
+                                            xsize 260
 
                                             action NullAction()
 
@@ -419,7 +419,8 @@ init 2:
                                         text_style "serum_text_style"
                                         xsize 550
 
-                                        action NullAction()
+                                        action  NullAction()
+                                        hovered SetScreenVariable("trait_tooltip", trait)
                                     hbox:
                                         vbox:
                                             textbutton "{color=#98fb98}[trait.positive_slug]{/color}":
