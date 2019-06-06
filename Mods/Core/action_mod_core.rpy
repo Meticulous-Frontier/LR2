@@ -58,7 +58,7 @@ init -1 python:
         count = 0
         for role in self.special_role:
             for act in role.actions:
-                if act.is_action_enabled(extra_args = self) or act.is_disabled_slug_shown(extra_args = self): #We should also check if a non-action disabled slug would be available so that the player can check what the requirement would be.
+                if act.is_action_enabled(self) or act.is_disabled_slug_shown(self): #We should also check if a non-action disabled slug would be available so that the player can check what the requirement would be.
                     count += 1
         return count
 
