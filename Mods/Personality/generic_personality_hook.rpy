@@ -63,6 +63,9 @@ init 1 python:
 
 
 label activate_generic_personality(stack):
+    if not SB_fetish_mod_init:
+        call SB_unique_people_create from _call_SB_fetish_mod_init_label_activate
+
     python:
         # add one bimbo to the game (on start of game)
         a_bimbo = create_random_person(age=renpy.random.randint(25, 35), tits="DD", body_type = "standard_body", face_style = "Face_4", skin = "tan",
@@ -79,6 +82,9 @@ label activate_generic_personality(stack):
     return
 
 label update_generic_personality(stack):
+    if not SB_fetish_mod_init:
+        call SB_fetish_mod_init_label from _call_SB_fetish_mod_init_label_update
+
     python:
         # fix for old save games (can be removed in future):
         if not find_in_list(lambda x: x == cougar_personality, list_of_personalities) is None:

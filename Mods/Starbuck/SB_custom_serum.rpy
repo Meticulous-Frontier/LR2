@@ -181,7 +181,7 @@ init -1:
                                 elif the_person == mom:
                                     for mand_event in mc.business.mandatory_crises_list:
                                         if mand_event.name == "mom weekly pay":
-                                            renpy.say("","DEBUG: Succesfully located mom event, attempting removal and replacement.")
+                                            #renpy.say("","DEBUG: Succesfully located mom event, attempting removal and replacement.")
                                             mc.business.mandatory_crises_list.remove(mand_event)
                                             SB_mom_weekly_pay_action = Action("mom anal pay", SB_mom_anal_pay_requirement, "SB_mom_anal_pay_label", the_person)
                                             mc.business.mandatory_crises_list.append(SB_mom_weekly_pay_action)
