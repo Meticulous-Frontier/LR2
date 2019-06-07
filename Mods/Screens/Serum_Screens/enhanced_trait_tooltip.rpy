@@ -1,57 +1,50 @@
-# init 2:
-#     screen trait_tooltip(the_trait,given_xpos=712,given_ypos=580):
-#
-#         frame:
-#             background "#666666"
-#
-#             xpos given_xpos
-#             ypos given_ypos
-#             ysize 260
-#             xsize 550
-#             viewport:
-#                 draggable True
-#                 xsize 550
-#                 ysize 250
-#                 mousewheel "vertical"
-#                 xalign 0.5
-#                 vbox:
-#
-#                     textbutton "[the_trait.name]":
-#                         style "textbutton_style"
-#                         text_style "serum_text_style"
-#                         xalign 0.5
-#                         xsize 500
-#                         action NullAction()
-#
-#                     hbox:
-#
-#                         vbox:
-#
-#                             textbutton "{color=#98fb98}[the_trait.positive_slug]{/color}":
-#                                 style "textbutton_style"
-#                                 text_style "serum_text_style"
-#                                 xalign 0.5
-#
-#                                 xsize 225
-#
-#                                 action NullAction()
-#
-#                         vbox:
-#
-#                             textbutton "{color=#cd5c5c}[the_trait.negative_slug]{/color}":
-#                                 style "textbutton_style"
-#                                 text_style "serum_text_style"
-#                                 xalign 0.5
-#
-#                                 xsize 225
-#
-#                                 action NullAction()
-#
-#                     textbutton "[the_trait.desc]":
-#                         style "textbutton_style"
-#                         text_style "serum_text_style"
-#                         xalign 0.5
-#
-#                         xsize 500
-#
-#                         action NullAction()
+init 2:
+    screen trait_tooltip(the_trait,given_xalign=0.9,given_yalign=0.1):
+
+        frame:
+            background "#666666"
+
+            xalign given_xalign
+            yalign given_yalign
+
+            vbox:
+                xalign 0.5
+                textbutton "[the_trait.name]":
+                    style "textbutton_style"
+                    text_style "serum_text_style"
+                    xalign 0.5
+                    xsize 500
+                    action NullAction()
+
+                hbox:
+
+                    vbox:
+
+                        textbutton "[the_trait.positive_slug]":
+                            style "serum_textbutton_style_positive"
+                            text_style "serum_text_style_traits"
+                            xalign 0.5
+
+                            xsize 225
+
+                            action NullAction()
+
+                    vbox:
+
+                        textbutton "[the_trait.negative_slug]":
+                            style "serum_textbutton_style_negative"
+                            text_style "serum_text_style_traits"
+                            xalign 0.5
+
+                            xsize 225
+
+                            action NullAction()
+
+                textbutton "[the_trait.desc]":
+                    style "textbutton_style"
+                    text_style "serum_text_style"
+                    xalign 0.5
+
+                    xsize 500
+
+                    action NullAction()

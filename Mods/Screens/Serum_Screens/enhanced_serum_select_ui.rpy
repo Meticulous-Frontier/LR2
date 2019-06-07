@@ -33,127 +33,130 @@ init 2:
                 xsize 1000
                 ysize 900
                 hbox:
-                    viewport:
-                        xsize 320
-                        ysize 800
-                        scrollbars "vertical"
-                        mousewheel True
-                        vbox:
+                    vbox:
+                        textbutton "Research New Traits":
+                            style "textbutton_style"
+                            text_style "serum_text_style"
                             xsize 320
-                            textbutton "Research New Traits":
-                                style "textbutton_style"
-                                text_style "serum_text_style"
-                                xsize 320
-                                xanchor 0.5
-                                xalign 0.5
+                            xanchor 0.5
+                            xalign 0.5
 
-                                action NullAction()
+                            action NullAction()
 
-                            for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True):
-                                if not trait.researched and trait.has_required():
-                                    $ trait_tags = ""
-                                    if trait.exclude_tags:
-                                        $ trait_tags = "\nExcludes Other: "
-                                        for a_tag in trait.exclude_tags:
-                                            $ trait_tags += "[[" + a_tag + "]"
-                                    $ trait_title = trait.name + " " + "(" +str(trait.current_research)+"/"+ str(trait.research_needed) + ")" + trait_tags
-
-                                    textbutton "[trait_title]":
-                                        style "textbutton_style"
-                                        text_style "serum_text_style"
-                                        action [Hide("trait_tooltip"),Return(trait)]
-                                        text_size 14
-                                        hovered Show("trait_tooltip",None,trait)
-                                        unhovered Hide("trait_tooltip")
-                                        xsize 320
-
-                    viewport:
-                        xsize 320
-                        ysize 800
-                        scrollbars "vertical"
-                        mousewheel True
-                        vbox:
+                        viewport:
                             xsize 320
-                            textbutton "Master Existing Traits:":
-                                style "textbutton_style"
-                                text_style "serum_text_style"
+                            ysize 750
+                            scrollbars "vertical"
+                            mousewheel True
+                            vbox:
                                 xsize 320
-                                xanchor 0.5
-                                xalign 0.5
 
-                                action NullAction()
+                                for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True):
+                                    if not trait.researched and trait.has_required():
+                                        $ trait_tags = ""
+                                        if trait.exclude_tags:
+                                            $ trait_tags = "\nExcludes Other: "
+                                            for a_tag in trait.exclude_tags:
+                                                $ trait_tags += "[[" + a_tag + "]"
+                                        $ trait_title = trait.name + " " + "(" +str(trait.current_research)+"/"+ str(trait.research_needed) + ")" + trait_tags
 
-                            for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True):
-                                if trait.researched:
-                                    $ trait_tags = ""
-                                    if trait.exclude_tags:
-                                        $ trait_tags = "\nExcludes Other: "
-                                        for a_tag in trait.exclude_tags:
-                                            $ trait_tags += "[[" + a_tag + "]"
+                                        textbutton "[trait_title]":
+                                            style "textbutton_style"
+                                            text_style "serum_text_style_traits"
+                                            action [Hide("trait_tooltip"),Return(trait)]
 
-                                    $ trait_title = trait.name + " " + "(" +str(trait.current_research)+"/"+ str(trait.research_needed) + ")" + trait_tags
-
-                                    $ trait_side_effects = str(trait.get_effective_side_effect_chance()) # Put this section into a function?
-
-                                    if trait.get_effective_side_effect_chance() >= 60: # Red (Color code the side effect risk for quicker identification)
-                                        $ trait_side_effects_text = "{color=#cd5c5c}[trait_side_effects]{/color}"
-
-                                    elif trait.get_effective_side_effect_chance() >= 20: # Yellow
-                                        $ trait_side_effects_text = "{color=#eee000}[trait_side_effects]{/color}"
-
-                                    else: # Green
-                                        $ trait_side_effects_text = "{color=#98fb98}[trait_side_effects]{/color}"
-
-
-                                    $ trait_mastery_level = str(trait.mastery_level)
-
-                                    if trait.mastery_level <= 10: # Red
-                                        $ trait_mastery_text = "{color=#cd5c5c}[trait_mastery_level]{/color}"
-                                    elif trait.mastery_level <= 50: # Yellow
-                                        $ trait_mastery_text = "{color=#eee000}[trait_mastery_level]{/color}"
-                                    else: # Green
-                                        $ trait_mastery_text = "{color=#98fb98}[trait_mastery_level]{/color}"
-
-                                    textbutton "[trait_title]" + "\n Mastery Level: " + trait_mastery_text + " | " + "Side Effect Chance: " + trait_side_effects_text + " %":
-                                        text_xalign 0.5
-                                        text_text_align 0.5
-                                        text_size 14
-                                        action [Hide("trait_tooltip"),Return(trait)] style "textbutton_style"
-                                        text_style "serum_text_style"
-                                        hovered Show("trait_tooltip",None,trait)
-                                        unhovered Hide("trait_tooltip")
-                                        xsize 320
-
-
-                    viewport:
-                        xsize 320
-                        ysize 800
-                        scrollbars "vertical"
-                        mousewheel True
-                        vbox:
+                                            hovered Show("trait_tooltip",None,trait)
+                                            unhovered Hide("trait_tooltip")
+                                            xsize 320
+                    vbox:
+                        textbutton "Master Existing Traits:":
+                            style "textbutton_style"
+                            text_style "serum_text_style"
                             xsize 320
-                            textbutton "Research New Designs:":
-                                style "textbutton_style"
-                                text_style "serum_text_style"
+                            xanchor 0.5
+                            xalign 0.5
+
+                            action NullAction()
+                        viewport:
+                            xsize 320
+                            ysize 750
+                            scrollbars "vertical"
+                            mousewheel True
+                            vbox:
                                 xsize 320
-                                xanchor 0.5
-                                xalign 0.5
 
-                                action NullAction()
 
-                            for serum in mc.business.serum_designs:
-                                if not serum.researched:
-                                    textbutton "[serum.name] ([serum.current_research]/[serum.research_needed])":
-                                        text_xalign 0.5
-                                        text_text_align 0.5
-                                        text_size 14
-                                        action [Hide("serum_tooltip"),Return(serum)] style "textbutton_style"
-                                        text_style "serum_text_style"
-                                        hovered Show("serum_tooltip",None,serum)
-                                        unhovered Hide("serum_tooltip")
-                                        xsize 320
+                                for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True):
+                                    if trait.researched:
+                                        $ trait_tags = ""
+                                        if trait.exclude_tags:
+                                            $ trait_tags = "\nExcludes Other: "
+                                            for a_tag in trait.exclude_tags:
+                                                $ trait_tags += "[[" + a_tag + "]"
 
-                textbutton "Do not change research." action Return("None") style "textbutton_style" text_style "serum_text_style" yalign 0.995 xanchor 0.5 xalign 0.5
+                                        $ trait_title = trait.name + " " + "(" +str(trait.current_research)+"/"+ str(trait.research_needed) + ")" + trait_tags
+
+                                        $ trait_side_effects = str(trait.get_effective_side_effect_chance()) # Put this section into a function?
+
+                                        if trait.get_effective_side_effect_chance() >= 60: # Red (Color code the side effect risk for quicker identification)
+                                            $ trait_side_effects_text = "{color=#cd5c5c}[trait_side_effects]{/color}"
+
+                                        elif trait.get_effective_side_effect_chance() >= 20: # Yellow
+                                            $ trait_side_effects_text = "{color=#eee000}[trait_side_effects]{/color}"
+
+                                        else: # Green
+                                            $ trait_side_effects_text = "{color=#98fb98}[trait_side_effects]{/color}"
+
+
+                                        $ trait_mastery_level = str(trait.mastery_level)
+
+                                        if trait.mastery_level <= 10: # Red
+                                            $ trait_mastery_text = "{color=#cd5c5c}[trait_mastery_level]{/color}"
+                                        elif trait.mastery_level <= 50: # Yellow
+                                            $ trait_mastery_text = "{color=#eee000}[trait_mastery_level]{/color}"
+                                        else: # Green
+                                            $ trait_mastery_text = "{color=#98fb98}[trait_mastery_level]{/color}"
+
+                                        textbutton "[trait_title]" + "\n Mastery Level: " + trait_mastery_text + " | " + "Side Effect Chance: " + trait_side_effects_text + " %":
+                                            text_xalign 0.5
+                                            text_text_align 0.5
+
+                                            action [Hide("trait_tooltip"),Return(trait)] style "textbutton_style"
+                                            text_style "serum_text_style_traits"
+                                            hovered Show("trait_tooltip",None,trait)
+                                            xsize 320
+
+                    vbox:
+                        textbutton "Research New Designs:":
+                            style "textbutton_style"
+                            text_style "serum_text_style"
+                            xsize 320
+                            xanchor 0.5
+                            xalign 0.5
+
+                            action NullAction()
+                        viewport:
+                            xsize 320
+                            ysize 750
+                            scrollbars "vertical"
+                            mousewheel True
+                            vbox:
+                                xsize 320
+
+
+                                for serum in mc.business.serum_designs:
+                                    if not serum.researched:
+                                        textbutton "[serum.name] ([serum.current_research]/[serum.research_needed])":
+                                            text_xalign 0.5
+                                            text_text_align 0.5
+
+                                            action [Hide("serum_tooltip"),Return(serum)] style "textbutton_style"
+                                            text_style "serum_text_style_traits"
+                                            hovered Show("serum_tooltip",None,serum)
+                                            unhovered Hide("serum_tooltip")
+                                            xsize 320
+
+                textbutton "Do not change research." action [Return("None"), Hide("trait_tooltip")] style "textbutton_style" text_style "serum_text_style" yalign 0.995 xanchor 0.5 xalign 0.5
 
         imagebutton:
             auto "/tutorial_images/restart_tutorial_%s.png"
