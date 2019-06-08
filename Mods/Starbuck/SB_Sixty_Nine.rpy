@@ -21,7 +21,7 @@ init:
 label intro_SB_sixty_nine(the_person, the_location, the_object, the_round):
     "You give her ass a good hard smack and then look at [the_person.possessive_title]."
     mc.name "Hey, wanna sixty nine?"
-    if SB_get_fetish(the_person) == "Oral Fetish":
+    if SB_check_fetish(the_person, oral_fetish_role):
         "[the_person.possessive_title] smiles wide and quickly responds."
         the_person.char "That sounds amazing! Sixty nine has to be the absolute best position... I can't wait to taste you!"
     if the_person.effective_sluttiness() > 45:
@@ -150,7 +150,7 @@ label scene_SB_sixty_nine_1(the_person, the_location, the_object, the_round):
                         $ mc.change_arousal(5)
 
                     "[the_person.possessive_title] wraps her right hand around the base of your cock and starts to slide it back and forth in time with her sucking. Her other hand begins to lightly cup and kneed your balls."
-                    if SB_get_fetish(the_person) == "External Cum Fetish":
+                    if SB_check_fetish(the_person, cum_external_role):
                         "After a moment she takes her lips off your dick and continues stroking you."
                         the_person.char "Mmm, I can't wait to feel your hot cum all over my face..."
                         "She strokes you off faster and holds your cock right against her face."
@@ -160,7 +160,7 @@ label scene_SB_sixty_nine_1(the_person, the_location, the_object, the_round):
                         $ the_person.change_arousal(5)
                         "You give [the_person.possessive_title]'s ass a hard smack and resume eating her pussy."
                         "[the_person.possessive_title]'s cunt quivers as she slides your cock back into her mouth, sucking at it with renewed vigor."
-                    elif SB_get_fetish(the_person) == "Internal Cum Fetish":
+                    elif SB_check_fetish(the_person, cum_internal_role):
                         "After a moment she takes her lips off your dick and continues stroking you."
                         the_person.char "Mmm, I can't wait to feel your cum sliding down my throat [the_person.mc_title]."
                         "She latches back onto your cock, sucking at the tip eagerly before letting it slip out again."
@@ -315,7 +315,7 @@ label outro_SB_sixty_nine(the_person, the_location, the_object, the_round):
     if the_person.get_opinion_score("cum facials") > 0: #She loves facials
         if the_person.get_opinion_score("cum facials") == the_person.get_opinion_score("drinking cum"):   #She likes them equally, so do one randomly
             if renpy.random.randint(0,100) < 50: #In her mouth
-                if SB_get_fetish(the_person) == "Oral Fetish":
+                if SB_check_fetish(the_person, oral_fetish_role):
                     "You feel [the_person.possessive_title] take you all the way in her mouth as you start to orgasm."
                     "You grunt and twitch as you start to empty your balls right into her stomach."
                     "She tightens and relaxes her throat, swallowing your erection over and over as it spurts every last drop of cum straight down her throat."
@@ -323,8 +323,8 @@ label outro_SB_sixty_nine(the_person, the_location, the_object, the_round):
                     #$ SB_sixty_nine.redraw_scene(the_person)
                     "When you're completely finished she pulls off slowly, kissing the tip before leaning back."
                     $ the_person.call_dialogue("cum_mouth")
-                elif SB_get_fetish(the_person) == "Internal Cum Fetish":
-                    "[the_person.possessive_title] pulls off until just the  tip of your cock is in her mouth and she begins to stroke you off eagerly."
+                elif SB_check_fetish(the_person, cum_internal_role):
+                    "[the_person.possessive_title] pulls off until just the tip of your cock is in her mouth and she begins to stroke you off eagerly."
                     "You erupt in orgasm into her greedy mouth. Her expert mouth milks you with every spurt."
                     "[the_person.possessive_title] begins moaning uncontrollably around your spasming cock when her cum addicted brain registers her cum dosage."
                 else:
@@ -339,7 +339,7 @@ label outro_SB_sixty_nine(the_person, the_location, the_object, the_round):
                 "[the_person.possessive_title] pulls you out of her mouth, and begins stroking you eagerly."
                 the_person.char "Thats it, [the_person.mc_title], cum all over me!"
                 $ the_person.cum_on_face()
-                if SB_get_fetish(the_person) == "External Cum Fetish":
+                if SB_check_fetish(the_person, cum_external_role):
                     "[the_person.possessive_title] begins moaning uncontrollably as she receives the cum her addicted brain has been begging her for."
                 #$ SB_sixty_nine.redraw_scene(the_person)
                 "You let out a shudder moaning as you cum, pumping your sperm onto [the_person.possessive_title]'s face. She sighs when you're completely finished."
@@ -348,14 +348,14 @@ label outro_SB_sixty_nine(the_person, the_location, the_object, the_round):
             "[the_person.possessive_title] pulls you out of her mouth, and begins stroking you eagerly."
             the_person.char "Thats it, [the_person.mc_title], cum all over me!"
             $ the_person.cum_on_face()
-            if SB_get_fetish(the_person) == "External Cum Fetish":
+            if SB_check_fetish(the_person, cum_external_role):
                 "[the_person.possessive_title] begins moaning uncontrollably as she receives the cum her addicted brain has been begging her for."
             #$ SB_sixty_nine.redraw_scene(the_person)
             "You let out a shudder moaning as you cum, pumping your sperm onto [the_person.possessive_title]'s face. She sighs when you're completely finished."
             $ the_person.call_dialogue("cum_face")
         "You give [the_person.possessive_title]'s slit a few more appreciative licks, and then you both start to get up."
     elif the_person.get_opinion_score("drinking cum") > 0:
-        if SB_get_fetish(the_person) == "Internal Cum Fetish":
+        if SB_check_fetish(the_person, cum_internal_role):
             "[the_person.possessive_title] pulls off until just the  tip of your cock is in her mouth and she begins to stroke you off eagerly."
             "You erupt in orgasm into her greedy mouth. Her expert mouth milks you with every spurt."
             "[the_person.possessive_title] begins moaning uncontrollably around your spasming cock when her cum addicted brain registers her cum dosage."

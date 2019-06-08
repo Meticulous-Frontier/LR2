@@ -1824,11 +1824,12 @@ init python:
             valid_possessive_titles.append("Your slutty business partner")
         if person.sluttiness > 100 and person.sex_skills["Anal"] >= 4:
             valid_possessive_titles.append("Your buttslut")
-        if SB_get_fetish(person) == "External Cum Fetish" or SB_get_fetish(person) == "Internal Cum Fetish":
+        if SB_check_fetish(person, cum_external_role) or SB_check_fetish(person, cum_internal_role):
             valid_possessive_titles.append("Your cum guzzler")
             valid_possessive_titles.append("Your cum catcher")
         return valid_possessive_titles
     def starbuck_player_titles(person):
         valid_player_titles = [reserved_player_titles(person)]
-        valid_player_titles.append("Business Partner")
+        if starbuck.shop_progress_stage > 1:
+            valid_player_titles.append("Business Partner")
         return valid_player_titles

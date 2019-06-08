@@ -69,18 +69,18 @@ init -1:
                     the_person.sexy_opinions[SB_random_fetish_key] = [SB_random_opinion, True]
 
         def fetish_oral_function_on_turn(the_person, add_to_log):
-                fetish_random_roll_1 = renpy.random.randint(0,100)
-                fetish_random_roll_2 = renpy.random.randint(0,100)
-                if fetish_random_roll_1 < FETISH_SKILL_RAISE_CHANCE:
-                    if the_person.sex_skills["Oral"] < FETISH_SEX_SKILL_MAX:
-                        the_person.sex_skills["Oral"] += 1
+            fetish_random_roll_1 = renpy.random.randint(0,100)
+            fetish_random_roll_2 = renpy.random.randint(0,100)
+            if fetish_random_roll_1 < FETISH_SKILL_RAISE_CHANCE:
+                if the_person.sex_skills["Oral"] < FETISH_SEX_SKILL_MAX:
+                    the_person.sex_skills["Oral"] += 1
 
-                if fetish_random_roll_2 < FETISH_DEVELOPMENT_CHANCE:
-                    SB_random_fetish_key = get_random_from_list( FETISH_ORAL_OPINION_LIST)
-                    SB_random_opinion = the_person.get_opinion_score(SB_random_fetish_key)
-                    if SB_random_opinion < 2:
-                        SB_random_opinion += 1
-                        the_person.sexy_opinions[SB_random_fetish_key] = [SB_random_opinion, True]
+            if fetish_random_roll_2 < FETISH_DEVELOPMENT_CHANCE:
+                SB_random_fetish_key = get_random_from_list( FETISH_ORAL_OPINION_LIST)
+                SB_random_opinion = the_person.get_opinion_score(SB_random_fetish_key)
+                if SB_random_opinion < 2:
+                    SB_random_opinion += 1
+                    the_person.sexy_opinions[SB_random_fetish_key] = [SB_random_opinion, True]
 
 
         def fetish_vaginal_function_on_turn(the_person, add_to_log):
@@ -112,87 +112,78 @@ init -1:
             if the_person.sex_skills["Vaginal"] == 5:
                 if the_person.get_opinion_score("vaginal sex") == 2:
                     if the_person.sluttiness >= 80:
-                        if SB_has_fetish(the_person) == False:
-                        #DEBUG Trigger for vaginal fetish
+                        if SB_get_fetish_count(the_person) == 0:
+                            #DEBUG Trigger for vaginal fetish
                             if FETISH_VAGINAL_EVENT_INUSE:
                                 the_person.change_slut_core(1, add_to_log = False)
                                 the_person.change_slut_temp(1, add_to_log = False)
                             elif the_person == mom:
-                                SB_fetish_mom_vaginal_crisis = Action(the_person.name + " Loves Vaginal Sex.", SB_fetish_mom_vaginal_requirement, "SB_fetish_mom_vaginal_label", the_person)
                                 if SB_fetish_mom_vaginal_crisis not in mc.business.mandatory_crises_list:
                                     mc.business.mandatory_crises_list.append(SB_fetish_mom_vaginal_crisis)
                                     FETISH_VAGINAL_EVENT_INUSE = True
                                     SB_SET_RANDOM_EVENT_CHANCE(0)
-
                             elif the_person == lily:
-                                SB_fetish_lily_vaginal_crisis = Action(the_person.name + " Loves Vaginal Sex.", SB_fetish_lily_vaginal_requirement, "SB_fetish_lily_vaginal_label", the_person)
                                 if SB_fetish_lily_vaginal_crisis not in mc.business.mandatory_crises_list:
                                     mc.business.mandatory_crises_list.append(SB_fetish_lily_vaginal_crisis)
                                     FETISH_VAGINAL_EVENT_INUSE = True
                                     SB_SET_RANDOM_EVENT_CHANCE(0)
-
                             else:
-                                SB_fetish_vaginal_crisis = Action(the_person.name + " Loves Vaginal Sex.", SB_fetish_vaginal_requirement, "SB_fetish_vaginal_label", the_person)
                                 if SB_fetish_vaginal_crisis not in mc.business.mandatory_crises_list:
+                                    SB_fetish_vaginal_crisis.args = [the_person]    # set the current person as action argument
                                     mc.business.mandatory_crises_list.append(SB_fetish_vaginal_crisis)
                                     FETISH_VAGINAL_EVENT_INUSE = True
                                     SB_SET_RANDOM_EVENT_CHANCE(0)
-                        #"Vaginal fetish event added"
-
-
-
+                            #"Vaginal fetish event added"
 
         def fetish_anal_function_on_turn(the_person, add_to_log):
-                global FETISH_ANAL_EVENT_INUSE
+            global FETISH_ANAL_EVENT_INUSE
 
-                if FETISH_DEBUG_MODE:
-                    the_person.change_slut_core(15, add_to_log)
-                    the_person.change_slut_temp(15, add_to_log)
-                    the_person.change_obedience(15, add_to_log)
-                    mc.business.funds = 500000
+            if FETISH_DEBUG_MODE:
+                the_person.change_slut_core(15, add_to_log)
+                the_person.change_slut_temp(15, add_to_log)
+                the_person.change_obedience(15, add_to_log)
+                mc.business.funds = 500000
 
-                fetish_random_roll_1 = renpy.random.randint(0,100)
-                fetish_random_roll_2 = renpy.random.randint(0,100)
-                if fetish_random_roll_1 < FETISH_SKILL_RAISE_CHANCE:
-                    if the_person.sex_skills["Anal"] < FETISH_SEX_SKILL_MAX:
-                        the_person.sex_skills["Anal"] += 1
+            fetish_random_roll_1 = renpy.random.randint(0,100)
+            fetish_random_roll_2 = renpy.random.randint(0,100)
+            if fetish_random_roll_1 < FETISH_SKILL_RAISE_CHANCE:
+                if the_person.sex_skills["Anal"] < FETISH_SEX_SKILL_MAX:
+                    the_person.sex_skills["Anal"] += 1
 
-                if fetish_random_roll_2 < FETISH_DEVELOPMENT_CHANCE:
-                    SB_random_fetish_key = get_random_from_list( FETISH_ANAL_OPINION_LIST)
-                    SB_random_opinion = the_person.get_opinion_score(SB_random_fetish_key)
-                    if SB_random_opinion < 2:
-                        SB_random_opinion += 1
-                        the_person.sexy_opinions[SB_random_fetish_key] = [SB_random_opinion, True]
+            if fetish_random_roll_2 < FETISH_DEVELOPMENT_CHANCE:
+                SB_random_fetish_key = get_random_from_list( FETISH_ANAL_OPINION_LIST)
+                SB_random_opinion = the_person.get_opinion_score(SB_random_fetish_key)
+                if SB_random_opinion < 2:
+                    SB_random_opinion += 1
+                    the_person.sexy_opinions[SB_random_fetish_key] = [SB_random_opinion, True]
 
-                if the_person.sex_skills["Anal"] == 5:
-                    if the_person.get_opinion_score("anal sex") == 2:
-                        if the_person.sluttiness >= 90:
-                            if SB_has_fetish(the_person) == False:
-                            #"DEBUG Trigger for anal fetish"
-                                if FETISH_ANAL_EVENT_INUSE:
-                                    return
-                                elif the_person == lily:
-                                    SB_lily_anal_dp_fetish = Action(the_person.name + " Loves Anal Sex.", SB_fetish_anal_requirement, "SB_lily_anal_dp_fetish_label", the_person)
-                                    if SB_lily_anal_dp_fetish not in mc.business.mandatory_crises_list:
-                                        mc.business.mandatory_crises_list.append(SB_lily_anal_dp_fetish)
+            if the_person.sex_skills["Anal"] >= 5:
+                if the_person.get_opinion_score("anal sex") == 2:
+                    if the_person.sluttiness >= 90:
+                        if SB_get_fetish_count(the_person) == 0:
+                        #"DEBUG Trigger for anal fetish"
+                            if FETISH_ANAL_EVENT_INUSE:
+                                return
+                            elif the_person == lily:
+                                if SB_lily_anal_dp_fetish not in mc.business.mandatory_crises_list:
+                                    mc.business.mandatory_crises_list.append(SB_lily_anal_dp_fetish)
+                                    FETISH_ANAL_EVENT_INUSE = True
+                                    SB_SET_RANDOM_EVENT_CHANCE(0)
+                                return
+                            elif the_person == mom:
+                                for mand_event in mc.business.mandatory_crises_list:
+                                    if mand_event.name == "mom weekly pay":
+                                        #renpy.say("","DEBUG: Succesfully located mom event, attempting removal and replacement.")
+                                        mc.business.mandatory_crises_list.remove(mand_event)
+                                        mc.business.mandatory_crises_list.append(SB_mom_anal_fetish)
                                         FETISH_ANAL_EVENT_INUSE = True
-                                        SB_SET_RANDOM_EVENT_CHANCE(0)
-                                    return
-                                elif the_person == mom:
-                                    for mand_event in mc.business.mandatory_crises_list:
-                                        if mand_event.name == "mom weekly pay":
-                                            #renpy.say("","DEBUG: Succesfully located mom event, attempting removal and replacement.")
-                                            mc.business.mandatory_crises_list.remove(mand_event)
-                                            SB_mom_weekly_pay_action = Action("mom anal pay", SB_mom_anal_pay_requirement, "SB_mom_anal_pay_label", the_person)
-                                            mc.business.mandatory_crises_list.append(SB_mom_weekly_pay_action)
-                                            FETISH_ANAL_EVENT_INUSE = True
-                                    return
-                                else:
-                                    SB_fetish_anal_crisis = Action(the_person.name + " Loves Anal Sex.", SB_fetish_anal_requirement, "SB_fetish_anal_label", the_person)
-                                    if SB_fetish_anal_crisis not in mc.business.mandatory_crises_list:
-                                        mc.business.mandatory_crises_list.append(SB_fetish_anal_crisis)
-                                        FETISH_ANAL_EVENT_INUSE = True
-                                        SB_SET_RANDOM_EVENT_CHANCE(0)
+                                return
+                            else:
+                                if SB_fetish_anal_crisis not in mc.business.mandatory_crises_list:
+                                    SB_fetish_anal_crisis.args = [the_person]    # set the current person as action argument
+                                    mc.business.mandatory_crises_list.append(SB_fetish_anal_crisis)
+                                    FETISH_ANAL_EVENT_INUSE = True
+                                    SB_SET_RANDOM_EVENT_CHANCE(0)
 
 
 
@@ -216,32 +207,30 @@ init -1:
                     SB_random_opinion += 1
                     the_person.sexy_opinions[SB_random_fetish_key] = [SB_random_opinion, True]
 
-            if the_person.sex_skills["Oral"] >= 3:
+            if the_person.sex_skills["Oral"] >= 5:
                 if SB_get_cum_score(the_person) > 8:
                     if the_person.sluttiness >= 90:
-                        if SB_has_fetish(the_person) == False:
-                        #"DEBUG Trigger for cum fetish"
-                            if the_person == lily:
-                                for morn_event in morning_crisis_list:
-                                    if morn_event[0].name == "Sister Cum Fetish":
-                                        return
-                                SB_fetish_lily_cum = Action("Sister Cum Fetish", SB_fetish_lily_cum_requirement, "SB_fetish_lily_cum_label")
-                                morning_crisis_list.append([SB_fetish_lily_cum, 1500])
-                                #FETISH_CUM_EVENT_INUSE = True
+                        if SB_get_fetish_count(the_person) == 0:
+                            #"DEBUG Trigger for cum fetish"
+                            if the_person == lily and not (SB_check_fetish(lily, cum_external_role) or SB_check_fetish(the_person, cum_internal_role)):
+                                if not SB_fetish_lily_cum in mandatory_morning_crises_list:
+                                    mandatory_morning_crises_list.append(SB_fetish_lily_cum)
                             elif FETISH_CUM_EVENT_INUSE:
                                 return
-                            elif the_person == mom:
-                                SB_fetish_mom_cum = Action("Mom Cum Fetish", SB_fetish_mom_cum_requirement, "SB_fetish_mom_cum_label")
+                            elif the_person == mom and not (SB_check_fetish(mom, cum_external_role) or SB_check_fetish(mom, cum_internal_role)):
                                 mc.business.mandatory_crises_list.append(SB_fetish_mom_cum)
                                 FETISH_CUM_EVENT_INUSE = True
-                            else:
-                                SB_fetish_cum_crisis = Action(the_person.name + " Loves Cum.", SB_fetish_cum_requirement, "SB_fetish_cum_label", the_person)
+                            elif not (SB_check_fetish(the_person, cum_external_role) or SB_check_fetish(the_person, cum_internal_role)):
                                 if SB_fetish_cum_crisis not in mc.business.mandatory_crises_list:
+                                    SB_fetish_cum_crisis.args = [the_person]
                                     mc.business.mandatory_crises_list.append(SB_fetish_cum_crisis)
                                     FETISH_CUM_EVENT_INUSE = True
                                     SB_SET_RANDOM_EVENT_CHANCE(0)
 
             ###DEBUGSBEND
+
+
+
 label SB_instantiate_serum_traits(): #Creates all of the default LR2 serum trait objects.
     python:
 

@@ -110,7 +110,7 @@ label scene_SB_doggy_anal_dildo_dp_1(the_person, the_location, the_object, the_r
                  $ the_person.call_dialogue("suprised_exclaim")
                  "You lean forward and whisper into [the_person.possessive_title]'s ear."
                  mc.name "I know you dream about my dick in your ass constantly and it feels good to finally have that dream come true, but don't forget who is in charge around here."
-                 if SB_get_fetish(the_person) == "Anal Fetish":
+                 if SB_check_fetish(the_person, anal_fetish_role):
                      "[the_person.possessive_title] whimpers in total submission to you."
                      the_person.char "I dream about it... I beg for it... It completes me! I'm not me unless your dick is deep in my ass [the_person.mc_title]!"
                      "You give her a couple slow, heavy thrusts before releasing her hair. She returns her hands to the ground and moans when you resume your slow, methodical fucking."
@@ -152,7 +152,7 @@ label scene_SB_doggy_anal_dildo_dp_2(the_person, the_location, the_object, the_r
         "You decide with her cheeks spread wide to see how deep you can get yourself into [the_person.possessive_title]. "
         "With her hands busy, she has no way of holding up your weight as you push yourself forward and then down on top of her, your full body weight pushing her prone down onto the [the_object.name]"
         "[the_person.possessive_title] whimpers, her body now pinned between your body and [the_object.name]. The vibrating dildo stimulates her pussy mercilessly."
-        if SB_get_fetish(the_person) == "Anal Fetish":
+        if SB_check_fetish(the_person, anal_fetish_role):
             "Despite having no leverage, [the_person.possessive_title] wriggles her ass against you as best as she can. Even with no room to move, her love for anal sex drives her to try to milk your cock"
             "You enjoy her efforts before you speak clearly to her."
             mc.name "You are such a slut. Is it nice to finally have a real cock, stuffed deep in your tight little asshole?"
