@@ -59,6 +59,7 @@ label train_in_gym(person):
                     $ change_scene_display(gym_shower)
 
                     call fuck_person(person) from _call_fuck_person_gym_training
+
                 "Have Sex (disabled)\n {size=22}Requires: Stamina{/size}" if not mc.current_stamina > 0:
                     pass
                 "Another Time":
@@ -77,6 +78,5 @@ label train_in_gym(person):
     hide screen person_info_ui
     $ person.reset_arousal()
     $ person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-    $ change_scene_display(mc.location)
-    $ renpy.scene("Active")
+    $ change_scene_display(gym)
     return
