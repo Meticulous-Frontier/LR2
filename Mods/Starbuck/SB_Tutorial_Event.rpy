@@ -1,3 +1,19 @@
+init -1 python:
+    SB_tutorial_crisis_weight = 5
+
+init 2 python:
+    def SB_tutorial_event_requirement():
+        if mc.location in [mall, mall_salon, gym, home_store, clothing_store, sex_store]:
+            unknown, known = get_people_with_status()
+            if (len(known) > 0):
+                return True
+        return False
+
+    SB_tutorial_crisis = ActionMod("Mall Flirt", SB_tutorial_event_requirement, "SB_tutorial_event",
+        menu_tooltip = "You have a short flirt with someone in the mall.", category = "Mall")
+    crisis_list.append([SB_tutorial_crisis, SB_tutorial_crisis_weight])
+
+
 label SB_tutorial_event():
     python:
         unknown, known = get_people_with_status()
@@ -30,13 +46,3 @@ label SB_tutorial_event():
     $ renpy.scene("Active")    
     return
 
-init 2 python:
-    def SB_tutorial_event_requirement():
-        if mc.location in [mall, mall_salon, gym, home_store, clothing_store, sex_store]:
-            unknown, known = get_people_with_status()
-            if (len(known) > 0):
-                return True
-        return False
-
-    SB_tutorial_crisis = Action("Mall Flirt Crisis", SB_tutorial_event_requirement, "SB_tutorial_event")
-    crisis_list.append([SB_tutorial_crisis,5])
