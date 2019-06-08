@@ -33,7 +33,7 @@ label scene_SB_reverse_cowgirl_1(the_person, the_location, the_object, the_round
         "You can clearly see her arousal everytime she bounces up and down on top of you, her juices are beginning to run down the inside of her thighs."
     else:
         "You watch in rapture as her tight pussy lips grip your shaft with every bounce."
-    if SB_get_fetish(the_person) == "Vaginal Fetish":   #Fetish serum, highly skilled and loves sex
+    if SB_check_fetish(the_person, vaginal_fetish_role):   #Fetish serum, highly skilled and loves sex
         the_person.char "Oh [the_person.mc_title], I love how full I feel when you fuck me... god I wish we could do this everyday!"
         "[the_person.possessive_title] gives you a few quick, shallow dips then pull off you almost completely, leaving just your tip inside her."
         "She swirls her hips a couple times then impales herself on your again. [the_person.possessive_title] works her hips relentlessly on top of you as she pleases herself on your erection."
@@ -80,7 +80,7 @@ label scene_SB_reverse_cowgirl_2(the_person, the_location, the_object, the_round
                 "She wiggles her hips back and forth, giving you an enticing moving target. You give her irresistable ass another spank."
                 $ the_person.change_arousal(the_person.get_opinion_score("showing her ass") * 5)
                 "[the_person.possessive_title] moans as you give her a few more swats. A bright red handprint is beginning to form on her cheeks."
-            elif SB_get_fetish(the_person) == "Vaginal Fetish":
+            elif SB_check_fetish(the_person, vaginal_fetish_role):
                 "You give her irresistable ass another spank. [the_person.possessive_title] times her thrust with your hand smacking her booty, swallowing your dick whole with her greedy cunt when you spank her."
                 the_person.char "Mmmm. I've been bad [the_person.mc_title], I can't get your dick off my mind!"
                 "You spank her again. She bottoms out on top of you in time with your smack again. She greatly enjoys the sensation of getting filled up and spanked at the same time."
@@ -127,7 +127,7 @@ label outro_SB_reverse_cowgirl(the_person, the_location, the_object, the_round):
     "[the_person.possessive_title]'s sweet cunt milks your cock, the wet friction pushes you past the point of no return."
     mc.name "Ah, I'm going to cum!"
     "[the_person.possessive_title] looks back at you and smiles."
-    if SB_get_fetish(the_person) == "Internal Cum Fetish":
+    if SB_check_fetish(the_person, cum_internal_role):
         "[the_person.possessive_title]'s body goes rigid as your cum poors into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
         the_person.char "Oh.. OH! Yes [the_person.mc_title]! Pump it deep! I want it it all inside me!"
         "[the_person.possessive_title] revels in having her cum fetish fulfilled."
@@ -135,7 +135,7 @@ label outro_SB_reverse_cowgirl(the_person, the_location, the_object, the_round):
         $ SB_reverse_cowgirl.redraw_scene(the_person)
         "When you finish, [the_person.possessive_title] slowly pulls up off you."
         "You gaze at her shapely ass as a few drips of your seed drip out her pussy and onto [the_object.name]"
-    elif SB_get_fetish(the_person) == "External Cum Fetish":
+    elif SB_check_fetish(the_person, cum_external_role):
         "[the_person.possessive_title] lifts her hips up off of you, your twitching cock suddenly cold and aching to be back inside her."
         "She reaches down between her legs and begins to pump your member with your hand."
         the_person.char "Oh its so good when you spray me with your seed... Do it! Cum all over me!"

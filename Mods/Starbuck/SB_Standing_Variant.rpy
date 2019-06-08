@@ -180,7 +180,7 @@ label scene_SB_facing_wall_1(the_person, the_location, the_object, the_round):
                      "Make her suck it":
                          "You bring your fingers, glistening with her moisture, up to her face."
                          mc.name "Suck my fingers clean like a good girl."
-                         if SB_get_fetish(the_person) == "Oral Fetish":
+                         if SB_check_fetish(the_person, oral_fetish_role):
                              "[the_person.possessive_title] opens her mouth and sucks your fingers into her mouth. She sucks your fingers hungrily, deep into her mouth. Your fingertips are tickling the back of her throat."
                              "Her head bobs up and down as she suckles her juices off your fingers."
                              "You pull your fingers out with a pop. She looks back at you, her pouty lips almost enticing you to let her suck on your finger a bit longer."
@@ -195,7 +195,7 @@ label scene_SB_facing_wall_1(the_person, the_location, the_object, the_round):
                      "Lick it clean":
                          "A tantalizing musk enters your nose, coming from your fingers. Without even thinking, you start to lick her juices off your fingers."
                          "You moan in appreciation of how good she tastes, and she peeks back at you."
-                         if SB_get_fetish(the_person) == "Oral Fetish":
+                         if SB_check_fetish(the_person, oral_fetish_role):
                              the_person.char "Oh [the_person.mc_title], if you want to taste me, just ask! I love it when you lick my pussy..."
                          elif the_person.get_opinion_score("getting head") > 0:
                              the_person.char "You know, [the_person.mc_title], if you ever want more, you could always go straight to the source..."
@@ -218,7 +218,7 @@ label scene_SB_facing_wall_1(the_person, the_location, the_object, the_round):
                  "She seems to be into it. Maybe you should tell her how you want to finish."
                  menu:
                      "I wanna creampie you":
-                         if SB_get_fetish(the_person) == "Internal Cum Fetish":
+                         if SB_check_fetish(the_person, cum_internal_role):
                              "[the_person.possessive_title]'s legs shake for a second. She looks back at you with fire in her eyes."
                              the_person.char "You better! Don't even thinking about robbing my poor pussy of your incredible cum. It belongs inside me!"
                              "You give her another rough thrust, pushing yourself deep inside her."
@@ -250,7 +250,7 @@ label scene_SB_facing_wall_1(the_person, the_location, the_object, the_round):
                              the_person.char "Mmmmm I love it when you fill me up... Or you could pull out and cum all over my ass... Whatever you want!"
                              "Sounds like she just wants to please you, without being partial to a creampie or finishing some other way."
                      "I wanna cover your ass":
-                          if SB_get_fetish(the_person) == "External Cum Fetish":
+                          if SB_check_fetish(the_person, cum_external_role):
                              "[the_person.possessive_title]'s legs shake for a second. She looks back at you with fire in her eyes."
                              the_person.char "You better! cover every single square inch of my ass. I want to feel it when I stand up and your cum runs down my legs"
                              "You fuck her roughly, each thrust making a loud slap."

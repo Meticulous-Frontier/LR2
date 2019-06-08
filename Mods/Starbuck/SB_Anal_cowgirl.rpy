@@ -31,7 +31,7 @@ label intro_SB_anal_cowgirl(the_person, the_location, the_object, the_round):
     else:
         "You nod and she lifts herself up. She reaches down with one hand and holds onto your cock to hold it steady."
         "When she has you in place she lowers herself down slowly, sliding you inch by inch into her tight ass."
-    if SB_get_fetish(the_person) == "Anal Fetish":
+    if SB_check_fetish(the_person, anal_fetish_role):
         the_person.char "OH! Thank god. I needed this so bad."
         "[the_person.possessive_title] settles in with the familiar feeling of your dick in her ass."
     else:
@@ -135,7 +135,7 @@ label scene_SB_anal_cowgirl_3(the_person, the_location, the_object, the_round):
         "Your cock glides in and out of her tight, supple ass. [the_person.possessive_title] is so excited her pussy is dripping her juices onto you."
     else:
         "Her ass is warm and tight. You glide in and out of her at her pace."
-    if SB_get_fetish(the_person) == "Anal Fetish":
+    if SB_check_fetish(the_person, anal_fetish_role):
         "[the_person.possessive_title] leans forward. She runs one hand through your hair and the other she puts on your chest."
         the_person.char "Mmmm, your cock feels so good [the_person.mc_title]. I crave it, stuffing my tight little asshole constantly." #NOTE: mc_title can be the_person.mc_title
         "[the_person.possessive_title] stops rocking her hips for a few minutes. Pausing just to enjoy the exquisite fullness your erection gives her."
@@ -239,7 +239,7 @@ label orgasm_SB_anal_cowgirl(the_person, the_location, the_object, the_round):
     $ the_person.call_dialogue("climax_responses")
     the_person.char "With one last gasp she collapses down against you. Her thighs quiver as she climaxes. Her velvet smooth ass quivers around your erection as she cums."
     "After a second [the_person.possessive_title] regains control of herself. Her breath is warm against your ear as she whispers to you."
-    if SB_get_fetish(the_person) == "Anal Fetish":
+    if SB_check_fetish(the_person, anal_fetish_role):
         the_person.char "Everytime you're in my ass, it's like I just can't stop cumming..."
     else:
         the_person.char "I can't stop now, I want you to make me cum again!"

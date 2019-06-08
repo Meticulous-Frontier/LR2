@@ -53,7 +53,7 @@ label scene_SB_doggy_standing_1(the_person, the_location, the_object, the_round)
         the_person.char "I'm sorry [the_person.mc_title], thats a little too rough. Can you go a little slower?"
         "You pull her hips back toward you slowly. She sighs, still trying to get accustomed to your girth, penetrating her at such a deep angle."
         "The next time you push yourself in you push a little faster. She seems to be adapting to your fucking."
-    elif SB_get_fetish(the_person) == "Vaginal Fetish":          #vaginal fetish
+    elif SB_check_fetish(the_person, vaginal_fetish_role):          #vaginal fetish
         "After a particularly hard thrust, [the_person.possessive_title] moans lewdly."
         the_person.char "That's it, fuck me harder! God I can't imagine going a single day without your cock inside me..."
         "With one hand on her hip to control the pace, you grope and worship her ass cheeks with the other hand."
@@ -164,7 +164,7 @@ label scene_SB_doggy_standing_2(the_person, the_location, the_object, the_round)
         "Gentle Sex":
             "You grasp her ass with both hands and begin to grope her. You kneed her cheeks as your hips slowly work your erection in and out of her."
             mc.name "[the_person.title], your pussy is so good. I love how eager you are to fuck me."
-            if SB_get_fetish(the_person) == "Vaginal Fetish":
+            if SB_check_fetish(the_person, vaginal_fetish_role):
                 the_person.char "I love being your little slut! Fuck me good [the_person.mc_title]!"
             elif the_person.sluttiness > 80:
                 the_person.char "Of course I'm eager. Your cock fills me just right. Fuck me good [the_person.mc_title]!"
@@ -215,7 +215,7 @@ label outro_SB_doggy_standing(the_person, the_location, the_object, the_round):
                 $ the_person.change_happiness(5)
             $ the_person.cum_in_vagina()
             $ SB_doggy_standing.redraw_scene(the_person)
-            if SB_get_fetish(the_person) == "Internal Cum Fetish":
+            if SB_check_fetish(the_person, cum_internal_role):
                 "[the_person.possessive_title]'s body goes rigid as your cum poors into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
                 the_person.char "Oh.. OH! Yes [the_person.mc_title]! Pump it deep! I was made to take your cum inside me!"
                 "[the_person.possessive_title] revels in having her cum fetish fulfilled."
@@ -242,7 +242,7 @@ label outro_SB_doggy_standing(the_person, the_location, the_object, the_round):
                  the_person.char "Yes! Paint me with your sticky cum!"
             $ the_person.cum_on_ass()
             $ SB_doggy_standing.redraw_scene(the_person)
-            if SB_get_fetish(the_person) == "External Cum Fetish":
+            if SB_check_fetish(the_person, cum_external_role):
                 "[the_person.possessive_title]'s body goes rigid as your cum coats her ass. Goosebumps erupt all over her body as her brain registers your cum on her skin."
                 "[the_person.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
                 "She truly is addicted to your cum."
@@ -261,7 +261,7 @@ label outro_SB_doggy_standing(the_person, the_location, the_object, the_round):
                 "Your orgasm hits hard. Your first jet sprays across her face."
                 $ the_person.cum_on_face()
                 $ the_person.draw_person(position = "blowjob")
-                if SB_get_fetish(the_person) == "External Cum Fetish":
+                if SB_check_fetish(the_person, cum_external_role):
                     "You can see [the_person.possessive_title]'s pupils dilate as you fulfil her cum fetish."
                     "[the_person.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her face. She moans lewdly."
                     "She truly is addicted to your cum."

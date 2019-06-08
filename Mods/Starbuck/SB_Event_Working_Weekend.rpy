@@ -8,6 +8,8 @@
 #
 #
 ###
+init -1 python:
+    SB_working_weekend_crisis_weight = 5
 
 init 2 python:
     def SB_working_weekend_requirement():
@@ -17,11 +19,9 @@ init 2 python:
                     return True
         return False
 
-    SB_working_weekend_crisis = Action("SB Working Weekend Crisis",SB_working_weekend_requirement,"SB_working_weekend_crisis_label")
-    crisis_list.append([SB_working_weekend_crisis,5])  #7 to match mom's texts
-
-
-
+    SB_working_weekend_crisis = ActionMod("Working Weekend",SB_working_weekend_requirement,"SB_working_weekend_crisis_label", 
+        menu_tooltip = "While working weekends an employee comes into the office.", category = "Business")
+    crisis_list.append([SB_working_weekend_crisis, SB_working_weekend_crisis_weight])
 
 label SB_working_weekend_crisis_label():
     python:

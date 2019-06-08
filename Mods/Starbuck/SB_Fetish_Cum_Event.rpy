@@ -8,7 +8,7 @@ init 1 python:
         return False
 
     def SB_fetish_mom_cum_requirement():
-        if mc_at_home() and time_of_day==4 and not mc.location.has_person(mom):
+        if mc_asleep() and day % 7 is not 4: # not on Friday nights
             if mc.current_stamina > 0:  #Must have the stamina to handle a long sexy night
                 return True
         return False
@@ -18,20 +18,6 @@ init 1 python:
             return True
         return False
 
-    def SB_fetish_shower_cum_requirement():
-        if mc_at_home() and time_of_day==0:
-            if SB_get_fetish(mom) == "Internal Cum Fetish":
-                return True
-            elif SB_get_fetish(mom) == "External Cum Fetish":
-                return True
-            if SB_get_fetish(lily) == "Internal Cum Fetish":
-                return True
-            elif SB_get_fetish(lily) == "External Cum Fetish":
-                return True
-        return False
-
-
-    #SB_fetish_cum_crisis = Action("cum Fetish Crisis", SB_fetish_cum_requirement,"SB_fetish_cum_label")
     def SB_get_cum_score(the_person):
         cum_score = 0
         for cumListEntry in FETISH_CUM_OPINION_LIST:
@@ -52,6 +38,10 @@ init 1 python:
                 if mc.is_at_work():
                     return True
         return False
+
+    SB_fetish_mom_cum = Action("Mom Cum Fetish", SB_fetish_mom_cum_requirement, "SB_fetish_mom_cum_label")
+    SB_fetish_lily_cum = Action("Sister Cum Fetish", SB_fetish_lily_cum_requirement, "SB_fetish_lily_cum_label")
+    SB_fetish_cum_crisis = Action("Loves Cum.", SB_fetish_cum_requirement, "SB_fetish_cum_label")
 
 #SBC1
 label SB_fetish_cum_label(the_person):
@@ -107,17 +97,17 @@ label SB_fetish_cum_label(the_person):
                         #"Note, cum in mouth detected. Comment this later"
                         the_person.sexy_opinions["drinking cum"] = [FETISH_OPINION_VALUE, True]
                         the_person.sexy_opinions["creampies"] = [FETISH_OPINION_VALUE, True]
-                        SB_give_cum_internal_role(the_person)
+                        the_person.special_role.append(cum_internal_role)
                     if sb_access.name == "Face Cum":     #You came on her face! Now she fetishes facials and getting cum on her.
                         #"Note, cum on face detected. Comment this later"
                         the_person.sexy_opinions["cum facials"] = [FETISH_OPINION_VALUE, True]
                         the_person.sexy_opinions["being covered in cum"] = [FETISH_OPINION_VALUE, True]
-                        SB_give_cum_external_role(the_person)
+                        the_person.special_role.append(cum_external_role)
             "[the_person.possessive_title] is moaning ecstatically below your desk."
-            if SB_get_fetish(the_person) == "External Cum Fetish":
+            if SB_check_fetish(the_person, cum_external_role):
                 "Glancing down, you see [the_person.possessive_title] running her hands along her face, then down to her chest. She is rubbing your cum into her skin."
                 the_person.char "Mmm... it feels so good! That first splash is always the best..."
-            elif SB_get_fetish(the_person) == "Internal Cum Fetish":
+            elif SB_check_fetish(the_person, cum_internal_role):
                 "Glancing down, you see [the_person.possessive_title] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
                 the_person.char "Mmm... it's all inside me now... right where it belongs!"
             "[the_person.possessive_title] stands up."
@@ -151,12 +141,16 @@ init 2 python:
     def SB_fetish_cum_dosage_requirement():
         if time_of_day < 4:
             if mc.is_at_work():
-                for person in mc.business.get_employee_list():
-                    if SB_get_fetish(person) == "Internal Cum Fetish":
-                        return True
-                    elif SB_get_fetish(person) == "External Cum Fetish":
-                        return True
+                if SB_check_fetish(person, cum_internal_role) or SB_check_fetish(person, cum_external_role):
+                    return True
+        return False
 
+    def SB_fetish_shower_cum_requirement():
+        if mc_at_home() and time_of_day==0:
+            if SB_check_fetish(mom, cum_internal_role) or SB_check_fetish(mom, cum_external_role):
+                return True
+            if SB_check_fetish(lily, cum_internal_role) or SB_check_fetish(lily, cum_external_role):
+                return True
         return False
 
     SB_fetish_cum_dosage_crisis = Action("Cum Fetish Dosage Crisis",SB_fetish_cum_dosage_requirement,"SB_fetish_cum_dosage_label")
@@ -172,9 +166,7 @@ label SB_fetish_cum_dosage_label():
     python:
         for person in mc.business.get_employee_list():
             for person in mc.business.get_employee_list():
-                if SB_get_fetish(person) == "Internal Cum Fetish":
-                    meets_fetish_list.append(person)
-                elif SB_get_fetish(person) == "External Cum Fetish":
+                if SB_check_fetish(person, cum_internal_role) or SB_check_fetish(person, cum_external_role):
                     meets_fetish_list.append(person)
 
     $ the_person = get_random_from_list(meets_fetish_list)
@@ -205,8 +197,6 @@ label SB_fetish_cum_dosage_label():
             $ the_person.draw_person(position = "blowjob")
             ###cum Scene, standing variant###
             call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), skip_intro = False, girl_in_charge = True) from _call_fuck_person_SBC20
-            $ the_person.reset_arousal()
-            ###Reset Arousal
             the_person.char "Oh my god, thank you [the_person.mc_title]... I wish I had time make you cum again... but I know you're a busy a man..."
             "[the_person.possessive_title] starts to get up. Her hunger for cum satisfied for now."
             the_person.char "Thanks again, [the_person.mc_title]. Don't hesitate to ask if you ever need to be... you know... serviced."
@@ -223,10 +213,14 @@ label SB_fetish_cum_dosage_label():
             $ the_person.change_happiness(-5)
             the_person.char "Oh! I'm sorry... I know you work so hard around here. Maybe tomorrow then?"
             "[the_person.possessive_title] quickly sulks off."
+    python:
+        the_person.reset_arousal()
+        the_person.review_outfit(show_review_message = False)
+        renpy.scene("Active")
     return
 
 #SBC3
-label SB_fetish_mom_cum_label():
+label SB_fetish_mom_cum_label(the_person):
     $ the_person = mom
     "Tired from a long day, you quickly fall asleep."
     "You are having some very pleasant dreams. [the_person.possessive_title] is posing for you in some sexy lingerie, then gets down on her knees..."
@@ -261,7 +255,7 @@ label SB_fetish_mom_cum_label():
             "You look down and see [the_person.possessive_title]. She uses her finger to wipe up a bit of cum that leaked out of her mouth and licks it clean."
             $ the_person.sexy_opinions["drinking cum"] = [FETISH_OPINION_VALUE, True]
             $ the_person.sexy_opinions["creampies"] = [FETISH_OPINION_VALUE, True]
-            $ SB_give_cum_internal_role(the_person)
+            $ the_person.special_role.append(cum_internal_role)
 
 
         "Cum on her face":
@@ -276,7 +270,7 @@ label SB_fetish_mom_cum_label():
             $ the_person.draw_person(position = "blowjob")
             $ the_person.sexy_opinions["cum facials"] = [FETISH_OPINION_VALUE, True]
             $ the_person.sexy_opinions["being covered in cum"] = [FETISH_OPINION_VALUE, True]
-            $ SB_give_cum_external_role(the_person)
+            $ the_person.special_role.append(cum_external_role)
             "Slowly recovering, you look at [the_person.possessive_title]'s cum covered face. Her eyes are closed and she is absentmindedly playing with some of the cum that is starting to run down her neck."
     the_person.char "Oh... I needed that so bad... you have no idea."
     $ the_person.reset_arousal()
@@ -309,10 +303,12 @@ label SB_fetish_mom_cum_label():
     "You grab some clothes and head for the shower."
 
     hide screen person_info_ui
-    $ the_person.reset_arousal()
-    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-    $ change_scene_display(mc.location)
-    $ renpy.scene("Active")
+
+    python:
+        the_person.reset_arousal()
+        the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+        change_scene_display(mc.location)
+        renpy.scene("Active")
     return
 
 
@@ -320,6 +316,7 @@ label SB_fetish_mom_cum_label():
 label SB_fetish_lily_cum_label():
     $ the_person = lily
     "You wake up a little groggy. Your head kinda hurts, so you grab some clothes and head towards the bathroom to take a hot shower. Hopefully the steam will help you feel better."
+    $ change_scene_display(home_shower)
     "You stand in the shower, enjoying the hot water for several minutes. The steam is beginning to cloud up the bathroom."
     "You are surprised when the shower door opens. You see [the_person.possessive_title] getting in the shower with you."
     $ the_person.outfit = SB_cum_nude_outfit.get_copy()
@@ -360,18 +357,18 @@ label SB_fetish_lily_cum_label():
                 #"Note, cum in mouth detected. Comment this later"
                 the_person.sexy_opinions["drinking cum"] = [FETISH_OPINION_VALUE, True]
                 the_person.sexy_opinions["creampies"] = [FETISH_OPINION_VALUE, True]
-                SB_give_cum_internal_role(the_person)
+                the_person.special_role.append(cum_internal_role)
             if sb_access.name == "Face Cum":     #You came on her face! Now she fetishes facials and getting cum on her.
                 #"Note, cum on face detected. Comment this later"
                 the_person.sexy_opinions["cum facials"] = [FETISH_OPINION_VALUE, True]
                 the_person.sexy_opinions["being covered in cum"] = [FETISH_OPINION_VALUE, True]
-                SB_give_cum_external_role(the_person)
+                the_person.special_role.append(cum_external_role)
     $ FETISH_CUM_EVENT_INUSE = False
     "[the_person.possessive_title] is moaning ecstatically. You start to worry that [mom.possessive_title] might hear."
-    if SB_get_fetish(the_person) == "External Cum Fetish":
+    if SB_check_fetish(the_person, cum_external_role):
         "Glancing down, you see [the_person.possessive_title] running her hands along her face, then down to her chest. She is rubbing your cum into her skin."
         the_person.char "Mmm... it feels so good! That first splash is always the best..."
-    elif SB_get_fetish(the_person) == "Internal Cum Fetish":
+    elif SB_check_fetish(the_person, cum_internal_role):
         "Glancing down, you see [the_person.possessive_title] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
         the_person.char "Mmm... it's all inside me now... right where it belongs!"
     $ the_person.draw_person(position = "kissing")
@@ -390,11 +387,13 @@ label SB_fetish_lily_cum_label():
     $ FETISH_CUM_EVENT_INUSE = False
     "[the_person.possessive_title] gets out. You finish up with your shower, balls empty and ready for the day!"
     hide screen person_info_ui
-    $ the_person.reset_arousal()
-    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-    $ change_scene_display(mc.location)
-    $ renpy.scene("Active")
+
     python:
+        the_person.reset_arousal()
+        the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+        change_scene_display(bedroom)
+        renpy.scene("Active")
+
         for morn_event in morning_crisis_list:
             if morn_event[0].name == "Sister Cum Fetish":
                 #renpy.say("","DEBUG: Succesfully located shower, attempting removal and replacement.")
@@ -406,17 +405,18 @@ label SB_fetish_shower_cum_label():
     $ meets_fetish_list = []
     python:
 
-        if SB_get_fetish(mom) == "Internal Cum Fetish":
+        if SB_check_fetish(mom, cum_internal_role):
             meets_fetish_list.append(mom)
-        elif SB_get_fetish(mom) == "External Cum Fetish":
+        elif SB_check_fetish(mom, cum_external_role):
             meets_fetish_list.append(mom)
-        if SB_get_fetish(lily) == "Internal Cum Fetish":
+        if SB_check_fetish(lily, cum_internal_role):
             meets_fetish_list.append(lily)
-        elif SB_get_fetish(lily) == "External Cum Fetish":
+        elif SB_check_fetish(lily, cum_external_role):
             meets_fetish_list.append(lily)
 
     $ the_person = get_random_from_list(meets_fetish_list)
     "You wake up a little groggy. Your head kinda hurts, so you grab some clothes and head towards the bathroom to take a hot shower. Hopefully the steam will help you feel better."
+    $ change_scene_display(home_shower)
     "You stand in the shower, enjoying the hot water for several minutes. The steam is beginning to cloud up the bathroom."
     "You hear the shower door open and see [the_person.possessive_title] getting in the shower with you."
     $ the_person.outfit = SB_cum_nude_outfit.get_copy()
@@ -440,9 +440,11 @@ label SB_fetish_shower_cum_label():
     "[the_person.possessive_title] gets out. You finish up with your shower, balls empty and ready for the day!"
 
     hide screen person_info_ui
-    $ the_person.reset_arousal()
-    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-    $ change_scene_display(mc.location)
-    $ renpy.scene("Active")
+
+    python:
+        the_person.reset_arousal()
+        the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+        change_scene_display(bedroom)
+        renpy.scene("Active")
 
     return

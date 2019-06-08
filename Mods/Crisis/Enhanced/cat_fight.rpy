@@ -208,7 +208,7 @@ label cat_fight_crisis_enhanced_label():
                     $ the_clothing = loser.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
 
                 $ scene_manager.update_actor(loser, emotion = "sad")
-                "[loser.title] looks down at herself. She seems to realise for the first time how little she's wearing now."
+                "[loser.title] looks down at herself. She seems to realize for the first time how little she's wearing now."
                 loser.char "Look what you've done! Oh god, I need to... I need to go!"
                 if loser.sluttiness > 80 and winner.sluttiness > 80:
                     $ scene_manager.update_actor(loser, position = "walking_away")

@@ -32,7 +32,7 @@ label intro_SB_doggy_anal(the_person, the_location, the_object, the_round):
         "You use your fingers to crudely work in and out of her ass a few times to help get it lubricated."
         "Deciding against making her suck on your fingers again after they've been in her ass, you spit a couple times down on her ass to get a bit more lubrication so you can penetrate her"
     "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
-    if SB_get_fetish(the_person) == "Anal Fetish":
+    if SB_check_fetish(the_person, anal_fetish_role):
         the_person.char "Oh my god it's so dirty... but it is so good too..."
         $ the_person.discover_opinion("anal sex")
     return
@@ -80,9 +80,9 @@ label scene_SB_doggy_anal_1(the_person, the_location, the_object, the_round):
                  "[the_person.possessive_title] begins to twerk up and down your shaft with quick, shallow movements."
                  if mc.arousal > 70:
                       mc.name "Damn that feels good. You're gonna make me cum if you keep that up. Where do you want my load?"
-                      if SB_get_fetish(the_person) == "Internal Cum Fetish":
-                          the_person.char "Just shove it in deep and dump it right in my ass. You know I need your cum inside me, right where it belonds!"
-                      elif SB_get_fetish(the_person) == "External Cum Fetish":
+                      if SB_check_fetish(the_person, cum_internal_role):
+                          the_person.char "Just shove it in deep and dump it right in my ass. You know I need your cum inside me, right where it belongs!"
+                      elif SB_check_fetish(the_person, cum_external_role):
                          the_person.char "Anywhere on my skin! My ass, my face, I don't care, just spray me down with it! With you know I need it like that!"
                       elif the_person.get_opinion_score("creampies") > 0:
                            the_person.char "You should just shove it in as deep as you can and cum inside me."
@@ -96,7 +96,7 @@ label scene_SB_doggy_anal_1(the_person, the_location, the_object, the_round):
                            the_person.char "I don't know... wherever you want I guess?"
                  else:
                       mc.name "Wow, your ass is amazing. Where'd you learn to work it like that girl? Have you been practicing?"
-                      if SB_get_fetish(the_person) == "Anal Fetish":
+                      if SB_check_fetish(the_person, anal_fetish_role):
                            "In response, she slams her ass all the way back on your dick. She grinds her hips left and right up against you."
                            the_person.char "Practicing, dreaming, begging for your cock in my ass! Every moment my rear is empty I'm craving your dick deep inside it."
                            "You can feel her tense and relax her muscles in her ass rhythmically, messaging your shaft while you remain totally engulfed inside her."
@@ -183,7 +183,7 @@ label scene_SB_doggy_anal_2(the_person, the_location, the_object, the_round):
                 "You decide with her cheeks spread wide to see how deep you can get yourself into [the_person.possessive_title]. "
                 "With her hands busy, she has no way of holding up your weight as you push yourself forward and then down on top of her, your full body weight pushing her prone down onto the [the_object.name]"
                 "[the_person.possessive_title] whimpers, her body now pinned between your body and [the_object.name]"
-                if SB_get_fetish(the_person) == "Anal Fetish":
+                if SB_check_fetish(the_person, anal_fetish_role):
                     "Despite having no leverage, [the_person.possessive_title] wriggles her ass against you as best as she can. Even with no room to move, her love for anal sex drives her to try to milk your cock"
                     "You enjoy her efforts before you speak clearly to her."
                     mc.name "Does this feel better than that plug? Is this what you're imagining everytime you push that plug up your ass?"
@@ -234,7 +234,7 @@ label outro_SB_doggy_anal(the_person, the_location, the_object, the_round):
                 the_person.char "Yes! Fill my ass with your cum!"
             $ cum_in_ass(the_person)
             $ SB_doggy_anal.redraw_scene(the_person)
-            if SB_get_fetish(the_person) == "Internal Cum Fetish":
+            if SB_check_fetish(the_person, cum_internal_role):
                 "[the_person.possessive_title]'s body goes rigid as your cum poors into her ass. Goosebumps erupt all over her body as her brain registers her creampie."
                 the_person.char "Oh.. OH! Yes [the_person.mc_title]! Pump it deep! You were meant to cum inside me!"
                 "[the_person.possessive_title] revels in having her cum fetish fulfilled."
@@ -251,7 +251,7 @@ label outro_SB_doggy_anal(the_person, the_location, the_object, the_round):
                  the_person.char "Yes! Paint me with your sticky cum!"
             $ the_person.cum_on_ass()
             $ SB_doggy_anal.redraw_scene(the_person)
-            if SB_get_fetish(the_person) == "External Cum Fetish":
+            if SB_check_fetish(the_person, cum_external_role):
                 "[the_person.possessive_title]'s body goes rigid as your cum coats her ass. Goosebumps erupt all over her body as her brain registers your cum on her skin."
                 "[the_person.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
                 "She truly is addicted to your cum."
@@ -265,7 +265,7 @@ label outro_SB_doggy_anal(the_person, the_location, the_object, the_round):
             mc.name "Fuck, get ready [the_person.title], I wanna cum on your face!"
             "You pull your cock out of [the_person.possessive_title]'s ass with a satisfying pop. She immediately turns around on gets on her knees in front of you."
             $ the_person.draw_person(position = "blowjob")
-            if SB_get_fetish(the_person) == "External Cum Fetish":
+            if SB_check_fetish(the_person, cum_external_role):
                 "[the_person.possessive_title] reaches up and begins stroking you off for your final few seconds."
                 "Your orgasm hits hard. Your first jet sprays across her face."
                 "You can see [the_person.possessive_title]'s pupils dilate as you fulfil her cum fetish."
