@@ -4,7 +4,7 @@ init -1:
         def serum_production_autosell(new_amount):
             if new_amount is "":
                 new_amount = -1
-            store.mc.business.serum_production_array[array_to_change][3] = new_amount
+            store.mc.business.serum_production_array[array_to_change][3] = int(new_amount)
 
 
 init 2:
@@ -210,7 +210,7 @@ init 2:
 
                                                 textbutton "+1":
                                                     action [
-                                                    Function(mc.business.change_line_autosell,count,1)
+                                                    Function(mc.business.change_line_autosell,count,+1)
                                                     ]
                                                     alternate [
                                                     Function(mc.business.change_line_autosell,count,+10)
