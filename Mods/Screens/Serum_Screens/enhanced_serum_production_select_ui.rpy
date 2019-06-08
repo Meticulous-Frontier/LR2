@@ -195,7 +195,7 @@ init 2:
                                                         id "serum_production_autosell"
                                                         style "textbutton_style"
                                                         action NullAction()
-                                                        hovered SetVariable("array_to_change", count)
+                                                        hovered If(array_to_change is not count, SetVariable("array_to_change", count))
                                                         unhovered Function(renpy.restart_interaction) #TODO: Tweak this so it is less annoying  and fix any associated errors
 
                                                         add Input(
