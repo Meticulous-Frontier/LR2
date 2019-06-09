@@ -20,8 +20,7 @@ init 2 python:
         return False
 
     mall_introduction_action = ActionMod("Mall Introduction", mall_introduction_requirement, "mall_introduction_action_label",
-        menu_tooltip = "You meet a stranger and a friend introduces you.", category = "Mall")
-    crisis_list.append([mall_introduction_action, mall_introduction_weight])
+        menu_tooltip = "You meet a stranger and a friend introduces you.", category = "Mall", is_crisis = True, crisis_weight = mall_introduction_weight)
 
 label mall_introduction_action_label:
     python:

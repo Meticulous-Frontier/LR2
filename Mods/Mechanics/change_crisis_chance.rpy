@@ -34,7 +34,7 @@ label show_crisis_chance_ui():
     python:
         disabled = 0
         # how many crisis events are disabled?
-        for action_mod in ActionMod._instances:
+        for action_mod in action_mod_list:
             if not action_mod.enabled:
                 disabled += 1
 

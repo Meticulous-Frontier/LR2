@@ -12,8 +12,7 @@ init 2 python:
         return False
 
     town_walk_crisis_action = ActionMod("Town Walk",town_walk_crisis_requirement,"town_walk_crisis_action_label", 
-        menu_tooltip = "On occasion you take an afternoon stroll through town, someone did not close their bedroom curtains.")
-    crisis_list.append([town_walk_crisis_action, town_walk_mod_weight])
+        menu_tooltip = "On occasion you take an afternoon stroll through town, someone did not close their bedroom curtains.", is_crisis = True, crisis_weight = town_walk_mod_weight)
 
 label town_walk_crisis_action_label:
     ## You spy on a neighbour during your town walk activities

@@ -42,7 +42,7 @@ init 1 python:
 
     def update_cougar_personality(person):
         # change personality to cougar if we meet age requirement
-        if action_mod_settings["cougar_personality_dummy_label"]:
+        if find_in_list(lambda x: x.effect == "cougar_personality_dummy_label", action_mod_list).enabled:
             if person not in list_of_unique_characters + [mom, lily, aunt, cousin, stephanie] and person.age > 45:
                 if not person.personality == cougar_personality:
                     person.original_personality = person.personality

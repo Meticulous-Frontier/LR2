@@ -8,10 +8,6 @@ init 2 python:
         return the_swing
 
     def SB_mod_initialization(action_mod):
-        # we only need one init per game
-        if not find_in_list(lambda x: x.name == "Starbuck",  all_people_in_the_game([mc])) is None:
-            return
-
         starbuck_personality = Personality("starbuck", default_prefix = "relaxed",
         common_likes = ["skirts", "small talk", "the colour blue", "makeup"],
         common_sexy_likes = ["lingerie","taking control",  "doggy style sex", "creampies"],

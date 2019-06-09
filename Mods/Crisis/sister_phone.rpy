@@ -11,8 +11,7 @@ init 3 python:
         return False
 
     sister_phone_crisis_action = ActionMod("Sister Phone Message",sister_phone_crisis_requirement,"sister_phone_crisis_action_label",
-        menu_tooltip = "[the_person.possessive_title] sends you phone messages", category="Home")
-    crisis_list.append([sister_phone_crisis_action, sister_phone_mod_weight])
+        menu_tooltip = "[the_person.possessive_title] sends you phone messages", category="Home", is_crisis = True, crisis_weight = sister_phone_mod_weight)
 
 label sister_phone_crisis_action_label:
     #TODO: have a way of saving and reviewing selfies in the future.
