@@ -18,6 +18,8 @@ init -1 python:
             return False
     Outfit.in_outfit = in_outfit
 
+
+
     def get_catagory(item): # Should re-write this function if possible.
         cloth_master_list = [
         panties_list + neckwear_list + bracelet_list + rings_list +
@@ -51,6 +53,57 @@ init -1 python:
                 return "Neckwear"
 init 2:
     $ import_selection = False # Decides if the import viewport is showing
+    $ selected_xml = "Exported_Wardrobe.xml"
+    python:
+        def custom_log_outfit(the_outfit, outfit_class = "FullSets", wardrobe_name = "Exported_Wardrobe"): #NOTE: This is just a version of the default log_outfit that does not append .xml to the file name
+            file_path = os.path.abspath(os.path.join(config.basedir, "game"))
+            file_path = os.path.join(file_path,"wardrobes")
+            file_name = os.path.join(file_path, wardrobe_name)
+
+            if not os.path.isfile(file_name): #We assume if the file exists that it is well formed. Otherwise we will create it and guarantee it is well formed.
+                #Note: if the file is changed (by inserting extra outfits, for example) exporting outfits may crash due to malformed xml, but we do not overwrite the file.
+                missing_file = open(file_name,"w+")
+                starting_element = ET.Element("Wardrobe",{"name":wardrobe_name})
+                starting_tree = ET.ElementTree(starting_element)
+                ET.SubElement(starting_element,"FullSets")
+                ET.SubElement(starting_element,"UnderwearSets")
+                ET.SubElement(starting_element,"OverwearSets")
+
+                indent(starting_element)
+                starting_tree.write(file_name,encoding="UTF-8")
+
+
+            wardrobe_tree = ET.parse(file_name)
+            tree_root = wardrobe_tree.getroot()
+            outfit_root = tree_root.find(outfit_class)
+
+            outfit_element = ET.SubElement(outfit_root,"Outfit",{"name":the_outfit.name})
+            upper_element = ET.SubElement(outfit_element, "UpperBody")
+            lower_element = ET.SubElement(outfit_element, "LowerBody")
+            feet_element = ET.SubElement(outfit_element, "Feet")
+            accessory_element = ET.SubElement(outfit_element, "Accessories")
+
+
+            for cloth in the_outfit.upper_body:
+                item_dict = build_item_dict(cloth)
+                if not cloth.is_extension:
+                    ET.SubElement(upper_element,"Item", item_dict)
+            for cloth in the_outfit.lower_body:
+                item_dict = build_item_dict(cloth)
+                if not cloth.is_extension:
+                    ET.SubElement(lower_element,"Item", item_dict)
+            for cloth in the_outfit.feet:
+                item_dict = build_item_dict(cloth)
+                if not cloth.is_extension:
+                    ET.SubElement(feet_element,"Item", item_dict)
+            for cloth in the_outfit.accessories:
+                item_dict = build_item_dict(cloth)
+                if not cloth.is_extension:
+                    ET.SubElement(accessory_element,"Item", item_dict)
+
+
+            indent(tree_root)
+            wardrobe_tree.write(file_name,encoding="UTF-8")
 
     screen outfit_creator(starting_outfit, target_wardrobe = mc.designed_wardrobe): ##Pass a completely blank outfit instance for a new outfit, or an already existing instance to load an old one.| This overrides the default outfit creation screen
 
@@ -59,6 +112,11 @@ init 2:
         zorder 100
         default catagory_selected = "Panties"
         default mannequin = True
+
+        default cloth_pattern_selection = True
+        default transparency_selection = True
+        default outfit_stats = True
+        default outfit_class_selected = "FullSets"
 
 
         default quick_catagory = None # Used to get catagory of the item
@@ -119,7 +177,7 @@ init 2:
                         for catagory in valid_catagories:
                             textbutton catagory:
                                 style "textbutton_style"
-                                text_style "textbutton_text_style"
+                                text_style "serum_text_style"
                                 if catagory == catagory_selected:
                                     background "#4f7ad6"
                                     hover_background "#4f7ad6"
@@ -157,7 +215,7 @@ init 2:
                                         for cloth in catagories_mapping[catagory_selected][0]:
                                             textbutton cloth.name:
                                                 style "textbutton_style"
-                                                text_style "textbutton_text_style"
+                                                text_style "custom_outfit_style"
 
                                                     background "#1a45a1"
                                                     hover_background "#3a65c1"
@@ -203,95 +261,152 @@ init 2:
                             vbox:
                                 spacing 10
                                 if selected_clothing is not None:
-                                    text selected_clothing.name + ", +" + __builtin__.str(selected_clothing.slut_value) + " Slut Requirement" style "textbutton_text_style"
+                                    frame:
+                                        background "#aaaaaa"
+                                        xfill True
+                                        textbutton "Add " + selected_clothing.name + " to outfit" + "\n+" + __builtin__.str(selected_clothing.slut_value) + " Slut Requirement":
+
+                                            style "textbutton_no_padding_highlight"
+                                            text_style "serum_text_style"
+                                            background "#1a45a1"
+                                            hover_background "#3a65c1"
+                                            xalign 0.5
+                                            xfill True
+
+                                            action [
+                                            SensitiveIf([
+                                            valid_check(starting_outfit, selected_clothing)
+                                            and selected_clothing in catagories_mapping[catagory_selected][0]
+                                            or starting_outfit.in_outfit(selected_clothing.name)]),
+
+                                            SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]), #Make sure color is updated
+                                            If(starting_outfit is not None and starting_outfit.in_outfit(selected_clothing.name) or selected_from_outfit in catagories_mapping[catagory_selected][0],
+                                            [Function(starting_outfit.remove_clothing, selected_from_outfit),
+                                            Function(apply_method, starting_outfit, selected_clothing)],
+                                            Function(apply_method, starting_outfit, selected_clothing)),
+                                            Show("mannequin", None, starting_outfit),
+                                            SetScreenVariable("selected_clothing", None)] # NOTE: We are no longer interested in the demo outfit so view the final outfit, starting_outfit
+
+
+                                            hovered [
+                                            If(selected_from_outfit is not None and selected_clothing in catagories_mapping[catagory_selected][0], Function(demo_outfit.remove_clothing, selected_from_outfit)),
+                                            Function(apply_method, demo_outfit, selected_clothing),
+                                            SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
+                                            Show("mannequin", None, demo_outfit)
+                                            ]
+
                                     if __builtin__.type(selected_clothing) is Clothing: #Only clothing items have patterns, facial accessories do not (currently).
-                                        hbox:
+                                        vbox:
                                             spacing 5
-                                            for pattern in selected_clothing.supported_patterns:
-                                                textbutton pattern:
-                                                    style "textbutton_style"
-                                                    text_style "textbutton_text_style"
-                                                    if selected_clothing.pattern == selected_clothing.supported_patterns[pattern]:
-                                                        background "#4f7ad6"
-                                                        hover_background "#4f7ad6"
-                                                    else:
-                                                        background "#1a45a1"
-                                                        hover_background "#3a65c1"
-                                                    xfill False
-                                                    xsize 120
-                                                    text_xalign 0.5
-                                                    text_xanchor 0.5
-                                                    text_size 12
-                                                    sensitive True
-                                                    action SetField(selected_clothing,"pattern",selected_clothing.supported_patterns[pattern])
+                                            hbox:
+                                                frame:
+                                                    background "#aaaaaa"
+                                                    xfill True
+                                                    textbutton "Cloth Pattern Selection":
+                                                        style "textbutton_no_padding_highlight"
+                                                        text_style "serum_text_style"
+                                                        xfill True
 
-                                    hbox:
-                                        spacing -5 #We will manually handle spacing so we can have our colour predictor frames
-                                        textbutton "Primary Colour":
-                                            style "textbutton_style"
-                                            text_style "textbutton_text_style"
-                                            text_size 12
-                                            xsize 120
-                                            if selected_colour == "colour":
-                                                background "#4f7ad6"
-                                                hover_background "#4f7ad6"
-                                            else:
-                                                background "#1a45a1"
-                                                hover_background "#3a65c1"
-                                            sensitive True
-                                            if selected_colour == "colour_pattern":
-                                                action [
-                                                SetField(selected_clothing,"colour_pattern",[current_r,current_g,current_b,current_a]),
-                                                SetScreenVariable("selected_colour","colour"),
-                                                SetScreenVariable("current_r",selected_clothing.colour[0]),
-                                                SetScreenVariable("current_g",selected_clothing.colour[1]),
-                                                SetScreenVariable("current_b",selected_clothing.colour[2]),
-                                                SetScreenVariable("current_a",selected_clothing.colour[3])
-                                                ]
-                                            else:
-                                                action NullAction()
+                                                        action ToggleScreenVariable("cloth_pattern_selection")
+                                            hbox:
+                                                spacing 5
+                                                if cloth_pattern_selection:
+                                                    frame:
+                                                        background "#aaaaaa"
+                                                        ysize 50
+                                                        viewport:
+                                                            mousewheel "horizontal"
+                                                            draggable True
 
-                                        frame:
-                                            if selected_colour == "colour":
-                                                background Color(rgb=(current_r,current_g,current_b,current_a))
-                                            else:
-                                                background Color(rgb=(selected_clothing.colour[0], selected_clothing.colour[1], selected_clothing.colour[2]))
-                                            xysize (45,45)
-                                            yanchor 0.5
-                                            yalign 0.5
+                                                            grid len(selected_clothing.supported_patterns) 1:
+                                                                xfill True
+                                                                for pattern in selected_clothing.supported_patterns:
 
-                                        if __builtin__.type(selected_clothing) is Clothing and selected_clothing.pattern is not None:
-                                            null width 15
-                                            textbutton "Pattern Colour":
-                                                style "textbutton_style"
-                                                text_style "textbutton_text_style"
-                                                text_size 12
-                                                xsize 120
-                                                if selected_colour == "colour_pattern":
-                                                    background "#4f7ad6"
-                                                    hover_background "#4f7ad6"
-                                                else:
-                                                    background "#1a45a1"
-                                                    hover_background "#3a65c1"
-                                                sensitive True
-                                                if selected_colour == "colour":
-                                                    action [
-                                                    SetField(selected_clothing,"colour",[current_r,current_g,current_b,current_a]),
-                                                    SetScreenVariable("selected_colour","colour_pattern"),
-                                                    SetScreenVariable("current_r",selected_clothing.colour_pattern[0]),
-                                                    SetScreenVariable("current_g",selected_clothing.colour_pattern[1]),
-                                                    SetScreenVariable("current_b",selected_clothing.colour_pattern[2]),
-                                                    SetScreenVariable("current_a",selected_clothing.colour_pattern[3])]
-                                                else:
-                                                    action NullAction()
-                                            frame:
-                                                if selected_colour == "colour_pattern":
-                                                    background Color(rgb=(current_r,current_g,current_b,current_a))
-                                                else:
-                                                    background Color(rgb=(selected_clothing.colour_pattern[0], selected_clothing.colour_pattern[1], selected_clothing.colour_pattern[2]))
-                                                xysize (45,45)
-                                                yanchor 0.5
-                                                yalign 0.5
+                                                                    textbutton pattern:
+                                                                        style "textbutton_no_padding_highlight"
+                                                                        text_style "serum_text_style"
+                                                                        xalign 0.5
+                                                                        xfill True
+
+                                                                        if selected_clothing.pattern == selected_clothing.supported_patterns[pattern]:
+                                                                            background "#4f7ad6"
+                                                                            hover_background "#4f7ad6"
+                                                                        else:
+                                                                            background "#1a45a1"
+                                                                            hover_background "#3a65c1"
+
+                                                                        sensitive True
+                                                                        action SetField(selected_clothing,"pattern",selected_clothing.supported_patterns[pattern])
+
+                                            hbox:
+                                                xfill True
+                                                spacing 5 #We will manually handle spacing so we can have our colour predictor frames
+                                                frame:
+                                                    ysize 50
+                                                    background "#aaaaaa"
+                                                    hbox:
+                                                        spacing 5
+                                                        textbutton "Primary Colour":
+                                                            style "textbutton_no_padding_highlight"
+                                                            text_style "serum_text_style"
+
+                                                            if selected_colour == "colour":
+                                                                background "#4f7ad6"
+                                                                hover_background "#4f7ad6"
+                                                            else:
+                                                                background "#1a45a1"
+                                                                hover_background "#3a65c1"
+                                                            sensitive True
+                                                            if selected_colour == "colour_pattern":
+                                                                action [
+                                                                SetField(selected_clothing,"colour_pattern",[current_r,current_g,current_b,current_a]),
+                                                                SetScreenVariable("selected_colour","colour"),
+                                                                SetScreenVariable("current_r",selected_clothing.colour[0]),
+                                                                SetScreenVariable("current_g",selected_clothing.colour[1]),
+                                                                SetScreenVariable("current_b",selected_clothing.colour[2]),
+                                                                SetScreenVariable("current_a",selected_clothing.colour[3])
+                                                                ]
+                                                            else:
+                                                                action NullAction()
+
+                                                        frame:
+                                                            if selected_colour == "colour":
+                                                                background Color(rgb=(current_r,current_g,current_b,current_a))
+                                                            else:
+                                                                background Color(rgb=(selected_clothing.colour[0], selected_clothing.colour[1], selected_clothing.colour[2]))
+                                                            yfill True
+                                                            xsize 50
+
+
+                                                        if __builtin__.type(selected_clothing) is Clothing and selected_clothing.pattern is not None:
+                                                            textbutton "Pattern Colour":
+                                                                style "textbutton_no_padding_highlight"
+                                                                text_style "serum_text_style"
+
+                                                                if selected_colour == "colour_pattern":
+                                                                    background "#4f7ad6"
+                                                                    hover_background "#4f7ad6"
+                                                                else:
+                                                                    background "#1a45a1"
+                                                                    hover_background "#3a65c1"
+                                                                sensitive True
+                                                                if selected_colour == "colour":
+                                                                    action [
+                                                                    SetField(selected_clothing,"colour",[current_r,current_g,current_b,current_a]),
+                                                                    SetScreenVariable("selected_colour","colour_pattern"),
+                                                                    SetScreenVariable("current_r",selected_clothing.colour_pattern[0]),
+                                                                    SetScreenVariable("current_g",selected_clothing.colour_pattern[1]),
+                                                                    SetScreenVariable("current_b",selected_clothing.colour_pattern[2]),
+                                                                    SetScreenVariable("current_a",selected_clothing.colour_pattern[3])]
+                                                                else:
+                                                                    action NullAction()
+                                                            frame:
+                                                                if selected_colour == "colour_pattern":
+                                                                    background Color(rgb=(current_r,current_g,current_b,current_a))
+                                                                else:
+                                                                    background Color(rgb=(selected_clothing.colour_pattern[0], selected_clothing.colour_pattern[1], selected_clothing.colour_pattern[2]))
+                                                                yfill True
+                                                                xsize 50
 
                                     hbox:
                                         spacing 10
@@ -350,44 +465,77 @@ init 2:
                                                 SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])
                                                 ]
 
-                                    text "Transparency: " style "menu_text_style"
-                                    hbox:
-                                        spacing 20
-                                        button:
-                                            if current_a == 1.0:
-                                                background "#4f7ad6"
-                                            else:
-                                                background "#1a45a1"
-                                            text "Normal" style "menu_text_style" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
-                                            xysize (120, 40)
-                                            action [
-                                            SetScreenVariable("current_a", 1.0),
-                                            SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])
-                                            ]
 
-                                        button:
-                                            if current_a == 0.95:
-                                                background "#4f7ad6"
-                                            else:
-                                                background "#1a45a1"
-                                            text "Sheer" style "menu_text_style" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
-                                            xysize (120, 40)
-                                            action [
-                                            SetScreenVariable("current_a", 0.95),
-                                            SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])
-                                            ]
+                                    vbox:
+                                        spacing 5
+                                        hbox:
+                                            frame:
+                                                background "#aaaaaa"
+                                                xfill True
+                                                textbutton "Transparency":
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "serum_text_style"
 
-                                        button:
-                                            if current_a == 0.8:
-                                                background "#4f7ad6"
-                                            else:
-                                                background "#1a45a1"
-                                            text "Translucent" style "menu_text_style" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
-                                            xysize (120, 40)
-                                            action [
-                                            SetScreenVariable("current_a", 0.8),
-                                            SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])
-                                            ]
+                                                    xfill True
+
+                                                    action ToggleScreenVariable("transparency_selection")
+                                        hbox:
+                                            if transparency_selection:
+                                                frame:
+                                                    background "#aaaaaa"
+                                                    ysize 50
+                                                    viewport:
+                                                        xfill True
+                                                        draggable True
+                                                        mousewheel "horizontal"
+                                                        hbox:
+                                                            spacing 5
+                                                            textbutton "Normal":
+                                                                style "textbutton_no_padding_highlight"
+                                                                text_style "serum_text_style"
+                                                                xalign 0.5
+                                                                xsize 200
+
+                                                                if current_a == 1.0:
+                                                                    background "#4f7ad6"
+                                                                else:
+                                                                    background "#1a45a1"
+                                                                action [
+                                                                SetScreenVariable("current_a", 1.0),
+                                                                SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])
+                                                                ]
+
+                                                            textbutton "Sheer":
+                                                                style "textbutton_no_padding_highlight"
+                                                                text_style "serum_text_style"
+                                                                xalign 0.5
+                                                                xsize 200
+                                                                if current_a == 0.95:
+                                                                    background "#4f7ad6"
+                                                                else:
+                                                                    background "#1a45a1"
+
+                                                                action [
+                                                                SetScreenVariable("current_a", 0.95),
+                                                                SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])
+                                                                ]
+
+                                                            textbutton "Translucent":
+                                                                style "textbutton_no_padding_highlight"
+                                                                text_style "serum_text_style"
+                                                                xalign 0.5
+                                                                xsize 200
+                                                                if current_a == 0.8:
+                                                                    background "#4f7ad6"
+                                                                else:
+                                                                    background "#1a45a1"
+
+
+                                                                action [
+                                                                SetScreenVariable("current_a", 0.8),
+                                                                SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])
+                                                                ]
+
 
                                     hbox:
                                         spacing 5
@@ -414,41 +562,6 @@ init 2:
 
 
 
-                            # TODO: Have it say "Replace" when adding to a slot already filled.
-                            if selected_clothing:
-                                textbutton "Add to Outfit":
-                                    style "textbutton_style"
-                                    text_style "textbutton_text_style"
-                                    background "#1a45a1"
-                                    hover_background "#3a65c1"
-                                    xalign 0.5
-                                    yalign 1.0
-                                    xanchor 0.5
-                                    yanchor 1.0
-
-                                    action [
-                                    SensitiveIf([
-                                    valid_check(starting_outfit, selected_clothing)
-                                    and selected_clothing in catagories_mapping[catagory_selected][0]
-                                    or starting_outfit.in_outfit(selected_clothing.name)]),
-
-                                    SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]), #Make sure color is updated
-                                    If(starting_outfit is not None and starting_outfit.in_outfit(selected_clothing.name) or selected_from_outfit in catagories_mapping[catagory_selected][0],
-                                    [Function(starting_outfit.remove_clothing, selected_from_outfit),
-                                    Function(apply_method, starting_outfit, selected_clothing)],
-                                    Function(apply_method, starting_outfit, selected_clothing)),
-                                    Show("mannequin", None, starting_outfit),
-                                    SetScreenVariable("selected_clothing", None)] # NOTE: We are no longer interested in the demo outfit so view the final outfit, starting_outfit
-
-
-                                    hovered [
-                                    If(selected_from_outfit is not None and selected_clothing in catagories_mapping[catagory_selected][0], Function(demo_outfit.remove_clothing, selected_from_outfit)),
-                                    Function(apply_method, demo_outfit, selected_clothing),
-                                    SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
-                                    Show("mannequin", None, demo_outfit)
-                                    ]
-
-
 
 
                 # vbox: #Items selector
@@ -459,107 +572,279 @@ init 2:
                 frame:
                     xysize (540, 500)
                     background "#aaaaaa"
-                    padding (20,20)
                     vbox:
-                        spacing 15
-                        text "Current Items" style "textbutton_text_style"
-                        frame:
+                        spacing 5
+                        grid 2 1:
                             xfill True
-                            yfill True
-                            background "#888888"
-                            viewport:
-                                    scrollbars "vertical"
-                                    mousewheel True
-                                    ysize 520
-                                    xsize 480
-                                    vbox:
-                                        spacing 5 #TODO: Add a viewport here too.
-                                        for cloth in starting_outfit.upper_body + starting_outfit.lower_body + starting_outfit.feet + starting_outfit.accessories:
-                                            if not cloth.is_extension: #Don't list extensions for removal.
-                                                button:
-                                                    background Color(rgb = (cloth.colour[0], cloth.colour[1], cloth.colour[2]))
-                                                    xysize (380, 40)
-                                                    action [ # NOTE: Left click makes more sense for selection than right clicking
+                            spacing 5
+                            frame:
+                                background "#888888"
+                                xfill True
+                                textbutton "View Outfit Stats":
+                                    style "textbutton_no_padding_highlight"
+                                    text_style "serum_text_style"
+                                    xfill True
 
-                                                    SetScreenVariable("selected_from_outfit", cloth),
-                                                    SetScreenVariable("catagory_selected", get_catagory(cloth)),
-                                                    SetScreenVariable("selected_clothing", cloth),
-                                                    If(selected_clothing is cloth, SetScreenVariable("selected_clothing", None)),
-                                                    If(demo_outfit.has_clothing(cloth) and selected_clothing is cloth,
-                                                    [Function(demo_outfit.remove_clothing, cloth), #Remove the cloth
-                                                    Function(apply_method, demo_outfit, cloth)]), # Add the copy of cloth
-                                                    Function(apply_method, demo_outfit, cloth),  # Add the copy of cloth
-                                                    SetScreenVariable("current_r",cloth.colour[0]),
-                                                    SetScreenVariable("current_g",cloth.colour[1]),
-                                                    SetScreenVariable("current_b",cloth.colour[2]),
-                                                    SetScreenVariable("current_a",cloth.colour[3]),
+                                    action ToggleScreenVariable("outfit_stats")
+                            frame:
+                                background "#888888"
+                                xfill True
+                                textbutton "Current Items":
+                                    style "textbutton_no_padding"
+                                    text_style "serum_text_style"
+                                    xfill True
+
+                                    action NullAction()
+
+                        hbox:
+                            spacing 5
+                            vbox:
+                                xalign 0.5
+                                if outfit_stats:
+                                    frame:
+                                        background "#888888"
+                                        yfill True
+                                        viewport:
+                                            draggable True
+                                            mousewheel True
+                                            yfill True
+                                            xsize 250
+                                            vbox:
+
+                                                textbutton "Sluttiness (Full Outfit): " + str(demo_outfit.slut_requirement):
+                                                    style "textbutton_no_padding"
+                                                    text_style "serum_text_style_traits"
+                                                    xfill True
+
+                                                    action NullAction()
+                                                if demo_outfit.is_suitable_underwear_set():
+
+                                                    textbutton "Sluttiness (Underwear): " + str(demo_outfit.get_underwear_slut_score()):
+                                                        style "textbutton_no_padding"
+                                                        text_style "serum_text_style_traits"
+                                                        xfill True
+
+                                                        action NullAction()
+                                                else:
+                                                    textbutton "Sluttiness (Underwear): Invalid":
+                                                        style "textbutton_no_padding"
+                                                        text_style "serum_text_style_traits"
+                                                        xfill True
+
+                                                        action NullAction()
+
+                                                if demo_outfit.is_suitable_overwear_set():
+                                                    textbutton "Sluttiness (Overwear): " + str(demo_outfit.get_overwear_slut_score()):
+                                                        style "textbutton_no_padding"
+                                                        text_style "serum_text_style_traits"
+                                                        xfill True
+
+                                                        action NullAction()
+                                                else:
+                                                    textbutton "Sluttiness (Overwear): Invalid":
+                                                        style "textbutton_no_padding"
+                                                        text_style "serum_text_style_traits"
+                                                        xfill True
+
+                                                        action NullAction()
+
+                                                textbutton "Tits Visible: " + str(demo_outfit.tits_visible()):
+                                                    style "textbutton_no_padding"
+                                                    text_style "serum_text_style_traits"
+                                                    xfill True
+
+                                                    action NullAction()
+                                                textbutton "Tits Usable: " + str(demo_outfit.tits_available()):
+                                                    style "textbutton_no_padding"
+                                                    text_style "serum_text_style_traits"
+                                                    xfill True
+
+                                                    action NullAction()
+                                                textbutton "Wearing a Bra: " + str(demo_outfit.wearing_bra()):
+                                                    style "textbutton_no_padding"
+                                                    text_style "serum_text_style_traits"
+                                                    xfill True
+
+                                                    action NullAction()
+                                                textbutton "Bra Covered: " + str(demo_outfit.bra_covered()):
+                                                    style "textbutton_no_padding"
+                                                    text_style "serum_text_style_traits"
+                                                    xfill True
+
+                                                    action NullAction()
+                                                textbutton "Pussy Visible: " + str(demo_outfit.vagina_visible()):
+                                                    style "textbutton_no_padding"
+                                                    text_style "serum_text_style_traits"
+                                                    xfill True
+
+                                                    action NullAction()
+                                                textbutton "Pussy Usable: " + str(demo_outfit.vagina_available()):
+                                                    style "textbutton_no_padding"
+                                                    text_style "serum_text_style_traits"
+                                                    xfill True
+
+                                                    action NullAction()
+                                                textbutton "Wearing Panties: " + str(demo_outfit.wearing_panties()):
+                                                    style "textbutton_no_padding"
+                                                    text_style "serum_text_style_traits"
+                                                    xfill True
+
+                                                    action NullAction()
+                                                textbutton "Panties Covered: " + str(demo_outfit.panties_covered()):
+                                                    style "textbutton_no_padding"
+                                                    text_style "serum_text_style_traits"
+                                                    xfill True
+
+                                                    action NullAction()
+                            vbox:
+                                frame:
+                                    background "#888888"
+
+                                    xfill True
+                                    viewport:
+                                            scrollbars "vertical"
+                                            mousewheel True
+                                            yfill True
+                                            xfill True
+                                            vbox:
+
+                                                spacing 5 #TODO: Add a viewport here too.
+                                                for cloth in starting_outfit.upper_body + starting_outfit.lower_body + starting_outfit.feet + starting_outfit.accessories:
+                                                    if not cloth.is_extension: #Don't list extensions for removal.
+                                                        button:
+                                                            background Color(rgb = (cloth.colour[0], cloth.colour[1], cloth.colour[2]))
+
+                                                            action [ # NOTE: Left click makes more sense for selection than right clicking
+
+                                                            SetScreenVariable("selected_from_outfit", cloth),
+                                                            SetScreenVariable("catagory_selected", get_catagory(cloth)),
+                                                            SetScreenVariable("selected_clothing", cloth),
+                                                            If(selected_clothing is cloth, SetScreenVariable("selected_clothing", None)),
+                                                            If(demo_outfit.has_clothing(cloth) and selected_clothing is cloth,
+                                                            [Function(demo_outfit.remove_clothing, cloth), #Remove the cloth
+                                                            Function(apply_method, demo_outfit, cloth)]), # Add the copy of cloth
+                                                            Function(apply_method, demo_outfit, cloth),  # Add the copy of cloth
+                                                            SetScreenVariable("current_r",cloth.colour[0]),
+                                                            SetScreenVariable("current_g",cloth.colour[1]),
+                                                            SetScreenVariable("current_b",cloth.colour[2]),
+                                                            SetScreenVariable("current_a",cloth.colour[3]),
 
 
-                                                    Show("mannequin", None, demo_outfit) # Make sure it is showing the correct outfit during changes, demo_outfit is a copy of starting_outfit
+                                                            Show("mannequin", None, demo_outfit) # Make sure it is showing the correct outfit during changes, demo_outfit is a copy of starting_outfit
 
-                                                    ]
-                                                    alternate [
-                                                    Function(starting_outfit.remove_clothing, cloth),
-                                                    Function(demo_outfit.remove_clothing, cloth)
-                                                    ]
-                                                    xalign 0.5
-                                                    yalign 0.0
-                                                    text cloth.name xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 style "outfit_style"
+                                                            ]
+                                                            alternate [
+                                                            Function(starting_outfit.remove_clothing, cloth),
+                                                            Function(demo_outfit.remove_clothing, cloth)
+                                                            ]
+                                                            xalign 0.5
+                                                            xfill True
+                                                            yfill True
+                                                            text cloth.name xalign 0.5 yalign 0.5 xfill True yfill True style "custom_outfit_style"
+
 
                 frame:
                     background "#aaaaaa"
+
                     xysize (540, 500)
                     #padding (20,20)
                     hbox:
+                        spacing 5
                         vbox:
-                            yalign 0.0
-                            text "Outfit Stats" style "menu_text_style" size 20
-                            text "Sluttiness (Full Outfit) : " + str(demo_outfit.slut_requirement) style "menu_text_style"
-                            if demo_outfit.is_suitable_underwear_set():
-                                text "Sluttiness (Underwear): " + str(demo_outfit.get_underwear_slut_score()) style "menu_text_style"
-                            else:
-                                text "Sluttiness (Underwear): Invalid" style "menu_text_style"
-
-                            if demo_outfit.is_suitable_overwear_set():
-                                text "Sluttiness (Overwear): " + str(demo_outfit.get_overwear_slut_score()) style "menu_text_style"
-                            else:
-                                text "Sluttiness (Overwear): Invalid" style "menu_text_style"
-                            text "Tits Visible: " + str(demo_outfit.tits_visible()) style "menu_text_style"
-                            text "Tits Usable: " + str(demo_outfit.tits_available()) style "menu_text_style"
-                            text "Wearing a Bra: " + str(demo_outfit.wearing_bra()) style "menu_text_style"
-                            text "Bra Covered: " + str(demo_outfit.bra_covered()) style "menu_text_style"
-                            text "Pussy Visible: " + str(demo_outfit.vagina_visible()) style "menu_text_style"
-                            text "Pussy Usable: " + str(demo_outfit.vagina_available()) style "menu_text_style"
-                            text "Wearing Panties: " + str(demo_outfit.wearing_panties()) style "menu_text_style"
-                            text "Panties Covered: " + str(demo_outfit.panties_covered()) style "menu_text_style"
-
                             hbox:
-                                #yalign 1.0
-                                #xalign 0.4
-                                #xanchor 0.5
-                                spacing 10
+                                spacing 5
                                 vbox:
-                                    textbutton "Save Outfit" style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 action [
-                                    If(target_wardrobe is mc.designed_wardrobe, Return(starting_outfit.get_copy()),
-                                    [Return(starting_outfit)]), #TODO: Commit changes to a person only when using the "Save Outfit", right now the changes are not saved to the Wardrobe only Outfit.copy
-                                    Hide("mannequin"),
-                                    Hide("outfit_creator")]
-                                    textbutton "Abandon Design" action [
-                                    If(target_wardrobe is mc.designed_wardrobe, [
-                                    Return("Not_New")]), # Solves default creation errors, but load outfit expects "No Return" instead so that will throw an error.
-                                    SetScreenVariable("starting_wardrobe", compare_outfit), # This doesn't really do anything at the moment. I'm thinking that an easy way of reseting the starting_outfit to be compare_outfit which is a copy of starting_outfit could be a good way of dealing with accidental commits and discarding unwanted changes. Without the need of further logic.
-                                    Hide("mannequin"), Hide("outfit_creator")] style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5
+                                    spacing 5
+                                    frame:
+                                        background "#888888"
+                                        xsize 250
+                                        vbox:
+                                            xalign 0.5
+                                            textbutton "Save Outfit":
+                                                style "textbutton_no_padding_highlight"
+                                                text_style "serum_text_style"
+                                                xfill True
 
-                        vbox:
-                            textbutton "Import Design" action ToggleVariable("import_selection") style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 xsize 250 xanchor 0.0
-                            if import_selection:
-                                viewport:
-                                    scrollbars "vertical"
-                                    mousewheel True
-                                    ysize 440
-                                    vbox:
-                                        for n in get_xml_files_from_path(["game/wardrobes/", "game/Mods/Wardrobes/"]):
-                                            textbutton n action [Show("import_outfit_manager", None, target_wardrobe, n)] style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 xanchor 0.0
+                                                action [
+                                                    If(target_wardrobe is mc.designed_wardrobe, Return(starting_outfit.get_copy()),
+                                                    [Return(starting_outfit)]), #TODO: Commit changes to a person only when using the "Save Outfit", right now the changes are not saved to the Wardrobe only Outfit.copy
+                                                    Hide("mannequin"),
+                                                    Hide("outfit_creator")
+                                                    ]
+
+                                            textbutton "Abandon / Exit":
+                                                style "textbutton_no_padding_highlight"
+                                                text_style "serum_text_style"
+                                                xfill True
+
+                                                action [
+                                                    If(target_wardrobe is mc.designed_wardrobe, [
+                                                    Return("Not_New")]), # Solves default creation errors, but load outfit expects "No Return" instead so that will throw an error.
+                                                    SetScreenVariable("starting_wardrobe", compare_outfit), # This doesn't really do anything at the moment. I'm thinking that an easy way of reseting the starting_outfit to be compare_outfit which is a copy of starting_outfit could be a good way of dealing with accidental commits and discarding unwanted changes. Without the need of further logic.
+                                                    Hide("mannequin"), Hide("outfit_creator")
+                                                    ]
+                                    frame:
+                                        background "#888888"
+                                        xsize 250
+                                        vbox:
+                                            xalign 0.5
+                                            textbutton "Export to [selected_xml]":
+                                                style "textbutton_no_padding_highlight"
+                                                text_style "serum_text_style"
+                                                xfill True
+
+                                                action [
+                                                Function(custom_log_outfit, starting_outfit, outfit_class = outfit_class_selected,
+                                                wardrobe_name = selected_xml),
+                                                Function(renpy.notify, "Outfit exported to [selected_xml]")
+                                                ]
+
+                                            textbutton "Type: [outfit_class_selected]":
+                                                xfill True
+                                                style "textbutton_no_padding_highlight"
+                                                text_style "serum_text_style"
+                                                action [
+                                                If(outfit_class_selected == "FullSets", SetScreenVariable("outfit_class_selected", "OverwearSets")),
+                                                If(outfit_class_selected == "OverwearSets", SetScreenVariable("outfit_class_selected", "UnderwearSets")),
+                                                If(outfit_class_selected == "UnderwearSets", SetScreenVariable("outfit_class_selected", "FullSets"))
+                                                ]
+                                                alternate [
+                                                If(outfit_class_selected == "FullSets", SetScreenVariable("outfit_class_selected", "UnderwearSets")),
+                                                If(outfit_class_selected == "OverwearSets", SetScreenVariable("outfit_class_selected", "FullSets")),
+                                                If(outfit_class_selected == "UnderwearSets", SetScreenVariable("outfit_class_selected", "OverwearSets"))
+                                                ]
+
+
+                                vbox:
+
+                                    frame:
+                                        background "#888888"
+                                        xsize 250
+                                        textbutton "Import Design" action ToggleVariable("import_selection") style "textbutton_no_padding_highlight" text_style "serum_text_style" xfill True xalign 0.5
+                                    if import_selection:
+                                        frame:
+                                            background "#888888"
+                                            xsize 250
+                                            viewport:
+                                                scrollbars "vertical"
+                                                mousewheel True
+                                                draggable True
+                                                vbox:
+                                                    for n in get_xml_files_from_path(["game/wardrobes/", "game/Mods/Wardrobes/"]):
+                                                        textbutton n:
+                                                            style "textbutton_no_padding_highlight"
+                                                            text_style "serum_text_style"
+                                                            xfill True
+                                                            xalign 0.5
+
+                                                            action [
+                                                            Show("import_outfit_manager", None, target_wardrobe, n)
+                                                            ]
+                                                            alternate [ #Right clicking selects the path that outfits should be exported to
+                                                            SetVariable("selected_xml", n)
+                                                            ]
+
+
 
         imagebutton:
             auto "/tutorial_images/restart_tutorial_%s.png"
