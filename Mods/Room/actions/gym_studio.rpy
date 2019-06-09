@@ -15,10 +15,12 @@ init 3 python:
     # the gym is initialized when the action mod is loaded and also links the gym_shower to the gym
     def gym_initialization(self):
         gym.background_image = Image(room_background_image("Gym_Background.jpg")) #As long a there is a mall background for the gym, replace it with our gym background
-        # add gym shower to active places
-        list_of_places.append(gym_shower)
-        gym.link_locations_two_way(gym_shower)
-        gym.actions.append(self)
+
+        if not self in gym.actions:
+            # add gym shower to active places
+            list_of_places.append(gym_shower)
+            gym.link_locations_two_way(gym_shower)
+            gym.actions.append(self)
         return
 
     train_in_gym_action = ActionMod("Schedule Gym Session {image=gui/heart/Time_Advance.png}", gym_requirement, "select_person_for_gym",
