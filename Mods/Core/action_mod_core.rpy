@@ -81,8 +81,9 @@ init 2 python:
 
             Action.__init__(self, name, requirement, effect, args, requirement_args, menu_tooltip)
 
-            # store the instance in class static    
-            self._instances.add(self)
+            # store the instance in class static
+            if not self in ActionMod._instances:
+                ActionMod._instances.add(self)
                     
         def initialize(self):
             if not self.initialization is None:
