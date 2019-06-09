@@ -315,7 +315,7 @@ init 2:
                                                 Function(apply_method, starting_outfit, selected_clothing)],
                                                 Function(apply_method, starting_outfit, selected_clothing)),
                                                 Show("mannequin", None, starting_outfit),
-                                                SetScreenVariable("selected_clothing", None)] # NOTE: We are no longer interested in the demo outfit so view the final outfit, starting_outfit
+                                                SetScreenVariable("selected_from_outfit", selected_clothing)] # NOTE: We are no longer interested in the demo outfit so view the final outfit, starting_outfit
 
 
                                                 hovered [
