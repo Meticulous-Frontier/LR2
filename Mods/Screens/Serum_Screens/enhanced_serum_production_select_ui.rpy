@@ -4,7 +4,7 @@ init -1:
         def serum_production_autosell(new_amount):
             if new_amount is "":
                 new_amount = -1
-            store.mc.business.serum_production_array[array_to_change][3] = new_amount
+            store.mc.business.serum_production_array[array_to_change][3] = int(new_amount)
 
 
 init 2:
@@ -195,7 +195,7 @@ init 2:
                                                         id "serum_production_autosell"
                                                         style "textbutton_style"
                                                         action NullAction()
-                                                        hovered SetVariable("array_to_change", count)
+                                                        hovered If(array_to_change is not count, SetVariable("array_to_change", count))
                                                         unhovered Function(renpy.restart_interaction) #TODO: Tweak this so it is less annoying  and fix any associated errors
 
                                                         add Input(
@@ -210,7 +210,7 @@ init 2:
 
                                                 textbutton "+1":
                                                     action [
-                                                    Function(mc.business.change_line_autosell,count,1)
+                                                    Function(mc.business.change_line_autosell,count,+1)
                                                     ]
                                                     alternate [
                                                     Function(mc.business.change_line_autosell,count,+10)
