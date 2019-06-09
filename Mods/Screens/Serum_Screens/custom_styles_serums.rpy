@@ -11,6 +11,11 @@ init -2 style serum_textbutton_style_positive: # Used for positive trait / serum
     insensitive_background "#222222"
     hover_background "#aaaaaa"
 
+init -2 style textbutton_no_padding: # Textbutton without padding
+    margin [2,2]
+    background "#000080"
+    insensitive_background "#222222"
+
 init -2 style serum_textbutton_style_negative: # Used for negative trait / serum slugs
     margin [2,2]
     background "#930000"
@@ -38,3 +43,18 @@ init -2 style serum_text_style_traits: # Unaligned text style for traits in the 
     outlines [(2,"#222222",0,0)]
     text_align 0.5
     xalign 0.5
+
+init -2 style textbutton_no_padding_highlight: # Textbutton without padding
+    margin [2,2]
+    background "#000080"
+    insensitive_background "#222222"
+    hover_background "#aaaaaa"
+
+init -2 style custom_outfit_style: ##The text style used for text inside of the outfit manager.
+    size 20
+    color "#dddddd"
+    outlines [(2,"#222222",0,0)]
+    insensitive_color "#dddddd"
+    hover_color "#ffffff"
+    bold False
+    italic False
