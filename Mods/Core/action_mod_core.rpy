@@ -70,12 +70,14 @@ init 2 python:
         # store instances of mod
         _instances = set()
 
-        def __init__(self, name, requirement, effect, args = None, requirement_args = None, menu_tooltip = None, initialization = None, category="Misc", enabled = True, priority = 10, on_enabled_changed = None):
+        def __init__(self, name, requirement, effect, args = None, requirement_args = None, menu_tooltip = "", initialization = None, category="Misc", enabled = True, allow_disable = True, priority = 10, on_enabled_changed = None, options_menu = None):
             self.initialization = initialization
             self.enabled = enabled
+            self.allow_disable = allow_disable
             self.category = category
             self.priority = priority
             self.on_enabled_changed = on_enabled_changed
+            self.options_menu = options_menu
 
             Action.__init__(self, name, requirement, effect, args, requirement_args, menu_tooltip)
 
@@ -85,6 +87,10 @@ init 2 python:
         def initialize(self):
             if not self.initialization is None:
                 self.initialization(self)
+
+        def show_options(self):
+            if not self.options_menu is None:
+                renpy.call(self.options_menu)
 
         def toggle_enabled(self):
             self.enabled = not self.enabled
@@ -121,7 +127,7 @@ init 2 python:
 
     # mod settings action
     action_mod_options_action = Action("MOD Settings", action_mod_settings_requirement, "show_action_mod_settings", menu_tooltip = "Enable or disable mods")
-
+    action_mod_configuration_action = Action("MOD Configuration", action_mod_settings_requirement, "show_action_mod_configuration", menu_tooltip = "Change configuration for individual MODS")
 
 init 5 python:
     add_label_hijack("normal_start", "activate_action_mod_core")  
@@ -139,6 +145,7 @@ label activate_action_mod_core(stack):
         append_and_initialize_action_mods()
 
         bedroom.actions.append(action_mod_options_action)
+        bedroom.actions.append(action_mod_configuration_action)
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
@@ -161,6 +168,8 @@ label update_action_mod_core(stack):
 
         if not action_mod_options_action in bedroom.actions:
             bedroom.actions.append(action_mod_options_action)
+        if not action_mod_configuration_action in bedroom.actions:
+            bedroom.actions.append(action_mod_configuration_action)
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
@@ -195,7 +204,7 @@ label change_mod_category:
     python:
         tuple_list = []
         for action_mod in action_mod_list:
-            if (action_mod.category == active_action_mod_category):
+            if (not hasattr(action_mod, "allow_disable") or action_mod.allow_disable) and action_mod.category == active_action_mod_category:
                 tuple_string = action_mod.name + "\n Active: " + str(action_mod.enabled) + " (tooltip)" + action_mod.menu_tooltip
                 tuple_list.append([tuple_string, action_mod])
 
@@ -209,3 +218,22 @@ label change_mod_category:
             action_mod_choice.toggle_enabled()
             renpy.jump("change_mod_category")
     return
+
+
+label show_action_mod_configuration:
+    python:
+        while True:
+            tuple_list = []
+            for action_mod in action_mod_list:
+                if action_mod.enabled and hasattr(action_mod, "options_menu") and not action_mod.options_menu is None:
+                    tuple_string = action_mod.name + " (tooltip)" + action_mod.menu_tooltip
+                    tuple_list.append([tuple_string, action_mod])
+
+            tuple_list = sorted(tuple_list, key=lambda x: x[0])
+            tuple_list.append(["Back","Back"])
+            action_mod_choice = renpy.display_menu(tuple_list, True, "Choice")
+
+            if action_mod_choice == "Back":
+                renpy.return_statement()
+            else:
+                action_mod_choice.show_options()

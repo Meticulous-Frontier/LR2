@@ -11,7 +11,7 @@ init -3 python:
     FETISH_CUM_OPINION_LIST = ["drinking cum", "creampies", "cum facials", "being covered in cum", "risking getting pregnant"]
     #suggestion add exhibitionist fetish and move some of the basic fetishes to this one
     FETISH_EXHIBITION_OPINION_LIST = ["not wearing underwear", "not wearing anything", "showing her tits", "showing her ass", "public sex", "lingerie", "skimpy outfits", "skimpy uniforms" ]
-
+    
     FETISH_EVENT_TARGET = None
     #global FETISH_VAGINAL_EVENT_INUSE, FETISH_ANAL_EVENT_INUSE
     FETISH_VAGINAL_EVENT_INUSE = False
@@ -28,7 +28,6 @@ init -3 python:
     SB_MOD_MC_AROUSAL_MULT = 1.0     #Default arousal multiplier for the MC
     SB_MOD_MC_AROUSAL_1ST_MULT = 0.9     #Arousal multiplier after the first upgrade
     SB_MOD_MC_AROUSAL_2ND_MULT = 0.8     #Arousal multiplier after second upgrade
-    config.console = True
 
     if FETISH_DEBUG_MODE:
         FETISH_RESEARCH_PERCENT = .01     #1 = 100%

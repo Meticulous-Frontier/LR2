@@ -1,29 +1,71 @@
-init -1 python:
-    ###Mod Options Test
-    SB_fetish_mod_init = False
+init 5 python:
+    add_label_hijack("normal_start", "activate_starbuck_mod_core")  
+    add_label_hijack("after_load", "update_starbuck_mod_core")
 
-label SB_fetish_mod_init_label():
-    call SB_unique_people_create() from SB_MOD_INIT_001
-    $ SB_fetish_mod_init = True
-    return
+init -2 python:
+    def SB_mod_setting_change_difficulty():
+        if store.shop_difficulty_value == 1.0:
+            store.shop_difficulty_value = 2.0
+        elif store.shop_difficulty_value == 2.0:
+            store.shop_difficulty_value = 0.5
+        elif store.shop_difficulty_value == 0.5:
+            store.shop_difficulty_value = 1.0
+        return
+
+    def SB_mod_setting_change_maximum_fetishes():
+        if store.max_fetishes_per_person == 1:
+            store.max_fetishes_per_person = 2
+        elif store.max_fetishes_per_person == 2:
+            store.max_fetishes_per_person = 3
+        elif store.max_fetishes_per_person == 3:
+            store.max_fetishes_per_person = 1
+        return
+
+    def SB_mod_setting_difficulty_name():
+        if store.shop_difficulty_value == 2.0:
+            return "Lucrative (Easy)"
+        elif store.shop_difficulty_value == 1.0:
+            return "Average (Normal)"
+        else:
+            return "Poor (Hard)"
+
+    def SB_mod_setting_maximum_fetishes_name():
+        return "Max " + str(store.max_fetishes_per_person) + " Fetishes per person"
+
 
 # TODO: Add difficulty configuration
-label SB_mod_options_menu():
-    "This is a test of the SB mod options menu. A menu should be displayed after this."
-    menu:
-        "Sex Shop Investment Returns":
-            "This mod changes how much return on investment you get from the sex shop, for difficulty purposes."
-            menu:
-                "Lucrative (Easy)":
-                    $starbuck.shop_difficulty_value = 2.0
-                    "Shop returns are now lucrative."
-                "Average (Normal)":
-                    $starbuck.shop_difficulty_value = 1.0
-                    "Shop returns are now normal."
-                "Poor (Hard)":
-                    $starbuck.shop_difficulty_value = 0.5
-                    "Shop returns are now poor."
-        "Return":
-            pass
-    
+label SB_mod_options_menu:
+    python:
+        while True:
+            tuple_list = []
+
+            tuple_list.append(["Difficulty: " + SB_mod_setting_difficulty_name() + " (tooltip)Changes the return on investment you get from the sex shop.", "SB_mod_setting_change_difficulty"])
+            tuple_list.append([SB_mod_setting_maximum_fetishes_name(), "SB_mod_setting_change_maximum_fetishes"])
+            tuple_list.append(["Back","Back"])
+
+            action_mod_choice = renpy.display_menu(tuple_list, True, "Choice")
+
+            if action_mod_choice == "Back":
+                renpy.return_statement()
+            else:
+                globals()[action_mod_choice]()
+
+label initialize_starbuck_configuration_values:
+    $ shop_difficulty_value = 1.0
+    $ max_fetishes_per_person = 1
+    return
+
+label activate_starbuck_mod_core(stack):
+    call initialize_starbuck_configuration_values from _call_initialize_starbuck_configuration_values_1
+    # continue on the hijack stack if needed
+    $ execute_hijack_call(stack)
+    return
+
+label update_starbuck_mod_core(stack):
+    python:
+        if not hasattr(store, 'shop_difficulty_value'):
+            renpy.call("initialize_starbuck_configuration_values")
+        
+        # continue on the hijack stack if needed
+        execute_hijack_call(stack)
     return
