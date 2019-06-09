@@ -27,9 +27,7 @@ init 1 python:
     # change the random person based other characteristics of personality
     def update_random_person(person):
         # turn cougars on or off
-        cougar_mod = find_in_list(lambda x: x.effect == cougar_personality_action.effect, ActionMod._instances)
-        enabled = not (cougar_mod is None or not cougar_mod.enabled)
-        update_cougar_personality(person, enabled)
+        update_cougar_personality(person)
         # A person could have dialog even if we don't know her
         if person.possessive_title is None:
             person.set_possessive_title("The unknown woman")
@@ -42,9 +40,9 @@ init 1 python:
             person.special_role.append(generic_people_role)
         return
 
-    def update_cougar_personality(person, enabled):
+    def update_cougar_personality(person):
         # change personality to cougar if we meet age requirement
-        if enabled:
+        if action_mod_settings["cougar_personality_dummy_label"]:
             if person not in list_of_unique_characters + [mom, lily, aunt, cousin, stephanie] and person.age > 45:
                 if not person.personality == cougar_personality:
                     person.original_personality = person.personality

@@ -62,7 +62,7 @@ label advance_time_enhanced:
         python:
             # how many crisis events are disabled?
             disabled = 0
-            for action_mod in action_mod_list:
+            for action_mod in ActionMod._instances:
                 if not action_mod.enabled:
                     disabled += 1
 

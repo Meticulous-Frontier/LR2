@@ -94,34 +94,25 @@ init 2 python:
 
         def toggle_enabled(self):
             self.enabled = not self.enabled
+            # update settings table
+            action_mod_settings[self.effect] = self.enabled
+            # trigger event
             if not self.on_enabled_changed is None:
                 self.on_enabled_changed(self.enabled)
 
     def action_mod_settings_requirement():
         return True
 
-    def is_in_action_mod_list(action_mod):
-        for am in action_mod_list:
-            if am.effect == action_mod.effect:
-                return True
-        return False
-
     # check all ActionMod classes in the game and make sure we have one instance of each and update the action_mod_list
     def append_and_initialize_action_mods():
-        remove_list = []
-        for action_mod in ActionMod._instances:
-            if not is_in_action_mod_list(action_mod):
-                action_mod_list.append(action_mod)
-            else:
-                remove_list.append(action_mod)
-        
-        # remove existing action mods from instance list
-        for action_mod in remove_list:
-            ActionMod._instances.remove(action_mod)
-
         # initialize mods       
         for action_mod in sorted(ActionMod._instances, key = lambda x: x.priority):
             action_mod.initialize()
+            # update mod active setting
+            if not action_mod.effect in action_mod_settings:
+                action_mod_settings[action_mod.effect] = action_mod.enabled
+            elif action_mod.enabled != action_mod_settings[action_mod.effect]:
+                action_mod.toggle_enabled()
 
         return
 
@@ -139,8 +130,9 @@ label after_load:
     return
 
 label activate_action_mod_core(stack):
+    $ action_mod_settings = {}
+
     # define here using $ so it gets stored in save game
-    $ action_mod_list = []
     python:
         append_and_initialize_action_mods()
 
@@ -156,12 +148,12 @@ label update_action_mod_core(stack):
     python:
         unmodded = False
         try:
-            action_mod_list
+            action_mod_settings
         except NameError:
             unmodded = True
 
     if unmodded:
-        $ action_mod_list = []
+        $ action_mod_settings = {}
 
     python:
         append_and_initialize_action_mods()
@@ -179,7 +171,7 @@ label show_action_mod_settings:
     python:
         global active_action_mod_category
         tuple_list = []
-        for mod in action_mod_list:
+        for mod in ActionMod._instances:
             has_category = False
             for cat in tuple_list:
                 if mod.category == cat[1].category:
@@ -203,7 +195,7 @@ label show_action_mod_settings:
 label change_mod_category:
     python:
         tuple_list = []
-        for action_mod in action_mod_list:
+        for action_mod in ActionMod._instances:
             if (not hasattr(action_mod, "allow_disable") or action_mod.allow_disable) and action_mod.category == active_action_mod_category:
                 tuple_string = action_mod.name + "\n Active: " + str(action_mod.enabled) + " (tooltip)" + action_mod.menu_tooltip
                 tuple_list.append([tuple_string, action_mod])
@@ -224,7 +216,7 @@ label show_action_mod_configuration:
     python:
         while True:
             tuple_list = []
-            for action_mod in action_mod_list:
+            for action_mod in ActionMod._instances:
                 if action_mod.enabled and hasattr(action_mod, "options_menu") and not action_mod.options_menu is None:
                     tuple_string = action_mod.name + " (tooltip)" + action_mod.menu_tooltip
                     tuple_list.append([tuple_string, action_mod])
