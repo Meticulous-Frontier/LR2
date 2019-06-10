@@ -269,7 +269,7 @@ init 2:
                                                 [Function(demo_outfit.remove_clothing, selected_clothing), # Remove then apply
                                                 Function(apply_method, demo_outfit, cloth)],
                                                 Function(apply_method, demo_outfit, cloth)), # Just remove
-                                                Show("mannequin", None, demo_outfit, mannequin)
+                                                If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit)])
                                                 ]
 
                                                 unhovered [
@@ -315,7 +315,7 @@ init 2:
                                                 [Function(starting_outfit.remove_clothing, selected_from_outfit),# True
                                                 Function(apply_method, starting_outfit, selected_clothing)],
                                                 Function(apply_method, starting_outfit, selected_clothing)), #False
-                                                Show("mannequin", None, starting_outfit, mannequin), # NOTE: We are no longer interested in the demo outfit so view the final outfit, starting_outfit
+                                                If(mannequin == "mannequin", Show("mannequin", None, starting_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, starting_outfit)]), # NOTE: We are no longer interested in the demo outfit so view the final outfit, starting_outfit
                                                 SetScreenVariable("selected_from_outfit", selected_clothing)]
 
 
@@ -323,7 +323,7 @@ init 2:
                                                 If(selected_from_outfit is not None and selected_clothing in catagories_mapping[catagory_selected][0], Function(demo_outfit.remove_clothing, selected_from_outfit)),
                                                 Function(apply_method, demo_outfit, selected_clothing),
                                                 SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
-                                                Show("mannequin", None, demo_outfit, mannequin)
+                                                If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit)])
                                                 ]
 
                                         if __builtin__.type(selected_clothing) is Clothing: #Only clothing items have patterns, facial accessories do not (currently).
@@ -473,7 +473,7 @@ init 2:
                                                                             text "Red "+ "%.2f" % current_r style "serum_text_style" yalign 0.5
                                                                         xsize 75
                                                                         ysize 45
-                                                                    bar value ScreenVariableValue("current_r", 1.0) xfill True ysize 45 style style.slider unhovered [SetScreenVariable("current_r",__builtin__.round(current_r,2)), SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])]
+                                                                    bar value ScreenVariableValue("current_r", 1.0) xfill True ysize 45 style style.slider unhovered [SetScreenVariable("current_r",__builtin__.round(current_r,2)), SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]), If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit)])]
                                                             frame:
 
                                                                 background "#aaaaaa"
@@ -489,7 +489,7 @@ init 2:
                                                                         xsize 75
                                                                         ysize 45
 
-                                                                    bar value ScreenVariableValue("current_g", 1.0) xfill True ysize 45 style style.slider unhovered [SetScreenVariable("current_g",__builtin__.round(current_g,2)), SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])]
+                                                                    bar value ScreenVariableValue("current_g", 1.0) xfill True ysize 45 style style.slider unhovered [SetScreenVariable("current_g",__builtin__.round(current_g,2)), SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]), If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit)])]
                                                             frame:
 
                                                                 background "#aaaaaa"
@@ -507,7 +507,8 @@ init 2:
 
                                                                     bar value ScreenVariableValue("current_b", 1.0) xfill True ysize 45 style style.slider unhovered [
                                                                     SetScreenVariable("current_b",__builtin__.round(current_b,2)),
-                                                                    SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])
+                                                                    SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
+                                                                    If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit)])
                                                                     ]
 
                                                             frame:
@@ -525,7 +526,7 @@ init 2:
                                                                         xsize 75
                                                                         ysize 45
 
-                                                                    bar value ScreenVariableValue("current_a", 1.0) xfill True ysize 45 style style.slider unhovered [SetScreenVariable("current_a",__builtin__.round(current_a,2)), SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])]
+                                                                    bar value ScreenVariableValue("current_a", 1.0) xfill True ysize 45 style style.slider unhovered [SetScreenVariable("current_a",__builtin__.round(current_a,2)), SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]), If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit)])]
                                                         viewport:
                                                             xfill True
                                                             draggable True
@@ -549,6 +550,7 @@ init 2:
                                                                             SetScreenVariable("current_b", a_colour[2]),
                                                                             SetScreenVariable("current_a", a_colour[3]),
                                                                             SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
+                                                                            If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit)])
                                                                             ]
                                                                             alternate [
                                                                             Function(update_colour_palette, count, current_r, current_g, current_b, current_a)
@@ -590,7 +592,8 @@ init 2:
                                                                         background "#1a45a1"
                                                                     action [
                                                                     SetScreenVariable("current_a", 1.0),
-                                                                    SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])
+                                                                    SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
+                                                                    If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit)])
                                                                     ]
 
                                                                 textbutton "Sheer":
@@ -605,7 +608,8 @@ init 2:
 
                                                                     action [
                                                                     SetScreenVariable("current_a", 0.95),
-                                                                    SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])
+                                                                    SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
+                                                                    If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit)])
                                                                     ]
 
                                                                 textbutton "Translucent":
@@ -621,7 +625,8 @@ init 2:
 
                                                                     action [
                                                                     SetScreenVariable("current_a", 0.8),
-                                                                    SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])
+                                                                    SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
+                                                                    If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit)])
                                                                     ]
 
 
@@ -798,7 +803,7 @@ init 2:
                                                             SetScreenVariable("current_a",cloth.colour[3]),
 
 
-                                                            Show("mannequin", None, demo_outfit, mannequin) # Make sure it is showing the correct outfit during changes, demo_outfit is a copy of starting_outfit
+                                                            If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit)]) # Make sure it is showing the correct outfit during changes, demo_outfit is a copy of starting_outfit
 
                                                             ]
                                                             alternate [
@@ -961,7 +966,8 @@ init 2:
                                                                 xalign 0.5
 
                                                                 action [
-                                                                SetScreenVariable("mannequin", person)
+                                                                SetScreenVariable("mannequin", person),
+                                                                If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit)])
                                                                 ]
 
 
