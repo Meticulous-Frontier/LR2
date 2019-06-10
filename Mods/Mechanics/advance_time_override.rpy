@@ -63,8 +63,9 @@ label advance_time_enhanced:
             # how many crisis events are disabled?
             disabled = 0
             for action_mod in action_mod_list:
-                if not action_mod.enabled:
-                    disabled += 1
+                if hasattr(action_mod, "is_crisis") and action_mod.is_crisis and not action_mod.enabled:
+                    if not hasattr(action_mod, "is_morning_crisis") or not action_mod.is_morning_crisis:
+                        disabled += 1
 
             while len(crisis_tracker) > ((len(crisis_list) - disabled) // 3): # release old tracked events
                 del crisis_tracker[0]
@@ -137,7 +138,14 @@ label advance_time_enhanced:
 
         if renpy.random.randint(0,100) < morning_crisis_chance: #ie. run crisis at set chance.
             python:
-                while len(morning_crisis_tracker) > (len(morning_crisis_list) // 2): # release old tracked events
+                # how many crisis events are disabled?
+                morning_disabled = 0                
+                for action_mod in action_mod_list:
+                    if hasattr(action_mod, "is_crisis") and action_mod.is_crisis and not action_mod.enabled:
+                        if hasattr(action_mod, "is_morning_crisis") and action_mod.is_morning_crisis:
+                            morning_disabled += 1
+
+                while len(morning_crisis_tracker) > ((len(morning_crisis_list) - morning_disabled) // 2): # release old tracked events
                     del morning_crisis_tracker[0]
 
                 possible_morning_crises = []
