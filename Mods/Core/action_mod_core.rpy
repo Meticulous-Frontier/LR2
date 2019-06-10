@@ -106,10 +106,11 @@ init 2 python:
     # check all ActionMod classes in the game and make sure we have one instance of each and update the action_mod_list
     def append_and_initialize_action_mods():
         # add action_mod instances to list
-        for action_mod in sorted(ActionMod._instances, key = lambda x: x.priority):
-            if action_mod not in action_mod_list:
-                action_mod_list.append(action_mod)
-                action_mod.initialize()
+        if not ActionMod._instances is None:
+            for action_mod in sorted(ActionMod._instances, key = lambda x: x.priority):
+                if action_mod not in action_mod_list:
+                    action_mod_list.append(action_mod)
+                    action_mod.initialize()
 
         # the crisis_list is not stored in save game
         remove_list = []
