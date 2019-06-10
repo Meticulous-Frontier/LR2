@@ -131,7 +131,7 @@ init 2:
 
     screen outfit_creator(starting_outfit, target_wardrobe = mc.designed_wardrobe): ##Pass a completely blank outfit instance for a new outfit, or an already existing instance to load an old one.| This overrides the default outfit creation screen
 
-        add "Paper_Background.png"
+        #add "Paper_Background.png"
         modal True
         zorder 100
         default catagory_selected = "Panties"
