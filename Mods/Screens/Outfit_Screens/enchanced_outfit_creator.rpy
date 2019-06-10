@@ -311,12 +311,12 @@ init 2:
                                                 or starting_outfit.in_outfit(selected_clothing.name)]),
 
                                                 SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]), #Make sure color is updated
-                                                If(starting_outfit is not None and starting_outfit.in_outfit(selected_clothing.name) or selected_from_outfit in catagories_mapping[catagory_selected][0],
-                                                [Function(starting_outfit.remove_clothing, selected_from_outfit),
+                                                If(starting_outfit is not None and starting_outfit.in_outfit(selected_clothing.name) or valid_check(starting_outfit, selected_clothing) is False, #selected_from_outfit in catagories_mapping[catagory_selected][0],
+                                                [Function(starting_outfit.remove_clothing, selected_from_outfit),# True
                                                 Function(apply_method, starting_outfit, selected_clothing)],
-                                                Function(apply_method, starting_outfit, selected_clothing)),
-                                                Show("mannequin", None, starting_outfit, mannequin),
-                                                SetScreenVariable("selected_from_outfit", selected_clothing)] # NOTE: We are no longer interested in the demo outfit so view the final outfit, starting_outfit
+                                                Function(apply_method, starting_outfit, selected_clothing)), #False
+                                                Show("mannequin", None, starting_outfit, mannequin), # NOTE: We are no longer interested in the demo outfit so view the final outfit, starting_outfit
+                                                SetScreenVariable("selected_from_outfit", selected_clothing)]
 
 
                                                 hovered [
