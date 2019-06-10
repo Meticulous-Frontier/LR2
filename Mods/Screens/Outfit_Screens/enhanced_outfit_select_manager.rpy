@@ -7,6 +7,7 @@ init 2:
         modal True
         zorder 99
         default preview_outfit = None
+        default import_selection = False
         hbox:
             spacing 20
             xalign 0.1
@@ -34,7 +35,7 @@ init 2:
                                         textbutton "Export to .xml File" action [Function(exported.append,outfit), Function(log_outfit, outfit, outfit_class = "FullSets", wardrobe_name = "Exported_Wardrobe"), Function(renpy.notify, "Outfit exported to Exported_Wardrobe.xml")] sensitive outfit not in exported hovered SetScreenVariable("preview_outfit", outfit.get_copy()) unhovered SetScreenVariable("preview_outfit", None) style "textbutton_style" text_style "outfit_description_style" xsize 410
                                     null height 15
                         vbox:
-                            textbutton "Import Design" action ToggleVariable("import_selection") style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 xsize 225 xanchor 0.0
+                            textbutton "Import Design" action ToggleScreenVariable("import_selection") style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 xsize 225 xanchor 0.0
                             if import_selection:
                                 viewport:
                                     scrollbars "vertical"
