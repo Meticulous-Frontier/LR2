@@ -913,7 +913,7 @@ label starbuck_sex_store_promo_two_label(the_person):
     the_person.char "Yes! And with the flared base, it's easy to hold... so I can control the depth... oh fuck!"
     $ the_person.change_arousal(15)
     "She is working the dildo in and out of herself now at a steady pace. Each time she pulls it out, you can see her juices glistening on the toy."
-    the_person.char "The textuing on the outside... it really... stimulates the nerve endings as it... oh god."
+    the_person.char "The texturing on the outside... it really... stimulates the nerve endings as it... oh god."
     $ the_person.change_arousal(15)
     "[the_person.possessive_title] is now fucking herself earnestly with the dildo. The sights and sounds are starting to turn you on. You absentmindedly begin to stroke yourself through your pants."
     the_person.char "Okay... now seems like a good time to test the curve, and see how well it stimulates the g-spot."
