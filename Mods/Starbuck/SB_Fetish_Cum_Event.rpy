@@ -97,12 +97,14 @@ label SB_fetish_cum_label(the_person):
                         #"Note, cum in mouth detected. Comment this later"
                         the_person.sexy_opinions["drinking cum"] = [FETISH_OPINION_VALUE, True]
                         the_person.sexy_opinions["creampies"] = [FETISH_OPINION_VALUE, True]
-                        the_person.special_role.append(cum_internal_role)
+                        if not cum_internal_role in the_person.special_role:
+                            the_person.special_role.append(cum_internal_role)
                     if sb_access.name == "Face Cum":     #You came on her face! Now she fetishes facials and getting cum on her.
                         #"Note, cum on face detected. Comment this later"
                         the_person.sexy_opinions["cum facials"] = [FETISH_OPINION_VALUE, True]
                         the_person.sexy_opinions["being covered in cum"] = [FETISH_OPINION_VALUE, True]
-                        the_person.special_role.append(cum_external_role)
+                        if not cum_external_role in the_person.special_role:
+                            the_person.special_role.append(cum_external_role)
             "[the_person.possessive_title] is moaning ecstatically below your desk."
             if SB_check_fetish(the_person, cum_external_role):
                 "Glancing down, you see [the_person.possessive_title] running her hands along her face, then down to her chest. She is rubbing your cum into her skin."
@@ -241,7 +243,7 @@ label SB_fetish_mom_cum_label(the_person):
     "She opens her mouth and goes back to work. Her skilled mouth is quickly bringing you to an orgasm!"
     "You carefully consider where to cum. This may have an effect on how her cum fetish develops!"
     menu:
-        "Cum in her mouth":
+        "Cum in her mouth" if not SB_check_fetish(the_person, cum_internal_role):
             "You rest your hand on her head, guiding her as she sucks you off."
             "With a little encouragement, you pull [the_person.possessive_title]'s head down a little further with each stroke."
             mc.name "That's it [the_person.title]. I'm going to cum in your mouth and I want you to swallow every drop."
@@ -258,7 +260,7 @@ label SB_fetish_mom_cum_label(the_person):
             $ the_person.special_role.append(cum_internal_role)
 
 
-        "Cum on her face":
+        "Cum on her face" if not SB_check_fetish(the_person, cum_external_role):
             "You rest your hand on her head, slowly gathering her hair up."
             mc.name "That's it [the_person.title]. I'm going to cum all over that pretty little face of yours."
             "[the_person.possessive_title] moans. She is ready for her prize."
@@ -357,12 +359,14 @@ label SB_fetish_lily_cum_label():
                 #"Note, cum in mouth detected. Comment this later"
                 the_person.sexy_opinions["drinking cum"] = [FETISH_OPINION_VALUE, True]
                 the_person.sexy_opinions["creampies"] = [FETISH_OPINION_VALUE, True]
-                the_person.special_role.append(cum_internal_role)
+                if not cum_internal_role in the_person.special_role:
+                    the_person.special_role.append(cum_internal_role)
             if sb_access.name == "Face Cum":     #You came on her face! Now she fetishes facials and getting cum on her.
                 #"Note, cum on face detected. Comment this later"
                 the_person.sexy_opinions["cum facials"] = [FETISH_OPINION_VALUE, True]
                 the_person.sexy_opinions["being covered in cum"] = [FETISH_OPINION_VALUE, True]
-                the_person.special_role.append(cum_external_role)
+                if not cum_external_role in the_person.special_role:
+                    the_person.special_role.append(cum_external_role)
     $ FETISH_CUM_EVENT_INUSE = False
     "[the_person.possessive_title] is moaning ecstatically. You start to worry that [mom.possessive_title] might hear."
     if SB_check_fetish(the_person, cum_external_role):

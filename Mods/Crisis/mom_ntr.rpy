@@ -11,8 +11,7 @@ init 2 python:
         return False
 
     mom_ntr_mod_action = ActionMod("Mom NTR",mom_ntr_mod_requirement,"mom_ntr_mod_action_label",
-        menu_tooltip = "At night you hear strange sounds out of [mom.possessive_title]'s bedroom", category = "NTR")
-    crisis_list.append([mom_ntr_mod_action, mom_ntr_mod_weight])
+        menu_tooltip = "At night you hear strange sounds out of [mom.possessive_title]'s bedroom", category = "NTR", is_crisis = True, crisis_weight = mom_ntr_mod_weight)
 
 label mom_ntr_mod_action_label:
     ## Mom having her private life

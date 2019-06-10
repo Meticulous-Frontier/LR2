@@ -57,7 +57,7 @@ init 2:
                                         if trait.exclude_tags:
                                             $ trait_tags = "\nExcludes Other: "
                                             for a_tag in trait.exclude_tags:
-                                                $ trait_tags += "[[" + a_tag + "]"
+                                                $ trait_tags += "[" + a_tag + "]"
                                         $ trait_title = trait.name + " " + "(" +str(trait.current_research)+"/"+ str(trait.research_needed) + ")" + trait_tags
 
                                         textbutton "[trait_title]":
@@ -92,7 +92,7 @@ init 2:
                                         if trait.exclude_tags:
                                             $ trait_tags = "\nExcludes Other: "
                                             for a_tag in trait.exclude_tags:
-                                                $ trait_tags += "[[" + a_tag + "]"
+                                                $ trait_tags += "[" + a_tag + "]"
 
                                         $ trait_title = trait.name + " " + "(" +str(trait.current_research)+"/"+ str(trait.research_needed) + ")" + trait_tags
 

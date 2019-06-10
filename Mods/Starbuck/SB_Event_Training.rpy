@@ -33,8 +33,7 @@ init 2 python:
         return False
 
     one_on_one_action = ActionMod("One on One Training", one_on_one_training_requirement, "SB_one_on_one_label",
-        menu_tooltip = "You give an employee on the job training.", category = "Business")
-    crisis_list.append([one_on_one_action, one_on_one_weight])
+        menu_tooltip = "You give an employee on the job training.", category = "Business", is_crisis = True, crisis_weight = one_on_one_weight)
 
 label SB_one_on_one_label():
     python:

@@ -22,8 +22,7 @@ init 2 python:
         return
 
     coffee_break_action = ActionMod("Coffee Break", coffee_break_requirement, "coffee_break_action_label",
-        menu_tooltip = "A group of employees is having a coffee break.", category = "Business")
-    crisis_list.append([coffee_break_action, coffee_break_weight])
+        menu_tooltip = "A group of employees is having a coffee break.", category = "Business", is_crisis = True, crisis_weight = coffee_break_weight)
 
 label coffee_break_action_label:
     python:

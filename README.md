@@ -18,10 +18,11 @@ to the screen to a minimum.
 How to Install:
 
     1. Download a .zip file from the master branch.
-    2. Extract Mods folder contents of the .zip into the Lab Rats 2/game/ folder.
+    2. Extract the Mods folder of the .zip into the <Lab Rats 2/game/> folder.
+    3. You now should have a <Lab Rats 2/game/Mods> folder.
     3. Launch Lab Rats 2 and load up a save or start fresh.
-    4. Skip time or play normally until the crisis event telling you about a computer in your bedroom is done.
-    5. Go to the player's bedroom and use the PC via the "Do something..." menu.
-    6. Hit the Mod Initialization button and click through any messages.
-    7. Done. Any mods present that use the Mod Core should now be activated.
+    4. The MOD settings can be configured or en-/disabled from your bedroom.
+    5. Done.
+
+Unfortunatly the base game is not bug free. Check https://github.com/Tristimdorion/Lab-Rats-2/tree/bugfix for a repository that has updated versions of the game files, with fixes for all bugs people reported on the Patreon page.
 

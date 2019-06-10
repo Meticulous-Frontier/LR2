@@ -1,4 +1,4 @@
-init 1 python:
+init 2 python:
     SB_STARBUCK_INTRO_COMPLETE = False
     SB_SHOP_STAGE_ONE_DAY = 9999
     SB_SHOP_STAGE_TWO_DAY = 9999
@@ -7,7 +7,7 @@ init 1 python:
         the_swing = Object("sex swing",["Sit","Low", "Swing"], sluttiness_modifier = 10, obedience_modifier = 10)
         return the_swing
 
-    def SB_generate_premade_list():
+    def SB_mod_initialization(action_mod):
         starbuck_personality = Personality("starbuck", default_prefix = "relaxed",
         common_likes = ["skirts", "small talk", "the colour blue", "makeup"],
         common_sexy_likes = ["lingerie","taking control",  "doggy style sex", "creampies"],
@@ -38,21 +38,22 @@ init 1 python:
 
         starbuck_wardrobe = wardrobe_from_xml("Starbuck_Wardrobe")
 
-        start_home = Room("Starbuck's home", "Starbuck's home", [], apartment_background, [],[],[],False,[0.5,0.5], visible = False)
-        start_home.link_locations_two_way(downtown)
-        start_home.add_object(make_wall())
-        start_home.add_object(make_floor())
-        start_home.add_object(make_bed())
-        start_home.add_object(make_window())
-        list_of_places.append(start_home)
+        starbuck_home = Room("Starbuck's home", "Starbuck's home", [], apartment_background, [],[],[],False,[0.5,0.5], visible = False)
+        starbuck_home.add_object(make_wall())
+        starbuck_home.add_object(make_floor())
+        starbuck_home.add_object(make_bed())
+        starbuck_home.add_object(make_window())
+
+        starbuck_home.link_locations_two_way(downtown)
+        list_of_places.append(starbuck_home)
+
         #global starbuck_role
         global starbuck
         starbuck = Sex_Shop_Owner(name = "Starbuck", last_name = "Thrace", age = 32, body_type = "curvy_body", tits="E",  height = 0.95,  body_images = white_skin, expression_images = Expression("Starbuck\'s Expression Set", "white", "Face_4"), hair_colour="golden blonde", hair_style = messy_short_hair.get_copy(), skin="white" , \
             eyes = "brown", job = "Sex Shop Owner", wardrobe = starbuck_wardrobe, personality = starbuck_personality, stat_list = [3,4,3],  skill_list = [1,1,4,2,1],  sluttiness = 42,  obedience = -22, suggest = 0, sex_list = [3,3,4,4], love = 0, happiness = 119, \
-            home = start_home, font = get_random_font(), work = None, name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", special_role = None)
+            home = starbuck_home, font = get_random_font(), work = None, name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", special_role = [starbuck_role])
 
         starbuck.hair_style.colour = [0.895, 0.781, 0.656, 1]
-        starbuck.special_role = [starbuck_role]
 
         starbuck.schedule[1] = sex_store
         starbuck.schedule[2] = sex_store
@@ -60,10 +61,22 @@ init 1 python:
 
         starbuck.home.add_person(starbuck)
 
+        #starbuck ACTIONS#
+        starbuck_vaginal_skillup = Action("Ask about improving vaginal skill", starbuck_vaginal_skillup_requirement, "starbuck_vaginal_skillup_label")
+        starbuck_anal_skillup = Action("Ask about improving anal skill", starbuck_anal_skillup_requirement, "starbuck_anal_skillup_label")
+        starbuck_oral_skillup = Action("Ask about improving oral skill", starbuck_oral_skillup_requirement, "starbuck_oral_skillup_label")
+        starbuck_foreplay_skillup = Action("Ask about improving foreplay", starbuck_foreplay_skillup_requirement, "starbuck_foreplay_skillup_label")
+        starbuck_arousal_reduction_one = Action("Ask about lasting longer", starbuck_arousal_reduction_one_requirement, "starbuck_arousal_reduction_one_label")
+        starbuck_arousal_reduction_two = Action("Ask about lasting even longer", starbuck_arousal_reduction_two_requirement, "starbuck_arousal_reduction_two_label")
+
+        starbuck_role = Role(role_name ="Starbuck", actions =[starbuck_vaginal_skillup, starbuck_anal_skillup, starbuck_oral_skillup, starbuck_foreplay_skillup, starbuck_arousal_reduction_one, starbuck_arousal_reduction_two])
+
         # Add StarBuck introduction event to sex store
-        starbuck_introduction_event_action = Action("Starbuck Introduction", starbuck_introduction_requirement, "starbuck_greetings")
         starbuck.on_room_enter_event_list.append(starbuck_introduction_event_action)
         return
+
+    # create mod event to trigger creation
+    starbuck_introduction_event_action = ActionMod("Starbuck's Sex Shop", starbuck_introduction_requirement, "starbuck_greetings", initialization = SB_mod_initialization, menu_tooltip = "Starbuck's Sex Shop", category = "Misc", allow_disable = False, options_menu = "SB_mod_options_menu")
 
 
 init -1 python:
@@ -217,27 +230,6 @@ init -1 python:
                 else:
                     return "Requires 90 sluttiness"
         return False
-
-label SB_unique_people_create():
-    $ SB_generate_premade_list()
-    call SB_instantiate_serum_traits() from _call_SB_instantiate_serum_traits_01   #DEBUGSB
-    return
-
-
-label SB_instantiate_roles(): #This section instantiates all of the key roles in the game. It is placed here to ensure it is properly created, saved, ect. by Renpy.
-    python:
-
-        #global starbuck_role
-        #starbuck ACTIONS#
-        starbuck_vaginal_skillup = Action("Ask about improving vaginal skill", starbuck_vaginal_skillup_requirement, "starbuck_vaginal_skillup_label")
-        starbuck_anal_skillup = Action("Ask about improving anal skill", starbuck_anal_skillup_requirement, "starbuck_anal_skillup_label")
-        starbuck_oral_skillup = Action("Ask about improving oral skill", starbuck_oral_skillup_requirement, "starbuck_oral_skillup_label")
-        starbuck_foreplay_skillup = Action("Ask about improving foreplay", starbuck_foreplay_skillup_requirement, "starbuck_foreplay_skillup_label")
-        starbuck_arousal_reduction_one = Action("Ask about lasting longer", starbuck_arousal_reduction_one_requirement, "starbuck_arousal_reduction_one_label")
-        starbuck_arousal_reduction_two = Action("Ask about lasting even longer", starbuck_arousal_reduction_two_requirement, "starbuck_arousal_reduction_two_label")
-
-        starbuck_role = Role(role_name ="Starbuck", actions =[starbuck_vaginal_skillup, starbuck_anal_skillup, starbuck_oral_skillup, starbuck_foreplay_skillup, starbuck_arousal_reduction_one, starbuck_arousal_reduction_two])
-    return
 
 #SBS10
 label starbuck_vaginal_skillup_label(the_person):
@@ -921,7 +913,7 @@ label starbuck_sex_store_promo_two_label(the_person):
     the_person.char "Yes! And with the flared base, it's easy to hold... so I can control the depth... oh fuck!"
     $ the_person.change_arousal(15)
     "She is working the dildo in and out of herself now at a steady pace. Each time she pulls it out, you can see her juices glistening on the toy."
-    the_person.char "The textuing on the outside... it really... stimulates the nerve endings as it... oh god."
+    the_person.char "The texturing on the outside... it really... stimulates the nerve endings as it... oh god."
     $ the_person.change_arousal(15)
     "[the_person.possessive_title] is now fucking herself earnestly with the dildo. The sights and sounds are starting to turn you on. You absentmindedly begin to stroke yourself through your pants."
     the_person.char "Okay... now seems like a good time to test the curve, and see how well it stimulates the g-spot."
@@ -1455,84 +1447,86 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     return
 
 label starbuck_intro():
-    show screen person_info_ui(starbuck)
-    $ starbuck.draw_person(emotion = "happy")
+    $ the_person = starbuck
+
+    show screen person_info_ui(the_person)
+    $ the_person.draw_person(emotion = "happy")
     if not SB_STARBUCK_INTRO_COMPLETE:
         "You enter the sex shop. A beautiful woman comes up to you and begins to introduce herself."
-        $ starbuck.draw_person(position = "stand2", emotion = "happy")
+        $ the_person.draw_person(position = "stand2", emotion = "happy")
         $ SB_STARBUCK_INTRO_COMPLETE = True
-        starbuck.char "Hello there sir! Welcome to Starbuck's Sex Shop!"
+        the_person.char "Hello there sir! Welcome to Starbuck's Sex Shop!"
 
         # uses parts of the in-game introduction sequence tailored to SB
-        if starbuck.title is None:
+        if the_person.title is None:
             mc.name "Hello."
-            $ title_choice = get_random_title(starbuck)
-            $ formatted_title = starbuck.create_formatted_title(title_choice)
-            starbuck.char "Let me introduce myself, i am [formatted_title]."
-            $ starbuck.set_title(title_choice)
-            $ starbuck.set_possessive_title(get_random_possessive_title(starbuck))
+            $ title_choice = get_random_title(the_person)
+            $ formatted_title = the_person.create_formatted_title(title_choice)
+            the_person.char "Let me introduce myself, i am [formatted_title]."
+            $ the_person.set_title(title_choice)
+            $ the_person.set_possessive_title(get_random_possessive_title(the_person))
             "She holds her hand out to shake yours."
-            starbuck.char "And how may I address you?"
+            the_person.char "And how may I address you?"
             $ title_tuple = []
             $ title_choice = None
             python:
-                for title in get_player_titles(starbuck):
+                for title in get_player_titles(the_person):
                     title_tuple.append([title,title])
 
             $ title_choice = renpy.display_menu(title_tuple,True,"Choice")
             mc.name "[title_choice], nice to meet you."
-            $ starbuck.set_mc_title(title_choice)
+            $ the_person.set_mc_title(title_choice)
 
-        starbuck.char "We've just opened, so stock is still fairly limited, but feel free to browse and I'm here to answer any questions you might have!"
-        "You smile at [starbuck.possessive_title] and promise to take a look."
-        starbuck.char "Sounds great!"
+        the_person.char "We've just opened, so stock is still fairly limited, but feel free to browse and I'm here to answer any questions you might have!"
+        "You smile at [the_person.possessive_title] and promise to take a look."
+        the_person.char "Sounds great!"
         $ renpy.scene("Active")
         hide screen person_info_ui
-        "After [starbuck.possessive_title] goes back to the counter, you walk around the shop a bit. Unfortunately, things are pretty bare. There are several shelves with just labels on them."
+        "After [the_person.possessive_title] goes back to the counter, you walk around the shop a bit. Unfortunately, things are pretty bare. There are several shelves with just labels on them."
         "You walk by one labeled as anal toys, but there aren't any on the shelf available for purchase."
         "You walk over to the counter."
-        show screen person_info_ui(starbuck)
-        $ starbuck.draw_person(position = "stand3", emotion = "happy")
+        show screen person_info_ui(the_person)
+        $ the_person.draw_person(position = "stand3", emotion = "happy")
         mc.name "This is pretty interesting, to open a sex shop like this, but the shelves seem pretty empty? Are you going to get more stock soon?"
-        $ starbuck.draw_person(position = "stand3", emotion = "sad")
-        starbuck.char "Yes, I'm sorry they are fairly empty, I didn't have much money to invest in the store. I'm hoping I'll be able to attract some customers, and reinvest the money back into the shop..."
+        $ the_person.draw_person(position = "stand3", emotion = "sad")
+        the_person.char "Yes, I'm sorry they are fairly empty, I didn't have much money to invest in the store. I'm hoping I'll be able to attract some customers, and reinvest the money back into the shop..."
         "You can see she is struggling a bit to open up."
-        starbuck.char "You see, it was always my husband and I's dream to open a shop like this, to help people be more adventurous and have fun in the bedroom..."
-        starbuck.char "When he died... it was hard. It has been a struggle to make ends meet, but I feel like I'm finally ready to move on with my life, and decided to chase my dreams!"
+        the_person.char "You see, it was always my husband and I's dream to open a shop like this, to help people be more adventurous and have fun in the bedroom..."
+        the_person.char "When he died... it was hard. It has been a struggle to make ends meet, but I feel like I'm finally ready to move on with my life, and decided to chase my dreams!"
         "You glance around the shop for a bit. You can tell she is very... optimistic."
         mc.name "That's great that you are moving on... but surely you should get a bit more stock? Have you tried finding any investors?"
-        "[starbuck.possessive_title] mumbles for a second before answering."
-        starbuck.char "Well, you would be surprised how hard it is to find investors for a sex shop..."
+        "[the_person.possessive_title] mumbles for a second before answering."
+        the_person.char "Well, you would be surprised how hard it is to find investors for a sex shop..."
         "You can tell that she is a hard worker, and is dedicated to making her shop work. Maybe you should consider investing in her shop?"
         mc.name "How much money would you need, say if someone were interested in investing in your shop, to get some basic stock on the shelves?"
-        "[starbuck.possessive_title] considers for a moment."
-        starbuck.char "Well, I really want the stock to be good, quality product. I'd say I could probably get everything setup for a basic shop for... say $1000?"
-        "That seems pretty reasonable. You decide to consider investing. You should talk to Starbuck again if you decide to invest in the shop!"
-    elif (starbuck.shop_progress_stage) == 0:
-        starbuck.char "Hello there sir! Welcome back to Starbuck's Sex Shop! Feel free to look around."
-        "You smile at [starbuck.possessive_title] and promise to take a look."
-        starbuck.char "Sounds great, [starbuck.mc_title]! I'll be here if you have any questions!"
-    elif (starbuck.shop_progress_stage) == 1:
-        starbuck.char "Hey there, [starbuck.mc_title]! Its good to see you!"
-        if starbuck.sluttiness > 60:
-            "[starbuck.possessive_title] smiles playfully."
-            starbuck.char "I was just thinking about you. Anything I can help you with?"
+        "[the_person.possessive_title] considers for a moment."
+        the_person.char "Well, I really want the stock to be good, quality product. I'd say I could probably get everything setup for a basic shop for... say $1000?"
+        "That seems pretty reasonable. You decide to consider investing. You should talk to the_person again if you decide to invest in the shop!"
+    elif (the_person.shop_progress_stage) == 0:
+        the_person.char "Hello there sir! Welcome back to Starbuck's Sex Shop! Feel free to look around."
+        "You smile at [the_person.possessive_title] and promise to take a look."
+        the_person.char "Sounds great, [the_person.mc_title]! I'll be here if you have any questions!"
+    elif (the_person.shop_progress_stage) == 1:
+        the_person.char "Hey there, [the_person.mc_title]! Its good to see you!"
+        if the_person.sluttiness > 60:
+            "[the_person.possessive_title] smiles playfully."
+            the_person.char "I was just thinking about you. Anything I can help you with?"
         else:
-            starbuck.char "Is there anything I can help you with?"
-    elif (starbuck.shop_progress_stage) == 2:
-        starbuck.char "[starbuck.mc_title]! I'm so glad to see you! This place is starting to do really well, thanks to you!"
-        if starbuck.sluttiness > 60:
-            "[starbuck.possessive_title] smiles playfully."
-            starbuck.char "I don't think I could ever repay you, is there anything I can help you with?"
+            the_person.char "Is there anything I can help you with?"
+    elif (the_person.shop_progress_stage) == 2:
+        the_person.char "[the_person.mc_title]! I'm so glad to see you! This place is starting to do really well, thanks to you!"
+        if the_person.sluttiness > 60:
+            "[the_person.possessive_title] smiles playfully."
+            the_person.char "I don't think I could ever repay you, is there anything I can help you with?"
         else:
-            starbuck.char "Is there anything I can help you with?"
-    elif (starbuck.shop_progress_stage) == 3:
-        starbuck.char "[starbuck.mc_title]! Thanks for checking in! Thing are going amazing here, all thanks to you and your generous investments!"
-        if starbuck.sluttiness > 60:
-            "[starbuck.possessive_title] smiles playfully."
-            starbuck.char "I'll be forever in your debt. Is there anything I can help you with?"
+            the_person.char "Is there anything I can help you with?"
+    elif (the_person.shop_progress_stage) == 3:
+        the_person.char "[the_person.mc_title]! Thanks for checking in! Thing are going amazing here, all thanks to you and your generous investments!"
+        if the_person.sluttiness > 60:
+            "[the_person.possessive_title] smiles playfully."
+            the_person.char "I'll be forever in your debt. Is there anything I can help you with?"
         else:
-            starbuck.char "Is there anything I can help you with?"
+            the_person.char "Is there anything I can help you with?"
     $ renpy.scene("Active")
     hide screen person_info_ui
     return

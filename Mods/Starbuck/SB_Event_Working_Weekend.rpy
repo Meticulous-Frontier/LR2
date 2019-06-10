@@ -20,8 +20,7 @@ init 2 python:
         return False
 
     SB_working_weekend_crisis = ActionMod("Working Weekend",SB_working_weekend_requirement,"SB_working_weekend_crisis_label", 
-        menu_tooltip = "While working weekends an employee comes into the office.", category = "Business")
-    crisis_list.append([SB_working_weekend_crisis, SB_working_weekend_crisis_weight])
+        menu_tooltip = "While working weekends an employee comes into the office.", category = "Business", is_crisis = True, crisis_weight = SB_working_weekend_crisis_weight)
 
 label SB_working_weekend_crisis_label():
     python:

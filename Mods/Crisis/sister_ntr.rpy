@@ -20,9 +20,8 @@ init 3 python:
                 positions.append ("anal")
         return get_random_from_list(positions)
 
-    sister_ntr_mod_action = ActionMod("Sister NTR",sister_ntr_crisis_requirement,"sister_ntr_crisis_action_label",
-        menu_tooltip = "At night you hear strange sounds out of [lily.possessive_title]'s bedroom", category = "NTR")
-    crisis_list.append([sister_ntr_mod_action, sister_ntr_mod_weight])
+    sister_ntr_mod_action = ActionMod("Sister NTR",sister_ntr_crisis_requirement,"sister_ntr_crisis_action_label", menu_tooltip = "At night you hear strange sounds out of [lily.possessive_title]'s bedroom", 
+        category = "NTR", is_crisis = True, crisis_weight = sister_ntr_mod_weight)
 
 label sister_ntr_crisis_action_label:
     ## Lily studing with her friends

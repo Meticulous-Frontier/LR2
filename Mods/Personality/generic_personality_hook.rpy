@@ -27,9 +27,7 @@ init 1 python:
     # change the random person based other characteristics of personality
     def update_random_person(person):
         # turn cougars on or off
-        cougar_mod = find_in_list(lambda x: x.effect == cougar_personality_action.effect, ActionMod._instances)
-        enabled = not (cougar_mod is None or not cougar_mod.enabled)
-        update_cougar_personality(person, enabled)
+        update_cougar_personality(person)
         # A person could have dialog even if we don't know her
         if person.possessive_title is None:
             person.set_possessive_title("The unknown woman")
@@ -42,9 +40,9 @@ init 1 python:
             person.special_role.append(generic_people_role)
         return
 
-    def update_cougar_personality(person, enabled):
+    def update_cougar_personality(person):
         # change personality to cougar if we meet age requirement
-        if enabled:
+        if find_in_list(lambda x: x.effect == "cougar_personality_dummy_label", action_mod_list).enabled:
             if person not in list_of_unique_characters + [mom, lily, aunt, cousin, stephanie] and person.age > 45:
                 if not person.personality == cougar_personality:
                     person.original_personality = person.personality
@@ -63,9 +61,6 @@ init 1 python:
 
 
 label activate_generic_personality(stack):
-    if not SB_fetish_mod_init:
-        call SB_unique_people_create from _call_SB_fetish_mod_init_label_activate
-
     python:
         # add one bimbo to the game (on start of game)
         a_bimbo = create_random_person(age=renpy.random.randint(25, 35), tits="DD", body_type = "standard_body", face_style = "Face_4", skin = "tan",
@@ -82,9 +77,6 @@ label activate_generic_personality(stack):
     return
 
 label update_generic_personality(stack):
-    if not SB_fetish_mod_init:
-        call SB_fetish_mod_init_label from _call_SB_fetish_mod_init_label_update
-
     python:
         # fix for old save games (can be removed in future):
         if not find_in_list(lambda x: x == cougar_personality, list_of_personalities) is None:

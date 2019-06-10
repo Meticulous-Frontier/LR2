@@ -67,61 +67,73 @@ init -1 python:
 
 init 2 python:
     class ActionMod(Action):
-        # store instances of mod
         _instances = set()
 
-        def __init__(self, name, requirement, effect, args = None, requirement_args = None, menu_tooltip = None, initialization = None, category="Misc", enabled = True, priority = 10, on_enabled_changed = None):
+        # store instances of mod
+        def __init__(self, name, requirement, effect, args = None, requirement_args = None, menu_tooltip = "", initialization = None, category="Misc", enabled = True, allow_disable = True, priority = 10, on_enabled_changed = None, options_menu = None, is_crisis = False, is_morning_crisis = False, crisis_weight = None):
             self.initialization = initialization
             self.enabled = enabled
+            self.allow_disable = allow_disable
             self.category = category
             self.priority = priority
             self.on_enabled_changed = on_enabled_changed
+            self.options_menu = options_menu
+            self.is_crisis = is_crisis
+            self.is_morning_crisis = is_morning_crisis
+            self.crisis_weight = crisis_weight
 
             Action.__init__(self, name, requirement, effect, args, requirement_args, menu_tooltip)
 
-            # store the instance in class static    
-            self._instances.add(self)
-                    
+            ActionMod._instances.add(self)
+
         def initialize(self):
             if not self.initialization is None:
                 self.initialization(self)
 
+        def show_options(self):
+            if not self.options_menu is None:
+                renpy.call(self.options_menu)
+
         def toggle_enabled(self):
             self.enabled = not self.enabled
+            # trigger event
             if not self.on_enabled_changed is None:
                 self.on_enabled_changed(self.enabled)
 
     def action_mod_settings_requirement():
         return True
 
-    def is_in_action_mod_list(action_mod):
-        for am in action_mod_list:
-            if am.effect == action_mod.effect:
-                return True
-        return False
-
     # check all ActionMod classes in the game and make sure we have one instance of each and update the action_mod_list
     def append_and_initialize_action_mods():
+        # add action_mod instances to list
+        if not ActionMod._instances is None:
+            for action_mod in sorted(ActionMod._instances, key = lambda x: x.priority):
+                if action_mod not in action_mod_list:
+                    action_mod_list.append(action_mod)
+                    action_mod.initialize()
+
+        # the crisis_list is not stored in save game
         remove_list = []
-        for action_mod in ActionMod._instances:
-            if not is_in_action_mod_list(action_mod):
-                action_mod_list.append(action_mod)
-            else:
+        for action_mod in action_mod_list:
+            if not hasattr(action_mod, "is_crisis"):
                 remove_list.append(action_mod)
-        
-        # remove existing action mods from instance list
+            elif action_mod.is_crisis:
+                if hasattr(action_mod, "is_morning_crisis") and action_mod.is_morning_crisis:
+                    morning_crisis_list.append([action_mod, action_mod.crisis_weight])
+                else:
+                    crisis_list.append([action_mod, action_mod.crisis_weight])
+
+        # remove not working stuff
         for action_mod in remove_list:
-            ActionMod._instances.remove(action_mod)
+            action_mod_list.remove(action_mod)
 
-        # initialize mods       
-        for action_mod in sorted(ActionMod._instances, key = lambda x: x.priority):
-            action_mod.initialize()
-
+        # clear instances
+        ActionMod._instances = None
         return
 
     # mod settings action
     action_mod_options_action = Action("MOD Settings", action_mod_settings_requirement, "show_action_mod_settings", menu_tooltip = "Enable or disable mods")
-
+    action_mod_configuration_action = Action("MOD Configuration", action_mod_settings_requirement, "show_action_mod_configuration", menu_tooltip = "Change configuration for individual MODS")
 
 init 5 python:
     add_label_hijack("normal_start", "activate_action_mod_core")  
@@ -133,12 +145,14 @@ label after_load:
     return
 
 label activate_action_mod_core(stack):
-    # define here using $ so it gets stored in save game
     $ action_mod_list = []
+
+    # define here using $ so it gets stored in save game
     python:
         append_and_initialize_action_mods()
 
         bedroom.actions.append(action_mod_options_action)
+        bedroom.actions.append(action_mod_configuration_action)
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
@@ -158,9 +172,10 @@ label update_action_mod_core(stack):
 
     python:
         append_and_initialize_action_mods()
-
         if not action_mod_options_action in bedroom.actions:
             bedroom.actions.append(action_mod_options_action)
+        if not action_mod_configuration_action in bedroom.actions:
+            bedroom.actions.append(action_mod_configuration_action)
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
@@ -195,7 +210,7 @@ label change_mod_category:
     python:
         tuple_list = []
         for action_mod in action_mod_list:
-            if (action_mod.category == active_action_mod_category):
+            if (not hasattr(action_mod, "allow_disable") or action_mod.allow_disable) and action_mod.category == active_action_mod_category:
                 tuple_string = action_mod.name + "\n Active: " + str(action_mod.enabled) + " (tooltip)" + action_mod.menu_tooltip
                 tuple_list.append([tuple_string, action_mod])
 
@@ -209,3 +224,22 @@ label change_mod_category:
             action_mod_choice.toggle_enabled()
             renpy.jump("change_mod_category")
     return
+
+
+label show_action_mod_configuration:
+    python:
+        while True:
+            tuple_list = []
+            for action_mod in action_mod_list:
+                if action_mod.enabled and hasattr(action_mod, "options_menu") and not action_mod.options_menu is None:
+                    tuple_string = action_mod.name + " (tooltip)" + action_mod.menu_tooltip
+                    tuple_list.append([tuple_string, action_mod])
+
+            tuple_list = sorted(tuple_list, key=lambda x: x[0])
+            tuple_list.append(["Back","Back"])
+            action_mod_choice = renpy.display_menu(tuple_list, True, "Choice")
+
+            if action_mod_choice == "Back":
+                renpy.return_statement()
+            else:
+                action_mod_choice.show_options()

@@ -11,9 +11,7 @@ init 2 python:
         return False
 
     business_meeting_action = ActionMod("Business Meeting", business_meeting_requirement, "business_meeting_action_label",
-        menu_tooltip = "An employee wants to discuss some business with you.", category = "Business")
-    crisis_list.append([business_meeting_action, business_meeting_weight])
-
+        menu_tooltip = "An employee wants to discuss some business with you.", category = "Business", is_crisis = True, crisis_weight = business_meeting_weight)
    
 label business_meeting_action_label:
     $ the_person = get_random_from_list(mc.business.get_employee_list())

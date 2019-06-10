@@ -10,9 +10,7 @@ init 2 python:
         return False
 
     SB_tutorial_crisis = ActionMod("Mall Flirt", SB_tutorial_event_requirement, "SB_tutorial_event",
-        menu_tooltip = "You have a short flirt with someone in the mall.", category = "Mall")
-    crisis_list.append([SB_tutorial_crisis, SB_tutorial_crisis_weight])
-
+        menu_tooltip = "You have a short flirt with someone in the mall.", category = "Mall", is_crisis = True, crisis_weight = SB_tutorial_crisis_weight)
 
 label SB_tutorial_event():
     python:

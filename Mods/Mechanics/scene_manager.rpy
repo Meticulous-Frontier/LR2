@@ -39,6 +39,15 @@ init -2 python:
                 #mc.log_event("Remove clothing " + actor.person.title, "gray_float_text")
                 actor.person.draw_animated_removal(the_clothing, position = actor.position, emotion = actor.emotion, special_modifier = actor.special_modifier, character_placement = actor.character_placement, scene_manager = self)
 
+        def get_free_position_tuple(self):
+            if find_in_list(lambda x: x.character_placement == character_right, self.actors) is None and find_in_list(lambda x: x.character_placement == character_right_flipped, self.actors) is None:
+                return [character_right, character_right_flipped]
+            if find_in_list(lambda x: x.character_placement == character_center, self.actors) is None and find_in_list(lambda x: x.character_placement == character_center_flipped, self.actors) is None:
+                return [character_center, character_center_flipped]
+            if find_in_list(lambda x: x.character_placement == character_left, self.actors) is None and find_in_list(lambda x: x.character_placement == character_left_flipped, self.actors) is None:
+                return [character_left, character_left_flipped]
+            return None
+
         # removes specific actor from scene
         def remove_actor(self, person):
             actor_to_remove = find_in_list(lambda x: x.person is person, self.actors)
