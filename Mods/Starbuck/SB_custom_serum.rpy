@@ -210,17 +210,19 @@ init -1 python:
             if SB_get_cum_score(the_person) > 8:
                 if the_person.sluttiness >= 90:
                     if SB_get_fetish_count(the_person) < store.max_fetishes_per_person:
-                        #"DEBUG Trigger for cum fetish"
-                        if the_person == lily and not (SB_check_fetish(lily, cum_external_role) or SB_check_fetish(the_person, cum_internal_role)):
+                        # renpy.say("", "Evaluate Cum Fetish (In Use: " + str(FETISH_CUM_EVENT_INUSE) + ")")
+                        if the_person == lily and not (SB_check_fetish(lily, cum_external_role) and SB_check_fetish(the_person, cum_internal_role)):
                             if not SB_fetish_lily_cum in mandatory_morning_crises_list:
                                 mandatory_morning_crises_list.append(SB_fetish_lily_cum)
                         elif FETISH_CUM_EVENT_INUSE:
                             return
-                        elif the_person == mom and not (SB_check_fetish(mom, cum_external_role) or SB_check_fetish(mom, cum_internal_role)):
+                        elif the_person == mom and not (SB_check_fetish(mom, cum_external_role) and SB_check_fetish(mom, cum_internal_role)):
                             mc.business.mandatory_crises_list.append(SB_fetish_mom_cum)
                             FETISH_CUM_EVENT_INUSE = True
-                        elif not (SB_check_fetish(the_person, cum_external_role) or SB_check_fetish(the_person, cum_internal_role)):
+                        elif not (SB_check_fetish(the_person, cum_external_role) and SB_check_fetish(the_person, cum_internal_role)):
+                            # renpy.say("", "Trigger cum fetish " + the_person.name)
                             if SB_fetish_cum_crisis not in mc.business.mandatory_crises_list:
+                                # renpy.say("", "Add trigger to mandatory crisis list " + the_person.name)
                                 SB_fetish_cum_crisis.args = [the_person]
                                 mc.business.mandatory_crises_list.append(SB_fetish_cum_crisis)
                                 FETISH_CUM_EVENT_INUSE = True
