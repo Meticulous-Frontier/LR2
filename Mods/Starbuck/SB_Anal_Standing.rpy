@@ -353,7 +353,7 @@ label orgasm_SB_anal_standing(the_girl, the_location, the_object, the_round):
 init:
     python:
         def cum_in_ass(the_girl):
-            mc.listener_system.fire_event("sex_cum_ass", the_girl = the_girl)
+            mc.listener_system.fire_event("sex_cum_ass", the_person = the_girl)
             the_girl.change_slut_temp(5*the_girl.get_opinion_score("creampies"))
             the_girl.change_happiness(5*the_girl.get_opinion_score("creampies"))
             the_girl.discover_opinion("creampies")
