@@ -70,7 +70,7 @@ init 2 python:
         _instances = set()
 
         # store instances of mod
-        def __init__(self, name, requirement, effect, args = None, requirement_args = None, menu_tooltip = "", initialization = None, category="Misc", enabled = True, allow_disable = True, priority = 10, on_enabled_changed = None, options_menu = None, is_crisis = False, crisis_weight = None):
+        def __init__(self, name, requirement, effect, args = None, requirement_args = None, menu_tooltip = "", initialization = None, category="Misc", enabled = True, allow_disable = True, priority = 10, on_enabled_changed = None, options_menu = None, is_crisis = False, is_morning_crisis = False, crisis_weight = None):
             self.initialization = initialization
             self.enabled = enabled
             self.allow_disable = allow_disable
@@ -79,6 +79,7 @@ init 2 python:
             self.on_enabled_changed = on_enabled_changed
             self.options_menu = options_menu
             self.is_crisis = is_crisis
+            self.is_morning_crisis = is_morning_crisis
             self.crisis_weight = crisis_weight
 
             Action.__init__(self, name, requirement, effect, args, requirement_args, menu_tooltip)
@@ -110,12 +111,20 @@ init 2 python:
                 action_mod_list.append(action_mod)
                 action_mod.initialize()
 
+        # the crisis_list is not stored in save game
         remove_list = []
         for action_mod in action_mod_list:
             if not hasattr(action_mod, "is_crisis"):
                 remove_list.append(action_mod)
             elif action_mod.is_crisis:
-                crisis_list.append([action_mod, action_mod.crisis_weight])
+                if hasattr(action_mod, "is_morning_crisis") and action_mod.is_morning_crisis:
+                    morning_crisis_list.append([action_mod, action_mod.crisis_weight])
+                else:
+                    crisis_list.append([action_mod, action_mod.crisis_weight])
+
+        # remove not working stuff
+        for action_mod in remove_list:
+            action_mod_list.remove(action_mod)
 
         # clear instances
         ActionMod._instances = None
