@@ -4,7 +4,7 @@ init 2 python:
     def hide_mannequin():
         renpy.hide_screen("mannequin")
 
-    def draw_mannequin(self , outfit, position = None, emotion = None, special_modifier = None): #Draw the person, standing as default if they aren't standing in any other position.
+    def draw_mannequin(self , outfit, position = None, emotion = None, special_modifier = None): # Small tweak of draw_person to allow for an outfit that is not theirs to be shown (NOTE: outfit.generate_draw_list)
             renpy.scene("Active")
             if position is None:
                 position = self.idle_pose #Easiest change is to call this and get a random standing posture instead of a specific idle pose. We redraw fairly frequently so she will change position frequently.
