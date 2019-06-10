@@ -68,7 +68,7 @@ init -1 python:
             if item in neckwear_list:
                 return "Neckwear"
 init 2:
-    $ import_selection = False # Decides if the import viewport is showing
+
     $ selected_xml = "Exported_Wardrobe.xml"
     $ palette_grid_size = 1
     python:
@@ -122,7 +122,7 @@ init 2:
             indent(tree_root)
             wardrobe_tree.write(file_name,encoding="UTF-8")
 
-        def add_palette(palette_grid_size):
+        def add_palette(palette_grid_size): # Conceptual
             while len(persistent.colour_palette) < palette_grid_size*10:
                 persistent.colour_palette.append([1,1,1,1])
             palette_grid_size = len(persistent.colour_palette)/10
@@ -135,14 +135,15 @@ init 2:
         modal True
         zorder 100
         default catagory_selected = "Panties"
-        default mannequin = True
+        default mannequin = "mannequin"
+        default mannequin_selection = False
 
         default cloth_pattern_selection = True
         default transparency_selection = True
         default outfit_stats = True
         default outfit_class_selected = "FullSets"
         default color_selection = True
-
+        default import_selection = False
 
         default quick_catagory = None # Used to get catagory of the item
         default selected_from_outfit = None # Used to temporarily remember what clothing you have selected from starting_outfit if any
@@ -268,7 +269,7 @@ init 2:
                                                 [Function(demo_outfit.remove_clothing, selected_clothing), # Remove then apply
                                                 Function(apply_method, demo_outfit, cloth)],
                                                 Function(apply_method, demo_outfit, cloth)), # Just remove
-                                                Show("mannequin", None, demo_outfit)
+                                                Show("mannequin", None, demo_outfit, mannequin)
                                                 ]
 
                                                 unhovered [
@@ -289,7 +290,7 @@ init 2:
                                 mousewheel True
                                 yfill True
                                 vbox:
-                                    spacing 10
+                                    spacing 5
                                     if selected_clothing is not None:
                                         frame:
                                             background "#aaaaaa"
@@ -314,7 +315,7 @@ init 2:
                                                 [Function(starting_outfit.remove_clothing, selected_from_outfit),
                                                 Function(apply_method, starting_outfit, selected_clothing)],
                                                 Function(apply_method, starting_outfit, selected_clothing)),
-                                                Show("mannequin", None, starting_outfit),
+                                                Show("mannequin", None, starting_outfit, mannequin),
                                                 SetScreenVariable("selected_from_outfit", selected_clothing)] # NOTE: We are no longer interested in the demo outfit so view the final outfit, starting_outfit
 
 
@@ -322,7 +323,7 @@ init 2:
                                                 If(selected_from_outfit is not None and selected_clothing in catagories_mapping[catagory_selected][0], Function(demo_outfit.remove_clothing, selected_from_outfit)),
                                                 Function(apply_method, demo_outfit, selected_clothing),
                                                 SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
-                                                Show("mannequin", None, demo_outfit)
+                                                Show("mannequin", None, demo_outfit, mannequin)
                                                 ]
 
                                         if __builtin__.type(selected_clothing) is Clothing: #Only clothing items have patterns, facial accessories do not (currently).
@@ -397,7 +398,7 @@ init 2:
                                                                     SetScreenVariable("current_a",selected_clothing.colour[3])
                                                                     ]
                                                                 else:
-                                                                    action NullAction()
+                                                                    action ToggleScreenVariable("color_selection")
 
                                                             frame:
                                                                 if selected_colour == "colour":
@@ -427,9 +428,10 @@ init 2:
                                                                         SetScreenVariable("current_r",selected_clothing.colour_pattern[0]),
                                                                         SetScreenVariable("current_g",selected_clothing.colour_pattern[1]),
                                                                         SetScreenVariable("current_b",selected_clothing.colour_pattern[2]),
-                                                                        SetScreenVariable("current_a",selected_clothing.colour_pattern[3])]
+                                                                        SetScreenVariable("current_a",selected_clothing.colour_pattern[3])
+                                                                        ]
                                                                     else:
-                                                                        action NullAction()
+                                                                        action ToggleScreenVariable("color_selection")
                                                                 frame:
                                                                     if selected_colour == "colour_pattern":
                                                                         background Color(rgb=(current_r,current_g,current_b,current_a))
@@ -439,87 +441,118 @@ init 2:
                                                                     xsize 50
 
                                         vbox:
+                                            spacing 5
                                             hbox:
                                                 spacing 5
-                                                textbutton "Color Selection":
-                                                    style "textbutton_no_padding_highlight"
-                                                    text_style "serum_text_style"
-                                                    xfill True
+                                                frame:
+                                                    background "#aaaaaa"
+                                                    textbutton "Color Selection":
+                                                        style "textbutton_no_padding_highlight"
+                                                        text_style "serum_text_style"
+                                                        xfill True
 
-                                                    action ToggleScreenVariable("color_selection")
+                                                        action ToggleScreenVariable("color_selection")
                                             hbox:
                                                 spacing 5
                                                 if color_selection:
-                                                    grid 2 2:
-                                                        xfill True
-                                                        frame:
+                                                    vbox:
+                                                        spacing 5
+                                                        grid 2 2:
+                                                            xfill True
+                                                            frame:
 
-                                                            background "#aaaaaa"
+                                                                background "#aaaaaa"
+                                                                hbox:
+                                                                    button:
+                                                                        background "#dd1f1f"
+                                                                        action ToggleScreenVariable("bar_select", 1, 0)
+
+                                                                        if bar_select == 1:
+                                                                            input default current_r length 4 changed colour_changed_r allow ".0123456789" style "serum_text_style"
+                                                                        else:
+                                                                            text "Red "+ "%.2f" % current_r style "serum_text_style" yalign 0.5
+                                                                        xsize 75
+                                                                        ysize 45
+                                                                    bar value ScreenVariableValue("current_r", 1.0) xfill True ysize 45 style style.slider unhovered [SetScreenVariable("current_r",__builtin__.round(current_r,2)), SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])]
+                                                            frame:
+
+                                                                background "#aaaaaa"
+                                                                hbox:
+                                                                    button:
+                                                                        background "#3ffc45"
+                                                                        action ToggleScreenVariable("bar_select", 2, 0)
+
+                                                                        if bar_select == 2:
+                                                                            input default current_g length 4 changed colour_changed_g allow ".0123456789" style "serum_text_style"
+                                                                        else:
+                                                                            text "Green "+ "%.2f" % current_g style "serum_text_style" yalign 0.5
+                                                                        xsize 75
+                                                                        ysize 45
+
+                                                                    bar value ScreenVariableValue("current_g", 1.0) xfill True ysize 45 style style.slider unhovered [SetScreenVariable("current_g",__builtin__.round(current_g,2)), SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])]
+                                                            frame:
+
+                                                                background "#aaaaaa"
+                                                                hbox:
+                                                                    button:
+                                                                        background "#3f87fc"
+                                                                        action ToggleScreenVariable("bar_select", 3, 0)
+                                                                        if bar_select == 3:
+                                                                            input default current_b length 4 changed colour_changed_b allow ".0123456789" style "serum_text_style"
+                                                                        else:
+                                                                            text "Blue "+ "%.2f" % current_b style "serum_text_style" yalign 0.5
+
+                                                                        xsize 75
+                                                                        ysize 45
+
+                                                                    bar value ScreenVariableValue("current_b", 1.0) xfill True ysize 45 style style.slider unhovered [
+                                                                    SetScreenVariable("current_b",__builtin__.round(current_b,2)),
+                                                                    SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])
+                                                                    ]
+
+                                                            frame:
+
+                                                                background "#aaaaaa"
+                                                                hbox:
+                                                                    button:
+                                                                        background "#111111"
+                                                                        action ToggleScreenVariable("bar_select", 4, 0)
+
+                                                                        if bar_select == 4:
+                                                                            input default current_a length 4 changed colour_changed_a allow ".0123456789" style "serum_text_style"
+                                                                        else:
+                                                                            text "Alpha "+ "%.2f" % current_a style "serum_text_style" yalign 0.5
+                                                                        xsize 75
+                                                                        ysize 45
+
+                                                                    bar value ScreenVariableValue("current_a", 1.0) xfill True ysize 45 style style.slider unhovered [SetScreenVariable("current_a",__builtin__.round(current_a,2)), SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])]
+                                                        viewport:
+                                                            xfill True
+                                                            draggable True
+                                                            mousewheel "horizontal"
+                                                            ysize 55
                                                             hbox:
-                                                                button:
-                                                                    background "#dd1f1f"
-                                                                    action ToggleScreenVariable("bar_select", 1, 0)
+                                                                spacing 5
+                                                                for count, a_colour in __builtin__.enumerate(persistent.colour_palette):
+                                                                    frame:
+                                                                        background "#aaaaaa"
+                                                                        button:
+                                                                            background Color(rgb=(a_colour[0], a_colour[1], a_colour[2]))
+                                                                            xysize (40,40)
+                                                                            sensitive True
+                                                                            xalign True
+                                                                            yalign True
+                                                                            action [
 
-                                                                    if bar_select == 1:
-                                                                        input default current_r length 4 changed colour_changed_r allow ".0123456789" style "serum_text_style"
-                                                                    else:
-                                                                        text "Red "+ "%.2f" % current_r style "serum_text_style" yalign 0.5
-                                                                    xsize 75
-                                                                    ysize 45
-                                                                bar value ScreenVariableValue("current_r", 1.0) xfill True ysize 45 style style.slider unhovered [SetScreenVariable("current_r",__builtin__.round(current_r,2)), SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])]
-                                                        frame:
-
-                                                            background "#aaaaaa"
-                                                            hbox:
-                                                                button:
-                                                                    background "#3ffc45"
-                                                                    action ToggleScreenVariable("bar_select", 2, 0)
-
-                                                                    if bar_select == 2:
-                                                                        input default current_g length 4 changed colour_changed_g allow ".0123456789" style "serum_text_style"
-                                                                    else:
-                                                                        text "Green "+ "%.2f" % current_g style "serum_text_style" yalign 0.5
-                                                                    xsize 75
-                                                                    ysize 45
-
-                                                                bar value ScreenVariableValue("current_g", 1.0) xfill True ysize 45 style style.slider unhovered [SetScreenVariable("current_g",__builtin__.round(current_g,2)), SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])]
-                                                        frame:
-
-                                                            background "#aaaaaa"
-                                                            hbox:
-                                                                button:
-                                                                    background "#3f87fc"
-                                                                    action ToggleScreenVariable("bar_select", 3, 0)
-                                                                    if bar_select == 3:
-                                                                        input default current_b length 4 changed colour_changed_b allow ".0123456789" style "serum_text_style"
-                                                                    else:
-                                                                        text "Blue "+ "%.2f" % current_b style "serum_text_style" yalign 0.5
-
-                                                                    xsize 75
-                                                                    ysize 45
-
-                                                                bar value ScreenVariableValue("current_b", 1.0) xfill True ysize 45 style style.slider unhovered [
-                                                                SetScreenVariable("current_b",__builtin__.round(current_b,2)),
-                                                                SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])
-                                                                ]
-
-                                                        frame:
-
-                                                            background "#aaaaaa"
-                                                            hbox:
-                                                                button:
-                                                                    background "#111111"
-                                                                    action ToggleScreenVariable("bar_select", 4, 0)
-
-                                                                    if bar_select == 4:
-                                                                        input default current_a length 4 changed colour_changed_a allow ".0123456789" style "serum_text_style"
-                                                                    else:
-                                                                        text "Alpha "+ "%.2f" % current_a style "serum_text_style" yalign 0.5
-                                                                    xsize 75
-                                                                    ysize 45
-
-                                                                bar value ScreenVariableValue("current_a", 1.0) xfill True ysize 45 style style.slider unhovered [SetScreenVariable("current_a",__builtin__.round(current_a,2)), SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a])]
-
+                                                                            SetScreenVariable("current_r", a_colour[0]),
+                                                                            SetScreenVariable("current_g", a_colour[1]),
+                                                                            SetScreenVariable("current_b", a_colour[2]),
+                                                                            SetScreenVariable("current_a", a_colour[3]),
+                                                                            SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
+                                                                            ]
+                                                                            alternate [
+                                                                            Function(update_colour_palette, count, current_r, current_g, current_b, current_a)
+                                                                            ]
                                         vbox:
                                             spacing 5
                                             hbox:
@@ -592,26 +625,7 @@ init 2:
                                                                     ]
 
 
-                                        hbox:
-                                            spacing 5
-                                            for count, a_colour in __builtin__.enumerate(persistent.colour_palette):
-                                                frame:
-                                                    background "#aaaaaa"
-                                                    button:
-                                                        background Color(rgb=(a_colour[0], a_colour[1], a_colour[2]))
-                                                        xysize (40,40)
-                                                        sensitive True
-                                                        action [
 
-                                                        SetScreenVariable("current_r", a_colour[0]),
-                                                        SetScreenVariable("current_g", a_colour[1]),
-                                                        SetScreenVariable("current_b", a_colour[2]),
-                                                        SetScreenVariable("current_a", a_colour[3]),
-                                                        SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
-                                                        ]
-                                                        alternate [
-                                                        Function(update_colour_palette, count, current_r, current_g, current_b, current_a)
-                                                        ]
 
 
 
@@ -784,7 +798,7 @@ init 2:
                                                             SetScreenVariable("current_a",cloth.colour[3]),
 
 
-                                                            Show("mannequin", None, demo_outfit) # Make sure it is showing the correct outfit during changes, demo_outfit is a copy of starting_outfit
+                                                            Show("mannequin", None, demo_outfit, mannequin) # Make sure it is showing the correct outfit during changes, demo_outfit is a copy of starting_outfit
 
                                                             ]
                                                             alternate [
@@ -873,12 +887,34 @@ init 2:
 
                                     frame:
                                         background "#888888"
-                                        xsize 250
-                                        textbutton "Import Design" action ToggleVariable("import_selection") style "textbutton_no_padding_highlight" text_style "serum_text_style" xfill True xalign 0.5
+                                        xfill True
+                                        vbox:
+                                            textbutton "Import Design":
+                                                style "textbutton_no_padding_highlight"
+                                                text_style "serum_text_style"
+                                                xfill True
+                                                xalign 0.5
+
+                                                action [
+                                                ToggleScreenVariable("import_selection"),
+                                                If(mannequin_selection, SetScreenVariable("mannequin_selection", False))
+                                                ]
+
+                                            textbutton "Mannequin Selection":
+                                                style "textbutton_no_padding_highlight"
+                                                text_style "serum_text_style"
+                                                xfill True
+                                                xalign 0.5
+
+                                                action [
+                                                ToggleScreenVariable("mannequin_selection"),
+                                                If(import_selection, SetScreenVariable("import_selection", False))
+                                                ]
+
                                     if import_selection:
                                         frame:
                                             background "#888888"
-                                            xsize 250
+                                            xfill True
                                             viewport:
                                                 scrollbars "vertical"
                                                 mousewheel True
@@ -897,6 +933,36 @@ init 2:
                                                             alternate [ #Right clicking selects the path that outfits should be exported to
                                                             SetVariable("selected_xml", n)
                                                             ]
+
+                                    if mannequin_selection:
+                                        frame:
+                                            background "#888888"
+                                            xfill True
+                                            viewport:
+                                                scrollbars "vertical"
+                                                mousewheel True
+                                                draggable True
+                                                vbox:
+                                                    textbutton "Default Mannequin":
+                                                        style "textbutton_no_padding_highlight"
+                                                        text_style "serum_text_style"
+                                                        xfill True
+                                                        xalign 0.5
+
+                                                        action [
+                                                        SetScreenVariable("mannequin", "mannequin")
+                                                        ]
+                                                    for room in list_of_places:
+                                                        for person in room.people:
+                                                            textbutton person.name:
+                                                                style "textbutton_no_padding_highlight"
+                                                                text_style "serum_text_style"
+                                                                xfill True
+                                                                xalign 0.5
+
+                                                                action [
+                                                                SetScreenVariable("mannequin", person)
+                                                                ]
 
 
 
