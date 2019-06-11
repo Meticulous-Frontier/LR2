@@ -53,6 +53,9 @@ init -1 python:
     Action.is_action_enabled = is_action_enabled
     Action.is_disabled_slug_shown = is_disabled_slug_shown
 
+    # Initialize the randomizer
+    renpy.random.seed()
+
     # BUGFIX MAIN CODE: The action functions are called wrong and the count has wrong indention level, so only 1 role gets checked.
     def valid_role_actions_enhanced(self):
         count = 0
