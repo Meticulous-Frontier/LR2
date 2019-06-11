@@ -119,9 +119,11 @@ init 2 python:
                 remove_list.append(action_mod)
             elif action_mod.is_crisis:
                 if hasattr(action_mod, "is_morning_crisis") and action_mod.is_morning_crisis:
-                    morning_crisis_list.append([action_mod, action_mod.crisis_weight])
+                    if not action_mod in [c[0] for c in morning_crisis_list]:
+                        morning_crisis_list.append([action_mod, action_mod.crisis_weight])
                 else:
-                    crisis_list.append([action_mod, action_mod.crisis_weight])
+                    if not action_mod in [c[0] for c in crisis_list]:
+                        crisis_list.append([action_mod, action_mod.crisis_weight])
 
         # remove not working stuff
         for action_mod in remove_list:
