@@ -5,6 +5,13 @@ init -2 style serum_text_style: # General text style used in the serum screens.
     outlines [(2,"#222222",0,0)]
     xalign 0.5
 
+init -2 style serum_background_style: # General text style used in the serum screens.
+    padding [5,5]
+    margin [5,5]
+    background "#999999"
+    insensitive_background "#222222"
+
+
 init -2 style serum_textbutton_style_positive: # Used for positive trait / serum slugs
     margin [2,2]
     background "#007000"

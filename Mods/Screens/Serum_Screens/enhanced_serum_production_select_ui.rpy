@@ -106,7 +106,7 @@ init 2:
                                             xsize 500
 
                                             textbutton "Production Weight: ":
-                                                style "textbutton_style"
+                                                style "serum_background_style"
                                                 text_style "serum_text_style"
 
                                                 action NullAction()
@@ -126,7 +126,7 @@ init 2:
 
                                                 textbutton str(mc.business.serum_production_array[count][1]) + "%":
 
-                                                    style "textbutton_style"
+                                                    style "serum_background_style"
                                                     text_style "serum_text_style"
 
                                                     action NullAction()
@@ -152,7 +152,7 @@ init 2:
                                                     tooltip "Work done by production employees will be split between active lines based on production weight."
 
                                                 textbutton "0%":
-                                                    style "textbutton_style"
+                                                    style "serum_background_style"
                                                     text_style "serum_text_style"
                                                     action NullAction()
 
@@ -168,7 +168,7 @@ init 2:
                                             ysize 40
                                             xsize 500
                                             textbutton "Auto-sell Threshold: ":
-                                                style "textbutton_style"
+                                                style "serum_background_style"
                                                 text_style "serum_text_style"
 
                                                 action NullAction()
@@ -187,13 +187,13 @@ init 2:
 
                                                 if mc.business.serum_production_array[count][3] < 0:
                                                     textbutton "None":
-                                                        style "textbutton_style"
+                                                        style "serum_background_style"
                                                         text_style "serum_text_style"
                                                         action NullAction()
                                                 else:
                                                     button:
                                                         id "serum_production_autosell"
-                                                        style "textbutton_style"
+                                                        style "serum_background_style"
                                                         action NullAction()
                                                         hovered If(array_to_change is not count, SetVariable("array_to_change", count))
                                                         unhovered Function(renpy.restart_interaction) #TODO: Tweak this so it is less annoying  and fix any associated errors
@@ -230,7 +230,7 @@ init 2:
 
                                                 textbutton "None":
 
-                                                    style "textbutton_style"
+                                                    style "serum_background_style"
                                                     text_style "serum_text_style"
 
                                                     action NullAction()
@@ -249,7 +249,7 @@ init 2:
                 frame:
                     background "#888888"
                     xsize 300
-                    ysize 450
+                    ysize 650
                     vbox:
                         xalign 0.5
                         textbutton "Choose Production for Line [line_selected]":
