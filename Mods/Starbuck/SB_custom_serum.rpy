@@ -209,24 +209,26 @@ init -1 python:
         if the_person.sex_skills["Oral"] >= 5:
             if SB_get_cum_score(the_person) > 8:
                 if the_person.sluttiness >= 90:
-                    if SB_get_fetish_count(the_person) < store.max_fetishes_per_person:
-                        # renpy.say("", "Evaluate Cum Fetish (In Use: " + str(FETISH_CUM_EVENT_INUSE) + ")")
-                        if the_person == lily and not (SB_check_fetish(lily, cum_external_role) and SB_check_fetish(the_person, cum_internal_role)):
-                            if not SB_fetish_lily_cum in mandatory_morning_crises_list:
-                                mandatory_morning_crises_list.append(SB_fetish_lily_cum)
-                        elif FETISH_CUM_EVENT_INUSE:
-                            return
-                        elif the_person == mom and not (SB_check_fetish(mom, cum_external_role) and SB_check_fetish(mom, cum_internal_role)):
-                            mc.business.mandatory_crises_list.append(SB_fetish_mom_cum)
-                            FETISH_CUM_EVENT_INUSE = True
-                        elif not (SB_check_fetish(the_person, cum_external_role) and SB_check_fetish(the_person, cum_internal_role)):
-                            # renpy.say("", "Trigger cum fetish " + the_person.name)
-                            if SB_fetish_cum_crisis not in mc.business.mandatory_crises_list:
-                                # renpy.say("", "Add trigger to mandatory crisis list " + the_person.name)
-                                SB_fetish_cum_crisis.args = [the_person]
-                                mc.business.mandatory_crises_list.append(SB_fetish_cum_crisis)
+                    # only allow one cum fetish either internal or external
+                    if not (SB_check_fetish(the_person, cum_external_role) or SB_check_fetish(the_person, cum_internal_role)):
+                        if SB_get_fetish_count(the_person) < store.max_fetishes_per_person:
+                            # renpy.say("", "Evaluate Cum Fetish (In Use: " + str(FETISH_CUM_EVENT_INUSE) + ")")
+                            if the_person == lily:
+                                if not SB_fetish_lily_cum in mandatory_morning_crises_list:
+                                    mandatory_morning_crises_list.append(SB_fetish_lily_cum)
+                            elif FETISH_CUM_EVENT_INUSE:
+                                return
+                            elif the_person == mom:
+                                mc.business.mandatory_crises_list.append(SB_fetish_mom_cum)
                                 FETISH_CUM_EVENT_INUSE = True
-                                SB_SET_RANDOM_EVENT_CHANCE(0)
+                            else:
+                                # renpy.say("", "Trigger cum fetish " + the_person.name)
+                                if SB_fetish_cum_crisis not in mc.business.mandatory_crises_list:
+                                    # renpy.say("", "Add trigger to mandatory crisis list " + the_person.name)
+                                    SB_fetish_cum_crisis.args = [the_person]
+                                    mc.business.mandatory_crises_list.append(SB_fetish_cum_crisis)
+                                    FETISH_CUM_EVENT_INUSE = True
+                                    SB_SET_RANDOM_EVENT_CHANCE(0)
 
         ###DEBUGSBEND
 
