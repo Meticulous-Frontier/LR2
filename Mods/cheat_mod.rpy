@@ -1,3 +1,12 @@
+# I wanted to give it a go at making a mostly modular cheat menu that is easy to configure and also extends itself as options more options e.g faces, personalitites are made available
+# I think I have a fairly good idea of how to bypass the quirks regarding lack of lists in certain aspects of the game e.g stats, but it is not quite there yet.
+
+# Adding and removing basic variables works the way I want. Can just throw in a new variable into the list and it just works, which is fine, but for things like skin and body_images (where you need two different inputs to get 1 result)
+# it becomes a bit more difficult coming up with good solutions
+
+# Worst case scenario for me right now would be that it's just even easier to keep it up to date at regular intervals
+# Going to see if I can add a separate screen for a "crisis master" as in the previous cheat screen, but only if I find a way to make it somewhat build itself on its own
+
 init 2 python:
     def edit_name_func(new_name):
 
@@ -12,25 +21,17 @@ init 2 python:
     def cheat_appearance():
         cs = renpy.current_screen()
         editing_target = cs.scope["editing_target"]
-
-
-        # if editing_target.skin == "white":
-        #     editing_target.body_images = white_skin
-        # elif editing_target.skin == "tan":
-        #     editing_target.body_images = tan_skin
-        # elif editing_target.skin == "black":
-        #     editing_target.body_images = black_skin
         editing_target.expression_images = Expression("default", editing_target.skin, editing_target.face_style)
         editing_target.draw_person()
         return
 
 init python:
-    config.overlay_screens = ["keybind"]
+    config.overlay_screens = ["keybind1"]
     config.console = True # Enables the console, can be set to False.
 
-screen keybind():
-    key "z" action ToggleScreen("cheat_menu")
-    key "Z" action ToggleScreen("cheat_menu")
+screen keybind1():
+    key "x" action ToggleScreen("cheat_menu")
+    key "X" action ToggleScreen("cheat_menu")
 
 
 screen cheat_menu():
@@ -47,6 +48,7 @@ screen cheat_menu():
     default face_options = True
     default body_options = True
     default skin_options = True
+    default breast_options = True
 
     default personality_options = True
     default appearance_options = True
@@ -99,7 +101,7 @@ screen cheat_menu():
         "Vaginal": ["sex_skills", "Vaginal", 1],
         "Anal": ["sex_skills", "Anal", 1]
         }
-    default available_naming = {
+    default available_naming = { # Consider making it update the respective lists custom titles when it becomes possible
         "Title": ["title"],
         "Player's Title": ["mc_title"],
         "Possesive Title": ["possessive_title"],
@@ -112,12 +114,14 @@ screen cheat_menu():
         $ for x in list_of_personalities: available_personalities[x.personality_type_prefix] = x
 
     default available_faces = [x for x in list_of_faces]
+    default available_body_types = [x for x in list_of_body_types]
+    default available_breast_sizes = [x[0] for x in list_of_tits]
 
     default list_of_bodies = [white_skin, tan_skin, black_skin] #Assemble the cloth items into a list. Revisit this later if a default list is created
-    default available_skin = {
-        "White": ["white", list_of_bodies[0]],
-        "Tan": ["tan", list_of_bodies[1]],
-        "Black": ["black", list_of_bodies[2]]
+    default available_skin = { #
+        "White": ["skin", "body_images", "white", list_of_bodies[0]],
+        "Tan": ["skin", "body_images",  "tan", list_of_bodies[1]],
+        "Black": ["skin", "body_images",  "black", list_of_bodies[2]]
         }
 
     default name_type = None
@@ -228,7 +232,7 @@ screen cheat_menu():
                 grid 5 1:
                     xfill True
                     vbox:
-                        textbutton "Name Options for [editing_target.name]":
+                        textbutton "Name Options":
                             style "textbutton_no_padding_highlight"
                             text_style "serum_text_style"
                             xfill True
@@ -386,17 +390,19 @@ screen cheat_menu():
                 xalign 0.5
                 xysize (1100, 200)
                 hbox:
-                    grid 3 1:
+                    grid 5 1:
                         xfill True
                         yfill True
                         vbox:
-                            textbutton "Personality":
-                                style "textbutton_no_padding_highlight"
-                                text_style "serum_text_style"
-                                xfill True
+                            if type(editing_target) is not Business and type(editing_target) is not MainCharacter:
+                                textbutton "Personality":
+                                    style "textbutton_no_padding_highlight"
+                                    text_style "serum_text_style"
+                                    xfill True
 
-                                action ToggleScreenVariable("personality_options")
-
+                                    action ToggleScreenVariable("personality_options")
+                            else:
+                                pass
                             if personality_options:
                                 viewport:
                                     mousewheel True
@@ -404,7 +410,7 @@ screen cheat_menu():
                                     vbox:
                                         for x in available_personalities:
                                             if hasattr(editing_target, "personality"):
-                                                textbutton "Type" + ": " + str(x):
+                                                textbutton str(x):
                                                     xfill True
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "serum_text_style"
@@ -421,13 +427,25 @@ screen cheat_menu():
                                                     alternate [
                                                         Function(setattr, editing_target, "personality", available_personalities[x])
                                                     ]
-                        vbox:
-                            textbutton "Face Type":
-                                style "textbutton_no_padding_highlight"
-                                text_style "serum_text_style"
-                                xfill True
 
-                                action ToggleScreenVariable("face_options")
+
+
+                        vbox:
+                            if type(editing_target) is not Business and type(editing_target) is not MainCharacter:
+                                hbox:
+                                    textbutton "Face Type":
+                                        style "textbutton_no_padding_highlight"
+                                        text_style "serum_text_style"
+
+                                        action ToggleScreenVariable("face_options")
+
+                                    textbutton "Hair":
+                                        style "textbutton_no_padding_highlight"
+                                        text_style "serum_text_style"
+                                        xfill True
+                                        action ToggleScreen("cheat_hair_dresser", None, editing_target, editing_target.hair_style, editing_target.hair_colour)
+                            else:
+                                pass
 
                             if face_options:
                                 viewport:
@@ -436,7 +454,7 @@ screen cheat_menu():
                                     vbox:
                                         for x in available_faces:
                                             if hasattr(editing_target, "face_style"):
-                                                textbutton "Type" + ": " + str(x):
+                                                textbutton str(x):
                                                     xfill True
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "serum_text_style"
@@ -454,13 +472,19 @@ screen cheat_menu():
                                                         Function(setattr, editing_target, "face_style", x),
                                                         Function(cheat_appearance)
                                                     ]
-                        vbox:
-                            textbutton "Skin Type":
-                                style "textbutton_no_padding_highlight"
-                                text_style "serum_text_style"
-                                xfill True
 
-                                action ToggleScreenVariable("skin_options")
+
+
+                        vbox:
+                            if type(editing_target) is not Business and type(editing_target) is not MainCharacter:
+                                textbutton "Skin Type":
+                                    style "textbutton_no_padding_highlight"
+                                    text_style "serum_text_style"
+                                    xfill True
+
+                                    action ToggleScreenVariable("skin_options")
+                            else:
+                                pass
 
                             if skin_options:
                                 viewport:
@@ -468,59 +492,438 @@ screen cheat_menu():
                                     draggable True
                                     vbox:
                                         for x in available_skin:
-                                            if hasattr(editing_target, "skin"):
-                                                textbutton x + ": " + str(available_skin[x][0]):
+                                            if hasattr(editing_target, available_skin[x][0] and available_skin[x][1]):
+                                                textbutton x:
                                                     xfill True
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "serum_text_style"
 
-                                                    if editing_target.skin == available_skin[x][0]:
+                                                    if editing_target.skin == available_skin[x][2]:
                                                         background "#4f7ad6"
                                                         hover_background "#4f7ad6"
 
                                                     action [
-                                                        Function(setattr, editing_target, "skin", available_skin[x][0]),
-                                                        Function(setattr, editing_target, "body_images", available_skin[x][1]),
+                                                        Function(setattr, editing_target, available_skin[x][0], available_skin[x][2]),
+                                                        Function(setattr, editing_target, available_skin[x][1], available_skin[x][3]),
                                                         Function(cheat_appearance)
                                                     ]
 
                                                     alternate [
-                                                        Function(setattr, editing_target, "skin", available_skin[x][0]),
-                                                        Function(setattr, editing_target, "body_images", available_skin[x][1]),
+                                                        Function(setattr, editing_target, available_skin[x][0], available_skin[x][2]),
+                                                        Function(setattr, editing_target, available_skin[x][1], available_skin[x][3]),
                                                         Function(cheat_appearance)
                                                     ]
-                        # vbox:
-                        #     textbutton "Body Type":
-                        #         style "textbutton_no_padding_highlight"
-                        #         text_style "serum_text_style"
-                        #         xfill True
-                        #
-                        #         action ToggleScreenVariable("body_options")
-                        #
-                        #     if body_options:
-                        #         viewport:
-                        #             mousewheel True
-                        #             draggable True
-                        #             vbox:
-                        #                 for x in list_of_body_types:
-                        #                     if hasattr(editing_target, "body_type"):
-                        #                         textbutton x + ": " + str(available_skin[x][0]):
-                        #                             xfill True
-                        #                             style "textbutton_no_padding_highlight"
-                        #                             text_style "serum_text_style"
-                        #
-                        #                             if editing_target.skin == available_skin[x][0]:
-                        #                                 background "#4f7ad6"
-                        #                                 hover_background "#4f7ad6"
-                        #
-                        #                             action [
-                        #                                 Function(setattr, editing_target, "skin", available_skin[x][0]),
-                        #                                 Function(setattr, editing_target, "body_images", available_skin[x][1]),
-                        #                                 Function(cheat_appearance)
-                        #                             ]
-                        #
-                        #                             alternate [
-                        #                                 Function(setattr, editing_target, "skin", available_skin[x][0]),
-                        #                                 Function(setattr, editing_target, "body_images", available_skin[x][1]),
-                        #                                 Function(cheat_appearance)
-                        #                             ]
+
+
+
+                        vbox:
+                            if type(editing_target) is not Business and type(editing_target) is not MainCharacter: #These options will never be relevant to a Business Object, but might want to revisit later once the grand scope of the game is settled down.
+                                textbutton "Body Type":
+                                    style "textbutton_no_padding_highlight"
+                                    text_style "serum_text_style"
+                                    xfill True
+
+                                    action ToggleScreenVariable("body_options")
+                            else:
+                                pass
+
+                            if body_options:
+                                viewport:
+                                    mousewheel True
+                                    draggable True
+                                    vbox:
+                                        for x in available_body_types:
+                                            if hasattr(editing_target, "body_type"):
+                                                textbutton x:
+                                                    xfill True
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "serum_text_style"
+
+                                                    if editing_target.body_type == x: # TODO: Take a look at this after you have slept some. Why isn't this working?
+                                                       background "4f7ad6"
+                                                       hover_background "4f7ad6"
+
+                                                    action [
+                                                       Function(setattr, editing_target, "body_type", x),
+                                                       Function(cheat_appearance)
+                                                    ]
+
+                                                    alternate [
+                                                       Function(setattr, editing_target, "body_type", x),
+                                                       Function(cheat_appearance)
+                                                    ]
+
+
+
+                        vbox:
+                            if type(editing_target) is not Business and type(editing_target) is not MainCharacter:
+                                textbutton "Breast Size":
+                                    style "textbutton_no_padding_highlight"
+                                    text_style "serum_text_style"
+                                    xfill True
+
+                                    action ToggleScreenVariable("breast_options")
+                            else:
+                                pass
+
+                            if breast_options:
+                                viewport:
+                                    mousewheel True
+                                    draggable True
+                                    vbox:
+                                        for x in available_breast_sizes:
+                                            if hasattr(editing_target, "tits"):
+                                                textbutton str(x):
+                                                    xfill True
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "serum_text_style"
+
+                                                    if editing_target.tits == x:
+                                                        background "#4f7ad6"
+                                                        hover_background "#4f7ad6"
+
+                                                    action [
+                                                        Function(setattr, editing_target, "tits", x),
+                                                        Function(cheat_appearance)
+                                                    ]
+
+                                                    alternate [
+                                                        Function(setattr, editing_target, "tits", x),
+                                                        Function(cheat_appearance)
+                                                    ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+screen cheat_hair_dresser(person, old_hair_style, old_hair_colour): ##Pass the person and the variables holding the current hair style
+    modal True
+    default catagory_selected = "Hair Style"
+
+    default hair_style_colour_palette = [
+        ["blond", [0.84,0.75,0.47,1]],
+        ["brown", [0.73,0.43,0.24,1]],
+        ["black", [0.1,0.09,0.08,1]],
+        ["red", [0.3,0.05,0.05,1]],
+        ["hot pink", [1,0.5,0.8,1]],
+        ["sky blue", [0.4,0.5,0.9,1]],
+        ["alt blond", [0.882, 0.733, 0.580,1]],
+        ["light grey", [0.866, 0.835, 0.862,1]],
+        ["ash brown", [0.590, 0.473, 0.379,1]],
+        ["knight red", [0.745, 0.117, 0.235,1]],
+        ["platinum blonde" , [0.789, 0.746, 0.691,1]],
+        ["golden blonde" , [0.895, 0.781, 0.656,1]],
+        ["turquoise" , [0.435, 0.807, 0.788,1]],
+        ["lime green" , [0.647, 0.854, 0.564,1]],
+        ["strawberry blonde" , [0.644, 0.418, 0.273,1]],
+        ["light auburn" , [0.566, 0.332, 0.238,1]],
+        ["pulp" , [0.643, 0.439, 0.541,1]],
+        ["saturated" , [0.905, 0.898, 0.513,1]],
+        ["emerald" , [0.098, 0.721, 0.541,1]],
+        ["light brown" , [0.652, 0.520, 0.414,1]]
+        ]
+
+    default valid_catagories = ["Hair Style"] #Holds the valid list of catagories strings to be shown at the top.
+
+    $ catagories_mapping = {
+        "Hair Style": [hair_styles]
+    }
+
+    default bar_select = 0 # 0 is nothing selected, 1 is red, 2 is green, 3 is blue, and 4 is alpha
+
+    default selected_colour = "colour" #If secondary we are alterning the patern colour. When changed it updates the colour of the clothing item. Current values are "colour" and "colour_pattern"
+    default current_r = person.hair_style.colour[0]
+    default current_g = person.hair_style.colour[1]
+    default current_b = person.hair_style.colour[2]
+    default current_a = person.hair_style.colour[3]
+
+    default selected_hair_colour = person.hair_colour
+    default selected_hair_style = person.hair_style
+
+    hbox: #The main divider between the new item adder and the current outfit view.
+        xpos 15
+        yalign 0.5
+        yanchor 0.5
+        spacing 15
+        frame:
+            background "#aaaaaa"
+            padding (20,20)
+            xysize (880, 1015)
+            hbox:
+                spacing 15
+                vbox: #Catagories select on far left
+                    spacing 15
+                    for catagory in valid_catagories:
+                        textbutton catagory:
+                            style "textbutton_style"
+                            text_style "textbutton_text_style"
+                            if catagory == catagory_selected:
+                                background "#4f7ad6"
+                                hover_background "#4f7ad6"
+                            else:
+                                background "#1a45a1"
+                                hover_background "#3a65c1"
+                            text_align(0.5,0.5)
+                            text_anchor(0.5,0.5)
+                            xysize (220, 60)
+                            action [SetScreenVariable("catagory_selected",catagory),
+                                SetScreenVariable("selected_colour", "colour")]
+
+                vbox:
+                    spacing 15
+                    viewport:
+                        ysize 480
+                        xminimum 605
+                        scrollbars "vertical"
+                        mousewheel True
+                        frame:
+                            xsize 620
+                            yminimum 480
+                            background "#888888"
+                            vbox:
+                                if catagory_selected in catagories_mapping:
+                                    for hair_style_item in catagories_mapping[catagory_selected][0]:
+                                        textbutton hair_style_item.name:
+                                            style "textbutton_style"
+                                            text_style "textbutton_text_style"
+                                            background "#1a45a1"
+                                            hover_background "#3a65c1"
+                                            xfill True
+                                            sensitive True
+                                            action [
+                                                SetScreenVariable("selected_colour", "colour"),
+                                                SetScreenVariable("selected_hair_style", hair_style_item),
+                                                SetField(hair_style_item, "colour", [current_r, current_g, current_b, current_a]),
+                                                SetField(person, "hair_style", hair_style_item),
+                                                Function(person.draw_person)]
+
+                    frame:
+                        #THIS IS WHERE SELECTED ITEM OPTIONS ARE SHOWN
+                        xysize (605, 480)
+                        background "#888888"
+                        vbox:
+                            spacing 10
+                            if selected_hair_style is not None:
+                                text selected_hair_style.name style "textbutton_text_style"
+
+                                hbox:
+                                    spacing -5 #We will manually handle spacing so we can have our colour predictor frames
+                                    textbutton "Primary Colour":
+                                        style "textbutton_style"
+                                        text_style "textbutton_text_style"
+                                        if selected_colour == "colour":
+                                            background "#4f7ad6"
+                                            hover_background "#4f7ad6"
+                                        else:
+                                            background "#1a45a1"
+                                            hover_background "#3a65c1"
+                                        sensitive True
+                                        action NullAction()
+
+                                    frame:
+                                        background Color(rgb=(current_r,current_g,current_b,current_a))
+                                        xysize (45,45)
+                                        yanchor 0.5
+                                        yalign 0.5
+
+                                    textbutton "Dye Hair":
+                                        style "textbutton_style"
+                                        text_style "textbutton_text_style"
+                                        background "#1a45a1"
+                                        hover_background "#3a65c1"
+                                        sensitive True
+                                        xoffset 20
+                                        action [
+                                            SetField(selected_hair_style, "colour", [current_r,current_g,current_b,current_a]),
+                                            SetField(person, "hair_colour", selected_hair_colour),
+                                            SetField(person, "hair_style", selected_hair_style),
+                                            Function(person.draw_person)
+                                        ]
+
+                                hbox:
+                                    spacing 10
+                                    vbox:
+                                        text "Red" style "textbutton_text_style"
+                                        hbox:
+                                            if bar_select == 1:
+                                                frame:
+                                                    input default current_r length 4 changed colour_changed_r allow ".0123456789" style "menu_text_style"
+                                                    xsize 70
+                                                    ysize 50
+                                            else:
+                                                button:
+                                                    background "#888888"
+                                                    action SetScreenVariable("bar_select",1)
+                                                    text "%.2f" % current_r style "menu_text_style"
+                                                    xsize 70
+                                                    ysize 50
+
+                                            bar value ScreenVariableValue("current_r", 1.0)  xsize 120 ysize 45 style style.slider #unhovered #SetScreenVariable("current_r",__builtin__.round(current_r,2))
+                                    vbox:
+                                        text "Green" style "textbutton_text_style"
+                                        hbox:
+                                            if bar_select == 2:
+                                                frame:
+                                                    input default current_g length 4 changed colour_changed_g allow ".0123456789" style "menu_text_style"
+                                                    xsize 70
+                                                    ysize 50
+                                            else:
+                                                button:
+                                                    background "#888888"
+                                                    action SetScreenVariable("bar_select",2)
+                                                    text "%.2f" % current_g style "menu_text_style"
+                                                    xsize 70
+                                                    ysize 50
+
+                                            bar value ScreenVariableValue("current_g", 1.0) xsize 120 ysize 45 style style.slider #unhovered SetScreenVariable("current_g",__builtin__.round(current_g,2))
+                                    vbox:
+                                        text "Blue" style "textbutton_text_style"
+                                        hbox:
+                                            if bar_select == 3:
+                                                frame:
+                                                    input default current_b length 4 changed colour_changed_b allow ".0123456789" style "menu_text_style"
+                                                    xsize 70
+                                                    ysize 50
+                                            else:
+                                                button:
+                                                    background "#888888"
+                                                    action SetScreenVariable("bar_select",3)
+                                                    text "%.2f" % current_b style "menu_text_style"
+                                                    xsize 70
+                                                    ysize 50
+
+                                            bar value ScreenVariableValue("current_b", 1.0) xsize 120 ysize 45 style style.slider #unhovered SetScreenVariable("current_b",__builtin__.round(current_b,2))
+
+                                text "Transparency: " style "menu_text_style"
+                                hbox:
+                                    spacing 20
+                                    button:
+                                        if current_a == 1.0:
+                                            background "#4f7ad6"
+                                        else:
+                                            background "#1a45a1"
+                                        text "Normal" style "menu_text_style" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
+                                        xysize (120, 40)
+                                        action SetScreenVariable("current_a", 1.0)
+
+                                    button:
+                                        if current_a == 0.95:
+                                            background "#4f7ad6"
+                                        else:
+                                            background "#1a45a1"
+                                        text "Sheer" style "menu_text_style" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
+                                        xysize (120, 40)
+                                        action SetScreenVariable("current_a", 0.95)
+
+                                    button:
+                                        if current_a == 0.8:
+                                            background "#4f7ad6"
+                                        else:
+                                            background "#1a45a1"
+                                        text "Translucent" style "menu_text_style" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
+                                        xysize (120, 40)
+                                        action SetScreenVariable("current_a", 0.8)
+                                for block_count, hair_colour_list in __builtin__.enumerate(split_list_in_blocks(hair_style_colour_palette, 10)):
+                                    hbox:
+                                        spacing 5
+                                        xalign 0.5
+                                        xanchor 0.5
+                                        yanchor (block_count * .1)
+                                        for count, hair_colour in __builtin__.enumerate(hair_colour_list):
+                                            frame:
+                                                background "#aaaaaa"
+                                                button:
+                                                    background Color(rgb=(hair_colour[1][0], hair_colour[1][1], hair_colour[1][2]))
+                                                    xysize (40,40)
+                                                    sensitive True
+                                                    action [
+                                                        SetScreenVariable("selected_hair_colour", hair_colour[0]),
+                                                        SetScreenVariable("current_r", hair_colour[1][0]),
+                                                        SetScreenVariable("current_g", hair_colour[1][1]),
+                                                        SetScreenVariable("current_b", hair_colour[1][2]),
+                                                        SetScreenVariable("current_a", hair_colour[1][3]),
+                                                        SetField(selected_hair_style, "colour", [hair_colour[1][0], hair_colour[1][1], hair_colour[1][2], hair_colour[1][3]]),
+                                                        SetField(person, "hair_colour", hair_colour[0]),
+                                                        SetField(person, "hair_style", selected_hair_style),
+                                                        Function(person.draw_person)
+                                                    ]
+                                                    # We use a fixed pallette of hair colours
+        vbox:
+            spacing 15
+            frame:
+                xysize (440, 500)
+                background "#aaaaaa"
+                padding (20,20)
+                vbox:
+                    spacing 15
+                    text "Current Hair Style" style "textbutton_text_style"
+                    frame:
+                        xfill True
+                        yfill True
+                        background "#888888"
+                        vbox:
+                            spacing 5 #TODO: Add a viewport here too.
+                            button:
+                                background Color(rgb = (selected_hair_style.colour[0], selected_hair_style.colour[1], selected_hair_style.colour[2]))
+                                xysize (380, 40)
+                                action NullAction()
+                                xalign 0.5
+                                yalign 0.0
+                                text selected_hair_style.name xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 style "outfit_style"
+
+
+
+
+            frame:
+                background "#aaaaaa"
+                xysize (440, 500)
+                padding (20,20)
+                vbox:
+                    yalign 0.0
+                    hbox:
+                        yalign 1.0
+                        xalign 0.5
+                        xanchor 0.5
+                        spacing 50
+                        textbutton "Save Haircut" action [Hide("cheat_hair_dresser")] style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 xysize (155,80)
+                        textbutton "Abandon Design" action [SetField(person, "hair_colour", old_hair_colour), SetField(person, "hair_style", old_hair_style), Hide("cheat_hair_dresser")] style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 xysize (185,80)
