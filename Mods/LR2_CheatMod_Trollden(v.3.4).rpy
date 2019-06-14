@@ -1,5 +1,6 @@
-init python:
-    config.overlay_screens = ["keybind"]
+init 1 python:
+    if "keybind" not in config.overlay_screens:
+        config.overlay_screens.append("keybind")
     config.console = True # Enables the console, can be set to False.
 
 screen keybind(): # Change the key "" to whatever you want to open / close the cheat menu
