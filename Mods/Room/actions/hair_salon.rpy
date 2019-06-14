@@ -55,6 +55,7 @@ label salon_response(person_choice): # How does the_person respond to a company 
 
     call screen hair_creator(person, hair_style_check, hair_color_check) # This is the "store" / "salon" part of the mod. TODO: Find a different way to check for changes in hair color
     call salon_checkout() #Will return here if nothing qualifies
+    call advance_time from _call_advance_time_hair_salon
     $ renpy.scene("Active")
     return
 
