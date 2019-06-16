@@ -124,6 +124,7 @@ init 2:
                                             action [Hide("trait_tooltip"),Return(trait)] style "textbutton_style"
                                             text_style "serum_text_style_traits"
                                             hovered Show("trait_tooltip",None,trait)
+                                            unhovered Hide("trait_tooltip")
                                             xsize 320
 
                     vbox:
