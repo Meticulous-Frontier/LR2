@@ -326,7 +326,7 @@ init -1:
 
             final_image = Composite(*composite_list) # Create a composite image using all of the displayables
 
-            renpy.show(self.name,at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=self.name)
+            renpy.show(self.name,at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=(self.name + self.last_name + str(self.age)))
 
         # replace the default draw_person function of the person class
         Person.draw_person = draw_person_enhanced
