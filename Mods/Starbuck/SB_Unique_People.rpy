@@ -1501,7 +1501,7 @@ label starbuck_intro():
         mc.name "How much money would you need, say if someone were interested in investing in your shop, to get some basic stock on the shelves?"
         "[the_person.possessive_title] considers for a moment."
         the_person.char "Well, I really want the stock to be good, quality product. I'd say I could probably get everything setup for a basic shop for... say $1000?"
-        "That seems pretty reasonable. You decide to consider investing. You should talk to the_person again if you decide to invest in the shop!"
+        "That seems pretty reasonable. You decide to consider investing. You should talk to [the_person.title] again if you decide to invest in the shop!"
     elif (the_person.shop_progress_stage) == 0:
         the_person.char "Hello there sir! Welcome back to Starbuck's Sex Shop! Feel free to look around."
         "You smile at [the_person.possessive_title] and promise to take a look."
