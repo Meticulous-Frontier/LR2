@@ -449,7 +449,7 @@ init 2:
                 xanchor 0.5
                 xalign 0.5
                 textbutton "Create Design":
-                    action [Return(starting_serum), Hide("trait_tooltip"), Hide("serum_design_ui"), Hide("serum_tooltip")]
+                    action [Hide("trait_tooltip"), Hide("serum_design_ui"), Hide("serum_tooltip"), Return(starting_serum)]
                     sensitive (starting_serum.slots >= effective_traits and len(starting_serum.traits) and starting_serum.has_tag("Production")) > 0
 
                     style "textbutton_style"
@@ -459,7 +459,7 @@ init 2:
                     xsize 230
 
                 textbutton "Reject Design":
-                    action [Return("None"), Hide("trait_tooltip"), Hide("serum_design_ui"), Hide("serum_tooltip")]
+                    action [Hide("trait_tooltip"), Hide("serum_design_ui"), Hide("serum_tooltip"), Return("None")]
 
                     style "textbutton_style"
                     text_style "serum_text_style"
