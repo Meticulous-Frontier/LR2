@@ -2,7 +2,8 @@
 
 init -1 python:
     def lysergide_n2o_trait_on_apply(person, add_to_log):
-        person.special_role.append(suggestable_role)
+        if suggestable_role not in person.special_role: # Make it not duplicate itself if it is re- applied before removed
+            person.special_role.append(suggestable_role)
         if add_to_log:
             mc.log_event((person.title or person.name) + " is suggestable.", "float_text_blue")
         return
