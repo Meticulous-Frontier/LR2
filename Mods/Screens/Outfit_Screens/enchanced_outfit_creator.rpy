@@ -26,6 +26,21 @@ init -1 python:
         cs.scope["current_a"] = __builtin__.round(float(new_value),2)
         renpy.restart_interaction()
 
+    def update_bar(new_value):
+
+        cs = renpy.current_screen()
+        selected_clothing = cs.scope["selected_clothing"]
+        selected_colour = cs.scope["selected_colour"]
+        selected_clothing.selected_colour = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]
+
+        if cs.scope["mannequin"] == "mannequin":
+            renpy.show_screen(cs.scope["demo_outfit"])
+        else:
+            renpy.hide("mannequin")
+            draw_mannequin(cs.scope["mannequin"], cs.scope["demo_outfit"])
+
+        renpy.restart_interaction()
+
     def in_outfit(self, cloth_name): # Checks if the clothing item exists in the outfit by name to account for instances where copies are used.
         for cloth in self.upper_body + self.lower_body + self.feet + self.accessories:
             if cloth.name == cloth_name:
@@ -920,6 +935,8 @@ init 2:
                                                 xfill True
                                                 xalign 0.5
 
+
+
                                                 action [
                                                 ToggleScreenVariable("mannequin_selection"),
                                                 If(import_selection, SetScreenVariable("import_selection", False))
@@ -940,6 +957,10 @@ init 2:
                                                             text_style "serum_text_style"
                                                             xfill True
                                                             xalign 0.5
+
+                                                            if selected_xml == n:
+                                                                background "#4f7ad6"
+                                                                hover_background "#4f7ad6"
 
                                                             action [
                                                             Show("import_outfit_manager", None, target_wardrobe, n)
@@ -973,6 +994,10 @@ init 2:
                                                                 text_style "serum_text_style"
                                                                 xfill True
                                                                 xalign 0.5
+
+                                                                if mannequin == person:
+                                                                    background "#4f7ad6"
+                                                                    hover_background "#4f7ad6"
 
                                                                 action [
                                                                 SetScreenVariable("mannequin", person),
