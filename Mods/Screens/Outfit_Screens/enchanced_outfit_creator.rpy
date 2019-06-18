@@ -926,6 +926,10 @@ init 2:
                                                 xfill True
                                                 xalign 0.5
 
+                                                if import_selection:
+                                                    background "#4f7ad6"
+                                                    hover_background "#4f7ad6"
+
                                                 action [
                                                 ToggleScreenVariable("import_selection"),
                                                 If(mannequin_selection or mannequin_poser, [SetScreenVariable("mannequin_selection", False), SetScreenVariable("mannequin_poser", False)])
@@ -937,7 +941,9 @@ init 2:
                                                 xfill True
                                                 xalign 0.5
 
-
+                                                if mannequin_selection:
+                                                    background "#4f7ad6"
+                                                    hover_background "#4f7ad6"
 
                                                 action [
                                                 ToggleScreenVariable("mannequin_selection"),
@@ -949,7 +955,9 @@ init 2:
                                                 text_style "serum_text_style"
                                                 xfill True
                                                 xalign 0.5
-
+                                                if mannequin_poser:
+                                                    background "#4f7ad6"
+                                                    hover_background "#4f7ad6"
 
 
                                                 action [
