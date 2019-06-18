@@ -3,9 +3,11 @@ init -1:
     python:
         def serum_production_autosell(new_amount):
             if new_amount is "":
+                new_amount = 0
+            if new_amount == "-":
                 new_amount = -1
             store.mc.business.serum_production_array[array_to_change][3] = int(new_amount)
-
+            renpy.restart_interaction()
 
 init 2:
     screen serum_production_select_ui:
@@ -185,28 +187,26 @@ init 2:
                                                     text_style "serum_text_style"
                                                     tooltip "Doses of serum above the auto-sell threshold will automatically be flagged for sale and moved to the marketing department."
 
-                                                if mc.business.serum_production_array[count][3] < 0:
-                                                    textbutton "None":
-                                                        style "serum_background_style"
-                                                        text_style "serum_text_style"
-                                                        action NullAction()
-                                                else:
-                                                    button:
-                                                        id "serum_production_autosell"
-                                                        style "serum_background_style"
-                                                        action NullAction()
-                                                        hovered If(array_to_change is not count, SetVariable("array_to_change", count))
-                                                        unhovered Function(renpy.restart_interaction) #TODO: Tweak this so it is less annoying  and fix any associated errors
 
-                                                        add Input(
-                                                        size =  20,
-                                                        color = "#dddddd",
-                                                        default = str(mc.business.serum_production_array[count][3]),
-                                                        changed = serum_production_autosell, # TODO: This passes only the inputed text to the function, need the production line we have selected to also carry over
-                                                        length = 7,
-                                                        button = renpy.get_widget("serum_production_select_ui", "serum_production_autosell"),
-                                                        allow = "0123456789"
-                                                        )
+                                                frame:
+                                                    background "#aaaaaa"
+                                                    ysize 50
+                                                    hbox:
+                                                        button:
+                                                            action ToggleVariable("array_to_change", count, None)
+
+                                                            if mc.business.serum_production_array[count][3] < 0:
+                                                                if array_to_change == count:
+                                                                    input default str(mc.business.serum_production_array[count][3]) length 7 allow "0123456789" changed serum_production_autosell
+                                                                else:
+                                                                    text "None" style "serum_text_style" yalign 0.5
+
+                                                            else:
+                                                                if array_to_change == count:
+                                                                    input default str(mc.business.serum_production_array[count][3]) length 7 allow "0123456789" changed serum_production_autosell
+                                                                else:
+                                                                    text str(mc.business.serum_production_array[count][3]) style "serum_text_style" yalign 0.5
+
 
                                                 textbutton "+1":
                                                     action [
