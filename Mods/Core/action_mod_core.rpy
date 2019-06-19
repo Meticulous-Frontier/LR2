@@ -24,6 +24,9 @@
 
     # train_in_gym_action = ActionMod("Schedule Gym Session {image=gui/heart/Time_Advance.png}", gym_requirement, "select_person_for_gym", initialization = gym_initialization,  menu_tooltip = "Bring a person to the gym to train their body.")
 
+# pre define variable for saving
+define action_mod_list = None
+
 init -1 python:
     def is_action_enabled(self, extra_args = None):
         if hasattr(self, "enabled"):
@@ -110,6 +113,7 @@ init 2 python:
     def append_and_initialize_action_mods():
         # add action_mod instances to list
         if not ActionMod._instances is None:
+            # renpy.say("", "There are " + str(len(action_mod_list)) + " mods in save game.")
             for action_mod in sorted(ActionMod._instances, key = lambda x: x.priority):
                 if action_mod not in action_mod_list:
                     action_mod_list.append(action_mod)
@@ -148,6 +152,7 @@ label after_load:
     return
 
 label activate_action_mod_core(stack):
+    # initialize variable
     $ action_mod_list = []
 
     # define here using $ so it gets stored in save game
@@ -171,6 +176,7 @@ label update_action_mod_core(stack):
             unmodded = True
 
     if unmodded:
+        # initialize variable
         $ action_mod_list = []
 
     python:
