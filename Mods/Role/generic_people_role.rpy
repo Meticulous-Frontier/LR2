@@ -81,6 +81,10 @@ init 2 python:
             return True
         return False
 
+    def spend_the_night_requirement(person):
+        if time_of_day is 4 and person.love > 50 and mc.location is person.home: #Has to be night, need to have some love and be in the_person's home location
+            return True
+        return False
     # Schedule Actions
     schedule_person_action = Action("Schedule [the_person.title]", schedule_person_requirement, "schedule_menu", menu_tooltip = "Schedule where the person should be throughout the day.")
     schedule_early_morning_action = Action("Early Morning", schedule_early_morning_requirement, "schedule_early_morning", menu_tooltip = "Schedule where the person should be during the Early Morning.")
@@ -101,11 +105,23 @@ init 2 python:
     hire_person_action = Action("Employ [the_person.title]\n Costs: $300", hire_person_requirement, "hire_person", menu_tooltip = "Hire the the person to work for you in your business. Costs $300")
     # Rename Person | Opens a menu that allows you to change first and last name plus a (non- appended) custom the_person.title
     rename_person_action = Action("Rename [the_person.title]", rename_person_requirement, "rename_person", menu_tooltip = "Change the name of the person.")
+    # Spend the Night | Allows you to sleep in the home of a person you have increased the love stat.
+    spend_the_night_action = Action("Spend the night with [the_person.possessive_title]", spend_the_night_requirement, "spend_the_night", menu_tooltip = "Allows you to sleep in this location")
 
-    generic_people_role = Role("Generic", [schedule_person_action, start_follow_action, stop_follow_action, hire_person_action, rename_person_action]) # This role is meant to not display in the person_ui_hud
+    # A role added to all people in the game to enable actions through the "Special Actions Menu..."
+    generic_people_role = Role("Generic", [schedule_person_action, start_follow_action, stop_follow_action, hire_person_action, rename_person_action, spend_the_night_action]) # This role is meant to not display in the person_ui_hud
 
     # NOTE: This extension of "any person" can be toggled from the Action Mod Core menu under "Misc", listed as Generic People Actions
+
+
 # NOTE: Not sure where to place these actions yet. Basically actions that could fit on any person regardless of role.
+label spend_the_night(person): # Consider adding the sleep_action to the_person's room, but stats jump all over the place so doesn't nescessarily make sense.
+    "You go to sleep in [person.home.name]"
+    $ person.change_love(5)
+    $ person.change_happiness(5)
+    call advance_time
+    return
+
 label rename_person(person):
     "You tell [person.possessive_title] that you are giving her a new name."
     while True:
