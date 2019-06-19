@@ -159,7 +159,7 @@ label SB_working_weekend_crisis_label():
 
 
 
-                "You chat with [the_person.possessive_title]for a bit longer, but eventually she says goodbye and leaves."
+                "You chat with [the_person.possessive_title] for a bit longer, but eventually she says goodbye and leaves."
 
         #IF she is a little slutty,
     else:  #If she is REALLY slutty

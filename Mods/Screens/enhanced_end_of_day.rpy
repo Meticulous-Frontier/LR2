@@ -33,10 +33,11 @@ init 2:
 
                 vbox:
                     xsize 800
-                    if mc.business.sales_made > (mc.business.calculate_salary_cost() + mc.business.supplies_purchased):
-                        text "Profit: $" + str(mc.business.sales_made - mc.business.calculate_salary_cost() - mc.business.supplies_purchased)  style "textbutton_text_style" size 26 color "#00A000"
+                    $ profit = mc.business.sales_made + starbuck.calc_investment_return() - mc.business.calculate_salary_cost() - mc.business.supplies_purchased
+                    if profit > 0:
+                        text "Profit: $" + str(profit)  style "textbutton_text_style" size 26 color "#00A000"
                     else:
-                        text "Loss: $" + str(abs(mc.business.sales_made - mc.business.calculate_salary_cost() - mc.business.supplies_purchased))  style "textbutton_text_style" size 26 color "#A00000"
+                        text "Loss: $" + str(abs(profit))  style "textbutton_text_style" size 26 color "#A00000"
 
                     text "     " + "Sales Made: $" + str(mc.business.sales_made) style "textbutton_text_style"
                     text "     " + "Daily Salary Paid: $" + str(mc.business.calculate_salary_cost()) style "textbutton_text_style"
