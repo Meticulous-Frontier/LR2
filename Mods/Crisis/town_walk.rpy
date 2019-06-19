@@ -11,7 +11,7 @@ init 2 python:
                     return True
         return False
 
-    town_walk_crisis_action = ActionMod("Town Walk",town_walk_crisis_requirement,"town_walk_crisis_action_label", 
+    town_walk_crisis_action = ActionMod("Town Walk",town_walk_crisis_requirement,"town_walk_crisis_action_label",
         menu_tooltip = "On occasion you take an afternoon stroll through town, someone did not close their bedroom curtains.", is_crisis = True, crisis_weight = town_walk_mod_weight)
 
 label town_walk_crisis_action_label:
@@ -24,7 +24,13 @@ label town_walk_crisis_action_label:
     if the_person is None: # this could be no one
         return
 
-    "You decided to take a walk during your lunch break, you see that the window in [the_person.possessive_title]'s house is open you get closer and peek inside."
+    "You decided to take a walk during your lunch break, you see that the window in [the_person.possessive_title]'s house is open"
+    menu:
+        "Get closer and peek inside?":
+            pass
+        "Ignore it.":
+            return
+
     $ change_scene_display(bedroom)
     show screen person_info_ui(the_person)
     $ the_person.draw_person(position = "walking_away")
@@ -33,19 +39,19 @@ label town_walk_crisis_action_label:
     menu:
         "Add a dose of serum to [the_person.title]'s drink.":
             call give_serum(the_person) from _call_give_serum_town_walk_1
-            "You quickly retreat away from the window."           
+            "You quickly retreat away from the window."
         "Keep watching.":
             "You decide not to risk being seen and stay away from her sight"
     the_person.char "I shoud get dresed for lunch. Don't have much time..."
-    
+
     $ the_person.strip_outfit_to_max_sluttiness(narrator_messages = [
-        "[the_person.possessive_title] takes off her [strip_choice.name] and throws it on the bed.", 
+        "[the_person.possessive_title] takes off her [strip_choice.name] and throws it on the bed.",
         "[the_person.possessive_title] keeps going and drops her [strip_choice.name].",
-        "[the_person.possessive_title] strips off her [strip_choice.name] and tosses it to the side.", 
-        "[the_person.possessive_title] removes her [strip_choice.name] and drops it to the floor.", 
+        "[the_person.possessive_title] strips off her [strip_choice.name] and tosses it to the side.",
+        "[the_person.possessive_title] removes her [strip_choice.name] and drops it to the floor.",
         "[the_person.possessive_title] quickly slides off her [strip_choice.name] and leaves it on the ground."
         ], temp_sluttiness_boost = 20)
-   
+
     if the_person.outfit.vagina_available():
         "You see that [the_person.possessive_title] also studies her pussy."
         if the_person.age <=30:
@@ -90,7 +96,7 @@ label town_walk_crisis_action_label:
                     "She pushes 3 fingers inside, making a deep gutteral noice."
                     the_person.char "Ahh, yes. Fuck me hard and deep."
                 else:
-                    "[the_person.possessive_title] keeps rubbing and her moans grow louder."                   
+                    "[the_person.possessive_title] keeps rubbing and her moans grow louder."
             else:
                 the_person.char "Mmm, yes. Keep going..."
             $ arousal_plus = renpy.random.randint (20,35)

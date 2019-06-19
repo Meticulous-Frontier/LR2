@@ -17,6 +17,11 @@ label mom_ntr_mod_action_label:
     ## Mom having her private life
     $ the_person = mom
     "Some time late in the night, you're awoken by some noise down the hallway."
+    menu:
+        "Investigate?":
+            pass
+        "Ignore it.":
+            return
     "As it seems to go on and on, you decide to investigate."
     "You drag yourself out of bed and enter the hallway. There is some rustling in [the_person.possessive_title]'s bedroom."
     "The door seems to be not closed. You decide to take a peek."
