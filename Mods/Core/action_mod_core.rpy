@@ -132,8 +132,6 @@ init 2 python:
         for action_mod in remove_list:
             action_mod_list.remove(action_mod)
 
-        # clear instances
-        ActionMod._instances = None
         return
 
     # mod settings action
