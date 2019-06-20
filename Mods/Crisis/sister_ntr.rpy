@@ -36,13 +36,6 @@ label sister_ntr_crisis_action_label:
     "You drag yourself out of bed and enter the hallway. There is a trace of light down the door to [the_person.possessive_title]'s bedroom."
     "The door itself seems to be not closed."
 
-    menu:
-        "Take a peek":
-            pass
-        "Go back to bed":
-            "You decide that it is wrong to interfere into [the_person.possessive_title]'s private life so you go back to your room to sleep."
-            return
-
     ## Now we determine which finising scenes are available depending on traits
     $ finishes = []
     if the_person.get_opinion_score("being covered in cum") > 0 or the_person.get_opinion_score("cum facials") > 0:
