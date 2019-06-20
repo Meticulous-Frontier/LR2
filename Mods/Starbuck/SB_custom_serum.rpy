@@ -207,15 +207,15 @@ init -1 python:
                 the_person.sexy_opinions[SB_random_fetish_key] = [SB_random_opinion, True]
 
         if the_person.sex_skills["Oral"] >= 5:
-            if SB_get_cum_score(the_person) > 8:
+            if SB_get_cum_score(the_person) >= 8:
                 if the_person.sluttiness >= 90:
                     # only allow one cum fetish either internal or external
                     if not (SB_check_fetish(the_person, cum_external_role) or SB_check_fetish(the_person, cum_internal_role)):
                         if SB_get_fetish_count(the_person) < store.max_fetishes_per_person:
                             # renpy.say("", "Evaluate Cum Fetish (In Use: " + str(FETISH_CUM_EVENT_INUSE) + ")")
                             if the_person == lily:
-                                if not SB_fetish_lily_cum in mandatory_morning_crises_list:
-                                    mandatory_morning_crises_list.append(SB_fetish_lily_cum)
+                                if not SB_fetish_lily_cum in mc.business.mandatory_morning_crises_list:
+                                    mc.business.mandatory_morning_crises_list.append(SB_fetish_lily_cum)
                             elif FETISH_CUM_EVENT_INUSE:
                                 return
                             elif the_person == mom:
