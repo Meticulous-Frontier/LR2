@@ -135,6 +135,7 @@ init -1:
             removed_something = False
 
             strip_choice = get_strip_choice_upper_first(test_outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet)
+            # renpy.say("", strip_choice.name + "  (required: " + str(test_outfit.slut_requirement) +  ", sluttiness: " +  str(self.effective_sluttiness() + temp_sluttiness_boost) + ")")
             while strip_choice and self.judge_outfit(test_outfit, temp_sluttiness_boost):
                 self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
                 self.outfit = test_outfit.get_copy() #Swap our current outfit out for the test outfit.
@@ -152,6 +153,15 @@ init -1:
 
         # Monkey wrench Person class to have automatic strip function
         Person.strip_outfit_to_max_sluttiness = strip_outfit_to_max_sluttiness
+
+        # BUGFIXED: Judge Outfit function uses the_person instead of self to check effective sluttiness
+        #Judge an outfit and determine if it's too slutty or not. Can be used to judge other people's outfits to determine if she thinks they look like a slut.
+        def judge_outfit_extension(self, outfit, temp_sluttiness_boost = 0): 
+            outfit.update_slut_requirement()    # reevaluate sluttiness requirement
+            # renpy.say("", "Judge Outfit:  " + str(outfit.slut_requirement) +  "  (validation sluttiness: " +  str(self.effective_sluttiness() + temp_sluttiness_boost) + ")")
+            return outfit.slut_requirement < (self.effective_sluttiness() + temp_sluttiness_boost)
+
+        Person.judge_outfit = judge_outfit_extension
 
         ## ADD OPINION EXTENSION
         ## Adds add_opinion function to Person class

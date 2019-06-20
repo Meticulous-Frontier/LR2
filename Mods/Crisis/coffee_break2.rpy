@@ -85,7 +85,6 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
             "You watch as [loser.possessive_title] strips down."
             $ scene_manager.strip_actor_outfit_to_max_sluttiness(loser, temp_sluttiness_boost = 40)
 
-
             # TODO: Figure out how to keep the cum on the face, just calling the cum_on_face() method does not work ????
             "She gives you a wink and turns around to pickup the food."
             $ scene_manager.update_actor(loser, position = "walking_away")
@@ -113,9 +112,10 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                 $ scene_manager.update_actor(loser, position = "walking_away")
                 "While enjoying the view you decide to go back to work."
         else:
-            "You watch as [loser.possessive_title] strips down as she walks down to the lobby."
-            $ scene_manager.update_actor(loser, position = "walking_away")
+            "You watch as [loser.possessive_title] strips down."
             $ scene_manager.strip_actor_outfit_to_max_sluttiness(loser, temp_sluttiness_boost = 40)
+            "[loser.possessive_title] turns around walking down to the lobby to pick up the food."
+            $ scene_manager.update_actor(loser, position = "walking_away")
             "You decide to go back to work and let the girls sort this out."
 
     else:
@@ -123,8 +123,11 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
         winner_one.char "No I didn't. And you know the rules!"
         $ scene_manager.update_actor(loser, emotion = "angry")
         loser.char "Fine, I'll do it but only my top and if I get it a third time in a row I swear..."
-        $ scene_manager.strip_actor_outfit_to_max_sluttiness(loser, exclude_lower = True, temp_sluttiness_boost = 20)
-        "[loser.possessive_title] sheepishly walks down the lobby trying to cover her breasts."
+        $ scene_manager.strip_actor_outfit_to_max_sluttiness(loser, exclude_lower = True, temp_sluttiness_boost = 30)
+        if loser.outfit.tits_visible():
+            "[loser.possessive_title] sheepishly walks down the lobby trying to cover her breasts."
+        else:
+            "[loser.possessive_title] sheepishly walks down the lobby."
         $ scene_manager.update_actor(loser, position = "walking_away")
         "The other girls stand back and watch, giggling amongst themselves."
         $ loser.change_slut_temp(5)
