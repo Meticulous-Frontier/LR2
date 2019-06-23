@@ -88,20 +88,26 @@ init -1 python:
             if outfit_choice > chance_to_use_full or len(self.underwear_sets + self.overwear_sets) == 0:
                 full_outfit = None
                 count = 0
-                while not full_outfit and count < 3:    # Try to find a valid uniform by stretching the sluttiness range, returns none when not succesfull
-                    full_outfit = self.get_random_appropriate_outfit(target_sluttiness, minimum_sluttiness, exclude_skirts, exclude_pants)
-                    target_sluttiness += 5
-                    minimum_sluttiness -= 5
+                while not full_outfit and count < 4:    # Try to find a valid uniform by stretching the sluttiness range, returns none when not succesfull               
+                    full_outfit = self.get_random_appropriate_outfit(target_sluttiness + (count * 5), minimum_sluttiness - (count * 10), exclude_skirts, exclude_pants)
                     count += 1
+
+                if not full_outfit: # fallback if we cannot find anything for our sluttiness or preferences
+                    full_outfit = self.pick_random_outfit()
 
                 return full_outfit
                 
         elif len(self.underwear_sets + self.overwear_sets) == 0:
-                #We have nothing else to make a uniform out of. Return None and let the pick uniform function handle that.
-                return None
+            #We have nothing else to make a uniform out of. Return None and let the pick uniform function handle that.
+            return None
 
         #If we get to here we are assembling an outfit out of underwear or overwear.
-        uniform_over = self.get_random_appropriate_overwear(target_sluttiness, minimum_sluttiness, exclude_skirts, exclude_pants)
+        uniform_over = None
+        count = 0
+        while not uniform_over and count < 4:   # Try to find a valid uniform by stretching the sluttiness range, returns none when not succesfull
+            uniform_over = self.get_random_appropriate_overwear(target_sluttiness + (count * 5), minimum_sluttiness - (count * 10), exclude_skirts, exclude_pants)
+            count += 1
+
         if uniform_over:
             slut_limit_remaining = target_sluttiness - uniform_over.get_overwear_slut_score()
             if slut_limit_remaining < 0:
