@@ -1,7 +1,7 @@
 init -1 python:
     
-    # there was no function to get appropriate overwear
-    def get_random_appropriate_overwear(self, sluttiness_limit, sluttiness_min = 0, exclude_skirts = False, exclude_pants = False): #Get an overwear outfit that is considered appropriate (based on overwear sluttiness, not full outfit sluttiness)
+    # Get an overwear outfit that is considered appropriate based on sluttines and preferences.
+    def get_random_appropriate_overwear(self, sluttiness_limit, sluttiness_min = 0, exclude_skirts = False, exclude_pants = False):
         valid_overwear = []
         for overwear in self.overwear_sets:
             if overwear.get_overwear_slut_score() <= sluttiness_limit and overwear.get_overwear_slut_score() >= sluttiness_min:
@@ -22,7 +22,8 @@ init -1 python:
 
     Wardrobe.get_random_appropriate_overwear = get_random_appropriate_overwear
 
-    def get_random_appropriate_outfit_enhanced(self, sluttiness_limit, sluttiness_min = 0, exclude_skirts = False, exclude_pants = False): # Get a copy of a full outfit that the character is at or below the sluttiness limit.
+    # Get a copy of a full outfit that is considered appropriate based on sluttiness and preferences.
+    def get_random_appropriate_outfit_enhanced(self, sluttiness_limit, sluttiness_min = 0, exclude_skirts = False, exclude_pants = False): 
         valid_outfits = []
         for outfit in self.outfits:
             if outfit.slut_requirement >= sluttiness_min and outfit.slut_requirement <= sluttiness_limit:
@@ -45,8 +46,9 @@ init -1 python:
 
 
     # Girls choose the work uniform based on sluttiness and opinion modifiers instead of random
-
-    def decide_on_uniform_enhanced(self, person): # Creates a uniform out of the clothing items from this wardrobe. Unlike a picked outfit sluttiness has no factor here. A girls personal underwear sets will be used for constructed uniforms.
+    # Creates a uniform out of the clothing items from this wardrobe. 
+    # When no company parts are available a girls personal wardrobe will be used for constructed uniforms.
+    def decide_on_uniform_enhanced(self, person): 
         conservative_score = person.get_opinion_score("conservative outfits") / 10 # high impact on sluttiness
         skimpy_uniform_score = person.get_opinion_score("skimpy uniforms") / 10
         work_uniforms_score = person.get_opinion_score("work uniforms") / 20 # low impact on sluttiness
@@ -69,23 +71,32 @@ init -1 python:
 
         # modify target sluttiness based on opinions
         target_sluttiness = person.sluttiness * (1 + skimpy_uniform_score + work_uniforms_score + marketing_score - conservative_score)
-        minimum_sluttiness = target_sluttiness - person.sluttiness
-        if minimum_sluttiness < 0:
-            minimum_sluttiness = 0
+        minimum_sluttiness = target_sluttiness - person.sluttiness # raise minimum sluttiness by the amount over normal sluttiness
+        if target_sluttiness > 40 and minimum_sluttiness == 0: # when there is no minimum sluttiness, increase it when the girl is slutty
+            minimum_sluttiness = (target_sluttiness - 40) // 2
+        if minimum_sluttiness > 40: # prevent minimum sluttiness from going too high (late game, high sluttiness)
+            minimum_sluttiness = 40
+        if target_sluttiness > 100 and minimum_sluttiness < 30: # when very slutty, don't bother with non-sexy clothes.
+            minimum_sluttiness = 30
 
         if len(self.outfits) > 0:
             #We have some full body outfits we mgiht use. 50/50 to use that or a constructed outfit.
             outfit_choice = renpy.random.randint(0,100)
-            chance_to_use_full = 50 #Like normal outfits a uniform hasa 50/50 chance of being a full outfit or aa assembled outfit if both are possible.
+            chance_to_use_full = 50 #Like normal outfits a uniform hasa 50/50 chance of being a full outfit or an assembled outfit if both are possible.
 
-            #If we roll an assembled outfit and we have some parts to make it out of do that.
-            if outfit_choice < chance_to_use_full and len(self.underwear_sets + self.overwear_sets) > 0: 
-                pass
-            else: #Otherwise use one of the appropriate full outfits.
-                full_outfit = self.get_random_appropriate_outfit(target_sluttiness, minimum_sluttiness, exclude_skirts, exclude_pants).get_copy()
+            #If we roll use full or we don't have the parts to make an assembled outfit.
+            if outfit_choice > chance_to_use_full or len(self.underwear_sets + self.overwear_sets) == 0:
+                full_outfit = None
+                count = 0
+                while not full_outfit and count < 3:    # Try to find a valid uniform by stretching the sluttiness range, returns none when not succesfull
+                    full_outfit = self.get_random_appropriate_outfit(target_sluttiness, minimum_sluttiness, exclude_skirts, exclude_pants)
+                    target_sluttiness += 5
+                    minimum_sluttiness -= 5
+                    count += 1
+
                 return full_outfit
-        else:
-            if len(self.underwear_sets + self.overwear_sets) == 0:
+                
+        elif len(self.underwear_sets + self.overwear_sets) == 0:
                 #We have nothing else to make a uniform out of. Return None and let the pick uniform function handle that.
                 return None
 
@@ -118,7 +129,6 @@ init -1 python:
         #At this point we have our under and over, if at all possible.
         if not uniform_over or not uniform_under:
             return None #Something's gone wrong and we don't have one of our sets. return None and let the uniform gods sort it out.
-
 
         assembled_uniform = uniform_under.get_copy()
         assembled_uniform.name = uniform_under.name + " + " + uniform_over.name
