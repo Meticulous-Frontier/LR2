@@ -222,7 +222,7 @@ label SB_fetish_cum_dosage_label():
     return
 
 #SBC3
-label SB_fetish_mom_cum_label(the_person):
+label SB_fetish_mom_cum_label():
     $ the_person = mom
     "Tired from a long day, you quickly fall asleep."
     "You are having some very pleasant dreams. [the_person.possessive_title] is posing for you in some sexy lingerie, then gets down on her knees..."
