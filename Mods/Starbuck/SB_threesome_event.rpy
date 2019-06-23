@@ -4,8 +4,8 @@ init 2 python:
     def SB_fetish_vaginal_family_threesome_requirement():
         if mc_asleep() and day % 7 is not 4: # not on Friday nights (we have the kitchen mom event here)
             if mc.current_stamina > 0:  #Must have the stamina to handle a long sexy night
-                if SB_get_fetish(mom) == "Vaginal Fetish" or mom.sluttiness > 50:
-                    if SB_get_fetish(lily) == "Vaginal Fetish" or lily.sluttiness > 50:
+                if SB_check_fetish(mom, vaginal_fetish_role) or mom.sluttiness > 50:
+                    if SB_check_fetish(lily, vaginal_fetish_role) or lily.sluttiness > 50:
                         return True
         return False
 
@@ -37,9 +37,9 @@ label SB_fetish_vaginal_family_threesome_label():
             $ the_person_one.change_happiness(-5)
             return
         "Strip first":
-            mc.name "That sounds good [the_person.title]... why don't you give me a show before we go to bed?"
+            mc.name "That sounds good [the_person_one.title]... why don't you give me a show before we go to bed?"
             "[the_person_one.possessive_title] smiles at you."
-            the_person_one.char "Aww, does my [the_person_one.mc_title] wanna see his [the_person.title] get naked for him? What a pervert!"
+            the_person_one.char "Aww, does my [the_person_one.mc_title] wanna see his [the_person_one.title] get naked for him? What a pervert!"
             "[the_person_one.possessive_title] winks at you before beginning her routine."
             call SB_free_strip_scene(the_person_one) from _SB_free_strip_scene_SBT_10
             mc.name "Damn [the_person_one.title], you are really getting good at that..."
@@ -48,7 +48,7 @@ label SB_fetish_vaginal_family_threesome_label():
     $ SB_draw_two_person_scene(person_one = the_person_one, person_two = the_person_two, one_pos_x = 0.7, two_emotion = "angry")
     hide screen person_info_ui
     show screen SB_two_person_info_ui(the_person_two, the_person_one)
-    the_person_two.char "Is that... [the_person_one.name]!?! What are you... why are you naked in your [the_person_two.mc_title]'s room?" #NOTE: the_person_one doesn't nescessarily know the_person_two's title for the MC, but still somewhat makes sense.
+    the_person_two.char "Is that... [the_person_one.name]!?! What are you... why are you naked in [the_person_two.mc_title]'s room?" #NOTE: the_person_one doesn't nescessarily know the_person_two's title for the MC, but still somewhat makes sense.
     "[the_person_two.possessive_title] is shocked to discover that you and [the_person_one.possessive_title] are in your room, clearly about to get busy."
     the_person_one.char "Mom! Nothing was... wait... what are you wearing?"
     "[the_person_two.possessive_title] quickly realizes that [the_person_one.possessive_title] is here... doing exactly what she was coming here to do. Her cheeks turn red with embarassment."

@@ -2,7 +2,7 @@
 # Based on the Pilotus13 Vanilla extension
 init -1 python:
     shower_mod_weight = 5
-    
+
 init 2 python:
     def shower_crisis_requirement():
         if mc_at_home() and time_of_day == 0:
@@ -15,10 +15,9 @@ init 2 python:
         home_shower.link_locations(hall)
         return
 
-    shower_crisis_action = ActionMod("Morning Shower", shower_crisis_requirement,"shower_crisis_action_label", initialization = shower_mod_initialization, 
-        menu_tooltip = "In the morning you notice the door to shower is open and someone is in there.", category="Home")
-    morning_crisis_list.append([shower_crisis_action, shower_mod_weight])   
-    
+    shower_crisis_action = ActionMod("Morning Shower", shower_crisis_requirement,"shower_crisis_action_label", initialization = shower_mod_initialization,
+        menu_tooltip = "In the morning you notice the door to shower is open and someone is in there.", category="Home", is_crisis = True, is_morning_crisis = True, crisis_weight = shower_mod_weight)
+
 label shower_crisis_action_label:
     ## Someone is taking a shower
     $ shower_person = renpy.random.randint(1, 2)
@@ -26,8 +25,13 @@ label shower_crisis_action_label:
         $ the_person = mom
     else:
         $ the_person = lily
-        
+
     "While walking around the house, you hear the shower running and notice that the bathroom door is not fully closed."
+    menu:
+        "Take a peek?":
+            pass
+        "Ignore it.":
+            return
     "You decide to take a peek."
     $ change_scene_display(home_shower)
     show screen person_info_ui(the_person)

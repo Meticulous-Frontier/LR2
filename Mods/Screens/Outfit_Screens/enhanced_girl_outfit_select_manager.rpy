@@ -4,6 +4,7 @@ init 2:
         modal True
         zorder 99 #Allow it to be hidden below outfit_creator
         default preview_outfit = None
+        default import_selection = False
         hbox:
             xalign 0.1
             yalign 0.1
@@ -25,7 +26,7 @@ init 2:
                                     textbutton "Select "+outfit.name+ "\n(Sluttiness " +str(outfit.slut_requirement) +")" action [Return(outfit), Hide("mannequin")] hovered Show("mannequin", None, outfit) sensitive (outfit.slut_requirement <= slut_limit) alternate Show("outfit_creator", None, outfit.get_copy(), the_person.wardrobe) style "textbutton_style" text_style "outfit_description_style" xsize 210
 
                     vbox:
-                        textbutton "Import Design" action ToggleVariable("import_selection") style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5
+                        textbutton "Import Design" action ToggleScreenVariable("import_selection") style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5
                         if import_selection:
                             viewport:
                                 scrollbars "vertical"
@@ -33,7 +34,7 @@ init 2:
                                 xsize 225
                                 ysize 750
                                 vbox:
-                                    for n in os.listdir("game/wardrobes/"):
+                                    for n in get_xml_files_from_path(["game/wardrobes/", "game/Mods/Wardrobes/"]):
                                         textbutton n action [Show("import_outfit_manager", None, target_wardrobe, n)] style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5
 
             if show_sets:

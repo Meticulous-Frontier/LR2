@@ -1,73 +1,6 @@
-init 1 python:
-    def SB_give_vaginal_role(the_person):
-        SB_fetish_vaginal_visit = Action("Sleepover Tonight", SB_fetish_vaginal_visit_requirement, "SB_fetish_vaginal_visit_label",
-        menu_tooltip = "Ask her over for some fun tonight.")
-        SB_fetish_vaginal_mom_kitchen = Action("Kitchen Sex", SB_fetish_vaginal_mom_kitchen_requirement, "SB_fetish_vaginal_mom_kitchen_label",
-        menu_tooltip = "Bend her over the kitchen counter.")
-        vaginal_fetish_role = Role(role_name ="Vaginal Fetish", actions =[SB_fetish_vaginal_visit, SB_fetish_vaginal_mom_kitchen])
-        the_person.special_role.append(vaginal_fetish_role)
-
-        return
-
-    def SB_give_anal_role(the_person):
-        SB_fetish_anal_staylate = Action("See me after work", SB_fetish_anal_staylate_requirement, "SB_fetish_anal_staylate_label",
-        menu_tooltip = "Ask her to stay after work is over.")
-        SB_fetish_anal_mom_kitchen = Action("Kitchen Sex", SB_fetish_anal_mom_kitchen_requirement, "SB_fetish_anal_mom_kitchen_label",
-        menu_tooltip = "Bend her over the kitchen counter.")
-        SB_lily_anal_in_room = Action("Use Strap On", SB_lily_anal_in_room_requirement, "SB_lily_anal_in_room_label",
-        menu_tooltip = "Double Penetration on the bed.")
-        anal_fetish_role = Role(role_name ="Anal Fetish", actions =[SB_fetish_anal_staylate, SB_fetish_anal_mom_kitchen, SB_lily_anal_in_room])
-        the_person.special_role.append(anal_fetish_role)
-
-        return
-
-    def SB_give_cum_internal_role(the_person):
-        SB_fetish_cum_getdosage = Action("Give her cum dosage", SB_fetish_cum_getdosage_requirement, "SB_fetish_cum_getdosage_label",
-        menu_tooltip = "Give her cum, right here, right now.")
-        cum_internal_role = Role(role_name = "Internal Cum Fetish", actions = [SB_fetish_cum_getdosage])
-        the_person.special_role.append(cum_internal_role)
-
-        return
-
-    def SB_give_cum_external_role(the_person):
-        SB_fetish_cum_getdosage = Action("Give her cum dosage", SB_fetish_cum_getdosage_requirement, "SB_fetish_cum_getdosage_label",
-        menu_tooltip = "Give her cum, right here, right now.")
-        cum_external_role = Role(role_name = "External Cum Fetish", actions = [SB_fetish_cum_getdosage])
-        the_person.special_role.append(cum_external_role)
-
-        return
-
-    def SB_has_fetish(the_person):
-        for _role in the_person.special_role:
-            if _role.role_name == "Vaginal Fetish":
-                return True
-            if _role.role_name == "Anal Fetish":
-                return True
-            if _role.role_name == "Internal Cum Fetish":
-                return True
-            if _role.role_name == "External Cum Fetish":
-                return True
-            if _role.role_name == "Oral Fetish":
-                return True
-        return False
-
-    def SB_get_fetish(the_person):
-        for _role in the_person.special_role:
-            if _role.role_name == "Vaginal Fetish":
-                return "Vaginal Fetish"
-            if _role.role_name == "Anal Fetish":
-                return "Anal Fetish"
-            if _role.role_name == "Internal Cum Fetish":
-                return "Internal Cum Fetish"
-            if _role.role_name == "External Cum Fetish":
-                return "External Cum Fetish"
-            if _role.role_name == "Oral Fetish":
-                return "Oral Fetish"
-        return "None"
-
 init -1 python:
     def SB_fetish_vaginal_visit_requirement(the_person):
-        if the_person.sex_skills["Vaginal"] == 6:
+        if the_person.sex_skills["Vaginal"] >= 6:
             if SB_MOD_RANDOM_EVENT_CHANCE > 0:
                 return True
             else:
@@ -76,7 +9,7 @@ init -1 python:
 
     def SB_fetish_vaginal_mom_kitchen_requirement(the_person):
         if the_person == mom:
-            if  mc.location == kitchen:
+            if mc.location == kitchen:
                 if mc.current_stamina > 0:
                     return True
                 else:
@@ -106,10 +39,9 @@ init -1 python:
         else:
             return "You are too tired."
 
-
     def SB_fetish_anal_staylate_requirement(the_person):
         if mc.is_at_work():
-            if the_person.sex_skills["Anal"] == 6:
+            if the_person.sex_skills["Anal"] >= 6:
                 if SB_MOD_RANDOM_EVENT_CHANCE > 0:
                     return True
                 else:
@@ -123,6 +55,54 @@ init -1 python:
         else:
             return "You're too tired"
 
+    # Initialize vaginal fetish role
+    SB_fetish_vaginal_visit = Action("Sleepover Tonight", SB_fetish_vaginal_visit_requirement, "SB_fetish_vaginal_visit_label",
+        menu_tooltip = "Ask her over for some fun tonight.")
+    SB_fetish_vaginal_mom_kitchen = Action("Kitchen Sex", SB_fetish_vaginal_mom_kitchen_requirement, "SB_fetish_vaginal_mom_kitchen_label",
+        menu_tooltip = "Bend her over the kitchen counter.")
+    vaginal_fetish_role = Role(role_name ="Vaginal Fetish", actions =[SB_fetish_vaginal_visit, SB_fetish_vaginal_mom_kitchen])
+
+    # Initialize anal fetsh role
+    SB_fetish_anal_staylate = Action("See me after work", SB_fetish_anal_staylate_requirement, "SB_fetish_anal_staylate_label",
+        menu_tooltip = "Ask her to stay after work is over.")
+    SB_fetish_anal_mom_kitchen = Action("Kitchen Sex", SB_fetish_anal_mom_kitchen_requirement, "SB_fetish_anal_mom_kitchen_label",
+        menu_tooltip = "Bend her over the kitchen counter.")
+    SB_lily_anal_in_room = Action("Use Strap On", SB_lily_anal_in_room_requirement, "SB_lily_anal_in_room_label",
+        menu_tooltip = "Double Penetration on the bed.")
+    anal_fetish_role = Role(role_name ="Anal Fetish", actions =[SB_fetish_anal_staylate, SB_fetish_anal_mom_kitchen, SB_lily_anal_in_room])
+
+    # Initialize Cum Fetish role
+    SB_fetish_cum_getdosage = Action("Give her cum dosage", SB_fetish_cum_getdosage_requirement, "SB_fetish_cum_getdosage_label",
+        menu_tooltip = "Give her cum, right here, right now.")
+    cum_internal_role = Role(role_name = "Internal Cum Fetish", actions = [SB_fetish_cum_getdosage])
+    cum_external_role = Role(role_name = "External Cum Fetish", actions = [SB_fetish_cum_getdosage])
+
+    # Initialize Oral Fetish role
+    oral_fetish_role = Role(role_name = "Oral Fetish", actions = [])
+    #TODO: Add some actions when 'afflicted'
+
+init 1 python:
+    def SB_get_fetish_count(the_person):
+        fetish_count = 0
+        for role in the_person.special_role:
+            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role]:
+                fetish_count += 1
+        return fetish_count
+
+    def SB_check_fetish(the_person, fetish):
+        for role in the_person.special_role:
+            if role == fetish:
+                return True
+        return False
+
+    def SB_get_fetishes_description(the_person):
+        description = ""
+        for role in the_person.special_role:
+            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role]:
+                if len(description) > 0:
+                    description += ", "
+                description += role.role_name
+        return description
 
 #Vaginal Fetish Events#
 label SB_fetish_vaginal_visit_label(the_person):
@@ -152,15 +132,16 @@ label SB_fetish_vaginal_visit_label(the_person):
         "[the_person.possessive_title] smiles, clearly enjoying your obvious innuendo."
         the_person.char "I'll see you tonight then!"
     python:
-        SB_fetish_vaginal_event = Action(the_person.name + " Visits You.", SB_fetish_vaginal_event_requirement, "SB_fetish_vaginal_event_label", the_person)
         if SB_fetish_vaginal_event not in mc.business.mandatory_crises_list:
+            SB_fetish_vaginal_event.args = [the_person] # Set Action event args to person
             mc.business.mandatory_crises_list.append(SB_fetish_vaginal_event)
             FETISH_VAGINAL_EVENT_INUSE = True
         SB_SET_RANDOM_EVENT_CHANCE(0)
     return
 
 #SBR10
-label SB_fetish_vaginal_mom_kitchen_label(the_person):
+label SB_fetish_vaginal_mom_kitchen_label():
+    $ the_person = mom
     $ ordered_bottom = the_person.outfit.get_lower_ordered()
     if len(ordered_bottom) > 0:
         $ the_clothing = the_person.outfit.get_lower_ordered()[-1] #Get the very top item of clothing.
@@ -228,11 +209,9 @@ label SB_fetish_anal_staylate_label(the_person):
     python:
         FETISH_ANAL_EVENT_INUSE = True
         SB_SET_RANDOM_EVENT_CHANCE(0)
-        SB_fetish_anal_staylate_event = Action(the_person.name + " stays late", SB_fetish_anal_staylate_event_requirement, "SB_fetish_anal_staylate_event_label", the_person)
         if SB_fetish_anal_staylate_event not in mc.business.mandatory_crises_list:
+            SB_fetish_anal_staylate_event.args = [the_person]  # set current person as action argument
             mc.business.mandatory_crises_list.append(SB_fetish_anal_staylate_event)
-
-
     return
 
 #SBR30

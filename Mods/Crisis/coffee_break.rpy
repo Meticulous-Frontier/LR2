@@ -22,8 +22,7 @@ init 2 python:
         return
 
     coffee_break_action = ActionMod("Coffee Break", coffee_break_requirement, "coffee_break_action_label",
-        menu_tooltip = "A group of employees is having a coffee break.", category = "Business")
-    crisis_list.append([coffee_break_action, coffee_break_weight])
+        menu_tooltip = "A group of employees is having a coffee break.", category = "Business", is_crisis = True, crisis_weight = coffee_break_weight)
 
 label coffee_break_action_label:
     python:
@@ -95,23 +94,26 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                     return
                 "Join them":
                     mc.name "Hello girls... mind if I join your little party?"
-                    $ scene_manager.update_actor(person_two, position = "stand_3")
-                    $ scene_manager.update_actor(person_three, position = "stand_4")
+                    $ scene_manager.update_actor(person_two, position = "stand3")
+                    $ scene_manager.update_actor(person_three, position = "stand4")
                     person_three.char "Oh my, hello [person_three.mc_title], we didn't see you there."
                     "You tell the girls to take off their clothes." 
 
                     python:
-                        scene_manager.strip_actor_outfit_to_max_sluttiness(person_two, temp_sluttiness_boost = 40)
-                        scene_manager.strip_actor_outfit_to_max_sluttiness(person_three, temp_sluttiness_boost = 40)
+                        scene_manager.strip_actor_outfit_to_max_sluttiness(person_two, temp_sluttiness_boost = 50)
+                        scene_manager.strip_actor_outfit_to_max_sluttiness(person_three, temp_sluttiness_boost = 50)
 
-                        scene_manager.remove_actor(person_two)
-                        scene_manager.remove_actor(person_three)
+                        # DON'T REMOVE ACTORS, THIS WILL RESET THE OUTFIT
+                        #scene_manager.remove_actor(person_two)
+                        #scene_manager.remove_actor(person_three)
+                        # DO REMOVE THE MULTI PERSON INFO UI
+                        renpy.hide_screen("multi_person_info_ui")
 
                     # switch to SB ui
                     hide screen person_info_ui
                     show screen SB_two_person_info_ui(person_two, person_three)                   
 
-                    $ SB_draw_two_person_scene(person_one = person_two, person_two = person_three, one_pos_x = 0.7, one_position = "stand_3", two_position = "stand_4")
+                    $ SB_draw_two_person_scene(person_one = person_two, person_two = person_three, one_pos_x = 0.7, one_position = "stand3", two_position = "stand4")
 
                     call SB_threesome_description(person_two, person_three, SB_threesome_sixty_nine, make_floor(), 0, private = True, girl_in_charge = False)
                     $ SB_draw_two_person_scene(person_one = person_two, person_two = person_three, one_pos_x = 0.7)
@@ -150,9 +152,5 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
         "You watch [person_two.title] and [person_three.title] walk away together."
 
     # clear scene
-    python:
-        scene_manager.remove_actor(person_two)
-        scene_manager.remove_actor(person_three)
-        renpy.scene("Active")
-
+    $ scene_manager.clear_scene()
     return

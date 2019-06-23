@@ -20,24 +20,21 @@ init 3 python:
                 positions.append ("anal")
         return get_random_from_list(positions)
 
-    sister_ntr_mod_action = ActionMod("Sister NTR",sister_ntr_crisis_requirement,"sister_ntr_crisis_action_label",
-        menu_tooltip = "At night you hear strange sounds out of [lily.possessive_title]'s bedroom", category = "NTR")
-    crisis_list.append([sister_ntr_mod_action, sister_ntr_mod_weight])
+    sister_ntr_mod_action = ActionMod("Sister NTR",sister_ntr_crisis_requirement,"sister_ntr_crisis_action_label", menu_tooltip = "At night you hear strange sounds out of [lily.possessive_title]'s bedroom",
+        category = "NTR", is_crisis = True, crisis_weight = sister_ntr_mod_weight)
 
 label sister_ntr_crisis_action_label:
     ## Lily studing with her friends
     $ the_person = lily
     "While to fall asleep, you're disturbed by some noise down the hallway."
+    menu:
+        "Investigate?":
+            pass
+        "Ignore it.":
+            return
     "As it seems to not let you sleep, you decide to investigate."
     "You drag yourself out of bed and enter the hallway. There is a trace of light down the door to [the_person.possessive_title]'s bedroom."
     "The door itself seems to be not closed."
-
-    menu:
-        "Take a peek":
-            pass
-        "Go back to bed":
-            "You decide that it is wrong to interfere into [the_person.possessive_title]'s private life so you go back to your room to sleep."
-            return
 
     ## Now we determine which finising scenes are available depending on traits
     $ finishes = []

@@ -9,6 +9,10 @@ label update_stephanie(stack):
         stephanie.opinions["small talk"] = [1, False]  # she likes small talk
         stephanie.opinions["flirting"] = [1, False]  # she likes flirting
 
+        # make sure she has no opinion on conservative outfits (affects happiness)
+        if any("conservative outfits" in s for s in stephanie.opinions):
+            del stephanie.opinions["conservative outfits"]
+
         stephanie.sexy_opinions["kissing"] = [1, False]  # she likes kissing
         stephanie.sexy_opinions["vaginal sex"] = [2, False] # she likes having sex
 

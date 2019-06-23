@@ -17,16 +17,15 @@ init 2 python:
     gym_clothes_sexy.add_feet(sneakers.get_copy(),colour_white)
 
 label train_in_gym(person):
-    $ change_scene_display(gym)
-    show screen person_info_ui(person)
-
-    if person.sluttiness > 40 or person.arousal > 35:
-        $ person.outfit = gym_clothes_sexy.get_copy()
-    else:
-        $ person.outfit = gym_clothes.get_copy()
-    $ person.draw_person(emotion="default")
-
-    $ change = renpy.random.random() * 4 # Maximum change is 4 pounds
+    python:
+        change_scene_display(gym)
+        renpy.show_screen("person_info_ui", person)
+        if person.sluttiness > 40 or person.arousal > 35:
+            person.outfit = gym_clothes_sexy.get_copy()
+        else:
+            person.outfit = gym_clothes.get_copy()
+        person.draw_person(emotion="default")
+        change = renpy.random.random() * 4 # Maximum change is 4 pounds
 
     if change < 1:
         "You decide to take a yoga class with [person.possessive_title]."
@@ -50,10 +49,7 @@ label train_in_gym(person):
 
     if body_changed:
         $ person.draw_person(person.body_type)
-        $ person.change_happiness(+10)
-        $ person.change_love(+5)
-        $ person.change_arousal(25)
-        $ slut_report = person.change_slut_temp(5)
+        $ person.change_stats(happiness = 10, love = 5, arousal = 25, slut_temp = 5)
         if person.sluttiness > 20:
             person.char "Wow, these gym sessions make me feel just great, somehow I get turned on too... would you mind?"
             menu:
@@ -63,6 +59,7 @@ label train_in_gym(person):
                     $ change_scene_display(gym_shower)
 
                     call fuck_person(person) from _call_fuck_person_gym_training
+
                 "Have Sex (disabled)\n {size=22}Requires: Stamina{/size}" if not mc.current_stamina > 0:
                     pass
                 "Another Time":
@@ -81,6 +78,5 @@ label train_in_gym(person):
     hide screen person_info_ui
     $ person.reset_arousal()
     $ person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-    $ change_scene_display(mc.location)
-    $ renpy.scene("Active")
+    $ change_scene_display(gym)
     return

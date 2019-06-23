@@ -4,10 +4,45 @@ init 2 python:
     # Follow Me | Allows you to put a person in a list_of_followers that comes along with you upon every location change (follow normal schedule on time advance, might want to remove them from the list during that, although they will come back if not)
     list_of_followers = []
 
+    # Build a location list where the person can be scheduled.
+    def build_schedule_location_list(person):
+        possible_locations = []
+
+        def add_location(location, add_when_not_visible = False):
+            if location.visible or add_when_not_visible:
+                if not location in possible_locations:
+                    possible_locations.append(location)
+
+        # person home
+        add_location(person.home, add_when_not_visible = True)
+        # add the mall and all its connections
+        add_location(mall)
+        for c in mall.connections:
+            add_location(c)
+        # add employee locations
+        if person.is_employee():
+            add_location(lobby)
+            for c in lobby.connections:
+                add_location(c)
+        # special character mom and lily locations
+        if person in [mom, lily]:
+            add_location(hall)
+            for c in hall.connections:
+                add_location(c)
+        # special character aunt and cousing locations
+        if person in [aunt, cousin]:
+            add_location(aunt_apartment)
+            for c in aunt_apartment.connections:
+                add_location(c)
+
+        return possible_locations
+
     # Schedule Person Requirements
     def schedule_person_requirement(person):
         if person.obedience >= 130:
             return True
+        return False
+
     def schedule_early_morning_requirement():
         return True
     def schedule_morning_requirement():
@@ -27,20 +62,29 @@ init 2 python:
         if person not in list_of_followers:
             if person.obedience >= 110:
                 return True
+        return False
+
     def stop_follow_requirement(person):
         if person in list_of_followers:
             return True
+        return False
 
     # Hire Person Requirements
     def hire_person_requirement(person):
         if person not in mc.business.get_employee_list():
             return True
+        return False
 
     # Rename Person Requirements
     def rename_person_requirement(person):
         if person.obedience >= 150:
             return True
+        return False
 
+    def spend_the_night_requirement(person):
+        if time_of_day is 4 and person.love > 50 and mc.location is person.home: #Has to be night, need to have some love and be in the_person's home location
+            return True
+        return False
     # Schedule Actions
     schedule_person_action = Action("Schedule [the_person.title]", schedule_person_requirement, "schedule_menu", menu_tooltip = "Schedule where the person should be throughout the day.")
     schedule_early_morning_action = Action("Early Morning", schedule_early_morning_requirement, "schedule_early_morning", menu_tooltip = "Schedule where the person should be during the Early Morning.")
@@ -61,11 +105,23 @@ init 2 python:
     hire_person_action = Action("Employ [the_person.title]\n Costs: $300", hire_person_requirement, "hire_person", menu_tooltip = "Hire the the person to work for you in your business. Costs $300")
     # Rename Person | Opens a menu that allows you to change first and last name plus a (non- appended) custom the_person.title
     rename_person_action = Action("Rename [the_person.title]", rename_person_requirement, "rename_person", menu_tooltip = "Change the name of the person.")
+    # Spend the Night | Allows you to sleep in the home of a person you have increased the love stat.
+    spend_the_night_action = Action("Spend the night with [the_person.possessive_title]", spend_the_night_requirement, "spend_the_night", menu_tooltip = "Allows you to sleep in this location")
 
-    generic_people_role = Role("Generic", [schedule_person_action, start_follow_action, stop_follow_action, hire_person_action, rename_person_action]) # This role is meant to not display in the person_ui_hud
+    # A role added to all people in the game to enable actions through the "Special Actions Menu..."
+    generic_people_role = Role("Generic", [schedule_person_action, start_follow_action, stop_follow_action, hire_person_action, rename_person_action, spend_the_night_action]) # This role is meant to not display in the person_ui_hud
 
     # NOTE: This extension of "any person" can be toggled from the Action Mod Core menu under "Misc", listed as Generic People Actions
+
+
 # NOTE: Not sure where to place these actions yet. Basically actions that could fit on any person regardless of role.
+label spend_the_night(person): # Consider adding the sleep_action to the_person's room, but stats jump all over the place so doesn't nescessarily make sense.
+    "You go to sleep in [person.home.name]"
+    $ person.change_love(5)
+    $ person.change_happiness(5)
+    call advance_time
+    return
+
 label rename_person(person):
     "You tell [person.possessive_title] that you are giving her a new name."
     while True:
@@ -134,7 +190,11 @@ label hire_person(person):
         "Back":
             return
     $ mc.business.pay(-300)
+
+    $ person.event_triggers_dict["employed_since"] = day
+    $ mc.business.listener_system.fire_event("new_hire", the_person = person)
     $ person.special_role.append(employee_role)
+
     $ work_station_destination = mc.business.get_employee_workstation(person).formalName
     "[person.title] heads over to the [work_station_destination]..."
     return
@@ -155,13 +215,11 @@ label schedule_menu(person): # TODO: Find a way to handle "None" instances of sc
         if act_choice == "Back":
             return
         else:
-            $ act_choice.call_action()
+            $ act_choice.call_action(person)
 
-label schedule_early_morning():
-
-    python: # First we select which employee we want
-
-        tuple_list = format_rooms(list_of_places) #TODO: Create a list that excludes homes not in mc.known_home_locations
+label schedule_early_morning(person):
+    python:
+        tuple_list = format_rooms(build_schedule_location_list(person))
         tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
         room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
 
@@ -172,12 +230,9 @@ label schedule_early_morning():
         "Early Morning Schedule Set: [room_choice.formalName]"
         return
 
-label schedule_morning():
-
-
-    python: # First we select which employee we want
-
-        tuple_list = format_rooms(list_of_places) #TODO: Create a list that excludes homes not in mc.known_home_locations
+label schedule_morning(person):
+    python:
+        tuple_list = format_rooms(build_schedule_location_list(person))
         tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
         room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
 
@@ -188,11 +243,9 @@ label schedule_morning():
         "Morning Schedule Set: [room_choice.formalName]"
         return
 
-label schedule_afternoon():
-
-    python: # First we select which employee we want
-
-        tuple_list = format_rooms(list_of_places) #TODO: Create a list that excludes homes not in mc.known_home_locations
+label schedule_afternoon(person):
+    python:
+        tuple_list = format_rooms(build_schedule_location_list(person))
         tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
         room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
 
@@ -203,13 +256,9 @@ label schedule_afternoon():
         "Afternoon Schedule Set: [room_choice.formalName]"
         return
 
-
-
-label schedule_evening():
-
-    python: # First we select which employee we want
-
-        tuple_list = format_rooms(list_of_places) #TODO: Create a list that excludes homes not in mc.known_home_locations
+label schedule_evening(person):
+    python:
+        tuple_list = format_rooms(build_schedule_location_list(person))
         tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
         room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
 
@@ -220,12 +269,9 @@ label schedule_evening():
         "Evening Schedule Set: [room_choice.formalName]"
         return
 
-
-
-label schedule_night():
-    python: # First we select which employee we want
-
-        tuple_list = format_rooms(list_of_places) #TODO: Create a list that excludes homes not in mc.known_home_locations
+label schedule_night(person):
+    python:
+        tuple_list = format_rooms(build_schedule_location_list(person))
         tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
         room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
 
@@ -236,7 +282,7 @@ label schedule_night():
         "Night Schedule Set: [room_choice.formalName]"
         return
 
-    # Follower Labels
+# Follower Labels
 label start_follow(person):
     "You tell [person.title] to follow you around."
     $ list_of_followers.append(the_person)

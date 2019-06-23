@@ -20,8 +20,7 @@ init 2 python:
         return False
 
     mall_introduction_action = ActionMod("Mall Introduction", mall_introduction_requirement, "mall_introduction_action_label",
-        menu_tooltip = "You meet a stranger and a friend introduces you.", category = "Mall")
-    crisis_list.append([mall_introduction_action, mall_introduction_weight])
+        menu_tooltip = "You meet a stranger and a friend introduces you.", category = "Mall", is_crisis = True, crisis_weight = mall_introduction_weight)
 
 label mall_introduction_action_label:
     python:
@@ -69,26 +68,32 @@ label mall_introduction_action_label:
     # bonus stats when the person knows you more intimately
     if known_person.sluttiness > 20 or known_person.love > 20:
         if known_person.is_employee():
-            known_person.char "I promise you [stranger.name], he is a great boss, you should go out with him sometime."
+            if known_person.sluttiness > 40:
+                known_person.char "You should get to know him more intimate [stranger.name], you should apply for a position in his company."
+            else:
+                known_person.char "I promise you [stranger.name], he is a great boss, you should go out with him sometime."
         else:
-            known_person.char "I have to tell you [stranger.name], he is a great person to hang out with."
+            if known_person.sluttiness > 40:
+                known_person.char "He can show you a really good time [stranger.name], if you know what i mean."
+            else:
+                known_person.char "I have to tell you [stranger.name], he is a great person to hang out with."
 
         $ stranger.change_love(5)
         $ stranger.change_happiness(10)
 
         if stranger.sluttiness > 5:
-            stranger.char "I trust your judgement [known_person.name] and he is very cute."
+            stranger.char "He is very cute [known_person.name], i might just do that."
         else:
             stranger.char "I trust your judgement [known_person.name], perhaps we could go out sometime."
 
-    mc.name "It was great meeting you both, until next time."
+    mc.name "It was great meeting you both here. I'll see you around [stranger.title]."
     
     $ scene_manager.update_actor(stranger, position = "back_peek")
     $ scene_manager.update_actor(known_person, position = "walking_away")
 
-    "[stranger.title] looks back at you smiling."
+    "While walking away [stranger.title] looks back at you smiling."
 
-    $ renpy.scene("Active")
+    $ scene_manager.clear_scene()
     return
 
 

@@ -1,15 +1,13 @@
 # Room management mod by Trollden.
-# Use it however you like.
+# Use it however you like, modify, share, re-purpose etc.
 
-# Requires Mod Core by ParadigmShift
 
-# There are four lists noted below.
 # Each list corresponds to the room they are named after e.g mod_rooms_lobby == Room(lobby)
 # the mod_rooms list will show the rooms in it regardless of what entry is being used.
 # To access the room manager in-game use the "Do something..." menu from the game_loop after having initialized the mod via the Mod Core.
 # If you do not have the mod core you can append the elevator_action yourself to the rooms you want it in with Roomname.actions.append(room_manager_action)
 
-# If you want characters other than the main character and defined characters to be able to roam the rooms make sure they are set to public with room.public = True
+# If you want characters other than the main character and defined characters to be able to roam the rooms make sure they are set to public with room.public = True and that the room you are accessing is in the list_of_places (used for pathing)
 
 init -1 python:
     mod_rooms_append = [] # Rooms appended to this list will have the room_manager_action automatically appended to them so that you can access it via "Do something..."
@@ -167,8 +165,8 @@ label room_manager_action_label(): # What happens when you "Enter the elevator"
     if room_manager_tutorial == False: # Set to True if the player does not wish to see the message (ever) again.
         "Speaker" "This elevator acts as a hub for rooms added to the game via mods"
         "Speaker" "If you want a room to show up in the elevator do mod_rooms.append(room_name)"
-        "Speaker" "If you want access to the elevator or bus from your room do mod_rooms_append.append(room_name)"
-        "Speaker" "See the elevator.rpy file for more information about different lists that can be used"
+        "Speaker" "If you want access to the 'elevator' or 'bus' from your room do mod_rooms_append.append(room_name)"
+        "Speaker" "See the room_manager.rpy file for more information about different lists that can be used"
         menu:
             "Speaker" "Would you like the message to be repeated?"
             "Yes":

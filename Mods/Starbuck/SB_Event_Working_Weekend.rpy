@@ -8,6 +8,8 @@
 #
 #
 ###
+init -1 python:
+    SB_working_weekend_crisis_weight = 5
 
 init 2 python:
     def SB_working_weekend_requirement():
@@ -17,11 +19,8 @@ init 2 python:
                     return True
         return False
 
-    SB_working_weekend_crisis = Action("SB Working Weekend Crisis",SB_working_weekend_requirement,"SB_working_weekend_crisis_label")
-    crisis_list.append([SB_working_weekend_crisis,5])  #7 to match mom's texts
-
-
-
+    SB_working_weekend_crisis = ActionMod("Working Weekend",SB_working_weekend_requirement,"SB_working_weekend_crisis_label", 
+        menu_tooltip = "While working weekends an employee comes into the office.", category = "Business", is_crisis = True, crisis_weight = SB_working_weekend_crisis_weight)
 
 label SB_working_weekend_crisis_label():
     python:
@@ -160,7 +159,7 @@ label SB_working_weekend_crisis_label():
 
 
 
-                "You chat with [the_person.possessive_title]for a bit longer, but eventually she says goodbye and leaves."
+                "You chat with [the_person.possessive_title] for a bit longer, but eventually she says goodbye and leaves."
 
         #IF she is a little slutty,
     else:  #If she is REALLY slutty
@@ -619,7 +618,7 @@ label SB_working_weekend_crisis_label():
             "Thank her for the show":
                 mc.name "Thanks for that very pleasant distraction, [the_person.title], but I need to get back to work now."
                 "[the_person.possessive_title] can barely hide their disappointment. There's a hint of anger in their voice when they reply."
-                the_perosn.char "Wow, really? After I stripped for you? Okay then, hope you day goes better than mine..."
+                the_person.char "Wow, really? After I stripped for you? Okay then, hope you day goes better than mine..."
                 $ the_person.change_slut_temp(5)
                 $ the_person.change_slut_core(2)
                 $ the_person.change_happiness(-5)

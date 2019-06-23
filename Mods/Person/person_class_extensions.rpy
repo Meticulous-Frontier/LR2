@@ -135,6 +135,7 @@ init -1:
             removed_something = False
 
             strip_choice = get_strip_choice_upper_first(test_outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet)
+            # renpy.say("", strip_choice.name + "  (required: " + str(test_outfit.slut_requirement) +  ", sluttiness: " +  str(self.effective_sluttiness() + temp_sluttiness_boost) + ")")
             while strip_choice and self.judge_outfit(test_outfit, temp_sluttiness_boost):
                 self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
                 self.outfit = test_outfit.get_copy() #Swap our current outfit out for the test outfit.
@@ -152,6 +153,15 @@ init -1:
 
         # Monkey wrench Person class to have automatic strip function
         Person.strip_outfit_to_max_sluttiness = strip_outfit_to_max_sluttiness
+
+        # BUGFIXED: Judge Outfit function uses the_person instead of self to check effective sluttiness
+        #Judge an outfit and determine if it's too slutty or not. Can be used to judge other people's outfits to determine if she thinks they look like a slut.
+        def judge_outfit_extension(self, outfit, temp_sluttiness_boost = 0): 
+            outfit.update_slut_requirement()    # reevaluate sluttiness requirement
+            # renpy.say("", "Judge Outfit:  " + str(outfit.slut_requirement) +  "  (validation sluttiness: " +  str(self.effective_sluttiness() + temp_sluttiness_boost) + ")")
+            return outfit.slut_requirement < (self.effective_sluttiness() + temp_sluttiness_boost)
+
+        Person.judge_outfit = judge_outfit_extension
 
         ## ADD OPINION EXTENSION
         ## Adds add_opinion function to Person class
@@ -247,6 +257,23 @@ init -1:
         # Add decrease opininion function to person class
         Person.decrease_opinion_score = decrease_opinion_score
 
+        # Change Multple Stats for a person at once (less lines of code, better readability)
+        def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut_temp = None, slut_core = None, add_to_log = True):
+            if not obedience is None:
+                self.change_obedience(obedience, add_to_log)
+            if not happiness is None:
+                self.change_happiness(happiness, add_to_log)
+            if not arousal is None:
+                self.change_arousal(arousal, add_to_log)
+            if not love is None:
+                self.change_love(love, add_to_log)
+            if not slut_temp is None:
+                self.change_slut_temp(slut_temp, add_to_log)
+            if not slut_core is None:
+                self.change_slut_core(slut_core, add_to_log)
+            return
+
+        Person.change_stats = change_stats
 
         ## CHANGE WILLPOWER EXTENSION
         # changes the willpower of a person by set amount
@@ -309,10 +336,12 @@ init -1:
 
             final_image = Composite(*composite_list) # Create a composite image using all of the displayables
 
-            renpy.show(self.name,at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=self.name)
+            renpy.show(self.name,at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=(self.name + self.last_name + str(self.age)))
 
         # replace the default draw_person function of the person class
         Person.draw_person = draw_person_enhanced
+        # add location to store original personality
+        Person.original_personality = None
 
         def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, special_modifier = None, character_placement = None, scene_manager = None): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
             #Note: this function includes a call to remove_clothing, it is not needed seperately.
@@ -412,40 +441,3 @@ init -1:
             message += " Willpower"
             mc.log_event(message, "float_text_blue")
             return
-
-#########################################
-# Transormation for character_placement #
-#########################################
-
-    transform character_right_flipped():
-        yalign 1.0
-        yanchor 1.0
-        xalign 1.0
-        xanchor 1.0
-        xzoom -1
-
-    transform character_center():
-        yalign 1.0
-        yanchor 1.0
-        xalign 0.75
-        xanchor 1.0
-
-    transform character_center_flipped():
-        yalign 1.0
-        yanchor 1.0
-        xalign 0.75
-        xanchor 1.0
-        xzoom -1
-
-    transform character_left():
-        yalign 1.0
-        yanchor 1.0
-        xalign 0.5
-        xanchor 1.0
-
-    transform character_left_flipped():
-        yalign 1.0
-        yanchor 1.0
-        xalign 0.5
-        xanchor 1.0
-        xzoom -1

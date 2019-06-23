@@ -10,6 +10,8 @@
 #
 #
 ###
+init -1 python:
+    SB_caught_masturbating_crisis_weight = 5
 
 init 2 python:
     def SB_caught_masturbating_requirement():
@@ -23,9 +25,8 @@ init 2 python:
                             return True
         return False
 
-    SB_caught_masturbating_crisis = Action("SB Caught Masturbating Crisis",SB_caught_masturbating_requirement,"SB_caught_masturbating_crisis_label")
-    crisis_list.append([SB_caught_masturbating_crisis,5])
-
+    SB_caught_masturbating_crisis = ActionMod("Office Masturbation",SB_caught_masturbating_requirement,"SB_caught_masturbating_crisis_label", 
+        menu_tooltip = "You find an employee masturbating in an empty storage room.", category = "Business", is_crisis = True, crisis_weight = SB_caught_masturbating_crisis_weight)
 
 label SB_caught_masturbating_crisis_label():
     python:

@@ -32,13 +32,20 @@ label update_change_crisis_chance(stack):
 
 label show_crisis_chance_ui():
     python:
-        disabled = 0
         # how many crisis events are disabled?
+        disabled = 0
         for action_mod in action_mod_list:
-            if not action_mod.enabled:
-                disabled += 1
+            if hasattr(action_mod, "is_crisis") and action_mod.is_crisis and not action_mod.enabled:
+                if not hasattr(action_mod, "is_morning_crisis") or not action_mod.is_morning_crisis:
+                    disabled += 1
 
-    call screen crisis_chance_setting(disabled)
+        morning_disabled = 0                
+        for action_mod in action_mod_list:
+            if hasattr(action_mod, "is_crisis") and action_mod.is_crisis and not action_mod.enabled:
+                if hasattr(action_mod, "is_morning_crisis") and action_mod.is_morning_crisis:
+                    morning_disabled += 1
+
+    call screen crisis_chance_setting(disabled, morning_disabled)
     $ crisis_chance = crisis_base_chance
     $ morning_crisis_chance = morning_crisis_base_chance
     return

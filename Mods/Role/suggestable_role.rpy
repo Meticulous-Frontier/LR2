@@ -5,72 +5,73 @@
 init 2 python: # Define actions and requirements for the actual mod here.
 
     def influence_opinion_requirement(person): # Shows only if person has been affected by suggestibility serum.
-        if person.suggestibility > 0:
+        if suggestable_role in person.special_role:
             return True
         else:
             return False
 
     influence_opinion_action = Action("Influence an opinion", influence_opinion_requirement, "influence_opinion_label",
-        menu_tooltip = "Influence a persons opinion about a specific topic")
+        menu_tooltip = "Influence a persons opinion regarding a specific topic")
 
     suggestable_role = Role("Suggestable", [influence_opinion_action])
 
 # Actions for the receptive role in suggestable_role.rpy
 
-label influence_opinion_label(person): # This is the setup phase that you have to get through.
-                                                 # We want to set up the setting and allow for choices to tackle them for better or worse results.
-                                                 # Do mood checks, relation to player character, opinion checks, personality checks.
-                                                 # calc_will() sets the baseline for the character after that use change_willpower(amount) to add and remove.
-                                                 # NOTE: Need to add ways to fail before the final segment.
+label influence_opinion_label(person): #Input a custom opinion, check if they have the opinion or not and base difficulty on how big the change is, or random up to 80 if it's a unrelated opinion
+
     $ opinion = None
     $ degree = None
-    $ discovered = None
-    $ people_nearby = len(mc.location.people)
-    $ person.willpower = calculate_willpower(person)
-    $ mc.power = player_willpower()
-
+    $ discovered = True
     # Pre-check to let the player know base information about the scenario.
-    if mc.power > person.willpower:
-        "Speaker" "You feel confident that you will be able to sway their opinion..."
+    "Speaker" "Type an opinion e.g 'sculpting garden gnomes' then hit enter to proceed "
+    $ opinion = str(renpy.input("Opinion:"))
 
-    elif mc.power < person.willpower:
-        "Speaker" "[person.name] seems to have a sturdy mentality at the moment, proceed with caution"
+    "Speaker" "How do you want [person.name] to feel about [opinion]?"
+    menu:
+        "Hate":
+            $ degree = -2
+        "Dislike":
+            $ degree = -1
+        "Neutral": #This will not display, can be used to "remove" an opinion without the need for additional code.
+            $ degree = 0
+        "Like":
+            $ degree = 1
+        "Love":
+            $ degree = 2
+        "Back":
+            return
 
-    else: # Happens if their willpower is equal to your power.
-        "Speaker" "This can go either way, don't mess up."
+    python:
+        score = person.get_opinion_score(opinion)
+        degrees = [-2,-1,0,1,2]
+        change = abs(degrees.index(score) - degrees.index(degree)) # How far is the degree away from current opinion (max 4 steps)
+        cur_score = opinion_score_to_string(score)
 
-    if len(mc.location.people) > 1: # Check if there are other people nearby and fortify their willpower based on how many.
-        "Speaker" "There are [people_nearby] other people around you that might interfer with the process."
-        "Speaker" "Try bringing [person.name] to a more secluded area?"
-
-        menu:
-            "Yes":
-                "Speaker" "You bring [person.name] away from the others"
-                "Speaker" "Having isolated the target it is now both more focused and pliable."
-
-                # Might want to assume that a certain personality or opinion makes them uncomfortable being away from others thus it was a mistake luring them away. Hate and unhappiness might also play into it.
-                if person.love < 30:
-                    $ person.change_willpower(10)   # she becomes more stubborn
-                    $ person.draw_person(emotion = "sad")
-                    "Speaker" "[person.name] seems to be uncomfortable with being alone in your presence ."
-
-            "No":
-                $ person.change_willpower(people_nearby * 5)    # persons nearby will interfere with influence
-
-                pass
-
-            "Back":
-                return
-
-    call influence_opinion_input_label(person) # Takes input and returns
-
-    if mc.power > person.willpower:
-        "Speaker" "You succeed at making the changes"
-        $ person.add_opinion(opinion, degree, discovered)
-    elif person.willpower > mc.power :
-        "Speaker" "[person.name]'s mind rejects your suggestions"
+    if score is not 0:
+        "Speaker" "[person.possessive_title] [cur_score] [opinion], depending on how drastic the change and how suggestable the person is you might succeed."
     else:
-        "Speaker" "You are at a stalemate, try changing your approach"
+        "Speaker" "[person.possessive_title], currently has no opinion regarding [opinion], depending on how suggestable the person is you might succeed"
+
+    if change == 1: # small change
+        $ difficulty = renpy.random.randint(0, 20) # Using ranges so people can get lucky, and it can give different outcomes faking simulation of psychology
+    elif change == 2: # medium change
+        $ difficulty = renpy.random.randint(20, 40)
+    elif change == 3: # large change
+        $ difficulty = renpy.random.randint(40, 60)
+    elif change == 4: # very large change
+        $ difficulty = renpy.random.randint(60, 80)
+    else:
+        $ difficulty = renpy.random.randint(0, 80) #Anything above 80 should be an auto- success
+
+    if person.suggestibility >= difficulty:
+        $ person.add_opinion(opinion, degree, discovered)
+        $ new_score = opinion_score_to_string(person.get_opinion_score(opinion))
+        "Speaker" "You succeed at influencing [person.possessive_title]'s' opinion to now [new_score] [opinion]"
+
+
+    else:
+        "Speaker" "[person.possessive_title] doesn't seem to agree with your suggestion regarding [opinion]"
+        "Speaker" "Making her more suggestable might help you out."
 
     $ person.special_role.remove(suggestable_role)
     $ mc.log_event((person.title or person.name) + " is no longer suggestable.", "float_text_blue")

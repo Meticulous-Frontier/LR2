@@ -1,5 +1,6 @@
-init python:
-    config.overlay_screens = ["keybind"]
+init 1 python:
+    if "keybind" not in config.overlay_screens:
+        config.overlay_screens.append("keybind")
     config.console = True # Enables the console, can be set to False.
 
 screen keybind(): # Change the key "" to whatever you want to open / close the cheat menu
@@ -660,7 +661,6 @@ screen cmw(): # Cheats affecting the general world
                 vbox: # Column 3
                     textbutton "Work Chat" action Call("work_chat_crisis_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "work_chat_crisis_label"
                     textbutton "Cat Fight" action Call("cat_fight_crisis_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "cat_fight_crisis_label"
-                    textbutton "Cat Fight Pick Winner" action Call("cat_fight_pick_winner", get_random_from_list(mc.location.people), get_random_from_list(mc.location.people)) style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "cat_fight_pick_winner"
                     textbutton "Research Reminder" action Call("research_reminder_crisis_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "research_reminder_crisis_label"
                     #textbutton "Serum Creation" action Call("serum_creation_crisis_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "serum_creation_crisis_label"
                     #textbutton "" action Call("") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip ""

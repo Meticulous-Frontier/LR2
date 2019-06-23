@@ -2,6 +2,19 @@
 # All girls in town older than 40 get this personality trait
 # See generic_personality_hook.rpy for more information
 
+init 3 python:
+    def cougar_personality_requirement():
+        return True
+
+    def change_cougar_personality_enabled(enabled):       
+        for person in all_people_in_the_game():
+            update_cougar_personality(person)
+        return
+
+    cougar_personality_action = ActionMod("Cougar Personality", cougar_personality_requirement, "cougar_personality_dummy_label", 
+        menu_tooltip = "Enable or disable the cougar personality.", category="Personality", on_enabled_changed = change_cougar_personality_enabled)
+
+
 init 1400 python:
     def cougar_titles(person):
         valid_titles = [reserved_titles(person)]
@@ -38,8 +51,7 @@ init 1400 python:
         common_sexy_dislikes = ["being submissive", "being fingered", "missionary style sex", "risking getting pregnant"],
         titles_function = cougar_titles, possessive_titles_function = cougar_possessive_titles, player_titles_function = cougar_player_titles)
 
-    # added to personalities prior to initalization of new games
-    list_of_personalities.append(cougar_personality)
+    # don't add it to the default list of personalities, let the personality hook change it based on age
 
 init 5 python:
     add_label_hijack("normal_start", "correct_personality_age_action")
@@ -48,7 +60,7 @@ init 5 python:
 # this used on the startup of the game (called ONCE)
 label correct_personality_age_action(stack):
     python:
-        for person in all_people_in_the_game(excluded_people = [mc, lily, mom, stephanie] + list_of_unique_characters):
+        for person in all_people_in_the_game(excluded_people = [mc, lily, mom, aunt, cousin, stephanie] + list_of_unique_characters):
             # make cougars personalities the right age
             if person.personality == cougar_personality:
                 if person.age < 40: # split age for cougars

@@ -11,8 +11,7 @@ init 3 python:
         return False
 
     sister_phone_crisis_action = ActionMod("Sister Phone Message",sister_phone_crisis_requirement,"sister_phone_crisis_action_label",
-        menu_tooltip = "[the_person.possessive_title] sends you phone messages", category="Home")
-    crisis_list.append([sister_phone_crisis_action, sister_phone_mod_weight])
+        menu_tooltip = "[the_person.possessive_title] sends you phone messages", category="Home", is_crisis = True, crisis_weight = sister_phone_mod_weight)
 
 label sister_phone_crisis_action_label:
     #TODO: have a way of saving and reviewing selfies in the future.
@@ -209,7 +208,7 @@ label sister_phone_crisis_action_label:
             $ the_person.draw_person(emotion = "happy")
             "[the_person.possessive_title] sends you a short video she took of herself outside. She's keeping up a brisk walk and seems slightly out of breath."
             if not the_person.outfit.wearing_bra and the_person.has_large_tits:
-                "She doesn't seem to realise it but it's very obvious [the_person.possessive_title] isn't wearing a bra under her shirt. Her sizeable breasts heave up and down with each step."
+                "She doesn't seem to realize it but it's very obvious [the_person.possessive_title] isn't wearing a bra under her shirt. Her sizeable breasts heave up and down with each step."
 
     else:
         #Sends you normal sisterly texts.

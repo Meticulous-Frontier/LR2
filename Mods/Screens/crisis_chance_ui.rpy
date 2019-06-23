@@ -1,4 +1,4 @@
-screen crisis_chance_setting(disabled):
+screen crisis_chance_setting(disabled, morning_disabled):
     modal True
     zorder 49
 
@@ -22,7 +22,7 @@ screen crisis_chance_setting(disabled):
 
         vbox:
             yalign 0.5
-            text "Morning Crisis Event [[Total: " + str(len(morning_crisis_list)) + "]" style "textbutton_text_style"           
+            text "Morning Crisis Event [[Total: " + str(len(morning_crisis_list) - morning_disabled) + "]" style "textbutton_text_style"           
             hbox:
                 bar value ScreenVariableValue("current_morning_crisis_base_chance", 100.0, step = 1.0) range 100 xsize 800 ysize 45 style style.slider
                 yalign 1.0
