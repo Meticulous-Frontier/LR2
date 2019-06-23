@@ -455,7 +455,7 @@ label SB_free_strip_scene(the_person):
     return
 
 #SBA4
-label SB_mom_anal_pay_label(the_person):
+label SB_mom_anal_pay_label():
     $ the_person = mom
     $ renpy.show(bedroom.name,what=bedroom.background_image)
     "You're getting ready for bed when [the_person.possessive_title] calls from downstairs."
@@ -577,7 +577,7 @@ label SB_mom_anal_pay_label(the_person):
     return
 
 #SBA50
-label SB_mom_anal_friday_label(the_person):
+label SB_mom_anal_friday_label():
     $ the_person = mom
     $ renpy.show(bedroom.name,what=bedroom.background_image)
     "You're hanging out in your room when you here [the_person.possessive_title] call form her room."
