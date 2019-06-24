@@ -100,11 +100,14 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                     "You tell the girls to take off their clothes." 
 
                     python:
-                        scene_manager.strip_actor_outfit_to_max_sluttiness(person_two, temp_sluttiness_boost = 40)
-                        scene_manager.strip_actor_outfit_to_max_sluttiness(person_three, temp_sluttiness_boost = 40)
+                        scene_manager.strip_actor_outfit_to_max_sluttiness(person_two, temp_sluttiness_boost = 50)
+                        scene_manager.strip_actor_outfit_to_max_sluttiness(person_three, temp_sluttiness_boost = 50)
 
-                        scene_manager.remove_actor(person_two)
-                        scene_manager.remove_actor(person_three)
+                        # DON'T REMOVE ACTORS, THIS WILL RESET THE OUTFIT
+                        #scene_manager.remove_actor(person_two)
+                        #scene_manager.remove_actor(person_three)
+                        # DO REMOVE THE MULTI PERSON INFO UI
+                        renpy.hide_screen("multi_person_info_ui")
 
                     # switch to SB ui
                     hide screen person_info_ui

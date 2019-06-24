@@ -31,7 +31,7 @@ init -2 python:
             actor = find_in_list(lambda x: x.person is person, self.actors)
             if not actor is None:
                 #mc.log_event("Strip " + actor.person.title, "gray_float_text")
-                actor.person.strip_outfit_to_max_sluttiness(top_layer_first = top_layer_first, exclude_upper = exclude_upper, exclude_lower = exclude_lower, exclude_feet = exclude_feet, narrator_messages = narrator_messages, character_placement = actor.character_placement, position = actor.position, emotion = actor.emotion, scene_manager = self)
+                actor.person.strip_outfit_to_max_sluttiness(top_layer_first = top_layer_first, exclude_upper = exclude_upper, exclude_lower = exclude_lower, exclude_feet = exclude_feet, narrator_messages = narrator_messages, character_placement = actor.character_placement, temp_sluttiness_boost = temp_sluttiness_boost,  position = actor.position, emotion = actor.emotion, scene_manager = self)
 
         def draw_animated_removal(self, person, the_clothing): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
             actor = find_in_list(lambda x: x.person is person, self.actors)
