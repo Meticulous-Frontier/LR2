@@ -15,17 +15,17 @@ init -1 python:
         the_person.change_slut_temp(2, add_to_log)
 
     def constant_stimulation_on_turn(the_person, add_to_log, fire_event = True):
-        if renpy.random.randint(0,100) < (the_person.suggestibility - the_person.core_sluttiness) * 3:
+        if renpy.random.randint(0,100) < (the_person.suggestibility - the_person.core_sluttiness) * 5:
             the_person.change_slut_core(1, add_to_log)
             the_person.change_slut_temp(1, add_to_log)
 
     def dopamine_therapy_on_turn(the_person, add_to_log, fire_event = True):
-        if renpy.random.randint(0,100) < (the_person.suggestibility - (the_person.happiness - 100)) * 3:
+        if renpy.random.randint(0,100) < (the_person.suggestibility - (the_person.happiness - 100)) * 5:
             the_person.change_happiness(1, add_to_log)
 
 
     def behavior_adjustment_on_turn(the_person, add_to_log, fire_event = True):
-        if renpy.random.randint(0,100) < (the_person.suggestibility - (the_person.obedience - 100)) * 3:
+        if renpy.random.randint(0,100) < (the_person.suggestibility - (the_person.obedience - 90)) * 5:
             the_person.change_obedience(1, add_to_log)
 
     def submission_function_on_apply(the_person, add_to_log):
@@ -207,7 +207,7 @@ init -1 python:
                 the_person.sexy_opinions[SB_random_fetish_key] = [SB_random_opinion, True]
 
         if the_person.sex_skills["Oral"] >= 5:
-            if SB_get_cum_score(the_person) > 8:
+            if SB_get_cum_score(the_person) >= 8:
                 if the_person.sluttiness >= 90:
                     # only allow one cum fetish either internal or external
                     if not (SB_check_fetish(the_person, cum_external_role) or SB_check_fetish(the_person, cum_internal_role)):
@@ -216,6 +216,8 @@ init -1 python:
                             if the_person == lily:
                                 if not SB_fetish_lily_cum in mandatory_morning_crises_list:
                                     mandatory_morning_crises_list.append(SB_fetish_lily_cum)
+                                if not SB_fetish_lily_cum in mc.business.mandatory_morning_crises_list:
+                                    mc.business.mandatory_morning_crises_list.append(SB_fetish_lily_cum)
                             elif FETISH_CUM_EVENT_INUSE:
                                 return
                             elif the_person == mom:

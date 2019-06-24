@@ -123,7 +123,7 @@ label outro_SB_cum_fetish_blowjob(the_girl, the_location, the_object, the_round)
         $ SB_cum_fetish_blowjob.redraw_scene(the_girl)
         if the_girl.arousal > 100:
             "[the_girl.possessive_title]'s legs quiver as she convulses. She is so addicted to your cum, blowing in her mouth has set off another orgasm for her."
-            $ the_girl.change_obedience(5*the_girl.get_opinion_score("drinking_cum"))
+            $ the_girl.change_obedience(5*the_girl.get_opinion_score("drinking cum"))
         "Once you've had a second to recover, [the_girl.possessive_title] closes her mouth and swallows loudly. It takes a few big gulps to get every last drop of your cum down, but when she opens up again it's all gone."
         $ SB_cum_fetish_blowjob.current_modifier = None
         $ SB_cum_fetish_blowjob.redraw_scene(the_girl)
@@ -138,7 +138,7 @@ label outro_SB_cum_fetish_blowjob(the_girl, the_location, the_object, the_round)
         $ SB_cum_fetish_blowjob.redraw_scene(the_girl)
         if the_girl.arousal > 100:
             "[the_girl.possessive_title]'s legs quiver as she convulses. She is so addicted to your cum, blowing on her face has set off another orgasm for her."
-            $ the_girl.change_obedience(5*the_girl.get_opinion_score("drinking_cum"))
+            $ the_girl.change_obedience(5*the_girl.get_opinion_score("cum facials"))
         "Slowly recovering, you look at [the_girl.possessive_title]'s cum covered face. Her eyes are closed and she is absentmindedly playing with some of the cum that is starting to run down her neck."
         $ SB_cum_fetish_blowjob.current_modifier = None
         $ SB_cum_fetish_blowjob.redraw_scene(the_girl)
