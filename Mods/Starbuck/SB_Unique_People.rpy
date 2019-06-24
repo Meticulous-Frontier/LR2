@@ -3,6 +3,28 @@ init 2 python:
     SB_SHOP_STAGE_ONE_DAY = 9999
     SB_SHOP_STAGE_TWO_DAY = 9999
 
+
+    #global starbuck_role
+    #starbuck ACTIONS#
+    starbuck_vaginal_skillup = Action("Ask about improving vaginal skill", starbuck_vaginal_skillup_requirement, "starbuck_vaginal_skillup_label")
+    starbuck_anal_skillup = Action("Ask about improving anal skill", starbuck_anal_skillup_requirement, "starbuck_anal_skillup_label")
+    starbuck_oral_skillup = Action("Ask about improving oral skill", starbuck_oral_skillup_requirement, "starbuck_oral_skillup_label")
+    starbuck_foreplay_skillup = Action("Ask about improving foreplay", starbuck_foreplay_skillup_requirement, "starbuck_foreplay_skillup_label")
+    #Arousal reduction is disabled for now. Might be able to revisit it at another time.
+    #starbuck_arousal_reduction_one = Action("Ask about lasting longer", starbuck_arousal_reduction_one_requirement, "starbuck_arousal_reduction_one_label")
+    #starbuck_arousal_reduction_two = Action("Ask about lasting even longer", starbuck_arousal_reduction_two_requirement, "starbuck_arousal_reduction_two_label")
+    starbuck_sex_store_investment_one = Action("Ask about investing in her store", starbuck_sex_store_investment_one_requirement, "starbuck_sex_store_investment_one_label")
+    starbuck_sex_store_investment_two = Action("Ask about stock levels", starbuck_sex_store_investment_two_requirement, "starbuck_sex_store_investment_two_label")
+    starbuck_sex_store_investment_three = Action("Ask about further investment", starbuck_sex_store_investment_three_requirement, "starbuck_sex_store_investment_three_label")
+    starbuck_sex_store_promo_one = Action("Ask how business is going", starbuck_sex_store_promo_one_requirement, "starbuck_sex_store_promo_one_label")
+    starbuck_sex_store_promo_two = Action("Ask if advertising is working", starbuck_sex_store_promo_two_requirement, "starbuck_sex_store_promo_two_label")
+    starbuck_sex_store_promo_three = Action("Ask if women are coming in", starbuck_sex_store_promo_three_requirement, "starbuck_sex_store_promo_three_label")
+    starbuck_sex_store_promo_four = Action("Ask if couples are coming in", starbuck_sex_store_promo_four_requirement, "starbuck_sex_store_promo_four_label")
+    starbuck_sex_store_promo_five = Action("Ask if couples are coming in", starbuck_sex_store_promo_five_requirement, "starbuck_sex_store_promo_five_label")
+    starbuck_spend_the_night = Action("Spend the night with her", starbuck_spend_the_night_requirement, "starbuck_spend_the_night_label")
+
+    starbuck_role = Role(role_name ="Sex Shop Owner", actions =[starbuck_vaginal_skillup, starbuck_anal_skillup, starbuck_oral_skillup, starbuck_foreplay_skillup, starbuck_sex_store_investment_one, starbuck_sex_store_investment_two, starbuck_sex_store_investment_three, starbuck_sex_store_promo_one, starbuck_sex_store_promo_two, starbuck_sex_store_promo_three, starbuck_sex_store_promo_four, starbuck_sex_store_promo_five, starbuck_spend_the_night])
+
     def SB_make_swing():
         the_swing = Object("sex swing",["Sit","Low", "Swing"], sluttiness_modifier = 10, obedience_modifier = 10)
         return the_swing
@@ -16,26 +38,8 @@ init 2 python:
         titles_function = starbuck_titles, possessive_titles_function = starbuck_possessive_titles, player_titles_function = starbuck_player_titles)
 
 
-        #global starbuck_role
-        #starbuck ACTIONS#
-        starbuck_vaginal_skillup = Action("Ask about improving vaginal skill", starbuck_vaginal_skillup_requirement, "starbuck_vaginal_skillup_label")
-        starbuck_anal_skillup = Action("Ask about improving anal skill", starbuck_anal_skillup_requirement, "starbuck_anal_skillup_label")
-        starbuck_oral_skillup = Action("Ask about improving oral skill", starbuck_oral_skillup_requirement, "starbuck_oral_skillup_label")
-        starbuck_foreplay_skillup = Action("Ask about improving foreplay", starbuck_foreplay_skillup_requirement, "starbuck_foreplay_skillup_label")
-        #Arousal reduction is disabled for now. Might be able to revisit it at another time.
-        #starbuck_arousal_reduction_one = Action("Ask about lasting longer", starbuck_arousal_reduction_one_requirement, "starbuck_arousal_reduction_one_label")
-        #starbuck_arousal_reduction_two = Action("Ask about lasting even longer", starbuck_arousal_reduction_two_requirement, "starbuck_arousal_reduction_two_label")
-        starbuck_sex_store_investment_one = Action("Ask about investing in her store", starbuck_sex_store_investment_one_requirement, "starbuck_sex_store_investment_one_label")
-        starbuck_sex_store_investment_two = Action("Ask about stock levels", starbuck_sex_store_investment_two_requirement, "starbuck_sex_store_investment_two_label")
-        starbuck_sex_store_investment_three = Action("Ask about further investment", starbuck_sex_store_investment_three_requirement, "starbuck_sex_store_investment_three_label")
-        starbuck_sex_store_promo_one = Action("Ask how business is going", starbuck_sex_store_promo_one_requirement, "starbuck_sex_store_promo_one_label")
-        starbuck_sex_store_promo_two = Action("Ask if advertising is working", starbuck_sex_store_promo_two_requirement, "starbuck_sex_store_promo_two_label")
-        starbuck_sex_store_promo_three = Action("Ask if women are coming in", starbuck_sex_store_promo_three_requirement, "starbuck_sex_store_promo_three_label")
-        starbuck_sex_store_promo_four = Action("Ask if couples are coming in", starbuck_sex_store_promo_four_requirement, "starbuck_sex_store_promo_four_label")
-        starbuck_sex_store_promo_five = Action("Ask if couples are coming in", starbuck_sex_store_promo_five_requirement, "starbuck_sex_store_promo_five_label")
-        starbuck_spend_the_night = Action("Spend the night with her", starbuck_spend_the_night_requirement, "starbuck_spend_the_night_label")
 
-        starbuck_role = Role(role_name ="Sex Shop Owner", actions =[starbuck_vaginal_skillup, starbuck_anal_skillup, starbuck_oral_skillup, starbuck_foreplay_skillup, starbuck_sex_store_investment_one, starbuck_sex_store_investment_two, starbuck_sex_store_investment_three, starbuck_sex_store_promo_one, starbuck_sex_store_promo_two, starbuck_sex_store_promo_three, starbuck_sex_store_promo_four, starbuck_sex_store_promo_five, starbuck_spend_the_night])
+
 
         starbuck_wardrobe = wardrobe_from_xml("Starbuck_Wardrobe")
 
@@ -45,7 +49,7 @@ init 2 python:
         starbuck_home.add_object(make_bed())
         starbuck_home.add_object(make_window())
 
-        #starbuck_home.link_locations_two_way(downtown)
+        starbuck_home.link_locations_two_way(downtown)
         list_of_places.append(starbuck_home)
 
         #global starbuck_role
@@ -1576,6 +1580,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         "You sit down and enjoy your coffee. It has been about 5 minutes now. The crack in the door is calling you. Should you join her in the shower? Or let her finish?"
         menu:
             "Shower with her.":
+                $ SB_nude_outfit = Outfit("Nude")
                 $ the_person.outfit = SB_nude_outfit.get_copy()
                 #TODO shower background?
                 "You decide you've waited long enough and make your way into the bathroom. Inside you smell the scent of lavender body wash and quickly spy [the_person.title]'s soapy body through the hazy steam."
@@ -1609,10 +1614,10 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
                     the_person.char "Oh my god..."
                     "[the_person.possessive_title] sighs as you bottom out."
                     "She wiggles her ass back and forth a few times, enjoying the familiar feel of fullness you give her when you fuck her."
-                    call fuck_person(the_person, start_position = SB_facing_wall, start_object = make_wall(), skip_intro = True, girl_in_charge = False) from _call_fuck_person_SBS123
-
+                    call sex_description(the_person, SB_doggy_standing, make_wall(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBS123
                     "You spend a moment recovering while [the_person.title] rinses herself off."
                 #TODO set outfit to regular nude again. She washed the cum off!
+                $ SB_nude_outfit = Outfit("Nude")
                 $ the_person.outfit = SB_nude_outfit.get_copy()
                 $ the_person.arousal = 50   #A hard setting of arousal... Did this to avoid an entry in the log. Not ideal code#
                 $ the_person.draw_person(position = "stand2")
@@ -1647,7 +1652,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
                 "You get into position behind her. She arches her back and presents her ass."
                 "[the_person.possessive_title]'s pussy is already dripping with arousal. You line yourself up with her ass, while she reaches down and lines the dildo up with her pussy."
                 "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
-                the_girl.char "Oh my god! I'm so full... Its so good [the_girl.mc_title]! Fuck me like you paid for this! Like I'm just a whore!"
+                the_person.char "Oh my god! I'm so full... Its so good [the_person.mc_title]! Fuck me like you paid for this! Like I'm just a whore!"
                 call sex_description(the_person, SB_doggy_anal_dildo_dp, make_bed(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBS124
                 "Finished with your anal plundering, you let yourself collapse onto [the_person.title]'s bed."
                 "She cuddles up next to you."
