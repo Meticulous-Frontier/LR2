@@ -136,7 +136,7 @@ label SB_fetish_vaginal_visit_label(the_person):
             SB_fetish_vaginal_event.args = [the_person] # Set Action event args to person
             mc.business.mandatory_crises_list.append(SB_fetish_vaginal_event)
             FETISH_VAGINAL_EVENT_INUSE = True
-        SB_SET_RANDOM_EVENT_CHANCE(0)
+            SB_SET_RANDOM_EVENT_CHANCE(0)
     return
 
 #SBR10
@@ -171,17 +171,17 @@ label SB_fetish_vaginal_mom_kitchen_label():
     "[the_person.possessive_title] stifles a moan, she pushes her hips back against you as you continue to stroke her."
     the_person.char "Mmmmmm... Okay... Do it! Just go quick! I don't want your sister to catch us."
     if the_person.outfit.vagina_available():           #If its available no need to strip.
-         "You quickly pull your cock out and line it up with her wet slit."
+        "You quickly pull your cock out and line it up with her wet slit."
     else:                                              #Otherwise, strip her down.
-         "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy"
+        "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy"
 
-         python:
-                for clothing in the_person.outfit.get_lower_ordered():
-                     the_person.outfit.remove_clothing(clothing)
-                     the_person.draw_person(position = "standing_doggy")
-                     renpy.say("","")
+        python:
+            for clothing in the_person.outfit.get_lower_ordered():
+                the_person.outfit.remove_clothing(clothing)
+                the_person.draw_person(position = "standing_doggy")
+                renpy.say("","")
 
-         "With her pussy finally exposed you waste no time. You quickly pull your cock out and line it up with her wet slit."
+        "With her pussy finally exposed you waste no time. You quickly pull your cock out and line it up with her wet slit."
 
     call sex_description(the_person, SB_doggy_standing , make_table(), 0, private = True) from _call_sex_description_SBR10
 
@@ -252,17 +252,17 @@ label SB_fetish_anal_mom_kitchen_label(the_person):
     "[the_person.possessive_title] stifles a moan, she pushes her hips back against you as you continue to stroke her."
     the_person.char "Mmmmmm... Okay... Do it! Just go quick! I don't want your sister to catch us."
     if the_person.outfit.vagina_available():           #If its available no need to strip.
-         "You quickly pull your cock out and begin to rub it between her cheeks."
+        "You quickly pull your cock out and begin to rub it between her cheeks."
     else:                                              #Otherwise, strip her down.
-         "You don't bother to reply, instead you begin stripping away anything between you and her supple ass."
+        "You don't bother to reply, instead you begin stripping away anything between you and her supple ass."
 
-         python:
-                for clothing in the_person.outfit.get_lower_ordered():
-                     the_person.outfit.remove_clothing(clothing)
-                     the_person.draw_person(position = "standing_doggy")
-                     renpy.say("","")
+        python:
+            for clothing in the_person.outfit.get_lower_ordered():
+                the_person.outfit.remove_clothing(clothing)
+                the_person.draw_person(position = "standing_doggy")
+                renpy.say("","")
 
-         "With her ass finally exposed you waste no time. You quickly pull your cock out and rub it between her cheeks."
+        "With her ass finally exposed you waste no time. You quickly pull your cock out and rub it between her cheeks."
     "[the_person.possessive_title] pulls some lube out of one of the kitchen drawers."
     mc.name "Wait... you keep lube in the...?"
     the_person.char "Shut up just fuck me before your sister notices!"
@@ -296,7 +296,7 @@ label SB_lily_anal_in_room_label(the_person):
         "You step up behind [the_person.possessive_title] and start to grope her ass. She sighs as you massage it."
         "You decide to start getting her ready while she looks for the the toy. You start peeling her clothes off."
         python:
-           for clothing in the_person.outfit.get_lower_ordered():
+            for clothing in the_person.outfit.get_lower_ordered():
                 the_person.outfit.remove_clothing(clothing)
                 the_person.draw_person(position = "standing_doggy")
                 renpy.say("","")

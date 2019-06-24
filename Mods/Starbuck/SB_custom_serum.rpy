@@ -112,27 +112,22 @@ init -1 python:
             if the_person.get_opinion_score("vaginal sex") == 2:
                 if the_person.sluttiness >= 80:
                     if SB_get_fetish_count(the_person) < store.max_fetishes_per_person:
-                        #DEBUG Trigger for vaginal fetish
+                        # renpy.say("", "Evaluate Vaginal Fetish (In Use: " + str(FETISH_VAGINAL_EVENT_INUSE) + ")")
                         if FETISH_VAGINAL_EVENT_INUSE:
-                            the_person.change_slut_core(1, add_to_log = False)
-                            the_person.change_slut_temp(1, add_to_log = False)
-                        elif the_person == mom:
-                            if SB_fetish_mom_vaginal_crisis not in mc.business.mandatory_crises_list:
-                                mc.business.mandatory_crises_list.append(SB_fetish_mom_vaginal_crisis)
-                                FETISH_VAGINAL_EVENT_INUSE = True
-                                SB_SET_RANDOM_EVENT_CHANCE(0)
+                            return
+
+                        FETISH_VAGINAL_EVENT_INUSE = True
+                        SB_SET_RANDOM_EVENT_CHANCE(0)
+                        # renpy.say("", "Trigger vaginal fetish " + the_person.name)
+
+                        if the_person == mom:
+                            mc.business.mandatory_crises_list.append(SB_fetish_mom_vaginal_crisis)
                         elif the_person == lily:
-                            if SB_fetish_lily_vaginal_crisis not in mc.business.mandatory_crises_list:
-                                mc.business.mandatory_crises_list.append(SB_fetish_lily_vaginal_crisis)
-                                FETISH_VAGINAL_EVENT_INUSE = True
-                                SB_SET_RANDOM_EVENT_CHANCE(0)
+                            mc.business.mandatory_crises_list.append(SB_fetish_lily_vaginal_crisis)
                         else:
-                            if SB_fetish_vaginal_crisis not in mc.business.mandatory_crises_list:
-                                SB_fetish_vaginal_crisis.args = [the_person]    # set the current person as action argument
-                                mc.business.mandatory_crises_list.append(SB_fetish_vaginal_crisis)
-                                FETISH_VAGINAL_EVENT_INUSE = True
-                                SB_SET_RANDOM_EVENT_CHANCE(0)
-                        #"Vaginal fetish event added"
+                            SB_fetish_vaginal_crisis.args = [the_person]    # set the current person as action argument
+                            mc.business.mandatory_crises_list.append(SB_fetish_vaginal_crisis)
+        return
 
     def fetish_anal_function_on_turn(the_person, add_to_log):
         global FETISH_ANAL_EVENT_INUSE
@@ -160,30 +155,27 @@ init -1 python:
             if the_person.get_opinion_score("anal sex") == 2:
                 if the_person.sluttiness >= 90:
                     if SB_get_fetish_count(the_person) < store.max_fetishes_per_person:
-                    #"DEBUG Trigger for anal fetish"
+                        # renpy.say("", "Evaluate Anal Fetish (In Use: " + str(FETISH_ANAL_EVENT_INUSE) + ")")
                         if FETISH_ANAL_EVENT_INUSE:
                             return
-                        elif the_person == lily:
-                            if SB_lily_anal_dp_fetish not in mc.business.mandatory_crises_list:
-                                mc.business.mandatory_crises_list.append(SB_lily_anal_dp_fetish)
-                                FETISH_ANAL_EVENT_INUSE = True
-                                SB_SET_RANDOM_EVENT_CHANCE(0)
-                            return
+
+                        FETISH_ANAL_EVENT_INUSE = True
+                        SB_SET_RANDOM_EVENT_CHANCE(0)
+
+                        # renpy.say("", "Trigger anal fetish " + the_person.name)
+                        if the_person == lily:
+                            mc.business.mandatory_crises_list.append(SB_lily_anal_dp_fetish)
                         elif the_person == mom:
                             for mand_event in mc.business.mandatory_crises_list:
                                 if mand_event.name == "mom weekly pay":
-                                    #renpy.say("","DEBUG: Succesfully located mom event, attempting removal and replacement.")
+                                    # renpy.say("","DEBUG: Succesfully located mom event, attempting removal and replacement.")
                                     mc.business.mandatory_crises_list.remove(mand_event)
                                     mc.business.mandatory_crises_list.append(SB_mom_anal_fetish)
                                     FETISH_ANAL_EVENT_INUSE = True
-                            return
                         else:
-                            if SB_fetish_anal_crisis not in mc.business.mandatory_crises_list:
-                                SB_fetish_anal_crisis.args = [the_person]    # set the current person as action argument
-                                mc.business.mandatory_crises_list.append(SB_fetish_anal_crisis)
-                                FETISH_ANAL_EVENT_INUSE = True
-                                SB_SET_RANDOM_EVENT_CHANCE(0)
-
+                            SB_fetish_anal_crisis.args = [the_person]    # set the current person as action argument
+                            mc.business.mandatory_crises_list.append(SB_fetish_anal_crisis)
+        return
 
 
     def fetish_cum_function_on_turn(the_person, add_to_log):
@@ -212,27 +204,21 @@ init -1 python:
                     # only allow one cum fetish either internal or external
                     if not (SB_check_fetish(the_person, cum_external_role) or SB_check_fetish(the_person, cum_internal_role)):
                         if SB_get_fetish_count(the_person) < store.max_fetishes_per_person:
-                            # renpy.say("", "Evaluate Cum Fetish (In Use: " + str(FETISH_CUM_EVENT_INUSE) + ")")
-                            if the_person == lily:
-                                if not SB_fetish_lily_cum in mandatory_morning_crises_list:
-                                    mandatory_morning_crises_list.append(SB_fetish_lily_cum)
-                                if not SB_fetish_lily_cum in mc.business.mandatory_morning_crises_list:
-                                    mc.business.mandatory_morning_crises_list.append(SB_fetish_lily_cum)
-                            elif FETISH_CUM_EVENT_INUSE:
+                            #renpy.say("", "Evaluate Cum Fetish (In Use: " + str(FETISH_CUM_EVENT_INUSE) + ")")
+                            if FETISH_CUM_EVENT_INUSE:
                                 return
+                            
+                            FETISH_CUM_EVENT_INUSE = True
+                            SB_SET_RANDOM_EVENT_CHANCE(0)
+                            #renpy.say("", "Trigger cum fetish " + the_person.name)
+                            if the_person == lily:
+                                mc.business.mandatory_morning_crises_list.append(SB_fetish_lily_cum)
                             elif the_person == mom:
                                 mc.business.mandatory_crises_list.append(SB_fetish_mom_cum)
-                                FETISH_CUM_EVENT_INUSE = True
                             else:
-                                # renpy.say("", "Trigger cum fetish " + the_person.name)
-                                if SB_fetish_cum_crisis not in mc.business.mandatory_crises_list:
-                                    # renpy.say("", "Add trigger to mandatory crisis list " + the_person.name)
-                                    SB_fetish_cum_crisis.args = [the_person]
-                                    mc.business.mandatory_crises_list.append(SB_fetish_cum_crisis)
-                                    FETISH_CUM_EVENT_INUSE = True
-                                    SB_SET_RANDOM_EVENT_CHANCE(0)
-
-        ###DEBUGSBEND
+                                SB_fetish_cum_crisis.args = [the_person]
+                                mc.business.mandatory_crises_list.append(SB_fetish_cum_crisis)
+        return
 
 label serum_mod_starbuck_traits(stack):
     python:

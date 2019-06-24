@@ -38,8 +38,6 @@ label SB_fetish_anal_label(the_person):
     #$ the_person.outfit = SB_anal_outfit.get_copy()
     $ the_person.draw_person()
 
-    $ FETISH_ANAL_EVENT_INUSE = False
-
     show screen person_info_ui(the_person)
     ###Draw the girl###
     "You give her a quick wave as she walks up to you."
@@ -104,6 +102,9 @@ label SB_fetish_anal_label(the_person):
             $ the_person.change_happiness(-5)
             the_person.char "Oh! I'm sorry... I didn't think about that. Maybe tomorrow then?"
             "[the_person.possessive_title] quickly sulks off."
+
+    $ FETISH_ANAL_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     return
 
 #SBA2
@@ -219,8 +220,6 @@ label SB_fetish_anal_staylate_event_label(the_person):
             $ the_person.reset_arousal()
             "[the_person.possessive_title] gets up and starts getting ready to go home."
             "You say goodbye to her as she walks out your office door. She walks a bit funny, clearly uncomfortable after the spanking she received."
-            $ FETISH_ANAL_EVENT_INUSE = False
-            $ SB_CALCULATE_RANDOM_EVENT_RATE()
         "Fuck Her Ass\n{size=22}Requires Stamina{/size} (disabled)" if mc.current_stamina == 0:
             pass
         "Send her home":
@@ -231,9 +230,9 @@ label SB_fetish_anal_staylate_event_label(the_person):
             $ the_person.change_love(-2)
             $ the_person.change_happiness(-5)
             $ the_person.change_obedience(10)
-            $ FETISH_ANAL_EVENT_INUSE = False
-            $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
+    $ FETISH_ANAL_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     hide screen person_info_ui
     return
 
@@ -515,8 +514,6 @@ label SB_mom_anal_pay_label():
             the_person.char "[the_person.mc_title]? Why don't you just stay in here tonight? [the_person.title] loves you... its okay!"
             "You slip back into bed next to her."
             $ the_person.special_role.append(anal_fetish_role)
-            $ SB_CALCULATE_RANDOM_EVENT_RATE()
-            $ FETISH_ANAL_EVENT_INUSE = False
             "[the_person.possessive_title] has already fallen asleep. You can hear her murmuring in her dreams about taking stuff in her ass."
             "It seems your serums have given her an anal fetish!"
             "You cuddle up behind her and enjoy the heat of her soft flesh as you slowly drift off to sleep."
@@ -567,6 +564,9 @@ label SB_mom_anal_pay_label():
             the_person.char "I understand sweetheart. Now don't let me keep you, I'm sure you were up to something important."
             $ mc.business.mandatory_crises_list.append(SB_mom_weekly_pay_action)
             $ the_person.review_outfit(show_review_message = False)
+
+    $ FETISH_ANAL_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
     hide screen person_info_ui
     $ the_person.reset_arousal()
@@ -752,8 +752,7 @@ label SB_lily_anal_dp_fetish_label():
     mc.name "Don't worry [the_person.title], we'll be careful."
     the_person.char "Good... because lately I've just been craving you so bad. We don't have to always use the strap on. But just thinking about you fucking my ass makes me so horny."
     $ the_person.special_role.append(anal_fetish_role)
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
-    $ FETISH_ANAL_EVENT_INUSE = False
+
     #TODO come back and change other events involving lily to account for her anal fetish.
     "It is pretty clear from the way she got off while you were fucking her and the way she was talking afterwards, you're convinced [the_person.possessive_title] has developed an anal fetish!"
     $ mc.change_location(sex_store)
@@ -765,6 +764,9 @@ label SB_lily_anal_dp_fetish_label():
         "Was she watching you somehow? Oh well, you decide to head out."
     else:
         "You wave goodbye to Starbuck and head out."
+
+    $ FETISH_ANAL_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False)
