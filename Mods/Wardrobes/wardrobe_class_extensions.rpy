@@ -126,11 +126,12 @@ init -1 python:
                 # no underwear that fits sluttiness, get one from her personal wardrobe
                 uniform_under = person.wardrobe.get_random_appropriate_underwear(target_sluttiness)
 
-            slut_limit_remaining = target_sluttiness - uniform_under.get_underwear_slut_score()
-            if slut_limit_remaining < 0:
-                slut_limit_remaining = 0 #If the outfit is so slutty we're not comfortable in it we'll try and wear the most conservative overwear we can.
+            if uniform_under:
+                slut_limit_remaining = target_sluttiness - uniform_under.get_underwear_slut_score()
+                if slut_limit_remaining < 0:
+                    slut_limit_remaining = 0 #If the outfit is so slutty we're not comfortable in it we'll try and wear the most conservative overwear we can.
 
-            uniform_over = person.wardrobe.get_random_appropriate_overwear(slut_limit_remaining, exclude_skirts = exclude_skirts, exclude_pants = exclude_pants)
+                uniform_over = person.wardrobe.get_random_appropriate_overwear(slut_limit_remaining, exclude_skirts = exclude_skirts, exclude_pants = exclude_pants)
 
         #At this point we have our under and over, if at all possible.
         if not uniform_over or not uniform_under:
