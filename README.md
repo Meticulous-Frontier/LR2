@@ -26,3 +26,4 @@ How to Install:
 
 Unfortunatly the base game is not bug free. Check https://github.com/Tristimdorion/Lab-Rats-2/tree/bugfix for a repository that has updated versions of the game files, with fixes for all bugs people reported on the Patreon page.
 
+Report Issues here: https://gitgud.io/lab-rats-2-mods/lr2mods/issues

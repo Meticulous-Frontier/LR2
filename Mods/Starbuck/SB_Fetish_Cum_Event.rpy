@@ -124,14 +124,14 @@ label SB_fetish_cum_label(the_person):
             the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
             "You wave goodbye to [the_person.possessive_title] and finish eating your lunch."
             $ SB_CALCULATE_RANDOM_EVENT_RATE()
-            $ FETISH_CUM_EVENT_INUSE = False
         "Help Yourself\n{size=22}Requires Stamina{/size} (disabled)" if mc.current_stamina == 0:
             pass
         "Refuse":
             the_person.char "I'm sorry to hear that..." #TODO finish this
             $ SB_CALCULATE_RANDOM_EVENT_RATE()
-            $ FETISH_CUM_EVENT_INUSE = False
-
+            
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
+    $ FETISH_CUM_EVENT_INUSE = False
     hide screen person_info_ui
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
@@ -304,8 +304,9 @@ label SB_fetish_mom_cum_label():
     "[the_person.possessive_title] leave your room. Wow! What a night!"
     "You grab some clothes and head for the shower."
 
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
+    $ FETISH_CUM_EVENT_INUSE = False
     hide screen person_info_ui
-
     python:
         the_person.reset_arousal()
         the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
@@ -367,7 +368,7 @@ label SB_fetish_lily_cum_label():
                 the_person.sexy_opinions["being covered in cum"] = [FETISH_OPINION_VALUE, True]
                 if not cum_external_role in the_person.special_role:
                     the_person.special_role.append(cum_external_role)
-    $ FETISH_CUM_EVENT_INUSE = False
+
     "[the_person.possessive_title] is moaning ecstatically. You start to worry that [mom.possessive_title] might hear."
     if SB_check_fetish(the_person, cum_external_role):
         "Glancing down, you see [the_person.possessive_title] running her hands along her face, then down to her chest. She is rubbing your cum into her skin."
@@ -387,9 +388,11 @@ label SB_fetish_lily_cum_label():
     mc.name "Of course, [the_person.title]. I'll always be here for you."
     "[the_person.possessive_title]'s body melts into yours as she hears your words."
     the_person.char "Okay... I'm going to hop out of the shower now."
+    "[the_person.possessive_title] gets out. You finish up with your shower, balls empty and ready for the day!"
+
+
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ FETISH_CUM_EVENT_INUSE = False
-    "[the_person.possessive_title] gets out. You finish up with your shower, balls empty and ready for the day!"
     hide screen person_info_ui
 
     python:

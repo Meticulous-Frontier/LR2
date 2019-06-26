@@ -47,11 +47,9 @@ init 1 python:
 
 #SBV1
 label SB_fetish_vaginal_label(the_person):
-    #$ the_person = FETISH_VAGINAL_EVENT_TARGET
     "*Ding Dong*"
     "You're roused from your bed by a ring on your doorbell."
     "You head to your front door and see [the_person.possessive_title] standing there... outside... in a very provacative outfit."
-    $ FETISH_VAGINAL_EVENT_INUSE = False
     $ the_person.outfit = SB_vaginal_outfit.get_copy()
     $ the_person.draw_person()
     show screen person_info_ui(the_person)
@@ -174,6 +172,9 @@ label SB_fetish_vaginal_label(the_person):
             "[the_person.possessive_title] quickly sulks off."
             return  # EXIT
 
+    $ FETISH_VAGINAL_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
+
     call SB_process_overnight_no_events() from _SB_overnight_SBV010
 
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV010
@@ -220,15 +221,13 @@ label SB_fetish_vaginal_event_label(the_person):
                 mc.name "Wait! Hey [the_person.title] why don't you, ya know, sleep in here tonight?"
                 the_person.char "Oh? I mean... I suppose that would be okay"
             "Let's fuck!\n{size=22}Requires Stamina{/size} (disabled)" if mc.current_stamina == 0:
-                    pass
+                pass
             "Just cuddle.":
                 mc.name "Actually, [the_person.title], I'm really worn out. Would you wanna just cuddle for a bit and get some sleep?"
                 "[the_person.possessive_title] is surprised by your answer, but happy that you want to be close to her."
                 $ the_person.change_happiness(2)
                 the_person.char "Oh! Well okay. I mean hey, tomorrow is a new day, and you know I like to be close to you..."
         "[the_person.possessive_title] lays down on your bed. You cuddle up behind her and slowly drift off to sleep."
-        python:
-            FETISH_VAGINAL_EVENT_INUSE = False
     elif the_person == lily:
         "There is a quick a knock on your door. You hear [the_person.possessive_title] from the other side of the door."
         show screen person_info_ui(the_person)
@@ -267,8 +266,6 @@ label SB_fetish_vaginal_event_label(the_person):
                 "[the_person.possessive_title] is surprised by your answer."
                 the_person.char "Oh! Well okay. I mean hey, tomorrow is a new day..."
         "[the_person.possessive_title] lays down on your bed. You cuddle up behind her and slowly drift off to sleep."
-        python:
-            FETISH_VAGINAL_EVENT_INUSE = False
     else:
         "Your phones rings. Its [the_person.possessive_title]! You quickly pick it up"
         the_person.char "Hey [the_person.mc_title]! I'm here out front!"
@@ -311,9 +308,10 @@ label SB_fetish_vaginal_event_label(the_person):
                 $ the_person.change_happiness(-2)
                 the_person.char "Oh! Well okay. I mean hey, tomorrow is a new day, and you know I like to be close to you..."
         "[the_person.possessive_title] lays down on your bed. You cuddle up behind her and slowly drift off to sleep."
-        python:
 
-            FETISH_VAGINAL_EVENT_INUSE = False
+
+    $ FETISH_VAGINAL_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
     call SB_process_overnight_no_events() from _SB_overnight_SBV020
 
@@ -364,9 +362,10 @@ label SB_fetish_mom_vaginal_label():
     "That night, after fucking [the_person.possessive_title], you share your bed together. As you fall asleep, you consider the implications of what happened. "
     "It is clear that [the_person.possessive_title] is now firmy under the influence of your serums and has developed a fetish for vaginal sex."
     "Her naked flesh soft up against yours gives you many sexy dreams that night."
-    python:
-        the_person.special_role.append(vaginal_fetish_role)
-        FETISH_VAGINAL_EVENT_INUSE = False
+
+    $ the_person.special_role.append(vaginal_fetish_role)
+    $ FETISH_VAGINAL_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
     call SB_process_overnight_no_events() from _SB_overnight_SBV030
 
@@ -427,9 +426,11 @@ label SB_fetish_lily_vaginal_label():
     "It is clear that [the_person.possessive_title] is now firmly under the influence of your serums and has developed a fetish for vaginal sex."
     "Her naked flesh soft up against makes your dreams very pleasant."
     #SBMOD Start hacked wakeup sex code. To be copy/pasted to other similar places#
-    python:
-        the_person.special_role.append(vaginal_fetish_role)
-        FETISH_VAGINAL_EVENT_INUSE = False
+
+    $ the_person.special_role.append(vaginal_fetish_role)
+    $ FETISH_VAGINAL_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
+
     call SB_process_overnight_no_events() from _SB_overnight_SBV040
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV040
     return
@@ -672,8 +673,10 @@ label SB_fetish_vaginal_lily_recurring_label():
     "After you finish your rutting, you and [the_person.possessive_title] get under the covers of your bed."
     "Spooning behind [the_person.possessive_title], you drift off to a wonderful night's sleep. Her body heat and the feeling of her naked skin against yours give you very pleasant dreams."
     #SBMOD Start hacked wakeup sex code. To be copy/pasted to other similar places#
-    python:
-        FETISH_VAGINAL_EVENT_INUSE = False
+
+    $ FETISH_VAGINAL_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
+
     call SB_process_overnight_no_events() from _SB_overnight_SBV070
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV070
     return

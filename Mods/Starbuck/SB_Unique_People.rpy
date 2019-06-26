@@ -3,6 +3,28 @@ init 2 python:
     SB_SHOP_STAGE_ONE_DAY = 9999
     SB_SHOP_STAGE_TWO_DAY = 9999
 
+
+    #global starbuck_role
+    #starbuck ACTIONS#
+    starbuck_vaginal_skillup = Action("Ask about improving vaginal skill", starbuck_vaginal_skillup_requirement, "starbuck_vaginal_skillup_label")
+    starbuck_anal_skillup = Action("Ask about improving anal skill", starbuck_anal_skillup_requirement, "starbuck_anal_skillup_label")
+    starbuck_oral_skillup = Action("Ask about improving oral skill", starbuck_oral_skillup_requirement, "starbuck_oral_skillup_label")
+    starbuck_foreplay_skillup = Action("Ask about improving foreplay", starbuck_foreplay_skillup_requirement, "starbuck_foreplay_skillup_label")
+    #Arousal reduction is disabled for now. Might be able to revisit it at another time.
+    #starbuck_arousal_reduction_one = Action("Ask about lasting longer", starbuck_arousal_reduction_one_requirement, "starbuck_arousal_reduction_one_label")
+    #starbuck_arousal_reduction_two = Action("Ask about lasting even longer", starbuck_arousal_reduction_two_requirement, "starbuck_arousal_reduction_two_label")
+    starbuck_sex_store_investment_one = Action("Ask about investing in her store", starbuck_sex_store_investment_one_requirement, "starbuck_sex_store_investment_one_label")
+    starbuck_sex_store_investment_two = Action("Ask about stock levels", starbuck_sex_store_investment_two_requirement, "starbuck_sex_store_investment_two_label")
+    starbuck_sex_store_investment_three = Action("Ask about further investment", starbuck_sex_store_investment_three_requirement, "starbuck_sex_store_investment_three_label")
+    starbuck_sex_store_promo_one = Action("Ask how business is going", starbuck_sex_store_promo_one_requirement, "starbuck_sex_store_promo_one_label")
+    starbuck_sex_store_promo_two = Action("Ask if advertising is working", starbuck_sex_store_promo_two_requirement, "starbuck_sex_store_promo_two_label")
+    starbuck_sex_store_promo_three = Action("Ask if women are coming in", starbuck_sex_store_promo_three_requirement, "starbuck_sex_store_promo_three_label")
+    starbuck_sex_store_promo_four = Action("Ask if couples are coming in", starbuck_sex_store_promo_four_requirement, "starbuck_sex_store_promo_four_label")
+    starbuck_sex_store_promo_five = Action("Ask if couples are coming in", starbuck_sex_store_promo_five_requirement, "starbuck_sex_store_promo_five_label")
+    starbuck_spend_the_night = Action("Spend the night with her", starbuck_spend_the_night_requirement, "starbuck_spend_the_night_label")
+
+    starbuck_role = Role(role_name ="Sex Shop Owner", actions =[starbuck_vaginal_skillup, starbuck_anal_skillup, starbuck_oral_skillup, starbuck_foreplay_skillup, starbuck_sex_store_investment_one, starbuck_sex_store_investment_two, starbuck_sex_store_investment_three, starbuck_sex_store_promo_one, starbuck_sex_store_promo_two, starbuck_sex_store_promo_three, starbuck_sex_store_promo_four, starbuck_sex_store_promo_five, starbuck_spend_the_night])
+
     def SB_make_swing():
         the_swing = Object("sex swing",["Sit","Low", "Swing"], sluttiness_modifier = 10, obedience_modifier = 10)
         return the_swing
@@ -16,29 +38,12 @@ init 2 python:
         titles_function = starbuck_titles, possessive_titles_function = starbuck_possessive_titles, player_titles_function = starbuck_player_titles)
 
 
-        #global starbuck_role
-        #starbuck ACTIONS#
-        starbuck_vaginal_skillup = Action("Ask about improving vaginal skill", starbuck_vaginal_skillup_requirement, "starbuck_vaginal_skillup_label")
-        starbuck_anal_skillup = Action("Ask about improving anal skill", starbuck_anal_skillup_requirement, "starbuck_anal_skillup_label")
-        starbuck_oral_skillup = Action("Ask about improving oral skill", starbuck_oral_skillup_requirement, "starbuck_oral_skillup_label")
-        starbuck_foreplay_skillup = Action("Ask about improving foreplay", starbuck_foreplay_skillup_requirement, "starbuck_foreplay_skillup_label")
-        #Arousal reduction is disabled for now. Might be able to revisit it at another time.
-        #starbuck_arousal_reduction_one = Action("Ask about lasting longer", starbuck_arousal_reduction_one_requirement, "starbuck_arousal_reduction_one_label")
-        #starbuck_arousal_reduction_two = Action("Ask about lasting even longer", starbuck_arousal_reduction_two_requirement, "starbuck_arousal_reduction_two_label")
-        starbuck_sex_store_investment_one = Action("Ask about investing in her store", starbuck_sex_store_investment_one_requirement, "starbuck_sex_store_investment_one_label")
-        starbuck_sex_store_investment_two = Action("Ask about stock levels", starbuck_sex_store_investment_two_requirement, "starbuck_sex_store_investment_two_label")
-        starbuck_sex_store_investment_three = Action("Ask about further investment", starbuck_sex_store_investment_three_requirement, "starbuck_sex_store_investment_three_label")
-        starbuck_sex_store_promo_one = Action("Ask how business is going", starbuck_sex_store_promo_one_requirement, "starbuck_sex_store_promo_one_label")
-        starbuck_sex_store_promo_two = Action("Ask if advertising is working", starbuck_sex_store_promo_two_requirement, "starbuck_sex_store_promo_two_label")
-        starbuck_sex_store_promo_three = Action("Ask if women are coming in", starbuck_sex_store_promo_three_requirement, "starbuck_sex_store_promo_three_label")
-        starbuck_sex_store_promo_four = Action("Ask if couples are coming in", starbuck_sex_store_promo_four_requirement, "starbuck_sex_store_promo_four_label")
-        starbuck_sex_store_promo_five = Action("Ask if couples are coming in", starbuck_sex_store_promo_five_requirement, "starbuck_sex_store_promo_five_label")
 
-        starbuck_role = Role(role_name ="Sex Shop Owner", actions =[starbuck_vaginal_skillup, starbuck_anal_skillup, starbuck_oral_skillup, starbuck_foreplay_skillup, starbuck_sex_store_investment_one, starbuck_sex_store_investment_two, starbuck_sex_store_investment_three, starbuck_sex_store_promo_one, starbuck_sex_store_promo_two, starbuck_sex_store_promo_three, starbuck_sex_store_promo_four, starbuck_sex_store_promo_five])
+
 
         starbuck_wardrobe = wardrobe_from_xml("Starbuck_Wardrobe")
 
-        starbuck_home = Room("Starbuck's home", "Starbuck's home", [], apartment_background, [],[],[],False,[0.5,0.5], visible = False)
+        starbuck_home = Room("Starbuck's home", "Starbuck's home", [], apartment_background, [],[],[],False,[0.5,0.5], visible = False, hide_in_known_house_map = False)
         starbuck_home.add_object(make_wall())
         starbuck_home.add_object(make_floor())
         starbuck_home.add_object(make_bed())
@@ -230,6 +235,13 @@ init -1 python:
                 else:
                     return "Requires 90 sluttiness"
         return False
+
+    def starbuck_spend_the_night_requirement(the_person):
+        if the_person.shop_investment_rate == 6.0:
+            if time_of_day < 4:
+                return "It isn't night"
+            else:
+                return True
 
 #SBS10
 label starbuck_vaginal_skillup_label(the_person):
@@ -1444,6 +1456,254 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     "You walk her to the door and say goodbye. Wow, you are now the proud owner of a sex swing! And with everything going on with [the_person.possessive_title], you brain is swimming a bit."
     $ sex_store.add_object(SB_make_swing())
     $ bedroom.add_object(SB_make_swing())
+    return
+
+#SBS120
+label starbuck_spend_the_night_label(the_person): #You spend the night at her place. You'll probably get busy
+    $ morning_fun_chance = 0
+    mc.name "I was thinking I could spen the night here tonight."
+    "[the_person.title] looks delighted."
+    the_person.char "Oh! That would be great! I'd love the company!"
+    $ the_roll = renpy.random.randint(0,100) #Roll for the possible event#
+    if the_roll < 10 or mc.current_stamina < 1: #No event, just cuddle up and go to bed.
+        mc.name "Thanks. Its been a long day and I'm exhausted."
+        "You strip off your work clothes, down to your boxers. You head to [the_person.title]'s bedroom and hop in her bed."
+        the_person.char "I'll be in in a minute!"
+        "You see [the_person.title] step into the bathroom. In a few minutes she emerges, ready for bed."
+        $ the_person.outfit = SB_advert_two_outfit.get_copy()
+        $ the_person.draw_person()
+        "She crawls into bed beside you. You cuddle up behind her and enjoy the warmth of her body as you drift off to a restful night's sleep."
+        $ morning_fun_chance = 100 #No action tonight? she wakes up hungry
+    elif the_roll < 40: #She seduces you
+        mc.name "Thanks. I just have a little bit of work stuff to finish up. I brought my laptop, mind if I take over your desk for a few?"
+        the_person.char "Help yourself! I'll tell you what, I'm going to hop in the shower."
+        "You sit down at the desk and pull out your laptop. You review some of the days research notes and begin emailing instructions for tomorrow."
+        "You make note of a couple issues serum production, so write yourself a reminder to talk with an employee tomorrow about it..."
+        "You delve into your work emails for a while longer, totally forgetting you are at [the_person.title]'s house. You are vaguely aware when you feel her coming up behind you."
+        "Your mind is brought immediately back to the present when you feel the heavenly sensation of [the_person.title]'s warm, soft titflesh on the back of your neck as she wraps her arms around you from behind."
+        mc.name "Mmm, that feels great..."
+        "She runs her hands up and down your chest, slowly unbuttoning your shirt. You lean your head back, your neck nestled between her amazing tits."
+        "[the_person.title] begins to move her chest up and down slightly, rubbing her breasts along your neck and shoulders."
+        the_person.char "Are you about at a stopping point?"
+        mc.name "Yes, definitely."
+        "You close your eyes and enjoy the sensations. [the_person.title]'s hands move lower down your belly and begins to stroke you through your pants."
+        "She expertly begins to unbuckle your belt, and undoes your pants. You sigh when she puts one hand down your underwear and begins to jack you off slowly. She whispers into your ear."
+        the_person.char "Come on... lets go to bed."
+        $ SB_nude_outfit = Outfit("Nude")
+        $ the_person.outfit = SB_nude_outfit.get_copy()
+        $ the_person.draw_person(position = "back_peek")
+        "She backs away from you and walks into her bedroom. You turn and watch her, seeing she is completely naked."
+        "You quickly follow her."
+        $ the_person.draw_person(position = "stand4")
+        "[the_person.title] stops when she gets to the bed and turns to you."
+        the_person.char "Lay down... theres something I want to do..."
+        $ the_person.draw_person(position = "standing_doggy")
+        "You nod. You take off what is left of your clothes and lay down. You watch [the_person.title] rummage through her nightstand. Her ass wiggles back and forth, right in front of you."
+        "*SMACK*"
+        "You reach up and give her ass a firm spank. She gives a sigh."
+        the_person.char "Ah! Here it is..."
+        $ the_person.draw_person(position = "stand4")
+        "She stands up and you see that she is holding a bottle of anal lubricant. You feel your dick twitch when you realize what she has in mind."
+        "She squirts some of it out onto your cock and works her hand up and down you a few times. Then she squirts a bit more into her hand and then reaches back to her ass."
+        "[the_person.title] gives another gasp as you imagine she works a bit of the lube into her tight hole."
+        $ the_person.draw_person(position = "cowgirl")
+        "[the_person.possessive_title] climbs up on top of you. She takes you in her hand and points it towards her back passage."
+        the_person.char "Oh god, [the_person.mc_title], its so big! Okay, here we go..."
+        "[the_person.possessive_title] goes slow, but steadily slides down, impaling her sphincter on your throbbing erection. She bottoms out and moans loudly."
+        #Fuck her#
+        call sex_description(the_person, SB_anal_cowgirl, make_bed(), 1, private= True, girl_in_charge = True) from _call_sex_description_SBS120
+        if the_person.arousal > 100:
+            the_person.char "Oh god, I came so hard..."
+            "[the_person.possessive_title] collapses onto the bed next to you, exhausted from her anal cowgirl ride."
+        else:
+            the_person.char "Mmm, that was so good, thank you [the_person.mc_title]..."
+            "[the_person.possessive_title] rolls off you and lays down on the bed next to you."
+        $ the_person.reset_arousal()
+        "[the_person.title] doesn't bother to get up, she just cuddles up next to you."
+        the_person.char "Thanks [the_person.mc_title], I needed that so bad."
+        "She stretches her arms out and yawns."
+        the_person.char "I'm wore out! Goodnight!"
+        "[the_person.title] nuzzles up against you and slowly drifts off to sleep. In your sex induced haze, you quickly drift off to sleep with her."
+        $ morning_fun_chance = 20 #She got what she wanted
+    elif the_roll < 70 or mc.current_stamina < 3: #You seduce her
+        $ the_person.draw_person(position = "kissing")
+        "[the_person.possessive_title] wraps her arms around you to give you a hug. You use the opportunity."
+        "You grab her ass and pick her up easily. She yelps for a second but quickly wraps her legs around you in an embrace."
+        "Your lips meet and you begin to kiss her hungrily. She returns your kiss. You pull her tight against you and begin to grind your needy cock up against her."
+        $ the_person.change_arousal(5)
+        "She breaks the kiss for a second."
+        the_person.char "Oh [the_person.mc_title], I missed you too."
+        "[the_person.possessive_title] clings to you and begins to kiss your neck eagerly. You carefully carry her towards her bedroom."
+        "When you get to her bed, you roughly throw her down on it."
+        $ the_person.draw_person(position = "missionary")
+        if the_person.outfit.vagina_available() and the_person.outfit.tits_available():
+            "You stop for a second and admire [the_person.title], her body on display in front of you. You guess she walks around the house like this?"
+        else:
+            "Your mind hazy with lust, you begin to pull [the_person.title]'s clothes off."
+            $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+            while strip_choice is not None:
+                $ the_person.draw_animated_removal(strip_choice)
+                "You roughly strip off [the_person.possessive_title]'s [strip_choice.name]."
+                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+            "Now naked, you stop for a second and admire [the_person.title]'s incredible body."
+        "Before you go any further, you decide to make sure that [the_person.title] is wet and ready for you. You pull her over so her legs are hanging off the edge of the bed and get down on your knees in front of her."
+        "She spread's her legs instinctively as you begin to kiss along her knee. You trail wet kisses along the inside of her thigh, working your way further up."
+        "When you reach her cunt, you waste no time, pushing your tongue between her lips and running it up and down her delicious slit."
+        "[the_person.title] moans and begins to run her hands through your hair. When you push your tongue up inside her he gently urges you deeper."
+        $ the_person.change_arousal(10)
+        "You reach forward with your hands and grasp her tits. You roll her nipples in your fingers for a second causing her moans to grow louder."
+        "You lick circles around her clit, then close your mouth over and gently suck on it."
+        $ the_person.change_arousal(10)
+        the_person.char "Oh! Baby I'm ready, come fuck me!"
+        call fuck_person(the_person) from _call_fuck_person_SBS121
+        if the_person.arousal > 100:
+            the_person.char "Oh god, I came so hard..."
+            $ morning_fun_chance = 50 #She finished
+        else:
+            the_person.char "Mmm, that was so good, thank you [the_person.mc_title]..."
+            $ morning_fun_chance = 100 #She didn't finish, so she comes for you in the morning.
+        $ the_person.reset_arousal()
+        "You lay down on the bed, hopping in the covers."
+        "[the_person.title] doesn't bother to get up, she just cuddles up next to you."
+        the_person.char "Thanks [the_person.mc_title], I didn't know I needed that until you got here."
+        "She stretches her arms out and yawns."
+        the_person.char "You wore me out! Goodnight!"
+        "[the_person.title] nuzzles up against you and slowly drifts off to sleep. In your sex induced haze, you quickly drift off to sleep with her."
+
+    else: # You both want it, and MC has stamina for a wild ride
+        "She gives you a flirty smile."
+        the_person.char "I'm kinda sweaty from a long day at the shop, so I was just getting ready to hop in the shower. Why don't you get comfortable? I won't be long."
+        $ the_person.draw_person(position = "walking_away")
+        "[the_person.title] turns and walks into her bathroom. She closes the door... mostly... leaving it open a crack. You're sure she left it open on purpose, but you decide for now to let her get started solo."
+        $ renpy.scene("Active")
+        "You head into her kitchen and notice her coffee pot is on and full. Was she expecting you? You pour yourself a cup and take a few sips."
+        "You sit down and enjoy your coffee. It has been about 5 minutes now. The crack in the door is calling you. Should you join her in the shower? Or let her finish?"
+        menu:
+            "Shower with her.":
+                $ SB_nude_outfit = Outfit("Nude")
+                $ the_person.outfit = SB_nude_outfit.get_copy()
+                #TODO shower background?
+                "You decide you've waited long enough and make your way into the bathroom. Inside you smell the scent of lavender body wash and quickly spy [the_person.title]'s soapy body through the hazy steam."
+                $ the_person.draw_person(position = "back_peek")
+                mc.name "Have room for me in there?"
+                the_person.char "Of course! I was hoping you would join me..."
+                "You strip down and enter the shower. [the_person.name] gives you a turn under the hot running water."
+                the_person.char "Great timing... can you wash my back?"
+                "She hands you her scrubbie and you begin to work circles up and down her back. The soap bubbles make her already smooth skin slick and soft."
+                "When her back is all soapy, you reach over her shoulder and hand the scrubbie back to her. You put your other hand against her hip and slowly pull her back against you."
+                "You now wrap your arms around her from behind, and she melts back into you. Your hands roam her body but quickly begin to grope her generous bosom, while she wiggles her ass back against you."
+                the_person.char "Mmm, I'm glad we're thinking the same thing. I'm really hungry for you tonight, [the_person.mc_title]!"
+                "You whisper into her ear."
+                mc.name "Is that so? I don't believe you... Why don't you show me."
+                if the_person.obedience > 110:  #She gets on her knees#
+                    "[the_person.title] chuckles."
+                    the_person.char "Mmm, for you, [the_person.mc_title]? I'll do just about anything..."
+                    $ the_person.draw_person(position = "blowjob")
+                    "[the_person.possessive_title] turns to you and gets down on her knees. She looks up at you. Her eyes certainly look a bit hungry..."
+                    "She puts her hands on her breasts. She leans forward and nestles your cock between her bountiful tits."
+                    call fuck_person(the_person, start_position = SB_Titfuck_Kneeling, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_SBS122
+                    "You spend a moment recovering while [the_person.title] rinses your cum off her body."
+
+
+                else:                           #She gets Feisty
+                    "[the_person.title] chuckles and pushes her ass back against you."
+                    the_person.char "Mmm, I have a better idea..."
+                    "[the_person.possessive_title] leans forward a bit, against the shower wall. She reaches back and grabs your hardness, pointing it down towards her slit."
+                    the_person.char "Why don't you just push it in... I'm ready for it, I promise..."
+                    "You decide to go for it. She has you lined up, so you slowly push yourself forward inside of her."
+                    the_person.char "Oh my god..."
+                    "[the_person.possessive_title] sighs as you bottom out."
+                    "She wiggles her ass back and forth a few times, enjoying the familiar feel of fullness you give her when you fuck her."
+                    call sex_description(the_person, SB_doggy_standing, make_wall(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBS123
+                    "You spend a moment recovering while [the_person.title] rinses herself off."
+                #TODO set outfit to regular nude again. She washed the cum off!
+                $ SB_nude_outfit = Outfit("Nude")
+                $ the_person.outfit = SB_nude_outfit.get_copy()
+                $ the_person.arousal = 50   #A hard setting of arousal... Did this to avoid an entry in the log. Not ideal code#
+                $ the_person.draw_person(position = "stand2")
+                "You both quickly finish showering. As you hop out, you quickly dry off and [the_person.title] takes your hand."
+                the_person.char "Lets go to bed! I'm so charged tonight, I think I can go all night!"
+                mc.name "Sounds good. I'm gonna fuck your brains out tonight."
+                $ the_person.draw_person(position = "walking_away")
+            #"Wait for her.":  #TODO
+        "You follow [the_person.title] to her bredroom."
+        "Her amazing ass sways back and forth as she walks. Your cock twitches thinking about the night ahead of you."
+        "She gets to her bed and immediately opens her nightstand and begins looking for something."
+        "She pulls out the strap on dildo you helped her demonstrate for her adverisement and some anal lube and turns to you."
+        $ the_person.draw_person(position = "stand4")
+        the_person.char "How about we give this another run? Last time we used it, the results were very good..."
+        menu:
+            "Agree":
+                mc.name "Lets do it. I love fucking your tight little ass."
+                $ the_person.draw_person(position = "blowjob")
+                "[the_person.possessive_title] gets down on her knees in front of you and starts securing the strap on."
+                mc.name "Hey... while you're down there..."
+                "[the_person.possessive_title] looks up at you and smiles. She sticks out her tongue and slithers it along your aching shaft, teasing you."
+                the_person.char "Mmm... you taste so good. But I have other plans for this."
+                "She squirts some lube into her hand and then gives you a couple strokes."
+                the_person.char "Okay, you're ready, now its my turn!"
+                $ the_person.draw_person(position = "doggy")
+                "[the_person.title] stands up and hands you the lube, then crawls up on the bed on all fours, presenting her ass to you. She gives her hips a little shake."
+                the_person.char "Lube me up, [the_person.mc_title]. Don't be stingy!"
+                "You squirt a generous amount of lube onto your fingers. You run your fingers along her ass crack, coating it in a glaze of lube."
+                "You take a finger and begin to push it up against her sphintcter. You can feel her physically force herself to relax and then your finger eases right in."
+                the_person.char "Mmm... that feels good already. I think I'm getting better at this!"
+                "You apply some more lube, then slowly push two fingers into her smooth back passage. You feel like she is ready for you."
+                "You get into position behind her. She arches her back and presents her ass."
+                "[the_person.possessive_title]'s pussy is already dripping with arousal. You line yourself up with her ass, while she reaches down and lines the dildo up with her pussy."
+                "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
+                the_person.char "Oh my god! I'm so full... Its so good [the_person.mc_title]! Fuck me like you paid for this! Like I'm just a whore!"
+                call sex_description(the_person, SB_doggy_anal_dildo_dp, make_bed(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBS124
+                "Finished with your anal plundering, you let yourself collapse onto [the_person.title]'s bed."
+                "She cuddles up next to you."
+                $ the_person.draw_person(position = "missionary", emotion = "happy")
+
+            "Fuck her your way":
+                mc.name "Not tonight. I have something different in mind."
+                "[the_person.title] looks a little disappointed, but waits to see what you DO have in mind."
+                call fuck_person(the_person) from _call_fuck_person_SBS125
+                "Finished for the night, you let yourself collapse onto [the_person.title]'s bed."
+                "She cuddles up next to you."
+                $ the_person.draw_person(position = "missionary", emotion = "happy")
+
+        $ morning_fun_chance = 50 #She finished. Maybe she wants an encore in the morning, maybe not.
+        "[the_person.title] nuzzles up against you and slowly drifts off to sleep. In your sex induced haze, you quickly drift off to sleep with her."
+
+    $ the_person.reset_arousal()
+    call SB_process_overnight_no_events() from _SB_process_overnight_no_events_SBS129
+    #Good morning!
+    $ renpy.scene("Active")
+    $ the_roll = renpy.random.randint(0,100)
+    if the_roll < morning_fun_chance:        #Roll for morning sex is successful
+        "[the_person.title]'s naked body against yours makes for a very pleasant night of sleep. A couple times throughout the night you stirred for a bit and gave her a grope, but quickly fell back asleep."
+        "Pleasant sensations and the feeling of weight around your torso slowly wakes you up."
+        $ the_person.change_arousal(30)
+        show screen person_info_ui(the_person)
+        $ the_person.draw_person(position = "cowgirl")
+        "When you awaken, you discover that [the_person.title] is on top of you, with your morning wood already hilted inside her pussy."
+        "You moan in appreciation at the wonderful wake up call."
+        the_person.char "Mmm... Good morning [the_person.mc_title]... When I woke up this morning you were poking me pretty good... I figured you wouldn't mind if I took it for a quick ride."
+        "You murmur your acceptance. Her mesmerizing tits are bouncing up and down right in front of you. You take them both in your palms and give them a good squeeze."
+        call sex_description(the_person, cowgirl , make_bed(), 1, private = True, girl_in_charge = True) from _call_sex_description_SBS125
+        the_person.char "Mmmff. So good... I wish I could call in sick and we could fuck all day... but I need to get to the shop."
+        $ the_person.reset_arousal()
+        $ the_person.draw_person(position = "stand3")
+        the_person.char "I'm gonna go hop in the shower. Feel free to let yourself out! Thanks for spending the night [the_person.mc_title]!"
+        "[the_person.title] slowly gets up and heads to the bathroom. You grab your stuff and head out."
+    else:                                    #No morning sex
+        "You wake up in the next morning after sleeping soundly the night before. As your stir it wakes up your bedwarmer, [the_person.title]. She yawns and stretches."
+        "Slowy, [the_person.title] yawns and sits up at the side of the bed."
+        $ the_person.draw_person(position = "sitting")
+        the_person.char "Good morning, sleepyhead! Wow, I slept so good last night... you really wore me out!"
+        "You chat for a few minutes, enjoying the warmth of her bed, until she gets up."
+        $ the_person.draw_person(position = "stand3")
+        the_person.char "I'm gonna go hop in the shower. Feel free to let yourself out! Thanks for spending the night [the_person.mc_title]!"
+        "[the_person.title]heads to the bathroom. You grab your stuff and head out."
+    hide screen person_info_ui
+    $ the_person.reset_arousal()
+    $ the_person.outfit = (the_person.wardrobe.decide_on_outfit(40)).get_copy()
+    $ change_scene_display(mc.location)
+    $ renpy.scene("Active")
     return
 
 label starbuck_intro():
