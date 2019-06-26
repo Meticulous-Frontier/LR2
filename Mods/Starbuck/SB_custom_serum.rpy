@@ -159,12 +159,11 @@ init -1 python:
                         if FETISH_ANAL_EVENT_INUSE:
                             return
 
-                        FETISH_ANAL_EVENT_INUSE = True
-                        SB_SET_RANDOM_EVENT_CHANCE(0)
-
                         # renpy.say("", "Trigger anal fetish " + the_person.name)
                         if the_person == lily:
                             mc.business.mandatory_crises_list.append(SB_lily_anal_dp_fetish)
+                            FETISH_ANAL_EVENT_INUSE = True
+                            SB_SET_RANDOM_EVENT_CHANCE(0)
                         elif the_person == mom:
                             for mand_event in mc.business.mandatory_crises_list:
                                 if mand_event.name == "mom weekly pay":
@@ -172,9 +171,12 @@ init -1 python:
                                     mc.business.mandatory_crises_list.remove(mand_event)
                                     mc.business.mandatory_crises_list.append(SB_mom_anal_fetish)
                                     FETISH_ANAL_EVENT_INUSE = True
+                                    SB_SET_RANDOM_EVENT_CHANCE(0)
                         else:
                             SB_fetish_anal_crisis.args = [the_person]    # set the current person as action argument
                             mc.business.mandatory_crises_list.append(SB_fetish_anal_crisis)
+                            FETISH_ANAL_EVENT_INUSE = True
+                            SB_SET_RANDOM_EVENT_CHANCE(0)
         return
 
 
