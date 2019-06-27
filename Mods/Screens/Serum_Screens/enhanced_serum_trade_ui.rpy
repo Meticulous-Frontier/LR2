@@ -19,106 +19,97 @@ init 2:
     screen serum_trade_ui(inventory_1,inventory_2,name_1="Player",name_2="Business"): #Lets you trade serums back and forth between two different inventories. Inventory 1 is assumed to be the players.
         add "Science_Menu_Background.png"
 
-
         frame:
             background "#888888"
             xalign 0.2
             xanchor 0.5
-            yalign 0.1
+            yalign 0.5
 
             vbox:
                 xsize 590
-                ysize 800
+                ysize 900
                 yalign 0.0
                 text "Trade Serums Between Inventories." style "serum_text_style" size 25 xalign 0.5 xanchor 0.5
-                for serum in set(inventory_1.get_serum_type_list()) | set(inventory_2.get_serum_type_list()): #Gets a unique entry for each serum design that shows up in either list. Doesn't duplicate if it's in both.
-                    # has a few things. 1) name of serum design. 2) count of first inventory, 3) arrows for transfering, 4) count of second inventory.
-                    frame:
-                        background "#777777"
 
-                        xalign 0.5
-                        xsize 570
+                frame:
+                    background "#777777"
+                    xalign 0.5
 
-                        vbox:
-                            textbutton serum.name:
+                    viewport:
+                        scrollbars "vertical"
+                        xsize 650
+                        mousewheel True
+                        hbox:
+                            xalign 0.5
+                            vbox:
+                                xalign 0.5
 
-                                style "textbutton_style"
-                                text_style "serum_text_style"
-                                xsize 560
+                                for serum in set(inventory_1.get_serum_type_list()) | set(inventory_2.get_serum_type_list()): #Gets a unique entry for each serum design that shows up in either list. Doesn't duplicate if it's in both.
+                                    # has a few things. 1) name of serum design. 2) count of first inventory, 3) arrows for transfering, 4) count of second inventory.
 
-                                action ToggleScreen("serum_tooltip", None, serum)
-                                hovered Show("serum_tooltip", None, serum)
+                                    vbox:
+                                        textbutton serum.name:
+                                            style "textbutton_style"
+                                            text_style "serum_text_style"
+                                            xsize 560
 
+                                            action ToggleScreen("serum_tooltip", None, serum)
+                                            hovered Show("serum_tooltip", None, serum)
+                                        hbox:
+                                            textbutton name_1 + " has: " + str(inventory_1.get_serum_count(serum)): # How many serums in inventory_1 (player's)
+                                                style "textbutton_style"
+                                                text_style "serum_text_style"
+                                                action NullAction()
 
-                            hbox:
-                                textbutton name_1 + " has: " + str(inventory_1.get_serum_count(serum)): # How many serums in inventory_1 (player's)
+                                            textbutton "<-":
+                                                action [ #When pressed, moves 1 serum from the business inventory to the player. Not active if the business has nothing in it.
+                                                Function(inventory_1.change_serum, serum, int(serum_transfer_amount)),
+                                                Function(inventory_2.change_serum, serum, -int(serum_transfer_amount))
+                                                ]
+                                                alternate [ # Alternate click multiplies the current value by 10
+                                                If(inventory_2.get_serum_count(serum) >= int(serum_transfer_amount) * 10,
+                                                [Function(inventory_1.change_serum, serum, int(serum_transfer_amount) * 10),
+                                                Function(inventory_2.change_serum, serum, -int(serum_transfer_amount) *10)])
+                                                ]
+                                                sensitive (inventory_2.get_serum_count(serum) >= int(serum_transfer_amount))
+                                                style "textbutton_style"
+                                                text_style "serum_text_style"
 
-                                    style "textbutton_style"
-                                    text_style "serum_text_style"
+                                            button:
+                                                id "serum_transfer_amount"
+                                                style "textbutton_style"
 
-                                    action NullAction()
+                                                action NullAction()
+                                                unhovered Function(renpy.restart_interaction) #TODO: Tweak this so it is less annoying  and fix any associated errors
 
-                                textbutton "<-":
+                                                add Input(
+                                                    size =  20,
+                                                    color = "#dddddd",
+                                                    default = serum_transfer_amount,
+                                                    changed = serum_transfer_amount_func,
+                                                    length = 7,
+                                                    button = renpy.get_widget("serum_trade_ui", "serum_transfer_amount"),
+                                                    allow = "0123456789"
+                                                )
 
-                                    action [ #When pressed, moves 1 serum from the business inventory to the player. Not active if the business has nothing in it.
-                                    Function(inventory_1.change_serum, serum, int(serum_transfer_amount)),
-                                    Function(inventory_2.change_serum, serum, -int(serum_transfer_amount))
-                                    ]
+                                            textbutton "->":
+                                                action [
+                                                Function(inventory_2.change_serum, serum, int(serum_transfer_amount)),
+                                                Function(inventory_1.change_serum, serum, -int(serum_transfer_amount))
+                                                ]
+                                                alternate [
+                                                If(inventory_1.get_serum_count(serum) >= int(serum_transfer_amount) * 10,
+                                                [Function(inventory_2.change_serum, serum, int(serum_transfer_amount) * 10),
+                                                Function(inventory_1.change_serum, serum, -int(serum_transfer_amount) * 10)])
+                                                ]
+                                                sensitive (inventory_1.get_serum_count(serum) >= int(serum_transfer_amount))
+                                                style "textbutton_style"
+                                                text_style "serum_text_style"
 
-                                    alternate [ # Alternate click multiplies the current value by 10
-                                    If(inventory_2.get_serum_count(serum) >= int(serum_transfer_amount) * 10,
-                                    [Function(inventory_1.change_serum, serum, int(serum_transfer_amount) * 10),
-                                    Function(inventory_2.change_serum, serum, -int(serum_transfer_amount) *10)])
-                                    ]
-
-                                    sensitive (inventory_2.get_serum_count(serum) >= int(serum_transfer_amount))
-                                    style "textbutton_style"
-                                    text_style "serum_text_style"
-
-                                button:
-
-                                    id "serum_transfer_amount"
-                                    style "textbutton_style"
-
-                                    action NullAction()
-                                    unhovered Function(renpy.restart_interaction) #TODO: Tweak this so it is less annoying  and fix any associated errors
-
-                                    add Input(
-                                    size =  20,
-                                    color = "#dddddd",
-                                    default = serum_transfer_amount,
-                                    changed = serum_transfer_amount_func,
-                                    length = 7,
-                                    button = renpy.get_widget("serum_trade_ui", "serum_transfer_amount"),
-                                    allow = "0123456789"
-                                    )
-
-
-
-
-
-
-                                textbutton "->":
-
-                                    action [
-                                    Function(inventory_2.change_serum, serum, int(serum_transfer_amount)),
-                                    Function(inventory_1.change_serum, serum, -int(serum_transfer_amount))
-                                    ]
-
-                                    alternate [
-                                    If(inventory_1.get_serum_count(serum) >= int(serum_transfer_amount) * 10,
-                                    [Function(inventory_2.change_serum, serum, int(serum_transfer_amount) * 10),
-                                    Function(inventory_1.change_serum, serum, -int(serum_transfer_amount) * 10)])
-                                    ]
-
-                                    sensitive (inventory_1.get_serum_count(serum) >= int(serum_transfer_amount))
-                                    style "textbutton_style"
-                                    text_style "serum_text_style"
-
-                                textbutton name_2 + " has: " + str(inventory_2.get_serum_count(serum)):
-                                    style "textbutton_style"
-                                    text_style "serum_text_style"
-                                    action NullAction()
+                                            textbutton name_2 + " has: " + str(inventory_2.get_serum_count(serum)):
+                                                style "textbutton_style"
+                                                text_style "serum_text_style"
+                                                action NullAction()
 
 
         frame:
