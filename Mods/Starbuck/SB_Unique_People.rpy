@@ -3,16 +3,13 @@ init 2 python:
     SB_SHOP_STAGE_ONE_DAY = 9999
     SB_SHOP_STAGE_TWO_DAY = 9999
 
-
-    #global starbuck_role
     #starbuck ACTIONS#
     starbuck_vaginal_skillup = Action("Ask about improving vaginal skill", starbuck_vaginal_skillup_requirement, "starbuck_vaginal_skillup_label")
     starbuck_anal_skillup = Action("Ask about improving anal skill", starbuck_anal_skillup_requirement, "starbuck_anal_skillup_label")
     starbuck_oral_skillup = Action("Ask about improving oral skill", starbuck_oral_skillup_requirement, "starbuck_oral_skillup_label")
     starbuck_foreplay_skillup = Action("Ask about improving foreplay", starbuck_foreplay_skillup_requirement, "starbuck_foreplay_skillup_label")
-    #Arousal reduction is disabled for now. Might be able to revisit it at another time.
-    #starbuck_arousal_reduction_one = Action("Ask about lasting longer", starbuck_arousal_reduction_one_requirement, "starbuck_arousal_reduction_one_label")
-    #starbuck_arousal_reduction_two = Action("Ask about lasting even longer", starbuck_arousal_reduction_two_requirement, "starbuck_arousal_reduction_two_label")
+    starbuck_arousal_reduction_one = Action("Ask about lasting longer", starbuck_arousal_reduction_one_requirement, "starbuck_arousal_reduction_one_label")
+    starbuck_arousal_reduction_two = Action("Ask about lasting even longer", starbuck_arousal_reduction_two_requirement, "starbuck_arousal_reduction_two_label")
     starbuck_sex_store_investment_one = Action("Ask about investing in her store", starbuck_sex_store_investment_one_requirement, "starbuck_sex_store_investment_one_label")
     starbuck_sex_store_investment_two = Action("Ask about stock levels", starbuck_sex_store_investment_two_requirement, "starbuck_sex_store_investment_two_label")
     starbuck_sex_store_investment_three = Action("Ask about further investment", starbuck_sex_store_investment_three_requirement, "starbuck_sex_store_investment_three_label")
@@ -22,8 +19,6 @@ init 2 python:
     starbuck_sex_store_promo_four = Action("Ask if couples are coming in", starbuck_sex_store_promo_four_requirement, "starbuck_sex_store_promo_four_label")
     starbuck_sex_store_promo_five = Action("Ask if couples are coming in", starbuck_sex_store_promo_five_requirement, "starbuck_sex_store_promo_five_label")
     starbuck_spend_the_night = Action("Spend the night with her", starbuck_spend_the_night_requirement, "starbuck_spend_the_night_label")
-
-    starbuck_role = Role(role_name ="Sex Shop Owner", actions =[starbuck_vaginal_skillup, starbuck_anal_skillup, starbuck_oral_skillup, starbuck_foreplay_skillup, starbuck_sex_store_investment_one, starbuck_sex_store_investment_two, starbuck_sex_store_investment_three, starbuck_sex_store_promo_one, starbuck_sex_store_promo_two, starbuck_sex_store_promo_three, starbuck_sex_store_promo_four, starbuck_sex_store_promo_five, starbuck_spend_the_night])
 
     def SB_make_swing():
         the_swing = Object("sex swing",["Sit","Low", "Swing"], sluttiness_modifier = 10, obedience_modifier = 10)
@@ -37,10 +32,6 @@ init 2 python:
         common_sexy_dislikes = [ "masturbating", "giving handjobs"],
         titles_function = starbuck_titles, possessive_titles_function = starbuck_possessive_titles, player_titles_function = starbuck_player_titles)
 
-
-
-
-
         starbuck_wardrobe = wardrobe_from_xml("Starbuck_Wardrobe")
 
         starbuck_home = Room("Starbuck's home", "Starbuck's home", [], apartment_background, [],[],[],False,[0.5,0.5], visible = False, hide_in_known_house_map = False)
@@ -51,6 +42,9 @@ init 2 python:
 
         starbuck_home.link_locations_two_way(downtown)
         list_of_places.append(starbuck_home)
+
+        # init starbuck role
+        starbuck_role = Role(role_name ="Sex Shop Owner", actions =[starbuck_vaginal_skillup, starbuck_anal_skillup, starbuck_oral_skillup, starbuck_foreplay_skillup, starbuck_sex_store_investment_one, starbuck_sex_store_investment_two, starbuck_sex_store_investment_three, starbuck_sex_store_promo_one, starbuck_sex_store_promo_two, starbuck_sex_store_promo_three, starbuck_sex_store_promo_four, starbuck_sex_store_promo_five, starbuck_spend_the_night])
 
         #global starbuck_role
         global starbuck
@@ -65,16 +59,6 @@ init 2 python:
         starbuck.schedule[3] = sex_store
 
         starbuck.home.add_person(starbuck)
-
-        #starbuck ACTIONS#
-        starbuck_vaginal_skillup = Action("Ask about improving vaginal skill", starbuck_vaginal_skillup_requirement, "starbuck_vaginal_skillup_label")
-        starbuck_anal_skillup = Action("Ask about improving anal skill", starbuck_anal_skillup_requirement, "starbuck_anal_skillup_label")
-        starbuck_oral_skillup = Action("Ask about improving oral skill", starbuck_oral_skillup_requirement, "starbuck_oral_skillup_label")
-        starbuck_foreplay_skillup = Action("Ask about improving foreplay", starbuck_foreplay_skillup_requirement, "starbuck_foreplay_skillup_label")
-        starbuck_arousal_reduction_one = Action("Ask about lasting longer", starbuck_arousal_reduction_one_requirement, "starbuck_arousal_reduction_one_label")
-        starbuck_arousal_reduction_two = Action("Ask about lasting even longer", starbuck_arousal_reduction_two_requirement, "starbuck_arousal_reduction_two_label")
-
-        starbuck_role = Role(role_name ="Starbuck", actions =[starbuck_vaginal_skillup, starbuck_anal_skillup, starbuck_oral_skillup, starbuck_foreplay_skillup, starbuck_arousal_reduction_one, starbuck_arousal_reduction_two])
 
         # Add StarBuck introduction event to sex store
         starbuck.on_room_enter_event_list.append(starbuck_introduction_event_action)
