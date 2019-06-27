@@ -312,6 +312,13 @@ init -1:
             if character_placement is None: # make sure we don't need to pass the position with each draw
                 character_placement = character_right
 
+            # sometimes there is no outfit set, causeing the generate drawlist to fail, not sure why, but try to fix it here.
+            if self.outfit is None:  
+                if self.planned_outfit is None:
+                    self.planned_outfit = self.wardrobe.decide_on_outfit(self.sluttiness)
+                self.outfit = self.planned_outfit.get_copy()
+                self.review_outfit(show_review_message = False)
+
             # if normal draw person call, clear scene
             if not from_scene:
                 renpy.scene("Active")
