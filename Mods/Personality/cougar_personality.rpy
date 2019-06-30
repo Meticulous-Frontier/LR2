@@ -1,5 +1,5 @@
 ## Cougar personality Mod by Tristimdorion
-# All girls in town older than 40 get this personality trait
+# All girls in town older than 45 get this personality trait
 # See generic_personality_hook.rpy for more information
 
 init 3 python:
@@ -51,30 +51,7 @@ init 1400 python:
         common_sexy_dislikes = ["being submissive", "being fingered", "missionary style sex", "risking getting pregnant"],
         titles_function = cougar_titles, possessive_titles_function = cougar_possessive_titles, player_titles_function = cougar_player_titles)
 
-    # don't add it to the default list of personalities, let the personality hook change it based on age
-
-init 5 python:
-    add_label_hijack("normal_start", "correct_personality_age_action")
-
-# make the woman in the game the right age for their personality
-# this used on the startup of the game (called ONCE)
-label correct_personality_age_action(stack):
-    python:
-        for person in all_people_in_the_game(excluded_people = [mc, lily, mom, aunt, cousin, stephanie] + list_of_unique_characters):
-            # make cougars personalities the right age
-            if person.personality == cougar_personality:
-                if person.age < 40: # split age for cougars
-                    person.age = renpy.random.randint(40, 55)
-                    # mc.log_event("Cougar " + person.name + " is " + str(person.age), "float_text_grey")
-            # make sure other personalities are not older than 40
-            if person.personality != cougar_personality:
-                if person.age > 40: # split age for cougars
-                    person.age = renpy.random.randint(18, 40)
-                    # mc.log_event("Changed " + person.name + " is " + str(person.age), "float_text_grey")
-
-        # continue on the hijack stack if needed
-        execute_hijack_call(stack)
-    return
+    # don't add it to the default list of personalities, let the generic personality hook change it based on age
 
 label cougar_greetings(the_person):
     if the_person.obedience > 130:
