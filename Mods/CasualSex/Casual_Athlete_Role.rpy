@@ -257,7 +257,7 @@ label casual_athlete_buy_protein_shake_label(the_person):
     "Before you take it back to her, you have a moment with no one around. You can add a serum to it if you do it quickly!"
     menu:
         "Add a dose of serum to [the_person.title]'s shake.":
-            call give_serum(the_person) from _call_give_serum_1
+            call give_serum(the_person) from _call_give_serum_casual_athlete
             $ the_person.draw_person(emotion = "happy")
             "You mix the serum into [the_person.title]'s protein shake. You take it over to her."
             the_person.char "Thanks [the_person.mc_title]."
