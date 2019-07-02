@@ -26,6 +26,12 @@ init -1:
                         text "Required Salary: $[the_candidate.salary]/day" style "menu_text_style" size 16
                         if recruitment_knowledge_one_policy.is_owned():
                             text "Personality: " + the_candidate.personality.personality_type_prefix.capitalize() style "menu_text_style" size 16
+                        if recruitment_knowledge_two_policy.is_owned():
+                            text "Relationship: " + the_candidate.relationship style "menu_text_style" size 16
+                            if the_candidate.relationship != "Single":
+                                text "Significant Other: " + the_candidate.SO_name style "menu_text_style" size 16
+                            if the_candidate.kids > 0:
+                                text "Kids: " + str(the_candidate.kids) style "menu_text_style" size 16
                         if recruitment_stat_improvement_policy.is_owned():
                             text "" style "menu_text_style" size 16
                             text "Happiness: [the_candidate.happiness]" style "menu_text_style" size 16

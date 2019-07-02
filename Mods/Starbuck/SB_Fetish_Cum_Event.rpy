@@ -50,7 +50,6 @@ label SB_fetish_cum_label(the_person):
     the_person.char "Hey [the_person.mc_title]! That sure looks good!"
     #$ the_person.outfit = SB_cum_outfit.get_copy()
     $ the_person.draw_person()
-    show screen person_info_ui(the_person)
     ###Draw the girl###
     "You give her a quick wave as she walks up to you. You assumed she was talking about your lunch, but quickly notice she is looking at your crotch."
     the_person.char "So, I forgot to pack a lunch today, and I'm pretty hungry, so I was wondering if, you know..."
@@ -132,7 +131,6 @@ label SB_fetish_cum_label(the_person):
             
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ FETISH_CUM_EVENT_INUSE = False
-    hide screen person_info_ui
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)
@@ -176,7 +174,6 @@ label SB_fetish_cum_dosage_label():
     "You step into your office and sit down for a minute. You hop on your laptop and start browsing the internet."
     "*KNOCK KNOCK*"
     $ the_person.draw_person()
-    show screen person_info_ui(the_person)
     "You look up and see [the_person.possessive_title] at your door."
     if mc.business.is_open_for_business():
         mc.name "Hello [the_person.title], come in."
@@ -230,7 +227,6 @@ label SB_fetish_mom_cum_label():
     "[the_person.possessive_title]'s skilled tongue teases and strokes you. The pleasure is so intense you slowly start to awaken from your naughty dream."
     "However, as you awaken, the pleasure you are experiencing continues."
     $ the_person.draw_person(position = "blowjob")
-    show screen person_info_ui(the_person)
     "You look down and discover that [the_person.possessive_title] is between your legs. She has pulled your underwear down and is sucking you off."
     mc.name "[the_person.title]? What are you..."
     "[the_person.possessive_title] interrupts you."
@@ -306,7 +302,6 @@ label SB_fetish_mom_cum_label():
 
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ FETISH_CUM_EVENT_INUSE = False
-    hide screen person_info_ui
     python:
         the_person.reset_arousal()
         the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
@@ -324,7 +319,6 @@ label SB_fetish_lily_cum_label():
     "You are surprised when the shower door opens. You see [the_person.possessive_title] getting in the shower with you."
     $ the_person.outfit = SB_cum_nude_outfit.get_copy()
     $ the_person.draw_person()
-    show screen person_info_ui(the_person)
     the_person.char "Good morning [the_person.mc_title]. Mind if I join you?"
     "You are surprised. She hasn't been this direct with you before. You quickly invite her in."
     the_person.char "Thanks! You were taking forever, and I got tired of waiting. This will be more fun than showering by myself, anyway."
@@ -393,7 +387,6 @@ label SB_fetish_lily_cum_label():
 
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ FETISH_CUM_EVENT_INUSE = False
-    hide screen person_info_ui
 
     python:
         the_person.reset_arousal()
@@ -428,7 +421,6 @@ label SB_fetish_shower_cum_label():
     "You hear the shower door open and see [the_person.possessive_title] getting in the shower with you."
     $ the_person.outfit = SB_cum_nude_outfit.get_copy()
     $ the_person.draw_person()
-    show screen person_info_ui(the_person)
     the_person.char "Good morning [the_person.mc_title]. Mind if I join you?"
     mc.name "Of course! Come on in."
     the_person.char "Thanks! I saw you get in the shower this morning... I was feeling thirsty, so I decided to hop in."
@@ -445,8 +437,6 @@ label SB_fetish_shower_cum_label():
     $ the_person.draw_person(position = "stand4")
     the_person.char "Okay... I'm going to hop out and let your finish showering now. Please give me more cum soon!"
     "[the_person.possessive_title] gets out. You finish up with your shower, balls empty and ready for the day!"
-
-    hide screen person_info_ui
 
     python:
         the_person.reset_arousal()

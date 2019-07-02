@@ -154,7 +154,7 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object, the_round):
         $ SB_reverse_cowgirl.redraw_scene(the_girl)
         "When you finish, [the_girl.possessive_title] slowly pulls up off you."
         "You gaze at her shapely ass as a few drips of your seed drip out her pussy and onto [the_object.name]"
-    elif the_girl.get_opinion_score("risking getting pregnant") > 0:
+    elif the_girl.get_opinion_score("bareback sex") > 0:
         the_girl.char "That's it, shoot your seed in deep! I want to feel you flood my womb!"
         "She stops her up and down movements and pushes herself down onto you, forcing you up inside her as deep a she can."
         "[the_girl.possessive_title] moans as the first wave of your cum floods her pussy. She holds herself still just as you dump your load deep inside her."

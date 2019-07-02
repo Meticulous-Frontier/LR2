@@ -32,7 +32,6 @@ label town_walk_crisis_action_label:
             return
 
     $ change_scene_display(bedroom)
-    show screen person_info_ui(the_person)
     $ the_person.draw_person(position = "walking_away")
     "You see [the_person.possessive_title] is standing in front of a mirror, studing herself."
     "There is a glass of water right near the window. This is a good opportunity to test a serum for free."
@@ -137,7 +136,6 @@ label town_walk_crisis_action_label:
         "Walk away":
             "You decide not to disturb her and just walk away."
 
-    hide screen person_info_ui
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)

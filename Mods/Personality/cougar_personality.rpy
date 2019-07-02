@@ -48,7 +48,7 @@ init 1400 python:
         common_likes = ["skirts", "small talk", "Mondays", "the weekend", "the colour red", "makeup", "sports", "flirting", "HR work"],
         common_sexy_likes = ["doggy style sex", "giving blowjobs", "getting head", "anal sex", "public sex", "skimpy outfits", "anal sex", "showing her tits", "showing her ass", "taking control", "not wearing underwear", "creampies", "drinking cum", "cum facials"],
         common_dislikes = ["Mondays", "the colour pink", "supply work", "conservative outfits", "work uniforms", "pants"],
-        common_sexy_dislikes = ["being submissive", "being fingered", "missionary style sex", "risking getting pregnant"],
+        common_sexy_dislikes = ["being submissive", "being fingered", "missionary style sex", "bareback sex"],
         titles_function = cougar_titles, possessive_titles_function = cougar_possessive_titles, player_titles_function = cougar_player_titles)
 
     # don't add it to the default list of personalities, let the generic personality hook change it based on age

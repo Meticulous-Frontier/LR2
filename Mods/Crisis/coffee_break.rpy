@@ -103,16 +103,7 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                         scene_manager.strip_actor_outfit_to_max_sluttiness(person_two, temp_sluttiness_boost = 50)
                         scene_manager.strip_actor_outfit_to_max_sluttiness(person_three, temp_sluttiness_boost = 50)
 
-                        # DON'T REMOVE ACTORS, THIS WILL RESET THE OUTFIT
-                        #scene_manager.remove_actor(person_two)
-                        #scene_manager.remove_actor(person_three)
-                        # DO REMOVE THE MULTI PERSON INFO UI
-                        renpy.hide_screen("multi_person_info_ui")
-
                     # switch to SB ui
-                    hide screen person_info_ui
-                    show screen SB_two_person_info_ui(person_two, person_three)                   
-
                     $ SB_draw_two_person_scene(person_one = person_two, person_two = person_three, one_pos_x = 0.7, one_position = "stand3", two_position = "stand4")
 
                     call SB_threesome_description(person_two, person_three, SB_threesome_sixty_nine, make_floor(), 0, private = True, girl_in_charge = False)
@@ -122,8 +113,6 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                     "They pickup their clothes and leave you feeling very proud of yourself."
 
                     # cleanup scene
-                    hide screen SB_two_person_info_ui
-
                     $ update_opinion(person_two, "threesomes")
                     $ person_two.reset_arousal()
                     $ person_two.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.

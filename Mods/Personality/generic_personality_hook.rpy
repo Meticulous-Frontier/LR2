@@ -42,7 +42,7 @@ init 1 python:
 
     def update_cougar_personality(person):
         # list_of_unique_characters is empty after game start, fill it with unique characters so we can use it in other parts of the MOD
-        list_of_unique_characters = [mom, lily, aunt, cousin, stephanie]
+        list_of_unique_characters = [mom, lily, aunt, cousin, stephanie, alexia]
         # change personality to cougar if we meet age requirement
         if find_in_list(lambda x: x.effect == "cougar_personality_dummy_label", action_mod_list).enabled:
             if person not in list_of_unique_characters and person.age > 45:

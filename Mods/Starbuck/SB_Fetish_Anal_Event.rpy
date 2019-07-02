@@ -38,7 +38,6 @@ label SB_fetish_anal_label(the_person):
     #$ the_person.outfit = SB_anal_outfit.get_copy()
     $ the_person.draw_person()
 
-    show screen person_info_ui(the_person)
     ###Draw the girl###
     "You give her a quick wave as she walks up to you."
     the_person.char "Hey, I really hate to bug you but... "
@@ -121,7 +120,6 @@ label SB_fetish_anal_staylate_event_label(the_person):
         $ SB_CALCULATE_RANDOM_EVENT_RATE()
         return
     "You finish up with your work for the day and return to your office. You are organizing some papers when [the_person.possessive_title] enters the room."
-    show screen person_info_ui(the_person)
     $ the_person.outfit = SB_anal_outfit.get_copy()
     $ the_person.draw_person()
     "From the look of her attire, she seems to have guessed the purpose of your meeting correctly."
@@ -184,7 +182,6 @@ label SB_fetish_anal_staylate_event_label(the_person):
             "You say goodbye to her as she walks out your office door."
             $ FETISH_ANAL_EVENT_INUSE = False
             $ SB_CALCULATE_RANDOM_EVENT_RATE()
-            hide screen person_info_ui
             return
         "Fuck Her Ass\n{size=22}Requires Stamina{/size} (disabled)" if mc.current_stamina == 0:
             pass
@@ -233,7 +230,6 @@ label SB_fetish_anal_staylate_event_label(the_person):
 
     $ FETISH_ANAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
-    hide screen person_info_ui
     return
 
 init 2 python:
@@ -262,7 +258,6 @@ label SB_fetish_anal_recurring_label():
 
     if mc.business.is_open_for_business():
         $ the_person.draw_person()
-        show screen person_info_ui(the_person)
         the_person.char "Hey, [the_person.mc_title]. Just wondering if... you know... you wanna stick around for a bit after work today?"
         "She flashes you a quick smile. You wonder if she has in that butt plug she showed you last time you stayed late at the office wit her..."
         mc.name "Sure, I can probably stick around for a little bit. Just give me a few minutes."
@@ -279,7 +274,6 @@ label SB_fetish_anal_recurring_label():
     else:
         $ the_person.outfit = SB_anal_outfit.get_copy()
         $ the_person.draw_person()
-        show screen person_info_ui(the_person)
         the_person.char "Hey, [the_person.mc_title]. I was wondering if you would be here on the weekend! Want to have some fun before you head home?"
         "[the_person.possessive_title] is dressed to impress. You wonder if she has in that butt plug she showed you last time you stayed late at the office wit her..."
         "As if sensing your thoughts, [the_person.possessive_title] turns around."
@@ -460,7 +454,6 @@ label SB_mom_anal_pay_label():
     "You're getting ready for bed when [the_person.possessive_title] calls from downstairs."
     the_person.char "[the_person.mc_title], could we talk for a moment?"
     mc.name "Sure, down in a second."
-    show screen person_info_ui(the_person)
     $ renpy.show(kitchen.name,what=kitchen.background_image)
     $ the_person.draw_person(position = "sitting")
     "[the_person.possessive_title] is sitting at the kitchen table, a collection of bills laid out in front of her."
@@ -568,7 +561,6 @@ label SB_mom_anal_pay_label():
     $ FETISH_ANAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
-    hide screen person_info_ui
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)
@@ -583,7 +575,6 @@ label SB_mom_anal_friday_label():
     "You're hanging out in your room when you here [the_person.possessive_title] call form her room."
     the_person.char "[the_person.mc_title], are you home? It's Friday night! Can you come to my room?"
     mc.name "Sure, down in a second."
-    show screen person_info_ui(the_person)
     $ renpy.show(mom_bedroom.name,what=mom_bedroom.background_image)
     $ the_person.outfit = lingerie_wardrobe.pick_random_outfit()
     $ the_person.draw_person(position = "stand4")
@@ -661,7 +652,6 @@ label SB_mom_anal_friday_label():
             the_person.char "I understand sweetheart. Now don't let me keep you, I'm sure you were up to something important."
             $ mc.business.mandatory_crises_list.append(SB_mom_weekly_anal_action)
 
-    hide screen person_info_ui
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)

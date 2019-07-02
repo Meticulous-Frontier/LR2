@@ -20,7 +20,6 @@ label SB_fetish_vaginal_family_threesome_label():
     $ mc.change_location(bedroom) #Make sure we're in our bedroom.
 
     "Before going to bed, you hear a knock on your door. You hear [the_person_one.possessive_title] from the other side of the door."
-    show screen person_info_ui(the_person_one)
     the_person_one.char "Hey [the_person_one.mc_title], you still up? I was just wondering if I could come in for a bit?"
     "You invite [the_person_one.possessive_title] in. You immediately start to get aroused when you see what she is wearing."
     $ the_person_one.outfit = SB_vaginal_lily_outfit.get_copy()
@@ -46,8 +45,6 @@ label SB_fetish_vaginal_family_threesome_label():
 
     "You are so busy checking out [the_person_one.possessive_title], your brain barely registers a knock on your door. [the_person_one.possessive_title] is just sitting down in your lap when you hear a gasp from your door."
     $ SB_draw_two_person_scene(person_one = the_person_one, person_two = the_person_two, one_pos_x = 0.7, two_emotion = "angry")
-    hide screen person_info_ui
-    show screen SB_two_person_info_ui(the_person_two, the_person_one)
     the_person_two.char "Is that... [the_person_one.name]!?! What are you... why are you naked in [the_person_two.mc_title]'s room?" #NOTE: the_person_one doesn't nescessarily know the_person_two's title for the MC, but still somewhat makes sense.
     "[the_person_two.possessive_title] is shocked to discover that you and [the_person_one.possessive_title] are in your room, clearly about to get busy."
     the_person_one.char "Mom! Nothing was... wait... what are you wearing?"
@@ -83,7 +80,6 @@ label SB_fetish_vaginal_family_threesome_label():
     "[the_person_two.possessive_title] turns and starts to walk out."
     the_person_one.char "Holy fuck [the_person_one.mc_title], that was so hot, I can't believe you got mom to join us..."
     "[the_person_one.possessive_title] says goodnight and then turns to leave."
-    hide screen SB_two_person_info_ui
 
     $ the_person_one.reset_arousal()
     $ the_person_one.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.

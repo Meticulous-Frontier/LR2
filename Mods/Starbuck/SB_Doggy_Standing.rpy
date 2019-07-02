@@ -88,12 +88,12 @@ label scene_SB_doggy_standing_1(the_girl, the_location, the_object, the_round):
             if mc.arousal > 70:
                 "[the_girl.possessive_title]'s' tight pussy feels so good. You are getting close to cumming."
                 mc.name "You feel amazing. You're gonna make me cum soon."
-                if the_girl.get_opinion_score("creampies") > 0 or the_girl.get_opinion_score("risking getting pregnant") > 0:
+                if the_girl.get_opinion_score("creampies") > 0 or the_girl.get_opinion_score("bareback sex") > 0:
                     "[the_girl.possessive_title] looks back at you and smiles."
                     the_girl.char "Oh [the_girl.mc_title], I can't wait to feel you fill me up. I hope you finish deep!"
                     "[the_girl.possessive_title]'s ass quivers a bit, as she imagines you cumming deep inside her."
                     $ the_girl.discover_opinion("creampies")
-                    $ the_girl.discover_opinion("risking getting pregnant")
+                    $ the_girl.discover_opinion("bareback sex")
                     $ the_girl.change_arousal(5)
                     if the_girl.get_opinion_score("being covered in cum") > 0:
                         the_girl.char "You could always pull out too... your cum feels so good when it splashes all over my skin..."
@@ -199,7 +199,7 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object, the_round):
     mc.name "Ah, I'm going to cum!"
     if the_girl.get_opinion_score("creampies") > 0:
         the_girl.char "Yes! Shove it in deep [the_girl.mc_title]!"
-    if the_girl.get_opinion_score("risking getting pregnant") > 0:
+    if the_girl.get_opinion_score("bareback sex") > 0:
         the_girl.char "Don't let a drop of that seed go to waste!"
     else:
         the_girl.char "That's it, cum for me!"
@@ -219,7 +219,7 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object, the_round):
                 "[the_girl.possessive_title]'s body goes rigid as your cum poors into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
                 the_girl.char "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
                 "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
-            if the_girl.get_opinion_score("risking getting pregnant") > 0:
+            if the_girl.get_opinion_score("bareback sex") > 0:
                 the_girl.char "Oh god... I can feel it so deep. I mean... it could... hopefully..."
                 "[the_girl.possessive_title]'s voice starts to trail off."
             elif the_girl.sluttiness > 110:
@@ -231,7 +231,7 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object, the_round):
 
             "You wait until your orgasm has passed completely, then pull out and stand back."
 
-            if the_girl.get_opinion_score("risking getting pregnant") > 0:
+            if the_girl.get_opinion_score("bareback sex") > 0:
                 "As your cum starts to leak out, [the_girl.possessive_title] reaches back and tries to keep it inside with her hand."
             else:
                 "You cum leaks out of her well used pussy."

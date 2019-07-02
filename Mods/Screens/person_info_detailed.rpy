@@ -24,18 +24,19 @@ init 2: # Need to allow for None name roles in this screen as well.
                     if not mc.business.get_employee_title(the_person) == "None":
                         text "Position: " + mc.business.get_employee_title(the_person) + " ($[the_person.salary]/day)" style "menu_text_style" xalign 0.5 yalign 0.5 yanchor 0.5
 
+                    $ visible_roles = []
+                    $ role_string = "Special Roles: "
                     python:
-                        role_string = "Special Roles: "
-                        if the_person.special_role: # NOTE: This is a temporary workaround to prevent errors due to NoneType Role Name. Will not scale.
-                            first = True
-                            for role in the_person.special_role:
-                                if not role.role_name in [generic_people_role.role_name]: # Hide generic role
-                                    if not first:
-                                        role_string += ", "
-                                    role_string += role.role_name
-                                    first = False
+                        for role in the_person.special_role:
+                            if not role.hidden:
+                                visible_roles.append(role.role_name)
 
-                    text role_string style "menu_text_style" xalign 0.5 yalign 0.5 yanchor 0.5
+                        if visible_roles:
+                            role_string += visible_roles[0]
+                            for role in visible_roles[1::]: #Slicing off the first manually let's us use commas correctly.
+                                role_string += ", " + role
+                    if visible_roles:
+                        text role_string style "menu_text_style" xalign 0.5 yalign 0.5 yanchor 0.5
             hbox:
                 xsize 1750
                 xalign 0.5
@@ -44,16 +45,34 @@ init 2: # Need to allow for None name roles in this screen as well.
                 frame:
                     background "#1a45a1aa"
                     xsize 325
-                    ysize 250
+                    ysize 260
                     vbox:
-                        text "Main Stats" style "menu_text_style" size 22
-                        text "Charisma: [the_person.charisma]" style "menu_text_style"
-                        text "Intelligence: [the_person.int]" style "menu_text_style"
-                        text "Focus: [the_person.focus]" style "menu_text_style"
+                        text "Status and Info" style "menu_text_style" size 22
+                        text "Happiness: [the_person.happiness]" style "menu_text_style"
+                        text "Sluttiness: [the_person.sluttiness]" style "menu_text_style"
+                        text "Obedience: [the_person.obedience] - " + get_obedience_plaintext(the_person.obedience) style "menu_text_style"
+                        text "Age: [the_person.age]" style "menu_text_style"
+                        text "Relationship:  [the_person.relationship]" style "menu_text_style"
+                        if the_person.relationship != "Single":
+                            text "Significant Other: [the_person.SO_name]" style "menu_text_style"
+                        if the_person.kids > 0:
+                            text "Kids: [the_person.kids]" style "menu_text_style"
+
                 frame:
                     background "#1a45a1aa"
                     xsize 325
-                    ysize 250
+                    ysize 260
+                    vbox:
+                        text "Characteristics" style "menu_text_style" size 22
+                        text "Charisma: [the_person.charisma]" style "menu_text_style"
+                        text "Intelligence: [the_person.int]" style "menu_text_style"
+                        text "Focus: [the_person.focus]" style "menu_text_style"
+                        text "Love: [the_person.love]" style "menu_text_style"
+
+                frame:
+                    background "#1a45a1aa"
+                    xsize 325
+                    ysize 260
                     vbox:
                         text "Work Skills" style "menu_text_style" size 22
                         text "HR Skill: [the_person.hr_skill]" style "menu_text_style"
@@ -65,7 +84,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                 frame:
                     background "#1a45a1aa"
                     xsize 325
-                    ysize 250
+                    ysize 260
                     vbox:
                         text "Sex Skills" style "menu_text_style" size 22
                         text "Foreplay Skill: " + str(the_person.sex_skills["Foreplay"]) style "menu_text_style"
@@ -76,27 +95,15 @@ init 2: # Need to allow for None name roles in this screen as well.
                 frame:
                     background "#1a45a1aa"
                     xsize 325
-                    ysize 250
-                    vbox:
-                        text "Current Status" style "menu_text_style" size 22
-                        text "Happiness: [the_person.happiness]" style "menu_text_style"
-                        text "Suggestibility: [the_person.suggestibility]" style "menu_text_style"
-                        text "Sluttiness: [the_person.sluttiness]" style "menu_text_style"
-                        text "Obedience: [the_person.obedience] - " + get_obedience_plaintext(the_person.obedience) style "menu_text_style"
-
-                frame:
-                    background "#1a45a1aa"
-                    xsize 325
-                    ysize 250
+                    ysize 260
                     vbox:
                         text "Currently Affected By:" style "menu_text_style" size 22
                         if not the_person.serum_effects:
                             text "No active serums." style "menu_text_style"
-
-                        for serum in the_person.serum_effects:
-                            text serum.name + " : " + str(serum.duration - serum.duration_counter) + " Turns Left" style "menu_text_style"
-                        null height 20
-
+                        else:
+                            text "Suggestibility: [the_person.suggestibility]" style "menu_text_style"
+                            for serum in the_person.serum_effects:
+                                text serum.name + " : " + str(serum.duration - serum.duration_counter) + " Turns Left" style "menu_text_style"
 
             hbox:
                 xsize 1750

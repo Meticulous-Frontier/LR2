@@ -48,7 +48,7 @@ label intro_SB_facing_wall(the_girl, the_location, the_object, the_round):
     #  "showing her ass"
     #  "creampies"
     #  "being covered in cum"
-    #  "risking getting pregnant"
+    #  "bareback sex"
     #  "being submissive"
     #  "taking control"
 
@@ -113,13 +113,13 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object, the_round):
                               $ the_girl.discover_opinion("creampies")
                               $ the_girl.change_arousal(the_girl.get_opinion_score("creampies") * 5)
                               "[the_girl.possessive_title] moans and her arousal is quickly building from your dirty talk."
-                         elif the_girl.get_opinion_score("risking getting pregnant") > 0:
+                         elif the_girl.get_opinion_score("bareback sex") > 0:
                              "You see goosebumps form on the back of [the_girl.possessive_title]'s neck"
                              the_girl.char "Plant your seed inside me! I want to feel you fill me up!"
                              "Sounds like she likes the idea of getting bred!"
                              mc.name "When I get ready to cum, I'm gonna thrust so deep inside you and hold it there while I fill your fertile pussy."
-                             $ the_girl.discover_opinion("risking getting pregnant")
-                             $ the_girl.change_arousal(the_girl.get_opinion_score("risking getting pregnant") * 5)
+                             $ the_girl.discover_opinion("bareback sex")
+                             $ the_girl.change_arousal(the_girl.get_opinion_score("bareback sex") * 5)
                              "[the_girl.possessive_title] moans and her arousal is quickly building from your dirty talk."
                          elif the_girl.get_opinion_score("creampies") < 0 or the_girl.effective_sluttiness() < 80:
                              "[the_girl.possessive_title] stiffens up slightly at the prospect of getting creampied"
@@ -234,13 +234,13 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object, the_round):
                               $ the_girl.discover_opinion("creampies")
                               $ the_girl.change_arousal(the_girl.get_opinion_score("creampies") * 5)
                               "[the_girl.possessive_title] moans and her arousal is quickly building from your dirty talk."
-                         elif the_girl.get_opinion_score("risking getting pregnant") > 0:
+                         elif the_girl.get_opinion_score("bareback sex") > 0:
                              "You see goosebumps form on the back of [the_girl.possessive_title]'s neck"
                              the_girl.char "Plant your seed inside me! I want to feel you fill me up!"
                              "Sounds like she likes the idea of getting bred!"
                              mc.name "When I get ready to cum, I'm gonna thrust so deep inside you and hold it there while I fill your fertile pussy."
-                             $ the_girl.discover_opinion("risking getting pregnant")
-                             $ the_girl.change_arousal(the_girl.get_opinion_score("risking getting pregnant") * 5)
+                             $ the_girl.discover_opinion("bareback sex")
+                             $ the_girl.change_arousal(the_girl.get_opinion_score("bareback sex") * 5)
                              "[the_girl.possessive_title] moans and her arousal is quickly building from your dirty talk."
                          elif the_girl.get_opinion_score("creampies") < 0 or the_girl.effective_sluttiness() < 80:
                              "[the_girl.possessive_title] stiffens up slightly at the prospect of getting creampied"
@@ -440,7 +440,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object, the_round):
                     "You fuck her hard and fast. [the_girl.possessive_title] gasps and moans, her rounded hips shaking with every thrust."
                     mc.name "That's right, I've got you right where I want you and there's nothing you can do about it."
                     "[the_girl.possessive_title] tries to move her head, but your strong grip on the her hair prevent her from shifting it much."
-                    if the_girl.get_opinion_score("risking getting pregnant") > 0:
+                    if the_girl.get_opinion_score("bareback sex") > 0:
                         the_girl.char "You could fuck me until you cum inside and there's nothing I could do. You could knock me up while I'm up against the [the_object.name] like I'm some kind of slut..."
                     elif the_girl.get_opinion_score("creampies") > 0:
                         the_girl.char "You could cum right inside me and there's nothing I could do to stop you... Just blow your load inside of me like I'm just a little slut..."
@@ -475,7 +475,7 @@ label outro_SB_facing_wall(the_girl, the_location, the_object, the_round):
             "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
             if the_girl.get_opinion_score("creampies") > 0:
                 the_girl.char "Yes! Fill me up with your cum!"
-            if the_girl.get_opinion_score("risking getting pregnant") > 0:
+            if the_girl.get_opinion_score("bareback sex") > 0:
                 the_girl.char "I love it when you shoot your seed so deep!"
             $ the_girl.cum_in_vagina()
             $ SB_facing_wall.redraw_scene(the_girl)
@@ -487,7 +487,7 @@ label outro_SB_facing_wall(the_girl, the_location, the_object, the_round):
                 the_girl.char "Oh my god, why do I let you do this to me... but it feels so good..."
 
             "Once you finish, you slowly back up and pull yourself out of [the_girl.possessive_title]. A stream of semen trickles out of her and down her long for a few seconds."
-            if the_girl.get_opinion_score("risking getting pregnant") > 0:
+            if the_girl.get_opinion_score("bareback sex") > 0:
                 "[the_girl.possessive_title] reaches back and desperately tries to stop any more from leaking out with her hand."
 
         "Cum on her ass.":

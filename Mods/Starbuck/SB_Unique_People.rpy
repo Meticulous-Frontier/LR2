@@ -828,7 +828,6 @@ label starbuck_sex_store_promo_one_label(the_person):
             $ the_person.review_outfit(show_review_message = False)
             $ the_person.shop_investment_rate = 2.0
 
-    hide screen person_info_ui
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)
@@ -989,7 +988,6 @@ label starbuck_sex_store_promo_two_label(the_person):
             $ the_person.change_slut_core(5)
             $ the_person.change_slut_temp(5)
 
-    hide screen person_info_ui
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)
@@ -1163,7 +1161,6 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     $ the_person.draw_person(position = "walking_away")
     the_person.char "I'm gonna go get cleaned up now... Get to work on that video!"
     $ the_person.shop_investment_rate = 4.0
-    hide screen person_info_ui
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     "You grab the camera, and start looking at the footage. The first thing you do is copy it on a thumb drive, for you to enjoy at a later date."
@@ -1322,7 +1319,6 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     $ the_person.shop_investment_rate = 5.0
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False)
-    hide screen person_info_ui
     "You head out to start work on the advertisement video."
 
     return
@@ -1662,7 +1658,6 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         "[the_person.title]'s naked body against yours makes for a very pleasant night of sleep. A couple times throughout the night you stirred for a bit and gave her a grope, but quickly fell back asleep."
         "Pleasant sensations and the feeling of weight around your torso slowly wakes you up."
         $ the_person.change_arousal(30)
-        show screen person_info_ui(the_person)
         $ the_person.draw_person(position = "cowgirl")
         "When you awaken, you discover that [the_person.title] is on top of you, with your morning wood already hilted inside her pussy."
         "You moan in appreciation at the wonderful wake up call."
@@ -1683,7 +1678,6 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         $ the_person.draw_person(position = "stand3")
         the_person.char "I'm gonna go hop in the shower. Feel free to let yourself out! Thanks for spending the night [the_person.mc_title]!"
         "[the_person.title]heads to the bathroom. You grab your stuff and head out."
-    hide screen person_info_ui
     $ the_person.reset_arousal()
     $ the_person.outfit = (the_person.wardrobe.decide_on_outfit(40)).get_copy()
     $ change_scene_display(mc.location)
@@ -1693,7 +1687,6 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
 label starbuck_intro():
     $ the_person = starbuck
 
-    show screen person_info_ui(the_person)
     $ the_person.draw_person(emotion = "happy")
     if not SB_STARBUCK_INTRO_COMPLETE:
         "You enter the sex shop. A beautiful woman comes up to you and begins to introduce herself."
@@ -1725,11 +1718,9 @@ label starbuck_intro():
         "You smile at [the_person.possessive_title] and promise to take a look."
         the_person.char "Sounds great!"
         $ renpy.scene("Active")
-        hide screen person_info_ui
         "After [the_person.possessive_title] goes back to the counter, you walk around the shop a bit. Unfortunately, things are pretty bare. There are several shelves with just labels on them."
         "You walk by one labeled as anal toys, but there aren't any on the shelf available for purchase."
         "You walk over to the counter."
-        show screen person_info_ui(the_person)
         $ the_person.draw_person(position = "stand3", emotion = "happy")
         mc.name "This is pretty interesting, to open a sex shop like this, but the shelves seem pretty empty? Are you going to get more stock soon?"
         $ the_person.draw_person(position = "stand3", emotion = "sad")
@@ -1772,7 +1763,6 @@ label starbuck_intro():
         else:
             the_person.char "Is there anything I can help you with?"
     $ renpy.scene("Active")
-    hide screen person_info_ui
     return
 ####Starbuck Unique Personality####
 

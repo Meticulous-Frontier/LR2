@@ -38,7 +38,6 @@ label mall_introduction_action_label:
         scene_manager.add_actor(known_person, position = "stand4", emotion = "happy", character_placement = character_center_flipped)
         scene_manager.add_actor(stranger, position = "stand3")
 
-    hide screen person_info_ui
     known_person.char "Oh, hello [known_person.mc_title], how nice to see you here."
     mc.name "Hello [known_person.title], nice to see you too."
 
