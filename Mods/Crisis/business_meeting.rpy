@@ -41,7 +41,7 @@ label business_meeting_action_label:
         $ the_person.change_happiness(5)
         "[the_person.title] finishes up her proposal."
 
-    $ the_person.wear_uniform() #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.review_outfit(show_review_message = False)
 
     call business_meeting_end(the_person) from _call_business_meeting_end_1
 
@@ -58,7 +58,6 @@ label business_meeting_action_label:
     "The changes inceased your business effectivity by [change]%%."
 
     $ the_person.reset_arousal()
-    $ the_person.review_outfit(show_review_message = False)
     $ change_scene_display(mc.location)
     $ renpy.scene("Active")
     return

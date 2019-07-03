@@ -363,7 +363,9 @@ init -1:
                 character_placement = character_right
 
             renpy.scene("Active") # clear layer for new draw action
-            if not scene_manager is None:   # when we are called from the scenemanager we have to draw the other characters
+            if scene_manager is None:
+                renpy.show_screen("person_info_ui",self)
+            else:   # when we are called from the scenemanager we have to draw the other characters
                 scene_manager.draw_scene_without(self)
 
             bottom_displayable.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier)) #Get the face displayable, also always under clothing.
