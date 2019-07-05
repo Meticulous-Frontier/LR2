@@ -201,28 +201,29 @@ screen cheat_menu():
                             ysize 125
                             vbox:
                                 for x in editable_characters:
-                                    textbutton x.name:
-                                        xfill True
+                                    if hasattr(x, "name"):
+                                        textbutton x.name:
+                                            xfill True
 
-                                        if editing_target == x:
-                                            background "#4f7ad6"
-                                            hover_background "#4f7ad6"
-                                        style "textbutton_no_padding_highlight"
-                                        text_style "serum_text_style"
+                                            if editing_target == x:
+                                                background "#4f7ad6"
+                                                hover_background "#4f7ad6"
+                                            style "textbutton_no_padding_highlight"
+                                            text_style "serum_text_style"
 
-                                        sensitive True
+                                            sensitive True
 
-                                        hovered [
-                                            NullAction()
-                                        ]
-                                        action [
+                                            hovered [
+                                                NullAction()
+                                            ]
+                                            action [
 
-                                            ToggleScreenVariable("editing_target", x, None)
-                                        ]
+                                                ToggleScreenVariable("editing_target", x, None)
+                                            ]
 
-                                        alternate [
-                                            NullAction()
-                                        ]
+                                            alternate [
+                                                NullAction()
+                                            ]
 
 
         if editing_target is not None:
