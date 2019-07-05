@@ -49,9 +49,9 @@ init -2 python:
             return None
 
         # removes specific actor from scene
-        def remove_actor(self, person):
+        def remove_actor(self, person, reset_actor = True):
             actor_to_remove = find_in_list(lambda x: x.person is person, self.actors)
-            if not actor_to_remove is None:
+            if reset_actor and not actor_to_remove is None:
                 # reset actor clothing and arousal
                 actor_to_remove.person.review_outfit(show_review_message = False)
                 actor_to_remove.person.reset_arousal()
