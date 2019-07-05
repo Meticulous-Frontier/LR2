@@ -1,29 +1,25 @@
 init 1 python:
     def get_wardrobe_file(xml_filename):
-        # make sure we don't have an .xml extension on the filename
-        wardrobe_name = os.path.splitext(xml_filename)[0]
+        wardrobe_file = None
+        modified_filename = "wardrobes/" + xml_filename + ".xml"
+        if renpy.loadable(modified_filename):
+            wardrobe_file = renpy.file(modified_filename)
 
-        file_path = os.path.abspath(os.path.join(config.basedir, "game"))
-        file_path = os.path.join(file_path,"wardrobes")
-        file_name = os.path.join(file_path, wardrobe_name + ".xml")
+        if wardrobe_file is None:
+            # check MOD wardrobes
+            modified_filename = "Mods/Wardrobes/" + xml_filename + ".xml"
+            if renpy.loadable(modified_filename):
+                wardrobe_file = renpy.file(modified_filename)
 
-        if not os.path.isfile(file_name):
-            # try to find the wardrobe in the mods location
-            file_path = os.path.abspath(os.path.join(config.basedir, "game"))
-            file_path = os.path.join(file_path,"Mods")
-            file_path = os.path.join(file_path,"Wardrobes")
-            file_name = os.path.join(file_path, wardrobe_name + ".xml")
-
-            if not os.path.isfile(file_name):
-                return None
-        return file_name
+        return wardrobe_file
 
     def get_xml_files_from_path(path_array):
         result = []
+        files = renpy.list_files()
         for p in path_array:
-            for n in os.listdir(p):
-                if n.endswith(".xml"):
-                    result.append(n)
+             for f in files:
+                 if f.startswith(p) and f.endswith(".xml"):
+                     result.append(f[(len(p)):(len(f)-4)])
         return result
 
     def wardrobe_from_xml(xml_filename):
