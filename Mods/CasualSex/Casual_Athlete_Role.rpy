@@ -11,7 +11,10 @@
 
 init -2 python:
     def casual_athlete_get_to_know_requirement(the_person):
-        return True
+        if mc.max_stamina > 3:
+            return True
+        else:
+            return False
 
     def casual_athlete_phase_one_requirement(the_person):
         if the_person.event_triggers_dict.get("athlete_progress", 0) < 1:
@@ -21,7 +24,7 @@ init -2 python:
         if the_person.event_triggers_dict.get("athlete_workout", 0) < 1:
             return False
         if time_of_day < 4:
-            if mc.max_stamina > 2:
+            if mc.max_stamina > 3:
                 if the_person.sluttiness < 20:
                     return "Requires 20 Sluttiness"
                 elif mc.location == gym:
@@ -38,7 +41,7 @@ init -2 python:
         if the_person.love > 50:
             return "She is uneasy about falling for you."
         if time_of_day < 4:
-            if mc.max_stamina > 4:
+            if mc.max_stamina > 5:
                 if the_person.sluttiness < 40:
                     return "Requires 40 Sluttiness"
                 return True
@@ -63,7 +66,8 @@ init -1 python:
         menu_tooltip = "Work up a sweat.")
     casual_athlete_phase_two = Action("Challenge to Race", casual_athlete_phase_two_requirement, "casual_athlete_phase_two_label",
         menu_tooltip = "No risk, no reward.")
-    casual_athlete_role = Role(role_name ="College Athlete", actions =[casual_athlete_get_to_know , casual_athlete_phase_one, casual_athlete_phase_two])
+    casual_athlete_protein_shake = Action("Buy Protein Shake ($5)", casual_athlete_buy_protein_shake_requirement,"casual_athlete_buy_protein_shake_label", menu_tooltip = "Slip some serum in.")
+    casual_athlete_role = Role(role_name ="?????", actions =[casual_athlete_get_to_know , casual_athlete_phase_one, casual_athlete_phase_two, casual_athlete_protein_shake])
 
 
 #*************TODO*****************
@@ -91,6 +95,10 @@ label casual_athlete_get_to_know_label(the_person):
         "You talk with her for a while about sports. She has a healthy interest in just about all things physical."
         the_person.char "Well, I need to get going. It was nice talking with you, [the_person.mc_title]!"
         $ the_person.event_triggers_dict["athlete_progress"] = 1
+        python:
+            for role in the_person.special_role:
+                if role.role_name == "?????":
+                    role.role_name = "College Athlete"
     elif the_person.event_triggers_dict.get("athlete_progress", 0) == 1:
         "You decide to ask [the_person.title] a bit more about her athletics."
         mc.name "I see you here a lot. Are you getting ready for a race?"
@@ -253,7 +261,9 @@ label casual_athlete_buy_protein_shake_label(the_person):
     "[the_person.possessive_title] looks at you and smiles."
     the_person.char "That sounds great!"
     $ renpy.scene("Active")
+
     "You head over to the counter where they have the supplements. You order her a protein shake."
+    $ mc.business.funds += 5
     "Before you take it back to her, you have a moment with no one around. You can add a serum to it if you do it quickly!"
     menu:
         "Add a dose of serum to [the_person.title]'s shake.":
