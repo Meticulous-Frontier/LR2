@@ -72,7 +72,6 @@ init -2 python:
 
         # helper function for strip and animated removal functions
         def draw_scene_without(self, person):
-            renpy.scene("Active")
             self.draw_info_ui()
             actor_missing = find_in_list(lambda x: x.person is person, self.actors)
             for actor in self.actors:
