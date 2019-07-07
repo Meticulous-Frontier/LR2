@@ -12,6 +12,7 @@ init 1 python:
     def SB_draw_two_person_scene(person_one, person_two, one_position = None, one_emotion = None, one_special_modifier = None, one_pos_x = 1.0, one_pos_y = 1.0, one_scale = 1.0, two_position = None, two_emotion = None, two_special_modifier = None, two_pos_x = 1.0, two_pos_y = 1.0, two_scale = 1.0): #Draw two people.
     #NOTE person two is always drawn second.
         renpy.scene("Active")
+        renpy.show_screen("SB_two_person_info_ui", person_one, person_two)
         if one_position is None:
             one_position = person_one.idle_pose #Easiest change is to call this and get a random standing posture instead of a specific idle pose. We redraw fairly frequently so she will change position frequently.
         #self.hair_style.draw_hair_back(self.hair_colour,self.height) #NOTE: Not currently used to see if it's actually needed.
@@ -98,12 +99,12 @@ label SB_test_draw_scene():
     return
 
 label SB_test_draw_scene_two():
-    show screen SB_two_person_info_ui(starbuck, lily)
-    $ SB_draw_two_person_scene(person_one = starbuck, person_two = lily, one_position = "missionary", one_scale = 0.5, two_position = "doggy",  two_pos_x = 0.95, two_pos_y = 0.7)
+    $ SB_draw_two_person_scene(person_one = mom, person_two = lily, one_position = "missionary", one_scale = 0.5, two_position = "doggy",  two_pos_x = 0.95, two_pos_y = 0.7)
     return
 
 
 screen SB_two_person_info_ui(the_person_one, the_person_two): #Used to display stats for a person while you're talking to them.
+    layer "Active"
     $ formatted_tooltip = ""
     $ formatted_obedience_tooltip = ""
     $ formatted_tooltip_2 = ""

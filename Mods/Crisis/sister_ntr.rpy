@@ -40,7 +40,7 @@ label sister_ntr_crisis_action_label:
     $ finishes = []
     if the_person.get_opinion_score("being covered in cum") > 0 or the_person.get_opinion_score("cum facials") > 0:
         $ finishes.append ("facial")
-    if the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("risking getting pregnant") > 0:
+    if the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("bareback sex") > 0:
         $ finishes.append ("inside")
     if the_person.get_opinion_score("giving blowjobs") > 0 or the_person.get_opinion_score("drinking cum") > 0:
         $ finishes.append ("drink")
@@ -53,7 +53,6 @@ label sister_ntr_crisis_action_label:
     else:
         $ encounter = 1
 
-    show screen person_info_ui(the_person)
     $ change_scene_display(bedroom)
     $ man_name = get_random_male_name()
 
@@ -925,8 +924,6 @@ label sister_ntr_crisis_action_label:
                 else:
                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
 
-
-    hide screen person_info_ui
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)

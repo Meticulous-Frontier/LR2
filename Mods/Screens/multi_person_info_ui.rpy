@@ -26,6 +26,7 @@ init -2 python:
         return tooltip
 
 screen multi_person_info_ui(actors): #Used to display stats for multi people while you're talking to them, takes an array of Actor objects.
+    layer "Active"
     frame:
         background Frame("gui/topbox.png")
         xsize 1100

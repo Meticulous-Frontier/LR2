@@ -50,7 +50,6 @@ label SB_one_on_one_label():
 
     "You take a quick break from work to go get a quick snack from the vending machine. While you are trying do decide what snack to buy, [the_person.possessive_title] enters the break room."
     $ the_person.draw_person()
-    show screen person_info_ui(the_person)
     the_person.char "Oh, hey [the_person.mc_title]!"
     "You make small with [the_person.possessive_title] for a while. Eventually, the subject of your role in the company and the various jobs you fulfill around the lab comes up."
     the_person.char "Yeah, I've heard that you are pretty skilled at some of the differnt jobs are the lab here. I was wondering if maybe you could give me some pointers?"
@@ -107,6 +106,5 @@ label SB_one_on_one_label():
     else:
         the_person.char "Thats okay, [the_person.mc_title], I understand. Maybe another time then!"
 
-    hide screen person_info_ui
     $ renpy.scene("Active")
     return

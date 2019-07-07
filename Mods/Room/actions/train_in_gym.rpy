@@ -19,7 +19,6 @@ init 2 python:
 label train_in_gym(person):
     python:
         change_scene_display(gym)
-        renpy.show_screen("person_info_ui", person)
         if person.sluttiness > 40 or person.arousal > 35:
             person.outfit = gym_clothes_sexy.get_copy()
         else:
@@ -75,7 +74,6 @@ label train_in_gym(person):
     $ mc.business.pay(-gym_session_cost)
     "You pay for the gym session and $ [gym_session_cost] has been deducted from the company's credit card."
 
-    hide screen person_info_ui
     $ person.reset_arousal()
     $ person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(gym)

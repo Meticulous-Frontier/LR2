@@ -90,9 +90,7 @@ label advance_time_enhanced:
         $ crisis_chance += 1    # increase chance when no event occurred
 
     $ renpy.scene("Active")
-    $ renpy.scene()
     $ renpy.show(mc.location.name,what=mc.location.background_image) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
-    hide screen person_info_ui
     show screen business_ui
 
     if time_of_day == 4: ##First, determine if we're going into the next chunk of time. If we are, advance the day and run all of the end of day code.

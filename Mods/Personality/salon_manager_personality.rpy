@@ -24,11 +24,10 @@ init 1400 python:
         common_likes = ["skirts", "small talk", "the weekend", "the colour purple", "makeup", "hiking", "flirting"],
         common_sexy_likes = ["doggy style sex", "giving blowjobs", "giving head", "anal sex", "public sex", "skimpy outfits", "anal sex", "showing her tits", "showing her ass", "being submissive", "creampies", "drinking cum", "cum facials"],
         common_dislikes = ["Mondays", "the colour yellow", "supply work", "conservative outfits", "work uniforms", "pants"],
-        common_sexy_dislikes = ["taking control", "risking getting pregnant"],
+        common_sexy_dislikes = ["taking control", "bareback sex"],
         titles_function = wild_titles, possessive_titles_function = salon_manager_possessive_titles, player_titles_function = wild_player_titles)
 
 label salon_manager_greetings(the_person):
-    show screen person_info_ui(the_person)
     $ the_person.draw_person(emotion = "happy")
 
     if the_person.mc_title == "Stranger":
@@ -71,5 +70,4 @@ label salon_manager_greetings(the_person):
             the_person.char "Is there anything I can help you with?"
 
     $ renpy.scene("Active")
-    hide screen person_info_ui
     return

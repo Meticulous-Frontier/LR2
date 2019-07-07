@@ -8,9 +8,9 @@ init -3 python:
     FETISH_ANAL_OPINION_LIST = ["anal sex", "showing her ass", "being submissive"]
     FETISH_ORAL_OPINION_LIST = ["giving blowjobs", "getting head", "drinking cum"]
     FETISH_VAGINAL_OPINION_LIST = ["doggy style sex", "missionary style sex", "sex standing up", "vaginal sex",]
-    FETISH_CUM_OPINION_LIST = ["drinking cum", "creampies", "cum facials", "being covered in cum", "risking getting pregnant"]
+    FETISH_CUM_OPINION_LIST = ["drinking cum", "creampies", "cum facials", "being covered in cum", "bareback sex"]
     #suggestion add exhibitionist fetish and move some of the basic fetishes to this one
-    FETISH_EXHIBITION_OPINION_LIST = ["not wearing underwear", "not wearing anything", "showing her tits", "showing her ass", "public sex", "lingerie", "skimpy outfits", "skimpy uniforms" ]
+    FETISH_EXHIBITION_OPINION_LIST = ["not wearing underwear", "not wearing anything", "showing her tits", "showing her ass", "public sex", "lingerie", "skimpy outfits", "skimpy uniforms", "cheating on men" ]
     
     FETISH_EVENT_TARGET = None
     #global FETISH_VAGINAL_EVENT_INUSE, FETISH_ANAL_EVENT_INUSE

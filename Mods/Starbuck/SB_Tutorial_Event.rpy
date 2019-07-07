@@ -21,7 +21,6 @@ label SB_tutorial_event():
     $ the_person = get_random_from_list(known)
 
     $ the_person.draw_person()
-    show screen person_info_ui(the_person)
 
     the_person.char "Oh, hey [the_person.mc_title]!"
     mc.name "Hello, [the_person.title]. How are you doing today."
@@ -39,7 +38,6 @@ label SB_tutorial_event():
             the_person.char "It was great seeing you! Take care [the_person.mc_title]!"
             $ the_person.change_happiness(5)
 
-    hide screen person_info_ui
     $ change_scene_display(mc.location)
     $ renpy.scene("Active")    
     return

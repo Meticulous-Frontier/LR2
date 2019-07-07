@@ -86,7 +86,7 @@ label sister_phone_crisis_action_label:
                 python:
                     for i in range(3):
                         the_person.outfit.remove_random_upper(top_layer_first = True)
-                        if the_person.outfit.panties_covered: #If we get down to her panties keep them on, because that's sexier.
+                        if the_person.outfit.panties_covered(): #If we get down to her panties keep them on, because that's sexier.
                             the_person.outfit.remove_random_lower(top_layer_first = True)
                 $ the_person.draw_person(emotion = "happy")
                 "[the_person.possessive_title] sends you a picture of herself stripped down in front of her bedroom mirror."
@@ -96,7 +96,7 @@ label sister_phone_crisis_action_label:
                 python:
                     for i in range(3):
                         the_person.outfit.remove_random_upper(top_layer_first = True)
-                        if the_person.outfit.panties_covered:
+                        if the_person.outfit.panties_covered():
                             the_person.outfit.remove_random_lower(top_layer_first = True)
                 $ the_person.draw_person(emotion = "happy")
                 "[the_person.possessive_title] sends you a picture of herself stripped down in the park."
@@ -150,21 +150,20 @@ label sister_phone_crisis_action_label:
                 "[the_person.possessive_title] sends you a sends you a selfie without her shirt on. It looks like it was taken in a bathroom of her school."
 
         elif ran_num == 2:
+            $ the_person.outfit.remove_random_upper(top_layer_first = True)
             if mc.business.is_weekend():
                 the_person.char "I wish you were here spending time with me. Maybe this will convince you [the_person.possessive_title] is a cool person to hang out with!"
-                $ the_person.outfit.remove_random_upper(top_layer_first = True)
                 $ the_person.draw_person(emotion = "happy")
                 "[the_person.possessive_title] sends you a selfie from her bedroom without her shirt on."
             else:
                 the_person.char "I'm busy here at school but I really wish I could be spending time with you instead. Do you think I'm pretty enough to spend time with ;)"
-                $ the_person.outfit.remove_random_upper(top_layer_first = True)
                 $ the_person.draw_person(emotion = "happy")
                 "[the_person.possessive_title] sends you a selfie without her shirt on. It looks like it's taken in the bathroom of her school."
 
         else:
             $ the_clothing = the_person.outfit.remove_random_upper(top_layer_first = True, do_not_remove = True)
             if the_clothing:
-                $ the_clothing.colour[3] = the_clothing.colour[3]*0.8 #It's translucent.
+                $ the_clothing.colour[3] = the_clothing.colour[3] * 0.7 #It's translucent.
                 the_person.char "It looks like my [the_clothing.name] didn't like being in the wash, it's gone all see-through."
                 $ the_person.draw_person(emotion = "happy")
                 if the_clothing.underwear:
@@ -200,15 +199,18 @@ label sister_phone_crisis_action_label:
             the_person.char "I'm always sending selfies to my friends, so I hope you like me sending them to you too!"
             $ the_person.draw_person(emotion = "happy")
             if mc.business.is_weekend():
-                "[the_person.possessive_title] sends you a selfie she took in the living room of your house."
+                "[the_person.possessive_title] sends you a selfie she took in her bedroom."
             else:
-                "[the_person.possessive_title] sends you a selfie she took in the bathroom at school."
+                "[the_person.possessive_title] sends you a selfie she took in an empty hallway at school."
         else:
             the_person.char "All your hard work has inspired me [the_person.mc_title], I'm going out for a walk to stay in shape!"
             $ the_person.draw_person(emotion = "happy")
             "[the_person.possessive_title] sends you a short video she took of herself outside. She's keeping up a brisk walk and seems slightly out of breath."
-            if not the_person.outfit.wearing_bra and the_person.has_large_tits:
-                "She doesn't seem to realize it but it's very obvious [the_person.possessive_title] isn't wearing a bra under her shirt. Her sizeable breasts heave up and down with each step."
+            if not the_person.outfit.wearing_bra():
+                if the_person.has_large_tits():
+                    "She doesn't seem to realize it but it's very obvious [the_person.possessive_title] isn't wearing a bra under her shirt. Her sizeable breasts heave up and down with each step."
+                else:
+                    "She doesn't seem to realize it but it's very obvious [the_person.possessive_title] isn't wearing a bra under her shirt. Her perky breasts slightly bounce with each step."
 
     else:
         #Sends you normal sisterly texts.

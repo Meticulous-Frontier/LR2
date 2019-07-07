@@ -29,7 +29,7 @@ label mom_ntr_mod_action_label:
     $ finishes = []
     if the_person.get_opinion_score("being covered in cum") > 0 or the_person.get_opinion_score("cum facials") > 0:
         $ finishes.append ("facial")
-    if the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("risking getting pregnant") > 0:
+    if the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("bareback sex") > 0:
         $ finishes.append ("inside")
     if the_person.get_opinion_score("giving blowjobs") > 0 or the_person.get_opinion_score("drinking cum") > 0:
         $ finishes.append ("drink")
@@ -45,7 +45,6 @@ label mom_ntr_mod_action_label:
         $ encounter = 1
 
     $ change_scene_display(bedroom)
-    show screen person_info_ui(the_person)
     $ man_name = get_random_male_name()
     $ wife_name = get_random_name()
     while wife_name is the_person.name: ## Just to avoid stupid duplications
@@ -79,7 +78,6 @@ label mom_ntr_mod_action_label:
             "You are unsure what to do here."
         else:
             $ the_person.draw_person(position = "kissing", emotion = "happy")
-            show screen person_info_ui(the_person)
             "You see [the_person.possessive_title] embracing some man, kissing him deeply."
             the_person.char "Oh [man_name], you are so nice. I had a wonderful evening!"
             "Now, when you heard the name, you recognize the man. It's [man_name], one of [the_person.possessive_title] colleagues."
@@ -2305,7 +2303,6 @@ label mom_ntr_mod_action_label:
                                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
             "Get back to bed.":
                 "You decide that it is wrong to interfere into [the_person.possessive_title]'s private life so you go back to your room to sleep."
-    hide screen person_info_ui
     $ the_person.sluttiness += 5
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.

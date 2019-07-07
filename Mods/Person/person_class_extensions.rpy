@@ -298,13 +298,9 @@ init -1:
 
         Person.review_outfit = review_outfit_enhanced
 
-        def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, character_placement = None, from_scene = False): #Draw the person, standing as default if they aren't standing in any other position.
+        def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, character_placement = None, from_scene = False): #Draw the person, standing as default if they aren't standing in any other position.
             if position is None:
                 position = self.idle_pose
-
-            # Hack for updating the hair colour based on the name of the hair colour when the colour is black but the name is not.
-            if (self.hair_colour != "black" and self.hair_style.colour == [0.1,0.09,0.08,1]):
-                update_hair_colour(self)
 
             if emotion is None:
                 emotion = self.get_emotion()
@@ -322,6 +318,8 @@ init -1:
             # if normal draw person call, clear scene
             if not from_scene:
                 renpy.scene("Active")
+                if show_person_info:
+                    renpy.show_screen("person_info_ui",self)
 
             displayable_list = [] # We will be building up a list of displayables passed to us by the various objects on the person (their body, clothing, etc.)
             displayable_list.append(self.body_images.generate_item_displayable(self.body_type,self.tits,position)) #Add the body displayable
@@ -365,7 +363,9 @@ init -1:
                 character_placement = character_right
 
             renpy.scene("Active") # clear layer for new draw action
-            if not scene_manager is None:   # when we are called from the scenemanager we have to draw the other characters
+            if scene_manager is None:
+                renpy.show_screen("person_info_ui",self)
+            else:   # when we are called from the scenemanager we have to draw the other characters
                 scene_manager.draw_scene_without(self)
 
             bottom_displayable.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier)) #Get the face displayable, also always under clothing.

@@ -1,3 +1,7 @@
+init 5 python:
+    add_label_hijack("normal_start", "activate_generic_people_role")  
+    add_label_hijack("after_load", "update_generic_people_role")
+
 init 2 python:
     # Schedule Person | Allows you to modify the schedule of the_person. Change requirement to be dependent on obedience?
     schedule_actions_list = [] # NOTE: Use this list to display all the schedule actions.
@@ -39,7 +43,7 @@ init 2 python:
 
     # Schedule Person Requirements
     def schedule_person_requirement(person):
-        if person.obedience >= 130:
+        if store.generic_people_role_change_schedule and person.obedience >= 130 and not person in list_of_unique_characters:
             return True
         return False
 
@@ -59,32 +63,45 @@ init 2 python:
 
     # Follow Me Requirements
     def start_follow_requirement(person):
-        if person not in list_of_followers:
-            if person.obedience >= 110:
-                return True
+        if store.generic_people_role_follow:
+            if person not in list_of_followers:
+                if person.obedience >= 110:
+                    return True
         return False
 
     def stop_follow_requirement(person):
-        if person in list_of_followers:
-            return True
+        if store.generic_people_role_follow:
+            if person in list_of_followers:
+                return True
         return False
 
     # Hire Person Requirements
     def hire_person_requirement(person):
-        if person not in mc.business.get_employee_list():
-            return True
+        if store.generic_people_role_hire_person:
+            if person not in mc.business.get_employee_list() + list_of_unique_characters:
+                return True
         return False
 
     # Rename Person Requirements
     def rename_person_requirement(person):
-        if person.obedience >= 150:
-            return True
+        if store.generic_people_role_rename_person:
+            if person.obedience >= 150:
+                return True
         return False
 
     def spend_the_night_requirement(person):
-        if time_of_day is 4 and person.love > 50 and mc.location is person.home: #Has to be night, need to have some love and be in the_person's home location
-            return True
+        if store.generic_people_role_spend_night:
+            if time_of_day is 4 and person.love > 50 and mc.location is person.home: #Has to be night, need to have some love and be in the_person's home location
+                return True
         return False
+
+    def generic_people_role_event_requirement():
+        return True
+
+    def turn_generic_people_role_feature_on_or_off(feature):
+        globals()[feature] = not globals()[feature]
+        return
+
     # Schedule Actions
     schedule_person_action = Action("Schedule [the_person.title]", schedule_person_requirement, "schedule_menu", menu_tooltip = "Schedule where the person should be throughout the day.")
     schedule_early_morning_action = Action("Early Morning", schedule_early_morning_requirement, "schedule_early_morning", menu_tooltip = "Schedule where the person should be during the Early Morning.")
@@ -109,9 +126,53 @@ init 2 python:
     spend_the_night_action = Action("Spend the night with [the_person.possessive_title]", spend_the_night_requirement, "spend_the_night", menu_tooltip = "Allows you to sleep in this location")
 
     # A role added to all people in the game to enable actions through the "Special Actions Menu..."
-    generic_people_role = Role("Generic", [schedule_person_action, start_follow_action, stop_follow_action, hire_person_action, rename_person_action, spend_the_night_action]) # This role is meant to not display in the person_ui_hud
+    generic_people_role = Role("Generic", [schedule_person_action, start_follow_action, stop_follow_action, hire_person_action, rename_person_action, spend_the_night_action], hidden = True) # This role is meant to not display in the person_ui_hud
 
     # NOTE: This extension of "any person" can be toggled from the Action Mod Core menu under "Misc", listed as Generic People Actions
+    generic_people_role_event_action = ActionMod("Generic People Role", generic_people_role_event_requirement, "generic_people_role_dummy_label", menu_tooltip = "Generic People Role Configuration Settings", category = "Misc", allow_disable = False, options_menu = "generic_people_role_options_menu")
+
+
+label initialize_generic_people_role_configuration_values:
+    $ generic_people_role_change_schedule = True
+    $ generic_people_role_follow = True
+    $ generic_people_role_hire_person = True
+    $ generic_people_role_rename_person = True
+    $ generic_people_role_spend_night = True
+    return
+
+label activate_generic_people_role(stack):
+    call initialize_generic_people_role_configuration_values from _call_initialize_generic_people_role_configuration_values_1
+    # continue on the hijack stack if needed
+    $ execute_hijack_call(stack)
+    return
+
+label update_generic_people_role(stack):
+    python:
+        if not hasattr(store, 'generic_people_role_change_schedule'):
+            renpy.call("initialize_generic_people_role_configuration_values")
+        
+        # continue on the hijack stack if needed
+        execute_hijack_call(stack)
+    return
+
+label generic_people_role_options_menu:
+    python:
+        while True:
+            tuple_list = []
+
+            tuple_list.append(["Change Schedule" + "\n Active: " + str(store.generic_people_role_change_schedule) + " (tooltip)Schedule where the person should be throughout the day.", "generic_people_role_change_schedule"])
+            tuple_list.append(["Follow You" + "\n Active: " + str(store.generic_people_role_follow) + " (tooltip)Tell a person to follow you where ever you go, until you tell them to stop following you.", "generic_people_role_follow"])
+            tuple_list.append(["Hire Person" + "\n Active: " + str(store.generic_people_role_hire_person) + " (tooltip)Hire a person to work for you.", "generic_people_role_hire_person"])
+            tuple_list.append(["Rename Person" + "\n Active: " + str(store.generic_people_role_rename_person) + " (tooltip)Change the name of the person.", "generic_people_role_rename_person"])
+            tuple_list.append(["Spend the Night" + "\n Active: " + str(store.generic_people_role_spend_night) + " (tooltip)Spend the night together.", "generic_people_role_spend_night"])
+            tuple_list.append(["Back","Back"])
+
+            action_mod_choice = renpy.display_menu(tuple_list, True, "Choice")
+
+            if action_mod_choice == "Back":
+                renpy.return_statement()
+            else:
+                turn_generic_people_role_feature_on_or_off(action_mod_choice)
 
 
 # NOTE: Not sure where to place these actions yet. Basically actions that could fit on any person regardless of role.
