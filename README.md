@@ -20,6 +20,9 @@ Enhancements:
 * Enhanced end of day dialog
 * Multiple characters on screen (in some dialogs)
 
+Cheat Mod:
+* Trollden Cheat Mod (press 'z' in game)
+
 Authors:
 * Trollden
 * Starbuck
