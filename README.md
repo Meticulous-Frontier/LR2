@@ -1,8 +1,8 @@
-**A collection of various Lab Rats 2 - Back to Business modifications**
+# A collection of various Lab Rats 2 - Back to Business modifications**
 
 This mod collection extends the base game with a range of new features and enhancements to make the game more enjoyable and configurable to your own preferences.
 
-New Features:
+## New Features:
 * Adds over 14 new crisis events with new dialogs and situations.
 * The sex shop owner with a complete storyline
 * Adds over 8 new sex positions with dialogs
@@ -12,7 +12,7 @@ New Features:
 * Extra personalities and random character enhancements with dialogs and story lines.
 * Purchasable new rooms with extra functions
 
-Enhancements:
+## Enhancements:
 * Enhanced outfit creator
 * Enhanced serum editor
 * Enhanced main map for faster navigation
@@ -20,16 +20,16 @@ Enhancements:
 * Enhanced end of day dialog
 * Multiple characters on screen (in some dialogs)
 
-Cheat Mod:
+## Cheat Mod:
 * Trollden Cheat Mod (press 'z' in game)
 
-Authors:
+## Authors:
 * Trollden
 * Starbuck
 * Pilotus13
 * Tristimdorion
 
-How to Install:
+## How to Install:
 1. Download a .zip file from the master branch.
 2. Extract the Mods folder of the .zip into the <Lab Rats 2/game/> folder.
 3. You now should have a <Lab Rats 2/game/Mods> folder.
