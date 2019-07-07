@@ -44,7 +44,6 @@ label intro_SB_sixty_nine(the_girl, the_location, the_object, the_round):
     return
 
 label scene_SB_sixty_nine_1(the_girl, the_location, the_object, the_round):
-    $ SB_sixty_nine.current_modifier = "SB_sixty_nine"
     $ SB_sixty_nine.redraw_scene(the_girl)
     if the_girl.sex_skills["Oral"] < 2: #Inexperienced.
         "You rest your hands on [the_girl.possessive_title]'s ass as she bobs her head up and down. She struggles to take your very deep, so she focuses on licking and sucking your tip."
@@ -403,13 +402,13 @@ label outro_SB_sixty_nine(the_girl, the_location, the_object, the_round):
 
     return
 
-label transition_SB_sixty_nine_deepthroat(the_girl, the_location, the_object, the_round):
+label transition_SB_sixty_nine_deepthroat(the_girl, the_location, the_object, the_round):  #Delete this?
     mc.name "Fuck that feels great [the_girl.possessive_title]. Think you can take it any deeper?"
-    $ SB_sixty_nine.current_modifier = None
+    #$ SB_sixty_nine.current_modifier = None
     $ SB_sixty_nine.redraw_scene(the_girl)
     "[the_girl.possessive_title] slides off your dick with a wet pop and takes a few breaths."
     the_girl.char "Well, I can try."
-    $ SB_sixty_nine.current_modifier = "SB_sixty_nine"
+    #$ SB_sixty_nine.current_modifier = "SB_sixty_nine"
     $ SB_sixty_nine.redraw_scene(the_girl)
     "Once she's caught her breath she opens her mouth wide and slides you back down her throat. She doesn't stop until her nose taps your stomach and she has your entire cock in her mouth."
     return
@@ -432,7 +431,7 @@ label strip_SB_sixty_nine(the_girl, the_clothing, the_location, the_object, the_
     return
 
 label strip_ask_SB_sixty_nine(the_girl, the_clothing, the_location, the_object, the_round):
-    $ SB_sixty_nine.current_modifier = None
+    #$ SB_sixty_nine.current_modifier = None
     $ SB_sixty_nine.redraw_scene(the_girl)
 
     "[the_girl.possessive_title] pops off your cock."
