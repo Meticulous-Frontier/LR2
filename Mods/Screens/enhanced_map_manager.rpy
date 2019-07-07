@@ -3,7 +3,7 @@
 
 init -1 python:
     def get_location_tooltip(location):
-        known_people = known_people_at_location(location)
+        known_people = sorted(known_people_at_location(location), key = lambda x: x.name)
         if len(known_people) == 0:
             return ""
         tooltip = "You know " + str(len(known_people)) 
