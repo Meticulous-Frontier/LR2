@@ -55,8 +55,8 @@ init -2 python:
                 # reset actor clothing and arousal
                 actor_to_remove.person.review_outfit(show_review_message = False)
                 actor_to_remove.person.reset_arousal()
-                self.actors.remove(actor_to_remove)
-                self.draw_scene()
+            self.actors.remove(actor_to_remove)
+            self.draw_scene()
 
         def draw_info_ui(self):
             renpy.scene("Active")
