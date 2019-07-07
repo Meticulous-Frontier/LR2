@@ -6,7 +6,7 @@ New Features:
 * Adds over 14 new crisis events with new dialogs and situations.
 * The sex shop owner with a complete storyline
 * Adds over 8 new sex positions with dialogs
-* A hair salon owner with options to change hair styles and colours.
+* A hair salon with options to change hair styles and colours.
 * Some extra actions in the gym studio.
 * A large collection of new serums to influence characters in the game.
 * Extra personalities and random character enhancements with dialogs and story lines.
