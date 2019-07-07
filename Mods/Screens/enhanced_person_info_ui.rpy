@@ -124,9 +124,8 @@ init 2:
                         action NullAction()
                         sensitive True
 
-                    if hasattr(person, "weight"):
-                        textbutton "Weight: " + get_person_weight_string(person):
-                            ysize 28
-                            text_style "menu_text_style"
-                            action NullAction()
-                            sensitive True
+                    textbutton "Weight: " + get_person_weight_string(person):
+                        ysize 28
+                        text_style "menu_text_style"
+                        action NullAction()
+                        sensitive True
