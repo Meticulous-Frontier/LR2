@@ -472,6 +472,12 @@ label outro_SB_facing_wall(the_girl, the_location, the_object, the_round):
     mc.name "Ah, I'm going to cum!"
     menu:
         "Cum inside of her.":
+            if mc.condom:
+                "You pull back on [the_girl.possessive_title]'s hips and drive your cock as deep inside of her as you cum. She gasps when she feels you filling the condom deep inside of her."
+                "You wait until your orgasm has passed completely, then pull out and stand back. You condom is bulged on the end where it is filled with your seed."
+                "[the_girl.possessive_title] reaches over for your cock, removes the condom, and ties the end in a knot for you."
+                the_girl.char "Wow that was good. Look at all that cum you made for me..."
+                return
             "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
             if the_girl.get_opinion_score("creampies") > 0:
                 the_girl.char "Yes! Fill me up with your cum!"
@@ -491,7 +497,11 @@ label outro_SB_facing_wall(the_girl, the_location, the_object, the_round):
                 "[the_girl.possessive_title] reaches back and desperately tries to stop any more from leaking out with her hand."
 
         "Cum on her ass.":
-            "You pull out of [the_girl.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She wiggles her ass for you as you cover her with your sperm."
+            if mc.condom:
+                "You pull out of [the_girl.possessive_title] at the last moment, pulling your condom off as your blow your load all over her ass."
+                "She holds still for you as you cover her with your sperm."
+            else:
+                "You pull out of [the_girl.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She wiggles her ass for you as you cover her with your sperm."
             if the_girl.get_opinion_score("being covered in cum") > 0:
                  the_girl.char "Yes! Paint me with your sticky cum!"
             $ the_girl.cum_on_ass()
@@ -507,7 +517,10 @@ label outro_SB_facing_wall(the_girl, the_location, the_object, the_round):
             "You stand back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
         "Cum on her face.":
             mc.name "Fuck, get ready [the_girl.possessive_title], I wanna cum on your face!"
-            "You pull your cock out of [the_girl.possessive_title] with a satisfying pop. She immediately turns around on gets on her knees in front of you."
+            if mc.condom:
+                "You pull your cock out of [the_girl.possessive_title] with a satisfying pop. You pull your condom off as she turns around on gets on her knees in front of you."
+            else:
+                "You pull your cock out of [the_girl.possessive_title] with a satisfying pop. She immediately turns around on gets on her knees in front of you."
             $ the_girl.draw_person(position = "blowjob")
             if the_girl.get_opinion_score("cum facials"):
                 "[the_girl.possessive_title] begins stroking you while pointing your cock straight at her eager face."

@@ -127,7 +127,14 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object, the_round):
     "[the_girl.possessive_title]'s sweet cunt milks your cock, the wet friction pushes you past the point of no return."
     mc.name "Ah, I'm going to cum!"
     "[the_girl.possessive_title] looks back at you and smiles."
-    if SB_check_fetish(the_girl, cum_internal_role):
+    if mc.condom:
+        "[the_girl.possessive_title]'s quivering hole feels too good, you can't hold it back anymore."
+        "She moans as she feels your erection twitching inside of her. You dump your load into the condom, hoping it can contain it."
+        "When you finish, [the_girl.possessive_title] slowly pulls up off you."
+        "You gaze at her shapely ass. She reaches back and carefuly removes your condom."
+        the_girl.char "Wow that was good. Look at all that cum you made for me..."
+        return
+    elif SB_check_fetish(the_girl, cum_internal_role):
         "[the_girl.possessive_title]'s body goes rigid as your cum poors into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
         the_girl.char "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I want it it all inside me!"
         "[the_girl.possessive_title] revels in having her cum fetish fulfilled."

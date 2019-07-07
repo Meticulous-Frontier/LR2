@@ -80,7 +80,9 @@ label scene_SB_doggy_anal_1(the_girl, the_location, the_object, the_round):
                  "[the_girl.possessive_title] begins to twerk up and down your shaft with quick, shallow movements."
                  if mc.arousal > 70:
                       mc.name "Damn that feels good. You're gonna make me cum if you keep that up. Where do you want my load?"
-                      if SB_check_fetish(the_girl, cum_internal_role):
+                      if mc.condom:
+                           the_girl.char "Just shove it in deep and dump it right in my ass. You still have that condom on, right?"
+                      elif SB_check_fetish(the_girl, cum_internal_role):
                           the_girl.char "Just shove it in deep and dump it right in my ass. You know I need your cum inside me, right where it belongs!"
                       elif SB_check_fetish(the_girl, cum_external_role):
                          the_girl.char "Anywhere on my skin! My ass, my face, I don't care, just spray me down with it! With you know I need it like that!"
@@ -229,6 +231,29 @@ label outro_SB_doggy_anal(the_girl, the_location, the_object, the_round):
     mc.name "Ah, I'm going to cum!"
     menu:
         "Cum inside of her.":
+            if mc.condom:
+                "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum."
+                "She gasps with every final thrust as you fill your condom, which is slowly expanding inside her to accomodate your seed."
+                if the_girl.get_opinion_score("bareback sex") > 0:
+                    the_girl.char "Oh god, imagine if you weren't wearing that rubber thing... I could feel you filling me up..."
+                else:
+                    the_girl.char "That's it, cum deep!"
+                "You wait until your orgasm has passed completely, then pull out and sit back. Her asshole gapes slightly. You condom is full of your potent seed."
+                if SB_check_fetish(the_girl, cum_internal_role):
+                    "[the_girl.possessive_title] quickly reachs back and grabs your cock. She hastily pulls your condom off, careful not to spill a drop."
+                    the_girl.char "I'm not letting a drop of this delicious cum go to waste!"
+                    "She brings the condom to her mouth and drains it all into her mouth in one quick motion. You can see her pupils dilate as she feeds her cum fetish."
+                    "She turns the condom inside out and licks the inside of it, desperate to get every drop of cum she possibly can."
+                elif the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
+                    $ the_girl.discover_opinion("drinking cum")
+                    "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off do your cum doesn't spill out."
+                    the_girl.char "It would be a shame to waste all of this, right?"
+                    "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
+                    $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+                else:
+                    "[the_girl.possessive_title] reaches over for your cock, removes the condom, and ties the end in a knot for you."
+                    the_girl.char "Mmmm, look at all that cum. I guess that means my ass was pretty good!"
+                return
             "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
             if the_girl.get_opinion_score("creampies") > 0:
                 the_girl.char "Yes! Fill my ass with your cum!"
@@ -246,7 +271,11 @@ label outro_SB_doggy_anal(the_girl, the_location, the_object, the_round):
             "You wait until your orgasm has passed completely, then pull out and sit back. Her asshole gapes slightly and you can see a hint of your cum start to dribble out, but most of it stays buried with her bowel"
 
         "Cum on her ass.":
-            "You pull out of [the_girl.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
+            if mc.condom:
+                "You pull out of [the_girl.possessive_title] at the last moment, pulling your condom off as your blow your load all over her ass."
+                "She holds still for you as you cover her with your sperm."
+            else:
+                "You pull out of [the_girl.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
             if the_girl.get_opinion_score("being covered in cum") > 0:
                  the_girl.char "Yes! Paint me with your sticky cum!"
             $ the_girl.cum_on_ass()
@@ -263,7 +292,10 @@ label outro_SB_doggy_anal(the_girl, the_location, the_object, the_round):
             "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
         "Cum on her face.":
             mc.name "Fuck, get ready [the_girl.title], I wanna cum on your face!"
-            "You pull your cock out of [the_girl.possessive_title]'s ass with a satisfying pop. She immediately turns around on gets on her knees in front of you."
+            if mc.condom:
+                "You pull your cock out of [the_girl.possessive_title]'s ass with a satisfying pop. You pull your condom off as she turns around on gets on her knees in front of you."
+            else:
+                "You pull your cock out of [the_girl.possessive_title]'s ass with a satisfying pop. She immediately turns around on gets on her knees in front of you."
             $ the_girl.draw_person(position = "blowjob")
             if SB_check_fetish(the_girl, cum_external_role):
                 "[the_girl.possessive_title] reaches up and begins stroking you off for your final few seconds."

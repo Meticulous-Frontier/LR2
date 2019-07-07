@@ -35,12 +35,16 @@ label intro_SB_sixty_nine(the_girl, the_location, the_object, the_round):
         the_girl.char "Oh! Yes that feels so good already! Oh [the_girl.mc_title] your tongue feels amazing."
     if the_girl.get_opinion_score("giving blowjobs") > 2:
         the_girl.char "Mmm, that feels good [the_girl.mc_title]... and your cock... it looks so good... I wanna swallow it whole!"
+    if mc.condom:
+        the_girl.char "Why are you wearing this thing? Lets take this off so I can take care of you better..."
+        "[the_girl.possessive_title] pulls off your condom."
+        $ mc.condom = False
     "[the_girl.possessive_title] begins to please you in return. Taking you into her mouth, she begins sucking you off."
     #$ SB_sixty_nine.redraw_scene(the_girl)
     return
 
 label scene_SB_sixty_nine_1(the_girl, the_location, the_object, the_round):
-    # $ SB_sixty_nine.current_modifier = "SB_sixty_nine"
+    $ SB_sixty_nine.current_modifier = "SB_sixty_nine"
     $ SB_sixty_nine.redraw_scene(the_girl)
     if the_girl.sex_skills["Oral"] < 2: #Inexperienced.
         "You rest your hands on [the_girl.possessive_title]'s ass as she bobs her head up and down. She struggles to take your very deep, so she focuses on licking and sucking your tip."
@@ -405,7 +409,7 @@ label transition_SB_sixty_nine_deepthroat(the_girl, the_location, the_object, th
     $ SB_sixty_nine.redraw_scene(the_girl)
     "[the_girl.possessive_title] slides off your dick with a wet pop and takes a few breaths."
     the_girl.char "Well, I can try."
-    # $ SB_sixty_nine.current_modifier = "SB_sixty_nine"
+    $ SB_sixty_nine.current_modifier = "SB_sixty_nine"
     $ SB_sixty_nine.redraw_scene(the_girl)
     "Once she's caught her breath she opens her mouth wide and slides you back down her throat. She doesn't stop until her nose taps your stomach and she has your entire cock in her mouth."
     return
@@ -413,6 +417,10 @@ label transition_SB_sixty_nine_deepthroat(the_girl, the_location, the_object, th
 label transition_default_SB_sixty_nine(the_girl, the_location, the_object, the_round):
     $ SB_sixty_nine.redraw_scene(the_girl)
     "You lay down on the [the_object.name]. [the_girl.possessive_title] swings one leg over your head and slowly moves her body into position on top of yours."
+    if mc.condom:
+        the_girl.char "Why are you wearing this thing? Lets take this off so I can take care of you better..."
+        "[the_girl.possessive_title] pulls off your condom."
+        $ mc.condom = False
     return
 
 label strip_SB_sixty_nine(the_girl, the_clothing, the_location, the_object, the_round):
