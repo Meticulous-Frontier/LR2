@@ -71,17 +71,17 @@ label cougar_introduction(the_person): # Copy paste from relaxed to fix crash
     mc.name "Excuse me, could I bother you for a moment?"
     "She turns around."
     $ the_person.set_title("???")
-    the_person.char "I guess? What do you need?"
+    the_person.char "I guess? What can I do for you?"
     mc.name "I know this is strange, but I saw you and I just needed to know your name."
-    "She laughs and blushes."
-    the_person.char "Really? You're just saying that to impress me, aren't you."
+    "She laughs with a twinkle in her eyes."
+    the_person.char "Is that so? You're trying to impress me, aren't you."
     mc.name "Really, I really just wanted to talk to you."
     $ title_choice = get_random_title(the_person)
     $ formatted_title = the_person.create_formatted_title(title_choice)
-    the_person.char "Well fine, my name is [formatted_title]. It's nice to meet you..."
+    the_person.char "Well, if you insist, my name is [formatted_title]. It's nice to meet you..."
     $ the_person.set_title(title_choice)
     $ the_person.set_possessive_title(get_random_possessive_title(the_person))
-    "She waits expectantly for you to introduce yourself."
+    "With a commanding gaze she waits for you to introduce yourself."
     return
 
 label cougar_clothing_accept(the_person):
@@ -112,6 +112,9 @@ label cougar_clothing_review(the_person):
     else:
         if the_person.sluttiness > 50:
             the_person.char "Oh [the_person.mc_title], I shouldn't be seen like this... Just give me a moment and I'll get dressed."
+        elif not the_person.relationship == "Single":
+            $ so_title = SO_relationship_to_title(the_person.relationship)
+            the_person.char "Oh my, what would my [so_title] say if he saw me here, like this....with you. Turn around, I need to cover myself!"
         else:
             the_person.char "Oh [the_person.mc_title], I'm not decent! Turn around now, I need to cover myself!"
     return
@@ -145,7 +148,11 @@ label cougar_sex_obedience_accept(the_person):
         else:
             the_person.char "How does this keep happening [the_person.mc_title]? You know I love you but we shouldn't be doing this..."
             "[the_person.possessive_title] looks away, conflicted."
-            the_person.char "I... You just have to make sure your mom and sister never find out about this. Nobody can know..."
+            if not the_person.relationship == "Single":
+                $ so_title = SO_relationship_to_title(the_person.relationship)
+                the_person.char "I... You just have to make sure my [so_title] never finds out about this. Nobody can know..."
+            else:
+                the_person.char "I... You just have to make sure your mom and sister never find out about this. Nobody can know..."
     return
 
 label cougar_sex_gentle_reject(the_person):
@@ -156,8 +163,13 @@ label cougar_sex_gentle_reject(the_person):
     return
 
 label cougar_sex_angry_reject(the_person):
-    if the_person.sluttiness < 20:
-        the_person.char "Oh god, what did you just say [the_person.mc_title]? I could be your mother, how could you even think about that!"
+    if not the_person.relationship == "Single":
+        $ so_title = SO_relationship_to_title(the_person.relationship)
+        the_person.char "Wait, what? I have a [so_title], what did you think we were going to be doing?"
+        "She glares at you and walks away."
+    elif the_person.sluttiness < 20:
+        the_person.char "Oh god, what did you just say [the_person.mc_title]?"
+        the_person.char "I could be your mother, how could you even think about that!"
     else:
         the_person.char "What? Oh god, I... I'm too old for you [the_person.mc_title]! We can't do things like that, ever."
         "[the_person.possessive_title] turns away from you."
@@ -177,7 +189,7 @@ label cougar_seduction_response(the_person):
         if the_person.sluttiness > 50:
             the_person.char "Do you need the touch of an experienced woman, [the_person.mc_title]? I know how stressed you can get you."
         else:
-            the_person.char "Oh well... What do you need help with [the_person.mc_title]?."
+            the_person.char "Oh sweety... What do you need help with [the_person.mc_title]?."
     else:
         if the_person.sluttiness > 50:
             the_person.char "Well, how about you let me take care of you for a change?"
@@ -188,39 +200,72 @@ label cougar_seduction_response(the_person):
     return
 
 label cougar_seduction_accept_crowded(the_person):
-    if the_person.sluttiness < 35:
-        "[the_person.possessive_title] pinches your ass cheek, whispering.."
-        the_person.char "You can't say things like that in public [the_person.mc_title]! Think of my reputation."
-        "She looks around quickly to see if anyone heard you, then takes your hand in hers."
-        the_person.char "Come on, I'm sure we can find a quiet place were you can take care of me."
-
-    elif the_person.sluttiness < 70:
-        "[the_person.possessive_title] smiles and devours your body with her eyes, making sure nobody around you notices."
-        the_person.char "Okay, but we need to be careful. I don't think people would understand our relationship. Let's find someplace quiet."
-
+    if the_person.relationship == "Single":
+        if the_person.sluttiness < 35:
+            "[the_person.possessive_title] pinches your ass cheek, whispering.."
+            the_person.char "You can't say things like that in public [the_person.mc_title]! Think of my reputation."
+            "She looks around quickly to see if anyone heard you, then takes your hand in hers."
+            the_person.char "Come on, I'm sure we can find a quiet place were you can take care of me."
+        elif the_person.sluttiness < 70:
+            "[the_person.possessive_title] smiles and devours your body with her eyes, making sure nobody around you notices."
+            the_person.char "Okay, but we need to be careful. I don't think people would understand our relationship. Let's find someplace quiet."
+        else:
+            the_person.char "Oh my [the_person.mc_title] ... why don't you take care of me right here!"
     else:
-        the_person.char "Oh my [the_person.mc_title] ... why don't you take care of me right here!"
+        $ so_title = SO_relationship_to_title(the_person.relationship)
+        if the_person.sluttiness + (5*the_person.get_opinion_score("cheating on men")) > 60:
+            the_person.char "No point wasting any time, right? I hope my [so_title] won't be too jealous."
+        else:
+            the_person.char "Okay, but we need to be careful. I don't want my [so_title] to find out what we're doing."
     return
 
 label cougar_seduction_accept_alone(the_person):
-    if the_person.sluttiness < 35:
-        the_person.char "I can't believe I'm saying this... I'll play along for now, but you better not disappoint me."
-        mc.name "Of course [the_person.title], I promise."
-    elif the_person.sluttiness < 70:
-        the_person.char "Oh [the_person.mc_title], what kind woman would I be if I said no? Come on, let's enjoy ourselves."
+    if the_person.relationship == "Single":
+        if the_person.sluttiness < 35:
+            the_person.char "I can't believe I'm saying this... I'll play along for now, but you better not disappoint me."
+            mc.name "Of course [the_person.title], I promise."
+        elif the_person.sluttiness < 70:
+            the_person.char "Oh [the_person.mc_title], what kind woman would I be if I said no? Come on, let's enjoy ourselves."
+        else:
+            the_person.char "Oh [the_person.mc_title], I'm so glad I make you feel this way. Come on, let's get started!"
     else:
-        the_person.char "Oh [the_person.mc_title], I'm so glad I make you feel this way. Come on, let's get started!"
+        $ so_title = SO_relationship_to_title(the_person.relationship)
+        if the_person.sluttiness + (5*the_person.get_opinion_score("cheating on men")) > 60:
+            the_person.char "Come on [the_person.mc_title], lets get going, screw my [so_title]!"
+        else:
+            the_person.char "I have a [so_title], I shouldn't be doing this..."
+            "Her eyes tell quitte a different story."
     return
 
 label cougar_sex_responses(the_person):
-    if the_person.sluttiness > 50:
-        if the_person.obedience > 130:
-            the_person.char "Oh... Please [the_person.mc_title], keep doing that to me!"
+    if the_person.arousal < 25:
+        if the_person.sluttiness > 50:
+            the_person.char "Mmm, that's nice!"
         else:
+            the_person.char "Ah... that feels really nice!"
+
+    elif the_person.arousal < 50:
+        if the_person.sluttiness > 50:
             the_person.char "Ah yes, that's it [the_person.mc_title], give it to [the_person.possessive_title]!"
+        else:
+            the_person.char "Oh my god, that feeling..."
+
+    elif the_person.arousal < 75:
+        if the_person.sluttiness > 50:
+            "[the_person.title] bites down on her lower lip and growls sensually."
+        else:
+            "[the_person.possessive_title] mumbles softly to herself."
+            the_person.char "Fuck... Oh fuck... Oh fuck!"
     else:
-        "[the_person.possessive_title] closes her eyes."
-        the_person.char "Yes [the_person.mc_title], just like that!"
+        if the_person.sluttiness > 50:
+            if the_person.relationship == "Single":
+                the_person.char "Oh... Please [the_person.mc_title], keep doing that to me!"
+            else:
+                $ so_title = SO_relationship_to_title(the_person.relationship)
+                the_person.char "Ah! My [so_title] never makes me want to cum this badly! I'm sorry horney!"
+        else:
+            "[the_person.possessive_title] closes her eyes."
+            the_person.char "Yes [the_person.mc_title], just like that!"
     return
 
 label cougar_seduction_refuse(the_person):
@@ -239,6 +284,14 @@ label cougar_flirt_response(the_person):
         else:
             the_person.char "Oh stop [the_person.mc_title], it's not nice to make fun of me like that."
             "[the_person.possessive_title] blushes and looks away."
+    elif not the_person.relationship == "Single":
+        $so_title = SO_relationship_to_title(the_person.relationship)
+        if the_person.sluttiness + (the_person.get_opinion_score("cheating on men")*5) > 60:
+            the_person.char "Well thank you [the_person.mc_title]. Don't let my [so_title] hear you say that though, he might get jealous."
+            "She smiles and winks mischievously."
+        else:
+            the_person.char "I have a [so_title], you really shouldn't be talking to me like that..."
+            "She seems more worried about being caught than flirting with you."
     else:
         if the_person.sluttiness > 50:
             the_person.char "Oh my...hmm... Thank you, [the_person.mc_title]."
@@ -410,14 +463,31 @@ label cougar_work_enter_greeting(the_person):
     return
 
 label cougar_date_seduction(the_person): #TODO: Change this to be different.
-    if the_person.sluttiness > the_person.love:
-        if the_person.sluttiness > 40:
-            the_person.char "You've been such a good boy tonight. Come with me tonight and I think you can make me feel good too..."
+    if the_person.relationship == "Single":
+        if the_person.sluttiness > the_person.love:
+            if the_person.sluttiness > 40:
+                the_person.char "You've been such a good boy tonight. Come with me tonight and I think you can make me feel good too..."
+            else:
+                the_person.char "You were a perfect gentleman tonight [the_person.mc_title], would you like to join me at my place?"
         else:
-            the_person.char "You were a perfect gentleman tonight [the_person.mc_title], would you like to join me at my place?"
+            if the_person.love > 40:
+                the_person.char "I had such a wonderful time tonight. You make me feel so young and alive, want to take a nightcap at my place?"
+            else:
+                the_person.char "You've been a wonderful date. Would you like to share a bottle of wine at my place?"
     else:
-        if the_person.love > 40:
-            the_person.char "I had such a wonderful time tonight. You make me feel so young and alive, want to take a nightcap at my place?"
+        $ so_title = SO_relationship_to_title(the_person.relationship)
+        if the_person.sluttiness > the_person.love:
+            if the_person.sluttiness > 40:
+                the_person.char "You've been such a good boy tonight. My [so_title] went night fishing with some buddies, so..."
+                the_person.char "Join me tonight and I think you can make me feel good..."
+            else:
+                the_person.char "You were a perfect gentleman tonight [the_person.mc_title]. It's been years since I had this much fun with my [so_title]."
+                the_person.char "He has his poker night with some friends. Would you like to join me at my place and have glass of wine?"
         else:
-            the_person.char "You've been a wonderful date. Would you like to share a bottle of wine at my place?"
+            if the_person.love > 40:
+                the_person.char "I don't want this night to end. My [so_title] is on a businesstrip this weekend."
+                the_person.char "Do you want to come over to my place so we can spend more time together?"
+            else:
+                the_person.char "Tonight was fantastic. I think my [so_title] is out for the night."
+                the_person.char "So do you want to come over to my place for a cup of coffee?"
     return
