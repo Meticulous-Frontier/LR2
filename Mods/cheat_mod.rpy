@@ -26,7 +26,8 @@ init 2 python:
         return
 
 init python:
-    config.overlay_screens = ["keybind1"]
+    if "keybind1" not in config.overlay_screens:
+        config.overlay_screens.append("keybind1")
     config.console = True # Enables the console, can be set to False.
 
 screen keybind1():
