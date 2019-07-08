@@ -260,9 +260,6 @@ init 2:
                                                 style "textbutton_style"
                                                 text_style "custom_outfit_style"
 
-                                                    background "#1a45a1"
-                                                    hover_background "#3a65c1"
-
                                                 if valid_check(starting_outfit, cloth) or selected_clothing in catagories_mapping[catagory_selected][0]:
 
                                                     background "#1a45a1"
