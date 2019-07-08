@@ -49,3 +49,12 @@ init -1 python:
         if time_name in time_names:
             return time_of_day == time_names.index(time_name)
         return False
+
+init -1 python: # Put a group of locations into a list e.g "Home" includes the entire player's home. To be used in shower_crisis
+
+    # Player's Home
+    def people_in_mc_home():
+        in_home = []
+        for person in hall.people + bedroom.people + lily_bedroom.people + mom_bedroom.people + kitchen.people:
+            in_home.append(person)
+        return in_home 
