@@ -67,6 +67,23 @@ label cougar_greetings(the_person):
             the_person.char "Good [day_part], [the_person.mc_title]!"
     return
 
+label cougar_introduction(the_person): # Copy paste from relaxed to fix crash
+    mc.name "Excuse me, could I bother you for a moment?"
+    "She turns around."
+    $ the_person.set_title("???")
+    the_person.char "I guess? What do you need?"
+    mc.name "I know this is strange, but I saw you and I just needed to know your name."
+    "She laughs and blushes."
+    the_person.char "Really? You're just saying that to impress me, aren't you."
+    mc.name "Really, I really just wanted to talk to you."
+    $ title_choice = get_random_title(the_person)
+    $ formatted_title = the_person.create_formatted_title(title_choice)
+    the_person.char "Well fine, my name is [formatted_title]. It's nice to meet you..."
+    $ the_person.set_title(title_choice)
+    $ the_person.set_possessive_title(get_random_possessive_title(the_person))
+    "She waits expectantly for you to introduce yourself."
+    return
+
 label cougar_clothing_accept(the_person):
     if the_person.obedience > 140:
         the_person.char "Well, if you think I have got the body for it then I'm not going to argue."
