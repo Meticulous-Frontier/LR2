@@ -88,13 +88,22 @@ init 2 python:
             if person.obedience >= 150:
                 return True
         return False
-
+    
+    # Spend the Night Requirements
     def spend_the_night_requirement(person):
         if store.generic_people_role_spend_night:
             if time_of_day is 4 and person.love > 50 and mc.location is person.home: #Has to be night, need to have some love and be in the_person's home location
                 return True
         return False
+    
+    # Pay Strip Requirements
+    def pay_to_strip_requirement(person):
+        if store.generic_people_role_pay_to_strip:
+            if person.obedience >= 130 and person.sluttiness >= 15 or person.obedience >= 150 or person.sluttiness >= 50 or person.get_opinion_score("not wearing anything") > 0:
+                return True
+        return False
 
+    # ActionMod Requirements
     def generic_people_role_event_requirement():
         return True
 
@@ -124,9 +133,11 @@ init 2 python:
     rename_person_action = Action("Rename [the_person.title]", rename_person_requirement, "rename_person", menu_tooltip = "Change the name of the person.")
     # Spend the Night | Allows you to sleep in the home of a person you have increased the love stat.
     spend_the_night_action = Action("Spend the night with [the_person.possessive_title]", spend_the_night_requirement, "spend_the_night", menu_tooltip = "Allows you to sleep in this location")
-
+    # Pay to Strip | Allows you to enter the pay_strip label used in certain events if requirements are met.
+    pay_to_strip_action = Action("Pay [the_person.title] to strip", pay_to_strip_requirement, "pay_strip_scene", menu_tooltip = "Pay the person to give you a strip tease.")
+    
     # A role added to all people in the game to enable actions through the "Special Actions Menu..."
-    generic_people_role = Role("Generic", [schedule_person_action, start_follow_action, stop_follow_action, hire_person_action, rename_person_action, spend_the_night_action], hidden = True) # This role is meant to not display in the person_ui_hud
+    generic_people_role = Role("Generic", [schedule_person_action, start_follow_action, stop_follow_action, hire_person_action, rename_person_action, spend_the_night_action, pay_to_strip_action], hidden = True) # This role is meant to not display in the person_ui_hud
 
     # NOTE: This extension of "any person" can be toggled from the Action Mod Core menu under "Misc", listed as Generic People Actions
     generic_people_role_event_action = ActionMod("Generic People Role", generic_people_role_event_requirement, "generic_people_role_dummy_label", menu_tooltip = "Generic People Role Configuration Settings", category = "Misc", allow_disable = False, options_menu = "generic_people_role_options_menu")
@@ -138,6 +149,7 @@ label initialize_generic_people_role_configuration_values:
     $ generic_people_role_hire_person = True
     $ generic_people_role_rename_person = True
     $ generic_people_role_spend_night = True
+    $ generic_people_role_pay_to_strip = True
     return
 
 label activate_generic_people_role(stack):
@@ -148,7 +160,7 @@ label activate_generic_people_role(stack):
 
 label update_generic_people_role(stack):
     python:
-        if not hasattr(store, 'generic_people_role_change_schedule'):
+        if not hasattr(store, 'generic_people_role_pay_to_strip'): # NOTE: Update this to one of the new variables added in initialize_generic_people_role_configuration_values to update, see above.
             renpy.call("initialize_generic_people_role_configuration_values")
         
         # continue on the hijack stack if needed
@@ -165,6 +177,7 @@ label generic_people_role_options_menu:
             tuple_list.append(["Hire Person" + "\n Active: " + str(store.generic_people_role_hire_person) + " (tooltip)Hire a person to work for you.", "generic_people_role_hire_person"])
             tuple_list.append(["Rename Person" + "\n Active: " + str(store.generic_people_role_rename_person) + " (tooltip)Change the name of the person.", "generic_people_role_rename_person"])
             tuple_list.append(["Spend the Night" + "\n Active: " + str(store.generic_people_role_spend_night) + " (tooltip)Spend the night together.", "generic_people_role_spend_night"])
+            tuple_list.append(["Pay to Strip" + "\n Active: " + str(store.generic_people_role_pay_to_strip) + " (tooltip)Pay someone to strip for you.", "generic_people_role_pay_to_strip"])
             tuple_list.append(["Back","Back"])
 
             action_mod_choice = renpy.display_menu(tuple_list, True, "Choice")
