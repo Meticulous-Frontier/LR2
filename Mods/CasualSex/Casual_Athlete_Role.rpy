@@ -38,6 +38,8 @@ init -2 python:
     def casual_athlete_phase_two_requirement(the_person):
         if the_person.event_triggers_dict.get("athlete_progress", 0) < 2:
             return False
+            if the_person.event_triggers_dict.get("athlete_progress", 0) > 3:
+                return False
         if the_person.love > 50:
             return "She is uneasy about falling for you."
         if time_of_day < 4:
@@ -47,6 +49,12 @@ init -2 python:
                 return True
             else:
                 return "Requires More Max Stamina"
+        return False
+
+    def casual_athlete_race_crisis_requirement():
+        if day % 7 == 5:
+            if time_of_day == 1:
+                return True
         return False
 
     def casual_athlete_buy_protein_shake_requirement(the_person):
@@ -69,6 +77,10 @@ init -1 python:
     casual_athlete_protein_shake = Action("Buy Protein Shake ($5)", casual_athlete_buy_protein_shake_requirement,"casual_athlete_buy_protein_shake_label", menu_tooltip = "Slip some serum in.")
     casual_athlete_role = Role(role_name ="?????", actions =[casual_athlete_get_to_know , casual_athlete_phase_one, casual_athlete_phase_two, casual_athlete_protein_shake])
 
+
+#*************Mandatory Crisis******************#
+init 1 python:
+    casual_athlete_race_crisis = Action("Charity Race", casual_athlete_race_crisis_requirement, "casual_athlete_race_crisis_label")
 
 #*************TODO*****************
 #Implement some method of adding this role to random towngirls.
@@ -147,6 +159,9 @@ label casual_athlete_get_to_know_label(the_person):
         "TODO: she talks to you about the upcoming marathon"
 
     elif the_person.event_triggers_dict.get("athlete_progress", 0) == 3:
+        "TODO: she trash talks you about the upcoming race."
+
+    elif the_person.event_triggers_dict.get("athlete_progress", 0) == 4:
         "TODO: she hints you should swing by her place for casual sex soon"
 
     else:
@@ -229,30 +244,141 @@ label casual_athlete_phase_one_label(the_person):
         $ the_person.outfit = CS_nude_outfit.get_copy()
         $ the_person.draw_person( position = "stand2")
         "As you enter, you see that [the_person.title] is already naked."
-        the_person.char "[the_person.mc_title], we can work out the details later... I have been fucked in months!"
+        the_person.char "[the_person.mc_title], we can work out the details later... I haven't been fucked in months!"
         "You walk over to her and quickly strip. You grab [the_person.title] by that ass and pick her up. You carry her to the wall and pin her up against it."
         $ the_person.draw_person( position = "against_wall")
         "[the_person.possessive_title] is grinding her hips up against yours. The sweat from your workouts mingles together as you prepare yourself to enter her."
 
         ###TODO new version figure out condom stuff here###
+        call condom_ask(the_person) from _casual_athlete_mod_condom_ask_CS010
 
         ###TODO situational sluttiness to make sure this position succeeds###
 
         "As you begin to push yourself inside her, she drags her nails across your back."
         the_person.char "Oh fuck, that's good. Give it to me good, [the_person.mc_title]!"
         call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, girl_in_charge = False, private = True) from _call_casual_sex_mod_CS010
+        if the_person.arousal > 100:
+            "As you slowly let [the_person.title] down from the wall, you can see her trembling, caused by aftershocks from her orgasm."
+        $ the_person.reset_arousal()
+        the_person.char "Mmm... that was nice..."
+        "[the_person.title] stutters for a moment."
+        the_person.char "But... you know... I really can't get involved in a serious relationship right now."
+        mc.name "I agree. We need some ground rules. Want to have coffee and figure it out?"
+        the_person.char "That sounds good. But its not a date, okay? Just need to set boundaries."
+        "You agree. You and [the_person.title] take a quick shower, then get ready and leave the gym."
+        #TODO change location to coffee house? Possibly change from grabbing coffee to grabbing a drink. ()
 
+        $ the_person.review_outfit(show_review_message = False)
+
+        $ the_person.draw_person( position = "sitting")
+        "You head to a nearby coffee shop. You grab yourself a coffee, letting [the_person.title] pay for her own. You grab a seat at a booth away from any other people."
+        the_person.char "So... are you interested in a friend's with benefits set up?"
+        "You give a quick nod."
+        the_person.char "Okay, so, some ground rules. First off, if either of us start's to catch feelings for the other person, we break it off. I sure as fuck don't have time for that stuff right now..."
+        mc.name "I agree. We'll keep it physical. No dates or whatever. Just hit me up when you want to fuck around."
+        the_person.char "Right... here, let's exchange numbers. I'll text you and if we're both free, we can screw around, no strings attached."
+        "You agree. You and [the_person.title] finish up with your coffees. You both get up to leave."
+        $ the_person.draw_person(position = "stand3")
+        the_person.char "Well, see you around, stud! I'd better go work on some homework."
+        "You say your goodbyes. This should be interesting. You wonder what kind of crazy sex you'll have with your new friends with benefits."
+
+        if casual_sex_add_person_to_list(the_person):
+            "You now have [the_person.title]'s phone number."
+        else:
+            "DEBUG: Did not successfully get phone number."
         $ the_person.event_triggers_dict["athlete_progress"] = 2
-    elif the_person.event_triggers_dict.get("athlete_progress", 0) == 2:
-        "Workout together again, already did this once."
+    elif the_person.event_triggers_dict.get("athlete_progress", 0) > 1:
+        mc.name "Hey [the_person.title]. I figured I would find you here. Want to workout together?"
+        the_person.char "That sounds great, [the_person.mc_title]! I always enjoy working up a sweat with you."
+        mc.name "Sounds good! I'll head to the locker room and get changed and meet you over by the free weights."
+        "You quickly get yourself changed into workout clothes and meet [the_person.title]."
+        $ the_person.draw_person( position = "stand4")
+        "It is obvious from the beginning of your workout with [the_person.possessive_title] that she intends to get frisky with you when you get done."
+        "While doing squats, she gets right behind you, pressing her body against yours as she spots you."
+        "You try to be as covert as possible, but a couple of the other guys in the gym shoot you knowing looks as you go about your workout."
+        "During the bench press, [the_person.title] stands right above you, her crotch tantalizingly close to your face."
+        the_person.char "Wow, what a workout! So... are you gonna go hit the showers now?"
+        "It is clear from the way she is asking she is curious if you are gonna follow her to the secluded lockerroom."
+        menu:
+            "Hit the Shower":
+                #TODO some kind of innuendo joke here#
+                mc.name "Yeah, I'm pretty sweaty. I'd better get cleaned up!"
+                $ the_person.draw_person( emotion = "happy")
+                "She gets close to you and whispers in your ear."
+                the_person.char "You now where to go... meet me in 5."
+                $ the_person.draw_person( position = "walking_away")
+                "You watch [the_person.title]'s amazing ass as she walks away. You swear there's a bit of a swagger there."
+                "You give her a few minutes, then follow after her."
+
+                #Lockerroom sex scene.
+                $ CS_nude_outfit = Outfit("Nude")
+                $ the_person.outfit = CS_nude_outfit.get_copy()
+                $ the_person.draw_person( position = "stand2")
+                "As you enter, you see that [the_person.title] is already naked."
+                the_person.char "[the_person.mc_title], give me that cock! It's been too long since fucked me good!"
+                "You walk over to her and quickly strip. You grab [the_person.title] by that ass and pick her up. You carry her to the wall and pin her up against it."
+                $ the_person.draw_person( position = "against_wall")
+                "[the_person.possessive_title] is grinding her hips up against yours. The sweat from your workouts mingles together as you prepare yourself to enter her."
+                call condom_ask(the_person) from _casual_athlete_mod_condom_ask_CS011
+
+                "As you begin to push yourself inside her, she drags her nails across your back."
+                the_person.char "Oh fuck, that's good. Give it to me good, [the_person.mc_title]!"
+                call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, girl_in_charge = False, private = True) from _call_casual_sex_mod_CS011
+                if the_person.arousal > 100:
+                    "As you slowly let [the_person.title] down from the wall, you can see her trembling, caused by aftershocks from her orgasm."
+                    the_person.char "Mmm... god I'm glad you know how to use that cock."
+                $ the_person.reset_arousal()
+                "Without another word, you and [the_person.title] take a quick shower, then get ready and leave the gym."
+                $ the_person.review_outfit(show_review_message = False)
+
+            "Not Today":  #lol what a tease#
+                the_person.char "Oh. Okay, I understand. Well, I'll see you around, [the_person.mc_title]!"
+                $ the_person.change_happiness(-3)
     return
 
+#CSA20
 label casual_athlete_phase_two_label(the_person):
     if the_person.event_triggers_dict.get("athlete_progress", 0) == 2:
-        "You race her, win, and have sexy times"
+        "You see [the_person.title] on the treadmill. She is running hard, and has been training for a race coming up soon. She pauses the treadmill as you walk up to her."
+        the_person.char "Hey [the_person.mc_title], here for another workout?"
+        mc.name "Not today, [the_person.title]. How goes training? Is that big race coming up soon?"
+        if day % 7 == 4:  #It is friday, the race is tomorrow!
+            the_person.char "Yeah! As a matter of fact, it's tomorrow!"
+        else:
+            the_person.char "Yeah! Its coming up quick, on Saturday morning!"
+        "She checks you out for a minute, before continuing."
+        the_person.char "You know, it's a charity race, with proceeds going to breast cancer! You seem pretty fit, and I know how much you love tits. Maybe you should race too?"
+        "You give her a smile."
+        mc.name "Ah, that sounds like a good cause, but I couldn't. I'd hate for our arrangement to come to an end because we are in the same race and I beat you and you get mad."
+        the_person.char "Hah! You wish! You seem awfully confident. I tell you what, why don't we make a little bet?"
+        "You are intrigued by where she is going with this."
+        mc.name "Go on."
+        the_person.char "You come out and race. When the race is over, we go back to my place, and whoever won gets to do anything they want with the loser!"
+        mc.name "Anything?"
+        "She gives you a wink."
+        the_person.char "That's what I said, isn't it?"
+        mc.name "You've got a deal. Saturday morning downtown. I'll be there."
+        $ the_person.draw_person (position = "stand4")
+        the_person.char "Yes! Oh my [the_person.mc_title], no backing out now! I'll have to find my handcuffs..."
+        "[the_person.title] seems pretty confident in herself, but you are pretty sure you have good odds in a race."
+        "You wave goodbye to [the_person.title], wondering what you've gotten yourself in to."
+
+        $ casual_athlete_race_crisis.args = [the_person]    # set the current person as action argument
+        $ mc.business.mandatory_crises_list.append(casual_athlete_race_crisis) #Add race crisis    TODO Find out if this breaks if two girls hit this stage a the same point in gameplay
+
         $ the_person.event_triggers_dict["athlete_progress"] = 3
-    elif the_person.event_triggers_dict.get("athlete_progress", 0) > 2:
-        "You already beat her once!"
+    elif the_person.event_triggers_dict.get("athlete_progress", 0) == 3:
+        mc.name "Hey [the_person.title], I just wanted to verify, the race is this Saturday, right?"
+        the_person.char "That's right! I can't wait to beat your ass in the race, and then spank it again later at my place!"
+        mc.name "Yeah right, I'll be bending you over before you can even get your front door closed."
+        "[the_person.title] has a spark in her eyes. Whoever wins, you have a feeling the sex is going to be amazing after the race."
+        "You wave goodbye to [the_person.title], wondering what you've gotten yourself in to."
+    return
+
+#CSA30
+label casual_athlete_race_crisis_label(the_person):
+    "It's race day! You make your way downtown, ready for your race with [the_person.title]."
+    #TODO this entire scene.
 
     return
 

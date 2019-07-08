@@ -3,7 +3,11 @@
 
 init 2 python:
     #def casual_sex_mod_initialization(action_mod):
+    workout_wardrobe = wardrobe_from_xml("Workout_Wardrobe")
+    casual_sex_list = [] #This will hold a list of girls looking for casual sex
     def test_init_050():
+
+
         people_to_process = [] #Create a list of everyone
         for place in list_of_places:
             for people in place.people:
@@ -19,6 +23,7 @@ init 2 python:
             if disqualifying_role == 0:         #Assign new casual sex roles#
                 if people.age < 30:
                     assign_casual_athlete_role(people)
+                    people.wardrobe = copy.copy(workout_wardrobe)
                     #people.special_role.append(casual_athlete_role)
                     #people.personality = athlete_personality
                     #people.schedule[1] = gym
@@ -29,6 +34,15 @@ init 2 python:
 #                if people.age < 30:
 #                    people.special_role.append(casual_athlete_role)
         return
+
+    def casual_sex_add_person_to_list(the_person):
+        if the_person in casual_sex_list:
+            return False
+        else:
+            casual_sex_list.append (the_person)
+            return True
+
+        return False
 
 init 1302 python:
     def assign_casual_athlete_role(the_person):
