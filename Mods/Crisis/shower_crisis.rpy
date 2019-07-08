@@ -20,11 +20,7 @@ init 2 python:
 
 label shower_crisis_action_label:
     ## Someone is taking a shower
-    $ shower_person = renpy.random.randint(1, 2)
-    if shower_person == 1:
-        $ the_person = mom
-    else:
-        $ the_person = lily
+    $ shower_person = get_random_from_list(people_in_mc_home()) #Checks all the rooms in player's home
 
     "While walking around the house, you hear the shower running and notice that the bathroom door is not fully closed."
     menu:
@@ -45,7 +41,7 @@ label shower_crisis_action_label:
     "You see the water running down her chest."
     $ the_person.draw_person(position = "stand3", emotion = "happy")
     "[the_person.possessive_title] turns around, with the water now going on her back and firm ass."
-    if the_person == mom:
+    if the_person.has_large_tits():
         "You can't help but admire [the_person.possessive_title]'s great body and tits."
         "Just as this thought flashes through your mind, she starts rubbing her boobs."
     else:
