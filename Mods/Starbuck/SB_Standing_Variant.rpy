@@ -516,7 +516,7 @@ label outro_SB_facing_wall(the_girl, the_location, the_object, the_round):
                 the_girl.char "Oh! Its so warm..."
             "You stand back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
         "Cum on her face.":
-            mc.name "Fuck, get ready [the_girl.possessive_title], I wanna cum on your face!"
+            mc.name "Fuck, get ready [the_girl.title], I wanna cum on your face!"
             if mc.condom:
                 "You pull your cock out of [the_girl.possessive_title] with a satisfying pop. You pull your condom off as she turns around on gets on her knees in front of you."
             else:
