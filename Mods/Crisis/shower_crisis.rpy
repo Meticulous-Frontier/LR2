@@ -20,7 +20,7 @@ init 2 python:
 
 label shower_crisis_action_label:
     ## Someone is taking a shower
-    $ shower_person = get_random_from_list(people_in_mc_home()) #Checks all the rooms in player's home
+    $ the_person = get_random_from_list(people_in_mc_home()) #Checks all the rooms in player's home
 
     "While walking around the house, you hear the shower running and notice that the bathroom door is not fully closed."
     menu:

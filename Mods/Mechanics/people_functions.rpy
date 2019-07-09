@@ -28,3 +28,6 @@ init -1 python:
                 if person.mc_title != "Stranger":
                     known_people.append(person)
         return known_people
+
+    def people_in_mc_home():
+        return hall.people + bedroom.people + lily_bedroom.people + mom_bedroom.people + kitchen.people
