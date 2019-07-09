@@ -24,6 +24,10 @@ init 2 python:
         the_swing = Object("sex swing",["Sit","Low", "Swing"], sluttiness_modifier = 10, obedience_modifier = 10)
         return the_swing
 
+    def SB_make_counter():
+        the_counter = Object("counter",["Sit","Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
+        return the_counter
+
     def SB_mod_initialization(action_mod):
         starbuck_personality = Personality("starbuck", default_prefix = "relaxed",
         common_likes = ["skirts", "small talk", "the colour blue", "makeup"],
@@ -59,6 +63,9 @@ init 2 python:
         starbuck.schedule[3] = sex_store
 
         starbuck.home.add_person(starbuck)
+
+        # Add a counter to the sex shop
+        sex_store.add_object(SB_make_counter())
 
         # Add StarBuck introduction event to sex store
         starbuck.on_room_enter_event_list.append(starbuck_introduction_event_action)
