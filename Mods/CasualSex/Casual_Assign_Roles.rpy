@@ -53,7 +53,9 @@ init 1302 python:
         common_dislikes = ["relationships"],
         common_sexy_dislikes = [],
         titles_function = athlete_titles, possessive_titles_function = athlete_possessive_titles, player_titles_function = athlete_player_titles)
+        local_athlete_personality.response_dict["hookup_rejection"] = "athlete_hookup_rejection"
         the_person.personality = local_athlete_personality
+        the_person.event_triggers_dict["reject_position"] = "standing_doggy"
         the_person.schedule[1] = gym
         the_person.schedule[3] = gym
 

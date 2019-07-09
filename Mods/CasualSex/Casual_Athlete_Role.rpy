@@ -378,8 +378,99 @@ label casual_athlete_phase_two_label(the_person):
 #CSA30
 label casual_athlete_race_crisis_label(the_person):
     "It's race day! You make your way downtown, ready for your race with [the_person.title]."
-    #TODO this entire scene.
-
+    $ mc.change_location(downtown)
+    $ renpy.show(mc.location.name,what=mc.location.background_image)
+    "You find where they are organizing the race. It is a 5 kilometer race, which is about three miles long."
+    "You look around and eventually find [the_person.title]."
+    $ the_person.draw_person(position = "stand3")
+    the_person.char "Hey, there you are! I was starting to think you had chickened out!"
+    mc.name "Not a chance. I hope you don't have any plans for tomorrow, because when I get done with you tonight you won't be able to get out of bed until Monday at least!"
+    the_person.char "Oh my, brave words for a bravy boy! Let's just see what happens!"
+    "You and [the_person.title] do some stretching and warmups, but soon it is time for the race to begin."
+    "You line up together at the starting line, ready for the race to begin."
+    "*BANG*"
+    $ the_person.draw_person(position = "walking_away")
+    "The official starts the race with a shot from the gun and the race begins! [the_person.title] jumps out in front of you, setting a fast pace."
+    "You are tempted to chase after her, but think better of it. This is a long race, and you need to pace yourself."
+    $ renpy.scene("Active")
+    "As you near the first kilometer, you lose sight of [the_person.title] in the crowd of racers, but you are sure you aren't far behind."
+    "You settle into your pace, determined to let your stamina carry you through the race, no matter what happens. You pass the second kilometer marker"
+    "You breathe in, you breathe out. You take pace after pace, determined to race with the best of your abilities."
+    "As you approach the third kilometer marker, you can see yourself catching up to a familiar form."
+    $ the_person.draw_person(position = "walking_away")
+    "God she is hot, her ass sways back and forth with each step she takes. You imagine all the things you want to do with those delightfully tight cheeks."
+    "You are catching up to her, and you find yourself running with a renewed vigor from the flow of testosterone in your bloodstream, day dreaming about [the_person.possessive_title]."
+    "You pass the marker for the fourth kilometer. This is it, its now or never!"
+    "You surge forward, and soon you are right beside her. She is gasping for air, she is completely winded!"
+    the_person.char "[the_person.mc_title]? Oh god..."
+    "She barely gets her words out as you pass her."
+    $ renpy.scene("Active")
+    "You keep pushing forward, not daring to turn around."
+    "You round a corner. The finish line! You give it everything you have! Your breathing is heavy and ragged, sucking in every ounce of air you can."
+    "You cross the finish line. You beat her!!!"
+    "You are catching your breath, and turn to see her cross the finish line just a few seconds behind you."
+    $ the_person.draw_person(position = "standing_doggy")
+    "[the_person.title] is breathing hard. She walks up to a table nearby and bends over with her hands on it, trying desperately to catch her breath."
+    "You walk up behind her and put your hands on her back. You are careful not to be too obvious, but you make some contact with her backside with your hips."
+    mc.name "Hey there, [the_person.title]! Nice race! I'm so glad you invited me out here to support such a charitable cause..."
+    $ the_person.draw_person(position = "stand4")
+    "She stands up and turns to face you."
+    the_person.char "Yeah!... I mean, its all for a good cause, right?"
+    $ the_person.draw_person(position = "stand4", emotion = "happy")
+    "You think you see a little smirk on the corner of her mouth."
+    "You both take a few minutes to recover, and soon you are ready to go."
+    the_person.char "Alright, you won the race. I guess it's time to head back to my place?"
+    "You call for an Uber and she gives you here adress. Soon you are walking into [the_person.title]'s apartment."
+    $ mc.change_location(the_person.home)
+    $ renpy.show(mc.location.name,what=mc.location.background_image)
+    if not the_person.home in mc.known_home_locations:
+        $ mc.known_home_locations.append(the_person.home)
+    "As soon as you walkin the door, you grab [the_person.title]. You pick her up and push her against the wall."
+    $ the_person.draw_person(position = "against_wall")
+    #TODO add temporary sluttiness to make sure she is up for anything###
+    $ the_person.add_situational_slut("Lost Bet",25,"Be ready for anything!")
+    the_person.char "Fuck! Mmm, are we gonna start right here? I remember the terms, do what you want to with me..."
+    "You growl into her neck as you grind your hips into hers."
+    mc.name "That's right, you're my sexy bitch for the day."
+    "You back up from the wall, but hold her tight, keeping her feet from reaching the floor. You turn and take her into her bedroom."
+    $ the_person.draw_person(position = "missionary")
+    "You throw her down on her bed."
+    if the_person.outfit.vagina_available() and the_person.outfit.tits_available():
+        "You stop for a second and admire [the_person.title], her body on display in front of you."
+        $ the_person.change_arousal(20)
+        "You notice some moisture building around her slit. She is definitely enjoying your hungry eyes roaming her body."
+    else:
+        "Your mind red with lust, you begin to rip [the_person.title]'s clothes off."
+        $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+        while strip_choice is not None:
+            $ the_person.draw_animated_removal(strip_choice)
+            "You roughly strip off [the_person.possessive_title]'s [strip_choice.name]."
+            $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+        $ the_person.change_arousal(20)
+        "[the_person.possessive_title] moans as you strip her down, enjoying your rough treatment of her."
+    "When she is full naked, you grab her hips and flip her over."
+    $ the_person.draw_person(position = "doggy")
+    $ the_person.change_arousal(5)
+    "There it is, the ass that inspired your final push in the race. She lowers her face to the bed and wiggles her hips at you."
+    "In a moment you are naked. You hop up on the bed and get behind her. You grab her hips and roughly pull her back toward you."
+    "You rub her slit up and down with your furious erection, coating it with her juices. You give her ass a rough spank, eliciting a yelp."
+    $ the_person.change_arousal(10)
+    the_person.char "Oh fuck, please just put it in. I feel like I'm on fire!!!"
+    "You consider for a second putting on a condom first. Nope, not a fucking chance. In one smooth motion you push yourself into her sopping, needy cunt."
+    the_person.char "Yes!!! Oh god, please fuck me good!"
+    "You have every intention of doing exactly that."
+    call fuck_person(the_person, private=True, start_position = doggy, start_object = make_bed(), skip_intro = True, girl_in_charge = False, hide_leave = True) from _call_casual_sex_mod_CS030
+    $ the_person.reset_arousal()
+    $ the_person.clear_situational_slut("Lost Bet")
+    "When you finish with her, [the_person.possessive_title] lays down on her bed."
+    $ the_person.draw_person(position = "missionary")
+    the_person.char "[the_person.mc_title]... I am so sore... My legs from the race... and... you know..."
+    the_person.char "But that was amazing... Look, I'll be your sexy bitch anytime you want, okay? You have my address now, feel free to stop by. Just promise you'll fuck me like that again."
+    "You laugh."
+    mc.name "Sounds good. You have my number, let me know if you wanna hookup sometime, or if you want a rematch!"
+    the_person.char "Ayup! Don't worry. Alright, if its okay with you, I think I'm gonna take a nap..."
+    "You excuse yourself. You grab your clothes and head out. You now know [the_person.title]'s address, with a standing offer to come over and fuck her silly!"
+    $ the_person.event_triggers_dict["athlete_progress"] = 4
     return
 
 label casual_athlete_buy_protein_shake_label(the_person):
@@ -654,6 +745,11 @@ label athlete_flirt_response(the_person):
         else:
             the_person.char "Hey, maybe if you buy me dinner first."
             "[the_person.title] gives you a wink and smiles."
+    return
+
+label athlete_hookup_rejection(the_person):
+    "Testing to see if this text works!"
+    the_person.char "Your loss! I've been working out so much lately, and you could have had some of this..."
     return
 
 #label athlete_cum_face(the_person):

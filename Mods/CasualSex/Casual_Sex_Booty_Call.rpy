@@ -27,12 +27,12 @@ label casual_sex_booty_call_label:
 
         "Not Now":
             "After a few minutes, you get a response."
-            the_person.char "Your loss! You could have had some of this..."
+            $ the_person.call_dialogue("hookup_rejection")
             python:
                 for i in range(3):
                     the_person.outfit.remove_random_upper(top_layer_first = True)
                     the_person.outfit.remove_random_lower(top_layer_first = True)
-            $ the_person.draw_person(position = "missionary", emotion = "happy")
+            $ the_person.draw_person(position = the_person.event_triggers_dict.get("reject_position", "missionary"))
             "She sends you a pic of herself masturbating."
 
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
