@@ -262,7 +262,7 @@ label cougar_sex_responses(the_person):
                 the_person.char "Oh... Please [the_person.mc_title], keep doing that to me!"
             else:
                 $ so_title = SO_relationship_to_title(the_person.relationship)
-                the_person.char "Ah! My [so_title] never makes me want to cum this badly! I'm sorry horney!"
+                the_person.char "Ah! My [so_title] never makes me want to cum this badly! I'm so horney!"
         else:
             "[the_person.possessive_title] closes her eyes."
             the_person.char "Yes [the_person.mc_title], just like that!"
