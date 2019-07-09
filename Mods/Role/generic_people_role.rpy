@@ -99,7 +99,9 @@ init 2 python:
     # Pay Strip Requirements
     def pay_to_strip_requirement(person):
         if store.generic_people_role_pay_to_strip:
-            if person.obedience >= 130 and person.sluttiness >= 15 or person.obedience >= 150 or person.sluttiness >= 50 or person.get_opinion_score("not wearing anything") > 0:
+            if len(mc.location.people) > 1:
+                return "Must be alone with " + person.title
+            if (person.obedience >= 130 and person.sluttiness >= 15) or (person.sluttiness >= 25 and person.get_opinion_score("not wearing anything") > 0) or person.obedience >= 150 or person.sluttiness >= 50:
                 return True
         return False
 
@@ -134,7 +136,7 @@ init 2 python:
     # Spend the Night | Allows you to sleep in the home of a person you have increased the love stat.
     spend_the_night_action = Action("Spend the night with [the_person.possessive_title]", spend_the_night_requirement, "spend_the_night", menu_tooltip = "Allows you to sleep in this location")
     # Pay to Strip | Allows you to enter the pay_strip label used in certain events if requirements are met.
-    pay_to_strip_action = Action("Pay [the_person.title] to strip", pay_to_strip_requirement, "pay_strip_scene", menu_tooltip = "Pay the person to give you a strip tease.")
+    pay_to_strip_action = Action("Pay [the_person.title] to strip", pay_to_strip_requirement, "generic_role_pay_to_strip", menu_tooltip = "Pay the person to give you a strip tease.")
     
     # A role added to all people in the game to enable actions through the "Special Actions Menu..."
     generic_people_role = Role("Generic", [schedule_person_action, start_follow_action, stop_follow_action, hire_person_action, rename_person_action, spend_the_night_action, pay_to_strip_action], hidden = True) # This role is meant to not display in the person_ui_hud
@@ -187,6 +189,11 @@ label generic_people_role_options_menu:
             else:
                 turn_generic_people_role_feature_on_or_off(action_mod_choice)
 
+label generic_role_pay_to_strip(person):
+    call pay_strip_scene(person) from _call_pay_strip_scene_generic_people_role
+    # reset the person outfit to the one prior to the strip
+    $ person.outfit = person.planned_outfit.get_copy()
+    return
 
 # NOTE: Not sure where to place these actions yet. Basically actions that could fit on any person regardless of role.
 label spend_the_night(person): # Consider adding the sleep_action to the_person's room, but stats jump all over the place so doesn't nescessarily make sense.
