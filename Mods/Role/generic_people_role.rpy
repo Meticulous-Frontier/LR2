@@ -99,10 +99,11 @@ init 2 python:
     # Pay Strip Requirements
     def pay_to_strip_requirement(person):
         if store.generic_people_role_pay_to_strip:
-            if len(mc.location.people) > 1:
-                return "Must be alone with " + person.title
-            if (person.obedience >= 130 and person.sluttiness >= 15) or (person.sluttiness >= 25 and person.get_opinion_score("not wearing anything") > 0) or person.obedience >= 150 or person.sluttiness >= 50:
-                return True
+            if not person is lily:
+                if (person.obedience >= 130 and person.sluttiness >= 15) or (person.sluttiness >= 25 and person.get_opinion_score("not wearing anything") > 0) or person.obedience >= 150 or person.sluttiness >= 50:
+                    if len(mc.location.people) > 1:
+                        return "Must be alone with " + person.title               
+                    return True
         return False
 
     # ActionMod Requirements
