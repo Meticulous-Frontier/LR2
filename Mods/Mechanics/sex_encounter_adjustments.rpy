@@ -108,7 +108,7 @@ label fuck_person_enhanced(the_person, private=True, start_position = None, star
                         menu:
                            "Keep going.":
                               $ the_person.change_obedience(2)
-                              call fuck_person_enhanced(the_person, private, start_position, start_object, skip_intro = True, girl_in_charge = girl_in_charge, hide_leave = True) from _call_fuck_person_enhanced_19 #Redo all of this but don't let them leave. Start position and start_object will normally be None
+                              call fuck_person_enhanced(the_person, private, start_position, start_object, skip_intro = True, girl_in_charge = girl_in_charge, hide_leave = True) #Redo all of this but don't let them leave. Start position and start_object will normally be None
 
                            "Leave.":
                               $ the_person.call_dialogue("sex_end_early")
@@ -116,7 +116,7 @@ label fuck_person_enhanced(the_person, private=True, start_position = None, star
                         $ the_person.call_dialogue("sex_end_early")
 
                   "See where this is going":
-                     call fuck_person_enhanced(the_person, private, start_position, start_object, skip_intro = True, girl_in_charge = True) from _call_fuck_person_enhanced_18
+                     call fuck_person_enhanced(the_person, private, start_position, start_object, skip_intro = True, girl_in_charge = True)
 
             elif the_person.arousal > 80:
                 # They're close to their orgasm and beg you to help them finish.
@@ -124,7 +124,7 @@ label fuck_person_enhanced(the_person, private=True, start_position = None, star
                 menu:
                     "Keep going.":
                         $ the_person.change_obedience(2)
-                        call fuck_person_enhanced(the_person, private, start_position, start_object, skip_intro = True, girl_in_charge = girl_in_charge, hide_leave = True) from _call_fuck_person_enhanced_19 #Redo all of this but don't let them leave. Start position and start_object will normally be None
+                        call fuck_person_enhanced(the_person, private, start_position, start_object, skip_intro = True, girl_in_charge = girl_in_charge, hide_leave = True) #Redo all of this but don't let them leave. Start position and start_object will normally be None
 
                     "Leave.":
                         $ the_person.call_dialogue("sex_end_early")
