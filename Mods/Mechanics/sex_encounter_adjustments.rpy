@@ -157,7 +157,7 @@ label sex_description_enhanced(the_person, the_position, the_object, round, priv
          if the_position.skill_tag == "Vaginal": #She may demand you put on a condom.
                call condom_ask(the_person)
                if not _return:
-                  call fuck_person_enhanced(the_person)
+                  call fuck_person_enhanced(the_person, private = private, girl_in_charge = girl_in_charge)
                   return
 
          $ the_position.call_intro(the_person, mc.location, the_object, round)
@@ -170,7 +170,7 @@ label sex_description_enhanced(the_person, the_position, the_object, round, priv
                if the_position.skill_tag == "Vaginal":
                   call condom_ask(the_person)
                   if not _return:
-                     call fuck_person_enhanced(the_person)
+                     call fuck_person_enhanced(the_person, private = private, girl_in_charge = girl_in_charge)
                      return
                $ the_position.redraw_scene(the_person)
                $ change_amount = the_position.slut_requirement - the_person.sluttiness
@@ -186,7 +186,7 @@ label sex_description_enhanced(the_person, the_position, the_object, round, priv
                   return #Don't do anything else, just return.
                else:
                   $ the_person.call_dialogue("sex_gentle_reject")
-                  call fuck_person_enhanced(the_person)#Gives you a chance to fuck them some other way, but this path is ended by the return right after you finish having sex like that.
+                  call fuck_person_enhanced(the_person, private = private, girl_in_charge = girl_in_charge)#Gives you a chance to fuck them some other way, but this path is ended by the return right after you finish having sex like that.
                   return
    
    if round > 1 or round == 0:
