@@ -26,16 +26,16 @@ init 2:
                     vbox:
                         frame:
                             background "#000080"
-                            xsize 390
+                            xsize 380
                             text "Research New Traits" style "serum_text_style"
 
                         viewport:
-                            xsize 390
+                            xsize 380
                             ysize 780
                             scrollbars "vertical"
                             mousewheel True
                             vbox:
-                                xsize 380
+                                xsize 370
 
                                 for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True):
                                     if not trait.researched and trait.has_required():
@@ -53,20 +53,20 @@ init 2:
 
                                             hovered Show("trait_tooltip",None,trait)
                                             unhovered Hide("trait_tooltip")
-                                            xsize 375
+                                            xsize 365
                     vbox:
                         frame:
                             background "#000080"
-                            xsize 390
+                            xsize 410
                             text "Master Existing Traits:" style "serum_text_style"
 
                         viewport:
-                            xsize 390
+                            xsize 410
                             ysize 780
                             scrollbars "vertical"
                             mousewheel True
                             vbox:
-                                xsize 380
+                                xsize 400
 
 
                                 for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True):
@@ -108,22 +108,21 @@ init 2:
                                             text_style "serum_text_style_traits"
                                             hovered Show("trait_tooltip",None,trait)
                                             unhovered Hide("trait_tooltip")
-                                            xsize 375
+                                            xsize 395
 
                     vbox:
                         frame:
                             background "#000080"
-                            xsize 390
+                            xsize 380
                             text "Research New Designs:" style "serum_text_style"
 
                         viewport:
-                            xsize 390
+                            xsize 380
                             ysize 780
                             scrollbars "vertical"
                             mousewheel True
                             vbox:
-                                xsize 380
-
+                                xsize 370
 
                                 for serum in mc.business.serum_designs:
                                     if not serum.researched:
@@ -135,7 +134,7 @@ init 2:
                                             text_style "serum_text_style_traits"
                                             hovered Show("serum_tooltip",None,serum)
                                             unhovered Hide("serum_tooltip")
-                                            xsize 375
+                                            xsize 365
 
                 textbutton "Do not change research." action [Return("None"), Hide("trait_tooltip")] style "textbutton_style" text_style "serum_text_style" yalign 0.995 xanchor 0.5 xalign 0.5
 
