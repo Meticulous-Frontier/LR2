@@ -151,199 +151,194 @@ label sex_description_enhanced(the_person, the_position, the_object, round, priv
    ##Describe the current round
 
    ## FIRST ROUND EXCLUSIVE STUFF ##
-   if round == 0: ##First round means you just started, so do intro stuff before we get on with it. Also where we check to see if they are into having this type of sex.
-      if the_person.effective_sluttiness() >= the_position.slut_requirement: #The person is slutty enough to want to have sex like this.
-         $ the_person.call_dialogue("sex_accept")
-         if the_position.skill_tag == "Vaginal": #She may demand you put on a condom.
-               call condom_ask(the_person)
-               if not _return:
-                  call fuck_person_enhanced(the_person, private = private, girl_in_charge = girl_in_charge)
-                  return
+    if round == 0: ##First round means you just started, so do intro stuff before we get on with it. Also where we check to see if they are into having this type of sex.
+        if the_person.effective_sluttiness() >= the_position.slut_requirement: #The person is slutty enough to want to have sex like this.
+            $ the_person.call_dialogue("sex_accept")
+            if the_position.skill_tag == "Vaginal": #She may demand you put on a condom.
+                call condom_ask(the_person)
+                if not _return:
+                    call fuck_person_enhanced(the_person, private, girl_in_charge = girl_in_charge)
+                    return
 
-         $ the_position.call_intro(the_person, mc.location, the_object, round)
-         $ the_position.redraw_scene(the_person)
+            $ the_position.call_intro(the_person, mc.location, the_object, round)
+            $ the_position.redraw_scene(the_person)
 
-      else: #The person isn't slutty enough for this. First, try and use obedience. If you still fail, but by a little, she rebukes you but you keep seducing her. Otherwise, the entire thing ends.
-         if the_person.effective_sluttiness() + (the_person.obedience-100) >= the_position.slut_requirement:
-               #You can use obedience to do it.
-               $ the_person.call_dialogue("sex_obedience_accept")
-               if the_position.skill_tag == "Vaginal":
-                  call condom_ask(the_person)
-                  if not _return:
-                     call fuck_person_enhanced(the_person, private = private, girl_in_charge = girl_in_charge)
-                     return
-               $ the_position.redraw_scene(the_person)
-               $ change_amount = the_position.slut_requirement - the_person.sluttiness
-               $ the_person.change_happiness(-change_amount) #She looses happiness equal to the difference between her sluttiness and the requirement. ie the amount obedience covered.
-               $ the_position.call_intro(the_person, mc.location, the_object, round)
-               $ the_position.redraw_scene(the_person)
-         else:
+        else: #The person isn't slutty enough for this. First, try and use obedience. If you still fail, but by a little, she rebukes you but you keep seducing her. Otherwise, the entire thing ends.
+            if the_person.effective_sluttiness() + (the_person.obedience-100) >= the_position.slut_requirement:
+                #You can use obedience to do it.
+                $ the_person.call_dialogue("sex_obedience_accept")
+                if the_position.skill_tag == "Vaginal":
+                    call condom_ask(the_person)
+                    if not _return:
+                        call fuck_person_enhanced(the_person, private, girl_in_charge = girl_in_charge)
+                        return
+                $ the_position.redraw_scene(the_person)
+                $ change_amount = the_position.slut_requirement - the_person.sluttiness
+                $ the_person.change_happiness(-change_amount) #She looses happiness equal to the difference between her sluttiness and the requirement. ie the amount obedience covered.
+                $ the_position.call_intro(the_person, mc.location, the_object, round)
+                $ the_position.redraw_scene(the_person)
+            else:
                #No amount of obedience will help here. How badly did you screw up?
-               if the_person.effective_sluttiness() < the_position.slut_requirement/2: #Badly, not even half way to what you needed
-                  $ the_position.redraw_scene(the_person,emotion="angry")
-                  $ the_person.change_happiness(-5) #She's pissed you would even try that
-                  $ the_person.call_dialogue("sex_angry_reject")
-                  return #Don't do anything else, just return.
-               else:
-                  $ the_person.call_dialogue("sex_gentle_reject")
-                  call fuck_person_enhanced(the_person, private = private, girl_in_charge = girl_in_charge)#Gives you a chance to fuck them some other way, but this path is ended by the return right after you finish having sex like that.
-                  return
+                if the_person.effective_sluttiness() < the_position.slut_requirement/2: #Badly, not even half way to what you needed
+                    $ the_position.redraw_scene(the_person,emotion="angry")
+                    $ the_person.change_happiness(-5) #She's pissed you would even try that
+                    $ the_person.call_dialogue("sex_angry_reject")
+                    return #Don't do anything else, just return.
+                else:
+                    $ the_person.call_dialogue("sex_gentle_reject")
+                    call fuck_person_enhanced(the_person, private, girl_in_charge = girl_in_charge)#Gives you a chance to fuck them some other way, but this path is ended by the return right after you finish having sex like that.
+                    return
    
-   if round > 1 or round == 0:
-      ## ONCE WE HAVE DONE FIRST ROUND CHECKS WE GO HERE ##
-      $ the_position.call_scene(the_person, mc.location, the_object, round) #HERE IS WHERE THE SCENE SCRIPT IS CALLED
-      $ mc.listener_system.fire_event("sex_event", the_person = the_person, the_position = the_position, the_object = the_object)
+    if round > 1 or round == 0:
+        ## ONCE WE HAVE DONE FIRST ROUND CHECKS WE GO HERE ##
+        $ the_position.call_scene(the_person, mc.location, the_object, round) #HERE IS WHERE THE SCENE SCRIPT IS CALLED
+        $ mc.listener_system.fire_event("sex_event", the_person = the_person, the_position = the_position, the_object = the_object)
 
-      $ change_amount = the_position.girl_arousal + (the_position.girl_arousal * mc.sex_skills[the_position.skill_tag] * 0.1) #How much we increase her arousal.
-      if the_position.skill_tag == "Vaginal":
-         $ the_person.discover_opinion("bareback sex")
-         if mc.condom:
-               $ change_amount += -2 * the_person.get_opinion_score("bareback sex")
-         else:
-               $ change_amount += 2 * the_person.get_opinion_score("bareback sex")
+        $ change_amount = the_position.girl_arousal + (the_position.girl_arousal * mc.sex_skills[the_position.skill_tag] * 0.1) #How much we increase her arousal.
+        if the_position.skill_tag == "Vaginal":
+            $ the_person.discover_opinion("bareback sex")
+            if mc.condom:
+                $ change_amount += -2 * the_person.get_opinion_score("bareback sex")
+            else:
+                $ change_amount += 2 * the_person.get_opinion_score("bareback sex")
 
-      if the_position.opinion_tags:
-         python:
-               for opinion_tag in the_position.opinion_tags:
-                  change_amount += the_person.get_opinion_score(opinion_tag) #Add a bonus or penalty if she likes or dislikes the position.
-                  the_person.discover_opinion(opinion_tag)
+        if the_position.opinion_tags:
+            python:
+                for opinion_tag in the_position.opinion_tags:
+                    change_amount += the_person.get_opinion_score(opinion_tag) #Add a bonus or penalty if she likes or dislikes the position.
+                    the_person.discover_opinion(opinion_tag)
 
-      if the_person.sluttiness + 1 > the_position.slut_cap:
-         $ slut_report = "Position Max Reached."
-      else:
-         $ slut_report = the_person.change_slut_temp(1)
+        if the_person.sluttiness + 1 > the_position.slut_cap:
+            $ slut_report = "Position Max Reached."
+        else:
+            $ slut_report = the_person.change_slut_temp(1)
 
-      if the_person.arousal > the_position.slut_cap: #She might be too turned on to be impressed by this position any more.
-         if the_person.sluttiness > the_position.slut_cap: #She's too slutty to find this interesting.
-               $ mc.log_event(the_person.title + ": Bored by position. Arousal gain halved.", "float_text_red")
-               $ change_amount = change_amount/2 #Low sluttiness girls can be made to cum by kissing, higher sluttiness girls require more intense positions.
-               #TODO: add a "sex_bored" dialogue option that can be called, asking for a more intense position.
+        if the_person.arousal > the_position.slut_cap: #She might be too turned on to be impressed by this position any more.
+            if the_person.sluttiness > the_position.slut_cap: #She's too slutty to find this interesting.
+                $ mc.log_event(the_person.title + ": Bored by position. Arousal gain halved.", "float_text_red")
+                $ change_amount = change_amount/2 #Low sluttiness girls can be made to cum by kissing, higher sluttiness girls require more intense positions.
+                #TODO: add a "sex_bored" dialogue option that can be called, asking for a more intense position.
 
+        $ the_person.change_arousal(change_amount) #The girls arousal gain is the base gain + 10% per the characters skill in that category.
+        $ mc.change_arousal(the_position.guy_arousal + (the_position.guy_arousal * the_person.sex_skills[the_position.skill_tag] * 0.1)) # The same calculation but for the guy
 
-      $ the_person.change_arousal(change_amount) #The girls arousal gain is the base gain + 10% per the characters skill in that category.
-      $ mc.change_arousal(the_position.guy_arousal + (the_position.guy_arousal * the_person.sex_skills[the_position.skill_tag] * 0.1)) # The same calculation but for the guy
+        ## POST ROUND CALCULATION AND DECISIONS PAST HERE ##
+        if the_person.arousal >= 100:
+            #She's climaxing.
+            #$ the_person.call_dialogue("climax_responses") #We now use a position specific orgasm part of the scene.
+            #$ the_position.redraw_scene(the_person,emotion="orgasm")
+            $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = the_position, the_object = the_object)
+            $ the_position.call_orgasm(the_person,mc.location, the_object, round)
+            $ the_position.current_modifier = None
+            if the_person.sluttiness > the_person.core_sluttiness and the_person.core_sluttiness < the_position.slut_cap:
+                $ the_person.change_slut_core(1)
+                $ the_person.change_slut_temp(-1)
+            $the_person.change_happiness(2) #Orgasms are good, right?
+        else:
+            $the_person.call_dialogue("sex_responses")
 
-      ## POST ROUND CALCULATION AND DECISIONS PAST HERE ##
+        ## IF OTHER PEOPLE ARE AROUND SEE WHAT THEY THINK ##
+        if not private:
+            $ other_people = [person for person in mc.location.people if person is not the_person] #Build a list with all the _other_ people in the room other than the one we're fucking.
+            $ watcher = get_random_from_list(other_people) #Get a random person from the people in the area, if there are any.
+            if watcher:
+                # NOTE: the dialogue here often draws the person talking with various emotions or positions, so we redraw the scene after we call them.
+                $ watcher.call_dialogue("sex_watch", the_sex_person = the_person, the_position = the_position) #Get the watcher's reaction to the people having sex. This might include dialogue calls from other personalities as well!
+                $ the_position.redraw_scene(the_person)
+                $ the_person.call_dialogue("being_watched", the_watcher = watcher, the_position = the_position) #Call her response to the person watching her.
+                $ the_person.change_arousal(the_person.get_opinion_score("public sex"))
+                $ the_person.discover_opinion("public sex")
 
-      if the_person.arousal >= 100:
-         #She's climaxing.
-         #$ the_person.call_dialogue("climax_responses") #We now use a position specific orgasm part of the scene.
-         #$ the_position.redraw_scene(the_person,emotion="orgasm")
-         $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = the_position, the_object = the_object)
-         $ the_position.call_orgasm(the_person,mc.location, the_object, round)
-         $ the_position.current_modifier = None
-         if the_person.sluttiness > the_person.core_sluttiness and the_person.core_sluttiness < the_position.slut_cap:
-               $ the_person.change_slut_core(1)
-               $ the_person.change_slut_temp(-1)
-         $the_person.change_happiness(2) #Orgasms are good, right?
-      else:
-         $the_person.call_dialogue("sex_responses")
+        $ strip_chance = the_person.effective_sluttiness() - the_person.outfit.slut_requirement
+        $ the_clothing = the_person.outfit.remove_random_any(exclude_feet = True, do_not_remove = True)
+        if renpy.random.randint(0,100) < strip_chance and the_clothing:
+            $ ask_chance = renpy.random.randint(0,100)
+            if ask_chance < the_person.obedience - the_person.arousal:
+                $ the_position.call_strip_ask(the_person, the_clothing, mc.location, the_object, round)
+            else:
+                $ the_position.call_strip(the_person, the_clothing, mc.location, the_object, round) #If a girl's outfit is less slutty than she is currently feeling (with arousal factored in) she will want to strip stuff off.
 
-      ## IF OTHER PEOPLE ARE AROUND SEE WHAT THEY THINK ##
-      if not private:
-         $ other_people = [person for person in mc.location.people if person is not the_person] #Build a list with all the _other_ people in the room other than the one we're fucking.
-         $ watcher = get_random_from_list(other_people) #Get a random person from the people in the area, if there are any.
-         if watcher:
-               # NOTE: the dialogue here often draws the person talking with various emotions or positions, so we redraw the scene after we call them.
-               $ watcher.call_dialogue("sex_watch", the_sex_person = the_person, the_position = the_position) #Get the watcher's reaction to the people having sex. This might include dialogue calls from other personalities as well!
-               $ the_position.redraw_scene(the_person)
-               $ the_person.call_dialogue("being_watched", the_watcher = watcher, the_position = the_position) #Call her response to the person watching her.
-               $ the_person.change_arousal(the_person.get_opinion_score("public sex"))
-               $ the_person.discover_opinion("public sex")
+    #TODO: This is where we check to see if a girl seizes initative during an encounter.
+    #TODO: This is where a girl might request a different position (and be happy if you follow through)
 
-      $ strip_chance = the_person.effective_sluttiness() - the_person.outfit.slut_requirement
-      $ the_clothing = the_person.outfit.remove_random_any(exclude_feet = True, do_not_remove = True)
-      if renpy.random.randint(0,100) < strip_chance and the_clothing:
-         $ ask_chance = renpy.random.randint(0,100)
-         if ask_chance < the_person.obedience - the_person.arousal:
-               $ the_position.call_strip_ask(the_person, the_clothing, mc.location, the_object, round)
-         else:
-               $ the_position.call_strip(the_person, the_clothing, mc.location, the_object, round) #If a girl's outfit is less slutty than she is currently feeling (with arousal factored in) she will want to strip stuff off.
-
-   #TODO: This is where we check to see if a girl seizes initative during an encounter.
-   #TODO: This is where a girl might request a different position (and be happy if you follow through)
-
-   ##Ask how you want to keep fucking her or find out how she keeps fucking you##
-   $ position_choice = "Keep Going" #Default value just to make sure scope is correct.
-   python:
-      if (mc.arousal >= 100):
-         "You're past your limit, you have no choice but to cum!"
-         position_choice = "Finish"
-      else:
-         if girl_in_charge:
-            renpy.say("",the_person.title +  " is taking the lead. She keeps " + the_position.verb + "ing you.")
-            position_choice = the_position
-            #TODO: this is where we perform any changes for the girl.
-            if not the_person.get_opinion_score("taking control") > 0:               
-               if renpy.random.randint(0, 100) > 70: # Give the player a chance to get back in charge without having to wait out the encounter.                  
-                  renpy.say("", "[the_person.title] doesn't seem to mind not being completely in charge.")
-                  tuple_list = []
-                  tuple_list.append(["Keep going.",the_position])
-                  tuple_list.append(["Change it up.","Pull Out"])
-                  tuple_list.append(["Strip her down.","Strip"])
-                  for position in the_position.connections:
-                     if the_object.has_trait(position.requires_location):
+    ##Ask how you want to keep fucking her or find out how she keeps fucking you##
+    $ position_choice = "Keep Going" #Default value just to make sure scope is correct.
+    python:
+        if (mc.arousal >= 100):
+            "You're past your limit, you have no choice but to cum!"
+            position_choice = "Finish"
+        else:
+            if girl_in_charge:
+                renpy.say("",the_person.title +  " is taking the lead. She keeps " + the_position.verb + "ing you.")
+                position_choice = the_position
+                #TODO: this is where we perform any changes for the girl.
+                if not the_person.get_opinion_score("taking control") > 0:               
+                    if renpy.random.randint(0, 100) > 70: # Give the player a chance to get back in charge without having to wait out the encounter.                  
+                        renpy.say("", "[the_person.title] doesn't seem to mind not being completely in charge.")
+                        tuple_list = []
+                        tuple_list.append(["Keep going.",the_position])
+                        tuple_list.append(["Change it up.","Pull Out"])
+                        tuple_list.append(["Strip her down.","Strip"])
+                        for position in the_position.connections:
+                            if the_object.has_trait(position.requires_location):
+                                appended_name = "Change to " + position.build_position_willingness_string(the_person) #Note: clothing check is now done in build_position_willingness_string() call and marks them as (disabled)
+                                tuple_list.append([appended_name,position])
+                        position_choice = renpy.display_menu(tuple_list,True,"Choice")
+            else:
+                tuple_list = []
+                tuple_list.append(["Keep going.",the_position])
+                tuple_list.append(["Back off and change positions.","Pull Out"])
+                if (mc.arousal > 80): #Only let you finish if you've got a high enough arousal score. #TODO: Add stat that controls how much control you have over this.
+                    tuple_list.append(["Cum!","Finish"])
+                tuple_list.append(["Strip her down.","Strip"])
+                for position in the_position.connections:
+                    if the_object.has_trait(position.requires_location):
                         appended_name = "Change to " + position.build_position_willingness_string(the_person) #Note: clothing check is now done in build_position_willingness_string() call and marks them as (disabled)
                         tuple_list.append([appended_name,position])
-                  position_choice = renpy.display_menu(tuple_list,True,"Choice")
+                position_choice = renpy.display_menu(tuple_list,True,"Choice")
 
-               
-         else:
-            tuple_list = []
-            tuple_list.append(["Keep going.",the_position])
-            tuple_list.append(["Back off and change positions.","Pull Out"])
-            if (mc.arousal > 80): #Only let you finish if you've got a high enough arousal score. #TODO: Add stat that controls how much control you have over this.
-               tuple_list.append(["Cum!","Finish"])
-            tuple_list.append(["Strip her down.","Strip"])
-            for position in the_position.connections:
-               if the_object.has_trait(position.requires_location):
-                  appended_name = "Change to " + position.build_position_willingness_string(the_person) #Note: clothing check is now done in build_position_willingness_string() call and marks them as (disabled)
-                  tuple_list.append([appended_name,position])
-            position_choice = renpy.display_menu(tuple_list,True,"Choice")
+    if position_choice == "Finish":
+        $ the_position.current_modifier = None
+        $ the_position.call_outro(the_person, mc.location, the_object, round)
+        $ mc.reset_arousal()
+        # TODO: have you finishing bump her arousal up so you might both cum at once.
 
-   if position_choice == "Finish":
-      $ the_position.current_modifier = None
-      $ the_position.call_outro(the_person, mc.location, the_object, round)
-      $ mc.reset_arousal()
-      # TODO: have you finishing bump her arousal up so you might both cum at once.
+    elif position_choice == "Strip":
+        call strip_menu(the_person)
+        $ the_position.redraw_scene(the_person)
+        call sex_description_enhanced(the_person, the_position, the_object, round = 1, private = private, girl_in_charge = girl_in_charge)
 
-   elif position_choice == "Strip":
-      call strip_menu(the_person)
-      $ the_position.redraw_scene(the_person)
-      call sex_description_enhanced(the_person, the_position, the_object, round = 1, private = private, girl_in_charge = girl_in_charge)
+    elif position_choice == "Pull Out": #Also how you leave if you don't want to fuck till you cum.
+        $ the_position.current_modifier = None
+        $ mc.condom = False
+        call fuck_person_enhanced(the_person, private, girl_in_charge = girl_in_charge)
 
-   elif position_choice == "Pull Out": #Also how you leave if you don't want to fuck till you cum.
-      $ the_position.current_modifier = None
-      $ mc.condom = False
-      call fuck_person_enhanced(the_person, girl_in_charge = girl_in_charge)
+    else:
+        if not position_choice == the_position: #We are changing to a new position.
+            $ the_position.current_modifier = None
+            if the_person.effective_sluttiness() >= position_choice.slut_requirement: #The person is slutty enough to want to have sex like this. Higher arousal can get you up to a +50 slutiness boost.
+                $ the_person.call_dialogue("sex_accept")
+                $ the_position.call_transition(position_choice, the_person, mc.location, the_object, round)
+            else: #The person isn't slutty enough for this. First, try and use obedience. If you still fail, but by a little, she rebukes you but you keep seducing her. Otherwise, the entire thing ends.
+                if the_person.effective_sluttiness() + (the_person.obedience-100) >= position_choice.slut_requirement:
+                    #You can use obedience to do it.
+                    $ change_amount = the_person.effective_sluttiness() - the_person.sluttiness
+                    $ the_position.redraw_scene(the_person,emotion = "sad")
+                    $ the_person.change_happiness(-change_amount) #She looses happiness equal to the difference between her sluttiness and the requirement. ie the amount obedience covered.
+                    $ the_person.call_dialogue("sex_obedience_accept")
+                    $ the_position.call_transition(position_choice, the_person, mc.location, the_object, round)
+                else:
+                    #No amount of obedience will help here. How badly did you screw up?
+                    if (the_person.effective_sluttiness() < (position_choice.slut_requirement/2)): #Badly, not even half way to what you needed
+                        $ the_person.change_happiness(-5) #She's pissed you would even try that
+                        $ the_person.change_love(-1)
+                        $ the_person.call_dialogue("sex_angry_reject")
+                        return #Don't do anything else, just return.
+                    else:
+                        $ the_position.call_transition(position_choice, the_person, mc.location, the_object, round)
+                        $ the_person.call_dialogue("sex_gentle_reject")
+                        call sex_description_enhanced(the_person, the_position, the_object, round = 1, private = private, girl_in_charge = girl_in_charge)
+                        $ position_choice = the_position
 
-   else:
-      if not position_choice == the_position: #We are changing to a new position.
-         $ the_position.current_modifier = None
-         if the_person.effective_sluttiness() >= position_choice.slut_requirement: #The person is slutty enough to want to have sex like this. Higher arousal can get you up to a +50 slutiness boost.
-               $ the_person.call_dialogue("sex_accept")
-               $ the_position.call_transition(position_choice, the_person, mc.location, the_object, round)
-         else: #The person isn't slutty enough for this. First, try and use obedience. If you still fail, but by a little, she rebukes you but you keep seducing her. Otherwise, the entire thing ends.
-               if the_person.effective_sluttiness() + (the_person.obedience-100) >= position_choice.slut_requirement:
-                  #You can use obedience to do it.
-                  $ change_amount = the_person.effective_sluttiness() - the_person.sluttiness
-                  $ the_position.redraw_scene(the_person,emotion = "sad")
-                  $ the_person.change_happiness(-change_amount) #She looses happiness equal to the difference between her sluttiness and the requirement. ie the amount obedience covered.
-                  $ the_person.call_dialogue("sex_obedience_accept")
-                  $ the_position.call_transition(position_choice, the_person, mc.location, the_object, round)
-               else:
-                  #No amount of obedience will help here. How badly did you screw up?
-                  if (the_person.effective_sluttiness() < (position_choice.slut_requirement/2)): #Badly, not even half way to what you needed
-                     $ the_person.change_happiness(-5) #She's pissed you would even try that
-                     $ the_person.change_love(-1)
-                     $ the_person.call_dialogue("sex_angry_reject")
-                     return #Don't do anything else, just return.
-                  else:
-                     $ the_position.call_transition(position_choice, the_person, mc.location, the_object, round)
-                     $ the_person.call_dialogue("sex_gentle_reject")
-                     call sex_description_enhanced(the_person, the_position, the_object, round = 1, girl_in_charge = girl_in_charge)
-                     $ position_choice = the_position
-
-      call sex_description_enhanced(the_person, position_choice, the_object, round+1, private = private, girl_in_charge = girl_in_charge)
-
-   return
+        call sex_description_enhanced(the_person, position_choice, the_object, round+1, private = private, girl_in_charge = girl_in_charge)
+    return
