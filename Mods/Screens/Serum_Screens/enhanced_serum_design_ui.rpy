@@ -20,13 +20,11 @@ init 2:
 
                 vbox:
                     xsize 530
-                    textbutton "Pick Production Type":
-                        style "serum_textbutton_style_header"
-                        text_style "serum_text_style_header"
-                        xalign 0.5
+                    frame:
+                        background "#000080"
                         xsize 530
+                        text "Pick Production Type" style "serum_text_style_header"
 
-                        action NullAction()
                     frame:
                         background "#666666"
                         xalign 0.5
@@ -77,7 +75,7 @@ init 2:
                                         textbutton trait.name + trait_tags + "\nMastery Level: " + trait_mastery_text + " | " + "Side Effect Chance: " + trait_side_effects_text + " %":
                                             style "textbutton_style"
                                             text_style "serum_text_style"
-                                            xsize 520
+                                            xsize 530
 
                                             sensitive trait_allowed
 
@@ -94,13 +92,10 @@ init 2:
                                             #unhovered [
                                             #Hide("trait_tooltip")
                                             #]
-                    textbutton "Add Serum Traits": # TODO: Possibly add a search filter input to this
-                        style "serum_textbutton_style_header"
-                        text_style "serum_text_style_header"
-                        xalign 0.5
+                    frame:
+                        background "#000080"
                         xsize 530
-
-                        action NullAction()
+                        text "Add Serum Traits" style "serum_text_style_header"
                     frame:
                         background "#666666"
                         xalign 0.5
@@ -154,7 +149,7 @@ init 2:
                                         textbutton trait.name + trait_tags + "\nMastery Level: " + trait_mastery_text + " | " + "Side Effect Chance: " + trait_side_effects_text + " %":
                                             style "textbutton_style"
                                             text_style "serum_text_style"
-                                            xsize 520
+                                            xsize 530
 
                                             sensitive trait_allowed
 
@@ -176,13 +171,11 @@ init 2:
                 background "#888888"
                 ysize 800
                 vbox:
-                    textbutton "Remove a trait":
-                        style "serum_textbutton_style_header"
-                        text_style "serum_text_style_header"
-                        xalign 0.5
+                    frame:
+                        background "#000080"
                         xsize 530
+                        text "Remove a trait" style "serum_text_style_header"
 
-                        action NullAction()
                     frame:
                         background "#666666"
                         xalign 0.5
@@ -237,100 +230,57 @@ init 2:
 
 
                     vbox:
-
-                        textbutton "Trait Information: [trait_tooltip.name]":
-                            style "serum_textbutton_style_header"
-                            text_style "serum_text_style_header"
-                            xalign 0.5
-                            xsize 530
-                            action NullAction()
                         frame:
-
-                            background "#666666"
-
+                            background "#000080"
                             xsize 530
-                        #    ysize 250
+                            text "Trait Information: [trait_tooltip.name]" style "serum_text_style_header"
 
+                        frame:
+                            background "#666666"
+                            xsize 530
                             xalign 0.5
                             viewport:
                                 draggable True
                                 xsize 530
                                 mousewheel "vertical"
-                                xalign 0.5
                                 vbox:
-                                    xalign 0.5
+                                    spacing 5
                                     hbox:
-                                        xalign 0.5
+                                        spacing 5
                                         vbox:
-                                            xalign 0.5
-                                            textbutton "[trait_tooltip.positive_slug]":
-                                                style "serum_textbutton_style_positive"
-                                                text_style "serum_text_style"
-                                                xalign 0.5
-
-                                                xsize 260
-
-                                                action NullAction()
-
+                                            frame:
+                                                background "#007000"
+                                                xsize 255
+                                                text "[trait_tooltip.positive_slug]" style "serum_text_style"
                                         vbox:
-                                            xalign 0.5
-                                            textbutton "[trait_tooltip.negative_slug]":
-                                                style "serum_textbutton_style_negative"
-                                                text_style "serum_text_style"
-                                                xalign 0.5
-
-                                                xsize 260
-
-                                                action NullAction()
+                                            frame:
+                                                background "#930000"
+                                                xsize 255
+                                                text "[trait_tooltip.negative_slug]" style "serum_text_style"
                                     hbox:
-                                        xalign 0.5
-                                        textbutton "[trait_tooltip.desc]":
-                                            style "textbutton_style"
-                                            text_style "serum_text_style"
-                                            xalign 0.5
-
-                                            xsize 520
-
-                                            action NullAction()
-
-
+                                        frame:
+                                            background "#000080"
+                                            xsize 515
+                                            text "[trait_tooltip.desc]" style "serum_text_style"
 
             frame:
                 background "#888888"
                 ysize 800
                 vbox:
                     xsize 550
-                    textbutton "Current Serum Statistics:":
-                        style "serum_textbutton_style_header"
-                        text_style "serum_text_style_header"
+                    spacing 5
+                    frame:
+                        background "#000080"
                         xsize 550
+                        text "Current Serum Statistics:" style "serum_text_style_header"
 
-                        xalign 0.5
-
-                        action NullAction()
-
-
-                    if effective_traits > starting_serum.slots:
-                        textbutton "Trait Slots: " + str(effective_traits) +"/[starting_serum.slots]":
-                            style "textbutton_style"
-                            text_style "serum_text_style"
-
-                            xsize 550
-                            xanchor 0.5
-                            xalign 0.5
-
-                            action NullAction()
-
-                    else:
-                        textbutton "Trait Slots: " + str(effective_traits) +"/[starting_serum.slots]":
-                            style "textbutton_style"
-                            text_style "serum_text_style"
-
-                            xsize 550
-                            xanchor 0.5
-                            xalign 0.5
-
-                            action NullAction()
+                    frame:
+                        if effective_traits > starting_serum.slots:
+                            background "#930000"
+                        else:
+                            background "#000080"
+                        xsize 550
+                        text "Trait Slots: " + str(effective_traits) +"/[starting_serum.slots]" style "serum_text_style"
 
                     viewport:
                         draggable True
@@ -350,62 +300,45 @@ init 2:
                                 else:
                                     add "Serum_Slot_Empty.png" xanchor 0.5 xalign 0.5
                     hbox:
-                        xalign 0.5
+                        spacing 5
                         vbox:
-                            xalign 0.5
-                            textbutton "Research Required: {color=#ff0000}[starting_serum.research_needed]{/color}":
-                                style "textbutton_style"
-                                text_style "serum_text_style"
-                                xsize 275
-
-                                action NullAction()
-
-                            textbutton "Production Cost: {color=#ff0000}[starting_serum.production_cost]{/color}":
-                                style "textbutton_style"
-                                text_style "serum_text_style"
-                                xsize 275
-
-                                action NullAction()
-
-                            textbutton "Value: ${color=#98fb98}[starting_serum.value]{/color}":
-                                style "textbutton_style"
-                                text_style "serum_text_style"
-                                xsize 275
-
-                                action NullAction()
+                            spacing 5
+                            frame:
+                                background "#000080"
+                                xsize 270
+                                text "Research Required: {color=#ff0000}[starting_serum.research_needed]{/color}" style "serum_text_style"
+                            frame:
+                                background "#000080"
+                                xsize 270
+                                text "Production Cost: {color=#ff0000}[starting_serum.production_cost]{/color}" style "serum_text_style"
+                            frame:
+                                background "#000080"
+                                xsize 270
+                                text "Value: ${color=#98fb98}[starting_serum.value]{/color}" style "serum_text_style"
                         vbox:
+                            spacing 5
+                            frame:
+                                background "#000080"
+                                xsize 270
+                                
+                                $ calculated_profit = (starting_serum.value*mc.business.batch_size)-starting_serum.production_cost
+                                if calculated_profit > 0:
+                                    text "Expected Profit:{color=#98fb98} $[calculated_profit]{/color}" style "serum_text_style"
+                                else:
+                                    $ calculated_profit = 0 - calculated_profit
+                                    text "Expected Profit:{color=#ff0000} -$[calculated_profit]{/color}" style "serum_text_style"
 
-                            $ calculated_profit = (starting_serum.value*mc.business.batch_size)-starting_serum.production_cost
-                            if calculated_profit > 0:
-                                textbutton "Expected Profit:{color=#98fb98} $[calculated_profit]{/color}":
-                                    style "textbutton_style"
-                                    text_style "serum_text_style"
-                                    xsize 275
-                                    action NullAction()
-                            else:
-                                $ calculated_profit = 0 - calculated_profit
-                                textbutton "Expected Profit:{color=#ff0000} -$[calculated_profit]{/color}":
-                                    style "textbutton_style"
-                                    text_style "serum_text_style"
-                                    xsize 275
+                            frame:
+                                background "#000080"
+                                xsize 270
+                                text "Duration: [starting_serum.duration] Turns" style "serum_text_style"
 
-                                    action NullAction()
-                            textbutton "Duration: [starting_serum.duration] Turns":
-                                style "textbutton_style"
-                                text_style "serum_text_style"
-                                xsize 275
-
-                                action NullAction()
                             null #Placeholder to keep the grid aligned
 
-                    textbutton "Serum Effects:":
-                        style "serum_textbutton_style_header"
-                        text_style "serum_text_style_header"
-                        xanchor 0.5
-                        xalign 0.5
+                    frame:
+                        background "#000080"
                         xsize 550
-
-                        action NullAction()
+                        text "Serum Effects:" style "serum_text_style_header"
 
                     viewport:
                         xsize 550
@@ -423,21 +356,19 @@ init 2:
 
                                         action  NullAction()
                                         hovered SetScreenVariable("trait_tooltip", trait)
+
                                     hbox:
+                                        spacing 5
                                         vbox:
-                                            textbutton "[trait.positive_slug]":
-                                                style "serum_textbutton_style_positive"
-                                                text_style "serum_text_style"
-                                                xsize 275
-
-                                                action NullAction()
+                                            frame:
+                                                background "#007000"
+                                                xsize 270
+                                                text "[trait.positive_slug]" style "serum_text_style"
                                         vbox:
-                                            textbutton "[trait.negative_slug]":
-                                                style "serum_textbutton_style_negative"
-                                                text_style "serum_text_style"
-                                                xsize 275
-
-                                                action NullAction()
+                                            frame:
+                                                background "#930000"
+                                                xsize 270
+                                                text "[trait.negative_slug]" style "serum_text_style"
 
         frame:
             background "#888888"

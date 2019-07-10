@@ -2,54 +2,40 @@ init 2:
     screen serum_select_ui: #How you select serum and trait research
         add "Science_Menu_Background.png"
         vbox:
-            xalign 0.1
+            xalign 0.08
             yalign 0.4
             frame:
                 background "#888888"
-                xsize 1000
-                if not mc.business.active_research_design == None:
-                    textbutton "Current Research: [mc.business.active_research_design.name] ([mc.business.active_research_design.current_research]/[mc.business.active_research_design.research_needed])":
-                        style "textbutton_style"
-                        text_style "serum_text_style"
-                        xsize 1000
-                        xanchor 0.5
-                        xalign 0.5
-
-                        action NullAction()
-                else:
-                    textbutton "Current Research: None!":
-                        style "textbutton_style"
-                        text_style "serum_text_style"
-                        xsize 1000
-                        xanchor 0.5
-                        xalign 0.5
-
-                        action NullAction()
+                xsize 1200
+                frame:
+                    background "#000080"
+                    xsize 1190
+                    if not mc.business.active_research_design == None:
+                        text "Current Research: [mc.business.active_research_design.name] ([mc.business.active_research_design.current_research]/[mc.business.active_research_design.research_needed])" style "serum_text_style"
+                    else:
+                        text "Current Research: None!" style "serum_text_style"
 
             null height 20
 
             frame:
                 background "#888888"
-                xsize 1000
+                xsize 1200
                 ysize 900
                 hbox:
+                    spacing 5
                     vbox:
-                        textbutton "Research New Traits":
-                            style "textbutton_style"
-                            text_style "serum_text_style"
-                            xsize 320
-                            xanchor 0.5
-                            xalign 0.5
-
-                            action NullAction()
+                        frame:
+                            background "#000080"
+                            xsize 390
+                            text "Research New Traits" style "serum_text_style"
 
                         viewport:
-                            xsize 320
-                            ysize 750
+                            xsize 390
+                            ysize 780
                             scrollbars "vertical"
                             mousewheel True
                             vbox:
-                                xsize 320
+                                xsize 380
 
                                 for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True):
                                     if not trait.researched and trait.has_required():
@@ -67,23 +53,20 @@ init 2:
 
                                             hovered Show("trait_tooltip",None,trait)
                                             unhovered Hide("trait_tooltip")
-                                            xsize 320
+                                            xsize 375
                     vbox:
-                        textbutton "Master Existing Traits:":
-                            style "textbutton_style"
-                            text_style "serum_text_style"
-                            xsize 320
-                            xanchor 0.5
-                            xalign 0.5
+                        frame:
+                            background "#000080"
+                            xsize 390
+                            text "Master Existing Traits:" style "serum_text_style"
 
-                            action NullAction()
                         viewport:
-                            xsize 320
-                            ysize 750
+                            xsize 390
+                            ysize 780
                             scrollbars "vertical"
                             mousewheel True
                             vbox:
-                                xsize 320
+                                xsize 380
 
 
                                 for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True):
@@ -125,24 +108,21 @@ init 2:
                                             text_style "serum_text_style_traits"
                                             hovered Show("trait_tooltip",None,trait)
                                             unhovered Hide("trait_tooltip")
-                                            xsize 320
+                                            xsize 375
 
                     vbox:
-                        textbutton "Research New Designs:":
-                            style "textbutton_style"
-                            text_style "serum_text_style"
-                            xsize 320
-                            xanchor 0.5
-                            xalign 0.5
+                        frame:
+                            background "#000080"
+                            xsize 390
+                            text "Research New Designs:" style "serum_text_style"
 
-                            action NullAction()
                         viewport:
-                            xsize 320
-                            ysize 750
+                            xsize 390
+                            ysize 780
                             scrollbars "vertical"
                             mousewheel True
                             vbox:
-                                xsize 320
+                                xsize 380
 
 
                                 for serum in mc.business.serum_designs:
@@ -155,7 +135,7 @@ init 2:
                                             text_style "serum_text_style_traits"
                                             hovered Show("serum_tooltip",None,serum)
                                             unhovered Hide("serum_tooltip")
-                                            xsize 320
+                                            xsize 375
 
                 textbutton "Do not change research." action [Return("None"), Hide("trait_tooltip")] style "textbutton_style" text_style "serum_text_style" yalign 0.995 xanchor 0.5 xalign 0.5
 

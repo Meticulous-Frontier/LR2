@@ -9,11 +9,11 @@ init 2:
             yalign 0.05
             anchor (0.0,0.0)
             vbox:
-                textbutton "Serum Available":
-                    style "textbutton_style"
-                    text_style "serum_text_style"
-                    action NullAction()
+                frame:
+                    background "#000080"
                     xsize 380
+                    text "Serum Available" style "serum_text_style_header"
+
                 for serum in the_inventory.serums_held:
                     textbutton serum[0].name + " - " + str(serum[1]) + " Doses":
                         style "textbutton_style"

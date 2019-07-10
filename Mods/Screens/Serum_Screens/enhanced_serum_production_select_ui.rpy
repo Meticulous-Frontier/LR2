@@ -29,26 +29,17 @@ init 2:
                 xsize 600
                 ysize 900
                 vbox:
-
+                    spacing 5
                     xalign 0.5
-
-                    textbutton "Production Lines":
+                    frame:
+                        background "#000080"
                         xsize 550
-                        xalign 0.5
+                        text "Production Lines" style "serum_text_style_header"
 
-                        style "serum_textbutton_style_header"
-                        text_style "serum_text_style_header"
-
-                        action NullAction()
-
-                    textbutton "Capacity Remaining: [production_remaining]%":
+                    frame:
+                        background "#000080"
                         xsize 550
-                        xalign 0.5
-
-                        style "textbutton_style"
-                        text_style "serum_text_style"
-
-                        action NullAction()
+                        text "Capacity Remaining: [production_remaining]%" style "serum_text_style"
 
                     viewport:
                         draggable True
@@ -248,15 +239,14 @@ init 2:
             if line_selected:
                 frame:
                     background "#888888"
-                    xsize 300
+                    xsize 400
                     ysize 650
+                    xalign 0.5
                     vbox:
-                        xalign 0.5
                         textbutton "Choose Production for Line [line_selected]":
                             style "serum_textbutton_style_header"
                             text_style "serum_text_style_header"
-                            xalign 0.5
-                            xsize 300
+                            xsize 375
                             action SetScreenVariable("line_selected",None)
 
                         if len(mc.business.serum_designs) == 0:
@@ -264,16 +254,13 @@ init 2:
                                 style "textbutton_style"
                                 text_style "serum_text_style"
                                 action NullAction()
-                                xalign 0.5
                         else:
                             viewport:
                                 draggable True
                                 scrollbars "vertical"
                                 mousewheel True
-
-                                xsize 300
+                                xsize 400
                                 vbox:
-
                                     for a_serum in mc.business.serum_designs:
                                         if a_serum.researched:
                                             textbutton "[a_serum.name]":
@@ -287,7 +274,7 @@ init 2:
                                                 ]
                                                 style "textbutton_style"
                                                 text_style "serum_text_style"
-                                                xsize 300
+                                                xsize 400
                                                 xalign 0.5
 
         frame:

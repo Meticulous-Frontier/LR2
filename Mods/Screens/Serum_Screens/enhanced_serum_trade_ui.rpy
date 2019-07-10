@@ -29,7 +29,10 @@ init 2:
                 xsize 590
                 ysize 900
                 yalign 0.0
-                text "Trade Serums Between Inventories." style "serum_text_style" size 25 xalign 0.5 xanchor 0.5
+                frame:
+                    background "#000080"
+                    xsize 590
+                    text "Trade Serums Between Inventories." style "serum_text_style_header"
 
                 frame:
                     background "#777777"
@@ -56,10 +59,10 @@ init 2:
                                             action ToggleScreen("serum_tooltip", None, serum)
                                             hovered Show("serum_tooltip", None, serum)
                                         hbox:
-                                            textbutton name_1 + " has: " + str(inventory_1.get_serum_count(serum)): # How many serums in inventory_1 (player's)
-                                                style "textbutton_style"
-                                                text_style "serum_text_style"
-                                                action NullAction()
+                                            frame:
+                                                background "#000080"
+                                                # How many serums in inventory_1 (player's)
+                                                text name_1 + ": " + str(inventory_1.get_serum_count(serum)) style "serum_text_style"
 
                                             textbutton "<-":
                                                 action [ #When pressed, moves 1 serum from the business inventory to the player. Not active if the business has nothing in it.
@@ -72,7 +75,7 @@ init 2:
                                                 Function(inventory_2.change_serum, serum, -int(serum_transfer_amount) *10)])
                                                 ]
                                                 sensitive (inventory_2.get_serum_count(serum) >= int(serum_transfer_amount))
-                                                style "textbutton_style"
+                                                style "textbutton_no_padding_highlight"
                                                 text_style "serum_text_style"
 
                                             button:
@@ -103,14 +106,12 @@ init 2:
                                                 Function(inventory_1.change_serum, serum, -int(serum_transfer_amount) * 10)])
                                                 ]
                                                 sensitive (inventory_1.get_serum_count(serum) >= int(serum_transfer_amount))
-                                                style "textbutton_style"
+                                                style "textbutton_no_padding_highlight"
                                                 text_style "serum_text_style"
 
-                                            textbutton name_2 + " has: " + str(inventory_2.get_serum_count(serum)):
-                                                style "textbutton_style"
-                                                text_style "serum_text_style"
-                                                action NullAction()
-
+                                            frame:
+                                                background "#000080"
+                                                text name_2 + ": " + str(inventory_2.get_serum_count(serum)) style "serum_text_style"
 
         frame:
             background None

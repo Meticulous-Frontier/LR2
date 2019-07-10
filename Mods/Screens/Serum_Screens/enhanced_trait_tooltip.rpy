@@ -1,6 +1,5 @@
 init 2:
     screen trait_tooltip(the_trait,given_xalign=0.9,given_yalign=0.1):
-
         frame:
             background "#666666"
 
@@ -8,47 +7,29 @@ init 2:
             yalign given_yalign
 
             vbox:
+                spacing 5
                 xalign 0.5
-                textbutton "[the_trait.name]":
-                    style "textbutton_style"
-                    text_style "serum_text_style"
-                    xalign 0.5
+                frame:
+                    background "#000080"
                     xsize 500
-                    action NullAction()
+                    text "[the_trait.name]" style "serum_text_style"
 
                 hbox:
+                    spacing 5
+                    frame:
+                        background "#007000"
+                        xsize 220
+                        text "[the_trait.positive_slug]" style "serum_text_style_traits"
 
-                    vbox:
-
-                        textbutton "[the_trait.positive_slug]":
-                            style "serum_textbutton_style_positive"
-                            text_style "serum_text_style_traits"
-                            xalign 0.5
-
-                            xsize 225
-
-                            action NullAction()
-
-                    vbox:
+                    frame:
+                        background "#930000"
+                        xsize 220
                         $ negative_slug_text = the_trait.build_negative_slug()
-                        textbutton "[negative_slug_text]":
-                            style "serum_textbutton_style_negative"
-                            text_style "serum_text_style_traits"
-                            xalign 0.5
-
-                            xsize 225
-
-                            action NullAction()
-
-                textbutton "[the_trait.desc]":
-                    style "textbutton_style"
-                    text_style "serum_text_style"
-                    xalign 0.5
-
+                        text "[negative_slug_text]" style "serum_text_style_traits"
+                frame:
+                    background "#000080"
                     xsize 500
-
-                    action NullAction()
-
+                    text "[the_trait.desc]" style "serum_text_style"
 
     screen trait_list_tooltip(the_traits):
         vbox:
