@@ -81,7 +81,7 @@ label scene_SB_Titfuck_Kneeling_3(the_girl, the_location, the_object, the_round)
 label outro_SB_Titfuck_Kneeling(the_girl, the_location, the_object, the_round):
     $ SB_Titfuck_Kneeling.current_modifier = "blowjob"
     $ SB_Titfuck_Kneeling.redraw_scene(the_girl)
-    "Little by little the soft, pillowy flesh of [the_girl.possessive_title]'s tits brings you closer to orgasm. You look down and see the hungry in her eyes and it pushes you over the edge."
+    "Little by little the soft, pillowy flesh of [the_girl.possessive_title]'s tits brings you closer to orgasm. You look down and see the hunger in her eyes and it pushes you over the edge."
     mc.name "Fuck, here I come!"
     if SB_check_fetish(the_girl, cum_internal_role):  #She can't help but swallow if she has an internal cum fetish#
         "[the_girl.possessive_title] suddenly leans forward and takes you in her mouth. She gives you a couple quick strokes with her hand"
