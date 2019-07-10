@@ -5,9 +5,21 @@
 # name,formalName,connections,background_image,objects,people,actions,public,map_pos, tutorial_label = None, visible = True)
 init -1 python:
     business_basement = [] # List of rooms that are supposed to be in the basement.
+    rooms_need_to_be_updated = True #Set to true if you have made additions
 
 init 5  python:
     add_label_hijack("normal_start", "store_basement_rooms")
+    add_label_hijack("after_load", "update_custom_rooms")
+
+label update_custom_rooms(stack):
+
+    if rooms_need_to_be_updated:
+        call store_basement_rooms(stack)
+    $ execute_hijack_call(stack)
+    return
+
+
+
 label store_basement_rooms(stack):
 
     $ m_division_basement = Room("security", "Security Room", [], room_background_image("Security_Background.jpg"), [],[],[], False, [], None, False)
@@ -34,5 +46,22 @@ label store_basement_rooms(stack):
         $ rd_division_basement.add_object(make_floor())
         $ rd_division_basement.add_object(make_desk())
         $ rd_division_basement.add_object(make_table())
+
+    # Bar
+    $ downtown_bar = Room("bar", "The Downtown Distillery", [], bar_background, [],[],[], True, [6,5], None, True)
+    
+    if downtown_bar not in list_of_places:
+        $ list_of_places.append(downtown_bar)
+
+    if object not in downtown_bar.objects:
+        $ downtown_bar.add_object(make_desk())
+        $ downtown_bar.add_object(make_chair())
+        $ downtown_bar.add_object(make_floor())
+
+    if downtown_bar not in mall.connections:
+        $ downtown_bar.link_locations_two_way(mall)
+    $ downtown_bar.actions.append(order_drink_action) # See downtown_bar_actions.rpy
+
+    $ rooms_need_to_be_updated = False
     $ execute_hijack_call(stack)
     return

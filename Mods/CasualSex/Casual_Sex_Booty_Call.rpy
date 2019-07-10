@@ -22,6 +22,7 @@ label casual_sex_booty_call_label:
     menu:
         "Definitely":
             the_person.char "Great! Meet me at the bar downtown in 15 minutes"
+            "Sorry! I haven't written this scene yet! Thanks for you patience! ***Starbuck***"
             #TODO this scene.... writer's block ARG
 
 
