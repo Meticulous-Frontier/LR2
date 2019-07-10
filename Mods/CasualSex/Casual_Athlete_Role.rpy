@@ -82,17 +82,6 @@ init -1 python:
 init 1 python:
     casual_athlete_race_crisis = Action("Charity Race", casual_athlete_race_crisis_requirement, "casual_athlete_race_crisis_label")
 
-#*************TODO*****************
-#Implement some method of adding this role to random towngirls.
-
-
-
-###DEBUG TESTING FUNCTIONS###
-label casual_athlete_debug(the_person):
-    "attempting to add role to [the_person.title]."
-    $ the_person.special_role.append(casual_athlete_role)
-    "role added to [the_person.title]."
-    return
 
 
 ###Athlete ACTION LABELS###
