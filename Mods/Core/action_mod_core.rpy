@@ -161,7 +161,7 @@ init 5 python:
 
 # as long as VREN doesn't use this, we need to add a dummy label for hijacking purposes 
 # NOTE: this label gets called after the hijack labels have been triggered
-label after_load:   
+label after_load:
     return
 
 label activate_action_mod_core(stack):
@@ -186,6 +186,10 @@ label update_action_mod_core(stack):
         try:
             action_mod_list
         except NameError:
+            unmodded = True
+
+        # extra check to validate that action mod list exists correctly
+        if not isinstance(action_mod_list, list):
             unmodded = True
 
     if unmodded:
