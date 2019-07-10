@@ -41,8 +41,6 @@ init 1 python:
         return
 
     def update_cougar_personality(person):
-        # list_of_unique_characters is empty after game start, fill it with unique characters so we can use it in other parts of the MOD
-        list_of_unique_characters = [mom, lily, aunt, cousin, stephanie, alexia]
         # change personality to cougar if we meet age requirement
         if find_in_list(lambda x: x.effect == "cougar_personality_dummy_label", action_mod_list).enabled:
             if person not in list_of_unique_characters and person.age > 45:
@@ -61,8 +59,10 @@ init 1 python:
                     # mc.log_event((person.title or person.name) + " D:" + str(person.age) + ": " + person.personality.personality_type_prefix, "float_text_grey")
         return
 
-
 label activate_generic_personality(stack):
+    # list_of_unique_characters is no longer used after game start, fill it with unique characters so we can use it in other parts of the MOD
+    $ list_of_unique_characters = [mom, lily, aunt, cousin, stephanie, alexia]
+
     python:
         # add one bimbo to the game (on start of game)
         a_bimbo = create_random_person(age=renpy.random.randint(25, 35), tits="DD", body_type = "standard_body", face_style = "Face_4", skin = "tan",
@@ -79,6 +79,9 @@ label activate_generic_personality(stack):
     return
 
 label update_generic_personality(stack):
+    # list_of_unique_characters is no longer used after game start, fill it with unique characters so we can use it in other parts of the MOD
+    $ list_of_unique_characters = [mom, lily, aunt, cousin, stephanie, alexia]
+
     python:
         # fix for old save games (can be removed in future):
         if not find_in_list(lambda x: x == cougar_personality, list_of_personalities) is None:
