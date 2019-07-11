@@ -5,7 +5,7 @@
 # name,formalName,connections,background_image,objects,people,actions,public,map_pos, tutorial_label = None, visible = True)
 init -1 python:
     business_basement = [] # List of rooms that are supposed to be in the basement.
-    rooms_need_to_be_updated = True #Set to true if you have made additions
+
 
 init 5  python:
     add_label_hijack("normal_start", "store_basement_rooms")
@@ -13,7 +13,7 @@ init 5  python:
 
 label update_custom_rooms(stack):
 
-    if rooms_need_to_be_updated:
+    if "downtown_bar" not in globals(): # After pushing room additions, update this to latest so it gets added on existing saves.
         call store_basement_rooms(stack)
     $ execute_hijack_call(stack)
     return
@@ -62,6 +62,5 @@ label store_basement_rooms(stack):
         $ downtown_bar.link_locations_two_way(mall)
     $ downtown_bar.actions.append(order_drink_action) # See downtown_bar_actions.rpy
 
-    $ rooms_need_to_be_updated = False
     $ execute_hijack_call(stack)
     return
