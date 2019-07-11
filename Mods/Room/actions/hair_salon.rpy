@@ -61,7 +61,7 @@ label salon_response(person_choice): # How does the_person respond to a company 
 
 label salon_checkout():
     # Check if any changes was made before leaving.
-    if hair_style_check != person.hair_style and hair_color_check != person.hair_colour: # Both was changed
+    if hair_style_check != person.hair_style and hair_color_check[1] != person.hair_colour[1]: # Both was changed
         $ salon_manager.draw_person(emotion = "happy")
         $ person.change_happiness(+10)
         salon_manager.char "That will be $[salon_style_cost] for the haircut and $[salon_dye_cost] for the dye. Who's paying?"

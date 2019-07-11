@@ -171,38 +171,9 @@ init python: # This space is reserved for definitions used to simplify the code
     def cheat_redraw_hair(): # Call this whenever you have made changes to the hair style or hair color
                              # NOTE:  You can define your own colors here by following the established format.
                              #        It makes the assumption that the_person.hair_colour is set.
-
-        if the_person.hair_colour == "blond":
-             the_person.hair_style.colour = [0.84,0.75,0.47,1] # Hair color is in normalized RGB decimal format. [R, G, B, Alpha]
-
-        elif the_person.hair_colour == "brown":
-             the_person.hair_style.colour = [0.73,0.43,0.24,1]
-
-        elif the_person.hair_colour == "black":
-             the_person.hair_style.colour = [0.1,0.09,0.08,1]
-
-        elif the_person.hair_colour == "red":
-             the_person.hair_style.colour = [0.3,0.05,0.05,1]
-
-        elif the_person.hair_colour == "hot pink": # Custom Color
-             the_person.hair_style.colour = [1,0.5,0.8,1]
-
-        elif the_person.hair_colour == "sky blue": # Custom Color
-             the_person.hair_style.colour = [0.4,0.5,0.9,1]
-
-        elif the_person.hair_colour == "test color 1": # Custom Color
-             the_person.hair_style.colour = [0.882, 0.733, 0.580,1]
-
-        elif the_person.hair_colour == "test color 2": # Custom Color
-             the_person.hair_style.colour = [0.270, 0.549, 0.274,1]
-
-        elif the_person.hair_colour == "test color 3": # Custom Color
-             the_person.hair_style.colour = [0.717, 0.8, 0.8,1]
-
-        elif the_person.hair_colour == "test color 4": # Custom Color
-             the_person.hair_style.colour = [0.717, 0.360, 0.839,1]
-
-        the_person.draw_person(the_person.hair_style)
+        the_person.hair_style.colour = the_person.hair_colour[1]
+        the_person.draw_person()
+        return
 
     def cheat_redraw_face(person): # Redraws the face with the matching skin colour
         if person.face_style == "Face_1": # Variations of Face Style 1
@@ -264,16 +235,16 @@ init python: # This space is reserved for definitions used to simplify the code
 
             elif person.skin == "black":
                  person.expression_images = Expression("default","black","Face_6")
-        person.draw_person(person.face_style) # Always redraw the face_style
+        person.draw_person() # Always redraw the face_style
 
     def cheat_redraw_breasts(): # Redraws the breasts / tits
-        the_person.draw_person(the_person.tits)
+        the_person.draw_person()
 
     def cheat_redraw_body(): # Redraws the body
-        the_person.draw_person(the_person.body_type)
+        the_person.draw_person()
 
     def cheat_redraw_skin(): # Redraws the skin color
-        the_person.draw_person(the_person.skin)
+        the_person.draw_person()
 
     # Definitions - End
 
@@ -460,17 +431,17 @@ screen cmoc():
             if capp and capphc: # Hair Color Options
                 hbox:
                     vbox: # Column 1, reserved for vanilla hair colors
-                        textbutton "Blond Color" action [SetField(the_person,"hair_colour", "blond"), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Brown Color" action [SetField(the_person,"hair_colour", "brown"), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Black Color" action [SetField(the_person,"hair_colour", "black"), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Red Color" action [SetField(the_person,"hair_colour", "red"), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        textbutton "Blond" action [SetField(the_person,"hair_colour", ["blond", [0.89,0.75,0.47,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        textbutton "Brown" action [SetField(the_person,"hair_colour", ["brown", [0.21,0.105,0.06,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        textbutton "Black" action [SetField(the_person,"hair_colour", ["black",[0.09,0.07,0.09,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        textbutton "Chestnut" action [SetField(the_person,"hair_colour", ["chestnut", [0.59,0.31,0.18,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        textbutton "Pulp" action [SetField(the_person,"hair_colour", ["pulp", [0.643, 0.439, 0.541,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                     vbox: # Column 2,  reserved for custom hair colors
-                        textbutton "Hot Pink Color" action [SetField(the_person,"hair_colour", "hot pink"), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Sky Blue Color" action [SetField(the_person,"hair_colour", "sky blue"), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Test Color 1" action [SetField(the_person,"hair_colour", "test color 1"), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Test Color 2" action [SetField(the_person,"hair_colour", "test color 2"), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Test Color 3" action [SetField(the_person,"hair_colour", "test color 3"), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Test Color 4" action [SetField(the_person,"hair_colour", "test color 4"), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        textbutton "Knight Red" action [SetField(the_person,"hair_colour", ["knight red", [0.745, 0.117, 0.235,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        textbutton "Platinum Blonde" action [SetField(the_person,"hair_colour", ["platinum blonde", [0.789, 0.746, 0.691,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        textbutton "Golden Blonde" action [SetField(the_person,"hair_colour", ["golden blonde", [0.895, 0.781, 0.656,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        textbutton "Strawberry Blonde" action [SetField(the_person,"hair_colour", ["strawberry blonde", [0.644, 0.418, 0.273,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        textbutton "Light Auburn" action [SetField(the_person,"hair_colour", ["light auburn", [0.566, 0.332, 0.238,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
 
             if capp and cappf: # Face Type Options
                 hbox:

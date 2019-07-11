@@ -151,6 +151,15 @@ init 2 python:
 
         return
 
+    def try_fix_game_issues():
+        # to fix game with old hair colour linked to hair style changed from v0.17 to v0.18
+        for person in all_people_in_the_game([mc]):
+            if isinstance(person.hair_colour, basestring):
+                person.hair_colour = find_in_list(lambda x: x[0] == person.hair_colour, list_of_hairs) or list_of_hairs[0]
+            elif not isinstance(person.hair_colour, list) or len(person.hair_colour) != 2:
+                person.hair_colour = list_of_hairs[0]
+        return
+
     # mod settings action
     action_mod_options_action = Action("MOD Settings", action_mod_settings_requirement, "show_action_mod_settings", menu_tooltip = "Enable or disable mods")
     action_mod_configuration_action = Action("MOD Configuration", action_mod_settings_requirement, "show_action_mod_configuration", menu_tooltip = "Change configuration for individual MODS")
@@ -202,6 +211,8 @@ label update_action_mod_core(stack):
             bedroom.actions.append(action_mod_options_action)
         if not action_mod_configuration_action in bedroom.actions:
             bedroom.actions.append(action_mod_configuration_action)
+
+        try_fix_game_issues()
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
