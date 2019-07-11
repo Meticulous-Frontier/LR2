@@ -43,7 +43,7 @@ init 2 python:
 
     # Schedule Person Requirements
     def schedule_person_requirement(person):
-        if store.generic_people_role_change_schedule and person.obedience >= 130 and not person in list_of_unique_characters:
+        if store.generic_people_role_change_schedule and person.obedience >= 130 and not person in unique_character_list:
             return True
         return False
 
@@ -78,7 +78,7 @@ init 2 python:
     # Hire Person Requirements
     def hire_person_requirement(person):
         if store.generic_people_role_hire_person:
-            if person not in mc.business.get_employee_list() + list_of_unique_characters:
+            if person not in mc.business.get_employee_list() + unique_character_list:
                 return True
         return False
 

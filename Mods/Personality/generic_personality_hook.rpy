@@ -43,14 +43,14 @@ init 1 python:
     def update_cougar_personality(person):
         # change personality to cougar if we meet age requirement
         if find_in_list(lambda x: x.effect == "cougar_personality_dummy_label", action_mod_list).enabled:
-            if person not in list_of_unique_characters and person.age > 45:
+            if person not in unique_character_list and person.age > 45:
                 if not person.personality == cougar_personality:
                     person.original_personality = person.personality
                     person.personality = cougar_personality
                     # mc.log_event((person.title or person.name) + "  A:" + str(person.age) + ": " + person.personality.personality_type_prefix, "float_text_grey")
         else:
             if person.personality == cougar_personality:
-                if person not in list_of_unique_characters:
+                if person not in unique_character_list:
                     if not (person.original_personality is None or person.original_personality == cougar_personality):
                         person.personality = person.original_personality
                     else:
@@ -60,8 +60,7 @@ init 1 python:
         return
 
 label activate_generic_personality(stack):
-    # list_of_unique_characters is no longer used after game start, fill it with unique characters so we can use it in other parts of the MOD
-    $ list_of_unique_characters = [mom, lily, aunt, cousin, stephanie, alexia]
+    $ unique_character_list = [mom, lily, aunt, cousin, stephanie, alexia]
 
     python:
         # add one bimbo to the game (on start of game)
@@ -79,8 +78,7 @@ label activate_generic_personality(stack):
     return
 
 label update_generic_personality(stack):
-    # list_of_unique_characters is no longer used after game start, fill it with unique characters so we can use it in other parts of the MOD
-    $ list_of_unique_characters = [mom, lily, aunt, cousin, stephanie, alexia]
+    $ unique_character_list = [mom, lily, aunt, cousin, stephanie, alexia]
 
     python:
         # fix for old save games (can be removed in future):
