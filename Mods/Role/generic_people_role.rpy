@@ -191,9 +191,21 @@ label generic_people_role_options_menu:
                 turn_generic_people_role_feature_on_or_off(action_mod_choice)
 
 label generic_role_pay_to_strip(person):
+    # strip a copy of the current outfit (so review outfit can restore the original outfit)
+    $ person.outfit = person.outfit.get_copy()
+
     call pay_strip_scene(person) from _call_pay_strip_scene_generic_people_role
+
     # reset the person outfit to the one prior to the strip
-    $ person.outfit = person.planned_outfit.get_copy()
+    python:
+        outfit_sluttiness = person.outfit.slut_requirement
+        person.review_outfit()
+        person.draw_person(emotion = "happy")
+
+    if person.sluttiness > outfit_sluttiness:
+        "She slowly puts her clothes back on, while looking at you seductively."
+    else:
+        "She quickly puts her clothes back on."
     return
 
 # NOTE: Not sure where to place these actions yet. Basically actions that could fit on any person regardless of role.
