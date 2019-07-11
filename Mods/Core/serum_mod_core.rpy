@@ -114,6 +114,10 @@ label update_serum_mod_core(stack):
         except NameError:
             unmodded = True
 
+        # extra check to validate that serum mod list exists correctly
+        if not unmodded and not isinstance(serum_mod_list, list):
+            unmodded = True
+
     if unmodded:
         $ serum_mod_list = []
         

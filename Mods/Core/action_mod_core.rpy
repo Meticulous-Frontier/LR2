@@ -189,7 +189,7 @@ label update_action_mod_core(stack):
             unmodded = True
 
         # extra check to validate that action mod list exists correctly
-        if not isinstance(action_mod_list, list):
+        if not unmodded and not isinstance(action_mod_list, list):
             unmodded = True
 
     if unmodded:
