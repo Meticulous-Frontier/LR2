@@ -7,58 +7,77 @@ init -1 python:
     business_basement = [] # List of rooms that are supposed to be in the basement.
     
     def update_custom_rooms(room): # Replaces the room in the list with the updated version.
-        for i in range(len(list_of_places)):
-            if list_of_places[i] == room:
-                
-                list_of_places[i].formalName = room.formalName
-                
-                list_of_places[i].map_pos = room.map_pos
-                list_of_places[i].background_image = room.background_image
-                
-                list_of_places[i].visible = room.visible
-                list_of_places[i].accessable = room.accessable
-                
-                if hasattr(list_of_places[i], "hide_in_known_housemap"): # Deal with this somehow else. Thought ModRooms should have the attribute as True by default?
-                    list_of_places[i].hide_in_known_housemap = room.hide_in_known_housemap
-                
-                if hasattr(list_of_places[i], "tutorial_label"):
-                    list_of_places[i].tutorial_label = room.tutorial_label
-                if hasattr(list_of_places[i], "trigger_tutorial"):
-                    list_of_places[i].trigger_tutorial = room.trigger_tutorial
-                   
+        room_update = find_in_list(lambda x: x.name == room.name, list_of_places)
+
+        # did not find a room to update
+        if not room_update:
+            return
+
+        # renpy.say("", "Update room " + room_update.name)
+
+        room_update.formalName = room.formalName
         
+        room_update.map_pos = room.map_pos
+        room_update.background_image = room.background_image
+        
+        room_update.visible = room.visible
+        room_update.accessable = room.accessable
+
+        room_update.connections = room.connections
+
+        room_update.objects = room.objects
+        room_update.objects.append(Object("stand",["Stand"], sluttiness_modifier = 0, obedience_modifier = -5)) #Add a standing position that you can always use.
+
+        # update available actions in room
+        room_update.actions = room.actions
+        
+        if room_update.tutorial_label != room.tutorial_label:        
+            room_update.tutorial_label = room.tutorial_label
+            room_update.trigger_tutorial = True
+
+        # old saves don't have hide_in_known_housemap
+        if hasattr(room_update, "hide_in_known_housemap"): # Deal with this somehow else. Thought ModRooms should have the attribute as True by default?
+            room_update.hide_in_known_housemap = room.hide_in_known_housemap
+
         return
 
 init 5  python:
-    add_label_hijack("normal_start", "store_custom_rooms")
+    add_label_hijack("normal_start", "active_custom_rooms")
     add_label_hijack("after_load", "update_custom_rooms")
 
-label update_custom_rooms(stack):
-
-    if "downtown_bar" not in globals(): # After pushing room additions, update this to latest so it gets added on existing saves, or any non- existing global var e.g "just_update_damnit"
-        call store_custom_rooms(stack)
+label activate_custom_rooms(stack):
+    call store_custom_rooms() from _call_store_custom_rooms_1
+    call store_downtown_bar() from _call_store_downtown_bar_1
     $ execute_hijack_call(stack)
     return
 
+label update_custom_rooms(stack):
+    # use this code to add only a new missing room
+    # if not find_in_list(lambda x: x.name == "downtown_bar", list_of_places):
+    #     call update_downtown_bar() from _call_update_downtown_bar
 
+    # always update the downtown bar with the latest definition
+    call store_downtown_bar() from _call_store_downtown_bar_2
 
-label store_custom_rooms(stack):
-    
+    $ execute_hijack_call(stack)
+    return
+
+label store_custom_rooms():
     # Marketing Division Basement - Security Room | security_room_actions.rpy
     $ m_division_basement_objects = [
         make_desk(),
         make_chair(),
         make_floor(),
-        ]
+    ]
 
-    $ m_division_basement = ModRoom("security", "Security Room", [], room_background_image("Security_Background.jpg"), m_division_basement_objects,[],[], False, [], None, False)
+    $ m_division_basement = Room("security", "Security Room", [], room_background_image("Security_Background.jpg"), m_division_basement_objects,[],[], False, [], None, False)
     
     # Production Division Basement - Machinery Room | machinery_room_actions.rpy
     $ p_division_basement_objects = [
         make_table()
-        ]
+    ]
 
-    $ p_division_basement = ModRoom("machinery", "Machinery Room", [], office_background, p_division_basement_objects, [], [], False, [], None, False)
+    $ p_division_basement = Room("machinery", "Machinery Room", [], office_background, p_division_basement_objects, [], [], False, [], None, False)
     
     # Research Division Basement - Biotechnology Lab | biotech_room_actions.rpy
     $ rd_division_basement_objects = [
@@ -68,7 +87,7 @@ label store_custom_rooms(stack):
         make_table()
     ]
 
-    $ rd_division_basement = ModRoom("biotech", "Biotechnology Lab", [], room_background_image("Biotech_Background.jpg"), rd_division_basement_objects, [], [], False, [], None, False)
+    $ rd_division_basement = Room("biotech", "Biotechnology Lab", [], room_background_image("Biotech_Background.jpg"), rd_division_basement_objects, [], [], False, [], None, False)
     
     # Main Office Basement - Dungeon | dungeon_room_actions.rpy
     $ office_basement_objects = [
@@ -76,7 +95,7 @@ label store_custom_rooms(stack):
         make_pillory(),
         make_woodhorse()
     ]
-    $ office_basement = ModRoom("dungeon", "Dungeon", [], bar_background, office_basement_objects, [],[], False,[], None, False)
+    $ office_basement = Room("dungeon", "Dungeon", [], bar_background, office_basement_objects, [],[], False,[], None, False)
 
     $ business_basement = [ # List of rooms to put in the "basement" of the business
         m_division_basement,
@@ -84,20 +103,26 @@ label store_custom_rooms(stack):
         rd_division_basement,
         office_basement
     ]
+    return
 
+label store_downtown_bar():
     # Downtown Bar - The Downtown Distillery | downtown_bar_actions.rpy
-    $ downtown_bar_objects = [
-        make_desk(),
-        make_chair(),
-        make_floor()
-    ]
-    $ downtown_bar = ModRoom("bar", "The Downtown Distillery", [downtown], bar_background, downtown_bar_objects,[],[], True, [6,5], None, True)
-    
-    if downtown_bar not in list_of_places: # Make sure it is in the list_of_places.
+    # This bar gets updated when a save game is loaded, regardsless of its existance
+
+    python:
+        downtown_bar_objects = [
+            make_desk(),
+            make_chair(),
+            make_floor()
+        ]
+        downtown_bar = Room("bar", "The Downtown Distillery", [downtown], bar_background, downtown_bar_objects,[], [downtown_bar_action], True, [6,5], None, True)
+
+    # Make sure it is in the list_of_places (and no duplicate)
+    # List of places gets stored, so will the bar when appended here
+    if downtown_bar not in list_of_places: 
         $ list_of_places.append(downtown_bar)
-    call downtown_bar_enable_actions # Enables non- destructive menu tree.
-    $ update_custom_rooms(downtown_bar) # This refreshes any properties, e.g move the position of the Room on the map.
-  
- 
-    $ execute_hijack_call(stack)
+    
+    # This refreshes the properties of the existing bar, e.g move the position of the Room on the map, objects, actions, connections, background etc.
+    $ update_custom_rooms(downtown_bar) 
+
     return
