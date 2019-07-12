@@ -58,8 +58,9 @@ label store_basement_rooms(stack):
         $ downtown_bar.add_object(make_chair())
         $ downtown_bar.add_object(make_floor())
 
-    if downtown_bar not in mall.connections:
-        $ downtown_bar.link_locations_two_way(mall)
+    if downtown_bar not in downtown.connections:
+        $ downtown_bar.link_locations_two_way(downtown)
+    $ down_town_bar.actions.append(downtown_bar_action)
     $ downtown_bar.actions.append(order_drink_action) # See downtown_bar_actions.rpy
 
     $ execute_hijack_call(stack)

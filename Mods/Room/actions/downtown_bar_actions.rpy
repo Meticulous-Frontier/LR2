@@ -3,6 +3,11 @@ init -1 python:
 
 init 3 python:
 
+   def downtown_bar_actions_requirement(): # Enables a buffer menu that builds itself the way Special Role Actions do, can be used if you want branching menus.
+      return True
+
+   downtown_bar_action = Action("Approach the counter.", downtown_bar_actions_requirement, "downtown_bar_actions", menu_tooltip = "More options...")
+   
    def order_drink_requierement():
       if time_of_day != 0:
          return True
