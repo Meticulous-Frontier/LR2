@@ -109,17 +109,20 @@ label store_downtown_bar():
     # Downtown Bar - The Downtown Distillery | downtown_bar_actions.rpy
     # This bar gets updated when a save game is loaded, regardsless of its existance
 
-    $ downtown_bar_objects = [
-        make_desk(),
-        make_chair(),
-        make_floor()
-    ]
-    $ downtown_bar = Room("bar", "The Downtown Distillery", [downtown], bar_background, downtown_bar_objects,[], [downtown_bar_action], True, [6,5], None, True)
+    python:
+        downtown_bar_objects = [
+            make_desk(),
+            make_chair(),
+            make_floor()
+        ]
+        downtown_bar = Room("bar", "The Downtown Distillery", [downtown], bar_background, downtown_bar_objects,[], [downtown_bar_action], True, [6,5], None, True)
 
-    if downtown_bar not in list_of_places: # Make sure it is in the list_of_places (and no duplicate)
+    # Make sure it is in the list_of_places (and no duplicate)
+    # List of places gets stored, so will the bar when appended here
+    if downtown_bar not in list_of_places: 
         $ list_of_places.append(downtown_bar)
     
-    # This refreshes any properties, e.g move the position of the Room on the map, objects, actions, connections, background etc.
+    # This refreshes the properties of the existing bar, e.g move the position of the Room on the map, objects, actions, connections, background etc.
     $ update_custom_rooms(downtown_bar) 
 
     return
