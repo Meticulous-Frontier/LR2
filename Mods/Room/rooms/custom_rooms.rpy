@@ -42,7 +42,7 @@ init -1 python:
         return
 
 init 5  python:
-    add_label_hijack("normal_start", "active_custom_rooms")
+    add_label_hijack("normal_start", "activate_custom_rooms")
     add_label_hijack("after_load", "update_custom_rooms")
 
 label activate_custom_rooms(stack):
