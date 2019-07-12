@@ -36,7 +36,7 @@ init 3 python:
     gene_modifications.append(modify_person)
 
     def change_body_requirement():
-        if hypothyroidism_serum_trait.researched and anorexia_serum_trait.researched:
+        if 1 == 1: #if hypothyroidism_serum_trait.researched and anorexia_serum_trait.researched:
             return True
         else:
             return "Requires: [hypothyroidism_serum_trait.name] and [anorexia_serum_trait.name]"
@@ -46,7 +46,8 @@ init 3 python:
     body_modifications.append(change_body)
 
     def change_skin_requirement():
-        if pigment_serum_trait.researched:
+        
+        if 1 == 1: #if pigment_serum_trait.researched:
             return True
         else:
             return "Requires: [pigment_serum_trait.name]"
