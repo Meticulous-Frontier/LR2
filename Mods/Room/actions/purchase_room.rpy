@@ -104,11 +104,8 @@ label purchase_dungeon_room(): #Enables the dugneon.
     $ mod_rooms_lobby.append(office_basement)
     $ mod_rooms_append.append(office_basement) # Gives an escape through the elevator
 
-    $ office_basement.add_object(make_bdsmbed())
-    $ office_basement.add_object(make_pillory())
-    $ office_basement.add_object(make_woodhorse())
-
-    $ list_of_places.append(office_basement)
+    if office_basement not in list_of_places:
+        $ list_of_places.append(office_basement)
 
     $ update_tier = can_increase_tier()
     if update_tier:
