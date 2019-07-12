@@ -6,6 +6,13 @@
 init -1 python:
     business_basement = [] # List of rooms that are supposed to be in the basement.
     
+    def clean_elevator_action():
+        if "room_manager_action" in globals():
+            for room in list_of_places:
+                if room_manager_action in room.actions:
+                    room.actions.remove(room_manager_action)
+        return
+
     def update_custom_rooms(room): # Replaces the room in the list with the updated version.
         room_update = find_in_list(lambda x: x.name == room.name, list_of_places)
 
@@ -46,8 +53,14 @@ init 5  python:
     add_label_hijack("after_load", "update_custom_rooms")
 
 label activate_custom_rooms(stack):
-    call store_custom_rooms() from _call_store_custom_rooms_1
+    
+    call store_m_division_basement() from _store_m_division_basement_1
+    call store_p_division_basement() from _store_p_division_basement_1
+    call store_rd_division_basement() from _store_rd_division_basement_1
+    call store_office_basement() from _store_office_basement_1
     call store_downtown_bar() from _call_store_downtown_bar_1
+    
+    $ clean_elevator_action()
     $ execute_hijack_call(stack)
     return
 
@@ -56,29 +69,44 @@ label update_custom_rooms(stack):
     # if not find_in_list(lambda x: x.name == "downtown_bar", list_of_places):
     #     call update_downtown_bar() from _call_update_downtown_bar
 
-    # always update the downtown bar with the latest definition
+    call store_m_division_basement() from _store_m_division_basement_2
+    call store_p_division_basement() from _store_p_division_basement_2
+    call store_rd_division_basement() from _store_rd_division_basement_2
+    call store_office_basement() from _store_office_basement_2
     call store_downtown_bar() from _call_store_downtown_bar_2
-
+    
+    $ clean_elevator_action()
     $ execute_hijack_call(stack)
     return
 
-label store_custom_rooms():
+
+    
+label store_m_division_basement():
     # Marketing Division Basement - Security Room | security_room_actions.rpy
     $ m_division_basement_objects = [
         make_desk(),
         make_chair(),
-        make_floor(),
+        make_floor()
     ]
 
-    $ m_division_basement = Room("security", "Security Room", [], room_background_image("Security_Background.jpg"), m_division_basement_objects,[],[], False, [], None, False)
+    $ m_division_basement = Room("security", "Security Room", [m_division], room_background_image("Security_Background.jpg"), m_division_basement_objects,[],[security_overview_action], False, [12,2], None, True)
     
+    $ update_custom_rooms(m_division_basement) 
+    return
+
+label store_p_division_basement():
     # Production Division Basement - Machinery Room | machinery_room_actions.rpy
+
     $ p_division_basement_objects = [
         make_table()
     ]
 
-    $ p_division_basement = Room("machinery", "Machinery Room", [], office_background, p_division_basement_objects, [], [], False, [], None, False)
+    $ p_division_basement = Room("machinery", "Machinery Room", [p_division], office_background, p_division_basement_objects, [], [], False, [10,5], None, True)
     
+    $ update_custom_rooms(p_division_basement) 
+    return
+    
+label store_rd_division_basement():
     # Research Division Basement - Biotechnology Lab | biotech_room_actions.rpy
     $ rd_division_basement_objects = [
         make_chair(),
@@ -87,22 +115,21 @@ label store_custom_rooms():
         make_table()
     ]
 
-    $ rd_division_basement = Room("biotech", "Biotechnology Lab", [], room_background_image("Biotech_Background.jpg"), rd_division_basement_objects, [], [], False, [], None, False)
+    $ rd_division_basement = Room("biotech", "Biotechnology Lab", [rd_division], room_background_image("Biotech_Background.jpg"), rd_division_basement_objects, [], [biotech_lab_action], False, [13,4], None, True)    
     
+    $ update_custom_rooms(rd_division_basement)
+    return
+
+label store_office_basement():
     # Main Office Basement - Dungeon | dungeon_room_actions.rpy
     $ office_basement_objects = [
         make_bdsmbed(),
         make_pillory(),
         make_woodhorse()
     ]
-    $ office_basement = Room("dungeon", "Dungeon", [], bar_background, office_basement_objects, [],[], False,[], None, False)
-
-    $ business_basement = [ # List of rooms to put in the "basement" of the business
-        m_division_basement,
-        p_division_basement,
-        rd_division_basement,
-        office_basement
-    ]
+    $ office_basement = Room("dungeon", "Dungeon", [office], bar_background, office_basement_objects, [],[dungeon_action], False,[10,2], None, True)
+    
+    $ update_custom_rooms(office_basement) 
     return
 
 label store_downtown_bar():
