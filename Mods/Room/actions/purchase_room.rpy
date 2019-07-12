@@ -94,9 +94,6 @@ label purchase_rooms():
 
 # Tier 1 Rooms
 label purchase_dungeon_room(): #Enables the dugneon.
-    "[office_basement.formalName] accessable from the elevator in [lobby.formalName]"
-    if office_basement in mod_rooms_lobby:
-        return  # room already exists exit
 
     $ mc.business.pay(- t1_cost)
 
@@ -112,9 +109,6 @@ label purchase_dungeon_room(): #Enables the dugneon.
 
 # Tier 2 Rooms
 label purchase_security_room(): #Enables the security room.
-    "[m_division_basement.formalName] accessable from the elevator in [lobby.formalName]"
-    if m_division_basement in mod_rooms_lobby:
-        return  # room already exists exit
 
     $ mc.business.pay(- t2_cost)
 
