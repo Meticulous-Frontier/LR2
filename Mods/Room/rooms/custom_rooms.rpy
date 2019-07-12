@@ -90,8 +90,7 @@ label store_m_division_basement():
             make_chair(),
             make_floor()
         ]
-
-    $ m_division_basement = Room("security", "Security Room", [m_division], room_background_image("Security_Background.jpg"), m_division_basement_objects,[],[security_overview_action], False, [12,2], None, True)
+        m_division_basement = Room("security", "Security Room", [m_division], room_background_image("Security_Background.jpg"), m_division_basement_objects,[],[security_overview_action], False, [12,2], None, True)
     
     $ update_custom_rooms(m_division_basement) 
     return
@@ -103,8 +102,7 @@ label store_p_division_basement():
         p_division_basement_objects = [
             make_table()
         ]
-
-    $ p_division_basement = Room("machinery", "Machinery Room", [p_division], office_background, p_division_basement_objects, [], [], False, [10,5], None, True)
+        p_division_basement = Room("machinery", "Machinery Room", [p_division], office_background, p_division_basement_objects, [], [], False, [11,5], None, True)
     
     $ update_custom_rooms(p_division_basement) 
     return
@@ -119,8 +117,7 @@ label store_rd_division_basement():
             make_desk(),
             make_table()
         ]
-
-    $ rd_division_basement = Room("biotech", "Biotechnology Lab", [rd_division], room_background_image("Biotech_Background.jpg"), rd_division_basement_objects, [], [biotech_lab_action], False, [13,4], None, True)    
+        rd_division_basement = Room("biotech", "Biotechnology Lab", [rd_division], room_background_image("Biotech_Background.jpg"), rd_division_basement_objects, [], [biotech_lab_action], False, [12,5], None, True)
     
     $ update_custom_rooms(rd_division_basement)
     return
@@ -134,7 +131,7 @@ label store_office_basement():
             make_pillory(),
             make_woodhorse()
         ]
-    $ office_basement = Room("dungeon", "Dungeon", [office], bar_background, office_basement_objects, [],[dungeon_action], False,[10,2], None, True)
+        office_basement = Room("dungeon", "Dungeon", [office], bar_background, office_basement_objects, [],[dungeon_action], False,[11,1], None, True)
     
     $ update_custom_rooms(office_basement) 
     return
