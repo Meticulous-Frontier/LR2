@@ -23,9 +23,10 @@ init -1 python:
                 
                 if hasattr(list_of_places[i], "tutorial_label"):
                     list_of_places[i].tutorial_label = room.tutorial_label
-                
+                    renpy.call(room.tutorial_label)
                 if hasattr(list_of_places[i], "trigger_tutorial"):
                     list_of_places[i].trigger_tutorial = room.trigger_tutorial
+                   
         
         return
 
@@ -91,11 +92,10 @@ label store_custom_rooms(stack):
         make_chair(),
         make_floor()
     ]
-    $ downtown_bar = ModRoom("bar", "The Downtown Distillery", [downtown], bar_background, downtown_bar_objects,[],[], True, [6,5], None, True)
+    $ downtown_bar = ModRoom("bar", "The Downtown Distillery", [downtown], bar_background, downtown_bar_objects,[],[], True, [6,5], "downtown_bar_enable_actions", True)
     
     if downtown_bar not in list_of_places: # Make sure it is in the list_of_places.
         $ list_of_places.append(downtown_bar)
-    
     $ update_custom_rooms(downtown_bar) # This refreshes any properties, e.g move the position of the Room on the map.
   
  
