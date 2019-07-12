@@ -9,7 +9,8 @@ init -1 python:
             for person in room.people:
                 for person in list_of_followers:
                     if person in list_of_followers:
-                        person.location().move_person(person, new_location)
+                        if person in room.people:
+                            room.move_person(person, new_location)
 
         change_scene_display(new_location)
 
