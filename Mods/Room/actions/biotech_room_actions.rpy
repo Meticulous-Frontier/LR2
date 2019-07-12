@@ -8,9 +8,8 @@ init 3 python:
     def biotech_lab_requirement():
         return True
 
-    biotech_action = Action("Do things in the lab", biotech_lab_requirement, "biotechs",
+    biotech_lab_action = Action("Do things in the lab", biotech_lab_requirement, "biotechs",
         menu_tooltip = "Do stuff")
-
 
     def gene_modification_requirement():
         return True
@@ -31,6 +30,7 @@ init 3 python:
 
     def modify_person_requirement():
         return True
+   
     modify_person = Action("Modify a person", modify_person_requirement, "modify_person",
         menu_tooltip = "Modify the appearance of a person through magic, not science")
     gene_modifications.append(modify_person)
@@ -40,6 +40,7 @@ init 3 python:
             return True
         else:
             return "Requires: [hypothyroidism_serum_trait.name] and [anorexia_serum_trait.name]"
+   
     change_body = Action("Change body: [person.body_type]", change_body_requirement, "change_body",
         menu_tooltip = "Modify [person.title]'s body type.")
     body_modifications.append(change_body)
@@ -49,22 +50,30 @@ init 3 python:
             return True
         else:
             return "Requires: [pigment_serum_trait.name]"
+   
     change_skin = Action("Change skin: [person.skin]", change_skin_requirement, "change_skin",
         menu_tooltip = "Modify [person.title]'s skin tone.")
     body_modifications.append(change_skin)
+    
     def change_face_requirement():
         return True
+   
     change_face = Action("Change face: [person.face_style]", change_face_requirement, "change_face",
         menu_tooltip = "Modify [person.title]'s face style.")
     body_modifications.append(change_face)
+    
     def change_breasts_requirement():
         if breast_enhancement.researched and breast_reduction.researched:
             return True
         else:
             return "Requires: [breast_enhancement.name] and [breast_reduction.name]"
+    
     change_breasts = Action("Change breasts: [person.tits]", change_breasts_requirement, "change_breasts",
         menu_tooltip = "Modify [person.title]'s cup size.")
     body_modifications.append(change_breasts)
+
+    
+
 label biotechs():
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
