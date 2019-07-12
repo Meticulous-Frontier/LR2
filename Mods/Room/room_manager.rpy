@@ -25,8 +25,7 @@ init 3 python:
             if action not in room.actions:
                 room.actions.append(action)
 
-    def room_manager_initialization(self):
-        mod_room_manager_append(room_manager_action) # Appends the action to any room in the mod_rooms_append list.
+    def room_manager_initialization(self): # Appends the action to any room in the mod_rooms_append list.
                                    #This is also done whenever accessing any entry points so a restart of the mod isn't required.
         return
 
@@ -101,14 +100,14 @@ label initialize_room_manager():
                           # It updates on first time startup of the mod and whenever an elevator / bus is entered so you can append to it whenever as long as at least ONE location
                           # With access to the screen already exist.
 
-    if mall not in mod_rooms_append:
-        $ mod_rooms_append.append(mall)
-        $ mod_rooms_append.append(downtown)
-        $ mod_rooms_append.append(hall)
-        $ mod_rooms_append.append(lobby)
+    #if mall not in mod_rooms_append:
+    #    $ mod_rooms_append.append(mall)
+    #    $ mod_rooms_append.append(downtown)
+    #    $ mod_rooms_append.append(hall)
+    #    $ mod_rooms_append.append(lobby)
 
         # Enable the action in the custom elevator room.
-        $ mod_rooms_append.append(elevator)
+    #    $ mod_rooms_append.append(elevator)
 
     # Have the default hubs always be available from within themselves.
     # Got to append them here as the rooms do not exist on list creation.

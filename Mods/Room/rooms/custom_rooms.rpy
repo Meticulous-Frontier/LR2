@@ -6,6 +6,13 @@
 init -1 python:
     business_basement = [] # List of rooms that are supposed to be in the basement.
     
+    def clean_elevator_action():
+        if "room_manager_action" in globals():
+            for room in list_of_places:
+                if room_manager_action in room.actions:
+                    room.actions.remove(room_manager_action)
+        return
+
     def update_custom_rooms(room): # Replaces the room in the list with the updated version.
         room_update = find_in_list(lambda x: x.name == room.name, list_of_places)
 
@@ -52,7 +59,8 @@ label activate_custom_rooms(stack):
     call store_rd_division_basement() from _store_rd_division_basement_1
     call store_office_basement() from _store_office_basement_1
     call store_downtown_bar() from _call_store_downtown_bar_1
-   
+    
+    $ clean_elevator_action()
     $ execute_hijack_call(stack)
     return
 
@@ -67,6 +75,7 @@ label update_custom_rooms(stack):
     call store_office_basement() from _store_office_basement_2
     call store_downtown_bar() from _call_store_downtown_bar_2
     
+    $ clean_elevator_action()
     $ execute_hijack_call(stack)
     return
 
