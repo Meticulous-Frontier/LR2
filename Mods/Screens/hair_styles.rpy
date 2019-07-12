@@ -87,7 +87,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                                 SetScreenVariable("selected_hair_style", hair_style_item),
                                                 SetField(person, "hair_colour", [selected_hair_colour_name, [current_r, current_g, current_b, current_a]]),
                                                 SetField(person, "hair_style", hair_style_item),
-                                                Function(person.draw_person)]
+                                                Function(person.draw_person, show_person_info = False)]
 
                     frame:
                         #THIS IS WHERE SELECTED ITEM OPTIONS ARE SHOWN
@@ -129,7 +129,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                             SetField(selected_hair_style, "colour", [current_r, current_g, current_b, current_a]),
                                             SetField(person, "hair_colour", [selected_hair_colour_name, [current_r, current_g, current_b, current_a]]),
                                             SetField(person, "hair_style", selected_hair_style),
-                                            Function(person.draw_person)
+                                            Function(person.draw_person, show_person_info = False)
                                         ]
 
                                 hbox:
@@ -238,7 +238,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                                         SetScreenVariable("current_a", hair_colour[1][3]),
                                                         SetField(person, "hair_colour", hair_colour),
                                                         SetField(person, "hair_style", selected_hair_style),
-                                                        Function(person.draw_person)
+                                                        Function(person.draw_person, show_person_info = False)
                                                     ]
                                                     # We use a fixed pallette of hair colours
         vbox:
