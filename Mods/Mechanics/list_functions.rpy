@@ -13,10 +13,31 @@ init -2 python:
             if search(item):
                 return item
         return None
+    
+    # finds all qualifying items in list and returns them as a smaller list.
+    def find_items_in_list(search, list):
+        items = []
+        for item in list:
+            if search(item):
+                items.append(item)
+        if items != []:
+            return items
+        else:
+            return None
 
-    def simple_list_format(list_to_format, what_to_format, string = ""): # Returns a simple list for use in generic menus. Extensive use in the Biotech Actions.
+    def simple_list_format(list_to_format, what_to_format, string = "", ignore = "", attrib = ""): # Returns a simple list for use in generic menus. Extensive use in the Biotech Actions.
         tuple_list = []                                                    # NOTE: Needed a generic list setup, this seems to cover most usecases I came across.
         for what_to_format in list_to_format:
-            tuple_string = str(string) + str(what_to_format)
-            tuple_list.append([tuple_string, what_to_format])
+            if what_to_format is not ignore:
+                
+                if attrib is not "":
+                    tuple_string = str(string) + str(vars(what_to_format)[attrib]) # e.g attrib = "name" for SerumTrait.name to be displayed
+                    tuple_list.append([tuple_string, what_to_format])
+                
+                else:
+                    tuple_string = str(string) + str(what_to_format)
+                    tuple_list.append([tuple_string, what_to_format])
+            else:
+                tuple_string = str(what_to_format)
+                tuple_list.append([tuple_string, what_to_format])
         return tuple_list
