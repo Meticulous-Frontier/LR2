@@ -117,7 +117,7 @@ label clone_person():
         if person_choice == "Back":
             return # Where to go if you hit "Back".
         else:
-            call cloning_process(person_choice)
+            call cloning_process(person_choice) from _call_cloning_process
 
 label cloning_process(person = the_person): # default to the_person when not passed as parameter
     $ person.draw_person(emotion = "default")
@@ -172,7 +172,7 @@ label modify_person():
         if person_choice == "Back":
             return # Where to go if you hit "Back".
         else:
-            call modification_process(person_choice)
+            call modification_process(person_choice) from _call_modification_process
 
 label modification_process(person = the_person): # when called without specific person use the_person variable
     $ person.draw_person(emotion = "default")

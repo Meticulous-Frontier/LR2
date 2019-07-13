@@ -35,7 +35,7 @@ label select_person_for_gym():
         "You send a text message to [person_choice.title] about a gym session."
         "After some time you get a response..."
 
-        call select_person_for_gym_response(person_choice)# What to do if "Back" was not the choice taken.
+        call select_person_for_gym_response(person_choice) from _call_select_person_for_gym_response # What to do if "Back" was not the choice taken.
     return # Go back to main menu
 
 

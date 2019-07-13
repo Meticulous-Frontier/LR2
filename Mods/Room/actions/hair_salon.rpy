@@ -16,7 +16,7 @@ label salon_label():
     if person_choice != "Back":
         "You send a message to [person_choice.name] about the appointment."
         "After some time you get a response..."
-        call salon_response(person_choice)# What to do if "Back" was not the choice taken.
+        call salon_response(person_choice) from _call_salon_response# What to do if "Back" was not the choice taken.
     return # Where to go if you hit "Back".
 
 label salon_response(person_choice): # How does the_person respond to a company paid haircut?
@@ -54,7 +54,7 @@ label salon_response(person_choice): # How does the_person respond to a company 
         person.char "Sounds good, I'll be right there [person.mc_title]."
 
     call screen hair_creator(person, hair_style_check, hair_color_check) # This is the "store" / "salon" part of the mod. TODO: Find a different way to check for changes in hair color
-    call salon_checkout() #Will return here if nothing qualifies
+    call salon_checkout() from _call_salon_checkout #Will return here if nothing qualifies
     call advance_time from _call_advance_time_hair_salon
     $ renpy.scene("Active")
     return

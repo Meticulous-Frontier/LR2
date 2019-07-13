@@ -241,7 +241,7 @@ label room_manager_action_label(): # What happens when you "Enter the elevator"
     $ elevator_entrance_p_division = False
     $ elevator_entrance_m_division = False
 
-    call change_location(new_location) # Runs the scene change.
+    call change_location(new_location) from _call_change_location_room_manager_action # Runs the scene change.
 
 #    if new_location == Room: # Have something happen if a specific room is entered.
 #        $ possible_greetings = []

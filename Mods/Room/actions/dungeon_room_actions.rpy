@@ -74,7 +74,7 @@ label train_slave():
             if person_choice.obedience < 130:
                 "[the_person.title] needs more obedience first"
             else:
-                call train_slave_menu(person_choice)
+                call train_slave_menu(person_choice) from _call_train_slave_menu
 
 label train_slave_menu(person_choice = the_person): # default to the person when called from action choice
     $ the_person = person_choice
@@ -93,7 +93,7 @@ label train_slave_menu(person_choice = the_person): # default to the person when
             $ act_choice.call_action()
 
 label sex_slave_label():
-    call fuck_person(the_person)
+    call fuck_person(the_person) from _call_fuck_person_sex_slave
     "After some sexual disciplinary actions [the_person.title] becomes a bit more obedient."
     $ the_person.change_obedience(+10)
     $ advance_time()

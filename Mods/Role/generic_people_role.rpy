@@ -213,7 +213,7 @@ label spend_the_night(person): # Consider adding the sleep_action to the_person'
     "You go to sleep in [person.home.name]"
     $ person.change_love(5)
     $ person.change_happiness(5)
-    call advance_time
+    call advance_time from _call_advance_time_spend_the_night
     return
 
 label rename_person(person):

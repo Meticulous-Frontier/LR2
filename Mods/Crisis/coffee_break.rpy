@@ -106,7 +106,7 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                     # switch to SB ui
                     $ SB_draw_two_person_scene(person_one = person_two, person_two = person_three, one_pos_x = 0.7, one_position = "stand3", two_position = "stand4")
 
-                    call SB_threesome_description(person_two, person_three, SB_threesome_sixty_nine, make_floor(), 0, private = True, girl_in_charge = False)
+                    call SB_threesome_description(person_two, person_three, SB_threesome_sixty_nine, make_floor(), 0, private = True, girl_in_charge = False) from _call_SB_threesome_description
                     $ SB_draw_two_person_scene(person_one = person_two, person_two = person_three, one_pos_x = 0.7)
                     person_two.char "Wow...this was...really good actually... You can join us anytime you want boss..."                   
                     $ SB_draw_two_person_scene(person_one = person_two, person_two = person_three, one_pos_x = 0.7, one_position = "walking_away", two_position = "walking_away")
