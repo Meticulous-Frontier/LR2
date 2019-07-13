@@ -36,10 +36,10 @@ init 3 python:
     gene_modifications.append(modify_person)
 
     def change_body_requirement():
-        if 1 == 1: #if hypothyroidism_serum_trait.researched and anorexia_serum_trait.researched:
+        if find_in_list(lambda x: x.has_trait(hypothyroidism_serum_trait) and x.has_trait(anorexia_serum_trait), mc.inventory.get_serum_type_list()):
             return True
         else:
-            return "Requires: [hypothyroidism_serum_trait.name] and [anorexia_serum_trait.name]"
+            return "Requires: Serum Containing [hypothyroidism_serum_trait.name] and [anorexia_serum_trait.name]"
    
     change_body = Action("Change body: [person.body_type]", change_body_requirement, "change_body",
         menu_tooltip = "Modify [person.title]'s body type.")
@@ -47,10 +47,10 @@ init 3 python:
 
     def change_skin_requirement():
         
-        if 1 == 1: #if pigment_serum_trait.researched:
+        if find_in_list(lambda x: x.has_trait(pigment_serum_trait), mc.inventory.get_serum_type_list()):
             return True
         else:
-            return "Requires: [pigment_serum_trait.name]"
+            return "Requires: Serum Containing [pigment_serum_trait.name]"
    
     change_skin = Action("Change skin: [person.skin]", change_skin_requirement, "change_skin",
         menu_tooltip = "Modify [person.title]'s skin tone.")
@@ -197,7 +197,7 @@ label change_body():
                 for n in list_of_body_types:
                     body_types.append(n)
                 body_types.append("Back")
-                body_choice = renpy.display_menu(simple_list_format(body_types, n, string = "Body Type: "),True,"Choice")
+                body_choice = renpy.display_menu(simple_list_format(body_types, n, string = "Body Type: ", ignore = "Back"),True,"Choice")
 
         if body_choice == "Back":
             return
@@ -206,14 +206,42 @@ label change_body():
             $ person.draw_person()
 
 label change_skin():
+    $ change_skin_stored = person.skin
     while True:
-        python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+        
+        python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.        
+
+            
+
             skin_styles = [x[0] for x in list_of_skins]
 
             skin_styles.append("Back")
-            skin_choice = renpy.display_menu(simple_list_format(skin_styles, x[0], string = "Skin Type: "),True,"Choice")
+            skin_choice = renpy.display_menu(simple_list_format(skin_styles, x[0], string = "Skin Type: ", ignore = "Back"),True,"Choice")
+        
         if skin_choice == "Back":
-            return
+            if person.skin != change_skin_stored:
+                "Select a serum in order to commit these changes."
+                python:
+                    possible_serum = [x for x in find_items_in_list(lambda x: x.has_trait(pigment_serum_trait), mc.inventory.get_serum_type_list())]
+
+                    possible_serum.append("Discard")
+                    serum_choice = renpy.display_menu(simple_list_format(possible_serum, x, string = "Serum: ", ignore = "Discard", attrib = "name"), True, "Choice")
+                
+                if serum_choice == "Discard":
+                    
+                    $ person.skin = change_skin_stored
+                    $ person.match_skin(change_skin_stored)
+                    $ person.draw_person()
+                    
+                    return
+                else:
+                   
+                    $ mc.inventory.change_serum(serum_choice, -1)
+                    "1x of [serum_choice.name] has been removed from your inventory"
+
+                    return
+            else:
+                return
         else:
             $ person.skin = skin_choice
             $ person.match_skin(skin_choice)
@@ -226,7 +254,7 @@ label change_face():
                 for face in list_of_faces:
                     face_styles.append(face)
                 face_styles.append("Back")
-                face_choice = renpy.display_menu(simple_list_format(face_styles, face, string = "Face Type: "),True,"Choice")
+                face_choice = renpy.display_menu(simple_list_format(face_styles, face, string = "Face Type: ", ignore = "Back"),True,"Choice")
 
         if face_choice == "Back":
             return
@@ -240,7 +268,7 @@ label change_breasts():
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
                 cup_sizes = [x[0] for x in list_of_tits]
                 cup_sizes.append("Back")
-                cup_choice = renpy.display_menu(simple_list_format(cup_sizes, x[0], string = "Cup Size: "),True,"Choice")
+                cup_choice = renpy.display_menu(simple_list_format(cup_sizes, x[0], string = "Cup Size: ", ignore = "Back"),True,"Choice")
 
         if cup_choice == "Back":
             return
