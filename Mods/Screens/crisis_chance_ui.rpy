@@ -30,6 +30,7 @@ screen crisis_chance_setting(disabled, morning_disabled):
 
         hbox:
             yalign 0.7
+            xsize 900
             text "{size=16}Warning: high values will increase the chance of an event to occur on every time advance in the game." style "warning_text"
 
         hbox:
@@ -37,9 +38,10 @@ screen crisis_chance_setting(disabled, morning_disabled):
             xalign 0.5
             xanchor 0.5
             spacing 50
-            textbutton "Cancel" action [Return] style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 xysize (155,60)
-            textbutton "Save" action [SetVariable("crisis_base_chance", int(round(current_crisis_base_chance))),SetVariable("morning_crisis_base_chance",int(round(current_morning_crisis_base_chance))), Return] style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 xysize (155,60)
+            textbutton "Cancel" action [Return] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (155,60)
+            textbutton "Save" action [SetVariable("crisis_base_chance", int(round(current_crisis_base_chance))),SetVariable("morning_crisis_base_chance",int(round(current_morning_crisis_base_chance))), Return] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (155,60)
 
 style warning_text:
     color "B22222"
     size 16
+    xalign 0.5

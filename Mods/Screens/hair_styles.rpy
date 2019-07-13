@@ -45,6 +45,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                 hover_background "#3a65c1"
                             text_align(0.5,0.5)
                             text_anchor(0.5,0.5)
+                            tooltip ""
                             xysize (220, 60)
                             action [SetScreenVariable("catagory_selected",catagory),
                                 SetScreenVariable("selected_colour", "colour")]
@@ -79,6 +80,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                             text_style "textbutton_text_style"
                                             background "#1a45a1"
                                             hover_background "#3a65c1"
+                                            tooltip ""
                                             xfill True
                                             sensitive True
                                             action [
@@ -110,6 +112,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                             background "#1a45a1"
                                             hover_background "#3a65c1"
                                         sensitive True
+                                        tooltip ""
                                         action NullAction()
 
                                     frame:
@@ -124,6 +127,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                         background "#1a45a1"
                                         hover_background "#3a65c1"
                                         sensitive True
+                                        tooltip ""
                                         xoffset 20
                                         action [
                                             SetField(selected_hair_style, "colour", [current_r, current_g, current_b, current_a]),
@@ -194,6 +198,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                             background "#4f7ad6"
                                         else:
                                             background "#1a45a1"
+                                        hover_background "#3a65c1"
                                         text "Normal" style "menu_text_style" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
                                         xysize (120, 40)
                                         action SetScreenVariable("current_a", 1.0)
@@ -203,6 +208,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                             background "#4f7ad6"
                                         else:
                                             background "#1a45a1"
+                                        hover_background "#3a65c1"
                                         text "Sheer" style "menu_text_style" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
                                         xysize (120, 40)
                                         action SetScreenVariable("current_a", 0.95)
@@ -212,6 +218,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                             background "#4f7ad6"
                                         else:
                                             background "#1a45a1"
+                                        hover_background "#3a65c1"
                                         text "Translucent" style "menu_text_style" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
                                         xysize (120, 40)
                                         action SetScreenVariable("current_a", 0.8)
@@ -228,6 +235,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                                     background Color(rgb=(hair_colour[1][0], hair_colour[1][1], hair_colour[1][2]))
                                                     xysize (40,40)
                                                     sensitive True
+                                                    tooltip ""
                                                     action [
                                                         SetScreenVariable("selected_hair_colour_name", hair_colour[0]),
                                                         SetScreenVariable("selected_hair_colour", hair_colour[1]),
@@ -243,29 +251,28 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                                     # We use a fixed pallette of hair colours
         vbox:
             spacing 15
+            xalign 0.5
             frame:
                 xysize (440, 500)
                 background "#aaaaaa"
                 padding (20,20)
                 vbox:
-                    spacing 15
-                    text "Current Hair Style" style "textbutton_text_style"
+                    frame:
+                        background "#000080"
+                        xsize 400                       
+                        text "Current Hair Style" xalign 0.5 style "textbutton_text_style"
                     frame:
                         xfill True
                         yfill True
                         background "#888888"
                         vbox:
                             spacing 5 #TODO: Add a viewport here too.
-                            button:
+                            frame:
                                 background Color(rgb = (selected_hair_colour[0], selected_hair_colour[1], selected_hair_colour[2]))
-                                xysize (380, 40)
-                                action NullAction()
+                                xysize (390, 40)
                                 xalign 0.5
                                 yalign 0.0
                                 text selected_hair_style.name xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 style "outfit_style"
-
-
-
 
             frame:
                 background "#aaaaaa"
@@ -278,5 +285,5 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                         xalign 0.5
                         xanchor 0.5
                         spacing 50
-                        textbutton "Save Haircut" action [Return] style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 xysize (155,80)
-                        textbutton "Abandon Design" action [SetField(person, "hair_colour", old_hair_colour), SetField(person, "hair_style", old_hair_style), Return] style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 xysize (185,80)
+                        textbutton "Save Haircut" action [Return] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (155,80)
+                        textbutton "Abandon Design" action [SetField(person, "hair_colour", old_hair_colour), SetField(person, "hair_style", old_hair_style), Return] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (185,80)

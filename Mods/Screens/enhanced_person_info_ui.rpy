@@ -108,24 +108,33 @@ init 2:
                     textbutton "Age: [person.age]":
                         ysize 28
                         text_style "menu_text_style"
+                        tooltip "The age of the girl."
                         action NullAction()
                         sensitive True
 
                     textbutton "Height: " + height_to_string(person.height):
                         ysize 28
                         text_style "menu_text_style"
-                        tooltip "The length of the person in feet and inches."
+                        if use_imperial_system:
+                            tooltip "The length of the girl in feet and inches."
+                        else:
+                            tooltip "The length of the girl in centimeters."
                         action NullAction()
                         sensitive True
 
                     textbutton "Cup size: [person.tits]":
                         ysize 28
                         text_style "menu_text_style"
+                        tooltip "The size of the breasts."
                         action NullAction()
                         sensitive True
 
                     textbutton "Weight: " + get_person_weight_string(person):
                         ysize 28
                         text_style "menu_text_style"
+                        if use_imperial_system:
+                            tooltip "The weight of the girl in pounds.\nDetermines the body type."
+                        else:
+                            tooltip "The weight of the girl in kilograms\nDetermines the body type."
                         action NullAction()
                         sensitive True
