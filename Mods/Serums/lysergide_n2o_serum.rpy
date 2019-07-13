@@ -19,7 +19,7 @@ init -1 python:
 # any label that starts with serum_mod is added to the serum mod list
 label serum_mod_lysergide_n2o_serum_trait(stack):
     python:
-        lysergide_n2o_serum_trait = SerumTraitMod(name = "Lysergide N2O Serum",
+        lysergide_n2o_serum_trait = SerumTraitMod(name = "Lysergide N2O Trait",
             desc = "Increases target subjects suggestibility, using LSD and Nitrous Oxide components to change the higher brainfunction to become more receptable to suggestions.",
             positive_slug = "+$25 Value, increases suggestibility while active",
             negative_slug = "+200 Serum Research",

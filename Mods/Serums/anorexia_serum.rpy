@@ -7,7 +7,7 @@ init -1 python:
 # any label that starts with serum_mod is added to the serum mod list
 label serum_mod_anorexia_serum_trait(stack):
     python:
-        anorexia_serum_trait = SerumTraitMod(name = "Anorexia Serum",
+        anorexia_serum_trait = SerumTraitMod(name = "Anorexia Trait",
             desc = "Decrease target subject body mass, using peptide YY3-36 as a serum component that acts on the hypothalamic feeding centers to inhibit hunger and calorie intake.",
             positive_slug = "-$15 Value, 20% Chance/Turn to reduce body mass by 200 grams",
             negative_slug = "+125 Serum Research",
