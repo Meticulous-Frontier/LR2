@@ -47,7 +47,7 @@ label give_wardrobe_label():
         if person_choice == "Back":
             return # Where to go if you hit "Back".
         else:
-            call give_wardrobe_input(person_choice)# What to do if "Back" was not the choice taken.
+            call give_wardrobe_input(person_choice) from _call_give_wardrobe_input# What to do if "Back" was not the choice taken.
 
 label give_wardrobe_input(person = the_person): # when called from action default to the person
     $ the_person = person

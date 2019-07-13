@@ -93,7 +93,7 @@ label fuck_person_enhanced(the_person, private=True, start_position = None, star
         $ start_round = 0
         if skip_intro:
             $ start_round = 1
-        call sex_description(the_person, position_choice, object_choice, start_round, private=private, girl_in_charge = girl_in_charge)
+        call sex_description(the_person, position_choice, object_choice, start_round, private=private, girl_in_charge = girl_in_charge) from _call_sex_description_fuck_person_enhanced
 
     else: #The position choice was "Leave" and we want to add some extra stuff.
         if the_person.effective_sluttiness() > 60:
@@ -108,7 +108,7 @@ label fuck_person_enhanced(the_person, private=True, start_position = None, star
                         menu:
                            "Keep going.":
                               $ the_person.change_obedience(2)
-                              call fuck_person_enhanced(the_person, private, start_position, start_object, skip_intro = True, girl_in_charge = girl_in_charge, hide_leave = True) #Redo all of this but don't let them leave. Start position and start_object will normally be None
+                              call fuck_person_enhanced(the_person, private, start_position, start_object, skip_intro = True, girl_in_charge = girl_in_charge, hide_leave = True) from _call_fuck_person_enhanced #Redo all of this but don't let them leave. Start position and start_object will normally be None
 
                            "Leave.":
                               $ the_person.call_dialogue("sex_end_early")
@@ -116,7 +116,7 @@ label fuck_person_enhanced(the_person, private=True, start_position = None, star
                         $ the_person.call_dialogue("sex_end_early")
 
                   "See where this is going":
-                     call fuck_person_enhanced(the_person, private, start_position, start_object, skip_intro = True, girl_in_charge = True)
+                     call fuck_person_enhanced(the_person, private, start_position, start_object, skip_intro = True, girl_in_charge = True) from _call_fuck_person_enhanced_1
 
             elif the_person.arousal > 80:
                 # They're close to their orgasm and beg you to help them finish.
@@ -124,7 +124,7 @@ label fuck_person_enhanced(the_person, private=True, start_position = None, star
                 menu:
                     "Keep going.":
                         $ the_person.change_obedience(2)
-                        call fuck_person_enhanced(the_person, private, start_position, start_object, skip_intro = True, girl_in_charge = girl_in_charge, hide_leave = True) #Redo all of this but don't let them leave. Start position and start_object will normally be None
+                        call fuck_person_enhanced(the_person, private, start_position, start_object, skip_intro = True, girl_in_charge = girl_in_charge, hide_leave = True) from _call_fuck_person_enhanced_2 #Redo all of this but don't let them leave. Start position and start_object will normally be None
 
                     "Leave.":
                         $ the_person.call_dialogue("sex_end_early")
@@ -155,9 +155,9 @@ label sex_description_enhanced(the_person, the_position, the_object, round, priv
         if the_person.effective_sluttiness() >= the_position.slut_requirement: #The person is slutty enough to want to have sex like this.
             $ the_person.call_dialogue("sex_accept")
             if the_position.skill_tag == "Vaginal": #She may demand you put on a condom.
-                call condom_ask(the_person)
+                call condom_ask(the_person) from _call_condom_ask_sex_description_enhanced_1
                 if not _return:
-                    call fuck_person_enhanced(the_person, private, girl_in_charge = girl_in_charge)
+                    call fuck_person_enhanced(the_person, private, girl_in_charge = girl_in_charge) from _call_fuck_person_sex_description_enhanced_1
                     return
 
             $ the_position.call_intro(the_person, mc.location, the_object, round)
@@ -168,9 +168,9 @@ label sex_description_enhanced(the_person, the_position, the_object, round, priv
                 #You can use obedience to do it.
                 $ the_person.call_dialogue("sex_obedience_accept")
                 if the_position.skill_tag == "Vaginal":
-                    call condom_ask(the_person)
+                    call condom_ask(the_person) from _call_condom_ask_sex_description_enhanced_2
                     if not _return:
-                        call fuck_person_enhanced(the_person, private, girl_in_charge = girl_in_charge)
+                        call fuck_person_enhanced(the_person, private, girl_in_charge = girl_in_charge) from _call_fuck_person_sex_description_enhanced_2
                         return
                 $ the_position.redraw_scene(the_person)
                 $ change_amount = the_position.slut_requirement - the_person.sluttiness
@@ -186,7 +186,7 @@ label sex_description_enhanced(the_person, the_position, the_object, round, priv
                     return #Don't do anything else, just return.
                 else:
                     $ the_person.call_dialogue("sex_gentle_reject")
-                    call fuck_person_enhanced(the_person, private, girl_in_charge = girl_in_charge)#Gives you a chance to fuck them some other way, but this path is ended by the return right after you finish having sex like that.
+                    call fuck_person_enhanced(the_person, private, girl_in_charge = girl_in_charge) from _call_fuck_person_sex_description_enhanced_3 #Gives you a chance to fuck them some other way, but this path is ended by the return right after you finish having sex like that.
                     return
    
     if round > 1 or round == 0:
@@ -304,14 +304,14 @@ label sex_description_enhanced(the_person, the_position, the_object, round, priv
         # TODO: have you finishing bump her arousal up so you might both cum at once.
 
     elif position_choice == "Strip":
-        call strip_menu(the_person)
+        call strip_menu(the_person) from _call_strip_menu_sex_description_enhanced_1
         $ the_position.redraw_scene(the_person)
-        call sex_description_enhanced(the_person, the_position, the_object, round = 1, private = private, girl_in_charge = girl_in_charge)
+        call sex_description_enhanced(the_person, the_position, the_object, round = 1, private = private, girl_in_charge = girl_in_charge) from _call_sex_description_enhanced_1
 
     elif position_choice == "Pull Out": #Also how you leave if you don't want to fuck till you cum.
         $ the_position.current_modifier = None
         $ mc.condom = False
-        call fuck_person_enhanced(the_person, private, girl_in_charge = girl_in_charge)
+        call fuck_person_enhanced(the_person, private, girl_in_charge = girl_in_charge) from _call_fuck_person_sex_description_enhanced_4
 
     else:
         if not position_choice == the_position: #We are changing to a new position.
@@ -337,8 +337,8 @@ label sex_description_enhanced(the_person, the_position, the_object, round, priv
                     else:
                         $ the_position.call_transition(position_choice, the_person, mc.location, the_object, round)
                         $ the_person.call_dialogue("sex_gentle_reject")
-                        call sex_description_enhanced(the_person, the_position, the_object, round = 1, private = private, girl_in_charge = girl_in_charge)
+                        call sex_description_enhanced(the_person, the_position, the_object, round = 1, private = private, girl_in_charge = girl_in_charge) from _call_sex_description_enhanced_2
                         $ position_choice = the_position
 
-        call sex_description_enhanced(the_person, position_choice, the_object, round+1, private = private, girl_in_charge = girl_in_charge)
+        call sex_description_enhanced(the_person, position_choice, the_object, round+1, private = private, girl_in_charge = girl_in_charge) from _call_sex_description_enhanced_3
     return

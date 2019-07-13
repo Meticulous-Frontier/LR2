@@ -173,7 +173,7 @@ label investigation_employee_label():
         if person_choice == "Back":
             return # Where to go if you hit "Back".
         else:
-            call investigate_person(person_choice)# What to do if "Back" was not the choice taken.
+            call investigate_person(person_choice) from _call_investigate_person# What to do if "Back" was not the choice taken.
 
 label investigate_person(person_choice = the_person): # Need to default to the_person for return calls.
     $ the_person = person_choice

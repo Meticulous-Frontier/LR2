@@ -71,7 +71,7 @@ label SB_fetish_vaginal_family_threesome_label():
     "[the_person_two.possessive_title] sighs. She gives in to her arousal and need."
     the_person_two.char "Okay... What do you want me to do?"
 
-    call SB_threesome_description(the_person_two, the_person_one, SB_threesome_sixty_nine, make_bed(), 0, private = True, girl_in_charge = False)
+    call SB_threesome_description(the_person_two, the_person_one, SB_threesome_sixty_nine, make_bed(), 0, private = True, girl_in_charge = False) from _call_SB_threesome_description_SB_fetish_vaginal_family_threesome
     "Wow, you just had sex with [the_person_one.possessive_title] and [the_person_two.possessive_title]! You can't believe how lucky you are."
     "Eventually, the girls get up."
     $ SB_draw_two_person_scene(person_one = the_person_one, person_two = the_person_two, one_pos_x = 0.7)

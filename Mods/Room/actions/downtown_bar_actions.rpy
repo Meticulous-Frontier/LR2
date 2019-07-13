@@ -35,7 +35,7 @@ label downtown_bar_drink_label():
    
    if time_of_day is not 4:
       "But you spent a couple of hours drinking it. Game balance."  
-      call advance_time
+      call advance_time from _call_advance_time_downtown_bar_actions
    else:
       "Wait, no. It's night time so you ought to pay back those $5, because of reasons."
       $ mc.business.pay(-5)  
