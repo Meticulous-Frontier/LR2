@@ -1,8 +1,8 @@
-# Anorexia Serum by Tristimdorion
+# Metabolizer Serum Trait by Tristimdorion
 
 init -1 python:
     def anorexia_serum_on_turn(person, add_to_log):
-        return person.change_weight(amount = -.2, chance = 20)       
+        return person.change_weight(amount = -.2, chance = 20)
 
 # any label that starts with serum_mod is added to the serum mod list
 label serum_mod_anorexia_serum_trait(stack):

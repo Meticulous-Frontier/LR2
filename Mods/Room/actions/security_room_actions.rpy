@@ -120,7 +120,8 @@ label m_division_observation_label():
     if len(m_division.people) < 1:
         "CCTV" "No one is around and nothing of interested seems to be going on."
 
-    $ randint = renpy.random.randint(1, 5)
+    python:
+        randint = renpy.random.randint(1, 5)
 
     if randint == 1:
         "Var 1"
