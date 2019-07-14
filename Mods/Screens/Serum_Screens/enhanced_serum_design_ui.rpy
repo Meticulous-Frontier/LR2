@@ -110,7 +110,7 @@ init 2:
                             vbox:
 
 
-                                for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True): # Sort traits by exclude tags (So all production traits are grouped, for example), then by tier (so the highest tier production tag ends up at the top
+                                for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name, reverse = False): # Sort traits by exclude tags (So all production traits are grouped, for example), then by name since tier does not matter.
                                     if trait not in starting_serum.traits and trait.researched and "Production" not in trait.exclude_tags:
                                         $ trait_tags = ""
                                         if trait.exclude_tags:
