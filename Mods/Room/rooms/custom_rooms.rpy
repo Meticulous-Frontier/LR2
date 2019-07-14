@@ -102,14 +102,14 @@ label store_p_division_basement():
         p_division_basement_objects = [
             make_table()
         ]
-        p_division_basement = Room("machinery", "Machinery Room", [p_division], office_background, p_division_basement_objects, [], [], False, [11,5], None, True)
-    
-    $ update_custom_rooms(p_division_basement) 
+        p_division_basement = Room("machinery", "Machinery Room", [p_division], office_background, p_division_basement_objects, [], [machinery_room_action], False, [11,5], None, True)
+
+    $ update_custom_rooms(p_division_basement)
     return
-    
+
 label store_rd_division_basement():
     # Research Division Basement - Biotechnology Lab | biotech_room_actions.rpy
-    
+
     python:
         rd_division_basement_objects = [
             make_chair(),

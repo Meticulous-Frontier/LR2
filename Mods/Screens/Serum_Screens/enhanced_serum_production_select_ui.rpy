@@ -13,10 +13,15 @@ init 2:
     screen serum_production_select_ui:
         add "Science_Menu_Background.png"
         default line_selected = None
-        default production_remaining = 100
 
         python:
-            production_remaining = 100
+            if "machinery_room_overload" in globals(): # Should not cause issues if not present.
+                production_remaining = machinery_room_overload
+                production_max = machinery_room_overload
+            else:
+                production_remaining = 100
+                production_max = production_remaining
+                
             for key in mc.business.serum_production_array:
                 production_remaining -= mc.business.serum_production_array[key][1] # How much of the 100% capability are we using?
         hbox:
