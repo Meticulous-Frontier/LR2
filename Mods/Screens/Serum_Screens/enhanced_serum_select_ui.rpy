@@ -1,3 +1,22 @@
+init -1 python:
+        def get_trait_side_effect_text(trait):
+            trait_side_effects = trait.get_effective_side_effect_chance()
+
+            if trait_side_effects >= 60: # Red (Color code the side effect risk for quicker identification)
+                return "{color=#cd5c5c}" + str(trait_side_effects) + "{/color}"
+            elif trait_side_effects >= 20: # Yellow
+                return "{color=#eee000}" + str(trait_side_effects) + "{/color}"
+            else: # Green
+                return "{color=#98fb98}" + str(trait_side_effects) + "{/color}"
+
+        def get_trait_mastery_text(trait):
+            if trait.mastery_level <= 10: # Red
+                return "{color=#cd5c5c}" + str(trait.mastery_level) + "{/color}"
+            elif trait.mastery_level <= 50: # Yellow
+                return "{color=#eee000}" + str(trait.mastery_level) + "{/color}"
+            else: # Green
+                return "{color=#98fb98}" + str(trait.mastery_level) + "{/color}"
+
 init 2:
     screen serum_select_ui: #How you select serum and trait research
         add "Science_Menu_Background.png"
@@ -11,7 +30,9 @@ init 2:
                     background "#000080"
                     xsize 1190
                     if not mc.business.active_research_design == None:
-                        text "Current Research: [mc.business.active_research_design.name] ([mc.business.active_research_design.current_research]/[mc.business.active_research_design.research_needed])" style "serum_text_style"
+                        $ trait_side_effects_text = get_trait_side_effect_text(mc.business.active_research_design)
+                        $ trait_mastery_text = get_trait_mastery_text(mc.business.active_research_design)
+                        text "Current Research: [mc.business.active_research_design.name] ([mc.business.active_research_design.current_research]/[mc.business.active_research_design.research_needed])" + "{size=14} Mastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %" style "serum_text_style"
                     else:
                         text "Current Research: None!" style "serum_text_style"
 
@@ -79,28 +100,10 @@ init 2:
 
                                         $ trait_title = trait.name + " " + "(" +str(trait.current_research)+"/"+ str(trait.research_needed) + ")" + trait_tags
 
-                                        $ trait_side_effects = str(trait.get_effective_side_effect_chance()) # Put this section into a function?
+                                        $ trait_side_effects_text = get_trait_side_effect_text(trait)
+                                        $ trait_mastery_text = get_trait_mastery_text(trait)
 
-                                        if trait.get_effective_side_effect_chance() >= 60: # Red (Color code the side effect risk for quicker identification)
-                                            $ trait_side_effects_text = "{color=#cd5c5c}[trait_side_effects]{/color}"
-
-                                        elif trait.get_effective_side_effect_chance() >= 20: # Yellow
-                                            $ trait_side_effects_text = "{color=#eee000}[trait_side_effects]{/color}"
-
-                                        else: # Green
-                                            $ trait_side_effects_text = "{color=#98fb98}[trait_side_effects]{/color}"
-
-
-                                        $ trait_mastery_level = str(trait.mastery_level)
-
-                                        if trait.mastery_level <= 10: # Red
-                                            $ trait_mastery_text = "{color=#cd5c5c}[trait_mastery_level]{/color}"
-                                        elif trait.mastery_level <= 50: # Yellow
-                                            $ trait_mastery_text = "{color=#eee000}[trait_mastery_level]{/color}"
-                                        else: # Green
-                                            $ trait_mastery_text = "{color=#98fb98}[trait_mastery_level]{/color}"
-
-                                        textbutton "[trait_title]" + "\n Mastery Level: " + trait_mastery_text + " | " + "Side Effect Chance: " + trait_side_effects_text + " %":
+                                        textbutton "[trait_title]\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
                                             text_xalign 0.5
                                             text_text_align 0.5
 
