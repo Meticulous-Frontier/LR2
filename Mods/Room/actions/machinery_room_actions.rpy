@@ -8,6 +8,8 @@ init 2 python:
 
     def machinery_room_construct_production_line_requirement():
         production_lines_cost = mc.business.production_lines * 5000
+        if time_of_day is 4:
+            return "Too late..."
         if not production_line_addition_2_policy.is_owned():
             return "Requires: [production_line_addition_2_policy.name]"
 
@@ -19,6 +21,8 @@ init 2 python:
     machinery_room_actions.append(machinery_room_construct_production_line_action)
 
     def machinery_room_overload_requirement():
+        if time_of_day is 4:
+            return "Too late..."
 
         if "machinery_room_overload" not in globals():
             overload_cost = 10000
