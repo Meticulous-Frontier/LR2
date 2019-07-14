@@ -246,8 +246,6 @@ label serum_mod_starbuck_traits(stack):
         #     is_side_effect = a_bool)
             )
 
-        pher_ther.initialize()
-
         sub_ther = SerumTraitMod(name = "Submission Therapy",
                 desc = "Introduces substances that naturally incline females to obey males, found in many mammals. Reduces feeling in the skin, including erogenous zones.",
                 positive_slug = "+3 Obedience/Turn, +$20 Value",
@@ -269,8 +267,6 @@ label serum_mod_starbuck_traits(stack):
         #     exclude_tags = [list_of_other_tags],
         #     is_side_effect = a_bool)
             )
-
-        sub_ther.initialize()
 
         ovulation_ther = SerumTraitMod(name = "Hormonal Ovulation",
                 desc = "Reproduces hormones naturally occuring during ovulation to make females more receptive to sex. Increases sluttiness over time.",
@@ -294,8 +290,6 @@ label serum_mod_starbuck_traits(stack):
         #     is_side_effect = a_bool)
             )
 
-        ovulation_ther.initialize()
-
         fetish_basic_ther = SerumTraitMod(name = "Initial Fetish Therapy",
                 desc = "Over time, increases general positivity towards basic sexual acts.",
                 positive_slug = "Slowly increases sexual opinions, Slowly increases Foreplay skill, +$5 Value",
@@ -317,8 +311,6 @@ label serum_mod_starbuck_traits(stack):
         #     exclude_tags = [list_of_other_tags],
         #     is_side_effect = a_bool)
             )
-
-        fetish_basic_ther.initialize()
 
         fetish_exhibition_ther = SerumTraitMod(name = "Exhibitionism Fetish Therapy",
                 desc = "Over time, increases the need to behave in an extravagant way in order to attract attention.",
@@ -342,8 +334,6 @@ label serum_mod_starbuck_traits(stack):
         #     is_side_effect = a_bool)
             )
 
-        fetish_exhibition_ther.initialize()
-
         fetish_oral_ther = SerumTraitMod(name = "Oral Fetish Therapy",
                 desc = "Over time, increases general positivity towards Oral Sex.",
                 positive_slug = "Slowly increases oral sexual opinions, Slowly increases Oral skill, +$5 Value",
@@ -365,8 +355,6 @@ label serum_mod_starbuck_traits(stack):
         #     exclude_tags = [list_of_other_tags],
         #     is_side_effect = a_bool)
             )
-
-        fetish_oral_ther.initialize()
 
         fetish_vaginal_ther = SerumTraitMod(name = "Vaginal Fetish Therapy",
                 desc = "Over time, increases general positivity towards Vaginal Sex.",
@@ -390,8 +378,6 @@ label serum_mod_starbuck_traits(stack):
         #     is_side_effect = a_bool)
             )
 
-        fetish_vaginal_ther.initialize()
-
         fetish_anal_ther = SerumTraitMod(name = "Anal Fetish Therapy",
                 desc = "Over time, increases general positivity towards Anal Sex.",
                 positive_slug = "Slowly increases Anal sexual opinions, Slowly increases Anal skill, +$5 Value",
@@ -413,8 +399,6 @@ label serum_mod_starbuck_traits(stack):
         #     exclude_tags = [list_of_other_tags],
         #     is_side_effect = a_bool)
             )
-
-        fetish_anal_ther.initialize()
 
         fetish_cum_ther = SerumTraitMod(name = "Cum Fetish Therapy",
                 desc = "Over time, increases general positivity towards Cum.",
@@ -438,8 +422,6 @@ label serum_mod_starbuck_traits(stack):
         #     is_side_effect = a_bool)
             )
 
-        fetish_cum_ther.initialize()
-
         constant_stimulation_ther = SerumTraitMod(name = "Constant Stimulation",
                 desc = "Slowly increases sluttiness. Strong wills can resist it, but it increases effect based on suggestability.",
                 positive_slug = "Slowly increases sluttiness based on suggestability, +$10 Value",
@@ -461,8 +443,6 @@ label serum_mod_starbuck_traits(stack):
         #     exclude_tags = [list_of_other_tags],
         #     is_side_effect = a_bool)
             )
-
-        constant_stimulation_ther.initialize()
 
         dopamine_therapy_ther = SerumTraitMod(name = "Dopamine Therapy",
                 desc = "Slowly increases happiness. Increases effect based on suggestability.",
@@ -486,8 +466,6 @@ label serum_mod_starbuck_traits(stack):
         #     is_side_effect = a_bool)
             )
 
-        dopamine_therapy_ther.initialize()
-
         behavior_adjustment_ther = SerumTraitMod(name = "Behavior Adjustment",
                 desc = "Slowly increases obedience. Increases effect based on suggestability.",
                 positive_slug = "Slowly increases obedience based on suggestability, +$10 Value",
@@ -509,8 +487,6 @@ label serum_mod_starbuck_traits(stack):
         #     exclude_tags = [list_of_other_tags],
         #     is_side_effect = a_bool)
             )
-
-        behavior_adjustment_ther.initialize()
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)

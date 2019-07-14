@@ -20,8 +20,5 @@ label serum_mod_pigment_serum_trait(stack):
             tier = 1,
             research_needed = 500)
 
-        # enable serum and append to mod_list
-        pigment_serum_trait.initialize()
-
         execute_hijack_call(stack)
     return

@@ -32,9 +32,6 @@ label serum_mod_lysergide_n2o_serum_trait(stack):
             tier = 2,
             research_needed = 500)
 
-        # enable serum and append to mod_list
-        lysergide_n2o_serum_trait.initialize()
-
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return

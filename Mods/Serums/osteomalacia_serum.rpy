@@ -19,9 +19,6 @@ label serum_mod_osteomalacia_serum_trait(stack):
             tier = 1,
             research_needed = 500)
 
-        # enable serum and append to mod_list
-        osteomalacia_serum_trait.initialize()
-
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return

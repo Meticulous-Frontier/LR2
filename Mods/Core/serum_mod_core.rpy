@@ -1,7 +1,7 @@
 # SERUM MOD CORE by Tristimdorion
 # Its used for adding new SerumTraits to the game
 # Create a SerumTraitMod class, it has the same parameters as the VREN Action class.
-# SerumTraitMod is added to save games when not present, the matching is based on the name property, so make sure it's unique (and don't change it between releases)
+# SerumTraitMod is added to save games when not present, the matching is based on the name property, so make sure it's unique.
 
 ### TEMPLATE ###
 # init -1 python:
@@ -23,9 +23,6 @@
 #             tier = 1,
 #             research_needed = 500)
 
-#         # enable serum and append to mod_list
-#         anorexia_serum_trait.initialize()
-
 #         # continue on the hijack stack if needed
 #         execute_hijack_call(stack)
 #     return
@@ -34,7 +31,7 @@ init 5 python:
     add_label_hijack("normal_start", "activate_serum_mod_core")
     add_label_hijack("after_load", "update_serum_mod_core")
 
-init 2 python:
+init -1 python:
     class SerumTraitMod(SerumTrait):
         # store instances of mod
         _instances = set()
@@ -50,41 +47,7 @@ init 2 python:
                 exclude_tags, is_side_effect)
 
             # store the instance in class static    
-            self._instances.add(self)
-
-
-        def __cmp__(self,other): 
-            if isinstance(other, SerumTrait):
-                if self.name == other.name:
-                    return 0
-
-            if self.__hash__() < other.__hash__():
-                return -1
-            else:
-                return 1
-
-        def __hash__(self):
-            return hash(self.name)
-
-
-        # check if SerumMod class is already in the game append if needed and update serum_mod_list / list_of_traits list
-        def initialize(self):
-            for serum_mod in self._instances:
-                if not serum_mod in serum_mod_list:
-                    serum_mod_list.append(self)
-                    self.toggle_enabled()
-
-            remove_list = []
-            for serum_mod in serum_mod_list:
-                if serum_mod not in self._instances:
-                    remove_list.append(serum_mod)
-
-            # remove serum mods not in instance list
-            for serum_mod in remove_list:
-                if serum_mod in list_of_traits:
-                    if serum_mod in list_of_traits:
-                        list_of_traits.remove(serum_mod)
-                    serum_mod_list.remove(serum_mod)
+            SerumTraitMod._instances.add(self)
 
         def toggle_enabled(self):
             self.enabled = not self.enabled
@@ -94,6 +57,26 @@ init 2 python:
             else:
                 if self in list_of_traits:
                     list_of_traits.remove(self)
+
+init 2 python:
+    def initialize_serum_mod_traits():
+        # check if SerumMod class is already in the game append if needed and update serum_mod_list / list_of_traits list
+        for serum_mod in SerumTraitMod._instances:
+            if not serum_mod in serum_mod_list:
+                serum_mod_list.append(serum_mod)
+                serum_mod.toggle_enabled()
+
+        remove_list = []
+        for serum_mod in serum_mod_list:
+            if serum_mod not in SerumTraitMod._instances:
+                remove_list.append(serum_mod)
+
+        # remove serum mods not in instance list
+        for serum_mod in remove_list:
+            if serum_mod in list_of_traits:
+                list_of_traits.remove(serum_mod)
+            serum_mod_list.remove(serum_mod)
+        return
 
     def serum_mod_settings_requirement():
         return True
@@ -118,6 +101,9 @@ label activate_serum_mod_core(stack):
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
+
+    # execute after stack has run
+    $ initialize_serum_mod_traits()
     return
 
 label update_serum_mod_core(stack):
@@ -143,6 +129,9 @@ label update_serum_mod_core(stack):
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
+
+    # execute after stack has run
+    $ initialize_serum_mod_traits()
     return
 
 label show_serum_mod_settings:
