@@ -35,8 +35,11 @@ label downtown_bar_drink_label():
 
     if not mc.location.people: # No one is in the bar so we create a person.
 
-        $ new_person = create_random_person()
-        $ mc.location.add_person(new_person)
+        python:
+
+            new_person = create_random_person()
+            mc.location.add_person(new_person)
+
         "The [downtown_bar.formalName] is a desolate place to be..."
 
         $ new_person.draw_person()
@@ -78,7 +81,7 @@ label downtown_bar_drink_label():
 
         mc.name "Stay healthy and hydrated, [the_person.title]."
 
-        if time_of_day is  4:
+        if time_of_day is 4:
             "After a night of drinks you decide to head back home to bed."
             $ mc.change_location(bedroom)
         call advance_time from downtown_bar_drink_1
