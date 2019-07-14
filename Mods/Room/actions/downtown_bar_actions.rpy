@@ -37,7 +37,7 @@ label downtown_bar_drink_label():
 
         $ new_person = create_random_person()
         $ mc.location.add_person(new_person)
-        "The [downtown_bar.formalName] is a desolate and lonely place to be..."
+        "The [downtown_bar.formalName] is a desolate place to be..."
 
         $ new_person.draw_person()
         "Having seated yourself by the counter with no bartender in sight you hear the entry door open up as a woman walks in."
