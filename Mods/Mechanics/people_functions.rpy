@@ -29,5 +29,13 @@ init -1 python:
                     known_people.append(person)
         return known_people
 
+    def unknown_people_at_location(location, excluded_people = []):
+        unknown_people = []
+        for person in location.people:
+            if person not in excluded_people:
+                if person.mc_title == "Stranger":
+                    unknown_people.append(person)
+        return unknown_people
+
     def people_in_mc_home():
         return hall.people + bedroom.people + lily_bedroom.people + mom_bedroom.people + kitchen.people
