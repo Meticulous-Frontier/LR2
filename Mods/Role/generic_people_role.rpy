@@ -379,10 +379,31 @@ label schedule_night(person):
 # Follower Labels
 label start_follow(person):
     "You tell [person.title] to follow you around."
-    $ list_of_followers.append(the_person)
+
+    #if the_person.get_opinion_score("being submissive"):
+
+    $ the_person.add_follower()
+
+    $ the_person.personality.get_dialogue(the_person, "seduction_accept_crowded")
+
     return
 
 label stop_follow(person):
+    python:
+        if the_person.schedule[time_of_day] is the_person.home:
+            schedule_destination = "my room."
+        else:
+            schedule_destination = "somewhere else." # If their destination is not their home it tends to be None so can't reliably use destination.formalName
+
     "You tell [person.title] to stop following you around."
-    $ list_of_followers.remove(the_person)
+
+    $ the_person.remove_follower()
+
+    $ the_person.draw_person(position = "walking_away")
+
+    $ the_person.run_move(mc.location) # This will trigger stat changes based on clothing, but shouldn't be problematic although it can be exploited.
+
+    the_person.title "Okay [the_person.mc_title], I'll head over to [schedule_destination]"
+
+
     return
