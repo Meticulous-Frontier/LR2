@@ -144,6 +144,9 @@ init 2 python:
                 else:
                     if not action_mod in [c[0] for c in crisis_list]:
                         crisis_list.append([action_mod, action_mod.crisis_weight])
+            # Temporary code to make save games compatible (remove on next version)
+            if action_mod.name == "Generic People Role":
+                remove_list.append(action_mod)
 
         # remove not working stuff
         for action_mod in remove_list:
@@ -219,49 +222,14 @@ label update_action_mod_core(stack):
     return
 
 label show_action_mod_settings:
-    python:
-        global active_action_mod_category
-        tuple_list = []
-        for mod in action_mod_list:
-            has_category = False
-            for cat in tuple_list:
-                if mod.category == cat[1].category:
-                    has_category = True
-
-            if not has_category:
-                tuple_string = "Category: " + mod.category
-                tuple_list.append([tuple_string, mod])
-
-        tuple_list = sorted(tuple_list, key=lambda x: x[0])
-        tuple_list.append(["Back","Back"])
-        category_choice = renpy.display_menu(tuple_list, True, "Choice")
-
-        if category_choice == "Back":
-            renpy.return_statement()
-        else:
-            active_action_mod_category = category_choice.category
-            renpy.jump("change_mod_category")
+    hide screen main_ui
+    hide screen phone_hud_ui
+    hide screen business_ui
+    call screen mod_configuration_ui
+    show screen phone_hud_ui
+    show screen business_ui
+    show screen main_ui
     return
-
-label change_mod_category:
-    python:
-        tuple_list = []
-        for action_mod in action_mod_list:
-            if (not hasattr(action_mod, "allow_disable") or action_mod.allow_disable) and action_mod.category == active_action_mod_category:
-                tuple_string = action_mod.name + "\n Active: " + str(action_mod.enabled) + " (tooltip)" + action_mod.menu_tooltip
-                tuple_list.append([tuple_string, action_mod])
-
-        tuple_list = sorted(tuple_list, key=lambda x: x[0])
-        tuple_list.append(["Back","Back"])
-        action_mod_choice = renpy.display_menu(tuple_list, True, "Choice")
-
-        if action_mod_choice == "Back":
-            renpy.jump("show_action_mod_settings")
-        else:
-            action_mod_choice.toggle_enabled()
-            renpy.jump("change_mod_category")
-    return
-
 
 label show_action_mod_configuration:
     python:

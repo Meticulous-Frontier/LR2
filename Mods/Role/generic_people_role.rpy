@@ -106,7 +106,7 @@ init 2 python:
                     return True
         return False
 
-    # ActionMod Requirements
+    # for backward compatibility remove with next version
     def generic_people_role_event_requirement():
         return True
 
@@ -142,10 +142,6 @@ init 2 python:
     # A role added to all people in the game to enable actions through the "Special Actions Menu..."
     generic_people_role = Role("Generic", [schedule_person_action, start_follow_action, stop_follow_action, hire_person_action, rename_person_action, spend_the_night_action, pay_to_strip_action], hidden = True) # This role is meant to not display in the person_ui_hud
 
-    # NOTE: This extension of "any person" can be toggled from the Action Mod Core menu under "Misc", listed as Generic People Actions
-    generic_people_role_event_action = ActionMod("Generic People Role", generic_people_role_event_requirement, "generic_people_role_dummy_label", menu_tooltip = "Generic People Role Configuration Settings", category = "Misc", allow_disable = False, options_menu = "generic_people_role_options_menu")
-
-
 label initialize_generic_people_role_configuration_values:
     $ generic_people_role_change_schedule = True
     $ generic_people_role_follow = True
@@ -169,26 +165,6 @@ label update_generic_people_role(stack):
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return
-
-label generic_people_role_options_menu:
-    python:
-        while True:
-            tuple_list = []
-
-            tuple_list.append(["Change Schedule" + "\n Active: " + str(store.generic_people_role_change_schedule) + " (tooltip)Schedule where the person should be throughout the day.", "generic_people_role_change_schedule"])
-            tuple_list.append(["Follow You" + "\n Active: " + str(store.generic_people_role_follow) + " (tooltip)Tell a person to follow you where ever you go, until you tell them to stop following you.", "generic_people_role_follow"])
-            tuple_list.append(["Hire Person" + "\n Active: " + str(store.generic_people_role_hire_person) + " (tooltip)Hire a person to work for you.", "generic_people_role_hire_person"])
-            tuple_list.append(["Rename Person" + "\n Active: " + str(store.generic_people_role_rename_person) + " (tooltip)Change the name of the person.", "generic_people_role_rename_person"])
-            tuple_list.append(["Spend the Night" + "\n Active: " + str(store.generic_people_role_spend_night) + " (tooltip)Spend the night together.", "generic_people_role_spend_night"])
-            tuple_list.append(["Pay to Strip" + "\n Active: " + str(store.generic_people_role_pay_to_strip) + " (tooltip)Pay someone to strip for you.", "generic_people_role_pay_to_strip"])
-            tuple_list.append(["Back","Back"])
-
-            action_mod_choice = renpy.display_menu(tuple_list, True, "Choice")
-
-            if action_mod_choice == "Back":
-                renpy.return_statement()
-            else:
-                turn_generic_people_role_feature_on_or_off(action_mod_choice)
 
 label generic_role_pay_to_strip(person):
     # strip a copy of the current outfit (so review outfit can restore the original outfit)
