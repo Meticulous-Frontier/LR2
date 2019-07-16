@@ -7,7 +7,7 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
 
         $ categories = sorted(policy_selection_screen_categories) #This way we can append extra categories and lists with ease.
 
-        default selected_catagory = categories[0] #Default to the first in our categories list
+        default selected_category = categories[0] #Default to the first in our categories list
         vbox:
             xalign 0.5
             yalign 0.15
@@ -21,7 +21,7 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                         margin [10, 10, 10, 10]
                         background "#000080"
                         xfill True
-                        text "Policy categories" style "serum_text_style"
+                        text "Policy Categories" style "serum_text_style"
 
                     viewport:
 
@@ -29,15 +29,17 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                         draggable True
                         mousewheel "horizontal"
 
-                        hbox: # Properly display categories
+
+                        grid len(categories) 1: # Properly display categories, this will shrink the more categories are added. Force hbox when it's above a certain amount so that we can use the viewport?
                             xfill True
-                            for catagory in categories:
-                                textbutton catagory[0]:
+                            xalign 0.5
+
+                            for category in categories:
+                                textbutton category[0]:
                                     ysize 80
-                                    xsize 200
-                                    xalign 0.5
-                                    action SetScreenVariable("selected_catagory", catagory)
-                                    sensitive selected_catagory != catagory
+                                    xfill True
+                                    action SetScreenVariable("selected_category", category)
+                                    sensitive selected_category != category
                                     style "textbutton_no_padding_highlight"
                                     text_style "serum_text_style"
 
@@ -45,54 +47,61 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                 xsize 1320
                 ysize 650
                 background "#1a45a1aa"
-                viewport:
-                    mousewheel True
-                    scrollbars "vertical"
-                    xsize 800
-                    ysize 650
-                    vbox:
-                        spacing 10
-                        for policy in selected_catagory[1]:
-                            if policy.is_owned():
-                                textbutton "$" + str(policy.cost) + " - " + policy.name:
-                                    tooltip policy.desc
-                                    action NullAction()
-                                    style "textbutton_no_padding_highlight"
-                                    text_style "serum_text_style"
-                                    background "#59853f"
-                                    hover_background "#78b156"
-                                    sensitive True
-                                    xsize 800
-                                    ysize 100
-                            else:
-                                if policy.requirement() and (policy.cost < mc.business.funds or policy.cost == mc.business.funds):
-                                    textbutton "$" + str(policy.cost) + " - " + policy.name:
-                                        tooltip policy.desc
-                                        style "textbutton_no_padding_highlight"
-                                        text_style "serum_text_style"
-                                        action Function(purchase_policy,policy)
-                                        sensitive policy.requirement() and (policy.cost < mc.business.funds or policy.cost == mc.business.funds)
-                                        xsize 800
-                                        ysize 100
-                                else:
-                                    textbutton "$" + str(policy.cost) + " - " + policy.name:
-                                        tooltip policy.desc
-                                        style "textbutton_no_padding_highlight"
-                                        text_style "serum_text_style"
-                                        background "#666666"
-                                        action NullAction()
-                                        sensitive True
-                                        xsize 800
-                                        ysize 100
+                hbox:
+                    frame:
+                        #background None
+                        #yfill True
+                        xsize 660
+                        viewport:
+                            mousewheel True
+                            if len(selected_category[1]) > 5: #Only take up scrollbar space if needed.
+                                 scrollbars "vertical"
+                            xfill True
+                            #yfill True
+
+                            grid 1 len(selected_category[1]):
+                                for policy in sorted(selected_category[1], key = lambda x: x.cost):
+                                    if policy.is_owned():
+
+                                        textbutton "$" + str(policy.cost) + " - " + policy.name:
+                                            tooltip policy.desc
+                                            action NullAction()
+                                            style "textbutton_no_padding_highlight"
+                                            xalign 0.5
+                                            text_style "serum_text_style"
+                                            background "#59853f"
+                                            hover_background "#78b156"
+                                            sensitive True
+                                            xfill True
+                                            ysize 100
+                                    else:
+                                        if policy.requirement() and (policy.cost < mc.business.funds or policy.cost == mc.business.funds):
+                                            textbutton "$" + str(policy.cost) + " - " + policy.name:
+                                                tooltip policy.desc
+                                                style "textbutton_no_padding_highlight"
+                                                text_style "serum_text_style"
+                                                action Function(purchase_policy,policy)
+                                                sensitive policy.requirement() and (policy.cost < mc.business.funds or policy.cost == mc.business.funds)
+                                                xfill True
+                                                ysize 100
+
+                                        else:
+                                            textbutton "$" + str(policy.cost) + " - " + policy.name:
+                                                tooltip policy.desc
+                                                style "textbutton_no_padding_highlight"
+                                                text_style "serum_text_style"
+                                                background "#666666"
+                                                action NullAction()
+                                                sensitive True
+                                                xfill True
+                                                ysize 100
 
 
-        if tooltip:
-            frame:
-                background "#1a45a1aa"
-                anchor [1.0,0.0]
-                align [0.84,0.2]
-                xsize 500
-                text tooltip style "menu_text_style"
+                    if tooltip:
+                        frame:
+                            background "#1a45a1aa"
+                            xfill True
+                            text tooltip style "serum_text_style"
 
         frame:
             background None
