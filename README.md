@@ -42,3 +42,5 @@ Unfortunatly the base game is not bug free. Check https://github.com/Tristimdori
 Report Issues here: https://gitgud.io/lab-rats-2-mods/lr2mods/issues
 
 Wiki for more information and solutions to common issues: https://gitgud.io/lab-rats-2-mods/lr2mods/wikis/home
+
+Mega for an android version of the game with these mods included: https://mega.nz/#F!SvZEDIrR!NBqa7nibwW4toHCxlztLcg
