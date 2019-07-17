@@ -60,7 +60,7 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                             #yfill True
 
                             grid 1 len(selected_category[1]):
-                                for policy in sorted(selected_category[1], key = lambda x: x.cost):
+                                for policy in sorted(sorted(sorted(selected_category[1], key = lambda x: x.cost), key = lambda x: x.is_owned()), key = lambda x: x.requirement(), reverse = True):
                                     if policy.is_owned():
 
                                         textbutton "$" + str(policy.cost) + " - " + policy.name:
