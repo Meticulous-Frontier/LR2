@@ -109,7 +109,7 @@ label scene_SB_Oral_Laying_2(the_person, the_location, the_object, the_round):
                 "She starts to rock her hips, grinding herself against your face."
                 the_person.char "Oh [the_person.mc_title]! That feels so good..."
                 $ the_person.change_arousal(2)
-            "She grinds against you hard, but your are quickly running out of air. When it gets to be too intense you break her hold on your by pushing yourself up on your hands."
+            "She grinds against you hard, but your are quickly running out of air. When it gets to be too intense you break her hold on you by pushing yourself up on your hands."
             the_person.char "Mmmm, sorry [the_person.mc_title], it feels so good when you lick me like this!"
         "Subdue Her":
             "You grab her hand off the back of your head. You arch your back to take away the leverage her legs give."

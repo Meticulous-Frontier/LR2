@@ -1,5 +1,5 @@
 init 5 python:
-    add_label_hijack("normal_start", "activate_generic_people_role")  
+    add_label_hijack("normal_start", "activate_generic_people_role")
     add_label_hijack("after_load", "update_generic_people_role")
 
 init 2 python:
@@ -88,21 +88,21 @@ init 2 python:
             if person.obedience >= 150:
                 return True
         return False
-    
+
     # Spend the Night Requirements
     def spend_the_night_requirement(person):
         if store.generic_people_role_spend_night:
             if time_of_day is 4 and person.love > 50 and mc.location is person.home: #Has to be night, need to have some love and be in the_person's home location
                 return True
         return False
-    
+
     # Pay Strip Requirements
     def pay_to_strip_requirement(person):
         if store.generic_people_role_pay_to_strip:
             if not person is lily:
                 if (person.obedience >= 130 and person.sluttiness >= 15) or (person.sluttiness >= 25 and person.get_opinion_score("not wearing anything") > 0) or person.obedience >= 150 or person.sluttiness >= 50:
                     if len(mc.location.people) > 1:
-                        return "Must be alone with " + person.title               
+                        return "Must be alone with " + person.title
                     return True
         return False
 
@@ -135,10 +135,10 @@ init 2 python:
     # Rename Person | Opens a menu that allows you to change first and last name plus a (non- appended) custom the_person.title
     rename_person_action = Action("Rename [the_person.title]", rename_person_requirement, "rename_person", menu_tooltip = "Change the name of the person.")
     # Spend the Night | Allows you to sleep in the home of a person you have increased the love stat.
-    spend_the_night_action = Action("Spend the night with [the_person.possessive_title]", spend_the_night_requirement, "spend_the_night", menu_tooltip = "Allows you to sleep in this location")
+    spend_the_night_action = Action("Spend the night with [the_person.possessive_title]", spend_the_night_requirement, "spend_the_night", menu_tooltip = "Allows you to sleep in this location.")
     # Pay to Strip | Allows you to enter the pay_strip label used in certain events if requirements are met.
     pay_to_strip_action = Action("Pay [the_person.title] to strip", pay_to_strip_requirement, "generic_role_pay_to_strip", menu_tooltip = "Pay the person to give you a strip tease.")
-    
+
     # A role added to all people in the game to enable actions through the "Special Actions Menu..."
     generic_people_role = Role("Generic", [schedule_person_action, start_follow_action, stop_follow_action, hire_person_action, rename_person_action, spend_the_night_action, pay_to_strip_action], hidden = True) # This role is meant to not display in the person_ui_hud
 
@@ -161,7 +161,7 @@ label update_generic_people_role(stack):
     python:
         if not hasattr(store, 'generic_people_role_pay_to_strip'): # NOTE: Update this to one of the new variables added in initialize_generic_people_role_configuration_values to update, see above.
             renpy.call("initialize_generic_people_role_configuration_values")
-        
+
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return
@@ -186,7 +186,7 @@ label generic_role_pay_to_strip(person):
 
 # NOTE: Not sure where to place these actions yet. Basically actions that could fit on any person regardless of role.
 label spend_the_night(person): # Consider adding the sleep_action to the_person's room, but stats jump all over the place so doesn't nescessarily make sense.
-    "You go to sleep in [person.home.name]"
+    "You go to sleep in [person.home.name]."
     $ person.change_love(5)
     $ person.change_happiness(5)
     call advance_time from _call_advance_time_spend_the_night

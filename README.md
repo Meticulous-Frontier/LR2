@@ -16,7 +16,7 @@ This mod collection extends the base game with a range of new features and enhan
 * Enhanced outfit creator
 * Enhanced serum editor
 * Enhanced main map for faster navigation
-* Enhanced interview ui
+* Enhanced interview UI
 * Enhanced end of day dialog
 * Multiple characters on screen (in some dialogs)
 
@@ -37,7 +37,7 @@ This mod collection extends the base game with a range of new features and enhan
 4. The MOD settings can be configured or en-/disabled from your bedroom.
 5. Done.
 
-Unfortunatly the base game is not bug free. Check https://github.com/Tristimdorion/Lab-Rats-2/tree/bugfix for a repository that has updated versions of the game files, with fixes for all bugs people reported on the Patreon page.
+Unfortunately the base game is not bug free. Check https://github.com/Tristimdorion/Lab-Rats-2/tree/bugfix for a repository that has updated versions of the game files, with fixes for all bugs people reported on the Patreon page.
 
 Report Issues here: https://gitgud.io/lab-rats-2-mods/lr2mods/issues
 
