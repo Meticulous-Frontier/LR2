@@ -14,9 +14,15 @@ init 2 python:
                     room.actions.remove(room_manager_action)
         return
 
+    def serum_action_cleanup():
+        if "serum_mod_options_action" in globals():
+            if serum_mod_options_action in bedroom.actions:
+                bedroom.actions.remove(serum_mod_options_action)
+        return
 label run_cleanup(stack):
 
     $ clean_elevator_action()
+    $ serum_action_cleanup()
 
     $ execute_hijack_call(stack)
 

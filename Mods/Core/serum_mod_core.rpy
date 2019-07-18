@@ -116,8 +116,7 @@ label update_serum_mod_core(stack):
     python:
         stack = append_serum_mods_to_stack(stack)
 
-        #if serum_mod_options_action in bedroom.actions:
-        #    bedroom.actions.remove(serum_mod_options_action)
+        
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
