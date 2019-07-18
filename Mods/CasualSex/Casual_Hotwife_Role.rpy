@@ -94,7 +94,7 @@ init 1 python:
 
 #************* Hotwife Action Labels *********#
 
-#label (the_person):
+
 #CSH00
 label casual_hotwife_get_a_drink_label(the_person):
     mc.name "Care to get a drink, [the_person.title]?"

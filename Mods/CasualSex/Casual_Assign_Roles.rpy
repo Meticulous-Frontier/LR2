@@ -29,6 +29,9 @@ init 2 python:
                 elif people.age < 40:
                     assign_casual_hotwife_role(people)
 
+                else:
+                    assign_casual_FA_role(people)
+
 
         return
 
@@ -116,6 +119,41 @@ init 1302 python:
         return
 
 
+    def assign_casual_FA_role(the_person):
+        the_person.special_role.append(casual_FA_role)
+        local_FA_personality = Personality("FA", default_prefix = the_person.personality.personality_type_prefix,
+        common_likes = ["traveling"],
+        common_sexy_likes = ["casual sex"],
+        common_dislikes = ["relationships"],
+        common_sexy_dislikes = [],
+        titles_function = FA_titles, possessive_titles_function = FA_possessive_titles, player_titles_function = FA_player_titles)
+        local_FA_personality.response_dict["hookup_rejection"] = "FA_hookup_rejection"
+        the_person.personality = local_FA_personality
+        the_person.event_triggers_dict["reject_position"] = "blowjob"
+        the_person.schedule[3] = downtown_bar
+
+        return
+
+    def remove_casual_FA_role(the_person):
+        the_person.special_role.remove(casual_FA_role)
+        #"relaxed", "reserved", "wild", "introvert", "cougar"
+        if the_person.personality.default_prefix == "relaxed":
+            the_person.personality = relaxed_personality
+        elif the_person.personality.default_prefix == "reserved":
+            the_person.personality = reserved_personality
+        elif the_person.personality.default_prefix == "wild":
+            the_person.personality = wild_personality
+        elif the_person.personality.default_prefix == "introvert":
+            the_person.personality = introvert_personality
+        elif the_person.personality.default_prefix == "cougar":
+            the_person.personality = cougar_personality
+        else:
+            the_person.personality = relaxed_personality  #Catch all for personalities#
+
+        the_person.schedule[2] = None    #Reset their schedule
+        the_person.schedule[3] = None
+
+        return
 
 
 
