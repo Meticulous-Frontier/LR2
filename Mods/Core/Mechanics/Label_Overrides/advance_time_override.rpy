@@ -52,7 +52,8 @@ label store_advance_time_actions():
             "Creates a list of people to process",
             advance_time_requirement,
             "people_to_process_label",
-            priority = 0
+            priority = 0,
+            allow_disable = False
             )
 
         if advance_time_people_to_process_action not in advance_time_action_list:
@@ -62,7 +63,8 @@ label store_advance_time_actions():
             "Ends the day if time_of_day is 4",
             advance_time_end_of_day_requirement,
             "advance_time_end_of_day_label",
-            priority = 1
+            priority = 1,
+            allow_disable = False
             )
 
         if advance_time_end_of_day_action not in advance_time_action_list:
@@ -72,7 +74,8 @@ label store_advance_time_actions():
             "Advances into the next time slot",
             advance_time_next_requirement,
             "advance_time_next_label",
-            priority = advance_time_end_of_day_action.priority + 1 # End of day calculations take priority
+            priority = advance_time_end_of_day_action.priority + 1, # End of day calculations take priority
+            allow_disable = False
             )
 
         if advance_time_next_action not in advance_time_action_list:
@@ -80,7 +83,7 @@ label store_advance_time_actions():
 
 
         advance_time_mandatory_crisis_action = ActionMod(
-            "Processes the mandatory crisis.",
+            "Run mandatory crisis events",
             advance_time_requirement,
             "advance_time_mandatory_crisis_label",
             priority = advance_time_next_action.priority + 1
@@ -90,7 +93,7 @@ label store_advance_time_actions():
             advance_time_action_list.append(advance_time_mandatory_crisis_action)
 
         advance_time_random_crisis_action = ActionMod(
-            "Determines if a random crisis is to be run.",
+            "Run random crisis events",
             advance_time_random_crisis_requirement,
             "advance_time_random_crisis_label",
             requirement_args = crisis_chance,
@@ -101,7 +104,7 @@ label store_advance_time_actions():
             advance_time_action_list.append(advance_time_random_crisis_action)
 
         advance_time_mandatory_morning_crisis_action = ActionMod(
-            "Runs mandatory morning crisis actions",
+            "Run mandatory morning crisis events",
             advance_time_requirement,
             "advance_time_mandatory_morning_crisis_label",
             priority = advance_time_next_action.priority + 1
@@ -111,7 +114,7 @@ label store_advance_time_actions():
             advance_time_action_list.append(advance_time_mandatory_morning_crisis_action)
 
         advance_time_random_morning_crisis_action = ActionMod(
-            "Calculate and run random morning crisis actions",
+            "Run random morning crisis events",
             advance_time_random_morning_crisis_requirement,
             "advance_time_random_morning_crisis_label",
             requirement_args = morning_crisis_base_chance,
@@ -123,7 +126,7 @@ label store_advance_time_actions():
 
 
         advance_time_daily_serum_dosage_action = ActionMod(
-            "Hands out daily serums to the business' employees",
+            "Employees daily Serum",
             advance_time_daily_serum_dosage_requirement, "advance_time_daily_serum_dosage_label",
             priority = 0
             )
@@ -135,7 +138,8 @@ label store_advance_time_actions():
             "Moves people_to_process to their destinations",
             advance_time_requirement,
             "advance_time_people_run_move_label",
-            priority = advance_time_people_to_process_action.priority + advance_time_next_action.priority + 1 # NOTE: Depends on people_to_process being up to date.
+            priority = advance_time_people_to_process_action.priority + advance_time_next_action.priority + 1, # NOTE: Depends on people_to_process being up to date.
+            allow_disable = False
             )
 
         if advance_time_people_run_move_action not in advance_time_action_list:
@@ -145,7 +149,8 @@ label store_advance_time_actions():
             "Determines if it is game over due to having gone bankrupt.",
             advance_time_bankrupt_check_requirement,
             "advance_time_bankrupt_check_label",
-            priority = 0
+            priority = 0,
+            category = "Gameplay"
             )
 
         if advance_time_bankrupt_check_action not in advance_time_action_list:
