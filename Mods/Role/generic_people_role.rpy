@@ -80,57 +80,49 @@ init 2 python:
     def turn_generic_people_role_feature_on_or_off(feature):
         globals()[feature] = not globals()[feature]
         return
+label store_generic_people_actions():
 
-    # Schedule Actions
-    schedule_person_action = Action("Schedule [the_person.title]", schedule_person_requirement, "schedule_menu", menu_tooltip = "Schedule where the person should be throughout the day.")
-    schedule_early_morning_action = Action("Early Morning", schedule_early_morning_requirement, "schedule_early_morning", menu_tooltip = "Schedule where the person should be during the Early Morning.")
-    schedule_actions_list.append(schedule_early_morning_action)
-    schedule_morning_action = Action("Morning", schedule_morning_requirement, "schedule_morning", menu_tooltip = "Schedule where the person should be during the Morning.")
-    schedule_actions_list.append(schedule_morning_action)
-    schedule_afternoon_action = Action("Afternoon", schedule_afternoon_requirement, "schedule_afternoon", menu_tooltip = "Schedule where the person should be during the Afternoon.")
-    schedule_actions_list.append(schedule_afternoon_action)
-    schedule_evening_action = Action("Evening", schedule_evening_requirement, "schedule_evening", menu_tooltip = "Schedule where the person should be during the Evening.")
-    schedule_actions_list.append(schedule_evening_action)
-    schedule_night_action = Action("Night", schedule_night_requirement, "schedule_night", menu_tooltip = "Schedule where the person should be during the Night.")
-    schedule_actions_list.append(schedule_night_action)
+    python:
+        # Schedule Actions
+        schedule_person_action = ActionMod("Schedule [the_person.title]", schedule_person_requirement, "schedule_menu", menu_tooltip = "Schedule where the person should be throughout the day.", category = "Generic People Actions")
+        schedule_early_morning_action = ActionMod("Early Morning", schedule_early_morning_requirement, "schedule_early_morning", menu_tooltip = "Schedule where the person should be during the Early Morning.", allow_disable = False)
+        schedule_actions_list.append(schedule_early_morning_action)
+        schedule_morning_action = ActionMod("Morning", schedule_morning_requirement, "schedule_morning", menu_tooltip = "Schedule where the person should be during the Morning.", allow_disable = False)
+        schedule_actions_list.append(schedule_morning_action)
+        schedule_afternoon_action = ActionMod("Afternoon", schedule_afternoon_requirement, "schedule_afternoon", menu_tooltip = "Schedule where the person should be during the Afternoon.", allow_disable = False)
+        schedule_actions_list.append(schedule_afternoon_action)
+        schedule_evening_action = ActionMod("Evening", schedule_evening_requirement, "schedule_evening", menu_tooltip = "Schedule where the person should be during the Evening.", allow_disable = False)
+        schedule_actions_list.append(schedule_evening_action)
+        schedule_night_action = ActionMod("Night", schedule_night_requirement, "schedule_night", menu_tooltip = "Schedule where the person should be during the Night.", allow_disable = False)
+        schedule_actions_list.append(schedule_night_action)
 
-    start_follow_action= Action("Follow me.", start_follow_requirement, "start_follow", menu_tooltip = "Have the person follow you around.")
-    stop_follow_action = Action("Stop following me.", stop_follow_requirement, "stop_follow", menu_tooltip = "Have the person stop following you.")
+        start_follow_action= ActionMod("Follow me.", start_follow_requirement, "start_follow", menu_tooltip = "Have the person follow you around.", category = "Generic People Actions")
+        stop_follow_action = ActionMod("Stop following me.", stop_follow_requirement, "stop_follow", menu_tooltip = "Have the person stop following you.", category = "Generic People Actions")
 
-    # Hire Person | Allows you to hire a person if they are not already hired. (Moves them to the appropriate division, no duplicates)
-    hire_person_action = Action("Employ [the_person.title]\n Costs: $300", hire_person_requirement, "hire_person", menu_tooltip = "Hire the the person to work for you in your business. Costs $300")
-    # Rename Person | Opens a menu that allows you to change first and last name plus a (non- appended) custom the_person.title
-    rename_person_action = Action("Rename [the_person.title]", rename_person_requirement, "rename_person", menu_tooltip = "Change the name of the person.")
-    # Spend the Night | Allows you to sleep in the home of a person you have increased the love stat.
-    spend_the_night_action = Action("Spend the night with [the_person.possessive_title]", spend_the_night_requirement, "spend_the_night", menu_tooltip = "Allows you to sleep in this location.")
-    # Pay to Strip | Allows you to enter the pay_strip label used in certain events if requirements are met.
-    pay_to_strip_action = Action("Pay [the_person.title] to strip", pay_to_strip_requirement, "generic_role_pay_to_strip", menu_tooltip = "Pay the person to give you a strip tease.")
+        # Hire Person | Allows you to hire a person if they are not already hired. (Moves them to the appropriate division, no duplicates)
+        hire_person_action = ActionMod("Employ [the_person.title]\n Costs: $300", hire_person_requirement, "hire_person", menu_tooltip = "Hire the the person to work for you in your business. Costs $300", category = "Generic People Actions")
+        # Rename Person | Opens a menu that allows you to change first and last name plus a (non- appended) custom the_person.title
+        rename_person_action = ActionMod("Rename [the_person.title]", rename_person_requirement, "rename_person", menu_tooltip = "Change the name of the person.", category = "Generic People Actions")
+        # Spend the Night | Allows you to sleep in the home of a person you have increased the love stat.
+        spend_the_night_action = ActionMod("Spend the night with [the_person.possessive_title]", spend_the_night_requirement, "spend_the_night", menu_tooltip = "Allows you to sleep in this location.", category = "Generic People Actions")
+        # Pay to Strip | Allows you to enter the pay_strip label used in certain events if requirements are met.
+        pay_to_strip_action = ActionMod("Pay [the_person.title] to strip", pay_to_strip_requirement, "generic_role_pay_to_strip", menu_tooltip = "Pay the person to give you a strip tease.", category = "Generic People Actions")
 
-    # A role added to all people in the game to enable actions through the "Special Actions Menu..."
-    generic_people_role = Role("Generic", [schedule_person_action, start_follow_action, stop_follow_action, hire_person_action, rename_person_action, spend_the_night_action, pay_to_strip_action], hidden = True) # This role is meant to not display in the person_ui_hud
+        # A role added to all people in the game to enable actions through the "Special Actions Menu..."
+        generic_people_role = Role("Generic", [schedule_person_action, start_follow_action, stop_follow_action, hire_person_action, rename_person_action, spend_the_night_action, pay_to_strip_action], hidden = True) # This role is meant to not display in the person_ui_hud
 
-label initialize_generic_people_role_configuration_values:
-    $ generic_people_role_change_schedule = True
-    $ generic_people_role_follow = True
-    $ generic_people_role_hire_person = True
-    $ generic_people_role_rename_person = True
-    $ generic_people_role_spend_night = True
-    $ generic_people_role_pay_to_strip = True
     return
 
 label activate_generic_people_role(stack):
-    call initialize_generic_people_role_configuration_values from _call_initialize_generic_people_role_configuration_values_1
+    call store_generic_people_actions from _activate_generic_people_role_1
     # continue on the hijack stack if needed
     $ execute_hijack_call(stack)
     return
 
 label update_generic_people_role(stack):
-    python:
-        if not hasattr(store, 'generic_people_role_pay_to_strip'): # NOTE: Update this to one of the new variables added in initialize_generic_people_role_configuration_values to update, see above.
-            renpy.call("initialize_generic_people_role_configuration_values")
-
-        # continue on the hijack stack if needed
-        execute_hijack_call(stack)
+    call store_generic_people_actions from _update_generic_people_role_1
+    # continue on the hijack stack if needed
+    $ execute_hijack_call(stack)
     return
 
 label generic_role_pay_to_strip(person):
