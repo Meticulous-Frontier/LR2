@@ -2,8 +2,6 @@
 # it adds a increased chance for a crisis to occur when more time passed without a crisis
 # it adds a way of preventing the same crisis popping up over and over, whilst others never get triggered by remembering a set of occured events
 init -1 python:
-    advance_time_action_list = []
-
     def advance_time_requirement():
         return True
 
@@ -19,151 +17,13 @@ init -1 python:
     def advance_time_bankrupt_check_requirement():
         return time_of_day is 4
 
-
     def advance_time_random_morning_crisis_requirement(morning_crisis_chance):
         return renpy.random.randint(0,100) < morning_crisis_chance
 
     def advance_time_daily_serum_dosage_requirement():
         return time_of_day == 1 and daily_serum_dosage_policy.is_owned() # This runs if you have the corresponding policy
 
-
 init 5 python:
-
-    add_label_hijack("normal_start", "activate_advance_time")
-    add_label_hijack("after_load", "update_advance_time")
-
-label activate_advance_time(stack):
-
-    call store_advance_time_actions from activate_advance_time_1
-    $ execute_hijack_call(stack)
-    return
-
-label update_advance_time(stack):
-
-    call store_advance_time_actions from update_advance_time_1
-    $ execute_hijack_call(stack)
-    return
-
-label store_advance_time_actions():
-
-    python: # TODO: Figure out how one would sort things to ensure the dependency is defined without literally having to move the order of the script.
-
-        advance_time_people_to_process_action = ActionMod(
-            "Creates a list of people to process",
-            advance_time_requirement,
-            "people_to_process_label",
-            priority = 0,
-            allow_disable = False
-            )
-
-        if advance_time_people_to_process_action not in advance_time_action_list:
-            advance_time_action_list.append(advance_time_people_to_process_action)
-
-        advance_time_end_of_day_action = ActionMod(
-            "Ends the day if time_of_day is 4",
-            advance_time_end_of_day_requirement,
-            "advance_time_end_of_day_label",
-            priority = 1,
-            allow_disable = False
-            )
-
-        if advance_time_end_of_day_action not in advance_time_action_list:
-            advance_time_action_list.append(advance_time_end_of_day_action)
-
-        advance_time_next_action = ActionMod(
-            "Advances into the next time slot",
-            advance_time_next_requirement,
-            "advance_time_next_label",
-            priority = advance_time_end_of_day_action.priority + 1, # End of day calculations take priority
-            allow_disable = False
-            )
-
-        if advance_time_next_action not in advance_time_action_list:
-            advance_time_action_list.append(advance_time_next_action)
-
-
-        advance_time_mandatory_crisis_action = ActionMod(
-            "Run mandatory crisis events",
-            advance_time_requirement,
-            "advance_time_mandatory_crisis_label",
-            priority = advance_time_next_action.priority + 1,
-            category = "Gameplay"
-            )
-
-        if advance_time_mandatory_crisis_action not in advance_time_action_list:
-            advance_time_action_list.append(advance_time_mandatory_crisis_action)
-
-        advance_time_random_crisis_action = ActionMod(
-            "Run random crisis events",
-            advance_time_random_crisis_requirement,
-            "advance_time_random_crisis_label",
-            requirement_args = crisis_chance,
-            priority = advance_time_next_action.priority + 1,
-            category = "Gameplay"
-            )
-
-        if advance_time_random_crisis_action not in advance_time_action_list:
-            advance_time_action_list.append(advance_time_random_crisis_action)
-
-        advance_time_mandatory_morning_crisis_action = ActionMod(
-            "Run mandatory morning crisis events",
-            advance_time_requirement,
-            "advance_time_mandatory_morning_crisis_label",
-            priority = advance_time_next_action.priority + 1,
-            category = "Gameplay"
-            )
-
-        if advance_time_mandatory_morning_crisis_action not in advance_time_action_list:
-            advance_time_action_list.append(advance_time_mandatory_morning_crisis_action)
-
-        advance_time_random_morning_crisis_action = ActionMod(
-            "Run random morning crisis events",
-            advance_time_random_morning_crisis_requirement,
-            "advance_time_random_morning_crisis_label",
-            requirement_args = morning_crisis_base_chance,
-            priority = advance_time_next_action.priority + 1,
-            category = "Gameplay"
-            )
-
-        if advance_time_random_morning_crisis_action not in advance_time_action_list:
-            advance_time_action_list.append(advance_time_random_morning_crisis_action)
-
-
-        advance_time_daily_serum_dosage_action = ActionMod(
-            "Employees daily Serum",
-            advance_time_daily_serum_dosage_requirement, "advance_time_daily_serum_dosage_label",
-            priority = 0,
-            allow_disable = False
-            )
-
-        if advance_time_daily_serum_dosage_action not in advance_time_action_list:
-            advance_time_action_list.append(advance_time_daily_serum_dosage_action)
-
-        advance_time_people_run_move_action = ActionMod(
-            "Moves people_to_process to their destinations",
-            advance_time_requirement,
-            "advance_time_people_run_move_label",
-            priority = advance_time_people_to_process_action.priority + advance_time_next_action.priority + 1, # NOTE: Depends on people_to_process being up to date.
-            allow_disable = False
-            )
-
-        if advance_time_people_run_move_action not in advance_time_action_list:
-            advance_time_action_list.append(advance_time_people_run_move_action)
-
-        advance_time_bankrupt_check_action = ActionMod(
-            "Determines if it is game over due to having gone bankrupt.",
-            advance_time_bankrupt_check_requirement,
-            "advance_time_bankrupt_check_label",
-            priority = 0,
-            category = "Gameplay"
-            )
-
-        if advance_time_bankrupt_check_action not in advance_time_action_list:
-            advance_time_action_list.append(advance_time_bankrupt_check_action)
-    return
-
-init 5 python:
-
     global crisis_chance
     global morning_crisis_chance
 
@@ -178,6 +38,33 @@ init 5 python:
 
     crisis_chance = crisis_base_chance
     morning_crisis_chance = morning_crisis_base_chance
+
+    advance_time_people_to_process_action = ActionMod("Creates a list of people to process", advance_time_requirement,
+        "people_to_process_label", priority = 0, allow_disable = False)
+    advance_time_end_of_day_action = ActionMod("Ends the day if time_of_day is 4", advance_time_end_of_day_requirement,
+        "advance_time_end_of_day_label", priority = 1, allow_disable = False)
+    advance_time_next_action = ActionMod("Advances into the next time slot", advance_time_next_requirement,
+        "advance_time_next_label", priority = advance_time_end_of_day_action.priority + 1, # End of day calculations take priority
+        allow_disable = False)
+    advance_time_mandatory_crisis_action = ActionMod("Run mandatory crisis events", advance_time_requirement,
+        "advance_time_mandatory_crisis_label", priority = advance_time_next_action.priority + 1, category = "Gameplay")
+    advance_time_random_crisis_action = ActionMod("Run random crisis events", advance_time_random_crisis_requirement,
+        "advance_time_random_crisis_label", requirement_args = crisis_chance, priority = advance_time_next_action.priority + 1, category = "Gameplay")
+    advance_time_mandatory_morning_crisis_action = ActionMod("Run mandatory morning crisis events", advance_time_requirement,
+        "advance_time_mandatory_morning_crisis_label", priority = advance_time_next_action.priority + 1, category = "Gameplay")
+    advance_time_random_morning_crisis_action = ActionMod("Run random morning crisis events", advance_time_random_morning_crisis_requirement,
+        "advance_time_random_morning_crisis_label", requirement_args = morning_crisis_base_chance, priority = advance_time_next_action.priority + 1, category = "Gameplay")
+    advance_time_daily_serum_dosage_action = ActionMod("Employees daily Serum", advance_time_daily_serum_dosage_requirement, 
+        "advance_time_daily_serum_dosage_label", priority = 0, allow_disable = False)
+    advance_time_people_run_move_action = ActionMod("Moves people_to_process to their destinations", advance_time_requirement,
+        "advance_time_people_run_move_label", priority = advance_time_people_to_process_action.priority + advance_time_next_action.priority + 1, # NOTE: Depends on people_to_process being up to date.
+        allow_disable = False)
+    advance_time_bankrupt_check_action = ActionMod("Determines if it is game over due to having gone bankrupt.", advance_time_bankrupt_check_requirement,
+        "advance_time_bankrupt_check_label", priority = 0, category = "Gameplay")
+
+    advance_time_action_list = [advance_time_people_to_process_action, advance_time_end_of_day_action, advance_time_next_action, advance_time_mandatory_crisis_action,
+        advance_time_random_crisis_action, advance_time_mandatory_morning_crisis_action, advance_time_random_morning_crisis_action, advance_time_daily_serum_dosage_action,
+        advance_time_people_run_move_action, advance_time_bankrupt_check_action]
 
     config.label_overrides["advance_time"] = "advance_time_enhanced"
 
@@ -208,15 +95,10 @@ label advance_time_enhanced:
 
     # increase crisis chance (every time slot)
     $ crisis_chance += 1
-
     $ mc.can_skip_time = True #Now give the player the ability to skip time again, because they should be back in control.
-
     return
 
-
-
 label advance_time_bankrupt_check_label():
-
     if mc.business.funds < 0:
         #"advance_time_bankrupt_check_label" # DEBUG
         $ mc.business.bankrupt_days += 1
@@ -226,14 +108,11 @@ label advance_time_bankrupt_check_label():
         else:
             $ days_remaining = mc.business.max_bankrupt_days-mc.business.bankrupt_days
             $ renpy.say("","Warning! Your company is losing money and unable to pay salaries or purchase necessary supplies! You have [days_remaining] days to restore yourself to positive funds or you will be foreclosed upon!")
-
     else:
         $ mc.business.bankrupt_days = 0
-
     return
 
 label advance_time_end_of_day_label():
-
     #"advance_time_end_of_day_label" # DEBUG
     #if time_of_day == 4: ##First, determine if we're going into the next chunk of time. If we are, advance the day and run all of the end of day code. NOTE: We can do checks like these with Action.requirements
     python:
@@ -250,11 +129,9 @@ label advance_time_end_of_day_label():
 
     # increase morning crisis chance (once a day)
     $ morning_crisis_chance += 2
-
     return
 
 label advance_time_random_crisis_label():
-
     #"advance_time_random_crisis_label" #DEBUG
     python:
         # how many crisis events are disabled?
@@ -288,7 +165,6 @@ label advance_time_random_crisis_label():
     $ renpy.scene("Active")
     $ renpy.show(mc.location.name,what=mc.location.background_image) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
     show screen business_ui
-
     return
 
 label advance_time_mandatory_crisis_label():
@@ -314,7 +190,6 @@ label advance_time_mandatory_crisis_label():
     return
 
 label people_to_process_label():
-
     #"people_to_process_label" #DEBUG
     python:
         people_to_process = [] #This is a master list of turns of need to process, stored as tuples [character,location]. Used to avoid modifying a list while we iterate over it, and to avoid repeat movements.
@@ -327,11 +202,9 @@ label people_to_process_label():
             people.run_turn()
         mc.business.run_turn()
         mc.run_turn()
-
     return
 
 label advance_time_mandatory_morning_crisis_label():
-
     #"advance_time_mandatory_morning_crisis_label" #DEBUG
     #Now we run mandatory morning crises. Nearly identical to normal crises, but these always trigger at the start of the day (ie when you wake up and before you have control of your character.)
     python:
@@ -351,11 +224,9 @@ label advance_time_mandatory_morning_crisis_label():
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
         for crisis in clear_list:
             mc.business.mandatory_morning_crises_list.remove(crisis) #Clean up the list.
-
     return
 
 label advance_time_random_morning_crisis_label():
-
     #"advance_time_random_morning_crisis_label" #DEBUG
     python:
         # how many crisis events are disabled?
@@ -384,27 +255,22 @@ label advance_time_random_morning_crisis_label():
         $ morning_crisis_chance = morning_crisis_base_chance
         $ morning_crisis_tracker.append([c[0] for c in morning_crisis_list].index(the_morning_crisis)) # add crisis index to recent crisis list
         $ the_morning_crisis.call_action()
-
     return
 
 label advance_time_next_label():
-
     #"advance_time_next_label" #DEBUG
     if time_of_day is 4: # NOTE: Take care of resetting it to 0 here rather than during end_day_label
         $ time_of_day = 0
     else:
         $ time_of_day += 1 ##Otherwise, just run the end of day code.
-
     return
-label advance_time_daily_serum_dosage_label():
 
+label advance_time_daily_serum_dosage_label():
     #"advance_time_daily_serum_dosage_label, hands out daily_serums" #DEBUG
     $ mc.business.give_daily_serum()
-
     return
 
 label advance_time_people_run_move_label():
-
     #"advance_time_people_run_move_label" #DEBUG
     python:
         for (people,place) in people_to_process: #Now move everyone to where the should be in the next time chunk. That may be home, work, etc.

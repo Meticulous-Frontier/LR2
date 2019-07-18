@@ -144,9 +144,6 @@ init 2 python:
                 else:
                     if not action_mod in [c[0] for c in crisis_list]:
                         crisis_list.append([action_mod, action_mod.crisis_weight])
-            # Temporary code to make save games compatible (remove on next version)
-            if action_mod.name == "Generic People Role":
-                remove_list.append(action_mod)
 
         # remove not working stuff
         for action_mod in remove_list:
