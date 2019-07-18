@@ -5,10 +5,6 @@ init -1 python:
    def downtown_bar_drink_requirement(): # Leave this in
       return True
 
-   # leave this function in for now for save game compatibility, can be removed in future version.
-   def order_drink_requierement():
-      return
-
    # actions available from entry point action
    downtown_bar_drink_action = Action("Order a drink for... {image=gui/heart/Time_Advance.png}", downtown_bar_drink_requirement, "downtown_bar_drink_label", menu_tooltip = "Treat someone with a drink...")
    downtown_bar_actions = [downtown_bar_drink_action] # Actions in a sub-menu

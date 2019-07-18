@@ -78,12 +78,6 @@ init 2 python:
             serum_mod_list.remove(serum_mod)
         return
 
-    # for backward compatibility remove with next version
-    def serum_mod_settings_requirement():
-        return True
-    # Serum Mod
-    serum_mod_options_action = Action("Serum MOD Settings", serum_mod_settings_requirement, "show_serum_mod_settings", menu_tooltip = "Enable or disable serum")
-
     # find all serum mods, and append the creation to the stack
     def append_serum_mods_to_stack(stack):
         for game_label in renpy.get_all_labels():
