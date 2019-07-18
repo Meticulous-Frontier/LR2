@@ -10,7 +10,7 @@ init 2 python:
 
     # Schedule Person Requirements
     def schedule_person_requirement(person):
-        if store.generic_people_role_change_schedule and person.obedience >= 130 and not person in unique_character_list:
+        if person.obedience >= 130 and not person in unique_character_list:
             return True
         return False
 
@@ -30,47 +30,41 @@ init 2 python:
 
     # Follow Me Requirements
     def start_follow_requirement(person):
-        if store.generic_people_role_follow:
-            if person not in list_of_followers:
-                if person.obedience >= 110:
-                    return True
+        if person not in list_of_followers:
+            if person.obedience >= 110:
+                return True
         return False
 
     def stop_follow_requirement(person):
-        if store.generic_people_role_follow:
-            if person in list_of_followers:
-                return True
+        if person in list_of_followers:
+            return True
         return False
 
     # Hire Person Requirements
     def hire_person_requirement(person):
-        if store.generic_people_role_hire_person:
-            if person not in mc.business.get_employee_list() + unique_character_list:
-                return True
+        if person not in mc.business.get_employee_list() + unique_character_list:
+            return True
         return False
 
     # Rename Person Requirements
     def rename_person_requirement(person):
-        if store.generic_people_role_rename_person:
-            if person.obedience >= 150:
-                return True
+        if person.obedience >= 150:
+            return True
         return False
 
     # Spend the Night Requirements
     def spend_the_night_requirement(person):
-        if store.generic_people_role_spend_night:
-            if time_of_day is 4 and person.love > 50 and mc.location is person.home: #Has to be night, need to have some love and be in the_person's home location
-                return True
+        if time_of_day is 4 and person.love > 50 and mc.location is person.home: #Has to be night, need to have some love and be in the_person's home location
+            return True
         return False
 
     # Pay Strip Requirements
     def pay_to_strip_requirement(person):
-        if store.generic_people_role_pay_to_strip:
-            if not person is lily:
-                if (person.obedience >= 130 and person.sluttiness >= 15) or (person.sluttiness >= 25 and person.get_opinion_score("not wearing anything") > 0) or person.obedience >= 150 or person.sluttiness >= 50:
-                    if len(mc.location.people) > 1:
-                        return "Must be alone with " + person.title
-                    return True
+        if not person is lily:
+            if (person.obedience >= 130 and person.sluttiness >= 15) or (person.sluttiness >= 25 and person.get_opinion_score("not wearing anything") > 0) or person.obedience >= 150 or person.sluttiness >= 50:
+                if len(mc.location.people) > 1:
+                    return "Must be alone with " + person.title
+                return True
         return False
 
     # for backward compatibility remove with next version
