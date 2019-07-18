@@ -12,7 +12,8 @@ init 3 python:
     def purchase_rooms_requirement():
         return True
 
-    #def purchase_rooms_initialization(self):
+    def purchase_rooms_initialization(self):
+        return True
     #    office.actions.append(self)
 
     #purchase_rooms = ActionMod("Purchase Rooms", purchase_rooms_requirement, "purchase_rooms", initialization = purchase_rooms_initialization,
