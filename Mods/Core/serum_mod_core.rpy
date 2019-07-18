@@ -6,7 +6,7 @@
 ### TEMPLATE ###
 # init -1 python:
 #     def anorexia_serum_on_turn(person, add_to_log):
-#         return person.change_weight(amount = -.2, chance = 20)       
+#         return person.change_weight(amount = -.2, chance = 20)
 
 # # any label that starts with serum_mod is added to the serum mod list
 # label serum_mod_anorexia_serum_trait(stack):
@@ -41,12 +41,12 @@ init -1 python:
             requires= None, tier = 0, start_researched=False,research_needed=50,exclude_tags=None, is_side_effect = False):
 
             self.enabled = False
-           
+
             SerumTrait.__init__(self, name,desc, positive_slug, negative_slug, value_added, research_added, slots_added, production_added,
-                duration_added, base_side_effect_chance, on_apply, on_remove, on_turn, on_day, requires, tier, start_researched, research_needed, 
+                duration_added, base_side_effect_chance, on_apply, on_remove, on_turn, on_day, requires, tier, start_researched, research_needed,
                 exclude_tags, is_side_effect)
 
-            # store the instance in class static    
+            # store the instance in class static
             SerumTraitMod._instances.add(self)
 
         def toggle_enabled(self):
@@ -112,12 +112,12 @@ label update_serum_mod_core(stack):
 
     if unmodded:
         $ serum_mod_list = []
-        
+
     python:
         stack = append_serum_mods_to_stack(stack)
 
-        if serum_mod_options_action in bedroom.actions:
-            bedroom.actions.remove(serum_mod_options_action)
+        #if serum_mod_options_action in bedroom.actions:
+        #    bedroom.actions.remove(serum_mod_options_action)
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
