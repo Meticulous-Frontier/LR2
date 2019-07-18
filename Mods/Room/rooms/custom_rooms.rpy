@@ -6,53 +6,8 @@
 init -1 python:
     business_basement = [] # List of rooms that are supposed to be in the basement.
 
-    def clean_elevator_action():
-        if "room_manager_action" in globals():
-            for room in list_of_places:
-                if room_manager_action in room.actions:
-                    room.actions.remove(room_manager_action)
-        return
 
-    def update_custom_rooms(room): # Replaces the room in the list with the updated version.
-        room_update = find_in_list(lambda x: x.name == room.name, list_of_places)
 
-        # did not find a room to update
-        if not room_update:
-            return
-
-        # renpy.say("", "Update room " + room_update.name)
-
-        room_update.formalName = room.formalName
-
-        room_update.map_pos = room.map_pos
-        room_update.background_image = room.background_image
-
-        room_update.visible = room.visible
-        room_update.accessable = room.accessable
-
-        room_update.connections = room.connections
-
-        room_update.objects = room.objects
-        room_update.objects.append(Object("stand",["Stand"], sluttiness_modifier = 0, obedience_modifier = -5)) #Add a standing position that you can always use.
-
-        # update available actions in room
-        room_update.actions = room.actions
-
-        if room_update.tutorial_label != room.tutorial_label:
-            room_update.tutorial_label = room.tutorial_label
-            room_update.trigger_tutorial = True
-
-        # old saves don't have hide_in_known_housemap
-        if hasattr(room_update, "hide_in_known_housemap"): # Deal with this somehow else. Thought ModRooms should have the attribute as True by default?
-            room_update.hide_in_known_housemap = room.hide_in_known_housemap
-
-        return
-
-    def add_custom_room(room): #Should prevent potential rollback errors
-        if room not in list_of_places:
-            list_of_places.append(room)
-        return
-    
 init 5  python:
     add_label_hijack("normal_start", "activate_custom_rooms")
     add_label_hijack("after_load", "update_custom_rooms")
@@ -65,7 +20,6 @@ label activate_custom_rooms(stack):
     call store_office_basement() from _store_office_basement_1
     call store_downtown_bar() from _call_store_downtown_bar_1
 
-    $ clean_elevator_action()
     $ execute_hijack_call(stack)
     return
 
@@ -139,6 +93,7 @@ label store_office_basement():
         office_basement = Room("dungeon", "Dungeon", [office], bar_background, office_basement_objects, [],[dungeon_action], False,[11,1], None, True)
 
     $ update_custom_rooms(office_basement)
+
     return
 
 label store_downtown_bar():

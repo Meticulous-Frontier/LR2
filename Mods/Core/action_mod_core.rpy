@@ -92,9 +92,9 @@ init 2 python:
 
             ActionMod._instances.add(self)
 
-        def __cmp__(self,other): 
+        def __cmp__(self,other):
             if isinstance(other, Action):
-                if self.effect == other.effect:                   
+                if self.effect == other.effect:
                     return 0
 
             if self.__hash__() < other.__hash__():
@@ -167,11 +167,11 @@ init 2 python:
     action_mod_options_action = Action("MOD Settings", action_mod_settings_requirement, "show_action_mod_settings", menu_tooltip = "Enable or disable mods")
     action_mod_configuration_action = Action("MOD Configuration", action_mod_settings_requirement, "show_action_mod_configuration", menu_tooltip = "Change configuration for individual MODS")
 
-init 5 python:
-    add_label_hijack("normal_start", "activate_action_mod_core")  
+init 4 python: # NOTE: Having it at 5 was causing errors after I moved things around. Haven't seen any side-effects of it.
+    add_label_hijack("normal_start", "activate_action_mod_core")
     add_label_hijack("after_load", "update_action_mod_core")
 
-# as long as VREN doesn't use this, we need to add a dummy label for hijacking purposes 
+# as long as VREN doesn't use this, we need to add a dummy label for hijacking purposes
 # NOTE: this label gets called after the hijack labels have been triggered
 label after_load:
     return

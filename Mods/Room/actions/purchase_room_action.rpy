@@ -12,11 +12,11 @@ init 3 python:
     def purchase_rooms_requirement():
         return True
 
-    def purchase_rooms_initialization(self):
-        office.actions.append(self)
+    #def purchase_rooms_initialization(self):
+    #    office.actions.append(self)
 
-    purchase_rooms = ActionMod("Purchase Rooms", purchase_rooms_requirement, "purchase_rooms", initialization = purchase_rooms_initialization,
-        menu_tooltip = "Purchase rooms and facilities", category = "Business", enabled = False)
+    #purchase_rooms = ActionMod("Purchase Rooms", purchase_rooms_requirement, "purchase_rooms", initialization = purchase_rooms_initialization,
+    #    menu_tooltip = "Purchase rooms and facilities", category = "Business", enabled = False)
 
 # Categorized rooms into tiers for their cost.
 # TODO: Show different disabled message if room purchased
