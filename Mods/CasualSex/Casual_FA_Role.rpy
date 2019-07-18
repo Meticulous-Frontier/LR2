@@ -249,7 +249,7 @@ label casual_FA_get_out_of_here_label(the_person):
     menu:
         "Give her a serum":
             "You decide to slip one into her drink."
-            call give_serum(the_person) from _call_give_serum_CSFA000
+            call give_serum(the_person) from _call_give_serum_CSFA000_1
         "Don't use serum":
             "You decide just to give her the drink."
     "You spot [the_person.title] by the door and join her. You follow her to the elevator, and soon find yourself in front of her hotel room door."
