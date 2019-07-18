@@ -19,8 +19,8 @@ label update_change_location_mod(stack):
 init 2 python: # Change location requirements block.
 
     def move_followers_action_requirement():
-        if "generic_people_role_follow" in globals():
-            return len(list_of_followers) > 0 and generic_people_role_follow
+        if "start_follow_action" in globals():
+            return len(list_of_followers) > 0
 
 
 label store_change_location_mod_actions():
