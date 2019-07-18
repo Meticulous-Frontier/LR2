@@ -1,8 +1,4 @@
 init 2 python:
-    def show_mannequin(demo_outfit):
-        renpy.show_transient_screen("mannequin", demo_outfit)
-    def hide_mannequin():
-        renpy.hide_screen("mannequin")
 
     def draw_mannequin(mannequin, outfit, position = None, emotion = None, special_modifier = None): # Small tweak of draw_person to allow for an outfit that is not theirs to be shown (NOTE: outfit.generate_draw_list)
             renpy.scene("Active")

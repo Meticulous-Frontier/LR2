@@ -14,9 +14,9 @@ init -1 python:
                               # It updates on first time startup of the mod and whenever an elevator / bus is entered so you can append to it whenever as long as at least ONE location
                               # With access to the screen already exist.
 
-init 2 python:
-    add_label_hijack("normal_start", "activate_room_manager")
-    add_label_hijack("after_load", "update_room_manager")
+#init 2 python:
+#    add_label_hijack("normal_start", "activate_room_manager")
+#    add_label_hijack("after_load", "update_room_manager")
 
 init 3 python:
     def mod_room_manager_append(action): # Make sure you input a valid action. e.g sleep_action

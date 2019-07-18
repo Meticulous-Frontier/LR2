@@ -1,11 +1,3 @@
-init 1500 python:
-    policy_selection_screen_categories = [ # Append to this list for them to display in the Policy Selection Screen.
-    ["Uniform Policies",uniform_policies_list],
-    ["Recruitment Policies",recruitment_policies_list],
-    ["Serum Policies",serum_policies_list],
-    ["Organisation Policies",organisation_policies_list]
-    ]
-
 init 6 python:
     add_label_hijack("normal_start", "store_expansion_policies")
     add_label_hijack("after_load", "store_expansion_policies")
@@ -13,13 +5,11 @@ init 6 python:
 init 1300 python:
     expansion_policies_list = []
 
-init 1600 python:
+init -1 python:
 
     def purchase_room_requirement(): #Would like to see if the room has already been purchased, but that shouldn't be nescessary on new saves.
         return True
 
-    def purchase_room_on_buy_function(room):
-        add_custom_room(room)
 
 label store_expansion_policies(stack):
 
