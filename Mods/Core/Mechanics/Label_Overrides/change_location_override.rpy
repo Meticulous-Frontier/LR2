@@ -26,7 +26,7 @@ init 2 python: # Define requirements block.
 label store_change_location_actions(): # NOTE: Update this to always have vanilla functionality present. Any modifications e.g the followers_list are considered modifications and not to be put here.
 
     python:
-        move_player_action = ActionMod("Moves the player", change_location_action_requirements, "move_player_label", priority = 0, allow_disable = False, menu_tooltip = "Moves the player to new location") # This is a vanilla action without any dependencies so it can run first.
+        move_player_action = ActionMod("Moves the player", change_location_action_requirements, "move_player_label", priority = 0, allow_disable = False, menu_tooltip = "Moves the player to new location", category = "Gameplay") # This is a vanilla action without any dependencies so it can run first.
         if move_player_action not in change_location_action_list:
             change_location_action_list.append(move_player_action)
 

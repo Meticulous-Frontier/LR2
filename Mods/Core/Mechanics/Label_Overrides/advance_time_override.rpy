@@ -86,7 +86,8 @@ label store_advance_time_actions():
             "Run mandatory crisis events",
             advance_time_requirement,
             "advance_time_mandatory_crisis_label",
-            priority = advance_time_next_action.priority + 1
+            priority = advance_time_next_action.priority + 1,
+            category = "Gameplay"
             )
 
         if advance_time_mandatory_crisis_action not in advance_time_action_list:
@@ -97,7 +98,8 @@ label store_advance_time_actions():
             advance_time_random_crisis_requirement,
             "advance_time_random_crisis_label",
             requirement_args = crisis_chance,
-            priority = advance_time_next_action.priority + 1
+            priority = advance_time_next_action.priority + 1,
+            category = "Gameplay"
             )
 
         if advance_time_random_crisis_action not in advance_time_action_list:
@@ -107,7 +109,8 @@ label store_advance_time_actions():
             "Run mandatory morning crisis events",
             advance_time_requirement,
             "advance_time_mandatory_morning_crisis_label",
-            priority = advance_time_next_action.priority + 1
+            priority = advance_time_next_action.priority + 1,
+            category = "Gameplay"
             )
 
         if advance_time_mandatory_morning_crisis_action not in advance_time_action_list:
@@ -118,7 +121,8 @@ label store_advance_time_actions():
             advance_time_random_morning_crisis_requirement,
             "advance_time_random_morning_crisis_label",
             requirement_args = morning_crisis_base_chance,
-            priority = advance_time_next_action.priority + 1
+            priority = advance_time_next_action.priority + 1,
+            category = "Gameplay"
             )
 
         if advance_time_random_morning_crisis_action not in advance_time_action_list:
@@ -128,7 +132,8 @@ label store_advance_time_actions():
         advance_time_daily_serum_dosage_action = ActionMod(
             "Employees daily Serum",
             advance_time_daily_serum_dosage_requirement, "advance_time_daily_serum_dosage_label",
-            priority = 0
+            priority = 0,
+            allow_disable = False
             )
 
         if advance_time_daily_serum_dosage_action not in advance_time_action_list:
