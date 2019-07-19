@@ -65,6 +65,12 @@ init -2 python:
         else:
             return "You need to be at the Gym"
 
+    def casual_athlete_house_call_requirement(the_person):
+        if the_person.event_triggers_dict.get("athlete_progress", 0) == 4:
+            if mc.location == the_person.home:
+                return True
+        return False
+
 
 #*************Create Casual Athlete Role***********#
 init -1 python:
@@ -75,7 +81,9 @@ init -1 python:
     casual_athlete_phase_two = Action("Challenge to Race", casual_athlete_phase_two_requirement, "casual_athlete_phase_two_label",
         menu_tooltip = "No risk, no reward.")
     casual_athlete_protein_shake = Action("Buy Protein Shake ($5)", casual_athlete_buy_protein_shake_requirement,"casual_athlete_buy_protein_shake_label", menu_tooltip = "Slip some serum in.")
-    casual_athlete_role = Role(role_name ="?????", actions =[casual_athlete_get_to_know , casual_athlete_phase_one, casual_athlete_phase_two, casual_athlete_protein_shake])
+    casual_athlete_house_call = Action("Take Charge", casual_athlete_house_call_requirement, "casual_athlete_house_call_label",
+        menu_tooltip = "Pick her up.")
+    casual_athlete_role = Role(role_name ="?????", actions =[casual_athlete_get_to_know , casual_athlete_phase_one, casual_athlete_phase_two, casual_athlete_protein_shake, casual_athlete_house_call])
 
 
 #*************Mandatory Crisis******************#
@@ -156,7 +164,7 @@ label casual_athlete_get_to_know_label(the_person):
     else:
         "Debug: How did you end up here???"
 
-
+    call advance_time from _call_advance_casual_athlete_get_to_know
     return
 
 #CSA10
@@ -323,6 +331,8 @@ label casual_athlete_phase_one_label(the_person):
             "Not Today":  #lol what a tease#
                 the_person.char "Oh. Okay, I understand. Well, I'll see you around, [the_person.mc_title]!"
                 $ the_person.change_happiness(-3)
+
+    call advance_time from _call_advance_casual_athlete_workout
     return
 
 #CSA20
@@ -362,6 +372,7 @@ label casual_athlete_phase_two_label(the_person):
         mc.name "Yeah right, I'll be bending you over before you can even get your front door closed."
         "[the_person.title] has a spark in her eyes. Whoever wins, you have a feeling the sex is going to be amazing after the race."
         "You wave goodbye to [the_person.title], wondering what you've gotten yourself in to."
+    call advance_time from _call_advance_casual_athlete_race_challenge
     return
 
 #CSA30
@@ -487,10 +498,42 @@ label casual_athlete_buy_protein_shake_label(the_person):
             the_person.char "Thanks [the_person.mc_title]."
             mc.name "No problem at all."
             $ renpy.scene("Active")
-
+    call advance_time from _call_advance_casual_athlete_smoothie
     return
 
+#CSA40
+label casual_athlete_house_call_label(the_person):
+    mc.name "Don't worry, I'm not here for busines. I'm here for pleasure!"
+    $ the_person.draw_person( position = "against_wall")
+    "You reach around with both hands and grab her ass. You roughly pick her up, holding her tightly against you."
+    the_person.char "Oh! Yes I was hoping that's why you were here..."
+    "[the_person.possessive_title] wraps her legs around you and you begin to grind your hips together. Heat is quickly building between the two of you."
+    "You carry her to her bedroom. The whole way there she is kissing and nipping at your neck and earlobe."
+    $ the_person.draw_person(position = "missionary")
+    "You throw her down on her bed."
+    if the_person.outfit.vagina_available() and the_person.outfit.tits_available():
+        "You stop for a second and admire [the_person.title], her body on display in front of you."
+        $ the_person.change_arousal(20)
+        "You notice some moisture building around her slit. She is definitely enjoying your hungry eyes roaming her body."
+    else:
+        "Your mind red with lust, you begin to rip [the_person.title]'s clothes off."
+        $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+        while strip_choice is not None:
+            $ the_person.draw_animated_removal(strip_choice)
+            "You roughly strip off [the_person.possessive_title]'s [strip_choice.name]."
+            $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+        $ the_person.change_arousal(20)
+        "[the_person.possessive_title] moans as you strip her down, enjoying your rough treatment of her."
+    call fuck_person(the_person,private = True) from _call_casual_sex_mod_CSA040
+    "After you finish with her, you get up and start to gather your clothes."
+    if the_person.arousal > 100:
+        "[the_person.possessive_title] is in an orgasm fueled daze, enjoying the effects it has on her."
+    the_person.char "Thanks for stopping by... I think I'm just gonna lay down for a bit..."
+    $ the_person.reset_arousal()
+    "Once you finish getting dressed you say goodbye and let yourself out."
 
+    call advance_time from _call_advance_casual_athlete_house_call
+    return
 #************* Personality****************#
 #Override some of her personality functions so that her conversation options makes sense.
 
@@ -538,6 +581,12 @@ label athlete_greetings(the_person):
             the_person.char "You want to join me for another workout? I always leave the gym feeling so satisfied when we work out together!"
         else:
             the_person.char "Hey there!"
+    if mc.location == the_person.home:
+        if the_person.event_triggers_dict.get("athlete_progress", 0) > 3:
+            the_person.char "Hey there [the_person.mc_title]! I wasn't expecting you! Are you here for some fun?"
+            "She looks at you hopefully."
+        else:
+            the_person.char "Hey there [the_person.mc_title]. I wasn't expecting you, are you sure you should be here?"
 
     elif the_person.sluttiness > 60:
         if the_person.obedience > 130:
