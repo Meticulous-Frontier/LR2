@@ -382,7 +382,7 @@ label sister_ntr_crisis_action_label:
                 "You see some books lying on the table. Seems they were studying and got little bored. Judging by the sweat on their bodies and loud moans, the seem to be relaxing for some time now."
                 "The man grabs [the_person.possessive_title]'s head and tries to force her to take his member all way long."
                 if submissive:
-                    "[the_person.possessive_title] obedientely takes it all in her mouth. You see some tears in her eyes but she does not object."
+                    "[the_person.possessive_title] obediently takes it all in her mouth. You see some tears in her eyes but she does not object."
                     man_name "That's it, dear. Take it deep. I like the way you do it."
                 else:
                     "[the_person.possessive_title] shakes her head, clearly showing that she does not like this. [man_name] takes his hands away."
@@ -838,7 +838,7 @@ label sister_ntr_crisis_action_label:
             "You see some books lying on the table. Seems they were studying and got little bored. Judging by the sweat on their bodies and loud moans, the seem to be relaxing for some time now."
             "The man grabs [the_person.possessive_title]'s head and tries to force her to take his member all way long."
             if submissive:
-                "[the_person.possessive_title] obedientely takes it all in her mouth. You see some tears in her eyes but she does not object."
+                "[the_person.possessive_title] obediently takes it all in her mouth. You see some tears in her eyes but she does not object."
                 man_name "That's it, dear. Take it deep. I like the way you do it."
                 man_name2 "Like being face-fucked, don't you , [the_person.name]?"
             else:

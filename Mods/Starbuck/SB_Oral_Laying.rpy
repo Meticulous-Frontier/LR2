@@ -128,7 +128,7 @@ label scene_SB_Oral_Laying_2(the_person, the_location, the_object, the_round):
 
 
     if mc.arousal > 70:
-        "[the_person.possessive_title]'s constant moans and gasps are incredibly arousing. You can't help but stroke yourself as you ear her out."
+        "[the_person.possessive_title]'s constant moans and gasps are incredibly arousing. You can't help but stroke yourself as you eat her out."
         "You should probably fuck her soon before you cum in your pants!"
     elif mc.arousal > 40:
         "[the_person.possessive_title]'s moaning and heavy breathing are arousing. You give yourself a couple strokes through your clothes while you eat her."
