@@ -79,7 +79,6 @@ label advance_time_collar_person_label():
 
     python:
         for (people,place) in people_to_process:
-            if hasattr(people, "dungeon_collar"): # Since the attribute is not part of the class, make sure it has been attributed first.
-                if people.dungeon_collar and people.obedience < 150:
-                    people.obedience = 150
+            if people.dungeon_collar and people.obedience < 150:
+                people.obedience = 150
     return
