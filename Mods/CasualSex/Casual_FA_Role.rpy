@@ -188,6 +188,7 @@ label casual_FA_get_a_drink_label(the_person):
         $ the_person.draw_person(position = "stand2")
         the_person.char "Thanks for the drink, [the_person.mc_title], but I'd better get to bed. I have an early flight to operate in the morning, and I HATE working tired."
         "You say goodbye and watch her as she leaves. You wonder if you will see her again."
+        call advance_time from _call_advance_casual_FA_drink01
         return
 
     elif the_person.event_triggers_dict.get("FA_progress", 0) == 1:
@@ -221,6 +222,7 @@ label casual_FA_get_a_drink_label(the_person):
                 return
         the_person.char "Thanks for the drink, [the_person.mc_title], but I'd better get to bed. I have an early flight to operate in the morning, and I HATE working tired."
         "You say goodbye and watch her as she leaves."
+        call advance_time from _call_advance_casual_FA_drink02
         return
 
     elif the_person.event_triggers_dict.get("FA_progress", 0) == 2:
@@ -249,25 +251,30 @@ label casual_FA_get_out_of_here_label(the_person):
     menu:
         "Give her a serum":
             "You decide to slip one into her drink."
-            call give_serum(the_person) from _call_give_serum_CSFA000_1
+            call give_serum(the_person) from _call_give_serum_CSFA010
         "Don't use serum":
             "You decide just to give her the drink."
     "You spot [the_person.title] by the door and join her. You follow her to the elevator, and soon find yourself in front of her hotel room door."
     the_person.char "Ok, this will be way quieter than downstairs."
     "TODO finish this scene."
 
+
+    call advance_time from _call_advance_casual_FA_one_night
     return
 
 #CSFA20
 label casual_FA_sex_discussion_label(the_person):
     "This scene is not yet written."
 
+
+    call advance_time from _call_advance_casual_FA_sex_discussion
     return
 
 #CSFA30
 label casual_FA_my_place_label(the_person):
     "This scene is not yet written."
 
+    call advance_time from _call_advance_casual_FA_my_place
     return
 
 #CSFA40
@@ -280,6 +287,7 @@ label casual_FA_crash_pad_label(the_person):
 label casual_FA_coming_over_label(the_person):
     "This scene is not yet written."
 
+    call advance_time from _call_advance_casual_FA_coming_over
     return
 
 #CSFA60

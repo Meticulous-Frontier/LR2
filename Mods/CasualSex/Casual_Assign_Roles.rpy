@@ -58,6 +58,9 @@ init 1302 python:
         the_person.event_triggers_dict["reject_position"] = "standing_doggy"
         the_person.schedule[1] = gym
         the_person.schedule[3] = gym
+        the_person.relationship = "Single"
+        the_person.SO_name = None
+        the_person.kids = 0
 
         return
 
@@ -94,6 +97,9 @@ init 1302 python:
         the_person.event_triggers_dict["reject_position"] = "blowjob"
         the_person.schedule[2] = downtown_bar
         the_person.schedule[3] = downtown_bar
+        the_person.relationship = "Married"
+        the_person.SO_name = get_random_male_name()
+        the_person.kids = 0 
 
         return
 
