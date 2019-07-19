@@ -123,6 +123,214 @@ init -1 python:
     casual_FA_role = Role(role_name ="?????", actions =[casual_FA_get_a_drink, casual_FA_get_out_of_here, casual_FA_sex_discussion, casual_FA_my_place, casual_FA_coming_over])
 
 
+#***************Create Flight Attendant Class************#
+init -1 python:
+    class Casual_Flight_Attendant(Person):
+        def __init__(self):
+            self.name = get_random_name()
+            self.last_name = get_random_last_name()
+
+            self.title = self.name #Note: We format these down below!
+            self.possessive_title = self.name #The way the girl is refered to in relation to you. For example "your sister", "your head researcher", or just their title again.
+
+            self.mc_title = "Stranger"
+
+            self.home = purgatory #The room the character goes to at night. If none a default location is used.
+            self.work = None #The room the character goes to for work.
+            self.schedule = {0:self.home,1:self.home,2:self.home,3:self.home,4:self.home} #A character's schedule is a dict of 0,1,2,3,4 (time periods) mapped to locations.
+            #If there is a place in the schedule the character will go there. Otherwise they have free time and will do whatever they want.
+            self.job = get_random_job() #Probably replace this
+
+            # Relationship and family stuff
+            self.relationship = "Single" #Should be Single, Girlfriend, Fiancée, or Married.
+
+            self.SO_name = None #If not single, name of their SO (for guilt purposes or future events).
+
+            self.kids = 0 #If she has kids, how many. (More likely for older characters.
+
+
+            self.personality = get_random_personality()
+
+
+            # Loves, likes, dislikes, and hates determine some reactions in conversations, options, etc. Some are just fluff.
+            self.opinions = {} #Key is the name of the opinion (see random list), value is a list holding [value, known]. Value ranges from -2 to 2 going from hate to love (things not on the list are assumed 0). Known is a bool saying if the player knows about their opinion.
+
+            self.sexy_opinions = {}
+            # We establish random opinions first and will overwrite any that conflict with generated personality opinions.
+            for x in __builtin__.range(1,5):
+                the_opinion_key = get_random_opinion()
+                degree = renpy.random.randint(-2,2)
+                if not degree == 0: #ie. ignore 0 value opinions.
+                    self.opinions[the_opinion_key] = [degree, False]
+
+            for x in __builtin__.range(1,2):
+                the_opinion_key = get_random_sexy_opinion()
+                degree = renpy.random.randint(-2,2)
+                if not degree == 0: #ie. ignore 0 value opinions.
+                    self.sexy_opinions[the_opinion_key] = [degree, False]
+
+            #Now we get our more likely default personality ones.
+            for x in __builtin__.range(1,4):
+                the_opinion_key, opinion_list = self.personality.generate_default_opinion()
+                if the_opinion_key:
+                    self.opinions[the_opinion_key] = opinion_list
+
+            for x in __builtin__.range(1,3):
+                the_opinion_key, opinion_list = self.personality.generate_default_sexy_opinion()
+                if the_opinion_key:
+                    self.sexy_opinions[the_opinion_key] = opinion_list
+
+
+
+            #TODO: Relationship with other people (List of known people plus relationship with them.)
+            FA_font = get_random_font()
+            name_color = get_random_readable_color()
+            #Using char instead of a string lets us customize the font and colour we are using for the character.
+            self.char = Character("???", what_font = FA_font, who_font = FA_font, color = name_color,  what_color = copy.copy(name_color))
+
+            # if title: #Format the given titles, if any, so they appear correctly the first time you meet at person.
+            #     self.set_title(title) #The way the girl is refered to by the MC. For example: "Mrs. Whatever", "Lily", or "Mom". Will reset "???" if appropriate
+            # else:
+            #     self.char.name = self.create_formatted_title("???")
+            # if possessive_title:
+            #     self.set_possessive_title(possessive_title)
+
+            ## Physical things.
+            self.age = renpy.random.randint(18,50)
+            self.body_type = get_random_body_type()
+            self.tits = get_random_tit()
+            self.height = 0.9 + (renpy.random.random()/10) #This is the scale factor for height, with the talest girl being 1.0 and the shortest being 0.8
+            #self.body_images = body_images #instance of Clothing class, which uses full body shots.
+            self.face_style = get_random_face()
+             #instance of the Expression class, which stores facial expressions for different skin colours
+            self.hair_colour = generate_hair_colour() #A list of [description, color value], where colour value is a standard RGBA list.
+            self.hair_style = get_random_from_list(hair_styles).get_copy()
+            self.hair_style.colour = self.hair_colour[1]
+            self.skin = get_random_skin()
+            self.eyes = get_random_eye()
+            #TODO: Tattoos eventually
+            if self.skin == "white":
+                self.body_images = white_skin
+            elif self.skin == "tan":
+                self.body_images = tan_skin
+            else:
+                self.body_images = black_skin
+
+            self.expression_images = Expression(self.name+"\'s Expression Set", self.skin, self.face_style)
+
+            self.serum_effects = [] #A list of all of the serums we are under the effect of.
+
+            #if not special_role:  #Characters may have a special role that unlocks additional actions. By default this is an empty list.
+            self.special_role = []
+            # elif isinstance(special_role, Role):
+            #     self.special_role = [special_role] #Support handing a non-list special role, in case we forget to wrap it in a list one day.
+            # elif isinstance(special_role, list):
+            # #     self.special_role = special_role #Otherwise we've handed it a list
+            # # else:
+            #     self.special_role = []
+            #     log_message("Person \"" + name + " " + last_name + "\" was handed an incorrect special role parameter.")
+
+
+            self.on_room_enter_event_list = [] #Checked when you enter a room with this character. If an event is in this list and enabled it is run (and no other event is until the room is reentered)
+            self.on_talk_event_list = [] #Checked when you start to interact with a character. If an event is in this list and enabled it is run (and no other event is until you talk to the character again.)
+
+            self.event_triggers_dict = {} #A dict used to store extra parameters used by events, like how many days has it been since a performance review.
+            self.event_triggers_dict["employed_since"] = 0
+            self.event_triggers_dict["wants_titlechange"] = False
+
+
+            skill_cap = 5
+            stat_cap = 5
+
+            if recruitment_skill_improvement_policy.is_owned():
+                skill_cap += 2
+
+            if recruitment_stat_improvement_policy.is_owned():
+                stat_cap += 2
+
+            self.charisma = renpy.random.randint(1,stat_cap) #How likeable the person is. Mainly influences marketing, also determines how well interactions with other characters go. Main stat for HR and sales
+            self.int = renpy.random.randint(1,stat_cap) #How smart the person is. Mainly influences research, small bonuses to most tasks. #Main stat for research and production.
+            self.focus = renpy.random.randint(1,stat_cap)
+
+            self.charisma_debt = renpy.random.randint(1,stat_cap) #Tracks how far into the negative a characters stats are, for the purposes of serum effects. Effective stats are never lower than 0.
+            self.int_debt = renpy.random.randint(1,stat_cap)
+            self.focus_debt = renpy.random.randint(1,stat_cap)
+
+            self.charisma_debt = 0 #Tracks how far into the negative a characters stats are, for the purposes of serum effects. Effective stats are never lower than 0.
+            self.int_debt = 0
+            self.focus_debt = 0
+
+            ##Work Skills##
+            #Skills can be trained up over time, but are limited by your raw stats. Ranges from 1 to 5 at start, can go up or down (min 0)
+            self.hr_skill = renpy.random.randint(1,skill_cap)
+            self.market_skill = renpy.random.randint(1,skill_cap)
+            self.research_skill = renpy.random.randint(1,skill_cap)
+            self.production_skill = renpy.random.randint(1,skill_cap)
+            self.supply_skill = renpy.random.randint(1,skill_cap)
+
+            self.salary = self.calculate_base_salary()
+
+            # self.employed_since = 0 #Default this to 0, it will almost always be overwritten but in case it sneaks through this makes sure that nothing breaks.
+
+            self.idle_pose = get_random_from_list(["stand2","stand3","stand4","stand5"]) #Get a random idle pose that you will use while people are talking to you.
+
+            ##Personality Stats##
+            #Things like sugestability, that change over the course of the game when the player interacts with the girl
+            self.suggestibility = 0 #How quickly/efficently bleeding temporary sluttiness is turned into core sluttiness.
+            self.suggest_bag = [] #This will store a list of ints which are the different suggestion values fighting for control. Only the highest is used, maintained when serums are added and removed.
+
+            self.happiness = 100 #Higher happiness makes a girl less likely to quit and more willing to put up with you pushing her using obedience.
+            self.love = 0
+            self.sluttiness = 0 + renpy.random.randint(0,20) #How slutty the girl is by default. Higher will have her doing more things just because she wants to or you asked.
+            self.core_sluttiness = self.sluttiness #Core sluttiness is the base level of what a girl considers normal. normal "sluttiness" is the more variable version, technically refered to as "temporary slutiness".
+            self.obedience = 100 #How likely the girl is to listen to commands. Default is 100 (normal person), lower actively resists commands, higher follows them.
+
+            #Situational modifiers are handled by events. These dicts and related functions provide a convenient way to avoid double contributions. Remember to clear your situational modifiers when you're done with them!!
+            self.situational_sluttiness = {} #A dict that stores a "situation" string and the corrisponding amount it is contributing to the girls sluttiness.
+            self.situational_obedience = {} #A dictthat stores a "situation" string and a corrisponding amount that it has affected their obedience by.
+
+            ##Sex Stats##
+            #These are physical stats about the girl that impact how she behaves in a sex scene. Future values might include things like breast sensitivity, pussy tighness, etc.
+            self.arousal = 0 #How actively horny a girl is, and how close she is to orgasm. Generally resets to 0 after orgasming, and decreases over time while not having sex (or having bad sex).
+
+            ##Sex Skills##
+            #These represent how skilled a girl is at different kinds of intimacy, ranging from kissing to anal. The higher the skill the closer she'll be able to bring you to orgasm (whether you like it or not!)
+            self.sex_skills = {}
+            self.sex_skills["Foreplay"] = renpy.random.randint(1,5) #A catch all for everything that goes on before blowjobs, sex, etc. Includes things like kissing and strip teases.
+            self.sex_skills["Oral"] = renpy.random.randint(1,5) #The girls skill at giving head.
+            self.sex_skills["Vaginal"] = renpy.random.randint(1,5) #The girls skill at different positions that involve vaginal sex.
+            self.sex_skills["Anal"] = renpy.random.randint(1,5) #The girls skill at different positions that involve anal sex.
+
+            ## Clothing things.
+            self.wardrobe = default_wardrobe.get_random_selection(40) #Note: we overwrote default copy behaviour for wardrobes so they do not have any interference issues with eachother.
+
+            self.planned_outfit = self.wardrobe.decide_on_outfit(self.sluttiness) #planned_outfit is the outfit the girl plans to wear today while not at work. She will change back into it after work or if she gets stripped. Cop0y it in case the outfit is changed during the day.
+            self.planned_uniform = None #The uniform the person was planning on wearing for today, so they can return to it if they need to while at work.
+            self.outfit = self.planned_outfit.get_copy() #Keep a seperate copy of hte outfit as the one that is being worn.
+
+
+            ## Conversation things##
+            self.sexed_count = 0
+
+
+        def run_day(self):
+            #renpy.say("","DEBUG: run day running correctly")
+            if day%7 == 3 or renpy.random.randint(0,100) < 50: #If the new day is Friday or random roll is out of town.
+                self.home = purgatory
+                self.schedule[0] = purgatory
+                self.schedule[1] = purgatory
+                self.schedule[2] = purgatory
+                self.schedule[3] = purgatory
+                self.schedule[4] = purgatory
+            else:
+                self.home = downtown_hotel
+                self.schedule[2] = downtown_bar
+                self.schedule[3] = downtown_bar
+                self.schedule[4] = downtown_hotel
+            #TODO Find a way to cancel dates made.
+            super(Casual_Flight_Attendant, self)
+        pass
+
 
 #*************Mandatory Crisis******************#
 

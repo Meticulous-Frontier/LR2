@@ -19,6 +19,8 @@ label activate_custom_rooms(stack):
     call store_rd_division_basement() from _store_rd_division_basement_1
     call store_office_basement() from _store_office_basement_1
     call store_downtown_bar() from _call_store_downtown_bar_1
+    call store_downtown_hotel() from _call_store_downtown_hotel_1
+    call store_purgatory_room() from _call_store_purgatory_room_1
 
     $ execute_hijack_call(stack)
     return
@@ -33,6 +35,8 @@ label update_custom_rooms(stack):
     call store_rd_division_basement() from _store_rd_division_basement_2
     call store_office_basement() from _store_office_basement_2
     call store_downtown_bar() from _call_store_downtown_bar_2
+    call store_downtown_hotel() from _call_store_downtown_hotel_2
+    call store_purgatory_room() from _call_store_purgatory_room_2
 
     $ clean_elevator_action()
     $ execute_hijack_call(stack)
@@ -117,3 +121,54 @@ label store_downtown_bar():
     $ update_custom_rooms(downtown_bar)
 
     return
+
+label store_downtown_hotel():
+    # Hotel Room - The Hotel | No actions at this time.
+    # This hotel gets updated when a save game is loaded, regardsless of its existance
+
+    python:
+        downtown_hotel_objects = [
+            make_desk(),
+            make_chair(),
+            make_floor(),
+            make_bed()
+        ]
+        downtown_hotel = Room("hotel", "The Hotel", [downtown], room_background_image("Hotel_Room_Background.jpg"), downtown_hotel_objects,[], [], False, [5,5], None, True)
+
+    # Make sure it is in the list_of_places (and no duplicate)
+    # List of places gets stored, so will the bar when appended here
+    if downtown_hotel not in list_of_places:
+        $ list_of_places.append(downtown_hotel)
+
+    # This refreshes the properties of the existing bar, e.g move the position of the Room on the map, objects, actions, connections, background etc.
+    $ update_custom_rooms(downtown_hotel)
+
+    return
+
+label store_purgatory_room():
+    #Creates a room specifically to keep girls we don't want to be accessible, so they are still updated.
+
+
+    python:
+        purgatory_objects = [
+            make_floor()
+        ]
+
+        purgatory = Room("purgatory",
+            formalName = "Purgatory",
+            connections = [],
+            background_image = None,
+            objects = purgatory_objects,
+            people = [],
+            actions = [],
+            public = False,
+            map_pos = [-5, -5],
+            tutorial_label = None,
+            visible = False,
+            hide_in_known_house_map = True)
+        purgatory.accessible = False
+
+    if purgatory not in list_of_places:
+        $ list_of_places.append(purgatory)
+
+    $ update_custom_rooms(purgatory)

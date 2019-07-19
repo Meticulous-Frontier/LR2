@@ -29,9 +29,24 @@ init 2 python:
                 elif people.age < 40:
                     assign_casual_hotwife_role(people)
 
-                else:
-                    assign_casual_FA_role(people)
-
+                #else:
+                    #assign_casual_FA_role(people)
+        num_FAs = renpy.random.randint(6,10)
+        FA_counter = 0
+        while FA_counter < num_FAs:
+            new_FA = Casual_Flight_Attendant()
+            local_FA_personality = Personality("FA", default_prefix = new_FA.personality.personality_type_prefix,
+            common_likes = ["traveling"],
+            common_sexy_likes = ["casual sex"],
+            common_dislikes = ["relationships"],
+            common_sexy_dislikes = [],
+            titles_function = FA_titles, possessive_titles_function = FA_possessive_titles, player_titles_function = FA_player_titles)
+            new_FA.special_role.append(casual_FA_role)
+            local_FA_personality.response_dict["hookup_rejection"] = "FA_hookup_rejection"
+            new_FA.personality = local_FA_personality
+            new_FA.event_triggers_dict["reject_position"] = "blowjob"
+            purgatory.add_person(new_FA)
+            FA_counter += 1
 
         return
 
@@ -99,7 +114,7 @@ init 1302 python:
         the_person.schedule[3] = downtown_bar
         the_person.relationship = "Married"
         the_person.SO_name = get_random_male_name()
-        the_person.kids = 0 
+        the_person.kids = 0
 
         return
 
