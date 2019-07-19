@@ -40,7 +40,7 @@ init 5 python:
     morning_crisis_chance = morning_crisis_base_chance
 
     advance_time_people_to_process_action = ActionMod("Creates a list of people to process", advance_time_requirement,
-        "people_to_process_label", priority = 0, allow_disable = False)
+        "advance_time_people_to_process_label", priority = 0, allow_disable = False)
     advance_time_end_of_day_action = ActionMod("Ends the day if time_of_day is 4", advance_time_end_of_day_requirement,
         "advance_time_end_of_day_label", priority = 1, allow_disable = False)
     advance_time_next_action = ActionMod("Advances into the next time slot", advance_time_next_requirement,
@@ -54,7 +54,7 @@ init 5 python:
         "advance_time_mandatory_morning_crisis_label", priority = advance_time_next_action.priority + 1, category = "Gameplay")
     advance_time_random_morning_crisis_action = ActionMod("Run random morning crisis events", advance_time_random_morning_crisis_requirement,
         "advance_time_random_morning_crisis_label", requirement_args = morning_crisis_base_chance, priority = advance_time_next_action.priority + 1, category = "Gameplay")
-    advance_time_daily_serum_dosage_action = ActionMod("Employees daily Serum", advance_time_daily_serum_dosage_requirement, 
+    advance_time_daily_serum_dosage_action = ActionMod("Employees daily Serum", advance_time_daily_serum_dosage_requirement,
         "advance_time_daily_serum_dosage_label", priority = 0, allow_disable = False)
     advance_time_people_run_move_action = ActionMod("Moves people_to_process to their destinations", advance_time_requirement,
         "advance_time_people_run_move_label", priority = advance_time_people_to_process_action.priority + advance_time_next_action.priority + 1, # NOTE: Depends on people_to_process being up to date.
@@ -189,8 +189,8 @@ label advance_time_mandatory_crisis_label():
             mc.business.mandatory_crises_list.remove(crisis) #Clean up the list.
     return
 
-label people_to_process_label():
-    #"people_to_process_label" #DEBUG
+label advance_time_people_to_process_label():
+    #"advance_time_people_to_process_label" #DEBUG
     python:
         people_to_process = [] #This is a master list of turns of need to process, stored as tuples [character,location]. Used to avoid modifying a list while we iterate over it, and to avoid repeat movements.
         for place in list_of_places:

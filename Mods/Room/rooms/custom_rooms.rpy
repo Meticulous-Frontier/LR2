@@ -90,7 +90,7 @@ label store_office_basement():
             make_pillory(),
             make_woodhorse()
         ]
-        office_basement = Room("dungeon", "Dungeon", [office], bar_background, office_basement_objects, [],[dungeon_action], False,[11,1], None, True)
+        office_basement = Room("dungeon", "Dungeon", [office], bar_background, office_basement_objects, [],[dungeon_room_action], False,[11,1], None, True)
 
     $ update_custom_rooms(office_basement)
 
