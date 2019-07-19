@@ -6,10 +6,7 @@ init python:
 
         score = self.get_opinion_score(topic)
 
-        if not discover:
-            vars(self)[category][topic] = [score, discover]
-
-        elif score is 2:
+        if score is 2:
             vars(self)[category][topic] = [score - 4, discover]
 
         else:
@@ -56,4 +53,4 @@ screen opinion_edit_menu():
                                         text_style "serum_text_style"
                                         xfill True
                                         action Function(target.update_opinion_score, x, categories[n][1], 1)
-                                        alternate Function(target.update_opinion_score, x, categories[n][1], 1, False)
+                                        alternate Function(target.update_opinion_score, x, categories[n][1], 0, False)
