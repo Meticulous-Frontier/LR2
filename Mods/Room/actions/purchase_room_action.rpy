@@ -105,7 +105,7 @@ label purchase_dungeon_room(): #Enables the dugneon.
     if update_tier:
         $ current_tier += 1
 
-    $ advance_time()
+    call advance_time from _call_advance_time_purchase_dungeon_room
     return
 
 # Tier 2 Rooms
@@ -120,7 +120,7 @@ label purchase_security_room(): #Enables the security room.
     if update_tier:
         $ current_tier += 1
 
-    $ advance_time()
+        call advance_time from _call_advance_time_purchase_security_room
     return
 
 label purchase_machinery_room(): #Enables the machinery room
@@ -134,7 +134,7 @@ label purchase_machinery_room(): #Enables the machinery room
     if update_tier:
         $ current_tier += 1
 
-    $ advance_time()
+    call advance_time from _call_advance_time_purchase_machinery_room
     return
 
 # Tier 3 Rooms
@@ -144,7 +144,7 @@ label purchase_biotech_room(): #Enables the biotech lab
     if rd_division_basement not in list_of_places:
         $ list_of_places.append(rd_division_basement)
 
-    $ advance_time()
+    call advance_time from _call_advance_time_purchase_biotech_room
     return
 
 #label purchase_dungeon_room(): #Enables the dugneon.

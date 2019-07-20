@@ -194,14 +194,17 @@ label investigate_person(person_choice = the_person): # Need to default to the_p
 label investigation_home_label():
     "You conveniently find [the_person.name]'s adress in the yellow pages."
     $ learn_home(the_person)
-#    $ advance_time()
+    
+    # call advance_time from _call_advance_time_investigation_home_label
+
     return
 
 label investigation_opinions_label():
 
     $ the_person.discover_opinion(the_person.get_random_opinion(False, True))
     "You discover something about [the_person.name]"
-#    $ advance_time()
+    # call advance_time from _call_advance_time_investigation_opinions_label
+
     return
 
 

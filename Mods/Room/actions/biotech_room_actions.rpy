@@ -119,6 +119,8 @@ label clone_person():
         else:
             call cloning_process(person_choice) from _call_cloning_process
 
+    return
+
 label cloning_process(person = the_person): # default to the_person when not passed as parameter
     $ person.draw_person(emotion = "default")
     while True:
@@ -158,7 +160,7 @@ label cloning_process(person = the_person): # default to the_person when not pas
                 $ rd_division_basement.add_person(clone) #Create rooms for the clones to inhabit until a schedule is given (through being hired or player input)
 
                 "[clone.name] [clone.last_name] created and is now awaiting you in [rd_division_basement.formalName]"
-                $ advance_time()
+                call advance_time from _call_advance_time_cloning_process
                 return
             "Back":
                 return
