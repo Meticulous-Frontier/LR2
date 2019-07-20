@@ -32,6 +32,12 @@ label mall_introduction_action_label:
         # pick a person from each
         known_person = get_random_from_list(known_people)
         stranger = get_random_from_list(strangers)
+        # don't random introduce unique characters
+        while stranger in unique_character_list:
+            strangers.remove(stranger)
+            if len(strangers) == 0:
+                renpy.return_statement() # no strangers left, exit
+            stranger = get_random_from_list(strangers)
 
         scene_manager = Scene()
 
