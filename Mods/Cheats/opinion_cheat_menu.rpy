@@ -6,9 +6,8 @@ init python:
 
         score = self.get_opinion_score(topic)
 
-        if score is 2:
-            vars(self)[category][topic] = [score - 4, discover]
-
+        if value != 0 and score == 2:
+            vars(self)[category][topic] = [-2, discover]
         else:
             vars(self)[category][topic] = [score + value, discover]
 
@@ -47,10 +46,19 @@ screen opinion_edit_menu():
                             mousewheel True
                             yfill True
                             vbox:
-                                for x in categories[n][0]:
-                                    textbutton "[x]\n" +  " Score: " + str(target.get_opinion_score(x)) + " | " + "Discovered: " + str(target.get_opinion_status(x)):
-                                        style "textbutton_no_padding_highlight"
-                                        text_style "serum_text_style"
-                                        xfill True
-                                        action Function(target.update_opinion_score, x, categories[n][1], 1)
-                                        alternate Function(target.update_opinion_score, x, categories[n][1], 0, False)
+                                for x in sorted(categories[n][0]):
+                                    hbox:
+                                        textbutton x.title():
+                                            style "textbutton_no_padding_highlight"
+                                            text_style "serum_trait_style"
+                                            xsize 400
+                                            padding [4,2]
+                                            action Function(target.update_opinion_score, x, categories[n][1], 1)
+                                            alternate Function(target.update_opinion_score, x, categories[n][1], 0, False)
+                                        frame:
+                                            background "#000080"
+                                            margin [1,2]
+                                            xsize 500
+                                            text " Score: " + str(target.get_opinion_score(x)) + " | " + "Discovered: " + str(target.get_opinion_status(x)) style "serum_text_style"
+
+
