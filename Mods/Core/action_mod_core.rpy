@@ -158,6 +158,11 @@ init 2 python:
                 person.hair_colour = find_in_list(lambda x: x[0] == person.hair_colour, list_of_hairs) or list_of_hairs[0]
             elif not isinstance(person.hair_colour, list) or len(person.hair_colour) != 2:
                 person.hair_colour = list_of_hairs[0]
+
+        # remove enter elevator action from configuration screen
+        found = find_in_list(lambda x: x.effect == "room_manager_action_label", action_mod_list)
+        if found:
+            found.allow_disable = False
         return
 
     # mod settings action
