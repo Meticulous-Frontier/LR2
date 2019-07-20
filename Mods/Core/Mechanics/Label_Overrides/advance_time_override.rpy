@@ -9,16 +9,19 @@ init -1 python:
         return True # We always want to increase the time_of_day value unless it is night time in which case the end of day action is triggered.
 
     def advance_time_end_of_day_requirement(): # NOTE: Make sure to assign a False return value if you want to do checks towards is_action_enabled()
-        return time_of_day is 4 # If it's night then run the end of day label.
+        return time_of_day == 4 # If it's night then run the end of day label.
 
     def advance_time_random_crisis_requirement():
         return renpy.random.randint(0,100) < crisis_chance
 
     def advance_time_bankrupt_check_requirement():
-        return time_of_day is 4
+        return time_of_day == 4
 
-    def advance_time_random_morning_crisis_requirement():
-        return renpy.random.randint(0,100) < morning_crisis_chance
+    def advance_time_mandatory_morning_crisis_requirement():
+        return time_of_day == 0
+
+    def advance_time_random_morning_crisis_requirement():       
+        return time_of_day == 0 and renpy.random.randint(0,100) < morning_crisis_chance
 
     def advance_time_daily_serum_dosage_requirement():
         return time_of_day == 1 and daily_serum_dosage_policy.is_owned() # This runs if you have the corresponding policy
@@ -50,7 +53,7 @@ init 5 python:
         "advance_time_mandatory_crisis_label", priority = advance_time_next_action.priority + 1, category = "Gameplay")
     advance_time_random_crisis_action = ActionMod("Run random crisis events", advance_time_random_crisis_requirement,
         "advance_time_random_crisis_label", priority = advance_time_next_action.priority + 1, category = "Gameplay")
-    advance_time_mandatory_morning_crisis_action = ActionMod("Run mandatory morning crisis events", advance_time_requirement,
+    advance_time_mandatory_morning_crisis_action = ActionMod("Run mandatory morning crisis events", advance_time_mandatory_morning_crisis_requirement,
         "advance_time_mandatory_morning_crisis_label", priority = advance_time_next_action.priority + 1, category = "Gameplay")
     advance_time_random_morning_crisis_action = ActionMod("Run random morning crisis events", advance_time_random_morning_crisis_requirement,
         "advance_time_random_morning_crisis_label", priority = advance_time_next_action.priority + 1, category = "Gameplay")
