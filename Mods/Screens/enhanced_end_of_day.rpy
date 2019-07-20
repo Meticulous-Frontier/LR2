@@ -33,7 +33,9 @@ init 2:
 
                 vbox:
                     xsize 800
-                    $ profit = mc.business.sales_made + starbuck.calc_investment_return() - mc.business.calculate_salary_cost() - mc.business.supplies_purchased
+                    $ profit = mc.business.sales_made + starbuck.calc_investment_return() - mc.business.supplies_purchased
+                    if mc.business.is_work_day():
+                        $ profit -= mc.business.calculate_salary_cost()
                     if profit > 0:
                         text "Profit: $" + str(profit)  style "textbutton_text_style" size 26 color "#00A000"
                     else:
