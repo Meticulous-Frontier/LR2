@@ -69,7 +69,7 @@ init -1 python:
         return
 
 label activate_generic_personality(stack):
-    $ unique_character_list = [mom, lily, aunt, cousin, stephanie, alexia]
+    call create_unique_character_list from _call_create_unique_character_list_activate
 
     python:
         # add one bimbo to the game (on start of game)
@@ -87,8 +87,7 @@ label activate_generic_personality(stack):
     return
 
 label update_generic_personality(stack):
-    $ unique_character_list = [mom, lily, aunt, cousin, stephanie, alexia]
-
+    call create_unique_character_list from _call_create_unique_character_list_update
 
     python:
         # fix for old save games (can be removed in future):
@@ -103,4 +102,16 @@ label update_generic_personality(stack):
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
+    return
+
+label create_unique_character_list:
+    # original unique game characters
+    $ unique_character_list = [mom, lily, aunt, cousin, stephanie, alexia]
+
+    # mod unique characters (check for existance first)
+    if "salon_manager" in globals():
+        $ unique_character_list.append(salon_manager)
+
+    if "starbuck" in globals():
+        $ unique_character_list.append(starbuck)
     return
