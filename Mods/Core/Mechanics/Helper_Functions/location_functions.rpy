@@ -1,7 +1,7 @@
 init -1 python:
     def change_scene_display(the_location): #Switch displayed location and background image
-        renpy.scene("Active")
         renpy.show(the_location.name, what=the_location.background_image)
+        renpy.scene("Active")
         return   
 
     def create_room_label_list(): #Assigns room.labels = [] to all rooms in list_of_places. So they can have labels assigned to them.
