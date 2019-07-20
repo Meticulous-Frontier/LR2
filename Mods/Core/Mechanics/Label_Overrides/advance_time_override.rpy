@@ -12,7 +12,7 @@ init -1 python:
         return time_of_day == 4 # If it's night then run the end of day label.
 
     def advance_time_random_crisis_requirement():
-        return renpy.random.randint(0,100) < crisis_chance
+        return time_of_day != 0 and renpy.random.randint(0,100) < crisis_chance
 
     def advance_time_bankrupt_check_requirement():
         return time_of_day == 4
