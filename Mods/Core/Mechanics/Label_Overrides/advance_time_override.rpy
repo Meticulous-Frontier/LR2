@@ -54,11 +54,11 @@ init 5 python:
         "advance_time_next_label", priority = advance_time_end_of_day_action.priority + 1, # End of day calculations take priority
         allow_disable = False)
     advance_time_mandatory_crisis_action = ActionMod("Run mandatory crisis events", advance_time_mandatory_crisis_requirement,
-        "advance_time_mandatory_crisis_label", priority = advance_time_next_action.priority + 1, category = "Gameplay")
+        "advance_time_mandatory_crisis_label", priority = advance_time_next_action.priority + 1, category = "Gameplay", allow_disable = False)
     advance_time_random_crisis_action = ActionMod("Run random crisis events", advance_time_random_crisis_requirement,
         "advance_time_random_crisis_label", priority = advance_time_next_action.priority + 1, category = "Gameplay")
     advance_time_mandatory_morning_crisis_action = ActionMod("Run mandatory morning crisis events", advance_time_mandatory_morning_crisis_requirement,
-        "advance_time_mandatory_morning_crisis_label", priority = advance_time_next_action.priority + 1, category = "Gameplay")
+        "advance_time_mandatory_morning_crisis_label", priority = advance_time_next_action.priority + 1, category = "Gameplay", allow_disable = False)
     advance_time_random_morning_crisis_action = ActionMod("Run random morning crisis events", advance_time_random_morning_crisis_requirement,
         "advance_time_random_morning_crisis_label", priority = advance_time_next_action.priority + 1, category = "Gameplay")
     advance_time_daily_serum_dosage_action = ActionMod("Employees daily Serum", advance_time_daily_serum_dosage_requirement,
