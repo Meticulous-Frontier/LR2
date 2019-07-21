@@ -1,7 +1,7 @@
 init -1 python:
     
     # Get an overwear outfit that is considered appropriate based on sluttines and preferences.
-    def get_random_appropriate_overwear(self, sluttiness_limit, sluttiness_min = 0, exclude_skirts = False, exclude_pants = False):
+    def get_random_appropriate_overwear_enhanced(self, sluttiness_limit, sluttiness_min = 0, exclude_skirts = False, exclude_pants = False):
         valid_overwear = []
         for overwear in self.overwear_sets:
             if overwear.get_overwear_slut_score() <= sluttiness_limit and overwear.get_overwear_slut_score() >= sluttiness_min:
@@ -20,7 +20,7 @@ init -1 python:
         else:
             return None
 
-    Wardrobe.get_random_appropriate_overwear = get_random_appropriate_overwear
+    Wardrobe.get_random_appropriate_overwear = get_random_appropriate_overwear_enhanced
 
     # Get a copy of a full outfit that is considered appropriate based on sluttiness and preferences.
     def get_random_appropriate_outfit_enhanced(self, sluttiness_limit, sluttiness_min = 0, exclude_skirts = False, exclude_pants = False): 
