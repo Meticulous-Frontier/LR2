@@ -18,7 +18,13 @@ label SB_tutorial_event():
         if len(known) == 0:
             renpy.return_statement()
 
-    $ the_person = get_random_from_list(known)
+        the_person = get_random_from_list(known)
+        # don't flirt in the mall with family members, the dialog feels wrong for this.
+        while the_person in [mom, lily, aunt, cousin]:
+            known.remove(the_person)
+            if len(known) == 0:
+                renpy.return_statement() # no known people left, exit
+            the_person = get_random_from_list(known)  
 
     $ the_person.draw_person()
 

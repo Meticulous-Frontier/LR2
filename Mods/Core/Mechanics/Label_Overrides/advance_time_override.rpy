@@ -9,16 +9,23 @@ init -1 python:
         return True # We always want to increase the time_of_day value unless it is night time in which case the end of day action is triggered.
 
     def advance_time_end_of_day_requirement(): # NOTE: Make sure to assign a False return value if you want to do checks towards is_action_enabled()
-        return time_of_day is 4 # If it's night then run the end of day label.
+        return time_of_day == 4 # If it's night then run the end of day label.
 
     def advance_time_random_crisis_requirement():
-        return renpy.random.randint(0,100) < crisis_chance
+        return time_of_day != 0 and renpy.random.randint(0,100) < crisis_chance
+
+    # only trigger mandatory crisis events in timeslot 4 when in bedroom (actually end of day after pressing sleep button, required for dialog consistency)   
+    def advance_time_mandatory_crisis_requirement():
+        return time_of_day != 4 or mc.location == bedroom 
 
     def advance_time_bankrupt_check_requirement():
-        return time_of_day is 4
+        return time_of_day == 4
 
-    def advance_time_random_morning_crisis_requirement():
-        return renpy.random.randint(0,100) < morning_crisis_chance
+    def advance_time_mandatory_morning_crisis_requirement():
+        return time_of_day == 0
+
+    def advance_time_random_morning_crisis_requirement():       
+        return time_of_day == 0 and renpy.random.randint(0,100) < morning_crisis_chance
 
     def advance_time_daily_serum_dosage_requirement():
         return time_of_day == 1 and daily_serum_dosage_policy.is_owned() # This runs if you have the corresponding policy
@@ -46,12 +53,12 @@ init 5 python:
     advance_time_next_action = ActionMod("Advances into the next time slot", advance_time_next_requirement,
         "advance_time_next_label", priority = advance_time_end_of_day_action.priority + 1, # End of day calculations take priority
         allow_disable = False)
-    advance_time_mandatory_crisis_action = ActionMod("Run mandatory crisis events", advance_time_requirement,
-        "advance_time_mandatory_crisis_label", priority = advance_time_next_action.priority + 1, category = "Gameplay")
+    advance_time_mandatory_crisis_action = ActionMod("Run mandatory crisis events", advance_time_mandatory_crisis_requirement,
+        "advance_time_mandatory_crisis_label", priority = advance_time_next_action.priority + 1, category = "Gameplay", allow_disable = False)
     advance_time_random_crisis_action = ActionMod("Run random crisis events", advance_time_random_crisis_requirement,
         "advance_time_random_crisis_label", priority = advance_time_next_action.priority + 1, category = "Gameplay")
-    advance_time_mandatory_morning_crisis_action = ActionMod("Run mandatory morning crisis events", advance_time_requirement,
-        "advance_time_mandatory_morning_crisis_label", priority = advance_time_next_action.priority + 1, category = "Gameplay")
+    advance_time_mandatory_morning_crisis_action = ActionMod("Run mandatory morning crisis events", advance_time_mandatory_morning_crisis_requirement,
+        "advance_time_mandatory_morning_crisis_label", priority = advance_time_next_action.priority + 1, category = "Gameplay", allow_disable = False)
     advance_time_random_morning_crisis_action = ActionMod("Run random morning crisis events", advance_time_random_morning_crisis_requirement,
         "advance_time_random_morning_crisis_label", priority = advance_time_next_action.priority + 1, category = "Gameplay")
     advance_time_daily_serum_dosage_action = ActionMod("Employees daily Serum", advance_time_daily_serum_dosage_requirement,
@@ -113,6 +120,9 @@ label advance_time_bankrupt_check_label():
     return
 
 label advance_time_end_of_day_label():
+    # make sure we run all required action before switching to next day
+    call advance_time_mandatory_crisis_label from _call_advance_time_mandatory_crisis_label_advance_time_end_of_day_label
+
     #"advance_time_end_of_day_label" # DEBUG
     #if time_of_day == 4: ##First, determine if we're going into the next chunk of time. If we are, advance the day and run all of the end of day code. NOTE: We can do checks like these with Action.requirements
     python:
@@ -161,9 +171,8 @@ label advance_time_random_crisis_label():
         $ crisis_tracker.append([c[0] for c in crisis_list].index(the_crisis)) # add crisis index to recent crisis list
         $ the_crisis.call_action()
 
+    $ change_scene_display(mc.location) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
 
-    $ renpy.scene("Active")
-    $ renpy.show(mc.location.name,what=mc.location.background_image) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
     show screen business_ui
     return
 
@@ -182,9 +191,8 @@ label advance_time_mandatory_crisis_label():
             $ clear_list.append(crisis)
         $ mandatory_crisis_count += 1
 
-    $ renpy.show(mc.location.name,what=mc.location.background_image) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
-
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
+        change_scene_display(mc.location) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
         for crisis in clear_list:
             mc.business.mandatory_crises_list.remove(crisis) #Clean up the list.
     return
@@ -220,8 +228,9 @@ label advance_time_mandatory_morning_crisis_label():
             $ renpy.scene("Active")
             $ clear_list.append(crisis)
         $ mandatory_morning_crisis_count += 1
-    $ renpy.show(mc.location.name,what=mc.location.background_image) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
+
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
+        change_scene_display(mc.location) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
         for crisis in clear_list:
             mc.business.mandatory_morning_crises_list.remove(crisis) #Clean up the list.
     return
@@ -259,7 +268,7 @@ label advance_time_random_morning_crisis_label():
 
 label advance_time_next_label():
     #"advance_time_next_label" #DEBUG
-    if time_of_day is 4: # NOTE: Take care of resetting it to 0 here rather than during end_day_label
+    if time_of_day == 4: # NOTE: Take care of resetting it to 0 here rather than during end_day_label
         $ time_of_day = 0
     else:
         $ time_of_day += 1 ##Otherwise, just run the end of day code.

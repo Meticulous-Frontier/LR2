@@ -57,9 +57,44 @@ init 2:
                             mousewheel True
                             vbox:
                                 xsize 370
+                                for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True): # Sort traits by exclude tags (So all production traits are grouped, for example), then by tier (so the highest tier production tag ends up at the top
+                                    if not trait.researched and trait.has_required() and "Production" in trait.exclude_tags:
+                                        $ trait_tags = ""
+                                        if trait.exclude_tags:
+                                            $ trait_tags = "\nExcludes Other: "
+                                            for a_tag in trait.exclude_tags:
+                                                $ trait_tags += "[" + a_tag + "]"
+                                        $ trait_title = trait.name + " " + "(" +str(trait.current_research)+"/"+ str(trait.research_needed) + ")" + trait_tags
 
-                                for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True):
-                                    if not trait.researched and trait.has_required():
+                                        textbutton "[trait_title]":
+                                            style "textbutton_style"
+                                            text_style "serum_text_style_traits"
+                                            action [Hide("trait_tooltip"),Return(trait)]
+
+                                            hovered Show("trait_tooltip",None,trait)
+                                            unhovered Hide("trait_tooltip")
+                                            xsize 365
+
+                                for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True): # Sort traits by exclude tags (So all production traits are grouped, for example), then by tier (so the highest tier production tag ends up at the top
+                                    if not trait.researched and trait.has_required() and "Suggest" in trait.exclude_tags:
+                                        $ trait_tags = ""
+                                        if trait.exclude_tags:
+                                            $ trait_tags = "\nExcludes Other: "
+                                            for a_tag in trait.exclude_tags:
+                                                $ trait_tags += "[" + a_tag + "]"
+                                        $ trait_title = trait.name + " " + "(" +str(trait.current_research)+"/"+ str(trait.research_needed) + ")" + trait_tags
+
+                                        textbutton "[trait_title]":
+                                            style "textbutton_style"
+                                            text_style "serum_text_style_traits"
+                                            action [Hide("trait_tooltip"),Return(trait)]
+
+                                            hovered Show("trait_tooltip",None,trait)
+                                            unhovered Hide("trait_tooltip")
+                                            xsize 365
+
+                                for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name, reverse = False): # Sort traits by exclude tags (So all production traits are grouped, for example), then by name since tier does not matter.
+                                    if not trait.researched and trait.has_required() and "Production" not in trait.exclude_tags and "Suggest" not in trait.exclude_tags:
                                         $ trait_tags = ""
                                         if trait.exclude_tags:
                                             $ trait_tags = "\nExcludes Other: "
@@ -88,10 +123,54 @@ init 2:
                             mousewheel True
                             vbox:
                                 xsize 400
+                                for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True): # Sort traits by exclude tags (So all production traits are grouped, for example), then by tier (so the highest tier production tag ends up at the top
+                                    if trait.researched and "Production" in trait.exclude_tags:
+                                        $ trait_tags = ""
+                                        if trait.exclude_tags:
+                                            $ trait_tags = "\nExcludes Other: "
+                                            for a_tag in trait.exclude_tags:
+                                                $ trait_tags += "[" + a_tag + "]"
 
+                                        $ trait_title = trait.name + " " + "(" +str(trait.current_research)+"/"+ str(trait.research_needed) + ")" + trait_tags
 
-                                for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True):
-                                    if trait.researched:
+                                        $ trait_side_effects_text = get_trait_side_effect_text(trait)
+                                        $ trait_mastery_text = get_trait_mastery_text(trait)
+
+                                        textbutton "[trait_title]\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
+                                            text_xalign 0.5
+                                            text_text_align 0.5
+
+                                            action [Hide("trait_tooltip"),Return(trait)] style "textbutton_style"
+                                            text_style "serum_text_style_traits"
+                                            hovered Show("trait_tooltip",None,trait)
+                                            unhovered Hide("trait_tooltip")
+                                            xsize 395
+
+                                for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True): # Sort traits by exclude tags (So all production traits are grouped, for example), then by tier (so the highest tier production tag ends up at the top
+                                    if trait.researched and "Suggest" in trait.exclude_tags:
+                                        $ trait_tags = ""
+                                        if trait.exclude_tags:
+                                            $ trait_tags = "\nExcludes Other: "
+                                            for a_tag in trait.exclude_tags:
+                                                $ trait_tags += "[" + a_tag + "]"
+
+                                        $ trait_title = trait.name + " " + "(" +str(trait.current_research)+"/"+ str(trait.research_needed) + ")" + trait_tags
+
+                                        $ trait_side_effects_text = get_trait_side_effect_text(trait)
+                                        $ trait_mastery_text = get_trait_mastery_text(trait)
+
+                                        textbutton "[trait_title]\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
+                                            text_xalign 0.5
+                                            text_text_align 0.5
+
+                                            action [Hide("trait_tooltip"),Return(trait)] style "textbutton_style"
+                                            text_style "serum_text_style_traits"
+                                            hovered Show("trait_tooltip",None,trait)
+                                            unhovered Hide("trait_tooltip")
+                                            xsize 395
+
+                                for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name, reverse = False): # Sort traits by exclude tags (So all production traits are grouped, for example), then by name since tier does not matter.
+                                    if trait.researched and "Production" not in trait.exclude_tags and "Suggest" not in trait.exclude_tags:
                                         $ trait_tags = ""
                                         if trait.exclude_tags:
                                             $ trait_tags = "\nExcludes Other: "

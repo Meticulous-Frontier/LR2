@@ -30,7 +30,7 @@ init 3 python:
         return
 
     room_manager_action = ActionMod("Enter the elevator", room_manager_action_requirement, "room_manager_action_label", initialization = room_manager_initialization,
-        menu_tooltip = "Visit rooms on different floors", category = "Misc", priority = 1)
+        menu_tooltip = "Visit rooms on different floors", category = "Misc", priority = 1, allow_disable = False)
 
         # Room(name,formalName,connections,background_image,objects,people,actions,public,map_pos, tutorial_label = None, visible = True)
     elevator = Room("elevator", "Elevator", [], apartment_background, [],[],[], False,[], None, False) # Create a custom room that can be put to use for generic events and such.

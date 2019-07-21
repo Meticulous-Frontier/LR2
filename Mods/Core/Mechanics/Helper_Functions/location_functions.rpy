@@ -1,7 +1,8 @@
 init -1 python:
-    def change_scene_display(the_location): #Switch displayed location and background image
-        renpy.scene("Active")
-        renpy.show(the_location.name, what=the_location.background_image)
+    def change_scene_display(location): #Switch displayed location and background image
+        #mc.log_event("Showing: " + location.formalName, "float_text_grey")
+        renpy.scene()   # initialize scene
+        renpy.show(location.name, what = location.background_image) # set background for new scene
         return   
 
     def create_room_label_list(): #Assigns room.labels = [] to all rooms in list_of_places. So they can have labels assigned to them.
@@ -15,10 +16,6 @@ init -1 python:
             tuple_string = flavor + room.formalName
             tuple_list.append([tuple_string, room])
         return tuple_list
-
-    def advance_time():
-        renpy.call("advance_time")
-        return
 
     def is_public():
         if mc.location.public == True:

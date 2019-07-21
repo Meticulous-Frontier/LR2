@@ -18,3 +18,11 @@ init -1 python:
         return hash(self.personality_type_prefix)
 
     Personality.__hash__ = personality_hash
+
+
+    def main_character_change_location(self,new_location):
+        self.location = new_location
+        change_scene_display(new_location)
+        return
+
+    MainCharacter.change_location = main_character_change_location

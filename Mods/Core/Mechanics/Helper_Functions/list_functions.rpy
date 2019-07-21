@@ -13,6 +13,12 @@ init -2 python:
             if search(item):
                 return item
         return None
+
+    def find_in_set(obj, in_set):
+        for element in in_set:
+            if element == obj:
+                return element
+        return
     
     # finds all qualifying items in list and returns them as a smaller list.
     def find_items_in_list(search, list):

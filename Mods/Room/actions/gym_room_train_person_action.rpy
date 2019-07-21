@@ -36,6 +36,8 @@ label select_person_for_gym():
         "After some time you get a response..."
 
         call select_person_for_gym_response(person_choice) from _call_select_person_for_gym_response # What to do if "Back" was not the choice taken.
+        call advance_time from _call_advance_time_gym_training
+
     return # Go back to main menu
 
 
@@ -67,7 +69,7 @@ label select_person_for_gym_response(person_choice):
         $ the_person.change_happiness(+10)
     # End of respones
     call train_in_gym(the_person) from _call_train_in_gym_person_for_gym
-    call advance_time from _call_advance_time_gym_training
+    return
 
 init -2 python:
     gym_session_cost = 40
@@ -147,5 +149,5 @@ label train_in_gym(person):
 
     $ person.reset_arousal()
     $ person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-    $ change_scene_display(gym)
+    $ change_scene_display(mc.location)
     return

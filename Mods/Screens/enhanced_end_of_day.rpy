@@ -33,14 +33,17 @@ init 2:
 
                 vbox:
                     xsize 800
-                    $ profit = mc.business.sales_made + starbuck.calc_investment_return() - mc.business.calculate_salary_cost() - mc.business.supplies_purchased
+                    $ salaray_costs = 0
+                    if day % 7 > 1 and day % 7 < 6: # day count already changed before summary is shown
+                        $ salaray_costs = mc.business.calculate_salary_cost()                   
+                    $ profit = mc.business.sales_made + starbuck.calc_investment_return() - salaray_costs - mc.business.supplies_purchased
                     if profit > 0:
                         text "Profit: $" + str(profit)  style "textbutton_text_style" size 26 color "#00A000"
                     else:
                         text "Loss: $" + str(abs(profit))  style "textbutton_text_style" size 26 color "#A00000"
 
                     text "     " + "Sales Made: $" + str(mc.business.sales_made) style "textbutton_text_style"
-                    text "     " + "Daily Salary Paid: $" + str(mc.business.calculate_salary_cost()) style "textbutton_text_style"
+                    text "     " + "Daily Salary Paid: $" + str(salaray_costs) style "textbutton_text_style"
                     text "     " + "Serums Sold Today: " + str(mc.business.serums_sold) style "textbutton_text_style"
                     text "     " + "Serums Ready for Sale: " + str(mc.business.sale_inventory.get_any_serum_count()) style "textbutton_text_style"
 

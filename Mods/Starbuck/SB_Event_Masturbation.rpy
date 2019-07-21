@@ -306,6 +306,8 @@ label SB_caught_masturbating_crisis_label():
         "Keep walking":
             "You decide to give [the_person.possessive_title] some privacy. As quietly as you can, you close the door behind you and continue walking"
 
+    $ the_person.reset_arousal()
+    $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)
     $ renpy.scene("Active")
     return
