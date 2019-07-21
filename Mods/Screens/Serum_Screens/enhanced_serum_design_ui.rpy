@@ -11,11 +11,11 @@ init 2:
             yalign 0.15
             xanchor 0.5
             xalign 0.5
-            xsize 1080
-            spacing 20
+            xsize 1180
+            spacing 10
             frame:
                 background "#888888"
-                ysize 800
+                ysize 850
 
 
                 vbox:
@@ -24,12 +24,11 @@ init 2:
                         background "#000080"
                         xsize 530
                         text "Pick Production Type" style "serum_text_style_header"
-
                     frame:
                         background "#666666"
                         xalign 0.5
                         xsize 530
-                        ysize 300
+                        ysize 175
 
                         viewport:
                             xsize 530
@@ -51,42 +50,19 @@ init 2:
                                                         if tag == checking_tag:
                                                             trait_allowed = False
 
-                                        $ trait_side_effects = str(trait.get_effective_side_effect_chance()) # Put this section into a function?
-
-                                        if trait.get_effective_side_effect_chance() >= 60: # Red (Color code the side effect risk for quicker identification)
-                                            $ trait_side_effects_text = "{color=#cd5c5c}[trait_side_effects]{/color}"
-
-                                        elif trait.get_effective_side_effect_chance() >= 20: # Yellow
-                                            $ trait_side_effects_text = "{color=#eee000}[trait_side_effects]{/color}"
-
-                                        else: # Green
-                                            $ trait_side_effects_text = "{color=#98fb98}[trait_side_effects]{/color}"
-
-
-                                        $ trait_mastery_level = str(trait.mastery_level)
-
-                                        if trait.mastery_level <= 10: # Red
-                                            $ trait_mastery_text = "{color=#cd5c5c}[trait_mastery_level]{/color}"
-                                        elif trait.mastery_level <= 50: # Yellow
-                                            $ trait_mastery_text = "{color=#eee000}[trait_mastery_level]{/color}"
-                                        else: # Green
-                                            $ trait_mastery_text = "{color=#98fb98}[trait_mastery_level]{/color}"
-
-                                        textbutton trait.name + trait_tags + "\nMastery Level: " + trait_mastery_text + " | " + "Side Effect Chance: " + trait_side_effects_text + " %":
+                                        #$ trait_side_effects_text = get_trait_side_effect_text(trait)
+                                        #$ trait_mastery_text = get_trait_mastery_text(trait)
+                                                    #+ "\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
+                                        textbutton trait.name + trait_tags:
                                             style "textbutton_style"
                                             text_style "serum_text_style"
                                             xsize 530
-
                                             sensitive trait_allowed
-
                                             action [
-                                            Function(starting_serum.add_trait,trait)
+                                                Function(starting_serum.add_trait,trait)
                                             ]
-
-
-
                                             hovered [
-                                            SetScreenVariable("trait_tooltip", trait)
+                                                SetScreenVariable("trait_tooltip", trait)
                                             ]
 
                                             #unhovered [
@@ -95,12 +71,57 @@ init 2:
                     frame:
                         background "#000080"
                         xsize 530
+                        text "Add Suggestion Trait" style "serum_text_style_header"
+                    frame:
+                        background "#666666"
+                        xalign 0.5
+                        xsize 530
+                        ysize 175
+
+                        viewport:
+                            xsize 530
+                            scrollbars "vertical"
+                            mousewheel True
+                            vbox:
+                                for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True): # Sort traits by exclude tags (So all production traits are grouped, for example), then by tier (so the highest tier production tag ends up at the top
+                                    if trait not in starting_serum.traits and trait.researched and "Suggest" in trait.exclude_tags:
+                                        $ trait_tags = ""
+                                        if trait.exclude_tags:
+                                            $ trait_tags = " - "
+                                            for a_tag in trait.exclude_tags:
+                                                $ trait_tags += "{color=#d38c19}[[" + a_tag + "]{/color}"
+                                        $ trait_allowed = True
+                                        python: # Check to see if the trait is excluded by any of the traits currently in the serum. A long looped segment only to deal with lists of tags, which are unlikely.
+                                            for checking_trait in starting_serum.traits:
+                                                for tag in trait.exclude_tags:
+                                                    for checking_tag in checking_trait.exclude_tags:
+                                                        if tag == checking_tag:
+                                                            trait_allowed = False
+
+                                        #$ trait_side_effects_text = get_trait_side_effect_text(trait)
+                                        #$ trait_mastery_text = get_trait_mastery_text(trait)
+                                                        # + "\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
+                                        textbutton trait.name + trait_tags:
+                                            style "textbutton_style"
+                                            text_style "serum_text_style"
+                                            xsize 530
+                                            sensitive trait_allowed
+                                            action [
+                                                Function(starting_serum.add_trait,trait)
+                                            ]
+                                            hovered [
+                                                SetScreenVariable("trait_tooltip", trait)
+                                            ]
+
+                    frame:
+                        background "#000080"
+                        xsize 530
                         text "Add Serum Traits" style "serum_text_style_header"
                     frame:
                         background "#666666"
                         xalign 0.5
                         xsize 530
-                        ysize 375
+                        ysize 350
 
                         viewport:
                             xsize 530
@@ -108,10 +129,8 @@ init 2:
                             mousewheel True
 
                             vbox:
-
-
                                 for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name, reverse = False): # Sort traits by exclude tags (So all production traits are grouped, for example), then by name since tier does not matter.
-                                    if trait not in starting_serum.traits and trait.researched and "Production" not in trait.exclude_tags:
+                                    if trait not in starting_serum.traits and trait.researched and "Production" not in trait.exclude_tags and "Suggest" not in trait.exclude_tags:
                                         $ trait_tags = ""
                                         if trait.exclude_tags:
                                             $ trait_tags = " - "
@@ -125,43 +144,19 @@ init 2:
                                                         if tag == checking_tag:
                                                             trait_allowed = False
 
-                                        $ trait_side_effects = str(trait.get_effective_side_effect_chance()) # Put this into a function?
-
-                                        if trait.get_effective_side_effect_chance() >= 60: # Red (Color code the side effect risk for quicker identification)
-                                            $ trait_side_effects_text = "{color=#cd5c5c}[trait_side_effects]{/color}"
-
-                                        elif trait.get_effective_side_effect_chance() >= 20: # Yellow
-                                            $ trait_side_effects_text = "{color=#eee000}[trait_side_effects]{/color}"
-
-                                        else: # Green
-                                            $ trait_side_effects_text = "{color=#98fb98}[trait_side_effects]{/color}"
-
-
-                                        $ trait_mastery_level = str(trait.mastery_level)
-
-                                        if trait.mastery_level <= 10: # Red
-                                            $ trait_mastery_text = "{color=#cd5c5c}[trait_mastery_level]{/color}"
-                                        elif trait.mastery_level <= 50: # Yellow
-                                            $ trait_mastery_text = "{color=#eee000}[trait_mastery_level]{/color}"
-                                        else: # Green
-                                            $ trait_mastery_text = "{color=#98fb98}[trait_mastery_level]{/color}"
-
-                                        textbutton trait.name + trait_tags + "\nMastery Level: " + trait_mastery_text + " | " + "Side Effect Chance: " + trait_side_effects_text + " %":
+                                        #$ trait_side_effects_text = get_trait_side_effect_text(trait)
+                                        #$ trait_mastery_text = get_trait_mastery_text(trait)
+                                                        #+ "\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
+                                        textbutton trait.name + trait_tags:
                                             style "textbutton_style"
                                             text_style "serum_text_style"
                                             xsize 530
-
                                             sensitive trait_allowed
-
                                             action [
-
-                                            Function(starting_serum.add_trait,trait)
+                                                Function(starting_serum.add_trait,trait)
                                             ]
-
-
-
                                             hovered [
-                                            SetScreenVariable("trait_tooltip", trait)
+                                                SetScreenVariable("trait_tooltip", trait)
                                             ]
 
                                             #unhovered [
@@ -169,7 +164,7 @@ init 2:
                                             #]
             frame:
                 background "#888888"
-                ysize 800
+                ysize 850
                 vbox:
                     frame:
                         background "#000080"
@@ -192,42 +187,21 @@ init 2:
                                         $ trait_tags = " - "
                                         for a_tag in trait.exclude_tags:
                                             $ trait_tags += "[[" + a_tag + "]"
-                                    $ trait_side_effects = str(trait.get_effective_side_effect_chance()) # Put this into a function?
 
-                                    if trait.get_effective_side_effect_chance() >= 60: # Red (Color code the side effect risk for quicker identification)
-                                        $ trait_side_effects_text = "{color=#cd5c5c}[trait_side_effects]{/color}"
+                                    $ trait_side_effects_text = get_trait_side_effect_text(trait)
+                                    $ trait_mastery_text = get_trait_mastery_text(trait)
 
-                                    elif trait.get_effective_side_effect_chance() >= 20: # Yellow
-                                        $ trait_side_effects_text = "{color=#eee000}[trait_side_effects]{/color}"
-
-                                    else: # Green
-                                        $ trait_side_effects_text = "{color=#98fb98}[trait_side_effects]{/color}"
-
-
-                                    $ trait_mastery_level = str(trait.mastery_level)
-
-                                    if trait.mastery_level <= 10: # Red
-                                        $ trait_mastery_text = "{color=#cd5c5c}[trait_mastery_level]{/color}"
-                                    elif trait.mastery_level <= 50: # Yellow
-                                        $ trait_mastery_text = "{color=#eee000}[trait_mastery_level]{/color}"
-                                    else: # Green
-                                        $ trait_mastery_text = "{color=#98fb98}[trait_mastery_level]{/color}"
-
-                                    textbutton trait.name + trait_tags + "\nMastery Level: " + trait_mastery_text + " | " + "Side Effect Chance: " + trait_side_effects_text + " %":
+                                    textbutton trait.name + trait_tags + "\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
                                         style "textbutton_style"
                                         text_style "serum_text_style"
                                         xsize 520
-
                                         action[
-                                        Function(starting_serum.remove_trait,trait)
+                                            Function(starting_serum.remove_trait,trait)
                                         ]
-
                                         hovered [
-                                        SetScreenVariable("trait_tooltip", trait)
+                                            SetScreenVariable("trait_tooltip", trait)
                                         ]
-
                                         #unhovered Hide("trait_tooltip")
-
 
                     vbox:
                         frame:
@@ -265,7 +239,7 @@ init 2:
 
             frame:
                 background "#888888"
-                ysize 800
+                ysize 850
                 vbox:
                     xsize 550
                     spacing 5
@@ -344,38 +318,33 @@ init 2:
                         xsize 550
                         scrollbars "vertical"
                         mousewheel True
-                        frame:
-                            xsize 550
-                            background None
-                            vbox:
-                                for trait in starting_serum.traits:
-                                    textbutton trait.name:
-                                        style "textbutton_style"
-                                        text_style "serum_text_style"
-                                        xsize 550
+                        draggable True
+                        vbox:
+                            for trait in starting_serum.traits:
+                                textbutton trait.name:
+                                    style "textbutton_style"
+                                    text_style "serum_text_style"
+                                    xsize 540
+                                    action  NullAction()
+                                    hovered SetScreenVariable("trait_tooltip", trait)
 
-                                        action  NullAction()
-                                        hovered SetScreenVariable("trait_tooltip", trait)
-
-                                    hbox:
-                                        spacing 5
-                                        vbox:
-                                            frame:
-                                                background "#007000"
-                                                xsize 270
-                                                text "[trait.positive_slug]" style "serum_text_style"
-                                        vbox:
-                                            frame:
-                                                background "#930000"
-                                                xsize 270
-                                                text "[trait.negative_slug]" style "serum_text_style"
+                                hbox:
+                                    frame:
+                                        background "#007000"
+                                        xsize 270
+                                        margin [5, 0, 5, 0]
+                                        text "[trait.positive_slug]" style "serum_text_style"
+                                    frame:
+                                        xsize 270
+                                        background "#930000"
+                                        text "[trait.negative_slug]" style "serum_text_style"
 
         frame:
             background "#888888"
             xsize 250
             xanchor 0.5
             xalign 0.5
-            yalign 0.9
+            yalign 0.93
             vbox:
                 xanchor 0.5
                 xalign 0.5
