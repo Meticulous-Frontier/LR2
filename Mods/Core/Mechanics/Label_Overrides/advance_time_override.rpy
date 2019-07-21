@@ -228,8 +228,9 @@ label advance_time_mandatory_morning_crisis_label():
             $ renpy.scene("Active")
             $ clear_list.append(crisis)
         $ mandatory_morning_crisis_count += 1
-    $ renpy.show(mc.location.name,what=mc.location.background_image) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
+
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
+        change_scene_display(mc.location) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
         for crisis in clear_list:
             mc.business.mandatory_morning_crises_list.remove(crisis) #Clean up the list.
     return
