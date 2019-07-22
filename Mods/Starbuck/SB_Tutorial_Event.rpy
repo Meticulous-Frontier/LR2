@@ -9,25 +9,30 @@ init 2 python:
                 return True
         return False
 
+    def get_known_person():
+        unknown, known = get_people_with_status()
+        if len(known) == 0:
+            return None
+
+        person = get_random_from_list(known)
+        # don't flirt in the mall with family members, the dialog feels wrong for this.
+        while person in [mom, lily, aunt, cousin]:
+            known.remove(person)
+            if len(known) == 0:
+                return None
+            person = get_random_from_list(known)  
+        return person
+
     SB_tutorial_crisis = ActionMod("Mall Flirt", SB_tutorial_event_requirement, "SB_tutorial_event",
         menu_tooltip = "You have a short flirt with someone in the mall.", category = "Mall", is_crisis = True, crisis_weight = SB_tutorial_crisis_weight)
 
 label SB_tutorial_event():
-    python:
-        unknown, known = get_people_with_status()
-        if len(known) == 0:
-            renpy.return_statement()
+    $ the_person = get_known_person()
 
-        the_person = get_random_from_list(known)
-        # don't flirt in the mall with family members, the dialog feels wrong for this.
-        while the_person in [mom, lily, aunt, cousin]:
-            known.remove(the_person)
-            if len(known) == 0:
-                renpy.return_statement() # no known people left, exit
-            the_person = get_random_from_list(known)  
+    if the_person is None:
+        return
 
     $ the_person.draw_person()
-
     the_person.char "Oh, hey [the_person.mc_title]!"
     mc.name "Hello, [the_person.title]. How are you doing today."
     "[the_person.possessive_title] smiles and bats her eyelashes a few times."
