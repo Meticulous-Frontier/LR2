@@ -576,7 +576,7 @@ label starbuck_sex_store_investment_three_label(the_person):
     the_person.char "The store next to us recently went ouf of business, once I save up enough money, I'm gonna buy it out and expand my store. Turn this place into [the_person.name]'s MEGA sex shop!"
     "You consider what she is saying."
     mc.name "What kind of stuff could you carry with the extra space that you aren't carrying now?"
-    the_person.char "Oh, well in here we sell mostly accessories, lingerie, that kind of thing, but with more room we could get in all kinds of kinky stuff. Sex furnite, like chairs and swings, massage tables..."
+    the_person.char "Oh, well in here we sell mostly accessories, lingerie, that kind of thing, but with more room we could get in all kinds of kinky stuff. Sex furniture, like chairs and swings, massage tables..."
     "Wow, you had no idea there was so much stuff out there..."
     the_person.char "...could even get into bondage gear, fetish items like furry tail butt plugs... I mean, the sky is the limit, you know?"
     "So far, all of your investments in the shop have paid off... plus, you start to imagine what it would be like to try some of these items with [the_person.possessive_title]..."

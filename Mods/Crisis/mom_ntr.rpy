@@ -211,7 +211,7 @@ label mom_ntr_mod_action_label:
                                 the_person.char "Now are you happy, [man_name]? See me covered in your love juices?"
                                 man_name "You are great, [the_person.name]. I wish I could do it more often."
                                 $ the_person.draw_person(position = "stand2", emotion = "happy")
-                                "[the_person.possessive_title] get's up and smiles."
+                                "[the_person.possessive_title] gets up and smiles."
                                 the_person.char "How about a shower, [man_name]?"
                                 "They both go into the bathroom and you decide to get back to your room."
                                 if submissive or the_person.sluttiness > 60:
@@ -232,7 +232,7 @@ label mom_ntr_mod_action_label:
                                 "You see some white drops falling to the blankets."
                                 man_name "Well, quite a nice view. One cum filled bitch."
                                 $ the_person.draw_person(position = "stand2", emotion = "happy")
-                                "[the_person.possessive_title] get's up and smiles."
+                                "[the_person.possessive_title] gets up and smiles."
                                 the_person.char "No need to be so rough. The last part was really not bad, I agree."
                                 the_person.char "How about a shower, [man_name]?"
                                 "They both go into the bathroom and you decide to get back to your room."
@@ -271,7 +271,7 @@ label mom_ntr_mod_action_label:
                                 the_person.char "Ah, you taste so good, [man_name]. I hope there be more of it."
                                 man_name "You are just a perverted cum-loving slut, [the_person.name]. You know that?"
                                 $ the_person.draw_person(position = "stand2", emotion = "happy")
-                                "[the_person.possessive_title] get's up and smiles."
+                                "[the_person.possessive_title] gets up and smiles."
                                 the_person.char "Well, maybe so... Still, no need for such rude words after such a wonderful final."
                                 the_person.char "How about a shower, [man_name]?"
                                 "They both go into the bathroom and you decide to get back to your room."
@@ -295,7 +295,7 @@ label mom_ntr_mod_action_label:
                                     "His white liquid covers her butt."
                                     man_name "That's it, [the_person.name]. You got what you deserved."
                                     $ the_person.draw_person(position = "kissing", emotion = "happy")
-                                    "[the_person.possessive_title] get's up and kisses [man_name] with a passion."
+                                    "[the_person.possessive_title] gets up and kisses [man_name] with a passion."
                                     the_person.char "That was really great, [man_name]. I lost count how many orgasms I had. Never had such a good sex. We must do it again sometime."
                                     the_person.char "Now, how about a shower, [man_name]? I'm sweating like a cow."
                                     "They both go into the bathroom and you decide to get back to your room."
@@ -311,7 +311,7 @@ label mom_ntr_mod_action_label:
                                     "His white liquid covers her butt."
                                     man_name "That's it, [the_person.name]. You got what you deserved."
                                     $ the_person.draw_person(position = "stand2", emotion = "sad")
-                                    "[the_person.possessive_title] get's up. You see tears in her eyes."
+                                    "[the_person.possessive_title] gets up. You see tears in her eyes."
                                     the_person.char "Damn, [man_name]! I wish none of this has happened. Now get out of my house. Don't want to see your face anymore!"
                                     $ the_person.draw_person(position = "sitting", emotion = "sad")
                                     "You retreat to your room, while [man_name] collects his clothes and gets dressed."
@@ -334,7 +334,7 @@ label mom_ntr_mod_action_label:
                                 the_person.char "Now are you happy, [man_name]? See me covered in your love juices?"
                                 man_name "You are great, [the_person.name]. I wish I could do it more often."
                                 $ the_person.draw_person(position = "stand2", emotion = "happy")
-                                "[the_person.possessive_title] get's up and smiles."
+                                "[the_person.possessive_title] gets up and smiles."
                                 the_person.char "How about a shower, [man_name]?"
                                 "They both go into the bathroom and you decide to get back to your room."
                                 if submissive or the_person.sluttiness > 60:
@@ -374,7 +374,7 @@ label mom_ntr_mod_action_label:
                                 the_person.char "Ah, you taste so good, [man_name]. I hope there be more of it."
                                 man_name "You are just a perverted cum-loving slut, [the_person.name]. You know that?"
                                 $ the_person.draw_person(position = "stand2", emotion = "happy")
-                                "[the_person.possessive_title] get's up and smiles."
+                                "[the_person.possessive_title] gets up and smiles."
                                 the_person.char "Well, maybe so... Still, no need for such rude words after such a wonderful final."
                                 the_person.char "How about a shower, [man_name]?"
                                 "They both go into the bathroom and you decide to get back to your room."
