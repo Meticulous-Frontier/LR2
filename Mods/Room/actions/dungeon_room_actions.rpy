@@ -1,52 +1,23 @@
 # TODO: Encourage players to unlock the "Follow Me" command to bring people to the Dungeon for situational bonuses from the objects in the Room.
 #       Balance how much of a bonus the objects give. Right now it's a sluttiness_modifier = 10, obedience_modifier = 20 for the lowest tier, "the_bdsmbed" which is +10 obedience from a normal bed.
-# TODO: Create a "Slave" role that can be unlocked at high obedience. It should make sure that "Generic People Actions" are always available.
-# TODO: Make a "Strip" Action that can be used to a) Strip person of clothing and B) Change their planned outfit to the stripped state if the player wants.
-# TODO: Create a short story resulting in an expensive Serum trait that enables the "Slave" role, inherently skipping the common requirements for certain Actions.
-#       Something as simple as 1st Slave reveal short text, then the same on 2nd and finally the third reveals a short text and that you have somehow come to the conclusion
-#       That you know how to chemically induce the "Slave" behavior.
-# TODO: Find and implement interesting Actions exclusive to the Room or the Role so that it doesn't become meaningless filler content.
-#       Increasing obedience seems to be relatively easy in the base game, so having obedience boosts seem redundant. What about converting some obedience into sluttiness?
-#       See whats possible in regards to using Role "Slave" to temporary increase the obedience of other People in the same room if the MainCharacter is present AND has interacted with the "Slave".
-# NOTE: Current actions seem pointless and can't see how they could be interesting without extensive story writing work even if fleshed out.
-init -1 python:
-    dungeon_room_actions = []
-    dungeon_room_slave_actions = []
-
+# NOTE: Strip action is now in generic_people_role
 init 10 python:
 
     def dungeon_room_actions_requirement():
         return True
 
-    def dungeon_room_collar_person_requirement(the_person):
-        if the_person.obedience >= 130 and mc.location == office_basement and the_person.dungeon_collar == False:
+    def dungeon_room_appoint_slave_requirement():
+        if mc.location.people:
             return True
-        if the_person.dungeon_collar == True:
-            return False
         else:
-            if mc.location == office_basement: #Only display the if you are in the Dungeon and they don't have a collar
-                return "Requires: 130 Obedience"
-
-    def dungeon_room_uncollar_person_requirement(the_person):
-        return the_person.dungeon_collar
-
-    def advance_time_collar_person_requirement():
-        return dungeon_room_collar_person_action.enabled
+            return "Requires: Person in Room"
 
     dungeon_room_action = Action("Manage [office_basement.formalName]", dungeon_room_actions_requirement, "dungeon_room_action_label",
         menu_tooltip = "Do things in the [office_basement.formalName]")
 
-    dungeon_room_collar_person_action = ActionMod("Place collar on [the_person.title].", dungeon_room_collar_person_requirement, "dungeon_room_collar_person_label",
-        menu_tooltip = "Put a collar of ownership on the target, ensure that their obedience stays high.", category = "Dungeon Actions")
-    dungeon_room_uncollar_person_action = ActionMod("Remove collar from [the_person.title].", dungeon_room_uncollar_person_requirement, "dungeon_room_collar_person_label",
-        menu_tooltip = "Remove the collar, declearing them a free spirit.", category = "Dungeon Actions", allow_disable = False)
-    Person.dungeon_collar = False #NOTE: Is this harmful?
-    generic_people_role.actions.append(dungeon_room_collar_person_action)
-    generic_people_role.actions.append(dungeon_room_uncollar_person_action)
-
-    advance_time_collar_person_action = ActionMod("Enable collar functionality", advance_time_collar_person_requirement, "advance_time_collar_person_label", allow_disable = False, priority = advance_time_people_to_process_action.priority + 1,
-        menu_tooltip = "Allows the dungeon_room_collar_person_action to do what it is intended to do.")
-    advance_time_action_list.append(advance_time_collar_person_action)
+    dungeon_room_appoint_slave_action = Action("Appoint a slave", dungeon_room_appoint_slave_requirement, "dungeon_room_appoint_slave_label", menu_tooltip = "Assigns the person a role as a slave. Use the \"Follow Me\" Action on a person to bring them to the Dungeon.")
+    dungeon_room_actions = [dungeon_room_appoint_slave_action]
+    dungeon_room_slave_actions = []
 
 label dungeon_room_action_label():
     while True:
@@ -64,21 +35,44 @@ label dungeon_room_action_label():
 
     return
 
-label dungeon_room_collar_person_label(the_person):
+label dungeon_room_appoint_slave_label():
 
-    if the_person.dungeon_collar:
-        $ the_person.dungeon_collar = False
-        "You remove the collar from your [the_person.possessive_title]'s neck"
-    else:
-        $ the_person.dungeon_collar = True
-        "You put one of the collars you created around your [the_person.possessive_title]'s neck"
+    while True:
+        $ tuple_list = mc.location.people + ["Back"]
+        call screen person_choice(tuple_list, draw_hearts = True)
+        $ person_choice = _return
+
+        if person_choice == "Back":
+            return # Where to go if you hit "Back"
+
+        else:
+            call dungeon_room_appoint_slave_label_2(person_choice) from dungeon_room_appoint_slave_label_1
 
     return
 
-label advance_time_collar_person_label():
+label dungeon_room_appoint_slave_label_2(the_person):
 
-    python:
-        for (people,place) in people_to_process:
-            if people.dungeon_collar and people.obedience < 150:
-                people.obedience = 150
+    if slave_role not in the_person.special_role:
+
+        if the_person.obedience >= 130:
+            if the_person.get_opinion_score("being submissive") > 0:
+                "[the_person.possessive_title] seems to be into the idea of serving you."
+
+            python:
+
+                the_person.call_dialogue("sex_obedience_accept")
+
+        else:
+            "[the_person.possessive_title] needs to be more obedient before being willing to commit to being your slave."
+            return
+
+        $ the_person.special_role.append(slave_role)
+        "[the_person.title] is now a willing slave of yours."
+
+
+    else:
+
+        $ the_person.special_role.remove(slave_role)
+        "You release [the_person.possessive_title] from their duties as a slave."
+
     return
