@@ -57,7 +57,8 @@ label advance_time_stay_wet_label():
         for (people, place) in people_to_process:
             if people.stay_wet and people.arousal < 50:
                 people.arousal = 50
-                people.sluttiness = 15 # Doesn't make sense for them to be "ready" if they cannot be seduced.
+                if people.sluttiness < 15:
+                    people.sluttiness = 15 # Doesn't make sense for them to be "ready" if they cannot be seduced.
     return
 
 label slave_collar_person_label(the_person):
