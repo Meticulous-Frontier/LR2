@@ -1,5 +1,8 @@
 init 2 python:
 
+    overload_cost = 10000
+    machinery_room_overload = 100
+
     def machinery_room_actions_requirement():
         return True
 
@@ -24,10 +27,7 @@ init 2 python:
         if time_of_day is 4:
             return "Too late..."
 
-        if "machinery_room_overload" not in globals():
-            overload_cost = 10000
-        else:
-            overload_cost = (machinery_room_overload % 100) * 1000
+        #overload_cost = (machinery_room_overload % 100) * 1000
 
         if mc.business.funds >= overload_cost:
             return True
@@ -72,10 +72,7 @@ label machinery_room_overload_label():
 
     python:
 
-        if "machinery_room_overload" not in globals():
-            overload_cost = 10000
-        else:
-            overload_cost = (machinery_room_overload % 100) * 1000
+        overload_cost = (machinery_room_overload % 100) * 1000 # First overload will be free, but afterwards scales. Since the room itself costs $20000 that's fine.
 
     "With the splendor of technical accessibility provided by this facility you can spend both time and funds to increase the productivity of your business."
     "Do you wish to spend $[overload_cost] to increase the maximum capacity by 10%%?"
@@ -84,9 +81,7 @@ label machinery_room_overload_label():
         "Yes \nCosts: $[overload_cost]":
             $ mc.business.pay(- overload_cost)
 
-            if "machinery_room_overload" not in globals():
-                $ machinery_room_overload = 100
-            $ machinery_room_overload = machinery_room_overload + 10
+            $ machinery_room_overload += 10
 
             "The production lines in [p_division.formalName] are now working at [machinery_room_overload]%%"
             call advance_time from machinery_room_overload_label_1
