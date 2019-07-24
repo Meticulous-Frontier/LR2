@@ -7,6 +7,14 @@ init 5  python:
 
 init 2 python:
 
+    def dungeon_room_collar_person_requirement(the_person):
+        return False
+    def dungeon_room_uncollar_person_requirement(the_person):
+        return False
+
+    def serum_mod_settings_requirement():
+        return False
+
     def clean_elevator_action():
         if "room_manager_action" in globals():
             for room in list_of_places:
