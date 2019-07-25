@@ -69,7 +69,16 @@ init -2 python:
         return False
 
     def casual_hotwife_sex_invite_requirement(the_person):
-
+        if the_person.event_triggers_dict.get("hotwife_progress", 0) < 3:
+            return False
+        elif mc.charisma < 6:
+            return "Requires higher Charisma"
+        elif the_person.sluttiness < 50:
+            return "Requires higher sluttiness"
+        elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 4:
+            return "She's already invited you over!"
+        else:
+            return True
         return False
 
     def casual_hotwife_her_place_requirement():
@@ -247,14 +256,42 @@ label casual_hotwife_get_a_drink_label(the_person):
             mc.name "Indeed, that sounds like fun! I'll try to look for you next time I'm around."
 
     elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 3:  #She's fucked you
-        "This scene is not yet written!"
+        mc.name "So, how are things going at home?"
+        the_person.char "Oh well... the hubby, he loves the photos he's been getting lately... and more importantly, I love what he does to me after he gets them."
+        mc.name "Hah, that's good! I'm glad, it sounds like it has really spiced things up for you two."
+        "[the_person.possessive_title] takes a long sip of her drink."
+        the_person.char "So umm... he's started asking, when am I gonna bring you back to our place..."
+        mc.name "Oh? He wants pictures of us in his own house huh?"
+        the_person.char "Well, not exactly."
+        mc.name "What do you mean?"
+        the_person.char "Well, he wants to be there. He wants to watch."
+        "Wow, her husband is really getting into the cuckolding thing!"
+        mc.name "And how do you feel about it? Do you feel like you're ready for that?"
+        if mc.charisma < 6 or the_person.sluttiness < 50:  #Checks Fail
+            the_person.char "Honestly? I'm still adapting to how things are now."
+            mc.name "That's understandable. Theres no reason to take things too fast."
+            "[the_person.title] takes another long sip from her beverage."
+            the_person.char "For now... let's just keep things how they are. But hey, you never know, maybe we can take that step soon!"
+            "You and [the_person.title] finish your drinks and then you say goodbye."
+        else:
+            the_person.char "Honestly? I'm getting a little turned on just thinking about it."
+            mc.name "I'll admit, I'm' a little hesitant to do something like that in front of your husband... but if you're sure about it."
+            the_person.char "Yeah... I'm certain! Let me know when would be a good time to come over, and I'll get the details sorted."
+            "Wow, she wants you to come to her house and fuck her in front of her husband! You should probably get on that before the opportunity passes!"
+            "You and [the_person.title] finish your drinks and then you say goodbye."
 
     elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 4:  #She's invied you over
         "You chat with [the_person.title] for a while, but you can definitely feel some tension in the air about your arrangement for tonight."
         mc.name "So... tonight at your place? I'll see you there?"
         the_person.char "Sounds good. See you then, [the_person.mc_title]."
     elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 5:  #You've fucked in front of her hustband
-        "This scene is not yet written!"
+        the_person.char "Thanks for the drink, [the_person.mc_title]. This whole adventure has really supercharged my sex life, its nice to have a break from fucking and just enjoy a stiff drink."
+        mc.name "Yeah, so is [the_person.SO_name] still enjoying your new lifestyle?"
+        the_person.char "Oh god, we both are. I've started fucking around with a couple other guys too. Last time I came home, he tied me up and umm... reclaimed me in every hole he could fit it in..."
+        mc.name "Damn! That sounds hot!"
+        the_person.char "Yeah! I came so many times... you didn't forget my address did you? You should stop by sometime and we could fuck around again."
+        mc.name "Don't worry, I haven't forgotten."
+        "You and [the_person.title] finish your drinks and then you say goodbye."
     else:
         "DEBUG: How did you get here?"
 
@@ -592,6 +629,10 @@ label casual_hotwife_dancing_sex_label(the_person):
 #CSH30
 label casual_hotwife_sex_invite_label(the_person):
     "This scene is not yet written!"
+    $ CS_hotwife_lingerie = Outfit("Lingerie Set Classic White")
+    $ SB_advert_one_outfit.add_upper(teddy.get_copy(),colour_white)
+    $ SB_advert_one_outfit.add_feet(garter_with_fishnets.get_copy(), colour_white)
+    $ SB_advert_one_outfit.add_feet(high_heels.get_copy(), colour_white)
 
 
     call advance_time from _call_advance_casual_hotwife_sex_invite
