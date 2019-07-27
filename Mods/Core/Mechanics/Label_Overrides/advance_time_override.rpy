@@ -2,6 +2,8 @@
 # it adds a increased chance for a crisis to occur when more time passed without a crisis
 # it adds a way of preventing the same crisis popping up over and over, whilst others never get triggered by remembering a set of occured events
 init -1 python:
+    bedroom_not_required_labels = ["dinner_date", "invest_rep_visit_label", "advanced_serum_stage_2_label", "serum_creation_crisis_label", "quitting_crisis_label"]
+
     def advance_time_requirement():
         return True
 
@@ -16,7 +18,7 @@ init -1 python:
 
     # only trigger mandatory crisis events in timeslot 4 when in bedroom (actually end of day after pressing sleep button, required for dialog consistency)   
     def advance_time_mandatory_crisis_requirement():
-        return time_of_day != 4 or mc.location == bedroom 
+        return True 
 
     def advance_time_bankrupt_check_requirement():
         return time_of_day == 4
@@ -185,7 +187,8 @@ label advance_time_mandatory_crisis_label():
 
     while mandatory_crisis_count < mandatory_crisis_max: #We need to keep this in a renpy loop, because a return call will always return to the end of an entire python block.
         $ crisis = mc.business.mandatory_crises_list[mandatory_crisis_count]
-        if crisis.is_action_enabled():
+        # most mandatory crisis are triggerd from bedroom after sleep button, some are excluded by the bedroom_not_required list
+        if crisis.is_action_enabled() and (crisis.effect in bedroom_not_required_labels or mc.location == bedroom):
             $ crisis.call_action()
             $ renpy.scene("Active")
             $ clear_list.append(crisis)
