@@ -1,23 +1,22 @@
 init -1 python:
-    biotech_actions = []
-    gene_modifications = []
-    body_modifications = []
+    biotech_room_actions = []
+    biotech_gene_modifications = []
+    biotech_body_modifications = []
 
 init 3 python:
 
     def biotech_lab_requirement():
         return True
 
-    biotech_action = Action("Do things in the lab", biotech_lab_requirement, "biotechs",
+    biotech_lab_action = Action("Do things in the lab", biotech_lab_requirement, "biotechs",
         menu_tooltip = "Do stuff")
-
 
     def gene_modification_requirement():
         return True
 
-    gene_modification = Action("Do genetic modifications", gene_modification_requirement, "gene_modifications",
+    gene_modification = Action("Do genetic modifications", gene_modification_requirement, "biotech_gene_modifications",
         menu_tooltip = "Do stuff with genes or cosmetic alterations")
-    biotech_actions.append(gene_modification)
+    biotech_room_actions.append(gene_modification)
 
     def clone_person_requirement():
         if not time_of_day == 4:
@@ -27,49 +26,60 @@ init 3 python:
 
     clone_person = Action("Clone a person {image=gui/heart/Time_Advance.png}", clone_person_requirement, "clone_person",
         menu_tooltip = "Create a near identical clone of the targeted person")
-    gene_modifications.append(clone_person)
+    biotech_gene_modifications.append(clone_person)
 
     def modify_person_requirement():
         return True
+
     modify_person = Action("Modify a person", modify_person_requirement, "modify_person",
         menu_tooltip = "Modify the appearance of a person through magic, not science")
-    gene_modifications.append(modify_person)
+    biotech_gene_modifications.append(modify_person)
 
     def change_body_requirement():
-        if hypothyroidism_serum_trait.researched and anorexia_serum_trait.researched:
+        if find_in_list(lambda x: x.has_trait(hypothyroidism_serum_trait) and x.has_trait(anorexia_serum_trait), mc.inventory.get_serum_type_list()):
             return True
         else:
-            return "Requires: [hypothyroidism_serum_trait.name] and [anorexia_serum_trait.name]"
+            return "Requires: Serum Containing [hypothyroidism_serum_trait.name] and [anorexia_serum_trait.name]"
+
     change_body = Action("Change body: [person.body_type]", change_body_requirement, "change_body",
         menu_tooltip = "Modify [person.title]'s body type.")
-    body_modifications.append(change_body)
+    biotech_body_modifications.append(change_body)
 
     def change_skin_requirement():
-        if pigment_serum_trait.researched:
+
+        if find_in_list(lambda x: x.has_trait(pigment_serum_trait), mc.inventory.get_serum_type_list()):
             return True
         else:
-            return "Requires: [pigment_serum_trait.name]"
+            return "Requires: Serum Containing [pigment_serum_trait.name]"
+
     change_skin = Action("Change skin: [person.skin]", change_skin_requirement, "change_skin",
         menu_tooltip = "Modify [person.title]'s skin tone.")
-    body_modifications.append(change_skin)
+    biotech_body_modifications.append(change_skin)
+
     def change_face_requirement():
         return True
+
     change_face = Action("Change face: [person.face_style]", change_face_requirement, "change_face",
         menu_tooltip = "Modify [person.title]'s face style.")
-    body_modifications.append(change_face)
+    biotech_body_modifications.append(change_face)
+
     def change_breasts_requirement():
         if breast_enhancement.researched and breast_reduction.researched:
             return True
         else:
             return "Requires: [breast_enhancement.name] and [breast_reduction.name]"
+
     change_breasts = Action("Change breasts: [person.tits]", change_breasts_requirement, "change_breasts",
         menu_tooltip = "Modify [person.title]'s cup size.")
-    body_modifications.append(change_breasts)
+    biotech_body_modifications.append(change_breasts)
+
+
+
 label biotechs():
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
                 biotech_options = []
-                for act in biotech_actions:
+                for act in biotech_room_actions:
                     biotech_options.append(act)
                 biotech_options.append("Back")
                 act_choice = call_formated_action_choice(biotech_options)
@@ -79,11 +89,11 @@ label biotechs():
         else:
             $ act_choice.call_action()
 
-label gene_modifications():
+label biotech_gene_modifications():
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
                 gene_modification_options = []
-                for act in gene_modifications:
+                for act in biotech_gene_modifications:
                     gene_modification_options.append(act)
                 gene_modification_options.append("Back")
                 act_choice = call_formated_action_choice(gene_modification_options)
@@ -107,7 +117,9 @@ label clone_person():
         if person_choice == "Back":
             return # Where to go if you hit "Back".
         else:
-            call cloning_process(person_choice)
+            call cloning_process(person_choice) from _call_cloning_process
+
+    return
 
 label cloning_process(person = the_person): # default to the_person when not passed as parameter
     $ person.draw_person(emotion = "default")
@@ -148,7 +160,7 @@ label cloning_process(person = the_person): # default to the_person when not pas
                 $ rd_division_basement.add_person(clone) #Create rooms for the clones to inhabit until a schedule is given (through being hired or player input)
 
                 "[clone.name] [clone.last_name] created and is now awaiting you in [rd_division_basement.formalName]"
-                $ advance_time()
+                call advance_time from _call_advance_time_cloning_process
                 return
             "Back":
                 return
@@ -162,14 +174,14 @@ label modify_person():
         if person_choice == "Back":
             return # Where to go if you hit "Back".
         else:
-            call modification_process(person_choice)
+            call modification_process(person_choice) from _call_modification_process
 
 label modification_process(person = the_person): # when called without specific person use the_person variable
     $ person.draw_person(emotion = "default")
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
                 body_modification_options = []
-                for act in body_modifications:
+                for act in biotech_body_modifications:
                     body_modification_options.append(act)
                 body_modification_options.append("Back")
                 act_choice = call_formated_action_choice(body_modification_options)
@@ -187,7 +199,7 @@ label change_body():
                 for n in list_of_body_types:
                     body_types.append(n)
                 body_types.append("Back")
-                body_choice = renpy.display_menu(simple_list_format(body_types, n, string = "Body Type: "),True,"Choice")
+                body_choice = renpy.display_menu(simple_list_format(body_types, n, string = "Body Type: ", ignore = "Back"),True,"Choice")
 
         if body_choice == "Back":
             return
@@ -196,14 +208,42 @@ label change_body():
             $ person.draw_person()
 
 label change_skin():
+    $ change_skin_stored = person.skin
     while True:
+
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+
+
+
             skin_styles = [x[0] for x in list_of_skins]
 
             skin_styles.append("Back")
-            skin_choice = renpy.display_menu(simple_list_format(skin_styles, x[0], string = "Skin Type: "),True,"Choice")
+            skin_choice = renpy.display_menu(simple_list_format(skin_styles, x[0], string = "Skin Type: ", ignore = "Back"),True,"Choice")
+
         if skin_choice == "Back":
-            return
+            if person.skin != change_skin_stored:
+                "Select a serum in order to commit these changes."
+                python:
+                    possible_serum = [x for x in find_items_in_list(lambda x: x.has_trait(pigment_serum_trait), mc.inventory.get_serum_type_list())]
+
+                    possible_serum.append("Discard")
+                    serum_choice = renpy.display_menu(simple_list_format(possible_serum, x, string = "Serum: ", ignore = "Discard", attrib = "name"), True, "Choice")
+
+                if serum_choice == "Discard":
+
+                    $ person.skin = change_skin_stored
+                    $ person.match_skin(change_skin_stored)
+                    $ person.draw_person()
+
+                    return
+                else:
+
+                    $ mc.inventory.change_serum(serum_choice, -1)
+                    "1x of [serum_choice.name] has been removed from your inventory"
+
+                    return
+            else:
+                return
         else:
             $ person.skin = skin_choice
             $ person.match_skin(skin_choice)
@@ -216,7 +256,7 @@ label change_face():
                 for face in list_of_faces:
                     face_styles.append(face)
                 face_styles.append("Back")
-                face_choice = renpy.display_menu(simple_list_format(face_styles, face, string = "Face Type: "),True,"Choice")
+                face_choice = renpy.display_menu(simple_list_format(face_styles, face, string = "Face Type: ", ignore = "Back"),True,"Choice")
 
         if face_choice == "Back":
             return
@@ -230,7 +270,7 @@ label change_breasts():
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
                 cup_sizes = [x[0] for x in list_of_tits]
                 cup_sizes.append("Back")
-                cup_choice = renpy.display_menu(simple_list_format(cup_sizes, x[0], string = "Cup Size: "),True,"Choice")
+                cup_choice = renpy.display_menu(simple_list_format(cup_sizes, x[0], string = "Cup Size: ", ignore = "Back"),True,"Choice")
 
         if cup_choice == "Back":
             return

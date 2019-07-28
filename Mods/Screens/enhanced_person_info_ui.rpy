@@ -1,6 +1,7 @@
 # Override default person_info_ui screen by VREN to show extra information about character
 init 2:
     screen person_info_ui(person): #Used to display stats for a person while you're talking to them.
+        layer "Active" #By making this layer active it is cleared whenever we draw a person or clear them off the screen.
         $ formatted_tooltip = ""
         $ formatted_obedience_tooltip = ""
         python:
@@ -12,7 +13,7 @@ init 2:
                 elif person.situational_sluttiness[situation][0] < 0:
                     negative_effects += get_coloured_arrow(-1)+get_red_heart(-person.situational_sluttiness[situation][0])+" - " + person.situational_sluttiness[situation][1] + "\n"
             formatted_tooltip += positive_effects + negative_effects
-            formatted_tooltip += "The higher a girl's sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is easier to raise but drops slowly over time. Core sluttiness (" + get_gold_heart(20) + ") is permanent, but can only be created by using serum to raise suggestability or by making the girl climax."
+            formatted_tooltip += "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is easier to raise but drops slowly over time. Core sluttiness (" + get_gold_heart(20) + ") is permanent, but only increases slowly unless a girl is suggestable."
 
             positive_effects = ""
             negative_effects = ""
@@ -46,8 +47,8 @@ init 2:
                         text "     Job: " + mc.business.get_employee_title(person) style "menu_text_style"
 
                     for role in person.special_role:
-                        if not role.role_name in [generic_people_role.role_name]:   # Hide generic role
-                            text "       - " + role.role_name  style "menu_text_style" size 14
+                        if not role.hidden:
+                            text "       - " + role.role_name style "menu_text_style" size 14
 
                 vbox:
                     if person.arousal > 0:
@@ -72,17 +73,10 @@ init 2:
                         action NullAction()
                         sensitive True
 
-                    textbutton "Love: [person.love]":
-                        ysize 28
-                        text_style "menu_text_style"
-                        tooltip "Girls who love you will be more willing to have sex when you are in private (as long as they are not family) and be more devoted to you. Girls who hate you will have a lower effective sluttiness regardless of the situation."
-                        action NullAction()
-                        sensitive True
-
                     textbutton "Suggestibility: [person.suggestibility]%":
                         ysize 28
                         text_style "menu_text_style"
-                        tooltip "How likely this character is to have an increase to her core sluttiness. Every time chunk there is a [person.suggestibility]% chance to change 1 point of temporary sluttiness (" + get_red_heart(5) + ") into core sluttiness (" + get_gold_heart(5) + ") as long as the temporary sluttiness is higher."
+                        tooltip "How likely this character is to increase her core sluttiness. Every time chunk there is a chance to change 1 point of temporary sluttiness (" + get_red_heart(5) + ") into core sluttiness (" + get_gold_heart(5) + ") as long as temporary sluttiness is higher."
                         action NullAction()
                         sensitive True
 
@@ -93,6 +87,13 @@ init 2:
                         action NullAction()
                         sensitive True
 
+                    textbutton "Love: [person.love]":
+                        ysize 28
+                        text_style "menu_text_style"
+                        tooltip "Girls who love you will be more willing to have sex when you're in private (as long as they aren't family) and be more devoted to you. Girls who hate you will have a lower effective sluttiness regardless of the situation."
+                        action NullAction()
+                        sensitive True
+
                     textbutton "Obedience: [person.obedience] - " + get_obedience_plaintext(person.obedience):
                         ysize 28
                         text_style "menu_text_style"
@@ -100,31 +101,40 @@ init 2:
                         action NullAction()
                         sensitive True
 
+
                 vbox:
                     textbutton "Detailed Information" action Show("person_info_detailed",the_person=person) style "textbutton_style" text_style "textbutton_text_style"
 
                     textbutton "Age: [person.age]":
                         ysize 28
                         text_style "menu_text_style"
+                        tooltip "The age of the girl."
                         action NullAction()
                         sensitive True
 
                     textbutton "Height: " + height_to_string(person.height):
                         ysize 28
                         text_style "menu_text_style"
-                        tooltip "The length of the person in feet and inches."
+                        if use_imperial_system:
+                            tooltip "The length of the girl in feet and inches."
+                        else:
+                            tooltip "The length of the girl in centimeters."
                         action NullAction()
                         sensitive True
 
                     textbutton "Cup size: [person.tits]":
                         ysize 28
                         text_style "menu_text_style"
+                        tooltip "The size of the breasts."
                         action NullAction()
                         sensitive True
 
-                    if hasattr(person, "weight"):
-                        textbutton "Weight: " + get_person_weight_string(person):
-                            ysize 28
-                            text_style "menu_text_style"
-                            action NullAction()
-                            sensitive True
+                    textbutton "Weight: " + get_person_weight_string(person):
+                        ysize 28
+                        text_style "menu_text_style"
+                        if use_imperial_system:
+                            tooltip "The weight of the girl in pounds.\nDetermines the body type."
+                        else:
+                            tooltip "The weight of the girl in kilograms\nDetermines the body type."
+                        action NullAction()
+                        sensitive True

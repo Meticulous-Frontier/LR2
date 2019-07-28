@@ -1,9 +1,9 @@
 # I'll want to use transition into using appendable Action lists when the content is laid down.
 # TODO: A) Make a requirement fo reach room or B) Find a way to display Cost only while requirement is met
 init -1 python:
-    security_actions = []
-    cctv_actions = []
-    investigation_actions = []
+    security_room_actions = []
+    security_room_cctv_actions = []
+    security_room_investigation_actions = []
 
 init 3 python: # Put this behind a mod init to ensure compatability
 
@@ -23,7 +23,7 @@ init 3 python: # Put this behind a mod init to ensure compatability
 
     investigation_employee_action = Action("Investigate an employee", investigation_requirement, "investigation_employee_label",
         menu_tooltip = "Find out information about the selected person.")
-    security_actions.append(investigation_employee_action)
+    security_room_actions.append(investigation_employee_action)
 
     def investigation_opinion_requirement():
         if the_person.get_random_opinion(False, True) == None:
@@ -33,7 +33,7 @@ init 3 python: # Put this behind a mod init to ensure compatability
 
     investigation_opinions_action = Action("Find opinions. {image=gui/heart/Time_Advance.png}", investigation_opinion_requirement, "investigation_opinions_label",
         menu_tooltip = "Find the likes and dislikes of a person")
-    investigation_actions.append(investigation_opinions_action)
+    security_room_investigation_actions.append(investigation_opinions_action)
 
     def investigation_home_requirement():
         if the_person.home in mc.known_home_locations:
@@ -43,37 +43,37 @@ init 3 python: # Put this behind a mod init to ensure compatability
 
     investigation_home_action = Action("Find home location. {image=gui/heart/Time_Advance.png}", investigation_home_requirement, "investigation_home_label",
         menu_tooltip = "Adds the home location to the list of known homes.")
-    investigation_actions.append(investigation_home_action)
+    security_room_investigation_actions.append(investigation_home_action)
 
     def cctv_requirement():
         return True
 
     cctv_action = Action("Watch CCTV", cctv_requirement, "cctv_label",
         menu_tooltip = "Check what's happening via the CCTV system.")
-    security_actions.append(cctv_action)
+    security_room_actions.append(cctv_action)
 
     def observation_requirement():
         return True
 
     m_division_observation_action = Action("Observe the [m_division.formalName]", observation_requirement, "m_division_observation_label",
         menu_tooltip = "See what's going on in ")
-    cctv_actions.append(m_division_observation_action)
+    security_room_cctv_actions.append(m_division_observation_action)
 
     p_division_observation_action = Action("Observe the [p_division.formalName]", observation_requirement, "p_division_observation_label",
         menu_tooltip = "See what's going on in ")
-    cctv_actions.append(p_division_observation_action)
+    security_room_cctv_actions.append(p_division_observation_action)
 
     rd_division_observation_action = Action("Observe the [rd_division.formalName]", observation_requirement, "rd_division_observation_label",
         menu_tooltip = "See what's going on in ")
-    cctv_actions.append(rd_division_observation_action)
+    security_room_cctv_actions.append(rd_division_observation_action)
 
     s_division_observation_action = Action("Observe the Supply Division", observation_requirement, "s_division_observation_label",
         menu_tooltip = "See what's going on in ")
-    cctv_actions.append(s_division_observation_action)
+    security_room_cctv_actions.append(s_division_observation_action)
 
     office_observation_action = Action("Observe the [office.formalName]", observation_requirement, "office_observation_label",
         menu_tooltip = "See what's going on in ")
-    cctv_actions.append(office_observation_action)
+    security_room_cctv_actions.append(office_observation_action)
 
 
 
@@ -86,7 +86,7 @@ label security_overview():
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
                 security_options = []
-                for act in security_actions:
+                for act in security_room_actions:
                     security_options.append(act)
                 security_options.append("Back")
                 act_choice = call_formated_action_choice(security_options)
@@ -103,7 +103,7 @@ label cctv_label():
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
                 cctv_options = []
-                for act in cctv_actions:
+                for act in security_room_cctv_actions:
                     cctv_options.append(act)
                 cctv_options.append("Back")
                 act_choice = call_formated_action_choice(cctv_options)
@@ -120,7 +120,8 @@ label m_division_observation_label():
     if len(m_division.people) < 1:
         "CCTV" "No one is around and nothing of interested seems to be going on."
 
-    $ randint = renpy.random.randint(1, 5)
+    python:
+        randint = renpy.random.randint(1, 5)
 
     if randint == 1:
         "Var 1"
@@ -173,14 +174,14 @@ label investigation_employee_label():
         if person_choice == "Back":
             return # Where to go if you hit "Back".
         else:
-            call investigate_person(person_choice)# What to do if "Back" was not the choice taken.
+            call investigate_person(person_choice) from _call_investigate_person# What to do if "Back" was not the choice taken.
 
 label investigate_person(person_choice = the_person): # Need to default to the_person for return calls.
     $ the_person = person_choice
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
                 investigative_options = []
-                for act in investigation_actions:
+                for act in security_room_investigation_actions:
                     investigative_options.append(act)
                 investigative_options.append("Back")
                 act_choice = call_formated_action_choice(investigative_options)
@@ -193,14 +194,17 @@ label investigate_person(person_choice = the_person): # Need to default to the_p
 label investigation_home_label():
     "You conveniently find [the_person.name]'s adress in the yellow pages."
     $ learn_home(the_person)
-#    $ advance_time()
+    
+    # call advance_time from _call_advance_time_investigation_home_label
+
     return
 
 label investigation_opinions_label():
 
     $ the_person.discover_opinion(the_person.get_random_opinion(False, True))
     "You discover something about [the_person.name]"
-#    $ advance_time()
+    # call advance_time from _call_advance_time_investigation_opinions_label
+
     return
 
 

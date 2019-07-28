@@ -182,8 +182,10 @@ label outro_SB_anal_swing(the_girl, the_location, the_object, the_round):
     "[the_girl.possessive_title]'s tight ass draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
     $the_girl.call_dialogue("sex_responses")
     mc.name "Ah, I'm going to cum!"
-    if the_girl.get_opinion_score("creampies") > 0:
+    if the_girl.get_opinion_score("creampies") > 0 or mc.condom:
             the_girl.char "Yes! Shove it in deep [the_girl.mc_title]!"
+    elif mc.condom:
+        the_girl.char "That's it baby, cum for me! Show me how much you love my ass!"
     elif the_girl.sluttiness < 80:
         the_girl.char "Oh my god I can't believe I'm letting you do this..."
     else:
@@ -192,7 +194,16 @@ label outro_SB_anal_swing(the_girl, the_location, the_object, the_round):
     menu:
         "Cum inside of her.":
             "[the_girl.possessive_title]'s ass is just too good. You decide to cum inside it."
-            "You pull back on the swing straps and drive your cock deep inside of her as you cum. She moans as you body dumps your load deep into her bowel."
+            if mc.condom:
+                "You pull back on the swing straps and drive your cock deep inside of her as you cum. You hope the condom can handle your load."
+                if the_girl.arousal > 110:
+                    "You feel her bowel contracting around your dick as she also starts to orgasm."
+                    $ the_girl.change_happiness(5)
+                "You wait until your orgasm has passed completely, then pull out. Her asshole gapes slightly."
+                the_girl.char "Wow... that was intense..."
+                return
+            else:
+                "You pull back on the swing straps and drive your cock deep inside of her as you cum. She moans as you body dumps your load deep into her bowel."
             if the_girl.get_opinion_score("creampies") > 0:
                 the_girl.char  "Yes! Fill your slut's ass with your cum! It's so hot!"
             if the_girl.arousal > 110:
@@ -214,7 +225,10 @@ label outro_SB_anal_swing(the_girl, the_location, the_object, the_round):
             "You wait until your orgasm has passed completely, then pull out. Her asshole gapes and you can see a hint of your cum start to dribble out, but most of it stays buried with her bowel"
 
         "Cum on her ass.":
-            "You pull out of [the_girl.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
+            if mc.condom:
+                "You pull out of [the_girl.possessive_title] at the last moment. You pull the condom off and blow your load all over her heart shaped ass cheeks."
+            else:
+                "You pull out of [the_girl.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
             if the_girl.get_opinion_score("being covered in cum") > 0:
                  the_girl.char "Yes! Paint me with your sticky cum!"
             $ the_girl.cum_on_ass()
@@ -231,7 +245,10 @@ label outro_SB_anal_swing(the_girl, the_location, the_object, the_round):
             "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
         "Cum on her tits.":
             mc.name "Fuck, get ready [the_girl.title], I wanna cum on your tits!"
-            "You pull your cock out of [the_girl.possessive_title]'s ass with a satisfying pop. You spin the swing around quickly so she faces you."
+            if mc.condom:
+                "You pull your cock out of [the_girl.possessive_title]'s ass with a satisfying pop. You spin the swing around quickly so she faces you, pulling your condom off at the same time."
+            else:
+                "You pull your cock out of [the_girl.possessive_title]'s ass with a satisfying pop. You spin the swing around quickly so she faces you."
             if the_girl.get_opinion_score("being covered in cum") > 0:
                 "[the_girl.possessive_title] reaches up and immediately begins stroking you off for you final few seconds."
                 "Your orgasm hits hard. Your first jet sprays across her tits."

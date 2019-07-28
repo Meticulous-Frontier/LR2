@@ -24,6 +24,10 @@ init 2 python:
         the_swing = Object("sex swing",["Sit","Low", "Swing"], sluttiness_modifier = 10, obedience_modifier = 10)
         return the_swing
 
+    def SB_make_counter():
+        the_counter = Object("counter",["Sit","Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
+        return the_counter
+
     def SB_mod_initialization(action_mod):
         starbuck_personality = Personality("starbuck", default_prefix = "relaxed",
         common_likes = ["skirts", "small talk", "the colour blue", "makeup"],
@@ -50,15 +54,16 @@ init 2 python:
         global starbuck
         starbuck = Sex_Shop_Owner(name = "Starbuck", last_name = "Thrace", age = 32, body_type = "curvy_body", tits="E",  height = 0.95,  body_images = white_skin, expression_images = Expression("Starbuck\'s Expression Set", "white", "Face_4"), hair_colour="golden blonde", hair_style = messy_short_hair.get_copy(), skin="white" , \
             eyes = "brown", job = "Sex Shop Owner", wardrobe = starbuck_wardrobe, personality = starbuck_personality, stat_list = [3,4,3],  skill_list = [1,1,4,2,1],  sluttiness = 42,  obedience = -22, suggest = 0, sex_list = [3,3,4,4], love = 0, happiness = 119, \
-            home = starbuck_home, font = get_random_font(), work = None, name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", special_role = [starbuck_role])
-
-        starbuck.hair_style.colour = [0.895, 0.781, 0.656, 1]
+            home = starbuck_home, font = get_random_font(), work = None, name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", special_role = [starbuck_role], relationship = "Single")
 
         starbuck.schedule[1] = sex_store
         starbuck.schedule[2] = sex_store
         starbuck.schedule[3] = sex_store
 
         starbuck.home.add_person(starbuck)
+
+        # Add a counter to the sex shop
+        sex_store.add_object(SB_make_counter())
 
         # Add StarBuck introduction event to sex store
         starbuck.on_room_enter_event_list.append(starbuck_introduction_event_action)
@@ -571,7 +576,7 @@ label starbuck_sex_store_investment_three_label(the_person):
     the_person.char "The store next to us recently went ouf of business, once I save up enough money, I'm gonna buy it out and expand my store. Turn this place into [the_person.name]'s MEGA sex shop!"
     "You consider what she is saying."
     mc.name "What kind of stuff could you carry with the extra space that you aren't carrying now?"
-    the_person.char "Oh, well in here we sell mostly accessories, lingerie, that kind of thing, but with more room we could get in all kinds of kinky stuff. Sex furnite, like chairs and swings, massage tables..."
+    the_person.char "Oh, well in here we sell mostly accessories, lingerie, that kind of thing, but with more room we could get in all kinds of kinky stuff. Sex furniture, like chairs and swings, massage tables..."
     "Wow, you had no idea there was so much stuff out there..."
     the_person.char "...could even get into bondage gear, fetish items like furry tail butt plugs... I mean, the sky is the limit, you know?"
     "So far, all of your investments in the shop have paid off... plus, you start to imagine what it would be like to try some of these items with [the_person.possessive_title]..."
@@ -828,7 +833,6 @@ label starbuck_sex_store_promo_one_label(the_person):
             $ the_person.review_outfit(show_review_message = False)
             $ the_person.shop_investment_rate = 2.0
 
-    hide screen person_info_ui
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)
@@ -989,7 +993,6 @@ label starbuck_sex_store_promo_two_label(the_person):
             $ the_person.change_slut_core(5)
             $ the_person.change_slut_temp(5)
 
-    hide screen person_info_ui
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)
@@ -1163,7 +1166,6 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     $ the_person.draw_person(position = "walking_away")
     the_person.char "I'm gonna go get cleaned up now... Get to work on that video!"
     $ the_person.shop_investment_rate = 4.0
-    hide screen person_info_ui
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     "You grab the camera, and start looking at the footage. The first thing you do is copy it on a thumb drive, for you to enjoy at a later date."
@@ -1322,7 +1324,6 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     $ the_person.shop_investment_rate = 5.0
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False)
-    hide screen person_info_ui
     "You head out to start work on the advertisement video."
 
     return
@@ -1662,7 +1663,6 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         "[the_person.title]'s naked body against yours makes for a very pleasant night of sleep. A couple times throughout the night you stirred for a bit and gave her a grope, but quickly fell back asleep."
         "Pleasant sensations and the feeling of weight around your torso slowly wakes you up."
         $ the_person.change_arousal(30)
-        show screen person_info_ui(the_person)
         $ the_person.draw_person(position = "cowgirl")
         "When you awaken, you discover that [the_person.title] is on top of you, with your morning wood already hilted inside her pussy."
         "You moan in appreciation at the wonderful wake up call."
@@ -1683,7 +1683,6 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         $ the_person.draw_person(position = "stand3")
         the_person.char "I'm gonna go hop in the shower. Feel free to let yourself out! Thanks for spending the night [the_person.mc_title]!"
         "[the_person.title]heads to the bathroom. You grab your stuff and head out."
-    hide screen person_info_ui
     $ the_person.reset_arousal()
     $ the_person.outfit = (the_person.wardrobe.decide_on_outfit(40)).get_copy()
     $ change_scene_display(mc.location)
@@ -1693,7 +1692,6 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
 label starbuck_intro():
     $ the_person = starbuck
 
-    show screen person_info_ui(the_person)
     $ the_person.draw_person(emotion = "happy")
     if not SB_STARBUCK_INTRO_COMPLETE:
         "You enter the sex shop. A beautiful woman comes up to you and begins to introduce herself."
@@ -1725,11 +1723,9 @@ label starbuck_intro():
         "You smile at [the_person.possessive_title] and promise to take a look."
         the_person.char "Sounds great!"
         $ renpy.scene("Active")
-        hide screen person_info_ui
         "After [the_person.possessive_title] goes back to the counter, you walk around the shop a bit. Unfortunately, things are pretty bare. There are several shelves with just labels on them."
         "You walk by one labeled as anal toys, but there aren't any on the shelf available for purchase."
         "You walk over to the counter."
-        show screen person_info_ui(the_person)
         $ the_person.draw_person(position = "stand3", emotion = "happy")
         mc.name "This is pretty interesting, to open a sex shop like this, but the shelves seem pretty empty? Are you going to get more stock soon?"
         $ the_person.draw_person(position = "stand3", emotion = "sad")
@@ -1772,7 +1768,6 @@ label starbuck_intro():
         else:
             the_person.char "Is there anything I can help you with?"
     $ renpy.scene("Active")
-    hide screen person_info_ui
     return
 ####Starbuck Unique Personality####
 

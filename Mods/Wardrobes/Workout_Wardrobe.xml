@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Wardrobe name="Workout_Wardrobe.xml">
+    <FullSets>
+        <Outfit name="BasicSportsBraWorkout">
+            <UpperBody>
+                <Item alpha="1.0" blue="0.18" green="0.18" name="Sports_Bra" palpha="1.0" pattern="Pattern_1" pblue="0.8" pgreen="0.71" pred="0.89" red="0.18" />
+            </UpperBody>
+            <LowerBody>
+                <Item alpha="1.0" blue="0.18" green="0.18" name="Panties" red="0.18" />
+                <Item alpha="1.0" blue="0.18" green="0.18" name="Leggings" red="0.18" />
+            </LowerBody>
+            <Feet>
+                <Item alpha="1.0" blue="0.35" green="0.31" name="Sneakers" palpha="1.0" pattern="Pattern_1" pblue="0.35" pgreen="0.31" pred="0.35" red="0.35" />
+            </Feet>
+            <Accessories />
+        </Outfit>
+        <Outfit name="PinkTanktopWorkout">
+            <UpperBody>
+                <Item alpha="1.0" blue="0.18" green="0.18" name="Sports_Bra" palpha="1.0" pattern="Pattern_1" pblue="0.8" pgreen="0.71" pred="0.89" red="0.18" />
+                <Item alpha="1.0" blue="0.8" green="0.71" name="Tanktop" red="0.89" />
+            </UpperBody>
+            <LowerBody>
+                <Item alpha="1.0" blue="0.18" green="0.18" name="Panties" red="0.18" />
+                <Item alpha="1.0" blue="0.18" green="0.18" name="Leggings" red="0.18" />
+            </LowerBody>
+            <Feet>
+                <Item alpha="1.0" blue="0.35" green="0.31" name="Sneakers" palpha="1.0" pattern="Pattern_1" pblue="0.35" pgreen="0.31" pred="0.35" red="0.35" />
+            </Feet>
+            <Accessories />
+        </Outfit>
+        <Outfit name="WineBraShortsWorkout">
+            <UpperBody>
+                <Item alpha="1.0" blue="0.21" green="0.18" name="Sports_Bra" red="0.44" />
+            </UpperBody>
+            <LowerBody>
+                <Item alpha="1.0" blue="0.18" green="0.18" name="Panties" red="0.18" />
+                <Item alpha="1" blue="0" green="0.0" name="Booty_Shorts" red="0.0" />
+            </LowerBody>
+            <Feet>
+                <Item alpha="1.0" blue="0.35" green="0.31" name="Sneakers" palpha="1" pattern="Pattern_1" pblue="1" pgreen="1" pred="1" red="0.35" />
+            </Feet>
+            <Accessories />
+        </Outfit>
+        <Outfit name="GreenTankWorkout">
+            <UpperBody>
+                <Item alpha="1.0" blue="0.18" green="0.18" name="Sports_Bra" red="0.18" />
+                <Item alpha="0.8" blue="0.65" green="0.65" name="Tanktop" red="0.4" />
+            </UpperBody>
+            <LowerBody>
+                <Item alpha="1.0" blue="0.18" green="0.18" name="Cotton_Panties" red="0.18" />
+                <Item alpha="1.0" blue="0.35" green="0.31" name="Leggings" red="0.35" />
+            </LowerBody>
+            <Feet>
+                <Item alpha="0.8" blue="0.65" green="0.65" name="Sneakers" palpha="1" pattern="Pattern_1" pblue="1" pgreen="1" pred="1" red="0.4" />
+            </Feet>
+            <Accessories />
+        </Outfit>
+        <Outfit name="GreenTankAndShortsWorkout">
+            <UpperBody>
+                <Item alpha="1.0" blue="0.18" green="0.18" name="Sports_Bra" red="0.18" />
+                <Item alpha="0.8" blue="0.65" green="0.65" name="Tanktop" red="0.4" />
+            </UpperBody>
+            <LowerBody>
+                <Item alpha="1.0" blue="0.18" green="0.18" name="Cotton_Panties" red="0.18" />
+                <Item alpha="1.0" blue="0.18" green="0.18" name="Booty_Shorts" red="0.18" />
+            </LowerBody>
+            <Feet>
+                <Item alpha="0.8" blue="0.65" green="0.65" name="Sneakers" palpha="1" pattern="Pattern_1" pblue="1" pgreen="1" pred="1" red="0.4" />
+            </Feet>
+            <Accessories />
+        </Outfit>
+        <Outfit name="HighVisWorkout">
+            <UpperBody>
+                <Item alpha="1.0" blue="0.08" green="1.0" name="Sports_Bra" palpha="1.0" pattern="Pattern_1" pblue="0.18" pgreen="0.18" pred="0.18" red="0.22" />
+            </UpperBody>
+            <LowerBody>
+                <Item alpha="1.0" blue="0.08" green="1.0" name="Panties" red="0.22" />
+                <Item alpha="1.0" blue="0.18" green="0.18" name="Booty_Shorts" red="0.18" />
+            </LowerBody>
+            <Feet>
+                <Item alpha="1.0" blue="0.18" green="0.18" name="Sneakers" palpha="1.0" pattern="Pattern_1" pblue="0.08" pgreen="1.0" pred="0.22" red="0.18" />
+            </Feet>
+            <Accessories />
+        </Outfit>
+    </FullSets>
+    <UnderwearSets>
+        <Outfit name="BasicWorkoutUnderwear">
+            <UpperBody>
+                <Item alpha="1.0" blue="0.18" green="0.18" name="Sports_Bra" red="0.18" />
+            </UpperBody>
+            <LowerBody>
+                <Item alpha="1.0" blue="0.18" green="0.18" name="Panties" red="0.18" />
+            </LowerBody>
+            <Feet />
+            <Accessories />
+        </Outfit>
+    </UnderwearSets>
+    <OverwearSets>
+        <Outfit name="WorkoutOverwearRedCami">
+            <UpperBody>
+                <Item alpha="1.0" blue="0.21" green="0.18" name="Tanktop" red="0.44" />
+            </UpperBody>
+            <LowerBody>
+                <Item alpha="1.0" blue="0.35" green="0.31" name="Leggings" red="0.35" />
+            </LowerBody>
+            <Feet>
+                <Item alpha="1.0" blue="0.35" green="0.31" name="Sneakers" palpha="1" pattern="Pattern_1" pblue="1" pgreen="1" pred="1" red="0.35" />
+            </Feet>
+            <Accessories />
+        </Outfit>
+        <Outfit name="GreenTShirtWorkoutOverwear">
+            <UpperBody>
+                <Item alpha="1.0" blue="0.65" green="0.65" name="Tshirt" red="0.4" />
+            </UpperBody>
+            <LowerBody>
+                <Item alpha="1.0" blue="0.18" green="0.18" name="Leggings" red="0.18" />
+            </LowerBody>
+            <Feet>
+                <Item alpha="1.0" blue="0.35" green="0.31" name="Sneakers" palpha="0.8" pattern="Pattern_1" pblue="0.65" pgreen="0.65" pred="0.4" red="0.35" />
+            </Feet>
+            <Accessories />
+        </Outfit>
+    </OverwearSets>
+</Wardrobe>

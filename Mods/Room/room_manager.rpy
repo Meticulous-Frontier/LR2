@@ -14,9 +14,9 @@ init -1 python:
                               # It updates on first time startup of the mod and whenever an elevator / bus is entered so you can append to it whenever as long as at least ONE location
                               # With access to the screen already exist.
 
-init 2 python:
-    add_label_hijack("normal_start", "activate_room_manager")
-    add_label_hijack("after_load", "update_room_manager")
+#init 2 python:
+#    add_label_hijack("normal_start", "activate_room_manager")
+#    add_label_hijack("after_load", "update_room_manager")
 
 init 3 python:
     def mod_room_manager_append(action): # Make sure you input a valid action. e.g sleep_action
@@ -25,13 +25,12 @@ init 3 python:
             if action not in room.actions:
                 room.actions.append(action)
 
-    def room_manager_initialization(self):
-        mod_room_manager_append(room_manager_action) # Appends the action to any room in the mod_rooms_append list.
+    def room_manager_initialization(self): # Appends the action to any room in the mod_rooms_append list.
                                    #This is also done whenever accessing any entry points so a restart of the mod isn't required.
         return
 
     room_manager_action = ActionMod("Enter the elevator", room_manager_action_requirement, "room_manager_action_label", initialization = room_manager_initialization,
-        menu_tooltip = "Visit rooms on different floors", category = "Misc", priority = 1)
+        menu_tooltip = "Visit rooms on different floors", category = "Misc", priority = 1, allow_disable = False)
 
         # Room(name,formalName,connections,background_image,objects,people,actions,public,map_pos, tutorial_label = None, visible = True)
     elevator = Room("elevator", "Elevator", [], apartment_background, [],[],[], False,[], None, False) # Create a custom room that can be put to use for generic events and such.
@@ -101,14 +100,14 @@ label initialize_room_manager():
                           # It updates on first time startup of the mod and whenever an elevator / bus is entered so you can append to it whenever as long as at least ONE location
                           # With access to the screen already exist.
 
-    if mall not in mod_rooms_append:
-        $ mod_rooms_append.append(mall)
-        $ mod_rooms_append.append(downtown)
-        $ mod_rooms_append.append(hall)
-        $ mod_rooms_append.append(lobby)
+    #if mall not in mod_rooms_append:
+    #    $ mod_rooms_append.append(mall)
+    #    $ mod_rooms_append.append(downtown)
+    #    $ mod_rooms_append.append(hall)
+    #    $ mod_rooms_append.append(lobby)
 
         # Enable the action in the custom elevator room.
-        $ mod_rooms_append.append(elevator)
+    #    $ mod_rooms_append.append(elevator)
 
     # Have the default hubs always be available from within themselves.
     # Got to append them here as the rooms do not exist on list creation.
@@ -242,7 +241,7 @@ label room_manager_action_label(): # What happens when you "Enter the elevator"
     $ elevator_entrance_p_division = False
     $ elevator_entrance_m_division = False
 
-    call change_location(new_location) # Runs the scene change.
+    call change_location(new_location) from _call_change_location_room_manager_action # Runs the scene change.
 
 #    if new_location == Room: # Have something happen if a specific room is entered.
 #        $ possible_greetings = []

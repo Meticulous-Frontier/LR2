@@ -8,7 +8,7 @@ init -1 python:
 
 label serum_mod_pigment_serum_trait(stack):
     python:
-        pigment_serum_trait = SerumTraitMod(name = "Pigment Serum",
+        pigment_serum_trait = SerumTraitMod(name = "Pigment Trait",
             desc = "Causes instantanious alterations in the subject's pigment distribution causing noticeable changes in skin color",
             positive_slug = "-$15 Value, Changes the subject's skin color",
             negative_slug = "+125 Serum Research",
@@ -19,9 +19,6 @@ label serum_mod_pigment_serum_trait(stack):
             requires = basic_med_app,
             tier = 1,
             research_needed = 500)
-
-        # enable serum and append to mod_list
-        pigment_serum_trait.initialize()
 
         execute_hijack_call(stack)
     return

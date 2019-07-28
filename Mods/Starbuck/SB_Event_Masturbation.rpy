@@ -50,7 +50,6 @@ label SB_caught_masturbating_crisis_label():
     "While you are walking by an unused storage room, you hear some muffled sounds coming from inside"
     "Looking inside, you see [the_person.possessive_title] on all fours, with her back to you, quietly moaning"
     $ the_person.draw_person(position = "doggy")
-    show screen person_info_ui(the_person)
     the_person.char "mmmmmmmfff... oh..."
     $ the_person.change_arousal(50)
     $ the_person.discover_opinion("masturbating")
@@ -307,7 +306,8 @@ label SB_caught_masturbating_crisis_label():
         "Keep walking":
             "You decide to give [the_person.possessive_title] some privacy. As quietly as you can, you close the door behind you and continue walking"
 
-    hide screen person_info_ui
+    $ the_person.reset_arousal()
+    $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)
     $ renpy.scene("Active")
     return

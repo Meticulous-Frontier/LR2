@@ -52,7 +52,6 @@ label SB_fetish_vaginal_label(the_person):
     "You head to your front door and see [the_person.possessive_title] standing there... outside... in a very provacative outfit."
     $ the_person.outfit = SB_vaginal_outfit.get_copy()
     $ the_person.draw_person()
-    show screen person_info_ui(the_person)
     ###Draw the girl###
     "You quickly open the door and invite her inside."
     "To avoid any situations with [mom.possessive_title] or [lily.possessive_title], you quickly invite her to your room."
@@ -184,7 +183,6 @@ label SB_fetish_vaginal_label(the_person):
 label SB_fetish_vaginal_event_label(the_person):
     if the_person == mom:
         "You hear a knock on your door. You hear [the_person.possessive_title]'s sweet and familiar voice from the other side."
-        show screen person_info_ui(the_person)
         the_person.char "Hey honey, its [the_person.possessive_title]..."
         "You invite [the_person.possessive_title] in. You immediately start to get aroused when you see what she is wearing."
         $ the_person.outfit = SB_vaginal_outfit.get_copy()
@@ -230,7 +228,6 @@ label SB_fetish_vaginal_event_label(the_person):
         "[the_person.possessive_title] lays down on your bed. You cuddle up behind her and slowly drift off to sleep."
     elif the_person == lily:
         "There is a quick a knock on your door. You hear [the_person.possessive_title] from the other side of the door."
-        show screen person_info_ui(the_person)
         the_person.char "Hey [the_person.mc_title], you still up? I hope you're ready for me!"
         "You invite [the_person.possessive_title] in. You immediately start to get aroused when you see what she is wearing."
         $ the_person.outfit = SB_vaginal_lily_outfit.get_copy()
@@ -272,7 +269,6 @@ label SB_fetish_vaginal_event_label(the_person):
         "You head to your front door and see [the_person.possessive_title] standing there... outside... in a very provacative outfit."
         $ the_person.outfit = SB_vaginal_outfit.get_copy()
         $ the_person.draw_person()
-        show screen person_info_ui(the_person)
         ###Draw the girl###
         "You quickly open the door and invite her inside."
         "To avoid any situations with [mom.possessive_title] or [lily.possessive_title], you quickly invite her to your room."
@@ -323,7 +319,6 @@ label SB_fetish_mom_vaginal_label():
     $ the_person = mom
     "You are just starting to drift off to sleep, when you hear a knock at your door."
     the_person.char "Hey Honey... its [the_person.title]... can I come in?"
-    show screen person_info_ui(the_person)
     "It is unusual for her to come around this time of night."
     mc.name "Sure thing [the_person.title]."
     $ the_person.outfit = SB_vaginal_outfit.get_copy()
@@ -378,7 +373,6 @@ label SB_fetish_lily_vaginal_label():
     $ the_person = lily
     "You are just starting to drift off to sleep, when you hear a knock at your door."
     the_person.char "Hey [the_person.mc_title]... Are you still up? Can I come in for a bit?"
-    show screen person_info_ui(the_person)
     "[the_person.possessive_title] almost never comes to your room, unless she needs something."
     mc.name "Sure thing [the_person.title]."
     $ the_person.outfit = SB_vaginal_lily_outfit.get_copy()
@@ -456,7 +450,6 @@ label SB_cowgirl_wakeup_label(the_person):
     $ the_person.change_arousal(35)
     $ mc.arousal = 35
     ###Set both arousals to 35
-    show screen person_info_ui(the_person)
     "You slowly open your eyes and discover that [the_person.possessive_title] is on top of you, riding you in the reverse cowgirl position."
     "You reach up and grab her amazing ass cheeks. [the_person.possessive_title] looks back at your when she feels your hands on her."
     the_person.char "Good morning [the_person.mc_title]... Sorry but when I woke up I noticed you were hard so... I figured you wouldn't mind if I hopped on for a bit..."
@@ -517,7 +510,6 @@ label SB_fetish_vaginal_recurring_label():
 
     if the_person == mom:
         "Before going to bed, you hear a knock on your door. You hear [the_person.possessive_title]'s sweet and familiar voice from the other side."
-        show screen person_info_ui(the_person)
         the_person.char "Hey honey, its [the_person.title]... I was just wondering if I could come in for a bit?"
         "You invite [the_person.possessive_title] in. You immediately start to get aroused when you see what she is wearing."
         $ the_person.outfit = SB_vaginal_outfit.get_copy()
@@ -554,7 +546,6 @@ label SB_fetish_vaginal_recurring_label():
                 "You hang out for a few minutes, until you hear the doorbell. You go to your front door and open it."
                 $ the_person.outfit = SB_vaginal_outfit.get_copy()
                 $ the_person.draw_person()
-                show screen person_info_ui(the_person)
                 ###Draw the girl###
                 "[the_person.possessive_title] is standing there, and she looks amazing."
                 "You quickly invite her inside and head up to your room."
@@ -611,7 +602,6 @@ label SB_fetish_vaginal_lily_recurring_label():
     $ the_person = lily
 
     "Before going to bed, you hear a knock on your door. You hear [the_person.possessive_title] from the other side of the door."
-    show screen person_info_ui(the_person)
     the_person.char "Hey [the_person.mc_title], you still up? I was just wondering if I could come in for a bit?"
     "You invite Lily in. You immediately start to get aroused when you see what she is wearing."
     $ the_person.outfit = SB_vaginal_lily_outfit.get_copy()

@@ -20,11 +20,7 @@ init 2 python:
 
 label shower_crisis_action_label:
     ## Someone is taking a shower
-    $ shower_person = renpy.random.randint(1, 2)
-    if shower_person == 1:
-        $ the_person = mom
-    else:
-        $ the_person = lily
+    $ the_person = get_random_from_list(people_in_mc_home()) #Checks all the rooms in player's home
 
     "While walking around the house, you hear the shower running and notice that the bathroom door is not fully closed."
     menu:
@@ -34,7 +30,6 @@ label shower_crisis_action_label:
             return
     "You decide to take a peek."
     $ change_scene_display(home_shower)
-    show screen person_info_ui(the_person)
     $ the_person.draw_person(position = "walking_away")
     "You see [the_person.possessive_title] is standing in front of a mirror, getting ready for a shower."
     $ shower_clothing = the_person.outfit.remove_random_any(top_layer_first = True)
@@ -46,7 +41,7 @@ label shower_crisis_action_label:
     "You see the water running down her chest."
     $ the_person.draw_person(position = "stand3", emotion = "happy")
     "[the_person.possessive_title] turns around, with the water now going on her back and firm ass."
-    if the_person == mom:
+    if the_person.has_large_tits():
         "You can't help but admire [the_person.possessive_title]'s great body and tits."
         "Just as this thought flashes through your mind, she starts rubbing her boobs."
     else:
@@ -123,7 +118,6 @@ label shower_crisis_action_label:
             pass
         "Walk away":
             "You decide not to disturb her and just walk away."
-    hide screen person_info_ui
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)

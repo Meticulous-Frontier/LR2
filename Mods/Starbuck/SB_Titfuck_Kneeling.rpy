@@ -33,6 +33,10 @@ init 1:
 label intro_SB_Titfuck_Kneeling(the_girl, the_location, the_object, the_round):
     "[the_girl.possessive_title] eagerly begins opening your pants. She pulls out your cock and gives it a few gentle strokes."
     the_girl.char "How about I take care of this for you?"
+    if mc.condom:
+        the_girl.char "Why are you wearing this thing? Lets take this off so I can take care of you better..."
+        "[the_girl.possessive_title] pulls off your condom."
+        $ mc.condom = False
     "[the_girl.possessive_title] looks up at your from her knees. She looks you right in the eyes as she leans foward and slides your cock between her tits."
     "With both hands holding her breasts together, she slowly starts to move her pillowy flesh up and down your erection."
 
@@ -77,7 +81,7 @@ label scene_SB_Titfuck_Kneeling_3(the_girl, the_location, the_object, the_round)
 label outro_SB_Titfuck_Kneeling(the_girl, the_location, the_object, the_round):
     $ SB_Titfuck_Kneeling.current_modifier = "blowjob"
     $ SB_Titfuck_Kneeling.redraw_scene(the_girl)
-    "Little by little the soft, pillowy flesh of [the_girl.possessive_title]'s tits brings you closer to orgasm. You look down and see the hungry in her eyes and it pushes you over the edge."
+    "Little by little the soft, pillowy flesh of [the_girl.possessive_title]'s tits brings you closer to orgasm. You look down and see the hunger in her eyes and it pushes you over the edge."
     mc.name "Fuck, here I come!"
     if SB_check_fetish(the_girl, cum_internal_role):  #She can't help but swallow if she has an internal cum fetish#
         "[the_girl.possessive_title] suddenly leans forward and takes you in her mouth. She gives you a couple quick strokes with her hand"
@@ -129,6 +133,10 @@ label transition_SB_Titfuck_Kneeling_blowjob(the_girl, the_location, the_object,
 #This label describes trainsition from blowjob to this position
 label transition_blowjob_SB_Titfuck_Kneeling(the_girl, the_location, the_object, the_round):
     mc.name "Those tits look great. Why don't you wrap those around my cock for a bit..."
+    if mc.condom:
+        the_girl.char "Why are you wearing this thing? Lets take this off so I can take care of you better..."
+        "[the_girl.possessive_title] pulls off your condom."
+        $ mc.condom = False
     "[the_girl.possessive_title] takes your hard cock in her hands. She strokes it tentativly a few times, then leans in and slides your length between her twin peaks." #TODO also figure out way to reference Hooters
     mc.name "That's it, that's a good girl."
     return

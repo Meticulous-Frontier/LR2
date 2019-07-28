@@ -92,9 +92,9 @@ init 2 python:
 
             ActionMod._instances.add(self)
 
-        def __cmp__(self,other): 
+        def __cmp__(self,other):
             if isinstance(other, Action):
-                if self.effect == other.effect:                   
+                if self.effect == other.effect:
                     return 0
 
             if self.__hash__() < other.__hash__():
@@ -151,17 +151,31 @@ init 2 python:
 
         return
 
+    def try_fix_game_issues():
+        # to fix game with old hair colour linked to hair style changed from v0.17 to v0.18
+        for person in all_people_in_the_game([mc]):
+            if isinstance(person.hair_colour, basestring):
+                person.hair_colour = find_in_list(lambda x: x[0] == person.hair_colour, list_of_hairs) or list_of_hairs[0]
+            elif not isinstance(person.hair_colour, list) or len(person.hair_colour) != 2:
+                person.hair_colour = list_of_hairs[0]
+
+        # remove enter elevator action from configuration screen
+        found = find_in_list(lambda x: x.effect == "room_manager_action_label", action_mod_list)
+        if found:
+            found.allow_disable = False
+        return
+
     # mod settings action
     action_mod_options_action = Action("MOD Settings", action_mod_settings_requirement, "show_action_mod_settings", menu_tooltip = "Enable or disable mods")
     action_mod_configuration_action = Action("MOD Configuration", action_mod_settings_requirement, "show_action_mod_configuration", menu_tooltip = "Change configuration for individual MODS")
 
-init 5 python:
-    add_label_hijack("normal_start", "activate_action_mod_core")  
+init 4 python: # NOTE: Having it at 5 was causing errors after I moved things around. Haven't seen any side-effects of it.
+    add_label_hijack("normal_start", "activate_action_mod_core")
     add_label_hijack("after_load", "update_action_mod_core")
 
-# as long as VREN doesn't use this, we need to add a dummy label for hijacking purposes 
+# as long as VREN doesn't use this, we need to add a dummy label for hijacking purposes
 # NOTE: this label gets called after the hijack labels have been triggered
-label after_load:   
+label after_load:
     return
 
 label activate_action_mod_core(stack):
@@ -188,6 +202,10 @@ label update_action_mod_core(stack):
         except NameError:
             unmodded = True
 
+        # extra check to validate that action mod list exists correctly
+        if not unmodded and not isinstance(action_mod_list, list):
+            unmodded = True
+
     if unmodded:
         # initialize variable
         $ action_mod_list = []
@@ -199,54 +217,21 @@ label update_action_mod_core(stack):
         if not action_mod_configuration_action in bedroom.actions:
             bedroom.actions.append(action_mod_configuration_action)
 
+        try_fix_game_issues()
+
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return
 
 label show_action_mod_settings:
-    python:
-        global active_action_mod_category
-        tuple_list = []
-        for mod in action_mod_list:
-            has_category = False
-            for cat in tuple_list:
-                if mod.category == cat[1].category:
-                    has_category = True
-
-            if not has_category:
-                tuple_string = "Category: " + mod.category
-                tuple_list.append([tuple_string, mod])
-
-        tuple_list = sorted(tuple_list, key=lambda x: x[0])
-        tuple_list.append(["Back","Back"])
-        category_choice = renpy.display_menu(tuple_list, True, "Choice")
-
-        if category_choice == "Back":
-            renpy.return_statement()
-        else:
-            active_action_mod_category = category_choice.category
-            renpy.jump("change_mod_category")
+    hide screen main_ui
+    hide screen phone_hud_ui
+    hide screen business_ui
+    call screen mod_configuration_ui
+    show screen phone_hud_ui
+    show screen business_ui
+    show screen main_ui
     return
-
-label change_mod_category:
-    python:
-        tuple_list = []
-        for action_mod in action_mod_list:
-            if (not hasattr(action_mod, "allow_disable") or action_mod.allow_disable) and action_mod.category == active_action_mod_category:
-                tuple_string = action_mod.name + "\n Active: " + str(action_mod.enabled) + " (tooltip)" + action_mod.menu_tooltip
-                tuple_list.append([tuple_string, action_mod])
-
-        tuple_list = sorted(tuple_list, key=lambda x: x[0])
-        tuple_list.append(["Back","Back"])
-        action_mod_choice = renpy.display_menu(tuple_list, True, "Choice")
-
-        if action_mod_choice == "Back":
-            renpy.jump("show_action_mod_settings")
-        else:
-            action_mod_choice.toggle_enabled()
-            renpy.jump("change_mod_category")
-    return
-
 
 label show_action_mod_configuration:
     python:

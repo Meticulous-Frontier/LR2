@@ -13,13 +13,17 @@ init 2:
                     vbox:
                         xalign 0.02
                         yalign 0.02
-                        if len(inventory_names) > 0 and count < len(inventory_names):
-                            text inventory_names[count] style "serum_text_style" size 25
-                        else:
-                            text "Serums in Inventory" style "serum_text_style" size 25
+                        frame:
+                            background "#000080"
+                            xsize 390
+                            if len(inventory_names) > 0 and count < len(inventory_names):
+                                text inventory_names[count] style "serum_text_style_header"
+                            else:
+                                text "Serums in Inventory" style "serum_text_style_header"
 
                         for design in an_inventory.serums_held:
                             textbutton design[0].name + ": " + str(design[1]) + " Doses":
+                                xsize 390
                                 style "textbutton_style"
                                 text_style "serum_text_style"
                                 action Show("serum_tooltip",None,design[0])

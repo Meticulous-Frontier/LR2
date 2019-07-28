@@ -29,7 +29,7 @@ label mom_ntr_mod_action_label:
     $ finishes = []
     if the_person.get_opinion_score("being covered in cum") > 0 or the_person.get_opinion_score("cum facials") > 0:
         $ finishes.append ("facial")
-    if the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("risking getting pregnant") > 0:
+    if the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("bareback sex") > 0:
         $ finishes.append ("inside")
     if the_person.get_opinion_score("giving blowjobs") > 0 or the_person.get_opinion_score("drinking cum") > 0:
         $ finishes.append ("drink")
@@ -45,7 +45,6 @@ label mom_ntr_mod_action_label:
         $ encounter = 1
 
     $ change_scene_display(bedroom)
-    show screen person_info_ui(the_person)
     $ man_name = get_random_male_name()
     $ wife_name = get_random_name()
     while wife_name is the_person.name: ## Just to avoid stupid duplications
@@ -79,7 +78,6 @@ label mom_ntr_mod_action_label:
             "You are unsure what to do here."
         else:
             $ the_person.draw_person(position = "kissing", emotion = "happy")
-            show screen person_info_ui(the_person)
             "You see [the_person.possessive_title] embracing some man, kissing him deeply."
             the_person.char "Oh [man_name], you are so nice. I had a wonderful evening!"
             "Now, when you heard the name, you recognize the man. It's [man_name], one of [the_person.possessive_title] colleagues."
@@ -213,7 +211,7 @@ label mom_ntr_mod_action_label:
                                 the_person.char "Now are you happy, [man_name]? See me covered in your love juices?"
                                 man_name "You are great, [the_person.name]. I wish I could do it more often."
                                 $ the_person.draw_person(position = "stand2", emotion = "happy")
-                                "[the_person.possessive_title] get's up and smiles."
+                                "[the_person.possessive_title] gets up and smiles."
                                 the_person.char "How about a shower, [man_name]?"
                                 "They both go into the bathroom and you decide to get back to your room."
                                 if submissive or the_person.sluttiness > 60:
@@ -234,7 +232,7 @@ label mom_ntr_mod_action_label:
                                 "You see some white drops falling to the blankets."
                                 man_name "Well, quite a nice view. One cum filled bitch."
                                 $ the_person.draw_person(position = "stand2", emotion = "happy")
-                                "[the_person.possessive_title] get's up and smiles."
+                                "[the_person.possessive_title] gets up and smiles."
                                 the_person.char "No need to be so rough. The last part was really not bad, I agree."
                                 the_person.char "How about a shower, [man_name]?"
                                 "They both go into the bathroom and you decide to get back to your room."
@@ -273,7 +271,7 @@ label mom_ntr_mod_action_label:
                                 the_person.char "Ah, you taste so good, [man_name]. I hope there be more of it."
                                 man_name "You are just a perverted cum-loving slut, [the_person.name]. You know that?"
                                 $ the_person.draw_person(position = "stand2", emotion = "happy")
-                                "[the_person.possessive_title] get's up and smiles."
+                                "[the_person.possessive_title] gets up and smiles."
                                 the_person.char "Well, maybe so... Still, no need for such rude words after such a wonderful final."
                                 the_person.char "How about a shower, [man_name]?"
                                 "They both go into the bathroom and you decide to get back to your room."
@@ -297,7 +295,7 @@ label mom_ntr_mod_action_label:
                                     "His white liquid covers her butt."
                                     man_name "That's it, [the_person.name]. You got what you deserved."
                                     $ the_person.draw_person(position = "kissing", emotion = "happy")
-                                    "[the_person.possessive_title] get's up and kisses [man_name] with a passion."
+                                    "[the_person.possessive_title] gets up and kisses [man_name] with a passion."
                                     the_person.char "That was really great, [man_name]. I lost count how many orgasms I had. Never had such a good sex. We must do it again sometime."
                                     the_person.char "Now, how about a shower, [man_name]? I'm sweating like a cow."
                                     "They both go into the bathroom and you decide to get back to your room."
@@ -313,7 +311,7 @@ label mom_ntr_mod_action_label:
                                     "His white liquid covers her butt."
                                     man_name "That's it, [the_person.name]. You got what you deserved."
                                     $ the_person.draw_person(position = "stand2", emotion = "sad")
-                                    "[the_person.possessive_title] get's up. You see tears in her eyes."
+                                    "[the_person.possessive_title] gets up. You see tears in her eyes."
                                     the_person.char "Damn, [man_name]! I wish none of this has happened. Now get out of my house. Don't want to see your face anymore!"
                                     $ the_person.draw_person(position = "sitting", emotion = "sad")
                                     "You retreat to your room, while [man_name] collects his clothes and gets dressed."
@@ -336,7 +334,7 @@ label mom_ntr_mod_action_label:
                                 the_person.char "Now are you happy, [man_name]? See me covered in your love juices?"
                                 man_name "You are great, [the_person.name]. I wish I could do it more often."
                                 $ the_person.draw_person(position = "stand2", emotion = "happy")
-                                "[the_person.possessive_title] get's up and smiles."
+                                "[the_person.possessive_title] gets up and smiles."
                                 the_person.char "How about a shower, [man_name]?"
                                 "They both go into the bathroom and you decide to get back to your room."
                                 if submissive or the_person.sluttiness > 60:
@@ -376,7 +374,7 @@ label mom_ntr_mod_action_label:
                                 the_person.char "Ah, you taste so good, [man_name]. I hope there be more of it."
                                 man_name "You are just a perverted cum-loving slut, [the_person.name]. You know that?"
                                 $ the_person.draw_person(position = "stand2", emotion = "happy")
-                                "[the_person.possessive_title] get's up and smiles."
+                                "[the_person.possessive_title] gets up and smiles."
                                 the_person.char "Well, maybe so... Still, no need for such rude words after such a wonderful final."
                                 the_person.char "How about a shower, [man_name]?"
                                 "They both go into the bathroom and you decide to get back to your room."
@@ -2305,7 +2303,6 @@ label mom_ntr_mod_action_label:
                                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
             "Get back to bed.":
                 "You decide that it is wrong to interfere into [the_person.possessive_title]'s private life so you go back to your room to sleep."
-    hide screen person_info_ui
     $ the_person.sluttiness += 5
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.

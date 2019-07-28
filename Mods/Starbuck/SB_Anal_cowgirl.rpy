@@ -151,7 +151,22 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_round):
 
     #Perhaps an option where she hesitates and you grab her hips and pull her down while you cum.
     $ threshold = 120 + (-20 * the_girl.get_opinion_score("creampies")) + (-20 * the_girl.get_opinion_score("anal sex"))
-    if the_girl.sluttiness > threshold:
+    if mc.condom:
+        the_girl.char "Yes! Ah!"
+        "[the_girl.possessive_title] drops herself down, grinding her hips against yours and pushing your cock as deep into her ass as possible."
+        the_girl.char "Ah... I hope the condom didn't break!"
+        "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
+        "Your condom is full of your potent seed."
+        if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
+            $ the_girl.discover_opinion("drinking cum")
+            "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off do your cum doesn't spill out."
+            the_girl.char "It would be a shame to waste all of this, right?"
+            "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
+            $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+        else:
+            "[the_girl.possessive_title] reaches over for your cock, removes the condom, and ties the end in a knot for you."
+            the_girl.char "Wow, is all that cum for me? I guess my ass must be pretty good!"
+    elif the_girl.sluttiness > threshold:
         #She drops down on you as you cum.
         the_girl.char "Yes! Ah!"
         "[the_girl.possessive_title] drops herself down, grinding her hips against yours and pushing your cock as deep into her ass as possible."

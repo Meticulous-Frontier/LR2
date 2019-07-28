@@ -27,7 +27,6 @@ label business_meeting_action_label:
 
     $ change_scene_display(the_place)
     $ the_person.draw_person(position="sitting", emotion="happy")
-    show screen person_info_ui(the_person)
 
     call business_meeting_introduction(the_person) from _call_business_meeting_introduction_1
     call business_meeting_flirtation(the_person) from _call_business_meeting_flirtation_1
@@ -42,7 +41,7 @@ label business_meeting_action_label:
         $ the_person.change_happiness(5)
         "[the_person.title] finishes up her proposal."
 
-    $ the_person.wear_uniform() #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.review_outfit(show_review_message = False)
 
     call business_meeting_end(the_person) from _call_business_meeting_end_1
 
@@ -58,9 +57,7 @@ label business_meeting_action_label:
     #$ mc.log_event("Company Efficiency: " + str(mc.business.effectiveness_cap) + "%", "float_text_grey")
     "The changes inceased your business effectivity by [change]%%."
 
-    hide screen person_info_ui
     $ the_person.reset_arousal()
-    $ the_person.review_outfit(show_review_message = False)
     $ change_scene_display(mc.location)
     $ renpy.scene("Active")
     return

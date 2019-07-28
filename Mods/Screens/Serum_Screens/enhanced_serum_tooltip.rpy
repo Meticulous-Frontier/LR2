@@ -22,7 +22,7 @@ init 2:
 
                     style "serum_textbutton_style_header"
                     xalign 0.5
-                    xsize 450
+                    xsize 480
 
                     action NullAction()
 
@@ -40,54 +40,51 @@ init 2:
                 frame:
                     background "#777777"
                     xalign 0.5
-                    xsize 450
-                    ysize 200
+                    xsize 480
+                    ysize 150
                     vbox:
                         hbox:
+                            spacing 5
                             vbox:
-                                textbutton "Research Required: {color=98fb98}[the_serum.research_needed]{/color}":
-                                    style "textbutton_style"
-                                    text_style "serum_text_style"
+                                spacing 5
+                                frame:
+                                    background "#000080"
                                     xsize 225
-                                    action NullAction()
+                                    text "Research Required: {color=98fb98}[the_serum.research_needed]{/color}" style "serum_text_style_traits"
 
-                                textbutton "Production Cost: {color=#cd5c5c}[the_serum.production_cost]{/color}":
-                                    style "textbutton_style"
-                                    text_style "serum_text_style"
+                                frame:
+                                    background "#000080"
                                     xsize 225
-                                    action NullAction()
+                                    text "Production Cost: {color=#cd5c5c}[the_serum.production_cost]{/color}" style "serum_text_style_traits"
 
-                                textbutton "Value: $[the_serum.value]":
-                                    style "textbutton_style"
-                                    text_style "serum_text_style"
+                                frame:
+                                    background "#000080"
                                     xsize 225
-                                    action NullAction()
-
+                                    text "Value: $[the_serum.value]" style "serum_text_style_traits"
 
                             vbox:
+                                spacing 5
                                 $ calculated_profit = (the_serum.value*mc.business.batch_size)-the_serum.production_cost
                                 if calculated_profit > 0:
-                                    textbutton "Expected Profit:{color=#98fb98} $[calculated_profit]{/color}":
-                                        style "textbutton_style"
-                                        text_style "serum_text_style"
+                                    frame:
+                                        background "#000080"
                                         xsize 225
-                                        action NullAction()
+                                        text "Expected Profit:{color=#98fb98} $[calculated_profit]{/color}" style "serum_text_style_traits"
                                 else:
                                     $ calculated_profit = 0 - calculated_profit
-                                    textbutton "Expected Profit:{color=#cd5c5c} -$[calculated_profit]{/color}":
-                                        style "textbutton_style"
-                                        text_style "serum_text_style"
+                                    frame:
+                                        background "#000080"
                                         xsize 225
-                                        action NullAction()
+                                        text "Expected Profit:{color=#cd5c5c} -$[calculated_profit]{/color}" style "serum_text_style_traits"
 
-                                textbutton "Duration: [the_serum.duration] Turns":
-                                    style "textbutton_style"
-                                    text_style "serum_text_style"
+                                frame:
+                                    background "#000080"
                                     xsize 225
-                                    action NullAction()
+                                    text "Duration: [the_serum.duration] Turns" style "serum_text_style_traits"
+
                                 if renpy.get_screen("review_designs_screen"): #Make it so you have to be in the review screen to edit things (still need to protect already created serum somehow)
                                     textbutton "Edit Serum":
-                                        style "textbutton_style"
+                                        style "textbutton_no_padding_highlight"
                                         text_style "serum_text_style"
                                         xsize 225
                                         action Show("serum_design_ui", None, the_serum, the_serum.traits)
@@ -95,81 +92,59 @@ init 2:
                 frame:
                     background "#777777"
                     xalign 0.5
-                    xsize 450
+                    xsize 480
                     if the_serum.side_effects:
-                        ysize 400
+                        ysize 450
+                    else:
+                        ysize 650
+
                     viewport:
                         scrollbars "vertical"
-                        xsize 450
+                        xsize 480
                         mousewheel True
                         vbox:
+                            spacing 5
                             for trait in the_serum.traits:
-                                textbutton trait.name:
-                                    style "textbutton_style"
-                                    text_style "serum_text_style"
-                                    xsize 450
-
-                                    action NullAction()
-
-                                    alternate [
-                                    SensitiveIf(trait in the_serum.traits),
-                                    ]
+                                frame:
+                                    background "#000080"
+                                    xsize 480
+                                    text trait.name style "serum_text_style"
 
                                 hbox:
-                                    xsize 225
+                                    spacing 5
+                                    frame:
+                                        background "#007000"
+                                        xsize 225
+                                        text "[trait.positive_slug]" style "serum_text_style_traits"
 
-                                    vbox:
-                                        textbutton "[trait.positive_slug]":
-                                             style "serum_textbutton_style_positive"
-                                             text_style "serum_text_style_traits"
-                                             xalign 0.5
-                                             xsize 225
+                                    frame:
+                                        background "#930000"
+                                        xsize 225
+                                        text "[trait.negative_slug]" style "serum_text_style_traits"
 
-                                             action NullAction()
-
-
-                                    vbox:
-                                        textbutton "[trait.negative_slug]":
-                                            style "serum_textbutton_style_negative"
-                                            text_style "serum_text_style_traits"
-                                            xalign 0.5
-                                            xsize 225
-
-                                            action NullAction()
                 if the_serum.side_effects:
-                    textbutton "Side Effects:":
-                        style "serum_textbutton_style_header"
-                        text_style "serum_text_style_header"
-                        xsize 450
+                    frame:
+                        background "#000080"
+                        xsize 480
+                        text "Side Effects:" style "serum_text_style"
 
-                        action NullAction()
                     frame:
                         background "#777777"
                         xalign 0.5
-                        xsize 450
+                        xsize 480
                         viewport:
                             scrollbars "vertical"
-                            xsize 450
+                            xsize 480
                             mousewheel True
                             vbox:
-
+                                spacing 5
                                 for side_effect in the_serum.side_effects:
-                                    textbutton side_effect.name:
-                                        style "textbutton_style"
-                                        text_style "serum_text_style"
-                                        xsize 450
+                                    frame:
+                                        background "#000080"
+                                        xsize 480
+                                        text side_effect.name style "serum_text_style_traits"
 
-                                        action NullAction()
-
-                                    hbox:
-                                        xsize 225
-                                        vbox:
-                                            pass
-                                        vbox:
-                                            textbutton "[side_effect.negative_slug]":
-                                                style "serum_textbutton_style_negative"
-                                                text_style "serum_text_style_traits"
-                                                xalign 0.5
-                                                xsize 225
-
-                                                action NullAction()
+                                    frame:
+                                        background "#930000"
+                                        xsize 480
+                                        text "[side_effect.negative_slug]" style "serum_text_style_traits"

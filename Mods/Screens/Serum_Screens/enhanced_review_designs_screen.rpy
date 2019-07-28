@@ -4,21 +4,16 @@ init 2:
         vbox:
             xalign 0.2
             xanchor 0.5
-            yalign 0.1
+            yalign 0.5
             frame:
                 background "#888888"
                 xalign 0.5
                 ysize 900
                 vbox:
-                    xalign 0.5
-                    textbutton "Serum Designs":
-                        style "textbutton_style"
-                        text_style "serum_text_style"
+                    frame:
+                        background "#000080"
                         xsize 650
-                        xalign 0.5
-                        action [
-                        NullAction()
-                        ]
+                        text "Serum Designs" style "serum_text_style_header" 
 
                     frame:
                         background "#777777"

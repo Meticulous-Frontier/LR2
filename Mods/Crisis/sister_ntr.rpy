@@ -40,7 +40,7 @@ label sister_ntr_crisis_action_label:
     $ finishes = []
     if the_person.get_opinion_score("being covered in cum") > 0 or the_person.get_opinion_score("cum facials") > 0:
         $ finishes.append ("facial")
-    if the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("risking getting pregnant") > 0:
+    if the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("bareback sex") > 0:
         $ finishes.append ("inside")
     if the_person.get_opinion_score("giving blowjobs") > 0 or the_person.get_opinion_score("drinking cum") > 0:
         $ finishes.append ("drink")
@@ -53,7 +53,6 @@ label sister_ntr_crisis_action_label:
     else:
         $ encounter = 1
 
-    show screen person_info_ui(the_person)
     $ change_scene_display(bedroom)
     $ man_name = get_random_male_name()
 
@@ -383,7 +382,7 @@ label sister_ntr_crisis_action_label:
                 "You see some books lying on the table. Seems they were studying and got little bored. Judging by the sweat on their bodies and loud moans, the seem to be relaxing for some time now."
                 "The man grabs [the_person.possessive_title]'s head and tries to force her to take his member all way long."
                 if submissive:
-                    "[the_person.possessive_title] obedientely takes it all in her mouth. You see some tears in her eyes but she does not object."
+                    "[the_person.possessive_title] obediently takes it all in her mouth. You see some tears in her eyes but she does not object."
                     man_name "That's it, dear. Take it deep. I like the way you do it."
                 else:
                     "[the_person.possessive_title] shakes her head, clearly showing that she does not like this. [man_name] takes his hands away."
@@ -839,7 +838,7 @@ label sister_ntr_crisis_action_label:
             "You see some books lying on the table. Seems they were studying and got little bored. Judging by the sweat on their bodies and loud moans, the seem to be relaxing for some time now."
             "The man grabs [the_person.possessive_title]'s head and tries to force her to take his member all way long."
             if submissive:
-                "[the_person.possessive_title] obedientely takes it all in her mouth. You see some tears in her eyes but she does not object."
+                "[the_person.possessive_title] obediently takes it all in her mouth. You see some tears in her eyes but she does not object."
                 man_name "That's it, dear. Take it deep. I like the way you do it."
                 man_name2 "Like being face-fucked, don't you , [the_person.name]?"
             else:
@@ -925,8 +924,6 @@ label sister_ntr_crisis_action_label:
                 else:
                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
 
-
-    hide screen person_info_ui
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     $ change_scene_display(mc.location)

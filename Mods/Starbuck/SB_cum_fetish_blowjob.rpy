@@ -16,6 +16,10 @@
 
 label intro_SB_cum_fetish_blowjob(the_girl, the_location, the_object, the_round):
     "[the_girl.possessive_title] eagerly begins opening your pants. She pulls out your cock and gives it a few gentle strokes."
+    if mc.condom:
+        the_girl.char "Why are you wearing this thing? Lets take this off so I can take care of you better..."
+        "[the_girl.possessive_title] pulls off your condom."
+        $ mc.condom = False
     the_girl.char "How about I take care of this for you?"
     "[the_girl.possessive_title] looks up at your from her knees. She looks you right in the eyes as she leans foward and slides her lips over the tip of your dick."
     $ SB_cum_fetish_blowjob.current_modifier = "blowjob"
@@ -148,6 +152,10 @@ label outro_SB_cum_fetish_blowjob(the_girl, the_location, the_object, the_round)
 label transition_SB_cum_fetish_blowjob_blowjob(the_girl, the_location, the_object, the_round):
     $ SB_cum_fetish_blowjob.current_modifier = "blowjob"
     $ SB_cum_fetish_blowjob.redraw_scene(the_girl)
+    if mc.condom:
+        the_girl.char "Why are you wearing this thing? Lets take this off so I can take care of you better..."
+        "[the_girl.possessive_title] pulls off your condom."
+        $ mc.condom = False
     "[the_girl.possessive_title] gets onto her knees in front of you and takes your hard cock in her hands. She strokes it tentativly a few times, then leans in and slides the tip into her mouth."
     mc.name "That's it, that's a good girl."
     return

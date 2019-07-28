@@ -51,8 +51,8 @@ label SB_mod_options_menu:
                 globals()[action_mod_choice]()
 
 label initialize_starbuck_configuration_values:
-    $ shop_difficulty_value = 1.0
-    $ max_fetishes_per_person = 1
+    $ store.shop_difficulty_value = 1.0
+    $ store.max_fetishes_per_person = 1
     return
 
 label activate_starbuck_mod_core(stack):

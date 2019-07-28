@@ -13,10 +13,15 @@ init 2:
     screen serum_production_select_ui:
         add "Science_Menu_Background.png"
         default line_selected = None
-        default production_remaining = 100
 
         python:
-            production_remaining = 100
+            if "machinery_room_overload" in globals(): # Should not cause issues if not present.
+                production_remaining = machinery_room_overload
+                production_max = machinery_room_overload
+            else:
+                production_remaining = 100
+                production_max = production_remaining
+                
             for key in mc.business.serum_production_array:
                 production_remaining -= mc.business.serum_production_array[key][1] # How much of the 100% capability are we using?
         hbox:
@@ -29,26 +34,17 @@ init 2:
                 xsize 600
                 ysize 900
                 vbox:
-
+                    spacing 5
                     xalign 0.5
-
-                    textbutton "Production Lines":
+                    frame:
+                        background "#000080"
                         xsize 550
-                        xalign 0.5
+                        text "Production Lines" style "serum_text_style_header"
 
-                        style "serum_textbutton_style_header"
-                        text_style "serum_text_style_header"
-
-                        action NullAction()
-
-                    textbutton "Capacity Remaining: [production_remaining]%":
+                    frame:
+                        background "#000080"
                         xsize 550
-                        xalign 0.5
-
-                        style "textbutton_style"
-                        text_style "serum_text_style"
-
-                        action NullAction()
+                        text "Capacity Remaining: [production_remaining]%" style "serum_text_style"
 
                     viewport:
                         draggable True
@@ -248,15 +244,14 @@ init 2:
             if line_selected:
                 frame:
                     background "#888888"
-                    xsize 300
+                    xsize 400
                     ysize 650
+                    xalign 0.5
                     vbox:
-                        xalign 0.5
                         textbutton "Choose Production for Line [line_selected]":
                             style "serum_textbutton_style_header"
                             text_style "serum_text_style_header"
-                            xalign 0.5
-                            xsize 300
+                            xsize 375
                             action SetScreenVariable("line_selected",None)
 
                         if len(mc.business.serum_designs) == 0:
@@ -264,16 +259,13 @@ init 2:
                                 style "textbutton_style"
                                 text_style "serum_text_style"
                                 action NullAction()
-                                xalign 0.5
                         else:
                             viewport:
                                 draggable True
                                 scrollbars "vertical"
                                 mousewheel True
-
-                                xsize 300
+                                xsize 400
                                 vbox:
-
                                     for a_serum in mc.business.serum_designs:
                                         if a_serum.researched:
                                             textbutton "[a_serum.name]":
@@ -287,7 +279,7 @@ init 2:
                                                 ]
                                                 style "textbutton_style"
                                                 text_style "serum_text_style"
-                                                xsize 300
+                                                xsize 400
                                                 xalign 0.5
 
         frame:

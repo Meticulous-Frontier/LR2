@@ -2,29 +2,6 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
     modal True
     default catagory_selected = "Hair Style"
 
-    default hair_style_colour_palette = [
-        ["blond", [0.84,0.75,0.47,1]],
-        ["brown", [0.73,0.43,0.24,1]],
-        ["black", [0.1,0.09,0.08,1]],
-        ["red", [0.3,0.05,0.05,1]],
-        ["hot pink", [1,0.5,0.8,1]],
-        ["sky blue", [0.4,0.5,0.9,1]],
-        ["alt blond", [0.882, 0.733, 0.580,1]],
-        ["light grey", [0.866, 0.835, 0.862,1]],
-        ["ash brown", [0.590, 0.473, 0.379,1]],
-        ["knight red", [0.745, 0.117, 0.235,1]],
-        ["platinum blonde" , [0.789, 0.746, 0.691,1]],
-        ["golden blonde" , [0.895, 0.781, 0.656,1]],
-        ["turquoise" , [0.435, 0.807, 0.788,1]],
-        ["lime green" , [0.647, 0.854, 0.564,1]],
-        ["strawberry blonde" , [0.644, 0.418, 0.273,1]],
-        ["light auburn" , [0.566, 0.332, 0.238,1]],
-        ["pulp" , [0.643, 0.439, 0.541,1]],
-        ["saturated" , [0.905, 0.898, 0.513,1]],
-        ["emerald" , [0.098, 0.721, 0.541,1]],
-        ["light brown" , [0.652, 0.520, 0.414,1]]
-        ]
-
     default valid_catagories = ["Hair Style"] #Holds the valid list of catagories strings to be shown at the top.
 
     $ catagories_mapping = {
@@ -34,12 +11,13 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
     default bar_select = 0 # 0 is nothing selected, 1 is red, 2 is green, 3 is blue, and 4 is alpha
 
     default selected_colour = "colour" #If secondary we are alterning the patern colour. When changed it updates the colour of the clothing item. Current values are "colour" and "colour_pattern"
-    default current_r = person.hair_style.colour[0]
-    default current_g = person.hair_style.colour[1]
-    default current_b = person.hair_style.colour[2]
-    default current_a = person.hair_style.colour[3]
+    default current_r = person.hair_colour[1][0]
+    default current_g = person.hair_colour[1][1]
+    default current_b = person.hair_colour[1][2]
+    default current_a = person.hair_colour[1][3]
 
-    default selected_hair_colour = person.hair_colour
+    default selected_hair_colour_name = person.hair_colour[0]
+    default selected_hair_colour = person.hair_colour[1]
     default selected_hair_style = person.hair_style
 
     hbox: #The main divider between the new item adder and the current outfit view.
@@ -67,6 +45,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                 hover_background "#3a65c1"
                             text_align(0.5,0.5)
                             text_anchor(0.5,0.5)
+                            tooltip ""
                             xysize (220, 60)
                             action [SetScreenVariable("catagory_selected",catagory),
                                 SetScreenVariable("selected_colour", "colour")]
@@ -101,14 +80,16 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                             text_style "textbutton_text_style"
                                             background "#1a45a1"
                                             hover_background "#3a65c1"
+                                            tooltip ""
                                             xfill True
                                             sensitive True
                                             action [
+                                                SetField(hair_style_item, "colour", [current_r, current_g, current_b, current_a]),
                                                 SetScreenVariable("selected_colour", "colour"),
                                                 SetScreenVariable("selected_hair_style", hair_style_item),
-                                                SetField(hair_style_item, "colour", [current_r, current_g, current_b, current_a]),
+                                                SetField(person, "hair_colour", [selected_hair_colour_name, [current_r, current_g, current_b, current_a]]),
                                                 SetField(person, "hair_style", hair_style_item),
-                                                Function(person.draw_person)]
+                                                Function(person.draw_person, show_person_info = False)]
 
                     frame:
                         #THIS IS WHERE SELECTED ITEM OPTIONS ARE SHOWN
@@ -131,10 +112,11 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                             background "#1a45a1"
                                             hover_background "#3a65c1"
                                         sensitive True
+                                        tooltip ""
                                         action NullAction()
 
                                     frame:
-                                        background Color(rgb=(current_r,current_g,current_b,current_a))
+                                        background Color(rgb=(current_r, current_g, current_b, current_a))
                                         xysize (45,45)
                                         yanchor 0.5
                                         yalign 0.5
@@ -145,12 +127,13 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                         background "#1a45a1"
                                         hover_background "#3a65c1"
                                         sensitive True
+                                        tooltip ""
                                         xoffset 20
                                         action [
-                                            SetField(selected_hair_style, "colour", [current_r,current_g,current_b,current_a]),
-                                            SetField(person, "hair_colour", selected_hair_colour),
+                                            SetField(selected_hair_style, "colour", [current_r, current_g, current_b, current_a]),
+                                            SetField(person, "hair_colour", [selected_hair_colour_name, [current_r, current_g, current_b, current_a]]),
                                             SetField(person, "hair_style", selected_hair_style),
-                                            Function(person.draw_person)
+                                            Function(person.draw_person, show_person_info = False)
                                         ]
 
                                 hbox:
@@ -215,6 +198,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                             background "#4f7ad6"
                                         else:
                                             background "#1a45a1"
+                                        hover_background "#3a65c1"
                                         text "Normal" style "menu_text_style" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
                                         xysize (120, 40)
                                         action SetScreenVariable("current_a", 1.0)
@@ -224,6 +208,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                             background "#4f7ad6"
                                         else:
                                             background "#1a45a1"
+                                        hover_background "#3a65c1"
                                         text "Sheer" style "menu_text_style" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
                                         xysize (120, 40)
                                         action SetScreenVariable("current_a", 0.95)
@@ -233,10 +218,11 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                             background "#4f7ad6"
                                         else:
                                             background "#1a45a1"
+                                        hover_background "#3a65c1"
                                         text "Translucent" style "menu_text_style" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
                                         xysize (120, 40)
                                         action SetScreenVariable("current_a", 0.8)
-                                for block_count, hair_colour_list in __builtin__.enumerate(split_list_in_blocks(hair_style_colour_palette, 10)):
+                                for block_count, hair_colour_list in __builtin__.enumerate(split_list_in_blocks(list_of_hairs, 10)):
                                     hbox:
                                         spacing 5
                                         xalign 0.5
@@ -249,43 +235,44 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                                     background Color(rgb=(hair_colour[1][0], hair_colour[1][1], hair_colour[1][2]))
                                                     xysize (40,40)
                                                     sensitive True
+                                                    tooltip ""
                                                     action [
-                                                        SetScreenVariable("selected_hair_colour", hair_colour[0]),
+                                                        SetScreenVariable("selected_hair_colour_name", hair_colour[0]),
+                                                        SetScreenVariable("selected_hair_colour", hair_colour[1]),
+                                                        SetField(selected_hair_style, "colour", [hair_colour[1][0], hair_colour[1][1], hair_colour[1][2], hair_colour[1][3]]),
                                                         SetScreenVariable("current_r", hair_colour[1][0]),
                                                         SetScreenVariable("current_g", hair_colour[1][1]),
                                                         SetScreenVariable("current_b", hair_colour[1][2]),
                                                         SetScreenVariable("current_a", hair_colour[1][3]),
-                                                        SetField(selected_hair_style, "colour", [hair_colour[1][0], hair_colour[1][1], hair_colour[1][2], hair_colour[1][3]]),
-                                                        SetField(person, "hair_colour", hair_colour[0]),
+                                                        SetField(person, "hair_colour", hair_colour),
                                                         SetField(person, "hair_style", selected_hair_style),
-                                                        Function(person.draw_person)
+                                                        Function(person.draw_person, show_person_info = False)
                                                     ]
                                                     # We use a fixed pallette of hair colours
         vbox:
             spacing 15
+            xalign 0.5
             frame:
                 xysize (440, 500)
                 background "#aaaaaa"
                 padding (20,20)
                 vbox:
-                    spacing 15
-                    text "Current Hair Style" style "textbutton_text_style"
+                    frame:
+                        background "#000080"
+                        xsize 400                       
+                        text "Current Hair Style" xalign 0.5 style "textbutton_text_style"
                     frame:
                         xfill True
                         yfill True
                         background "#888888"
                         vbox:
                             spacing 5 #TODO: Add a viewport here too.
-                            button:
-                                background Color(rgb = (selected_hair_style.colour[0], selected_hair_style.colour[1], selected_hair_style.colour[2]))
-                                xysize (380, 40)
-                                action NullAction()
+                            frame:
+                                background Color(rgb = (selected_hair_colour[0], selected_hair_colour[1], selected_hair_colour[2]))
+                                xysize (390, 40)
                                 xalign 0.5
                                 yalign 0.0
                                 text selected_hair_style.name xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 style "outfit_style"
-
-
-
 
             frame:
                 background "#aaaaaa"
@@ -298,5 +285,5 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                         xalign 0.5
                         xanchor 0.5
                         spacing 50
-                        textbutton "Save Haircut" action [Return] style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 xysize (155,80)
-                        textbutton "Abandon Design" action [SetField(person, "hair_colour", old_hair_colour), SetField(person, "hair_style", old_hair_style), Return] style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5 xysize (185,80)
+                        textbutton "Save Haircut" action [Return] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (155,80)
+                        textbutton "Abandon Design" action [SetField(person, "hair_colour", old_hair_colour), SetField(person, "hair_style", old_hair_style), Return] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (185,80)

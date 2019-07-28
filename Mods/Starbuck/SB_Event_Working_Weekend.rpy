@@ -41,7 +41,6 @@ label SB_working_weekend_crisis_label():
     "Deep in thought, and with the company normally desserted, it takes you by surprise when you see movement out of the corner of your eye."
     "Looking aside, you see [the_person.possessive_title]."
     $ the_person.draw_person()
-    show screen person_info_ui(the_person)
     "You can tell by the look on her face that [the_person.possessive_title] is also surprised to see you."
     if the_person.sluttiness < SB_LOW_SLUT_VALUE:
         #if she is not slutty at all
@@ -352,19 +351,19 @@ label SB_working_weekend_crisis_label():
                             $ SEXUAL_TOPIC_COUNTER += 1
                         $ the_person.discover_opinion("drinking cum")
 
-                        if the_person.get_opinion_score("risking getting pregnant") > 1:
+                        if the_person.get_opinion_score("bareback sex") > 1:
                             the_person.char "I actually LOVE the thrill of pregnancy risk though. Shoot it inside me deep!"
                             $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("risking getting pregnant") > 0:
+                        elif the_person.get_opinion_score("bareback sex") > 0:
                             the_person.char "I kinda like when guys cum inside me. It feels kinda risky, right?"
                             $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("risking getting pregnant") < -1:
+                        elif the_person.get_opinion_score("bareback sex") < -1:
                             the_person.char "I am so scared of getting pregnant."
                             $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("risking getting pregnant") < 0:
+                        elif the_person.get_opinion_score("bareback sex") < 0:
                             the_person.char "I am a little afraid of getting pregnant, to be honest."
                             $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("risking getting pregnant")
+                        $ the_person.discover_opinion("bareback sex")
 
                     "Sexy Clothing":
                         mc.name "So, how do you feel about sexy clothing and outfits, [the_person.title]?"
@@ -557,8 +556,6 @@ label SB_working_weekend_crisis_label():
             "You walk over to [the_person.possessive_title]. She wraps her arms around you as you roughly grab her ass and pick her up. She's grinding herself against you as you carry her over to your desk."
             "[the_person.possessive_title] is just pulling your cock out when you hear a cough from the doorway."
             the_person_two.char "Wow, looks like you guys are getting ready for some fun!"
-            hide screen person_info_ui
-            show screen SB_two_person_info_ui(the_person_two, the_person)
             $ SB_draw_two_person_scene(person_one = the_person, person_two = the_person_two, two_pos_x = 0.7, one_position = "missionary")
             "You turn and see [the_person_two.possessive_title] standing in the doorway. You aren't sure how long she has been standing there."
             the_person_two.char "This is so sexy... [the_person_two.mc_title], can I join? Please!?! You won't regret it!"
@@ -588,7 +585,6 @@ label SB_working_weekend_crisis_label():
             $ mc.current_stamina += -1
             the_person.char "Holy fuck [the_person.mc_title], that was so hot."
             "She eventually gets up and gets herself dressed again. You say goodbye as she leaves the office."
-            hide screen SB_two_person_info_ui
             $ the_person_two.reset_arousal()
             $ the_person.reset_arousal()
 
@@ -626,9 +622,9 @@ label SB_working_weekend_crisis_label():
                 return
         "Eventually, [the_person.possessive_title] gets up. She says goodbye after giving you a peck on the cheek and is soon walking out the door."
 
-
-
-    $ renpy.scene("Active")
+    $ the_person.reset_arousal()
+    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+    $ change_scene_display(mc.location)
     return
 
 init 3 python :

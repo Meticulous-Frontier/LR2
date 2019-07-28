@@ -32,13 +32,18 @@ label mall_introduction_action_label:
         # pick a person from each
         known_person = get_random_from_list(known_people)
         stranger = get_random_from_list(strangers)
+        # don't random introduce unique characters
+        while stranger in unique_character_list:
+            strangers.remove(stranger)
+            if len(strangers) == 0:
+                renpy.return_statement() # no strangers left, exit
+            stranger = get_random_from_list(strangers)
 
         scene_manager = Scene()
 
         scene_manager.add_actor(known_person, position = "stand4", emotion = "happy", character_placement = character_center_flipped)
         scene_manager.add_actor(stranger, position = "stand3")
 
-    hide screen person_info_ui
     known_person.char "Oh, hello [known_person.mc_title], how nice to see you here."
     mc.name "Hello [known_person.title], nice to see you too."
 
