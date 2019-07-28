@@ -4,6 +4,12 @@
 init -1 python:
     bedroom_not_required_labels = ["dinner_date", "invest_rep_visit_label", "advanced_serum_stage_2_label", "serum_creation_crisis_label", "quitting_crisis_label"]
 
+    # fix for date requirement triggered in wrong timeslot
+    def dinner_date_requirement(day_of_week): #Used for a mandatory crisis that triggers on the next Friday in time chunk 3.
+        if time_of_day == 4 and day%7 == day_of_week: #Day of week is a nubmer from 0 to 6, where 0 is Monday.
+            return True
+        return False
+
     def advance_time_requirement():
         return True
 
