@@ -77,16 +77,21 @@ init -2 python:
             return "Requires higher sluttiness"
         elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 4:
             return "She's already invited you over!"
-        else:
+        elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 3:
             return True
         return False
 
     def casual_hotwife_her_place_requirement():
-
+        if mc_asleep():
+            return True
         return False
 
     def casual_hotwife_home_sex_requirement(the_person):
-
+        if the_person.event_triggers_dict.get("hotwife_progress", 0) == 5:
+            if mc.location == the_person.home:
+                return True
+            else:
+                return "You can only do this at her place."
         return False
 
 
@@ -628,28 +633,120 @@ label casual_hotwife_dancing_sex_label(the_person):
 
 #CSH30
 label casual_hotwife_sex_invite_label(the_person):
-    "This scene is not yet written!"
-    $ CS_hotwife_lingerie = Outfit("Lingerie Set Classic White")
-    $ SB_advert_one_outfit.add_upper(teddy.get_copy(),colour_white)
-    $ SB_advert_one_outfit.add_feet(garter_with_fishnets.get_copy(), colour_white)
-    $ SB_advert_one_outfit.add_feet(high_heels.get_copy(), colour_white)
+    mc.name "Hey so... I'm not doing anything later..."
+    "You can see a smile start to form on [the_person.title]'s face."
+    the_person.char "You want to come over tonight?"
+    mc.name "That would be great."
+    "[the_person.possessive_title] gives you her address."
+    the_person.char "Come over tonight, around 10pm. You won't regret it! Is there anything else you want to do now?"
+    $ casual_hotwife_her_place.args = [the_person]    # set the current person as action argument
+    $ mc.business.mandatory_crises_list.append(casual_hotwife_her_place) #Add race crisis    TODO Find out if this breaks if two girls hit this stage a the same point in gameplay
+    if not the_person.home in mc.known_home_locations:
+        $ mc.known_home_locations.append(the_person.home)
+    $ the_person.event_triggers_dict["hotwife_progress"] = 4
 
-
-    call advance_time from _call_advance_casual_hotwife_sex_invite
+    #call advance_time from _call_advance_casual_hotwife_sex_invite
     return
 
 #CSH40
 label casual_hotwife_her_place_label(the_person):
-    "This scene is not yet written!"
+    "You head over to [the_person.title]'s place. You can't believe you're gonna fuck her in front of her husband!"
+    $ mc.change_location(the_person.home)
+    $ renpy.show(mc.location.name,what=mc.location.background_image)
+    "You ring the doorbell. Soon [the_person.title] answers the door."
 
+    $ CS_hotwife_lingerie = Outfit("Lingerie Set Classic White")
+    $ CS_hotwife_lingerie.add_upper(teddy.get_copy(),colour_white)
+    $ CS_hotwife_lingerie.add_feet(garter_with_fishnets.get_copy(), colour_white)
+    $ CS_hotwife_lingerie.add_feet(high_heels.get_copy(), colour_white)
+    $ the_person.outfit = CS_hotwife_lingerie.get_copy()
+    $ the_person.draw_person(position = "stand4")
+    the_person.char "You made it! I wasn't sure you would actually come!"
+    mc.name "Of course!"
+    "You check her out. She definitely looks ready for some action! She takes your hand and slowly walks you back to the bedroom."
+    the_person.char "[the_person.SO_name] and I were just getting started... you came at the perfect time..."
+    "[the_person.SO_name]? Why does that sound so familiar?"
+    "As you walk into the bedroom, you see [the_person.SO_name], the bartender sitting in a chair, completely naked."
+    "Holy shit! Its the bartender! He had a front row ticket every time you fucked [the_person.title] at the bar! No wonder he went along with all of it!"
+    "He nods to you, but you are shocked at the revelation."
+    the_person.char "Don't worry about him, get over here and fuck me [the_person.mc_title]!"
+    $ the_person.draw_person(position = "doggy")
+    "You watch as [the_person.possessive_title] crawls on to the bed, pointing her ass back at you. She wiggles it back and forth, enticingly."
+    "You walk up behind her and run your hands over her pliant cheeks. [the_person.SO_name]'s chair is at the end of the bed, so he will have an excellent profile view while you fuck his wife."
+    "With one hand you start to undo your trousers. With your other hand, you run you fingers along her slit. She is wet and ready for you."
+    "Your cock now free, you line yourself up with [the_person.possessive_title]'s pussy. You put her husband out of your mind as you slowly push into her."
+    "[the_person.possessive_title] gasps as you begin to slide in and out of her."
+    call sex_description(the_person, doggy, make_bed(), 1, private= True, girl_in_charge = False) from _call_sex_description_CSH040
 
+    #Finishing dialogue based on sexual performance
+    if the_person.arousal > 130:   #She had more than one orgasm
+        the_person.char "Oh my god... I came so many times..."
+        "[the_person.possessive_title] collapses onto the bed after your performance. You get up and start to get dressed."
+        "You nod at [the_person.SO_name], and he nods back. He goes over to a bedside table and gets out a set of handcuffs."
+        "After you fucked her brains out, [the_person.title] lays helpless on the bed as he starts to cuff her hands behind her back."
+        "You finished getting dressed and decide to leave them to it, so you quietly excuse yourself from the bedroom."
+    elif the_person.arousal > 101: #She had approximately one orgasm
+        the_person.char "Oh god, I came so hard... That was good [the_person.mc_title]."
+        $ the_person.draw_person (position = "missionary")
+        "[the_person.possessive_title] rolls over on her back and spreads her legs wide."
+        the_person.char "[the_person.SO_name]... I've been a bad girl..."
+        "[the_person.SO_name] gets up from his chair and gets some handcuffs from a bedside table. You get yourself dressed."
+        "[the_person.SO_name] begins cuffing [the_person.title]'s hands to the bedpost. You finish getting dress and quietly excuse yourself from the bedroom."
+    else:                           #You left her hanging
+        "Surprised you are finished so soon, [the_person.title] gets up and sits at the edge of the bed."
+        $ the_person.draw_person( position = "sitting")
+        the_person.char "Thanks for getting me warmed up..."
+        "[the_person.SO_name] gets up from his chair and gets some handcuffs from a bedside table. You get yourself dressed."
+        the_person.char "Oh... [the_person.SO_name], I've been a bad girl... what are you gonna do with those handcuffs?"
+        "[the_person.SO_name] begins cuffing [the_person.title]'s behind her back. You finish getting dress and quietly excuse yourself from the bedroom."
+    #TODO Transition to home#
+    $ the_person.reset_arousal()
+    "You make your way back home. You can hardly believe your luck, fucking [the_person.title] in her house, in front of her husband, who is also the bartender!"
+    $ mc.change_location(bedroom)
+    $ renpy.show(mc.location.name,what=mc.location.background_image)
+    $ the_person.event_triggers_dict["hotwife_progress"] = 5
     return
 
 #CSH50
 label casual_hotwife_home_sex_label(the_person):
-    "This scene is not yet written!"
+    mc.name "So, want to have some fun tonight?"
+    the_person.char "Sounds great! Just give me a minute to get ready..."
+    $ the_person.draw_person(position = "walking_away")
+    "[the_person.possessive_title] walks into her bedroom and closes the door. You hang out in her living room for a few minutes while she gets ready."
+    $ CS_hotwife_lingerie2 = Outfit("Pink Lingerie")
+    $ CS_hotwife_lingerie2.add_upper(teddy.get_copy(),colour_pink)
+    $ CS_hotwife_lingerie2.add_feet(garter_with_fishnets.get_copy(), colour_pink)
+    $ the_person.outfit = CS_hotwife_lingerie2.get_copy()
+    $ the_person.draw_person(position = "stand4")
+    "She opens up the bedroom door and motions for you to follow her. As you step into her bedroom you see [the_person.SO_name] sitting at the edge of the bed again."
+    "You nod at him, and he gives a brief nod back. You turn your attention back to [the_person.title]"
+    the_person.char "Mmm, I can't wait. Let's go!"
+    call fuck_person(the_person,private = True) from _call_casual_sex_mod_CSH050
+    if the_person.arousal > 130:   #She had more than one orgasm
+        the_person.char "Oh my god... I came so many times..."
+        "[the_person.possessive_title] collapses onto the bed after your performance. You get up and start to get dressed."
+        "You nod at [the_person.SO_name], and he nods back. He goes over to a bedside table and gets out a set of handcuffs."
+        "After you fucked her brains out, [the_person.title] lays helpless on the bed as he starts to cuff her hands behind her back."
+        "You finished getting dressed and decide to leave them to it, so you quietly excuse yourself from the bedroom."
+    elif the_person.arousal > 101: #She had approximately one orgasm
+        the_person.char "Oh god, I came so hard... That was good [the_person.mc_title]."
+        $ the_person.draw_person (position = "missionary")
+        "[the_person.possessive_title] rolls over on her back and spreads her legs wide."
+        the_person.char "[the_person.SO_name]... I've been a bad girl..."
+        "[the_person.SO_name] gets up from his chair and gets some handcuffs from a bedside table. You get yourself dressed."
+        "[the_person.SO_name] begins cuffing [the_person.title]'s hands to the bedpost. You finish getting dress and quietly excuse yourself from the bedroom."
+    else:                           #You left her hanging
+        "Surprised you are finished so soon, [the_person.title] gets up and sits at the edge of the bed."
+        $ the_person.draw_person( position = "sitting")
+        the_person.char "Thanks for getting me warmed up..."
+        "[the_person.SO_name] gets up from his chair and gets some handcuffs from a bedside table. You get yourself dressed."
+        the_person.char "Oh... [the_person.SO_name], I've been a bad girl... what are you gonna do with those handcuffs?"
+        "[the_person.SO_name] begins cuffing [the_person.title]'s behind her back. You finish getting dress and quietly excuse yourself from the bedroom."
 
-
+    $ the_person.reset_arousal()
+    "You make your way back home after a sexy evening with [the_person.possessive_title]."
+    $ mc.change_location(bedroom)
+    $ renpy.show(mc.location.name,what=mc.location.background_image)
 
     call advance_time from _call_advance_casual_hotwife_home_sex
     return
