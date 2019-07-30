@@ -149,6 +149,13 @@ label scene_SB_anal_standing_1(the_girl, the_location, the_object, the_round):
                 $ the_girl.change_arousal(mc.sex_skills["Foreplay"])
                 if the_girl.arousal > 80:
                     "You can feel her juices dripping down from her slit in response to your touch."
+                    if the_girl.arousal > 130:
+                        "She moans loudly. She grinds herself up against your fingers while your cock is buried deep inside her ass. The stirring motion feels great."
+                        the_girl.char "Oh fuck, here I go again!"
+                        "[the_girl.possessive_title]'s legs start to give out as she cums yet again. You hold her body in place as she cums, your hips in the back and your hand in her crotch."
+                        $the_girl.change_happiness(5)
+                        the_girl.char "Oh jesus... you made me cum again... I... god keep going, I'm going to cum again!"
+                        return
             "After a bit longer of touching her, you straighten your back and begin to rock your hips again, continuing to fuck her ass."
     return
 
@@ -207,7 +214,22 @@ label scene_SB_anal_standing_2(the_girl, the_location, the_object, the_round):
                 "[the_girl.possessive_title] looks back at you and manages to smile throug the intense sensation of having her ass fucked."
                 the_girl.char "You are stretching me out so much... Be careful back there, I'm not sure how much of this I can take!"
                 "You reassure her, and then slowly begin to fuck her tightest hole again."
-
+        "Choke Her" if (the_girl.get_opinion_score("being submissive") > 0 and the_girl.sexy_opinions["being submissive"][1] == True):   #Can only be done if the girl is known submissive#
+            "You take your hands off her hips and run them up her back. With one hand you grab the back of her hair and pull her head back."
+            the_girl.char "Mmm, thats it, you can be rough with me if you want..."
+            "You pull her hair back hard enough to hurt a little, she arches her back in pleasure as you start to fuck her ass more roughly."
+            mc.name "Of course I can, I can do anything I want to you, my little slut."
+            "You run your other hand along the side of her neck. She begins to say something but you squeeze her neck and she stops."
+            mc.name "Sshhh, theres no need for words right now."
+            "You tighten your hold around her neck, constricting her airway. [the_girl.title] shoves her ass back hard against you."
+            "You loosen your grip for a second and she moans loudly and takes a couple deep breaths. You cut the third one off and begin to really pound her ass."
+            "Her ass cheeks quake from your relentless fucking. [the_girl.possessive_title] begins to squirm against you, fighting for air."
+            $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 10)
+            "You hold on for a few more seconds, until you feel her knees start to buckle before letting go. [the_person.possessive_title] gasps for air."
+            the_girl.char "Oh my god, that was so hot..."
+            "You spank her ass hard and continue to fuck her tightest hole."
+        "Choke Her\n{size=22}Must be submissive{/size} (disabled)" if (the_girl.get_opinion_score("being submissive") <= 0 or the_girl.sexy_opinions["being submissive"][1] == False):
+            pass
     return
 
 

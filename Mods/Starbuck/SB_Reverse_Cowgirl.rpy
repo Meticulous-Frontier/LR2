@@ -9,6 +9,7 @@ init:
         "orgasm_SB_reverse_cowgirl",
         opinion_tags = ["taking control","vaginal sex"])
         list_of_girl_positions.append(SB_reverse_cowgirl)
+        list_of_girl_positions.append(SB_reverse_cowgirl)
         #list_of_positions.append(SB_reverse_cowgirl)   ###20,120 for testing purprose only###
 
 init 1:
@@ -53,13 +54,21 @@ label scene_SB_reverse_cowgirl_1(the_girl, the_location, the_object, the_round):
     elif the_girl.sex_skills["Vaginal"] > 2: #She has some skill
         "[the_girl.possessive_title] slows her pace for a bit, working your erection with her body with purpose."
         "She makes a couple shallow dips, then then sheathes you entirely."
+        "[the_girl.possessive_title] stops moving her hips for a few seconds, but you can feel her contracting and relaxing the muscles around her pelvis, her cunt milking you without even having to move her hips."
+        mc.name "Oh my god [the_girl.title], that feels amazing..."
+        if the_girl.arousal > 130:
+            the_girl.char "[the_girl.mc_title]! I'm cumming again! Cum for me... I need you to cum for me now!!!"
+            "Her pleading and the intense pleasure her cunt is giving you is pushing you to orgasm soon."
+            $ mc.change_arousal(50)
+            return
+        "[the_girl.title] moans as she continues to ride you."
 
     else:
         "[the_girl.possessive_title] works her hips up and down on you as best as she can."
-        "She makes a couple shallow dips, then then sheathes you entirely."
-
-
-
+        "She makes a couple shallow dips, then then sheathes you entirely. She makes a few awkward gyrations with her hips."
+        the_person.char "Mmm, it feels good. I wish I could fuck you as good as you fuck me."
+        mc.name "Don't worry, it feels great, keep going."
+        "[the_girl.title] moans as she continues to ride you."
 
     return
 
@@ -93,7 +102,7 @@ label scene_SB_reverse_cowgirl_2(the_girl, the_location, the_object, the_round):
             "You leave a hand planted on [the_girl.possessive_title]'s butt while she fucks you, squeezing it and giving it the occasional slap."
 
         "Admire her":
-            mc.name "Damn [the_girl.title],  your ass is amazing!"
+            mc.name "Damn [the_girl.title], your ass is amazing!"
             "[the_girl.possessive_title] wiggles back and forth a few more times, then looks back at you and smiles."
             if the_girl.get_opinion_score("taking control") > 0:
                 the_girl.char "Do you like that, [the_girl.mc_title]? Just lay back and let me take care of you..."
@@ -135,6 +144,9 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object, the_round):
         the_girl.char "Wow that was good. Look at all that cum you made for me..."
         return
     elif SB_check_fetish(the_girl, cum_internal_role):
+        the_girl.char "Oh god, I can't wait to feel you shoot it up inside me... Cum for me [the_girl.mc_title]!"
+        "[the_girl.possessive_title]'s quivering hole feels too good, you can't hold it back anymore."
+        "She moans as the first wave of your cum floods her pussy. She rocks her hips back and forth on top of you as you dump your load inside her."
         "[the_girl.possessive_title]'s body goes rigid as your cum poors into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
         the_girl.char "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I want it it all inside me!"
         "[the_girl.possessive_title] revels in having her cum fetish fulfilled."

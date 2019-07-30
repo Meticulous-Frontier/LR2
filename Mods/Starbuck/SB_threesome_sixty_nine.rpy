@@ -109,6 +109,7 @@ label scene_SB_threesome_sixty_nine_1(the_girl_1, the_girl_2, the_location, the_
                 $the_girl_2.change_arousal(mc.sex_skills["Oral"])
             "Suck her nipples.\n{size=22}Obstucted by Clothing{/size} (disabled)" if not the_girl_2.outfit.tits_available():
                 pass
+                
         "While you give attention to [the_girl_2.possessive_title]'s tits, you never stop pistoning your cock in and out of [the_girl_1.title]'s slick pussy."
     else:
         "You rest one hand on [the_girl_2.title]'s head, guiding her as she sucks you off. With you other hand you continue to finger fuck [the_girl_1.title]."

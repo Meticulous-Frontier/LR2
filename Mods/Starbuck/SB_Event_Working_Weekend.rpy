@@ -103,16 +103,9 @@ label SB_working_weekend_crisis_label():
                 $ the_person.add_situational_slut("seduction_approach",20)
                 $ the_person.add_situational_obedience("seduction_approach", 5)
                 call sex_description(the_person, blowjob, make_floor(), round = 1, private = True, girl_in_charge = True) from _call_sex_description_SB1
-                #while mc.arousal < 100:
-                    #Blowjob stuff#
-                #    $ SB_round_int = renpy.random.randint(0,100)
-                #    if (SB_round_int) < 50:
-                #        "While working your "##########################
-                #    else:
-                #        "that"
-                #    $ mc.arousal += (the_person.sex_skills["Oral"] * 4 + 15)
+
                 $ the_person.reset_arousal()
-                    #Tidy up our situational modifiers, if any.
+
                 $ the_person.clear_situational_slut("seduction_approach")
                 $ the_person.clear_situational_obedience("seduction_approach")
                 $ mc.current_stamina += -1
