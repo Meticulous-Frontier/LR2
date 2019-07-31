@@ -22,10 +22,12 @@ This mod collection extends the base game with a range of new features and enhan
 
 ## Cheat Mod:
 * Trollden Cheat Mod (press 'z' in game)
+* Opinion Editor (press 'p' while talking to someone)
 
 ## Authors:
 * Trollden
 * Starbuck
+* Longshot (Android)
 * Pilotus13
 * Tristimdorion
 
@@ -36,11 +38,16 @@ This mod collection extends the base game with a range of new features and enhan
 3. Launch Lab Rats 2 and load up a save or start fresh.
 4. The MOD settings can be configured or en-/disabled from your bedroom.
 5. Done.
+ 
+## Android
+The android version of the game including the mod is available on MEGA at https://mega.nz/#F!SvZEDIrR!NBqa7nibwW4toHCxlztLcg
 
+## Updated Vanilla Game
 Unfortunately the base game is not bug free. Check https://github.com/Tristimdorion/Lab-Rats-2/tree/bugfix for a repository that has updated versions of the game files, with fixes for all bugs people reported on the Patreon page.
 
+## Issues
 Report Issues here: https://gitgud.io/lab-rats-2-mods/lr2mods/issues
 
 Wiki for more information and solutions to common issues: https://gitgud.io/lab-rats-2-mods/lr2mods/wikis/home
 
-Mega for an android version of the game with these mods included: https://mega.nz/#F!SvZEDIrR!NBqa7nibwW4toHCxlztLcg
+
