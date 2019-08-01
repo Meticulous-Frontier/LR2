@@ -1,7 +1,7 @@
 init 2:
     #TODO: Solve the error when having used outfit_creator screen and abandoning design
     # We want it to just hide the outfit_creator and then display this screen again, not return out of screen.
-    screen outfit_select_manager(slut_limit = 999, show_export = False, show_sets = False, show_overwear = True, show_underwear = True, show_outfits = True): ##Brings up a list of the players current saved outfits, returns the selected outfit or None.
+    screen outfit_select_manager(slut_limit = 999, show_export = True, show_make_new = True, main_selectable = False, show_sets = False, show_overwear = True, show_underwear = True, show_outfits = True, show_delete = True, show_duplicate = True, show_modify = True): ##Brings up a list of the players current saved outfits, returns the selected outfit or None.
     #If sluttiness_limit is passed, you cannot exit the creator until the proposed outfit has a sluttiness below it.
 
         if the_person is not None: # NOTE: Determine this here as the script.rpy does not use the mc.designed_wardrobe when calling screen by default

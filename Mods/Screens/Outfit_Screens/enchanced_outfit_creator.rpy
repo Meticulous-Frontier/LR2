@@ -144,7 +144,7 @@ init 2:
 
 
 
-    screen outfit_creator(starting_outfit, target_wardrobe = mc.designed_wardrobe): ##Pass a completely blank outfit instance for a new outfit, or an already existing instance to load an old one.| This overrides the default outfit creation screen
+    screen outfit_creator(starting_outfit, target_wardrobe = mc.designed_wardrobe, outfit_type = "Full"): ##Pass a completely blank outfit instance for a new outfit, or an already existing instance to load an old one.| This overrides the default outfit creation screen
 
         #add "Paper_Background.png"
         modal True
