@@ -2026,7 +2026,7 @@ label starbuck_being_watched(the_person, the_watcher, the_position):
 
     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness >= the_position.slut_cap:
         #She's into it and encouraged by the slut watching her.
-        the_person.char "Oh [the_person.mc_title], [the_wather.name] is watching you fuck my brains out!"
+        the_person.char "Oh [the_person.mc_title], [the_watcher.name] is watching you fuck my brains out!"
         $ the_person.change_arousal(2)
         "[the_person.possessive_title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
 
