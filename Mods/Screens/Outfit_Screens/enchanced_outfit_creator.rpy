@@ -1150,9 +1150,12 @@ init 2:
 
                                                                 action [
                                                                 SetScreenVariable("mannequin", person),
+<<<<<<< HEAD
                                                                 Function(preview_outfit)
+=======
+                                                                If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, person, demo_outfit, mannequin_pose)])
+>>>>>>> c46bc08457873a312041d5e486667112ebba0b2d
                                                                 ]
-
 
                                     if mannequin_poser:
                                         frame:
@@ -1163,7 +1166,7 @@ init 2:
                                                 mousewheel True
                                                 draggable True
                                                 vbox:
-                                                    for x in list_of_positions:
+                                                    for x in sorted(list_of_positions + list(set(list_of_girl_positions) - set(list_of_positions)), key = lambda x: x.name):
                                                         textbutton x.name:
                                                             style "textbutton_no_padding_highlight"
                                                             text_style "serum_text_style"
@@ -1176,7 +1179,7 @@ init 2:
 
                                                             action [
                                                             SetScreenVariable("mannequin_pose", x.position_tag),
-                                                            If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit, mannequin_pose)])
+                                                            If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit, x.position_tag)])
                                                             ]
 
                                                             alternate NullAction()

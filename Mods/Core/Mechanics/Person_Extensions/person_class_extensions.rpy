@@ -408,26 +408,7 @@ init -1:
                 if show_person_info:
                     renpy.show_screen("person_info_ui",self)
 
-            displayable_list = [] # We will be building up a list of displayables passed to us by the various objects on the person (their body, clothing, etc.)
-            displayable_list.append(self.body_images.generate_item_displayable(self.body_type,self.tits,position)) #Add the body displayable
-            displayable_list.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier)) #Get the face displayable
-
-            size_render = renpy.render(displayable_list[0], 10, 10, 0, 0) #We need a render object to check the actual size of the body displayable so we can build our composite accordingly.
-            the_size = size_render.get_size() # Get the size. Without it our displayable would be stuck in the top left when we changed the size ofthings inside it.
-            x_size = __builtin__.int(the_size[0])
-            y_size = __builtin__.int(the_size[1])
-
-            displayable_list.extend(self.outfit.generate_draw_list(self,position,emotion,special_modifier)) #Get the displayables for everything we wear. Note that extnsions do not return anything because they have nothing to show.
-            displayable_list.append(self.hair_style.generate_item_displayable("standard_body",self.tits,position)) #Get hair
-
-            #NOTE: default return for the_size is floats, even though it is in exact pixels. Use int here otherwise positional modifiers like xanchor and yalign do not work (no displayable is shown at all!)
-            composite_list = [(x_size,y_size)] #Now we build a list of our parameters, done like this so they are arbitrarily long
-            for display in displayable_list:
-                composite_list.append((0,0)) #Center all displaybles on the top left corner, because of how they are rendered they will all line up.
-                composite_list.append(display) #Append the actual displayable
-
-            final_image = Composite(*composite_list) # Create a composite image using all of the displayables
-
+            final_image = self.build_person_displayable(position, emotion, special_modifier, show_person_info)
             renpy.show(self.name,at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=(self.name + self.last_name + str(self.age)))
 
         # replace the default draw_person function of the person class
