@@ -28,12 +28,9 @@ init 2 python:
 
         final_image = Composite(*composite_list) # Create a composite image using all of the displayables
 
-<<<<<<< HEAD
-            renpy.restart_interaction()
 #    Person.draw_mannequin = draw_mannequin
-=======
         renpy.show(mannequin.name,at_list=[character_right, scale_person(mannequin.height)],layer="Active",what=final_image,tag=mannequin.name)
->>>>>>> c46bc08457873a312041d5e486667112ebba0b2d
+        renpy.restart_interaction()
 
 init 2: # Moved to screen so that it can be refreshed upon changes made in outfit_creator
     screen mannequin(outfit, model = "mannequin"):

@@ -21,22 +21,41 @@ init 10 python:
 
         return heart_string
 
+    def replace_cloth(cloth):
+
+        cs = renpy.current_screen()
+
+        if not cs.scope["valid_check"](cs.scope["starting_outfit"], cs.scope["selected_clothing"]) and cs.scope["selected_from_outfit"] is not None:
+            cs.scope["starting_outfit"].remove_clothing(cs.scope["selected_from_outfit"])
+            cs.scope["apply_method"](cs.scope["starting_outfit"], cs.scope["selected_clothing"])
+        else:
+            cs.scope["apply_method"](cs.scope["starting_outfit"], cs.scope["selected_clothing"])
+
+        cs.scope["selected_from_outfit"] = cloth
+
+        renpy.restart_interaction()
+
     def update_outfit_color(cloth_to_color):
 
         cs = renpy.current_screen()
 
-        cloth_to_color.colour = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]
+
+        if cs.scope["selected_colour"] == "colour_pattern":
+            cloth_to_color.colour_pattern = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]
+        else:
+            cloth_to_color.colour = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]
+
         renpy.restart_interaction()
 
-    def preview_outfit():
+    def preview_outfit(outfit = "demo_outfit"):
 
         cs = renpy.current_screen()
         if cs.scope["mannequin"] == "mannequin":
-            renpy.show_screen("mannequin", cs.scope["demo_outfit"])
+            renpy.show_screen("mannequin", cs.scope[outfit])
         else:
             if renpy.get_screen("mannequin"):
                 renpy.hide_screen("mannequin")
-            draw_mannequin(cs.scope["mannequin"], cs.scope["demo_outfit"], cs.scope["mannequin_pose"])
+            draw_mannequin(cs.scope["mannequin"], cs.scope[outfit], cs.scope["mannequin_pose"])
 
         renpy.restart_interaction()
 
@@ -45,12 +64,14 @@ init 10 python:
         cs = renpy.current_screen()
 
 
-
-        if cs.scope["selected_clothing"] in cs.scope["categories_mapping"][cs.scope["category_selected"]][0]:
-            cs.scope["demo_outfit"].remove_clothing(cs.scope["selected_clothing"])
-            cs.scope["apply_method"](cs.scope["demo_outfit"], cloth)
+        if cs.scope["selected_clothing"] is not None:
+            if cs.scope["selected_clothing"] in cs.scope["categories_mapping"][cs.scope["category_selected"]][0]:
+                cs.scope["demo_outfit"].remove_clothing(cs.scope["selected_clothing"])
+                cs.scope["apply_method"](cs.scope["demo_outfit"], cloth)
 
         else:
+            if cs.scope["selected_clothing"] is not None and cs.scope["demo_outfit"].in_outfit(cs.scope["selected_clothing"].name):
+                cs.scope["demo_outfit"].remove_clothing(cs.scope["selected_clothing"])
             cs.scope["apply_method"](cs.scope["demo_outfit"], cloth)
 
         renpy.restart_interaction()
@@ -66,6 +87,8 @@ init 10 python:
 
         if cs.scope["selected_clothing"] is not None:
             cs.scope["apply_method"](cs.scope["demo_outfit"], cs.scope["selected_clothing"])
+        else:
+            preview_outfit()
 
         renpy.restart_interaction()
 
@@ -75,7 +98,7 @@ init 10 python:
         cs = renpy.current_screen()
 
         if cs.scope["selected_clothing"] is not None:
-            if cs.scope["valid_check"](cs.scope["starting_outfit"], cs.scope["selected_clothing"]) and cs.scope["cloth"].layer in cs.scope["valid_layers"] or cs.scope["selected_clothing"] in cs.scope["categories_mapping"][cs.scope["category_selected"]][0] and cs.scope["cloth"].layer in cs.scope["valid_layers"]:
+            if cs.scope["valid_check"](cs.scope["starting_outfit"], cs.scope["selected_clothing"]) or cs.scope["cloth"].layer in cs.scope["valid_layers"]:
                 return True
             else:
                 return False
@@ -84,11 +107,11 @@ init 10 python:
 
         cs = renpy.current_screen()
 
-
+        cs.scope["selected_clothing"] = None
         cs.scope["category_selected"] = category
         cs.scope["selected_colour"] = "colour" # Default to altering non- pattern colors
 
-        cs.scope["demo_outfit"] = cs.scope["compare_outfit"]
+        cs.scope["demo_outfit"] = cs.scope["starting_outfit"].get_copy()
 
         preview_outfit()
 
@@ -244,7 +267,7 @@ init 2:
             palette_grid_size = len(persistent.colour_palette)/10
 
 
-
+init 2:
     screen outfit_creator(starting_outfit, target_wardrobe = mc.designed_wardrobe, outfit_type = "full"): ##Pass a completely blank outfit instance for a new outfit, or an already existing instance to load an old one.| This overrides the default outfit creation screen
 
         #add "Paper_Background.png"
@@ -409,24 +432,22 @@ init 2:
                                             xalign 0.5
                                             xfill True
 
+                                            sensitive outfit_valid_check()
+
                                             action [
-                                            SensitiveIf(outfit_valid_check),
 
-                                            SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]), #Make sure color is updated
-                                            If(starting_outfit is not None and starting_outfit.in_outfit(selected_clothing.name) or valid_check(starting_outfit, selected_clothing) is False, #selected_from_outfit in categories_mapping[category_selected][0],
-                                            [Function(starting_outfit.remove_clothing, selected_from_outfit),# True
-                                            Function(apply_method, starting_outfit, selected_clothing)],
-                                            Function(apply_method, starting_outfit, selected_clothing)), #False
-                                            Function(preview_outfit), # NOTE: We are no longer interested in the demo outfit so view the final outfit, starting_outfit
-                                            SetScreenVariable("selected_from_outfit", selected_clothing)]
+                                                Function(update_outfit_color, selected_clothing), #Make sure color is updated
+                                                Function(replace_cloth, selected_clothing),
+                                                Function(preview_outfit) # NOTE: We are no longer interested in the demo outfit so view the final outfit, starting_outfit
 
+                                                ]
 
                                             hovered [
-                                            If(selected_from_outfit is not None and selected_clothing in categories_mapping[category_selected][0], Function(demo_outfit.remove_clothing, selected_from_outfit)),
-                                            Function(apply_method, demo_outfit, selected_clothing),
-                                            SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
-                                            Function(preview_outfit)
-                                            ]
+                                                Function(preview_apply, selected_clothing),
+                                                Function(update_outfit_color, selected_clothing),
+                                                Function(preview_outfit)
+
+                                                ]
 
                                     frame:
                                         background "#888888"
@@ -697,85 +718,85 @@ init 2:
                                                                                     SetScreenVariable("current_g", a_colour[1]),
                                                                                     SetScreenVariable("current_b", a_colour[2]),
                                                                                     SetScreenVariable("current_a", a_colour[3]),
-                                                                                    SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
+                                                                                    Function(update_outfit_color, selected_clothing),
                                                                                     Function(preview_outfit)
                                                                                     ]
                                                                                     alternate [
                                                                                     Function(update_colour_palette, count, current_r, current_g, current_b, current_a)
                                                                                     ]
-                                                vbox:
-                                                    spacing 5
-                                                    hbox:
-                                                        frame:
-                                                            background "#aaaaaa"
-                                                            xfill True
-                                                            textbutton "Transparency":
-                                                                style "textbutton_no_padding_highlight"
-                                                                text_style "serum_text_style"
-
-                                                                xfill True
-
-                                                                action ToggleScreenVariable("transparency_selection")
-                                                    hbox:
-                                                        if transparency_selection:
-                                                            frame:
-                                                                background "#aaaaaa"
-                                                                ysize 50
-                                                                viewport:
-                                                                    xfill True
-                                                                    draggable True
-                                                                    mousewheel "horizontal"
-                                                                    ysize 50
-                                                                    hbox:
-                                                                        spacing 5
-                                                                        textbutton "Normal":
-                                                                            style "textbutton_no_padding_highlight"
-                                                                            text_style "serum_text_style"
-                                                                            xalign 0.5
-                                                                            xsize 200
-
-                                                                            if current_a == 1.0:
-                                                                                background "#4f7ad6"
-                                                                            else:
-                                                                                background "#1a45a1"
-                                                                            action [
-                                                                            SetScreenVariable("current_a", 1.0),
-                                                                            SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
-                                                                            Function(preview_outfit)
-                                                                            ]
-
-                                                                        textbutton "Sheer":
-                                                                            style "textbutton_no_padding_highlight"
-                                                                            text_style "serum_text_style"
-                                                                            xalign 0.5
-                                                                            xsize 200
-                                                                            if current_a == 0.95:
-                                                                                background "#4f7ad6"
-                                                                            else:
-                                                                                background "#1a45a1"
-
-                                                                            action [
-                                                                            SetScreenVariable("current_a", 0.95),
-                                                                            SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
-                                                                            Function(preview_outfit)
-                                                                            ]
-
-                                                                        textbutton "Translucent":
-                                                                            style "textbutton_no_padding_highlight"
-                                                                            text_style "serum_text_style"
-                                                                            xalign 0.5
-                                                                            xsize 200
-                                                                            if current_a == 0.8:
-                                                                                background "#4f7ad6"
-                                                                            else:
-                                                                                background "#1a45a1"
-
-
-                                                                            action [
-                                                                            SetScreenVariable("current_a", 0.8),
-                                                                            SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
-                                                                            Function(preview_outfit)
-                                                                            ]
+                                                # vbox:
+                                                #     spacing 5
+                                                #     hbox:
+                                                #         frame:
+                                                #             background "#aaaaaa"
+                                                #             xfill True
+                                                #             textbutton "Transparency":
+                                                #                 style "textbutton_no_padding_highlight"
+                                                #                 text_style "serum_text_style"
+                                                #
+                                                #                 xfill True
+                                                #
+                                                #                 action ToggleScreenVariable("transparency_selection")
+                                                #     hbox:
+                                                #         if transparency_selection:
+                                                #             frame:
+                                                #                 background "#aaaaaa"
+                                                #                 ysize 50
+                                                #                 viewport:
+                                                #                     xfill True
+                                                #                     draggable True
+                                                #                     mousewheel "horizontal"
+                                                #                     ysize 50
+                                                #                     hbox:
+                                                #                         spacing 5
+                                                #                         textbutton "Normal":
+                                                #                             style "textbutton_no_padding_highlight"
+                                                #                             text_style "serum_text_style"
+                                                #                             xalign 0.5
+                                                #                             xsize 200
+                                                #
+                                                #                             if current_a == 1.0:
+                                                #                                 background "#4f7ad6"
+                                                #                             else:
+                                                #                                 background "#1a45a1"
+                                                #                             action [
+                                                #                             SetScreenVariable("current_a", 1.0),
+                                                #                             SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
+                                                #                             Function(preview_outfit)
+                                                #                             ]
+                                                #
+                                                #                         textbutton "Sheer":
+                                                #                             style "textbutton_no_padding_highlight"
+                                                #                             text_style "serum_text_style"
+                                                #                             xalign 0.5
+                                                #                             xsize 200
+                                                #                             if current_a == 0.95:
+                                                #                                 background "#4f7ad6"
+                                                #                             else:
+                                                #                                 background "#1a45a1"
+                                                #
+                                                #                             action [
+                                                #                             SetScreenVariable("current_a", 0.95),
+                                                #                             SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
+                                                #                             Function(preview_outfit)
+                                                #                             ]
+                                                #
+                                                #                         textbutton "Translucent":
+                                                #                             style "textbutton_no_padding_highlight"
+                                                #                             text_style "serum_text_style"
+                                                #                             xalign 0.5
+                                                #                             xsize 200
+                                                #                             if current_a == 0.8:
+                                                #                                 background "#4f7ad6"
+                                                #                             else:
+                                                #                                 background "#1a45a1"
+                                                #
+                                                #
+                                                #                             action [
+                                                #                             SetScreenVariable("current_a", 0.8),
+                                                #                             SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
+                                                #                             Function(preview_outfit)
+                                                #                             ]
 
 
 
@@ -943,18 +964,16 @@ init 2:
                                                             SetScreenVariable("selected_from_outfit", cloth),
                                                             SetScreenVariable("category_selected", get_category(cloth)),
                                                             SetScreenVariable("selected_clothing", cloth),
-                                                            If(selected_clothing is cloth, SetScreenVariable("selected_clothing", None)),
-                                                            If(demo_outfit.has_clothing(cloth) and selected_clothing is cloth,
-                                                            [Function(demo_outfit.remove_clothing, cloth), #Remove the cloth
-                                                            Function(apply_method, demo_outfit, cloth)]), # Add the copy of cloth
-                                                            Function(apply_method, demo_outfit, cloth),  # Add the copy of cloth
+                                                            Function(preview_apply, cloth),
+                                                            #Function(preview_restore, cloth),
+                                                            Function(preview_outfit),
                                                             SetScreenVariable("current_r",cloth.colour[0]),
                                                             SetScreenVariable("current_g",cloth.colour[1]),
                                                             SetScreenVariable("current_b",cloth.colour[2]),
                                                             SetScreenVariable("current_a",cloth.colour[3]),
 
 
-                                                            If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit, mannequin_pose)]) # Make sure it is showing the correct outfit during changes, demo_outfit is a copy of starting_outfit
+                                                            Function(preview_outfit) # Make sure it is showing the correct outfit during changes, demo_outfit is a copy of starting_outfit
 
                                                             ]
                                                             alternate [
@@ -1150,11 +1169,7 @@ init 2:
 
                                                                 action [
                                                                 SetScreenVariable("mannequin", person),
-<<<<<<< HEAD
                                                                 Function(preview_outfit)
-=======
-                                                                If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, person, demo_outfit, mannequin_pose)])
->>>>>>> c46bc08457873a312041d5e486667112ebba0b2d
                                                                 ]
 
                                     if mannequin_poser:
@@ -1179,7 +1194,7 @@ init 2:
 
                                                             action [
                                                             SetScreenVariable("mannequin_pose", x.position_tag),
-                                                            If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit, x.position_tag)])
+                                                            Function(preview_outfit)
                                                             ]
 
                                                             alternate NullAction()
