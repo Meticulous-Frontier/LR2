@@ -35,6 +35,7 @@ init 2 python:
 
             renpy.show(mannequin.name,at_list=[character_right, scale_person(mannequin.height)],layer="Active",what=final_image,tag=mannequin.name)
 
+            renpy.restart_interaction()
 #    Person.draw_mannequin = draw_mannequin
 
 init 2: # Moved to screen so that it can be refreshed upon changes made in outfit_creator
@@ -43,13 +44,7 @@ init 2: # Moved to screen so that it can be refreshed upon changes made in outfi
         zorder 102
         fixed: #TODO: Move this to it's own screen so it can be shown anywhere
             pos (1450,0)
-
-            if model == "mannequin":
-                add mannequin_average
-                if outfit is not None:
-                    for cloth in outfit.generate_draw_list(None,"stand3"):
-                        add cloth
-
-            else:
-
-                $ model.draw_mannequin(outfit)
+            add mannequin_average
+            if outfit is not None:
+                for cloth in outfit.generate_draw_list(None,"stand3"):
+                    add cloth

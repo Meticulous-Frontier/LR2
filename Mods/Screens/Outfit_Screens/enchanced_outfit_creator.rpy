@@ -4,42 +4,143 @@
                       # Fix issue with hitting "Abandon" when using Outfit Manager through "Add Outfit" for a Person, seems to be coming from the fact it does not give the expected return of "No Return".
                       # Best solution would be for Vren to change that in the main script so all the outfit screen expect the same return.
                       # Figure out why and fix actions only running certain functions on every second press.
-                      # Add logic for the instances where multiple cloth items from a catagory can be applied so it displays properly at all times. (no known issues with the end result, just display)
+                      # Add logic for the instances where multiple cloth items from a category can be applied so it displays properly at all times. (no known issues with the end result, just display)
 
-init -1 python:
+init 10 python:
 
-    def colour_changed_a(new_value): # Used to modify the alpha channel through user input
+    # NOTE: Override the color changing functions
+
+    def get_heart_image_list_cloth(slut_value): ## Returns a string of hearts. Since we are dealing with lower values this version has 20 as it's 100% filled value. Used to indicate sluttiness requirement for the cloth item.
+
+        heart_string = "{image=" + get_individual_heart(0, slut_value*5, 0) + "}"
+        heart_string += "{image=" + get_individual_heart(0, slut_value*5-20, 0) + "}"
+        heart_string += "{image=" + get_individual_heart(0, slut_value*5-40, 0) + "}"
+        heart_string += "{image=" + get_individual_heart(0, slut_value*5-60, 0) + "}"
+        heart_string += "{image=" + get_individual_heart(0, slut_value*5-80, 0) + "}"
+
+
+        return heart_string
+
+    def update_outfit_color(cloth_to_color):
+
+        cs = renpy.current_screen()
+
+        cloth_to_color.colour = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]
+        renpy.restart_interaction()
+
+    def preview_outfit():
+
+        cs = renpy.current_screen()
+        if cs.scope["mannequin"] == "mannequin":
+            renpy.show_screen("mannequin", cs.scope["demo_outfit"])
+        else:
+            if renpy.get_screen("mannequin"):
+                renpy.hide_screen("mannequin")
+            draw_mannequin(cs.scope["mannequin"], cs.scope["demo_outfit"], cs.scope["mannequin_pose"])
+
+        renpy.restart_interaction()
+
+    def preview_apply(cloth): # Temporarily remove the selected clothing with the one being hovered over.
+
+        cs = renpy.current_screen()
+
+
+
+        if cs.scope["selected_clothing"] in cs.scope["categories_mapping"][cs.scope["category_selected"]][0]:
+            cs.scope["demo_outfit"].remove_clothing(cs.scope["selected_clothing"])
+            cs.scope["apply_method"](cs.scope["demo_outfit"], cloth)
+
+        else:
+            cs.scope["apply_method"](cs.scope["demo_outfit"], cloth)
+
+        renpy.restart_interaction()
+
+    def preview_restore(cloth):
+
+        cs = renpy.current_screen()
+
+        if cloth is cs.scope["selected_clothing"] and cs.scope["categories_mapping"][cs.scope["category_selected"]][0]:
+            pass
+        else:
+            cs.scope["demo_outfit"].remove_clothing(cloth)
+
+        if cs.scope["selected_clothing"] is not None:
+            cs.scope["apply_method"](cs.scope["demo_outfit"], cs.scope["selected_clothing"])
+
+        renpy.restart_interaction()
+
+
+    def outfit_valid_check():
+
+        cs = renpy.current_screen()
+
+        if cs.scope["selected_clothing"] is not None:
+            if cs.scope["valid_check"](cs.scope["starting_outfit"], cs.scope["selected_clothing"]) and cs.scope["cloth"].layer in cs.scope["valid_layers"] or cs.scope["selected_clothing"] in cs.scope["categories_mapping"][cs.scope["category_selected"]][0] and cs.scope["cloth"].layer in cs.scope["valid_layers"]:
+                return True
+            else:
+                return False
+
+    def switch_outfit_category(category):
+
+        cs = renpy.current_screen()
+
+
+        cs.scope["category_selected"] = category
+        cs.scope["selected_colour"] = "colour" # Default to altering non- pattern colors
+
+        cs.scope["demo_outfit"] = cs.scope["compare_outfit"]
+
+        preview_outfit()
+
+        # if cs.scope["selected_clothing"] is not None and not cs.scope["starting_outfit"].has_clothing(cs.scope["selected_clothing"]):
+        #     cs.scope["demo_outfit"].remove_clothing(cs.scope["selected_clothing"])
+
+    def colour_changed_bar(new_value): # Handles the changes to clothing colors, both normal and with patterns. Covers all channels.
         if not new_value:
             new_value = 0
-
         try:
             new_value = float(new_value)
         except ValueError:
             new_value = 0
-
         if float(new_value) < 0:
             new_value = 0
         elif float(new_value) > 1:
             new_value = 1.0
-        cs = renpy.current_screen()
-
-        cs.scope["current_a"] = __builtin__.round(float(new_value),2)
-        renpy.restart_interaction()
-
-    def update_bar(new_value):
 
         cs = renpy.current_screen()
-        selected_clothing = cs.scope["selected_clothing"]
-        selected_colour = cs.scope["selected_colour"]
-        selected_clothing.selected_colour = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]
+        bar_value = cs.scope["bar_value"]
 
-        if cs.scope["mannequin"] == "mannequin":
-            renpy.show_screen(cs.scope["demo_outfit"])
-        else:
-            renpy.hide("mannequin")
-            draw_mannequin(cs.scope["mannequin"], cs.scope["demo_outfit"])
+        if bar_value == "current_a":
+            cs.scope["current_a"] = __builtin__.round(float(new_value),2)
+            if cs.scope["selected_colour"] == "colour_pattern":
+                cs.scope["selected_clothing"].colour_pattern = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], __builtin__.round(float(new_value),2)]
+            else:
+                cs.scope["selected_clothing"].colour = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], __builtin__.round(float(new_value),2)]
 
-        renpy.restart_interaction()
+        if bar_value == "current_r":
+            cs.scope["current_r"] = __builtin__.round(float(new_value),2)
+            if cs.scope["selected_colour"] == "colour_pattern":
+                cs.scope["selected_clothing"].colour_pattern = [__builtin__.round(float(new_value),2), cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]
+            else:
+                cs.scope["selected_clothing"].colour = [__builtin__.round(float(new_value),2), cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]
+
+        if bar_value == "current_g":
+            cs.scope["current_g"] = __builtin__.round(float(new_value),2)
+            if cs.scope["selected_colour"] == "colour_pattern":
+                cs.scope["selected_clothing"].colour_pattern = [cs.scope["current_r"], __builtin__.round(float(new_value),2), cs.scope["current_b"], cs.scope["current_a"]]
+            else:
+                cs.scope["selected_clothing"].colour = [cs.scope["current_r"], __builtin__.round(float(new_value),2), cs.scope["current_b"], cs.scope["current_a"]]
+
+        if bar_value == "current_b":
+            cs.scope["current_b"] = __builtin__.round(float(new_value),2)
+            if cs.scope["selected_colour"] == "colour_pattern":
+                cs.scope["selected_clothing"].colour_pattern = [cs.scope["current_r"], cs.scope["current_g"], __builtin__.round(float(new_value),2), cs.scope["current_a"]]
+            else:
+                cs.scope["selected_clothing"].colour = [cs.scope["current_r"], cs.scope["current_g"], __builtin__.round(float(new_value),2), cs.scope["current_a"]]
+
+        preview_outfit()
+
+init -1 python:
 
     def in_outfit(self, cloth_name): # Checks if the clothing item exists in the outfit by name to account for instances where copies are used.
         for cloth in self.upper_body + self.lower_body + self.feet + self.accessories:
@@ -51,7 +152,7 @@ init -1 python:
 
 
 
-    def get_catagory(item): # Should re-write this function if possible.
+    def get_category(item): # Should re-write this function if possible.
         cloth_master_list = [
         panties_list + neckwear_list + bracelet_list + rings_list +
         earings_list + shoes_list + bra_list + pants_list + skirts_list +
@@ -144,12 +245,12 @@ init 2:
 
 
 
-    screen outfit_creator(starting_outfit, target_wardrobe = mc.designed_wardrobe, outfit_type = "Full"): ##Pass a completely blank outfit instance for a new outfit, or an already existing instance to load an old one.| This overrides the default outfit creation screen
+    screen outfit_creator(starting_outfit, target_wardrobe = mc.designed_wardrobe, outfit_type = "full"): ##Pass a completely blank outfit instance for a new outfit, or an already existing instance to load an old one.| This overrides the default outfit creation screen
 
         #add "Paper_Background.png"
         modal True
         zorder 100
-        default catagory_selected = "Panties"
+        default category_selected = "Panties"
         default mannequin = "mannequin"
         default mannequin_pose = None
         default mannequin_selection = False
@@ -162,17 +263,23 @@ init 2:
         default color_selection = True
         default import_selection = False
 
-        default quick_catagory = None # Used to get catagory of the item
+        default quick_category = None # Used to get category of the item
         default selected_from_outfit = None # Used to temporarily remember what clothing you have selected from starting_outfit if any
         default compare_outfit = starting_outfit.get_copy() # Have a non- altered copy available for checks.
         default colour_cloth = None # A variable to fetch the copy of selected_clothing.get_copy()
         default demo_outfit = starting_outfit.get_copy()
 
+        if outfit_type == "under":
+            $ valid_layers = [0,1]
+        elif outfit_type == "over":
+            $ valid_layers = [2,3]
+        else:
+            $ valid_layers = [0,1,2,3]
 
-        $ valid_catagories = ["Panties", "Bras", "Pants", "Skirts", "Dresses", "Shirts", "Socks", "Shoes", "Facial", "Rings", "Bracelets", "Neckwear"] #Holds the valid list of catagories strings to be shown at the top.
+        $ valid_categories = ["Panties", "Bras", "Pants", "Skirts", "Dresses", "Shirts", "Socks", "Shoes", "Facial", "Rings", "Bracelets", "Neckwear"] #Holds the valid list of categories strings to be shown at the top.
 
-        $ catagories_mapping = {
-            "Panties": [panties_list, Outfit.can_add_lower, Outfit.add_lower],  #Maps each catagory to the function it should use to determine if it is valid and how it should be added to the outfit.
+        $ categories_mapping = {
+            "Panties": [panties_list, Outfit.can_add_lower, Outfit.add_lower],  #Maps each category to the function it should use to determine if it is valid and how it should be added to the outfit.
             "Bras": [bra_list, Outfit.can_add_upper, Outfit.add_upper],
             "Pants": [pants_list, Outfit.can_add_lower, Outfit.add_lower],
             "Skirts": [skirts_list, Outfit.can_add_lower, Outfit.add_lower],
@@ -187,6 +294,7 @@ init 2:
 
 
         default bar_select = 0 # 0 is nothing selected, 1 is red, 2 is green, 3 is blue, and 4 is alpha
+        default bar_value = None # Stores information about which bar is being changed and is then passed to colour_changed_bar() as default value
 
         default selected_clothing = None
         default selected_clothing_colour = None
@@ -200,7 +308,7 @@ init 2:
 
         # $ current_colour = [1.0,1.0,1.0,1.0] #This is the colour we will apply to all of the clothing
 
-        #Each catagory below has a click to enable button. If it's false, we don't show anything for it.
+        #Each category below has a click to enable button. If it's false, we don't show anything for it.
         #TODO: refactor this outfit creator to remove as much duplication as possible.
 
 
@@ -215,28 +323,24 @@ init 2:
                 xysize (880, 1015)
                 hbox:
                     spacing 15
-                    vbox: #Catagories select on far left
-                        spacing 15
-                        for catagory in valid_catagories:
-                            textbutton catagory:
-                                style "textbutton_style"
-                                text_style "serum_text_style"
-                                if catagory == catagory_selected:
-                                    background "#4f7ad6"
-                                    hover_background "#4f7ad6"
-                                else:
-                                    background "#1a45a1"
-                                    hover_background "#3a65c1"
-                                text_align(0.5,0.5)
-                                text_anchor(0.5,0.5)
-                                xysize (220, 60)
-                                action [
-                                SetScreenVariable("catagory_selected",catagory),
-                                SetScreenVariable("selected_clothing", None),
-                                SetScreenVariable("selected_colour", "colour"),
-                                If(selected_clothing is not None and not starting_outfit.has_clothing(selected_clothing),
-                                Function(demo_outfit.remove_clothing, selected_clothing))
-                                ] #Set the clothing to None when you change catagories to avoid breaking the clothing add function assignments
+                    frame:
+                        xsize 200
+
+                        viewport:
+                            mousewheel True
+                            draggable True
+                            grid 1 len(valid_categories): #categories select on far left
+                                for category in valid_categories:
+                                    textbutton category:
+                                        style "textbutton_style"
+                                        text_style "serum_text_style"
+
+                                        xfill True
+                                        sensitive category is not category_selected
+
+                                        action [
+                                        Function(switch_outfit_category, category) # If a clothing item is selected and currently being previewed then remove it from preview.
+                                        ]
                     vbox:
                         spacing 15
                         viewport:
@@ -250,49 +354,41 @@ init 2:
                                 background "#888888"
                                 vbox:
                                     #THIS IS WHERE ITEM CHOICES ARE SHOWN
-                                    if catagory_selected in catagories_mapping:
-                                        $ valid_check = catagories_mapping[catagory_selected][1]
-                                        $ apply_method = catagories_mapping[catagory_selected][2]
-                                        $ cloth_list_length = len(catagories_mapping[catagory_selected][0])
+                                    if category_selected in categories_mapping:
+                                        $ valid_check = categories_mapping[category_selected][1]
+                                        $ apply_method = categories_mapping[category_selected][2]
+                                        $ cloth_list_length = len(categories_mapping[category_selected][0])
 
-                                        for cloth in catagories_mapping[catagory_selected][0]:
-                                            textbutton cloth.name:
+                                        for cloth in categories_mapping[category_selected][0]:
+                                            textbutton cloth.name + (" | " + get_heart_image_list_cloth(cloth.slut_value) if cloth.slut_value > 0 else ""):
                                                 style "textbutton_style"
                                                 text_style "custom_outfit_style"
 
-                                                if valid_check(starting_outfit, cloth) or selected_clothing in catagories_mapping[catagory_selected][0]:
-
-                                                    background "#1a45a1"
-                                                    hover_background "#3a65c1"
-
-                                                else:
-                                                    background "#444444"
-                                                    hover_background "#444444"
+                                                if selected_clothing is not None:
+                                                    sensitive outfit_valid_check()
+                                                else: # If we are not editing an item already in the outfit then abide by the valid_layers rules.
+                                                    sensitive cloth.layer in valid_layers
 
                                                 xfill True
+                                                xalign 0.5
 
                                                 action [
-                                                SensitiveIf(valid_check(starting_outfit, cloth) or selected_clothing in catagories_mapping[catagory_selected][0]),
+
                                                 SetScreenVariable("selected_clothing", cloth),
-                                                SetScreenVariable("selected_colour", "colour"),
+                                                SetScreenVariable("selected_colour", "colour")
 
                                                 ]
 
                                                 hovered [
-                                                If(selected_clothing in catagories_mapping[catagory_selected][0],
-                                                [Function(demo_outfit.remove_clothing, selected_clothing), # Remove then apply
-                                                Function(apply_method, demo_outfit, cloth)],
-                                                Function(apply_method, demo_outfit, cloth)), # Just remove
-                                                If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit, mannequin_pose)])
+                                                Function(preview_apply, cloth), # Add the hovered outfit to the demo outfit
+                                                Function(update_outfit_color, cloth),
+                                                Function(preview_outfit)
                                                 ]
 
                                                 unhovered [
-                                                SensitiveIf(valid_check(starting_outfit, cloth) or selected_clothing in catagories_mapping[catagory_selected][0]),
-                                                If(cloth is selected_clothing and selected_clothing in catagories_mapping[catagory_selected][0],
-                                                NullAction(),
-                                                Function(demo_outfit.remove_clothing, cloth)),
-                                                If(selected_clothing is not None,
-                                                Function(apply_method, demo_outfit, selected_clothing))
+                                                Function(preview_restore, cloth), # Remove the hovered outfit from the demo outfit and focus on the selected item if any.
+                                                If(selected_clothing is not None, Function(update_outfit_color, selected_clothing)),
+                                                Function(preview_outfit)
                                                 ]
                         frame:
                             #THIS IS WHERE SELECTED ITEM OPTIONS ARE SHOWN
@@ -314,25 +410,22 @@ init 2:
                                             xfill True
 
                                             action [
-                                            SensitiveIf([
-                                            valid_check(starting_outfit, selected_clothing)
-                                            and selected_clothing in catagories_mapping[catagory_selected][0]
-                                            or starting_outfit.in_outfit(selected_clothing.name)]),
+                                            SensitiveIf(outfit_valid_check),
 
                                             SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]), #Make sure color is updated
-                                            If(starting_outfit is not None and starting_outfit.in_outfit(selected_clothing.name) or valid_check(starting_outfit, selected_clothing) is False, #selected_from_outfit in catagories_mapping[catagory_selected][0],
+                                            If(starting_outfit is not None and starting_outfit.in_outfit(selected_clothing.name) or valid_check(starting_outfit, selected_clothing) is False, #selected_from_outfit in categories_mapping[category_selected][0],
                                             [Function(starting_outfit.remove_clothing, selected_from_outfit),# True
                                             Function(apply_method, starting_outfit, selected_clothing)],
                                             Function(apply_method, starting_outfit, selected_clothing)), #False
-                                            If(mannequin == "mannequin", Show("mannequin", None, starting_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, starting_outfit)]), # NOTE: We are no longer interested in the demo outfit so view the final outfit, starting_outfit
+                                            Function(preview_outfit), # NOTE: We are no longer interested in the demo outfit so view the final outfit, starting_outfit
                                             SetScreenVariable("selected_from_outfit", selected_clothing)]
 
 
                                             hovered [
-                                            If(selected_from_outfit is not None and selected_clothing in catagories_mapping[catagory_selected][0], Function(demo_outfit.remove_clothing, selected_from_outfit)),
+                                            If(selected_from_outfit is not None and selected_clothing in categories_mapping[category_selected][0], Function(demo_outfit.remove_clothing, selected_from_outfit)),
                                             Function(apply_method, demo_outfit, selected_clothing),
                                             SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
-                                            If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit, mannequin_pose)])
+                                            Function(preview_outfit)
                                             ]
 
                                     frame:
@@ -486,14 +579,25 @@ init 2:
                                                                             button:
                                                                                 background "#dd1f1f"
                                                                                 action ToggleScreenVariable("bar_select", 1, 0)
+                                                                                hovered SetScreenVariable("bar_value", "current_r")
 
                                                                                 if bar_select == 1:
-                                                                                    input default current_r length 4 changed colour_changed_r allow ".0123456789" style "serum_text_style"
+                                                                                    input default current_r length 4 changed colour_changed_bar allow ".0123456789" style "serum_text_style"
                                                                                 else:
                                                                                     text "Red "+ "%.2f" % current_r style "serum_text_style" yalign 0.5
                                                                                 xsize 75
                                                                                 ysize 45
-                                                                            bar value ScreenVariableValue("current_r", 1.0) xfill True ysize 45 style style.slider unhovered [SetScreenVariable("current_r",__builtin__.round(current_r,2)), SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]), If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit, mannequin_pose)])]
+
+                                                                            bar:
+
+                                                                                adjustment ui.adjustment(range = 1.00, value = current_r, step = 0.1, changed = colour_changed_bar)
+                                                                                xfill True
+                                                                                ysize 45
+                                                                                style style.slider
+
+                                                                                hovered SetScreenVariable("bar_value", "current_r")
+                                                                                unhovered [SetScreenVariable("current_r",__builtin__.round(current_r,2))]
+
                                                                     frame:
 
                                                                         background "#aaaaaa"
@@ -501,15 +605,24 @@ init 2:
                                                                             button:
                                                                                 background "#3ffc45"
                                                                                 action ToggleScreenVariable("bar_select", 2, 0)
+                                                                                hovered SetScreenVariable("bar_value", "current_g")
 
                                                                                 if bar_select == 2:
-                                                                                    input default current_g length 4 changed colour_changed_g allow ".0123456789" style "serum_text_style"
+                                                                                    input default current_g length 4 changed colour_changed_bar allow ".0123456789" style "serum_text_style"
                                                                                 else:
                                                                                     text "Green "+ "%.2f" % current_g style "serum_text_style" yalign 0.5
                                                                                 xsize 75
                                                                                 ysize 45
 
-                                                                            bar value ScreenVariableValue("current_g", 1.0) xfill True ysize 45 style style.slider unhovered [SetScreenVariable("current_g",__builtin__.round(current_g,2)), SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]), If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit, mannequin_pose)])]
+                                                                            bar:
+
+                                                                                adjustment ui.adjustment(range = 1.00, value = current_g, step = 0.1, changed = colour_changed_bar)
+                                                                                xfill True
+                                                                                ysize 45
+                                                                                style style.slider
+
+                                                                                hovered SetScreenVariable("bar_value", "current_g")
+                                                                                unhovered [SetScreenVariable("current_g",__builtin__.round(current_g,2))]
                                                                     frame:
 
                                                                         background "#aaaaaa"
@@ -517,19 +630,25 @@ init 2:
                                                                             button:
                                                                                 background "#3f87fc"
                                                                                 action ToggleScreenVariable("bar_select", 3, 0)
+                                                                                hovered SetScreenVariable("bar_value", "current_b")
+
                                                                                 if bar_select == 3:
-                                                                                    input default current_b length 4 changed colour_changed_b allow ".0123456789" style "serum_text_style"
+                                                                                    input default current_b length 4 changed colour_changed_bar allow ".0123456789" style "serum_text_style"
                                                                                 else:
                                                                                     text "Blue "+ "%.2f" % current_b style "serum_text_style" yalign 0.5
 
                                                                                 xsize 75
                                                                                 ysize 45
 
-                                                                            bar value ScreenVariableValue("current_b", 1.0) xfill True ysize 45 style style.slider unhovered [
-                                                                            SetScreenVariable("current_b",__builtin__.round(current_b,2)),
-                                                                            SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
-                                                                            If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit, mannequin_pose)])
-                                                                            ]
+                                                                            bar:
+
+                                                                                adjustment ui.adjustment(range = 1.00, value = current_b, step = 0.1, changed = colour_changed_bar)
+                                                                                xfill True
+                                                                                ysize 45
+                                                                                style style.slider
+
+                                                                                hovered SetScreenVariable("bar_value", "current_b")
+                                                                                unhovered [SetScreenVariable("current_b",__builtin__.round(current_b,2))]
 
                                                                     frame:
 
@@ -538,15 +657,24 @@ init 2:
                                                                             button:
                                                                                 background "#111111"
                                                                                 action ToggleScreenVariable("bar_select", 4, 0)
+                                                                                hovered SetScreenVariable("bar_value", "current_a")
 
                                                                                 if bar_select == 4:
-                                                                                    input default current_a length 4 changed colour_changed_a allow ".0123456789" style "serum_text_style"
+                                                                                    input default current_a length 4 changed colour_changed_bar allow ".0123456789" style "serum_text_style"
                                                                                 else:
                                                                                     text "Alpha "+ "%.2f" % current_a style "serum_text_style" yalign 0.5
                                                                                 xsize 75
                                                                                 ysize 45
 
-                                                                            bar value ScreenVariableValue("current_a", 1.0) xfill True ysize 45 style style.slider unhovered [SetScreenVariable("current_a",__builtin__.round(current_a,2)), SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]), If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit, mannequin_pose)])]
+                                                                            bar:
+
+                                                                                adjustment ui.adjustment(range = 1.00, value = current_a, step = 0.1, changed = colour_changed_bar)
+                                                                                xfill True
+                                                                                ysize 45
+                                                                                style style.slider
+
+                                                                                hovered SetScreenVariable("bar_value", "current_a")
+                                                                                unhovered [SetScreenVariable("current_a",__builtin__.round(current_a,2))]
                                                                 viewport:
                                                                     xfill True
                                                                     draggable True
@@ -570,7 +698,7 @@ init 2:
                                                                                     SetScreenVariable("current_b", a_colour[2]),
                                                                                     SetScreenVariable("current_a", a_colour[3]),
                                                                                     SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
-                                                                                    If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit, mannequin_pose)])
+                                                                                    Function(preview_outfit)
                                                                                     ]
                                                                                     alternate [
                                                                                     Function(update_colour_palette, count, current_r, current_g, current_b, current_a)
@@ -613,7 +741,7 @@ init 2:
                                                                             action [
                                                                             SetScreenVariable("current_a", 1.0),
                                                                             SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
-                                                                            If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit, mannequin_pose)])
+                                                                            Function(preview_outfit)
                                                                             ]
 
                                                                         textbutton "Sheer":
@@ -629,7 +757,7 @@ init 2:
                                                                             action [
                                                                             SetScreenVariable("current_a", 0.95),
                                                                             SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
-                                                                            If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit, mannequin_pose)])
+                                                                            Function(preview_outfit)
                                                                             ]
 
                                                                         textbutton "Translucent":
@@ -646,7 +774,7 @@ init 2:
                                                                             action [
                                                                             SetScreenVariable("current_a", 0.8),
                                                                             SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
-                                                                            If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit, mannequin_pose)])
+                                                                            Function(preview_outfit)
                                                                             ]
 
 
@@ -813,7 +941,7 @@ init 2:
                                                             action [ # NOTE: Left click makes more sense for selection than right clicking
 
                                                             SetScreenVariable("selected_from_outfit", cloth),
-                                                            SetScreenVariable("catagory_selected", get_catagory(cloth)),
+                                                            SetScreenVariable("category_selected", get_category(cloth)),
                                                             SetScreenVariable("selected_clothing", cloth),
                                                             If(selected_clothing is cloth, SetScreenVariable("selected_clothing", None)),
                                                             If(demo_outfit.has_clothing(cloth) and selected_clothing is cloth,
@@ -1022,7 +1150,7 @@ init 2:
 
                                                                 action [
                                                                 SetScreenVariable("mannequin", person),
-                                                                If(mannequin == "mannequin", Show("mannequin", None, demo_outfit), [Hide("mannequin"),Function(draw_mannequin, mannequin, demo_outfit, mannequin_pose)])
+                                                                Function(preview_outfit)
                                                                 ]
 
 
