@@ -46,7 +46,7 @@ screen opinion_edit_menu():
                             mousewheel True
                             yfill True
                             vbox:
-                                for x in sorted(categories[n][0]):
+                                for x in sorted(categories[n][0], key=lambda s: s.lower()):
                                     hbox:
                                         textbutton x.title():
                                             style "textbutton_no_padding_highlight"
