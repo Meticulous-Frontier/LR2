@@ -10,6 +10,12 @@ init 2 python:
                     return True
         return False
 
+    def remove_person_shoes(person):
+        feet = person.outfit.remove_random_feet(top_layer_first = True, do_not_remove = True)
+        if feet:
+            person.draw_animated_removal(feet, position="sitting", emotion="default")
+        return
+
     business_meeting_action = ActionMod("Business Meeting", business_meeting_requirement, "business_meeting_action_label",
         menu_tooltip = "An employee wants to discuss some business with you.", category = "Business", is_crisis = True, crisis_weight = business_meeting_weight)
    
@@ -69,9 +75,7 @@ label business_meeting_introduction(person):
 
 label business_meeting_flirtation(person):
     if person.sluttiness > 15:
-        $ feet = person.outfit.remove_random_feet(top_layer_first = True, do_not_remove = True)
-        if feet:
-            $ person.draw_animated_removal(feet, position="sitting", emotion="default")
+        $ remove_person_shoes(person)
         "While talking about her proposal, you suddenly feel her bare foot moving up and down your leg."
     else:
         "You mind wanders off while she is talking..."
@@ -82,15 +86,15 @@ label business_meeting_arrousal(person):
         "She moves up to your crotch and unzips your pants with her feet, sliding with her foot over you growing bulge."
         person.char "Oh my [person.mc_title], it seems my proposal got you all exited."
     else:
-        person.char "Perhaps we could discuss this matter in a more private setting, [person.mc_title]?"
+        person.char "She keeps stroking your legs while she talks, making sure you are focussed on her."
     return
 
 label business_meeting_seduction(person):
     if person.sluttiness > 50:
-        $ top_clothing = person.outfit.remove_random_upper(top_layer_first = True, do_not_remove = True)
-        if top_clothing:
-            "After talking for a while she takes off her [top_clothing.name]."
-            $ person.draw_animated_removal(top_clothing, position="sitting", emotion="default")
+        $ strip_choice = person.outfit.remove_random_upper(top_layer_first = True, do_not_remove = True)
+        if strip_choice:
+            "After talking for a while she takes off her [strip_choice.name]."
+            $ person.draw_animated_removal(strip_choice, position="sitting", emotion="default")
             person.char "This should help you focus, [person.mc_title]."
             "You can't help but admire [person.possessive_title] boldness."
 
@@ -115,12 +119,11 @@ label business_meeting_seduction(person):
 
 label business_meeting_end(person):
     if person.sluttiness < 20:
-        person.char "Thank you for the meeting, [person.mc_title]!"
+        person.char "Thank you for listening to my ideas, [person.mc_title]."
     elif person.sluttiness < 40:
-        person.char "Thank you, [person.mc_title], I'm always happy to serve you or the business!"
+        person.char "Thank you, [person.mc_title], I hope you 'come' to see things my way."
     else:
-        person.char "Thank you for giving me the personal attention I needed, [person.mc_title]!"
-
+        person.char "Thank you, [person.mc_title], I hope you liked my contribution."
 
     if person.sluttiness < 40:
         "You thank [person.title] for her time and that you will look into the matter."
