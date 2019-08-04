@@ -1,27 +1,6 @@
 init 2 python: # Declare variables to use
 
      # Note that the class Room have a bunch of useful variables already for restricting access, adding objects etc.
-
-    def create_salon_manager():
-    # Wardrobe for employees in the salon
-        salon_wardrobe = wardrobe_from_xml("Salon_Wardrobe")
-        global salon_manager
-
-        if "salon_manager_personality" in globals():
-            salon_manager = create_random_person(name = "Ophelia", last_name = "von Friseur", height = .9, age = renpy.random.randint(21,30), body_type = "thin_body",
-                personality = salon_manager_personality, job = "Hair Stylist", starting_wardrobe = salon_wardrobe, eyes="blue", start_sluttiness = 10,
-                possessive_title = "My stylist")
-        else:
-            salon_manager = create_random_person(name = "Ophelia", last_name = "von Friseur", height = .9, age = renpy.random.randint(21,30), body_type = "thin_body",
-                personality = None, job = "Hair Stylist", starting_wardrobe = None, eyes="blue", start_sluttiness = 10,
-                possessive_title = "My stylist")
-
-        # We want whoever the salon_manager is to be in the salon during work hours.
-        salon_manager.schedule[1] = mall_salon
-        salon_manager.schedule[2] = mall_salon
-        salon_manager.schedule[3] = mall_salon
-        return
-
     def salon_requirement():
         if day%7 == 6: # Can be removed
             return "Closed on Sundays."
@@ -38,15 +17,28 @@ init 2 python: # Declare variables to use
             return True
 
     def hair_salon_mod_initialization(self):
+        # Wardrobe for employees in the salon
+        salon_wardrobe = wardrobe_from_xml("Salon_Wardrobe")
+
         # Place the stylist character so it is in a room in the world.
-        create_salon_manager()
+        global salon_manager
 
+        salon_manager = create_random_person(name = "Ophelia", last_name = "von Friseur", height = .9, age = renpy.random.randint(21,30), body_type = "thin_body",
+            personality =  None if not "salon_manager_personality" in globals() else salon_manager_personality, job = "Hair Stylist", starting_wardrobe = salon_wardrobe, eyes="blue", start_sluttiness = 10,
+            possessive_title = "My stylist")
 
-        salon_manager.special_role.append(salon_manager_role)
+        if "salon_manager_role" in globals():
+            salon_manager.special_role.append(salon_manager_role)
 
         if "salon_manager_personality" in globals():
             salon_manager.on_room_enter_event_list.append(salon_introduction_action)
 
+        # We want whoever the salon_manager is to be in the salon during work hours.
+        salon_manager.schedule[1] = mall_salon
+        salon_manager.schedule[2] = mall_salon
+        salon_manager.schedule[3] = mall_salon
+
+        # Add to mall
         mall_salon.add_person(salon_manager)
         # Add to map
         list_of_places.append(mall_salon)
