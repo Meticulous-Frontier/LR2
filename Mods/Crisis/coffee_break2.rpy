@@ -141,5 +141,9 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
         $ winner_two.change_happiness(2)
         "Although not professional, you can't help but smile and enjoy the situation."
 
-    $ scene_manager.clear_scene()
+    python: # Release variables
+        winner_one = None
+        winner_two = None
+        loser = None
+        scene_manager.clear_scene()
     return
