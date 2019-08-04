@@ -377,11 +377,12 @@ init -1:
             self.outfit.remove_all_cum()
 
             if self.should_wear_uniform():
-                self.wear_uniform()#Reset uniform
-            elif self.outfit.slut_requirement > self.sluttiness:
-                self.outfit = self.planned_outfit.get_copy()
-                if show_review_message:
+                self.wear_uniform() # Reset uniform
+            else:
+                self.outfit.update_slut_requirement()
+                if self.outfit.slut_requirement > self.sluttiness and show_review_message:
                     self.call_dialogue("clothing_review")
+                self.outfit = self.planned_outfit.get_copy()    #restore outfit
 
         Person.review_outfit = review_outfit_enhanced
 
