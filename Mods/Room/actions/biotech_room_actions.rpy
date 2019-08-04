@@ -137,29 +137,31 @@ label cloning_process(person = the_person): # default to the_person when not pas
 
 
             "Begin production:{image=gui/heart/Time_Advance.png} \n{size=22}Name: [clone_name] [clone_last_name], Age: [clone_age]{/size}":
+                python:
+                    if clone_name == None:
+                        clone_name = person.name
+                    if clone_last_name == None:
+                        clone_last_name = person.last_name
+                    if clone_age == None:
+                        clone_age = person.age
 
-                if clone_name == None:
-                    $ clone_name = person.name
-                if clone_last_name == None:
-                    $ clone_last_name = person.last_name
-                if clone_age == None:
-                    $ clone_age = person.age
+                    clone = create_random_person(name = clone_name, last_name = clone_last_name, age = clone_age, body_type = person.body_type, face_style = person.face_style, tits = person.tits, height = person.height, hair_colour = person.hair_colour, hair_style = person.hair_style, skin = person.skin, eyes = person.eyes, job = None,
+                        personality = person.personality, custom_font = None, name_color = None, dial_color = None, starting_wardrobe = person.wardrobe, stat_array = None, skill_array = None, sex_array = None,
+                        start_sluttiness = person.sluttiness, start_obedience = person.obedience, start_happiness = person.happiness, start_love = person.love, start_home = None, title = "Clone", possessive_title = "Your creation", mc_title = "Creator")
 
-                $ clone = create_random_person(name = clone_name, last_name = clone_last_name, age = clone_age, body_type = person.body_type, face_style = person.face_style, tits = person.tits, height = person.height, hair_colour = person.hair_colour, hair_style = person.hair_style, skin = person.skin, eyes = person.eyes, job = None,
-                    personality = person.personality, custom_font = None, name_color = None, dial_color = None, starting_wardrobe = person.wardrobe, stat_array = None, skill_array = None, sex_array = None,
-                    start_sluttiness = person.sluttiness, start_obedience = person.obedience, start_happiness = person.happiness, start_love = person.love, start_home = None, title = "Clone", possessive_title = "Your creation", mc_title = "Creator")
+                    clone.schedule[0] = rd_division_basement
+                    clone.schedule[1] = rd_division_basement
+                    clone.schedule[2] = rd_division_basement
+                    clone.schedule[3] = rd_division_basement
+                    clone.schedule[4] = rd_division_basement
 
-                $ clone.schedule[0] = rd_division_basement
-                $ clone.schedule[1] = rd_division_basement
-                $ clone.schedule[2] = rd_division_basement
-                $ clone.schedule[3] = rd_division_basement
-                $ clone.schedule[4] = rd_division_basement
+                    clone.special_role.append(clone_role)
 
-                $ clone.special_role.append(clone_role)
-
-                $ rd_division_basement.add_person(clone) #Create rooms for the clones to inhabit until a schedule is given (through being hired or player input)
+                    rd_division_basement.add_person(clone) #Create rooms for the clones to inhabit until a schedule is given (through being hired or player input)
 
                 "[clone.name] [clone.last_name] created and is now awaiting you in [rd_division_basement.formalName]"
+
+                $ clone = None    # Release variable
                 call advance_time from _call_advance_time_cloning_process
                 return
             "Back":
