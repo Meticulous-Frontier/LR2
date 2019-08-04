@@ -73,9 +73,9 @@ label activate_generic_personality(stack):
 
     python:
         # add one bimbo to the game (on start of game)
-        a_bimbo = create_random_person(age=renpy.random.randint(25, 35), tits="DD", body_type = "standard_body", face_style = "Face_4", skin = "tan",
+        the_person = create_random_person(age=renpy.random.randint(25, 35), tits="DD", body_type = "standard_body", face_style = "Face_4", skin = "tan",
             hair_colour = "platinum blonde", hair_style = messy_hair, eyes = "blue", personality = bimbo_personality)
-        a_bimbo.home.add_person(a_bimbo)
+        the_person.home.add_person(the_person)
 
         # update characters in game
         for person in all_people_in_the_game():
