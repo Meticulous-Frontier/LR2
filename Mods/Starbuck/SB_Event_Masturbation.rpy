@@ -25,22 +25,22 @@ init 2 python:
                             return True
         return False
 
-    SB_caught_masturbating_crisis = ActionMod("Office Masturbation",SB_caught_masturbating_requirement,"SB_caught_masturbating_crisis_label", 
-        menu_tooltip = "You find an employee masturbating in an empty storage room.", category = "Business", is_crisis = True, crisis_weight = SB_caught_masturbating_crisis_weight)
-
-label SB_caught_masturbating_crisis_label():
-    python:
+    def select_girl_masturbating():
         masturbating_people = []
         for person in mc.business.get_employee_list():
             if person.get_opinion_score("masturbating") > 0 or person.sluttiness > 50:
                 masturbating_people.append(person)
-        the_person = get_random_from_list(masturbating_people)
+        return get_random_from_list(masturbating_people)
 
+    SB_caught_masturbating_crisis = ActionMod("Office Masturbation",SB_caught_masturbating_requirement,"SB_caught_masturbating_crisis_label", 
+        menu_tooltip = "You find an employee masturbating in an empty storage room.", category = "Business", is_crisis = True, crisis_weight = SB_caught_masturbating_crisis_weight)
+
+label SB_caught_masturbating_crisis_label():
+    $ the_person = select_girl_masturbating()
     if the_person is None:
-        "No one eligible for masturbating!"
+        # "No one eligible for masturbating!"
         return
 
-    $ the_person = get_random_from_list(masturbating_people)
     $ the_place = mc.business.get_employee_workstation(the_person)
     $ ordered_bottom = the_person.outfit.get_lower_ordered()
     if len(ordered_bottom) > 0:
