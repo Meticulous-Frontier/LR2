@@ -183,7 +183,7 @@ init -1:
             self.sexed_count = 0 #Reset the counter for how many times you've been seduced, you might be seduced multiple times in one day!
 
             if time_of_day == 0: #It's a new day, get a new outfit out to wear!
-                self.planned_outfit = self.wardrobe.decide_on_outfit(self.sluttiness)
+                self.planned_outfit = self.wardrobe.decide_on_outfit2(self) # Use enhanced outfit selector
                 self.outfit = self.planned_outfit.get_copy()
                 self.planned_uniform = None
 
@@ -399,7 +399,7 @@ init -1:
             # sometimes there is no outfit set, causeing the generate drawlist to fail, not sure why, but try to fix it here.
             if self.outfit is None:
                 if self.planned_outfit is None:
-                    self.planned_outfit = self.wardrobe.decide_on_outfit(self.sluttiness)
+                    self.planned_outfit = self.wardrobe.decide_on_outfit2(self) # Use enhanced outfit function
                 self.outfit = self.planned_outfit.get_copy()
                 self.review_outfit(show_review_message = False)
 
