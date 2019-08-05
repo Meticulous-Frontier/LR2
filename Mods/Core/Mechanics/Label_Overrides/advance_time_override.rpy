@@ -291,6 +291,7 @@ label advance_time_daily_serum_dosage_label():
 label advance_time_people_run_move_label():
     #"advance_time_people_run_move_label" #DEBUG
     python:
-        for (people,place) in people_to_process: #Now move everyone to where the should be in the next time chunk. That may be home, work, etc.
-            people.run_move(place)
+        for (person, place) in people_to_process: #Now move everyone to where the should be in the next time chunk. That may be home, work, etc.
+            person.run_move(place)
+
     return
