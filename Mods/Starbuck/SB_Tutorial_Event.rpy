@@ -20,7 +20,7 @@ init 2 python:
             known.remove(person)
             if len(known) == 0:
                 return None
-            person = get_random_from_list(known)  
+            person = get_random_from_list(known)
         return person
 
     SB_tutorial_crisis = ActionMod("Mall Flirt", SB_tutorial_event_requirement, "SB_tutorial_event",
@@ -36,7 +36,7 @@ label SB_tutorial_event():
     the_person.char "Oh, hey [the_person.mc_title]!"
     mc.name "Hello, [the_person.title]. How are you doing today."
     "[the_person.possessive_title] smiles and bats her eyelashes a few times."
-    the_person.char "Well, to be honest, its much better now that you are here!"
+    the_person.char "Well, to be honest, it is much better now that you are here!"
     menu:
         "Looking good girl!":
             the_person.char "Aww, thanks! You're looking pretty sexy yourself..."
@@ -50,6 +50,5 @@ label SB_tutorial_event():
             $ the_person.change_happiness(5)
 
     $ change_scene_display(mc.location)
-    $ renpy.scene("Active")    
+    $ renpy.scene("Active")
     return
-
