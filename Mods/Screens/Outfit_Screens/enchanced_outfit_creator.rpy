@@ -108,10 +108,19 @@ init 10 python:
         cs = renpy.current_screen()
 
         cs.scope["selected_clothing"] = None
+        cs.scope["selected_from_outfit"] = None
         cs.scope["category_selected"] = category
         cs.scope["selected_colour"] = "colour" # Default to altering non- pattern colors
 
         cs.scope["demo_outfit"] = cs.scope["starting_outfit"].get_copy()
+
+        # select cloth item from category we have selected
+        for cloth in cs.scope["starting_outfit"].upper_body + cs.scope["starting_outfit"].lower_body + cs.scope["starting_outfit"].feet + cs.scope["starting_outfit"].accessories:
+            if not cloth.is_extension:
+                if cloth in cs.scope["categories_mapping"][category][0]:
+                    cs.scope["selected_clothing"] = cloth
+                    cs.scope["selected_from_outfit"] = cloth
+                    break
 
         preview_outfit()
 
@@ -855,92 +864,84 @@ init 2:
                                             yfill True
                                             xsize 250
                                             vbox:
+                                                frame:
+                                                    background "#000080"
+                                                    xsize 250                                                   
+                                                    padding [1,1]
+                                                    text "Sluttiness (Full Outfit): " + str(demo_outfit.slut_requirement) style "serum_text_style_traits"
+                                                frame:
+                                                    background "#000080"
+                                                    xsize 250                                                   
+                                                    padding [1,1]
+                                                    if demo_outfit.is_suitable_underwear_set():
+                                                        text "Sluttiness (Underwear): " + str(demo_outfit.get_underwear_slut_score()) style "serum_text_style_traits"
+                                                    else:
+                                                        text "Sluttiness (Underwear): Invalid" style "serum_text_style_traits"
+                                                frame:
+                                                    background "#000080"
+                                                    xsize 250                                                   
+                                                    padding [1,1]
+                                                    if demo_outfit.is_suitable_overwear_set():
+                                                        text "Sluttiness (Overwear): " + str(demo_outfit.get_overwear_slut_score()) style "serum_text_style_traits"
+                                                    else:
+                                                        text "Sluttiness (Overwear): Invalid" style "serum_text_style_traits"
+                                                frame:
+                                                    background "#000080"
+                                                    xsize 250                                                   
+                                                    padding [1,1]
+                                                    text "Tits Visible: " + str(demo_outfit.tits_visible()) style "serum_text_style_traits"
+                                                frame:
+                                                    background "#000080"
+                                                    xsize 250                                                   
+                                                    padding [1,1]
+                                                    text "Tits Usable: " + str(demo_outfit.tits_available()) style "serum_text_style_traits"
+                                                frame:
+                                                    background "#000080"
+                                                    xsize 250                                                   
+                                                    padding [1,1]
+                                                    text "Wearing a Bra: " + str(demo_outfit.wearing_bra()) style "serum_text_style_traits"
+                                                frame:
+                                                    background "#000080"
+                                                    xsize 250                                                   
+                                                    padding [1,1]
+                                                    text "Bra Covered: " + str(demo_outfit.bra_covered()) style "serum_text_style_traits"
+                                                frame:
+                                                    background "#000080"
+                                                    xsize 250                                                   
+                                                    padding [1,1]
+                                                    text "Pussy Visible: " + str(demo_outfit.vagina_visible()) style "serum_text_style_traits"
+                                                frame:
+                                                    background "#000080"
+                                                    xsize 250                                                   
+                                                    padding [1,1]
+                                                    text "Pussy Usable: " + str(demo_outfit.vagina_available()) style "serum_text_style_traits"
+                                                frame:
+                                                    background "#000080"
+                                                    xsize 250                                                   
+                                                    padding [1,1]
+                                                    text "Wearing Panties: " + str(demo_outfit.wearing_panties()) style "serum_text_style_traits"
+                                                frame:
+                                                    background "#000080"
+                                                    xsize 250                                                   
+                                                    padding [1,1]
+                                                    text "Panties Covered: " + str(demo_outfit.panties_covered()) style "serum_text_style_traits"
 
-                                                textbutton "Sluttiness (Full Outfit): " + str(demo_outfit.slut_requirement):
-                                                    style "textbutton_no_padding"
-                                                    text_style "serum_text_style_traits"
-                                                    xfill True
+                                                # DEBUG CODE TO SEE WHAT IS SELECTED WHEN WE CLICK AROUND
+                                                # frame:
+                                                #     background "#007000"
+                                                #     xsize 250                                                   
+                                                #     padding [1,1]
+                                                #     if (selected_from_outfit):
+                                                #         text "From outfit: " + selected_from_outfit.name style "serum_text_style_traits"
+                                                # frame:
+                                                #     background "#007000"
+                                                #     xsize 250                                                   
+                                                #     padding [1,1]
+                                                #     if (selected_clothing):
+                                                #         text "Seletect Item: " + selected_clothing.name style "serum_text_style_traits"
 
-                                                    action NullAction()
-                                                if demo_outfit.is_suitable_underwear_set():
 
-                                                    textbutton "Sluttiness (Underwear): " + str(demo_outfit.get_underwear_slut_score()):
-                                                        style "textbutton_no_padding"
-                                                        text_style "serum_text_style_traits"
-                                                        xfill True
 
-                                                        action NullAction()
-                                                else:
-                                                    textbutton "Sluttiness (Underwear): Invalid":
-                                                        style "textbutton_no_padding"
-                                                        text_style "serum_text_style_traits"
-                                                        xfill True
-
-                                                        action NullAction()
-
-                                                if demo_outfit.is_suitable_overwear_set():
-                                                    textbutton "Sluttiness (Overwear): " + str(demo_outfit.get_overwear_slut_score()):
-                                                        style "textbutton_no_padding"
-                                                        text_style "serum_text_style_traits"
-                                                        xfill True
-
-                                                        action NullAction()
-                                                else:
-                                                    textbutton "Sluttiness (Overwear): Invalid":
-                                                        style "textbutton_no_padding"
-                                                        text_style "serum_text_style_traits"
-                                                        xfill True
-
-                                                        action NullAction()
-
-                                                textbutton "Tits Visible: " + str(demo_outfit.tits_visible()):
-                                                    style "textbutton_no_padding"
-                                                    text_style "serum_text_style_traits"
-                                                    xfill True
-
-                                                    action NullAction()
-                                                textbutton "Tits Usable: " + str(demo_outfit.tits_available()):
-                                                    style "textbutton_no_padding"
-                                                    text_style "serum_text_style_traits"
-                                                    xfill True
-
-                                                    action NullAction()
-                                                textbutton "Wearing a Bra: " + str(demo_outfit.wearing_bra()):
-                                                    style "textbutton_no_padding"
-                                                    text_style "serum_text_style_traits"
-                                                    xfill True
-
-                                                    action NullAction()
-                                                textbutton "Bra Covered: " + str(demo_outfit.bra_covered()):
-                                                    style "textbutton_no_padding"
-                                                    text_style "serum_text_style_traits"
-                                                    xfill True
-
-                                                    action NullAction()
-                                                textbutton "Pussy Visible: " + str(demo_outfit.vagina_visible()):
-                                                    style "textbutton_no_padding"
-                                                    text_style "serum_text_style_traits"
-                                                    xfill True
-
-                                                    action NullAction()
-                                                textbutton "Pussy Usable: " + str(demo_outfit.vagina_available()):
-                                                    style "textbutton_no_padding"
-                                                    text_style "serum_text_style_traits"
-                                                    xfill True
-
-                                                    action NullAction()
-                                                textbutton "Wearing Panties: " + str(demo_outfit.wearing_panties()):
-                                                    style "textbutton_no_padding"
-                                                    text_style "serum_text_style_traits"
-                                                    xfill True
-
-                                                    action NullAction()
-                                                textbutton "Panties Covered: " + str(demo_outfit.panties_covered()):
-                                                    style "textbutton_no_padding"
-                                                    text_style "serum_text_style_traits"
-                                                    xfill True
-
-                                                    action NullAction()
                             vbox:
                                 frame:
                                     background "#888888"
@@ -978,7 +979,8 @@ init 2:
                                                             ]
                                                             alternate [
                                                             Function(starting_outfit.remove_clothing, cloth),
-                                                            Function(demo_outfit.remove_clothing, cloth)
+                                                            Function(demo_outfit.remove_clothing, cloth),
+                                                            Function(preview_outfit)
                                                             ]
                                                             xalign 0.5
                                                             xfill True
@@ -1181,19 +1183,19 @@ init 2:
                                                 mousewheel True
                                                 draggable True
                                                 vbox:
-                                                    for x in sorted(list_of_positions + list(set(list_of_girl_positions) - set(list_of_positions)), key = lambda x: x.name):
-                                                        textbutton x.name:
+                                                    for x in sorted(["stand2","stand3","stand4","stand5","walking_away","kissing","doggy","missionary","blowjob","against_wall","back_peek","sitting","standing_doggy","cowgirl"]):
+                                                        textbutton x:
                                                             style "textbutton_no_padding_highlight"
                                                             text_style "serum_text_style"
                                                             xfill True
                                                             xalign 0.5
 
-                                                            if mannequin_pose == x.position_tag:
+                                                            if mannequin_pose == x:
                                                                 background "#4f7ad6"
                                                                 hover_background "#4f7ad6"
 
                                                             action [
-                                                            SetScreenVariable("mannequin_pose", x.position_tag),
+                                                            SetScreenVariable("mannequin_pose", x),
                                                             Function(preview_outfit)
                                                             ]
 
