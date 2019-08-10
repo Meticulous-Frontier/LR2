@@ -62,6 +62,14 @@ label mall_introduction_action_label:
 
     if known_person.is_employee():
         known_person.char "And this is my boss, [title_choice]."
+    elif known_person is lily:
+        known_person.char "And this is my brother, [title_choice]."
+    elif known_person is mom:
+        known_person.char "And this is my son, [title_choice]."
+    elif known_person is aunt:
+        known_person.char "And this is my nephew, [title_choice]."
+    elif known_person is cousin:
+        known_person.char "And this is my cousin, [title_choice]."
     else:
         known_person.char "And this is my friend, [title_choice]."
 
