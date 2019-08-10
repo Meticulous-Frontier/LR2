@@ -56,6 +56,16 @@ init -1 python:
 
     Wardrobe.get_random_appropriate_underwear = get_random_appropriate_underwear_enhanced
 
+    def pick_outfit_with_lowest_sluttiness(self):
+        selected_outfit = None
+        for outfit in self.outfits:
+            if selected_outfit == None or outfit.get_full_outfit_slut_score() < selected_outfit.get_full_outfit_slut_score():
+                selected_outfit = outfit
+
+        return outfit.get_copy() # Get a copy of _any_ full outfit in this character's wardrobe.
+
+    Wardrobe.pick_outfit_with_lowest_sluttiness = pick_outfit_with_lowest_sluttiness
+
     def calculate_minimum_sluttiness(person, target_sluttiness):
         minimum_sluttiness = target_sluttiness - person.sluttiness # raise minimum sluttiness by the amount over normal sluttiness
         if target_sluttiness > 40 and minimum_sluttiness == 0: # when there is no minimum sluttiness, increase it when the girl is slutty
@@ -92,13 +102,13 @@ init -1 python:
     # Creates a uniform out of the clothing items from this wardrobe. 
     # When no company parts are available a girls personal wardrobe will be used for constructed uniforms.
     def decide_on_uniform_enhanced(self, person): 
-        conservative_score = person.get_opinion_score("conservative outfits") / 10 # high impact on sluttiness
-        skimpy_uniform_score = person.get_opinion_score("skimpy uniforms") / 10
-        work_uniforms_score = person.get_opinion_score("work uniforms") / 20 # low impact on sluttiness
+        conservative_score = person.get_opinion_score("conservative outfits") / 20 # high impact on sluttiness
+        skimpy_uniform_score = person.get_opinion_score("skimpy uniforms") / 20
+        work_uniforms_score = person.get_opinion_score("work uniforms") / 30 # low impact on sluttiness
         marketing_score = 0
         # girls working in marketing know they make more sales when wearing a sluttier outfit, so this affects their uniform choice
         if male_focused_marketing_policy.is_owned() and mc.business.get_employee_title(person) == "Marketing":
-            marketing_score = .2
+            marketing_score = .1
 
         # modify target sluttiness based on opinions
         target_sluttiness = person.sluttiness * (1 + skimpy_uniform_score + work_uniforms_score + marketing_score - conservative_score)
@@ -121,7 +131,7 @@ init -1 python:
                     count += 1
 
                 if not full_outfit: # fallback if we cannot find anything for our sluttiness or preferences
-                    full_outfit = self.pick_random_outfit()
+                    full_outfit = self.pick_outfit_with_lowest_sluttiness()
 
                 return full_outfit
                 
@@ -172,8 +182,8 @@ init -1 python:
 
     # An outfit selector that takes personal preferences into account
     def decide_on_outfit_enhanced(self, person, sluttiness_modifier = 0.0):
-        conservative_score = person.get_opinion_score("conservative outfits") / 10 # high impact on sluttiness
-        skimpy_outfit_score = person.get_opinion_score("skimpy outfits") / 10
+        conservative_score = person.get_opinion_score("conservative outfits") / 20 # high impact on sluttiness
+        skimpy_outfit_score = person.get_opinion_score("skimpy outfits") / 20
 
         target_sluttiness = person.sluttiness * (1 + skimpy_outfit_score + sluttiness_modifier - conservative_score)
         minimum_sluttiness = calculate_minimum_sluttiness(person, target_sluttiness)
@@ -194,7 +204,7 @@ init -1 python:
                     count += 1
 
                 if not full_outfit: # fallback if we cannot find anything for our sluttiness or preferences
-                    full_outfit = self.pick_random_outfit()
+                    full_outfit = self.pick_outfit_with_lowest_sluttiness()
 
                 return full_outfit
                 

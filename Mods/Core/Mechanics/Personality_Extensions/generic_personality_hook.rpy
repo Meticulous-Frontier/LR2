@@ -101,13 +101,13 @@ init -1 python:
             base_wardrobe.add_overwear_set(overwear.get_copy())
 
         while len(base_wardrobe.outfits) > 6:
-            base_wardrobe.remove_outfit(get_random_from_list(base_wardrobe.outfits))
+             base_wardrobe.remove_outfit(sorted(base_wardrobe.outfits, key = lambda x: x.slut_requirement)[renpy.random.randint(2,len(base_wardrobe.outfits)-1)])
 
         while len(base_wardrobe.underwear_sets) > 6:
-            base_wardrobe.remove_outfit(get_random_from_list(base_wardrobe.underwear_sets))
+             base_wardrobe.remove_outfit(sorted(base_wardrobe.underwear_sets, key = lambda x: x.slut_requirement)[renpy.random.randint(2,len(base_wardrobe.underwear_sets)-1)])
 
         while len(base_wardrobe.overwear_sets) > 6:
-            base_wardrobe.remove_outfit(get_random_from_list(base_wardrobe.overwear_sets))
+             base_wardrobe.remove_outfit(sorted(base_wardrobe.overwear_sets, key = lambda x: x.slut_requirement)[renpy.random.randint(2,len(base_wardrobe.overwear_sets)-1)])
 
         person.wardrobe = base_wardrobe
         return
