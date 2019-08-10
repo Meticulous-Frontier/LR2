@@ -210,8 +210,7 @@ init -1 python:
                 
         elif len(self.underwear_sets + self.overwear_sets) == 0:
             #We have nothing else to make a uniform out of. Use default builder function.
-            return self.build_appropriate_outfit(target_sluttiness, minimum_sluttiness)
-
+            return default_wardrobe.build_appropriate_outfit(target_sluttiness, minimum_sluttiness)
 
         #If we get to here we are assembling an outfit out of underwear or overwear.
         outfit_over = None
@@ -230,7 +229,6 @@ init -1 python:
             if not outfit_under:
                 #We need to get a bottom from the default wardrobe. We also want to make sure it's something she would personally wear.
                 outfit_under = default_wardrobe.get_random_appropriate_underwear(slut_limit_remaining, preferences = preferences)
-
         else:
             #There are no tops, so we're going to try and get a bottom and use one of the default wardrobe tops.
             outfit_under = self.get_random_appropriate_underwear(target_sluttiness, minimum_sluttiness, preferences)
@@ -244,10 +242,12 @@ init -1 python:
                     slut_limit_remaining = 0 #If the outfit is so slutty we're not comfortable in it we'll try and wear the most conservative overwear we can.
 
                 outfit_over = person.wardrobe.get_random_appropriate_overwear(slut_limit_remaining, preferences = preferences)
+                if not outfit_over:
+                    outfit_over = default_wardrobe.get_random_appropriate_overwear(slut_limit_remaining, preferences = preferences)
 
         #At this point we have our under and over, if at all possible.
         if not outfit_over or not outfit_under:
-            return self.build_appropriate_outfit(target_sluttiness, minimum_sluttiness) # Use default builder to create an outfit
+            return default_wardrobe.build_appropriate_outfit(target_sluttiness, minimum_sluttiness) # Use default builder to create an outfit
 
         return build_assembled_outfit(outfit_under, outfit_over)
 
