@@ -112,6 +112,12 @@ label append_company_wardrobe:
         normalo.add_feet(boot_heels.get_copy(), upper_color)
         mc.save_design(normalo, normalo.name, outfit_type = uniform_mode)
 
+        normalo = Outfit("[mc.business.name] - Sexy Overwear Boots")
+        normalo.add_lower(pencil_skirt.get_copy(), lower_color)
+        normalo.add_upper(business_vest.get_copy(), upper_color)
+        normalo.add_feet(tall_boots.get_copy(), upper_color)
+        mc.save_design(normalo, normalo.name, outfit_type = uniform_mode)
+
         normalo = Outfit("[mc.business.name] - Fitness Overwear")
         normalo.add_upper(sweater.get_copy(), upper_color)
         normalo.add_lower(leggings.get_copy(), lower_color)
@@ -121,7 +127,7 @@ label append_company_wardrobe:
         normalo = Outfit("[mc.business.name] - Provocative Overwear")
         normalo.add_lower(belted_skirt.get_copy(), lower_color)
         normalo.add_upper(belted_top.get_copy(), upper_color)
-        normalo.add_feet(high_heels.get_copy(), upper_color)
+        normalo.add_feet(pumps.get_copy(), upper_color)
         mc.save_design(normalo, normalo.name, outfit_type = uniform_mode)
 
         normalo = Outfit("[mc.business.name] - Hotpants Overwear")
@@ -166,6 +172,16 @@ label append_company_wardrobe:
         normalf.add_accessory(lipstick.get_copy(), [0.6,0.1,0.1,0.8])
         mc.save_design(normalf, normalf.name, outfit_type = uniform_mode)
 
+        normalf = Outfit("[mc.business.name] - Sexy Uniform Boots")
+        normalf.add_upper(business_vest.get_copy(), upper_color)
+        normalf.add_lower(lace_panties.get_copy(), under_color)
+        normalf.add_lower(pencil_skirt.get_copy(), lower_color)
+        normalf.add_feet(thigh_highs.get_copy(), under_color)
+        normalf.add_feet(tall_boots.get_copy(), upper_color)
+        normalf.add_accessory(light_eye_shadow.get_copy(), [0.1,0.2,0.7,.9])
+        normalf.add_accessory(lipstick.get_copy(), [0.6,0.1,0.1,0.8])
+        mc.save_design(normalf, normalf.name, outfit_type = uniform_mode)
+
         normalf = Outfit("[mc.business.name] - Fitness Uniform")
         normalf.add_upper(sweater.get_copy(), upper_color)
         normalf.add_lower(lace_panties.get_copy(), under_color)
@@ -189,7 +205,7 @@ label append_company_wardrobe:
         normalf.add_lower(mini_skirt.get_copy(), lower_color)
         normalf.add_upper(business_vest.get_copy(), upper_color)
         normalf.add_feet(garter_with_fishnets.get_copy(), under_color)
-        normalf.add_feet(high_heels.get_copy(), upper_color)
+        normalf.add_feet(pumps.get_copy(), upper_color)
         normalf.add_accessory(heavy_eye_shadow.get_copy(), [0,0,0,.8])
         normalf.add_accessory(light_eye_shadow.get_copy(), [0,0,0,1])
         normalf.add_accessory(lipstick.get_copy(), [0.6,0.1,0.1,0.8])
