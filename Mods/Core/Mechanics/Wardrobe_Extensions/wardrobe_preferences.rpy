@@ -30,6 +30,8 @@ init 0 python:
                 self.no_boots = False
                 self.prefer_high_heels = False
                 self.no_high_heels = False
+                self.no_clothes = False
+                self.prefer_clothes = False
                 return
 
             self.exclude_skirts, self.exclude_pants = self.get_skirt_and_pants_preference(person)
@@ -64,70 +66,42 @@ init 0 python:
         def evaluate_outfit(self, outfit, sluttiness_limit, sluttiness_min = 0):
             is_overwear = outfit.is_suitable_overwear_set()
             slut_score = is_overwear and outfit.get_overwear_slut_score() or outfit.get_full_outfit_slut_score()
-            show_msg = False    # Set True for debugging
 
             if not (slut_score <= sluttiness_limit and slut_score >= sluttiness_min):
-                #renpy.say("", "Reject: " + outfit.name + " (outside sluttiness range: " + str(sluttiness_min) + " <= " + str(slut_score) + " <= " + str(sluttiness_limit) + " score)")
                 return False
             if len(outfit.upper_body + outfit.lower_body + outfit.feet) == 0:
                 return False # No clothing at all should not be in person wardrobe by default
             if self.no_clothes and len(outfit.upper_body + outfit.lower_body + outfit.feet) > (is_overwear and 3 or 5):
-                if show_msg:
-                    renpy.say("", "Reject: " + outfit.name + " (too many clothes: " + str(len(outfit.upper_body + outfit.lower_body + outfit.feet)) + " items)")
                 return False
-            if self.prefer_clothes and len(outfit.upper_body + outfit.lower_body + outfit.feet) < (is_overwear and 2 or 3):
-                if show_msg:
-                    renpy.say("", "Reject: " + outfit.name + " (not enough clothing: " + str(len(outfit.upper_body + outfit.lower_body + outfit.feet)) + " items)")
+            if self.prefer_clothes and len(outfit.upper_body + outfit.lower_body + outfit.feet) < (is_overwear and 2 or 4):
                 return False
             if self.exclude_skirts and (any(outfit.has_clothing(item) for item in skirts_list) or any(outfit.has_clothing(item) for item in dress_list)):
-                if show_msg:
-                    renpy.say("", "Reject: " + outfit.name + " (is skirt or dress)")
                 return False
             if self.exclude_pants and any(outfit.has_clothing(item) for item in pants_list):
-                if show_msg:
-                    renpy.say("", "Reject: " + outfit.name + " (has pants)")
                 return False
             if (self.show_tits and any(outfit.has_clothing(item) for item in self.hide_tits_list)) or (self.no_show_tits and not any(outfit.has_clothing(item) for item in self.hide_tits_list)):
-                if show_msg:
-                    renpy.say("", "Reject: " + outfit.name +  (self.show_tits and " (hides tits)" or (self.no_show_tits and " (shows tits) " or "")))
                 return False
             if (self.show_ass and any(outfit.has_clothing(item) for item in self.hide_ass_list)) or (self.no_show_ass and not any(outfit.has_clothing(item) for item in self.hide_ass_list)):
-                if show_msg:
-                    renpy.say("", "Reject: " + outfit.name +  (self.show_ass and " (hides ass)" or (self.no_show_ass and " (shows ass) " or "")))
                 return False
             if (self.prefer_high_heels and not any(outfit.has_clothing(item) for item in self.high_heels_list)) or (self.no_high_heels and any(outfit.has_clothing(item) for item in self.high_heels_list)):
-                if show_msg:
-                    renpy.say("", "Reject: " + outfit.name +  (self.prefer_high_heels and " (no heels)" or (self.no_high_heels and " (has heels) " or "")))
                 return False
             if (self.prefer_boots and not any(outfit.has_clothing(item) for item in self.boots_list)) or (self.no_boots and any(outfit.has_clothing(item) for item in self.boots_list)):
-                if show_msg:
-                    renpy.say("", "Reject: " + outfit.name +  (self.prefer_boots and " (no boots)" or (self.no_boots and " (has boots) " or "")))
                 return False
             
             slut_modifier = person.get_opinion_score("conservative outfits")
             # checks differ when overwear or full outfit
             if is_overwear:
-                if self.conservative_outfits and (slut_score > (13 + slut_modifier) or (outfit.tits_available() or outfit.vagina_available() or not outfit.bra_covered() or not outfit.panties_covered())):
-                    if show_msg:
-                        renpy.say("", "Reject: " + outfit.name + " (not conservative " + str(slut_score) + " )")
+                if self.conservative_outfits and (slut_score > (15 + slut_modifier) or (outfit.tits_available() or outfit.vagina_available() or not outfit.bra_covered() or not outfit.panties_covered())):
                     return False
-                if (self.skimpy_outfits or self.skimpy_uniforms) and not slut_score > (8 + slut_modifier) and (not outfit.tits_available() or not outfit.vagina_available()):
-                    if show_msg:
-                        renpy.say("", "Reject: " + outfit.name + " (overwear not skimpy " + str(slut_score) + ")")
+                if (self.skimpy_outfits or self.skimpy_uniforms) and not slut_score > (10 + slut_modifier) and (not outfit.tits_available() or not outfit.vagina_available()):
                     return False
             else:
-                if self.conservative_outfits and (slut_score > (8 + slut_modifier) or (not outfit.wearing_panties() or not outfit.bra_covered() or not outfit.panties_covered())):
-                    if show_msg:
-                        renpy.say("", "Reject: " + outfit.name + " (not conservative " + str(slut_score) + ")")
+                if self.conservative_outfits and (slut_score > (10 + slut_modifier) or (not outfit.wearing_panties() or not outfit.bra_covered() or not outfit.panties_covered())):
                     return False
                 if (self.skimpy_outfits or self.skimpy_uniforms) and not slut_score > (5 + slut_modifier):
-                    if show_msg:
-                        renpy.say("", "Reject: " + outfit.name + " (outfit not skimpy " + str(slut_score) + ")")
                     return False
                 # only makeup check for full outfit
                 if (self.no_make_up and any(outfit.has_clothing(item) for item in self.makeup_list)) or (self.make_up and not any(outfit.has_clothing(item) for item in self.makeup_list)):
-                    if show_msg:
-                        renpy.say("", "Reject: " + outfit.name +  (self.no_make_up and " (has makeup)" or (self.make_up and " (no makeup) " or "")))
                     return False
 
             #renpy.say("", "Add: " + outfit.name)
@@ -135,25 +109,16 @@ init 0 python:
 
         def evaluate_underwear(self, underwear, sluttiness_limit, sluttiness_min = 0):
             slut_score = underwear.get_underwear_slut_score()
-            show_msg = False    # Set True for debugging
 
             if not (underwear.get_underwear_slut_score() <= sluttiness_limit and underwear.get_underwear_slut_score() >= sluttiness_min):
                 return False
             if (not self.no_underwear and len(underwear.upper_body + underwear.lower_body + underwear.feet) < 1) or (self.no_underwear and len(underwear.upper_body + underwear.lower_body + underwear.feet)) > 1:
-                if show_msg:
-                    renpy.say("", "Reject: " + underwear.name +  (self.no_underwear and " (too many items)" or " (not enough items) "))
                 return False
             if self.lingerie and (any(item.slut_value < 1 for item in underwear.lower_body) or any(item.slut_value < 1 for item in underwear.upper_body) or not underwear.wearing_panties()):
-                if show_msg:
-                    renpy.say("", "Reject: " + underwear.name + " (not sexy enough) ")
                 return False
             if (self.no_lingerie or self.conservative_outfits) and (any(item.slut_value > 1 for item in underwear.lower_body) or any(item.slut_value > 1 for item in underwear.upper_body)):
-                if show_msg:
-                    renpy.say("", "Reject: " + underwear.name + " (too sexy) ")
                 return False
             if (self.skimpy_outfits or self.skimpy_uniforms) and slut_score < 10:
-                if show_msg:
-                    renpy.say("", "Reject: " + underwear.name + " (not slutty enough) ")
                 return False
             # no makeup check, default wardrobe has no underwear with makeup
             return True

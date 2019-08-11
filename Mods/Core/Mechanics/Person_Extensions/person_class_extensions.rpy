@@ -117,7 +117,7 @@ init -1:
         # Adds learn_home function to the_person.
         Person.learn_home = learn_home
 
-        ## STRIP OUTFIT TO MAX SLUTTINES EXTENSION
+        ## STRIP OUTFIT TO MAX SLUTTINESS EXTENSION
         # Strips down the person to a clothing their are comfortable with (starting with top, before bottom)
         # narrator_messages: narrator voice after each item of clothing stripped, use '[person.<title>]' for titles and '[strip_choice.name]' for clothing item.
             # Can be an array of messages for variation in message per clothing item or just a single string or None for silent stripping

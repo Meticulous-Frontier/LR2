@@ -1,5 +1,5 @@
 init -1 python:
-    # Get an overwear outfit that is considered appropriate based on sluttines and preferences.
+    # Get an overwear outfit that is considered appropriate based on sluttiness and preferences.
     def get_random_appropriate_overwear_enhanced(self, sluttiness_limit, sluttiness_min = 0, preferences = None):
         if preferences == None:
             preferences = WardrobePreference()
@@ -72,8 +72,8 @@ init -1 python:
             minimum_sluttiness = (target_sluttiness - 40) // 2
         if minimum_sluttiness > 40: # prevent minimum sluttiness from going too high (late game, high sluttiness)
             minimum_sluttiness = 40
-        if target_sluttiness > 100 and minimum_sluttiness < 30: # when very slutty, don't bother with non-sexy clothes.
-            minimum_sluttiness = 30
+        if target_sluttiness > 100 and minimum_sluttiness < 20: # when very slutty, don't bother with non-sexy clothes.
+            minimum_sluttiness = 20
         return minimum_sluttiness
 
     def build_assembled_outfit(outfit_under, outfit_over):
@@ -102,16 +102,16 @@ init -1 python:
     # Creates a uniform out of the clothing items from this wardrobe. 
     # When no company parts are available a girls personal wardrobe will be used for constructed uniforms.
     def decide_on_uniform_enhanced(self, person): 
-        conservative_score = person.get_opinion_score("conservative outfits") / 20 # high impact on sluttiness
-        skimpy_uniform_score = person.get_opinion_score("skimpy uniforms") / 20
-        work_uniforms_score = person.get_opinion_score("work uniforms") / 30 # low impact on sluttiness
+        conservative_score = person.get_opinion_score("conservative outfits") / 20.0 # high impact on sluttiness
+        skimpy_uniform_score = person.get_opinion_score("skimpy uniforms") / 20.0
+        work_uniforms_score = person.get_opinion_score("work uniforms") / 40.0 # low impact on sluttiness
         marketing_score = 0
         # girls working in marketing know they make more sales when wearing a sluttier outfit, so this affects their uniform choice
         if male_focused_marketing_policy.is_owned() and mc.business.get_employee_title(person) == "Marketing":
-            marketing_score = .1
+            marketing_score = .05
 
         # modify target sluttiness based on opinions
-        target_sluttiness = person.sluttiness * (1 + skimpy_uniform_score + work_uniforms_score + marketing_score - conservative_score)
+        target_sluttiness = __builtin__.int(person.sluttiness * (1 + skimpy_uniform_score + work_uniforms_score + marketing_score - conservative_score))
         minimum_sluttiness = calculate_minimum_sluttiness(person, target_sluttiness)
 
         preferences = WardrobePreference(person)
@@ -182,25 +182,30 @@ init -1 python:
 
     # An outfit selector that takes personal preferences into account
     def decide_on_outfit_enhanced(self, person, sluttiness_modifier = 0.0):
-        conservative_score = person.get_opinion_score("conservative outfits") / 20 # high impact on sluttiness
-        skimpy_outfit_score = person.get_opinion_score("skimpy outfits") / 20
+        conservative_score = person.get_opinion_score("conservative outfits") / 20.0
+        skimpy_outfit_score = person.get_opinion_score("skimpy outfits") / 20.0
+        marketing_score = 0
+        # girls working in marketing know they make more sales when wearing a sluttier outfit, so this affects their uniform choice
+        if male_focused_marketing_policy.is_owned() and mc.business.get_employee_title(person) == "Marketing":
+            marketing_score = .05
 
-        target_sluttiness = person.sluttiness * (1 + skimpy_outfit_score + sluttiness_modifier - conservative_score)
+        target_sluttiness = __builtin__.int(person.sluttiness * (1 + skimpy_outfit_score + marketing_score + sluttiness_modifier - conservative_score))
         minimum_sluttiness = calculate_minimum_sluttiness(person, target_sluttiness)
-
         preferences = WardrobePreference(person)
 
         if len(self.outfits) > 0:
             #We have some full body outfits we might use. 50/50 to use that or a constructed outfit.
             outfit_choice = renpy.random.randint(0,100)
-            chance_to_use_full = 50 # 50/50 chance of being a full outfit or an assembled outfit if both are possible.
+            chance_to_use_full = (50 / 8.0) * len(self.outfits)   # when 8 outfits chance is 50%.
+            if chance_to_use_full > 70:
+                chance_to_use_full = 70
 
             #If we roll use full or we don't have the parts to make an assembled outfit.
             if outfit_choice > chance_to_use_full or len(self.underwear_sets + self.overwear_sets) == 0:
                 full_outfit = None
                 count = 0
                 while not full_outfit and count < 4:    # Try to find a valid outfit by stretching the sluttiness range, returns none when not succesfull               
-                    full_outfit = self.get_random_appropriate_outfit(target_sluttiness + (count * 2), minimum_sluttiness - (count * 10), preferences)
+                    full_outfit = self.get_random_appropriate_outfit(target_sluttiness + (count * 3), minimum_sluttiness - (count * 5), preferences)
                     count += 1
 
                 if not full_outfit: # fallback if we cannot find anything for our sluttiness or preferences
@@ -216,13 +221,13 @@ init -1 python:
         outfit_over = None
         count = 0
         while not outfit_over and count < 4:   # Try to find a valid uniform by stretching the sluttiness range, returns none when not succesfull
-            outfit_over = self.get_random_appropriate_overwear(target_sluttiness + (count * 5), minimum_sluttiness - (count * 10), preferences)
+            outfit_over = self.get_random_appropriate_overwear(target_sluttiness + (count * 3), minimum_sluttiness - (count * 5), preferences)
             count += 1
 
         if outfit_over:
             slut_limit_remaining = target_sluttiness - outfit_over.get_overwear_slut_score()
-            if slut_limit_remaining < 0:
-                slut_limit_remaining = 0
+            if slut_limit_remaining < 5:
+                slut_limit_remaining = 5  # don't expect 0 sluttiness underwear to be in wardrobe.
 
             #We got a top, now get a bottom.
             outfit_under = self.get_random_appropriate_underwear(slut_limit_remaining, preferences = preferences)
@@ -238,8 +243,8 @@ init -1 python:
 
             if outfit_under:
                 slut_limit_remaining = target_sluttiness - outfit_under.get_underwear_slut_score()
-                if slut_limit_remaining < 0:
-                    slut_limit_remaining = 0 #If the outfit is so slutty we're not comfortable in it we'll try and wear the most conservative overwear we can.
+                if slut_limit_remaining < 10:
+                    slut_limit_remaining = 10 # don't expect 0 sluttiness overwear to be in wardrobe.
 
                 outfit_over = person.wardrobe.get_random_appropriate_overwear(slut_limit_remaining, preferences = preferences)
                 if not outfit_over:
@@ -253,8 +258,8 @@ init -1 python:
 
     Wardrobe.decide_on_outfit2 = decide_on_outfit_enhanced
 
-# add some overwear with boots
 init 2 python:
+    # add some overwear with boots
     business_overwear_1 = Outfit("Business Overwear 1")
     business_overwear_1.add_upper(sleeveless_top.get_copy(),colour_white)
     business_overwear_1.add_upper(suit_jacket.get_copy(),colour_black)
@@ -283,3 +288,25 @@ init 2 python:
     sexy_overwear_8.add_accessory(gold_earings.get_copy(),colour_white)
     sexy_overwear_8.add_feet(tall_boots.get_copy(),colour_white)
     default_wardrobe.add_overwear_set(sexy_overwear_8)
+
+    # add some outfit with makeup
+    business_outfit_4 = Outfit("Business Outfit 4")
+    business_outfit_4.add_upper(sweater.get_copy(),colour_white)
+    business_outfit_4.add_upper(bralette.get_copy(),colour_white)
+    business_outfit_4.add_accessory(gold_earings.get_copy(),colour_white)
+    business_outfit_4.add_accessory(modern_glasses.get_copy(),colour_white)
+    business_outfit_4.add_accessory(lipstick.get_copy(),colour_red)
+    business_outfit_4.add_feet(slips.get_copy(),colour_black)
+    business_outfit_4.add_lower(suitpants.get_copy(),colour_black)
+    business_outfit_4.add_lower(panties.get_copy(),colour_white)
+    default_wardrobe.add_outfit(business_outfit_4)
+
+    business_outfit_5 = Outfit("Business Outfit 5")
+    business_outfit_5.add_upper(sweater.get_copy(),colour_white)
+    business_outfit_5.add_upper(bralette.get_copy(),colour_white)
+    business_outfit_5.add_accessory(lipstick.get_copy(),colour_red)
+    business_outfit_5.add_feet(heels.get_copy(),colour_black)
+    business_outfit_5.add_lower(pencil_skirt.get_copy(),colour_black)
+    business_outfit_5.add_lower(panties.get_copy(),colour_white)
+    default_wardrobe.add_outfit(business_outfit_5)
+
