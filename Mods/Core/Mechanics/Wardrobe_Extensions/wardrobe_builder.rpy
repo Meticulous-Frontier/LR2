@@ -106,6 +106,11 @@ init 5 python:
                 if overwear.can_add_accessory(item):
                     overwear.add_accessory(item)
 
+            # prevent any item from having no colour set
+            for cloth in overwear.upper_body + overwear.lower_body + overwear.feet + overwear.accessories:
+                if len(cloth.colour) < 4:
+                    cloth.colour = [1, 1, 1, .5]    # transparant white is easy to spot for debuggin
+
             return overwear
 
         def build_overwear(self, points = 0):
@@ -186,7 +191,7 @@ init 5 python:
                 if make_up_score > 2:
                     outfit.add_accessory(light_eye_shadow.get_copy(), get_random_from_list([[.15, .15, .15, .95], [.5, .18, .18, .95]]))
                 if make_up_score > 3:
-                    outfit.add_accessory(heavy_eye_shadow.get_copy(), [[.15, .15, .15, .95], ], [.1, .15, .55, .9])
+                    outfit.add_accessory(heavy_eye_shadow.get_copy(), get_random_from_list([[.15, .15, .15, .95], [.1, .15, .55, .9]]))
 
             self.add_accessory_from_list(outfit, list(filter(lambda x: x.slut_value <= points, self.earings_only_list)), 3, color_lower)
             self.add_accessory_from_list(outfit, list(filter(lambda x: x.slut_value <= points, bracelet_list)), 3, color_upper)
@@ -234,7 +239,14 @@ init 5 python:
             
             renpy.random.shuffle(weighted_list)
 
-            return get_random_from_weighted_list(weighted_list)
+            item = get_random_from_weighted_list(weighted_list)
+
+            if hasattr(item, "supported_patterns") and item.supported_patterns and renpy.random.randint(0, 1) == 1:
+                key_value = get_random_from_list(list(item.supported_patterns.keys()))
+                item.pattern = item.supported_patterns[key_value]
+                item.colour_pattern = self.get_color()
+
+            return item
 
         def build_weighted_list(self, item_group, filtered_list):
             item_list = []
