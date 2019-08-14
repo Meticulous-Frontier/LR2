@@ -25,13 +25,13 @@ init 10 python:
         return collar_slave_action.enabled
 
     stay_wet_action = ActionMod("Stay wet.", stay_wet_requirement, "stay_wet_label", menu_tooltip = "Have the person stay aroused at all times.", category = "Slave Role")
-    advance_time_stay_wet_action = ActionMod("Enable 'stay wet' functionality", advance_time_stay_wet_requirement, "advance_time_stay_wet_label", priority = advance_time_people_to_process_action.priority + 1, allow_disable = False, menu_tooltip = "People with 'stay_wet = True' have their minimum arousal set to 50%")
+    advance_time_stay_wet_action = ActionMod("Enable 'stay wet' functionality", advance_time_stay_wet_requirement, "advance_time_stay_wet_label", priority = 20, allow_disable = False, menu_tooltip = "People with 'stay_wet = True' have their minimum arousal set to 50%")
     if advance_time_stay_wet_action not in advance_time_action_list:
         advance_time_action_list.append(advance_time_stay_wet_action)
 
     collar_slave_action = ActionMod("Place collar on [the_person.title].", collar_slave_requirement, "slave_collar_person_label", menu_tooltip = "Put a collar of ownership on the target, ensure that their obedience stays high.", category = "Slave Role")
     uncollar_slave_action = ActionMod("Remove collar from [the_person.title].", uncollar_slave_requirement, "slave_collar_person_label", menu_tooltip = "Remove the collar, declearing them a free spirit.", category = "Dungeon Actions", allow_disable = False)
-    advance_time_collar_person_action = ActionMod("Enable 'collar' functionality", advance_time_collar_person_requirement, "advance_time_collar_person_label", allow_disable = False, priority = advance_time_people_to_process_action.priority + 1, menu_tooltip = "Allows the collar_slave_action to do what it is intended to.")
+    advance_time_collar_person_action = ActionMod("Enable 'collar' functionality", advance_time_collar_person_requirement, "advance_time_collar_person_label", allow_disable = False, priority = 20, menu_tooltip = "Allows the collar_slave_action to do what it is intended to.")
     if advance_time_collar_person_action not in advance_time_action_list:
         advance_time_action_list.append(advance_time_collar_person_action)
 

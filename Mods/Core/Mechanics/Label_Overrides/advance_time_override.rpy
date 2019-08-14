@@ -4,20 +4,11 @@
 init -1 python:
     bedroom_not_required_labels = ["dinner_date", "invest_rep_visit_label", "advanced_serum_stage_2_label", "serum_creation_crisis_label", "quitting_crisis_label"]
 
-    # fix for date requirement triggered in wrong timeslot
-    def dinner_date_requirement(day_of_week): #Used for a mandatory crisis that triggers on the next Friday in time chunk 3.
-        if time_of_day == 4 and day%7 == day_of_week: #Day of week is a nubmer from 0 to 6, where 0 is Monday.
-            return True
-        return False
-
-    def advance_time_requirement():
-        return True
-
     def advance_time_next_requirement():
-        return True # We always want to increase the time_of_day value unless it is night time in which case the end of day action is triggered.
+        return True 
 
-    def advance_time_end_of_day_requirement(): # NOTE: Make sure to assign a False return value if you want to do checks towards is_action_enabled()
-        return time_of_day == 4 # If it's night then run the end of day label.
+    def advance_time_end_of_day_requirement():
+        return time_of_day == 0
 
     def advance_time_random_crisis_requirement():
         return time_of_day != 0 and renpy.random.randint(0,100) < crisis_chance
@@ -38,6 +29,12 @@ init -1 python:
     def advance_time_daily_serum_dosage_requirement():
         return time_of_day == 1 and daily_serum_dosage_policy.is_owned() # This runs if you have the corresponding policy
 
+    def advance_time_people_run_day_requirement():
+        return time_of_day == 4
+
+    def advance_time_people_run_turn_requirement():
+        return True
+
 init 5 python:
     global crisis_chance
     global morning_crisis_chance
@@ -54,30 +51,41 @@ init 5 python:
     crisis_chance = crisis_base_chance
     morning_crisis_chance = morning_crisis_base_chance
 
-    advance_time_people_to_process_action = ActionMod("Creates a list of people to process", advance_time_requirement,
-        "advance_time_people_to_process_label", priority = 0, allow_disable = False)
-    advance_time_end_of_day_action = ActionMod("Ends the day if time_of_day is 4", advance_time_end_of_day_requirement,
-        "advance_time_end_of_day_label", priority = 1, allow_disable = False)
-    advance_time_next_action = ActionMod("Advances into the next time slot", advance_time_next_requirement,
-        "advance_time_next_label", priority = advance_time_end_of_day_action.priority + 1, # End of day calculations take priority
-        allow_disable = False)
-    advance_time_mandatory_crisis_action = ActionMod("Run mandatory crisis events", advance_time_mandatory_crisis_requirement,
-        "advance_time_mandatory_crisis_label", priority = advance_time_next_action.priority + 1, category = "Gameplay", allow_disable = False)
-    advance_time_random_crisis_action = ActionMod("Run random crisis events", advance_time_random_crisis_requirement,
-        "advance_time_random_crisis_label", priority = advance_time_next_action.priority + 1, category = "Gameplay")
-    advance_time_mandatory_morning_crisis_action = ActionMod("Run mandatory morning crisis events", advance_time_mandatory_morning_crisis_requirement,
-        "advance_time_mandatory_morning_crisis_label", priority = advance_time_next_action.priority + 1, category = "Gameplay", allow_disable = False)
-    advance_time_random_morning_crisis_action = ActionMod("Run random morning crisis events", advance_time_random_morning_crisis_requirement,
-        "advance_time_random_morning_crisis_label", priority = advance_time_next_action.priority + 1, category = "Gameplay")
-    advance_time_daily_serum_dosage_action = ActionMod("Employees daily Serum", advance_time_daily_serum_dosage_requirement,
-        "advance_time_daily_serum_dosage_label", priority = 0, allow_disable = False)
-    advance_time_people_run_move_action = ActionMod("Moves people_to_process to their destinations", advance_time_requirement,
-        "advance_time_people_run_move_label", priority = advance_time_people_to_process_action.priority + advance_time_next_action.priority + 1, # NOTE: Depends on people_to_process being up to date.
-        allow_disable = False)
-    advance_time_bankrupt_check_action = ActionMod("Determines if it is game over due to having gone bankrupt.", advance_time_bankrupt_check_requirement,
-        "advance_time_bankrupt_check_label", priority = 0, category = "Gameplay")
 
-    advance_time_action_list = [advance_time_people_to_process_action, advance_time_end_of_day_action, advance_time_next_action, advance_time_mandatory_crisis_action,
+    advance_time_people_run_turn_action = ActionMod("End of day run people", advance_time_people_run_turn_requirement,
+        "advance_time_people_run_turn_label", priority = 1, allow_disable = False)
+
+    advance_time_mandatory_crisis_action = ActionMod("Run mandatory crisis events", advance_time_mandatory_crisis_requirement,
+        "advance_time_mandatory_crisis_label", priority = 2, category = "Gameplay", allow_disable = False)
+    advance_time_random_crisis_action = ActionMod("Run random crisis events", advance_time_random_crisis_requirement,
+        "advance_time_random_crisis_label", priority = 3, category = "Gameplay")
+
+    advance_time_people_run_day_action = ActionMod("End of day run people", advance_time_people_run_day_requirement,
+        "advance_time_people_run_day_label", priority = 4, allow_disable = False)
+
+    advance_time_next_action = ActionMod("Advances into the next time slot", advance_time_next_requirement,
+        "advance_time_next_label", priority = 5, allow_disable = False)
+
+    advance_time_bankrupt_check_action = ActionMod("Determines if it is game over due to having gone bankrupt.", advance_time_bankrupt_check_requirement,
+        "advance_time_bankrupt_check_label", priority = 6, category = "Gameplay")
+
+    advance_time_end_of_day_action = ActionMod("Ends the day if time_of_day is 4", advance_time_end_of_day_requirement,
+        "advance_time_end_of_day_label", priority = 7, allow_disable = False)
+
+    advance_time_mandatory_morning_crisis_action = ActionMod("Run mandatory morning crisis events", advance_time_mandatory_morning_crisis_requirement,
+        "advance_time_mandatory_morning_crisis_label", priority = 8, category = "Gameplay", allow_disable = False)
+
+    advance_time_random_morning_crisis_action = ActionMod("Run random morning crisis events", advance_time_random_morning_crisis_requirement,
+        "advance_time_random_morning_crisis_label", priority = 9, category = "Gameplay")
+
+    advance_time_daily_serum_dosage_action = ActionMod("Employees daily Serum", advance_time_daily_serum_dosage_requirement,
+        "advance_time_daily_serum_dosage_label", priority = 10, allow_disable = False)
+
+    # NOTE: Depends on people_to_process being up to date.
+    advance_time_people_run_move_action = ActionMod("Moves people_to_process to their destinations", advance_time_next_requirement,
+        "advance_time_people_run_move_label", priority = 15, allow_disable = False)
+
+    advance_time_action_list = [advance_time_people_run_turn_action, advance_time_people_run_day_action, advance_time_end_of_day_action, advance_time_next_action, advance_time_mandatory_crisis_action,
         advance_time_random_crisis_action, advance_time_mandatory_morning_crisis_action, advance_time_random_morning_crisis_action, advance_time_daily_serum_dosage_action,
         advance_time_people_run_move_action, advance_time_bankrupt_check_action]
 
@@ -91,10 +99,8 @@ label advance_time_enhanced:
     # Note: This will require breaking people's turns into movement and actions.
     # Then: Add research crisis when serum is finished, requiring additional input from the player and giving the chance to test a serum on the R&D staff.
 
-    $ mc.can_skip_time = False #Ensure the player cannot skip time during crises.
-
-    #"advance_time_enhanced" # DEBUG
     python:
+        #renpy.say("", "advance_time_enhanced -> location: " + mc.location.name + ", time: [time_of_day]") # DEBUG
         advance_time_count = 0 # NOTE: Count and Max might need to be unique for each label since it carries over.
         advance_time_max_actions = len(advance_time_action_list) # This list is automatically sorted by priority due to the class properties.
         advance_time_action_list_sorted = sorted(advance_time_action_list, key = lambda x: x.priority)
@@ -110,12 +116,11 @@ label advance_time_enhanced:
 
     # increase crisis chance (every time slot)
     $ crisis_chance += 1
-    $ mc.can_skip_time = True #Now give the player the ability to skip time again, because they should be back in control.
     return
 
 label advance_time_bankrupt_check_label():
     if mc.business.funds < 0:
-        #"advance_time_bankrupt_check_label" # DEBUG
+        # "advance_time_bankrupt_check_label" # DEBUG
         $ mc.business.bankrupt_days += 1
         if mc.business.bankrupt_days == mc.business.max_bankrupt_days:
             $ renpy.say("","With no funds to pay your creditors you are forced to close your business and auction off all of your materials at a fraction of their value. Your story ends here.")
@@ -127,30 +132,8 @@ label advance_time_bankrupt_check_label():
         $ mc.business.bankrupt_days = 0
     return
 
-label advance_time_end_of_day_label():
-    # make sure we run all required action before switching to next day
-    call advance_time_mandatory_crisis_label from _call_advance_time_mandatory_crisis_label_advance_time_end_of_day_label
-
-    #"advance_time_end_of_day_label" # DEBUG
-    #if time_of_day == 4: ##First, determine if we're going into the next chunk of time. If we are, advance the day and run all of the end of day code. NOTE: We can do checks like these with Action.requirements
-    python:
-        for (people,place) in people_to_process:
-            people.run_day()
-
-    $ mc.run_day()
-    $ mc.business.run_day()
-
-    $ day += 1
-
-    call screen end_of_day_update() # We have to keep this outside of a python block, because the renpy.call_screen function does not properly fade out the text bar.
-    $ mc.business.clear_messages()
-
-    # increase morning crisis chance (once a day)
-    $ morning_crisis_chance += 2
-    return
-
 label advance_time_random_crisis_label():
-    #"advance_time_random_crisis_label" #DEBUG
+    # "advance_time_random_crisis_label - timeslot [time_of_day]" #DEBUG
     python:
         # how many crisis events are disabled?
         disabled = 0
@@ -185,7 +168,7 @@ label advance_time_random_crisis_label():
     return
 
 label advance_time_mandatory_crisis_label():
-    #"advance_time_mandatory_crisis_label" #DEBUG
+    # "advance_time_mandatory_crisis_label - timeslot [time_of_day]" #DEBUG
     python:
         mandatory_crisis_count = 0
         mandatory_crisis_max = len(mc.business.mandatory_crises_list)
@@ -206,8 +189,8 @@ label advance_time_mandatory_crisis_label():
             mc.business.mandatory_crises_list.remove(crisis) #Clean up the list.
     return
 
-label advance_time_people_to_process_label():
-    #"advance_time_people_to_process_label" #DEBUG
+label advance_time_people_run_turn_label():
+    # "advance_time_people_run_turn_label - timeslot [time_of_day]" #DEBUG
     python:
         people_to_process = [] #This is a master list of turns of need to process, stored as tuples [character,location]. Used to avoid modifying a list while we iterate over it, and to avoid repeat movements.
         for place in list_of_places:
@@ -221,11 +204,30 @@ label advance_time_people_to_process_label():
         mc.run_turn()
     return
 
+label advance_time_people_run_day_label():
+    # "advance_time_people_run_day_label - timeslot [time_of_day]" # DEBUG
+    #if time_of_day == 4: ##First, determine if we're going into the next chunk of time. If we are, advance the day and run all of the end of day code. NOTE: We can do checks like these with Action.requirements
+    python:
+        for (people,place) in people_to_process:
+            people.run_day()
+
+    $ mc.run_day()
+    $ mc.business.run_day()
+    return
+
+label advance_time_end_of_day_label():
+    # "advance_time_end_of_day_label - timeslot [time_of_day]" # DEBUG
+    call screen end_of_day_update() # We have to keep this outside of a python block, because the renpy.call_screen function does not properly fade out the text bar.
+    $ mc.business.clear_messages()
+    # increase morning crisis chance (once a day)
+    $ morning_crisis_chance += 2
+    return
+
 label advance_time_mandatory_morning_crisis_label():
+    # "advance_time_mandatory_morning_crisis_label  - timeslot [time_of_day]" # DEBUG
     #"advance_time_mandatory_morning_crisis_label" #DEBUG
     #Now we run mandatory morning crises. Nearly identical to normal crises, but these always trigger at the start of the day (ie when you wake up and before you have control of your character.)
     python:
-
         mandatory_morning_crisis_count = 0
         mandatory_morning_crisis_max = len(mc.business.mandatory_morning_crises_list)
         clear_list = []
@@ -245,7 +247,7 @@ label advance_time_mandatory_morning_crisis_label():
     return
 
 label advance_time_random_morning_crisis_label():
-    #"advance_time_random_morning_crisis_label" #DEBUG
+    # "advance_time_random_morning_crisis_label  - timeslot [time_of_day]" #DEBUG
     python:
         # how many crisis events are disabled?
         morning_disabled = 0
@@ -276,22 +278,22 @@ label advance_time_random_morning_crisis_label():
     return
 
 label advance_time_next_label():
-    #"advance_time_next_label" #DEBUG
+    # "advance_time_next_label  - timeslot [time_of_day]" #DEBUG
     if time_of_day == 4: # NOTE: Take care of resetting it to 0 here rather than during end_day_label
         $ time_of_day = 0
+        $ day += 1
     else:
         $ time_of_day += 1 ##Otherwise, just run the end of day code.
     return
 
 label advance_time_daily_serum_dosage_label():
-    #"advance_time_daily_serum_dosage_label, hands out daily_serums" #DEBUG
+    # "advance_time_daily_serum_dosage_label - timeslot [time_of_day]" #DEBUG
     $ mc.business.give_daily_serum()
     return
 
 label advance_time_people_run_move_label():
-    #"advance_time_people_run_move_label" #DEBUG
+    # "advance_time_people_run_move_label - timeslot [time_of_day]" #DEBUG
     python:
         for (person, place) in people_to_process: #Now move everyone to where the should be in the next time chunk. That may be home, work, etc.
             person.run_move(place)
-
     return
