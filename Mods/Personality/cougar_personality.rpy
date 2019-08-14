@@ -491,3 +491,40 @@ label cougar_date_seduction(the_person): #TODO: Change this to be different.
                 the_person.char "Tonight was fantastic. I think my [so_title] is out for the night."
                 the_person.char "So do you want to come over to my place for a cup of coffee?"
     return
+
+label cougar_sex_end_early(the_person):
+    if the_person.sluttiness > 50:
+        if the_person.love > 40:
+            if the_person.arousal > 60:
+                the_person.char "Is that it? You're going to drive me crazy [the_person.mc_title], I'm so horny..."
+            else:
+                the_person.char "All done? I hope you were having a good time."
+        else:
+            if the_person.arousal > 60:
+                the_person.char "Already done? I don't know how you can stop, I'm so excited at the moment!"
+            else:
+                the_person.char "Leaving already? Well, that's disappointing."
+
+    else:
+        if the_person.love > 40:
+            if the_person.arousal > 60:
+                the_person.char "That's it? Well, you could at least make me cum too."
+            else:
+                the_person.char "All done? Maybe we can pick this up the next time when we're alone."
+        else:
+            if the_person.arousal > 60:
+                the_person.char "I... I don't know what to say, did I exhaust you?"
+            else:
+                the_person.char "That's all you wanted? I guess we're finished then."
+    return
+
+label cougar_sex_take_control(the_person):
+    if the_person.arousal > 60:
+        the_person.char "I just can't let you go [the_person.mc_title], You are going to finish what you started!"
+    else:
+        the_person.char "Do you think you're going somewhere? You are not yet done [the_person.mc_title]."
+    return
+
+label cougar_sex_beg_finish(the_person):
+    "Wait, you can't stop now? Please [the_person.mc_title], I'm almost there, I'll do anything!"
+    return
