@@ -296,7 +296,7 @@ init 2:
 
 
 init 2:
-    screen outfit_creator(starting_outfit, target_wardrobe = mc.designed_wardrobe, outfit_type = "full"): ##Pass a completely blank outfit instance for a new outfit, or an already existing instance to load an old one.| This overrides the default outfit creation screen
+    screen outfit_creator(starting_outfit, outfit_type = "full"): ##Pass a completely blank outfit instance for a new outfit, or an already existing instance to load an old one.| This overrides the default outfit creation screen
 
         #add "Paper_Background.png"
         modal True
@@ -322,10 +322,13 @@ init 2:
 
         if outfit_type == "under":
             $ valid_layers = [0,1]
+            $ outfit_class_selected = "UnderwearSets"
         elif outfit_type == "over":
             $ valid_layers = [2,3]
+            $ outfit_class_selected = "OverwearSets"
         else:
             $ valid_layers = [0,1,2,3]
+            $ outfit_class_selected = "FullSets"
 
         $ valid_categories = ["Panties", "Bras", "Pants", "Skirts", "Dresses", "Shirts", "Socks", "Shoes", "Facial", "Rings", "Bracelets", "Neckwear"] #Holds the valid list of categories strings to be shown at the top.
 
@@ -1032,11 +1035,10 @@ init 2:
                                                 xfill True
 
                                                 action [
-                                                    If(target_wardrobe is mc.designed_wardrobe, Return(item_outfit.get_copy()),
-                                                    [Return(item_outfit)]), #TODO: Commit changes to a person only when using the "Save Outfit", right now the changes are not saved to the Wardrobe only Outfit.copy
+                                                    Return(item_outfit),
                                                     Hide("mannequin"),
                                                     Hide("outfit_creator")
-                                                    ]
+                                                ]
 
                                             textbutton "Abandon / Exit":
                                                 style "textbutton_no_padding_highlight"
@@ -1044,11 +1046,10 @@ init 2:
                                                 xfill True
 
                                                 action [
-                                                    If(target_wardrobe is mc.designed_wardrobe, [
-                                                    Return("Not_New")]), # Solves default creation errors, but load outfit expects "No Return" instead so that will throw an error.
-                                                    SetScreenVariable("starting_wardrobe", item_outfit), # This doesn't really do anything at the moment. I'm thinking that an easy way of reseting the starting_outfit to be compare_outfit which is a copy of starting_outfit could be a good way of dealing with accidental commits and discarding unwanted changes. Without the need of further logic.
-                                                    Hide("mannequin"), Hide("outfit_creator")
-                                                    ]
+                                                    Return("Not_New"),
+                                                    Hide("mannequin"), 
+                                                    Hide("outfit_creator")
+                                                ]
                                     frame:
                                         background "#888888"
                                         xsize 250
@@ -1068,16 +1069,17 @@ init 2:
                                                 xfill True
                                                 style "textbutton_no_padding_highlight"
                                                 text_style "serum_text_style"
-                                                action [
-                                                If(outfit_class_selected == "FullSets", SetScreenVariable("outfit_class_selected", "OverwearSets")),
-                                                If(outfit_class_selected == "OverwearSets", SetScreenVariable("outfit_class_selected", "UnderwearSets")),
-                                                If(outfit_class_selected == "UnderwearSets", SetScreenVariable("outfit_class_selected", "FullSets"))
-                                                ]
-                                                alternate [
-                                                If(outfit_class_selected == "FullSets", SetScreenVariable("outfit_class_selected", "UnderwearSets")),
-                                                If(outfit_class_selected == "OverwearSets", SetScreenVariable("outfit_class_selected", "FullSets")),
-                                                If(outfit_class_selected == "UnderwearSets", SetScreenVariable("outfit_class_selected", "OverwearSets"))
-                                                ]
+                                                action NullAction()
+                                                # action [
+                                                # If(outfit_class_selected == "FullSets", SetScreenVariable("outfit_class_selected", "OverwearSets")),
+                                                # If(outfit_class_selected == "OverwearSets", SetScreenVariable("outfit_class_selected", "UnderwearSets")),
+                                                # If(outfit_class_selected == "UnderwearSets", SetScreenVariable("outfit_class_selected", "FullSets"))
+                                                # ]
+                                                # alternate [
+                                                # If(outfit_class_selected == "FullSets", SetScreenVariable("outfit_class_selected", "UnderwearSets")),
+                                                # If(outfit_class_selected == "OverwearSets", SetScreenVariable("outfit_class_selected", "FullSets")),
+                                                # If(outfit_class_selected == "UnderwearSets", SetScreenVariable("outfit_class_selected", "OverwearSets"))
+                                                # ]
                                     frame:
                                         background "#888888"
                                         xsize 250
