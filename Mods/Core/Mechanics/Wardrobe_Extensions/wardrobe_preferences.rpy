@@ -1,7 +1,5 @@
 init 0 python:
     # insert new opinions in list
-    opinions_list.insert(7, "boots")
-    opinions_list.insert(7, "high heels")
 
     class WardrobePreference():
         makeup_list = [light_eye_shadow, heavy_eye_shadow, blush, lipstick]
@@ -14,6 +12,7 @@ init 0 python:
             if person == None:
                 self.exclude_skirts = False
                 self.exclude_pants = False
+                self.exclude_dresses = False
                 self.lingerie = False
                 self.no_lingerie = False
                 self.skimpy_outfits = False
@@ -34,7 +33,7 @@ init 0 python:
                 self.prefer_clothes = False
                 return
 
-            self.exclude_skirts, self.exclude_pants = self.get_skirt_and_pants_preference(person)
+            self.exclude_skirts, self.exclude_pants, self.exclude_dresses = self.get_skirt_dress_and_pants_preference(person)
             self.lingerie = person.get_opinion_score("lingerie") > 0
             self.no_lingerie = person.get_opinion_score("lingerie") < 0
             self.skimpy_outfits = person.get_opinion_score("skimpy outfits") > person.get_opinion_score("conservative outfits")
@@ -75,7 +74,9 @@ init 0 python:
                 return False
             if self.prefer_clothes and len(outfit.upper_body + outfit.lower_body + outfit.feet) < (is_overwear and 2 or 4):
                 return False
-            if self.exclude_skirts and (any(outfit.has_clothing(item) for item in skirts_list) or any(outfit.has_clothing(item) for item in dress_list)):
+            if self.exclude_skirts and any(outfit.has_clothing(item) for item in skirts_list):
+                return False
+            if self.exclude_dresses and any(outfit.has_clothing(item) for item in dress_list):
                 return False
             if self.exclude_pants and any(outfit.has_clothing(item) for item in pants_list):
                 return False
@@ -123,17 +124,26 @@ init 0 python:
             # no makeup check, default wardrobe has no underwear with makeup
             return True
 
-        def get_skirt_and_pants_preference(self, person):
+        def get_skirt_dress_and_pants_preference(self, person):
             skirts_score = person.get_opinion_score("skirts")
             pants_score = person.get_opinion_score("pants")
-            exclude_skirts = skirts_score < 0 or pants_score > 0
-            exclude_pants = pants_score < 0 or skirts_score > 0
+            dress_score = person.get_opinion_score("dresses")
+            exclude_skirts = skirts_score == -2
+            exclude_pants = pants_score == -2
+            exclude_dresses = dress_score == -2
 
             # break tigh when they don't like both.
-            if exclude_skirts and exclude_pants:
-                if pants_score < skirts_score or skirts_score == pants_score:  # favor skirts
-                    exclude_skirts = False
-                else:
+            if exclude_skirts and exclude_pants and exclude_skirts:
+                if pants_score > skirts_score and pants_score > dress_score:
                     exclude_pants = False
+                elif skirts_score > pants_score and pants_score > dress_score: 
+                    exclude_skirts = False
+                elif dress_score > skirts_score and dress_score > pants_score:
+                    exclude_dresses = False
+            if exclude_skirts and exclude_pants and exclude_skirts:
+                if dress_score > skirts_score:
+                    exclude_dresses = False
+                else:
+                    exclude_skirts = False
 
-            return (exclude_skirts, exclude_pants)
+            return (exclude_skirts, exclude_pants, exclude_dresses)

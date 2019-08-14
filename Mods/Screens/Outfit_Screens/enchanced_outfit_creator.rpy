@@ -25,11 +25,11 @@ init 10 python:
 
         cs = renpy.current_screen()
 
-        if not cs.scope["valid_check"](cs.scope["starting_outfit"], cs.scope["selected_clothing"]) and cs.scope["selected_from_outfit"] is not None:
-            cs.scope["starting_outfit"].remove_clothing(cs.scope["selected_from_outfit"])
-            cs.scope["apply_method"](cs.scope["starting_outfit"], cs.scope["selected_clothing"])
+        if not cs.scope["valid_check"](cs.scope["item_outfit"], cs.scope["selected_clothing"]) and cs.scope["selected_from_outfit"] is not None:
+            cs.scope["item_outfit"].remove_clothing(cs.scope["selected_from_outfit"])
+            cs.scope["apply_method"](cs.scope["item_outfit"], cs.scope["selected_clothing"])
         else:
-            cs.scope["apply_method"](cs.scope["starting_outfit"], cs.scope["selected_clothing"])
+            cs.scope["apply_method"](cs.scope["item_outfit"], cs.scope["selected_clothing"])
 
         cs.scope["selected_from_outfit"] = cloth
 
@@ -98,10 +98,18 @@ init 10 python:
         cs = renpy.current_screen()
 
         if cs.scope["selected_clothing"] is not None:
-            if cs.scope["valid_check"](cs.scope["starting_outfit"], cs.scope["selected_clothing"]) or cs.scope["cloth"].layer in cs.scope["valid_layers"]:
+            if cs.scope["valid_check"](cs.scope["item_outfit"], cs.scope["selected_clothing"]) or cs.scope["cloth"].layer in cs.scope["valid_layers"]:
                 return True
             else:
                 return False
+
+    def set_generated_outfit(category, slut_value):
+        cs = renpy.current_screen()
+
+        outfit = WardrobeBuilder(the_person).build_outfit(cs.scope["outfit_class_selected"], slut_value)
+        cs.scope["item_outfit"] = outfit.get_copy()
+        cs.scope["demo_outfit"] = outfit
+        switch_outfit_category(category)
 
     def switch_outfit_category(category):
 
@@ -112,10 +120,10 @@ init 10 python:
         cs.scope["category_selected"] = category
         cs.scope["selected_colour"] = "colour" # Default to altering non- pattern colors
 
-        cs.scope["demo_outfit"] = cs.scope["starting_outfit"].get_copy()
+        cs.scope["demo_outfit"] = cs.scope["item_outfit"].get_copy()
 
         # select cloth item from category we have selected
-        for cloth in cs.scope["starting_outfit"].upper_body + cs.scope["starting_outfit"].lower_body + cs.scope["starting_outfit"].feet + cs.scope["starting_outfit"].accessories:
+        for cloth in cs.scope["item_outfit"].upper_body + cs.scope["item_outfit"].lower_body + cs.scope["item_outfit"].feet + cs.scope["item_outfit"].accessories:
             if not cloth.is_extension:
                 if cloth in cs.scope["categories_mapping"][category][0]:
                     cs.scope["selected_clothing"] = cloth
@@ -171,6 +179,17 @@ init 10 python:
                 cs.scope["selected_clothing"].colour = [cs.scope["current_r"], cs.scope["current_g"], __builtin__.round(float(new_value),2), cs.scope["current_a"]]
 
         preview_outfit()
+
+    def update_slut_generation(new_value):
+        cs = renpy.current_screen()
+
+        if new_value < 1:
+            new_value = 1
+        if new_value > 15:
+            new_value = 15
+
+        cs.scope["slut_generation"] = new_value
+        renpy.restart_interaction()
 
 init -1 python:
 
@@ -297,9 +316,9 @@ init 2:
 
         default quick_category = None # Used to get category of the item
         default selected_from_outfit = None # Used to temporarily remember what clothing you have selected from starting_outfit if any
-        default compare_outfit = starting_outfit.get_copy() # Have a non- altered copy available for checks.
         default colour_cloth = None # A variable to fetch the copy of selected_clothing.get_copy()
         default demo_outfit = starting_outfit.get_copy()
+        default item_outfit = starting_outfit.get_copy()
 
         if outfit_type == "under":
             $ valid_layers = [0,1]
@@ -336,6 +355,8 @@ init 2:
         default current_g = 1.0
         default current_b = 1.0
         default current_a = 1.0
+
+        default slut_generation = 1
 
 
         # $ current_colour = [1.0,1.0,1.0,1.0] #This is the colour we will apply to all of the clothing
@@ -955,7 +976,7 @@ init 2:
                                             vbox:
 
                                                 spacing 5 #TODO: Add a viewport here too.
-                                                for cloth in starting_outfit.upper_body + starting_outfit.lower_body + starting_outfit.feet + starting_outfit.accessories:
+                                                for cloth in item_outfit.upper_body + item_outfit.lower_body + item_outfit.feet + item_outfit.accessories:
                                                     if not cloth.is_extension: #Don't list extensions for removal.
                                                         button:
                                                             background Color(rgb = (cloth.colour[0], cloth.colour[1], cloth.colour[2]))
@@ -978,7 +999,7 @@ init 2:
 
                                                             ]
                                                             alternate [
-                                                            Function(starting_outfit.remove_clothing, cloth),
+                                                            Function(item_outfit.remove_clothing, cloth),
                                                             Function(demo_outfit.remove_clothing, cloth),
                                                             Function(preview_outfit)
                                                             ]
@@ -1011,8 +1032,8 @@ init 2:
                                                 xfill True
 
                                                 action [
-                                                    If(target_wardrobe is mc.designed_wardrobe, Return(starting_outfit.get_copy()),
-                                                    [Return(starting_outfit)]), #TODO: Commit changes to a person only when using the "Save Outfit", right now the changes are not saved to the Wardrobe only Outfit.copy
+                                                    If(target_wardrobe is mc.designed_wardrobe, Return(item_outfit.get_copy()),
+                                                    [Return(item_outfit)]), #TODO: Commit changes to a person only when using the "Save Outfit", right now the changes are not saved to the Wardrobe only Outfit.copy
                                                     Hide("mannequin"),
                                                     Hide("outfit_creator")
                                                     ]
@@ -1025,7 +1046,7 @@ init 2:
                                                 action [
                                                     If(target_wardrobe is mc.designed_wardrobe, [
                                                     Return("Not_New")]), # Solves default creation errors, but load outfit expects "No Return" instead so that will throw an error.
-                                                    SetScreenVariable("starting_wardrobe", compare_outfit), # This doesn't really do anything at the moment. I'm thinking that an easy way of reseting the starting_outfit to be compare_outfit which is a copy of starting_outfit could be a good way of dealing with accidental commits and discarding unwanted changes. Without the need of further logic.
+                                                    SetScreenVariable("starting_wardrobe", item_outfit), # This doesn't really do anything at the moment. I'm thinking that an easy way of reseting the starting_outfit to be compare_outfit which is a copy of starting_outfit could be a good way of dealing with accidental commits and discarding unwanted changes. Without the need of further logic.
                                                     Hide("mannequin"), Hide("outfit_creator")
                                                     ]
                                     frame:
@@ -1039,11 +1060,10 @@ init 2:
                                                 xfill True
 
                                                 action [
-                                                Function(custom_log_outfit, starting_outfit, outfit_class = outfit_class_selected,
+                                                Function(custom_log_outfit, item_outfit, outfit_class = outfit_class_selected,
                                                 wardrobe_name = selected_xml),
                                                 Function(renpy.notify, "Outfit exported to [selected_xml]")
                                                 ]
-
                                             textbutton "Type: [outfit_class_selected]":
                                                 xfill True
                                                 style "textbutton_no_padding_highlight"
@@ -1058,7 +1078,29 @@ init 2:
                                                 If(outfit_class_selected == "OverwearSets", SetScreenVariable("outfit_class_selected", "FullSets")),
                                                 If(outfit_class_selected == "UnderwearSets", SetScreenVariable("outfit_class_selected", "OverwearSets"))
                                                 ]
+                                    frame:
+                                        background "#888888"
+                                        xsize 250
+                                        vbox:
+                                            textbutton "Generate [outfit_class_selected]":
+                                                xfill True
+                                                style "textbutton_no_padding_highlight"
+                                                text_style "serum_text_style"
+                                                action [
+                                                    Function(set_generated_outfit, category_selected, slut_generation)
+                                                ]
 
+                                            hbox:
+                                                button:
+                                                    background "#505050"
+                                                    text "Slut "+ str(slut_generation) style "serum_text_style" yalign 0.5
+                                                    xsize 90
+                                                    ysize 45
+                                                bar:
+                                                    adjustment ui.adjustment(range = 15, value = slut_generation, step = 1, changed = update_slut_generation)
+                                                    xfill True
+                                                    ysize 45
+                                                    style style.slider
 
                                 vbox:
 
