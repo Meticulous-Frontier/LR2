@@ -8,15 +8,15 @@ init 5 python:
 
     class WardrobeBuilder():
         preferences = {}
-        preferences["skimpy_outfits"] = {}
-        preferences["skimpy_outfits"]["upper_body"] = [two_part_dress, thin_dress, leotard, tshirt, lace_sweater, sweater, belted_top, lace_crop_top, tanktop, tube_top, business_vest]
-        preferences["skimpy_outfits"]["lower_body"] = [leggings, booty_shorts, jean_hotpants, belted_skirt, lace_skirt, mini_skirt]
-        preferences['skimpy_outfits']["feet"] = [thigh_highs, fishnets, garter_with_fishnets, pumps, heels, high_heels, thigh_high_boots]
-        preferences["skimpy_outfits"]["accessories"] = [lace_choker, wide_choker, spiked_choker]
+        preferences["skimpy outfits"] = {}
+        preferences["skimpy outfits"]["upper_body"] = [two_part_dress, thin_dress, leotard, tshirt, lace_sweater, sweater, belted_top, lace_crop_top, tanktop, tube_top, business_vest]
+        preferences["skimpy outfits"]["lower_body"] = [leggings, booty_shorts, jean_hotpants, belted_skirt, lace_skirt, mini_skirt]
+        preferences['skimpy outfits']["feet"] = [thigh_highs, fishnets, garter_with_fishnets, pumps, heels, high_heels, thigh_high_boots]
+        preferences["skimpy outfits"]["accessories"] = [lace_choker, wide_choker, spiked_choker]
         preferences["conservative outfits"] = {}
         preferences["conservative outfits"]["upper_body"] = [long_sweater, sleeveless_top, long_tshirt, camisole, long_sleeve_blouse, short_sleeve_blouse, tie_sweater, dress_shirt, summer_dress]
         preferences["conservative outfits"]["lower_body"] = [pencil_skirt, skirt, long_skirt]
-        preferences["conservative outfits"]["feet"] = [sandles, shoes, slips, sneakers, tall_boots, short_socks, medium_socks, high_socks]
+        preferences["conservative outfits"]["feet"] = [sandles, shoes, slips, sneakers, tall_boots, short_socks, medium_socks]
         preferences["conservative outfits"]["accessories"] = [wool_scarf]
         preferences["dresses"] = {}
         preferences["dresses"]["lower_body"] = [x for x in dress_list if x not in [lacy_one_piece_underwear, lingerie_one_piece]]
@@ -72,14 +72,20 @@ init 5 python:
         earings_only_list = [chandelier_earings, gold_earings, modern_glasses]
 
         def __init__(self, person):
-            self.person = person
-            skirts_score = person.get_opinion_score("skirts")
-            pants_score = person.get_opinion_score("pants")
-            dress_score = person.get_opinion_score("dresses")
+            if person and isinstance(person, Person):
+                self.person = person
+            else:
+                self.person = create_random_person("Ema","Hesire", 23, "thin_body", "B", 0.91)
+                self.person.opinions.clear() # reset opinions so every item has an equal chance
+                self.person.sexy_opinions.clear()
+
+            skirts_score = self.person.get_opinion_score("skirts")
+            pants_score = self.person.get_opinion_score("pants")
+            dress_score = self.person.get_opinion_score("dresses")
 
             # person hates all main clothing items, make her like skirts.
             if skirts_score + pants_score + dress_score == -6:
-                person.opinions["skirts"] = [1, True]
+                self.person.opinions["skirts"] = [1, True]
 
         def build_outfit(self, outfit_type, points):
             if (outfit_type == "OverwearSets"):
@@ -113,6 +119,14 @@ init 5 python:
 
             return overwear
 
+        def get_hate_list(self):
+            item_list = []
+            for pref in self.preferences:
+                score = self.person.get_opinion_score(pref)
+                if score == -2:
+                    item_list.append(pref)
+            return item_list
+
         def build_overwear(self, points = 0):
             outfit = Outfit("Overwear")
 
@@ -137,8 +151,7 @@ init 5 python:
 
             # find lowerbody item
             if item is None or not item.has_extension:
-                filtered_lower_list = list(filter(lambda x: x.slut_value <= points, pants_list + skirts_list))
-                item = self.get_item_from_list("lower_body", filtered_lower_list)
+                item = self.get_item_from_list("lower_body", self.build_filter_list(pants_list + skirts_list, points))
                 if item:
                     score = self.person.get_opinion_score("not wearing anything")
                     if points < 3 or not renpy.random.randint(0, (score + 2) * 5) > 13:
@@ -159,8 +172,7 @@ init 5 python:
             color_upper, color_lower, color_feet = self.get_main_color_scheme()
             
             # find upperbody item
-            filtered_upper_list = list(filter(lambda x: x.slut_value <= points, bra_list + [lingerie_one_piece, lacy_one_piece_underwear]))
-            item = self.get_item_from_list("upper_body", filtered_upper_list)
+            item = self.get_item_from_list("upper_body", self.build_filter_list(bra_list + [lingerie_one_piece, lacy_one_piece_underwear], points))
             if item:
                 score = self.person.get_opinion_score("showing her tits") + self.person.get_opinion_score("not wearing underwear")
                 if points < 3 or not renpy.random.randint(0, (score + 4) * 5) > 22:
@@ -168,16 +180,14 @@ init 5 python:
 
             # find lowerbody item
             if not item or not item.has_extension:
-                filtered_lower_list = list(filter(lambda x: x.slut_value <= points, panties_list))
-                item = self.get_item_from_list("lower_body", filtered_lower_list)
+                item = self.get_item_from_list("lower_body", self.build_filter_list(panties_list, points))
                 if item:
                     score = self.person.get_opinion_score("showing her ass") + self.person.get_opinion_score("not wearing underwear")
                     if points < 3 or not renpy.random.randint(0, (score + 4) * 5) > 22:
                         outfit.add_lower(item.get_copy(), color_lower)
             
             if points > 4 or renpy.random.randint(0, 3) == 0:
-                filtered_feet_list = list(filter(lambda x: x.slut_value <= points, points > 4 and self.preferences['lingerie']["feet"] or socks_list))
-                item = self.get_item_from_list("feet", filtered_feet_list)
+                item = self.get_item_from_list("feet", self.build_filter_list(socks_list, points))
                 if item:
                     outfit.add_feet(item.get_copy(), color_feet)
             
@@ -193,12 +203,16 @@ init 5 python:
                 if make_up_score > 3:
                     outfit.add_accessory(heavy_eye_shadow.get_copy(), get_random_from_list([[.15, .15, .15, .95], [.1, .15, .55, .9]]))
 
-            self.add_accessory_from_list(outfit, list(filter(lambda x: x.slut_value <= points, self.earings_only_list)), 3, color_lower)
-            self.add_accessory_from_list(outfit, list(filter(lambda x: x.slut_value <= points, bracelet_list)), 3, color_upper)
-            self.add_accessory_from_list(outfit, list(filter(lambda x: x.slut_value <= points, rings_list)), 3, color_lower)
-            self.add_accessory_from_list(outfit, list(filter(lambda x: x.slut_value <= points, neckwear_list)), 3, color_upper)
+            self.add_accessory_from_list(outfit, self.build_filter_list(self.earings_only_list, points), 3, color_lower)
+            self.add_accessory_from_list(outfit, self.build_filter_list(bracelet_list, points), 3, color_upper)
+            self.add_accessory_from_list(outfit, self.build_filter_list(rings_list, points), 3, color_lower)
+            self.add_accessory_from_list(outfit, self.build_filter_list(neckwear_list, points), 3, color_upper)
 
-            return outfit           
+            return outfit
+
+
+        def build_filter_list(self, item_list, points):
+            return list(filter(lambda x: x.slut_value <= points, item_list))
         
         def add_accessory_from_list(self, outfit, filtered_list, chance, item_color = [.8, .1, .1, .95]):
             if renpy.random.randint(0, chance) == 0:
@@ -234,7 +248,7 @@ init 5 python:
                 if item_group in self.preferences[pref]:
                     if self.person.get_opinion_score(pref) == -2:
                         item_list = [x for x in weighted_list if x[0] not in self.preferences[pref][item_group]]
-                        if item_list:
+                        if item_list: # check if we have any items left, if not use original weighted list
                             weighted_list = item_list
             
             renpy.random.shuffle(weighted_list)

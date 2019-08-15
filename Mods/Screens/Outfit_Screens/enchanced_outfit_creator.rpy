@@ -106,7 +106,7 @@ init 10 python:
     def set_generated_outfit(category, slut_value):
         cs = renpy.current_screen()
 
-        outfit = WardrobeBuilder(the_person).build_outfit(cs.scope["outfit_class_selected"], slut_value)
+        outfit = cs.scope["outfit_builder"].build_outfit(cs.scope["outfit_class_selected"], slut_value)
         cs.scope["item_outfit"] = outfit.get_copy()
         cs.scope["demo_outfit"] = outfit
         switch_outfit_category(category)
@@ -183,10 +183,10 @@ init 10 python:
     def update_slut_generation(new_value):
         cs = renpy.current_screen()
 
-        if new_value < 1:
+        if new_value < 0:
             new_value = 1
-        if new_value > 15:
-            new_value = 15
+        if new_value > 12:
+            new_value = 12
 
         cs.scope["slut_generation"] = new_value
         renpy.restart_interaction()
@@ -303,7 +303,7 @@ init 2:
         zorder 100
         default category_selected = "Panties"
         default mannequin = "mannequin"
-        default mannequin_pose = None
+        default mannequin_pose = "stand3"
         default mannequin_selection = False
         default mannequin_poser = False
 
@@ -319,6 +319,7 @@ init 2:
         default colour_cloth = None # A variable to fetch the copy of selected_clothing.get_copy()
         default demo_outfit = starting_outfit.get_copy()
         default item_outfit = starting_outfit.get_copy()
+        default outfit_builder = WardrobeBuilder(None)
 
         if outfit_type == "under":
             $ valid_layers = [0,1]
@@ -359,7 +360,7 @@ init 2:
         default current_b = 1.0
         default current_a = 1.0
 
-        default slut_generation = 1
+        default slut_generation = 0
 
 
         # $ current_colour = [1.0,1.0,1.0,1.0] #This is the colour we will apply to all of the clothing
@@ -395,7 +396,7 @@ init 2:
                                         sensitive category is not category_selected
 
                                         action [
-                                        Function(switch_outfit_category, category) # If a clothing item is selected and currently being previewed then remove it from preview.
+                                            Function(switch_outfit_category, category) # If a clothing item is selected and currently being previewed then remove it from preview.
                                         ]
                     vbox:
                         spacing 15
@@ -429,22 +430,20 @@ init 2:
                                                 xalign 0.5
 
                                                 action [
-
-                                                SetScreenVariable("selected_clothing", cloth),
-                                                SetScreenVariable("selected_colour", "colour")
-
+                                                    SetScreenVariable("selected_clothing", cloth),
+                                                    SetScreenVariable("selected_colour", "colour")
                                                 ]
 
                                                 hovered [
-                                                Function(preview_apply, cloth), # Add the hovered outfit to the demo outfit
-                                                Function(update_outfit_color, cloth),
-                                                Function(preview_outfit)
+                                                    Function(preview_apply, cloth), # Add the hovered outfit to the demo outfit
+                                                    Function(update_outfit_color, cloth),
+                                                    Function(preview_outfit)
                                                 ]
 
                                                 unhovered [
-                                                Function(preview_restore, cloth), # Remove the hovered outfit from the demo outfit and focus on the selected item if any.
-                                                If(selected_clothing is not None, Function(update_outfit_color, selected_clothing)),
-                                                Function(preview_outfit)
+                                                    Function(preview_restore, cloth), # Remove the hovered outfit from the demo outfit and focus on the selected item if any.
+                                                    If(selected_clothing is not None, Function(update_outfit_color, selected_clothing)),
+                                                    Function(preview_outfit)
                                                 ]
                         frame:
                             #THIS IS WHERE SELECTED ITEM OPTIONS ARE SHOWN
@@ -468,19 +467,16 @@ init 2:
                                             sensitive outfit_valid_check()
 
                                             action [
-
                                                 Function(update_outfit_color, selected_clothing), #Make sure color is updated
                                                 Function(replace_cloth, selected_clothing),
                                                 Function(preview_outfit) # NOTE: We are no longer interested in the demo outfit so view the final outfit, starting_outfit
-
-                                                ]
+                                            ]
 
                                             hovered [
                                                 Function(preview_apply, selected_clothing),
                                                 Function(update_outfit_color, selected_clothing),
                                                 Function(preview_outfit)
-
-                                                ]
+                                            ]
 
                                     frame:
                                         background "#888888"
@@ -557,12 +553,12 @@ init 2:
                                                                         sensitive True
                                                                         if selected_colour == "colour_pattern":
                                                                             action [
-                                                                            SetField(selected_clothing,"colour_pattern",[current_r,current_g,current_b,current_a]),
-                                                                            SetScreenVariable("selected_colour","colour"),
-                                                                            SetScreenVariable("current_r",selected_clothing.colour[0]),
-                                                                            SetScreenVariable("current_g",selected_clothing.colour[1]),
-                                                                            SetScreenVariable("current_b",selected_clothing.colour[2]),
-                                                                            SetScreenVariable("current_a",selected_clothing.colour[3])
+                                                                                SetField(selected_clothing,"colour_pattern",[current_r,current_g,current_b,current_a]),
+                                                                                SetScreenVariable("selected_colour","colour"),
+                                                                                SetScreenVariable("current_r",selected_clothing.colour[0]),
+                                                                                SetScreenVariable("current_g",selected_clothing.colour[1]),
+                                                                                SetScreenVariable("current_b",selected_clothing.colour[2]),
+                                                                                SetScreenVariable("current_a",selected_clothing.colour[3])
                                                                             ]
                                                                         else:
                                                                             action ToggleScreenVariable("color_selection")
@@ -590,12 +586,12 @@ init 2:
                                                                             sensitive True
                                                                             if selected_colour == "colour":
                                                                                 action [
-                                                                                SetField(selected_clothing,"colour",[current_r,current_g,current_b,current_a]),
-                                                                                SetScreenVariable("selected_colour","colour_pattern"),
-                                                                                SetScreenVariable("current_r",selected_clothing.colour_pattern[0]),
-                                                                                SetScreenVariable("current_g",selected_clothing.colour_pattern[1]),
-                                                                                SetScreenVariable("current_b",selected_clothing.colour_pattern[2]),
-                                                                                SetScreenVariable("current_a",selected_clothing.colour_pattern[3])
+                                                                                    SetField(selected_clothing,"colour",[current_r,current_g,current_b,current_a]),
+                                                                                    SetScreenVariable("selected_colour","colour_pattern"),
+                                                                                    SetScreenVariable("current_r",selected_clothing.colour_pattern[0]),
+                                                                                    SetScreenVariable("current_g",selected_clothing.colour_pattern[1]),
+                                                                                    SetScreenVariable("current_b",selected_clothing.colour_pattern[2]),
+                                                                                    SetScreenVariable("current_a",selected_clothing.colour_pattern[3])
                                                                                 ]
                                                                             else:
                                                                                 action ToggleScreenVariable("color_selection")
@@ -986,25 +982,23 @@ init 2:
 
                                                             action [ # NOTE: Left click makes more sense for selection than right clicking
 
-                                                            SetScreenVariable("selected_from_outfit", cloth),
-                                                            SetScreenVariable("category_selected", get_category(cloth)),
-                                                            SetScreenVariable("selected_clothing", cloth),
-                                                            Function(preview_apply, cloth),
-                                                            #Function(preview_restore, cloth),
-                                                            Function(preview_outfit),
-                                                            SetScreenVariable("current_r",cloth.colour[0]),
-                                                            SetScreenVariable("current_g",cloth.colour[1]),
-                                                            SetScreenVariable("current_b",cloth.colour[2]),
-                                                            SetScreenVariable("current_a",cloth.colour[3]),
+                                                                SetScreenVariable("selected_from_outfit", cloth),
+                                                                SetScreenVariable("category_selected", get_category(cloth)),
+                                                                SetScreenVariable("selected_clothing", cloth),
+                                                                Function(preview_apply, cloth),
 
+                                                                #Function(preview_restore, cloth),
+                                                                SetScreenVariable("current_r",cloth.colour[0]),
+                                                                SetScreenVariable("current_g",cloth.colour[1]),
+                                                                SetScreenVariable("current_b",cloth.colour[2]),
+                                                                SetScreenVariable("current_a",cloth.colour[3]),
 
-                                                            Function(preview_outfit) # Make sure it is showing the correct outfit during changes, demo_outfit is a copy of starting_outfit
-
+                                                                Function(preview_outfit) # Make sure it is showing the correct outfit during changes, demo_outfit is a copy of starting_outfit
                                                             ]
                                                             alternate [
-                                                            Function(item_outfit.remove_clothing, cloth),
-                                                            Function(demo_outfit.remove_clothing, cloth),
-                                                            Function(preview_outfit)
+                                                                Function(item_outfit.remove_clothing, cloth),
+                                                                Function(demo_outfit.remove_clothing, cloth),
+                                                                Function(preview_outfit)
                                                             ]
                                                             xalign 0.5
                                                             xfill True
@@ -1061,9 +1055,9 @@ init 2:
                                                 xfill True
 
                                                 action [
-                                                Function(custom_log_outfit, item_outfit, outfit_class = outfit_class_selected,
-                                                wardrobe_name = selected_xml),
-                                                Function(renpy.notify, "Outfit exported to [selected_xml]")
+                                                    Function(custom_log_outfit, item_outfit, outfit_class = outfit_class_selected,
+                                                    wardrobe_name = selected_xml),
+                                                    Function(renpy.notify, "Outfit exported to [selected_xml]")
                                                 ]
                                             textbutton "Type: [outfit_class_selected]":
                                                 xfill True
@@ -1099,10 +1093,39 @@ init 2:
                                                     xsize 90
                                                     ysize 45
                                                 bar:
-                                                    adjustment ui.adjustment(range = 15, value = slut_generation, step = 1, changed = update_slut_generation)
+                                                    adjustment ui.adjustment(range = 12, value = slut_generation, step = 1, changed = update_slut_generation)
                                                     xfill True
                                                     ysize 45
                                                     style style.slider
+
+                                    if outfit_builder and len(outfit_builder.get_hate_list()) > 0:
+                                        frame:
+                                            background "#888888"
+                                            xsize 250
+                                            vbox:
+                                                spacing 0
+                                                frame:
+                                                    background "#000080"
+                                                    xsize 240                                                   
+                                                    padding [1,1]
+                                                    text "Hates:" style "serum_text_style_traits"
+                                                frame:
+                                                    background "#888888"
+                                                    yfill True
+                                                    xpos 0
+                                                    xsize 240
+                                                    viewport:
+                                                        draggable True
+                                                        mousewheel True
+                                                        yfill True
+                                                        xsize 230
+                                                        vbox:
+                                                            for pref in outfit_builder.get_hate_list():
+                                                                frame:
+                                                                    background "#000080"
+                                                                    xsize 235
+                                                                    padding [1,1]
+                                                                    text pref style "serum_text_style_traits"
 
                                 vbox:
 
@@ -1151,9 +1174,9 @@ init 2:
 
 
                                                 action [
-                                                SensitiveIf(mannequin != "mannequin"),
-                                                ToggleScreenVariable("mannequin_poser"),
-                                                If(import_selection or mannequin_selection, [SetScreenVariable("import_selection", False), SetScreenVariable("mannequin_selection", False)])
+                                                    SensitiveIf(mannequin != "mannequin"),
+                                                    ToggleScreenVariable("mannequin_poser"),
+                                                    If(import_selection or mannequin_selection, [SetScreenVariable("import_selection", False), SetScreenVariable("mannequin_selection", False)])
                                                 ]
 
                                     if import_selection:
@@ -1177,7 +1200,7 @@ init 2:
                                                                 hover_background "#4f7ad6"
 
                                                             action [
-                                                            Show("import_outfit_manager", None, target_wardrobe, n)
+                                                                Show("import_outfit_manager", None, target_wardrobe, n)
                                                             ]
                                                             alternate [ #Right clicking selects the path that outfits should be exported to
                                                             SetVariable("selected_xml", n)
@@ -1199,24 +1222,26 @@ init 2:
                                                         xalign 0.5
 
                                                         action [
-                                                        SetScreenVariable("mannequin", "mannequin")
+                                                            SetScreenVariable("mannequin", "mannequin"),
+                                                            SetScreenVariable("outfit_builder", WardrobeBuilder(None)),
+                                                            Function(preview_outfit)
                                                         ]
-                                                    for room in list_of_places:
-                                                        for person in room.people:
-                                                            textbutton person.name:
-                                                                style "textbutton_no_padding_highlight"
-                                                                text_style "serum_text_style"
-                                                                xfill True
-                                                                xalign 0.5
+                                                    for person in sorted(known_people_in_the_game(), key = lambda x: x.name):
+                                                        textbutton person.name:
+                                                            style "textbutton_no_padding_highlight"
+                                                            text_style "serum_text_style"
+                                                            xfill True
+                                                            xalign 0.5
 
-                                                                if mannequin == person:
-                                                                    background "#4f7ad6"
-                                                                    hover_background "#4f7ad6"
+                                                            if mannequin == person:
+                                                                background "#4f7ad6"
+                                                                hover_background "#4f7ad6"
 
-                                                                action [
+                                                            action [
                                                                 SetScreenVariable("mannequin", person),
+                                                                SetScreenVariable("outfit_builder", WardrobeBuilder(person)),
                                                                 Function(preview_outfit)
-                                                                ]
+                                                            ]
 
                                     if mannequin_poser:
                                         frame:
