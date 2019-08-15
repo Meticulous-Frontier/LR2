@@ -6,6 +6,16 @@ init 5 python:
     opinions_list.insert(15, "the colour purple")
     opinions_list.insert(15, "the colour white")
 
+    # generate a more useable default color palette
+    if len(persistent.colour_palette) == 10:
+        persistent.colour_palette = [
+            [.20, .29, .70, .95],  [0, .45, .73, .95], [.26, .49, .76, .95], [.89, .65, .34, .95], [.96, .77, .19, .95], [.98, .92, .36, .95],
+            [.33, .10, .06, .95], [.80, .26, .04, .95], [.99, .42, .52, .95], [.87, .44, .63, .95], [1, .41, .71, .95], [1, .73, .85, .95],
+            [.29, .32, .12, .95], [.18, .54, .34, .95], [.0, .8, .6, .95], [.41, .16, .38, .95], [.45, .31, .59, .95], [.71, .4, .85, .95],
+            [.95, .95, .95, .95], [.15, .15, .15, .95],
+            [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1]    # allow for 6 unused userdefinable colors
+        ]
+
     class WardrobeBuilder():
         preferences = {}
         preferences["skimpy outfits"] = {}
@@ -43,30 +53,37 @@ init 5 python:
 
         color_prefs = {}
         color_prefs["the colour blue"] = {}
-        color_prefs["the colour blue"]["denim"] = [.08, .38, .74, .95]
+        color_prefs["the colour blue"]["violet blue"] = [.20, .29, .70, .95]
         color_prefs["the colour blue"]["french blue"] = [0, .45, .73, .95]
+        color_prefs["the colour blue"]["tufts blue"] = [.26, .49, .76, .95]
         color_prefs["the colour yellow"] = {}
         color_prefs["the colour yellow"]["indian yellow"] = [.89, .65, .34, .95]
+        color_prefs["the colour yellow"]["saffron"] = [.96, .77, .19, .95]
         color_prefs["the colour yellow"]["corn"] = [.98, .92, .36, .95]
         color_prefs["the colour red"] = {}
         color_prefs["the colour red"]["bordeaux red"] = [.33, .10, .06, .95]
         color_prefs["the colour red"]["sinopia"] = [.80, .26, .04, .95]
+        color_prefs["the colour red"]["wild strawberry"] = [.99, .42, .52, .95]
         color_prefs["the colour pink"] = {}
+        color_prefs["the colour pink"]["thulian pink"] = [.87, .44, .63, .95]
         color_prefs["the colour pink"]["hot pink"] = [1, .41, .71, .95]
         color_prefs["the colour pink"]["cotton candy"] = [1, .73, .85, .95]
         color_prefs["the colour black"] = {}
         color_prefs["the colour black"]["midnight black"] = [.15, .15, .15, .95]
+        color_prefs["the colour black"]["warm black"] = [0, .26, .36, .95]
         color_prefs["the colour black"]["charcoal"] = [.21, .27, .34, .95]
         color_prefs["the colour green"] = {}
         color_prefs["the colour green"]["army green"] = [.29, .32, .12, .95]
         color_prefs["the colour green"]["sea green"] = [.18, .54, .34, .95]
+        color_prefs["the colour green"]["caribbean green"] = [.0, .8, .6, .95]
         color_prefs["the colour purple"] = {}
+        color_prefs["the colour purple"]["palatinate purple"] = [.41, .16, .38, .95]
         color_prefs["the colour purple"]["dark lavender"] = [.45, .31, .59, .95]
         color_prefs["the colour purple"]["rich lilac"] = [.71, .4, .85, .95]
         color_prefs["the colour white"] = {}
-        color_prefs["the colour white"]["bright white"] = [1, 1, 1, .95]
         color_prefs["the colour white"]["white smoke"] = [.95, .95, .95, .95]
         color_prefs["the colour white"]["ghost white"] = [.97, .97, 1, .95]
+        color_prefs["the colour white"]["bright white"] = [1, 1, 1, .95]
         #color_prefs[""][""] = [, , , ]
 
         earings_only_list = [chandelier_earings, gold_earings, modern_glasses]

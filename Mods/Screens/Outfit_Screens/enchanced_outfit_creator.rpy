@@ -237,7 +237,6 @@ init -1 python:
 init 2:
 
     $ selected_xml = "Exported_Wardrobe.xml"
-    $ palette_grid_size = 1
     python:
         def custom_log_outfit(the_outfit, outfit_class = "FullSets", wardrobe_name = "Exported_Wardrobe"): #NOTE: This is just a version of the default log_outfit that does not append .xml to the file name
             file_path = os.path.abspath(os.path.join(config.basedir, "game"))
@@ -285,15 +284,8 @@ init 2:
                 if not cloth.is_extension:
                     ET.SubElement(accessory_element,"Item", item_dict)
 
-
             indent(tree_root)
             wardrobe_tree.write(file_name,encoding="UTF-8")
-
-        def add_palette(palette_grid_size): # Conceptual
-            while len(persistent.colour_palette) < palette_grid_size*10:
-                persistent.colour_palette.append([1,1,1,1])
-            palette_grid_size = len(persistent.colour_palette)/10
-
 
 init 2:
     screen outfit_creator(starting_outfit, outfit_type = "full"): ##Pass a completely blank outfit instance for a new outfit, or an already existing instance to load an old one.| This overrides the default outfit creation screen
@@ -618,7 +610,7 @@ init 2:
                                                     hbox:
                                                         spacing 5
                                                         if color_selection:
-                                                            vbox:
+                                                            hbox:
                                                                 spacing 5
                                                                 grid 2 2:
                                                                     xfill True
@@ -632,14 +624,12 @@ init 2:
                                                                                 hovered SetScreenVariable("bar_value", "current_r")
 
                                                                                 if bar_select == 1:
-                                                                                    input default current_r length 4 changed colour_changed_bar allow ".0123456789" style "serum_text_style"
+                                                                                    input default current_r length 4 changed colour_changed_bar allow ".0123456789" style "serum_text_style" size 16
                                                                                 else:
-                                                                                    text "Red "+ "%.2f" % current_r style "serum_text_style" yalign 0.5
+                                                                                    text "R "+ "%.2f" % current_r style "serum_text_style" yalign 0.5 size 16
                                                                                 xsize 75
                                                                                 ysize 45
-
                                                                             bar:
-
                                                                                 adjustment ui.adjustment(range = 1.00, value = current_r, step = 0.1, changed = colour_changed_bar)
                                                                                 xfill True
                                                                                 ysize 45
@@ -658,14 +648,12 @@ init 2:
                                                                                 hovered SetScreenVariable("bar_value", "current_g")
 
                                                                                 if bar_select == 2:
-                                                                                    input default current_g length 4 changed colour_changed_bar allow ".0123456789" style "serum_text_style"
+                                                                                    input default current_g length 4 changed colour_changed_bar allow ".0123456789" style "serum_text_style" size 16
                                                                                 else:
-                                                                                    text "Green "+ "%.2f" % current_g style "serum_text_style" yalign 0.5
+                                                                                    text "G "+ "%.2f" % current_g style "serum_text_style" yalign 0.5 size 16
                                                                                 xsize 75
                                                                                 ysize 45
-
                                                                             bar:
-
                                                                                 adjustment ui.adjustment(range = 1.00, value = current_g, step = 0.1, changed = colour_changed_bar)
                                                                                 xfill True
                                                                                 ysize 45
@@ -683,15 +671,13 @@ init 2:
                                                                                 hovered SetScreenVariable("bar_value", "current_b")
 
                                                                                 if bar_select == 3:
-                                                                                    input default current_b length 4 changed colour_changed_bar allow ".0123456789" style "serum_text_style"
+                                                                                    input default current_b length 4 changed colour_changed_bar allow ".0123456789" style "serum_text_style" size 16
                                                                                 else:
-                                                                                    text "Blue "+ "%.2f" % current_b style "serum_text_style" yalign 0.5
+                                                                                    text "B "+ "%.2f" % current_b style "serum_text_style" yalign 0.5 size 16
 
                                                                                 xsize 75
                                                                                 ysize 45
-
                                                                             bar:
-
                                                                                 adjustment ui.adjustment(range = 1.00, value = current_b, step = 0.1, changed = colour_changed_bar)
                                                                                 xfill True
                                                                                 ysize 45
@@ -710,9 +696,9 @@ init 2:
                                                                                 hovered SetScreenVariable("bar_value", "current_a")
 
                                                                                 if bar_select == 4:
-                                                                                    input default current_a length 4 changed colour_changed_bar allow ".0123456789" style "serum_text_style"
+                                                                                    input default current_a length 4 changed colour_changed_bar allow ".0123456789" style "serum_text_style" size 16
                                                                                 else:
-                                                                                    text "Alpha "+ "%.2f" % current_a style "serum_text_style" yalign 0.5
+                                                                                    text "A "+ "%.2f" % current_a style "serum_text_style" yalign 0.5 size 16
                                                                                 xsize 75
                                                                                 ysize 45
 
@@ -725,34 +711,33 @@ init 2:
 
                                                                                 hovered SetScreenVariable("bar_value", "current_a")
                                                                                 unhovered [SetScreenVariable("current_a",__builtin__.round(current_a,2))]
-                                                                viewport:
-                                                                    xfill True
-                                                                    draggable True
-                                                                    mousewheel "horizontal"
-                                                                    ysize 55
-                                                                    hbox:
-                                                                        spacing 5
-                                                                        for count, a_colour in __builtin__.enumerate(persistent.colour_palette):
-                                                                            frame:
-                                                                                background "#aaaaaa"
-                                                                                button:
-                                                                                    background Color(rgb=(a_colour[0], a_colour[1], a_colour[2]))
-                                                                                    xysize (40,40)
-                                                                                    sensitive True
-                                                                                    xalign True
-                                                                                    yalign True
-                                                                                    action [
+                                                    if color_selection:
+                                                        for block_count, colour_list in __builtin__.enumerate(split_list_in_blocks(persistent.colour_palette, 13)):
+                                                            hbox:
+                                                                spacing 0
+                                                                yanchor (block_count * .1)
 
-                                                                                    SetScreenVariable("current_r", a_colour[0]),
-                                                                                    SetScreenVariable("current_g", a_colour[1]),
-                                                                                    SetScreenVariable("current_b", a_colour[2]),
-                                                                                    SetScreenVariable("current_a", a_colour[3]),
-                                                                                    Function(update_outfit_color, selected_clothing),
-                                                                                    Function(preview_outfit)
-                                                                                    ]
-                                                                                    alternate [
-                                                                                    Function(update_colour_palette, count, current_r, current_g, current_b, current_a)
-                                                                                    ]
+                                                                for count, a_colour in __builtin__.enumerate(colour_list):
+                                                                    frame:
+                                                                        background "#aaaaaa"
+                                                                        padding [3, 3]
+                                                                        button:
+                                                                            background Color(rgb=(a_colour[0], a_colour[1], a_colour[2]))
+                                                                            xysize (38, 38)
+                                                                            sensitive True
+                                                                            xalign True
+                                                                            yalign True
+                                                                            action [
+                                                                                SetScreenVariable("current_r", a_colour[0]),
+                                                                                SetScreenVariable("current_g", a_colour[1]),
+                                                                                SetScreenVariable("current_b", a_colour[2]),
+                                                                                SetScreenVariable("current_a", a_colour[3]),
+                                                                                Function(update_outfit_color, selected_clothing),
+                                                                                Function(preview_outfit)
+                                                                            ]
+                                                                            alternate [
+                                                                                Function(update_colour_palette, count, current_r, current_g, current_b, current_a)
+                                                                            ]
                                                 # vbox:
                                                 #     spacing 5
                                                 #     hbox:
