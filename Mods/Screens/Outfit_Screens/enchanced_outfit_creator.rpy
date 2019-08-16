@@ -736,7 +736,7 @@ init 2:
                                                                                 Function(preview_outfit)
                                                                             ]
                                                                             alternate [
-                                                                                Function(update_colour_palette, count, current_r, current_g, current_b, current_a)
+                                                                                Function(update_colour_palette, count + (block_count * 13), current_r, current_g, current_b, current_a)
                                                                             ]
                                                 # vbox:
                                                 #     spacing 5
