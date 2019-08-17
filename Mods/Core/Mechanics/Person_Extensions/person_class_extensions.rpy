@@ -108,6 +108,10 @@ init -1:
         Person.is_employee = is_employee
 
         def create_home_location(self):
+            # check if we already have a home, if so exit
+            if self.home:
+                return
+
             self.home = Room(name+"'s home", name+"'s home", [], apartment_background, [],[],[],False,[0.5,0.5], visible = False, hide_in_known_house_map = False)
             self.home.link_locations_two_way(downtown)
             self.home.add_object(make_wall())
@@ -115,6 +119,9 @@ init -1:
             self.home.add_object(make_bed())
             self.home.add_object(make_window())
             list_of_places.append(self.home)
+
+            # set the person schedule
+            self.schedule = {0:self.home,1:None,2:None,3:None,4:self.home}
             return
 
         Person.create_home_location = create_home_location
