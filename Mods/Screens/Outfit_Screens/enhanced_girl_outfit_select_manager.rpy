@@ -15,7 +15,7 @@ init 2:
                 ysize 750
                 hbox:
                     vbox:
-                        textbutton "Full Outfits"  action NullAction() style "textbutton_style" text_style "textbutton_text_style" text_text_align 0.5 text_xalign 0.5
+                        text "Full Outfits" style "menu_text_style" size 30
                         viewport:
                             scrollbars "vertical"
                             ysize 750
