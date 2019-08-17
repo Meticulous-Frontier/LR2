@@ -180,8 +180,9 @@ init 5 python:
             if item:
                 outfit.add_feet(item.get_copy(), [color_feet[0] * .8, color_feet[1] * .8, color_feet[2] * .8, color_feet[3]])
 
-            return outfit
+            outfit.name = self.get_name_classification(points) + self.get_cloting_name(outfit.upper_body, 2) + " and " + self.get_cloting_name(outfit.lower_body, 2)
 
+            return outfit
 
         def build_underwear(self, points = 0):
             outfit = Outfit("Underwear")
@@ -224,6 +225,8 @@ init 5 python:
             self.add_accessory_from_list(outfit, self.build_filter_list(bracelet_list, points), 3, color_upper)
             self.add_accessory_from_list(outfit, self.build_filter_list(rings_list, points), 3, color_lower)
             self.add_accessory_from_list(outfit, self.build_filter_list(neckwear_list, points), 3, color_upper)
+
+            outfit.name = self.get_name_classification(points) + self.get_cloting_name(outfit.upper_body, 1) + " and " + self.get_cloting_name(outfit.lower_body, 1)
 
             return outfit
 
@@ -303,3 +306,18 @@ init 5 python:
 
             renpy.random.shuffle(color_list)
             return get_random_from_weighted_list([x for x in color_list if x[1] > 0])
+
+        def get_name_classification(self, points):
+            if points < 2:
+                return "Conservative "
+            if points < 4:
+                return "Relaxed "
+            if points < 6:
+                return "Sexy "
+            return "Slutty "
+        
+        def get_cloting_name(self, items, layer):
+            item = filter(lambda x: x.layer == layer, items)
+            if (item):
+                return item[0].name
+            return "skin"
