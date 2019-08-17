@@ -33,7 +33,7 @@ label downtown_bar_drink_label():
 
         python:
 
-            new_person = create_random_person()
+            new_person = create_random_person(create_home_location = False)
             mc.location.add_person(new_person)
 
         "The [downtown_bar.formalName] is a desolate place to be..."
@@ -68,6 +68,7 @@ label downtown_bar_drink_label():
             $ the_person = person_choice
 
         if the_person.mc_title == "Stranger": # First time introduction that does not return to talk_person
+            $ the_person.create_home_location()
             call person_introduction(the_person) from _call_person_introduction_downtown_bar_drink
 
         "Since there's no bartender in town you grab a glass of the finest tap water and treat [the_person.title] to a once- in a lifetime experience."
