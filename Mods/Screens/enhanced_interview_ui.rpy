@@ -1,5 +1,48 @@
-init -1:
-    screen interview_ui(the_candidates,count):
+init 1:
+    python:
+        def number_of_cadidates():
+            count = 3 #Num of people to generate, by default is 3. Changed with some policies
+            if recruitment_batch_three_policy.is_owned():
+                count = 10
+            elif recruitment_batch_two_policy.is_owned():
+                count = 6
+            elif recruitment_batch_one_policy.is_owned():
+                count = 4
+            return count
+
+        def number_of_opinions_to_reveal():
+            reveal_count = 0
+            if recruitment_knowledge_one_policy.is_owned():
+                reveal_count += 2
+            if recruitment_knowledge_two_policy.is_owned():
+                reveal_count += 2
+            if recruitment_knowledge_three_policy.is_owned():
+                reveal_count += 1
+            if recruitment_knowledge_four_policy.is_owned():
+                reveal_count += 1
+            return reveal_count
+
+        def generate_candidates(count):
+            candidates = []
+            reveal_count = number_of_opinions_to_reveal()
+            reveal_sex = recruitment_knowledge_three_policy.is_owned()
+
+            for x in range(0, count): 
+                candidates.append(make_person(create_home_location = False))
+
+            for a_candidate in candidates:
+                for x in __builtin__.range(0,reveal_count): #Reveal all of their opinions based on our policies.
+                    a_candidate.discover_opinion(a_candidate.get_random_opinion(include_known = False, include_sexy = reveal_sex),add_to_log = False) #Get a random opinion and reveal it.
+
+            #NOTE: count is given +1 because the screen tries to pre-calculate the result of button presses. This leads to index out-of-bounds, unless we pad it with an extra character (who will not be reached).
+            candidates.append("dummy")
+
+            show_candidate(candidates[0]) #Show the first candidate, updates are taken care of by actions within the screen.
+
+            return candidates
+
+init 2:
+    screen interview_ui(the_candidates, count):
         default current_selection = 0
         default the_candidate = the_candidates[current_selection]
         vbox:
@@ -162,3 +205,76 @@ init -1:
                 idle "/tutorial_images/hiring_tutorial_"+__builtin__.str(mc.business.event_triggers_dict["hiring_tutorial"])+".png"
                 hover "/tutorial_images/hiring_tutorial_"+__builtin__.str(mc.business.event_triggers_dict["hiring_tutorial"])+".png"
                 action Function(mc.business.advance_tutorial,"hiring_tutorial")
+
+init 1500 python:
+    config.label_overrides["interview_action_description"] = "interview_action_description_low_mem_usage"
+
+label interview_action_description_low_mem_usage:
+    $ count = number_of_cadidates()
+    $ interview_cost = 50
+    "Bringing in [count] people for an interview will cost $[interview_cost]. Do you want to spend time interviewing potential employees?"
+    menu:
+        "Yes, I'll pay the cost. -$[interview_cost]":
+            $ mc.business.funds += -interview_cost
+            $ renpy.scene("Active")
+            hide screen main_ui #NOTE: We have to hide all of these screens because we are using a fake (aka. non-screen) background for this. We're doing that so we can use the normal draw_person call for them.
+            hide screen phone_hud_ui
+            hide screen business_ui
+            hide screen goal_hud_ui
+            show bg paper_menu_background #Show a paper background for this scene.
+            $ candidates = generate_candidates(count)
+            call screen interview_ui(candidates,count)
+            $ renpy.scene()
+            show screen phone_hud_ui
+            show screen business_ui
+            show screen goal_hud_ui
+            show screen main_ui
+            $ renpy.scene("Active")
+            $ renpy.show(mc.location.name,what=mc.location.background_image)
+            if not _return == "None":
+                python:
+                    new_person = _return
+                    new_person.event_triggers_dict["employed_since"] = day
+                    mc.business.listener_system.fire_event("new_hire", the_person = new_person)
+                    new_person.special_role.append(employee_role)
+                    new_person.create_home_location()
+
+                "You complete the nessesary paperwork and hire [_return.name]. What division do you assign them to?"
+                menu:
+                    "Research and Development.":
+                        $ mc.business.add_employee_research(new_person)
+                        $ mc.business.r_div.add_person(new_person)
+                        $ new_person.set_work([1,2,3], mc.business.r_div)
+
+                    "Production.":
+                        $ mc.business.add_employee_production(new_person)
+                        $ mc.business.p_div.add_person(new_person)
+                        $ new_person.set_work([1,2,3], mc.business.p_div)
+
+                    "Supply Procurement.":
+                        $ mc.business.add_employee_supply(new_person)
+                        $ mc.business.s_div.add_person(new_person)
+                        $ new_person.set_work([1,2,3], mc.business.s_div)
+
+                    "Marketing.":
+                        $ mc.business.add_employee_marketing(new_person)
+                        $ mc.business.m_div.add_person(new_person)
+                        $ new_person.set_work([1,2,3], mc.business.m_div)
+
+                    "Human Resources.":
+                        $ mc.business.add_employee_hr(new_person)
+                        $ mc.business.h_div.add_person(new_person)
+                        $ new_person.set_work([1,2,3], mc.business.h_div)
+
+                python: #Establish their titles. TODO: Have this kind of stuff handled in an interview scene.
+                    new_person.set_title(get_random_title(new_person))
+                    new_person.set_possessive_title(get_random_possessive_title(new_person))
+                    new_person.set_mc_title(get_random_player_title(new_person))
+
+            else:
+                "You decide against hiring anyone new for now."
+
+            call advance_time from _call_advance_time_interview_ui
+        "Nevermind.":
+            pass
+    return

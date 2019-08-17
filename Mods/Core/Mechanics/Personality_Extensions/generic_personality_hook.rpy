@@ -9,7 +9,7 @@ init 5 python:
 
 init -1 python:
     # This will be called in game when a person is created orginal function in script.rpy
-    def make_person():
+    def make_person(create_home_location = True):
         split_proportion = 20 #1/5 characters generated will be a premade character.
         return_character = None
         if renpy.random.randint(1,100) < split_proportion:
@@ -17,7 +17,7 @@ init -1 python:
 
         if return_character is None: #Either we aren't getting a premade, or we are out of them.
             # Use larger height range of person object (not full)
-            return_character = create_random_person(height = 0.825 + (renpy.random.random()/7))
+            return_character = create_random_person(height = 0.825 + (renpy.random.random()/7), create_home_location = create_home_location)
 
         update_random_person(return_character)
         update_person_roles(return_character)
