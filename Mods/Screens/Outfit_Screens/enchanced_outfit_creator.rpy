@@ -235,8 +235,6 @@ init -1 python:
             if item in neckwear_list:
                 return "Neckwear"
 init 2:
-
-    $ selected_xml = "Exported_Wardrobe.xml"
     python:
         def custom_log_outfit(the_outfit, outfit_class = "FullSets", wardrobe_name = "Exported_Wardrobe"): #NOTE: This is just a version of the default log_outfit that does not append .xml to the file name
             file_path = os.path.abspath(os.path.join(config.basedir, "game"))
@@ -299,8 +297,7 @@ init 2:
         default mannequin_selection = False
         default mannequin_poser = False
 
-        if the_person is not None:
-            default selected_xml = the_person.wardrobe
+        default selected_xml = "Exported_Wardrobe.xml"
         default cloth_pattern_selection = True
         default transparency_selection = True
         default outfit_stats = True
@@ -1036,34 +1033,34 @@ init 2:
                                         xsize 250
                                         vbox:
                                             xalign 0.5
-                                            textbutton ("Export to [selected_xml]" if selected_xml is not the_person.wardrobe else "Add to [selected_xml.name]"):
+                                            textbutton ("Export to [selected_xml]" if mannequin == "mannequin" else "Add to [mannequin.name] wardrobe"):
                                                 style "textbutton_no_padding_highlight"
                                                 text_style "serum_text_style"
                                                 xfill True
 
-                                                if selected_xml is not the_person.wardrobe:
+                                                if mannequin == "mannequin":
                                                     action [
                                                         Function(custom_log_outfit, item_outfit, outfit_class = outfit_class_selected,
                                                         wardrobe_name = selected_xml),
-                                                        Function(renpy.notify, "Outfit exported to [selected_xml]")
+                                                        Function(renpy.notify, "Outfit exported to " + selected_xml + "]")
                                                     ]
 
                                                 else:
                                                     if outfit_type == "full":
                                                         action [
-                                                            Function(the_person.wardrobe.add_outfit, demo_outfit.get_copy()),
-                                                            Function(renpy.notify, "Outfit added to [the_person.wardrobe.name]")
+                                                            Function(mannequin.wardrobe.add_outfit, demo_outfit.get_copy()),
+                                                            Function(renpy.notify, "Outfit added to " + mannequin.name + " wardrobe")
                                                         ]
                                                     elif outfit_type == "over":
                                                         action [
-                                                            Function(the_person.wardrobe.add_overwear_set, demo_outfit.get_copy()),
-                                                            Function(renpy.notify, "Outfit added to [the_person.wardrobe.name]")
+                                                            Function(mannequin.wardrobe.add_overwear_set, demo_outfit.get_copy()),
+                                                            Function(renpy.notify, "Outfit added to " + mannequin.name + " wardrobe")
                                                         ]
 
                                                     elif outfit_type == "under":
                                                         action [
-                                                            Function(the_person.wardrobe.add_underwear_set, demo_outfit.get_copy()),
-                                                            Function(renpy.notify, "Outfit added to [the_person.wardrobe.name]")
+                                                            Function(mannequin.wardrobe.add_underwear_set, demo_outfit.get_copy()),
+                                                            Function(renpy.notify, "Outfit added to " + mannequin.name + " wardrobe")
                                                         ]
 
                                             textbutton "Type: [outfit_class_selected]":
