@@ -138,7 +138,7 @@ init 5 python:
 
         def get_hate_list(self):
             item_list = []
-            for pref in self.preferences:
+            for pref in self.preferences.keys() + self.color_prefs.keys():
                 score = self.person.get_opinion_score(pref)
                 if score == -2:
                     item_list.append(pref)
