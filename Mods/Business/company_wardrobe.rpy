@@ -22,24 +22,30 @@ label append_company_wardrobe:
     menu:
         "Primary Color Red":
             python:
-                upper_color = [.6, .1, .1, .9]
-                under_color = [.9, .9, .9, .8]
-                upper_color_dim = [.55, .15, 0.1, .9]
+                upper_color = [.7, .1, .2, .95]
+                under_color = [.97, .97, 1, .95]
+                upper_color_dim = [.63, .09, 0.18, .95]
 
         "Primary Color Yellow":
             python:
-                upper_color = [.8, .7, .1, .9]
-                under_color = [.15, .15, .15, .8]                
-                upper_color_dim = [.7, .6, 0, .9]
+                upper_color = [.96, .77, .19, .95]
+                under_color = [.15, .15, .15, .95]                
+                upper_color_dim = [.87, .69, .17, .95]
 
         "Primary Color Blue":
             python:
-                upper_color = [.1, .15, .55, .9]
-                under_color = [.8, .7, .1, .8]                
-                upper_color_dim = [0, 0.05, .45, .9]
+                upper_color = [.17, .32, .75, .95]
+                under_color = [.87, .69, .17, .95]                
+                upper_color_dim = [0.15, 0.29, .68, .95]
+
+        "Primary Color White":
+            python:
+                upper_color = [.97, .97, 1, .95]
+                under_color = [.97, .97, 1, .95]
+                upper_color_dim = [.93, .93, 0.96, .95]
 
     python:
-        lower_color = [.1, .1, .1, .9]
+        lower_color = [.15, .15, .15, .95]
         uniform_mode = "under"
 
         normalu = Outfit("[mc.business.name] - Normal Underwear")
@@ -51,12 +57,16 @@ label append_company_wardrobe:
         normalu.add_upper(strapless_bra.get_copy(), under_color)
         normalu.add_lower(lace_panties.get_copy(), under_color)
         normalu.add_feet(high_socks.get_copy(), under_color)
+        normalu.add_accessory(blush.get_copy(), [0.76, 0.376, 0.368, 0.8])
+        normalu.add_accessory(lipstick.get_copy(), [0.6,0.1,0.1,0.8])
         mc.save_design(normalu, normalu.name, outfit_type = uniform_mode)
 
         normalu = Outfit("[mc.business.name] - Sexy Underwear")
         normalu.add_upper(lace_bra.get_copy(), under_color)
         normalu.add_lower(lace_panties.get_copy(), under_color)
         normalu.add_feet(thigh_highs.get_copy(), under_color)
+        normalu.add_accessory(blush.get_copy(), [0.76, 0.376, 0.368, 0.8])
+        normalu.add_accessory(lipstick.get_copy(), [0.6,0.1,0.1,0.8])
         mc.save_design(normalu, normalu.name, outfit_type = uniform_mode)
 
         normalu = Outfit("[mc.business.name] - Provocative Underwear")
@@ -103,7 +113,7 @@ label append_company_wardrobe:
         normalo = Outfit("[mc.business.name] - Relaxed Overwear")
         normalo.add_lower(pencil_skirt.get_copy(), lower_color)
         normalo.add_upper(lace_crop_top.get_copy(), upper_color)
-        normalo.add_feet(boot_heels.get_copy(), upper_color)
+        normalo.add_feet(sandle_heels.get_copy(), upper_color)
         mc.save_design(normalo, normalo.name, outfit_type = uniform_mode)
 
         normalo = Outfit("[mc.business.name] - Sexy Overwear")
