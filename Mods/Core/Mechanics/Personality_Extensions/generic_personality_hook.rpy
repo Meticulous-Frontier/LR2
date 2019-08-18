@@ -103,23 +103,32 @@ init -1 python:
         outfit_builder = WardrobeBuilder(person)
         slut_scores = [1, 3, 5, 6, 10, 12]
 
-        while len(base_wardrobe.outfits) > 8:
+        while len(base_wardrobe.outfits) > 7:
             base_wardrobe.remove_outfit(sorted(base_wardrobe.outfits, key = lambda x: x.slut_requirement)[renpy.random.randint(2,len(base_wardrobe.outfits)-1)])
 
         while len(base_wardrobe.outfits) < 6:    # add some generated outfits
             base_wardrobe.add_outfit(outfit_builder.build_outfit("FullSets", slut_scores[len(base_wardrobe.outfits)]))
 
-        while len(base_wardrobe.underwear_sets) > 8:
+        # add one generated outfit
+        base_wardrobe.add_outfit(outfit_builder.build_outfit("FullSets", 12))
+
+        while len(base_wardrobe.underwear_sets) > 7:
             base_wardrobe.remove_outfit(sorted(base_wardrobe.underwear_sets, key = lambda x: x.slut_requirement)[renpy.random.randint(2,len(base_wardrobe.underwear_sets)-1)])
 
         while len(base_wardrobe.underwear_sets) < 6:    # add some generated outfits
             base_wardrobe.add_underwear_set(outfit_builder.build_outfit("UnderwearSets", slut_scores[len(base_wardrobe.underwear_sets)]))
 
-        while len(base_wardrobe.overwear_sets) > 8:
+        # add one generated underwear
+        base_wardrobe.add_underwear_set(outfit_builder.build_outfit("UnderwearSets", 12))
+
+        while len(base_wardrobe.overwear_sets) > 7:
             base_wardrobe.remove_outfit(sorted(base_wardrobe.overwear_sets, key = lambda x: x.slut_requirement)[renpy.random.randint(2,len(base_wardrobe.overwear_sets)-1)])
 
         while len(base_wardrobe.overwear_sets) < 6:    # add some generated outfits
             base_wardrobe.add_overwear_set(outfit_builder.build_outfit("OverwearSets", slut_scores[len(base_wardrobe.overwear_sets)]))
+
+        # add one generated overwear
+        base_wardrobe.add_overwear_set(outfit_builder.build_outfit("OverwearSets", 12))
 
         person.wardrobe = base_wardrobe
         return
