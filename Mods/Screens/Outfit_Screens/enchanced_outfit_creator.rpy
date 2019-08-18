@@ -299,6 +299,8 @@ init 2:
         default mannequin_selection = False
         default mannequin_poser = False
 
+        if the_person is not None:
+            default selected_xml = the_person.wardrobe
         default cloth_pattern_selection = True
         default transparency_selection = True
         default outfit_stats = True
@@ -871,12 +873,12 @@ init 2:
                                             vbox:
                                                 frame:
                                                     background "#000080"
-                                                    xsize 250                                                   
+                                                    xsize 250
                                                     padding [1,1]
                                                     text "Sluttiness (Full Outfit): " + str(demo_outfit.slut_requirement) style "serum_text_style_traits"
                                                 frame:
                                                     background "#000080"
-                                                    xsize 250                                                   
+                                                    xsize 250
                                                     padding [1,1]
                                                     if demo_outfit.is_suitable_underwear_set():
                                                         text "Sluttiness (Underwear): " + str(demo_outfit.get_underwear_slut_score()) style "serum_text_style_traits"
@@ -884,7 +886,7 @@ init 2:
                                                         text "Sluttiness (Underwear): Invalid" style "serum_text_style_traits"
                                                 frame:
                                                     background "#000080"
-                                                    xsize 250                                                   
+                                                    xsize 250
                                                     padding [1,1]
                                                     if demo_outfit.is_suitable_overwear_set():
                                                         text "Sluttiness (Overwear): " + str(demo_outfit.get_overwear_slut_score()) style "serum_text_style_traits"
@@ -892,55 +894,55 @@ init 2:
                                                         text "Sluttiness (Overwear): Invalid" style "serum_text_style_traits"
                                                 frame:
                                                     background "#000080"
-                                                    xsize 250                                                   
+                                                    xsize 250
                                                     padding [1,1]
                                                     text "Tits Visible: " + str(demo_outfit.tits_visible()) style "serum_text_style_traits"
                                                 frame:
                                                     background "#000080"
-                                                    xsize 250                                                   
+                                                    xsize 250
                                                     padding [1,1]
                                                     text "Tits Usable: " + str(demo_outfit.tits_available()) style "serum_text_style_traits"
                                                 frame:
                                                     background "#000080"
-                                                    xsize 250                                                   
+                                                    xsize 250
                                                     padding [1,1]
                                                     text "Wearing a Bra: " + str(demo_outfit.wearing_bra()) style "serum_text_style_traits"
                                                 frame:
                                                     background "#000080"
-                                                    xsize 250                                                   
+                                                    xsize 250
                                                     padding [1,1]
                                                     text "Bra Covered: " + str(demo_outfit.bra_covered()) style "serum_text_style_traits"
                                                 frame:
                                                     background "#000080"
-                                                    xsize 250                                                   
+                                                    xsize 250
                                                     padding [1,1]
                                                     text "Pussy Visible: " + str(demo_outfit.vagina_visible()) style "serum_text_style_traits"
                                                 frame:
                                                     background "#000080"
-                                                    xsize 250                                                   
+                                                    xsize 250
                                                     padding [1,1]
                                                     text "Pussy Usable: " + str(demo_outfit.vagina_available()) style "serum_text_style_traits"
                                                 frame:
                                                     background "#000080"
-                                                    xsize 250                                                   
+                                                    xsize 250
                                                     padding [1,1]
                                                     text "Wearing Panties: " + str(demo_outfit.wearing_panties()) style "serum_text_style_traits"
                                                 frame:
                                                     background "#000080"
-                                                    xsize 250                                                   
+                                                    xsize 250
                                                     padding [1,1]
                                                     text "Panties Covered: " + str(demo_outfit.panties_covered()) style "serum_text_style_traits"
 
                                                 # DEBUG CODE TO SEE WHAT IS SELECTED WHEN WE CLICK AROUND
                                                 # frame:
                                                 #     background "#007000"
-                                                #     xsize 250                                                   
+                                                #     xsize 250
                                                 #     padding [1,1]
                                                 #     if (selected_from_outfit):
                                                 #         text "From outfit: " + selected_from_outfit.name style "serum_text_style_traits"
                                                 # frame:
                                                 #     background "#007000"
-                                                #     xsize 250                                                   
+                                                #     xsize 250
                                                 #     padding [1,1]
                                                 #     if (selected_clothing):
                                                 #         text "Seletect Item: " + selected_clothing.name style "serum_text_style_traits"
@@ -1026,7 +1028,7 @@ init 2:
 
                                                 action [
                                                     Return("Not_New"),
-                                                    Hide("mannequin"), 
+                                                    Hide("mannequin"),
                                                     Hide("outfit_creator")
                                                 ]
                                     frame:
@@ -1034,16 +1036,36 @@ init 2:
                                         xsize 250
                                         vbox:
                                             xalign 0.5
-                                            textbutton "Export to [selected_xml]":
+                                            textbutton ("Export to [selected_xml]" if selected_xml is not the_person.wardrobe else "Add to [selected_xml.name]"):
                                                 style "textbutton_no_padding_highlight"
                                                 text_style "serum_text_style"
                                                 xfill True
 
-                                                action [
-                                                    Function(custom_log_outfit, item_outfit, outfit_class = outfit_class_selected,
-                                                    wardrobe_name = selected_xml),
-                                                    Function(renpy.notify, "Outfit exported to [selected_xml]")
-                                                ]
+                                                if selected_xml is not the_person.wardrobe:
+                                                    action [
+                                                        Function(custom_log_outfit, item_outfit, outfit_class = outfit_class_selected,
+                                                        wardrobe_name = selected_xml),
+                                                        Function(renpy.notify, "Outfit exported to [selected_xml]")
+                                                    ]
+
+                                                else:
+                                                    if outfit_type == "full":
+                                                        action [
+                                                            Function(the_person.wardrobe.add_outfit, demo_outfit.get_copy()),
+                                                            Function(renpy.notify, "Outfit added to [the_person.wardrobe.name]")
+                                                        ]
+                                                    elif outfit_type == "over":
+                                                        action [
+                                                            Function(the_person.wardrobe.add_overwear_set, demo_outfit.get_copy()),
+                                                            Function(renpy.notify, "Outfit added to [the_person.wardrobe.name]")
+                                                        ]
+
+                                                    elif outfit_type == "under":
+                                                        action [
+                                                            Function(the_person.wardrobe.add_underwear_set, demo_outfit.get_copy()),
+                                                            Function(renpy.notify, "Outfit added to [the_person.wardrobe.name]")
+                                                        ]
+
                                             textbutton "Type: [outfit_class_selected]":
                                                 xfill True
                                                 style "textbutton_no_padding_highlight"
@@ -1091,7 +1113,7 @@ init 2:
                                                 spacing 0
                                                 frame:
                                                     background "#000080"
-                                                    xsize 240                                                   
+                                                    xsize 240
                                                     padding [1,1]
                                                     text "Hates:" style "serum_text_style_traits"
                                                 frame:
