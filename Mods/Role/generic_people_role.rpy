@@ -81,7 +81,7 @@ init 5 python:
     stop_follow_action = ActionMod("Stop following me.", stop_follow_requirement, "stop_follow", menu_tooltip = "Have the person stop following you.", allow_disable = False, category = "Generic People Actions")
 
     # Hire Person | Allows you to hire a person if they are not already hired. (Moves them to the appropriate division, no duplicates)
-    hire_person_action = ActionMod("Employ [the_person.title]\n Costs: $300", hire_person_requirement, "hire_person", menu_tooltip = "Hire the the person to work for you in your business. Costs $300", category = "Generic People Actions")
+    hire_person_action = ActionMod("Employ [the_person.title]", hire_person_requirement, "hire_person", menu_tooltip = "Hire the the person to work for you in your business.", category = "Generic People Actions")
     # Rename Person | Opens a menu that allows you to change first and last name plus a (non- appended) custom the_person.title
     rename_person_action = ActionMod("Rename [the_person.title]", rename_person_requirement, "rename_person", menu_tooltip = "Change the name of the person.", category = "Generic People Actions")
     # Spend the Night | Allows you to sleep in the home of a person you have increased the love stat.
@@ -147,15 +147,19 @@ label rename_person(person):
 
 # Hire Person Labels
 label hire_person(person):
-    if mc.business.funds < 300:
-        "Hiring [person.title] will cost you $300 and put you in debt due to low funds."
-    else:
-        "Hiring [person.title] will cost you $300, do you wish to proceed?"
+
+    python:
+        if mc.business.funds < person.calculate_base_salary():
+            renpy.say("", "Hiring [person.title] will cost you $" + str(person.calculate_base_salary()) + " and put you in debt due to low funds.")
+        else:
+            renpy.say("", "Hiring [person.title] will cost you $" + str(person.calculate_base_salary()) + ", do you wish to proceed?")
+
     menu:
         "Yes":
             pass
         "No":
             return
+
     "You complete the nessesary paperwork and hire [person.title]. What division do you assign them to?"
     menu:
         "Research and Development.":
@@ -185,7 +189,7 @@ label hire_person(person):
 
         "Back":
             return
-    $ mc.business.pay(-300)
+    $ mc.business.pay(- person.calculate_base_salary())
 
     $ person.event_triggers_dict["employed_since"] = day
     $ mc.business.listener_system.fire_event("new_hire", the_person = person)
