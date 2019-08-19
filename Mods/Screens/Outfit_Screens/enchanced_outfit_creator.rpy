@@ -49,6 +49,7 @@ init 10 python:
 
     def preview_outfit(outfit = "demo_outfit"):
 
+        renpy.scene("Active")
         cs = renpy.current_screen()
         if cs.scope["mannequin"] == "mannequin":
             renpy.show_screen("mannequin", cs.scope[outfit])
@@ -1048,18 +1049,18 @@ init 2:
                                                 else:
                                                     if outfit_type == "full":
                                                         action [
-                                                            Function(mannequin.wardrobe.add_outfit, demo_outfit.get_copy()),
+                                                            Function(mannequin.wardrobe.add_outfit, item_outfit.get_copy()),
                                                             Function(renpy.notify, "Outfit added to " + mannequin.name + " wardrobe")
                                                         ]
                                                     elif outfit_type == "over":
                                                         action [
-                                                            Function(mannequin.wardrobe.add_overwear_set, demo_outfit.get_copy()),
+                                                            Function(mannequin.wardrobe.add_overwear_set, item_outfit.get_copy()),
                                                             Function(renpy.notify, "Outfit added to " + mannequin.name + " wardrobe")
                                                         ]
 
                                                     elif outfit_type == "under":
                                                         action [
-                                                            Function(mannequin.wardrobe.add_underwear_set, demo_outfit.get_copy()),
+                                                            Function(mannequin.wardrobe.add_underwear_set, item_outfit.get_copy()),
                                                             Function(renpy.notify, "Outfit added to " + mannequin.name + " wardrobe")
                                                         ]
 
