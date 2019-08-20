@@ -25,6 +25,21 @@ init -1 python:
             person.char.who_args["color"] = color_replacement_list[idx][1]
         return
 
+    def color_indicator(variable, max_value = 100): # Gives color indication to a value range split into 5.
+
+        if variable >= max_value / 1.25: # 80%
+            return "{color=#24ed27}" + str(variable) +"{/color}"
+        if variable >=max_value / 1.67: # 60%
+            return "{color=#8edb21}" + str(variable) +"{/color}"
+        if variable >= max_value / 2.5: # 40%
+            return "{color=#ffec6e}" + str(variable) +"{/color}"
+        if variable >= max_value / 5: # 20%
+            return "{color=#ed9d4c}" + str(variable) +"{/color}"
+        else: # less than 20%
+            return "{color=#c91616}" + str(variable) +"{/color}"
+
+
+
 init 5 python:
     add_label_hijack("normal_start", "activate_color_blindness_fix")
     add_label_hijack("after_load", "update_color_blindness_fix")
@@ -46,4 +61,3 @@ label update_color_blindness_fix(stack):
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return
-
