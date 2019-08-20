@@ -33,7 +33,7 @@ label town_walk_crisis_action_label:
 
     $ change_scene_display(bedroom)
     $ the_person.draw_person(position = "walking_away")
-    "You see [the_person.possessive_title] is standing in front of a mirror, studing herself."
+    "You see [the_person.possessive_title] is standing in front of a mirror, studying herself."
     "There is a glass of water right near the window. This is a good opportunity to test a serum for free."
     menu:
         "Add a dose of serum to [the_person.title]'s drink.":
@@ -41,7 +41,7 @@ label town_walk_crisis_action_label:
             "You quickly retreat away from the window."
         "Keep watching.":
             "You decide not to risk being seen and stay away from her sight"
-    the_person.char "I shoud get dresed for lunch. Don't have much time..."
+    the_person.char "I shoud get dressed for lunch. Don't have much time..."
 
     $ the_person.strip_outfit_to_max_sluttiness(narrator_messages = [
         "[the_person.possessive_title] takes off her [strip_choice.name] and throws it on the bed.",
@@ -66,7 +66,7 @@ label town_walk_crisis_action_label:
             the_person.char "Darn girl, these puppies look delightful :)"
         else:
             the_person.char "Good to know that even at [the_person.age] my chest is attractive."
-        "She plays with her boobs a little, cuping them, and pinching the nipples so they get hard."
+        "She plays with her boobs a little, cupping them, and pinches the nipples so they get hard."
         $ arousal_plus = renpy.random.randint (10,40)
         $ the_person.change_arousal (arousal_plus)
     else:
@@ -75,34 +75,34 @@ label town_walk_crisis_action_label:
     if the_person.sluttiness >=50 or the_person.get_opinion_score("masturbating") > 0 or the_person.arousal > 35:
         "[the_person.possessive_title] seems to get turned on by her own image in the mirror."
         $ the_person.draw_person(position = "missionary")
-        "She lays down on the bed, spreads her legs and begins to slowly masturbate."
+        "She lays down on the bed, spreads her legs and begins to masturbate slowly."
         if the_person.outfit.vagina_available():
-            "You notice that she fingering herself with one hand, while the other is caressing the clit."
+            "You notice that she is fingering herself with one hand, while the other is caressing her clit."
         else:
             "You notice that with one hand [the_person.possessive_title] squeezes her tits, while shoving the other between her legs."
         while the_person.arousal < 100:
             $ random_mast_descrip = renpy.random.randint(0,3)
             if random_mast_descrip == 0:
-                "As she gets more and more turned on, her hand is moving faster and faster."
+                "As she gets more and more turned on, her hand moves faster and faster."
             elif random_mast_descrip == 1:
                 if the_person.outfit.vagina_available():
-                    "Her both hands move really fast around her wide-spread pussy."
+                    "Both her hands move really fast around her wide-spread pussy."
                 else:
-                    "[the_person.possessive_title] pinches her nipples and squeezing the other vigorously between her legs."
+                    "[the_person.possessive_title] pinches her nipples and squeezes the other vigorously between her legs."
                 the_person.char "Ahh, yes. That's it. Just what I need."
             elif random_mast_descrip == 2:
                 if the_person.outfit.vagina_available():
                     "She pushes 3 fingers inside, making a deep gutteral noice."
-                    the_person.char "Ahh, yes. Fuck me hard and deep."
+                    $ the_person.call_dialogue("sex_responses")
                 else:
                     "[the_person.possessive_title] keeps rubbing and her moans grow louder."
             else:
                 the_person.char "Mmm, yes. Keep going..."
             $ arousal_plus = renpy.random.randint (20,35)
             $ the_person.change_arousal (arousal_plus)
-        the_person.char "Shit, I'm cumming!"
+        $ the_person.call_dialogue("climax_responses")
         $ the_person.draw_person(position = "missionary", emotion = "orgasm")
-        "You see [the_person.possessive_title]'s body shiver as she reaches orgasm."
+        #"You see [the_person.possessive_title]'s body shiver as she reaches orgasm." NOTE: Things like this gets mentioned in the climax_responses
         the_person.char "Wow, that was intense. Need to be quieter or someone might just hear me - the window is still open... I would be so ashamed."
         $ slut_bonus = renpy.random.randint (5,10)
         $ the_person.sluttiness += slut_bonus
@@ -114,11 +114,11 @@ label town_walk_crisis_action_label:
     menu:
         "Join her." if mc.current_stamina > 0:
             "You decide to use this opportunity and join her."
-            mc.name "I was passing by, heard some noise  and decided to investigate. All this robberies, you know..."
+            mc.name "I was passing by, heard some noise  and decided to investigate. All these robberies, you know..."
             mc.name "And I see that that you indeed require some attention, [the_person.title]. Should I join?"
             if the_person.sluttiness > 50 or the_person.arousal > 50:
                 $ the_person.draw_person(position = "stand5", emotion = "happy")
-                "[the_person.possessive_title] turns around on hearing your voice. You see her smile."
+                "[the_person.possessive_title] turns around upon hearing your voice. You see her smile."
                 if (the_person.love) > 30:
                     the_person.char "Come on in [the_person.mc_title]. I could use your help."
                 else:
@@ -127,7 +127,7 @@ label town_walk_crisis_action_label:
                 call fuck_person(the_person) from _call_fuck_person_P13S2
             else:
                 $ the_person.draw_person(position = "stand4", emotion = "angry")
-                "[the_person.possessive_title] quickly turns around on hearing your voice. You see that she is not glad to see you."
+                "[the_person.possessive_title] quickly turns around upon hearing your voice. You see that she is not glad to see you."
                 the_person.char "The fuck are you doing, Mr. [mc.last_name]? You can't just spy on people in their homes! Get out of here or I'll call the police!"
                 "You quickly leave the area."
                 $ the_person.happiness -= 5
