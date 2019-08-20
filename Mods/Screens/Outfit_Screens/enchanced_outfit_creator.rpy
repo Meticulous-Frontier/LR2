@@ -292,6 +292,8 @@ init 2:
         #add "Paper_Background.png"
         modal True
         zorder 100
+
+        $ renpy.block_rollback()
         default category_selected = "Panties"
         default mannequin = "mannequin"
         default mannequin_pose = "stand3"
