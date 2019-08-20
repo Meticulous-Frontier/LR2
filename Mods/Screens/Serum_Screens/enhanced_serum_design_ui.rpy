@@ -1,5 +1,7 @@
 init 2:
     screen serum_design_ui(starting_serum,current_traits):
+        $ renpy.block_rollback()
+        
         add "Science_Menu_Background.png"
         default trait_tooltip = primitive_serum_prod
         python:
@@ -294,7 +296,7 @@ init 2:
                             frame:
                                 background "#000080"
                                 xsize 270
-                                
+
                                 $ calculated_profit = (starting_serum.value*mc.business.batch_size)-starting_serum.production_cost
                                 if calculated_profit > 0:
                                     text "Expected Profit:{color=#98fb98} $[calculated_profit]{/color}" style "serum_text_style"

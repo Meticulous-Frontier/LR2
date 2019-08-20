@@ -29,14 +29,14 @@ init -1 python:
 
         if variable >= max_value / 1.25: # 80%
             return "{color=#24ed27}" + str(variable) +"{/color}"
-        if variable >=max_value / 1.67: # 60%
+        if variable >= max_value / 1.67: # 60%
             return "{color=#8edb21}" + str(variable) +"{/color}"
         if variable >= max_value / 2.5: # 40%
             return "{color=#ffec6e}" + str(variable) +"{/color}"
         if variable >= max_value / 5: # 20%
             return "{color=#ed9d4c}" + str(variable) +"{/color}"
         else: # less than 20%
-            return "{color=#c91616}" + str(variable) +"{/color}"
+            return "{color=#ff6347}" + str(variable) +"{/color}"
 
 
 

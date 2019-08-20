@@ -14,6 +14,11 @@ init 2:
         add "Science_Menu_Background.png"
         default line_selected = None
 
+        default production_line_weight_tooltip = "Work done by production employees will be split between active lines based on production weight."
+        default production_line_autosell_tooltip = "Doses of serum above the auto-sell threshold will automatically be flagged for sale and moved to the marketing department."
+
+        $ renpy.block_rollback()
+
         python:
             if "machinery_room_overload" in globals(): # Should not cause issues if not present.
                 production_remaining = machinery_room_overload
@@ -21,7 +26,7 @@ init 2:
             else:
                 production_remaining = 100
                 production_max = production_remaining
-                
+
             for key in mc.business.serum_production_array:
                 production_remaining -= mc.business.serum_production_array[key][1] # How much of the 100% capability are we using?
         hbox:
@@ -38,209 +43,217 @@ init 2:
                     xalign 0.5
                     frame:
                         background "#000080"
-                        xsize 550
+                        xfill True
+
                         text "Production Lines" style "serum_text_style_header"
 
                     frame:
                         background "#000080"
-                        xsize 550
-                        text "Capacity Remaining: [production_remaining]%" style "serum_text_style"
+                        xfill True
+
+                        text "Capacity Remaining: " + str(color_indicator(production_remaining)) + "%" style "serum_text_style"
 
                     viewport:
                         draggable True
-                        scrollbars "vertical"
+                        if mc.business.production_lines > 3: # Have the scrollbar only exist if it is nescessary
+                            scrollbars "vertical"
                         mousewheel True
-                        xsize 550
+                        xfill True
+
                         vbox:
                             spacing 20
+                            xfill True
+
                             for count in range(1,mc.business.production_lines+1): #For the non-programmers we index our lines to 1 through production_lines.
-                                frame:
-                                    background "#999999"
-                                    vbox:
-                                        $ name_string = ""
-                                        if count in mc.business.serum_production_array:
-                                            $ name_string = "Production Line " + str(count) + "\nCurrently Producing: " + mc.business.serum_production_array[count][0].name
-                                        else:
-                                            $ name_string = "Production Line " + str(count) + "\nCurrently Producing: Nothing"
-
-                                        $ button_background = "#000080"
-                                        if line_selected == count:
-                                            $ button_background = "#666666"
-
-                                        if count in mc.business.serum_production_array:
-                                            $ the_serum = mc.business.serum_production_array[count][0]
-                                            textbutton "[name_string]":
-
-                                                action [
-                                                ToggleScreenVariable("line_selected", count, None),
-                                                Hide("serum_tooltip")
-                                                ]
-
-                                                style "textbutton_style"
-                                                text_style "serum_text_style"
-
-                                                hovered [
-                                                Show("serum_tooltip",None,the_serum,0.94,0.072)
-                                                ]
+                                vbox:
+                                    xfill True
+                                    frame:
+                                        background "#999999"
 
 
-                                                xsize 500
-                                        else:
-                                            textbutton "[name_string]":
+                                        vbox:
+                                            xfill True
 
-                                                action [
-                                                ToggleScreenVariable("line_selected", count, None)
-                                                ]
+                                            $ name_string = ""
+                                            if count in mc.business.serum_production_array:
+                                                $ name_string = "Production Line " + str(count) + "\nCurrently Producing: " + mc.business.serum_production_array[count][0].name
+                                            else:
+                                                $ name_string = "Production Line " + str(count) + "\nCurrently Producing: {color=#ff6347}Nothing{/color}"
 
-                                                style "textbutton_style"
-                                                text_style "serum_text_style"
-
-                                                xsize 500
-
-                                        null height 20
-
-                                        hbox:
-                                            ysize 40
-                                            xsize 500
-
-                                            textbutton "Production Weight: ":
-                                                style "serum_background_style"
-                                                text_style "serum_text_style"
-
-                                                action NullAction()
+                                            # $ button_background = "#000080"
+                                            # if line_selected == count:
+                                            #     $ button_background = "#666666"
 
                                             if count in mc.business.serum_production_array:
-
-                                                textbutton "-10%":
-
-                                                    action [
-                                                    Function(mc.business.change_line_weight,count,-10)
-                                                    ]
-
+                                                $ the_serum = mc.business.serum_production_array[count][0]
+                                                textbutton "[name_string]":
+                                                    xfill True
                                                     style "textbutton_style"
                                                     text_style "serum_text_style"
 
-                                                    tooltip "Work done by production employees will be split between active lines based on production weight."
-
-                                                textbutton str(mc.business.serum_production_array[count][1]) + "%":
-
-                                                    style "serum_background_style"
-                                                    text_style "serum_text_style"
-
-                                                    action NullAction()
-
-                                                textbutton "+10%":
-
                                                     action [
-                                                    Function(mc.business.change_line_weight,count,10)
+                                                    ToggleScreenVariable("line_selected", count, None),
+                                                    ToggleScreen("serum_tooltip", None, the_serum, 0.94, 0.072)
                                                     ]
 
-                                                    style "textbutton_style"
-                                                    text_style "serum_text_style"
-
-                                                    tooltip "Work done by production employees will be split between active lines based on production weight."
+                                                    # hovered [
+                                                    # Show("serum_tooltip", None, the_serum, 0.94, 0.072)
+                                                    # ]
 
                                             else:
-                                                textbutton "-10%":
-                                                    action NullAction()
+                                                textbutton "[name_string]":
+                                                    xfill True
                                                     style "textbutton_style"
                                                     text_style "serum_text_style"
-                                                    sensitive False
 
-                                                    tooltip "Work done by production employees will be split between active lines based on production weight."
-
-                                                textbutton "0%":
-                                                    style "serum_background_style"
-                                                    text_style "serum_text_style"
-                                                    action NullAction()
-
-                                                textbutton "+10%":
-                                                    action NullAction()
-                                                    style "textbutton_style"
-                                                    text_style "serum_text_style"
-                                                    sensitive False
-
-                                                    tooltip "Work done by production employees will be split between active lines based on production weight."
-
-                                        hbox:
-                                            ysize 40
-                                            xsize 500
-                                            textbutton "Auto-sell Threshold: ":
-                                                style "serum_background_style"
-                                                text_style "serum_text_style"
-
-                                                action NullAction()
-
-                                            if count in mc.business.serum_production_array:
-                                                textbutton "-1":
                                                     action [
-                                                    Function(mc.business.change_line_autosell,count,-1)
+                                                    ToggleScreenVariable("line_selected", count, None)
                                                     ]
-                                                    alternate [
-                                                    Function(mc.business.change_line_autosell,count,-10)
-                                                    ]
-                                                    style "textbutton_style"
-                                                    text_style "serum_text_style"
-                                                    tooltip "Doses of serum above the auto-sell threshold will automatically be flagged for sale and moved to the marketing department."
 
 
-                                                frame:
-                                                    background "#aaaaaa"
-                                                    ysize 50
+
+
+                                        #null height 20
+                                            frame:
+                                                background "#000080"
+                                                grid 1 2:
+                                                    xfill True
                                                     hbox:
-                                                        button:
-                                                            action ToggleVariable("array_to_change", count, None)
 
-                                                            if mc.business.serum_production_array[count][3] < 0:
-                                                                if array_to_change == count:
-                                                                    input default str(mc.business.serum_production_array[count][3]) length 7 allow "0123456789" changed serum_production_autosell
-                                                                else:
-                                                                    text "None" style "serum_text_style" yalign 0.5
+                                                        xfill True
 
-                                                            else:
-                                                                if array_to_change == count:
-                                                                    input default str(mc.business.serum_production_array[count][3]) length 7 allow "0123456789" changed serum_production_autosell
-                                                                else:
-                                                                    text str(mc.business.serum_production_array[count][3]) style "serum_text_style" yalign 0.5
+                                                        frame:
+                                                            background None
+
+                                                            text "Production Weight:   " style "serum_text_style"
+
+                                                        if count in mc.business.serum_production_array:
+                                                            grid 3 1:
+                                                                xfill True
+                                                                textbutton "-10%":
+                                                                    xfill True
+                                                                    style "textbutton_style"
+                                                                    text_style "serum_text_style"
 
 
-                                                textbutton "+1":
-                                                    action [
-                                                    Function(mc.business.change_line_autosell,count,+1)
-                                                    ]
-                                                    alternate [
-                                                    Function(mc.business.change_line_autosell,count,+10)
-                                                    ]
-                                                    style "textbutton_style"
-                                                    text_style "serum_text_style"
+                                                                    action [
+                                                                    Function(mc.business.change_line_weight,count,-10)
+                                                                    ]
 
-                                                    tooltip "Doses of serum above the auto-sell threshold will automatically be flagged for sale and moved to the marketing department."
-                                            else:
-                                                textbutton "-1":
-                                                    action NullAction()
-                                                    style "textbutton_style"
-                                                    text_style "serum_text_style"
-                                                    sensitive False
+                                                                    tooltip production_line_weight_tooltip
 
-                                                    tooltip "Doses of serum above the auto-sell threshold will automatically be flagged for sale and moved to the marketing department."
+                                                                frame:
+                                                                    xfill True
+                                                                    background None
 
-                                                textbutton "None":
+                                                                    text str(color_indicator(mc.business.serum_production_array[count][1])) + "%" style "serum_text_style"
 
-                                                    style "serum_background_style"
-                                                    text_style "serum_text_style"
+                                                                textbutton "+10%":
+                                                                    xfill True
+                                                                    style "textbutton_style"
+                                                                    text_style "serum_text_style"
 
-                                                    action NullAction()
 
-                                                textbutton "+1":
+                                                                    action [
+                                                                    Function(mc.business.change_line_weight,count,10)
+                                                                    ]
 
-                                                    style "textbutton_style"
-                                                    text_style "serum_text_style"
+                                                                    tooltip production_line_weight_tooltip
 
-                                                    sensitive False
+                                                        else:
+                                                            grid 3 1:
+                                                                xfill True
+                                                                frame:
+                                                                    background None
+                                                                    xfill True
+                                                                    text "-10%" style "serum_text_style"
+                                                                    tooltip production_line_weight_tooltip
 
-                                                    action NullAction()
-                                                    tooltip "Doses of serum above the auto-sell threshold will automatically be flagged for sale and moved to the marketing department."
+                                                                frame:
+                                                                    background None
+                                                                    xfill True
+                                                                    text "0%" style "serum_text_style"
 
+                                                                frame:
+                                                                    background None
+                                                                    xfill True
+                                                                    text "+10%" style "serum_text_style"
+                                                                    tooltip production_line_weight_tooltip
+
+                                                    hbox:
+
+                                                        xfill True
+                                                        frame:
+                                                            background None
+                                                            text "Auto-sell Threshold: " style "serum_text_style"
+
+                                                        if count in mc.business.serum_production_array:
+                                                            grid 3 1:
+                                                                xfill True
+                                                                textbutton "-1":
+                                                                    xfill True
+                                                                    style "textbutton_style"
+                                                                    text_style "serum_text_style"
+
+                                                                    action [
+                                                                    Function(mc.business.change_line_autosell,count,-1)
+                                                                    ]
+                                                                    alternate [
+                                                                    Function(mc.business.change_line_autosell,count,-10)
+                                                                    ]
+                                                                    production_line_autosell_tooltip
+
+
+                                                                # frame:
+                                                                #     background None
+                                                                #     xfill True
+                                                                button:
+                                                                    xfill True
+                                                                    action ToggleVariable("array_to_change", count, None)
+
+
+                                                                    if array_to_change == count:
+                                                                        input default str(mc.business.serum_production_array[count][3]) length 7 allow "0123456789" changed serum_production_autosell style "serum_text_style"
+                                                                    else:
+                                                                        if mc.business.serum_production_array[count][3] >= 0:
+                                                                            text str(mc.business.serum_production_array[count][3]) style "serum_text_style" yalign 0.5
+
+                                                                    if mc.business.serum_production_array[count][3] < 0 and array_to_change != count:
+                                                                        text "None" style "serum_text_style" yalign 0.5
+
+                                                                textbutton "+1":
+                                                                    xfill True
+                                                                    style "textbutton_style"
+                                                                    text_style "serum_text_style"
+
+                                                                    action [
+                                                                    Function(mc.business.change_line_autosell,count,+1)
+                                                                    ]
+                                                                    alternate [
+                                                                    Function(mc.business.change_line_autosell,count,+10)
+                                                                    ]
+
+                                                                    production_line_autosell_tooltip
+                                                        else:
+                                                            grid 3 1:
+                                                                xfill True
+                                                                frame:
+                                                                    background None
+                                                                    xfill True
+                                                                    text "-1" style "serum_text_style"
+
+                                                                    production_line_autosell_tooltip
+
+                                                                frame:
+                                                                    background None
+                                                                    xfill True
+                                                                    text "None" style "serum_text_style"
+
+                                                                frame:
+                                                                    background None
+                                                                    xfill True
+                                                                    text "-10%" style "serum_text_style"
+                                                                    production_line_autosell_tooltip
             if line_selected:
                 frame:
                     background "#888888"
