@@ -201,7 +201,7 @@ init 2:
                                                                     alternate [
                                                                     Function(mc.business.change_line_autosell,count,-10)
                                                                     ]
-                                                                    production_line_autosell_tooltip
+                                                                    tooltip production_line_autosell_tooltip
 
 
                                                                 # frame:
@@ -233,7 +233,7 @@ init 2:
                                                                     Function(mc.business.change_line_autosell,count,+10)
                                                                     ]
 
-                                                                    production_line_autosell_tooltip
+                                                                    tooltip production_line_autosell_tooltip
                                                         else:
                                                             grid 3 1:
                                                                 xfill True
@@ -242,7 +242,7 @@ init 2:
                                                                     xfill True
                                                                     text "-1" style "serum_text_style"
 
-                                                                    production_line_autosell_tooltip
+                                                                    tooltip production_line_autosell_tooltip
 
                                                                 frame:
                                                                     background None
@@ -253,7 +253,7 @@ init 2:
                                                                     background None
                                                                     xfill True
                                                                     text "-10%" style "serum_text_style"
-                                                                    production_line_autosell_tooltip
+                                                                    tooltip production_line_autosell_tooltip
             if line_selected:
                 frame:
                     background "#888888"
