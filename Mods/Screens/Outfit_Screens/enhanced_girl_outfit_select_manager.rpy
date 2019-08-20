@@ -1,8 +1,6 @@
 init 2:
     screen girl_outfit_select_manager(target_wardrobe, show_sets = True, slut_limit = the_person.sluttiness): ##Brings up a list of outfits currently in a girls wardrobe.
         #add "Paper_Background.png"
-
-        $ hide_ui()
         modal True
         zorder 99 #Allow it to be hidden below outfit_creator
         default preview_outfit = None
@@ -40,7 +38,7 @@ init 2:
 
                                     sensitive (outfit.slut_requirement <= slut_limit)
 
-                                    action [Return(outfit), Hide("mannequin")]
+                                    action [Hide("mannequin", Return(outfit))]
                                     hovered [Function(draw_mannequin, the_person, outfit)]
                                     alternate Show("outfit_creator", None, outfit.get_copy(), the_person.wardrobe)
 
@@ -71,7 +69,7 @@ init 2:
 
                                         sensitive (outfit.slut_requirement <= slut_limit)
 
-                                        action [Return(outfit), Hide("mannequin")]
+                                        action [Hide("mannequin", Return(outfit))]
                                         hovered [Function(draw_mannequin, the_person, outfit)]
                                         alternate Show("outfit_creator", None, outfit.get_copy(), the_person.wardrobe)
 
@@ -102,7 +100,7 @@ init 2:
 
                                         sensitive (outfit.slut_requirement <= slut_limit)
 
-                                        action [Return(outfit), Hide("mannequin")]
+                                        action [Hide("mannequin", Return(outfit))]
                                         hovered [Function(draw_mannequin, the_person, outfit)]
                                         alternate Show("outfit_creator", None, outfit.get_copy(), the_person.wardrobe)
 
@@ -115,5 +113,5 @@ init 2:
                 align [0.5,0.5]
                 auto "gui/button/choice_%s_background.png"
                 focus_mask "gui/button/choice_idle_background.png"
-                action [Return("None"), Hide("mannequin"), Function(show_ui)]
+                action [Hide("mannequin"), Return("None")]
             textbutton "Return" align [0.5,0.5] text_style "return_button_style"

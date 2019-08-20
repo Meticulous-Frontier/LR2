@@ -224,13 +224,9 @@ label update_action_mod_core(stack):
     return
 
 label show_action_mod_settings:
-    hide screen main_ui
-    hide screen phone_hud_ui
-    hide screen business_ui
+    $ hide_ui()
     call screen mod_configuration_ui
-    show screen phone_hud_ui
-    show screen business_ui
-    show screen main_ui
+    $ show_ui()
     return
 
 label show_action_mod_configuration:

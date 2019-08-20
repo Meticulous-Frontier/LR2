@@ -5,7 +5,6 @@ init 3:
     screen outfit_delete_manager(target_wardrobe, show_sets = True, slut_limit = 9999): ##This screen is used and shared for MC, Company Uniforms and Person. Script.rpy should be calling correct Wardrobe at all times so no default currently needed. NOTE: Script.rpy does not support editing of outfits by default from this screen, but slight additions to it will make it work. Tested. Will propose the change to Vren at later time, pretty much copy paste from different section.
         #add "Paper_Background.png"
 
-        $ hide_ui()
         modal True
         zorder 99 #Allow it to be hidden below outfit_creator
         default preview_outfit = None
@@ -118,5 +117,5 @@ init 3:
                 align [0.5,0.5]
                 auto "gui/button/choice_%s_background.png"
                 focus_mask "gui/button/choice_idle_background.png"
-                action [Return("No Return"), Hide("mannequin"), Function(show_ui)]
+                action [Return("No Return"), Hide("mannequin")]
             textbutton "Return" align [0.5,0.5] text_style "return_button_style"

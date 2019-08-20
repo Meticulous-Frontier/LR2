@@ -217,18 +217,12 @@ label interview_action_description_low_mem_usage:
         "Yes, I'll pay the cost. -$[interview_cost]":
             $ mc.business.funds += -interview_cost
             $ renpy.scene("Active")
-            hide screen main_ui #NOTE: We have to hide all of these screens because we are using a fake (aka. non-screen) background for this. We're doing that so we can use the normal draw_person call for them.
-            hide screen phone_hud_ui
-            hide screen business_ui
-            hide screen goal_hud_ui
+            $ hide_ui()
             show bg paper_menu_background #Show a paper background for this scene.
             $ candidates = generate_candidates(count)
             call screen interview_ui(candidates,count)
             $ renpy.scene()
-            show screen phone_hud_ui
-            show screen business_ui
-            show screen goal_hud_ui
-            show screen main_ui
+            $ show_ui()
             $ renpy.scene("Active")
             $ renpy.show(mc.location.name,what=mc.location.background_image)
             if not _return == "None":

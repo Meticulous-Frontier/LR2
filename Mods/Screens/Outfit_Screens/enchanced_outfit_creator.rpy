@@ -293,7 +293,6 @@ init 2:
         modal True
         zorder 100
 
-        $ hide_ui()
         $ renpy.block_rollback()
         default category_selected = "Panties"
         default mannequin = "mannequin"
@@ -1019,8 +1018,7 @@ init 2:
                                                 action [
                                                     Return(item_outfit),
                                                     Hide("mannequin"),
-                                                    Hide("outfit_creator"),
-                                                    Function(show_ui)
+                                                    Hide("outfit_creator")
                                                 ]
 
                                             textbutton "Abandon / Exit":
@@ -1031,8 +1029,7 @@ init 2:
                                                 action [
                                                     Return("Not_New"),
                                                     Hide("mannequin"),
-                                                    Hide("outfit_creator"),
-                                                    Function(show_ui)
+                                                    Hide("outfit_creator")
                                                 ]
                                     frame:
                                         background "#888888"
