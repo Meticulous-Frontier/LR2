@@ -1,4 +1,19 @@
 init -2 python:
+
+    def hide_ui(): # Hides the UI
+        renpy.scene("Active")
+        renpy.hide_screen("main_ui")
+        renpy.hide_screen("phone_hud_ui")
+        renpy.hide_screen("business_ui")
+        renpy.hide_screen("goal_hud_ui")
+
+    def show_ui(): # Show the UI
+        renpy.scene("Active")
+        renpy.show_screen("main_ui")
+        renpy.show_screen("phone_hud_ui")
+        renpy.show_screen("business_ui")
+        renpy.show_screen("goal_hud_ui")
+
     class Scene():
         def __init__(self):
             self.actors = []
@@ -77,8 +92,8 @@ init -2 python:
             actor_missing = find_in_list(lambda x: x.person is person, self.actors)
             for actor in self.actors:
                 if not actor is actor_missing:
-                    actor.draw_actor()   
-            
+                    actor.draw_actor()
+
     class Actor():
         def __init__(self, person, position = None, emotion = None, special_modifier = None, character_placement = None):
             self.person = person
