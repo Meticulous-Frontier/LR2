@@ -161,14 +161,33 @@ init 2: # Need to allow for None name roles in this screen as well.
                                 else:
                                     text "   ????" style "menu_text_style"
 
-        frame:
-            background None
-            anchor [0.5,0.5]
-            align [0.5,0.88]
-            xysize [500,125]
-            imagebutton:
-                align [0.5,0.5]
-                auto "gui/button/choice_%s_background.png"
-                focus_mask "gui/button/choice_idle_background.png"
-                action Hide("person_info_detailed")
-            textbutton "Return" align [0.5,0.5] style "return_button_style"
+            hbox:
+                xsize 1750
+                xalign 0.5
+                xanchor 0.5
+                spacing 30
+                frame:
+                    background "#1a45a1aa"
+                    xsize 415
+                    ysize 165
+                    vbox:
+                        text "HR Job: [hr_base]" style "menu_text_style"
+                        text "Marketing Job: [market_base]" style "menu_text_style"
+                        text "Research Job: [research_base]" style "menu_text_style"
+                        text "Production Job: [prod_base]" style "menu_text_style"
+                        text "Supply Job: [supply_base]" style "menu_text_style"
+                frame:
+                    background None
+                    anchor [0.5,1]
+                    align [0.5,0]
+                    xysize [860,125]
+                    imagebutton:
+                        align [0.5,0.5]
+                        auto "gui/button/choice_%s_background.png"
+                        focus_mask "gui/button/choice_idle_background.png"
+                        action Hide("person_info_detailed")
+                    textbutton "Return" align [0.5,0.5] style "return_button_style"
+                frame:
+                    background None
+                    xsize 415
+                    ysize 125
