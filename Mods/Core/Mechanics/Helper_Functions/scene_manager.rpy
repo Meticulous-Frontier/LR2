@@ -1,14 +1,14 @@
 init -2 python:
 
     def hide_ui(): # Hides the UI
-        renpy.scene("Active")
+        
         renpy.hide_screen("main_ui")
         renpy.hide_screen("phone_hud_ui")
         renpy.hide_screen("business_ui")
         renpy.hide_screen("goal_hud_ui")
 
     def show_ui(): # Show the UI
-        renpy.scene("Active")
+
         renpy.show_screen("main_ui")
         renpy.show_screen("phone_hud_ui")
         renpy.show_screen("business_ui")
