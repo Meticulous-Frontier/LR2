@@ -10,13 +10,13 @@ init 10 python:
 
     # NOTE: Override the color changing functions
 
-    def get_heart_image_list_cloth(slut_value): ## Returns a string of hearts. Since we are dealing with lower values this version has 20 as it's 100% filled value. Used to indicate sluttiness requirement for the cloth item.
+    def get_heart_image_list_cloth(slut_value, multiplier = 5): ## Returns a string of hearts. Since we are dealing with lower values this version has 20 as it's 100% filled value. Used to indicate sluttiness requirement for the cloth item.
 
-        heart_string = "{image=" + get_individual_heart(0, slut_value*5, 0) + "}"
-        heart_string += "{image=" + get_individual_heart(0, slut_value*5-20, 0) + "}"
-        heart_string += "{image=" + get_individual_heart(0, slut_value*5-40, 0) + "}"
-        heart_string += "{image=" + get_individual_heart(0, slut_value*5-60, 0) + "}"
-        heart_string += "{image=" + get_individual_heart(0, slut_value*5-80, 0) + "}"
+        heart_string = "{image=" + get_individual_heart(0, slut_value*multiplier, 0) + "}"
+        heart_string += "{image=" + get_individual_heart(0, slut_value*multiplier-20, 0) + "}"
+        heart_string += "{image=" + get_individual_heart(0, slut_value*multiplier-40, 0) + "}"
+        heart_string += "{image=" + get_individual_heart(0, slut_value*multiplier-60, 0) + "}"
+        heart_string += "{image=" + get_individual_heart(0, slut_value*multiplier-80, 0) + "}"
 
 
         return heart_string
