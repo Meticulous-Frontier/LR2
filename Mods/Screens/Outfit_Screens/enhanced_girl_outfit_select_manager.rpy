@@ -38,7 +38,7 @@ init 2:
 
                                     sensitive (outfit.slut_requirement <= slut_limit)
 
-                                    action [Hide("mannequin", Return(outfit))]
+                                    action [Hide("mannequin"), Return(outfit)]
                                     hovered [Function(draw_mannequin, the_person, outfit)]
                                     alternate Show("outfit_creator", None, outfit.get_copy(), the_person.wardrobe)
 
@@ -69,7 +69,7 @@ init 2:
 
                                         sensitive (outfit.slut_requirement <= slut_limit)
 
-                                        action [Hide("mannequin", Return(outfit))]
+                                        action [Hide("mannequin"), Return(outfit)]
                                         hovered [Function(draw_mannequin, the_person, outfit)]
                                         alternate Show("outfit_creator", None, outfit.get_copy(), the_person.wardrobe)
 
@@ -100,7 +100,7 @@ init 2:
 
                                         sensitive (outfit.slut_requirement <= slut_limit)
 
-                                        action [Hide("mannequin", Return(outfit))]
+                                        action [Hide("mannequin"), Return(outfit)]
                                         hovered [Function(draw_mannequin, the_person, outfit)]
                                         alternate Show("outfit_creator", None, outfit.get_copy(), the_person.wardrobe)
 
