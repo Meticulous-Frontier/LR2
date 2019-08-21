@@ -180,6 +180,11 @@ init 5 python:
             if item:
                 outfit.add_feet(item.get_copy(), [color_feet[0] * .8, color_feet[1] * .8, color_feet[2] * .8, color_feet[3]])
 
+            self.add_accessory_from_list(outfit, self.build_filter_list(self.earings_only_list, points), 3, color_lower)
+            self.add_accessory_from_list(outfit, self.build_filter_list(rings_list, points), 3, color_lower)
+            self.add_accessory_from_list(outfit, self.build_filter_list(bracelet_list, points), 3, color_upper)
+            self.add_accessory_from_list(outfit, self.build_filter_list(neckwear_list, points), 3, color_upper)
+
             outfit.name = self.get_name_classification(points) + self.get_cloting_name(outfit.upper_body, 2) + " and " + self.get_cloting_name(outfit.lower_body, 2)
 
             return outfit
@@ -220,11 +225,6 @@ init 5 python:
                     outfit.add_accessory(light_eye_shadow.get_copy(), get_random_from_list([[.15, .15, .15, .95], [.5, .18, .18, .95]]))
                 if make_up_score > 3:
                     outfit.add_accessory(heavy_eye_shadow.get_copy(), get_random_from_list([[.15, .15, .15, .95], [.1, .15, .55, .9]]))
-
-            self.add_accessory_from_list(outfit, self.build_filter_list(self.earings_only_list, points), 3, color_lower)
-            self.add_accessory_from_list(outfit, self.build_filter_list(bracelet_list, points), 3, color_upper)
-            self.add_accessory_from_list(outfit, self.build_filter_list(rings_list, points), 3, color_lower)
-            self.add_accessory_from_list(outfit, self.build_filter_list(neckwear_list, points), 3, color_upper)
 
             outfit.name = self.get_name_classification(points) + self.get_cloting_name(outfit.upper_body, 1) + " and " + self.get_cloting_name(outfit.lower_body, 1)
 
