@@ -132,15 +132,15 @@ label rename_person(person):
 
             "Title: [person.title]":
                 $ new_title = str(renpy.input("Title: ", person.title))
-                $ person.title = new_title
+                $ person.set_title(new_title)
 
             "Possessive Title: [person.possessive_title]":
                 $ new_title = str(renpy.input("Possessive Title: ", person.possessive_title))
-                $ person.possessive_title = new_title
+                $ person.set_possessive_title(new_title)
 
             "Your Title: [person.mc_title]":
                 $ new_title = str(renpy.input("Your Title: ", person.mc_title))
-                $ person.mc_title = new_title
+                $ person.set_mc_title(new_title)
 
             "Back":
                 return
