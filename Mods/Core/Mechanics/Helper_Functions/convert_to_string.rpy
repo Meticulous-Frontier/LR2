@@ -33,3 +33,12 @@ init -1 python:
             return "curvy " + pronoun
         else:
             return "skinny " + pronoun
+
+    def remove_display_tags(person, string): # Displays the string without color and font tags
+
+        string = string.replace(person.char.who_args["color"], "")
+        string = string.replace(person.char.who_args["font"], "")
+        string = string.replace("{/font}{/color}", "")
+        string = string.replace("{color=}{font=}", "")
+
+        return string

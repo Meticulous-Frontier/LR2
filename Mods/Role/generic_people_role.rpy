@@ -118,6 +118,7 @@ label spend_the_night(person): # Consider adding the sleep_action to the_person'
     call advance_time from _call_advance_time_spend_the_night
     return
 
+
 label rename_person(person):
     "You tell [person.possessive_title] that you are giving her a new name."
     while True:
@@ -131,11 +132,11 @@ label rename_person(person):
                 $ person.last_name = new_last_name
 
             "Title: [person.title]":
-                $ new_title = str(renpy.input("Title: ", person.title))
+                $ new_title = str(renpy.input("Title: ", remove_display_tags(person, person.title)))
                 $ person.set_title(new_title)
 
             "Possessive Title: [person.possessive_title]":
-                $ new_title = str(renpy.input("Possessive Title: ", person.possessive_title))
+                $ new_title = str(renpy.input("Possessive Title: ", remove_display_tags(person, person.possessive_title)))
                 $ person.set_possessive_title(new_title)
 
             "Your Title: [person.mc_title]":
