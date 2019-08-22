@@ -44,7 +44,7 @@ init 2 python:
 
     # Rename Person Requirements
     def rename_person_requirement(person):
-        if person.obedience >= 150:
+        if person.obedience >= 120:
             return True
         return False
 
@@ -132,11 +132,11 @@ label rename_person(person):
                 $ person.last_name = new_last_name
 
             "Title: [person.title]":
-                $ new_title = str(renpy.input("Title: ", remove_display_tags(person, person.title)))
+                $ new_title = str(renpy.input("Title: ", remove_display_tags(person.title)))
                 $ person.set_title(new_title)
 
             "Possessive Title: [person.possessive_title]":
-                $ new_title = str(renpy.input("Possessive Title: ", remove_display_tags(person, person.possessive_title)))
+                $ new_title = str(renpy.input("Possessive Title: ", remove_display_tags(person.possessive_title)))
                 $ person.set_possessive_title(new_title)
 
             "Your Title: [person.mc_title]":
