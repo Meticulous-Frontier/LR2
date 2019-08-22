@@ -82,7 +82,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object, the_round):
                 "[the_girl.possessive_title] puts her hand on the back of your head. She starts to pull your head back a bit, guiding you back to her clit."
                 the_girl.char "That feels good [the_girl.mc_title], but it feels even better when you kiss me here..."
                 "You accept her guidance and begin to lick and suck at her clit again."
-        "Finger Her Ass." if (the_girl.get_opinion_score("anal sex") > 0 and the_girl.sexy_opinions["anal sex"][1] == True):
+        "Finger Her Ass." if (the_girl.get_opinion_score("anal sex") > 0 and the_girl.get_opinion_status("anal sex")):
             "As you continue to lick all around [the_girl.possessive_title]'s cunt, you slowly push a finger up inside of her pussy."
             if the_girl.arousal > 50:
                 "It isn't long until your finger is well lubricated from her sopping wet cunt."
@@ -97,7 +97,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object, the_round):
             "You continue for a while. [the_girl.title] clearly enjoys the anal penetration. Eventually you pull your finger out and resume eating her out normally."
             $ the_girl.change_arousal(the_girl.get_opinion_score("anal sex") * 10)
             the_girl.char "Fuck that was intense..."
-        "Finger Her Ass.\n{size=22}Must like anal sex{/size} (disabled)" if (the_girl.get_opinion_score("anal sex") <= 0 or the_girl.sexy_opinions["anal sex"][1] == False):
+        "Finger Her Ass.\n{size=22}Must like anal sex{/size} (disabled)" if (the_girl.get_opinion_score("anal sex") <= 0 or not the_girl.get_opinion_status("anal sex")):
             pass
 
 

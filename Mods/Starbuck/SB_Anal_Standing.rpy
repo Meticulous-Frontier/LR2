@@ -214,7 +214,11 @@ label scene_SB_anal_standing_2(the_girl, the_location, the_object, the_round):
                 "[the_girl.possessive_title] looks back at you and manages to smile throug the intense sensation of having her ass fucked."
                 the_girl.char "You are stretching me out so much... Be careful back there, I'm not sure how much of this I can take!"
                 "You reassure her, and then slowly begin to fuck her tightest hole again."
-        "Choke Her" if (the_girl.get_opinion_score("being submissive") > 0 and the_girl.sexy_opinions["being submissive"][1] == True):   #Can only be done if the girl is known submissive#
+<<<<<<< HEAD
+        "Choke Her" if (the_girl.get_opinion_score("being submissive") > 0 and the_girl.get_opinion_status("being submissive")):   #Can only be done if the girl is known submissive#
+=======
+        "Choke Her" if (the_girl.get_opinion_score("being submissive") > 0 and the_girl.get_opinion_score("being submissive")):   #Can only be done if the girl is known submissive#
+>>>>>>> 051091026280cba67cef9ac189b9ee8ec1fda3ae
             "You take your hands off her hips and run them up her back. With one hand you grab the back of her hair and pull her head back."
             the_girl.char "Mmm, thats it, you can be rough with me if you want..."
             "You pull her hair back hard enough to hurt a little, she arches her back in pleasure as you start to fuck her ass more roughly."
@@ -228,7 +232,11 @@ label scene_SB_anal_standing_2(the_girl, the_location, the_object, the_round):
             "You hold on for a few more seconds, until you feel her knees start to buckle before letting go. [the_person.possessive_title] gasps for air."
             the_girl.char "Oh my god, that was so hot..."
             "You spank her ass hard and continue to fuck her tightest hole."
-        "Choke Her\n{size=22}Must be submissive{/size} (disabled)" if (the_girl.get_opinion_score("being submissive") <= 0 or the_girl.sexy_opinions["being submissive"][1] == False):
+<<<<<<< HEAD
+        "Choke Her\n{size=22}Must be submissive{/size} (disabled)" if (the_girl.get_opinion_score("being submissive") <= 0 or not the_girl.get_opinion_status("being submissive")):
+=======
+        "Choke Her\n{size=22}Must be submissive{/size} (disabled)" if (the_girl.get_opinion_score("being submissive") <= 0 or not the_girl.get_opinion_score("being submissive")):
+>>>>>>> 051091026280cba67cef9ac189b9ee8ec1fda3ae
             pass
     return
 
