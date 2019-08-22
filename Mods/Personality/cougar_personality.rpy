@@ -304,7 +304,7 @@ label cougar_flirt_response(the_person):
 label cougar_cum_face(the_person):
     if the_person.obedience > 130:
         if the_person.sluttiness > 50:
-            $ pronoun = person_body_shame_string(the_person, "litlle cum slut")
+            $ pronoun = person_body_shame_string(the_person, "little cum slut")
             the_person.char "Ah... do you like to see my face covered [the_person.mc_title]? Am I your good [pronoun]?"
         else:
             the_person.char "Oh, it's everywhere! Next time be more careful, I'm only doing this for you."

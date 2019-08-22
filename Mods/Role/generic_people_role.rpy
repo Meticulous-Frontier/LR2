@@ -66,15 +66,15 @@ init 2 python:
 init 5 python:
     # Schedule Actions
     schedule_person_action = ActionMod("Schedule [the_person.title]", schedule_person_requirement, "schedule_menu", menu_tooltip = "Schedule where the person should be throughout the day.", category = "Generic People Actions")
-    schedule_early_morning_action = ActionMod("Early Morning", schedule_early_morning_requirement, "schedule_early_morning", menu_tooltip = "Schedule where the person should be during the Early Morning.", allow_disable = False)
+    schedule_early_morning_action = ActionMod("Early Morning", schedule_early_morning_requirement, "schedule_person", args = [0], menu_tooltip = "Schedule where the person should be during the Early Morning.", allow_disable = False)
     schedule_actions_list.append(schedule_early_morning_action)
-    schedule_morning_action = ActionMod("Morning", schedule_morning_requirement, "schedule_morning", menu_tooltip = "Schedule where the person should be during the Morning.", allow_disable = False)
+    schedule_morning_action = ActionMod("Morning", schedule_morning_requirement, "schedule_person", args = [1], menu_tooltip = "Schedule where the person should be during the Morning.", allow_disable = False)
     schedule_actions_list.append(schedule_morning_action)
-    schedule_afternoon_action = ActionMod("Afternoon", schedule_afternoon_requirement, "schedule_afternoon", menu_tooltip = "Schedule where the person should be during the Afternoon.", allow_disable = False)
+    schedule_afternoon_action = ActionMod("Afternoon", schedule_afternoon_requirement, "schedule_person", args = [2], menu_tooltip = "Schedule where the person should be during the Afternoon.", allow_disable = False)
     schedule_actions_list.append(schedule_afternoon_action)
-    schedule_evening_action = ActionMod("Evening", schedule_evening_requirement, "schedule_evening", menu_tooltip = "Schedule where the person should be during the Evening.", allow_disable = False)
+    schedule_evening_action = ActionMod("Evening", schedule_evening_requirement, "schedule_person", args = [3], menu_tooltip = "Schedule where the person should be during the Evening.", allow_disable = False)
     schedule_actions_list.append(schedule_evening_action)
-    schedule_night_action = ActionMod("Night", schedule_night_requirement, "schedule_night", menu_tooltip = "Schedule where the person should be during the Night.", allow_disable = False)
+    schedule_night_action = ActionMod("Night", schedule_night_requirement, "schedule_person", args = [4], menu_tooltip = "Schedule where the person should be during the Night.", allow_disable = False)
     schedule_actions_list.append(schedule_night_action)
 
     start_follow_action= ActionMod("Follow me.", start_follow_requirement, "start_follow", menu_tooltip = "Have the person follow you around.", category = "Generic People Actions")
@@ -218,7 +218,9 @@ label schedule_menu(person): # TODO: Find a way to handle "None" instances of sc
         else:
             $ act_choice.call_action(person)
 
-label schedule_early_morning(person):
+label schedule_person(*args):
+    #$ person = the_person
+    $ time_slot = args[0]
     python:
         tuple_list = format_rooms(build_schedule_location_list(person))
         tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
@@ -227,60 +229,8 @@ label schedule_early_morning(person):
     if room_choice == "Back":
         return
     else:
-        $ person.schedule[0] = room_choice
-        "Early Morning Schedule Set: [room_choice.formalName]"
-        return
-
-label schedule_morning(person):
-    python:
-        tuple_list = format_rooms(build_schedule_location_list(person))
-        tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
-        room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
-
-    if room_choice == "Back":
-        return
-    else:
-        $ person.schedule[1] = room_choice
-        "Morning Schedule Set: [room_choice.formalName]"
-        return
-
-label schedule_afternoon(person):
-    python:
-        tuple_list = format_rooms(build_schedule_location_list(person))
-        tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
-        room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
-
-    if room_choice == "Back":
-        return # Where to go if you hit "Back".
-    else:
-        $ person.schedule[2] = room_choice
-        "Afternoon Schedule Set: [room_choice.formalName]"
-        return
-
-label schedule_evening(person):
-    python:
-        tuple_list = format_rooms(build_schedule_location_list(person))
-        tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
-        room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
-
-    if room_choice == "Back":
-        return # Where to go if you hit "Back".
-    else:
-        $ person.schedule[3] = room_choice
-        "Evening Schedule Set: [room_choice.formalName]"
-        return
-
-label schedule_night(person):
-    python:
-        tuple_list = format_rooms(build_schedule_location_list(person))
-        tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
-        room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
-
-    if room_choice == "Back":
-        return # Where to go if you hit "Back".
-    else:
-        $ person.schedule[4] = room_choice
-        "Night Schedule Set: [room_choice.formalName]"
+        $ person.schedule[time_slot] = room_choice
+        $ renpy.say("", time_names[time_slot] + " Schedule Set: [room_choice.formalName]")
         return
 
 # Follower Labels
