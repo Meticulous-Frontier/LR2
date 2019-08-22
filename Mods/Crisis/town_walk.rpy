@@ -15,7 +15,7 @@ init 2 python:
         menu_tooltip = "On occasion you take an afternoon stroll through town, someone did not close their bedroom curtains.", is_crisis = True, crisis_weight = town_walk_mod_weight)
 
 label town_walk_crisis_action_label:
-    ## You spy on a neighbour during your town walk activities
+    ## You spy on a neighbor during your town walk activities
     $ exclude_list = [mom, lily, aunt, cousin, mc] # exclude family and MC
     if mc.business.is_open_for_business() and not mc.business.is_weekend(): # exclude employees working on weekdays
         $ exclude_list.append(mc.business.get_employee_list())
@@ -41,7 +41,7 @@ label town_walk_crisis_action_label:
             "You quickly retreat away from the window."
         "Keep watching.":
             "You decide not to risk being seen and stay away from her sight"
-    the_person.char "I shoud get dressed for lunch. Don't have much time..."
+    the_person.char "I should get dressed for lunch. Don't have much time..."
 
     $ the_person.strip_outfit_to_max_sluttiness(narrator_messages = [
         "[the_person.possessive_title] takes off her [strip_choice.name] and throws it on the bed.",
@@ -81,34 +81,30 @@ label town_walk_crisis_action_label:
         else:
             "You notice that with one hand [the_person.possessive_title] squeezes her tits, while shoving the other between her legs."
         while the_person.arousal < 100:
-            $ random_mast_descrip = renpy.random.randint(0,3)
-            if random_mast_descrip == 0:
+            $ rand_chance = renpy.random.randint(0,3)
+            if rand_chance == 0:
                 "As she gets more and more turned on, her hand moves faster and faster."
-            elif random_mast_descrip == 1:
+            elif rand_chance == 1:
                 if the_person.outfit.vagina_available():
                     "Both her hands move really fast around her wide-spread pussy."
                 else:
                     "[the_person.possessive_title] pinches her nipples and squeezes the other vigorously between her legs."
                 the_person.char "Ahh, yes. That's it. Just what I need."
-            elif random_mast_descrip == 2:
+            elif rand_chance == 2:
                 if the_person.outfit.vagina_available():
-                    "She pushes 3 fingers inside, making a deep gutteral noice."
+                    "She pushes 3 fingers inside, making a deep guttural noise."
                     $ the_person.call_dialogue("sex_responses")
                 else:
                     "[the_person.possessive_title] keeps rubbing and her moans grow louder."
             else:
                 the_person.char "Mmm, yes. Keep going..."
-            $ arousal_plus = renpy.random.randint (20,35)
-            $ the_person.change_arousal (arousal_plus)
+            $ the_person.change_arousal(renpy.random.randint(20,35))
         $ the_person.call_dialogue("climax_responses")
         $ the_person.draw_person(position = "missionary", emotion = "orgasm")
         #"You see [the_person.possessive_title]'s body shiver as she reaches orgasm." NOTE: Things like this gets mentioned in the climax_responses
         the_person.char "Wow, that was intense. Need to be quieter or someone might just hear me - the window is still open... I would be so ashamed."
-        $ slut_bonus = renpy.random.randint (5,10)
-        $ the_person.sluttiness += slut_bonus
         $ the_person.reset_arousal()
-        $ arousal_plus = renpy.random.randint (0,60)
-        $ the_person.change_arousal (arousal_plus)
+        $ the_person.change_stats(arousal = renpy.random.randint(0,60), slut_temp = renpy.random.randint(5,10))
     else:
         pass
     menu:

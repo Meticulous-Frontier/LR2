@@ -61,7 +61,7 @@ label business_meeting_action_label:
         "You make a call to [hr_employee.title] from HR to implement some of the changes you discussed with [the_person.title]."
     $ mc.business.effectiveness_cap += change
     #$ mc.log_event("Company Efficiency: " + str(mc.business.effectiveness_cap) + "%", "float_text_grey")
-    "The changes inceased your business effectivity by [change]%%."
+    "The changes increased your business effectivity by [change]%%."
 
     $ the_person.reset_arousal()
     $ change_scene_display(mc.location)
@@ -138,5 +138,5 @@ label business_meeting_end(person):
     if person.sluttiness < 40:
         "You watch her walking away, deciding what to do next." 
     else:
-        "After contemplating what just happend, you decide what to do next."
+        "After contemplating what just happened, you decide what to do next."
     return

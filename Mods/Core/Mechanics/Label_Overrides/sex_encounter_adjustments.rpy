@@ -231,8 +231,7 @@ label sex_description_enhanced(the_person, the_position, the_object, round, priv
             $ the_position.call_orgasm(the_person,mc.location, the_object, round)
             $ the_position.current_modifier = None
             if the_person.sluttiness > the_person.core_sluttiness and the_person.core_sluttiness < the_position.slut_cap:
-                $ the_person.change_slut_core(1)
-                $ the_person.change_slut_temp(-1)
+                $ the_person.change_stats(slut_core = 1, slut_temp = -1)
             $the_person.change_happiness(2) #Orgasms are good, right?
         else:
             $the_person.call_dialogue("sex_responses")

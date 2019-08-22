@@ -36,7 +36,7 @@ label sister_ntr_crisis_action_label:
     "You drag yourself out of bed and enter the hallway. There is a trace of light down the door to [the_person.possessive_title]'s bedroom."
     "The door itself seems to be not closed."
 
-    ## Now we determine which finising scenes are available depending on traits
+    ## Now we determine which finishing scenes are available depending on traits
     $ finishes = []
     if the_person.get_opinion_score("being covered in cum") > 0 or the_person.get_opinion_score("cum facials") > 0:
         $ finishes.append ("facial")
@@ -49,7 +49,7 @@ label sister_ntr_crisis_action_label:
     $ submissive = the_person.get_opinion_score("being submissive") > 0
     ## Determine what type of encounter it is
     if the_person.sluttiness >= 60:
-        $ encounter = renpy.random.randint (1,2)
+        $ encounter = renpy.random.randint(1,2)
     else:
         $ encounter = 1
 
@@ -59,23 +59,23 @@ label sister_ntr_crisis_action_label:
     if encounter is 1: ## a scene with one man
         if the_person.sluttiness < 40:
             $ the_person.draw_person(position = "kissing", emotion = "happy")
-            "You see [the_person.possessive_title] kissing a young man. On the table there are some college books lying aroung. Seems they decided to take a break from studying."
+            "You see [the_person.possessive_title] kissing a young man. On the table there are some college books lying around. Seems they decided to take a break from studying."
             the_person.char "Oh, [man_name]. You are so sweet - agreeing to help me with homework. I could not done this myself!"
-            "Now you recognise the man - it is [man_name], [the_person.possessive_title]'s coed."
+            "Now you recognize the man - it is [man_name], [the_person.possessive_title]'s coed."
             man_name "Not a problem at all!"
             "They go back to kissing. [man_name] moves his hands to [the_person.possessive_title] butt and starts caressing it."
             the_person.char "Mmmmm... Your hands are so gentle..."
             "You see [man_name] starts to undress [the_person.possessive_title]."
             $ the_person.strip_outfit_to_max_sluttiness(narrator_messages = "He takes off [the_person.possessive_title]'s [strip_choice.name] and throws it on a chair.")
             the_person.char "Hold it there, [man_name]. I'm not ready for this. Hope you understand."
-            "You see a glimpse of dissapointment on man's face, but he regains himself."
+            "You see a glimpse of disappointment on man's face, but he regains himself."
             man_name "Sorry, [the_person.name]. I understand."
             $ the_person.draw_person(position = "stand3", emotion = "happy")
             "He gets away from [the_person.possessive_title] and starts picking up his books from the table."
             "Once it is done, he moves to the door."
-            man_name "Thanks for the evening, [the_person.name]. Say, how about we have a lunch at cafe next to college tommorrow?"
+            man_name "Thanks for the evening, [the_person.name]. Say, how about we have a lunch at cafe next to college tomorrow?"
             the_person.char "Oh, I like that, [man_name]. I'll give you a call after the classes, ok?"
-            man_name "Great. See you tommorrow then!"
+            man_name "Great. See you tomorrow then!"
             $ the_person.sluttiness += 2
             "You get back to your room and don't even hear from door closing as you fall asleep just as you head touches the pillow."
         else:
@@ -102,7 +102,7 @@ label sister_ntr_crisis_action_label:
                     the_person.char "Hold it, [man_name]! I have a better idea."
                     $ the_person.draw_person(position = "blowjob")
                     "She pushes him backwards. With a wet sound his dick leaves her pussy. [the_person.possessive_title] gets on her knees in front of [man_name] cock."
-                    the_person.char "Remember the link I sent you, with a girl getting a cumshot? Do this to me, will you?"
+                    the_person.char "Remember the link I sent you, with a girl getting a cum shot? Do this to me, will you?"
                     man_name "And how can I deny that?"
                     "He strokes his dick for few moments and starts to cover [the_person.possessive_title] face with hot semen."
                     $ the_person.cum_on_face()
@@ -167,7 +167,7 @@ label sister_ntr_crisis_action_label:
                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
                 elif finish == "usual":
                     "[man_name] pulls out his cock, [the_person.possessive_title] grabs it and starts stroking. In a few moments the man begins to cum."
-                    "[the_person.possessive_title] grabss the tip of his cock to catch all the sperm."
+                    "[the_person.possessive_title] grabs the tip of his cock to catch all the sperm."
                     man_name "Ow, fuck! That was great!"
                     $ the_person.draw_person(position = "missionary", emotion = "happy")
                     the_person.char "Yeah, [man_name]! It was great! We really should have done this sooner!"
@@ -200,7 +200,7 @@ label sister_ntr_crisis_action_label:
                     the_person.char "Hold it, [man_name]! I have a better idea."
                     $ the_person.draw_person(position = "blowjob")
                     "She pushes him backwards. With a wet sound his dick leaves her pussy. [the_person.possessive_title] gets on her knees in front of [man_name] cock."
-                    the_person.char "Remember the link I sent you, with a girl getting a cumshot? Do this to me, will you?"
+                    the_person.char "Remember the link I sent you, with a girl getting a cum shot? Do this to me, will you?"
                     man_name "And how can I deny that?"
                     "He strokes his dick for few moments and starts to cover [the_person.possessive_title] face with hot semen."
                     $ the_person.cum_on_face()
@@ -297,7 +297,7 @@ label sister_ntr_crisis_action_label:
                     the_person.char "Hold it, [man_name]! I have a better idea."
                     $ the_person.draw_person(position = "blowjob")
                     "She pushes him backwards. With a wet sound his dick leaves her pussy. [the_person.possessive_title] gets on her knees in front of [man_name] cock."
-                    the_person.char "Remember the link I sent you, with a girl getting a cumshot? Do this to me, will you?"
+                    the_person.char "Remember the link I sent you, with a girl getting a cum shot? Do this to me, will you?"
                     man_name "And how can I deny that?"
                     "He strokes his dick for few moments and starts to cover [the_person.possessive_title] face with hot semen."
                     $ the_person.cum_on_face()
@@ -349,7 +349,7 @@ label sister_ntr_crisis_action_label:
                     $ the_person.cum_in_mouth()
                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                     "[man_name] shrugs and starts filling her mouth with his load."
-                    man_name "Take it all, [the_person.name]. Get you protein coctail of the day!"
+                    man_name "Take it all, [the_person.name]. Get you protein cocktail of the day!"
                     $ the_person.draw_person(position = "blowjob", emotion = "happy")
                     "His weakened dick falls out from [the_person.possessive_title]'s mouth. She looks up and smiles. She swallows the sperm, but you still see traces of it."
                     the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of cola and then we have to finish the tasks. Don't wanna get bad grade on that test."
@@ -395,7 +395,7 @@ label sister_ntr_crisis_action_label:
                     the_person.char "Hold it, [man_name]! I have a better idea."
                     $ the_person.draw_person(position = "blowjob")
                     "She pushes him backwards. With a wet sound his dick leaves her mouth. [the_person.possessive_title] is sitting on her knees in front of [man_name] cock."
-                    the_person.char "Remember the link I sent you, with a girl getting a cumshot? Do this to me, will you?"
+                    the_person.char "Remember the link I sent you, with a girl getting a cum shot? Do this to me, will you?"
                     man_name "And how can I deny that?"
                     "He strokes his dick for few moments and starts to cover [the_person.possessive_title] face with hot semen."
                     $ the_person.cum_on_face()
@@ -422,7 +422,7 @@ label sister_ntr_crisis_action_label:
                     $ the_person.cum_in_mouth()
                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                     "[man_name] shrugs and starts filling her mouth with his load."
-                    man_name "Take it all, [the_person.name]. Get you protein coctail of the day!"
+                    man_name "Take it all, [the_person.name]. Get you protein cocktail of the day!"
                     $ the_person.draw_person(position = "blowjob", emotion = "happy")
                     "His weakened dick falls out from [the_person.possessive_title]'s mouth. She looks up and smiles. She swallows the sperm, but you still see traces of it."
                     the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of cola and then we have to finish the tasks. Don't wanna get bad grade on that test."
@@ -481,7 +481,7 @@ label sister_ntr_crisis_action_label:
                 the_person.char "Hold it, [man_name]! I have a better idea."
                 $ the_person.draw_person(position = "blowjob")
                 "She pushes him backwards. With a wet sound his dick leaves her pussy. [the_person.possessive_title] gets on her knees in front of [man_name] cock. [man_name2] also comes up to her."
-                the_person.char "Do you like porn with a lot of cumshots? Do this to me, will you?"
+                the_person.char "Do you like porn with a lot of cum shots? Do this to me, will you?"
                 man_name "And how can I deny that?"
                 man_name2 "Yeah, such stuff really turns me on!"
                 "They stroke their dicks for few moments and start to cover [the_person.possessive_title] face with hot semen."
@@ -495,7 +495,7 @@ label sister_ntr_crisis_action_label:
                 the_person.char "Do I look cute this way?"
                 man_name "You look like a real porn actress, [the_person.name]."
                 man_name2 "Our little coed just got her sperm bath. What a view!"
-                the_person.char "I loved that too. Now I go wash my face and then we have to study. I need a straigh A on that test."
+                the_person.char "I loved that too. Now I go wash my face and then we have to study. I need a straight A on that test."
                 "You go back to you room to finally have some sleep."
                 if submissive or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from outside the bedroom."
@@ -544,7 +544,7 @@ label sister_ntr_crisis_action_label:
                 $ the_person.cum_in_mouth()
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "[man_name] shrugs and starts filling her mouth with his load."
-                man_name "Take it all, [the_person.name]. Get you protein coctail of the day!"
+                man_name "Take it all, [the_person.name]. Get you protein cocktail of the day!"
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
                 "His weakened dick falls out from [the_person.possessive_title]'s mouth. She looks up and smiles. She swallows the sperm, but you still see traces of it."
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
@@ -555,7 +555,7 @@ label sister_ntr_crisis_action_label:
                 "You see [man_name2] body shrugs as he starts to shoot his load into [the_person.possessive_title] mouth."
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
                 "She gulps and looks up to men with a broad simle."
-                the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of water and then we have to study. I need a straigh A on that test."
+                the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of water and then we have to study. I need a straight A on that test."
                 "You go back to you room to finally have some sleep."
                 if submissive or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from outside the bedroom."
@@ -567,7 +567,7 @@ label sister_ntr_crisis_action_label:
                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
             elif finish == "usual":
                 "[man_name] pulls out his cock, [the_person.possessive_title] grabs it and starts stroking. In a few moments the man begins to cum."
-                "[the_person.possessive_title] grabps the tip with her hand so that no sperm would spill."
+                "[the_person.possessive_title] grabs the tip with her hand so that no sperm would spill."
                 man_name "Ow, fuck! That was great!"
                 $ the_person.draw_person(position = "missionary", emotion = "happy")
                 the_person.char "Yeah, [man_name]! It was great! We really should have done this sooner!"
@@ -607,7 +607,7 @@ label sister_ntr_crisis_action_label:
                 the_person.char "Hold it, [man_name]! I have a better idea."
                 $ the_person.draw_person(position = "blowjob")
                 "She pushes him backwards. With a wet sound his dick leaves her pussy. [the_person.possessive_title] gets on her knees in front of [man_name] cock. [man_name2] also comes up to her."
-                the_person.char "Do you like porn with a lot of cumshots? Do this to me, will you?"
+                the_person.char "Do you like porn with a lot of cum shots? Do this to me, will you?"
                 man_name "And how can I deny that?"
                 man_name2 "Yeah, such stuff really turns me on!"
                 "They stroke their dicks for few moments and start to cover [the_person.possessive_title] face with hot semen."
@@ -672,18 +672,18 @@ label sister_ntr_crisis_action_label:
                 $ the_person.cum_in_mouth()
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "[man_name] shrugs and starts filling her mouth with his load."
-                man_name "Take it all, [the_person.name]. Get you protein coctail of the day!"
+                man_name "Take it all, [the_person.name]. Get you protein cocktail of the day!"
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
                 "He pull his dick out of [the_person.possessive_title]'s mouth. She looks up, swallows and smiles."
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "After finishing with [man_name], [the_person.possessive_title] starts sucking [man_name2]'s cock."
-                man_name2 "Shit, your mouth is so good! I'm gonna expode right now!"
+                man_name2 "Shit, your mouth is so good! I'm gonna explode right now!"
                 $ the_person.cum_in_mouth()
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "You see [man_name2] body convulse as he shoots his load into [the_person.possessive_title] mouth."
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
-                "She gulps and looks up to men with a broad simle."
-                the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of water and then we have to study. I need a straigh A on that test."
+                "She gulps and looks up to the men with a broad smile."
+                the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of water and then we have to study. I need a straight A on that test."
                 "You go back to you room to finally have some sleep."
                 if submissive or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from outside the bedroom."
@@ -734,7 +734,7 @@ label sister_ntr_crisis_action_label:
                 the_person.char "Hold it, [man_name]! I have a better idea."
                 $ the_person.draw_person(position = "blowjob")
                 "She pushes them backwards. [the_person.possessive_title] gets on her knees in front of [man_name] cock. [man_name2] also comes up to her."
-                the_person.char "Do you like porn with a lot of cumshots? I want you both to cum all over me?"
+                the_person.char "Do you like porn with a lot of cum shots? I want you both to cum all over me?"
                 man_name "How could I deny that?"
                 man_name2 "Yeah, that really turns me on!"
                 "They stroke their dicks for few moments and start to cover [the_person.possessive_title]'s face with hot semen."
@@ -792,17 +792,17 @@ label sister_ntr_crisis_action_label:
                 $ the_person.cum_in_mouth()
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "[man_name] shrugs and starts filling her mouth with his load."
-                man_name "Take it all, [the_person.name]. Get you protein coctail of the day!"
+                man_name "Take it all, [the_person.name]. Get you protein cocktail of the day!"
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
                 "He pulls his cock out of [the_person.possessive_title]'s mouth. She looks up, and swallows his load."
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "After finishing with [man_name], [the_person.possessive_title] starts sucking [man_name2]'s cock."
-                man_name2 "Shit, your mouth is so good! I'm gonna expode right now!"
+                man_name2 "Shit, your mouth is so good! I'm gonna explode right now!"
                 $ the_person.cum_in_mouth()
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "You see [man_name2] body shiver as he starts to shoot his load into [the_person.possessive_title] mouth."
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
-                "She also gulps his load down and looks up to men with a broad simle."
+                "She also gulps his load down and looks up to men with a broad smile."
                 the_person.char "Such a wonderful taste, [man_name2]! Now I'll get a glass of water and then we go back to our books. I don't want to fail this test."
                 "You go back to you room to finally have some sleep."
                 if submissive or the_person.sluttiness > 60:
@@ -819,14 +819,14 @@ label sister_ntr_crisis_action_label:
                 man_name "Ow, fuck! That was great!"
                 the_person.char "Yeah, [man_name]! It was great! We really should have done this sooner!"
                 man_name2 "I'm gonna cum too, [the_person.name]."
-                "She gets off from him, grabs his dick and strokes it for a while. Once he reaches an orgasm, [the_person.possessive_title] also cathes all his semen so it won't stain anything."
+                "She gets off from him, grabs his dick and strokes it for a while. Once he reaches an orgasm, [the_person.possessive_title] also catches all his semen so it won't stain anything."
                 the_person.char "You did well, boys! Now I go and wash my hands and get back to our studies. I need a straight A on that test."
                 "You go back to you room to finally have some sleep."
                 if submissive or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from outside the bedroom."
                     the_person.char "Please, guys. Cum for me once more!"
                     man_name "Sure, [the_person.name]. Stroke my cock slowly..."
-                    man_name2 "Do us both simultaniously, [the_person.name], You're gonna love it."
+                    man_name2 "Do us both simultaneously, [the_person.name], You're gonna love it."
                     "You don't catch a lot of sleep tonight..."
                 else:
                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
@@ -851,7 +851,7 @@ label sister_ntr_crisis_action_label:
             if finish == "facial":
                 "She takes his cock out of her mouth."
                 the_person.char "Hold it, [man_name]! I have a better idea."
-                the_person.char "Do you like porn with a lot of cumshots? Do this to me, will you?"
+                the_person.char "Do you like porn with a lot of cum shots? Do this to me, will you?"
                 man_name "And how can I deny that?"
                 man_name2 "Yeah, such stuff really turns me on!"
                 "They stroke their dicks for few moments and start to cover [the_person.possessive_title] face with hot semen."
@@ -885,17 +885,17 @@ label sister_ntr_crisis_action_label:
                 $ the_person.cum_in_mouth()
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "[man_name] shrugs and starts filling her mouth with his load."
-                man_name "Take it all, [the_person.name]. Get you protein coctail of the day!"
+                man_name "Take it all, [the_person.name]. Get you protein cocktail of the day!"
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
                 "His weakened dick falls out from [the_person.possessive_title]'s mouth. She looks up and smiles. She swallows the sperm, but you still see traces of it."
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "After finishing with [man_name], [the_person.possessive_title] starts sucking [man_name2]'s cock."
-                man_name2 "Shit, your mouth is so good! I'm gonna expode right now!"
+                man_name2 "Shit, your mouth is so good! I'm gonna explode right now!"
                 $ the_person.cum_in_mouth()
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "You see [man_name2] body shrugs as he starts to shoot his load into [the_person.possessive_title] mouth."
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
-                "She gulps and looks up to men with a broad simle."
+                "She gulps and looks up to men with a broad smile."
                 the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of water and then we have to finish the tasks. Don't wanna get bad grade on that test."
                 "You go back to you room to finally have some sleep."
                 if submissive or the_person.sluttiness > 60:
@@ -913,7 +913,7 @@ label sister_ntr_crisis_action_label:
                 the_person.char "Yeah, [man_name]! It was great! We really should have done this sooner!"
                 man_name2 "I'm gonna cum too, [the_person.name]."
                 "She grabs his dick and strokes it for a while. Once he reaches an orgasm, [the_person.possessive_title] closes the tip with a hand so that the semen won't stain anything."
-                the_person.char "You have such sweet and tasty cocks, guys! Now I go wash my hands and then we have to study. I need a straigh A on that test."
+                the_person.char "You have such sweet and tasty cocks, guys! Now I go wash my hands and then we have to study. I need a straight A on that test."
                 "You go back to you room to finally have some sleep."
                 if submissive or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from [the_person.possessive_title]'s bedroom."

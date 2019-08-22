@@ -47,37 +47,35 @@ label shower_crisis_action_label:
     else:
         "You can't help but admire [the_person.possessive_title]'s slim body and perky tits."
         "Just as this thought flashes through your mind, she starts rubbing her breasts, pinching her small nipples."
-    $ arousal_plus = renpy.random.randint (10,50)
-    $ the_person.change_arousal(arousal_plus)
+    $ the_person.change_arousal(renpy.random.randint(10,50))
     if the_person.sluttiness >=50 or the_person.get_opinion_score("masturbating") > 0 or the_person.arousal > 35:
         "The warmth of the water and her caresses seem to turn [the_person.possessive_title] on."
         $ the_person.draw_person(position = "missionary")
         "She sits on the shower floor, spreads her legs and begins to masturbate with her hand."
         while the_person.arousal < 100:
-            $ random_mast_descrip = renpy.random.randint(0,4)
-            if random_mast_descrip == 0:
+            $ rand_chance = renpy.random.randint(0,4)
+            if rand_chance == 0:
                 "[the_person.possessive_title] rubs her clit and her moans grow louder."
-            elif random_mast_descrip == 1:
+            elif rand_chance == 1:
                 "As she gets more and more turned on, her hand is moving faster and faster."
-            elif random_mast_descrip == 2:
-                "She pushes 3 fingers inside, making a deep gutteral noice."
+            elif rand_chance == 2:
+                "She pushes 3 fingers inside, making a deep guttural noise."
                 the_person.char "Ahh, yes. Fuck me hard and deep."
-            elif random_mast_descrip == 3:
+            elif rand_chance == 3:
                 if the_person.get_opinion_score("anal sex") > 0:
                     "She slow pushes a finger in her rectum..."
                     the_person.char "Mmmm, yes, make me your little anal slut."
                 else:
-                    "[the_person.possessive_title] moves two fingers along her labia, quitly moaning with pleasure."
+                    "[the_person.possessive_title] moves two fingers along her labia, quietly moaning with pleasure."
             else:
                 if the_person.get_opinion_score("being submissive") > 0:
-                    "[the_person.possessive_title] pinches her nipples hard, wincing from exitement and pain."
+                    "[the_person.possessive_title] pinches her nipples hard, wincing from excitement and pain."
                 else:
                     if the_person.has_large_tits():
                         "With one hand she softly squeezes her large breast."
                     else:
                         "With one hand she squeezes het perky little breast."
-            $ arousal_plus = renpy.random.randint (20,35)
-            $ the_person.change_arousal (arousal_plus)
+            $ the_person.change_arousal(renpy.random.randint(20,35))
         the_person.char "Shit, I'm cumming!"
         $ the_person.draw_person(position = "missionary", emotion = "orgasm")
         "You see [the_person.possessive_title]'s body shiver as she reaches orgasm."
@@ -85,11 +83,8 @@ label shower_crisis_action_label:
         $ the_person.draw_person(position = "walking_away")
         "She gets up and returns to washing her body."
         "You see her love juices mixing with the water dripping on the floor."
-        $ slut_bonus = renpy.random.randint (1,5)
-        $ the_person.sluttiness += slut_bonus
         $ the_person.reset_arousal()
-        $ arousal_plus = renpy.random.randint (10,50)
-        $ the_person.change_arousal (arousal_plus)
+        $ the_person.change_stats(arousal = renpy.random.randint(10,50), slut_temp = renpy.random.randint(2,5))
     else:
         pass
     menu:
@@ -99,7 +94,7 @@ label shower_crisis_action_label:
             if the_person.sluttiness > 70 or the_person.arousal > 35:
                 $ the_person.draw_person(position = "back_peek", emotion = "happy")
                 "[the_person.possessive_title] turns her head when she hears your voice. You see her smile."
-                the_person.char "Well, that sounds lika a plan, [the_person.mc_title]. Come on, get in here."
+                the_person.char "Well, that sounds like a plan, [the_person.mc_title]. Come on, get in here."
                 "You quickly take off your clothes and step into the shower."
                 "[the_person.possessive_title] stands still as you hug her from behind. Your erect dick pushing against her bottom."
                 the_person.char "Ow, I feel that someone is happy to see me. Why don't you slide it in?"

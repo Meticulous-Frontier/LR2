@@ -99,8 +99,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                 loser.char "Ah yes, fill me up. Fuck me you sweaty pig."
                 "His face turns bright red as he pushes [loser.possessive_title]'s face into the desk."
                 loser.char "Oh yes. I'm cumming!"
-                $ loser.change_slut_temp(3)
-                $ loser.change_slut_core(3)
+                $ loser.change_stats(slut_temp = 3, slut_core = 3)
                 "He finishes leaving her quivering against the desk. As he walks away he says: 'Enjoy your food, slut!'"
                 $ loser.cum_on_ass()               
                 "She gathers her clothes and takes the food back to her colleagues. "

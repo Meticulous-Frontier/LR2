@@ -381,13 +381,13 @@ label cougar_sex_watch(the_person, the_sex_person, the_position):
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person(emotion = "default")
         the_person.char "[the_person.mc_title], Why are you doing this here..."
-        $ change_report = the_person.change_slut_temp(1)
+        $ the_person.change_slut_temp(1)
         "[the_person.possessive_title] looks in another direction, but she keeps glancing at you and [the_sex_person.name]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person(emotion = "happy")
         the_person.char "Oh my, [the_person.mc_title]? You might want to teach me that someday..."
-        $ change_report = the_person.change_slut_temp(2)
+        $ the_person.change_slut_temp(2)
         "[the_person.possessive_title] studies [the_sex_person.name] while you [the_position.verb] her."
 
     else:
@@ -430,7 +430,7 @@ label cougar_being_watched(the_person, the_watcher, the_position):
 
     else: #the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #They're both into it but not fanatical about it.
-        the_person.char "[the_watcher.name], I'm glad you don't critisize me."
+        the_person.char "[the_watcher.name], I'm glad you don't criticize me."
         the_person.char "People say I shouldn't do this, but this young man makes me feel alive."
         $ the_person.change_arousal(1)
         $ the_person.change_slut_temp(1)
@@ -443,7 +443,7 @@ label cougar_work_enter_greeting(the_person):
         if the_person.obedience > 120:
             "[the_person.possessive_title] gives you a nod and then turns back to her work."
         else:
-            "[the_person.possessive_title] does not acknowlegde you when you enter."
+            "[the_person.possessive_title] does not acknowledge you when you enter."
 
     elif the_person.happiness > 120:
         if the_person.sluttiness > 50:
@@ -485,7 +485,7 @@ label cougar_date_seduction(the_person): #TODO: Change this to be different.
                 the_person.char "He has his poker night with some friends. Would you like to join me at my place and have glass of wine?"
         else:
             if the_person.love > 40:
-                the_person.char "I don't want this night to end. My [so_title] is on a businesstrip this weekend."
+                the_person.char "I don't want this night to end. My [so_title] is on a business trip this weekend."
                 the_person.char "Do you want to come over to my place so we can spend more time together?"
             else:
                 the_person.char "Tonight was fantastic. I think my [so_title] is out for the night."

@@ -81,7 +81,7 @@ label family_morning_breakfast_enhanced_label():
         "She turns around and hands one plate to you and one plate to [lily.title]."
         lily.char "Thanks Mom, you're the best!"
         $ scene_manager.update_actor(mom, position = "sitting")
-        mom.char "No problem, I'm just happy to spend my morning relaxing with my two favourite people!"
+        mom.char "No problem, I'm just happy to spend my morning relaxing with my two favorite people!"
         "You enjoy a relaxing breakfast bonding with your mother and lily. [mom.possessive_title] seems particularly happy she gets to spend time with you."
         "Neither [lily.title] or [mom.possessive_title] seem to think it's strange to relax in their underwear."
         $ lily.change_stats(love = 3, slut_temp = 3)
@@ -89,7 +89,7 @@ label family_morning_breakfast_enhanced_label():
         "When you're done you help [mom.possessive_title] put the dirty dishes away and get on with your day."
 
     elif mom_slutty and not sis_slutty:
-        #Lily thinks her mom is embarassing and weird but Mom pulls rank.
+        #Lily thinks her mom is embarrassing and weird but Mom pulls rank.
         lily.char "Oh my god Mom, what are you wearing?"
         $ scene_manager.update_actor(mom, position = "back_peek")
         mom.char "What? It's the weekend and it's just the three of us. I didn't think anyone would mind if I was a little more casual."
@@ -115,7 +115,7 @@ label family_morning_breakfast_enhanced_label():
                     "[lily.title] looks at the two of you like you're crazy then sighs dramatically."
                     lily.char "Fine, but this is really weird, okay?"
                     $ scene_manager.update_actor(mom, position = "sitting")
-                    "[mom.possessive_title] dishes out three portions and sits down at the table with you. [lily.title] eventaully gets use to her mothers outfit and joins in on your conversation."
+                    "[mom.possessive_title] dishes out three portions and sits down at the table with you. [lily.title] eventually gets use to her mothers outfit and joins in on your conversation."
                     $ lily.change_slut_temp(5)
                     $ mom.change_happiness(10)
 

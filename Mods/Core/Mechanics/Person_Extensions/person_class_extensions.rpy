@@ -195,7 +195,7 @@ init -1:
         Person.judge_outfit = judge_outfit_extension
 
         # Person.run_move with fixes for "followers" to exclude them since it causes issues in certain circumstances.
-        def run_move_followers_fix(self,location): #Move to the apporpriate place for the current time unit, ie. where the player should find us.
+        def run_move_followers_fix(self,location): #Move to the appropriate place for the current time unit, ie. where the player should find us.
 
             #Move the girl the appropriate location on the map. For now this is either a division at work (chunks 1,2,3) or downtown (chunks 0,5). TODO: add personal homes to all girls that you know above a certain amount.
 
@@ -223,7 +223,7 @@ init -1:
                 elif destination == self.home:
                     self.outfit = self.planned_outfit.get_copy() #We're at home, so we can get back into our casual outfit.
 
-                #NOTE: There is no else here because all of the desitnations should be set. If it's just a location they travel there and that's the end of it.
+                #NOTE: There is no else here because all of the destination should be set. If it's just a location they travel there and that's the end of it.
 
             else:
                 #She finds somewhere to burn some time
@@ -287,7 +287,7 @@ init -1:
             if discovered is None: # we didn't find any discovery information for opinion, so it's new and we passed None, so default set to false
                 discovered = False
             if sexy_opinion is None:
-                if topic in sexy_opinions_list: # We did't find the topic in existing opinions for person, check global list if it is sexy
+                if topic in sexy_opinions_list: # We didn't find the topic in existing opinions for person, check global list if it is sexy
                     sexy_opinion = True
                 sexy_opinion = False
 
@@ -332,7 +332,7 @@ init -1:
             if add_to_log:
                 mc.log_event((self.title or self.name) + " " + opinion_score_to_string(score) + " " + str(topic), "float_text_green")
             return
-        # Add increase opininion function to person class
+        # Add increase opinion function to person class
         Person.increase_opinion_score = increase_opinion_score
 
         ## Decrease the opinion on a specific topic (opinion)
@@ -360,10 +360,10 @@ init -1:
             if add_to_log:
                 mc.log_event((self.title or self.name) + " " + opinion_score_to_string(score) + " " + str(topic), "float_text_green")
             return
-        # Add decrease opininion function to person class
+        # Add decrease opinion function to person class
         Person.decrease_opinion_score = decrease_opinion_score
 
-        # Change Multple Stats for a person at once (less lines of code, better readability)
+        # Change Multiple Stats for a person at once (less lines of code, better readability)
         def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut_temp = None, slut_core = None, add_to_log = True):
             if not obedience is None:
                 self.change_obedience(obedience, add_to_log)

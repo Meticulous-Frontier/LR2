@@ -76,7 +76,7 @@ label late_for_work_action_label:
         if the_person.get_opinion_score("cum facials") > 0:
             the_person.char "Aww. But I like the way it feels."
         elif the_person.get_opinion_score("cum facials") < 0:
-            the_person.char "Definitly, I hate feeling all sticky."
+            the_person.char "Definitely, I hate feeling all sticky."
         else:
             the_person.char "Of Course [the_person.mc_title]."
         

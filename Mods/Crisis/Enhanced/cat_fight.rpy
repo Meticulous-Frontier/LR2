@@ -57,7 +57,7 @@ label cat_fight_crisis_enhanced_label():
             $ scene_manager.update_actor(person_one, emotion="sad")
             person_one.char "But sir..."
             if person_one.sluttiness > 50 and person_two.sluttiness > 50:
-                mc.name "I said nough. Clearly you need help sorting this out."
+                mc.name "I said enough. Clearly you need help sorting this out."
                 "You stand up and take [person_one.title]'s hand in your right hand, then take [person_two.title]'s hand in your left."
                 mc.name "The two of you are part of a larger team. I need you to work together."
                 "You bring the girls hands together and wrap yours around both of theirs."
@@ -73,16 +73,14 @@ label cat_fight_crisis_enhanced_label():
                 $ scene_manager.update_actor(person_one, position = "stand3")
                 $ scene_manager.update_actor(person_two, position = "stand2")
                 "[person_one.title] breaks the kiss and steps back, blushing and panting softly."
-                $ person_one.change_obedience(5)
-                $ person_one.change_slut_temp(10)
+                $ person_one.change_stats(obedience = 5, slut_temp = 10)
                 person_one.name "I should... I should get back to work. Sorry for causing any trouble."
                 $ scene_manager.update_actor(person_one, position = "walking_away")
                 $ scene_manager.update_actor(person_two, emotion = "happy")
                 "[person_two.title] watches [person_one.title] leave, eyes lingering on her ass as she walks away."
                 $ scene_manager.remove_actor(person_one)
                 mc.name "Go on, you should get back to work too."
-                $ person_two.change_obedience(5)
-                $ person_two.change_slut_temp(10)
+                $ person_two.change_stats(obedience = 5, slut_temp = 10)
                 $ scene_manager.update_actor(person_two, position = "back_peek")
                 "You give [person_two.title] a light slap on the butt to pull her attention back to you. She nods quickly and heads the other way."
             else:
@@ -162,24 +160,24 @@ label cat_fight_crisis_enhanced_label():
                     "She smooths her hair back and gets back to work. You decide to do the same."
 
             else: #both >= 40
-                #Girls start pulling clothing off of eachother on purpose until one is naked enough to be very embarassed, then they give up.
+                #Girls start pulling clothing off of each other on purpose until one is naked enough to be very embarrassed, then they give up.
                 while the_clothing and loser.outfit.slut_requirement < 80:
-                    $ rand_fight = renpy.random.randint(0,3)
-                    if rand_fight == 0:
+                    $ rand_chance = renpy.random.randint(0,3)
+                    if rand_chance == 0:
                         "[winner.title] grabs [loser.title] by the [the_clothing.name] and yanks her around. There's a loud rip and the piece of clothing comes free."
                         $ scene_manager.draw_animated_removal(loser, the_clothing)
                         loser.char "You bitch!"
-                    elif rand_fight == 1:
+                    elif rand_chance == 1:
                         "[loser.title] circles around [winner.title], then runs forward yelling and screaming. [winner.title] pushes her to the side, then grabs her by the [the_clothing.name] and tries to pull her to the ground."
-                        "The girls struggle until [loser.title]'s [the_clothing.name] comes free and they seperate. [winner.title] drops it to the ground."
+                        "The girls struggle until [loser.title]'s [the_clothing.name] comes free and they separate. [winner.title] drops it to the ground."
                         $ scene_manager.draw_animated_removal(loser, the_clothing)
                         loser.char "You'll pay for that, slut!"
-                    elif rand_fight == 2:
+                    elif rand_chance == 2:
                         "[winner.title] and [loser.title] collide, screaming profanities at each other."
-                        "You aren't sure exactly what happens, but when they seperate [winner.title] is holding a piece of fabric that use to be [loser.title]'s [the_clothing.name]."
+                        "You aren't sure exactly what happens, but when they separate [winner.title] is holding a piece of fabric that use to be [loser.title]'s [the_clothing.name]."
                         $ scene_manager.draw_animated_removal(loser, the_clothing)
                         loser.char "Is that all you've got?"
-                    else: #rand_fight == 3
+                    else: #rand_chance == 3
                         "[loser.title] gets an arm around [winner.title]'s waist and pushes her against a desk. The two grapple for a moment, then [winner.title] grabs [loser.title] by the [the_clothing.name] and pulls until the piece of clothing rips off."
                         $ scene_manager.draw_animated_removal(loser, the_clothing)
                         loser.char "Fuck, you're going to pay for that!"
@@ -187,9 +185,9 @@ label cat_fight_crisis_enhanced_label():
                     $ returns_favour = renpy.random.randint(0,2)
                     $ other_clothing = winner.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
 
-                    if returns_favour == 0: #Doesn't actually return the favour, because she's the loser she only retalliates %66 of the time.
+                    if returns_favour == 0: #Doesn't actually return the favour, because she's the loser she only retaliates %66 of the time.
                         "[winner.title] laughs and crouches low."
-                        winner.char "Come on! Come and get it, you cocksucking whore!"
+                        winner.char "Come on! Come and get it, you cock sucking whore!"
                     elif returns_favour == 1:
                         winner.char "Do you think I'm afraid of you? Come on!"
                         if other_clothing:
@@ -226,12 +224,12 @@ label cat_fight_crisis_enhanced_label():
                     loser.char "Oh god... [winner.title], just... Ah!"
                     "[winner.title] isn't going easy on [loser.title]. She shivers and bucks against [winner.title]."
                     $ loser.change_arousal(25)
-                    "[winner.title] speeds up, pumping her fingers in and out of [loser.title]'s exposded cunt. She moans loudly and rolls her hips against [winner.title]'s."
+                    "[winner.title] speeds up, pumping her fingers in and out of [loser.title]'s exposed cunt. She moans loudly and rolls her hips against [winner.title]'s."
                     $ loser.change_arousal(25)
                     winner.char "You thought you could get away easy, huh? Well now I'm going to make you cum right here, you dirty little slut!"
                     $ loser.change_arousal(25)
                     "[loser.title] looks right into your eyes. She doesn't look embarrassed - in fact it looks like she's turned on by you watching her get finger banged right in the middle of the office."
-                    loser.char "I'm goint to... I'm going to... AH!"
+                    loser.char "I'm going to... I'm going to... AH!"
                     $ loser.change_arousal(25)
                     $ scene_manager.update_actor(loser, emotion = "orgasm")
                     winner.char "That's it, cum for me slut!"
