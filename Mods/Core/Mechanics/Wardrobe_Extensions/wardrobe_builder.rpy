@@ -19,14 +19,14 @@ init 5 python:
     class WardrobeBuilder():
         preferences = {}
         preferences["skimpy outfits"] = {}
-        preferences["skimpy outfits"]["upper_body"] = [two_part_dress, thin_dress, leotard, tshirt, lace_sweater, sweater, belted_top, lace_crop_top, tanktop, tube_top, business_vest]
-        preferences["skimpy outfits"]["lower_body"] = [leggings, booty_shorts, jean_hotpants, belted_skirt, lace_skirt, mini_skirt]
+        preferences["skimpy outfits"]["upper_body"] = [two_part_dress, thin_dress, leotard, lace_sweater, belted_top, lace_crop_top, tanktop, tube_top, business_vest]
+        preferences["skimpy outfits"]["lower_body"] = [booty_shorts, jean_hotpants, belted_skirt, mini_skirt]
         preferences['skimpy outfits']["feet"] = [thigh_highs, fishnets, garter_with_fishnets, pumps, heels, high_heels, thigh_high_boots]
         preferences["skimpy outfits"]["accessories"] = [lace_choker, wide_choker, spiked_choker]
         preferences["conservative outfits"] = {}
-        preferences["conservative outfits"]["upper_body"] = [long_sweater, sleeveless_top, long_tshirt, camisole, long_sleeve_blouse, short_sleeve_blouse, tie_sweater, dress_shirt, summer_dress]
-        preferences["conservative outfits"]["lower_body"] = [pencil_skirt, skirt, long_skirt]
-        preferences["conservative outfits"]["feet"] = [sandles, shoes, slips, sneakers, tall_boots, short_socks, medium_socks]
+        preferences["conservative outfits"]["upper_body"] = [long_sweater, sleeveless_top, long_tshirt, camisole, long_sleeve_blouse, short_sleeve_blouse, tie_sweater, dress_shirt, sweater_dress]
+        preferences["conservative outfits"]["lower_body"] = [pencil_skirt, skirt, long_skirt, jeans, suitpants]
+        preferences["conservative outfits"]["feet"] = [sandles, shoes, slips, sneakers, short_socks]
         preferences["conservative outfits"]["accessories"] = [wool_scarf]
         preferences["dresses"] = {}
         preferences["dresses"]["lower_body"] = [x for x in dress_list if x not in [lacy_one_piece_underwear, lingerie_one_piece]]
@@ -198,7 +198,7 @@ init 5 python:
             item = self.get_item_from_list("upper_body", self.build_filter_list(bra_list + [lingerie_one_piece, lacy_one_piece_underwear], points))
             if item:
                 score = self.person.get_opinion_score("showing her tits") + self.person.get_opinion_score("not wearing underwear")
-                if points < 3 or not renpy.random.randint(0, (score + 4) * 5) > 22:
+                if points < 3 or not renpy.random.randint(0, (score + 4) * 5) > 28:
                     outfit.add_upper(item.get_copy(), color_upper)
 
             # find lowerbody item
@@ -206,7 +206,7 @@ init 5 python:
                 item = self.get_item_from_list("lower_body", self.build_filter_list(panties_list, points))
                 if item:
                     score = self.person.get_opinion_score("showing her ass") + self.person.get_opinion_score("not wearing underwear")
-                    if points < 3 or not renpy.random.randint(0, (score + 4) * 5) > 22:
+                    if points < 3 or not renpy.random.randint(0, (score + 4) * 5) > 28:
                         outfit.add_lower(item.get_copy(), color_lower)
             
             if points > 4 or renpy.random.randint(0, 3) == 0:
@@ -232,6 +232,11 @@ init 5 python:
 
 
         def build_filter_list(self, item_list, points):
+            items = []
+            while len(items) == 0 and points < 15:  # make sure we got some items to choose from
+                items = list(filter(lambda x: x.slut_value <= points, item_list))
+                points += 1
+
             return list(filter(lambda x: x.slut_value <= points, item_list))
         
         def add_accessory_from_list(self, outfit, filtered_list, chance, item_color = [.8, .1, .1, .95]):
