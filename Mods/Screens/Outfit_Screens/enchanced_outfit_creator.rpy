@@ -314,6 +314,7 @@ init 2:
         default demo_outfit = starting_outfit.get_copy()
         default item_outfit = starting_outfit.get_copy()
         default outfit_builder = WardrobeBuilder(None)
+        default max_slut = outfit_type == "over" and 6 or 12
 
         if outfit_type == "under":
             $ valid_layers = [0,1]
@@ -1100,12 +1101,14 @@ init 2:
                                                     xsize 90
                                                     ysize 45
                                                 bar:
-                                                    adjustment ui.adjustment(range = 12, value = slut_generation, step = 1, changed = update_slut_generation)
+                                                    adjustment ui.adjustment(range = max_slut, value = slut_generation, step = 1, changed = update_slut_generation)
                                                     xfill True
                                                     ysize 45
                                                     style style.slider
 
-                                    if outfit_builder and len(outfit_builder.get_hate_list()) > 0:
+                                    $ love_list = outfit_builder.get_love_list()
+                                    $ hate_list = outfit_builder.get_hate_list()
+                                    if outfit_builder and len(love_list + hate_list) > 0:
                                         frame:
                                             background "#888888"
                                             xsize 250
@@ -1115,22 +1118,26 @@ init 2:
                                                     background "#000080"
                                                     xsize 240
                                                     padding [1,1]
-                                                    text "Hates:" style "serum_text_style_traits"
-                                                frame:
-                                                    background "#888888"
+                                                    text "Preferences:" style "serum_text_style_traits"
+                                                viewport:
+                                                    scrollbars "vertical"
+                                                    draggable True
+                                                    mousewheel True
                                                     yfill True
-                                                    xpos 0
                                                     xsize 240
-                                                    viewport:
-                                                        draggable True
-                                                        mousewheel True
-                                                        yfill True
-                                                        xsize 230
-                                                        vbox:
-                                                            for pref in outfit_builder.get_hate_list():
+                                                    vbox:
+                                                        if len(love_list) > 0:
+                                                            for pref in love_list:
                                                                 frame:
-                                                                    background "#000080"
-                                                                    xsize 235
+                                                                    background "#007000"
+                                                                    xsize 220
+                                                                    padding [1,1]
+                                                                    text pref style "serum_text_style_traits"
+                                                        if len(hate_list) > 0:
+                                                            for pref in hate_list:
+                                                                frame:
+                                                                    background "#930000"
+                                                                    xsize 220
                                                                     padding [1,1]
                                                                     text pref style "serum_text_style_traits"
 

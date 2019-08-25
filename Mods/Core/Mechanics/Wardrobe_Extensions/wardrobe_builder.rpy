@@ -6,6 +6,11 @@ init 5 python:
     opinions_list.insert(15, "the colour purple")
     opinions_list.insert(15, "the colour white")
 
+    # make business vest layer 2
+    shirts_list.remove(business_vest)
+    business_vest = Clothing("Business Vest", 2, True, True, "Tight_Vest", True, False, 2, opacity_adjustment = 1.3)
+    shirts_list.append(business_vest)    
+
     # generate a more useable default color palette
     if len(persistent.colour_palette) == 10:
         persistent.colour_palette = [
@@ -13,7 +18,7 @@ init 5 python:
             [.33, .10, .06, .95], [.80, .26, .04, .95], [.99, .42, .52, .95], [.87, .44, .63, .95], [1, .41, .71, .95], [1, .73, .85, .95],
             [.29, .32, .12, .95], [.18, .54, .34, .95], [.0, .8, .6, .95], [.41, .16, .38, .95], [.45, .31, .59, .95], [.71, .4, .85, .95],
             [.95, .95, .95, .95], [.15, .15, .15, .95],
-            [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1]    # allow for 6 unused userdefinable colors
+            [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1]    # allow for 6 unused user definable colors
         ]
 
     class WardrobeBuilder():
@@ -144,6 +149,14 @@ init 5 python:
                     item_list.append(pref)
             return item_list
 
+        def get_love_list(self):
+            item_list = []
+            for pref in self.preferences.keys() + self.color_prefs.keys():
+                score = self.person.get_opinion_score(pref)
+                if score == 2:
+                    item_list.append(pref)
+            return item_list
+
         def build_overwear(self, points = 0):
             outfit = Outfit("Overwear")
 
@@ -153,26 +166,22 @@ init 5 python:
 
             # find upper body item
             filtered_upper_list = list(filter(lambda x: x.slut_value <= points, upper_item_list))
-            item = self.get_item_from_list("upper_body", filtered_upper_list)
+            item = self.get_item_from_list("upper_body", filtered_upper_list, points, ["not wearing anything"])
             if item:
-                score = self.person.get_opinion_score("not wearing anything")
-                if points < 3 or not renpy.random.randint(0, (score + 2) * 5) > 13:
-                    outfit.add_upper(item.get_copy(), color_upper)
+                outfit.add_upper(item.get_copy(), color_upper)
 
             # we added a overlay item, so find a real upper item this time
             if item and item.layer == 3:
                 filtered_upper_list = list(filter(lambda x: x.slut_value <= points and x.layer == 2, upper_item_list))
-                item = self.get_item_from_list("upper_body", filtered_upper_list)
+                item = self.get_item_from_list("upper_body", filtered_upper_list, points, ["not wearing anything"])
                 if item:
                     outfit.add_upper(item.get_copy(), color_lower)
 
             # find lowerbody item
             if item is None or not item.has_extension:
-                item = self.get_item_from_list("lower_body", self.build_filter_list(pants_list + skirts_list, points))
+                item = self.get_item_from_list("lower_body", self.build_filter_list(pants_list + skirts_list, points), points, ["not wearing anything"])
                 if item:
-                    score = self.person.get_opinion_score("not wearing anything")
-                    if points < 3 or not renpy.random.randint(0, (score + 2) * 5) > 13:
-                        outfit.add_lower(item.get_copy(), [color_lower[0] * .9, color_lower[1] * .9, color_lower[2] * .9, color_lower[3]])
+                    outfit.add_lower(item.get_copy(), [color_lower[0] * .9, color_lower[1] * .9, color_lower[2] * .9, color_lower[3]])
 
             # find feet item
             filtered_feet_list = list(filter(lambda x: x.slut_value <= points, shoes_list))
@@ -194,22 +203,18 @@ init 5 python:
 
             color_upper, color_lower, color_feet = self.get_main_color_scheme()
             
-            # find upperbody item
-            item = self.get_item_from_list("upper_body", self.build_filter_list(bra_list + [lingerie_one_piece, lacy_one_piece_underwear], points))
+            # find upper body item
+            item = self.get_item_from_list("upper_body", self.build_filter_list(bra_list + [lingerie_one_piece, lacy_one_piece_underwear], points), points, ["showing her tits", "not wearing underwear"])
             if item:
-                score = self.person.get_opinion_score("showing her tits") + self.person.get_opinion_score("not wearing underwear")
-                if points < 3 or not renpy.random.randint(0, (score + 4) * 5) > 28:
-                    outfit.add_upper(item.get_copy(), color_upper)
+                outfit.add_upper(item.get_copy(), color_upper)
 
-            # find lowerbody item
+            # find lower body item
             if not item or not item.has_extension:
-                item = self.get_item_from_list("lower_body", self.build_filter_list(panties_list, points))
+                item = self.get_item_from_list("lower_body", self.build_filter_list(panties_list, points), points, ["showing her ass", "not wearing underwear"])
                 if item:
-                    score = self.person.get_opinion_score("showing her ass") + self.person.get_opinion_score("not wearing underwear")
-                    if points < 3 or not renpy.random.randint(0, (score + 4) * 5) > 28:
-                        outfit.add_lower(item.get_copy(), color_lower)
+                    outfit.add_lower(item.get_copy(), color_lower)
             
-            if points > 4 or renpy.random.randint(0, 3) == 0:
+            if points > 5 or renpy.random.randint(0, 3) == 0:
                 item = self.get_item_from_list("feet", self.build_filter_list(socks_list, points))
                 if item:
                     outfit.add_feet(item.get_copy(), color_feet)
@@ -266,7 +271,7 @@ init 5 python:
 
             return (color_upper, color_lower, color_feet)
 
-        def get_item_from_list(self, item_group, filtered_list):
+        def get_item_from_list(self, item_group, filtered_list, points = 0, empty_item_opinions = []):
             weighted_list = self.build_weighted_list(item_group, filtered_list)
 
             for pref in self.preferences:
@@ -276,11 +281,17 @@ init 5 python:
                         if item_list: # check if we have any items left, if not use original weighted list
                             weighted_list = item_list
             
+            if points > 4:  # we want high sluttiness so add chance for not wearing an item based on opinion
+                for opinion in empty_item_opinions:
+                    score = self.person.get_opinion_score(opinion)
+                    if score > 0:
+                        weighted_list.append([None, score * (20 + points)])
+
             renpy.random.shuffle(weighted_list)
 
             item = get_random_from_weighted_list(weighted_list)
 
-            if hasattr(item, "supported_patterns") and item.supported_patterns and renpy.random.randint(0, 1) == 1:
+            if item and hasattr(item, "supported_patterns") and item.supported_patterns and renpy.random.randint(0, 1) == 1:
                 key_value = get_random_from_list(list(item.supported_patterns.keys()))
                 item.pattern = item.supported_patterns[key_value]
                 item.colour_pattern = self.get_color()
