@@ -31,9 +31,9 @@ label cut_hair_label(person):
     if hair_style_check != person.hair_style or hair_color_check != person.hair_colour: # Anything was changed
         person.char "Better now?"
         $ person.draw_person(emotion = "happy")
-        mc.name "You look wonderfull, [person.possessive_title]!"
+        mc.name "You look wonderful, [person.possessive_title]!"
     else:
-        person.char "It seems you prefered my old look, [the_person.mc_title]."
+        person.char "It seems you preferred my old look, [the_person.mc_title]."
 
     $ renpy.scene("Active")
     return

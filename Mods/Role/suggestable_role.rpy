@@ -1,4 +1,4 @@
-# if suggestability is enabled now depends on the lysergide_n2o_serum
+# if suggestibility is enabled now depends on the lysergide_n2o_serum
 # the serum adds the role action to a person and removes it when
 # the serum wears off
 
@@ -48,9 +48,9 @@ label influence_opinion_label(person): #Input a custom opinion, check if they ha
         cur_score = opinion_score_to_string(score)
 
     if score is not 0:
-        "Speaker" "[person.possessive_title] [cur_score] [opinion], depending on how drastic the change and how suggestable the person is you might succeed."
+        "Speaker" "[person.possessive_title] [cur_score] [opinion], depending on how drastic the change and how suggestible the person is you might succeed."
     else:
-        "Speaker" "[person.possessive_title], currently has no opinion regarding [opinion], depending on how suggestable the person is you might succeed"
+        "Speaker" "[person.possessive_title], currently has no opinion regarding [opinion], depending on how suggestible the person is you might succeed"
 
     if change == 1: # small change
         $ difficulty = renpy.random.randint(0, 20) # Using ranges so people can get lucky, and it can give different outcomes faking simulation of psychology
@@ -71,7 +71,7 @@ label influence_opinion_label(person): #Input a custom opinion, check if they ha
 
     else:
         "Speaker" "[person.possessive_title] doesn't seem to agree with your suggestion regarding [opinion]"
-        "Speaker" "Making her more suggestable might help you out."
+        "Speaker" "Making her more suggestible might help you out."
 
     $ person.special_role.remove(suggestable_role)
     $ mc.log_event((person.title or person.name) + " is no longer suggestable.", "float_text_blue")

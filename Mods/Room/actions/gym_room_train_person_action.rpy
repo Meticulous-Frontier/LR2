@@ -101,7 +101,7 @@ label train_in_gym(person):
 
     if change < 1:
         "You decide to take a yoga class with [person.possessive_title]."
-        person.char "This stretching is good my flexibilty."
+        person.char "This stretching is good my flexibility."
         if person.sluttiness > 20:
             $ person.draw_person(emotion="happy")
             "There is a subtle undertone in that remark that makes you smile."

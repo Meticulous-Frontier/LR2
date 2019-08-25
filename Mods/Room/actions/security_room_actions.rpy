@@ -5,7 +5,7 @@ init -1 python:
     security_room_cctv_actions = []
     security_room_investigation_actions = []
 
-init 3 python: # Put this behind a mod init to ensure compatability
+init 3 python: # Put this behind a mod init to ensure compatibility
 
 
     def security_overview_requirement():
@@ -192,7 +192,7 @@ label investigate_person(person_choice = the_person): # Need to default to the_p
             $ act_choice.call_action()
 
 label investigation_home_label():
-    "You conveniently find [the_person.name]'s adress in the yellow pages."
+    "You conveniently find [the_person.name]'s address in the yellow pages."
     $ learn_home(the_person)
     
     # call advance_time from _call_advance_time_investigation_home_label

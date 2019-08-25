@@ -94,7 +94,7 @@ label purchase_rooms():
             $ act_choice.call_action()
 
 # Tier 1 Rooms
-label purchase_dungeon_room(): #Enables the dugneon.
+label purchase_dungeon_room(): #Enables the dungeon.
 
     $ mc.business.pay(- t1_cost)
 
@@ -147,7 +147,7 @@ label purchase_biotech_room(): #Enables the biotech lab
     call advance_time from _call_advance_time_purchase_biotech_room
     return
 
-#label purchase_dungeon_room(): #Enables the dugneon.
+#label purchase_dungeon_room(): #Enables the dungeon.
 #    if office_basement not in mod_rooms_lobby:
 #        $ mod_rooms_lobby.append(office_basement)
 #    return

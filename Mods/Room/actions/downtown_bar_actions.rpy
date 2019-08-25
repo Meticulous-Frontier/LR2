@@ -14,7 +14,7 @@ init -1 python:
 
 
 label downtown_bar_actions():
-   python: #Generate a list of options from the actions that have their requierement met, plus a back button in case the player wants to take none of them.
+   python: #Generate a list of options from the actions that have their requirements met, plus a back button in case the player wants to take none of them.
       downtown_bar_options = []
       for act in downtown_bar_actions:
          downtown_bar_options.append(act)
@@ -44,7 +44,7 @@ label downtown_bar_drink_label():
 
         $ new_person.draw_person(position = "sitting")
         "She seats herself in the longue area, seemingly puzzled by the lack of attendance at the only bar in town."
-        "She sits quietely minding her own business..."
+        "She sits quietly minding her own business..."
 
         "Do you wish to introduce yourself, perhaps grace her with a free- of charge drink?"
 

@@ -234,7 +234,7 @@ label cougar_seduction_accept_alone(the_person):
             the_person.char "Come on [the_person.mc_title], lets get going, screw my [so_title]!"
         else:
             the_person.char "I have a [so_title], I shouldn't be doing this..."
-            "Her eyes tell quitte a different story."
+            "Her eyes tell quite a different story."
     return
 
 label cougar_sex_responses(the_person):
@@ -319,7 +319,7 @@ label cougar_cum_face(the_person):
 label cougar_cum_mouth(the_person):
     if the_person.obedience > 130:
         if the_person.sluttiness > 50:
-            the_person.char "It seems I did a good job, you have a wonderfull taste [the_person.mc_title]."
+            the_person.char "It seems I did a good job, you have a wonderful taste [the_person.mc_title]."
         else:
             the_person.char "I'm not sure I'm really into this, I'll try to like it for you [the_person.mc_title]."
     else:
@@ -342,7 +342,7 @@ label cougar_sex_strip(the_person):
             the_person.char "How about I take this off for you."
         else:
             the_person.char "Oh [the_person.mc_title], you make me feel so young again!"
-            the_person.char "I realy need to take some more off."
+            the_person.char "I really need to take some more off."
     else:
         if the_person.arousal < 50:
             the_person.char "I'm really horny, I bet you want to see some more of me."

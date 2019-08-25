@@ -8,7 +8,7 @@ init -1 python:
 label serum_mod_osteomalacia_serum_trait(stack):
     python:
         osteomalacia_serum_trait = SerumTraitMod(name = "Osteomalacia Trait",
-            desc = "Decrease target subjects height, reduces calcium and vitimine D absorbtion combined with experimental component to slightly change height.",
+            desc = "Decrease target subjects height, reduces calcium and vitamine D absorption combined with experimental component to slightly change height.",
             positive_slug = "-$15 Value, 20% Chance/Turn to decrease height by 1 cm",
             negative_slug = "+125 Serum Research",
             value_added = -15,

@@ -30,7 +30,7 @@ init 10 python:
         advance_time_action_list.append(advance_time_stay_wet_action)
 
     collar_slave_action = ActionMod("Place collar on [the_person.title].", collar_slave_requirement, "slave_collar_person_label", menu_tooltip = "Put a collar of ownership on the target, ensure that their obedience stays high.", category = "Slave Role")
-    uncollar_slave_action = ActionMod("Remove collar from [the_person.title].", uncollar_slave_requirement, "slave_collar_person_label", menu_tooltip = "Remove the collar, declearing them a free spirit.", category = "Dungeon Actions", allow_disable = False)
+    uncollar_slave_action = ActionMod("Remove collar from [the_person.title].", uncollar_slave_requirement, "slave_collar_person_label", menu_tooltip = "Remove the collar, declaring them a free spirit.", category = "Dungeon Actions", allow_disable = False)
     advance_time_collar_person_action = ActionMod("Enable 'collar' functionality", advance_time_collar_person_requirement, "advance_time_collar_person_label", allow_disable = False, priority = 20, menu_tooltip = "Allows the collar_slave_action to do what it is intended to.")
     if advance_time_collar_person_action not in advance_time_action_list:
         advance_time_action_list.append(advance_time_collar_person_action)
@@ -40,7 +40,7 @@ init 10 python:
 label stay_wet_label(the_person): # Can expand with dialogue options and degrees of arousal, but just setting up basic actions for now.
 
     if the_person.stay_wet == False:
-        "You order [the_person.possessive_title] to keep themself wet and ready at all times for you."
+        "You order [the_person.possessive_title] to keep herself wet and ready at all times for you."
         if the_person.arousal < 50:
             $ the_person.arousal = 50
         $ the_person.stay_wet = True

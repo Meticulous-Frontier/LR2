@@ -1,6 +1,6 @@
-# Business Basement Rooms is a proof of concept on best practises for adding rooms to the game via the Room Manager.
+# Business Basement Rooms is a proof of concept on best practices for adding rooms to the game via the Room Manager.
 # Requires the Room Manager.rpy to be present for it to work as intended.
-# Adds a basement section accessable via the business lobby.
+# Adds a basement section accessible via the business lobby.
 
 # name,formalName,connections,background_image,objects,people,actions,public,map_pos, tutorial_label = None, visible = True)
 init -1 python:
@@ -102,7 +102,7 @@ label store_office_basement():
 
 label store_downtown_bar():
     # Downtown Bar - The Downtown Distillery | downtown_bar_actions.rpy
-    # This bar gets updated when a save game is loaded, regardsless of its existance
+    # This bar gets updated when a save game is loaded, regardless of its existence
 
     python:
         downtown_bar_objects = [
@@ -124,7 +124,7 @@ label store_downtown_bar():
 
 label store_downtown_hotel():
     # Hotel Room - The Hotel | No actions at this time.
-    # This hotel gets updated when a save game is loaded, regardsless of its existance
+    # This hotel gets updated when a save game is loaded, regardless of its existence
 
     python:
         downtown_hotel_objects = [

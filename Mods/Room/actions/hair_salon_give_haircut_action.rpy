@@ -28,7 +28,7 @@ label salon_response(person_choice): # How does the_person respond to a company 
         hair_color_check = person.hair_colour
 
     # Add responses here: Currently just placeholders.
-    # We don't need repsonse that vary by sluttiness / obedience anymore
+    # We don't need response that vary by sluttiness / obedience anymore
     # they are covered by the new title system.
     # so start with the exceptions and run down to the default response.
 
