@@ -96,6 +96,7 @@ init 1 python:
 label casual_athlete_get_to_know_label(the_person):
     if "athlete_progress" not in the_person.event_triggers_dict:
         $ the_person.event_triggers_dict["athlete_progress"] = 0
+        #Introduction scene#
     if the_person.event_triggers_dict.get("athlete_progress", 0) < 1:
         "You look up and down [the_person.title]. You can tell she takes care of herself."
         mc.name "You seem like you like to work out."
@@ -108,6 +109,7 @@ label casual_athlete_get_to_know_label(the_person):
             for role in the_person.special_role:
                 if role.role_name == "?????":
                     role.role_name = "College Athlete"
+        #You're introduced but not had sex yet#
     elif the_person.event_triggers_dict.get("athlete_progress", 0) == 1:
         "You decide to ask [the_person.title] a bit more about her athletics."
         mc.name "I see you here a lot. Are you getting ready for a race?"
@@ -135,7 +137,7 @@ label casual_athlete_get_to_know_label(the_person):
         else:
             the_person.char "I appreciate you buying me a protein shake now and then. I definitely feel the effects of them. I feel stronger... even sexier since you started doing that!"
         "[the_person.title] moves on to the free weights area of the gym."
-        if mc.max_stamina > 4:
+        if mc.max_stamina > 3:
             the_person.char "I think I'm going to do some squats..."
             "[the_person.title] looks over at you. She gives you a quick appraisal."
             the_person.char "Hey, you look like you're fairly fit yourself. You should workout with me sometime."
@@ -152,14 +154,41 @@ label casual_athlete_get_to_know_label(the_person):
             "You consider her statement for a moment."
             the_person.char "Anyway, I'm going to get back to my workout. I'll see you around [the_person.title]!"
             "If you want to get further with her, maybe you should work on increasing your stamina!"
+
+        #Had sex in the lockerroom#
     elif the_person.event_triggers_dict.get("athlete_progress", 0) == 2:
-        "TODO: she talks to you about the upcoming marathon"
+        "You notice that [the_perosn.title] is really pushing herself hard today on the treadmill."
+        mc.name "Hey [the_person.title]. You're really going at it! Have an event coming up?"
+        "[the_person.title] slows the treadmill down so she can carry on a conversation."
+        the_person.char "Yeah! I have a big 10k coming up. I really want to do well for this, with it coming up on track season!"
+        "You chit chat with [the_person.title] for a bit about the upcoming race."
+        if mc.max_stamina > 5:
+            the_person.char "Hey, you seem pretty fit too. You should consider entering! It's for a great cause!"
+            mc.name "Okay... I'll consider it. Things are pretty busy at work lately, but I'll get back to you if I have time."
+            the_person.char "Just don't be sore about it when I beat you to the finish line. I'm a serious athlete!"
+            mc.name "Ohhh, I see! Well, maybe we should make it a race! But what would the stakes be?"
+            "[the_person.title] chuckles before responding. She gives you a quick wink."
+            the_person.char "I'm sure we could come up with something... be careful though, don't bet anything you aren't willing to lose!"
+        else:
+            the_person.char "Hey, it has been nice chatting with you, but I need to get back to my workout!"
+        "You say goodbye and head on your way."
 
+        #You've challenged her to a race!#
     elif the_person.event_triggers_dict.get("athlete_progress", 0) == 3:
-        "TODO: she trash talks you about the upcoming race."
+        "You try to strike up a conversation with [the_person.title]."
+        the_person.char "Hey now, no distractions! Your ass is mine on Saturday!"
+        mc.name "Ha! We'll see about that!"
 
+
+        #You've won the race#
     elif the_person.event_triggers_dict.get("athlete_progress", 0) == 4:
-        "TODO: she hints you should swing by her place for casual sex soon"
+        mc.name "Hey [the_person.title]."
+        the_person.char "Hey. [the_person.mc_title]!"
+        "You catch up with her for a bit with what she's been up to."
+        the_person.char "Well, it was good to see you. We should work out again sometime, or... you haven't lost my address have you?"
+        mc.name "Of course not!"
+        the_person.char "Then swing by some evening, it would be good to get a little time working out some tension!"
+        "You tell her you'll look her up soon, say goodbye and head on your way."
 
     else:
         "Debug: How did you end up here???"
@@ -503,7 +532,7 @@ label casual_athlete_buy_protein_shake_label(the_person):
 
 #CSA40
 label casual_athlete_house_call_label(the_person):
-    mc.name "Don't worry, I'm not here for busines. I'm here for pleasure!"
+    mc.name "Don't worry, I'm not here for business. I'm here for pleasure!"
     $ the_person.draw_person( position = "against_wall")
     "You reach around with both hands and grab her ass. You roughly pick her up, holding her tightly against you."
     the_person.char "Oh! Yes I was hoping that's why you were here..."

@@ -312,6 +312,11 @@ init -1 python:
                                         mc.business.mandatory_crises_list.append(SB_mom_anal_fetish)
                                         FETISH_ANAL_EVENT_INUSE = True
                                         SB_SET_RANDOM_EVENT_CHANCE(0)
+                            elif the_person == starbuck:
+                                if starbuck.shop_investment_rate == 6.0:
+                                    mc.business.mandatory_crises_list.append(SB_starbuck_anal_intro_event)
+                                    FETISH_ANAL_EVENT_INUSE = True
+                                    SB_SET_RANDOM_EVENT_CHANCE(0)
                             else:
                                 SB_fetish_anal_crisis.args = [the_person]    # set the current person as action argument
                                 mc.business.mandatory_crises_list.append(SB_fetish_anal_crisis)

@@ -42,11 +42,21 @@ init -1 python:
     def SB_fetish_anal_staylate_requirement(the_person):
         if mc.is_at_work():
             if the_person.sex_skills["Anal"] >= 6:
-                if SB_MOD_RANDOM_EVENT_CHANCE > 0:
+                if SB_MOD_RANDOM_EVENT_CHANCE > 0:  #TODO this shit is probably broke. It just need to check for employee status?
                     return True
                 else:
                     return "Someone else is coming over tonight"
         return
+
+    def SB_fetish_starbuck_anal_swing_demo_requirement(the_person):
+        if the_person == starbuck:
+            if mc.location == sex_store:
+                return True
+            else:
+                return "Must be at the Sex Shop"
+        else:
+            return False
+
 
     def SB_fetish_cum_getdosage_requirement(the_person):
         if mc.current_stamina > 0:
@@ -69,7 +79,9 @@ init -1 python:
         menu_tooltip = "Bend her over the kitchen counter.")
     SB_lily_anal_in_room = Action("Use Strap On", SB_lily_anal_in_room_requirement, "SB_lily_anal_in_room_label",
         menu_tooltip = "Double Penetration on the bed.")
-    anal_fetish_role = Role(role_name ="Anal Fetish", actions =[SB_fetish_anal_staylate, SB_fetish_anal_mom_kitchen, SB_lily_anal_in_room])
+    SB_fetish_starbuck_anal_swing_demo = Action("Have Sex Swing Demo", SB_fetish_starbuck_anal_swing_demo_requirement, "SB_starbuck_anal_swing_demo",
+        menu_tooltip = "Anal Sex in the Swing")
+    anal_fetish_role = Role(role_name ="Anal Fetish", actions =[SB_fetish_anal_staylate, SB_fetish_anal_mom_kitchen, SB_lily_anal_in_room, SB_fetish_starbuck_anal_swing_demo])
 
     # Initialize Cum Fetish role
     SB_fetish_cum_getdosage = Action("Give her cum dosage", SB_fetish_cum_getdosage_requirement, "SB_fetish_cum_getdosage_label",

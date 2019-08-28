@@ -67,10 +67,15 @@ init 2 python:
 
         # Add StarBuck introduction event to sex store
         starbuck.on_room_enter_event_list.append(starbuck_introduction_event_action)
+
+        starbuck.event_triggers_dict["sb_fetish"] = "None"
         return
 
     # create mod event to trigger creation
     starbuck_introduction_event_action = ActionMod("Starbuck's Sex Shop", starbuck_introduction_requirement, "starbuck_greetings", initialization = SB_mod_initialization, menu_tooltip = "Starbuck's Sex Shop", category = "Misc", allow_disable = False, options_menu = "SB_mod_options_menu")
+
+    #def SB_starbuck_fetish_available():
+    #    if SB_get_fetish_count(starbuck) < store.max_fetishes_per_person:
 
 
 init -1 python:
@@ -1434,7 +1439,6 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
                 "She hugs you again and begins kissing you on your neck."
                 the_person.char "You make me feel so good, [the_person.mc_title]... come visit me soon okay?"
                 $ the_person.shop_owner_relationship_stage = 1.0
-                "NOTE FROM THE AUTHOR: This is the final event in Starbuck's storyline... for now..."
             #TODO its not mutual
     $the_person.draw_person(position = "stand2")
     the_person.char "Okay, its time for me to get to the shop. See you soon [the_person.mc_title]!"
@@ -1770,6 +1774,64 @@ label starbuck_intro():
     $ renpy.scene("Active")
     return
 ####Starbuck Unique Personality####
+
+label starbuck_anal_fetish_masturbate(alert = False):
+    $ the_person = starbuck
+
+    if alert == True:
+        "You feel your phone vibrate with a notification."
+        "You pull it out and take a look. Looks like [the_person.title] is masturbating with her plug!"
+    else:
+        "You decide to check up on [the_person.title]. You pull out your phone and check up on her."
+        "You are mildly surprised to see that she is masturbating with her plug!"
+    "Do you want to have some fun with the plug?"
+    menu:
+        "Leave her to her fun":
+            #TODO this section
+            return
+        "Vibrate the plug":
+            "You decide to have a little fun with the plug vibration. You push and the hold the vibration function for a solid three seconds."
+            "The app registers a heart rate spike with the vibration. [the_person.possessive_title] knows you are watching the monitor as she masturbates!"
+    #WE can assume we decided to vibrate the plug
+    "You imagine [the_person.title], somewhere in her shop, pushing th plug in and out of herself."
+    "You push and hold the vibrate button again, release it, then pulse again. You make it pulse with vibration every second or two."
+    "You watch as her heart rate slowly climbs. It's 100 beats per minute now and still climbing."
+    "You pulse the plug a bit faster now. Her heart rate keeps climbing."
+    "You can imagine her, bent over, fucking herself with her plug as it vibrates deep inside her needy bowel."
+    "After a minute, you see her heart rate peak. You give her 10-15 seconds of strong pulsing vibrations."
+    $ the_person.change_happiness(5)
+    $ the_person.change_obedience(3)
+    "You see the obvious spike on the chart now as her heart rate subsides. The plug registers that it is now back in place and not being used for masturbation."
+    "After a few seconds you get a text message from [the_person.possessive_title]."
+    #TODO picture of her bent over
+    the_person.char "That felt good! You should come visit me soon though... get yourself some of this!"
+    "She attached a picture of herself, bent over and showing her ass to you."
+    return
+
+label starbuck_anal_fetish_request(alert = False):
+    $ the_person = starbuck
+    "You feel your phone vibrate with a notification."
+    "[the_person.title] sent you a text and a picture!"
+    $ the_person.draw_person(position = SB_get_random_ass_position())
+    the_person.char "Hey! You need to get over here and fuck this! I'm about to go crazy! I might jump the next guy that walks through my door!"
+    "Sounds like she is desperate for a dick in her ass!"
+
+    return
+
+label starbuck_anal_fetish_checkup(alert = False):
+    $ the_person = starbuck
+    "You decide to check up on [the_person.title]. You pull out your phone and check up on her."
+    "You see she has been good. She's had the plug in, just the way she said she would!"
+    if the_person.arousal > 40:
+        "You can also see her temperature is a little elevated, consistent with what you would expect from someone in a consistent arousal state."
+    "You decide to let her know you're thinking about her and her delicious ass."
+    "You set the vibration setting to high, then press and hold the vibration button for several seconds. You can see her heart rate spike as her plug quakes inside her ass."
+    "You wait for a few seconds, then send her another round of vibrations."
+    $ the_person.change_arousal(20)
+    "You decide that is enough for now and go back to what you were doing."
+    return
+
+
 
 label starbuck_greetings(the_person):
     call starbuck_intro from SB_starbuck_intro_1
