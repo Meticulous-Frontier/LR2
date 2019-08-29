@@ -30,9 +30,13 @@ init 2:
                     background "#000080"
                     xsize 1190
                     if not mc.business.active_research_design == None:
-                        $ trait_side_effects_text = get_trait_side_effect_text(mc.business.active_research_design)
-                        $ trait_mastery_text = get_trait_mastery_text(mc.business.active_research_design)
-                        text "Current Research: [mc.business.active_research_design.name] ([mc.business.active_research_design.current_research]/[mc.business.active_research_design.research_needed])" + "{size=14} Mastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %" style "serum_text_style"
+                        if isinstance(mc.business.active_research_design, SerumTrait):
+                            $ trait_side_effects_text = get_trait_side_effect_text(mc.business.active_research_design)
+                            $ trait_mastery_text = get_trait_mastery_text(mc.business.active_research_design)
+                            text "Current Research: [mc.business.active_research_design.name] ([mc.business.active_research_design.current_research]/[mc.business.active_research_design.research_needed])" + "{size=14} Mastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %" style "serum_text_style"
+                        else:
+                            $ change_amount = str(__builtin__.round((mc.business.active_research_design.current_research/mc.business.active_research_design.research_needed) * 100, 1))
+                            text "Current Research: [mc.business.active_research_design.name] {size=14} Completion: [change_amount]%" style "serum_text_style"
                     else:
                         text "Current Research: None!" style "serum_text_style"
 
