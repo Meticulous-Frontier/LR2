@@ -839,9 +839,9 @@ label starbuck_sex_store_promo_one_label(the_person):
             $ the_person.shop_investment_rate = 2.0
 
     python:
-        SB_advert_one_outfit = None
-        SB_advert_two_outfit = None
-        SB_advert_three_outfit = None
+        del SB_advert_one_outfit
+        del SB_advert_two_outfit
+        del SB_advert_three_outfit
         the_person.reset_arousal()
         the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
         change_scene_display(mc.location)
@@ -903,7 +903,7 @@ label starbuck_sex_store_promo_two_label(the_person):
     $ the_person.outfit = SB_advert_four_outfit.get_copy()
     $ the_person.draw_person()
     $ the_person.wardrobe.add_outfit(SB_advert_four_outfit)
-    $ SB_advert_four_outfit = None
+    $ del SB_advert_four_outfit
     "You check out [the_person.possessive_title] in her outfit. Damn she looks hot!"
     the_person.char "Okay, so here's what I'm thinking..."
     "[the_person.possessive_title] starts going over the details of how she wants to do it. You take mental notes. Soon you are ready to begin."
@@ -1038,7 +1038,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     $ the_person.outfit = SB_advert_five_outfit.get_copy()
     $ the_person.draw_person()
     $ the_person.wardrobe.add_underwear_set(SB_advert_five_outfit)
-    $ SB_advert_five_outfit = None
+    $ del SB_advert_five_outfit
     "[the_person.possessive_title] stands before you almost completely exposed, her incredible body is on full display."
     if starbuck.love > 50:
         the_person.char "Do you think that before we get started, maybe you could just hold me for a little bit?"
@@ -1223,7 +1223,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     $ the_person.outfit = SB_advert_six_outfit.get_copy()
     $ the_person.draw_person()
     $ the_person.wardrobe.add_outfit(SB_advert_six_outfit)
-    $ SB_advert_six_outfit = None
+    $ del SB_advert_six_outfit
     mc.name "[the_person.title]... thats... you look amazing."
     "[the_person.possessive_title] gives you a wide smile."
     the_person.char "Thank you! You know I can't give ALL my investors special views like this..."

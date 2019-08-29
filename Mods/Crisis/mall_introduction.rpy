@@ -106,7 +106,12 @@ label mall_introduction_action_label:
 
     "While walking away [stranger.title] looks back at you smiling."
 
-    $ scene_manager.clear_scene()
+    python: # Release variables
+        scene_manager.clear_scene()
+        del strangers
+        del known_people
+        del stranger
+        del known_person
     return
 
 

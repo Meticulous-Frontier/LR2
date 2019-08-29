@@ -26,16 +26,11 @@ label downtown_bar_actions():
    return
 
 label downtown_bar_drink_label():
+    $ new_person = create_random_person(create_home_location = False)
 
     "[downtown_bar.formalName] is Under Construction - Placeholder Action (Probably will be removed)" # A way to generate new people.
 
     if not mc.location.people: # No one is in the bar so we create a person.
-
-        python:
-
-            new_person = create_random_person(create_home_location = False)
-            mc.location.add_person(new_person)
-
         "The [downtown_bar.formalName] is a desolate place to be..."
 
         $ new_person.draw_person()
@@ -48,42 +43,48 @@ label downtown_bar_drink_label():
 
         "Do you wish to introduce yourself, perhaps grace her with a free- of charge drink?"
 
-    while True:
+    $ tuple_list = known_people_at_location(mc.location) + unknown_people_at_location(mc.location) + [new_person, "Back"]
 
-        $ tuple_list = known_people_at_location(mc.location) + unknown_people_at_location(mc.location) + ["Back"]
+    call screen person_choice(tuple_list, draw_hearts = True)
 
-        call screen person_choice(tuple_list, draw_hearts = True)
+    $ person_choice = _return
 
-        $ person_choice = _return
+    if person_choice == "Back":
+        if new_person.mc_title == "Stranger": # If the player had no interest in interacting with the character we remove it from the game. Assuming a proper "Back" button gets added during first time introduction we can do more with this.
+            "Not seeing any reason to stick around she promptly leaves, never to be seen again."
 
-        if person_choice == "Back":
+        python: # release variables
+            del new_person
+            renpy.scene("Active")
+            
+        return # Where to go if you hit "Back".
+    else:
+        $ the_person = person_choice
 
-            if new_person.mc_title == "Stranger": # If the player had no interest in interacting with the character we remove it from the game. Assuming a proper "Back" button gets added during first time introduction we can do more with this.
-                "Not seeing any reason to stick around she promptly leaves, never to be seen again."
-                $ mc.location.remove_person(new_person)
+    # add person to game
+    python:
+        if not new_person in mc.location:
+            the_person.create_home_location()
+            mc.location.add_person(new_person)  
 
-            $ renpy.scene("Active")
-            return # Where to go if you hit "Back".
-        else:
-            $ the_person = person_choice
+    if the_person.mc_title == "Stranger": # First time introduction that does not return to talk_person
+        call person_introduction(the_person) from _call_person_introduction_downtown_bar_drink
 
-        if the_person.mc_title == "Stranger": # First time introduction that does not return to talk_person
-            $ the_person.create_home_location()
-            call person_introduction(the_person) from _call_person_introduction_downtown_bar_drink
+    "Since there's no bartender in town you grab a glass of the finest tap water and treat [the_person.title] to a once- in a lifetime experience."
+    $ the_person.change_stats(love = 2, happiness = 2)
 
-        "Since there's no bartender in town you grab a glass of the finest tap water and treat [the_person.title] to a once- in a lifetime experience."
-        $ the_person.change_stats(love = 2, happiness = 2)
+    the_person.title "Oh, wow. I literally cannot live without water, this is great. Thanks, [the_person.mc_title]!"
 
-        the_person.title "Oh, wow. I literally cannot live without water, this is great. Thanks, [the_person.mc_title]!"
+    mc.name "Stay healthy and hydrated, [the_person.title]."
 
-        mc.name "Stay healthy and hydrated, [the_person.title]."
+    python: # release variables
+        del new_person
 
-        if time_of_day is 4:
-            "After a night of drinks you decide to head back home to bed."
-            $ mc.change_location(bedroom)
-        call advance_time from downtown_bar_drink_1
+    if time_of_day == 4:
+        "After a night of drinks you decide to head back home to bed."
+        $ mc.change_location(bedroom)
 
-        $ renpy.scene("Active")
-        return
+    call advance_time from downtown_bar_drink_1
 
+    $ renpy.scene("Active")
     return

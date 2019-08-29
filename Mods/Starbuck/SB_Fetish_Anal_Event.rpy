@@ -355,10 +355,10 @@ label SB_free_strip_scene(the_person):
     while keep_stripping:
         $ rand_strip_desc = renpy.random.randint(0,3)
         $ the_person.draw_person(position = picked_pose)
-        $ tease_clothing = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True) #She's slutty enough that she wants to tease you a little more
+        $ clothing = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True) #She's slutty enough that she wants to tease you a little more
         if rand_strip_desc == 0:
-                if tease_clothing is not None:
-                    "[the_person.possessive_title] pulls at her [tease_clothing.name] seductively."
+                if clothing is not None:
+                    "[the_person.possessive_title] pulls at her [clothing.name] seductively."
                     the_person.char "Mmm, I bet you want me to take this off, right?"
                     "[the_person.possessive_title] wiggles her hips side to side and bites her bottom lip, as if imagining some greater pleasure yet to come."
                 else:
@@ -377,8 +377,8 @@ label SB_free_strip_scene(the_person):
                     the_person.char "You're looking so good today [the_person.mc_title], did you know that?"
 
         elif rand_strip_desc == 2:
-                if tease_clothing is not None:
-                    "[the_person.possessive_title] slips a hand under her [tease_clothing.name] and starts to pull it off."
+                if clothing is not None:
+                    "[the_person.possessive_title] slips a hand under her [clothing.name] and starts to pull it off."
                     the_person.char "Maybe I should just... slip this off. What do you think?"
                 else:
                     if the_person.has_large_tits():

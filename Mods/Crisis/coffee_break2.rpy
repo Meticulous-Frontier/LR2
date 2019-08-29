@@ -26,6 +26,13 @@ label coffee_break2_action_label:
 
     mc.name "As you are walking around the office, you see several employees at the coffee machine. They haven't noticed you, but you can hear what they are saying."
     call coffee_break2_food_delivery_label(person_one, person_two, person_three) from _call_coffee_break2_food_delivery_label_1
+
+    python:
+        # Release variables
+        del list_of_possible_people
+        del person_one
+        del person_two
+        del person_three
     return
 
 label coffee_break2_food_delivery_label(person_one, person_two, person_three):
@@ -141,8 +148,8 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
         "Although not professional, you can't help but smile and enjoy the situation."
 
     python: # Release variables
-        winner_one = None
-        winner_two = None
-        loser = None
+        del winner_one
+        del winner_two
+        del loser
         scene_manager.clear_scene()
     return

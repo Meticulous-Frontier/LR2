@@ -81,12 +81,17 @@ label SB_fetish_vaginal_family_threesome_label():
     the_person_one.char "Holy fuck [the_person_one.mc_title], that was so hot, I can't believe you got mom to join us..."
     "[the_person_one.possessive_title] says goodnight and then turns to leave."
 
-    $ the_person_one.reset_arousal()
-    $ the_person_one.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+    python:
+        the_person_one.reset_arousal()
+        the_person_one.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
 
-    $ the_person_two.reset_arousal()
-    $ the_person_two.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+        the_person_two.reset_arousal()
+        the_person_two.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
 
-    $ change_scene_display(mc.location)
-    $ renpy.scene("Active")
+        # release variables
+        del the_person_one
+        del the_person_two
+
+        change_scene_display(mc.location)
+        renpy.scene("Active")
     return

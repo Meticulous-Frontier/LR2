@@ -259,7 +259,11 @@ label cat_fight_crisis_enhanced_label():
                     $ scene_manager.update_actor(loser, position = "walking_away")                   
                     "[winner.title] leaves and you get back to work."
 
-    $ scene_manager.clear_scene()
+    python:     # Release variables
+        scene_manager.clear_scene()
+        del list_of_possible_people
+        del person_one
+        del person_two
     return
 
 

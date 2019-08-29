@@ -36,6 +36,11 @@ label coffee_break_action_label:
 
     mc.name "As you are walking around the office, you see several employees at the coffee machine. They haven't noticed you, but you can hear what they are saying."   
     call coffee_break_chit_chat_label(person_one, person_two, person_three) from _call_coffee_break_chit_chat_label_1
+    python:     # Release variables
+        del list_of_possible_people
+        del person_one
+        del person_two
+        del person_three
     return
 
 label coffee_break_chit_chat_label(person_one, person_two, person_three):

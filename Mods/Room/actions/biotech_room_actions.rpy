@@ -161,7 +161,7 @@ label cloning_process(person = the_person): # default to the_person when not pas
 
                 "[clone.name] [clone.last_name] created and is now awaiting you in [rd_division_basement.formalName]"
 
-                $ clone = None    # Release variable
+                $ del clone    # Release variable
                 call advance_time from _call_advance_time_cloning_process
                 return
             "Back":

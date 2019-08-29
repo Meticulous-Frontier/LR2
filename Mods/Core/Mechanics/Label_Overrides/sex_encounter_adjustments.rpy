@@ -247,6 +247,7 @@ label sex_description_enhanced(the_person, the_position, the_object, round, priv
                 $ the_person.call_dialogue("being_watched", the_watcher = watcher, the_position = the_position) #Call her response to the person watching her.
                 $ the_person.change_arousal(the_person.get_opinion_score("public sex"))
                 $ the_person.discover_opinion("public sex")
+                $ del watcher       # Release variable
 
         $ strip_chance = the_person.effective_sluttiness() - the_person.outfit.slut_requirement
         $ the_clothing = the_person.outfit.remove_random_any(exclude_feet = True, do_not_remove = True)

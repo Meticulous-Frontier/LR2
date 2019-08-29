@@ -16,11 +16,7 @@ init 2 python:
 
 label town_walk_crisis_action_label:
     ## You spy on a neighbor during your town walk activities
-    $ exclude_list = [mom, lily, aunt, cousin, mc] # exclude family and MC
-    if mc.business.is_open_for_business() and not mc.business.is_weekend(): # exclude employees working on weekdays
-        $ exclude_list.append(mc.business.get_employee_list())
-
-    $ the_person = get_random_known_person_in_the_game(excluded_people=exclude_list)
+    $ the_person = get_random_known_person_in_the_game(excluded_people = [mom, lily, aunt, cousin, mc] + mc.business.get_employee_list())
     if the_person is None: # this could be no one
         return
 
@@ -132,8 +128,9 @@ label town_walk_crisis_action_label:
         "Walk away":
             "You decide not to disturb her and just walk away."
 
-    $ the_person.reset_arousal()
-    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-    $ change_scene_display(mc.location)
-    $ renpy.scene("Active")
+    python:
+        the_person.reset_arousal()
+        the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+        change_scene_display(mc.location)
+        renpy.scene("Active")
     return
