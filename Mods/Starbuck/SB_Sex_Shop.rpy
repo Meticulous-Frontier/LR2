@@ -41,6 +41,11 @@ init -1 python:
             if sb_random_action <= 25:
                 current_action = "masturbate"
 
+            #TODO Move to an action, using renpy.call will interrupt the advance_time_people_run_turn_label preventing 
+            #    the run_turn on some person objects (all that are after SB in the people_to_process list)
+            #    suggestion: move to the SB_fetish_anal_event source code file and add appropriate action to mandatory list
+            #                to make sure it is repeated, add it to the mandatory list again at end of label (since the executed action will be removed)
+            #                the same it is done for the mom_weekly_pay_action event
             #TODO make it so MC can set option at PC to be notified when starbuck masturbates
 
             if self.event_triggers_dict.get("sb_fetish", "None") == "Anal": #She has an anal fetish#
