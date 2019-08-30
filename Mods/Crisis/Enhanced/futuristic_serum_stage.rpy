@@ -16,6 +16,7 @@ label futuristic_serum_stage_2_enhanced_label(the_person):
                 my_string = "There is currently nobody in your company who meets these requirements."
         "[my_string]"
         the_person.char "Noted. I'll get back to you when I have your test subjects ready."
+        $ del satisfying_list
         return
 
     mc.name "[the_person.title], I have your group of test subjects ready."
@@ -85,7 +86,13 @@ label futuristic_serum_stage_2_enhanced_label(the_person):
     $ mc.business.research_tier = 3
     $ mc.log_event("Max Research Tier Unlocked", "float_text_grey")
 
-    $ scene_manager.clear_scene()
+    python:
+        scene_manager.clear_scene()
+        del pick_1
+        del pick_2
+        del pick_3
+        del go_first
+        del possible_picks
 
     call advance_time from _call_advance_time_serum_stage_2_enhanced
     return
