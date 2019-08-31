@@ -1,6 +1,6 @@
 ## Booty Call Crisis. Girl you are FWB with calls you for some casual sex.
 init -1 python:
-    booty_call_mod_weight = 7     # Set High for testing. TODO set lower after playtesting
+    booty_call_mod_weight = 5     # Set High for testing. TODO set lower after play testing
 
 init 3 python:
     #sports_bar = Room("bar", "Bar", [], room_background_image("bar_background.png"), [make_floor(), make_wall(), make_chair(), make_window()], [], [], True, [6,5], None, True)
@@ -10,20 +10,20 @@ init 3 python:
                 return True
         return False
 
-    def get_casual_sex_booty_call_people():
+    def get_casual_sex_booty_call_person():
         possible_people = []
         for person in known_people_in_the_game([mc]):
             # check if person has a casual sex role and we have her phone number
             if any(x in person.special_role for x in [casual_athlete_role, casual_hotwife_role, casual_FA_role]) and person.event_triggers_dict["booty_call", False]:
-                possible_people.append(person) 
-        return possible_people
+                possible_people.append(person)
+
+        return get_random_from_list(possible_people)
 
     casual_sex_booty_call = ActionMod("Booty Call", casual_sex_booty_call_requirement,"casual_sex_booty_call_label",
         menu_tooltip = "A friend sends you a phone message", is_crisis = True, crisis_weight = booty_call_mod_weight)
 
 label casual_sex_booty_call_label:
-    $ the_person = get_random_from_list(get_casual_sex_booty_call_people())
-
+    $ the_person = get_casual_sex_booty_call_person()
     # No one qualified so end here    
     if the_person is None:
         return
