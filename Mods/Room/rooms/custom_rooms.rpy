@@ -13,13 +13,13 @@ init 15 python:
         make_chair(),
         make_floor()
     ]
-    m_division_basement = Room("security", "Security Room", [], room_background_image("Security_Background.jpg"), m_division_basement_objects,[],[security_overview_action], False, [12,2], None, True)
+    m_division_basement = Room("security", "Security Room", [], room_background_image("Security_Background.jpg"), m_division_basement_objects,[],[security_overview_action], False, [12,2], None, False)
 
     # Production Division Basement - Machinery Room | machinery_room_actions.rpy
     p_division_basement_objects = [
         make_table()
     ]
-    p_division_basement = Room("machinery", "Machinery Room", [], office_background, p_division_basement_objects, [], [machinery_room_action], False, [11,5], None, True)
+    p_division_basement = Room("machinery", "Machinery Room", [], office_background, p_division_basement_objects, [], [machinery_room_action], False, [11,5], None, False)
 
     # Research Division Basement - Biotechnology Lab | biotech_room_actions.rpy
     rd_division_basement_objects = [
@@ -28,7 +28,7 @@ init 15 python:
         make_desk(),
         make_table()
     ]
-    rd_division_basement = Room("biotech", "Biotechnology Lab", [], room_background_image("Biotech_Background.jpg"), rd_division_basement_objects, [], [biotech_lab_action], False, [12,5], None, True)
+    rd_division_basement = Room("biotech", "Biotechnology Lab", [], room_background_image("Biotech_Background.jpg"), rd_division_basement_objects, [], [biotech_lab_action], False, [12,5], None, False)
 
     # Main Office Basement - Dungeon | dungeon_room_actions.rpy
     office_basement_objects = [
@@ -36,7 +36,7 @@ init 15 python:
         make_pillory(),
         make_woodhorse()
     ]
-    office_basement = Room("dungeon", "Dungeon", [], bar_background, office_basement_objects, [],[dungeon_room_action], False,[11,1], None, True)
+    office_basement = Room("dungeon", "Dungeon", [], bar_background, office_basement_objects, [],[dungeon_room_action], False,[11,1], None, False)
 
     # Downtown Bar - The Downtown Distillery | downtown_bar_actions.rpy
     # This bar gets updated when a save game is loaded, regardless of its existence

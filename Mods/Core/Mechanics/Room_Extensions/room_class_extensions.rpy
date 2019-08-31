@@ -58,7 +58,7 @@ init -1 python:
         room_update.map_pos = room.map_pos
         room_update.background_image = room.background_image
 
-        room_update.visible = room.visible
+        # room_update.visible = room.visible    DON'T UPDATE VISIBILITY
         room_update.accessable = room.accessable
 
         room_update.connections = room.connections
@@ -80,12 +80,7 @@ init -1 python:
         return
 
     def purchase_room_on_buy_function(room):
-        add_custom_room(room)
-
-    def add_custom_room(room): #Should prevent potential rollback errors
-        if room not in list_of_places:
-            list_of_places.append(room)
-        return
+        room.visible = True
 
     # Build a location list where the person can be scheduled.
     def build_schedule_location_list(person):
