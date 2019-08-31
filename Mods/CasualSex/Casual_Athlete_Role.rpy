@@ -308,7 +308,7 @@ label casual_athlete_phase_one_label(the_person):
         the_person.char "Well, see you around, stud! I'd better go work on some homework."
         "You say your goodbyes. This should be interesting. You wonder what kind of crazy sex you'll have with your new friends with benefits."
 
-        the_person.event_triggers_dict["booty_call"] = True
+        $ the_person.event_triggers_dict["booty_call"] = True
         
         "You now have [the_person.title]'s phone number."
         $ the_person.event_triggers_dict["athlete_progress"] = 2
