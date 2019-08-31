@@ -221,6 +221,7 @@ label interview_action_description_low_mem_usage:
             show bg paper_menu_background #Show a paper background for this scene.
             $ candidates = generate_candidates(count)
             call screen interview_ui(candidates,count)
+            $ del candidates
             $ renpy.scene()
             $ show_ui()
             $ renpy.scene("Active")
