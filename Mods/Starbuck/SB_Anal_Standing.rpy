@@ -252,7 +252,7 @@ label outro_SB_anal_standing(the_girl, the_location, the_object, the_round):
                 "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum."
                 "She gasps with every final thrust as you fill your condom, which is slowly expanding inside her to accomodate your seed."
                 if the_girl.get_opinion_score("bareback sex") > 0:
-                    the_girl.char "Oh god, imagine if you weren't wearing that rubber thing... I could feel you filling me up..."
+                    the_girl.char "Oh god, imagine if you weren't wearing that fucking rubber! I could feel you filling me up..."
                 else:
                     the_girl.char "That's it, cum deep!"
                 "You wait until your orgasm has passed completely, then pull out and sit back. Her asshole gapes slightly. You condom is full of your potent seed."

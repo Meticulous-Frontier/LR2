@@ -463,7 +463,28 @@ label casual_FA_get_out_of_here_label(the_person):
         "Don't use serum":
             "You decide just to give her the drink."
     "You spot [the_person.title] by the door and join her. You follow her to the elevator, and soon find yourself in front of her hotel room door."
+    #TODO change rooms to hotel#
     the_person.char "Ok, this will be way quieter than downstairs."
+    "[the_person.title] opens her hotel room door and you quickly follow her inside. At first, you weren't sure what she had planned for the evening, but she quickly signalled her intentions."
+    $ the_person.draw_person(position = "kissing")
+    "She puts one hand on your shoulder and starts leaning into you. At first you lightly brush your lips together, but soon she returns your kiss hungrily."
+    "You are savoring the taste of chapstick when she suddenly turns away from you."
+    $ the_person.draw_person(position = "back_peek")
+    "She grabs the ice bucket and hands it to you."
+    the_person.char "Be a sweetheart and fill this up for me real quick, would you?"
+    "You go and quickly fill the ice bucket. You don't run into anyone in the hall, which makes it easier since your cock is rock hard thinking about getting back to the room."
+    "When you walk in, you notice the bathroom door is closed and an empty gin sour glass sitting on the table. You set the ice bucket down at the desk and have a seat on the edge of the bed."
+    "You wait for a few minutes, and are soon rewarded for your patience when [the_person.title] emerges from the restroom."
+    #TODO put her in lingerie
+    $ the_person.draw_person(position = "stand2")
+    "She emerges in an incredible set of purple lingerie. You start to get up but she quickly stops you, pushing you back onto the bed."
+    $ the_person.draw_person (position = "cowgirl")
+    "[the_person.possessive_title] pushes you onto your back and straddles your waist. She begins to grind up against you, dry humping your erection."
+    "She closes her eyes and moans. You reach up and kneed her tits through her bra. She reaches back and undoes the clasp holding her bra on. She leans forward and her bra falls off her shoulders and onto the bed."
+    #TODO draw bra strip#
+    "Your hands return to her perky tits. They feel soft and supple in your hands. She moans when you pinch her nipples gently."
+    $ the_person.change_arousal(10)
+
     "TODO finish this scene."
 
 
@@ -581,6 +602,10 @@ label FA_greetings(the_person):
 
 label FA_hookup_rejection(the_person):
     the_person.char "Your loss! Just thinking about you makes me want to spread my legs, and you could have had some of this..."
+    return
+
+label FA_hookup_accept(the_person):
+    "This is a test to see if this is working!"
     return
 
 

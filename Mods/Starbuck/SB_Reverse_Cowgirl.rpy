@@ -122,14 +122,40 @@ label scene_SB_reverse_cowgirl_2(the_girl, the_location, the_object, the_round):
                     "[the_girl.possessive_title] grabs your ankles to steady herself."
                     the_girl.char "You should... I love it when you cum. I want to make you cum!"
             else:
-                the_girl.char "I'm glad you like it, [the_girl.mc_title]. I love it when you fuck me, but sometimes it feels good to be on top once a while too..."
+                the_girl.char "I'm glad you like it, [the_girl.mc_title]. I love it when you fuck me, but sometimes it feels good to be on top too..."
                 if the_girl.get_opinion_score("masturbating") > 0:
                     "[the_girl.possessive_title] reaches down with one hand and begins to rub her clit as she grinds back against you."
                     $ the_girl.discover_opinion("masturbating")
                     $ the_girl.change_arousal(the_girl.get_opinion_score("masturbating" * 5))
                 "You grab [the_girl.possessive_title]'s ass cheeks with both hands. Her smooth skin feels supple in your hands." ###TODO
             "After some time spent grinding, [the_girl.possessive_title] resumes her bouncing motion on top of you."
-
+        "Finger Her Ass" if (the_girl.get_opinion_score("anal sex") > 0 and the_girl.get_opinion_status("anal sex")):   #Can only be done if the girl is known submissive#
+            "You decide to help her feel even more full! You bring your index finger up to your mouth. You stick it in your mouth, getting it good a lubed up."
+            "[the_girl.possessive] stops grinding for a second when she feels your finger at her asshole."
+            if the_girl.sex_skills["Anal"] > 1: #She can easily take a finger
+                "You push your finger easily up inside her. Her rectum relaxes and she sighs when you finger is fully engulfed by her back passage."
+                the_girl.char "OH! I love that feeling... keep it right there..."
+            else:
+                "You meet some resistance as you slowly push your finger against her rectum. She gasps as she fights the feeling to resist it."
+                the_girl.char "Oh! I love this feeling, but give me a second, I'm not very good at taking things back there..."
+                "She takes a deep breath, but is able to slowly force herself to relax. You are able to slowly slide your finger inside her."
+                "It takes several seconds, but her rectum finally relaxes enough you are able to fully engulf your finger in her back passage."
+                the_girl.char "Mmm... keep it right there, I'm gonna take it slow."
+            "[the_girl.title] begins to slowly gring her gips again. With each movement forward your cock and finger slowly pull out of her, and with each movement back she takes them both deep."
+            the_girl.char "Yes! Oh fuck [the_girl.mc_title], the pressure feels so good!"
+            $ the_girl.change_arousal(the_girl.get_opinion_score("anal sex" * 5))
+            if the_girl.arousal > 130:
+                "You can feel [the_girl.title]'s pussy and ass quaking as she aftershocks from her orgasms. She moans ecstatically."
+                "Her pussy clenching your cock as she grinds you feels amazing, and it turns you on seeing her rolling into multiple orgasms."
+                $ mc.change_arousal(10)
+                $ the_girl.change_happiness(2)
+            else:
+                "[the_girl.title] is taking her time, just enjoying the feeling of having you fill both her holes."
+                "She stops for a second when you hit just the right spot and works her hips side to side for a few moments instead of forward and back."
+            "Eventually, she stops grinding and begins to work her body up and down again. You try to keep your finger inside her ass, but it soon slips out."
+            "Instead of stopping to let you push your finger back inside her, she keeps riding you, so you give her ass a firm spank."
+        "Finger Her Ass\n{size=22}Must like anal sex{/size} (disabled)" if (the_girl.get_opinion_score("anal sex") <= 0 or not the_girl.get_opinion_status("anal sex")):
+            pass
     return
 
 label outro_SB_reverse_cowgirl(the_girl, the_location, the_object, the_round):
@@ -205,7 +231,7 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object, the_round):
         "[the_girl.possessive_title] shakes her hips side to side for you, showing off her prize. In a couple places your cum starts drip down from her shapely ass."
         "You lay back and take a few moments to enjoy the view."
     elif the_girl.sex_skills["Vaginal"] > 5:
-        the_girl.char "Oh god, it feels to good to pull off now... just shoot it up inside me!"
+        the_girl.char "Oh god, it feels too good to pull off now... just shoot it up inside me!"
         if the_girl.arousal > 130:
             "[the_girl.possessive_title] is riding you with wild abandon, as yet another orgasm wracks her body. Too late to stop, you begin cumming at the same time."
         elif the_girl.arousal > 100:

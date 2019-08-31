@@ -1002,6 +1002,11 @@ label hotwife_hookup_rejection(the_person):
     the_person.char "Your loss! Just thinking about you makes me want to get on my knees, and you could have had some of this..."
     return
 
+label hotwife_hookup_accept(the_person):
+    the_person.char "Meet me at the bar... you know where to go! ;)"
+    "You put your phone in your pocket and head to the gym."
+    return
+
 #label hotwife_cum_face(the_person):
 #    if the_person.obedience > 130:
 #        if the_person.sluttiness > 60:
