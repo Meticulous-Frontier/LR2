@@ -6,7 +6,75 @@
 init -1 python:
     business_basement = [] # List of rooms that are supposed to be in the basement.
 
+init 15 python:
+    # Marketing Division Basement - Security Room | security_room_actions.rpy
+    m_division_basement_objects = [
+        make_desk(),
+        make_chair(),
+        make_floor()
+    ]
+    m_division_basement = Room("security", "Security Room", [], room_background_image("Security_Background.jpg"), m_division_basement_objects,[],[security_overview_action], False, [12,2], None, True)
 
+    # Production Division Basement - Machinery Room | machinery_room_actions.rpy
+    p_division_basement_objects = [
+        make_table()
+    ]
+    p_division_basement = Room("machinery", "Machinery Room", [], office_background, p_division_basement_objects, [], [machinery_room_action], False, [11,5], None, True)
+
+    # Research Division Basement - Biotechnology Lab | biotech_room_actions.rpy
+    rd_division_basement_objects = [
+        make_chair(),
+        make_floor(),
+        make_desk(),
+        make_table()
+    ]
+    rd_division_basement = Room("biotech", "Biotechnology Lab", [], room_background_image("Biotech_Background.jpg"), rd_division_basement_objects, [], [biotech_lab_action], False, [12,5], None, True)
+
+    # Main Office Basement - Dungeon | dungeon_room_actions.rpy
+    office_basement_objects = [
+        make_bdsmbed(),
+        make_pillory(),
+        make_woodhorse()
+    ]
+    office_basement = Room("dungeon", "Dungeon", [], bar_background, office_basement_objects, [],[dungeon_room_action], False,[11,1], None, True)
+
+    # Downtown Bar - The Downtown Distillery | downtown_bar_actions.rpy
+    # This bar gets updated when a save game is loaded, regardless of its existence
+    downtown_bar_objects = [
+        make_desk(),
+        make_chair(),
+        make_floor()
+    ]
+    downtown_bar = Room("bar", "The Downtown Distillery", [], bar_background, downtown_bar_objects,[], [downtown_bar_action], True, [6,5], None, True)
+
+    # Hotel Room - The Hotel | No actions at this time.
+    # This hotel gets updated when a save game is loaded, regardless of its existence
+    downtown_hotel_objects = [
+        make_desk(),
+        make_chair(),
+        make_floor(),
+        make_bed()
+    ]
+    downtown_hotel = Room("hotel", "The Hotel", [], room_background_image("Hotel_Room_Background.jpg"), downtown_hotel_objects,[], [], False, [5,5], None, True)
+
+    #Creates a room specifically to keep girls we don't want to be accessible, so they are still updated.
+    purgatory_objects = [
+        make_floor()
+    ]
+
+    purgatory = Room("purgatory",
+        formalName = "Purgatory",
+        connections = [],
+        background_image = None,
+        objects = purgatory_objects,
+        people = [],
+        actions = [],
+        public = False,
+        map_pos = [-5, -5],
+        tutorial_label = None,
+        visible = False,
+        hide_in_known_house_map = True)
+    purgatory.accessible = False
 
 init 5  python:
     add_label_hijack("normal_start", "activate_custom_rooms")
@@ -42,133 +110,63 @@ label update_custom_rooms(stack):
     $ execute_hijack_call(stack)
     return
 
-
-
 label store_m_division_basement():
-    # Marketing Division Basement - Security Room | security_room_actions.rpy
-
-    python:
-        m_division_basement_objects = [
-            make_desk(),
-            make_chair(),
-            make_floor()
-        ]
-        m_division_basement = Room("security", "Security Room", [m_division], room_background_image("Security_Background.jpg"), m_division_basement_objects,[],[security_overview_action], False, [12,2], None, True)
+    if m_division_basement not in list_of_places:
+        $ m_division_basement.link_locations_two_way(m_division)
+        $ list_of_places.append(m_division_basement)
 
     $ update_custom_rooms(m_division_basement)
     return
 
 label store_p_division_basement():
-    # Production Division Basement - Machinery Room | machinery_room_actions.rpy
-
-    python:
-        p_division_basement_objects = [
-            make_table()
-        ]
-        p_division_basement = Room("machinery", "Machinery Room", [p_division], office_background, p_division_basement_objects, [], [machinery_room_action], False, [11,5], None, True)
-
+    if p_division_basement not in list_of_places:
+        $ p_division_basement.link_locations_two_way(p_division)
+        $ list_of_places.append(p_division_basement)
+    
     $ update_custom_rooms(p_division_basement)
     return
 
 label store_rd_division_basement():
-    # Research Division Basement - Biotechnology Lab | biotech_room_actions.rpy
-
-    python:
-        rd_division_basement_objects = [
-            make_chair(),
-            make_floor(),
-            make_desk(),
-            make_table()
-        ]
-        rd_division_basement = Room("biotech", "Biotechnology Lab", [rd_division], room_background_image("Biotech_Background.jpg"), rd_division_basement_objects, [], [biotech_lab_action], False, [12,5], None, True)
-
+    if rd_division_basement not in list_of_places:
+        $ rd_division_basement.link_locations_two_way(rd_division)
+        $ list_of_places.append(rd_division_basement)
+    
     $ update_custom_rooms(rd_division_basement)
     return
 
 label store_office_basement():
-    # Main Office Basement - Dungeon | dungeon_room_actions.rpy
-
-    python:
-        office_basement_objects = [
-            make_bdsmbed(),
-            make_pillory(),
-            make_woodhorse()
-        ]
-        office_basement = Room("dungeon", "Dungeon", [office], bar_background, office_basement_objects, [],[dungeon_room_action], False,[11,1], None, True)
-
+    if office_basement not in list_of_places:
+        $ office_basement.link_locations_two_way(office)
+        $ list_of_places.append(office_basement)
+    
     $ update_custom_rooms(office_basement)
-
     return
 
 label store_downtown_bar():
-    # Downtown Bar - The Downtown Distillery | downtown_bar_actions.rpy
-    # This bar gets updated when a save game is loaded, regardless of its existence
-
-    python:
-        downtown_bar_objects = [
-            make_desk(),
-            make_chair(),
-            make_floor()
-        ]
-        downtown_bar = Room("bar", "The Downtown Distillery", [downtown], bar_background, downtown_bar_objects,[], [downtown_bar_action], True, [6,5], None, True)
-
     # Make sure it is in the list_of_places (and no duplicate)
     # List of places gets stored, so will the bar when appended here
     if downtown_bar not in list_of_places:
+        $ downtown_bar.link_locations_two_way(downtown)
         $ list_of_places.append(downtown_bar)
 
     # This refreshes the properties of the existing bar, e.g move the position of the Room on the map, objects, actions, connections, background etc.
     $ update_custom_rooms(downtown_bar)
-
     return
 
 label store_downtown_hotel():
-    # Hotel Room - The Hotel | No actions at this time.
-    # This hotel gets updated when a save game is loaded, regardless of its existence
-
-    python:
-        downtown_hotel_objects = [
-            make_desk(),
-            make_chair(),
-            make_floor(),
-            make_bed()
-        ]
-        downtown_hotel = Room("hotel", "The Hotel", [downtown], room_background_image("Hotel_Room_Background.jpg"), downtown_hotel_objects,[], [], False, [5,5], None, True)
-
     # Make sure it is in the list_of_places (and no duplicate)
     # List of places gets stored, so will the bar when appended here
     if downtown_hotel not in list_of_places:
+        $ downtown_hotel.link_locations_two_way(downtown)
         $ list_of_places.append(downtown_hotel)
 
     # This refreshes the properties of the existing bar, e.g move the position of the Room on the map, objects, actions, connections, background etc.
     $ update_custom_rooms(downtown_hotel)
-
     return
 
 label store_purgatory_room():
-    #Creates a room specifically to keep girls we don't want to be accessible, so they are still updated.
-
-
-    python:
-        purgatory_objects = [
-            make_floor()
-        ]
-
-        purgatory = Room("purgatory",
-            formalName = "Purgatory",
-            connections = [],
-            background_image = None,
-            objects = purgatory_objects,
-            people = [],
-            actions = [],
-            public = False,
-            map_pos = [-5, -5],
-            tutorial_label = None,
-            visible = False,
-            hide_in_known_house_map = True)
-        purgatory.accessible = False
-
     if purgatory not in list_of_places:
         $ list_of_places.append(purgatory)
 
     $ update_custom_rooms(purgatory)
+    return
