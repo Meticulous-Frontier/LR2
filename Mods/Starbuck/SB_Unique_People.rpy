@@ -67,8 +67,6 @@ init 2 python:
 
         # Add StarBuck introduction event to sex store
         starbuck.on_room_enter_event_list.append(starbuck_introduction_event_action)
-
-        starbuck.event_triggers_dict["sb_fetish"] = "None"
         return
 
     # create mod event to trigger creation

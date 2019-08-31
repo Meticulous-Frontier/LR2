@@ -861,14 +861,9 @@ label SB_starbuck_anal_intro():
     "This should allow for some... unique experiences!"
     the_person.char "Well, I'd better get home. Feel free to uh, check in on me whenever you want [the_person.mc_title]!"
     "You say goodbye and head out so she can finish locking up the sex shop."
-    $ the_person.event_triggers_dict["sb_fetish"] = "Anal"
 
     $ FETISH_ANAL_EVENT_INUSE = False
-
-
-
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
-
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False)
     $ renpy.scene("Active")
