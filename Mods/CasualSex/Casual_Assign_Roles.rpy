@@ -4,7 +4,6 @@
 init 2 python:
     #def casual_sex_mod_initialization(action_mod):
     workout_wardrobe = wardrobe_from_xml("Workout_Wardrobe")
-    casual_sex_list = [] #This will hold a list of girls looking for casual sex
 
 
     def casual_sex_test():
@@ -109,14 +108,7 @@ init 2 python:
 
         return
 
-    def casual_sex_add_person_to_list(the_person):
-        if the_person in casual_sex_list:
-            return False
-        else:
-            casual_sex_list.append (the_person)
-            return True
 
-        return False
 
     def casual_sex_create_athlete():
         new_athlete = create_random_person( body_type = "thin_body", age = renpy.random.randint(19,25))

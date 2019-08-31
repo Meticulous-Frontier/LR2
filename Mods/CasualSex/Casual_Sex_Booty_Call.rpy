@@ -7,16 +7,26 @@ init 3 python:
     def casual_sex_booty_call_requirement():
         if time_of_day > 0 : #Not early morning
             if time_of_day < 4: #Not night
-                if len(casual_sex_list) > 0:   #Must have atleast one FWB
-                    return True
+                return True
         return False
+
+    def get_casual_sex_booty_call_people():
+        possible_people = []
+        for person in known_people:
+            # check if person has a casual sex role and we have her phone number
+            if any(x in person.special_role for x in [casual_athlete_role, casual_hotwife_role, casual_FA_role]) and person.event_triggers_dict["booty_call", False]:
+                possible_people.append(person) 
+        return possible_people
 
     casual_sex_booty_call = ActionMod("Booty Call", casual_sex_booty_call_requirement,"casual_sex_booty_call_label",
         menu_tooltip = "A friend sends you a phone message", is_crisis = True, crisis_weight = booty_call_mod_weight)
 
 label casual_sex_booty_call_label:
+    $ the_person = get_random_from_list(get_casual_sex_booty_call_people())
 
-    $ the_person = get_random_from_list(casual_sex_list)
+    # No one qualified so end here    
+    if the_person is None:
+        return
 
     "While you're going about your day you get a text from [the_person.possessive_title]."
     the_person.char "Hey stud! Up for some fun?"

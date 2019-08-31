@@ -202,7 +202,7 @@ label casual_athlete_phase_one_label(the_person):
         mc.name "Hey [the_person.title]. I figured I would find you here. Want to workout together?"
         "[the_person.title] is just hopping off the treadmill. You can tell she just finished getting warmed up."
         the_person.char "[the_person.mc_title]! Hey, I was wondering if you would take me up on my offer to workout sometime. That sounds great! I'm going to be doing free weights today."
-        mc.name "Sounds good! I'll head to the locker room and get changed and meet you over by the free weights."
+        mc.name "Sounds good! I'll head to the lockerroom and get changed and meet you over by the free weights."
         "You quickly get yourself changed into workout clothes and meet [the_person.title]."
         the_person.char "This will be perfect! Today is strength day and with you around to spot me I can really push myself to the limit."
         $ the_person.draw_person( position = "stand4")
@@ -252,7 +252,7 @@ label casual_athlete_phase_one_label(the_person):
         mc.name "See? Two friends, helping each other out. I take a turn, then you take a turn..."
         "[the_person.title] grunts... or was that a groan? You lean forward just a bit farther. It is now obvious you are using the opportunity to put your body up against hers as she finishes her squats."
         "At the top of her last squat, she lingers a bit before she racks the weight. You feel an ever so slight wiggle of her hips up against you. She's getting turned on!"
-        "She racks her weights with a groan, and you quickly retreat. Getting an erection here would be a bit embarassing"
+        "She racks her weights with a groan, and you quickly retreat. Getting an erection here would be a bit embarrassing"
         the_person.char "Okay... let finish with the bench press."
         "You head over to the bench and start racking some weights on it. You lay down on the bench while [the_person.title] stands by your head."
         "She looks around a bit to see if anybody is watching you before prompting you to begin."
@@ -308,15 +308,15 @@ label casual_athlete_phase_one_label(the_person):
         the_person.char "Well, see you around, stud! I'd better go work on some homework."
         "You say your goodbyes. This should be interesting. You wonder what kind of crazy sex you'll have with your new friends with benefits."
 
-        if casual_sex_add_person_to_list(the_person):
-            "You now have [the_person.title]'s phone number."
-        else:
-            "DEBUG: Did not successfully get phone number."
+        the_person.event_triggers_dict["booty_call"] = True
+        
+        "You now have [the_person.title]'s phone number."
         $ the_person.event_triggers_dict["athlete_progress"] = 2
+
     elif the_person.event_triggers_dict.get("athlete_progress", 0) > 1:
         mc.name "Hey [the_person.title]. I figured I would find you here. Want to workout together?"
         the_person.char "That sounds great, [the_person.mc_title]! I always enjoy working up a sweat with you."
-        mc.name "Sounds good! I'll head to the locker room and get changed and meet you over by the free weights."
+        mc.name "Sounds good! I'll head to the lockerroom and get changed and meet you over by the free weights."
         "You quickly get yourself changed into workout clothes and meet [the_person.title]."
         $ the_person.draw_person( position = "stand4")
         "It is obvious from the beginning of your workout with [the_person.possessive_title] that she intends to get frisky with you when you get done."
@@ -414,7 +414,7 @@ label casual_athlete_race_crisis_label(the_person):
     $ the_person.draw_person(position = "stand3")
     the_person.char "Hey, there you are! I was starting to think you had chickened out!"
     mc.name "Not a chance. I hope you don't have any plans for tomorrow, because when I get done with you tonight you won't be able to get out of bed until Monday at least!"
-    the_person.char "Oh my, brave words for a bravy boy! Let's just see what happens!"
+    the_person.char "Oh my, brave words for a brave boy! Let's just see what happens!"
     "You and [the_person.title] do some stretching and warmups, but soon it is time for the race to begin."
     "You line up together at the starting line, ready for the race to begin."
     "*BANG*"
@@ -449,7 +449,7 @@ label casual_athlete_race_crisis_label(the_person):
     "You think you see a little smirk on the corner of her mouth."
     "You both take a few minutes to recover, and soon you are ready to go."
     the_person.char "Alright, you won the race. I guess it's time to head back to my place?"
-    "You call for an Uber and she gives you here adress. Soon you are walking into [the_person.title]'s apartment."
+    "You call for an Uber and she gives you here address. Soon you are walking into [the_person.title]'s apartment."
     $ mc.change_location(the_person.home)
     $ renpy.show(mc.location.name,what=mc.location.background_image)
     if not the_person.home in mc.known_home_locations:
@@ -743,17 +743,17 @@ label athlete_seduction_response(the_person):
 label athlete_seduction_accept_crowded(the_person):
     if mc.location == gym:
         if the_person.sluttiness < 20:
-            the_person.char "I suppose we could sneak away into the locker room... There's nothing wrong with that, right?"
+            the_person.char "I suppose we could sneak away into the lockerroom... There's nothing wrong with that, right?"
         elif the_person.sluttiness < 70:
-            the_person.char "Come on, let's sneak into the locker room and do it!"
+            the_person.char "Come on, let's sneak into the lockerroom and do it!"
         else:
-            the_person.char "Oh fuck that sounds nice. I'm not sure I can wait until we sneak into the locker room, maybe we should just do it right here!"
+            the_person.char "Oh fuck that sounds nice. I'm not sure I can wait until we sneak into the lockerroom, maybe we should just do it right here!"
         return
 
     if the_person.sluttiness < 20:
         the_person.char "I suppose we could sneak away for a few minutes. There's nothing wrong with that, right?"
     elif the_person.sluttiness < 50:
-        the_person.char "Come on, let's go find someplace quiet where we won't be interupted."
+        the_person.char "Come on, let's go find someplace quiet where we won't be interrupted."
     else:
         the_person.char "No point waisting any time then, right? Let's get to it!"
     return
@@ -838,12 +838,12 @@ label athlete_hookup_accept(the_person):
     $ the_person.change_arousal( 15 + (mc.sex_skills["Oral"] * 2)) #50 + 4
     "[the_person.title] runs a hand through your hair, then grabs some of it on the back of your head. She begins to gyrate her hips as she grinds into you."
     "You decide to go with it. You flatten your tongue out and begin to move it across her clitoris in long strokes."
-    "She grinds herself happily against your face. She moans appreciatively at your skilled oral stimluation."
+    "She grinds herself happily against your face. She moans appreciatively at your skilled oral stimulation."
     $ the_person.change_arousal( 15 + (mc.sex_skills["Oral"] * 2)) #65 + 6
     if the_person.arousal > 100: #She is surprised how fast you make her cum
         "Suddenly, you feel her body go stiff and her moans ramp up quickly."
         the_person.char "Fuck! I'm gonna... you're gonna make me...!"
-        "[the_person.title] convulses as she orgasms. She is caught completely off gaurd by how fast you made her cum."
+        "[the_person.title] convulses as she orgasms. She is caught completely off guard by how fast you made her cum."
         "The hand on the back of your head lets go but you continue your assault for several more seconds."
         $ the_person.change_slut_temp(1)
         $ the_person.change_happiness(2)
@@ -855,7 +855,7 @@ label athlete_hookup_accept(the_person):
         if the_person.arousal > 100: #She orgasms
             the_person.char "Yes! That's it! I'm gonna cum!"
             "[the_person.title] convulses as she orgasms. She moans and runs her hands through your hair."
-            "You continue your assult for several more seconds."
+            "You continue your assault for several more seconds."
         else:   #Not skilled enough to make her orgasm.
             "You are feverishly working at her pussy, but for some reason you can seem to find the right spot."
             "Soon, the stimulation gets to be too much for her and she puts her hand on your hand and slowly pushes it back."
@@ -984,7 +984,7 @@ label athlete_hookup_accept(the_person):
                         the_person.char "Oh my... be careful!"
                     "With your hands firmly on her hips, you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
                     the_person.char "Oh god you make me feel so dirty... I love it!"
-                    "You fuck her hard but at a steadty, even pace."
+                    "You fuck her hard but at a steady, even pace."
                     "[the_person.possessive_title] moans, matching each hip movement of yours with movement of her own."
                     the_person.char "It feels so deep... I can't... my legs!"
                     "Her knees give out, but you are too close to stop fucking her. You grab her hips roughly and pick up the pace."
@@ -1238,7 +1238,7 @@ label athlete_improved_serum_unlock(the_person):
     the_person.char "Okay, how can I help?"
     mc.name "All of our research and development up until this point has been based on the limited notes I have from my university days. I'm sure there's more we could learn, and I want you to look into it for me."
     "[the_person.title] smiles mischievously."
-    the_person.char "I've got an idea that you might want to hear then. It's not the most... orthodox testing procedure but I think it is nessesary if we want to see rapid results."
+    the_person.char "I've got an idea that you might want to hear then. It's not the most... orthodox testing procedure but I think it is necessary if we want to see rapid results."
     mc.name "Go on, I'm interested."
     the_person.char "Our testing procedures focus on human safety, which I'll admit is important, but it doesn't leave us with much information about the subjective effects of our creations."
     the_person.char "What I want to do is take a dose of our serum myself, then have you record me while you run me through some questions."

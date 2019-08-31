@@ -476,10 +476,10 @@ label casual_hotwife_blowjob_text_label(the_person):
     the_person.char "Okay, well, I need to get going. I'm sure I'll see you around soon..."
     "You say goodbye and head out. Hot damn! You are now friends with benefits with a hot wife. You bet the sex is going to be amazing..."
     $ the_person.event_triggers_dict["hotwife_blowjob_text_enable"] = 0
-    if casual_sex_add_person_to_list(the_person):
-        "You now have [the_person.title]'s phone number. She may call you from time to time to hookup!"
-    else:
-        "DEBUG: Did not suc cessfully get phone number. Whoops!"
+
+    the_person.event_triggers_dict["booty_call"] = True
+
+    "You now have [the_person.title]'s phone number. She may call you from time to time to hookup!"
     call advance_time from _call_advance_casual_hotwife_sex_discussion
     return
 
