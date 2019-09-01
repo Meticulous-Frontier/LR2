@@ -26,7 +26,7 @@ label downtown_bar_actions():
    return
 
 label downtown_bar_drink_label():
-    $ new_person = create_random_person(create_home_location = False)
+    $ new_person = create_random_person()
 
     "[downtown_bar.formalName] is Under Construction - Placeholder Action (Probably will be removed)" # A way to generate new people.
 
@@ -48,6 +48,7 @@ label downtown_bar_drink_label():
     call screen person_choice(tuple_list, draw_hearts = True)
 
     $ person_choice = _return
+    $ del tuple_list
 
     if person_choice == "Back":
         if new_person.mc_title == "Stranger": # If the player had no interest in interacting with the character we remove it from the game. Assuming a proper "Back" button gets added during first time introduction we can do more with this.
@@ -64,7 +65,7 @@ label downtown_bar_drink_label():
     # add person to game
     python:
         if not new_person in mc.location:
-            the_person.create_home_location()
+            the_person.generate_home()
             mc.location.add_person(new_person)  
 
     if the_person.mc_title == "Stranger": # First time introduction that does not return to talk_person

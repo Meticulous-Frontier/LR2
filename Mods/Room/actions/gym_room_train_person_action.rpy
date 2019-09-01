@@ -30,6 +30,7 @@ label select_person_for_gym():
     $ tuple_list = known_people_in_the_game([mc]) + ["Back"]
     call screen person_choice(tuple_list, draw_hearts = True)
     $ person_choice = _return
+    $ del tuple_list
 
     if person_choice != "Back":
         "You send a text message to [person_choice.title] about a gym session."

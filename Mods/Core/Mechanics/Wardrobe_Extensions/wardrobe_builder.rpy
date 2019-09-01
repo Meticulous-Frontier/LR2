@@ -97,7 +97,7 @@ init 5 python:
             if person and isinstance(person, Person):
                 self.person = person
             else:
-                self.person = create_random_person("Ema","Hesire", 23, "thin_body", "B", 0.91, create_home_location = False)
+                self.person = create_random_person("Ema","Hesire", 23, "thin_body", "B", 0.91)
                 self.person.opinions.clear() # reset opinions so every item has an equal chance
                 self.person.sexy_opinions.clear()
 

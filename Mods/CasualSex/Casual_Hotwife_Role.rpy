@@ -823,13 +823,38 @@ label hotwife_sex_responses(the_person):
         "[the_person.title] closes her eyes and moans quietly to herself."
     return
 
-label hotwife_climax_responses(the_person):
+label hotwife_climax_responses_foreplay(the_person):
+    if the_person.sluttiness > 50:
+        the_person.char "Oh fuck yes, I'm going to cum! I'm cumming!"
+    else:
+        the_person.char "Oh fuck, you're going to make me cum! Fuck!"
+        "She goes silent, then lets out a shuddering moan."
+    return
+
+label hotwife_climax_responses_oral(the_person):
+    if the_person.sluttiness > 70:
+        the_person.char "Fuck yes, I'm going to cum! Make me cum!"
+    else:
+        the_person.char "Oh my god, you're good at that! I'm going to... I'm going to cum!"
+    return
+
+label hotwife_climax_responses_vaginal(the_person):
     if the_person.sluttiness > 70:
         the_person.char "I'm going to cum! Ah! Make me cum [the_person.mc_title], I want to cum so badly! Ah!"
         "She closes her eyes and squeals with pleasure."
     else:
         the_person.char "Ah! I'm cumming! Oh fuck! Ah!"
     the_person.char "Fuck I hope daddy does this to me again later!"
+    return
+
+label hotwife_climax_responses_anal(the_person):
+    if the_person.sluttiness > 70:
+        the_person.char "Oh fuck, your cock feels so huge in my ass! It's going to make me cum!"
+        the_person.char "Ah! Mmhmmm!"
+    else:
+        the_person.char "Oh fucking shit, I think you're going to make me..."
+        "She barely finishes her sentence before her body is wracked with pleasure."
+        the_person.char "Cum!"
     return
 
 label hotwife_clothing_accept(the_person):

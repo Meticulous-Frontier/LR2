@@ -176,13 +176,39 @@ label cougar_sex_angry_reject(the_person):
         the_person.char "You should go. This was a mistake. I should have known it was a mistake. I don't know what came over me."
     return
 
-label cougar_climax_responses(the_person):
+
+label cougar_climax_responses_foreplay(the_person):
+    if the_person.sluttiness > 50:
+        the_person.char "Oh my god! I'm going to... I'm going to..."
+        the_person.char "{b}Cum!{/b} Ah!"
+    else:
+        the_person.char "Oh keep doing that [the_person.mc_title], I'm cumming!"
+    return
+
+label cougar_climax_responses_oral(the_person):
+    if the_person.sluttiness > 70:
+        the_person.char "Oh fuck! Oh fuck, make me cum [the_person.mc_title]!"
+        "She closes her eyes and squeals with pleasure."
+    else:
+        the_person.char "Oh my god, I'm going to cum. I'm going to cum!"
+        "She closes her eyes and squeals with pleasure."
+    return
+
+label cougar_climax_responses_vaginal(the_person):
     if the_person.sluttiness > 70:
         the_person.char "Ah! Yes [the_person.mc_title]! Right there on my...yesss...I'm cumming!"
         "She closes her eyes and goes into a frenzy of multiple orgasms."
     else:
         the_person.char "Oh god, that's it...keep going...yes [the_person.mc_title]..yes! Yes! YES!"
     return
+
+label cougar_climax_responses_anal(the_person):
+    if the_person.sluttiness > 80:
+        the_person.char "I'm going to cum! Fuck my ass hard and make me cum!"
+    else:
+        the_person.char "Oh fuck, I think... I think I'm going to cum!"
+    return
+
 
 label cougar_seduction_response(the_person):
     if the_person.obedience > 130:

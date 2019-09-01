@@ -41,7 +41,8 @@ label dungeon_room_appoint_slave_label():
         $ tuple_list = mc.location.people + ["Back"]
         call screen person_choice(tuple_list, draw_hearts = True)
         $ person_choice = _return
-
+        $ del tuple_list
+        
         if person_choice == "Back":
             return # Where to go if you hit "Back"
 

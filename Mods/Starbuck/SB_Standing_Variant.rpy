@@ -624,7 +624,7 @@ label strip_ask_SB_facing_wall(the_girl, the_clothing, the_location, the_object,
 
 label orgasm_SB_facing_wall(the_girl, the_location, the_object, the_round):
     "[the_girl.possessive_title] gasps. Her hands grasp at the [the_object.name] as she starts to cum."
-    $ the_girl.call_dialogue("climax_responses")
+    $ the_girl.call_dialogue("climax_responses_vaginal")
     "You push her roughly up against [the_object.name] and keep fucking her through her orgasm."
     "After a couple of seconds [the_girl.possessive_title] takes a couple of deep breathes. You slow down your pace and give her a chance to recover."
     the_girl.char "Keep fucking me... Make me cum again!"

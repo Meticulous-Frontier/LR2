@@ -28,7 +28,7 @@ init 1:
             reveal_sex = recruitment_knowledge_three_policy.is_owned()
 
             for x in range(0, count): 
-                candidates.append(make_person(create_home_location = False))
+                candidates.append(make_person())
 
             for a_candidate in candidates:
                 for x in __builtin__.range(0,reveal_count): #Reveal all of their opinions based on our policies.
@@ -206,70 +206,3 @@ init 2:
                 hover "/tutorial_images/hiring_tutorial_"+__builtin__.str(mc.business.event_triggers_dict["hiring_tutorial"])+".png"
                 action Function(mc.business.advance_tutorial,"hiring_tutorial")
 
-init 1500 python:
-    config.label_overrides["interview_action_description"] = "interview_action_description_low_mem_usage"
-
-label interview_action_description_low_mem_usage:
-    $ count = number_of_cadidates()
-    $ interview_cost = 50
-    "Bringing in [count] people for an interview will cost $[interview_cost]. Do you want to spend time interviewing potential employees?"
-    menu:
-        "Yes, I'll pay the cost. -$[interview_cost]":
-            $ mc.business.funds += -interview_cost
-            $ renpy.scene("Active")
-            $ hide_ui()
-            show bg paper_menu_background #Show a paper background for this scene.
-            $ candidates = generate_candidates(count)
-            call screen interview_ui(candidates,count)
-            $ del candidates
-            $ renpy.scene()
-            $ show_ui()
-            $ renpy.scene("Active")
-            $ renpy.show(mc.location.name,what=mc.location.background_image)
-            if not _return == "None":
-                python:
-                    new_person = _return
-                    new_person.event_triggers_dict["employed_since"] = day
-                    mc.business.listener_system.fire_event("new_hire", the_person = new_person)
-                    new_person.special_role.append(employee_role)
-                    new_person.create_home_location()
-
-                "You complete the nessesary paperwork and hire [_return.name]. What division do you assign them to?"
-                menu:
-                    "Research and Development.":
-                        $ mc.business.add_employee_research(new_person)
-                        $ mc.business.r_div.add_person(new_person)
-                        $ new_person.set_work([1,2,3], mc.business.r_div)
-
-                    "Production.":
-                        $ mc.business.add_employee_production(new_person)
-                        $ mc.business.p_div.add_person(new_person)
-                        $ new_person.set_work([1,2,3], mc.business.p_div)
-
-                    "Supply Procurement.":
-                        $ mc.business.add_employee_supply(new_person)
-                        $ mc.business.s_div.add_person(new_person)
-                        $ new_person.set_work([1,2,3], mc.business.s_div)
-
-                    "Marketing.":
-                        $ mc.business.add_employee_marketing(new_person)
-                        $ mc.business.m_div.add_person(new_person)
-                        $ new_person.set_work([1,2,3], mc.business.m_div)
-
-                    "Human Resources.":
-                        $ mc.business.add_employee_hr(new_person)
-                        $ mc.business.h_div.add_person(new_person)
-                        $ new_person.set_work([1,2,3], mc.business.h_div)
-
-                python: #Establish their titles. TODO: Have this kind of stuff handled in an interview scene.
-                    new_person.set_title(get_random_title(new_person))
-                    new_person.set_possessive_title(get_random_possessive_title(new_person))
-                    new_person.set_mc_title(get_random_player_title(new_person))
-
-            else:
-                "You decide against hiring anyone new for now."
-
-            call advance_time from _call_advance_time_interview_ui
-        "Nevermind.":
-            pass
-    return

@@ -343,7 +343,7 @@ label strip_ask_SB_doggy_standing(the_girl, the_clothing, the_location, the_obje
 
 label orgasm_SB_doggy_standing(the_girl, the_location, the_object, the_round):
     "[the_girl.possessive_title]'s legs start to quiver, and then suddenly she tenses up."
-    $ the_girl.call_dialogue("climax_responses")
+    $ the_girl.call_dialogue("climax_responses_vaginal")
     "You bury your cock in deep in [the_girl.possessive_title]'s cunt while she cums. Her pussy spasms around you."
     "After a couple of seconds [the_girl.possessive_title] sighs and the tension drains from her body."
     if the_girl.get_opinion_score("doggy style sex") > 0:

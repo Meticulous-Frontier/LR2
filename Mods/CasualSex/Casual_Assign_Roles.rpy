@@ -107,6 +107,7 @@ init 2 python:
 
     def casual_sex_create_athlete():
         new_athlete = create_random_person( body_type = "thin_body", age = renpy.random.randint(19,25))
+        new_athlete.generate_home()
         new_athlete.original_personality = athlete_personality
         assign_casual_athlete_role(new_athlete)
         gym.add_person(new_athlete)
@@ -114,6 +115,7 @@ init 2 python:
 
     def casual_sex_create_hotwife():
         new_hotwife = create_random_person(age = renpy.random.randint(30,40))
+        new_hotwife.generate_home()
         new_hotwife.original_personality = hotwife_personality
         assign_casual_hotwife_role(new_hotwife)
         downtown_bar.add_person(new_hotwife)

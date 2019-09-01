@@ -1089,7 +1089,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     $ the_person.change_arousal(10)#90
     "[the_person.possessive_title] is bucking her hips wildly as you lick her. Suddenly, she grabs the back of your head and gasps."
     $ the_person.change_arousal(20)#110
-    $ the_person.call_dialogue("climax_responses")
+    $ the_person.call_dialogue("climax_responses_oral")
     "Her pussy is drooling wet as she climaxes. She paws at the table, trying to find something to hold onto."
     "After a few seconds she lets out a long sigh and all the tension drains out of her body. You slow down a bit and lap up her sweet, creamy juices."
     the_person.char "Oh fuck [the_person.mc_title], your tongue feels so good. Wow!"
@@ -1116,7 +1116,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     $ mc.change_arousal(20)#40
     "[the_person.possessive_title] struggles a bit against her handcuffs, but she is helpless to defend herself from your spanking."
     "[the_person.possessive_title]'s moaning intensifies rapidly, until finally she takes a sharp breath and tenses up."
-    $ the_person.call_dialogue("climax_responses")
+    $ the_person.call_dialogue("climax_responses_vaginal")
     $ the_person.change_slut_temp(5)
     $ the_person.change_slut_core(2)
     $ the_person.change_happiness(4)
@@ -1129,7 +1129,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     "With the leverage of your hands on her shoulders, holding her body weight up off the table. Your hips make heavy slapping noises as the slam into her ass with each thrust."
     the_person.char "OHHH! Fuck me [the_person.mc_title]! HOLY FUCK!"
     "[the_person.possessive_title]'s entire body begins to tremble as another orgasm hits her. Her pussy spasms wildly all around you and you can see her hips quaking."
-    $ the_person.call_dialogue("climax_responses")
+    $ the_person.call_dialogue("climax_responses_vaginal")
     $ the_person.change_slut_temp(5)
     $ the_person.change_slut_core(2)
     $ the_person.change_happiness(4)

@@ -382,7 +382,7 @@ label strip_ask_SB_doggy_anal(the_girl, the_clothing, the_location, the_object, 
 
 label orgasm_SB_doggy_anal(the_girl, the_location, the_object, the_round):
     "[the_girl.possessive_title]'s tight back passage starts to quiver, and suddenly tenses up."
-    $ the_girl.call_dialogue("climax_responses")
+    $ the_girl.call_dialogue("climax_responses_anal")
     "You bury your cock in deep in [the_girl.possessive_title]'s ass while she cums. Her bowel grips you tightly."
     "After a couple of seconds [the_girl.possessive_title] sighs and the tension drains from her body."
     if the_girl.get_opinion_score("anal sex") < 0:

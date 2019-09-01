@@ -1,4 +1,4 @@
-# Genric Personality Hook by Tristimdorion
+# Generic Personality Hook by Tristimdorion
 # overrides the default make person function in the game
 # so we can add / change person characteristics based on custom personalities.
 # if you need person customizations, extend the hijacked labels
@@ -8,23 +8,50 @@ init 5 python:
     add_label_hijack("after_load", "update_generic_personality")
 
 init -1 python:
-    # This will be called in game when a person is created orginal function in script.rpy
-    def make_person(create_home_location = True):
-        split_proportion = 20 #1/5 characters generated will be a premade character.
+    # This will be called in game when a person is created original function in script.rpy
+    def make_person():
         return_character = None
-        if renpy.random.randint(1,100) < split_proportion:
+        if renpy.random.randint(1,100) < 20:
             return_character = get_premade_character()
 
-        if return_character is None: #Either we aren't getting a premade, or we are out of them.
+        if return_character is None: #Either we aren't getting a pre-made, or we are out of them.
             # Use larger height range of person object (not full)
-            return_character = create_random_person(height = 0.825 + (renpy.random.random()/7), create_home_location = create_home_location)
+            return_character = create_random_person(height = 0.825 + (renpy.random.random()/7))
 
+        update_person_opinions(return_character)
         update_random_person(return_character)
         update_person_roles(return_character)
         rebuild_wardrobe(return_character)
         update_person_outfit(return_character)
 
         return return_character
+
+
+    def update_person_opinions(person):
+        # make sure we have an opinion about one of the clothing categories
+        if not any(x[0] in person.opinions for x in ["dresses", "pants", "skirts"]):
+            the_opinion_key = get_random_from_list(["dresses", "pants", "skirts"])
+            degree = get_random_from_list([-2,-1,1,2])
+            person.opinions[the_opinion_key] = [degree, False]
+
+        # make sure we have an opinion about shoes and makeup
+        if not any(x[0] in person.opinions for x in ["boots", "high heels", "makeup"]):
+            the_opinion_key = get_random_from_list(["boots", "high heels", "makeup"])
+            degree = get_random_from_list([-2,-1,1,2])
+            person.opinions[the_opinion_key] = [degree, False]
+
+        # make sure we have an opinion about basic sex acts
+        if not any(x[0] in person.sexy_opinions for x in ["kissing", "masturbating", "giving blowjobs", "being fingered"]):
+            the_opinion_key = get_random_from_list(["kissing", "masturbating", "giving blowjobs", "being fingered"])
+            degree = get_random_from_list([-2,-1,1,2])
+            person.sexy_opinions[the_opinion_key] = [degree, False]
+
+        # make sure we have an opinion about clothing to wear
+        if not any(x[0] in person.sexy_opinions for x in ["skimpy outfits", "not wearing underwear", "showing her tits", "showing her ass", "skimpy uniforms"]):
+            the_opinion_key = get_random_from_list(["skimpy outfits", "not wearing underwear", "showing her tits", "showing her ass", "skimpy uniforms"])
+            degree = get_random_from_list([-2,-1,1,2])
+            person.sexy_opinions[the_opinion_key] = [degree, False]
+        return
 
     # make sure new character has a more appropriate outfit to wear
     def update_person_outfit(person):
@@ -140,6 +167,7 @@ label activate_generic_personality(stack):
         # add one bimbo to the game (on start of game)
         the_person = create_random_person(age=renpy.random.randint(25, 35), tits="DD", body_type = "standard_body", face_style = "Face_4", skin = "tan",
             hair_colour = "platinum blonde", hair_style = messy_hair, eyes = "blue", personality = bimbo_personality)
+        the_person.generate_home()
         the_person.home.add_person(the_person)
 
         # update characters in game

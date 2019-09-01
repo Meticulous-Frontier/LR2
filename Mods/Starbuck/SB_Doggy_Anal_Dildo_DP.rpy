@@ -344,7 +344,7 @@ label orgasm_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object, the_roun
         the_girl.char "Oh fuck... fuck... yes!"
         return
     "[the_girl.possessive_title]'s tight back passage start to quiver, and suddenly tenses up."
-    $ the_girl.call_dialogue("climax_responses")
+    $ the_girl.call_dialogue("climax_responses_anal")
     "You bury your cock in deep in [the_girl.possessive_title]'s ass while she cums. Her bowel grips you tightly. The vibrations from the dildo intensify her orgasm."
     "After a couple of seconds [the_girl.possessive_title] sighs and the tension drains from her body."
     if the_girl.get_opinion_score("anal sex") < 0:

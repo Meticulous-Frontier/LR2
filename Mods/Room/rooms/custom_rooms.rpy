@@ -45,7 +45,7 @@ init 15 python:
         make_chair(),
         make_floor()
     ]
-    downtown_bar = Room("bar", "The Downtown Distillery", [], bar_background, downtown_bar_objects,[], [downtown_bar_action], True, [6,5], None, True)
+    downtown_bar = Room("bar", "The Downtown Distillery", [], bar_background, downtown_bar_objects,[], [downtown_bar_action], True, [5,4], None, True)
 
     # Hotel Room - The Hotel | No actions at this time.
     # This hotel gets updated when a save game is loaded, regardless of its existence

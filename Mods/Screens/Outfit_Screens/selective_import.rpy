@@ -17,7 +17,7 @@ init 2 python:
 init 2:
     screen import_outfit_manager(target_wardrobe, xml_filename, slut_limit = 999, show_export = True, show_sets = True, show_overwear = True, show_underwear = True, show_outfits = True): ##Brings up a list of the players current saved outfits, returns the selected outfit or None.
         #If sluttiness_limit is passed, you cannot exit the creator until the proposed outfit has a sluttiness below it.
-        $ wardrobe_preview = create_random_person(create_home_location = False)
+        $ wardrobe_preview = create_random_person()
         $ wardrobe_preview.wardrobe = wardrobe_from_xml("")
         $ import_wardrobe(wardrobe_preview.wardrobe, xml_filename)
         add "Paper_Background.png"

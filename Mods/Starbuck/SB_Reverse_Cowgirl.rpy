@@ -330,7 +330,7 @@ label transition_SB_reverse_cowgirl_doggy(the_girl, the_location, the_object, th
 
 label orgasm_SB_reverse_cowgirl(the_girl, the_location, the_object, the_round):
     "[the_girl.possessive_title]'s cunt quivers and spasms around you, and then suddenly tenses up."
-    $ the_girl.call_dialogue("climax_responses")
+    $ the_girl.call_dialogue("climax_responses_vaginal")
     "[the_girl.possessive_title] stirs her womb with your erection aggressively through her climax"
     "After a couple of seconds [the_girl.possessive_title] sighs and the tension drains from her body."
     the_girl.char "God it feels so good, I wonder if you can last long enough to let me cum again..."

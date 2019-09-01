@@ -204,7 +204,7 @@ label strip_ask_SB_Oral_Laying(the_girl, the_clothing, the_location, the_object,
 
 label orgasm_SB_Oral_Laying(the_girl, the_location, the_object, the_round):
     "[the_girl.possessive_title] is bucking her hips wildy as you lick her. Suddenly, she grabs the back of your head and gasps."
-    $ the_girl.call_dialogue("climax_responses")
+    $ the_girl.call_dialogue("climax_responses_oral")
     "Her pussy is drooling wet as she climaxes. She paws at the [the_object.name], trying to find something to hold onto."
     "After a few seconds she lets out a long sigh and all the tension drains out of her body. You slow down a bit and lap up her sweet, creamy juices."
     the_girl.char "Oh fuck [the_girl.mc_title], your tongue feels so good."

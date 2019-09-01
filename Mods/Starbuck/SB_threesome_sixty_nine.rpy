@@ -260,7 +260,7 @@ label orgasm_SB_threesome_sixty_nine(the_girl_1, the_girl_2, the_location, the_o
     if current_girl == 1:
         if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
             "You can feel [the_girl_1.title] trembling beneath you. [the_girl_2.title] opens her mouth and moans as [the_girl_1.title] licks her in just the right spot."
-            $ the_girl_2.call_dialogue("climax_responses")
+            $ the_girl_2.call_dialogue("climax_responses_vaginal")
             "[the_girl_1.title] is moaning loudly but it all gets muffled as [the_girl_2.title] grinds against her face roughly."
             "They both orgasm. [the_girl_1.title]'s cunt pulses around your cock as she cums, while [the_girl_2.title] moans and closes her eyes."
             "As they start to wind down, you continue fucking [the_girl_1.title]'s now considerably slicker pussy."
@@ -274,13 +274,13 @@ label orgasm_SB_threesome_sixty_nine(the_girl_1, the_girl_2, the_location, the_o
 
         elif the_girl_2.arousal > 100:   #Just girl 2 orgasms
             "[the_girl_2.title] opens her mouth and moans as [the_girl_1.title] licks her in just the right spot."
-            $ the_girl_2.call_dialogue("climax_responses")
+            $ the_girl_2.call_dialogue("climax_responses_oral")
             "[the_girl_2.title] grinds her pussy against the other girl's face as she orgasms."
 
     elif current_girl == 2:
         if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
             "You can feel [the_girl_1.title] trembling as you finger her. [the_girl_2.title] moans around your cock as [the_girl_1.title] licks her in just the right spot."
-            $ the_girl_2.call_dialogue("climax_responses")
+            $ the_girl_2.call_dialogue("climax_responses_oral")
             "[the_girl_1.title] is moaning loudly but it all gets muffled as [the_girl_2.title] grinds against her face roughly."
             "They both orgasm. [the_girl_1.title]'s cunt quivers around your fingers as she cums, while [the_girl_2.title] moans and closes her eyes."
             "As they start to wind down, you put your hand on the back of [the_girl_2.title]'s head and remind her to keep sucking."

@@ -43,7 +43,8 @@ label give_wardrobe_label():
         $ tuple_list = known_people_in_the_game([mc]) + ["Back"]
         call screen person_choice(tuple_list, draw_hearts = True)
         $ person_choice = _return
-
+        $ del tuple_list
+        
         if person_choice == "Back":
             return # Where to go if you hit "Back".
         else:
