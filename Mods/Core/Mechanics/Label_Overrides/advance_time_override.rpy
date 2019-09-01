@@ -89,6 +89,52 @@ init 5 python:
 
     config.label_overrides["advance_time"] = "advance_time_enhanced"
 
+    def get_crisis_from_crisis_list():
+        possible_crisis_list = []
+        for crisis in crisis_list:
+            ic = [c[0] for c in crisis_list].index(crisis[0]) # get index of crisis
+            if not ic in crisis_tracker: # skip events in tracker list
+                if crisis[0].is_action_enabled(): #Get the first element of the weighted tuple, the action.
+                    possible_crisis_list.append(crisis) #Build a list of valid crises from ones that pass their requirement.
+
+        renpy.random.shuffle(possible_crisis_list)    # shuffle the list in random order
+        return get_random_from_weighted_list(possible_crisis_list)
+
+    def get_morning_crisis_from_crisis_list():
+        possible_morning_crises = []
+        for crisis in morning_crisis_list:
+            ic = [c[0] for c in morning_crisis_list].index(crisis[0]) # get index of crisis
+            if not ic in morning_crisis_tracker: # skip events in tracker list
+                if crisis[0].is_action_enabled(): #Get the first element of the weighted tuple, the action.
+                    possible_morning_crises.append(crisis) # Build a list of valid crises from ones that pass their requirement.
+
+        renpy.random.shuffle(possible_morning_crises)    # shuffle the list in random order
+        return get_random_from_weighted_list(possible_morning_crises)
+
+    def cleanup_crisis_tracker():
+        # how many crisis events are disabled?
+        disabled = 0
+        for action_mod in action_mod_list:
+            if hasattr(action_mod, "is_crisis") and action_mod.is_crisis and not action_mod.enabled:
+                if not hasattr(action_mod, "is_morning_crisis") or not action_mod.is_morning_crisis:
+                    disabled += 1
+
+        while len(crisis_tracker) > ((len(crisis_list) - disabled) // 3): # release old tracked events
+            del crisis_tracker[0]
+        return
+
+    def cleanup_morning_crisis_tracker():
+        # how many crisis events are disabled?
+        morning_disabled = 0
+        for action_mod in action_mod_list:
+            if hasattr(action_mod, "is_crisis") and action_mod.is_crisis and not action_mod.enabled:
+                if hasattr(action_mod, "is_morning_crisis") and action_mod.is_morning_crisis:
+                    morning_disabled += 1
+
+        while len(morning_crisis_tracker) > ((len(morning_crisis_list) - morning_disabled) // 2): # release old tracked events
+            del morning_crisis_tracker[0]
+        return
+
 label advance_time_enhanced:
     # 1) Turns are processed _before_ the time is advanced.
     # 1a) crises are processed if they are triggered.
@@ -130,38 +176,17 @@ label advance_time_bankrupt_check_label():
         $ mc.business.bankrupt_days = 0
     return
 
+
 label advance_time_random_crisis_label():
     # "advance_time_random_crisis_label - timeslot [time_of_day]" #DEBUG
-    python:
-        # how many crisis events are disabled?
-        disabled = 0
-        for action_mod in action_mod_list:
-            if hasattr(action_mod, "is_crisis") and action_mod.is_crisis and not action_mod.enabled:
-                if not hasattr(action_mod, "is_morning_crisis") or not action_mod.is_morning_crisis:
-                    disabled += 1
-
-        while len(crisis_tracker) > ((len(crisis_list) - disabled) // 3): # release old tracked events
-            del crisis_tracker[0]
-
-        possible_crisis_list = []
-        for crisis in crisis_list:
-            ic = [c[0] for c in crisis_list].index(crisis[0]) # get index of crisis
-            if not ic in crisis_tracker: # skip events in tracker list
-                if crisis[0].is_action_enabled(): #Get the first element of the weighted tuple, the action.
-                    possible_crisis_list.append(crisis) #Build a list of valid crises from ones that pass their requirement.
-
-        renpy.random.shuffle(possible_crisis_list)    # shuffle the list in random order
-
-    $ the_crisis = get_random_from_weighted_list(possible_crisis_list)
-
+    $ cleanup_crisis_tracker()
+    $ the_crisis = get_crisis_from_crisis_list()
     if the_crisis:
         #$ mc.log_event("General [[" + str(len(possible_crisis_list)) + "]: " + the_crisis.name, "float_text_grey")
         $ crisis_chance = crisis_base_chance
         $ crisis_tracker.append([c[0] for c in crisis_list].index(the_crisis)) # add crisis index to recent crisis list
         $ the_crisis.call_action()
-
     $ change_scene_display(mc.location) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
-
     show screen business_ui
     return
 
@@ -245,33 +270,14 @@ label advance_time_mandatory_morning_crisis_label():
 
 label advance_time_random_morning_crisis_label():
     # "advance_time_random_morning_crisis_label  - timeslot [time_of_day]" #DEBUG
-    python:
-        # how many crisis events are disabled?
-        morning_disabled = 0
-        for action_mod in action_mod_list:
-            if hasattr(action_mod, "is_crisis") and action_mod.is_crisis and not action_mod.enabled:
-                if hasattr(action_mod, "is_morning_crisis") and action_mod.is_morning_crisis:
-                    morning_disabled += 1
-
-        while len(morning_crisis_tracker) > ((len(morning_crisis_list) - morning_disabled) // 2): # release old tracked events
-            del morning_crisis_tracker[0]
-
-        possible_morning_crises = []
-        for crisis in morning_crisis_list:
-            ic = [c[0] for c in morning_crisis_list].index(crisis[0]) # get index of crisis
-            if not ic in morning_crisis_tracker: # skip events in tracker list
-                if crisis[0].is_action_enabled(): #Get the first element of the weighted tuple, the action.
-                    possible_morning_crises.append(crisis) # Build a list of valid crises from ones that pass their requirement.
-
-        renpy.random.shuffle(possible_morning_crises)    # shuffle the list in random order
-
-    $ the_morning_crisis = get_random_from_weighted_list(possible_morning_crises)
-
+    $ cleanup_morning_crisis_tracker()
+    $ the_morning_crisis = get_morning_crisis_from_crisis_list()
     if the_morning_crisis:
         #$ mc.log_event("Morning: [[" + str(len(possible_morning_crises)) + "] : " +  the_morning_crisis.name, "float_text_grey")
         $ morning_crisis_chance = morning_crisis_base_chance
         $ morning_crisis_tracker.append([c[0] for c in morning_crisis_list].index(the_morning_crisis)) # add crisis index to recent crisis list
         $ the_morning_crisis.call_action()
+    $ change_scene_display(mc.location) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
     return
 
 label advance_time_next_label():
