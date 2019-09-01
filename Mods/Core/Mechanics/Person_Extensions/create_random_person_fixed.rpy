@@ -116,7 +116,7 @@ init -1 python:
 
         if create_home_location and start_home == None:
             start_home = Room(name+"'s home", name+"'s home", [], apartment_background, [],[],[],False,[0.5,0.5], visible = False, hide_in_known_house_map = False)
-            start_home.link_locations_two_way(downtown)
+            #start_home.link_locations_two_way(downtown)
             start_home.add_object(make_wall())
             start_home.add_object(make_floor())
             start_home.add_object(make_bed())
@@ -143,10 +143,36 @@ init -1 python:
         if SO_name is None and relationship != "Single":
             SO_name = get_random_male_name()
 
-        return Person(name,last_name,age,body_type,tits,height,body_images,emotion_images,hair_colour,hair_style,skin,eyes,job,starting_wardrobe,personality,
+        new_person = Person(name,last_name,age,body_type,tits,height,body_images,emotion_images,hair_colour,hair_style,skin,eyes,job,starting_wardrobe,personality,
             stat_array,skill_array,sex_list=sex_array,sluttiness=start_sluttiness,obedience=start_obedience,suggest=start_suggest, love=start_love, happiness=start_happiness, home = start_home,
             font = my_custom_font, name_color = name_color , dialogue_color = dial_color,
             face_style = face_style,
             title = title, possessive_title = possessive_title, mc_title = mc_title,
             relationship = relationship, kids = kids, SO_name = SO_name)
+
+        # make sure we have an opinion about clothing
+        if not any(x[0] in new_person.opinions for x in ["dresses", "pants", "skirts"]):
+            the_opinion_key = get_random_from_list(["dresses", "pants", "skirts"])
+            degree = get_random_from_list([-2,-1,1,2])
+            new_person.opinions[the_opinion_key] = [degree, False]
+
+        # make sure we have an opinion about shoes and makeup
+        if not any(x[0] in new_person.opinions for x in ["boots", "high heels", "makeup"]):
+            the_opinion_key = get_random_from_list(["boots", "high heels", "makeup"])
+            degree = get_random_from_list([-2,-1,1,2])
+            new_person.opinions[the_opinion_key] = [degree, False]
+
+        # make sure we have an opinion about basic sex acts
+        if not any(x[0] in new_person.sexy_opinions for x in ["kissing", "masturbating", "giving blowjobs", "being fingered"]):
+            the_opinion_key = get_random_from_list(["kissing", "masturbating", "giving blowjobs", "being fingered"])
+            degree = get_random_from_list([-2,-1,1,2])
+            new_person.sexy_opinions[the_opinion_key] = [degree, False]
+
+        # make sure we have an opinion about clothing to wear
+        if not any(x[0] in new_person.sexy_opinions for x in ["skimpy outfits", "not wearing underwear", "showing her tits", "showing her ass", "skimpy uniforms"]):
+            the_opinion_key = get_random_from_list(["skimpy outfits", "not wearing underwear", "showing her tits", "showing her ass", "skimpy uniforms"])
+            degree = get_random_from_list([-2,-1,1,2])
+            new_person.sexy_opinions[the_opinion_key] = [degree, False]
+
+        return new_person
 
