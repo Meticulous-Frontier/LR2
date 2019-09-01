@@ -911,7 +911,7 @@ label athlete_hookup_accept(the_person):
     "Your hips slap against [the_person.possessive_title]'s ass as you fuck her vigorously."
     $ the_person.call_dialogue("sex_responses")
     if mc.condom == True:
-        "You grasp her ass with both hands and begin to grope her. You kneed her cheeks as your hips slowly work your erection in and out of her."
+        "You grasp her ass with both hands and begin to grope her. You knead her cheeks as your hips slowly work your erection in and out of her."
         $ the_person.change_arousal(20) #90 + 8
         if the_person.arousal > 100:
             "You can feel [the_person.title]'s pussy begin to spasm as she cums. You can see in the mirror that her mouth is hanging open and her eyes are closed."

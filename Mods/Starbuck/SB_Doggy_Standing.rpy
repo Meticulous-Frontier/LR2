@@ -162,7 +162,7 @@ label scene_SB_doggy_standing_2(the_girl, the_location, the_object, the_round):
     "You push yourself in as deep as you can go. [the_girl.possessive_title] moans as you fill her completely."
     menu:
         "Gentle Sex":
-            "You grasp her ass with both hands and begin to grope her. You kneed her cheeks as your hips slowly work your erection in and out of her."
+            "You grasp her ass with both hands and begin to grope her. You knead her cheeks as your hips slowly work your erection in and out of her."
             mc.name "[the_girl.title], your pussy is so good. I love how eager you are to fuck me."
             if SB_check_fetish(the_girl, vaginal_fetish_role):
                 the_girl.char "I love being your little slut! Fuck me good [the_girl.mc_title]!"
