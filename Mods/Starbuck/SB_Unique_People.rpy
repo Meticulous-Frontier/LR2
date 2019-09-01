@@ -44,7 +44,7 @@ init 2 python:
         starbuck_home.add_object(make_bed())
         starbuck_home.add_object(make_window())
 
-        starbuck_home.link_locations_two_way(downtown)
+        #starbuck_home.link_locations_two_way(downtown)
         list_of_places.append(starbuck_home)
 
         # init starbuck role

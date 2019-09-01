@@ -113,7 +113,7 @@ init -1:
                 return
 
             self.home = Room(self.name + "'s home", self.name + "'s home", [], apartment_background, [], [], [], False, [0.5,0.5], visible = False, hide_in_known_house_map = False)
-            self.home.link_locations_two_way(downtown)
+            #self.home.link_locations_two_way(downtown)
             self.home.add_object(make_wall())
             self.home.add_object(make_floor())
             self.home.add_object(make_bed())
