@@ -77,7 +77,7 @@ init -1 python:
         if hasattr(room_update, "hide_in_known_housemap"): # Deal with this somehow else. Thought ModRooms should have the attribute as True by default?
             room_update.hide_in_known_housemap = room.hide_in_known_housemap
 
-        return
+        return room_update
 
     def purchase_room_on_buy_function(room):
         room.visible = True
