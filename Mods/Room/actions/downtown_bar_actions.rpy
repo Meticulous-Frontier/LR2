@@ -57,16 +57,16 @@ label downtown_bar_drink_label():
         python: # release variables
             del new_person
             renpy.scene("Active")
-            
+
         return # Where to go if you hit "Back".
     else:
         $ the_person = person_choice
 
     # add person to game
     python:
-        if not new_person in mc.location:
+        if not new_person in mc.location.people:
             the_person.generate_home()
-            mc.location.add_person(new_person)  
+            mc.location.add_person(new_person)
 
     if the_person.mc_title == "Stranger": # First time introduction that does not return to talk_person
         call person_introduction(the_person) from _call_person_introduction_downtown_bar_drink
