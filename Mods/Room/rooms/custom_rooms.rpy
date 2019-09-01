@@ -112,7 +112,7 @@ label update_custom_rooms(stack):
 
 label store_m_division_basement():
     if m_division_basement not in list_of_places:
-        $ m_division_basement.link_locations(m_division)
+        #$ m_division_basement.link_locations(m_division)
         $ list_of_places.append(m_division_basement)
     
     $ m_division_basement = update_custom_rooms(m_division_basement)
@@ -120,7 +120,7 @@ label store_m_division_basement():
 
 label store_p_division_basement():
     if p_division_basement not in list_of_places:
-        $ p_division_basement.link_locations(p_division)
+        #$ p_division_basement.link_locations(p_division)
         $ list_of_places.append(p_division_basement)
     
     $ p_division_basement = update_custom_rooms(p_division_basement)
@@ -128,7 +128,7 @@ label store_p_division_basement():
 
 label store_rd_division_basement():
     if rd_division_basement not in list_of_places:
-        $ rd_division_basement.link_locations(rd_division)
+        #$ rd_division_basement.link_locations(rd_division)
         $ list_of_places.append(rd_division_basement)
     
     $ rd_division_basement = update_custom_rooms(rd_division_basement)
@@ -136,7 +136,7 @@ label store_rd_division_basement():
 
 label store_office_basement():
     if office_basement not in list_of_places:
-        $ office_basement.link_locations(office)
+        #$ office_basement.link_locations(office)
         $ list_of_places.append(office_basement)
     
     $ office_basement = update_custom_rooms(office_basement)
@@ -146,7 +146,7 @@ label store_downtown_bar():
     # Make sure it is in the list_of_places (and no duplicate)
     # List of places gets stored, so will the bar when appended here
     if downtown_bar not in list_of_places:
-        $ downtown_bar.link_locations(downtown)
+        #$ downtown_bar.link_locations(downtown)
         $ list_of_places.append(downtown_bar)
 
     # This refreshes the properties of the existing bar, e.g move the position of the Room on the map, objects, actions, connections, background etc.
@@ -157,7 +157,7 @@ label store_downtown_hotel():
     # Make sure it is in the list_of_places (and no duplicate)
     # List of places gets stored, so will the bar when appended here
     if downtown_hotel not in list_of_places:
-        $ downtown_hotel.link_locations(downtown)
+        #$ downtown_hotel.link_locations(downtown)
         $ list_of_places.append(downtown_hotel)
 
     # This refreshes the properties of the existing bar, e.g move the position of the Room on the map, objects, actions, connections, background etc.

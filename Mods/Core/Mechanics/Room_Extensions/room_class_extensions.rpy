@@ -61,7 +61,7 @@ init -1 python:
         # room_update.visible = room.visible    DON'T UPDATE VISIBILITY
         room_update.accessable = room.accessable
 
-        room_update.connections = room.connections
+        # room_update.connections = room.connections    DON'T UPDATE CONNECTIONS
 
         room_update.objects = room.objects
         room_update.objects.append(Object("stand",["Stand"], sluttiness_modifier = 0, obedience_modifier = -5)) #Add a standing position that you can always use.
