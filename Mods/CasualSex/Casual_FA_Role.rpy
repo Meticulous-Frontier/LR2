@@ -480,7 +480,7 @@ label casual_FA_get_out_of_here_label(the_person):
     "She emerges in an incredible set of purple lingerie. You start to get up but she quickly stops you, pushing you back onto the bed."
     $ the_person.draw_person (position = "cowgirl")
     "[the_person.possessive_title] pushes you onto your back and straddles your waist. She begins to grind up against you, dry humping your erection."
-    "She closes her eyes and moans. You reach up and kneed her tits through her bra. She reaches back and undoes the clasp holding her bra on. She leans forward and her bra falls off her shoulders and onto the bed."
+    "She closes her eyes and moans. You reach up and knead her tits through her bra. She reaches back and undoes the clasp holding her bra on. She leans forward and her bra falls off her shoulders and onto the bed."
     #TODO draw bra strip#
     "Your hands return to her perky tits. They feel soft and supple in your hands. She moans when you pinch her nipples gently."
     $ the_person.change_arousal(10)

@@ -95,7 +95,7 @@ label scene_SB_anal_swing_1(the_girl, the_location, the_object, the_round):
         the_girl.char "Oh god, you fuck me so good."
 
     #menu:
-    #    "Kneed her ass":
+    #    "knead her ass":
 
 
     #    "Play with her clit":

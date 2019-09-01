@@ -64,7 +64,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object, the_round):
                     the_girl.char "I'm sorry that I'm not at good at sucking you as you are at kissing me..."
                     "You pause your licking to give her some encouragement."
                     mc.name "Don't worry, you just need more practice."
-                "You kneed her ass cheeks with your hands a few times, then spread her cheeks apart and continue to eat her out."
+                "You knead her ass cheeks with your hands a few times, then spread her cheeks apart and continue to eat her out."
             "Focus on her.\n{size=22}Requires Oral Skill{/size} (disabled)" if mc.sex_skills["Oral"] < 3:
                     pass
             "Focus on you.":
@@ -76,7 +76,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object, the_round):
                     the_girl.char "Sorry! I'm just not very good at this I guess."
                     "[the_girl.possessive_title] keeps stroking you, this time you can barely feel it. You sigh and decide to just keep eating her out while she does her thing."
                 else:
-                    "[the_girl.possessive_title] wraps her right hand around the base of your cock and starts to slide it back and forth in time with her sucking. Her other hand begins to lightly cup and kneed your balls."
+                    "[the_girl.possessive_title] wraps her right hand around the base of your cock and starts to slide it back and forth in time with her sucking. Her other hand begins to lightly cup and knead your balls."
                     if (the_girl.get_opinion_score("cum facials") > 0 or the_girl.get_opinion_score("being covered in cum") > 0 ) and the_girl.sluttiness > 40:
                         "After a moment she takes her lips off your dick and continues stroking you."
                         the_girl.char "Mmm, I can't wait to feel your hot cum all over my face..."
@@ -116,7 +116,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object, the_round):
                     "[the_girl.possessive_title] slips you back into her soft mouth. Her tongue swirls around you in large circles few a seconds and the resumes bobbing her head up and down."
                     "You pause your licking to give her some encouragement."
                     mc.name "That's it, [the_girl.title], suck my cock!"
-                "You kneed her ass cheeks with your hands a few times, then spread her cheeks apart and continue to eat her out."
+                "You knead her ass cheeks with your hands a few times, then spread her cheeks apart and continue to eat her out."
             "Focus on her.\n{size=22}Requires Oral Skill{/size} (disabled)" if mc.sex_skills["Oral"] < 3:
                     pass
             "Focus on you.":
@@ -152,7 +152,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object, the_round):
                         $ the_girl.discover_opinion("being submissive")
                         $ mc.change_arousal(5)
 
-                    "[the_girl.possessive_title] wraps her right hand around the base of your cock and starts to slide it back and forth in time with her sucking. Her other hand begins to lightly cup and kneed your balls."
+                    "[the_girl.possessive_title] wraps her right hand around the base of your cock and starts to slide it back and forth in time with her sucking. Her other hand begins to lightly cup and knead your balls."
                     if SB_check_fetish(the_girl, cum_external_role):
                         "After a moment she takes her lips off your dick and continues stroking you."
                         the_girl.char "Mmm, I can't wait to feel your hot cum all over my face..."
@@ -201,7 +201,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object, the_round):
         menu:
             "Focus on her." if mc.sex_skills["Oral"] > 5:
                 "Not to be outdone, you double down on your efforts to please [the_girl.possessive_title] orally."
-                "You aggressively lick her clit, while simultaneously kneeding her ass cheeks with your hands. You pull her clit into your mouth and suck on it lightly."
+                "You aggressively lick her clit, while simultaneously kneading her ass cheeks with your hands. You pull her clit into your mouth and suck on it lightly."
                 the_girl.char "mmmmmmmfff"
                 "The vibrations in [the_girl.possessive_title]'s throat feel amazing around your cock. You lick up some of her fluids that are beginning to drip down then lick up an down the length of slit a few times."
                 if the_girl.get_opinion_score("drinking cum") > 0 and (the_girl.get_opinion_score("drinking cum") >= the_girl.get_opinion_score("cum facials")):

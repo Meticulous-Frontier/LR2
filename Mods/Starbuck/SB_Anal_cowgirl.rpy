@@ -100,7 +100,7 @@ label scene_SB_anal_cowgirl_2(the_girl, the_location, the_object, the_round):
             "She moans as you rub and tweak her breasts. She puts her hands on your chest and focuses on fucking you."
         else:
             $ the_clothing = the_girl.outfit.get_upper_visible()[0]
-            "She reaches up and grabs onto one of her small tits through her [the_clothing.name]. She kneeds it through the fabric and moans loudly while she rides you."
+            "She reaches up and grabs onto one of her small tits through her [the_clothing.name]. She kneads it through the fabric and moans loudly while she rides you."
             the_girl.char "Ah!"
             menu:
                 "Pull her [the_clothing.name] off.":
