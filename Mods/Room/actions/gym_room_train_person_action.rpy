@@ -28,7 +28,7 @@ init 3 python:
 label select_person_for_gym():
     "Select who the gym session is for"
     $ tuple_list = known_people_in_the_game([mc]) + ["Back"]
-    call screen person_choice(tuple_list, draw_hearts = True)
+    call screen person_choice(tuple_list, person_prefix = "Train", draw_hearts = True, show_person_preview = False)
     $ person_choice = _return
     $ del tuple_list
 

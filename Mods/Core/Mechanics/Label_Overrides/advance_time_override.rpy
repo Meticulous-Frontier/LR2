@@ -152,7 +152,6 @@ label advance_time_enhanced:
     while advance_time_count < advance_time_max_actions:
         $ act = advance_time_action_list_sorted[advance_time_count]
         if act.is_action_enabled(): # Only run actions that have their requirement met.
-
             $ act.call_action()
             $ renpy.scene("Active")
 
@@ -160,6 +159,7 @@ label advance_time_enhanced:
 
     # increase crisis chance (every time slot)
     $ crisis_chance += 1
+    $ del people_to_process
     return
 
 label advance_time_bankrupt_check_label():
@@ -186,6 +186,7 @@ label advance_time_random_crisis_label():
         $ crisis_chance = crisis_base_chance
         $ crisis_tracker.append([c[0] for c in crisis_list].index(the_crisis)) # add crisis index to recent crisis list
         $ the_crisis.call_action()
+        $ del the_crisis
     $ change_scene_display(mc.location) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
     show screen business_ui
     return
@@ -198,17 +199,20 @@ label advance_time_mandatory_crisis_label():
         clear_list = []
 
     while mandatory_crisis_count < mandatory_crisis_max: #We need to keep this in a renpy loop, because a return call will always return to the end of an entire python block.
-        $ crisis = mc.business.mandatory_crises_list[mandatory_crisis_count]
-        if crisis.is_action_enabled():
-            $ crisis.call_action()
+        $ the_crisis = mc.business.mandatory_crises_list[mandatory_crisis_count]
+        if the_crisis.is_action_enabled():
+            $ the_crisis.call_action()
             $ renpy.scene("Active")
-            $ clear_list.append(crisis)
+            $ clear_list.append(the_crisis)
         $ mandatory_crisis_count += 1
+        $ del the_crisis
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
         change_scene_display(mc.location) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
         for crisis in clear_list:
             mc.business.mandatory_crises_list.remove(crisis) #Clean up the list.
+
+        del clear_list
     return
 
 label advance_time_people_run_turn_label():
@@ -216,12 +220,12 @@ label advance_time_people_run_turn_label():
     python:
         people_to_process = [] #This is a master list of turns of need to process, stored as tuples [character,location]. Used to avoid modifying a list while we iterate over it, and to avoid repeat movements.
         for place in list_of_places:
-            for people in place.people:
-                people_to_process.append([people,place])
+            for person in place.people:
+                people_to_process.append([person, place])
 
     python:
-        for (people,place) in people_to_process: #Run the results of people spending their turn in their current location.
-            people.run_turn()
+        for (person, place) in people_to_process: #Run the results of people spending their turn in their current location.
+            person.run_turn()
         mc.business.run_turn()
         mc.run_turn()
     return
@@ -230,8 +234,8 @@ label advance_time_people_run_day_label():
     # "advance_time_people_run_day_label - timeslot [time_of_day]" # DEBUG
     #if time_of_day == 4: ##First, determine if we're going into the next chunk of time. If we are, advance the day and run all of the end of day code. NOTE: We can do checks like these with Action.requirements
     python:
-        for (people,place) in people_to_process:
-            people.run_day()
+        for (person, place) in people_to_process:
+            person.run_day()
 
     $ mc.run_day()
     $ mc.business.run_day()
@@ -255,17 +259,20 @@ label advance_time_mandatory_morning_crisis_label():
         clear_list = []
 
     while mandatory_morning_crisis_count < mandatory_morning_crisis_max: #We need to keep this in a renpy loop, because a return call will always return to the end of an entire python block.
-        $crisis = mc.business.mandatory_morning_crises_list[mandatory_morning_crisis_count]
-        if crisis.is_action_enabled():
-            $ crisis.call_action()
+        $ the_crisis = mc.business.mandatory_morning_crises_list[mandatory_morning_crisis_count]
+        if the_crisis.is_action_enabled():
+            $ the_crisis.call_action()
             $ renpy.scene("Active")
-            $ clear_list.append(crisis)
+            $ clear_list.append(the_crisis)
         $ mandatory_morning_crisis_count += 1
+        $ del the_crisis
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
         change_scene_display(mc.location) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
         for crisis in clear_list:
             mc.business.mandatory_morning_crises_list.remove(crisis) #Clean up the list.
+
+        del clear_list
     return
 
 label advance_time_random_morning_crisis_label():
@@ -277,6 +284,7 @@ label advance_time_random_morning_crisis_label():
         $ morning_crisis_chance = morning_crisis_base_chance
         $ morning_crisis_tracker.append([c[0] for c in morning_crisis_list].index(the_morning_crisis)) # add crisis index to recent crisis list
         $ the_morning_crisis.call_action()
+        $ del the_morning_crisis
     $ change_scene_display(mc.location) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
     return
 

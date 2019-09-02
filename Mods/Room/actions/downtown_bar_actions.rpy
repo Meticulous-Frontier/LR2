@@ -44,9 +44,7 @@ label downtown_bar_drink_label():
         "Do you wish to introduce yourself, perhaps grace her with a free- of charge drink?"
 
     $ tuple_list = known_people_at_location(mc.location) + unknown_people_at_location(mc.location) + [new_person, "Back"]
-
-    call screen person_choice(tuple_list, draw_hearts = True)
-
+    call screen person_choice(tuple_list, person_prefix = "Drink with", draw_hearts = True)
     $ person_choice = _return
     $ del tuple_list
 

@@ -16,7 +16,7 @@ label label_override_actions_hook(stack):
                     action_mod_list[idx] = found
                 except ValueError:
                     null
-                
+        del found
         # update the advance_time_action_list with the instances in the action_mod_list
         advance_time_action_list = [x for x in action_mod_list if x in advance_time_action_list]
     $ execute_hijack_call(stack)

@@ -675,8 +675,8 @@ label SB_process_overnight_no_events():   #Use this label for overnights where t
     $ time_of_day = 0
     $ day += 1
     python:
-        for (people,place) in people_to_process:
-            people.run_day()
+        for (person, place) in people_to_process:
+            person.run_day()
 
     $ mc.run_day()
     $ mc.business.run_day()

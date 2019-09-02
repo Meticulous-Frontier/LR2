@@ -82,6 +82,7 @@ init -1 python:
                 found = find_in_list(lambda x: x == role_action, action_mod_list)
                 if found:
                     role_action.enabled = found.enabled
+                    del found
         return
 
     def update_cougar_personality(person):

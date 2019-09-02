@@ -41,7 +41,7 @@ label give_wardrobe_label():
     "Select who to give clothes"
     while True:
         $ tuple_list = known_people_in_the_game([mc]) + ["Back"]
-        call screen person_choice(tuple_list, draw_hearts = True)
+        call screen person_choice(tuple_list, draw_hearts = True, show_person_preview = False)
         $ person_choice = _return
         $ del tuple_list
         

@@ -39,7 +39,7 @@ label dungeon_room_appoint_slave_label():
 
     while True:
         $ tuple_list = mc.location.people + ["Back"]
-        call screen person_choice(tuple_list, draw_hearts = True)
+        call screen person_choice(tuple_list, person_prefix = "Make", person_suffix = "a slave.", draw_hearts = True)
         $ person_choice = _return
         $ del tuple_list
         

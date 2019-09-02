@@ -8,6 +8,22 @@ init 5 python:
     add_label_hijack("normal_start", "activate_change_crisis_chance")  
     add_label_hijack("after_load", "update_change_crisis_chance")
 
+    def action_mod_disabled_count():
+        disabled = 0
+        for action_mod in action_mod_list:
+            if hasattr(action_mod, "is_crisis") and action_mod.is_crisis and not action_mod.enabled:
+                if not hasattr(action_mod, "is_morning_crisis") or not action_mod.is_morning_crisis:
+                    disabled += 1
+        return disabled
+
+    def action_mod_morning_disabled_count():
+        morning_disabled = 0                
+        for action_mod in action_mod_list:
+            if hasattr(action_mod, "is_crisis") and action_mod.is_crisis and not action_mod.enabled:
+                if hasattr(action_mod, "is_morning_crisis") and action_mod.is_morning_crisis:
+                    morning_disabled += 1
+        return morning_disabled
+
 label activate_change_crisis_chance(stack):
     python:
         bedroom.actions.append(change_crisis_chance_action)
@@ -31,21 +47,7 @@ label update_change_crisis_chance(stack):
     return
 
 label show_crisis_chance_ui():
-    python:
-        # how many crisis events are disabled?
-        disabled = 0
-        for action_mod in action_mod_list:
-            if hasattr(action_mod, "is_crisis") and action_mod.is_crisis and not action_mod.enabled:
-                if not hasattr(action_mod, "is_morning_crisis") or not action_mod.is_morning_crisis:
-                    disabled += 1
-
-        morning_disabled = 0                
-        for action_mod in action_mod_list:
-            if hasattr(action_mod, "is_crisis") and action_mod.is_crisis and not action_mod.enabled:
-                if hasattr(action_mod, "is_morning_crisis") and action_mod.is_morning_crisis:
-                    morning_disabled += 1
-
-    call screen crisis_chance_setting(disabled, morning_disabled)
+    $ renpy.call_screen("crisis_chance_setting", action_mod_disabled_count(), action_mod_morning_disabled_count())
     $ crisis_chance = crisis_base_chance
     $ morning_crisis_chance = morning_crisis_base_chance
     return

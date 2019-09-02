@@ -111,7 +111,7 @@ label clone_person():
 
     while True:
         $ tuple_list = known_people_in_the_game([mc]) + ["Back"]
-        call screen person_choice(tuple_list, draw_hearts = True)
+        call screen person_choice(tuple_list, person_prefix = "Clone", draw_hearts = True, show_person_preview = False)
         $ person_choice = _return
         $ del tuple_list
 
@@ -171,7 +171,7 @@ label cloning_process(person = the_person): # default to the_person when not pas
 label modify_person():
     while True:
         $ tuple_list = known_people_in_the_game([mc]) + ["Back"]
-        call screen person_choice(tuple_list, draw_hearts = True)
+        call screen person_choice(tuple_list, person_prefix = "Modify", draw_hearts = True, show_person_preview = False)
         $ person_choice = _return
         $ del tuple_list
 

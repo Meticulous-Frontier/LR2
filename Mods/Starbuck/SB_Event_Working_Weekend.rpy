@@ -33,7 +33,7 @@ label SB_working_weekend_crisis_label():
     $ SB_LOW_SLUT_VALUE = 30    #Declare constants to tweak later
     $ SB_HIGH_SLUT_VALUE = 70
     $ the_place = mc.business.get_employee_workstation(the_person)
-    $ ordered_bottom = the_person.outfit.get_lower_ordered()
+    # $ ordered_bottom = the_person.outfit.get_lower_ordered()
     #if len(ordered_bottom) > 0:
         #$ the_clothing = the_person.outfit.get_lower_ordered()[-1] #Get the very top item of clothing.
 

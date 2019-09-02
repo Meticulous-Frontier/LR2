@@ -157,6 +157,7 @@ label SB_fetish_vaginal_mom_kitchen_label():
     $ ordered_bottom = the_person.outfit.get_lower_ordered()
     if len(ordered_bottom) > 0:
         $ the_clothing = the_person.outfit.get_lower_ordered()[-1] #Get the very top item of clothing.
+    $ del ordered_bottom
 
     mc.name "Hey [the_person.title], dinner sure smells good. Just keep working on it, don't mind me!"
     "[the_person.possessive_title] hesitates for a second, clearly realizing you are up to something."
@@ -241,6 +242,7 @@ label SB_fetish_anal_mom_kitchen_label(the_person):
     $ ordered_bottom = the_person.outfit.get_lower_ordered()
     if len(ordered_bottom) > 0:
         $ the_clothing = the_person.outfit.get_lower_ordered()[-1] #Get the very top item of clothing.
+    $ del ordered_bottom
 
     mc.name "Hey [the_person.title], dinner sure smells good. Just keep working on it, don't mind me!"
     "[the_person.possessive_title] hesitates for a second, clearly realizing you are up to something."

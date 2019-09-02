@@ -45,6 +45,7 @@ label SB_caught_masturbating_crisis_label():
     $ ordered_bottom = the_person.outfit.get_lower_ordered()
     if len(ordered_bottom) > 0:
         $ the_clothing = the_person.outfit.get_lower_ordered()[-1] #Get the very top item of clothing.
+    $ del ordered_bottom
 
     "You decide to take a quick break from what you are doing. You stand up and stretch your legs, and go for a quick walk"
     "While you are walking by an unused storage room, you hear some muffled sounds coming from inside"

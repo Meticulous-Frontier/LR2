@@ -10,7 +10,7 @@ init 2 python:
 label salon_label():
     "Select who the appointment is for."
     $ tuple_list = known_people_in_the_game([mc]) + ["Back"]
-    call screen person_choice(tuple_list, draw_hearts = True)
+    call screen person_choice(tuple_list, person_prefix = "Change", draw_hearts = True, show_person_preview = False)
     $ person_choice = _return
     $ del tuple_list
     

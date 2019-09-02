@@ -163,6 +163,7 @@ init 2 python:
         found = find_in_list(lambda x: x.effect == "room_manager_action_label", action_mod_list)
         if found:
             found.allow_disable = False
+            del found
         return
 
     # mod settings action
