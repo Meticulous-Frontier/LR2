@@ -2,6 +2,8 @@ init -1 python:
         def get_trait_side_effect_text(trait):
             trait_side_effects = trait.get_effective_side_effect_chance()
 
+            if trait_side_effects > 100:
+                return "{color=#cd5c5c}100{/color}"
             if trait_side_effects >= 60: # Red (Color code the side effect risk for quicker identification)
                 return "{color=#cd5c5c}" + str(trait_side_effects) + "{/color}"
             elif trait_side_effects >= 20: # Yellow
