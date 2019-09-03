@@ -266,8 +266,7 @@ label casual_athlete_phase_one_label(the_person):
         $ the_person.draw_person( position = "walking_away")
         "You watch [the_person.title] walk off, fighting off an erection. Looks like you're about to hookup at the gym!"
         "After three minutes, you follow after [the_person.title]. When you find the family use room, you let yourself in."
-        $ CS_nude_outfit = Outfit("Nude")
-        $ the_person.outfit = CS_nude_outfit.get_copy()
+        $ the_person.outfit = Outfit("Nude").get_copy()
         $ the_person.draw_person( position = "stand2")
         "As you enter, you see that [the_person.title] is already naked."
         the_person.char "[the_person.mc_title], we can work out the details later... I haven't been fucked in months!"
@@ -337,8 +336,7 @@ label casual_athlete_phase_one_label(the_person):
                 "You give her a few minutes, then follow after her."
 
                 #Lockerroom sex scene.
-                $ CS_nude_outfit = Outfit("Nude")
-                $ the_person.outfit = CS_nude_outfit.get_copy()
+                $ the_person.outfit = Outfit("Nude").get_copy()
                 $ the_person.draw_person( position = "stand2")
                 "As you enter, you see that [the_person.title] is already naked."
                 the_person.char "[the_person.mc_title], give me that cock! It's been too long since fucked me good!"

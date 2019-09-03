@@ -660,6 +660,7 @@ label casual_hotwife_her_place_label(the_person):
     $ CS_hotwife_lingerie.add_feet(garter_with_fishnets.get_copy(), colour_white)
     $ CS_hotwife_lingerie.add_feet(high_heels.get_copy(), colour_white)
     $ the_person.outfit = CS_hotwife_lingerie.get_copy()
+    $ del CS_hotwife_lingerie
     $ the_person.draw_person(position = "stand4")
     the_person.char "You made it! I wasn't sure you would actually come!"
     mc.name "Of course!"
@@ -718,6 +719,7 @@ label casual_hotwife_home_sex_label(the_person):
     $ CS_hotwife_lingerie2.add_feet(garter_with_fishnets.get_copy(), colour_pink)
     $ the_person.outfit = CS_hotwife_lingerie2.get_copy()
     $ the_person.draw_person(position = "stand4")
+    $ del CS_hotwife_lingerie2
     "She opens up the bedroom door and motions for you to follow her. As you step into her bedroom you see [the_person.SO_name] sitting at the edge of the bed again."
     "You nod at him, and he gives a brief nod back. You turn your attention back to [the_person.title]"
     the_person.char "Mmm, I can't wait. Let's go!"
