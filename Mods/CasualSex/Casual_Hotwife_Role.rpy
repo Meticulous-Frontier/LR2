@@ -1031,7 +1031,243 @@ label hotwife_hookup_rejection(the_person):
 
 label hotwife_hookup_accept(the_person):
     the_person.char "Meet me at the bar... you know where to go! ;)"
-    "You put your phone in your pocket and head to the gym."
+    "You put your phone in your pocket and head to the bar."
+
+    $ mc.change_location(downtown_bar)
+    $ renpy.show(mc.location.name,what=mc.location.background_image)
+
+    "A few minutes later, you walk into the bar. You start walking back toward the women's restroom. The bartender nods to you as you pass the bar."
+    $ the_person.draw_person(position = "stand4")
+    $ the_person.arousal = 20
+    "You discover [the_person.possessive_title] standing at one of the sinks, touching herself while waiting for you. Her pussy glistens with arousal."
+    "You quickly lock the door behind you. She notices you walk in but doesn't say a word."
+    $ the_person.draw_person(position = "kissing")
+    "You walk over to her silently. She looks into your eyes as she wraps her arms around your shoulders. You bring your face to hers and begin to make out."
+    "You waste no time and grab her hips with your hands. You pull her close and she begins to grind her hips against yours."
+    the_person.char "Mmmm, my favorite bull is here to take care of me."
+    $ the_person.change_arousal( 15 + (mc.sex_skills["Foreplay"] * 2)) #35 + 2
+    "You run your hands along her stomach and back up a little bit, giving yourself some room to work."
+    "You run your hand down [the_person.title]'s belly, across her mound and between her legs. She moans as your fingers run across her labia."
+    the_person.char "I'm glad I called you, that feels good..."
+    $ the_person.change_arousal( 15 + (mc.sex_skills["Foreplay"] * 2)) #50 + 4
+    "[the_person.title] runs a hand through your hair, while you run your fingers along her slit."
+    "You move two fingers across her clitoris gently in long strokes."
+    "She grinds herself happily against your hand. She moans appreciatively at your skilled fingering."
+    "You bring two fingers to her dripping hole and push them up inside of her. You find her G-spot and begin to stroke it firmly."
+    the_person.char "Mmm, that's the spot..."
+    "[the_person.title] gasps as you stroke her. Her body is reacting quickly to your fingers."
+    $ the_person.change_arousal( 15 + (mc.sex_skills["Foreplay"] * 2)) #65 + 6
+    if the_person.arousal > 100: #She is surprised how fast you make her cum
+        "Suddenly, you feel her body go stiff and her moans ramp up quickly."
+        the_person.char "Fuck! I'm gonna... you're gonna make me...!"
+        "[the_person.title] convulses as she orgasms. She is caught completely off guard by how fast you made her cum."
+        "The hand on the back of your head lets go but you continue to stroke her G-spot for several more seconds."
+        $ the_person.change_slut_temp(1)
+        $ the_person.change_happiness(2)
+    else:
+        the_person.char "Mmm, that's it. Your fingers feel so good."
+        "[the_person.title]'s hand on the back of your head guides your face down to one of her breasts. You like and suck at her nipples as you continue to finger her."
+        "Her body is responding. Her hips are starting to twitch back and forth on their own as she approaches an orgasm."
+        $ the_person.change_arousal( 15 + (mc.sex_skills["Foreplay"] * 2)) #80 + 8
+        if the_person.arousal > 100: #She orgasms
+            the_person.char "Yes! That's it! I'm gonna cum!"
+            "[the_person.title] convulses as she orgasms. She moans and runs her hands through your hair."
+            "You continue to stroke her G-spot for several more seconds."
+        else:   #Not skilled enough to make her orgasm.
+            "You are feverishly working at her pussy, but for some reason you can seem to find the right spot."
+            "Soon, your wrist starts to cramp up from the bad angle forcing you to slow. She is a little frustrated but still very aroused."
+    $ the_person.change_arousal(-30) #50 + 8
+    the_person.char "Mmm, that was a great warmup. Let me return the favor."
+    "[the_person.possessive_title] quickly helps your undress, then gets down on her knees in front of you."
+
+    $ the_person.draw_person(position = "blowjob")
+    the_person.char "Here, don't forget this!"
+    "She hands you her phone. You snap a couple picture of this bombshell on her knees with your cock in the foreground."
+    "She gives your cock a few slow strokes before she begins to lick the tip. Her tongue feels like wet velvet as it circles around your glans."
+    "[the_person.title] opens her mouth and then envelopes the end of your dick with her warm, wet mouth."
+    "[the_person.title] keeps her mouth open wide and bobs her head back and forth to slide your cock in and out. The feeling of her soft, warm mouth sends shivers up your spine."
+    "As she slides her tongue along your length you snap a few more pictures."
+    "It feels amazing, you can tell if you let her keep going you will cum quickly."
+    #TODO write blwjob finish scene#
+    mc.name "That feels great, but I don't want to finish in your mouth. Why don't you stand up and turn around..."
+    $ the_person.draw_person( position = "standing_doggy")
+    if the_person.sluttiness > 40: #She asks if you want to use a condom
+        the_person.char "Do you want to put on a condom first?"
+        menu:
+            "Yes":
+                mc.name "Yeah, I'd probably better. I may not be able to resist pulling out."
+                if the_person.sluttiness > 60:
+                    the_person.char "I mean... its okay with me if you wanted to stick it in for a little bit without one on, you know, just to get started..."
+                    if the_person.sluttiness > 90:
+                        the_person.char "...or even just finish inside me. I promise I wouldn't mind at all!"
+                    mc.name "Maybe next time!"
+                "You get a condom and put it on quickly."
+                $ mc.condom = True
+            "No":
+                $ mc.condom = False
+                mc.name "No way, I want to feel everything."
+                if the_person.sluttiness > 60:
+                    the_person.char "Mmmm, sounds good. I was hoping you would say that!"
+                    if the_person.sluttiness > 80:
+                        "She wiggles her ass back and forth a little bit."
+                        the_person.char "You don't need to worry about pulling out. My husband goes crazy when another man cums inside me!"
+                else:
+                    the_person.char "Okay, just make sure to pull out before you finish, okay?"
+    else:
+        the_person.char "You have a condom right? Make sure you put one on..."
+        mc.name "Right! I'd probably better. I may not be able to resist pulling out."
+        "You get a condom and put it on quickly."
+        $ mc.condom = True
+    "You put your hands on her hips and put your dick at her entrance. She is still soaked from your fingering earlier, so you easily slide into her."
+    "Her pussy feels amazing wrapped around your erection. Her legs shake a bit as she gets used to the depth of your penetration."
+    $ the_person.change_arousal(20) #70 + 8
+    the_person.char "Ohhh, [the_person.mc_title]... That is exactly what I was hoping for when I sent you that text earlier. That feels so good..."
+    "You give her a few tentative thrusts, then quickly pick up the pace and begin fucking her in earnest."
+    "You set her phone to video mode, and take a clip of her backside rippling as you thrust in and out of her."
+    "Your hips slap against [the_person.possessive_title]'s ass as you fuck her vigorously."
+    $ the_person.call_dialogue("sex_responses")
+    if mc.condom == True:
+        "You grasp her ass with both hands and begin to grope her. You knead her cheeks as your hips slowly work your erection in and out of her."
+        $ the_person.change_arousal(20) #90 + 8
+        if the_person.arousal > 100:
+            "You can feel [the_person.title]'s pussy begin to spasm as she cums. You can see in the mirror that her mouth is hanging open and her eyes are closed."
+            $ the_person.change_slut_temp(1)
+            $ the_person.change_happiness(2)
+        "After the stimulation from hew blowjob earlier, you know you aren't going to last long. You give her ass a loud spank."
+        mc.name "That's it, bitch. I'm about to cum!"
+        if the_person.sluttiness > 100: #She is so slutty, she begs for your cum.
+            the_person.char "The condom! Take it off! Please!?! Your cock is so good, I want to feel you dump your load inside me!"
+            "Your brain is getting a little hazy with lust. Surely there's nothing wrong with that, right?"
+            menu:
+                "Take It Off":
+                    "In one swift you pull out of [the_person.title], pull the condom off, then shove yourself deep back inside her."
+                    "You wad up the condom then throw it on the counter. It lands with splat."
+                    the_person.char "Yes! Cum for me! I want to feel it!"
+                    $ the_person.change_arousal(20) #110 + 8
+                    "Her excitement is too much. You bottom out and cum, dumping wave after wave of your semen deep inside of her."
+                    the_person.char  "Yes! Fill me with your cum!"
+                    "You feel her pussy spasming around your dick as she also starts to orgasm."
+                    $ the_person.change_slut_temp(1)
+                    $ the_person.change_happiness(2)
+                    "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
+                    "You use her phone and get several close up pictures of her well used snatch with your load dripping out of it."
+                    "You take a moment to recover. Then you and [the_person.title] get cleaned up and dress. You quietly sneak out of the restroom."
+                    return
+                "Leave It On":
+                    mc.name "I can't pull out, even for a second!"
+        "You bottom out and cum, dumping your load into the condom."
+        "You wait until your orgasm has passed completely, then pull out and stand back. Your condom is bulged on the end where it is filled with your seed."
+        if the_person.arousal < 100:
+            the_person.char "Wow, okay, I guess we are done?"
+            $ the_person.change_happiness(-5)
+            $ the_person.change_obedience(-5)
+            "She is a bit disappointed she didn't finish."
+        else:
+            the_person.char "That was nice. I'll make sure next time I'm in the mood to hit you up again..."
+        "You take your condom off and throw it in the trash can. You both get dressed before sneaking out of the bathroom."
+        return
+    else: #You went in raw
+        "You push yourself in as deep as you can go. [the_person.possessive_title] moans as you fill her completely."
+        "With every thrust, her ass ripples pleasantly. You give her cheek and open handed spank and watch as shockwaves expand from the epicenter."
+        "[the_person.title] moans at your rough treatment."
+        $ the_person.change_arousal(20) #70 + 8
+        if the_person.arousal > 100:
+            "You can feel [the_person.title]'s pussy begin to spasm as she cums. Her silky wetness contracting around you feels amazing."
+            $ the_person.change_slut_temp(1)
+            $ the_person.change_happiness(2)
+    if the_person.sluttiness > 70:
+        the_person.char "You should stick a finger in my other hole while you fuck me and take a picture. Then hubby will have to reclaim both holes!"
+        "Wow, its not every day you have a beautiful married woman ask you to finger her ass while you bend her over and fuck her!"
+        "You reach a hand forward and put your index finger in front of her face. She quickly gets the idea and opens her mouth with her tongue out, and begins slathering your finger with saliva."
+        "When satisfied, you bring you fingers back to her tight back passage. You pull your cock almost completely out and stop you hip motion as you begin to press your finger against [the_person.title]'s puckered hole."
+        "She forces her sphincter to relax and your finger begins to slip inside her."
+        the_person.char "Ohh, yes. You can move your hips, that feels good..."
+        "You give [the_person.possessive_title]'s cunt a few slow thrusts, while simultaneously fingering her other hole."
+        $ the_person.change_arousal(20)#90 + 8
+        if the_person.arousal > 120:
+            the_person.char "OH! Its so good... fuck I'm gonna cum again!!!"
+            "You get the now familiar feeling of [the_person.title] cumming around your cock, but this time you can also feel the waves around your finger."
+            "You almost forgot to take some pictures! You grab her phone with your free hand and snap a few pics of her getting double penetration."
+            "You wonder what it would feel like to make her cum again, but with your cock in her ass instead..."
+            menu:
+                "Stay Vaginal":
+                    "As [the_person.title]'s pussy quivers around you, you decide to just keep doing what you are doing."
+                "Fuck Her Ass" if the_person.sluttiness > 80:
+                    "You pull out of her pussy. Her juices leave a strand attached to you, connecting you to her cunt."
+                    the_person.char "Mmm, [the_person.mc_title]? Why did you pull out... OH!"
+                    "Her question is swiftly answered when she feels your manhood poking her puckered hole."
+                    if the_person.sluttiness > 100:
+                        the_person.char "Yes! Fuck my ass good!"
+                    else:
+                        the_person.char "Oh my... be careful!"
+                    "With your hands firmly on her hips, you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
+                    the_person.char "Oh god you make me feel so dirty... I love it!"
+                    "You fuck her hard but at a steady, even pace."
+                    "[the_person.possessive_title] moans, matching each hip movement of yours with movement of her own."
+                    the_person.char "It feels so deep... I can't... my legs!"
+                    "Her knees give out, but you are too close to stop fucking her. You grab her hips roughly and pick up the pace."
+                    $ the_person.change_arousal(20)#110 + 8
+                    "Her ass begins to spasm. Her buttery smooth back passage squeezes you over and over as her body is racked with yet another orgasm. It feels incredible."
+                    $ the_person.change_slut_temp(2)
+                    $ the_person.change_happiness(5)
+                    mc.name "Get ready, I'm gonna cum!"
+                    "[the_peron.title] is incoherent, and doesn't process your words."
+                    "You plunge deep into her ass and hold it there while you cum. She gasps in time with each new shot of hot semen inside of her."
+                    "You stand there for a minute, holding her hips in the air, you dick buried in her bowel as it softens. Eventually she speaks up."
+                    the_person.char "Wow... okay... I think I can stand now..."
+                    "You slowly let her down. Her legs buckle for a second, but she catches herself."
+                    "You see a faint trace of your semen running down the back of her leg."
+                    "You take several pics now. Her hole is gaping slightly and you can see the faint tint of your creamy deposit inside it."
+                    the_person.char "That was SO good. You'll be hearing from me again, I'm sure. I can't wait to send hubby those pictures..."
+                    "You and [the_person.title] get cleaned up and dressed, then sneak out of the restroom."
+                    return
+                "Fuck Her Ass\n{size=22}Requires 80 sluttiness{/size} (disabled)" if the_person.sluttiness < 80:
+                    pass
+    "[the_person.possessive_title]'s creamy cunt draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
+    mc.name "Get ready, I'm gonna cum!"
+    $ the_person.change_arousal(35)
+    if the_person.sluttiness > 90:
+        "To your surprise [the_person.title] reaches back with both hands and grabs your hips, pulling you deep inside of her."
+        "Her grip is startlingly strong. You don't think you could pull out even if you wanted to!"
+        the_person.char "That's it, cum with me!"
+        "You cum erupts in a torrent. You seed spills deep inside [the_person.title]. Her entire body begins to spasm as she joins you in orgasm."
+        $ the_person.change_happiness(5)
+        $ the_person.change_slut_temp(1)
+        "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
+        "You use her phone and get several close up pictures of her well used snatch with your load dripping out of it."
+        "You take a moment to recover. Then you and [the_person.title] get cleaned up and dress. You quietly sneak out of the restroom."
+        return
+    elif the_person.sluttiness > 60:
+        the_person.char "Oh god... you should probably pull out but... it feels so good..."
+        "You briefly consider pulling out."
+        menu:
+            "Pull Out":
+                "You pull out of [the_person.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
+                the_person.char "Oh! Its so hot on my skin!"
+                $ the_person.cum_on_ass()
+                $ the_person.draw_person(position = "standing_doggy")
+                "You stand back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
+                "You use her phone and get several close up pictures of her luscious ass with your load covering it."
+                "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the restroom."
+                return
+            "Creampie":
+                "Her pussy feels too good. You bottom out and cum, dumping wave after wave of your semen deep inside of her."
+                "You seed spills deep inside [the_person.title]. Her entire body begins to spasm as she joins you in orgasm."
+                $ the_person.change_happiness(5)
+                $ the_person.change_slut_temp(1)
+                "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
+                "You use her phone and get several close up pictures of her well used snatch with your load dripping out of it."
+                "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the restroom."
+                return
+    else:
+        "[the_person.title] suddenly moves her hips forward, your cock slides out of her."
+        the_person.char "Cum on my ass!"
+        "You stroke your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
+        $ the_person.cum_on_ass()
+        $ the_person.draw_person(position = "standing_doggy")
+        "You stand back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
+        "You use her phone and get several close up pictures of her luscious ass with your load covering it."
+        "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the restroom."
     return
 
 #label hotwife_cum_face(the_person):

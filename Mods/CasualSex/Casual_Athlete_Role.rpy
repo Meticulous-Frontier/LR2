@@ -311,7 +311,7 @@ label casual_athlete_phase_one_label(the_person):
         "You say your goodbyes. This should be interesting. You wonder what kind of crazy sex you'll have with your new friends with benefits."
 
         $ the_person.event_triggers_dict["booty_call"] = True
-        
+
         "You now have [the_person.title]'s phone number."
         $ the_person.event_triggers_dict["athlete_progress"] = 2
 
@@ -848,14 +848,17 @@ label athlete_hookup_rejection(the_person):
 label athlete_hookup_accept(the_person):
     the_person.char "Meet me at the gym... you know the place!"
     "You put your phone in your pocket and head to the gym."
-    #TODO change place to the gym
+
+    $ mc.change_location(gym)
+    $ renpy.show(mc.location.name,what=mc.location.background_image)
+
     "A few minutes later, you walk into the gym. You locate the family lockerroom and discover it to be unlocked. You quietly let yourself in."
     $ the_person.draw_person(position = "against_wall")
     $ the_person.arousal = 20
     "You discover [the_person.possessive_title] sitting at one of the sinks, touching herself while waiting for you. Her pussy glistens with arousal."
     "You quickly lock the door behind you. She notices you walk in but doesn't say a word."
     "You walk over to her silently, and then get down on your knees in front of her. Her pussy is hanging off the side of the sink, right in front of your face."
-    "You waste not time and dive your tongue straight into her cunt. Her tangy juices greet your tongue."
+    "You waste no time and dive your tongue straight into her cunt. Her tangy juices greet your tongue."
     the_person.char "Mmmm, this is my favorite warm up..."
     $ the_person.change_arousal( 15 + (mc.sex_skills["Oral"] * 2)) #35 + 2
     "You quickly lap up the juices available along her labia, then focus your attention on her clitoris with the goal of making more."
@@ -893,14 +896,8 @@ label athlete_hookup_accept(the_person):
     "[the_person.title] opens her mouth and then envelopes the end of your dick with her warm, wet mouth."
     "[the_person.title] keeps her mouth open wide and bobs her head back and forth to slide your cock in and out. The feeling of her soft, warm mouth sends shivers up your spine."
     "It feels amazing, you can tell if you let her keep going you will cum quickly."
-    menu:
-        "Keep Going":
-            pass #TODO this scene
-            "Sorry, I forgot to write this path!"
-            #Cum after blowjob path.
-            return
-        "Bend Her Over the Sink":
-            mc.name "That feels great, but I don't want to finish in your mouth. Why don't you stand up and turn around..."
+    #TODO write blwjob finish scene#
+    mc.name "That feels great, but I don't want to finish in your mouth. Why don't you stand up and turn around..."
     $ the_person.draw_person( position = "standing_doggy")
     if the_person.sluttiness > 40: #She asks if you want to use a condom
         the_person.char "Do you want to put on a condom first?"
