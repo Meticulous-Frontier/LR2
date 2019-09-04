@@ -157,7 +157,7 @@ label casual_athlete_get_to_know_label(the_person):
 
         #Had sex in the lockerroom#
     elif the_person.event_triggers_dict.get("athlete_progress", 0) == 2:
-        "You notice that [the_perosn.title] is really pushing herself hard today on the treadmill."
+        "You notice that [the_person.title] is really pushing herself hard today on the treadmill."
         mc.name "Hey [the_person.title]. You're really going at it! Have an event coming up?"
         "[the_person.title] slows the treadmill down so she can carry on a conversation."
         the_person.char "Yeah! I have a big 10k coming up. I really want to do well for this, with it coming up on track season!"
