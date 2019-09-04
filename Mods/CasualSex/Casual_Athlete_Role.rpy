@@ -12,7 +12,10 @@
 init -2 python:
     def casual_athlete_get_to_know_requirement(the_person):
         if mc.max_stamina > 3:
-            return True
+            if mc.location == gym:
+                return True
+            else:
+                return "Wait until you see her at the gym"
         else:
             return False
 
