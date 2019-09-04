@@ -71,7 +71,7 @@ init -1 python:
     list_of_last_names.append("Richter")
     list_of_last_names.append("Ziegler")
 
-    # Itialian
+    # Italian
     list_of_names.append("Aurora")
     list_of_names.append("Camilla")
     list_of_names.append("Chiara")
@@ -94,3 +94,26 @@ init -1 python:
     list_of_last_names.append("Ricci")
     list_of_last_names.append("Russo")
     list_of_last_names.append("Greco")
+
+    # African
+    list_of_names.append("Ashanti")
+    list_of_names.append("Eshe")
+    list_of_names.append("Hadiyya")
+    list_of_names.append("Kesia")
+    list_of_names.append("Kalisha")
+    list_of_names.append("Malaika")
+    list_of_names.append("Poni")
+    list_of_names.append("Radhiya")
+    list_of_names.append("Shani")
+    list_of_names.append("Zuri")
+
+    list_of_last_names.append("Abebe")
+    list_of_last_names.append("Alasa")
+    list_of_last_names.append("Dogo")
+    list_of_last_names.append("Jelani")
+    list_of_last_names.append("Mensah")
+    list_of_last_names.append("Ndiaye")
+    list_of_last_names.append("Okoye")
+    list_of_last_names.append("Osei")
+    list_of_last_names.append("Temitope")
+    list_of_last_names.append("Zivai")
