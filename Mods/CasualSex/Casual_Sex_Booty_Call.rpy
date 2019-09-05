@@ -14,8 +14,7 @@ init 3 python:
         possible_people = []
         for person in known_people_in_the_game([mc]):
             # check if person has a casual sex role and we have her phone number
-            # only works for role names and not objects since the casual_role object has a name of ??????
-            if any([x.role_name for x in person.special_role] for x in ["College Athlete", "Hotwife", "Flight Attendant"]) and person.event_triggers_dict.get("booty_call", False):
+            if any(x in person.special_role for x in [casual_hotwife_role, casual_athlete_role, casual_FA_role]) and person.event_triggers_dict.get("booty_call", False):
                 possible_people.append(person)
 
         return get_random_from_list(possible_people)

@@ -120,7 +120,7 @@ init -1 python:
         menu_tooltip = "See if she wants to take this to your place")
     casual_FA_coming_over = Action("Come over tonight", casual_FA_coming_over_requirement, "casual_FA_coming_over_label",
         menu_tooltip = "Offer a bed in exchange for favors")
-    casual_FA_role = Role(role_name ="?????", actions =[casual_FA_get_a_drink, casual_FA_get_out_of_here, casual_FA_sex_discussion, casual_FA_my_place, casual_FA_coming_over])
+    casual_FA_role = Role(role_name ="Flight Attendant", actions =[casual_FA_get_a_drink, casual_FA_get_out_of_here, casual_FA_sex_discussion, casual_FA_my_place, casual_FA_coming_over], hidden = True)
 
 
 #***************Create Flight Attendant Class************#
@@ -387,11 +387,6 @@ label casual_FA_get_a_drink_label(the_person):
         mc.name "Wow, that sounds like quite the job!"
         the_person.char "Yeah, I mean, the pay isn't that great, but the travel benefits are amazing. Last month I took a trip to San Juan and paid nothing for the airfare."
         $ the_person.event_triggers_dict["FA_progress"] = 1
-        python:
-            for role in the_person.special_role:
-                if role.role_name == "?????":
-                    role.role_name = "Flight Attendant"
-
         "You make some small chat with [the_person.title] for a little longer, but soon she stands up."
         $ the_person.draw_person(position = "stand2")
         the_person.char "Thanks for the drink, [the_person.mc_title], but I'd better get to bed. I have an early flight to operate in the morning, and I HATE working tired."

@@ -109,7 +109,7 @@ init -1 python:
         menu_tooltip = "Ask if she wants to get out of here.")
     casual_hotwife_home_sex = Action("Put on a show.", casual_hotwife_home_sex_requirement, "casual_hotwife_home_sex_label",
         menu_tooltip = "Let hubby watch.")
-    casual_hotwife_role = Role(role_name ="?????", actions =[casual_hotwife_get_a_drink, casual_hotwife_bathroom_blowjob, casual_hotwife_blowjob_text, casual_hotwife_dancing_sex, casual_hotwife_sex_invite, casual_hotwife_home_sex])
+    casual_hotwife_role = Role(role_name ="Hot Wife", actions =[casual_hotwife_get_a_drink, casual_hotwife_bathroom_blowjob, casual_hotwife_blowjob_text, casual_hotwife_dancing_sex, casual_hotwife_sex_invite, casual_hotwife_home_sex], hidden = True)
 
 #*************Mandatory Crisis******************#
 
@@ -177,12 +177,7 @@ label casual_hotwife_get_a_drink_label(the_person):
         the_person.char "Well... to be honest... no. I haven't. I've gone out by myself a few times now... but I'm still too nervous. Something about you though, it puts me at ease to be around you..."
         "You chat with [the_person.title] for a bit longer, but soon it is time to leave."
         $ the_person.event_triggers_dict["hotwife_progress"] = 1
-        python:
-            for role in the_person.special_role:
-                if role.role_name == "?????":
-                    role.role_name = "Hotwife"
         mc.name "Take care, I'm sure I'll see you here again sometime!"
-
 
     #***Event State 1 ####
     elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 1:  #You are acquainted, but not yet done anything sexual

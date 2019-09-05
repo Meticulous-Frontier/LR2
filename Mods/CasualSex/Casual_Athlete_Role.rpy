@@ -86,7 +86,7 @@ init -1 python:
     casual_athlete_protein_shake = Action("Buy Protein Shake ($5)", casual_athlete_buy_protein_shake_requirement,"casual_athlete_buy_protein_shake_label", menu_tooltip = "Slip some serum in.")
     casual_athlete_house_call = Action("Take Charge", casual_athlete_house_call_requirement, "casual_athlete_house_call_label",
         menu_tooltip = "Pick her up.")
-    casual_athlete_role = Role(role_name ="?????", actions =[casual_athlete_get_to_know , casual_athlete_phase_one, casual_athlete_phase_two, casual_athlete_protein_shake, casual_athlete_house_call])
+    casual_athlete_role = Role(role_name ="College Athlete", actions =[casual_athlete_get_to_know , casual_athlete_phase_one, casual_athlete_phase_two, casual_athlete_protein_shake, casual_athlete_house_call], hidden = True)
 
 
 #*************Mandatory Crisis******************#
@@ -108,10 +108,6 @@ label casual_athlete_get_to_know_label(the_person):
         "You talk with her for a while about sports. She has a healthy interest in just about all things physical."
         the_person.char "Well, I need to get going. It was nice talking with you, [the_person.mc_title]!"
         $ the_person.event_triggers_dict["athlete_progress"] = 1
-        python:
-            for role in the_person.special_role:
-                if role.role_name == "?????":
-                    role.role_name = "College Athlete"
         #You're introduced but not had sex yet#
     elif the_person.event_triggers_dict.get("athlete_progress", 0) == 1:
         "You decide to ask [the_person.title] a bit more about her athletics."
