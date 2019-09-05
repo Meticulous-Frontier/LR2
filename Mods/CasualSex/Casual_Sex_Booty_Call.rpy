@@ -14,7 +14,7 @@ init 3 python:
         possible_people = []
         for person in known_people_in_the_game([mc]):
             # check if person has a casual sex role and we have her phone number
-            if any(x in person.special_role for x in [casual_athlete_role, casual_hotwife_role, casual_FA_role]) and person.event_triggers_dict["booty_call", False]:
+            if any(x in person.special_role for x in [casual_athlete_role, casual_hotwife_role, casual_FA_role]) and person.event_triggers_dict.get("booty_call", False):
                 possible_people.append(person)
 
         return get_random_from_list(possible_people)
@@ -24,7 +24,7 @@ init 3 python:
 
 label casual_sex_booty_call_label:
     $ the_person = get_casual_sex_booty_call_person()
-    # No one qualified so end here    
+    # No one qualified so end here
     if the_person is None:
         return
 
