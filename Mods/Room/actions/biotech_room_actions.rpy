@@ -36,10 +36,10 @@ init 3 python:
     biotech_gene_modifications.append(modify_person)
 
     def change_body_requirement():
-        if find_in_list(lambda x: x.has_trait(hypothyroidism_serum_trait) and x.has_trait(anorexia_serum_trait), mc.inventory.get_serum_type_list()):
+        if find_in_list(lambda x: x.name == hypothyroidism_serum_trait.name, list_of_traits).researched and find_in_list(lambda x: x.name == anorexia_serum_trait.name, list_of_traits).researched:
             return True
         else:
-            return "Requires: Serum Containing [hypothyroidism_serum_trait.name] and [anorexia_serum_trait.name]"
+            return "Requires: [hypothyroidism_serum_trait.name] and [anorexia_serum_trait.name] researched"
 
     change_body = Action("Change body: [person.body_type]", change_body_requirement, "change_body",
         menu_tooltip = "Modify [person.title]'s body type.")
@@ -47,10 +47,10 @@ init 3 python:
 
     def change_skin_requirement():
 
-        if find_in_list(lambda x: x.has_trait(pigment_serum_trait), mc.inventory.get_serum_type_list()):
+        if find_in_list(lambda x: x.name == pigment_serum_trait.name, list_of_traits).researched:
             return True
         else:
-            return "Requires: Serum Containing [pigment_serum_trait.name]"
+            return "Requires: [pigment_serum_trait.name] researched"
 
     change_skin = Action("Change skin: [person.skin]", change_skin_requirement, "change_skin",
         menu_tooltip = "Modify [person.title]'s skin tone.")
@@ -212,7 +212,6 @@ label change_body():
             $ person.draw_person()
 
 label change_skin():
-    $ change_skin_stored = person.skin
     while True:
 
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
@@ -225,29 +224,8 @@ label change_skin():
             skin_choice = renpy.display_menu(simple_list_format(skin_styles, x[0], string = "Skin Type: ", ignore = "Back"),True,"Choice")
 
         if skin_choice == "Back":
-            if person.skin != change_skin_stored:
-                "Select a serum in order to commit these changes."
-                python:
-                    possible_serum = [x for x in find_items_in_list(lambda x: x.has_trait(pigment_serum_trait), mc.inventory.get_serum_type_list())]
+            return
 
-                    possible_serum.append("Discard")
-                    serum_choice = renpy.display_menu(simple_list_format(possible_serum, x, string = "Serum: ", ignore = "Discard", attrib = "name"), True, "Choice")
-
-                if serum_choice == "Discard":
-
-                    $ person.skin = change_skin_stored
-                    $ person.match_skin(change_skin_stored)
-                    $ person.draw_person()
-
-                    return
-                else:
-
-                    $ mc.inventory.change_serum(serum_choice, -1)
-                    "1x of [serum_choice.name] has been removed from your inventory"
-
-                    return
-            else:
-                return
         else:
             $ person.skin = skin_choice
             $ person.match_skin(skin_choice)
