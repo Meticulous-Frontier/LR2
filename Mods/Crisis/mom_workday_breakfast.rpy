@@ -116,7 +116,7 @@ label mom_breakfast_action_label():
                         "You roll her nipples a couple of times between your fingers. She sighs at the sensations you are giving her."
 
                     "Finish Message":
-                        pass
+                        "You work on her shoulders for a while. She sighs in relaxation. You finish up and go back to your breakfast."
                         $ scene_manager.clear_scene()
                         return
                 if the_person.outfit.tits_available():
@@ -124,12 +124,17 @@ label mom_breakfast_action_label():
                 else:
                     menu:
                         "Pull Her Top Up" if the_person.sluttiness > 40:
-                            #TODO strip top
+                            while not the_person.outfit.tits_available():    #If covered up, have her take her top off
+                                #the_person.char "Here... let me take this off. I bet that will help ease some of your stress."
+                                $ the_clothing = the_person.outfit.get_upper_ordered()[-1]
+                                #"[the_person.possessive_title] takes off her [the_clothing.name]"
+                                $ scene_manager.draw_animated_removal(the_person, the_clothing)
                             "You reach down and slowly remove her top, exposing her creamy tits."
                             "Your hands return to her chest, her boobs feel hot and soft in your hands."
                             pass
                         "Finish Massage":
-                            pass
+                            "[the_person.possessive_title] feel great, but eventually you decide it is too risky to keep going."
+                            "[the_person.title] shakes her head a bit as you sit back down, as if trying to clear some thoughts from her head."
                             $ scene_manager.clear_scene()
                             return
                 #Assume we are still going
@@ -152,18 +157,27 @@ label mom_breakfast_action_label():
                                 "Your fingers are now sliding across the flesh of her moistened cunt."
                                 pass
                             "Finish Massage":
-                                pass
+                                "You decide for now just to tease her. You pet her through her clothes for a minute longer then stop, kissing her on her neck."
+                                "[the_person.title] looks at you as you sit down, arousal clear in her eyes."
+                                mc.name "Don't want to go to far, [lily.name] could walk out at any moment..."
+                                "She shakes her head for a moment, trying to clear her thoughts, but it is obvious her mind continues to dwell on how it could go if you had kept going..."
+                                $ the_person.change_obedience (10)
+                                $ the_person.change_slut_temp(3)
                                 $ scene_manager.clear_scene()
                                 return
                         pass
                     "Finish Massage":
-                        pass
+                        "You pinch and pull at her nipples for a few more minutes, but eventuall you decide just to tease her for now."
+                        "[the_person.title] looks at you as you sit down, arousal clear in her eyes."
+                        mc.name "Don't want to go to far, [lily.name] could walk out at any moment..."
+                        $ the_person.change_obedience (5)
+                        $ the_person.change_slut_temp(2)
                         $ scene_manager.clear_scene()
                         return
                     "Finger Her" if the_person.sluttiness > 60 and the_person.outfit.vagina_available():
                         "You whisper in her ear."
                         mc.name "I've got a better idea."
-                        "You let one hand slowly descend from her breast down to her moistened cunt."
+                        "You let one hand slowly descend from her breast down to her exposed cunt."
                         $ the_person.change_arousal(30) #65
                 #We assume here we are fingering her to completion.
                 "You dip two fingers into her honeypot. She moans as your begin to stir your fingers for a bit."
@@ -231,7 +245,7 @@ label mom_breakfast_action_label():
             the_person.char "It was amazing... I want some of the real thing!"
             "She opens her mouth and slides your penis in. She dances circles all around it while she suckles the tip. You look down and notice that she is touching herself."
             $ the_person.change_arousal(20)
-            #TODO cum fetish blowjob#
+            call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_workday_breakfast_01
             "Finished with her breakfast, [the_person.title] gets up from the table and excuses herself."
             $ scene_manager.update_actor(mom, position = "walking_away")
             the_person.char "Have a good day at work, I'm gonna go get ready for the day!"
