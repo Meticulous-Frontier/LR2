@@ -24,6 +24,8 @@ label store_expansion_policies(stack):
 
         if purchase_machinery_room_policy not in expansion_policies_list:
             expansion_policies_list.append(purchase_machinery_room_policy)
+        else:
+            update_policy(purchase_machinery_room_policy, expansion_policies_list)
 
         purchase_biotech_lab_room_policy = Policy(
             name = "[rd_division_basement.formalName]",
@@ -36,6 +38,8 @@ label store_expansion_policies(stack):
 
         if purchase_biotech_lab_room_policy not in expansion_policies_list:
             expansion_policies_list.append(purchase_biotech_lab_room_policy)
+        else:
+            update_policy(purchase_biotech_lab_room_policy, expansion_policies_list)
 
         purchase_security_room_policy = Policy(
             name = "[m_division_basement.formalName]",
@@ -48,6 +52,8 @@ label store_expansion_policies(stack):
 
         if purchase_security_room_policy not in expansion_policies_list:
             expansion_policies_list.append(purchase_security_room_policy)
+        else:
+            update_policy(purchase_security_room_policy, expansion_policies_list)
 
         purchase_dungeon_room_policy = Policy(
             name = "[office_basement.formalName]",
@@ -60,6 +66,8 @@ label store_expansion_policies(stack):
 
         if purchase_dungeon_room_policy not in expansion_policies_list:
             expansion_policies_list.append(purchase_dungeon_room_policy)
+        else:
+            update_policy(purchase_dungeon_room_policy, expansion_policies_list)
 
         # purchase_biotech_lab_room_policy = Policy(
         #     name = ,

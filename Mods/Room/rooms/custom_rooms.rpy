@@ -1,8 +1,4 @@
-# Business Basement Rooms is a proof of concept on best practices for adding rooms to the game via the Room Manager.
-# Requires the Room Manager.rpy to be present for it to work as intended.
-# Adds a basement section accessible via the business lobby.
-
-# name,formalName,connections,background_image,objects,people,actions,public,map_pos, tutorial_label = None, visible = True)
+# name, formalName, connections, background_image, objects, people, actions, public, map_pos, tutorial_label = None, visible = True)
 init -1 python:
     business_basement = [] # List of rooms that are supposed to be in the basement.
 
@@ -13,7 +9,7 @@ init 15 python:
         make_chair(),
         make_floor()
     ]
-    m_division_basement = Room("security", "Security Room", [], room_background_image("Security_Background.jpg"), m_division_basement_objects,[],[security_overview_action], False, [12,2], None, False)
+    m_division_basement = Room("security", "Security Room", [], room_background_image("Security_Background.jpg"), m_division_basement_objects,[], [security_overview_action], False, [12,2], None, False)
 
     # Production Division Basement - Machinery Room | machinery_room_actions.rpy
     p_division_basement_objects = [
@@ -36,7 +32,7 @@ init 15 python:
         make_pillory(),
         make_woodhorse()
     ]
-    office_basement = Room("dungeon", "Dungeon", [], bar_background, office_basement_objects, [],[dungeon_room_action], False,[11,1], None, False)
+    office_basement = Room("dungeon", "Dungeon", [], bar_background, office_basement_objects, [], [dungeon_room_action], False, [11,1], None, False)
 
     # Downtown Bar - The Downtown Distillery | downtown_bar_actions.rpy
     # This bar gets updated when a save game is loaded, regardless of its existence
@@ -45,7 +41,7 @@ init 15 python:
         make_chair(),
         make_floor()
     ]
-    downtown_bar = Room("bar", "The Downtown Distillery", [], bar_background, downtown_bar_objects,[], [downtown_bar_action], True, [5,4], None, True)
+    downtown_bar = Room("bar", "The Downtown Distillery", [], bar_background, downtown_bar_objects, [], [downtown_bar_action], True, [5,4], None, True)
 
     # Hotel Room - The Hotel | No actions at this time.
     # This hotel gets updated when a save game is loaded, regardless of its existence
@@ -114,7 +110,7 @@ label store_m_division_basement():
     if m_division_basement not in list_of_places:
         #$ m_division_basement.link_locations(m_division)
         $ list_of_places.append(m_division_basement)
-    
+
     $ m_division_basement = update_custom_rooms(m_division_basement)
     return
 
@@ -122,7 +118,7 @@ label store_p_division_basement():
     if p_division_basement not in list_of_places:
         #$ p_division_basement.link_locations(p_division)
         $ list_of_places.append(p_division_basement)
-    
+
     $ p_division_basement = update_custom_rooms(p_division_basement)
     return
 
@@ -130,7 +126,7 @@ label store_rd_division_basement():
     if rd_division_basement not in list_of_places:
         #$ rd_division_basement.link_locations(rd_division)
         $ list_of_places.append(rd_division_basement)
-    
+
     $ rd_division_basement = update_custom_rooms(rd_division_basement)
     return
 
@@ -138,7 +134,7 @@ label store_office_basement():
     if office_basement not in list_of_places:
         #$ office_basement.link_locations(office)
         $ list_of_places.append(office_basement)
-    
+
     $ office_basement = update_custom_rooms(office_basement)
     return
 
