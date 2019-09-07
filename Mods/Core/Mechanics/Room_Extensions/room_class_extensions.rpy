@@ -64,7 +64,9 @@ init -1 python:
         # room_update.connections = room.connections    DON'T UPDATE CONNECTIONS
 
         room_update.objects = room.objects
-        room_update.objects.append(Object("stand",["Stand"], sluttiness_modifier = 0, obedience_modifier = -5)) #Add a standing position that you can always use.
+
+        if not room.has_object_with_trait("Stand"): # Was creating a standing object for each room on every save reload
+            room_update.objects.append(Object("stand",["Stand"], sluttiness_modifier = 0, obedience_modifier = -5)) #Add a standing position that you can always use.
 
         # update available actions in room
         room_update.actions = room.actions
