@@ -555,7 +555,7 @@ label SB_mom_anal_pay_label():
             "You grab the lube leftover from the night before. You quickly apply another glob to [the_person.title]'s back side. You apply some more to your cock until it is good and slick."
             "You get yourself lined up with your mom's back passage. You slowly begin your anal penetration."
             the_person.char "That's it [the_person.mc_title]! Fuck me good!"
-            call sex_description(the_person, SB_doggy_anal, make_bed(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBA43
+            call sex_description(the_person, doggy_anal, make_bed(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBA43
             $ mc.current_stamina += -1
             if the_person.arousal > 100:
                 "[the_person.title] lays there on the bed, speechless from your anal plundering."
@@ -654,7 +654,7 @@ label SB_mom_anal_friday_label():
             "You grab the lube leftover from the night before. You quickly apply another glob to [the_person.mc_title]'s back side. You apply some more to your cock until it is good and slick."
             "You get yourself lined up with [the_person.possessive_title]'s back passage. You slowly begin your anal penetration."
             the_person.char "That's it [the_person.mc_title]! Fuck me good!"
-            call sex_description(the_person, SB_doggy_anal, make_bed(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBA53
+            call sex_description(the_person, doggy_anal, make_bed(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBA53
             if the_person.arousal > 100:
                 "[the_person.mc_title] lays there on the bed, speechless from your anal plundering."
             else:
@@ -831,7 +831,7 @@ label SB_starbuck_anal_intro():
     mc.name "Hey [the_person.title]. I'm about to fuck your ass now, just the way you like."
     "Her body shudders from your dirty talk. She wiggles her ass back up against you."
     the_person.char "It's about fucking time! Give it to me good, [the_person.mc_title], you know I can take it!"
-    call sex_description(the_person, SB_doggy_anal, make_bed(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBA70
+    call sex_description(the_person, doggy_anal, make_bed(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBA70
     $ the_person.sexy_opinions["anal sex"] = [FETISH_OPINION_VALUE, True]
     $ the_person.special_role.append(anal_fetish_role)
     $ the_person.sex_skills["Anal"] = 6
