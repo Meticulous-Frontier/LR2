@@ -308,7 +308,7 @@ init 5 python:
                     if name == item_group:
                         for item in self.preferences[pref][name]:
                             if item in filtered_list:                      
-                                [x for x in item_list if item in x][0][1] += (score + 2) * 5
+                                [x for x in item_list if item in x][0][1] += (score + 2) * 10
 
             return [x for x in item_list if x[1] > 0]
 
@@ -318,7 +318,7 @@ init 5 python:
                 score = self.person.get_opinion_score(cp)
                 if score != -2:
                     for col in self.color_prefs[cp]:
-                        color_list.append([self.color_prefs[cp][col], (score + 2) * 5])
+                        color_list.append([self.color_prefs[cp][col], (score + 2) * 10])
 
             renpy.random.shuffle(color_list)
             return get_random_from_weighted_list([x for x in color_list if x[1] > 0])

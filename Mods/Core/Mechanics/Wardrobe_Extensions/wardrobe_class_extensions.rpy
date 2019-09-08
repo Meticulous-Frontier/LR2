@@ -1,6 +1,6 @@
 init -1 python:
     # Get an overwear outfit that is considered appropriate based on sluttiness and preferences.
-    def get_random_appropriate_overwear_enhanced(self, sluttiness_limit, sluttiness_min = 0, preferences = None):
+    def get_random_appropriate_overwear_enhanced(self, sluttiness_limit, sluttiness_min = 0, guarantee_output = False, preferences = None):
         if preferences == None:
             preferences = WardrobePreference()
 
@@ -13,12 +13,17 @@ init -1 python:
         if the_outfit:
             return the_outfit.get_copy()
         else:
+            if guarantee_output:
+                if sluttiness_limit < 120:
+                    return self.get_random_appropriate_overwear_enhanced(sluttiness_limit+5, sluttiness_min-5, guarantee_output, preferences)
+                else:
+                    return Outfit("Nothing")
             return None
 
     Wardrobe.get_random_appropriate_overwear = get_random_appropriate_overwear_enhanced
 
     # Get a copy of a full outfit that is considered appropriate based on sluttiness and preferences.
-    def get_random_appropriate_outfit_enhanced(self, sluttiness_limit, sluttiness_min = 0, preferences = None): 
+    def get_random_appropriate_outfit_enhanced(self, sluttiness_limit, sluttiness_min = 0, guarantee_output = False, preferences = None): 
         if preferences == None:
             preferences = WardrobePreference()
 
@@ -31,11 +36,16 @@ init -1 python:
         if the_outfit:
             return the_outfit.get_copy()
         else:
+            if guarantee_output:
+                if sluttiness_limit < 120:
+                    return self.get_random_appropriate_outfit_enhanced(sluttiness_limit+5, sluttiness_min-5, guarantee_output, preferences)
+                else:
+                    return Outfit("Nothing")
             return None
 
     Wardrobe.get_random_appropriate_outfit = get_random_appropriate_outfit_enhanced
 
-    def get_random_appropriate_underwear_enhanced(self, sluttiness_limit, sluttiness_min = 0, preferences = None): #Get an underwear outfit that is considered appropriate (based on underwear sluttiness, not full outfit sluttiness)
+    def get_random_appropriate_underwear_enhanced(self, sluttiness_limit, sluttiness_min = 0, guarantee_output = False, preferences = None): #Get an underwear outfit that is considered appropriate (based on underwear sluttiness, not full outfit sluttiness)
         if preferences == None:
             preferences = WardrobePreference()
 
@@ -52,7 +62,14 @@ init -1 python:
         if valid_underwear:
             return get_random_from_list(valid_underwear).get_copy()
         else:
-            return None
+            if guarantee_output: # If an output is guaranteed we always return an Outfit object (even if it is empty). Otherwise we return None to indicate failure to find something.
+                if sluttiness_limit < 120: #Sets an effective recursion limit.
+                    return self.get_random_appropriate_underwear_enhanced(sluttiness_limit+5, sluttiness_min-5, guarantee_output, preferences)
+                else:
+                    return Outfit("Nothing")
+
+            else:
+                return None
 
     Wardrobe.get_random_appropriate_underwear = get_random_appropriate_underwear_enhanced
 
@@ -126,8 +143,8 @@ init -1 python:
                 full_outfit = None
                 count = 0
 
-                while not full_outfit and count < 4:    # Try to find a valid uniform by stretching the sluttiness range, returns none when not succesfull
-                    full_outfit = self.get_random_appropriate_outfit(target_sluttiness + (count * 2), minimum_sluttiness - (count * 10), preferences)
+                while not full_outfit and count < 4:    # Try to find a valid uniform by stretching the sluttiness range, returns none when not successful
+                    full_outfit = self.get_random_appropriate_outfit(target_sluttiness + (count * 2), minimum_sluttiness - (count * 10), preferences = preferences)
                     count += 1
 
                 if not full_outfit: # fallback if we cannot find anything for our sluttiness or preferences
@@ -142,8 +159,8 @@ init -1 python:
         #If we get to here we are assembling an outfit out of underwear or overwear.
         uniform_over = None
         count = 0
-        while not uniform_over and count < 4:   # Try to find a valid uniform by stretching the sluttiness range, returns none when not succesfull
-            uniform_over = self.get_random_appropriate_overwear(target_sluttiness + (count * 2), minimum_sluttiness - (count * 10), preferences)
+        while not uniform_over and count < 4:   # Try to find a valid uniform by stretching the sluttiness range, returns none when not successful
+            uniform_over = self.get_random_appropriate_overwear(target_sluttiness + (count * 2), minimum_sluttiness - (count * 10), preferences = preferences)
             count += 1
 
         if uniform_over:
@@ -159,7 +176,7 @@ init -1 python:
 
         else:
             #There are no tops, so we're going to try and get a bottom and use one of the persons tops.
-            uniform_under = self.get_random_appropriate_underwear(target_sluttiness, minimum_sluttiness, preferences)
+            uniform_under = self.get_random_appropriate_underwear(target_sluttiness, minimum_sluttiness, preferences = preferences)
             if not uniform_under:
                 # no underwear that fits sluttiness, get one from her personal wardrobe
                 uniform_under = person.wardrobe.get_random_appropriate_underwear(target_sluttiness, preferences = preferences)
@@ -177,7 +194,7 @@ init -1 python:
 
         return build_assembled_outfit(uniform_under, uniform_over)
 
-    # replace default uniform descission function
+    # replace default uniform decision function
     Wardrobe.decide_on_uniform = decide_on_uniform_enhanced
 
     # An outfit selector that takes personal preferences into account
@@ -204,8 +221,8 @@ init -1 python:
             if outfit_choice > chance_to_use_full or len(self.underwear_sets + self.overwear_sets) == 0:
                 full_outfit = None
                 count = 0
-                while not full_outfit and count < 4:    # Try to find a valid outfit by stretching the sluttiness range, returns none when not succesfull               
-                    full_outfit = self.get_random_appropriate_outfit(target_sluttiness + (count * 3), minimum_sluttiness - (count * 5), preferences)
+                while not full_outfit and count < 4:    # Try to find a valid outfit by stretching the sluttiness range, returns none when not successful
+                    full_outfit = self.get_random_appropriate_outfit(target_sluttiness + (count * 3), minimum_sluttiness - (count * 5), preferences = preferences)
                     count += 1
 
                 if not full_outfit: # fallback if we cannot find anything for our sluttiness or preferences
@@ -220,8 +237,8 @@ init -1 python:
         #If we get to here we are assembling an outfit out of underwear or overwear.
         outfit_over = None
         count = 0
-        while not outfit_over and count < 4:   # Try to find a valid uniform by stretching the sluttiness range, returns none when not succesfull
-            outfit_over = self.get_random_appropriate_overwear(target_sluttiness + (count * 3), minimum_sluttiness - (count * 5), preferences)
+        while not outfit_over and count < 4:   # Try to find a valid uniform by stretching the sluttiness range, returns none when not successful
+            outfit_over = self.get_random_appropriate_overwear(target_sluttiness + (count * 3), minimum_sluttiness - (count * 5), preferences = preferences)
             count += 1
 
         if outfit_over:
@@ -236,7 +253,7 @@ init -1 python:
                 outfit_under = default_wardrobe.get_random_appropriate_underwear(slut_limit_remaining, preferences = preferences)
         else:
             #There are no tops, so we're going to try and get a bottom and use one of the default wardrobe tops.
-            outfit_under = self.get_random_appropriate_underwear(target_sluttiness, minimum_sluttiness, preferences)
+            outfit_under = self.get_random_appropriate_underwear(target_sluttiness, minimum_sluttiness, preferences = preferences)
             if not outfit_under:
                 # no underwear that fits sluttiness, get one from the default wardrobe
                 outfit_under = default_wardrobe.get_random_appropriate_underwear(target_sluttiness, preferences = preferences)
