@@ -1,4 +1,19 @@
 init 2:
+    python:
+        def get_exclude_tags(trait):
+            tags = ""
+            if trait.exclude_tags:
+                tags = " - "
+                for a_tag in trait.exclude_tags:
+                    tags += "{color=#d38c19}[[" + a_tag + "]{/color}"
+            return tags
+
+        def get_trait_allowed(starting_serum, trait):
+            for a_trait in starting_serum.traits:
+                if any(t in a_trait.exclude_tags for t in trait.exclude_tags):
+                    return False
+            return True
+
     screen serum_design_ui(starting_serum,current_traits):
         $ renpy.block_rollback()
         
@@ -39,18 +54,8 @@ init 2:
                             vbox:
                                 for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True): # Sort traits by exclude tags (So all production traits are grouped, for example), then by tier (so the highest tier production tag ends up at the top
                                     if trait not in starting_serum.traits and trait.researched and "Production" in trait.exclude_tags:
-                                        $ trait_tags = ""
-                                        if trait.exclude_tags:
-                                            $ trait_tags = " - "
-                                            for a_tag in trait.exclude_tags:
-                                                $ trait_tags += "{color=#d38c19}[[" + a_tag + "]{/color}"
-                                        $ trait_allowed = True
-                                        python: # Check to see if the trait is excluded by any of the traits currently in the serum. A long looped segment only to deal with lists of tags, which are unlikely.
-                                            for checking_trait in starting_serum.traits:
-                                                for tag in trait.exclude_tags:
-                                                    for checking_tag in checking_trait.exclude_tags:
-                                                        if tag == checking_tag:
-                                                            trait_allowed = False
+                                        $ trait_tags = get_exclude_tags(trait)
+                                        $ trait_allowed = get_trait_allowed(starting_serum, trait)
 
                                         #$ trait_side_effects_text = get_trait_side_effect_text(trait)
                                         #$ trait_mastery_text = get_trait_mastery_text(trait)
@@ -87,18 +92,8 @@ init 2:
                             vbox:
                                 for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True): # Sort traits by exclude tags (So all production traits are grouped, for example), then by tier (so the highest tier production tag ends up at the top
                                     if trait not in starting_serum.traits and trait.researched and "Suggest" in trait.exclude_tags:
-                                        $ trait_tags = ""
-                                        if trait.exclude_tags:
-                                            $ trait_tags = " - "
-                                            for a_tag in trait.exclude_tags:
-                                                $ trait_tags += "{color=#d38c19}[[" + a_tag + "]{/color}"
-                                        $ trait_allowed = True
-                                        python: # Check to see if the trait is excluded by any of the traits currently in the serum. A long looped segment only to deal with lists of tags, which are unlikely.
-                                            for checking_trait in starting_serum.traits:
-                                                for tag in trait.exclude_tags:
-                                                    for checking_tag in checking_trait.exclude_tags:
-                                                        if tag == checking_tag:
-                                                            trait_allowed = False
+                                        $ trait_tags = get_exclude_tags(trait)
+                                        $ trait_allowed = get_trait_allowed(starting_serum, trait)
 
                                         #$ trait_side_effects_text = get_trait_side_effect_text(trait)
                                         #$ trait_mastery_text = get_trait_mastery_text(trait)
@@ -133,18 +128,8 @@ init 2:
                             vbox:
                                 for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name, reverse = False): # Sort traits by exclude tags (So all production traits are grouped, for example), then by name since tier does not matter.
                                     if trait not in starting_serum.traits and trait.researched and "Production" not in trait.exclude_tags and "Suggest" not in trait.exclude_tags:
-                                        $ trait_tags = ""
-                                        if trait.exclude_tags:
-                                            $ trait_tags = " - "
-                                            for a_tag in trait.exclude_tags:
-                                                $ trait_tags += "[[" + a_tag + "]"
-                                        $ trait_allowed = True
-                                        python: # Check to see if the trait is excluded by any of the traits currently in the serum. A long looped segment only to deal with lists of tags, which are unlikely.
-                                            for checking_trait in starting_serum.traits:
-                                                for tag in trait.exclude_tags:
-                                                    for checking_tag in checking_trait.exclude_tags:
-                                                        if tag == checking_tag:
-                                                            trait_allowed = False
+                                        $ trait_tags = get_exclude_tags(trait)
+                                        $ trait_allowed = get_trait_allowed(starting_serum, trait)
 
                                         #$ trait_side_effects_text = get_trait_side_effect_text(trait)
                                         #$ trait_mastery_text = get_trait_mastery_text(trait)
@@ -184,11 +169,7 @@ init 2:
                             mousewheel True
                             vbox:
                                 for trait in starting_serum.traits:
-                                    $ trait_tags = ""
-                                    if trait.exclude_tags:
-                                        $ trait_tags = " - "
-                                        for a_tag in trait.exclude_tags:
-                                            $ trait_tags += "[[" + a_tag + "]"
+                                    $ trait_tags = get_exclude_tags(trait)
 
                                     $ trait_side_effects_text = get_trait_side_effect_text(trait)
                                     $ trait_mastery_text = get_trait_mastery_text(trait)
