@@ -87,18 +87,16 @@ init 2:
                             vbox:
                                 for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True): # Sort traits by exclude tags (So all production traits are grouped, for example), then by tier (so the highest tier production tag ends up at the top
                                     if trait not in starting_serum.traits and trait.researched and "Suggest" in trait.exclude_tags:
-                                        $ trait_tags = ""
-                                        if trait.exclude_tags:
-                                            $ trait_tags = " - "
-                                            for a_tag in trait.exclude_tags:
-                                                $ trait_tags += "{color=#d38c19}[[" + a_tag + "]{/color}"
-                                        $ trait_allowed = True
-                                        python: # Check to see if the trait is excluded by any of the traits currently in the serum. A long looped segment only to deal with lists of tags, which are unlikely.
-                                            for checking_trait in starting_serum.traits:
+                                        python:
+                                            trait_allowed = True
+                                            trait_tags = ""
+                                            if trait.exclude_tags:
+                                                trait_tags = " - "
+                                                # Check to see if the trait is excluded by any of the traits currently in the serum. A long looped segment only to deal with lists of tags, which are unlikely.
                                                 for tag in trait.exclude_tags:
-                                                    for checking_tag in checking_trait.exclude_tags:
-                                                        if tag == checking_tag:
-                                                            trait_allowed = False
+                                                    trait_tags += "{color=#d38c19}[[" + tag + "]{/color}"
+                                                    if any(tag in checking_trait.exclude_tags for checking_trait in starting_serum.traits):
+                                                        trait_allowed = False
 
                                         #$ trait_side_effects_text = get_trait_side_effect_text(trait)
                                         #$ trait_mastery_text = get_trait_mastery_text(trait)
