@@ -43,10 +43,11 @@ label downtown_bar_drink_label():
 
         "Do you wish to introduce yourself, perhaps grace her with a free- of charge drink?"
 
-    $ tuple_list = known_people_at_location(mc.location) + unknown_people_at_location(mc.location) + [new_person, "Back"]
-    call screen person_choice(tuple_list, person_prefix = "Drink with", draw_hearts = True)
+    $ people_list = ["Drink with"]
+    $ people_list.extend(known_people_at_location(mc.location) + unknown_people_at_location(mc.location) + [new_person, "Back"])
+    call screen main_choice_display([people_list])
     $ person_choice = _return
-    $ del tuple_list
+    $ del people_list
 
     if person_choice == "Back":
         if new_person.mc_title == "Stranger": # If the player had no interest in interacting with the character we remove it from the game. Assuming a proper "Back" button gets added during first time introduction we can do more with this.

@@ -38,10 +38,11 @@ label dungeon_room_action_label():
 label dungeon_room_appoint_slave_label():
 
     while True:
-        $ tuple_list = mc.location.people + ["Back"]
-        call screen person_choice(tuple_list, person_prefix = "Make", person_suffix = "a slave.", draw_hearts = True)
+        $ people_list = ["Turn into slave"]
+        $ people_list.extend(mc.location.people + ["Back"])
+        call screen main_choice_display([people_list])
         $ person_choice = _return
-        $ del tuple_list
+        $ del people_list
         
         if person_choice == "Back":
             return # Where to go if you hit "Back"

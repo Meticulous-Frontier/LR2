@@ -36,7 +36,10 @@ init 3 python:
     biotech_gene_modifications.append(modify_person)
 
     def change_body_requirement():
-        if find_in_list(lambda x: x.name == hypothyroidism_serum_trait.name, list_of_traits).researched and find_in_list(lambda x: x.name == anorexia_serum_trait.name, list_of_traits).researched:
+        hypothyroidism = find_in_list(lambda x: x.name == hypothyroidism_serum_trait.name, list_of_traits)
+        anorexia = find_in_list(lambda x: x.name == anorexia_serum_trait.name, list_of_traits)
+
+        if not hypothyroidism is None and not anorexia is None and hypothyroidism.researched and anorexia.researched:
             return True
         else:
             return "Requires: [hypothyroidism_serum_trait.name] and [anorexia_serum_trait.name] researched"
@@ -46,8 +49,8 @@ init 3 python:
     biotech_body_modifications.append(change_body)
 
     def change_skin_requirement():
-
-        if find_in_list(lambda x: x.name == pigment_serum_trait.name, list_of_traits).researched:
+        pigment = find_in_list(lambda x: x.name == pigment_serum_trait.name, list_of_traits)
+        if not pigment is None and pigment.researched:
             return True
         else:
             return "Requires: [pigment_serum_trait.name] researched"
@@ -110,10 +113,11 @@ label clone_person():
     $ clone_age = None
 
     while True:
-        $ tuple_list = known_people_in_the_game([mc]) + ["Back"]
-        call screen person_choice(tuple_list, person_prefix = "Clone", draw_hearts = True, show_person_preview = False)
+        $ people_list = ["Clone Person"]
+        $ people_list.extend(known_people_in_the_game([mc]) + ["Back"])
+        call screen main_choice_display([people_list])
         $ person_choice = _return
-        $ del tuple_list
+        $ del people_list
 
         if person_choice == "Back":
             return # Where to go if you hit "Back".
@@ -170,10 +174,11 @@ label cloning_process(person = the_person): # default to the_person when not pas
 
 label modify_person():
     while True:
-        $ tuple_list = known_people_in_the_game([mc]) + ["Back"]
-        call screen person_choice(tuple_list, person_prefix = "Modify", draw_hearts = True, show_person_preview = False)
+        $ people_list = ["Modify Person"]
+        $ people_list.extend(known_people_in_the_game([mc]) + ["Back"])
+        call screen main_choice_display([people_list])
         $ person_choice = _return
-        $ del tuple_list
+        $ del people_list
 
         if person_choice == "Back":
             return # Where to go if you hit "Back".

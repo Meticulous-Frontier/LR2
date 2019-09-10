@@ -40,10 +40,11 @@ label import_wardrobe_label():
 label give_wardrobe_label():
     "Select who to give clothes"
     while True:
-        $ tuple_list = known_people_in_the_game([mc]) + ["Back"]
-        call screen person_choice(tuple_list, draw_hearts = True, show_person_preview = False)
+        $ people_list = ["Clothes for"]
+        $ people_list.extend(known_people_in_the_game([mc]) + ["Back"])
+        call screen main_choice_display([people_list])
         $ person_choice = _return
-        $ del tuple_list
+        $ del people_list
         
         if person_choice == "Back":
             return # Where to go if you hit "Back".
