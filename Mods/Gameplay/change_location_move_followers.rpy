@@ -40,9 +40,8 @@ label move_followers_label():
         # Added extra checks to make sure it runs through everything and moves all people in list, not only first.
         for room in list_of_places:
             for person in room.people:
-                for person in list_of_followers:
-                    if person in list_of_followers:
-                        if person in room.people:
-                            room.move_person(person, new_location)
+                if person in list_of_followers:
+                    if person in room.people:
+                        room.move_person(person, new_location)
 
     return

@@ -165,9 +165,8 @@ label SB_fetish_cum_dosage_label():
     $ meets_fetish_list = []
     python:
         for person in mc.business.get_employee_list():
-            for person in mc.business.get_employee_list():
-                if SB_check_fetish(person, cum_internal_role) or SB_check_fetish(person, cum_external_role):
-                    meets_fetish_list.append(person)
+            if SB_check_fetish(person, cum_internal_role) or SB_check_fetish(person, cum_external_role):
+                meets_fetish_list.append(person)
 
     $ the_person = get_random_from_list(meets_fetish_list)
     "As you finish up with one of your work tasks, you decide to take a quick break."
