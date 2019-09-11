@@ -9,7 +9,7 @@ init 0 python:
         high_heels_list = [pumps, heels, high_heels, boot_heels, thigh_high_boots]
 
         def __init__(self, person = None):
-            if person == None:
+            if person is None:
                 self.exclude_skirts = False
                 self.exclude_pants = False
                 self.exclude_dresses = False

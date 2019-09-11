@@ -66,7 +66,7 @@ init python: # This space is reserved for definitions used to simplify the code
     def cheat_default_person(): # Ensures that a person with valid attributes is always set
                                 # TODO: Come up with a simular solution that remembers the last person you interacted with, but also replaces whenever a new person is in focus e.g during crisis.
         global the_person       # I want to modify the_person outside of the function
-        if the_person == None:
+        if the_person is None:
             the_person = lily   # Using the lily pre-made character as it is always present in the world.
         elif the_person == person_choice:
             the_person = person_choice

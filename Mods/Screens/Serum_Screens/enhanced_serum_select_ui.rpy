@@ -31,7 +31,7 @@ init 2:
                 frame:
                     background "#000080"
                     xsize 1190
-                    if not mc.business.active_research_design == None:
+                    if not mc.business.active_research_design is None:
                         if isinstance(mc.business.active_research_design, SerumTrait):
                             $ trait_side_effects_text = get_trait_side_effect_text(mc.business.active_research_design)
                             $ trait_mastery_text = get_trait_mastery_text(mc.business.active_research_design)

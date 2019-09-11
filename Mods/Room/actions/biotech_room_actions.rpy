@@ -143,11 +143,11 @@ label cloning_process(person = the_person): # default to the_person when not pas
 
             "Begin production:{image=gui/heart/Time_Advance.png} \n{size=22}Name: [clone_name] [clone_last_name], Age: [clone_age]{/size}":
                 python:
-                    if clone_name == None:
+                    if clone_name is None:
                         clone_name = person.name
-                    if clone_last_name == None:
+                    if clone_last_name is None:
                         clone_last_name = person.last_name
-                    if clone_age == None:
+                    if clone_age is None:
                         clone_age = person.age
 
                     clone = create_random_person(name = clone_name, last_name = clone_last_name, age = clone_age, body_type = person.body_type, face_style = person.face_style, tits = person.tits, height = person.height, hair_colour = person.hair_colour, hair_style = person.hair_style, skin = person.skin, eyes = person.eyes, job = None,

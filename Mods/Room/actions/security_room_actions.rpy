@@ -26,7 +26,7 @@ init 3 python: # Put this behind a mod init to ensure compatibility
     security_room_actions.append(investigation_employee_action)
 
     def investigation_opinion_requirement():
-        if the_person.get_random_opinion(False, True) == None:
+        if the_person.get_random_opinion(False, True) is None:
             return "All opinions discovered"
         else:
             return True
@@ -230,7 +230,7 @@ label investigation_opinions_label():
 #            $ advance_time()
 #            return
 #
-#        "Investigate opinions (disabled) \n{size=22}All opinions known{/size}" if the_person.get_random_opinion(False, True) == None:
+#        "Investigate opinions (disabled) \n{size=22}All opinions known{/size}" if the_person.get_random_opinion(False, True) is None:
 #            pass
 #        "Back":
 #            jump investigation_employee_label
