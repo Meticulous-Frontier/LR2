@@ -61,7 +61,7 @@ label mom_breakfast_action_label():
                 $ the_person.change_happiness(2)
 
             "Emphasize Happiness": #This will increase happiness (duh)
-                mc.name "I'm sorry work is such a pain. Just think about the weekend coming up, maybe you and [sister.title] can go shopping or something?"
+                mc.name "I'm sorry work is such a pain. Just think about the weekend coming up, maybe you and [lily.title] can go shopping or something?"
                 "Your kind words bring a smile to her face."
                 $ scene_manager.update_actor(the_person, position = "sitting", emotion="happy")
                 the_person.char "Thank you, [the_person.mc_title], for your kind words. You and your sister mean so much to me, its a good reminder why I do what I do sometimes."
