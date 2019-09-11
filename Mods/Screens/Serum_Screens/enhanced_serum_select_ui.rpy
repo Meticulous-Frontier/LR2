@@ -19,6 +19,14 @@ init -1 python:
             else: # Green
                 return "{color=#98fb98}" + str(trait.mastery_level) + "{/color}"
 
+        def get_trait_display_title(trait):
+            trait_tags = ""
+            if trait.exclude_tags:
+                trait_tags = "\nExcludes Other: "
+                for a_tag in trait.exclude_tags:
+                    trait_tags += "[" + a_tag + "]"
+            return trait.name + " " + "(" + str(trait.current_research) + "/" + str(trait.research_needed) + ")" + trait_tags
+
 init 2:
     screen serum_select_ui: #How you select serum and trait research
         add "Science_Menu_Background.png"
@@ -65,13 +73,7 @@ init 2:
                                 xsize 370
                                 for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True): # Sort traits by exclude tags (So all production traits are grouped, for example), then by tier (so the highest tier production tag ends up at the top
                                     if not trait.researched and trait.has_required() and "Production" in trait.exclude_tags:
-                                        $ trait_tags = ""
-                                        if trait.exclude_tags:
-                                            $ trait_tags = "\nExcludes Other: "
-                                            for a_tag in trait.exclude_tags:
-                                                $ trait_tags += "[" + a_tag + "]"
-                                        $ trait_title = trait.name + " " + "(" +str(trait.current_research)+"/"+ str(trait.research_needed) + ")" + trait_tags
-
+                                        $ trait_title = get_trait_display_title(trait)
                                         textbutton "[trait_title]":
                                             style "textbutton_style"
                                             text_style "serum_text_style_traits"
@@ -83,13 +85,7 @@ init 2:
 
                                 for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True): # Sort traits by exclude tags (So all production traits are grouped, for example), then by tier (so the highest tier production tag ends up at the top
                                     if not trait.researched and trait.has_required() and "Suggest" in trait.exclude_tags:
-                                        $ trait_tags = ""
-                                        if trait.exclude_tags:
-                                            $ trait_tags = "\nExcludes Other: "
-                                            for a_tag in trait.exclude_tags:
-                                                $ trait_tags += "[" + a_tag + "]"
-                                        $ trait_title = trait.name + " " + "(" +str(trait.current_research)+"/"+ str(trait.research_needed) + ")" + trait_tags
-
+                                        $ trait_title = get_trait_display_title(trait)
                                         textbutton "[trait_title]":
                                             style "textbutton_style"
                                             text_style "serum_text_style_traits"
@@ -101,13 +97,7 @@ init 2:
 
                                 for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name, reverse = False): # Sort traits by exclude tags (So all production traits are grouped, for example), then by name since tier does not matter.
                                     if not trait.researched and trait.has_required() and "Production" not in trait.exclude_tags and "Suggest" not in trait.exclude_tags:
-                                        $ trait_tags = ""
-                                        if trait.exclude_tags:
-                                            $ trait_tags = "\nExcludes Other: "
-                                            for a_tag in trait.exclude_tags:
-                                                $ trait_tags += "[" + a_tag + "]"
-                                        $ trait_title = trait.name + " " + "(" +str(trait.current_research)+"/"+ str(trait.research_needed) + ")" + trait_tags
-
+                                        $ trait_title = get_trait_display_title(trait)
                                         textbutton "[trait_title]":
                                             style "textbutton_style"
                                             text_style "serum_text_style_traits"
@@ -131,14 +121,7 @@ init 2:
                                 xsize 400
                                 for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True): # Sort traits by exclude tags (So all production traits are grouped, for example), then by tier (so the highest tier production tag ends up at the top
                                     if trait.researched and "Production" in trait.exclude_tags:
-                                        $ trait_tags = ""
-                                        if trait.exclude_tags:
-                                            $ trait_tags = "\nExcludes Other: "
-                                            for a_tag in trait.exclude_tags:
-                                                $ trait_tags += "[" + a_tag + "]"
-
-                                        $ trait_title = trait.name + " " + "(" +str(trait.current_research)+"/"+ str(trait.research_needed) + ")" + trait_tags
-
+                                        $ trait_title = get_trait_display_title(trait)
                                         $ trait_side_effects_text = get_trait_side_effect_text(trait)
                                         $ trait_mastery_text = get_trait_mastery_text(trait)
 
@@ -154,14 +137,7 @@ init 2:
 
                                 for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True): # Sort traits by exclude tags (So all production traits are grouped, for example), then by tier (so the highest tier production tag ends up at the top
                                     if trait.researched and "Suggest" in trait.exclude_tags:
-                                        $ trait_tags = ""
-                                        if trait.exclude_tags:
-                                            $ trait_tags = "\nExcludes Other: "
-                                            for a_tag in trait.exclude_tags:
-                                                $ trait_tags += "[" + a_tag + "]"
-
-                                        $ trait_title = trait.name + " " + "(" +str(trait.current_research)+"/"+ str(trait.research_needed) + ")" + trait_tags
-
+                                        $ trait_title = get_trait_display_title(trait)
                                         $ trait_side_effects_text = get_trait_side_effect_text(trait)
                                         $ trait_mastery_text = get_trait_mastery_text(trait)
 
@@ -177,14 +153,7 @@ init 2:
 
                                 for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name, reverse = False): # Sort traits by exclude tags (So all production traits are grouped, for example), then by name since tier does not matter.
                                     if trait.researched and "Production" not in trait.exclude_tags and "Suggest" not in trait.exclude_tags:
-                                        $ trait_tags = ""
-                                        if trait.exclude_tags:
-                                            $ trait_tags = "\nExcludes Other: "
-                                            for a_tag in trait.exclude_tags:
-                                                $ trait_tags += "[" + a_tag + "]"
-
-                                        $ trait_title = trait.name + " " + "(" +str(trait.current_research)+"/"+ str(trait.research_needed) + ")" + trait_tags
-
+                                        $ trait_title = get_trait_display_title(trait)
                                         $ trait_side_effects_text = get_trait_side_effect_text(trait)
                                         $ trait_mastery_text = get_trait_mastery_text(trait)
 
@@ -224,7 +193,7 @@ init 2:
                                             unhovered Hide("serum_tooltip")
                                             xsize 365
 
-                textbutton "Do not change research." action [Return("None"), Hide("trait_tooltip")] style "textbutton_style" text_style "serum_text_style" yalign 0.995 xanchor 0.5 xalign 0.5
+                textbutton "Do not change research" action [Return("None"), Hide("trait_tooltip")] style "textbutton_style" text_style "serum_text_style" yalign 0.995 xanchor 0.5 xalign 0.5 xsize 360
 
         imagebutton:
             auto "/tutorial_images/restart_tutorial_%s.png"
