@@ -1,5 +1,5 @@
 ## Morning crisis
-#Have breakfast with Jennifer. Designed as an opportuniy to raise her obedience, and to give some variation to morning events
+#Have breakfast with Jennifer. Designed as an opportunity to raise her obedience, and to give some variation to morning events
 #You wake up and have breakfast with Jennifer. At minimal sluttiness, gives MC the option to giver her a motivational speech.
 #At mid sluttiness, MC can tell Jennifer she should try going to work without underwear on, try and get attention from men that way.
 #At high sluttiness, Jennifer asks MC to cum on/in her so she can feel it throughout the day.
@@ -31,15 +31,19 @@ init 2 python:
     mom_commando_day_selfie_action = Action("Mom Commando Selfie", mom_commando_day_selfie_requirement, "mom_commando_day_selfie_label")
 
 label mom_breakfast_action_label():
-    $ the_person = mom
     "You wake up, shower, and get ready for the day. As you finish getting ready you notice the smell of bacon and coffee coming from the kitchen."
-    #"When you walk out to the kitche, you see [the_person.title] just sitting down to some breakfast."
+
+    python:
+        the_person = mom
+        scene_manager = Scene()
+        scene_manager.add_actor(the_person, position = "sitting")
+    #"When you walk out to the kitchen, you see [the_person.title] just sitting down to some breakfast."
     #$ the_person.draw_person(position = "sitting")
-    $ scene_manager.add_actor(the_person, position = "sitting")
+
     mc.name "Good morning, [the_person.title]. That smells great!"
     "She sees you walk into the kitchen and greets you warmly."
     the_person.char "Good morning! I made extra, grab some breakfast! I want you well fed going to work today."
-    "You grab some coffe and some bacon and sit down next to [the_person.possessive_title]. She is shaking her head while she looks at her phone."
+    "You grab some coffee and some bacon and sit down next to [the_person.possessive_title]. She is shaking her head while she looks at her phone."
     #$ the_person.draw_person(position = "sitting",emotion="angry")
     $ scene_manager.update_actor(the_person, position = "sitting", emotion="angry")
     mc.name "Everything okay?"
@@ -98,7 +102,6 @@ label mom_breakfast_action_label():
                 $ the_person.change_obedience(5)
                 if the_person.sluttiness > 50:
                     $ mc.business.mandatory_crises_list.append(mom_commando_day_selfie_action)
-                    pass
                 $ scene_manager.clear_scene()
                 return
             "Give Her Some Attention":  #Sluttiness staircase event, take it farther the sluttier she is
@@ -131,7 +134,7 @@ label mom_breakfast_action_label():
                                 $ scene_manager.draw_animated_removal(the_person, the_clothing)
                             "You reach down and slowly remove her top, exposing her creamy tits."
                             "Your hands return to her chest, her boobs feel hot and soft in your hands."
-                            pass
+
                         "Finish Massage":
                             "[the_person.possessive_title] feel great, but eventually you decide it is too risky to keep going."
                             "[the_person.title] shakes her head a bit as you sit back down, as if trying to clear some thoughts from her head."
@@ -167,7 +170,7 @@ label mom_breakfast_action_label():
                                 return
                         pass
                     "Finish Massage":
-                        "You pinch and pull at her nipples for a few more minutes, but eventuall you decide just to tease her for now."
+                        "You pinch and pull at her nipples for a few more minutes, but eventually you decide just to tease her for now."
                         "[the_person.title] looks at you as you sit down, arousal clear in her eyes."
                         mc.name "Don't want to go to far, [lily.name] could walk out at any moment..."
                         $ the_person.change_obedience (5)
@@ -231,7 +234,7 @@ label mom_breakfast_action_label():
                 $ the_person.change_happiness(-5)
                 $ the_person.change_obedience(5)
                 the_person.char "That's okay, I understand. Well don't forget, dinner will be the usual time tonight. Maybe we can do something after that?"
-                "You give her a non-commital shrug. The tension at the table is a little much, so you quickly finish your breakfast and head out."
+                "You give her a non-committal shrug. The tension at the table is a little much, so you quickly finish your breakfast and head out."
                 $ scene_manager.clear_scene()
                 return
 
@@ -268,7 +271,7 @@ label mom_breakfast_action_label():
             the_person.char "Hush, you never know when you might have need of something like that, especially with all the urges I've been having lately..."
             "You watch as she applies a generous amount to her hand, then she reaches back and starts applying it to her back end."
             the_person.char "Remember, this is a quickie! Sit back and enjoy, but don't hold back! I want your cum!"
-            "[the_person.possessive_title] unzips your pants and pulles your firm cock. She sits down on your lap, facing you."
+            "[the_person.possessive_title] unzips your pants and pulls out your firm cock. She sits down on your lap, facing you."
             $ scene_manager.update_actor(mom, position = "cowgirl")
             "With one hand on your cock, she guides you to her tight anal pucker. In one smooth motion, she relaxes herself and lowers her body down on to you, impaling herself on your manhood."
             the_person.char "OH fuck, that is just what I needed... I was dreaming about this last night... I dreamed that you had me tied up and bent over and you pounded my ass over and over..."
@@ -276,12 +279,12 @@ label mom_breakfast_action_label():
             the_person.char "I remember you saying you were gonna cum... and I was so ready for it, I was begging you for it... and then suddenly I woke up!"
             "[the_person.possessive_title] hips are moving in wide circles. Her bowel feels amazing, like a buttery vice."
             the_person.char "I just need to feel it. To feel you cum inside my ass, to blow so deep and fill me up."
-            "Her voice and her movements are desparate. You suddenly realize that she is racing you to the finish, and you aren't sure who is going to finish first."
+            "Her voice and her movements are desperate. You suddenly realize that she is racing you to the finish, and you aren't sure who is going to finish first."
             the_person.char "I need it [the_person.mc_title]! I want to feel you slowly oozing out of me as I walk around at work today. Then when I get home I want you to spank me and fuck my ass over the counter while I cook dinner!"
             "Your balls are beginning to tense, you are seconds away from ejaculating!"
             the_person.char "Claim my asshole! Mark your territory with your cum! Then spank me and do it again and again!"
             "You climax in a frenzy. She arches her back and moans involuntarily when she feels your cum flood her rectum. Her orgasm hits immediately after yours."
-            "Finally speechless, [the_person.title]'s body stops rocking, but you feel the twitching of her sphintcer as orgasmic waves hit her. You sigh happily, dumping the last of your cum insider her."
+            "Finally speechless, [the_person.title]'s body stops rocking, but you feel the twitching of her sphincter as orgasmic waves hit her. You sigh happily, dumping the last of your cum insider her."
 
             $ cum_in_ass(the_person)
             $ mc.listener_system.fire_event("girl_climax", the_person = the_person) #TODO check and make sure this works...
@@ -298,7 +301,7 @@ label mom_breakfast_action_label():
             return
         else:
             the_person.char "Remember, this is a quickie! Sit back and enjoy, but don't hold back! I want your cum!"
-            "[the_person.possessive_title] unzips your pants and pulles your firm cock. She sits down on your lap, facing you."
+            "[the_person.possessive_title] unzips your pants and pulls out your firm cock. She sits down on your lap, facing you."
             $ scene_manager.update_actor(mom, position = "cowgirl")
             "With one hand on your cock, she guides you straight to her cunt. In one smooth motion, she relaxes herself and lowers her body down on to you, impaling herself on your manhood."
             the_person.char "OH fuck, that is just what I needed... I was dreaming about this last night..."
@@ -306,7 +309,7 @@ label mom_breakfast_action_label():
             the_person.char "I remember you saying you were gonna cum... and I was so ready for it, I begging you for it... and then suddenly I woke up!"
             "[the_person.possessive_title] hips are moving in wide circles. Her sopping wet cunt feels amazing surrounding your penis."
             the_person.char "I want to feel it. Not just when you cum now... but when I'm at work, I want to feel you slowly leak out of me..."
-            "Her voice and her movements are desparate. You suddenly realize that she is racing you to the finish, and you aren't sure who is going to finish first."
+            "Her voice and her movements are desperate. You suddenly realize that she is racing you to the finish, and you aren't sure who is going to finish first."
             the_person.char "I need it [the_person.mc_title]! I want every drip to be a reminder of how good you make me feel!"
             "Your balls are beginning to tense, you are seconds away from ejaculating! She begins to make a short, fast humping motion, grinding her clit against your stomach."
             the_person.char "Claim mommy! Mark your territory with your cum! Fill me up!"
