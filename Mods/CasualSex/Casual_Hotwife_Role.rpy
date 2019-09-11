@@ -1241,7 +1241,7 @@ label hotwife_hookup_accept(the_person):
                 the_person.char "Oh! Its so hot on my skin!"
                 $ the_person.cum_on_ass()
                 $ the_person.draw_person(position = "standing_doggy")
-                "You stand back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
+                "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title]'s ass covered in your semen."
                 "You use her phone and get several close up pictures of her luscious ass with your load covering it."
                 "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the restroom."
                 return
@@ -1260,7 +1260,7 @@ label hotwife_hookup_accept(the_person):
         "You stroke your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
         $ the_person.cum_on_ass()
         $ the_person.draw_person(position = "standing_doggy")
-        "You stand back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
+        "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title]'s ass covered in your semen."
         "You use her phone and get several close up pictures of her luscious ass with your load covering it."
         "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the restroom."
     return
