@@ -167,10 +167,10 @@ label office_observation_label():
 label investigation_employee_label():
     while True:
         $ people_list = ["Investigate"]
-        $ people_list.extend(known_people_in_the_game([mc]) + ["Back"])
+        $ people_list.extend(mc.business.get_employee_list() + ["Back"]) # NOTE: Create an upgrade that allows investigation of people outside of the business? known_people_in_the_game()
         call screen main_choice_display([people_list])
         $ person_choice = _return
-        $ del people_list        
+        $ del people_list
 
         if person_choice == "Back":
             return # Where to go if you hit "Back".

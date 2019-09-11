@@ -36,12 +36,8 @@ label store_change_location_mod_actions():
 label move_followers_label():
 
     python:
-        # list of followers follow you around. Will go to scheduled room on time advance.¨
-        # Added extra checks to make sure it runs through everything and moves all people in list, not only first.
-        for room in list_of_places:
-            for person in room.people:
-                if person in list_of_followers:
-                    if person in room.people:
-                        room.move_person(person, new_location)
+
+        for person in list_of_followers:
+            person.location().move_person(person, new_location)
 
     return
