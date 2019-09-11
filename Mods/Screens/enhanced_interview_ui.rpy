@@ -17,9 +17,9 @@ init 1:
             if recruitment_knowledge_two_policy.is_owned():
                 reveal_count += 2
             if recruitment_knowledge_three_policy.is_owned():
-                reveal_count += 1
+                reveal_count += 2
             if recruitment_knowledge_four_policy.is_owned():
-                reveal_count += 1
+                reveal_count += 2
             return reveal_count
 
         def generate_candidates(count):
