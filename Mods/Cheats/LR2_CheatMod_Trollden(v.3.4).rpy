@@ -5,16 +5,16 @@ init 1 python:
 
 screen keybind(): # Change the key "" to whatever you want to open / close the cheat menu
 
-    key "z" action [Function(cheat_default_person), ToggleScreen("cm"), Hide("cmmc"), Hide("cmoc"), Hide("cmc"), Hide("cmw")] # Runs the define_a_person function to prevent issues with the_person not being defined, also hides all of the main screens if they are visible.
-    key "Z" action [Function(cheat_default_person), ToggleScreen("cm"), Hide("cmmc"), Hide("cmoc"), Hide("cmc"), Hide("cmw")]
+    key "z" action [ToggleScreen("cm"), Hide("cmmc"), Hide("cmoc"), Hide("cmc"), Hide("cmw")] # Runs the define_a_person function to prevent issues with the_person not being defined, also hides all of the main screens if they are visible.
+    key "Z" action [ToggleScreen("cm"), Hide("cmmc"), Hide("cmoc"), Hide("cmc"), Hide("cmw")]
 
 init python: # This space is reserved for variables used to display and hide vbox(es) and hbox(es) later on in the code, it was the easiest way for me to do it.
     # The variables that are singled out act as a parent for the cluster below, imagine a tree view. In other words the singled variable has to be true in order for the children to show e.g capp and capph needs to be true for capph to show.
 
     # Miscellanious - Start
 
-    the_person = None # Intended to prevent the_person is not defined errors
-    person_choice = None # Intended to prevent person_choice is not defined errors
+    #the_person = None # Intended to prevent the_person is not defined errors
+    #person_choice = None # Intended to prevent person_choice is not defined errors
 
     cml = None # Handles the whether the crisis master list should be visible or hidden
     cmlpage = 1 # Defines which page is shown in the crisis master list, defaults to one.
@@ -62,14 +62,6 @@ init python: # This space is reserved for definitions used to simplify the code
         for trait in list_of_traits:
             if trait.tier <= mc.business.research_tier:
                 trait.researched = True
-
-    def cheat_default_person(): # Ensures that a person with valid attributes is always set
-                                # TODO: Come up with a simular solution that remembers the last person you interacted with, but also replaces whenever a new person is in focus e.g during crisis.
-        global the_person       # I want to modify the_person outside of the function
-        if the_person is None:
-            the_person = lily   # Using the lily pre-made character as it is always present in the world.
-        elif the_person == person_choice:
-            the_person = person_choice
 
     def cheat_salary_expectations():
 
@@ -280,13 +272,17 @@ screen cm(): # Overlaps the screen "screen goal_hud_ui():" in script.rpy
             spacing -5
             textbutton "Cheat Menu" action [ToggleScreen("cm"), Hide("cmmc"), Hide("cmoc"), Hide("cmc"), Hide("cmw")] style "textbutton_style" text_style "textbutton_text_style" xsize 245 text_xalign 0.5 tooltip "Hides the cheat menu"
 
-            textbutton "Main Character" action [ToggleScreen("cmmc"), Hide("cmoc"), Hide("cmc"), Hide("cmw")] style "textbutton_style" text_style "textbutton_text_style" xsize 245 tooltip "Cheats for the main character"
+            if "mc" in globals():
+                textbutton "Main Character" action [ToggleScreen("cmmc"), Hide("cmoc"), Hide("cmc"), Hide("cmw")] style "textbutton_style" text_style "textbutton_text_style" xsize 245 tooltip "Cheats for the main character"
 
-            textbutton "Edit: [the_person.name]" action [ToggleScreen("cmoc"), Hide("cmmc"), Hide("cmc"), Hide("cmw")] style "textbutton_style" text_style "textbutton_text_style" xsize 245 tooltip "Cheats for other characters"
+            if "the_person" in globals() and the_person is not None:
+                textbutton "Edit: [the_person.name]" action [ToggleScreen("cmoc"), Hide("cmmc"), Hide("cmc"), Hide("cmw")] style "textbutton_style" text_style "textbutton_text_style" xsize 245 tooltip "Cheats for other characters"
 
-            textbutton "Company" action [ToggleScreen("cmc"), Hide("cmoc"), Hide("cmmc"), Hide("cmw")] style "textbutton_style" text_style "textbutton_text_style" xsize 245
+            if "mc.business" in globals():
+                textbutton "Company" action [ToggleScreen("cmc"), Hide("cmoc"), Hide("cmmc"), Hide("cmw")] style "textbutton_style" text_style "textbutton_text_style" xsize 245
 
-            textbutton "World" action [ToggleScreen("cmw"), Hide("cmoc"), Hide("cmmc"), Hide("cmc")] style "textbutton_style" text_style "textbutton_text_style" xsize 245
+            if "day" in globals():
+                textbutton "World" action [ToggleScreen("cmw"), Hide("cmoc"), Hide("cmmc"), Hide("cmc")] style "textbutton_style" text_style "textbutton_text_style" xsize 245
 
 screen cmmc():
     zorder 49
@@ -328,209 +324,210 @@ screen cmmc():
 
 screen cmoc():
     zorder 49
-    frame: # Top Frame
-        background im.Scale("Goal_Frame_1.png", 900, 195) # Scales the image to a size fitting the frame it is contained within
-        xsize 900
-        ysize 195
-        yalign 0.225
-        xalign 0.5
-        hbox:
-            xalign 0.08
-            vbox: # the_person main stats
+    if the_person is not None:
+        frame: # Top Frame
+            background im.Scale("Goal_Frame_1.png", 900, 195) # Scales the image to a size fitting the frame it is contained within
+            xsize 900
+            ysize 195
+            yalign 0.225
+            xalign 0.5
+            hbox:
+                xalign 0.08
+                vbox: # the_person main stats
 
-                textbutton "Name: [the_person.name]" action NullAction() style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                textbutton "Main Stats" action NullAction() style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                    textbutton "Name: [the_person.name]" action NullAction() style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                    textbutton "Main Stats" action NullAction() style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
 
-                textbutton "Charisma: [the_person.charisma]" action SetField(the_person,"charisma", the_person.charisma + 1) alternate SetField(the_person,"charisma", the_person.charisma - 1)  style "cheatbutton_style" text_style "cheattext_style" xsize 220
-                textbutton "Intelligence: [the_person.int]" action SetField(the_person,"int", the_person.int + 1) alternate SetField(the_person,"int", the_person.int - 1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
-                textbutton "Focus: [the_person.focus]" action SetField(the_person,"focus", the_person.focus + 1) alternate SetField(the_person,"focus", the_person.focus - 1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
-                #textbutton "Stamina: [the_person.current_stamina]" action [SetField(the_person,"max_stamina", the_person.max_stamina + 1), SetField(the_person,"current_stamina", the_person.max_stamina + 1)] alternate [SetField(the_person,"max_stamina", the_person.max_stamina - 1), SetField(the_person,"current_stamina", the_person.max_stamina - 1)] style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                    textbutton "Charisma: [the_person.charisma]" action SetField(the_person,"charisma", the_person.charisma + 1) alternate SetField(the_person,"charisma", the_person.charisma - 1)  style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                    textbutton "Intelligence: [the_person.int]" action SetField(the_person,"int", the_person.int + 1) alternate SetField(the_person,"int", the_person.int - 1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                    textbutton "Focus: [the_person.focus]" action SetField(the_person,"focus", the_person.focus + 1) alternate SetField(the_person,"focus", the_person.focus - 1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                    #textbutton "Stamina: [the_person.current_stamina]" action [SetField(the_person,"max_stamina", the_person.max_stamina + 1), SetField(the_person,"current_stamina", the_person.max_stamina + 1)] alternate [SetField(the_person,"max_stamina", the_person.max_stamina - 1), SetField(the_person,"current_stamina", the_person.max_stamina - 1)] style "cheatbutton_style" text_style "cheattext_style" xsize 220
 
-            vbox: # the_person work skills
-                textbutton "Work Skills" action NullAction() style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                vbox: # the_person work skills
+                    textbutton "Work Skills" action NullAction() style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
 
-                textbutton "Human Resources: [the_person.hr_skill]" action SetField(the_person,"hr_skill", the_person.hr_skill + 1) alternate SetField(the_person,"hr_skill", the_person.hr_skill - 1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
-                textbutton "Marketing: [the_person.market_skill]" action SetField(the_person,"market_skill", the_person.market_skill + 1) alternate SetField(the_person,"market_skill", the_person.market_skill - 1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
-                textbutton "Research: [the_person.research_skill]" action SetField(the_person,"research_skill", the_person.research_skill + 1) alternate SetField(the_person,"research_skill", the_person.research_skill - 1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
-                textbutton "Production: [the_person.production_skill]" action SetField(the_person,"production_skill", the_person.production_skill + 1) alternate SetField(the_person,"production_skill", the_person.production_skill - 1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
-                textbutton "Supply Procurement: [the_person.supply_skill]" action SetField(the_person,"supply_skill", the_person.supply_skill + 1) alternate SetField(the_person,"supply_skill", the_person.supply_skill - 1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                    textbutton "Human Resources: [the_person.hr_skill]" action SetField(the_person,"hr_skill", the_person.hr_skill + 1) alternate SetField(the_person,"hr_skill", the_person.hr_skill - 1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                    textbutton "Marketing: [the_person.market_skill]" action SetField(the_person,"market_skill", the_person.market_skill + 1) alternate SetField(the_person,"market_skill", the_person.market_skill - 1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                    textbutton "Research: [the_person.research_skill]" action SetField(the_person,"research_skill", the_person.research_skill + 1) alternate SetField(the_person,"research_skill", the_person.research_skill - 1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                    textbutton "Production: [the_person.production_skill]" action SetField(the_person,"production_skill", the_person.production_skill + 1) alternate SetField(the_person,"production_skill", the_person.production_skill - 1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                    textbutton "Supply Procurement: [the_person.supply_skill]" action SetField(the_person,"supply_skill", the_person.supply_skill + 1) alternate SetField(the_person,"supply_skill", the_person.supply_skill - 1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
 
-            vbox: # the_person sex skills
-                textbutton "Sex Skills" action NullAction() style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                vbox: # the_person sex skills
+                    textbutton "Sex Skills" action NullAction() style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
 
-                textbutton "Foreplay: [the_person.sex_skills[Foreplay]]" action SetDict(the_person.sex_skills, "Foreplay", the_person.sex_skills["Foreplay"] +1) alternate SetDict(the_person.sex_skills, "Foreplay", the_person.sex_skills["Foreplay"] -1)  style "cheatbutton_style" text_style "cheattext_style" xsize 220
-                textbutton "Oral: [the_person.sex_skills[Oral]]" action SetDict(the_person.sex_skills, "Oral", the_person.sex_skills["Oral"] +1) alternate SetDict(the_person.sex_skills, "Oral", the_person.sex_skills["Oral"] -1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
-                textbutton "Vaginal: [the_person.sex_skills[Vaginal]]" action SetDict(the_person.sex_skills, "Vaginal", the_person.sex_skills["Vaginal"] +1) alternate SetDict(the_person.sex_skills, "Vaginal", the_person.sex_skills["Vaginal"] -1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
-                textbutton "Anal: [the_person.sex_skills[Anal]]" action SetDict(the_person.sex_skills, "Anal", the_person.sex_skills["Anal"] +1) alternate SetDict(the_person.sex_skills, "Anal", the_person.sex_skills["Anal"] -1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
-                textbutton "Arousal: [the_person.arousal]" action SetField(the_person,"arousal", the_person.arousal + 25) alternate SetField(the_person,"arousal", the_person.arousal - 25) style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                    textbutton "Foreplay: [the_person.sex_skills[Foreplay]]" action SetDict(the_person.sex_skills, "Foreplay", the_person.sex_skills["Foreplay"] +1) alternate SetDict(the_person.sex_skills, "Foreplay", the_person.sex_skills["Foreplay"] -1)  style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                    textbutton "Oral: [the_person.sex_skills[Oral]]" action SetDict(the_person.sex_skills, "Oral", the_person.sex_skills["Oral"] +1) alternate SetDict(the_person.sex_skills, "Oral", the_person.sex_skills["Oral"] -1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                    textbutton "Vaginal: [the_person.sex_skills[Vaginal]]" action SetDict(the_person.sex_skills, "Vaginal", the_person.sex_skills["Vaginal"] +1) alternate SetDict(the_person.sex_skills, "Vaginal", the_person.sex_skills["Vaginal"] -1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                    textbutton "Anal: [the_person.sex_skills[Anal]]" action SetDict(the_person.sex_skills, "Anal", the_person.sex_skills["Anal"] +1) alternate SetDict(the_person.sex_skills, "Anal", the_person.sex_skills["Anal"] -1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                    textbutton "Arousal: [the_person.arousal]" action SetField(the_person,"arousal", the_person.arousal + 25) alternate SetField(the_person,"arousal", the_person.arousal - 25) style "cheatbutton_style" text_style "cheattext_style" xsize 220
 
-            vbox: # the_person relations
-                textbutton "Relations" action NullAction() style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                vbox: # the_person relations
+                    textbutton "Relations" action NullAction() style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
 
-                textbutton "Happiness: [the_person.happiness]" action SetField(the_person, "happiness", the_person.happiness + 10) alternate SetField(the_person, "happiness", the_person.happiness - 10) style "cheatbutton_style" text_style "cheattext_style" xsize 220
-                textbutton "Love: [the_person.love]" action SetField(the_person, "love", the_person.love + 10) alternate SetField(the_person, "love", the_person.love - 10) style "cheatbutton_style" text_style "cheattext_style" xsize 220
-                textbutton "Suggestibility: [the_person.suggestibility]" action SetField(the_person, "suggestibility", the_person.suggestibility + 50) alternate SetField(the_person, "suggestibility", the_person.suggestibility - 50) style "cheatbutton_style" text_style "cheattext_style" xsize 220
-                textbutton "Sluttiness: [the_person.sluttiness]" action SetField(the_person, "sluttiness", the_person.sluttiness + 10) alternate SetField(the_person, "sluttiness", the_person.sluttiness - 10) style "cheatbutton_style" text_style "cheattext_style" xsize 220
-                textbutton "Core Sluttiness: [the_person.core_sluttiness]" action SetField(the_person, "core_sluttiness", the_person.core_sluttiness + 10) alternate SetField(the_person, "core_sluttiness", the_person.core_sluttiness - 10) style "cheatbutton_style" text_style "cheattext_style" xsize 220
-                textbutton "Obedience: [the_person.obedience]" action SetField(the_person, "obedience", the_person.obedience + 25) alternate SetField(the_person, "obedience", the_person.obedience - 25) style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                    textbutton "Happiness: [the_person.happiness]" action SetField(the_person, "happiness", the_person.happiness + 10) alternate SetField(the_person, "happiness", the_person.happiness - 10) style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                    textbutton "Love: [the_person.love]" action SetField(the_person, "love", the_person.love + 10) alternate SetField(the_person, "love", the_person.love - 10) style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                    textbutton "Suggestibility: [the_person.suggestibility]" action SetField(the_person, "suggestibility", the_person.suggestibility + 50) alternate SetField(the_person, "suggestibility", the_person.suggestibility - 50) style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                    textbutton "Sluttiness: [the_person.sluttiness]" action SetField(the_person, "sluttiness", the_person.sluttiness + 10) alternate SetField(the_person, "sluttiness", the_person.sluttiness - 10) style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                    textbutton "Core Sluttiness: [the_person.core_sluttiness]" action SetField(the_person, "core_sluttiness", the_person.core_sluttiness + 10) alternate SetField(the_person, "core_sluttiness", the_person.core_sluttiness - 10) style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                    textbutton "Obedience: [the_person.obedience]" action SetField(the_person, "obedience", the_person.obedience + 25) alternate SetField(the_person, "obedience", the_person.obedience - 25) style "cheatbutton_style" text_style "cheattext_style" xsize 220
 
-    frame: # Bottom frame
-        background im.Scale("Goal_Frame_1.png", 1165, 200) # Scales the image to a size fitting the frame it is contained within
-        xsize 1165
-        ysize 200
-        yalign 1.0
-        xalign 0.529
-        hbox:
-            xalign 0.029
-            vbox: # Bottom frame menu
+        frame: # Bottom frame
+            background im.Scale("Goal_Frame_1.png", 1165, 200) # Scales the image to a size fitting the frame it is contained within
+            xsize 1165
+            ysize 200
+            yalign 1.0
+            xalign 0.529
+            hbox:
+                xalign 0.029
+                vbox: # Bottom frame menu
 
-                textbutton "Appearance" action ToggleVariable("capp") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                    textbutton "Appearance" action ToggleVariable("capp") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
 
-                textbutton "Personality" action ToggleVariable("cpy") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                    textbutton "Personality" action ToggleVariable("cpy") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
 
-                textbutton "Employment" action ToggleVariable("cemp") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                    textbutton "Employment" action ToggleVariable("cemp") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
 
-            if cemp: # Employment options
-                hbox:
+                if cemp: # Employment options
+                    hbox:
+                        vbox:
+                            textbutton "Job: [the_person.job]" action NullAction() style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Set Marketing" action [SetField(the_person, "job", "Marketing"), Function(cheat_hire_person)] alternate [Function(cheat_fire_employee)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Set Production" action [SetField(the_person, "job", "Production"), Function(cheat_hire_person)] alternate [Function(cheat_fire_employee)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        vbox:
+                            textbutton "Set Research" action [SetField(the_person, "job", "Researcher"), Function(cheat_hire_person)] alternate [Function(cheat_fire_employee)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Set Supply" action [SetField(the_person, "job", "Supply"), Function(cheat_hire_person)] alternate [Function(cheat_fire_employee)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Set HR" action [SetField(the_person, "job", "Human Resources"), Function(cheat_hire_person)] alternate [Function(cheat_fire_employee)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+
+                if capp: # Appearance sections
                     vbox:
-                        textbutton "Job: [the_person.job]" action NullAction() style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Set Marketing" action [SetField(the_person, "job", "Marketing"), Function(cheat_hire_person)] alternate [Function(cheat_fire_employee)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Set Production" action [SetField(the_person, "job", "Production"), Function(cheat_hire_person)] alternate [Function(cheat_fire_employee)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+
+                        textbutton "Hair Styles" action ToggleVariable("capph") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 # Expands to hairstyles
+                        textbutton "Hair Color" action ToggleVariable("capphc") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 # Expands to hair color
+                        textbutton "Face" action ToggleVariable("cappf") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 # Expands to faces
+                        textbutton "Breasts" action ToggleVariable("cappt") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 # Expands to breasts
+                        textbutton "Body" action ToggleVariable("cappb") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 # Expands to body
+                        textbutton "Skin Color" action ToggleVariable("capps") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 # Expands to skin color
+
+                if capp and capph: # Hair Style Options
+                    hbox:
+                        vbox: # Column 1
+
+                            textbutton "Short Hair" action [SetField(the_person,"hair_style", short_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Ponytail" action [SetField(the_person,"hair_style", ponytail), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Messy Ponytail" action [SetField(the_person,"hair_style", messy_ponytail), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Messy Short Hair" action [SetField(the_person,"hair_style", messy_short_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Messy Long Hair" action [SetField(the_person,"hair_style", messy_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Shaved Side Hair" action [SetField(the_person,"hair_style", shaved_side_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        vbox: # Column 2
+
+                            textbutton "Twin Ponytails" action [SetField(the_person,"hair_style", twintail), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Long Hair" action [SetField(the_person,"hair_style", long_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Bow Hair" action [SetField(the_person,"hair_style", bow_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Bobbed Hair" action [SetField(the_person,"hair_style", bobbed_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+
+                if capp and capphc: # Hair Color Options
+                    hbox:
+                        vbox: # Column 1, reserved for vanilla hair colors
+                            textbutton "Blond" action [SetField(the_person,"hair_colour", ["blond", [0.89,0.75,0.47,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Brown" action [SetField(the_person,"hair_colour", ["brown", [0.21,0.105,0.06,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Black" action [SetField(the_person,"hair_colour", ["black",[0.09,0.07,0.09,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Chestnut" action [SetField(the_person,"hair_colour", ["chestnut", [0.59,0.31,0.18,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Pulp" action [SetField(the_person,"hair_colour", ["pulp", [0.643, 0.439, 0.541,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        vbox: # Column 2,  reserved for custom hair colors
+                            textbutton "Knight Red" action [SetField(the_person,"hair_colour", ["knight red", [0.745, 0.117, 0.235,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Platinum Blonde" action [SetField(the_person,"hair_colour", ["platinum blonde", [0.789, 0.746, 0.691,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Golden Blonde" action [SetField(the_person,"hair_colour", ["golden blonde", [0.895, 0.781, 0.656,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Strawberry Blonde" action [SetField(the_person,"hair_colour", ["strawberry blonde", [0.644, 0.418, 0.273,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Light Auburn" action [SetField(the_person,"hair_colour", ["light auburn", [0.566, 0.332, 0.238,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+
+                if capp and cappf: # Face Type Options
+                    hbox:
+                        vbox: # Column 1
+                            textbutton "Face Type 1" action [SetField(the_person,"face_style", "Face_1"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Face Type 2" action [SetField(the_person,"face_style", "Face_2"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Face Type 3" action [SetField(the_person,"face_style", "Face_3"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        vbox: # Column 2
+                            textbutton "Face Type 4" action [SetField(the_person,"face_style", "Face_4"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Face Type 5" action [SetField(the_person,"face_style", "Face_5"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Face Type 6" action [SetField(the_person,"face_style", "Face_6"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+
+                if capp and cappt: # Breast Size Options
+                    hbox:
+                        vbox: # Column 1
+                            textbutton "A Cups" action [SetField(the_person,"tits", "A"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "AA Cups" action [SetField(the_person,"tits", "AA"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "B Cups" action [SetField(the_person,"tits", "B"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "C Cups" action [SetField(the_person,"tits", "C"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "D Cups" action [SetField(the_person,"tits", "D"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "DD Cups" action [SetField(the_person,"tits", "DD"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        vbox: # Column 2
+                            textbutton "DDD Cups" action [SetField(the_person,"tits", "DDD"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "E Cups" action [SetField(the_person,"tits", "E"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "F Cups" action [SetField(the_person,"tits", "F"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "FF Cups" action [SetField(the_person,"tits", "FF"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+
+                if capp and cappb: # Body Type Options
+                    hbox:
+                        vbox: # Column 1
+                            textbutton "Thin Body" action [SetField(the_person,"body_type", "thin_body"), Function(cheat_redraw_body)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Standard Body" action [SetField(the_person,"body_type", "standard_body"), Function(cheat_redraw_body)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Curvy Body" action [SetField(the_person,"body_type", "curvy_body"), Function(cheat_redraw_body)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        vbox: # Column 2, unused
+                            pass
+
+                if capp and capps: # Skin Color Options
+                    hbox:
+                        vbox: # Column 1
+                            textbutton "White Skin" action [SetField(the_person,"body_images", white_skin), SetField(the_person,"skin", "white"), Function(cheat_redraw_skin)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Tan Skin" action [SetField(the_person,"body_images", tan_skin), SetField(the_person,"skin", "tan"), Function(cheat_redraw_skin)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Black Skin" action [SetField(the_person,"body_images", black_skin), SetField(the_person,"skin", "black"), Function(cheat_redraw_skin)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        vbox: # Column 2, unused
+                            pass
+
+                if cpy: # Personality Related Options
                     vbox:
-                        textbutton "Set Research" action [SetField(the_person, "job", "Researcher"), Function(cheat_hire_person)] alternate [Function(cheat_fire_employee)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Set Supply" action [SetField(the_person, "job", "Supply"), Function(cheat_hire_person)] alternate [Function(cheat_fire_employee)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Set HR" action [SetField(the_person, "job", "Human Resources"), Function(cheat_hire_person)] alternate [Function(cheat_fire_employee)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        textbutton "Personality Type" action ToggleVariable("cpyt") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 # Expands to hairstyles
+                        textbutton "Opinions" action ToggleVariable("cpyo") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "Not implemented, sorry" # Expands to opinions
+                        textbutton "Sexy Opinions" action ToggleVariable("cpyso") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "Not implemented, sorry" # Expands to sexy opinions
 
-            if capp: # Appearance sections
-                vbox:
+                        textbutton "Next Page: [cmlypage]" action [If(cmlypage == 3, true = SetVariable("cmlypage", cmlypage - 2), false = SetVariable("cmlypage", cmlypage + 1))] alternate [If(cmlypage == 1, true = SetVariable("cmlypage", cmlypage + 2), false = SetVariable("cmlypage", cmlypage - 1))] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "Shift through pages"
 
-                    textbutton "Hair Styles" action ToggleVariable("capph") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 # Expands to hairstyles
-                    textbutton "Hair Color" action ToggleVariable("capphc") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 # Expands to hair color
-                    textbutton "Face" action ToggleVariable("cappf") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 # Expands to faces
-                    textbutton "Breasts" action ToggleVariable("cappt") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 # Expands to breasts
-                    textbutton "Body" action ToggleVariable("cappb") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 # Expands to body
-                    textbutton "Skin Color" action ToggleVariable("capps") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 # Expands to skin color
-
-            if capp and capph: # Hair Style Options
-                hbox:
-                    vbox: # Column 1
-
-                        textbutton "Short Hair" action [SetField(the_person,"hair_style", short_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Ponytail" action [SetField(the_person,"hair_style", ponytail), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Messy Ponytail" action [SetField(the_person,"hair_style", messy_ponytail), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Messy Short Hair" action [SetField(the_person,"hair_style", messy_short_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Messy Long Hair" action [SetField(the_person,"hair_style", messy_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Shaved Side Hair" action [SetField(the_person,"hair_style", shaved_side_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                    vbox: # Column 2
-
-                        textbutton "Twin Ponytails" action [SetField(the_person,"hair_style", twintail), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Long Hair" action [SetField(the_person,"hair_style", long_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Bow Hair" action [SetField(the_person,"hair_style", bow_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Bobbed Hair" action [SetField(the_person,"hair_style", bobbed_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-
-            if capp and capphc: # Hair Color Options
-                hbox:
-                    vbox: # Column 1, reserved for vanilla hair colors
-                        textbutton "Blond" action [SetField(the_person,"hair_colour", ["blond", [0.89,0.75,0.47,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Brown" action [SetField(the_person,"hair_colour", ["brown", [0.21,0.105,0.06,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Black" action [SetField(the_person,"hair_colour", ["black",[0.09,0.07,0.09,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Chestnut" action [SetField(the_person,"hair_colour", ["chestnut", [0.59,0.31,0.18,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Pulp" action [SetField(the_person,"hair_colour", ["pulp", [0.643, 0.439, 0.541,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                    vbox: # Column 2,  reserved for custom hair colors
-                        textbutton "Knight Red" action [SetField(the_person,"hair_colour", ["knight red", [0.745, 0.117, 0.235,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Platinum Blonde" action [SetField(the_person,"hair_colour", ["platinum blonde", [0.789, 0.746, 0.691,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Golden Blonde" action [SetField(the_person,"hair_colour", ["golden blonde", [0.895, 0.781, 0.656,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Strawberry Blonde" action [SetField(the_person,"hair_colour", ["strawberry blonde", [0.644, 0.418, 0.273,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Light Auburn" action [SetField(the_person,"hair_colour", ["light auburn", [0.566, 0.332, 0.238,1]]), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-
-            if capp and cappf: # Face Type Options
-                hbox:
-                    vbox: # Column 1
-                        textbutton "Face Type 1" action [SetField(the_person,"face_style", "Face_1"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Face Type 2" action [SetField(the_person,"face_style", "Face_2"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Face Type 3" action [SetField(the_person,"face_style", "Face_3"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                    vbox: # Column 2
-                        textbutton "Face Type 4" action [SetField(the_person,"face_style", "Face_4"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Face Type 5" action [SetField(the_person,"face_style", "Face_5"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Face Type 6" action [SetField(the_person,"face_style", "Face_6"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-
-            if capp and cappt: # Breast Size Options
-                hbox:
-                    vbox: # Column 1
-                        textbutton "A Cups" action [SetField(the_person,"tits", "A"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "AA Cups" action [SetField(the_person,"tits", "AA"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "B Cups" action [SetField(the_person,"tits", "B"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "C Cups" action [SetField(the_person,"tits", "C"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "D Cups" action [SetField(the_person,"tits", "D"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "DD Cups" action [SetField(the_person,"tits", "DD"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                    vbox: # Column 2
-                        textbutton "DDD Cups" action [SetField(the_person,"tits", "DDD"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "E Cups" action [SetField(the_person,"tits", "E"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "F Cups" action [SetField(the_person,"tits", "F"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "FF Cups" action [SetField(the_person,"tits", "FF"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-
-            if capp and cappb: # Body Type Options
-                hbox:
-                    vbox: # Column 1
-                        textbutton "Thin Body" action [SetField(the_person,"body_type", "thin_body"), Function(cheat_redraw_body)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Standard Body" action [SetField(the_person,"body_type", "standard_body"), Function(cheat_redraw_body)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Curvy Body" action [SetField(the_person,"body_type", "curvy_body"), Function(cheat_redraw_body)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                    vbox: # Column 2, unused
-                        pass
-
-            if capp and capps: # Skin Color Options
-                hbox:
-                    vbox: # Column 1
-                        textbutton "White Skin" action [SetField(the_person,"body_images", white_skin), SetField(the_person,"skin", "white"), Function(cheat_redraw_skin)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Tan Skin" action [SetField(the_person,"body_images", tan_skin), SetField(the_person,"skin", "tan"), Function(cheat_redraw_skin)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        textbutton "Black Skin" action [SetField(the_person,"body_images", black_skin), SetField(the_person,"skin", "black"), Function(cheat_redraw_skin)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                    vbox: # Column 2, unused
-                        pass
-
-            if cpy: # Personality Related Options
-                vbox:
-                    textbutton "Personality Type" action ToggleVariable("cpyt") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 # Expands to hairstyles
-                    textbutton "Opinions" action ToggleVariable("cpyo") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "Not implemented, sorry" # Expands to opinions
-                    textbutton "Sexy Opinions" action ToggleVariable("cpyso") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "Not implemented, sorry" # Expands to sexy opinions
-
-                    textbutton "Next Page: [cmlypage]" action [If(cmlypage == 3, true = SetVariable("cmlypage", cmlypage - 2), false = SetVariable("cmlypage", cmlypage + 1))] alternate [If(cmlypage == 1, true = SetVariable("cmlypage", cmlypage + 2), false = SetVariable("cmlypage", cmlypage - 1))] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "Shift through pages"
-
-#            if cpy and cpyo: # the_person.opinions
-#                hbox:
-#                    if cmlypage == 1:
-#                        vbox:
-#                            textbutton "skirts [the_person.opinions["skirts"]]" action NullAction() style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip ""
-#
-#                        vbox:
-#                            pass
-#                    if cmlypage == 2:
-#                        vbox:
-#                            pass
-#
-#                    if cmlypage == 3:
-#                        vbox:
-#                            pass
-#
-#            if cpy and cpyso: # the_person.sexy_opinions
-#                hbox:
-#                    vbox:
-#                        pass
+    #            if cpy and cpyo: # the_person.opinions
+    #                hbox:
+    #                    if cmlypage == 1:
+    #                        vbox:
+    #                            textbutton "skirts [the_person.opinions["skirts"]]" action NullAction() style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip ""
+    #
+    #                        vbox:
+    #                            pass
+    #                    if cmlypage == 2:
+    #                        vbox:
+    #                            pass
+    #
+    #                    if cmlypage == 3:
+    #                        vbox:
+    #                            pass
+    #
+    #            if cpy and cpyso: # the_person.sexy_opinions
+    #                hbox:
+    #                    vbox:
+    #                        pass
 
 
 
 
-            if cpy and cpyt: # Personality Type selection
-                hbox:
-                    vbox:
-                        textbutton "Current: [the_person.personality.personality_type_prefix]" action NullAction() style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
-                        textbutton "Relaxed Personality" action [SetField(the_person,"personality", relaxed_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
-                        textbutton "Reserved Personality" action [SetField(the_person,"personality", reserved_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
-                        textbutton "Wild Personality" action [SetField(the_person,"personality", wild_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
-                        textbutton "Bimbo Personality" action [SetField(the_person,"personality", bimbo_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
-                        textbutton "Stephanie's Personality" action [SetField(the_person,"personality", stephanie_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
-                    vbox:
-                        textbutton "Sister's Personality" action [SetField(the_person,"personality", lily_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
-                        textbutton "Mom's Personality" action [SetField(the_person,"personality", mom_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                if cpy and cpyt: # Personality Type selection
+                    hbox:
+                        vbox:
+                            textbutton "Current: [the_person.personality.personality_type_prefix]" action NullAction() style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            textbutton "Relaxed Personality" action [SetField(the_person,"personality", relaxed_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            textbutton "Reserved Personality" action [SetField(the_person,"personality", reserved_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            textbutton "Wild Personality" action [SetField(the_person,"personality", wild_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            textbutton "Bimbo Personality" action [SetField(the_person,"personality", bimbo_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            textbutton "Stephanie's Personality" action [SetField(the_person,"personality", stephanie_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                        vbox:
+                            textbutton "Sister's Personality" action [SetField(the_person,"personality", lily_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            textbutton "Mom's Personality" action [SetField(the_person,"personality", mom_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
 
 screen cmc(): # Cheats for business / company
     zorder 49
