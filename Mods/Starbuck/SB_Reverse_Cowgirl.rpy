@@ -141,7 +141,7 @@ label scene_SB_reverse_cowgirl_2(the_girl, the_location, the_object, the_round):
                 "She takes a deep breath, but is able to slowly force herself to relax. You are able to slowly slide your finger inside her."
                 "It takes several seconds, but her rectum finally relaxes enough you are able to fully engulf your finger in her back passage."
                 the_girl.char "Mmm... keep it right there, I'm gonna take it slow."
-            "[the_girl.title] begins to slowly grind her gips again. With each movement forward your cock and finger slowly pull out of her, and with each movement back she takes them both deep."
+            "[the_girl.title] begins to slowly grind her hips again. With each movement forward your cock and finger slowly pull out of her, and with each movement back she takes them both deep."
             the_girl.char "Yes! Oh fuck [the_girl.mc_title], the pressure feels so good!"
             $ the_girl.change_arousal(the_girl.get_opinion_score("anal sex" * 5))
             if the_girl.arousal > 130:
