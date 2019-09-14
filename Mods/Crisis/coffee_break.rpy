@@ -52,11 +52,11 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
         scene_manager.draw_scene()
 
     if person_one.sluttiness > 40 and person_three.sluttiness > 40:
-        person_one.char "Don't you think [the_person.mc_title] has a nice bulge in his pants."
+        person_one.char "Don't you think [person_one.mc_title] has a nice bulge in his pants."
         person_two.char "I bet the he is hung like a horse."
         person_three.char "I've always wanted to take some horse riding lessons."
     else:
-        person_one.char "Don't you think [the_person.mc_title] is really good looking."
+        person_one.char "Don't you think [person_one.mc_title] is really good looking."
         person_two.char "I like how his butt flexes in his pants."
         person_three.char "To be honest, I much more prefer the other side."
 
