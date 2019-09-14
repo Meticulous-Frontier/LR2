@@ -7,7 +7,10 @@ init 2 python:
 init 10 python:
 
     def stay_wet_requirement(the_person):
-        return True
+        return not the_person.stay_wet
+
+    def calm_down_requirement(the_person):
+        return the_person.stay_wet
 
     def advance_time_stay_wet_requirement():
         return stay_wet_action.enabled
@@ -34,7 +37,8 @@ init 10 python:
     def wakeup_duty_crisis_requirement():
         return True
 
-    stay_wet_action = ActionMod("Stay wet.", stay_wet_requirement, "stay_wet_label", menu_tooltip = "Have the person stay aroused at all times.", category = "Slave Role")
+    stay_wet_action = ActionMod("Stay wet", stay_wet_requirement, "stay_wet_label", menu_tooltip = "Have the person stay aroused at all times.", category = "Slave Role")
+    calm_down_action = ActionMod("Calm down", calm_down_requirement, "stay_wet_label", menu_tooltip = "Have the person calm down.", category = "Slave Role", allow_disable = False)
     advance_time_stay_wet_action = ActionMod("Enable 'stay wet' functionality", advance_time_stay_wet_requirement, "advance_time_stay_wet_label", priority = 20, allow_disable = False, menu_tooltip = "People with 'stay_wet = True' have their minimum arousal set to 50%")
     if advance_time_stay_wet_action not in advance_time_action_list:
         advance_time_action_list.append(advance_time_stay_wet_action)
@@ -48,7 +52,7 @@ init 10 python:
     wakeup_duty_action = ActionMod("Wake me up in the morning.", wakeup_duty_requirement, "wakeup_duty_label", menu_tooltip = "Have your slave wake you up in the morning", category = "Slave Role")
     wakeup_duty_crisis = Action("Slave Alarm Clock", wakeup_duty_crisis_requirement, "slave_alarm_clock_label")
 
-    slave_role = Role("Slave", [stay_wet_action, collar_slave_action, uncollar_slave_action, wakeup_duty_action], hidden = False)
+    slave_role = Role("Slave", [stay_wet_action, calm_down_action, collar_slave_action, uncollar_slave_action, wakeup_duty_action], hidden = False)
 
 label stay_wet_label(the_person): # Can expand with dialogue options and degrees of arousal, but just setting up basic actions for now.
 
@@ -61,6 +65,7 @@ label stay_wet_label(the_person): # Can expand with dialogue options and degrees
     elif the_person.stay_wet == True:
         "You tell [the_person.possessive_title] to calm their tits."
         $ the_person.stay_wet = False
+        $ the_person.reset_arousal()
 
     return
 
@@ -241,7 +246,7 @@ label slave_alarm_clock_label(the_person):
             "Order her to take your cum in her mouth." if the_person.obedience >= 130:
                 mc.name "I'm almost there [the_person.title], I need to cum in your mouth."
                 $ the_person.change_obedience(5)
-                $ call_dialogue("sex_obedience_accept")
+                $ the_person.call_dialogue("sex_obedience_accept")
                 "She nods and leans over, stroking your cock faster and faster as she places the tip just inside her mouth."
                 "The soft touch of her lips pushes you over the edge. You gasp and climax, shooting your hot load into [the_person.possessive_title]'s waiting mouth."
                 $ the_person.cum_in_mouth()
