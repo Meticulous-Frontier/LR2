@@ -230,7 +230,7 @@ screen cheat_menu():
         if editing_target is not None:
             frame:
                 xalign 0.5
-                xysize (1100, 200)
+                xysize (1100, 275)
                 grid 5 1:
                     xfill True
                     vbox:
@@ -710,7 +710,7 @@ screen cheat_hair_dresser(person, old_hair_style, old_hair_colour): ##Pass the p
                                         sensitive True
                                         xoffset 20
                                         action [
-                                            SetField(selected_hair_style, "colour", [current_r, current_g, current_b, current_a]),                                            
+                                            SetField(selected_hair_style, "colour", [current_r, current_g, current_b, current_a]),
                                             SetField(person, "hair_colour", [selected_hair_colour_name, [current_r,current_g,current_b,current_a]]),
                                             SetField(person, "hair_style", selected_hair_style),
                                             Function(person.draw_person)
