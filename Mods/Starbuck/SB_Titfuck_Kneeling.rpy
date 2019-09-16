@@ -1,14 +1,14 @@
 ﻿init:
     python:
         SB_Titfuck_Kneeling = Position("Titfuck",   #Name of the position in the sex position selection screen
-        20,                                         #Required sluttiness for girl to consider. 20 sluttiness = 1 heart
-        40,                                         #Max temporary sluttiness from postions
+        25,                                         #Required sluttiness for girl to consider. 20 sluttiness = 1 heart
+        60,                                         #Max temporary sluttiness from postions
         "blowjob",                                  #Image name used for the position
         "Kneel",                                    #Description of female pose. Requires room item that accomodates this descriptor: EG, bed for "laying"
         "Tits",                                     #Girl part that must be available to select position. Can be "None", "Tits", or "Vagina"
         "Foreplay",                                 #Skill used to determine how fast arousal is gained each round
         15,                                         #Base female arousal gain per round
-        22,                                         #Base male arousal gain per round
+        20,                                         #Base male arousal gain per round
         [],                                         #"Connections". Currently unused as far as I can tell. Use link_positions() or Link_positions_two_way() instead
         "intro_SB_Titfuck_Kneeling",                #Name of label describing getting into positions
         ["scene_SB_Titfuck_Kneeling_1","scene_SB_Titfuck_Kneeling_2"],  #List of labels describing the act of the positions
@@ -37,7 +37,7 @@ label intro_SB_Titfuck_Kneeling(the_girl, the_location, the_object, the_round):
         the_girl.char "Why are you wearing this thing? Lets take this off so I can take care of you better..."
         "[the_girl.possessive_title] pulls off your condom."
         $ mc.condom = False
-    "[the_girl.possessive_title] looks up at your from her knees. She looks you right in the eyes as she leans foward and slides your cock between her tits."
+    "[the_girl.possessive_title] looks up at you from her knees. She looks you right in the eyes as she leans foward and slides your cock between her tits."
     "With both hands holding her breasts together, she slowly starts to move her pillowy flesh up and down your erection."
 
     return
@@ -55,20 +55,39 @@ label scene_SB_Titfuck_Kneeling_1(the_girl, the_location, the_object, the_round)
         "[the_girl.title] mutters a quick apology, but lightens up her grip. It feels much better when she resumes stroking you."
     else: #Is experienced
         "[the_girl.title]'s creamy pillows feel amazing wrapped around your erection."
-        "[the_girl.possessive_title] lets out a moan, as she pinches her nipples while you pound her pillows."
+        "[the_girl.possessive_title] lets out a moan. She pinches her nipples while you pound her pillows."
+
+        "She grabs your cock with her hand and then pulls her chest back from around you. She takes the tip of your cock and uses it to tease her nipples."
+        the_person.char "Mmm, my nipples are so sensitive."
+        "[the_girl.title] raps her chest a few times now with your cock, sending ripples out from the point of impact."
 
     return
 
 #The second position label
 label scene_SB_Titfuck_Kneeling_2(the_girl, the_location, the_object, the_round):
-    "You ran your hand through [the_girl.title]'s hair while she bounces her mammaries up and down."
+    "You run your hand through [the_girl.title]'s hair while she bounces her mammaries up and down."
     "You move your hand down to her shoulder and grasp it firmly, stopping her motion. You begin to buck your hips, giving her a break from her motions."
     "Her hands move to your ass, and you can feel her gently urging you as you thrust up against her."
-    #if the_girl.has_large_tits():   #Must have a certain cup size
-
-
-    #else:                           #She has smaller tits
-
+    if the_girl.has_large_tits():   #Must have a certain cup size
+        "You look down and can barely see the tip of your cock poking up from between [the_girl.title]'s generous chest."
+        mc.name "Your tits feel so good. You should play with them while I thrust."
+        "She takes her hands and runs them along the sides of her breasts. Her abundance of titflesh feels amazing wrapped around you."
+        "[the_girl.title] starts to pinch and pull at her nipples."
+        if SB_check_fetish(the_girl, cum_external_role):
+            the_person.char "Mmm, your cock is so hot, I can't wait to feel your cum bursting out, all over me."
+            "She pinches her nipples hard and pulls on them, causing her to cry out."
+            $ the_girl.change_arousal(10)
+        else:
+            the_person.char "Your cock is so hot, it feels so right up against my body like this."
+            "She pinches her nipples hard and pulls on them, causing her to cry out."
+            $ the_girl.change_arousal(5)
+    else:                           #She has smaller tits
+        "Her hands leave your ass and she brings her hands to the sides of her chest, squishing her tits together to try and stimulate you better."
+        mc.name "Mmm that's it, push them together like that."
+        "You keep thrusting. [the_girl.title] gathers some saliva in her mouth and then spits on the head of your cock."
+        the_person.char "Gotta keep things lubricated..."
+        "She spits again. You can feel her spit coating your cock and it slides a little smoother between her tits now."
+    "You let go of her shoulders. She looks up at you, smiles, and then resumes fucking you with her tits."
     return
 
 #You can make more than 2 position labels. This one is currently unused. To use it, add the label name to the position declaration at the beginning of the file with the other two labels
@@ -110,7 +129,7 @@ label outro_SB_Titfuck_Kneeling(the_girl, the_location, the_object, the_round):
             $ the_girl.change_obedience(5*the_girl.get_opinion_score("cum facials"))        #Feels good to serve MC
         "Slowly recovering, you look at [the_girl.possessive_title]'s cum covered upper body. Her eyes are closed and she is absentmindedly playing with some of the cum that is starting to run down her cleavage."
         the_girl.char "Yes! Its so hot. It feels so good on my skin..."
-    elif the_girl.effective_sluttiness() > 60:          #No cum fetish, but still slutty
+    elif the_girl.effective_sluttiness() > 60 or the_girl.get_opinion_score("being covered in cum") > 0:          #No cum fetish, but still slutty
         "[the_girl.possessive_title] smiles wide as your cum splashes onto her body."
         $ the_girl.cum_on_tits()
         $ SB_cum_fetish_blowjob.redraw_scene(the_girl)       #Must redraw scene to see cum on the girl
