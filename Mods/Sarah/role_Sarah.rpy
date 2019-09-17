@@ -11,10 +11,11 @@
 # Required labels:
 # INTRO
 # Hire
-# Story part one: She catches you in the office on Saturday, invites you out for drinks. She ends up at your place
-# Story part two: Catch her swiping breast enhancement serums on friday
+# Story arc part one: She catches you in the office on Saturday, invites you to bar where she is meeting a friend. Close the bar down with her
+# Story arc part one: She comes looking for you at the office on Saturday. Invites you out to drinks with jut her. She winds up at your place.
+# Story arc part three: Catch her swiping breast enhancement serums on friday  NOTE: Part three has separate requirements from one and two and could happen before or after either part.
 # Following monday, observe the results
-# Story part three: Help her seduce another employee
+# Story part four: Help her seduce another employee
 #
 # Intro: mandatory event, in the AM knocks on MC home selling solar panels.
 # Hiring: mandatory event. Call up Sarah and hire her for the HR position.
@@ -56,6 +57,9 @@ init 2 python:
         sarah.home = Sarah_home
 
         sarah.home.add_person(sarah)
+        sarah.event_triggers_dict["epic_tits_progress"] = 0    # 0 = not started, 1 = mandatory event triggered, 2 = tits epic
+        sarah.event_triggers_dict["drinks_out_progress"] = 0   # 0 = not started, 1 = third wheel event complete, 2 = grab drinks complete
+
 
         Sarah_intro = Action("Sarah_intro",Sarah_intro_requirement,"Sarah_intro_label") #Set the trigger day for the next monday. Monday is day%7 == 0
         mc.business.mandatory_crises_list.append(Sarah_intro) #Add the event here so that it pops when the requirements are met.
@@ -85,6 +89,26 @@ init -1 python:
         if time_of_day == 1:
             if day%7 == 0:  #Monday
                 return True
+        return False
+
+    def Sarah_third_wheel_requirement():
+        if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 1: #Don't run this if epic tits is in progress
+            return False
+        if time_of_day > 1:
+            if sarah.sluttiness > 15:
+                if day%7 == 5:  #Saturday
+                    if mc.is_at_work():
+                        return True
+        return False
+
+    def Sarah_get_drinks_requirement():
+        if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 1: #Don't run this if epic tits is in progress
+            return False
+        if time_of_day > 1:
+            if sarah.sluttiness > 30:
+                if day%7 == 5:  #Saturday
+                    if mc.is_at_work():
+                        return True
         return False
 
 
@@ -182,6 +206,117 @@ label Sarah_hire_label():
     #TODO Hire Sarah officially here?
     $ HR_director_initial_hire = Action("Hire HR Director",HR_director_initial_hire_requirement,"HR_director_initial_hire_label", args = the_person) #Set the trigger day for the next monday. Monday is day%7 == 0
     $ mc.business.mandatory_crises_list.append(HR_director_initial_hire) #Add the event here so that it pops when the requirements are met.
+
+    return
+
+label Sarah_third_wheel_label():
+    $ the_person = sarah
+    #TODO going out outfit
+    "By yourself on the weekend at work, you get up for a minute and decide to stretch your legs and walk the hallways for a bit."
+    "As you pass by the HR offices, you notice the HR Director's office door is open and the light is on. You decide to investigate."
+    $ scene_manager.add_actor(the_person, position = "sitting")
+    "You see [the_person.possessive_title] sitting at her desk, rumaging through her drawers looking for something."
+    "She notices you step in her door and looks surprised."
+    the_person.char "Oh! Hey [the_person.mc_title]. I was just looking for something I left in my desk. What are you doing here? Isn't this place closed down for the weekend?"
+    mc.name "Yeah, well, I had a few things I wanted to get done over the weekend. Is it something I can help you find?"
+    the_person.char "I actually just found it! One second..."
+    "You see her pull a small, silver package out of her desk and shove it in her bag quickly... was that a condom?"
+    the_person.char "...sorry I just... you know, like to be prepared. You never know!"
+    mc.name "You look nice, you have a date tonight?"
+    "[the_person.title] blushes and looks down at her desk."
+    the_person.char "Errrmm... not really. I'm meeting a friend at the bar for a few drinks. I thought it was just going to be me and her, but she just texted me she is bringing her boyfriend."
+    mc.name "Ah... your friend... is she like, your wing-woman or something? Helping you pick up guys at the bar?"
+    the_person.char "Well, not exactly. I don't really want to talk about it right now."
+    "She glances up and looks at you for a moment. Suddenly you realize she is checking you out."
+    the_person.char "Say, what are you up to tonight, [the_person.mc_title]?"
+    mc.name "Well, I was gonna get a few more things done around here. But to be honest, I wouldn't be against grabbing a few drinks with an old friend, if that were to be suggested."
+    $ scene_manager.update_actor(the_person, emotion = "happy")
+    the_person.char "Aww, you wouldn't mind coming along? I hate being the third wheel. If you get bored you can leave at any time, I promise!"
+    mc.name "Nonsense, let me just wrap up what I was doing, lockup and we'll go."
+    "You head downtown with [the_person.char]. You decide to walk since it isn't very, and enjoy talking with her as you go."
+    #TODO change to downtown background.
+    $ scene_manager.update_actor(the_person, position = "stand2")
+    "Getting curious, you decide to ask her why she needed the condom at the office."
+    mc.name "So... when I first stepped into your office you were looking for something in your desk... was that a condom?"
+    "[the_person.title] doesn't stop walking, but you can see her get a little tense."
+    the_person.char "Yeah, it was."
+    mc.name "So, why did you need to come back and grab that?"
+    the_person.char "Well my friend has been dating this guy for a while and keeps complaining, he wants them to open up their relationship some, maybe bring a lucky guy or girl back to their place sometime..."
+    the_person.char "I've been out with them a couple of times now, hoping maybe they would show interest in me, but so far nothing."
+    if sarah.event_triggers_dict.get("epic_tits_progress", 0) < 2:
+        the_person.char "Her boyfriend... it's like he just looks right through me. I've seen them leave the bar with a girl before, and its always some dumb looking, busty girl."
+        mc.name "Don't be silly, you are so sexy. There is more to look for in a woman than chest size."
+        "She laughs at you sarcastically."
+        the_person.char "Ha! Very funny. No, I'm afraid the guys I meet tend to friend zone me pretty quick. The flat chested third wheel! I suspect that is how things will go tonight."
+    else:
+        the_person.char "I though that, you know, after taking those serums that her boyfriend might actually notice me now."
+        the_person.char "Really though, I'm about ready to move on. They still think of me as that flat chested third wheel I used to be!"
+    "[the_person.title] considers things for a bit."
+    the_person.char "However tonight goes... its pretty amazing you are willing to come out here with me like this."
+    mc.name "Of course, I can't remember the last time I said no to drinks with a single lady as beautiful as you."
+    the_person.char "There you go again! You know, it was a long time ago that we grew up together. But I still have so many fond memories of you. You always used to be so nice to me."
+    the_person.char "I remember one time, we were playing in the living room at my house, and suddenly a bug landed on my head. I started screaming! I was so scared."
+    $ scene_manager.update_actor(the_person, position = "stand4", emotion = "happy")
+    "She stops walking for a moment and turns to you, a serious, but happy look on her face."
+    the_person.char "Suddenly, you grabbed me. HOLD STILL! you yelled, and you knocked the bug off me and on the floor and stomped on it."
+    the_person.char "When my family moved away and the memories got old... I kept telling myself, we were just kids. He was sweet because we were just kids."
+    the_person.char "But meeting you again, now that we are adults... and getting to know you all over again. You are still that sweet boy."
+    the_person.char "You didn't even think twice about it tonight, when I asked you to go. That means a lot to me, you know?"
+    $ scene_manager.update_actor(the_person, position = "stand2")
+    "[the_person.possessive_title] turns and continues walking. You walk beside her the rest of the way to the bar in silence."
+
+    #TODO change background to bar.
+    $ sarah_friend = create_random_person() #TODO figure out how to properly delete this character later
+    $ sarah_friend.title = sarah_friend.name
+    $ sarah_friend.mc_title = mc.name
+    "When you get to the bar, [the_person.title] quickly spots her friend and leads you over to the table."
+    $ scene_manager.update_actor(the_person, position = "sitting")
+    $ scene_manager.add_actor(sarah_friend, position = "sitting", character_placement = character_left_flipped)
+    the_person.char "Hey [sarah_friend.title]! Good to see you."
+    sarah_friend.char "Hey girl! Is he with you?"
+    "She nods towards you."
+    the_person.char "Yup! This is my bo... I mean, an old friend of mine. [mc.name] this is [sarah_friend.title]!"
+    "You make your acquantainces and sit down. [sarah_friend.title] also introduces you to her boyfriend."
+    "You chat for a bit, but notice that [sarah_friend.title] keeps checking you out. Normally you would be testing the waters with her, but with [the_person.title] here, you are a little leary."
+    mc.name "Hey, how about I get us a couple drinks, [the_person.title]?"
+    the_person.char "Oh! That sounds great! Can you get me an appletini?"
+    "As you start to get up, [sarah_friend.title]'s boyfriend also excuses himself to the restroom, leaving the girls alone."
+    "It takes a few minutes to get the attention of the bartender. You order the drink for [the_person.title] and get yourself a nice bourbon, straight."
+    $ scene_manager.update_actor(the_person, position = "sitting", emotion = "sad")
+    "When you come back to the table, you notice that [the_person.possessive_title] is looking down at the table and looks upset about something."
+    mc.name "Hey! Here's your drink... are you okay?"
+    the_person.char "Yeah... yeah I'm fine I just umm, I need to go use the lady's room."
+    $ scene_manager.update_actor(the_person, position = "walking_away")
+    "She gets up in a hurry and walks quickly away. You look at [sarah_friend.title]"
+    $ scene_manager.remove_actor(the_person, reset_actor = False)
+    mc.name "Umm... any idea what that is about?"
+    sarah_friend.char "No idea... we were just talking about, well you actually."
+    "Something about the way she says it makes you uncomfortable."
+    sarah_friend.char "[the_person.name] says you are a great guy, a good friend of hers."
+    mc.name "Yeah, something like that I guess..."
+    sarah_friend.char "What do you say we get out of here? Like back to my place?"
+    mc.name "That sounds pretty good actually. [the_person.name] will be excited to hear that I think."
+    sarah_friend.char "Ha! No no, I mean, just you. [the_person.name] is a good friend but..."
+    mc.name "but?"
+    if sarah.event_triggers_dict.get("epic_tits_progress", 0) < 2:
+        sarah_friend.char "My boyfriend... he just isn't attracted to her. I mean, have you seen her chest? Like, neither have we!"
+        "You feel yourself getting angry at her crude remarks."
+    else:
+        sarah_friend.char "My boyfriend can't stop staring at her tits. It's pissing me off! I can't believe she got implants, she is such a whore."
+        "You feel yourself getting angry at her crude remarks."
+    "You are able to restrain yourself, but only just barely."
+    mc.name "[the_person.name] has an amazing body, and a great personality to go with it. If you and your boyfriend don't see that, I don't think anything with me can work out."
+    sarah_friend.char "Pfft, whatever."
+    #TODO
+
+
+
+
+
+    return
+
+label Sarah_get_drinks_label():
+    pass
 
     return
 

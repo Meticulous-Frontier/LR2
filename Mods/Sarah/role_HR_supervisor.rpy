@@ -41,6 +41,9 @@ init -2 python:
                 return True
         return False
 
+    def HR_director_fire_requirement():
+        return True
+
 init 1301 python:
     def HR_director_creation_requirement():
         return True
@@ -58,7 +61,7 @@ label HR_director_mod_init():
     python:
         business_HR_director = None
         business_HR_tier = 0     # HR tiers based on progression. 1 = hired someone. 2 = training videos. 3 = company sponsored sexual training.
-        business_HR_eff_bonus = 0  #This bonus is based on OTHER factors and can be added to via events.
+        business_HR_eff_bonus = mc.business.effectiveness_cap - 100  #This bonus is based on OTHER factors and can be added to via events.
 
         Sarah_mod_initialization() #TODO this is for testing. Should probably figure out a better way to do this...
 
@@ -80,7 +83,7 @@ label fire_HR_director(the_person):
         the_person.char "I... I'm sorry I couldn't do a better job. Good luck filling the position, sir."
     else:
         $ the_person.draw_person(emotion="happy")
-        the_person.char "Whew, I have a really hard time working with people to be honest. I hope whoever replaces me can do a better job at it!"
+        the_person.char "Whew! I have a really hard time working with people to be honest. I hope whoever replaces me can do a better job at it!"
     $ the_person.special_role.remove(HR_director_role)
     $ business_HR_director = None
     #TODO remove monday meeting mandatory event

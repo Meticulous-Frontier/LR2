@@ -1,27 +1,22 @@
-# Right now this is just a copy paste of another personality. EVentually these responses should be changed to be unique to Sarah
-#
-#
-#
+#Testing Comments
 
 
+init 1301 python:
 
-
-﻿init 1301:
-    python:
-        def Sarah_titles(the_person):
-            return the_person.name
-        def Sarah_possessive_titles(the_person):
-            valid_possessive_titles = [Sarah_titles(the_person)]
-            valid_possessive_titles.append("Your childhood friend")
-            return valid_possessive_titles
-        def Sarah_player_titles(the_person):
-            return mc.name
-        Sarah_personality = Personality("wild",
-        common_likes = ["skirts", "small talk", "Fridays", "the weekend", "the colour purple", "makeup", "flirting", "HR work","heavy metal","punk"],
-        common_sexy_likes = ["doggy style sex", "giving blowjobs", "getting head", "anal sex", "public sex", "skimpy outfits", "showing her tits", "showing her ass", "threesomes", "not wearing underwear", "creampies", "bareback sex"],
-        common_dislikes = ["Mondays", "the colour pink", "supply work", "conservative outfits", "work uniforms"],
-        common_sexy_dislikes = ["being submissive", "being fingered", "missionary style sex", "giving handjobs"],
-        titles_function = Sarah_titles, possessive_titles_function = Sarah_possessive_titles, player_titles_function = Sarah_player_titles)
+    def Sarah_titles(the_person):
+        return the_person.name
+    def Sarah_possessive_titles(the_person):
+        valid_possessive_titles = [Sarah_titles(the_person)]
+        valid_possessive_titles.append("Your childhood friend")
+        return valid_possessive_titles
+    def Sarah_player_titles(the_person):
+        return mc.name
+    Sarah_personality = Personality("wild",
+    common_likes = ["skirts", "small talk", "Fridays", "the weekend", "the colour purple", "makeup", "flirting", "HR work","heavy metal","punk"],
+    common_sexy_likes = ["doggy style sex", "giving blowjobs", "getting head", "anal sex", "public sex", "skimpy outfits", "showing her tits", "showing her ass", "threesomes", "not wearing underwear", "creampies", "bareback sex"],
+    common_dislikes = ["Mondays", "the colour pink", "supply work", "conservative outfits", "work uniforms"],
+    common_sexy_dislikes = ["being submissive", "being fingered", "missionary style sex", "giving handjobs"],
+    titles_function = Sarah_titles, possessive_titles_function = Sarah_possessive_titles, player_titles_function = Sarah_player_titles)
 
 
 
