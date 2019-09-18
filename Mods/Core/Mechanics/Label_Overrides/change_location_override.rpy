@@ -37,22 +37,18 @@ label move_player_label(): #NOTE: Upon returning to the game_loop it calls the c
     return
 
 label change_location_label(place):
-
-
     $ new_location = place
-
     $ change_location_count = 0
-    $ change_location_max = len(change_location_action_list)
-    $ change_location_action_list_sorted = sorted(change_location_action_list, key = lambda x: x.priority) # Execute actions in order of priority, from lowest to highest.
 
-    while change_location_count < change_location_max:
-
-        $ act = change_location_action_list[change_location_count]
+    while change_location_count < len(change_location_action_list):
+        # iterate through sorted change location action list
+        $ act = sorted(change_location_action_list, key = lambda x: x.priority)[change_location_count]
         if act.is_action_enabled(): # Only run actions that have their requirement met.
-
             $ act.call_action()
             $ renpy.scene("Active")
 
         $ change_location_count += 1
 
+    $ del new_location
+    $ del act
     return mc.location # game_loop requires this to be provided.

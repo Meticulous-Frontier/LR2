@@ -1,6 +1,6 @@
 # Overrides the default advance time function in the game
 # it adds a increased chance for a crisis to occur when more time passed without a crisis
-# it adds a way of preventing the same crisis popping up over and over, whilst others never get triggered by remembering a set of occured events
+# it adds a way of preventing the same crisis popping up over and over, whilst others never get triggered by remembering a set of occurred events
 init -1 python:
     def advance_time_next_requirement():
         return True 
@@ -307,4 +307,7 @@ label advance_time_people_run_move_label():
     python:
         for (person, place) in people_to_process: #Now move everyone to where the should be in the next time chunk. That may be home, work, etc.
             person.run_move(place)
+            if person.follow_mc: # move follower to mc location
+                person.location().move_person(person, mc.location)
+                
     return

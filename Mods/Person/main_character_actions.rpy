@@ -1,11 +1,9 @@
 init 2 python:
     # Schedule Person | Allows you to modify the schedule of the_person. Change requirement to be dependent on obedience?
     schedule_actions_list = [] # NOTE: Use this list to display all the schedule actions.
-    # Follow Me | Allows you to put a person in a list_of_followers that comes along with you upon every location change (follow normal schedule on time advance, might want to remove them from the list during that, although they will come back if not)
-    list_of_followers = []
 
     # Schedule Person Requirements
-    def schedule_person_requirement(person):
+    def mc_schedule_person_requirement(person):
         if person.obedience >= 130 and not person in unique_character_list:
             return True
         return False
@@ -25,37 +23,32 @@ init 2 python:
             return "Requires: 150 Obedience"
 
     # Follow Me Requirements
-    def start_follow_requirement(person):
-        if person not in list_of_followers:
-            if person.obedience >= 110:
-                return True
-        return False
+    def mc_start_follow_requirement(person):
+        return not person.follow_mc and person.obedience >= 110
 
-    def stop_follow_requirement(person):
-        if person in list_of_followers:
-            return True
-        return False
+    def mc_stop_follow_requirement(person):
+        return person.follow_mc
 
     # Hire Person Requirements
-    def hire_person_requirement(person):
+    def mc_hire_person_requirement(person):
         if person not in mc.business.get_employee_list() + unique_character_list:
             return True
         return False
 
     # Rename Person Requirements
-    def rename_person_requirement(person):
+    def mc_action_rename_person_requirement(person):
         if person.obedience >= 120:
             return True
         return False
 
     # Spend the Night Requirements
-    def spend_the_night_requirement(person):
+    def mc_action_spend_the_night_requirement(person):
         if time_of_day is 4 and person.love > 50 and mc.location is person.home: #Has to be night, need to have some love and be in the_person's home location
             return True
         return False
 
     # Pay Strip Requirements
-    def pay_to_strip_requirement(person):
+    def mc_action_pay_to_strip_requirement(person):
         if not person is lily:
             if (person.obedience >= 130 and person.sluttiness >= 15) or (person.sluttiness >= 25 and person.get_opinion_score("not wearing anything") > 0) or person.obedience >= 150 or person.sluttiness >= 50:
                 if len(mc.location.people) > 1:
@@ -65,34 +58,42 @@ init 2 python:
 
 init 5 python:
     # Schedule Actions
-    schedule_person_action = ActionMod("Schedule [the_person.title]", schedule_person_requirement, "schedule_menu", menu_tooltip = "Schedule where the person should be throughout the day.", category = "Generic People Actions")
-    schedule_early_morning_action = ActionMod("Early Morning", schedule_early_morning_requirement, "schedule_person", args = [0], menu_tooltip = "Schedule where the person should be during the Early Morning.", allow_disable = False)
+    mc_schedule_person_action = ActionMod("Schedule [the_person.title]", mc_schedule_person_requirement, "mc_schedule_menu_label", menu_tooltip = "Schedule where the person should be throughout the day.", category = "Generic People Actions")
+
+    schedule_early_morning_action = Action("Early Morning", schedule_early_morning_requirement, "mc_schedule_person_label", args = [0], menu_tooltip = "Schedule where the person should be during the Early Morning.")
     schedule_actions_list.append(schedule_early_morning_action)
-    schedule_morning_action = ActionMod("Morning", schedule_morning_requirement, "schedule_person", args = [1], menu_tooltip = "Schedule where the person should be during the Morning.", allow_disable = False)
+
+    schedule_morning_action = Action("Morning", schedule_morning_requirement, "mc_schedule_person_label", args = [1], menu_tooltip = "Schedule where the person should be during the Morning.")
     schedule_actions_list.append(schedule_morning_action)
-    schedule_afternoon_action = ActionMod("Afternoon", schedule_afternoon_requirement, "schedule_person", args = [2], menu_tooltip = "Schedule where the person should be during the Afternoon.", allow_disable = False)
+
+    schedule_afternoon_action = Action("Afternoon", schedule_afternoon_requirement, "mc_schedule_person_label", args = [2], menu_tooltip = "Schedule where the person should be during the Afternoon.")
     schedule_actions_list.append(schedule_afternoon_action)
-    schedule_evening_action = ActionMod("Evening", schedule_evening_requirement, "schedule_person", args = [3], menu_tooltip = "Schedule where the person should be during the Evening.", allow_disable = False)
+
+    schedule_evening_action = Action("Evening", schedule_evening_requirement, "mc_schedule_person_label", args = [3], menu_tooltip = "Schedule where the person should be during the Evening.")
     schedule_actions_list.append(schedule_evening_action)
-    schedule_night_action = ActionMod("Night", schedule_night_requirement, "schedule_person", args = [4], menu_tooltip = "Schedule where the person should be during the Night.", allow_disable = False)
+
+    schedule_night_action = Action("Night", schedule_night_requirement, "mc_schedule_person_label", args = [4], menu_tooltip = "Schedule where the person should be during the Night.")
     schedule_actions_list.append(schedule_night_action)
 
-    start_follow_action= ActionMod("Follow me.", start_follow_requirement, "start_follow", menu_tooltip = "Have the person follow you around.", category = "Generic People Actions")
-    stop_follow_action = ActionMod("Stop following me.", stop_follow_requirement, "stop_follow", menu_tooltip = "Have the person stop following you.", allow_disable = False, category = "Generic People Actions")
+    mc_start_follow_action = ActionMod("Follow me.", mc_start_follow_requirement, "mc_start_follow_label", menu_tooltip = "Have the person follow you around.", category = "Generic People Actions")
+    mc_stop_follow_action = ActionMod("Stop following me.", mc_stop_follow_requirement, "mc_stop_follow_label", menu_tooltip = "Have the person stop following you.", allow_disable = False, category = "Generic People Actions")
 
     # Hire Person | Allows you to hire a person if they are not already hired. (Moves them to the appropriate division, no duplicates)
-    hire_person_action = ActionMod("Employ [the_person.title]", hire_person_requirement, "hire_person", menu_tooltip = "Hire the the person to work for you in your business.", category = "Generic People Actions")
+    mc_hire_person_action = ActionMod("Employ [the_person.title]", mc_hire_person_requirement, "mc_hire_person_label", menu_tooltip = "Hire the the person to work for you in your business.", category = "Generic People Actions")
+
     # Rename Person | Opens a menu that allows you to change first and last name plus a (non- appended) custom the_person.title
-    rename_person_action = ActionMod("Rename [the_person.title]", rename_person_requirement, "rename_person", menu_tooltip = "Change the name of the person.", category = "Generic People Actions")
+    mc_rename_person_action = ActionMod("Rename [the_person.title]", mc_action_rename_person_requirement, "mc_rename_person_label", menu_tooltip = "Change the name of the person.", category = "Generic People Actions")
+
     # Spend the Night | Allows you to sleep in the home of a person you have increased the love stat.
-    spend_the_night_action = ActionMod("Spend the night with [the_person.possessive_title]", spend_the_night_requirement, "spend_the_night", menu_tooltip = "Allows you to sleep in this location.", category = "Generic People Actions")
+    mc_spend_the_night_action = ActionMod("Spend the night with [the_person.possessive_title]", mc_action_spend_the_night_requirement, "mc_spend_the_night_label", menu_tooltip = "Allows you to sleep in this location.", category = "Generic People Actions")
+
     # Pay to Strip | Allows you to enter the pay_strip label used in certain events if requirements are met.
-    pay_to_strip_action = ActionMod("Pay [the_person.title] to strip", pay_to_strip_requirement, "generic_role_pay_to_strip", menu_tooltip = "Pay the person to give you a strip tease.", category = "Generic People Actions")
+    pay_to_strip_action = ActionMod("Pay [the_person.title] to strip", mc_action_pay_to_strip_requirement, "mc_pay_to_strip_label", menu_tooltip = "Pay the person to give you a strip tease.", category = "Generic People Actions")
 
-    # A role added to all people in the game to enable actions through the "Special Actions Menu..."
-    generic_people_role = Role("Generic", [schedule_person_action, start_follow_action, stop_follow_action, hire_person_action, rename_person_action, spend_the_night_action, pay_to_strip_action], hidden = True) # This role is meant to not display in the person_ui_hud
+    main_character_actions_list = [mc_schedule_person_action, mc_start_follow_action, mc_stop_follow_action, mc_hire_person_action, mc_rename_person_action, mc_spend_the_night_action, pay_to_strip_action]
 
-label generic_role_pay_to_strip(person):
+
+label mc_pay_to_strip_label(person):
     # strip a copy of the current outfit (so review outfit can restore the original outfit)
     $ person.outfit = person.outfit.get_copy()
 
@@ -111,7 +112,7 @@ label generic_role_pay_to_strip(person):
     return
 
 # NOTE: Not sure where to place these actions yet. Basically actions that could fit on any person regardless of role.
-label spend_the_night(person): # Consider adding the sleep_action to the_person's room, but stats jump all over the place so doesn't nescessarily make sense.
+label mc_spend_the_night_label(person): # Consider adding the sleep_action to the_person's room, but stats jump all over the place so doesn't necessarily make sense.
     "You go to sleep in [person.home.name]."
     $ person.change_love(5)
     $ person.change_happiness(5)
@@ -119,7 +120,7 @@ label spend_the_night(person): # Consider adding the sleep_action to the_person'
     return
 
 
-label rename_person(person):
+label mc_rename_person_label(person):
     "You tell [person.possessive_title] that you are giving her a new name."
     while True:
         menu rename_person_menu:
@@ -147,7 +148,7 @@ label rename_person(person):
                 return
 
 # Hire Person Labels
-label hire_person(person):
+label mc_hire_person_label(person):
 
     python:
         if mc.business.funds < person.calculate_base_salary():
@@ -161,7 +162,7 @@ label hire_person(person):
         "No":
             return
 
-    "You complete the nessesary paperwork and hire [person.title]. What division do you assign them to?"
+    "You complete the necessary paperwork and hire [person.title]. What division do you assign them to?"
     menu:
         "Research and Development.":
             $ mc.business.add_employee_research(person)
@@ -203,7 +204,7 @@ label hire_person(person):
 
     # Schedule Person Labels
 
-label schedule_menu(person): # TODO: Find a way to handle "None" instances of schedule to display formalName on Action.
+label mc_schedule_menu_label(person): # TODO: Find a way to handle "None" instances of schedule to display formalName on Action.
     python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
         schedule_options = []
         for act in schedule_actions_list:
@@ -218,7 +219,7 @@ label schedule_menu(person): # TODO: Find a way to handle "None" instances of sc
         else:
             $ act_choice.call_action(person)
 
-label schedule_person(*args):
+label mc_schedule_person_label(*args):
     #$ person = the_person
     $ time_slot = args[0]
     python:
@@ -234,18 +235,17 @@ label schedule_person(*args):
         return
 
 # Follower Labels
-label start_follow(person):
+label mc_start_follow_label(person):
     "You tell [person.title] to follow you around."
 
     #if the_person.get_opinion_score("being submissive"):
 
-    $ the_person.add_follower()
-
+    $ the_person.follow_mc = True
     $ the_person.personality.get_dialogue(the_person, "seduction_accept_crowded")
 
     return
 
-label stop_follow(person):
+label mc_stop_follow_label(person):
     python:
         if the_person.schedule[time_of_day] is the_person.home:
             schedule_destination = "my room."
@@ -254,7 +254,7 @@ label stop_follow(person):
 
     "You tell [person.title] to stop following you around."
 
-    $ the_person.remove_follower()
+    $ the_person.follow_mc = False
 
     $ the_person.draw_person(position = "walking_away")
 
