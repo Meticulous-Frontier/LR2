@@ -278,7 +278,7 @@ screen cm(): # Overlaps the screen "screen goal_hud_ui():" in script.rpy
             if "the_person" in globals() and the_person is not None:
                 textbutton "Edit: [the_person.name]" action [ToggleScreen("cmoc"), Hide("cmmc"), Hide("cmc"), Hide("cmw")] style "textbutton_style" text_style "textbutton_text_style" xsize 245 tooltip "Cheats for other characters"
 
-            if "mc.business" in globals():
+            if "main_business" in globals():
                 textbutton "Company" action [ToggleScreen("cmc"), Hide("cmoc"), Hide("cmmc"), Hide("cmw")] style "textbutton_style" text_style "textbutton_text_style" xsize 245
 
             if "day" in globals():
