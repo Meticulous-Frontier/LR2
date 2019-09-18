@@ -20,7 +20,6 @@ init -1 python:
 
         update_person_opinions(return_character)
         update_random_person(return_character)
-        update_person_roles(return_character)
         rebuild_wardrobe(return_character)
         update_person_outfit(return_character)
 
@@ -68,21 +67,6 @@ init -1 python:
         # A person could have dialog even if we don't know her
         if person.possessive_title is None:
             person.set_possessive_title("The unknown woman")
-        return
-
-    # bind the generic people role actions to the people in the game
-    def update_person_roles(person):
-        # Adds mandatory roles to person
-        if "generic_people_role" in globals():
-            if find_in_list(lambda x: x == generic_people_role, person.special_role) is None:
-                person.special_role.append(generic_people_role)
-
-            # enable role actions based on configuration settings
-            for role_action in find_in_list(lambda x: x == generic_people_role, person.special_role).actions:
-                found = find_in_list(lambda x: x == role_action, action_mod_list)
-                if found:
-                    role_action.enabled = found.enabled
-                    del found
         return
 
     def update_cougar_personality(person):
@@ -171,10 +155,14 @@ label activate_generic_personality(stack):
         the_person.generate_home()
         the_person.home.add_person(the_person)
 
+        # add mc actions
+        for action in main_character_actions_list:
+            if action not in mc.main_character_actions:
+                mc.main_character_actions.append(action)
+
         # update characters in game
         for person in all_people_in_the_game():
             update_random_person(person)
-            update_person_roles(person)
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
@@ -189,10 +177,14 @@ label update_generic_personality(stack):
             if not find_in_list(lambda x: x == cougar_personality, list_of_personalities) is None:
                 list_of_personalities.remove(cougar_personality)
 
+        # add mc actions
+        for action in main_character_actions_list:
+            if action not in mc.main_character_actions:
+                mc.main_character_actions.append(action)
+
         # update characters in game (save game)
         for person in all_people_in_the_game():
             update_random_person(person)
-            update_person_roles(person)
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)

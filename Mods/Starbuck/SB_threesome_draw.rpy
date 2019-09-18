@@ -10,7 +10,7 @@ init 1 python:
     sexy_opinions_list.append("threesomes")
 
     def SB_draw_two_person_scene(person_one, person_two, one_position = None, one_emotion = None, one_special_modifier = None, one_pos_x = 1.0, one_pos_y = 1.0, one_scale = 1.0, two_position = None, two_emotion = None, two_special_modifier = None, two_pos_x = 1.0, two_pos_y = 1.0, two_scale = 1.0): #Draw two people.
-    #NOTE person two is always drawn second.
+        #NOTE person two is always drawn second.
         renpy.scene("Active")
         renpy.show_screen("SB_two_person_info_ui", person_one, person_two)
         if one_position is None:
@@ -93,6 +93,170 @@ init 1 python:
         renpy.show(person_two.name,at_list=[transform_two, scale_person(person_two.height)],layer="Active",what=final_image_2,tag=person_two.name)
         return
 
+label SB_threesome_setup_helper(): #This function is designed to help come up with number for threesome positions.
+    $ the_person_one = None
+    $ the_person_two = None
+    $ person_one_position = None
+    $ person_two_position = None
+    $ person_one_emotion = None
+    $ person_two_emotion = None
+    $ person_one_pos_x = 1.0
+    $ person_one_pos_y = 1.0
+    $ person_two_pos_x = 1.0
+    $ person_two_pos_y = 1.0
+    $ person_one_scale = 1.0
+    $ person_two_scale = 1.0
+    $ pos_tuple_list = []
+    python:
+        pos_tuple_list.append(["stand2", "stand2"])
+        pos_tuple_list.append(["stand3", "stand3"])
+        pos_tuple_list.append(["stand4", "stand4"])
+        pos_tuple_list.append(["stand5", "stand5"])
+        pos_tuple_list.append(["walking_away", "walking_away"])
+        pos_tuple_list.append(["kissing", "kissing"])
+        pos_tuple_list.append(["doggy", "doggy"])
+        pos_tuple_list.append(["missionary", "missionary"])
+        pos_tuple_list.append(["blowjob", "blowjob"])
+        pos_tuple_list.append(["against_wall", "against_wall"])
+        pos_tuple_list.append(["back_peek", "back_peek"])
+        pos_tuple_list.append(["sitting", "sitting"])
+        pos_tuple_list.append(["standing_doggy" "standing_doggy"])
+        pos_tuple_list.append(["cowgirl", "cowgirl"])
+        pos_tuple_list.append(["Leave","Leave"])
+    $ SB_menu_choice = None
+
+    # (person_one, person_two, one_position = None, one_emotion = None, one_special_modifier = None, one_pos_x = 1.0, one_pos_y = 1.0, one_scale = 1.0, two_position = None, two_emotion = None, two_special_modifier = None, two_pos_x = 1.0, two_pos_y = 1.0, two_scale = 1.0):
+
+    "Please select person one."
+    $ tuple_list = known_people_in_the_game([mc]) + ["Back"]
+    call screen person_choice(tuple_list, draw_hearts = True, show_person_preview = False)
+    $ the_person_one = _return
+    $ del tuple_list
+
+    "Please select person two."
+    $ tuple_list = known_people_in_the_game([mc]) + ["Back"]
+    call screen person_choice(tuple_list, draw_hearts = True, show_person_preview = False)
+    $ the_person_two = _return
+    $ del tuple_list
+
+    # for position in ["stand2","stand3","stand4","stand5","walking_away","kissing","doggy","missionary","blowjob","against_wall","back_peek","sitting","standing_doggy","cowgirl"]:
+    #     pos_tuple_list.append(position)
+    "Please select person one position."
+    call SB_select_girl_position() from SB_call_pos_1
+    $ person_one_position = _return
+
+    "Please select person two position."
+    call SB_select_girl_position() from SB_call_pos_2
+    $ person_two_position = _return
+    #$ person_two_position = SB_select_girl_position()
+
+    #$ SB_draw_two_person_scene(the_person_one, the_person_two)
+
+    $ SB_draw_two_person_scene(person_one = the_person_one, person_two = the_person_two, one_position = person_one_position, two_position = person_two_position,
+    one_pos_x = person_one_pos_x, one_pos_y = person_one_pos_y, one_scale = person_one_scale,
+    two_pos_x = person_two_pos_x, two_pos_y = person_two_pos_y, two_scale = person_two_scale)
+
+    while SB_menu_choice != "Finish":
+
+        "What would you like to adjust?"
+        menu:
+            "Person One X":
+                call SB_change_value_amount()
+                $ person_one_pos_x += _return
+            "Person One Y":
+                call SB_change_value_amount()
+                $ person_one_pos_y += _return
+            "Person Two X":
+                call SB_change_value_amount()
+                $ person_two_pos_x += _return
+            "Person Two Y":
+                call SB_change_value_amount()
+                $ person_two_pos_y += _return
+            "Person One Scale":
+                call SB_change_value_amount()
+                $ person_one_scale += _return
+            "Person Two Scale":
+                call SB_change_value_amount()
+                $ person_two_scale += _return
+            "Finished":
+                $ SB_menu_choice = "Finish"
+                pass
+
+        $ SB_draw_two_person_scene(person_one = the_person_one, person_two = the_person_two, one_position = person_one_position, two_position = person_two_position,
+        one_pos_x = person_one_pos_x, one_pos_y = person_one_pos_y, one_scale = person_one_scale,
+        two_pos_x = person_two_pos_x, two_pos_y = person_two_pos_y, two_scale = person_two_scale)
+
+    $ output_string = 'person one x = ' + str(person_one_pos_x) + ' y = ' + str(person_one_pos_y) + ' scale = ' + str(person_one_scale)
+
+    #$ output_string = ('person one x = ' + str(person_one_pos_x)  + ' y = ' + str(person_one_pos_y) + ' scale = ' + str(person_one_scale) + 'person two x = ' + str(person_two_pos_x) ' y = ' + str(person_two_pos_y) + ' scale = ' + str(person_two_scale))
+    mc.name "[output_string]"
+
+    $ output_string = 'person two x = ' + str(person_two_pos_x) + ' y = ' + str(person_two_pos_y) + ' scale = ' + str(person_two_scale)
+
+    mc.name "[output_string]"
+    # "Person One X = [one_pos_x]"
+    # "Person One Y = [one_pos_y]"
+    # "Person One Scale = [one_scale]"
+    # "Person Two X = [two_pos_x]"
+    # "Person Two Y = [two_pos_x]"
+    # "Person Two Scale = [two_scale]"
+
+
+    return
+label SB_change_value_amount():
+    "How much do you want to change the value by?"
+    menu:
+        "+1":
+            return 0.01
+            pass
+        "+10":
+            return 0.10
+            pass
+        "+50":
+            return 0.50
+            pass
+        "-1":
+            return -0.01
+            pass
+        "-10":
+            return -0.10
+            pass
+        "-50":
+            return -0.50
+            pass
+    return 0
+
+label SB_select_girl_position():
+    menu:
+        "stand2":
+            return "stand2"
+        "stand3":
+            return "stand3"
+        "stand4":
+            return "stand4"
+        "stand5":
+            return "stand5"
+        "walking_away":
+            return "walking_away"
+        "kissing":
+            return "kissing"
+        "doggy":
+            return "doggy"
+        "missionary":
+            return "missionary"
+        "blowjob":
+            return "blowjob"
+        "against_wall":
+            return "against_wall"
+        "back_peek":
+            return "back_peek"
+        "sitting":
+            return "sitting"
+        "standing_doggy":
+            return "standing_doggy"
+        "cowgirl":
+            return "cowgirl"
+    return "stand2"  #Default case#
 
 label SB_test_draw_scene():
     $ SB_draw_two_person_scene(person_one = stephanie, person_two = lily, two_pos_x = 0.7)
