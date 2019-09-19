@@ -34,7 +34,7 @@ init 5 python:
         preferences["conservative outfits"]["feet"] = [sandles, shoes, slips, sneakers, short_socks]
         preferences["conservative outfits"]["accessories"] = [wool_scarf]
         preferences["dresses"] = {}
-        preferences["dresses"]["upper_body"] = [x for x in dress_list if x not in [lacy_one_piece_underwear, lingerie_one_piece]]
+        preferences["dresses"]["upper_body"] = [x for x in dress_list if x not in [bath_robe + lacy_one_piece_underwear, lingerie_one_piece]]
         preferences["skirts"] = {}
         preferences["skirts"]["lower_body"] = skirts_list
         preferences["pants"] = {}
