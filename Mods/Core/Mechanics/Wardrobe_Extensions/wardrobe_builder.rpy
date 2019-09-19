@@ -162,7 +162,7 @@ init 5 python:
 
             color_upper, color_lower, color_feet = self.get_main_color_scheme()
 
-            upper_item_list = [x for x in dress_list + shirts_list if x not in [lacy_one_piece_underwear, lingerie_one_piece]]
+            upper_item_list = [x for x in dress_list + shirts_list if x not in [bath_robe, lacy_one_piece_underwear, lingerie_one_piece]]
 
             # find upper body item
             filtered_upper_list = list(filter(lambda x: x.slut_value <= points, upper_item_list))
