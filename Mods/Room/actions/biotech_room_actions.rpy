@@ -154,6 +154,7 @@ label cloning_process(person = the_person): # default to the_person when not pas
                         personality = person.personality, custom_font = None, name_color = None, dial_color = None, starting_wardrobe = person.wardrobe, stat_array = None, skill_array = None, sex_array = None,
                         start_sluttiness = person.sluttiness, start_obedience = person.obedience, start_happiness = person.happiness, start_love = person.love, start_home = None, title = "Clone", possessive_title = "Your creation", mc_title = "Creator", relationship = "Single", kids = 0)
 
+                    clone.generate_home()
                     clone.schedule[0] = rd_division_basement
                     clone.schedule[1] = rd_division_basement
                     clone.schedule[2] = rd_division_basement
