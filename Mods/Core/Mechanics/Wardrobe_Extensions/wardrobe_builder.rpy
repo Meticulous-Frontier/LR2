@@ -14,8 +14,8 @@ init 5 python:
     # generate a more useable default color palette
     if len(persistent.colour_palette) == 10:
         persistent.colour_palette = [
-            [.20, .29, .70, .95],  [0, .45, .73, .95], [.26, .49, .76, .95], [.89, .65, .34, .95], [.96, .77, .19, .95], [.98, .92, .36, .95],
-            [.33, .10, .06, .95], [.80, .26, .04, .95], [.99, .42, .52, .95], [.87, .44, .63, .95], [1, .41, .71, .95], [1, .73, .85, .95],
+            [0, .278, .671, .95],  [.392, .584, .929, .95], [.282, .239, .545, .95], [.89, .65, .34, .95], [.96, .77, .19, .95], [.98, .92, .36, .95],
+            [.33, .10, .06, .95], [.80, .26, .04, .95], [.843, .039, .325, .95], [.87, .44, .63, .95], [1, .41, .71, .95], [1, .73, .85, .95],
             [.29, .32, .12, .95], [.18, .54, .34, .95], [.0, .8, .6, .95], [.41, .16, .38, .95], [.45, .31, .59, .95], [.71, .4, .85, .95],
             [.95, .95, .95, .95], [.15, .15, .15, .95],
             [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1]    # allow for 6 unused user definable colors
@@ -52,15 +52,15 @@ init 5 python:
         preferences["makeup"]["accessories"] = [light_eye_shadow, heavy_eye_shadow, blush, lipstick]
         preferences['lingerie'] = {}
         preferences['lingerie']["upper_body"] = [lacy_one_piece_underwear, lingerie_one_piece, strapless_bra, lace_bra, thin_bra, corset]
-        preferences['lingerie']["lower_body"] = [cute_panties, lace_panties, cute_lace_panties, tiny_lace_panties, thin_panties, thong, tiny_g_string]
+        preferences['lingerie']["lower_body"] = [lace_panties, cute_lace_panties, tiny_lace_panties, thin_panties, thong, tiny_g_string]
         preferences['lingerie']["feet"] = [thigh_highs, fishnets, garter_with_fishnets]
         preferences['lingerie']['accessories'] = [lace_choker, wide_choker]
 
         color_prefs = {}
         color_prefs["the colour blue"] = {}
-        color_prefs["the colour blue"]["violet blue"] = [.20, .29, .70, .95]
-        color_prefs["the colour blue"]["french blue"] = [0, .45, .73, .95]
-        color_prefs["the colour blue"]["tufts blue"] = [.26, .49, .76, .95]
+        color_prefs["the colour blue"]["cobalt blue"] = [0, .278, .671, .95]
+        color_prefs["the colour blue"]["cornflower blue"] = [.392, .584, .929, .95]
+        color_prefs["the colour blue"]["dark slate blue"] = [.282, .239, .545, .95]
         color_prefs["the colour yellow"] = {}
         color_prefs["the colour yellow"]["indian yellow"] = [.89, .65, .34, .95]
         color_prefs["the colour yellow"]["saffron"] = [.96, .77, .19, .95]
@@ -68,7 +68,7 @@ init 5 python:
         color_prefs["the colour red"] = {}
         color_prefs["the colour red"]["bordeaux red"] = [.33, .10, .06, .95]
         color_prefs["the colour red"]["sinopia"] = [.80, .26, .04, .95]
-        color_prefs["the colour red"]["wild strawberry"] = [.99, .42, .52, .95]
+        color_prefs["the colour red"]["debian red"] = [.843, .039, .325, .95]
         color_prefs["the colour pink"] = {}
         color_prefs["the colour pink"]["thulian pink"] = [.87, .44, .63, .95]
         color_prefs["the colour pink"]["hot pink"] = [1, .41, .71, .95]

@@ -76,7 +76,7 @@ init 0 python:
                 return False
             if self.exclude_skirts and any(outfit.has_clothing(item) for item in skirts_list):
                 return False
-            if self.exclude_dresses and any(outfit.has_clothing(item) for item in dress_list):
+            if self.exclude_dresses and any(outfit.has_clothing(item) for item in [x for x in dress_list if x not in [bath_robe, lacy_one_piece_underwear, lingerie_one_piece]]):
                 return False
             if self.exclude_pants and any(outfit.has_clothing(item) for item in pants_list):
                 return False
