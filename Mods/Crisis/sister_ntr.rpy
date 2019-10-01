@@ -83,7 +83,7 @@ label sister_ntr_crisis_action_label:
             the_person.char "Oh, I like that, [man_name]. I'll give you a call after the classes, ok?"
             man_name "Great. See you tomorrow then!"
             $ the_person.sluttiness += 2
-            "You get back to your room and don't even hear from door closing as you fall asleep just as you head touches the pillow."
+            "You get back to your room and don't even hear from door closing. You fall asleep just as you head touches the pillow."
         else:
             $ the_person.strip_outfit_to_max_sluttiness()
             $ position = select_position(the_person)
