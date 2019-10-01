@@ -24,7 +24,7 @@ init 2 python: # Declare variables to use
         global salon_manager
 
         salon_manager = create_random_person(name = "Ophelia", last_name = "von Friseur", height = .9, age = renpy.random.randint(21,30), body_type = "thin_body",
-            personality =  None if not "salon_manager_personality" in globals() else salon_manager_personality, job = "Hair Stylist", starting_wardrobe = salon_wardrobe, eyes="blue", start_sluttiness = 10,
+            personality =  None if not "salon_manager_personality" in globals() else salon_manager_personality, job = "Hair Stylist", starting_wardrobe = salon_wardrobe, eyes="light blue", start_sluttiness = 10,
             possessive_title = "My stylist")
 
         if "salon_manager_role" in globals():
@@ -56,4 +56,4 @@ init 2 python: # Declare variables to use
     salon_introduction_action = Action("Ophelia's Hair Salon", salon_introduction_action_requirement, "salon_manager_greetings", menu_tooltip = "Ophelia's Hair Salon")
 
     # Create the room(s) I want to use.
-    mall_salon = Room("salon", "Hair Salon", [], room_background_image("Salon_Background.jpg"), [make_floor(), make_wall(), make_chair(), make_window()], [], [salon_action], True, [7,2], None, True)
+    mall_salon = Room("salon", "Hair Salon", [], room_background_image("Salon_Background.jpg"), [make_floor(), make_wall(), make_chair(), make_window()], [], [salon_action], True, [7,2], None, True, lighting_conditions = standard_indoor_lighting)

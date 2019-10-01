@@ -38,7 +38,7 @@ label intro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object, the_round
 
 label scene_SB_doggy_anal_dildo_dp_1(the_girl, the_location, the_object, the_round):
     "You give [the_girl.possessive_title]'s ass a good hard spank. She lets out a loud yelp"
-    $ the_girl.call_dialogue("sex_responses")
+    $ the_girl.call_dialogue("sex_responses_anal")
     if the_girl.sex_skills["Anal"] < 2: #Inexperienced
         "[the_girl.possessive_title] reflexively starts to pull away after you spank her. You grab her hips to keep her from pulling off completely."
         the_girl.char "Sorry, I just... I don't do this very often... please just be gentle with me!"
@@ -134,7 +134,7 @@ label scene_SB_doggy_anal_dildo_dp_2(the_girl, the_location, the_object, the_rou
     the_girl.char "Ah... I feel so full!"
     "The dildo is clearly making the experience much more intense for her."
     "You reach forward and place your hands on [the_girl.possessive_title]'s shoulders. With each thrust you pull her back onto you forcefully, your hips smacking her ass cheeks loudly. She arches her back and lets out a series of satisfied yelps."
-    $the_girl.call_dialogue("sex_responses")
+    $the_girl.call_dialogue("sex_responses_anal")
     if the_girl.arousal > 130:
         "[the_girl.possessive_title]'s pussy is now constantly spasming in orgasm. Her juices are running out from around the dildo and down the inside of her legs."
         "With every quiver and every spasm, her buttery butthole contracts and squeezes your cock, begging you to cum for her."
@@ -196,7 +196,7 @@ label scene_SB_doggy_anal_dildo_dp_3(the_girl, the_location, the_object, the_rou
 
 label outro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object, the_round):
     "[the_girl.possessive_title]'s tight ass draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
-    $the_girl.call_dialogue("sex_responses")
+    $the_girl.call_dialogue("sex_responses_anal")
     mc.name "Ah, I'm going to cum!"
     menu:
         "Cum inside of her.":

@@ -124,7 +124,7 @@ init -1:
         # narrator_messages: narrator voice after each item of clothing stripped, use '[person.<title>]' for titles and '[strip_choice.name]' for clothing item.
             # Can be an array of messages for variation in message per clothing item or just a single string or None for silent stripping
         # scene manager parameter is filled from that class so that all people present in scene are drawn
-        def strip_outfit_to_max_sluttiness(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, narrator_messages = None, character_placement = None, temp_sluttiness_boost = 0, position = None, emotion = None, scene_manager = None):
+        def strip_outfit_to_max_sluttiness(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, narrator_messages = None, character_placement = None, lighting = None, temp_sluttiness_boost = 0, position = None, emotion = None, scene_manager = None):
             # internal function to strip top clothing first.
             def get_strip_choice_upper_first(outfit, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True):
                 strip_choice = outfit.remove_random_upper(top_layer_first)
@@ -151,7 +151,7 @@ init -1:
             strip_choice = get_strip_choice_upper_first(test_outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet)
             # renpy.say("", strip_choice.name + "  (required: " + str(test_outfit.slut_requirement) +  ", sluttiness: " +  str(self.effective_sluttiness() + temp_sluttiness_boost) + ")")
             while strip_choice and self.judge_outfit(test_outfit, temp_sluttiness_boost):
-                self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
+                self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
                 self.outfit = test_outfit.get_copy() #Swap our current outfit out for the test outfit.
                 if msg_count > 0:   # do we need to show a random message and replace titles and outfit name
                     msg_idx = renpy.random.randint(1, msg_count)
@@ -313,7 +313,7 @@ init -1:
 
         Person.review_outfit = review_outfit_enhanced
 
-        def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, character_placement = None, from_scene = False): #Draw the person, standing as default if they aren't standing in any other position.
+        def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, lighting = None, character_placement = None, from_scene = False): #Draw the person, standing as default if they aren't standing in any other position.
             if position is None:
                 position = self.idle_pose
 
@@ -323,7 +323,10 @@ init -1:
             if character_placement is None: # make sure we don't need to pass the position with each draw
                 character_placement = character_right
 
-            # sometimes there is no outfit set, causeing the generate drawlist to fail, not sure why, but try to fix it here.
+            if lighting is None:
+                lighting = mc.location.get_lighting_conditions()
+
+            # sometimes there is no outfit set, causing the generate drawlist to fail, not sure why, but try to fix it here.
             if self.outfit is None:
                 if self.planned_outfit is None:
                     self.planned_outfit = self.wardrobe.decide_on_outfit2(self) # Use enhanced outfit function
@@ -336,7 +339,7 @@ init -1:
                 if show_person_info:
                     renpy.show_screen("person_info_ui",self)
 
-            final_image = self.build_person_displayable(position, emotion, special_modifier, show_person_info)
+            final_image = self.build_person_displayable(position, emotion, special_modifier, show_person_info, lighting)
             renpy.show(self.name,at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=(self.name + self.last_name + str(self.age)))
 
         # replace the default draw_person function of the person class
@@ -344,7 +347,7 @@ init -1:
         # add location to store original personality
         Person.original_personality = None
 
-        def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, special_modifier = None, character_placement = None, scene_manager = None): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
+        def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, special_modifier = None, lighting = None, character_placement = None, scene_manager = None): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
             #Note: this function includes a call to remove_clothing, it is not needed seperately.
             if position is None:
                 position = self.idle_pose
@@ -355,6 +358,9 @@ init -1:
             if emotion is None:
                 emotion = self.get_emotion()
 
+            if lighting is None:
+                lighting = mc.location.get_lighting_conditions()
+
             if character_placement is None: # make sure we don't need to pass the position with each draw
                 character_placement = character_right
 
@@ -364,15 +370,15 @@ init -1:
             else:   # when we are called from the scenemanager we have to draw the other characters
                 scene_manager.draw_scene_without(self)
 
-            bottom_displayable.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier)) #Get the face displayable, also always under clothing.
+            bottom_displayable.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier, eye_colour = self.eyes[1], lighting = lighting)) #Get the face displayable, also always under clothing.
 
-            bottom_displayable.append(self.body_images.generate_item_displayable(self.body_type,self.tits,position))  #Body is always under clothing
+            bottom_displayable.append(self.body_images.generate_item_displayable(self.body_type,self.tits,position, lighting = lighting))  #Body is always under clothing
             size_render = renpy.render(bottom_displayable[1], 10, 10, 0, 0) #We need a render object to check the actual size of the body displayable so we can build our composite accordingly.
             the_size = size_render.get_size()
             x_size = __builtin__.int(the_size[0])
             y_size = __builtin__.int(the_size[1])
 
-            bottom_clothing, split_clothing, top_clothing = self.outfit.generate_split_draw_list(the_clothing, self, position, emotion, special_modifier) #Gets a split list of all of our clothing items.
+            bottom_clothing, split_clothing, top_clothing = self.outfit.generate_split_draw_list(the_clothing, self, position, emotion, special_modifier, lighting = lighting) #Gets a split list of all of our clothing items.
             #We should remember that middle item can be None.
             for item in bottom_clothing:
                 bottom_displayable.append(item)
@@ -380,7 +386,7 @@ init -1:
             for item in top_clothing:
                 top_displayable.append(item)
 
-            top_displayable.append(self.hair_style.generate_item_displayable("standard_body",self.tits,position)) #Hair is always on top
+            top_displayable.append(self.hair_style.generate_item_displayable("standard_body",self.tits,position, lighting = lighting)) #Hair is always on top
 
             #Now we build our two composites, one for the bottom image and one for the top.
             composite_bottom_params = [(x_size,y_size)]

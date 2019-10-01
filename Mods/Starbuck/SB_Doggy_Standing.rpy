@@ -47,7 +47,7 @@ label intro_SB_doggy_standing(the_girl, the_location, the_object, the_round):
 
 label scene_SB_doggy_standing_1(the_girl, the_location, the_object, the_round):
     "Your hips slap against [the_girl.possessive_title]'s ass as you fuck her vigorously."
-    $ the_girl.call_dialogue("sex_responses")
+    $ the_girl.call_dialogue("sex_responses_vaginal")
     if the_girl.sex_skills["Vaginal"] < 2: #Inexperienced
         "After a particularly hard thrust, [the_girl.possessive_title] reflexively starts to pull away. You grab her hips to keep her from pulling off completely."
         the_girl.char "I'm sorry [the_girl.mc_title], thats a little too rough. Can you go a little slower?"
@@ -195,7 +195,7 @@ label scene_SB_doggy_standing_2(the_girl, the_location, the_object, the_round):
 
 label outro_SB_doggy_standing(the_girl, the_location, the_object, the_round):
     "[the_girl.possessive_title]'s creamy cunt draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
-    $the_girl.call_dialogue("sex_responses")
+    $the_girl.call_dialogue("sex_responses_vaginal")
     mc.name "Ah, I'm going to cum!"
     if the_girl.get_opinion_score("creampies") > 0:
         the_girl.char "Yes! Shove it in deep [the_girl.mc_title]!"

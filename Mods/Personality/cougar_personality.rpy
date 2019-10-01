@@ -209,7 +209,6 @@ label cougar_climax_responses_anal(the_person):
         the_person.char "Oh fuck, I think... I think I'm going to cum!"
     return
 
-
 label cougar_seduction_response(the_person):
     if the_person.obedience > 130:
         if the_person.sluttiness > 50:
@@ -263,35 +262,124 @@ label cougar_seduction_accept_alone(the_person):
             "Her eyes tell quite a different story."
     return
 
-label cougar_sex_responses(the_person):
+label cougar_sex_responses_foreplay(the_person):
     if the_person.arousal < 25:
         if the_person.sluttiness > 50:
-            the_person.char "Mmm, that's nice!"
+            the_person.char "Mmm, you know just what I like, don't you?"
         else:
-            the_person.char "Ah... that feels really nice!"
+            the_person.char "Oh my... that feels very good, [the_person.mc_title]!"
 
     elif the_person.arousal < 50:
         if the_person.sluttiness > 50:
-            the_person.char "Ah yes, that's it [the_person.mc_title], give it to [the_person.possessive_title]!"
+            "[the_person.title] closes her eyes and lets out a loud, sensual moan."
         else:
-            the_person.char "Oh my god, that feeling..."
+            the_person.char "Keep doing that [the_person.mc_title]... Wow, you're good!"
 
     elif the_person.arousal < 75:
         if the_person.sluttiness > 50:
-            "[the_person.title] bites down on her lower lip and growls sensually."
+            the_person.char "Oh gods above that feels amazing!"
         else:
-            "[the_person.possessive_title] mumbles softly to herself."
-            the_person.char "Fuck... Oh fuck... Oh fuck!"
+            the_person.char "Oh lord... I could get use to you touching me like this!"
     else:
         if the_person.sluttiness > 50:
             if the_person.relationship == "Single":
-                the_person.char "Oh... Please [the_person.mc_title], keep doing that to me!"
+                the_person.char "Touch me [the_person.mc_title], I want you to touch me!"
             else:
                 $ so_title = SO_relationship_to_title(the_person.relationship)
-                the_person.char "Ah! My [so_title] never makes me want to cum this badly! I'm so horney!"
+                the_person.char "I should feel bad... but my egoistic [so_title] never touches me this way!"
+                the_person.char "I need this, so badly!"
         else:
-            "[the_person.possessive_title] closes her eyes."
-            the_person.char "Yes [the_person.mc_title], just like that!"
+            the_person.char "I want you to keep touching me, I never guessed a young man could make me feel this way, but I want more of it!"
+    return
+
+label cougar_sex_responses_oral(the_person):
+    if the_person.arousal < 25:
+        if the_person.sluttiness > 50:
+            the_person.char "Oh [the_person.mc_title], you're so good to me."
+        else:
+            the_person.char "Oh my... that feels..."
+            "She sighs happily."
+            the_person.char "Yes, right there!"
+
+    elif the_person.arousal < 50:
+        if the_person.sluttiness > 50:
+            the_person.char "Yes, just like that! Mmm!"
+        else:
+            the_person.char "Keep doing that [the_person.mc_title], it's making me feel... very aroused."
+
+    elif the_person.arousal < 75:
+        if the_person.sluttiness > 50:
+            the_person.char "Mmm, you really know how to put that tongue of yours to good use. That feels amazing!"
+        else:
+            the_person.char "Oh lord... your tongue is addictive, I just want more of it!"
+    else:
+        if the_person.sluttiness > 50:
+            if the_person.relationship == "Single":
+                the_person.char "Oh I need this so badly [the_person.mc_title]! If you keep going you'll make me climax!"
+            else:
+                $ so_title = SO_relationship_to_title(the_person.relationship)
+                the_person.char "I should feel bad, but you make me feel so good, my worthless [so_title] never does this for me!"
+        else:
+            the_person.char "Oh sweet lord in heaven... This feeling is intoxicating!"
+    return
+
+label cougar_sex_responses_vaginal(the_person):
+    if the_person.arousal < 25:
+        if the_person.sluttiness > 50:
+            the_person.char "Mmm, I love feeling you inside of me!"
+        else:
+            the_person.char "Oh lord, you're so big... Whew!"
+
+    elif the_person.arousal < 50:
+        if the_person.sluttiness > 50:
+            "[the_person.title] closes her eyes and lets out a loud, sensual moan."
+        else:
+            the_person.char "Oh that feels very good, keep doing that!"
+
+    elif the_person.arousal < 75:
+        if the_person.sluttiness > 50:
+            the_person.char "Yes! Oh god yes, fuck me!"
+        else:
+            the_person.char "Oh lord your... cock feels so big!"
+    else:
+        if the_person.sluttiness > 50:
+            if the_person.relationship == "Single":
+                the_person.char "Keep... keep going [the_person.mc_title]! I'm going to climax soon!"
+            else:
+                $ so_title = SO_relationship_to_title(the_person.relationship)
+                the_person.char "Keep going! My [so_title]'s tiny cock never makes me climax and I want it so badly!"
+                the_person.char "I should feel bad, but all I want is your young cock in me right now!"
+        else:
+            "[the_person.title]'s face is flush as she pants and gasps."
+    return
+
+label cougar_sex_responses_anal(the_person):
+    if the_person.arousal < 25:
+        if the_person.sluttiness > 50:
+            the_person.char "Mmm, you feel so big when you're inside me like this."
+        else:
+            the_person.char "Be gentle, it feels like you're going to tear me in half!"
+
+    elif the_person.arousal < 50:
+        if the_person.sluttiness > 50:
+            the_person.char "Give it to me, [the_person.mc_title], give me every last inch!"
+        else:
+            the_person.char "Oh god! Oww! Move a little slower..."
+
+    elif the_person.arousal < 75:
+        if the_person.sluttiness > 50:
+            the_person.char "I hope my ass isn't too tight for you, I don't want you to cum early."
+        else:
+            the_person.char "I don't think I will be able to walk straight after this!"
+    else:
+        if the_person.sluttiness > 50:
+            if the_person.relationship == "Single":
+                the_person.char "You're young cock feels so stuffed inside me! Keep going, I might actually climax!"
+            else:
+                $ so_title = SO_relationship_to_title(the_person.relationship)
+                the_person.char "My [so_title] always wanted to try anal, but I told him it would never happen. My rear entrance belongs to you, [the_person.mc_title]!"
+        else:
+            the_person.char "Oh lord, this is actually starting to feel good... If you keep this up, I'm going to cum!"
     return
 
 label cougar_seduction_refuse(the_person):
@@ -356,6 +444,46 @@ label cougar_cum_mouth(the_person):
             the_person.char "Give me a little heads up next time, [the_person.mc_title]."
     return
 
+label cougar_cum_vagina(the_person):
+    if mc.condom:
+        if the_person.sluttiness > 75 or the_person.get_opinion_score("creampies") > 0:
+            the_person.char "Oh... your seed is so close to me. Just a thin, thin condom in the way..."
+        else:
+            the_person.char "I can feel your seed through the condom. Well done, there's a lot of it."
+
+    else:
+        if the_person.sluttiness > 75 or the_person.get_opinion_score("creampies") > 0:
+            if the_person.relationship != "Single":
+                $ so_title = SO_relationship_to_title(the_person.relationship)
+                the_person.char "Yes, give me your seed!"
+                the_person.char "If I become pregnant I can say it's my [so_title]'s. I'm sure he would believe it."
+            else:
+                the_person.char "Mmm, your semen is so nice and warm. I wonder how potent it is. You might have gotten me pregnant, you know."
+        else:
+            if the_person.relationship != "Single":
+                $ so_title = SO_relationship_to_title(the_person.relationship)
+                the_person.char "Oh no... You need to cum outside of me [the_person.mc_title]."
+                the_person.char "What would I tell my [so_title] if I got pregnant? He might not believe it's his!"
+            else:
+                the_person.char "Oh no... You need to cum outside of me [the_person.mc_title]."
+                the_person.char "I'm in no position to be getting pregnant."
+                the_person.char "Well, I suppose you have me in the literal position to get pregnant, but you know what I mean."
+    return
+
+label cougar_cum_anal(the_person):
+    if the_person.obedience > 130:
+        if the_person.sluttiness > 50:
+            $ pronoun = person_body_shame_string(the_person, "little anal slave")
+            the_person.char "Ah...yes pump your seed into your [pronoun]?"
+        else:
+            the_person.char "Oh my, you filled up my bottom, remember [the_person.mc_title], I'm only doing this for you."
+    else:
+        if the_person.sluttiness > 75 or the_person.get_opinion_score("anal creampies") > 0:
+            the_person.char "Cum inside me [the_person.mc_title], fill my ass with your cum!"
+        else:
+            the_person.char "Oh lord, I hope I'm ready for this!"
+    return
+
 label cougar_sex_strip(the_person):
     if the_person.sluttiness < 20:
         if the_person.arousal < 50:
@@ -374,10 +502,9 @@ label cougar_sex_strip(the_person):
             the_person.char "I'm really horny, I bet you want to see some more of me."
         else:
             the_person.char "I need to get this off, I want to feel your young body against mine!"
-
     return
 
-label cougar_suprised_exclaim(the_person):
+label cougar_surprised_exclaim(the_person):
     $rando = renpy.random.choice(["Oh my!","Oh, that's not good!", "Darn!", "Oh!", "My word!", "How about that!", "Shock and horror!", "I'll be jiggered!"])
     the_person.char "[rando]"
     return

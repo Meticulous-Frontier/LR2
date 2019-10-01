@@ -1120,7 +1120,7 @@ label hotwife_hookup_accept(the_person):
     "You give her a few tentative thrusts, then quickly pick up the pace and begin fucking her in earnest."
     "You set her phone to video mode, and take a clip of her backside rippling as you thrust in and out of her."
     "Your hips slap against [the_person.possessive_title]'s ass as you fuck her vigorously."
-    $ the_person.call_dialogue("sex_responses")
+    $ the_person.call_dialogue("sex_responses_vaginal")
     if mc.condom == True:
         "You grasp her ass with both hands and begin to grope her. You knead her cheeks as your hips slowly work your erection in and out of her."
         $ the_person.change_arousal(20) #90 + 8

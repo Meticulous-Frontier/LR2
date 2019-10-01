@@ -67,7 +67,7 @@ label intro_SB_anal_standing(the_girl, the_location, the_object, the_round):
 
 label scene_SB_anal_standing_1(the_girl, the_location, the_object, the_round):
     "Your hips slap against [the_girl.possessive_title]'s as you plunder her rectum."
-    $ the_girl.call_dialogue("sex_responses")
+    $ the_girl.call_dialogue("sex_responses_anal")
     if the_girl.sex_skills["Anal"] < 2: #Inexperienced
         "After a particularly hard thrust, [the_girl.possessive_title] reflexively starts to pull away. You grab her hips to keep her from pulling off completely."
         the_girl.char "I'm sorry [the_girl.mc_title], it hurts. Can you go a little slower?"
@@ -235,7 +235,7 @@ label scene_SB_anal_standing_2(the_girl, the_location, the_object, the_round):
 
 label outro_SB_anal_standing(the_girl, the_location, the_object, the_round):
     "[the_girl.possessive_title]'s tight ass draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
-    $the_girl.call_dialogue("sex_responses")
+    $the_girl.call_dialogue("sex_responses_anal")
     mc.name "Ah, I'm going to cum!"
     if mc.condom:
         the_girl.char "Oh god do it! Show me how much you love my ass!"

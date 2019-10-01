@@ -38,7 +38,7 @@ init 2 python:
 
         starbuck_wardrobe = wardrobe_from_xml("Starbuck_Wardrobe")
 
-        starbuck_home = Room("Starbuck's home", "Starbuck's home", [], apartment_background, [],[],[],False,[0.5,0.5], visible = False, hide_in_known_house_map = False)
+        starbuck_home = Room("Starbuck's home", "Starbuck's home", [], apartment_background, [],[],[],False,[0.5,0.5], visible = False, hide_in_known_house_map = False, lighting_conditions = standard_indoor_lighting)
         starbuck_home.add_object(make_wall())
         starbuck_home.add_object(make_floor())
         starbuck_home.add_object(make_bed())
@@ -1141,7 +1141,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     $ the_person.change_arousal(20)
     $ mc.change_arousal(25)#105
     "You can't take anymore. You let go of her shoulders and her upper body crashes roughly to the table. You grab her hips and plow deep into her pussy."
-    $the_person.call_dialogue("sex_responses")
+    $the_person.call_dialogue("sex_responses_vaginal")
     mc.name "Ah, I'm going to cum!"
     "You bottom out and explode deep inside of [the_person.possessive_title]. The heat of your semen painting her vaginal walls sends her into another orgasm."
     the_person.char "OH! I'M CUMMING AGAIN! YES [the_person.mc_title]!"

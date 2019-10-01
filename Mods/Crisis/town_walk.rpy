@@ -89,7 +89,7 @@ label town_walk_crisis_action_label:
             elif rand_chance == 2:
                 if the_person.outfit.vagina_available():
                     "She pushes 3 fingers inside, making a deep guttural noise."
-                    $ the_person.call_dialogue("sex_responses")
+                    $ the_person.call_dialogue("sex_responses_foreplay")
                 else:
                     "[the_person.possessive_title] keeps rubbing and her moans grow louder."
             else:

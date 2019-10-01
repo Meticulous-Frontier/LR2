@@ -49,6 +49,7 @@ init 5 python:
     crisis_chance = crisis_base_chance
     morning_crisis_chance = morning_crisis_base_chance
 
+    mandatory_advance_time = False
 
     advance_time_people_run_turn_action = ActionMod("End of day run people", advance_time_people_run_turn_requirement,
         "advance_time_people_run_turn_label", priority = 1, allow_disable = False)
@@ -160,6 +161,10 @@ label advance_time_enhanced:
     # increase crisis chance (every time slot)
     $ crisis_chance += 1
     $ del people_to_process
+    $ renpy.free_memory()
+    $ mc.location.show_background()
+    if mandatory_advance_time: #If a crisis has told us to advance time after it we do so.
+        call advance_time from _call_advance_time_advance_time_enhanced    
     return
 
 label advance_time_bankrupt_check_label():
@@ -185,6 +190,8 @@ label advance_time_random_crisis_label():
         #$ mc.log_event("General [[" + str(len(possible_crisis_list)) + "]: " + the_crisis.name, "float_text_grey")
         $ crisis_chance = crisis_base_chance
         $ crisis_tracker.append([c[0] for c in crisis_list].index(the_crisis)) # add crisis index to recent crisis list
+        if _return == "Advance Time":
+            $ mandatory_advance_time = True
         $ the_crisis.call_action()
         $ del the_crisis
     $ change_scene_display(mc.location) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
@@ -202,6 +209,8 @@ label advance_time_mandatory_crisis_label():
         $ the_crisis = mc.business.mandatory_crises_list[mandatory_crisis_count]
         if the_crisis.is_action_enabled():
             $ the_crisis.call_action()
+            if _return == "Advance Time":
+                $ mandatory_advance_time = True
             $ renpy.scene("Active")
             $ clear_list.append(the_crisis)
         $ mandatory_crisis_count += 1
@@ -218,6 +227,8 @@ label advance_time_mandatory_crisis_label():
 label advance_time_people_run_turn_label():
     # "advance_time_people_run_turn_label - timeslot [time_of_day]" #DEBUG
     python:
+        mandatory_advance_time = False
+
         people_to_process = [] #This is a master list of turns of need to process, stored as tuples [character,location]. Used to avoid modifying a list while we iterate over it, and to avoid repeat movements.
         for place in list_of_places:
             for person in place.people:
@@ -262,6 +273,8 @@ label advance_time_mandatory_morning_crisis_label():
         $ the_crisis = mc.business.mandatory_morning_crises_list[mandatory_morning_crisis_count]
         if the_crisis.is_action_enabled():
             $ the_crisis.call_action()
+            if _return == "Advance Time":
+                $ mandatory_advance_time = True
             $ renpy.scene("Active")
             $ clear_list.append(the_crisis)
         $ mandatory_morning_crisis_count += 1
@@ -284,6 +297,8 @@ label advance_time_random_morning_crisis_label():
         $ morning_crisis_chance = morning_crisis_base_chance
         $ morning_crisis_tracker.append([c[0] for c in morning_crisis_list].index(the_morning_crisis)) # add crisis index to recent crisis list
         $ the_morning_crisis.call_action()
+        if _return == "Advance Time":
+            $ mandatory_advance_time = True        
         $ del the_morning_crisis
     $ change_scene_display(mc.location) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
     return

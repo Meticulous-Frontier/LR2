@@ -31,7 +31,7 @@ init 2 python:
 
         Sarah_wardrobe = wardrobe_from_xml("Sarah_Wardrobe")
 
-        Sarah_home = Room("Sarah's home", "Sarah's home", [], apartment_background, [],[],[],False,[0.5,0.5], visible = False, hide_in_known_house_map = False)
+        Sarah_home = Room("Sarah's home", "Sarah's home", [], apartment_background, [],[],[],False,[0.5,0.5], visible = False, hide_in_known_house_map = False, lighting_conditions = standard_indoor_lighting)
         Sarah_home.add_object(make_wall())
         Sarah_home.add_object(make_floor())
         Sarah_home.add_object(make_bed())

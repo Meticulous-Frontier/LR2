@@ -54,7 +54,7 @@ label intro_SB_facing_wall(the_girl, the_location, the_object, the_round):
 
 label scene_SB_facing_wall_1(the_girl, the_location, the_object, the_round):
     "You grab [the_girl.possessive_title] hips an begin trusting eagerly. You hips slap against her ass in lewd smacking noises as you fuck her."
-    $ the_girl.call_dialogue("sex_responses")
+    $ the_girl.call_dialogue("sex_responses_vaginal")
     if the_girl.sex_skills["Vaginal"] < 2: #Inexperienced, option to dominate her a bit
         "[the_girl.possessive_title] is getting overwhelmed by the sensation. She is clearly enjoying your fucking but is having a hard time keeping up."
         the_girl.char "Sorry, I just... you are going so fast!"
@@ -468,7 +468,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object, the_round):
 
 label outro_SB_facing_wall(the_girl, the_location, the_object, the_round):
     "[the_girl.possessive_title]'s sweet cunt draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
-    $the_girl.call_dialogue("sex_responses")
+    $the_girl.call_dialogue("sex_responses_vaginal")
     mc.name "Ah, I'm going to cum!"
     menu:
         "Cum inside of her.":

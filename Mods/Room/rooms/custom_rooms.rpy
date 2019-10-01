@@ -9,13 +9,13 @@ init 15 python:
         make_chair(),
         make_floor()
     ]
-    m_division_basement = Room("security", "Security Room", [], room_background_image("Security_Background.jpg"), m_division_basement_objects,[], [security_overview_action], False, [12,2], None, False)
+    m_division_basement = Room("security", "Security Room", [], room_background_image("Security_Background.jpg"), m_division_basement_objects,[], [security_overview_action], False, [12,2], None, False, lighting_conditions = standard_indoor_lighting)
 
     # Production Division Basement - Machinery Room | machinery_room_actions.rpy
     p_division_basement_objects = [
         make_table()
     ]
-    p_division_basement = Room("machinery", "Machinery Room", [], office_background, p_division_basement_objects, [], [machinery_room_action], False, [11,5], None, False)
+    p_division_basement = Room("machinery", "Machinery Room", [], office_background, p_division_basement_objects, [], [machinery_room_action], False, [11,5], None, False, lighting_conditions = standard_indoor_lighting)
 
     # Research Division Basement - Biotechnology Lab | biotech_room_actions.rpy
     rd_division_basement_objects = [
@@ -24,7 +24,7 @@ init 15 python:
         make_desk(),
         make_table()
     ]
-    rd_division_basement = Room("biotech", "Biotechnology Lab", [], room_background_image("Biotech_Background.jpg"), rd_division_basement_objects, [], [biotech_lab_action], False, [12,5], None, False)
+    rd_division_basement = Room("biotech", "Biotechnology Lab", [], room_background_image("Biotech_Background.jpg"), rd_division_basement_objects, [], [biotech_lab_action], False, [12,5], None, False, lighting_conditions = standard_indoor_lighting)
 
     # Main Office Basement - Dungeon | dungeon_room_actions.rpy
     office_basement_objects = [
@@ -32,7 +32,7 @@ init 15 python:
         make_pillory(),
         make_woodhorse()
     ]
-    office_basement = Room("dungeon", "Dungeon", [], bar_background, office_basement_objects, [], [dungeon_room_action], False, [11,1], None, False)
+    office_basement = Room("dungeon", "Dungeon", [], bar_background, office_basement_objects, [], [dungeon_room_action], False, [11,1], None, False, lighting_conditions = standard_club_lighting)
 
     # Downtown Bar - The Downtown Distillery | downtown_bar_actions.rpy
     # This bar gets updated when a save game is loaded, regardless of its existence
@@ -41,7 +41,7 @@ init 15 python:
         make_chair(),
         make_floor()
     ]
-    downtown_bar = Room("bar", "The Downtown Distillery", [], bar_background, downtown_bar_objects, [], [downtown_bar_action], True, [5,4], None, True)
+    downtown_bar = Room("bar", "The Downtown Distillery", [], bar_background, downtown_bar_objects, [], [downtown_bar_action], True, [5,4], None, True, lighting_conditions = standard_indoor_lighting)
 
     # Hotel Room - The Hotel | No actions at this time.
     # This hotel gets updated when a save game is loaded, regardless of its existence
@@ -51,7 +51,7 @@ init 15 python:
         make_floor(),
         make_bed()
     ]
-    downtown_hotel = Room("hotel", "The Hotel", [], room_background_image("Hotel_Room_Background.jpg"), downtown_hotel_objects,[], [], False, [5,5], None, True)
+    downtown_hotel = Room("hotel", "The Hotel", [], room_background_image("Hotel_Room_Background.jpg"), downtown_hotel_objects,[], [], False, [5,5], None, True, lighting_conditions = standard_indoor_lighting)
 
     #Creates a room specifically to keep girls we don't want to be accessible, so they are still updated.
     purgatory_objects = [

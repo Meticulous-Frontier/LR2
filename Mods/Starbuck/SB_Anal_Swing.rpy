@@ -75,7 +75,7 @@ label intro_SB_anal_swing(the_girl, the_location, the_object, the_round):
 label scene_SB_anal_swing_1(the_girl, the_location, the_object, the_round):
     "Your hips slap against [the_girl.possessive_title]'s as you plunder her rectum. You keep a slow but steady pace."
     "With each bounce in the swing, [the_girl.possessive_title]'s ass pulls off you almost completely, but you grab the ropes of the swing and forcefully slam her ass back into you."
-    $ the_girl.call_dialogue("sex_responses")
+    $ the_girl.call_dialogue("sex_responses_anal")
 
     if SB_check_fetish(the_girl, anal_fetish_role):           #Anal fetish
         "After a particularly hard bounce, [the_girl.possessive_title] moans ecstatically."
@@ -180,7 +180,7 @@ label scene_SB_anal_swing_2(the_girl, the_location, the_object, the_round):
 
 label outro_SB_anal_swing(the_girl, the_location, the_object, the_round):
     "[the_girl.possessive_title]'s tight ass draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
-    $the_girl.call_dialogue("sex_responses")
+    $the_girl.call_dialogue("sex_responses_anal")
     mc.name "Ah, I'm going to cum!"
     if the_girl.get_opinion_score("creampies") > 0 or mc.condom:
             the_girl.char "Yes! Shove it in deep [the_girl.mc_title]!"
