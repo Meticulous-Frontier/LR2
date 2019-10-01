@@ -313,7 +313,7 @@ init -1:
 
         Person.review_outfit = review_outfit_enhanced
 
-        def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, character_placement = None, from_scene = False): #Draw the person, standing as default if they aren't standing in any other position.
+        def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, lightning = None, character_placement = None, from_scene = False): #Draw the person, standing as default if they aren't standing in any other position.
             if position is None:
                 position = self.idle_pose
 
@@ -322,6 +322,9 @@ init -1:
 
             if character_placement is None: # make sure we don't need to pass the position with each draw
                 character_placement = character_right
+
+            if lighting is None: # Lighting conditions for the Room
+                lighting = mc.location.get_lighting_conditions()
 
             # sometimes there is no outfit set, causeing the generate drawlist to fail, not sure why, but try to fix it here.
             if self.outfit is None:
@@ -336,7 +339,7 @@ init -1:
                 if show_person_info:
                     renpy.show_screen("person_info_ui",self)
 
-            final_image = self.build_person_displayable(position, emotion, special_modifier, show_person_info)
+            final_image = self.build_person_displayable(position, emotion, special_modifier, show_person_info, lighting)
             renpy.show(self.name,at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=(self.name + self.last_name + str(self.age)))
 
         # replace the default draw_person function of the person class
@@ -344,7 +347,7 @@ init -1:
         # add location to store original personality
         Person.original_personality = None
 
-        def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, special_modifier = None, character_placement = None, scene_manager = None): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
+        def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, special_modifier = None, lighting = None, character_placement = None, scene_manager = None): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
             #Note: this function includes a call to remove_clothing, it is not needed seperately.
             if position is None:
                 position = self.idle_pose
@@ -358,21 +361,24 @@ init -1:
             if character_placement is None: # make sure we don't need to pass the position with each draw
                 character_placement = character_right
 
+            if lighting is None: # Lighting conditions for the Room
+                lighting = mc.location.get_lighting_conditions()
+
             renpy.scene("Active") # clear layer for new draw action
             if scene_manager is None:
                 renpy.show_screen("person_info_ui",self)
             else:   # when we are called from the scenemanager we have to draw the other characters
                 scene_manager.draw_scene_without(self)
 
-            bottom_displayable.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier)) #Get the face displayable, also always under clothing.
+            bottom_displayable.append(self.expression_images.generate_emotion_displayable(position, emotion, special_modifier = special_modifier, eye_colour = self.eyes[1], lighting = lighting)) #Get the face displayable, also always under clothing.
 
-            bottom_displayable.append(self.body_images.generate_item_displayable(self.body_type,self.tits,position))  #Body is always under clothing
+            bottom_displayable.append(self.body_images.generate_item_displayable(self.body_type, self.tits, position, lighting = lighting ))  #Body is always under clothing
             size_render = renpy.render(bottom_displayable[1], 10, 10, 0, 0) #We need a render object to check the actual size of the body displayable so we can build our composite accordingly.
             the_size = size_render.get_size()
             x_size = __builtin__.int(the_size[0])
             y_size = __builtin__.int(the_size[1])
 
-            bottom_clothing, split_clothing, top_clothing = self.outfit.generate_split_draw_list(the_clothing, self, position, emotion, special_modifier) #Gets a split list of all of our clothing items.
+            bottom_clothing, split_clothing, top_clothing = self.outfit.generate_split_draw_list(the_clothing, self, position, emotion, special_modifier, lighting = lighting) #Gets a split list of all of our clothing items.
             #We should remember that middle item can be None.
             for item in bottom_clothing:
                 bottom_displayable.append(item)
@@ -380,7 +386,7 @@ init -1:
             for item in top_clothing:
                 top_displayable.append(item)
 
-            top_displayable.append(self.hair_style.generate_item_displayable("standard_body",self.tits,position)) #Hair is always on top
+            top_displayable.append(self.hair_style.generate_item_displayable("standard_body", self.tits, position, lighting = lighting)) #Hair is always on top
 
             #Now we build our two composites, one for the bottom image and one for the top.
             composite_bottom_params = [(x_size,y_size)]
