@@ -1,6 +1,6 @@
 init -1:
     python:
-        import uuid
+        import hashlib
 
         def location(self): # Check what location a person is in e.g the_person.location() == downtown. Use to trigger events?
             for location in list_of_places:
@@ -25,7 +25,7 @@ init -1:
 
         def get_person_identifier(self):
             if not hasattr(self, "_identifier"):
-                self._identifier = str(uuid.uuid4())
+                self._identifier = hashlib.md5(self.name + self.last_name + str(self.age)).hexdigest()
             return self._identifier
 
         def set_person_identifier(self, value):
