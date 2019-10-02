@@ -111,12 +111,12 @@ init 5 python:
         return get_random_from_weighted_list(possible_morning_crises_list)
 
     def cleanup_crisis_tracker():
-        while len(crisis_tracker) > 4: # release old tracked events
+        while len(crisis_tracker) > 10: # release old tracked events
             del crisis_tracker[0]
         return
 
     def cleanup_morning_crisis_tracker():
-        while len(morning_crisis_tracker) > 2: # release old tracked events
+        while len(morning_crisis_tracker) > 3: # release old tracked events
             del morning_crisis_tracker[0]
         return
 
