@@ -1266,7 +1266,7 @@ init 2:
                                                 mousewheel True
                                                 draggable True
                                                 vbox:
-                                                    for x in sorted(["stand2","stand3","stand4","stand5","walking_away","kissing","doggy","missionary","blowjob","against_wall","back_peek","sitting","standing_doggy","cowgirl"]):
+                                                    for x in sorted(["stand2","stand3","stand4","stand5","walking_away","kissing","kneeling1","doggy","missionary","blowjob","against_wall","back_peek","sitting","standing_doggy","cowgirl"]):
                                                         textbutton x:
                                                             style "textbutton_no_padding_highlight"
                                                             text_style "serum_text_style"
