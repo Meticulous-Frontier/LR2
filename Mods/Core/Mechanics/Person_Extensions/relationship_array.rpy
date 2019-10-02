@@ -32,6 +32,14 @@ init -1 python:
             elif the_person.identifier == self.person_b_identifier:
                 return self.type_b
 
+        def get_person_a(self):
+            return find_in_list(lambda x: x.identifier == self.person_a_identifier, all_people_in_the_game())
+
+        def get_person_b(self):
+            return find_in_list(lambda x: x.identifier == self.person_b_identifier, all_people_in_the_game())
+
+        person_a = property(get_person_a)
+        person_b = property(get_person_b)
 
     class RelationshipArray(renpy.store.object):
         def __init__(self):
@@ -47,7 +55,7 @@ init -1 python:
                 self.relationships.append(Relationship(person_a.identifier, person_b.identifier, type_a, type_b, visible))
 
             else: #A relationship exists, update it to the new state.
-                if person_a.identifier == the_relationship.person_a: #Relationships may have been referred to in the opposite order, so flip the references around if needed.
+                if person_a.identifier == the_relationship.person_a_identifier: #Relationships may have been referred to in the opposite order, so flip the references around if needed.
                     if type_a is not None:
                         the_relationship.type_a = type_a
 
@@ -56,7 +64,7 @@ init -1 python:
                     else:
                         the_relationship.type_b = type_b
 
-                elif person_a.identifier == the_relationship.person_b:
+                elif person_a.identifier == the_relationship.person_b_identifier:
                     if type_a is not None:
                         the_relationship.type_b = type_a
 
@@ -132,7 +140,7 @@ init -1 python:
             the_relationship = self.get_relationship(person_a, person_b)
             if the_relationship is not None: #If it exists we're going to improve it by one step, up to best friend.
                 the_type = the_relationship.get_type()
-                
+
                 if the_type in relationship_scale: #You can only change non-family and non-romantic relationships like this.
                     the_state = relationship_scale.index(the_type)
                     the_state += 1
