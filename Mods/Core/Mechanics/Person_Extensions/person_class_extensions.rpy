@@ -1,5 +1,7 @@
 init -1:
     python:
+        import uuid
+
         def location(self): # Check what location a person is in e.g the_person.location() == downtown. Use to trigger events?
             for location in list_of_places:
                 if self in location.people:
@@ -8,18 +10,32 @@ init -1:
         Person.location = location
 
         def get_follow_me(self):
-            if not hasattr(self, "follow_me"):
-                self.follow_me = False
-            return self.follow_me
+            if not hasattr(self, "_follow_me"):
+                self._follow_me = False
+            return self._follow_me
 
         def set_follow_me(self, value):
-            self.follow_me = value
+            self._follow_me = value
 
         def del_follow_me(self):
-            del self.follow_me
+            del self._follow_me
 
         # add follow_mc attribute to person class (without sub-classing)
         Person.follow_mc = property(get_follow_me, set_follow_me, del_follow_me, "I'm the follow_me property.")
+
+        def get_person_identifier(self):
+            if not hasattr(self, "_identifier"):
+                self._identifier = str(uuid.uuid4())
+            return self._identifier
+
+        def set_person_identifier(self, value):
+            self._identifier = value
+
+        def del_person_identifier(self):
+            del self._identifier
+
+        # add follow_mc attribute to person class (without sub-classing)
+        Person.identifier = property(get_person_identifier, set_person_identifier, del_person_identifier, "Unique identifier for person class.")
 
         ## MATCH SKIN COLOR
         # Matches skin, body, face and expression images based on input of skin color
