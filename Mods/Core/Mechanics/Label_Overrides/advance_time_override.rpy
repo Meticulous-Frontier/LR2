@@ -194,7 +194,7 @@ label advance_time_random_crisis_label():
             $ mandatory_advance_time = True
         $ the_crisis.call_action()
         $ del the_crisis
-    $ change_scene_display(mc.location) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
+    $ mc.location.show_background()
     show screen business_ui
     return
 
@@ -217,7 +217,7 @@ label advance_time_mandatory_crisis_label():
         $ del the_crisis
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
-        change_scene_display(mc.location) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
+        mc.location.show_background()
         for crisis in clear_list:
             mc.business.mandatory_crises_list.remove(crisis) #Clean up the list.
 
@@ -281,7 +281,7 @@ label advance_time_mandatory_morning_crisis_label():
         $ del the_crisis
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
-        change_scene_display(mc.location) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
+        mc.location.show_background()
         for crisis in clear_list:
             mc.business.mandatory_morning_crises_list.remove(crisis) #Clean up the list.
 
@@ -300,7 +300,7 @@ label advance_time_random_morning_crisis_label():
         if _return == "Advance Time":
             $ mandatory_advance_time = True        
         $ del the_morning_crisis
-    $ change_scene_display(mc.location) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
+    $ mc.location.show_background()
     return
 
 label advance_time_next_label():

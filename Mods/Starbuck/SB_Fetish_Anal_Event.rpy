@@ -582,7 +582,7 @@ label SB_mom_anal_pay_label():
 
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-    $ change_scene_display(mc.location)
+    $ mc.location.show_background()
     $ renpy.scene("Active")
 
     return
@@ -673,7 +673,7 @@ label SB_mom_anal_friday_label():
 
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-    $ change_scene_display(mc.location)
+    $ mc.location.show_background()
     $ renpy.scene("Active")
     return
 

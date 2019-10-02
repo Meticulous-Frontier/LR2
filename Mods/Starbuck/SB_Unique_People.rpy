@@ -842,7 +842,7 @@ label starbuck_sex_store_promo_one_label(the_person):
         del SB_advert_three_outfit
         the_person.reset_arousal()
         the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-        change_scene_display(mc.location)
+        mc.location.show_background()
         renpy.scene("Active")
     return #Toy modeling, ends in blowjob
 
@@ -1003,7 +1003,7 @@ label starbuck_sex_store_promo_two_label(the_person):
 
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-    $ change_scene_display(mc.location)
+    $ mc.location.show_background()
     $ renpy.scene("Active")
     return #Masturbation, ends in sex
 
@@ -1179,7 +1179,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     "You grab the camera, and start looking at the footage. The first thing you do is copy it on a thumb drive, for you to enjoy at a later date."
     "You head out to start work on the advertisement video."
-    $ change_scene_display(mc.location)
+    $ mc.location.show_background()
     $ renpy.scene("Active")
     return
 
@@ -1694,7 +1694,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         "[the_person.title]heads to the bathroom. You grab your stuff and head out."
     $ the_person.reset_arousal()
     $ the_person.outfit = (the_person.wardrobe.decide_on_outfit(40)).get_copy()
-    $ change_scene_display(mc.location)
+    $ mc.location.show_background()
     $ renpy.scene("Active")
     return
 

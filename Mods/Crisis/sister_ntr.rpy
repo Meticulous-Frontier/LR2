@@ -59,7 +59,7 @@ label sister_ntr_crisis_action_label:
     else:
         $ encounter = 1
 
-    $ change_scene_display(bedroom)
+    $ bedroom.show_background()
     $ man_name = get_random_male_name()
 
     if encounter is 1: ## a scene with one man
@@ -932,6 +932,6 @@ label sister_ntr_crisis_action_label:
 
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-    $ change_scene_display(mc.location)
+    $ mc.location.show_background()
     $ renpy.scene("Active")
     return

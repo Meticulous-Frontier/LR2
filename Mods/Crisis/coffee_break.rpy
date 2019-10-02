@@ -41,10 +41,12 @@ label coffee_break_action_label:
         del person_one
         del person_two
         del person_three
+        mc.location.show_background()
     return
 
 label coffee_break_chit_chat_label(person_one, person_two, person_three):
     python:
+        office.show_background()
         scene_manager = Scene()
         scene_manager.add_actor(person_one, emotion="default", character_placement = character_left_flipped)
         scene_manager.add_actor(person_two, emotion="default", character_placement = character_center_flipped)
@@ -93,7 +95,7 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
             menu:
                 "Walk away":
                     python:
-                        change_scene_display(mc.location)
+                        mc.location.show_background()
                         scene_manager.remove_actor(person_two)
                         scene_manager.remove_actor(person_three)
                     return
@@ -126,8 +128,7 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                     $ person_three.reset_arousal()
                     $ person_three.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
 
-                    $ change_scene_display(mc.location)
-                    $ renpy.scene("Active")
+                    $ mc.location.show_background()
 
                     "Amazing you just fucked two of your employees, wondering if other girls in your company might also be up for this."
                     return

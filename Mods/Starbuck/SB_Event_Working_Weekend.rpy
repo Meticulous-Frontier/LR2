@@ -38,7 +38,7 @@ label SB_working_weekend_crisis_label():
         #$ the_clothing = the_person.outfit.get_lower_ordered()[-1] #Get the very top item of clothing.
 
     "Even though it is the weekend, you find yourself working."
-    "Deep in thought, and with the company normally desserted, it takes you by surprise when you see movement out of the corner of your eye."
+    "Deep in thought, and with the company normally deserted, it takes you by surprise when you see movement out of the corner of your eye."
     "Looking aside, you see [the_person.possessive_title]."
     $ the_person.draw_person()
     "You can tell by the look on her face that [the_person.possessive_title] is also surprised to see you."
@@ -49,7 +49,7 @@ label SB_working_weekend_crisis_label():
         menu:
             "Stress the importance of obedience.":
                 mc.name "It is no accident that this place is accomplishing great things. The work I am trying to do requires many long hours, but also organization and commitment to procedures."
-                mc.name "A highly organised workplace is important, especially in a lab setting. I need employees who are able to listen to my instructions and follow them."
+                mc.name "A highly organized workplace is important, especially in a lab setting. I need employees who are able to listen to my instructions and follow them."
                 "[the_person.possessive_title] nods in agreement."
                 mc.name "You are doing a great job so far, [the_person.title], can I count on you to listen and obey the tasks I set out for you?"
                 $ the_person.change_obedience(10)
@@ -77,7 +77,7 @@ label SB_working_weekend_crisis_label():
         "Before you can respond, [the_person.possessive_title] pulls up a chair and sits beside you."
         $ the_person.draw_person(position = "sitting")
         the_person.char "Wow, your dedication to this place is pretty incredible... Don't you ever do something... you know, to blow off steam?"
-        "[the_person.possessive_title]'s voice takes a bit of a sulty tone at the end of that statement. Is she flirting with you?"
+        "[the_person.possessive_title]'s voice takes a bit of a sultry tone at the end of that statement. Is she flirting with you?"
         mc.name "Yes, [the_person.title], of course I do... but... it IS rather boring around here. I'd be grateful for a bit of company while I'm working"
         "[the_person.possessive_title] smiles at you. And was that a wink?"
         the_person.char "Oh! [the_person.mc_title], I was about to go out, but seeing you here still working on the weekend, I'd be glad to stay here with you a bit and give you a bit of a... distraction for a bit."
@@ -164,7 +164,7 @@ label SB_working_weekend_crisis_label():
         menu:
             "Strip for me":
                 mc.name "Hey, I'm almost done with this, but I tell you what. Why don't you give me a show while I finish and then maybe when I'm done I'll take you up on that."
-                "[the_person.possessive_title] smiles mischieviously at you, before nodding."
+                "[the_person.possessive_title] smiles mischievously at you, before nodding."
                 the_person.char "I can do that, [the_person.mc_title]... I hope you like the show!"
                 $ the_person.change_slut_temp(5)
                 call SB_free_strip_scene(the_person) from _SB_free_strip_scene_3
@@ -523,7 +523,7 @@ label SB_working_weekend_crisis_label():
                             the_person.char "I actually LOVE taking control."
                             $ SEXUAL_TOPIC_COUNTER += 1
                         elif the_person.get_opinion_score("taking control") > 0:
-                            the_person.char "I liketaking control."
+                            the_person.char "I like taking control."
                             $ SEXUAL_TOPIC_COUNTER += 1
                         elif the_person.get_opinion_score("taking control") < -1:
                             the_person.char "I actually HATE taking control."
@@ -617,7 +617,7 @@ label SB_working_weekend_crisis_label():
 
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-    $ change_scene_display(mc.location)
+    $ mc.location.show_background()
     return
 
 init 3 python :

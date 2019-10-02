@@ -92,7 +92,7 @@ init 2 python:
 
 label train_in_gym(person):
     python:
-        change_scene_display(gym)
+        gym.show_background()
         if person.sluttiness > 40 or person.arousal > 35:
             person.outfit = gym_clothes_sexy.get_copy()
         else:
@@ -129,7 +129,7 @@ label train_in_gym(person):
                 "Have Sex" if mc.current_stamina > 0:
                     mc.name "Lets go to the shower room."
                     person.char "Lead the way, [person.mc_title]."
-                    $ change_scene_display(gym_shower)
+                    $ gym_shower.show_background()
 
                     call fuck_person(person) from _call_fuck_person_gym_training
 
@@ -150,5 +150,5 @@ label train_in_gym(person):
 
     $ person.reset_arousal()
     $ person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-    $ change_scene_display(mc.location)
+    $ mc.location.show_background()
     return

@@ -133,7 +133,7 @@ label SB_fetish_cum_label(the_person):
     $ FETISH_CUM_EVENT_INUSE = False
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-    $ change_scene_display(mc.location)
+    $ mc.location.show_background()
     $ renpy.scene("Active")
     return
 
@@ -304,7 +304,7 @@ label SB_fetish_mom_cum_label():
     python:
         the_person.reset_arousal()
         the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-        change_scene_display(mc.location)
+        mc.location.show_background()
         renpy.scene("Active")
     return
 
@@ -313,7 +313,7 @@ label SB_fetish_mom_cum_label():
 label SB_fetish_lily_cum_label():
     $ the_person = lily
     "You wake up a little groggy. Your head kinda hurts, so you grab some clothes and head towards the bathroom to take a hot shower. Hopefully the steam will help you feel better."
-    $ change_scene_display(home_shower)
+    $ home_shower.show_background()
     "You stand in the shower, enjoying the hot water for several minutes. The steam is beginning to cloud up the bathroom."
     "You are surprised when the shower door opens. You see [the_person.possessive_title] getting in the shower with you."
     $ the_person.outfit = SB_cum_nude_outfit.get_copy()
@@ -390,7 +390,7 @@ label SB_fetish_lily_cum_label():
     python:
         the_person.reset_arousal()
         the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-        change_scene_display(bedroom)
+        bedroom.show_background()
         renpy.scene("Active")
 
         for morn_event in morning_crisis_list:
@@ -415,7 +415,7 @@ label SB_fetish_shower_cum_label():
 
     $ the_person = get_random_from_list(meets_fetish_list)
     "You wake up a little groggy. Your head kinda hurts, so you grab some clothes and head towards the bathroom to take a hot shower. Hopefully the steam will help you feel better."
-    $ change_scene_display(home_shower)
+    $ home_shower.show_background()
     "You stand in the shower, enjoying the hot water for several minutes. The steam is beginning to cloud up the bathroom."
     "You hear the shower door open and see [the_person.possessive_title] getting in the shower with you."
     $ the_person.outfit = SB_cum_nude_outfit.get_copy()
@@ -440,7 +440,7 @@ label SB_fetish_shower_cum_label():
     python:
         the_person.reset_arousal()
         the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-        change_scene_display(bedroom)
+        mc.location.show_background()
         renpy.scene("Active")
 
     return

@@ -31,7 +31,7 @@ label business_meeting_action_label:
 
     "You meet up in an empty office of the [the_place.name] department."
 
-    $ change_scene_display(the_place)
+    $ the_place.show_background()
     $ the_person.draw_person(position="sitting", emotion="happy")
 
     call business_meeting_introduction(the_person) from _call_business_meeting_introduction_1
@@ -64,7 +64,7 @@ label business_meeting_action_label:
     "The changes increased your business effectivity by [change]%%."
 
     $ the_person.reset_arousal()
-    $ change_scene_display(mc.location)
+    $ mc.location.show_background()
     $ renpy.scene("Active")
     return
 

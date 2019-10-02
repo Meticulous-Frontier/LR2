@@ -29,7 +29,7 @@ label shower_crisis_action_label:
         "Ignore it.":
             return
     "You decide to take a peek."
-    $ change_scene_display(home_shower)
+    $ home_shower.show_background()
     $ the_person.draw_person(position = "walking_away")
     "You see [the_person.possessive_title] is standing in front of a mirror, getting ready for a shower."
     $ shower_clothing = the_person.outfit.remove_random_any(top_layer_first = True)
@@ -117,7 +117,7 @@ label shower_crisis_action_label:
     python:
         the_person.reset_arousal()
         the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-        change_scene_display(mc.location)
+        mc.location.show_background()
         # Release variables
         del shower_clothing
         renpy.scene("Active")

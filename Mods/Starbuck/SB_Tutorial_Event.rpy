@@ -49,6 +49,6 @@ label SB_tutorial_event():
             the_person.char "It was great seeing you! Take care [the_person.mc_title]!"
             $ the_person.change_happiness(5)
 
-    $ change_scene_display(mc.location)
+    $ mc.location.show_background()
     $ renpy.scene("Active")
     return
