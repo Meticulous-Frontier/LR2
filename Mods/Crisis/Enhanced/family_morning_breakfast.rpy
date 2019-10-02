@@ -41,6 +41,7 @@ label family_morning_breakfast_enhanced_label():
     
     "You get up, get dressed, and head for the kitchen."
     $ mc.change_location(kitchen)
+    $ kitchen.show_background()
     $ scene_manager.add_actor(mom, position = "walking_away", character_placement = character_left_flipped)
 
     if mom_slutty:
