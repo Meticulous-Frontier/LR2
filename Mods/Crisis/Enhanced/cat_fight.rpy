@@ -10,7 +10,7 @@ label cat_fight_crisis_enhanced_label():
         return
 
     python:
-        the_relationship = get_random_from_list(own_relationships.get_business_relationships(["Rival","Nemesis"])) #Get a random rival or nemesis relationship within the company
+        the_relationship = get_random_from_list(town_relationships.get_business_relationships(["Rival","Nemesis"])) #Get a random rival or nemesis relationship within the company
         if the_relationship is None:
             renpy.return_statement() #Just in case something goes wrong getting a relationship we'll exit gracefully.
         if renpy.random.randint(0,1) == 1: #Randomize the order so that repeated events with the same people alternate who is person_one and two.
