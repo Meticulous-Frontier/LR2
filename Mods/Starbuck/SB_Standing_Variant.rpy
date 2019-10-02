@@ -9,7 +9,7 @@ init:
         "transition_default_SB_facing_wall",
         "strip_SB_facing_wall", "strip_ask_SB_facing_wall",
         "orgasm_SB_facing_wall",
-        opinion_tags = ["sex standing up" "vaginal sex"])
+        opinion_tags = ["sex standing up", "vaginal sex"])
         #list_of_positions.append(SB_facing_wall)     #Consider adding later, but for now, transition from the other standing scene
 
 init 1:

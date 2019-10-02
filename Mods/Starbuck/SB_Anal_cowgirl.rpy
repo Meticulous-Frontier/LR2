@@ -7,7 +7,7 @@
         "transition_default_SB_anal_cowgirl",
         "strip_SB_anal_cowgirl", "strip_ask_SB_anal_cowgirl",
         "orgasm_SB_anal_cowgirl",
-        opinion_tags = ["taking control" "anal sex"])
+        opinion_tags = ["taking control", "anal sex"])
         list_of_girl_positions.append(SB_anal_cowgirl)
 
 
