@@ -26,8 +26,8 @@ init 3 python:
         initialization = gym_initialization, menu_tooltip = "Bring a person to the gym to train their body.", category="Mall")
 
 label select_person_for_gym():
-    $ people_list = ["Train with"]
-    $ people_list.extend(known_people_in_the_game([mc]) + ["Back"])
+    $ people_list = get_sorted_people_list(known_people_in_the_game([mc]), "Train with", ["Back"])
+
     call screen main_choice_display([people_list])
     $ person_choice = _return
     $ del people_list

@@ -8,8 +8,8 @@ init 2 python:
     salon_total_cost = salon_style_cost + salon_dye_cost
 
 label salon_label():
-    $ people_list = ["Salon Appointment"]
-    $ people_list.extend(known_people_in_the_game([mc]) + ["Back"])
+    $ people_list = get_sorted_people_list(known_people_in_the_game([mc]), "Salon appointment", ["Back"])
+
     call screen main_choice_display([people_list])
     $ person_choice = _return
     $ del people_list

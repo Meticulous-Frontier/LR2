@@ -40,8 +40,8 @@ label import_wardrobe_label():
 label give_wardrobe_label():
     "Select who to give clothes"
     while True:
-        $ people_list = ["Clothes for"]
-        $ people_list.extend(known_people_in_the_game([mc]) + ["Back"])
+        $ people_list = get_sorted_people_list(known_people_in_the_game([mc]), "Clothes for", ["Back"])
+
         call screen main_choice_display([people_list])
         $ person_choice = _return
         $ del people_list
