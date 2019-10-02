@@ -685,7 +685,7 @@ screen cmw(): # Cheats affecting the general world
                 vbox:
                     textbutton "Late for Work" action Call("late_for_work_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "An employee is late for work in the morning"
                     textbutton "Mall Introduction" action Call("mall_introduction_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "A friend introduces a stranger in the mall"
-
+                    textbutton "Daughter Work" action Call("daughter_work_crisis_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "An employee asks to hire her daughter"
 
             if cml == True and cmlpage == 4: # Page 4
                 vbox:
