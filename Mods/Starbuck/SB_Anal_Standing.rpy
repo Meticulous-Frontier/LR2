@@ -1,6 +1,5 @@
-init:
-    python:
-        SB_anal_standing = Position("Standing Anal",70,95,"standing_doggy","Low","Vagina","Anal",18,18,[],
+init python:
+    SB_anal_standing = Position("Standing Anal",70,95,"standing_doggy","Low","Vagina","Anal",18,18,[],
         "intro_SB_anal_standing",
         ["scene_SB_anal_standing_1","scene_SB_anal_standing_2"],
         "outro_SB_anal_standing",
@@ -8,11 +7,11 @@ init:
         "strip_SB_anal_standing", "strip_ask_SB_anal_standing",
         "orgasm_SB_anal_standing",
         opinion_tags = ["doggy style sex", "anal sex", "sex standing up"])
-        list_of_positions.append(SB_anal_standing)
+    list_of_positions.append(SB_anal_standing)
 
-#init 1:
-    #python:
-        #SB_anal_standing.link_positions_two_way(doggy, "transition_SB_anal_standing_doggy", "transition_doggy_SB_anal_standing")
+init 1 python:
+    SB_anal_standing.link_positions(SB_doggy_standing, "transition_SB_anal_standing_SB_doggy_standing")
+    SB_anal_standing.link_positions(doggy_anal, "transition_SB_anal_standing_doggy_anal")
 
 label intro_SB_anal_standing(the_girl, the_location, the_object, the_round):
     "With you arms wrapped around [the_girl.possessive_title], you make out for a bit with her back to the [the_object.name]"
@@ -358,6 +357,36 @@ label transition_default_SB_anal_standing(the_girl, the_location, the_object, th
     "[the_girl.possessive_title] turns and puts her hands on [the_object.name]. You bounce your hard shaft on her ass a couple of times before lining yourself up with her sphincter."
     "Once you're both ready you push yourself forward, slipping your hard shaft deep inside of her. She lets out a gasp under her breath."
     return
+
+label transition_SB_anal_standing_doggy_anal(the_girl, the_location, the_object, the_round):
+    mc.name "Get down on your knees [the_girl.title], i'm going to fuck you like the little bitch you are."
+    the_girl.char "Oh yes, [the_girl.mc_title], make me your little bitch."
+    return
+
+label transition_SB_anal_standing_SB_doggy_standing(the_girl, the_location, the_object, the_round):
+    "You pull out of [the_girl.title]'s asshole, leaving it gaping and her sighing in relief."
+    "You shift your cock downwards and rub the tip of it along the slit of her vagina."
+    if the_girl.effective_sluttiness() < the_girl.get_no_condom_threshold():
+        the_girl.char "Mmm, fuck me [the_girl.mc_title]. Use all of my holes for your pleasure!"
+        $ wants_condom = False
+    else:
+        the_girl.char "Wait, wait... I can't risk getting pregnant, I need you to put on a condom."
+        $ wants_condom = True
+
+    if wants_condom and not mc.condom:
+        menu:
+            "Put on a condom.":
+                "You pull your dick back and quickly put on a condom. Then you line up your dick with her dripping wet pussy."
+
+            "Ram it home!":
+                if wants_condom:
+                    mc.name "Don't worry, I'll pull out."
+                    $ the_girl.change_happiness(-5)
+                else:
+                    pass
+
+    "You grab her by the hips and thrust yourself deep inside her tight, pulsating pussy."
+    return    
 
 label strip_SB_anal_standing(the_girl, the_clothing, the_location, the_object, the_round):
     "[the_girl.possessive_title] leans forward a little further and pops off your cock."

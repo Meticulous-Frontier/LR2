@@ -1,6 +1,5 @@
-init:
-    python:
-        SB_doggy_standing = Position("Standing Doggy",70,90,"standing_doggy","Low","Vagina","Vaginal",20,20,[],
+init python:
+    SB_doggy_standing = Position("Standing Doggy",70,90,"standing_doggy","Low","Vagina","Vaginal",20,20,[],
         "intro_SB_doggy_standing",
         ["scene_SB_doggy_standing_1","scene_SB_doggy_standing_2"],
         "outro_SB_doggy_standing",
@@ -8,11 +7,11 @@ init:
         "strip_SB_doggy_standing", "strip_ask_SB_doggy_standing",
         "orgasm_SB_doggy_standing",
         opinion_tags = ["doggy style sex", "vaginal sex", "sex standing up"])
-        list_of_positions.append(SB_doggy_standing)
+    list_of_positions.append(SB_doggy_standing)
 
-#init 1:
-    #python:
-        #SB_doggy_standing.link_positions_two_way(doggy, "transition_SB_doggy_standing_doggy", "transition_doggy_SB_doggy_standing")
+init 1 python:
+    SB_doggy_standing.link_positions(SB_anal_standing, "transition_SB_doggy_standing_SB_anal_standing")
+    SB_doggy_standing.link_positions(doggy, "transition_SB_doggy_standing_doggy")
 
 label intro_SB_doggy_standing(the_girl, the_location, the_object, the_round):
     "You turn [the_girl.possessive_title] around, and she leans over [the_object.name], presenting her ass to you."
@@ -303,6 +302,39 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object, the_round):
 
     return
 
+label transition_SB_doggy_standing_doggy(the_girl, the_location, the_object, the_round):
+    mc.name "Get down on your knees [the_girl.title], i'm going to fuck you like the little bitch you are."
+    the_girl.char "Oh yes, [the_girl.mc_title], make me your little bitch."
+    return
+
+label transition_SB_doggy_standing_SB_anal_standing(the_girl, the_location, the_object, the_round):
+    "You pull out of [the_girl.title]'s wet pussy, leaving it dripping fluids on the floor."
+    "You line your cock up with her asshole, the tip just barely pressing against it."
+    if the_girl.sex_skills["Anal"] > 2 or the_girl.get_opinion_score("anal sex") > 0:
+        the_girl.char "Oh god, yes. Fuck my ass [the_girl.mc_title]!"
+    else:
+        the_girl.char "Uh... Oh fuck, you'd tear me apart [the_girl.mc_title]..."
+    menu:
+        "Ram it home!":
+            "You get a firm grip on her hips, make sure you're lined up, and push yourself in with all your might."
+            if the_girl.get_opinion_score("being submissive") > 0 or the_girl.get_opinion_score("anal sex") > 0:
+                the_girl.char "Ah! Yes! Tear that ass up!"
+                $ the_girl.change_arousal(5*( the_girl.get_opinion_score("being submissive") + the_girl.get_opinion_score("anal sex") ))
+                "Using her pussy juice as lube you lay into her tight ass, waisting no time in fucking her hard."
+
+            else:
+                the_girl.char "Oh fuck! FUCK!"
+                "She yells out in surprise and pain. You bottom out and hold still, giving her a second to get use to your size."
+                the_girl.char "Fuck... I hate that part..."
+                mc.name "It's just like ripping off a bandage. You'll get use to it."
+                "You wait a moment, then start to move again. Using her pussy juices as lube you've soon got a good rhythm going."
+
+        "Take it slow.":
+            "You keep a firm grip on her hips as you push forward, sliding into one painful inch at a time."
+            "Using her pussy juice as lube, you manage to slip your full cock into her ass. You pause there, giving her a moment to adjust."
+            the_girl.char "Mmmhph... Fuck..."
+            "When she's finally ready you start to move, fucking her cute little ass."
+    return
 
 label transition_default_SB_doggy_standing(the_girl, the_location, the_object, the_round):
     "[the_girl.possessive_title] turns and puts her hands on [the_object.name]. You bounce your hard shaft on her ass a couple of times before lining yourself up with her pussy."
