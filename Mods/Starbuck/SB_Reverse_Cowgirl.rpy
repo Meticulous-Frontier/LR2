@@ -9,8 +9,6 @@ init:
         "orgasm_SB_reverse_cowgirl",
         opinion_tags = ["taking control","vaginal sex"])
         list_of_girl_positions.append(SB_reverse_cowgirl)
-        list_of_girl_positions.append(SB_reverse_cowgirl)
-        #list_of_positions.append(SB_reverse_cowgirl)   ###20,120 for testing purpose only###
 
 init 1:
     python:
