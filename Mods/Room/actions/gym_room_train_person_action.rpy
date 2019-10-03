@@ -90,10 +90,20 @@ init 2 python:
     gym_clothes_sexy.add_lower(booty_shorts.get_copy(),colour_pink)
     gym_clothes_sexy.add_feet(sneakers.get_copy(),colour_white)
 
+    gym_clothes_slutty = Outfit("Slutty Gym Clothes")
+    gym_clothes_slutty.add_upper(lingerie_one_piece.get_copy(),colour_pink)
+    gym_clothes_slutty.add_feet(sneakers.get_copy(),colour_pink)
+    gym_clothes_slutty.add_accessory(lipstick.get_copy(), colour_pink)
+    gym_clothes_slutty.add_accessory(wide_choker.get_copy(), colour_pink)
+    gym_clothes_slutty.add_accessory(heavy_eye_shadow.get_copy(), [0,0,0,.9])
+    gym_clothes_slutty.add_accessory(light_eye_shadow.get_copy(), colour_pink)
+
 label train_in_gym(person):
     python:
         gym.show_background()
-        if person.sluttiness > 40 or person.arousal > 35:
+        if person.sluttiness > 70 or person.arousal > 70:
+            person.outfit = gym_clothes_slutty.get_copy()
+        elif person.sluttiness > 40 or person.arousal > 35:
             person.outfit = gym_clothes_sexy.get_copy()
         else:
             person.outfit = gym_clothes.get_copy()
@@ -120,9 +130,9 @@ label train_in_gym(person):
 
     "After the session [person.possessive_title] weighs [new_weight]."
 
-    if body_changed:
+    if body_changed or person.sluttiness > 50:
         $ person.draw_person(person.body_type)
-        $ person.change_stats(happiness = 10, love = 5, arousal = 25, slut_temp = 5)
+        $ person.change_stats(happiness = 10, love = 5, arousal = renpy.random.randint(15, 35), slut_temp = 5)
         if person.sluttiness > 20:
             person.char "Wow, these gym sessions make me feel just great, somehow I get turned on too... would you mind?"
             menu:
@@ -137,7 +147,7 @@ label train_in_gym(person):
                     pass
                 "Another Time":
                     mc.name "Sorry [person.title], another time."
-                    $ person.change_happiness(-10)
+                    $ person.change_happiness(-5)
         else:
             person.char "Amazing, these gym session are really paying off."
     person.char "Thank you, [person.mc_title]."
