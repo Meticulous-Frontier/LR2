@@ -1080,7 +1080,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     $ the_person.draw_person(position = "missionary")
     "Her panties now in shreds, [the_person.possessive_title] gathers what is left of them and pulls them off."
     $ the_person.change_arousal(20)#70
-    "[the_person.possessive_title]'s juices are beginning to flow freely from her slit. You lap them up before circling your tongue aroud her clit a few times."
+    "[the_person.possessive_title]'s juices are beginning to flow freely from her slit. You lap them up before circling your tongue around her clit a few times."
     "After licking at her clit, you move your tongue down to her entrance. You push your tongue up inside her as far as it will go."
     $ the_person.change_arousal(10)#80
     "[the_person.possessive_title] has stopped providing commentary and is now just moaning and encouraging you."
@@ -1193,7 +1193,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     "[the_person.possessive_title] stutters as she tries to figure out the best way to explain what she means."
     the_person.char "I guess I just mean that, the sales we are getting, its for just generic sex items. Lingerie, condoms, handcuffs... but the more... shall we say, kinky items aren't really selling."
     mc.name "Like what kind of things aren't selling?"
-    the_person.char "Well, some of the kinkier items... like whips, ropes, strapons... that kind of thing."
+    the_person.char "Well, some of the kinkier items... like whips, ropes, strap-ons... that kind of thing."
     "You consider some of the items she has in mind. The list she's said makes you a little nervous."
     mc.name "Well, I mean, I'm definitely willing to help you make another video showcasing an item or two... did you have anything specific in mind?"
     the_person.char "Well... I'm going to be honest here, you definitely seem like more of a dominant type... why don't we make a video where I play the submissive? See if we can get more business that way?"

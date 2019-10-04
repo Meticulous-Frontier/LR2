@@ -913,10 +913,10 @@ label SB_starbuck_anal_swing_demo(the_person):
                     $ the_person.draw_person(position = "sitting")
                     "[the_person.title] sits down on the swing. You get behind her and grab the ropes. Her ass already well lubed from her plug, she is ready for you."
                     "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]"
-                    the_person.char "Oh fuck! Everytime I think about the first time you fucked me on this thing I touch myself... fuck me good [the_person.mc_title]!"
+                    the_person.char "Oh fuck! Every time I think about the first time you fucked me on this thing I touch myself... fuck me good [the_person.mc_title]!"
                 else:   #People watch
                     the_person.char "Here they come! This is gonna be great!"
-                    "[the_person.possessive_title] looks genuinely excited! She walks over next to swing and non-chalantly takes out her plug and sets it to the side."
+                    "[the_person.possessive_title] looks genuinely excited! She walks over next to swing and nonchalantly takes out her plug and sets it to the side."
                     $ get_random_from_list(mc.location.people).draw_person(position = "stand4")
                     "You watch as people begin to walk into the room..."
                     "You are about to fuck [the_person.title], in the ass, in front of customers..."
@@ -959,7 +959,7 @@ label SB_starbuck_anal_swing_demo(the_person):
                 $ the_person.draw_person(position = "sitting")
                 "[the_person.title] sits down on the swing. You get behind her and grab the ropes. Her ass already well lubed from her plug, she is ready for you."
                 "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]"
-                the_person.char "Oh fuck! Everytime I think about the first time you fucked me on this thing I touch myself... fuck me good [the_person.mc_title]!"
+                the_person.char "Oh fuck! Every time I think about the first time you fucked me on this thing I touch myself... fuck me good [the_person.mc_title]!"
     else:
         the_person.char "Okay! Lets go!"
         $ the_person.draw_person(position = "walking_away")
@@ -984,7 +984,7 @@ label SB_starbuck_anal_swing_demo(the_person):
         $ the_person.draw_person(position = "sitting")
         "[the_person.title] sits down on the swing. You get behind her and grab the ropes. Her ass already well lubed from her plug, she is ready for you."
         "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]"
-        the_person.char "Oh fuck! Everytime I think about the first time you fucked me on this thing I touch myself... fuck me good [the_person.mc_title]!"
+        the_person.char "Oh fuck! Every time I think about the first time you fucked me on this thing I touch myself... fuck me good [the_person.mc_title]!"
 
     call sex_description(the_person, SB_anal_swing, SB_make_swing(), 1, private= scene_private, girl_in_charge = False) from _call_sex_description_SBA080
 
