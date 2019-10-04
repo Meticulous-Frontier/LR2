@@ -554,7 +554,7 @@ label SB_fetish_vaginal_recurring_label():
                 "Your hands start exploring her body immediately while you start to kiss. [the_person.possessive_title] breaks off for a second and looks into your eyes."
                 the_person.char "Thanks for letting me come over... I honestly... I just couldn't stop thinking about you tonight."
 
-    if  the_person.get_opinion_score("doggy style sex") > 2:
+    if the_person.get_opinion_score("doggy style sex") > 2:
         "[the_person.possessive_title] lets go of you, and starts to slowly back up."
         the_person.char "I don't know what has come over me lately... I can't stop thinking about you fucking me from behind..."
         $ the_person.draw_person(position = "doggy")
@@ -565,20 +565,20 @@ label SB_fetish_vaginal_recurring_label():
         call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBV60
         ###Clear Arousal###
         $ the_person.reset_arousal()
-    elif  the_person.get_opinion_score("sex standing up") > 2:
+    elif the_person.get_opinion_score("sex standing up") > 2:
         "[the_person.possessive_title] resumes kissing you. You grab her ass with both hands and pick her up. She grinds her crotch into you."
         $ the_person.change_arousal(20)
         the_person.char "I need you so bad, just do me right here, up against the wall!"
         "You quickly pin [the_person.possessive_title] to the wall. She wraps her legs around you and sighs as you sink your cock into her greedy cunt."
         call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBV61
         $ the_person.reset_arousal()
-    elif  the_person.get_opinion_score("missionary style sex") > 2:
+    elif the_person.get_opinion_score("missionary style sex") > 2:
         "You kiss [the_person.possessive_title] along her neck and ear. She shivers at the sensation and then whispers in your ear."
         $ the_person.change_arousal(20)
         the_person.char "Throw me down on your bed, [the_person.mc_title]. I want to feel your weight on top of me while you fuck my brains out!"
         "You roughly pick up [the_person.possessive_title] and carry her over to the bed. You throw her down and quickly jump on top of her."
         "[the_person.possessive_title] spread her legs wide, giving you easy access. She sighs as you sink your cock into her greedy cunt."
-        call fuck_person(the_person, start_position = missionary start_object = make_bed(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBV62
+        call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBV62
         ###Reset Arousal
         $ the_person.reset_arousal()
     else:
@@ -651,7 +651,7 @@ label SB_fetish_vaginal_lily_recurring_label():
         the_person.char "Throw me down on your bed, [the_person.mc_title]. I want to feel your weight on top of me while you fuck my brains out!"
         "You roughly pick up [the_person.possessive_title] and carry her over to the bed. You throw her down and quickly jump on top of her."
         "[the_person.possessive_title] spread her legs wide, giving you easy access. She sighs as you sink your cock into her greedy cunt."
-        call fuck_person(the_person, start_position = missionary start_object = make_bed(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBV72
+        call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBV72
         ###Reset Arousal
         $ the_person.reset_arousal()
     else:
