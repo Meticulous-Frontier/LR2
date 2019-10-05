@@ -1,5 +1,5 @@
 init python:
-    SB_doggy_standing = Position("Standing Doggy",70,90,"standing_doggy","Low","Vagina","Vaginal",20,20,[],
+    SB_doggy_standing = Position("Standing Doggy",60,80,"standing_doggy","Low","Vagina","Vaginal",20,20,[],
         "intro_SB_doggy_standing",
         ["scene_SB_doggy_standing_1","scene_SB_doggy_standing_2"],
         "outro_SB_doggy_standing",

@@ -4,7 +4,7 @@
 
 init:
     python:
-        SB_sixty_nine = Position("Sixty-Nine",30,70,"doggy","Lay","Vagina","Oral",20,20,[],
+        SB_sixty_nine = Position("Sixty-Nine",45,65,"doggy","Lay","Vagina","Oral",20,20,[],
         "intro_SB_sixty_nine",
         ["scene_SB_sixty_nine_1","scene_SB_sixty_nine_2"],
         "outro_SB_sixty_nine",

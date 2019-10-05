@@ -1,12 +1,12 @@
 ﻿init python:
     SB_Titfuck_Kneeling = Position("Titfuck",   #Name of the position in the sex position selection screen
         25,                                         #Required sluttiness for girl to consider. 20 sluttiness = 1 heart
-        60,                                         #Max temporary sluttiness from postions
+        45,                                         #Max temporary sluttiness from postions
         "blowjob",                                  #Image name used for the position
         "Kneel",                                    #Description of female pose. Requires room item that accomodates this descriptor: EG, bed for "laying"
         "Tits",                                     #Girl part that must be available to select position. Can be "None", "Tits", or "Vagina"
         "Foreplay",                                 #Skill used to determine how fast arousal is gained each round
-        15,                                         #Base female arousal gain per round
+        10,                                         #Base female arousal gain per round
         20,                                         #Base male arousal gain per round
         [],                                         #"Connections". Currently unused as far as I can tell. Use link_positions() or Link_positions_two_way() instead
         "intro_SB_Titfuck_Kneeling",                #Name of label describing getting into positions

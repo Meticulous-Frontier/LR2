@@ -1,6 +1,6 @@
 init:
     python:
-        SB_doggy_anal_dildo_dp = Position("Doggy Anal DP",80,110,"doggy","Lay","Vagina","Anal",25,18,[],
+        SB_doggy_anal_dildo_dp = Position("Doggy Anal DP",90,120,"doggy","Lay","Vagina","Anal",25,18,[],
         "intro_SB_doggy_anal_dildo_dp",
         ["scene_SB_doggy_anal_dildo_dp_1","scene_SB_doggy_anal_dildo_dp_2"],
         "outro_SB_doggy_anal_dildo_dp",
