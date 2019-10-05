@@ -135,6 +135,41 @@ init -1:
         # Adds learn_home function to the_person.
         Person.learn_home = learn_home
 
+        def get_known_opinion_list(self, include_sexy = False, include_normal = True, only_positive = False, only_negative = False): #Gets the topic string of a random opinion this character holds. Includes options to include known opinions and sexy opinions. Returns None if no valid opinion can be found.
+            the_dict = {} #Start our list of valid opinions to be listed as empty
+
+            if include_normal: #if we include normal opinions build a dict out of the two
+                the_dict = dict(the_dict, **self.opinions)
+
+            if include_sexy: #If we want sexy opinions add them in too.
+                the_dict = dict(the_dict, **self.sexy_opinions)
+
+            unknown_keys = []
+            for k in the_dict: #Go through each value in our combined normal and sexy opinion dict
+                if not the_dict[k][1]: #Check if we know about it...
+                    unknown_keys.append(k) #We build a temporary list of keys to remove because otherwise we are modifying the dict while we traverse it.
+            for del_key in unknown_keys:
+                del the_dict[del_key]
+
+            remove_keys = []
+            if only_positive:
+                for k in the_dict:
+                    if self.get_opinion_score(k) <= 0:
+                        remove_keys.append(k)
+
+            if only_negative:
+                for k in the_dict:
+                    if self.get_opinion_score(k) > 0:
+                        remove_keys.append(k)
+
+            for del_key in remove_keys:
+                del the_dict[del_key]
+
+            return the_dict.keys()
+
+        Person.get_known_opinion_list = get_known_opinion_list
+
+
         ## STRIP OUTFIT TO MAX SLUTTINESS EXTENSION
         # Strips down the person to a clothing their are comfortable with (starting with top, before bottom)
         # narrator_messages: narrator voice after each item of clothing stripped, use '[person.<title>]' for titles and '[strip_choice.name]' for clothing item.

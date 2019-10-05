@@ -3,6 +3,7 @@ init -1:
         def build_position_willingness_string_enhanced(self, the_person): #Generates a string for this position that includes a tooltip and coloured willingness for the person given.
             willingness_string = ""
             tooltip_string = ""
+            opinion_string = ""
 
             if the_person.effective_sluttiness() >= self.slut_cap:
                 if the_person.arousal >= self.slut_cap:
@@ -21,9 +22,18 @@ init -1:
                 willingness_string = "{color=#FF3D3D}Too Slutty{/color}"
                 tooltip_string = " (tooltip)This position is so far beyond what she considers appropriate that she would never dream of it."
 
+            positive_opinions = the_person.get_known_opinion_list(include_sexy = True, include_normal = False, only_positive = True, only_negative = False)
+            negative_opinions = the_person.get_known_opinion_list(include_sexy = True, include_normal = False, only_positive = False, only_negative = True)
+
+            if any(x in positive_opinions for x in self.opinion_tags):
+                opinion_string = " {color=#0044AA}Favorite{/color}"
+            if any(x in negative_opinions for x in self.opinion_tags):
+                opinion_string = " {color=#0044AA}Dislike{/color}"
+
+
             if self.check_clothing(the_person):
-                return self.name + "\n{size=22}" + willingness_string + "{/size}" + tooltip_string
+                return self.name + "{size=22}\n" + willingness_string + opinion_string + "{/size}" + tooltip_string
             else:
-                return self.name + "\n{size=22}" + willingness_string + "\nObstructed by Clothing{/size} (disabled)"
+                return self.name + "{size=22}\n" + willingness_string + opinion_string + "\nObstructed by Clothing{/size} (disabled)"
 
         Position.build_position_willingness_string = build_position_willingness_string_enhanced
