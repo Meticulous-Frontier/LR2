@@ -323,9 +323,9 @@ init -1:
                 self.wear_uniform() # Reset uniform
             else:
                 self.outfit.update_slut_requirement()
+                self.outfit = self.planned_outfit.get_copy()    #restore outfit
                 if self.outfit.slut_requirement > self.sluttiness and show_review_message:
                     self.call_dialogue("clothing_review")
-                self.outfit = self.planned_outfit.get_copy()    #restore outfit
 
         Person.review_outfit = review_outfit_enhanced
 
@@ -419,10 +419,10 @@ init -1:
             final_top = Composite(*composite_top_params)
 
             renpy.show("Bottom Composite", at_list=[character_placement, scale_person(self.height)], layer="Active", what=final_bottom, tag=self.name+"Bottom")
+            renpy.show("Top Composite", at_list=[character_placement, scale_person(self.height)], layer="Active", what=final_top, tag=self.name+"Top")
             if split_clothing: #Only show this if we actually had something returned to us.
                 renpy.show("Removed Item", at_list=[character_placement, scale_person(self.height), clothing_fade], layer="Active", what=split_clothing, tag=self.name+"Middle")
                 self.outfit.remove_clothing(the_clothing)
-            renpy.show("Top Composite", at_list=[character_placement, scale_person(self.height)], layer="Active", what=final_top, tag=self.name+"Top")
 
         Person.draw_animated_removal = draw_animated_removal_enhanced
 
