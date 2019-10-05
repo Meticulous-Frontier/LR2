@@ -323,9 +323,11 @@ init -1:
                 self.wear_uniform() # Reset uniform
             else:
                 self.outfit.update_slut_requirement()
-                self.outfit = self.planned_outfit.get_copy()    #restore outfit
-                if self.outfit.slut_requirement > self.sluttiness and show_review_message:
-                    self.call_dialogue("clothing_review")
+                # only show review message when parameter is true and she doesn't feel comfortable in her current outfit
+                show_review_message = show_review_message and self.outfit.slut_requirement > self.sluttiness   
+                self.outfit = self.planned_outfit.get_copy()    # always restore outfit
+                if show_review_message:
+                    self.call_dialogue("clothing_review") # must be last call in function
 
         Person.review_outfit = review_outfit_enhanced
 
