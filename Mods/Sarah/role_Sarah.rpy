@@ -12,7 +12,7 @@
 # INTRO
 # Hire
 # Story arc part one: She catches you in the office on Saturday, invites you to bar where she is meeting a friend. Close the bar down with her
-# Story arc part one: She comes looking for you at the office on Saturday. Invites you out to drinks with jut her. She winds up at your place.
+# Story arc part two: She comes looking for you at the office on Saturday. Invites you out to drinks with jut her. She winds up at your place.
 # Story arc part three: Catch her swiping breast enhancement serums on friday  NOTE: Part three has separate requirements from one and two and could happen before or after either part.
 # Following monday, observe the results
 # Story part four: Help her seduce another employee
@@ -118,7 +118,7 @@ label Sarah_intro_label():
     "You hear the doorbell ring. You don't remember expecting anyone? You go and answer it."
     $ the_person.draw_person()
     "Standing at your door is a cute brunette, fairly short, and strikingly familiar..."
-    "She appears to be holding some kind of clipboard. A door to door salewoman? Do those still exist?"
+    "She appears to be holding some kind of clipboard. A door to door saleswoman? Do those still exist?"
     the_person.char "Hello sir, I am [the_person.title], with Metropolis Power and Light, I was just wondering if you had ever thought about installing solar panels..."
     "She begins talking about the benefits and tax credits associated with solar panels, but you have a hard time listening."
     "This girl... she look so familiar! Where do you know her from!?!"
@@ -159,14 +159,14 @@ label Sarah_intro_label():
     the_person.char "... I was really hoping to eventually move up to HR director there. I love working with other people, and the small business atmosphere was great!"
     "HR director? You've never heard of such a position."
     mc.name "So, what kind of work would you do as an HR director that is different from a regular HR position?"
-    the_person.char "Well, I would be in charge of the direction of the company in general, as far as work values, help with compan morale..."
+    the_person.char "Well, I would be in charge of the direction of the company in general, as far as work values, help with company morale..."
     "She goes on to list multiple duties, aspects of running a small business that you had honestly never considered before."
     "When she finishes, you consider things for a moment. It would be REALLY handy to have someone around like this. She already has some work experience, and is young and ready to prove herself."
     "But, before you hire her, you would need to set up the HR director position at the company. Alternatively, you could still setup the new position, but hire someone else to fill the position."
     menu:
         "Offer to hire her":
-            mc.name "So, as it turns out, I just recently started a new business making small run pharmaceuticals. You seem pretty knowledgable, would you consider running the HR department?"
-            "[the_person.title] is caught completely off gaurd by your offer."
+            mc.name "So, as it turns out, I just recently started a new business making small run pharmaceuticals. You seem pretty knowledgeable, would you consider running the HR department?"
+            "[the_person.title] is caught completely off guard by your offer."
             the_person.char "Wait, so, you run a small business? I mean, I would love to, but I can't afford to do another unpaid internship right now."
             mc.name "I didn't say it was unpaid, this would definitely be a paid position."
             $ the_person.draw_person(position = "stand3", emotion = "happy")
@@ -202,7 +202,7 @@ label Sarah_hire_label():
     the_person.char "That sounds great! When can I get started?"
     mc.name "Tomorrow morning. I'll text the address after this call. We will go over your role and responsibilities when you get there."
     the_person.char "Yes! I'm so glad to finally be done selling solar panels. I'll see you in the morning!"
-    "You hang up the phone. You quickly text [the_person.title] the adress of your business."
+    "You hang up the phone. You quickly text [the_person.title] the address of your business."
     #TODO Hire Sarah officially here?
     $ HR_director_initial_hire = Action("Hire HR Director",HR_director_initial_hire_requirement,"HR_director_initial_hire_label", args = the_person) #Set the trigger day for the next monday. Monday is day%7 == 0
     $ mc.business.mandatory_crises_list.append(HR_director_initial_hire) #Add the event here so that it pops when the requirements are met.
@@ -215,7 +215,7 @@ label Sarah_third_wheel_label():
     "By yourself on the weekend at work, you get up for a minute and decide to stretch your legs and walk the hallways for a bit."
     "As you pass by the HR offices, you notice the HR Director's office door is open and the light is on. You decide to investigate."
     $ scene_manager.add_actor(the_person, position = "sitting")
-    "You see [the_person.possessive_title] sitting at her desk, rumaging through her drawers looking for something."
+    "You see [the_person.possessive_title] sitting at her desk, rummaging through her drawers looking for something."
     "She notices you step in her door and looks surprised."
     the_person.char "Oh! Hey [the_person.mc_title]. I was just looking for something I left in my desk. What are you doing here? Isn't this place closed down for the weekend?"
     mc.name "Yeah, well, I had a few things I wanted to get done over the weekend. Is it something I can help you find?"
@@ -276,7 +276,7 @@ label Sarah_third_wheel_label():
     sarah_friend.char "Hey girl! Is he with you?"
     "She nods towards you."
     the_person.char "Yup! This is my bo... I mean, an old friend of mine. [mc.name] this is [sarah_friend.title]!"
-    "You make your acquantainces and sit down. [sarah_friend.title] also introduces you to her boyfriend."
+    "You make acquaintance and sit down. [sarah_friend.title] also introduces you to her boyfriend."
     "You chat for a bit, but notice that [sarah_friend.title] keeps checking you out. Normally you would be testing the waters with her, but with [the_person.title] here, you are a little leary."
     mc.name "Hey, how about I get us a couple drinks, [the_person.title]?"
     the_person.char "Oh! That sounds great! Can you get me an appletini?"
@@ -343,10 +343,10 @@ label Sarah_catch_stealing_label():
     $ the_person.change_love(3)
     $ the_person.draw_person(emotion = "happy")
     "She is very relieved to hear that."
-    the_person.char "Oh! Thank you [the_persom.mc_title]! I'm sorry, I won't be sneaky like that again. I just... you now I've always had such a small chest and I've always been really self concious about it."
+    the_person.char "Oh! Thank you [the_person.mc_title]! I'm sorry, I won't be sneaky like that again. I just... you now I've always had such a small chest and I've always been really self concious about it."
     the_person.char "I've thought about getting implants before but... surgery seems so extreme for a cosmetic issue."
     mc.name "So, how many are you planning to take?"
-    the_person.char "Oh, well, research says we don't know for sure how effectice they are... I figure I'll just take one each day until I go up a few cup sizes."
+    the_person.char "Oh, well, research says we don't know for sure how effective they are... I figure I'll just take one each day until I go up a few cup sizes."
     the_person.char "I've already ordered new bras and everything. I'm going to keep a careful record of how many I take and when, and then take measurements over the weekend."
     "[stephanie.name] is going to stop by this weekend to help document everything, she said it would be good for research..."
     "You think about it for a moment. You picture [the_person.title] for a moment with some nice 'C' cup tits... but then you can't help but imagine if she went crazy with it and took more."
@@ -463,7 +463,7 @@ label Sarah_tits_reveal_label():
     $ the_person.draw_person(position = "blowjob")
     "[the_person.possessive_title] eagerly begins opening your pants. She pulls out your cock and gives it a few gentle strokes."
     the_person.char "I can't believe I'm finally doing this. This all feels like a dream!"
-    "She looks up at you from her knees. She looks you right in the eyes as she leans foward and slides your cock between her pillowy tits."
+    "She looks up at you from her knees. She looks you right in the eyes as she leans forward and slides your cock between her pillowy tits."
     "With both hands holding her breasts together, she slowly starts to move her pillowy flesh up and down your erection."
     call sex_description(the_person, SB_Titfuck_Kneeling, make_floor(), round = 1, private = True, girl_in_charge = True) from _call_sex_description_sarah_tits_reveal_1
     if the_person.arousal > 100: #She finished!
