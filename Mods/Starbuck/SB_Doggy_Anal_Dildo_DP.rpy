@@ -82,7 +82,7 @@ label scene_SB_doggy_anal_dildo_dp_1(the_girl, the_location, the_object, the_rou
                  "[the_girl.possessive_title] begins to twerk up and down your shaft with quick, shallow movements."
                  if mc.arousal > 70:
                       mc.name "Damn that feels good. You're gonna make me cum if you keep that up. Where do you want my load?"
-                      if the_girl.get_opinion_score("creampies") > 0:
+                      if the_girl.get_opinion_score("anal creampies") > 0:
                            the_girl.char "You should just shove it in as deep as you can and cum inside me."
                       elif the_girl.get_opinion_score("being covered in cum") > 0:
                            the_girl.char "You should pull out and cum all over my ass. That would be so hot..."
@@ -157,13 +157,13 @@ label scene_SB_doggy_anal_dildo_dp_2(the_girl, the_location, the_object, the_rou
             "You enjoy her efforts before you speak clearly to her."
             mc.name "You are such a slut. Is it nice to finally have a real cock, stuffed deep in your tight little asshole?"
             "[the_girl.possessive_title] is writhing in pleasure, having her fetish of anal sex fulfilled. The extra stimulation from the dildo just makes it even better."
-            the_girl.char "Oh god it is. Everytime I play with my ass and all I can think about is your big meaty dick buried inside me."
+            the_girl.char "Oh god it is. Every time I play with my ass and all I can think about is your big meaty dick buried inside me."
             "You grab her hair at the base of her scalp and pull her head back before whispering into her ear."
             mc.name "Don't worry, slut. This won't be the last time I stuff your holes. This one especially."
             "You give her prone body a forceful thrust."
             "You can see goosebumps all over [the_girl.possessive_title]'s skin. She moans and then begs you to keep fucking her."
             the_girl.char "I was made to be your little cock sleeve. Fuck me [the_girl.mc_title]!"
-        elif the_girl.get_opinion_score("creampies") > 0:
+        elif the_girl.get_opinion_score("anal creampies") > 0:
             the_girl.char "Holy hell that is deep... tell me... tell me you'll push it this deep again when you cum... that would be so hot!"
             $mc.change_arousal(5)
             "In your mind, you play out the fantasy of cumming so deep in [the_girl.possessive_title]'s ass, even when you pull out not a drop of your seed leaks out."
@@ -202,14 +202,14 @@ label outro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object, the_round
         "Cum inside of her.":
             if mc.condom:
                 "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum."
-                "She gasps with every final thrust as you fill your condom, which is slowly expanding inside her to accomodate your seed."
+                "She gasps with every final thrust as you fill your condom, which is slowly expanding inside her to accommodate your seed."
                 if the_girl.get_opinion_score("bareback sex") > 0:
                     the_girl.char "Oh god, imagine if you weren't wearing that rubber thing... I could feel you filling me up!"
                 else:
                     the_girl.char "That's it, cum deep!"
                 "You wait until your orgasm has passed completely, then pull out and sit back. Her asshole gapes slightly. You condom is full of your potent seed."
                 if SB_check_fetish(the_girl, cum_internal_role):
-                    "[the_girl.possessive_title] quickly reachs back and grabs your cock. She hastily pulls your condom off, careful not to spill a drop."
+                    "[the_girl.possessive_title] quickly reaches back and grabs your cock. She hastily pulls your condom off, careful not to spill a drop."
                     the_girl.char "I'm not letting a drop of this delicious cum go to waste!"
                     "She brings the condom to her mouth and drains it all into her mouth in one quick motion. You can see her pupils dilate as she feeds her cum fetish."
                     "She turns the condom inside out and licks the inside of it, desperate to get every drop of cum she possibly can."
@@ -224,9 +224,9 @@ label outro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object, the_round
                     the_girl.char "Mmmm, look at all that cum. I guess that means my ass was pretty good!"
                 return
             "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
-            if the_girl.get_opinion_score("creampies") > 0:
+            if the_girl.get_opinion_score("anal creampies") > 0:
                 the_girl.char "Yes! Fill my ass with your cum!"
-            $ cum_in_ass(the_girl)
+            $ the_girl.cum_in_ass()
             $ SB_doggy_anal_dildo_dp.redraw_scene(the_girl)
             if the_girl.sluttiness > 110:
                 the_girl.char "Oh god it's so good. It doesn't matter which hole you do it in, I love it when you cum inside me."
@@ -274,7 +274,7 @@ label outro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object, the_round
                 $ the_girl.cum_on_face()
                 $ the_girl.draw_person(position = "blowjob")
                 "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."
-            "You take a deep breath to steady yourself once you've finised orgasming. [the_girl.possessive_title] looks up at you from her knees, face covered in your semen."
+            "You take a deep breath to steady yourself once you've finished orgasming. [the_girl.possessive_title] looks up at you from her knees, face covered in your semen."
             $ the_girl.call_dialogue("cum_face")
 
 

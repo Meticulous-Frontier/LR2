@@ -182,7 +182,7 @@ label outro_SB_anal_swing(the_girl, the_location, the_object, the_round):
     "[the_girl.possessive_title]'s tight ass draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
     $the_girl.call_dialogue("sex_responses_anal")
     mc.name "Ah, I'm going to cum!"
-    if the_girl.get_opinion_score("creampies") > 0 or mc.condom:
+    if the_girl.get_opinion_score("anal creampies") > 0 or mc.condom:
             the_girl.char "Yes! Shove it in deep [the_girl.mc_title]!"
     elif mc.condom:
         the_girl.char "That's it baby, cum for me! Show me how much you love my ass!"
@@ -204,18 +204,18 @@ label outro_SB_anal_swing(the_girl, the_location, the_object, the_round):
                 return
             else:
                 "You pull back on the swing straps and drive your cock deep inside of her as you cum. She moans as you body dumps your load deep into her bowel."
-            if the_girl.get_opinion_score("creampies") > 0:
+            if the_girl.get_opinion_score("anal creampies") > 0:
                 the_girl.char  "Yes! Fill your slut's ass with your cum! It's so hot!"
             if the_girl.arousal > 110:
                 "You feel her bowel contracting around your dick as she also starts to orgasm."
                 $ the_girl.change_happiness(5)
-            $ cum_in_ass(the_girl)
+            $ the_girl.cum_in_ass()
             $ SB_anal_swing.redraw_scene(the_girl)
             if SB_check_fetish(the_girl, cum_internal_role):
-                "[the_girl.possessive_title]'s body goes rigid as your cum poors into her ass. Goosebumps erupt all over her body as her brain registers her creampie."
+                "[the_girl.possessive_title]'s body goes rigid as your cum pours into her ass. Goosebumps erupt all over her body as her brain registers her creampie."
                 the_girl.char "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
                 "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
-            elif the_girl.get_opinion_score("creampies") > 0:
+            elif the_girl.get_opinion_score("anal creampies") > 0:
                 the_girl.char "Yes!... Thank you so much [the_girl.mc_title]. It's inside me... you know I love that so much..."
             elif the_girl.sluttiness > 110:
                 the_girl.char "Oh god it's so good. It makes me so happy to be pumped full like this."

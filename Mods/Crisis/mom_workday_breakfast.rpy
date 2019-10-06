@@ -286,7 +286,7 @@ label mom_breakfast_action_label():
             "You climax in a frenzy. She arches her back and moans involuntarily when she feels your cum flood her rectum. Her orgasm hits immediately after yours."
             "Finally speechless, [the_person.title]'s body stops rocking, but you feel the twitching of her sphincter as orgasmic waves hit her. You sigh happily, dumping the last of your cum insider her."
 
-            $ cum_in_ass(the_person)
+            $ the_person.cum_in_ass()
             $ mc.listener_system.fire_event("girl_climax", the_person = the_person) #TODO check and make sure this works...
             $ the_person.change_happiness(5)
             $ the_person.change_obedience(5)

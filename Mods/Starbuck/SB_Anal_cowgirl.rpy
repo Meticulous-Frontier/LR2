@@ -150,7 +150,7 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_round):
     mc.name "Fuck, I'm going to cum!"
 
     #Perhaps an option where she hesitates and you grab her hips and pull her down while you cum.
-    $ threshold = 120 + (-20 * the_girl.get_opinion_score("creampies")) + (-20 * the_girl.get_opinion_score("anal sex"))
+    $ threshold = 120 + (-20 * the_girl.get_opinion_score("anal creampies")) + (-20 * the_girl.get_opinion_score("anal sex"))
     if mc.condom:
         the_girl.char "Yes! Ah!"
         "[the_girl.possessive_title] drops herself down, grinding her hips against yours and pushing your cock as deep into her ass as possible."
@@ -175,7 +175,7 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_round):
             the_girl.char "That's it baby! Give your cum to [the_girl.title]!"
         else:
             the_girl.char "Oh my god... Give it all to me [the_girl.mc_title]... Fill my ass up!"
-        $ cum_in_ass(the_girl)
+        $ the_girl.cum_in_ass()
         $ SB_anal_cowgirl.redraw_scene(the_girl)
         the_girl.char "Oh yes... so full..."
         "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
@@ -193,7 +193,7 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_round):
 
     else:
         #She hesitates and you can decide to pull her down or not.
-        "[the_girl.possessive_title] starts to pull up and off of you. She hesistates with the tip of your cock just inside of her ass."
+        "[the_girl.possessive_title] starts to pull up and off of you. She hesitates with the tip of your cock just inside of her ass."
         the_girl.char "I... I really shouldn't let you..."
         "She bites her lip and moans, unsure of what to do."
         menu:
@@ -202,7 +202,7 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_round):
                 "The feeling of her tight, warm ass sliding down and engulfing your cock again pushes you over the edge. You pull [the_girl.possessive_title] tight against you and unload inside of her."
                 the_girl.char "Ah! Fuck..."
                 $ the_girl.change_obedience(3)
-                $ cum_in_ass(the_girl)
+                $ the_girl.cum_in_ass()
                 $ SB_anal_cowgirl.redraw_scene(the_girl)
                 "You give a few half-hearted pumps when you're done, then tap [the_girl.possessive_title] on the ass. She slides off of your dick and collapses beside you."
 
