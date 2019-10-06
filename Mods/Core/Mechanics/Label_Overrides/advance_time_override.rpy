@@ -40,6 +40,9 @@ init 5 python:
     global crisis_base_chance
     global morning_crisis_base_chance
 
+    # some crisis events have impact on game dynamic and should be allowed to trigger often
+    excluded_crisis_tracker_events = [work_relationship_change_crisis]
+
     crisis_base_chance = 8
     morning_crisis_base_chance = 4
 
@@ -173,7 +176,8 @@ label advance_time_random_crisis_label():
     if the_crisis:
         #$ mc.log_event("General [[" + str(len(possible_crisis_list)) + "]: " + the_crisis.name, "float_text_grey")
         $ crisis_chance = crisis_base_chance
-        $ crisis_tracker.append([c[0] for c in crisis_list].index(the_crisis)) # add crisis index to recent crisis list
+        if not the_crisis in excluded_crisis_tracker_events:
+            $ crisis_tracker.append([c[0] for c in crisis_list].index(the_crisis)) # add crisis index to recent crisis list
         if _return == "Advance Time":
             $ mandatory_advance_time = True
         $ the_crisis.call_action()
@@ -279,7 +283,8 @@ label advance_time_random_morning_crisis_label():
     if the_morning_crisis:
         #$ mc.log_event("Morning: [[" + str(len(possible_morning_crises_list)) + "] : " +  the_morning_crisis.name, "float_text_grey")
         $ morning_crisis_chance = morning_crisis_base_chance
-        $ morning_crisis_tracker.append([c[0] for c in morning_crisis_list].index(the_morning_crisis)) # add crisis index to recent crisis list
+        if not the_morning_crisis in excluded_crisis_tracker_events:
+            $ morning_crisis_tracker.append([c[0] for c in morning_crisis_list].index(the_morning_crisis)) # add crisis index to recent crisis list
         $ the_morning_crisis.call_action()
         if _return == "Advance Time":
             $ mandatory_advance_time = True        
