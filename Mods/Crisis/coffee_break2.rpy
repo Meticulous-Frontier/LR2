@@ -129,7 +129,11 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
     else:
         loser.char "This is not fair [winner_one.name], you wanted me to loose."
         winner_one.char "No I didn't. And you know the rules!"
+
         $ scene_manager.update_actor(loser, emotion = "angry")
+        # the loser feels betrayed by winner_one who is holding the straws
+        $ town_relationships.worsen_relationship(winner_one, loser)
+
         loser.char "Fine, I'll do it but only my top and if I get it a third time in a row I swear..."
         $ scene_manager.strip_actor_outfit_to_max_sluttiness(loser, exclude_lower = True, temp_sluttiness_boost = 30)
         if loser.outfit.tits_visible():
