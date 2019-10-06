@@ -9,88 +9,40 @@ transform transform_two():
 init 1 python:
     sexy_opinions_list.append("threesomes")
 
-    def SB_draw_two_person_scene(person_one, person_two, one_position = None, one_emotion = None, one_special_modifier = None, one_pos_x = 1.0, one_pos_y = 1.0, one_scale = 1.0, two_position = None, two_emotion = None, two_special_modifier = None, two_pos_x = 1.0, two_pos_y = 1.0, two_scale = 1.0): #Draw two people.
+    def SB_draw_two_person_scene(person_one, person_two, one_position = None, one_emotion = None, one_special_modifier = None, one_pos_x = 1.0, one_pos_y = 1.0, one_scale = 1.0, two_position = None, two_emotion = None, two_special_modifier = None, two_pos_x = 1.0, two_pos_y = 1.0, two_scale = 1.0, lighting = None): #Draw two people.
         #NOTE person two is always drawn second.
         renpy.scene("Active")
         renpy.show_screen("SB_two_person_info_ui", person_one, person_two)
         if one_position is None:
             one_position = person_one.idle_pose #Easiest change is to call this and get a random standing posture instead of a specific idle pose. We redraw fairly frequently so she will change position frequently.
-        #self.hair_style.draw_hair_back(self.hair_colour,self.height) #NOTE: Not currently used to see if it's actually needed.
-
-        displayable_list = [] # We will be building up a list of displayables passed to us by the various objects on the person (their body, clothing, etc.)
 
         if one_emotion is None:
             one_emotion = person_one.get_emotion()
 
+        if lighting is None:
+            lighting = mc.location.get_lighting_conditions()
 
         transform_one.xpos = one_pos_x
         transform_one.ypos = one_pos_y
         transform_one.zoom = one_scale
 
-        displayable_list.append(person_one.body_images.generate_item_displayable(person_one.body_type,person_one.tits,one_position)) #Now add their body
-
-        displayable_list.append(person_one.expression_images.generate_emotion_displayable(one_position,one_emotion, special_modifier = one_special_modifier)) #Get the face displayable first so we can layer the neck properly.
-
-        size_render = renpy.render(displayable_list[0], 10, 10, 0, 0) #We need a render object to check the actual size of the body displayable so we can build our composite accordingly.
-        the_size = size_render.get_size() # Get the size. Without it our displayable would be stuck in the top left when we changed the size ofthings inside it.
-        x_size = __builtin__.int(the_size[0])
-        y_size = __builtin__.int(the_size[1])
-
-
-
-        displayable_list.extend(person_one.outfit.generate_draw_list(person_one,one_position,one_emotion,one_special_modifier)) #Get the displayables for everything we wear. Note that extnsions do not return anything because they have nothing to show.
-        displayable_list.append(person_one.hair_style.generate_item_displayable("standard_body",person_one.tits,one_position)) #Get hair
-
-        #NOTE: default return for the_size is floats, even though it is in exact pixels. Use int here otherwise positional modifiers like xanchor and yalign do not work (no displayable is shown at all!)
-        composite_list = [(x_size,y_size)] #Now we build a list of our parameters, done like this so they are arbitrarily long
-        for display in displayable_list:
-            composite_list.append((0,0)) #Center all displaybles on the top left corner, because of how they are rendered they will all line up.
-            composite_list.append(display) #Append the actual displayable
-
-        final_image = im.Composite(*composite_list) # Create a composite image using all of the displayables
+        one_final_image = person_one.build_person_displayable(one_position, one_emotion, one_special_modifier, False, lighting)            
+        renpy.show(person_one.name,at_list=[transform_one, scale_person(person_one.height)],layer="Active",what=one_final_image,tag=person_one.name)
 
         #Now do person two
 
-        renpy.show(person_one.name,at_list=[transform_one, scale_person(person_one.height)],layer="Active",what=final_image,tag=person_one.name)
-
         if two_position is None:
             two_position = person_two.idle_pose #Easiest change is to call this and get a random standing posture instead of a specific idle pose. We redraw fairly frequently so she will change position frequently.
-        #self.hair_style.draw_hair_back(self.hair_colour,self.height) #NOTE: Not currently used to see if it's actually needed.
-
-        displayable_list = [] # We will be building up a list of displayables passed to us by the various objects on the person (their body, clothing, etc.)
 
         if two_emotion is None:
             two_emotion = person_two.get_emotion()
-
-
 
         transform_two.xpos = two_pos_x
         transform_two.ypos = two_pos_y
         transform_two.zoom = two_scale
 
-        displayable_list.append(person_two.body_images.generate_item_displayable(person_two.body_type,person_two.tits,two_position)) #Now add their body
-
-        displayable_list.append(person_two.expression_images.generate_emotion_displayable(two_position,two_emotion, special_modifier = two_special_modifier)) #Get the face displayable first so we can layer the neck properly.
-
-        size_render = renpy.render(displayable_list[0], 10, 10, 0, 0) #We need a render object to check the actual size of the body displayable so we can build our composite accordingly.
-        the_size = size_render.get_size() # Get the size. Without it our displayable would be stuck in the top left when we changed the size ofthings inside it.
-        x_size = __builtin__.int(the_size[0])
-        y_size = __builtin__.int(the_size[1])
-
-
-
-        displayable_list.extend(person_two.outfit.generate_draw_list(person_two,two_position,two_emotion,two_special_modifier)) #Get the displayables for everything we wear. Note that extnsions do not return anything because they have nothing to show.
-        displayable_list.append(person_two.hair_style.generate_item_displayable("standard_body",person_two.tits,two_position)) #Get hair
-
-        #NOTE: default return for the_size is floats, even though it is in exact pixels. Use int here otherwise positional modifiers like xanchor and yalign do not work (no displayable is shown at all!)
-        composite_list = [(x_size,y_size)] #Now we build a list of our parameters, done like this so they are arbitrarily long
-        for display in displayable_list:
-            composite_list.append((0,0)) #Center all displaybles on the top left corner, because of how they are rendered they will all line up.
-            composite_list.append(display) #Append the actual displayable
-
-        final_image_2 = im.Composite(*composite_list) # Create a composite image using all of the displayables
-
-        renpy.show(person_two.name,at_list=[transform_two, scale_person(person_two.height)],layer="Active",what=final_image_2,tag=person_two.name)
+        two_final_image = person_two.build_person_displayable(two_position, two_emotion, two_special_modifier, False, lighting)            
+        renpy.show(person_two.name,at_list=[transform_two, scale_person(person_two.height)],layer="Active",what=two_final_image,tag=person_two.name)
         return
 
 label SB_threesome_setup_helper(): #This function is designed to help come up with number for threesome positions.
