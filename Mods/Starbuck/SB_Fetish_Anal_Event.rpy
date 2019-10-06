@@ -469,11 +469,13 @@ label SB_free_strip_scene(the_person):
 #SBA40
 label SB_mom_anal_pay_label():
     $ the_person = mom
-    $ renpy.show(bedroom.name,what=bedroom.background_image)
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
     "You're getting ready for bed when [the_person.possessive_title] calls from downstairs."
     the_person.char "[the_person.mc_title], could we talk for a moment?"
     mc.name "Sure, down in a second."
-    $ renpy.show(kitchen.name,what=kitchen.background_image)
+    $ mc.change_location(kitchen)
+    $ mc.location.show_background()    
     $ the_person.draw_person(position = "sitting")
     "[the_person.possessive_title] is sitting at the kitchen table, a collection of bills laid out in front of her."
     "She is fidgeting a bit. You can tell she is a little nervous about something."
@@ -501,7 +503,7 @@ label SB_mom_anal_pay_label():
             the_person.char "Thank you [the_person.mc_title]! Now, are you ready a show?"
             call SB_free_strip_scene(the_person) from _call_SB_free_strip_scene_SBA40
             "Now that she is naked, [the_person.possessive_title] quickly grabs your hand and leads you to her bedroom. When you get to her bed, she shoves you down on your back."
-            $ renpy.show(mom_bedroom.name,what=mom_bedroom.background_image)
+            $ mom_bedroom.show_background()
             the_person.char "Oh god, I need this so bad honey. You just lay back and let momma take care of you now."
             "[the_person.possessive_title] quickly strips you down. She reaches into her nightstand and grabs some lube. She hands it to you."
             the_person.char "Here! Can you get me, you know... ready?"
@@ -590,11 +592,11 @@ label SB_mom_anal_pay_label():
 #SBA50
 label SB_mom_anal_friday_label():
     $ the_person = mom
-    $ renpy.show(bedroom.name,what=bedroom.background_image)
+    $ bedroom.show_background()
     "You're hanging out in your room when you here [the_person.possessive_title] call form her room."
     the_person.char "[the_person.mc_title], are you home? It's Friday night! Can you come to my room?"
     mc.name "Sure, down in a second."
-    $ renpy.show(mom_bedroom.name,what=mom_bedroom.background_image)
+    $ mom_bedroom.show_background()
     $ the_person.outfit = lingerie_wardrobe.pick_random_outfit()
     $ the_person.draw_person(position = "stand4")
     "[the_person.title] is standing next to her bed. You quickly shut her door and lock it."
@@ -683,7 +685,7 @@ label SB_lily_anal_dp_fetish_label():
     "As you are finishing up with work for the day, you get a text on your phone. It is from Lily, [the_person.possessive_title]."
     the_person.char "Hey [the_person.mc_title]! Can you do me a favor? Meet me at the mall when you get off work. I need your help with something..."
     "You let her know you'll be there. You quickly finish up with your work and head over to the mall."
-    $ renpy.show(mall.name,what=mall.background_image)
+    $ mall.show_background()
     "When you get to the mall, you look around for a minute, then spot Lily. She waves to you then comes running over to you, giving you a big hug."
     $ the_person.draw_person(position = "stand4")
     the_person.char "Hey! Thanks for coming with me! I need your help with something!"
@@ -693,7 +695,7 @@ label SB_lily_anal_dp_fetish_label():
     the_person.char "Definitely! Don't worry, you'll be glad you came when you see where we are going."
     "Lily grabs you by the hand and leads you into the mall. It seems any inhibition she might have previously had being seen with her [the_person.mc_title] has vanished after being corrupted by your serums."
     "You are almost surprised when she leads you into the sex shop. The owner greets you as you walk in."
-    $ renpy.show(sex_store.name,what=sex_store.background_image)
+    $ sex_store.show_background()
     if starbuck.sluttiness > 50 or starbuck.love > 30:
         $ starbuck.draw_person(emotion = "happy")
         starbuck.char "Hello! Welcome to... Oh hey [the_person.mc_title]! Good to see you! Oh and you brought a partner! Hi I'm [starbuck.title]!"
@@ -795,8 +797,9 @@ label SB_starbuck_anal_intro():
     "You decide this is too good of an opportunity to pass up. You head over to the sex shop."
     #TODO Change locations to the sex shop
 
-    $ renpy.show(sex_store.name,what=sex_store.background_image)
     $ mc.change_location(sex_store)
+    $ mc.location.show_background()
+    
     "The door is locked so you give it a knock. [the_person.possessive_title] appears in the glass and quickly opens it for you."
     the_person.char "[the_person.mc_title]! You came!"
     "She gives you a quick wink."

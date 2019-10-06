@@ -1417,7 +1417,8 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     $ the_person.outfit = (the_person.wardrobe.decide_on_outfit(40)).get_copy()
 
     #TODO move the scene to the player's bedroom. and get dressed
-    $ renpy.show(bedroom.name,what=bedroom.background_image)
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
     $ the_person.draw_person(position = "stand4")
     "You and [the_person.possessive_title] head back to your place. Having already put one together, you and her quick have it all set up."
 

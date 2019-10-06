@@ -647,7 +647,7 @@ label casual_hotwife_sex_invite_label(the_person):
 label casual_hotwife_her_place_label(the_person):
     "You head over to [the_person.title]'s place. You can't believe you're gonna fuck her in front of her husband!"
     $ mc.change_location(the_person.home)
-    $ renpy.show(mc.location.name,what=mc.location.background_image)
+    $ mc.location.show_background()
     "You ring the doorbell. Soon [the_person.title] answers the door."
 
     $ CS_hotwife_lingerie = Outfit("Lingerie Set Classic White")
@@ -699,7 +699,7 @@ label casual_hotwife_her_place_label(the_person):
     $ the_person.reset_arousal()
     "You make your way back home. You can hardly believe your luck, fucking [the_person.title] in her house, in front of her husband, who is also the bartender!"
     $ mc.change_location(bedroom)
-    $ renpy.show(mc.location.name,what=mc.location.background_image)
+    $ mc.location.show_background()
     $ the_person.event_triggers_dict["hotwife_progress"] = 5
     return
 
@@ -743,7 +743,7 @@ label casual_hotwife_home_sex_label(the_person):
     $ the_person.reset_arousal()
     "You make your way back home after a sexy evening with [the_person.possessive_title]."
     $ mc.change_location(bedroom)
-    $ renpy.show(mc.location.name,what=mc.location.background_image)
+    $ mc.location.show_background()
 
     call advance_time from _call_advance_casual_hotwife_home_sex
     return
@@ -1029,7 +1029,7 @@ label hotwife_hookup_accept(the_person):
     "You put your phone in your pocket and head to the bar."
 
     $ mc.change_location(downtown_bar)
-    $ renpy.show(mc.location.name,what=mc.location.background_image)
+    $ mc.location.show_background()
 
     "A few minutes later, you walk into the bar. You start walking back toward the women's restroom. The bartender nods to you as you pass the bar."
     $ the_person.draw_person(position = "stand4")

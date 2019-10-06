@@ -405,7 +405,7 @@ label casual_athlete_phase_two_label(the_person):
 label casual_athlete_race_crisis_label(the_person):
     "It's race day! You make your way downtown, ready for your race with [the_person.title]."
     $ mc.change_location(downtown)
-    $ renpy.show(mc.location.name,what=mc.location.background_image)
+    $ mc.location.show_background()
     "You find where they are organizing the race. It is a 5 kilometer race, which is about three miles long."
     "You look around and eventually find [the_person.title]."
     $ the_person.draw_person(position = "stand3")
@@ -448,7 +448,7 @@ label casual_athlete_race_crisis_label(the_person):
     the_person.char "Alright, you won the race. I guess it's time to head back to my place?"
     "You call for an Uber and she gives you here address. Soon you are walking into [the_person.title]'s apartment."
     $ mc.change_location(the_person.home)
-    $ renpy.show(mc.location.name,what=mc.location.background_image)
+    $ mc.location.show_background()
     if not the_person.home in mc.known_home_locations:
         $ mc.known_home_locations.append(the_person.home)
     "As soon as you walkin the door, you grab [the_person.title]. You pick her up and push her against the wall."
@@ -846,10 +846,10 @@ label athlete_hookup_accept(the_person):
     "You put your phone in your pocket and head to the gym."
 
     $ mc.change_location(gym)
-    $ renpy.show(mc.location.name,what=mc.location.background_image)
+    $ mc.location.show_background()
 
     "A few minutes later, you walk into the gym. You locate the family lockerroom and discover it to be unlocked. You quietly let yourself in."
-    $ the_person.draw_person(position = "against_wall")
+    $ the_person.draw_person(position = "missionary")
     $ the_person.arousal = 20
     "You discover [the_person.possessive_title] sitting at one of the sinks, touching herself while waiting for you. Her pussy glistens with arousal."
     "You quickly lock the door behind you. She notices you walk in but doesn't say a word."
