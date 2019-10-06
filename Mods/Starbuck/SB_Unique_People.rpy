@@ -273,9 +273,10 @@ label starbuck_vaginal_skillup_label(the_person):
                             the_person.char "Let's do that again soon!"
                         else:
                             the_person.char "Thanks for the fuck!"
-                            $ the_person.reset_arousal()
-                            $ the_person.review_outfit(show_review_message = False)
-                            "You leave [the_person.possessive_title] to get cleaned up and get back to work."
+                        
+                        "You leave [the_person.possessive_title] to get cleaned up and get back to work."
+                        $ the_person.reset_arousal()
+                        $ the_person.review_outfit(show_review_message = False)
 
                     "No thanks":
                         "You thank her for the offer, but decide against it for now."
@@ -328,9 +329,10 @@ label starbuck_anal_skillup_label(the_person):
                             the_person.char "Let's do that again soon!"
                         else:
                             the_person.char "Thanks for the fuck!"
-                            $ the_person.reset_arousal()
-                            $ the_person.review_outfit(show_review_message = False)
+
                         "You leave [the_person.possessive_title] to get cleaned up and get back to work."
+                        $ the_person.reset_arousal()
+                        $ the_person.review_outfit(show_review_message = False)
 
                     "No thanks":
                         "You thank her for the offer, but decide against it for now."
@@ -383,9 +385,10 @@ label starbuck_oral_skillup_label(the_person):
                             the_person.char "Let's do that again soon!"
                         else:
                             the_person.char "Thanks for the fuck!"
-                            $ the_person.reset_arousal()
-                            $ the_person.review_outfit(show_review_message = False)
+
                         "You leave [the_person.possessive_title] to get cleaned up and get back to work."
+                        $ the_person.reset_arousal()
+                        $ the_person.review_outfit(show_review_message = False)
 
                     "No thanks":
                         "You thank her for the offer, but decide against it for now."
@@ -437,9 +440,10 @@ label starbuck_foreplay_skillup_label(the_person):
                             the_person.char "Let's do that again soon!"
                         else:
                             the_person.char "Thanks for the fuck!"
-                            $ the_person.reset_arousal()
-                            $ the_person.review_outfit(show_review_message = False)
-                            "You leave [the_person.possessive_title] to get cleaned up and get back to work."
+
+                        "You leave [the_person.possessive_title] to get cleaned up and get back to work."
+                        $ the_person.reset_arousal()
+                        $ the_person.review_outfit(show_review_message = False)
 
                     "No thanks":
                         "You thank her for the offer, but decide against it for now."
