@@ -145,7 +145,7 @@ label scene_SB_doggy_anal_dildo_dp_2(the_girl, the_location, the_object, the_rou
         "[the_girl.possessive_title] seems to be enjoying the double penetration you are giving her. She yelps in response to one particularly eager thrust."
         the_girl.char "God dammit, you're so fucking big. You feel huge... I'm so full."
     if the_girl.get_opinion_score("masturbating") > 0:
-        "You notice that[the_girl.possessive_title] now has one hand on her pussy, rubbing her clit, and with the other hand she reaches back and pulls her ass cheeks apart."
+        "You notice that [the_girl.possessive_title] now has one hand on her pussy, rubbing her clit, and with the other hand she reaches back and pulls her ass cheeks apart."
         $ the_girl.change_arousal(the_girl.get_opinion_score("masturbating" * 3))
     else:
         "[the_girl.possessive_title] reaches back with both hands and spreads her ass cheeks apart."
