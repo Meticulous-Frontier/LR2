@@ -369,8 +369,12 @@ label starbuck_oral_skillup_label(the_person):
                         "You head to the back of hte store with [the_person.possessive_title]. Watching the video, you learn several new tips and tricks for giving awesome oral."
                         "When you finish, you see [the_person.possessive_title] looking at you."
                         the_person.char "Wow, that was interesting!... you ready to give it a try, [the_person.mc_title]?"
-                        $ mc.current_stamina += -1
-                        call fuck_person(the_person) from _call_fuck_person_SBS30
+                        python:
+                            mc.current_stamina -= 1
+                            for clothing in the_person.outfit.get_lower_ordered():
+                                the_person.outfit.remove_clothing(clothing)
+
+                        call fuck_person(the_person, start_position = SB_Oral_Laying, skip_intro = True) from _call_fuck_person_SBS30
                         if the_person.arousal > 160:
                             the_person.char "Oh my god, I came so many times... did you make me squirt?"
                             $ the_person.change_obedience (5)
@@ -1020,7 +1024,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     "You consider her problem for a bit, but it is actually her that comes up with an idea first."
     the_person.char "So, I was thinking, maybe for my next video review you could umm,  you know, help me demonstrate something?"
     "She looks at you hopefully. This is an easy decision."
-    the_person.char "Absolutely. It's only fair. You've already put yourself out there, I'm ready to do my part."
+    mc.name "Absolutely. It's only fair. You've already put yourself out there, I'm ready to do my part."
     "[the_person.possessive_title] gives you a bright, beaming smile."
     the_person.char "Yes! Okay! Give me minute I'll meet you in the back! Get the camera ready!"
     "You make your way to the back. You get the camera setup and ready to go."
