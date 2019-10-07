@@ -115,12 +115,19 @@ init 2: # Need to allow for None name roles in this screen as well.
                     ysize 400
                     vbox:
                         text "Loves" style "menu_text_style" size 22
-                        for opinion in sorted(master_opinion_dict):
-                            if master_opinion_dict[opinion][0] == 2:
-                                if master_opinion_dict[opinion][1]:
-                                    text "   " + opinion.title() style "menu_text_style"
-                                else:
-                                    text "   ????" style "menu_text_style"
+                        viewport:
+                            scrollbars "vertical"
+                            mousewheel True
+                            frame:
+                                xsize 315
+                                background None
+                                vbox:
+                                    for opinion in sorted(master_opinion_dict):
+                                        if master_opinion_dict[opinion][0] == 2:
+                                            if master_opinion_dict[opinion][1]:
+                                                text "   " + opinion.title() style "menu_text_style"
+                                            else:
+                                                text "   ????" style "menu_text_style"
 
                 frame:
                     background "#1a45a1aa"
@@ -128,12 +135,19 @@ init 2: # Need to allow for None name roles in this screen as well.
                     ysize 400
                     vbox:
                         text "Likes" style "menu_text_style" size 22
-                        for opinion in sorted(master_opinion_dict):
-                            if master_opinion_dict[opinion][0] == 1:
-                                if master_opinion_dict[opinion][1]:
-                                    text "   " + opinion.title() style "menu_text_style"
-                                else:
-                                    text "   ????" style "menu_text_style"
+                        viewport:
+                            scrollbars "vertical"
+                            mousewheel True
+                            frame:
+                                xsize 315
+                                background None
+                                vbox:
+                                    for opinion in sorted(master_opinion_dict):
+                                        if master_opinion_dict[opinion][0] == 1:
+                                            if master_opinion_dict[opinion][1]:
+                                                text "   " + opinion.title() style "menu_text_style"
+                                            else:
+                                                text "   ????" style "menu_text_style"
 
                 frame:
                     background "#1a45a1aa"
@@ -141,12 +155,19 @@ init 2: # Need to allow for None name roles in this screen as well.
                     ysize 400
                     vbox:
                         text "Dislikes" style "menu_text_style" size 22
-                        for opinion in sorted(master_opinion_dict):
-                            if master_opinion_dict[opinion][0] == -1:
-                                if master_opinion_dict[opinion][1]:
-                                    text "   " + opinion.title() style "menu_text_style"
-                                else:
-                                    text "   ????" style "menu_text_style"
+                        viewport:
+                            scrollbars "vertical"
+                            mousewheel True
+                            frame:
+                                xsize 315
+                                background None
+                                vbox:
+                                    for opinion in sorted(master_opinion_dict):
+                                        if master_opinion_dict[opinion][0] == -1:
+                                            if master_opinion_dict[opinion][1]:
+                                                text "   " + opinion.title() style "menu_text_style"
+                                            else:
+                                                text "   ????" style "menu_text_style"
 
                 frame:
                     background "#1a45a1aa"
@@ -154,12 +175,19 @@ init 2: # Need to allow for None name roles in this screen as well.
                     ysize 400
                     vbox:
                         text "Hates" style "menu_text_style" size 22
-                        for opinion in sorted(master_opinion_dict):
-                            if master_opinion_dict[opinion][0] == -2:
-                                if master_opinion_dict[opinion][1]:
-                                    text "   " + opinion.title() style "menu_text_style"
-                                else:
-                                    text "   ????" style "menu_text_style"
+                        viewport:
+                            scrollbars "vertical"
+                            mousewheel True
+                            frame:
+                                xsize 315
+                                background None
+                                vbox:
+                                    for opinion in sorted(master_opinion_dict):
+                                        if master_opinion_dict[opinion][0] == -2:
+                                            if master_opinion_dict[opinion][1]:
+                                                text "   " + opinion.title() style "menu_text_style"
+                                            else:
+                                                text "   ????" style "menu_text_style"
 
                 frame:
                     background "#1a45a1aa"
