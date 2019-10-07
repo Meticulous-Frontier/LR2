@@ -96,6 +96,7 @@ label SB_fetish_anal_label(the_person):
             ###Reset Arousal
             #$ the_person.SB_fetish = "anal sex"
             $ the_person.sexy_opinions["anal sex"] = [FETISH_OPINION_VALUE, True]
+            $ the_person.sexy_opinions["anal creampies"] = [FETISH_OPINION_VALUE, True]
             "[the_person.possessive_title] takes a few minutes to recover, then turns to you."
             $ the_person.draw_person()
             the_person.char "Wow, that was amazing, [the_person.mc_title]. I don't know what has been coming over me lately... I just can't stop thinking about you bending me over..."
@@ -753,7 +754,7 @@ label SB_lily_anal_dp_fetish_label():
     the_person.char "Okay... Go slow... but I'm ready!"
     call sex_description(the_person, SB_doggy_anal_dildo_dp, make_floor(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBA60
     if the_person.arousal > 150:
-        "[the_person.possessive_title] is a sweaty, heaving mess. You know she orgasmed multiple times from the intense sensations of the double penetration."
+        "[the_person.possessive_title] is a sweaty, heaving mess. You know she had multiple orgasms from the intense sensations of the double penetration."
         "She looks back at you in awe."
     elif the_person.arousal > 100:
         "[the_person.possessive_title] is laying on the floor, exhausted from the intensity of the double penetration."
@@ -769,12 +770,12 @@ label SB_lily_anal_dp_fetish_label():
     $ mc.change_location(sex_store)
     "After you both clean up, you leave the back room of the sex shop."
     $ starbuck.draw_person(emotion = "happy")
-    starbuck.char "Have a good day! Thanks for shopping at Starbuck's sex shop!"
+    starbuck.char "Have a good day! Thank you for shopping at Starbuck's sex shop!"
     if starbuck.sluttiness > 50:
-        "You wave goodbye to Starbuck. You note some telltale signs of arousal, flushed cheeks, and you can see her nipples are erect."
+        "You wave goodbye to [the_person.possessive_title]. You note some telltale signs of arousal, flushed cheeks, and you can see her nipples are erect."
         "Was she watching you somehow? Oh well, you decide to head out."
     else:
-        "You wave goodbye to Starbuck and head out."
+        "You wave goodbye to [the_person.possessive_title] and head out."
 
     $ FETISH_ANAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
@@ -816,7 +817,7 @@ label SB_starbuck_anal_intro():
     "You walk up behind her and begin to run your hands along her delicious hips. You can see goosebumps break out along her skin."
     mc.name "Thinking of getting fucked in the ass? My my, [the_person.possessive_title], you seem to have quite the affinity for anal these days?"
     "[the_person.title] looks back at you."
-    the_person.char "It's true... I don't understand why, but lately I just find myself cosntantly daydreaming about taking it in the ass. I can't even masturbate anymore without some kind of plug back there!"
+    the_person.char "It's true... I don't understand why, but lately I just find myself constantly daydreaming about taking it in the ass. I can't even masturbate anymore without some kind of plug back there!"
     "Sounds like [the_person.title] has developed an anal fetish!"
     "You reach down and start to slowly play with her plug. Her body stiffens as she feels it begin to slowly work in and out of her. She lets out a long, low moan."
     $ the_person.change_arousal(10)
@@ -836,6 +837,7 @@ label SB_starbuck_anal_intro():
     the_person.char "It's about fucking time! Give it to me good, [the_person.mc_title], you know I can take it!"
     call sex_description(the_person, doggy_anal, make_bed(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBA70
     $ the_person.sexy_opinions["anal sex"] = [FETISH_OPINION_VALUE, True]
+    $ the_person.sexy_opinions["anal creampies"] = [FETISH_OPINION_VALUE, True]
     $ the_person.special_role.append(anal_fetish_role)
     $ the_person.sex_skills["Anal"] = 6
     "It's pretty clear from her sexual performance and the way she talks to you, that [the_person.title] has developed an anal fetish."
