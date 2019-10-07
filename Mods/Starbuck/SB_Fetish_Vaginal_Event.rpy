@@ -49,7 +49,7 @@ init 1 python:
 label SB_fetish_vaginal_label(the_person):
     "*Ding Dong*"
     "You're roused from your bed by a ring on your doorbell."
-    "You head to your front door and see [the_person.possessive_title] standing there... outside... in a very provacative outfit."
+    "You head to your front door and see [the_person.possessive_title] standing there... outside... in a very provocative outfit."
     $ the_person.outfit = SB_vaginal_outfit.get_copy()
     $ the_person.draw_person()
     ###Draw the girl###
@@ -144,16 +144,10 @@ label SB_fetish_vaginal_label(the_person):
 
             "That night, you have many pleasant dreams involving [the_person.possessive_title] and sex in all kinds of crazy positions."
             $ SB_random_fetish_key = get_random_from_list(FETISH_VAGINAL_OPINION_LIST)
-            if SB_random_fetish_key == "doggy style sex":
-                "A couple times in the night, you stir slightly when you hear [the_person.possessive_title] making moaning noises in their sleep, and talking about doggy style sex!"
-            if SB_random_fetish_key == "missionary style sex":
-                "A couple times in the night, you stir slightly when you hear [the_person.possessive_title] making moaning noises in their sleep, and talking about missionary style sex!"
-            if SB_random_fetish_key == "sex standing up":
-                "A couple times in the night, you stir slightly when you hear [the_person.possessive_title] making moaning noises in their sleep, and talking about standing sex!"
-            if SB_random_fetish_key == "vaginal sex":
-                "A couple times in the night, you stir slightly when you hear [the_person.possessive_title] making moaning noises in their sleep, and talking about all kinds of vaginal sex!"
-            #$ the_person.SB_fetish = SB_random_fetish_key
+            "A couple times in the night, you stir slightly when you hear [the_person.possessive_title] making moaning noises in their sleep, and talking about [SB_random_fetish_key]!"
+            $ the_person.sexy_opinions["vaginal sex"] = [FETISH_OPINION_VALUE, True]
             $ the_person.sexy_opinions[SB_random_fetish_key] = [FETISH_OPINION_VALUE, True]
+
             "She's been under the influence of your serums for a while now... you wonder if she's developed a fetish..."
             $ the_person.special_role.append(vaginal_fetish_role)
         "Refuse":       # allow for player to decide if he wants to induce fetish
@@ -197,7 +191,7 @@ label SB_fetish_vaginal_event_label(the_person):
                 mc.name "Thanks [the_person.title]! Yeah, it has been a pretty long day... It would be great to blow off some steam..."
                 "[the_person.possessive_title] gives you a lusty look. She smiles and bounces slightly on your bed."
                 $ the_person.change_slut_temp(2)
-                the_person.char "Excellent! Now don't think of me as your mom, just think of me as your private, slutty milf. I'll do wahtever your cock wants me to do, okay?"
+                the_person.char "Excellent! Now don't think of me as your mom, just think of me as your private, slutty milf. I'll do whatever your cock wants me to do, okay?"
                 "You nod and she slides closer to you on the bed."
                 $ mc.current_stamina += -1
                 $ the_person.add_situational_obedience("crisis_stuff", 25, "I'm doing it for my family.")
@@ -266,7 +260,7 @@ label SB_fetish_vaginal_event_label(the_person):
     else:
         "Your phones rings. Its [the_person.possessive_title]! You quickly pick it up"
         the_person.char "Hey [the_person.mc_title]! I'm here out front!"
-        "You head to your front door and see [the_person.possessive_title] standing there... outside... in a very provacative outfit."
+        "You head to your front door and see [the_person.possessive_title] standing there... outside... in a very provocative outfit."
         $ the_person.outfit = SB_vaginal_outfit.get_copy()
         $ the_person.draw_person()
         ###Draw the girl###
@@ -353,9 +347,11 @@ label SB_fetish_mom_vaginal_label():
     ###Reset Arousal
     $ the_person.reset_arousal()
     #$ the_person.SB_fetish = "vaginal sex"
+    $ SB_random_fetish_key = get_random_from_list(FETISH_VAGINAL_OPINION_LIST)
     $ the_person.sexy_opinions["vaginal sex"] = [FETISH_OPINION_VALUE, True]
+    $ the_person.sexy_opinions[SB_random_fetish_key] = [FETISH_OPINION_VALUE, True]
     "That night, after fucking [the_person.possessive_title], you share your bed together. As you fall asleep, you consider the implications of what happened. "
-    "It is clear that [the_person.possessive_title] is now firmy under the influence of your serums and has developed a fetish for vaginal sex."
+    "It is clear that [the_person.possessive_title] is now firmly under the influence of your serums and has developed a fetish for vaginal sex."
     "Her naked flesh soft up against yours gives you many sexy dreams that night."
 
     $ the_person.special_role.append(vaginal_fetish_role)
@@ -414,6 +410,8 @@ label SB_fetish_lily_vaginal_label():
     ###Reset Arousal
     $ the_person.reset_arousal()
     #$ the_person.SB_fetish = "vaginal sex"
+    $ SB_random_fetish_key = get_random_from_list(FETISH_VAGINAL_OPINION_LIST)
+    $ the_person.sexy_opinions[SB_random_fetish_key] = [FETISH_OPINION_VALUE, True]
     $ the_person.sexy_opinions["vaginal sex"] = [FETISH_OPINION_VALUE, True]
     the_person.char "Oh... that was so good. [the_person.mc_title]... can I spend the night with you? I don't wanna sleep alone tonight..."
     "That night, after fucking [the_person.possessive_title], you share your bed together. As you fall asleep, you consider the implications of what happened. "
@@ -444,18 +442,18 @@ label SB_cowgirl_wakeup_label(the_person):
     "She's on her knees, sucking you off expertly. Later, shes on her back while you pin her to the bed. Sometime later, shes on her hands and knees, taking your cock like a pro."
 
     "When morning comes, you feel a stirring in your loins again as you start to slowly wake up. This time, however, there are some very pleasant sensations coming from your crotch."
-    ###Draw girl doggystyle###
+
     $ the_person.outfit = SB_vaginal_nude_outfit.get_copy()
-    $ the_person.draw_person(position = "doggy")
+    $ the_person.draw_person(position = "cowgirl")
     $ the_person.change_arousal(35)
-    $ mc.arousal = 35
-    ###Set both arousals to 35
-    "You slowly open your eyes and discover that [the_person.possessive_title] is on top of you, riding you in the reverse cowgirl position."
-    "You reach up and grab her amazing ass cheeks. [the_person.possessive_title] looks back at your when she feels your hands on her."
+    $ mc.arousal = 25
+
+    "You slowly open your eyes and discover that [the_person.possessive_title] is on top of you, riding you in the cowgirl position."
+    "You reach up and grab her amazing ass cheeks. [the_person.possessive_title] looks in your eyes when she feels your hands on her."
     the_person.char "Good morning [the_person.mc_title]... Sorry but when I woke up I noticed you were hard so... I figured you wouldn't mind if I hopped on for a bit..."
     "[the_person.possessive_title] moans during one slow stroke."
     "You decide to lay back and enjoy the ride"
-    call sex_description(the_person, SB_reverse_cowgirl , make_bed(), 0, private = True) from _call_sex_description_SBV50
+    call fuck_person(the_person, private = True, start_position = cowgirl, skip_intro = True) from _call_sex_description_SBV50
     $ the_person.reset_arousal()
     mc.name "Oh god what a wakeup. I think I'm gonna go back to sleep for a bit. Thanks!"
     if the_person == mom:
@@ -463,7 +461,7 @@ label SB_cowgirl_wakeup_label(the_person):
         the_person.char "Oh, anything for you honey. Well, I'd better go get ready for the day!"
     elif the_person == starbuck:
         "[the_person.possessive_title] giggles for a second then says goodbye."
-        the_person.char "Yeah well, just don't tell me other custumers about this, I can't make housecalls for everyone!"
+        the_person.char "Yeah well, just don't tell my other customers about this, I can't make house calls for everyone!"
     else:
         "[the_person.title] looks at you and winks."
         the_person.char "Anytime [the_person.mc_title]! I'd better go get ready!"
