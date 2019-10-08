@@ -545,7 +545,7 @@ label casual_athlete_house_call_label(the_person):
         "Your mind red with lust, you begin to rip [the_person.title]'s clothes off."
         $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
         while strip_choice is not None:
-            $ the_person.draw_animated_removal(strip_choice)
+            $ the_person.draw_animated_removal(strip_choice, position = "missionary")
             "You roughly strip off [the_person.possessive_title]'s [strip_choice.name]."
             $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
         $ the_person.change_arousal(20)
@@ -558,6 +558,7 @@ label casual_athlete_house_call_label(the_person):
     $ the_person.reset_arousal()
     "Once you finish getting dressed you say goodbye and let yourself out."
 
+    $ mc.change_location(bedroom) # go home
     call advance_time from _call_advance_casual_athlete_house_call
     return
 #************* Personality****************#
