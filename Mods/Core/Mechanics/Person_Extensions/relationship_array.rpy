@@ -3,7 +3,7 @@
 init -1 python:
     relationship_scale = ["Nemesis", "Rival", "Acquaintance", "Friend", "Best Friend"]
 
-    class Relationship(renpy.store.object): #A class used to store information about the relationship between two people. Do not manipulate directly, use RelationshipArray to change things.
+    class Relationship(): #A class used to store information about the relationship between two people. Do not manipulate directly, use RelationshipArray to change things.
         def __init__(self, person_a_identifier, person_b_identifier, type_a, type_b = None, visible = None):
             self.person_a_identifier = person_a_identifier
             self.person_b_identifier = person_b_identifier
@@ -41,7 +41,7 @@ init -1 python:
         person_a = property(get_person_a)
         person_b = property(get_person_b)
 
-    class RelationshipArray(renpy.store.object):
+    class RelationshipArray():
         def __init__(self):
             self.relationships = [] #List of relationships. Relationships are bi-directional, so if you look for person_a, person_b you'll get the same object as person_b, person_a (but the type can be relative to the order).
             ### Types of Relationships (* denotes currently unused but planned roles)
