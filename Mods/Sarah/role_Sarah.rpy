@@ -301,13 +301,45 @@ label Sarah_third_wheel_label():
     if sarah.event_triggers_dict.get("epic_tits_progress", 0) < 2:
         sarah_friend.char "My boyfriend... he just isn't attracted to her. I mean, have you seen her chest? Like, neither have we!"
         "You feel yourself getting angry at her crude remarks."
-    else:
+    elif sarah.event_triggers_dict.get("epic_tits_progress", 0) == 2:
         sarah_friend.char "My boyfriend can't stop staring at her tits. It's pissing me off! I can't believe she got implants, she is such a whore."
+        "You feel yourself getting angry at her crude remarks."
+    else:
+        sarah_friend.char "Like, one day she's got nothing, next thing I know, her tits are fucking huge!?! She's such a bimbo."
         "You feel yourself getting angry at her crude remarks."
     "You are able to restrain yourself, but only just barely."
     mc.name "[the_person.name] has an amazing body, and a great personality to go with it. If you and your boyfriend don't see that, I don't think anything with me can work out."
-    sarah_friend.char "Pfft, whatever."
-    #TODO
+    sarah_friend.char "Pfft, whatever. There's a dozen other dicks at the bar. Why don't you go find your date, she's probably sulking in the bathroom again!"
+    "You decide not to stoop to her level and to end your conversation there. You grab you and [the_person.title]'s drink and get up, not bothering to say goodbye."
+    $ scene_manager.remove_actor(sarah_friend, reset_actor = False)
+    "You walk over to where the restrooms are and wait for [the_person.title]. You stand there for several minutes but start to get worried about her."
+    "You don't seen anyone come in or out of the women's restroom so you decide to risk it. You walk to the door and slowly open it."
+    $ scene_manager.add_actor(the_person, position = "stand2", emotion = "sad")
+    "Inside you see [the_person.title] looking at herself in the mirror. She is forlorn and from the look of her makeup has obviously been crying."
+    mc.name "Hey, are you okay? I don't mean to invade your privacy, but I was starting to get worried about you."
+    "She quickly looks up and is surprised to see you. She briefly pulls herself together."
+    the_person.char "Is that [the_person.mc_title]? You're still here? I thought you would be gone by now..."
+    mc.name "What are you talking about?"
+    the_person.char "Well, [sarah_friend.title] said... she was asking me about you, asked if we were involved, and when I said no said she was going to make a pass at you tonight..."
+    the_person.char "I just assumed, when I left the table that, I mean, why didn't you go with her?"
+    "She assumed when her friend made a pass at you that you would bail on her! You quickly reassure her."
+    mc.name "[the_person.title]. I came here to support you, and to spend time with my long lost friend having fun and having a few drinks."
+    mc.name "If you think I'm going to miss out on that for a silly one night stand, you are mistaken."
+    $ scene_manager.add_actor(the_person, position = "stand2", emotion = "happy")
+    the_person.char "I'm sorry! I didn't mean that I think you're shallow or anything I just... Look, give me one more minute and I'll be right out, okay?"
+    mc.name "Sounds good!"
+    "You step out of he lady's room and shortly after [the_person.title] steps out and joins you. You hand her the appletini."
+    the_person.char "Thanks for waiting! I'm so sorry, I honestly thought you were going to go with them."
+    the_person.char "Thank you for... I mean, everything you've done for me. You gave me a job, you let me drag you out to a bar with strangers, and then stuck with me even when you probably shouldn't have..."
+    mc.name "You're crazy. It's not everday a long last childhood friend literally knocks on your front door."
+    the_person.char "You've always been amazing to me. I should have known better."
+    $ the_person.change_happiness(20)
+    $ the_person.change_obedience(10)
+    $ the_person.change_love(10)
+    "She takes a long sip of her drink. You begin to chat and catch up a bit."
+    $ scene_manager.add_actor(the_person, position = "sitting")
+    "You spend several hours with [the_person.title] sitting in a secluded booth catching up. After multiple appletinis and whiskeys, you are both feeling pretty good."
+
 
 
 
@@ -322,6 +354,7 @@ label Sarah_get_drinks_label():
 
 label Sarah_catch_stealing_label():
     $ the_person = sarah
+    $ sarah.event_triggers_dict["epic_tits_progress"] = 1
     "As you walk to halls of your company, getting ready to pack things up for the weekend, you notice [the_person.title] sneaking out of the research division."
     $ the_person.draw_person()
     mc.name "Hello [the_person.title]... what brings you to research on a late Friday evening?"
@@ -407,6 +440,7 @@ label Sarah_catch_stealing_label():
 label Sarah_epic_tits_label():
     $ the_person = sarah
     $ sarah.tits = "F"
+    $ sarah.event_triggers_dict["epic_tits_progress"] = 3
     $ the_person.change_slut_core(10)
     $ the_person.change_slut_temp(10)
     call Sarah_tits_reveal_label() from Sarah_epic_tits_call_1
@@ -415,6 +449,7 @@ label Sarah_epic_tits_label():
 label Sarah_new_tits_label():
     $ the_person = sarah
     $ sarah.tits = "D"
+    $ sarah.event_triggers_dict["epic_tits_progress"] = 2
     $ the_person.change_slut_core(5)
     $ the_person.change_slut_temp(5)
     call Sarah_tits_reveal_label() from Sarah_new_tits_call_1
