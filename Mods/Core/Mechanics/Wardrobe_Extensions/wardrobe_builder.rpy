@@ -21,6 +21,23 @@ init 5 python:
             [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1]    # allow for 6 unused user definable colors
         ]
 
+    # array for determining the sluttiness of an outfit
+    slut_scores = [1, 2, 3, 4, 5, 6, 10, 12]
+
+    def enhance_existing_wardrobe(person, max_outfits):
+        outfit_builder = WardrobeBuilder(person)
+
+        while len(person.wardrobe.outfits) < max_outfits:    # add some generated outfits
+            person.wardrobe.add_outfit(outfit_builder.build_outfit("FullSets", slut_scores[len(person.wardrobe.outfits)]))
+
+        while len(person.wardrobe.overwear_sets) < max_outfits:    # add some generated outfits
+            person.wardrobe.add_overwear_set(outfit_builder.build_outfit("OverwearSets", slut_scores[len(person.wardrobe.overwear_sets)]))
+
+        while len(person.wardrobe.underwear_sets) < max_outfits:    # add some generated outfits
+            person.wardrobe.add_underwear_set(outfit_builder.build_outfit("UnderwearSets", slut_scores[len(person.wardrobe.underwear_sets)]))
+
+        return
+
     class WardrobeBuilder():
         preferences = {}
         preferences["skimpy outfits"] = {}
@@ -194,7 +211,7 @@ init 5 python:
             self.add_accessory_from_list(outfit, self.build_filter_list(bracelet_list, points), 3, color_upper)
             self.add_accessory_from_list(outfit, self.build_filter_list(neckwear_list, points), 3, color_upper)
 
-            outfit.name = self.get_name_classification(points) + self.get_cloting_name(outfit.upper_body, 2) + " and " + self.get_cloting_name(outfit.lower_body, 2)
+            outfit.build_outfit_name()
 
             return outfit
 
@@ -231,7 +248,7 @@ init 5 python:
                 if make_up_score > 3:
                     outfit.add_accessory(heavy_eye_shadow.get_copy(), get_random_from_list([[.15, .15, .15, .95], [.1, .15, .55, .9]]))
 
-            outfit.name = self.get_name_classification(points) + self.get_cloting_name(outfit.upper_body, 1) + " and " + self.get_cloting_name(outfit.lower_body, 1)
+            outfit.build_outfit_name()
 
             return outfit
 
@@ -322,18 +339,3 @@ init 5 python:
 
             renpy.random.shuffle(color_list)
             return get_random_from_weighted_list([x for x in color_list if x[1] > 0])
-
-        def get_name_classification(self, points):
-            if points < 2:
-                return "Conservative "
-            if points < 4:
-                return "Relaxed "
-            if points < 6:
-                return "Sexy "
-            return "Slutty "
-        
-        def get_cloting_name(self, items, layer):
-            item = filter(lambda x: x.layer == layer, items)
-            if (item):
-                return item[0].name
-            return "skin"

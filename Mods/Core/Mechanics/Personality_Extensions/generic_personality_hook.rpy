@@ -94,55 +94,43 @@ init -1 python:
         if not person.wardrobe.name == "Master_Default_Wardrobe":
             return
 
-        base_wardrobe = Wardrobe(default_wardrobe.name)
+        base_wardrobe = Wardrobe("[person.name]_[person.last_name]_wardrobe")
         preferences = WardrobePreference(person)
 
         for outfit in default_wardrobe.outfits:
             if not preferences.evaluate_outfit(outfit, 999):
                 continue
             base_wardrobe.add_outfit(outfit.get_copy())
+            if len(base_wardrobe.outfits) > 8:  # quick exit when we have enough
+                break
 
         for underwear in default_wardrobe.underwear_sets:
             if not preferences.evaluate_underwear(underwear, 999):
                 continue
             base_wardrobe.add_underwear_set(underwear.get_copy())
+            if len(base_wardrobe.underwear_sets) > 8:   # quick exit when we have enough
+                break
 
         for overwear in default_wardrobe.overwear_sets:
             if not preferences.evaluate_outfit(overwear, 999):
                 continue
             base_wardrobe.add_overwear_set(overwear.get_copy())
+            if len(base_wardrobe.overwear_sets) > 8:    # quick exit when we have enough
+                break
 
-        outfit_builder = WardrobeBuilder(person)
-        slut_scores = [1, 3, 5, 6, 10, 12]
-
-        while len(base_wardrobe.outfits) > 7:
+        # ensure we have at least 3 auto generated outfits by removing surplus, but keep the 2 most decent outfits from default wardrobe
+        while len(base_wardrobe.outfits) > 5:
             base_wardrobe.remove_outfit(sorted(base_wardrobe.outfits, key = lambda x: x.slut_requirement)[renpy.random.randint(2,len(base_wardrobe.outfits)-1)])
 
-        while len(base_wardrobe.outfits) < 6:    # add some generated outfits
-            base_wardrobe.add_outfit(outfit_builder.build_outfit("FullSets", slut_scores[len(base_wardrobe.outfits)]))
-
-        # add one generated outfit
-        base_wardrobe.add_outfit(outfit_builder.build_outfit("FullSets", 12))
-
-        while len(base_wardrobe.underwear_sets) > 7:
+        while len(base_wardrobe.underwear_sets) > 5:
             base_wardrobe.remove_outfit(sorted(base_wardrobe.underwear_sets, key = lambda x: x.slut_requirement)[renpy.random.randint(2,len(base_wardrobe.underwear_sets)-1)])
 
-        while len(base_wardrobe.underwear_sets) < 6:    # add some generated outfits
-            base_wardrobe.add_underwear_set(outfit_builder.build_outfit("UnderwearSets", slut_scores[len(base_wardrobe.underwear_sets)]))
-
-        # add one generated underwear
-        base_wardrobe.add_underwear_set(outfit_builder.build_outfit("UnderwearSets", 12))
-
-        while len(base_wardrobe.overwear_sets) > 7:
+        while len(base_wardrobe.overwear_sets) > 5:
             base_wardrobe.remove_outfit(sorted(base_wardrobe.overwear_sets, key = lambda x: x.slut_requirement)[renpy.random.randint(2,len(base_wardrobe.overwear_sets)-1)])
 
-        while len(base_wardrobe.overwear_sets) < 6:    # add some generated outfits
-            base_wardrobe.add_overwear_set(outfit_builder.build_outfit("OverwearSets", slut_scores[len(base_wardrobe.overwear_sets)]))
-
-        # add one generated overwear
-        base_wardrobe.add_overwear_set(outfit_builder.build_outfit("OverwearSets", 12))
-
         person.wardrobe = base_wardrobe
+
+        enhance_existing_wardrobe(person, 8)
         return
 
 label activate_generic_personality(stack):
@@ -151,7 +139,7 @@ label activate_generic_personality(stack):
     python:
         # add one bimbo to the game (on start of game)
         the_person = create_random_person(age=renpy.random.randint(25, 35), tits="DD", body_type = "standard_body", face_style = "Face_4", skin = "tan",
-            hair_colour = "platinum blonde", hair_style = messy_hair, eyes = "light blue", personality = bimbo_personality)
+            hair_colour = ["platinum blonde", [0.789, 0.746, 0.691,1]], hair_style = messy_hair, eyes = ["light blue", [0.60, 0.75, 0.98, 1.0]], personality = bimbo_personality)
         the_person.generate_home()
         the_person.home.add_person(the_person)
 
@@ -194,10 +182,16 @@ label create_unique_character_list:
     # original unique game characters
     $ unique_character_list = [mom, lily, aunt, cousin, stephanie, alexia, nora]
 
-    # mod unique characters (check for existance first)
+    # mod unique characters (check for existence first)
     if "salon_manager" in globals():
         $ unique_character_list.append(salon_manager)
 
     if "starbuck" in globals():
         $ unique_character_list.append(starbuck)
+
+    # make sure unique characters have at least six outfits / overwear sets to choose from
+    python:
+        for person in unique_character_list:
+            enhance_existing_wardrobe(person, 6)
+
     return
