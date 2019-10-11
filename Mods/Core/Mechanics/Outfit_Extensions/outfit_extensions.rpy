@@ -42,7 +42,7 @@ init -1 python:
                 return "Sexy"
             return "Slutty"
 
-        def get_cloting_items(outfit_part):
+        def get_clothing_items(outfit_part):
             items = filter(lambda x: x.layer == 2, outfit_part)
             if not items:
                 items = filter(lambda x: x.layer == 1, outfit_part)
@@ -50,12 +50,12 @@ init -1 python:
 
         outfitname = ""
 
-        upper = get_cloting_items(self.upper_body)
+        upper = get_clothing_items(self.upper_body)
         if upper:
             outfitname += upper[0].name
         
         if not upper or not upper[0].has_extension:
-            lower = get_cloting_items(self.lower_body)
+            lower = get_clothing_items(self.lower_body)
             if upper and lower:
                 outfitname += " and "
             if lower:
