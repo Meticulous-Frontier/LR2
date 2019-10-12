@@ -97,6 +97,7 @@ init 1 python:
 
 ###Athlete ACTION LABELS###
 label casual_athlete_get_to_know_label(the_person):
+    $ set_gym_outfit(the_person)
     if "athlete_progress" not in the_person.event_triggers_dict:
         $ the_person.event_triggers_dict["athlete_progress"] = 0
         #Introduction scene#
@@ -192,11 +193,13 @@ label casual_athlete_get_to_know_label(the_person):
     else:
         "Debug: How did you end up here???"
 
+    $ the_person.review_outfit()
     call advance_time from _call_advance_casual_athlete_get_to_know
     return
 
 #CSA10
 label casual_athlete_phase_one_label(the_person):
+    $ set_gym_outfit(the_person)
     if the_person.event_triggers_dict.get("athlete_progress", 0) == 1:
         mc.name "Hey [the_person.title]. I figured I would find you here. Want to workout together?"
         "[the_person.title] is just hopping off the treadmill. You can tell she just finished getting warmed up."
@@ -214,7 +217,7 @@ label casual_athlete_phase_one_label(the_person):
         the_person.char "You've been a good friend though. It's nice having a guy be just a friend."
         "You finish up your curls with [the_person.title]. You move on to the pull up bar."
         $ the_person.draw_person( position = "stand3")
-        "You start to do a few pullups."
+        "You start to do a few pull-ups."
         mc.name "So, I get that you don't have time for a relationship but... how do you deal with your, you know, needs?"
         the_person.char "Well, I used to have a few friends from class that came with, well, benefits I guess you could say."
         "You grunt as you exert yourself as you finish your set."
@@ -223,7 +226,7 @@ label casual_athlete_phase_one_label(the_person):
         "You let go of the pull up bar and she steps up to it."
         the_person.char "Hey, could you do me a favor? Could you pull me down a little bit while I do my reps, you know, to give a little resistance?"
         mc.name "Sure, I can do that."
-        "[the_person.title] reaches up and grabs the pull up bar. You put your hands on her hips and lightly push down, giving her some extra weight for her pullups."
+        "[the_person.title] reaches up and grabs the pull up bar. You put your hands on her hips and lightly push down, giving her some extra weight for her pull-ups."
         "As she begins to pull herself up, her hips, waist, and ass are in perfect position, right in front of your face. You check her out while she struggles through her reps."
         "[the_person.title]'s tight, thin body is undeniably sexy and athletic. Your hands on her hips gives you a naughty idea."
         mc.name "I stay busy with my business. I know that feeling, not having time for a relationship, but looking for some casual hookups."
@@ -350,19 +353,21 @@ label casual_athlete_phase_one_label(the_person):
                 if the_person.arousal > 100:
                     "As you slowly let [the_person.title] down from the wall, you can see her trembling, caused by aftershocks from her orgasm."
                     the_person.char "Mmm... god I'm glad you know how to use that cock."
-                $ the_person.reset_arousal()
                 "Without another word, you and [the_person.title] take a quick shower, then get ready and leave the gym."
-                $ the_person.review_outfit(show_review_message = False)
+
+                $ the_person.reset_arousal()
 
             "Not Today":  #lol what a tease#
                 the_person.char "Oh. Okay, I understand. Well, I'll see you around, [the_person.mc_title]!"
                 $ the_person.change_happiness(-3)
 
+    $ the_person.review_outfit(show_review_message = False)
     call advance_time from _call_advance_casual_athlete_workout
     return
 
 #CSA20
 label casual_athlete_phase_two_label(the_person):
+    $ set_gym_outfit(the_person)
     if the_person.event_triggers_dict.get("athlete_progress", 0) == 2:
         "You see [the_person.title] on the treadmill. She is running hard, and has been training for a race coming up soon. She pauses the treadmill as you walk up to her."
         the_person.char "Hey [the_person.mc_title], here for another workout?"
@@ -398,11 +403,14 @@ label casual_athlete_phase_two_label(the_person):
         mc.name "Yeah right, I'll be bending you over before you can even get your front door closed."
         "[the_person.title] has a spark in her eyes. Whoever wins, you have a feeling the sex is going to be amazing after the race."
         "You wave goodbye to [the_person.title], wondering what you've gotten yourself in to."
+    
+    $ the_person.review_outfit(show_review_message = False)
     call advance_time from _call_advance_casual_athlete_race_challenge
     return
 
 #CSA30
 label casual_athlete_race_crisis_label(the_person):
+    $ set_gym_outfit(the_person)
     "It's race day! You make your way downtown, ready for your race with [the_person.title]."
     $ mc.change_location(downtown)
     $ mc.location.show_background()
@@ -451,7 +459,7 @@ label casual_athlete_race_crisis_label(the_person):
     $ mc.location.show_background()
     if not the_person.home in mc.known_home_locations:
         $ mc.known_home_locations.append(the_person.home)
-    "As soon as you walkin the door, you grab [the_person.title]. You pick her up and push her against the wall."
+    "As soon as you walk in the door, you grab [the_person.title]. You pick her up and push her against the wall."
     $ the_person.draw_person(position = "against_wall")
     #TODO add temporary sluttiness to make sure she is up for anything###
     $ the_person.add_situational_slut("Lost Bet",25,"Be ready for anything!")
@@ -500,6 +508,7 @@ label casual_athlete_race_crisis_label(the_person):
     return
 
 label casual_athlete_buy_protein_shake_label(the_person):
+    $ set_gym_outfit(the_person)
     mc.name "Hey [the_person.name], I see you're working pretty hard today! Can I get you a protein shake?"
     "[the_person.possessive_title] looks at you and smiles."
     the_person.char "That sounds great!"
@@ -524,6 +533,8 @@ label casual_athlete_buy_protein_shake_label(the_person):
             the_person.char "Thanks [the_person.mc_title]."
             mc.name "No problem at all."
             $ renpy.scene("Active")
+
+    $ the_person.review_outfit(show_review_message = False)            
     call advance_time from _call_advance_casual_athlete_smoothie
     return
 
@@ -564,14 +575,13 @@ label casual_athlete_house_call_label(the_person):
 #************* Personality****************#
 #Override some of her personality functions so that her conversation options makes sense.
 
-init 1301 python:              #Because Vren Init personality functionns at 1300
-
-
+init 1301 python:              #Because Vren Init personality functions at 1300
 
     def athlete_titles(the_person):
         valid_titles = []
         valid_titles.append(the_person.name)
-        if the_person.sluttiness > 20:
+        valid_titles.append("College Athlete")
+        if the_person.sluttiness > 40:
             valid_titles.append("Cardio Bunny")
         return valid_titles
 
@@ -581,12 +591,14 @@ init 1301 python:              #Because Vren Init personality functionns at 1300
         if the_person.sluttiness > 60:
             valid_possessive_titles.append("Your gym slut")
 
-        if the_person.sluttiness > 100:
+        if the_person.sluttiness > 80:
             valid_possessive_titles.append("The gym cumdump")
             valid_possessive_titles.append("The gym bicycle")
         return valid_possessive_titles
+
     def athlete_player_titles(the_person):
         return mc.name
+
     athlete_personality = Personality("athlete", default_prefix = "wild",
     common_likes = [],
     common_sexy_likes = ["casual sex"],
@@ -838,7 +850,6 @@ label athlete_flirt_response(the_person):
     return
 
 label athlete_hookup_rejection(the_person):
-    "Testing to see if this text works!"
     the_person.char "Your loss! I've been working out so much lately, and you could have had some of this..."
     return
 

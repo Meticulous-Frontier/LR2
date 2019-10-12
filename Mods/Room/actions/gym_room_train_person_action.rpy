@@ -98,15 +98,20 @@ init 2 python:
     gym_clothes_slutty.add_accessory(heavy_eye_shadow.get_copy(), [0,0,0,.9])
     gym_clothes_slutty.add_accessory(light_eye_shadow.get_copy(), colour_pink)
 
-label train_in_gym(person):
-    python:
-        gym.show_background()
+    def set_gym_outfit(person):
         if person.sluttiness > 70 or person.arousal > 70:
             person.outfit = gym_clothes_slutty.get_copy()
         elif person.sluttiness > 40 or person.arousal > 35:
             person.outfit = gym_clothes_sexy.get_copy()
         else:
             person.outfit = gym_clothes.get_copy()
+        return
+
+
+label train_in_gym(person):
+    python:
+        gym.show_background()
+        set_gym_outfit(person)
         person.draw_person(emotion="default")
         change = renpy.random.random() * 4 # Maximum change is 4 pounds
 
