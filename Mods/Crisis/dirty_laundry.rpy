@@ -8,46 +8,68 @@
 # high sluttiness they put the panties on and have MC cum in the panties while they wear them
 
 init -1 python:
-    dirty_laundry_weight = 4  
+    dirty_laundry_weight = 4
 
 init 2 python:
     def dirty_laundry_requirement():
         if mc_asleep():
-            if mc_at_home():
-                return True
+            return True
         return False
 
     dirty_laundry_action = ActionMod("Dirty Laundry", dirty_laundry_requirement, "dirty_laundry_action_label",
         menu_tooltip = "Start your laundry before bed.", category = "Home", is_crisis = True, crisis_weight = dirty_laundry_weight)
 
-label dirty_laundry_action_label:
+init 3 python:
+    #Create Sleeping Outfits
+    night_clothes = Outfit("Night Clothes")
+    night_clothes.add_lower(cotton_panties.get_copy(),colour_white)
+    night_clothes.add_upper(sports_bra.get_copy(),colour_white)
+    night_clothes.add_upper(long_tshirt.get_copy(),colour_white)
 
+    night_clothes_sexy = Outfit("Sexy Night Clothes")
+    night_clothes_sexy.add_upper(nightgown_dress.get_copy(),colour_black)
+    night_clothes_sexy.add_lower(cute_lace_panties.get_copy(),colour_black)
+
+    night_clothes_slutty = Outfit("Slutty Night Clothes")
+    night_clothes_slutty.add_upper(lingerie_one_piece.get_copy(),colour_yellow)
+    night_clothes_slutty.add_feet(pumps.get_copy(),colour_black)
+    night_clothes_slutty.add_feet(fishnets.get_copy(),colour_black)
+
+    def set_night_outfit(person):
+        if person.sluttiness > 70 or person.arousal > 70:
+            person.outfit = night_clothes_slutty.get_copy()
+        elif person.sluttiness > 40 or person.arousal > 35:
+            person.outfit = night_clothes_sexy.get_copy()
+        else:
+            person.outfit = night_clothes.get_copy()
+        return
+
+label dirty_laundry_action_label:
     $ the_person = get_random_from_list(people_in_mc_home())
-    #$ the_panties = get_random_from_list(people_in_mc_home())
-    $ the_panties = the_person
+    $ set_night_outfit(the_person)
 
     "You are just drifting off to sleep when you suddenly you remember. You don't have any clean clothes for tomorrow!"
     "You look a the clock. It is already pretty late. You guess that your family is already asleep, so you grab your laundry and take it to the laundry room just wearing your boxers."
     "You throw your laundry in the washing machine, add some detergent and start it up."
     "As you are thinking about what to do for the next 30 minutes while the washer runs and you can move your clothes to the dryer, you notice a laundry basket on the floor filled with clean, folded clothes."
-    "It looks like they all belong to [the_panties.title]. Sitting on top of the laundy is a pair of sexy black panties."
+    "It looks like they all belong to [the_person.title]. Sitting on top of the laundry is a pair of sexy black panties."
     "You feel your cock stir when you think about the ass those panties cover. Maybe while you wait for your laundry you could relieve some tension fantasizing about that..."
     menu:
         "Masturbate with panties":
             "You take a quick look out the door to make sure the coast is clear, then close it behind you. You grab the panties and then pull your pants down."
             "You wrap the cloth of the panties around your cock and start to work them up and down. The satin texture feels great."
-            "You close your eyes and imagine [the_panties.title]. You imagine her in the morning, pulling up her cum filled panties up and wearing them around all day long."
-            if renpy.random.randint(1,2) == 1: #No one catches you
-                "Images of [the_panties.title] flood you brain as you continue to jack off. She's bent over now, begging you to cum all over her ass."
+            "You close your eyes and imagine [the_person.title]. You imagine her in the morning, pulling up her cum filled panties up and wearing them around all day long."
+            $ rnd_num = renpy.random.randint(1,2) # increase for more situations
+            if rnd_num == 1: #No one catches you
+                "Images of [the_person.title] flood you brain as you continue to jack off. She's bent over now, begging you to cum all over her ass."
                 "You go past the point of no return. You wrap the panties around the tip and then fire your load off into them."
-                "When you finish, you take a look at them. Your cum is all over [the_panties.title]'s panties."
+                "When you finish, you take a look at them. Your cum is all over [the_person.title]'s panties."
                 "You do your best to fold them back up and put them back at the top of her laundry pile. You wonder if she'll notice."
                 "Soon the washer is done. You swap your clothes to the dryer and start it, then head for bed. They should be dry in the morning!"
                 #TODO mandatory event the next day when the girl discovers her used panties
-            elif the_person == the_panties:                               #the panty owner catches you!
+            elif rnd_num == 2:                               #the panty owner catches you!
                 "Your imagination is running wild and lewd images of [the_person.title] run through your head. Suddenly, you hear the laundry room door open!"
                 the_person.char "Holy fuck!"
-                $ the_person.draw_person()
                 "You are totally busted! You stop what you are doing and open you eyes, seeing [the_person.title] looking at you wide eyed."
                 if the_person.sluttiness < 20:
                     $ the_person.draw_person(position = "stand4", emotion= "angry")
@@ -96,10 +118,11 @@ label dirty_laundry_action_label:
                              "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy"
 
                              python:
-                                    for clothing in the_person.outfit.get_lower_ordered():
-                                         the_person.outfit.remove_clothing(clothing)
-                                         the_person.draw_person(position = "missionary")
-                                         renpy.say("","")
+                                strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, exclude_upper = True, exclude_feet = True, do_not_remove = True)
+                                while strip_choice is not None:
+                                    the_person.draw_animated_removal(strip_choice, position = "missionary")
+                                    strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, exclude_upper = True, exclude_feet = True, do_not_remove = True)
+                                    renpy.pause(.5)
 
                              "With her pussy finally exposed you waste no time diving right in"
                         "Cupping her ass with your hands, you circle your tongue all around her wet, inviting cunt."
@@ -112,15 +135,11 @@ label dirty_laundry_action_label:
                         "[the_person.possessive_title] begins to orgasm convulsively, and she cries out."
                         the_person.char "Yes [the_person.mc_title]! Yes! Yes! Oh fuck how do you do that"
                         $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "missionary")
-                        $ the_person.change_happiness(5)
-                        $ the_person.change_obedience(5)
-                        $ the_person.change_slut_core(2)
-                        $ the_person.change_slut_temp(5)
-                        $ the_person.change_love(3)
+                        $ the_person.change_stats(obedience = 5, happiness = 5, love = 3, slut_temp = 5, slut_core = 2)
                         "[the_person.possessive_title] runs her hands through your hair one last time. She sits up and gives you a kiss, tasting herself on your tongue."
                         the_person.char "Remember... this is our little secret... okay?"
                         "You hear the sound of the washing machine stopping. You start to open it up and move your laundry over to the dryer."
-                        "Each time you move some clothing over, you bend over unneccesarily far so your face is near her cunt again. A couple times you give her a quick lick and she shudders."
+                        "Each time you move some clothing over, you bend over unnecessarily far so your face is near her cunt again. A couple times you give her a quick lick and she shudders."
                         $ the_person.draw_person()
                         "[the_person.title] slowly gets to her feet, but she is a little unsteady. You start the dryer with all your clothes in it, then grab her clean laundry."
                         mc.name "I'll get this for you."
@@ -172,9 +191,7 @@ label dirty_laundry_action_label:
                     $ the_person.draw_person(emotion = "happy")
                     "When you come back to your senses, you look and see [the_person.title]. She is licking a little bit of cum that got on her hand."
                     the_person.char "Mmm... that was hot! I can't wait to wear these tomorrow."
-                    $ the_person.change_happiness(5)
-                    $ the_person.change_obedience(5)
-                    $ the_person.change_slut_temp(5)
+                    $ the_person.change_stats(obedience = 5, happiness = 5, slut_temp = 5)
                     "She grabs her other laundry and you say goodnight before she leaves you alone in the laundry room, recovering."
                     $ renpy.scene("Active")
                     "You wait a few minutes until the washer is done. You move your laundry over to the dryer then walk to your room."
@@ -193,15 +210,19 @@ label dirty_laundry_action_label:
                     the_person.char "I can't wait to wear those panties after you cum in them... I think I'll wear them to bed tonight! Actually... maybe I could wear them before that..."
                     "She looks at you for another second. What is she talking about?"
                     "She suddenly stands up and starts stripping."
-                    $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+                    $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
                     while strip_choice is not None:
                         $ the_person.draw_animated_removal(strip_choice)
                         "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-                        $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+                        $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
+
                     "Once she is naked, [the_person.title] turns to you."
                     the_person.char "Here, let me have those!"
                     "You hand her the panties. She quickly puts them on."
-                    #TODO add panties to outfit
+
+                    $ the_person.outfit.add_lower(lace_panties.get_copy(), colour_black)
+                    $ the_person.draw_person()
+
                     the_person.char "Mmm, yeah this will be more fun! Don't worry, you can still cum in my panties... but you have to do it while I'm wearing them!"
                     $ the_person.draw_person(position = "standing_doggy")
                     "[the_person.possessive_title] turns around and bends over with her hands on the dryer. She looks back at you."
@@ -240,17 +261,18 @@ label dirty_laundry_action_label:
                             "Your first couple of spurts erupt and splash up against her cunt and all long the front of her panties. She moans when she feels the splash."
                             "You pull back completely now and grab your cock. You aim another spurt and one ass check, then for the next one at the other."
                             $ the_person.cum_on_ass()
+
                     $ the_person.draw_person(position="back_peek")
                     "As you step back, [the_person.title] slowly stands up and looks back at you."
                     the_person.char "Wow, that was so hot..."
                     "You see her hand go down her side and she starts to touch herself through her cum soaked panties."
                     the_person.char "I think umm... I'm gonna retire to my room for the night..."
                     menu:
-                        "Masturbate for me" if the_person.obedience > 130:
+                        "Masturbate for me" if the_person.obedience >= 130:
                             mc.name "I mean, its my cum you're using, just get yourself off right here."
                             "She thinks about it for second, then agrees."
                             the_person.char "Okay! Just do me a favor and don't get dressed."
-                            $ the_person.draw_person( position = "against_wall")
+                            $ the_person.draw_person( position = "missionary")
                             "[the_person.title] sits on the edge of the dryer now and starts to touch herself."
                             "Her hand is making big circles around her clit. You can see some of your cum starting to leak out the sides of her panties."
                             the_person.char "Mmm, your cum feels so good..."
@@ -269,26 +291,20 @@ label dirty_laundry_action_label:
                             $ renpy.scene("Active")
                             "You wait a few minutes until the washer is done. You move your laundry over to the dryer then walk to your room."
                             "You go back to your room and get to sleep. Your laundry should be dry in the morning!"
-                        "Masturbate for me.\n{size=22}Requires Obedience{/size} (disabled)" if the_person.obedience < 131:
+                        "Masturbate for me.\n{size=22}Requires 130 Obedience{/size} (disabled)" if the_person.obedience < 130:
                             pass
-                    $ the_person.change_happiness(5)
-                    $ the_person.change_obedience(5)
-                    $ the_person.change_slut_temp(5)
-            else:                                                        #Someone else catches you! for now this is disabled
+                    $ the_person.change_stats(obedience = 5, happiness = 5, slut_temp = 5)
+            else:      #Someone else catches you! for now this is disabled
                 pass
                 #TODO this
             pass
         "Find something else to do":
             "You decide to do something else. You head back to room and hop on your PC, doing work related tasks until the washer is done."
             "You go back to swap your laundry to the dryer."
-            $ the_panties.draw_person()
-            "[the_panties.title] is just coming out of the laundry room with her laundry basket."
+            $ the_person.draw_person()
+            "[the_person.title] is just coming out of the laundry room with her laundry basket."
             #TODO outfit and text based on her sluttiness.
-            "You say goodnight to [the_panties.title] and then swap your clothes from the washer to the dryer. They should be dry in the morning!"
-            $ renpy.scene("Active")
-            return
-
-
+            "You say goodnight to [the_person.title] and then swap your clothes from the washer to the dryer. They should be dry in the morning!"
 
     $ renpy.scene("Active")
     $ the_person.review_outfit(show_review_message = False)
