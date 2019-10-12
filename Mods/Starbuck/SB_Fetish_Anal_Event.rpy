@@ -105,10 +105,10 @@ label SB_fetish_anal_label(the_person):
             "You tease her."
             the_person.char "I can't stop thinking about how full it feels... it feels so right when you push into my ass. It gets me so hot imagining it..."
             "She's been under the influence of your serums for a while now... you wonder if she's developed an anal fetish..."
+            $ the_person.special_role.append(anal_fetish_role)
             "[the_person.possessive_title] gets her butt plug. She slowly pushes it back into her ass."
             the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
             "You wave goodbye to [the_person.possessive_title] and get ready to head home for the night."
-            $ the_person.special_role.append(anal_fetish_role)
             $ SB_CALCULATE_RANDOM_EVENT_RATE()
         "Refuse":
             the_person.char "I'm sorry to hear that..." #TODO finish this
