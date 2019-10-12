@@ -475,12 +475,10 @@ label casual_athlete_race_crisis_label(the_person):
         "You notice some moisture building around her slit. She is definitely enjoying your hungry eyes roaming her body."
     else:
         "Your mind red with lust, you begin to rip [the_person.title]'s clothes off."
-        $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-        while strip_choice is not None:
-            $ the_person.draw_animated_removal(strip_choice)
-            "You roughly strip off [the_person.possessive_title]'s [strip_choice.name]."
-            $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+
+        $ the_person.strip_outfit(position = "missionary")
         $ the_person.change_arousal(20)
+
         "[the_person.possessive_title] moans as you strip her down, enjoying your rough treatment of her."
     "When she is full naked, you grab her hips and flip her over."
     $ the_person.draw_person(position = "doggy")
@@ -554,12 +552,10 @@ label casual_athlete_house_call_label(the_person):
         "You notice some moisture building around her slit. She is definitely enjoying your hungry eyes roaming her body."
     else:
         "Your mind red with lust, you begin to rip [the_person.title]'s clothes off."
-        $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-        while strip_choice is not None:
-            $ the_person.draw_animated_removal(strip_choice, position = "missionary")
-            "You roughly strip off [the_person.possessive_title]'s [strip_choice.name]."
-            $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+
+        $ the_person.strip_outfit(position = "missionary")
         $ the_person.change_arousal(20)
+
         "[the_person.possessive_title] moans as you strip her down, enjoying your rough treatment of her."
     call fuck_person(the_person,private = True) from _call_casual_sex_mod_CSA040
     "After you finish with her, you get up and start to gather your clothes."
@@ -1024,7 +1020,7 @@ label athlete_hookup_accept(the_person):
                     $ the_person.change_slut_temp(2)
                     $ the_person.change_happiness(5)
                     mc.name "Get ready, I'm gonna cum!"
-                    "[the_peron.title] is incoherent, and doesn't process your words."
+                    "[the_person.title] is incoherent, and doesn't process your words."
                     "You plunge deep into her ass and hold it there while you cum. She gasps in time with each new shot of hot semen inside of her."
                     "You stand there for a minute, holding her hips in the air, you dick buried in her bowel as it softens. Eventually she speaks up."
                     the_person.char "Wow... okay... I think I can stand now..."

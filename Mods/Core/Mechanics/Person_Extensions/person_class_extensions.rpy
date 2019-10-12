@@ -219,6 +219,27 @@ init -1:
         # Monkey wrench Person class to have automatic strip function
         Person.strip_outfit_to_max_sluttiness = strip_outfit_to_max_sluttiness
 
+        def strip_outfit(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, delay = 1, character_placement = None, position = None, emotion = None, lighting = None, scene_manager = None):
+            if position is None:
+                self.position = person.idle_pose
+
+            if emotion is None:
+                self.emotion = person.get_emotion()
+
+            if lighting is None:
+                lighting = mc.location.get_lighting_conditions()
+
+            if character_placement is None:
+                self.character_placement = character_right
+
+            strip_choice = self.outfit.remove_random_any(top_layer_first, exclude_upper, exclude_lower, exclude_feet, do_not_remove = True)
+            while not strip_choice is None:
+                self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
+                strip_choice = self.outfit.remove_random_any(top_layer_first, exclude_upper, exclude_lower, exclude_feet, do_not_remove = True)
+                renpy.pause(delay)
+
+        Person.strip_outfit = strip_outfit
+
         # BUGFIXED: Judge Outfit function uses the_person instead of self to check effective sluttiness
         #Judge an outfit and determine if it's too slutty or not. Can be used to judge other people's outfits to determine if she thinks they look like a slut.
         def judge_outfit_extension(self, outfit, temp_sluttiness_boost = 0):

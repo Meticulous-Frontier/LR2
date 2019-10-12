@@ -514,12 +514,10 @@ label casual_hotwife_dancing_sex_label(the_person):
             "You stop for a second and admire [the_person.title], her body on display in front of you."
         else:
             "Piece by piece, you take [the_person.title]'s clothes off."
-            $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-            while strip_choice is not None:
-                $ the_person.draw_animated_removal(strip_choice)
-                "You gently strip off [the_person.possessive_title]'s [strip_choice.name]."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+
+            $ the_person.strip_outfit(position = "against_wall")
             $ the_person.change_arousal(20)
+
             "Once finished, You stop for a second and admire [the_person.title], her body on display in front of you."
         the_person.char "Oh! Shit I almost forgot!"
         "[the_person.possessive_title] grabs her purse. She rummages through it for a moment then pulls out her phone."
@@ -582,7 +580,7 @@ label casual_hotwife_dancing_sex_label(the_person):
     else:   #We've done this before
         mc.name "Hey, [the_person.title]. You up for some dancing?"
         "[the_person.possessive_title] smiles."
-        the_person.char "You knowit! Let's go!"
+        the_person.char "You know it! Let's go!"
         "You follow [the_person.title] out on to the dance floor. The bar is playing some pretty upbeat, fun music."
         "You waste no time and grab [the_person.possessive_title]. You sync your movements to the beat and begin to move your bodies to the beat."
         $ the_person.draw_person (position = "back_peek")
@@ -1206,7 +1204,7 @@ label hotwife_hookup_accept(the_person):
                     $ the_person.change_slut_temp(2)
                     $ the_person.change_happiness(5)
                     mc.name "Get ready, I'm gonna cum!"
-                    "[the_peron.title] is incoherent, and doesn't process your words."
+                    "[the_person.title] is incoherent, and doesn't process your words."
                     "You plunge deep into her ass and hold it there while you cum. She gasps in time with each new shot of hot semen inside of her."
                     "You stand there for a minute, holding her hips in the air, you dick buried in her bowel as it softens. Eventually she speaks up."
                     the_person.char "Wow... okay... I think I can stand now..."

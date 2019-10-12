@@ -31,12 +31,10 @@ label shower_crisis_action_label:
     "You decide to take a peek."
     $ home_shower.show_background()
     $ the_person.draw_person(position = "walking_away")
-    "You see [the_person.possessive_title] is standing in front of a mirror, getting ready for a shower."
-    $ shower_clothing = the_person.outfit.remove_random_any(top_layer_first = True)
-    while shower_clothing is not None:
-        "You see [the_person.possessive_title] undressing, taking off her [shower_clothing.name]"
-        $ the_person.draw_animated_removal(shower_clothing, position = "walking_away")
-        $ shower_clothing = the_person.outfit.remove_random_any(top_layer_first = True)
+    "You see [the_person.possessive_title] is standing in front of a mirror, getting ready for a shower, undressing herself."
+
+    $ the_person.strip_outfit(position = "walking_away", exclude_feet = False)
+
     "Now completely nude, she gets into the shower."
     "You see the water running down her chest."
     $ the_person.draw_person(position = "stand3", emotion = "happy")
@@ -118,7 +116,5 @@ label shower_crisis_action_label:
         the_person.reset_arousal()
         the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
         mc.location.show_background()
-        # Release variables
-        del shower_clothing
         renpy.scene("Active")
     return

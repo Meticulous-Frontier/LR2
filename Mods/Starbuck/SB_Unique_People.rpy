@@ -687,32 +687,22 @@ label starbuck_sex_store_promo_one_label(the_person):
     "Once in the backroom, you can see that [the_person.possessive_title] has three outfits picked out. Some classic black lingerie with fishnet and garter belt, a light blue nightgown, and a pink lacy one piece."
     "The first item to model is a bottle of some good quality, oil based lube. You figure a regular standing pose should work for this."
     "Which lingerie should you have her use for this?"
-    $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
     menu:
         "The classic black set":
             "[the_person.possessive_title] starts to strip down."
-            while strip_choice is not None:
-                $ the_person.draw_animated_removal(strip_choice)
-                "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+            $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.outfit = SB_advert_one_outfit.get_copy()
             $ the_person.draw_person()
         "The blue nightgown":
             "[the_person.possessive_title] starts to strip down."
-            while strip_choice is not None:
-                $ the_person.draw_animated_removal(strip_choice)
-                "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+            $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.outfit = SB_advert_two_outfit.get_copy()
             $ the_person.draw_person()
         "the pink one piece":
             "[the_person.possessive_title] starts to strip down."
-            while strip_choice is not None:
-                $ the_person.draw_animated_removal(strip_choice)
-                "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+            $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.outfit = SB_advert_three_outfit.get_copy()
             $ the_person.draw_person()
@@ -727,32 +717,22 @@ label starbuck_sex_store_promo_one_label(the_person):
     "The next item for her to model will be a male masturbation sleeve."
     "It is designed to look like a famous porn actress' asshole, so you figure to model this product, [the_person.possessive_title] should have her back to you."
     "Which lingerie should you have her use for this?"
-    $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
     menu:
         "The classic black set":
             "[the_person.possessive_title] starts to strip down."
-            while strip_choice is not None:
-                $ the_person.draw_animated_removal(strip_choice)
-                "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+            $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.outfit = SB_advert_one_outfit.get_copy()
             $ the_person.draw_person()
         "The blue nightgown":
             "[the_person.possessive_title] starts to strip down."
-            while strip_choice is not None:
-                $ the_person.draw_animated_removal(strip_choice)
-                "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+            $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.outfit = SB_advert_two_outfit.get_copy()
             $ the_person.draw_person()
         "the pink one piece":
             "[the_person.possessive_title] starts to strip down."
-            while strip_choice is not None:
-                $ the_person.draw_animated_removal(strip_choice)
-                "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+            $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.outfit = SB_advert_three_outfit.get_copy()
             $ the_person.draw_person()
@@ -769,32 +749,22 @@ label starbuck_sex_store_promo_one_label(the_person):
     "The attention you are giving her is really starting to excite [the_person.possessive_title]. You can see her nipples sticking out proudly in her outfit."
     "The last item for her to model is a dildo. You figure since you are mainly targeting a male audience with this advertisement, a good pose for her would be on her knees, like shes getting ready to put it in her mouth."
     "Which lingerie should you have her use for this?"
-    $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
     menu:
         "The classic black set":
             "[the_person.possessive_title] starts to strip down."
-            while strip_choice is not None:
-                $ the_person.draw_animated_removal(strip_choice)
-                "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+            $ the_person.strip_outfit(position = "stand2", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.outfit = SB_advert_one_outfit.get_copy()
             $ the_person.draw_person()
         "The blue nightgown":
             "[the_person.possessive_title] starts to strip down."
-            while strip_choice is not None:
-                $ the_person.draw_animated_removal(strip_choice)
-                "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+            $ the_person.strip_outfit(position = "stand2", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.outfit = SB_advert_two_outfit.get_copy()
             $ the_person.draw_person()
         "the pink one piece":
             "[the_person.possessive_title] starts to strip down."
-            while strip_choice is not None:
-                $ the_person.draw_animated_removal(strip_choice)
-                "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+            $ the_person.strip_outfit(position = "stand2", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.outfit = SB_advert_three_outfit.get_copy()
             $ the_person.draw_person()
@@ -900,11 +870,7 @@ label starbuck_sex_store_promo_two_label(the_person):
     $ the_person.draw_person(position = "stand2")
     "She joins in the backroom carrying a couple of dildos and a set of lingerie."
     the_person.char "Okay, let me just get changed really quick."
-    $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-    while strip_choice is not None:
-        $ the_person.draw_animated_removal(strip_choice)
-        "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-        $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+    $ the_person.strip_outfit(position = "stand2", exclude_feet = False)
     "Once she finishes stripping, she grabs the lingerie set and puts it on."
     $ the_person.outfit = SB_advert_four_outfit.get_copy()
     $ the_person.draw_person()
@@ -1035,11 +1001,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     the_person.char "Ok, I figure we can get through a couple things... I have a pair of edible panties, and a nice set of fuzzy handcuffs..."
     "Wow... so at her suggestion, you are about to eat panties off of [the_person.possessive_title]... and then hand cuff her... all on camera."
     "[the_person.possessive_title] starts to strip down."
-    $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-    while strip_choice is not None:
-        $ the_person.draw_animated_removal(strip_choice)
-        "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-        $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+    $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
     "Once she finishes stripping, she grabs the panties and puts them on."
     $ the_person.outfit = SB_advert_five_outfit.get_copy()
     $ the_person.draw_person()
@@ -1220,11 +1182,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     the_person.char "Ok, I figure we can start with the whip... I also have a bottle of premium anal lube, and a strap on for guys designed for double penetration..."
     "Wow... you wonder which hole you are gonna get to fuck while the strap on fucks the other..."
     "[the_person.possessive_title] starts to strip down in front of you."
-    $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-    while strip_choice is not None:
-        $ the_person.draw_animated_removal(strip_choice)
-        "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-        $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+    $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
     "Once she finishes stripping, she puts on some incredibly sexy pink lingerie."
     $ the_person.outfit = SB_advert_six_outfit.get_copy()
     $ the_person.draw_person()
@@ -1381,11 +1339,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     $ the_person.draw_person(position = "stand3")
     the_person.char "Alright. Before we get started, let me get ready. You should probably get naked too!"
     "You start to strip down, but watch intently while [the_person.possessive_title] strips down along side you."
-    $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-    while strip_choice is not None:
-        $ the_person.draw_animated_removal(strip_choice)
-        "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-        $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+    $ the_person.strip_outfit(position = "stand3")
     "Now that she is naked, [the_person.possessive_title] grabs some of her anal lube of a shelf. You raise an eyebrow as she squirts some onto her hand."
     mc.name "Anal lube? Wow... going all out are we?"
     "[the_person.possessive_title] chuckles as she reaches back and starts to spread the lube around her backside."
@@ -1543,11 +1497,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
             "You stop for a second and admire [the_person.title], her body on display in front of you. You guess she walks around the house like this?"
         else:
             "Your mind hazy with lust, you begin to pull [the_person.title]'s clothes off."
-            $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-            while strip_choice is not None:
-                $ the_person.draw_animated_removal(strip_choice)
-                "You roughly strip off [the_person.possessive_title]'s [strip_choice.name]."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+            $ the_person.strip_outfit(position = "missionary")
             "Now naked, you stop for a second and admire [the_person.title]'s incredible body."
         "Before you go any further, you decide to make sure that [the_person.title] is wet and ready for you. You pull her over so her legs are hanging off the edge of the bed and get down on your knees in front of her."
         "She spread's her legs instinctively as you begin to kiss along her knee. You trail wet kisses along the inside of her thigh, working your way further up."

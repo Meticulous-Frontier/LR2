@@ -113,18 +113,13 @@ label dirty_laundry_action_label:
                         the_person.char "[the_person.mc_title]? Oh god, what are you going to do to me?"
                         "You put your finger over her lips to silence her."
                         if the_person.outfit.vagina_available():           #If its available no need to strip.
-                             "You lower your face down between her legs. With her pussy exposed you waste no time diving right in"
+                            "You lower your face down between her legs. With her pussy exposed you waste no time diving right in"
                         else:                                              #Otherwise, strip her down.
-                             "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy"
+                            "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy"
 
-                             python:
-                                strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, exclude_upper = True, exclude_feet = True, do_not_remove = True)
-                                while strip_choice is not None:
-                                    the_person.draw_animated_removal(strip_choice, position = "missionary")
-                                    strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, exclude_upper = True, exclude_feet = True, do_not_remove = True)
-                                    renpy.pause(.5)
+                            $ the_person.strip_outfit(position = "missionary")
 
-                             "With her pussy finally exposed you waste no time diving right in"
+                            "With her pussy finally exposed you waste no time diving right in"
                         "Cupping her ass with your hands, you circle your tongue all around her wet, inviting cunt."
                         the_person.char "Oh [the_person.mc_title], you have no idea how bad I need this."
                         "[the_person.possessive_title] runs her hands your hair. You bury your nose in her mound and flick your tongue in and out of her slick hole"
@@ -210,11 +205,8 @@ label dirty_laundry_action_label:
                     the_person.char "I can't wait to wear those panties after you cum in them... I think I'll wear them to bed tonight! Actually... maybe I could wear them before that..."
                     "She looks at you for another second. What is she talking about?"
                     "She suddenly stands up and starts stripping."
-                    $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
-                    while strip_choice is not None:
-                        $ the_person.draw_animated_removal(strip_choice)
-                        "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-                        $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
+
+                    $ the_person.strip_outfit(position = "stand2")
 
                     "Once she is naked, [the_person.title] turns to you."
                     the_person.char "Here, let me have those!"

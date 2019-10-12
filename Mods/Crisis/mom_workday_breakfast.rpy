@@ -258,12 +258,9 @@ label mom_breakfast_action_label():
         $ scene_manager.update_actor(mom, position = "stand4")
         the_person.char "Oh! We'd better go quick, your sister could come out at any time..."
         "[the_person.possessive_title] quickly starts to strip down."
-        $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-        while strip_choice is not None:
-            #$ the_person.draw_animated_removal(strip_choice)
-            $ scene_manager.draw_animated_removal(mom, strip_choice)
-            " [the_person.possessive_title] strips off her [strip_choice.name]."
-            $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+
+        $ scene_manager.strip_actor_outfit(mom)
+
         "You take a quick sip of coffee. [the_person.possessive_title] is naked in the kitchen!"
         if SB_check_fetish(the_person, anal_fetish_role): #The anal role
             "She opens one of the drawers and pulls out a bottle of lube..."

@@ -948,11 +948,9 @@ label SB_starbuck_anal_swing_demo(the_person):
                 the_person.char "Alright. Before we get started, let me get ready. You should probably get naked too!"
                 $ the_person.draw_person( position = "stand2")
                 "You start to strip down, but watch intently while [the_person.possessive_title] strips down along side you."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-                while strip_choice is not None:
-                    $ the_person.draw_animated_removal(strip_choice)
-                    "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-                    $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+
+                $ the_person.strip_outfit(position = "stand2")
+
                 "When you finish stripping, she turns her back to you."
                 $ the_person.draw_person(position = "back_peek")
                 mc.name "It's going to feel so good when I slide into that amazing ass of yours..."
@@ -971,13 +969,11 @@ label SB_starbuck_anal_swing_demo(the_person):
         "[the_person.possessive_title] walks to the back room. You quickly follow her."
         "You get to the back room and [the_person.title] turns to you."
         the_person.char "Alright. Before we get started, let me get ready. You should probably get naked too!"
-        $ the_person.draw_person( position = "stand2")
+        $ the_person.draw_person(position = "stand2")
         "You start to strip down, but watch intently while [the_person.possessive_title] strips down along side you."
-        $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-        while strip_choice is not None:
-            $ the_person.draw_animated_removal(strip_choice)
-            "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-            $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+
+        $ the_person.strip_outfit(position = "stand2")
+        
         "When you finish stripping, she turns her back to you."
         $ the_person.draw_person(position = "back_peek")
         mc.name "It's going to feel so good when I slide into that amazing ass of yours..."
