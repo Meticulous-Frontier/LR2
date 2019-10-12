@@ -120,6 +120,7 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                     "They pickup their clothes and leave you feeling very proud of yourself."
 
                     # cleanup scene
+                    $ renpy.scene("Active")
                     $ update_opinion(person_two, "threesomes")
                     $ person_two.reset_arousal()
                     $ person_two.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
@@ -127,8 +128,6 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                     $ update_opinion(person_three, "threesomes")
                     $ person_three.reset_arousal()
                     $ person_three.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-
-                    $ mc.location.show_background()
 
                     "Amazing you just fucked two of your employees, wondering if other girls in your company might also be up for this."
                     return
