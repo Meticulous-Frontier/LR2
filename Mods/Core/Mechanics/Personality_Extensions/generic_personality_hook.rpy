@@ -28,29 +28,44 @@ init -1 python:
 
     def update_person_opinions(person):
         # make sure we have an opinion about one of the clothing categories
-        if not any(x[0] in person.opinions for x in ["dresses", "pants", "skirts"]):
-            the_opinion_key = get_random_from_list(["dresses", "pants", "skirts"])
-            degree = get_random_from_list([-2,-1,1,2])
-            person.opinions[the_opinion_key] = [degree, False]
+        ensure_opinion_on_subject(person, ["dresses", "pants", "skirts"])
 
         # make sure we have an opinion about shoes and makeup
-        if not any(x[0] in person.opinions for x in ["boots", "high heels", "makeup"]):
-            the_opinion_key = get_random_from_list(["boots", "high heels", "makeup"])
+        ensure_opinion_on_subject(person, ["boots", "high heels", "makeup"])
+
+        # make sure we have an opinion about clothing to wear
+        ensure_sexy_opinion_on_subject(person, ["skimpy outfits", "not wearing underwear", "showing her tits", "showing her ass", "skimpy uniforms"])
+
+        # do we have sexual preferences / dislikes?
+        ensure_opinion_on_sexual_preference(person, "Foreplay", ["kissing", "being fingered", "giving handjobs"])
+        ensure_opinion_on_sexual_preference(person, "Oral", ["giving blowjobs", "getting head", "drinking cum" ])
+        ensure_opinion_on_sexual_preference(person, "Vaginal", ["missionary style sex", "vaginal sex", "creampies"])
+        ensure_opinion_on_sexual_preference(person, "Anal", ["anal sex", "anal creampies", "doggy style sex"])
+
+        return
+
+    def ensure_opinion_on_subject(person, opinions):
+        if not any(x[0] in person.opinions for x in opinions):
+            the_opinion_key = get_random_from_list(opinions)
             degree = get_random_from_list([-2,-1,1,2])
             person.opinions[the_opinion_key] = [degree, False]
 
-        # make sure we have an opinion about basic sex acts
-        if not any(x[0] in person.sexy_opinions for x in ["kissing", "masturbating", "giving blowjobs", "being fingered"]):
-            the_opinion_key = get_random_from_list(["kissing", "masturbating", "giving blowjobs", "being fingered"])
+    def ensure_sexy_opinion_on_subject(person, opinions):
+        if not any(x[0] in person.opinions for x in opinions):
+            the_opinion_key = get_random_from_list(opinions)
             degree = get_random_from_list([-2,-1,1,2])
             person.sexy_opinions[the_opinion_key] = [degree, False]
 
-        # make sure we have an opinion about clothing to wear
-        if not any(x[0] in person.sexy_opinions for x in ["skimpy outfits", "not wearing underwear", "showing her tits", "showing her ass", "skimpy uniforms"]):
-            the_opinion_key = get_random_from_list(["skimpy outfits", "not wearing underwear", "showing her tits", "showing her ass", "skimpy uniforms"])
-            degree = get_random_from_list([-2,-1,1,2])
+    def ensure_opinion_on_sexual_preference(person, sex_skill, opinions):
+        if not any(x[0] in person.sexy_opinions for x in opinions):
+            the_opinion_key = get_random_from_list(opinions)
+            if person.sex_skills[sex_skill] >= 3: # positive skew
+                degree = get_random_from_list([1,2])
+            elif person.sex_skills[sex_skill] < 1: # negative skew
+                degree = get_random_from_list([-2, -1])
+            else: # random
+                degree = get_random_from_list([-2,-1,1,2])
             person.sexy_opinions[the_opinion_key] = [degree, False]
-        return
 
     # make sure new character has a more appropriate outfit to wear
     def update_person_outfit(person):
