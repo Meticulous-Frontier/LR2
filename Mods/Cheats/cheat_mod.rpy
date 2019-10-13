@@ -113,6 +113,10 @@ screen cheat_menu():
     default available_personalities = {}
     if available_personalities == {}:
         $ for x in list_of_personalities: available_personalities[x.personality_type_prefix] = x
+        if "list_of_extra_personalities" in globals():
+            $ for x in list_of_extra_personalities: available_personalities[x.personality_type_prefix] = x
+
+
 
     default available_faces = [x for x in list_of_faces]
     default available_body_types = [x for x in list_of_body_types]
