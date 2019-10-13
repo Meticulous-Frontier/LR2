@@ -73,38 +73,47 @@ init 2:
                     ysize 550
                     vbox:
                         text "Opinions" style "menu_text_style" size 26 xalign 0.5 xanchor 0.5 #Info about the persons loves, likes, dislikes, and hates
-                        text "Loves" style "menu_text_style" size 20
-                        for opinion in master_opinion_dict:
-                            if master_opinion_dict[opinion][0] == 2:
-                                if master_opinion_dict[opinion][1]:
-                                    text "    " + opinion.title() style "menu_text_style" size 16
-                                else:
-                                    text "    ????" style "menu_text_style" size 16
+                        hbox:
+                            spacing 5
+                            vbox:
+                                xsize 210
+                                text "Loves" style "menu_text_style" size 22
+                                for opinion in master_opinion_dict:
+                                    if master_opinion_dict[opinion][0] == 2:
+                                        if master_opinion_dict[opinion][1]:
+                                            text opinion.title() style "menu_text_style" size 16
+                                        else:
+                                            text "????" style "menu_text_style" size 16
+                            vbox:
+                                text "Likes" style "menu_text_style" size 22
+                                for opinion in master_opinion_dict:
+                                    if master_opinion_dict[opinion][0] == 1:
+                                        if master_opinion_dict[opinion][1]:
+                                            text opinion.title() style "menu_text_style" size 16
+                                        else:
+                                            text "????" style "menu_text_style" size 16
+                        hbox:
+                            ysize 14
+                        hbox:
+                            spacing 5
+                            vbox:
+                                xsize 210
+                                text "Dislikes" style "menu_text_style" size 20
+                                for opinion in master_opinion_dict:
+                                    if master_opinion_dict[opinion][0] == -1:
+                                        if master_opinion_dict[opinion][1]:
+                                            text opinion.title() style "menu_text_style" size 16
+                                        else:
+                                            text "????" style "menu_text_style" size 16
 
-                        text "Likes" style "menu_text_style" size 20
-                        for opinion in master_opinion_dict:
-                            if master_opinion_dict[opinion][0] == 1:
-                                if master_opinion_dict[opinion][1]:
-                                    text "    " + opinion.title() style "menu_text_style" size 16
-                                else:
-                                    text "    ????" style "menu_text_style"
-
-                        text "Dislikes" style "menu_text_style" size 20
-                        for opinion in master_opinion_dict:
-                            if master_opinion_dict[opinion][0] == -1:
-                                if master_opinion_dict[opinion][1]:
-                                    text "    " + opinion.title() style "menu_text_style" size 16
-                                else:
-                                    text "    ????" style "menu_text_style" size 16
-
-
-                        text "Hates" style "menu_text_style" size 20
-                        for opinion in master_opinion_dict:
-                            if master_opinion_dict[opinion][0] == -2:
-                                if master_opinion_dict[opinion][1]:
-                                    text "    " + opinion.title() style "menu_text_style" size 16
-                                else:
-                                    text "    ????" style "menu_text_style" size 16
+                            vbox:
+                                text "Hates" style "menu_text_style" size 20
+                                for opinion in master_opinion_dict:
+                                    if master_opinion_dict[opinion][0] == -2:
+                                        if master_opinion_dict[opinion][1]:
+                                            text opinion.title() style "menu_text_style" size 16
+                                        else:
+                                            text "????" style "menu_text_style" size 16
 
             frame:
                 background "#1a45a1aa"
