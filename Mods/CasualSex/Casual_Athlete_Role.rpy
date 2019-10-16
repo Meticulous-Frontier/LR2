@@ -616,7 +616,7 @@ label athlete_greetings(the_person):
             the_person.char "You want to join me for another workout? I always leave the gym feeling so satisfied when we work out together!"
         else:
             the_person.char "Hey there!"
-    if mc.location == the_person.home:
+    elif mc.location == the_person.home:
         if the_person.event_triggers_dict.get("athlete_progress", 0) > 3:
             the_person.char "Hey there [the_person.mc_title]! I wasn't expecting you! Are you here for some fun?"
             "She looks at you hopefully."
