@@ -530,16 +530,45 @@ screen cmoc():
 
                 if cpy and cpyt: # Personality Type selection
                     hbox:
+
                         vbox:
                             textbutton "Current: [the_person.personality.personality_type_prefix]" action NullAction() style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
-                            textbutton "Relaxed Personality" action [SetField(the_person,"personality", relaxed_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
-                            textbutton "Reserved Personality" action [SetField(the_person,"personality", reserved_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
-                            textbutton "Wild Personality" action [SetField(the_person,"personality", wild_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
-                            textbutton "Bimbo Personality" action [SetField(the_person,"personality", bimbo_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
-                            textbutton "Stephanie's Personality" action [SetField(the_person,"personality", stephanie_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "relaxed_personality" in globals():
+                                textbutton "Relaxed" action [SetField(the_person,"personality", relaxed_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "reserved_personality" in globals():
+                                textbutton "Reserved" action [SetField(the_person,"personality", reserved_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "wild_personality" in globals():
+                                textbutton "Wild" action [SetField(the_person,"personality", wild_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "bimbo_personality" in globals():
+                                textbutton "Bimbo" action [SetField(the_person,"personality", bimbo_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+
                         vbox:
-                            textbutton "Sister's Personality" action [SetField(the_person,"personality", lily_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
-                            textbutton "Mom's Personality" action [SetField(the_person,"personality", mom_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "lily_personality" in globals():
+                                textbutton "Sister's" action [SetField(the_person,"personality", lily_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "mom_personality" in globals():
+                                textbutton "Mom's" action [SetField(the_person,"personality", mom_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "stephanie_personality" in globals():
+                                textbutton "Stephanie's" action [SetField(the_person,"personality", stephanie_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "nora_personality" in globals():
+                                textbutton "Nora's" action [SetField(the_person,"personality", nora_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "aunt_personality" in globals():
+                                textbutton "Aunt's" action [SetField(the_person,"personality", aunt_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "cousin_personality" in globals():
+                                textbutton "Cousin's" action [SetField(the_person,"personality", cousin_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                        vbox:
+                            if "FA_personality" in globals():
+                                textbutton "Flight Attendant" action [SetField(the_person,"personality", FA_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "cougar_personality" in globals():
+                                textbutton "Cougar" action [SetField(the_person,"personality", cougar_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "athlete_personality" in globals():
+                                textbutton "College Athlete" action [SetField(the_person,"personality", athlete_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "starbuck_personality" in globals():
+                                textbutton "Starbuck's" action [SetField(the_person,"personality", starbuck_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "hotwife_personality" in globals():
+                                textbutton "Hotwife" action [SetField(the_person,"personality", hotwife_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "Sarah_personality" in globals():
+                                textbutton "Sarah's" action [SetField(the_person,"personality", Sarah_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+
 
 screen cmc(): # Cheats for business / company
     zorder 49
