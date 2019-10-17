@@ -240,6 +240,86 @@ init -1:
 
         Person.strip_outfit = strip_outfit
 
+        def run_move_enhanced(self,location): 
+            self.sexed_count = 0 #Reset the counter for how many times you've been seduced, you might be seduced multiple times in one day!
+
+            if time_of_day == 0: #It's a new day, get a new outfit out to wear!
+                self.planned_outfit = self.wardrobe.decide_on_outfit(self.sluttiness)
+                self.outfit = self.planned_outfit.get_copy()
+                self.planned_uniform = None
+
+            destination = self.schedule[time_of_day] #None destination means they have free time
+            if destination == self.work and not mc.business.is_open_for_business(): #NOTE: Right now we give everyone time off based on when the mc has work scheduled.
+                destination = None
+
+            if destination is not None: #We have somewhere scheduled to be for this time chunk. Let's move over there.
+                location.move_person(self, destination) #Always go where you're scheduled to be.
+                if self.schedule[time_of_day] == self.work: #We're going to work.
+                    if self.should_wear_uniform(): #Get a uniform if we should be wearing one.
+                        self.wear_uniform()
+                        self.change_happiness(self.get_opinion_score("work uniforms"),add_to_log = False)
+                        # only changes sluttiness in low sluttiness range after that she won't care anymore
+                        if self.sluttiness < 40 and self.planned_uniform and self.planned_uniform.slut_requirement > self.sluttiness*0.75: #A skimpy outfit/uniform is defined as the top 25% of a girls natural sluttiness.
+                            self.change_slut_temp(self.get_opinion_score("skimpy uniforms"), add_to_log = False)
+
+                elif destination == self.home:
+                    self.outfit = self.planned_outfit.get_copy() #We're at home, so we can get back into our casual outfit.
+
+                #NOTE: There is no else here because all of the destinations should be set. If it's just a location they travel there and that's the end of it.
+
+            else:
+                #She finds somewhere to burn some time
+                self.outfit = self.planned_outfit.get_copy() #Get changed back into our proper outfit if we aren't in it already.
+                available_locations = [] #Check to see where is public (or where you are white listed) and move to one of those locations randomly
+                for potential_location in list_of_places:
+                    if potential_location.public:
+                        available_locations.append(potential_location)
+                location.move_person(self, get_random_from_list(available_locations))
+
+            #A skimpy outfit is defined as the top 25% of a girls natural sluttiness.
+            if self.outfit and self.planned_outfit.slut_requirement > self.sluttiness * 0.75:
+                # only changes sluttiness in low sluttiness range after that she won't care anymore
+                if self.sluttiness < 40:
+                    self.change_slut_temp(self.get_opinion_score("skimpy outfits"), add_to_log = False)         
+            
+            #A conservative outfit is defined as the bottom 25% of a girls natural sluttiness.                    
+            if self.outfit and self.planned_outfit.slut_requirement < self.sluttiness * 0.25:
+                # happiness won't go below 80 or over 120 by this trait and only affects in low sluttiness range, after that she won't care
+                if self.happiness > 80 and self.happiness < 120 and self.sluttiness < 40:
+                    self.change_happiness(self.get_opinion_score("conservative outfits"), add_to_log = False)
+
+            # lingerie only impacts to sluttiness level 40
+            if self.sluttiness < 40 and self.outfit.get_bra() or self.outfit.get_panties():
+                lingerie_bonus = 0
+                if self.outfit.get_bra() and self.outfit.get_bra().slut_value > 1: #We consider underwear with an innate sluttiness of 2 or higher "lingerie" rather than just underwear.
+                    lingerie_bonus += self.get_opinion_score("lingerie")
+                if self.outfit.get_panties() and self.outfit.get_panties().slut_value > 1:
+                    lingerie_bonus += self.get_opinion_score("lingerie")
+                lingerie_bonus = __builtin__.int(lingerie_bonus/2.0)
+                self.change_slut_temp(lingerie_bonus, add_to_log = False)
+
+            # not wearing underwear only impacts sluttiness to level 60
+            if self.sluttiness < 60 and not self.outfit.wearing_bra() or not self.outfit.wearing_panties(): #We need to determine how much underwear they are not wearing. Each piece counts as half, so a +2 "love" is +1 slut per chunk.
+                underwear_bonus = 0
+                if not self.outfit.wearing_bra():
+                    underwear_bonus += self.get_opinion_score("not wearing underwear")
+                if not self.outfit.wearing_panties():
+                    underwear_bonus += self.get_opinion_score("not wearing underwear")
+                underwear_bonus = __builtin__.int(underwear_bonus/2.0) #I believe this rounds towards 0. No big deal if it doesn't, very minor detail.
+                self.change_slut_temp(underwear_bonus, add_to_log = False)
+
+            # showing the goods only impacts sluttiness to level 80
+            if self.sluttiness < 80 and self.outfit.tits_visible():
+                self.change_slut_temp(self.get_opinion_score("showing her tits"), add_to_log = False)
+            if self.sluttiness < 80 and self.outfit.vagina_visible():
+                self.change_slut_temp(self.get_opinion_score("showing her ass"), add_to_log = False)
+
+            # showing everything only impacts sluttiness to level 80
+            if self.sluttiness < 80 and self.outfit.tits_available() and self.outfit.tits_visible() and self.outfit.vagina_available() and self.outfit.vagina_visible():
+                self.change_slut_temp(self.get_opinion_score("not wearing anything"), add_to_log = False)
+
+        Person.run_move = run_move_enhanced
+
         # BUGFIXED: Judge Outfit function uses the_person instead of self to check effective sluttiness
         #Judge an outfit and determine if it's too slutty or not. Can be used to judge other people's outfits to determine if she thinks they look like a slut.
         def judge_outfit_extension(self, outfit, temp_sluttiness_boost = 0):
