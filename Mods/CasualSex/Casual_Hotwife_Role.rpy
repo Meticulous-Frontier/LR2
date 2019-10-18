@@ -27,6 +27,8 @@ init -2 python:
     def casual_hotwife_get_a_drink_requirement(the_person):  #For now this should always return true. May be other conditions not to in the future#
         if the_person.event_triggers_dict.get("hotwife_blowjob_text_enable", 0) == 1:
             return False
+        if mc.location != downtown_bar:
+            return "Not in Bar"
         return True
 
     def casual_hotwife_bathroom_blowjob_requirement(the_person):
@@ -34,13 +36,14 @@ init -2 python:
             return False
         if the_person.event_triggers_dict.get("hotwife_blowjob_text_enable", 0) == 1:
             return False
-        if the_person.event_triggers_dict.get("hotwife_blowjob_enable", 0) == 1:
-            #TODO Check to see if you are at the bar!!!
-            return True
+        if mc.location != downtown_bar:
+            return "Not in Bar"
         elif mc.charisma < 4:
             return "Requires higher Charisma"
         elif the_person.sluttiness < 25:
             return "Requires higher sluttiness"
+        elif the_person.event_triggers_dict.get("hotwife_blowjob_enable", 0) == 1:
+            return True
         else:
             return "Grab a drink with her first"
         return False
@@ -58,6 +61,9 @@ init -2 python:
             return False
         if the_person.event_triggers_dict.get("hotwife_progress", 0) < 2:
             return False
+        
+        if mc.location != downtown_bar:
+            return "Not in Bar"
         elif mc.charisma < 5:
             return "Requires higher Charisma"
         elif the_person.sluttiness < 40:
