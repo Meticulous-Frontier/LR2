@@ -75,3 +75,42 @@ init -1 python:
         return self.name
 
     Outfit.build_outfit_name = build_outfit_name_custom
+
+# initialize this part after wardrobe builder is initialized
+init 6 python:
+    def get_total_slut_modifiers_enhanced(self):
+        def clothing_in_preferences(topic, clothing):
+            for layer in WardrobeBuilder.preferences[topic].keys():
+                if clothing in WardrobeBuilder.preferences[topic][layer]:
+                    return True
+            return False
+
+        new_score = 0
+        for cloth in self.accessories + self.upper_body + self.lower_body + self.feet:
+            new_score += cloth.slut_value
+            if clothing_in_preferences("skimpy outfits", cloth):
+                new_score += 1
+            if clothing_in_preferences("conservative outfits", cloth):
+                new_score -= 3
+            if clothing_in_preferences("showing her tits", cloth):
+                new_score += 2
+            if clothing_in_preferences("showing her ass", cloth):
+                new_score += 2
+            if clothing_in_preferences("lingerie", cloth):
+                new_score += 1
+            if clothing_in_preferences("high heels", cloth):
+                new_score += 1
+            if cloth in [two_part_dress, thin_dress, nightgown_dress, thigh_high_boots]:
+                new_score += 20 # extremely slutty clothing (applies extra modifier)
+            if cloth in [lacy_one_piece_underwear, lingerie_one_piece, leotard]:
+                if any(x for x in self.lower_body if x.layer == 2) and not any(x for x in self.upper_body if x.layer == 2):
+                    new_score += 10 # partially covered
+                elif not any(x for x in self.lower_body if x.layer == 2) and any(x for x in self.upper_body if x.layer == 2):
+                    new_score += 10 # partially covered
+                else:
+                    new_score += 20 # uncovered very slutty
+
+
+        return new_score if new_score > 0 else 0
+
+    Outfit.get_total_slut_modifiers = get_total_slut_modifiers_enhanced
