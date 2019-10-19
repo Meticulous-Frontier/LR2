@@ -118,7 +118,7 @@ label mom_breakfast_action_label():
                         $ the_person.change_arousal(15)
                         "You roll her nipples a couple of times between your fingers. She sighs at the sensations you are giving her."
 
-                    "Finish Message":
+                    "Finish Massage":
                         "You work on her shoulders for a while. She sighs in relaxation. You finish up and go back to your breakfast."
                         $ scene_manager.clear_scene()
                         return
