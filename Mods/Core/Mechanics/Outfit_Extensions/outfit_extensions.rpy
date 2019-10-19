@@ -100,16 +100,17 @@ init 6 python:
                 new_score += 1
             if clothing_in_preferences("high heels", cloth):
                 new_score += 1
-            if cloth in [two_part_dress, thin_dress, nightgown_dress, thigh_high_boots]:
-                new_score += 20 # extremely slutty clothing (applies extra modifier)
-            if cloth in [lacy_one_piece_underwear, lingerie_one_piece, leotard]:
-                if any(x for x in self.lower_body if x.layer == 2) and not any(x for x in self.upper_body if x.layer == 2):
-                    new_score += 10 # partially covered
-                elif not any(x for x in self.lower_body if x.layer == 2) and any(x for x in self.upper_body if x.layer == 2):
-                    new_score += 10 # partially covered
-                else:
-                    new_score += 20 # uncovered very slutty
-
+            if cloth in [pumps, high_heels, leggings]:
+                new_score += 5 # small extra modifier
+            if cloth in [summer_dress, evening_dress]:
+                new_score += 10 # sexy modifier
+            if cloth in [two_part_dress, thin_dress, nightgown_dress, thigh_high_boots, leotard]:
+                new_score += 15 # extremely slutty clothing (applies extra modifier)
+            if cloth in [lacy_one_piece_underwear, lingerie_one_piece]:
+                if not any(x for x in self.upper_body if x.layer == 2):
+                    new_score += 10 # upper part not covered
+                if not any(x for x in self.lower_body if x.layer == 2):
+                    new_score += 10 # lower part not covered
 
         return new_score if new_score > 0 else 0
 

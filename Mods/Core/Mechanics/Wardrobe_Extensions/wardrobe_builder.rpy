@@ -68,7 +68,7 @@ init 5 python:
         preferences["makeup"] = {}
         preferences["makeup"]["accessories"] = [light_eye_shadow, heavy_eye_shadow, blush, lipstick]
         preferences['lingerie'] = {}
-        preferences['lingerie']["upper_body"] = [lacy_one_piece_underwear, lingerie_one_piece, strapless_bra, lace_bra, thin_bra, corset]
+        preferences['lingerie']["upper_body"] = [lacy_one_piece_underwear, lingerie_one_piece, leotard, strapless_bra, lace_bra, thin_bra, corset]
         preferences['lingerie']["lower_body"] = [lace_panties, cute_lace_panties, tiny_lace_panties, thin_panties, thong, tiny_g_string]
         preferences['lingerie']["feet"] = [thigh_highs, fishnets, garter_with_fishnets]
         preferences['lingerie']['accessories'] = [lace_choker, wide_choker]
@@ -231,8 +231,11 @@ init 5 python:
                 if item:
                     outfit.add_lower(item.get_copy(), color_lower)
             
-            if points > 5 or renpy.random.randint(0, 3) == 0:
-                item = self.get_item_from_list("feet", self.build_filter_list(socks_list, points))
+            if renpy.random.randint(0, 3 if points >= 5 else 1) == 0:
+                if points >= 5:
+                    item = self.get_item_from_list("feet", self.build_filter_list([x for x in socks_list if x not in [short_socks, medium_socks]], points))
+                else:
+                    item = self.get_item_from_list("feet", self.build_filter_list(socks_list, points))
                 if item:
                     outfit.add_feet(item.get_copy(), color_feet)
             
@@ -253,10 +256,10 @@ init 5 python:
             return outfit
 
 
-        def build_filter_list(self, item_list, points):
+        def build_filter_list(self, item_list, points, min_points = 0):
             items = []
             while len(items) == 0 and points < 15:  # make sure we got some items to choose from
-                items = list(filter(lambda x: x.slut_value <= points, item_list))
+                items = list(filter(lambda x: x.slut_value >= min_points and x.slut_value <= points, item_list))
                 points += 1
 
             return list(filter(lambda x: x.slut_value <= points, item_list))
