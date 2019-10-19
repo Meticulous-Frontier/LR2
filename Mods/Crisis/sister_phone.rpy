@@ -181,7 +181,10 @@ label sister_phone_crisis_action_label:
         #Sends you normal texts but talks about wanting to get away to talk to you instead
         $ rand_chance = renpy.random.randint(1,5) #Used to determine which variant we use to avoid spamming the player with the exact same texts.
         if rand_chance == 1:
-            the_person.char "I hope I'm not interrupting, I just wanted to say hi and check in. I'm stuck here at school but wish I could spend more time with you."
+            if mc.business.is_weekend():
+                the_person.char "I hope I'm not interrupting, I just wanted to say hi and check in. I'm stuck here at home wishing I could spend more time with you."
+            else:
+                the_person.char "I hope I'm not interrupting, I just wanted to say hi and check in. I'm stuck here at school wishing I could spend more time with you."
             the_person.char "Have a great day, see you later tonight. Love, [the_person.possessive_title]."
 
         elif rand_chance == 2:
