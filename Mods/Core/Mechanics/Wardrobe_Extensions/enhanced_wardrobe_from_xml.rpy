@@ -1,25 +1,23 @@
 init 1 python:
     def get_wardrobe_file(xml_filename):
+        file_name = xml_filename + ".xml"
         wardrobe_file = None
-        modified_filename = "wardrobes/" + xml_filename + ".xml"
-        if renpy.loadable(modified_filename):
-            wardrobe_file = renpy.file(modified_filename)
-
-        if wardrobe_file is None:
-            # check MOD wardrobes
-            modified_filename = "Mods/Wardrobes/" + xml_filename + ".xml"
-            if renpy.loadable(modified_filename):
-                wardrobe_file = renpy.file(modified_filename)
+        
+        for file in renpy.list_files():
+            if file_name in file:
+                wardrobe_file = renpy.file(file)
+                break
 
         return wardrobe_file
 
-    def get_xml_files_from_path(path_array):
+    def get_xml_files_from_path():
         result = []
         files = renpy.list_files()
-        for p in path_array:
-             for f in files:
-                 if f.startswith(p) and f.endswith(".xml"):
-                     result.append(f[(len(p)):(len(f)-4)])
+        for file in files:
+            if file.endswith(".xml"):
+                base = os.path.basename(file)
+                result.append(os.path.splitext(base)[0])
+        result.sort()
         return result
 
     def wardrobe_from_xml(xml_filename):

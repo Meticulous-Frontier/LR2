@@ -15,10 +15,9 @@
     #         return True
 
     # def gym_initialization(self):
-    #     gym.background_image = Image("Mods/mods/Room/images/Gym_Background.jpg") #As long a there is a mall background for the gym, replace it with our gym background
+    #     gym.background_image =  room_background_image("Gym_Background.jpg") #As long a there is a mall background for the gym, replace it with our gym background
     #     # add gym shower to active places
     #     list_of_places.append(gym_shower)
-    #     gym.link_locations_two_way(gym_shower)
     #     gym.actions.append(self)
     #     return
 

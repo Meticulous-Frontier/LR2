@@ -1202,7 +1202,7 @@ init 2:
                                                 mousewheel True
                                                 draggable True
                                                 vbox:
-                                                    for n in get_xml_files_from_path(["wardrobes/", "Mods/Wardrobes/"]):
+                                                    for n in get_xml_files_from_path():
                                                         textbutton n:
                                                             style "textbutton_no_padding_highlight"
                                                             text_style "serum_text_style"
