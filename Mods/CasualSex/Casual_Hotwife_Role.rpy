@@ -764,6 +764,7 @@ init 1301 python:              #Because Vren Init personality functionns at 1300
         valid_titles.append(the_person.name)
         if the_person.sluttiness > 40:
             valid_titles.append("Slutwife")
+            valid_titles.append("Cuckold Wife")
         return valid_titles
 
     def hotwife_possessive_titles(the_person):

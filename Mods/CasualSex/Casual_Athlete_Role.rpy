@@ -576,9 +576,11 @@ init 1301 python:              #Because Vren Init personality functions at 1300
     def athlete_titles(the_person):
         valid_titles = []
         valid_titles.append(the_person.name)
-        valid_titles.append("College Athlete")
         if the_person.sluttiness > 40:
+            valid_titles.append("College Athlete")
             valid_titles.append("Cardio Bunny")
+        if the_person.sluttiness > 60:
+            valid_titles.append("Slutty Athlete")
         return valid_titles
 
     def athlete_possessive_titles(the_person):
