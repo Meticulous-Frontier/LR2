@@ -25,17 +25,11 @@ init 1 python:
         if file_name is None:
             return Wardrobe("[xml_filename]") #If there is no wardrobe present we return an empty wardrobe with the name of our file.
 
-        wardrobe_tree = ET.parse(file_name)
-        tree_root = wardrobe_tree.getroot()
+        tree_root = ET.parse(file_name).getroot()
 
-        return_wardrobe = Wardrobe(tree_root.attrib["name"])
-        for outfit_element in tree_root.find("FullSets"):
-            return_wardrobe.add_outfit(outfit_from_xml(outfit_element))
-        for outfit_element in tree_root.find("UnderwearSets"):
-            return_wardrobe.add_underwear_set(outfit_from_xml(outfit_element))
-        for outfit_element in tree_root.find("OverwearSets"):
-            return_wardrobe.add_overwear_set(outfit_from_xml(outfit_element))
-        return return_wardrobe
+        wardrobe = Wardrobe(tree_root.attrib["name"])
+
+        return parse_wardrobe_tree(wardrobe, tree_root)
 
     def import_wardrobe(wardrobe, xml_filename): # This is a rewrite of the wardrobe_from_xml function written by Vren.
                                                  # Wardrobe should be who's / what wardrobe you want to import into. e.g for main character it is mc.designed_wardrobe
@@ -43,19 +37,15 @@ init 1 python:
 
         file_name = get_wardrobe_file(xml_filename)
         if file_name is None:
-            return Wardrobe("[xml_filename]") #If there is no wardrobe present we return an empty wardrobe with the name of our file.
+            return wardrobe # return the original wardrobe since we didn't find an xml to import into it.
 
-        wardrobe_tree = ET.parse(file_name)
-        tree_root = wardrobe_tree.getroot()
+        return parse_wardrobe_tree(wardrobe, ET.parse(file_name).getroot())
 
-        return_wardrobe = Wardrobe(tree_root.attrib["name"])
-        for outfit_element in tree_root.find("FullSets"):
+    def parse_wardrobe_tree(wardrobe, xml_root):
+        for outfit_element in xml_root.find("FullSets"):
             wardrobe.add_outfit(outfit_from_xml(outfit_element))
-
-        for outfit_element in tree_root.find("UnderwearSets"):
+        for outfit_element in xml_root.find("UnderwearSets"):
             wardrobe.add_underwear_set(outfit_from_xml(outfit_element))
-
-        for outfit_element in tree_root.find("OverwearSets"):
+        for outfit_element in xml_root.find("OverwearSets"):
             wardrobe.add_overwear_set(outfit_from_xml(outfit_element))
-
-        return return_wardrobe
+        return wardrobe
