@@ -1,7 +1,7 @@
 init 1 python: # Declare variables to use
 
     # Create the room(s) I want to use.
-    gym_shower = Room("shower", "Gym Shower", [], room_background_image("Gym_Shower_Background.jpg"), [], [], [], True, [], None, False, lighting_conditions = standard_indoor_lighting)
+    gym_shower = Room("gym shower", "Gym Shower", [], room_background_image("Gym_Shower_Background.jpg"), [], [], [], True, [], None, False, lighting_conditions = standard_indoor_lighting)
 
 init 3 python: # Room creation
     # Create Gym shower and attach to gym
