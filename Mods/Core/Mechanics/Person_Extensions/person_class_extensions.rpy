@@ -289,7 +289,7 @@ init -1:
                     self.change_happiness(self.get_opinion_score("conservative outfits"), add_to_log = False)
 
             # lingerie only impacts to sluttiness level 40
-            if self.sluttiness < 40 and self.outfit.get_bra() or self.outfit.get_panties():
+            if self.sluttiness < 40 and (self.outfit.get_bra() or self.outfit.get_panties()):
                 lingerie_bonus = 0
                 if self.outfit.get_bra() and self.outfit.get_bra().slut_value > 1: #We consider underwear with an innate sluttiness of 2 or higher "lingerie" rather than just underwear.
                     lingerie_bonus += self.get_opinion_score("lingerie")
@@ -299,7 +299,7 @@ init -1:
                 self.change_slut_temp(lingerie_bonus, add_to_log = False)
 
             # not wearing underwear only impacts sluttiness to level 60
-            if self.sluttiness < 60 and not self.outfit.wearing_bra() or not self.outfit.wearing_panties(): #We need to determine how much underwear they are not wearing. Each piece counts as half, so a +2 "love" is +1 slut per chunk.
+            if self.sluttiness < 60 and (not self.outfit.wearing_bra() or not self.outfit.wearing_panties()): #We need to determine how much underwear they are not wearing. Each piece counts as half, so a +2 "love" is +1 slut per chunk.
                 underwear_bonus = 0
                 if not self.outfit.wearing_bra():
                     underwear_bonus += self.get_opinion_score("not wearing underwear")
