@@ -293,12 +293,13 @@ label casual_athlete_phase_one_label(the_person):
         mc.name "I agree. We need some ground rules. Want to have coffee and figure it out?"
         the_person.char "That sounds good. But its not a date, okay? Just need to set boundaries."
         "You agree. You and [the_person.title] take a quick shower, then get ready and leave the gym."
-        #TODO change location to coffee house? Possibly change from grabbing coffee to grabbing a drink. ()
 
         $ the_person.review_outfit(show_review_message = False)
 
-        $ the_person.draw_person( position = "sitting")
         "You head to a nearby coffee shop. You grab yourself a coffee, letting [the_person.title] pay for her own. You grab a seat at a booth away from any other people."
+        $ renpy.show("restaurant", what = restaraunt_background)
+        $ the_person.draw_person( position = "sitting")
+
         the_person.char "So... are you interested in a friend's with benefits set up?"
         "You give a quick nod."
         the_person.char "Okay, so, some ground rules. First off, if either of us start's to catch feelings for the other person, we break it off. I sure as fuck don't have time for that stuff right now..."
