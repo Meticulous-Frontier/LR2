@@ -728,6 +728,7 @@ screen cmw(): # Cheats affecting the general world
                     textbutton "Mall Introduction" action Call("mall_introduction_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "A friend introduces a stranger in the mall"
                     textbutton "Daughter Work" action Call("daughter_work_crisis_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "An employee asks to hire her daughter"
                     textbutton "Horny at Work" action Call("horny_at_work_crisis_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "When you haven't had sex today, you get horny at work"
+                    textbutton "Laundry Night" action Call("dirty_laundry_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "You forgot to do your laundry for the next day"
 
             if cml == True and cmlpage == 4: # Page 4
                 vbox:
