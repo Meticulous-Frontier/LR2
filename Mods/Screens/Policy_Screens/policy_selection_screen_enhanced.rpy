@@ -7,6 +7,8 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
 
         $ categories = sorted(policy_selection_screen_categories) #This way we can append extra categories and lists with ease.
 
+
+
         default selected_category = categories[0] #Default to the first in our categories list
         default selected_policy = None
         default selected_tooltip = None
@@ -131,6 +133,7 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                                             textbutton "$" + str(policy.cost) + " - " + policy.name:
                                                 tooltip policy.desc
                                                 action NullAction()
+                                                alternate [Function(policy.buy_policy, True), If(policy.refresh is not None, Function(renpy.call_in_new_context, policy.refresh))]
                                                 hovered SetScreenVariable("selected_tooltip", policy.desc)
                                                 style "textbutton_no_padding_highlight"
                                                 xalign 0.5
@@ -142,17 +145,15 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                                                 ysize 100
 
                                         else:
-                                            if policy.requirement() and (policy.cost < mc.business.funds or policy.cost == mc.business.funds):
+                                            if policy.requirement() and (policy.cost <= mc.business.funds):
                                                 textbutton "$" + str(policy.cost) + " - " + policy.name:
                                                     tooltip policy.desc
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "serum_text_style"
 
-                                                    if not policy.upgrade:
-                                                        action [Function(purchase_policy, policy)]
-                                                    else:
-                                                        action [Function(policy.buy_policy), If(policy.refresh is not None, Function(renpy.call_in_new_context, policy.refresh))]
-                                                        alternate [Function(policy.buy_policy, True), If(policy.refresh is not None, Function(renpy.call_in_new_context, policy.refresh))]
+                                                    action [Function(policy.buy_policy), If(policy.refresh is not None, Function(renpy.call_in_new_context, policy.refresh))]
+                                                    alternate [Function(policy.buy_policy, True), If(policy.refresh is not None, Function(renpy.call_in_new_context, policy.refresh))]
+
                                                     hovered SetScreenVariable("selected_tooltip", policy.desc)
                                                     sensitive policy.requirement() and (policy.cost < mc.business.funds or policy.cost == mc.business.funds)
                                                     xfill True
