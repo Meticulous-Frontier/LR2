@@ -8,6 +8,8 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
         $ categories = sorted(policy_selection_screen_categories) #This way we can append extra categories and lists with ease.
 
         default selected_category = categories[0] #Default to the first in our categories list
+        default selected_policy = None
+        default selected_tooltip = None
         vbox:
             xalign 0.5
             yalign 0.15
@@ -38,7 +40,7 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                                 textbutton category[0]:
                                     ysize 80
                                     xfill True
-                                    action SetScreenVariable("selected_category", category)
+                                    action [SetScreenVariable("selected_category", category), SetScreenVariable("selected_policy", None), SetScreenVariable("selected_tooltip", None)]
                                     sensitive selected_category != category
                                     style "textbutton_no_padding_highlight"
                                     text_style "serum_text_style"
@@ -65,7 +67,8 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
 
                                         textbutton "$" + str(policy.cost) + " - " + policy.name:
                                             tooltip policy.desc
-                                            action NullAction()
+                                            action [ToggleScreenVariable("selected_policy", policy, None)]
+                                            hovered SetScreenVariable("selected_tooltip", policy.desc)
                                             style "textbutton_no_padding_highlight"
                                             xalign 0.5
                                             text_style "serum_text_style"
@@ -74,13 +77,15 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                                             sensitive True
                                             xfill True
                                             ysize 100
+
                                     else:
                                         if policy.requirement() and (policy.cost < mc.business.funds or policy.cost == mc.business.funds):
                                             textbutton "$" + str(policy.cost) + " - " + policy.name:
                                                 tooltip policy.desc
                                                 style "textbutton_no_padding_highlight"
                                                 text_style "serum_text_style"
-                                                action Function(purchase_policy,policy)
+                                                action [Function(purchase_policy, policy), ToggleScreenVariable("selected_policy", policy, None)]
+                                                hovered SetScreenVariable("selected_tooltip", policy.desc)
                                                 sensitive policy.requirement() and (policy.cost < mc.business.funds or policy.cost == mc.business.funds)
                                                 xfill True
                                                 ysize 100
@@ -91,18 +96,78 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                                                 style "textbutton_no_padding_highlight"
                                                 text_style "serum_text_style"
                                                 background "#666666"
-                                                action NullAction()
+                                                action [ToggleScreenVariable("selected_policy", policy, None)]
+                                                hovered SetScreenVariable("selected_tooltip", policy.desc)
                                                 sensitive True
                                                 xfill True
                                                 ysize 100
 
 
-                    if tooltip:
-                        frame:
-                            background "#1a45a1aa"
-                            xfill True
-                            text tooltip style "serum_text_style"
 
+                    vbox:
+                        # if tooltip:
+                        if selected_tooltip is not None:
+                            frame:
+                                xfill True
+                                ysize 100
+                                viewport:
+                                    scrollbars "vertical"
+                                    draggable True
+                                    mousewheel True
+                                    vbox:
+                                        text selected_tooltip style "serum_text_style" #tooltip
+                        else:
+                            frame: # A hidden frame to avoid things from moving around
+                                background None
+                                xfill True
+                                ysize 100
+
+                        if selected_policy is not None and (hasattr(selected_policy, "children") and selected_policy.children):
+                            frame:
+                                grid 1 len(selected_policy.children):
+                                    for policy in sorted(sorted(sorted(selected_policy.children, key = lambda x: x.cost), key = lambda x: x.is_owned()), key = lambda x: x.requirement(), reverse = True):
+                                        if policy.is_owned():
+
+                                            textbutton "$" + str(policy.cost) + " - " + policy.name:
+                                                tooltip policy.desc
+                                                action NullAction()
+                                                hovered SetScreenVariable("selected_tooltip", policy.desc)
+                                                style "textbutton_no_padding_highlight"
+                                                xalign 0.5
+                                                text_style "serum_text_style"
+                                                background "#59853f"
+                                                hover_background "#78b156"
+                                                sensitive True
+                                                xfill True
+                                                ysize 100
+
+                                        else:
+                                            if policy.requirement() and (policy.cost < mc.business.funds or policy.cost == mc.business.funds):
+                                                textbutton "$" + str(policy.cost) + " - " + policy.name:
+                                                    tooltip policy.desc
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "serum_text_style"
+
+                                                    if not policy.upgrade:
+                                                        action [Function(purchase_policy, policy)]
+                                                    else:
+                                                        action [Function(policy.buy_policy), If(policy.refresh is not None, Function(renpy.call_in_new_context, policy.refresh))]
+                                                    hovered SetScreenVariable("selected_tooltip", policy.desc)
+                                                    sensitive policy.requirement() and (policy.cost < mc.business.funds or policy.cost == mc.business.funds)
+                                                    xfill True
+                                                    ysize 100
+
+                                            else:
+                                                textbutton "$" + str(policy.cost) + " - " + policy.name:
+                                                    tooltip policy.desc
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "serum_text_style"
+                                                    background "#666666"
+                                                    action NullAction()
+                                                    hovered SetScreenVariable("selected_tooltip", policy.desc)
+                                                    sensitive True
+                                                    xfill True
+                                                    ysize 100
         frame:
             background None
             anchor [0.5,0.5]
