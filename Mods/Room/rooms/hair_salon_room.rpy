@@ -33,10 +33,12 @@ init 2 python: # Declare variables to use
         if "salon_manager_personality" in globals():
             salon_manager.on_room_enter_event_list.append(salon_introduction_action)
 
+        # create home for salon manager
+        salon_manager.generate_home()            
+
         # We want whoever the salon_manager is to be in the salon during work hours.
-        salon_manager.schedule[1] = mall_salon
-        salon_manager.schedule[2] = mall_salon
-        salon_manager.schedule[3] = mall_salon
+        salon_manager.set_schedule([0,4], salon_manager.home)
+        salon_manager.set_schedule([1,2,3], mall_salon)
 
         # Add to mall
         mall_salon.add_person(salon_manager)
