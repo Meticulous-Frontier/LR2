@@ -31,14 +31,25 @@ init 2 python:
 
     def buy_policy_enhanced(self, alternate_click = False):
 
-        if self.on_buy_function is not None:
-            if alternate_click is True: # This is true if you right click the policy in the policy_selection_screen
-                if self.alternate_on_buy_arguments is not None:
-                    self.on_buy_function(**self.alternate_on_buy_arguments)
-            else:
+        if hasattr(self, "upgrade"):
+            upgrade = self.upgrade
+        else:
+            upgrade = False
+
+
+        if alternate_click is True: # This is true if you right click the policy in the policy_selection_screen
+            if self.alternate_on_buy_arguments is not None:
+                self.on_buy_function(**self.alternate_on_buy_arguments)
+            if upgrade == False:
+                if self in mc.business.policy_list:
+                    mc.business.policy_list.remove(self)
+        else:
+            if self.on_buy_function is not None:
                 self.on_buy_function(**self.on_buy_arguments)
                 mc.business.pay(-self.cost) # Currently do not deduct cost for the alternate_on_buy_arguments
 
+            if upgrade == False:
+                mc.business.policy_list.append(self)
 
     Policy.buy_policy = buy_policy_enhanced # Allows alternate usage for right clicking etc.
 
@@ -54,10 +65,12 @@ init 2 python:
             if self.parent:
                 if not hasattr(self.parent, "children"): # Allow non- ModPolicy (normal Policy) class to be used as parents
                     self.parent.children = []
+
                 if self not in parent.children:
                     self.parent.children.append(self)
                 else: # Use something like this to refresh attributes. The self.refresh is the same label that initializes the ModPolicy
                     self.parent.children[self.parent.children.index(self)].cost = self.cost
+                    self.parent.children[self.parent.children.index(self)].desc = self.desc # Some text can't be interpolated e.g the return of a function
 
             self.alternate_on_buy_arguments = alternate_on_buy_arguments # Arguments sent to on_buy_function when right clicking in policy_selection_screen
             self.upgrade = upgrade # A multi- stage or endless policy upgrade must be set to True so that it doesn't become "purchased" | is_owned() == True
