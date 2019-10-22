@@ -15,18 +15,19 @@ init -1 python:
         else:
             return purchase_machinery_room_policy.is_owned()
 
-    def reset_mod_policy(policy): # Makes it so the policy can be purchased again
-        if policy in mc.business.policy_list:
-            mc.business.policy_list.remove(policy)
-        renpy.restart_interaction() # Refresh text
+    def overload_production_lines_requirement():
+        return purchase_security_room_policy.is_owned()
 
 
+    def overload_production_lines_on_buy_function(amount):
+        global machinery_room_overload
+        machinery_room_overload += amount
 
 label store_mod_policies(stack = None):
 
     python:
         create_production_line_policy = ModPolicy(
-            name = "Upgrade [p_division_basement.formalName]",
+            name = "Create Production Line",
             cost = mc.business.production_lines * 5000,
             desc = "Increases the amount of production lines in the [p_division.formalName].\nYou currently have: [mc.business.production_lines]",
             requirement = create_production_line_requirement,
@@ -35,6 +36,19 @@ label store_mod_policies(stack = None):
             parent = purchase_machinery_room_policy, # Set the policy you want as a parent here. Clicking the parent in the policy screen will reveal the children ( if any are present )
             upgrade = True,
             refresh = "store_mod_policies" # Set this to the function that creates it
+         )
+
+        overload_production_lines_policy = ModPolicy(
+            name = "Overload Production Lines",
+            cost = (machinery_room_overload % 100) * 1000,
+            desc = "Increases the maximum efficiency of the production lines in [p_division.formalName].\nYou currently have: [machinery_room_overload]% Max",
+            requirement = overload_production_lines_requirement,
+            on_buy_function = overload_production_lines_on_buy_function,
+            on_buy_arguments = {"amount": 10},
+            alternate_on_buy_arguments = {"amount": -10}, # Arguments sent on a right click. Usually a decrease. Free right now, add a refund / cost to it?
+            parent = purchase_machinery_room_policy,
+            upgrade = True,
+            refresh = "store_mod_policies"
          )
 
     if stack is not None:
