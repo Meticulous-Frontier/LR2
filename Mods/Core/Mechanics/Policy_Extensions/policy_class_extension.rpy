@@ -29,12 +29,23 @@ init 2 python:
 
         return policy_to_update
 
+    def buy_policy_enhanced(self, alternate_click = False):
 
+        if self.on_buy_function is not None:
+            if alternate_click is True: # This is true if you right click the policy in the policy_selection_screen
+                if self.alternate_on_buy_arguments is not None:
+                    self.on_buy_function(**self.alternate_on_buy_arguments)
+            else:
+                self.on_buy_function(**self.on_buy_arguments)
+                mc.business.pay(-self.cost) # Currently do not deduct cost for the alternate_on_buy_arguments
+
+
+    Policy.buy_policy = buy_policy_enhanced # Allows alternate usage for right clicking etc.
 
 
     class ModPolicy(Policy): # Allows you to attach parent / child relation to the policies which display when the parent is selected.
 
-        def __init__(self, name, desc, requirement, cost, on_buy_function = None, on_buy_arguments = None, parent = None, image = None, enabled = False, upgrade = False, refresh = None):
+        def __init__(self, name, desc, requirement, cost, on_buy_function = None, on_buy_arguments = None, alternate_on_buy_arguments = None, parent = None, image = None, enabled = False, upgrade = False, refresh = None):
 
             Policy.__init__(self, name, desc, requirement, cost, on_buy_function, on_buy_arguments)
             self.children = [] # A list that gets filled with child elements
@@ -48,11 +59,12 @@ init 2 python:
                 else: # Use something like this to refresh attributes. The self.refresh is the same label that initializes the ModPolicy
                     self.parent.children[self.parent.children.index(self)].cost = self.cost
 
-
+            self.alternate_on_buy_arguments = alternate_on_buy_arguments # Arguments sent to on_buy_function when right clicking in policy_selection_screen
             self.upgrade = upgrade # A multi- stage or endless policy upgrade must be set to True so that it doesn't become "purchased" | is_owned() == True
             self.refresh = refresh # Set this to the label that creates the policy in the first place. This will refresh descriptions, cost, parents etc.
             self.enabled = enabled # Whether the policy is active or not
             self.image = image # Image background or icons to use?
+
 
     # def buy_mod_policy(self): # Allows for lists to be used when running functions on purchase
     #     mc.business.funds -= self.cost
