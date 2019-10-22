@@ -2,11 +2,11 @@
 # Create them as ModPolicy instead of Policy if you intend for them to be non- standalone aka child elements of a parent policy
 # NOTE: ModPolicy takes a list of on_buy_functions
 
-init 10 python: # Room expansions are init 6
+init 1400 python: # Room expansions are init 6
     add_label_hijack("normal_start", "store_mod_policies")
     add_label_hijack("after_load", "store_mod_policies")
 
-init -1 python:
+init 10 python:
 
 
     def create_production_line_requirement():
@@ -16,12 +16,19 @@ init -1 python:
             return purchase_machinery_room_policy.is_owned()
 
     def overload_production_lines_requirement():
-        return purchase_security_room_policy.is_owned()
-
+        return purchase_machinery_room_policy.is_owned()
 
     def overload_production_lines_on_buy_function(amount):
         global machinery_room_overload
         machinery_room_overload += amount
+        if machinery_room_overload < 100:
+            machinery_room_overload = 100
+
+    def mandatory_vibe_policy_requirement():
+        return maximal_arousal_uniform_policy.is_owned()
+    def mandatory_vibe_action_requirement():
+        return mandatory_vibe_policy.is_owned()
+
 
 label store_mod_policies(stack = None):
 
@@ -51,6 +58,31 @@ label store_mod_policies(stack = None):
             refresh = "store_mod_policies"
          )
 
+         ###################################################
+         # Keep a minimum arousal level for your employees #
+         ###################################################
+
+        mandatory_vibe_policy = ModPolicy(
+            name = "Attach Bullet Viberator",
+            cost = 5000,
+            desc = "Ensures a minimum arousal level for your employees\nEnabled: " + (str(mandatory_vibe_policy.is_owned()) if "mandatory_vibe_policy" in globals() else "False"),
+            requirement = mandatory_vibe_policy_requirement,
+            parent = maximal_arousal_uniform_policy,
+            refresh = "store_mod_policies"
+        )
+        mandatory_vibe_company_action = ActionMod("Attach vibes to outfits", mandatory_vibe_action_requirement, "mandatory_vibe_company_label", priority = 2)
+        if mandatory_vibe_company_action not in advance_time_action_list:
+            advance_time_action_list.append(mandatory_vibe_company_action)
+
+          ###################################################
+
     if stack is not None:
         $ execute_hijack_call(stack)
         return
+
+label mandatory_vibe_company_label():
+    python:
+        for person in mc.business.get_employee_list():
+            if person.arousal < 30:
+                person.arousal = 30
+    return
