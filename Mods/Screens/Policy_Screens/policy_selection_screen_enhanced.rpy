@@ -152,6 +152,7 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                                                         action [Function(purchase_policy, policy)]
                                                     else:
                                                         action [Function(policy.buy_policy), If(policy.refresh is not None, Function(renpy.call_in_new_context, policy.refresh))]
+                                                        alternate [Function(policy.buy_policy, True), If(policy.refresh is not None, Function(renpy.call_in_new_context, policy.refresh))]
                                                     hovered SetScreenVariable("selected_tooltip", policy.desc)
                                                     sensitive policy.requirement() and (policy.cost < mc.business.funds or policy.cost == mc.business.funds)
                                                     xfill True
