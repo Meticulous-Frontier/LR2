@@ -50,9 +50,8 @@ init 2 python:
             stat_array = [4,3,3], skill_array = [5,3,2,1,1], sex_array = [1,2,3,1], start_sluttiness = 3, start_obedience = 0, start_happiness = 102, start_love = 3, \
             title = "Sarah", possessive_title = "Your childhood friend",mc_title = mc.name, relationship = "Single", kids = 0)
 
-        sarah.schedule[1] = mall #Testing
-        sarah.schedule[2] = mall
-        sarah.schedule[3] = mall
+        sarah.set_schedule([0,4], Sarah_home)
+        sarah.set_schedule([1,2,3], mall)
 
         sarah.home = Sarah_home
 
