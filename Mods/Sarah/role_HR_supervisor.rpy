@@ -64,12 +64,46 @@ init -2 python:
 
         return False
 
+init 2 python:
+    def get_HR_review_list(the_person, tier = 0):   #Pass in the HR director so we don't try to counsel her
+        topic_list = []
+        HR_employee_list = []
+        for person in mc.business.get_employee_list():
+            if not person is the_person:  #exclude the HR director
+                topic_list = create_HR_review_topic_list(person)
+                renpy.random.shuffle(topic_list)  #Shuffle the topic list so there is a greater variety in suggest topics to discuss with the employee
+                for topic in topic_list:
+                    if person.get_opinion_score(topic) < tier:
+                        HR_employee_list.append([(person.title + "\n{size=22}" + " Opinion: " + topic + "{/size}"), person])
+
+
+        return HR_employee_list
+
+    def create_HR_review_topic_list(the_person):
+        topic_list = ["working"]
+        if the_person in mc.business.production_team:
+            topic_list.append("production work")
+        if the_person in mc.business.hr_team:
+            topic_list.append("HR work")
+        if the_person in mc.business.research_team:
+            topic_list.append("research work")
+        if the_person in mc.business.market_team:
+            topic_list.append("marketing work")
+        if the_person in mc.business.supply_team:
+            topic_list.append("supply work")
+        if business_HR_uniform:
+            topic_list.append("work uniforms")
+        if business_HR_skimpy_uniform:
+            topic_list.append("skimpy uniforms")
+
+        return topic_list
+
 init 1301 python:
     def HR_director_creation_requirement():
         return True
 
     HR_director_creation_policy = Policy(name = "Create HR Director Position",
-        desc = "Create a new position for an HR Director. Inccreases maximum employee count by one.",
+        desc = "Create a new position for an HR Director. Increases maximum employee count by one.",
         cost = 500,
         requirement =  HR_director_creation_requirement,
         on_buy_function = increase_max_employee_size,
@@ -162,25 +196,25 @@ label HR_director_initial_hire_label(the_person):
     #TODO if away from work, move MC to work.
     "You meet with your new HR Director, [the_person.title] in the morning."
     $ the_person.draw_person()
-    if the_person == sarah:
+    if the_person is sarah:
         "Since she is new to the company in general, you give [the_person.title] a tour of the company first."
         the_person.char "So... what kind of pharmaceuticals are being researched, exactly?"
         "You decide to just be honest. If she is going to be working here at the company, she is going to figure it out sooner or later anyway."
-        mc.name "Well, most of our research right now is targetted toward making people's lives better."
-        mc.name "We came across a formula not long ago with almost no known side effects, that with tweeks to the final formula can be used for a number of different things, from increasing happiness to increasing charisma, to making sex better."
+        mc.name "Well, most of our research right now is targeted toward making people's lives better."
+        mc.name "We came across a formula not long ago with almost no known side effects, that with tweaks to the final formula can be used for a number of different things, from increasing happiness to increasing charisma, to making sex better."
         the_person.char "Wow, that sounds very versatile!"
         "After the tour you head back to your office."
 
     else:
         "You head to your office with her."
-    the_person.char "Well, I am excited to have this opportuniy. To be honest I'm not really even sure where to begin!"
+    the_person.char "Well, I am excited to have this opportunity. To be honest I'm not really even sure where to begin!"
     mc.name "I'll tell you what, for the rest of this week, why don't you just work alongside the others in the HR department. I'll send over to you my personal dossiers on all the employees, and as you have time you can look over them."
     the_person.char "Okay, I can do that. I'll look over them over the weekend as well. Do you want to plan on having a meeting sometime next week?"
     mc.name "That sounds good. How about we do lunch on Monday? Since you are going to heading up the department, having a meeting every week might be a good idea."
     $ the_person.draw_person(emotion = "happy")
     the_person.char "Great! I'll look forward to it. I'll try to have a plan ready for the meeting on Monday on what we can accomplish."
     "You say goodbye to [the_person.title]."
-    if the_person == sarah:
+    if the_person is sarah:
         python:
             #TODO try to detect if employee count is full again
             the_person.schedule[1] = None # remove previous schedule
@@ -206,6 +240,7 @@ label HR_director_initial_hire_label(the_person):
     return
 
 label HR_director_first_monday_label(the_person):
+    $ mc.change_location(office)
     #TODO move MC to office if required
     "It's lunchtime, so you prepare to have your first meeting with your new HR Direction, [the_person.title]."
     "You grab your lunch from the break head to your office and sit down."
@@ -258,7 +293,7 @@ label HR_director_monday_meeting_label(the_person):
     "Your HR Director appears in the doorway to your office. It is time for your weekly HR meeting."
     "She sits down across from you and starts to eat her lunch."
     $ the_person.draw_person(position = "sitting")
-    the_person.char "Here are my plans for the week. I think I have a few tweeks to efficiency I can make, but overall I wouldn't expect to see a big change company wide."
+    the_person.char "Here are my plans for the week. I think I have a few tweaks to efficiency I can make, but overall I wouldn't expect to see a big change company wide."
     call HR_director_calculate_eff(the_person) from HR_director_monday_meeting_1
     "She hands you a few documents. You check them over."
     mc.name "Looks good. Go ahead and continue with those plans."
@@ -305,29 +340,28 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         the_person.char "Honestly? All the girls here like all the policies I've looked at, but its possible with a bit of persuasion we could make them love them."
         the_person.char "Here's my list. Who do you want me to call in?"
     python:
-        choice = None
-        choice = menu(HR_employee_list)
+        person_choice = None
+        person_choice = menu(HR_employee_list)
     the_person.char "Alright, let me go get her."
     $ renpy.scene("Active")
 
-    "[choice.title] steps in to the office in a minute, follow by [the_person.title]."
-    choice.char "Hello [choice.mc_title]."
+    "[person_choice.title] steps in to the office in a minute, follow by [the_person.title]."
+    person_choice.char "Hello [person_choice.mc_title]."
 
     $ scene_manager.add_actor(the_person, position = "stand4")
-    $ scene_manager.add_actor(choice, position = "sitting", character_placement = character_left_flipped)
-    "[choice.title] sits down across from you at your desk. [the_person.title] takes the lead makes a cup of coffee for her before she sits down."
+    $ scene_manager.add_actor(person_choice, position = "sitting", character_placement = character_left_flipped)
+    "[person_choice.title] sits down across from you at your desk. [the_person.title] takes the lead makes a cup of coffee for her before she sits down."
     the_person.char "Thanks for coming. [the_person.mc_title] just wanted to have quick chat. Here, have a cup of coffee."
     $ scene_manager.update_actor(the_person, position = "sitting")
-    "[choice.title] takes the coffee and nods. She takes a few sips as you begin."
+    "[person_choice.title] takes the coffee and nods. She takes a few sips as you begin."
     mc.name "That's right. As you know, we run a small business here, and I like to make sure all my employees enjoy their work here."
     mc.name "Recently, I've become concerned you may not like the work environment."
     python:
-        opinion_list = create_HR_review_topic_list(choice)
+        opinion_list = create_HR_review_topic_list(person_choice)
         opinion_chat_list = []
         for opinion in opinion_list:
-            if choice.get_opinion_score(opinion) <  max_opinion:
-                desc_string = get_opinion_text_descriptor(choice, opinion)
-                opinion_chat_list.append([("Discuss " + opinion + "\n{size=22}" + choice.title + " " + desc_string + " " + opinion + "{/size}"), opinion])
+            if person_choice.get_opinion_score(opinion) <  max_opinion:
+                opinion_chat_list.append([("Discuss " + opinion + "\n{size=22}" + person_choice.title + " " + opinion_score_to_string(person_choice.get_opinion_score(opinion)) + " " + opinion + "{/size}"), opinion])
 
         opinion_chat = None
         opinion_chat = menu(opinion_chat_list)
@@ -351,32 +385,35 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     else:
         mc.name "I know the policy in place feels weird, but I want you to rethink your opinion on [opinion_chat]. It would be helpful if you would "
     the_person.char "All of our employees are valued here, not just as employees, but as people."
-    choice.char "Thanks... I guess... I've never really thought about it like that."
-    if choice.obedience > 120: #She is obedient
-        choice.char "I'm not sure I really thought about things here as more than just another job... but I want this place to succeed. I want you to succeed, [choice.mc_title]."
+    person_choice.char "Thanks... I guess... I've never really thought about it like that."
+    if person_choice.obedience > 120: #She is obedient
+        person_choice.char "I'm not sure I really thought about things here as more than just another job... but I want this place to succeed. I want you to succeed, [person_choice.mc_title]."
     else:
-        choice.char "I guess I never really though about it like that. I mean, if I have to have a job... I guess I might as well try to be more positive about it, right?"
+        person_choice.char "I guess I never really though about it like that. I mean, if I have to have a job... I guess I might as well try to be more positive about it, right?"
     "She stops for a moment and gathers her thoughts."
-    choice.char "I'll think abou this for a bit, but I think I understand what you are saying. I'll try to have a better attitude about things going forward."
-    $ scene_manager.update_actor(choice, position = "sitting", character_placement = character_left_flipped, emotion = "happy")
-    "[choice.title] thinks for a moment, then smiles at both of you."
-    choice.char "Thanks for calling me in... I guess I'd better go get back to work!"
+    person_choice.char "I'll think about this for a bit, but I think I understand what you are saying. I'll try to have a better attitude about things going forward."
+    $ scene_manager.update_actor(person_choice, position = "sitting", character_placement = character_left_flipped, emotion = "happy")
+    "[person_choice.title] thinks for a moment, then smiles at both of you."
+    person_choice.char "Thanks for calling me in... I guess I'd better go get back to work!"
     if opinion_chat in opinions_list:
-        $ choice.opinions[opinion_chat] = [max_opinion, True]
+        $ person_choice.opinions[opinion_chat] = [max_opinion, True]
     else:
-        $ choice.sexy_opinions[opinion_chat] = [max_opinion, True]
-    $ scene_manager.update_actor(choice, position = "walking_away", character_placement = character_left_flipped)
+        $ person_choice.sexy_opinions[opinion_chat] = [max_opinion, True]
+    $ scene_manager.update_actor(person_choice, position = "walking_away", character_placement = character_left_flipped)
     $ scene_manager.update_actor(the_person, position = "stand2")
-    "[the_person.title] gets up and walks [choice.title] to the door."
-    "They exchange a few pleasantries before [choice.title] leaves the room."
+    "[the_person.title] gets up and walks [person_choice.title] to the door."
+    "They exchange a few pleasantries before [person_choice.title] leaves the room."
     $ scene_manager.remove_actor(the_person, reset_actor = False)
-    $ scene_manager.remove_actor(choice, reset_actor = False)
+    $ scene_manager.remove_actor(person_choice, reset_actor = False)
     "[the_person.title] comes back to the desk and sits down."
     $ the_person.draw_person(position = "sitting")
 
     #Cleanup?
-    $ del HR_employee_list
-    $ del opinion_list
+    python:
+        del HR_employee_list
+        del opinion_list
+        del opinion_chat_list
+        del person_choice
     return
 
 label HR_director_review_discoveries_label(the_person):
@@ -384,9 +421,9 @@ label HR_director_review_discoveries_label(the_person):
     if business_HR_serum_suggest_1 == False:
         if off_label_drugs.researched: #Researched!
              $ business_HR_serum_suggest_1 = True
-             the_person.char "Hmmm... interesing."
+             the_person.char "Hmmm... interesting."
              "[the_person.title] looks closely at one of the serums that has been researched."
-             the_person.char "I see here that you've managed to create a serum that has the ability to increase a person's... suggestability?"
+             the_person.char "I see here that you've managed to create a serum that has the ability to increase a person's... suggestibility?"
              mc.name "Right. Basically it sets up the brain to make new connections it might not have previously made, opening up a person to suggestions they may not normally consider."
              the_person.char "That would actually be useful... We could use some, in the coffee we make when we bring them in for meetings?"
              mc.name "A version of the serum with a short useful life would be useful for giving the meetings more impact."
@@ -398,9 +435,9 @@ label HR_director_review_discoveries_label(the_person):
     elif business_HR_serum_suggest_2 == False:
         if mind_control_agent.researched: #Researched!
             $ business_HR_serum_suggest_2 = True
-            the_person.char "Hmmm... interesing."
+            the_person.char "Hmmm... interesting."
             "[the_person.title] looks closely at one of the serums that has been researched."
-            the_person.char "I see here that you've managed to improve on an earlier design to increase a person's suggestability!"
+            the_person.char "I see here that you've managed to improve on an earlier design to increase a person's suggestibility!"
             mc.name "Right. It bypasses connections that would normally trigger a rejection response and causes the person to consider actions that would normally be rejected."
             if business_HR_coffee_tier == 0:
                 the_person.char "I know I brought this up last time we researched a similar serum, but having a serum like that to give employees when they come in for reviews would be very useful."
@@ -445,7 +482,7 @@ label HR_director_review_discoveries_label(the_person):
         if corporate_enforced_nudity_policy.is_owned():
             if the_person.sluttiness > 40:  #She only volunteers to start doing this if she is slutty enough.
                 the_person.char "I see here that the uniform policy has recently been loosened further."
-                the_person.char "Personally, I think it is great that I can come to work and show off lots of skin, but with the latest change in uniform policy, it might be intimadting to employees who don't like skimpy uniforms."
+                the_person.char "Personally, I think it is great that I can come to work and show off lots of skin, but with the latest change in uniform policy, it might be intimidating to employees who don't like skimpy uniforms."
                 the_person.char "It might be a good to idea to include opinions on skimpy uniforms when meeting one on one with employees."
                 "You realize the swing in the uniform policy might be a bit much for some girls, so this is probably a good thing to start counseling for."
                 mc.name "That's a good idea. Go ahead and implement that going forward."
@@ -548,51 +585,3 @@ label HR_director_meeting_on_demand_label(the_person):
     call advance_time from hr_advance_time_one
     return
 
-init 2 python:
-    def get_HR_review_list(the_person, tier = 0):   #Pass in the HR director so we don't try to counsel her
-        topic_list = []
-        HR_employee_list = []
-        for person in mc.business.get_employee_list():
-            if person == the_person:  #This employee is the HR director, don't do anything with them.
-                pass
-            else:
-                topic_list = create_HR_review_topic_list(person)
-                renpy.random.shuffle(topic_list)  #Shuffle the topic list so there is a greater variety in suggest topics to discuss with the employee
-                for topic in topic_list:
-                    if person.get_opinion_score(topic) < tier:
-                        HR_employee_list.append([(person.title + "\n{size=22}" + " Opinion: " + topic + "{/size}"), person])
-
-
-        return HR_employee_list
-
-    def create_HR_review_topic_list(the_person):
-        topic_list = ["working"]
-        if the_person in mc.business.production_team:
-            topic_list.append("production work")
-        if the_person in mc.business.hr_team:
-            topic_list.append("HR work")
-        if the_person in mc.business.research_team:
-            topic_list.append("research work")
-        if the_person in mc.business.market_team:
-            topic_list.append("marketing work")
-        if the_person in mc.business.supply_team:
-            topic_list.append("supply work")
-        if business_HR_uniform:
-            topic_list.append("work uniforms")
-        if business_HR_skimpy_uniform:
-            topic_list.append("skimpy uniforms")
-
-
-        return topic_list
-
-    def get_opinion_text_descriptor(the_person, topic):
-        if the_person.get_opinion_score(topic) > 1:
-            return "loves"
-        elif the_person.get_opinion_score(topic) == 1:
-            return "likes"
-        elif the_person.get_opinion_score(topic) == -1:
-            return "dislikes"
-        elif the_person.get_opinion_score(topic) < -1:
-            return "hates"
-        else:
-            return "ignores"
