@@ -177,7 +177,7 @@ label dirty_laundry_action_label:
                         else:
                             the_person.char "Your little sister wants your cum in her panties. I wanna wear them when I go to class tomorrow, squirming in my seat through the lecture, knowing your cum is rubbing against me."
                     elif the_person == aunt:        #Wow, congrats on getting her so slutty while shes living with you!
-                        the_person.char "Your aunt wants your cum in her panties. When I wear them around tomorrow I'll remember your cum is filling me up."
+                        the_person.char "Your aunt wants your cum in her panties. When I wear them around tomorrow I'll remember your cum is filling them up."
                     elif the_person == cousin:        #Wow, congrats on getting her so slutty while shes living with you!
                         the_person.char "Go ahead and fill up my panties, you perv. Turns out, I'm as much of a perv as you are. I'm totally wearing these all day tomorrow."
                     else:                           #Someone else someday? A live in girlfriend maybe?
@@ -298,6 +298,10 @@ label dirty_laundry_action_label:
             pass
         "Find something else to do":
             "You decide to do something else. You head back to room and hop on your PC, doing work related tasks until the washer is done."
+            "While you are working on researching business methods, you accidentally get caught up in a click bait, 10 ways to increase your bottom line item on some random economics website."
+            "Most of the info is garbage, but one of them actually makes sense for you to use. You make note of the method and decide to institute it at your business."
+            $ mc.business.effectiveness_cap += 1
+            $ business_HR_eff_bonus += 1
             "You go back to swap your laundry to the dryer."
             $ the_person.draw_person()
             "[the_person.title] is just coming out of the laundry room with her laundry basket."

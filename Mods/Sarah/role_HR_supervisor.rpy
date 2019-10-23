@@ -81,8 +81,24 @@ init 1301 python:
         return False
 
     def HR_director_tier_2_suggest():
-        if blood_brain_pen.researched:
+        if mind_control_agent.researched:
             return True
+        return False
+
+    def HR_director_change_relative_recruitment_requirement(the_person):
+        if business_HR_relative_recruitment_unlock:
+            return True
+        return False
+
+    def HR_director_meeting_on_demand_requirement(the_person):
+        if business_HR_meeting_on_demand:
+            if business_HR_meeting_last_day <= day:
+                if mc.business.is_open_for_business():
+                    return True
+                else:
+                    return "Only on during work day"
+            else:
+                return "One meeting per day."
         return False
 
     def HR_director_breast():
@@ -100,6 +116,13 @@ label HR_director_mod_init():
         business_HR_serum_suggest_2 = False
         business_HR_serum_breast = False
         business_HR_coffee_tier = 0
+        business_HR_skimpy_uniform = False
+        business_HR_uniform = False
+        business_HR_relative_recruitment_status = False
+        business_HR_relative_recruitment_unlock = False
+        business_HR_meeting_on_demand = False
+        business_HR_meeting_last_day = 0
+
 
 
         Sarah_mod_initialization() #TODO this is for testing. Should probably figure out a better way to do this...
@@ -108,7 +131,11 @@ label HR_director_mod_init():
             menu_tooltip = "Costs $500 but makes meetings more impactful.")
         HR_director_coffee_tier_2_action = Action("Add stronger serum to coffee during meetings.", HR_director_coffee_tier_2_requirement, "HR_director_coffee_tier_2_label",
             menu_tooltip = "Costs $1500 but makes meetings impactful.")
-        HR_director_role = Role("HR Director", [HR_director_coffee_tier_1_action, HR_director_coffee_tier_2_action]) #Actions go in block
+        HR_director_change_relative_recruitment_action = Action("Change recruitment signage", HR_director_change_relative_recruitment_requirement, "HR_director_change_relative_recruitment_label",
+            menu_tooltip = "Changes how often employees ask for employment for their daughters")
+        HR_director_meeting_on_demand_action = Action("Meet with employee{image=gui/heart/Time_Advance.png}", HR_director_meeting_on_demand_requirement, "HR_director_meeting_on_demand_label",
+            menu_tooltip = "Arrange a meeting with an employee")
+        HR_director_role = Role("HR Director", [HR_director_meeting_on_demand_action, HR_director_coffee_tier_1_action, HR_director_coffee_tier_2_action, HR_director_change_relative_recruitment_action]) #Actions go in block
     return
 
 
@@ -243,7 +270,7 @@ label HR_director_monday_meeting_label(the_person):
             mc.name "Yes I want to do that."
             the_person.char "Ok! Let me see who I have on my list here..."
             call HR_director_personnel_interview_label(the_person, max_opinion = business_HR_coffee_tier) from HR_DIR_INTERVIEW_CALL_2
-    the_person.char "Ok, next up, I wanted to review progress made on serums the past week to see if anything new discoveries might be useful."
+    the_person.char "Ok, next up, I wanted to review progress made on serums and policy changes from the past week to see if anything might be useful."
     call HR_director_review_discoveries_label(the_person) from HR_DIR_INTERVIEW_CALL_3
     mc.name "Alright, I think that is all for today. Unless something comes up, same time next week?"
     $ the_person.draw_person(position = "stand2")
@@ -254,73 +281,75 @@ label HR_director_monday_meeting_label(the_person):
     return
 
 label HR_director_personnel_interview_label(the_person, max_opinion = 0):
-    $ HR_employee_list = []
-    python:
-        for person in mc.business.get_employee_list():
-            if person == the_person:  #This employee is the HR director, don't do anything with them.
-                pass
-            elif person.get_opinion_score("working") < max_opinion:
-                HR_employee_list.append([(person.title + ' opinion: working'), person])
-            elif person in mc.business.production_team:
-                if person.get_opinion_score("production work") < max_opinion:
-                    HR_employee_list.append([(person.title + ' opinion: production'), person])
-            elif person in mc.business.research_team:
-                if person.get_opinion_score("research work") < max_opinion:
-                    HR_employee_list.append([(person.title + ' opinion: research'), person])
-            elif person in mc.business.hr_team:
-                if person.get_opinion_score("HR work") < max_opinion:
-                    HR_employee_list.append([(person.title + ' opinion: HR'), person])
-            elif person in mc.business.market_team:
-                if person.get_opinion_score("marketing work") < max_opinion:
-                    HR_employee_list.append([(person.title + ' opinion: marketing'), person])
-            elif person in mc.business.supply_team:
-                if person.get_opinion_score("supply work") < max_opinion:
-                    HR_employee_list.append([(person.title + ' opinion: supply'), person])
-            elif person.happiness < 85:  #Some arbitrary number
-                HR_employee_list.append([person, (person.title + ' opinion: unhappy')])
-            #TODO add other reasons, EG, work uniforms, showing ass, etc as business evolves
+    $ HR_employee_list = get_HR_review_list(the_person, 0)
+    $ HR_tier_talk = 0
 
+
+    if len(HR_employee_list) == 0: #No one qualifies!
+        if business_HR_coffee_tier > 0:
+            $ HR_employee_list = get_HR_review_list(the_person, 1) #Run again to see if any girls don't like something
+            $ HR_tier_talk = 1
+            if len(HR_employee_list) == 0: #Still no one!
+                if business_HR_coffee_tier > 1:
+                    $ HR_employee_list = get_HR_review_list(the_person, 2) #Run again to see if any girls don't love something
+                    $ HR_tier_talk = 2
     if len(HR_employee_list) == 0: #No one qualifies!
         the_person.char "Actually, thing are running really smoothly right now, I didn't come across any dossiers this past weekend that drew my attention!"
         #TODO add another option here? Offer to bring in any girl?
         return
-    the_person.char "Alright, here's my list. Who do you want me to call in?"
+    if HR_tier_talk == 0:
+        the_person.char "Alright, here's my list. Who do you want me to call in?"
+    elif HR_tier_talk == 1:
+        the_person.char "Things are running pretty good right now, but they could always be better. Here's my list, who do you want me to call in?"
+    elif HR_tier_talk == 2:
+        the_person.char "Honestly? All the girls here like all the policies I've looked at, but its possible with a bit of persuasion we could make them love them."
+        the_person.char "Here's my list. Who do you want me to call in?"
     python:
         choice = None
         choice = menu(HR_employee_list)
     the_person.char "Alright, let me go get her."
-    #TODO scene manager, draw the girls.
+    $ renpy.scene("Active")
+
     "[choice.title] steps in to the office in a minute, follow by [the_person.title]."
     choice.char "Hello [choice.mc_title]."
-    #TODO they both sit down.
+
+    $ scene_manager.add_actor(the_person, position = "stand4")
+    $ scene_manager.add_actor(choice, position = "sitting", character_placement = character_left_flipped)
     "[choice.title] sits down across from you at your desk. [the_person.title] takes the lead makes a cup of coffee for her before she sits down."
     the_person.char "Thanks for coming. [the_person.mc_title] just wanted to have quick chat. Here, have a cup of coffee."
-    "[choice.title] takes the coffe and nods. She takes a few sips as you begin."
+    $ scene_manager.update_actor(the_person, position = "sitting")
+    "[choice.title] takes the coffee and nods. She takes a few sips as you begin."
     mc.name "That's right. As you know, we run a small business here, and I like to make sure all my employees enjoy their work here."
     mc.name "Recently, I've become concerned you may not like the work environment."
-    $ opinion_chat = None
-    menu:
-        "Talk about working" if choice.get_opinion_score("working") < max_opinion:
-            $ opinion_chat = "working"
-            mc.name "I know that a job is just a job, but I think if you take the time to get to know your fellow employees and come in each day with a good attitude, you could learn to like coming to work every day."
-        "Talk about HR work" if choice.get_opinion_score("HR work") < max_opinion:
-            $ opinion_chat = "HR work"
-            mc.name "I know that working with people all day long can be exhausting, but think about how much you can impact your fellow employees if you greet them with a smile every day."
-        "Talk about production work" if choice.get_opinion_score("production work") < max_opinion:
-            $ opinion_chat = "production work"
-            mc.name "I know that production work is boring and tedious, but it is your hard work down in the production lab that keeps this business moving forward."
-        "Talk about research work" if choice.get_opinion_score("research work") < max_opinion:
-            $ opinion_chat = "research work"
-            mc.name "I know that sometimes research work feels thankless, but I want you to know right now, I am so thankful for all the hard work you put into the department."
-        "Talk about marketing work" if choice.get_opinion_score("marketing work") < max_opinion:
-            $ opinion_chat = "marketing work"
-            mc.name "I know that marketing work is difficult. For every sale theres dozens of rejections. But I want you know that without your hard work, it doesn't matter how good our product is if no one knows it's being made."
-        "Talk about supply work" if choice.get_opinion_score("supply work") < max_opinion:
-            $ opinion_chat = "supply work"
-            mc.name "I know that sourcing chemicals and trying to keep costs down is thankless work, but I want you to know, as the owner of the company, I appreciate your hard work and dedication to doing what needs to be done."
-        "Ask if something is bothering her" if choice.happiness < 85:
-            mc.name "Lately, I've noticed that you aren't smiling anymore when you come in to work. Is there something that I can help you with? Or something about work that is bothering you?"
-            #TODO possibly grab a few random opinions and see if any are applicable?
+    python:
+        opinion_list = create_HR_review_topic_list(choice)
+        opinion_chat_list = []
+        for opinion in opinion_list:
+            if choice.get_opinion_score(opinion) <  max_opinion:
+                desc_string = get_opinion_text_descriptor(choice, opinion)
+                opinion_chat_list.append([("Discuss " + opinion + "\n{size=22}" + choice.title + " " + desc_string + " " + opinion + "{/size}"), opinion])
+
+        opinion_chat = None
+        opinion_chat = menu(opinion_chat_list)
+
+    if opinion_chat == "working":
+        mc.name "I know that a job is just a job, but I think if you take the time to get to know your fellow employees and come in each day with a good attitude, you could learn to like coming to work every day."
+    elif opinion_chat == "HR work":
+        mc.name "I know that working with people all day long can be exhausting, but think about how much you can impact your fellow employees if you greet them with a smile every day."
+    elif opinion_chat == "production work":
+        mc.name "I know that production work is boring and tedious, but it is your hard work down in the production lab that keeps this business moving forward."
+    elif opinion_chat == "research work":
+        mc.name "I know that sometimes research work feels thankless, but I want you to know right now, I am so thankful for all the hard work you put into the department."
+    elif opinion_chat == "marketing work":
+        mc.name "I know that marketing work is difficult. For every sale theres dozens of rejections. But I want you know that without your hard work, it doesn't matter how good our product is if no one knows it's being made."
+    elif opinion_chat == "supply work":
+        mc.name "I know that sourcing chemicals and trying to keep costs down is thankless work, but I want you to know, as the owner of the company, I appreciate your hard work and dedication to doing what needs to be done."
+    elif opinion_chat == "work uniforms":
+        mc.name "I know that it feels like we are taking some of your creativity away when we assign uniforms. I understand that, but it is also important that we keep a professional atmosphere here."
+    elif opinion_chat == "skimpy uniforms":
+        mc.name "I know that it feels weird, being asked to come in to work wearing clothes that show a lot of skin, but in the market we are in, dressing to impress can be a key business advantage."
+    else:
+        mc.name "I know the policy in place feels weird, but I want you to rethink your opinion on [opinion_chat]. It would be helpful if you would "
     the_person.char "All of our employees are valued here, not just as employees, but as people."
     choice.char "Thanks... I guess... I've never really thought about it like that."
     if choice.obedience > 120: #She is obedient
@@ -329,13 +358,25 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         choice.char "I guess I never really though about it like that. I mean, if I have to have a job... I guess I might as well try to be more positive about it, right?"
     "She stops for a moment and gathers her thoughts."
     choice.char "I'll think abou this for a bit, but I think I understand what you are saying. I'll try to have a better attitude about things going forward."
-    #draw girl with smiles
+    $ scene_manager.update_actor(choice, position = "sitting", character_placement = character_left_flipped, emotion = "happy")
     "[choice.title] thinks for a moment, then smiles at both of you."
     choice.char "Thanks for calling me in... I guess I'd better go get back to work!"
-    $ choice.opinions[opinion_chat] = [max_opinion, True]
+    if opinion_chat in opinions_list:
+        $ choice.opinions[opinion_chat] = [max_opinion, True]
+    else:
+        $ choice.sexy_opinions[opinion_chat] = [max_opinion, True]
+    $ scene_manager.update_actor(choice, position = "walking_away", character_placement = character_left_flipped)
+    $ scene_manager.update_actor(the_person, position = "stand2")
     "[the_person.title] gets up and walks [choice.title] to the door."
-    #TODO finish scene
-    #TODO scene manager unload scene
+    "They exchange a few pleasantries before [choice.title] leaves the room."
+    $ scene_manager.remove_actor(the_person, reset_actor = False)
+    $ scene_manager.remove_actor(choice, reset_actor = False)
+    "[the_person.title] comes back to the desk and sits down."
+    $ the_person.draw_person(position = "sitting")
+
+    #Cleanup?
+    $ del HR_employee_list
+    $ del opinion_list
     return
 
 label HR_director_review_discoveries_label(the_person):
@@ -355,7 +396,7 @@ label HR_director_review_discoveries_label(the_person):
              the_person.char "Sounds good [the_person.mc_title]!"
 
     elif business_HR_serum_suggest_2 == False:
-        if blood_brain_pen.researched: #Researched!
+        if mind_control_agent.researched: #Researched!
             $ business_HR_serum_suggest_2 = True
             the_person.char "Hmmm... interesing."
             "[the_person.title] looks closely at one of the serums that has been researched."
@@ -389,8 +430,58 @@ label HR_director_review_discoveries_label(the_person):
                 "You notice [the_person.title] writing herself a note to visit the research department later."
                 #TODO add breast serum sneak event to mandatory list
                 $ Sarah_catch_stealing_action = Action("Catch Sarah Stealing",Sarah_catch_stealing_requirement,"Sarah_catch_stealing_label") #Set the trigger day for the next monday. Monday is day%7 == 0
-                $ mc.business.mandatory_crises_list.append(Sarah_catch_stealing_action) #Add the event here so that it pops when the requirements are met.
+                $ mc.business.mandatory_crises_list.append(Sarah_catch_stealing_action) #Insert the event to the top of the list
     "You spend a few minutes with [the_person.title] going over the progress in the research department over the last week or so."
+    the_person.char "That's it for research, let's take a look at policy changes from the last week."
+    if business_HR_uniform == False:
+        if relaxed_uniform_policy.is_owned():
+            the_person.char "Hmmm, I see here that we have recently opened up company policy to allow for uniform guidelines."
+            the_person.char "This is something that could potentially alienate some of our employees. It might be a good idea if we include opinions on work uniforms when meeting one on one with them."
+            "You hadn't considered how your employees would react when you instituted the uniform policy. You decide [the_person.possessive_title] is right."
+            mc.name "That's a good idea. Go ahead and implement that going forward."
+            the_person.char "Sure thing [the_person.mc_title]!"
+            $ business_HR_uniform = True
+    elif business_HR_skimpy_uniform == False:
+        if corporate_enforced_nudity_policy.is_owned():
+            if the_person.sluttiness > 40:  #She only volunteers to start doing this if she is slutty enough.
+                the_person.char "I see here that the uniform policy has recently been loosened further."
+                the_person.char "Personally, I think it is great that I can come to work and show off lots of skin, but with the latest change in uniform policy, it might be intimadting to employees who don't like skimpy uniforms."
+                the_person.char "It might be a good to idea to include opinions on skimpy uniforms when meeting one on one with employees."
+                "You realize the swing in the uniform policy might be a bit much for some girls, so this is probably a good thing to start counseling for."
+                mc.name "That's a good idea. Go ahead and implement that going forward."
+                the_person.char "Sure thing [the_person.mc_title]!"
+                $ business_HR_skimpy_uniform = True
+                if the_person == sarah:
+                    the_person.char "Mmm, I can't wait to see what some of the outfits other girls wear around the office..."
+                    $ the_person.change_slut_temp(5)
+    if business_HR_relative_recruitment_unlock == False:
+        if (mc.business.max_employee_count - mc.business.get_employee_count()) > 4:
+            the_person.char "I see here that changes within the company have produced several vacancies."
+            the_person.char "If you like, I could post something in the break room that we are looking for more employees."
+            the_person.char "Several of the women who work here have children or relatives who could use the work. They might be more likely to come to you asking for employment if they know we need the help."
+            "You consider what she is saying. It might be good for company morale to have mothers and their daughters both employed by you. Who knows, it could lead to other situations too."
+            "You weigh the option. Do you want to post something?"
+            menu:
+                "Approve":
+                    mc.name "That's a good idea. Go ahead and implement that going forward."
+                    $ crisis_list.remove([daughter_work_crisis, 2])
+                    $ crisis_list.append([daughter_work_crisis,10])
+                "Deny":
+                    mc.name "I think for now I'd like to stick with more traditional recruiting methods."
+                    $ business_HR_relative_recruitment_status = True
+
+            "Sure thing [the_person.mc_title]. If you change your mind in the future, just let me know. I can always put the sign up or down based on what we need at the time."
+            $ business_HR_relative_recruitment_unlock = True
+
+    if business_HR_meeting_on_demand == False:
+        if mc.business.get_employee_count() > 10:
+            the_person.char "I see the business has grown. We now have a double digit number of employees!"
+            the_person.char "I was thinking, with the number of employees we have now, we could probably do our one on one meetings more often without losing their effectiveness."
+            the_person.char "We still don't want to do it too often, but I was thinking we could have meetings as often as once a day?"
+            "With your growing number of employees, it makes sense that you would be able to have meetings more often."
+            mc.name "I'll keep that in mind going forward. If I want to have a meeting with an employee, I'll make sure to come find you first."
+            the_person.char "Great! I think that will work out nicely."
+            $ business_HR_meeting_on_demand = True
     return
 
 label HR_director_coffee_tier_1_label(the_person):
@@ -420,3 +511,88 @@ label HR_director_calculate_eff(the_person):
         #TODO make events later on that factor this to be better
     $ HR_dir_factor += business_HR_eff_bonus
     $ mc.business.effectiveness_cap = (100 + HR_dir_factor)   #100% base effectiveness
+    return
+
+label HR_director_change_relative_recruitment_label(the_person):
+    if business_HR_relative_recruitment_status:
+        the_person.char "I see, are you sure you want me to take down the sign in the break room that we are looking for more employees?"
+        menu:
+            "Take the Sign Down":
+                the_person.char "Ok, I'll take it down as soon as we are finished here. Is there anything else I can do for you?"
+                $ crisis_list.remove(daughter_work_crisis)
+                $ crisis_list.append([daughter_work_crisis,2])
+            "Leave the Sign Up":
+                the_person.char "Oh... sorry I thought you said you wanted to change it. Is there anything else I can do for you?"
+        return
+    else:
+        the_person.char "I see, are you sure you want me to put the sign in the break room that we are looking for more employees?"
+        menu:
+            "Put the Sign Up":
+                the_person.char "Ok, I'll put it up as soon as we are finished here. Is there anything else I can do for you?"
+                $ crisis_list.remove(daughter_work_crisis)
+                $ crisis_list.append([daughter_work_crisis,10])
+            "Leave the Sign Down":
+                the_person.char "Oh... sorry I thought you said you wanted to change it. Is there anything else I can do for you?"
+        return
+
+label HR_director_meeting_on_demand_label(the_person):
+    the_person.char "Okay, I think I have time for that! Let me grab my dossiers from Monday and I'll meet you in your office."
+    "You head to your office and [the_person.possessive_title] quickly arrives with her papers."
+    $ the_person.draw_person(position = "sitting")
+    the_person.char "Ok! Let me see who I have on my list here..."
+    call HR_director_personnel_interview_label(the_person, max_opinion = business_HR_coffee_tier) from HR_DIR_INTERVIEW_CALL_4
+    the_person.char "I'd say that went pretty well! I'm going to ahead and get back to work, if that is okay with you, [the_person.mc_title]?"
+    "You thank her for her help and excuse her. She gets up and leaves you to get back to work."
+    $ renpy.scene("Active")
+    $ business_HR_meeting_last_day = day
+    call advance_time from hr_advance_time_one
+    return
+
+init 2 python:
+    def get_HR_review_list(the_person, tier = 0):   #Pass in the HR director so we don't try to counsel her
+        topic_list = []
+        HR_employee_list = []
+        for person in mc.business.get_employee_list():
+            if person == the_person:  #This employee is the HR director, don't do anything with them.
+                pass
+            else:
+                topic_list = create_HR_review_topic_list(person)
+                renpy.random.shuffle(topic_list)  #Shuffle the topic list so there is a greater variety in suggest topics to discuss with the employee
+                for topic in topic_list:
+                    if person.get_opinion_score(topic) < tier:
+                        HR_employee_list.append([(person.title + "\n{size=22}" + " Opinion: " + topic + "{/size}"), person])
+
+
+        return HR_employee_list
+
+    def create_HR_review_topic_list(the_person):
+        topic_list = ["working"]
+        if the_person in mc.business.production_team:
+            topic_list.append("production work")
+        if the_person in mc.business.hr_team:
+            topic_list.append("HR work")
+        if the_person in mc.business.research_team:
+            topic_list.append("research work")
+        if the_person in mc.business.market_team:
+            topic_list.append("marketing work")
+        if the_person in mc.business.supply_team:
+            topic_list.append("supply work")
+        if business_HR_uniform:
+            topic_list.append("work uniforms")
+        if business_HR_skimpy_uniform:
+            topic_list.append("skimpy uniforms")
+
+
+        return topic_list
+
+    def get_opinion_text_descriptor(the_person, topic):
+        if the_person.get_opinion_score(topic) > 1:
+            return "loves"
+        elif the_person.get_opinion_score(topic) == 1:
+            return "likes"
+        elif the_person.get_opinion_score(topic) == -1:
+            return "dislikes"
+        elif the_person.get_opinion_score(topic) < -1:
+            return "hates"
+        else:
+            return "ignores"

@@ -45,7 +45,7 @@ init 2 python:
 
         #global Sarah_role
         global sarah
-        sarah = create_random_person(name = "Sarah", last_name ="Cooper", age = 20, body_type = "thin_body", face_style = "Face_3", tits = "A", height = 0.90, hair_colour = "brown", hair_style = short_hair, skin="white",\
+        sarah = create_random_person(name = "Sarah", last_name ="Cooper", age = 21, body_type = "thin_body", face_style = "Face_3", tits = "A", height = 0.90, hair_colour = "brown", hair_style = short_hair, skin="white",\
             eyes = "dark blue", personality = Sarah_personality, name_color = "#9400D3", dial_color = "#9400D3", starting_wardrobe = None, \
             stat_array = [4,3,3], skill_array = [5,3,2,1,1], sex_array = [1,2,3,1], start_sluttiness = 3, start_obedience = 0, start_happiness = 102, start_love = 3, \
             title = "Sarah", possessive_title = "Your childhood friend",mc_title = mc.name, relationship = "Single", kids = 0)
@@ -68,7 +68,7 @@ init 2 python:
 
 init -1 python:
     def Sarah_intro_requirement():
-        if day > 14:
+        if day > 2: #Early for testing
             if mc_at_home():
                 if time_of_day < 4:
                     return True
@@ -118,6 +118,17 @@ init -1 python:
                     if mc.is_at_work():
                         return True
         return False
+
+    def Sarah_remove_bra_from_wardrobe(wardrobe):  #Test this function
+        for outfit in wardrobe.outfits:
+            if outfit.wearing_bra():
+                outfit.remove_clothing(outfit.get_bra())
+        for outfit in wardrobe.underwear_sets:
+            if outfit.wearing_bra():
+                outfit.remove_clothing(outfit.get_bra())
+
+    def test_bra_function(the_person):
+        Sarah_remove_bra_from_wardrobe(the_person.wardrobe)
 
 
 label Sarah_intro_label():
@@ -379,7 +390,7 @@ label Sarah_third_wheel_label():
     $ scene_manager.update_actor(the_person, position = "stand4")
     "She suddenly snaps back to reality. Her cheeks are flushed."
     the_person.char "Right! Yes of course. Goodnight!"
-    $ time_of_day = 4
+    $ time_of_day = 3
     "She turns and heads into her building. You check your watch and realize how late it is."
     $ scene_manager.remove_actor(the_person, reset_actor = False)
     $ del sarah_friend #Cleanup?
@@ -460,6 +471,7 @@ label Sarah_catch_stealing_label():
                         mc.name "Sounds good. I'll look forward to seeing... all of you... on Monday."
                         "She blushes and nods."
                         the_person.char "Alright, see you Monday!"
+                        $ Sarah_remove_bra_from_wardrobe(the_person.wardrobe)
                         $ Sarah_epic_tits = Action("Sarah epic tits",Sarah_epic_tits_requirement,"Sarah_epic_tits_label")
                         $ mc.business.mandatory_crises_list.append(Sarah_epic_tits) #Add the event here so that it pops when the requirements are met.
                         return
