@@ -74,8 +74,12 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                                             style "textbutton_no_padding_highlight"
                                             xalign 0.5
                                             text_style "serum_text_style"
-                                            background "#59853f"
-                                            hover_background "#78b156"
+
+                                            if selected_tooltip is policy.desc:
+                                                background "#78b156"
+                                            else:
+                                                background "#59853f"
+
                                             sensitive True
                                             xfill True
                                             ysize 100
@@ -86,6 +90,10 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                                                 tooltip policy.desc
                                                 style "textbutton_no_padding_highlight"
                                                 text_style "serum_text_style"
+
+                                                if selected_tooltip is policy.desc:
+                                                    background "#aaaaaa"
+
                                                 action [Function(purchase_policy, policy), ToggleScreenVariable("selected_policy", policy, None)]
                                                 hovered SetScreenVariable("selected_tooltip", policy.desc)
                                                 sensitive policy.requirement() and (policy.cost < mc.business.funds or policy.cost == mc.business.funds)
@@ -97,7 +105,12 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                                                 tooltip policy.desc
                                                 style "textbutton_no_padding_highlight"
                                                 text_style "serum_text_style"
-                                                background "#666666"
+
+                                                if selected_tooltip is policy.desc:
+                                                    background "#aaaaaa"
+                                                else:
+                                                    background "#666666"
+
                                                 action [ToggleScreenVariable("selected_policy", policy, None)]
                                                 hovered SetScreenVariable("selected_tooltip", policy.desc)
                                                 sensitive True
@@ -138,8 +151,12 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                                                 style "textbutton_no_padding_highlight"
                                                 xalign 0.5
                                                 text_style "serum_text_style"
-                                                background "#59853f"
-                                                hover_background "#78b156"
+
+                                                if selected_tooltip is policy.desc:
+                                                    background "#78b156"
+                                                else:
+                                                    background "#59853f"
+
                                                 sensitive True
                                                 xfill True
                                                 ysize 100
@@ -150,6 +167,9 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                                                     tooltip policy.desc
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "serum_text_style"
+
+                                                    if selected_tooltip is policy.desc:
+                                                        background "#aaaaaa"
 
                                                     action [Function(policy.buy_policy), If(policy.refresh is not None, Function(renpy.call_in_new_context, policy.refresh))]
                                                     alternate [Function(policy.buy_policy, True), If(policy.refresh is not None, Function(renpy.call_in_new_context, policy.refresh))]
@@ -164,7 +184,12 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                                                     tooltip policy.desc
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "serum_text_style"
-                                                    background "#666666"
+
+                                                    if selected_tooltip is policy.desc:
+                                                        background "#aaaaaa"
+                                                    else:
+                                                        background "#666666"
+
                                                     action NullAction()
                                                     hovered SetScreenVariable("selected_tooltip", policy.desc)
                                                     sensitive True
