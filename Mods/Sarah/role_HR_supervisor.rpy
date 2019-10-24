@@ -98,6 +98,13 @@ init 2 python:
 
         return topic_list
 
+    def update_hire_daughter_crisis(chance):
+        found = find_in_list(lambda x: x[0] == daughter_work_crisis, crisis_list)
+        if found:
+            found[1] = chance
+            #renpy.say("", "Updated daughter at work crisis chance to: " + str(chance) + "%%")
+        return
+
 init 1301 python:
     def HR_director_creation_requirement():
         return True
@@ -501,11 +508,11 @@ label HR_director_review_discoveries_label(the_person):
             menu:
                 "Approve":
                     mc.name "That's a good idea. Go ahead and implement that going forward."
-                    $ crisis_list.remove([daughter_work_crisis, 2])
-                    $ crisis_list.append([daughter_work_crisis,10])
+                    $ update_hire_daughter_crisis(10)
+                    $ business_HR_relative_recruitment_status = True
                 "Deny":
                     mc.name "I think for now I'd like to stick with more traditional recruiting methods."
-                    $ business_HR_relative_recruitment_status = True
+                    $ business_HR_relative_recruitment_status = False
 
             "Sure thing [the_person.mc_title]. If you change your mind in the future, just let me know. I can always put the sign up or down based on what we need at the time."
             $ business_HR_relative_recruitment_unlock = True
@@ -556,8 +563,8 @@ label HR_director_change_relative_recruitment_label(the_person):
         menu:
             "Take the Sign Down":
                 the_person.char "Ok, I'll take it down as soon as we are finished here. Is there anything else I can do for you?"
-                $ crisis_list.remove(daughter_work_crisis)
-                $ crisis_list.append([daughter_work_crisis,2])
+                $ update_hire_daughter_crisis(2)
+                $ business_HR_relative_recruitment_status = False
             "Leave the Sign Up":
                 the_person.char "Oh... sorry I thought you said you wanted to change it. Is there anything else I can do for you?"
         return
@@ -566,8 +573,8 @@ label HR_director_change_relative_recruitment_label(the_person):
         menu:
             "Put the Sign Up":
                 the_person.char "Ok, I'll put it up as soon as we are finished here. Is there anything else I can do for you?"
-                $ crisis_list.remove(daughter_work_crisis)
-                $ crisis_list.append([daughter_work_crisis,10])
+                $ update_hire_daughter_crisis(10)
+                $ business_HR_relative_recruitment_status = True
             "Leave the Sign Down":
                 the_person.char "Oh... sorry I thought you said you wanted to change it. Is there anything else I can do for you?"
         return
