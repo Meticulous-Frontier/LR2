@@ -26,7 +26,7 @@ init 10 python:
     def mandatory_vibe_policy_requirement():
         return maximal_arousal_uniform_policy.is_owned()
     def mandatory_vibe_action_requirement():
-        return mandatory_vibe_policy.is_owned() and mc.business.is_open_for_business() # Only run while employees are at work. # Action runs if the policy is owned. Is_owned() checks if it is in the mc.business.policy_list
+        return get_from_policy_list(mandatory_vibe_policy).enabled and mc.business.is_open_for_business() # Only run while employees are at work. # Action runs if the policy is owned. Is_owned() checks if it is in the mc.business.policy_list
 
 
 label store_mod_policies(stack = None):
@@ -65,7 +65,7 @@ label store_mod_policies(stack = None):
         mandatory_vibe_policy = ModPolicy(
             name = "Attach Bullet Viberator",
             cost = 5000,
-            desc = "Ensures a minimum arousal level for your employees\nEnabled: " + (str(mandatory_vibe_policy.is_owned()) if "mandatory_vibe_policy" in globals() else "False"),
+            desc = "Ensures a minimum arousal level for your employees\nEnabled: " + (str(get_from_policy_list(mandatory_vibe_policy).enabled) if "mandatory_vibe_policy" in globals() and mandatory_vibe_policy.is_owned() else "False"),
             requirement = mandatory_vibe_policy_requirement,
             parent = maximal_arousal_uniform_policy,
             refresh = "store_mod_policies"
