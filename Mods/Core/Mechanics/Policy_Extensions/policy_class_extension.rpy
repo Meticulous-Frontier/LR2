@@ -31,38 +31,34 @@ init 2 python:
 
     def buy_policy_enhanced(self, alternate_click = False):
 
-        if hasattr(self, "upgrade"):
-            upgrade = self.upgrade
-        else:
-            upgrade = False
+        if self not in mc.business.policy_list:
+            mc.business.policy_list.append(self)
 
-        if not hasattr(self, "enabled"):
-            self.enabled = False
+        persistent_policy = find_in_list(lambda x: x.name == self.name, mc.business.policy_list)
+        if not persistent_policy:
+            renpy.say("Error", "No policy found named [self.name] in mc.business.policy_list")
 
+        #if alternate_click is True: # This is true if you right click the policy in the policy_selection_screen
+            #if self.alternate_on_buy_arguments is not None:
+            #    self.on_buy_function(**self.alternate_on_buy_arguments)
+                #if hasattr(persistent_policy, "refund"): TODO: Find a way to deal with refunds when you "sell" multiple at a time.
+                #    mc.business.pay(+persistent_policy.refund)
 
-        if alternate_click is True: # This is true if you right click the policy in the policy_selection_screen
-            if self.alternate_on_buy_arguments is not None:
-                self.on_buy_function(**self.alternate_on_buy_arguments)
-                if hasattr(self, "refund"):
-                    mc.business.pay(+self.refund)
-            if upgrade is False: # If it is not an upgrade or normal policy it is disabled / sold when right clicking. purchase_policy() is where it is appended.
-                if self in mc.business.policy_list:
-                    mc.business.policy_list.remove(self)
-        else:
+        else: # Left click actions
             if self.on_buy_function is not None:
                 self.on_buy_function(**self.on_buy_arguments)
-            if upgrade is False:
-                mc.business.policy_list.append(self)
-                if type(self) is ModPolicy and not self.enabled:
-                    self.enabled = True # Marks it as enabled and no longer need to re- purchase it
-                    mc.business.pay(-self.cost) # Currently do not deduct cost for the alternate_on_buy_arguments
 
-            if not self.enabled:
+            if not persistent_policy.enabled:
                 mc.business.pay(-self.cost) # Currently do not deduct cost for the alternate_on_buy_arguments
-                self.refund = self.cost
+                persistent_policy.refund = self.cost
+
+        if self.refresh:
+            renpy.call_in_new_context(self.refresh)
+
 
     Policy.buy_policy = buy_policy_enhanced # Allows alternate usage for right clicking etc.
-
+    Policy.enabled = None
+    Policy.refresh = None
 
     class ModPolicy(Policy): # Allows you to attach parent / child relation to the policies which display when the parent is selected.
 
@@ -87,6 +83,7 @@ init 2 python:
             self.refresh = refresh # Set this to the label that creates the policy in the first place. This will refresh descriptions, cost, parents etc.
             self.image = image # Image background or icons to use?
             self.enabled = False
+
             #if self.parent:
             #    self.enabled = self.parent.children[self.parent.children.index(self)].enabled
 
