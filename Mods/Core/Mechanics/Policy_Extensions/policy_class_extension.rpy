@@ -36,31 +36,41 @@ init 2 python:
         else:
             upgrade = False
 
+        if not hasattr(self, "enabled"):
+            self.enabled = False
+
 
         if alternate_click is True: # This is true if you right click the policy in the policy_selection_screen
             if self.alternate_on_buy_arguments is not None:
                 self.on_buy_function(**self.alternate_on_buy_arguments)
-            if upgrade == False: # If it is not an upgrade or normal policy it is disabled / sold when right clicking. purchase_policy() is where it is appended.
+                if hasattr(self, "refund"):
+                    mc.business.pay(+self.refund)
+            if upgrade is False: # If it is not an upgrade or normal policy it is disabled / sold when right clicking. purchase_policy() is where it is appended.
                 if self in mc.business.policy_list:
                     mc.business.policy_list.remove(self)
         else:
             if self.on_buy_function is not None:
                 self.on_buy_function(**self.on_buy_arguments)
-            mc.business.pay(-self.cost) # Currently do not deduct cost for the alternate_on_buy_arguments
-
-            if upgrade == False:
+            if upgrade is False:
                 mc.business.policy_list.append(self)
+                if type(self) is ModPolicy and not self.enabled:
+                    self.enabled = True # Marks it as enabled and no longer need to re- purchase it
+                    mc.business.pay(-self.cost) # Currently do not deduct cost for the alternate_on_buy_arguments
+
+            if not self.enabled:
+                mc.business.pay(-self.cost) # Currently do not deduct cost for the alternate_on_buy_arguments
+                self.refund = self.cost
 
     Policy.buy_policy = buy_policy_enhanced # Allows alternate usage for right clicking etc.
 
 
     class ModPolicy(Policy): # Allows you to attach parent / child relation to the policies which display when the parent is selected.
 
-        def __init__(self, name, desc, requirement, cost, on_buy_function = None, on_buy_arguments = None, alternate_on_buy_arguments = None, parent = None, image = None, enabled = False, upgrade = False, refresh = None):
+        def __init__(self, name, desc, requirement, cost, on_buy_function = None, on_buy_arguments = None, alternate_on_buy_arguments = None, parent = None, image = None, upgrade = False, refresh = None):
 
             Policy.__init__(self, name, desc, requirement, cost, on_buy_function, on_buy_arguments)
             self.children = [] # A list that gets filled with child elements
-            self.parent = parent # A list of optional policies that can be toggled on / off
+            self.parent = parent # The parent of a policy is where you want it to be subcatagorized
 
             if self.parent:
                 if not hasattr(self.parent, "children"): # Allow non- ModPolicy (normal Policy) class to be used as parents
@@ -75,9 +85,10 @@ init 2 python:
             self.alternate_on_buy_arguments = alternate_on_buy_arguments # Arguments sent to on_buy_function when right clicking in policy_selection_screen
             self.upgrade = upgrade # A multi- stage or endless policy upgrade must be set to True so that it doesn't become "purchased" | is_owned() == True
             self.refresh = refresh # Set this to the label that creates the policy in the first place. This will refresh descriptions, cost, parents etc.
-            self.enabled = enabled # Whether the policy is active or not
             self.image = image # Image background or icons to use?
-
+            self.enabled = False
+            #if self.parent:
+            #    self.enabled = self.parent.children[self.parent.children.index(self)].enabled
 
     # def buy_mod_policy(self): # Allows for lists to be used when running functions on purchase
     #     mc.business.funds -= self.cost

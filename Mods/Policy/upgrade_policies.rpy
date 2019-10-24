@@ -15,7 +15,7 @@ init 10 python:
             return purchase_machinery_room_policy.is_owned()
 
     def overload_production_lines_requirement():
-        return purchase_machinery_room_policy.is_owned()
+        return purchase_machinery_room_policy.is_owned() and ("machinery_room_overload" in globals() and machinery_room_overload >= 100)
 
     def overload_production_lines_on_buy_function(amount):
         global machinery_room_overload
