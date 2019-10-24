@@ -1,3 +1,10 @@
+init 2 python:
+
+    def get_from_policy_list(policy):
+
+        persistent_policy = find_in_list(lambda x: x.name == policy.name, mc.business.policy_list)
+        return persistent_policy
+
 init 2: # Will give this a polish later, just wanted to enable categories from lists.
     screen policy_selection_screen():
         add "Paper_Background.png"
@@ -144,32 +151,48 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                                     if len(selected_policy.children) > 5: #Only take up scrollbar space if needed.
                                          scrollbars "vertical"
                                     xfill True
+
                                     grid 1 len(selected_policy.children):
                                         for policy in sorted(sorted(sorted(selected_policy.children, key = lambda x: x.cost), key = lambda x: x.is_owned()), key = lambda x: x.requirement(), reverse = True):
                                             if policy.is_owned():
 
-                                                textbutton ("$" + str(policy.cost) + " - " if (hasattr(policy, "enabled") and not policy.enabled) else "") + policy.name:
-                                                    tooltip policy.desc
-                                                    action NullAction()
-                                                    alternate [Function(policy.buy_policy, True), If(policy.refresh is not None, Function(renpy.call_in_new_context, policy.refresh))]
+                                                textbutton ("$" + str(policy.cost) + " - " if policy.upgrade else "") + policy.name:
+                                                    #tooltip policy.desc
+
+                                                    if not policy.upgrade:
+                                                        action [ToggleField(get_from_policy_list(policy), "enabled", True, False), If(policy.refresh is not None, Function(renpy.call_in_new_context, policy.refresh))]
+                                                    elif policy.upgrade and policy.requirement() and (policy.cost <= mc.business.funds):
+                                                        action Function(policy.buy_policy)
+                                                    else:
+                                                        action NullAction()
+                                                    #alternate [Function(policy.buy_policy, True)]
+
                                                     hovered SetScreenVariable("selected_tooltip", policy.desc)
+
                                                     style "textbutton_no_padding_highlight"
                                                     xalign 0.5
                                                     text_style "serum_text_style"
 
                                                     if selected_tooltip is policy.desc:
                                                         background "#78b156"
+
+                                                    elif not (policy.cost <= mc.business.funds):
+                                                        background "#666666"
+
+                                                    elif not get_from_policy_list(policy).enabled:
+                                                        background "#666666"
+
                                                     else:
                                                         background "#59853f"
 
-                                                    sensitive True
+                                                    #sensitive True
                                                     xfill True
                                                     ysize 100
 
                                             else:
                                                 if policy.requirement() and (policy.cost <= mc.business.funds):
-                                                    textbutton ("$" + str(policy.cost) + " - " if (hasattr(policy, "enabled") and not policy.enabled) else "") + policy.name:
-                                                        tooltip policy.desc
+                                                    textbutton "$" + str(policy.cost) + " - " + policy.name:
+                                                        #tooltip policy.desc
                                                         style "textbutton_no_padding_highlight"
                                                         text_style "serum_text_style"
 
@@ -177,7 +200,7 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                                                             background "#aaaaaa"
 
                                                         action [Function(policy.buy_policy), If(policy.refresh is not None, Function(renpy.call_in_new_context, policy.refresh))]
-                                                        alternate [Function(policy.buy_policy, True), If(policy.refresh is not None, Function(renpy.call_in_new_context, policy.refresh))]
+                                                        #alternate [Function(policy.buy_policy, True), If(policy.refresh is not None, Function(renpy.call_in_new_context, policy.refresh))]
 
                                                         hovered SetScreenVariable("selected_tooltip", policy.desc)
                                                         sensitive policy.requirement() and (policy.cost < mc.business.funds or policy.cost == mc.business.funds)
@@ -185,8 +208,8 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                                                         ysize 100
 
                                                 else:
-                                                    textbutton ("$" + str(policy.cost) + " - " if (hasattr(policy, "enabled") and not policy.enabled) else "") + policy.name:
-                                                        tooltip policy.desc
+                                                    textbutton "$" + str(policy.cost) + " - "  + policy.name:
+                                                        #tooltip policy.desc
                                                         style "textbutton_no_padding_highlight"
                                                         text_style "serum_text_style"
 
@@ -196,8 +219,9 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                                                             background "#666666"
 
                                                         action NullAction()
-                                                        if policy.requirement():
-                                                            alternate [Function(policy.buy_policy, True), If(policy.refresh is not None, Function(renpy.call_in_new_context, policy.refresh))]
+                                                        #if policy.requirement():
+                                                            #alternate [Function(policy.buy_policy, True), If(policy.refresh is not None, Function(renpy.call_in_new_context, policy.refresh))]
+
                                                         hovered SetScreenVariable("selected_tooltip", policy.desc)
                                                         sensitive True
                                                         xfill True
