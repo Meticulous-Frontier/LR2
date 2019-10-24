@@ -1,8 +1,7 @@
 # Contains upgrade modules to policies such as rooms or policies that you want to be toggleable.
 # Create them as ModPolicy instead of Policy if you intend for them to be non- standalone aka child elements of a parent policy
-# NOTE: ModPolicy takes a list of on_buy_functions
 
-init 1400 python: # Room expansions are init 6
+init 1400 python: # Room expansions are init 6, base game policies are init 1300
     add_label_hijack("normal_start", "store_mod_policies")
     add_label_hijack("after_load", "store_mod_policies")
 
@@ -27,7 +26,7 @@ init 10 python:
     def mandatory_vibe_policy_requirement():
         return maximal_arousal_uniform_policy.is_owned()
     def mandatory_vibe_action_requirement():
-        return mandatory_vibe_policy.is_owned()
+        return mandatory_vibe_policy.is_owned() and mc.business.is_open_for_business() # Only run while employees are at work. # Action runs if the policy is owned. Is_owned() checks if it is in the mc.business.policy_list
 
 
 label store_mod_policies(stack = None):
@@ -38,8 +37,9 @@ label store_mod_policies(stack = None):
             cost = mc.business.production_lines * 5000,
             desc = "Increases the amount of production lines in the [p_division.formalName].\nYou currently have: [mc.business.production_lines]",
             requirement = create_production_line_requirement,
-            on_buy_function = add_production_lines, # Find a way to use lists as on_buy_function
-            on_buy_arguments = {"amount": 1}, # Make this less weird and more useful instead. As it is you can only match one argument to each function
+            on_buy_function = add_production_lines, # Find a way to use lists as on_buy_function?
+            on_buy_arguments = {"amount": 1},
+            alternate_on_buy_arguments = {"amount": -1},
             parent = purchase_machinery_room_policy, # Set the policy you want as a parent here. Clicking the parent in the policy screen will reveal the children ( if any are present )
             upgrade = True,
             refresh = "store_mod_policies" # Set this to the function that creates it
