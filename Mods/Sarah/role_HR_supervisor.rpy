@@ -66,18 +66,14 @@ init -2 python:
 
 init 2 python:
     def get_HR_review_list(the_person, tier = 0):   #Pass in the HR director so we don't try to counsel her
-        topic_list = []
-        HR_employee_list = []
-        for person in mc.business.get_employee_list():
-            if not person is the_person:  #exclude the HR director
-                topic_list = create_HR_review_topic_list(person)
-                renpy.random.shuffle(topic_list)  #Shuffle the topic list so there is a greater variety in suggest topics to discuss with the employee
-                for topic in topic_list:
-                    if person.get_opinion_score(topic) < tier:
-                        HR_employee_list.append([(person.title + "\n{size=22}" + " Opinion: " + topic + "{/size}"), person])
-
-
-        return HR_employee_list
+        people_list = []
+        for person in [x for x in mc.business.get_employee_list() if not x is the_person]:
+            topic_list = create_HR_review_topic_list(person)
+            for topic in topic_list:
+                if person.get_opinion_score(topic) < tier:
+                    people_list.append(person)
+                    break
+        return people_list
 
     def create_HR_review_topic_list(the_person):
         topic_list = ["working"]
@@ -163,8 +159,6 @@ label HR_director_mod_init():
         business_HR_relative_recruitment_unlock = False
         business_HR_meeting_on_demand = False
         business_HR_meeting_last_day = 0
-
-
 
         Sarah_mod_initialization() #TODO this is for testing. Should probably figure out a better way to do this...
 
@@ -323,18 +317,13 @@ label HR_director_monday_meeting_label(the_person):
     return
 
 label HR_director_personnel_interview_label(the_person, max_opinion = 0):
-    $ HR_employee_list = get_HR_review_list(the_person, 0)
-    $ HR_tier_talk = 0
+    $ HR_tier_talk = -1 # init at -1 so we do the first collect with 0
+    $ HR_employee_list = []
+    # build list of girls that qualify for specified tier and max_opinion score
+    while len(HR_employee_list) == 0 and HR_tier_talk < business_HR_coffee_tier and HR_tier_talk < max_opinion:
+        $ HR_tier_talk += 1
+        $ HR_employee_list = get_HR_review_list(the_person, HR_tier_talk)
 
-
-    if len(HR_employee_list) == 0: #No one qualifies!
-        if business_HR_coffee_tier > 0:
-            $ HR_employee_list = get_HR_review_list(the_person, 1) #Run again to see if any girls don't like something
-            $ HR_tier_talk = 1
-            if len(HR_employee_list) == 0: #Still no one!
-                if business_HR_coffee_tier > 1:
-                    $ HR_employee_list = get_HR_review_list(the_person, 2) #Run again to see if any girls don't love something
-                    $ HR_tier_talk = 2
     if len(HR_employee_list) == 0: #No one qualifies!
         the_person.char "Actually, thing are running really smoothly right now, I didn't come across any dossiers this past weekend that drew my attention!"
         #TODO add another option here? Offer to bring in any girl?
@@ -346,21 +335,32 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     elif HR_tier_talk == 2:
         the_person.char "Honestly? All the girls here like all the policies I've looked at, but its possible with a bit of persuasion we could make them love them."
         the_person.char "Here's my list. Who do you want me to call in?"
-    python:
-        person_choice = None
-        person_choice = menu(HR_employee_list)
+
+    # use new menu layout for selecting people
+    call screen main_choice_display([["Call in"] + HR_employee_list], draw_hearts_for_people = False)
+    $ person_choice = _return
+
     the_person.char "Alright, let me go get her."
     $ renpy.scene("Active")
 
-    "[person_choice.title] steps in to the office in a minute, follow by [the_person.title]."
+    "[person_choice.title] steps in to the office after a few minutes, followed by [the_person.title]."
     person_choice.char "Hello [person_choice.mc_title]."
 
+    $ scene_manager.add_actor(person_choice, position = "stand3", character_placement = character_left_flipped)
+    mc.name "Hello [person_choice.title], come in and take a seat."
+
+    $ scene_manager.update_actor(person_choice, position = "sitting")
     $ scene_manager.add_actor(the_person, position = "stand4")
-    $ scene_manager.add_actor(person_choice, position = "sitting", character_placement = character_left_flipped)
-    "[person_choice.title] sits down across from you at your desk. [the_person.title] takes the lead makes a cup of coffee for her before she sits down."
-    the_person.char "Thanks for coming. [the_person.mc_title] just wanted to have quick chat. Here, have a cup of coffee."
-    $ scene_manager.update_actor(the_person, position = "sitting")
-    "[person_choice.title] takes the coffee and nods. She takes a few sips as you begin."
+
+    if business_HR_coffee_tier > 0:
+        "[person_choice.title] sits down across from you at your desk. [the_person.title] pours a cup of coffee while talking."
+        the_person.char "Thanks for coming. [the_person.mc_title] just wanted to have quick chat. Here, have a cup of coffee."
+        $ scene_manager.update_actor(the_person, position = "sitting")
+        "[person_choice.title] takes the coffee and nods. She takes a few sips as you begin."
+    else:
+        "[person_choice.title] sits down across from you at your desk. [the_person.title] starts talking while she sits down."
+        the_person.char "Thanks for coming. [the_person.mc_title] just wanted to have quick chat."
+
     mc.name "That's right. As you know, we run a small business here, and I like to make sure all my employees enjoy their work here."
     mc.name "Recently, I've become concerned you may not like the work environment."
     python:
@@ -368,10 +368,12 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         opinion_chat_list = []
         for opinion in opinion_list:
             if person_choice.get_opinion_score(opinion) <  max_opinion:
-                opinion_chat_list.append([("Discuss " + opinion + "\n{size=22}" + person_choice.title + " " + opinion_score_to_string(person_choice.get_opinion_score(opinion)) + " " + opinion + "{/size}"), opinion])
+                title_desc = opinion.title() + "\n{size=14}" + "She " + opinion_score_to_string(person_choice.get_opinion_score(opinion)) + " it{/size}"
+                opinion_chat_list.append([title_desc, opinion])
 
-        opinion_chat = None
-        opinion_chat = menu(opinion_chat_list)
+    $ opinion_chat_list.insert(0, "Discuss Topic")
+    call screen main_choice_display([opinion_chat_list])
+    $ opinion_chat = _return
 
     if opinion_chat == "working":
         mc.name "I know that a job is just a job, but I think if you take the time to get to know your fellow employees and come in each day with a good attitude, you could learn to like coming to work every day."
