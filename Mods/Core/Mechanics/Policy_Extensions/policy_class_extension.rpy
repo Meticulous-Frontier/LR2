@@ -40,13 +40,13 @@ init 2 python:
         if alternate_click is True: # This is true if you right click the policy in the policy_selection_screen
             if self.alternate_on_buy_arguments is not None:
                 self.on_buy_function(**self.alternate_on_buy_arguments)
-            if upgrade == False:
+            if upgrade == False: # If it is not an upgrade or normal policy it is disabled / sold when right clicking. purchase_policy() is where it is appended.
                 if self in mc.business.policy_list:
                     mc.business.policy_list.remove(self)
         else:
             if self.on_buy_function is not None:
                 self.on_buy_function(**self.on_buy_arguments)
-                mc.business.pay(-self.cost) # Currently do not deduct cost for the alternate_on_buy_arguments
+            mc.business.pay(-self.cost) # Currently do not deduct cost for the alternate_on_buy_arguments
 
             if upgrade == False:
                 mc.business.policy_list.append(self)
