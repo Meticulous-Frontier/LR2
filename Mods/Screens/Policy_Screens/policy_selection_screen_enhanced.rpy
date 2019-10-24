@@ -3,6 +3,8 @@ init 2 python:
     def get_from_policy_list(policy):
 
         persistent_policy = find_in_list(lambda x: x.name == policy.name, mc.business.policy_list)
+        if not persistent_policy:
+            return False
         return persistent_policy
 
 init 2: # Will give this a polish later, just wanted to enable categories from lists.
@@ -181,7 +183,7 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
 
                                                     elif policy.upgrade and (policy.cost > mc.business.funds):
                                                         background "#666666"
-                                                        
+
                                                     else:
                                                         background "#59853f"
 
