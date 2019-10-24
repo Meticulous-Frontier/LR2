@@ -359,6 +359,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         "[person_choice.title] takes the coffee and nods. She takes a few sips as you begin."
     else:
         "[person_choice.title] sits down across from you at your desk. [the_person.title] starts talking while she sits down."
+        $ scene_manager.update_actor(the_person, position = "sitting")
         the_person.char "Thanks for coming. [the_person.mc_title] just wanted to have quick chat."
 
     mc.name "That's right. As you know, we run a small business here, and I like to make sure all my employees enjoy their work here."
