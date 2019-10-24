@@ -26,7 +26,7 @@ init 10 python:
     def mandatory_vibe_policy_requirement():
         return maximal_arousal_uniform_policy.is_owned()
     def mandatory_vibe_action_requirement():
-        return get_from_policy_list(mandatory_vibe_policy).enabled and mc.business.is_open_for_business() # Only run while employees are at work. # Action runs if the policy is owned. Is_owned() checks if it is in the mc.business.policy_list
+        return (mandatory_vibe_policy.is_owned() and get_from_policy_list(mandatory_vibe_policy).enabled) and mc.business.is_open_for_business() # Only run while employees are at work. # Action runs if the policy is owned. Is_owned() checks if it is in the mc.business.policy_list
 
 
 label store_mod_policies(stack = None):
