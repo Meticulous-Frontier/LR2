@@ -176,16 +176,16 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                                                     if selected_tooltip is policy.desc:
                                                         background "#78b156"
 
-                                                    elif not (policy.cost <= mc.business.funds):
+                                                    elif not get_from_policy_list(policy).enabled and not policy.upgrade:
                                                         background "#666666"
 
-                                                    elif not get_from_policy_list(policy).enabled:
+                                                    elif policy.upgrade and (policy.cost > mc.business.funds):
                                                         background "#666666"
-
+                                                        
                                                     else:
                                                         background "#59853f"
 
-                                                    #sensitive True
+                                                    sensitive True
                                                     xfill True
                                                     ysize 100
 
