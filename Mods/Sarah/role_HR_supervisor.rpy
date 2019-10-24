@@ -34,7 +34,7 @@ init -2 python:
         return False
 
     def HR_director_monday_meeting_requirement():
-        if get_HR_director() == None:
+        if get_HR_director() is None:
             return False
         elif time_of_day == 1:
             if day%7 == 0:  #Monday
@@ -218,9 +218,7 @@ label HR_director_initial_hire_label(the_person):
     if the_person is sarah:
         python:
             #TODO try to detect if employee count is full again
-            the_person.schedule[1] = None # remove previous schedule
-            the_person.schedule[2] = None
-            the_person.schedule[3] = None
+            the_person.set_schedule([1,2,3], None) # remove previous schedule
             the_person.event_triggers_dict["employed_since"] = day
             mc.business.listener_system.fire_event("new_hire", the_person = the_person)
             the_person.special_role.append(employee_role)
@@ -346,6 +344,8 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     "[person_choice.title] steps in to the office after a few minutes, followed by [the_person.title]."
     person_choice.char "Hello [person_choice.mc_title]."
 
+    # initialize
+    $ scene_manager = Scene()   
     $ scene_manager.add_actor(person_choice, position = "stand3", character_placement = character_left_flipped)
     mc.name "Hello [person_choice.title], come in and take a seat."
 
@@ -413,8 +413,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     $ scene_manager.update_actor(the_person, position = "stand2")
     "[the_person.title] gets up and walks [person_choice.title] to the door."
     "They exchange a few pleasantries before [person_choice.title] leaves the room."
-    $ scene_manager.remove_actor(the_person, reset_actor = False)
-    $ scene_manager.remove_actor(person_choice, reset_actor = False)
+    $ scene_manager.clear_scene()
     "[the_person.title] comes back to the desk and sits down."
     $ the_person.draw_person(position = "sitting")
 
@@ -553,7 +552,7 @@ label HR_director_coffee_tier_2_label(the_person):
 
 label HR_director_calculate_eff(the_person):
     $ HR_dir_factor = 0
-    if get_HR_director() != "None":
+    if not get_HR_director() is None:
         $ HR_dir_factor = ((the_person.charisma * 2 ) + the_person.hr_skill)   #Charisma + HR skill
         #TODO make events later on that factor this to be better
     $ HR_dir_factor += business_HR_eff_bonus
@@ -588,7 +587,7 @@ label HR_director_meeting_on_demand_label(the_person):
     $ the_person.draw_person(position = "sitting")
     the_person.char "Ok! Let me see who I have on my list here..."
     call HR_director_personnel_interview_label(the_person, max_opinion = business_HR_coffee_tier) from HR_DIR_INTERVIEW_CALL_4
-    the_person.char "I'd say that went pretty well! I'm going to ahead and get back to work, if that is okay with you, [the_person.mc_title]?"
+    the_person.char "I'd say that went pretty well! I'm going to head back to work, if that is okay with you, [the_person.mc_title]?"
     "You thank her for her help and excuse her. She gets up and leaves you to get back to work."
     $ renpy.scene("Active")
     $ business_HR_meeting_last_day = day
