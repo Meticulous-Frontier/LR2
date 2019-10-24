@@ -476,7 +476,7 @@ label Sarah_catch_stealing_label():
                         return
                     else:
                         the_person.char "I just... I don't think I can do that right now. I'm sorry [the_person.mc_title]!"
-                        mc.name "It fine, I just want you to be happy with your body."
+                        mc.name "It's fine, I just want you to be happy with your body."
                         the_person.char "Right. I mean, I can always take more later if I need to."
 
                 "You're right":
