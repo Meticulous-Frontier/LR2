@@ -400,10 +400,74 @@ label Sarah_third_wheel_label():
     return
 
 label Sarah_get_drinks_label():
-    "This label in progress"
-    pass
+    $ the_person = sarah
+    #TODO going out outfit
+    "Lost in thought as you get your work done in the silence of the weekend, a sudden voice startles you."
+    the_person.char "[the_person.mc_title]! I figured I'd find you around here on a Saturday again!"
+    "You look up to see the now familiar face of [the_person.title] standing in the doorway."
+    $ scene_manager.add_actor(the_person, emotion = "happy")
+    "It is crazy to think that just a short time ago, she was out of your life completely, but after you chance encounter, you feel like you have been friends forever."
+    mc.name "Hey [the_person.title]. You look great! Are you going out tonight?"
+    the_person.char "Actually, I'm not sure yet. I hope so! But I'm not sure if the guy I want to go out with is going to be able to go yet or not..."
+    mc.name "Is that so? I hope he can make it and that he treats you well!"
+    the_person.char "Hahaha, yeah me too. And don't worry, he's always treated me right."
+    "[the_person.possessive_title] looks down at the floor for a minute and mumbles something. Its obvious she is trying to work up the courage to ask you out, but it is cute watching her fumble a bit."
+    the_person.char "So... you uhh, have any big plans for the evening, [the_person.mc_title]?"
+    mc.name "Oh, well, certainly nothing as big as what you have planned! I'm just trying to get a little a head of work for next week."
+    the_person.char "Ah! That's good. It is pretty amazing how much work you put into this place. It's something I admire a lot..."
+    the_person.char "Anyway, I've seen how hard you work and I was thinking that, maybe we could go out and get a few drinks?"
+    "You decide to tease her a bit."
+    mc.name "Ahh, I see. You meeting another friend tonight? I'm not sure I want..."
+    "She quickly interrupts you."
+    the_person.char "No! God no, that was awful. I thought we could just go out, you know? Me and you?"
+    mc.name "You mean like a date?"
+    "She stutters a moment before she replies."
+    the_person.char "Well, ermm, I mean, uhh..."
+    the_person.char "Yeah. Pretty much that is exactly what I'm trying to ask..."
+    "You admire her courage. She must be really interested in you to have the guts to ask you out like this! If you accept, she might assume you are interested in a relationship..."
+    menu:
+        "Sounds great!": #Begin the dating path with Sarah
+            pass
+        "Just as friends.\n (Coming Later) (disabled)":
+            pass
+            #TODO when Vren release boyfriend girlfriend relations, evaluate this option to eventually shift to a FWB scenario over dating.
+    mc.name "I'm actually at a great stopping point. Let's go!"
+    the_person.char "Great! Do you want to walk again tonight? It was kind of nice when we walked together last time."
+    mc.name "Sounds good to me, it's good to get out and stretch the legs once in a while."
+    "You lock up on your way out and head toward downtown."
+
+    $ mc.change_location(downtown)
+    $ mc.location.show_background()
+
+    "You enjoy pleasant conversation with [the_person.possessive_title] as you walk downtown."
+    #TODO the convo
+
+
+
+
+    $ mc.change_location(downtown_bar)
+    $ mc.location.show_background()
+
+    "You walk into the bar. [the_person.title] spots an empty booth."
+    the_person.char "Hey, there's an empty table over there!"
+    mc.name "Go grab it. Appletini?"
+    the_person.char "Sounds great!"
+    $ scene_manager.update_actor(the_person, position = "walking_away")
+    "She walks off to the booth while you head up to the bar."
+    "You order your drinks with the bartender. If you wanted to, now would be a good time to slip a serum into her drink..."
+    menu:
+        "Slip in a serum":
+            "After you get the drinks, you carefully add a serum to it."
+            call give_serum(the_person) from _call_give_sarah_serum_001
+        "Leave alone":
+            "You decide to leave her drink alone."
+    "You grab your drinks and then head to the table. You sit down across from [the_person.title]."
+    $ scene_manager.update_actor(the_person, position = "sitting")
+    the_person.char "Thanks! I love these things..."
+    "She takes a long sip from her glass."
 
     return
+
 
 label Sarah_catch_stealing_label():
     $ the_person = sarah
