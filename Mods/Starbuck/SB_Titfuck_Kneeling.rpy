@@ -1,13 +1,12 @@
-﻿init:
-    python:
-        SB_Titfuck_Kneeling = Position("Titfuck",   #Name of the position in the sex position selection screen
+﻿init python:
+    SB_Titfuck_Kneeling = Position("Titfuck",   #Name of the position in the sex position selection screen
         25,                                         #Required sluttiness for girl to consider. 20 sluttiness = 1 heart
-        60,                                         #Max temporary sluttiness from postions
+        45,                                         #Max temporary sluttiness from postions
         "blowjob",                                  #Image name used for the position
         "Kneel",                                    #Description of female pose. Requires room item that accomodates this descriptor: EG, bed for "laying"
         "Tits",                                     #Girl part that must be available to select position. Can be "None", "Tits", or "Vagina"
         "Foreplay",                                 #Skill used to determine how fast arousal is gained each round
-        15,                                         #Base female arousal gain per round
+        10,                                         #Base female arousal gain per round
         20,                                         #Base male arousal gain per round
         [],                                         #"Connections". Currently unused as far as I can tell. Use link_positions() or Link_positions_two_way() instead
         "intro_SB_Titfuck_Kneeling",                #Name of label describing getting into positions
@@ -18,13 +17,12 @@
         "strip_ask_SB_Titfuck_Kneeling",            #Label for if girl asks to take something off
         "orgasm_SB_Titfuck_Kneeling",               #Label for if girl orgasms
         opinion_tags = ["giving blowjobs", "showing her tits"])     #Girl has additional arousal gains based on these opinions. See random_lists.rpy for possible likes.
-        list_of_girl_positions.append(SB_Titfuck_Kneeling)  #Uncomment this when this position is finished# #This line adds it to the list of positions the girl can choose if she pleases you NOTE:Cannot be selected by player at this time.
-        list_of_positions.append(SB_Titfuck_Kneeling) #Use this function if you want the position to be selectable during sexy times by the player.
+    list_of_girl_positions.append(SB_Titfuck_Kneeling)  #Uncomment this when this position is finished# #This line adds it to the list of positions the girl can choose if she pleases you NOTE:Cannot be selected by player at this time.
+    list_of_positions.append(SB_Titfuck_Kneeling) #Use this function if you want the position to be selectable during sexy times by the player.
 
-init 1:
-    python:
-        #Use this function to create a two way link between this position and another, so players can go back and forth.
-        SB_Titfuck_Kneeling.link_positions_two_way(blowjob, "transition_SB_Titfuck_Kneeling_blowjob", "transition_blowjob_SB_Titfuck_Kneeling")
+init 1 python:
+    #Use this function to create a two way link between this position and another, so players can go back and forth.
+    SB_Titfuck_Kneeling.link_positions_two_way(blowjob, "transition_SB_Titfuck_Kneeling_blowjob", "transition_blowjob_SB_Titfuck_Kneeling")
 
         #Use this line to create a one way link, so players can go from this position to the one linked
 #        SB_Titfuck_Kneeling.link_positions(deepthroat,"transition_SB_Titfuck_Kneeling_deepthroat")
@@ -37,7 +35,7 @@ label intro_SB_Titfuck_Kneeling(the_girl, the_location, the_object, the_round):
         the_girl.char "Why are you wearing this thing? Lets take this off so I can take care of you better..."
         "[the_girl.possessive_title] pulls off your condom."
         $ mc.condom = False
-    "[the_girl.possessive_title] looks up at you from her knees. She looks you right in the eyes as she leans foward and slides your cock between her tits."
+    "[the_girl.possessive_title] looks up at you from her knees. She looks you right in the eyes as she leans forward and slides your cock between her tits."
     "With both hands holding her breasts together, she slowly starts to move her pillowy flesh up and down your erection."
 
     return
@@ -50,7 +48,7 @@ label scene_SB_Titfuck_Kneeling_1(the_girl, the_location, the_object, the_round)
     "The extra lubrication feels great, causing you to let out an appreciative moan."
     if the_girl.sex_skills["Foreplay"] < 2: #Inexperienced.
         "[the_girl.title] is trying her best to pleasure you with her chest, but her inexperience is starting to show."
-        "She is pushing her tits together, but she is doing it too hard. It doesn't hurt, but the sensation isn't particularly pleasureable."
+        "She is pushing her tits together, but she is doing it too hard. It doesn't hurt, but the sensation isn't particularly pleasurable."
         mc.name "Mmm, easy, you aren't trying to strangle it. Tits are soft, your grip should be soft too."
         "[the_girl.title] mutters a quick apology, but lightens up her grip. It feels much better when she resumes stroking you."
     else: #Is experienced
@@ -145,18 +143,18 @@ label outro_SB_Titfuck_Kneeling(the_girl, the_location, the_object, the_round):
 #This label describes transition from this position to a blowjob
 label transition_SB_Titfuck_Kneeling_blowjob(the_girl, the_location, the_object, the_round):
     mc.name "Why don't you suck on me now? I bet those pouty lips of yours would feel amazing around my cock."
-    "[the_girl.possessive_title] takes your hard cock in her hands. She strokes it tentativly a few times, then leans in and slides the tip into her mouth."
+    "[the_girl.possessive_title] takes your hard cock in her hands. She strokes it tentatively a few times, then leans in and slides the tip into her mouth."
     mc.name "That's it, that's a good girl."
     return
 
-#This label describes trainsition from blowjob to this position
+#This label describes transitions from blowjob to this position
 label transition_blowjob_SB_Titfuck_Kneeling(the_girl, the_location, the_object, the_round):
     mc.name "Those tits look great. Why don't you wrap those around my cock for a bit..."
     if mc.condom:
         the_girl.char "Why are you wearing this thing? Lets take this off so I can take care of you better..."
         "[the_girl.possessive_title] pulls off your condom."
         $ mc.condom = False
-    "[the_girl.possessive_title] takes your hard cock in her hands. She strokes it tentativly a few times, then leans in and slides your length between her twin peaks." #TODO also figure out way to reference Hooters
+    "[the_girl.possessive_title] takes your hard cock in her hands. She strokes it tentatively a few times, then leans in and slides your length between her twin peaks." #TODO also figure out way to reference Hooters
     mc.name "That's it, that's a good girl."
     return
 
@@ -171,7 +169,6 @@ label strip_SB_Titfuck_Kneeling(the_girl, the_clothing, the_location, the_object
 
 #This label describes the girl asking to take something off
 label strip_ask_SB_Titfuck_Kneeling(the_girl, the_clothing, the_location, the_object, the_round):
-
     "[the_girl.possessive_title] looks up at you from her knees."
     the_girl.char "Sir, I'd like to take off my [the_clothing.name], would you mind?"
     menu:
@@ -180,11 +177,9 @@ label strip_ask_SB_Titfuck_Kneeling(the_girl, the_clothing, the_location, the_ob
             $ the_girl.draw_animated_removal(the_clothing, position = SB_Titfuck_Kneeling.position_tag)
             "[the_girl.possessive_title] stands up and strips out of her [the_clothing.name]. Then she gets back onto her knees and slides your cock back between her tits."
 
-
         "Leave it on.":
             mc.name "No, I like how you look with it on."
             the_girl.char "Is it sexy? Does it make you just want to blow your load, looking at me wearing this?"
-
     return
 
 #This label describes when she orgasms

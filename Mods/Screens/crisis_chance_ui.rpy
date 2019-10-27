@@ -18,7 +18,7 @@ screen crisis_chance_setting(disabled, morning_disabled):
             hbox:
                 bar value ScreenVariableValue("current_crisis_base_chance", 100.0, step = 1.0) range 100 xsize 800 ysize 45 style style.slider
                 yalign 1.0
-                text str(int(round(current_crisis_base_chance))) + "%" style "menu_text_style"
+                text str(int(current_crisis_base_chance)) + "%" style "menu_text_style"
 
         vbox:
             yalign 0.5
@@ -26,7 +26,7 @@ screen crisis_chance_setting(disabled, morning_disabled):
             hbox:
                 bar value ScreenVariableValue("current_morning_crisis_base_chance", 100.0, step = 1.0) range 100 xsize 800 ysize 45 style style.slider
                 yalign 1.0
-                text str(int(round(current_morning_crisis_base_chance))) + "%" style "menu_text_style"
+                text str(int(current_morning_crisis_base_chance)) + "%" style "menu_text_style"
 
         hbox:
             yalign 0.7
@@ -39,7 +39,7 @@ screen crisis_chance_setting(disabled, morning_disabled):
             xanchor 0.5
             spacing 50
             textbutton "Cancel" action [Return] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (155,60)
-            textbutton "Save" action [SetVariable("crisis_base_chance", int(round(current_crisis_base_chance))),SetVariable("morning_crisis_base_chance",int(round(current_morning_crisis_base_chance))), Return] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (155,60)
+            textbutton "Save" action [SetVariable("crisis_base_chance", int(current_crisis_base_chance)),SetVariable("morning_crisis_base_chance",int(current_morning_crisis_base_chance)), Return] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (155,60)
 
 style warning_text:
     color "B22222"

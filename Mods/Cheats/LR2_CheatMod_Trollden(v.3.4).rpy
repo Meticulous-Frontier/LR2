@@ -29,6 +29,7 @@ init python: # This space is reserved for variables used to display and hide vbo
     capphc = None # Hair color
     capphcp = 1 # Hair color selection page
     cappf = None # Face
+    cappe = None # Eyes
     cappt = None # Tits
     cappb = None # Body
     capps = None # Skin
@@ -264,10 +265,10 @@ screen cm(): # Overlaps the screen "screen goal_hud_ui():" in script.rpy
 
     zorder 49 # Keep zorder below 50 to allow tooltips to properly display
     frame:
-        background "Goal_Frame_1.png"
+        background im.Scale("Goal_Frame_1.png", 260, 254)
         yalign 0.5
         xsize 260
-        ysize 250
+        ysize 254
         vbox:
             spacing -5
             textbutton "Cheat Menu" action [ToggleScreen("cm"), Hide("cmmc"), Hide("cmoc"), Hide("cmc"), Hide("cmw")] style "textbutton_style" text_style "textbutton_text_style" xsize 245 text_xalign 0.5 tooltip "Hides the cheat menu"
@@ -400,10 +401,11 @@ screen cmoc():
 
                 if capp: # Appearance sections
                     vbox:
-
                         textbutton "Hair Styles" action ToggleVariable("capph") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 # Expands to hairstyles
                         textbutton "Hair Color" action ToggleVariable("capphc") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 # Expands to hair color
                         textbutton "Face" action ToggleVariable("cappf") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 # Expands to faces
+                        textbutton "Eyes" action ToggleVariable("cappe") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 # Expands to faces
+                    vbox:
                         textbutton "Breasts" action ToggleVariable("cappt") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 # Expands to breasts
                         textbutton "Body" action ToggleVariable("cappb") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 # Expands to body
                         textbutton "Skin Color" action ToggleVariable("capps") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 # Expands to skin color
@@ -411,15 +413,13 @@ screen cmoc():
                 if capp and capph: # Hair Style Options
                     hbox:
                         vbox: # Column 1
-
                             textbutton "Short Hair" action [SetField(the_person,"hair_style", short_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                             textbutton "Ponytail" action [SetField(the_person,"hair_style", ponytail), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                             textbutton "Messy Ponytail" action [SetField(the_person,"hair_style", messy_ponytail), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                             textbutton "Messy Short Hair" action [SetField(the_person,"hair_style", messy_short_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                             textbutton "Messy Long Hair" action [SetField(the_person,"hair_style", messy_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                            textbutton "Shaved Side Hair" action [SetField(the_person,"hair_style", shaved_side_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                         vbox: # Column 2
-
+                            textbutton "Shaved Side Hair" action [SetField(the_person,"hair_style", shaved_side_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                             textbutton "Twin Ponytails" action [SetField(the_person,"hair_style", twintail), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                             textbutton "Long Hair" action [SetField(the_person,"hair_style", long_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                             textbutton "Bow Hair" action [SetField(the_person,"hair_style", bow_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
@@ -459,8 +459,8 @@ screen cmoc():
                             textbutton "B Cups" action [SetField(the_person,"tits", "B"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                             textbutton "C Cups" action [SetField(the_person,"tits", "C"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                             textbutton "D Cups" action [SetField(the_person,"tits", "D"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                            textbutton "DD Cups" action [SetField(the_person,"tits", "DD"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                         vbox: # Column 2
+                            textbutton "DD Cups" action [SetField(the_person,"tits", "DD"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                             textbutton "DDD Cups" action [SetField(the_person,"tits", "DDD"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                             textbutton "E Cups" action [SetField(the_person,"tits", "E"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                             textbutton "F Cups" action [SetField(the_person,"tits", "F"), Function(cheat_redraw_breasts)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
@@ -474,6 +474,18 @@ screen cmoc():
                             textbutton "Curvy Body" action [SetField(the_person,"body_type", "curvy_body"), Function(cheat_redraw_body)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                         vbox: # Column 2, unused
                             pass
+
+                if capp and cappe: # Eye Color Options
+                    hbox:
+                        vbox: # Column 1
+                            textbutton "Dark Blue" action [SetField(the_person,"eyes", list_of_eyes[0]), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Light Blue" action [SetField(the_person,"eyes", list_of_eyes[1]), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Green" action [SetField(the_person,"eyes", list_of_eyes[2]), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Brown" action [SetField(the_person,"eyes", list_of_eyes[3]), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Grey" action [SetField(the_person,"eyes", list_of_eyes[4]), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        vbox: # Column 2, unused
+                            pass
+
 
                 if capp and capps: # Skin Color Options
                     hbox:
@@ -518,16 +530,45 @@ screen cmoc():
 
                 if cpy and cpyt: # Personality Type selection
                     hbox:
+
                         vbox:
                             textbutton "Current: [the_person.personality.personality_type_prefix]" action NullAction() style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
-                            textbutton "Relaxed Personality" action [SetField(the_person,"personality", relaxed_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
-                            textbutton "Reserved Personality" action [SetField(the_person,"personality", reserved_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
-                            textbutton "Wild Personality" action [SetField(the_person,"personality", wild_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
-                            textbutton "Bimbo Personality" action [SetField(the_person,"personality", bimbo_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
-                            textbutton "Stephanie's Personality" action [SetField(the_person,"personality", stephanie_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "relaxed_personality" in globals():
+                                textbutton "Relaxed" action [SetField(the_person,"personality", relaxed_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "reserved_personality" in globals():
+                                textbutton "Reserved" action [SetField(the_person,"personality", reserved_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "wild_personality" in globals():
+                                textbutton "Wild" action [SetField(the_person,"personality", wild_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "bimbo_personality" in globals():
+                                textbutton "Bimbo" action [SetField(the_person,"personality", bimbo_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+
                         vbox:
-                            textbutton "Sister's Personality" action [SetField(the_person,"personality", lily_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
-                            textbutton "Mom's Personality" action [SetField(the_person,"personality", mom_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "lily_personality" in globals():
+                                textbutton "Sister's" action [SetField(the_person,"personality", lily_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "mom_personality" in globals():
+                                textbutton "Mom's" action [SetField(the_person,"personality", mom_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "stephanie_personality" in globals():
+                                textbutton "Stephanie's" action [SetField(the_person,"personality", stephanie_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "nora_personality" in globals():
+                                textbutton "Nora's" action [SetField(the_person,"personality", nora_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "aunt_personality" in globals():
+                                textbutton "Aunt's" action [SetField(the_person,"personality", aunt_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "cousin_personality" in globals():
+                                textbutton "Cousin's" action [SetField(the_person,"personality", cousin_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                        vbox:
+                            if "FA_personality" in globals():
+                                textbutton "Flight Attendant" action [SetField(the_person,"personality", FA_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "cougar_personality" in globals():
+                                textbutton "Cougar" action [SetField(the_person,"personality", cougar_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "athlete_personality" in globals():
+                                textbutton "College Athlete" action [SetField(the_person,"personality", athlete_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "starbuck_personality" in globals():
+                                textbutton "Starbuck's" action [SetField(the_person,"personality", starbuck_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "hotwife_personality" in globals():
+                                textbutton "Hotwife" action [SetField(the_person,"personality", hotwife_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+                            if "Sarah_personality" in globals():
+                                textbutton "Sarah's" action [SetField(the_person,"personality", Sarah_personality)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 250
+
 
 screen cmc(): # Cheats for business / company
     zorder 49
@@ -685,7 +726,9 @@ screen cmw(): # Cheats affecting the general world
                 vbox:
                     textbutton "Late for Work" action Call("late_for_work_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "An employee is late for work in the morning"
                     textbutton "Mall Introduction" action Call("mall_introduction_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "A friend introduces a stranger in the mall"
-
+                    textbutton "Daughter Work" action Call("daughter_work_crisis_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "An employee asks to hire her daughter"
+                    textbutton "Horny at Work" action Call("horny_at_work_crisis_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "When you haven't had sex today, you get horny at work"
+                    textbutton "Laundry Night" action Call("dirty_laundry_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "You forgot to do your laundry for the next day"
 
             if cml == True and cmlpage == 4: # Page 4
                 vbox:

@@ -111,55 +111,99 @@ init 2: # Need to allow for None name roles in this screen as well.
                 $ master_opinion_dict = dict(the_person.opinions, **the_person.sexy_opinions)
                 frame:
                     background "#1a45a1aa"
-                    xsize 415
+                    xsize 325
                     ysize 400
                     vbox:
                         text "Loves" style "menu_text_style" size 22
-                        for opinion in sorted(master_opinion_dict):
-                            if master_opinion_dict[opinion][0] == 2:
-                                if master_opinion_dict[opinion][1]:
-                                    text "   " + opinion.title() style "menu_text_style"
-                                else:
-                                    text "   ????" style "menu_text_style"
+                        viewport:
+                            scrollbars "vertical"
+                            mousewheel True
+                            frame:
+                                xsize 315
+                                background None
+                                vbox:
+                                    for opinion in sorted(master_opinion_dict):
+                                        if master_opinion_dict[opinion][0] == 2:
+                                            if master_opinion_dict[opinion][1]:
+                                                text "   " + opinion.title() style "menu_text_style"
+                                            else:
+                                                text "   ????" style "menu_text_style"
 
                 frame:
                     background "#1a45a1aa"
-                    xsize 415
+                    xsize 325
                     ysize 400
                     vbox:
                         text "Likes" style "menu_text_style" size 22
-                        for opinion in sorted(master_opinion_dict):
-                            if master_opinion_dict[opinion][0] == 1:
-                                if master_opinion_dict[opinion][1]:
-                                    text "   " + opinion.title() style "menu_text_style"
-                                else:
-                                    text "   ????" style "menu_text_style"
+                        viewport:
+                            scrollbars "vertical"
+                            mousewheel True
+                            frame:
+                                xsize 315
+                                background None
+                                vbox:
+                                    for opinion in sorted(master_opinion_dict):
+                                        if master_opinion_dict[opinion][0] == 1:
+                                            if master_opinion_dict[opinion][1]:
+                                                text "   " + opinion.title() style "menu_text_style"
+                                            else:
+                                                text "   ????" style "menu_text_style"
 
                 frame:
                     background "#1a45a1aa"
-                    xsize 415
+                    xsize 325
                     ysize 400
                     vbox:
                         text "Dislikes" style "menu_text_style" size 22
-                        for opinion in sorted(master_opinion_dict):
-                            if master_opinion_dict[opinion][0] == -1:
-                                if master_opinion_dict[opinion][1]:
-                                    text "   " + opinion.title() style "menu_text_style"
-                                else:
-                                    text "   ????" style "menu_text_style"
+                        viewport:
+                            scrollbars "vertical"
+                            mousewheel True
+                            frame:
+                                xsize 315
+                                background None
+                                vbox:
+                                    for opinion in sorted(master_opinion_dict):
+                                        if master_opinion_dict[opinion][0] == -1:
+                                            if master_opinion_dict[opinion][1]:
+                                                text "   " + opinion.title() style "menu_text_style"
+                                            else:
+                                                text "   ????" style "menu_text_style"
 
                 frame:
                     background "#1a45a1aa"
-                    xsize 415
+                    xsize 325
                     ysize 400
                     vbox:
                         text "Hates" style "menu_text_style" size 22
-                        for opinion in sorted(master_opinion_dict):
-                            if master_opinion_dict[opinion][0] == -2:
-                                if master_opinion_dict[opinion][1]:
-                                    text "   " + opinion.title() style "menu_text_style"
-                                else:
-                                    text "   ????" style "menu_text_style"
+                        viewport:
+                            scrollbars "vertical"
+                            mousewheel True
+                            frame:
+                                xsize 315
+                                background None
+                                vbox:
+                                    for opinion in sorted(master_opinion_dict):
+                                        if master_opinion_dict[opinion][0] == -2:
+                                            if master_opinion_dict[opinion][1]:
+                                                text "   " + opinion.title() style "menu_text_style"
+                                            else:
+                                                text "   ????" style "menu_text_style"
+
+                frame:
+                    background "#1a45a1aa"
+                    xsize 325
+                    ysize 400
+                    vbox:
+                        text "Other Relations" style "menu_text_style" size 22
+                        viewport:
+                            scrollbars "vertical"
+                            mousewheel True
+                            frame:
+                                xsize 315
+                                background None
+                                vbox:
+                                    for relationship in town_relationships.get_relationship_type_list(the_person, visible = True):
+                                        text "   " + relationship[0].name + " " + relationship[0].last_name + " [[" + relationship[1] + "]" size 14 style "menu_text_style"
 
             hbox:
                 xsize 1750

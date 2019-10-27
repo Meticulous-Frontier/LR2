@@ -1,7 +1,7 @@
 init:
     python:
         SB_threesome_doggy_plus_oral = SB_Threesome_Position(name = "Doggy with Oral",
-            slut_requirement = 60,
+            slut_requirement = 80,
             slut_cap = 120,
             position_one_tag = "missionary",
             position_two_tag = "doggy",

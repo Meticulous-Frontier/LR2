@@ -1,6 +1,6 @@
 ﻿init:
     python:
-        SB_Oral_Laying = Position("Cunnilingus",30,70,"missionary","Lay","Vagina","Oral",25,15,[],
+        SB_Oral_Laying = Position("Cunnilingus",30,55,"missionary","Lay","Vagina","Oral",25,15,[],
         "intro_SB_Oral_Laying",
         ["scene_SB_Oral_Laying_1","scene_SB_Oral_Laying_2"],
         "outro_SB_Oral_Laying",

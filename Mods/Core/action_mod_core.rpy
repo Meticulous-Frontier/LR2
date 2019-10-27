@@ -15,10 +15,9 @@
     #         return True
 
     # def gym_initialization(self):
-    #     gym.background_image = Image("Mods/mods/Room/images/Gym_Background.jpg") #As long a there is a mall background for the gym, replace it with our gym background
+    #     gym.background_image =  room_background_image("Gym_Background.jpg") #As long a there is a mall background for the gym, replace it with our gym background
     #     # add gym shower to active places
     #     list_of_places.append(gym_shower)
-    #     gym.link_locations_two_way(gym_shower)
     #     gym.actions.append(self)
     #     return
 
@@ -81,14 +80,13 @@ init 2 python:
             self.enabled = enabled
             self.allow_disable = allow_disable
             self.category = category
-            self.priority = priority
             self.on_enabled_changed = on_enabled_changed
             self.options_menu = options_menu
             self.is_crisis = is_crisis
             self.is_morning_crisis = is_morning_crisis
             self.crisis_weight = crisis_weight
 
-            Action.__init__(self, name, requirement, effect, args, requirement_args, menu_tooltip)
+            Action.__init__(self, name, requirement, effect, args, requirement_args, menu_tooltip, priority)
 
             ActionMod._instances.add(self)
 

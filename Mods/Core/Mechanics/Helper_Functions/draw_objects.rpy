@@ -50,7 +50,7 @@ init 2 python:
     # NOTE: As long as you are working with the same prop you can move it around without having to hide it first.
     # For testing purposes: draw_object("lollipop", 0.25, "10", place_prop(yalign = 0.225, xalign = 0.907, rotate = 5))
     def draw_object(prop, size, layers = "Active", transform = place_prop): # Input would be draw_object("filename", size, layer, place_prop(args))
-        prop = Image("Mods/Room/images/props/" + prop + ".png")
+        prop = prop_image(prop + ".png")
         size = size
         name = "Prop:" + "[prop]"
         transform = transform

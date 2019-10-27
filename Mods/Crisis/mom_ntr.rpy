@@ -50,7 +50,7 @@ label mom_ntr_mod_action_label:
     else:
         $ encounter = 1
 
-    $ change_scene_display(bedroom)
+    $ bedroom.show_background()
     $ man_name = get_random_male_name()
     $ wife_name = get_random_name()
     while wife_name is the_person.name: ## Just to avoid stupid duplications
@@ -2295,6 +2295,6 @@ label mom_ntr_mod_action_label:
     $ the_person.sluttiness += 5
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-    $ change_scene_display(mc.location)
+    $ mc.location.show_background()
     $ renpy.scene("Active")
     return

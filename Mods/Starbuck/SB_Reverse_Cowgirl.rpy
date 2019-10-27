@@ -1,6 +1,6 @@
 init:
     python:
-        SB_reverse_cowgirl = Position("Reverse Cowgirl",60,100,"doggy","Lay","Vagina","Vaginal",22,18,[],
+        SB_reverse_cowgirl = Position("Reverse Cowgirl",60,80,"doggy","Lay","Vagina","Vaginal",22,18,[],
         "intro_SB_reverse_cowgirl",
         ["scene_SB_reverse_cowgirl_1","scene_SB_reverse_cowgirl_2"],
         "outro_SB_reverse_cowgirl",
@@ -9,8 +9,6 @@ init:
         "orgasm_SB_reverse_cowgirl",
         opinion_tags = ["taking control","vaginal sex"])
         list_of_girl_positions.append(SB_reverse_cowgirl)
-        list_of_girl_positions.append(SB_reverse_cowgirl)
-        #list_of_positions.append(SB_reverse_cowgirl)   ###20,120 for testing purpose only###
 
 init 1:
     python:

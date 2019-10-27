@@ -309,6 +309,6 @@ label SB_caught_masturbating_crisis_label():
 
     $ the_person.reset_arousal()
     $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
-    $ change_scene_display(mc.location)
+    $ mc.location.show_background()
     $ renpy.scene("Active")
     return

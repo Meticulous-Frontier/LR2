@@ -18,7 +18,7 @@ init 2 python:
 
     business_meeting_action = ActionMod("Business Meeting", business_meeting_requirement, "business_meeting_action_label",
         menu_tooltip = "An employee wants to discuss some business with you.", category = "Business", is_crisis = True, crisis_weight = business_meeting_weight)
-   
+
 label business_meeting_action_label:
     $ the_person = get_random_from_list(mc.business.get_employee_list())
     $ the_place = mc.business.get_employee_workstation(the_person)
@@ -31,7 +31,7 @@ label business_meeting_action_label:
 
     "You meet up in an empty office of the [the_place.name] department."
 
-    $ change_scene_display(the_place)
+    $ the_place.show_background()
     $ the_person.draw_person(position="sitting", emotion="happy")
 
     call business_meeting_introduction(the_person) from _call_business_meeting_introduction_1
@@ -60,11 +60,12 @@ label business_meeting_action_label:
     else:
         "You make a call to [hr_employee.title] from HR to implement some of the changes you discussed with [the_person.title]."
     $ mc.business.effectiveness_cap += change
+    $ business_HR_eff_bonus += change
     #$ mc.log_event("Company Efficiency: " + str(mc.business.effectiveness_cap) + "%", "float_text_grey")
     "The changes increased your business effectivity by [change]%%."
 
     $ the_person.reset_arousal()
-    $ change_scene_display(mc.location)
+    $ mc.location.show_background()
     $ renpy.scene("Active")
     return
 
@@ -136,7 +137,7 @@ label business_meeting_end(person):
     $ the_person.draw_person(position="walking_away")
 
     if person.sluttiness < 40:
-        "You watch her walking away, deciding what to do next." 
+        "You watch her walking away, deciding what to do next."
     else:
         "After contemplating what just happened, you decide what to do next."
     return

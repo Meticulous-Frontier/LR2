@@ -5,12 +5,16 @@ init -3 python:
     FETISH_SKILL_RAISE_CHANCE = 50
     FETISH_DEVELOPMENT_CHANCE = 50
     FETISH_BASIC_OPINION_LIST = ["giving handjobs", "being fingered", "kissing", "masturbating", "big dicks"]
-    FETISH_ANAL_OPINION_LIST = ["anal sex", "showing her ass", "being submissive"]
+    FETISH_ANAL_OPINION_LIST = ["anal sex", "doggy style sex", "showing her ass", "sex standing up", "anal creampies" ]
     FETISH_ORAL_OPINION_LIST = ["giving blowjobs", "getting head", "drinking cum"]
-    FETISH_VAGINAL_OPINION_LIST = ["doggy style sex", "missionary style sex", "sex standing up", "vaginal sex",]
-    FETISH_CUM_OPINION_LIST = ["drinking cum", "creampies", "cum facials", "being covered in cum", "bareback sex"]
+    FETISH_VAGINAL_OPINION_LIST = ["missionary style sex", "creampies", "sex standing up", "vaginal sex", "doggy style sex", "being fingered"]
+    FETISH_CUM_OPINION_LIST = ["drinking cum", "creampies", "anal creampies", "cum facials", "being covered in cum", "bareback sex"]
     #suggestion add exhibitionist fetish and move some of the basic fetishes to this one
-    FETISH_EXHIBITION_OPINION_LIST = ["not wearing underwear", "not wearing anything", "showing her tits", "showing her ass", "public sex", "lingerie", "skimpy outfits", "skimpy uniforms", "cheating on men" ]
+    FETISH_EXHIBITION_OPINION_LIST = ["not wearing underwear", "not wearing anything", "showing her tits", "showing her ass", "public sex", "lingerie", "skimpy outfits", "skimpy uniforms" ]
+    #relation fetishes (impact relationship with people) still need to workout how to make this happen
+    FETISH_RELATION_OPTION_LIST = ["cheating on men", "incest"]
+    # these fetishes could be used for 'slave' / 'dominatrix'
+    FETISH_BDSM_OPTION_LIST = ["being submissive", "taking control"]
 
     FETISH_EVENT_TARGET = None
     #global FETISH_VAGINAL_EVENT_INUSE, FETISH_ANAL_EVENT_INUSE
@@ -22,7 +26,7 @@ init -3 python:
     FETISH_RESEARCH_MID_TIER = 1          #Default = 2
     FETISH_RESEARCH_FINAL_TIER = 2      #Default = 3
     FETISH_PRODUCTION_COST = 20     #Default 100
-    FETISH_OPINION_VALUE = 10       #To work on balance issues#
+    FETISH_OPINION_VALUE = 2       #To work on balance issues#
     SB_MOD_RANDOM_EVENT_CHANCE = 20
     SB_MOD_DEFAULT_RANDOM_EVENT_CHANCE = 20
     SB_MOD_MC_AROUSAL_MULT = 1.0     #Default arousal multiplier for the MC

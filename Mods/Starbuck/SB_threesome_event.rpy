@@ -92,6 +92,6 @@ label SB_fetish_vaginal_family_threesome_label():
         del the_person_one
         del the_person_two
 
-        change_scene_display(mc.location)
+        mc.location.show_background()
         renpy.scene("Active")
     return

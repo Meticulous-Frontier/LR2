@@ -27,6 +27,8 @@ init -2 python:
     def casual_hotwife_get_a_drink_requirement(the_person):  #For now this should always return true. May be other conditions not to in the future#
         if the_person.event_triggers_dict.get("hotwife_blowjob_text_enable", 0) == 1:
             return False
+        if mc.location != downtown_bar:
+            return "Not in Bar"
         return True
 
     def casual_hotwife_bathroom_blowjob_requirement(the_person):
@@ -34,13 +36,14 @@ init -2 python:
             return False
         if the_person.event_triggers_dict.get("hotwife_blowjob_text_enable", 0) == 1:
             return False
-        if the_person.event_triggers_dict.get("hotwife_blowjob_enable", 0) == 1:
-            #TODO Check to see if you are at the bar!!!
-            return True
+        if mc.location != downtown_bar:
+            return "Not in Bar"
         elif mc.charisma < 4:
             return "Requires higher Charisma"
         elif the_person.sluttiness < 25:
             return "Requires higher sluttiness"
+        elif the_person.event_triggers_dict.get("hotwife_blowjob_enable", 0) == 1:
+            return True
         else:
             return "Grab a drink with her first"
         return False
@@ -58,6 +61,9 @@ init -2 python:
             return False
         if the_person.event_triggers_dict.get("hotwife_progress", 0) < 2:
             return False
+        
+        if mc.location != downtown_bar:
+            return "Not in Bar"
         elif mc.charisma < 5:
             return "Requires higher Charisma"
         elif the_person.sluttiness < 40:
@@ -514,12 +520,10 @@ label casual_hotwife_dancing_sex_label(the_person):
             "You stop for a second and admire [the_person.title], her body on display in front of you."
         else:
             "Piece by piece, you take [the_person.title]'s clothes off."
-            $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-            while strip_choice is not None:
-                $ the_person.draw_animated_removal(strip_choice)
-                "You gently strip off [the_person.possessive_title]'s [strip_choice.name]."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+
+            $ the_person.strip_outfit(position = "against_wall")
             $ the_person.change_arousal(20)
+
             "Once finished, You stop for a second and admire [the_person.title], her body on display in front of you."
         the_person.char "Oh! Shit I almost forgot!"
         "[the_person.possessive_title] grabs her purse. She rummages through it for a moment then pulls out her phone."
@@ -582,7 +586,7 @@ label casual_hotwife_dancing_sex_label(the_person):
     else:   #We've done this before
         mc.name "Hey, [the_person.title]. You up for some dancing?"
         "[the_person.possessive_title] smiles."
-        the_person.char "You knowit! Let's go!"
+        the_person.char "You know it! Let's go!"
         "You follow [the_person.title] out on to the dance floor. The bar is playing some pretty upbeat, fun music."
         "You waste no time and grab [the_person.possessive_title]. You sync your movements to the beat and begin to move your bodies to the beat."
         $ the_person.draw_person (position = "back_peek")
@@ -647,7 +651,7 @@ label casual_hotwife_sex_invite_label(the_person):
 label casual_hotwife_her_place_label(the_person):
     "You head over to [the_person.title]'s place. You can't believe you're gonna fuck her in front of her husband!"
     $ mc.change_location(the_person.home)
-    $ renpy.show(mc.location.name,what=mc.location.background_image)
+    $ mc.location.show_background()
     "You ring the doorbell. Soon [the_person.title] answers the door."
 
     $ CS_hotwife_lingerie = Outfit("Lingerie Set Classic White")
@@ -699,7 +703,7 @@ label casual_hotwife_her_place_label(the_person):
     $ the_person.reset_arousal()
     "You make your way back home. You can hardly believe your luck, fucking [the_person.title] in her house, in front of her husband, who is also the bartender!"
     $ mc.change_location(bedroom)
-    $ renpy.show(mc.location.name,what=mc.location.background_image)
+    $ mc.location.show_background()
     $ the_person.event_triggers_dict["hotwife_progress"] = 5
     return
 
@@ -743,7 +747,7 @@ label casual_hotwife_home_sex_label(the_person):
     $ the_person.reset_arousal()
     "You make your way back home after a sexy evening with [the_person.possessive_title]."
     $ mc.change_location(bedroom)
-    $ renpy.show(mc.location.name,what=mc.location.background_image)
+    $ mc.location.show_background()
 
     call advance_time from _call_advance_casual_hotwife_home_sex
     return
@@ -760,6 +764,7 @@ init 1301 python:              #Because Vren Init personality functionns at 1300
         valid_titles.append(the_person.name)
         if the_person.sluttiness > 40:
             valid_titles.append("Slutwife")
+            valid_titles.append("Cuckold Wife")
         return valid_titles
 
     def hotwife_possessive_titles(the_person):
@@ -1029,7 +1034,7 @@ label hotwife_hookup_accept(the_person):
     "You put your phone in your pocket and head to the bar."
 
     $ mc.change_location(downtown_bar)
-    $ renpy.show(mc.location.name,what=mc.location.background_image)
+    $ mc.location.show_background()
 
     "A few minutes later, you walk into the bar. You start walking back toward the women's restroom. The bartender nods to you as you pass the bar."
     $ the_person.draw_person(position = "stand4")
@@ -1120,7 +1125,7 @@ label hotwife_hookup_accept(the_person):
     "You give her a few tentative thrusts, then quickly pick up the pace and begin fucking her in earnest."
     "You set her phone to video mode, and take a clip of her backside rippling as you thrust in and out of her."
     "Your hips slap against [the_person.possessive_title]'s ass as you fuck her vigorously."
-    $ the_person.call_dialogue("sex_responses")
+    $ the_person.call_dialogue("sex_responses_vaginal")
     if mc.condom == True:
         "You grasp her ass with both hands and begin to grope her. You knead her cheeks as your hips slowly work your erection in and out of her."
         $ the_person.change_arousal(20) #90 + 8
@@ -1206,7 +1211,7 @@ label hotwife_hookup_accept(the_person):
                     $ the_person.change_slut_temp(2)
                     $ the_person.change_happiness(5)
                     mc.name "Get ready, I'm gonna cum!"
-                    "[the_peron.title] is incoherent, and doesn't process your words."
+                    "[the_person.title] is incoherent, and doesn't process your words."
                     "You plunge deep into her ass and hold it there while you cum. She gasps in time with each new shot of hot semen inside of her."
                     "You stand there for a minute, holding her hips in the air, you dick buried in her bowel as it softens. Eventually she speaks up."
                     the_person.char "Wow... okay... I think I can stand now..."

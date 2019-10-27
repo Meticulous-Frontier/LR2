@@ -38,8 +38,8 @@ label dungeon_room_action_label():
 label dungeon_room_appoint_slave_label():
 
     while True:
-        $ people_list = ["Turn into slave"]
-        $ people_list.extend(mc.location.people + ["Back"])
+        $ people_list = get_sorted_people_list(mc.location.people, "Turn into slave", ["Back"])
+
         call screen main_choice_display([people_list])
         $ person_choice = _return
         $ del people_list

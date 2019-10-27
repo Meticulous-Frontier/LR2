@@ -8,7 +8,7 @@ init 1400 python:
 
     salon_manager_personality = Personality("salon_manager", default_prefix = "wild", #Based on wild style personality
         common_likes = ["skirts", "small talk", "the weekend", "the colour purple", "makeup", "hiking", "flirting"],
-        common_sexy_likes = ["doggy style sex", "giving blowjobs", "giving head", "anal sex", "public sex", "skimpy outfits", "anal sex", "showing her tits", "showing her ass", "being submissive", "creampies", "drinking cum", "cum facials"],
+        common_sexy_likes = ["doggy style sex", "giving blowjobs", "getting head", "anal sex", "public sex", "skimpy outfits", "anal creampies", "showing her tits", "showing her ass", "being submissive", "creampies", "drinking cum", "cum facials"],
         common_dislikes = ["Mondays", "the colour yellow", "supply work", "conservative outfits", "work uniforms", "pants"],
         common_sexy_dislikes = ["taking control", "bareback sex"],
         titles_function = wild_titles, possessive_titles_function = salon_manager_possessive_titles, player_titles_function = wild_player_titles)

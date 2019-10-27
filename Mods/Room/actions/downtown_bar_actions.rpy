@@ -43,8 +43,8 @@ label downtown_bar_drink_label():
 
         "Do you wish to introduce yourself, perhaps grace her with a free- of charge drink?"
 
-    $ people_list = ["Drink with"]
-    $ people_list.extend(known_people_at_location(mc.location) + unknown_people_at_location(mc.location) + [new_person, "Back"])
+    $ people_list = get_sorted_people_list(known_people_at_location(mc.location) + unknown_people_at_location(mc.location), "Drink with", [new_person, "Back"])
+
     call screen main_choice_display([people_list])
     $ person_choice = _return
     $ del people_list

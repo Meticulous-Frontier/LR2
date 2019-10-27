@@ -14,7 +14,7 @@ init 3 python:
 
     # the gym is initialized when the action mod is loaded and also links the gym_shower to the gym
     def gym_initialization(self):
-        gym.background_image = Image(room_background_image("Gym_Background.jpg")) #As long a there is a mall background for the gym, replace it with our gym background
+        gym.background_image = room_background_image("Gym_Background.jpg") #As long a there is a mall background for the gym, replace it with our gym background
 
         # add gym shower to active places
         list_of_places.append(gym_shower)
@@ -26,8 +26,8 @@ init 3 python:
         initialization = gym_initialization, menu_tooltip = "Bring a person to the gym to train their body.", category="Mall")
 
 label select_person_for_gym():
-    $ people_list = ["Train with"]
-    $ people_list.extend(known_people_in_the_game([mc]) + ["Back"])
+    $ people_list = get_sorted_people_list(known_people_in_the_game([mc]), "Train with", ["Back"])
+
     call screen main_choice_display([people_list])
     $ person_choice = _return
     $ del people_list
@@ -90,13 +90,28 @@ init 2 python:
     gym_clothes_sexy.add_lower(booty_shorts.get_copy(),colour_pink)
     gym_clothes_sexy.add_feet(sneakers.get_copy(),colour_white)
 
-label train_in_gym(person):
-    python:
-        change_scene_display(gym)
-        if person.sluttiness > 40 or person.arousal > 35:
+    gym_clothes_slutty = Outfit("Slutty Gym Clothes")
+    gym_clothes_slutty.add_upper(lingerie_one_piece.get_copy(),colour_pink)
+    gym_clothes_slutty.add_feet(sneakers.get_copy(),colour_pink)
+    gym_clothes_slutty.add_accessory(lipstick.get_copy(), colour_pink)
+    gym_clothes_slutty.add_accessory(wide_choker.get_copy(), colour_pink)
+    gym_clothes_slutty.add_accessory(heavy_eye_shadow.get_copy(), [0,0,0,.9])
+    gym_clothes_slutty.add_accessory(light_eye_shadow.get_copy(), colour_pink)
+
+    def set_gym_outfit(person):
+        if person.sluttiness > 70 or person.arousal > 70:
+            person.outfit = gym_clothes_slutty.get_copy()
+        elif person.sluttiness > 40 or person.arousal > 35:
             person.outfit = gym_clothes_sexy.get_copy()
         else:
             person.outfit = gym_clothes.get_copy()
+        return
+
+
+label train_in_gym(person):
+    python:
+        gym.show_background()
+        set_gym_outfit(person)
         person.draw_person(emotion="default")
         change = renpy.random.random() * 4 # Maximum change is 4 pounds
 
@@ -120,16 +135,16 @@ label train_in_gym(person):
 
     "After the session [person.possessive_title] weighs [new_weight]."
 
-    if body_changed:
+    if body_changed or person.sluttiness > 50:
         $ person.draw_person(person.body_type)
-        $ person.change_stats(happiness = 10, love = 5, arousal = 25, slut_temp = 5)
+        $ person.change_stats(happiness = 10, love = 5, arousal = renpy.random.randint(15, 35), slut_temp = 5)
         if person.sluttiness > 20:
             person.char "Wow, these gym sessions make me feel just great, somehow I get turned on too... would you mind?"
             menu:
                 "Have Sex" if mc.current_stamina > 0:
                     mc.name "Lets go to the shower room."
                     person.char "Lead the way, [person.mc_title]."
-                    $ change_scene_display(gym_shower)
+                    $ gym_shower.show_background()
 
                     call fuck_person(person) from _call_fuck_person_gym_training
 
@@ -137,7 +152,7 @@ label train_in_gym(person):
                     pass
                 "Another Time":
                     mc.name "Sorry [person.title], another time."
-                    $ person.change_happiness(-10)
+                    $ person.change_happiness(-5)
         else:
             person.char "Amazing, these gym session are really paying off."
     person.char "Thank you, [person.mc_title]."
@@ -150,5 +165,5 @@ label train_in_gym(person):
 
     $ person.reset_arousal()
     $ person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-    $ change_scene_display(mc.location)
+    $ mc.location.show_background()
     return

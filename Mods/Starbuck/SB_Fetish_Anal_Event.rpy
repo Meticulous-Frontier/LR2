@@ -96,6 +96,7 @@ label SB_fetish_anal_label(the_person):
             ###Reset Arousal
             #$ the_person.SB_fetish = "anal sex"
             $ the_person.sexy_opinions["anal sex"] = [FETISH_OPINION_VALUE, True]
+            $ the_person.sexy_opinions["anal creampies"] = [FETISH_OPINION_VALUE, True]
             "[the_person.possessive_title] takes a few minutes to recover, then turns to you."
             $ the_person.draw_person()
             the_person.char "Wow, that was amazing, [the_person.mc_title]. I don't know what has been coming over me lately... I just can't stop thinking about you bending me over..."
@@ -104,10 +105,10 @@ label SB_fetish_anal_label(the_person):
             "You tease her."
             the_person.char "I can't stop thinking about how full it feels... it feels so right when you push into my ass. It gets me so hot imagining it..."
             "She's been under the influence of your serums for a while now... you wonder if she's developed an anal fetish..."
+            $ the_person.special_role.append(anal_fetish_role)
             "[the_person.possessive_title] gets her butt plug. She slowly pushes it back into her ass."
             the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
             "You wave goodbye to [the_person.possessive_title] and get ready to head home for the night."
-            $ the_person.special_role.append(anal_fetish_role)
             $ SB_CALCULATE_RANDOM_EVENT_RATE()
         "Refuse":
             the_person.char "I'm sorry to hear that..." #TODO finish this
@@ -469,11 +470,13 @@ label SB_free_strip_scene(the_person):
 #SBA40
 label SB_mom_anal_pay_label():
     $ the_person = mom
-    $ renpy.show(bedroom.name,what=bedroom.background_image)
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
     "You're getting ready for bed when [the_person.possessive_title] calls from downstairs."
     the_person.char "[the_person.mc_title], could we talk for a moment?"
     mc.name "Sure, down in a second."
-    $ renpy.show(kitchen.name,what=kitchen.background_image)
+    $ mc.change_location(kitchen)
+    $ mc.location.show_background()    
     $ the_person.draw_person(position = "sitting")
     "[the_person.possessive_title] is sitting at the kitchen table, a collection of bills laid out in front of her."
     "She is fidgeting a bit. You can tell she is a little nervous about something."
@@ -501,7 +504,7 @@ label SB_mom_anal_pay_label():
             the_person.char "Thank you [the_person.mc_title]! Now, are you ready a show?"
             call SB_free_strip_scene(the_person) from _call_SB_free_strip_scene_SBA40
             "Now that she is naked, [the_person.possessive_title] quickly grabs your hand and leads you to her bedroom. When you get to her bed, she shoves you down on your back."
-            $ renpy.show(mom_bedroom.name,what=mom_bedroom.background_image)
+            $ mom_bedroom.show_background()
             the_person.char "Oh god, I need this so bad honey. You just lay back and let momma take care of you now."
             "[the_person.possessive_title] quickly strips you down. She reaches into her nightstand and grabs some lube. She hands it to you."
             the_person.char "Here! Can you get me, you know... ready?"
@@ -582,7 +585,7 @@ label SB_mom_anal_pay_label():
 
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-    $ change_scene_display(mc.location)
+    $ mc.location.show_background()
     $ renpy.scene("Active")
 
     return
@@ -590,11 +593,11 @@ label SB_mom_anal_pay_label():
 #SBA50
 label SB_mom_anal_friday_label():
     $ the_person = mom
-    $ renpy.show(bedroom.name,what=bedroom.background_image)
+    $ bedroom.show_background()
     "You're hanging out in your room when you here [the_person.possessive_title] call form her room."
     the_person.char "[the_person.mc_title], are you home? It's Friday night! Can you come to my room?"
     mc.name "Sure, down in a second."
-    $ renpy.show(mom_bedroom.name,what=mom_bedroom.background_image)
+    $ mom_bedroom.show_background()
     $ the_person.outfit = lingerie_wardrobe.pick_random_outfit()
     $ the_person.draw_person(position = "stand4")
     "[the_person.title] is standing next to her bed. You quickly shut her door and lock it."
@@ -673,7 +676,7 @@ label SB_mom_anal_friday_label():
 
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-    $ change_scene_display(mc.location)
+    $ mc.location.show_background()
     $ renpy.scene("Active")
     return
 
@@ -683,7 +686,7 @@ label SB_lily_anal_dp_fetish_label():
     "As you are finishing up with work for the day, you get a text on your phone. It is from Lily, [the_person.possessive_title]."
     the_person.char "Hey [the_person.mc_title]! Can you do me a favor? Meet me at the mall when you get off work. I need your help with something..."
     "You let her know you'll be there. You quickly finish up with your work and head over to the mall."
-    $ renpy.show(mall.name,what=mall.background_image)
+    $ mall.show_background()
     "When you get to the mall, you look around for a minute, then spot Lily. She waves to you then comes running over to you, giving you a big hug."
     $ the_person.draw_person(position = "stand4")
     the_person.char "Hey! Thanks for coming with me! I need your help with something!"
@@ -693,7 +696,7 @@ label SB_lily_anal_dp_fetish_label():
     the_person.char "Definitely! Don't worry, you'll be glad you came when you see where we are going."
     "Lily grabs you by the hand and leads you into the mall. It seems any inhibition she might have previously had being seen with her [the_person.mc_title] has vanished after being corrupted by your serums."
     "You are almost surprised when she leads you into the sex shop. The owner greets you as you walk in."
-    $ renpy.show(sex_store.name,what=sex_store.background_image)
+    $ sex_store.show_background()
     if starbuck.sluttiness > 50 or starbuck.love > 30:
         $ starbuck.draw_person(emotion = "happy")
         starbuck.char "Hello! Welcome to... Oh hey [the_person.mc_title]! Good to see you! Oh and you brought a partner! Hi I'm [starbuck.title]!"
@@ -751,7 +754,7 @@ label SB_lily_anal_dp_fetish_label():
     the_person.char "Okay... Go slow... but I'm ready!"
     call sex_description(the_person, SB_doggy_anal_dildo_dp, make_floor(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBA60
     if the_person.arousal > 150:
-        "[the_person.possessive_title] is a sweaty, heaving mess. You know she orgasmed multiple times from the intense sensations of the double penetration."
+        "[the_person.possessive_title] is a sweaty, heaving mess. You know she had multiple orgasms from the intense sensations of the double penetration."
         "She looks back at you in awe."
     elif the_person.arousal > 100:
         "[the_person.possessive_title] is laying on the floor, exhausted from the intensity of the double penetration."
@@ -767,12 +770,12 @@ label SB_lily_anal_dp_fetish_label():
     $ mc.change_location(sex_store)
     "After you both clean up, you leave the back room of the sex shop."
     $ starbuck.draw_person(emotion = "happy")
-    starbuck.char "Have a good day! Thanks for shopping at Starbuck's sex shop!"
+    starbuck.char "Have a good day! Thank you for shopping at Starbuck's sex shop!"
     if starbuck.sluttiness > 50:
-        "You wave goodbye to Starbuck. You note some telltale signs of arousal, flushed cheeks, and you can see her nipples are erect."
+        "You wave goodbye to [the_person.possessive_title]. You note some telltale signs of arousal, flushed cheeks, and you can see her nipples are erect."
         "Was she watching you somehow? Oh well, you decide to head out."
     else:
-        "You wave goodbye to Starbuck and head out."
+        "You wave goodbye to [the_person.possessive_title] and head out."
 
     $ FETISH_ANAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
@@ -795,8 +798,9 @@ label SB_starbuck_anal_intro():
     "You decide this is too good of an opportunity to pass up. You head over to the sex shop."
     #TODO Change locations to the sex shop
 
-    $ renpy.show(sex_store.name,what=sex_store.background_image)
     $ mc.change_location(sex_store)
+    $ mc.location.show_background()
+    
     "The door is locked so you give it a knock. [the_person.possessive_title] appears in the glass and quickly opens it for you."
     the_person.char "[the_person.mc_title]! You came!"
     "She gives you a quick wink."
@@ -813,7 +817,7 @@ label SB_starbuck_anal_intro():
     "You walk up behind her and begin to run your hands along her delicious hips. You can see goosebumps break out along her skin."
     mc.name "Thinking of getting fucked in the ass? My my, [the_person.possessive_title], you seem to have quite the affinity for anal these days?"
     "[the_person.title] looks back at you."
-    the_person.char "It's true... I don't understand why, but lately I just find myself cosntantly daydreaming about taking it in the ass. I can't even masturbate anymore without some kind of plug back there!"
+    the_person.char "It's true... I don't understand why, but lately I just find myself constantly daydreaming about taking it in the ass. I can't even masturbate anymore without some kind of plug back there!"
     "Sounds like [the_person.title] has developed an anal fetish!"
     "You reach down and start to slowly play with her plug. Her body stiffens as she feels it begin to slowly work in and out of her. She lets out a long, low moan."
     $ the_person.change_arousal(10)
@@ -833,6 +837,7 @@ label SB_starbuck_anal_intro():
     the_person.char "It's about fucking time! Give it to me good, [the_person.mc_title], you know I can take it!"
     call sex_description(the_person, doggy_anal, make_bed(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBA70
     $ the_person.sexy_opinions["anal sex"] = [FETISH_OPINION_VALUE, True]
+    $ the_person.sexy_opinions["anal creampies"] = [FETISH_OPINION_VALUE, True]
     $ the_person.special_role.append(anal_fetish_role)
     $ the_person.sex_skills["Anal"] = 6
     "It's pretty clear from her sexual performance and the way she talks to you, that [the_person.title] has developed an anal fetish."
@@ -913,10 +918,10 @@ label SB_starbuck_anal_swing_demo(the_person):
                     $ the_person.draw_person(position = "sitting")
                     "[the_person.title] sits down on the swing. You get behind her and grab the ropes. Her ass already well lubed from her plug, she is ready for you."
                     "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]"
-                    the_person.char "Oh fuck! Everytime I think about the first time you fucked me on this thing I touch myself... fuck me good [the_person.mc_title]!"
+                    the_person.char "Oh fuck! Every time I think about the first time you fucked me on this thing I touch myself... fuck me good [the_person.mc_title]!"
                 else:   #People watch
                     the_person.char "Here they come! This is gonna be great!"
-                    "[the_person.possessive_title] looks genuinely excited! She walks over next to swing and non-chalantly takes out her plug and sets it to the side."
+                    "[the_person.possessive_title] looks genuinely excited! She walks over next to swing and nonchalantly takes out her plug and sets it to the side."
                     $ get_random_from_list(mc.location.people).draw_person(position = "stand4")
                     "You watch as people begin to walk into the room..."
                     "You are about to fuck [the_person.title], in the ass, in front of customers..."
@@ -943,11 +948,9 @@ label SB_starbuck_anal_swing_demo(the_person):
                 the_person.char "Alright. Before we get started, let me get ready. You should probably get naked too!"
                 $ the_person.draw_person( position = "stand2")
                 "You start to strip down, but watch intently while [the_person.possessive_title] strips down along side you."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-                while strip_choice is not None:
-                    $ the_person.draw_animated_removal(strip_choice)
-                    "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-                    $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+
+                $ the_person.strip_outfit(position = "stand2")
+
                 "When you finish stripping, she turns her back to you."
                 $ the_person.draw_person(position = "back_peek")
                 mc.name "It's going to feel so good when I slide into that amazing ass of yours..."
@@ -959,20 +962,18 @@ label SB_starbuck_anal_swing_demo(the_person):
                 $ the_person.draw_person(position = "sitting")
                 "[the_person.title] sits down on the swing. You get behind her and grab the ropes. Her ass already well lubed from her plug, she is ready for you."
                 "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]"
-                the_person.char "Oh fuck! Everytime I think about the first time you fucked me on this thing I touch myself... fuck me good [the_person.mc_title]!"
+                the_person.char "Oh fuck! Every time I think about the first time you fucked me on this thing I touch myself... fuck me good [the_person.mc_title]!"
     else:
         the_person.char "Okay! Lets go!"
         $ the_person.draw_person(position = "walking_away")
         "[the_person.possessive_title] walks to the back room. You quickly follow her."
         "You get to the back room and [the_person.title] turns to you."
         the_person.char "Alright. Before we get started, let me get ready. You should probably get naked too!"
-        $ the_person.draw_person( position = "stand2")
+        $ the_person.draw_person(position = "stand2")
         "You start to strip down, but watch intently while [the_person.possessive_title] strips down along side you."
-        $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-        while strip_choice is not None:
-            $ the_person.draw_animated_removal(strip_choice)
-            "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-            $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+
+        $ the_person.strip_outfit(position = "stand2")
+        
         "When you finish stripping, she turns her back to you."
         $ the_person.draw_person(position = "back_peek")
         mc.name "It's going to feel so good when I slide into that amazing ass of yours..."
@@ -984,7 +985,7 @@ label SB_starbuck_anal_swing_demo(the_person):
         $ the_person.draw_person(position = "sitting")
         "[the_person.title] sits down on the swing. You get behind her and grab the ropes. Her ass already well lubed from her plug, she is ready for you."
         "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]"
-        the_person.char "Oh fuck! Everytime I think about the first time you fucked me on this thing I touch myself... fuck me good [the_person.mc_title]!"
+        the_person.char "Oh fuck! Every time I think about the first time you fucked me on this thing I touch myself... fuck me good [the_person.mc_title]!"
 
     call sex_description(the_person, SB_anal_swing, SB_make_swing(), 1, private= scene_private, girl_in_charge = False) from _call_sex_description_SBA080
 

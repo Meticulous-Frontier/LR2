@@ -12,7 +12,7 @@
 # INTRO
 # Hire
 # Story arc part one: She catches you in the office on Saturday, invites you to bar where she is meeting a friend. Close the bar down with her
-# Story arc part one: She comes looking for you at the office on Saturday. Invites you out to drinks with jut her. She winds up at your place.
+# Story arc part two: She comes looking for you at the office on Saturday. Invites you out to drinks with jut her. She winds up at your place.
 # Story arc part three: Catch her swiping breast enhancement serums on friday  NOTE: Part three has separate requirements from one and two and could happen before or after either part.
 # Following monday, observe the results
 # Story part four: Help her seduce another employee
@@ -31,7 +31,7 @@ init 2 python:
 
         Sarah_wardrobe = wardrobe_from_xml("Sarah_Wardrobe")
 
-        Sarah_home = Room("Sarah's home", "Sarah's home", [], apartment_background, [],[],[],False,[0.5,0.5], visible = False, hide_in_known_house_map = False)
+        Sarah_home = Room("Sarah's home", "Sarah's home", [], apartment_background, [],[],[],False,[0.5,0.5], visible = False, hide_in_known_house_map = False, lighting_conditions = standard_indoor_lighting)
         Sarah_home.add_object(make_wall())
         Sarah_home.add_object(make_floor())
         Sarah_home.add_object(make_bed())
@@ -45,14 +45,13 @@ init 2 python:
 
         #global Sarah_role
         global sarah
-        sarah = create_random_person(name = "Sarah", last_name ="Cooper", age = 20, body_type = "thin_body", face_style = "Face_3", tits = "A", height = 0.90, hair_colour = "brown", hair_style = short_hair, skin="white",\
-            eyes = "blue", personality = Sarah_personality, name_color = "#9400D3", dial_color = "#9400D3", starting_wardrobe = None, \
+        sarah = create_random_person(name = "Sarah", last_name ="Cooper", age = 21, body_type = "thin_body", face_style = "Face_3", tits = "A", height = 0.90, hair_colour = "brown", hair_style = short_hair, skin="white",\
+            eyes = "dark blue", personality = Sarah_personality, name_color = "#9400D3", dial_color = "#9400D3", starting_wardrobe = None, \
             stat_array = [4,3,3], skill_array = [5,3,2,1,1], sex_array = [1,2,3,1], start_sluttiness = 3, start_obedience = 0, start_happiness = 102, start_love = 3, \
             title = "Sarah", possessive_title = "Your childhood friend",mc_title = mc.name, relationship = "Single", kids = 0)
 
-        sarah.schedule[1] = mall #Testing
-        sarah.schedule[2] = mall
-        sarah.schedule[3] = mall
+        sarah.set_schedule([0,4], Sarah_home)
+        sarah.set_schedule([1,2,3], mall)
 
         sarah.home = Sarah_home
 
@@ -68,7 +67,7 @@ init 2 python:
 
 init -1 python:
     def Sarah_intro_requirement():
-        if day > 14:
+        if day > 2: #Early for testing
             if mc_at_home():
                 if time_of_day < 4:
                     return True
@@ -79,13 +78,20 @@ init -1 python:
             return True
         return False
 
-    def  Sarah_new_tits_requirement():
+    def Sarah_catch_stealing_requirement():
+        if time_of_day == 3:
+            if day%7 == 4:  #friday
+                if mc.is_at_work():
+                    return True
+        return False
+
+    def Sarah_new_tits_requirement():
         if time_of_day == 1:
             if day%7 == 0:  #Monday
                 return True
         return False
 
-    def  Sarah_epic_tits_requirement():
+    def Sarah_epic_tits_requirement():
         if time_of_day == 1:
             if day%7 == 0:  #Monday
                 return True
@@ -102,6 +108,7 @@ init -1 python:
         return False
 
     def Sarah_get_drinks_requirement():
+        return False            #This event is currently disabled until i finish writing it.
         if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 1: #Don't run this if epic tits is in progress
             return False
         if time_of_day > 1:
@@ -111,6 +118,17 @@ init -1 python:
                         return True
         return False
 
+    def Sarah_remove_bra_from_wardrobe(wardrobe):  #Test this function
+        for outfit in wardrobe.outfits:
+            if outfit.wearing_bra():
+                outfit.remove_clothing(outfit.get_bra())
+        for outfit in wardrobe.underwear_sets:
+            if outfit.wearing_bra():
+                outfit.remove_clothing(outfit.get_bra())
+
+    def test_bra_function(the_person):
+        Sarah_remove_bra_from_wardrobe(the_person.wardrobe)
+
 
 label Sarah_intro_label():
     $ the_person = sarah
@@ -118,7 +136,7 @@ label Sarah_intro_label():
     "You hear the doorbell ring. You don't remember expecting anyone? You go and answer it."
     $ the_person.draw_person()
     "Standing at your door is a cute brunette, fairly short, and strikingly familiar..."
-    "She appears to be holding some kind of clipboard. A door to door salewoman? Do those still exist?"
+    "She appears to be holding some kind of clipboard. A door to door saleswoman? Do those still exist?"
     the_person.char "Hello sir, I am [the_person.title], with Metropolis Power and Light, I was just wondering if you had ever thought about installing solar panels..."
     "She begins talking about the benefits and tax credits associated with solar panels, but you have a hard time listening."
     "This girl... she look so familiar! Where do you know her from!?!"
@@ -159,14 +177,14 @@ label Sarah_intro_label():
     the_person.char "... I was really hoping to eventually move up to HR director there. I love working with other people, and the small business atmosphere was great!"
     "HR director? You've never heard of such a position."
     mc.name "So, what kind of work would you do as an HR director that is different from a regular HR position?"
-    the_person.char "Well, I would be in charge of the direction of the company in general, as far as work values, help with compan morale..."
+    the_person.char "Well, I would be in charge of the direction of the company in general, as far as work values, help with company morale..."
     "She goes on to list multiple duties, aspects of running a small business that you had honestly never considered before."
     "When she finishes, you consider things for a moment. It would be REALLY handy to have someone around like this. She already has some work experience, and is young and ready to prove herself."
     "But, before you hire her, you would need to set up the HR director position at the company. Alternatively, you could still setup the new position, but hire someone else to fill the position."
     menu:
         "Offer to hire her":
-            mc.name "So, as it turns out, I just recently started a new business making small run pharmaceuticals. You seem pretty knowledgable, would you consider running the HR department?"
-            "[the_person.title] is caught completely off gaurd by your offer."
+            mc.name "So, as it turns out, I just recently started a new business making small run pharmaceuticals. You seem pretty knowledgeable, would you consider running the HR department?"
+            "[the_person.title] is caught completely off guard by your offer."
             the_person.char "Wait, so, you run a small business? I mean, I would love to, but I can't afford to do another unpaid internship right now."
             mc.name "I didn't say it was unpaid, this would definitely be a paid position."
             $ the_person.draw_person(position = "stand3", emotion = "happy")
@@ -202,7 +220,7 @@ label Sarah_hire_label():
     the_person.char "That sounds great! When can I get started?"
     mc.name "Tomorrow morning. I'll text the address after this call. We will go over your role and responsibilities when you get there."
     the_person.char "Yes! I'm so glad to finally be done selling solar panels. I'll see you in the morning!"
-    "You hang up the phone. You quickly text [the_person.title] the adress of your business."
+    "You hang up the phone. You quickly text [the_person.title] the address of your business."
     #TODO Hire Sarah officially here?
     $ HR_director_initial_hire = Action("Hire HR Director",HR_director_initial_hire_requirement,"HR_director_initial_hire_label", args = the_person) #Set the trigger day for the next monday. Monday is day%7 == 0
     $ mc.business.mandatory_crises_list.append(HR_director_initial_hire) #Add the event here so that it pops when the requirements are met.
@@ -215,7 +233,7 @@ label Sarah_third_wheel_label():
     "By yourself on the weekend at work, you get up for a minute and decide to stretch your legs and walk the hallways for a bit."
     "As you pass by the HR offices, you notice the HR Director's office door is open and the light is on. You decide to investigate."
     $ scene_manager.add_actor(the_person, position = "sitting")
-    "You see [the_person.possessive_title] sitting at her desk, rumaging through her drawers looking for something."
+    "You see [the_person.possessive_title] sitting at her desk, rummaging through her drawers looking for something."
     "She notices you step in her door and looks surprised."
     the_person.char "Oh! Hey [the_person.mc_title]. I was just looking for something I left in my desk. What are you doing here? Isn't this place closed down for the weekend?"
     mc.name "Yeah, well, I had a few things I wanted to get done over the weekend. Is it something I can help you find?"
@@ -233,8 +251,11 @@ label Sarah_third_wheel_label():
     $ scene_manager.update_actor(the_person, emotion = "happy")
     the_person.char "Aww, you wouldn't mind coming along? I hate being the third wheel. If you get bored you can leave at any time, I promise!"
     mc.name "Nonsense, let me just wrap up what I was doing, lockup and we'll go."
-    "You head downtown with [the_person.char]. You decide to walk since it isn't very, and enjoy talking with her as you go."
-    #TODO change to downtown background.
+    "You head downtown with [the_person.char]. You decide to walk since it isn't very far, and enjoy talking with her as you go."
+
+    $ mc.change_location(downtown)
+    $ mc.location.show_background()
+
     $ scene_manager.update_actor(the_person, position = "stand2")
     "Getting curious, you decide to ask her why she needed the condom at the office."
     mc.name "So... when I first stepped into your office you were looking for something in your desk... was that a condom?"
@@ -266,6 +287,9 @@ label Sarah_third_wheel_label():
     "[the_person.possessive_title] turns and continues walking. You walk beside her the rest of the way to the bar in silence."
 
     #TODO change background to bar.
+    $ mc.change_location(downtown_bar)
+    $ mc.location.show_background()
+
     $ sarah_friend = create_random_person() #TODO figure out how to properly delete this character later
     $ sarah_friend.title = sarah_friend.name
     $ sarah_friend.mc_title = mc.name
@@ -276,7 +300,7 @@ label Sarah_third_wheel_label():
     sarah_friend.char "Hey girl! Is he with you?"
     "She nods towards you."
     the_person.char "Yup! This is my bo... I mean, an old friend of mine. [mc.name] this is [sarah_friend.title]!"
-    "You make your acquantainces and sit down. [sarah_friend.title] also introduces you to her boyfriend."
+    "You make acquaintance and sit down. [sarah_friend.title] also introduces you to her boyfriend."
     "You chat for a bit, but notice that [sarah_friend.title] keeps checking you out. Normally you would be testing the waters with her, but with [the_person.title] here, you are a little leary."
     mc.name "Hey, how about I get us a couple drinks, [the_person.title]?"
     the_person.char "Oh! That sounds great! Can you get me an appletini?"
@@ -301,14 +325,74 @@ label Sarah_third_wheel_label():
     if sarah.event_triggers_dict.get("epic_tits_progress", 0) < 2:
         sarah_friend.char "My boyfriend... he just isn't attracted to her. I mean, have you seen her chest? Like, neither have we!"
         "You feel yourself getting angry at her crude remarks."
-    else:
+    elif sarah.event_triggers_dict.get("epic_tits_progress", 0) == 2:
         sarah_friend.char "My boyfriend can't stop staring at her tits. It's pissing me off! I can't believe she got implants, she is such a whore."
+        "You feel yourself getting angry at her crude remarks."
+    else:
+        sarah_friend.char "Like, one day she's got nothing, next thing I know, her tits are fucking huge!?! She's such a bimbo."
         "You feel yourself getting angry at her crude remarks."
     "You are able to restrain yourself, but only just barely."
     mc.name "[the_person.name] has an amazing body, and a great personality to go with it. If you and your boyfriend don't see that, I don't think anything with me can work out."
-    sarah_friend.char "Pfft, whatever."
-    #TODO
+    sarah_friend.char "Pfft, whatever. There's a dozen other dicks at the bar. Why don't you go find your date, she's probably sulking in the bathroom again!"
+    "You decide not to stoop to her level and to end your conversation there. You grab you and [the_person.title]'s drink and get up, not bothering to say goodbye."
+    $ scene_manager.remove_actor(sarah_friend, reset_actor = False)
+    "You walk over to where the restrooms are and wait for [the_person.title]. You stand there for several minutes but start to get worried about her."
+    "You don't seen anyone come in or out of the women's restroom so you decide to risk it. You walk to the door and slowly open it."
+    $ scene_manager.add_actor(the_person, position = "stand2", emotion = "sad")
+    "Inside you see [the_person.title] looking at herself in the mirror. She is forlorn and from the look of her makeup has obviously been crying."
+    mc.name "Hey, are you okay? I don't mean to invade your privacy, but I was starting to get worried about you."
+    "She quickly looks up and is surprised to see you. She briefly pulls herself together."
+    the_person.char "Is that [the_person.mc_title]? You're still here? I thought you would be gone by now..."
+    mc.name "What are you talking about?"
+    the_person.char "Well, [sarah_friend.title] said... she was asking me about you, asked if we were involved, and when I said no said she was going to make a pass at you tonight..."
+    the_person.char "I just assumed, when I left the table that, I mean, why didn't you go with her?"
+    "She assumed when her friend made a pass at you that you would bail on her! You quickly reassure her."
+    mc.name "[the_person.title]. I came here to support you, and to spend time with my long lost friend having fun and having a few drinks."
+    mc.name "If you think I'm going to miss out on that for a silly one night stand, you are mistaken."
+    $ scene_manager.update_actor(the_person, position = "stand2", emotion = "happy")
+    the_person.char "I'm sorry! I didn't mean that I think you're shallow or anything I just... Look, give me one more minute and I'll be right out, okay?"
+    mc.name "Sounds good!"
+    "You step out of he lady's room and shortly after [the_person.title] steps out and joins you. You hand her the appletini."
+    the_person.char "Thanks for waiting! I'm so sorry, I honestly thought you were going to go with them."
+    the_person.char "Thank you for... I mean, everything you've done for me. You gave me a job, you let me drag you out to a bar with strangers, and then stuck with me even when you probably shouldn't have..."
+    mc.name "You're crazy. It's not everday a long last childhood friend literally knocks on your front door."
+    the_person.char "You've always been amazing to me. I should have known better."
+    $ the_person.change_happiness(20)
+    $ the_person.change_obedience(10)
+    $ the_person.change_love(10)
+    "She takes a long sip of her drink. You begin to chat and catch up a bit."
+    $ scene_manager.update_actor(the_person, position = "sitting")
+    "You spend several hours with [the_person.title] sitting in a secluded booth catching up. After multiple appletinis and whiskeys, you are both feeling pretty good."
+    the_person.char "Well, I suppose it is getting pretty late. You have no idea how great this was. I don't want to say goodbye yet..."
+    "[the_person.title] thinks for a moment."
+    the_person.char "Hey... do you want to walk me home?"
+    mc.name "That sounds like a perfect way to end the evening. Let's go."
 
+    $ mc.change_location(downtown)
+    $ mc.location.show_background()
+
+    $ scene_manager.update_actor(the_person, position = "stand3")
+    "You walk together with [the_person.title] through the streets as she slowly leads the way. You converse a bit, but things are mostly quiet as you walk."
+    "Soon you are standing in front of the door to her apartment building."
+    the_person.char "Thanks for today! It really means a lot to me that you spend the whole evening with me."
+    mc.name "Consider it making up for lost time."
+    "[the_person.possessive_title] blushes and looks down."
+    mc.name "Goodnight."
+    "You step close and put your arms around her."
+    $ scene_manager.update_actor(the_person, position = "kissing")
+    "She quickly wraps her arms around you and embraces you. You move your head to kiss her on the cheek, but at the last second she moves her head and you find your lips pressing into hers."
+    the_person.char "Ohhh! Mmmmm..."
+    "At first she opens her eyes in surprise, but quickly closes them and begins to kiss you back."
+    "Her lips part and your tongue quickly takes advantage and begins to explore her soft lips. They taste sweet, with just a hint of appletini."
+    "You stand there in front of [the_person.title]'s building, holding each other and making out for several seconds until the kiss stops and you step back. Her eyes are still closed."
+    mc.name "I'll see you on Monday?"
+    $ scene_manager.update_actor(the_person, position = "stand4")
+    "She suddenly snaps back to reality. Her cheeks are flushed."
+    the_person.char "Right! Yes of course. Goodnight!"
+    $ time_of_day = 3
+    "She turns and heads into her building. You check your watch and realize how late it is."
+    $ scene_manager.remove_actor(the_person, reset_actor = False)
+    $ del sarah_friend #Cleanup?
 
 
 
@@ -316,12 +400,78 @@ label Sarah_third_wheel_label():
     return
 
 label Sarah_get_drinks_label():
-    pass
+    $ the_person = sarah
+    #TODO going out outfit
+    "Lost in thought as you get your work done in the silence of the weekend, a sudden voice startles you."
+    the_person.char "[the_person.mc_title]! I figured I'd find you around here on a Saturday again!"
+    "You look up to see the now familiar face of [the_person.title] standing in the doorway."
+    $ scene_manager.add_actor(the_person, emotion = "happy")
+    "It is crazy to think that just a short time ago, she was out of your life completely, but after you chance encounter, you feel like you have been friends forever."
+    mc.name "Hey [the_person.title]. You look great! Are you going out tonight?"
+    the_person.char "Actually, I'm not sure yet. I hope so! But I'm not sure if the guy I want to go out with is going to be able to go yet or not..."
+    mc.name "Is that so? I hope he can make it and that he treats you well!"
+    the_person.char "Hahaha, yeah me too. And don't worry, he's always treated me right."
+    "[the_person.possessive_title] looks down at the floor for a minute and mumbles something. Its obvious she is trying to work up the courage to ask you out, but it is cute watching her fumble a bit."
+    the_person.char "So... you uhh, have any big plans for the evening, [the_person.mc_title]?"
+    mc.name "Oh, well, certainly nothing as big as what you have planned! I'm just trying to get a little a head of work for next week."
+    the_person.char "Ah! That's good. It is pretty amazing how much work you put into this place. It's something I admire a lot..."
+    the_person.char "Anyway, I've seen how hard you work and I was thinking that, maybe we could go out and get a few drinks?"
+    "You decide to tease her a bit."
+    mc.name "Ahh, I see. You meeting another friend tonight? I'm not sure I want..."
+    "She quickly interrupts you."
+    the_person.char "No! God no, that was awful. I thought we could just go out, you know? Me and you?"
+    mc.name "You mean like a date?"
+    "She stutters a moment before she replies."
+    the_person.char "Well, ermm, I mean, uhh..."
+    the_person.char "Yeah. Pretty much that is exactly what I'm trying to ask..."
+    "You admire her courage. She must be really interested in you to have the guts to ask you out like this! If you accept, she might assume you are interested in a relationship..."
+    menu:
+        "Sounds great!": #Begin the dating path with Sarah
+            pass
+        "Just as friends.\n (Coming Later) (disabled)":
+            pass
+            #TODO when Vren release boyfriend girlfriend relations, evaluate this option to eventually shift to a FWB scenario over dating.
+    mc.name "I'm actually at a great stopping point. Let's go!"
+    the_person.char "Great! Do you want to walk again tonight? It was kind of nice when we walked together last time."
+    mc.name "Sounds good to me, it's good to get out and stretch the legs once in a while."
+    "You lock up on your way out and head toward downtown."
+
+    $ mc.change_location(downtown)
+    $ mc.location.show_background()
+
+    "You enjoy pleasant conversation with [the_person.possessive_title] as you walk downtown."
+    #TODO the convo
+
+
+
+
+    $ mc.change_location(downtown_bar)
+    $ mc.location.show_background()
+
+    "You walk into the bar. [the_person.title] spots an empty booth."
+    the_person.char "Hey, there's an empty table over there!"
+    mc.name "Go grab it. Appletini?"
+    the_person.char "Sounds great!"
+    $ scene_manager.update_actor(the_person, position = "walking_away")
+    "She walks off to the booth while you head up to the bar."
+    "You order your drinks with the bartender. If you wanted to, now would be a good time to slip a serum into her drink..."
+    menu:
+        "Slip in a serum":
+            "After you get the drinks, you carefully add a serum to it."
+            call give_serum(the_person) from _call_give_sarah_serum_001
+        "Leave alone":
+            "You decide to leave her drink alone."
+    "You grab your drinks and then head to the table. You sit down across from [the_person.title]."
+    $ scene_manager.update_actor(the_person, position = "sitting")
+    the_person.char "Thanks! I love these things..."
+    "She takes a long sip from her glass."
 
     return
 
+
 label Sarah_catch_stealing_label():
     $ the_person = sarah
+    $ sarah.event_triggers_dict["epic_tits_progress"] = 1
     "As you walk to halls of your company, getting ready to pack things up for the weekend, you notice [the_person.title] sneaking out of the research division."
     $ the_person.draw_person()
     mc.name "Hello [the_person.title]... what brings you to research on a late Friday evening?"
@@ -343,10 +493,10 @@ label Sarah_catch_stealing_label():
     $ the_person.change_love(3)
     $ the_person.draw_person(emotion = "happy")
     "She is very relieved to hear that."
-    the_person.char "Oh! Thank you [the_persom.mc_title]! I'm sorry, I won't be sneaky like that again. I just... you now I've always had such a small chest and I've always been really self concious about it."
+    the_person.char "Oh! Thank you [the_person.mc_title]! I'm sorry, I won't be sneaky like that again. I just... you know I've always had such a small chest and been really self concious about it."
     the_person.char "I've thought about getting implants before but... surgery seems so extreme for a cosmetic issue."
     mc.name "So, how many are you planning to take?"
-    the_person.char "Oh, well, research says we don't know for sure how effectice they are... I figure I'll just take one each day until I go up a few cup sizes."
+    the_person.char "Oh, well, research says we don't know for sure how effective they are... I figure I'll just take one each day until I go up a few cup sizes."
     the_person.char "I've already ordered new bras and everything. I'm going to keep a careful record of how many I take and when, and then take measurements over the weekend."
     "[stephanie.name] is going to stop by this weekend to help document everything, she said it would be good for research..."
     "You think about it for a moment. You picture [the_person.title] for a moment with some nice 'C' cup tits... but then you can't help but imagine if she went crazy with it and took more."
@@ -362,7 +512,7 @@ label Sarah_catch_stealing_label():
                 "Buy her new bras ($300)":
                     $ mc.business.funds += -300
                     mc.name "I'll consider it an investment, from the business. It is the least we can do if you are willing to test the new serum prototypes."
-                    the_person.char "Oh... that's very generous! I mean, I supposed if you're willing to do that. I can probably return a bunch of the other ones too."
+                    the_person.char "Oh... that's very generous! I mean, I suppose if you're willing to do that. I can probably return a bunch of the other ones too."
                     "She stands there for a few moments, considering her options."
                     the_person.char "Ok! I'll do it! Oh god I'm so excited. I'm going to go straight home and take a few before bedtime."
                     mc.name "Sounds good. I'll look forward to seeing... all of you... on Monday."
@@ -384,12 +534,13 @@ label Sarah_catch_stealing_label():
                         mc.name "Sounds good. I'll look forward to seeing... all of you... on Monday."
                         "She blushes and nods."
                         the_person.char "Alright, see you Monday!"
+                        $ Sarah_remove_bra_from_wardrobe(the_person.wardrobe)
                         $ Sarah_epic_tits = Action("Sarah epic tits",Sarah_epic_tits_requirement,"Sarah_epic_tits_label")
                         $ mc.business.mandatory_crises_list.append(Sarah_epic_tits) #Add the event here so that it pops when the requirements are met.
                         return
                     else:
                         the_person.char "I just... I don't think I can do that right now. I'm sorry [the_person.mc_title]!"
-                        mc.name "It fine, I just want you to be happy with your body."
+                        mc.name "It's fine, I just want you to be happy with your body."
                         the_person.char "Right. I mean, I can always take more later if I need to."
 
                 "You're right":
@@ -407,6 +558,7 @@ label Sarah_catch_stealing_label():
 label Sarah_epic_tits_label():
     $ the_person = sarah
     $ sarah.tits = "F"
+    $ sarah.event_triggers_dict["epic_tits_progress"] = 3
     $ the_person.change_slut_core(10)
     $ the_person.change_slut_temp(10)
     call Sarah_tits_reveal_label() from Sarah_epic_tits_call_1
@@ -415,6 +567,7 @@ label Sarah_epic_tits_label():
 label Sarah_new_tits_label():
     $ the_person = sarah
     $ sarah.tits = "D"
+    $ sarah.event_triggers_dict["epic_tits_progress"] = 2
     $ the_person.change_slut_core(5)
     $ the_person.change_slut_temp(5)
     call Sarah_tits_reveal_label() from Sarah_new_tits_call_1
@@ -463,7 +616,7 @@ label Sarah_tits_reveal_label():
     $ the_person.draw_person(position = "blowjob")
     "[the_person.possessive_title] eagerly begins opening your pants. She pulls out your cock and gives it a few gentle strokes."
     the_person.char "I can't believe I'm finally doing this. This all feels like a dream!"
-    "She looks up at you from her knees. She looks you right in the eyes as she leans foward and slides your cock between her pillowy tits."
+    "She looks up at you from her knees. She looks you right in the eyes as she leans forward and slides your cock between her pillowy tits."
     "With both hands holding her breasts together, she slowly starts to move her pillowy flesh up and down your erection."
     call sex_description(the_person, SB_Titfuck_Kneeling, make_floor(), round = 1, private = True, girl_in_charge = True) from _call_sex_description_sarah_tits_reveal_1
     if the_person.arousal > 100: #She finished!

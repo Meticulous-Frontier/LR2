@@ -230,7 +230,7 @@ init -1 python:
 
             if the_person.sex_skills["Vaginal"] == 5:
                 if the_person.get_opinion_score("vaginal sex") == 2:
-                    if the_person.sluttiness >= 80:
+                    if the_person.sluttiness >= 80 and not SB_check_fetish(the_person, vaginal_fetish_role):
                         if SB_get_fetish_count(the_person) < store.max_fetishes_per_person:
                             # renpy.say("", "Evaluate Vaginal Fetish (In Use: " + str(FETISH_VAGINAL_EVENT_INUSE) + ")")
                             if FETISH_VAGINAL_EVENT_INUSE:
@@ -293,7 +293,7 @@ init -1 python:
 
             if the_person.sex_skills["Anal"] >= 5:
                 if the_person.get_opinion_score("anal sex") == 2:
-                    if the_person.sluttiness >= 90:
+                    if the_person.sluttiness >= 90 and not SB_check_fetish(the_person, anal_fetish_role):
                         if SB_get_fetish_count(the_person) < store.max_fetishes_per_person:
                             # renpy.say("", "Evaluate Anal Fetish (In Use: " + str(FETISH_ANAL_EVENT_INUSE) + ")")
                             if FETISH_ANAL_EVENT_INUSE:

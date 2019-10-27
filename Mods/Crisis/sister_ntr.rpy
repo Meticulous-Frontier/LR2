@@ -59,7 +59,7 @@ label sister_ntr_crisis_action_label:
     else:
         $ encounter = 1
 
-    $ change_scene_display(bedroom)
+    $ bedroom.show_background()
     $ man_name = get_random_male_name()
 
     if encounter is 1: ## a scene with one man
@@ -83,7 +83,7 @@ label sister_ntr_crisis_action_label:
             the_person.char "Oh, I like that, [man_name]. I'll give you a call after the classes, ok?"
             man_name "Great. See you tomorrow then!"
             $ the_person.sluttiness += 2
-            "You get back to your room and don't even hear from door closing as you fall asleep just as you head touches the pillow."
+            "You get back to your room and don't even hear from door closing. You fall asleep just as you head touches the pillow."
         else:
             $ the_person.strip_outfit_to_max_sluttiness()
             $ position = select_position(the_person)
@@ -932,6 +932,6 @@ label sister_ntr_crisis_action_label:
 
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-    $ change_scene_display(mc.location)
+    $ mc.location.show_background()
     $ renpy.scene("Active")
     return

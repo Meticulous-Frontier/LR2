@@ -15,7 +15,7 @@ init -1 python:
         else:
             if guarantee_output:
                 if sluttiness_limit < 120:
-                    return self.get_random_appropriate_overwear_enhanced(sluttiness_limit+5, sluttiness_min-5, guarantee_output, preferences)
+                    return self.get_random_appropriate_overwear(sluttiness_limit+5, sluttiness_min-5, guarantee_output, preferences)
                 else:
                     return Outfit("Nothing")
             return None
@@ -38,7 +38,7 @@ init -1 python:
         else:
             if guarantee_output:
                 if sluttiness_limit < 120:
-                    return self.get_random_appropriate_outfit_enhanced(sluttiness_limit+5, sluttiness_min-5, guarantee_output, preferences)
+                    return self.get_random_appropriate_outfit(sluttiness_limit+5, sluttiness_min-5, guarantee_output, preferences)
                 else:
                     return Outfit("Nothing")
             return None
@@ -64,7 +64,7 @@ init -1 python:
         else:
             if guarantee_output: # If an output is guaranteed we always return an Outfit object (even if it is empty). Otherwise we return None to indicate failure to find something.
                 if sluttiness_limit < 120: #Sets an effective recursion limit.
-                    return self.get_random_appropriate_underwear_enhanced(sluttiness_limit+5, sluttiness_min-5, guarantee_output, preferences)
+                    return self.get_random_appropriate_underwear(sluttiness_limit+5, sluttiness_min-5, guarantee_output, preferences)
                 else:
                     return Outfit("Nothing")
 

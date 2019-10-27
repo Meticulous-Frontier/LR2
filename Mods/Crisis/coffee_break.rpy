@@ -41,10 +41,12 @@ label coffee_break_action_label:
         del person_one
         del person_two
         del person_three
+        mc.location.show_background()
     return
 
 label coffee_break_chit_chat_label(person_one, person_two, person_three):
     python:
+        office.show_background()
         scene_manager = Scene()
         scene_manager.add_actor(person_one, emotion="default", character_placement = character_left_flipped)
         scene_manager.add_actor(person_two, emotion="default", character_placement = character_center_flipped)
@@ -93,7 +95,7 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
             menu:
                 "Walk away":
                     python:
-                        change_scene_display(mc.location)
+                        mc.location.show_background()
                         scene_manager.remove_actor(person_two)
                         scene_manager.remove_actor(person_three)
                     return
@@ -118,6 +120,7 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                     "They pickup their clothes and leave you feeling very proud of yourself."
 
                     # cleanup scene
+                    $ renpy.scene("Active")
                     $ update_opinion(person_two, "threesomes")
                     $ person_two.reset_arousal()
                     $ person_two.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
@@ -126,8 +129,7 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                     $ person_three.reset_arousal()
                     $ person_three.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
 
-                    $ change_scene_display(mc.location)
-                    $ renpy.scene("Active")
+                    $ town_relationships.improve_relationship(person_two, person_three)
 
                     "Amazing you just fucked two of your employees, wondering if other girls in your company might also be up for this."
                     return
@@ -137,12 +139,16 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
             $ scene_manager.update_actor(person_two, position = "walking_away")
             $ scene_manager.update_actor(person_three, position = "walking_away")
 
+            $ town_relationships.improve_relationship(person_two, person_three)
+
             "[person_two.title] grabs [person_three.title] by her arm and they walk down the corridor."
     else:
         person_two.char "Yeah, we better get going too."
         $ scene_manager.update_actor(person_two, position = "walking_away")
         $ scene_manager.update_actor(person_three, position = "walking_away")
 
+        $ town_relationships.improve_relationship(person_two, person_three)
+        
         "You watch [person_two.title] and [person_three.title] walk away together."
 
     # clear scene

@@ -16,10 +16,7 @@ init 2 python:
 
 init 2:
     screen import_outfit_manager(target_wardrobe, xml_filename, slut_limit = 999, show_export = True, show_sets = True, show_overwear = True, show_underwear = True, show_outfits = True): ##Brings up a list of the players current saved outfits, returns the selected outfit or None.
-        #If sluttiness_limit is passed, you cannot exit the creator until the proposed outfit has a sluttiness below it.
-        $ wardrobe_preview = create_random_person()
-        $ wardrobe_preview.wardrobe = wardrobe_from_xml("")
-        $ import_wardrobe(wardrobe_preview.wardrobe, xml_filename)
+        $ wardrobe = wardrobe_from_xml(xml_filename)
         add "Paper_Background.png"
         modal True
         zorder 101
@@ -42,7 +39,7 @@ init 2:
                             spacing 0
                             text "Full Outfits" style "menu_text_style" size 30
                             null height 10
-                            for outfit in wardrobe_preview.wardrobe.get_outfit_list():
+                            for outfit in wardrobe.get_outfit_list():
                                 #hbox:
                                 textbutton outfit.name+ "\n(Sluttiness " +str(outfit.slut_requirement) +")" action [Show("outfit_creator", None, outfit.get_copy(), target_wardrobe), Hide("import_outfit_manager")] sensitive (outfit.slut_requirement <= slut_limit) hovered Show("mannequin", None, outfit) style "textbutton_style" text_style "outfit_description_style" xsize 410
                                 if show_export:
@@ -67,7 +64,7 @@ init 2:
                                 spacing 0
                                 text "Overwear Sets" style "menu_text_style" size 30
                                 null height 10
-                                for outfit in wardrobe_preview.wardrobe.get_overwear_sets_list():
+                                for outfit in wardrobe.get_overwear_sets_list():
                                     #hbox:
                                     textbutton outfit.name+ "\n(Sluttiness " +str(outfit.get_overwear_slut_score()) +")" action [Show("outfit_creator", None, outfit.get_copy(), target_wardrobe), Hide("import_outfit_manager")] sensitive (outfit.get_overwear_slut_score() <= slut_limit) hovered Show("mannequin", None, outfit) style "textbutton_style" text_style "outfit_description_style" xsize 410
                                     if show_export:
@@ -89,7 +86,7 @@ init 2:
                                 spacing 0
                                 text "Underwear Sets" style "menu_text_style" size 30
                                 null height 10
-                                for outfit in wardrobe_preview.wardrobe.get_underwear_sets_list():
+                                for outfit in wardrobe.get_underwear_sets_list():
                                     #hbox:
                                     textbutton outfit.name+ "\n(Sluttiness " +str(outfit.get_underwear_slut_score()) +")" action [Show("outfit_creator", None, outfit.get_copy(), target_wardrobe), Hide("import_outfit_manager")] sensitive (outfit.get_underwear_slut_score() <= slut_limit) hovered Show("mannequin", None, outfit) style "textbutton_style" text_style "outfit_description_style" xsize 410
                                     if show_export:

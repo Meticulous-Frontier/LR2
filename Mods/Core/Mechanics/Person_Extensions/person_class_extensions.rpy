@@ -1,5 +1,7 @@
 init -1:
     python:
+        import hashlib
+
         def location(self): # Check what location a person is in e.g the_person.location() == downtown. Use to trigger events?
             for location in list_of_places:
                 if self in location.people:
@@ -8,18 +10,32 @@ init -1:
         Person.location = location
 
         def get_follow_me(self):
-            if not hasattr(self, "follow_me"):
-                self.follow_me = False
-            return self.follow_me
+            if not hasattr(self, "_follow_me"):
+                self._follow_me = False
+            return self._follow_me
 
         def set_follow_me(self, value):
-            self.follow_me = value
+            self._follow_me = value
 
         def del_follow_me(self):
-            del self.follow_me
+            del self._follow_me
 
         # add follow_mc attribute to person class (without sub-classing)
         Person.follow_mc = property(get_follow_me, set_follow_me, del_follow_me, "I'm the follow_me property.")
+
+        def get_person_identifier(self):
+            if not hasattr(self, "_identifier"):
+                self._identifier = hashlib.md5(self.name + self.last_name + str(self.age)).hexdigest()
+            return self._identifier
+
+        def set_person_identifier(self, value):
+            self._identifier = value
+
+        def del_person_identifier(self):
+            del self._identifier
+
+        # add follow_mc attribute to person class (without sub-classing)
+        Person.identifier = property(get_person_identifier, set_person_identifier, del_person_identifier, "Unique identifier for person class.")
 
         ## MATCH SKIN COLOR
         # Matches skin, body, face and expression images based on input of skin color
@@ -119,12 +135,47 @@ init -1:
         # Adds learn_home function to the_person.
         Person.learn_home = learn_home
 
+        def get_known_opinion_list(self, include_sexy = False, include_normal = True, only_positive = False, only_negative = False): #Gets the topic string of a random opinion this character holds. Includes options to include known opinions and sexy opinions. Returns None if no valid opinion can be found.
+            the_dict = {} #Start our list of valid opinions to be listed as empty
+
+            if include_normal: #if we include normal opinions build a dict out of the two
+                the_dict = dict(the_dict, **self.opinions)
+
+            if include_sexy: #If we want sexy opinions add them in too.
+                the_dict = dict(the_dict, **self.sexy_opinions)
+
+            unknown_keys = []
+            for k in the_dict: #Go through each value in our combined normal and sexy opinion dict
+                if not the_dict[k][1]: #Check if we know about it...
+                    unknown_keys.append(k) #We build a temporary list of keys to remove because otherwise we are modifying the dict while we traverse it.
+            for del_key in unknown_keys:
+                del the_dict[del_key]
+
+            remove_keys = []
+            if only_positive:
+                for k in the_dict:
+                    if self.get_opinion_score(k) <= 0:
+                        remove_keys.append(k)
+
+            if only_negative:
+                for k in the_dict:
+                    if self.get_opinion_score(k) > 0:
+                        remove_keys.append(k)
+
+            for del_key in remove_keys:
+                del the_dict[del_key]
+
+            return the_dict.keys()
+
+        Person.get_known_opinion_list = get_known_opinion_list
+
+
         ## STRIP OUTFIT TO MAX SLUTTINESS EXTENSION
         # Strips down the person to a clothing their are comfortable with (starting with top, before bottom)
         # narrator_messages: narrator voice after each item of clothing stripped, use '[person.<title>]' for titles and '[strip_choice.name]' for clothing item.
             # Can be an array of messages for variation in message per clothing item or just a single string or None for silent stripping
         # scene manager parameter is filled from that class so that all people present in scene are drawn
-        def strip_outfit_to_max_sluttiness(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, narrator_messages = None, character_placement = None, temp_sluttiness_boost = 0, position = None, emotion = None, scene_manager = None):
+        def strip_outfit_to_max_sluttiness(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, narrator_messages = None, character_placement = None, lighting = None, temp_sluttiness_boost = 0, position = None, emotion = None, scene_manager = None):
             # internal function to strip top clothing first.
             def get_strip_choice_upper_first(outfit, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True):
                 strip_choice = outfit.remove_random_upper(top_layer_first)
@@ -151,7 +202,7 @@ init -1:
             strip_choice = get_strip_choice_upper_first(test_outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet)
             # renpy.say("", strip_choice.name + "  (required: " + str(test_outfit.slut_requirement) +  ", sluttiness: " +  str(self.effective_sluttiness() + temp_sluttiness_boost) + ")")
             while strip_choice and self.judge_outfit(test_outfit, temp_sluttiness_boost):
-                self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
+                self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
                 self.outfit = test_outfit.get_copy() #Swap our current outfit out for the test outfit.
                 if msg_count > 0:   # do we need to show a random message and replace titles and outfit name
                     msg_idx = renpy.random.randint(1, msg_count)
@@ -167,6 +218,107 @@ init -1:
 
         # Monkey wrench Person class to have automatic strip function
         Person.strip_outfit_to_max_sluttiness = strip_outfit_to_max_sluttiness
+
+        def strip_outfit(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, delay = 1, character_placement = None, position = None, emotion = None, lighting = None, scene_manager = None):
+            if position is None:
+                self.position = person.idle_pose
+
+            if emotion is None:
+                self.emotion = person.get_emotion()
+
+            if lighting is None:
+                lighting = mc.location.get_lighting_conditions()
+
+            if character_placement is None:
+                self.character_placement = character_right
+
+            strip_choice = self.outfit.remove_random_any(top_layer_first, exclude_upper, exclude_lower, exclude_feet, do_not_remove = True)
+            while not strip_choice is None:
+                self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
+                strip_choice = self.outfit.remove_random_any(top_layer_first, exclude_upper, exclude_lower, exclude_feet, do_not_remove = True)
+                renpy.pause(delay)
+
+        Person.strip_outfit = strip_outfit
+
+        def run_move_enhanced(self,location): 
+            self.sexed_count = 0 #Reset the counter for how many times you've been seduced, you might be seduced multiple times in one day!
+
+            if time_of_day == 0: #It's a new day, get a new outfit out to wear!
+                self.planned_outfit = self.wardrobe.decide_on_outfit(self.sluttiness)
+                self.outfit = self.planned_outfit.get_copy()
+                self.planned_uniform = None
+
+            destination = self.schedule[time_of_day] #None destination means they have free time
+            if destination == self.work and not mc.business.is_open_for_business(): #NOTE: Right now we give everyone time off based on when the mc has work scheduled.
+                destination = None
+
+            if destination is not None: #We have somewhere scheduled to be for this time chunk. Let's move over there.
+                location.move_person(self, destination) #Always go where you're scheduled to be.
+                if self.schedule[time_of_day] == self.work: #We're going to work.
+                    if self.should_wear_uniform(): #Get a uniform if we should be wearing one.
+                        self.wear_uniform()
+                        self.change_happiness(self.get_opinion_score("work uniforms"),add_to_log = False)
+                        # only changes sluttiness in low sluttiness range after that she won't care anymore
+                        if self.sluttiness < 40 and self.planned_uniform and self.planned_uniform.slut_requirement > self.sluttiness*0.75: #A skimpy outfit/uniform is defined as the top 25% of a girls natural sluttiness.
+                            self.change_slut_temp(self.get_opinion_score("skimpy uniforms"), add_to_log = False)
+
+                elif destination == self.home:
+                    self.outfit = self.planned_outfit.get_copy() #We're at home, so we can get back into our casual outfit.
+
+                #NOTE: There is no else here because all of the destinations should be set. If it's just a location they travel there and that's the end of it.
+
+            else:
+                #She finds somewhere to burn some time
+                self.outfit = self.planned_outfit.get_copy() #Get changed back into our proper outfit if we aren't in it already.
+                available_locations = [] #Check to see where is public (or where you are white listed) and move to one of those locations randomly
+                for potential_location in list_of_places:
+                    if potential_location.public:
+                        available_locations.append(potential_location)
+                location.move_person(self, get_random_from_list(available_locations))
+
+            #A skimpy outfit is defined as the top 25% of a girls natural sluttiness.
+            if self.outfit and self.planned_outfit.slut_requirement > self.sluttiness * 0.75:
+                # only changes sluttiness in low sluttiness range after that she won't care anymore
+                if self.sluttiness < 40:
+                    self.change_slut_temp(self.get_opinion_score("skimpy outfits"), add_to_log = False)         
+            
+            #A conservative outfit is defined as the bottom 25% of a girls natural sluttiness.                    
+            if self.outfit and self.planned_outfit.slut_requirement < self.sluttiness * 0.25:
+                # happiness won't go below 80 or over 120 by this trait and only affects in low sluttiness range, after that she won't care
+                if self.happiness > 80 and self.happiness < 120 and self.sluttiness < 40:
+                    self.change_happiness(self.get_opinion_score("conservative outfits"), add_to_log = False)
+
+            # lingerie only impacts to sluttiness level 40
+            if self.sluttiness < 40 and (self.outfit.get_bra() or self.outfit.get_panties()):
+                lingerie_bonus = 0
+                if self.outfit.get_bra() and self.outfit.get_bra().slut_value > 1: #We consider underwear with an innate sluttiness of 2 or higher "lingerie" rather than just underwear.
+                    lingerie_bonus += self.get_opinion_score("lingerie")
+                if self.outfit.get_panties() and self.outfit.get_panties().slut_value > 1:
+                    lingerie_bonus += self.get_opinion_score("lingerie")
+                lingerie_bonus = __builtin__.int(lingerie_bonus/2.0)
+                self.change_slut_temp(lingerie_bonus, add_to_log = False)
+
+            # not wearing underwear only impacts sluttiness to level 60
+            if self.sluttiness < 60 and (not self.outfit.wearing_bra() or not self.outfit.wearing_panties()): #We need to determine how much underwear they are not wearing. Each piece counts as half, so a +2 "love" is +1 slut per chunk.
+                underwear_bonus = 0
+                if not self.outfit.wearing_bra():
+                    underwear_bonus += self.get_opinion_score("not wearing underwear")
+                if not self.outfit.wearing_panties():
+                    underwear_bonus += self.get_opinion_score("not wearing underwear")
+                underwear_bonus = __builtin__.int(underwear_bonus/2.0) #I believe this rounds towards 0. No big deal if it doesn't, very minor detail.
+                self.change_slut_temp(underwear_bonus, add_to_log = False)
+
+            # showing the goods only impacts sluttiness to level 80
+            if self.sluttiness < 80 and self.outfit.tits_visible():
+                self.change_slut_temp(self.get_opinion_score("showing her tits"), add_to_log = False)
+            if self.sluttiness < 80 and self.outfit.vagina_visible():
+                self.change_slut_temp(self.get_opinion_score("showing her ass"), add_to_log = False)
+
+            # showing everything only impacts sluttiness to level 80
+            if self.sluttiness < 80 and self.outfit.tits_available() and self.outfit.tits_visible() and self.outfit.vagina_available() and self.outfit.vagina_visible():
+                self.change_slut_temp(self.get_opinion_score("not wearing anything"), add_to_log = False)
+
+        Person.run_move = run_move_enhanced
 
         # BUGFIXED: Judge Outfit function uses the_person instead of self to check effective sluttiness
         #Judge an outfit and determine if it's too slutty or not. Can be used to judge other people's outfits to determine if she thinks they look like a slut.
@@ -307,13 +459,15 @@ init -1:
                 self.wear_uniform() # Reset uniform
             else:
                 self.outfit.update_slut_requirement()
-                if self.outfit.slut_requirement > self.sluttiness and show_review_message:
-                    self.call_dialogue("clothing_review")
-                self.outfit = self.planned_outfit.get_copy()    #restore outfit
+                # only show review message when parameter is true and she doesn't feel comfortable in her current outfit
+                show_review_message = show_review_message and self.outfit.slut_requirement > self.sluttiness   
+                self.outfit = self.planned_outfit.get_copy()    # always restore outfit
+                if show_review_message:
+                    self.call_dialogue("clothing_review") # must be last call in function
 
         Person.review_outfit = review_outfit_enhanced
 
-        def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, character_placement = None, from_scene = False): #Draw the person, standing as default if they aren't standing in any other position.
+        def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, lighting = None, character_placement = None, from_scene = False): #Draw the person, standing as default if they aren't standing in any other position.
             if position is None:
                 position = self.idle_pose
 
@@ -323,7 +477,10 @@ init -1:
             if character_placement is None: # make sure we don't need to pass the position with each draw
                 character_placement = character_right
 
-            # sometimes there is no outfit set, causeing the generate drawlist to fail, not sure why, but try to fix it here.
+            if lighting is None:
+                lighting = mc.location.get_lighting_conditions()
+
+            # sometimes there is no outfit set, causing the generate drawlist to fail, not sure why, but try to fix it here.
             if self.outfit is None:
                 if self.planned_outfit is None:
                     self.planned_outfit = self.wardrobe.decide_on_outfit2(self) # Use enhanced outfit function
@@ -336,7 +493,7 @@ init -1:
                 if show_person_info:
                     renpy.show_screen("person_info_ui",self)
 
-            final_image = self.build_person_displayable(position, emotion, special_modifier, show_person_info)
+            final_image = self.build_person_displayable(position, emotion, special_modifier, show_person_info, lighting)
             renpy.show(self.name,at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=(self.name + self.last_name + str(self.age)))
 
         # replace the default draw_person function of the person class
@@ -344,7 +501,7 @@ init -1:
         # add location to store original personality
         Person.original_personality = None
 
-        def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, special_modifier = None, character_placement = None, scene_manager = None): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
+        def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, special_modifier = None, lighting = None, character_placement = None, scene_manager = None): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
             #Note: this function includes a call to remove_clothing, it is not needed seperately.
             if position is None:
                 position = self.idle_pose
@@ -355,6 +512,9 @@ init -1:
             if emotion is None:
                 emotion = self.get_emotion()
 
+            if lighting is None:
+                lighting = mc.location.get_lighting_conditions()
+
             if character_placement is None: # make sure we don't need to pass the position with each draw
                 character_placement = character_right
 
@@ -364,15 +524,15 @@ init -1:
             else:   # when we are called from the scenemanager we have to draw the other characters
                 scene_manager.draw_scene_without(self)
 
-            bottom_displayable.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier)) #Get the face displayable, also always under clothing.
+            bottom_displayable.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier, eye_colour = self.eyes[1], lighting = lighting)) #Get the face displayable, also always under clothing.
 
-            bottom_displayable.append(self.body_images.generate_item_displayable(self.body_type,self.tits,position))  #Body is always under clothing
+            bottom_displayable.append(self.body_images.generate_item_displayable(self.body_type,self.tits,position, lighting = lighting))  #Body is always under clothing
             size_render = renpy.render(bottom_displayable[1], 10, 10, 0, 0) #We need a render object to check the actual size of the body displayable so we can build our composite accordingly.
             the_size = size_render.get_size()
             x_size = __builtin__.int(the_size[0])
             y_size = __builtin__.int(the_size[1])
 
-            bottom_clothing, split_clothing, top_clothing = self.outfit.generate_split_draw_list(the_clothing, self, position, emotion, special_modifier) #Gets a split list of all of our clothing items.
+            bottom_clothing, split_clothing, top_clothing = self.outfit.generate_split_draw_list(the_clothing, self, position, emotion, special_modifier, lighting = lighting) #Gets a split list of all of our clothing items.
             #We should remember that middle item can be None.
             for item in bottom_clothing:
                 bottom_displayable.append(item)
@@ -380,7 +540,7 @@ init -1:
             for item in top_clothing:
                 top_displayable.append(item)
 
-            top_displayable.append(self.hair_style.generate_item_displayable("standard_body",self.tits,position)) #Hair is always on top
+            top_displayable.append(self.hair_style.generate_item_displayable("standard_body",self.tits,position, lighting = lighting)) #Hair is always on top
 
             #Now we build our two composites, one for the bottom image and one for the top.
             composite_bottom_params = [(x_size,y_size)]
@@ -397,10 +557,10 @@ init -1:
             final_top = Composite(*composite_top_params)
 
             renpy.show("Bottom Composite", at_list=[character_placement, scale_person(self.height)], layer="Active", what=final_bottom, tag=self.name+"Bottom")
+            renpy.show("Top Composite", at_list=[character_placement, scale_person(self.height)], layer="Active", what=final_top, tag=self.name+"Top")
             if split_clothing: #Only show this if we actually had something returned to us.
                 renpy.show("Removed Item", at_list=[character_placement, scale_person(self.height), clothing_fade], layer="Active", what=split_clothing, tag=self.name+"Middle")
                 self.outfit.remove_clothing(the_clothing)
-            renpy.show("Top Composite", at_list=[character_placement, scale_person(self.height)], layer="Active", what=final_top, tag=self.name+"Top")
 
         Person.draw_animated_removal = draw_animated_removal_enhanced
 

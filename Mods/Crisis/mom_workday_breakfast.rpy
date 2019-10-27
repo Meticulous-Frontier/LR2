@@ -118,7 +118,7 @@ label mom_breakfast_action_label():
                         $ the_person.change_arousal(15)
                         "You roll her nipples a couple of times between your fingers. She sighs at the sensations you are giving her."
 
-                    "Finish Message":
+                    "Finish Massage":
                         "You work on her shoulders for a while. She sighs in relaxation. You finish up and go back to your breakfast."
                         $ scene_manager.clear_scene()
                         return
@@ -258,12 +258,9 @@ label mom_breakfast_action_label():
         $ scene_manager.update_actor(mom, position = "stand4")
         the_person.char "Oh! We'd better go quick, your sister could come out at any time..."
         "[the_person.possessive_title] quickly starts to strip down."
-        $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-        while strip_choice is not None:
-            #$ the_person.draw_animated_removal(strip_choice)
-            $ scene_manager.draw_animated_removal(mom, strip_choice)
-            " [the_person.possessive_title] strips off her [strip_choice.name]."
-            $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+
+        $ scene_manager.strip_actor_outfit(mom)
+
         "You take a quick sip of coffee. [the_person.possessive_title] is naked in the kitchen!"
         if SB_check_fetish(the_person, anal_fetish_role): #The anal role
             "She opens one of the drawers and pulls out a bottle of lube..."
@@ -286,7 +283,7 @@ label mom_breakfast_action_label():
             "You climax in a frenzy. She arches her back and moans involuntarily when she feels your cum flood her rectum. Her orgasm hits immediately after yours."
             "Finally speechless, [the_person.title]'s body stops rocking, but you feel the twitching of her sphincter as orgasmic waves hit her. You sigh happily, dumping the last of your cum insider her."
 
-            $ cum_in_ass(the_person)
+            $ the_person.cum_in_ass()
             $ mc.listener_system.fire_event("girl_climax", the_person = the_person) #TODO check and make sure this works...
             $ the_person.change_happiness(5)
             $ the_person.change_obedience(5)

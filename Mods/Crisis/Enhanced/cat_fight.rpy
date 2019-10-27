@@ -10,15 +10,19 @@ label cat_fight_crisis_enhanced_label():
         return
 
     python:
-        #Generate list of people with poor obedience
-        list_of_possible_people = mc.business.get_requirement_employee_list(obedience_max = 130)
-        person_one = get_random_from_list(list_of_possible_people)
-        list_of_possible_people.remove(person_one)
-        person_two = get_random_from_list(list_of_possible_people)
+        the_relationship = get_random_from_list(town_relationships.get_business_relationships(["Rival","Nemesis"])) #Get a random rival or nemesis relationship within the company
+        if the_relationship is None:
+            renpy.return_statement() #Just in case something goes wrong getting a relationship we'll exit gracefully.
+        if renpy.random.randint(0,1) == 1: #Randomize the order so that repeated events with the same people alternate who is person_one and two.
+            person_one = the_relationship.person_a
+            person_two = the_relationship.person_b
+        else:
+            person_one = the_relationship.person_b
+            person_two = the_relationship.person_a
 
         scene_manager = Scene()
 
-    person_one.char "Excuse me, sir?"
+    person_one.char "Excuse me, [person_one.mc_title]?"
     $ scene_manager.add_actor(person_one, emotion = "angry")
     $ scene_manager.add_actor(person_two, emotion = "angry", character_placement = character_center_flipped)
     "You feel a tap on your back while you're working. [person_one.title] and [person_two.title] are glaring at each other while they wait to get your attention."
@@ -52,7 +56,7 @@ label cat_fight_crisis_enhanced_label():
 
 
         "Stop the argument, side with no one.":
-            #Obedience boost to both, happinss drop to both. At high sluttiness have them "kiss and make up"
+            #Obedience boost to both, happiness drop to both. At high sluttiness have them "kiss and make up"
             mc.name "Enough! I can't be the arbitrator for every single conflict we have in this office. You two are going to have to figure this out between yourselves."
             $ scene_manager.update_actor(person_one, emotion="sad")
             person_one.char "But sir..."
@@ -261,7 +265,7 @@ label cat_fight_crisis_enhanced_label():
 
     python:     # Release variables
         scene_manager.clear_scene()
-        del list_of_possible_people
+        del the_relationship
         del person_one
         del person_two
     return

@@ -38,7 +38,7 @@ init 2 python:
 
         starbuck_wardrobe = wardrobe_from_xml("Starbuck_Wardrobe")
 
-        starbuck_home = Room("Starbuck's home", "Starbuck's home", [], apartment_background, [],[],[],False,[0.5,0.5], visible = False, hide_in_known_house_map = False)
+        starbuck_home = Room("Starbuck's home", "Starbuck's home", [], apartment_background, [],[],[],False,[0.5,0.5], visible = False, hide_in_known_house_map = False, lighting_conditions = standard_indoor_lighting)
         starbuck_home.add_object(make_wall())
         starbuck_home.add_object(make_floor())
         starbuck_home.add_object(make_bed())
@@ -52,8 +52,8 @@ init 2 python:
 
         #global starbuck_role
         global starbuck
-        starbuck = Sex_Shop_Owner(name = "Starbuck", last_name = "Thrace", age = 32, body_type = "curvy_body", tits="E",  height = 0.95,  body_images = white_skin, expression_images = Expression("Starbuck\'s Expression Set", "white", "Face_4"), hair_colour="golden blonde", hair_style = messy_short_hair.get_copy(), skin="white" , \
-            eyes = "brown", job = "Sex Shop Owner", wardrobe = starbuck_wardrobe, personality = starbuck_personality, stat_list = [3,4,3],  skill_list = [1,1,4,2,1],  sluttiness = 42,  obedience = -22, suggest = 0, sex_list = [3,3,4,4], love = 0, happiness = 119, \
+        starbuck = Sex_Shop_Owner(name = "Starbuck", last_name = "Thrace", age = 32, body_type = "curvy_body", tits="E",  height = 0.95,  body_images = white_skin, expression_images = Expression("Starbuck\'s Expression Set", "white", "Face_4"), hair_colour= ["golden blonde", [0.895, 0.781, 0.656,1]], hair_style = messy_short_hair.get_copy(), skin="white" , \
+            eyes = ["green",[0.245, 0.734, 0.269, 1.0]], job = "Sex Shop Owner", wardrobe = starbuck_wardrobe, personality = starbuck_personality, stat_list = [3,4,3],  skill_list = [1,1,4,2,1],  sluttiness = 42,  obedience = -22, suggest = 0, sex_list = [3,3,4,4], love = 0, happiness = 119, \
             home = starbuck_home, font = get_random_font(), work = None, name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", special_role = [starbuck_role], relationship = "Single")
 
         starbuck.schedule[1] = sex_store
@@ -273,9 +273,10 @@ label starbuck_vaginal_skillup_label(the_person):
                             the_person.char "Let's do that again soon!"
                         else:
                             the_person.char "Thanks for the fuck!"
-                            $ the_person.reset_arousal()
-                            $ the_person.review_outfit(show_review_message = False)
-                            "You leave [the_person.possessive_title] to get cleaned up and get back to work."
+                        
+                        "You leave [the_person.possessive_title] to get cleaned up and get back to work."
+                        $ the_person.reset_arousal()
+                        $ the_person.review_outfit(show_review_message = False)
 
                     "No thanks":
                         "You thank her for the offer, but decide against it for now."
@@ -328,9 +329,10 @@ label starbuck_anal_skillup_label(the_person):
                             the_person.char "Let's do that again soon!"
                         else:
                             the_person.char "Thanks for the fuck!"
-                            $ the_person.reset_arousal()
-                            $ the_person.review_outfit(show_review_message = False)
+
                         "You leave [the_person.possessive_title] to get cleaned up and get back to work."
+                        $ the_person.reset_arousal()
+                        $ the_person.review_outfit(show_review_message = False)
 
                     "No thanks":
                         "You thank her for the offer, but decide against it for now."
@@ -367,8 +369,12 @@ label starbuck_oral_skillup_label(the_person):
                         "You head to the back of hte store with [the_person.possessive_title]. Watching the video, you learn several new tips and tricks for giving awesome oral."
                         "When you finish, you see [the_person.possessive_title] looking at you."
                         the_person.char "Wow, that was interesting!... you ready to give it a try, [the_person.mc_title]?"
-                        $ mc.current_stamina += -1
-                        call fuck_person(the_person) from _call_fuck_person_SBS30
+                        python:
+                            mc.current_stamina -= 1
+                            for clothing in the_person.outfit.get_lower_ordered():
+                                the_person.outfit.remove_clothing(clothing)
+
+                        call fuck_person(the_person, start_position = SB_Oral_Laying, skip_intro = True) from _call_fuck_person_SBS30
                         if the_person.arousal > 160:
                             the_person.char "Oh my god, I came so many times... did you make me squirt?"
                             $ the_person.change_obedience (5)
@@ -383,9 +389,10 @@ label starbuck_oral_skillup_label(the_person):
                             the_person.char "Let's do that again soon!"
                         else:
                             the_person.char "Thanks for the fuck!"
-                            $ the_person.reset_arousal()
-                            $ the_person.review_outfit(show_review_message = False)
+
                         "You leave [the_person.possessive_title] to get cleaned up and get back to work."
+                        $ the_person.reset_arousal()
+                        $ the_person.review_outfit(show_review_message = False)
 
                     "No thanks":
                         "You thank her for the offer, but decide against it for now."
@@ -437,9 +444,10 @@ label starbuck_foreplay_skillup_label(the_person):
                             the_person.char "Let's do that again soon!"
                         else:
                             the_person.char "Thanks for the fuck!"
-                            $ the_person.reset_arousal()
-                            $ the_person.review_outfit(show_review_message = False)
-                            "You leave [the_person.possessive_title] to get cleaned up and get back to work."
+
+                        "You leave [the_person.possessive_title] to get cleaned up and get back to work."
+                        $ the_person.reset_arousal()
+                        $ the_person.review_outfit(show_review_message = False)
 
                     "No thanks":
                         "You thank her for the offer, but decide against it for now."
@@ -679,32 +687,22 @@ label starbuck_sex_store_promo_one_label(the_person):
     "Once in the backroom, you can see that [the_person.possessive_title] has three outfits picked out. Some classic black lingerie with fishnet and garter belt, a light blue nightgown, and a pink lacy one piece."
     "The first item to model is a bottle of some good quality, oil based lube. You figure a regular standing pose should work for this."
     "Which lingerie should you have her use for this?"
-    $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
     menu:
         "The classic black set":
             "[the_person.possessive_title] starts to strip down."
-            while strip_choice is not None:
-                $ the_person.draw_animated_removal(strip_choice)
-                "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+            $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.outfit = SB_advert_one_outfit.get_copy()
             $ the_person.draw_person()
         "The blue nightgown":
             "[the_person.possessive_title] starts to strip down."
-            while strip_choice is not None:
-                $ the_person.draw_animated_removal(strip_choice)
-                "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+            $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.outfit = SB_advert_two_outfit.get_copy()
             $ the_person.draw_person()
         "the pink one piece":
             "[the_person.possessive_title] starts to strip down."
-            while strip_choice is not None:
-                $ the_person.draw_animated_removal(strip_choice)
-                "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+            $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.outfit = SB_advert_three_outfit.get_copy()
             $ the_person.draw_person()
@@ -719,32 +717,22 @@ label starbuck_sex_store_promo_one_label(the_person):
     "The next item for her to model will be a male masturbation sleeve."
     "It is designed to look like a famous porn actress' asshole, so you figure to model this product, [the_person.possessive_title] should have her back to you."
     "Which lingerie should you have her use for this?"
-    $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
     menu:
         "The classic black set":
             "[the_person.possessive_title] starts to strip down."
-            while strip_choice is not None:
-                $ the_person.draw_animated_removal(strip_choice)
-                "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+            $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.outfit = SB_advert_one_outfit.get_copy()
             $ the_person.draw_person()
         "The blue nightgown":
             "[the_person.possessive_title] starts to strip down."
-            while strip_choice is not None:
-                $ the_person.draw_animated_removal(strip_choice)
-                "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+            $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.outfit = SB_advert_two_outfit.get_copy()
             $ the_person.draw_person()
         "the pink one piece":
             "[the_person.possessive_title] starts to strip down."
-            while strip_choice is not None:
-                $ the_person.draw_animated_removal(strip_choice)
-                "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+            $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.outfit = SB_advert_three_outfit.get_copy()
             $ the_person.draw_person()
@@ -761,32 +749,22 @@ label starbuck_sex_store_promo_one_label(the_person):
     "The attention you are giving her is really starting to excite [the_person.possessive_title]. You can see her nipples sticking out proudly in her outfit."
     "The last item for her to model is a dildo. You figure since you are mainly targeting a male audience with this advertisement, a good pose for her would be on her knees, like shes getting ready to put it in her mouth."
     "Which lingerie should you have her use for this?"
-    $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
     menu:
         "The classic black set":
             "[the_person.possessive_title] starts to strip down."
-            while strip_choice is not None:
-                $ the_person.draw_animated_removal(strip_choice)
-                "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+            $ the_person.strip_outfit(position = "stand2", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.outfit = SB_advert_one_outfit.get_copy()
             $ the_person.draw_person()
         "The blue nightgown":
             "[the_person.possessive_title] starts to strip down."
-            while strip_choice is not None:
-                $ the_person.draw_animated_removal(strip_choice)
-                "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+            $ the_person.strip_outfit(position = "stand2", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.outfit = SB_advert_two_outfit.get_copy()
             $ the_person.draw_person()
         "the pink one piece":
             "[the_person.possessive_title] starts to strip down."
-            while strip_choice is not None:
-                $ the_person.draw_animated_removal(strip_choice)
-                "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+            $ the_person.strip_outfit(position = "stand2", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.outfit = SB_advert_three_outfit.get_copy()
             $ the_person.draw_person()
@@ -842,7 +820,7 @@ label starbuck_sex_store_promo_one_label(the_person):
         del SB_advert_three_outfit
         the_person.reset_arousal()
         the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-        change_scene_display(mc.location)
+        mc.location.show_background()
         renpy.scene("Active")
     return #Toy modeling, ends in blowjob
 
@@ -892,11 +870,7 @@ label starbuck_sex_store_promo_two_label(the_person):
     $ the_person.draw_person(position = "stand2")
     "She joins in the backroom carrying a couple of dildos and a set of lingerie."
     the_person.char "Okay, let me just get changed really quick."
-    $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-    while strip_choice is not None:
-        $ the_person.draw_animated_removal(strip_choice)
-        "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-        $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+    $ the_person.strip_outfit(position = "stand2", exclude_feet = False)
     "Once she finishes stripping, she grabs the lingerie set and puts it on."
     $ the_person.outfit = SB_advert_four_outfit.get_copy()
     $ the_person.draw_person()
@@ -1003,7 +977,7 @@ label starbuck_sex_store_promo_two_label(the_person):
 
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-    $ change_scene_display(mc.location)
+    $ mc.location.show_background()
     $ renpy.scene("Active")
     return #Masturbation, ends in sex
 
@@ -1016,7 +990,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     "You consider her problem for a bit, but it is actually her that comes up with an idea first."
     the_person.char "So, I was thinking, maybe for my next video review you could umm,  you know, help me demonstrate something?"
     "She looks at you hopefully. This is an easy decision."
-    the_person.char "Absolutely. It's only fair. You've already put yourself out there, I'm ready to do my part."
+    mc.name "Absolutely. It's only fair. You've already put yourself out there, I'm ready to do my part."
     "[the_person.possessive_title] gives you a bright, beaming smile."
     the_person.char "Yes! Okay! Give me minute I'll meet you in the back! Get the camera ready!"
     "You make your way to the back. You get the camera setup and ready to go."
@@ -1027,11 +1001,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     the_person.char "Ok, I figure we can get through a couple things... I have a pair of edible panties, and a nice set of fuzzy handcuffs..."
     "Wow... so at her suggestion, you are about to eat panties off of [the_person.possessive_title]... and then hand cuff her... all on camera."
     "[the_person.possessive_title] starts to strip down."
-    $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-    while strip_choice is not None:
-        $ the_person.draw_animated_removal(strip_choice)
-        "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-        $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+    $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
     "Once she finishes stripping, she grabs the panties and puts them on."
     $ the_person.outfit = SB_advert_five_outfit.get_copy()
     $ the_person.draw_person()
@@ -1080,7 +1050,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     $ the_person.draw_person(position = "missionary")
     "Her panties now in shreds, [the_person.possessive_title] gathers what is left of them and pulls them off."
     $ the_person.change_arousal(20)#70
-    "[the_person.possessive_title]'s juices are beginning to flow freely from her slit. You lap them up before circling your tongue aroud her clit a few times."
+    "[the_person.possessive_title]'s juices are beginning to flow freely from her slit. You lap them up before circling your tongue around her clit a few times."
     "After licking at her clit, you move your tongue down to her entrance. You push your tongue up inside her as far as it will go."
     $ the_person.change_arousal(10)#80
     "[the_person.possessive_title] has stopped providing commentary and is now just moaning and encouraging you."
@@ -1141,7 +1111,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     $ the_person.change_arousal(20)
     $ mc.change_arousal(25)#105
     "You can't take anymore. You let go of her shoulders and her upper body crashes roughly to the table. You grab her hips and plow deep into her pussy."
-    $the_person.call_dialogue("sex_responses")
+    $the_person.call_dialogue("sex_responses_vaginal")
     mc.name "Ah, I'm going to cum!"
     "You bottom out and explode deep inside of [the_person.possessive_title]. The heat of your semen painting her vaginal walls sends her into another orgasm."
     the_person.char "OH! I'M CUMMING AGAIN! YES [the_person.mc_title]!"
@@ -1179,7 +1149,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     "You grab the camera, and start looking at the footage. The first thing you do is copy it on a thumb drive, for you to enjoy at a later date."
     "You head out to start work on the advertisement video."
-    $ change_scene_display(mc.location)
+    $ mc.location.show_background()
     $ renpy.scene("Active")
     return
 
@@ -1193,7 +1163,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     "[the_person.possessive_title] stutters as she tries to figure out the best way to explain what she means."
     the_person.char "I guess I just mean that, the sales we are getting, its for just generic sex items. Lingerie, condoms, handcuffs... but the more... shall we say, kinky items aren't really selling."
     mc.name "Like what kind of things aren't selling?"
-    the_person.char "Well, some of the kinkier items... like whips, ropes, strapons... that kind of thing."
+    the_person.char "Well, some of the kinkier items... like whips, ropes, strap-ons... that kind of thing."
     "You consider some of the items she has in mind. The list she's said makes you a little nervous."
     mc.name "Well, I mean, I'm definitely willing to help you make another video showcasing an item or two... did you have anything specific in mind?"
     the_person.char "Well... I'm going to be honest here, you definitely seem like more of a dominant type... why don't we make a video where I play the submissive? See if we can get more business that way?"
@@ -1212,11 +1182,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     the_person.char "Ok, I figure we can start with the whip... I also have a bottle of premium anal lube, and a strap on for guys designed for double penetration..."
     "Wow... you wonder which hole you are gonna get to fuck while the strap on fucks the other..."
     "[the_person.possessive_title] starts to strip down in front of you."
-    $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-    while strip_choice is not None:
-        $ the_person.draw_animated_removal(strip_choice)
-        "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-        $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+    $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
     "Once she finishes stripping, she puts on some incredibly sexy pink lingerie."
     $ the_person.outfit = SB_advert_six_outfit.get_copy()
     $ the_person.draw_person()
@@ -1373,11 +1339,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     $ the_person.draw_person(position = "stand3")
     the_person.char "Alright. Before we get started, let me get ready. You should probably get naked too!"
     "You start to strip down, but watch intently while [the_person.possessive_title] strips down along side you."
-    $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-    while strip_choice is not None:
-        $ the_person.draw_animated_removal(strip_choice)
-        "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
-        $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+    $ the_person.strip_outfit(position = "stand3")
     "Now that she is naked, [the_person.possessive_title] grabs some of her anal lube of a shelf. You raise an eyebrow as she squirts some onto her hand."
     mc.name "Anal lube? Wow... going all out are we?"
     "[the_person.possessive_title] chuckles as she reaches back and starts to spread the lube around her backside."
@@ -1417,7 +1379,8 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     $ the_person.outfit = (the_person.wardrobe.decide_on_outfit(40)).get_copy()
 
     #TODO move the scene to the player's bedroom. and get dressed
-    $ renpy.show(bedroom.name,what=bedroom.background_image)
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
     $ the_person.draw_person(position = "stand4")
     "You and [the_person.possessive_title] head back to your place. Having already put one together, you and her quick have it all set up."
 
@@ -1534,11 +1497,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
             "You stop for a second and admire [the_person.title], her body on display in front of you. You guess she walks around the house like this?"
         else:
             "Your mind hazy with lust, you begin to pull [the_person.title]'s clothes off."
-            $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-            while strip_choice is not None:
-                $ the_person.draw_animated_removal(strip_choice)
-                "You roughly strip off [the_person.possessive_title]'s [strip_choice.name]."
-                $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+            $ the_person.strip_outfit(position = "missionary")
             "Now naked, you stop for a second and admire [the_person.title]'s incredible body."
         "Before you go any further, you decide to make sure that [the_person.title] is wet and ready for you. You pull her over so her legs are hanging off the edge of the bed and get down on your knees in front of her."
         "She spread's her legs instinctively as you begin to kiss along her knee. You trail wet kisses along the inside of her thigh, working your way further up."
@@ -1694,7 +1653,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         "[the_person.title]heads to the bathroom. You grab your stuff and head out."
     $ the_person.reset_arousal()
     $ the_person.outfit = (the_person.wardrobe.decide_on_outfit(40)).get_copy()
-    $ change_scene_display(mc.location)
+    $ mc.location.show_background()
     $ renpy.scene("Active")
     return
 

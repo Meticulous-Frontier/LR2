@@ -40,6 +40,9 @@ init 5 python:
     global crisis_base_chance
     global morning_crisis_base_chance
 
+    # some crisis events have impact on game dynamic and should be allowed to trigger often
+    excluded_crisis_tracker_events = [work_relationship_change_crisis]
+
     crisis_base_chance = 8
     morning_crisis_base_chance = 4
 
@@ -49,6 +52,7 @@ init 5 python:
     crisis_chance = crisis_base_chance
     morning_crisis_chance = morning_crisis_base_chance
 
+    mandatory_advance_time = False
 
     advance_time_people_run_turn_action = ActionMod("End of day run people", advance_time_people_run_turn_requirement,
         "advance_time_people_run_turn_label", priority = 1, allow_disable = False)
@@ -96,42 +100,26 @@ init 5 python:
             if not ic in crisis_tracker: # skip events in tracker list
                 if crisis[0].is_action_enabled(): #Get the first element of the weighted tuple, the action.
                     possible_crisis_list.append(crisis) #Build a list of valid crises from ones that pass their requirement.
-
         renpy.random.shuffle(possible_crisis_list)    # shuffle the list in random order
         return get_random_from_weighted_list(possible_crisis_list)
 
     def get_morning_crisis_from_crisis_list():
-        possible_morning_crises = []
+        possible_morning_crises_list = []
         for crisis in morning_crisis_list:
             ic = [c[0] for c in morning_crisis_list].index(crisis[0]) # get index of crisis
             if not ic in morning_crisis_tracker: # skip events in tracker list
                 if crisis[0].is_action_enabled(): #Get the first element of the weighted tuple, the action.
-                    possible_morning_crises.append(crisis) # Build a list of valid crises from ones that pass their requirement.
-
-        renpy.random.shuffle(possible_morning_crises)    # shuffle the list in random order
-        return get_random_from_weighted_list(possible_morning_crises)
+                    possible_morning_crises_list.append(crisis) # Build a list of valid crises from ones that pass their requirement.
+        renpy.random.shuffle(possible_morning_crises_list)    # shuffle the list in random order
+        return get_random_from_weighted_list(possible_morning_crises_list)
 
     def cleanup_crisis_tracker():
-        # how many crisis events are disabled?
-        disabled = 0
-        for action_mod in action_mod_list:
-            if hasattr(action_mod, "is_crisis") and action_mod.is_crisis and not action_mod.enabled:
-                if not hasattr(action_mod, "is_morning_crisis") or not action_mod.is_morning_crisis:
-                    disabled += 1
-
-        while len(crisis_tracker) > ((len(crisis_list) - disabled) // 3): # release old tracked events
+        while len(crisis_tracker) > 10: # release old tracked events
             del crisis_tracker[0]
         return
 
     def cleanup_morning_crisis_tracker():
-        # how many crisis events are disabled?
-        morning_disabled = 0
-        for action_mod in action_mod_list:
-            if hasattr(action_mod, "is_crisis") and action_mod.is_crisis and not action_mod.enabled:
-                if hasattr(action_mod, "is_morning_crisis") and action_mod.is_morning_crisis:
-                    morning_disabled += 1
-
-        while len(morning_crisis_tracker) > ((len(morning_crisis_list) - morning_disabled) // 2): # release old tracked events
+        while len(morning_crisis_tracker) > 3: # release old tracked events
             del morning_crisis_tracker[0]
         return
 
@@ -160,6 +148,10 @@ label advance_time_enhanced:
     # increase crisis chance (every time slot)
     $ crisis_chance += 1
     $ del people_to_process
+    $ renpy.free_memory()
+    $ mc.location.show_background()
+    if mandatory_advance_time: #If a crisis has told us to advance time after it we do so.
+        call advance_time from _call_advance_time_advance_time_enhanced    
     return
 
 label advance_time_bankrupt_check_label():
@@ -184,10 +176,13 @@ label advance_time_random_crisis_label():
     if the_crisis:
         #$ mc.log_event("General [[" + str(len(possible_crisis_list)) + "]: " + the_crisis.name, "float_text_grey")
         $ crisis_chance = crisis_base_chance
-        $ crisis_tracker.append([c[0] for c in crisis_list].index(the_crisis)) # add crisis index to recent crisis list
+        if not the_crisis in excluded_crisis_tracker_events:
+            $ crisis_tracker.append([c[0] for c in crisis_list].index(the_crisis)) # add crisis index to recent crisis list
+        if _return == "Advance Time":
+            $ mandatory_advance_time = True
         $ the_crisis.call_action()
         $ del the_crisis
-    $ change_scene_display(mc.location) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
+    $ mc.location.show_background()
     show screen business_ui
     return
 
@@ -202,13 +197,15 @@ label advance_time_mandatory_crisis_label():
         $ the_crisis = mc.business.mandatory_crises_list[mandatory_crisis_count]
         if the_crisis.is_action_enabled():
             $ the_crisis.call_action()
+            if _return == "Advance Time":
+                $ mandatory_advance_time = True
             $ renpy.scene("Active")
             $ clear_list.append(the_crisis)
         $ mandatory_crisis_count += 1
         $ del the_crisis
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
-        change_scene_display(mc.location) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
+        mc.location.show_background()
         for crisis in clear_list:
             mc.business.mandatory_crises_list.remove(crisis) #Clean up the list.
 
@@ -218,6 +215,8 @@ label advance_time_mandatory_crisis_label():
 label advance_time_people_run_turn_label():
     # "advance_time_people_run_turn_label - timeslot [time_of_day]" #DEBUG
     python:
+        mandatory_advance_time = False
+
         people_to_process = [] #This is a master list of turns of need to process, stored as tuples [character,location]. Used to avoid modifying a list while we iterate over it, and to avoid repeat movements.
         for place in list_of_places:
             for person in place.people:
@@ -262,13 +261,15 @@ label advance_time_mandatory_morning_crisis_label():
         $ the_crisis = mc.business.mandatory_morning_crises_list[mandatory_morning_crisis_count]
         if the_crisis.is_action_enabled():
             $ the_crisis.call_action()
+            if _return == "Advance Time":
+                $ mandatory_advance_time = True
             $ renpy.scene("Active")
             $ clear_list.append(the_crisis)
         $ mandatory_morning_crisis_count += 1
         $ del the_crisis
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
-        change_scene_display(mc.location) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
+        mc.location.show_background()
         for crisis in clear_list:
             mc.business.mandatory_morning_crises_list.remove(crisis) #Clean up the list.
 
@@ -280,12 +281,15 @@ label advance_time_random_morning_crisis_label():
     $ cleanup_morning_crisis_tracker()
     $ the_morning_crisis = get_morning_crisis_from_crisis_list()
     if the_morning_crisis:
-        #$ mc.log_event("Morning: [[" + str(len(possible_morning_crises)) + "] : " +  the_morning_crisis.name, "float_text_grey")
+        #$ mc.log_event("Morning: [[" + str(len(possible_morning_crises_list)) + "] : " +  the_morning_crisis.name, "float_text_grey")
         $ morning_crisis_chance = morning_crisis_base_chance
-        $ morning_crisis_tracker.append([c[0] for c in morning_crisis_list].index(the_morning_crisis)) # add crisis index to recent crisis list
+        if not the_morning_crisis in excluded_crisis_tracker_events:
+            $ morning_crisis_tracker.append([c[0] for c in morning_crisis_list].index(the_morning_crisis)) # add crisis index to recent crisis list
         $ the_morning_crisis.call_action()
+        if _return == "Advance Time":
+            $ mandatory_advance_time = True        
         $ del the_morning_crisis
-    $ change_scene_display(mc.location) #Make sure we're showing the correct background for our location, which might have been temporarily changed by a crisis.
+    $ mc.location.show_background()
     return
 
 label advance_time_next_label():

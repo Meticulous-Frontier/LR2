@@ -32,13 +32,6 @@ init 1 python:
 
     SB_cum_nude_outfit = Outfit("Nude")
 
-    def SB_fetish_cum_underdesk_event_requirement():
-        if time_of_day < 4:
-            if mc.business.is_open_for_business():
-                if mc.is_at_work():
-                    return True
-        return False
-
     SB_fetish_mom_cum = Action("Mom Cum Fetish", SB_fetish_mom_cum_requirement, "SB_fetish_mom_cum_label")
     SB_fetish_lily_cum = Action("Sister Cum Fetish", SB_fetish_lily_cum_requirement, "SB_fetish_lily_cum_label")
     SB_fetish_cum_crisis = Action("Loves Cum.", SB_fetish_cum_requirement, "SB_fetish_cum_label")
@@ -133,7 +126,7 @@ label SB_fetish_cum_label(the_person):
     $ FETISH_CUM_EVENT_INUSE = False
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-    $ change_scene_display(mc.location)
+    $ mc.location.show_background()
     $ renpy.scene("Active")
     return
 
@@ -304,7 +297,7 @@ label SB_fetish_mom_cum_label():
     python:
         the_person.reset_arousal()
         the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-        change_scene_display(mc.location)
+        mc.location.show_background()
         renpy.scene("Active")
     return
 
@@ -313,7 +306,7 @@ label SB_fetish_mom_cum_label():
 label SB_fetish_lily_cum_label():
     $ the_person = lily
     "You wake up a little groggy. Your head kinda hurts, so you grab some clothes and head towards the bathroom to take a hot shower. Hopefully the steam will help you feel better."
-    $ change_scene_display(home_shower)
+    $ home_shower.show_background()
     "You stand in the shower, enjoying the hot water for several minutes. The steam is beginning to cloud up the bathroom."
     "You are surprised when the shower door opens. You see [the_person.possessive_title] getting in the shower with you."
     $ the_person.outfit = SB_cum_nude_outfit.get_copy()
@@ -390,12 +383,12 @@ label SB_fetish_lily_cum_label():
     python:
         the_person.reset_arousal()
         the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-        change_scene_display(bedroom)
+        bedroom.show_background()
         renpy.scene("Active")
 
         for morn_event in morning_crisis_list:
             if morn_event[0].name == "Sister Cum Fetish":
-                #renpy.say("","DEBUG: Succesfully located shower, attempting removal and replacement.")
+                #renpy.say("","DEBUG: Successfully located shower, attempting removal and replacement.")
                 morning_crisis_list.remove(morn_event)
     return
 
@@ -415,7 +408,7 @@ label SB_fetish_shower_cum_label():
 
     $ the_person = get_random_from_list(meets_fetish_list)
     "You wake up a little groggy. Your head kinda hurts, so you grab some clothes and head towards the bathroom to take a hot shower. Hopefully the steam will help you feel better."
-    $ change_scene_display(home_shower)
+    $ home_shower.show_background()
     "You stand in the shower, enjoying the hot water for several minutes. The steam is beginning to cloud up the bathroom."
     "You hear the shower door open and see [the_person.possessive_title] getting in the shower with you."
     $ the_person.outfit = SB_cum_nude_outfit.get_copy()
@@ -429,7 +422,7 @@ label SB_fetish_shower_cum_label():
     $ the_person.draw_person(position = "blowjob")
     "[the_person.possessive_title] gets down on her knees."
     the_person.char "I'm sorry, I know I shouldn't approach you like this... but I can't help myself this morning! Give me your cum please!"
-    "[the_person.possessive_title] looks up at your from her knees. She looks you right in the eyes as she leans foward and slides her lips over the tip of your dick."
+    "[the_person.possessive_title] looks up at your from her knees. She looks you right in the eyes as she leans forward and slides her lips over the tip of your dick."
     call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_SBC50
     the_person.char "Oh my god, thank you [the_person.mc_title]. I needed that so bad."
     "[the_person.possessive_title] stands up. Her hunger for cum satisfied for now."
@@ -440,7 +433,7 @@ label SB_fetish_shower_cum_label():
     python:
         the_person.reset_arousal()
         the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
-        change_scene_display(bedroom)
+        mc.location.show_background()
         renpy.scene("Active")
 
     return

@@ -1,10 +1,4 @@
 init -1 python:
-    def change_scene_display(location): #Switch displayed location and background image
-        #mc.log_event("Showing: " + location.formalName, "float_text_grey")
-        renpy.scene()   # initialize scene
-        renpy.show(location.name, what = location.background_image) # set background for new scene
-        return   
-
     def create_room_label_list(): #Assigns room.labels = [] to all rooms in list_of_places. So they can have labels assigned to them.
         for room in list_of_places: # NOTE: Going to be using the Room.actions list instead because I was too focused on trying to make something unessescary work when I created this.
             if hasattr(room, "labels") == False:

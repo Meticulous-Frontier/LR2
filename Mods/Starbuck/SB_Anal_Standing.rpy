@@ -1,18 +1,17 @@
-init:
-    python:
-        SB_anal_standing = Position("Standing Anal",70,95,"standing_doggy","Low","Vagina","Anal",18,18,[],
+init python:
+    SB_anal_standing = Position("Standing Anal",70,95,"standing_doggy","Low","Vagina","Anal",18,18,[],
         "intro_SB_anal_standing",
         ["scene_SB_anal_standing_1","scene_SB_anal_standing_2"],
         "outro_SB_anal_standing",
         "transition_default_SB_anal_standing",
         "strip_SB_anal_standing", "strip_ask_SB_anal_standing",
         "orgasm_SB_anal_standing",
-        opinion_tags = ["doggy style sex" "anal sex" "sex standing up"])
-        list_of_positions.append(SB_anal_standing)
+        opinion_tags = ["doggy style sex", "anal sex", "sex standing up"])
+    list_of_positions.append(SB_anal_standing)
 
-#init 1:
-    #python:
-        #SB_anal_standing.link_positions_two_way(doggy, "transition_SB_anal_standing_doggy", "transition_doggy_SB_anal_standing")
+init 1 python:
+    SB_anal_standing.link_positions(SB_doggy_standing, "transition_SB_anal_standing_SB_doggy_standing")
+    SB_anal_standing.link_positions(doggy_anal, "transition_SB_anal_standing_doggy_anal")
 
 label intro_SB_anal_standing(the_girl, the_location, the_object, the_round):
     "With you arms wrapped around [the_girl.possessive_title], you make out for a bit with her back to the [the_object.name]"
@@ -67,7 +66,7 @@ label intro_SB_anal_standing(the_girl, the_location, the_object, the_round):
 
 label scene_SB_anal_standing_1(the_girl, the_location, the_object, the_round):
     "Your hips slap against [the_girl.possessive_title]'s as you plunder her rectum."
-    $ the_girl.call_dialogue("sex_responses")
+    $ the_girl.call_dialogue("sex_responses_anal")
     if the_girl.sex_skills["Anal"] < 2: #Inexperienced
         "After a particularly hard thrust, [the_girl.possessive_title] reflexively starts to pull away. You grab her hips to keep her from pulling off completely."
         the_girl.char "I'm sorry [the_girl.mc_title], it hurts. Can you go a little slower?"
@@ -89,10 +88,10 @@ label scene_SB_anal_standing_1(the_girl, the_location, the_object, the_round):
     else:
         "Fucking her hard, [the_girl.possessive_title] moans, matching each hip movement of yours with movement of her own."
         the_girl.char "Oh god, you fuck me so good, I can barely keep up!"
-        "[the_girl.possessive_title] reaches back with one hand and pulls her ass cheek back, giving you a great view of her booty hole stretched wide to accomodate you."
+        "[the_girl.possessive_title] reaches back with one hand and pulls her ass cheek back, giving you a great view of her booty hole stretched wide to accommodate you."
         "Buried deep inside, you stir your hips in a circular motion. Her rectum quivers in response."
     menu:
-        "knead her ass":
+        "Knead her ass":
             "With your erection buried deep in her rump, you take both hands and knead her ass cheeks."
             mc.name "[the_girl.title], your ass is so tight, I can't believe you let me sodomize you like this."
             if the_girl.get_opinion_score("being submissive") > 0 or the_girl.obedience > 130:
@@ -114,12 +113,12 @@ label scene_SB_anal_standing_1(the_girl, the_location, the_object, the_round):
                 if mc.arousal > 70:
                     "You moan at the sensations."
                     mc.name "You feel amazing. You're gonna make me cum soon."
-                    if the_girl.get_opinion_score("creampies") > 0:
+                    if the_girl.get_opinion_score("anal creampies") > 0:
                         "[the_girl.possessive_title] looks back at you and smiles."
                         the_girl.char "Oh [the_girl.mc_title], I can't wait to feel you fill me up. I hope you finish deep!"
                         "[the_girl.possessive_title]'s ass quivers a bit, as she imagines you cumming deep inside her."
-                        $ the_girl.discover_opinion("creampies")
-                        $ the_girl.change_arousal(the_girl.get_opinion_score("creampies") * 3)
+                        $ the_girl.discover_opinion("anal creampies")
+                        $ the_girl.change_arousal(the_girl.get_opinion_score("anal creampies") * 3)
                         if the_girl.get_opinion_score("being covered in cum") > 0:
                             the_girl.char "You could always pull out too... your cum feels so good when is splashes all over my skin..."
                             $ the_girl.discover_opinion("being covered in cum")
@@ -235,11 +234,11 @@ label scene_SB_anal_standing_2(the_girl, the_location, the_object, the_round):
 
 label outro_SB_anal_standing(the_girl, the_location, the_object, the_round):
     "[the_girl.possessive_title]'s tight ass draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
-    $the_girl.call_dialogue("sex_responses")
+    $the_girl.call_dialogue("sex_responses_anal")
     mc.name "Ah, I'm going to cum!"
     if mc.condom:
         the_girl.char "Oh god do it! Show me how much you love my ass!"
-    elif the_girl.get_opinion_score("creampies") > 0:
+    elif the_girl.get_opinion_score("anal creampies") > 0:
             the_girl.char "Yes! Shove it in deep [the_girl.mc_title]!"
     elif the_girl.sluttiness < 80:
         the_girl.char "Oh my god I can't believe I'm letting you do this..."
@@ -250,14 +249,14 @@ label outro_SB_anal_standing(the_girl, the_location, the_object, the_round):
         "Cum inside of her.":
             if mc.condom:
                 "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum."
-                "She gasps with every final thrust as you fill your condom, which is slowly expanding inside her to accomodate your seed."
+                "She gasps with every final thrust as you fill your condom, which is slowly expanding inside her to accommodate your seed."
                 if the_girl.get_opinion_score("bareback sex") > 0:
                     the_girl.char "Oh god, imagine if you weren't wearing that fucking rubber! I could feel you filling me up..."
                 else:
                     the_girl.char "That's it, cum deep!"
                 "You wait until your orgasm has passed completely, then pull out and sit back. Her asshole gapes slightly. You condom is full of your potent seed."
                 if SB_check_fetish(the_girl, cum_internal_role):
-                    "[the_girl.possessive_title] quickly reachs back and grabs your cock. She hastily pulls your condom off, careful not to spill a drop."
+                    "[the_girl.possessive_title] quickly reaches back and grabs your cock. She hastily pulls your condom off, careful not to spill a drop."
                     the_girl.char "I'm not letting a drop of this delicious cum go to waste!"
                     "She brings the condom to her mouth and drains it all into her mouth in one quick motion. You can see her pupils dilate as she feeds her cum fetish."
                     "She turns the condom inside out and licks the inside of it, desperate to get every drop of cum she possibly can."
@@ -273,18 +272,18 @@ label outro_SB_anal_standing(the_girl, the_location, the_object, the_round):
                 return
             "[the_girl.possessive_title]'s ass is just too good. You decide to cum inside it."
             "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
-            if the_girl.get_opinion_score("creampies") > 0:
+            if the_girl.get_opinion_score("anal creampies") > 0:
                 the_girl.char  "Yes! Fill my ass with your cum!"
             if the_girl.arousal > 110:
                 "You feel her bowel contracting around your dick as she also starts to orgasm."
                 $ the_girl.change_happiness(5)
-            $ cum_in_ass(the_girl)
+            $ the_girl.cum_in_ass()
             $ SB_anal_standing.redraw_scene(the_girl)
             if SB_check_fetish(the_girl, cum_internal_role):
-                "[the_girl.possessive_title]'s body goes rigid as your cum poors into her ass. Goosebumps erupt all over her body as her brain registers her creampie."
+                "[the_girl.possessive_title]'s body goes rigid as your cum pours into her ass. Goosebumps erupt all over her body as her brain registers her creampie."
                 the_girl.char "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
                 "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
-            elif the_girl.get_opinion_score("creampies") > 0:
+            elif the_girl.get_opinion_score("anal creampies") > 0:
                 the_girl.char "Oh god... its inside me... right where it belongs. Thank you so much [the_girl.mc_title]!"
             elif the_girl.sluttiness > 110:
                 the_girl.char "Oh god it's so good. It doesn't matter which hole you do it in, I love it when you cum inside me."
@@ -359,6 +358,36 @@ label transition_default_SB_anal_standing(the_girl, the_location, the_object, th
     "Once you're both ready you push yourself forward, slipping your hard shaft deep inside of her. She lets out a gasp under her breath."
     return
 
+label transition_SB_anal_standing_doggy_anal(the_girl, the_location, the_object, the_round):
+    mc.name "Get down on your knees [the_girl.title], i'm going to fuck you like the little bitch you are."
+    the_girl.char "Oh yes, [the_girl.mc_title], make me your little bitch."
+    return
+
+label transition_SB_anal_standing_SB_doggy_standing(the_girl, the_location, the_object, the_round):
+    "You pull out of [the_girl.title]'s asshole, leaving it gaping and her sighing in relief."
+    "You shift your cock downwards and rub the tip of it along the slit of her vagina."
+    if the_girl.effective_sluttiness() < the_girl.get_no_condom_threshold():
+        the_girl.char "Mmm, fuck me [the_girl.mc_title]. Use all of my holes for your pleasure!"
+        $ wants_condom = False
+    else:
+        the_girl.char "Wait, wait... I can't risk getting pregnant, I need you to put on a condom."
+        $ wants_condom = True
+
+    if wants_condom and not mc.condom:
+        menu:
+            "Put on a condom.":
+                "You pull your dick back and quickly put on a condom. Then you line up your dick with her dripping wet pussy."
+
+            "Ram it home!":
+                if wants_condom:
+                    mc.name "Don't worry, I'll pull out."
+                    $ the_girl.change_happiness(-5)
+                else:
+                    pass
+
+    "You grab her by the hips and thrust yourself deep inside her tight, pulsating pussy."
+    return    
+
 label strip_SB_anal_standing(the_girl, the_clothing, the_location, the_object, the_round):
     "[the_girl.possessive_title] leans forward a little further and pops off your cock."
     $ the_girl.call_dialogue("sex_strip")
@@ -401,19 +430,3 @@ label orgasm_SB_anal_standing(the_girl, the_location, the_object, the_round):
     else:
         the_girl.char "Don't stop... it still feels so good!"
     return
-
-
-
-init:
-    python:
-        def cum_in_ass(the_girl):
-            mc.listener_system.fire_event("sex_cum_ass", the_person = the_girl)
-            the_girl.change_slut_temp(5*the_girl.get_opinion_score("creampies"))
-            the_girl.change_happiness(5*the_girl.get_opinion_score("creampies"))
-            the_girl.discover_opinion("creampies")
-
-            the_girl.change_slut_temp(5*the_girl.get_opinion_score("anal sex"))
-            the_girl.change_happiness(5*the_girl.get_opinion_score("anal sex"))
-            the_girl.discover_opinion("anal sex")
-
-            return
