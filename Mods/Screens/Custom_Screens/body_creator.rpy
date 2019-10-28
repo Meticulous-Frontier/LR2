@@ -13,6 +13,7 @@ init -2 python:
 
         if part_to_display in hair_styles:
             part_to_display.colour = self.hair_colour[1]
+
         cs = renpy.current_screen()
 
         position = "stand3"
@@ -24,7 +25,7 @@ init -2 python:
 
         displayable_list = [] # We will be building up a list of displayables passed to us by the various objects on the person (their body, clothing, etc.)
 
-        if part_to_display in list_of_bodies and type(part_to_display) is Clothing: # Seperate the parts (Clothing) so we draw things individually.
+        if part_to_display in list_of_bodies: # Seperate the parts (Clothing) so we draw things individually.
             displayable_list.append(part_to_display.generate_item_displayable(self.body_type, self.tits, position, lighting)) #Add the body displayable
 
         #displayable_list.extend(self.outfit.generate_draw_list(self,position,emotion,special_modifier, lighting = lighting)) #Get the displayables for everything we wear. Note that extnsions do not return anything because they have nothing to show.
@@ -99,52 +100,56 @@ screen body_customizer(the_person):
     zorder 999
 
     default list_of_bodies = [white_skin, tan_skin, black_skin] #Assemble the cloth items into a list. Revisit this later if a default list is created
-    default categories = {"hair_style": [hair_styles, False], "body_images": [list_of_bodies, False], "expression_images": [list_of_faces, False]}
+    default categories = {"hair_style": [hair_styles, False], "body_images": [list_of_bodies, False], "expression_images": [list_of_faces, False], "tits": [[x[0] for x in list_of_tits], False], "body_type": [list_of_body_types, False]}
     frame:
         area(0, 100, 1500, 900)
 
         hbox:
             xfill True
-            vbox:
-                for cat in categories:
-                    hbox:
-                        frame:
-                            xsize 200
-                            ysize 200
-
-                            button:
-                                background "#666666"
-                                foreground Crop(( 0, 0, 190, 190), get_part_display_image(the_person, getattr(the_person, cat))) # TODO: Change positional alignment and crop size to fit all types of images
-
-                                ysize 190
-
-                                action Function(toggle_dict_key, cat) # Should probably be using ToggleDict here.
-
-                        if categories[cat][1]:
+            vpgrid id "mainport":
+                cols 1
+                draggable True
+                mousewheel True
+                vbox:
+                    for cat in categories:
+                        hbox:
                             frame:
+                                xsize 200
                                 ysize 200
-                                vpgrid:
 
-                                    yfill True
+                                button:
+                                    background "#666666"
+                                    foreground Crop(( 0, 0, 190, 190), get_part_display_image(the_person, getattr(the_person, cat))) # TODO: Change positional alignment and crop size to fit all types of images
 
-                                    cols 4
-                                    side_xalign 1.0
-                                    draggable True
-                                    mousewheel True
-                                    scrollbars "vertical"
+                                    ysize 190
 
-                                    for item in categories[cat][0]:
-                                        frame:
-                                            xsize 200
-                                            ysize 200
-                                            button:
-                                                foreground Crop(( 0, 0, 190, 190), get_part_display_image(the_person, item))
-                                                ysize 190
-                                                action [
-                                                    Function(custom_set_field, the_person, cat, item),
-                                                    Function(the_person.draw_person, show_person_info = False)
+                                    action Function(toggle_dict_key, cat) # Should probably be using ToggleDict here.
 
-                                                ]
+                            if categories[cat][1]:
+                                frame:
+                                    ysize 200
+                                    vpgrid:
+
+                                        yfill True
+
+                                        cols 4
+                                        side_xalign 1.0
+                                        draggable True
+                                        mousewheel True
+                                        scrollbars "vertical"
+
+                                        for item in categories[cat][0]:
+                                            frame:
+                                                xsize 200
+                                                ysize 200
+                                                button:
+                                                    foreground Crop(( 0, 0, 190, 190), get_part_display_image(the_person, item))
+                                                    ysize 190
+                                                    action [
+                                                        Function(custom_set_field, the_person, cat, item),
+                                                        Function(the_person.draw_person, show_person_info = False)
+
+                                                    ]
 
 
             frame:
