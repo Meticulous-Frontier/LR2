@@ -40,6 +40,9 @@ init -1:
         ## MATCH SKIN COLOR
         # Matches skin, body, face and expression images based on input of skin color
         def match_skin(self, color):
+            if " skin" in color: # If using the_person.body_images.name as a reference, remove the " skin" part.
+                color = color[:-5]
+
             self.skin = str(color)
             if self.skin == "white":
                 self.body_images = white_skin
