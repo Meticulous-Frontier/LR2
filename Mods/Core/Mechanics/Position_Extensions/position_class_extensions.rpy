@@ -25,10 +25,12 @@ init -1:
             positive_opinions = the_person.get_known_opinion_list(include_sexy = True, include_normal = False, only_positive = True, only_negative = False)
             negative_opinions = the_person.get_known_opinion_list(include_sexy = True, include_normal = False, only_positive = False, only_negative = True)
 
-            if any(x in positive_opinions for x in self.opinion_tags):
-                opinion_string = " {color=#0044AA}Favorite{/color}"
-            if any(x in negative_opinions for x in self.opinion_tags):
-                opinion_string = " {color=#0044AA}Dislike{/color}"
+            if positive_opinions:
+                if any(x in positive_opinions for x in self.opinion_tags):
+                    opinion_string = " {color=#0044AA}Favorite{/color}"
+            if negative_opinions:
+                if any(x in negative_opinions for x in self.opinion_tags):
+                    opinion_string = " {color=#0044AA}Dislike{/color}"
 
 
             if self.check_clothing(the_person):
