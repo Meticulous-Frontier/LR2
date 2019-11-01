@@ -22,13 +22,13 @@ init -1:
                 willingness_string = "{color=#FF3D3D}Too Slutty{/color}"
                 tooltip_string = " (tooltip)This position is so far beyond what she considers appropriate that she would never dream of it."
 
-            positive_opinions = the_person.get_known_opinion_list(include_sexy = True, include_normal = False, only_positive = True, only_negative = False)
-            negative_opinions = the_person.get_known_opinion_list(include_sexy = True, include_normal = False, only_positive = False, only_negative = True)
+            positive_opinions = [the_person.get_known_opinion_list(include_sexy = True, include_normal = False, only_positive = True, only_negative = False)]
+            negative_opinions = [the_person.get_known_opinion_list(include_sexy = True, include_normal = False, only_positive = False, only_negative = True)]
 
-            if positive_opinions:
+            if positive_opinions is not None and self.opinion_tags is not None:
                 if any(x in positive_opinions for x in self.opinion_tags):
                     opinion_string = " {color=#0044AA}Favorite{/color}"
-            if negative_opinions:
+            if negative_opinions is not None and self.opinion_tags is not None:
                 if any(x in negative_opinions for x in self.opinion_tags):
                     opinion_string = " {color=#0044AA}Dislike{/color}"
 
