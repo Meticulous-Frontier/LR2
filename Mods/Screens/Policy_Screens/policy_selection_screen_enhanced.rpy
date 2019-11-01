@@ -178,7 +178,7 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                                                     if selected_tooltip is policy.desc:
                                                         background "#78b156"
 
-                                                    elif not get_from_policy_list(policy).enabled and not policy.upgrade:
+                                                    elif not get_from_policy_list(policy).enabled and (not policy.upgrade and policy.refresh is not None):
                                                         background "#666666"
 
                                                     elif policy.upgrade and (policy.cost > mc.business.funds):
