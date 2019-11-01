@@ -11,6 +11,8 @@ init:
         "transition_default_SB_sixty_nine",
         "strip_SB_sixty_nine", "strip_ask_SB_sixty_nine",
         "orgasm_SB_sixty_nine",
+        verb = "sixty-nine",
+        verbing = "sixty-nining",
         opinion_tags = ["giving blowjobs", "getting head"], record_class = "Cunnilingus")
         list_of_positions.append(SB_sixty_nine)
 

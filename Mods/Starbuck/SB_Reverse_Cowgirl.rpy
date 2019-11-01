@@ -7,6 +7,8 @@ init:
         "transition_default_SB_reverse_cowgirl",
         "strip_SB_reverse_cowgirl", "strip_ask_SB_reverse_cowgirl",
         "orgasm_SB_reverse_cowgirl",
+        verb = "ride",
+        verbing = "riding",
         opinion_tags = ["taking control","vaginal sex"], record_class = "Vaginal Sex")
         list_of_girl_positions.append(SB_reverse_cowgirl)
 

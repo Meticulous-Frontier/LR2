@@ -7,6 +7,7 @@
         "transition_default_SB_anal_cowgirl",
         "strip_SB_anal_cowgirl", "strip_ask_SB_anal_cowgirl",
         "orgasm_SB_anal_cowgirl",
+        verb = "ass fuck",
         opinion_tags = ["taking control", "anal sex"], record_class = "Anal Sex")
         list_of_girl_positions.append(SB_anal_cowgirl)
 

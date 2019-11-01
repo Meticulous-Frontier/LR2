@@ -6,6 +6,7 @@ init python:
         "transition_default_SB_anal_standing",
         "strip_SB_anal_standing", "strip_ask_SB_anal_standing",
         "orgasm_SB_anal_standing",
+        verb = "ass fuck",
         opinion_tags = ["doggy style sex", "anal sex", "sex standing up"], record_class = "Anal Sex")
     list_of_positions.append(SB_anal_standing)
 
