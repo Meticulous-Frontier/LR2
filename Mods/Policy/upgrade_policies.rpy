@@ -10,12 +10,12 @@ init 10 python:
 
     def create_production_line_requirement():
         if "production_line_addition_2_policy" in globals(): # In case this gets removed or changed
-            return purchase_machinery_room_policy.is_owned() and production_line_addition_2_policy.is_owned()
+            return p_division_policy.is_owned() and production_line_addition_2_policy.is_owned()
         else:
-            return purchase_machinery_room_policy.is_owned()
+            return p_division_policy.is_owned()
 
     def overload_production_lines_requirement():
-        return purchase_machinery_room_policy.is_owned() and ("machinery_room_overload" in globals() and machinery_room_overload >= 100)
+        return p_division_policy.is_owned() and ("machinery_room_overload" in globals() and machinery_room_overload >= 100)
 
     def overload_production_lines_on_buy_function(amount):
         global machinery_room_overload
@@ -28,10 +28,24 @@ init 10 python:
     def mandatory_vibe_action_requirement():
         return (mandatory_vibe_policy.is_owned() and get_from_policy_list(mandatory_vibe_policy).enabled) and mc.business.is_open_for_business() # Only run while employees are at work. # Action runs if the policy is owned. Is_owned() checks if it is in the mc.business.policy_list
 
+    def body_customizer_policy_requirement():
+        return rd_division_policy.is_owned()
+    body_customizer_action = Action("Modify Person", body_customizer_policy_requirement, "body_customizer_action_label", menu_tooltip = "Bring a person in for modifications")
 
 label store_mod_policies(stack = None):
 
-    python:
+    python: # NOTE: Feel free to rename things and change the costs up.
+
+        body_customizer_policy = ModPolicy(
+            name = "Genetic Manipulation Permit",
+            cost = 15000,
+            desc = "Allows the modification of DNA on human subjects with the intent of cosmetic changes in the [rd_division.formalName]",
+            requirement = body_customizer_policy_requirement,
+            on_buy_function = rd_division.add_action,
+            on_buy_arguments = {"act": body_customizer_action},
+            parent = rd_division_policy
+
+        )
         create_production_line_policy = ModPolicy(
             name = "Create Production Line",
             cost = mc.business.production_lines * 5000,
@@ -40,7 +54,7 @@ label store_mod_policies(stack = None):
             on_buy_function = add_production_lines, # Find a way to use lists as on_buy_function?
             on_buy_arguments = {"amount": 1},
             alternate_on_buy_arguments = {"amount": -1},
-            parent = purchase_machinery_room_policy, # Set the policy you want as a parent here. Clicking the parent in the policy screen will reveal the children ( if any are present )
+            parent = p_division_policy, # Set the policy you want as a parent here. Clicking the parent in the policy screen will reveal the children ( if any are present )
             upgrade = True,
             refresh = "store_mod_policies" # Set this to the function that creates it
          )
@@ -53,7 +67,7 @@ label store_mod_policies(stack = None):
             on_buy_function = overload_production_lines_on_buy_function,
             on_buy_arguments = {"amount": 10},
             alternate_on_buy_arguments = {"amount": -10}, # Arguments sent on a right click. Usually a decrease. Free right now, add a refund / cost to it?
-            parent = purchase_machinery_room_policy,
+            parent = p_division_policy,
             upgrade = True,
             refresh = "store_mod_policies"
          )
@@ -85,4 +99,19 @@ label mandatory_vibe_company_label():
         for person in mc.business.get_employee_list():
             if person.arousal < 30:
                 person.arousal = 30
+    return
+
+label body_customizer_action_label():
+
+    while True:
+        $ people_list = get_sorted_people_list(known_people_in_the_game([mc]), "Modify Person", ["Back"])
+
+        call screen main_choice_display([people_list])
+        $ person_choice = _return
+        $ del people_list
+
+        if person_choice == "Back":
+            return # Where to go if you hit "Back".
+        else:
+            show screen body_customizer(person_choice)
     return
