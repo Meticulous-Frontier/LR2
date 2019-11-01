@@ -42,7 +42,7 @@ init 5 python:
         preferences = {}
         preferences["skimpy outfits"] = {}
         preferences["skimpy outfits"]["upper_body"] = [two_part_dress, thin_dress, leotard, lace_sweater, belted_top, lace_crop_top, tanktop, tube_top, business_vest]
-        preferences["skimpy outfits"]["lower_body"] = [booty_shorts, jean_hotpants, belted_skirt, mini_skirt]
+        preferences["skimpy outfits"]["lower_body"] = [booty_shorts, jean_hotpants, daisy_dukes, belted_skirt, mini_skirt]
         preferences['skimpy outfits']["feet"] = [thigh_highs, fishnets, garter_with_fishnets, pumps, heels, high_heels, thigh_high_boots]
         preferences["skimpy outfits"]["accessories"] = [lace_choker, wide_choker, spiked_choker]
         preferences["conservative outfits"] = {}
@@ -51,7 +51,7 @@ init 5 python:
         preferences["conservative outfits"]["feet"] = [sandles, shoes, slips, sneakers, short_socks]
         preferences["conservative outfits"]["accessories"] = [wool_scarf]
         preferences["dresses"] = {}
-        preferences["dresses"]["upper_body"] = [x for x in dress_list if x not in [bath_robe, lacy_one_piece_underwear, lingerie_one_piece]]
+        preferences["dresses"]["upper_body"] = [x for x in dress_list if x not in [bath_robe, lacy_one_piece_underwear, lingerie_one_piece, apron]]
         preferences["skirts"] = {}
         preferences["skirts"]["lower_body"] = skirts_list
         preferences["pants"] = {}
@@ -60,7 +60,7 @@ init 5 python:
         preferences["showing her tits"]["upper_body"] = [strapless_bra, lace_bra, leotard, thin_dress, two_part_dress, lacy_one_piece_underwear, lingerie_one_piece, lace_sweater, sweater, belted_top, tube_top, business_vest, suit_jacket, vest]
         preferences["showing her ass"] = {}
         preferences["showing her ass"]["upper_body"] = [two_part_dress, thin_dress, summer_dress, leotard, lacy_one_piece_underwear, lingerie_one_piece]
-        preferences["showing her ass"]["lower_body"] = [cute_panties, lace_panties, cute_lace_panties, tiny_lace_panties, thong, tiny_g_string, leggings, booty_shorts, jean_hotpants]
+        preferences["showing her ass"]["lower_body"] = [cute_panties, lace_panties, cute_lace_panties, tiny_lace_panties, thong, tiny_g_string, leggings, booty_shorts, jean_hotpants, daisy_dukes]
         preferences["high heels"] = {}
         preferences["high heels"]["feet"] = [sandle_heels, pumps, heels, high_heels, boot_heels, thigh_high_boots]
         preferences["boots"] = {}
