@@ -132,7 +132,7 @@ screen body_customizer(the_person = the_person):
     #       Add Clone action
     $ renpy.block_rollback()
     modal True
-    zorder 999
+    zorder 99
 
     default list_of_bodies = [white_skin, tan_skin, black_skin] #Assemble the cloth items into a list. Revisit this later if a default list is created
     default list_of_cup_sizes = [x[0] for x in list_of_tits] # Create a standarized list
@@ -210,14 +210,14 @@ screen body_customizer(the_person = the_person):
                 xsize 200
                 ysize 200
                 vbox:
-                    textbutton "Return":
+                    textbutton "Save | Return":
                         xfill True
 
                         style "textbutton_no_padding_highlight"
                         text_style "serum_text_style"
                         action Hide("body_customizer")
 
-                    textbutton "Discard":
+                    textbutton "Discard | Undo":
                         xfill True
 
                         style "textbutton_no_padding_highlight"
@@ -247,13 +247,30 @@ screen body_customizer(the_person = the_person):
 
 
 
+init 2 python:
+
+    def set_clone_names(new_name):
+
+        cs = renpy.current_screen()
+        if cs.scope["name_type"] == "name":
+            cs.scope["clone_name"] = new_name
+        if cs.scope["name_type"] == "last_name":
+            cs.scope["clone_last_name"] = new_name
+
+        renpy.restart_interaction()
 
 screen name_select_popup(the_person): #
     modal True
-    zorder 1000
+    zorder 100
     default name_type = None
     default editing_target = the_person
-    default categories = {"Name": ["name", False], "Last Name": ["last_name", False]}
+
+    if "clone_name" not in renpy.current_screen().scope:
+        default clone_name = None
+    if "clone_last_name" not in renpy.current_screen().scope:
+        default clone_last_name = None
+
+    default categories = {"Name": ["name", False, "clone_name"], "Last Name": ["last_name", False, "clone_last_name"]}
     frame:
         xalign 0.3
         yalign 0.4
@@ -262,18 +279,26 @@ screen name_select_popup(the_person): #
         vbox:
             for cat in categories:
                 frame:
-                    button:
+                    grid 1 2:
+                        frame:
+                            background "#666666"
+                            ysize 60
+                            xfill True
+                            text str(cat) style "serum_text_style" xalign 0.5
+                        frame:
+                            button:
 
-                        text (str(cat) + ": " + getattr(the_person, categories[cat][0]) if not categories[cat][1] else "") style "serum_text_style"
-                        xfill True
-                        action Function(toggle_dict_key, cat)
-                        hovered SetScreenVariable("name_type", categories[cat][0])
+                                if not categories[cat][1]:
+                                    text (getattr(the_person, categories[cat][0]) if renpy.current_screen().scope[str(categories[cat][2])] is None else renpy.current_screen().scope[str(categories[cat][2])]) style "serum_text_style"
+                                xfill True
+                                action Function(toggle_dict_key, cat)
+                                hovered SetScreenVariable("name_type", categories[cat][0])
 
-                        if categories[cat][1]:
+                                if categories[cat][1]:
 
-                            input default getattr(the_person, categories[cat][0]):
-                                changed edit_name_func
-                                style "serum_text_style"
+                                    input default renpy.current_screen().scope[str(categories[cat][2])]:
+                                        changed set_clone_names
+                                        style "serum_text_style"
 
             frame:
                 textbutton "Return":
@@ -281,7 +306,12 @@ screen name_select_popup(the_person): #
 
                     text_style "serum_text_style"
                     action Hide(renpy.current_screen().screen_name)
+            frame:
+                textbutton "Make Clone":
+                    xfill True
 
+                    text_style "serum_text_style"
+                    action [Function(the_person.create_clone, clone_name, clone_last_name), Function(renpy.notify, "Clone Created and placed in [mc.location.formalName]")]
 
 
 
