@@ -101,7 +101,7 @@ init 2 python:
         clone.SO_name = None
         clone.kids = None
         clone.title = clone.create_formatted_title("Clone")
-        clone.special_role = []
+        clone.special_role = [clone_role]
         clone.obedience = 120
 
         mc.location.add_person(clone)
