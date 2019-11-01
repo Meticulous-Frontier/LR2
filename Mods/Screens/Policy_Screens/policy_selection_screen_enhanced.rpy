@@ -161,7 +161,7 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                                                 textbutton ("$" + str(policy.cost) + " - " if policy.upgrade else "") + policy.name:
                                                     #tooltip policy.desc
 
-                                                    if not policy.upgrade:
+                                                    if not policy.upgrade and policy.refresh is not None:
                                                         action [ToggleField(get_from_policy_list(policy), "enabled", True, False), If(policy.refresh is not None, Function(renpy.call_in_new_context, policy.refresh))]
                                                     elif policy.upgrade and policy.requirement() and (policy.cost <= mc.business.funds):
                                                         action Function(policy.buy_policy)
