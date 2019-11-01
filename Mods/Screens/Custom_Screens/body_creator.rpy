@@ -100,7 +100,7 @@ init 2 python:
         clone.relationship = None
         clone.SO_name = None
         clone.kids = None
-        clone.title = clone.set_title("Clone")
+        clone.title = clone.create_formatted_title("Clone")
         clone.special_role = []
         clone.obedience = 120
 
@@ -130,6 +130,7 @@ screen body_customizer(the_person = the_person):
     #       Make images fit properly
     #       Maintain colors, possibly add color selection for hair and eyes (though I think I want to leave hair colors, and maybe hair overall since we have the hair salon)
     #       Add Clone action
+    $ the_person.draw_person()
     $ renpy.block_rollback()
     modal True
     zorder 99
@@ -215,7 +216,7 @@ screen body_customizer(the_person = the_person):
 
                         style "textbutton_no_padding_highlight"
                         text_style "serum_text_style"
-                        action Hide("body_customizer")
+                        action [Hide("body_customizer"), Function(renpy.scene, "Active")]
 
                     textbutton "Discard | Undo":
                         xfill True
