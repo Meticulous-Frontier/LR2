@@ -14,6 +14,35 @@ init -1 python:
 label store_expansion_policies(stack):
 
     python:
+
+        p_division_policy = Policy(
+            name = "Production Division", # NOTE: Do not use e.g "[room.formalName] as it breaks the hash check"
+            cost = 5000,
+            desc = "Allows the business to further expand the production area.",
+            requirement = purchase_room_requirement,
+            on_buy_function = purchase_room_on_buy_function,
+            on_buy_arguments = {"room": p_division_basement})
+
+        if p_division_policy not in expansion_policies_list:
+            expansion_policies_list.append(p_division_policy)
+        else:
+            update_policy(p_division_policy, expansion_policies_list)
+
+        rd_division_policy = Policy(
+            name = "R&D Division",
+            cost = 5000,
+            desc = "Allows for the installation of additional equipment.",
+            requirement = purchase_room_requirement,
+            #on_buy_function = purchase_room_on_buy_function,
+            #on_buy_arguments = {"room": rd_division_basement}
+        )
+
+        if rd_division_policy not in expansion_policies_list:
+            expansion_policies_list.append(rd_division_policy)
+        else:
+            update_policy(rd_division_policy, expansion_policies_list)
+
+
         purchase_machinery_room_policy = Policy(
             name = "[p_division_basement.formalName]", # NOTE: Do not use e.g "[room.formalName] as it breaks the hash check"
             cost = 20000,
@@ -22,10 +51,10 @@ label store_expansion_policies(stack):
             on_buy_function = purchase_room_on_buy_function,
             on_buy_arguments = {"room": p_division_basement})
 
-        if purchase_machinery_room_policy not in expansion_policies_list:
-            expansion_policies_list.append(purchase_machinery_room_policy)
-        else:
-            update_policy(purchase_machinery_room_policy, expansion_policies_list)
+        # #if purchase_machinery_room_policy not in expansion_policies_list:
+        #     expansion_policies_list.append(purchase_machinery_room_policy)
+        # else:
+        #     update_policy(purchase_machinery_room_policy, expansion_policies_list)
 
         purchase_biotech_lab_room_policy = Policy(
             name = "[rd_division_basement.formalName]",
@@ -36,10 +65,10 @@ label store_expansion_policies(stack):
             on_buy_arguments = {"room": rd_division_basement}
         )
 
-        if purchase_biotech_lab_room_policy not in expansion_policies_list:
-            expansion_policies_list.append(purchase_biotech_lab_room_policy)
-        else:
-            update_policy(purchase_biotech_lab_room_policy, expansion_policies_list)
+        # if purchase_biotech_lab_room_policy not in expansion_policies_list:
+        #     expansion_policies_list.append(purchase_biotech_lab_room_policy)
+        # else:
+        #     update_policy(purchase_biotech_lab_room_policy, expansion_policies_list)
 
         purchase_security_room_policy = Policy(
             name = "[m_division_basement.formalName]",
