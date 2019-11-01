@@ -7,7 +7,7 @@
         "transition_default_SB_Oral_Laying",
         "strip_SB_Oral_Laying", "strip_ask_SB_Oral_Laying",
         "orgasm_SB_Oral_Laying",
-        opinion_tags = ["being fingered","getting head"])
+        opinion_tags = ["being fingered","getting head"], record_class = "Cunnilingus")
         list_of_positions.append(SB_Oral_Laying)
 
 init 1:
