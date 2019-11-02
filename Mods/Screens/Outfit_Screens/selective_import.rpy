@@ -41,7 +41,7 @@ init 2:
                             null height 10
                             for outfit in wardrobe.get_outfit_list():
                                 #hbox:
-                                textbutton outfit.name+ "\n(Sluttiness " +str(outfit.slut_requirement) +")" action [Show("outfit_creator", None, outfit.get_copy(), target_wardrobe), Hide("import_outfit_manager")] sensitive (outfit.slut_requirement <= slut_limit) hovered Show("mannequin", None, outfit) style "textbutton_style" text_style "outfit_description_style" xsize 410
+                                textbutton outfit.name+ "\n(Sluttiness " +str(outfit.slut_requirement) +")" action [Show("outfit_creator", None, outfit.get_copy(), target_wardrobe, outfit_type = "full"), Hide("import_outfit_manager")] sensitive (outfit.slut_requirement <= slut_limit) hovered Show("mannequin", None, outfit) style "textbutton_style" text_style "outfit_description_style" xsize 410
                                 if show_export:
                                     default exported = []
                                     textbutton "Export to .xml File" action [Function(exported.append,outfit), Function(log_outfit, outfit, outfit_class = "FullSets", wardrobe_name = "Exported_Wardrobe"), Function(renpy.notify, "Outfit exported to Exported_Wardrobe.xml")] sensitive outfit not in exported style "textbutton_style" text_style "outfit_description_style" xsize 410
@@ -66,7 +66,7 @@ init 2:
                                 null height 10
                                 for outfit in wardrobe.get_overwear_sets_list():
                                     #hbox:
-                                    textbutton outfit.name+ "\n(Sluttiness " +str(outfit.get_overwear_slut_score()) +")" action [Show("outfit_creator", None, outfit.get_copy(), target_wardrobe), Hide("import_outfit_manager")] sensitive (outfit.get_overwear_slut_score() <= slut_limit) hovered Show("mannequin", None, outfit) style "textbutton_style" text_style "outfit_description_style" xsize 410
+                                    textbutton outfit.name+ "\n(Sluttiness " +str(outfit.get_overwear_slut_score()) +")" action [Show("outfit_creator", None, outfit.get_copy(), target_wardrobe, outfit_type = "over"), Hide("import_outfit_manager")] sensitive (outfit.get_overwear_slut_score() <= slut_limit) hovered Show("mannequin", None, outfit) style "textbutton_style" text_style "outfit_description_style" xsize 410
                                     if show_export:
                                         default exported = []
                                         textbutton "Export to .xml File" action [Function(exported.append,outfit), Function(log_outfit, outfit, outfit_class = "OverwearSets", wardrobe_name = "Exported_Wardrobe"), Function(renpy.notify, "Outfit exported to Exported_Wardrobe.xml")] sensitive outfit not in exported  style "textbutton_style" text_style "outfit_description_style" xsize 410
@@ -88,7 +88,7 @@ init 2:
                                 null height 10
                                 for outfit in wardrobe.get_underwear_sets_list():
                                     #hbox:
-                                    textbutton outfit.name+ "\n(Sluttiness " +str(outfit.get_underwear_slut_score()) +")" action [Show("outfit_creator", None, outfit.get_copy(), target_wardrobe), Hide("import_outfit_manager")] sensitive (outfit.get_underwear_slut_score() <= slut_limit) hovered Show("mannequin", None, outfit) style "textbutton_style" text_style "outfit_description_style" xsize 410
+                                    textbutton outfit.name+ "\n(Sluttiness " +str(outfit.get_underwear_slut_score()) +")" action [Show("outfit_creator", None, outfit.get_copy(), target_wardrobe, outfit_type = "under"), Hide("import_outfit_manager")] sensitive (outfit.get_underwear_slut_score() <= slut_limit) hovered Show("mannequin", None, outfit) style "textbutton_style" text_style "outfit_description_style" xsize 410
                                     if show_export:
                                         default exported = []
                                         textbutton "Export to .xml File" action [Function(exported.append,outfit), Function(log_outfit, outfit, outfit_class = "UnderwearSets", wardrobe_name = "Exported_Wardrobe"), Function(renpy.notify, "Outfit exported to Exported_Wardrobe.xml")] sensitive outfit not in exported hovered SetScreenVariable("preview_outfit", outfit.get_copy()) unhovered SetScreenVariable("preview_outfit", None) style "textbutton_style" text_style "outfit_description_style" xsize 410
