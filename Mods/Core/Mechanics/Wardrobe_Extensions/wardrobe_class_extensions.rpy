@@ -134,7 +134,7 @@ init -1 python:
         preferences = WardrobePreference(person)
 
         if len(self.outfits) > 0:
-            #We have some full body outfits we mgiht use. 50/50 to use that or a constructed outfit.
+            #We have some full body outfits we might use. 50/50 to use that or a constructed outfit.
             outfit_choice = renpy.random.randint(0,100)
             chance_to_use_full = 50 #Like normal outfits a uniform hasa 50/50 chance of being a full outfit or an assembled outfit if both are possible.
 

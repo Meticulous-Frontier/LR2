@@ -38,6 +38,8 @@ init 5 python:
 
         return
 
+    real_dress_list = [x for x in dress_list if x not in [bath_robe, leotard, lacy_one_piece_underwear, lingerie_one_piece, apron]]
+
     class WardrobeBuilder():
         preferences = {}
         preferences["skimpy outfits"] = {}
@@ -51,13 +53,13 @@ init 5 python:
         preferences["conservative outfits"]["feet"] = [sandles, shoes, slips, sneakers, short_socks]
         preferences["conservative outfits"]["accessories"] = [wool_scarf]
         preferences["dresses"] = {}
-        preferences["dresses"]["upper_body"] = [x for x in dress_list if x not in [bath_robe, lacy_one_piece_underwear, lingerie_one_piece, apron]]
+        preferences["dresses"]["upper_body"] = real_dress_list
         preferences["skirts"] = {}
         preferences["skirts"]["lower_body"] = skirts_list
         preferences["pants"] = {}
         preferences["pants"]["lower_body"] = pants_list
         preferences["showing her tits"] = {}
-        preferences["showing her tits"]["upper_body"] = [strapless_bra, lace_bra, leotard, thin_dress, two_part_dress, lacy_one_piece_underwear, lingerie_one_piece, lace_sweater, sweater, belted_top, tube_top, business_vest, suit_jacket, vest]
+        preferences["showing her tits"]["upper_body"] = [strapless_bra, lace_bra, thin_dress, two_part_dress, lacy_one_piece_underwear, lingerie_one_piece, lace_sweater, sweater, belted_top, tube_top, business_vest, suit_jacket, vest]
         preferences["showing her ass"] = {}
         preferences["showing her ass"]["upper_body"] = [two_part_dress, thin_dress, summer_dress, leotard, lacy_one_piece_underwear, lingerie_one_piece]
         preferences["showing her ass"]["lower_body"] = [cute_panties, lace_panties, cute_lace_panties, tiny_lace_panties, thong, tiny_g_string, leggings, booty_shorts, jean_hotpants, daisy_dukes]
@@ -68,7 +70,7 @@ init 5 python:
         preferences["makeup"] = {}
         preferences["makeup"]["accessories"] = [light_eye_shadow, heavy_eye_shadow, blush, lipstick]
         preferences['lingerie'] = {}
-        preferences['lingerie']["upper_body"] = [lacy_one_piece_underwear, lingerie_one_piece, leotard, strapless_bra, lace_bra, thin_bra, corset]
+        preferences['lingerie']["upper_body"] = [lacy_one_piece_underwear, lingerie_one_piece, strapless_bra, lace_bra, thin_bra, corset]
         preferences['lingerie']["lower_body"] = [lace_panties, cute_lace_panties, tiny_lace_panties, thin_panties, thong, tiny_g_string]
         preferences['lingerie']["feet"] = [thigh_highs, fishnets, garter_with_fishnets]
         preferences['lingerie']['accessories'] = [lace_choker, wide_choker]
@@ -179,7 +181,7 @@ init 5 python:
 
             color_upper, color_lower, color_feet = self.get_main_color_scheme()
 
-            upper_item_list = [x for x in dress_list + shirts_list if x not in [bath_robe, lacy_one_piece_underwear, lingerie_one_piece]]
+            upper_item_list = real_dress_list + shirts_list
 
             # find upper body item
             filtered_upper_list = list(filter(lambda x: x.slut_value <= points, upper_item_list))
