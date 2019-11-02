@@ -49,7 +49,7 @@ init 2:
                                                         style "textbutton_no_padding_highlight"
                                                         text_style "serum_text_style"
                                                         action [
-                                                            Show("outfit_creator", None, outfit.get_copy(), target_wardrobe, outfit_type = category[1]),
+                                                            Show("outfit_creator", None, outfit.get_copy(), target_wardrobe, outfit_type = outfit_categories[category][1]),
                                                             Hide(renpy.current_screen().screen_name)
                                                             ]
 
@@ -64,7 +64,7 @@ init 2:
                                                             xfill True
 
                                                             action [
-                                                                Function(exported.append,outfit), Function(log_outfit, outfit, outfit_class = "FullSets", wardrobe_name = "Exported_Wardrobe"),
+                                                                Function(exported.append,outfit), Function(log_outfit, outfit, outfit_class = outfit_categories[category][0], wardrobe_name = "Exported_Wardrobe"),
                                                                 Function(renpy.notify, "Outfit exported to Exported_Wardrobe.xml")
                                                                 ]
 
@@ -76,7 +76,7 @@ init 2:
                                                             xfill True
 
                                                             action [
-                                                                Function(add_outfit, target_wardrobe, outfit, outfit_type = "full"),
+                                                                Function(add_outfit, target_wardrobe, outfit, outfit_type = outfit_categories[category][1]),
                                                                 Function(renpy.notify, "Outfit imported to " + target_wardrobe.name)
                                                                 ]
                                                             sensitive not target_wardrobe.has_outfit_with_name(outfit.name)
