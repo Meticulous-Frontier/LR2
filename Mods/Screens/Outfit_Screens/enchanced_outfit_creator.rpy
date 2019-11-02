@@ -411,7 +411,7 @@ init 2:
                                         $ apply_method = categories_mapping[category_selected][2]
                                         $ cloth_list_length = len(categories_mapping[category_selected][0])
 
-                                        for cloth in categories_mapping[category_selected][0]:
+                                        for cloth in sorted(categories_mapping[category_selected][0], key = lambda x: (x.layer, x.slut_value, x.name)):
                                             textbutton cloth.name + (" | " + get_heart_image_list_cloth(cloth.slut_value) if cloth.slut_value > 0 else ""):
                                                 style "textbutton_style"
                                                 text_style "custom_outfit_style"
