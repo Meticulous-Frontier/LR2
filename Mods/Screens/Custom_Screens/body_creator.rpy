@@ -102,7 +102,8 @@ init 2 python:
         clone.kids = None
         clone.title = clone.create_formatted_title("Clone")
         clone.special_role = [clone_role]
-        clone.obedience = 120
+        if clone.obedience < 120:
+            clone.obedience = 120
 
         mc.location.add_person(clone)
     Person.create_clone = create_clone
