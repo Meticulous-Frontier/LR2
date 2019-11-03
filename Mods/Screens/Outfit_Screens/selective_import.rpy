@@ -25,26 +25,26 @@ init 2:
         zorder 100
         default preview_outfit = None
         grid len(outfit_categories) 1:
-            xsize 900
-            for category in outfit_categories: # NOTE: Dictionary is not sorted. Don't know the best way to make it so.
+            for category in sorted(outfit_categories): # NOTE: Dictionary is not sorted. Don't know the best way to make it so.
                 vbox:
-                    xsize 500
+                    xsize 480
                     frame:
                         text category style "serum_text_style" xalign 0.5
                         xfill True
                     viewport:
-                        if len(getattr(wardrobe, outfit_categories[category][2])()) > 6:
+                        ysize 880
+                        if len(getattr(wardrobe, outfit_categories[category][2])()) > 7:
                             scrollbars "vertical"
                         mousewheel True
                         vbox:
                             if len(getattr(wardrobe, outfit_categories[category][2])()) > 0:
                                 frame:
                                     vbox:
-                                        for outfit in sorted(getattr(wardrobe, outfit_categories[category][2])(), key = lambda outfit: outfit.slut_requirement):  # Not sure if there's any good reason to sort XML lists since the default way it works is to place the newest outfit at the bottom which is predictable.
+                                        for outfit in sorted(getattr(wardrobe, outfit_categories[category][2])(), key = lambda outfit: (outfit.slut_requirement, outfit.name)):  # Not sure if there's any good reason to sort XML lists since the default way it works is to place the newest outfit at the bottom which is predictable.
                                             frame:
                                                 vbox:
                                                     xfill True
-                                                    textbutton outfit.name  + "\n" + get_heart_image_list_cloth(outfit.slut_requirement, 1) +"":
+                                                    textbutton outfit.name + "\n" + get_heart_image_list_cloth(outfit.slut_requirement, 1):
                                                         xfill True
                                                         style "textbutton_no_padding_highlight"
                                                         text_style "serum_text_style"
@@ -70,7 +70,8 @@ init 2:
 
                                                             sensitive outfit not in exported
 
-                                                        textbutton "Import to wardrobe: [target_wardrobe.name]":
+                                                    if not target_wardrobe is None:
+                                                        textbutton "Import to: [target_wardrobe.name]":
                                                             style "textbutton_no_padding_highlight"
                                                             text_style "serum_text_style"
                                                             xfill True
@@ -85,7 +86,7 @@ init 2:
         frame:
             background None
             anchor [0.5,0.5]
-            align [0.5,0.88]
+            align [0.5,0.92]
             xysize [500,125]
             imagebutton:
                 align [0.5,0.5]
