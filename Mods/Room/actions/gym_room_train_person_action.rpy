@@ -68,7 +68,7 @@ label select_person_for_gym_response(person_choice):
     else:
         the_person.char "Sounds good, I'll be right there [the_person.mc_title]."
         $ the_person.change_happiness(+10)
-    # End of respones
+    # End of responses
     call train_in_gym(the_person) from _call_train_in_gym_person_for_gym
     return
 
@@ -76,37 +76,9 @@ init -2 python:
     gym_session_cost = 40
 
 init 2 python:
-    #Create Gym Outfits
-    gym_clothes = Outfit("Gym Clothes")
-    gym_clothes.add_lower(panties.get_copy(),colour_black)
-    gym_clothes.add_upper(sports_bra.get_copy(),colour_pink)
-    gym_clothes.add_upper(tanktop.get_copy(),colour_pink)
-    gym_clothes.add_lower(leggings.get_copy(),colour_pink)
-    gym_clothes.add_feet(sneakers.get_copy(),colour_white)
-
-    gym_clothes_sexy = Outfit("Sexy Gym Clothes")
-    gym_clothes_sexy.add_lower(tiny_g_string.get_copy(),colour_black)
-    gym_clothes_sexy.add_upper(sports_bra.get_copy(),colour_pink)
-    gym_clothes_sexy.add_lower(booty_shorts.get_copy(),colour_pink)
-    gym_clothes_sexy.add_feet(sneakers.get_copy(),colour_white)
-
-    gym_clothes_slutty = Outfit("Slutty Gym Clothes")
-    gym_clothes_slutty.add_upper(lingerie_one_piece.get_copy(),colour_pink)
-    gym_clothes_slutty.add_feet(sneakers.get_copy(),colour_pink)
-    gym_clothes_slutty.add_accessory(lipstick.get_copy(), colour_pink)
-    gym_clothes_slutty.add_accessory(wide_choker.get_copy(), colour_pink)
-    gym_clothes_slutty.add_accessory(heavy_eye_shadow.get_copy(), [0,0,0,.9])
-    gym_clothes_slutty.add_accessory(light_eye_shadow.get_copy(), colour_pink)
-
     def set_gym_outfit(person):
-        if person.sluttiness > 70 or person.arousal > 70:
-            person.outfit = gym_clothes_slutty.get_copy()
-        elif person.sluttiness > 40 or person.arousal > 35:
-            person.outfit = gym_clothes_sexy.get_copy()
-        else:
-            person.outfit = gym_clothes.get_copy()
+        person.outfit = workout_wardrobe.decide_on_outfit2(person)
         return
-
 
 label train_in_gym(person):
     python:
@@ -136,7 +108,7 @@ label train_in_gym(person):
     "After the session [person.possessive_title] weighs [new_weight]."
 
     if body_changed or person.sluttiness > 50:
-        $ person.draw_person(person.body_type)
+        $ person.draw_person()
         $ person.change_stats(happiness = 10, love = 5, arousal = renpy.random.randint(15, 35), slut_temp = 5)
         if person.sluttiness > 20:
             person.char "Wow, these gym sessions make me feel just great, somehow I get turned on too... would you mind?"
@@ -146,7 +118,9 @@ label train_in_gym(person):
                     person.char "Lead the way, [person.mc_title]."
                     $ gym_shower.show_background()
 
-                    call fuck_person(person) from _call_fuck_person_gym_training
+                    "As soon as you get into the showers, [person.possessive_title] moves closer and starts kissing you."
+
+                    call fuck_person(person, start_position = kissing, start_object = mc.location.get_object_with_name("floor"), skip_intro = True) from _call_fuck_person_gym_training
 
                 "Have Sex (disabled)\n {size=22}Requires: Stamina{/size}" if not mc.current_stamina > 0:
                     pass
