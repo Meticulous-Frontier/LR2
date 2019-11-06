@@ -31,7 +31,7 @@ init 2 python:
 
         Sarah_wardrobe = wardrobe_from_xml("Sarah_Wardrobe")
 
-        Sarah_home = Room("Sarah's home", "Sarah's home", [], apartment_background, [],[],[],False,[0.5,0.5], visible = False, hide_in_known_house_map = False, lighting_conditions = standard_indoor_lighting)
+        Sarah_home = Room("Sarah's home", "Sarah's home", [], apartment_background, [],[],[],False,[0,0], visible = False, hide_in_known_house_map = False, lighting_conditions = standard_indoor_lighting)
         Sarah_home.add_object(make_wall())
         Sarah_home.add_object(make_floor())
         Sarah_home.add_object(make_bed())
@@ -224,7 +224,7 @@ label Sarah_hire_label():
     #TODO Hire Sarah officially here?
     $ HR_director_initial_hire = Action("Hire HR Director",HR_director_initial_hire_requirement,"HR_director_initial_hire_label", args = the_person) #Set the trigger day for the next monday. Monday is day%7 == 0
     $ mc.business.mandatory_crises_list.append(HR_director_initial_hire) #Add the event here so that it pops when the requirements are met.
-
+    $ business_HR_meeting_last_day = day # used to make sure we meet the next day
     return
 
 label Sarah_third_wheel_label():

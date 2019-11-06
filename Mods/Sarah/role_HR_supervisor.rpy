@@ -23,8 +23,10 @@ init -0 python:
 #HR director action requirements#
 init -2 python:
     def HR_director_initial_hire_requirement():
-        if time_of_day == 1:
-            return True
+        if business_HR_meeting_last_day < day:
+            if mc.business.is_open_for_business():
+                if time_of_day == 1:
+                    return True
         return False
 
     def HR_director_first_monday_requirement():
@@ -129,7 +131,7 @@ init 1301 python:
 
     def HR_director_meeting_on_demand_requirement(the_person):
         if business_HR_meeting_on_demand:
-            if business_HR_meeting_last_day <= day:
+            if business_HR_meeting_last_day < day:
                 if mc.business.is_open_for_business():
                     return True
                 else:
@@ -239,10 +241,10 @@ label HR_director_initial_hire_label(the_person):
     return
 
 label HR_director_first_monday_label(the_person):
-    $ mc.change_location(office)
-    #TODO move MC to office if required
     "It's lunchtime, so you prepare to have your first meeting with your new HR Direction, [the_person.title]."
     "You grab your lunch from the break head to your office and sit down."
+    $ mc.change_location(office)
+    $ mc.location.show_background()
     $ the_person.draw_person()
     "Soon, [the_person.title] appears in your door."
     the_person.char "Knock knock!"
