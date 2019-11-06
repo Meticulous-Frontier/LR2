@@ -11,7 +11,7 @@ init 1301 python:
         return valid_possessive_titles
     def Sarah_player_titles(the_person):
         return mc.name
-    Sarah_personality = Personality("sarah", default_prefix = "wild",
+    Sarah_personality = Personality("Sarah", default_prefix = "wild",
     common_likes = ["skirts", "small talk", "Fridays", "the weekend", "the colour purple", "makeup", "flirting", "HR work","heavy metal","punk"],
     common_sexy_likes = ["doggy style sex", "giving blowjobs", "getting head", "anal sex", "public sex", "skimpy outfits", "showing her tits", "showing her ass", "threesomes", "not wearing underwear", "creampies", "bareback sex"],
     common_dislikes = ["Mondays", "the colour pink", "supply work", "conservative outfits", "work uniforms"],
