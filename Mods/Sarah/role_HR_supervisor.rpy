@@ -67,6 +67,15 @@ init -2 python:
         return False
 
 init 2 python:
+    def build_HR_review_list(the_person, max_tier = 0):
+        HR_tier_talk = -1 # init at -1 so we do the first collect with 0
+        HR_employee_list = []
+        # build list of girls that qualify for specified tier and max_tier score
+        while len(HR_employee_list) == 0 and HR_tier_talk < business_HR_coffee_tier and HR_tier_talk < max_tier:
+            HR_tier_talk += 1
+            HR_employee_list = get_HR_review_list(the_person, HR_tier_talk)
+        return HR_employee_list
+
     def get_HR_review_list(the_person, tier = 0):   #Pass in the HR director so we don't try to counsel her
         people_list = []
         for person in [x for x in mc.business.get_employee_list() if not x is the_person]:
@@ -267,15 +276,20 @@ label HR_director_first_monday_label(the_person):
     the_person.char "Besides that, it takes time! And if we did it all the time, I think it would lose some of the effectiveness."
     mc.name "Okay. That all sounds like good ideas. Should we make this Monday lunch a permanent arrangement? We can talk about the developments of the past week, discuss who we want to meet with, and make a plan for the upcoming week."
     $ the_person.draw_person(position = "sitting", emotion = "happy")
-    the_person.char "That sounds great! Alright, I actually have a set of possibilities arranged for a meeting today if you would like. Do you want to go over my list of girls?"
-    menu:
-        "Let's start next week":
-            pass
-        "Let's start today":
-            mc.name "If you think meeting with some of these girls would be helpful, I think we should start immediately."
-            the_person.char "Ok! Let me see who I have on my list here..."
-            call HR_director_personnel_interview_label(the_person, max_opinion = 0) from HR_DIR_INTERVIEW_CALL_1
 
+    $ HR_employee_list = build_HR_review_list(the_person, 0)
+    if len(HR_employee_list) == 0:
+        the_person.char "That sounds great! Alright, I currently have no employees that would benefit from a meeting, perhaps next week."
+    else:
+        the_person.char "That sounds great! Alright, I actually have a set of possibilities arranged for a meeting today if you would like. Do you want to go over my list of girls?"
+        menu:
+            "Let's start next week":
+                pass
+            "Let's start today":
+                mc.name "If you think meeting with some of these girls would be helpful, I think we should start immediately."
+                the_person.char "Ok! Let me see who I have on my list here..."
+                call HR_director_personnel_interview_label(the_person, max_opinion = 0) from HR_DIR_INTERVIEW_CALL_1
+    $ del HR_employee_list
 
     mc.name "Alright, I think that is all for today. Unless something comes up, same time next week?"
     $ the_person.draw_person(position = "stand2")
@@ -295,7 +309,7 @@ label HR_director_monday_meeting_label(the_person):
         $ mc.location.show_background()
         "Hello [the_person.mc_title]!"
         $ the_person.draw_person()
-        mc.char "Hi [the_person.title], come in and take a seat."
+        mc.name "Hi [the_person.title], come in and take a seat."
     else:
         "Hello [the_person.mc_title]!"
         $ the_person.draw_person()
@@ -307,14 +321,21 @@ label HR_director_monday_meeting_label(the_person):
     call HR_director_calculate_eff(the_person) from HR_director_monday_meeting_1
     "She hands you a few documents. You check them over."
     mc.name "Looks good. Go ahead and continue with those plans."
-    the_person.char "Can do! Did you want to call in a girl for a counseling session this week?"
-    menu:
-        "Let's not this week":
-            pass
-        "Call one in":
-            mc.name "Yes I want to do that."
-            the_person.char "Ok! Let me see who I have on my list here..."
-            call HR_director_personnel_interview_label(the_person, max_opinion = business_HR_coffee_tier) from HR_DIR_INTERVIEW_CALL_2
+
+    $ HR_employee_list = build_HR_review_list(the_person, 0)
+    if len(HR_employee_list) == 0:
+        the_person.char "Can do! I have currently no girls on my counseling list, perhaps next week."
+    else:
+        the_person.char "Can do! Did you want to call in a girl for a counseling session this week?"
+        menu:
+            "Let's not this week":
+                pass
+            "Call one in":
+                mc.name "Yes I want to do that."
+                the_person.char "Ok! Let me see who I have on my list here..."
+                call HR_director_personnel_interview_label(the_person, max_opinion = business_HR_coffee_tier) from HR_DIR_INTERVIEW_CALL_2
+    $ del HR_employee_list
+
     the_person.char "Ok, next up, I wanted to review progress made on serums and policy changes from the past week to see if anything might be useful."
     call HR_director_review_discoveries_label(the_person) from HR_DIR_INTERVIEW_CALL_3
     mc.name "Alright, I think that is all for today. Unless something comes up, same time next week?"
@@ -326,13 +347,7 @@ label HR_director_monday_meeting_label(the_person):
     return
 
 label HR_director_personnel_interview_label(the_person, max_opinion = 0):
-    $ HR_tier_talk = -1 # init at -1 so we do the first collect with 0
-    $ HR_employee_list = []
-    # build list of girls that qualify for specified tier and max_opinion score
-    while len(HR_employee_list) == 0 and HR_tier_talk < business_HR_coffee_tier and HR_tier_talk < max_opinion:
-        $ HR_tier_talk += 1
-        $ HR_employee_list = get_HR_review_list(the_person, HR_tier_talk)
-
+    $ HR_employee_list = build_HR_review_list(the_person, max_opinion)
     if len(HR_employee_list) == 0: #No one qualifies!
         the_person.char "Actually, thing are running really smoothly right now, I didn't come across any dossiers this past weekend that drew my attention!"
         #TODO add another option here? Offer to bring in any girl?
