@@ -95,7 +95,7 @@ init 2 python:
         clone.last_name = (last_name if last_name is not None else self.last_name)
         clone.age = (age if age is not None else self.age)
         clone.job = None
-        clone.wardrobe = None
+        clone.wardrobe = Wardrobe(clone.name) # Empty wardrobe
         clone.work = None
         clone.relationship = None
         clone.SO_name = None
@@ -104,6 +104,13 @@ init 2 python:
         clone.special_role = [clone_role]
         if clone.obedience < 120:
             clone.obedience = 120
+        if clone.love < 30:
+            clone.love = 30
+
+        clone.serum_effects = []
+        clone.schedule = {0: rd_division, 1: rd_division, 2: rd_division, 3: rd_division, 4: rd_division}
+        for record in clone.sex_record:
+            clone.sex_record[record] = 0
 
         mc.location.add_person(clone)
     Person.create_clone = create_clone
