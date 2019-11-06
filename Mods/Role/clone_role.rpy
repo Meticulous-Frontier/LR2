@@ -5,7 +5,7 @@ init 2 python:
 
     # Clone Recall - Brings the clone back to base
     clone_recall = Action("Recall clone", clone_recall_requirement, "clone_recall", menu_tooltip = "Bring the clone back to the lab for modifications")
-    
+
     clone_role = Role("Clone", [clone_recall])
 
 
@@ -18,7 +18,7 @@ init 2 python:
 label clone_recall(person):
     "You order [person.title] back to [rd_division_basement.name]"
 
-    $ mc.location.move_person(person, rd_division_basement)
+    $ mc.location.move_person(person, rd_division)
 
     person.char "Okay, [person.mc_title]. I'll head there next."
     return
