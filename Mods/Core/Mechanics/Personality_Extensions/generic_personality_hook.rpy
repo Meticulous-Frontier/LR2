@@ -204,6 +204,9 @@ label create_unique_character_list:
     if "starbuck" in globals():
         $ unique_character_list.append(starbuck)
 
+    if "sarah" in globals():
+        $ unique_character_list.append(sarah)
+
     # disable for now, random outfits remove uniqueness of character in story line
     # make sure unique characters have at least six outfits / overwear sets to choose from
     #python:
