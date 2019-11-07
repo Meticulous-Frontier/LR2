@@ -468,7 +468,7 @@ label Sarah_get_drinks_label():
     the_person.char "I have to say, I feel like I'm settling in pretty well. The girls at the office have been really nice to me so far."
     mc.name "That's good to hear. I'm very selective about who I hire."
     the_person.char "Yeah. You choice is very, shall we say, interesting? Hiring only women to work for you. Not that I'm complaining or anything!"
-    mc.name "I know it may seem a bit odd, but so far it has been advantagous to keep the staff all female. Perhaps in the future that could change, but now it is working."
+    mc.name "I know it may seem a bit odd, but so far it has been advantageous to keep the staff all female. Perhaps in the future that could change, but now it is working."
     the_person.char "It's quite alright with me. To be honest, I umm, enjoy the surroundings..."
     "She takes a long sip of her drink."
     mc.name "Sorry, I feel like you've hinted at this a few times before but, I just want to clarify. Are you a lesbian? I'm totally fine with that, I'm just curious."
