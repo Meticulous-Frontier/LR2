@@ -86,13 +86,13 @@ init -1 python:
         return False
 
     def Sarah_new_tits_requirement():
-        if time_of_day == 1:
+        if time_of_day == 0:    # triggers right when she comes into office
             if day%7 == 0:  #Monday
                 return True
         return False
 
     def Sarah_epic_tits_requirement():
-        if time_of_day == 1:
+        if time_of_day == 0:    # triggers right when she comes into office
             if day%7 == 0:  #Monday
                 return True
         return False
@@ -589,8 +589,15 @@ label Sarah_new_tits_label():
     call Sarah_tits_reveal_label() from Sarah_new_tits_call_1
     return
 
-label Sarah_tits_reveal_label():
+label Sarah_tits_reveal_label():    
     $ the_person = sarah
+    if not mc.location == office:
+        "Your phone rings. Its [the_person.possessive_title]. You answer it."
+        the_person.char "Hello [the_person.mc_title], could you meet me in your office? It's urgent."
+        "You put your phone in your pocket and head to your office."
+        $ mc.change_location(office)
+        $ mc.location.show_background()
+
     $ the_person.draw_person()
     "[the_person.title] steps confidently into your office."
     the_person.char "Good morning [the_person.mc_title]! Ready for our Monday meeting?"
