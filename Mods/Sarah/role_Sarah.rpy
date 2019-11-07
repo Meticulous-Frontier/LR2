@@ -464,7 +464,23 @@ label Sarah_get_drinks_label():
     "You grab your drinks and then head to the table. You sit down across from [the_person.title]."
     $ scene_manager.update_actor(the_person, position = "sitting")
     the_person.char "Thanks! I love these things..."
-    "She takes a long sip from her glass."
+    "She takes a long sip from her glass. You take a sip of yours. [the_person.possessive_title] sets down her glass and looks at you."
+    the_person.char "I have to say, I feel like I'm settling in pretty well. The girls at the office have been really nice to me so far."
+    mc.name "That's good to hear. I'm very selective about who I hire."
+    the_person.char "Yeah. You choice is very, shall we say, interesting? Hiring only women to work for you. Not that I'm complaining or anything!"
+    mc.name "I know it may seem a bit odd, but so far it has been advantagous to keep the staff all female. Perhaps in the future that could change, but now it is working."
+    the_person.char "It's quite alright with me. To be honest, I umm, enjoy the surroundings..."
+    "She takes a long sip of her drink."
+    mc.name "Sorry, I feel like you've hinted at this a few times before but, I just want to clarify. Are you a lesbian? I'm totally fine with that, I'm just curious."
+    "[the_person.title] laughs and puts her hand on yours."
+    the_person.char "Oh, I'm not dedicated to it or anything, but I've always been curious about what it would be like to be with another woman."
+    "She sighs."
+    the_person.char "Don't get me wrong, I don't think I could ever date another woman, I prefer men, but I've always wanted to try a Ménage à trois..."
+    "You have discovered that [the_person.title] likes other girls!"
+    "You have discovered that [the_person.title] loves threesomes!" #TODO add these opinions
+    mc.name "That's very open minded of you. I can certainly respect that!"
+    "[the_person.title] tips her glass back and finishes her first drink. You make it a point to do the same."
+
 
     return
 
