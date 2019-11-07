@@ -258,7 +258,7 @@ label starbuck_vaginal_skillup_label(the_person):
                         mc.name "Sounds good, [the_person.title]. Since you recommended it, its only fair you be the first to feel it."
                         the_person.char "Ah... I can't wait! Let's go!"
                         $ mc.current_stamina += -1
-                        call fuck_person(the_person) from _call_fuck_person_SBS10
+                        call fuck_person(the_person, start_position = missionary, start_object = mc.location.get_object_with_name("floor"), skip_intro = True, private = True) from _call_fuck_person_SBS10
                         if the_person.arousal > 160:
                             the_person.char "Oh wow... I've never... I came so many times..."
                             $ the_person.change_obedience (5)
@@ -314,7 +314,7 @@ label starbuck_anal_skillup_label(the_person):
                         mc.name "Sounds good, [the_person.title]. Since you recommended it, its only fair I use it on you first!"
                         the_person.char "Ah... I can't wait! Let's go!"
                         $ mc.current_stamina += -1
-                        call sex_description(the_person, SB_anal_standing , make_desk(), 0, private = True) from _call_sex_description_SBS20
+                        call sex_description(the_person, start_position = SB_anal_standing, start_object = mc.location.get_object_with_name("counter"), skip_intro = True, private = True) from _call_sex_description_SBS20
                         if the_person.arousal > 160:
                             the_person.char "Oh wow... I've never... I came so many times!"
                             $ the_person.change_obedience (5)
@@ -374,7 +374,7 @@ label starbuck_oral_skillup_label(the_person):
                             for clothing in the_person.outfit.get_lower_ordered():
                                 the_person.outfit.remove_clothing(clothing)
 
-                        call fuck_person(the_person, start_position = SB_Oral_Laying, skip_intro = True) from _call_fuck_person_SBS30
+                        call fuck_person(the_person, start_position = SB_Oral_Laying, start_object = mc.location.get_object_with_name("floor"), skip_intro = True, private = True) from _call_fuck_person_SBS30
                         if the_person.arousal > 160:
                             the_person.char "Oh my god, I came so many times... did you make me squirt?"
                             $ the_person.change_obedience (5)
@@ -429,7 +429,7 @@ label starbuck_foreplay_skillup_label(the_person):
                         mc.name "Sounds good, [the_person.title]. Since you recommended it, its only fair you be the first to feel it."
                         the_person.char "Ah... I can't wait! Let's go!"
                         $ mc.current_stamina += -1
-                        call fuck_person(the_person) from _call_fuck_person_SBS40
+                        call fuck_person(the_person, start_position = standing_grope, skip_intro = True, private = True) from _call_fuck_person_SBS40
                         if the_person.arousal > 160:
                             the_person.char "Oh wow... I've never... I came so many times..."
                             $ the_person.change_obedience (5)
