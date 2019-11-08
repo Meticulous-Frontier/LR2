@@ -200,16 +200,16 @@ label Sarah_intro_label():
             "In order to hire [the_person.title], you will need to create a new HR Director position via the policy menu."
             $ Sarah_hire = Action("Sarah hire",Sarah_hire_requirement,"Sarah_hire_label")
             $ mc.business.mandatory_crises_list.append(Sarah_hire) #Add the event here so that it pops when the requirements are met.
+
+            if HR_director_creation_policy not in organisation_policies_list:       #Hopefully by testint to see if it is already there we can avoid any issues in the future with mod compatability.... *shrug*
+                $ organisation_policies_list.append(HR_director_creation_policy)
+
         "Don't offer to hire her":
             "You decide maybe down the line you could make a new HR director position, but you decide the [the_person.title] is probably not the best fit for it."
             mc.name "I'm sorry it didn't work out, I hope you are able to find something in your field."
             the_person.char "Thanks... well, it was good seeing you. I'd better keep at it."
             "You say goodbye to [the_person.title]. If you want to hire an HR director, you will need to create the position via the policy menu."
             #TODO figure out a way to delete sarah and remove her from the game.
-
-
-    if HR_director_creation_policy not in organisation_policies_list:       #Hopefully by testint to see if it is already there we can avoid any issues in the future with mod compatability.... *shrug*
-        $ organisation_policies_list.append(HR_director_creation_policy)
 
     return
 
@@ -218,7 +218,11 @@ label Sarah_hire_label():
     "After creating the new HR Director position, you call up [the_person.title]. She answers and says hello."
     mc.name "Hey, I just wanted to let you know, I have the details finalized for an HR Director position."
     the_person.char "That sounds great! When can I get started?"
-    mc.name "Tomorrow morning. I'll text the address after this call. We will go over your role and responsibilities when you get there."
+    $ day_name = "Tomorrow"
+    if day%7 == 4 or day%7 == 5: # its friday or saturday so next workday is monday
+        $ day_name = "Monday"
+    
+    mc.name "[day_name] morning. I'll text the address after this call. We will go over your role and responsibilities when you get there."
     the_person.char "Yes! I'm so glad to finally be done selling solar panels. I'll see you in the morning!"
     "You hang up the phone. You quickly text [the_person.title] the address of your business."
     #TODO Hire Sarah officially here?

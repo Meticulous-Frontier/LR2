@@ -235,8 +235,7 @@ label HR_director_initial_hire_label(the_person):
         for other_employee in mc.business.get_employee_list():
             town_relationships.begin_relationship(the_person, other_employee) #They are introduced to everyone at work, with a starting value of "Acquaintance"
 
-    if the_person is sarah:
-        python:
+        if the_person is sarah:
             #TODO try to detect if employee count is full again
             the_person.set_schedule([1,2,3], None) # remove previous schedule
             the_person.event_triggers_dict["employed_since"] = day
@@ -246,8 +245,7 @@ label HR_director_initial_hire_label(the_person):
             mc.business.add_employee_hr(the_person)
             the_person.set_work([1,2,3], mc.business.h_div)
             business_HR_director = the_person
-    else:
-        python:
+        else:
             mc.business.remove_employee(the_person)
             the_person.special_role.append(employee_role)
             the_person.special_role.append(HR_director_role)
