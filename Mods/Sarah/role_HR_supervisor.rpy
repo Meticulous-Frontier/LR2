@@ -135,7 +135,10 @@ init 1301 python:
 
     def HR_director_change_relative_recruitment_requirement(the_person):
         if business_HR_relative_recruitment_unlock:
-            return True
+            if mc.business.is_open_for_business():
+                return True
+            else:
+                return "Only on during work day"
         return False
 
     def HR_director_meeting_on_demand_requirement(the_person):
