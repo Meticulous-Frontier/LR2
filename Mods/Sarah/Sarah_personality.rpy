@@ -43,16 +43,21 @@ label Sarah_introduction(the_person):
     return
 
 label Sarah_greetings(the_person):
-    if the_person.sluttiness > 60:
-        if the_person.obedience > 130:
-            the_person.char "Hello there [the_person.mc_title]. How can I help you, do you have anything that needs attention? Anything at all?"
+    if the_person.love < 0:
+        the_person.char "Ugh, what do you want?"
+    elif the_person.happiness < 90:
+        the_person.char "Hey, today is not what I hoped it to be."        
+    else:    
+        if the_person.sluttiness > 60:
+            if the_person.obedience > 130:
+                the_person.char "Hello there [the_person.mc_title]. How can I help you, do you have anything that needs attention? Anything at all?"
+            else:
+                the_person.char "Hey there [the_person.mc_title], I hope this is for pleasure and not business."
         else:
-            the_person.char "Hey there [the_person.mc_title], I hope this is for pleasure and not business."
-    else:
-        if the_person.obedience > 130:
-            the_person.char "Hello [the_person.mc_title]"
-        else:
-            the_person.char "Hey, how's it going?"
+            if the_person.obedience > 130:
+                the_person.char "Hello [the_person.mc_title]"
+            else:
+                the_person.char "Hey, how's it going?"
     return
 
 label Sarah_sex_responses(the_person):

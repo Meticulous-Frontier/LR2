@@ -48,12 +48,17 @@ label salon_manager_greetings(the_person):
         "You smile at [the_person.name] and hand over your company credit card."
         the_person.char "Perfect! All done."
     else:
-        the_person.char "Hey there, [the_person.mc_title]! Its good to see you!"
-        if the_person.sluttiness > 60:
-            "[the_person.possessive_title] smiles playfully."
-            the_person.char "I was just thinking about you. Anything I can do for you today?"
+        if the_person.love < 0:
+            the_person.char "Hi, what can I do for you?"
+        elif the_person.happiness < 90:
+            the_person.char "Hey. I hope you're having a better day than I am."        
         else:
-            the_person.char "Is there anything I can help you with?"
+            the_person.char "Hey there, [the_person.mc_title]! Its good to see you!"
+            if the_person.sluttiness > 60:
+                "[the_person.possessive_title] smiles playfully."
+                the_person.char "I was just thinking about you. Anything I can do for you today?"
+            else:
+                the_person.char "Is there anything I can help you with?"
 
     $ renpy.scene("Active")
     return
