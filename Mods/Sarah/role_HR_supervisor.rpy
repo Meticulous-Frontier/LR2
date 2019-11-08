@@ -229,6 +229,12 @@ label HR_director_initial_hire_label(the_person):
     $ the_person.draw_person(emotion = "happy")
     the_person.char "Great! I'll look forward to it. I'll try to have a plan ready for the meeting on Monday on what we can accomplish."
     "You say goodbye to [the_person.title]."
+
+    # update employee relationships
+    python:
+        for other_employee in mc.business.get_employee_list():
+            town_relationships.begin_relationship(the_person, other_employee) #They are introduced to everyone at work, with a starting value of "Acquaintance"
+
     if the_person is sarah:
         python:
             #TODO try to detect if employee count is full again
@@ -248,6 +254,7 @@ label HR_director_initial_hire_label(the_person):
             mc.business.add_employee_hr(the_person)
             the_person.set_work([1,2,3], mc.business.h_div)
             business_HR_director = the_person
+
     $ HR_director_first_monday = Action("First Monday",HR_director_first_monday_requirement,"HR_director_first_monday_label", args = the_person) #Set the trigger day for the next monday. Monday is day%7 == 0
     $ mc.business.mandatory_crises_list.append(HR_director_first_monday) #Add the event here so that it pops when the requirements are met.
     return
