@@ -172,6 +172,69 @@ init -1:
 
         Person.get_known_opinion_list = get_known_opinion_list
 
+        def generate_daughter_enhanced(self): #Generates a random person who shares a number of similarities to the mother
+            age = renpy.random.randint(18, self.age-16)
+
+            if renpy.random.randint(0,100) < 60:
+                body_type = self.body_type
+            else:
+                body_type = None
+
+            if renpy.random.randint(0,100) < 40: #Slightly lower for facial similarities to keep characters looking distinct
+                face_style = self.face_style
+            else:
+                face_style = None
+
+            if renpy.random.randint(0,100) < 60: #60% of the time they share hair colour
+                hair_colour = self.hair_colour
+            else:
+                hair_colour = None
+
+            if renpy.random.randint(0,100) < 60: # 60% they share the same breast size
+                tits = self.tits
+            else:
+                tits = None
+
+            if renpy.random.randint(0,100) < 60: #Share the same eye colour
+                eyes = self.eyes
+            else:
+                eyes = None
+
+            if renpy.random.randint(0,100) < 60: #Have heights that roughly match (but o
+                height = self.height * (renpy.random.randint(95,105)/100.0)
+                if height > 1.0:
+                    height = 1.0
+                elif height < 0.9:
+                    height = 0.9
+            else:
+                height = None
+
+            if renpy.random.randint(0,100) < 85 - age: #It is less likely she lives at home the older she is.
+                start_home  = self.home
+            else:
+                start_home  = None
+
+
+            the_daughter = create_random_person(last_name = self.last_name, age = age, body_type = body_type, face_style = face_style, tits = tits, height = height,
+                hair_colour = hair_colour, skin = self.skin, eyes = eyes, start_home = start_home)
+
+            if start_home is None:
+                the_daughter.generate_home()
+            the_daughter.home.add_person(the_daughter)
+
+            for sister in town_relationships.get_existing_children(self): #First find all of the other kids this person has
+                town_relationships.update_relationship(the_daughter, sister, "Sister") #Set them as sisters
+
+            town_relationships.update_relationship(self, the_daughter, "Daughter", "Mother") #Now set the mother/daughter relationship (not before, otherwise she's a sister to herself!)
+
+            # make her a little bit more unique by changing wardrobe and opinions
+            update_person_opinions(the_daughter)
+            rebuild_wardrobe(the_daughter)
+            update_person_outfit(the_daughter)
+
+            return the_daughter
+
+        Person.generate_daughter = generate_daughter_enhanced
 
         ## STRIP OUTFIT TO MAX SLUTTINESS EXTENSION
         # Strips down the person to a clothing their are comfortable with (starting with top, before bottom)
