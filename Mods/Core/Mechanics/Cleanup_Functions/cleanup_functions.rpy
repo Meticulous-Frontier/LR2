@@ -28,10 +28,14 @@ init 2 python:
                 bedroom.actions.remove(serum_mod_options_action)
         return
 
+    def fix_breakup_action():
+        if "ask_break_up_action" in globals():
+            ask_break_up_action.effect = "ask_break_up_label"
+
     if config.version == "v0.22.0":
         if "girlfriend_role" not in globals():
 
-            ask_break_up_action = Action("Break up with her.", ask_break_up_requirement, "ask_be_girlfriend_label", menu_tooltip = "Breaking up may break her heart, but it'll be easier on her than catching you with another woman.")
+            ask_break_up_action = Action("Break up with her.", ask_break_up_requirement, "ask_break_up_label", menu_tooltip = "Breaking up may break her heart, but it'll be easier on her than catching you with another woman.")
 
             girlfriend_role = Role("Girlfriend", [ask_break_up_action])
 
@@ -43,6 +47,7 @@ label run_cleanup(stack):
 
     $ clean_elevator_action()
     $ serum_action_cleanup()
+    $ fix_breakup_action()
 
     $ execute_hijack_call(stack)
 
