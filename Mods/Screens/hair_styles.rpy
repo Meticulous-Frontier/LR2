@@ -74,7 +74,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                     #    $ valid_check = catagories_mapping[catagory_selected][1]
                                     #    $ apply_method = catagories_mapping[catagory_selected][2]
                                     #    $ cloth_list_length = len(catagories_mapping[catagory_selected][0])
-                                    for hair_style_item in catagories_mapping[catagory_selected][0]:
+                                    for hair_style_item in sorted(catagories_mapping[catagory_selected][0], key = lambda x: x.name):
                                         textbutton hair_style_item.name:
                                             style "textbutton_style"
                                             text_style "textbutton_text_style"
