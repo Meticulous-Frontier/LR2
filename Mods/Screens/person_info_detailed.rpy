@@ -52,9 +52,14 @@ init 2: # Need to allow for None name roles in this screen as well.
                         text "Sluttiness: [the_person.sluttiness]" style "menu_text_style"
                         text "Obedience: [the_person.obedience] - " + get_obedience_plaintext(the_person.obedience) style "menu_text_style"
                         text "Age: [the_person.age]" style "menu_text_style"
-                        text "Relationship:  [the_person.relationship]" style "menu_text_style"
+                        if girlfriend_role in the_person.special_role:
+                            text "Relationship: Girlfriend" style "menu_text_style"
+                        else:
+                            text "Relationship: [the_person.relationship]" style "menu_text_style"
                         if the_person.relationship != "Single":
                             text "Significant Other: [the_person.SO_name]" style "menu_text_style"
+                        elif girlfriend_role in the_person.special_role:
+                            text "Significant Other: [mc.name]" style "menu_text_style"
                         if the_person.kids > 0:
                             text "Kids: [the_person.kids]" style "menu_text_style"
 
@@ -243,9 +248,16 @@ init 2: # Need to allow for None name roles in this screen as well.
                     xoffset 195
                     vbox:
                         text "Currently Affected By:" style "menu_text_style" size 22
-                        if not the_person.serum_effects:
-                            text "No active serums." style "menu_text_style"
-                        else:
-                            text "Suggestibility: [the_person.suggestibility]" style "menu_text_style"
-                            for serum in the_person.serum_effects:
-                                text serum.name + " : " + str(serum.duration - serum.duration_counter) + " Turns Left" style "menu_text_style"
+                        viewport:
+                            scrollbars "vertical"
+                            mousewheel True
+                            frame:
+                                xsize 300
+                                background None
+                                vbox:
+                                    if not the_person.serum_effects:
+                                        text "No active serums." style "menu_text_style"
+                                    else:
+                                        text "Suggestibility: [the_person.suggestibility]" style "menu_text_style"
+                                        for serum in the_person.serum_effects:
+                                            text serum.name + " : " + str(serum.duration - serum.duration_counter) + " Turns Left" style "menu_text_style"
