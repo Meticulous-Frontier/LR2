@@ -42,6 +42,8 @@ init python: # This space is reserved for variables used to display and hide vbo
     cpyo = None # Personality Opinions
     cpyso = None # Personality Sexy Opinions
 
+    cfc = None # Font Color
+
     cemp = None # Shows the_person employment section and allows the following buttons:
 
     # Other Characters - End
@@ -89,7 +91,9 @@ init python: # This space is reserved for definitions used to simplify the code
             if policy.on_buy_function is not None:
                 policy.on_buy_function(**policy.on_buy_arguments)
 
-
+    def chunks(items, size):
+        for i in range(0, len(items), size):
+            yield items[i:i+size]
 
 #        batch_size_increase(increase_amount = 5)
 #        add_production_lines(3)
@@ -238,7 +242,14 @@ init python: # This space is reserved for definitions used to simplify the code
 
     def cheat_redraw_skin(): # Redraws the skin color
         the_person.draw_person()
-
+    def cheat_person_font_color(color):
+        the_person.char.color = color
+        the_person.char.what_color = color
+        the_person.char.what_args["color"] = color
+        the_person.char.who_args["color"] = color
+        the_person.set_title(remove_display_tags(the_person.title))
+        the_person.set_possessive_title(remove_display_tags(the_person.possessive_title))
+        the_person.set_mc_title(remove_display_tags(the_person.mc_title))
     # Definitions - End
 
 # Styles - Start
@@ -381,12 +392,10 @@ screen cmoc():
             hbox:
                 xalign 0.029
                 vbox: # Bottom frame menu
-
                     textbutton "Appearance" action ToggleVariable("capp") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-
                     textbutton "Personality" action ToggleVariable("cpy") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-
                     textbutton "Employment" action ToggleVariable("cemp") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                    textbutton "Font Color" action ToggleVariable("cfc") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
 
                 if cemp: # Employment options
                     hbox:
@@ -410,6 +419,14 @@ screen cmoc():
                         textbutton "Body" action ToggleVariable("cappb") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 # Expands to body
                         textbutton "Skin Color" action ToggleVariable("capps") style "cheatbutton_style" text_style "textbutton_text_style" xsize 220 # Expands to skin color
 
+                if cfc:
+                    $ grouped = list(chunks(readable_color_list, 5))
+                    for g in grouped:
+                        vbox:
+                            for c in g:
+                                textbutton "{color=[c]}[the_person.name]{/color}" action [Function(cheat_person_font_color, c)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+
+
                 if capp and capph: # Hair Style Options
                     hbox:
                         vbox: # Column 1
@@ -424,6 +441,11 @@ screen cmoc():
                             textbutton "Long Hair" action [SetField(the_person,"hair_style", long_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                             textbutton "Bow Hair" action [SetField(the_person,"hair_style", bow_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                             textbutton "Bobbed Hair" action [SetField(the_person,"hair_style", bobbed_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        vbox: # Column 3
+                            textbutton "Braided Bun" action [SetField(the_person,"hair_style", braided_bun), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Curly Bun" action [SetField(the_person,"hair_style", curly_bun), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Windswept Short" action [SetField(the_person,"hair_style", windswept_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Bowl Hair" action [SetField(the_person,"hair_style", bowl_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
 
                 if capp and capphc: # Hair Color Options
                     hbox:
