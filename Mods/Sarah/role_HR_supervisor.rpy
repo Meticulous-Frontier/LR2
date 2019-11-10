@@ -304,7 +304,7 @@ label HR_director_first_monday_label(the_person):
     $ HR_director_monday_meeting = Action("Monday HR Lunch",HR_director_monday_meeting_requirement,"HR_director_monday_meeting_label", args = the_person) #Set the trigger day for the next monday. Monday is day%7 == 0
     $ mc.business.mandatory_crises_list.append(HR_director_monday_meeting) #Add the event here so that it pops when the requirements are met.
     $ business_HR_tier = 1
-    if the_person == sarah:
+    if the_person is sarah:
         $ Sarah_third_wheel_action = Action("Sarah's third wheel event",Sarah_third_wheel_requirement,"Sarah_third_wheel_label")
         $ mc.business.mandatory_crises_list.append(Sarah_third_wheel_action)
     return
@@ -493,7 +493,7 @@ label HR_director_review_discoveries_label(the_person):
                 mc.name "Noted. I'll consider it and get back to you if I decide to do this."
                 the_person.char "Sounds good [the_person.mc_title]!"
 
-    if the_person == sarah:
+    if the_person is sarah:
         if business_HR_serum_breast == False:
             if breast_enhancement.researched: #Researched!
                 $ business_HR_serum_breast = True
@@ -529,7 +529,7 @@ label HR_director_review_discoveries_label(the_person):
                 mc.name "That's a good idea. Go ahead and implement that going forward."
                 the_person.char "Sure thing [the_person.mc_title]!"
                 $ business_HR_skimpy_uniform = True
-                if the_person == sarah:
+                if the_person is sarah:
                     the_person.char "Mmm, I can't wait to see what some of the outfits other girls wear around the office..."
                     $ the_person.change_slut_temp(5)
     if business_HR_relative_recruitment_unlock == False:
