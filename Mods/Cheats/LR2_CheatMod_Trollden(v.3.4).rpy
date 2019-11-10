@@ -243,6 +243,10 @@ init python: # This space is reserved for definitions used to simplify the code
     def cheat_redraw_skin(): # Redraws the skin color
         the_person.draw_person()
     def cheat_person_font_color(person, color):
+        if hasattr(person.char, "color"):
+            person.char.color = color
+        if hasattr(person.char, "what_color"):
+            person.char.what_color = color
         person.char.what_args["color"] = color
         person.char.who_args["color"] = color
         person.set_title(remove_display_tags(person.title))
