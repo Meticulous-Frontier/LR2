@@ -6,6 +6,13 @@
 
 # Worst case scenario for me right now would be that it's just even easier to keep it up to date at regular intervals
 # Going to see if I can add a separate screen for a "crisis master" as in the previous cheat screen, but only if I find a way to make it somewhat build itself on its own
+init -2 style cheat_text_style: # General text style used in the serum screens.
+    text_align 0.5
+    size 18
+    color "#dddddd"
+    outlines [(2,"#222222",0,0)]
+    xalign 0.5
+
 
 init 2 python:
     def edit_name_func(new_name):
@@ -25,6 +32,15 @@ init 2 python:
         editing_target.draw_person()
         return
 
+    def cheat_collapse_menus():
+        cs = renpy.current_screen()
+        cs.scope["personality_options"] = False
+        cs.scope["face_options"] = False
+        cs.scope["skin_options"] = False
+        cs.scope["body_options"] = False
+        cs.scope["breast_options"] = False
+        cs.scope["font_color_options"] = False
+
 init python:
     if "keybind1" not in config.overlay_screens:
         config.overlay_screens.append("keybind1")
@@ -39,20 +55,23 @@ screen cheat_menu():
 
     # Screen management variables
     default main_screen_showing = True
-    default naming_options = False # Extends the name_options viewport
+    default naming_options = True # Extends the name_options viewport
     default time_control_showing = True
 
     default main_stats_options = True
     default work_skills_options = True
     default sex_stats_options = True
     default relation_options = True
-    default face_options = True
-    default body_options = True
-    default skin_options = True
-    default breast_options = True
 
-    default personality_options = True
     default appearance_options = True
+
+    default personality_options = False
+    default face_options = False
+    default skin_options = False
+    default body_options = False
+    default breast_options = False
+    default font_color_options = False
+
     # Input management variables
     default name_select = False #Determines if the name button is currently taking an input or not
 
@@ -68,33 +87,33 @@ screen cheat_menu():
         "Age": ["age", "age", 1],
 
         "Arousal": ["arousal", "arousal", 10],
-        "Stamina": ["current_stamina", "current_stamina", 5],
+        "Stamina": ["current_stamina", "current_stamina", 1],
 
-        "Funds": ["funds", "funds", 100000],
-        "Supplies": ["supply_count", "supply_count", 100000],
-        "Effectivity": ["team_effectiveness", "team_effectiveness", 1000],
-        "Max Effectivity": ["effectiveness_cap", "effectiveness_cap", 1000] # Might add If statement to combine these two as they go hand in hand
+        "Funds": ["funds", "funds", 10000],
+        "Supplies": ["supply_count", "supply_count", 10000],
+        "Effectivity": ["team_effectiveness", "team_effectiveness", 10],
+        "Max Effectivity": ["effectiveness_cap", "effectiveness_cap", 10] # Might add If statement to combine these two as they go hand in hand
         }
     default work_skills = {
-        "Human Resources": ["hr_skill", "hr_skill", 1],
+        "HR": ["hr_skill", "hr_skill", 1],
         "Marketing": ["market_skill", "market_skill", 1],
         "Researching": ["research_skill", "research_skill", 1],
         "Production": ["production_skill", "production_skill", 1],
         "Supplying": ["supply_skill", "supply_skill", 1],
 
-        "Max Employees": ["max_employee_count", "max_employee_count", 10],
+        "Max Employees": ["max_employee_count", "max_employee_count", 5],
         "Production Lines": ["production_lines", "production_lines", 1],
-        "Serum Batch Sizes": ["batch_size", "batch_size", 10],
+        "Serum Batch Size": ["batch_size", "batch_size", 5],
         "Research Tier": ["research_tier", "research_tier", 1]
 
         }
     default relation_stats = {
-        "Happiness": ["happiness", "happiness", 10],
         "Love": ["love", "love", 10],
         "Suggestibility": ["suggestibility", "suggestibility", 10],
         "Sluttiness": ["sluttiness", "sluttiness", 10],
         "Core Sluttiness": ["core_sluttiness", "core_sluttiness", 10],
-        "Obedience": ["obedience", "obedience", 10]
+        "Obedience": ["obedience", "obedience", 10],
+        "Happiness": ["happiness", "happiness", 10]
         }
     default sex_stats = { # Sex Skills are stored in a dict
         "Foreplay": ["sex_skills", "Foreplay", 1],
@@ -105,7 +124,7 @@ screen cheat_menu():
     default available_naming = { # Consider making it update the respective lists custom titles when it becomes possible
         "Title": ["title"],
         "Player's Title": ["mc_title"],
-        "Possesive Title": ["possessive_title"],
+        "Reference Title": ["possessive_title"],
         "First Name": ["name"],
         "Last Name": ["last_name"]
         }
@@ -155,7 +174,7 @@ screen cheat_menu():
                             xfill True
                             yfill True
                             style "textbutton_no_padding_highlight"
-                            text_style "serum_text_style"
+                            text_style "cheat_text_style"
 
                             action [
                                 SetVariable("day", day + 1)
@@ -168,7 +187,7 @@ screen cheat_menu():
                             xfill True
                             yfill True
                             style "textbutton_no_padding_highlight"
-                            text_style "serum_text_style"
+                            text_style "cheat_text_style"
 
                             action [
                                 If(time_of_day == 4, true = SetVariable("time_of_day", time_of_day - 4), false = SetVariable("time_of_day", time_of_day + 1))
@@ -181,7 +200,7 @@ screen cheat_menu():
                             xfill True
 
                             style "textbutton_no_padding_highlight"
-                            text_style "serum_text_style"
+                            text_style "cheat_text_style"
 
                             action [
                                 SetVariable("time_of_day", 4), Call("advance_time", from_current=True)
@@ -196,7 +215,7 @@ screen cheat_menu():
                         textbutton "Cheat Menu":
                             xfill True
                             style "textbutton_no_padding_highlight"
-                            text_style "serum_text_style"
+                            text_style "cheat_text_style"
                             action [
                                 Hide("cheat_menu")
                             ]
@@ -214,7 +233,7 @@ screen cheat_menu():
                                                 background "#4f7ad6"
                                                 hover_background "#4f7ad6"
                                             style "textbutton_no_padding_highlight"
-                                            text_style "serum_text_style"
+                                            text_style "cheat_text_style"
 
                                             sensitive True
 
@@ -233,14 +252,201 @@ screen cheat_menu():
 
         if editing_target is not None:
             frame:
-                xalign 0.5
-                xysize (1100, 275)
-                grid 5 1:
+                xoffset 400
+                yoffset 200
+                xysize (1100, 260)
+                grid 4 1:
                     xfill True
+                    vbox:
+                        textbutton "Main Stats":
+                            style "textbutton_no_padding_highlight"
+                            text_style "cheat_text_style"
+                            xfill True
+
+                            action ToggleScreenVariable("main_stats_options")
+
+                        if main_stats_options:
+                            viewport:
+                                mousewheel True
+                                draggable True
+                                vbox:
+                                    for x in main_stats:
+                                        if hasattr(editing_target, str(main_stats[x][0])):
+                                            hbox:
+                                                textbutton " - ":
+                                                    xsize 36
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "cheat_text_style" 
+                                                    action [
+                                                        Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] - main_stats[x][2])
+                                                    ]
+
+                                                textbutton x + ": " + str(vars(editing_target)[main_stats[x][1]]):
+                                                    xsize 198
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "cheat_text_style"
+
+                                                    action [
+                                                        Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] + main_stats[x][2])
+                                                    ]
+
+                                                    alternate [
+                                                        Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] - main_stats[x][2])
+                                                    ]
+
+                                                textbutton " + ":
+                                                    xsize 36
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "cheat_text_style" 
+                                                    action [
+                                                        Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] + main_stats[x][2])
+                                                    ]
+
+                    vbox:
+                            #Make this check if editing_target has any of the attributes in the list instead.
+                        textbutton "Work Skills":
+                            style "textbutton_no_padding_highlight"
+                            text_style "cheat_text_style"
+                            xfill True
+
+                            action ToggleScreenVariable("work_skills_options")
+                        if work_skills_options:
+                            viewport:
+                                mousewheel True
+                                draggable True
+                                vbox:
+                                    for x in work_skills:
+                                        if hasattr(editing_target, str(work_skills[x][0])):
+                                            hbox:
+                                                textbutton " - ":
+                                                    xsize 36
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "cheat_text_style"
+                                                    action [
+                                                        Function(setattr, editing_target, work_skills[x][0], vars(editing_target)[work_skills[x][1]] - work_skills[x][2])
+                                                    ]
+
+                                                textbutton x + ": " + str(vars(editing_target)[work_skills[x][1]]):
+                                                    xsize 198
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "cheat_text_style"
+
+                                                    action [
+                                                        Function(setattr, editing_target, work_skills[x][0], vars(editing_target)[work_skills[x][1]] + work_skills[x][2])
+                                                    ]
+
+                                                    alternate [
+                                                        Function(setattr, editing_target, work_skills[x][0], vars(editing_target)[work_skills[x][1]] - work_skills[x][2])
+                                                    ]
+
+                                                textbutton " + ":
+                                                    xsize 36
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "cheat_text_style"
+                                                    action [
+                                                        Function(setattr, editing_target, work_skills[x][0], vars(editing_target)[work_skills[x][1]] + work_skills[x][2])
+                                                    ]                                                    
+                    vbox:
+                        textbutton "Sex Skills":
+                            style "textbutton_no_padding_highlight"
+                            text_style "cheat_text_style"
+                            xfill True
+
+                            action ToggleScreenVariable("sex_stats_options")
+
+                        if sex_stats_options:
+                            viewport:
+                                mousewheel True
+                                draggable True
+                                vbox:
+                                    for x in sex_stats:
+                                        if hasattr(editing_target, str(sex_stats[x][0])):
+                                            hbox:
+                                                textbutton " - ":
+                                                    xsize 36
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "cheat_text_style"
+                                                    action [
+                                                        SetDict(vars(editing_target)[sex_stats[x][0]], sex_stats[x][1], vars(editing_target)[sex_stats[x][0]][sex_stats[x][1]] - sex_stats[x][2])
+                                                    ]
+
+                                                textbutton x + ": " + str(vars(editing_target)[sex_stats[x][0]][sex_stats[x][1]]):
+                                                    xsize 198
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "cheat_text_style"
+
+                                                    action [
+                                                        SetDict(vars(editing_target)[sex_stats[x][0]], sex_stats[x][1], vars(editing_target)[sex_stats[x][0]][sex_stats[x][1]] + sex_stats[x][2])
+                                                    ]
+
+                                                    alternate [
+                                                        SetDict(vars(editing_target)[sex_stats[x][0]], sex_stats[x][1], vars(editing_target)[sex_stats[x][0]][sex_stats[x][1]] - sex_stats[x][2])
+                                                    ]
+
+                                                textbutton " + ":
+                                                    xsize 36
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "cheat_text_style"
+                                                    action [
+                                                        SetDict(vars(editing_target)[sex_stats[x][0]], sex_stats[x][1], vars(editing_target)[sex_stats[x][0]][sex_stats[x][1]] + sex_stats[x][2])
+                                                    ]                                                    
+
+
+                    vbox:
+
+                        textbutton "Relations":
+                            style "textbutton_no_padding_highlight"
+                            text_style "cheat_text_style"
+                            xfill True
+
+                            action ToggleScreenVariable("relation_options")
+
+                        if relation_options:
+                            viewport:
+                                mousewheel True
+                                draggable True
+                                vbox:
+                                    for x in relation_stats:
+                                        if hasattr(editing_target, str(relation_stats[x][0])):
+                                            hbox:
+                                                textbutton " - ":
+                                                    xsize 36
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "cheat_text_style"
+                                                    action [
+                                                        Function(setattr, editing_target, relation_stats[x][0], vars(editing_target)[relation_stats[x][1]] - relation_stats[x][2])
+                                                    ]
+
+                                                textbutton x + ": " + str(vars(editing_target)[relation_stats[x][0]]):
+                                                    xsize 198
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "cheat_text_style"
+
+                                                    action [
+                                                        Function(setattr, editing_target, relation_stats[x][0], vars(editing_target)[relation_stats[x][1]] + relation_stats[x][2])
+                                                    ]
+
+                                                    alternate [
+                                                        Function(setattr, editing_target, relation_stats[x][0], vars(editing_target)[relation_stats[x][1]] - relation_stats[x][2])
+                                                    ]
+
+                                                textbutton " + ":
+                                                    xsize 36
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "cheat_text_style"
+                                                    action [
+                                                        Function(setattr, editing_target, relation_stats[x][0], vars(editing_target)[relation_stats[x][1]] + relation_stats[x][2])
+                                                    ]                                                    
+
+            frame:
+                xoffset 0
+                yoffset 50
+                xysize (390, 330)
+                grid 1 1:
                     vbox:
                         textbutton "Name Options":
                             style "textbutton_no_padding_highlight"
-                            text_style "serum_text_style"
+                            text_style "cheat_text_style"
                             xfill True
 
                             action ToggleScreenVariable("naming_options")
@@ -266,9 +472,9 @@ screen cheat_menu():
                                                 action [ToggleScreenVariable("name_select"), SetScreenVariable("name_type", available_naming[x][0])]
 
                                                 if name_select:
-                                                    input default str(vars(editing_target)[available_naming[x][0]]):
+                                                    input default remove_display_tags(str(vars(editing_target)[available_naming[x][0]])):
                                                         changed edit_name_func
-                                                        style "serum_text_style"
+                                                        style "cheat_text_style"
                                                         yalign 0.5
                                                         xalign 0.5
                                                         xfill True
@@ -277,326 +483,183 @@ screen cheat_menu():
                                                     text x + ": "+ str(vars(editing_target)[available_naming[x][0]]):
                                                         yalign 0.5
                                                         yfill True
-                                                        style "serum_text_style"
-                    vbox:
-                        textbutton "Main Stats":
-                            style "textbutton_no_padding_highlight"
-                            text_style "serum_text_style"
-                            xfill True
+                                                        style "cheat_text_style"
 
-                            action ToggleScreenVariable("main_stats_options")
-
-                        if main_stats_options:
-                            viewport:
-                                mousewheel True
-                                draggable True
-                                vbox:
-                                    for x in main_stats:
-                                        if hasattr(editing_target, str(main_stats[x][0])):
-                                            textbutton x + ": " + str(vars(editing_target)[main_stats[x][1]]):
-                                                xfill True
-                                                style "textbutton_no_padding_highlight"
-                                                text_style "serum_text_style"
-
-                                                action [
-                                                    Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] + main_stats[x][2])
-                                                ]
-
-                                                alternate [
-                                                    Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] - main_stats[x][2])
-                                                ]
-
-                    vbox:
-                            #Make this check if editing_target has any of the attributes in the list instead.
-                        textbutton "Work Skills":
-                            style "textbutton_no_padding_highlight"
-                            text_style "serum_text_style"
-                            xfill True
-
-                            action ToggleScreenVariable("work_skills_options")
-                        if work_skills_options:
-                            viewport:
-                                mousewheel True
-                                draggable True
-                                vbox:
-                                    for x in work_skills:
-                                        if hasattr(editing_target, str(work_skills[x][0])):
-                                            textbutton x + ": " + str(vars(editing_target)[work_skills[x][1]]):
-                                                xfill True
-                                                style "textbutton_no_padding_highlight"
-                                                text_style "serum_text_style"
-
-                                                action [
-                                                    Function(setattr, editing_target, work_skills[x][0], vars(editing_target)[work_skills[x][1]] + work_skills[x][2])
-                                                ]
-
-                                                alternate [
-                                                    Function(setattr, editing_target, work_skills[x][0], vars(editing_target)[work_skills[x][1]] - work_skills[x][2])
-                                                ]
-                    vbox:
-                        textbutton "Sex Skills":
-                            style "textbutton_no_padding_highlight"
-                            text_style "serum_text_style"
-                            xfill True
-
-                            action ToggleScreenVariable("sex_stats_options")
-
-                        if sex_stats_options:
-                            viewport:
-                                mousewheel True
-                                draggable True
-                                vbox:
-                                    for x in sex_stats:
-                                        if hasattr(editing_target, str(sex_stats[x][0])):
-                                            textbutton x + ": " + str(vars(editing_target)[sex_stats[x][0]][sex_stats[x][1]]):
-                                                xfill True
-                                                style "textbutton_no_padding_highlight"
-                                                text_style "serum_text_style"
-
-                                                action [
-                                                    SetDict(vars(editing_target)[sex_stats[x][0]], sex_stats[x][1], vars(editing_target)[sex_stats[x][0]][sex_stats[x][1]] + sex_stats[x][2])
-                                                ]
-
-                                                alternate [
-                                                    SetDict(vars(editing_target)[sex_stats[x][0]], sex_stats[x][1], vars(editing_target)[sex_stats[x][0]][sex_stats[x][1]] - sex_stats[x][2])
-                                                ]
-
-                    vbox:
-
-                        textbutton "Relations":
-                            style "textbutton_no_padding_highlight"
-                            text_style "serum_text_style"
-                            xfill True
-
-                            action ToggleScreenVariable("relation_options")
-
-                        if relation_options:
-                            viewport:
-                                mousewheel True
-                                draggable True
-                                vbox:
-                                    for x in relation_stats:
-                                        if hasattr(editing_target, str(relation_stats[x][0])):
-                                            textbutton x + ": " + str(vars(editing_target)[relation_stats[x][0]]):
-                                                xfill True
-                                                style "textbutton_no_padding_highlight"
-                                                text_style "serum_text_style"
-
-                                                action [
-                                                    Function(setattr, editing_target, relation_stats[x][0], vars(editing_target)[relation_stats[x][1]] + relation_stats[x][2])
-                                                ]
-
-                                                alternate [
-                                                    Function(setattr, editing_target, relation_stats[x][0], vars(editing_target)[relation_stats[x][1]] - relation_stats[x][2])
-                                                ]
-
-        if editing_target is not None:
+        if editing_target is not None and type(editing_target) is not Business and type(editing_target) is not MainCharacter:
             frame:
-                yalign 1.0
-                xalign 0.5
-                xysize (1100, 200)
+                xoffset 400
+                yoffset 470
+                xysize (515, 520)
                 hbox:
-                    grid 5 1:
-                        xfill True
-                        yfill True
-                        vbox:
-                            if type(editing_target) is not Business and type(editing_target) is not MainCharacter:
-                                textbutton "Personality":
-                                    style "textbutton_no_padding_highlight"
-                                    text_style "serum_text_style"
-                                    xfill True
-
-                                    action ToggleScreenVariable("personality_options")
-                            else:
-                                pass
-                            if personality_options:
-                                viewport:
-                                    mousewheel True
-                                    draggable True
-                                    vbox:
-                                        for x in available_personalities:
-                                            if hasattr(editing_target, "personality"):
-                                                textbutton str(x):
-                                                    xfill True
-                                                    style "textbutton_no_padding_highlight"
-                                                    text_style "serum_text_style"
-
-
-                                                    if editing_target.personality == available_personalities[x]:
-                                                        background "#4f7ad6"
-                                                        hover_background "#4f7ad6"
-
-                                                    action [
-                                                        Function(setattr, editing_target, "personality", available_personalities[x])
-                                                    ]
-
-                                                    alternate [
-                                                        Function(setattr, editing_target, "personality", available_personalities[x])
-                                                    ]
-
-
-
-                        vbox:
-                            if type(editing_target) is not Business and type(editing_target) is not MainCharacter:
-                                hbox:
-                                    textbutton "Face Type":
-                                        style "textbutton_no_padding_highlight"
-                                        text_style "serum_text_style"
-
-                                        action ToggleScreenVariable("face_options")
-
-                                    textbutton "Hair":
-                                        style "textbutton_no_padding_highlight"
-                                        text_style "serum_text_style"
-                                        xfill True
-                                        action ToggleScreen("cheat_hair_dresser", None, editing_target, editing_target.hair_style, editing_target.hair_colour)
-                            else:
-                                pass
-
+                    vbox:
+                        xsize 250
+                        textbutton "Face Type":
+                            style "textbutton_no_padding_highlight"
+                            text_style "cheat_text_style"
+                            xfill True
                             if face_options:
-                                viewport:
-                                    mousewheel True
-                                    draggable True
-                                    vbox:
-                                        for x in available_faces:
-                                            if hasattr(editing_target, "face_style"):
-                                                textbutton str(x):
-                                                    xfill True
-                                                    style "textbutton_no_padding_highlight"
-                                                    text_style "serum_text_style"
+                                background "#4f7ad6"
+                                hover_background "#4f7ad6"
+                            action [Function(cheat_collapse_menus), ToggleScreenVariable("face_options")]
 
-                                                    if editing_target.face_style == x:
-                                                        background "#4f7ad6"
-                                                        hover_background "#4f7ad6"
+                        textbutton "Hair":
+                            style "textbutton_no_padding_highlight"
+                            text_style "cheat_text_style"
+                            xfill True
+                            action ToggleScreen("cheat_hair_dresser", None, editing_target, editing_target.hair_style, editing_target.hair_colour)
 
-                                                    action [
-                                                        Function(setattr, editing_target, "face_style", x),
-                                                        Function(cheat_appearance)
-                                                    ]
-
-                                                    alternate [
-                                                        Function(setattr, editing_target, "face_style", x),
-                                                        Function(cheat_appearance)
-                                                    ]
-
-
-
-                        vbox:
-                            if type(editing_target) is not Business and type(editing_target) is not MainCharacter:
-                                textbutton "Skin Type":
-                                    style "textbutton_no_padding_highlight"
-                                    text_style "serum_text_style"
-                                    xfill True
-
-                                    action ToggleScreenVariable("skin_options")
-                            else:
-                                pass
-
+                        textbutton "Skin Type":
+                            style "textbutton_no_padding_highlight"
+                            text_style "cheat_text_style"
+                            xfill True
                             if skin_options:
-                                viewport:
-                                    mousewheel True
-                                    draggable True
-                                    vbox:
-                                        for x in available_skin:
-                                            if hasattr(editing_target, available_skin[x][0] and available_skin[x][1]):
-                                                textbutton x:
-                                                    xfill True
-                                                    style "textbutton_no_padding_highlight"
-                                                    text_style "serum_text_style"
+                                background "#4f7ad6"
+                                hover_background "#4f7ad6"
+                            action [Function(cheat_collapse_menus), ToggleScreenVariable("skin_options")]
 
-                                                    if editing_target.skin == available_skin[x][2]:
-                                                        background "#4f7ad6"
-                                                        hover_background "#4f7ad6"
-
-                                                    action [
-                                                        Function(setattr, editing_target, available_skin[x][0], available_skin[x][2]),
-                                                        Function(setattr, editing_target, available_skin[x][1], available_skin[x][3]),
-                                                        Function(cheat_appearance)
-                                                    ]
-
-                                                    alternate [
-                                                        Function(setattr, editing_target, available_skin[x][0], available_skin[x][2]),
-                                                        Function(setattr, editing_target, available_skin[x][1], available_skin[x][3]),
-                                                        Function(cheat_appearance)
-                                                    ]
-
-
-
-                        vbox:
-                            if type(editing_target) is not Business and type(editing_target) is not MainCharacter: #These options will never be relevant to a Business Object, but might want to revisit later once the grand scope of the game is settled down.
-                                textbutton "Body Type":
-                                    style "textbutton_no_padding_highlight"
-                                    text_style "serum_text_style"
-                                    xfill True
-
-                                    action ToggleScreenVariable("body_options")
-                            else:
-                                pass
-
+                        textbutton "Body Type":
+                            style "textbutton_no_padding_highlight"
+                            text_style "cheat_text_style"
+                            xfill True
                             if body_options:
-                                viewport:
-                                    mousewheel True
-                                    draggable True
-                                    vbox:
-                                        for x in available_body_types:
-                                            if hasattr(editing_target, "body_type"):
-                                                textbutton x:
-                                                    xfill True
-                                                    style "textbutton_no_padding_highlight"
-                                                    text_style "serum_text_style"
+                                background "#4f7ad6"
+                                hover_background "#4f7ad6"
+                            action [Function(cheat_collapse_menus), ToggleScreenVariable("body_options")]
 
-                                                    if editing_target.body_type == x: # TODO: Take a look at this after you have slept some. Why isn't this working?
-                                                       background "4f7ad6"
-                                                       hover_background "4f7ad6"
-
-                                                    action [
-                                                       Function(setattr, editing_target, "body_type", x),
-                                                       Function(cheat_appearance)
-                                                    ]
-
-                                                    alternate [
-                                                       Function(setattr, editing_target, "body_type", x),
-                                                       Function(cheat_appearance)
-                                                    ]
-
-
-
-                        vbox:
-                            if type(editing_target) is not Business and type(editing_target) is not MainCharacter:
-                                textbutton "Breast Size":
-                                    style "textbutton_no_padding_highlight"
-                                    text_style "serum_text_style"
-                                    xfill True
-
-                                    action ToggleScreenVariable("breast_options")
-                            else:
-                                pass
-
+                        textbutton "Breast Size":
+                            style "textbutton_no_padding_highlight"
+                            text_style "cheat_text_style"
+                            xfill True
                             if breast_options:
-                                viewport:
-                                    mousewheel True
-                                    draggable True
-                                    vbox:
-                                        for x in available_breast_sizes:
-                                            if hasattr(editing_target, "tits"):
-                                                textbutton str(x):
-                                                    xfill True
-                                                    style "textbutton_no_padding_highlight"
-                                                    text_style "serum_text_style"
+                                background "#4f7ad6"
+                                hover_background "#4f7ad6"
+                            action [Function(cheat_collapse_menus), ToggleScreenVariable("breast_options")]
 
-                                                    if editing_target.tits == x:
-                                                        background "#4f7ad6"
-                                                        hover_background "#4f7ad6"
+                        if hasattr(editing_target, "personality") and editing_target.personality.personality_type_prefix in available_personalities:
+                            textbutton "Personality":
+                                style "textbutton_no_padding_highlight"
+                                text_style "cheat_text_style"
+                                xfill True
+                                if personality_options:
+                                    background "#4f7ad6"
+                                    hover_background "#4f7ad6"
+                                action [Function(cheat_collapse_menus), ToggleScreenVariable("personality_options")]
 
-                                                    action [
-                                                        Function(setattr, editing_target, "tits", x),
-                                                        Function(cheat_appearance)
-                                                    ]
+                        textbutton "Font Color":
+                            style "textbutton_no_padding_highlight"
+                            text_style "cheat_text_style"
+                            xfill True
+                            if font_color_options:
+                                background "#4f7ad6"
+                                hover_background "#4f7ad6"
+                            action [Function(cheat_collapse_menus), ToggleScreenVariable("font_color_options")]
 
-                                                    alternate [
-                                                        Function(setattr, editing_target, "tits", x),
-                                                        Function(cheat_appearance)
-                                                    ]
+
+                    vbox:
+                        xsize 250
+                        if personality_options:
+                            for x in available_personalities:
+                                if hasattr(editing_target, "personality"):
+                                    textbutton str(x).title():
+                                        xfill True
+                                        style "textbutton_no_padding_highlight"
+                                        text_style "cheat_text_style"
+
+                                        if editing_target.personality.personality_type_prefix == x:
+                                            background "#4f7ad6"
+                                            hover_background "#4f7ad6"
+
+                                        action [
+                                            Function(setattr, editing_target, "personality", available_personalities[x])
+                                        ]
+
+                        if face_options:
+                            for x in available_faces:
+                                if hasattr(editing_target, "face_style"):
+                                    textbutton str(x):
+                                        xfill True
+                                        style "textbutton_no_padding_highlight"
+                                        text_style "cheat_text_style"
+
+                                        if editing_target.face_style == x:
+                                            background "#4f7ad6"
+                                            hover_background "#4f7ad6"
+
+                                        action [
+                                            Function(setattr, editing_target, "face_style", x),
+                                            Function(cheat_appearance)
+                                        ]
+
+                        if skin_options:
+                            vbox:
+                                for x in available_skin:
+                                    if hasattr(editing_target, available_skin[x][0] and available_skin[x][1]):
+                                        textbutton x:
+                                            xfill True
+                                            style "textbutton_no_padding_highlight"
+                                            text_style "cheat_text_style"
+
+                                            if editing_target.skin == available_skin[x][2]:
+                                                background "#4f7ad6"
+                                                hover_background "#4f7ad6"
+
+                                            action [
+                                                Function(setattr, editing_target, available_skin[x][0], available_skin[x][2]),
+                                                Function(setattr, editing_target, available_skin[x][1], available_skin[x][3]),
+                                                Function(cheat_appearance)
+                                            ]
+
+
+                        if body_options:
+                            vbox:
+                                for x in available_body_types:
+                                    if hasattr(editing_target, "body_type"):
+                                        textbutton x:
+                                            xfill True
+                                            style "textbutton_no_padding_highlight"
+                                            text_style "cheat_text_style"
+
+                                            if editing_target.body_type == x: # TODO: Take a look at this after you have slept some. Why isn't this working?
+                                                background "4f7ad6"
+                                                hover_background "4f7ad6"
+
+                                            action [
+                                                Function(setattr, editing_target, "body_type", x),
+                                                Function(cheat_appearance)
+                                            ]
+
+                        if breast_options:
+                            vbox:
+                                for x in available_breast_sizes:
+                                    if hasattr(editing_target, "tits"):
+                                        textbutton str(x):
+                                            xfill True
+                                            style "textbutton_no_padding_highlight"
+                                            text_style "cheat_text_style"
+
+                                            if editing_target.tits == x:
+                                                background "#4f7ad6"
+                                                hover_background "#4f7ad6"
+
+                                            action [
+                                                Function(setattr, editing_target, "tits", x),
+                                                Function(cheat_appearance)
+                                            ]
+
+                        if font_color_options:
+                            vbox:
+                                for c in readable_color_list:
+                                    textbutton "{color=[c]}[the_person.name]{/color}":
+                                        xfill True
+                                        style "textbutton_no_padding_highlight"
+                                        text_style "cheat_text_style"
+
+                                        if editing_target.char.what_args["color"] == c:
+                                            background "#4f7ad6"
+                                            hover_background "#4f7ad6"
+
+                                        action [Function(cheat_person_font_color, editing_target, c)]
+
 
 screen cheat_hair_dresser(person, old_hair_style, old_hair_colour): ##Pass the person and the variables holding the current hair style
     modal True

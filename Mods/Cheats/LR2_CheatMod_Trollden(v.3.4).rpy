@@ -242,14 +242,12 @@ init python: # This space is reserved for definitions used to simplify the code
 
     def cheat_redraw_skin(): # Redraws the skin color
         the_person.draw_person()
-    def cheat_person_font_color(color):
-        the_person.char.color = color
-        the_person.char.what_color = color
-        the_person.char.what_args["color"] = color
-        the_person.char.who_args["color"] = color
-        the_person.set_title(remove_display_tags(the_person.title))
-        the_person.set_possessive_title(remove_display_tags(the_person.possessive_title))
-        the_person.set_mc_title(remove_display_tags(the_person.mc_title))
+    def cheat_person_font_color(person, color):
+        person.char.what_args["color"] = color
+        person.char.who_args["color"] = color
+        person.set_title(remove_display_tags(person.title))
+        person.set_possessive_title(remove_display_tags(person.possessive_title))
+        person.set_mc_title(remove_display_tags(person.mc_title))
     # Definitions - End
 
 # Styles - Start
@@ -424,7 +422,7 @@ screen cmoc():
                     for g in grouped:
                         vbox:
                             for c in g:
-                                textbutton "{color=[c]}[the_person.name]{/color}" action [Function(cheat_person_font_color, c)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                                textbutton "{color=[c]}[the_person.name]{/color}" action [Function(cheat_person_font_color, the_person, c)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
 
 
                 if capp and capph: # Hair Style Options
