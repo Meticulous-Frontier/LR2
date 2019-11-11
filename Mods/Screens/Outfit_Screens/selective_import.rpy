@@ -24,6 +24,10 @@ init 2:
         modal True
         zorder 100
         default preview_outfit = None
+        default targeted_outfit = None
+
+        default import_wardrobes = [mc.designed_wardrobe, mc.business.m_uniform, mc.business.p_uniform, mc.business.r_uniform, mc.business.s_uniform, mc.business.h_uniform, mc.business.all_uniform]
+
         grid len(outfit_categories) 1:
             for category in sorted(outfit_categories): # NOTE: Dictionary is not sorted. Don't know the best way to make it so.
                 vbox:
@@ -37,12 +41,13 @@ init 2:
                             scrollbars "vertical"
                         mousewheel True
                         vbox:
-                            if len(getattr(wardrobe, outfit_categories[category][2])()) > 0:
+                            if len(getattr(wardrobe, outfit_categories[category][2])()) > 0: #Don't show a frame if it is empty
                                 frame:
                                     vbox:
                                         for outfit in sorted(getattr(wardrobe, outfit_categories[category][2])(), key = lambda outfit: (outfit.slut_requirement, outfit.name)):  # Not sure if there's any good reason to sort XML lists since the default way it works is to place the newest outfit at the bottom which is predictable.
                                             frame:
                                                 vbox:
+                                                    id str(outfit)
                                                     xfill True
                                                     textbutton outfit.name + "\n" + get_heart_image_list_cloth(outfit.slut_requirement, 1):
                                                         xfill True
@@ -64,23 +69,43 @@ init 2:
                                                             xfill True
 
                                                             action [
-                                                                Function(exported.append,outfit), Function(log_outfit, outfit, outfit_class = outfit_categories[category][0], wardrobe_name = "Exported_Wardrobe"),
+                                                                Function(exported.append, outfit), Function(log_outfit, outfit, outfit_class = outfit_categories[category][0], wardrobe_name = "Exported_Wardrobe"),
                                                                 Function(renpy.notify, "Outfit exported to Exported_Wardrobe.xml")
                                                                 ]
 
                                                             sensitive outfit not in exported
 
-                                                    if not target_wardrobe is None:
-                                                        textbutton "Import to: [target_wardrobe.name]":
+
+                                                        textbutton "Direct Import Selection:":
+
                                                             style "textbutton_no_padding_highlight"
                                                             text_style "serum_text_style"
                                                             xfill True
 
-                                                            action [
-                                                                Function(add_outfit, target_wardrobe, outfit, outfit_type = outfit_categories[category][1]),
-                                                                Function(renpy.notify, "Outfit imported to " + target_wardrobe.name)
-                                                                ]
-                                                            sensitive not target_wardrobe.has_outfit_with_name(outfit.name)
+                                                            action ToggleScreenVariable("targeted_outfit", renpy.get_widget(renpy.current_screen(), str(outfit)), None)
+
+                                                        if targeted_outfit == renpy.get_widget(renpy.current_screen(), str(outfit)):
+                                                            frame:
+                                                                vbox:
+                                                                    for wardrobes in import_wardrobes:
+                                                                        textbutton str(wardrobes.name): # TODO: Remove the business name from strings?
+                                                                            style "textbutton_no_padding_highlight"
+                                                                            text_style "serum_text_style"
+                                                                            xfill True
+
+                                                                            sensitive not wardrobes.has_outfit_with_name(outfit.name)# in getattr(wardrobes, outfit_categories[category][2])()
+
+                                                                            action [
+                                                                                 Function(add_outfit, wardrobes, outfit, outfit_type = outfit_categories[category][1]),
+                                                                                 Function(renpy.notify, "Outfit imported to " + wardrobes.name)
+                                                                                 ]
+
+                                                        #
+                                                        # action [
+                                                        #     Function(add_outfit, target_wardrobe, outfit, outfit_type = outfit_categories[category][1]),
+                                                        #     Function(renpy.notify, "Outfit imported to " + target_wardrobe.name)
+                                                        #     ]
+                                                        # sensitive not target_wardrobe.has_outfit_with_name(outfit.name)
 
 
         frame:
