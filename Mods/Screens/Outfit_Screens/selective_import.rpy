@@ -9,6 +9,30 @@ init 2 python:
             else: #outfit_type = full
                 wardrobe.add_outfit(the_outfit)
 
+    def add_outfit_to_wardrobes(list_of_wardrobes, the_outfit, outfit_type = "full"): #Adds the outfit to every wardrobe in the list of wardrobes passed to it
+
+        for wardrobe in list_of_wardrobes:
+            if not wardrobe.has_outfit_with_name(the_outfit.name):
+                if outfit_type == "under":
+                    wardrobe.add_underwear_set(the_outfit)
+                elif outfit_type == "over":
+                    wardrobe.add_overwear_set(the_outfit)
+                else: #outfit_type = full
+                    wardrobe.add_outfit(the_outfit)
+
+    def wardrobes_has_outfit_with_name(list_of_wardrobes, the_name): # Check if every Wardrobe in the list has the outfit already
+
+        max_count = len(list_of_wardrobes)
+        count = 0
+        for wardrobe in list_of_wardrobes:
+            for checked_outfit in wardrobe.outfits + wardrobe.underwear_sets + wardrobe.overwear_sets:
+                if checked_outfit.name == the_name:
+                    count += 1
+        if count == max_count:
+            return True
+        else:
+            return False
+
     def selected_xml_wardrobe(target_wardrobe, xml_filename): # TODO: Use this instead -> Show("import_outfit_manager", None, target_wardrobe, n)
         renpy.show_screen("import_outfit_manager", target_wardrobe, xml_filename)
     def selected_xml_clothing(outfit):
@@ -25,8 +49,10 @@ init 2:
         zorder 100
         default preview_outfit = None
         default targeted_outfit = None
-
-        default import_wardrobes = [mc.designed_wardrobe, mc.business.m_uniform, mc.business.p_uniform, mc.business.r_uniform, mc.business.s_uniform, mc.business.h_uniform, mc.business.all_uniform]
+        #default business_wardrobes = [mc.business.m_uniform, mc.business.p_uniform, mc.business.r_uniform, mc.business.s_uniform, mc.business.h_uniform, mc.business.all_uniform]
+        default import_wardrobes = {"Your Wardrobe": [[mc.designed_wardrobe]], "Marketing Division": [[mc.business.m_uniform]], "Research Division": [[mc.business.r_uniform]], "Production Division": [[mc.business.p_uniform]], "Supply Division": [[mc.business.s_uniform]], "HR Division": [[mc.business.h_uniform]], "All Divisions": [[mc.business.all_uniform]]}
+        if "list_of_slaves" in globals():
+            $ import_wardrobes["Slaves"] = [[x.wardrobe for x in list_of_slaves]]
 
         grid len(outfit_categories) 1:
             for category in sorted(outfit_categories): # NOTE: Dictionary is not sorted. Don't know the best way to make it so.
@@ -88,16 +114,16 @@ init 2:
                                                             frame:
                                                                 vbox:
                                                                     for wardrobes in import_wardrobes:
-                                                                        textbutton str(wardrobes.name): # TODO: Remove the business name from strings?
+                                                                        textbutton str(wardrobes):
                                                                             style "textbutton_no_padding_highlight"
                                                                             text_style "serum_text_style"
                                                                             xfill True
 
-                                                                            sensitive not wardrobes.has_outfit_with_name(outfit.name)# in getattr(wardrobes, outfit_categories[category][2])()
+                                                                            sensitive not wardrobes_has_outfit_with_name(import_wardrobes[wardrobes][0], outfit.name)# in getattr(wardrobes, outfit_categories[category][2])()
 
                                                                             action [
-                                                                                 Function(add_outfit, wardrobes, outfit, outfit_type = outfit_categories[category][1]),
-                                                                                 Function(renpy.notify, "Outfit imported to " + wardrobes.name)
+                                                                                 Function(add_outfit_to_wardrobes, import_wardrobes[wardrobes][0], outfit, outfit_type = outfit_categories[category][1]),
+                                                                                 Function(renpy.notify, "Outfit imported to " + wardrobes)
                                                                                  ]
 
                                                         #
