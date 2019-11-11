@@ -68,25 +68,15 @@ label dungeon_room_appoint_slave_label_2(the_person):
             "[the_person.possessive_title] needs to be more obedient before being willing to commit to being your slave."
             return
 
-        python:
-            if "list_of_slaves" not in globals(): # Initialize the list when and if relevant.
-                list_of_slaves = []
-            the_person.special_role.append(slave_role)
-            list_of_slaves.append(the_person)
+        $ the_person.special_role.append(slave_role)
 
         "[the_person.title] is now a willing slave of yours."
 
 
     else: # What happens when they are already appointed
 
-        python:
-            if "list_of_slaves" not in globals(): # Initialize the list when and if relevant.
-                list_of_slaves = []
+        $ the_person.special_role.remove(slave_role)
 
-            the_person.special_role.remove(slave_role)
-
-            if the_person in list_of_slaves: # Relevant for older saves
-                list_of_slaves.remove(the_person)
 
         "You release [the_person.possessive_title] from their duties as a slave."
 

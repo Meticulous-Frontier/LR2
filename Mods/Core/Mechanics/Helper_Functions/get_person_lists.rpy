@@ -39,3 +39,7 @@ init -1 python:
 
     def people_in_mc_home():
         return hall.people + bedroom.people + lily_bedroom.people + mom_bedroom.people + kitchen.people
+
+    def people_in_role(role):
+        all_people = all_people_in_the_game([mc])
+        return [x for x in all_people if role in x.special_role]
