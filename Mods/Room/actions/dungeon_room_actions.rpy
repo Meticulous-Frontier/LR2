@@ -43,7 +43,7 @@ label dungeon_room_appoint_slave_label():
         call screen main_choice_display([people_list])
         $ person_choice = _return
         $ del people_list
-        
+
         if person_choice == "Back":
             return # Where to go if you hit "Back"
 
@@ -54,7 +54,7 @@ label dungeon_room_appoint_slave_label():
 
 label dungeon_room_appoint_slave_label_2(the_person):
 
-    if slave_role not in the_person.special_role:
+    if slave_role not in the_person.special_role: # What happens when you try to appoint them
 
         if the_person.obedience >= 130:
             if the_person.get_opinion_score("being submissive") > 0:
@@ -68,13 +68,26 @@ label dungeon_room_appoint_slave_label_2(the_person):
             "[the_person.possessive_title] needs to be more obedient before being willing to commit to being your slave."
             return
 
-        $ the_person.special_role.append(slave_role)
+        python:
+            if "list_of_slaves" not in globals(): # Initialize the list when and if relevant.
+                list_of_slaves = []
+            the_person.special_role.append(slave_role)
+            list_of_slaves.append(the_person)
+
         "[the_person.title] is now a willing slave of yours."
 
 
-    else:
+    else: # What happens when they are already appointed
 
-        $ the_person.special_role.remove(slave_role)
+        python:
+            if "list_of_slaves" not in globals(): # Initialize the list when and if relevant.
+                list_of_slaves = []
+
+            the_person.special_role.remove(slave_role)
+
+            if the_person in list_of_slaves: # Relevant for older saves
+                list_of_slaves.remove(the_person)
+
         "You release [the_person.possessive_title] from their duties as a slave."
 
     return

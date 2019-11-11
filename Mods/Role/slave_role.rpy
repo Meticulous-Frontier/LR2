@@ -115,7 +115,7 @@ label slave_training_label(the_person): # TODO: Add variations to these. They ar
             $ the_person.change_stats(2, 2, 10, 2)
             pass
 
-        "Give her a kiss.":
+        "Give her a quick kiss.":
             $ the_person.draw_person("kissing")
             "You give [the_person.possessive_title] a quick kiss"
             $ the_person.change_stats(0, 2, 10, 5)
