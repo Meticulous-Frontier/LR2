@@ -45,7 +45,11 @@ label downtown_bar_drink_label():
 
     $ people_list = get_sorted_people_list(known_people_at_location(mc.location) + unknown_people_at_location(mc.location), "Drink with", [new_person, "Back"])
 
-    call screen main_choice_display([people_list])
+    if "build_menu_items" in globals():
+        call screen main_choice_display(build_menu_items([people_list]))
+    else:
+        call screen main_choice_display([people_list])    
+    
     $ person_choice = _return
     $ del people_list
 

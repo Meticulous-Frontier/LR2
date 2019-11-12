@@ -77,7 +77,7 @@ label store_mod_policies(stack = None):
          ###################################################
 
         mandatory_vibe_policy = ModPolicy(
-            name = "Attach Bullet Viberator",
+            name = "Attach Bullet Vibrator",
             cost = 5000,
             desc = "Ensures a minimum arousal level for your employees\nEnabled: " + (str(get_from_policy_list(mandatory_vibe_policy).enabled) if "mandatory_vibe_policy" in globals() and mandatory_vibe_policy.is_owned() else "False"),
             requirement = mandatory_vibe_policy_requirement,
@@ -106,7 +106,10 @@ label body_customizer_action_label():
     while True:
         $ people_list = get_sorted_people_list(known_people_in_the_game([mc]), "Modify Person", ["Back"])
 
-        call screen main_choice_display([people_list])
+        if "build_menu_items" in globals():
+            call screen main_choice_display(build_menu_items([people_list]))
+        else:
+            call screen main_choice_display([people_list])
         $ person_choice = _return
         $ del people_list
 

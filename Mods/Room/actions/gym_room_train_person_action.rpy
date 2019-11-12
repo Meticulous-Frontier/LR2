@@ -28,7 +28,10 @@ init 3 python:
 label select_person_for_gym():
     $ people_list = get_sorted_people_list(known_people_in_the_game([mc]), "Train with", ["Back"])
 
-    call screen main_choice_display([people_list])
+    if "build_menu_items" in globals():
+        call screen main_choice_display(build_menu_items([people_list]))
+    else:
+        call screen main_choice_display([people_list])
     $ person_choice = _return
     $ del people_list
 

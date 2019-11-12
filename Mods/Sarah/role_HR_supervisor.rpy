@@ -367,7 +367,11 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         the_person.char "Here's my list. Who do you want me to call in?"
 
     # use new menu layout for selecting people
-    call screen main_choice_display([["Call in"] + HR_employee_list], draw_hearts_for_people = False)
+    if "build_menu_items" in globals():
+        call screen main_choice_display(build_menu_items([["Call in"] + HR_employee_list], draw_hearts_for_people = False))
+    else:
+        call screen main_choice_display([["Call in"] + HR_employee_list], draw_hearts_for_people = False)
+
     $ person_choice = _return
 
     the_person.char "Alright, let me go get her."
@@ -405,7 +409,10 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
                 opinion_chat_list.append([title_desc, opinion])
 
     $ opinion_chat_list.insert(0, "Discuss Topic")
-    call screen main_choice_display([opinion_chat_list])
+    if "build_menu_items" in globals():
+        call screen main_choice_display(build_menu_items([opinion_chat_list]))
+    else:
+        call screen main_choice_display([opinion_chat_list])
     $ opinion_chat = _return
 
     if opinion_chat == "working":
