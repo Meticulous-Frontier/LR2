@@ -62,7 +62,22 @@ init python: # This space is reserved for definitions used to simplify the code
     # Definitions - Start
 
     def cheat_serum_traits(): # Researches all the traits in list_of_traits
-        for trait in list_of_traits:
+        list_of_unlisted_traits = [
+            nora_reward_aunt_trait,
+            nora_reward_nora_trait,
+            nora_reward_sister_trait,
+            nora_reward_genius_trait,
+            nora_reward_mother_trait,
+            nora_reward_cousin_trait,
+            nora_reward_low_love_trait,
+            nora_reward_high_slut_trait,
+            nora_reward_high_obedience_trait,
+            nora_reward_high_love_trait
+            ]
+
+        for trait in list_of_traits + list_of_nora_traits + list_of_unlisted_traits:
+            if trait not in list_of_traits:
+                list_of_traits.append(trait)
             if trait.tier <= mc.business.research_tier:
                 trait.researched = True
 
