@@ -39,7 +39,7 @@ init 2:
                         focus_mask "gui/LR2_Hex_Button_idle.png"
                         action [Hide("housing_map_manager"), Return(place), Call("change_location_label", place)]
                         sensitive place.accessable
-                    text place.formalName + "\n(" + str(len(place.people)) + ")" anchor [0.5,0.5] style "map_text_style"
+                    text replace_nth_occurrence(place.formalName + " (" + str(len(place.people)) + ")", " ", "\n", 2) anchor [0.5,0.5] style "map_text_style"
 
             else:
                 frame:
