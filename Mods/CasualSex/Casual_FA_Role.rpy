@@ -545,7 +545,7 @@ init 1301 python:              #Because Vren Init personality functionns at 1300
         return valid_possessive_titles
     def FA_player_titles(the_person):
         return mc.name
-    FA_personality = Personality("FA", default_prefix = "wild",
+    FA_personality = Personality("Stewardess", default_prefix = "wild",
     common_likes = ["traveling"],
     common_sexy_likes = ["casual sex"],
     common_dislikes = ["relationships"],
