@@ -536,7 +536,7 @@ screen cheat_menu():
                             style "textbutton_no_padding_highlight"
                             text_style "cheat_text_style"
                             xfill True
-                            if breast_options:
+                            if hair_style_options:
                                 background "#4f7ad6"
                                 hover_background "#4f7ad6"
                             action [Function(cheat_collapse_menus), ToggleScreenVariable("hair_style_options")]
