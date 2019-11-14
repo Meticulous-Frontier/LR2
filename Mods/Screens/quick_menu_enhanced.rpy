@@ -26,3 +26,20 @@ init 5:
             textbutton _("Prefs") action ShowMenu('preferences')
             textbutton _("Cheat") action ToggleScreen("cheat_menu")
             textbutton _("Opinions") action ToggleScreen("opinion_edit_menu")
+
+    screen quick_menu():
+        variant "touch"
+
+        zorder 100
+
+        hbox:
+            style_prefix "quick"
+
+            xalign 0.5
+            yalign 1.0
+
+            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
+            textbutton _("Menu") action ShowMenu()
+            textbutton _("Auto") action Preference("auto-forward", "toggle")
+            textbutton _("Cheat") action ToggleScreen("cheat_menu")
+            textbutton _("Opinions") action ToggleScreen("opinion_edit_menu")
