@@ -435,13 +435,13 @@ init 2:
                                                 xalign 0.5
 
                                                 action [
-                                                    SetScreenVariable("selected_clothing", cloth),
+                                                    SetScreenVariable("selected_clothing", cloth.get_copy()),
                                                     SetScreenVariable("selected_colour", "colour")
                                                 ]
 
                                                 hovered [
-                                                    Function(preview_apply, cloth), # Add the hovered outfit to the demo outfit
-                                                    Function(update_outfit_color, cloth),
+                                                    Function(preview_apply, cloth.get_copy()), # Add the hovered outfit to the demo outfit
+                                                    Function(update_outfit_color, cloth.get_copy()),
                                                     Function(preview_outfit)
                                                 ]
 
