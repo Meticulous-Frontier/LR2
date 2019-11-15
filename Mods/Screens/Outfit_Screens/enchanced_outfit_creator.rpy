@@ -205,10 +205,12 @@ init -1 python:
 
 
     def get_category(item): # Should re-write this function if possible.
+        cs = renpy.current_screen()
+        fluids_list = cs.scope["fluids_list"]
         cloth_master_list = [
         panties_list + neckwear_list + bracelet_list + rings_list +
         earings_list + shoes_list + bra_list + pants_list + skirts_list +
-        shirts_list + dress_list +  socks_list
+        shirts_list + dress_list +  socks_list + fluids_list
         ]
         for cloth in cloth_master_list:
             if item in panties_list:
@@ -235,6 +237,10 @@ init -1 python:
                 return "Bracelets"
             if item in neckwear_list:
                 return "Neckwear"
+            if item in fluids_list:
+                return "Fluids"
+            else:
+                return "Item not in Category"
 init 2:
     python:
         def custom_log_outfit(the_outfit, outfit_class = "FullSets", wardrobe_name = "Exported_Wardrobe"): #NOTE: This is just a version of the default log_outfit that does not append .xml to the file name
@@ -294,6 +300,9 @@ init 2:
         zorder 100
 
         $ renpy.block_rollback()
+
+        $ fluids_list = [face_cum, mouth_cum, stomach_cum, tits_cum, ass_cum]
+
         default category_selected = "Panties"
         default mannequin = "mannequin"
         default mannequin_pose = "stand3"
@@ -326,7 +335,7 @@ init 2:
             $ valid_layers = [0,1,2,3]
             $ outfit_class_selected = "FullSets"
 
-        $ valid_categories = ["Panties", "Bras", "Pants", "Skirts", "Dresses", "Shirts", "Socks", "Shoes", "Facial", "Rings", "Bracelets", "Neckwear"] #Holds the valid list of categories strings to be shown at the top.
+        $ valid_categories = ["Panties", "Bras", "Pants", "Skirts", "Dresses", "Shirts", "Socks", "Shoes", "Facial", "Rings", "Bracelets", "Neckwear", "Not Paint"] #Holds the valid list of categories strings to be shown at the top.
 
         $ categories_mapping = {
             "Panties": [panties_list, Outfit.can_add_lower, Outfit.add_lower],  #Maps each category to the function it should use to determine if it is valid and how it should be added to the outfit.
@@ -340,7 +349,8 @@ init 2:
             "Facial": [earings_list, Outfit.can_add_accessory, Outfit.add_accessory],
             "Rings": [rings_list, Outfit.can_add_accessory, Outfit.add_accessory],
             "Bracelets": [bracelet_list, Outfit.can_add_accessory, Outfit.add_accessory],
-            "Neckwear": [neckwear_list, Outfit.can_add_accessory, Outfit.add_accessory]}
+            "Neckwear": [neckwear_list, Outfit.can_add_accessory, Outfit.add_accessory],
+            "Not Paint": [fluids_list, Outfit.can_add_accessory, Outfit.add_accessory]}
 
 
         default bar_select = 0 # 0 is nothing selected, 1 is red, 2 is green, 3 is blue, and 4 is alpha
