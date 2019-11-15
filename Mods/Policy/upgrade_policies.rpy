@@ -6,8 +6,6 @@ init 1400 python: # Room expansions are init 6, base game policies are init 1300
     add_label_hijack("after_load", "store_mod_policies")
 
 init 10 python:
-
-
     def create_production_line_requirement():
         if "production_line_addition_2_policy" in globals(): # In case this gets removed or changed
             return p_division_policy.is_owned() and production_line_addition_2_policy.is_owned()
@@ -25,11 +23,18 @@ init 10 python:
 
     def mandatory_vibe_policy_requirement():
         return maximal_arousal_uniform_policy.is_owned()
+
     def mandatory_vibe_action_requirement():
-        return (mandatory_vibe_policy.is_owned() and get_from_policy_list(mandatory_vibe_policy).enabled) and mc.business.is_open_for_business() # Only run while employees are at work. # Action runs if the policy is owned. Is_owned() checks if it is in the mc.business.policy_list
+        # Only run while employees are at work. # Action runs if the policy is owned. Is_owned() checks if it is in the mc.business.policy_list
+        if mc.business.is_open_for_business():
+            policy = get_from_policy_list(mandatory_vibe_policy)
+            if policy:
+                return policy.is_owned() and policy.enabled
+        return False
 
     def body_customizer_policy_requirement():
         return rd_division_policy.is_owned()
+
     body_customizer_action = Action("Modify Person", body_customizer_policy_requirement, "body_customizer_action_label", menu_tooltip = "Bring a person in for modifications")
 
 label store_mod_policies(stack = None):
@@ -79,12 +84,12 @@ label store_mod_policies(stack = None):
         mandatory_vibe_policy = ModPolicy(
             name = "Attach Bullet Vibrator",
             cost = 5000,
-            desc = "Ensures a minimum arousal level for your employees\nEnabled: " + (str(get_from_policy_list(mandatory_vibe_policy).enabled) if "mandatory_vibe_policy" in globals() and mandatory_vibe_policy.is_owned() else "False"),
+            desc = "Ensures a minimum arousal level for your employees\nEnabled: " + str(mandatory_vibe_action_requirement()),
             requirement = mandatory_vibe_policy_requirement,
             parent = maximal_arousal_uniform_policy,
             refresh = "store_mod_policies"
         )
-        mandatory_vibe_company_action = ActionMod("Attach vibes to outfits", mandatory_vibe_action_requirement, "mandatory_vibe_company_label", priority = 2)
+        mandatory_vibe_company_action = ActionMod("Attach vibes to outfits", mandatory_vibe_action_requirement, "mandatory_vibe_company_label", priority = 2, enabled = False)
         if mandatory_vibe_company_action not in advance_time_action_list:
             advance_time_action_list.append(mandatory_vibe_company_action)
 
@@ -102,7 +107,6 @@ label mandatory_vibe_company_label():
     return
 
 label body_customizer_action_label():
-
     while True:
         $ people_list = get_sorted_people_list(known_people_in_the_game([mc]), "Modify Person", ["Back"])
 
