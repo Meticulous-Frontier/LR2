@@ -238,7 +238,7 @@ init -1 python:
             if item in neckwear_list:
                 return "Neckwear"
             if item in fluids_list:
-                return "Fluids"
+                return "Not Paint"
             else:
                 return "Item not in Category"
 init 2:
