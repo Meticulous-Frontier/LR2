@@ -395,6 +395,16 @@ init -1:
 
         Person.judge_outfit = judge_outfit_extension
 
+        # BUGFIX: Remove suggest effect
+        # Sometimes an effect is no longer in bag causing an exception, fix: check if effect exists before trying to remove
+        def remove_suggest_effect_fixed(self, amount):
+            self.change_suggest(- __builtin__.max(self.suggest_bag or [0])) #Subtract the max
+            if amount in self.suggest_bag:
+                self.suggest_bag.remove(amount)
+            self.change_suggest(__builtin__.max(self.suggest_bag or [0])) # Add the new max. If we were max, it is now lower, otherwie it cancels out.
+
+        Person.remove_suggest_effect = remove_suggest_effect_fixed
+
         ## ADD OPINION EXTENSION
         ## Adds add_opinion function to Person class
         def add_opinion(self, topic, degree, discovered = None, sexy_opinion = None, add_to_log = True): # Gives a message stating the opinion has been changed.
