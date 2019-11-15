@@ -32,6 +32,11 @@ init 2 python:
         if "ask_break_up_action" in globals():
             ask_break_up_action.effect = "ask_break_up_label"
 
+    def fix_room_names():
+        for person in known_people_in_the_game([mc] + unique_character_list):
+            person.home.name = person.name + " " + person.last_name +" home"
+            person.home.formalName = person.name + " " + person.last_name +" home"
+
     if config.version == "v0.22.0":
         if "girlfriend_role" not in globals():
 
@@ -48,6 +53,7 @@ label run_cleanup(stack):
     $ clean_elevator_action()
     $ serum_action_cleanup()
     $ fix_breakup_action()
+    $ fix_room_names()
 
     $ execute_hijack_call(stack)
 
