@@ -36,6 +36,7 @@ init 10 python:
         return rd_division_policy.is_owned()
 
     body_customizer_action = Action("Modify Person", body_customizer_policy_requirement, "body_customizer_action_label", menu_tooltip = "Bring a person in for modifications")
+    mandatory_vibe_company_action = ActionMod("Attach vibes to outfits", mandatory_vibe_action_requirement, "mandatory_vibe_company_label", priority = 2, enabled = False, allow_disable = True, category = "Business")
 
 label store_mod_policies(stack = None):
 
@@ -89,7 +90,6 @@ label store_mod_policies(stack = None):
             parent = maximal_arousal_uniform_policy,
             refresh = "store_mod_policies"
         )
-        mandatory_vibe_company_action = ActionMod("Attach vibes to outfits", mandatory_vibe_action_requirement, "mandatory_vibe_company_label", priority = 2, enabled = False)
         if mandatory_vibe_company_action not in advance_time_action_list:
             advance_time_action_list.append(mandatory_vibe_company_action)
 
