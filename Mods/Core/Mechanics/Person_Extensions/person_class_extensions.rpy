@@ -243,8 +243,10 @@ init -1:
         # scene manager parameter is filled from that class so that all people present in scene are drawn
         def strip_outfit_to_max_sluttiness(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, narrator_messages = None, character_placement = None, lighting = None, temp_sluttiness_boost = 0, position = None, emotion = None, scene_manager = None):
             # internal function to strip top clothing first.
-            def get_strip_choice_upper_first(outfit, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True):
-                strip_choice = outfit.remove_random_upper(top_layer_first)
+            def get_strip_choice_max(outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet):
+                strip_choice = None
+                if not exclude_upper:
+                    strip_choice = outfit.remove_random_upper(top_layer_first)
                 if strip_choice is None:
                     strip_choice = outfit.remove_random_any(top_layer_first, exclude_upper, exclude_lower, exclude_feet)
                 return strip_choice
@@ -265,7 +267,7 @@ init -1:
             test_outfit = self.outfit.get_copy()
             removed_something = False
 
-            strip_choice = get_strip_choice_upper_first(test_outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet)
+            strip_choice = get_strip_choice_max(test_outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet)
             # renpy.say("", strip_choice.name + "  (required: " + str(test_outfit.slut_requirement) +  ", sluttiness: " +  str(self.effective_sluttiness() + temp_sluttiness_boost) + ")")
             while strip_choice and self.judge_outfit(test_outfit, temp_sluttiness_boost):
                 self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
@@ -278,7 +280,7 @@ init -1:
                 else:
                     renpy.pause(1) # if no message to show, wait a short while before automatically continue stripping
 
-                strip_choice = get_strip_choice_upper_first(test_outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet)
+                strip_choice = get_strip_choice_max(test_outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet)
 
             return removed_something
 
