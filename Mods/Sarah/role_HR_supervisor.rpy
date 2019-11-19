@@ -370,7 +370,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     if "build_menu_items" in globals():
         call screen main_choice_display(build_menu_items([["Call in"] + HR_employee_list], draw_hearts_for_people = False))
     else:
-        call screen main_choice_display([["Call in"] + HR_employee_list], draw_hearts_for_people = False)
+        call screen main_choice_display([["Call in"] + HR_employee_list])
 
     $ person_choice = _return
 
