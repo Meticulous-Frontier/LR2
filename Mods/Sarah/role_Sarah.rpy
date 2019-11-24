@@ -58,6 +58,7 @@ init 2 python:
         sarah.home.add_person(sarah)
         sarah.event_triggers_dict["epic_tits_progress"] = 0    # 0 = not started, 1 = mandatory event triggered, 2 = tits epic
         sarah.event_triggers_dict["drinks_out_progress"] = 0   # 0 = not started, 1 = third wheel event complete, 2 = grab drinks complete
+        sarah.event_triggers_dict["dating_path"] = False       # False = not started, or doing FWB during story, True = dating her.
 
 
         Sarah_intro = Action("Sarah_intro",Sarah_intro_requirement,"Sarah_intro_label") #Set the trigger day for the next monday. Monday is day%7 == 0
@@ -221,7 +222,7 @@ label Sarah_hire_label():
     $ day_name = "Tomorrow"
     if day%7 == 4 or day%7 == 5: # its friday or saturday so next workday is monday
         $ day_name = "Monday"
-    
+
     mc.name "[day_name] morning. I'll text the address after this call. We will go over your role and responsibilities when you get there."
     the_person.char "Yes! I'm so glad to finally be done selling solar panels. I'll see you in the morning!"
     "You hang up the phone. You quickly text [the_person.title] the address of your business."
@@ -431,8 +432,10 @@ label Sarah_get_drinks_label():
     "You admire her courage. She must be really interested in you to have the guts to ask you out like this! If you accept, she might assume you are interested in a relationship..."
     menu:
         "Sounds great!": #Begin the dating path with Sarah
+            $ sarah.event_triggers_dict["dating_path"] = True
             pass
         "Just as friends.\n (Coming Later) (disabled)":
+            $ sarah.event_triggers_dict["dating_path"] = False
             pass
             #TODO when Vren release boyfriend girlfriend relations, evaluate this option to eventually shift to a FWB scenario over dating.
     mc.name "I'm actually at a great stopping point. Let's go!"
@@ -444,6 +447,8 @@ label Sarah_get_drinks_label():
     $ mc.location.show_background()
 
     "You enjoy pleasant conversation with [the_person.possessive_title] as you walk downtown."
+    if the_person.event_triggers_dict.get("dating_path", False) == True:
+        "As you walk along, you feel her hand slip into yours. You twiddle your thumb with hers as you walk downtown."
     #TODO the convo
 
 
@@ -484,7 +489,105 @@ label Sarah_get_drinks_label():
     "You have discovered that [the_person.title] loves threesomes!" #TODO add these opinions
     mc.name "That's very open minded of you. I can certainly respect that!"
     "[the_person.title] tips her glass back and finishes her first drink. You make it a point to do the same."
-
+    mc.name "Let me grab the next round."
+    if the_person.event_triggers_dict.get("dating_path", False) == True:
+        the_person.char "That sounds great. Say, want to play some darts? I'll grab us a board while you grab the drinks!"
+        mc.name "That sounds great, I'll meet you over there."
+        $ scene_manager.update_actor(the_person, position = "walking_away")
+        "[the_person.possessive_title] gets up and walks over to the dart boards while you grab a couple more drinks."
+        "You feel like, so far atleast, this date is going pretty well!"
+        $ scene_manager.update_actor(the_person, position = "stand4")
+        "You walk over to [the_person.title], drinks in hand. You hand her a drink."
+        mc.name "How about a toast? To tonight! May we love as long as we live, and live as long as we love."
+        "You surprise yourself with your sappy toast. It seems to have the desired effect though, as she smiles wide with your toast."
+    else:
+        the_person.char "Hey, let me grab the next round. I want to play a game though! Can you go get us a dart game setup?"
+        mc.name "Yeah, that actually sounds pretty fun. I'll do that."
+        $ scene_manager.update_actor(the_person, position = "walking_away")
+        "[the_person.possessive_title] gets up and walks over to the bar while you head over to reserve a dart board."
+        "You are having a lot of fun hanging out with [the_person.title]. Even though you rejected her earlier, you are wondering how she might feel about a friends with benefits setup..."
+        $ scene_manager.update_actor(the_person, position = "stand4")
+        "[the_person.title] joins you and hands you another whiskey."
+        the_person.char "How about to a toast? To he who has seen me at my best and has seen me at my worst and can't tell the difference!"
+        "You grin at her cheesy toast, she smiles wide at you."
+    "You clink your glasses together and take a deep sip."
+    the_person.char "Alright! I'm going first."
+    $ scene_manager.remove_actor(the_person, reset_actor = False)
+    call play_darts_301(the_person, focus_mod = 2) from play_darts_301_call_1
+    if _return:
+        $ scene_manager.add_actor(the_person, emotion = "sad")
+        "[the_person.title] gives you a pathetically fake pout after you win your game of darts."
+    else:
+        $ scene_manager.add_actor(the_person, emotion = "happy")
+        "[the_person.title] gives you a huge smile after winning your game of darts!"
+    "You notice the drinks are empty."
+    mc.name "That was a good game. Want another round and another game?"
+    $ scene_manager.update_actor(the_person, position = "stand4", emotion = "happy")
+    the_person.char "Oh! That sounds great! I'll get it setup!"
+    "You walk over to the bartender and order another round. You walk back to the dart board and give [the_person.possessive_title] her drink."
+    the_person.char "Thanksh! I love these things..."
+    "You notice her speech is starting to get a little slurred... You bet as you feed her drinks, she may have trouble focusing on the game."
+    $ scene_manager.update_actor(the_person, position = "walking_away")
+    "[the_person.title] starts to line herself up on the line to throw. You decide to see if you can distract her a little further."
+    "You walk up behind her and put your hand on her back."
+    mc.name "Hang on, I just noticed something about the way you are throwing the darts."
+    "You get in close behind her until you are right behind her, your body up against hers."
+    the_person.char "Oh? I thought I did okay, but if you have some... tips... for me that would be nice!"
+    "The feminine smell in her hair enters your nostrils and you take a deep breath, enjoying your proximity with [the_person.title]."
+    "You run your fingertips along her arm, until you are holding her hand as she holds her dart."
+    mc.name "Thats right, there was something about your posture that caught my eye."
+    "You are now pushing yourself lightly up against [the_person.title]. She catches her breath when she feels your erection beginning to grow against her backside."
+    the_person.char "Ah, something caught your eye then?"
+    "You quickly release her and then walk back to the table."
+    the_person.char "Yeah, something like that. I'm not sure what it was, but I'll let you know if I can put my finger on it..."
+    "[the_person.title] is trying to focus on the dart board, but she keeps stealing glances back at you. Your flirting is having the desired effect on her!"
+    "She readies herself for the next round of darts."
+    $ scene_manager.remove_actor(the_person, reset_actor = False)
+    call play_darts_301(the_person, focus_mod = -2) from play_darts_301_call_2
+    if _return:
+        $ scene_manager.add_actor(the_person, emotion = "sad")
+        "[the_person.title] gives you a pathetically fake pout after you win your game of darts."
+    else:
+        $ scene_manager.add_actor(the_person, emotion = "happy")
+        "[the_person.title] gives you a huge smile after winning your game of darts!"
+    "Drinks are empty again. You look at [the_person.title]. She is definitely tipsy, but you think she should be able to handle one more round."
+    mc.name "How about one more game? I'll grab us another round."
+    $ scene_manager.update_actor(the_person, position = "stand4", emotion = "happy")
+    the_person.char "Another drink! I'm loooooveeeee going out with you, [the_person.mc_title]! You know how to keep the drinksh flowing!"
+    mc.name "Haha, okay, let me go grab us another round."
+    "You walk over to the bartender and order another round. You walk back to the dart board and give [the_person.possessive_title] her drink."
+    the_person.char "OKAY, so, I've had a great warm up now, but I think for this next round, we should make it a littler more... intereshting."
+    mc.name "Oh? What did you have in mind?"
+    the_person.char "I think, whoever losses... HA thats a funny word... anyway whoever is the loser, should hafta walk the winner home!"
+    "You raise an eyebrow involuntarily. For some reason you expected something a little... crazier than that."
+    mc.name "Hah, okay, we can do that. You're up first!"
+    "[the_person.possessive_title] turns and looks at the table where she set the darts earlier. She bends over and slowly starts picking them up, one by one."
+    $ scene_manager.update_actor(the_person, position = "standing_doggy")
+    "She's completely bent over the table, and is obviously wiggling her hips at you. You realize when she talked earlier about the loser walking the winner home, she was probably proposing your place or hers..."
+    "You step behind her and get close to her again. You push your hips against hers, and pretend to reach past her towards your darts that are also on the table."
+    mc.name "Excuse me... just grabbing my darts here real quick..."
+    "You slowly grab your darts, one by one. She pushes herself back against you."
+    the_person.char "Of course, be careful though! The tipsh are sharp."
+    mc.name "Of course, you needn't worry, I'll handle them gently..."
+    "As you finish your sentence, you run your free hand down along her back. You slowly stand up and move away from her. You don't want to be too lewd in a public setting like this... not yet anyway..."
+    $ scene_manager.update_actor(the_person, position = "walking_away")
+    "[the_person.possessive_title] walks over to the line and looks at the dart board, then back at you. She is so distracted, she can barely focus on the board."
+    "You should be able to win this game handily, unless you decide to throw the game on purpose!"
+    $ scene_manager.remove_actor(the_person, reset_actor = False)
+    call play_darts_301(the_person, focus_mod = -6) from play_darts_301_call_3
+    if _return:
+        $ scene_manager.add_actor(the_person, emotion = "happy")
+        "[the_person.title] can't even pretend to be sad when you win the game."
+        the_person.char "You won!"
+    else:
+        $ scene_manager.add_actor(the_person, emotion = "happy")
+        "[the_person.title] gives you a huge smile after winning your game of darts!"
+        the_person.char "You are such a gentleman. I'm pretty sure you were just letting me win! That totally doesn't count!"
+    "She takes the last sip of her drink before setting it down."
+    the_person.char "I'll walk you home! Besides, it's only fair, you walked me home last time."
+    "You start to protest, but she quickly silences you."
+    the_person.char "Don't be silly! I can see myself home whenever we get done... err... when you say goodbye I mean..."
+    "Her intentions are pretty clear at this point. You take the last sip of your whiskey and set it down."
 
     return
 
@@ -593,7 +696,7 @@ label Sarah_new_tits_label():
     call Sarah_tits_reveal_label() from Sarah_new_tits_call_1
     return
 
-label Sarah_tits_reveal_label():    
+label Sarah_tits_reveal_label():
     $ the_person = sarah
     if not mc.location == office:
         "Your phone rings. Its [the_person.possessive_title]. You answer it."
@@ -663,3 +766,170 @@ label Sarah_tits_reveal_label():
     $ the_person.review_outfit(show_review_message = False)
 
     return
+
+label play_darts_301(the_person, focus_mod = 0): #Label returns true if mc wins, false if the_person wins
+    $ mc_score = 301
+    $ p2_score = 301
+    $ scene_manager.add_actor(the_person, position = "walking_away")
+    "[the_person.title] steps to the line and prepares to throw her first set of darts."
+    while (mc_score != 0) and (p2_score != 0):
+        "It's [the_person.title]'s turn."
+        $ scene_manager.update_actor(the_person, position = "walking_away")
+        "[the_person.title] begins to throw her darts."
+
+        #First Dart
+        if p2_score > 49:
+            $ p2_score -= roll_dart_odds(target = 50, focus_score = (the_person.focus + focus_mod))
+        elif p2_score > 24:
+            $ p2_score -= roll_dart_odds(target = 25, focus_score = (the_person.focus + focus_mod))
+        elif p2_score > 19:
+            $ p2_score -= roll_dart_odds(target = 20, focus_score = (the_person.focus + focus_mod))
+        else:
+            $ p2_score -= roll_dart_odds(target = p2_score, focus_score = (the_person.focus + focus_mod))
+
+            #Second Dart
+        if p2_score > 50:
+            $ p2_score -= roll_dart_odds(target = 50, focus_score = (the_person.focus + focus_mod))
+        elif p2_score < 0:
+            pass
+            #TODO BUST
+        elif p2_score == 0:
+            pass
+            #TODO SHE WINS
+        elif p2_score > 24:
+            $ p2_score -= roll_dart_odds(target = 25, focus_score = (the_person.focus + focus_mod))
+        else:
+            $ p2_score -= roll_dart_odds(target = p2_score, focus_score = (the_person.focus + focus_mod))
+
+            #Third Dart
+        if p2_score > 50:
+            $ p2_score -= roll_dart_odds(target = 50, focus_score = (the_person.focus + focus_mod))
+        elif p2_score < 0:
+            pass
+            #TODO BUST
+        elif p2_score == 0:
+            pass
+            #TODO SHE WINS
+        elif p2_score > 24:
+            $ p2_score -= roll_dart_odds(target = 25, focus_score = (the_person.focus + focus_mod))
+        else:
+            $ p2_score -= roll_dart_odds(target = p2_score, focus_score = (the_person.focus + focus_mod))
+
+        "[the_person.title] score: [p2_score]"
+        if p2_score == 0:
+            "[the_person.title] wins the game!"
+            $ scene_manager.remove_actor(the_person, reset_actor = False)
+            return False
+        elif p2_score < 0:
+            "[the_person.title] busts! Her score is reset to 101!"
+            $ p2_score = 101
+        $ scene_manager.update_actor(the_person)
+        the_person.char "Okay, [the_person.mc_title]. Your turn!"
+        "Your score: [mc_score]"
+        "What would you like to target?"
+        menu:
+            "Bullseye (50)" if mc_score > 49:
+                $ mc_score -= roll_dart_odds(target = 50, focus_score = mc.focus)
+                pass
+            "Bullseye (50)" if mc_score < 50:
+                "You decide to try and bust on purpose."
+                $ mc_score -= roll_dart_odds(target = 50, focus_score = mc.focus)
+            "Outer Ring (25)" if mc_score > 24:
+                $ mc_score -= roll_dart_odds(target = 25, focus_score = mc.focus)
+                pass
+            "Outer Ring (25)" if mc_score < 25:
+                "You decide to try and bust on purpose."
+                $ mc_score -= roll_dart_odds(target = 25, focus_score = mc.focus)
+            "20" if mc_score > 20:
+                $ mc_score -= roll_dart_odds(target = 20, focus_score = mc.focus)
+                pass
+            "[mc_score]" if mc_score < 21:
+                "This is it, you're going for the win!"
+                $ mc_score -= roll_dart_odds(target = mc_score, focus_score = mc.focus)
+
+        if mc_score > 0:
+            "Now for your second dart."
+            "Your score: [mc_score]"
+            "What would you like to target?"
+            menu:
+                "Bullseye (50)" if mc_score > 49:
+                    $ mc_score -= roll_dart_odds(target = 50, focus_score = mc.focus)
+                    pass
+                "Bullseye (50)" if mc_score < 50:
+                    "You decide to try and bust on purpose."
+                    $ mc_score -= roll_dart_odds(target = 50, focus_score = mc.focus)
+                "Outer Ring (25)" if mc_score > 24:
+                    $ mc_score -= roll_dart_odds(target = 25, focus_score = mc.focus)
+                    pass
+                "Outer Ring (25)" if mc_score < 25:
+                    "You decide to try and bust on purpose."
+                    $ mc_score -= roll_dart_odds(target = 25, focus_score = mc.focus)
+                "20" if mc_score > 20:
+                    $ mc_score -= roll_dart_odds(target = 20, focus_score = mc.focus)
+                    pass
+                "[mc_score]" if mc_score < 21:
+                    "This is it, you're going for the win!"
+                    $ mc_score -= roll_dart_odds(target = mc_score, focus_score = mc.focus)
+
+        if mc_score > 0:
+            "Now for your third dart."
+            "Your score: [mc_score]"
+            "What would you like to target?"
+            menu:
+                "Bullseye (50)" if mc_score > 49:
+                    $ mc_score -= roll_dart_odds(target = 50, focus_score = mc.focus)
+                    pass
+                "Bullseye (50)" if mc_score < 50:
+                    "You decide to try and bust on purpose."
+                    $ mc_score -= roll_dart_odds(target = 50, focus_score = mc.focus)
+                "Outer Ring (25)" if mc_score > 24:
+                    $ mc_score -= roll_dart_odds(target = 25, focus_score = mc.focus)
+                    pass
+                "Outer Ring (25)" if mc_score < 25:
+                    "You decide to try and bust on purpose."
+                    $ mc_score -= roll_dart_odds(target = 25, focus_score = mc.focus)
+                "20" if mc_score > 20:
+                    $ mc_score -= roll_dart_odds(target = 20, focus_score = mc.focus)
+                    pass
+                "[mc_score]" if mc_score < 21:
+                    "This is it, you're going for the win!"
+                    $ mc_score -= roll_dart_odds(target = mc_score, focus_score = mc.focus)
+        if mc_score == 0: #MC wins!
+            "You win the game of darts!"
+            $ scene_manager.remove_actor(the_person, reset_actor = False)
+            return True
+        elif mc_score < 0:
+            "You bust! Your score is reset to 101."
+            $ mc_score = 101
+    $ scene_manager.remove_actor(the_person, reset_actor = False)
+    return False
+
+
+init 5 python:
+    def roll_dart_odds(target = 50, focus_score = 0):
+        dart_roll = 0
+        rand_roll = renpy.random.randint(0,100)
+        if target == 50:
+            if rand_roll < (20 + (focus_score * 4)): #Bullseye!
+                dart_roll = 50
+            elif rand_roll < (50 + (focus_score * 5)): #HIT
+                dart_roll = 25
+            else:
+                dart_roll = renpy.random.randint(1,20)
+            pass
+        elif target == 25:
+            if rand_roll < (40 + (focus_score * 4)): #HIT
+                dart_roll = 25
+            elif rand_roll < (50 + (focus_score * 4)): #Bullseye!
+                dart_roll = 50
+            else:
+                dart_roll = renpy.random.randint(1,20)
+        else:
+            if rand_roll < (50 + (focus_score * 4)):
+                dart_roll = target
+            else:
+                dart_roll = renpy.random.randint(1,20)
+
+
+        renpy.say("", "The dart hits " + str(dart_roll) + "!")
+        return dart_roll
