@@ -15,7 +15,7 @@
 # Story arc part two: She comes looking for you at the office on Saturday. Invites you out to drinks with jut her. She winds up at your place.
 # Story arc part three: Catch her swiping breast enhancement serums on friday  NOTE: Part three has separate requirements from one and two and could happen before or after either part.
 # Following monday, observe the results
-# Story part four: Help her seduce another employee
+# Story part four: Date night, starts with drinks, ends at a strip club
 #
 # Intro: mandatory event, in the AM knocks on MC home selling solar panels.
 # Hiring: mandatory event. Call up Sarah and hire her for the HR position.
@@ -588,6 +588,144 @@ label Sarah_get_drinks_label():
     "You start to protest, but she quickly silences you."
     the_person.char "Don't be silly! I can see myself home whenever we get done... err... when you say goodbye I mean..."
     "Her intentions are pretty clear at this point. You take the last sip of your whiskey and set it down."
+    mc.name "I can see there's no talking you out of it. And to be honest, I would appreciate the company."
+    "She smiles at you. You leave the bar with her and start walking home."
+    $ mc.change_location(downtown)
+    $ mc.location.show_background()
+    #TODO set to night time
+
+    "You enjoy the fresh air as you begin your walk. Thinking about your time with [the_person.title] tonight, you decide now would probably be a good idea to talk about things."
+    if the_person.event_triggers_dict.get("dating_path", False) == True:
+        "You take the initiative and take [the_person.title]'s hand. You can see her smile out of the corner of your eye."
+        mc.name "So, I had a lot of fun on our date tonight."
+        the_person.char "Me too!"
+        mc.name "I think it is great that you are so open in your sexuality, and wanting to try new things."
+        "You can feel her grip tighten on your hand for a second."
+        mc.name "I know it is kind of weird to talk about, but I want you to know that if you want to mess around with another girl... let's just say I'm not the jealous type."
+        "She laughs at you before replying."
+        the_person.char "That's good to know. Honestly, I wasn't sure how you would feel about it, but I figure most guys like to idea of being with two women..."
+        mc.name "Yeah, I suppose that much is obvious. But I think I could probably help set something up..."
+        "She stops and turns to you."
+    else:
+        mc.name "So, I had a lot of fun tonight."
+        the_person.char "Me too!"
+        mc.name "I think it is a great that you are open in your sexuality, and wanting to try new things."
+        "You see a brief frown on her face start to form."
+        mc.name "I know it is kind of weird to talk about, but I want you to know that, even though I'm not looking for anything serious right now, I'd love to help you explore that side of things... sexually."
+        "She stops and turns to you."
+    $ scene_manager.update_actor(the_person, position = "stand3")
+    the_person.char "You mean... you would be willing to try and set something up?"
+    mc.name "Well... yeah! I'm pretty sure that is something I could pull off."
+    "[the_person.title] looks bewildered."
+    the_person.char "That would be something. Huh! I'll have to think about it... okay?"
+    "As you are standing there looking at each other, you feel a cold breeze begin, followed quickly by rain drops beginning to fall."
+    the_person.char "Ah! I didn't know it was going to rain!"
+    $ scene_manager.update_actor(the_person, position = "walking_away")
+    "[the_person.possessive_title] turns and starts to walk quickly. You hurry to catch up to her."
+    "You are only a few blocks from your house, but by the time you get there, the rain is pouring down in sheets."
+    "You quickly open the door and let [the_person.title] in."
+
+    $ mc.change_location(hall)
+    $ mc.location.show_background()
+
+    $ ordered_top = the_person.outfit.get_upper_ordered()
+    $ ordered_bot = the_person.outfit.get_lower_ordered()
+    if len(ordered_top) != 0:
+        $ the_clothing_top = the_person.outfit.get_upper_ordered()[-1] #Get the very top item of clothing.
+        $ the_clothing_top.colour[3] = the_clothing_top.colour[3] * 0.75
+    if len(ordered_bot) != 0:
+        $ the_clothing_bot = the_person.outfit.get_lower_ordered()[-1] #Get the very top item of clothing.
+        $ the_clothing_bot.colour[3] = the_clothing_bot.colour[3] * 0.75
+    $ scene_manager.update_actor(the_person, position = "stand4")
+    if (len(ordered_top) > 0 or len(ordered_bot) < 0):
+        "You look at [the_person.title]. Her clothing is soaked and you can practically see through it. She looks cold."
+    else:  #She's... naked?
+        "Barely clothed, [the_person.title] is shivering from the cold."
+    mc.name "I'm sorry, I didn't realize it was going to rain like that!"
+    "You made quite a bit of noise when you came in the door, and [mom.title] pokes her head out from the kitchen to see what is going on."
+    $ scene_manager.add_actor(mom, position = "stand2", character_placement = character_left_flipped)
+    mom.char "Oh! You two look absolutely soaked! Are you okay?"
+    mc.name "Thanks [mom.title]! This is [the_person.title]! We got caught out in the rain walking back. Do you think you could grab us a few towels, and maybe have some dry clothes for her to wear for a bit?"
+    if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 0: #Small tits
+        mom.char "Yes of course! She looks about Lily's size, I'm sure I can find something..."
+    elif sarah.event_triggers_dict.get("epic_tits_progress", 0) == 2: #Big tits
+        "[mom.title] looks her over for a moment, checking out her curves."
+        mom.char "Yes! I'm not sure Lily's clothes would work... I bet I have something I could give her, just give me a minute."
+    elif sarah.event_triggers_dict.get("epic_tits_progress", 0) == 3: #Huge tits
+        "[mom.possessive_title] eyes travel all over [the_person.title]'s body. Her eyes go wide when she see how big her tits are."
+        mom.char "I'm not sure I have... actually, I think Gabrielle might have left something that would fit her..."
+    $ scene_manager.update_actor(mom, position = "walking_away")
+    "[mom.title] leaves to go find something. [the_person.title] is shivering cold."
+    mc.name "I'm sorry, you look so cold. Why don't you come her for a minute..."
+    "You step toward her. You put your hands around her back and draw her close to you. She wraps her arms around your neck."
+    $ scene_manager.update_actor(the_person, position = "kissing")
+    "Her body feels cold, but it feels great running your hands along her body. After a minute, she stops shivering."
+    the_person.char "Thank you... that feels... much better."
+    "Her face is nearing yours, and you are just getting ready to kiss her."
+    $ scene_manager.update_actor(mom, position = "stand2")
+    mom.char "Here we go! I got you some... OH!"
+    "ABORT! You quickly let go of [the_person.title] when your mother interrupts you."
+    mom.char "Sorry! I didn't... here you go!"
+    "She quickly hands [the_person.title] a large towel and a set of clothes."
+    mom.char "There you are dear. I'm sorry, but Lily is in the bathroom right now, taking one of her rediculously long showers..."
+    mc.name "That's okay, she can change in my room! I can wait out here."
+    the_person.char "Thank you! I'll be quick!"
+    $ scene_manager.update_actor(the_person, position = "walking_away")
+    "[the_person.title] takes the clothes and the towel. You quickly point her to your room."
+    "She disappears behind your bedroom door with the clothes. You mother turns to you."
+    $ scene_manager.remove_actor(the_person, reset_actor = False)
+    mom.char "She seems nice!"
+    mc.name "Yeah! Believe it or not, she is the daughter of one of dad's old friends. We used to play together as kids!"
+    if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 0: #Small tits
+        mom.char "Aww! That's cute! And she is so cute too. You be nice to her, okay?"
+    elif sarah.event_triggers_dict.get("epic_tits_progress", 0) == 2: #Big tits
+        mom.char "Aww! That's great! She certainly has blossomed into a beautiful young lady. You be nice to her, okay?"
+    elif sarah.event_triggers_dict.get("epic_tits_progress", 0) == 3: #Huge tits
+        mom.char "Wow! That's great! And she has... I mean... her figure is incredible! You be nice to her, okay?"
+    mc.name "Don't worry, [mom.title]."
+    mom.char "I'll umm, just be in my room for the night. Don't do anything I wouldn't do..."
+    $ scene_manager.remove_actor(mom, reset_actor = False)
+    "[mom.possessive_title] quickly steps into her room and closes the door. You look at the door to your own bedroom, imagining the woman inside it slowly peeling off her soaking wet garments..."
+    "As you look at your door, you realize that it isn't closed all the way. [the_person.title] left it open a crack!"
+    "You creep slowly up to your door and listen. You don't hear much coming from within, so you slowly inch the door open and then peek inside."
+
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
+
+    $ scene_manager.add_actor(the_person, position = "walking_away")
+    "You see that [the_person.title] is just starting to peel off her clothes."
+    $ scene_manager.strip_actor_outfit(the_person)
+    "She stands there, looking at herself in the mirror for a moment, when she spots you looking at her from the door. Busted!"
+    $ scene_manager.update_actor(the_person, position = "back_peek")
+    the_person.char "Hey! You gonna come in and close the door or just stand there?"
+    "Nice! She must have left the door cracked on purpose, hoping you would peek."
+    "You quickly step into your room, close your door and lock it behind you. [the_person.title] giggles."
+    "You walk over to her and embrace her again."
+    $ scene_manager.update_actor(the_person, position = "kissing")
+    the_person.char "I was hoping you would come..."
+    "Her mouth opens, her eyes close, and your faces move together as you begin to kiss. Her mouth immediately opens and you begin to twirl your tongues around each other."
+    $ the_person.change_arousal(10)
+    the_person.char "That feels good... but I'm freezing!"
+    $ scene_manager.update_actor(the_person, position = "sitting")
+    "You quickly pick her up. You carry her over to your bed and then throw her down on it."
+    mc.name "Don't worry, I'll get your warmed up in a hurry!"
+    $ scene_manager.update_actor(the_person, position = "missionary")
+    "You start to climb on top of [the_person.possessive_title]. She opens her legs and the wraps them around you."
+    "You are still wearing your wet clothes, but you don't care. You slowly start to grind your hardness into her groin through your pants."
+    $ the_person.change_arousal(10)
+    the_person.char "Mmmm, that feels good, but you're cold too! Let's get these off..."
+    "[the_person.title] is pulling at your shirt. You quickly help her take it off, then reach down, unbutton your pants, and take them and your underwear off in one smooth motion."
+    "Your cock springs free. [the_person.title] gasps as she takes it in her hand."
+    the_person.char "Ohhhh. It's so warm! This is exactly what I need to warm me up!"
+    "You look down at [the_person.title]. She is stroking your cock now, and you can feel her legs start to wrap around your back again, urging you to push yourself into her."
+    "For a moment you consider grabbing a condom, but that thought evaporates when she runs the nails of her free hand roughly down your back."
+    "You let go of yourself, and move your hips into position just above hers. Her hand stops stroking you and guides your cock to her pussy as it gets close."
+    "You can feel the moist heat coming from between [the_person.title]'s legs as you get close. You feel the head begin to poke against her slit."
+    "Her legs wrap tighter behing you, begging you to push into her. You happily give in, parting her labia and sinking slowly into her cunt."
+    the_person.char "OH god... that's so good!"
+    call sex_description(the_person, missionary, make_bed(), round = 1, private = True, girl_in_charge = False) from _call_sex_description_sarah_grabbing_drinks_1
+
+
 
     return
 
