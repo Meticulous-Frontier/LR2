@@ -109,11 +109,22 @@ init -1 python:
         return False
 
     def Sarah_get_drinks_requirement():
-        return False            #This event is currently disabled until i finish writing it.
+
         if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 1: #Don't run this if epic tits is in progress
             return False
         if time_of_day > 1:
             if sarah.sluttiness > 30:
+                if day%7 == 5:  #Saturday
+                    if mc.is_at_work():
+                        return True
+        return False
+
+    def Sarah_stripclub_story_requirement():
+        return False   #Disabled while I work on it
+        if sarah.event_triggers_dict.get("epic_tits_progress", 0) < 2:  #Don't run until after she has bigger tits
+            return False
+        if time_of_day > 1:
+            if sarah.sluttiness > 50:
                 if day%7 == 5:  #Saturday
                     if mc.is_at_work():
                         return True
@@ -398,7 +409,8 @@ label Sarah_third_wheel_label():
     "She turns and heads into her building. You check your watch and realize how late it is."
     $ scene_manager.remove_actor(the_person, reset_actor = False)
     $ del sarah_friend #Cleanup?
-
+    $ Sarah_get_drinks_action = Action("Sarah get drinks",Sarah_get_drinks_requirement,"Sarah_get_drinks_label")
+    $ mc.business.mandatory_crises_list.append(Sarah_get_drinks_action) #Add the event here so that it pops when the requirements are met.
 
 
 
@@ -432,13 +444,23 @@ label Sarah_get_drinks_label():
     "You admire her courage. She must be really interested in you to have the guts to ask you out like this! If you accept, she might assume you are interested in a relationship..."
     menu:
         "Sounds great!": #Begin the dating path with Sarah
+            mc.name "A date sounds great! I'd love to spend some more time with you, catching up and learning about what you've been up to."
+            "Her face shows visible signs of relief."
+            the_person.char "Okay! This will be fun! Do want to get out of here now, or do you need some time to finish up?"
             $ sarah.event_triggers_dict["dating_path"] = True
-            pass
-        "Just as friends.\n (Coming Later) (disabled)":
+            $ the_person.change_happiness(20)
+            $ the_person.change_love(10)
+        "Just as friends.":
+            mc.name "I wouldn't mind going out for a few drinks, with a friend of course."
+            $ scene_manager.add_actor(the_person, emotion = "sad")
+            "Her face shows visible signs of disappointment."
+            the_person.char "Oh, right. Friends! That's us! I don't want to interrupt you, there, buddy. Need a few minutes to finish up?"
+            $ the_person.change_happiness(-20)
+            $ the_person.change_obedience(20)
+            $ the_person.change_love(-10)
             $ sarah.event_triggers_dict["dating_path"] = False
-            pass
-            #TODO when Vren release boyfriend girlfriend relations, evaluate this option to eventually shift to a FWB scenario over dating.
-    mc.name "I'm actually at a great stopping point. Let's go!"
+
+    mc.name "I'm actually at a great stopping point now. Let's go!"
     the_person.char "Great! Do you want to walk again tonight? It was kind of nice when we walked together last time."
     mc.name "Sounds good to me, it's good to get out and stretch the legs once in a while."
     "You lock up on your way out and head toward downtown."
@@ -486,7 +508,9 @@ label Sarah_get_drinks_label():
     "She sighs."
     the_person.char "Don't get me wrong, I don't think I could ever date another woman, I prefer men, but I've always wanted to try a Ménage à trois..."
     "You have discovered that [the_person.title] likes other girls!"
-    "You have discovered that [the_person.title] loves threesomes!" #TODO add these opinions
+    $ update_opinion(the_person, "other girls")
+    "You have discovered that [the_person.title] likes threesomes!"
+    $ update_opinion(the_person, "threesomes")
     mc.name "That's very open minded of you. I can certainly respect that!"
     "[the_person.title] tips her glass back and finishes her first drink. You make it a point to do the same."
     mc.name "Let me grab the next round."
@@ -499,6 +523,8 @@ label Sarah_get_drinks_label():
         $ scene_manager.update_actor(the_person, position = "stand4")
         "You walk over to [the_person.title], drinks in hand. You hand her a drink."
         mc.name "How about a toast? To tonight! May we love as long as we live, and live as long as we love."
+        $ the_person.change_happiness(5)
+        $ the_person.change_love(5)
         "You surprise yourself with your sappy toast. It seems to have the desired effect though, as she smiles wide with your toast."
     else:
         the_person.char "Hey, let me grab the next round. I want to play a game though! Can you go get us a dart game setup?"
@@ -593,6 +619,7 @@ label Sarah_get_drinks_label():
     $ mc.change_location(downtown)
     $ mc.location.show_background()
     #TODO set to night time
+    $ time_of_day = 3 #Hopefully this works
 
     "You enjoy the fresh air as you begin your walk. Thinking about your time with [the_person.title] tonight, you decide now would probably be a good idea to talk about things."
     if the_person.event_triggers_dict.get("dating_path", False) == True:
@@ -724,8 +751,38 @@ label Sarah_get_drinks_label():
     "Her legs wrap tighter behing you, begging you to push into her. You happily give in, parting her labia and sinking slowly into her cunt."
     the_person.char "OH god... that's so good!"
     call sex_description(the_person, missionary, make_bed(), round = 1, private = True, girl_in_charge = False) from _call_sex_description_sarah_grabbing_drinks_1
-
-
+    if the_person.event_triggers_dict.get("dating_path", False) == True:
+        the_person.char "Oh my god... ever since you came back into my life, I'd been hoping... maybe this was all happening for a reason."
+        "You lay down on your side next to her. She scoots next to you and lays her head on your arm."
+        the_person.char "Can we... can I just be close to you for a while? I'm not ready for this day to end!"
+        $ the_person.change_happiness(5)
+        $ the_person.change_love(5)
+        mc.name "Of course! Your skin feels so good."
+        "You cuddle up with [the_person.possessive_title] for a while, just enjoying the afterglow of your lovemaking."
+        "She is starting to doze off, when suddenly she wakes up and gets up."
+    else:
+        the_person.char "Mmm, that was nice. It's been a while since I was able to do that."
+        "She rolls on her side and looks at you."
+        the_person.char "So... friends with benefits then? I think that is an arrangement that I could live with."
+        mc.name "Great! Yeah if you get the urge, I'm up for a hookup now and then."
+        the_person.char "Okay. You'd better satisfy me though!"
+        "You give her a wink and a nod."
+        $ the_person.change_happiness(5)
+        $ the_person.change_slut_temp(5)
+        $ the_person.change_slut_core(5)
+        the_person.char "Alright... I'm just gonna lay here for a moment. It's been a long day, I need to take a few minutes before I get up."
+        "She rolls over, facing away from and relaxes for a bit, enjoying coming down from the high of fucking."
+        "She is starting to doze off, when suddenly she wakes up and gets up."
+    $ scene_manager.update_actor(the_person, position = "stand2")
+    the_person.char "Sorry... I just realized how late it is getting. I'd better get home!"
+    #TODO have her actually put on the outfit provided earlier. Is this worth the effort to write?
+    "You watch her intently from your bed. Her body looks amazing, as she begins to hide it behind the clothes you provided her."
+    the_person.char "Don't worry, I can see myself out. I had a great time tonight! I'll see you on Monday, okay?"
+    mc.name "Goodbye!"
+    $ scene_manager.remove_actor(the_person)
+    "[the_person.possessive_title] lets herself out of your room and leaves. Wow, what an evening!"
+    $ Sarah_stripclub_story_action = Action("Sarah stripclub",Sarah_stripclub_story_requirement,"Sarah_stripclub_story_label")
+    $ mc.business.mandatory_crises_list.append(Sarah_stripclub_story_action) #Add the event here so that it pops when the requirements are met.
 
     return
 
@@ -902,6 +959,11 @@ label Sarah_tits_reveal_label():
     "She gets up and leaves the room. You smile to yourself, thinking about how good her new tits felt around your cock."
     $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False)
+
+    return
+
+label Sarah_stripclub_story_label():
+    pass
 
     return
 

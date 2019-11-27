@@ -66,6 +66,25 @@ init -2 python:
 
         return False
 
+    def HR_director_mind_control_requirement(the_person):
+        if business_HR_mind_control:
+            if business_HR_mind_control_attempt == False:
+                if mc.business.funds > 5000:
+                    return True
+                else:
+                    return "Requires $5000"
+        return False
+
+    def  HR_director_mind_control_attempt_requirement(the_person):
+        if business_HR_mind_control_attempt:
+            if business_HR_meeting_last_day < day:
+                if mc.business.is_open_for_business():
+                    return True
+                else:
+                    return "Only during work day"
+            else:
+                return "One meeting per day."
+
 init 2 python:
     def build_HR_review_list(the_person, max_tier = 0):
         HR_tier_talk = -1 # init at -1 so we do the first collect with 0
@@ -85,6 +104,11 @@ init 2 python:
                     people_list.append(person)
                     break
         return people_list
+
+    def build_HR_mc_list(the_person):
+        HR_employee_list = []
+        HR_employee_list = get_HR_review_list(the_person, tier = 2)
+        return HR_employee_list
 
     def create_HR_review_topic_list(the_person):
         topic_list = ["working"]
@@ -129,6 +153,11 @@ init 1301 python:
         return False
 
     def HR_director_tier_2_suggest():
+        if blood_brain_pen.researched:
+            return True
+        return False
+
+    def HR_director_mind_control_suggest():
         if mind_control_agent.researched:
             return True
         return False
@@ -152,6 +181,8 @@ init 1301 python:
                 return "One meeting per day."
         return False
 
+
+
     def HR_director_breast():
         if breast_enhancement.researched:
             return True
@@ -165,6 +196,8 @@ label HR_director_mod_init():
         business_HR_eff_bonus = mc.business.effectiveness_cap - 100  #This bonus is based on OTHER factors and can be added to via events.
         business_HR_serum_suggest_1 = False
         business_HR_serum_suggest_2 = False
+        business_HR_mind_control = False
+        business_HR_mind_control_attempt = False
         business_HR_serum_breast = False
         business_HR_coffee_tier = 0
         business_HR_skimpy_uniform = False
@@ -180,11 +213,15 @@ label HR_director_mod_init():
             menu_tooltip = "Costs $500 but makes meetings more impactful.")
         HR_director_coffee_tier_2_action = Action("Add stronger serum to coffee during meetings.", HR_director_coffee_tier_2_requirement, "HR_director_coffee_tier_2_label",
             menu_tooltip = "Costs $1500 but makes meetings impactful.")
+        HR_director_mind_control_action = Action("Produce mind control Serum.", HR_director_mind_control_requirement, "HR_director_mind_control_label",
+            menu_tooltip = "Costs $5000. Allows you to attempt mind control of employee.")
+        HR_director_mind_control_attempt = Action("Attempt Mind Control.", HR_director_mind_control_attempt_requirement, "HR_director_mind_control_attempt_label",
+            menu_tooltip = "WARNING: May have side effects!")
         HR_director_change_relative_recruitment_action = Action("Change recruitment signage", HR_director_change_relative_recruitment_requirement, "HR_director_change_relative_recruitment_label",
             menu_tooltip = "Changes how often employees ask for employment for their daughters")
         HR_director_meeting_on_demand_action = Action("Meet with employee{image=gui/heart/Time_Advance.png}", HR_director_meeting_on_demand_requirement, "HR_director_meeting_on_demand_label",
             menu_tooltip = "Arrange a meeting with an employee")
-        HR_director_role = Role("HR Director", [HR_director_meeting_on_demand_action, HR_director_coffee_tier_1_action, HR_director_coffee_tier_2_action, HR_director_change_relative_recruitment_action]) #Actions go in block
+        HR_director_role = Role("HR Director", [HR_director_meeting_on_demand_action, HR_director_coffee_tier_1_action, HR_director_coffee_tier_2_action, HR_director_mind_control_action, HR_director_change_relative_recruitment_action]) #Actions go in block
     return
 
 
@@ -381,7 +418,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     person_choice.char "Hello [person_choice.mc_title]."
 
     # initialize
-    $ scene_manager = Scene()   
+    $ scene_manager = Scene()
     $ scene_manager.add_actor(person_choice, position = "stand3", character_placement = character_left_flipped)
     mc.name "Hello [person_choice.title], come in and take a seat."
 
@@ -481,7 +518,7 @@ label HR_director_review_discoveries_label(the_person):
              the_person.char "Sounds good [the_person.mc_title]!"
 
     elif business_HR_serum_suggest_2 == False:
-        if mind_control_agent.researched: #Researched!
+        if blood_brain_pen.researched: #Researched!
             $ business_HR_serum_suggest_2 = True
             the_person.char "Hmmm... interesting."
             "[the_person.title] looks closely at one of the serums that has been researched."
@@ -499,6 +536,21 @@ label HR_director_review_discoveries_label(the_person):
                 the_person.char "I think for about $1500 we could probably set something similar up for this one. It would give out meetings considerably more impact."
                 mc.name "Noted. I'll consider it and get back to you if I decide to do this."
                 the_person.char "Sounds good [the_person.mc_title]!"
+
+    elif business_HR_mind_control == False:
+        if mind_control_agent.researched: #Researched
+            $ business_HR_mind_control = True
+            the_person.char "Wow... this is crazy."
+            "[the_person.title] looks closely at one of the serums that has been researched."
+            the_person.char "It says here, you have researched a serum that allows for temporary mind control!?!"
+            mc.name "Right. It bypasses all inhibitions and allows direct implantation of suggestions."
+            the_person.char "So... obviously the ethics of this are dubious but... You could do incredible things with it, from an HR standpoint."
+            mc.name "Well, we've had to dilute it quite a bit. High concentrations can have pretty bad side effects."
+            the_person.char "So... maybe we could consider creating a concentrated, single use version? With something like that, we could change a girl's work opinions all at once!"
+            the_person.char "Looks like for about $5000 we could stock a single use version like that. It would be pretty challenging to synthesize."
+            mc.name "Noted. I'll consider it and get back to you if I decide to do this."
+            the_person.char "Sounds good [the_person.mc_title]!"
+
 
     if the_person is sarah:
         if business_HR_serum_breast == False:
@@ -633,3 +685,125 @@ label HR_director_meeting_on_demand_label(the_person):
     call advance_time from hr_advance_time_one
     return
 
+label HR_director_mind_control_label(the_person):
+    $ mc.business.funds -= 5000
+    mc.name "I've been thinking about your proposal to create a specialized serum for mind control attempts. I would like to move forward with it."
+    the_person.char "Sounds good sir! I'll head over to research and have them synthesize me some."
+    the_person.char "I'll make sure it stay locked away, and only you and I will have a key to get some out."
+    mc.name "Sounds good."
+    the_person.char "Did you need anything else, [the_person.mc_title]?"
+    $ business_HR_mind_control_attempt = True
+    return
+
+label HR_director_mind_control_attempt_label(the_person):
+    $ backfire_odds = 100
+    $ HR_employee_list = build_HR_mc_list(the_person)
+    if len(HR_employee_list) == 0: #No one qualifies!
+        the_person.char "Actually, things are running really smoothly right now, I'm not sure that would be beneficial?"
+        return
+
+    the_person.char "Okay... remember this act has a chance of backfiring, having all kinds of unknown side effects. Are you sure you want to continue?"
+    "Note: The chance of the session backfiring is directly related to your mastery level of the Mind Control serum effect!"
+    $ backfire_odds = mind_control_agent.base_side_effect_chance / mind_control_agent.mastery_level
+    "Current odds of backfiring are: [backfire_odds]. Successful mind control will increase all current trainable opinions by 1 tier. Are you sure you want to attempt?"
+    menu:
+        "Yes":
+            pass
+        "No":
+            return
+    the_person.char "Okay. Who do you want me to make the attempt on?"
+
+    if "build_menu_items" in globals():
+        call screen main_choice_display(build_menu_items([["Call in"] + HR_employee_list], draw_hearts_for_people = False))
+    else:
+        call screen main_choice_display([["Call in"] + HR_employee_list])
+
+    $ person_choice = _return
+
+    the_person.char "Okay. I'll go get them."
+    $ renpy.scene("Active")
+    call HR_mind_control_attempt(person_choice, the_person) from HR_mind_control_attempt_call_1
+
+    $ renpy.scene("Active")
+    $ business_HR_meeting_last_day = day
+    call advance_time from hr_advance_time_two
+    return True
+
+label HR_mind_control_attempt(the_person, the_HR_dir):
+    "[the_HR_dir.title] returns with [the_person.title]."
+    $ scene_manager.add_actor(the_HR_dir)
+    $ scene_manager.add_actor(the_person,  character_placement = character_left_flipped)
+    the_person.char "You wanted to see me sir?"
+    mc.name "Ah, yes, thank you for coming. [the_person.title], we are trying a new experimental counseling method, that we are combining with one our recent serum developments."
+    mc.name "I've asked you to come, because I would like you to help us test it. [the_HR_dir.title] here is going to administer the session."
+    "She looks a bit concerned when you tell her what you want her to do."
+    if the_person.obedience > 130:
+        "When she looks into your eyes though, you can see her hesitation vanish. Her obedience to you melts away her objections."
+    else:
+        the_person.char "I don't know sir... are you sure this is safe?"
+        menu:
+            "(Lie) It is perfectly safe" if mc.charisma > 4:
+                pass
+            "There are risks involved":
+                the_person.char "I'm not sure I want to do that. Why should I agree to something like this?"
+                menu:
+                    "I'll reward you sexually" if the_person.sluttiness > 60:
+                        "Her face lights up at the prospect of having some alone time with you."
+                        #TODO code it so it happens
+                    "It would mean a lot to me" if the_person.love > 60:
+                        "Her face softens when you appeal to her emotionally."
+                    "I'll reward you financially ($1000)":
+                        the_person.char "Oh... well I suppose I could really use the extra pay."
+                        $ mc.business.funds -= 1000
+                    "I'll fire you if you don't.":
+                        $ scene_manager.update_actor(the_person, emotion = "angry")
+                        the_person.char "What!?! You're kidding me? I can't afford to lose this job right now!"
+                        if the_person.happiness > 90:
+                            $the_person.change_happiness(70 - the_person.happiness)
+                        else:
+                            $the_person.change_happiness(-35)
+
+    the_person.char "Okay... I'll do it. Let's get this overwith!"
+    the_HR_dir.char "Alright. Come with me, and we will get the process started."
+    $ scene_manager.remove_actor(the_person)
+    $ scene_manager.remove_actor(the_HR_dir)
+    "The two girls get up and leave to go to a quite room where [the_HR_dir.title] makes the mind control attempt."
+    "You return to your work while the attempt is made."
+    "..."
+    "....."
+    $ is_backfire = False
+    if (mind_control_agent.base_side_effect_chance / mind_control_agent.mastery_level) < renpy.random.randint(0,100): #FAIL
+        $ backfire_string = mind_control_backfire(the_person)
+        "The mind control event has backfired!"
+        #TODO add backfire string to event log
+        $ is_backfire = True
+    else:
+        python:
+            topic_list = create_HR_review_topic_list(the_person)
+            for topic in topic_list:
+                update_opinion(the_person, topic)
+
+    $ scene_manager.add_actor(the_HR_dir)
+    "[the_HR_dir.title] eventually returns."
+    mc.name "Welcome back. How did it go?"
+    if is_backfire:
+        the_HR_dir.char "Unfortunately, the attempt backfired. I'm not sure yet what the effects were, but they certainly weren't the desired ones."
+        mc.name "That is... unfortunate."
+        the_HR_dir.char "She is resting for now. It would probably be best to leave her to rest, but if you want you can go and see her."
+    else:
+        the_HR_dir.char "I believe the attempt was succesful. I have no indication that she experienced any side effects."
+        mc.name "Excellent. Good work [the_HR_dir.title]"
+        the_HR_dir.char "She is resting for now, but before I left she asked to see you. It's up to you if you want to go see her."
+    mc.name "Thank you. I'll consider it. That'll be all for now."
+    $ scene_manager.remove_actor(the_HR_dir)
+    "[the_HR_dir.title] leaves."
+    #TODO the rest of this encounter. Go see her, pay her with sexual favors, etc.
+    return
+
+init 1200 python:
+    def mind_control_backfire(the_person):
+        the_person.change_cha(-2)
+        the_person.change_int(-2)
+        the_person.change_focus(-2)
+        # Use this function to create random backfire to person. Ideas: Bimbo, loss of stats, decrease all opinions.
+        return "Backfire: Stat Loss"
