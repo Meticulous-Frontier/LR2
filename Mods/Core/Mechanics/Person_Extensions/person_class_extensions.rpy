@@ -40,6 +40,9 @@ init -1:
         ## MATCH SKIN COLOR
         # Matches skin, body, face and expression images based on input of skin color
         def match_skin(self, color):
+            if " skin" in color: # If using the_person.body_images.name as a reference, remove the " skin" part.
+                color = color[:-5]
+
             self.skin = str(color)
             if self.skin == "white":
                 self.body_images = white_skin
@@ -169,6 +172,69 @@ init -1:
 
         Person.get_known_opinion_list = get_known_opinion_list
 
+        def generate_daughter_enhanced(self): #Generates a random person who shares a number of similarities to the mother
+            age = renpy.random.randint(18, self.age-16)
+
+            if renpy.random.randint(0,100) < 60:
+                body_type = self.body_type
+            else:
+                body_type = None
+
+            if renpy.random.randint(0,100) < 40: #Slightly lower for facial similarities to keep characters looking distinct
+                face_style = self.face_style
+            else:
+                face_style = None
+
+            if renpy.random.randint(0,100) < 60: #60% of the time they share hair colour
+                hair_colour = self.hair_colour
+            else:
+                hair_colour = None
+
+            if renpy.random.randint(0,100) < 60: # 60% they share the same breast size
+                tits = self.tits
+            else:
+                tits = None
+
+            if renpy.random.randint(0,100) < 60: #Share the same eye colour
+                eyes = self.eyes
+            else:
+                eyes = None
+
+            if renpy.random.randint(0,100) < 60: #Have heights that roughly match (but o
+                height = self.height * (renpy.random.randint(95,105)/100.0)
+                if height > 1.0:
+                    height = 1.0
+                elif height < 0.9:
+                    height = 0.9
+            else:
+                height = None
+
+            if renpy.random.randint(0,100) < 85 - age: #It is less likely she lives at home the older she is.
+                start_home  = self.home
+            else:
+                start_home  = None
+
+
+            the_daughter = create_random_person(last_name = self.last_name, age = age, body_type = body_type, face_style = face_style, tits = tits, height = height,
+                hair_colour = hair_colour, skin = self.skin, eyes = eyes, start_home = start_home)
+
+            if start_home is None:
+                the_daughter.generate_home()
+            the_daughter.home.add_person(the_daughter)
+
+            for sister in town_relationships.get_existing_children(self): #First find all of the other kids this person has
+                town_relationships.update_relationship(the_daughter, sister, "Sister") #Set them as sisters
+
+            town_relationships.update_relationship(self, the_daughter, "Daughter", "Mother") #Now set the mother/daughter relationship (not before, otherwise she's a sister to herself!)
+
+            # make her a little bit more unique by changing wardrobe and opinions
+            update_person_opinions(the_daughter)
+            rebuild_wardrobe(the_daughter)
+            update_person_outfit(the_daughter)
+
+            return the_daughter
+
+        Person.generate_daughter = generate_daughter_enhanced
 
         ## STRIP OUTFIT TO MAX SLUTTINESS EXTENSION
         # Strips down the person to a clothing their are comfortable with (starting with top, before bottom)
@@ -177,8 +243,10 @@ init -1:
         # scene manager parameter is filled from that class so that all people present in scene are drawn
         def strip_outfit_to_max_sluttiness(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, narrator_messages = None, character_placement = None, lighting = None, temp_sluttiness_boost = 0, position = None, emotion = None, scene_manager = None):
             # internal function to strip top clothing first.
-            def get_strip_choice_upper_first(outfit, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True):
-                strip_choice = outfit.remove_random_upper(top_layer_first)
+            def get_strip_choice_max(outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet):
+                strip_choice = None
+                if not exclude_upper:
+                    strip_choice = outfit.remove_random_upper(top_layer_first)
                 if strip_choice is None:
                     strip_choice = outfit.remove_random_any(top_layer_first, exclude_upper, exclude_lower, exclude_feet)
                 return strip_choice
@@ -199,7 +267,7 @@ init -1:
             test_outfit = self.outfit.get_copy()
             removed_something = False
 
-            strip_choice = get_strip_choice_upper_first(test_outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet)
+            strip_choice = get_strip_choice_max(test_outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet)
             # renpy.say("", strip_choice.name + "  (required: " + str(test_outfit.slut_requirement) +  ", sluttiness: " +  str(self.effective_sluttiness() + temp_sluttiness_boost) + ")")
             while strip_choice and self.judge_outfit(test_outfit, temp_sluttiness_boost):
                 self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
@@ -212,7 +280,7 @@ init -1:
                 else:
                     renpy.pause(1) # if no message to show, wait a short while before automatically continue stripping
 
-                strip_choice = get_strip_choice_upper_first(test_outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet)
+                strip_choice = get_strip_choice_max(test_outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet)
 
             return removed_something
 
@@ -328,6 +396,16 @@ init -1:
             return outfit.slut_requirement < (self.effective_sluttiness() + temp_sluttiness_boost)
 
         Person.judge_outfit = judge_outfit_extension
+
+        # BUGFIX: Remove suggest effect
+        # Sometimes an effect is no longer in bag causing an exception, fix: check if effect exists before trying to remove
+        def remove_suggest_effect_fixed(self, amount):
+            self.change_suggest(- __builtin__.max(self.suggest_bag or [0])) #Subtract the max
+            if amount in self.suggest_bag:
+                self.suggest_bag.remove(amount)
+            self.change_suggest(__builtin__.max(self.suggest_bag or [0])) # Add the new max. If we were max, it is now lower, otherwie it cancels out.
+
+        Person.remove_suggest_effect = remove_suggest_effect_fixed
 
         ## ADD OPINION EXTENSION
         ## Adds add_opinion function to Person class

@@ -52,9 +52,14 @@ init 2: # Need to allow for None name roles in this screen as well.
                         text "Sluttiness: [the_person.sluttiness]" style "menu_text_style"
                         text "Obedience: [the_person.obedience] - " + get_obedience_plaintext(the_person.obedience) style "menu_text_style"
                         text "Age: [the_person.age]" style "menu_text_style"
-                        text "Relationship:  [the_person.relationship]" style "menu_text_style"
+                        if girlfriend_role in the_person.special_role:
+                            text "Relationship: Girlfriend" style "menu_text_style"
+                        else:
+                            text "Relationship: [the_person.relationship]" style "menu_text_style"
                         if the_person.relationship != "Single":
                             text "Significant Other: [the_person.SO_name]" style "menu_text_style"
+                        elif girlfriend_role in the_person.special_role:
+                            text "Significant Other: [mc.name]" style "menu_text_style"
                         if the_person.kids > 0:
                             text "Kids: [the_person.kids]" style "menu_text_style"
 
@@ -97,13 +102,16 @@ init 2: # Need to allow for None name roles in this screen as well.
                     xsize 325
                     ysize 260
                     vbox:
-                        text "Currently Affected By:" style "menu_text_style" size 22
-                        if not the_person.serum_effects:
-                            text "No active serums." style "menu_text_style"
-                        else:
-                            text "Suggestibility: [the_person.suggestibility]" style "menu_text_style"
-                            for serum in the_person.serum_effects:
-                                text serum.name + " : " + str(serum.duration - serum.duration_counter) + " Turns Left" style "menu_text_style"
+                        text "Sex Record" style "menu_text_style" size 22
+                        viewport:
+                            scrollbars "vertical"
+                            mousewheel True
+                            frame:
+                                xsize 300
+                                background None
+                                vbox:
+                                    for record in sorted(the_person.sex_record):
+                                        text record + ": " + str(the_person.sex_record[record]) style "menu_text_style"
 
             hbox:
                 xsize 1750
@@ -212,7 +220,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                 spacing 30
                 frame:
                     background "#1a45a1aa"
-                    xsize 415
+                    xsize 325
                     ysize 165
                     vbox:
                         text "HR Job: [hr_base]" style "menu_text_style"
@@ -224,7 +232,9 @@ init 2: # Need to allow for None name roles in this screen as well.
                     background None
                     anchor [0.5,1]
                     align [0.5,0]
-                    xysize [860,125]
+                    xysize [500,125]
+                    xoffset 10
+                    yoffset 30
                     imagebutton:
                         align [0.5,0.5]
                         auto "gui/button/choice_%s_background.png"
@@ -232,6 +242,22 @@ init 2: # Need to allow for None name roles in this screen as well.
                         action Hide("person_info_detailed")
                     textbutton "Return" align [0.5,0.5] style "return_button_style"
                 frame:
-                    background None
-                    xsize 415
-                    ysize 125
+                    background "#1a45a1aa"
+                    xsize 325
+                    ysize 165
+                    xoffset 195
+                    vbox:
+                        text "Currently Affected By:" style "menu_text_style" size 22
+                        viewport:
+                            scrollbars "vertical"
+                            mousewheel True
+                            frame:
+                                xsize 300
+                                background None
+                                vbox:
+                                    if not the_person.serum_effects:
+                                        text "No active serums." style "menu_text_style"
+                                    else:
+                                        text "Suggestibility: [the_person.suggestibility]" style "menu_text_style"
+                                        for serum in the_person.serum_effects:
+                                            text serum.name + " : " + str(serum.duration - serum.duration_counter) + " Turns Left" style "menu_text_style"

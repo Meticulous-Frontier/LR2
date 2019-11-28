@@ -9,98 +9,134 @@ init 2 python:
             else: #outfit_type = full
                 wardrobe.add_outfit(the_outfit)
 
+    def add_outfit_to_wardrobes(list_of_wardrobes, the_outfit, outfit_type = "full"): #Adds the outfit to every wardrobe in the list of wardrobes passed to it
+
+        for wardrobe in list_of_wardrobes:
+            if not wardrobe.has_outfit_with_name(the_outfit.name):
+                if outfit_type == "under":
+                    wardrobe.add_underwear_set(the_outfit)
+                elif outfit_type == "over":
+                    wardrobe.add_overwear_set(the_outfit)
+                else: #outfit_type = full
+                    wardrobe.add_outfit(the_outfit)
+
+    def wardrobes_has_outfit_with_name(list_of_wardrobes, the_name): # Check if every Wardrobe in the list has the outfit already
+
+        max_count = len(list_of_wardrobes)
+        count = 0
+        for wardrobe in list_of_wardrobes:
+            for checked_outfit in wardrobe.outfits + wardrobe.underwear_sets + wardrobe.overwear_sets:
+                if checked_outfit.name == the_name:
+                    count += 1
+        if count == max_count:
+            return True
+        else:
+            return False
+
     def selected_xml_wardrobe(target_wardrobe, xml_filename): # TODO: Use this instead -> Show("import_outfit_manager", None, target_wardrobe, n)
         renpy.show_screen("import_outfit_manager", target_wardrobe, xml_filename)
     def selected_xml_clothing(outfit):
         renpy.show_screen("outfit_creator", outfit.get_copy())
 
 init 2:
-    screen import_outfit_manager(target_wardrobe, xml_filename, slut_limit = 999, show_export = True, show_sets = True, show_overwear = True, show_underwear = True, show_outfits = True): ##Brings up a list of the players current saved outfits, returns the selected outfit or None.
+    screen import_outfit_manager(target_wardrobe, xml_filename, show_export = True): ##Brings up a list of the players current saved outfits, returns the selected outfit or None.
         $ wardrobe = wardrobe_from_xml(xml_filename)
+
+
+        default outfit_categories = {"Full": ["FullSets", "full", "get_outfit_list"], "Overwear": ["OverwearSets", "over", "get_overwear_sets_list"], "Underwear": ["UnderwearSets", "under", "get_underwear_sets_list"]}
         add "Paper_Background.png"
         modal True
-        zorder 101
+        zorder 100
         default preview_outfit = None
-        hbox:
-            spacing 20
-            xalign 0.1
-            yalign 0.1
-            if show_outfits:
-                frame:
-                    background "#888888"
-                    xsize 450
-                    ysize 750
+        default targeted_outfit = None
+        #default business_wardrobes = [mc.business.m_uniform, mc.business.p_uniform, mc.business.r_uniform, mc.business.s_uniform, mc.business.h_uniform, mc.business.all_uniform]
+        default import_wardrobes = {"Your Wardrobe": [[mc.designed_wardrobe]], "Marketing Division": [[mc.business.m_uniform]], "Research Division": [[mc.business.r_uniform]], "Production Division": [[mc.business.p_uniform]], "Supply Division": [[mc.business.s_uniform]], "HR Division": [[mc.business.h_uniform]], "All Divisions": [[mc.business.all_uniform]]}
+        $ import_wardrobes["Slaves"] = [[x.wardrobe for x in people_in_role(slave_role)]]
+
+        grid len(outfit_categories) 1:
+            for category in sorted(outfit_categories): # NOTE: Dictionary is not sorted. Don't know the best way to make it so.
+                vbox:
+                    xsize 480
+                    frame:
+                        text category style "serum_text_style" xalign 0.5
+                        xfill True
                     viewport:
-                        scrollbars "vertical"
-                        xsize 450
-                        ysize 750
+                        ysize 880
+                        if len(getattr(wardrobe, outfit_categories[category][2])()) > 7:
+                            scrollbars "vertical"
                         mousewheel True
                         vbox:
-                            spacing 0
-                            text "Full Outfits" style "menu_text_style" size 30
-                            null height 10
-                            for outfit in wardrobe.get_outfit_list():
-                                #hbox:
-                                textbutton outfit.name+ "\n(Sluttiness " +str(outfit.slut_requirement) +")" action [Show("outfit_creator", None, outfit.get_copy(), target_wardrobe), Hide("import_outfit_manager")] sensitive (outfit.slut_requirement <= slut_limit) hovered Show("mannequin", None, outfit) style "textbutton_style" text_style "outfit_description_style" xsize 410
-                                if show_export:
-                                    default exported = []
-                                    textbutton "Export to .xml File" action [Function(exported.append,outfit), Function(log_outfit, outfit, outfit_class = "FullSets", wardrobe_name = "Exported_Wardrobe"), Function(renpy.notify, "Outfit exported to Exported_Wardrobe.xml")] sensitive outfit not in exported style "textbutton_style" text_style "outfit_description_style" xsize 410
-                                    textbutton "Import to wardrobe: [target_wardrobe.name]" action [Function(add_outfit, target_wardrobe, outfit, outfit_type = "full"), Function(renpy.notify, "Outfit imported")] sensitive not target_wardrobe.has_outfit_with_name(outfit.name) style "textbutton_style" text_style "outfit_description_style" xsize 410
+                            if len(getattr(wardrobe, outfit_categories[category][2])()) > 0: #Don't show a frame if it is empty
+                                frame:
+                                    vbox:
+                                        for outfit in sorted(getattr(wardrobe, outfit_categories[category][2])(), key = lambda outfit: (outfit.slut_requirement, outfit.name)):  # Not sure if there's any good reason to sort XML lists since the default way it works is to place the newest outfit at the bottom which is predictable.
+                                            frame:
+                                                vbox:
+                                                    id str(outfit)
+                                                    xfill True
+                                                    textbutton outfit.name + "\n" + get_heart_image_list_cloth(outfit.slut_requirement, 1):
+                                                        xfill True
+                                                        style "textbutton_no_padding_highlight"
+                                                        text_style "serum_text_style"
+                                                        action [
+                                                            Show("outfit_creator", None, outfit.get_copy(), target_wardrobe, outfit_type = outfit_categories[category][1]),
+                                                            Hide(renpy.current_screen().screen_name)
+                                                            ]
 
-                                null height 15
+                                                        hovered Show("mannequin", None, outfit)
 
-            if show_sets:
-                if show_overwear:
-                    frame:
-                        background "#888888"
-                        xsize 450
-                        ysize 750
-                        viewport:
-                            scrollbars "vertical"
-                            xsize 450
-                            ysize 750
-                            mousewheel True
-                            vbox:
-                                spacing 0
-                                text "Overwear Sets" style "menu_text_style" size 30
-                                null height 10
-                                for outfit in wardrobe.get_overwear_sets_list():
-                                    #hbox:
-                                    textbutton outfit.name+ "\n(Sluttiness " +str(outfit.get_overwear_slut_score()) +")" action [Show("outfit_creator", None, outfit.get_copy(), target_wardrobe), Hide("import_outfit_manager")] sensitive (outfit.get_overwear_slut_score() <= slut_limit) hovered Show("mannequin", None, outfit) style "textbutton_style" text_style "outfit_description_style" xsize 410
-                                    if show_export:
-                                        default exported = []
-                                        textbutton "Export to .xml File" action [Function(exported.append,outfit), Function(log_outfit, outfit, outfit_class = "OverwearSets", wardrobe_name = "Exported_Wardrobe"), Function(renpy.notify, "Outfit exported to Exported_Wardrobe.xml")] sensitive outfit not in exported  style "textbutton_style" text_style "outfit_description_style" xsize 410
-                                        textbutton "Import to wardrobe: [target_wardrobe.name]" action [Function(add_outfit, target_wardrobe, outfit, outfit_type = "over"), Function(renpy.notify, "Outfit imported")] sensitive not target_wardrobe.has_outfit_with_name(outfit.name) style "textbutton_style" text_style "outfit_description_style" xsize 410
-                                    null height 15
-                if show_underwear:
-                    frame:
-                        background "#888888"
-                        xsize 450
-                        ysize 750
-                        viewport:
-                            scrollbars "vertical"
-                            xsize 450
-                            ysize 750
-                            mousewheel True
-                            vbox:
-                                spacing 0
-                                text "Underwear Sets" style "menu_text_style" size 30
-                                null height 10
-                                for outfit in wardrobe.get_underwear_sets_list():
-                                    #hbox:
-                                    textbutton outfit.name+ "\n(Sluttiness " +str(outfit.get_underwear_slut_score()) +")" action [Show("outfit_creator", None, outfit.get_copy(), target_wardrobe), Hide("import_outfit_manager")] sensitive (outfit.get_underwear_slut_score() <= slut_limit) hovered Show("mannequin", None, outfit) style "textbutton_style" text_style "outfit_description_style" xsize 410
-                                    if show_export:
-                                        default exported = []
-                                        textbutton "Export to .xml File" action [Function(exported.append,outfit), Function(log_outfit, outfit, outfit_class = "UnderwearSets", wardrobe_name = "Exported_Wardrobe"), Function(renpy.notify, "Outfit exported to Exported_Wardrobe.xml")] sensitive outfit not in exported hovered SetScreenVariable("preview_outfit", outfit.get_copy()) unhovered SetScreenVariable("preview_outfit", None) style "textbutton_style" text_style "outfit_description_style" xsize 410
-                                        textbutton "Import to wardrobe: [target_wardrobe.name]" action [Function(add_outfit, target_wardrobe, outfit, outfit_type = "under"), Function(renpy.notify, "Outfit imported")] sensitive not target_wardrobe.has_outfit_with_name(outfit.name) style "textbutton_style" text_style "outfit_description_style" xsize 410
-                                    null height 15
+                                                    if show_export:
+                                                        default exported = []
 
+                                                        textbutton "Export to .xml File":
+                                                            style "textbutton_no_padding_highlight"
+                                                            text_style "serum_text_style"
+                                                            xfill True
+
+                                                            action [
+                                                                Function(exported.append, outfit), Function(log_outfit, outfit, outfit_class = outfit_categories[category][0], wardrobe_name = "Exported_Wardrobe"),
+                                                                Function(renpy.notify, "Outfit exported to Exported_Wardrobe.xml")
+                                                                ]
+
+                                                            sensitive outfit not in exported
+
+
+                                                        textbutton "Direct Import Selection:":
+
+                                                            style "textbutton_no_padding_highlight"
+                                                            text_style "serum_text_style"
+                                                            xfill True
+
+                                                            action ToggleScreenVariable("targeted_outfit", renpy.get_widget(renpy.current_screen(), str(outfit)), None)
+
+                                                        if targeted_outfit == renpy.get_widget(renpy.current_screen(), str(outfit)):
+                                                            frame:
+                                                                vbox:
+                                                                    for wardrobes in import_wardrobes:
+                                                                        textbutton str(wardrobes):
+                                                                            style "textbutton_no_padding_highlight"
+                                                                            text_style "serum_text_style"
+                                                                            xfill True
+
+                                                                            sensitive not wardrobes_has_outfit_with_name(import_wardrobes[wardrobes][0], outfit.name)# in getattr(wardrobes, outfit_categories[category][2])()
+
+                                                                            action [
+                                                                                 Function(add_outfit_to_wardrobes, import_wardrobes[wardrobes][0], outfit, outfit_type = outfit_categories[category][1]),
+                                                                                 Function(renpy.notify, "Outfit imported to " + wardrobes)
+                                                                                 ]
+
+                                                        #
+                                                        # action [
+                                                        #     Function(add_outfit, target_wardrobe, outfit, outfit_type = outfit_categories[category][1]),
+                                                        #     Function(renpy.notify, "Outfit imported to " + target_wardrobe.name)
+                                                        #     ]
+                                                        # sensitive not target_wardrobe.has_outfit_with_name(outfit.name)
 
 
         frame:
             background None
             anchor [0.5,0.5]
-            align [0.5,0.88]
+            align [0.5,0.92]
             xysize [500,125]
             imagebutton:
                 align [0.5,0.5]

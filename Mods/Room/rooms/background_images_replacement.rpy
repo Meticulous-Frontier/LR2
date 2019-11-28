@@ -14,6 +14,14 @@ label updated_room_background(stack):
         #As long a there is a mall background for the sex_store, replace it with our custom background (since SB uses this location)
         sex_store.background_image = room_background_image("Sex_Shop_Background.jpg")
 
+        # Load extra GUI images
+        thumbs_up_image = Image(get_file_handle("thumbs_up_small.png"))
+        thumbs_down_image = Image(get_file_handle("thumbs_down_small.png"))
+
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
+
+    image thumbs_up = "[thumbs_up_image.filename]"
+    image thumbs_down = "[thumbs_down_image.filename]"
+
     return

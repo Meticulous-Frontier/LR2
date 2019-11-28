@@ -43,8 +43,12 @@ init 3:
                                     sensitive (outfit.slut_requirement <= slut_limit)
 
                                     action [Function(target_wardrobe.remove_outfit,outfit)]
-                                    hovered Function(draw_mannequin, the_person, outfit)
-                                    alternate Show("outfit_creator", None, outfit.get_copy(), the_person.wardrobe)
+
+                                    if the_person is not None:
+                                        hovered Function(draw_mannequin, the_person, outfit)
+                                        alternate Show("outfit_creator", None, outfit.get_copy(), the_person.wardrobe)
+                                    else:
+                                        hovered Show("mannequin", None, outfit)
 
             if show_sets:
                 frame:
@@ -74,8 +78,11 @@ init 3:
                                         sensitive (outfit.slut_requirement <= slut_limit)
 
                                         action [Function(target_wardrobe.remove_outfit,outfit)]
-                                        hovered Function(draw_mannequin, the_person, outfit)
-                                        alternate Show("outfit_creator", None, outfit.get_copy(), the_person.wardrobe)
+                                        if the_person is not None:
+                                            hovered Function(draw_mannequin, the_person, outfit)
+                                            alternate Show("outfit_creator", None, outfit.get_copy(), the_person.wardrobe)
+                                        else:
+                                            hovered Show("mannequin", None, outfit)
 
 
                 frame:
@@ -105,8 +112,11 @@ init 3:
                                         sensitive (outfit.slut_requirement <= slut_limit)
 
                                         action [Function(target_wardrobe.remove_outfit,outfit)]
-                                        hovered Function(draw_mannequin, the_person, outfit)
-                                        alternate Show("outfit_creator", None, outfit.get_copy(), the_person.wardrobe)
+                                        if the_person is not None:
+                                            hovered Function(draw_mannequin, the_person, outfit)
+                                            alternate Show("outfit_creator", None, outfit.get_copy(), the_person.wardrobe)
+                                        else:
+                                            hovered Show("mannequin", None, outfit)
 
         frame:
             background None

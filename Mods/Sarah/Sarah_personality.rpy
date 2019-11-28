@@ -11,7 +11,7 @@ init 1301 python:
         return valid_possessive_titles
     def Sarah_player_titles(the_person):
         return mc.name
-    Sarah_personality = Personality("wild",
+    Sarah_personality = Personality("Sarah", default_prefix = "wild",
     common_likes = ["skirts", "small talk", "Fridays", "the weekend", "the colour purple", "makeup", "flirting", "HR work","heavy metal","punk"],
     common_sexy_likes = ["doggy style sex", "giving blowjobs", "getting head", "anal sex", "public sex", "skimpy outfits", "showing her tits", "showing her ass", "threesomes", "not wearing underwear", "creampies", "bareback sex"],
     common_dislikes = ["Mondays", "the colour pink", "supply work", "conservative outfits", "work uniforms"],
@@ -43,16 +43,21 @@ label Sarah_introduction(the_person):
     return
 
 label Sarah_greetings(the_person):
-    if the_person.sluttiness > 60:
-        if the_person.obedience > 130:
-            the_person.char "Hello there [the_person.mc_title]. How can I help you, do you have anything that needs attention? Anything at all?"
+    if the_person.love < 0:
+        the_person.char "Ugh, what do you want?"
+    elif the_person.happiness < 90:
+        the_person.char "Hey, today is not what I hoped it to be."        
+    else:    
+        if the_person.sluttiness > 60:
+            if the_person.obedience > 130:
+                the_person.char "Hello there [the_person.mc_title]. How can I help you, do you have anything that needs attention? Anything at all?"
+            else:
+                the_person.char "Hey there [the_person.mc_title], I hope this is for pleasure and not business."
         else:
-            the_person.char "Hey there [the_person.mc_title], I hope this is for pleasure and not business."
-    else:
-        if the_person.obedience > 130:
-            the_person.char "Hello [the_person.mc_title]"
-        else:
-            the_person.char "Hey, how's it going?"
+            if the_person.obedience > 130:
+                the_person.char "Hello [the_person.mc_title]"
+            else:
+                the_person.char "Hey, how's it going?"
     return
 
 label Sarah_sex_responses(the_person):

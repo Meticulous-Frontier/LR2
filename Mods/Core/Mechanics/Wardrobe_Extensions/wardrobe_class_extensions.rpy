@@ -134,7 +134,7 @@ init -1 python:
         preferences = WardrobePreference(person)
 
         if len(self.outfits) > 0:
-            #We have some full body outfits we mgiht use. 50/50 to use that or a constructed outfit.
+            #We have some full body outfits we might use. 50/50 to use that or a constructed outfit.
             outfit_choice = renpy.random.randint(0,100)
             chance_to_use_full = 50 #Like normal outfits a uniform hasa 50/50 chance of being a full outfit or an assembled outfit if both are possible.
 
@@ -232,7 +232,10 @@ init -1 python:
                 
         elif len(self.underwear_sets + self.overwear_sets) == 0:
             #We have nothing else to make a uniform out of. Use default builder function.
-            return default_wardrobe.build_appropriate_outfit(target_sluttiness, minimum_sluttiness)
+            full_outfit = self.decide_on_outfit(target_sluttiness, minimum_sluttiness)
+            if full_outfit is None:
+                default_wardrobe.decide_on_outfit(target_sluttiness, minimum_sluttiness)
+            return full_outfit
 
         #If we get to here we are assembling an outfit out of underwear or overwear.
         outfit_over = None

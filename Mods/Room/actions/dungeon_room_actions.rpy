@@ -40,10 +40,14 @@ label dungeon_room_appoint_slave_label():
     while True:
         $ people_list = get_sorted_people_list(mc.location.people, "Turn into slave", ["Back"])
 
-        call screen main_choice_display([people_list])
+        if "build_menu_items" in globals():
+            call screen main_choice_display(build_menu_items([people_list]))
+        else:
+            call screen main_choice_display([people_list])
+            
         $ person_choice = _return
         $ del people_list
-        
+
         if person_choice == "Back":
             return # Where to go if you hit "Back"
 
@@ -54,7 +58,7 @@ label dungeon_room_appoint_slave_label():
 
 label dungeon_room_appoint_slave_label_2(the_person):
 
-    if slave_role not in the_person.special_role:
+    if slave_role not in the_person.special_role: # What happens when you try to appoint them
 
         if the_person.obedience >= 130:
             if the_person.get_opinion_score("being submissive") > 0:
@@ -69,12 +73,15 @@ label dungeon_room_appoint_slave_label_2(the_person):
             return
 
         $ the_person.special_role.append(slave_role)
+
         "[the_person.title] is now a willing slave of yours."
 
 
-    else:
+    else: # What happens when they are already appointed
 
         $ the_person.special_role.remove(slave_role)
+
+
         "You release [the_person.possessive_title] from their duties as a slave."
 
     return

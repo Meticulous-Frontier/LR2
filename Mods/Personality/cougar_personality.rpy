@@ -54,17 +54,22 @@ init 1400 python:
     # don't add it to the default list of personalities, let the generic personality hook change it based on age
 
 label cougar_greetings(the_person):
-    if the_person.obedience > 130:
-        if the_person.sluttiness > 60:
-            the_person.char "Hello my boy. Is there anything I can take care of for you?"
-        else:
-            the_person.char "Hello young man. I hope everything is going well, if there's anything I can help with let me know."
+    if the_person.love < 0:
+        the_person.char "Yes, what do you want?"
+    elif the_person.happiness < 90:
+        the_person.char "Hello..."
     else:
-        if the_person.sluttiness > 60:
-            the_person.char "Hello [the_person.mc_title], how has your day been? I was... thinking about you, that's all."
+        if the_person.obedience > 130:
+            if the_person.sluttiness > 60:
+                the_person.char "Hello my boy. Is there anything I can take care of for you?"
+            else:
+                the_person.char "Hello young man. I hope everything is going well, if there's anything I can help with let me know."
         else:
-            $ day_part = time_of_day_string()
-            the_person.char "Good [day_part], [the_person.mc_title]!"
+            if the_person.sluttiness > 60:
+                the_person.char "Hello [the_person.mc_title], how has your day been? I was... thinking about you, that's all."
+            else:
+                $ day_part = time_of_day_string()
+                the_person.char "Good [day_part], [the_person.mc_title]!"
     return
 
 label cougar_introduction(the_person): # Copy paste from relaxed to fix crash
@@ -592,12 +597,11 @@ label cougar_being_watched(the_person, the_watcher, the_position):
     return
 
 label cougar_work_enter_greeting(the_person):
-    if the_person.happiness < 80:
+    if the_person.happiness < 80 or the_person.love < 0:
         if the_person.obedience > 120:
             "[the_person.possessive_title] gives you a nod and then turns back to her work."
         else:
             "[the_person.possessive_title] does not acknowledge you when you enter."
-
     elif the_person.happiness > 120:
         if the_person.sluttiness > 50:
             "[the_person.possessive_title] looks up from her work when you enter the room."

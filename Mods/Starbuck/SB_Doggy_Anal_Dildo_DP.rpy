@@ -7,7 +7,8 @@ init:
         "transition_default_SB_doggy_anal_dildo_dp",
         "strip_SB_doggy_anal_dildo_dp", "strip_ask_SB_doggy_anal_dildo_dp",
         "orgasm_SB_doggy_anal_dildo_dp",
-        opinion_tags = ["doggy style sex", "anal sex", "vaginal sex"])
+        verb = "ass fuck",
+        opinion_tags = ["doggy style sex", "anal sex", "vaginal sex"], record_class = "Anal Sex")
         #list_of_positions.append(SB_doggy_anal_dildo_dp)
 
 #init 1:

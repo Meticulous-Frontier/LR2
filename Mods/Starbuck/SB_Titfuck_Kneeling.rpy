@@ -16,7 +16,8 @@
         "strip_SB_Titfuck_Kneeling",                #Label for if girl decides to take something off
         "strip_ask_SB_Titfuck_Kneeling",            #Label for if girl asks to take something off
         "orgasm_SB_Titfuck_Kneeling",               #Label for if girl orgasms
-        opinion_tags = ["giving blowjobs", "showing her tits"])     #Girl has additional arousal gains based on these opinions. See random_lists.rpy for possible likes.
+        verb = "titty fuck",
+        opinion_tags = ["giving blowjobs", "showing her tits"], record_class = "Tit Fuck")     #Girl has additional arousal gains based on these opinions. See random_lists.rpy for possible likes.
     list_of_girl_positions.append(SB_Titfuck_Kneeling)  #Uncomment this when this position is finished# #This line adds it to the list of positions the girl can choose if she pleases you NOTE:Cannot be selected by player at this time.
     list_of_positions.append(SB_Titfuck_Kneeling) #Use this function if you want the position to be selectable during sexy times by the player.
 
