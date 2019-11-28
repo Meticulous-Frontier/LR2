@@ -191,6 +191,7 @@ init 1301 python:
 ### HR Director Mod init ###
 label HR_director_mod_init():
     python:
+        #TODO move all these true flase flags to a dict so that in the future when I add more, I can call them by reference and not invalidate old saves games!
         business_HR_director = None
         business_HR_tier = 0     # HR tiers based on progression. 1 = hired someone. 2 = training videos. 3 = company sponsored sexual training.
         business_HR_eff_bonus = mc.business.effectiveness_cap - 100  #This bonus is based on OTHER factors and can be added to via events.
@@ -202,6 +203,8 @@ label HR_director_mod_init():
         business_HR_coffee_tier = 0
         business_HR_skimpy_uniform = False
         business_HR_uniform = False
+        business_HR_sexy_meeting_start = False
+        business_HR_sexy_start_unlocks = {}
         business_HR_relative_recruitment_status = False
         business_HR_relative_recruitment_unlock = False
         business_HR_meeting_on_demand = False
@@ -221,7 +224,7 @@ label HR_director_mod_init():
             menu_tooltip = "Changes how often employees ask for employment for their daughters")
         HR_director_meeting_on_demand_action = Action("Meet with employee{image=gui/heart/Time_Advance.png}", HR_director_meeting_on_demand_requirement, "HR_director_meeting_on_demand_label",
             menu_tooltip = "Arrange a meeting with an employee")
-        HR_director_role = Role("HR Director", [HR_director_meeting_on_demand_action, HR_director_coffee_tier_1_action, HR_director_coffee_tier_2_action, HR_director_mind_control_action, HR_director_change_relative_recruitment_action]) #Actions go in block
+        HR_director_role = Role("HR Director", [HR_director_meeting_on_demand_action, HR_director_coffee_tier_1_action, HR_director_coffee_tier_2_action, HR_director_mind_control_action, HR_director_change_relative_recruitment_action, HR_director_change_relative_recruitment_action]) #Actions go in block
     return
 
 
@@ -352,15 +355,52 @@ label HR_director_monday_meeting_label(the_person):
         $ mc.change_location(office)
         $ mc.location.show_background()
         "Hello [the_person.mc_title]!"
-        $ the_person.draw_person()
+        $ scene_manager.add_actor(the_person)
         mc.name "Hi [the_person.title], come in and take a seat."
     else:
         "Hello [the_person.mc_title]!"
-        $ the_person.draw_person()
+        $ scene_manager.add_actor(the_person)
         "Your HR Director appears in the doorway to your office. It is time for your weekly HR meeting."
         "She sits down across from you and starts to eat her lunch."
 
-    $ the_person.draw_person(position = "sitting")
+    $ scene_manager.update_actor(the_person, position = "sitting")
+    if the_person.sluttiness > 40 and business_HR_sexy_meeting_start == False:
+        "For some reason, she doesn't begin with her usual efficiency talk. Instead, she seems to be keenly interested in watching you eat..."
+        the_person.char "So, before we get started today, I was wondering if umm..."
+        mc.name "Yes?"
+        "Her cheeks a little flushed, she's obviously embarassed about what she is about to ask."
+        the_person.char "Well... I've just noticed that, we employ women here, and it must be hard on you to be around so many women all day long..."
+        "You don't really see where she is going with this."
+        the_person.char "It would cause the company a lot of trouble if some sort of sexual harassment suit that would come up."
+        mc.name "I suppose."
+        the_person.char "So anyway, I thought maybe, to start the meeting, we could fool around a little."
+        the_person.char "It would help clear your mind when we talk about the staff as well as give you an outlet for all the tension you have being around women all day..."
+        mc.name "That's very generous of you. All in the name of efficiency?"
+        the_person.char "Well, plus it would be fun..."
+        "You consider her offer."
+        mc.name "That would be acceptable, and I can see how it would be helpful to start the meeting with a clear mind."
+        "She smiles widely when you accept her explaination. You can tell she really just wants to fuck around..."
+        $ business_HR_sexy_meeting_start = True
+        the_person.char "So... can we start today?"
+        menu:
+            "Let's go":
+                call HR_diector_sexy_meeting_start_label(the_person) from sexy_meeting_start_one
+                $ scene_manager.update_actor(the_person, position = "sitting")
+                "Feeling good, [the_person.title] returns to her seat and starts to pull out her notes."
+            "Not Today":
+                the_person.char "Ahh, okay. I know this was short notice, but you can plan on it next week, okay?"
+                "She reaches down to her backpack and begins to pull out her notes from the previous week."
+    elif business_HR_sexy_meeting_start:
+        "She looks at you intently."
+        the_person.char "So, need some relief before we get started today?"
+        menu:
+            "Let's go":
+                call HR_diector_sexy_meeting_start_label(the_person) from sexy_meeting_start_two
+                $ scene_manager.update_actor(the_person, position = "sitting")
+                "Feeling good, [the_person.title] returns to her seat and starts to pull out her notes."
+            "Not Today":
+                the_person.char "Ahh, damn. Okay, give me a second and we can get started here."
+                "She reaches down to her backpack and begins to pull out her notes from the previous week."
     the_person.char "Here are my plans for the week. I think I have a few tweaks to efficiency I can make, but overall I wouldn't expect to see a big change company wide."
     call HR_director_calculate_eff(the_person) from HR_director_monday_meeting_1
     "She hands you a few documents. You check them over."
@@ -685,6 +725,94 @@ label HR_director_meeting_on_demand_label(the_person):
     call advance_time from hr_advance_time_one
     return
 
+label HR_diector_sexy_meeting_start_label(the_person):
+    #Phases of this label.
+    #   First we determine if we have any new acts of service our girl is willing to perform.
+    #   If not, give the player the option to choice an unlocked act of service
+    #   Next, perform the act
+    #   Then, clean up, with higher sluttiness giving the player the option to have her not clean up.
+
+    if len(business_HR_sexy_start_unlocks) == 0:  #This is the first time this function has been run
+        the_person.char "So... I have no idea the best way to do this..."
+        mc.name "Why don't you just come over here and give me a blowjob."
+        the_person.char "Okay! That should be fun!"
+        $ scene_manager.update_actor(the_person, position = "blowjob")
+        "[the_person.possessive_title] comes around to your side of the desk and gets down on her knees. She pulls down your zipper and pulls your cock out."
+        the_person.char "Mmm, it smells so good. Let's get this taken care of!"
+        "She runs her tongue up and down your length a few times, then parts her lips and begins to suck you off."
+        call sex_description(the_person, blowjob, make_floor(), round = 1, private = True, girl_in_charge = True) from _call_sex_description_meeting_start_one
+        mc.name "Mmm, this is a great way to start Monday. This was a great idea [the_person.title]."
+        $ scene_manager.update_actor(the_person, emotion = "happy")
+        "[the_person.possessive_title] stops licking the cum off her lips for a second and smiles."
+        the_person.char "Thank you sir! I am willing to do this next week again if you decide to."
+        $ business_HR_sexy_start_unlocks["blowjob"] = True
+        "She cleans herself up and makes herself presentable again."
+
+        #TODO code for her to clean herself up
+        return
+
+    if business_HR_sexy_start_unlocks.get("titfuck", False) == False:
+        if the_person == sarah and sarah.event_triggers_dict.get("epic_tits_progress", 0) > 1:
+            the_person.char "So... I was thinking this week maybe I could do that thing again. You know, where I put your cock between my tits?"
+            the_person.char "It felt soooo good last time. I've been thinking about it a lot."
+            mc.name "That sounds great, I'll admit it, seeing my cock between your tits is hot."
+            if the_person.outfit.tits_available():
+                "With her tits already out and ready to be used, she just gives you a big smile."
+            else:
+                "[the_person.possessive_title] begins to take off her top."
+                $ scene_manager.strip_actor_outfit(the_person, exclude_lower = True)
+                "With her tits out and ready to be used, she gives you a big smile."
+            $ scene_manager.update_actor(the_person, position = "blowjob", emotion = "happy")
+            "She gets up and starts walking around the desk. By the time she gets to you, you already have your rock hard dick out."
+            "She gets on her knees and gives you a couple strokes with her hand."
+            the_person.char "Mmmm, I love the feeling of a cock buried between by big tits... this is gonna be great!"
+            "With her hands on each side of her chest, she wraps her sizable boobs around you and begins to bounce them up and down."
+            call sex_description(the_person, SB_Titfuck_Kneeling, make_floor(), round = 1, private = True, girl_in_charge = True) from _call_sex_description_meeting_start_two
+            $ business_HR_sexy_start_unlocks["titfuck"] = True
+            "After you finish, [the_person.possessive_title] runs her hands along her tits, rubbing your cum into her skin."
+            the_person.char "Mmm, god that was hot. Let me just enjoy this a minute before we move on with the meeting..."
+            "You run your hands through her hair for a bit while she enjoys the warmth of your cum on her skin."
+            "Eventually she cleans herself up and makes herself presentable again."
+            return
+
+    the_person.char "Okay! How do you want me to take care of you this week, [the_person.mc_title]?"
+
+    python:
+        tuple_list = []
+        for position in business_HR_sexy_start_unlocks.keys():
+            if business_HR_sexy_start_unlocks[position] == True:
+                tuple_list.append([position, position])
+        tuple_list.append(["Surprise me", "any"])
+
+        position_choice = renpy.display_menu(tuple_list,True,"Choice")
+
+    if position_choice == "any":
+        the_person.char "Mmmm, I can do that! "
+        $ the_person.change_happiness(5)
+        $ the_person.change_obedience(-5)
+        $ position = get_random_from_list(business_HR_sexy_start_unlocks.keys())
+
+    if position_choice == "blowjob":
+        the_person.char "Get your cock out, I want to taste it!"
+        "[the_person.possessive_title] stands up and starts to walk around the desk while you pull out your erection."
+        $ scene_manager.update_actor(the_person, position = "blowjob")
+        "She gets down on her knees in front of you and takes a moment to admire your hardness."
+        "She opens her mouth and runs her tongue along it a few times, and then parts her lips and begins to suck you off."
+        call sex_description(the_person, blowjob, make_floor(), round = 1, private = True, girl_in_charge = True) from _call_sex_description_meeting_mid_one
+
+    elif position_choice == "titfuck":
+        if the_person.outfit.tits_available() == False:
+            "[the_person.possessive_title] begins to take off her top. "
+            $ scene_manager.strip_actor_outfit(the_person, exclude_lower = True)
+            "With her tits out and ready to be used, she gives you a big smile."
+        the_person.char "Get your cock out, I want to feel it slide between my boobs!"
+        "You pull your cock out as she gets up and walks around your desk. She drops down on her knees in front of you."
+        $ scene_manager.update_actor(the_person, position = "blowjob")
+        "[the_person.possessive_title] smiles at you as she uses her hands to wrap her tits around your cock, and then starts to move them up and down."
+        call sex_description(the_person, SB_Titfuck_Kneeling, make_floor(), round = 1, private = True, girl_in_charge = True) from _call_sex_description_meeting_mid_two
+
+    return
+
 label HR_director_mind_control_label(the_person):
     $ mc.business.funds -= 5000
     mc.name "I've been thinking about your proposal to create a specialized serum for mind control attempts. I would like to move forward with it."
@@ -772,7 +900,8 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
     "..."
     "....."
     $ is_backfire = False
-    if (mind_control_agent.base_side_effect_chance / mind_control_agent.mastery_level) < renpy.random.randint(0,100): #FAIL
+    $ backfire_odds = mind_control_agent.base_side_effect_chance / mind_control_agent.mastery_level
+    if int(backfire_odds) > renpy.random.randint(0,100): #FAIL
         $ backfire_string = mind_control_backfire(the_person)
         "The mind control event has backfired!"
         #TODO add backfire string to event log

@@ -65,6 +65,15 @@ init 2 python:
         mc.business.mandatory_crises_list.append(Sarah_intro) #Add the event here so that it pops when the requirements are met.
         return
 
+    def Sarah_reset_vars():
+        if sarah.has_large_tits():
+            sarah.event_triggers_dict["epic_tits_progress"] = 2
+        sarah.event_triggers_dict["drinks_out_progress"] = 0
+        sarah.event_triggers_dict["dating_path"] = False
+        return
+
+
+
 
 init -1 python:
     def Sarah_intro_requirement():
@@ -137,6 +146,14 @@ init -1 python:
         for outfit in wardrobe.underwear_sets:
             if outfit.wearing_bra():
                 outfit.remove_clothing(outfit.get_bra())
+
+    def Sarah_weekend_surprise_crisis_requirement():
+        if time_of_day > 1:
+            if sarah.sluttiness > 30:
+                if day%7 == 5:  #Saturday
+                    if mc.is_at_work():
+                        return True
+        return False
 
     def test_bra_function(the_person):
         Sarah_remove_bra_from_wardrobe(the_person.wardrobe)
@@ -600,6 +617,7 @@ label Sarah_get_drinks_label():
     "[the_person.possessive_title] walks over to the line and looks at the dart board, then back at you. She is so distracted, she can barely focus on the board."
     "You should be able to win this game handily, unless you decide to throw the game on purpose!"
     $ scene_manager.remove_actor(the_person, reset_actor = False)
+    $ sarah.event_triggers_dict["drinks_out_progress"] = 2
     call play_darts_301(the_person, focus_mod = -6) from play_darts_301_call_3
     if _return:
         $ scene_manager.add_actor(the_person, emotion = "happy")
@@ -781,11 +799,14 @@ label Sarah_get_drinks_label():
     mc.name "Goodbye!"
     $ scene_manager.remove_actor(the_person)
     "[the_person.possessive_title] lets herself out of your room and leaves. Wow, what an evening!"
-    $ Sarah_stripclub_story_action = Action("Sarah stripclub",Sarah_stripclub_story_requirement,"Sarah_stripclub_story_label")
+
+    $ Sarah_stripclub_story_action = Action("Sarah stripclub",Sarah_stripclub_story_requirement,"Sarah_stripclub_story_label")  #Create the next storyline event
     $ mc.business.mandatory_crises_list.append(Sarah_stripclub_story_action) #Add the event here so that it pops when the requirements are met.
 
-    return
+    $ sarah_weekend_surprise_action = ActionMod("Sarah's Weekend Surprise", Sarah_weekend_surprise_crisis_requirement, "Sarah_weekend_surprise_crisis_label",
+        menu_tooltip = "Sarah catches you at work on the weekend again.", category = "Business", is_crisis = True, crisis_weight = 5)
 
+    return
 
 label Sarah_catch_stealing_label():
     $ the_person = sarah
@@ -1104,6 +1125,65 @@ label play_darts_301(the_person, focus_mod = 0): #Label returns true if mc wins,
     $ scene_manager.remove_actor(the_person, reset_actor = False)
     return False
 
+label Sarah_weekend_surprise_crisis_label():
+    $ the_person = sarah
+    #TODO going out outfit
+    "Lost in thought as you get your work done in the silence of the weekend, a sudden voice startles you."
+    the_person.char "[the_person.mc_title]! Working away your weekend again I see!"
+    "You look up to see the now familiar face of [the_person.title] standing in the doorway."
+    $ scene_manager.add_actor(the_person, emotion = "happy")
+    the_person.char "You work too much! Let's go head to the bar!"
+    "You have been working quite a bit lately, it would be good to have a chance to blow off some steam."
+    menu:
+        "Let's Go":
+            "This option has not yet been implemented."
+        "Not Today":
+            the_person.char "Seriously? You're going to turn me down?"
+            mc.name "I'm sorry, there is a lot I want to get done around here."
+            if sarah.sluttiness > 70:
+                the_person.char "You know, it is so sexy how much work you put into this place."
+                mc.name "Is that so?"
+                $ scene_manager.update_actor(the_person, position = "kneeling1")
+                "She slowly climbs up onto your desk and begins to touch herself."
+                the_person.char "I know you have a lot to do. Feel free to watch... or blow a little steam off with me!"
+
+
+            elif sarah.sluttiness > 25 and sarah.event_triggers_dict.get("epic_tits_progress", 0) > 1:
+                the_person.char "I got an idea. Why don't you let me help you, you know, relieve a little tension?"
+                mc.name "I'm not honestly that tense right now..."
+                if the_person.outfit.tits_available():
+                    "[the_person.title] begins to grope her own tits and play with her nipples."
+                else:
+                    "Without prompting, [the_person.title] starts to remove her top..."
+                    $ scene_manager.strip_actor_outfit(the_person, exclude_lower = True)
+                the_person.char "Are you sure? My big tits don't make you tense... at all?"
+                "You have to admit it, seeing her epic tits gets you excited. You can feel an erection starting."
+                the_person.char "Hmmm. Earth to [the_person.mc_title]?"
+                mc.name "Right! I'm sure a short diversion wouldn't delay me too much."
+                the_person.char "Mmm, ever since I took those serums, I've been craving your cock between my tits..."
+                "She walks right up to you and starts to get down on her knees. You pull your cock out, which is now fully erect."
+                $ scene_manager.update_actor(the_person, position = "blowjob")
+                the_person.char "That's it. Let me just take of this for you..."
+                call sex_description(the_person, SB_Titfuck_Kneeling, make_floor(), round = 1, private = True, girl_in_charge = True) from _call_sex_description_sarah_weekend_titfuck_1
+                "[the_person.possessive_title] moans as she rubs your cum into her chest."
+                the_person.char "It feels so sticky on my skin... Mmmm that was nice."
+                "You clear your throat and then respond."
+                mc.name "That felt great!"
+                $ scene_manager.update_actor(the_person, position = "stand4")
+                the_person.char "Alright, I know you wanted to get other things done, so I'll let you get back to it. But don't work too hard! Look me up if you need another break sometime!"
+                "She quickly cleans herself up then leaves, giving you a chance to continue your work, but now with your balls empty."
+            else:
+                $ the_person.change_happiness(-10)
+                $ the_person.change_love(-5)
+                $ the_person.change_obedience(5)
+                the_person.char "Wow, okay. Sorry, I didn't realize you were so busy. Maybe next time I guess?"
+                "[the_person.title] quickly turns and walks out, leaving you to your work."
+                $ scene_manager.remove_actor(the_person)
+                return
+
+
+
+    return
 
 init 5 python:
     def roll_dart_odds(target = 50, focus_score = 0):
