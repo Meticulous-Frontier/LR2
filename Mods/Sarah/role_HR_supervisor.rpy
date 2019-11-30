@@ -368,7 +368,7 @@ label HR_director_monday_meeting_label(the_person):
         "For some reason, she doesn't begin with her usual efficiency talk. Instead, she seems to be keenly interested in watching you eat..."
         the_person.char "So, before we get started today, I was wondering if umm..."
         mc.name "Yes?"
-        "Her cheeks a little flushed, she's obviously embarassed about what she is about to ask."
+        "Her cheeks a little flushed, she's obviously embarrassed about what she is about to ask."
         the_person.char "Well... I've just noticed that, we employ women here, and it must be hard on you to be around so many women all day long..."
         "You don't really see where she is going with this."
         the_person.char "It would cause the company a lot of trouble if some sort of sexual harassment suit that would come up."
@@ -379,7 +379,7 @@ label HR_director_monday_meeting_label(the_person):
         the_person.char "Well, plus it would be fun..."
         "You consider her offer."
         mc.name "That would be acceptable, and I can see how it would be helpful to start the meeting with a clear mind."
-        "She smiles widely when you accept her explaination. You can tell she really just wants to fuck around..."
+        "She smiles widely when you accept her explanation. You can tell she really just wants to fuck around..."
         $ business_HR_sexy_meeting_start = True
         the_person.char "So... can we start today?"
         menu:
@@ -891,7 +891,7 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
                         else:
                             $the_person.change_happiness(-35)
 
-    the_person.char "Okay... I'll do it. Let's get this overwith!"
+    the_person.char "Okay... I'll do it. Let's get this over with!"
     the_HR_dir.char "Alright. Come with me, and we will get the process started."
     $ scene_manager.remove_actor(the_person)
     $ scene_manager.remove_actor(the_HR_dir)
@@ -920,7 +920,7 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
         mc.name "That is... unfortunate."
         the_HR_dir.char "She is resting for now. It would probably be best to leave her to rest, but if you want you can go and see her."
     else:
-        the_HR_dir.char "I believe the attempt was succesful. I have no indication that she experienced any side effects."
+        the_HR_dir.char "I believe the attempt was successful. I have no indication that she experienced any side effects."
         mc.name "Excellent. Good work [the_HR_dir.title]"
         the_HR_dir.char "She is resting for now, but before I left she asked to see you. It's up to you if you want to go see her."
     mc.name "Thank you. I'll consider it. That'll be all for now."

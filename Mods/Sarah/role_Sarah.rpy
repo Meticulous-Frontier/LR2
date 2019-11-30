@@ -712,7 +712,7 @@ label Sarah_get_drinks_label():
     "ABORT! You quickly let go of [the_person.title] when your mother interrupts you."
     mom.char "Sorry! I didn't... here you go!"
     "She quickly hands [the_person.title] a large towel and a set of clothes."
-    mom.char "There you are dear. I'm sorry, but Lily is in the bathroom right now, taking one of her rediculously long showers..."
+    mom.char "There you are dear. I'm sorry, but Lily is in the bathroom right now, taking one of her ridiculously long showers..."
     mc.name "That's okay, she can change in my room! I can wait out here."
     the_person.char "Thank you! I'll be quick!"
     $ scene_manager.update_actor(the_person, position = "walking_away")
@@ -766,7 +766,7 @@ label Sarah_get_drinks_label():
     "For a moment you consider grabbing a condom, but that thought evaporates when she runs the nails of her free hand roughly down your back."
     "You let go of yourself, and move your hips into position just above hers. Her hand stops stroking you and guides your cock to her pussy as it gets close."
     "You can feel the moist heat coming from between [the_person.title]'s legs as you get close. You feel the head begin to poke against her slit."
-    "Her legs wrap tighter behing you, begging you to push into her. You happily give in, parting her labia and sinking slowly into her cunt."
+    "Her legs wrap tighter behind you, begging you to push into her. You happily give in, parting her labia and sinking slowly into her cunt."
     the_person.char "OH god... that's so good!"
     call sex_description(the_person, missionary, make_bed(), round = 1, private = True, girl_in_charge = False) from _call_sex_description_sarah_grabbing_drinks_1
     if the_person.event_triggers_dict.get("dating_path", False) == True:
