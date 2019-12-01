@@ -16,6 +16,7 @@ init 5 python:
         "make up": "girls who wear makeup",
         "giving blowjobs": "getting blowjobs",
         "giving handjobs": "getting handjobs",
+        "giving tit fucks": "fucking tits",
         "being fingered": "fingering a girl",
         "showing her tits": "looking at tits",
         "showing her ass": "looking at butts",
