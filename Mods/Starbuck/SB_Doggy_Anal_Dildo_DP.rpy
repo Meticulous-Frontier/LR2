@@ -1,15 +1,19 @@
-init:
-    python:
-        SB_doggy_anal_dildo_dp = Position("Doggy Anal DP",90,120,"doggy","Lay","Vagina","Anal",25,18,[],
-        "intro_SB_doggy_anal_dildo_dp",
-        ["scene_SB_doggy_anal_dildo_dp_1","scene_SB_doggy_anal_dildo_dp_2"],
-        "outro_SB_doggy_anal_dildo_dp",
-        "transition_default_SB_doggy_anal_dildo_dp",
-        "strip_SB_doggy_anal_dildo_dp", "strip_ask_SB_doggy_anal_dildo_dp",
-        "orgasm_SB_doggy_anal_dildo_dp",
+init python:
+    SB_doggy_anal_dildo_dp = Position(name = "Doggy Anal DP", slut_requirement = 90, slut_cap = 120, requires_hard = True, requires_large_tits = False,
+        position_tag = "doggy", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Anal",
+        girl_arousal = 25, girl_energy = 11,
+        guy_arousal = 18, guy_energy = 14,
+        connections = [],
+        intro = "intro_SB_doggy_anal_dildo_dp",
+        scenes = ["scene_SB_doggy_anal_dildo_dp_1","scene_SB_doggy_anal_dildo_dp_2"],
+        outro = "outro_SB_doggy_anal_dildo_dp",
+        transition_default = "transition_default_SB_doggy_anal_dildo_dp",
+        strip_description = "strip_SB_doggy_anal_dildo_dp", strip_ask_description = "strip_ask_SB_doggy_anal_dildo_dp",
+        orgasm_description = "orgasm_SB_doggy_anal_dildo_dp",
         verb = "ass fuck",
         opinion_tags = ["doggy style sex", "anal sex", "vaginal sex"], record_class = "Anal Sex")
-        #list_of_positions.append(SB_doggy_anal_dildo_dp)
+
+    #list_of_positions.append(SB_doggy_anal_dildo_dp)
 
 #init 1:
 #    python:

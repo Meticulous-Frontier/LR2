@@ -162,7 +162,7 @@ label SB_fetish_anal_staylate_event_label(the_person):
             the_person.char "Yes sir!"
             "You murmur a soft approval. You give her ass another hard spank."
             "SMACK"
-            "[the_person.possessive_title]'s accomodating ass ripples in shockwaves out from where you hand spanks it."
+            "[the_person.possessive_title]'s accommodating ass ripples in shockwaves out from where you hand spanks it."
             "You give her hind quarters a few more spanks, giving her few seconds in between."
             $ the_person.change_arousal(20)
             "[the_person.possessive_title] barely stifles a moan as you spank her again. Her cheeks are beginning to glow a rosey red. Her pussy lips are growing puffy with clear signs of arousal."

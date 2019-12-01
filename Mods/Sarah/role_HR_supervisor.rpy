@@ -767,7 +767,7 @@ label HR_diector_sexy_meeting_start_label(the_person):
             "She gets on her knees and gives you a couple strokes with her hand."
             the_person.char "Mmmm, I love the feeling of a cock buried between by big tits... this is gonna be great!"
             "With her hands on each side of her chest, she wraps her sizable boobs around you and begins to bounce them up and down."
-            call sex_description(the_person, SB_Titfuck_Kneeling, make_floor(), round = 1, private = True, girl_in_charge = True) from _call_sex_description_meeting_start_two
+            call sex_description(the_person, tit_fuck, make_floor(), round = 1, private = True, girl_in_charge = True) from _call_sex_description_meeting_start_two
             $ business_HR_sexy_start_unlocks["titfuck"] = True
             "After you finish, [the_person.possessive_title] runs her hands along her tits, rubbing your cum into her skin."
             the_person.char "Mmm, god that was hot. Let me just enjoy this a minute before we move on with the meeting..."
@@ -809,7 +809,7 @@ label HR_diector_sexy_meeting_start_label(the_person):
         "You pull your cock out as she gets up and walks around your desk. She drops down on her knees in front of you."
         $ scene_manager.update_actor(the_person, position = "blowjob")
         "[the_person.possessive_title] smiles at you as she uses her hands to wrap her tits around your cock, and then starts to move them up and down."
-        call sex_description(the_person, SB_Titfuck_Kneeling, make_floor(), round = 1, private = True, girl_in_charge = True) from _call_sex_description_meeting_mid_two
+        call sex_description(the_person, tit_fuck, make_floor(), round = 1, private = True, girl_in_charge = True) from _call_sex_description_meeting_mid_two
 
     return
 

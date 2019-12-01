@@ -371,7 +371,7 @@ label starbuck_oral_skillup_label(the_person):
                         the_person.char "Wow, that was interesting!... you ready to give it a try, [the_person.mc_title]?"
                         "She quickly takes off some clothes to give you easy access."
                         $ the_person.strip_outfit_to_max_sluttiness(exclude_upper = True)
-                        call fuck_person(the_person, start_position = SB_Oral_Laying, start_object = mc.location.get_object_with_name("floor"), skip_intro = True, private = True) from _call_fuck_person_SBS30
+                        call fuck_person(the_person, start_position = cunnilingus, start_object = mc.location.get_object_with_name("floor"), skip_intro = True, private = True) from _call_fuck_person_SBS30
                         $ the_report = _return
                         if the_report.get("girl orgasms", 0) > 1:
                             the_person.char "Oh my god, I came so many times... did you make me squirt?"
@@ -1542,7 +1542,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
                     $ the_person.draw_person(position = "blowjob")
                     "[the_person.possessive_title] turns to you and gets down on her knees. She looks up at you. Her eyes certainly look a bit hungry..."
                     "She puts her hands on her breasts. She leans forward and nestles your cock between her bountiful tits."
-                    call fuck_person(the_person, start_position = SB_Titfuck_Kneeling, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_SBS122
+                    call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_SBS122
                     "You spend a moment recovering while [the_person.title] rinses your cum off her body."
 
 

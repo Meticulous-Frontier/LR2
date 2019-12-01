@@ -1,17 +1,21 @@
 #This is a variant on the standing sex up against the wall. In this version, we have the girl's back to us instead of facing us.#
 
-init:
-    python:
-        SB_facing_wall = Position("Facing Wall",70,90,"back_peek","Lean","Vagina","Vaginal",20,20,[],
-        "intro_SB_facing_wall",
-        ["scene_SB_facing_wall_1","scene_SB_facing_wall_2"],
-        "outro_SB_facing_wall",
-        "transition_default_SB_facing_wall",
-        "strip_SB_facing_wall", "strip_ask_SB_facing_wall",
-        "orgasm_SB_facing_wall",
+init python:
+    SB_facing_wall = Position(name = "Facing Wall", slut_requirement = 70, slut_cap = 90, requires_hard = True, requires_large_tits = False,
+        position_tag = "back_peek", requires_location = "Lean", requires_clothing = "Vagina", skill_tag = "Vaginal",
+        girl_arousal = 20, girl_energy = 16,
+        guy_arousal = 18, guy_energy = 16,
+        connections = [],
+        intro = "intro_SB_facing_wall",
+        scenes = ["scene_SB_facing_wall_1","scene_SB_facing_wall_2"],
+        outro = "outro_SB_facing_wall",
+        transition_default = "transition_default_SB_facing_wall",
+        strip_description = "strip_SB_facing_wall", strip_ask_description = "strip_ask_SB_facing_wall",
+        orgasm_description = "orgasm_SB_facing_wall",
         verb = "fuck",
         opinion_tags = ["sex standing up", "vaginal sex"], record_class = "Vaginal Sex")
-        #list_of_positions.append(SB_facing_wall)     #Consider adding later, but for now, transition from the other standing scene
+    
+    #list_of_positions.append(SB_facing_wall)     #Consider adding later, but for now, transition from the other standing scene
 
 init 1:
     python:

@@ -1,13 +1,18 @@
 init python:
-    SB_doggy_standing = Position("Standing Doggy",60,80,"standing_doggy","Low","Vagina","Vaginal",20,20,[],
-        "intro_SB_doggy_standing",
-        ["scene_SB_doggy_standing_1","scene_SB_doggy_standing_2"],
-        "outro_SB_doggy_standing",
-        "transition_default_SB_doggy_standing",
-        "strip_SB_doggy_standing", "strip_ask_SB_doggy_standing",
-        "orgasm_SB_doggy_standing",
+    SB_doggy_standing = Position(name = "Standing Doggy", slut_requirement = 60, slut_cap = 80, requires_hard = True, requires_large_tits = False,
+        position_tag = "standing_doggy", requires_location = "Low", requires_clothing = "Vagina", skill_tag = "Vaginal",
+        girl_arousal = 20, girl_energy = 16,
+        guy_arousal = 20, guy_energy = 16,
+        connections = [],
+        intro = "intro_SB_doggy_standing",
+        scenes = ["scene_SB_doggy_standing_1","scene_SB_doggy_standing_2"],
+        outro = "outro_SB_doggy_standing",
+        transition_default = "transition_default_SB_doggy_standing",
+        strip_description = "strip_SB_doggy_standing",  strip_ask_description = "strip_ask_SB_doggy_standing",
+        orgasm_description = "orgasm_SB_doggy_standing",
         verb = "fuck",
         opinion_tags = ["doggy style sex", "vaginal sex", "sex standing up"], record_class = "Vaginal Sex")
+
     list_of_positions.append(SB_doggy_standing)
 
 init 1 python:
