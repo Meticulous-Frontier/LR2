@@ -102,7 +102,7 @@ init 6 python:
                 new_score += 1
             if cloth in [pumps, high_heels, leggings]:
                 new_score += 5 # small extra modifier
-            if cloth in [summer_dress, evening_dress]:
+            if cloth in [summer_dress, virgin_killer, evening_dress]:
                 new_score += 10 # sexy modifier
             if cloth in [two_part_dress, thin_dress, nightgown_dress, thigh_high_boots, leotard]:
                 new_score += 15 # extremely slutty clothing (applies extra modifier)
