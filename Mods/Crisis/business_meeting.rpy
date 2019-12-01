@@ -104,10 +104,8 @@ label business_meeting_seduction(person):
         $ person.draw_person(position = "blowjob")
         $ person.change_arousal(25)
         menu:
-            "Continue" if  mc.current_stamina > 0:
+            "Continue":
                 call fuck_person(person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_business_meeting
-            "Continue. (disabled)" if not mc.current_stamina > 0:
-                pass
             "Not now":
                 mc.name "I'm sorry [person.title], i've got another meeting to attend."
                 $ person.draw_person(position = "stand4", emotion="sad")

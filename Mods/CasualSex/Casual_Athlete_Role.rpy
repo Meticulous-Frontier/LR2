@@ -11,13 +11,13 @@
 
 init -2 python:
     def casual_athlete_get_to_know_requirement(the_person):
-        if mc.max_stamina > 3:
+        if mc.max_energy >= 110:
             if mc.location == gym:
                 return True
             else:
                 return "Wait until you see her at the gym"
         else:
-            return False
+            return "Requires 110 maximum energy"
 
     def casual_athlete_phase_one_requirement(the_person):
         if the_person.event_triggers_dict.get("athlete_progress", 0) < 1:
@@ -27,7 +27,7 @@ init -2 python:
         if the_person.event_triggers_dict.get("athlete_workout", 0) < 1:
             return False
         if time_of_day < 4:
-            if mc.max_stamina > 3:
+            if mc.max_energy >= 120:
                 if the_person.sluttiness < 20:
                     return "Requires 20 Sluttiness"
                 elif mc.location == gym:
@@ -35,7 +35,7 @@ init -2 python:
                 else:
                     return "Not at the gym"
             else:
-                return "Requires More Max Stamina"
+                return "Requires 120 maximum energy"
         return False
 
     def casual_athlete_phase_two_requirement(the_person):
@@ -46,12 +46,12 @@ init -2 python:
         if the_person.love > 50:
             return "She is uneasy about falling for you."
         if time_of_day < 4:
-            if mc.max_stamina > 5:
+            if mc.max_energy >= 140:
                 if the_person.sluttiness < 40:
                     return "Requires 40 Sluttiness"
                 return True
             else:
-                return "Requires More Max Stamina"
+                return "Requires 140 maximum energy"
         return False
 
     def casual_athlete_race_crisis_requirement():
@@ -137,7 +137,7 @@ label casual_athlete_get_to_know_label(the_person):
         else:
             the_person.char "I appreciate you buying me a protein shake now and then. I definitely feel the effects of them. I feel stronger... even sexier since you started doing that!"
         "[the_person.title] moves on to the free weights area of the gym."
-        if mc.max_stamina > 3:
+        if mc.max_energy >= 110:
             the_person.char "I think I'm going to do some squats..."
             "[the_person.title] looks over at you. She gives you a quick appraisal."
             the_person.char "Hey, you look like you're fairly fit yourself. You should workout with me sometime."
@@ -162,7 +162,7 @@ label casual_athlete_get_to_know_label(the_person):
         "[the_person.title] slows the treadmill down so she can carry on a conversation."
         the_person.char "Yeah! I have a big 10k coming up. I really want to do well for this, with it coming up on track season!"
         "You chit chat with [the_person.title] for a bit about the upcoming race."
-        if mc.max_stamina > 5:
+        if mc.max_energy >= 140:
             the_person.char "Hey, you seem pretty fit too. You should consider entering! It's for a great cause!"
             mc.name "Okay... I'll consider it. Things are pretty busy at work lately, but I'll get back to you if I have time."
             the_person.char "Just don't be sore about it when I beat you to the finish line. I'm a serious athlete!"
@@ -284,9 +284,9 @@ label casual_athlete_phase_one_label(the_person):
         "As you begin to push yourself inside her, she drags her nails across your back."
         the_person.char "Oh fuck, that's good. Give it to me good, [the_person.mc_title]!"
         call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, girl_in_charge = False, private = True) from _call_casual_sex_mod_CS010
-        if the_person.arousal > 100:
+        $ the_report = _return
+        if the_report.get("girl orgasms", 0) > 0:
             "As you slowly let [the_person.title] down from the wall, you can see her trembling, caused by aftershocks from her orgasm."
-        $ the_person.reset_arousal()
         the_person.char "Mmm... that was nice..."
         "[the_person.title] stutters for a moment."
         the_person.char "But... you know... I really can't get involved in a serious relationship right now."
@@ -351,12 +351,11 @@ label casual_athlete_phase_one_label(the_person):
                 "As you begin to push yourself inside her, she drags her nails across your back."
                 the_person.char "Oh fuck, that's good. Give it to me good, [the_person.mc_title]!"
                 call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, girl_in_charge = False, private = True) from _call_casual_sex_mod_CS011
-                if the_person.arousal > 100:
+                $ the_report = _return
+                if the_report.get("girl orgasms", 0) > 0:
                     "As you slowly let [the_person.title] down from the wall, you can see her trembling, caused by aftershocks from her orgasm."
                     the_person.char "Mmm... god I'm glad you know how to use that cock."
                 "Without another word, you and [the_person.title] take a quick shower, then get ready and leave the gym."
-
-                $ the_person.reset_arousal()
 
             "Not Today":  #lol what a tease#
                 the_person.char "Oh. Okay, I understand. Well, I'll see you around, [the_person.mc_title]!"
@@ -493,7 +492,6 @@ label casual_athlete_race_crisis_label(the_person):
     the_person.char "Yes!!! Oh god, please fuck me good!"
     "You have every intention of doing exactly that."
     call fuck_person(the_person, private=True, start_position = doggy, start_object = make_bed(), skip_intro = True, girl_in_charge = False, hide_leave = True) from _call_casual_sex_mod_CS030
-    $ the_person.reset_arousal()
     $ the_person.clear_situational_slut("Lost Bet")
     "When you finish with her, [the_person.possessive_title] lays down on her bed."
     $ the_person.draw_person(position = "missionary")
@@ -559,11 +557,11 @@ label casual_athlete_house_call_label(the_person):
 
         "[the_person.possessive_title] moans as you strip her down, enjoying your rough treatment of her."
     call fuck_person(the_person,private = True) from _call_casual_sex_mod_CSA040
+    $ the_report = _return
     "After you finish with her, you get up and start to gather your clothes."
-    if the_person.arousal > 100:
+    if the_report.get("girl orgasms", 0) > 0:
         "[the_person.possessive_title] is in an orgasm fueled daze, enjoying the effects it has on her."
     the_person.char "Thanks for stopping by... I think I'm just gonna lay down for a bit..."
-    $ the_person.reset_arousal()
     "Once you finish getting dressed you say goodbye and let yourself out."
 
     $ mc.change_location(bedroom) # go home

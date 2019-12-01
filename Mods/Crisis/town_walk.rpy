@@ -104,7 +104,7 @@ label town_walk_crisis_action_label:
     else:
         pass
     menu:
-        "Join her." if mc.current_stamina > 0:
+        "Join her.":
             "You decide to use this opportunity and join her."
             mc.name "I was passing by, heard some noise  and decided to investigate. All these robberies, you know..."
             mc.name "And I see that that you indeed require some attention, [the_person.title]. Should I join?"
@@ -123,13 +123,10 @@ label town_walk_crisis_action_label:
                 the_person.char "The fuck are you doing, Mr. [mc.last_name]? You can't just spy on people in their homes! Get out of here or I'll call the police!"
                 "You quickly leave the area."
                 $ the_person.happiness -= 5
-        "Join her. (disabled)" if not mc.current_stamina > 0:
-            pass
         "Walk away":
             "You decide not to disturb her and just walk away."
 
     python:
-        the_person.reset_arousal()
         the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
         mc.location.show_background()
         renpy.scene("Active")

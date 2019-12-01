@@ -1,10 +1,9 @@
 init 1 python:
     def SB_fetish_anal_requirement():
         if time_of_day == 3:
-            if mc.current_stamina > 0:
-                if mc.business.is_open_for_business():
-                    if mc.is_at_work():
-                        return True
+            if mc.business.is_open_for_business():
+                if mc.is_at_work():
+                    return True
         return False
 
     def SB_mom_anal_pay_requirement():
@@ -64,7 +63,7 @@ label SB_fetish_anal_label(the_person):
     the_person.char "I was wondering if you would stay for a bit after work? I need help with something."
     "[the_person.possessive_title] looks at you with hopeful eyes."
     menu:
-        "Accept" if mc.current_stamina > 0:  #This begins the sex scene
+        "Accept":
             ###Set anal skill to 6
             $ the_person.sex_skills["Anal"] = 6
             mc.name "I suppose I could stay for a bit, let me just finish up a couple things and I'll be right with you."
@@ -92,7 +91,6 @@ label SB_fetish_anal_label(the_person):
             "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]"
             ###Anal Scene, standing variant###
             call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBA10
-            $ the_person.reset_arousal()
             ###Reset Arousal
             #$ the_person.SB_fetish = "anal sex"
             $ the_person.sexy_opinions["anal sex"] = [FETISH_OPINION_VALUE, True]
@@ -115,7 +113,7 @@ label SB_fetish_anal_label(the_person):
             $ the_person.change_obedience(-10)
             $ the_person.change_happiness(-10)
             "[the_person.possessive_title] quickly sulks off."
-        "Too Tired" if mc.current_stamina == 0:     # na stamina for the player to induce fetish
+        "Too Tired" if mc.energy < 30:     # na stamina for the player to induce fetish
             "[the_person.possessive_title] is surprised by your answer."
             $ the_person.change_obedience(-5)
             $ the_person.change_happiness(-5)
@@ -169,7 +167,7 @@ label SB_fetish_anal_staylate_event_label(the_person):
             $ the_person.change_arousal(20)
             "[the_person.possessive_title] barely stifles a moan as you spank her again. Her cheeks are beginning to glow a rosey red. Her pussy lips are growing puffy with clear signs of arousal."
             "You decide it is time to move on."
-        "Fuck Her Ass" if mc.current_stamina > 0:
+        "Fuck Her Ass":
             "You firmly grasp one of her ass cheeks in one hand before responding."
             mc.name "Everything seems to be in order, but I'll still need to carry out your punishment."
             "With two fingers, you start to pull the jewelled plug from her. When only the tip remains, you push it back in."
@@ -186,7 +184,8 @@ label SB_fetish_anal_staylate_event_label(the_person):
             the_person.char "No! I need you in my ass right now... I need the heat and intensity of you fucking my ass right now!"
             "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]"
             call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBA20
-            if the_person.arousal > 100:
+            $ the_report = _return
+            if the_report.get("girl orgasms", 0) > 0:
                 "[the_person.possessive_title] lays over the desk for a while, recovering from her ass reaming."
                 the_person.char "God... that felt so fucking good..."
                 $ the_person.change_obedience(5)
@@ -197,19 +196,16 @@ label SB_fetish_anal_staylate_event_label(the_person):
                 "[the_person.possessive_title] seems disappointed she didn't finish."
                 $ the_person.change_love(-2)
                 $ the_person.change_happiness(-5)
-            $ the_person.reset_arousal()
+
             "[the_person.possessive_title] gets up and starts getting ready to go home."
             "You say goodbye to her as she walks out your office door."
             $ FETISH_ANAL_EVENT_INUSE = False
             $ SB_CALCULATE_RANDOM_EVENT_RATE()
             return
-        "Fuck Her Ass\n{size=22}Requires Stamina{/size} (disabled)" if mc.current_stamina == 0:
-            pass
-
 
 
     menu:
-        "Fuck Her Ass" if mc.current_stamina > 0:
+        "Fuck Her Ass":
             "You firmly grasp one of her ass cheeks in one hand. It is hot to the touch."
             "With two fingers, you start to pull the jewelled plug from her. When only the tip remains, you push it back in."
             "You fuck her for a few moments with the jewelled plug. She loves the penetration and begins to push her hips back against you as you work the plug in and out of her."
@@ -224,7 +220,8 @@ label SB_fetish_anal_staylate_event_label(the_person):
             the_person.char "No! I need you in my ass right now... I need the heat and intensity of you fucking my ass right now!"
             "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]"
             call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBA21
-            if the_person.arousal > 100:
+            $ the_report = _return
+            if the_report.get("girl orgasms", 0) > 0:
                 "[the_person.possessive_title] lays over the desk for a while, recovering from her ass reaming and spanking."
                 the_person.char "God... that felt so fucking good..."
                 $ the_person.change_obedience(5)
@@ -234,11 +231,9 @@ label SB_fetish_anal_staylate_event_label(the_person):
                 "[the_person.possessive_title] seems disappointed she didn't finish."
                 $ the_person.change_love(-2)
                 $ the_person.change_happiness(-5)
-            $ the_person.reset_arousal()
+
             "[the_person.possessive_title] gets up and starts getting ready to go home."
             "You say goodbye to her as she walks out your office door. She walks a bit funny, clearly uncomfortable after the spanking she received."
-        "Fuck Her Ass\n{size=22}Requires Stamina{/size} (disabled)" if mc.current_stamina == 0:
-            pass
         "Send her home":
             mc.name "That's enough for today [the_person.title]."
             "[the_person.possessive_title] looks back at your, clearly surprised that you are sending her away already."
@@ -301,7 +296,7 @@ label SB_fetish_anal_recurring_label():
         "Between her pillowy cheeks is her pink jewelled butt plug."
         the_person.char "What do you say, [the_person.mc_title]? Want to replace my plug with something else?"
     menu:
-        "Fuck her ass" if mc.current_stamina > 0:
+        "Fuck her ass":
             the_person.char "Mmmm I can't wait to feel it."
             $ the_person.draw_person(position = "standing_doggy")
             "[the_person.possessive_title] walks over in front of you, with her hands on your desk."
@@ -315,25 +310,23 @@ label SB_fetish_anal_recurring_label():
             the_person.char "No! I need you in my ass right now... I need the heat and intensity of you fucking my ass right now!"
             "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]"
             call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBA30
-            ###Reset Arousal
             the_person.char "It was so good. I've been thinking about that all day."
             "[the_person.possessive_title] gets her butt plug. She slowly pushes it back into her ass."
             the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
             "You wave goodbye to [the_person.possessive_title] and get ready to head home for the night."
         "No Thanks":
-            "[the_person.possessive_title] is caught completely off gaurd by your refusal."
+            "[the_person.possessive_title] is caught completely off guard by your refusal."
             $ the_person.change_obedience(-10)
             $ the_person.change_happiness(-10)
             the_person.char "Oh!... Okay... Well... hey I understand... Maybe some other time yeah?"
             "[the_person.possessive_title] quickly sulks off. Maybe you should've?"
-        "Too Tired" if mc.current_stamina == 0:
+        "Too Tired" if mc.energy < 30:
             "[the_person.possessive_title] is surprised by your answer."
             $ the_person.change_obedience(-5)
             $ the_person.change_happiness(-5)
             the_person.char "Oh! I'm sorry... I know you work so hard around here. Maybe tomorrow then?"
             "[the_person.possessive_title] quickly sulks off."
 
-    $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False)
     $ renpy.scene("Active")
     return
@@ -559,7 +552,6 @@ label SB_mom_anal_pay_label():
             "You get yourself lined up with your mom's back passage. You slowly begin your anal penetration."
             the_person.char "That's it [the_person.mc_title]! Fuck me good!"
             call sex_description(the_person, doggy_anal, make_bed(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBA43
-            $ mc.current_stamina += -1
             if the_person.arousal > 100:
                 "[the_person.title] lays there on the bed, speechless from your anal plundering."
             else:
@@ -604,7 +596,7 @@ label SB_mom_anal_friday_label():
     the_person.char "[the_person.mc_title]! Hey, it time for our Friday night date! Are you ready for your show and, well you know what comes afterword..."
     "[the_person.title] smiles wide, waiting for your response."
     menu:
-        "Strip and ride me." if mc.current_stamina > 0:
+        "Strip and ride me.":
 
             "You sit down on the bed. [the_person.title] walks over to you."
             the_person.char "Remember, no touching! Atleast during this part. Now, are you ready a show?"
@@ -622,7 +614,6 @@ label SB_mom_anal_friday_label():
             $ the_person.draw_person(position = "cowgirl")
             the_person.char "Now, just let [the_person.title] take care of you. I'm gonna stick it into my most intimate hole now..."
             "[the_person.title] goes slow, but steadily slides down, impaling her sphincter on your throbbing erection. She bottoms out and moans loudly."
-            $ mc.current_stamina += -1
             call sex_description(the_person, SB_anal_cowgirl, make_bed(), 1, private= True, girl_in_charge = True) from _call_sex_description_SBA51
             if the_person.arousal > 100:
                 the_person.char "Oh god, I came so hard..."

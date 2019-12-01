@@ -253,21 +253,21 @@ label starbuck_vaginal_skillup_label(the_person):
                 "[the_person.possessive_title] hands you your purchase after she rings you up. She smiles at you and blushes a bit."
                 the_person.char "Now... did you maybe want some help... trying this out?"
                 menu:
-                    "Fuck her" if  mc.current_stamina > 0:
+                    "Fuck her":
                         "You take a quick look at the instructions. Looks like it should be fairly easy to keep with you and use with your partners from now on..."
                         mc.name "Sounds good, [the_person.title]. Since you recommended it, its only fair you be the first to feel it."
                         the_person.char "Ah... I can't wait! Let's go!"
                         "She quickly takes off some clothes to give you easy access."
                         $ the_person.strip_outfit_to_max_sluttiness(exclude_upper = True)
-                        $ mc.current_stamina += -1
                         call fuck_person(the_person, start_position = missionary, start_object = mc.location.get_object_with_name("floor"), skip_intro = True, private = True) from _call_fuck_person_SBS10
-                        if the_person.arousal > 160:
+                        $ the_report = _return
+                        if the_report.get("girl orgasms", 0) > 1:
                             the_person.char "Oh wow... I've never... I came so many times..."
                             $ the_person.change_obedience (5)
                             $ the_person.change_slut_temp (5)
                             $ the_person.change_slut_core (5)
                             the_person.char "Let's do that again soon!"
-                        elif the_person.arousal > 100:
+                        elif the_report.get("girl orgasms", 0) > 0:
                             the_person.char "Oh wow... The orgasms that thing gives..."
                             $ the_person.change_obedience (2)
                             $ the_person.change_slut_temp (2)
@@ -283,8 +283,6 @@ label starbuck_vaginal_skillup_label(the_person):
                     "No thanks":
                         "You thank her for the offer, but decide against it for now."
 
-                    "Fuck her\n{size=22}Requires Stamina{/size} (disabled)" if the_person.sluttiness > 60 and mc.current_stamina == 0:
-                        "You thank her for the offer, but decide against it for now."
         "Not right now":
             "You thank her for the help, but decide against it for now."
     return
@@ -311,21 +309,21 @@ label starbuck_anal_skillup_label(the_person):
                 "[the_person.possessive_title] hands you your purchase after she rings you up. She smiles at you and blushes a bit."
                 the_person.char "Now... did you maybe want some help... trying this out?"
                 menu:
-                    "Fuck her ass" if  mc.current_stamina > 0:
+                    "Fuck her ass":
                         "You take a quick look at the instructions. Looks like it should be fairly easy to keep with you and use with your partners from now on..."
                         mc.name "Sounds good, [the_person.title]. Since you recommended it, its only fair I use it on you first!"
                         the_person.char "Ah... I can't wait! Let's go!"
                         "She quickly takes off some clothes to give you easy access."
                         $ the_person.strip_outfit_to_max_sluttiness(exclude_upper = True)
-                        $ mc.current_stamina += -1
                         call fuck_person(the_person, start_position = SB_anal_standing, start_object = mc.location.get_object_with_name("counter"), skip_intro = True, private = True) from _call_fuck_person_SBS20
-                        if the_person.arousal > 160:
+                        $ the_report = _return
+                        if the_report.get("girl orgasms", 0) > 1:
                             the_person.char "Oh wow... I've never... I came so many times!"
                             $ the_person.change_obedience (5)
                             $ the_person.change_slut_temp (5)
                             $ the_person.change_slut_core (5)
                             the_person.char "Let's do that again soon!"
-                        elif the_person.arousal > 100:
+                        elif the_report.get("girl orgasms", 0) > 0:
                             the_person.char "Oh wow... I came so hard!"
                             $ the_person.change_obedience (2)
                             $ the_person.change_slut_temp (2)
@@ -341,8 +339,6 @@ label starbuck_anal_skillup_label(the_person):
                     "No thanks":
                         "You thank her for the offer, but decide against it for now."
 
-                    "Fuck her\n{size=22}Requires Stamina{/size} (disabled)" if the_person.sluttiness > 90 and mc.current_stamina == 0:
-                        "You thank her for the offer, but decide against it for now."
         "Not right now":
             "You thank her for the help, but decide against it for now."
     return
@@ -367,7 +363,7 @@ label starbuck_oral_skillup_label(the_person):
                 "[the_person.possessive_title] hands you your purchase after she rings you up. She smiles at you and blushes a bit."
                 the_person.char "Now... did you maybe want some help... trying this out?"
                 menu:
-                    "Eat her pussy" if  mc.current_stamina > 0:
+                    "Eat her pussy":
                         mc.name "Sounds good, [the_person.title]."
                         the_person.char "Ah... okay! Let me close up really quick, I have a movie player in the back. We can go back and watch it together and then try it out!"
                         "You head to the back of hte store with [the_person.possessive_title]. Watching the video, you learn several new tips and tricks for giving awesome oral."
@@ -376,13 +372,14 @@ label starbuck_oral_skillup_label(the_person):
                         "She quickly takes off some clothes to give you easy access."
                         $ the_person.strip_outfit_to_max_sluttiness(exclude_upper = True)
                         call fuck_person(the_person, start_position = SB_Oral_Laying, start_object = mc.location.get_object_with_name("floor"), skip_intro = True, private = True) from _call_fuck_person_SBS30
-                        if the_person.arousal > 160:
+                        $ the_report = _return
+                        if the_report.get("girl orgasms", 0) > 1:
                             the_person.char "Oh my god, I came so many times... did you make me squirt?"
                             $ the_person.change_obedience (5)
                             $ the_person.change_slut_temp (5)
                             $ the_person.change_slut_core (5)
                             the_person.char "Let's do that again soon!"
-                        elif the_person.arousal > 100:
+                        elif the_report.get("girl orgasms", 0) > 0:
                             the_person.char "Oh wow... That felt so good!"
                             $ the_person.change_obedience (2)
                             $ the_person.change_slut_temp (2)
@@ -399,9 +396,6 @@ label starbuck_oral_skillup_label(the_person):
                         "You thank her for the offer, but decide against it for now."
                         "You head back to your house and watch the video. You pick up several new tips and tricks to try next to eat a girl out!"
 
-                    "Eat her pussy\n{size=22}Requires Stamina{/size} (disabled)" if the_person.sluttiness > 60 and mc.current_stamina == 0:
-                        "You thank her for the offer, but decide against it for now."
-                        "You head back to your house and watch the video. You pick up several new tips and tricks to try next to eat a girl out!"
         "Not right now":
             "You thank her for the help, but decide against it for now."
     return
@@ -425,21 +419,21 @@ label starbuck_foreplay_skillup_label(the_person):
                 "[the_person.possessive_title] hands you your purchase after she rings you up. She smiles at you and blushes a bit."
                 the_person.char "Now... did you maybe want some help... trying this out?"
                 menu:
-                    "Finger her" if  mc.current_stamina > 0:
+                    "Finger her":
                         "You take a quick look at the instructions. Looks like it should be fairly easy to keep with you and use with your partners from now on..."
                         mc.name "Sounds good, [the_person.title]. Since you recommended it, its only fair you be the first to feel it."
                         the_person.char "Ah... I can't wait! Let's go!"
                         "She quickly takes off some clothes to give you easy access."
                         $ the_person.strip_outfit_to_max_sluttiness(exclude_upper = True)
-                        $ mc.current_stamina += -1
                         call fuck_person(the_person, start_position = standing_grope, skip_intro = True, private = True) from _call_fuck_person_SBS40
-                        if the_person.arousal > 160:
+                        $ the_report = _return
+                        if the_report.get("girl orgasms", 0) > 1:
                             the_person.char "Oh wow... I've never... I came so many times..."
                             $ the_person.change_obedience (5)
                             $ the_person.change_slut_temp (5)
                             $ the_person.change_slut_core (5)
                             the_person.char "Let's do that again soon!"
-                        elif the_person.arousal > 100:
+                        elif the_report.get("girl orgasms", 0) > 0:
                             the_person.char "Oh wow... The orgasms that thing gives..."
                             $ the_person.change_obedience (2)
                             $ the_person.change_slut_temp (2)
@@ -455,8 +449,6 @@ label starbuck_foreplay_skillup_label(the_person):
                     "No thanks":
                         "You thank her for the offer, but decide against it for now."
 
-                    "Fuck her\n{size=22}Requires Stamina{/size} (disabled)" if the_person.sluttiness > 60 and mc.current_stamina == 0:
-                        "You thank her for the offer, but decide against it for now."
         "Not right now":
             "You thank her for the help, but decide against it for now."
     return
@@ -785,20 +777,19 @@ label starbuck_sex_store_promo_one_label(the_person):
     "You can tell she is fumbling with her words, trying to cover up that she lost her awareness and started sucking on the dildo."
     "You are all done with the pictures... maybe you should offer her something else to suck on?"
     menu:
-        "Want a real dick?" if mc.current_stamina > 0:
+        "Want a real dick?":
             "[the_person.possessive_title] looks up at you, still on her knees."
             the_person.char "Oh [the_person.mc_title], getting all dressed up has me all turned on. If you'd let me do that, I would really appreciate it."
             mc.name "Go ahead, you look amazing. I can't wait to feel your mouth."
             "You walk up to [the_person.possessive_title]. She unzips your pants and pulls your cock out from your pants."
             "She runs her tongue up and down the sides a few times, then opens her mouth and sucks you into her hot mouth."
             call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_SBS70
-            if the_person.arousal > 100:
+            $ the_report = _return
+            if the_report.get("girl orgasms", 0) > 0:
                 "[the_person.possessive_title] takes a few minutes to recover from her orgasm. Eventually she gets up."
             else:
                 "After you finish, [the_person.possessive_title] takes a second, then gets up."
             $ starbuck.draw_person(position = "stand2", emotion = "happy")
-            $ mc.current_stamina += -1
-            $ the_person.reset_arousal()
             the_person.char "Mmm... That was nice. It's been a while since I sucked on a hard cock. It was kinda nice!"
             if the_person.get_opinion_score("giving blowjobs") < 1:
                 $ the_person.sexy_opinions["giving blowjobs"] = [1, True]
@@ -808,8 +799,6 @@ label starbuck_sex_store_promo_one_label(the_person):
             the_person.char "If this advertisement works, we'll have to make more right?"
             mc.name "Definitely. Alright, I'll go ahead and get some advertisements done, and we'll see if we can't get better foot traffic in here."
             "You say goodbye to [the_person.possessive_title] and head out. With pictures like these, you are sure the business here will increase."
-        "Want a real dick? \nRequires: Stamina (disabled)" if mc.current_stamina == 0:
-            pass
         "Give her some privacy":
             "You decide to give her some time to yourself. You use her phone to forward all the pictures you took to your account."
             mc.name "Okay, those should be good. I'll go ahead and get some advertisements done, and we'll see if we can't get better traffic in here."
@@ -924,7 +913,7 @@ label starbuck_sex_store_promo_two_label(the_person):
         "She pushes herself up on her elbows, but makes no motion to stand up."
         the_person.char "Toys are great... but nothing beats a real cock inside me. Would you please fuck me [the_person.mc_title]?"
     menu:
-        "Fuck Her" if mc.current_stamina > 0:
+        "Fuck Her":
             mc.name "[the_person.title], that was so hot! I can't wait to bury myself into your amazing cunt."
             "She smiles at your response."
             the_person.char "Then come get some! I just came, no need to warm me up!"
@@ -937,7 +926,6 @@ label starbuck_sex_store_promo_two_label(the_person):
                 "She grabs your cock with your hand and points it at her soaked slit. With one smooth motion you thrust into her. She's so wet you glide in with no resistance."
             "Wasting no time, you begin thrusting into her. Her pussy feels amazing wrapped around you."
             call fuck_person(the_person, start_position = missionary, start_object = make_floor(), skip_intro = True, girl_in_charge = False) from _call_fuck_person_SBS80
-            $ mc.current_stamina += -1
             "[the_person.possessive_title] lays there in a daze. Between the toy and your cock, she had multiple orgasms."
             if (the_person.love > 50):
                 "As your start getting dressed again, out of the corner of your eye you see [the_person.possessive_title] begin to shudder."
@@ -962,11 +950,8 @@ label starbuck_sex_store_promo_two_label(the_person):
             if the_person.get_opinion_score("public sex") < 1:
                 $ the_person.sexy_opinions["public sex"] = [1, True]
                 "[the_person.possessive_title] now likes public sex!"
-            $ the_person.reset_arousal()
             "You chat with her for a few minutes about the details of setting up a review site, but eventually its time to say goodbye."
             the_person.char "Thanks again for everything [the_person.mc_title]. Don't be a stranger now!"
-        "Fuck Her \nRequires: Stamina (disabled)" if mc.current_stamina == 0:
-            pass
         "Refuse":  #Lol really? I guess some people may not have the stamina.
             mc.name "Sorry, I've had a long day, and I should probably get to work on editing this video."
             "She seems surprised by your answer."
@@ -1425,7 +1410,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
     "[the_person.title] looks delighted."
     the_person.char "Oh! That would be great! I'd love the company!"
     $ the_roll = renpy.random.randint(0,100) #Roll for the possible event#
-    if the_roll < 10 or mc.current_stamina < 1: #No event, just cuddle up and go to bed.
+    if the_roll < 10 or mc.energy < 30: #No event, just cuddle up and go to bed.
         mc.name "Thanks. Its been a long day and I'm exhausted."
         "You strip off your work clothes, down to your boxers. You head to [the_person.title]'s bedroom and hop in her bed."
         the_person.char "I'll be in in a minute!"
@@ -1485,7 +1470,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         the_person.char "I'm wore out! Goodnight!"
         "[the_person.title] nuzzles up against you and slowly drifts off to sleep. In your sex induced haze, you quickly drift off to sleep with her."
         $ morning_fun_chance = 20 #She got what she wanted
-    elif the_roll < 70 or mc.current_stamina < 3: #You seduce her
+    elif the_roll < 70 or mc.energy < 50: #You seduce her
         $ the_person.draw_person(position = "kissing")
         "[the_person.possessive_title] wraps her arms around you to give you a hug. You use the opportunity."
         "You grab her ass and pick her up easily. She yelps for a second but quickly wraps her legs around you in an embrace."
@@ -1512,13 +1497,13 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         $ the_person.change_arousal(10)
         the_person.char "Oh! Baby I'm ready, come fuck me!"
         call fuck_person(the_person) from _call_fuck_person_SBS121
-        if the_person.arousal > 100:
+        $ the_report = _return
+        if the_report.get("girl orgasms", 0) > 0:
             the_person.char "Oh god, I came so hard..."
-            $ morning_fun_chance = 50 #She finished
+            $ morning_fun_chance = 30 #She finished
         else:
             the_person.char "Mmm, that was so good, thank you [the_person.mc_title]..."
             $ morning_fun_chance = 100 #She didn't finish, so she comes for you in the morning.
-        $ the_person.reset_arousal()
         "You lay down on the bed, hopping in the covers."
         "[the_person.title] doesn't bother to get up, she just cuddles up next to you."
         the_person.char "Thanks [the_person.mc_title], I didn't know I needed that until you got here."
@@ -1625,7 +1610,6 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         $ morning_fun_chance = 50 #She finished. Maybe she wants an encore in the morning, maybe not.
         "[the_person.title] nuzzles up against you and slowly drifts off to sleep. In your sex induced haze, you quickly drift off to sleep with her."
 
-    $ the_person.reset_arousal()
     call SB_process_overnight_no_events() from _SB_process_overnight_no_events_SBS129
     #Good morning!
     $ renpy.scene("Active")

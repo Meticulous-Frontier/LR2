@@ -1,7 +1,7 @@
 init 1 python:
     def SB_fetish_vaginal_requirement():
         if mc_asleep():
-            if mc.current_stamina > 0:  #Must have the stamina to handle a long sexy night
+            if mc.energy > 30:  #Must have the stamina to handle a long sexy night
                 return True
         return False
 
@@ -24,13 +24,13 @@ init 1 python:
 
     def SB_fetish_mom_vaginal_requirement():
         if mc_asleep():
-            if mc.current_stamina > 0:
+            if mc.energy > 30:
                 return True
         return False
 
     def SB_fetish_lily_vaginal_requirement():
         if mc_asleep():
-            if mc.current_stamina > 0:
+            if mc.energy > 30:
                 return True
         return False
 
@@ -64,7 +64,7 @@ label SB_fetish_vaginal_label(the_person):
     the_person.char "I'll take care of your needs whenever you need it... if you do the same for me?"
     "[the_person.possessive_title] looks at you with hopeful eyes."
     menu:
-        "Accept" if mc.current_stamina > 0:  #This begins the sex scene
+        "Accept":  #This begins the sex scene
             ###Set vaginal skill to 6
             $ the_person.sex_skills["Vaginal"] = 6
             "[the_person.possessive_title] walks over to the windows and looks out of it. You see her hips move side to side for a second and the peaks back at you."
@@ -74,8 +74,6 @@ label SB_fetish_vaginal_label(the_person):
             ###Sex Scene, standing variant at window###
             "You put your hands on her hips. She sticks her ass out slightly as you line yourself and then gently push your cock inside her."
             call fuck_person(the_person, start_position = SB_facing_wall, start_object = make_window(), skip_intro = True, girl_in_charge = False) from _call_fuck_person_SBV11
-            $ the_person.reset_arousal()
-            ###Reset Arousal
 
             "[the_person.possessive_title] walks over to your bed and lays down on her back and takes off any remaining clothing."
             $ the_person.outfit = SB_vaginal_nude_outfit.get_copy()
@@ -92,8 +90,6 @@ label SB_fetish_vaginal_label(the_person):
             "You roll over on top of [the_person.possessive_title]. She wraps her arms around you as you slowly sink your cock into her moist cunt."
             ###Sex scene, missionary###   ###TODO: consider writing a variant of this because the default intro is going to be confusing###
             call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True, girl_in_charge = False) from _call_fuck_person_SBV12
-            ###Reset Arousal
-            $ the_person.reset_arousal()
 
             the_person.char "Oh god [the_person.mc_title], tonight has been incredible... excuse me for a second."
             $ the_person.draw_person(position = "walking_away")
@@ -138,8 +134,7 @@ label SB_fetish_vaginal_label(the_person):
             "You get down on your knees and get behind [the_person.possessive_title]. You line yourself up with her soaking wet slit and push yourself in."
             ###Sex Doggy Style###
             call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True, girl_in_charge = False) from _call_fuck_person_SBV13
-            ###Clear Arousal###
-            $ the_person.reset_arousal()
+
             "Exhausted from your night with [the_person.possessive_title], you get back up into your bed. [the_person.possessive_title] joins you and you quickly fall asleep, cuddling together."
 
             "That night, you have many pleasant dreams involving [the_person.possessive_title] and sex in all kinds of crazy positions."
@@ -157,7 +152,7 @@ label SB_fetish_vaginal_label(the_person):
             the_person.char "Oh! I'm sorry... Maybe tomorrow then?"
             "[the_person.possessive_title] quickly sulks off."
             return # EXIT
-        "Too Tired" if mc.current_stamina == 0:     # na stamina for the player to induce fetish
+        "Too Tired" if mc.energy < 30:     # na stamina for the player to induce fetish
             "[the_person.possessive_title] is surprised by your answer."
             $ the_person.change_obedience(-5)
             $ the_person.change_happiness(-5)
@@ -193,10 +188,10 @@ label SB_fetish_vaginal_event_label(the_person):
                 $ the_person.change_slut_temp(2)
                 the_person.char "Excellent! Now don't think of me as your mom, just think of me as your private, slutty milf. I'll do whatever your cock wants me to do, okay?"
                 "You nod and she slides closer to you on the bed."
-                $ mc.current_stamina += -1
                 $ the_person.add_situational_obedience("crisis_stuff", 25, "I'm doing it for my family.")
                 call fuck_person(the_person) from _call_fuck_person_SBV20
-                if the_person.arousal >= 100:
+                $ the_report = _return
+                if the_report.get("girl orgasms", 0) > 0:
                     "[the_person.possessive_title] needs a few minutes to lie down when you're finished. Bit by bit her breathing slows down."
                     $ the_person.change_love(5)
                     the_person.char "Oh [the_person.mc_title], that was magical. I've never felt so close to you before..."
@@ -208,12 +203,9 @@ label SB_fetish_vaginal_event_label(the_person):
                     $ the_person.change_love(3)
                     $ the_person.draw_person(position = "back_peek")
                     the_person.char "Sweet dreams."
-                $ the_person.reset_arousal()
                 $ the_person.clear_situational_obedience("crisis_stuff")
                 mc.name "Wait! Hey [the_person.title] why don't you, ya know, sleep in here tonight?"
                 the_person.char "Oh? I mean... I suppose that would be okay"
-            "Let's fuck!\n{size=22}Requires Stamina{/size} (disabled)" if mc.current_stamina == 0:
-                pass
             "Just cuddle.":
                 mc.name "Actually, [the_person.title], I'm really worn out. Would you wanna just cuddle for a bit and get some sleep?"
                 "[the_person.possessive_title] is surprised by your answer, but happy that you want to be close to her."
@@ -238,9 +230,9 @@ label SB_fetish_vaginal_event_label(the_person):
                 "[the_person.possessive_title] bites her lip, glancing down at your bulge. Her cheeks are flushed and rosey."
                 the_person.char "Hey... if you want to I could... you know... take care of that tent you are sporting there [the_person.mc_title]."
                 "You stand up and embrace her, your dick straining against your clothes, eager to begin another incestuous tryst with [the_person.possessive_title]."
-                $ mc.current_stamina += -1
                 call fuck_person(the_person) from _call_fuck_person_SBV21
-                if the_person.arousal >= 100:
+                $ the_report = _return
+                if the_report.get("girl orgasms", 0) > 1:
                     "[the_person.possessive_title] needs a few minutes to lie down when you're finished. Bit by bit her breathing slows down."
                     $ the_person.change_happiness(5)
                     the_person.char "Oh god [the_person.mc_title], your dick is sooooo good..."
@@ -250,8 +242,6 @@ label SB_fetish_vaginal_event_label(the_person):
                     $ the_person.change_love(-2)
                     $ the_person.change_happiness(-5)
                 $ the_person.reset_arousal()
-            "Let's fuck!\n{size=22}Requires Stamina{/size} (disabled)" if mc.current_stamina == 0:
-                    pass
             "Just cuddle.":
                 mc.name "Actually, [the_person.title], I'm really worn out. Would you wanna just cuddle for a bit and get some sleep?"
                 "[the_person.possessive_title] is surprised by your answer."
@@ -277,9 +267,9 @@ label SB_fetish_vaginal_event_label(the_person):
                 mc.name "You know exactly what I have in mind..."
                 "[the_person.possessive_title] gives you a lusty look."
                 the_person.char "Yeah... I know. Let's get started! I'm ready to go!"
-                $ mc.current_stamina += -1
                 call fuck_person(the_person) from _call_fuck_person_SBV22
-                if the_person.arousal > 100:
+                $ the_report = _return
+                if the_report.get("girl orgasms", 0) > 0:
                     the_person.char "Mmmm. I swear you make me cum every time..."
                     $ the_person.change_love(2)
                     $ the_person.change_happiness(5)
@@ -290,8 +280,6 @@ label SB_fetish_vaginal_event_label(the_person):
                     $ the_person.change_love(-2)
                     $ the_person.change_happiness(-5)
                 $ the_person.reset_arousal()
-            "Let's fuck!\n{size=22}Requires Stamina{/size} (disabled)" if mc.current_stamina == 0:
-                    pass
             "Just cuddle.":
                 mc.name "Actually, [the_person.title], I'm really sorry about this, but I'm really worn out. Would you wanna just cuddle for a bit and get some sleep?"
                 "[the_person.possessive_title] is surprised by your answer, and clearly a little disappointed."
@@ -454,7 +442,6 @@ label SB_cowgirl_wakeup_label(the_person):
     "[the_person.possessive_title] moans during one slow stroke."
     "You decide to lay back and enjoy the ride"
     call fuck_person(the_person, private = True, start_position = cowgirl, skip_intro = True) from _call_sex_description_SBV50
-    $ the_person.reset_arousal()
     mc.name "Oh god what a wakeup. I think I'm gonna go back to sleep for a bit. Thanks!"
     if the_person == mom:
         "[the_person.possessive_title] looks at you and smiles."
@@ -561,15 +548,12 @@ label SB_fetish_vaginal_recurring_label():
         the_person.char "Come fuck me, [the_person.mc_title]. Don't worry, I'm ready for you!"
         "You quickly take your position behind her and slowly sink your cock into her greedy cunt."
         call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBV60
-        ###Clear Arousal###
-        $ the_person.reset_arousal()
     elif the_person.get_opinion_score("sex standing up") > 2:
         "[the_person.possessive_title] resumes kissing you. You grab her ass with both hands and pick her up. She grinds her crotch into you."
         $ the_person.change_arousal(20)
         the_person.char "I need you so bad, just do me right here, up against the wall!"
         "You quickly pin [the_person.possessive_title] to the wall. She wraps her legs around you and sighs as you sink your cock into her greedy cunt."
         call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBV61
-        $ the_person.reset_arousal()
     elif the_person.get_opinion_score("missionary style sex") > 2:
         "You kiss [the_person.possessive_title] along her neck and ear. She shivers at the sensation and then whispers in your ear."
         $ the_person.change_arousal(20)
@@ -577,8 +561,6 @@ label SB_fetish_vaginal_recurring_label():
         "You roughly pick up [the_person.possessive_title] and carry her over to the bed. You throw her down and quickly jump on top of her."
         "[the_person.possessive_title] spread her legs wide, giving you easy access. She sighs as you sink your cock into her greedy cunt."
         call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBV62
-        ###Reset Arousal
-        $ the_person.reset_arousal()
     else:
         "[the_person.possessive_title] reaches down and starts to stroke your crotch through your clothes."
         $ the_person.change_arousal(20)
@@ -634,15 +616,12 @@ label SB_fetish_vaginal_lily_recurring_label():
         the_person.char "Come fuck me, [the_person.mc_title]. Don't worry, I'm ready for you!"
         "You quickly take your position behind her and slowly sink your cock into her greedy cunt."
         call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBV70
-        ###Clear Arousal###
-        $ the_person.reset_arousal()
     elif  the_person.get_opinion_score("sex standing up") > 2:
         "[the_person.possessive_title] resumes kissing you. You grab her ass with both hands and pick her up. She grinds her crotch into you."
         $ the_person.change_arousal(20)
         the_person.char "I need you so bad, just do me right here, up against the wall!"
         "You quickly pin your helpless [the_person.title] to the wall. She wraps her legs around you and sighs as you sink your cock into her greedy cunt."
         call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBV71
-        $ the_person.reset_arousal()
     elif  the_person.get_opinion_score("missionary style sex") > 2:
         "You kiss [the_person.possessive_title] along her neck and ear. She shivers at the sensation and then whispers in your ear."
         $ the_person.change_arousal(20)
@@ -650,8 +629,6 @@ label SB_fetish_vaginal_lily_recurring_label():
         "You roughly pick up [the_person.possessive_title] and carry her over to the bed. You throw her down and quickly jump on top of her."
         "[the_person.possessive_title] spread her legs wide, giving you easy access. She sighs as you sink your cock into her greedy cunt."
         call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBV72
-        ###Reset Arousal
-        $ the_person.reset_arousal()
     else:
         "[the_person.possessive_title] reaches down and starts to stroke your crotch through your clothes."
         $ the_person.change_arousal(20)

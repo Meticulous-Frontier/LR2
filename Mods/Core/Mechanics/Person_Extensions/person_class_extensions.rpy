@@ -662,7 +662,7 @@ init -1:
             mc.power = 0
 
             mc.power += int(mc.charisma*5) # Positive character modifiers
-            mc.power += int(mc.current_stamina*1.5)
+            mc.power += int((mc.energy / 20) * 1.5)
             return mc.power
 
         # calculates current willpower of a person

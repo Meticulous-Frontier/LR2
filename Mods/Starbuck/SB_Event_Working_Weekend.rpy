@@ -83,7 +83,7 @@ label SB_working_weekend_crisis_label():
         the_person.char "Oh! [the_person.mc_title], I was about to go out, but seeing you here still working on the weekend, I'd be glad to stay here with you a bit and give you a bit of a... distraction for a bit."
         "The suggestion in her voice is apparent with the last statement. You briefly consider her offer before making a request..."
         menu:
-            "How about a blowjob?\n{size=22}Modifiers: +20 Sluttiness, +5 Obedience{/size}" if mc.current_stamina > 0:
+            "How about a blowjob?\n{size=22}Modifiers: +20 Sluttiness, +5 Obedience{/size}":
                 "[the_person.possessive_title] smiles."
                 the_person.char "Oh [the_person.mc_title], you work so hard. Don't worry, I'll take care of you."
                 if not the_person.outfit.tits_available():    #If covered up, have her take her top off
@@ -108,11 +108,8 @@ label SB_working_weekend_crisis_label():
 
                 $ the_person.clear_situational_slut("seduction_approach")
                 $ the_person.clear_situational_obedience("seduction_approach")
-                $ mc.current_stamina += -1
                 "Eventually, [the_person.possessive_title] gets up. She says goodbye after giving you a quick kiss"
                 return
-            "How about a blowjob?\n{size=22}Requires Stamina{/size} (disabled)" if mc.current_stamina == 0:
-                pass
             "Just Talk":
                 "You decide to take the opportunity to learn a little more about [the_person.possessive_title]."
                 "You chit chat about various things. You decide to probe a little further about her interests."
@@ -575,7 +572,6 @@ label SB_working_weekend_crisis_label():
                 $ the_person.change_slut_core(2)
                 $ the_person.change_slut_temp(5)
                 $ the_person.change_love(5)
-            $ mc.current_stamina += -1
             the_person.char "Holy fuck [the_person.mc_title], that was so hot."
             "She eventually gets up and gets herself dressed again. You say goodbye as she leaves the office."
             $ the_person_two.reset_arousal()
@@ -583,7 +579,7 @@ label SB_working_weekend_crisis_label():
 
             return
         menu:
-            "Fuck her on your desk" if mc.current_stamina > 0:
+            "Fuck her on your desk":
                 "You walk over to [the_person.possessive_title]. She wraps her arms around you as you roughly grab her ass and pick her up. She's grinding herself against you as you carry her over to your desk."
                 "When her ass runs up against the desk, she reaches down and begins unzipping your pants."
                 "She pulls your your dick out and lays back. She lines you up with her pussy and push yourself into her."
@@ -594,16 +590,12 @@ label SB_working_weekend_crisis_label():
                     $ the_person.change_slut_core(2)
                     $ the_person.change_slut_temp(5)
                     $ the_person.change_love(5)
-                    $ mc.current_stamina += -1
                 else:   #She didn't cum
                     "You get up and make yourself presentable again. [the_person.possessive_title] lays there for a bit, clearly disappointed she didn't orgasm."
                     $ the_person.change_slut_temp(5)
                     $ the_person.change_happiness(-5)
-                    $ mc.current_stamina += -1
                 "She eventually gets up and gets herself dressed again. You say goodbye as she leaves the office."
                 $ the_person.reset_arousal()
-            "Fuck her on your desk\n{size=22}Requires Stamina{/size} (disabled)" if mc.current_stamina == 0:
-                pass
             "Thank her for the show":
                 mc.name "Thanks for that very pleasant distraction, [the_person.title], but I need to get back to work now."
                 "[the_person.possessive_title] can barely hide their disappointment. There's a hint of anger in their voice when they reply."

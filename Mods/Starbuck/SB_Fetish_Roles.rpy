@@ -10,7 +10,7 @@ init -1 python:
     def SB_fetish_vaginal_mom_kitchen_requirement(the_person):
         if the_person == mom:
             if mc.location == kitchen:
-                if mc.current_stamina > 0:
+                if mc.energy > 30:
                     return True
                 else:
                     return "You're too tired for sex."
@@ -20,7 +20,7 @@ init -1 python:
     def SB_fetish_anal_mom_kitchen_requirement(the_person):
         if the_person == mom:
             if  mc.location == kitchen:
-                if mc.current_stamina > 0:
+                if mc.energy > 30:
                     return True
                 else:
                     return "You're too tired for sex."
@@ -34,7 +34,7 @@ init -1 python:
             return "Must be in Lily's bedroom"
         elif len(lily_bedroom.people) > 1:
             return "Must be alone with Lily"
-        elif mc.current_stamina > 0:
+        elif mc.energy > 30:
             return True
         else:
             return "You are too tired."
@@ -59,7 +59,7 @@ init -1 python:
 
 
     def SB_fetish_cum_getdosage_requirement(the_person):
-        if mc.current_stamina > 0:
+        if mc.energy > 30:
             if time_of_day < 4:
                 return True
         else:
@@ -280,7 +280,7 @@ label SB_fetish_anal_mom_kitchen_label(the_person):
     "[the_person.possessive_title] pulls some lube out of one of the kitchen drawers."
     mc.name "Wait... you keep lube in the...?"
     the_person.char "Shut up just fuck me before your sister notices!"
-    "You rub some lube on your cock and on [the_person.title]'s ass hole. You grab her by the hips and then rougly pull her back until your cock is buried inside her rump."
+    "You rub some lube on your cock and on [the_person.title]'s ass hole. You grab her by the hips and then roughly pull her back until your cock is buried inside her rump."
 
     call sex_description(the_person, SB_anal_standing , make_table(), 1, private = True) from _call_sex_description_SBR40
 

@@ -250,7 +250,7 @@ label SB_caught_masturbating_crisis_label():
                                     renpy.say("","")
                        the_person.char "Could you just give me a little quickie? I'm all warmed up, you could just stick it in right now..."
                        menu:
-                           "Fuck her" if mc.current_stamina > 0:
+                           "Fuck her":
                                mc.name "Sure, I could go for a quick fuck right now."
                                "You quickly pull your pants down. [the_person.possessive_title] is wiggling her ass back and forth, waiting for you."
                                "You rub the tip of your penis against [the_person.possessive_title]'s cunt. She is already soaking wet."
@@ -269,8 +269,6 @@ label SB_caught_masturbating_crisis_label():
                                the_person.char "Mmmm, thanks [the_person.mc_title]! That was just what I needed..."
                                "You decide to give [the_person.possessive_title] a chance to recover. You make yourself decent, then leave the room, closing the door on the way out."
                                "You finish up your walk and return back to your previous work"
-                           "Fuck her\n{size=22}Requires Stamina{/size} (disabled)" if mc.current_stamina == 0:
-                               pass
 
                            "Just watch":
                                mc.name "I'm afraid I can't right now, but that's okay, I'm definitely enjoying the view."

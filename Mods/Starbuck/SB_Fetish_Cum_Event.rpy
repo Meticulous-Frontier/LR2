@@ -1,7 +1,7 @@
 init 1 python:
     def SB_fetish_cum_requirement():
         if time_of_day == 1:
-            if mc.current_stamina > 0:
+            if mc.energy > 30:
                 if mc.business.is_open_for_business():
                     if mc.is_at_work():
                         return True
@@ -9,7 +9,7 @@ init 1 python:
 
     def SB_fetish_mom_cum_requirement():
         if mc_asleep() and day % 7 is not 4: # not on Friday nights
-            if mc.current_stamina > 0:  #Must have the stamina to handle a long sexy night
+            if mc.energy > 30:  #Must have the stamina to handle a long sexy night
                 return True
         return False
 
@@ -51,7 +51,7 @@ label SB_fetish_cum_label(the_person):
     "[the_person.possessive_title] looks at you with hopeful eyes."
     the_person.char "I could get down under your desk! If anyone walks by they won't even know!"
     menu:
-        "Help yourself" if mc.current_stamina > 0:  #This begins the sex scene
+        "Help yourself":  #This begins the sex scene
             mc.name "I suppose I could help you out with that. Are you sure you don't want to share any of my lunch?"
             the_person.char "Oh! That's okay, [the_person.mc_title]."
             "[the_person.possessive_title] lowers her voice and whispers huskily in your ear."
@@ -80,8 +80,6 @@ label SB_fetish_cum_label(the_person):
             "You should be careful where you cum. It is likely her fetish may develop based on where you cum!"
             ###cum Scene, standing variant###
             call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_SBC10
-            $ the_person.reset_arousal()
-            ###Reset Arousal
             #Try and figure out where you came
             python:
                 for sb_access in the_person.outfit.accessories:
@@ -116,8 +114,6 @@ label SB_fetish_cum_label(the_person):
             the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
             "You wave goodbye to [the_person.possessive_title] and finish eating your lunch."
             $ SB_CALCULATE_RANDOM_EVENT_RATE()
-        "Help Yourself\n{size=22}Requires Stamina{/size} (disabled)" if mc.current_stamina == 0:
-            pass
         "Refuse":
             the_person.char "I'm sorry to hear that..." #TODO finish this
             $ SB_CALCULATE_RANDOM_EVENT_RATE()
@@ -182,7 +178,7 @@ label SB_fetish_cum_dosage_label():
         the_person.char "Oh [the_person.mc_title]! Thank goodness you are here, you are just the man I wanted to see."
         the_person.char "You know how much I need your cum... so I was wondering... want to take a five minute break? I promise I won't be a bother!"
     menu:
-        "Suck me off" if mc.current_stamina > 0:
+        "Suck me off":
             the_person.char "Yes! Oh thank you [the_person.mc_title]!"
             "[the_person.possessive_title] walks over to you and immediately drops down on her knees. You consider asking her to strip down a bit, but she is already too busy stroking your cock."
             $ the_person.draw_person(position = "blowjob")
@@ -198,14 +194,13 @@ label SB_fetish_cum_dosage_label():
             $ the_person.change_happiness(-10)
             the_person.char "Oh!... Okay... Well... hey I understand... Maybe some other time yeah?"
             "[the_person.possessive_title] quickly sulks off. Maybe you should've?"
-        "Too Tired" if mc.current_stamina == 0:
+        "Too Tired" if mc.energy < 30:
             "[the_person.possessive_title] is surprised by your answer."
             $ the_person.change_obedience(-5)
             $ the_person.change_happiness(-5)
             the_person.char "Oh! I'm sorry... I know you work so hard around here. Maybe tomorrow then?"
             "[the_person.possessive_title] quickly sulks off."
     python:
-        the_person.reset_arousal()
         the_person.review_outfit(show_review_message = False)
         renpy.scene("Active")
     return
@@ -283,7 +278,8 @@ label SB_fetish_mom_cum_label():
     the_person.char "Mmm, that feels good [the_person.mc_title]... and your cock... it looks so good... I wanna swallow it whole!"
     "[the_person.possessive_title] begins to please you in return. Taking you into her mouth, she begins sucking you off."
     call fuck_person(the_person, start_position = SB_sixty_nine, start_object = make_bed(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_SBC31
-    if the_person.arousal >= 100:
+    $ the_report = _return
+    if the_report.get("girl orgasms", 0) > 0:
         "[the_person.possessive_title] lays on top of you for a little longer, recovering. She idly licks your rapidly softening cock and nuzzles it for a bit."
     $ the_person.draw_person(position = "stand5")
     "[the_person.possessive_title] stands up."
@@ -295,7 +291,6 @@ label SB_fetish_mom_cum_label():
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ FETISH_CUM_EVENT_INUSE = False
     python:
-        the_person.reset_arousal()
         the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
         mc.location.show_background()
         renpy.scene("Active")
@@ -337,8 +332,6 @@ label SB_fetish_lily_cum_label():
     "[the_person.possessive_title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
     "You should be careful where you cum. It is likely her fetish may develop based on where you cum!"
     call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_SBC40
-    $ the_person.reset_arousal()
-    ###Reset Arousal
     #Try and figure out where you came
     python:
         for sb_access in the_person.outfit.accessories:
@@ -381,7 +374,6 @@ label SB_fetish_lily_cum_label():
     $ FETISH_CUM_EVENT_INUSE = False
 
     python:
-        the_person.reset_arousal()
         the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
         bedroom.show_background()
         renpy.scene("Active")
@@ -431,7 +423,6 @@ label SB_fetish_shower_cum_label():
     "[the_person.possessive_title] gets out. You finish up with your shower, balls empty and ready for the day!"
 
     python:
-        the_person.reset_arousal()
         the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
         mc.location.show_background()
         renpy.scene("Active")
