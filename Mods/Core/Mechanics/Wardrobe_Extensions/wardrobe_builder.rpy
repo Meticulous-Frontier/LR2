@@ -70,7 +70,7 @@ init 5 python:
         preferences["makeup"] = {}
         preferences["makeup"]["accessories"] = [light_eye_shadow, heavy_eye_shadow, blush, lipstick]
         preferences['lingerie'] = {}
-        preferences['lingerie']["upper_body"] = [lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, strapless_bra, lace_bra, thin_bra, corset]
+        preferences['lingerie']["upper_body"] = [lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, strapless_bra, lace_bra, thin_bra, strappy_bra, corset]
         preferences['lingerie']["lower_body"] = [lace_panties, cute_lace_panties, tiny_lace_panties, thin_panties, thong, tiny_g_string, string_panties, strappy_panties]
         preferences['lingerie']["feet"] = [thigh_highs, fishnets, garter_with_fishnets]
         preferences['lingerie']['accessories'] = [lace_choker, wide_choker]
