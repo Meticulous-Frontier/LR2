@@ -331,7 +331,7 @@ screen cmmc():
                 textbutton "Charisma: [mc.charisma]" action SetField(mc,"charisma", mc.charisma + 1) alternate SetField(mc,"charisma", mc.charisma - 1)  style "cheatbutton_style" text_style "cheattext_style" xsize 220
                 textbutton "Intelligence: [mc.int]" action SetField(mc,"int", mc.int + 1) alternate SetField(mc,"int", mc.int - 1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
                 textbutton "Focus: [mc.focus]" action SetField(mc,"focus", mc.focus + 1) alternate SetField(mc,"focus", mc.focus - 1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
-                textbutton "Stamina: [mc.current_stamina]" action [SetField(mc,"max_stamina", mc.max_stamina + 1), SetField(mc,"current_stamina", mc.max_stamina + 1)] alternate [SetField(mc,"max_stamina", mc.max_stamina - 1), SetField(mc,"current_stamina", mc.max_stamina - 1)] style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                textbutton "Energy: [mc.energy]" action [SetField(mc,"max_energy", mc.max_energy + 10.0), SetField(mc,"energy", mc.max_energy + 10.0)] alternate [SetField(mc,"max_energy", mc.max_energy - 10.0), SetField(mc,"energy", mc.max_energy - 10.0)] style "cheatbutton_style" text_style "cheattext_style" xsize 220
 
             vbox: # Work skills
                 textbutton "Work Skills" action NullAction() style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
@@ -370,7 +370,7 @@ screen cmoc():
                     textbutton "Charisma: [the_person.charisma]" action SetField(the_person,"charisma", the_person.charisma + 1) alternate SetField(the_person,"charisma", the_person.charisma - 1)  style "cheatbutton_style" text_style "cheattext_style" xsize 220
                     textbutton "Intelligence: [the_person.int]" action SetField(the_person,"int", the_person.int + 1) alternate SetField(the_person,"int", the_person.int - 1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
                     textbutton "Focus: [the_person.focus]" action SetField(the_person,"focus", the_person.focus + 1) alternate SetField(the_person,"focus", the_person.focus - 1) style "cheatbutton_style" text_style "cheattext_style" xsize 220
-                    #textbutton "Stamina: [the_person.current_stamina]" action [SetField(the_person,"max_stamina", the_person.max_stamina + 1), SetField(the_person,"current_stamina", the_person.max_stamina + 1)] alternate [SetField(the_person,"max_stamina", the_person.max_stamina - 1), SetField(the_person,"current_stamina", the_person.max_stamina - 1)] style "cheatbutton_style" text_style "cheattext_style" xsize 220
+                    textbutton "Energy: [the_person.energy]" action [SetField(the_person,"max_energy", the_person.max_energy + 10.0), SetField(the_person,"energy", the_person.max_energy + 10.0)] alternate [SetField(the_person,"max_energy", the_person.max_energy - 10.0), SetField(the_person,"energy", the_person.max_energy - 10.0)] style "cheatbutton_style" text_style "cheattext_style" xsize 220
 
                 vbox: # the_person work skills
                     textbutton "Work Skills" action NullAction() style "cheatbutton_style" text_style "textbutton_text_style" xsize 220

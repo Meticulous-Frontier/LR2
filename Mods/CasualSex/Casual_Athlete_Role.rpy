@@ -5,7 +5,7 @@
 # Tends to hang out at the Gym
 #  First event: She invites you to work out with her. You work up a sweat together, then sneak into a changing room for sex
 #  Second event: She invites you to compete with her in distance race (10k? something similar). Makes a wager if you win she'll let you "do what you want" with her
-#  Event Requirements: Advances with sluttiness and player stamina. Stamina takes the place of physical fitness during this storyline
+#  Event Requirements: Advances with sluttiness and player energy. Max energy takes the place of physical fitness during this storyline
 #  Girl requirements: Age <25, skinny body type.
 #  Other notes: She calls it off if she "catches feels" (love > 50). Will start warning player at > 40 love
 
@@ -150,10 +150,10 @@ label casual_athlete_get_to_know_label(the_person):
         else:
             the_person.char "I think I'm going to do some squats..."
             "[the_person.title] looks over at you. She gives you a quick appraisal."
-            the_person.char "Hey, have you ever thought about working out a bit more? It does wonders for your stamina..."
+            the_person.char "Hey, have you ever thought about working out a bit more? It does wonders for your energy..."
             "You consider her statement for a moment."
             the_person.char "Anyway, I'm going to get back to my workout. I'll see you around [the_person.title]!"
-            "If you want to get further with her, maybe you should work on increasing your stamina!"
+            "If you want to get further with her, maybe you should work on increasing your energy!"
 
         #Had sex in the lockerroom#
     elif the_person.event_triggers_dict.get("athlete_progress", 0) == 2:
@@ -428,7 +428,7 @@ label casual_athlete_race_crisis_label(the_person):
     "You are tempted to chase after her, but think better of it. This is a long race, and you need to pace yourself."
     $ renpy.scene("Active")
     "As you near the first kilometer, you lose sight of [the_person.title] in the crowd of racers, but you are sure you aren't far behind."
-    "You settle into your pace, determined to let your stamina carry you through the race, no matter what happens. You pass the second kilometer marker"
+    "You settle into your pace, determined to let your energy carry you through the race, no matter what happens. You pass the second kilometer marker"
     "You breathe in, you breathe out. You take pace after pace, determined to race with the best of your abilities."
     "As you approach the third kilometer marker, you can see yourself catching up to a familiar form."
     $ the_person.draw_person(position = "walking_away")

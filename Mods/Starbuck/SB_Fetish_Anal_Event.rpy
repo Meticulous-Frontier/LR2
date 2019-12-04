@@ -113,7 +113,7 @@ label SB_fetish_anal_label(the_person):
             $ the_person.change_obedience(-10)
             $ the_person.change_happiness(-10)
             "[the_person.possessive_title] quickly sulks off."
-        "Too Tired" if mc.energy < 30:     # na stamina for the player to induce fetish
+        "Too Tired" if mc.energy < 30:     # not enough energy for the player to induce fetish
             "[the_person.possessive_title] is surprised by your answer."
             $ the_person.change_obedience(-5)
             $ the_person.change_happiness(-5)

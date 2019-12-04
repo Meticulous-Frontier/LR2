@@ -9,7 +9,7 @@ init 1 python:
 
     def SB_fetish_mom_cum_requirement():
         if mc_asleep() and day % 7 is not 4: # not on Friday nights
-            if mc.energy > 30:  #Must have the stamina to handle a long sexy night
+            if mc.energy > 30:  #Must have the energy to handle a long sexy night
                 return True
         return False
 

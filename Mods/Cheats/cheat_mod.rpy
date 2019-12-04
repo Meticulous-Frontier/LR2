@@ -89,7 +89,7 @@ screen cheat_menu():
         "Age": ["age", "age", 1],
 
         "Arousal": ["arousal", "arousal", 10],
-        "Stamina": ["current_stamina", "current_stamina", 1],
+        "Energy": ["max_energy", "max_energy", 10.0],
 
         "Funds": ["funds", "funds", 10000],
         "Supplies": ["supply_count", "supply_count", 10000],

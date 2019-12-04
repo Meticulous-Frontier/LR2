@@ -1,7 +1,7 @@
 init 1 python:
     def SB_fetish_vaginal_requirement():
         if mc_asleep():
-            if mc.energy > 30:  #Must have the stamina to handle a long sexy night
+            if mc.energy > 30:  #Must have the energy to handle a long sexy night
                 return True
         return False
 
@@ -152,7 +152,7 @@ label SB_fetish_vaginal_label(the_person):
             the_person.char "Oh! I'm sorry... Maybe tomorrow then?"
             "[the_person.possessive_title] quickly sulks off."
             return # EXIT
-        "Too Tired" if mc.energy < 30:     # na stamina for the player to induce fetish
+        "Too Tired" if mc.energy < 30:     # not enough energy for the player to induce fetish
             "[the_person.possessive_title] is surprised by your answer."
             $ the_person.change_obedience(-5)
             $ the_person.change_happiness(-5)

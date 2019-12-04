@@ -952,7 +952,7 @@ label starbuck_sex_store_promo_two_label(the_person):
                 "[the_person.possessive_title] now likes public sex!"
             "You chat with her for a few minutes about the details of setting up a review site, but eventually its time to say goodbye."
             the_person.char "Thanks again for everything [the_person.mc_title]. Don't be a stranger now!"
-        "Refuse":  #Lol really? I guess some people may not have the stamina.
+        "Refuse":  #Lol really? I guess some people may not have the energy.
             mc.name "Sorry, I've had a long day, and I should probably get to work on editing this video."
             "She seems surprised by your answer."
             the_person.char "Oh... right, I'm sure that's going to be a lot of hard work..."
