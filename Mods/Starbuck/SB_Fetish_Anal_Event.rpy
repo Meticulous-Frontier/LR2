@@ -90,8 +90,7 @@ label SB_fetish_anal_label(the_person):
             the_person.char "No! I need you in my ass right now... I need the heat and intensity of you fucking my ass right now!"
             "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]"
             ###Anal Scene, standing variant###
-            call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBA10
-            ###Reset Arousal
+            call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True) from _call_fuck_person_SBA10
             #$ the_person.SB_fetish = "anal sex"
             $ the_person.sexy_opinions["anal sex"] = [FETISH_OPINION_VALUE, True]
             $ the_person.sexy_opinions["anal creampies"] = [FETISH_OPINION_VALUE, True]
@@ -183,7 +182,7 @@ label SB_fetish_anal_staylate_event_label(the_person):
             "[the_person.possessive_title] tries to push back against you and begins to beg."
             the_person.char "No! I need you in my ass right now... I need the heat and intensity of you fucking my ass right now!"
             "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]"
-            call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBA20
+            call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True) from _call_fuck_person_SBA20
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:
                 "[the_person.possessive_title] lays over the desk for a while, recovering from her ass reaming."
@@ -219,7 +218,7 @@ label SB_fetish_anal_staylate_event_label(the_person):
             "[the_person.possessive_title] tries to push back against you and begins to beg."
             the_person.char "No! I need you in my ass right now... I need the heat and intensity of you fucking my ass right now!"
             "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]"
-            call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBA21
+            call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True) from _call_fuck_person_SBA21
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:
                 "[the_person.possessive_title] lays over the desk for a while, recovering from her ass reaming and spanking."
@@ -309,7 +308,7 @@ label SB_fetish_anal_recurring_label():
             "[the_person.possessive_title] tries to push back against you and begins to beg."
             the_person.char "No! I need you in my ass right now... I need the heat and intensity of you fucking my ass right now!"
             "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]"
-            call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBA30
+            call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True) from _call_fuck_person_SBA30
             the_person.char "It was so good. I've been thinking about that all day."
             "[the_person.possessive_title] gets her butt plug. She slowly pushes it back into her ass."
             the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
@@ -510,8 +509,9 @@ label SB_mom_anal_pay_label():
             $ the_person.draw_person(position = "cowgirl")
             the_person.char "Now, just let [the_person.title] take care of you. I'm gonna stick it into my most intimate hole now..."
             "[the_person.possessive_title] goes slow, but steadily slides down, impaling her sphincter on your throbbing erection. She bottoms out and moans loudly."
-            call sex_description(the_person, SB_anal_cowgirl, make_bed(), 1, private= True, girl_in_charge = True) from _call_sex_description_SBA41
-            if the_person.arousal > 100:
+            call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True) from _call_sex_description_SBA41
+            $ the_report = _return
+            if the_report.get("girl orgasms", 0) > 0:
                 the_person.char "Oh god, I came so hard..."
                 "[the_person.possessive_title] collapses onto the bed next to you, exhausted from her anal cowgirl ride."
             else:
@@ -551,8 +551,9 @@ label SB_mom_anal_pay_label():
             "You grab the lube leftover from the night before. You quickly apply another glob to [the_person.title]'s back side. You apply some more to your cock until it is good and slick."
             "You get yourself lined up with your mom's back passage. You slowly begin your anal penetration."
             the_person.char "That's it [the_person.mc_title]! Fuck me good!"
-            call sex_description(the_person, doggy_anal, make_bed(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBA43
-            if the_person.arousal > 100:
+            call fuck_person(the_person, start_position = doggy_anal, start_position = make_bed(), skip_intro = True) from _call_sex_description_SBA43
+            $ the_report = _return
+            if the_report.get("girl orgasms", 0) > 0:
                 "[the_person.title] lays there on the bed, speechless from your anal plundering."
             else:
                 "[the_person.title] lays there on the bed"
@@ -614,14 +615,14 @@ label SB_mom_anal_friday_label():
             $ the_person.draw_person(position = "cowgirl")
             the_person.char "Now, just let [the_person.title] take care of you. I'm gonna stick it into my most intimate hole now..."
             "[the_person.title] goes slow, but steadily slides down, impaling her sphincter on your throbbing erection. She bottoms out and moans loudly."
-            call sex_description(the_person, SB_anal_cowgirl, make_bed(), 1, private= True, girl_in_charge = True) from _call_sex_description_SBA51
-            if the_person.arousal > 100:
+            call fuck_person(the_person, start_position = SB_anal_cowgirl, start_position = make_bed(), skip_intro = True, girl_in_charge = True) from _call_sex_description_SBA51
+            $ the_report = _return
+            if the_report.get("girl orgasms", 0) > 0:
                 the_person.char "Oh god, I came so hard..."
                 "[the_person.title] collapses onto the bed next to you, exhausted from her anal cowgirl ride."
             else:
                 the_person.char "Mmm, that was so good, thank you [the_person.mc_title]..."
                 "[the_person.possessive_title] rolls off you and lays down on the bed next to you."
-            $ the_person.reset_arousal()
 
             "You cuddle up behind her and enjoy the heat of her soft flesh as you slowly drift off to sleep."
 
@@ -648,12 +649,12 @@ label SB_mom_anal_friday_label():
             "You grab the lube leftover from the night before. You quickly apply another glob to [the_person.mc_title]'s back side. You apply some more to your cock until it is good and slick."
             "You get yourself lined up with [the_person.possessive_title]'s back passage. You slowly begin your anal penetration."
             the_person.char "That's it [the_person.mc_title]! Fuck me good!"
-            call sex_description(the_person, doggy_anal, make_bed(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBA53
-            if the_person.arousal > 100:
+            call fuck_person(the_person, start_position = doggy_anal, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBA53
+            $ the_report = _return
+            if the_report.get("girl orgasms", 0) > 0:
                 "[the_person.mc_title] lays there on the bed, speechless from your anal plundering."
             else:
                 "[the_person.mc_title] lays there on the bed"
-            $ the_person.reset_arousal()
             mc.name "Mmm, thanks [the_person.mc_title]. That ass is amazing. Next friday, right?"
             the_person.char "Yes [the_person.mc_title]. But don't feel like you HAVE to wait to take my ass. We can do it whenever you want. I'll be ready!"
             $ mc.business.mandatory_crises_list.append(SB_mom_weekly_anal_action)
@@ -743,11 +744,12 @@ label SB_lily_anal_dp_fetish_label():
     the_person.char "Fuck! Holy hell... [the_person.mc_title] that is intense! I've never felt... I'm so full!!!"
     "Going tantalizingly slow, you pull yourself mostly out, then back into her buttery smooth back door."
     the_person.char "Okay... Go slow... but I'm ready!"
-    call sex_description(the_person, SB_doggy_anal_dildo_dp, make_floor(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBA60
-    if the_person.arousal > 150:
+    call fuck_person(the_person, start_position = SB_doggy_anal_dildo_dp, start_object = make_floor(), skip_intro = True) from _call_sex_description_SBA60
+    $ the_report = _return
+    if the_report.get("girl orgasms", 0) > 1:
         "[the_person.possessive_title] is a sweaty, heaving mess. You know she had multiple orgasms from the intense sensations of the double penetration."
         "She looks back at you in awe."
-    elif the_person.arousal > 100:
+    elif the_report.get("girl orgasms", 0) > 0:
         "[the_person.possessive_title] is laying on the floor, exhausted from the intensity of the double penetration."
         "She looks back at you and smiles"
     the_person.char "[the_person.mc_title]... That felt amazing. I'm not sure though... are we going to able to keep this from mom? I don't think I can stay quiet enough when I'm getting fucked in both holes like that..."
@@ -826,7 +828,7 @@ label SB_starbuck_anal_intro():
     mc.name "Hey [the_person.title]. I'm about to fuck your ass now, just the way you like."
     "Her body shudders from your dirty talk. She wiggles her ass back up against you."
     the_person.char "It's about fucking time! Give it to me good, [the_person.mc_title], you know I can take it!"
-    call sex_description(the_person, doggy_anal, make_bed(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBA70
+    call fuck_person(the_person, start_position = doggy_anal, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBA70
     $ the_person.sexy_opinions["anal sex"] = [FETISH_OPINION_VALUE, True]
     $ the_person.sexy_opinions["anal creampies"] = [FETISH_OPINION_VALUE, True]
     $ the_person.special_role.append(anal_fetish_role)
@@ -978,7 +980,7 @@ label SB_starbuck_anal_swing_demo(the_person):
         "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]"
         the_person.char "Oh fuck! Every time I think about the first time you fucked me on this thing I touch myself... fuck me good [the_person.mc_title]!"
 
-    call sex_description(the_person, SB_anal_swing, SB_make_swing(), 1, private= scene_private, girl_in_charge = False) from _call_sex_description_SBA080
+    call fuck_person(the_person, private = scene_private, start_position = SB_anal_swing, start_object = SB_make_swing(), skip_intro = True) from _call_sex_description_SBA080
 
     #TODO the rest of this scene.
     if scene_private:
@@ -1003,7 +1005,6 @@ label SB_starbuck_anal_swing_demo(the_person):
         the_person.char "Thanks [the_person.mc_title], that was amazing. Alright, you run a long now! Don't worry about me, I'll get cleaned up and back out front in a quick minute."
         "You excuse yourself. You wonder if this will help sell the swing any!"
 
-    $ the_person.reset_arousal()
     call advance_time from _call_advance_SB_Anal_call_time_SBA081
 
     return

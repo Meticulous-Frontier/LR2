@@ -251,24 +251,25 @@ label SB_caught_masturbating_crisis_label():
                        the_person.char "Could you just give me a little quickie? I'm all warmed up, you could just stick it in right now..."
                        menu:
                            "Fuck her":
-                               mc.name "Sure, I could go for a quick fuck right now."
-                               "You quickly pull your pants down. [the_person.possessive_title] is wiggling her ass back and forth, waiting for you."
-                               "You rub the tip of your penis against [the_person.possessive_title]'s cunt. She is already soaking wet."
-                               "When you're ready you push forward, slipping your shaft deep inside of [the_person.possessive_title]. She moans and quivers as you start to pump in and out."
-                               call sex_description(the_person, doggy, make_floor(), round = 1, private = True, girl_in_charge = False) from _call_sex_sb_event_masturbation_010
-                               if the_person.arousal > 130:
-                                   "[the_person.possessive_title] is exhausted. She came so hard, it is all she can do to pant and catch her breath."
-                                   $ the_person.change_happiness(5)
-                                   $ the_person.change_obedience(5)
-                                   $ the_person.change_slut_core(2)
-                                   $ the_person.change_slut_temp(5)
-                               else:
-                                   "[the_person.possessive_title] quickly recovers after you finish."
-                                   $ the_person.change_happiness(3)
-                                   $ the_person.change_slut_temp(3)
-                               the_person.char "Mmmm, thanks [the_person.mc_title]! That was just what I needed..."
-                               "You decide to give [the_person.possessive_title] a chance to recover. You make yourself decent, then leave the room, closing the door on the way out."
-                               "You finish up your walk and return back to your previous work"
+                                mc.name "Sure, I could go for a quick fuck right now."
+                                "You quickly pull your pants down. [the_person.possessive_title] is wiggling her ass back and forth, waiting for you."
+                                "You rub the tip of your penis against [the_person.possessive_title]'s cunt. She is already soaking wet."
+                                "When you're ready you push forward, slipping your shaft deep inside of [the_person.possessive_title]. She moans and quivers as you start to pump in and out."
+                                call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True) from _call_sex_sb_event_masturbation_010
+                                $ the_report = _return
+                                if the_report.get("girl orgasms", 0) > 1:
+                                    "[the_person.possessive_title] is exhausted. She came so hard, it is all she can do to pant and catch her breath."
+                                    $ the_person.change_happiness(5)
+                                    $ the_person.change_obedience(5)
+                                    $ the_person.change_slut_core(2)
+                                    $ the_person.change_slut_temp(5)
+                                else:
+                                    "[the_person.possessive_title] quickly recovers after you finish."
+                                    $ the_person.change_happiness(3)
+                                    $ the_person.change_slut_temp(3)
+                                the_person.char "Mmmm, thanks [the_person.mc_title]! That was just what I needed..."
+                                "You decide to give [the_person.possessive_title] a chance to recover. You make yourself decent, then leave the room, closing the door on the way out."
+                                "You finish up your walk and return back to your previous work"
 
                            "Just watch":
                                mc.name "I'm afraid I can't right now, but that's okay, I'm definitely enjoying the view."

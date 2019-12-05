@@ -73,7 +73,7 @@ label SB_fetish_vaginal_label(the_person):
             "You walk over and stand behind [the_person.possessive_title] as she looks by the window."
             ###Sex Scene, standing variant at window###
             "You put your hands on her hips. She sticks her ass out slightly as you line yourself and then gently push your cock inside her."
-            call fuck_person(the_person, start_position = SB_facing_wall, start_object = make_window(), skip_intro = True, girl_in_charge = False) from _call_fuck_person_SBV11
+            call fuck_person(the_person, start_position = SB_facing_wall, start_object = make_window(), skip_intro = True) from _call_fuck_person_SBV11
 
             "[the_person.possessive_title] walks over to your bed and lays down on her back and takes off any remaining clothing."
             $ the_person.outfit = SB_vaginal_nude_outfit.get_copy()
@@ -89,7 +89,7 @@ label SB_fetish_vaginal_label(the_person):
             the_person.char "That feels so good [the_person.mc_title]... are you about ready for round two?"
             "You roll over on top of [the_person.possessive_title]. She wraps her arms around you as you slowly sink your cock into her moist cunt."
             ###Sex scene, missionary###   ###TODO: consider writing a variant of this because the default intro is going to be confusing###
-            call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True, girl_in_charge = False) from _call_fuck_person_SBV12
+            call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True) from _call_fuck_person_SBV12
 
             the_person.char "Oh god [the_person.mc_title], tonight has been incredible... excuse me for a second."
             $ the_person.draw_person(position = "walking_away")
@@ -133,7 +133,7 @@ label SB_fetish_vaginal_label(the_person):
             the_person.char "Come and get it, [the_person.mc_title]... its yours for the taking!"
             "You get down on your knees and get behind [the_person.possessive_title]. You line yourself up with her soaking wet slit and push yourself in."
             ###Sex Doggy Style###
-            call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True, girl_in_charge = False) from _call_fuck_person_SBV13
+            call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True) from _call_fuck_person_SBV13
 
             "Exhausted from your night with [the_person.possessive_title], you get back up into your bed. [the_person.possessive_title] joins you and you quickly fall asleep, cuddling together."
 
@@ -331,9 +331,7 @@ label SB_fetish_mom_vaginal_label():
     "You moan into her mouth and quickly prepare yourself to penetrate [the_person.possessive_title]."
     $ the_person.sex_skills["Vaginal"] = 6
     ###Sex scene, missionary###   ###TODO: consider writing a variant of this because the default intro is going to be confusing###
-    call sex_description(the_person, missionary , make_bed(), 0, private = True) from _call_sex_description_SBV30
-    ###Reset Arousal
-    $ the_person.reset_arousal()
+    call fuck_person(the_person, start_position = missionary, start_position = make_bed(), skip_intro = True) from _call_sex_description_SBV30
     #$ the_person.SB_fetish = "vaginal sex"
     $ SB_random_fetish_key = get_random_from_list(FETISH_VAGINAL_OPINION_LIST)
     $ the_person.sexy_opinions["vaginal sex"] = [FETISH_OPINION_VALUE, True]
@@ -394,9 +392,7 @@ label SB_fetish_lily_vaginal_label():
     "You moan into her mouth and quickly prepare yourself to penetrate [the_person.possessive_title]."
     $ the_person.sex_skills["Vaginal"] = 6
     ###Sex scene, missionary###   ###TODO: consider writing a variant of this because the default intro is going to be confusing###
-    call sex_description(the_person, doggy , make_bed(), 0, private = True) from _call_sex_description_SBV40
-    ###Reset Arousal
-    $ the_person.reset_arousal()
+    call fuck_person(the_person, start_position = doggy, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBV40
     #$ the_person.SB_fetish = "vaginal sex"
     $ SB_random_fetish_key = get_random_from_list(FETISH_VAGINAL_OPINION_LIST)
     $ the_person.sexy_opinions[SB_random_fetish_key] = [FETISH_OPINION_VALUE, True]
@@ -441,7 +437,7 @@ label SB_cowgirl_wakeup_label(the_person):
     the_person.char "Good morning [the_person.mc_title]... Sorry but when I woke up I noticed you were hard so... I figured you wouldn't mind if I hopped on for a bit..."
     "[the_person.possessive_title] moans during one slow stroke."
     "You decide to lay back and enjoy the ride"
-    call fuck_person(the_person, private = True, start_position = cowgirl, skip_intro = True) from _call_sex_description_SBV50
+    call fuck_person(the_person, start_position = cowgirl, skip_intro = True) from _call_sex_description_SBV50
     mc.name "Oh god what a wakeup. I think I'm gonna go back to sleep for a bit. Thanks!"
     if the_person == mom:
         "[the_person.possessive_title] looks at you and smiles."
@@ -547,20 +543,20 @@ label SB_fetish_vaginal_recurring_label():
         "[the_person.possessive_title] turns away from you and gets down on her hands and knees. She sticks her ass up in the air and starts to wiggle it back and forth."
         the_person.char "Come fuck me, [the_person.mc_title]. Don't worry, I'm ready for you!"
         "You quickly take your position behind her and slowly sink your cock into her greedy cunt."
-        call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBV60
+        call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True) from _call_fuck_person_SBV60
     elif the_person.get_opinion_score("sex standing up") > 2:
         "[the_person.possessive_title] resumes kissing you. You grab her ass with both hands and pick her up. She grinds her crotch into you."
         $ the_person.change_arousal(20)
         the_person.char "I need you so bad, just do me right here, up against the wall!"
         "You quickly pin [the_person.possessive_title] to the wall. She wraps her legs around you and sighs as you sink your cock into her greedy cunt."
-        call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBV61
+        call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True) from _call_fuck_person_SBV61
     elif the_person.get_opinion_score("missionary style sex") > 2:
         "You kiss [the_person.possessive_title] along her neck and ear. She shivers at the sensation and then whispers in your ear."
         $ the_person.change_arousal(20)
         the_person.char "Throw me down on your bed, [the_person.mc_title]. I want to feel your weight on top of me while you fuck my brains out!"
         "You roughly pick up [the_person.possessive_title] and carry her over to the bed. You throw her down and quickly jump on top of her."
         "[the_person.possessive_title] spread her legs wide, giving you easy access. She sighs as you sink your cock into her greedy cunt."
-        call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBV62
+        call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True) from _call_fuck_person_SBV62
     else:
         "[the_person.possessive_title] reaches down and starts to stroke your crotch through your clothes."
         $ the_person.change_arousal(20)
@@ -615,20 +611,20 @@ label SB_fetish_vaginal_lily_recurring_label():
         "[the_person.possessive_title] turns away from you and gets down on her hands and knees. She sticks her ass up in the air and starts to wiggle it back and forth."
         the_person.char "Come fuck me, [the_person.mc_title]. Don't worry, I'm ready for you!"
         "You quickly take your position behind her and slowly sink your cock into her greedy cunt."
-        call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBV70
+        call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True) from _call_fuck_person_SBV70
     elif  the_person.get_opinion_score("sex standing up") > 2:
         "[the_person.possessive_title] resumes kissing you. You grab her ass with both hands and pick her up. She grinds her crotch into you."
         $ the_person.change_arousal(20)
         the_person.char "I need you so bad, just do me right here, up against the wall!"
         "You quickly pin your helpless [the_person.title] to the wall. She wraps her legs around you and sighs as you sink your cock into her greedy cunt."
-        call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBV71
+        call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True) from _call_fuck_person_SBV71
     elif  the_person.get_opinion_score("missionary style sex") > 2:
         "You kiss [the_person.possessive_title] along her neck and ear. She shivers at the sensation and then whispers in your ear."
         $ the_person.change_arousal(20)
         the_person.char "Throw me down on your bed, [the_person.mc_title]. I want to feel your weight on top of me while you fuck my brains out!"
         "You roughly pick up [the_person.possessive_title] and carry her over to the bed. You throw her down and quickly jump on top of her."
         "[the_person.possessive_title] spread her legs wide, giving you easy access. She sighs as you sink your cock into her greedy cunt."
-        call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True, girl_in_charge = False, private = True) from _call_fuck_person_SBV72
+        call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True) from _call_fuck_person_SBV72
     else:
         "[the_person.possessive_title] reaches down and starts to stroke your crotch through your clothes."
         $ the_person.change_arousal(20)

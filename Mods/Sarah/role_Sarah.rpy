@@ -768,7 +768,7 @@ label Sarah_get_drinks_label():
     "You can feel the moist heat coming from between [the_person.title]'s legs as you get close. You feel the head begin to poke against her slit."
     "Her legs wrap tighter behind you, begging you to push into her. You happily give in, parting her labia and sinking slowly into her cunt."
     the_person.char "OH god... that's so good!"
-    call sex_description(the_person, missionary, make_bed(), round = 1, private = True, girl_in_charge = False) from _call_sex_description_sarah_grabbing_drinks_1
+    call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True) from _call_sex_description_sarah_grabbing_drinks_1
     if the_person.event_triggers_dict.get("dating_path", False) == True:
         the_person.char "Oh my god... ever since you came back into my life, I'd been hoping... maybe this was all happening for a reason."
         "You lay down on your side next to her. She scoots next to you and lays her head on your arm."
@@ -964,8 +964,9 @@ label Sarah_tits_reveal_label():
     the_person.char "I can't believe I'm finally doing this. This all feels like a dream!"
     "She looks up at you from her knees. She looks you right in the eyes as she leans forward and slides your cock between her pillowy tits."
     "With both hands holding her breasts together, she slowly starts to move her pillowy flesh up and down your erection."
-    call sex_description(the_person, tit_fuck, make_floor(), round = 1, private = True, girl_in_charge = True) from _call_sex_description_sarah_tits_reveal_1
-    if the_person.arousal > 100: #She finished!
+    call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_sex_description_sarah_tits_reveal_1
+    $ the_report = _return
+    if the_report.get("girl orgasms", 0) > 0:
         the_person.char "Oh my god, I came so hard... I can't believe it. That felt so good! I need to do that again soon!"
         if the_person.get_opinion_score("showing her tits") < 2:
             $ the_person.sexy_opinions["showing her tits"] = [2, True]
@@ -1164,7 +1165,7 @@ label Sarah_weekend_surprise_crisis_label():
                 "She walks right up to you and starts to get down on her knees. You pull your cock out, which is now fully erect."
                 $ scene_manager.update_actor(the_person, position = "blowjob")
                 the_person.char "That's it. Let me just take of this for you..."
-                call sex_description(the_person, tit_fuck, make_floor(), round = 1, private = True, girl_in_charge = True) from _call_sex_description_sarah_weekend_titfuck_1
+                call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_sex_description_sarah_weekend_titfuck_1
                 "[the_person.possessive_title] moans as she rubs your cum into her chest."
                 the_person.char "It feels so sticky on my skin... Mmmm that was nice."
                 "You clear your throat and then respond."

@@ -283,7 +283,7 @@ label casual_athlete_phase_one_label(the_person):
 
         "As you begin to push yourself inside her, she drags her nails across your back."
         the_person.char "Oh fuck, that's good. Give it to me good, [the_person.mc_title]!"
-        call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, girl_in_charge = False, private = True) from _call_casual_sex_mod_CS010
+        call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True) from _call_casual_sex_mod_CS010
         $ the_report = _return
         if the_report.get("girl orgasms", 0) > 0:
             "As you slowly let [the_person.title] down from the wall, you can see her trembling, caused by aftershocks from her orgasm."
@@ -350,7 +350,7 @@ label casual_athlete_phase_one_label(the_person):
 
                 "As you begin to push yourself inside her, she drags her nails across your back."
                 the_person.char "Oh fuck, that's good. Give it to me good, [the_person.mc_title]!"
-                call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, girl_in_charge = False, private = True) from _call_casual_sex_mod_CS011
+                call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True) from _call_casual_sex_mod_CS011
                 $ the_report = _return
                 if the_report.get("girl orgasms", 0) > 0:
                     "As you slowly let [the_person.title] down from the wall, you can see her trembling, caused by aftershocks from her orgasm."
@@ -491,7 +491,7 @@ label casual_athlete_race_crisis_label(the_person):
     "You consider for a second putting on a condom first. Nope, not a fucking chance. In one smooth motion you push yourself into her sopping, needy cunt."
     the_person.char "Yes!!! Oh god, please fuck me good!"
     "You have every intention of doing exactly that."
-    call fuck_person(the_person, private=True, start_position = doggy, start_object = make_bed(), skip_intro = True, girl_in_charge = False, hide_leave = True) from _call_casual_sex_mod_CS030
+    call fuck_person(the_person, private=True, start_position = doggy, start_object = make_bed(), skip_intro = True, hide_leave = True) from _call_casual_sex_mod_CS030
     $ the_person.clear_situational_slut("Lost Bet")
     "When you finish with her, [the_person.possessive_title] lays down on her bed."
     $ the_person.draw_person(position = "missionary")
@@ -556,7 +556,7 @@ label casual_athlete_house_call_label(the_person):
         $ the_person.change_arousal(20)
 
         "[the_person.possessive_title] moans as you strip her down, enjoying your rough treatment of her."
-    call fuck_person(the_person,private = True) from _call_casual_sex_mod_CSA040
+    call fuck_person(the_person) from _call_casual_sex_mod_CSA040
     $ the_report = _return
     "After you finish with her, you get up and start to gather your clothes."
     if the_report.get("girl orgasms", 0) > 0:

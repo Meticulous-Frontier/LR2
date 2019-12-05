@@ -196,14 +196,14 @@ label SB_fetish_vaginal_mom_kitchen_label():
 
         "With her pussy finally exposed you waste no time. You quickly pull your cock out and line it up with her wet slit."
 
-    call sex_description(the_person, SB_doggy_standing , make_table(), 0, private = True) from _call_sex_description_SBR10
+    call fuck_person(the_person, start_position = SB_doggy_standing, start_position = make_table(), skip_intro = True) from _call_sex_description_SBR10
 
-    if the_person.arousal > 100:
+    $ the_report = _return
+    if the_report.get("girl orgasms", 0) > 0:
         "[the_person.possessive_title] is positively glowing. She knows that even while preparing dinner, you may come and fuck her at any time."
     else:
         "[the_person.possessive_title] remains silent. She knows that even while preparing dinner, you may come use her for your pleasure at any time."
 
-    $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False)
     "As [the_person.possessive_title] continues dinner preparation, you take a quick look around. It doesn't look like Lily noticed anything happened between you and [the_person.possessive_title]."
     return
@@ -234,7 +234,7 @@ label SB_fetish_cum_getdosage_label(the_person):
     the_person.char "Oh!? Yes! its my favorite!"
     "[the_person.possessive_title] immediately drops to her knees. She doesn't even seem to care that there could be other people around."
     $ the_person.draw_person(position = "blowjob")
-    call fuck_person(the_person, private = False, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), skip_intro = False, girl_in_charge = True) from _call_fuck_person_SBR30
+    call fuck_person(the_person, private = False, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), girl_in_charge = True) from _call_fuck_person_SBR30
     return
 
 #SBR40
@@ -282,14 +282,14 @@ label SB_fetish_anal_mom_kitchen_label(the_person):
     the_person.char "Shut up just fuck me before your sister notices!"
     "You rub some lube on your cock and on [the_person.title]'s ass hole. You grab her by the hips and then roughly pull her back until your cock is buried inside her rump."
 
-    call sex_description(the_person, SB_anal_standing , make_table(), 1, private = True) from _call_sex_description_SBR40
+    call fuck_person(the_person, start_position = SB_anal_standing, start_position = make_table(), skip_intro = True) from _call_sex_description_SBR40
 
-    if the_person.arousal > 100:
+    $ the_report = _return
+    if the_report.get("girl orgasms", 0) > 0:
         "[the_person.possessive_title] is positively glowing. She knows that even while preparing dinner, you may come and fuck her at any time."
     else:
         "[the_person.possessive_title] remains silent. She knows that even while preparing dinner, you may come use her for your pleasure at any time."
 
-    $ the_person.reset_arousal()
     $ the_person.review_outfit(show_review_message = False)
     "As [the_person.possessive_title] continues dinner preparation, you take a quick look around. It doesn't look like Lily noticed anything happened between you and [the_person.possessive_title]."
     return
@@ -319,11 +319,10 @@ label SB_lily_anal_in_room_label(the_person):
     "[the_person.possessive_title] hands you a bottle of lube and the dildo, then heads over to her bed and gets on her hands and knees with her ass in the air."
     $ the_person.draw_person(position = "doggy")
     "You put the dildo on and lube yourself up. You get behind [the_person.possessive_title] on the bed and start to line yourself up."
-    "You cock sinks easily into her greedy back passage. She is so accustomed to being fucked anally now she accomodates you easily."
+    "You cock sinks easily into her greedy back passage. She is so accustomed to being fucked anally now she accommodates you easily."
     the_person.char "Oh thank god... I was starting to consider jumping you in the middle of the night. You know I need your cock in my ass [the_person.mc_title]..."
     the_person.char "Now fuck me good! I'm ready for it!"
-    call sex_description(the_person, SB_doggy_anal_dildo_dp, make_bed(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBR50
-    $ the_person.reset_arousal()
+    call fuck_person(the_person, start_position = SB_doggy_anal_dildo_dp, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBR50
     the_person.char "Yes... Thanks [the_person.mc_title]... Don't be a stranger now!"
     "[the_person.possessive_title] wiggles her ass back and forth a bit, still lying face down on her bed. You politely excuse yourself."
     $ the_person.review_outfit(show_review_message = False)

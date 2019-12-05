@@ -102,9 +102,7 @@ label SB_working_weekend_crisis_label():
                 $ the_person.draw_person(position = "blowjob")
                 $ the_person.add_situational_slut("seduction_approach",20)
                 $ the_person.add_situational_obedience("seduction_approach", 5)
-                call sex_description(the_person, blowjob, make_floor(), round = 1, private = True, girl_in_charge = True) from _call_sex_description_SB1
-
-                $ the_person.reset_arousal()
+                call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_sex_description_SB1
 
                 $ the_person.clear_situational_slut("seduction_approach")
                 $ the_person.clear_situational_obedience("seduction_approach")
@@ -583,9 +581,9 @@ label SB_working_weekend_crisis_label():
                 "You walk over to [the_person.possessive_title]. She wraps her arms around you as you roughly grab her ass and pick her up. She's grinding herself against you as you carry her over to your desk."
                 "When her ass runs up against the desk, she reaches down and begins unzipping your pants."
                 "She pulls your your dick out and lays back. She lines you up with her pussy and push yourself into her."
-                call sex_description(the_person, missionary, make_desk(), 1, private = True) from _call_sex_description_SB15
-
-                if the_person.arousal > 100:  #She  came
+                call fuck_person(the_person, start_position = missionary, start_object = make_desk(), skip_intro = True) from _call_sex_description_SB15
+                $ the_report = _return
+                if the_report.get("girl orgasms", 0) > 0:
                     "You get up and make yourself presentable again. [the_person.possessive_title] lays there for a while, recovering from her orgasm."
                     $ the_person.change_slut_core(2)
                     $ the_person.change_slut_temp(5)

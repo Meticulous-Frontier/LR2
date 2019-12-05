@@ -259,7 +259,7 @@ label starbuck_vaginal_skillup_label(the_person):
                         the_person.char "Ah... I can't wait! Let's go!"
                         "She quickly takes off some clothes to give you easy access."
                         $ the_person.strip_outfit_to_max_sluttiness(exclude_upper = True)
-                        call fuck_person(the_person, start_position = missionary, start_object = mc.location.get_object_with_name("floor"), skip_intro = True, private = True) from _call_fuck_person_SBS10
+                        call fuck_person(the_person, start_position = missionary, start_object = mc.location.get_object_with_name("floor"), skip_intro = True) from _call_fuck_person_SBS10
                         $ the_report = _return
                         if the_report.get("girl orgasms", 0) > 1:
                             the_person.char "Oh wow... I've never... I came so many times..."
@@ -315,7 +315,7 @@ label starbuck_anal_skillup_label(the_person):
                         the_person.char "Ah... I can't wait! Let's go!"
                         "She quickly takes off some clothes to give you easy access."
                         $ the_person.strip_outfit_to_max_sluttiness(exclude_upper = True)
-                        call fuck_person(the_person, start_position = SB_anal_standing, start_object = mc.location.get_object_with_name("counter"), skip_intro = True, private = True) from _call_fuck_person_SBS20
+                        call fuck_person(the_person, start_position = SB_anal_standing, start_object = mc.location.get_object_with_name("counter"), skip_intro = True) from _call_fuck_person_SBS20
                         $ the_report = _return
                         if the_report.get("girl orgasms", 0) > 1:
                             the_person.char "Oh wow... I've never... I came so many times!"
@@ -371,7 +371,7 @@ label starbuck_oral_skillup_label(the_person):
                         the_person.char "Wow, that was interesting!... you ready to give it a try, [the_person.mc_title]?"
                         "She quickly takes off some clothes to give you easy access."
                         $ the_person.strip_outfit_to_max_sluttiness(exclude_upper = True)
-                        call fuck_person(the_person, start_position = cunnilingus, start_object = mc.location.get_object_with_name("floor"), skip_intro = True, private = True) from _call_fuck_person_SBS30
+                        call fuck_person(the_person, start_position = cunnilingus, start_object = mc.location.get_object_with_name("floor"), skip_intro = True) from _call_fuck_person_SBS30
                         $ the_report = _return
                         if the_report.get("girl orgasms", 0) > 1:
                             the_person.char "Oh my god, I came so many times... did you make me squirt?"
@@ -425,7 +425,7 @@ label starbuck_foreplay_skillup_label(the_person):
                         the_person.char "Ah... I can't wait! Let's go!"
                         "She quickly takes off some clothes to give you easy access."
                         $ the_person.strip_outfit_to_max_sluttiness(exclude_upper = True)
-                        call fuck_person(the_person, start_position = standing_grope, skip_intro = True, private = True) from _call_fuck_person_SBS40
+                        call fuck_person(the_person, start_position = standing_grope, skip_intro = True) from _call_fuck_person_SBS40
                         $ the_report = _return
                         if the_report.get("girl orgasms", 0) > 1:
                             the_person.char "Oh wow... I've never... I came so many times..."
@@ -925,7 +925,7 @@ label starbuck_sex_store_promo_two_label(the_person):
                 "[the_person.possessive_title] runs her hands along your sides as you get into position."
                 "She grabs your cock with your hand and points it at her soaked slit. With one smooth motion you thrust into her. She's so wet you glide in with no resistance."
             "Wasting no time, you begin thrusting into her. Her pussy feels amazing wrapped around you."
-            call fuck_person(the_person, start_position = missionary, start_object = make_floor(), skip_intro = True, girl_in_charge = False) from _call_fuck_person_SBS80
+            call fuck_person(the_person, start_position = missionary, start_object = make_floor(), skip_intro = True) from _call_fuck_person_SBS80
             "[the_person.possessive_title] lays there in a daze. Between the toy and your cock, she had multiple orgasms."
             if (the_person.love > 50):
                 "As your start getting dressed again, out of the corner of your eye you see [the_person.possessive_title] begin to shudder."
@@ -1252,7 +1252,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
     the_person.char "Oh my god! I'm so full... Its so good [the_person.mc_title]! This thing is amazing..."
     "With your hands on her hips, you slowly start to fuck her."
-    call sex_description(the_person, SB_doggy_anal_dildo_dp, make_floor(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBS100
+    call fuck_person(the_person, start_position = SB_doggy_anal_dildo_dp, start_object = make_floor(), skip_intro = True) from _call_sex_description_SBS100
     "[the_person.possessive_title] is in a sex induced daze after you finish. She struggles to make a coherent end to the video."
     the_person.char "So that's... when you use a strap on... holy fuck people just get one."
     "You get up and head over to the camera and stop the recording."
@@ -1352,7 +1352,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     "You give her a modest thrust. The swing bounces forward for a second, but gravity soon causes her ass to pendulum back and smack against your hip."
     "The feeling is exquisite. You grab her hips and get ready to fuck [the_person.possessive_title]'s brains out."
     #Call sex scene#
-    call sex_description(the_person, SB_anal_swing, SB_make_swing(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBS110
+    call fuck_person(the_person, start_position = SB_anal_swing, start_object = SB_make_swing(), skip_intro = True) from _call_sex_description_SBS110
 
     "Turning off the video camera, you turn to [the_person.possessive_title]."
     $ the_person.shop_investment_rate = 6.0
@@ -1456,8 +1456,9 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         the_person.char "Oh god, [the_person.mc_title], its so big! Okay, here we go..."
         "[the_person.possessive_title] goes slow, but steadily slides down, impaling her sphincter on your throbbing erection. She bottoms out and moans loudly."
         #Fuck her#
-        call sex_description(the_person, SB_anal_cowgirl, make_bed(), 1, private= True, girl_in_charge = True) from _call_sex_description_SBS120
-        if the_person.arousal > 100:
+        call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True) from _call_sex_description_SBS120
+        $ the_report = _return
+        if the_report.get("girl orgasms", 0) > 0:
             the_person.char "Oh god, I came so hard..."
             "[the_person.possessive_title] collapses onto the bed next to you, exhausted from her anal cowgirl ride."
         else:
@@ -1545,7 +1546,6 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
                     call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_SBS122
                     "You spend a moment recovering while [the_person.title] rinses your cum off her body."
 
-
                 else:                           #She gets Feisty
                     "[the_person.title] chuckles and pushes her ass back against you."
                     the_person.char "Mmm, I have a better idea..."
@@ -1555,7 +1555,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
                     the_person.char "Oh my god..."
                     "[the_person.possessive_title] sighs as you bottom out."
                     "She wiggles her ass back and forth a few times, enjoying the familiar feel of fullness you give her when you fuck her."
-                    call sex_description(the_person, SB_doggy_standing, make_wall(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBS123
+                    call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_wall(), skip_intro = True) from _call_sex_description_SBS123
                     "You spend a moment recovering while [the_person.title] rinses herself off."
                 #TODO set outfit to regular nude again. She washed the cum off!
                 $ SB_nude_outfit = Outfit("Nude")
@@ -1594,7 +1594,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
                 "[the_person.possessive_title]'s pussy is already dripping with arousal. You line yourself up with her ass, while she reaches down and lines the dildo up with her pussy."
                 "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
                 the_person.char "Oh my god! I'm so full... Its so good [the_person.mc_title]! Fuck me like you paid for this! Like I'm just a whore!"
-                call sex_description(the_person, SB_doggy_anal_dildo_dp, make_bed(), 1, private= True, girl_in_charge = False) from _call_sex_description_SBS124
+                call fuck_person(the_person, start_position = SB_doggy_anal_dildo_dp, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBS124
                 "Finished with your anal plundering, you let yourself collapse onto [the_person.title]'s bed."
                 "She cuddles up next to you."
                 $ the_person.draw_person(position = "missionary", emotion = "happy")
@@ -1623,9 +1623,8 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         "You moan in appreciation at the wonderful wake up call."
         the_person.char "Mmm... Good morning [the_person.mc_title]... When I woke up this morning you were poking me pretty good... I figured you wouldn't mind if I took it for a quick ride."
         "You murmur your acceptance. Her mesmerizing tits are bouncing up and down right in front of you. You take them both in your palms and give them a good squeeze."
-        call sex_description(the_person, cowgirl , make_bed(), 1, private = True, girl_in_charge = True) from _call_sex_description_SBS125
+        call fuck_person(the_person, start_position = cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True) from _call_sex_description_SBS125
         the_person.char "Mmmff. So good... I wish I could call in sick and we could fuck all day... but I need to get to the shop."
-        $ the_person.reset_arousal()
         $ the_person.draw_person(position = "stand3")
         the_person.char "I'm gonna go hop in the shower. Feel free to let yourself out! Thanks for spending the night [the_person.mc_title]!"
         "[the_person.title] slowly gets up and heads to the bathroom. You grab your stuff and head out."
