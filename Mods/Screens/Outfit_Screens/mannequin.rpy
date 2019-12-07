@@ -12,7 +12,7 @@ init 2 python:
         displayable_list = [] # We will be building up a list of displayables passed to us by the various objects on the person (their body, clothing, etc.)
 
         displayable_list.append(mannequin.body_images.generate_item_displayable(mannequin.body_type,mannequin.tits,position, lighting)) #Add the body displayable
-        displayable_list.append(mannequin.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier)) #Get the face displayable
+        displayable_list.append(mannequin.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier, eye_colour = mannequin.eyes[1], lighting = lighting)) #Get the face displayable
         displayable_list.append(mannequin.pubes_style.generate_item_displayable(mannequin.body_type,mannequin.tits, position, lighting)) #Add in her pubes. #TODO: See if we need to mask this with her body profile for particularly bush-y bushes to prevent clothing overflow.
 
         size_render = renpy.render(displayable_list[0], 10, 10, 0, 0) #We need a render object to check the actual size of the body displayable so we can build our composite accordingly.
