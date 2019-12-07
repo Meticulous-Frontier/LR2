@@ -20,8 +20,8 @@ init 2 python:
         x_size = __builtin__.int(the_size[0])
         y_size = __builtin__.int(the_size[1])
 
-        displayable_list.extend(outfit.generate_draw_list(mannequin,position,emotion,special_modifier)) #Get the displayables for everything we wear. Note that extnsions do not return anything because they have nothing to show.
-        displayable_list.append(mannequin.hair_style.generate_item_displayable("standard_body",mannequin.tits,position)) #Get hair
+        displayable_list.extend(outfit.generate_draw_list(mannequin,position,emotion,special_modifier, lighting = lighting)) #Get the displayables for everything we wear. Note that extnsions do not return anything because they have nothing to show.
+        displayable_list.append(mannequin.hair_style.generate_item_displayable("standard_body",mannequin.tits,position, lighting = lighting)) #Get hair
 
         #NOTE: default return for the_size is floats, even though it is in exact pixels. Use int here otherwise positional modifiers like xanchor and yalign do not work (no displayable is shown at all!)
         composite_list = [(x_size,y_size)] #Now we build a list of our parameters, done like this so they are arbitrarily long
