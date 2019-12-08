@@ -603,8 +603,9 @@ init -1:
                 scene_manager.draw_scene_without(self)
 
             bottom_displayable.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier, eye_colour = self.eyes[1], lighting = lighting)) #Get the face displayable, also always under clothing.
-
             bottom_displayable.append(self.body_images.generate_item_displayable(self.body_type,self.tits,position, lighting = lighting))  #Body is always under clothing
+            bottom_displayable.append(self.pubes_style.generate_item_displayable(self.body_type,self.tits, position, lighting = lighting)) #Pubes are also always under clothing and can't be removed.
+
             size_render = renpy.render(bottom_displayable[1], 10, 10, 0, 0) #We need a render object to check the actual size of the body displayable so we can build our composite accordingly.
             the_size = size_render.get_size()
             x_size = __builtin__.int(the_size[0])
@@ -635,10 +636,10 @@ init -1:
             final_top = Composite(*composite_top_params)
 
             renpy.show("Bottom Composite", at_list=[character_placement, scale_person(self.height)], layer="Active", what=final_bottom, tag=self.name+"Bottom")
-            renpy.show("Top Composite", at_list=[character_placement, scale_person(self.height)], layer="Active", what=final_top, tag=self.name+"Top")
             if split_clothing: #Only show this if we actually had something returned to us.
                 renpy.show("Removed Item", at_list=[character_placement, scale_person(self.height), clothing_fade], layer="Active", what=split_clothing, tag=self.name+"Middle")
                 self.outfit.remove_clothing(the_clothing)
+            renpy.show("Top Composite", at_list=[character_placement, scale_person(self.height)], layer="Active", what=final_top, tag=self.name+"Top")
 
         Person.draw_animated_removal = draw_animated_removal_enhanced
 
