@@ -32,6 +32,7 @@ init 5 python:
 
 
 label small_talk_person_enhanced(person):
+    $ mc.change_energy(-15)
     $ smalltalk_opinion = person.get_opinion_score("small talk")
     mc.name "So [person.title], what's been on your mind recently?"
     $ person.discover_opinion("small talk")
@@ -126,5 +127,4 @@ label small_talk_person_enhanced(person):
             "You don't feel like you've learned much about her, but least she seems to have enjoyed talking."
 
     $ person.apply_serum_study()
-    call advance_time from _call_advance_time_small_talk_enhanced
     return
