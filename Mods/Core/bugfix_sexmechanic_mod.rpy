@@ -184,39 +184,39 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
         elif round_choice == "Leave":
             $ finished = True # Unless something stops us the encounter is over and we can end
-            if renpy.random.randint(0,the_person.arousal) + 50 > the_person.obedience: #She's disobedient and will take control of the encounter. disobed disobd
-                $ the_person.call_dialogue("sex_take_control")
-                $ the_person.change_obedience(-3)
-                $ girl_in_charge = True
-                $ finished = False
-                $ position_choice = None #She picks the position now, because she has her own list of possibilities
 
-            elif (the_person.arousal > the_person.max_arousal - 30) and (report_log.get("girl orgasms", 0) == 0) and report_log.get("beg finish", 0) == 0: #Within 30 of orgasming and she hasn't cum yet
-                # They're close to their orgasm and beg you to help them finish.
-                $ the_person.call_dialogue("sex_beg_finish")
-                menu:
-                    "Give her what she wants.":
-                        $ the_person.change_obedience(2)
-                        if "beg finished" in report_log:
-                            $ report_log["beg finish"] += 1
-                        $ finished = False
+            # only consider continue when the girl and the mc have enough energy
+            if the_person.energy > 25 and mc.energy > 25:
+                if renpy.random.randint(0,the_person.arousal) + 50 > the_person.obedience: #She's disobedient and will take control of the encounter. disobed disobd
+                    $ the_person.call_dialogue("sex_take_control")
+                    $ the_person.change_obedience(-3)
+                    $ girl_in_charge = True
+                    $ finished = False
+                    $ position_choice = None #She picks the position now, because she has her own list of possibilities
 
-                    "Stop and leave.":
-                        $ the_person.call_dialogue("sex_end_early")
+                elif (the_person.arousal > the_person.max_arousal - 30) and (report_log.get("girl orgasms", 0) == 0) and report_log.get("beg finish", 0) == 0: #Within 30 of orgasming and she hasn't cum yet
+                    # They're close to their orgasm and beg you to help them finish.
+                    $ the_person.call_dialogue("sex_beg_finish")
+                    menu:
+                        "Give her what she wants.":
+                            $ the_person.change_obedience(2)
+                            if "beg finished" in report_log:
+                                $ report_log["beg finish"] += 1
+                            $ finished = False
 
-            elif report_log.get("beg finish", 0) > 0 and report_log.get("girl orgasms", 0) == 0: #You promised to make her cum but didn't
-                $ the_person.change_obedience(-5)
-                $ the_person.change_happiness(-10)
-                $ the_person.change_love(-3)
-                the_person.char "But you promised..."
-                #TODO: Add some personality specific dialgoue for this
+                        "Stop and leave.":
+                            $ the_person.call_dialogue("sex_end_early")
 
-            else: # You end the encounter and nothing special happens.
-                #TODO: Add some personality specfic dialogue
-                pass
+                elif report_log.get("beg finish", 0) > 0 and report_log.get("girl orgasms", 0) == 0: #You promised to make her cum but didn't
+                    $ the_person.change_obedience(-5)
+                    $ the_person.change_happiness(-10)
+                    $ the_person.change_love(-3)
+                    the_person.char "But you promised..."
+                    #TODO: Add some personality specific dialgoue for this
 
-
-
+                else: # You end the encounter and nothing special happens.
+                    #TODO: Add some personality specfic dialogue
+                    pass
 
         elif round_choice == "Girl Leave":
             $ finished = True
