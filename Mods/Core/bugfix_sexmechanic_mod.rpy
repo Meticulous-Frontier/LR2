@@ -1,8 +1,10 @@
 # Fix for sex mechanic for people who don't have the bugfix branch installed
+# Enhancement for pick object (don't show list when only one object can be selected (auto-select it))
 
 init 5 python:
     config.label_overrides["fuck_person"] = "fuck_person_bugfix"
     config.label_overrides["check_position_willingness"] = "check_position_willingness_bugfix"
+    config.label_overrides["pick_object"] = "pick_object_enhanced"
 
 label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
@@ -286,3 +288,31 @@ label check_position_willingness_bugfix(the_person, the_position, skip_dialog = 
         $ willing = _return
 
     return willing
+
+label pick_object_enhanced(the_person, the_position, forced_object = None):
+    if the_position is None:
+        return None
+
+    $ object_option_list = []
+    if the_position is None:
+        $ the_person.clear_situational_slut("sex_object")
+        $ the_person.clear_situational_obedience("sex_object")
+        return None
+
+    python:
+        if forced_object:
+            picked_object = forced_object
+        else:
+            for object in mc.location.objects:
+                if object.has_trait(position_choice.requires_location):
+                    object_option_list.append([object.get_formatted_name(),object]) #Displays a list of objects in the room related to that position and their appropriate bonuses/penalties
+
+            # if we have only one object to pick for position, select it automatically (saves the user for selecting the only obvious choice)
+            if len(object_option_list) == 1:
+                picked_object = object_option_list[0][1]
+            else:
+                picked_object = renpy.display_menu(object_option_list,True,"Choice")
+
+    $ the_person.add_situational_slut("sex_object", picked_object.sluttiness_modifier, the_position.verbing + " on a " + picked_object.name)
+    $ the_person.add_situational_obedience("sex_object",picked_object.obedience_modifier, the_position.verbing + " on a " + picked_object.name)
+    return picked_object
