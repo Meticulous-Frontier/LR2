@@ -39,7 +39,7 @@ init 2:
                 spacing 100
                 vbox:
                     if person.title:
-                        text person.title style "menu_text_style" size 40
+                        text person.title style "menu_text_style" size 30
                     else:
                         text "???" style "menu_text_style" font person.char.what_args["font"] color person.char.what_args["color"] size 40
                     
@@ -52,7 +52,7 @@ init 2:
 
                 vbox:
                     if person.arousal > 0:
-                        textbutton "Arousal: [person.arousal]% (+" + get_red_heart(__builtin__.int(person.arousal/4)) + ")":
+                        textbutton "Arousal: [the_person.arousal]/[the_person.max_arousal] (+" + get_red_heart(__builtin__.int(person.arousal/4)) + ")":
                             ysize 28
                             text_style "menu_text_style"
                             tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will instantly turn temporary sluttiness into core sluttiness, as well as make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider."
@@ -66,6 +66,13 @@ init 2:
                             action NullAction()
                             sensitive True
 
+                    textbutton "Energy: [person.energy]/[person.max_energy] {image=gui/extra_images/energy_token.png}":
+                        ysize 28
+                        text_style "menu_text_style"
+                        tooltip "Energy is spent while having sex, with more energy spent on positions that give the man more pleasure. Some energy comes back each turn, and a lot of energy comes back over night."
+                        action NullAction()
+                        sensitive True
+
                     textbutton "Happiness: [person.happiness]":
                         ysize 28
                         text_style "menu_text_style"
@@ -73,12 +80,12 @@ init 2:
                         action NullAction()
                         sensitive True
 
-                    textbutton "Suggestibility: [person.suggestibility]%":
-                        ysize 28
-                        text_style "menu_text_style"
-                        tooltip "How likely this character is to increase her core sluttiness. Every time chunk there is a chance to change 1 point of temporary sluttiness (" + get_red_heart(5) + ") into core sluttiness (" + get_gold_heart(5) + ") as long as temporary sluttiness is higher."
-                        action NullAction()
-                        sensitive True
+                    # textbutton "Suggestibility: [the_person.suggestibility]%":
+                    #     ysize 24
+                    #     text_style "menu_text_style"
+                    #     tooltip "How likely this character is to increase her core sluttiness. Every time chunk there is a chance to change 1 point of temporary sluttiness (" + get_red_heart(5) + ") into core sluttiness (" + get_gold_heart(5) + ") as long as temporary sluttiness is higher."
+                    #     action NullAction()
+                    #     sensitive True
 
                     textbutton "Sluttiness: " + get_heart_image_list(person):
                         ysize 28
@@ -103,7 +110,16 @@ init 2:
 
 
                 vbox:
-                    textbutton "Detailed Information" action Show("person_info_detailed",the_person=person) style "textbutton_style" text_style "textbutton_text_style"
+                    hbox:
+                        textbutton "Detailed Information" action Show("person_info_detailed",the_person=person) style "textbutton_style" text_style "textbutton_text_style"
+                        if person.suggestibility > 0:
+                            textbutton "{image=serum_vial} +[the_person.suggestibility]%":
+                                yoffset 6
+                                ysize 24
+                                text_style "menu_text_style"
+                                tooltip "How likely this character is to increase her core sluttiness. Every time chunk there is a chance to change 1 point of temporary sluttiness (" + get_red_heart(5) + ") into core sluttiness (" + get_gold_heart(5) + ") as long as temporary sluttiness is higher."
+                                action NullAction()
+                                sensitive True
 
                     textbutton "Age: [person.age]":
                         ysize 28
