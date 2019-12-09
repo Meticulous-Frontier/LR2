@@ -5,6 +5,7 @@ init 5 python:
     config.label_overrides["fuck_person"] = "fuck_person_bugfix"
     config.label_overrides["check_position_willingness"] = "check_position_willingness_bugfix"
     config.label_overrides["pick_object"] = "pick_object_enhanced"
+    config.label_overrides["girl_choose_position"] = "girl_choose_position_enhanced"
 
 label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
@@ -186,7 +187,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             $ finished = True # Unless something stops us the encounter is over and we can end
 
             # only consider continue when the girl and the mc have enough energy
-            if the_person.energy > 25 and mc.energy > 25:
+            if the_person.energy > 20 and mc.energy > 20:
                 if renpy.random.randint(0,the_person.arousal) + 50 > the_person.obedience: #She's disobedient and will take control of the encounter. disobed disobd
                     $ the_person.call_dialogue("sex_take_control")
                     $ the_person.change_obedience(-3)
@@ -316,3 +317,13 @@ label pick_object_enhanced(the_person, the_position, forced_object = None):
     $ the_person.add_situational_slut("sex_object", picked_object.sluttiness_modifier, the_position.verbing + " on a " + picked_object.name)
     $ the_person.add_situational_obedience("sex_object",picked_object.obedience_modifier, the_position.verbing + " on a " + picked_object.name)
     return picked_object
+
+label girl_choose_position_enhanced(the_person):
+    $ position_option_list = []
+    python:
+        for position in list_of_girl_positions:
+            if mc.location.has_object_with_trait(position.requires_location):
+                if position.her_position_willingness_check(the_person):
+                    position_option_list.append(position)
+        picked_position = get_random_from_list(position_option_list)
+    return picked_position
