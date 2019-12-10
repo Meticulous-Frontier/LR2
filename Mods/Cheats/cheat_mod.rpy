@@ -79,7 +79,7 @@ screen cheat_menu():
     default name_select = False #Determines if the name button is currently taking an input or not
 
     default editable_characters = [mc, the_person, mc.business] # Add unique characters to this list if you want to customize them often
-    default editing_target = None
+    default editing_target = the_person # default open the_person cheat menu
 
     # Lists for common skill attributes.
     default main_stats = { #The arrays are utilized in this order: key = "DisplayName", [0 = hasattr check], [1 = variable / key], [2 = amount to changed] NOTE: Fields are duplicated incase things change later, less likely that the buttons will need to be re formated
