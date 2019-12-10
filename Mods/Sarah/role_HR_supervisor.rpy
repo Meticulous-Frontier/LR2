@@ -224,7 +224,7 @@ label HR_director_mod_init():
             menu_tooltip = "Changes how often employees ask for employment for their daughters")
         HR_director_meeting_on_demand_action = Action("Meet with employee{image=gui/heart/Time_Advance.png}", HR_director_meeting_on_demand_requirement, "HR_director_meeting_on_demand_label",
             menu_tooltip = "Arrange a meeting with an employee")
-        HR_director_role = Role("HR Director", [HR_director_meeting_on_demand_action, HR_director_coffee_tier_1_action, HR_director_coffee_tier_2_action, HR_director_mind_control_action, HR_director_change_relative_recruitment_action, HR_director_change_relative_recruitment_action]) #Actions go in block
+        HR_director_role = Role("HR Director", [HR_director_meeting_on_demand_action, HR_director_coffee_tier_1_action, HR_director_coffee_tier_2_action, HR_director_mind_control_action, HR_director_change_relative_recruitment_action]) #Actions go in block
     return
 
 
