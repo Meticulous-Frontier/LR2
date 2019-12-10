@@ -350,6 +350,8 @@ label HR_director_first_monday_label(the_person):
     return
 
 label HR_director_monday_meeting_label(the_person):
+    $ scene_manager = Scene()
+
     if mc.location != office:
         "You hurry to your office for your weekly meeting with your HR director [the_person.title]."
         $ mc.change_location(office)
@@ -405,6 +407,7 @@ label HR_director_monday_meeting_label(the_person):
     call HR_director_calculate_eff(the_person) from HR_director_monday_meeting_1
     "She hands you a few documents. You check them over."
     mc.name "Looks good. Go ahead and continue with those plans."
+    $ scene_manager.clear_scene()
 
     $ (HR_employee_list, HR_tier_talk) = build_HR_review_list(the_person, business_HR_coffee_tier)
     if len(HR_employee_list) == 0:
