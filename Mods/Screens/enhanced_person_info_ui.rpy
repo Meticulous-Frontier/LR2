@@ -52,7 +52,7 @@ init 2:
 
                 vbox:
                     if person.arousal > 0:
-                        textbutton "Arousal: [the_person.arousal]/[the_person.max_arousal] (+" + get_red_heart(__builtin__.int(person.arousal/4)) + ")":
+                        textbutton "Arousal: [person.arousal]/[person.max_arousal] (+" + get_red_heart(__builtin__.int(person.arousal/4)) + ")":
                             ysize 28
                             text_style "menu_text_style"
                             tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will instantly turn temporary sluttiness into core sluttiness, as well as make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider."
