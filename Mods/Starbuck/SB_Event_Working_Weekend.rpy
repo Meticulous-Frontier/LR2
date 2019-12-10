@@ -102,7 +102,7 @@ label SB_working_weekend_crisis_label():
                 $ the_person.draw_person(position = "blowjob")
                 $ the_person.add_situational_slut("seduction_approach",20)
                 $ the_person.add_situational_obedience("seduction_approach", 5)
-                call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_sex_description_SB1
+                call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_SB1
 
                 $ the_person.clear_situational_slut("seduction_approach")
                 $ the_person.clear_situational_obedience("seduction_approach")

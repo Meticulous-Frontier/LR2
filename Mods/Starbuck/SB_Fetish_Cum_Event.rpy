@@ -79,7 +79,7 @@ label SB_fetish_cum_label(the_person):
             "[the_person.possessive_title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
             "You should be careful where you cum. It is likely her fetish may develop based on where you cum!"
             ###cum Scene, standing variant###
-            call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_SBC10
+            call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC10
             #Try and figure out where you came
             python:
                 for sb_access in the_person.outfit.accessories:
@@ -183,7 +183,7 @@ label SB_fetish_cum_dosage_label():
             "[the_person.possessive_title] walks over to you and immediately drops down on her knees. You consider asking her to strip down a bit, but she is already too busy stroking your cock."
             $ the_person.draw_person(position = "blowjob")
             ###cum Scene, standing variant###
-            call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), girl_in_charge = True) from _call_fuck_person_SBC20
+            call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC20
             the_person.char "Oh my god, thank you [the_person.mc_title]... I wish I had time make you cum again... but I know you're a busy a man..."
             "[the_person.possessive_title] starts to get up. Her hunger for cum satisfied for now."
             the_person.char "Thanks again, [the_person.mc_title]. Don't hesitate to ask if you ever need to be... you know... serviced."
@@ -277,7 +277,7 @@ label SB_fetish_mom_cum_label():
     "[the_person.possessive_title] repositions and swings a leg over your body, presenting her pussy right in front of your face. You waste no time and start to flick your tongue around her slit."
     the_person.char "Mmm, that feels good [the_person.mc_title]... and your cock... it looks so good... I wanna swallow it whole!"
     "[the_person.possessive_title] begins to please you in return. Taking you into her mouth, she begins sucking you off."
-    call fuck_person(the_person, start_position = SB_sixty_nine, start_object = make_bed(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_SBC31
+    call fuck_person(the_person, start_position = SB_sixty_nine, start_object = make_bed(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC31
     $ the_report = _return
     if the_report.get("girl orgasms", 0) > 0:
         "[the_person.possessive_title] lays on top of you for a little longer, recovering. She idly licks your rapidly softening cock and nuzzles it for a bit."
@@ -331,7 +331,7 @@ label SB_fetish_lily_cum_label():
     "[the_person.possessive_title] opens her mouth and starts to suck you off. You feel her soft, velvet mouth wrapped around you."
     "[the_person.possessive_title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
     "You should be careful where you cum. It is likely her fetish may develop based on where you cum!"
-    call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_SBC40
+    call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC40
     #Try and figure out where you came
     python:
         for sb_access in the_person.outfit.accessories:
@@ -415,7 +415,7 @@ label SB_fetish_shower_cum_label():
     "[the_person.possessive_title] gets down on her knees."
     the_person.char "I'm sorry, I know I shouldn't approach you like this... but I can't help myself this morning! Give me your cum please!"
     "[the_person.possessive_title] looks up at your from her knees. She looks you right in the eyes as she leans forward and slides her lips over the tip of your dick."
-    call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_SBC50
+    call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC50
     the_person.char "Oh my god, thank you [the_person.mc_title]. I needed that so bad."
     "[the_person.possessive_title] stands up. Her hunger for cum satisfied for now."
     $ the_person.draw_person(position = "stand4")

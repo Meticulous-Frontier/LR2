@@ -105,7 +105,7 @@ label business_meeting_seduction(person):
         $ person.change_arousal(25)
         menu:
             "Continue":
-                call fuck_person(person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_business_meeting
+                call fuck_person(person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_business_meeting
             "Not now":
                 mc.name "I'm sorry [person.title], i've got another meeting to attend."
                 $ person.draw_person(position = "stand4", emotion="sad")

@@ -14,8 +14,10 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
         $ report_log["positions_used"] = [] #This is a list, not an int.
 
     $ finished = False #When True we exit the main loop (or never enter it, if we can't find anything to do)
-    $ position_choice = None
-    $ object_choice = None
+    $ position_choice = start_position # initialize with start_position (in case girl is in charge or position is locked)
+    $ object_choice = start_object # initialize with start_object (in case girl is in charge or position is locked)
+
+    # $ renpy.say("", "Fuck Person Enhanced => start position: " + ("None" if start_position is None else start_position.name) + " , object: " + ("None" if start_object is None else start_object.name))
 
     #Family situational modifiers
     if the_person.has_family_taboo(): #Check if any of the roles the person has belong to the list of family roles.
@@ -70,7 +72,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
         if girl_in_charge:
             # The girls decisions set round_choice here.
             if position_choice is None:
-                call girl_choose_position(the_person) from _call_girl_choose_position_bugfix #Get her to pick a position based on what's available #TODO: This function
+                call girl_choose_position_enhanced(the_person) from _call_girl_choose_position_bugfix #Get her to pick a position based on what's available #TODO: This function
                 $ position_choice = _return #Can be none, if no option was available for her to take.
             if position_choice is None: #There's no position we can take
                 "[the_person.title] can't think of anything more to do with you."
@@ -128,7 +130,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 else:
                     $ position_choice = start_position
 
-                call pick_object(the_person, position_choice, forced_object = start_object) from _call_pick_object_bugfix
+                call pick_object_enhanced(the_person, position_choice, forced_object = start_object) from _call_pick_object_bugfix
                 $ object_choice = _return
 
                 if position_choice and object_choice:
@@ -152,6 +154,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
             $ start_position = None #Clear start positions/objects so they aren't noticed next round.
             $ start_object = None
+            # $ renpy.say("", "Continue round => Position: " + position_choice.name + ", object: " + object_choice.name)
             if position_choice and object_choice: #If we have both an object and a position we're good to go, otherwise we loop and they have a chance to choose again.
                 call sex_description(the_person, position_choice, object_choice, private = private, report_log = report_log) from _call_sex_description_bugfix
                 $ first_round = False
@@ -302,6 +305,7 @@ label pick_object_enhanced(the_person, the_position, forced_object = None):
 
     python:
         if forced_object:
+            #renpy.say("", "Pick object forced: " + forced_object.name)
             picked_object = forced_object
         else:
             for object in mc.location.objects:
@@ -313,6 +317,8 @@ label pick_object_enhanced(the_person, the_position, forced_object = None):
                 picked_object = object_option_list[0][1]
             else:
                 picked_object = renpy.display_menu(object_option_list,True,"Choice")
+            
+            #renpy.say("", "Pick object: " + picked_object.name)
 
     $ the_person.add_situational_slut("sex_object", picked_object.sluttiness_modifier, the_position.verbing + " on a " + picked_object.name)
     $ the_person.add_situational_obedience("sex_object",picked_object.obedience_modifier, the_position.verbing + " on a " + picked_object.name)

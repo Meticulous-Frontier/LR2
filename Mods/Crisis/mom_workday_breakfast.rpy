@@ -248,7 +248,7 @@ label mom_breakfast_action_label():
             the_person.char "It was amazing... I want some of the real thing!"
             "She opens her mouth and slides your penis in. She dances circles all around it while she suckles the tip. You look down and notice that she is touching herself."
             $ the_person.change_arousal(20)
-            call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_workday_breakfast_01
+            call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_workday_breakfast_01
             "Finished with her breakfast, [the_person.title] gets up from the table and excuses herself."
             $ scene_manager.update_actor(mom, position = "walking_away")
             the_person.char "Have a good day at work, I'm gonna go get ready for the day!"

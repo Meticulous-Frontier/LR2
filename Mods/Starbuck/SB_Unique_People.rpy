@@ -708,7 +708,7 @@ label starbuck_sex_store_promo_one_label(the_person):
     $ starbuck.draw_person(position = "stand4", emotion = "happy")
     "[the_person.possessive_title] strikes a pose for you. You take several pictures, trying to find the best angles to show off her body... and the product."
     "You can tell that [the_person.possessive_title] is actually enjoying herself and your attention. Her cheeks are starting to get a little flushed."
-    $ the_person.change_arousal(10)
+    $ the_person.change_arousal(12)
     "The next item for her to model will be a male masturbation sleeve."
     "It is designed to look like a famous porn actress' asshole, so you figure to model this product, [the_person.possessive_title] should have her back to you."
     "Which lingerie should you have her use for this?"
@@ -740,7 +740,7 @@ label starbuck_sex_store_promo_one_label(the_person):
     mc.name "Perfect! These pictures are perfect, you are going to get a flood of guys in here looking for this!"
     "Once you are done [the_person.possessive_title] turns back to face you."
     $ starbuck.draw_person(position = "stand2", emotion = "happy")
-    $ the_person.change_arousal(20)
+    $ the_person.change_arousal(24)
     "The attention you are giving her is really starting to excite [the_person.possessive_title]. You can see her nipples sticking out proudly in her outfit."
     "The last item for her to model is a dildo. You figure since you are mainly targeting a male audience with this advertisement, a good pose for her would be on her knees, like shes getting ready to put it in her mouth."
     "Which lingerie should you have her use for this?"
@@ -769,7 +769,7 @@ label starbuck_sex_store_promo_one_label(the_person):
     the_person.char "Oh! That sounds like fun... sucking on a... a dildo, right!"
     $ starbuck.draw_person(position = "blowjob")
     "[the_person.possessive_title] gets down on her knees. She looks at the dildo longingly. You take multiple pictures of her."
-    $ the_person.change_arousal(30)
+    $ the_person.change_arousal(36)
     the_person.char "Mmm... it looks so tasty..."
     "[the_person.possessive_title] opens her mouth, and slowly starting to run her tongue along the dildo. You see one of her hands slowly drift down between her legs and she begins to touch herself."
     "She has her eyes closed, so you snap a few more pictures of her sucking on the dildo. She suddenly realizes what she is doing and pulls off."
@@ -783,7 +783,7 @@ label starbuck_sex_store_promo_one_label(the_person):
             mc.name "Go ahead, you look amazing. I can't wait to feel your mouth."
             "You walk up to [the_person.possessive_title]. She unzips your pants and pulls your cock out from your pants."
             "She runs her tongue up and down the sides a few times, then opens her mouth and sucks you into her hot mouth."
-            call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_SBS70
+            call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBS70
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:
                 "[the_person.possessive_title] takes a few minutes to recover from her orgasm. Eventually she gets up."
@@ -1456,7 +1456,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         the_person.char "Oh god, [the_person.mc_title], its so big! Okay, here we go..."
         "[the_person.possessive_title] goes slow, but steadily slides down, impaling her sphincter on your throbbing erection. She bottoms out and moans loudly."
         #Fuck her#
-        call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True) from _call_sex_description_SBS120
+        call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_SBS120
         $ the_report = _return
         if the_report.get("girl orgasms", 0) > 0:
             the_person.char "Oh god, I came so hard..."
@@ -1543,7 +1543,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
                     $ the_person.draw_person(position = "blowjob")
                     "[the_person.possessive_title] turns to you and gets down on her knees. She looks up at you. Her eyes certainly look a bit hungry..."
                     "She puts her hands on her breasts. She leans forward and nestles your cock between her bountiful tits."
-                    call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = True) from _call_fuck_person_SBS122
+                    call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBS122
                     "You spend a moment recovering while [the_person.title] rinses your cum off her body."
 
                 else:                           #She gets Feisty
@@ -1555,7 +1555,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
                     the_person.char "Oh my god..."
                     "[the_person.possessive_title] sighs as you bottom out."
                     "She wiggles her ass back and forth a few times, enjoying the familiar feel of fullness you give her when you fuck her."
-                    call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_wall(), skip_intro = True) from _call_sex_description_SBS123
+                    call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_wall(), skip_intro = True, position_locked = True) from _call_sex_description_SBS123
                     "You spend a moment recovering while [the_person.title] rinses herself off."
                 #TODO set outfit to regular nude again. She washed the cum off!
                 $ SB_nude_outfit = Outfit("Nude")
@@ -1623,7 +1623,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         "You moan in appreciation at the wonderful wake up call."
         the_person.char "Mmm... Good morning [the_person.mc_title]... When I woke up this morning you were poking me pretty good... I figured you wouldn't mind if I took it for a quick ride."
         "You murmur your acceptance. Her mesmerizing tits are bouncing up and down right in front of you. You take them both in your palms and give them a good squeeze."
-        call fuck_person(the_person, start_position = cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True) from _call_sex_description_SBS125
+        call fuck_person(the_person, start_position = cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_SBS125
         the_person.char "Mmmff. So good... I wish I could call in sick and we could fuck all day... but I need to get to the shop."
         $ the_person.draw_person(position = "stand3")
         the_person.char "I'm gonna go hop in the shower. Feel free to let yourself out! Thanks for spending the night [the_person.mc_title]!"

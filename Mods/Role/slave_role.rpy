@@ -341,7 +341,7 @@ label slave_alarm_clock_label(the_person):
                 $ the_person.change_happiness(5)
                 $ the_person.change_love(2)
                 "You lie back relax as [the_person.possessive_title] lowers herself down onto your hard cock."
-                call fuck_person(the_person, start_position = cowgirl, start_object = bedroom.get_object_with_name("bed"), skip_intro = True, girl_in_charge = True) from _slave_alarm_clock_label_2
+                call fuck_person(the_person, start_position = cowgirl, start_object = bedroom.get_object_with_name("bed"), skip_intro = True, girl_in_charge = True, position_locked = True) from _slave_alarm_clock_label_2
                 $ the_report = _return
                 if the_report.get("girl orgasms", 0) > 0:
                     $ the_person.change_love(5)
