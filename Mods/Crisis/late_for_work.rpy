@@ -139,7 +139,7 @@ label late_for_work_action_label:
                 if the_person.get_opinion_score("giving blowjobs") < 0:
                     the_person.char "Mmm, can't believe I get to suck your cock. This is how to start the day off right..."
                 "Her mouth opens and envelopes your cock. She begins to suck you off eagerly."
-                call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True, private = True) from _call_late_for_work_BJ_1
+                call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True, private = True) from _call_late_for_work_BJ_2
                 $ the_report = _return
                 if the_report.get("girl orgasms",0) > 0:
                     "It takes [the_person.title] a minute before she finally stands up, recovering from her orgasm."
