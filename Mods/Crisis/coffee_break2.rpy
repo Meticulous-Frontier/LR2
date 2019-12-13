@@ -110,10 +110,65 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                 loser.char "Oh yes. I'm cumming!"
                 $ loser.change_stats(slut_temp = 3, slut_core = 3)
                 "He finishes leaving her quivering against the desk. As he walks away he says: 'Enjoy your food, slut!'"
-                $ loser.cum_on_ass()               
+                $ loser.cum_on_ass()
                 "She gathers her clothes and takes the food back to her colleagues. "
                 $ scene_manager.update_actor(loser, position = "walking_away")
-                "While enjoying the view you decide to go back to work."
+                if winner_one.sluttiness > 60 and winner_two_sluttiness > 60:
+                    "You are thorougly turned on after witnessing these events. You follow [loser.possessive_title] as she takes the delivery to the break room."
+                    $ scene_manager.update_actor(loser, character_placement = character_center_flipped)
+                    "She steps into the break room and sets the food on the table."
+                    loser.char "Lunch is here!"
+                    $ scene_manager.add_actor(winner_one, emotion="happy", character_placement = character_left_flipped)
+                    $ scene_manager.add_actor(winner_two, emotion="happy")
+                    "You enter the room and see [winner_one.title] and [winner_two.title] waiting. They see you enter the room and fall silent."
+                    "You start to walk up behind [loser.title] and quietly start to take your dick out of your pants."
+                    loser.char "Hey, I see the food is here, why are you two acting so funny?"
+                    mc.name "That was quite the show [loser.title]."
+                    $ scene_manager.update_actor(loser, position = "back_peek")
+                    "You put your hands on her hips, her ass still slick with the delivery guy's cum."
+                    mc.name "I only got to cum on your face, it doesn't seem right the delivery guy got more than me."
+                    loser.char "Hey now, it's not like that, you know you can claim me anytime you want, we just looking for some free... FUCK"
+                    "You grab her hips and ram yourself forward into [loser.possessive_title]'s sopping wet pussy."
+                    if winner_one.sluttiness > 90 and winner_one.outfit.vagina_visible():
+                        winner_one.char "Holy shit he's gonna fuck her right here!"
+                        $ scene_manager.update_actor(winner_one, position = "kneeling1")
+                        "While watching you, [winner_one.title] begins to touch herself and masturbate."
+                        $ winner_two.change_happiness(3)
+                        $ winner_two.change_slut_temp(5)
+                    else:
+                        winner_one.char "Holy!... Wow I was not expecting this!"
+                        "[winner_one.title] watches you closely."
+                    "You pound [loser.title] hard. She so wet from her earlier sex that you easily slide in and out of her."
+                    "You look down and see the soft wet lips of her labia gripping and pulling at you everytime you start to slide out. It feels amazing."
+                    if winner_two.sluttiness > 90 and winner_two.get_opinion_score("public sex") > 0:
+                        winner_two.char "Fuck yeah! Give it to her good [winner_two.mc_title]!"
+                        "[winner_two.title] is watching intently, cheering you on as you give it to [loser.possessive_title]."
+                        $ winner_two.change_happiness(3)
+                        $ winner_two.change_slut_temp(5)
+                    else:
+                        winner_two.char "Wow, that looks like it feels good..."
+                        "[winner_two.title] is watching intently."
+                    loser.char "Oh god... I'm gonna... It's so good!"
+                    $ scene_manager.update_actor(loser, position = "standing_doggy")
+                    "[loser.title] bends over the lunch table and pushes herself back against you as she orgasms."
+                    loser.char "Yes... YES!!!"
+                    "Her pussy clenching you drives you over the edge as well. You ram yourself deep and dump your cum inside of her."
+                    $ loser.cum_in_vagina()
+                    "You pull out and look at [loser.possessive_title]. She has cum on her face, on her ass, and now running down the inside of her legs as your seed spills out of her."
+                    $ mc.listener_system.fire_event("girl_climax", the_person = loser, the_position = "standing_doggy")
+                    $ loser.change_stats(obedience = 5, happiness = 5, love = 3, slut_temp = 5, slut_core = 2)
+                    if winner_one.sluttiness > 90 and winner_one.outfit.vagina_visible():
+                        winner_one.char "Oh god, so hot..."
+                        "[winner_one.title] can't help herself. She is so turned on watching, she makes herself cum."
+                        winner_one.char "Oh Fuck!"
+                        $ mc.listener_system.fire_event("girl_climax", the_person = winner_one, the_position = "kneeling1")
+                        $ winner_one.change_stats(obedience = 5,slut_temp = 5, slut_core = 2)
+                    if winner_two.sluttiness > 90 and winner_two.get_opinion_score("public sex") > 0:
+                        winner_two.char "God... Damn... maybe next time I can set it up so I get the short straw."
+                    "You turn and walk out of the room without saying a word. You can feel the three girls looking at you as you leave the room."
+
+                else:
+                    "While enjoying the view you decide to go back to work."
             else:
                 $ scene_manager.update_actor(loser, position = "back_peek")
                 "Seems he has seen this before since he doesn't move a muscle when she looks back in your direction."
