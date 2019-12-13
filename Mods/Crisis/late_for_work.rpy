@@ -38,7 +38,7 @@ label late_for_work_action_label:
 
         $ the_person.draw_person(position = 'walking_away')
         "[the_person.possessive_title] quietly rushes to her desk."
-    elif the_person.relatioship != "Single":
+    elif the_person.relationship != "Single":
         $ the_person.cum_on_tits()
         $ the_person.draw_person(position="stand3", emotion="default")
         the_person.char "I'm sorry [the_person.mc_title], [the_person.SO_name] needed some personal attention when he dropped me off at the office."
@@ -83,7 +83,7 @@ label late_for_work_action_label:
                 "She quickly gets down on her knees. She pulls your cock out of you pants and gives it a couple strokes."
                 the_person.char "Mmm, can't believe I get to suck my two favorite cocks in the same morning..."
                 "Her mouth opens and envelopes your cock. She begins to suck you off eagerly."
-                call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True, private = True) from _call_late_for_work_BJ_1
+                call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True, private = True) from _call_late_for_work_BJ_1
                 $ the_report = _return
                 if the_report.get("girl orgasms",0) > 0:
                     "It takes [the_person.title] a minute before she finally stands up, recovering from her orgasm."
@@ -139,7 +139,7 @@ label late_for_work_action_label:
                 if the_person.get_opinion_score("giving blowjobs") < 0:
                     the_person.char "Mmm, can't believe I get to suck your cock. This is how to start the day off right..."
                 "Her mouth opens and envelopes your cock. She begins to suck you off eagerly."
-                call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True, private = True) from _call_late_for_work_BJ_2
+                call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True, private = True) from _call_late_for_work_BJ_2
                 $ the_report = _return
                 if the_report.get("girl orgasms",0) > 0:
                     "It takes [the_person.title] a minute before she finally stands up, recovering from her orgasm."

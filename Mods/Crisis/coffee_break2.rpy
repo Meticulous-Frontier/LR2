@@ -113,7 +113,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                 $ loser.cum_on_ass()
                 "She gathers her clothes and takes the food back to her colleagues. "
                 $ scene_manager.update_actor(loser, position = "walking_away")
-                if winner_one.sluttiness > 60 and winner_two_sluttiness > 60:
+                if winner_one.sluttiness > 60 and winner_two.sluttiness > 60:
                     "You are thorougly turned on after witnessing these events. You follow [loser.possessive_title] as she takes the delivery to the break room."
                     $ scene_manager.update_actor(loser, character_placement = character_center_flipped)
                     "She steps into the break room and sets the food on the table."
