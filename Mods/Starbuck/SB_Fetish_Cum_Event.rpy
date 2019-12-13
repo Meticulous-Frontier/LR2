@@ -117,7 +117,7 @@ label SB_fetish_cum_label(the_person):
         "Refuse":
             the_person.char "I'm sorry to hear that..." #TODO finish this
             $ SB_CALCULATE_RANDOM_EVENT_RATE()
-            
+
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ FETISH_CUM_EVENT_INUSE = False
     $ the_person.reset_arousal()
@@ -382,7 +382,7 @@ label SB_fetish_lily_cum_label():
             if morn_event[0].name == "Sister Cum Fetish":
                 #renpy.say("","DEBUG: Successfully located shower, attempting removal and replacement.")
                 morning_crisis_list.remove(morn_event)
-    return
+    return "True"
 
 #SBC5
 label SB_fetish_shower_cum_label():
