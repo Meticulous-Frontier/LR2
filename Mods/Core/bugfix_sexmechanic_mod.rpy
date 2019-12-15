@@ -83,6 +83,9 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             elif report_log.get("girl orgasms", 0) > 0 and the_person.love < 10 and the_person.obedience < 110: #She's cum and doesn't care about you finishing.
                 the_person.char "Whew, that felt great. Thanks for the good time [the_person.mc_title]!"
                 $ round_choice = "Girl Leave"
+            elif report_log.get("girl orgasms", 0) == 0 and the_person.energy < 25 :
+                the_person.char "That was nice, but i'm tired. We will continue this another time."
+                $ round_choice = "Girl Leave"
             else:
                 "[the_person.possessive_title] is in control, and keeps on [position_choice.verbing] you."
                 $ round_choice = "Continue"
@@ -167,7 +170,8 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 elif position_choice.girl_energy > the_person.energy:
                     #TODO: Add some differentiated dialgoue depending on the position.
                     #TODO: Add "no energy" transitions where you keep fucking her anyways. (double TODO: Add a way of "breaking" her like this)
-                    the_person.char "I'm exhausted [the_person.mc_title], I can't keep this up..."
+                    if not girl_in_charge:
+                        the_person.char "I'm exhausted [the_person.mc_title], I can't keep this up..."
                     $ position_choice = None
                 else: #Nothing major has happened that requires us to change positions, we can have girls take over, strip
                     call girl_strip_event(the_person, position_choice, object_choice) from _call_girl_strip_event_bugfix
