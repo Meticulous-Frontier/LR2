@@ -386,6 +386,17 @@ init -1:
             if self.sluttiness < 80 and self.outfit.tits_available() and self.outfit.tits_visible() and self.outfit.vagina_available() and self.outfit.vagina_visible():
                 self.change_slut_temp(self.get_opinion_score("not wearing anything"), add_to_log = False)
 
+            for event_list in [self.on_room_enter_event_list, self.on_talk_event_list]: #Go through both of these lists and curate them, ie trim out events that should have expired.
+                removal_list = [] #So we can iterate through without removing and damaging the list.
+                for an_action in event_list:
+                    if isinstance(an_action, Limited_Time_Action): #It's a LTA holder, so it has a turn counter
+                        an_action.turns_valid += -1
+                        if an_action.turns_valid <= 0:
+                            removal_list.append(an_action)
+
+                for action_to_remove in removal_list:
+                    event_list.remove(action_to_remove)
+
         Person.run_move = run_move_enhanced
 
         # BUGFIXED: Judge Outfit function uses the_person instead of self to check effective sluttiness

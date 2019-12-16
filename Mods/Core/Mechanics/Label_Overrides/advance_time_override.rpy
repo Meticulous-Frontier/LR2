@@ -103,6 +103,15 @@ init 5 python:
         renpy.random.shuffle(possible_crisis_list)    # shuffle the list in random order
         return get_random_from_weighted_list(possible_crisis_list)
 
+    def get_limited_time_action_for_person(person):
+        possible_crisis_list = []
+        for crisis in limited_time_event_pool:
+            if crisis[0].is_action_enabled(person): #Get the first element of the weighted tuple, the action.
+                possible_crisis_list.append(crisis) #Build a list of valid crises from ones that pass their requirement.
+        renpy.random.shuffle(possible_crisis_list)    # shuffle the list in random order
+        return get_random_from_weighted_list(possible_crisis_list, return_everything = True)
+
+
     def get_morning_crisis_from_crisis_list():
         possible_morning_crises_list = []
         for crisis in morning_crisis_list:
@@ -313,5 +322,17 @@ label advance_time_people_run_move_label():
             person.run_move(place)
             if person.follow_mc: # move follower to mc location
                 person.location().move_person(person, mc.location)
+
+            if person.title is not None: #We don't assign events to people we haven't met.
+                if renpy.random.randint(0,100) < 7: #Only assign one to 12% of people, to cut down on the number of people we're checking.
+                    the_crisis = get_limited_time_action_for_person(person)
+                    if the_crisis is not None:
+                        limited_time_event = Limited_Time_Action(the_crisis[0], the_crisis[0].event_duration) #Wraps the action so that we can have an instanced duration counter and add/remove it easily.\
+                        #renpy.notify("Created event: " + the_crisis[0].name + " for " + people.name)
+                        if the_crisis[2] == "on_talk":
+                            person.on_talk_event_list.append(limited_time_event)
+
+                        elif the_crisis[2] == "on_enter":
+                            person.on_room_enter_event_list.append(limited_time_event)
                 
     return
