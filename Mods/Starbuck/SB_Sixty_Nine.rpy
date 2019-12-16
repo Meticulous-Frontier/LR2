@@ -5,8 +5,8 @@
 init python:
     SB_sixty_nine = Position(name = "Sixty-Nine", slut_requirement = 45, slut_cap = 65, requires_hard = True, requires_large_tits = False,
         position_tag = "doggy", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Oral",
-        girl_arousal = 15, girl_energy = 15,
-        guy_arousal = 15, guy_energy = 15,
+        girl_arousal = 15, girl_energy = 10,
+        guy_arousal = 15, guy_energy = 10,
         connections = [],
         intro = "intro_SB_sixty_nine",
         scenes = ["scene_SB_sixty_nine_1","scene_SB_sixty_nine_2"],

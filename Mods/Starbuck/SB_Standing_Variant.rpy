@@ -3,8 +3,8 @@
 init python:
     SB_facing_wall = Position(name = "Facing Wall", slut_requirement = 70, slut_cap = 90, requires_hard = True, requires_large_tits = False,
         position_tag = "back_peek", requires_location = "Lean", requires_clothing = "Vagina", skill_tag = "Vaginal",
-        girl_arousal = 20, girl_energy = 16,
-        guy_arousal = 18, guy_energy = 16,
+        girl_arousal = 20, girl_energy = 11,
+        guy_arousal = 18, guy_energy = 11,
         connections = [],
         intro = "intro_SB_facing_wall",
         scenes = ["scene_SB_facing_wall_1","scene_SB_facing_wall_2"],

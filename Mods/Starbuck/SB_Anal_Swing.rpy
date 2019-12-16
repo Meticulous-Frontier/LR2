@@ -1,8 +1,8 @@
 init python:
     SB_anal_swing = Position(name = "Swinging Anal", slut_requirement = 85, slut_cap = 110, requires_hard = True, requires_large_tits = False,
         position_tag = "sitting", requires_location = "Swing", requires_clothing = "Vagina", skill_tag = "Anal",
-        girl_arousal = 20, girl_energy = 10,
-        guy_arousal = 23, guy_energy = 16,
+        girl_arousal = 20, girl_energy = 6,
+        guy_arousal = 23, guy_energy = 10,
         connections = [],
         intro = "intro_SB_anal_swing",
         scenes = ["scene_SB_anal_swing_1","scene_SB_anal_swing_2"],

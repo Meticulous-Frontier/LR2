@@ -2,7 +2,7 @@
     SB_cum_fetish_blowjob = Position(name = "Blowjob", slut_requirement = 40, slut_cap = 100, requires_hard = True, requires_large_tits = False,
         position_tag = "blowjob", requires_location = "Kneel", requires_clothing = "None", skill_tag = "Oral",
         girl_arousal = 13, girl_energy = 10,
-        guy_arousal = 15, guy_energy = 5,
+        guy_arousal = 15, guy_energy = 3,
         connections = [],
         intro = "intro_SB_cum_fetish_blowjob",
         scenes = ["scene_SB_cum_fetish_blowjob_1","scene_SB_cum_fetish_blowjob_2"],

@@ -1,8 +1,8 @@
 ﻿init python:
     SB_anal_cowgirl = Position("Anal Cowgirl", slut_requirement = 70, slut_cap = 95, requires_hard = True, requires_large_tits = False,
         position_tag = "cowgirl", requires_location = "Lay",  requires_clothing = "Vagina", skill_tag = "Anal",
-        girl_arousal = 11, girl_energy = 15,
-        guy_arousal = 14, guy_energy = 8,
+        girl_arousal = 11, girl_energy = 10,
+        guy_arousal = 14, guy_energy = 5,
         connections = [],
         intro = "intro_SB_anal_cowgirl",
         scenes = ["scene_SB_anal_cowgirl_1","scene_SB_anal_cowgirl_2","scene_SB_anal_cowgirl_3"],
