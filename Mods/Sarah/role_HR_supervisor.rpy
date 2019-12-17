@@ -743,7 +743,7 @@ label HR_diector_sexy_meeting_start_label(the_person):
         "[the_person.possessive_title] comes around to your side of the desk and gets down on her knees. She pulls down your zipper and pulls your cock out."
         the_person.char "Mmm, it smells so good. Let's get this taken care of!"
         "She runs her tongue up and down your length a few times, then parts her lips and begins to suck you off."
-        call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_meeting_start_one
+        call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_start_one
         mc.name "Mmm, this is a great way to start Monday. This was a great idea [the_person.title]."
         $ scene_manager.update_actor(the_person, emotion = "happy")
         "[the_person.possessive_title] stops licking the cum off her lips for a second and smiles."
@@ -801,7 +801,7 @@ label HR_diector_sexy_meeting_start_label(the_person):
         $ scene_manager.update_actor(the_person, position = "blowjob")
         "She gets down on her knees in front of you and takes a moment to admire your hardness."
         "She opens her mouth and runs her tongue along it a few times, and then parts her lips and begins to suck you off."
-        call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_meeting_mid_one
+        call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_mid_one
 
     elif position_choice == "titfuck":
         if the_person.outfit.tits_available() == False:
@@ -812,7 +812,7 @@ label HR_diector_sexy_meeting_start_label(the_person):
         "You pull your cock out as she gets up and walks around your desk. She drops down on her knees in front of you."
         $ scene_manager.update_actor(the_person, position = "blowjob")
         "[the_person.possessive_title] smiles at you as she uses her hands to wrap her tits around your cock, and then starts to move them up and down."
-        call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_meeting_mid_two
+        call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_mid_two
 
     return
 
