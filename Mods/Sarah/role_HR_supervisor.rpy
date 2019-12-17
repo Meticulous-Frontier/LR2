@@ -770,7 +770,7 @@ label HR_diector_sexy_meeting_start_label(the_person):
             "She gets on her knees and gives you a couple strokes with her hand."
             the_person.char "Mmmm, I love the feeling of a cock buried between by big tits... this is gonna be great!"
             "With her hands on each side of her chest, she wraps her sizable boobs around you and begins to bounce them up and down."
-            call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_meeting_start_two
+            call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_start_two
             $ business_HR_sexy_start_unlocks["titfuck"] = True
             "After you finish, [the_person.possessive_title] runs her hands along her tits, rubbing your cum into her skin."
             the_person.char "Mmm, god that was hot. Let me just enjoy this a minute before we move on with the meeting..."

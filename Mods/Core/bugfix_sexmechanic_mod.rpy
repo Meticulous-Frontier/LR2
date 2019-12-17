@@ -7,7 +7,7 @@ init 5 python:
     config.label_overrides["pick_object"] = "pick_object_enhanced"
     config.label_overrides["girl_choose_position"] = "girl_choose_position_enhanced"
 
-label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True):
+label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, exit_when_guy_cums = True):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
     if report_log is None:
         $ report_log = defaultdict(int) #Holds information about the encounter: what positiosn were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
@@ -82,6 +82,8 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 $ round_choice = "Girl Leave"
             elif report_log.get("girl orgasms", 0) > 0 and the_person.love < 10 and the_person.obedience < 110: #She's cum and doesn't care about you finishing.
                 the_person.char "Whew, that felt great. Thanks for the good time [the_person.mc_title]!"
+                $ round_choice = "Girl Leave"
+            elif report_log.get("guy orgasms", 0) > 0 and exit_when_guy_cums:
                 $ round_choice = "Girl Leave"
             elif report_log.get("girl orgasms", 0) == 0 and the_person.energy < 25 :
                 the_person.char "That was nice, but i'm tired. We will continue this another time."

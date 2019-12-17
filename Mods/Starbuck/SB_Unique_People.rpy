@@ -783,7 +783,7 @@ label starbuck_sex_store_promo_one_label(the_person):
             mc.name "Go ahead, you look amazing. I can't wait to feel your mouth."
             "You walk up to [the_person.possessive_title]. She unzips your pants and pulls your cock out from your pants."
             "She runs her tongue up and down the sides a few times, then opens her mouth and sucks you into her hot mouth."
-            call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBS70
+            call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBS70
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:
                 "[the_person.possessive_title] takes a few minutes to recover from her orgasm. Eventually she gets up."
@@ -1456,7 +1456,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         the_person.char "Oh god, [the_person.mc_title], its so big! Okay, here we go..."
         "[the_person.possessive_title] goes slow, but steadily slides down, impaling her sphincter on your throbbing erection. She bottoms out and moans loudly."
         #Fuck her#
-        call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_SBS120
+        call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_SBS120
         $ the_report = _return
         if the_report.get("girl orgasms", 0) > 0:
             the_person.char "Oh god, I came so hard..."
@@ -1543,7 +1543,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
                     $ the_person.draw_person(position = "blowjob")
                     "[the_person.possessive_title] turns to you and gets down on her knees. She looks up at you. Her eyes certainly look a bit hungry..."
                     "She puts her hands on her breasts. She leans forward and nestles your cock between her bountiful tits."
-                    call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBS122
+                    call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBS122
                     "You spend a moment recovering while [the_person.title] rinses your cum off her body."
 
                 else:                           #She gets Feisty

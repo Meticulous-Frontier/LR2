@@ -354,7 +354,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         "She starts to take you into her mouth. You snap a few more pictures of this beautiful hotwife, on her knees servicing you."
         "[the_person.possessive_title]'s head is now bouncing up and down on your cock. Her pouty lips feel amazing sliding up and down your length."
         "You forget you are supposed to take pictures and begin to just enjoy the wonderful sensations."
-        call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_CSH010
+        call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_CSH010
         $ the_report = _return
         if the_report.get("girl orgasms", 0) > 0:
             "Wow... I can't believe I came... while I was blowing you! That was fucking hot!"
@@ -417,14 +417,14 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             mc.name "Oh fuck!"
             "You make sure to snap more pictures of her. She's getting good at this!"
             "You decide to just enjoy her skilled mouth going down on you."
-            call fuck_person(the_person, start_position = deepthroat, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_CSH011
+            call fuck_person(the_person, start_position = deepthroat, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_CSH011
         else:
             the_person.char "Mmmm, I can't wait any longer... I have to taste it!"
             "She opens up her mouth and wraps her lips around your meat."
             "You snap some pictures as she pulls of and begin to run her tongue up and down along the sides of your cock."
             mc.name "Mmm, that feels great [the_person.title]."
             "You decide to just enjoy her skilled mouth going down on you."
-            call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_CSH012
+            call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_CSH012
 
         $ cum_face = False
         $ cum_mouth = False

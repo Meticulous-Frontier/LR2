@@ -964,7 +964,7 @@ label Sarah_tits_reveal_label():
     the_person.char "I can't believe I'm finally doing this. This all feels like a dream!"
     "She looks up at you from her knees. She looks you right in the eyes as she leans forward and slides your cock between her pillowy tits."
     "With both hands holding her breasts together, she slowly starts to move her pillowy flesh up and down your erection."
-    call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_sarah_tits_reveal_1
+    call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_sarah_tits_reveal_1
     $ the_report = _return
     if the_report.get("girl orgasms", 0) > 0:
         the_person.char "Oh my god, I came so hard... I can't believe it. That felt so good! I need to do that again soon!"
