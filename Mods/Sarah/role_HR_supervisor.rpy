@@ -407,7 +407,7 @@ label HR_director_monday_meeting_label(the_person):
     call HR_director_calculate_eff(the_person) from HR_director_monday_meeting_1
     "She hands you a few documents. You check them over."
     mc.name "Looks good. Go ahead and continue with those plans."
-    $ scene_manager.clear_scene()
+    #$ scene_manager.clear_scene()
 
     $ (HR_employee_list, HR_tier_talk) = build_HR_review_list(the_person, business_HR_coffee_tier)
     if len(HR_employee_list) == 0:
@@ -453,15 +453,15 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         call screen main_choice_display([["Call in"] + HR_employee_list])
 
     $ person_choice = _return
-
+    $ scene_manager.update_actor(the_person, position = "stand2")
     the_person.char "Alright, let me go get her."
     $ renpy.scene("Active")
-
+    $ scene_manager.clear_scene()
     "[person_choice.title] steps in to the office after a few minutes, followed by [the_person.title]."
     person_choice.char "Hello [person_choice.mc_title]."
 
     # initialize
-    $ scene_manager = Scene()
+    #$ scene_manager = Scene()
     $ scene_manager.add_actor(person_choice, position = "stand3", character_placement = character_left_flipped)
     mc.name "Hello [person_choice.title], come in and take a seat."
 
