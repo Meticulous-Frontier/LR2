@@ -784,7 +784,7 @@ label HR_diector_sexy_meeting_start_label(the_person):
         tuple_list = []
         for position in business_HR_sexy_start_unlocks.keys():
             if business_HR_sexy_start_unlocks[position] == True:
-                tuple_list.append([position, position])
+                tuple_list.append([position.title(), position])
         tuple_list.append(["Surprise me", "any"])
 
         position_choice = renpy.display_menu(tuple_list,True,"Choice")
@@ -793,7 +793,7 @@ label HR_diector_sexy_meeting_start_label(the_person):
         the_person.char "Mmmm, I can do that! "
         $ the_person.change_happiness(5)
         $ the_person.change_obedience(-5)
-        $ position = get_random_from_list(business_HR_sexy_start_unlocks.keys())
+        $ position_choice = get_random_from_list(business_HR_sexy_start_unlocks.keys())
 
     if position_choice == "blowjob":
         the_person.char "Get your cock out, I want to taste it!"
@@ -814,6 +814,8 @@ label HR_diector_sexy_meeting_start_label(the_person):
         "[the_person.possessive_title] smiles at you as she uses her hands to wrap her tits around your cock, and then starts to move them up and down."
         call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_mid_two
 
+    "She quickly gets dressed to continue your meeting."
+    $ the_person.review_outfit(show_review_message = False)
     return
 
 label HR_director_mind_control_label(the_person):
