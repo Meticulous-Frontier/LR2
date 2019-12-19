@@ -168,3 +168,17 @@ init -1:
         xalign 0.5
         xanchor 1.0
         xzoom -1
+
+    transform character_69_bottom():
+        yalign 1.0
+        yanchor 1.0
+        xalign 1.0
+        xanchor 0.95
+        zoom 0.8
+
+    transform character_69_on_top():
+        yalign 0.7
+        yanchor 1.0
+        xalign 1.0
+        xanchor 1.02
+        zoom 0.75
