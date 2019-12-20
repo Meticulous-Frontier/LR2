@@ -218,13 +218,13 @@ label HR_director_mod_init():
             menu_tooltip = "Costs $1500 but makes meetings impactful.")
         HR_director_mind_control_action = Action("Produce mind control Serum.", HR_director_mind_control_requirement, "HR_director_mind_control_label",
             menu_tooltip = "Costs $5000. Allows you to attempt mind control of employee.")
-        HR_director_mind_control_attempt = Action("Attempt Mind Control.", HR_director_mind_control_attempt_requirement, "HR_director_mind_control_attempt_label",
+        HR_director_mind_control_attempt = Action("Attempt Mind Control {image=gui/heart/Time_Advance.png}", HR_director_mind_control_attempt_requirement, "HR_director_mind_control_attempt_label",
             menu_tooltip = "WARNING: May have side effects!")
         HR_director_change_relative_recruitment_action = Action("Change recruitment signage", HR_director_change_relative_recruitment_requirement, "HR_director_change_relative_recruitment_label",
             menu_tooltip = "Changes how often employees ask for employment for their daughters")
-        HR_director_meeting_on_demand_action = Action("Meet with employee{image=gui/heart/Time_Advance.png}", HR_director_meeting_on_demand_requirement, "HR_director_meeting_on_demand_label",
+        HR_director_meeting_on_demand_action = Action("Meet with employee {image=gui/heart/Time_Advance.png}", HR_director_meeting_on_demand_requirement, "HR_director_meeting_on_demand_label",
             menu_tooltip = "Arrange a meeting with an employee")
-        HR_director_role = Role("HR Director", [HR_director_meeting_on_demand_action, HR_director_coffee_tier_1_action, HR_director_coffee_tier_2_action, HR_director_mind_control_action, HR_director_change_relative_recruitment_action]) #Actions go in block
+        HR_director_role = Role("HR Director", [HR_director_meeting_on_demand_action, HR_director_coffee_tier_1_action, HR_director_coffee_tier_2_action, HR_director_mind_control_action, HR_director_mind_control_attempt, HR_director_change_relative_recruitment_action]) #Actions go in block
     return
 
 
@@ -853,7 +853,7 @@ label HR_director_mind_control_attempt_label(the_person):
 
     $ person_choice = _return
 
-    the_person.char "Okay. I'll go get them."
+    the_person.char "Okay. I'll go get her."
     $ renpy.scene("Active")
     call HR_mind_control_attempt(person_choice, the_person) from HR_mind_control_attempt_call_1
 
