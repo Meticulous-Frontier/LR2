@@ -94,7 +94,7 @@ init -1 python:
             renpy.call(self.swap_description,the_person_one, the_person_two, the_location, the_object, round)
 
 label threesome_test():
-    call start_threesome(mom, lily) from threesome_test_call_1
+    call join_threesome(mom, lily, "missionary") from threesome_test_call_1
     return "Test Complete"
 
 label threesome_alignment():
@@ -133,10 +133,10 @@ label threesome_alignment():
                 pass
             "lily - zoom":
                 pass
-        $ position_choice.align_position(the_person_one, the_person_two)
+        $ position_choice.align_position(the_person_one, the_person_two)  #This doesn't work lol. Delete? I hate transforms
 
 label start_threesome(the_person_one, the_person_two, start_position = None, start_object = None, round = 0, private = True, girl_in_charge = False, position_locked = False, report_log = None, affair_ask_after = True, hide_leave = False):
-    # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
+    # When called
     if report_log is None:
         $ report_log = defaultdict(int) #Holds information about the encounter: what positiosn were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
         $ report_log["positions_used"] = ["Threesome"] #This is a list, not an int.
@@ -459,32 +459,33 @@ label threesome_round(the_person_one, the_person_two, position_choice, round = 0
 
     return
 
-label pick_threesome(the_person_one, the_person_two):
-    #TODO
+label pick_threesome(the_person_one, the_person_two, girl_one_position = None, object_choice = None):  #We can pass in a position for girl one if the second girl "walks in" on the sex event
+    $ girl_two_list = []
+    $ position_choice = None
+    if girl_one_position == None:
+        python:
+            girl_one_choice = None
+            girl_one_list = []
+            for threeway in list_of_threesomes:
+                if threeway.requirements(the_person_one, the_person_two):
+                    if (get_initial_threesome_pairing(threeway.position_one_tag)) not in girl_one_list: #This doesn't work for stand2-5 TODO
+                        girl_one_list.append(get_initial_threesome_pairing(threeway.position_one_tag))
+                    if (get_initial_threesome_pairing(threeway.position_two_tag)) not in girl_one_list:
+                        girl_one_list.append(get_initial_threesome_pairing(threeway.position_two_tag))
+        "What do you want [the_person_one.title] to do?"
+        $ girl_one_choice = renpy.display_menu(girl_one_list,True,"Choice")
+    else:
+        $ girl_one_choice = girl_one_position
     python:
-        girl_one_choice = None
-        girl_one_list = []
-        girl_two_list = []
-        position_choice = None
         for threeway in list_of_threesomes:
             if threeway.requirements(the_person_one, the_person_two):
-                if (get_initial_threesome_pairing(threeway.position_one_tag)) not in girl_one_list: #This doesn't work for stand2-5 TODO
-                    girl_one_list.append(get_initial_threesome_pairing(threeway.position_one_tag))
-                if (get_initial_threesome_pairing(threeway.position_two_tag)) not in girl_one_list:
-                    girl_one_list.append(get_initial_threesome_pairing(threeway.position_two_tag))
-    "What do you want [the_person_one.title] to do?"
-    $ girl_one_choice = renpy.display_menu(girl_one_list,True,"Choice")
-
-    python:
-        for threeway in list_of_threesomes:
-            if threeway.requirements(the_person_one, the_person_two):
-                if threeway.position_one_tag == girl_one_choice:
+                if threeway.position_one_tag == girl_one_choice:            #Look for positions that match with any position taken by girl 1
                     girl_two_list.append([threeway.girl_two_final_description, threeway.position_two_tag])
                 elif threeway.position_two_tag == girl_one_choice:
                     girl_two_list.append([threeway.girl_one_final_description, threeway.position_one_tag])
     "What do you want [the_person_two.title] to do?"
     if len(girl_two_list) == 0:
-        "Something has gone wrong, no available positions"
+        "Something has gone wrong, no available positions"  #Return something default?
     $ girl_two_choice = renpy.display_menu(girl_two_list,True,"Choice")
 
     python:
@@ -495,7 +496,7 @@ label pick_threesome(the_person_one, the_person_two):
             if girl_one_choice == threeway.position_two_tag and girl_two_choice == threeway.position_one_tag:
                 position_choice = threeway
                 girl_swap_pos = True
-
+    #TODO figure out if position requires an object, if so select the object#
     return position_choice
 
 label threesome_strip_menu(the_person_one, the_person_two):
@@ -527,10 +528,31 @@ label threesome_strip_menu(the_person_one, the_person_two):
     call threesome_strip_menu(the_person_one, the_person_two) from _threesome_recurrent_strip_call_1
     return
 
+label can_join_threesome(the_person_one, the_person_two, intial_position): #Can use this function to check if there is a threesome position available that a second girl can join.
+    $ return_bool = False
+    python:
+        for threeway in list_of_threesomes:
+            if threeway.requirements(the_person_one, the_person_two):
+                if threeway.position_one_tag == girl_one_choice:            #Look for positions that match with any position taken by girl 1
+                    return_bool =  True
+                elif threeway.position_two_tag == girl_one_choice:
+                    return_bool =  True
+    return return_bool                                                          #No acceptable position found, cannot join threesome
+
+label join_threesome(the_person_one, the_person_two, initial_position):  #We can use this function to add a second girl to an existing sex scene.
+                                                                         #Works by selecting a position then calling threesome with the first position pre-set
+
+    call pick_threesome(the_person_one, the_person_two, girl_one_position = initial_position) from _join_threesome_position_selection_1
+    $ position_choice = _return
+    call start_threesome(the_person_one, the_person_two, start_position = position_choice, private = False) from _join_threesome_in_progress_1
+
+    return
+
+
 init python:
     def get_initial_threesome_pairing(position_tag):
         if position_tag == "stand2" or position_tag == "stand3" or position_tag == "stand4" or position_tag == "stand5":
-            return (["Stand Right There", "stand"])
+            return (["Stand Right There", "stand"])  #TODO this probably isn't going to work right. Figure out another way to do this. Or don't write positions using standX?
         elif position_tag == "walking_away":
             return (["Turn Away From Me", "walking_away"])
         elif position_tag == "kissing":
