@@ -24,3 +24,9 @@ init -1 python:
 
     def requirement_disable_position(the_person_one, the_person_two):
         return False
+
+    def requirement_hard(the_person_one, the_person_two):
+        if mc.recently_orgasmed:
+            return False
+        else:
+            return True

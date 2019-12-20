@@ -199,6 +199,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
             $ round_choice = "Leave"
         else:
             $ active_mc_position.call_intro(the_person_one, the_person_two, mc.location, object_choice, round)
+            $ round_choice = None
     while not finished:
         # if girl_in_charge:
         #     # For now, default to guys only in charge
@@ -219,7 +220,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                             if options.requirement(the_person_one, the_person_two):
                                 option_list.append([options.description,options.name])
 
-                    if not position_locked and object_choice:
+                    if not position_locked:
                         option_list.append(["Pause and change position.\n-5 {image=gui/extra_images/arousal_token.png}","Change"])
                         ##### For now, no implemantation of connections
                         # for position in position_choice.connections:
