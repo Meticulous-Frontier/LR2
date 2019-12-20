@@ -19,7 +19,7 @@ init 2 python:
                     return True
         return False
 
-    SB_working_weekend_crisis = ActionMod("Working Weekend",SB_working_weekend_requirement,"SB_working_weekend_crisis_label", 
+    SB_working_weekend_crisis = ActionMod("Working Weekend",SB_working_weekend_requirement,"SB_working_weekend_crisis_label",
         menu_tooltip = "While working weekends an employee comes into the office.", category = "Business", is_crisis = True, crisis_weight = SB_working_weekend_crisis_weight)
 
 label SB_working_weekend_crisis_label():
@@ -558,7 +558,8 @@ label SB_working_weekend_crisis_label():
                 $ strip_choice = the_person_two.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
             "Now naked, she walks over to you and [the_person.possessive_title]."
             the_person_two.char "Okay, how do you want to do this?"
-            call SB_threesome_description(the_person, the_person_two, SB_threesome_sixty_nine, make_desk(), 0, private = True, girl_in_charge = False) from _SB_EVENT_THREESOME_WEEKEND_SB10
+            call start_threesome(the_person, the_person_two, start_position = Threesome_sixty_nine) from threesome_working_weekend_test_call_4
+            #call SB_threesome_description(the_person, the_person_two, SB_threesome_sixty_nine, make_desk(), 0, private = True, girl_in_charge = False) from _SB_EVENT_THREESOME_WEEKEND_SB10
             "Wow, you just had sex with [the_person.possessive_title] and [the_person_two.possessive_title]! You can't believe how lucky you are."
             "Eventually, [the_person_two.possessive_title] gets up."
             $ SB_draw_two_person_scene(person_one = the_person, person_two = the_person_two, two_pos_x = 0.7, one_position = "missionary")

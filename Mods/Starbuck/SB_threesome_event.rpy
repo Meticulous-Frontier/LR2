@@ -65,13 +65,16 @@ label SB_fetish_vaginal_family_threesome_label():
     the_person_one.char "Mmm... I can't wait for you to fuck me..."
     $ the_person_one.change_arousal(10)
     "You glance over at [the_person_two.possessive_title]. She is watching you and [the_person_one.possessive_title] intently and has one hand between her legs, stroking the outer lips of her pussy."
-    $ the_person_one.change_arousal(5)
+    $ the_person_two.change_arousal(5)
     "This is going better than you expected! You get a little braver."
     mc.name "Hey [the_person_two.title]... why don't you join us? There's no reason we can't all have a little family fun together..."
     "[the_person_two.possessive_title] sighs. She gives in to her arousal and need."
     the_person_two.char "Okay... What do you want me to do?"
-
-    call SB_threesome_description(the_person_two, the_person_one, SB_threesome_sixty_nine, make_bed(), 0, private = True, girl_in_charge = False) from _call_SB_threesome_description_SB_fetish_vaginal_family_threesome
+    mc.name "Come here and lay down... I give you some action while [the_person_one.title] sits on your face."
+    "[the_person_two.title] hesitates for a second, but then relents."
+    the_person_two.char "That sounds like fun... Okay! I'll do it!"
+    #call SB_threesome_description(the_person_two, the_person_one, SB_threesome_sixty_nine, make_bed(), 0, private = True, girl_in_charge = False) from _call_SB_threesome_description_SB_fetish_vaginal_family_threesome
+    call start_threesome(mom, lily, start_position = Threesome_sixty_nine) from threesome_event_test_call_2
     "Wow, you just had sex with [the_person_one.possessive_title] and [the_person_two.possessive_title]! You can't believe how lucky you are."
     "Eventually, the girls get up."
     $ SB_draw_two_person_scene(person_one = the_person_one, person_two = the_person_two, one_pos_x = 0.7)
