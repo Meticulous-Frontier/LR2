@@ -458,24 +458,14 @@ init -1:
 
         ## Increase the opinion on a specific topic (opinion)
         def increase_opinion_score(self, topic, add_to_log = True):
-            sexy_opinion = False
-            if topic in sexy_opinions_list:
-                sexy_opinion = True
-            elif not topic in opinions_list:
-                return # unknown opinion, so exit function
-
-            score = 0
-            if sexy_opinion:
-                score = self.sexy_opinions[topic][0]
-            else:
-                score = self.opinions[topic][0]
+            score = self.get_opinion_score(topic)
 
             if score < 2:
                 score += 1
 
-            if sexy_opinion:
+            if topic in self.sexy_opinions:
                 self.sexy_opinions[topic][0] = score
-            else:
+            if topic in self.opinions:
                 self.opinions[topic][0] = score
 
             if add_to_log:
@@ -486,24 +476,14 @@ init -1:
 
         ## Decrease the opinion on a specific topic (opinion)
         def decrease_opinion_score(self, topic, add_to_log = True):
-            sexy_opinion = False
-            if topic in sexy_opinions_list:
-                sexy_opinion = True
-            elif not topic in opinions_list:
-                return # unknown opinion, so exit function
-
-            score = 0
-            if sexy_opinion:
-                score = self.sexy_opinions[topic][0]
-            else:
-                score = self.opinions[topic][0]
+            score = self.get_opinion_score(topic)
 
             if score > -2:
                 score -= 1
 
-            if sexy_opinion:
+            if topic in self.sexy_opinions:
                 self.sexy_opinions[topic][0] = score
-            else:
+            if topic in self.opinions:
                 self.opinions[topic][0] = score
 
             if add_to_log:
