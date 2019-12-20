@@ -282,7 +282,7 @@ label SB_fetish_anal_mom_kitchen_label(the_person):
     the_person.char "Shut up just fuck me before your sister notices!"
     "You rub some lube on your cock and on [the_person.title]'s ass hole. You grab her by the hips and then roughly pull her back until your cock is buried inside her rump."
 
-    call fuck_person(the_person, start_position = SB_anal_standing, start_position = make_table(), skip_intro = True) from _call_sex_description_SBR40
+    call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_table(), skip_intro = True) from _call_sex_description_SBR40
 
     $ the_report = _return
     if the_report.get("girl orgasms", 0) > 0:

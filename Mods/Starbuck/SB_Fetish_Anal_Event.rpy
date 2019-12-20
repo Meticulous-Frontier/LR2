@@ -468,7 +468,7 @@ label SB_mom_anal_pay_label():
     the_person.char "[the_person.mc_title], could we talk for a moment?"
     mc.name "Sure, down in a second."
     $ mc.change_location(kitchen)
-    $ mc.location.show_background()    
+    $ mc.location.show_background()
     $ the_person.draw_person(position = "sitting")
     "[the_person.possessive_title] is sitting at the kitchen table, a collection of bills laid out in front of her."
     "She is fidgeting a bit. You can tell she is a little nervous about something."
@@ -551,7 +551,7 @@ label SB_mom_anal_pay_label():
             "You grab the lube leftover from the night before. You quickly apply another glob to [the_person.title]'s back side. You apply some more to your cock until it is good and slick."
             "You get yourself lined up with your mom's back passage. You slowly begin your anal penetration."
             the_person.char "That's it [the_person.mc_title]! Fuck me good!"
-            call fuck_person(the_person, start_position = doggy_anal, start_position = make_bed(), skip_intro = True) from _call_sex_description_SBA43
+            call fuck_person(the_person, start_position = doggy_anal, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBA43
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:
                 "[the_person.title] lays there on the bed, speechless from your anal plundering."
@@ -615,7 +615,7 @@ label SB_mom_anal_friday_label():
             $ the_person.draw_person(position = "cowgirl")
             the_person.char "Now, just let [the_person.title] take care of you. I'm gonna stick it into my most intimate hole now..."
             "[the_person.title] goes slow, but steadily slides down, impaling her sphincter on your throbbing erection. She bottoms out and moans loudly."
-            call fuck_person(the_person, start_position = SB_anal_cowgirl, start_position = make_bed(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_SBA51
+            call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_SBA51
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:
                 the_person.char "Oh god, I came so hard..."
@@ -793,7 +793,7 @@ label SB_starbuck_anal_intro():
 
     $ mc.change_location(sex_store)
     $ mc.location.show_background()
-    
+
     "The door is locked so you give it a knock. [the_person.possessive_title] appears in the glass and quickly opens it for you."
     the_person.char "[the_person.mc_title]! You came!"
     "She gives you a quick wink."
@@ -966,7 +966,7 @@ label SB_starbuck_anal_swing_demo(the_person):
         "You start to strip down, but watch intently while [the_person.possessive_title] strips down along side you."
 
         $ the_person.strip_outfit(position = "stand2")
-        
+
         "When you finish stripping, she turns her back to you."
         $ the_person.draw_person(position = "back_peek")
         mc.name "It's going to feel so good when I slide into that amazing ass of yours..."
