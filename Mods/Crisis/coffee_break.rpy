@@ -12,13 +12,13 @@ init 2 python:
         return False
 
     def has_opinion(person, topic):
-        return not person.get_opinion_topic(topic) is None
+        return not (person.get_opinion_topic(topic) is None)
 
     def update_opinion(person, topic):
         if has_opinion(person, topic):
             person.increase_opinion_score(topic)
         else:
-            person.add_opinion(topic, 1, sexy_opinion = True)
+            person.add_opinion(topic, 1)
         return
 
     coffee_break_action = ActionMod("Coffee Break", coffee_break_requirement, "coffee_break_action_label",
