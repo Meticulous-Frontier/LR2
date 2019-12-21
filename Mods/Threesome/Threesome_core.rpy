@@ -529,16 +529,16 @@ label threesome_strip_menu(the_person_one, the_person_two):
     call threesome_strip_menu(the_person_one, the_person_two) from _threesome_recurrent_strip_call_1
     return
 
-label can_join_threesome(the_person_one, the_person_two, intial_position): #Can use this function to check if there is a threesome position available that a second girl can join.
-    $ return_bool = False
-    python:
-        for threeway in list_of_threesomes:
-            if threeway.requirements(the_person_one, the_person_two):
-                if threeway.position_one_tag == girl_one_choice:            #Look for positions that match with any position taken by girl 1
-                    return_bool =  True
-                elif threeway.position_two_tag == girl_one_choice:
-                    return_bool =  True
-    return return_bool                                                          #No acceptable position found, cannot join threesome
+# label can_join_threesome(the_person_one, the_person_two, initial_position_tag): #Can use this function to check if there is a threesome position available that a second girl can join.
+#     $ return_bool = False
+#     python:
+#         for threeway in list_of_threesomes:
+#             if threeway.requirements(the_person_one, the_person_two):
+#                 if threeway.position_one_tag == initial_position_tag:            #Look for positions that match with any position taken by girl 1
+#                     return_bool =  True
+#                 elif threeway.position_two_tag == initial_position_tag:
+#                     return_bool =  True
+#     return return_bool                                                          #No acceptable position found, cannot join threesome
 
 label join_threesome(the_person_one, the_person_two, initial_position):  #We can use this function to add a second girl to an existing sex scene.
                                                                          #Works by selecting a position then calling threesome with the first position pre-set
@@ -547,7 +547,7 @@ label join_threesome(the_person_one, the_person_two, initial_position):  #We can
     $ position_choice = _return
     call start_threesome(the_person_one, the_person_two, start_position = position_choice, private = False) from _join_threesome_in_progress_1
 
-    return
+    return _return
 
 
 init python:
@@ -576,3 +576,14 @@ init python:
             return (["Sit on Top", "cowgirl"])
         else:
             return (["Broken Position", "stand4"])
+
+    def can_join_threesome(the_person_one, the_person_two, initial_position_tag): #Can use this function to check if there is a threesome position available that a second girl can join.
+        return_bool = False
+
+        for threeway in list_of_threesomes:
+            if threeway.requirements(the_person_one, the_person_two):
+                if threeway.position_one_tag == initial_position_tag:            #Look for positions that match with any position taken by girl 1
+                    return_bool =  True
+                elif threeway.position_two_tag == initial_position_tag:
+                    return_bool =  True
+        return return_bool
