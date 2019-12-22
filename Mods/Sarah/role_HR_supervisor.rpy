@@ -22,6 +22,8 @@ init -0 python:
 
 #HR director action requirements#
 init -2 python:
+    business_HR_gym_tier = 0
+    business_HR_gym_msg_tier = 0
     def HR_director_initial_hire_requirement():
         if business_HR_meeting_last_day < day:
             if mc.business.is_open_for_business():
@@ -64,6 +66,18 @@ init -2 python:
                 else:
                     return "Requires $1500"
 
+        return False
+
+    def HR_director_gym_membership_tier_1_requirement(the_person):
+        if business_HR_gym_msg_tier > 0:
+            if business_HR_gym_tier == 0:
+                return True
+        return False
+
+    def HR_director_gym_membership_tier_2_requirement(the_person):
+        if business_HR_gym_msg_tier > 1:
+            if business_HR_gym_tier == 1:
+                return True
         return False
 
     def HR_director_mind_control_requirement(the_person):
@@ -183,6 +197,8 @@ init 1301 python:
 
 
 
+
+
     def HR_director_breast():
         if breast_enhancement.researched:
             return True
@@ -201,6 +217,8 @@ label HR_director_mod_init():
         business_HR_mind_control_attempt = False
         business_HR_serum_breast = False
         business_HR_coffee_tier = 0
+        business_HR_gym_tier = 0
+        business_HR_gym_msg_tier = 0
         business_HR_skimpy_uniform = False
         business_HR_uniform = False
         business_HR_sexy_meeting_start = False
@@ -216,6 +234,10 @@ label HR_director_mod_init():
             menu_tooltip = "Costs $500 but makes meetings more impactful.")
         HR_director_coffee_tier_2_action = Action("Add stronger serum to coffee during meetings.", HR_director_coffee_tier_2_requirement, "HR_director_coffee_tier_2_label",
             menu_tooltip = "Costs $1500 but makes meetings impactful.")
+        HR_director_gym_membership_tier_1_action = Action("Sponsor company gym membership.", HR_director_gym_membership_tier_1_requirement, "HR_director_gym_membership_tier_1_requirement",
+            menu_tooltip = "Costs money each week, but increases girls energy over time.")
+        HR_director_gym_membership_tier_2_action = Action("Sponsor company health program.", HR_director_gym_membership_tier_2_requirement, "HR_director_gym_membership_tier_2_requirement",
+            menu_tooltip = "Costs money each week, but increases girls energy over time.")
         HR_director_mind_control_action = Action("Produce mind control Serum.", HR_director_mind_control_requirement, "HR_director_mind_control_label",
             menu_tooltip = "Costs $5000. Allows you to attempt mind control of employee.")
         HR_director_mind_control_attempt = Action("Attempt Mind Control {image=gui/heart/Time_Advance.png}", HR_director_mind_control_attempt_requirement, "HR_director_mind_control_attempt_label",
@@ -421,6 +443,8 @@ label HR_director_monday_meeting_label(the_person):
                 mc.name "Yes I want to do that."
                 the_person.char "Ok! Let me see who I have on my list here..."
                 call HR_director_personnel_interview_label(the_person, max_opinion = business_HR_coffee_tier) from HR_DIR_INTERVIEW_CALL_2
+    the_person.char "Hmm, let's see, what's next..."
+    call HR_director_manage_gym_membership(the_person) from HR_Gym_manage_1
 
     the_person.char "Ok, next up, I wanted to review progress made on serums and policy changes from the past week to see if anything might be useful."
     call HR_director_review_discoveries_label(the_person) from HR_DIR_INTERVIEW_CALL_3
@@ -662,7 +686,54 @@ label HR_director_review_discoveries_label(the_person):
             mc.name "I'll keep that in mind going forward. If I want to have a meeting with an employee, I'll make sure to come find you first."
             the_person.char "Great! I think that will work out nicely."
             $ business_HR_meeting_on_demand = True
+
+    if mc.business.get_employee_count() > 6 and business_HR_gym_msg_tier == 0:
+        $ business_HR_gym_msg_tier = 1
+        the_person.char "With our small, but growing employee group, I thought it might be worth looking into a compnay sponsored gym fitness program."
+        the_person.char "I did some research, and it turns out there is a local one with a nice facility with great pricing for companies."
+        mc.name "How much would it cost?"
+        the_person.char "For the company I found, the pricing is $5 per person, per week."
+        mc.name "That seems pretty reasonable actually. What benefits would it provide?"
+        the_person.char "Well, having something like that available to employees would certainly help employees get more fit."
+        the_person.char "It might take a while to see changes, but I would say girls would have more energy over all."
+        mc.name "Okay, I'll consider it and get back to you on that."
+
+    elif mc.business.get_employee_count() > 14 and business_HR_gym_tier == 1:
+        $ business_HR_gym_msg_tier = 2
+        the_person.char "The company is getting bigger, and I was thinking about possible benefits to the company for increasing good health habits of the employees."
+        the_person.char "There is a company that specializes in information compaigns on healthy eating habits, exercise, and good mental health."
+        the_person.char "Combined with the company gym membership, I think we would see a sizable benefit to the company as a whole."
+        mc.name "How much would it cost?"
+        the_person.char "For the company I found, the pricing is $10 per person, per week. This would be on top of the $5 per person for the company gym membership."
+        mc.name "What would be the benefits we would see if we invest in this?"
+        the_person.char "Well, generally it would incerase the energy of employees as they develop healthier eating patterns."
+        the_person.char "Additionally, I think employees with interests in sports and hiking would really appreciate the change also."
+        mc.name "Okay, I'll consider it and get back to you on that."
     return
+
+label HR_director_manage_gym_membership(the_person):
+    if business_HR_gym_tier == 0:
+        $ cost = 0
+        return
+    elif business_HR_gym_tier == 1:
+        python:
+            for x in mc.business.get_employee_list():
+                if x.max_energy < 120:
+                    x.change_max_energy(5 ,add_to_log = False)
+            cost = len(mc.business.get_employee_list()) * 5
+    elif business_HR_gym_tier == 2:
+        python:
+            for x in mc.business.get_employee_list():
+                if x.max_energy < 150:
+                    x.change_max_energy(5 ,add_to_log = False)
+                if x.get_opinion_score("sports") > 0 or x.get_opinion_score("hiking") > 0:
+                    x.change_happiness(10)
+            cost = len(mc.business.get_employee_list()) * 15
+    the_person.char "Just to let you know, I wrote out the check this morning for this week's employee health program."
+    $ mc.business.funds -= cost
+    return
+
+
 
 label HR_director_coffee_tier_1_label(the_person):
     $ mc.business.funds -= 500
@@ -691,6 +762,22 @@ label HR_director_calculate_eff(the_person):
         #TODO make events later on that factor this to be better
     $ HR_dir_factor += business_HR_eff_bonus
     $ mc.business.effectiveness_cap = (100 + HR_dir_factor)   #100% base effectiveness
+    return
+
+label HR_director_gym_membership_tier_1_label(the_person):
+    mc.name "I've been thinking about your proposal to sponsor a company gym membership. I'm giving you approval to set it up."
+    the_person.char "Sounds good sir! I'll have that set up and ready to begin next week."
+    mc.name "Sounds good."
+    the_person.char "Did you need anything else, [the_person.mc_title]?"
+    $ business_HR_gym_tier = 1
+    return
+
+label HR_director_gym_membership_tier_2_label(the_person):
+    mc.name "I've been thinking about your proposal to sponsor a company wide health program. I'm giving you approval to set it up."
+    the_person.char "Sounds good sir! I'll have that set up and ready to begin next week."
+    mc.name "Sounds good."
+    the_person.char "Did you need anything else, [the_person.mc_title]?"
+    $ business_HR_gym_tier = 2
     return
 
 label HR_director_change_relative_recruitment_label(the_person):
@@ -778,6 +865,34 @@ label HR_diector_sexy_meeting_start_label(the_person):
             "Eventually she cleans herself up and makes herself presentable again."
             return
 
+    if business_HR_sexy_start_unlocks.get("missionary on desk", False) == False:
+        if (the_person.sluttiness + the_person.get_opinion_score("vaginal sex") * 5) >= 60:
+            the_person.char "Hey... you know what would be really hot?"
+            "You feel yourself raise your eyebrow in response. This should be good!"
+            the_person.char "What if I just layed down on your desk and you had your way with me, right here in your office?"
+            the_person.char "Having my boss pin me to his desk and ravage me..."
+            mc.name "I'm think thats a good idea. Why don't you get your ass over here and we'll find out for sure!"
+            the_person.char "Oh! Yes sir!"
+            "[the_person.possessive_title] gets on your desk and lays on her back."
+            $ scene_manager.update_actor(the_person, position = "missionary", emotion = "happy")
+            if the_person.outfit.vagina_available():
+                "She spreads her legs, her pussy on display in front of you."
+            else:
+                "You start to strip [the_person.possessive_title] down."
+                $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
+                "Soon her body is on full display in front of you, on your desk."
+            "You have your cock out in a flash. You position it at her slick entrance."
+            "You push yourself inside of her nice and slow, since she hasn't had much time to warm up yet."
+            the_person.char "Mmmm, [the_person.mc_title]. Use me boss! I'm here to serve you!"
+            "You start to piston your cock in and out of her."
+            call fuck_person(the_person, start_position = missionary, start_object = make_desk(), skip_intro = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_start_three
+            $ business_HR_sexy_start_unlocks["missionary on desk"] = True
+            "[the_person.possessive_title] lays on your desk, recovering."
+            mc.name "You were right, [the_person.title]. It IS really hot to fuck you on my desk!"
+            the_person.char "Ah, yes, I suspected it would be, sir!"
+            "Eventually she cleans herself up and makes herself presentable again."
+            return
+
     the_person.char "Okay! How do you want me to take care of you this week, [the_person.mc_title]?"
 
     python:
@@ -813,6 +928,18 @@ label HR_diector_sexy_meeting_start_label(the_person):
         $ scene_manager.update_actor(the_person, position = "blowjob")
         "[the_person.possessive_title] smiles at you as she uses her hands to wrap her tits around your cock, and then starts to move them up and down."
         call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_mid_two
+
+    elif position_choice == "missionary on desk":
+        if the_person.outfit.vagina_available() == False:
+            "[the_person.possessive_title] begins to take off her clothes. "
+            $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
+            "When she finishes getting naked, she gives you a big smile."
+        the_person.char "Oh my, fucking me on your desk? You are so naughty, boss!"
+        $ scene_manager.update_actor(the_person, position = "missionary")
+        mc.name "Oh, I'm the naughty one? I seem to remember this was your idea in the first place..."
+        "You pull your cock out and line it up with [the_person.title]'s pussy. You ease youself inside of her with one slow, smooth push."
+        the_person.char "I never said I wasn't naughty too... Oh god, [the_person.mc_title], that feels good. Have your way with me!"
+        call fuck_person(the_person, start_position = missionary, start_object = make_desk(), skip_intro = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_mid_three
 
     "She quickly gets dressed to continue your meeting."
     $ the_person.review_outfit(show_review_message = False)

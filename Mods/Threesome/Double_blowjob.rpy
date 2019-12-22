@@ -60,7 +60,7 @@ init:
             strip_ask_description = "strip_ask_threesome_double_blowjob_makeout",
             orgasm_description = "orgasm_threesome_double_blowjob_makeout",
             swap_description = "swap_threesome_double_blowjob_makeout",
-            requirement = requirement_disable_position)
+            requirement = requirement_always_true)
 
 
         threesome_double_blowjob = Threesome_Position(name = "Sixty Nine Plus One",
@@ -70,7 +70,7 @@ init:
             girl_one_final_description = "On your knees too",
             girl_two_final_description = "On your knees too",
             requires_location = "Kneel",
-            requirements = requirement_hard,
+            requirements = requirement_always_true,
             verb = "throat",
             p1_transform = threesome_double_blowjob_one_transform,
             p2_transform = threesome_double_blowjob_two_transform,
@@ -208,16 +208,90 @@ label swap_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_locat
 #In scene 2, girls make out around MC's cock
 
 label intro_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location, the_object, the_round):
-    "This scene in progress"
+    "As the girls get on their knees, you run your hands through their hair."
+    mc.name "Why don't you two makeout for a bit. I want to watch."
+    "[the_girl_1.title] and [the_girl_2.title] turn to each other and begin to kiss. Their hands begin to explore each other's breasts."
+    the_girl_1.char "Mmmm, I love your tits, [the_girl_2.name]!"
+    the_girl_2.char "Yours are nice too... I kinda want to suck on them..."
+    "The girls are heating up as they start to make out with each other."
+    return
 
 label scene_threesome_double_blowjob_makeout_1(the_girl_1, the_girl_2, the_location, the_object, the_round):
-    "This scene in progress"
+    if the_girl_2.outfit.vagina_available():
+        "As they are making out, you notice [the_girl_1.possessive_title] has her hand between [the_girl_2.title]'s legs, petting her pussy."
+    else:
+        the_girl_1.char "Mmm... I want to touch you. Lets get these out of the way!"
+        "She starts to strip her."
+        $ scene_manager.strip_actor_outfit(the_girl_2, exclude_upper = True)
+        "Once she finishes stripping her lower half [the_girl_1.title] immediately begins to fondle [the_girl_2.possessive_title]'s pussy."
+    if the_girl_1.outfit.vagina_available():
+        "As she gets fingered, you notice that [the_girl_2.title] reaches down and begins to return the favor, fondling [the_girl_1.title]."
+    else:
+        the_girl_2.char "Mmm, I want to to touch you too! Lets get these off of you..."
+        "[the_girl_2.title] starts to pull at her clothes."
+        $ scene_manager.strip_actor_outfit(the_girl_1, exclude_upper = True)
+        "Once her pussy is bare, the girls waste no time and begin to pet each other."
+    "[the_girl_1.title] and [the_girl_2.title] begin moaning into each others mouths as they make out, while simulteanously fingering each other."
+    "You start to stroke yourself, watching the impressive show in front of, but you soon feel another hand on yours."
+    if mc.recently_orgasmed:
+        "[the_girl_1.title]'s hand bumps yours away, and she begins to stroke your semi-erect cock."
+    else:
+        "[the_girl_1.title]'s hand bumps yours away, and she begins to stroke your hard cock."
+    "The girls make out for a while, enjoying the taste of each other's lips."
+    return
 
 label scene_threesome_double_blowjob_makeout_2(the_girl_1, the_girl_2, the_location, the_object, the_round):
-    "This scene in progress"
+    "You decide to give the girls something additional to kiss as they make out with each other."
+    "You move forward and move your hips right next to their faces, your cock resting on [the_girl_1.title]'s cheek."
+    if mc.recently_orgasmed:
+        "She gets the hint. The girls shift over, so they are making out, but the tip of your cock is also in the side of each of their mouths."
+        "Watching the girls make out around your cock is extremely arousing, causing you to get hard even though you just came a few moments ago."
+        $ mc.change_arousal(5)
+        $ mc.recently_orgasmed = False
+    else:
+        "The girls get the hint. They shift over, so they are making out, but the tip of your cock is also in the side of each of their mouths."
+    "Two tongues duel around the tip of your cock. The pleasure is exquisite, their lovely lips smacking and slurping at each other and you."
+    "You grab the back of their heads for a moment, the thrust your hips forward. Their tongues and lips caress the side of your dick as it slides between them."
+    "When you pull back, you step back. The girls pout for a second when your cock is no longer in reach but quickly resume touching and kissing each other."
+    return
 
 label outro_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location, the_object, the_round):
-    "This scene in progress"
+    "Watching the girls, on their knees in front of you, kiss and please each other has you hot and bothered. You find yourself stroking yourself past the point of no return."
+    mc.name "Oh god, I'm gonna cum!"
+    if the_girl_1.get_opinion_score("drinking cum") > 1:
+        "[the_girl_1.possessive_title] immediately grabs your cock, opens up and takes your tip in her mouth."
+        "[the_girl_2.title] moves down and strokes the side of your cock as you begin to ejaculate into [the_girl_1.title]'s eager mouth."
+        $ the_girl_1.cum_in_mouth()
+        $ scene_manager.draw_scene()
+        "You dump wave after wave of cum into [the_girl_1.title]'s mouth."
+        if the_girl_2.get_opinion_score("drinking cum") > 0:
+            "As you finish, you slowly pull back. Some of your cum slowly dribbles out of her mouth."
+            the_girl_2.char "Hey! Save some for me!"
+            "[the_girl_2.title] leans toward's her blowjob partner and begins kissing and licking your cum off her face."
+            "Soon, they are full on making out, swapping your cum between their mouths."
+            $ the_girl_2.cum_in_mouth()
+            $ scene_manager.draw_scene()
+            "When they finish, they look up at you, remnants of your cum still visible at the corner of their mouths."
+            return
+        "You slowly pull back. Some of your cum slowly dribbles out of her mouth."
+        return
+    elif the_girl_2.get_opinion_score("drinking cum") > 0:
+        "[the_girl_2.possessive_title] immediately grabs your cock, opens up and takes your tip in her mouth."
+        "[the_girl_1.title] strokes your cock with her hand as you fire your load into the back of [the_girl_2.title]'s mouth."
+        $ the_girl_2.cum_in_mouth()
+        $ scene_manager.draw_scene()
+        "As you finish, you slowly pull back. Some of your cum slowly dribbles out of her mouth."
+        return
+    "You take your cock and begin to stroke it. Both girls look up at you as you get ready to finish."
+    "Your orgasm hits and you being spraying down their beautiful faces with their seed."
+    $ the_girl_1.cum_on_face()
+    $ scene_manager.draw_scene()
+    "Your first couple of spurts hit [the_girl_1.title] in the face. She gives a sigh when she feels your warm seed."
+    "You point your cock at [the_girl_2.title] and fire another couple of rounds."
+    $ the_girl_2.cum_on_face()
+    $ scene_manager.draw_scene()
+    "When you finish, both of the girl's faces are covered in your sticky cum."
+    return
 
 label strip_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location, the_object, the_round):
     "This scene in progress"
@@ -226,7 +300,34 @@ label strip_ask_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_loc
     "This scene in progress"
 
 label orgasm_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location, the_object, the_round):
-    "This scene in progress"
+        if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
+            "You can feel the pace and urgency of the girls moaning increase as the kiss each other."
+            "When you look down, you can see that each girl has a hand along the other's crotch."
+            "They both orgasm, almost in unison."
+            "As they start to wind down, they continue kissing and caressing each other."
+            return
+
+        elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
+            "You can feel [the_girl_1.title] moaning around your cock with increasing intensity. When you look down, you notice [the_girl_2.title]'s hand petting her crotch."
+            "An orgasm hits her. She takes your cock into her mouth and moans around it loudly. The vibrations feel amazing."
+            "When she finishes, she briefly comes up for air."
+            the_girl_1.char "Oh fuck that was good. I need a second."
+            "She sits back and [the_girl_2.title] takes over for her while she recovers."
+            return
+
+        elif the_girl_2.arousal > 100:   #Just girl 2 orgasms
+            "You can feel [the_girl_2.title] moaning around your cock with increasing intensity. When you look down, you notice [the_girl_1.title]'s hand petting her crotch."
+            "An orgasm hits her. She takes your cock into her mouth and moans around it loudly. The vibrations feel amazing."
+            "When she finishes, she briefly comes up for air."
+            the_girl_2.char "Oh fuck that was good. I need a second."
+            "She sits back and [the_girl_1.title] takes over for her while she recovers."
+            return
+        return
 
 label swap_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location, the_object, the_round):
-    "This scene in progress"
+    mc.name "Why don't you two makeout for a bit. I want to watch."
+    "[the_girl_1.title] and [the_girl_2.title] turn to each other and begin to kiss. Their hands begin to explore each other's breasts."
+    the_girl_1.char "Mmmm, I love your tits, [the_girl_2.name]!"
+    the_girl_2.char "Yours are nice too... I kinda want to suck on them..."
+    "The girls are heating up as they start to make out with each other."
+    return

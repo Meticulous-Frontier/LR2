@@ -135,11 +135,13 @@ label threesome_alignment():
                 pass
         $ position_choice.align_position(the_person_one, the_person_two)  #This doesn't work lol. Delete? I hate transforms
 
+
 label start_threesome(the_person_one, the_person_two, start_position = None, start_object = None, round = 0, private = True, girl_in_charge = False, position_locked = False, report_log = None, affair_ask_after = True, hide_leave = False):
     # When called
     if report_log is None:
         $ report_log = defaultdict(int) #Holds information about the encounter: what positiosn were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
-        $ report_log["positions_used"] = ["Threesome"] #This is a list, not an int.
+        $ report_log["positions_used"] = []  #We don't need to add threesome to the list, because we add it manually at the end of this function.
+        #$ report_log["positions_used"]
 
     $ finished = False #When True we exit the main loop (or never enter it, if we can't find anything to do)
     $ position_choice = None
@@ -300,9 +302,19 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                     the_person_one.char "I'm exhausted [the_person.mc_title], I can't keep this up..."
                     $ position_choice = None
                     $ active_mc_position = None
-                    if the_person_two.energy > 20:
+                    if the_person_two.energy > 30:
                         #TODO give option to continue fucking the second girl
-                        pass
+                        the_person_two.char "Don't worry, I'm still good to go!"
+                        "Do you want to continue?"
+                        menu:
+                            "Fuck [the_person_two.title]":
+                                "[the_person_one.title] moves to the side and recovers while you resume activities with [the_person_two.title]."
+                                $ scene_manager.remove_actor(the_person_one)
+                                $ report_log["girl orgasms"] = report_log["girl two orgasms"]
+                                call fuck_person(the_person_two, private = private, report_log = report_log) from threesome_to_twosome_transition_1
+                            "Done for now":
+                                "I think we should just be done for now." #TODO girl takes over if she needs to cum and hasn't yet
+                        $ finished = True
                     else:
                         the_person_two.char "Yeah me too. I think I need a break!"
                         $ finished = True
@@ -311,7 +323,18 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                     $ position_choice = None
                     $ active_mc_position = None
                     if the_person_one.energy > 20:
-                        #TODO give option to continue fucking the second girl
+                        the_person_one.char "Don't worry, I'm still good to go!"
+                        "Do you want to continue?"
+                        menu:
+                            "Fuck [the_person_one.title]":
+                                "[the_person_two.title] moves to the side and recovers while you resume activities with [the_person_one.title]."
+                                $ scene_manager.remove_actor(the_person_two)
+                                $ report_log["girl orgasms"] = report_log["girl one orgasms"]
+                                call fuck_person(the_person_one, private = private, report_log = report_log) from threesome_to_twosome_transition_2
+                            "Done for now":
+                                "I think we should just be done for now." #TODO girl takes over if she needs to cum and hasn't yet
+                        $ finished = True
+
                         pass
                     else:
                         the_person_one.char "Yeah me too. I think I need a break!"
