@@ -684,7 +684,7 @@ label SB_lily_anal_dp_fetish_label():
     the_person.char "Hey! Thanks for coming with me! I need your help with something!"
     "You are a little hesitant. She wants you to go shopping with her?"
     mc.name "Are you sure you need me for this?"
-    "She gives you a mischevious smile."
+    "She gives you a mischievous smile."
     the_person.char "Definitely! Don't worry, you'll be glad you came when you see where we are going."
     "Lily grabs you by the hand and leads you into the mall. It seems any inhibition she might have previously had being seen with her [the_person.mc_title] has vanished after being corrupted by your serums."
     "You are almost surprised when she leads you into the sex shop. The owner greets you as you walk in."
