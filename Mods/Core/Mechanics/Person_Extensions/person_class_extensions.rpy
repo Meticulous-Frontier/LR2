@@ -306,6 +306,14 @@ init -1:
                 strip_choice = self.outfit.remove_random_any(top_layer_first, exclude_upper, exclude_lower, exclude_feet, do_not_remove = True)
                 renpy.pause(delay)
 
+            # special case where she is wearing a two-part item that blocks her vagina, but we need it be available
+            if not exclude_lower and not self.outfit.vagina_available():
+                strip_choice = self.outfit.remove_random_any(top_layer_first, False, exclude_lower, exclude_feet, do_not_remove = True)
+                while not strip_choice is None:
+                    self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
+                    strip_choice = self.outfit.remove_random_any(top_layer_first, False, exclude_lower, exclude_feet, do_not_remove = True)
+                    renpy.pause(delay)
+
         Person.strip_outfit = strip_outfit
 
         def run_move_enhanced(self,location): 

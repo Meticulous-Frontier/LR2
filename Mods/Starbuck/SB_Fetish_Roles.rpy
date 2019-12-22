@@ -188,11 +188,7 @@ label SB_fetish_vaginal_mom_kitchen_label():
     else:                                              #Otherwise, strip her down.
         "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy"
 
-        python:
-            for clothing in the_person.outfit.get_lower_ordered():
-                the_person.outfit.remove_clothing(clothing)
-                the_person.draw_person(position = "standing_doggy")
-                renpy.say("","")
+        $ the_person.strip_outfit(position = "standing_doggy", exclude_upper = True)
 
         "With her pussy finally exposed you waste no time. You quickly pull your cock out and line it up with her wet slit."
 
@@ -270,11 +266,7 @@ label SB_fetish_anal_mom_kitchen_label(the_person):
     else:                                              #Otherwise, strip her down.
         "You don't bother to reply, instead you begin stripping away anything between you and her supple ass."
 
-        python:
-            for clothing in the_person.outfit.get_lower_ordered():
-                the_person.outfit.remove_clothing(clothing)
-                the_person.draw_person(position = "standing_doggy")
-                renpy.say("","")
+        $ the_person.strip_outfit(position = "standing_doggy", exclude_upper = True)
 
         "With her ass finally exposed you waste no time. You quickly pull your cock out and rub it between her cheeks."
     "[the_person.possessive_title] pulls some lube out of one of the kitchen drawers."
@@ -309,11 +301,7 @@ label SB_lily_anal_in_room_label(the_person):
     else:
         "You step up behind [the_person.possessive_title] and start to grope her ass. She sighs as you massage it."
         "You decide to start getting her ready while she looks for the the toy. You start peeling her clothes off."
-        python:
-            for clothing in the_person.outfit.get_lower_ordered():
-                the_person.outfit.remove_clothing(clothing)
-                the_person.draw_person(position = "standing_doggy")
-                renpy.say("","")
+        $ the_person.strip_outfit(position = "standing_doggy", exclude_upper = True)
         mc.name "Mmmm, [the_person.title], your ass looks amazing. I can't wait to see that hole stretched around my cock..."
     the_person.char "Ah! Here it is. I know I can't wait, you know I love when you fuck me in the ass [the_person.mc_title]."
     "[the_person.possessive_title] hands you a bottle of lube and the dildo, then heads over to her bed and gets on her hands and knees with her ass in the air."
