@@ -149,7 +149,7 @@ init -1 python:
 
     def Sarah_weekend_surprise_crisis_requirement():
         if time_of_day > 1:
-            if sarah.sluttiness > 30:
+            if sarah.sluttiness > 50:
                 if day%7 == 5:  #Saturday
                     if mc.is_at_work():
                         return True
@@ -157,7 +157,6 @@ init -1 python:
 
     def test_bra_function(the_person):
         Sarah_remove_bra_from_wardrobe(the_person.wardrobe)
-
 
 label Sarah_intro_label():
     $ the_person = sarah
@@ -426,11 +425,9 @@ label Sarah_third_wheel_label():
     "She turns and heads into her building. You check your watch and realize how late it is."
     $ scene_manager.remove_actor(the_person, reset_actor = False)
     $ del sarah_friend #Cleanup?
+
     $ Sarah_get_drinks_action = Action("Sarah get drinks",Sarah_get_drinks_requirement,"Sarah_get_drinks_label")
     $ mc.business.mandatory_crises_list.append(Sarah_get_drinks_action) #Add the event here so that it pops when the requirements are met.
-
-
-
     return
 
 label Sarah_get_drinks_label():
@@ -805,6 +802,7 @@ label Sarah_get_drinks_label():
 
     $ sarah_weekend_surprise_action = ActionMod("Sarah's Weekend Surprise", Sarah_weekend_surprise_crisis_requirement, "Sarah_weekend_surprise_crisis_label",
         menu_tooltip = "Sarah catches you at work on the weekend again.", category = "Business", is_crisis = True, crisis_weight = 5)
+    $ mc.business.mandatory_crises_list.append(sarah_weekend_surprise_action) #Add the event here so that it pops when the requirements are met.
 
     return
 
@@ -895,20 +893,22 @@ label Sarah_catch_stealing_label():
     return
 
 label Sarah_epic_tits_label():
-    $ the_person = sarah
-    $ sarah.tits = "F"
-    $ sarah.event_triggers_dict["epic_tits_progress"] = 3
-    $ the_person.change_slut_core(10)
-    $ the_person.change_slut_temp(10)
+    python:
+        the_person = sarah
+        sarah.tits = "F"
+        sarah.event_triggers_dict["epic_tits_progress"] = 3
+        the_person.change_slut_core(10)
+        the_person.change_slut_temp(10)
     call Sarah_tits_reveal_label() from Sarah_epic_tits_call_1
     return
 
 label Sarah_new_tits_label():
-    $ the_person = sarah
-    $ sarah.tits = "D"
-    $ sarah.event_triggers_dict["epic_tits_progress"] = 2
-    $ the_person.change_slut_core(5)
-    $ the_person.change_slut_temp(5)
+    python:
+        the_person = sarah
+        sarah.tits = "D"
+        sarah.event_triggers_dict["epic_tits_progress"] = 2
+        the_person.change_slut_core(5)
+        the_person.change_slut_temp(5)
     call Sarah_tits_reveal_label() from Sarah_new_tits_call_1
     return
 
@@ -1047,8 +1047,7 @@ label play_darts_301(the_person, focus_mod = 0): #Label returns true if mc wins,
             $ p2_score = 101
         $ scene_manager.update_actor(the_person)
         the_person.char "Okay, [the_person.mc_title]. Your turn!"
-        "Your score: [mc_score]"
-        "What would you like to target?"
+        "Your score: [mc_score], what would you like to target?"
         menu:
             "Bullseye (50)" if mc_score > 49:
                 $ mc_score -= roll_dart_odds(target = 50, focus_score = mc.focus)
@@ -1070,9 +1069,7 @@ label play_darts_301(the_person, focus_mod = 0): #Label returns true if mc wins,
                 $ mc_score -= roll_dart_odds(target = mc_score, focus_score = mc.focus)
 
         if mc_score > 0:
-            "Now for your second dart."
-            "Your score: [mc_score]"
-            "What would you like to target?"
+            "Now for your second dart. Your score: [mc_score], what would you like to target?"
             menu:
                 "Bullseye (50)" if mc_score > 49:
                     $ mc_score -= roll_dart_odds(target = 50, focus_score = mc.focus)
@@ -1094,9 +1091,7 @@ label play_darts_301(the_person, focus_mod = 0): #Label returns true if mc wins,
                     $ mc_score -= roll_dart_odds(target = mc_score, focus_score = mc.focus)
 
         if mc_score > 0:
-            "Now for your third dart."
-            "Your score: [mc_score]"
-            "What would you like to target?"
+            "Now for your third dart. Your score: [mc_score], what would you like to target?"
             menu:
                 "Bullseye (50)" if mc_score > 49:
                     $ mc_score -= roll_dart_odds(target = 50, focus_score = mc.focus)
@@ -1149,7 +1144,7 @@ label Sarah_weekend_surprise_crisis_label():
                 the_person.char "I know you have a lot to do. Feel free to watch... or blow a little steam off with me!"
 
 
-            elif sarah.sluttiness > 25 and sarah.event_triggers_dict.get("epic_tits_progress", 0) > 1:
+            elif sarah.event_triggers_dict.get("epic_tits_progress", 0) > 1:
                 the_person.char "I got an idea. Why don't you let me help you, you know, relieve a little tension?"
                 mc.name "I'm not honestly that tense right now..."
                 if the_person.outfit.tits_available():
@@ -1181,8 +1176,6 @@ label Sarah_weekend_surprise_crisis_label():
                 "[the_person.title] quickly turns and walks out, leaving you to your work."
                 $ scene_manager.remove_actor(the_person)
                 return
-
-
 
     return
 

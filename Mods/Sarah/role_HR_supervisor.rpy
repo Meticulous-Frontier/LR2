@@ -22,8 +22,81 @@ init -0 python:
 
 #HR director action requirements#
 init -2 python:
+    #TODO move all these true false flags to a dict so that in the future when I add more, I can call them by reference and not invalidate old saves games!
+
+    business_HR_director = None
+    business_HR_tier = 0     # HR tiers based on progression. 1 = hired someone. 2 = training videos. 3 = company sponsored sexual training.
+    business_HR_eff_bonus = 0  #This bonus is based on OTHER factors and can be added to via events.
+    business_HR_serum_suggest_1 = False
+    business_HR_serum_suggest_2 = False
+    business_HR_mind_control = False
+    business_HR_mind_control_attempt = False
+    business_HR_serum_breast = False
+    business_HR_coffee_tier = 0
     business_HR_gym_tier = 0
     business_HR_gym_msg_tier = 0
+    business_HR_skimpy_uniform = False
+    business_HR_uniform = False
+    business_HR_sexy_meeting_start = False
+    business_HR_sexy_start_unlocks = {}
+    business_HR_relative_recruitment_status = False
+    business_HR_relative_recruitment_unlock = False
+    business_HR_meeting_on_demand = False
+    business_HR_meeting_last_day = 0
+    business_HR_gym_tier = 0
+    business_HR_gym_msg_tier = 0
+
+init 5 python:
+    def build_HR_review_list(the_person, max_tier = 0):
+        HR_tier_talk = -1 # init at -1 so we do the first collect with 0
+        HR_employee_list = []
+        # build list of girls that qualify for specified tier and max_tier score
+        while len(HR_employee_list) == 0 and HR_tier_talk < business_HR_coffee_tier and HR_tier_talk < max_tier:
+            HR_tier_talk += 1
+            HR_employee_list = get_HR_review_list(the_person, HR_tier_talk)
+        return (HR_employee_list, HR_tier_talk)
+
+    def get_HR_review_list(the_person, tier = 0):   #Pass in the HR director so we don't try to counsel her
+        people_list = []
+        for person in [x for x in mc.business.get_employee_list() if not x is the_person]:
+            topic_list = create_HR_review_topic_list(person)
+            for topic in topic_list:
+                if person.get_opinion_score(topic) < tier:
+                    people_list.append(person)
+                    break
+        return people_list
+
+    def build_HR_mc_list(the_person):
+        HR_employee_list = []
+        HR_employee_list = get_HR_review_list(the_person, tier = 2)
+        return HR_employee_list
+
+    def create_HR_review_topic_list(the_person):
+        topic_list = ["working"]
+        if the_person in mc.business.production_team:
+            topic_list.append("production work")
+        if the_person in mc.business.hr_team:
+            topic_list.append("HR work")
+        if the_person in mc.business.research_team:
+            topic_list.append("research work")
+        if the_person in mc.business.market_team:
+            topic_list.append("marketing work")
+        if the_person in mc.business.supply_team:
+            topic_list.append("supply work")
+        if business_HR_uniform:
+            topic_list.append("work uniforms")
+        if business_HR_skimpy_uniform:
+            topic_list.append("skimpy uniforms")
+
+        return topic_list
+
+    def update_hire_daughter_crisis(chance):
+        found = find_in_list(lambda x: x[0] == daughter_work_crisis, crisis_list)
+        if found:
+            found[1] = chance
+            #renpy.say("", "Updated daughter at work crisis chance to: " + str(chance) + "%%")
+        return
+
     def HR_director_initial_hire_requirement():
         if business_HR_meeting_last_day < day:
             if mc.business.is_open_for_business():
@@ -99,83 +172,6 @@ init -2 python:
             else:
                 return "One meeting per day."
 
-init 2 python:
-    def build_HR_review_list(the_person, max_tier = 0):
-        HR_tier_talk = -1 # init at -1 so we do the first collect with 0
-        HR_employee_list = []
-        # build list of girls that qualify for specified tier and max_tier score
-        while len(HR_employee_list) == 0 and HR_tier_talk < business_HR_coffee_tier and HR_tier_talk < max_tier:
-            HR_tier_talk += 1
-            HR_employee_list = get_HR_review_list(the_person, HR_tier_talk)
-        return (HR_employee_list, HR_tier_talk)
-
-    def get_HR_review_list(the_person, tier = 0):   #Pass in the HR director so we don't try to counsel her
-        people_list = []
-        for person in [x for x in mc.business.get_employee_list() if not x is the_person]:
-            topic_list = create_HR_review_topic_list(person)
-            for topic in topic_list:
-                if person.get_opinion_score(topic) < tier:
-                    people_list.append(person)
-                    break
-        return people_list
-
-    def build_HR_mc_list(the_person):
-        HR_employee_list = []
-        HR_employee_list = get_HR_review_list(the_person, tier = 2)
-        return HR_employee_list
-
-    def create_HR_review_topic_list(the_person):
-        topic_list = ["working"]
-        if the_person in mc.business.production_team:
-            topic_list.append("production work")
-        if the_person in mc.business.hr_team:
-            topic_list.append("HR work")
-        if the_person in mc.business.research_team:
-            topic_list.append("research work")
-        if the_person in mc.business.market_team:
-            topic_list.append("marketing work")
-        if the_person in mc.business.supply_team:
-            topic_list.append("supply work")
-        if business_HR_uniform:
-            topic_list.append("work uniforms")
-        if business_HR_skimpy_uniform:
-            topic_list.append("skimpy uniforms")
-
-        return topic_list
-
-    def update_hire_daughter_crisis(chance):
-        found = find_in_list(lambda x: x[0] == daughter_work_crisis, crisis_list)
-        if found:
-            found[1] = chance
-            #renpy.say("", "Updated daughter at work crisis chance to: " + str(chance) + "%%")
-        return
-
-init 1301 python:
-    def HR_director_creation_requirement():
-        return True
-
-    HR_director_creation_policy = Policy(name = "Create HR Director Position",
-        desc = "Create a new position for an HR Director. Increases maximum employee count by one.",
-        cost = 500,
-        requirement =  HR_director_creation_requirement,
-        on_buy_function = increase_max_employee_size,
-        on_buy_arguments = {"amount":1})
-
-    def HR_director_tier_1_suggest():
-        if off_label_drugs.researched:
-            return True
-        return False
-
-    def HR_director_tier_2_suggest():
-        if blood_brain_pen.researched:
-            return True
-        return False
-
-    def HR_director_mind_control_suggest():
-        if mind_control_agent.researched:
-            return True
-        return False
-
     def HR_director_change_relative_recruitment_requirement(the_person):
         if business_HR_relative_recruitment_unlock:
             if mc.business.is_open_for_business():
@@ -195,59 +191,55 @@ init 1301 python:
                 return "One meeting per day."
         return False
 
+    def remove_mandatory_crisis_list_action(crisis_name):
+        found = find_in_list(lambda x: x.effect == crisis_name, mc.business.mandatory_crises_list)
+        if found:
+            mc.business.mandatory_crises_list.remove(found)
+        return
+
+    def cleanup_HR_director_meetings():
+        remove_mandatory_crisis_list_action("Sarah_intro_label")
+        remove_mandatory_crisis_list_action("Sarah_hire_label")
+        remove_mandatory_crisis_list_action("Sarah_get_drinks_label")
+        remove_mandatory_crisis_list_action("Sarah_stripclub_story_label")
+        remove_mandatory_crisis_list_action("Sarah_epic_tits_label")
+        remove_mandatory_crisis_list_action("Sarah_new_tits_label")
+        remove_mandatory_crisis_list_action("Sarah_third_wheel_label")
+        remove_mandatory_crisis_list_action("Sarah_catch_stealing_label")
+        remove_mandatory_crisis_list_action("HR_director_initial_hire_label")
+        remove_mandatory_crisis_list_action("HR_director_first_monday_label")
+        remove_mandatory_crisis_list_action("HR_director_monday_meeting_label")
+        return
 
 
+    HR_director_coffee_tier_1_action = Action("Add serum to coffee during meetings.", HR_director_coffee_tier_1_requirement, "HR_director_coffee_tier_1_label",
+        menu_tooltip = "Costs $500 but makes meetings more impactful.")
+    HR_director_coffee_tier_2_action = Action("Add stronger serum to coffee during meetings.", HR_director_coffee_tier_2_requirement, "HR_director_coffee_tier_2_label",
+        menu_tooltip = "Costs $1500 but makes meetings impactful.")
+    HR_director_gym_membership_tier_1_action = Action("Sponsor company gym membership.", HR_director_gym_membership_tier_1_requirement, "HR_director_gym_membership_tier_1_label",
+        menu_tooltip = "Costs money each week, but increases girls energy over time.")
+    HR_director_gym_membership_tier_2_action = Action("Sponsor company health program.", HR_director_gym_membership_tier_2_requirement, "HR_director_gym_membership_tier_2_label",
+        menu_tooltip = "Costs money each week, but increases girls energy over time.")
+    HR_director_mind_control_action = Action("Produce mind control Serum.", HR_director_mind_control_requirement, "HR_director_mind_control_label",
+        menu_tooltip = "Costs $5000. Allows you to attempt mind control of employee.")
+    HR_director_mind_control_attempt = Action("Attempt Mind Control {image=gui/heart/Time_Advance.png}", HR_director_mind_control_attempt_requirement, "HR_director_mind_control_attempt_label",
+        menu_tooltip = "WARNING: May have side effects!")
+    HR_director_change_relative_recruitment_action = Action("Change recruitment signage", HR_director_change_relative_recruitment_requirement, "HR_director_change_relative_recruitment_label",
+        menu_tooltip = "Changes how often employees ask for employment for their daughters")
+    HR_director_meeting_on_demand_action = Action("Meet with employee {image=gui/heart/Time_Advance.png}", HR_director_meeting_on_demand_requirement, "HR_director_meeting_on_demand_label",
+        menu_tooltip = "Arrange a meeting with an employee")
+    HR_director_role = Role("HR Director", [HR_director_meeting_on_demand_action, HR_director_coffee_tier_1_action, HR_director_coffee_tier_2_action, HR_director_gym_membership_tier_1_action, HR_director_gym_membership_tier_2_action, HR_director_mind_control_action, HR_director_mind_control_attempt, HR_director_change_relative_recruitment_action]) #Actions go in block
 
+init 1301 python:
+    def HR_director_creation_requirement():
+        return True
 
-    def HR_director_breast():
-        if breast_enhancement.researched:
-            return True
-        return False
-
-### HR Director Mod init ###
-label HR_director_mod_init():
-    python:
-        #TODO move all these true flase flags to a dict so that in the future when I add more, I can call them by reference and not invalidate old saves games!
-        business_HR_director = None
-        business_HR_tier = 0     # HR tiers based on progression. 1 = hired someone. 2 = training videos. 3 = company sponsored sexual training.
-        business_HR_eff_bonus = mc.business.effectiveness_cap - 100  #This bonus is based on OTHER factors and can be added to via events.
-        business_HR_serum_suggest_1 = False
-        business_HR_serum_suggest_2 = False
-        business_HR_mind_control = False
-        business_HR_mind_control_attempt = False
-        business_HR_serum_breast = False
-        business_HR_coffee_tier = 0
-        business_HR_gym_tier = 0
-        business_HR_gym_msg_tier = 0
-        business_HR_skimpy_uniform = False
-        business_HR_uniform = False
-        business_HR_sexy_meeting_start = False
-        business_HR_sexy_start_unlocks = {}
-        business_HR_relative_recruitment_status = False
-        business_HR_relative_recruitment_unlock = False
-        business_HR_meeting_on_demand = False
-        business_HR_meeting_last_day = 0
-
-        Sarah_mod_initialization() #TODO this is for testing. Should probably figure out a better way to do this...
-
-        HR_director_coffee_tier_1_action = Action("Add serum to coffee during meetings.", HR_director_coffee_tier_1_requirement, "HR_director_coffee_tier_1_label",
-            menu_tooltip = "Costs $500 but makes meetings more impactful.")
-        HR_director_coffee_tier_2_action = Action("Add stronger serum to coffee during meetings.", HR_director_coffee_tier_2_requirement, "HR_director_coffee_tier_2_label",
-            menu_tooltip = "Costs $1500 but makes meetings impactful.")
-        HR_director_gym_membership_tier_1_action = Action("Sponsor company gym membership.", HR_director_gym_membership_tier_1_requirement, "HR_director_gym_membership_tier_1_requirement",
-            menu_tooltip = "Costs money each week, but increases girls energy over time.")
-        HR_director_gym_membership_tier_2_action = Action("Sponsor company health program.", HR_director_gym_membership_tier_2_requirement, "HR_director_gym_membership_tier_2_requirement",
-            menu_tooltip = "Costs money each week, but increases girls energy over time.")
-        HR_director_mind_control_action = Action("Produce mind control Serum.", HR_director_mind_control_requirement, "HR_director_mind_control_label",
-            menu_tooltip = "Costs $5000. Allows you to attempt mind control of employee.")
-        HR_director_mind_control_attempt = Action("Attempt Mind Control {image=gui/heart/Time_Advance.png}", HR_director_mind_control_attempt_requirement, "HR_director_mind_control_attempt_label",
-            menu_tooltip = "WARNING: May have side effects!")
-        HR_director_change_relative_recruitment_action = Action("Change recruitment signage", HR_director_change_relative_recruitment_requirement, "HR_director_change_relative_recruitment_label",
-            menu_tooltip = "Changes how often employees ask for employment for their daughters")
-        HR_director_meeting_on_demand_action = Action("Meet with employee {image=gui/heart/Time_Advance.png}", HR_director_meeting_on_demand_requirement, "HR_director_meeting_on_demand_label",
-            menu_tooltip = "Arrange a meeting with an employee")
-        HR_director_role = Role("HR Director", [HR_director_meeting_on_demand_action, HR_director_coffee_tier_1_action, HR_director_coffee_tier_2_action, HR_director_gym_membership_tier_1_action, HR_director_gym_membership_tier_2_action, HR_director_mind_control_action, HR_director_mind_control_attempt, HR_director_change_relative_recruitment_action]) #Actions go in block
-    return
+    HR_director_creation_policy = Policy(name = "Create HR Director Position",
+        desc = "Create a new position for an HR Director. Increases maximum employee count by one.",
+        cost = 500,
+        requirement =  HR_director_creation_requirement,
+        on_buy_function = increase_max_employee_size,
+        on_buy_arguments = {"amount":1})
 
 
 #####HR Director ACTION LABELS#####
@@ -264,9 +256,10 @@ label fire_HR_director(the_person):
     else:
         $ the_person.draw_person(emotion="happy")
         the_person.char "Whew! I have a really hard time working with people to be honest. I hope whoever replaces me can do a better job at it!"
+
     $ the_person.special_role.remove(HR_director_role)
     $ business_HR_director = None
-    #TODO remove monday meeting mandatory event
+    $ cleanup_HR_director_meetings()
     return
 
 label HR_director_initial_hire_label(the_person):
@@ -365,6 +358,7 @@ label HR_director_first_monday_label(the_person):
     the_person.char "Sounds great! I'll see you then!"
     $ HR_director_monday_meeting = Action("Monday HR Lunch",HR_director_monday_meeting_requirement,"HR_director_monday_meeting_label", args = the_person) #Set the trigger day for the next monday. Monday is day%7 == 0
     $ mc.business.mandatory_crises_list.append(HR_director_monday_meeting) #Add the event here so that it pops when the requirements are met.
+
     $ business_HR_tier = 1
     if the_person is sarah:
         $ Sarah_third_wheel_action = Action("Sarah's third wheel event",Sarah_third_wheel_requirement,"Sarah_third_wheel_label")
@@ -580,7 +574,7 @@ label HR_director_review_discoveries_label(the_person):
              the_person.char "That would actually be useful... We could use some, in the coffee we make when we bring them in for meetings?"
              mc.name "A version of the serum with a short useful life would be useful for giving the meetings more impact."
              "[the_person.title] looks into more details of the serum."
-             the_person.char "Looks like the serum is fairly easy to produce. I'd say fo about $500 we could probably setup an something long term for the monday meetings..."
+             the_person.char "Looks like the serum is fairly easy to produce. I'd say for about $500 we could probably setup an something long term for the monday meetings..."
              mc.name "Noted. I'll consider it and get back to you if I decide to do this."
              the_person.char "Sounds good [the_person.mc_title]!"
 
@@ -689,7 +683,7 @@ label HR_director_review_discoveries_label(the_person):
 
     if mc.business.get_employee_count() > 6 and business_HR_gym_msg_tier == 0:
         $ business_HR_gym_msg_tier = 1
-        the_person.char "With our small, but growing employee group, I thought it might be worth looking into a compnay sponsored gym fitness program."
+        the_person.char "With our small, but growing employee group, I thought it might be worth looking into a company sponsored gym fitness program."
         the_person.char "I did some research, and it turns out there is a local one with a nice facility with great pricing for companies."
         mc.name "How much would it cost?"
         the_person.char "For the company I found, the pricing is $5 per person, per week."
@@ -701,12 +695,12 @@ label HR_director_review_discoveries_label(the_person):
     elif mc.business.get_employee_count() > 14 and business_HR_gym_tier == 1:
         $ business_HR_gym_msg_tier = 2
         the_person.char "The company is getting bigger, and I was thinking about possible benefits to the company for increasing good health habits of the employees."
-        the_person.char "There is a company that specializes in information compaigns on healthy eating habits, exercise, and good mental health."
+        the_person.char "There is a company that specializes in information campaigns on healthy eating habits, exercise, and good mental health."
         the_person.char "Combined with the company gym membership, I think we would see a sizable benefit to the company as a whole."
         mc.name "How much would it cost?"
         the_person.char "For the company I found, the pricing is $10 per person, per week. This would be on top of the $5 per person for the company gym membership."
         mc.name "What would be the benefits we would see if we invest in this?"
-        the_person.char "Well, generally it would incerase the energy of employees as they develop healthier eating patterns."
+        the_person.char "Well, generally it would increase the energy of employees as they develop healthier eating patterns."
         the_person.char "Additionally, I think employees with interests in sports and hiking would really appreciate the change also."
         mc.name "Okay, I'll consider it and get back to you on that."
     return
