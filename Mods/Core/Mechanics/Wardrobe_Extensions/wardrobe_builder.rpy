@@ -75,6 +75,13 @@ init 5 python:
         preferences['lingerie']["feet"] = [thigh_highs, fishnets, garter_with_fishnets]
         preferences['lingerie']['accessories'] = [lace_choker, wide_choker]
 
+        matching_underwear = {}
+        matching_underwear["Bralette"] = [boy_shorts, cute_lace_panties, tiny_lace_panties, thong, tiny_g_string]
+        matching_underwear["Sports_Bra"] = [cotton_panties, panties, lace_panties]
+        matching_underwear["Lace_Bra"] = [cute_lace_panties, lace_panties, tiny_lace_panties, thong, tiny_g_string]
+        matching_underwear["Strappy_Bra"] = [strappy_panties]
+        matching_underwear["Corset"] = [panties, thin_panties, thong, tiny_lace_panties, tiny_g_string, string_panties]
+
         color_prefs = {}
         color_prefs["the colour blue"] = {}
         color_prefs["the colour blue"]["cobalt blue"] = [0, .278, .671, .95]
@@ -229,7 +236,10 @@ init 5 python:
 
             # find lower body item
             if not item or not item.has_extension:
-                item = self.get_item_from_list("lower_body", self.build_filter_list(panties_list, points), points, ["showing her ass", "not wearing underwear"])
+                if item and item.proper_name in self.matching_underwear:
+                    item = self.get_item_from_list("lower_body", self.build_filter_list(self.matching_underwear[item.proper_name], points), points, ["showing her ass", "not wearing underwear"])
+                else:
+                    item = self.get_item_from_list("lower_body", self.build_filter_list(panties_list, points), points, ["showing her ass", "not wearing underwear"])
                 if item:
                     outfit.add_lower(item.get_copy(), color_lower)
             
