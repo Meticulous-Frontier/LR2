@@ -77,14 +77,14 @@ init -2 python:
 
 #*************Create Casual Athlete Role***********#
 init -1 python:
-    casual_athlete_get_to_know = Action("Get to know Her", casual_athlete_get_to_know_requirement, "casual_athlete_get_to_know_label",
+    casual_athlete_get_to_know = Action("Get to know Her {image=gui/heart/Time_Advance.png}", casual_athlete_get_to_know_requirement, "casual_athlete_get_to_know_label",
         menu_tooltip = "Make an observation about her.")
-    casual_athlete_phase_one = Action("Workout Together", casual_athlete_phase_one_requirement, "casual_athlete_phase_one_label",
+    casual_athlete_phase_one = Action("Workout Together {image=gui/heart/Time_Advance.png}", casual_athlete_phase_one_requirement, "casual_athlete_phase_one_label",
         menu_tooltip = "Work up a sweat.")
-    casual_athlete_phase_two = Action("Challenge to Race", casual_athlete_phase_two_requirement, "casual_athlete_phase_two_label",
+    casual_athlete_phase_two = Action("Challenge to Race {image=gui/heart/Time_Advance.png}", casual_athlete_phase_two_requirement, "casual_athlete_phase_two_label",
         menu_tooltip = "No risk, no reward.")
-    casual_athlete_protein_shake = Action("Buy Protein Shake ($5)", casual_athlete_buy_protein_shake_requirement,"casual_athlete_buy_protein_shake_label", menu_tooltip = "Slip some serum in.")
-    casual_athlete_house_call = Action("Take Charge", casual_athlete_house_call_requirement, "casual_athlete_house_call_label",
+    casual_athlete_protein_shake = Action("Buy Protein Shake ($5) {image=gui/heart/Time_Advance.png}", casual_athlete_buy_protein_shake_requirement,"casual_athlete_buy_protein_shake_label", menu_tooltip = "Slip some serum in.")
+    casual_athlete_house_call = Action("Take Charge {image=gui/heart/Time_Advance.png}", casual_athlete_house_call_requirement, "casual_athlete_house_call_label",
         menu_tooltip = "Pick her up.")
     casual_athlete_role = Role(role_name ="College Athlete", actions =[casual_athlete_get_to_know , casual_athlete_phase_one, casual_athlete_phase_two, casual_athlete_protein_shake, casual_athlete_house_call], hidden = True)
 

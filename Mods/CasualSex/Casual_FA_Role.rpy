@@ -110,15 +110,15 @@ init -2 python: #Requirement Declarations#
 #*************Create Casual Flight Attendant Role***********#
 
 init -1 python:
-    casual_FA_get_a_drink = Action("Get a drink with her", casual_FA_get_a_drink_requirement, "casual_FA_get_a_drink_label",
+    casual_FA_get_a_drink = Action("Get a drink with her {image=gui/heart/Time_Advance.png}", casual_FA_get_a_drink_requirement, "casual_FA_get_a_drink_label",
         menu_tooltip = "Alcohol loosens lips!")
-    casual_FA_get_out_of_here = Action("Drinks to go", casual_FA_get_out_of_here_requirement, "casual_FA_get_out_of_here_label",
+    casual_FA_get_out_of_here = Action("Drinks to go {image=gui/heart/Time_Advance.png}", casual_FA_get_out_of_here_requirement, "casual_FA_get_out_of_here_label",
         menu_tooltip = "See if she wants to take things somewhere private.")
-    casual_FA_sex_discussion = Action("Ask her about the other night...",  casual_FA_sex_discussion_requirement, "casual_FA_sex_discussion_label",
+    casual_FA_sex_discussion = Action("Ask her about the other night... {image=gui/heart/Time_Advance.png}",  casual_FA_sex_discussion_requirement, "casual_FA_sex_discussion_label",
         menu_tooltip = "Make sure it went okay.")
-    casual_FA_my_place = Action("Take this back to your place", casual_FA_my_place_requirement, "casual_FA_my_place_label",
+    casual_FA_my_place = Action("Take this back to your place {image=gui/heart/Time_Advance.png}", casual_FA_my_place_requirement, "casual_FA_my_place_label",
         menu_tooltip = "See if she wants to take this to your place")
-    casual_FA_coming_over = Action("Come over tonight", casual_FA_coming_over_requirement, "casual_FA_coming_over_label",
+    casual_FA_coming_over = Action("Come over tonight {image=gui/heart/Time_Advance.png}", casual_FA_coming_over_requirement, "casual_FA_coming_over_label",
         menu_tooltip = "Offer a bed in exchange for favors")
     casual_FA_role = Role(role_name ="Flight Attendant", actions =[casual_FA_get_a_drink, casual_FA_get_out_of_here, casual_FA_sex_discussion, casual_FA_my_place, casual_FA_coming_over], hidden = True)
 

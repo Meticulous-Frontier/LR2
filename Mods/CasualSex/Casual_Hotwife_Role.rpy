@@ -103,17 +103,17 @@ init -2 python:
 
 #*************Create Casual Hotwife Role***********#
 init -1 python:
-    casual_hotwife_get_a_drink = Action("Get a drink with her", casual_hotwife_get_a_drink_requirement, "casual_hotwife_get_a_drink_label",
+    casual_hotwife_get_a_drink = Action("Get a drink with her {image=gui/heart/Time_Advance.png}", casual_hotwife_get_a_drink_requirement, "casual_hotwife_get_a_drink_label",
         menu_tooltip = "Alcohol loosens lips!")
-    casual_hotwife_bathroom_blowjob = Action("Sneak into the bathroom", casual_hotwife_bathroom_blowjob_requirement, "casual_hotwife_bathroom_blowjob_label",
+    casual_hotwife_bathroom_blowjob = Action("Sneak into the bathroom {image=gui/heart/Time_Advance.png}", casual_hotwife_bathroom_blowjob_requirement, "casual_hotwife_bathroom_blowjob_label",
         menu_tooltip = "She wants pics to send her husband...")
-    casual_hotwife_blowjob_text = Action("Ask her about the blowjob pictures...", casual_hotwife_blowjob_text_requirement, "casual_hotwife_blowjob_text_label",
+    casual_hotwife_blowjob_text = Action("Ask her about the blowjob pictures... {image=gui/heart/Time_Advance.png}", casual_hotwife_blowjob_text_requirement, "casual_hotwife_blowjob_text_label",
         menu_tooltip = "Make sure it went okay.")
-    casual_hotwife_dancing_sex = Action("Dirty dancing", casual_hotwife_dancing_sex_requirement, "casual_hotwife_dancing_sex_label",
+    casual_hotwife_dancing_sex = Action("Dirty dancing {image=gui/heart/Time_Advance.png}", casual_hotwife_dancing_sex_requirement, "casual_hotwife_dancing_sex_label",
         menu_tooltip = "She wants to dance dirty with you!")
     casual_hotwife_sex_invite = Action("Your place or mine?", casual_hotwife_sex_invite_requirement, "casual_hotwife_sex_invite_label",
         menu_tooltip = "Ask if she wants to get out of here.")
-    casual_hotwife_home_sex = Action("Put on a show.", casual_hotwife_home_sex_requirement, "casual_hotwife_home_sex_label",
+    casual_hotwife_home_sex = Action("Put on a show {image=gui/heart/Time_Advance.png}", casual_hotwife_home_sex_requirement, "casual_hotwife_home_sex_label",
         menu_tooltip = "Let hubby watch.")
     casual_hotwife_role = Role(role_name ="Hot Wife", actions =[casual_hotwife_get_a_drink, casual_hotwife_bathroom_blowjob, casual_hotwife_blowjob_text, casual_hotwife_dancing_sex, casual_hotwife_sex_invite, casual_hotwife_home_sex], hidden = True)
 
