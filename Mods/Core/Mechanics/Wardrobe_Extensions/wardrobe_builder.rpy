@@ -59,7 +59,7 @@ init 5 python:
         preferences["pants"] = {}
         preferences["pants"]["lower_body"] = pants_list
         preferences["showing her tits"] = {}
-        preferences["showing her tits"]["upper_body"] = [strapless_bra, lace_bra, thin_dress, two_part_dress, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, lace_sweater, sweater, belted_top, tube_top, business_vest, suit_jacket, vest]
+        preferences["showing her tits"]["upper_body"] = [strapless_bra, lace_bra, strappy_bra, thin_dress, two_part_dress, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, lace_sweater, sweater, belted_top, tube_top, business_vest, suit_jacket, vest]
         preferences["showing her ass"] = {}
         preferences["showing her ass"]["upper_body"] = [two_part_dress, thin_dress, summer_dress, virgin_killer, leotard, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear]
         preferences["showing her ass"]["lower_body"] = [cute_panties, lace_panties, cute_lace_panties, tiny_lace_panties, thong, tiny_g_string, string_panties, strappy_panties, leggings, booty_shorts, jean_hotpants, daisy_dukes]
