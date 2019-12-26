@@ -162,7 +162,7 @@ init 5 python:
                     return "Requires $5000"
         return False
 
-    def  HR_director_mind_control_attempt_requirement(the_person):
+    def HR_director_mind_control_attempt_requirement(the_person):
         if business_HR_mind_control_attempt:
             if business_HR_meeting_last_day < day:
                 if mc.business.is_open_for_business():
@@ -189,6 +189,19 @@ init 5 python:
                     return "Only on during work day"
             else:
                 return "One meeting per day."
+        return False
+
+    def is_HR_director_employed(hr_director):
+        if hr_director in mc.business.get_employee_list():
+            return True
+        cleanup_HR_director_meetings()
+        return False
+
+    def can_appoint_HR_director_requirement():
+        if business_HR_director is None:
+            if HR_director_creation_policy.is_owned():
+                if len(mc.business.hr_team) > 0:
+                    return True
         return False
 
     def remove_mandatory_crisis_list_action(crisis_name):
@@ -229,6 +242,10 @@ init 5 python:
     HR_director_meeting_on_demand_action = Action("Meet with employee {image=gui/heart/Time_Advance.png}", HR_director_meeting_on_demand_requirement, "HR_director_meeting_on_demand_label",
         menu_tooltip = "Arrange a meeting with an employee")
     HR_director_role = Role("HR Director", [HR_director_meeting_on_demand_action, HR_director_coffee_tier_1_action, HR_director_coffee_tier_2_action, HR_director_gym_membership_tier_1_action, HR_director_gym_membership_tier_2_action, HR_director_mind_control_action, HR_director_mind_control_attempt, HR_director_change_relative_recruitment_action]) #Actions go in block
+
+    HR_director_appointment_action = Action("Appoint HR Director.", can_appoint_HR_director_requirement, "HR_director_appointment_action_label",
+            menu_tooltip = "Pick a member of your HR staff to be your HR director. The HR director will help you manage your employees wellbeing and motivation.")
+
 
 init 1301 python:
     def HR_director_creation_requirement():
@@ -290,6 +307,7 @@ label HR_director_initial_hire_label(the_person):
         for other_employee in mc.business.get_employee_list():
             town_relationships.begin_relationship(the_person, other_employee) #They are introduced to everyone at work, with a starting value of "Acquaintance"
 
+        business_HR_eff_bonus = mc.business.effectiveness_cap - 100
         if the_person is sarah:
             #TODO try to detect if employee count is full again
             the_person.set_schedule([1,2,3], None) # remove previous schedule
@@ -313,6 +331,9 @@ label HR_director_initial_hire_label(the_person):
     return
 
 label HR_director_first_monday_label(the_person):
+    if not is_HR_director_employed(business_HR_director):
+        $ business_HR_director = None
+        return
     "It's lunchtime, so you prepare to have your first meeting with your new HR Direction, [the_person.title]."
     "You grab your lunch from the break head to your office and sit down."
     $ mc.change_location(office)
@@ -366,6 +387,10 @@ label HR_director_first_monday_label(the_person):
     return
 
 label HR_director_monday_meeting_label(the_person):
+    if not is_HR_director_employed(business_HR_director):
+        $ business_HR_director = None
+        return
+
     $ scene_manager = Scene()
 
     if mc.location != office:
@@ -724,13 +749,11 @@ label HR_director_manage_gym_membership(the_person):
                     x.change_happiness(10)
             cost = len(mc.business.get_employee_list()) * 15
     the_person.char "Just to let you know, I wrote out the check this morning for this week's employee health program."
-    $ mc.business.funds -= cost
+    $ mc.business.pay(-cost)
     return
 
-
-
 label HR_director_coffee_tier_1_label(the_person):
-    $ mc.business.funds -= 500
+    $ mc.business.pay(- 500)
     mc.name "I've been thinking about your proposal to add serums to the coffee we serve to employees when we meet with them. I'm giving you approval to set it up."
     the_person.char "Sounds good sir! I'll head over to research and have them synthesize me some."
     the_person.char "I'll keep it in a locked cabinet and from now on I'll only use it when we give an employee coffee during our monday meetings."
@@ -740,7 +763,7 @@ label HR_director_coffee_tier_1_label(the_person):
     return
 
 label HR_director_coffee_tier_2_label(the_person):
-    $ mc.business.funds -= 1500
+    $ mc.business.pay(- 1500)
     mc.name "I've been thinking about your proposal to add the stronger serum to the coffee we serve to employees when we meet with them. I'm giving you approval to set it up."
     the_person.char "Sounds good sir! I'll head over to research and have them synthesize me some."
     the_person.char "I'll keep it in a locked cabinet and from now on I'll only use it when we give an employee coffee during our monday meetings."
@@ -940,7 +963,7 @@ label HR_diector_sexy_meeting_start_label(the_person):
     return
 
 label HR_director_mind_control_label(the_person):
-    $ mc.business.funds -= 5000
+    $ mc.business.pay(- 5000)
     mc.name "I've been thinking about your proposal to create a specialized serum for mind control attempts. I would like to move forward with it."
     the_person.char "Sounds good sir! I'll head over to research and have them synthesize me some."
     the_person.char "I'll make sure it stay locked away, and only you and I will have a key to get some out."
@@ -1008,7 +1031,7 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
                         "Her face softens when you appeal to her emotionally."
                     "I'll reward you financially ($1000)":
                         the_person.char "Oh... well I suppose I could really use the extra pay."
-                        $ mc.business.funds -= 1000
+                        $ mc.business.pay(- 1000)
                     "I'll fire you if you don't.":
                         $ scene_manager.update_actor(the_person, emotion = "angry")
                         the_person.char "What!?! You're kidding me? I can't afford to lose this job right now!"
@@ -1053,6 +1076,22 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
     $ scene_manager.remove_actor(the_HR_dir)
     "[the_HR_dir.title] leaves."
     #TODO the rest of this encounter. Go see her, pay her with sexual favors, etc.
+    return
+
+label HR_director_appointment_action_label:
+    $ people_list = get_sorted_people_list(mc.business.hr_team, "Appoint", ["Back"])
+
+    if "build_menu_items" in globals():
+        call screen main_choice_display(build_menu_items([people_list]))
+    else:
+        call screen main_choice_display([people_list])
+    $ person_choice = _return
+    $ del people_list
+ 
+    if person_choice == "Back":
+        return
+        
+    call HR_director_initial_hire_label(person_choice) from _call_HR_director_initial_hire_label_appointment 
     return
 
 init 1200 python:
