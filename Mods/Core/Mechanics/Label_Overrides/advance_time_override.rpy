@@ -203,20 +203,22 @@ label advance_time_mandatory_crisis_label():
         clear_list = []
 
     while mandatory_crisis_count < mandatory_crisis_max: #We need to keep this in a renpy loop, because a return call will always return to the end of an entire python block.
-        $ the_crisis = mc.business.mandatory_crises_list[mandatory_crisis_count]
-        if the_crisis.is_action_enabled():
-            $ the_crisis.call_action()
-            if _return == "Advance Time":
-                $ mandatory_advance_time = True
-            $ renpy.scene("Active")
-            $ clear_list.append(the_crisis)
+        if mandatory_crisis_count < len(mc.business.mandatory_crises_list): # extra check to make sure index still exists
+            $ the_crisis = mc.business.mandatory_crises_list[mandatory_crisis_count]
+            if the_crisis.is_action_enabled():
+                $ the_crisis.call_action()
+                if _return == "Advance Time":
+                    $ mandatory_advance_time = True
+                $ renpy.scene("Active")
+                $ clear_list.append(the_crisis)
+            $ del the_crisis
         $ mandatory_crisis_count += 1
-        $ del the_crisis
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
         mc.location.show_background()
         for crisis in clear_list:
-            mc.business.mandatory_crises_list.remove(crisis) #Clean up the list.
+            if crisis in mc.business.mandatory_crises_list: # extra check to see if crisis still in list
+                mc.business.mandatory_crises_list.remove(crisis) #Clean up the list.
 
         del clear_list
     return
