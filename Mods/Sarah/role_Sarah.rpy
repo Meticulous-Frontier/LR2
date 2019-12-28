@@ -51,7 +51,7 @@ init 2 python:
             title = "Sarah", possessive_title = "Your childhood friend",mc_title = mc.name, relationship = "Single", kids = 0)
 
         sarah.set_schedule([0,4], Sarah_home)
-        sarah.set_schedule([1,2,3], mall)
+        sarah.set_schedule([1,2,3], Sarah_home)
 
         sarah.home = Sarah_home
 
@@ -65,6 +65,17 @@ init 2 python:
 
         Sarah_intro = Action("Sarah_intro",Sarah_intro_requirement,"Sarah_intro_label") #Set the trigger day for the next monday. Monday is day%7 == 0
         mc.business.mandatory_crises_list.append(Sarah_intro) #Add the event here so that it pops when the requirements are met.
+
+        sarah.opinions["HR work"] = [2, True]  # she loves HR work
+        sarah.opinions["work uniforms"] = [1, False]  # she likes uniforms
+        sarah.opinions["Mondays"] = [1, False]  # she likes mondays, and monday meetings!
+        sarah.opinions["working"] = [1, False]  # a bit of a workaholic
+
+
+        sarah.sexy_opinions["taking control"] = [1, False]  # she likes taking control, type A
+        sarah.sexy_opinions["giving handjobs"] = [2, False] # Not afraid to get her hands dirty ;)
+        sarah.sexy_opinions["showing her tits"] = [-2, False]  # She hates showing her small tits
+
         return
 
     def Sarah_reset_vars():

@@ -563,12 +563,12 @@ label threesome_strip_menu(the_person_one, the_person_two):
 #                     return_bool =  True
 #     return return_bool                                                          #No acceptable position found, cannot join threesome
 
-label join_threesome(the_person_one, the_person_two, initial_position):  #We can use this function to add a second girl to an existing sex scene.
+label join_threesome(the_person_one, the_person_two, initial_position, private = true):  #We can use this function to add a second girl to an existing sex scene.
                                                                          #Works by selecting a position then calling threesome with the first position pre-set
 
     call pick_threesome(the_person_one, the_person_two, girl_one_position = initial_position) from _join_threesome_position_selection_1
     $ position_choice = _return
-    call start_threesome(the_person_one, the_person_two, start_position = position_choice, private = False) from _join_threesome_in_progress_1
+    call start_threesome(the_person_one, the_person_two, start_position = position_choice, private = private) from _join_threesome_in_progress_1
 
     return _return
 
@@ -595,6 +595,8 @@ init python:
             return (["Lay Forward", "kneeling1"])
         elif position_tag == "standing_doggy":
             return (["Bend Over", "standing_doggy"])
+        elif position_tag == "doggy":
+            return (["Get on Your Hands and Knees", "doggy"])
         elif position_tag == "cowgirl":
             return (["Sit on Top", "cowgirl"])
         else:

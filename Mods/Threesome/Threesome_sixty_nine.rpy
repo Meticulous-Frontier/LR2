@@ -17,7 +17,7 @@ transform Threesome_sixty_nine_girl_two_transform():
 init:
     python:
         Threesome_sixty_nine_fuck_girl_one = Threesome_MC_position(name = "fuck_girl_1",
-            description = "Fuck bottom girl",
+            description = "Fuck [the_person_one.title]",
             skill_tag_p1 = "Vaginal",
             skill_tag_p2 = "Oral",
             girl_one_arousal = 22,
@@ -40,7 +40,7 @@ init:
             requirement = requirement_hard_both_vagina_available)
 
         Threesome_sixty_nine_oral_girl_two = Threesome_MC_position(name = "oral_girl_2",
-            description = "Get Blowjob",
+            description = "Get Blowjob from [the_person_two.title]",
             skill_tag_p1 = "Foreplay",
             skill_tag_p2 = "Oral",
             girl_one_arousal = 16,
@@ -136,8 +136,13 @@ label intro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_locat
     return
 
 label intro_threesome_sixty_nine_fuck_oral_girl_2(the_girl_1, the_girl_2, the_location, the_object, the_round):
-    pass #TODO
-    "This needs to be written"
+    mc.name "I want you to warm me up before I fuck [the_girl_1.title]."
+    if SB_check_fetish(the_girl_2, oral_fetish_role):
+        the_girl_2.char "Oh my god, a mouth on my pussy and my lips on your cock... this is going to be incredible!"
+    else:
+        the_girl_2.char "Mmmm, you may not even make it to her pussy!"
+    "The girls start to get into position. [the_girl_2.title] sits on [the_girl_1.title]'s face and immediately opens wide and takes you in her mouth."
+    "She moans as she begins to grind her pussy against the other girls face."
     return
 
 label scene_threesome_sixty_nine_fuck_girl_one_1(the_girl_1, the_girl_2, the_location, the_object, the_round):
@@ -455,3 +460,4 @@ label swap_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location
     else:
         pass
     "The sound of muffled moans and slick licking motions fill the air."
+    return

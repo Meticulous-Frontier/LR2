@@ -17,7 +17,7 @@ init:
     python:
 
         threesome_double_blowjob_focus_oral= Threesome_MC_position(name = "focus_oral",
-            description = "Focus on Oral",
+            description = "Focus on You",
             skill_tag_p1 = "Oral",
             skill_tag_p2 = "Oral",
             girl_one_arousal = 5,
@@ -40,7 +40,7 @@ init:
             requirement = requirement_hard)
 
         threesome_double_blowjob_makeout = Threesome_MC_position(name = "Makeout",
-            description = "Makeout",
+            description = "Watch Girls Makeout",
             skill_tag_p1 = "Oral",
             skill_tag_p2 = "Oral",
             girl_one_arousal = 12,

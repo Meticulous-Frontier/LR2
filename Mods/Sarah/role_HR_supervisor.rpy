@@ -498,8 +498,9 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     $ person_choice = _return
     $ scene_manager.update_actor(the_person, position = "stand2")
     the_person.char "Alright, let me go get her."
-    $ renpy.scene("Active")
-    $ scene_manager.clear_scene()
+    $ scene_manager.remove_actor(the_person, reset_actor = False)
+    #$ renpy.scene("Active")
+    #$ scene_manager.clear_scene()
     "[person_choice.title] steps in to the office after a few minutes, followed by [the_person.title]."
     person_choice.char "Hello [person_choice.mc_title]."
 
@@ -510,6 +511,17 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
 
     $ scene_manager.update_actor(person_choice, position = "sitting")
     $ scene_manager.add_actor(the_person, position = "stand4")
+
+    if the_person.sluttiness > 80:
+        "You notice that [the_person.title] locks the door as she enters your office."
+
+    if the_person.outfit.check_outfit_cum():
+        "[person_choice.title] sits down across from you, but is clearly distracted by [the_person.title]. She clearly notices your cum still on her."
+        if person_choice.sluttiness > 80:
+            person_choice.char "Wow, not sure why you called me in here, but I hope its for the same thing you have her in here for..."
+        else:
+            person_choice.char "Is that... I'm sorry, what is that you needed, [person_choice.mc_title]?"
+        $ person_choice.change_slut_temp(10) # give her a temp slut boost to maybe have a threesome later...
 
     if business_HR_coffee_tier > 0:
         "[person_choice.title] sits down across from you at your desk. [the_person.title] pours a cup of coffee while talking."
@@ -566,6 +578,29 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     person_choice.char "I'll think about this for a bit, but I think I understand what you are saying. I'll try to have a better attitude about things going forward."
     $ scene_manager.update_actor(person_choice, position = "sitting", character_placement = character_left_flipped, emotion = "happy")
     "[person_choice.title] thinks for a moment, then smiles at both of you."
+    # if person_choice.sluttiness > 80 and the_person.sluttiness > 80: # TODO come back after writing sarah threesome content to unlock this instead
+    #     person_choice.char "Thanks for calling me in. Is that all? Or was there maybe someone... I mean someTHING else on the to do list?"
+    #     "Are you done with her?"
+    #     menu:
+    #         "Attempt a threesome with [the_person.title]":
+    #             mc.name "I have one more thing for you before you go..."
+    #             person_choice.char "Yes sir?"
+    #             mc.name "Having this meeting has been great, but, I think you could use a little more... hands on training."
+    #             person_choice.char "Mmm, that sounds nice, is [the_person.name] going to join us?"
+    #             if the_person.outfit.check_outfit_cum():
+    #                 "With [the_person.title] still wearing your cum from her service earlier, you get a burst of energy and arousal."
+    #                 $ mc.change_arousal(30)
+    #                 $ mc.change_energy(100)
+    #             mc.name "Of course. Let's get started."
+    #             call start_threesome(person_choice, the_person) from threesome_HR_meeting_happy_ending
+    #             person_choice.char "Oh my... that was fun. Thanks for calling me in! I guess I'd better go get back to work..."
+    #             if the_person == sarah:
+    #                 $ the_person.change_happiness(10)
+    #         "That's all":
+    #             person_choice.char "Thanks for calling me in... I guess I'd better go get back to work!"
+    #
+    # else:
+    #     pass
     person_choice.char "Thanks for calling me in... I guess I'd better go get back to work!"
     if opinion_chat in opinions_list:
         $ person_choice.opinions[opinion_chat] = [max_opinion, True]
@@ -855,7 +890,7 @@ label HR_diector_sexy_meeting_start_label(the_person):
         $ business_HR_sexy_start_unlocks["blowjob"] = True
         "She cleans herself up and makes herself presentable again."
 
-        #TODO code for her to clean herself up
+        $ the_person.review_outfit(show_review_message = False)
         return
 
     if business_HR_sexy_start_unlocks.get("titfuck", False) == False:
@@ -880,6 +915,7 @@ label HR_diector_sexy_meeting_start_label(the_person):
             the_person.char "Mmm, god that was hot. Let me just enjoy this a minute before we move on with the meeting..."
             "You run your hands through her hair for a bit while she enjoys the warmth of your cum on her skin."
             "Eventually she cleans herself up and makes herself presentable again."
+            $ the_person.review_outfit(show_review_message = False)
             return
 
     if business_HR_sexy_start_unlocks.get("missionary on desk", False) == False:
@@ -908,7 +944,44 @@ label HR_diector_sexy_meeting_start_label(the_person):
             mc.name "You were right, [the_person.title]. It IS really hot to fuck you on my desk!"
             the_person.char "Ah, yes, I suspected it would be, sir!"
             "Eventually she cleans herself up and makes herself presentable again."
+            $ the_person.review_outfit(show_review_message = False)
             return
+
+    if business_HR_sexy_start_unlocks.get("bent over desk", False) == False:
+        if (the_person.sluttiness + the_person.get_opinion_score("doggy style sex") * 5) >= 70:
+            if the_person.obedience > 130:
+                mc.name "Come here, I'm going to use you the way I see fit today."
+                if the_person.get_opinion_score("being submissive"):
+                    the_person.char "Oh! Yes sir!"
+                    $ the_person.change_obedience(3)
+                else:
+                    the_person.char "Ok..."
+                "You stand up as she walks around to your side of the desk. You roughly turn her around and bend her over your desk."
+                $ scene_manager.update_actor(the_person, position="standing_doggy")
+                the_person.char "Oh my!"
+                $ business_HR_sexy_start_unlocks["bent over desk"] = True
+
+                if the_person.outfit.vagina_available():
+                    "She wiggles her hips back at you a bit. Her pussy lips glisten with a bit of moisture."
+                else:
+                    "You start to strip [the_person.possessive_title] down."
+                    $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
+                    "Soon her ass is on full display in front of you, bent over your desk."
+                "You push yourself inside of her nice and slow, since she hasn't had much time to warm up yet."
+                the_person.char "Oh God! its going so deep."
+                "You give her ass a solid spank, then begin to fuck her roughly."
+                call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_start_four
+                $ the_report = _return
+                if the_report.get("girl_orgasms",0)>0:
+                    "[the_person.possessive_title] is still bent over your desk, recovering from her orgasm."
+                    the_person.char "That's... yeah you can do that to me any time."
+                else:
+                    "[the_person.possessive_title] slowly recovers from using her body for your pleasure."
+                    the_person.char "Mmm, happy to be of service, sir. We can do that again next time... if you want!"
+                "Eventually she cleans herself up and makes herself presentable again."
+                $ the_person.review_outfit(show_review_message = False)
+                return
+
 
     the_person.char "Okay! How do you want me to take care of you this week, [the_person.mc_title]?"
 
@@ -958,8 +1031,40 @@ label HR_diector_sexy_meeting_start_label(the_person):
         the_person.char "I never said I wasn't naughty too... Oh god, [the_person.mc_title], that feels good. Have your way with me!"
         call fuck_person(the_person, start_position = missionary, start_object = make_desk(), skip_intro = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_mid_three
 
-    "She quickly gets dressed to continue your meeting."
-    $ the_person.review_outfit(show_review_message = False)
+    elif position_choice == "bent over desk":
+        mc.name "Get over here, I'm going to bend you over my desk again."
+        if the_person.get_opinion_score("being submissive"):
+            the_person.char "Oh! Yes sir!"
+            $ the_person.change_obedience(2)
+        else:
+            the_person.char "Ok."
+        "You stand up as she walks around to your side of the desk. You roughly bend her over your desk and give her ass a spank."
+        $ scene_manager.update_actor(the_person, position="standing_doggy")
+        the_person.char "Oh my!"
+
+        if the_person.outfit.vagina_available():
+            "She wiggles her hips back at you a bit. Her pussy lips glisten with a bit of moisture."
+        else:
+            "You start to strip [the_person.possessive_title] down."
+            $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
+            "Soon her ass is on full display in front of you, bent over your desk."
+        "You don't waste any time. You pull your cock out and point it at her slit. You pull her hips back as you push inside of her with one smooth push."
+        the_person.char "Mmm, fuck me good [the_person.mc_title]!"
+        "You eagerly begin to pump your hips and fuck your HR director over your desk."
+        call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_mid_four
+
+
+    "She quickly starts to get dressed to continue your meeting."
+    if ((the_person.obedience - 100) + the_person.sluttiness) > 100: #If she is either very obedient, slutty, or a mixture
+        menu:
+            "Tell her to stay like that for the meeting":
+                mc.name "I'm very busy, lets just continue the meeting. Don't bother to clean up."
+                "[the_person.title] opens her mouth for a second, ready to protest, but quickly reconsiders."
+                the_person.char "Of course, [the_person.mc_title]. Let's see what is next."
+            "Let her clean herself up":
+                $ the_person.review_outfit(show_review_message = False)
+                "[the_person.possessive_title] quickly cleans herself up, ready to continue the meeting."
+
     return
 
 label HR_director_mind_control_label(the_person):
@@ -1087,11 +1192,11 @@ label HR_director_appointment_action_label:
         call screen main_choice_display([people_list])
     $ person_choice = _return
     $ del people_list
- 
+
     if person_choice == "Back":
         return
-        
-    call HR_director_initial_hire_label(person_choice) from _call_HR_director_initial_hire_label_appointment 
+
+    call HR_director_initial_hire_label(person_choice) from _call_HR_director_initial_hire_label_appointment
     return
 
 init 1200 python:
