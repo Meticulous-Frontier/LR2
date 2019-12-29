@@ -881,6 +881,7 @@ label HR_diector_sexy_meeting_start_label(the_person):
         "[the_person.possessive_title] comes around to your side of the desk and gets down on her knees. She pulls down your zipper and pulls your cock out."
         the_person.char "Mmm, it smells so good. Let's get this taken care of!"
         "She runs her tongue up and down your length a few times, then parts her lips and begins to suck you off."
+        $ mc.change_arousal(40)
         call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_start_one
         mc.name "Mmm, this is a great way to start Monday. This was a great idea [the_person.title]."
         $ scene_manager.update_actor(the_person, emotion = "happy")
@@ -903,9 +904,11 @@ label HR_diector_sexy_meeting_start_label(the_person):
                 "[the_person.possessive_title] begins to take off her top."
                 $ scene_manager.strip_actor_outfit(the_person, exclude_lower = True)
                 "With her tits out and ready to be used, she gives you a big smile."
+            $ mc.change_arousal(20)
             $ scene_manager.update_actor(the_person, position = "blowjob", emotion = "happy")
             "She gets up and starts walking around the desk. By the time she gets to you, you already have your rock hard dick out."
             "She gets on her knees and gives you a couple strokes with her hand."
+            $ mc.change_arousal(20)
             the_person.char "Mmmm, I love the feeling of a cock buried between by big tits... this is gonna be great!"
             "With her hands on each side of her chest, she wraps her sizable boobs around you and begins to bounce them up and down."
             call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_start_two
@@ -923,6 +926,7 @@ label HR_diector_sexy_meeting_start_label(the_person):
             "You feel yourself raise your eyebrow in response. This should be good!"
             the_person.char "What if I just layed down on your desk and you had your way with me, right here in your office?"
             the_person.char "Having my boss pin me to his desk and ravage me..."
+            $ mc.change_arousal(20)
             mc.name "I'm think thats a good idea. Why don't you get your ass over here and we'll find out for sure!"
             the_person.char "Oh! Yes sir!"
             "[the_person.possessive_title] gets on your desk and lays on her back."
@@ -933,6 +937,7 @@ label HR_diector_sexy_meeting_start_label(the_person):
                 "You start to strip [the_person.possessive_title] down."
                 $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
                 "Soon her body is on full display in front of you, on your desk."
+            $ mc.change_arousal(20)
             "You have your cock out in a flash. You position it at her slick entrance."
             "You push yourself inside of her nice and slow, since she hasn't had much time to warm up yet."
             the_person.char "Mmmm, [the_person.mc_title]. Use me boss! I'm here to serve you!"
@@ -957,6 +962,7 @@ label HR_diector_sexy_meeting_start_label(the_person):
                     the_person.char "Ok..."
                 "You stand up as she walks around to your side of the desk. You roughly turn her around and bend her over your desk."
                 $ scene_manager.update_actor(the_person, position="standing_doggy")
+                $ mc.change_arousal(20)
                 the_person.char "Oh my!"
                 $ business_HR_sexy_start_unlocks["bent over desk"] = True
 
@@ -968,6 +974,7 @@ label HR_diector_sexy_meeting_start_label(the_person):
                     "Soon her ass is on full display in front of you, bent over your desk."
                 "You push yourself inside of her nice and slow, since she hasn't had much time to warm up yet."
                 the_person.char "Oh God! its going so deep."
+                $ mc.change_arousal(20)
                 "You give her ass a solid spank, then begin to fuck her roughly."
                 call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_start_four
                 $ the_report = _return
@@ -995,6 +1002,7 @@ label HR_diector_sexy_meeting_start_label(the_person):
 
     if position_choice == "any":
         the_person.char "Mmmm, I can do that! "
+        $ mc.change_arousal(20)
         $ the_person.change_happiness(5)
         $ the_person.change_obedience(-5)
         $ position_choice = get_random_from_list(business_HR_sexy_start_unlocks.keys())
@@ -1004,6 +1012,7 @@ label HR_diector_sexy_meeting_start_label(the_person):
         "[the_person.possessive_title] stands up and starts to walk around the desk while you pull out your erection."
         $ scene_manager.update_actor(the_person, position = "blowjob")
         "She gets down on her knees in front of you and takes a moment to admire your hardness."
+        $ mc.change_arousal(20)
         "She opens her mouth and runs her tongue along it a few times, and then parts her lips and begins to suck you off."
         call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_mid_one
 
@@ -1013,6 +1022,7 @@ label HR_diector_sexy_meeting_start_label(the_person):
             $ scene_manager.strip_actor_outfit(the_person, exclude_lower = True)
             "With her tits out and ready to be used, she gives you a big smile."
         the_person.char "Get your cock out, I want to feel it slide between my boobs!"
+        $ mc.change_arousal(20)
         "You pull your cock out as she gets up and walks around your desk. She drops down on her knees in front of you."
         $ scene_manager.update_actor(the_person, position = "blowjob")
         "[the_person.possessive_title] smiles at you as she uses her hands to wrap her tits around your cock, and then starts to move them up and down."
@@ -1026,7 +1036,8 @@ label HR_diector_sexy_meeting_start_label(the_person):
         the_person.char "Oh my, fucking me on your desk? You are so naughty, boss!"
         $ scene_manager.update_actor(the_person, position = "missionary")
         mc.name "Oh, I'm the naughty one? I seem to remember this was your idea in the first place..."
-        "You pull your cock out and line it up with [the_person.title]'s pussy. You ease youself inside of her with one slow, smooth push."
+        "You pull your cock out and line it up with [the_person.title]'s pussy. You ease yourself inside of her with one slow, smooth push."
+        $ mc.change_arousal(20)
         the_person.char "I never said I wasn't naughty too... Oh god, [the_person.mc_title], that feels good. Have your way with me!"
         call fuck_person(the_person, start_position = missionary, start_object = make_desk(), skip_intro = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_mid_three
 
@@ -1049,6 +1060,7 @@ label HR_diector_sexy_meeting_start_label(the_person):
             "Soon her ass is on full display in front of you, bent over your desk."
         "You don't waste any time. You pull your cock out and point it at her slit. You pull her hips back as you push inside of her with one smooth push."
         the_person.char "Mmm, fuck me good [the_person.mc_title]!"
+        $ mc.change_arousal(20)
         "You eagerly begin to pump your hips and fuck your HR director over your desk."
         call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_mid_four
 

@@ -85,6 +85,7 @@ label business_meeting_flirtation(person):
 label business_meeting_arrousal(person):
     if person.sluttiness > 30:
         "She moves up to your crotch and unzips your pants with her feet, sliding with her foot over you growing bulge."
+        $ mc.change_arousal(20)
         person.char "Oh my [person.mc_title], it seems my proposal got you all exited."
     else:
         person.char "She keeps stroking your legs while she talks, making sure you are focussed on her."
@@ -97,10 +98,12 @@ label business_meeting_seduction(person):
             "After talking for a while she takes off her [strip_choice.name]."
             $ person.draw_animated_removal(strip_choice, position="sitting", emotion="default")
             person.char "This should help you focus, [person.mc_title]."
+            $ mc.change_arousal(20)
             "You can't help but admire [person.possessive_title] boldness."
 
         person.char "I'm sorry, it seems i've dropped something..."
         "[person.possessive_title] slides under the table grabbing your now exposed cock looking up at you with a smile."
+        $ mc.change_arousal(10)
         $ person.draw_person(position = "blowjob")
         $ person.change_arousal(25)
         menu:

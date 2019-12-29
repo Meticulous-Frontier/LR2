@@ -319,6 +319,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         "You both take a quick look around, and when the coast is clear, you both walk into the bathroom and lock the door behind you."
         "You waste no time, you quickly wrap your arms around [the_person.title] and start making out with her."
         $ the_person.draw_person(position = "kissing")
+        $ mc.change_arousal(10)
         the_person.char "Mm... mmm.... mmmmmmmmmff..."
         "She is moaning in your mouth. You can tell the naughtiness of getting intimate with someone other than her husband is really turning her on."
         $ the_person.change_arousal(10)
@@ -341,6 +342,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             the_person.char "Don't forget to take pictures!"
         "With her phone in hand, you snap a few pictures as she slowly walks over to you."
         "She runs her hands across your chest. She slowly gets down on her knees in front of you."
+        $ the_person.change_arousal(20)
         $ the_person.draw_person(position = "blowjob")
         "[the_person.possessive_title] tugs at your belt, then slowly lowers your pants."
         "One more tug on your underwear, and your erection springs free."
@@ -348,11 +350,15 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         "She begins to stroke you softly with her hand."
         the_person.char "Mmmmm.... its so hard... and hot!"
         "You moan as she strokes you. You make sure to snap a couple pictures."
+        $ mc.change_arousal(10)
+        $ the_person.change_arousal(10)
         the_person.char "Does that feel good? I bet it does... I just wanna make you feel good..."
         "She closes her eyes, then opens her mouth. She slowly rubs the tip back and forth along her slithery tongue."
         the_person.char "Mmm, you taste good too."
         "She starts to take you into her mouth. You snap a few more pictures of this beautiful hotwife, on her knees servicing you."
         "[the_person.possessive_title]'s head is now bouncing up and down on your cock. Her pouty lips feel amazing sliding up and down your length."
+        $ the_person.change_arousal(20)
+        $ mc.change_arousal(20)
         "You forget you are supposed to take pictures and begin to just enjoy the wonderful sensations."
         call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_CSH010
         $ the_report = _return
