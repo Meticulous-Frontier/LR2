@@ -35,8 +35,12 @@ init -1 python:
             self.can_swap = can_swap
 
         def create_scene(self, the_person_one, the_person_two):
-            scene_manager.add_actor(the_person_one, position = self.position_one_tag, character_placement = self.p1_transform)
-            scene_manager.add_actor(the_person_two, position = self.position_two_tag, character_placement = self.p2_transform)
+            if girl_swap_pos:
+                scene_manager.add_actor(the_person_two, position = self.position_one_tag, character_placement = self.p1_transform)
+                scene_manager.add_actor(the_person_one, position = self.position_two_tag, character_placement = self.p2_transform)
+            else:
+                scene_manager.add_actor(the_person_one, position = self.position_one_tag, character_placement = self.p1_transform)
+                scene_manager.add_actor(the_person_two, position = self.position_two_tag, character_placement = self.p2_transform)
             scene_manager.draw_scene()
             return
 
@@ -78,20 +82,113 @@ init -1 python:
             self.requirement = requirement
 
         def call_intro(self, the_person_one, the_person_two, the_location, the_object, round):
-            renpy.call(self.intro,the_person_one, the_person_two, the_location, the_object, round)
+            if girl_swap_pos:
+                renpy.call(self.intro,the_person_two, the_person_one, the_location, the_object, round)
+            else:
+                renpy.call(self.intro,the_person_one, the_person_two, the_location, the_object, round)
 
         def call_scene(self, the_person_one, the_person_two, the_location, the_object, round):
             random_scene = renpy.random.randint(0,len(self.scenes)-1)
-            renpy.call(self.scenes[random_scene],the_person_one, the_person_two, the_location, the_object, round)
+            if girl_swap_pos:
+                renpy.call(self.scenes[random_scene],the_person_two, the_person_one, the_location, the_object, round)
+            else:
+                renpy.call(self.scenes[random_scene],the_person_one, the_person_two, the_location, the_object, round)
 
         def call_orgasm(self, the_person_one, the_person_two, the_location, the_object, round):
-            renpy.call(self.orgasm_description,the_person_one, the_person_two, the_location, the_object, round)
+            if girl_swap_pos:
+                renpy.call(self.orgasm_description,the_person_two, the_person_one, the_location, the_object, round)
+            else:
+                renpy.call(self.orgasm_description,the_person_one, the_person_two, the_location, the_object, round)
 
         def call_outro(self, the_person_one, the_person_two, the_location, the_object, round):
-            renpy.call(self.outro,the_person_one, the_person_two, the_location, the_object, round)
+            if girl_swap_pos:
+                renpy.call(self.outro,the_person_two, the_person_one, the_location, the_object, round)
+            else:
+                renpy.call(self.outro,the_person_one, the_person_two, the_location, the_object, round)
 
         def call_transition(self, the_person_one, the_person_two, the_location, the_object, round):
-            renpy.call(self.swap_description,the_person_one, the_person_two, the_location, the_object, round)
+            if girl_swap_pos:
+                renpy.call(self.swap_description,the_person_two, the_person_one, the_location, the_object, round)
+            else:
+                renpy.call(self.swap_description,the_person_one, the_person_two, the_location, the_object, round)
+
+        def check_girl_one_energy(self, the_person_one):
+            if girl_swap_pos:
+                if self.girl_two_energy > the_person_one.energy:
+                    return False
+            else:
+                if self.girl_one_energy > the_person_one.energy:
+                    return False
+            return True
+
+        def check_girl_two_energy(self, the_person_two):
+            if girl_swap_pos:
+                if self.girl_one_energy > the_person_two.energy:
+                    return False
+            else:
+                if self.girl_two_energy > the_person_two.energy:
+                    return False
+            return True
+
+        def calc_arousal_changes(self, the_person_one, the_person_two):
+            #Calculate arousal gains
+            if girl_swap_pos:
+                girl_one_arousal_change = self.girl_two_arousal + ((the_person_one.get_opinion_score("threesomes") / 5) * self.girl_two_arousal)   #20% arousal bonus for each level of threesome like/dislike
+                if self.girl_two_source == 0:  #MC is source#
+                    girl_one_arousal_change += girl_one_arousal_change * mc.sex_skills[self.skill_tag_p2] * 0.1  #Add 10% per skill level
+                elif self.girl_two_source == 1:
+                    girl_one_arousal_change += girl_one_arousal_change * the_person_one.sex_skills[self.skill_tag_p2] * 0.1  #Add 10% per skill level
+                else:  #Assume girl 2 is source
+                    girl_one_arousal_change += girl_one_arousal_change * the_person_two.sex_skills[self.skill_tag_p2] * 0.1  #Add 10% per skill level
+            else:
+                girl_one_arousal_change = self.girl_one_arousal + ((the_person_one.get_opinion_score("threesomes") / 5) * self.girl_one_arousal)   #20% arousal bonus for each level of threesome like/dislike
+                if self.girl_one_source == 0:  #MC is source#
+                    girl_one_arousal_change += girl_one_arousal_change * mc.sex_skills[self.skill_tag_p1] * 0.1  #Add 10% per skill level
+                elif self.girl_one_source == 1: #Girl one is her own source? Maybe masturbating?
+                    girl_one_arousal_change += girl_one_arousal_change * the_person_one.sex_skills[self.skill_tag_p1] * 0.1  #Add 10% per skill level
+                else:  #Assume girl 2 is source
+                    girl_one_arousal_change += girl_one_arousal_change * the_person_two.sex_skills[self.skill_tag_p1] * 0.1  #Add 10% per skill level
+
+            the_person_one.change_arousal(girl_one_arousal_change)  #Make the change
+
+            #Repeat for girl two
+            if girl_swap_pos:
+                girl_two_arousal_change = self.girl_one_arousal + ((the_person_two.get_opinion_score("threesomes") / 5) * self.girl_one_arousal)   #20% arousal bonus for each level of threesome like/dislike
+                if self.girl_one_source == 0:  #MC is source#
+                    girl_two_arousal_change += girl_two_arousal_change * mc.sex_skills[self.skill_tag_p1] * 0.1  #Add 10% per skill level
+                elif self.girl_one_source == 1: #Girl 1 is source
+                    girl_two_arousal_change += girl_two_arousal_change * the_person_one.sex_skills[self.skill_tag_p1] * 0.1  #Add 10% per skill level
+                else:  #Assume girl 2 is source
+                    girl_two_arousal_change += girl_two_arousal_change * the_person_two.sex_skills[self.skill_tag_p1] * 0.1  #Add 10% per skill level
+            else:
+                girl_two_arousal_change = self.girl_two_arousal + ((the_person_two.get_opinion_score("threesomes") / 5) * self.girl_two_arousal)   #20% arousal bonus for each level of threesome like/dislike
+                if self.girl_two_source == 0:  #MC is source#
+                    girl_two_arousal_change += girl_two_arousal_change * mc.sex_skills[self.skill_tag_p2] * 0.1  #Add 10% per skill level
+                elif self.girl_two_source == 1: #Girl 1 is source
+                    girl_two_arousal_change += girl_two_arousal_change * the_person_one.sex_skills[self.skill_tag_p2] * 0.1  #Add 10% per skill level
+                else:  #Assume girl 2 is source
+                    girl_two_arousal_change += girl_two_arousal_change * the_person_two.sex_skills[self.skill_tag_p2] * 0.1  #Add 10% per skill level
+
+            the_person_two.change_arousal(girl_two_arousal_change)  #Make the change
+
+            #MC arousal change
+            his_arousal_change = self.guy_arousal
+            if self.guy_source == 0:
+                his_arousal_change += 0.1 * mc.sex_skills[self.skill_tag_guy]
+            elif girl_swap_pos:
+                if self.guy_source == 1:
+                    his_arousal_change += 0.1 * the_person_two.sex_skills[self.skill_tag_guy]
+                else:
+                    his_arousal_change += 0.1 * the_person_one.sex_skills[self.skill_tag_guy]
+            else:
+                if self.guy_source == 1:
+                    his_arousal_change += 0.1 * the_person_one.sex_skills[self.skill_tag_guy]
+                else:
+                    his_arousal_change += 0.1 * the_person_two.sex_skills[self.skill_tag_guy]
+
+
+                mc.change_arousal(his_arousal_change)
+
 
 label threesome_test():
     call join_threesome(mom, lily, "missionary") from threesome_test_call_1
@@ -164,13 +261,13 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
     else:
         $ position_choice = start_position
     #pick_threesome can give use the option to swap the girls opening spots
-    if girl_swap_pos:
-        $ the_person = the_person_one
-        $ the_person_one = the_person_two
-        $ the_person_two = the_person
-        $ int_swap = report_log["girl one orgasms"]
-        $ report_log["girl one orgasms"] = report_log["girl two orgasms"]
-        $ report_log["girl two orgasms"] = int_swap
+    # if girl_swap_pos:
+    #     $ the_person = the_person_one
+    #     $ the_person_one = the_person_two
+    #     $ the_person_two = the_person
+    #     $ int_swap = report_log["girl one orgasms"]
+    #     $ report_log["girl one orgasms"] = report_log["girl two orgasms"]
+    #     $ report_log["girl two orgasms"] = int_swap
 
     #TODO fix this fucking stupid hack
     $ scene_manager.remove_actor(the_person_one, reset_actor = False)
@@ -248,13 +345,13 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                 "You decide to change it up."
                 call pick_threesome(the_person_one, the_person_two) from threesome_mid_position_set
                 $ position_choice = _return
-                if girl_swap_pos:
-                    $ the_person = the_person_one
-                    $ the_person_one = the_person_two
-                    $ the_person_two = the_person
-                    $ int_swap = report_log["girl one orgasms"]
-                    $ report_log["girl one orgasms"] = report_log["girl two orgasms"]
-                    $ report_log["girl two orgasms"] = int_swap
+                # if girl_swap_pos:
+                #     $ the_person = the_person_one
+                #     $ the_person_one = the_person_two
+                #     $ the_person_two = the_person
+                #     $ int_swap = report_log["girl one orgasms"]
+                #     $ report_log["girl one orgasms"] = report_log["girl two orgasms"]
+                #     $ report_log["girl two orgasms"] = int_swap
                 #TODO fix this fucking stupid hack
                 $ scene_manager.remove_actor(the_person_one, reset_actor = False)
                 $ scene_manager.remove_actor(the_person_two, reset_actor = False)
@@ -297,7 +394,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                     "You're too exhausted to continue [position_choice.verbing] [the_person.possessive_title]."
                     $ position_choice = None
                     $ active_mc_position = None
-                elif active_mc_position.girl_one_energy > the_person_one.energy:
+                elif not active_mc_position.check_girl_one_energy(the_person_one):
 
                     the_person_one.char "I'm exhausted [the_person.mc_title], I can't keep this up..."
                     $ position_choice = None
@@ -318,11 +415,11 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                     else:
                         the_person_two.char "Yeah me too. I think I need a break!"
                         $ finished = True
-                elif active_mc_position.girl_two_energy > the_person_two.energy:
+                elif not active_mc_position.check_girl_two_energy(the_person_two):
                     the_person_two.char "I'm exhausted [the_person.mc_title], I can't keep this up..."
                     $ position_choice = None
                     $ active_mc_position = None
-                    if the_person_one.energy > 20:
+                    if the_person_one.energy > 30:
                         the_person_one.char "Don't worry, I'm still good to go!"
                         "Do you want to continue?"
                         menu:
@@ -413,37 +510,39 @@ label threesome_round(the_person_one, the_person_two, position_choice, round = 0
         $ report_log["total rounds"] += 1
 
     #Calculate arousal gains
-    $ girl_one_arousal_change = position_choice.girl_one_arousal + ((the_person_one.get_opinion_score("threesomes") / 5) * position_choice.girl_one_arousal)   #20% arousal bonus for each level of threesome like/dislike
-    if position_choice.girl_one_source == 0:  #MC is source#
-        $ girl_one_arousal_change += girl_one_arousal_change * mc.sex_skills[position_choice.skill_tag_p1] * 0.1  #Add 10% per skill level
-    elif position_choice.girl_one_source == 1: #Girl one is her own source? Maybe masturbating?
-        $ girl_one_arousal_change += girl_one_arousal_change * the_person_one.sex_skills[position_choice.skill_tag_p1] * 0.1  #Add 10% per skill level
-    else:  #Assume girl 2 is source
-        $ girl_one_arousal_change += girl_one_arousal_change * the_person_two.sex_skills[position_choice.skill_tag_p1] * 0.1  #Add 10% per skill level
-
-    $ the_person_one.change_arousal(girl_one_arousal_change)  #Make the change
-    #Repeat for girl two
-    $ girl_two_arousal_change = position_choice.girl_two_arousal + ((the_person_two.get_opinion_score("threesomes") / 5) * position_choice.girl_two_arousal)   #20% arousal bonus for each level of threesome like/dislike
-    if position_choice.girl_two_source == 0:  #MC is source#
-        $ girl_two_arousal_change += girl_two_arousal_change * mc.sex_skills[position_choice.skill_tag_p2] * 0.1  #Add 10% per skill level
-    elif position_choice.girl_one_source == 1: #Girl 1 is source
-        $ girl_two_arousal_change += girl_two_arousal_change * the_person_one.sex_skills[position_choice.skill_tag_p2] * 0.1  #Add 10% per skill level
-    else:  #Assume girl 2 is source
-        $ girl_two_arousal_change += girl_two_arousal_change * the_person_two.sex_skills[position_choice.skill_tag_p2] * 0.1  #Add 10% per skill level
-
-    $ the_person_two.change_arousal(girl_two_arousal_change)  #Make the change
-
-    #MC arousal change
-    $ his_arousal_change = position_choice.guy_arousal
-    if position_choice.guy_source == 0:
-        $ his_arousal_change += 0.1 * mc.sex_skills[position_choice.skill_tag_guy]
-    elif position_choice.guy_source == 1:
-        $ his_arousal_change += 0.1 * the_person_one.sex_skills[position_choice.skill_tag_guy]
-    else:
-        $ his_arousal_change += 0.1 * the_person_two.sex_skills[position_choice.skill_tag_guy]
-
-
-    $ mc.change_arousal(his_arousal_change)
+    $position_choice.calc_arousal_changes(the_person_one, the_person_two)
+    #
+    # $ girl_one_arousal_change = position_choice.girl_one_arousal + ((the_person_one.get_opinion_score("threesomes") / 5) * position_choice.girl_one_arousal)   #20% arousal bonus for each level of threesome like/dislike
+    # if position_choice.girl_one_source == 0:  #MC is source#
+    #     $ girl_one_arousal_change += girl_one_arousal_change * mc.sex_skills[position_choice.skill_tag_p1] * 0.1  #Add 10% per skill level
+    # elif position_choice.girl_one_source == 1: #Girl one is her own source? Maybe masturbating?
+    #     $ girl_one_arousal_change += girl_one_arousal_change * the_person_one.sex_skills[position_choice.skill_tag_p1] * 0.1  #Add 10% per skill level
+    # else:  #Assume girl 2 is source
+    #     $ girl_one_arousal_change += girl_one_arousal_change * the_person_two.sex_skills[position_choice.skill_tag_p1] * 0.1  #Add 10% per skill level
+    #
+    # $ the_person_one.change_arousal(girl_one_arousal_change)  #Make the change
+    # #Repeat for girl two
+    # $ girl_two_arousal_change = position_choice.girl_two_arousal + ((the_person_two.get_opinion_score("threesomes") / 5) * position_choice.girl_two_arousal)   #20% arousal bonus for each level of threesome like/dislike
+    # if position_choice.girl_two_source == 0:  #MC is source#
+    #     $ girl_two_arousal_change += girl_two_arousal_change * mc.sex_skills[position_choice.skill_tag_p2] * 0.1  #Add 10% per skill level
+    # elif position_choice.girl_one_source == 1: #Girl 1 is source
+    #     $ girl_two_arousal_change += girl_two_arousal_change * the_person_one.sex_skills[position_choice.skill_tag_p2] * 0.1  #Add 10% per skill level
+    # else:  #Assume girl 2 is source
+    #     $ girl_two_arousal_change += girl_two_arousal_change * the_person_two.sex_skills[position_choice.skill_tag_p2] * 0.1  #Add 10% per skill level
+    #
+    # $ the_person_two.change_arousal(girl_two_arousal_change)  #Make the change
+    #
+    # #MC arousal change
+    # $ his_arousal_change = position_choice.guy_arousal
+    # if position_choice.guy_source == 0:
+    #     $ his_arousal_change += 0.1 * mc.sex_skills[position_choice.skill_tag_guy]
+    # elif position_choice.guy_source == 1:
+    #     $ his_arousal_change += 0.1 * the_person_one.sex_skills[position_choice.skill_tag_guy]
+    # else:
+    #     $ his_arousal_change += 0.1 * the_person_two.sex_skills[position_choice.skill_tag_guy]
+    #
+    #
+    # $ mc.change_arousal(his_arousal_change)
     #Erection changes
     if mc.recently_orgasmed and mc.arousal >= 10:
         $ mc.recently_orgasmed = False
@@ -485,6 +584,7 @@ label threesome_round(the_person_one, the_person_two, position_choice, round = 0
 
 label pick_threesome(the_person_one, the_person_two, girl_one_position = None, object_choice = None):  #We can pass in a position for girl one if the second girl "walks in" on the sex event
     $ girl_two_list = []
+    $ girl_swap_pos = False
     $ position_choice = None
     if girl_one_position == None:
         python:

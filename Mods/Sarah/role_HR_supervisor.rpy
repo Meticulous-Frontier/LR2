@@ -578,30 +578,29 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     person_choice.char "I'll think about this for a bit, but I think I understand what you are saying. I'll try to have a better attitude about things going forward."
     $ scene_manager.update_actor(person_choice, position = "sitting", character_placement = character_left_flipped, emotion = "happy")
     "[person_choice.title] thinks for a moment, then smiles at both of you."
-    # if person_choice.sluttiness > 80 and the_person.sluttiness > 80: # TODO come back after writing sarah threesome content to unlock this instead
-    #     person_choice.char "Thanks for calling me in. Is that all? Or was there maybe someone... I mean someTHING else on the to do list?"
-    #     "Are you done with her?"
-    #     menu:
-    #         "Attempt a threesome with [the_person.title]":
-    #             mc.name "I have one more thing for you before you go..."
-    #             person_choice.char "Yes sir?"
-    #             mc.name "Having this meeting has been great, but, I think you could use a little more... hands on training."
-    #             person_choice.char "Mmm, that sounds nice, is [the_person.name] going to join us?"
-    #             if the_person.outfit.check_outfit_cum():
-    #                 "With [the_person.title] still wearing your cum from her service earlier, you get a burst of energy and arousal."
-    #                 $ mc.change_arousal(30)
-    #                 $ mc.change_energy(100)
-    #             mc.name "Of course. Let's get started."
-    #             call start_threesome(person_choice, the_person) from threesome_HR_meeting_happy_ending
-    #             person_choice.char "Oh my... that was fun. Thanks for calling me in! I guess I'd better go get back to work..."
-    #             if the_person == sarah:
-    #                 $ the_person.change_happiness(10)
-    #         "That's all":
-    #             person_choice.char "Thanks for calling me in... I guess I'd better go get back to work!"
-    #
-    # else:
-    #     pass
-    person_choice.char "Thanks for calling me in... I guess I'd better go get back to work!"
+    if person_choice.sluttiness > 80 and the_person.sluttiness > 80: # TODO come back after writing sarah threesome content to unlock this instead
+        person_choice.char "Thanks for calling me in. Is that all? Or was there maybe someone... I mean someTHING else on the to do list?"
+        "Are you done with her?"
+        menu:
+            "Attempt a threesome with [the_person.title]":
+                mc.name "I have one more thing for you before you go..."
+                person_choice.char "Yes sir?"
+                mc.name "Having this meeting has been great, but, I think you could use a little more... hands on training."
+                person_choice.char "Mmm, that sounds nice, is [the_person.name] going to join us?"
+                if the_person.outfit.check_outfit_cum():
+                    "With [the_person.title] still wearing your cum from her service earlier, you get a burst of energy and arousal."
+                    $ mc.change_arousal(30)
+                    $ mc.change_energy(100)
+                mc.name "Of course. Let's get started."
+                call start_threesome(person_choice, the_person) from threesome_HR_meeting_happy_ending
+                person_choice.char "Oh my... that was fun. Thanks for calling me in! I guess I'd better go get back to work..."
+                if the_person == sarah:
+                    $ the_person.change_happiness(10)
+            "That's all":
+                person_choice.char "Thanks for calling me in... I guess I'd better go get back to work!"
+
+    else:
+        person_choice.char "Thanks for calling me in... I guess I'd better go get back to work!"
     if opinion_chat in opinions_list:
         $ person_choice.opinions[opinion_chat] = [max_opinion, True]
     else:
