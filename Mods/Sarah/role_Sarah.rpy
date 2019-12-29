@@ -836,9 +836,9 @@ label Sarah_catch_stealing_label():
         the_person.char "Oh, don't worry about it, it is just between me and her!"
         "You furrow your brow. Hopefully you can convince her to come clean with whatever it is that she is doing."
         mc.name "I'm sure it is fine, but you ARE coming out of a research on a Friday, after everyone has left for the weekend. Let me see what you have."
-        "Realing that you aren't going to back down, she slowly brings her hand forward. In it are several glass vials with some prototype serum labeled 'T+'"
+        "Reeling that you aren't going to back down, she slowly brings her hand forward. In it are several glass vials with some prototype serum labeled 'T+'"
         the_person.char "Don't be mad! When you told me on Monday that we had come up with a breast enhancement serum, I knew I had to get my hands on one of the prototypes..."
-    mc.name "It okay. I didn't realize that was something you would be interested in. If you had asked me, I would have seen it arranged without having to sneak around!"
+    mc.name "It's okay. I didn't realize that was something you would be interested in. If you had asked me, I would have seen it arranged without having to sneak around!"
     $ the_person.change_happiness(5)
     $ the_person.change_love(3)
     $ the_person.draw_person(emotion = "happy")
