@@ -38,7 +38,6 @@ init -2 python:
     business_HR_skimpy_uniform = False
     business_HR_uniform = False
     business_HR_sexy_meeting_start = False
-    business_HR_sexy_start_unlocks = {}
     business_HR_relative_recruitment_status = False
     business_HR_relative_recruitment_unlock = False
     business_HR_meeting_on_demand = False
@@ -280,6 +279,9 @@ label fire_HR_director(the_person):
     return
 
 label HR_director_initial_hire_label(the_person):
+    # somehow load and save for dictionaries does not work as expected so init on hire.
+    $ business_HR_sexy_start_unlocks = {}
+
     #TODO if away from work, move MC to work.
     "You meet with your new HR Director, [the_person.title] in the morning."
     $ the_person.draw_person()
