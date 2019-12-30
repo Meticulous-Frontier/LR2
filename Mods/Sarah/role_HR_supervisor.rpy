@@ -873,7 +873,7 @@ label HR_diector_sexy_meeting_start_label(the_person):
     #   Next, perform the act
     #   Then, clean up, with higher sluttiness giving the player the option to have her not clean up.
 
-    if len(business_HR_sexy_start_unlocks) == 0:  #This is the first time this function has been run
+    if business_HR_sexy_start_unlocks.get("blowjob", False) == False:  #This is the first time this function has been run
         the_person.char "So... I have no idea the best way to do this..."
         mc.name "Why don't you just come over here and give me a blowjob."
         the_person.char "Okay! That should be fun!"
@@ -1033,7 +1033,7 @@ label HR_diector_sexy_meeting_start_label(the_person):
             "[the_person.possessive_title] begins to take off her clothes. "
             $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
             "When she finishes getting naked, she gives you a big smile."
-        the_person.char "Oh my, fucking me on your desk? You are so naughty, boss!"
+        the_person.char "Oh my, fucking me on your desk? You are so naughty, [the_person.mc_title]!"
         $ scene_manager.update_actor(the_person, position = "missionary")
         mc.name "Oh, I'm the naughty one? I seem to remember this was your idea in the first place..."
         "You pull your cock out and line it up with [the_person.title]'s pussy. You ease yourself inside of her with one slow, smooth push."
