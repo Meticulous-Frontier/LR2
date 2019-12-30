@@ -175,7 +175,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     if not girl_in_charge:
                         the_person.char "I'm exhausted [the_person.mc_title], I can't keep this up..."
                     $ position_choice = None
-                else: #Nothing major has happened that requires us to change positions, we can have girls take over, strip
+                elif not position_locked: #Nothing major has happened that requires us to change positions, we can have girls take over, strip
                     call girl_strip_event(the_person, position_choice, object_choice) from _call_girl_strip_event_bugfix
 
 
