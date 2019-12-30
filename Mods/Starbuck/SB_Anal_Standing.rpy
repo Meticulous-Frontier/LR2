@@ -1,6 +1,6 @@
 init python:
     SB_anal_standing = Position(name = "Standing Anal", slut_requirement = 70, slut_cap = 95, requires_hard = True, requires_large_tits = False,
-        position_tag = "standing_doggy", requires_location = "Lean", requires_clothing = "Vagina", skill_tag = "Anal",
+        position_tag = "standing_doggy", requires_location = "Low", requires_clothing = "Vagina", skill_tag = "Anal",
         girl_arousal = 18, girl_energy = 11,
         guy_arousal = 20, guy_energy = 11,
         connections = [],
@@ -268,7 +268,7 @@ label outro_SB_anal_standing(the_girl, the_location, the_object, the_round):
                     "She turns the condom inside out and licks the inside of it, desperate to get every drop of cum she possibly can."
                 elif the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
                     $ the_girl.discover_opinion("drinking cum")
-                    "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off do your cum doesn't spill out."
+                    "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
                     the_girl.char "It would be a shame to waste all of this, right?"
                     "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
                     $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
