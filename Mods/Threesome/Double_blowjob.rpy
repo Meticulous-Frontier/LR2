@@ -99,11 +99,11 @@ label scene_threesome_double_blowjob_focus_oral_1(the_girl_1, the_girl_2, the_lo
     "[the_girl_1.title] opens up and begins to blow you. Her tongue works circle around your head as she gives you shallow strokes."
     "[the_girl_2.title] moves her head lower and gently suckles on your ballsack. She gently sucks one into her mouth, then moves over to the other."
     if the_girl_2.get_opinion_score("giving blowjobs") > 0:
-        "You feel a pleasrable vibration in your testicles as [the_girl_2.possessive_title] starts to hum a bit."
+        "You feel a pleasurable vibration in your testicles as [the_girl_2.possessive_title] starts to hum a bit."
     "The sensations of having two mouths pleasuring you is intense."
     mc.name "Damn girls, that feels amazing!"
     "[the_girl_1.title] comes up for air, then runs her mouth along the side of your cock. [the_girl_2.title] notices and her mouth to the opposite side of your cock."
-    "They slowly stroke your cock together, mouths on opposite sides of your acheing hard on."
+    "They slowly stroke your cock together, mouths on opposite sides of your aching hard on."
     return
 
 label scene_threesome_double_blowjob_focus_oral_2(the_girl_1, the_girl_2, the_location, the_object, the_round):
@@ -129,7 +129,7 @@ label outro_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_loca
         if the_girl_2.get_opinion_score("drinking cum") > 0:
             "As you finish, you slowly pull back. Some of your cum slowly dribbles out of her mouth."
             the_girl_2.char "Hey! Save some for me!"
-            "[the_girl_2.title] leans toward's her blowjob partner and begins kissing and licking your cum off her face."
+            "[the_girl_2.title] leans towards her blowjob partner and begins kissing and licking your cum off her face."
             "Soon, they are full on making out, swapping your cum between their mouths."
             $ the_girl_2.cum_in_mouth()
             $ scene_manager.draw_scene()
@@ -267,7 +267,7 @@ label outro_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_locatio
         if the_girl_2.get_opinion_score("drinking cum") > 0:
             "As you finish, you slowly pull back. Some of your cum slowly dribbles out of her mouth."
             the_girl_2.char "Hey! Save some for me!"
-            "[the_girl_2.title] leans toward's her blowjob partner and begins kissing and licking your cum off her face."
+            "[the_girl_2.title] leans towards her blowjob partner and begins kissing and licking your cum off her face."
             "Soon, they are full on making out, swapping your cum between their mouths."
             $ the_girl_2.cum_in_mouth()
             $ scene_manager.draw_scene()
