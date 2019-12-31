@@ -423,7 +423,7 @@ label HR_director_monday_meeting_label(the_person):
         the_person.char "So... can we start today?"
         menu:
             "Let's go":
-                call HR_director_sexy_meeting_start_labe(the_person) from sexy_meeting_start_one
+                call HR_director_sexy_meeting_start_label(the_person) from sexy_meeting_start_one
                 $ scene_manager.update_actor(the_person, position = "sitting")
                 "Feeling good, [the_person.title] returns to her seat and starts to pull out her notes."
             "Not Today":
@@ -434,7 +434,7 @@ label HR_director_monday_meeting_label(the_person):
         the_person.char "So, need some relief before we get started today?"
         menu:
             "Let's go":
-                call HR_director_sexy_meeting_start_labe(the_person) from sexy_meeting_start_two
+                call HR_director_sexy_meeting_start_label(the_person) from sexy_meeting_start_two
                 $ scene_manager.update_actor(the_person, position = "sitting")
                 "Feeling good, [the_person.title] returns to her seat and starts to pull out her notes."
             "Not Today":
@@ -873,7 +873,7 @@ label HR_director_meeting_on_demand_label(the_person):
     call advance_time from hr_advance_time_one
     return
 
-label HR_director_sexy_meeting_start_labe(the_person):
+label HR_director_sexy_meeting_start_label(the_person):
     #Phases of this label.
     #   First we determine if we have any new acts of service our girl is willing to perform.
     #   If not, give the player the option to choice an unlocked act of service
