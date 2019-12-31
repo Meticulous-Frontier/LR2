@@ -865,7 +865,7 @@ label HR_director_meeting_on_demand_label(the_person):
     "You head to your office and [the_person.possessive_title] quickly arrives with her papers."
     $ the_person.draw_person(position = "sitting")
     the_person.char "Ok! Let me see who I have on my list here..."
-    call HR_director_personnel_interview_label(the_person, max_opinion = business_HR_coffee_tier) from HR_DIR_INTERVIEW_CALL_4
+    call HR_director_personnel_interview_label(the_person, max_opinion = get_HR_director_tag("business_HR_coffee_tier", 0)) from HR_DIR_INTERVIEW_CALL_4
     the_person.char "I'd say that went pretty well! I'm going to head back to work, if that is okay with you, [the_person.mc_title]?"
     "You thank her for her help and excuse her. She gets up and leaves you to get back to work."
     $ renpy.scene("Active")
