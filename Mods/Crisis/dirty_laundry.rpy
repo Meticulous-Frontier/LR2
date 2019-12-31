@@ -301,7 +301,7 @@ label dirty_laundry_action_label:
             "While you are working on researching business methods, you accidentally get caught up in a click bait, 10 ways to increase your bottom line item on some random economics website."
             "Most of the info is garbage, but one of them actually makes sense for you to use. You make note of the method and decide to institute it at your business."
             $ mc.business.effectiveness_cap += 1
-            $ business_HR_eff_bonus += 1
+            $ set_HR_director_tag("business_HR_eff_bonus", get_HR_director_tag("business_HR_eff_bonus") + 1)
             "You go back to swap your laundry to the dryer."
             $ the_person.draw_person()
             "[the_person.title] is just coming out of the laundry room with her laundry basket."

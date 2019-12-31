@@ -269,7 +269,7 @@ label Sarah_hire_label():
     #TODO Hire Sarah officially here?
     $ HR_director_initial_hire = Action("Hire HR Director",HR_director_initial_hire_requirement,"HR_director_initial_hire_label", args = the_person) #Set the trigger day for the next monday. Monday is day%7 == 0
     $ mc.business.mandatory_crises_list.append(HR_director_initial_hire) #Add the event here so that it pops when the requirements are met.
-    $ business_HR_meeting_last_day = day # used to make sure we meet the next day
+    $ set_HR_director_tag("business_HR_meeting_last_day", day) # used to make sure we meet the next day
     return
 
 label Sarah_third_wheel_label():
