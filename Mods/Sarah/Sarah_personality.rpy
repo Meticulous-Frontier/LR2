@@ -46,8 +46,8 @@ label Sarah_greetings(the_person):
     if the_person.love < 0:
         the_person.char "Ugh, what do you want?"
     elif the_person.happiness < 90:
-        the_person.char "Hey, today is not what I hoped it to be."        
-    else:    
+        the_person.char "Hey, today is not what I hoped it to be."
+    else:
         if the_person.sluttiness > 60:
             if the_person.obedience > 130:
                 the_person.char "Hello there [the_person.mc_title]. How can I help you, do you have anything that needs attention? Anything at all?"
@@ -359,7 +359,23 @@ label Sarah_sex_strip(the_person):
     return
 
 label Sarah_sex_watch(the_person, the_sex_person, the_position):
-    if the_person.sluttiness < the_position.slut_requirement - 20:
+    if the_person.sluttiness > 80 and the_sex_person.sluttiness > 80:
+        $ the_person.draw_person()
+        the_person.char "Oh my good, that looks amazing..."
+        if can_join_threesome(the_sex_person, the_person, the_position.position_tag):
+            the_person.char "Can I... can I join you? I want some too!"
+            menu:
+                "Let her join":
+                    the_person.char "Yes! Thank you [the_person.title]!"
+                    call join_threesome(the_sex_person, the_person, the_position.position_tag)
+                    $ renpy.pop_call()
+                    $ renpy.pop_call()
+                    $ renpy.pop_call() #Why does this take three tries to keep from going crazy? I have no idea
+                    return _return
+                "Not this time":
+                    the_person.char "Aww, okay. Maybe next time..."
+                    $ the_person.change_obedience(3)
+    elif the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person.char "Ugh, jesus you two. Get a room or something, nobody wants to see this."
         $ the_person.change_obedience(-2)

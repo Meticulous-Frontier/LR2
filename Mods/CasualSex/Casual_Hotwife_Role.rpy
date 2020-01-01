@@ -103,17 +103,17 @@ init -2 python:
 
 #*************Create Casual Hotwife Role***********#
 init -1 python:
-    casual_hotwife_get_a_drink = Action("Get a drink with her", casual_hotwife_get_a_drink_requirement, "casual_hotwife_get_a_drink_label",
+    casual_hotwife_get_a_drink = Action("Get a drink with her {image=gui/heart/Time_Advance.png}", casual_hotwife_get_a_drink_requirement, "casual_hotwife_get_a_drink_label",
         menu_tooltip = "Alcohol loosens lips!")
-    casual_hotwife_bathroom_blowjob = Action("Sneak into the bathroom", casual_hotwife_bathroom_blowjob_requirement, "casual_hotwife_bathroom_blowjob_label",
+    casual_hotwife_bathroom_blowjob = Action("Sneak into the bathroom {image=gui/heart/Time_Advance.png}", casual_hotwife_bathroom_blowjob_requirement, "casual_hotwife_bathroom_blowjob_label",
         menu_tooltip = "She wants pics to send her husband...")
-    casual_hotwife_blowjob_text = Action("Ask her about the blowjob pictures...", casual_hotwife_blowjob_text_requirement, "casual_hotwife_blowjob_text_label",
+    casual_hotwife_blowjob_text = Action("Ask her about the blowjob pictures... {image=gui/heart/Time_Advance.png}", casual_hotwife_blowjob_text_requirement, "casual_hotwife_blowjob_text_label",
         menu_tooltip = "Make sure it went okay.")
-    casual_hotwife_dancing_sex = Action("Dirty dancing", casual_hotwife_dancing_sex_requirement, "casual_hotwife_dancing_sex_label",
+    casual_hotwife_dancing_sex = Action("Dirty dancing {image=gui/heart/Time_Advance.png}", casual_hotwife_dancing_sex_requirement, "casual_hotwife_dancing_sex_label",
         menu_tooltip = "She wants to dance dirty with you!")
     casual_hotwife_sex_invite = Action("Your place or mine?", casual_hotwife_sex_invite_requirement, "casual_hotwife_sex_invite_label",
         menu_tooltip = "Ask if she wants to get out of here.")
-    casual_hotwife_home_sex = Action("Put on a show.", casual_hotwife_home_sex_requirement, "casual_hotwife_home_sex_label",
+    casual_hotwife_home_sex = Action("Put on a show {image=gui/heart/Time_Advance.png}", casual_hotwife_home_sex_requirement, "casual_hotwife_home_sex_label",
         menu_tooltip = "Let hubby watch.")
     casual_hotwife_role = Role(role_name ="Hot Wife", actions =[casual_hotwife_get_a_drink, casual_hotwife_bathroom_blowjob, casual_hotwife_blowjob_text, casual_hotwife_dancing_sex, casual_hotwife_sex_invite, casual_hotwife_home_sex], hidden = True)
 
@@ -319,6 +319,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         "You both take a quick look around, and when the coast is clear, you both walk into the bathroom and lock the door behind you."
         "You waste no time, you quickly wrap your arms around [the_person.title] and start making out with her."
         $ the_person.draw_person(position = "kissing")
+        $ mc.change_arousal(10)
         the_person.char "Mm... mmm.... mmmmmmmmmff..."
         "She is moaning in your mouth. You can tell the naughtiness of getting intimate with someone other than her husband is really turning her on."
         $ the_person.change_arousal(10)
@@ -341,6 +342,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             the_person.char "Don't forget to take pictures!"
         "With her phone in hand, you snap a few pictures as she slowly walks over to you."
         "She runs her hands across your chest. She slowly gets down on her knees in front of you."
+        $ the_person.change_arousal(20)
         $ the_person.draw_person(position = "blowjob")
         "[the_person.possessive_title] tugs at your belt, then slowly lowers your pants."
         "One more tug on your underwear, and your erection springs free."
@@ -348,14 +350,19 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         "She begins to stroke you softly with her hand."
         the_person.char "Mmmmm.... its so hard... and hot!"
         "You moan as she strokes you. You make sure to snap a couple pictures."
+        $ mc.change_arousal(10)
+        $ the_person.change_arousal(10)
         the_person.char "Does that feel good? I bet it does... I just wanna make you feel good..."
         "She closes her eyes, then opens her mouth. She slowly rubs the tip back and forth along her slithery tongue."
         the_person.char "Mmm, you taste good too."
         "She starts to take you into her mouth. You snap a few more pictures of this beautiful hotwife, on her knees servicing you."
         "[the_person.possessive_title]'s head is now bouncing up and down on your cock. Her pouty lips feel amazing sliding up and down your length."
+        $ the_person.change_arousal(20)
+        $ mc.change_arousal(20)
         "You forget you are supposed to take pictures and begin to just enjoy the wonderful sensations."
-        call sex_description(the_person, blowjob, make_floor(), 1, private= True, girl_in_charge = True) from _call_sex_description_CSH010
-        if the_person.arousal > 100:
+        call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_CSH010
+        $ the_report = _return
+        if the_report.get("girl orgasms", 0) > 0:
             "Wow... I can't believe I came... while I was blowing you! That was fucking hot!"
         else:
             "Wow... that was hot!"
@@ -386,7 +393,6 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         "You sneak your way out of the bathroom while [the_person.possessive_title] cleans herself up. You hope everything goes well with her tonight!"
         $ the_person.event_triggers_dict["hotwife_blowjob_text_enable"] = 1
         $ the_person.event_triggers_dict["hotwife_progress"] = 2
-        $ the_person.reset_arousal()
         $ the_person.review_outfit(show_review_message = False)
     else:   #This is not our first time getting blown#
         mc.name "Hey, you wanna sneak off for a bit?"
@@ -417,14 +423,14 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             mc.name "Oh fuck!"
             "You make sure to snap more pictures of her. She's getting good at this!"
             "You decide to just enjoy her skilled mouth going down on you."
-            call sex_description(the_person, deepthroat, make_floor(), 1, private= True, girl_in_charge = True) from _call_sex_description_CSH011
+            call fuck_person(the_person, start_position = deepthroat, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_CSH011
         else:
             the_person.char "Mmmm, I can't wait any longer... I have to taste it!"
             "She opens up her mouth and wraps her lips around your meat."
             "You snap some pictures as she pulls of and begin to run her tongue up and down along the sides of your cock."
             mc.name "Mmm, that feels great [the_person.title]."
             "You decide to just enjoy her skilled mouth going down on you."
-            call sex_description(the_person, blowjob, make_floor(), 1, private= True, girl_in_charge = True) from _call_sex_description_CSH012
+            call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_CSH012
 
         $ cum_face = False
         $ cum_mouth = False
@@ -444,7 +450,6 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             "You suddenly remember the phone. You snap a couple pictures of her face with your cum covering it."
         the_person.char "Mmm, that was great [the_person.mc_title]! I can't wait until I get home tonight... I hope daddy gets the handcuffs out again..."
         "You say goodbye and excuse yourself while she gets herself cleaned up. This arrangement is working out to be very beneficial!"
-        $ the_person.reset_arousal()
         $ the_person.review_outfit(show_review_message = False)
         call advance_time from _call_advance_casual_hotwife_bathroom_blowjob
     return
@@ -541,7 +546,7 @@ label casual_hotwife_dancing_sex_label(the_person):
         "You look up and get one last picture of [the_person.title] in the mirror. Her mouth is open and she has one hand groping one of her own tits while her other hand is reaching back and grabbing your hip."
         "You set the phone down and begin to fuck her."
         $ mc.condom = False
-        call sex_description(the_person, SB_doggy_standing, SB_make_counter(), 1, private= True, girl_in_charge = False) from _call_sex_description_CSH020
+        call fuck_person(the_person, start_position = SB_doggy_standing, start_object = SB_make_counter(), skip_intro = True) from _call_sex_description_CSH020
         #TODO description for all possible cum locations
         $ cum_face = False
         $ cum_mouth = False
@@ -574,7 +579,6 @@ label casual_hotwife_dancing_sex_label(the_person):
             "You grab her phone and snap a couple pictures of her well used pussy with your cum dripping out of it."
         if the_person.arousal > 110:
             the_person.char "Oh my god... that was amazing. That felt so good."
-        $ the_person.reset_arousal()
         $ the_person.draw_person("stand3")
         the_person.char "Wow, I never knew cheating could feel so good. God, I can't wait until my husband reclaims me later... oh fuck."
         "[the_person.possessive_title] starts to touch herself a bit, getting herself excited thinking about what is in store for her later tonight. She quickly realizes she needs to stop though."
@@ -615,11 +619,10 @@ label casual_hotwife_dancing_sex_label(the_person):
         call SB_free_strip_scene(the_person) from _CS_free_strip_scene_CSH021
         "You got lots of pics of her strip tease. You take a few more as she saunters over to you."
         the_person.char "Come on, lets fuck!"
-        call fuck_person(the_person,private = True) from _call_casual_sex_mod_CSH022
+        call fuck_person(the_person) from _call_casual_sex_mod_CSH022
         "As you finish up, you make sure to take some pictures of the aftermath. You notice [the_person.possessive_title] is touching herself."
         the_person.char "Oh god, daddy is fuck me so rough tonight when he reclaims me tonight... I'm gonna be so sore. I can't wait!"
         "You almost think she is going to make herself cum again until she stops."
-        $ the_person.reset_arousal()
         $ the_person.draw_person("stand3")
         the_person.char "Thanks again [the_person.mc_title]. You know where to look for me next time you need some... action."
         "She takes her phone from you and starts going through the pictures you took."
@@ -676,7 +679,7 @@ label casual_hotwife_her_place_label(the_person):
     "With one hand you start to undo your trousers. With your other hand, you run you fingers along her slit. She is wet and ready for you."
     "Your cock now free, you line yourself up with [the_person.possessive_title]'s pussy. You put her husband out of your mind as you slowly push into her."
     "[the_person.possessive_title] gasps as you begin to slide in and out of her."
-    call sex_description(the_person, doggy, make_bed(), 1, private= True, girl_in_charge = False) from _call_sex_description_CSH040
+    call fuck_person(the_person, start_position = doggy, start_object = make_bed(), skip_intro = True) from _call_sex_description_CSH040
 
     #Finishing dialogue based on sexual performance
     if the_person.arousal > 130:   #She had more than one orgasm
@@ -699,8 +702,6 @@ label casual_hotwife_her_place_label(the_person):
         "[the_person.SO_name] gets up from his chair and gets some handcuffs from a bedside table. You get yourself dressed."
         the_person.char "Oh... [the_person.SO_name], I've been a bad girl... what are you gonna do with those handcuffs?"
         "[the_person.SO_name] begins cuffing [the_person.title]'s behind her back. You finish getting dress and quietly excuse yourself from the bedroom."
-    #TODO Transition to home#
-    $ the_person.reset_arousal()
     "You make your way back home. You can hardly believe your luck, fucking [the_person.title] in her house, in front of her husband, who is also the bartender!"
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
@@ -722,14 +723,15 @@ label casual_hotwife_home_sex_label(the_person):
     "She opens up the bedroom door and motions for you to follow her. As you step into her bedroom you see [the_person.SO_name] sitting at the edge of the bed again."
     "You nod at him, and he gives a brief nod back. You turn your attention back to [the_person.title]"
     the_person.char "Mmm, I can't wait. Let's go!"
-    call fuck_person(the_person,private = True) from _call_casual_sex_mod_CSH050
-    if the_person.arousal > 130:   #She had more than one orgasm
+    call fuck_person(the_person) from _call_casual_sex_mod_CSH050
+    $ the_report = _return
+    if the_report.get("girl orgasms", 0) > 1:
         the_person.char "Oh my god... I came so many times..."
         "[the_person.possessive_title] collapses onto the bed after your performance. You get up and start to get dressed."
         "You nod at [the_person.SO_name], and he nods back. He goes over to a bedside table and gets out a set of handcuffs."
         "After you fucked her brains out, [the_person.title] lays helpless on the bed as he starts to cuff her hands behind her back."
         "You finished getting dressed and decide to leave them to it, so you quietly excuse yourself from the bedroom."
-    elif the_person.arousal > 101: #She had approximately one orgasm
+    elif the_report.get("girl orgasms", 0) > 0:
         the_person.char "Oh god, I came so hard... That was good [the_person.mc_title]."
         $ the_person.draw_person (position = "missionary")
         "[the_person.possessive_title] rolls over on her back and spreads her legs wide."
@@ -744,7 +746,6 @@ label casual_hotwife_home_sex_label(the_person):
         the_person.char "Oh... [the_person.SO_name], I've been a bad girl... what are you gonna do with those handcuffs?"
         "[the_person.SO_name] begins cuffing [the_person.title]'s behind her back. You finish getting dress and quietly excuse yourself from the bedroom."
 
-    $ the_person.reset_arousal()
     "You make your way back home after a sexy evening with [the_person.possessive_title]."
     $ mc.change_location(bedroom)
     $ mc.location.show_background()

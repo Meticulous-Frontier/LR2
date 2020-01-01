@@ -61,23 +61,17 @@ init 2:
                                         hbox:
                                             frame:
                                                 background "#000080"
+                                                xsize 170
                                                 # How many serums in inventory_1 (player's)
                                                 text name_1 + ": " + str(inventory_1.get_serum_count(serum)) style "serum_text_style"
 
-                                            textbutton "<-":
-                                                action [ #When pressed, moves 1 serum from the business inventory to the player. Not active if the business has nothing in it.
-                                                Function(inventory_1.change_serum, serum, int(serum_transfer_amount)),
-                                                Function(inventory_2.change_serum, serum, -int(serum_transfer_amount))
-                                                ]
-                                                alternate [ # Alternate click multiplies the current value by 10
-                                                If(inventory_2.get_serum_count(serum) >= int(serum_transfer_amount) * 10,
-                                                [Function(inventory_1.change_serum, serum, int(serum_transfer_amount) * 10),
-                                                Function(inventory_2.change_serum, serum, -int(serum_transfer_amount) *10)])
-                                                ]
-                                                sensitive (inventory_2.get_serum_count(serum) >= int(serum_transfer_amount))
-                                                style "textbutton_no_padding_highlight"
-                                                text_style "serum_text_style"
+                                            null width 10
 
+                                            textbutton "|<" action [Function(inventory_1.change_serum,serum,inventory_2.get_serum_count(serum)),Function(inventory_2.change_serum,serum,-inventory_2.get_serum_count(serum))] sensitive (inventory_2.get_serum_count(serum) > 0) style "textbutton_no_padding_highlight" text_style "serum_text_style"
+                                            textbutton "<<" action [Function(inventory_1.change_serum,serum,10),Function(inventory_2.change_serum,serum,-10)] sensitive (inventory_2.get_serum_count(serum) > 9) style "textbutton_no_padding_highlight" text_style "serum_text_style"
+                                            textbutton "<" action [Function(inventory_1.change_serum,serum, serum_transfer_amount),Function(inventory_2.change_serum,serum, -serum_transfer_amount)] sensitive (inventory_2.get_serum_count(serum) > serum_transfer_amount - 1) style "textbutton_no_padding_highlight" text_style "serum_text_style"
+
+                                            null width 10
                                             button:
                                                 id "serum_transfer_amount"
                                                 style "textbutton_style"
@@ -90,27 +84,22 @@ init 2:
                                                     color = "#dddddd",
                                                     default = serum_transfer_amount,
                                                     changed = serum_transfer_amount_func,
-                                                    length = 7,
+                                                    length = 4,
                                                     button = renpy.get_widget("serum_trade_ui", "serum_transfer_amount"),
                                                     allow = "0123456789"
                                                 )
 
-                                            textbutton "->":
-                                                action [
-                                                Function(inventory_2.change_serum, serum, int(serum_transfer_amount)),
-                                                Function(inventory_1.change_serum, serum, -int(serum_transfer_amount))
-                                                ]
-                                                alternate [
-                                                If(inventory_1.get_serum_count(serum) >= int(serum_transfer_amount) * 10,
-                                                [Function(inventory_2.change_serum, serum, int(serum_transfer_amount) * 10),
-                                                Function(inventory_1.change_serum, serum, -int(serum_transfer_amount) * 10)])
-                                                ]
-                                                sensitive (inventory_1.get_serum_count(serum) >= int(serum_transfer_amount))
-                                                style "textbutton_no_padding_highlight"
-                                                text_style "serum_text_style"
+                                            null width 10
+
+                                            textbutton ">" action [Function(inventory_2.change_serum,serum, serum_transfer_amount),Function(inventory_1.change_serum,serum,-serum_transfer_amount)] sensitive (inventory_1.get_serum_count(serum) > serum_transfer_amount - 1) style "textbutton_no_padding_highlight" text_style "serum_text_style"
+                                            textbutton ">>" action [Function(inventory_2.change_serum,serum,10),Function(inventory_1.change_serum,serum,-10)] sensitive (inventory_1.get_serum_count(serum) > 9) style "textbutton_no_padding_highlight" text_style "serum_text_style"
+                                            textbutton ">|" action [Function(inventory_2.change_serum,serum,inventory_1.get_serum_count(serum)),Function(inventory_1.change_serum,serum,-inventory_1.get_serum_count(serum))] sensitive (inventory_1.get_serum_count(serum) > 0) style "textbutton_no_padding_highlight" text_style "serum_text_style"
+
+                                            null width 10
 
                                             frame:
                                                 background "#000080"
+                                                xsize 170
                                                 text name_2 + ": " + str(inventory_2.get_serum_count(serum)) style "serum_text_style"
 
         frame:

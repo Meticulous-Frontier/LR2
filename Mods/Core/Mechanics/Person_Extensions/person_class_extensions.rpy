@@ -306,6 +306,14 @@ init -1:
                 strip_choice = self.outfit.remove_random_any(top_layer_first, exclude_upper, exclude_lower, exclude_feet, do_not_remove = True)
                 renpy.pause(delay)
 
+            # special case where she is wearing a two-part item that blocks her vagina, but we need it be available
+            if not exclude_lower and not self.outfit.vagina_available():
+                strip_choice = self.outfit.remove_random_any(top_layer_first, False, exclude_lower, exclude_feet, do_not_remove = True)
+                while not strip_choice is None:
+                    self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
+                    strip_choice = self.outfit.remove_random_any(top_layer_first, False, exclude_lower, exclude_feet, do_not_remove = True)
+                    renpy.pause(delay)
+
         Person.strip_outfit = strip_outfit
 
         def run_move_enhanced(self,location): 
@@ -386,6 +394,17 @@ init -1:
             if self.sluttiness < 80 and self.outfit.tits_available() and self.outfit.tits_visible() and self.outfit.vagina_available() and self.outfit.vagina_visible():
                 self.change_slut_temp(self.get_opinion_score("not wearing anything"), add_to_log = False)
 
+            for event_list in [self.on_room_enter_event_list, self.on_talk_event_list]: #Go through both of these lists and curate them, ie trim out events that should have expired.
+                removal_list = [] #So we can iterate through without removing and damaging the list.
+                for an_action in event_list:
+                    if isinstance(an_action, Limited_Time_Action): #It's a LTA holder, so it has a turn counter
+                        an_action.turns_valid += -1
+                        if an_action.turns_valid <= 0:
+                            removal_list.append(an_action)
+
+                for action_to_remove in removal_list:
+                    event_list.remove(action_to_remove)
+
         Person.run_move = run_move_enhanced
 
         # BUGFIXED: Judge Outfit function uses the_person instead of self to check effective sluttiness
@@ -447,24 +466,14 @@ init -1:
 
         ## Increase the opinion on a specific topic (opinion)
         def increase_opinion_score(self, topic, add_to_log = True):
-            sexy_opinion = False
-            if topic in sexy_opinions_list:
-                sexy_opinion = True
-            elif not topic in opinions_list:
-                return # unknown opinion, so exit function
-
-            score = 0
-            if sexy_opinion:
-                score = self.sexy_opinions[topic][0]
-            else:
-                score = self.opinions[topic][0]
+            score = self.get_opinion_score(topic)
 
             if score < 2:
                 score += 1
 
-            if sexy_opinion:
+            if topic in self.sexy_opinions:
                 self.sexy_opinions[topic][0] = score
-            else:
+            if topic in self.opinions:
                 self.opinions[topic][0] = score
 
             if add_to_log:
@@ -475,24 +484,14 @@ init -1:
 
         ## Decrease the opinion on a specific topic (opinion)
         def decrease_opinion_score(self, topic, add_to_log = True):
-            sexy_opinion = False
-            if topic in sexy_opinions_list:
-                sexy_opinion = True
-            elif not topic in opinions_list:
-                return # unknown opinion, so exit function
-
-            score = 0
-            if sexy_opinion:
-                score = self.sexy_opinions[topic][0]
-            else:
-                score = self.opinions[topic][0]
+            score = self.get_opinion_score(topic)
 
             if score > -2:
                 score -= 1
 
-            if sexy_opinion:
+            if topic in self.sexy_opinions:
                 self.sexy_opinions[topic][0] = score
-            else:
+            if topic in self.opinions:
                 self.opinions[topic][0] = score
 
             if add_to_log:
@@ -603,8 +602,9 @@ init -1:
                 scene_manager.draw_scene_without(self)
 
             bottom_displayable.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier, eye_colour = self.eyes[1], lighting = lighting)) #Get the face displayable, also always under clothing.
-
             bottom_displayable.append(self.body_images.generate_item_displayable(self.body_type,self.tits,position, lighting = lighting))  #Body is always under clothing
+            bottom_displayable.append(self.pubes_style.generate_item_displayable(self.body_type,self.tits, position, lighting = lighting)) #Pubes are also always under clothing and can't be removed.
+
             size_render = renpy.render(bottom_displayable[1], 10, 10, 0, 0) #We need a render object to check the actual size of the body displayable so we can build our composite accordingly.
             the_size = size_render.get_size()
             x_size = __builtin__.int(the_size[0])
@@ -635,10 +635,10 @@ init -1:
             final_top = Composite(*composite_top_params)
 
             renpy.show("Bottom Composite", at_list=[character_placement, scale_person(self.height)], layer="Active", what=final_bottom, tag=self.name+"Bottom")
-            renpy.show("Top Composite", at_list=[character_placement, scale_person(self.height)], layer="Active", what=final_top, tag=self.name+"Top")
             if split_clothing: #Only show this if we actually had something returned to us.
                 renpy.show("Removed Item", at_list=[character_placement, scale_person(self.height), clothing_fade], layer="Active", what=split_clothing, tag=self.name+"Middle")
                 self.outfit.remove_clothing(the_clothing)
+            renpy.show("Top Composite", at_list=[character_placement, scale_person(self.height)], layer="Active", what=final_top, tag=self.name+"Top")
 
         Person.draw_animated_removal = draw_animated_removal_enhanced
 
@@ -662,7 +662,7 @@ init -1:
             mc.power = 0
 
             mc.power += int(mc.charisma*5) # Positive character modifiers
-            mc.power += int(mc.current_stamina*1.5)
+            mc.power += int((mc.energy / 20) * 1.5)
             return mc.power
 
         # calculates current willpower of a person

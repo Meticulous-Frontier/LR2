@@ -1,17 +1,21 @@
 #Dry sex position. This position is my attempt at creating a bridge between kissing and missionary.
 #This position will link itself dynamically with missionary if the girl's vagina becomes available. Otherwise no link is made.
 
-init:
-    python:
-        dry_sex = Position("Dry Sex",30,55,"missionary","Lay","None","Vaginal",16,16,[],
-        "intro_dry_sex",
-        ["scene_dry_sex_1","scene_dry_sex_2"],
-        "outro_dry_sex",
-        "transition_default_dry_sex",
-        "strip_dry_sex", "strip_ask_dry_sex",
-        "orgasm_dry_sex",
-        opinion_tags = ["missionary style sex","big dicks"])  #Lol I have no idea
-        #list_of_positions.append(dry_sex)   #Disabled for now
+init python:
+    dry_sex = Position(name = "Dry Sex", slut_requirement = 30, slut_cap = 55, requires_hard = False, requires_large_tits = False,
+        position_tag = "missionary", requires_location = "Lay", requires_clothing = "None", skill_tag = "Foreplay",
+        girl_arousal = 14, girl_energy = 10,
+        guy_arousal = 13, guy_energy = 12,
+        connections = [],
+        intro = "intro_dry_sex",
+        scenes = ["scene_dry_sex_1","scene_dry_sex_2"],
+        outro = "outro_dry_sex",
+        transition_default = "transition_default_dry_sex",
+        strip_description = "strip_dry_sex", strip_ask_description = "strip_ask_dry_sex",
+        orgasm_description = "orgasm_dry_sex",
+        opinion_tags = ["missionary style sex", "big dicks"])  #Lol I have no idea
+        
+    #list_of_positions.append(dry_sex)   #Disabled for now
 
 # init 1:
 #     python:

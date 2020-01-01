@@ -1,15 +1,19 @@
-init:
-    python:
-        SB_doggy_anal_dildo_dp = Position("Doggy Anal DP",90,120,"doggy","Lay","Vagina","Anal",25,18,[],
-        "intro_SB_doggy_anal_dildo_dp",
-        ["scene_SB_doggy_anal_dildo_dp_1","scene_SB_doggy_anal_dildo_dp_2"],
-        "outro_SB_doggy_anal_dildo_dp",
-        "transition_default_SB_doggy_anal_dildo_dp",
-        "strip_SB_doggy_anal_dildo_dp", "strip_ask_SB_doggy_anal_dildo_dp",
-        "orgasm_SB_doggy_anal_dildo_dp",
+init python:
+    SB_doggy_anal_dildo_dp = Position(name = "Doggy Anal DP", slut_requirement = 90, slut_cap = 120, requires_hard = True, requires_large_tits = False,
+        position_tag = "doggy", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Anal",
+        girl_arousal = 25, girl_energy = 6,
+        guy_arousal = 18, guy_energy = 10,
+        connections = [],
+        intro = "intro_SB_doggy_anal_dildo_dp",
+        scenes = ["scene_SB_doggy_anal_dildo_dp_1","scene_SB_doggy_anal_dildo_dp_2"],
+        outro = "outro_SB_doggy_anal_dildo_dp",
+        transition_default = "transition_default_SB_doggy_anal_dildo_dp",
+        strip_description = "strip_SB_doggy_anal_dildo_dp", strip_ask_description = "strip_ask_SB_doggy_anal_dildo_dp",
+        orgasm_description = "orgasm_SB_doggy_anal_dildo_dp",
         verb = "ass fuck",
         opinion_tags = ["doggy style sex", "anal sex", "vaginal sex"], record_class = "Anal Sex")
-        #list_of_positions.append(SB_doggy_anal_dildo_dp)
+
+    #list_of_positions.append(SB_doggy_anal_dildo_dp)
 
 #init 1:
 #    python:
@@ -216,7 +220,7 @@ label outro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object, the_round
                     "She turns the condom inside out and licks the inside of it, desperate to get every drop of cum she possibly can."
                 elif the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
                     $ the_girl.discover_opinion("drinking cum")
-                    "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off do your cum doesn't spill out."
+                    "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
                     the_girl.char "It would be a shame to waste all of this, right?"
                     "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
                     $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))

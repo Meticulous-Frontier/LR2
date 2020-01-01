@@ -5,7 +5,7 @@
 #        ***Optional:
 #        If NPC is slutty (>60?), check and see if MC has sex skill greater than NPC
 #        If yes, have NPC ask if MC will train her in sex skill
-#        Check if MC has stamina. If yes give MC option to train in sex skill
+#        Check if MC has energy. If yes give MC option to train in sex skill
 #        If yes, trigger sex skill training scene.
 #
 #        Future options: Other benefits for NPCs having high sex skills

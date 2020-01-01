@@ -14,6 +14,9 @@ init -2 python:
 
         body_type = None
         tits = None
+
+        if part_to_display in pube_styles:
+            part_to_display.colour = self.pubes_colour
         if part_to_display in hair_styles:
             part_to_display.colour = self.hair_colour[1]
 
@@ -34,15 +37,20 @@ init -2 python:
 
         displayable_list = [] # We will be building up a list of displayables passed to us by the various objects on the person (their body, clothing, etc.)
 
+
         if part_to_display in list_of_bodies: # Seperate the parts (Clothing) so we draw things individually.
             displayable_list.append(part_to_display.generate_item_displayable((self.body_type if body_type is None else body_type), (self.tits if tits is None else tits), position, lighting)) #Add the body displayable
 
         if part_to_display in list_of_faces:
             displayable_list.append(Image("character_images/" + emotion + "_" + part_to_display + "_" + position + "_" + self.skin + ".png")) #Get the face displayable
+            displayable_list.append(self.hair_style.generate_item_displayable("standard_body", self.tits,position, lighting = lighting))
+        #if part_to_display in hair_styles and type(part_to_display) is Clothing:
+        #    displayable_list.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier, eye_colour = self.eyes[1], lighting = lighting)) #Get the face displayable
+        #    displayable_list.append(part_to_display.generate_item_displayable("standard_body", self.tits,position, lighting = lighting)) #Get hair
 
-        if part_to_display in hair_styles and type(part_to_display) is Clothing:
-            displayable_list.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier, eye_colour = self.eyes[1], lighting = lighting)) #Get the face displayable
-            displayable_list.append(part_to_display.generate_item_displayable("standard_body", self.tits,position, lighting = lighting)) #Get hair
+        if part_to_display in pube_styles:
+            displayable_list.append(self.body_images.generate_item_displayable((self.body_type if body_type is None else body_type), (self.tits if tits is None else tits), position, lighting))
+            displayable_list.append(part_to_display.generate_item_displayable((self.body_type if body_type is None else body_type), (self.tits if tits is None else tits), position, lighting))
 
         if displayable_list:
             size_render = renpy.render(displayable_list[0], 10, 10, 0, 0) #We need a render object to check the actual size of the body displayable so we can build our composite accordingly.
@@ -57,6 +65,8 @@ init -2 python:
                 if part_to_display in (hair_styles + list_of_faces):
                     composite_list.append((-150,10)) #Center all displaybles on the top left corner, because of how they are rendered they will all line up.
 
+                elif part_to_display in pube_styles:
+                    composite_list.append((-170, -400))
                 elif tits is not None:
                     composite_list.append((-150,-160))
                 else:
@@ -154,7 +164,7 @@ screen body_customizer(the_person = the_person):
 
     default fallback_person = copy.copy(the_person)
 
-    default category_unsorted = {"hair_style": [hair_styles, False, 0], "face_style": [list_of_faces, False, 1], "tits": [list_of_cup_sizes, False, 2], "body_images": [list_of_bodies, False, 3] , "body_type": [list_of_body_types, False, 4]} # Key is the attribute to fetch via getattr, [0] is the list of items to select / display from and [1] is a bool to determine if [0] is shown
+    default category_unsorted = {"face_style": [list_of_faces, False, 0], "tits": [list_of_cup_sizes, False, 1], "pubes_style": [pube_styles, False, 2],"body_images": [list_of_bodies, False, 3] , "body_type": [list_of_body_types, False, 4]} # "hair_style": [hair_styles, False, 0] # Key is the attribute to fetch via getattr, [0] is the list of items to select / display from and [1] is a bool to determine if [0] is shown
     default categories = collections.OrderedDict(sorted(category_unsorted.items(), key = lambda t: t[1][2]))
     frame:
         #area(0, 100, 1500, 900)
@@ -241,6 +251,7 @@ screen body_customizer(the_person = the_person):
                             SetField(the_person, "hair_style", fallback_person.hair_style),
                             SetField(the_person, "name", fallback_person.name),
                             SetField(the_person, "last_name", fallback_person.last_name),
+                            SetField(the_person, "pubes_style", fallback_person.pubes_style),
 
                             Function(the_person.match_skin, fallback_person.skin),
                             Function(the_person.draw_person, show_person_info = False)

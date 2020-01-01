@@ -128,57 +128,52 @@ init 2:
                                                             text "Production Weight:   " style "serum_text_style"
 
                                                         if count in mc.business.serum_production_array:
-                                                            grid 3 1:
-                                                                xfill True
-                                                                textbutton "-10%":
-                                                                    xfill True
-                                                                    style "textbutton_style"
-                                                                    text_style "serum_text_style"
+                                                            textbutton "-10%":
+                                                                xsize 40
+                                                                style "textbutton_style"
+                                                                text_style "serum_text_style"
 
 
-                                                                    action [
-                                                                    Function(mc.business.change_line_weight,count,-10)
-                                                                    ]
+                                                                action [
+                                                                Function(mc.business.change_line_weight,count,-10)
+                                                                ]
 
-                                                                    tooltip production_line_weight_tooltip
+                                                                tooltip production_line_weight_tooltip
 
-                                                                frame:
-                                                                    xfill True
-                                                                    background None
+                                                            frame:
+                                                                xsize 140
+                                                                background None
 
-                                                                    text str(color_indicator(mc.business.serum_production_array[count][1])) + "%" style "serum_text_style"
+                                                                text str(color_indicator(mc.business.serum_production_array[count][1])) + "%" style "serum_text_style"
 
-                                                                textbutton "+10%":
-                                                                    xfill True
-                                                                    style "textbutton_style"
-                                                                    text_style "serum_text_style"
+                                                            textbutton "+10%":
+                                                                xsize 40
+                                                                style "textbutton_style"
+                                                                text_style "serum_text_style"
 
+                                                                action [
+                                                                Function(mc.business.change_line_weight,count,10)
+                                                                ]
 
-                                                                    action [
-                                                                    Function(mc.business.change_line_weight,count,10)
-                                                                    ]
-
-                                                                    tooltip production_line_weight_tooltip
+                                                                tooltip production_line_weight_tooltip
 
                                                         else:
-                                                            grid 3 1:
-                                                                xfill True
-                                                                frame:
-                                                                    background None
-                                                                    xfill True
-                                                                    text "-10%" style "serum_text_style"
-                                                                    tooltip production_line_weight_tooltip
+                                                            frame:
+                                                                background None
+                                                                xsize 40
+                                                                text "-10%" style "serum_text_style"
+                                                                tooltip production_line_weight_tooltip
 
-                                                                frame:
-                                                                    background None
-                                                                    xfill True
-                                                                    text "0%" style "serum_text_style"
+                                                            frame:
+                                                                background None
+                                                                xsize 140
+                                                                text "0%" style "serum_text_style"
 
-                                                                frame:
-                                                                    background None
-                                                                    xfill True
-                                                                    text "+10%" style "serum_text_style"
-                                                                    tooltip production_line_weight_tooltip
+                                                            frame:
+                                                                background None
+                                                                xsize 40
+                                                                text "+10%" style "serum_text_style"
+                                                                tooltip production_line_weight_tooltip
 
                                                     hbox:
 
@@ -188,72 +183,70 @@ init 2:
                                                             text "Auto-sell Threshold: " style "serum_text_style"
 
                                                         if count in mc.business.serum_production_array:
-                                                            grid 3 1:
-                                                                xfill True
-                                                                textbutton "-1":
-                                                                    xfill True
-                                                                    style "textbutton_style"
+                                                            hbox:
+                                                                xsize 40
+                                                                yoffset 8
+                                                                textbutton "<<":
+                                                                    action [Function(mc.business.change_line_autosell,count,-10)]
+                                                                    style "textbutton_no_padding_highlight" 
                                                                     text_style "serum_text_style"
+                                                                    tooltip production_line_autosell_tooltip
+                                                                textbutton "<": 
+                                                                    action [Function(mc.business.change_line_autosell,count, -1)]
+                                                                    style "textbutton_no_padding_highlight"
+                                                                    text_style "serum_text_style"
+                                                                    tooltip production_line_autosell_tooltip
 
-                                                                    action [
-                                                                    Function(mc.business.change_line_autosell,count,-1)
-                                                                    ]
-                                                                    alternate [
-                                                                    Function(mc.business.change_line_autosell,count,-10)
-                                                                    ]
+                                                            # frame:
+                                                            #     background None
+                                                            #     xfill True
+                                                            button:
+                                                                xsize 140
+                                                                action ToggleVariable("array_to_change", count, None)
+
+                                                                if array_to_change == count:
+                                                                    input default str(mc.business.serum_production_array[count][3]) length 7 allow "0123456789" changed serum_production_autosell style "serum_text_style"
+                                                                else:
+                                                                    if mc.business.serum_production_array[count][3] >= 0:
+                                                                        text str(mc.business.serum_production_array[count][3]) style "serum_text_style" yalign 0.5
+
+                                                                if mc.business.serum_production_array[count][3] < 0 and array_to_change != count:
+                                                                    text "None" style "serum_text_style" yalign 0.5
+
+                                                            hbox:
+                                                                xalign 1
+                                                                xsize 40
+                                                                yoffset 8
+                                                                textbutton ">": 
+                                                                    action [Function(mc.business.change_line_autosell,count, 1)]
+                                                                    style "textbutton_no_padding_highlight"
+                                                                    text_style "serum_text_style"
+                                                                    tooltip production_line_autosell_tooltip
+                                                                textbutton ">>":
+                                                                    action [Function(mc.business.change_line_autosell,count,10)]
+                                                                    style "textbutton_no_padding_highlight" 
+                                                                    text_style "serum_text_style"
                                                                     tooltip production_line_autosell_tooltip
 
 
-                                                                # frame:
-                                                                #     background None
-                                                                #     xfill True
-                                                                button:
-                                                                    xfill True
-                                                                    action ToggleVariable("array_to_change", count, None)
-
-
-                                                                    if array_to_change == count:
-                                                                        input default str(mc.business.serum_production_array[count][3]) length 7 allow "0123456789" changed serum_production_autosell style "serum_text_style"
-                                                                    else:
-                                                                        if mc.business.serum_production_array[count][3] >= 0:
-                                                                            text str(mc.business.serum_production_array[count][3]) style "serum_text_style" yalign 0.5
-
-                                                                    if mc.business.serum_production_array[count][3] < 0 and array_to_change != count:
-                                                                        text "None" style "serum_text_style" yalign 0.5
-
-                                                                textbutton "+1":
-                                                                    xfill True
-                                                                    style "textbutton_style"
-                                                                    text_style "serum_text_style"
-
-                                                                    action [
-                                                                    Function(mc.business.change_line_autosell,count,+1)
-                                                                    ]
-                                                                    alternate [
-                                                                    Function(mc.business.change_line_autosell,count,+10)
-                                                                    ]
-
-                                                                    tooltip production_line_autosell_tooltip
                                                         else:
-                                                            grid 3 1:
-                                                                xfill True
-                                                                frame:
-                                                                    background None
-                                                                    xfill True
-                                                                    text "-1" style "serum_text_style"
+                                                            frame:
+                                                                background None
+                                                                xsize 60
+                                                                text "<< <" style "serum_text_style"
 
-                                                                    tooltip production_line_autosell_tooltip
+                                                                tooltip production_line_autosell_tooltip
 
-                                                                frame:
-                                                                    background None
-                                                                    xfill True
-                                                                    text "None" style "serum_text_style"
+                                                            frame:
+                                                                background None
+                                                                xsize 100
+                                                                text "None" style "serum_text_style"
 
-                                                                frame:
-                                                                    background None
-                                                                    xfill True
-                                                                    text "-10%" style "serum_text_style"
-                                                                    tooltip production_line_autosell_tooltip
+                                                            frame:
+                                                                background None
+                                                                xsize 60
+                                                                text "> >>" style "serum_text_style"
+                                                                tooltip production_line_autosell_tooltip
             if line_selected:
                 frame:
                     background "#888888"

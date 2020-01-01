@@ -103,6 +103,15 @@ init 5 python:
         renpy.random.shuffle(possible_crisis_list)    # shuffle the list in random order
         return get_random_from_weighted_list(possible_crisis_list)
 
+    def get_limited_time_action_for_person(person):
+        possible_crisis_list = []
+        for crisis in limited_time_event_pool:
+            if crisis[0].is_action_enabled(person): #Get the first element of the weighted tuple, the action.
+                possible_crisis_list.append(crisis) #Build a list of valid crises from ones that pass their requirement.
+        renpy.random.shuffle(possible_crisis_list)    # shuffle the list in random order
+        return get_random_from_weighted_list(possible_crisis_list, return_everything = True)
+
+
     def get_morning_crisis_from_crisis_list():
         possible_morning_crises_list = []
         for crisis in morning_crisis_list:
@@ -114,12 +123,12 @@ init 5 python:
         return get_random_from_weighted_list(possible_morning_crises_list)
 
     def cleanup_crisis_tracker():
-        while len(crisis_tracker) > 10: # release old tracked events
+        while len(crisis_tracker) > 6: # release old tracked events
             del crisis_tracker[0]
         return
 
     def cleanup_morning_crisis_tracker():
-        while len(morning_crisis_tracker) > 3: # release old tracked events
+        while len(morning_crisis_tracker) > 2: # release old tracked events
             del morning_crisis_tracker[0]
         return
 
@@ -194,20 +203,22 @@ label advance_time_mandatory_crisis_label():
         clear_list = []
 
     while mandatory_crisis_count < mandatory_crisis_max: #We need to keep this in a renpy loop, because a return call will always return to the end of an entire python block.
-        $ the_crisis = mc.business.mandatory_crises_list[mandatory_crisis_count]
-        if the_crisis.is_action_enabled():
-            $ the_crisis.call_action()
-            if _return == "Advance Time":
-                $ mandatory_advance_time = True
-            $ renpy.scene("Active")
-            $ clear_list.append(the_crisis)
+        if mandatory_crisis_count < len(mc.business.mandatory_crises_list): # extra check to make sure index still exists
+            $ the_crisis = mc.business.mandatory_crises_list[mandatory_crisis_count]
+            if the_crisis.is_action_enabled():
+                $ the_crisis.call_action()
+                if _return == "Advance Time":
+                    $ mandatory_advance_time = True
+                $ renpy.scene("Active")
+                $ clear_list.append(the_crisis)
+            $ del the_crisis
         $ mandatory_crisis_count += 1
-        $ del the_crisis
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
         mc.location.show_background()
         for crisis in clear_list:
-            mc.business.mandatory_crises_list.remove(crisis) #Clean up the list.
+            if crisis in mc.business.mandatory_crises_list: # extra check to see if crisis still in list
+                mc.business.mandatory_crises_list.remove(crisis) #Clean up the list.
 
         del clear_list
     return
@@ -313,5 +324,17 @@ label advance_time_people_run_move_label():
             person.run_move(place)
             if person.follow_mc: # move follower to mc location
                 person.location().move_person(person, mc.location)
+
+            if person.title is not None: #We don't assign events to people we haven't met.
+                if renpy.random.randint(0,100) < 7: #Only assign one to 12% of people, to cut down on the number of people we're checking.
+                    the_crisis = get_limited_time_action_for_person(person)
+                    if the_crisis is not None:
+                        limited_time_event = Limited_Time_Action(the_crisis[0], the_crisis[0].event_duration) #Wraps the action so that we can have an instanced duration counter and add/remove it easily.\
+                        #renpy.notify("Created event: " + the_crisis[0].name + " for " + people.name)
+                        if the_crisis[2] == "on_talk":
+                            person.on_talk_event_list.append(limited_time_event)
+
+                        elif the_crisis[2] == "on_enter":
+                            person.on_room_enter_event_list.append(limited_time_event)
                 
     return

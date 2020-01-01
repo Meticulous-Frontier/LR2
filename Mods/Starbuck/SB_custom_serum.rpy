@@ -355,7 +355,7 @@ init -1 python:
                     SB_random_opinion += 1
                     the_person.sexy_opinions[SB_random_fetish_key] = [SB_random_opinion, True]
 
-            if the_person.sex_skills["Oral"] >= 5:
+            if the_person.sex_skills["Oral"] >= 3:
                 if SB_get_cum_score(the_person) >= 8:
                     if the_person.sluttiness >= 90:
                         # only allow one cum fetish either internal or external

@@ -1,16 +1,19 @@
-init:
-    python:
-        SB_reverse_cowgirl = Position("Reverse Cowgirl",60,80,"doggy","Lay","Vagina","Vaginal",22,18,[],
-        "intro_SB_reverse_cowgirl",
-        ["scene_SB_reverse_cowgirl_1","scene_SB_reverse_cowgirl_2"],
-        "outro_SB_reverse_cowgirl",
-        "transition_default_SB_reverse_cowgirl",
-        "strip_SB_reverse_cowgirl", "strip_ask_SB_reverse_cowgirl",
-        "orgasm_SB_reverse_cowgirl",
-        verb = "ride",
-        verbing = "riding",
+init python:
+    SB_reverse_cowgirl = Position(name = "Reverse Cowgirl", slut_requirement = 60, slut_cap = 80, requires_hard = True, requires_large_tits = False,
+        position_tag = "doggy", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Vaginal",
+        girl_arousal = 18, girl_energy = 10,
+        guy_arousal = 14, guy_energy = 6,
+        connections = [],
+        intro = "intro_SB_reverse_cowgirl",
+        scenes = ["scene_SB_reverse_cowgirl_1","scene_SB_reverse_cowgirl_2"],
+        outro = "outro_SB_reverse_cowgirl",
+        transition_default = "transition_default_SB_reverse_cowgirl",
+        strip_description = "strip_SB_reverse_cowgirl", strip_ask_description = "strip_ask_SB_reverse_cowgirl",
+        orgasm_description = "orgasm_SB_reverse_cowgirl",
+        verb = "ride", verbing = "riding",
         opinion_tags = ["taking control","vaginal sex"], record_class = "Vaginal Sex")
-        list_of_girl_positions.append(SB_reverse_cowgirl)
+
+    list_of_girl_positions.append(SB_reverse_cowgirl)
 
 init 1:
     python:

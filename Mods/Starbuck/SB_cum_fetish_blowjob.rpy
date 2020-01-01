@@ -1,14 +1,19 @@
-﻿init:
-    python:
-        SB_cum_fetish_blowjob = Position("Blowjob",40,100,"blowjob","Kneel","None","Oral",20,25,[],
-        "intro_SB_cum_fetish_blowjob",
-        ["scene_SB_cum_fetish_blowjob_1","scene_SB_cum_fetish_blowjob_2"],
-        "outro_SB_cum_fetish_blowjob",
-        "transition_default_SB_cum_fetish_blowjob",
-        "strip_SB_cum_fetish_blowjob", "strip_ask_SB_cum_fetish_blowjob",
-        "orgasm_SB_cum_fetish_blowjob",
-        opinion_tags = ["giving blowjobs"])
-        list_of_girl_positions.append(SB_cum_fetish_blowjob)
+﻿init python:
+    SB_cum_fetish_blowjob = Position(name = "Blowjob", slut_requirement = 40, slut_cap = 100, requires_hard = True, requires_large_tits = False,
+        position_tag = "blowjob", requires_location = "Kneel", requires_clothing = "None", skill_tag = "Oral",
+        girl_arousal = 13, girl_energy = 10,
+        guy_arousal = 15, guy_energy = 3,
+        connections = [],
+        intro = "intro_SB_cum_fetish_blowjob",
+        scenes = ["scene_SB_cum_fetish_blowjob_1","scene_SB_cum_fetish_blowjob_2"],
+        outro = "outro_SB_cum_fetish_blowjob",
+        transition_default = "transition_default_SB_cum_fetish_blowjob",
+        strip_description = "strip_SB_cum_fetish_blowjob", strip_ask_description = "strip_ask_SB_cum_fetish_blowjob",
+        orgasm_description = "orgasm_SB_cum_fetish_blowjob",
+        verb = "throat",
+        opinion_tags = ["giving blowjobs"], record_class = "Blowjobs")
+
+    list_of_girl_positions.append(SB_cum_fetish_blowjob)
 
 #init 1:
 #    python:

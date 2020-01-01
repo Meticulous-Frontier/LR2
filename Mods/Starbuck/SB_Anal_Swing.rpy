@@ -1,15 +1,19 @@
-init:
-    python:
-        SB_anal_swing = Position("Swinging Anal",85,110,"sitting","Swing","Vagina","Anal",20,20,[],
-        "intro_SB_anal_swing",
-        ["scene_SB_anal_swing_1","scene_SB_anal_swing_2"],
-        "outro_SB_anal_swing",
-        "transition_default_SB_anal_swing",
-        "strip_SB_anal_swing", "strip_ask_SB_anal_swing",
-        "orgasm_SB_anal_swing",
+init python:
+    SB_anal_swing = Position(name = "Swinging Anal", slut_requirement = 85, slut_cap = 110, requires_hard = True, requires_large_tits = False,
+        position_tag = "sitting", requires_location = "Swing", requires_clothing = "Vagina", skill_tag = "Anal",
+        girl_arousal = 20, girl_energy = 6,
+        guy_arousal = 23, guy_energy = 10,
+        connections = [],
+        intro = "intro_SB_anal_swing",
+        scenes = ["scene_SB_anal_swing_1","scene_SB_anal_swing_2"],
+        outro = "outro_SB_anal_swing",
+        transition_default = "transition_default_SB_anal_swing",
+        strip_description = "strip_SB_anal_swing",  strip_ask_description = "strip_ask_SB_anal_swing",
+        orgasm_description = "orgasm_SB_anal_swing",
         verb = "ass fuck",
-        opinion_tags = ["doggy style sex" "anal sex" "sex standing up"], record_class = "Anal Sex")
-        list_of_positions.append(SB_anal_swing)
+        opinion_tags = ["doggy style sex", "anal sex", "sex standing up"], record_class = "Anal Sex")
+
+    list_of_positions.append(SB_anal_swing)
 
 #init 1:
     #python:

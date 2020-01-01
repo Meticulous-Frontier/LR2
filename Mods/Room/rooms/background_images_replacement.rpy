@@ -17,11 +17,14 @@ label updated_room_background(stack):
         # Load extra GUI images
         thumbs_up_image = Image(get_file_handle("thumbs_up_small.png"))
         thumbs_down_image = Image(get_file_handle("thumbs_down_small.png"))
+        vial_image = Image(get_file_handle("vial.png"))
+
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
 
     image thumbs_up = "[thumbs_up_image.filename]"
     image thumbs_down = "[thumbs_down_image.filename]"
+    image serum_vial = "[vial_image.filename]"
 
     return

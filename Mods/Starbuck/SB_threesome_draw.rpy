@@ -218,6 +218,11 @@ label SB_test_draw_scene_two():
     $ SB_draw_two_person_scene(person_one = mom, person_two = lily, one_position = "missionary", one_scale = 0.5, two_position = "doggy",  two_pos_x = 0.95, two_pos_y = 0.7)
     return
 
+label trist_draw_69():
+    $ renpy.scene("Active")
+    $ lily.draw_person("missionary", character_placement = character_69_bottom, from_scene = True)
+    $ mom.draw_person("cowgirl", character_placement = character_69_on_top, from_scene = True)
+    return
 
 screen SB_two_person_info_ui(the_person_one, the_person_two): #Used to display stats for a person while you're talking to them.
     layer "Active"

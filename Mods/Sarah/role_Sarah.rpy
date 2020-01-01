@@ -51,7 +51,7 @@ init 2 python:
             title = "Sarah", possessive_title = "Your childhood friend",mc_title = mc.name, relationship = "Single", kids = 0)
 
         sarah.set_schedule([0,4], Sarah_home)
-        sarah.set_schedule([1,2,3], mall)
+        sarah.set_schedule([1,2,3], Sarah_home)
 
         sarah.home = Sarah_home
 
@@ -60,9 +60,22 @@ init 2 python:
         sarah.event_triggers_dict["drinks_out_progress"] = 0   # 0 = not started, 1 = third wheel event complete, 2 = grab drinks complete
         sarah.event_triggers_dict["dating_path"] = False       # False = not started, or doing FWB during story, True = dating her.
 
+        # add appoint
+        office.actions.append(HR_director_appointment_action)
 
         Sarah_intro = Action("Sarah_intro",Sarah_intro_requirement,"Sarah_intro_label") #Set the trigger day for the next monday. Monday is day%7 == 0
         mc.business.mandatory_crises_list.append(Sarah_intro) #Add the event here so that it pops when the requirements are met.
+
+        sarah.opinions["HR work"] = [2, True]  # she loves HR work
+        sarah.opinions["work uniforms"] = [1, False]  # she likes uniforms
+        sarah.opinions["Mondays"] = [1, False]  # she likes mondays, and monday meetings!
+        sarah.opinions["working"] = [1, False]  # a bit of a workaholic
+
+
+        sarah.sexy_opinions["taking control"] = [1, False]  # she likes taking control, type A
+        sarah.sexy_opinions["giving handjobs"] = [2, False] # Not afraid to get her hands dirty ;)
+        sarah.sexy_opinions["showing her tits"] = [-2, False]  # She hates showing her small tits
+
         return
 
     def Sarah_reset_vars():
@@ -132,7 +145,7 @@ init -1 python:
         return False   #Disabled while I work on it
         if sarah.event_triggers_dict.get("epic_tits_progress", 0) < 2:  #Don't run until after she has bigger tits
             return False
-        if time_of_day > 1:
+        if time_of_day > 2:   #Only in the evening when the strippers are at the club
             if sarah.sluttiness > 50:
                 if day%7 == 5:  #Saturday
                     if mc.is_at_work():
@@ -149,7 +162,7 @@ init -1 python:
 
     def Sarah_weekend_surprise_crisis_requirement():
         if time_of_day > 1:
-            if sarah.sluttiness > 30:
+            if sarah.sluttiness > 50:
                 if day%7 == 5:  #Saturday
                     if mc.is_at_work():
                         return True
@@ -157,7 +170,6 @@ init -1 python:
 
     def test_bra_function(the_person):
         Sarah_remove_bra_from_wardrobe(the_person.wardrobe)
-
 
 label Sarah_intro_label():
     $ the_person = sarah
@@ -257,7 +269,7 @@ label Sarah_hire_label():
     #TODO Hire Sarah officially here?
     $ HR_director_initial_hire = Action("Hire HR Director",HR_director_initial_hire_requirement,"HR_director_initial_hire_label", args = the_person) #Set the trigger day for the next monday. Monday is day%7 == 0
     $ mc.business.mandatory_crises_list.append(HR_director_initial_hire) #Add the event here so that it pops when the requirements are met.
-    $ business_HR_meeting_last_day = day # used to make sure we meet the next day
+    $ set_HR_director_tag("business_HR_meeting_last_day", day) # used to make sure we meet the next day
     return
 
 label Sarah_third_wheel_label():
@@ -426,11 +438,9 @@ label Sarah_third_wheel_label():
     "She turns and heads into her building. You check your watch and realize how late it is."
     $ scene_manager.remove_actor(the_person, reset_actor = False)
     $ del sarah_friend #Cleanup?
+
     $ Sarah_get_drinks_action = Action("Sarah get drinks",Sarah_get_drinks_requirement,"Sarah_get_drinks_label")
     $ mc.business.mandatory_crises_list.append(Sarah_get_drinks_action) #Add the event here so that it pops when the requirements are met.
-
-
-
     return
 
 label Sarah_get_drinks_label():
@@ -712,7 +722,7 @@ label Sarah_get_drinks_label():
     "ABORT! You quickly let go of [the_person.title] when your mother interrupts you."
     mom.char "Sorry! I didn't... here you go!"
     "She quickly hands [the_person.title] a large towel and a set of clothes."
-    mom.char "There you are dear. I'm sorry, but Lily is in the bathroom right now, taking one of her rediculously long showers..."
+    mom.char "There you are dear. I'm sorry, but Lily is in the bathroom right now, taking one of her ridiculously long showers..."
     mc.name "That's okay, she can change in my room! I can wait out here."
     the_person.char "Thank you! I'll be quick!"
     $ scene_manager.update_actor(the_person, position = "walking_away")
@@ -766,9 +776,9 @@ label Sarah_get_drinks_label():
     "For a moment you consider grabbing a condom, but that thought evaporates when she runs the nails of her free hand roughly down your back."
     "You let go of yourself, and move your hips into position just above hers. Her hand stops stroking you and guides your cock to her pussy as it gets close."
     "You can feel the moist heat coming from between [the_person.title]'s legs as you get close. You feel the head begin to poke against her slit."
-    "Her legs wrap tighter behing you, begging you to push into her. You happily give in, parting her labia and sinking slowly into her cunt."
+    "Her legs wrap tighter behind you, begging you to push into her. You happily give in, parting her labia and sinking slowly into her cunt."
     the_person.char "OH god... that's so good!"
-    call sex_description(the_person, missionary, make_bed(), round = 1, private = True, girl_in_charge = False) from _call_sex_description_sarah_grabbing_drinks_1
+    call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True) from _call_sex_description_sarah_grabbing_drinks_1
     if the_person.event_triggers_dict.get("dating_path", False) == True:
         the_person.char "Oh my god... ever since you came back into my life, I'd been hoping... maybe this was all happening for a reason."
         "You lay down on your side next to her. She scoots next to you and lays her head on your arm."
@@ -805,6 +815,7 @@ label Sarah_get_drinks_label():
 
     $ sarah_weekend_surprise_action = ActionMod("Sarah's Weekend Surprise", Sarah_weekend_surprise_crisis_requirement, "Sarah_weekend_surprise_crisis_label",
         menu_tooltip = "Sarah catches you at work on the weekend again.", category = "Business", is_crisis = True, crisis_weight = 5)
+    $ mc.business.mandatory_crises_list.append(sarah_weekend_surprise_action) #Add the event here so that it pops when the requirements are met.
 
     return
 
@@ -825,9 +836,9 @@ label Sarah_catch_stealing_label():
         the_person.char "Oh, don't worry about it, it is just between me and her!"
         "You furrow your brow. Hopefully you can convince her to come clean with whatever it is that she is doing."
         mc.name "I'm sure it is fine, but you ARE coming out of a research on a Friday, after everyone has left for the weekend. Let me see what you have."
-        "Realing that you aren't going to back down, she slowly brings her hand forward. In it are several glass vials with some prototype serum labeled 'T+'"
+        "Reeling that you aren't going to back down, she slowly brings her hand forward. In it are several glass vials with some prototype serum labeled 'T+'"
         the_person.char "Don't be mad! When you told me on Monday that we had come up with a breast enhancement serum, I knew I had to get my hands on one of the prototypes..."
-    mc.name "It okay. I didn't realize that was something you would be interested in. If you had asked me, I would have seen it arranged without having to sneak around!"
+    mc.name "It's okay. I didn't realize that was something you would be interested in. If you had asked me, I would have seen it arranged without having to sneak around!"
     $ the_person.change_happiness(5)
     $ the_person.change_love(3)
     $ the_person.draw_person(emotion = "happy")
@@ -895,20 +906,22 @@ label Sarah_catch_stealing_label():
     return
 
 label Sarah_epic_tits_label():
-    $ the_person = sarah
-    $ sarah.tits = "F"
-    $ sarah.event_triggers_dict["epic_tits_progress"] = 3
-    $ the_person.change_slut_core(10)
-    $ the_person.change_slut_temp(10)
+    python:
+        the_person = sarah
+        sarah.tits = "F"
+        sarah.event_triggers_dict["epic_tits_progress"] = 3
+        the_person.change_slut_core(10)
+        the_person.change_slut_temp(10)
     call Sarah_tits_reveal_label() from Sarah_epic_tits_call_1
     return
 
 label Sarah_new_tits_label():
-    $ the_person = sarah
-    $ sarah.tits = "D"
-    $ sarah.event_triggers_dict["epic_tits_progress"] = 2
-    $ the_person.change_slut_core(5)
-    $ the_person.change_slut_temp(5)
+    python:
+        the_person = sarah
+        sarah.tits = "D"
+        sarah.event_triggers_dict["epic_tits_progress"] = 2
+        the_person.change_slut_core(5)
+        the_person.change_slut_temp(5)
     call Sarah_tits_reveal_label() from Sarah_new_tits_call_1
     return
 
@@ -964,8 +977,9 @@ label Sarah_tits_reveal_label():
     the_person.char "I can't believe I'm finally doing this. This all feels like a dream!"
     "She looks up at you from her knees. She looks you right in the eyes as she leans forward and slides your cock between her pillowy tits."
     "With both hands holding her breasts together, she slowly starts to move her pillowy flesh up and down your erection."
-    call sex_description(the_person, SB_Titfuck_Kneeling, make_floor(), round = 1, private = True, girl_in_charge = True) from _call_sex_description_sarah_tits_reveal_1
-    if the_person.arousal > 100: #She finished!
+    call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_sarah_tits_reveal_1
+    $ the_report = _return
+    if the_report.get("girl orgasms", 0) > 0:
         the_person.char "Oh my god, I came so hard... I can't believe it. That felt so good! I need to do that again soon!"
         if the_person.get_opinion_score("showing her tits") < 2:
             $ the_person.sexy_opinions["showing her tits"] = [2, True]
@@ -984,9 +998,239 @@ label Sarah_tits_reveal_label():
     return
 
 label Sarah_stripclub_story_label():
-    pass
+    $ the_person = sarah
+    #TODO going out outfit
+    "Lost in thought as you get your work done in the silence of the weekend, a sudden voice startles you."
+    the_person.char "[the_person.mc_title]! You crazy workaholic, let's go blow off some steam!"
+    "You look up and see [the_person.title] standing in the doorway."
+    $ scene_manager.add_actor(the_person, emotion = "happy")
+    "You still aren't quite used to her enhanced chest size. You realize you are blatantly checking her out as she stands in the door."
+    the_person.char "Mmm, I've been getting exactly that look from a ton of guys lately... and a few girls to."
+    the_person.char "It's been great! I can't thank you enough for helping this happen. I think I might know a way to repay you a little bit though..."
+    mc.name "It's okay, you don't have to do anything, I was just happy to help!"
+    if the_person.event_triggers_dict.get("dating_path", False) == True:
+        the_person.char "Hah! [the_person.mc_title], that's one of the things I love about you. You are so giving of yourself and your resources."
+        $ the_person.change_love(10)
+    else:
+        the_person.char "Hey now, friends with benefits means we both get benefits, but lately it feels like I've been getting most of the benefits!"
+        the_person.char "This arrangement has been great, I don't it to end just because I'm the only one getting anything out of it."
+    the_person.char "This time though, you are going to have to let me do something for you. Don't worry, we're both gonna like it."
+    mc.name "Ok, what did you have in mind?"
+    the_person.char "You'll just have to see! Let's go!"
+
+    $ mc.change_location(downtown)
+    $ mc.location.show_background()
+    if the_person.event_triggers_dict.get("dating_path", False) == True:
+        "[the_person.possessive_title] holds your hand as you leave the lab and head downtown."
+        "You pass the bar you usually go to. Where is this girl taking you?"
+    else:
+        "[the_person.possessive_title] leads the way as you leave the lab and head downtown."
+        "You pass the bar you usually go to. You wonder what this crazy girl has in mind for tonight."
+    "Soon you walk up to a building and [the_person.title] comes to a stop. The sign out from says [strip_club.name]." #TODO if MC has not yet discovered this place, make him discover it
+    "Wow, a strip club? This could be interesting. You decide to tease her."
+    mc.name "You know, its against company policy to be moonlighting at a place like this. Even with a body like yours."
+    the_person.char "Ha! No I haven't been working here, I just thought it would be fun to watch a couple shows."
+    mc.name "Sounds great!"
+
+    $ mc.change_location(strip_club)
+    $ mc.location.show_background()
+
+    "You head inside. Your senses are assaulted by everything going on. The loud bass music thumps in your ears. On stage you see a girl shaking her ass for a group of guys."
+    "You check around quickly... looks like [the_person.title] is the only woman in the crowd with you."
+    the_person.char "Come on, let's grab a table to the side before we decide what to do first!"
+    $ scene_manager.update_actor(the_person, position = "sitting")
+    "You sit down across from [the_person.possessive_title] in a booth."
+    the_person.char "Alright, lets just watch the girls from here for a little bit. I'm going to buy you a private dance before we go."
+    mc.name "That's... very generous of you. You know you don't have to do that, right?"
+    the_person.char "Sure but, it's not like I'm not going to have fun while we're here too. I've heard the girls here are hot!"
+    "It's been clear for a while now that [the_person.title] has an interest in both men and women. It's cute to see her coming out of her shell a bit and enjoying her sexuality."
+    the_person.char "Oh look! Here comes a girl now!"
+    "Your eyes are drawn to the stage."
+    call watch_strip_show(the_person) from Sarah_strip_show_call_1
+    the_person.char "Wow! That was impressive! I've never been to a place like this before, but I can see why guys like it so much..."
+    "As she finishes her sentence, one of the guys who had been around the stage gets a little too close to your table. You can see him checking out [the_person.title]"
+    "?????""Hey there, aren't you a doll! Whaddya say to a private dance in the back? Not sure how much this guy is paying, but I could make it worth your while..."
+    if the_person.event_triggers_dict.get("dating_path", False) == True:
+        the_person.char "Not likely! I'm reserved for my boyfriend here."
+    else:
+        the_person.char "Not likely!"
+        "?????""Come on baby, I bet I can pay you better than what this guy is payin' you to be here with him!"
+        the_person.char "Yeah right! This guy owns his own pharmaceutical business. Move along now."
+    "You get ready to add in to the conversation, but the guy gets the point."
+    "?????""Damn, alright. Enjoy those tits mister, they look fantastic."
+    $ the_person.change_happiness(5)
+    "The guy wanders off. [the_person.possessive_title] has a smug look on her face."
+    the_person.char "Damn right they're fantastic. What do you think, [the_person.mc_title]. Are you gonna enjoy these tits later?"
+    "Before you can respond, the music starts up again and another girl comes out on the stage."
+    the_person.char "Oh! Here we go again!"
+    call watch_strip_show(the_person) from Sarah_strip_show_call_2
+    $ showgirl = _return
+    if showgirl.has_large_tits():
+        the_person.char "Damn! That girl had a nice chest. Wish I could get my hands on her..."
+    else:
+        the_person.char "That was impressive! Even though her chest was small, she certainly knows how to work her body. Wish I could get my hands on her..."
+    if showgirl == cousin:
+        "While it was true, you aren't sure you have the guts to tell her that the girl on stage was your cousin, [cousin.title]."
+        "Either way, she seemed to really enjoy her performance."
+    else:
+        "She seems to have really enjoyed this particular performance."
+    "You enjoy your time with [the_person.title]. As girls come and go off the stage you both remark on what you like or didn't like about each performance."
+    the_person.char "Mmm, I think I've seen enough. So, want to go back to the private room for a lapdance? Any girls in particular stand out to you?"
+    "You think about it for a second. Then decide to change it up a little."
+    mc.name "I've got a better idea. Why don't we both get a private dance?"
+    "[the_person.title] raises an eyebrow"
+    the_person.char "You mean... I figured that they only did private dances for guys..."
+    mc.name "Nah, if you give me a minute, I bet I can get it setup."
+    the_person.char "But I don't have the money for two..."
+    mc.name "Ah! Forget about it. I'll put it on the company card. This is a teambuilding exercise, right?"
+    the_person.char "Teambuilding... right! I can get behind that!"
+    mc.name "Ok, I'll be right back."
+    $ scene_manager.remove_actor(the_person, reset_actor = False)
+    "You get up and head over to the counter where the owner is."
+    "You arrange a two private lap dances. For [the_person.title], you ask for the girl that did the second dance on stage. You pick a random girl for yours."
+    #TODO pay $200
+    "You go to the back, and find a room with two chairs facing each other. [the_person.title] sits across from you."
+    $ scene_manager.add_actor(the_person, position = "sitting", emotion = "happy", character_placement = character_left_flipped)
+    the_person.char "Mmm, I'm so nervous..."
+    #TODO make a variant on character left that is a close to Sarah so it looks more like an actual lap dance.
+    #TODO put them in sexy outfits!
+    $ scene_manager.add_actor(showgirl, character_placement = character_center_flipped)
+    $ strip_girls = mc.location.people
+    # $ strip_girls.remove(the_person)
+    $ strip_girls.remove(showgirl)
+    $ showgirl_2 = get_random_from_list(strip_girls)
+    $ scene_manager.add_actor(showgirl_2)
+    showgirl_2.char "Alright! We got a couple in here tonight, this should be fun!"
+    if showgirl_2 == cousin:
+        "Suddenly, you realize the girl doing your lap dance is [showgirl_2.title], your cousin!"
+        "[showgirl_2.possessive_title] lowers her face to your ear and whispers in it."
+        showgirl_2.char "What the fuck? You want me to give you a lapdance? Here??? In front of your little bimbo? You're a sick fuck..."
+        showgirl_2.char "Mention us being related one time and I'll kill you, I swear."
+        "She stands back up and acts as if nothing happened."
+    if showgirl == cousin:
+        "You see [showgirl.title] look over at you, realizing that you are gonna be in the room as she performs for [the_person.title]"
+        "She gives you a quick wink."
+    showgirl.char "Alright, lets get the fun started!"
+    $ scene_manager.update_actor(showgirl_2, position = "kneeling1")
+    "Your stripper gets on your lap. She starts to take off her top."
+    $ scene_manager.strip_actor_outfit(showgirl_2, exclude_lower = True, exclude_feet = True)
+    "With her tits free, she begins to gyrate them back and forth, right in front of your face. They wobble appealingly."
+    $ scene_manager.update_actor(showgirl, position = "blowjob")
+    "You glance over and notice the girl in front of [the_person.title] is doing something similar."
+    $ scene_manager.strip_actor_outfit(showgirl, exclude_lower = True, exclude_feet = True)
+    showgirl_2.char "For $100, you two can play with our tits for a bit."
+    if showgirl_2 == cousin:
+        "[showgirl_2.title] lowers her lips to your ear again."
+        showgirl_2.char "Don't you wanna grab your cousin's tits, pervert?"
+    "You see [the_person.title] look over at you. You can see her mouth the word 'please'"
+    mc.name "That sounds fair."
+    "You grab $100 and put it in the tip jar."
+    "Before you finish putting the money in the jar, you notice that [the_person.title] has her hands all over her stripper's chest."
+    "She seems to be really enjoying the show so far!"
+    $ mc.change_arousal(10)
+    $ the_person.change_arousal(12)
+    "You reach up and begin to fondle your stripper's tits. They are so soft and warm. They feel amazing."
+    "After a while, it's time to change things up. Both strippers get up and turn to so their backs are facing you and [the_person.title]."
+    $ scene_manager.update_actor(showgirl_2, position = "standing_doggy")
+    $ scene_manager.update_actor(showgirl, position = "standing_doggy")
+    "Your girl puts her ass against your chest and starts to wiggle her hips back and forth as she slowly works herself down your body."
+    "Soon she is working your erection with her hips, through both of your clothes."
+    "She starts to strip down her remaining clothing."
+    $ scene_manager.strip_actor_outfit(showgirl_2, exclude_feet = False)
+    "You notice that [the_person.title] and her stripper are in a similar state."
+    $ scene_manager.strip_actor_outfit(showgirl, exclude_feet = False)
+    "Her ass bare now, you find it difficult to restrain your hands from molesting the girl in front of you."
+    $ mc.change_arousal(15)
+    $ the_person.change_arousal(20)
+    showgirl_2.char "For $200, you two can touch, anywhere you want other than pussies while we dance for you."
+    "You don't hesistate. You grab $200 and put it in the tip jar."
+    "[the_person.title] sees you do it and immediately starts to run her hands along her girl's hips."
+    "You do the same. The girl in front of you continues to work her hips back and forth across your erection as you run your hands along her hips."
+    "You cup and grab her ass a few times when you have the opportunity. Her hips sway enticingly."
+    "You look up and see [the_person.title] hands roaming all over her stripper's body. She plays with her tits for a while, then runs her hands along her sides and down her legs."
+    $ mc.change_arousal(40)
+    $ the_person.change_arousal(45)
+    "It's beginning to get hard to control yourself, you are getting close to cumming, when it is time for the lapdance to end."
+    $ scene_manager.update_actor(showgirl, position = "stand4")
+    $ scene_manager.update_actor(showgirl_2, position = "stand5")
+    showgirl.char "Mmm, that was fun! It's been forever since I had a female client. They always love getting to touch..."
+    "The strippers leave, leaving you and [the_person.title] alone and highly aroused."
+    $ scene_manager.remove_actor(showgirl)
+    $ scene_manager.remove_actor(showgirl_2)
+    $ del showgirl
+    $ del showgirl_2
+    the_person.char "Good lord... we need to get out here! Can we go back to your place?"
+    mc.name "Absolutely."
+    "You both head out and are soon walking through your front door."
+    $ mc.change_location(hall)
+    $ mc.location.show_background()
+    $ scene_manager.update_actor(the_person, position = "stand2", character_placement = character_right)
+    the_person.char "Oh god I can't wait to get to your bedroom and..."
+    $ scene_manager.add_actor(mom, character_placement = character_left_flipped)
+    "[mom.title] pops around the corner when she hears you walking down the hall and unknowingly interrupts."
+    mom.char "Hey [mom.mc_title]. You missed dinner! Leftovers are in the fridge. Oh! Hello again!"
+    mc.name "Thanks, we're just going to go to my room for a bit to discuss some... work relate matters."
+    "You see [mom.title] quick appraising the situation."
+    mom.char "Right. Have fun talking about... work stuff! Nice to see you again!"
+    the_person.char "Nice to see you again too."
+    $ scene_manager.remove_actor(mom)
+
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
+
+    "Finally, you reach your bedroom and quickly close and lock the door."
+    mc.name "God I'm sorry, if you aren't in the mood anymore..."
+    the_person.char "Sorry for what? Its your mom, I think its sweet."
+    mc.name "So... do you wanna..."
+    the_person.char "Oh fuck yeah, I'm so worked up. But first I want to try something! Why don't you sit down on the bed there."
+    "You quickly sit down."
+    mc.name "What do you have in mind, [the_person.title]?"
+    the_person.char "I'm gonna give you a lapdance. Just like that girl at the strip club..."
+    the_person.char "But the difference is, you can touch me all you want to!"
+
+
 
     return
+
+label watch_strip_show(the_person):  #This scene assumes scene manager is running and the_person is with you, so she won't strip for you.
+    if len(mc.location.people) < 2:
+        "There's no one here to strip for you!"
+    $ strip_girls = mc.location.people
+    # $ strip_girls.remove(the_person)
+    $ showgirl = get_random_from_list(strip_girls)
+    # TODO put showgirl in outfit
+    $ pose_list = ["walking_away","back_peek","standing_doggy","stand2","stand3","stand4","stand5", "doggy","kneeling1"]
+    "You watch as a girl gets on stage and starts to do her routine."
+    $ scene_manager.add_actor(showgirl, character_placement = character_left_flipped)
+    $ finished = True
+    $ finished_chance = 0
+    python:
+        for x in range(6):
+            scene_manager.update_actor(showgirl, position = get_random_from_list(pose_list))
+            rand_roll = renpy.random.randint(0,100)
+            if rand_roll <76: #Take something off
+                showgirl.outfit.remove_random_any(top_layer_first = True)
+            rand_roll = renpy.random.randint(0,100)
+            if rand_roll < finished_chance:
+                finished = False
+            else:
+                finished_chance += 5
+                renpy.pause()
+    if showgirl.outfit.vagina_visible():
+        "As she finishes, the showgirl gives one more pose, showing off her exposed ass to the crowd."
+        $ scene_manager.update_actor(showgirl, position = "standing_doggy")
+    elif showgirl.outfit.tits_visible():
+        "As she finishes, the showgirl gives one more pose, showing off her exposed tits to the crowd."
+        $ scene_manager.update_actor(showgirl, position = "kneeling1")
+    else:
+        "As she finished, the showgirl gives one more pose, to the enjoyment of everyone in the crowd."
+        $ scene_manager.update_actor(showgirl, position = get_random_from_list(pose_list))
+    $ scene_manager.update_actor(showgirl, position = "walking_away")
+    "After finishing, the showgirl grabs her tips then exits the stage."
+    $ scene_manager.remove_actor(showgirl)
+    #Cleanup
+    $ del strip_girls
+    return showgirl
 
 label play_darts_301(the_person, focus_mod = 0): #Label returns true if mc wins, false if the_person wins
     $ mc_score = 301
@@ -1046,8 +1290,7 @@ label play_darts_301(the_person, focus_mod = 0): #Label returns true if mc wins,
             $ p2_score = 101
         $ scene_manager.update_actor(the_person)
         the_person.char "Okay, [the_person.mc_title]. Your turn!"
-        "Your score: [mc_score]"
-        "What would you like to target?"
+        "Your score: [mc_score], what would you like to target?"
         menu:
             "Bullseye (50)" if mc_score > 49:
                 $ mc_score -= roll_dart_odds(target = 50, focus_score = mc.focus)
@@ -1069,9 +1312,7 @@ label play_darts_301(the_person, focus_mod = 0): #Label returns true if mc wins,
                 $ mc_score -= roll_dart_odds(target = mc_score, focus_score = mc.focus)
 
         if mc_score > 0:
-            "Now for your second dart."
-            "Your score: [mc_score]"
-            "What would you like to target?"
+            "Now for your second dart. Your score: [mc_score], what would you like to target?"
             menu:
                 "Bullseye (50)" if mc_score > 49:
                     $ mc_score -= roll_dart_odds(target = 50, focus_score = mc.focus)
@@ -1093,9 +1334,7 @@ label play_darts_301(the_person, focus_mod = 0): #Label returns true if mc wins,
                     $ mc_score -= roll_dart_odds(target = mc_score, focus_score = mc.focus)
 
         if mc_score > 0:
-            "Now for your third dart."
-            "Your score: [mc_score]"
-            "What would you like to target?"
+            "Now for your third dart. Your score: [mc_score], what would you like to target?"
             menu:
                 "Bullseye (50)" if mc_score > 49:
                     $ mc_score -= roll_dart_odds(target = 50, focus_score = mc.focus)
@@ -1148,7 +1387,7 @@ label Sarah_weekend_surprise_crisis_label():
                 the_person.char "I know you have a lot to do. Feel free to watch... or blow a little steam off with me!"
 
 
-            elif sarah.sluttiness > 25 and sarah.event_triggers_dict.get("epic_tits_progress", 0) > 1:
+            elif sarah.event_triggers_dict.get("epic_tits_progress", 0) > 1:
                 the_person.char "I got an idea. Why don't you let me help you, you know, relieve a little tension?"
                 mc.name "I'm not honestly that tense right now..."
                 if the_person.outfit.tits_available():
@@ -1164,7 +1403,7 @@ label Sarah_weekend_surprise_crisis_label():
                 "She walks right up to you and starts to get down on her knees. You pull your cock out, which is now fully erect."
                 $ scene_manager.update_actor(the_person, position = "blowjob")
                 the_person.char "That's it. Let me just take of this for you..."
-                call sex_description(the_person, SB_Titfuck_Kneeling, make_floor(), round = 1, private = True, girl_in_charge = True) from _call_sex_description_sarah_weekend_titfuck_1
+                call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_sarah_weekend_titfuck_1
                 "[the_person.possessive_title] moans as she rubs your cum into her chest."
                 the_person.char "It feels so sticky on my skin... Mmmm that was nice."
                 "You clear your throat and then respond."
@@ -1180,8 +1419,6 @@ label Sarah_weekend_surprise_crisis_label():
                 "[the_person.title] quickly turns and walks out, leaving you to your work."
                 $ scene_manager.remove_actor(the_person)
                 return
-
-
 
     return
 

@@ -5,19 +5,19 @@
 # Tends to hang out at the Gym
 #  First event: She invites you to work out with her. You work up a sweat together, then sneak into a changing room for sex
 #  Second event: She invites you to compete with her in distance race (10k? something similar). Makes a wager if you win she'll let you "do what you want" with her
-#  Event Requirements: Advances with sluttiness and player stamina. Stamina takes the place of physical fitness during this storyline
+#  Event Requirements: Advances with sluttiness and player energy. Max energy takes the place of physical fitness during this storyline
 #  Girl requirements: Age <25, skinny body type.
 #  Other notes: She calls it off if she "catches feels" (love > 50). Will start warning player at > 40 love
 
 init -2 python:
     def casual_athlete_get_to_know_requirement(the_person):
-        if mc.max_stamina > 3:
+        if mc.max_energy >= 110:
             if mc.location == gym:
                 return True
             else:
                 return "Wait until you see her at the gym"
         else:
-            return False
+            return "Requires 110 maximum energy"
 
     def casual_athlete_phase_one_requirement(the_person):
         if the_person.event_triggers_dict.get("athlete_progress", 0) < 1:
@@ -27,7 +27,7 @@ init -2 python:
         if the_person.event_triggers_dict.get("athlete_workout", 0) < 1:
             return False
         if time_of_day < 4:
-            if mc.max_stamina > 3:
+            if mc.max_energy >= 120:
                 if the_person.sluttiness < 20:
                     return "Requires 20 Sluttiness"
                 elif mc.location == gym:
@@ -35,7 +35,7 @@ init -2 python:
                 else:
                     return "Not at the gym"
             else:
-                return "Requires More Max Stamina"
+                return "Requires 120 maximum energy"
         return False
 
     def casual_athlete_phase_two_requirement(the_person):
@@ -46,12 +46,12 @@ init -2 python:
         if the_person.love > 50:
             return "She is uneasy about falling for you."
         if time_of_day < 4:
-            if mc.max_stamina > 5:
+            if mc.max_energy >= 140:
                 if the_person.sluttiness < 40:
                     return "Requires 40 Sluttiness"
                 return True
             else:
-                return "Requires More Max Stamina"
+                return "Requires 140 maximum energy"
         return False
 
     def casual_athlete_race_crisis_requirement():
@@ -77,14 +77,14 @@ init -2 python:
 
 #*************Create Casual Athlete Role***********#
 init -1 python:
-    casual_athlete_get_to_know = Action("Get to know Her", casual_athlete_get_to_know_requirement, "casual_athlete_get_to_know_label",
+    casual_athlete_get_to_know = Action("Get to know Her {image=gui/heart/Time_Advance.png}", casual_athlete_get_to_know_requirement, "casual_athlete_get_to_know_label",
         menu_tooltip = "Make an observation about her.")
-    casual_athlete_phase_one = Action("Workout Together", casual_athlete_phase_one_requirement, "casual_athlete_phase_one_label",
+    casual_athlete_phase_one = Action("Workout Together {image=gui/heart/Time_Advance.png}", casual_athlete_phase_one_requirement, "casual_athlete_phase_one_label",
         menu_tooltip = "Work up a sweat.")
-    casual_athlete_phase_two = Action("Challenge to Race", casual_athlete_phase_two_requirement, "casual_athlete_phase_two_label",
+    casual_athlete_phase_two = Action("Challenge to Race {image=gui/heart/Time_Advance.png}", casual_athlete_phase_two_requirement, "casual_athlete_phase_two_label",
         menu_tooltip = "No risk, no reward.")
-    casual_athlete_protein_shake = Action("Buy Protein Shake ($5)", casual_athlete_buy_protein_shake_requirement,"casual_athlete_buy_protein_shake_label", menu_tooltip = "Slip some serum in.")
-    casual_athlete_house_call = Action("Take Charge", casual_athlete_house_call_requirement, "casual_athlete_house_call_label",
+    casual_athlete_protein_shake = Action("Buy Protein Shake ($5) {image=gui/heart/Time_Advance.png}", casual_athlete_buy_protein_shake_requirement,"casual_athlete_buy_protein_shake_label", menu_tooltip = "Slip some serum in.")
+    casual_athlete_house_call = Action("Take Charge {image=gui/heart/Time_Advance.png}", casual_athlete_house_call_requirement, "casual_athlete_house_call_label",
         menu_tooltip = "Pick her up.")
     casual_athlete_role = Role(role_name ="College Athlete", actions =[casual_athlete_get_to_know , casual_athlete_phase_one, casual_athlete_phase_two, casual_athlete_protein_shake, casual_athlete_house_call], hidden = True)
 
@@ -137,7 +137,7 @@ label casual_athlete_get_to_know_label(the_person):
         else:
             the_person.char "I appreciate you buying me a protein shake now and then. I definitely feel the effects of them. I feel stronger... even sexier since you started doing that!"
         "[the_person.title] moves on to the free weights area of the gym."
-        if mc.max_stamina > 3:
+        if mc.max_energy >= 110:
             the_person.char "I think I'm going to do some squats..."
             "[the_person.title] looks over at you. She gives you a quick appraisal."
             the_person.char "Hey, you look like you're fairly fit yourself. You should workout with me sometime."
@@ -150,10 +150,10 @@ label casual_athlete_get_to_know_label(the_person):
         else:
             the_person.char "I think I'm going to do some squats..."
             "[the_person.title] looks over at you. She gives you a quick appraisal."
-            the_person.char "Hey, have you ever thought about working out a bit more? It does wonders for your stamina..."
+            the_person.char "Hey, have you ever thought about working out a bit more? It does wonders for your energy..."
             "You consider her statement for a moment."
             the_person.char "Anyway, I'm going to get back to my workout. I'll see you around [the_person.title]!"
-            "If you want to get further with her, maybe you should work on increasing your stamina!"
+            "If you want to get further with her, maybe you should work on increasing your energy!"
 
         #Had sex in the lockerroom#
     elif the_person.event_triggers_dict.get("athlete_progress", 0) == 2:
@@ -162,7 +162,7 @@ label casual_athlete_get_to_know_label(the_person):
         "[the_person.title] slows the treadmill down so she can carry on a conversation."
         the_person.char "Yeah! I have a big 10k coming up. I really want to do well for this, with it coming up on track season!"
         "You chit chat with [the_person.title] for a bit about the upcoming race."
-        if mc.max_stamina > 5:
+        if mc.max_energy >= 140:
             the_person.char "Hey, you seem pretty fit too. You should consider entering! It's for a great cause!"
             mc.name "Okay... I'll consider it. Things are pretty busy at work lately, but I'll get back to you if I have time."
             the_person.char "Just don't be sore about it when I beat you to the finish line. I'm a serious athlete!"
@@ -283,10 +283,10 @@ label casual_athlete_phase_one_label(the_person):
 
         "As you begin to push yourself inside her, she drags her nails across your back."
         the_person.char "Oh fuck, that's good. Give it to me good, [the_person.mc_title]!"
-        call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, girl_in_charge = False, private = True) from _call_casual_sex_mod_CS010
-        if the_person.arousal > 100:
+        call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True) from _call_casual_sex_mod_CS010
+        $ the_report = _return
+        if the_report.get("girl orgasms", 0) > 0:
             "As you slowly let [the_person.title] down from the wall, you can see her trembling, caused by aftershocks from her orgasm."
-        $ the_person.reset_arousal()
         the_person.char "Mmm... that was nice..."
         "[the_person.title] stutters for a moment."
         the_person.char "But... you know... I really can't get involved in a serious relationship right now."
@@ -350,13 +350,12 @@ label casual_athlete_phase_one_label(the_person):
 
                 "As you begin to push yourself inside her, she drags her nails across your back."
                 the_person.char "Oh fuck, that's good. Give it to me good, [the_person.mc_title]!"
-                call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, girl_in_charge = False, private = True) from _call_casual_sex_mod_CS011
-                if the_person.arousal > 100:
+                call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True) from _call_casual_sex_mod_CS011
+                $ the_report = _return
+                if the_report.get("girl orgasms", 0) > 0:
                     "As you slowly let [the_person.title] down from the wall, you can see her trembling, caused by aftershocks from her orgasm."
                     the_person.char "Mmm... god I'm glad you know how to use that cock."
                 "Without another word, you and [the_person.title] take a quick shower, then get ready and leave the gym."
-
-                $ the_person.reset_arousal()
 
             "Not Today":  #lol what a tease#
                 the_person.char "Oh. Okay, I understand. Well, I'll see you around, [the_person.mc_title]!"
@@ -429,7 +428,7 @@ label casual_athlete_race_crisis_label(the_person):
     "You are tempted to chase after her, but think better of it. This is a long race, and you need to pace yourself."
     $ renpy.scene("Active")
     "As you near the first kilometer, you lose sight of [the_person.title] in the crowd of racers, but you are sure you aren't far behind."
-    "You settle into your pace, determined to let your stamina carry you through the race, no matter what happens. You pass the second kilometer marker"
+    "You settle into your pace, determined to let your energy carry you through the race, no matter what happens. You pass the second kilometer marker"
     "You breathe in, you breathe out. You take pace after pace, determined to race with the best of your abilities."
     "As you approach the third kilometer marker, you can see yourself catching up to a familiar form."
     $ the_person.draw_person(position = "walking_away")
@@ -492,8 +491,7 @@ label casual_athlete_race_crisis_label(the_person):
     "You consider for a second putting on a condom first. Nope, not a fucking chance. In one smooth motion you push yourself into her sopping, needy cunt."
     the_person.char "Yes!!! Oh god, please fuck me good!"
     "You have every intention of doing exactly that."
-    call fuck_person(the_person, private=True, start_position = doggy, start_object = make_bed(), skip_intro = True, girl_in_charge = False, hide_leave = True) from _call_casual_sex_mod_CS030
-    $ the_person.reset_arousal()
+    call fuck_person(the_person, private=True, start_position = doggy, start_object = make_bed(), skip_intro = True, hide_leave = True) from _call_casual_sex_mod_CS030
     $ the_person.clear_situational_slut("Lost Bet")
     "When you finish with her, [the_person.possessive_title] lays down on her bed."
     $ the_person.draw_person(position = "missionary")
@@ -558,12 +556,12 @@ label casual_athlete_house_call_label(the_person):
         $ the_person.change_arousal(20)
 
         "[the_person.possessive_title] moans as you strip her down, enjoying your rough treatment of her."
-    call fuck_person(the_person,private = True) from _call_casual_sex_mod_CSA040
+    call fuck_person(the_person) from _call_casual_sex_mod_CSA040
+    $ the_report = _return
     "After you finish with her, you get up and start to gather your clothes."
-    if the_person.arousal > 100:
+    if the_report.get("girl orgasms", 0) > 0:
         "[the_person.possessive_title] is in an orgasm fueled daze, enjoying the effects it has on her."
     the_person.char "Thanks for stopping by... I think I'm just gonna lay down for a bit..."
-    $ the_person.reset_arousal()
     "Once you finish getting dressed you say goodbye and let yourself out."
 
     $ mc.change_location(bedroom) # go home

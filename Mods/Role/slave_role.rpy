@@ -336,14 +336,14 @@ label slave_alarm_clock_label(the_person):
         "She grinds her hips back and forth, rubbing your shaft along the lips of her cunt."
         the_person.char "Would you like me to take care of this for you?"
         menu:
-            "Let [the_person.possessive_title] fuck you." if mc.current_stamina > 0:
+            "Let [the_person.possessive_title] fuck you.":
                 mc.name "That would be great [the_person.title]."
                 $ the_person.change_happiness(5)
                 $ the_person.change_love(2)
                 "You lie back relax as [the_person.possessive_title] lowers herself down onto your hard cock."
-                call fuck_person(the_person, start_position = cowgirl, start_object = bedroom.get_object_with_name("bed"), skip_intro = True, girl_in_charge = True) from _slave_alarm_clock_label_2
-                $ mc.current_stamina += -1
-                if the_person.arousal >= 100:
+                call fuck_person(the_person, start_position = cowgirl, start_object = bedroom.get_object_with_name("bed"), skip_intro = True, girl_in_charge = True, position_locked = True) from _slave_alarm_clock_label_2
+                $ the_report = _return
+                if the_report.get("girl orgasms", 0) > 0:
                     $ the_person.change_love(5)
                     the_person.char "That was amazing [the_person.mc_title]..."
                     "She rolls over and kisses you, then rests her head on your chest."
@@ -353,11 +353,7 @@ label slave_alarm_clock_label(the_person):
                 else:
                     the_person.char "I'm glad I could help [the_person.mc_title]. Now you should hurry up before you're late!"
                     "[the_person.possessive_title] kisses you on the forehead and stands up to leave."
-                $ the_person.reset_arousal()
                 $ the_person.review_outfit()
-
-            "Let [the_person.title] fuck you.\nRequires: 1 Stamina (disabled)" if mc.current_stamina <= 0:
-                pass
 
             "Ask her to get off.":
                 mc.name "Sorry [the_person.title], but I need to save my energy for later today."

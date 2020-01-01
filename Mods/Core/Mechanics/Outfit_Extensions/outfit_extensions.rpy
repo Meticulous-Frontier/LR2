@@ -9,15 +9,24 @@ init -1 python:
         for acc in remove_list:
             self.accessories.remove(acc)
         return
-    
+
     Outfit.remove_all_cum = remove_all_cum
+
+    def check_outfit_cum(self):                                             #Checks if the person has any cum on them
+        for acc in self.accessories:
+            if acc in [mouth_cum, tits_cum, stomach_cum, face_cum, ass_cum]:
+                return True
+        return False
+
+    Outfit.check_outfit_cum = check_outfit_cum
+
 
     def get_overwear_slut_score_enhanced(self): #Calculates the sluttiness of this outfit assuming it's an overwear set. That means we assume a modest underwear set is used (ie. one that denies access).
         new_score = 0
         if self.tits_visible():
             new_score += 20
         elif self.tits_available():
-            new_score += 10          
+            new_score += 10
 
         if self.vagina_visible():
             new_score += 20
@@ -53,7 +62,7 @@ init -1 python:
         upper = get_clothing_items(self.upper_body)
         if upper:
             outfitname += upper[0].name
-        
+
         if not upper or not upper[0].has_extension:
             lower = get_clothing_items(self.lower_body)
             if upper and lower:
@@ -65,11 +74,11 @@ init -1 python:
             feet = get_clothing_items(self.feet)
             if feet:
                 outfitname = feet[0].name
-        
+
         if len(outfitname) == 0:
             return "Naked"
 
-        self.update_slut_requirement()           
+        self.update_slut_requirement()
         self.name = get_name_classification(self.slut_requirement) + " " + outfitname
 
         return self.name
@@ -102,7 +111,7 @@ init 6 python:
                 new_score += 1
             if cloth in [pumps, high_heels, leggings]:
                 new_score += 5 # small extra modifier
-            if cloth in [summer_dress, evening_dress]:
+            if cloth in [summer_dress, virgin_killer, evening_dress]:
                 new_score += 10 # sexy modifier
             if cloth in [two_part_dress, thin_dress, nightgown_dress, thigh_high_boots, leotard]:
                 new_score += 15 # extremely slutty clothing (applies extra modifier)

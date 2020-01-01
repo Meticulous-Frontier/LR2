@@ -7,18 +7,21 @@ init 2 python:
         if emotion is None:
             emotion = mannequin.get_emotion()
 
+        lighting = [0.98,0.98,0.98]
+
         displayable_list = [] # We will be building up a list of displayables passed to us by the various objects on the person (their body, clothing, etc.)
 
-        displayable_list.append(mannequin.body_images.generate_item_displayable(mannequin.body_type,mannequin.tits,position)) #Add the body displayable
-        displayable_list.append(mannequin.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier)) #Get the face displayable
+        displayable_list.append(mannequin.body_images.generate_item_displayable(mannequin.body_type,mannequin.tits,position, lighting)) #Add the body displayable
+        displayable_list.append(mannequin.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier, eye_colour = mannequin.eyes[1], lighting = lighting)) #Get the face displayable
+        displayable_list.append(mannequin.pubes_style.generate_item_displayable(mannequin.body_type,mannequin.tits, position, lighting)) #Add in her pubes. #TODO: See if we need to mask this with her body profile for particularly bush-y bushes to prevent clothing overflow.
 
         size_render = renpy.render(displayable_list[0], 10, 10, 0, 0) #We need a render object to check the actual size of the body displayable so we can build our composite accordingly.
         the_size = size_render.get_size() # Get the size. Without it our displayable would be stuck in the top left when we changed the size ofthings inside it.
         x_size = __builtin__.int(the_size[0])
         y_size = __builtin__.int(the_size[1])
 
-        displayable_list.extend(outfit.generate_draw_list(mannequin,position,emotion,special_modifier)) #Get the displayables for everything we wear. Note that extnsions do not return anything because they have nothing to show.
-        displayable_list.append(mannequin.hair_style.generate_item_displayable("standard_body",mannequin.tits,position)) #Get hair
+        displayable_list.extend(outfit.generate_draw_list(mannequin,position,emotion,special_modifier, lighting = lighting)) #Get the displayables for everything we wear. Note that extnsions do not return anything because they have nothing to show.
+        displayable_list.append(mannequin.hair_style.generate_item_displayable("standard_body",mannequin.tits,position, lighting = lighting)) #Get hair
 
         #NOTE: default return for the_size is floats, even though it is in exact pixels. Use int here otherwise positional modifiers like xanchor and yalign do not work (no displayable is shown at all!)
         composite_list = [(x_size,y_size)] #Now we build a list of our parameters, done like this so they are arbitrarily long

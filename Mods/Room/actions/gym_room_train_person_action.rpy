@@ -96,14 +96,20 @@ label train_in_gym(person):
         if person.sluttiness > 20:
             $ person.draw_person(emotion="happy")
             "There is a subtle undertone in that remark that makes you smile."
+        $ person.change_max_energy(5)
+        "She seems to be building up her endurance"
     elif change < 2.5:
         "You and [person.possessive_title] spend a few hours working out."
+        $ person.change_max_energy(10)
+        "She seems to be building up her endurance"
     else:
         "You put [person.possessive_title] through a vigorous training session."
         if person.sluttiness > 20:
             $ person.draw_person(emotion = "angry")
             person.char "It seems you have plans with my body, [person.mc_title]."
             "If she only knew what dirty things you have her doing in your mind."
+        $ person.change_max_energy(10)
+        "She seems to be building up her endurance"
 
     $ body_changed = person.change_weight(-change, 100)
     $ new_weight = get_person_weight_string(person)
@@ -116,7 +122,7 @@ label train_in_gym(person):
         if person.sluttiness > 20:
             person.char "Wow, these gym sessions make me feel just great, somehow I get turned on too... would you mind?"
             menu:
-                "Have Sex" if mc.current_stamina > 0:
+                "Have Sex":
                     mc.name "Lets go to the shower room."
                     person.char "Lead the way, [person.mc_title]."
                     $ gym_shower.show_background()
@@ -124,9 +130,10 @@ label train_in_gym(person):
                     "As soon as you get into the showers, [person.possessive_title] moves closer and starts kissing you."
 
                     call fuck_person(person, start_position = kissing, start_object = mc.location.get_object_with_name("floor"), skip_intro = True) from _call_fuck_person_gym_training
+                    $ the_report = _return
+                    if the_report.get("girl orgasms", 0) > 0:
+                        "[person.possessive_title] takes a few minutes to catch her breath, while looking at you getting dressed."
 
-                "Have Sex (disabled)\n {size=22}Requires: Stamina{/size}" if not mc.current_stamina > 0:
-                    pass
                 "Another Time":
                     mc.name "Sorry [person.title], another time."
                     $ person.change_happiness(-5)
@@ -140,7 +147,6 @@ label train_in_gym(person):
     $ mc.business.pay(-gym_session_cost)
     "You pay for the gym session and $ [gym_session_cost] has been deducted from the company's credit card."
 
-    $ person.reset_arousal()
     $ person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
     $ mc.location.show_background()
     return

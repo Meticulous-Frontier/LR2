@@ -72,13 +72,14 @@ screen cheat_menu():
     default body_options = False
     default breast_options = False
     default hair_style_options = False
+    default pubes_options = False
     default font_color_options = False
 
     # Input management variables
     default name_select = False #Determines if the name button is currently taking an input or not
 
     default editable_characters = [mc, the_person, mc.business] # Add unique characters to this list if you want to customize them often
-    default editing_target = None
+    default editing_target = the_person # default open the_person cheat menu
 
     # Lists for common skill attributes.
     default main_stats = { #The arrays are utilized in this order: key = "DisplayName", [0 = hasattr check], [1 = variable / key], [2 = amount to changed] NOTE: Fields are duplicated incase things change later, less likely that the buttons will need to be re formated
@@ -89,7 +90,7 @@ screen cheat_menu():
         "Age": ["age", "age", 1],
 
         "Arousal": ["arousal", "arousal", 10],
-        "Stamina": ["current_stamina", "current_stamina", 1],
+        "Energy": ["max_energy", "max_energy", 10.0],
 
         "Funds": ["funds", "funds", 10000],
         "Supplies": ["supply_count", "supply_count", 10000],
@@ -143,6 +144,7 @@ screen cheat_menu():
     default available_body_types = list_of_body_types
     default available_breast_sizes = [x[0] for x in list_of_tits]
     default available_hair_styles = sorted(hair_styles, key = lambda x: x.name)
+    default available_pubes_styles = sorted(pube_styles, key = lambda x: x.name)
 
     default list_of_bodies = [white_skin, tan_skin, black_skin] #Assemble the cloth items into a list. Revisit this later if a default list is created
     default available_skin = { #
@@ -541,6 +543,16 @@ screen cheat_menu():
                                 hover_background "#4f7ad6"
                             action [Function(cheat_collapse_menus), ToggleScreenVariable("hair_style_options")]
 
+                        textbutton "Pubes Style":
+                            style "textbutton_no_padding_highlight"
+                            text_style "cheat_text_style"
+                            xfill True
+                            if pubes_options:
+                                background "#4f7ad6"
+                                hover_background "#4f7ad6"
+                            action [Function(cheat_collapse_menus), ToggleScreenVariable("pubes_options")]
+
+
                         if hasattr(editing_target, "personality") and editing_target.personality.personality_type_prefix in available_personalities:
                             textbutton "Personality":
                                 style "textbutton_no_padding_highlight"
@@ -678,6 +690,24 @@ screen cheat_menu():
                                             action [
                                                 SetField(editing_target,"hair_style", x),
                                                 Function(cheat_redraw_hair)
+                                            ]                                
+
+                        if pubes_options:
+                            vbox:
+                                for x in available_pubes_styles:
+                                    if hasattr(editing_target, "pubes_style"):
+                                        textbutton str(x.name):
+                                            xfill True
+                                            style "textbutton_no_padding_highlight"
+                                            text_style "cheat_text_style"
+
+                                            if editing_target.pubes_style == x:
+                                                background "#4f7ad6"
+                                                hover_background "#4f7ad6"
+
+                                            action [
+                                                SetField(editing_target, "pubes_style", x),
+                                                Function(cheat_appearance)
                                             ]                                
 
                         if font_color_options:

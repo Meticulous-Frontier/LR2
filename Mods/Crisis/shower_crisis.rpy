@@ -86,7 +86,7 @@ label shower_crisis_action_label:
     else:
         pass
     menu:
-        "Join her." if mc.current_stamina > 0:
+        "Join her.":
             "You decide to use this opportunity and join her."
             mc.name "The door was not closed, how about we shower together, [the_person.title]?"
             if the_person.sluttiness > 70 or the_person.arousal > 35:
@@ -107,13 +107,10 @@ label shower_crisis_action_label:
                 the_person.char "What the fuck, [the_person.mc_title]? Can't you see I'm naked here? Get lost, you perv!"
                 "You quickly leave the bathroom."
                 $ the_person.happiness -= 5
-        "Join her. (disabled)" if not mc.current_stamina > 0:
-            pass
         "Walk away":
             "You decide not to disturb her and just walk away."
 
     python:
-        the_person.reset_arousal()
         the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
         mc.location.show_background()
         renpy.scene("Active")

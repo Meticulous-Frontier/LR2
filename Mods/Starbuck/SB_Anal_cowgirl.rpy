@@ -1,17 +1,19 @@
-﻿init:
-    python:
-        SB_anal_cowgirl = Position("Anal Cowgirl",70,95,"cowgirl","Lay","Vagina","Anal",20,20,[],
-        "intro_SB_anal_cowgirl",
-        ["scene_SB_anal_cowgirl_1","scene_SB_anal_cowgirl_2","scene_SB_anal_cowgirl_3"],
-        "outro_SB_anal_cowgirl",
-        "transition_default_SB_anal_cowgirl",
-        "strip_SB_anal_cowgirl", "strip_ask_SB_anal_cowgirl",
-        "orgasm_SB_anal_cowgirl",
+﻿init python:
+    SB_anal_cowgirl = Position("Anal Cowgirl", slut_requirement = 70, slut_cap = 95, requires_hard = True, requires_large_tits = False,
+        position_tag = "cowgirl", requires_location = "Lay",  requires_clothing = "Vagina", skill_tag = "Anal",
+        girl_arousal = 11, girl_energy = 10,
+        guy_arousal = 14, guy_energy = 5,
+        connections = [],
+        intro = "intro_SB_anal_cowgirl",
+        scenes = ["scene_SB_anal_cowgirl_1","scene_SB_anal_cowgirl_2","scene_SB_anal_cowgirl_3"],
+        outro = "outro_SB_anal_cowgirl",
+        transition_default = "transition_default_SB_anal_cowgirl",
+        strip_description = "strip_SB_anal_cowgirl", strip_ask_description = "strip_ask_SB_anal_cowgirl",
+        orgasm_description = "orgasm_SB_anal_cowgirl",
         verb = "ass fuck",
         opinion_tags = ["taking control", "anal sex"], record_class = "Anal Sex")
-        list_of_girl_positions.append(SB_anal_cowgirl)
 
-
+    list_of_girl_positions.append(SB_anal_cowgirl)
 
 #init 1:
 #    python:
@@ -160,7 +162,7 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_round):
         "Your condom is full of your potent seed."
         if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
             $ the_girl.discover_opinion("drinking cum")
-            "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off do your cum doesn't spill out."
+            "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
             the_girl.char "It would be a shame to waste all of this, right?"
             "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
             $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
