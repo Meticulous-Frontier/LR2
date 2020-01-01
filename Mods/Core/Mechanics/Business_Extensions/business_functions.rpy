@@ -1,6 +1,5 @@
 init -1 python:
-    def pay(self, amount, add_to_log = True):
-        amount = amount
+    def change_funds(self, amount, add_to_log = True):
         self.funds += amount
 
         if add_to_log:
@@ -12,7 +11,7 @@ init -1 python:
         return
 
     # Add Pay function to business object
-    Business.pay = pay
+    Business.change_funds = change_funds
 
     def change_line_weight_enhanced(self,line,weight_change): # Allow values above 100 ( it is capped by production_remaining anyway)
 

@@ -96,7 +96,7 @@ label purchase_rooms():
 # Tier 1 Rooms
 label purchase_dungeon_room(): #Enables the dungeon.
 
-    $ mc.business.pay(- t1_cost)
+    $ mc.business.change_funds(- t1_cost)
 
     if office_basement not in list_of_places:
         $ list_of_places.append(office_basement)
@@ -111,7 +111,7 @@ label purchase_dungeon_room(): #Enables the dungeon.
 # Tier 2 Rooms
 label purchase_security_room(): #Enables the security room.
 
-    $ mc.business.pay(- t2_cost)
+    $ mc.business.change_funds(- t2_cost)
 
     if m_division_basement not in list_of_places:
         $ list_of_places.append(m_division_basement)
@@ -125,7 +125,7 @@ label purchase_security_room(): #Enables the security room.
 
 label purchase_machinery_room(): #Enables the machinery room
 
-    $ mc.business.pay(- t2_cost)
+    $ mc.business.change_funds(- t2_cost)
 
     if p_division_basement not in list_of_places:
         $ list_of_places.append(p_division_basement)
@@ -139,7 +139,7 @@ label purchase_machinery_room(): #Enables the machinery room
 
 # Tier 3 Rooms
 label purchase_biotech_room(): #Enables the biotech lab
-    $ mc.business.pay(- t3_cost)
+    $ mc.business.change_funds(- t3_cost)
 
     if rd_division_basement not in list_of_places:
         $ list_of_places.append(rd_division_basement)

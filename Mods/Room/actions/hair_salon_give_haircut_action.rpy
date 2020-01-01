@@ -70,21 +70,21 @@ label salon_checkout():
         $ person.change_happiness(+10)
         salon_manager.char "That will be $[salon_style_cost] for the haircut and $[salon_dye_cost] for the dye. Who's paying?"
         mc.name "That will be me..."
-        $ mc.business.pay(- salon_total_cost)
+        $ mc.business.change_funds(- salon_total_cost)
         "You complete the transaction and $[salon_total_cost] has been deducted from the company's credit card."
     elif hair_style_check != person.hair_style: # Only the hair_style was changed.
         $ salon_manager.draw_person(emotion = "happy")
         $ person.change_happiness(+5)
         salon_manager.char "That will be $[salon_style_cost] for the haircut. Who's paying?"
         mc.name "That will be me..."
-        $ mc.business.pay(- salon_style_cost)
+        $ mc.business.change_funds(- salon_style_cost)
         "You complete the transaction and $[salon_style_cost] has been deducted from the company's credit card."
     elif hair_color_check != person.hair_colour:
         $ salon_manager.draw_person(emotion = "happy")
         $ person.change_happiness(+5)
         salon_manager.char "That will be $[salon_dye_cost] for the dye. Who's paying?"
         mc.name "That will be me..."
-        $ mc.business.pay(- salon_dye_cost)
+        $ mc.business.change_funds(- salon_dye_cost)
         "You complete the transaction and $[salon_dye_cost] has been deducted from the company's credit card."
     else:
         $ person.change_happiness(-5)

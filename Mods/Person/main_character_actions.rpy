@@ -191,7 +191,7 @@ label mc_hire_person_label(person):
 
         "Back":
             return
-    $ mc.business.pay(- person.calculate_base_salary())
+    $ mc.business.change_funds(- person.calculate_base_salary())
 
     $ person.event_triggers_dict["employed_since"] = day
     $ mc.business.listener_system.fire_event("new_hire", the_person = person)

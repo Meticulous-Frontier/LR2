@@ -1093,7 +1093,7 @@ label Sarah_stripclub_story_label():
     $ scene_manager.remove_actor(the_person, reset_actor = False)
     "You get up and head over to the counter where the owner is."
     "You arrange two private lap dances. For [the_person.title], you ask for the girl that did the second dance on stage. You pick a random girl for yours."
-    $ mc.business.pay(-200)
+    $ mc.business.change_funds(-200)
     "You go to the back, and find a room with two chairs facing each other. [the_person.title] sits across from you."
     $ scene_manager.add_actor(the_person, position = "sitting", emotion = "happy", character_placement = character_left_flipped)
     the_person.char "Mmm, I'm so nervous..."

@@ -59,7 +59,7 @@ label machinery_room_construct_production_line_label():
     menu:
         "Purchase Production Line \nCosts: $[production_line_cost]":
             $ add_production_lines(1)
-            $ mc.business.pay(- production_line_cost)
+            $ mc.business.change_funds(- production_line_cost)
 
             "Production lines expanded"
             call advance_time from machinery_room_construct_production_line_label_1
@@ -79,7 +79,7 @@ label machinery_room_overload_label():
 
     menu:
         "Yes \nCosts: $[overload_cost]":
-            $ mc.business.pay(- overload_cost)
+            $ mc.business.change_funds(- overload_cost)
 
             $ machinery_room_overload += 10
 

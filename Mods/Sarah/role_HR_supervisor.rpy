@@ -790,11 +790,11 @@ label HR_director_manage_gym_membership(the_person):
                     x.change_happiness(2 * x.get_opinion_score("sports"))
             cost = len(mc.business.get_employee_list()) * 15
     the_person.char "Just to let you know, I wrote out the check this morning for this week's employee health program."
-    $ mc.business.pay(-cost)
+    $ mc.business.change_funds(-cost)
     return
 
 label HR_director_coffee_tier_1_label(the_person):
-    $ mc.business.pay(- 500)
+    $ mc.business.change_funds(- 500)
     mc.name "I've been thinking about your proposal to add serums to the coffee we serve to employees when we meet with them. I'm giving you approval to set it up."
     the_person.char "Sounds good sir! I'll head over to research and have them synthesize me some."
     the_person.char "I'll keep it in a locked cabinet and from now on I'll only use it when we give an employee coffee during our monday meetings."
@@ -804,7 +804,7 @@ label HR_director_coffee_tier_1_label(the_person):
     return
 
 label HR_director_coffee_tier_2_label(the_person):
-    $ mc.business.pay(- 1500)
+    $ mc.business.change_funds(- 1500)
     mc.name "I've been thinking about your proposal to add the stronger serum to the coffee we serve to employees when we meet with them. I'm giving you approval to set it up."
     the_person.char "Sounds good sir! I'll head over to research and have them synthesize me some."
     the_person.char "I'll keep it in a locked cabinet and from now on I'll only use it when we give an employee coffee during our monday meetings."
@@ -1086,7 +1086,7 @@ label HR_director_sexy_meeting_start_label(the_person):
     return
 
 label HR_director_mind_control_label(the_person):
-    $ mc.business.pay(- 5000)
+    $ mc.business.change_funds(- 5000)
     mc.name "I've been thinking about your proposal to create a specialized serum for mind control attempts. I would like to move forward with it."
     the_person.char "Sounds good sir! I'll head over to research and have them synthesize me some."
     the_person.char "I'll make sure it stay locked away, and only you and I will have a key to get some out."
@@ -1154,7 +1154,7 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
                         "Her face softens when you appeal to her emotionally."
                     "I'll reward you financially ($1000)":
                         the_person.char "Oh... well I suppose I could really use the extra pay."
-                        $ mc.business.pay(- 1000)
+                        $ mc.business.change_funds(- 1000)
                     "I'll fire you if you don't.":
                         $ scene_manager.update_actor(the_person, emotion = "angry")
                         the_person.char "What!?! You're kidding me? I can't afford to lose this job right now!"
