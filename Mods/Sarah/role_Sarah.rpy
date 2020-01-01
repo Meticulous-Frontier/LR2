@@ -1026,8 +1026,13 @@ label Sarah_stripclub_story_label():
     else:
         "[the_person.possessive_title] leads the way as you leave the lab and head downtown."
         "You pass the bar you usually go to. You wonder what this crazy girl has in mind for tonight."
-    "Soon you walk up to a building and [the_person.title] comes to a stop. The sign out from says [strip_club.name]." #TODO if MC has not yet discovered this place, make him discover it
+    "Soon you walk up to a building and [the_person.title] comes to a stop. The sign out from says [strip_club.name]."
     "Wow, a strip club? This could be interesting. You decide to tease her."
+
+    # if MC has not yet discovered this place, make it visible on the map
+    if not strip_club.visible:
+        $ strip_club.visible = True
+
     mc.name "You know, its against company policy to be moonlighting at a place like this. Even with a body like yours."
     the_person.char "Ha! No I haven't been working here, I just thought it would be fun to watch a couple shows."
     mc.name "Sounds great!"
@@ -1075,20 +1080,20 @@ label Sarah_stripclub_story_label():
     else:
         "She seems to have really enjoyed this particular performance."
     "You enjoy your time with [the_person.title]. As girls come and go off the stage you both remark on what you like or didn't like about each performance."
-    the_person.char "Mmm, I think I've seen enough. So, want to go back to the private room for a lapdance? Any girls in particular stand out to you?"
+    the_person.char "Mmm, I think I've seen enough. So, want to go back to the private room for a lap dance? Any girls in particular stand out to you?"
     "You think about it for a second. Then decide to change it up a little."
     mc.name "I've got a better idea. Why don't we both get a private dance?"
     "[the_person.title] raises an eyebrow"
     the_person.char "You mean... I figured that they only did private dances for guys..."
     mc.name "Nah, if you give me a minute, I bet I can get it setup."
     the_person.char "But I don't have the money for two..."
-    mc.name "Ah! Forget about it. I'll put it on the company card. This is a teambuilding exercise, right?"
-    the_person.char "Teambuilding... right! I can get behind that!"
+    mc.name "Ah! Forget about it. I'll put it on the company card. This is a team building exercise, right?"
+    the_person.char "Team building... right! I can get behind that!"
     mc.name "Ok, I'll be right back."
     $ scene_manager.remove_actor(the_person, reset_actor = False)
     "You get up and head over to the counter where the owner is."
-    "You arrange a two private lap dances. For [the_person.title], you ask for the girl that did the second dance on stage. You pick a random girl for yours."
-    #TODO pay $200
+    "You arrange two private lap dances. For [the_person.title], you ask for the girl that did the second dance on stage. You pick a random girl for yours."
+    $ mc.business.pay(-200)
     "You go to the back, and find a room with two chairs facing each other. [the_person.title] sits across from you."
     $ scene_manager.add_actor(the_person, position = "sitting", emotion = "happy", character_placement = character_left_flipped)
     the_person.char "Mmm, I'm so nervous..."
@@ -1104,7 +1109,7 @@ label Sarah_stripclub_story_label():
     if showgirl_2 == cousin:
         "Suddenly, you realize the girl doing your lap dance is [showgirl_2.title], your cousin!"
         "[showgirl_2.possessive_title] lowers her face to your ear and whispers in it."
-        showgirl_2.char "What the fuck? You want me to give you a lapdance? Here??? In front of your little bimbo? You're a sick fuck..."
+        showgirl_2.char "What the fuck? You want me to give you a lap dance? Here??? In front of your little bimbo? You're a sick fuck..."
         showgirl_2.char "Mention us being related one time and I'll kill you, I swear."
         "She stands back up and acts as if nothing happened."
     if showgirl == cousin:
@@ -1143,14 +1148,14 @@ label Sarah_stripclub_story_label():
     $ mc.change_arousal(15)
     $ the_person.change_arousal(20)
     showgirl_2.char "For $200, you two can touch, anywhere you want other than pussies while we dance for you."
-    "You don't hesistate. You grab $200 and put it in the tip jar."
+    "You don't hesitate. You grab $200 and put it in the tip jar."
     "[the_person.title] sees you do it and immediately starts to run her hands along her girl's hips."
     "You do the same. The girl in front of you continues to work her hips back and forth across your erection as you run your hands along her hips."
     "You cup and grab her ass a few times when you have the opportunity. Her hips sway enticingly."
     "You look up and see [the_person.title] hands roaming all over her stripper's body. She plays with her tits for a while, then runs her hands along her sides and down her legs."
     $ mc.change_arousal(40)
     $ the_person.change_arousal(45)
-    "It's beginning to get hard to control yourself, you are getting close to cumming, when it is time for the lapdance to end."
+    "It's beginning to get hard to control yourself, you are getting close to cumming, when it is time for the lap dance to end."
     $ scene_manager.update_actor(showgirl, position = "stand4")
     $ scene_manager.update_actor(showgirl_2, position = "stand5")
     showgirl.char "Mmm, that was fun! It's been forever since I had a female client. They always love getting to touch..."
@@ -1169,7 +1174,7 @@ label Sarah_stripclub_story_label():
     $ scene_manager.add_actor(mom, character_placement = character_left_flipped)
     "[mom.title] pops around the corner when she hears you walking down the hall and unknowingly interrupts."
     mom.char "Hey [mom.mc_title]. You missed dinner! Leftovers are in the fridge. Oh! Hello again!"
-    mc.name "Thanks, we're just going to go to my room for a bit to discuss some... work relate matters."
+    mc.name "Thanks, we're just going to go to my room for a bit to discuss some... work related matters."
     "You see [mom.title] quick appraising the situation."
     mom.char "Right. Have fun talking about... work stuff! Nice to see you again!"
     the_person.char "Nice to see you again too."
@@ -1185,7 +1190,7 @@ label Sarah_stripclub_story_label():
     the_person.char "Oh fuck yeah, I'm so worked up. But first I want to try something! Why don't you sit down on the bed there."
     "You quickly sit down."
     mc.name "What do you have in mind, [the_person.title]?"
-    the_person.char "I'm gonna give you a lapdance. Just like that girl at the strip club..."
+    the_person.char "I'm gonna give you a lap dance. Just like that girl at the strip club..."
     the_person.char "But the difference is, you can touch me all you want to!"
 
 
