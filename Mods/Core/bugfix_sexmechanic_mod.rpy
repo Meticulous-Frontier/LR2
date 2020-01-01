@@ -213,6 +213,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                             if "beg finished" in report_log:
                                 $ report_log["beg finish"] += 1
                             $ finished = False
+                            $ position_locked = False
 
                         "Stop and leave.":
                             $ the_person.call_dialogue("sex_end_early")
