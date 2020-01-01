@@ -63,7 +63,7 @@ init:
             requirement = requirement_always_true)
 
 
-        threesome_double_blowjob = Threesome_Position(name = "Sixty Nine Plus One",
+        threesome_double_blowjob = Threesome_Position(name = "Double Blowjob",
             slut_requirement = 60,
             position_one_tag = "blowjob",
             position_two_tag = "blowjob",
