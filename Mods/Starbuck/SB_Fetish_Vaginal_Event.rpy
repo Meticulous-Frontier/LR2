@@ -448,7 +448,7 @@ label SB_cowgirl_wakeup_label(the_person):
     else:
         "[the_person.title] looks at you and winks."
         the_person.char "Anytime [the_person.mc_title]! I'd better go get ready!"
-    $ the_person.review_outfit(show_review_message = False)
+    $ the_person.review_outfit(dialogue = False)
     "You fall back asleep. When you wake up, [the_person.possessive_title] has left."
     "Looks like you slept in!"
     $ FETISH_VAGINAL_EVENT_INUSE = False

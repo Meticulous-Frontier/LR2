@@ -529,7 +529,7 @@ init -1:
         # attach to person object
         Person.change_willpower = change_willpower
 
-        def review_outfit_enhanced(self, show_review_message = True):
+        def review_outfit_enhanced(self, dialogue = True):
             self.outfit.remove_all_cum()
 
             if self.should_wear_uniform():
@@ -537,9 +537,9 @@ init -1:
             else:
                 self.outfit.update_slut_requirement()
                 # only show review message when parameter is true and she doesn't feel comfortable in her current outfit
-                show_review_message = show_review_message and self.outfit.slut_requirement > self.sluttiness   
+                dialogue = dialogue and self.outfit.slut_requirement > self.sluttiness   
                 self.outfit = self.planned_outfit.get_copy()    # always restore outfit
-                if show_review_message:
+                if dialogue:
                     self.call_dialogue("clothing_review") # must be last call in function
 
         Person.review_outfit = review_outfit_enhanced
@@ -562,7 +562,7 @@ init -1:
                 if self.planned_outfit is None:
                     self.planned_outfit = self.wardrobe.decide_on_outfit2(self) # Use enhanced outfit function
                 self.outfit = self.planned_outfit.get_copy()
-                self.review_outfit(show_review_message = False)
+                self.review_outfit(dialogue = False)
 
             # if normal draw person call, clear scene
             if not from_scene:

@@ -86,10 +86,10 @@ label SB_fetish_vaginal_family_threesome_label():
 
     python:
         the_person_one.reset_arousal()
-        the_person_one.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+        the_person_one.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
 
         the_person_two.reset_arousal()
-        the_person_two.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+        the_person_two.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
 
         # release variables
         del the_person_one

@@ -291,7 +291,7 @@ label SB_caught_masturbating_crisis_label():
                             "You decide to give [the_person.possessive_title] a chance to recover. You nod to her and then back out of the room."
                             "You finish up your walk and return back to your previous work"
 
-            $ the_person.review_outfit(show_review_message = False)
+            $ the_person.review_outfit(dialogue = False)
         "Keep walking":
             "You decide to give [the_person.possessive_title] some privacy. As quietly as you can, you close the door behind you and continue walking"
 

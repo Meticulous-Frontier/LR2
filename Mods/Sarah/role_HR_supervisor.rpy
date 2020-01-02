@@ -897,7 +897,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         $ set_HR_director_unlock("blowjob", True)
         "She cleans herself up and makes herself presentable again."
 
-        $ the_person.review_outfit(show_review_message = False)
+        $ the_person.review_outfit(dialogue = False)
         return
 
     if get_HR_director_unlock("titfuck") == False:
@@ -924,7 +924,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             the_person.char "Mmm, god that was hot. Let me just enjoy this a minute before we move on with the meeting..."
             "You run your hands through her hair for a bit while she enjoys the warmth of your cum on her skin."
             "Eventually she cleans herself up and makes herself presentable again."
-            $ the_person.review_outfit(show_review_message = False)
+            $ the_person.review_outfit(dialogue = False)
             return
 
     if get_HR_director_unlock("missionary on desk") == False:
@@ -955,7 +955,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             mc.name "You were right, [the_person.title]. It IS really hot to fuck you on my desk!"
             the_person.char "Ah, yes, I suspected it would be, sir!"
             "Eventually she cleans herself up and makes herself presentable again."
-            $ the_person.review_outfit(show_review_message = False)
+            $ the_person.review_outfit(dialogue = False)
             return
 
     if get_HR_director_unlock("bent over desk") == False:
@@ -992,7 +992,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                     "[the_person.possessive_title] slowly recovers from using her body for your pleasure."
                     the_person.char "Mmm, happy to be of service, sir. We can do that again next time... if you want!"
                 "Eventually she cleans herself up and makes herself presentable again."
-                $ the_person.review_outfit(show_review_message = False)
+                $ the_person.review_outfit(dialogue = False)
                 return
 
 
@@ -1080,7 +1080,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                 "[the_person.title] opens her mouth for a second, ready to protest, but quickly reconsiders."
                 the_person.char "Of course, [the_person.mc_title]. Let's see what is next."
             "Let her clean herself up":
-                $ the_person.review_outfit(show_review_message = False)
+                $ the_person.review_outfit(dialogue = False)
                 "[the_person.possessive_title] quickly cleans herself up, ready to continue the meeting."
 
     return

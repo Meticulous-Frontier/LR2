@@ -993,7 +993,7 @@ label Sarah_tits_reveal_label():
     $ the_person.draw_person(position = "walking_away")
     "She gets up and leaves the room. You smile to yourself, thinking about how good her new tits felt around your cock."
     $ the_person.reset_arousal()
-    $ the_person.review_outfit(show_review_message = False)
+    $ the_person.review_outfit(dialogue = False)
 
     return
 

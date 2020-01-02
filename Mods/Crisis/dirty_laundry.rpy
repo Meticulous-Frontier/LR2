@@ -309,5 +309,5 @@ label dirty_laundry_action_label:
             "You say goodnight to [the_person.title] and then swap your clothes from the washer to the dryer. They should be dry in the morning!"
 
     $ renpy.scene("Active")
-    $ the_person.review_outfit(show_review_message = False)
+    $ the_person.review_outfit(dialogue = False)
     return

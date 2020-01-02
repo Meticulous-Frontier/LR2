@@ -121,7 +121,7 @@ label SB_fetish_cum_label(the_person):
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ FETISH_CUM_EVENT_INUSE = False
     $ the_person.reset_arousal()
-    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
     $ mc.location.show_background()
     $ renpy.scene("Active")
     return
@@ -201,7 +201,7 @@ label SB_fetish_cum_dosage_label():
             the_person.char "Oh! I'm sorry... I know you work so hard around here. Maybe tomorrow then?"
             "[the_person.possessive_title] quickly sulks off."
     python:
-        the_person.review_outfit(show_review_message = False)
+        the_person.review_outfit(dialogue = False)
         renpy.scene("Active")
     return
 
@@ -291,7 +291,7 @@ label SB_fetish_mom_cum_label():
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ FETISH_CUM_EVENT_INUSE = False
     python:
-        the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+        the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
         mc.location.show_background()
         renpy.scene("Active")
     return
@@ -374,7 +374,7 @@ label SB_fetish_lily_cum_label():
     $ FETISH_CUM_EVENT_INUSE = False
 
     python:
-        the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+        the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
         bedroom.show_background()
         renpy.scene("Active")
 
@@ -423,7 +423,7 @@ label SB_fetish_shower_cum_label():
     "[the_person.possessive_title] gets out. You finish up with your shower, balls empty and ready for the day!"
 
     python:
-        the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+        the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
         mc.location.show_background()
         renpy.scene("Active")
 

@@ -294,7 +294,7 @@ label casual_athlete_phase_one_label(the_person):
         the_person.char "That sounds good. But its not a date, okay? Just need to set boundaries."
         "You agree. You and [the_person.title] take a quick shower, then get ready and leave the gym."
 
-        $ the_person.review_outfit(show_review_message = False)
+        $ the_person.review_outfit(dialogue = False)
 
         "You head to a nearby coffee shop. You grab yourself a coffee, letting [the_person.title] pay for her own. You grab a seat at a booth away from any other people."
         $ renpy.show("restaurant", what = restaraunt_background)
@@ -361,7 +361,7 @@ label casual_athlete_phase_one_label(the_person):
                 the_person.char "Oh. Okay, I understand. Well, I'll see you around, [the_person.mc_title]!"
                 $ the_person.change_happiness(-3)
 
-    $ the_person.review_outfit(show_review_message = False)
+    $ the_person.review_outfit(dialogue = False)
     call advance_time from _call_advance_casual_athlete_workout
     return
 
@@ -404,7 +404,7 @@ label casual_athlete_phase_two_label(the_person):
         "[the_person.title] has a spark in her eyes. Whoever wins, you have a feeling the sex is going to be amazing after the race."
         "You wave goodbye to [the_person.title], wondering what you've gotten yourself in to."
     
-    $ the_person.review_outfit(show_review_message = False)
+    $ the_person.review_outfit(dialogue = False)
     call advance_time from _call_advance_casual_athlete_race_challenge
     return
 
@@ -531,7 +531,7 @@ label casual_athlete_buy_protein_shake_label(the_person):
             mc.name "No problem at all."
             $ renpy.scene("Active")
 
-    $ the_person.review_outfit(show_review_message = False)            
+    $ the_person.review_outfit(dialogue = False)            
     call advance_time from _call_advance_casual_athlete_smoothie
     return
 

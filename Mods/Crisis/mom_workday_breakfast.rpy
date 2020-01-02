@@ -343,5 +343,5 @@ label mom_commando_day_selfie_label():
     the_person.char "Don't tempt me! See you at home tonight!"
     "You smile and resume your day."
     $ renpy.scene("Active")
-    $ the_person.review_outfit(show_review_message = False)
+    $ the_person.review_outfit(dialogue = False)
     return

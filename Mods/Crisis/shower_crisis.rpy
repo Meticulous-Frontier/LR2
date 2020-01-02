@@ -111,7 +111,7 @@ label shower_crisis_action_label:
             "You decide not to disturb her and just walk away."
 
     python:
-        the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+        the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
         mc.location.show_background()
         renpy.scene("Active")
     return

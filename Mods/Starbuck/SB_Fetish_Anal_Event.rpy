@@ -326,7 +326,7 @@ label SB_fetish_anal_recurring_label():
             the_person.char "Oh! I'm sorry... I know you work so hard around here. Maybe tomorrow then?"
             "[the_person.possessive_title] quickly sulks off."
 
-    $ the_person.review_outfit(show_review_message = False)
+    $ the_person.review_outfit(dialogue = False)
     $ renpy.scene("Active")
     return
 
@@ -571,13 +571,13 @@ label SB_mom_anal_pay_label():
             "[the_person.possessive_title] nods and turns back to her bills."
             the_person.char "I understand sweetheart. Now don't let me keep you, I'm sure you were up to something important."
             $ mc.business.mandatory_crises_list.append(SB_mom_weekly_pay_action)
-            $ the_person.review_outfit(show_review_message = False)
+            $ the_person.review_outfit(dialogue = False)
 
     $ FETISH_ANAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
     $ the_person.reset_arousal()
-    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
     $ mc.location.show_background()
     $ renpy.scene("Active")
 
@@ -667,7 +667,7 @@ label SB_mom_anal_friday_label():
             $ mc.business.mandatory_crises_list.append(SB_mom_weekly_anal_action)
 
     $ the_person.reset_arousal()
-    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
     $ mc.location.show_background()
     $ renpy.scene("Active")
     return
@@ -774,7 +774,7 @@ label SB_lily_anal_dp_fetish_label():
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
     $ the_person.reset_arousal()
-    $ the_person.review_outfit(show_review_message = False)
+    $ the_person.review_outfit(dialogue = False)
     $ renpy.scene("Active")
     return
 
@@ -863,7 +863,7 @@ label SB_starbuck_anal_intro():
     $ FETISH_ANAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ the_person.reset_arousal()
-    $ the_person.review_outfit(show_review_message = False)
+    $ the_person.review_outfit(dialogue = False)
     $ renpy.scene("Active")
     return
 

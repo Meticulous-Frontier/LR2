@@ -2294,7 +2294,7 @@ label mom_ntr_mod_action_label:
                 "You decide that it is wrong to interfere into [the_person.possessive_title]'s private life so you go back to your room to sleep."
     $ the_person.sluttiness += 5
     $ the_person.reset_arousal()
-    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
     $ mc.location.show_background()
     $ renpy.scene("Active")
     return

@@ -47,7 +47,7 @@ label business_meeting_action_label:
         $ the_person.change_happiness(5)
         "[the_person.title] finishes up her proposal."
 
-    $ the_person.review_outfit(show_review_message = False)
+    $ the_person.review_outfit(dialogue = False)
 
     call business_meeting_end(the_person) from _call_business_meeting_end_1
 

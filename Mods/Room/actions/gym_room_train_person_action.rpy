@@ -147,6 +147,6 @@ label train_in_gym(person):
     $ mc.business.change_funds(-gym_session_cost)
     "You pay for the gym session and $ [gym_session_cost] has been deducted from the company's credit card."
 
-    $ person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+    $ person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
     $ mc.location.show_background()
     return

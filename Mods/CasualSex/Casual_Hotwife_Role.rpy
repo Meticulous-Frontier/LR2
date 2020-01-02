@@ -393,7 +393,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         "You sneak your way out of the bathroom while [the_person.possessive_title] cleans herself up. You hope everything goes well with her tonight!"
         $ the_person.event_triggers_dict["hotwife_blowjob_text_enable"] = 1
         $ the_person.event_triggers_dict["hotwife_progress"] = 2
-        $ the_person.review_outfit(show_review_message = False)
+        $ the_person.review_outfit(dialogue = False)
     else:   #This is not our first time getting blown#
         mc.name "Hey, you wanna sneak off for a bit?"
         "[the_person.possessive_title] flashes you her beautiful smile."
@@ -450,7 +450,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             "You suddenly remember the phone. You snap a couple pictures of her face with your cum covering it."
         the_person.char "Mmm, that was great [the_person.mc_title]! I can't wait until I get home tonight... I hope daddy gets the handcuffs out again..."
         "You say goodbye and excuse yourself while she gets herself cleaned up. This arrangement is working out to be very beneficial!"
-        $ the_person.review_outfit(show_review_message = False)
+        $ the_person.review_outfit(dialogue = False)
         call advance_time from _call_advance_casual_hotwife_bathroom_blowjob
     return
 
@@ -585,7 +585,7 @@ label casual_hotwife_dancing_sex_label(the_person):
         $ the_person.event_triggers_dict["hotwife_progress"] = 3
         "She takes her phone from you and starts going through the pictures you took."
         the_person.char "You'd better get going, [the_person.mc_title]. I'm going to send these to my husband..."
-        $ the_person.review_outfit(show_review_message = False)
+        $ the_person.review_outfit(dialogue = False)
 
     else:   #We've done this before
         mc.name "Hey, [the_person.title]. You up for some dancing?"
@@ -627,7 +627,7 @@ label casual_hotwife_dancing_sex_label(the_person):
         the_person.char "Thanks again [the_person.mc_title]. You know where to look for me next time you need some... action."
         "She takes her phone from you and starts going through the pictures you took."
         the_person.char "You'd better get going. I'm going to send these to my husband..."
-        $ the_person.review_outfit(show_review_message = False)
+        $ the_person.review_outfit(dialogue = False)
 
     "You grab your clothes and quickly get yourself presentable, before sneaking your way out of the lady's room."
     call advance_time from _call_advance_casual_hotwife_dancing

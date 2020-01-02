@@ -607,7 +607,7 @@ label SB_working_weekend_crisis_label():
         "Eventually, [the_person.possessive_title] gets up. She says goodbye after giving you a peck on the cheek and is soon walking out the door."
 
     $ the_person.reset_arousal()
-    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
     $ mc.location.show_background()
     return
 

@@ -125,11 +125,11 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                     $ renpy.scene("Active")
                     $ update_opinion(person_two, "threesomes")
                     $ person_two.reset_arousal()
-                    $ person_two.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+                    $ person_two.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
 
                     $ update_opinion(person_three, "threesomes")
                     $ person_three.reset_arousal()
-                    $ person_three.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+                    $ person_three.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
 
                     $ town_relationships.improve_relationship(person_two, person_three)
 
