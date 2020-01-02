@@ -105,7 +105,7 @@ label mom_breakfast_action_label():
                 $ scene_manager.clear_scene()
                 return
             "Give Her Some Attention":  #Sluttiness staircase event, take it farther the sluttier she is
-                mc.name "I'm sorry [the_person.name], I didn't realize you were in need of some attention!"
+                mc.name "I'm sorry [the_person.title], I didn't realize you were in need of some attention!"
                 "You get up from your chair and walk around behind [the_person.possessive_title]"
                 the_person.char "[the_person.mc_title]? What are you... oohhhh."
                 "You put your hands on her shoulders and begin to massage them. She sighs as your hands begin to work on her tension."
