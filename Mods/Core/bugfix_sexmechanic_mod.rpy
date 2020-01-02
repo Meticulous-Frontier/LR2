@@ -253,7 +253,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
     if affair_ask_after and private and ask_girlfriend_requirement(the_person) is True and not the_person.relationship == "Single":
         if the_person.love >= 60 and the_person.sluttiness >= 30 - (the_person.get_opinion_score("cheating on men") * 5) and report_log.get("Climaxes",0) >= 1: #If she loves you enoguh, is moderately slutty, and you made her cum
-            call affaire_check(the_person, report_log) from _call_affaire_check_bugfix
+            call affair_check(the_person, report_log) from _call_affair_check_bugfix
 
 
     python: #Log all of the different classes of sex, but only once per class.
