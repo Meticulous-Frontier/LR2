@@ -4,7 +4,7 @@ init -1 python:
     def remove_all_cum(self):
         remove_list = []
         for acc in self.accessories:
-            if acc in [mouth_cum, tits_cum, stomach_cum, face_cum, ass_cum]:
+            if acc.name in [mouth_cum.name, tits_cum.name, stomach_cum.name, face_cum.name, ass_cum.name, creampie_cum.name]:
                 remove_list.append(acc)
         for acc in remove_list:
             self.accessories.remove(acc)
@@ -14,7 +14,7 @@ init -1 python:
 
     def check_outfit_cum(self):                                             #Checks if the person has any cum on them
         for acc in self.accessories:
-            if acc in [mouth_cum, tits_cum, stomach_cum, face_cum, ass_cum]:
+            if acc.name in [mouth_cum.name, tits_cum.name, stomach_cum.name, face_cum.name, ass_cum.name, creampie_cum.name]:
                 return True
         return False
 

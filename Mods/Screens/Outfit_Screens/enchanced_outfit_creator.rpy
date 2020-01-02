@@ -301,7 +301,7 @@ init 2:
 
         $ renpy.block_rollback()
 
-        $ fluids_list = [face_cum, mouth_cum, stomach_cum, tits_cum, ass_cum]
+        $ fluids_list = [face_cum, mouth_cum, stomach_cum, tits_cum, ass_cum, creampie_cum]
 
         default category_selected = "Panties"
         default mannequin = "mannequin"
