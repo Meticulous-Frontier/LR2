@@ -326,15 +326,15 @@ label advance_time_people_run_move_label():
                 person.location().move_person(person, mc.location)
 
             if person.title is not None: #We don't assign events to people we haven't met.
-                if renpy.random.randint(0,100) < 7: #Only assign one to 12% of people, to cut down on the number of people we're checking.
+                if renpy.random.randint(0,100) < 12: #Only assign one to 12% of people, to cut down on the number of people we're checking.
                     the_crisis = get_limited_time_action_for_person(person)
                     if the_crisis is not None:
                         limited_time_event = Limited_Time_Action(the_crisis[0], the_crisis[0].event_duration) #Wraps the action so that we can have an instanced duration counter and add/remove it easily.\
                         #renpy.notify("Created event: " + the_crisis[0].name + " for " + people.name)
-                        if the_crisis[2] == "on_talk":
+                        if the_crisis[2] == "on_talk" and len(person.on_talk_event_list) == 0: # prevent multiple on talk events for person
                             person.on_talk_event_list.append(limited_time_event)
 
-                        elif the_crisis[2] == "on_enter":
+                        elif the_crisis[2] == "on_enter" and len(person.on_room_enter_event_list) == 0: # prevent multiple on enter events for person
                             person.on_room_enter_event_list.append(limited_time_event)
                 
     return
