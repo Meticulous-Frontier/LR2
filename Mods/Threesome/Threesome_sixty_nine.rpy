@@ -135,7 +135,7 @@ label intro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_locat
     "You push yourself into [the_girl_1.title]'s steamy cunt and start to fuck her while [the_girl_2.title] rides on her face."
     return
 
-label intro_threesome_sixty_nine_fuck_oral_girl_2(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label intro_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_location, the_object, the_round):
     mc.name "I want you to warm me up before I fuck [the_girl_1.title]."
     if SB_check_fetish(the_girl_2, oral_fetish_role):
         the_girl_2.char "Oh my god, a mouth on my pussy and my lips on your cock... this is going to be incredible!"
