@@ -1190,8 +1190,13 @@ label Sarah_stripclub_story_label():
     the_person.char "Oh fuck yeah, I'm so worked up. But first I want to try something! Why don't you sit down on the bed there."
     "You quickly sit down."
     mc.name "What do you have in mind, [the_person.title]?"
-    the_person.char "I'm gonna give you a lap dance. Just like that girl at the strip club..."
-    the_person.char "But the difference is, you can touch me all you want to!"
+    the_person.char "I'm gonna give you a lap dance. Just like that girl at the strip club."
+    if the_person.event_triggers_dict.get("dating_path", False) == True:
+        the_person.char "But the difference is, you can touch me all you want to!"
+        mc.name "Mmm, don't mind if I do."
+    else:
+        the_person.char "But remember, no touching!"
+        mc.name "No promises."
 
 
 
