@@ -16,6 +16,7 @@ transform threesome_test_2():
 init -1 python:
     list_of_threesomes = []
     girl_swap_pos = False  #Nasty hack to tell threesome code to swap girl 1 and girl 2. #TODO find a better way to do this
+    THREESOME_BASE_SLUT_REQ = 80  #A constant to hold the usual base sluttiness requirements for threesomes.
     class Threesome_Position(renpy.store.object):
         def __init__(self,name,slut_requirement,position_one_tag, position_two_tag,girl_one_final_description,girl_two_final_description,requires_location,requirements,
         p1_transform, p2_transform, can_swap = False, verb = "fuck" ):
@@ -187,7 +188,7 @@ init -1 python:
                     his_arousal_change += 0.1 * the_person_two.sex_skills[self.skill_tag_guy]
 
 
-                mc.change_arousal(his_arousal_change)
+            mc.change_arousal(his_arousal_change)
 
 
 label threesome_test():
@@ -712,3 +713,12 @@ init python:
                 elif threeway.position_two_tag == initial_position_tag:
                     return_bool =  True
         return return_bool
+
+    def willing_to_threesome(the_person_one, the_person_two):    #Use this function to check and see if two people are willing to engage in a threesome
+        person_one_slut_req = THREESOME_BASE_SLUT_REQ
+        person_two_slut_req = THREESOME_BASE_SLUT_REQ
+        if the_person_one.sluttiness < person_one_slut_req:
+            return False
+        if the_person_two.sluttiness < person_two_slut_req:
+            return False
+        return True
