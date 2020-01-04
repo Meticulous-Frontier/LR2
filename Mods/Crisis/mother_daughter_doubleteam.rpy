@@ -1,6 +1,6 @@
-## Mother Daugher Doubleteam
+## Mother Daughter Double Team
 init -1 python:
-    mother_daughter_doubleteam_weight = 50
+    mother_daughter_doubleteam_weight = 5
 
 init 2 python:
     def mother_daughter_doubleteam_requirement():
@@ -24,15 +24,16 @@ label mother_daughter_doubleteam_action_label():
             for person in town_relationships.get_business_relationships(["Daughter"]):
                 if willing_to_threesome( person.person_a, person.person_b):
                     mother_list.append(person.person_a) #Now have a list of mothers
-    "[mother_list]"
+    #"[mother_list]"
     python:
+        scene_manager = Scene() # make sure we have a clean scene manager
         the_person_one = get_random_from_list(mother_list)
         daughter_req = town_relationships.get_existing_children(the_person_one)
-    "[the_person_one.title]"
-    "[daughter_list]"
+    #"[the_person_one.title]"
+    #"[daughter_list]"
     python:
         for daughter_person in daughter_req:
-            renpy.say("", "[daughter_person.title]")
+            #renpy.say("", "[daughter_person.title]")
             if willing_to_threesome(the_person_one, daughter_person):
                 daughter_list.append(daughter_person) #Now a list of her existing daughters
         the_person_two = get_random_from_list(daughter_list)
@@ -78,7 +79,7 @@ label mother_daughter_doubleteam_action_label():
                     the_person_two.char "I see. Well, I guess I'm making dinner tonight mom. But we should revisit this in the future, I bet with a bit more practice, this might go differently."
                 "[the_person_two.title]":
                     "[the_person_one.title] is stunned by your verdict."
-                    the_person_one.char "That... I can't believe it. Have I let myself get comfortable after all these years? Maybe I should practive more."
+                    the_person_one.char "That... I can't believe it. Have I let myself get comfortable after all these years? Maybe I should practice more."
                     the_person_one.char "Alright, I'll make dinner tonight, but this isn't over girl! We'll revisit this another time!"
             $ scene_manager.update_actor(the_person_one, position = "walking_away")
             $ scene_manager.update_actor(the_person_two, position = "walking_away")
@@ -90,7 +91,6 @@ label mother_daughter_doubleteam_action_label():
             $ scene_manager.update_actor(the_person_one, position = "walking_away")
             $ scene_manager.update_actor(the_person_two, position = "walking_away")
             "The two girls walk out of the breakroom, still discussing their issue."
-
 
     $ scene_manager.clear_scene()
     python:
