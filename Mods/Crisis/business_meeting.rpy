@@ -60,7 +60,8 @@ label business_meeting_action_label:
     else:
         "You make a call to [hr_employee.title] from HR to implement some of the changes you discussed with [the_person.title]."
     $ mc.business.effectiveness_cap += change
-    $ set_HR_director_tag("business_HR_eff_bonus", get_HR_director_tag("business_HR_eff_bonus") + change)
+    if get_HR_director_tag("business_HR_eff_bonus"):
+        $ set_HR_director_tag("business_HR_eff_bonus", get_HR_director_tag("business_HR_eff_bonus") + change)
     #$ mc.log_event("Company Efficiency: " + str(mc.business.effectiveness_cap) + "%", "float_text_grey")
     "The changes increased your business effectivity by [change]%%."
 
