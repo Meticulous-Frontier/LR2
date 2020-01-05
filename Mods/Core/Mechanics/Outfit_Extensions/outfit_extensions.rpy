@@ -20,7 +20,6 @@ init -1 python:
 
     Outfit.check_outfit_cum = check_outfit_cum
 
-
     def get_overwear_slut_score_enhanced(self): #Calculates the sluttiness of this outfit assuming it's an overwear set. That means we assume a modest underwear set is used (ie. one that denies access).
         new_score = 0
         if self.tits_visible():
@@ -87,6 +86,15 @@ init -1 python:
 
 # initialize this part after wardrobe builder is initialized
 init 6 python:
+    def tits_available_enhanced(self):
+        reachable = True
+        for cloth in self.upper_body:
+            if cloth.anchor_below and not cloth in [cincher, heart_pasties]:
+                reachable = False
+        return reachable
+
+    Outfit.tits_available = tits_available_enhanced
+
     def get_total_slut_modifiers_enhanced(self):
         def clothing_in_preferences(topic, clothing):
             for layer in WardrobeBuilder.preferences[topic].keys():
