@@ -491,7 +491,7 @@ label casual_athlete_race_crisis_label(the_person):
     "You consider for a second putting on a condom first. Nope, not a fucking chance. In one smooth motion you push yourself into her sopping, needy cunt."
     the_person.char "Yes!!! Oh god, please fuck me good!"
     "You have every intention of doing exactly that."
-    call fuck_person(the_person, private=True, start_position = doggy, start_object = make_bed(), skip_intro = True, hide_leave = True) from _call_casual_sex_mod_CS030
+    call fuck_person(the_person, private=True, start_position = doggy, start_object = make_bed(), skip_intro = True) from _call_casual_sex_mod_CS030
     $ the_person.clear_situational_slut("Lost Bet")
     "When you finish with her, [the_person.possessive_title] lays down on her bed."
     $ the_person.draw_person(position = "missionary")
