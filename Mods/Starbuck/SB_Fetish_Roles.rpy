@@ -192,7 +192,7 @@ label SB_fetish_vaginal_mom_kitchen_label():
 
         "With her pussy finally exposed you waste no time. You quickly pull your cock out and line it up with her wet slit."
 
-    call fuck_person(the_person, start_position = SB_doggy_standing, start_position = make_table(), skip_intro = True) from _call_sex_description_SBR10
+    call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_table(), skip_intro = True) from _call_sex_description_SBR10
 
     $ the_report = _return
     if the_report.get("girl orgasms", 0) > 0:
