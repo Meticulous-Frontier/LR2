@@ -331,7 +331,7 @@ label SB_fetish_mom_vaginal_label():
     "You moan into her mouth and quickly prepare yourself to penetrate [the_person.possessive_title]."
     $ the_person.sex_skills["Vaginal"] = 6
     ###Sex scene, missionary###   ###TODO: consider writing a variant of this because the default intro is going to be confusing###
-    call fuck_person(the_person, start_position = missionary, start_position = make_bed(), skip_intro = True) from _call_sex_description_SBV30
+    call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBV30
     #$ the_person.SB_fetish = "vaginal sex"
     $ SB_random_fetish_key = get_random_from_list(FETISH_VAGINAL_OPINION_LIST)
     $ the_person.sexy_opinions["vaginal sex"] = [FETISH_OPINION_VALUE, True]
