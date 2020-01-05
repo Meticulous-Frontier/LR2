@@ -128,7 +128,7 @@ label scene_SB_anal_cowgirl_2(the_girl, the_location, the_object, the_round):
         the_girl.char "[the_girl.mc_title]! [the_girl.title] loves it when you play with her nipples."
     else:
         the_girl.char "Mmm, I love it when you play with my tits!"
-    if the_girl.has_large_tits:
+    if the_girl.has_large_tits():
         "You give her epic tits another squeeze. They are so full and soft and feel heavy in your hands."
     else:
         "You give her modest tits another squeeze. They are supple yet firm in your hands."
