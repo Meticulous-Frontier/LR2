@@ -10,7 +10,7 @@ init 5 python:
 label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, exit_when_guy_cums = True):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
     if report_log is None:
-        $ report_log = defaultdict(int) #Holds information about the encounter: what positiosn were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
+        $ report_log = defaultdict(int) #Holds information about the encounter: what positions were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
         $ report_log["positions_used"] = [] #This is a list, not an int.
 
     $ finished = False #When True we exit the main loop (or never enter it, if we can't find anything to do)
@@ -111,7 +111,14 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                         option_list.append(["Pause and change position.\n-5 {image=gui/extra_images/arousal_token.png}","Change"])
                         for position in position_choice.connections:
                             if object_choice.has_trait(position.requires_location):
-                                appended_name = "Transition to " + position.build_position_willingness_string(the_person) #Note: clothing and energy checks are done inside of build_position_willingness, invalid positiosn marked (disabled)
+                                appended_name = "Transition to " + position.build_position_willingness_string(the_person) #Note: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
+                                option_list.append([appended_name,position])
+
+                    if position_locked and object_choice:
+                        # allow transition to positions with same traits and skill requirements
+                        for position in position_choice.connections:
+                            if object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag:
+                                appended_name = "Transition to " + position.build_position_willingness_string(the_person) #Note: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                                 option_list.append([appended_name,position])
 
                     if not hide_leave: #TODO: Double check that we can always get out
