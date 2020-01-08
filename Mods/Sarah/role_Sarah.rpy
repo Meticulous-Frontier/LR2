@@ -60,7 +60,7 @@ init 2 python:
         sarah.event_triggers_dict["dating_path"] = False       # False = not started, or doing FWB during story, True = dating her.
         sarah.event_triggers_dict["stripclub_progress"] = 0    # 0 = not complete, 1 = strip club even complete
         sarah.event_triggers_dict["initial_threesome_target"] = None    #this will hold who sarah decides she wants to have a threesome with.
-        sarah_event_triggers_dict["threesome_unlock"] = False   #Set this to true after first threesome with Sarah
+        sarah.event_triggers_dict["threesome_unlock"] = False   #Set this to true after first threesome with Sarah
 
         # add appoint
         office.actions.append(HR_director_appointment_action)
