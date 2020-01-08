@@ -22,8 +22,8 @@ label SB_fetish_vaginal_family_threesome_label():
     "Before going to bed, you hear a knock on your door. You hear [the_person_one.possessive_title] from the other side of the door."
     the_person_one.char "Hey [the_person_one.mc_title], you still up? I was just wondering if I could come in for a bit?"
     "You invite [the_person_one.possessive_title] in. You immediately start to get aroused when you see what she is wearing."
-    $ the_person_one.outfit = SB_vaginal_lily_outfit.get_copy()
-    $ the_person_two.outfit = SB_vaginal_outfit.get_copy()
+    $ the_person_one.apply_outfit(SB_vaginal_lily_outfit)
+    $ the_person_two.apply_outfit(SB_vaginal_outfit)
     $ the_person_one.draw_person()
     the_person_one.char "So... I was wondering... is it okay if I sleep in here with you tonight?"
     menu:

@@ -121,9 +121,9 @@ init 6 python:
                 new_score += 5 # small extra modifier
             if cloth in [summer_dress, virgin_killer, evening_dress]:
                 new_score += 10 # sexy modifier
-            if cloth in [two_part_dress, thin_dress, nightgown_dress, thigh_high_boots, leotard]:
+            if cloth in [two_part_dress, thin_dress, nightgown_dress, thigh_high_boots, micro_skirt]:
                 new_score += 15 # extremely slutty clothing (applies extra modifier)
-            if cloth in [lacy_one_piece_underwear, lingerie_one_piece]:
+            if cloth in [lacy_one_piece_underwear, lingerie_one_piece, leotard]:
                 if not any(x for x in self.upper_body if x.layer == 2):
                     new_score += 10 # upper part not covered
                 if not any(x for x in self.lower_body if x.layer == 2):

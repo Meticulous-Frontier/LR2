@@ -41,7 +41,6 @@ label SB_fetish_cum_label(the_person):
     #$ the_person = FETISH_cum_EVENT_TARGET
     "You are just finishing up with with some work before you get ready for lunch. You hear a friendly voice greet you as you pull your packed lunch from the desk."
     the_person.char "Hey [the_person.mc_title]! That sure looks good!"
-    #$ the_person.outfit = SB_cum_outfit.get_copy()
     $ the_person.draw_person()
     ###Draw the girl###
     "You give her a quick wave as she walks up to you. You assumed she was talking about your lunch, but quickly notice she is looking at your crotch."
@@ -266,7 +265,7 @@ label SB_fetish_mom_cum_label():
     "You slowly fall asleep, enjoying the warmth of her body."
     call SB_process_overnight_no_events() from _SB_overnight_SBC030
     "When morning comes, you feel a stirring in your loins again as you start to slowly wake up. The now familiar feeling of [the_person.possessive_title]'s mouth feels amazing."
-    $ the_person.outfit = SB_cum_nude_outfit.get_copy()
+    $ the_person.apply_outfit(SB_cum_nude_outfit)
     $ the_person.draw_person( position = "blowjob")
     "She senses that you are beginning to awake."
     the_person.char "Good morning, [the_person.mc_title]. It's a new day... and I need another load of your cum..."
@@ -304,7 +303,7 @@ label SB_fetish_lily_cum_label():
     $ home_shower.show_background()
     "You stand in the shower, enjoying the hot water for several minutes. The steam is beginning to cloud up the bathroom."
     "You are surprised when the shower door opens. You see [the_person.possessive_title] getting in the shower with you."
-    $ the_person.outfit = SB_cum_nude_outfit.get_copy()
+    $ the_person.apply_outfit(SB_cum_nude_outfit)
     $ the_person.draw_person()
     the_person.char "Good morning [the_person.mc_title]. Mind if I join you?"
     "You are surprised. She hasn't been this direct with you before. You quickly invite her in."
@@ -403,7 +402,7 @@ label SB_fetish_shower_cum_label():
     $ home_shower.show_background()
     "You stand in the shower, enjoying the hot water for several minutes. The steam is beginning to cloud up the bathroom."
     "You hear the shower door open and see [the_person.possessive_title] getting in the shower with you."
-    $ the_person.outfit = SB_cum_nude_outfit.get_copy()
+    $ the_person.apply_outfit(SB_cum_nude_outfit)
     $ the_person.draw_person()
     the_person.char "Good morning [the_person.mc_title]. Mind if I join you?"
     mc.name "Of course! Come on in."

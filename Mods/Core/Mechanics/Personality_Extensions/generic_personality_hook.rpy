@@ -71,7 +71,7 @@ init -1 python:
     def update_person_outfit(person):
         if not person in unique_character_list:
             person.planned_outfit = person.wardrobe.decide_on_outfit2(person) # Use enhanced outfit selector
-            person.outfit = person.planned_outfit.get_copy()
+            person.apply_outfit(person.planned_outfit)
             person.planned_uniform = None
         return
 

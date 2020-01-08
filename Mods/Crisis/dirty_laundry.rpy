@@ -37,11 +37,11 @@ init 3 python:
 
     def set_night_outfit(person):
         if person.sluttiness > 70 or person.arousal > 70:
-            person.outfit = night_clothes_slutty.get_copy()
+            person.apply_outfit(night_clothes_slutty)
         elif person.sluttiness > 40 or person.arousal > 35:
-            person.outfit = night_clothes_sexy.get_copy()
+            person.apply_outfit(night_clothes_sexy)
         else:
-            person.outfit = night_clothes.get_copy()
+            person.apply_outfit(night_clothes)
         return
 
 label dirty_laundry_action_label:

@@ -44,7 +44,7 @@ init 5 python:
         preferences = {}
         preferences["skimpy outfits"] = {}
         preferences["skimpy outfits"]["upper_body"] = [two_part_dress, thin_dress, leotard, lace_sweater, belted_top, lace_crop_top, tanktop, tube_top, business_vest]
-        preferences["skimpy outfits"]["lower_body"] = [booty_shorts, jean_hotpants, daisy_dukes, belted_skirt, mini_skirt]
+        preferences["skimpy outfits"]["lower_body"] = [booty_shorts, jean_hotpants, daisy_dukes, belted_skirt, mini_skirt, micro_skirt]
         preferences['skimpy outfits']["feet"] = [thigh_highs, fishnets, garter_with_fishnets, pumps, heels, high_heels, thigh_high_boots]
         preferences["skimpy outfits"]["accessories"] = [lace_choker, wide_choker, spiked_choker]
         preferences["conservative outfits"] = {}
@@ -59,10 +59,10 @@ init 5 python:
         preferences["pants"] = {}
         preferences["pants"]["lower_body"] = pants_list
         preferences["showing her tits"] = {}
-        preferences["showing her tits"]["upper_body"] = [strapless_bra, lace_bra, strappy_bra, cincher, heart_pasties, thin_dress, two_part_dress, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, lace_sweater, sweater, belted_top, tube_top, business_vest, suit_jacket, vest]
+        preferences["showing her tits"]["upper_body"] = [strapless_bra, lace_bra, strappy_bra, quarter_cup_bustier, cincher, heart_pasties, thin_dress, two_part_dress, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, lace_sweater, sweater, belted_top, tube_top, business_vest, suit_jacket, vest]
         preferences["showing her ass"] = {}
         preferences["showing her ass"]["upper_body"] = [two_part_dress, thin_dress, summer_dress, virgin_killer, leotard, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear]
-        preferences["showing her ass"]["lower_body"] = [cute_panties, lace_panties, cute_lace_panties, tiny_lace_panties, thong, tiny_g_string, string_panties, strappy_panties, leggings, booty_shorts, jean_hotpants, daisy_dukes]
+        preferences["showing her ass"]["lower_body"] = [cute_panties, lace_panties, cute_lace_panties, tiny_lace_panties, thong, tiny_g_string, string_panties, strappy_panties, crotchless_panties, leggings, booty_shorts, jean_hotpants, daisy_dukes, micro_skirt]
         preferences["high heels"] = {}
         preferences["high heels"]["feet"] = [sandle_heels, pumps, heels, high_heels, boot_heels, thigh_high_boots]
         preferences["boots"] = {}
@@ -78,9 +78,12 @@ init 5 python:
         matching_underwear = {}
         matching_underwear["Bralette"] = [boy_shorts, cute_lace_panties, tiny_lace_panties, thong, tiny_g_string]
         matching_underwear["Sports_Bra"] = [cotton_panties, panties, lace_panties]
-        matching_underwear["Lace_Bra"] = [cute_lace_panties, lace_panties, tiny_lace_panties, thong, tiny_g_string]
+        matching_underwear["Lace_Bra"] = [cute_lace_panties, lace_panties, tiny_lace_panties, thong, tiny_g_string, crotchless_panties]
         matching_underwear["Strappy_Bra"] = [strappy_panties]
-        matching_underwear["Corset"] = [panties, thin_panties, thong, tiny_lace_panties, tiny_g_string, string_panties]
+        matching_underwear["Corset"] = [panties, thin_panties, thong, tiny_lace_panties, tiny_g_string, string_panties, crotchless_panties]
+
+        clashing_overwear = {}
+        clashing_overwear[""] = []
 
         color_prefs = {}
         color_prefs["the colour blue"] = {}

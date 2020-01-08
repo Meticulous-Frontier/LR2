@@ -80,7 +80,7 @@ init -2 python:
 
 init 2 python:
     def set_gym_outfit(person):
-        person.outfit = workout_wardrobe.decide_on_outfit2(person)
+        person.apply_outfit(workout_wardrobe.decide_on_outfit2(person))
         return
 
 label train_in_gym(person):

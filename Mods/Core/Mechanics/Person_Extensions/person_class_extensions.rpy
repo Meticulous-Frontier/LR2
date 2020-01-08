@@ -271,7 +271,7 @@ init -1:
             # renpy.say("", strip_choice.name + "  (required: " + str(test_outfit.slut_requirement) +  ", sluttiness: " +  str(self.effective_sluttiness() + temp_sluttiness_boost) + ")")
             while strip_choice and self.judge_outfit(test_outfit, temp_sluttiness_boost):
                 self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
-                self.outfit = test_outfit.get_copy() #Swap our current outfit out for the test outfit.
+                self.apply_outfit(test_outfit, ignore_base = True) #Swap our current outfit out for the test outfit.
                 if msg_count > 0:   # do we need to show a random message and replace titles and outfit name
                     msg_idx = renpy.random.randint(1, msg_count)
                     msg = messages[msg_idx - 1]
@@ -321,7 +321,7 @@ init -1:
 
             if time_of_day == 0: #It's a new day, get a new outfit out to wear!
                 self.planned_outfit = self.wardrobe.decide_on_outfit(self.sluttiness)
-                self.outfit = self.planned_outfit.get_copy()
+                self.apply_outfit(self.planned_outfit)
                 self.planned_uniform = None
 
             destination = self.schedule[time_of_day] #None destination means they have free time
@@ -339,13 +339,13 @@ init -1:
                             self.change_slut_temp(self.get_opinion_score("skimpy uniforms"), add_to_log = False)
 
                 elif destination == self.home:
-                    self.outfit = self.planned_outfit.get_copy() #We're at home, so we can get back into our casual outfit.
+                    self.apply_outfit(self.planned_outfit) #We're at home, so we can get back into our casual outfit.
 
                 #NOTE: There is no else here because all of the destinations should be set. If it's just a location they travel there and that's the end of it.
 
             else:
                 #She finds somewhere to burn some time
-                self.outfit = self.planned_outfit.get_copy() #Get changed back into our proper outfit if we aren't in it already.
+                self.apply_outfit(self.planned_outfit) #Get changed back into our proper outfit if we aren't in it already.
                 available_locations = [] #Check to see where is public (or where you are white listed) and move to one of those locations randomly
                 for potential_location in list_of_places:
                     if potential_location.public:
@@ -538,7 +538,7 @@ init -1:
                 self.outfit.update_slut_requirement()
                 # only show review message when parameter is true and she doesn't feel comfortable in her current outfit
                 dialogue = dialogue and self.outfit.slut_requirement > self.sluttiness   
-                self.outfit = self.planned_outfit.get_copy()    # always restore outfit
+                self.apply_outfit(self.planned_outfit)    # always restore outfit
                 if dialogue:
                     self.call_dialogue("clothing_review") # must be last call in function
 
@@ -561,7 +561,7 @@ init -1:
             if self.outfit is None:
                 if self.planned_outfit is None:
                     self.planned_outfit = self.wardrobe.decide_on_outfit2(self) # Use enhanced outfit function
-                self.outfit = self.planned_outfit.get_copy()
+                self.apply_outfit(self.planned_outfit)
                 self.review_outfit(dialogue = False)
 
             # if normal draw person call, clear scene

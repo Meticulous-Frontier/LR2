@@ -687,19 +687,19 @@ label starbuck_sex_store_promo_one_label(the_person):
             "[the_person.possessive_title] starts to strip down."
             $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
-            $ the_person.outfit = SB_advert_one_outfit.get_copy()
+            $ the_person.apply_outfit(SB_advert_one_outfit)
             $ the_person.draw_person()
         "The blue nightgown":
             "[the_person.possessive_title] starts to strip down."
             $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
-            $ the_person.outfit = SB_advert_two_outfit.get_copy()
+            $ the_person.apply_outfit(SB_advert_two_outfit)
             $ the_person.draw_person()
         "the pink one piece":
             "[the_person.possessive_title] starts to strip down."
             $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
-            $ the_person.outfit = SB_advert_three_outfit.get_copy()
+            $ the_person.apply_outfit(SB_advert_three_outfit)
             $ the_person.draw_person()
     "Now dressed in her outfit, [the_person.possessive_title] hands you her phone. She grabs the first item, the bottle of lubricant."
     mc.name "Wow... you look great..."
@@ -717,19 +717,19 @@ label starbuck_sex_store_promo_one_label(the_person):
             "[the_person.possessive_title] starts to strip down."
             $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
-            $ the_person.outfit = SB_advert_one_outfit.get_copy()
+            $ the_person.apply_outfit(SB_advert_one_outfit)
             $ the_person.draw_person()
         "The blue nightgown":
             "[the_person.possessive_title] starts to strip down."
             $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
-            $ the_person.outfit = SB_advert_two_outfit.get_copy()
+            $ the_person.apply_outfit(SB_advert_two_outfit)
             $ the_person.draw_person()
         "the pink one piece":
             "[the_person.possessive_title] starts to strip down."
             $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
-            $ the_person.outfit = SB_advert_three_outfit.get_copy()
+            $ the_person.apply_outfit(SB_advert_three_outfit)
             $ the_person.draw_person()
     "Now dressed in her outfit, [the_person.possessive_title] looks to you for direction."
     mc.name "[the_person.title]. You look incredible..."
@@ -749,19 +749,19 @@ label starbuck_sex_store_promo_one_label(the_person):
             "[the_person.possessive_title] starts to strip down."
             $ the_person.strip_outfit(position = "stand2", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
-            $ the_person.outfit = SB_advert_one_outfit.get_copy()
+            $ the_person.apply_outfit(SB_advert_one_outfit)
             $ the_person.draw_person()
         "The blue nightgown":
             "[the_person.possessive_title] starts to strip down."
             $ the_person.strip_outfit(position = "stand2", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
-            $ the_person.outfit = SB_advert_two_outfit.get_copy()
+            $ the_person.apply_outfit(SB_advert_two_outfit)
             $ the_person.draw_person()
         "the pink one piece":
             "[the_person.possessive_title] starts to strip down."
             $ the_person.strip_outfit(position = "stand2", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
-            $ the_person.outfit = SB_advert_three_outfit.get_copy()
+            $ the_person.apply_outfit(SB_advert_three_outfit)
             $ the_person.draw_person()
     "As she changes you stand and gawk at her amazing body."
     the_person.char "Don't worry [the_person.mc_title], we're almost done. What should I do for this one?"
@@ -864,7 +864,7 @@ label starbuck_sex_store_promo_two_label(the_person):
     the_person.char "Okay, let me just get changed really quick."
     $ the_person.strip_outfit(position = "stand2", exclude_feet = False)
     "Once she finishes stripping, she grabs the lingerie set and puts it on."
-    $ the_person.outfit = SB_advert_four_outfit.get_copy()
+    $ the_person.apply_outfit(SB_advert_four_outfit)
     $ the_person.draw_person()
     $ the_person.wardrobe.add_outfit(SB_advert_four_outfit)
     $ del SB_advert_four_outfit
@@ -991,7 +991,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     "[the_person.possessive_title] starts to strip down."
     $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
     "Once she finishes stripping, she grabs the panties and puts them on."
-    $ the_person.outfit = SB_advert_five_outfit.get_copy()
+    $ the_person.apply_outfit(SB_advert_five_outfit)
     $ the_person.draw_person()
     $ the_person.wardrobe.add_underwear_set(SB_advert_five_outfit)
     $ del SB_advert_five_outfit
@@ -1172,7 +1172,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     "[the_person.possessive_title] starts to strip down in front of you."
     $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
     "Once she finishes stripping, she puts on some incredibly sexy pink lingerie."
-    $ the_person.outfit = SB_advert_six_outfit.get_copy()
+    $ the_person.apply_outfit(SB_advert_six_outfit)
     $ the_person.draw_person()
     $ the_person.wardrobe.add_outfit(SB_advert_six_outfit)
     $ del SB_advert_six_outfit
@@ -1364,7 +1364,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     mc.name "Well, it would be rude to say no."
     "[the_person.possessive_title] gives you a big hug."
     the_person.char "Great! Let's get it done. It won't take us long!"
-    $ the_person.outfit = (the_person.wardrobe.decide_on_outfit(40)).get_copy()
+    $ the_person.apply_outfit(the_person.wardrobe.decide_on_outfit(40))
 
     #TODO move the scene to the player's bedroom. and get dressed
     $ mc.change_location(bedroom)
@@ -1415,7 +1415,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         "You strip off your work clothes, down to your boxers. You head to [the_person.title]'s bedroom and hop in her bed."
         the_person.char "I'll be in in a minute!"
         "You see [the_person.title] step into the bathroom. In a few minutes she emerges, ready for bed."
-        $ the_person.outfit = the_person.wardrobe.get_random_appropriate_underwear(the_person.sluttiness, 10, WardrobePreference(the_person))
+        $ the_person.apply_outfit(the_person.wardrobe.get_random_appropriate_underwear(the_person.sluttiness, 10, WardrobePreference(the_person)))
         $ the_person.draw_person()
         "She crawls into bed beside you. You cuddle up behind her and enjoy the warmth of her body as you drift off to a restful night's sleep."
         $ morning_fun_chance = 100 #No action tonight? she wakes up hungry
@@ -1434,8 +1434,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         "You close your eyes and enjoy the sensations. [the_person.title]'s hands move lower down your belly and begins to stroke you through your pants."
         "She expertly begins to unbuckle your belt, and undoes your pants. You sigh when she puts one hand down your underwear and begins to jack you off slowly. She whispers into your ear."
         the_person.char "Come on... lets go to bed."
-        $ SB_nude_outfit = Outfit("Nude")
-        $ the_person.outfit = SB_nude_outfit.get_copy()
+        $ the_person.apply_outfit(Outfit("Nude"))
         $ the_person.draw_person(position = "back_peek")
         "She backs away from you and walks into her bedroom. You turn and watch her, seeing she is completely naked."
         "You quickly follow her."
@@ -1522,8 +1521,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         "You sit down and enjoy your coffee. It has been about 5 minutes now. The crack in the door is calling you. Should you join her in the shower? Or let her finish?"
         menu:
             "Shower with her.":
-                $ SB_nude_outfit = Outfit("Nude")
-                $ the_person.outfit = SB_nude_outfit.get_copy()
+                $ the_person.apply_outfit(Outfit("Nude"))
                 #TODO shower background?
                 "You decide you've waited long enough and make your way into the bathroom. Inside you smell the scent of lavender body wash and quickly spy [the_person.title]'s soapy body through the hazy steam."
                 $ the_person.draw_person(position = "back_peek")
@@ -1558,8 +1556,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
                     call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_wall(), skip_intro = True, position_locked = True) from _call_sex_description_SBS123
                     "You spend a moment recovering while [the_person.title] rinses herself off."
                 #TODO set outfit to regular nude again. She washed the cum off!
-                $ SB_nude_outfit = Outfit("Nude")
-                $ the_person.outfit = SB_nude_outfit.get_copy()
+                $ the_person.apply_outfit(Outfit("Nude"))
                 $ the_person.arousal = 50   #A hard setting of arousal... Did this to avoid an entry in the log. Not ideal code#
                 $ the_person.draw_person(position = "stand2")
                 "You both quickly finish showering. As you hop out, you quickly dry off and [the_person.title] takes your hand."
@@ -1638,7 +1635,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         the_person.char "I'm gonna go hop in the shower. Feel free to let yourself out! Thanks for spending the night [the_person.mc_title]!"
         "[the_person.title]heads to the bathroom. You grab your stuff and head out."
     $ the_person.reset_arousal()
-    $ the_person.outfit = (the_person.wardrobe.decide_on_outfit(40)).get_copy()
+    $ the_person.apply_outfit(the_person.wardrobe.decide_on_outfit(40))
     $ mc.location.show_background()
     $ renpy.scene("Active")
     return

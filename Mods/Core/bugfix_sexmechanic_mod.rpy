@@ -5,7 +5,6 @@ init 5 python:
     config.label_overrides["fuck_person"] = "fuck_person_bugfix"
     config.label_overrides["check_position_willingness"] = "check_position_willingness_bugfix"
     config.label_overrides["pick_object"] = "pick_object_enhanced"
-    config.label_overrides["girl_choose_position"] = "girl_choose_position_enhanced"
 
 label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, exit_when_guy_cums = True):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
@@ -72,11 +71,18 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
         if girl_in_charge:
             # The girls decisions set round_choice here.
             if position_choice is None:
-                call girl_choose_position_enhanced(the_person) from _call_girl_choose_position_bugfix #Get her to pick a position based on what's available #TODO: This function
+                call girl_choose_position(the_person) from _call_girl_choose_position_bugfix #Get her to pick a position based on what's available #TODO: This function
                 $ position_choice = _return #Can be none, if no option was available for her to take.
+                if position_choice is not None:
+                    # We need to make sure we're using an appropriate object
+                    call girl_choose_object(the_person, position_choice) from _call_girl_choose_object_bugfix
+                    $ object_choice = _return
             if position_choice is None: #There's no position we can take
                 "[the_person.title] can't think of anything more to do with you."
                 $ round_choice = "Girl Leave"
+            if object_choice is None:
+                "[the_person.title] looks around, but can't see anywhere to have fun with you."
+                $ round_choice = "Girl Leave"                
             elif report_log.get("guy orgasms", 0) > 0 and report_log.get("girl orgasms", 0) > 0: #Both parties have been satisfied
                 the_person.char "Whew, that felt amazing. It's good to know it was as good for you as it was for me."
                 $ round_choice = "Girl Leave"
@@ -336,13 +342,3 @@ label pick_object_enhanced(the_person, the_position, forced_object = None):
     $ the_person.add_situational_slut("sex_object", picked_object.sluttiness_modifier, the_position.verbing + " on a " + picked_object.name)
     $ the_person.add_situational_obedience("sex_object",picked_object.obedience_modifier, the_position.verbing + " on a " + picked_object.name)
     return picked_object
-
-label girl_choose_position_enhanced(the_person):
-    $ position_option_list = []
-    python:
-        for position in list_of_girl_positions:
-            if mc.location.has_object_with_trait(position.requires_location):
-                if position.her_position_willingness_check(the_person):
-                    position_option_list.append(position)
-        picked_position = get_random_from_list(position_option_list)
-    return picked_position

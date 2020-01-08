@@ -9,11 +9,11 @@ label family_morning_breakfast_enhanced_label():
         sis_slutty = False
         if mom.sluttiness > 40:
             mom_slutty = True
-            mom.outfit = mom.wardrobe.get_random_appropriate_underwear(mom.sluttiness)
+            mom.apply_outfit(mom.wardrobe.get_random_appropriate_underwear(mom.sluttiness))
 
         if lily.sluttiness > 40:
             sis_slutty = True
-            lily.outfit = lily.wardrobe.get_random_appropriate_underwear(lily.sluttiness)
+            lily.apply_outfit(lily.wardrobe.get_random_appropriate_underwear(lily.sluttiness))
 
         #Make sure we're in our bedroom when the event starts.
         mc.change_location(bedroom)
@@ -130,7 +130,7 @@ label family_morning_breakfast_enhanced_label():
                     $ scene_manager.update_actor(lily, position = "walking_away", character_placement = character_left_flipped)
                     "Your mother leaves to get dressed. [lily.possessive_title] ends up serving out breakfast for all three of you."
                     $ scene_manager.update_actor(lily, position = "sitting")
-                    $ mom.outfit = mom.planned_outfit.get_copy()
+                    $ mom.apply_outfit(mom.planned_outfit)
                     lily.char "She's been so weird lately. I don't know what's going on with her..."
                     $ scene_manager.add_actor(mom, position = "sitting", character_placement = character_right)
                     $ lily.change_happiness(5)
@@ -181,7 +181,7 @@ label family_morning_breakfast_enhanced_label():
             $ scene_manager.remove_actor(lily)
             $ scene_manager.update_actor(mom, position = "walking_away", emotion = "sad")
             mom.char "I don't know how I manage to survive with you two around!"
-            $ lily.outfit = lily.planned_outfit.get_copy()
+            $ lily.apply_outfit(lily.planned_outfit)
             $ lily.change_stats(obedience = 10, happiness = -5)
             $ mom.change_obedience(-2)
             $ scene_manager.add_actor(lily, position = "sitting")

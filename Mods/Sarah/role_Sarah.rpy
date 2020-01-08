@@ -1378,7 +1378,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
     $ the_person = sarah
     $ scene_manager = Scene()
     $ rand_roll = renpy.random.randint(0,100)
-    $ the_person.outfit = SB_vaginal_nude_outfit.get_copy()
+    $ the_person.apply_outfit(SB_vaginal_nude_outfit)
 
     $ threesome_wakeup = False
     $ threesome_partner = None
@@ -1468,7 +1468,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
     pass
     #sexy morning wakeup starts here
     if threesome_wakeup:
-        $ threesome_partner.outfit = SB_vaginal_nude_outfit.get_copy()
+        $ threesome_partner.apply_outfit(SB_vaginal_nude_outfit)
         "You are slow to wakeup. You had several sexy dreams the night before, and you aren't ready to leave them yet."
         "It feels good, in your dream, as you slowly push your cock into [the_person.title]'s hot pussy."
         "Something stirs you though. You hear a hushed whisper. But that wasn't to you? Then a little giggle."
