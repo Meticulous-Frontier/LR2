@@ -26,7 +26,6 @@ init 2 python:
 
 
 
-
     def Sarah_mod_initialization(): #Add actionmod as argument#
 
         Sarah_wardrobe = wardrobe_from_xml("Sarah_Wardrobe")
@@ -59,6 +58,9 @@ init 2 python:
         sarah.event_triggers_dict["epic_tits_progress"] = 0    # 0 = not started, 1 = mandatory event triggered, 2 = tits epic
         sarah.event_triggers_dict["drinks_out_progress"] = 0   # 0 = not started, 1 = third wheel event complete, 2 = grab drinks complete
         sarah.event_triggers_dict["dating_path"] = False       # False = not started, or doing FWB during story, True = dating her.
+        sarah.event_triggers_dict["stripclub_progress"] = 0    # 0 = not complete, 1 = strip club even complete
+        sarah.event_triggers_dict["initial_threesome_target"] = None    #this will hold who sarah decides she wants to have a threesome with.
+        sarah_event_triggers_dict["threesome_unlock"] = False   #Set this to true after first threesome with Sarah
 
         # add appoint
         office.actions.append(HR_director_appointment_action)
@@ -142,7 +144,6 @@ init -1 python:
         return False
 
     def Sarah_stripclub_story_requirement():
-        return False   #Disabled while I work on it
         if sarah.event_triggers_dict.get("epic_tits_progress", 0) < 2:  #Don't run until after she has bigger tits
             return False
         if time_of_day > 2:   #Only in the evening when the strippers are at the club
@@ -151,6 +152,10 @@ init -1 python:
                     if mc.is_at_work():
                         return True
         return False
+
+    def Sarah_threesome_request_requirement():
+        return False        #Return false while I write the events
+
 
     def Sarah_remove_bra_from_wardrobe(wardrobe):  #Test this function
         for outfit in wardrobe.outfits:
@@ -999,6 +1004,7 @@ label Sarah_tits_reveal_label():
 
 label Sarah_stripclub_story_label():
     $ the_person = sarah
+    $ scene_manager = Scene()
     #TODO going out outfit
     "Lost in thought as you get your work done in the silence of the weekend, a sudden voice startles you."
     the_person.char "[the_person.mc_title]! You crazy workaholic, let's go blow off some steam!"
@@ -1197,9 +1203,356 @@ label Sarah_stripclub_story_label():
     else:
         the_person.char "But remember, no touching!"
         mc.name "No promises."
+    $ scene_manager.update_actor(the_person, position = "kneeling1")
+    "[the_person.title] climbs up on your lap."
 
+    if the_person.outfit.tits_available():
+        "She runs her hands through your hair and brings your face up to her naked, heaving chest."
+    else:
+        "She begins to undress her top half right in front of you, letting you watch as she exposes her soft skin."
+        $ scene_manager.strip_actor_outfit(the_person, exclude_lower = True, exclude_feet = True)
+        "As she pulls off her last piece of clothing, she runs her hands through your hair and brings your face to her naked, heaving chest."
 
+    if the_person.event_triggers_dict.get("dating_path", False) == True:
+        "Your hands naturally reach up and begin to fondle [the_person.possessive_title]'s generous breasts."
+        the_person.char "Mmmm that's it baby. It feels so good when you touch me there."
+        $ the_person.change_arousal(10)
+    else:
+        "Your hands begin to move towards [the_person.possessive_title]'s generous breasts, but she slaps your hands away."
+        the_person.char "Hey! You know the rules, no touching!"
+        "You quickly lower your hands to your sides."
+    "[the_person.title] is slowly grinding herself in circles against your lap. The heat of her body against yours is really getting you worked up."
+    "With the excitement from the strip club earlier, you are starting to ache for some relief."
+    $ mc.change_arousal(10)
+    $ scene_manager.update_actor(the_person, position = "back_peek")
+    "[the_person.possessive_title] stands up and turns away from you."
+    if the_person.outfit.vagina_available():
+        "Her hips sway back forth. Her shapely ass inches from your face makes a tantalizing target."
+        $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False, exclude_feet = False)
+    else:
+        "She begins to slowly strip her bottom half down in front of you, swaying her hips tantalizingly as she does so."
+        $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False, exclude_feet = False)
+        "Now naked in front of you, you can't tear your eyes away from her base ass, mere inches from your face."
+    "Her pussy is dripping with excitement. It looks like you could probably make her cum in seconds, she is so turned on."
+    the_person.char "Oh god I'm so hot... I can't take it!"
+    $ scene_manager.update_actor(the_person, position = "standing_doggy")
+    "She bends over and pushes her ass back against your face. You immediately begin to lick and probe her slit with your tongue."
+    the_person.char "It was so hot having those girls strip for us earlier... I need to cum, make me cum!"
+    "You reach up and grab her hips with your hands. You give one cheek a hard spank while your tongue snakes its way inside of her."
+    $ the_person.change_arousal(30)
+    the_person.char "Yes! Oh fuck I'm gonna cum!!!"
+    $ mc.listener_system.fire_event("girl_climax", the_person = the_person)
+    $ the_person.change_happiness(5)
+    $ the_person.change_obedience(5)
+    $ the_person.change_slut_temp(5)
+    "You grip her hips roughly to hold her still as you bring her to a climax. Her knees start to buckle but you hold her ass firmly in place."
+    "She gives a low, steady moan when she finally finishes climaxing."
+    $ the_person.change_arousal(-(the_person.arousal / 3))
+    the_person.char "Oh god I need that so bad... I think... you're gonna have to take over, [the_person.mc_title]."
+    "The excitement of the evening has you on edge, so you grab [the_person.title] and throw her down on the bed."
+    $ scene_manager.update_actor(the_person, position = "doggy")
+    "You quickly strip out of your clothes and get behind her, lining yourself up with her slit."
+    if mc.energy < 30:
+        $ mc.energy = 30
+    call fuck_person(the_person, start_position = doggy, start_object = make_bed(), skip_intro = False, girl_in_charge = False, position_locked = True) from _call_sex_description_stripclub_aftermath_1
+    "When you finish with her, [the_person.title] collapses in the bed."
+    $ scene_manager.update_actor(the_person, position = "missionary")
+    "You cuddle up next to her as you both catch your breath."
+    #complex decision tree here.
+    # If dating path, have her ask to be your girlfriend officially.
+    # If she is already dating someone else, have her break up with them
+    # If she is already married, turn it into an affaire
+    # if she is engaged, have her break it off.
+    # If not dating path, she recovers, then heads out
+    if girlfriend_role in the_person.special_role:  #You are already dating her via other means. She just cuddles up with you.
+        "As you both recover, [the_person.possessive_title] starts kissing you along your neck, then whispers in your ear."
+        the_person.char "Thank you for the good time tonight. I love you."
+        mc.name "I love you too."
 
+    elif the_person.event_triggers_dict.get("dating_path", False) == True:
+        "After you both recover, you continue to lie together, enjoying your flesh being against one another. She seems deep in though, but eventually asks you a question."
+        if the_person.relationship == "Single":
+            the_person.char "So... we've done this a couple times now and... I know this is usually where the man kind of takes the lead but umm..."
+            the_person.char "Everytime I think about you, and being with you, I get so happy, and I start smiling."
+            the_person.char "Is it... can we just make it official? I want to be with you. I want to be your girlfriend!"
+            menu:
+                "Make it official":
+                    the_person.char "Yes! Oh my god you have no idea how happy that makes me to hear, that you feel the same way!"
+                    $ the_person.change_happiness(15)
+                    $ the_person.change_love(5)
+                    "She kisses you, and you kiss her back."
+                    $ the_person.special_role.append(girlfriend_role)
+
+                "Let's just be friends":
+                    the_person.char "Ah... okay wow, I guess I was just... totally misinterpreting things between us..."
+                    $ the_person.change_happiness(-15)
+                    $ the_person.change_love(-20)
+                    $ the_person.event_triggers_dict["dating_path"] = False
+                    the_person.char "I didn't realize you just wanted things to be strictly physical between us. Is that what you want? Friends with benefits?"
+                    mc.name "Yes that is what I am looking for right now."
+                    the_person.char "Okay... I'm sorry I didn't realize. But I think I can manage that."
+
+        elif the_person.relationship == "Married":
+            the_person.char "So... we've done this a couple of times. I know, I'm a married woman, but I can't stop thinking about you."
+            the_person.char "Everytime I think about you, I get a little bit wet thinking about what you do to me."
+            the_person.char "Is this something you want to continue? I can't leave my husband but you can fuck me anytime you want!"
+            menu:
+                "Have an affair":
+                    the_person.char "Okay. Wow, I never thought I would do this..."
+                    "She reaches down and gives your softened cock a few strokes."
+                    the_person.char "But the things you do to me... my husband doesn't even come close!"
+                    $ the_person.special_role.append(affair_role)
+                    $ the_person.change_slut_temp(2)
+                "Let's keep it casual.":
+                    the_person.char "Ah, okay. So like, friends with benefits? Is that what we are talking about here?"
+                    mc.name "Exactly."
+                    the_person.char "Okay. That actually makes things a little easier for me. I can manage that!"
+                    the_person.char "And if my husband ever asks, I'm just with friends!"
+                    $ the_person.event_triggers_dict["dating_path"] = False
+        else:       #She is a girlfriend or a fiancee
+            the_person.char "So... we've done this a couple of times. I know, I'm seeing someone else right now, but I can't stop thinking about you."
+            the_person.char "Honestly, if you gave the word, I would call him up and dump him right now so that we could be together!"
+            the_person.char "So... should I do that? I just want to be your girlfriend!"
+            menu:
+                "Dump him for me":
+                    "[the_person.title] takes a deep breath, then slowly gets up."
+                    $ scene_manager.update_actor(the_person, position = "walking_away")
+                    the_person.char "Okay. For you, I'll do it. Here we go."
+                    "You watch as she dials her man. She talks quietly into her phone, so you can't make out everything she is saying."
+                    "It takes her several minutes, and you hear her apologize a few times, but eventually finishes and hangs up her phone."
+                    "She crawls back into bed beside you."
+                    $ scene_manager.update_actor(the_person, position = "missionary")
+                    "Well, it's official. I'm all yours now!"
+                    $ the_person.special_role.append(girlfriend_role)
+                    $ the_person.change_love(10)
+                    $ the_person.change_obedience(5)
+                    $ so_title = SO_relationship_to_title(the_person.relationship)
+                    $ ex_title = so_title[:4]
+                    $ the_person.relationship = "Single"
+                    $ the_person.SO_name = None
+                "Let's keep it casual.":
+                    the_person.char "Ah, okay. So like, friends with benefits? Is that what we are talking about here?"
+                    mc.name "Exactly."
+                    the_person.char "Okay. That actually makes things a little easier for me. I can manage that!"
+                    $ the_person.event_triggers_dict["dating_path"] = False
+
+    else:
+        "As you both recover, [the_person.possessive_title] just lays back and enjoys the warmth of your skin."
+        the_person.char "Mmmm, that was such a fun night, [the_person.mc_title]. I don't want to get up..."
+    $ the_person.event_triggers_dict["stripclub_progress"] = 1
+    $ staying_over = False
+    if girlfriend_role in the_person.special_role:
+        the_person.char "It feels so good to be next to you, I could lay like this all night."
+        mc.name "Why don't you? Just spend the night here."
+        the_person.char "Oh! That's a great idea!"
+        $ staying_over = True
+    elif affair_role in the_person.special_role:
+        the_person.char "It feels so good to be next to you, but I need to get home to my [the_person.so_title]."
+        mc.name "You don't have to. Just spend the night here."
+        the_person.char "I'm sorry I can't. Thanks for the offer though!"
+    else:
+        the_person.char "I need to get going... I guess. Thanks for the evening though. It was great!"
+        mc.name "You don't have to. Just spend the night here."
+        the_person.char "That's tempting, believe me, but I need to get home. Thanks for the offer!"
+    if staying_over:
+        $ scene_manager.update_actor(the_person, position = "walking_away")
+        "Worn out from your date with [the_person.possessive_title], you cuddle up with her and quickly fall asleep."
+        call SB_process_overnight_no_events() from _sarah_overnight_after_stripclub
+        call Sarah_spend_the_night() from sarah_stripclub_spend_the_night_sequence
+    else:
+        $ scene_manager.update_actor(the_person, position = "stand3")
+        "You lay on your bed and watch as [the_person.possessive_title] slowly gets her clothes on. She says goodbye then lets herself out."
+        $ scene_manager.remove_actor(the_person)
+
+    $ Sarah_threesome_request_action = Action("Sarah Threesome Request",Sarah_threesome_request_requirement,"Sarah_threesome_request_label")  #Create the next storyline event
+    $ mc.business.mandatory_crises_list.append(Sarah_threesome_request_action) #Add the event here so that it pops when the requirements are met.
+
+    return
+
+label Sarah_threesome_request_label():
+    #TODO figure out how I want to write this. Needs an outline#
+    pass
+    return
+
+label Sarah_spend_the_night():      #She spends the night with you. Have a random chance of a threesome with mom or lily
+    $ the_person = sarah
+    $ scene_manager = Scene()
+    $ rand_roll = renpy.random.randint(0,100)
+    $ the_person.outfit = SB_vaginal_nude_outfit.get_copy()
+
+    $ threesome_wakeup = False
+    $ threesome_partner = None
+    if rand_roll < 50: #Wakeup to sexy times
+        if sarah.event_triggers_dict.get("threesome_unlock", 0) == 1 and rand_roll < 20: #If willing, Lily or mom have a threesome
+            if rand_roll < 10: #Try lily first
+                if willing_to_threesome(the_person, lily):
+                    $ threesome_partner = lily
+                    $ threesome_wakeup = True
+                elif willing_to_threesome(the_person, mom):
+                    $ threesome_partner = mom
+                    $ threesome_wakeup = True
+            else:
+                if willing_to_threesome(the_person, mom):
+                    $ threesome_partner = mom
+                    $ threesome_wakeup = True
+                elif willing_to_threesome(the_person, lily):
+                    $ threesome_partner = lily
+                    $ threesome_wakeup = True
+    else:
+
+        $ scene_manager.add_actor(the_person, position = "walking_away")
+        "You slowly wake up, with your arms around [the_person.possessive_title], spooning with her."
+        "She is still sleeping, but her skin is setting off electric sparks everywhere it is touching yours."
+        "Your hands cup and squeeze one of her breasts. It's so full and hot, they feel so good in your hands."
+        the_person.char "Mmmmmmmm......"
+        "[the_person.title] moans but doesn't stir. Maybe you could surprise her with a little good morning dicking."
+        menu:
+            "Try to slide yourself in":
+                pass
+            "Get ready for the day":
+                "Thinking about your tasks for the day, you feel yourself get a bit anxious about wasting the morning."
+                "You get up and head for bathroom to take a leak."
+                "When you come back, [the_person.title] is awake."
+                $ scene_manager.update_actor(the_person, position = "missionary")
+                the_person.char "Good morning! I slept great."
+                "You both get ready for the day before heading out."
+                $ scene_manager.remove_actor(the_person)
+                return
+        "Your cock is already hard, being up against [the_person.title], but she may not be fully wet yet."
+        "You spit into your hand and rub it on your dick a few times, getting it lubed up."
+        "When you feel good about it, you reach down and gently spread her cheeks apart. You position yourself at her entrance and give it a little push."
+        "You are able to ease yourself about halfway in, but the angle makes it hard to get deep penetration."
+        the_person.char "Oh [the_person.mc_title]. Mmmmmm"
+        "She's still asleep, but is still responding to your touch. She must be a heavy sleeper! Or maybe she is just really worn out from last night..."
+        "You give her a few gentle, smooth strokes. You can feel her pussy getting wetter with each stroke as her body begins to respond to the stimulation."
+        $ the_person.change_arousal(20)
+        "With her legs closed and on her side like this, her pussy feels really tight. You can feel her gripping you everytime you start to pull it out."
+        $ mc.change_arousal(15)
+        "Your reach around her with your hand and grab one of her tits. You start to get a little rough with her and pinch and pull at one of her nipples."
+        $ the_person.change_arousal(20)
+        $ mc.change_arousal(15)
+        the_person.char "Mmm that feels so... wait... [the_person.mc_title]?"
+        $ scene_manager.update_actor(the_person, position = "back_peek", emotion = "happy")
+        "[the_person.possessive_title] wakes up and looks back at you smiling."
+        the_person.char "Oh my god that feels so good... Baby you know how to give a wakeup call, holy fuck!"
+        "Encouraged by her words, you reach your hand down and lift her leg, giving you a better angle for deeper penetration."
+        "You pick up the pace and begin to fuck her earnestly."
+        $ the_person.change_arousal(30) #70
+        $ mc.change_arousal(25) #55
+        the_person.char "Oh yes that feels so good, fuck me good!"
+        "She reaches down and holds her leg for you, freeing up your hand. You reach down between her legs and start to play with her clit."
+        "Her ass is making smacking noises now, everytime your hips drive your cock deep inside of her."
+        $ the_person.change_arousal(40) #110
+        $ mc.change_arousal(35) #90
+        the_person.char "Oh fuck, yes! YES!"
+        "She shoves her ass back against you as she cums. Her helpless body quivers in delight. Her moans drive you even harder."
+        $ mc.change_arousal(20) #110
+        mc.name "I'm gonna cum!"
+        the_person.char "Shove it in deep! I want to feel your seed inside me all day long!"
+        $ the_person.cum_in_vagina()
+        #TODO internal fetish specific dialogue
+        "You grab her hip and shove your cock deep and hold it there, cumming deep inside her. She moans and gasps with every spurt."
+        "Satisfied, you slowly pull out of her."
+        the_person.char "That's certainly one way to start the day... holy hell."
+        $ the_person.reset_arousal()
+        $ mc.arousal = 0
+        "You lay in bed together for a little longer, but soon it is time to start the day."
+        $ the_person.review_outfit(dialogue = False)
+        $ scene_manager.update_actor(the_person, position = "stand4")
+        "You both get ready for the day."
+        the_person.char "Alright, I need to get some things done today. Thanks for letting me spend the night!"
+        $ scene_manager.remove_actor(the_person)
+
+        return
+
+    pass
+    #sexy morning wakeup starts here
+    if threesome_wakeup:
+        $ threesome_partner.outfit = SB_vaginal_nude_outfit.get_copy()
+        "You are slow to wakeup. You had several sexy dreams the night before, and you aren't ready to leave them yet."
+        "It feels good, in your dream, as you slowly push your cock into [the_person.title]'s hot pussy."
+        "Something stirs you though. You hear a hushed whisper. But that wasn't to you? Then a little giggle."
+        threesome_partner.char "Mmmm, he's so big..."
+        $ threesome_partner.change_arousal(30)
+        "You must still be dreaming, that sounded like [threesome_partner.title]. Your cock feels amazing, wrapped in a warm, wet vice."
+        the_person.char "I know. He was grinding against me all night last night. It was making me so horny!"
+        $ the_person.change_arousal(30)
+        "Wait... what?"
+        "You slowly open your eyes."
+        $ scene_manager.add_actor(threesome_partner, position = "cowgirl")
+        "[threesome_partner.possessive_title] is on top of you, your cock inside of her. Holy fuck!"
+        "You open your eyes completely."
+        $ scene_manager.add_actor(the_person, position = "kneeling1", character_placement = character_center_flipped)
+        "[the_person.title] is beside her, touching herself while [theesome_partner.title] fucks you. She notices you wakeup."
+        the_person.char "Good morning! [threesome_partner.name] came in this morning looking for you, so I invited her to hop on for a bit."
+        threesome_partner.char "I'm sorry, I didn't realize your girlfriend was spending the night, and I was feeling needy this morning..."
+        "As she talks, [threesome_partner.title] starts to rock her hips back and forth, enjoying the fullness of being penetrated by you."
+        mc.name "Wow, what a wakeup... a guy could get used to this..."
+        the_person.char "Mmm, I don't mind sharing you. I need a little more stimulation than my fingers though..."
+        "[the_person.title] turns around, facing away from you and lifts one leg over your body, back her pussy up to your face."
+        the_person.char "Do me a favor and kiss me for a bit?"
+        mc.name "Mmm, definitely."
+        "You waste no time and dive right into [the_person.possessive_title]'s delicious cunt."
+        # TODO change this scene if the girls both like anal? Need to figure out how to handle starting in a specific threesome action
+        call start_threesome(threesome_partner, the_person, start_position = Threesome_double_down, round = 1, private = True, position_locked = False, affair_ask_after = False, hide_leave = False) from sarah_overnight_threesome_wakeup
+        $ afterglow_report = _return
+        $ scene_manager.update_actor(the_person, position = "missionary", character_placement = character_center_flipped)
+        $ scene_manager.update_actor(threesome_partner, position = "missionary", character_placement = character_right)
+        "All finished, the girls flop onto their backs, one on each side of you."
+        if afterglow_report["girl one orgasms"] > 0 and afterglow_report["girl two orgasms"] > 0:  #They both finished.
+            the_person.char "Oh wow, that was so hot..."
+            if the_person.get_opinion_score("incest") < 1:
+                $ update_opinion(the_person, "incest")
+            if threesome_partner == mom:
+                threesome_partner.char "I know... I just had a threesome with my son and his girlfriend... and I loved it!"
+                $ update_opinion(threesome_partner, "incest")
+            else:
+                threesome_partner.char "I know! A threesome with my bro and his girl... and I loved it!"
+                $ update_opinion(threesome_partner, "incest")
+            threesome_partner.char "It was amazing... [the_person.name] don't be a stranger now..."
+        else:
+            "You lay together for a few moments, enjoying each other's proximity."
+        $ scene_manager.update_actor(threesome_partner, position = "stand3")
+        "[threesome_partner.title] gets up, and remarks before leaving."
+        threesome_partner.char "That was fun! I'm gonna head back to my room. Thanks for sharing [the_person.name]!"
+        $ scene_manager.remove_actor(threesome_partner)
+        "She walks out, leaving you alone with [the_person.possessive_title]"
+        the_person.char "That's certainly one way to start the day... holy hell."
+        "You lay in bed together for a little longer, but soon it is time to start the day."
+        $ the_person.review_outfit(dialogue = False)
+        $ scene_manager.update_actor(the_person, position = "stand4")
+        "You both get ready for the day."
+        the_person.char "Alright, I need to get some things done. Thanks for letting me spend the night!"
+        $ scene_manager.remove_actor(the_person)
+
+    else:
+        "You are slow to wakeup. You had several sexy dreams the night before, and you aren't ready to leave them yet."
+        "It feels good, in your dream, as you slowly push your cock into [the_person.title]'s hot pussy."
+        "It's so wet and tight, it feels almost real..."
+        the_person.char "...[the_person.mc_title]... mmm.... I can't take it anymore..."
+        $ scene_manager.add_actor(the_person, position = "cowgirl")
+        $ the_person.change_arousal(30)
+        $ mc.change_arousal(30)
+        "You slowly open your eyes and discover [the_person.possessive_title] is on top of you, riding your cock."
+        the_person.char "Oh thank god you're awake. I swear you were poking me all night long! I kept hoping you would just stick it in, but I think you were sleeping."
+        the_person.char "I couldn't take it anymore. I hope you don't mind!"
+        "[the_person.title]'s epic tits are bouncing up and down right in front of you as she rides you."
+        mc.name "Definitely. Ride me good!"
+        call fuck_person(the_person, start_position = cowgirl, start_object = bedroom.get_object_with_name("bed"), skip_intro = True, girl_in_charge = True) from _sarah_cowgirl_wakeup_overnight_1
+        $ the_report = _return
+        if the_report.get("girl orgasms", 0) > 0:
+            $ the_person.change_love(5)
+            the_person.char "Oh wow I came so hard [the_person.mc_title]."
+            "She rolls over and kisses you, then rests her head on your chest."
+
+        "You lay in bed together for a little longer, but soon it is time to start the day."
+        $ the_person.reset_arousal()
+        $ mc.arousal = 0
+        $ the_person.review_outfit(dialogue = False)
+        $ scene_manager.update_actor(the_person, position = "stand4")
+        "You both get ready for the day."
+        the_person.char "Alright, I need to get some things done today. Thanks for letting me spend the night!"
+        $ scene_manager.remove_actor(the_person)
     return
 
 label watch_strip_show(the_person):  #This scene assumes scene manager is running and the_person is with you, so she won't strip for you.

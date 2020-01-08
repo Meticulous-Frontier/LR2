@@ -24,14 +24,11 @@ label mother_daughter_doubleteam_action_label():
             for person in town_relationships.get_business_relationships(["Daughter"]):
                 if willing_to_threesome( person.person_a, person.person_b):
                     mother_list.append(person.person_a) #Now have a list of mothers
-    #"[mother_list]"
-    python:
+
         scene_manager = Scene() # make sure we have a clean scene manager
         the_person_one = get_random_from_list(mother_list)
         daughter_req = town_relationships.get_existing_children(the_person_one)
-    #"[the_person_one.title]"
-    #"[daughter_list]"
-    python:
+
         for daughter_person in daughter_req:
             #renpy.say("", "[daughter_person.title]")
             if willing_to_threesome(the_person_one, daughter_person):

@@ -276,7 +276,8 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
     #end TODO
 
     $ position_choice.create_scene(the_person_one, the_person_two)
-    "As the girls get into position, you consider how to begin your threesome."
+    if round == 0:
+        "As the girls get into position, you consider how to begin your threesome."
     $ option_list = []
     python:
         for options in position_choice.mc_position:
@@ -297,8 +298,10 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
         if active_mc_position == None:
             "Something broke..."
             $ round_choice = "Leave"
-        else:
+        elif round == 0:
             $ active_mc_position.call_intro(the_person_one, the_person_two, mc.location, object_choice, round)
+            $ round_choice = None
+        else:
             $ round_choice = None
     while not finished:
         # if girl_in_charge:
@@ -664,7 +667,7 @@ label threesome_strip_menu(the_person_one, the_person_two):
 #                     return_bool =  True
 #     return return_bool                                                          #No acceptable position found, cannot join threesome
 
-label join_threesome(the_person_one, the_person_two, initial_position, private = true):  #We can use this function to add a second girl to an existing sex scene.
+label join_threesome(the_person_one, the_person_two, initial_position, private = True):  #We can use this function to add a second girl to an existing sex scene.
                                                                          #Works by selecting a position then calling threesome with the first position pre-set
 
     call pick_threesome(the_person_one, the_person_two, girl_one_position = initial_position) from _join_threesome_position_selection_1

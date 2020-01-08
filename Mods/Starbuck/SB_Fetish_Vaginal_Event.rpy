@@ -662,7 +662,7 @@ label SB_process_overnight_no_events():   #Use this label for overnights where t
             $ renpy.say("","Warning! Your company is losing money and unable to pay salaries or purchase necessary supplies! You have [days_remaining] days to restore yourself to positive funds or you will be foreclosed upon!")
     else:
         $ mc.business.bankrupt_days = 0
-
+    $ mc.energy = mc.max_energy
 
 
     call screen end_of_day_update() # We have to keep this outside of a python block, because the renpy.call_screen function does not properly fade out the text bar.

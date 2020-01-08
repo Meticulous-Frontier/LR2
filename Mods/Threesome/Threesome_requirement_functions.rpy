@@ -30,3 +30,15 @@ init -1 python:
             return False
         else:
             return True
+
+    def requirement_hard_both_vagina_both_like_anal(the_person_one, the_person_two):
+        if mc.recently_orgasmed:
+            return False
+        if the_person_one.get_opinion_score("anal sex") < 0:
+            return False
+        if the_person_two.get_opinion_score("anal sex") < 0:
+            return False
+        if the_person_one.outfit.vagina_available():
+            if the_person_two.outfit.vagina_available():
+                return True
+        return False
