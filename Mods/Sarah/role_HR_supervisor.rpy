@@ -1462,7 +1462,7 @@ label HR_director_monday_headhunt_update_label(the_person):
     else:
         the_person.char "I should have the time now to initiate another search. If you want me to start another talent search let me know!"
         $ set_HR_director_tag("business_HR_headhunter_progress", 0)
-    "Let's see if any recent recruiting policy updates will change how we look for employees."
+    the_person.char "Let's see if any recent recruiting policy updates will change how we look for employees."
     if get_HR_director_unlock("headhunter_obedience", False) == False and recruitment_obedience_improvement_policy.is_owned():
         the_person.char "Looks like I can target a new employee based on their free will! I can either scout for an obedient, or free spirited prospect."
         $ set_HR_director_unlock("headhunter_obedience", True)
@@ -1549,7 +1549,7 @@ init 1200 python:
             recruit.production_skill -= 2
             recruit.hr_skill -= 2
             recruit.supply_skill -= 2
-            recruit_market_skill -= 2
+            recruit.market_skill -= 2
             recruit.research_skill -= 2
 
 
