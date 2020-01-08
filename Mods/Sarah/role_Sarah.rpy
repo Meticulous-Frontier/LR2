@@ -1347,7 +1347,7 @@ label Sarah_stripclub_story_label():
         the_person.char "Oh! That's a great idea!"
         $ staying_over = True
     elif affair_role in the_person.special_role:
-        the_person.char "It feels so good to be next to you, but I need to get home to my [the_person.so_title]."
+        the_person.char "It feels so good to be next to you, but I need to get home."
         mc.name "You don't have to. Just spend the night here."
         the_person.char "I'm sorry I can't. Thanks for the offer though!"
     else:
