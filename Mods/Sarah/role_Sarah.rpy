@@ -1483,7 +1483,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         "[threesome_partner.possessive_title] is on top of you, your cock inside of her. Holy fuck!"
         "You open your eyes completely."
         $ scene_manager.add_actor(the_person, position = "kneeling1", character_placement = character_center_flipped)
-        "[the_person.title] is beside her, touching herself while [theesome_partner.title] fucks you. She notices you wakeup."
+        "[the_person.title] is beside her, touching herself while [threesome_partner.title] fucks you. She notices you wakeup."
         the_person.char "Good morning! [threesome_partner.name] came in this morning looking for you, so I invited her to hop on for a bit."
         threesome_partner.char "I'm sorry, I didn't realize your girlfriend was spending the night, and I was feeling needy this morning..."
         "As she talks, [threesome_partner.title] starts to rock her hips back and forth, enjoying the fullness of being penetrated by you."
