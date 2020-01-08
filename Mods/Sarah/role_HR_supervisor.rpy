@@ -1387,7 +1387,7 @@ label HR_director_headhunt_initiate_label(the_person):
     #TODO make the mandatory event next.
     $ set_HR_director_tag("recruit_day", day + days_to_find)
 
-    $ HR_director_headhunt_interview_action = Action("Prospect Interview",HR_director_headhunt_interview_action,"HR_director_headhunt_interview_label", args = the_person) #Set the trigger day for the next monday. Monday is day%7 == 0
+    $ HR_director_headhunt_interview_action = Action("Prospect Interview",HR_director_headhunt_interview_requirement,"HR_director_headhunt_interview_label", args = the_person) #Set the trigger day for the next monday. Monday is day%7 == 0
     $ mc.business.mandatory_crises_list.append(HR_director_headhunt_interview_action) #Add the event here so that it pops when the requirements are met.
     the_person.char "Is there anything else you need?"
 
@@ -1426,16 +1426,21 @@ label HR_director_headhunt_interview_label(the_person):
 
     call hire_select_process([prospect,make_person()]) from _call_hire_prospect_process_1  #Copying how Vren calls this... hopefully this is right...
 
-    if _return == prosect: #MC chooses to hire her
+    if _return == prospect: #MC chooses to hire her
         mc.name "Alright [the_person.title], this looks promising. Good work finding her."
         $ the_person.change_happiness(5)
         $ the_person.change_obedience(5)
         the_person.char "Alright! I'll give her the news."
-        call hire_someone(the_daughter) from _call_hire_HR_prospect_1
+        $ prospect.generate_home()
+        call hire_someone(prospect, add_to_location = True) from _call_hire_HR_prospect_1
+        $ prospect.set_title(get_random_title(prospect))
+        $ prospect.set_possessive_title(get_random_possessive_title(prospect))
+        $ prospect.set_mc_title(get_random_player_title(prospect))
         the_person.char "Give me the rest of the week to catch up on my normal HR work. If you want me to start the process again, talk to me on Monday."
     else:
         mc.name "I'm sorry, this wasn't exactly what I had in mind."
         the_person.char "Ah, okay. Well give me the rest of the week to catch up on my normal HR work. If you want me to start the process again, talk to me on Monday."
+    $ del prospect
     return
 
 
@@ -1508,7 +1513,7 @@ init 1200 python:
             main_skill += 4
 
         recruit = create_random_person(tits = get_HR_director_tag("recruit_bust", None),
-        start_obedience = get_HR_director("recruit_obedience"),
+        start_obedience = get_HR_director_tag("recruit_obedience"),
         start_sluttiness = get_HR_director_tag("recruit_slut"),
         relationship = get_HR_director_tag("recruit_marital"),
         kids = get_HR_director_tag("recruit_kids"))
@@ -1546,4 +1551,6 @@ init 1200 python:
             recruit.supply_skill -= 2
             recruit_market_skill -= 2
             recruit.research_skill -= 2
+
+
         return recruit
