@@ -316,7 +316,7 @@ init -1:
 
         Person.strip_outfit = strip_outfit
 
-        def run_move_enhanced(self,location): 
+        def run_move_enhanced(self,location):
             self.sexed_count = 0 #Reset the counter for how many times you've been seduced, you might be seduced multiple times in one day!
 
             if time_of_day == 0: #It's a new day, get a new outfit out to wear!
@@ -356,9 +356,9 @@ init -1:
             if self.outfit and self.planned_outfit.slut_requirement > self.sluttiness * 0.75:
                 # only changes sluttiness in low sluttiness range after that she won't care anymore
                 if self.sluttiness < 40:
-                    self.change_slut_temp(self.get_opinion_score("skimpy outfits"), add_to_log = False)         
-            
-            #A conservative outfit is defined as the bottom 25% of a girls natural sluttiness.                    
+                    self.change_slut_temp(self.get_opinion_score("skimpy outfits"), add_to_log = False)
+
+            #A conservative outfit is defined as the bottom 25% of a girls natural sluttiness.
             if self.outfit and self.planned_outfit.slut_requirement < self.sluttiness * 0.25:
                 # happiness won't go below 80 or over 120 by this trait and only affects in low sluttiness range, after that she won't care
                 if self.happiness > 80 and self.happiness < 120 and self.sluttiness < 40:
@@ -500,6 +500,22 @@ init -1:
         # Add decrease opinion function to person class
         Person.decrease_opinion_score = decrease_opinion_score
 
+        ##Max the opinion on a specific topic (opinion)
+        def max_opinion_score(self, topic, add_to_log = True):
+            score = self.get_opinion_score(topic)
+            if score < 2:
+                if topic in self.sexy_opinions:
+                    self.sexy_opinions[topic][0] = 2
+                if topic in self.opinions:
+                    self.opinions[topic][0] = 2
+
+                if add_to_log:
+                    mc.log_event((self.title or self.name) + " " + opinion_score_to_string(2) + " " + str(topic), "float_text_green")
+            return
+
+        # Add max opinion function to person class
+        Person.max_opinion_score = max_opinion_score
+
         # Change Multiple Stats for a person at once (less lines of code, better readability)
         def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut_temp = None, slut_core = None, add_to_log = True):
             if not obedience is None:
@@ -537,7 +553,7 @@ init -1:
             else:
                 self.outfit.update_slut_requirement()
                 # only show review message when parameter is true and she doesn't feel comfortable in her current outfit
-                dialogue = dialogue and self.outfit.slut_requirement > self.sluttiness   
+                dialogue = dialogue and self.outfit.slut_requirement > self.sluttiness
                 self.apply_outfit(self.planned_outfit)    # always restore outfit
                 if dialogue:
                     self.call_dialogue("clothing_review") # must be last call in function
