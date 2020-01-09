@@ -282,6 +282,7 @@ label Sarah_third_wheel_label():
     #TODO going out outfit
     "By yourself on the weekend at work, you get up for a minute and decide to stretch your legs and walk the hallways for a bit."
     "As you pass by the HR offices, you notice the HR Director's office door is open and the light is on. You decide to investigate."
+    $ scene_manager = Scene() # make sure we have a clean scene manager
     $ scene_manager.add_actor(the_person, position = "sitting")
     "You see [the_person.possessive_title] sitting at her desk, rummaging through her drawers looking for something."
     "She notices you step in her door and looks surprised."
