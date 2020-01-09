@@ -58,6 +58,12 @@ init -1 python:
     # Initialize the randomizer
     renpy.random.seed()
 
+    # use this as initalization method for the ActionMod to make it disabled by default
+    def init_action_mod_disabled(self):
+        self.enabled = False
+        return
+
+
     # BUGFIX MAIN CODE: The action functions are called wrong and the count has wrong indention level, so only 1 role gets checked.
     def valid_role_actions_enhanced(self):
         count = 0

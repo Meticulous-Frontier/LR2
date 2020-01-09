@@ -56,9 +56,10 @@ init 2 python:
                 return True
         return False
 
+
 init 5 python:
     # Schedule Actions
-    mc_schedule_person_action = ActionMod("Schedule [the_person.title]", mc_schedule_person_requirement, "mc_schedule_menu_label", menu_tooltip = "Schedule where the person should be throughout the day.", category = "Generic People Actions")
+    mc_schedule_person_action = ActionMod("Schedule [the_person.title]", mc_schedule_person_requirement, "mc_schedule_menu_label", menu_tooltip = "Schedule where the person should be throughout the day.", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
     schedule_early_morning_action = Action("Early Morning", schedule_early_morning_requirement, "mc_schedule_person_label", args = [0], menu_tooltip = "Schedule where the person should be during the Early Morning.")
     schedule_actions_list.append(schedule_early_morning_action)
@@ -82,13 +83,13 @@ init 5 python:
     mc_hire_person_action = ActionMod("Employ [the_person.title]", mc_hire_person_requirement, "mc_hire_person_label", menu_tooltip = "Hire the the person to work for you in your business.", category = "Generic People Actions")
 
     # Rename Person | Opens a menu that allows you to change first and last name plus a (non- appended) custom the_person.title
-    mc_rename_person_action = ActionMod("Rename [the_person.title]", mc_action_rename_person_requirement, "mc_rename_person_label", menu_tooltip = "Change the name of the person.", category = "Generic People Actions")
+    mc_rename_person_action = ActionMod("Rename [the_person.title]", mc_action_rename_person_requirement, "mc_rename_person_label", menu_tooltip = "Change the name of the person.", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
     # Spend the Night | Allows you to sleep in the home of a person you have increased the love stat.
-    mc_spend_the_night_action = ActionMod("Spend the night with [the_person.possessive_title]", mc_action_spend_the_night_requirement, "mc_spend_the_night_label", menu_tooltip = "Allows you to sleep in this location.", category = "Generic People Actions")
+    mc_spend_the_night_action = ActionMod("Spend the night with [the_person.possessive_title]", mc_action_spend_the_night_requirement, "mc_spend_the_night_label", menu_tooltip = "Allows you to sleep in this location.", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
     # Pay to Strip | Allows you to enter the pay_strip label used in certain events if requirements are met.
-    pay_to_strip_action = ActionMod("Pay [the_person.title] to strip", mc_action_pay_to_strip_requirement, "mc_pay_to_strip_label", menu_tooltip = "Pay the person to give you a strip tease.", category = "Generic People Actions")
+    pay_to_strip_action = ActionMod("Pay [the_person.title] to strip", mc_action_pay_to_strip_requirement, "mc_pay_to_strip_label", menu_tooltip = "Pay the person to give you a strip tease.", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
     main_character_actions_list = [mc_schedule_person_action, mc_start_follow_action, mc_stop_follow_action, mc_hire_person_action, mc_rename_person_action, mc_spend_the_night_action, pay_to_strip_action]
 

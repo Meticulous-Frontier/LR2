@@ -11,10 +11,6 @@ init 3 python:
                     return True
         return False
 
-    def sister_ntr_mod_init(self):
-        self.enabled = False
-        return        
-
     def select_position(the_person):
         positions = ["bj"]
         if the_person.outfit.vagina_available():
@@ -26,7 +22,7 @@ init 3 python:
 
     sister_ntr_mod_action = ActionMod("Sister NTR",sister_ntr_crisis_requirement,"sister_ntr_crisis_action_label", 
         menu_tooltip = "At night you hear strange sounds out of [lily.possessive_title]'s bedroom", category = "NTR",
-        initialization = sister_ntr_mod_init,
+        initialization = init_action_mod_disabled,
         is_crisis = True, crisis_weight = sister_ntr_mod_weight)
 
 label sister_ntr_crisis_action_label:

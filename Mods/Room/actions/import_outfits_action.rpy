@@ -13,12 +13,15 @@ init 2 python:
 
     def import_wardrobe_mod_initialization(self):
         bedroom.actions.append(self)
+        self.enabled = False
         return
     def give_wardrobe_mod_initialization(self):
         clothing_store.actions.append(self)
+        self.enabled = False
         return
     def give_uniform_mod_initialization(self):
         office.actions.append(self)
+        self.enabled = False
         return
 
     def check_import_xml_file(xml_filename):

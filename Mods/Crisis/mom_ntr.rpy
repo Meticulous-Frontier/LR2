@@ -10,13 +10,9 @@ init 2 python:
                 return True
         return False
 
-    def mom_ntr_mod_init(self):
-        self.enabled = False
-        return
-
     mom_ntr_mod_action = ActionMod("Mom NTR",mom_ntr_mod_requirement,"mom_ntr_mod_action_label",
         menu_tooltip = "At night you hear strange sounds out of [mom.possessive_title]'s bedroom", category = "NTR", 
-        initialization = mom_ntr_mod_init,
+        initialization = init_action_mod_disabled,
         is_crisis = True, crisis_weight = mom_ntr_mod_weight)
 
 label mom_ntr_mod_action_label:

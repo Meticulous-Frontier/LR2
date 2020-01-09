@@ -8,6 +8,7 @@ init 3 python:
 
     def company_wardrobe_initialization(self):
         lobby.actions.append(self)
+        self.enabled = False
         return
 
     company_wardrobe_action = ActionMod("Add Company Wardrobe", company_wardrobe_requirement, "append_company_wardrobe", initialization = company_wardrobe_initialization,  
