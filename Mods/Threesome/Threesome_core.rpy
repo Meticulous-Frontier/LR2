@@ -400,7 +400,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                     $ active_mc_position = None
                 elif not active_mc_position.check_girl_one_energy(the_person_one):
 
-                    the_person_one.char "I'm exhausted [the_person.mc_title], I can't keep this up..."
+                    the_person_one.char "I'm exhausted [the_person_one.mc_title], I can't keep this up..."
                     $ position_choice = None
                     $ active_mc_position = None
                     if the_person_two.energy > 30:
@@ -410,9 +410,13 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                         menu:
                             "Fuck [the_person_two.title]":
                                 "[the_person_one.title] moves to the side and recovers while you resume activities with [the_person_two.title]."
-                                $ scene_manager.remove_actor(the_person_one)
+                                $ scene_manager.remove_actor(the_person_one, reset_actor = False)
                                 $ report_log["girl orgasms"] = report_log["girl two orgasms"]
                                 call fuck_person(the_person_two, private = private, report_log = report_log) from threesome_to_twosome_transition_1
+                                $ scene_manager.add_actor(the_person_one, character_placement = character_center_flipped)
+                                $ temp_log = _return
+                                $ report_log["girl two orgasms"] = temp_log["girl orgasms"]
+
                             "Done for now":
                                 "I think we should just be done for now." #TODO girl takes over if she needs to cum and hasn't yet
                         $ finished = True
@@ -420,7 +424,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                         the_person_two.char "Yeah me too. I think I need a break!"
                         $ finished = True
                 elif not active_mc_position.check_girl_two_energy(the_person_two):
-                    the_person_two.char "I'm exhausted [the_person.mc_title], I can't keep this up..."
+                    the_person_two.char "I'm exhausted [the_person_two.mc_title], I can't keep this up..."
                     $ position_choice = None
                     $ active_mc_position = None
                     if the_person_one.energy > 30:
@@ -429,9 +433,12 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                         menu:
                             "Fuck [the_person_one.title]":
                                 "[the_person_two.title] moves to the side and recovers while you resume activities with [the_person_one.title]."
-                                $ scene_manager.remove_actor(the_person_two)
+                                $ scene_manager.remove_actor(the_person_two, reset_actor = False)
                                 $ report_log["girl orgasms"] = report_log["girl one orgasms"]
                                 call fuck_person(the_person_one, private = private, report_log = report_log) from threesome_to_twosome_transition_2
+                                $ scene_manager.add_actor(the_person_two, character_placement = character_center_flipped)
+                                $ temp_log = _return
+                                $ report_log["girl one orgasms"] = temp_log["girl orgasms"]
                             "Done for now":
                                 "I think we should just be done for now." #TODO girl takes over if she needs to cum and hasn't yet
                         $ finished = True

@@ -107,7 +107,7 @@ label scene_threesome_double_blowjob_focus_oral_1(the_girl_1, the_girl_2, the_lo
     return
 
 label scene_threesome_double_blowjob_focus_oral_2(the_girl_1, the_girl_2, the_location, the_object, the_round):
-    "[the_girl_2.title] opens up and takes a turn focusing on your. She takes the base in her hand and gives you long, deep strokes."
+    "[the_girl_2.title] opens up and takes a turn focusing on your hard on. She takes the base in her hand and gives you long, deep strokes."
     $ scene_manager.update_actor(the_girl_1, position = "kissing")
     "[the_girl_1.title] takes a moment and stands up, wrapping her hands around you. She begins kissing your neck and along your jawline."
     "[the_girl_1.possessive_title]'s lips on your neck, her body against yours, and [the_girl_2.possessive_title]'s mouth on your cock. This must be heaven."

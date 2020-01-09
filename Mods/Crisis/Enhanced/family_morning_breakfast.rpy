@@ -38,7 +38,7 @@ label family_morning_breakfast_enhanced_label():
         mc.name "Thanks for letting me know [lily.title], I'll be down in a minute."
         "She nods and closes your door as she leaves."
         $ scene_manager.remove_actor(lily, reset_actor = False)
-    
+
     "You get up, get dressed, and head for the kitchen."
     $ mc.change_location(kitchen)
     $ kitchen.show_background()
@@ -71,7 +71,7 @@ label family_morning_breakfast_enhanced_label():
     else:
         "[lily.possessive_title] comes into the room and gives a dramatic yawn before sitting down at the kitchen table."
     $ scene_manager.update_actor(lily, position = "sitting")
-    
+
     if mom_slutty and sis_slutty:
         #You have breakfast with both of them stripped down like it's no big thing.
         lily.char "Hope I'm not too late."
@@ -87,6 +87,39 @@ label family_morning_breakfast_enhanced_label():
         "Neither [lily.title] or [mom.possessive_title] seem to think it's strange to relax in their underwear."
         $ lily.change_stats(love = 3, slut_temp = 3)
         $ mom.change_stats(love = 3, slut_temp = 3, happiness = 10)
+        if Family_Threesome_Proc:
+            "While no one else seems to be bothered by all the skin in the room, it is starting to take a toll on you."
+            "You try to focus on something work related, but instead all you can focus on are [mom.possessive_title]'s heaving tits, across the table from you."
+            mom.char "Honey? Are you feeling okay? You seem a little zoned out..."
+            "Next to you, [lily.title] notices your erection and speaks up."
+            lily.char "I'm sure he's fine mom, but us walking around like this has him all worked up. He's hard as a rock!"
+            "[lily.possessive_title] reaches down and starts to stroke you."
+            mom.char "Oh! I'm so sorry [mom.mc_title], I didn't even think about that. [lily.name] honey, lets take care of him before the day gets going."
+            lily.char "Good idea mom!"
+            menu:
+                "Accept their help":
+                    mc.name "Oh wow, that would be great!"
+                    $ scene_manager.update_actor(mom, position = "stand2")
+                    $ scene_manager.update_actor(lily, position = "blowjob")
+                    "[mom.possessive_title] gets up and starts walking around the table, while [lily.title] gets on her knees and starts pulling off your pants and underwear."
+                    "Your cock springs out of your clothes, nearly smacking [lily.possessive_title] in the face. [mom.title] gets on her knees next to [lily.title]"
+                    call start_threesome(lily, mom, start_position = threesome_double_blowjob, position_locked = True) from _threesome_for_breakfast_yum_1
+                    $ sex_report = _return
+                    if sex_report["guy orgasms"] > 0:
+                        "You enjoy your post orgasm bliss for a few moments while [mom.possessive_title] and [lily.possessive_title] get up."
+                    else:
+                        "Finished for now, you decide to put your cock away while [mom.possessive_title] and [lily.possessive_title] get up."
+                    $ scene_manager.update_actor(mom, position="walking_away", character_placement = character_center_flipped)
+                    $ scene_manager.update_actor(lily, position = "stand4", character_placement = character_right)
+                    mc.name "Mmm, thanks for breakfast mom!"
+                    if sex_report["guy orgasms"] > 0:
+                        "[lily.title] laughs and jokes back."
+                        lily.char "Thanks for breakfast, bro!"
+                "Refuse":
+                    mc.name "That's okay, I have a ton of stuff to get done today. Maybe tonight after dinner?"
+                    mom.char "Okay, if thats what you want [mom.mc_title]."
+                    $ scene_manager.update_actor(mom, position="walking_away", character_placement = character_center_flipped)
+                    "[mom.possessive_title] gets up and starts to do the dishes."
         "When you're done you help [mom.possessive_title] put the dirty dishes away and get on with your day."
 
     elif mom_slutty and not sis_slutty:
