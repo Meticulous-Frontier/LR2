@@ -1544,13 +1544,13 @@ init 1200 python:
             other_stat = 2
 
         recruit = create_random_person(tits = get_HR_director_tag("recruit_bust", None),
-            start_obedience = get_HR_director_tag("recruit_obedience"),
-            start_sluttiness = get_HR_director_tag("recruit_slut"),
-            relationship = get_HR_director_tag("recruit_marital"),
-            age = get_HR_director_tag("recruit_age"),
-            kids = get_HR_director_tag("recruit_kids"),
-            body_type = get_HR_director_tag("recruit_body"),
-            height = get_HR_director_tag("recruit_height"),
+            start_obedience = get_HR_director_tag("recruit_obedience", None),
+            start_sluttiness = get_HR_director_tag("recruit_slut", None),
+            relationship = get_HR_director_tag("recruit_marital", None),
+            age = get_HR_director_tag("recruit_age", None),
+            kids = get_HR_director_tag("recruit_kids", None),
+            body_type = get_HR_director_tag("recruit_body", None),
+            height = get_HR_director_tag("recruit_height", None),
             sex_array = sex_array)
 
         # make balanced stats
@@ -1567,32 +1567,36 @@ init 1200 python:
             recruit.charisma = main_stat
             recruit.hr_skill = main_skill
             recruit.focus -= other_stat
-            recruit.max_opinion_score("HR work", False)
+            recruit.opinions["HR work"] = [2, True]
         elif get_HR_director_tag("recruit_dept") == "supply":
             recruit.focus = main_stat
             recruit.supply_skill = main_skill
             recruit.int -= other_stat
-            recruit.max_opinion_score("supply work", False)
+            recruit.opinions["supply work"] = [2, True]
         elif get_HR_director_tag("recruit_dept") == "market":
             recruit.charisma = main_stat
             recruit.market_skill = main_skill
             recruit.int -= other_stat
-            recruit.max_opinion_score("marketing work", False)
+            recruit.opinions["marketing work"] = [2, True]
         elif get_HR_director_tag("recruit_dept") == "research":
             recruit.int = main_stat
             recruit.research_skill = main_skill
             recruit.charisma -= other_stat
-            recruit.max_opinion_score("research work", False)
+            recruit.opinions["research work"] = [2, True]
         elif get_HR_director_tag("recruit_dept") == "production":
             recruit.focus = main_stat
             recruit.production_skill = main_skill
             recruit.charisma -= other_stat
-            recruit.max_opinion_score("production work", False)
+            recruit.opinions["production work"] = [2, True]
 
         # use enhanced make person options
         update_person_opinions(recruit)
         update_random_person(recruit)
         rebuild_wardrobe(recruit)
         update_person_outfit(recruit, -30) # choose a less slutty outfit as planned outfit
+
+        # discover some opinions
+        for x in __builtin__.range(0, 6):
+            recruit.discover_opinion(recruit.get_random_opinion(include_known = False, include_sexy = True),add_to_log = False)
 
         return recruit
