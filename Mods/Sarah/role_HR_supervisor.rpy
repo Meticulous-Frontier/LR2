@@ -1273,17 +1273,16 @@ label HR_director_headhunt_initiate_label(the_person):
 
     if get_HR_director_unlock("headhunter_obedience", False) == True:
         the_person.char "Do you want her to be obedient, free spirited, or somewhere in between?"
-        $ ran_num = renpy.random.randint(0,30)
         menu:
             "Free spirited":
                 $ days_to_find += 1
-                $ set_HR_director_tag("recruit_obedience", (60 + ran_num))
+                $ set_HR_director_tag("recruit_obedience", -renpy.random.randint(10,30))
             "Obedient":
                 $ days_to_find += 1
-                $ set_HR_director_tag("recruit_obedience", (120 + ran_num))
+                $ set_HR_director_tag("recruit_obedience", renpy.random.randint(-10,10))
             "In between":
                 $ days_to_find += 1
-                $ set_HR_director_tag("recruit_obedience", (90 + ran_num))
+                $ set_HR_director_tag("recruit_obedience", renpy.random.randint(10,30))
             "I don't care":
                 pass
         the_person.char "Okay! I can do that."
