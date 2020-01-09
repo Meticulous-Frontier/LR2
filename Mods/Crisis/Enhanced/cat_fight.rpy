@@ -260,8 +260,44 @@ label cat_fight_crisis_enhanced_label():
                     winner.char "Hah... I knew I had that..."
                     "[winner.title] takes a look down at herself."
                     winner.char "I should probably go get cleaned up too. Sorry about all of this [winner.mc_title]."
-                    $ scene_manager.update_actor(loser, position = "walking_away")                   
+                    $ scene_manager.update_actor(loser, position = "walking_away")
                     "[winner.title] leaves and you get back to work."
+
+        "Have a team building exercise" if willing_to_threesome(person_one, person_two) and mc.energy > 30:
+            mc.name "Enough! It is obvious to me that we are too busy working against one another, and not enough working as a team."
+            $ scene_manager.update_actor(person_one, emotion="sad")
+            person_one.char "But sir..."
+            mc.name "Don't but sir me! It's time for you two to do a team building exercise. On your knees, both of you."
+            "They both look at each other, bewildered, but they do what you ask."
+            $ scene_manager.update_actor(person_one, position = "blowjob")
+            $ scene_manager.update_actor(person_two, position = "blowjob")
+            "You unzip your pants and pull your cock out."
+            mc.name "Alright, I want you two to cooperate, FOR ONCE, and team up on this."
+            "Both girls seem relieved. While unorthodox, you are pretty sure their slutty natures will come out and they'll bond while they blow you."
+            call start_threesome(person_one, person_two, start_position = threesome_double_blowjob, position_locked = True) from _team_building_threesome_1
+            $ sex_report = _return
+            if sex_report["guy orgasms"] > 0:
+                "You watch as [person_one.title] and [person_two.title] begin to kiss and lick your cum off of each other's faces"
+                "This turned out to be a success!"
+                $ person_one.change_stats(obedience = 5, slut_temp = 10, happiness = 5)
+                $ person_two.change_stats(obedience = 5, slut_temp = 10, happiness = 5)
+                mc.name "See what you can do if you just work together? Go on now, get back to work."
+                $ scene_manager.update_actor(person_one, position = "walking_away")
+                $ scene_manager.update_actor(person_two, position = "walking_away")
+                "You watch them both walking off together."
+            else:
+                "Frustrated, you put your cock away while admonishing them."
+                mc.name "If you two can't work together on something as simple as sucking dick, how can you cooperate doing anything else?"
+                $ person_one.change_stats(happiness = -5, obedience = 5)
+                $ scene_manager.update_actor(person_one, emotion="sad")
+                person_one.char "I'm sorry sir. It won't happen again!"
+                $ person_two.change_stats(happiness = -5, obedience = 5)
+                $ scene_manager.update_actor(person_two, emotion="sad")
+                person_two.char "Understood sir, there won't be any more problems."
+                mc.name "Good to hear. Now get back to work."
+                $ scene_manager.update_actor(person_one, position = "walking_away")
+                $ scene_manager.update_actor(person_two, position = "walking_away")
+
 
     python:     # Release variables
         scene_manager.clear_scene()
