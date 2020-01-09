@@ -323,7 +323,7 @@ init 2:
         default demo_outfit = starting_outfit.get_copy()
         default item_outfit = starting_outfit.get_copy()
         default outfit_builder = WardrobeBuilder(None)
-        default max_slut = outfit_type == "over" and 6 or 12
+        default max_slut = outfit_type == "over" and 8 or 12
 
         if outfit_type == "under":
             $ valid_layers = [0,1]
