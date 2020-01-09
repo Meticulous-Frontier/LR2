@@ -230,7 +230,7 @@ init -1:
             # make her a little bit more unique by changing wardrobe and opinions
             update_person_opinions(the_daughter)
             rebuild_wardrobe(the_daughter)
-            update_person_outfit(the_daughter, -0.5)
+            update_person_outfit(the_daughter, -0.2)
 
             return the_daughter
 

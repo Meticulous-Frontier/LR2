@@ -1592,7 +1592,7 @@ init 1200 python:
         update_person_opinions(recruit)
         update_random_person(recruit)
         rebuild_wardrobe(recruit)
-        update_person_outfit(recruit, -0.5) # choose a less slutty outfit as planned outfit
+        update_person_outfit(recruit, -0.2) # choose a less slutty outfit as planned outfit
 
         # discover some opinions
         for x in __builtin__.range(0, 6):
