@@ -185,7 +185,7 @@ init 5 python:
         return False
 
     def HR_director_headhunt_initiate_requirement(the_person):
-        if get_HR_director_unlock("business_HR_headhunter_initial", False):
+        if get_HR_director_unlock("business_HR_headhunter_initial", False) == True:
             if get_HR_director_tag("business_HR_headhunter_progress", 0) == 0:
                 if mc.business.max_employee_count == mc.business.get_employee_count():
                     return "You have too many employees"
