@@ -21,7 +21,7 @@ init -1 python:
         update_person_opinions(return_character)
         update_random_person(return_character)
         rebuild_wardrobe(return_character)
-        update_person_outfit(return_character)
+        update_person_outfit(return_character, -20) # choose a less slutty outfit as planned outfit
 
         return return_character
 
@@ -68,9 +68,9 @@ init -1 python:
             person.sexy_opinions[the_opinion_key] = [degree, False]
 
     # make sure new character has a more appropriate outfit to wear
-    def update_person_outfit(person):
+    def update_person_outfit(person, sluttiness_modifier = 0.0):
         if not person in unique_character_list:
-            person.planned_outfit = person.wardrobe.decide_on_outfit2(person) # Use enhanced outfit selector
+            person.planned_outfit = person.wardrobe.decide_on_outfit2(person, sluttiness_modifier) # Use enhanced outfit selector
             person.apply_outfit(person.planned_outfit)
             person.planned_uniform = None
         return
