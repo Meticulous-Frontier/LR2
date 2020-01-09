@@ -1358,22 +1358,59 @@ label HR_director_headhunt_initiate_label(the_person):
         the_person.char "I can manage that."
 
     if get_HR_director_unlock("headhunter_bust", False) == True:
-        the_person.char "Do you want her to be busty, flat chested, or somewhere in between?"
+        the_person.char "Do you want her to have specific physical attributes, like size, weight, or bust?"
+
         menu:
-            "Busty":
-                $ days_to_find += 1
-                $ set_HR_director_tag("recruit_bust", "FF")
-                pass
-            "Flat":
-                $ days_to_find += 1
-                $ set_HR_director_tag("recruit_bust", "A")
-                pass
-            "Normal":
-                $ set_HR_director_tag("recruit_bust", "C")
-                $ days_to_find += 1
-                pass
-            "I don't care":
-                pass
+            "Yes":
+                the_person.char "Okay, do you want her to be tall, short, or in between?"
+                menu:
+                    "Tall":
+                        $ days_to_find += 1
+                        $ set_HR_director_tag("recruit_height", "1.0")
+                        pass
+                    "Short":
+                        $ days_to_find += 1
+                        $ set_HR_director_tag("recruit_height", "0.9")
+                        pass
+                    "Normal":
+                        $ set_HR_director_tag("recruit_height", "0.95")
+                        $ days_to_find += 1
+                        pass
+                    "I don't care":
+                        pass
+                the_person.char "Okay, how about thick or skinny?"
+                menu:
+                    "Thick":
+                        $ days_to_find += 1
+                        $ set_HR_director_tag("recruit_width", "curvy_body")
+                        pass
+                    "Skinny":
+                        $ days_to_find += 1
+                        $ set_HR_director_tag("recruit_height", "thin_body")
+                        pass
+                    "Normal":
+                        $ set_HR_director_tag("recruit_height", "standard_body")
+                        $ days_to_find += 1
+                        pass
+                    "I don't care":
+                        pass
+                the_person.char "Sounds good. How about bust size?"
+                menu:
+                    "Busty":
+                        $ days_to_find += 1
+                        $ set_HR_director_tag("recruit_bust", "FF")
+                        pass
+                    "Flat":
+                        $ days_to_find += 1
+                        $ set_HR_director_tag("recruit_bust", "A")
+                        pass
+                    "Normal":
+                        $ set_HR_director_tag("recruit_bust", "C")
+                        $ days_to_find += 1
+                        pass
+                    "I don't care":
+                        pass
+            "No":
         the_person.char "Okay then."
     the_person.char "Okay, I'll go ahead and start the search."
     if days_to_find <= 2:
@@ -1479,7 +1516,7 @@ label HR_director_monday_headhunt_update_label(the_person):
         the_person.char "Looks like I can pick prospects based on whether or not they have kids. More MILFs around here? I could handle that!"
         $ set_HR_director_unlock("headhunter_kids", True)
     elif get_HR_director_unlock("headhunter_bust", False) == False and recruitment_knowledge_four_policy.is_owned():
-        the_person.char "Looks like I can pick prospects based on whether or not they are... shall we say, blessed in the chest? Busty or perky?"
+        the_person.char "With the new software update, I can now search by a variety of physical preferences. Busty? Short? Thick? I can make it happen!"
         $ set_HR_director_unlock("headhunter_bust", True)
     else:
         "Looks like I don't have any additions to the prospecting system this week."
@@ -1502,6 +1539,8 @@ init 1200 python:
         set_HR_director_tag("recruit_slut", None)
         set_HR_director_tag("recruit_kids", None)
         set_HR_director_tag("recruit_bust", None)
+        set_HR_director_tag("recruit_height", None)
+        set_HR_director_tag("recruit_width", None)
         set_HR_director_tag("recruit_day", day)
         return
 
@@ -1516,7 +1555,9 @@ init 1200 python:
         start_obedience = get_HR_director_tag("recruit_obedience"),
         start_sluttiness = get_HR_director_tag("recruit_slut"),
         relationship = get_HR_director_tag("recruit_marital"),
-        kids = get_HR_director_tag("recruit_kids"))
+        kids = get_HR_director_tag("recruit_kids"),
+        body_type = get_HR_director_tag("recruit_width"),
+        height = get_HR_director_tag("recruit_height"))
         if get_HR_director_tag("recruit_dept") == "HR":
             recruit.charisma = main_stat
             recruit.hr_skill = main_skill
