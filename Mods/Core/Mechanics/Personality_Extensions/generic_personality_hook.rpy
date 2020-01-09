@@ -21,7 +21,7 @@ init -1 python:
         update_person_opinions(return_character)
         update_random_person(return_character)
         rebuild_wardrobe(return_character)
-        update_person_outfit(return_character, -20) # choose a less slutty outfit as planned outfit
+        update_person_outfit(return_character, -30) # choose a less slutty outfit as planned outfit
 
         return return_character
 

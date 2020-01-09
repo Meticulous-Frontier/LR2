@@ -1253,7 +1253,7 @@ label HR_director_headhunt_initiate_label(the_person):
     the_person.char "Ah! Okay, what department are you looking to hire for?"
     $ reset_headhunter_criteria()
     $ days_to_find = 1
-    "Note, whichever department they are hired for, per turn production is guaranteed to be at least 50."
+    #"Note, whichever department they are hired for, per turn production is guaranteed to be at least 50."
     menu:
         "HR Dept":
             $ set_HR_director_tag("recruit_dept", "HR")
@@ -1443,7 +1443,7 @@ label HR_director_headhunt_interview_label(the_person):
             return
     $ scene_manager.update_actor(the_person, position = "sitting")
 
-    call hire_select_process([prospect,make_person()]) from _call_hire_prospect_process_1  #Copying how Vren calls this... hopefully this is right...
+    call hire_select_process([prospect, 1]) from _call_hire_prospect_process_1  #Copying how Vren calls this... hopefully this is right...
 
     if _return == prospect: #MC chooses to hire her
         mc.name "Alright [the_person.title], this looks promising. Good work finding her."
@@ -1529,12 +1529,19 @@ init 1200 python:
         return
 
     def generate_HR_recruit():
-        main_stat = renpy.random.randint(6,9)
-        main_skill = renpy.random.randint(5,8)
-        main_other = renpy.random.randint(5,8)
-        if get_HR_director_tag("recruit_focused"):
-            main_stat += 4 #Add 4, since -2 is applied to all stats for focus
-            main_skill += 4
+        # department boosted stats
+        main_stat = renpy.random.randint(5,7)
+        main_skill = renpy.random.randint(5,7)
+        other_stat = 0
+
+        min_slut = (get_HR_director_tag("recruit_slut", 0) or 0) // 10
+        sex_array = [renpy.random.randint(min_slut,5), renpy.random.randint(min_slut,5), renpy.random.randint(min_slut,5), renpy.random.randint(min_slut,5)]
+
+        # extra boost for focused recruit
+        if get_HR_director_tag("recruit_focused", False) == True:
+            main_stat += 2
+            main_skill += 2
+            other_stat = 2
 
         recruit = create_random_person(tits = get_HR_director_tag("recruit_bust", None),
             start_obedience = get_HR_director_tag("recruit_obedience"),
@@ -1543,41 +1550,49 @@ init 1200 python:
             age = get_HR_director_tag("recruit_age"),
             kids = get_HR_director_tag("recruit_kids"),
             body_type = get_HR_director_tag("recruit_body"),
-            height = get_HR_director_tag("recruit_height"))
+            height = get_HR_director_tag("recruit_height"),
+            sex_array = sex_array)
+
+        # make balanced stats
+        recruit.int = renpy.random.randint(3,6)
+        recruit.focus = renpy.random.randint(3,6)
+        recruit.charisma = renpy.random.randint(3,6)
+        recruit.production_skill = renpy.random.randint(3,6)
+        recruit.hr_skill = renpy.random.randint(3,6)
+        recruit.supply_skill = renpy.random.randint(3,6)
+        recruit.market_skill = renpy.random.randint(3,6)
+        recruit.research_skill = renpy.random.randint(3,6)
 
         if get_HR_director_tag("recruit_dept") == "HR":
             recruit.charisma = main_stat
             recruit.hr_skill = main_skill
-            recruit.int = main_other
+            recruit.focus -= other_stat
             recruit.max_opinion_score("HR work", False)
         elif get_HR_director_tag("recruit_dept") == "supply":
             recruit.focus = main_stat
             recruit.supply_skill = main_skill
-            recruit.charisma = main_other
+            recruit.int -= other_stat
             recruit.max_opinion_score("supply work", False)
         elif get_HR_director_tag("recruit_dept") == "market":
             recruit.charisma = main_stat
             recruit.market_skill = main_skill
-            recruit.focus = main_other
+            recruit.int -= other_stat
             recruit.max_opinion_score("marketing work", False)
         elif get_HR_director_tag("recruit_dept") == "research":
             recruit.int = main_stat
             recruit.research_skill = main_skill
-            recruit.focus = main_other
+            recruit.charisma -= other_stat
             recruit.max_opinion_score("research work", False)
         elif get_HR_director_tag("recruit_dept") == "production":
             recruit.focus = main_stat
             recruit.production_skill = main_skill
-            recruit.int = main_other
+            recruit.charisma -= other_stat
             recruit.max_opinion_score("production work", False)
-        if get_HR_director_tag("recruit_focused"):
-            recruit.change_int(-2, add_to_log = False)
-            recruit.change_cha(-2, add_to_log = False)
-            recruit.change_focus(-2, add_to_log = False)
-            recruit.production_skill -= 2
-            recruit.hr_skill -= 2
-            recruit.supply_skill -= 2
-            recruit.market_skill -= 2
-            recruit.research_skill -= 2
+
+        # use enhanced make person options
+        update_person_opinions(recruit)
+        update_random_person(recruit)
+        rebuild_wardrobe(recruit)
+        update_person_outfit(recruit, -30) # choose a less slutty outfit as planned outfit
 
         return recruit
