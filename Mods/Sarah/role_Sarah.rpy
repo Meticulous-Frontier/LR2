@@ -405,7 +405,7 @@ label Sarah_third_wheel_label():
     "You step out of he lady's room and shortly after [the_person.title] steps out and joins you. You hand her the appletini."
     the_person.char "Thanks for waiting! I'm so sorry, I honestly thought you were going to go with them."
     the_person.char "Thank you for... I mean, everything you've done for me. You gave me a job, you let me drag you out to a bar with strangers, and then stuck with me even when you probably shouldn't have..."
-    mc.name "You're crazy. It's not everday a long last childhood friend literally knocks on your front door."
+    mc.name "You're crazy. It's not everyday a long last childhood friend literally knocks on your front door."
     the_person.char "You've always been amazing to me. I should have known better."
     $ the_person.change_happiness(20)
     $ the_person.change_obedience(10)

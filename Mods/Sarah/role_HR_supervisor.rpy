@@ -1249,28 +1249,23 @@ label HR_director_appointment_action_label:
 
 
 label HR_director_headhunt_initiate_label(the_person):
-    mc.name "I'd like to initiate a search for a specfic job opening."
+    mc.name "I'd like to initiate a search for a specific job opening."
     the_person.char "Ah! Okay, what department are you looking to hire for?"
     $ reset_headhunter_criteria()
     $ days_to_find = 1
-    "Note, whichever department they are hired for, per turn production is guardenteed to be atleast 50."
+    "Note, whichever department they are hired for, per turn production is guaranteed to be at least 50."
     menu:
         "HR Dept":
             $ set_HR_director_tag("recruit_dept", "HR")
-            pass
         "Supply Dept":
             $ set_HR_director_tag("recruit_dept", "supply")
-            pass
         "Marketing Dept":
             $ set_HR_director_tag("recruit_dept", "market")
-            pass
         "Research Dept":
             $ set_HR_director_tag("recruit_dept", "research")
-            pass
         "Production Dept":
             $ set_HR_director_tag("recruit_dept", "production")
-            pass
-        "Nevermind, I changed my mind":     #A chance to exit without the event firing
+        "Never mind":     #A chance to exit without the event firing
             the_person.char "Ah, ok. Is there anything else I can help you with, [the_person.mc_title]?"
             return
     the_person.char "Okay! Let's see here, what else can we sort by..."
@@ -1278,20 +1273,17 @@ label HR_director_headhunt_initiate_label(the_person):
 
     if get_HR_director_unlock("headhunter_obedience", False) == True:
         the_person.char "Do you want her to be obedient, free spirited, or somewhere in between?"
-        $ random_obed_mod = renpy.random.randint(0,20)
+        $ ran_num = renpy.random.randint(0,30)
         menu:
             "Free spirited":
                 $ days_to_find += 1
-                $ set_HR_director_tag("recruit_obedience", (40 + random_obed_mod))
-                pass
+                $ set_HR_director_tag("recruit_obedience", (60 + ran_num))
             "Obedient":
                 $ days_to_find += 1
-                $ set_HR_director_tag("recruit_obedience", (120 + random_obed_mod))
-                pass
+                $ set_HR_director_tag("recruit_obedience", (120 + ran_num))
             "In between":
                 $ days_to_find += 1
-                $ set_HR_director_tag("recruit_obedience", (80 + random_obed_mod))
-                pass
+                $ set_HR_director_tag("recruit_obedience", (90 + ran_num))
             "I don't care":
                 pass
         the_person.char "Okay! I can do that."
@@ -1302,7 +1294,6 @@ label HR_director_headhunt_initiate_label(the_person):
             "Focused":
                 $ days_to_find += 1
                 $ set_HR_director_tag("recruit_focused", True)
-                pass
             "Normal":
                 pass
         the_person.char "Got it"
@@ -1313,51 +1304,51 @@ label HR_director_headhunt_initiate_label(the_person):
             "Married":
                 $ days_to_find += 1
                 $ set_HR_director_tag("recruit_marital", "Married")
-                pass
+            "In a relationship":
+                $ days_to_find += 1
+                $ set_HR_director_tag("recruit_marital", get_random_from_list(["Girlfriend", "Fiancée"]))
             "Single":
                 $ days_to_find += 1
                 $ set_HR_director_tag("recruit_marital", "Single")
-                pass
             "I don't care":
                 pass
         the_person.char "Sure thing."
 
     if get_HR_director_unlock("headhunter_slut", False) == True:
         the_person.char "Do you want her to be slutty, a prude, or somewhere in between?."
+        $ ran_num = renpy.random.randint(0,10)
+        $ slut_modifier = -20 if recruitment_slut_improvement_policy.is_owned() else 0
         menu:
             "Slutty":
                 $ days_to_find += 1
-                $ set_HR_director_tag("recruit_slut", 30)
-                pass
+                $ set_HR_director_tag("recruit_slut", 30 + ran_num + slut_modifier)
             "Normal":
                 $ days_to_find += 1
-                $ set_HR_director_tag("recruit_slut", 0)
-                pass
+                $ set_HR_director_tag("recruit_slut", 15 + ran_num + slut_modifier)
             "Prude":
                 $ days_to_find += 1
-                $ set_HR_director_tag("recruit_slut", -20)
-                pass
+                $ set_HR_director_tag("recruit_slut", 0 + ran_num + slut_modifier)
             "I don't care":
                 pass
         the_person.char "Alrighty!"
 
     if get_HR_director_unlock("headhunter_kids", False) == True:
         the_person.char "Do you want her to have kids already?"
-        $ random_kid_mod = renpy.random.randint(1,5)
+        $ ran_num = renpy.random.randint(1,5)
         menu:
             "Mother":
                 $ days_to_find += 1
-                $ set_HR_director_tag("recruit_kids", random_kid_mod)
-                pass
+                $ set_HR_director_tag("recruit_kids", ran_num)
+                $ set_HR_director_tag("recruit_age", renpy.randint(18 + ran_num * 3, 44))
             "No kids":
                 $ days_to_find += 1
                 $ set_HR_director_tag("recruit_kids", 0)
-                pass
+                $ set_HR_director_tag("recruit_age", renpy.randint(18, 35))
             "I don't care":
                 pass
         the_person.char "I can manage that."
 
-    if get_HR_director_unlock("headhunter_bust", False) == True:
+    if get_HR_director_unlock("headhunter_physical", False) == True:
         the_person.char "Do you want her to have specific physical attributes, like size, weight, or bust?"
 
         menu:
@@ -1366,51 +1357,43 @@ label HR_director_headhunt_initiate_label(the_person):
                 menu:
                     "Tall":
                         $ days_to_find += 1
-                        $ set_HR_director_tag("recruit_height", "1.0")
-                        pass
+                        $ set_HR_director_tag("recruit_height", "0.98")
                     "Short":
                         $ days_to_find += 1
-                        $ set_HR_director_tag("recruit_height", "0.9")
-                        pass
+                        $ set_HR_director_tag("recruit_height", "0.83")
                     "Normal":
-                        $ set_HR_director_tag("recruit_height", "0.95")
+                        $ set_HR_director_tag("recruit_height", "0.9")
                         $ days_to_find += 1
-                        pass
                     "I don't care":
                         pass
                 the_person.char "Okay, how about thick or skinny?"
                 menu:
                     "Thick":
                         $ days_to_find += 1
-                        $ set_HR_director_tag("recruit_width", "curvy_body")
-                        pass
+                        $ set_HR_director_tag("recruit_body", "curvy_body")
                     "Skinny":
                         $ days_to_find += 1
-                        $ set_HR_director_tag("recruit_height", "thin_body")
-                        pass
+                        $ set_HR_director_tag("recruit_body", "thin_body")
                     "Normal":
-                        $ set_HR_director_tag("recruit_height", "standard_body")
+                        $ set_HR_director_tag("recruit_body", "standard_body")
                         $ days_to_find += 1
-                        pass
                     "I don't care":
                         pass
                 the_person.char "Sounds good. How about bust size?"
                 menu:
                     "Busty":
                         $ days_to_find += 1
-                        $ set_HR_director_tag("recruit_bust", "FF")
-                        pass
+                        $ set_HR_director_tag("recruit_bust", get_random_from_list(["DDD", "E", "F","FF"]))
                     "Flat":
                         $ days_to_find += 1
-                        $ set_HR_director_tag("recruit_bust", "A")
-                        pass
+                        $ set_HR_director_tag("recruit_bust", get_random_from_list(["AA", "A", "B"]))
                     "Normal":
-                        $ set_HR_director_tag("recruit_bust", "C")
+                        $ set_HR_director_tag("recruit_bust", get_random_from_list(["C", "D", "DD"]))
                         $ days_to_find += 1
-                        pass
                     "I don't care":
                         pass
             "No":
+                pass
         the_person.char "Okay then."
     the_person.char "Okay, I'll go ahead and start the search."
     if days_to_find <= 2:
@@ -1418,10 +1401,9 @@ label HR_director_headhunt_initiate_label(the_person):
     elif days_to_find <= 5:
         the_person.char "Alright, this is fairly specific, so give me a few days to see what I can find and I'll get back to you."
     else:
-        the_person.char "This is... pretty specific. It'll probably take me atleast a week to find someone who meets all these criteria!"
+        the_person.char "This is... pretty specific. It'll probably take me at least a week to find someone who meets all these criteria!"
     mc.name "Thank you. Let me know when you have found someone and we'll do the interview."
 
-    #TODO make the mandatory event next.
     $ set_HR_director_tag("recruit_day", day + days_to_find)
 
     $ HR_director_headhunt_interview_action = Action("Prospect Interview",HR_director_headhunt_interview_requirement,"HR_director_headhunt_interview_label", args = the_person) #Set the trigger day for the next monday. Monday is day%7 == 0
@@ -1499,25 +1481,26 @@ label HR_director_monday_headhunt_update_label(the_person):
     else:
         the_person.char "I should have the time now to initiate another search. If you want me to start another talent search let me know!"
         $ set_HR_director_tag("business_HR_headhunter_progress", 0)
+
     the_person.char "Let's see if any recent recruiting policy updates will change how we look for employees."
     if get_HR_director_unlock("headhunter_obedience", False) == False and recruitment_obedience_improvement_policy.is_owned():
-        the_person.char "Looks like I can target a new employee based on their free will! I can either scout for an obedient, or free spirited prospect."
+        the_person.char "I can now target a new employee based on their free will! I can either scout for an obedient, or free spirited prospect."
         $ set_HR_director_unlock("headhunter_obedience", True)
     elif get_HR_director_unlock("headhunter_focused", False) == False and recruitment_batch_three_policy.is_owned():
-        the_person.char "Looks like I can target highly specialized prospects. They will be more skilled in an area, but may not be well rounded individuals."
+        the_person.char "I can now target highly specialized prospects. They will be more skilled in an area, but may not be well rounded individuals."
         $ set_HR_director_unlock("headhunter_focused", True)
+    elif get_HR_director_unlock("headhunter_physical", False) == False and recruitment_knowledge_one_policy.is_owned():
+        the_person.char "With the new software update, I can now search by a variety of physical preferences. Busty? Short? Thick? I can make it happen!"
+        $ set_HR_director_unlock("headhunter_physical", True)
     elif get_HR_director_unlock("headhunter_marital", False) == False and recruitment_knowledge_two_policy.is_owned():
-        the_person.char "Looks like I can target married or single indivuals. It might be illegal in most states, but not here!"
+        the_person.char "I can now target married or single individuals. It might be illegal in most states, but not here!"
         $ set_HR_director_unlock("headhunter_marital", True)
     elif get_HR_director_unlock("headhunter_slut", False) == False and recruitment_slut_improvement_policy.is_owned():
-        the_person.char "Looks like I can narrow down prospects based on general promiscuity. Want a prude or a slut? I can do that."
+        the_person.char "I can now narrow down prospects based on general promiscuity. Want a prude or a slut? I can do that."
         $ set_HR_director_unlock("headhunter_slut", True)
     elif get_HR_director_unlock("headhunter_kids", False) == False and recruitment_knowledge_three_policy.is_owned():
-        the_person.char "Looks like I can pick prospects based on whether or not they have kids. More MILFs around here? I could handle that!"
+        the_person.char "I can now pick prospects based on whether or not they have kids. More MILFs around here? I could handle that!"
         $ set_HR_director_unlock("headhunter_kids", True)
-    elif get_HR_director_unlock("headhunter_bust", False) == False and recruitment_knowledge_four_policy.is_owned():
-        the_person.char "With the new software update, I can now search by a variety of physical preferences. Busty? Short? Thick? I can make it happen!"
-        $ set_HR_director_unlock("headhunter_bust", True)
     else:
         "Looks like I don't have any additions to the prospecting system this week."
     return
@@ -1538,50 +1521,54 @@ init 1200 python:
         set_HR_director_tag("recruit_marital", None)
         set_HR_director_tag("recruit_slut", None)
         set_HR_director_tag("recruit_kids", None)
+        set_HR_director_tag("recruit_age", None)
         set_HR_director_tag("recruit_bust", None)
         set_HR_director_tag("recruit_height", None)
-        set_HR_director_tag("recruit_width", None)
+        set_HR_director_tag("recruit_body", None)
         set_HR_director_tag("recruit_day", day)
         return
 
     def generate_HR_recruit():
-        main_stat = renpy.random.randint(7,9)
-        main_skill = renpy.random.randint(7,8)
+        main_stat = renpy.random.randint(6,9)
+        main_skill = renpy.random.randint(5,8)
+        main_other = renpy.random.randint(5,8)
         if get_HR_director_tag("recruit_focused"):
             main_stat += 4 #Add 4, since -2 is applied to all stats for focus
             main_skill += 4
 
         recruit = create_random_person(tits = get_HR_director_tag("recruit_bust", None),
-        start_obedience = get_HR_director_tag("recruit_obedience"),
-        start_sluttiness = get_HR_director_tag("recruit_slut"),
-        relationship = get_HR_director_tag("recruit_marital"),
-        kids = get_HR_director_tag("recruit_kids"),
-        body_type = get_HR_director_tag("recruit_width"),
-        height = get_HR_director_tag("recruit_height"))
+            start_obedience = get_HR_director_tag("recruit_obedience"),
+            start_sluttiness = get_HR_director_tag("recruit_slut"),
+            relationship = get_HR_director_tag("recruit_marital"),
+            age = get_HR_director_tag("recruit_age"),
+            kids = get_HR_director_tag("recruit_kids"),
+            body_type = get_HR_director_tag("recruit_body"),
+            height = get_HR_director_tag("recruit_height"))
+
         if get_HR_director_tag("recruit_dept") == "HR":
             recruit.charisma = main_stat
             recruit.hr_skill = main_skill
-            recruit.int = 5
+            recruit.int = main_other
             recruit.max_opinion_score("HR work", False)
         elif get_HR_director_tag("recruit_dept") == "supply":
             recruit.focus = main_stat
             recruit.supply_skill = main_skill
-            recruit.charisma = 5
+            recruit.charisma = main_other
             recruit.max_opinion_score("supply work", False)
         elif get_HR_director_tag("recruit_dept") == "market":
             recruit.charisma = main_stat
             recruit.market_skill = main_skill
-            recruit.focus = 5
+            recruit.focus = main_other
             recruit.max_opinion_score("marketing work", False)
         elif get_HR_director_tag("recruit_dept") == "research":
             recruit.int = main_stat
             recruit.research_skill = main_skill
-            recruit.focus = 5
+            recruit.focus = main_other
             recruit.max_opinion_score("research work", False)
         elif get_HR_director_tag("recruit_dept") == "production":
             recruit.focus = main_stat
             recruit.production_skill = main_skill
-            recruit.int = 5
+            recruit.int = main_other
             recruit.max_opinion_score("production work", False)
         if get_HR_director_tag("recruit_focused"):
             recruit.change_int(-2, add_to_log = False)
@@ -1592,6 +1579,5 @@ init 1200 python:
             recruit.supply_skill -= 2
             recruit.market_skill -= 2
             recruit.research_skill -= 2
-
 
         return recruit
