@@ -326,7 +326,8 @@ init 5 python:
 
             item = get_random_from_weighted_list(weighted_list)
 
-            if item and hasattr(item, "supported_patterns") and item.supported_patterns and renpy.random.randint(0, 1) == 1:
+            # force pattern for certain items, others random 50/50
+            if item and hasattr(item, "supported_patterns") and item.supported_patterns and (renpy.random.randint(0, 1) == 1 or item in [apron, breed_collar, cum_slut_collar, fuck_doll_collar]):
                 key_value = get_random_from_list(list(item.supported_patterns.keys()))
                 item.pattern = item.supported_patterns[key_value]
                 item.colour_pattern = self.get_color()
