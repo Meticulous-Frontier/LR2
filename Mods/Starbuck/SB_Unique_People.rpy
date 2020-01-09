@@ -52,9 +52,13 @@ init 2 python:
 
         #global starbuck_role
         global starbuck
-        starbuck = Sex_Shop_Owner(name = "Cara", last_name = "Thrace", age = 32, body_type = "curvy_body", tits="E",  height = 0.95,  body_images = white_skin, expression_images = Expression("Starbuck\'s Expression Set", "white", "Face_4"), hair_colour= ["golden blonde", [0.895, 0.781, 0.656,1]], hair_style = messy_short_hair.get_copy(), pubes_colour = None, pubes_style = None, skin="white", \
+        starbuck_base = Outfit("Starbuck's accessories")
+        starbuck_lipstick = lipstick.get_copy()
+        starbuck_lipstick.colour = [.80, .26, .04, .90]
+        starbuck_base.add_accessory(starbuck_lipstick)
+        starbuck = Sex_Shop_Owner(name = "Cara", last_name = "Thrace", age = 32, body_type = "curvy_body", tits="E",  height = 0.95,  body_images = white_skin, expression_images = Expression("Starbuck\'s Expression Set", "white", "Face_4"), hair_colour= ["golden blonde", [0.895, 0.781, 0.656,1]], hair_style = messy_short_hair.get_copy(), pubes_colour = None, pubes_style = landing_strip_pubes, skin="white", \
             eyes = ["green",[0.245, 0.734, 0.269, 1.0]], job = "Sex Shop Owner", wardrobe = starbuck_wardrobe, personality = starbuck_personality, stat_list = [3,4,3],  skill_list = [1,1,4,2,1], sluttiness = 42, obedience = -22, suggest = 0, sex_list = [3,3,4,4], love = 0, happiness = 119, \
-            home = starbuck_home, work = None, font = get_random_font(), name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", special_role = [starbuck_role], relationship = "Single")
+            home = starbuck_home, work = None, font = get_random_font(), name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", special_role = [starbuck_role], relationship = "Single", base_outfit = starbuck_base)
 
         starbuck.schedule[1] = sex_store
         starbuck.schedule[2] = sex_store
