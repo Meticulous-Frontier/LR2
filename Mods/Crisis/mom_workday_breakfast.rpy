@@ -257,6 +257,49 @@ label mom_breakfast_action_label():
 
         $ scene_manager.update_actor(mom, position = "stand4")
         the_person.char "Oh! We'd better go quick, your sister could come out at any time..."
+        if Family_Threesome_Proc:
+            mc.name "Why does it matter if [lily.name] comes out?"
+            the_person.char "Well, I mean its not that I mind, but your mommy has needs [the_person.mc_title]..."
+            menu:
+                "Insist [lily.title] join you" if willing_to_threesome(mom, lily):
+                    mc.name "Don't worry [the_person.title]. I'll make sure you have your needs met."
+                    the_person.char "I suppose that would be okay, just make sure I get to finish!"
+                    mc.name "Of course!"
+                    "[the_person.possessive_title] quickly starts to strip down while you knock on [lily.possessive_title]'s door."
+
+                    $ scene_manager.strip_actor_outfit(mom)
+                    "After no response, you kock again."
+                    lily.char "What!?! I'm tired!"
+                    mc.name "Me and mom are gonna have some fun, you should join us."
+                    lily.char "Huh? Really!?! I'll be right there!"
+                    "You walk back to the kitchen and [lily.title] quickly joins you."
+                    $ scene_manager.add_actor(lily, character_placement = character_center)
+                    if lily.outfit.vagina_visible() and lily.outfit.tits_available():
+                        "Already basically ready to go, [lily.title] looks to you for direction."
+                    else:
+                        "Seeing [the_person.possessive_title] already naked, [lily.title] strips down also."
+                        $ scene_manager.strip_actor_outfit(lily)
+                    mc.name "Mom is feeling needy this morning sis, why don't we take care of her?"
+                    lily.char "Sounds great!"
+                    # TODO threesome scene where you fuck a girl from behind while the other girl fondles her tits and makes out with her.
+                    call start_threesome(the_person, lily) from _fuck_mom_for_breakfast_1
+                    $ sex_report = _return
+                    if sex_report["girl one orgasms"] > 0 and sex_report["girl two orgasms"] > 0 and sex_report["guy orgasms"] > 0: #Happy family
+                        "The three of you remain together for a while, enjoying your orgasms."
+                        $ the_person.change_stats(obedience = 5, happiness = 15)
+                        the_person.char "You two... I get overwhelmed by all the love I feel for you two when we do things like this. I love you both so much!"
+                    elif sex_report["girl one orgasms"] > 0:
+                        "[the_person.possessive_title] recovers for a bit from her orgasm."
+                        $ the_person.change_stats(obedience = 5, happiness = 5)
+                        the_person.char "Thank you, [the_person.mc_title], for insisting on bringing your sister out. You were right, that felt so good."
+                        lily.char "What? Mooooom! You were gonna fuck around without me?"
+                    "You get up and excuse yourself. Time to start the day!"
+                    $ scene_manager.clear_scene()
+                    return
+                "Relent":
+                    mc.name "Ok... but I'm not going to keep it down just because she is home."
+                    the_person.char "Okay dear."
+
         "[the_person.possessive_title] quickly starts to strip down."
 
         $ scene_manager.strip_actor_outfit(mom)
