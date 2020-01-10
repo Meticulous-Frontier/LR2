@@ -6,7 +6,7 @@ init 5 python:
     config.label_overrides["check_position_willingness"] = "check_position_willingness_bugfix"
     config.label_overrides["pick_object"] = "pick_object_enhanced"
 
-label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, exit_when_guy_cums = True):
+label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
     if report_log is None:
         $ report_log = defaultdict(int) #Holds information about the encounter: what positions were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
@@ -89,9 +89,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             elif report_log.get("girl orgasms", 0) > 0 and the_person.love < 10 and the_person.obedience < 110: #She's cum and doesn't care about you finishing.
                 the_person.char "Whew, that felt great. Thanks for the good time [the_person.mc_title]!"
                 $ round_choice = "Girl Leave"
-            elif report_log.get("guy orgasms", 0) > 0 and exit_when_guy_cums:
-                $ round_choice = "Girl Leave"
-            elif report_log.get("girl orgasms", 0) == 0 and the_person.energy < 25 :
+            elif report_log.get("girl orgasms", 0) == 0 and the_person.energy < 15 :
                 the_person.char "That was nice, but i'm tired. We will continue this another time."
                 $ round_choice = "Girl Leave"
             else:
@@ -209,7 +207,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             $ finished = True # Unless something stops us the encounter is over and we can end
 
             # only consider continue when the girl and the mc have enough energy
-            if the_person.energy > 20 and mc.energy > 20:
+            if the_person.energy > 15 and mc.energy > 15:
                 if renpy.random.randint(0,the_person.arousal) + 50 > the_person.obedience: #She's disobedient and will take control of the encounter. disobed disobd
                     $ the_person.call_dialogue("sex_take_control")
                     $ the_person.change_obedience(-3)
