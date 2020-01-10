@@ -298,6 +298,7 @@ label cat_fight_crisis_enhanced_label():
                 $ scene_manager.update_actor(person_one, position = "walking_away")
                 $ scene_manager.update_actor(person_two, position = "walking_away")
 
+            $ town_relationships.improve_relationship(person_one, person_two)
 
     python:     # Release variables
         scene_manager.clear_scene()
