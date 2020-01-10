@@ -480,6 +480,7 @@ label HR_director_monday_meeting_label(the_person):
                 mc.name "Yes I want to do that."
                 the_person.char "Ok! Let me see who I have on my list here..."
                 call HR_director_personnel_interview_label(the_person, max_opinion = get_HR_director_tag("business_HR_coffee_tier", 0)) from HR_DIR_INTERVIEW_CALL_2
+                $ set_HR_director_tag("business_HR_meeting_last_day", day)
     the_person.char "Hmm, let's see, what's next..."
     call HR_director_manage_gym_membership(the_person) from HR_Gym_manage_1
 
