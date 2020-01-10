@@ -93,7 +93,7 @@ init:
             girl_one_final_description = "On your back and let her eat you out",
             girl_two_final_description = "Eat her out while on your hands and knees",
             requires_location = "Lay",
-            requirements = requirement_both_vagina_available,
+            requirements = requirement_hard_both_vagina_available,
             verb = "fuck",
             p1_transform = Threesome_doggy_deluxe_girl_one_transform,
             p2_transform = Threesome_doggy_deluxe_girl_two_transform,
