@@ -1247,168 +1247,52 @@ label HR_director_appointment_action_label:
     call HR_director_initial_hire_label(person_choice) from _call_HR_director_initial_hire_label_appointment
     return
 
-
 label HR_director_headhunt_initiate_label(the_person):
     mc.name "I'd like to initiate a search for a specific job opening."
-    the_person.char "Ah! Okay, what department are you looking to hire for?"
+    the_person.char "Ah! Okay, just fill out this form with your requirements."
+
     $ reset_headhunter_criteria()
-    $ days_to_find = 1
-    #"Note, whichever department they are hired for, per turn production is guaranteed to be at least 50."
-    menu:
-        "HR Dept":
-            $ set_HR_director_tag("recruit_dept", "HR")
-        "Supply Dept":
-            $ set_HR_director_tag("recruit_dept", "supply")
-        "Marketing Dept":
-            $ set_HR_director_tag("recruit_dept", "market")
-        "Research Dept":
-            $ set_HR_director_tag("recruit_dept", "research")
-        "Production Dept":
-            $ set_HR_director_tag("recruit_dept", "production")
-        "Never mind":     #A chance to exit without the event firing
-            the_person.char "Ah, ok. Is there anything else I can help you with, [the_person.mc_title]?"
-            return
-    the_person.char "Okay! Let's see here, what else can we sort by..."
-    $ set_HR_director_tag("business_HR_headhunter_progress", 1)
+    $ hide_ui()
+    call screen HR_director_recruitment_screen(the_person)
+    $ show_ui()
+    if _return:
+        python:
+            days_to_find = 1
+            if get_HR_director_tag("recruit_obedience", None) is not None:
+                days_to_find += 1
+            if get_HR_director_tag("recruit_focused", None) is not None:
+                days_to_find += 1
+            if get_HR_director_tag("recruit_marital", None) is not None:
+                days_to_find += 1
+            if get_HR_director_tag("recruit_slut", None) is not None:
+                days_to_find += 1
+            if get_HR_director_tag("recruit_kids", 0) != 0:
+                days_to_find += 1
+            if get_HR_director_tag("recruit_height", None) is not None:
+                days_to_find += 1
+            if get_HR_director_tag("recruit_body", None) is not None:
+                days_to_find += 1
+            if get_HR_director_tag("recruit_bust", None) is not None:
+                days_to_find += 1
 
-    if get_HR_director_unlock("headhunter_obedience", False) == True:
-        the_person.char "Do you want her to be obedient, free spirited, or somewhere in between?"
-        menu:
-            "Free spirited":
-                $ days_to_find += 1
-                $ set_HR_director_tag("recruit_obedience", -renpy.random.randint(10,30))
-            "Obedient":
-                $ days_to_find += 1
-                $ set_HR_director_tag("recruit_obedience", renpy.random.randint(-10,10))
-            "In between":
-                $ days_to_find += 1
-                $ set_HR_director_tag("recruit_obedience", renpy.random.randint(10,30))
-            "I don't care":
-                pass
-        the_person.char "Okay! I can do that."
+        the_person.char "Okay, I'll go ahead and start the search."
+        if days_to_find <= 2:
+            the_person.char "This shouldn't take me long. Hopefully just a day or two!"
+        elif days_to_find <= 5:
+            the_person.char "Alright, this is fairly specific, so give me a few days to see what I can find and I'll get back to you."
+        else:
+            the_person.char "This is... pretty specific. It'll probably take me at least a week to find someone who meets all these criteria!"
+        mc.name "Thank you. Let me know when you have found someone and we'll do the interview."
 
-    if get_HR_director_unlock("headhunter_focused", False) == True:
-        the_person.char "Do you want her to be highly focused at her given role? Remember focused training may leave her deficient in other areas."
-        menu:
-            "Focused":
-                $ days_to_find += 1
-                $ set_HR_director_tag("recruit_focused", True)
-            "Normal":
-                pass
-        the_person.char "Got it"
+        $ set_HR_director_tag("recruit_day", day + days_to_find)
+        $ set_HR_director_tag("business_HR_headhunter_progress", 1)
 
-    if get_HR_director_unlock("headhunter_marital", False) == True:
-        the_person.char "Do you want her to be married or single?."
-        menu:
-            "Married":
-                $ days_to_find += 1
-                $ set_HR_director_tag("recruit_marital", "Married")
-            "In a relationship":
-                $ days_to_find += 1
-                $ set_HR_director_tag("recruit_marital", get_random_from_list(["Girlfriend", "Fiancée"]))
-            "Single":
-                $ days_to_find += 1
-                $ set_HR_director_tag("recruit_marital", "Single")
-            "I don't care":
-                pass
-        the_person.char "Sure thing."
-
-    if get_HR_director_unlock("headhunter_slut", False) == True:
-        the_person.char "Do you want her to be slutty, a prude, or somewhere in between?."
-        $ ran_num = renpy.random.randint(0,10)
-        $ slut_modifier = -20 if recruitment_slut_improvement_policy.is_owned() else 0
-        menu:
-            "Slutty":
-                $ days_to_find += 1
-                $ set_HR_director_tag("recruit_slut", 30 + ran_num + slut_modifier)
-            "Normal":
-                $ days_to_find += 1
-                $ set_HR_director_tag("recruit_slut", 15 + ran_num + slut_modifier)
-            "Prude":
-                $ days_to_find += 1
-                $ set_HR_director_tag("recruit_slut", 0 + ran_num + slut_modifier)
-            "I don't care":
-                pass
-        the_person.char "Alrighty!"
-
-    if get_HR_director_unlock("headhunter_kids", False) == True:
-        the_person.char "Do you want her to have kids already?"
-        $ ran_num = renpy.random.randint(1,5)
-        menu:
-            "Mother":
-                $ days_to_find += 1
-                $ set_HR_director_tag("recruit_kids", ran_num)
-                $ set_HR_director_tag("recruit_age", renpy.randint(18 + ran_num * 3, 44))
-            "No kids":
-                $ days_to_find += 1
-                $ set_HR_director_tag("recruit_kids", 0)
-                $ set_HR_director_tag("recruit_age", renpy.randint(18, 35))
-            "I don't care":
-                pass
-        the_person.char "I can manage that."
-
-    if get_HR_director_unlock("headhunter_physical", False) == True:
-        the_person.char "Do you want her to have specific physical attributes, like size, weight, or bust?"
-
-        menu:
-            "Yes":
-                the_person.char "Okay, do you want her to be tall, short, or in between?"
-                menu:
-                    "Tall":
-                        $ days_to_find += 1
-                        $ set_HR_director_tag("recruit_height", "0.98")
-                    "Short":
-                        $ days_to_find += 1
-                        $ set_HR_director_tag("recruit_height", "0.83")
-                    "Normal":
-                        $ set_HR_director_tag("recruit_height", "0.9")
-                        $ days_to_find += 1
-                    "I don't care":
-                        pass
-                the_person.char "Okay, how about thick or skinny?"
-                menu:
-                    "Thick":
-                        $ days_to_find += 1
-                        $ set_HR_director_tag("recruit_body", "curvy_body")
-                    "Skinny":
-                        $ days_to_find += 1
-                        $ set_HR_director_tag("recruit_body", "thin_body")
-                    "Normal":
-                        $ set_HR_director_tag("recruit_body", "standard_body")
-                        $ days_to_find += 1
-                    "I don't care":
-                        pass
-                the_person.char "Sounds good. How about bust size?"
-                menu:
-                    "Busty":
-                        $ days_to_find += 1
-                        $ set_HR_director_tag("recruit_bust", get_random_from_list(["DDD", "E", "F","FF"]))
-                    "Flat":
-                        $ days_to_find += 1
-                        $ set_HR_director_tag("recruit_bust", get_random_from_list(["AA", "A", "B"]))
-                    "Normal":
-                        $ set_HR_director_tag("recruit_bust", get_random_from_list(["C", "D", "DD"]))
-                        $ days_to_find += 1
-                    "I don't care":
-                        pass
-            "No":
-                pass
-        the_person.char "Okay then."
-    the_person.char "Okay, I'll go ahead and start the search."
-    if days_to_find <= 2:
-        the_person.char "This shouldn't take me long. Hopefully just a day or two!"
-    elif days_to_find <= 5:
-        the_person.char "Alright, this is fairly specific, so give me a few days to see what I can find and I'll get back to you."
+        $ HR_director_headhunt_interview_action = Action("Prospect Interview",HR_director_headhunt_interview_requirement,"HR_director_headhunt_interview_label", args = the_person) #Set the trigger day for the next monday. Monday is day%7 == 0
+        $ mc.business.mandatory_crises_list.append(HR_director_headhunt_interview_action) #Add the event here so that it pops when the requirements are met.
+        the_person.char "Is there anything else you need?"
     else:
-        the_person.char "This is... pretty specific. It'll probably take me at least a week to find someone who meets all these criteria!"
-    mc.name "Thank you. Let me know when you have found someone and we'll do the interview."
-
-    $ set_HR_director_tag("recruit_day", day + days_to_find)
-
-    $ HR_director_headhunt_interview_action = Action("Prospect Interview",HR_director_headhunt_interview_requirement,"HR_director_headhunt_interview_label", args = the_person) #Set the trigger day for the next monday. Monday is day%7 == 0
-    $ mc.business.mandatory_crises_list.append(HR_director_headhunt_interview_action) #Add the event here so that it pops when the requirements are met.
-    the_person.char "Is there anything else you need?"
-
+        mc.name "I've changed my mind."
+        the_person.char "No problem, just let me know if you want me to start recruiting someone."
     return
 
 label HR_director_headhunt_interview_label(the_person):
