@@ -119,7 +119,7 @@ init 5 python:
 
     def HR_director_coffee_tier_1_requirement(the_person):
         if get_HR_director_tag("business_HR_coffee_tier", 0) == 0:
-            if get_HR_director_tag("business_HR_serum_tier", 0) == 1:
+            if get_HR_director_tag("business_HR_serum_tier", 0) > 0:
                 if mc.business.funds > 500:
                     return True
                 else:
@@ -129,7 +129,7 @@ init 5 python:
 
     def HR_director_coffee_tier_2_requirement(the_person):
         if get_HR_director_tag("business_HR_coffee_tier", 0) == 1:
-            if get_HR_director_tag("business_HR_serum_tier", 0) == 2:
+            if get_HR_director_tag("business_HR_serum_tier", 0) > 1:
                 if mc.business.funds > 1500:
                     return True
                 else:
