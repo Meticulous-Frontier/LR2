@@ -124,7 +124,7 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_1(the_girl_1, the_girl_2, the_l
     if the_girl_2.arousal > 50:
         "A steady stream of moans are getting drown out as [the_girl_2.title] buries her face in [the_girl_1.title]'s slit."
     else:
-        "You hear a low and stady moan coming from [the_girl_2.possessive_title], but its getting muffled by [the_girl_1.title]'s cunt."
+        "You hear a low and steady moan coming from [the_girl_2.possessive_title], but its getting muffled by [the_girl_1.title]'s cunt."
     menu:
         "Talk dirty to [the_girl_2.title].":
             mc.name "How does that feel? Do you like getting used? I bet you do."
@@ -233,7 +233,7 @@ label outro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
                 $ the_girl_2.cum_in_vagina()
                 $ scene_manager.draw_scene()
                 if SB_check_fetish(the_girl_2, cum_internal_role):
-                    "[the_girl_2.possessive_title]'s body goes rigid as your cum poors into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
+                    "[the_girl_2.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
                     "She revels in having her cum fetish fulfilled."
                 "You slowly pull back. Your cum is dripping out of her cunt and down the inside of her legs."
                 "You sit back and enjoy the feeling of post orgasm bliss."
