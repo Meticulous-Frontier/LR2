@@ -187,7 +187,7 @@ init 5 python:
         return False
 
     def HR_director_headhunt_initiate_requirement(the_person):
-        if get_HR_director_unlock("business_HR_headhunter_initial", False) == True:
+        if get_HR_director_tag("business_HR_headhunter_initial", False) == True:
             if get_HR_director_tag("business_HR_headhunter_progress", 0) == 0:
                 if mc.business.max_employee_count == mc.business.get_employee_count():
                     return "You have too many employees"
@@ -486,12 +486,12 @@ label HR_director_monday_meeting_label(the_person):
     the_person.char "Hmm, let's see, what's next..."
     call HR_director_manage_gym_membership(the_person) from HR_Gym_manage_1
 
-    if get_HR_director_unlock("business_HR_headhunter_initial", False) == False and recruitment_batch_two_policy.is_owned():  #Unlock the new headhunter rewards
+    if get_HR_director_tag("business_HR_headhunter_initial", False) == False and recruitment_batch_two_policy.is_owned():  #Unlock the new headhunter rewards
         the_person.char "Our new recruiting software is useful for widening the pool of applicants to hire from, but when you cast a wider net, sometimes you get less than desirable results."
         the_person.char "After this meeting, I'll see if I can rework some of the software to better find applicants for specific departments."
         the_person.char "If you want to find an employee for a specific job, let me know, I might be able to get more fitting results!"
-        $ set_HR_director_unlock("business_HR_headhunter_initial", True)
-    elif get_HR_director_unlock("business_HR_headhunter_initial", False) == True:
+        $ set_HR_director_tag("business_HR_headhunter_initial", True)
+    elif get_HR_director_tag("business_HR_headhunter_initial", False) == True:
         call HR_director_monday_headhunt_update_label(the_person) from HR_headhunter_monday_update_1
 
     the_person.char "Ok, next up, I wanted to review progress made on serums and policy changes from the past week to see if anything might be useful."
@@ -1367,6 +1367,10 @@ label HR_director_monday_headhunt_update_label(the_person):
     else:
         the_person.char "I should have the time now to initiate another search. If you want me to start another talent search let me know!"
         $ set_HR_director_tag("business_HR_headhunter_progress", 0)
+
+    # all updates researched (quick exit)
+    if get_HR_director_tag("headhunter_kids", False) == True:
+        return
 
     the_person.char "Let's see if any recent recruiting policy updates will change how we look for employees."
     if get_HR_director_tag("headhunter_obedience", False) == False and recruitment_obedience_improvement_policy.is_owned():
