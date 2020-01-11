@@ -39,6 +39,14 @@ init 1 python:
             return True
         return False
 
+    def add_breed_me_collar_to_base_outfit(person):
+        bm_collar = breed_collar.get_copy()
+        bm_collar.colour = [1,.41,.71,.9]
+        bm_collar.pattern = "Pattern_1"
+        bm_collar.colour_pattern = [.1,.1,.1,.9]
+        person.base_outfit.add_accessory(bm_collar)
+        return
+
     SB_fetish_mom_vaginal_crisis = Action("Mom Loves Vaginal Sex", SB_fetish_mom_vaginal_requirement, "SB_fetish_mom_vaginal_label")
     SB_fetish_lily_vaginal_crisis = Action("Lily Loves Vaginal Sex", SB_fetish_lily_vaginal_requirement, "SB_fetish_lily_vaginal_label")
     SB_fetish_vaginal_crisis = Action("Loves Vaginal Sex", SB_fetish_vaginal_requirement, "SB_fetish_vaginal_label")
@@ -145,6 +153,7 @@ label SB_fetish_vaginal_label(the_person):
 
             "She's been under the influence of your serums for a while now... you wonder if she's developed a fetish..."
             $ the_person.special_role.append(vaginal_fetish_role)
+            $ add_breed_me_collar_to_base_outfit(the_person)
         "Refuse":       # allow for player to decide if he wants to induce fetish
             mc.name "I'm sorry [the_person.title], I really need to get some sleep."
             $ the_person.change_obedience(-10)
@@ -341,6 +350,7 @@ label SB_fetish_mom_vaginal_label():
     "Her naked flesh soft up against yours gives you many sexy dreams that night."
 
     $ the_person.special_role.append(vaginal_fetish_role)
+    $ add_breed_me_collar_to_base_outfit(the_person)
     $ FETISH_VAGINAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
@@ -404,6 +414,7 @@ label SB_fetish_lily_vaginal_label():
     #SBMOD Start hacked wakeup sex code. To be copy/pasted to other similar places#
 
     $ the_person.special_role.append(vaginal_fetish_role)
+    $ add_breed_me_collar_to_base_outfit(the_person)
     $ FETISH_VAGINAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
 

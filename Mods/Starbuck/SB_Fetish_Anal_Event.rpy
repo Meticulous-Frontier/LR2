@@ -23,6 +23,20 @@ init 1 python:
             return True
         return False
 
+    def add_fuck_doll_collar_to_base_outfit(person):
+        # remove breed me collar if it exists (anal collar has priority)
+        found = find_in_list(lambda x: x.proper_name == "Collar_Breed", person.base_outfit.accessories)
+        if found:
+            person.base_outfit.accessories.remove(found)
+
+        fd_collar = fuck_doll_collar.get_copy()
+        fd_collar.colour = [.41,.16,.38,.9]
+        fd_collar.pattern = "Pattern_1"
+        fd_collar.colour_pattern = [.95,.95,.95,.9]
+        person.base_outfit.add_accessory(fd_collar)
+        return
+
+
         #Mandatory Events
     SB_lily_anal_dp_fetish = Action("Lily Anal Sex", SB_fetish_anal_requirement, "SB_lily_anal_dp_fetish_label")
     SB_mom_anal_fetish = Action("Mom Anal Sex", SB_mom_anal_pay_requirement, "SB_mom_anal_pay_label")
@@ -102,6 +116,7 @@ label SB_fetish_anal_label(the_person):
             the_person.char "I can't stop thinking about how full it feels... it feels so right when you push into my ass. It gets me so hot imagining it..."
             "She's been under the influence of your serums for a while now... you wonder if she's developed an anal fetish..."
             $ the_person.special_role.append(anal_fetish_role)
+            $ add_fuck_doll_collar_to_base_outfit(the_person)
             "[the_person.possessive_title] gets her butt plug. She slowly pushes it back into her ass."
             the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
             "You wave goodbye to [the_person.possessive_title] and get ready to head home for the night."
@@ -349,39 +364,39 @@ label SB_free_strip_scene(the_person):
         $ the_person.draw_person(position = picked_pose)
         $ clothing = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True) #She's slutty enough that she wants to tease you a little more
         if rand_strip_desc == 0:
-                if clothing is not None:
-                    "[the_person.possessive_title] pulls at her [clothing.name] seductively."
-                    the_person.char "Mmm, I bet you want me to take this off, right?"
-                    "[the_person.possessive_title] wiggles her hips side to side and bites her bottom lip, as if imagining some greater pleasure yet to come."
-                else:
-                    "[the_person.possessive_title] runs her hands down her body seductively."
-                    the_person.char "Mmm, I bet you want to get your hands on me now, right?"
-                    "[the_person.possessive_title] wiggles her hips side to side and bites her bottom lip, as if imagining some greater pleasure yet to come."
+            if clothing is not None:
+                "[the_person.possessive_title] pulls at her [clothing.name] seductively."
+                the_person.char "Mmm, I bet you want me to take this off, right?"
+                "[the_person.possessive_title] wiggles her hips side to side and bites her bottom lip, as if imagining some greater pleasure yet to come."
+            else:
+                "[the_person.possessive_title] runs her hands down her body seductively."
+                the_person.char "Mmm, I bet you want to get your hands on me now, right?"
+                "[the_person.possessive_title] wiggles her hips side to side and bites her bottom lip, as if imagining some greater pleasure yet to come."
 
         elif rand_strip_desc == 1:
-                if the_person.has_large_tits():
-                    "[the_person.possessive_title] moves her body side to side for you, letting her large tits bounce and jiggle while you watch."
-                    "[the_person.possessive_title] takes a wider stances and slides her hands down her own thighs, all while maintaining eye contact with you."
-                    the_person.char "You're looking so good today [the_person.mc_title], did you know that?"
-                else:
-                    "[the_person.possessive_title] moves her body side to side for you while you watch."
-                    "[the_person.possessive_title] takes a wider stances and slides her hands down her own thighs, all while maintaining eye contact with you."
-                    the_person.char "You're looking so good today [the_person.mc_title], did you know that?"
+            if the_person.has_large_tits():
+                "[the_person.possessive_title] moves her body side to side for you, letting her large tits bounce and jiggle while you watch."
+                "[the_person.possessive_title] takes a wider stances and slides her hands down her own thighs, all while maintaining eye contact with you."
+                the_person.char "You're looking so good today [the_person.mc_title], did you know that?"
+            else:
+                "[the_person.possessive_title] moves her body side to side for you while you watch."
+                "[the_person.possessive_title] takes a wider stances and slides her hands down her own thighs, all while maintaining eye contact with you."
+                the_person.char "You're looking so good today [the_person.mc_title], did you know that?"
 
         elif rand_strip_desc == 2:
-                if clothing is not None:
-                    "[the_person.possessive_title] slips a hand under her [clothing.name] and starts to pull it off."
-                    the_person.char "Maybe I should just... slip this off. What do you think?"
+            if clothing is not None:
+                "[the_person.possessive_title] slips a hand under her [clothing.name] and starts to pull it off."
+                the_person.char "Maybe I should just... slip this off. What do you think?"
+            else:
+                if the_person.has_large_tits():
+                    "[the_person.possessive_title]'s hands slide up and down her body. She cups one of her sizeable breast and squeezes it, pinching her own nipple while she does."
+                    the_person.char "Oh [the_person.mc_title], I think I'm going to need more than your eyes on me soon..."
                 else:
-                    if the_person.has_large_tits():
-                        "[the_person.possessive_title]'s hands slide up and down her body. She cups one of her sizeable breast and squeezes it, pinching her own nipple while she does."
-                        the_person.char "Oh [the_person.mc_title], I think I'm going to need more than your eyes on me soon..."
-                    else:
-                        "[the_person.possessive_title]'s hands slide up and down her body. She rubs her small breasts, paying special attention to their firm nipples."
-                        the_person.char "Oh [the_person.mc_title], I think I'm going to need more than your eyes on me soon..."
+                    "[the_person.possessive_title]'s hands slide up and down her body. She rubs her small breasts, paying special attention to their firm nipples."
+                    the_person.char "Oh [the_person.mc_title], I think I'm going to need more than your eyes on me soon..."
         else:
-                the_person.char "I hope you're enjoying the show [the_person.mc_title]."
-                "She wiggles her hips for you and winks."
+            the_person.char "I hope you're enjoying the show [the_person.mc_title]."
+            "She wiggles her hips for you and winks."
 
         $menu_list = [] #Tuple of menu things.
         # High obedience characters are more willing to be told to strip down (althoug they still expect to be paid for it)
@@ -404,7 +419,7 @@ label SB_free_strip_scene(the_person):
         if strip_choice == "Watch":
             if renpy.random.randint(0,1) == 0:
                 $ tease_item = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True) #The clothing item she's considering taking off
-                if renpy.random.randint(0,100) < 50: #She's independant enough to strip, change pose, etc. on her own.
+                if renpy.random.randint(0,100) < 50: #She's independent enough to strip, change pose, etc. on her own.
                     if tease_item is not None : #A more obedient person is less willing to strip without being told to. A less obedient person will strip further on their own.
 
                         $ the_person.draw_animated_removal(tease_item, position = picked_pose)
@@ -521,6 +536,7 @@ label SB_mom_anal_pay_label():
             the_person.char "[the_person.mc_title]? Why don't you just stay in here tonight? [the_person.title] loves you... its okay!"
             "You slip back into bed next to her."
             $ the_person.special_role.append(anal_fetish_role)
+            $ add_fuck_doll_collar_to_base_outfit(the_person)
             "[the_person.possessive_title] has already fallen asleep. You can hear her murmuring in her dreams about taking stuff in her ass."
             "It seems your serums have given her an anal fetish!"
             "You cuddle up behind her and enjoy the heat of her soft flesh as you slowly drift off to sleep."
@@ -756,6 +772,7 @@ label SB_lily_anal_dp_fetish_label():
     mc.name "Don't worry [the_person.title], we'll be careful."
     the_person.char "Good... because lately I've just been craving you so bad. We don't have to always use the strap on. But just thinking about you fucking my ass makes me so horny."
     $ the_person.special_role.append(anal_fetish_role)
+    $ add_fuck_doll_collar_to_base_outfit(the_person)
 
     #TODO come back and change other events involving lily to account for her anal fetish.
     "It is pretty clear from the way she got off while you were fucking her and the way she was talking afterwards, you're convinced [the_person.possessive_title] has developed an anal fetish!"
@@ -831,6 +848,7 @@ label SB_starbuck_anal_intro():
     $ the_person.sexy_opinions["anal sex"] = [FETISH_OPINION_VALUE, True]
     $ the_person.sexy_opinions["anal creampies"] = [FETISH_OPINION_VALUE, True]
     $ the_person.special_role.append(anal_fetish_role)
+    $ add_fuck_doll_collar_to_base_outfit(the_person)
     $ the_person.sex_skills["Anal"] = 6
     "It's pretty clear from her sexual performance and the way she talks to you, that [the_person.title] has developed an anal fetish."
     $ the_person.reset_arousal()
