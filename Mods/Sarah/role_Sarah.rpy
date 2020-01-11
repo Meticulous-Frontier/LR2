@@ -1105,12 +1105,10 @@ label Sarah_stripclub_story_label():
     $ scene_manager.add_actor(the_person, position = "sitting", emotion = "happy", character_placement = character_left_flipped)
     the_person.char "Mmm, I'm so nervous..."
     #TODO make a variant on character left that is a close to Sarah so it looks more like an actual lap dance.
-    #TODO put them in sexy outfits!
+    $ showgirl.apply_outfit(stripclub_wardrobe.pick_random_outfit())
     $ scene_manager.add_actor(showgirl, character_placement = character_center_flipped)
-    $ strip_girls = mc.location.people
-    # $ strip_girls.remove(the_person)
-    $ strip_girls.remove(showgirl)
-    $ showgirl_2 = get_random_from_list(strip_girls)
+    $ showgirl_2 = get_random_from_list([x for x in stripclub_strippers if x != showgirl])
+    $ showgirl_2.apply_outfit(stripclub_wardrobe.pick_random_outfit())
     $ scene_manager.add_actor(showgirl_2)
     showgirl_2.char "Alright! We got a couple in here tonight, this should be fun!"
     if showgirl_2 == cousin:
@@ -1557,12 +1555,8 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
     return
 
 label watch_strip_show(the_person):  #This scene assumes scene manager is running and the_person is with you, so she won't strip for you.
-    if len(mc.location.people) < 2:
-        "There's no one here to strip for you!"
-    $ strip_girls = mc.location.people
-    # $ strip_girls.remove(the_person)
-    $ showgirl = get_random_from_list(strip_girls)
-    # TODO put showgirl in outfit
+    $ showgirl = get_random_from_list(stripclub_strippers)
+    $ showgirl.apply_outfit(stripclub_wardrobe.pick_random_outfit())
     $ pose_list = ["walking_away","back_peek","standing_doggy","stand2","stand3","stand4","stand5", "doggy","kneeling1"]
     "You watch as a girl gets on stage and starts to do her routine."
     $ scene_manager.add_actor(showgirl, character_placement = character_left_flipped)
@@ -1592,8 +1586,6 @@ label watch_strip_show(the_person):  #This scene assumes scene manager is runnin
     $ scene_manager.update_actor(showgirl, position = "walking_away")
     "After finishing, the showgirl grabs her tips then exits the stage."
     $ scene_manager.remove_actor(showgirl)
-    #Cleanup
-    $ del strip_girls
     return showgirl
 
 label play_darts_301(the_person, focus_mod = 0): #Label returns true if mc wins, false if the_person wins
