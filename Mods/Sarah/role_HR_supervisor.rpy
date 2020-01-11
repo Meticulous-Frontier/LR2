@@ -1057,7 +1057,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_mid_one
 
     elif position_choice == "titfuck":
-        if the_person.outfit.tits_available() == False:
+        if not the_person.outfit.tits_available():
             "[the_person.possessive_title] begins to take off her top. "
             $ scene_manager.strip_actor_outfit(the_person, exclude_lower = True)
             "With her tits out and ready to be used, she gives you a big smile."
@@ -1069,9 +1069,9 @@ label HR_director_sexy_meeting_start_label(the_person):
         call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_mid_two
 
     elif position_choice == "missionary on desk":
-        if the_person.outfit.vagina_available() == False:
+        if not (the_person.outfit.vagina_available() and the_person.outfit.vagina_visible()):
             "[the_person.possessive_title] begins to take off her clothes. "
-            $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
+            $ scene_manager.strip_actor_outfit(the_person, exclude_upper = True, exclude_lower = False)
             "When she finishes getting naked, she gives you a big smile."
         the_person.char "Oh my, fucking me on your desk? You are so naughty, [the_person.mc_title]!"
         $ scene_manager.update_actor(the_person, position = "missionary")
@@ -1092,11 +1092,11 @@ label HR_director_sexy_meeting_start_label(the_person):
         $ scene_manager.update_actor(the_person, position="standing_doggy")
         the_person.char "Oh my!"
 
-        if the_person.outfit.vagina_available():
+        if the_person.outfit.vagina_available() and the_person.outfit.vagina_visible():
             "She wiggles her hips back at you a bit. Her pussy lips glisten with a bit of moisture."
         else:
             "You start to strip [the_person.possessive_title] down."
-            $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
+            $ scene_manager.strip_actor_outfit(the_person, exclude_upper = True, exclude_lower = False)
             "Soon her ass is on full display in front of you, bent over your desk."
         "You don't waste any time. You pull your cock out and point it at her slit. You pull her hips back as you push inside of her with one smooth push."
         the_person.char "Mmm, fuck me good [the_person.mc_title]!"
