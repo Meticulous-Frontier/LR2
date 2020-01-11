@@ -257,7 +257,7 @@ label mom_breakfast_action_label():
 
         $ scene_manager.update_actor(mom, position = "stand4")
         the_person.char "Oh! We'd better go quick, your sister could come out at any time..."
-        if Family_Threesome_Proc:
+        if mc.business.event_triggers_dict.get("family_threesome", False) == True:
             mc.name "Why does it matter if [lily.name] comes out?"
             the_person.char "Well, I mean its not that I mind, but your mommy has needs [the_person.mc_title]..."
             menu:

@@ -11,7 +11,6 @@ init 2 python:
 
     SB_fetish_vaginal_family_threesome = Action("Family Threesome",SB_fetish_vaginal_family_threesome_requirement,"SB_fetish_vaginal_family_threesome_label")
     crisis_list.append([SB_fetish_vaginal_family_threesome, 5])
-    Family_Threesome_Proc = False #Keep track of whether or not this has happened before...
 
 
 label SB_fetish_vaginal_family_threesome_label():
@@ -59,7 +58,7 @@ label SB_fetish_vaginal_family_threesome_label():
             "[the_person_one.possessive_title] gives you a wink and then begins to crawl up the bed towards you."
 
     "You are so busy checking out [the_person_one.possessive_title], your brain barely registers a knock on your door. [the_person_one.possessive_title] is just sitting down in your lap when you hear a gasp from your door."
-    if Family_Threesome_Proc == True:
+    if mc.business.event_triggers_dict.get("family_threesome", False) == True:
         $ scene_manager.add_actor(the_person_two, emotion = "happy")
         the_person_two.char "Is that [the_person_one.name]? Ah good, I thought I heard you come in here."
         the_person_one.char "Mom! Going to join us again tonight?"
@@ -130,7 +129,7 @@ label SB_fetish_vaginal_family_threesome_label():
         $ scene_manager.strip_actor_outfit_to_max_sluttiness(the_person_two, temp_sluttiness_boost = 50)
         #call SB_threesome_description(the_person_two, the_person_one, SB_threesome_sixty_nine, make_bed(), 0, private = True, girl_in_charge = False) from _call_SB_threesome_description_SB_fetish_vaginal_family_threesome
         call start_threesome(lily, mom, start_position = Threesome_double_down) from threesome_event_test_call_2
-        $ Family_Threesome_Proc = True
+        $ mc.business.event_triggers_dict["family_threesome"] = True
         "Wow, you just had sex with [the_person_one.possessive_title] and [the_person_two.possessive_title]! You can't believe how lucky you are."
         "Maybe this is the event that will finally set things in motion for you family. All three of you are in this sexually together."
         "Eventually, the girls get up."

@@ -87,7 +87,7 @@ label family_morning_breakfast_enhanced_label():
         "Neither [lily.title] or [mom.possessive_title] seem to think it's strange to relax in their underwear."
         $ lily.change_stats(love = 3, slut_temp = 3)
         $ mom.change_stats(love = 3, slut_temp = 3, happiness = 10)
-        if Family_Threesome_Proc:
+        if mc.business.event_triggers_dict.get("family_threesome", False) == True:
             "While no one else seems to be bothered by all the skin in the room, it is starting to take a toll on you."
             "You try to focus on something work related, but instead all you can focus on are [mom.possessive_title]'s heaving tits, across the table from you."
             mom.char "Honey? Are you feeling okay? You seem a little zoned out..."
