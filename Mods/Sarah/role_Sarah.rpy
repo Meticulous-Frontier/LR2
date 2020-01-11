@@ -816,7 +816,7 @@ label Sarah_get_drinks_label():
     $ scene_manager.remove_actor(the_person)
     "[the_person.possessive_title] lets herself out of your room and leaves. Wow, what an evening!"
 
-    $ Sarah_stripclub_story_action = Action("Sarah stripclub",Sarah_stripclub_story_requirement,"Sarah_stripclub_story_label")  #Create the next storyline event
+    $ Sarah_stripclub_story_action = Action("Sarah Strip Club",Sarah_stripclub_story_requirement,"Sarah_stripclub_story_label")  #Create the next storyline event
     $ mc.business.mandatory_crises_list.append(Sarah_stripclub_story_action) #Add the event here so that it pops when the requirements are met.
 
     $ sarah_weekend_surprise_action = ActionMod("Sarah's Weekend Surprise", Sarah_weekend_surprise_crisis_requirement, "Sarah_weekend_surprise_crisis_label",
