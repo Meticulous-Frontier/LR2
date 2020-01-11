@@ -60,7 +60,7 @@ init 2:
                 xfill True
                 text "Character" style "serum_text_style_header"
 
-            if get_HR_director_unlock("headhunter_obedience", False) == True:
+            if get_HR_director_tag("headhunter_obedience", False) == True:
                 hbox:
                     xalign 0.5
                     textbutton "Free spirited":
@@ -108,7 +108,7 @@ init 2:
                 xfill True
                 text "Job Focus" style "serum_text_style_header"
 
-            if get_HR_director_unlock("headhunter_focused", False) == True:
+            if get_HR_director_tag("headhunter_focused", False) == True:
                 hbox:
                     xalign 0.5
                     textbutton "Department Focus":
@@ -139,7 +139,7 @@ init 2:
                 xfill True
                 text "Marital Status" style "serum_text_style_header"
 
-            if get_HR_director_unlock("headhunter_marital", False) == True:
+            if get_HR_director_tag("headhunter_marital", False) == True:
                 hbox:
                     xalign 0.5
                     textbutton "Maried":
@@ -186,7 +186,7 @@ init 2:
                 xfill True
                 text "Sluttiness" style "serum_text_style_header"
 
-            if get_HR_director_unlock("headhunter_slut", False) == True:
+            if get_HR_director_tag("headhunter_slut", False) == True:
                 hbox:
                     xalign 0.5
                     textbutton "Slutty":
@@ -233,7 +233,7 @@ init 2:
                 xfill True
                 text "Children" style "serum_text_style_header"
 
-            if get_HR_director_unlock("headhunter_kids", False) == True:
+            if get_HR_director_tag("headhunter_kids", False) == True:
                 hbox:
                     xalign 0.5
                     textbutton "Mother":
@@ -266,7 +266,7 @@ init 2:
                 xfill True
                 text "Height" style "serum_text_style_header"
 
-            if get_HR_director_unlock("headhunter_physical", False) == True:
+            if get_HR_director_tag("headhunter_physical", False) == True:
                 hbox:
                     xalign 0.5
                     textbutton "Tall":
@@ -313,7 +313,7 @@ init 2:
                 xfill True
                 text "Body" style "serum_text_style_header"
 
-            if get_HR_director_unlock("headhunter_physical", False) == True:
+            if get_HR_director_tag("headhunter_physical", False) == True:
                 hbox:
                     xalign 0.5
                     textbutton "Thick":
@@ -360,7 +360,7 @@ init 2:
                 xfill True
                 text "Bust" style "serum_text_style_header"
 
-            if get_HR_director_unlock("headhunter_physical", False) == True:
+            if get_HR_director_tag("headhunter_physical", False) == True:
                 hbox:
                     xalign 0.5
                     textbutton "Busty":

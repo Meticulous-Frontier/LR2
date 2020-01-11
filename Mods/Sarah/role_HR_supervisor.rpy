@@ -28,10 +28,12 @@ init -0 python:
         if business_HR_director:
             return business_HR_director.HR_tags.get(key, default)
 
+    # used for unlocked sex positions
     def set_HR_director_unlock(key, value):
         if business_HR_director:
             business_HR_director.HR_unlocks[key] = value
 
+    # used for unlocked sex positions
     def get_HR_director_unlock(key, default = False):
         if business_HR_director:
             return business_HR_director.HR_unlocks.get(key, default)
@@ -1367,24 +1369,24 @@ label HR_director_monday_headhunt_update_label(the_person):
         $ set_HR_director_tag("business_HR_headhunter_progress", 0)
 
     the_person.char "Let's see if any recent recruiting policy updates will change how we look for employees."
-    if get_HR_director_unlock("headhunter_obedience", False) == False and recruitment_obedience_improvement_policy.is_owned():
+    if get_HR_director_tag("headhunter_obedience", False) == False and recruitment_obedience_improvement_policy.is_owned():
         the_person.char "I can now target a new employee based on their free will! I can either scout for an obedient, or free spirited prospect."
-        $ set_HR_director_unlock("headhunter_obedience", True)
-    elif get_HR_director_unlock("headhunter_focused", False) == False and recruitment_batch_three_policy.is_owned():
+        $ set_HR_director_tag("headhunter_obedience", True)
+    elif get_HR_director_tag("headhunter_focused", False) == False and recruitment_batch_three_policy.is_owned():
         the_person.char "I can now target highly specialized prospects. They will be more skilled in an area, but may not be well rounded individuals."
-        $ set_HR_director_unlock("headhunter_focused", True)
-    elif get_HR_director_unlock("headhunter_physical", False) == False and recruitment_knowledge_one_policy.is_owned():
+        $ set_HR_director_tag("headhunter_focused", True)
+    elif get_HR_director_tag("headhunter_physical", False) == False and recruitment_knowledge_one_policy.is_owned():
         the_person.char "With the new software update, I can now search by a variety of physical preferences. Busty? Short? Thick? I can make it happen!"
-        $ set_HR_director_unlock("headhunter_physical", True)
-    elif get_HR_director_unlock("headhunter_marital", False) == False and recruitment_knowledge_two_policy.is_owned():
+        $ set_HR_director_tag("headhunter_physical", True)
+    elif get_HR_director_tag("headhunter_marital", False) == False and recruitment_knowledge_two_policy.is_owned():
         the_person.char "I can now target married or single individuals. It might be illegal in most states, but not here!"
-        $ set_HR_director_unlock("headhunter_marital", True)
-    elif get_HR_director_unlock("headhunter_slut", False) == False and recruitment_slut_improvement_policy.is_owned():
+        $ set_HR_director_tag("headhunter_marital", True)
+    elif get_HR_director_tag("headhunter_slut", False) == False and recruitment_slut_improvement_policy.is_owned():
         the_person.char "I can now narrow down prospects based on general promiscuity. Want a prude or a slut? I can do that."
-        $ set_HR_director_unlock("headhunter_slut", True)
-    elif get_HR_director_unlock("headhunter_kids", False) == False and recruitment_knowledge_three_policy.is_owned():
+        $ set_HR_director_tag("headhunter_slut", True)
+    elif get_HR_director_tag("headhunter_kids", False) == False and recruitment_knowledge_three_policy.is_owned():
         the_person.char "I can now pick prospects based on whether or not they have kids. More MILFs around here? I could handle that!"
-        $ set_HR_director_unlock("headhunter_kids", True)
+        $ set_HR_director_tag("headhunter_kids", True)
     else:
         "Looks like I don't have any additions to the prospecting system this week."
     return
