@@ -24,10 +24,7 @@ init 1 python:
         return False
 
     def add_fuck_doll_collar_to_base_outfit(person):
-        # remove breed me collar if it exists (anal collar has priority)
-        found = find_in_list(lambda x: x.proper_name == "Collar_Breed", person.base_outfit.accessories)
-        if found:
-            person.base_outfit.accessories.remove(found)
+        person.base_outfit.remove_all_collars()
 
         fd_collar = fuck_doll_collar.get_copy()
         fd_collar.colour = [.41,.16,.38,.9]

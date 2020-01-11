@@ -26,10 +26,7 @@ init 1 python:
         return cum_score
 
     def add_cum_slut_collar_to_base_outfit(person):
-        # remove breed me collar if it exists (cum collar has priority)
-        found = find_in_list(lambda x: x.proper_name == "Collar_Breed", person.base_outfit.accessories)
-        if found:
-            person.base_outfit.accessories.remove(found)
+        person.base_outfit.remove_all_collars()
 
         cs_collar = cum_slut_collar.get_copy()
         cs_collar.colour = [.1,.1,.1,.9]

@@ -20,6 +20,15 @@ init -1 python:
 
     Outfit.check_outfit_cum = check_outfit_cum
 
+    def remove_all_collars(self):
+        for proper_name in ["Collar_Breed", "Collar_Cum_Slut", "Collar_Fuck_Doll"]:
+            found = find_in_list(lambda x: x.proper_name == proper_name, self.accessories)
+            if found:
+                self.accessories.remove(found)
+        return
+
+    Outfit.remove_all_collars = remove_all_collars
+
     def get_overwear_slut_score_enhanced(self): #Calculates the sluttiness of this outfit assuming it's an overwear set. That means we assume a modest underwear set is used (ie. one that denies access).
         new_score = 0
         if self.tits_visible():
@@ -87,11 +96,10 @@ init -1 python:
 # initialize this part after wardrobe builder is initialized
 init 6 python:
     def tits_available_enhanced(self):
-        reachable = True
         for cloth in self.upper_body:
             if cloth.anchor_below and not cloth in [cincher, heart_pasties]:
-                reachable = False
-        return reachable
+                return False
+        return True
 
     Outfit.tits_available = tits_available_enhanced
 

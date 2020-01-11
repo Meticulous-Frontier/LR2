@@ -40,6 +40,8 @@ init 1 python:
         return False
 
     def add_breed_me_collar_to_base_outfit(person):
+        person.base_outfit.remove_all_collars()
+
         bm_collar = breed_collar.get_copy()
         bm_collar.colour = [1,.41,.71,.9]
         bm_collar.pattern = "Pattern_1"
