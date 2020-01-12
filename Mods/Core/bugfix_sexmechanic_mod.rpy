@@ -94,7 +94,8 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 the_person.char "That was nice, but i'm tired. We will continue this another time."
                 $ round_choice = "Girl Leave"
             else:
-                "[the_person.possessive_title] is in control, and keeps on [position_choice.verbing] you."
+                # Don't show control message, it breaks the flow, because it pops up every round.
+                #"[the_person.possessive_title] is in control, and keeps on [position_choice.verbing] you."
                 $ round_choice = "Continue"
         else:
             # Forced actions (when the guy is in charge) go here and set round_choice.
@@ -105,7 +106,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             # Note: There can be no chance based decisions in this section, because it loops on menu interactions, not on actual rounds of sex. Those go after the "change or continue" loop
 
         if round_choice is None: #If there is no set round_choice
-            #TODO: Add a varient of this list when the girl is in control to ask if you want to resist or ask/beg for something.
+            #TODO: Add a variant of this list when the girl is in control to ask if you want to resist or ask/beg for something.
             $ option_list = []
             python:
                 if position_choice is not None:
@@ -238,7 +239,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     #TODO: Add some personality specific dialgoue for this
 
                 else: # You end the encounter and nothing special happens.
-                    #TODO: Add some personality specfic dialogue
+                    #TODO: Add some personality specific dialogue
                     pass
 
         elif round_choice == "Girl Leave":
@@ -306,8 +307,13 @@ label check_position_willingness_bugfix(the_person, the_position, skip_dialog = 
         $ willing = False
 
     if willing and the_position.skill_tag == "Vaginal" and not mc.condom: #We might need a condom, which means she might say no. TODO: Add an option to pull _off_ a condom while having sex.
-        call condom_ask(the_person) from _call_condom_ask_bugfix
-        $ willing = _return
+        if the_person.effective_sluttiness() < the_person.get_no_condom_threshold() + 50:
+            # she is not slutty enough and we have the condom dialog
+            call condom_ask(the_person) from _call_condom_ask_bugfix
+            $ willing = _return
+        else:
+            # she is so slutty we are going to fuck her raw (we don't care anymore)
+            mc.name "I'm going to fuck your little pussy raw."
 
     return willing
 
