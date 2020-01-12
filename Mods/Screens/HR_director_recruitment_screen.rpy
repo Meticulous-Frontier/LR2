@@ -2,7 +2,7 @@
 init 2:
 
     screen HR_director_recruitment_screen(hr_director):
-        $ slut_modifier = -20 if recruitment_slut_improvement_policy.is_owned() else 0
+        $ slut_modifier = 0 if recruitment_slut_improvement_policy.is_owned() else -20
         $ kids = renpy.random.randint(1, 5)
 
         add "Paper_Background.png"
