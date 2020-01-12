@@ -502,6 +502,7 @@ label HR_director_monday_meeting_label(the_person):
 
     $ HR_director_monday_meeting = Action("Monday HR Lunch",HR_director_monday_meeting_requirement,"HR_director_monday_meeting_label", args = the_person) #Set the trigger day for the next monday. Monday is day%7 == 0
     $ mc.business.mandatory_crises_list.append(HR_director_monday_meeting) #Add the event here so that it pops when the requirements are met.
+    $ the_person.review_outfit(dialogue = False)
     return
 
 label HR_director_personnel_interview_label(the_person, max_opinion = 0):
@@ -638,6 +639,9 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     $ scene_manager.update_actor(the_person, position = "stand2")
     "[the_person.title] gets up and walks [person_choice.title] to the door."
     "They exchange a few pleasantries before [person_choice.title] leaves the room."
+    $ scene_manager.remove_actor(person_choice)
+    # remove actor first (without reset), so she continues the meeting as she was dressed before
+    $ scene_manager.remove_actor(the_person, reset_actor = False)
     $ scene_manager.clear_scene()
     "[the_person.title] comes back to the desk and sits down."
     $ the_person.draw_person(position = "sitting")
@@ -1105,7 +1109,6 @@ label HR_director_sexy_meeting_start_label(the_person):
         call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_mid_four
 
 
-    "She quickly starts to get dressed to continue your meeting."
     if ((the_person.obedience - 100) + the_person.sluttiness) > 100: #If she is either very obedient, slutty, or a mixture
         menu:
             "Tell her to stay like that for the meeting":
@@ -1115,6 +1118,9 @@ label HR_director_sexy_meeting_start_label(the_person):
             "Let her clean herself up":
                 $ the_person.review_outfit(dialogue = False)
                 "[the_person.possessive_title] quickly cleans herself up, ready to continue the meeting."
+    else:
+        "She quickly starts to get dressed to continue your meeting."
+
 
     return
 
