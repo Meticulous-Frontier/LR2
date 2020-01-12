@@ -54,7 +54,7 @@ label SB_caught_masturbating_crisis_label():
     the_person.char "mmmmmmmfff... oh..."
     $ the_person.change_arousal(50)
     $ the_person.discover_opinion("masturbating")
-    if the_person.outfit.vagina_available(): #If she is naked below
+    if the_person.outfit.vagina_visible(): #If she is naked below
         "With her pussy on full display, you can see she is masturbating vigorously. Her pink lips glisten with moisture"
     else:
         "While it is kind of hard to see, it appears that [the_person.possessive_title] has one hand in her [the_clothing.name] and is masturbating"
@@ -67,7 +67,7 @@ label SB_caught_masturbating_crisis_label():
             "[the_person.possessive_title] continues to moan to herself, lost in whatever fantasy she is masturbating to"
             #Get Caught?
             $ random_roll = renpy.random.randint(0,100)
-            $ success_chance = 10*(mc.focus + 1)
+            $ success_chance = 5*(mc.focus + 1)
             if random_roll < success_chance: #If player does not get caught
                 "[the_person.possessive_title] is breathing heavily. It is clear from how vigorously she is touching herself that she is going to orgasm soon." #TODO finish this
                 if the_person.sluttiness < 20:   #She's not interested in MC yet...
@@ -166,7 +166,7 @@ label SB_caught_masturbating_crisis_label():
                     $ the_person.draw_person()
                     "[the_person.possessive_title] quickly stands up."
                     $ random_roll2 = renpy.random.randint(0,100)
-                    if random_roll2 < 50: #She's pissed
+                    if random_roll2 < 50 : #She's pissed
                         $ the_person.draw_person(emotion="angry")
                         the_person.char "What the fuck?!? Were you just standing there watching me? Oh my god..."
                         mc.name "No, I was... I heard a noise... I was just trying to see what it was..."
@@ -206,7 +206,7 @@ label SB_caught_masturbating_crisis_label():
                     $ the_person.draw_person(position = "missionary")
                     "[the_person.possessive_title] rolls over on her back and continues masturbating."
                     $ the_person.change_arousal(20)
-                    if the_person.outfit.vagina_available():
+                    if the_person.outfit.vagina_visible():
                         "Her delicious pussy on full display, [the_person.possessive_title] increases her pace while closely watching you."
                     else:
                         "[the_person.possessive_title] has her hand in her [the_clothing.name]. Her movements get faster while closely watching you"
@@ -235,7 +235,7 @@ label SB_caught_masturbating_crisis_label():
                     "You finish up your walk and return back to your previous work"
                 else: #She is very slutty
                     the_person.char "Oh [the_person.mc_title]! Thank god, I could really use your help here..."
-                    if the_person.outfit.vagina_available() == False:
+                    if not the_person.outfit.vagina_available():
                         "[the_person.possessive_title] begins to pull off her clothes."
                         $ the_person.strip_outfit(position = "doggy", exclude_upper = True)
                     the_person.char "Could you just give me a little quickie? I'm all warmed up, you could just stick it in right now..."
