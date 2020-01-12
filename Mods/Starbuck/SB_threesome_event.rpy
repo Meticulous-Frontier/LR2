@@ -10,7 +10,7 @@ init 2 python:
         return False
 
     SB_fetish_vaginal_family_threesome = Action("Family Threesome",SB_fetish_vaginal_family_threesome_requirement,"SB_fetish_vaginal_family_threesome_label")
-    crisis_list.append([SB_fetish_vaginal_family_threesome, 5])
+    crisis_list.append([SB_fetish_vaginal_family_threesome, 8])
 
 
 label SB_fetish_vaginal_family_threesome_label():

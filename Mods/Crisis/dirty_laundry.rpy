@@ -8,7 +8,7 @@
 # high sluttiness they put the panties on and have MC cum in the panties while they wear them
 
 init -1 python:
-    dirty_laundry_weight = 4
+    dirty_laundry_weight = 5
 
 init 2 python:
     def dirty_laundry_requirement():
