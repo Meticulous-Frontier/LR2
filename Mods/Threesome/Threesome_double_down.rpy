@@ -167,10 +167,7 @@ label outro_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_loca
         the_girl_2.char "Hey! No fair! I want some of that!"
         "You feel [the_girl_1.title] slowly pull off of you, your cock cold and aching to be back inside of her."
         "[the_girl_2.title] leans forward and takes your cock in her mouth, sucking the remains of your cum of your shaft."
-        if the_girl_2.outfit.can_add_accessory(mouth_cum):
-            $the_cumshot = mouth_cum.get_copy()
-            $the_cumshot.layer = 0 #TODO: make sure this doesn't break things by being on layer 0
-            $the_girl_2.outfit.add_accessory(the_cumshot)
+        $ the_girl_2.cum_in_mouth()
         $ scene_manager.draw_scene()
         "You feel a few more licks along your pelvic area, which you assume is her cleaning up any remaining drops of cum."
         the_girl_2.char "Mmmm, I'm not letting a drop go to waste..."
