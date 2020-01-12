@@ -1,6 +1,13 @@
-
+# Before the family threesome flag is set, the crisis chance is high (it unlocks other parts of the game)
+# After first occurrence the chance is lowered, since we don't want it to happen too often.
 
 init 2 python:
+    def update_family_threesome_crisis(chance):
+        found = find_in_list(lambda x: x[0] == SB_fetish_vaginal_family_threesome, crisis_list)
+        if found:
+            found[1] = chance
+        return
+
     def SB_fetish_vaginal_family_threesome_requirement():
         if mc_asleep() and day % 7 is not 4: # not on Friday nights (we have the kitchen mom event here)
             if mc.energy > 50:  #Must have the energy to handle a long sexy night
@@ -10,7 +17,30 @@ init 2 python:
         return False
 
     SB_fetish_vaginal_family_threesome = Action("Family Threesome",SB_fetish_vaginal_family_threesome_requirement,"SB_fetish_vaginal_family_threesome_label")
-    crisis_list.append([SB_fetish_vaginal_family_threesome, 8])
+    crisis_list.append([SB_fetish_vaginal_family_threesome, 3])
+
+init 5 python:
+    # we need the label hijacks to correctly set the crisis chance (since it is not stored in the save game)
+    add_label_hijack("normal_start", "init_family_threesome_crisis")
+    add_label_hijack("after_load", "update_family_threesome_crisis")
+
+label init_family_threesome_crisis(stack):
+    python:
+        update_family_threesome_crisis(25) 
+        # continue on the hijack stack if needed
+        execute_hijack_call(stack)
+    return
+
+label update_family_threesome_crisis(stack):
+    python:
+        # assign correct weight to relative recruitment status
+        if mc.business.event_triggers_dict.get("family_threesome", False) == False:
+            update_family_threesome_crisis(25)
+        if mc.business.event_triggers_dict.get("family_threesome", False) == True:
+            update_family_threesome_crisis(3)
+        execute_hijack_call(stack)
+    return
+
 
 
 label SB_fetish_vaginal_family_threesome_label():
@@ -130,6 +160,7 @@ label SB_fetish_vaginal_family_threesome_label():
         #call SB_threesome_description(the_person_two, the_person_one, SB_threesome_sixty_nine, make_bed(), 0, private = True, girl_in_charge = False) from _call_SB_threesome_description_SB_fetish_vaginal_family_threesome
         call start_threesome(lily, mom, start_position = Threesome_double_down) from threesome_event_test_call_2
         $ mc.business.event_triggers_dict["family_threesome"] = True
+        $ update_family_threesome_crisis(3)
         "Wow, you just had sex with [the_person_one.possessive_title] and [the_person_two.possessive_title]! You can't believe how lucky you are."
         "Maybe this is the event that will finally set things in motion for you family. All three of you are in this sexually together."
         "Eventually, the girls get up."
