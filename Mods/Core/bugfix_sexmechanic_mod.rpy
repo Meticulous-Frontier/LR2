@@ -5,6 +5,7 @@ init 5 python:
     config.label_overrides["fuck_person"] = "fuck_person_bugfix"
     config.label_overrides["check_position_willingness"] = "check_position_willingness_bugfix"
     config.label_overrides["pick_object"] = "pick_object_enhanced"
+    config.label_overrides["watcher_check"] = "watcher_check_enhanced"
 
 label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
@@ -340,3 +341,117 @@ label pick_object_enhanced(the_person, the_position, forced_object = None):
     $ the_person.add_situational_slut("sex_object", picked_object.sluttiness_modifier, the_position.verbing + " on a " + picked_object.name)
     $ the_person.add_situational_obedience("sex_object",picked_object.obedience_modifier, the_position.verbing + " on a " + picked_object.name)
     return picked_object
+
+label watcher_check_enhanced(the_person, the_position, the_object, the_report): # Check to see if anyone is around to comment on the characters having sex.
+    $ other_people = [person for person in mc.location.people if person is not the_person] #Build a list with all the _other_ people in the room other than the one we're fucking.
+    python: #Checks to see if anyone watching is in a relationship, and if they are sets up an event where they confront you later about you actively cheating in front of the,
+        for a_person in other_people:
+            if girlfriend_role in a_person.special_role and the_position.slut_requirement > (a_person.sluttiness/2): #You can get away with stuff half as slutty as she would do
+                caught_cheating_action = Action("Caught cheating action", caught_cheating_requirement, "caught_cheating_label", args = the_person)
+                not_already_in = True
+                for an_action in a_person.on_room_enter_event_list:
+                    if an_action == caught_cheating_action:
+                        not_already_in = False
+
+                if not_already_in:
+                    a_person.on_room_enter_event_list.append(caught_cheating_action)
+                    renpy.say("",a_person.title + " gasps when she sees what you and " + the_person.title + " are doing.")
+
+
+            elif affair_role in a_person.special_role and the_position.slut_requirement > ((a_person.sluttiness*2)/3): #You can get away with stuff two thirds as slutty as what she would do.
+                caught_affair_cheating_action = Action("Caught affair cheating action", caught_affair_cheating_requirement, "caught_affair_cheating_label", args = the_person)
+                not_already_in = True
+                for an_action in a_person.on_room_enter_event_list:
+                    if an_action == caught_affair_cheating_action:
+                        not_already_in = False
+
+                if not_already_in:
+                    a_person.on_room_enter_event_list.append(caught_affair_cheating_action)
+                    renpy.say("",a_person.title + " gasps when she sees what you and " + the_person.title + " are doing.")
+
+    $ watcher = get_random_from_list(other_people) #Get a random person from the people in the area, if there are any.
+    $ del other_people
+    if watcher:
+        $ the_relationship = town_relationships.get_relationship(watcher, the_person)
+        if the_relationship.get_type() in ["Mother", "Daughter", "Sister", "Cousin", "Niece", "Aunt", "Grandmother", "Granddaughter"]:
+            call relationship_sex_watch(watcher, the_relationship.type_b.lower(), the_position) 
+            $ the_position.redraw_scene(the_person)
+            call relationship_being_watched(the_person, watcher, the_relationship.type_a.lower(), the_position)
+            $ the_person.change_arousal(the_person.get_opinion_score("public sex"))
+            $ the_person.discover_opinion("public sex")
+        else:
+            # NOTE: the dialogue here often draws the person talking with various emotions or positions, so we redraw the scene after we call them.
+            $ watcher.call_dialogue("sex_watch", the_sex_person = the_person, the_position = the_position) #Get the watcher's reaction to the people having sex. This might include dialogue calls from other personalities as well!
+            $ the_position.redraw_scene(the_person)
+            $ the_person.call_dialogue("being_watched", the_watcher = watcher, the_position = the_position) #Call her response to the person watching her.
+            $ the_person.change_arousal(the_person.get_opinion_score("public sex"))
+            $ the_person.discover_opinion("public sex")
+    return
+
+label relationship_sex_watch(the_person, the_relation, the_position):
+    if the_person.sluttiness < the_position.slut_requirement - 20:
+        $ the_person.draw_person(emotion = "angry")
+        the_person.char "Oh my god [the_relation], I can't believe you're doing that here in front of everyone. Don't either of you have any decency?"
+        $ the_person.change_obedience(-2)
+        $ the_person.change_happiness(-1)
+        "[the_person.title] looks away while you and her [the_relation] [the_position.verb]."
+
+    elif the_person.sluttiness < the_position.slut_requirement - 10:
+        $ the_person.draw_person()
+        $ the_person.change_happiness(-1)
+        "[the_person.title] shakes her head and tries to avoid watching you and her [the_relation] [the_position.verb]."
+
+    elif the_person.sluttiness < the_position.slut_requirement:
+        $ the_person.draw_person()
+        $ change_report = the_person.change_slut_temp(1)
+        "[the_person.title] tries to avert her gaze, but keeps glancing over while you and her [the_relation] [the_position.verb]."
+
+    elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
+        $ the_person.draw_person()
+        the_person.char "Oh my..."
+        $ change_report = the_person.change_slut_temp(2)
+        "[the_person.title] watches quietly while you and her [the_relation] [the_position.verb]."
+
+    else:
+        $ the_person.draw_person(emotion = "happy")
+        the_person.char "Glad to see you two are having a good time. [the_person.mc_title], careful you aren't too rough with my [the_relation]."
+        "[the_person.title] watches quietly while you and her [the_relation] [the_position.verb]."
+    return
+
+label relationship_being_watched(the_person, the_watcher, the_relation, the_position):
+    if the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness >= the_position.slut_cap:
+        #They agree you should give it to her harder
+        the_person.char "I can handle it [the_person.mc_title], you can be rough with me."
+        $ the_person.change_arousal(1)
+        "[the_person.title] seems turned on by her [the_relation] watching you and her [the_position.verb]."
+
+    elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
+        #She's super slutty and doesn't care what people think.
+        the_person.char "Don't listen to my [the_relation], I'm having a great time. Look, she can't stop peeking over."
+
+    elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
+        #She's super slutty and encourages the watcher to be slutty.
+        $ the_person.change_arousal(1)
+        "[the_person.title] seems turned on by her [the_relation] watching you and her [the_position.verb]."
+
+    elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness >= the_position.slut_cap:
+        #She's into it and encouraged by the slut watching her.
+        the_person.char "Oh god, having you watch us like this..."
+        $ the_person.change_arousal(1)
+        "[the_person.title] seems turned on by her [the_relation] watching you and her [the_position.verb]."
+
+    elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
+        #She's into it but shamed by the prude watching her.
+        the_person.char "[the_person.mc_title], maybe we shouldn't be doing this here..."
+        $ the_person.change_arousal(-1)
+        $ the_person.change_slut_temp(-1)
+        "[the_person.title] seems uncomfortable with her [the_relation] nearby."
+
+    else: #the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
+        #They're both into it but not fanatical about it.
+        the_person.char "Oh my god, having you watch us do this feels so dirty. I think I like it!"
+        $ the_person.change_arousal(1)
+        $ the_person.change_slut_temp(1)
+        "[the_person.title] seems more comfortable [the_position.verbing] you with her [the_relationship] around."
+
+    return
