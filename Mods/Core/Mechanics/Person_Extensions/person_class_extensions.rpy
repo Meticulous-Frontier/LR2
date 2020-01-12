@@ -204,8 +204,8 @@ init -1:
                 height = self.height * (renpy.random.randint(95,105)/100.0)
                 if height > 1.0:
                     height = 1.0
-                elif height < 0.9:
-                    height = 0.9
+                elif height < 0.8:
+                    height = 0.8
             else:
                 height = None
 
@@ -320,7 +320,7 @@ init -1:
             self.sexed_count = 0 #Reset the counter for how many times you've been seduced, you might be seduced multiple times in one day!
 
             if time_of_day == 0: #It's a new day, get a new outfit out to wear!
-                self.planned_outfit = self.wardrobe.decide_on_outfit(self.sluttiness)
+                self.planned_outfit = self.wardrobe.decide_on_outfit2(self)
                 self.apply_outfit(self.planned_outfit)
                 self.planned_uniform = None
 
