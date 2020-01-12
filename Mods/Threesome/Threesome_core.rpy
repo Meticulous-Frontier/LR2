@@ -19,7 +19,7 @@ init -1 python:
     THREESOME_BASE_SLUT_REQ = 80  #A constant to hold the usual base sluttiness requirements for threesomes.
     class Threesome_Position(renpy.store.object):
         def __init__(self,name,slut_requirement,position_one_tag, position_two_tag,girl_one_final_description,girl_two_final_description,requires_location,requirements,
-        p1_transform, p2_transform, can_swap = False, verb = "fuck" ):
+        p1_transform, p2_transform, can_swap = False, verb = "fuck", verbing = None):
             self.name = name
             self.slut_requirement = slut_requirement #The required slut score of the girl. Obedience will help fill the gap if possible, at a happiness penalty. Value from 0 (almost always possible) to ~100
             self.position_one_tag = position_one_tag # The tag used to get the correct position image set
@@ -30,10 +30,14 @@ init -1 python:
             self.requirements = requirements        #The requirements to run this position. Should be a function
             self.mc_position = []                   #Holds the positions that MC can take during this position
             self.verb = verb #A verb used to describe the position. "Fuck" is default, and mostly used for sex positions or blowjobs etc. Kiss, Fool around, etc. are also possibilities.
+            self.verbing = verbing
             self.current_modifier = None #We will update this if the posisiion has a special modifier that shoudl be applied, like blowjob.
             self.p1_transform = p1_transform
             self.p2_transform = p2_transform
             self.can_swap = can_swap
+
+            if verbing is None:
+                self.verbing = verb + "ing"
 
         def create_scene(self, the_person_one, the_person_two):
             if girl_swap_pos:
