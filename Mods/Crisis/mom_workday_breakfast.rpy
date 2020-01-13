@@ -268,7 +268,7 @@ label mom_breakfast_action_label():
                     "[the_person.possessive_title] quickly starts to strip down while you knock on [lily.possessive_title]'s door."
 
                     $ scene_manager.strip_actor_outfit(mom)
-                    "After no response, you kock again."
+                    "After no response, you knock again."
                     lily.char "What!?! I'm tired!"
                     mc.name "Me and mom are gonna have some fun, you should join us."
                     lily.char "Huh? Really!?! I'll be right there!"
@@ -281,8 +281,7 @@ label mom_breakfast_action_label():
                         $ scene_manager.strip_actor_outfit(lily)
                     mc.name "Mom is feeling needy this morning sis, why don't we take care of her?"
                     lily.char "Sounds great!"
-                    # TODO threesome scene where you fuck a girl from behind while the other girl fondles her tits and makes out with her.
-                    call start_threesome(the_person, lily) from _fuck_mom_for_breakfast_1
+                    call start_threesome(the_person, lily, start_position = Threesome_doggy_deluxe) from _fuck_mom_for_breakfast_1
                     $ sex_report = _return
                     if sex_report["girl one orgasms"] > 0 and sex_report["girl two orgasms"] > 0 and sex_report["guy orgasms"] > 0: #Happy family
                         "The three of you remain together for a while, enjoying your orgasms."
