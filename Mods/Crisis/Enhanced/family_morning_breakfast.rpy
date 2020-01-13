@@ -109,7 +109,7 @@ label family_morning_breakfast_enhanced_label():
                         "You enjoy your post orgasm bliss for a few moments while [mom.possessive_title] and [lily.possessive_title] get up."
                     else:
                         "Finished for now, you decide to put your cock away while [mom.possessive_title] and [lily.possessive_title] get up."
-                    $ scene_manager.update_actor(mom, position="walking_away", character_placement = character_center_flipped)
+                    $ scene_manager.update_actor(mom, position="stand3", character_placement = character_center_flipped)
                     $ scene_manager.update_actor(lily, position = "stand4", character_placement = character_right)
                     mc.name "Mmm, thanks for breakfast mom!"
                     if sex_report["guy orgasms"] > 0:
