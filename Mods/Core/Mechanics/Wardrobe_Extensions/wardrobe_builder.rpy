@@ -121,6 +121,7 @@ init 5 python:
         #color_prefs[""][""] = [, , , ]
 
         earings_only_list = [chandelier_earings, gold_earings, modern_glasses]
+        neckwear_without_collars = [x for x in neckwear_list if x.proper_name not in ["Collar_Breed", "Collar_Cum_Slut", "Collar_Fuck_Doll"]]
 
         def __init__(self, person):
             if person and isinstance(person, Person):
@@ -218,10 +219,10 @@ init 5 python:
             if item:
                 outfit.add_feet(item.get_copy(), [color_feet[0] * .8, color_feet[1] * .8, color_feet[2] * .8, color_feet[3]])
 
-            self.add_accessory_from_list(outfit, self.build_filter_list(self.earings_only_list, points), 3, color_lower)
-            self.add_accessory_from_list(outfit, self.build_filter_list(rings_list, points), 3, color_lower)
-            self.add_accessory_from_list(outfit, self.build_filter_list(bracelet_list, points), 3, color_upper)
-            self.add_accessory_from_list(outfit, self.build_filter_list(neckwear_list, points), 3, color_upper)
+            self.add_accessory_from_list(outfit, self.build_filter_list(self.earings_only_list, points, self.person.base_outfit.accessories), 3, color_lower)
+            self.add_accessory_from_list(outfit, self.build_filter_list(rings_list, points, self.person.base_outfit.accessories), 3, color_lower)
+            self.add_accessory_from_list(outfit, self.build_filter_list(bracelet_list, points, self.person.base_outfit.accessories), 3, color_upper)
+            self.add_accessory_from_list(outfit, self.build_filter_list(self.neckwear_without_collars, points, self.person.base_outfit.accessories), 3, color_upper)
 
             outfit.build_outfit_name()
 
@@ -271,10 +272,10 @@ init 5 python:
             return outfit
 
 
-        def build_filter_list(self, item_list, points, min_points = 0):
+        def build_filter_list(self, item_list, points, min_points = 0, filter_list = []):
             items = []
             while len(items) == 0 and points < 15:  # make sure we got some items to choose from
-                items = list(filter(lambda x: x.slut_value >= min_points and x.slut_value <= points, item_list))
+                items = list(filter(lambda x: x.slut_value >= min_points and x.slut_value <= points and x not in filter_list, item_list))
                 points += 1
 
             return list(filter(lambda x: x.slut_value <= points, item_list))
