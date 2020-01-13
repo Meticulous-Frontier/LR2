@@ -400,12 +400,13 @@ label SB_free_strip_scene(the_person):
         # Low obedience characters will strip off less when told but can be left to run the show on their own and will remove some.
         python:
             for item in the_person.outfit.get_unanchored():
-                test_outfit = the_person.outfit.get_copy()
-                test_outfit.remove_clothing(item)
+                if not item.is_extension:
+                    test_outfit = the_person.outfit.get_copy()
+                    test_outfit.remove_clothing(item)
 
-                display_string = "Strip " + item.name
+                    display_string = "Strip " + item.name
 
-                menu_list.append([display_string, [item, 0]])
+                    menu_list.append([display_string, [item, 0]])
 
             menu_list.append(["Just watch.","Watch"])
             menu_list.append(["Tell her to pose.","Pose"])
