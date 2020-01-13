@@ -39,13 +39,14 @@ init -1 python:
             if verbing is None:
                 self.verbing = verb + "ing"
 
-        def create_scene(self, the_person_one, the_person_two):
+        # requires the existence of a scene_manager with both actors
+        def update_scene(self, the_person_one, the_person_two):
             if girl_swap_pos:
-                scene_manager.add_actor(the_person_two, position = self.position_one_tag, character_placement = self.p1_transform)
-                scene_manager.add_actor(the_person_one, position = self.position_two_tag, character_placement = self.p2_transform)
+                scene_manager.update_actor(the_person_two, position = self.position_one_tag, character_placement = self.p1_transform)
+                scene_manager.update_actor(the_person_one, position = self.position_two_tag, character_placement = self.p2_transform)
             else:
-                scene_manager.add_actor(the_person_one, position = self.position_one_tag, character_placement = self.p1_transform)
-                scene_manager.add_actor(the_person_two, position = self.position_two_tag, character_placement = self.p2_transform)
+                scene_manager.update_actor(the_person_one, position = self.position_one_tag, character_placement = self.p1_transform)
+                scene_manager.update_actor(the_person_two, position = self.position_two_tag, character_placement = self.p2_transform)
             scene_manager.draw_scene()
             return
 
@@ -201,7 +202,7 @@ label threesome_test():
 
 label threesome_alignment():
     $ position_choice = threesome_double_blowjob
-    $ position_choice.create_scene(mom, lily)
+    $ position_choice.update_scene(mom, lily)
     $ finished = False
     while not finished:
         menu:
@@ -274,12 +275,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
     #     $ report_log["girl one orgasms"] = report_log["girl two orgasms"]
     #     $ report_log["girl two orgasms"] = int_swap
 
-    #TODO fix this fucking stupid hack
-    $ scene_manager.remove_actor(the_person_one, reset_actor = False)
-    $ scene_manager.remove_actor(the_person_two, reset_actor = False)
-    #end TODO
-
-    $ position_choice.create_scene(the_person_one, the_person_two)
+    $ position_choice.update_scene(the_person_one, the_person_two)
     if round == 0:
         "As the girls get into position, you consider how to begin your threesome."
     $ option_list = []
@@ -311,7 +307,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
         # if girl_in_charge:
         #     # For now, default to guys only in charge
         if round_choice is None: #If there is no set round_choice
-            #TODO: Add a varient of this list when the girl is in control to ask if you want to resist or ask/beg for something.
+            #TODO: Add a variant of this list when the girl is in control to ask if you want to resist or ask/beg for something.
             $ option_list = []
             python:
                 if position_choice is not None:
@@ -329,7 +325,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
 
                     if not position_locked:
                         option_list.append(["Pause and change position.\n-5 {image=gui/extra_images/arousal_token.png}","Change"])
-                        ##### For now, no implemantation of connections
+                        #### For now, no implementation of connections
                         # for position in position_choice.connections:
                         #     if object_choice.has_trait(position.requires_location):
                         #         appended_name = "Transition to " + position.build_position_willingness_string(the_person) #Note: clothing and energy checks are done inside of build_position_willingness, invalid positiosn marked (disabled)
@@ -360,11 +356,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                 #     $ int_swap = report_log["girl one orgasms"]
                 #     $ report_log["girl one orgasms"] = report_log["girl two orgasms"]
                 #     $ report_log["girl two orgasms"] = int_swap
-                #TODO fix this fucking stupid hack
-                $ scene_manager.remove_actor(the_person_one, reset_actor = False)
-                $ scene_manager.remove_actor(the_person_two, reset_actor = False)
-                #end TODO
-                $ position_choice.create_scene(the_person_one, the_person_two)
+                $ position_choice.update_scene(the_person_one, the_person_two)
                 "As the girls get into position, you consider how to resume your threesome."
                 $ option_list = []
                 python:
@@ -525,7 +517,7 @@ label threesome_round(the_person_one, the_person_two, position_choice, round = 0
         $ report_log["total rounds"] += 1
 
     #Calculate arousal gains
-    $position_choice.calc_arousal_changes(the_person_one, the_person_two)
+    $ position_choice.calc_arousal_changes(the_person_one, the_person_two)
     #
     # $ girl_one_arousal_change = position_choice.girl_one_arousal + ((the_person_one.get_opinion_score("threesomes") / 5) * position_choice.girl_one_arousal)   #20% arousal bonus for each level of threesome like/dislike
     # if position_choice.girl_one_source == 0:  #MC is source#
