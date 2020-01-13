@@ -122,7 +122,7 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                     "They pickup their clothes and leave you feeling very proud of yourself."
 
                     # cleanup scene
-                    $ renpy.scene("Active")
+                    $ scene_manager.clear_scene()
                     $ update_opinion(person_two, "threesomes")
                     $ person_two.reset_arousal()
                     $ person_two.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
