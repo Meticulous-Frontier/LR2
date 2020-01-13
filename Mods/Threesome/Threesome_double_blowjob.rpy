@@ -87,7 +87,7 @@ label intro_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_loca
     else:
         the_girl_1.char "I don't usually give blowjobs, but with [the_girl_2.name] here it should be fun!"
     if the_girl_2.get_opinion_score("giving blowjobs") > 0:
-        the_girl_1.char "This is gonna great, I can lick your balls while she's blowing you, [the_girl_2.mc_title]!"
+        the_girl_1.char "This is gonna be great, I can lick your balls while she's blowing you, [the_girl_2.mc_title]!"
     else:
         the_girl_2.char "I wonder how long you can last with two girls on their knees for you, [the_girl_2.mc_title]."
     "[the_girl_1.possessive_title] and [the_girl_2.possessive_title] get to work servicing your cock."
@@ -195,7 +195,7 @@ label swap_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_locat
     else:
         the_girl_1.char "I don't usually give blowjobs, but with [the_girl_2.name] here it should be fun!"
     if the_girl_2.get_opinion_score("giving blowjobs") > 0:
-        the_girl_1.char "This is gonna great, I can lick your balls while she's blowing you, [the_girl_2.mc_title]!"
+        the_girl_1.char "This is gonna be great, I can lick your balls while she's blowing you, [the_girl_2.mc_title]!"
     else:
         the_girl_2.char "I wonder how long you can last with two girls on their knees for you, [the_girl_2.mc_title]."
     "[the_girl_1.possessive_title] and [the_girl_2.possessive_title] get to work servicing your cock."
