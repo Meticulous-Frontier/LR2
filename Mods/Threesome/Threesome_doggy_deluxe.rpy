@@ -245,7 +245,7 @@ label outro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
                 "You pull out of [the_girl_2.title] at the last moment. She wiggles her ass for you as you cover her with your cum."
             $ the_girl_2.cum_on_ass()
             $ scene_manager.draw_scene()
-            if SB_check_fetish(the_girl, cum_external_role):
+            if SB_check_fetish(the_girl_2, cum_external_role):
                 "[the_girl_2.possessive_title]'s body goes rigid as your cum coats her ass. Goosebumps erupt all over her body as her brain registers your cum on her skin."
                 "[the_girl_2.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
                 "She truly is addicted to your cum."
