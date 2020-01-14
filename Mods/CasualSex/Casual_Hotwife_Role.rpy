@@ -366,19 +366,12 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             "Wow... I can't believe I came... while I was blowing you! That was fucking hot!"
         else:
             "Wow... that was hot!"
-        $ cum_face = False
-        $ cum_mouth = False
-        python:
-            for cs_access in the_person.outfit.accessories:
-                if cs_access.name == "Mouth Cum":    #You came in her mouth!
-                    cum_mouth = True
-                if cs_access.name == "Face Cum":     #You came on her face!
-                    cum_face = True
-        if cum_mouth:
+
+        if the_person.outfit.has_mouth_cum():
             "[the_person.possessive_title] looks up at you. She couldn't quiet swallow all your cum, some of it is slowly dripping down the sides of her mouth."
             the_person.char "Hey! Don't forget to take pictures!"
             "You suddenly remember the phone. You snap a couple pictures of her face with your traces of cum on it."
-        else:
+        elif the_person.outfit.has_face_cum():
             "[the_person.possessive_title] looks up at you. Her face is plastered with your sticky seed."
             the_person.char "Hey! Don't forget to take pictures!"
             "You suddenly remember the phone. You snap a couple pictures of her face with your cum covering it."
@@ -432,19 +425,11 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             "You decide to just enjoy her skilled mouth going down on you."
             call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_CSH012
 
-        $ cum_face = False
-        $ cum_mouth = False
-        python:
-            for cs_access in the_person.outfit.accessories:
-                if cs_access.name == "Mouth Cum":    #You came in her mouth!
-                    cum_mouth = True
-                if cs_access.name == "Face Cum":     #You came on her face!
-                    cum_face = True
-        if cum_mouth:
+        if the_person.outfit.has_mouth_cum():
             "[the_person.possessive_title] looks up at you. She couldn't quiet swallow all your cum, some of it is slowly dripping down the sides of her mouth."
             the_person.char "Hey! Don't forget to take pictures!"
             "You suddenly remember the phone. You snap a couple pictures of her face with your traces of cum on it."
-        else:
+        elif the_person.outfit.has_face_cum():
             "[the_person.possessive_title] looks up at you. Her face is plastered with your sticky seed."
             the_person.char "Hey! Don't forget to take pictures!"
             "You suddenly remember the phone. You snap a couple pictures of her face with your cum covering it."
@@ -548,30 +533,16 @@ label casual_hotwife_dancing_sex_label(the_person):
         $ mc.condom = False
         call fuck_person(the_person, start_position = SB_doggy_standing, start_object = SB_make_counter(), skip_intro = True) from _call_sex_description_CSH020
         #TODO description for all possible cum locations
-        $ cum_face = False
-        $ cum_mouth = False
-        $ cum_tits = False
-        $ cum_ass = False
-        python:
-            for cs_access in the_person.outfit.accessories:
-                if cs_access.name == "Mouth Cum":    #You came in her mouth!
-                    cum_mouth = True
-                if cs_access.name == "Face Cum":     #You came on her face!
-                    cum_face = True
-                if cs_access.name == "Ass Cum":
-                    cum_ass = True
-                if cs_access.name == "Tit Cum":
-                    cum_tits = True
-        if cum_mouth:
+        if the_person.outfit.has_mouth_cum():
             "[the_person.possessive_title] looks up at you. She couldn't quiet swallow all your cum, some of it is slowly dripping down the sides of her mouth."
             "You grab her phone and snap a couple pictures of her face with your traces of cum on it."
-        elif cum_face:
+        elif the_person.outfit.has_face_cum():
             "[the_person.possessive_title] looks up at you. Her face is plastered with your sticky seed."
             "You grab her phone and snap a couple pictures of her face with your cum covering it."
-        elif cum_tits:
+        elif the_person.outfit.has_tits_cum():
             "[the_person.possessive_title] looks up at you. Her tits are plastered with your sticky seed."
             "You grab her phone and snap a couple pictures of her tits with your cum covering it."
-        elif cum_ass:
+        elif the_person.outfit.has_ass_cum():
             "[the_person.possessive_title] looks back at you. Her ass is plastered with your sticky seed."
             "You grab her phone and snap a couple pictures of her ass with your cum covering it."
         else:       #We assume we finished inside her#

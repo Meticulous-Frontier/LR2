@@ -20,6 +20,37 @@ init -1 python:
 
     Outfit.check_outfit_cum = check_outfit_cum
 
+    def has_mouth_cum(self):
+        return any(x.name == mouth_cum.name for x in self.accessories)
+
+    Outfit.has_mouth_cum = has_mouth_cum
+
+    def has_tits_cum(self):
+        return any(x.name == tits_cum.name for x in self.accessories)
+
+    Outfit.has_tits_cum = has_tits_cum
+
+    def has_stomach_cum(self):
+        return any(x.name == stomach_cum.name for x in self.accessories)
+
+    Outfit.has_stomach_cum = has_stomach_cum
+
+    def has_face_cum(self):
+        return any(x.name == face_cum.name for x in self.accessories)
+
+    Outfit.has_face_cum = has_face_cum
+
+    def has_ass_cum(self):
+        return any(x.name == ass_cum.name for x in self.accessories)
+
+    Outfit.has_ass_cum = has_ass_cum
+
+    def has_creampie_cum(self):
+        return any(x.name == creampie_cum.name for x in self.accessories)
+
+    Outfit.has_creampie_cum = has_creampie_cum
+
+
     def remove_all_collars(self):
         for proper_name in ["Collar_Breed", "Collar_Cum_Slut", "Collar_Fuck_Doll"]:
             found = find_in_list(lambda x: x.proper_name == proper_name, self.accessories)
