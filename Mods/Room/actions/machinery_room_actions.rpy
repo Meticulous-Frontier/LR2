@@ -37,18 +37,19 @@ init 2 python:
     machinery_room_actions.append(machinery_room_overload_action)
 
 label machinery_room_action_label():
-
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
             act_list = []
             for act in machinery_room_actions:
                 act_list.append(act)
             act_choice = call_formated_action_choice(act_list + ["Back"])
+            del act_list
 
         if act_choice == "Back":
             return
         else:
             $ act_choice.call_action()
+            $ del act_choice
 
 label machinery_room_construct_production_line_label():
     python:
@@ -65,7 +66,7 @@ label machinery_room_construct_production_line_label():
             call advance_time from machinery_room_construct_production_line_label_1
 
         "Back":
-            return
+            pass
     return
 
 label machinery_room_overload_label():
@@ -86,6 +87,6 @@ label machinery_room_overload_label():
             "The production lines in [p_division.formalName] are now working at [machinery_room_overload]%%"
             call advance_time from machinery_room_overload_label_1
         "No":
-            return
+            pass
 
     return

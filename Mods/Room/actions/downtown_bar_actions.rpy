@@ -20,9 +20,11 @@ label downtown_bar_actions():
          downtown_bar_options.append(act)
       downtown_bar_options.append("Back")
       act_choice = call_formated_action_choice(downtown_bar_options)
+      del downtown_bar_options
 
    if act_choice != "Back":
       $ act_choice.call_action()
+      $ del act_choice
    return
 
 label downtown_bar_drink_label():

@@ -238,6 +238,7 @@ label advance_time_people_run_turn_label():
             person.run_turn()
         mc.business.run_turn()
         mc.run_turn()
+        
     return
 
 label advance_time_people_run_day_label():

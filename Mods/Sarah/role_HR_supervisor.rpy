@@ -1043,6 +1043,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         tuple_list.append(["Surprise me", "any"])
 
         position_choice = renpy.display_menu(tuple_list,True,"Choice")
+        del tuple_list
 
     if position_choice == "any":
         the_person.char "Mmmm, I can do that! "

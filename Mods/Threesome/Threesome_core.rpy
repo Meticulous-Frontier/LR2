@@ -288,6 +288,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
     $ round_choice = None # We start any encounter by letting them pick what position they want (unless something is forced or the girl is in charge)
     $ active_mc_position = None
     $ round_choice = renpy.display_menu(option_list,True,"Choice")
+    $ del option_list
     if round_choice == "Leave":
         "Really? You changed your mind? You leave the poor girls after you got them all ready for some action."
     else:
@@ -341,7 +342,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                         option_list.append(["Stop and leave.", "Leave"])
 
             $ round_choice = renpy.display_menu(option_list,True,"Choice") #This gets the players choice for what to do this round.
-
+            $ del option_list
 
         # Now that a round_choice has been picked we can do something.
         if round_choice == "Change" or round_choice == "Continue":
@@ -367,6 +368,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                 $ round_choice = None # We start any encounter by letting them pick what position they want (unless something is forced or the girl is in charge)
                 $ active_mc_position = None
                 $ round_choice = renpy.display_menu(option_list,True,"Choice")
+                $ del option_list
                 if round_choice == "Leave":
                     $ finished = True
                     "You decide to finish the threesome instead."
@@ -605,6 +607,7 @@ label pick_threesome(the_person_one, the_person_two, girl_one_position = None, o
                         girl_one_list.append(get_initial_threesome_pairing(threeway.position_two_tag))
         "What do you want [the_person_one.title] to do?"
         $ girl_one_choice = renpy.display_menu(girl_one_list,True,"Choice")
+        $ del girl_one_list
     else:
         $ girl_one_choice = girl_one_position
     python:
@@ -618,6 +621,7 @@ label pick_threesome(the_person_one, the_person_two, girl_one_position = None, o
     if len(girl_two_list) == 0:
         "Something has gone wrong, no available positions"  #Return something default?
     $ girl_two_choice = renpy.display_menu(girl_two_list,True,"Choice")
+    $ del girl_two_list
 
     python:
         for threeway in list_of_threesomes:
@@ -642,6 +646,7 @@ label threesome_strip_menu(the_person_one, the_person_two):
     else:
         $ strip_menu.append (["Strip " + the_person_two.title, "strip_two"])
     $ strip_choice = renpy.display_menu(strip_menu,True,"Choice")
+    $ del strip_menu
     if strip_choice == "strip_one":
         mc.name "[the_person_one.title], I want you to get naked now."
         the_person_one.char "Of course!"

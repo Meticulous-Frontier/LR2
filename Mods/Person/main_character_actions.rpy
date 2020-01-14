@@ -220,6 +220,9 @@ label mc_schedule_menu_label(person): # TODO: Find a way to handle "None" instan
         else:
             $ act_choice.call_action(person)
 
+    $ del schedule_options
+    return
+
 label mc_schedule_person_label(*args):
     #$ person = the_person
     $ time_slot = args[0]

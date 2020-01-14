@@ -137,7 +137,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                         option_list.append(["Stop and leave.", "Leave"])
 
             $ round_choice = renpy.display_menu(option_list,True,"Choice") #This gets the players choice for what to do this round.
-
+            $ del option_list
 
         # Now that a round_choice has been picked we can do something.
         if round_choice == "Change" or round_choice == "Continue":
@@ -274,7 +274,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             if position_type.record_class and position_type.record_class not in types_seen:
                 the_person.sex_record[position_type.record_class] += 1
                 types_seen.append(position_type.record_class)
-
+        del types_seen
     # We return the report_log so that events can use the results of the encounter to figure out what to do.
     return report_log
 
@@ -343,6 +343,7 @@ label pick_object_enhanced(the_person, the_position, forced_object = None):
                 picked_object = renpy.display_menu(object_option_list,True,"Choice")
             
             #renpy.say("", "Pick object: " + picked_object.name)
+        del object_option_list
 
     $ the_person.add_situational_slut("sex_object", picked_object.sluttiness_modifier, the_position.verbing + " on a " + picked_object.name)
     $ the_person.add_situational_obedience("sex_object",picked_object.obedience_modifier, the_position.verbing + " on a " + picked_object.name)

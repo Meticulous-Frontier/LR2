@@ -277,7 +277,8 @@ label SB_fetish_anal_recurring_label():
             if SB_check_fetish(person, anal_fetish_role):
                 meets_fetish_list.append(person)
 
-    $ the_person = get_random_from_list(meets_fetish_list)
+        the_person = get_random_from_list(meets_fetish_list)
+        del meets_fetish_list
 
     "As you are packing up your stuff to head home for the day, you hear [the_person.possessive_title]'s sweet voice call out to you."
 
@@ -451,12 +452,14 @@ label SB_free_strip_scene(the_person):
                 pose_menu_tuple.append(["Nevermind.",None])
 
             $ pose_choice = renpy.display_menu(pose_menu_tuple,True,"Choice")
+            $ del pose_menu_tuple
             if pose_choice is not None:
                 $ picked_pose = pose_choice
                 "[the_person.possessive_title] nods and moves for you."
 
             else:
                 mc.name "Nevermind, you look perfect like this."
+            $ del pose_choice
 
         elif strip_choice == "Finish":
             $ keep_stripping = False
@@ -945,7 +948,7 @@ label SB_starbuck_anal_swing_demo(the_person):
                     "She whimpers back at you."
                     the_person.char "Alright, lets give em a good show."
                     $ scene_private = False
-                    pass
+                $ del audience_list
             "Keep it private.":
                 mc.name "I think I'd like to keep it between me and you, if that's okay."
                 "You can tell she is a little disappointed, but she quickly smiles again when she remembers that you are about to fuck her in the ass..."

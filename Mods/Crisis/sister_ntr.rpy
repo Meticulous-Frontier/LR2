@@ -930,4 +930,5 @@ label sister_ntr_crisis_action_label:
     $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
     $ mc.location.show_background()
     $ renpy.scene("Active")
+    $ del finishes
     return

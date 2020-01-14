@@ -500,7 +500,8 @@ label SB_fetish_vaginal_recurring_label():
                 meets_fetish_list.append(person)
         if mom.sex_skills["Vaginal"] > 5:
             meets_fetish_list.append(mom)
-    $ the_person = get_random_from_list(meets_fetish_list)
+        the_person = get_random_from_list(meets_fetish_list)
+        del meets_fetish_list
 
     if the_person == mom:
         "Before going to bed, you hear a knock on your door. You hear [the_person.possessive_title]'s sweet and familiar voice from the other side."

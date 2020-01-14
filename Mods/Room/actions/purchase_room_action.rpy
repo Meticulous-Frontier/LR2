@@ -87,11 +87,13 @@ label purchase_rooms():
                 room_options.append(act)
             room_options.append("Back")
             act_choice = call_formated_action_choice(room_options)
+            del room_options
 
         if act_choice == "Back":
             return
         else:
             $ act_choice.call_action()
+            $ del act_choice
 
 # Tier 1 Rooms
 label purchase_dungeon_room(): #Enables the dungeon.

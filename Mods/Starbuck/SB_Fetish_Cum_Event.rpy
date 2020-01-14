@@ -168,7 +168,8 @@ label SB_fetish_cum_dosage_label():
             if SB_check_fetish(person, cum_internal_role) or SB_check_fetish(person, cum_external_role):
                 meets_fetish_list.append(person)
 
-    $ the_person = get_random_from_list(meets_fetish_list)
+        the_person = get_random_from_list(meets_fetish_list)
+        del meets_fetish_list
     "As you finish up with one of your work tasks, you decide to take a quick break."
     "You step into your office and sit down for a minute. You hop on your laptop and start browsing the internet."
     "*KNOCK KNOCK*"
@@ -403,7 +404,6 @@ label SB_fetish_lily_cum_label():
 label SB_fetish_shower_cum_label():
     $ meets_fetish_list = []
     python:
-
         if SB_check_fetish(mom, cum_internal_role):
             meets_fetish_list.append(mom)
         elif SB_check_fetish(mom, cum_external_role):
@@ -413,7 +413,8 @@ label SB_fetish_shower_cum_label():
         elif SB_check_fetish(lily, cum_external_role):
             meets_fetish_list.append(lily)
 
-    $ the_person = get_random_from_list(meets_fetish_list)
+        the_person = get_random_from_list(meets_fetish_list)
+        del meets_fetish_list
     "You wake up a little groggy. Your head kinda hurts, so you grab some clothes and head towards the bathroom to take a hot shower. Hopefully the steam will help you feel better."
     $ home_shower.show_background()
     "You stand in the shower, enjoying the hot water for several minutes. The steam is beginning to cloud up the bathroom."

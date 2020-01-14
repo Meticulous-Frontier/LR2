@@ -43,6 +43,7 @@ label SB_one_on_one_label():
                 if person.int > 1:
                     training_eligible.append(person)
         the_person = get_random_from_list(training_eligible)
+        del training_eligible
 
     if the_person is None:
         # "No one eligible for training!"
