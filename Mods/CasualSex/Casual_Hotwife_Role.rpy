@@ -752,10 +752,10 @@ init 1301 python:              #Because Vren Init personality functionns at 1300
     def hotwife_player_titles(the_person):
         return mc.name
     hotwife_personality = Personality("hotwife", default_prefix = "wild",
-    common_likes = [],
-    common_sexy_likes = ["casual sex"],
-    common_dislikes = ["relationships"],
-    common_sexy_dislikes = [],
+    common_likes = ["skirts", "dresses", "the weekend", "the colour red", "makeup", "flirting", "high heels"],
+    common_sexy_likes = ["casual sex", "doggy style sex", "giving blowjobs", "vaginal sex", "public sex", "lingerie", "not wearing underwear", "being submissive", "drinking cum", "cheating on men"],
+    common_dislikes = ["relationships", "pants", "working", "the colour yellow", "conservative outfits", "sports"],
+    common_sexy_dislikes = ["taking control", "giving handjobs", "not wearing anything"],
     titles_function = hotwife_titles, possessive_titles_function = hotwife_possessive_titles, player_titles_function = hotwife_player_titles)
 
 

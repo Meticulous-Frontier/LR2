@@ -597,10 +597,10 @@ init 1301 python:              #Because Vren Init personality functions at 1300
         return mc.name
 
     athlete_personality = Personality("athlete", default_prefix = "wild",
-    common_likes = [],
-    common_sexy_likes = ["casual sex"],
-    common_dislikes = ["relationships"],
-    common_sexy_dislikes = [],
+    common_likes = ["small talk", "the colour blue", "sports", "taking control"],
+    common_sexy_likes = ["casual sex", "doggy style sex", "giving blowjobs", "showing her ass", "drinking cum"],
+    common_dislikes = ["relationships", "conservative outfits", "makeup", "the colour pink", "dresses", "high heels", "the colour purple"],
+    common_sexy_dislikes = ["lingerie", "being submissive", "skimpy outfits"],
     titles_function = athlete_titles, possessive_titles_function = athlete_possessive_titles, player_titles_function = athlete_player_titles)
 
 #************* Personality labels***************#
