@@ -48,6 +48,7 @@ init 0 python:
             self.no_high_heels = person.get_opinion_score("high heels") < 0
             self.no_clothes = person.get_opinion_score("not wearing anything") > 0
             self.prefer_clothes = person.get_opinion_score("not wearing anything") < 0
+            self.slut_modifier = person.get_opinion_score("conservative outfits")
 
             # skimpy preference overrides conservative outfit choice
             if (self.skimpy_outfits or self.skimpy_uniforms):
@@ -85,17 +86,16 @@ init 0 python:
             if (self.prefer_boots and not any(outfit.has_clothing(item) for item in self.boots_list)) or (self.no_boots and any(outfit.has_clothing(item) for item in self.boots_list)):
                 return False
             
-            slut_modifier = person.get_opinion_score("conservative outfits")
             # checks differ when overwear or full outfit
             if is_overwear:
-                if self.conservative_outfits and (slut_score > (15 + slut_modifier) or (outfit.tits_available() or outfit.vagina_available() or not outfit.bra_covered() or not outfit.panties_covered())):
+                if self.conservative_outfits and (slut_score > (15 + self.slut_modifier) or (outfit.tits_available() or outfit.vagina_available() or not outfit.bra_covered() or not outfit.panties_covered())):
                     return False
-                if (self.skimpy_outfits or self.skimpy_uniforms) and not slut_score > (10 + slut_modifier) and (not outfit.tits_available() or not outfit.vagina_available()):
+                if (self.skimpy_outfits or self.skimpy_uniforms) and not slut_score > (10 + self.slut_modifier) and (not outfit.tits_available() or not outfit.vagina_available()):
                     return False
             else:
-                if self.conservative_outfits and (slut_score > (10 + slut_modifier) or (not outfit.wearing_panties() or not outfit.bra_covered() or not outfit.panties_covered())):
+                if self.conservative_outfits and (slut_score > (10 + self.slut_modifier) or (not outfit.wearing_panties() or not outfit.bra_covered() or not outfit.panties_covered())):
                     return False
-                if (self.skimpy_outfits or self.skimpy_uniforms) and not slut_score > (5 + slut_modifier):
+                if (self.skimpy_outfits or self.skimpy_uniforms) and not slut_score > (5 + self.slut_modifier):
                     return False
 
             #renpy.say("", "Add: " + outfit.name)
@@ -125,7 +125,7 @@ init 0 python:
             exclude_pants = pants_score == -2
             exclude_dresses = dress_score == -2
 
-            # break tigh when they don't like both.
+            # break tie when they don't like both.
             if exclude_skirts and exclude_pants and exclude_skirts:
                 if pants_score > skirts_score and pants_score > dress_score:
                     exclude_pants = False
