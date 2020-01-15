@@ -69,7 +69,7 @@ init -1 python:
 
     # make sure new character has a more appropriate outfit to wear
     def update_person_outfit(person, sluttiness_modifier = 0.0):
-        if not person in unique_character_list:
+        if not "unique_character_list" in globals() or not person in unique_character_list:
             person.planned_outfit = person.wardrobe.decide_on_outfit2(person, sluttiness_modifier) # Use enhanced outfit selector
             person.apply_outfit(person.planned_outfit)
             person.planned_uniform = None
@@ -85,10 +85,10 @@ init -1 python:
         return
 
     def update_cougar_personality(person):
-        if "cougar_personality" in globals():
+        if "cougar_personality" in globals() and "unique_character_list" in globals():
             # change personality to cougar if we meet age requirement
             if find_in_list(lambda x: x.effect == "cougar_personality_dummy_label", action_mod_list).enabled:
-                if person not in unique_character_list and person.age > 45:
+                if  person.age > 45 and person not in unique_character_list:
                     if not person.personality == cougar_personality:
                         person.original_personality = person.personality
                         person.personality = cougar_personality
