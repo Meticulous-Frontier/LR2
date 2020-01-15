@@ -163,6 +163,14 @@ label advance_time_enhanced:
         call advance_time from _call_advance_time_advance_time_enhanced    
     return
 
+label advance_time_enhanced_next_day_no_events:
+    call advance_time_next_label() from _call_advance_time_next_label_no_events
+    call advance_time_people_run_day_label() from _call_advance_time_people_run_day_label_no_events
+    if advance_time_bankrupt_check_action.enabled:
+        call advance_time_bankrupt_check_label() from _call_advance_time_bankrupt_check_label_no_events
+    call advance_time_end_of_day_label() from _call_advance_time_end_of_day_label_no_events
+    return
+
 label advance_time_bankrupt_check_label():
     if mc.business.funds < 0:
         # "advance_time_bankrupt_check_label" # DEBUG

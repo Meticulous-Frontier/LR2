@@ -266,20 +266,20 @@ init 2 python:
                         return True
         return False
 
+    def get_anal_fetish_employee():
+        meets_fetish_list = []
+        for person in mc.business.get_employee_list():
+            if SB_check_fetish(person, anal_fetish_role):
+                meets_fetish_list.append(person)
+
+        return get_random_from_list(meets_fetish_list)
+
     SB_fetish_anal_recurring_crisis = Action("Anal Fetish Recurring Crisis",SB_fetish_anal_recurring_requirement,"SB_fetish_anal_recurring_label")
     crisis_list.append([SB_fetish_anal_recurring_crisis, 5])
 
 #SBA3
 label SB_fetish_anal_recurring_label():
-    $ meets_fetish_list = []
-    python:
-        for person in mc.business.get_employee_list():
-            if SB_check_fetish(person, anal_fetish_role):
-                meets_fetish_list.append(person)
-
-        the_person = get_random_from_list(meets_fetish_list)
-        del meets_fetish_list
-
+    $ the_person = get_anal_fetish_employee()
     "As you are packing up your stuff to head home for the day, you hear [the_person.possessive_title]'s sweet voice call out to you."
 
     if mc.business.is_open_for_business():
@@ -542,7 +542,7 @@ label SB_mom_anal_pay_label():
             "It seems your serums have given her an anal fetish!"
             "You cuddle up behind her and enjoy the heat of her soft flesh as you slowly drift off to sleep."
 
-            call SB_process_overnight_no_events() from _SB_process_overnight_no_events_SBA42
+            call advance_time_enhanced_next_day_no_events() from _call_advance_time_enhanced_next_day_no_events_SBA42
             $ the_person.apply_outfit(SB_anal_nude_outfit)
             "The next morning, you slowly wake up. The bed next to you is cold. You look around and see [the_person.possessive_title] getting ready for the day in the bathroom."
             $ mc.change_location(mom_bedroom)
@@ -570,9 +570,9 @@ label SB_mom_anal_pay_label():
             call fuck_person(the_person, start_position = doggy_anal, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBA43
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:
-                "[the_person.title] lays there on the bed, speechless from your anal plundering."
+                "[the_person.possessive_title] lays there on the bed, speechless from your anal plundering."
             else:
-                "[the_person.title] lays there on the bed"
+                "[the_person.possessive_title] lays there on the bed."
             $ the_person.reset_arousal()
             mc.name "So... every friday night? I think I could get used to that..."
             "You can see [the_person.possessive_title]'s body quiver slightly at your words."
@@ -585,7 +585,7 @@ label SB_mom_anal_pay_label():
         "Not this week.":
             mc.name "Sorry [the_person.title], but I'm tight on cash right now as well. Maybe next week, okay?"
             "[the_person.possessive_title] nods and turns back to her bills."
-            the_person.char "I understand sweetheart. Now don't let me keep you, I'm sure you were up to something important."
+            the_person.char "I understand [the_person.mc_title]. Now don't let me keep you, I'm sure you were up to something important."
             $ mc.business.mandatory_crises_list.append(SB_mom_weekly_pay_action)
             $ the_person.review_outfit(dialogue = False)
 
@@ -642,7 +642,7 @@ label SB_mom_anal_friday_label():
 
             "You cuddle up behind her and enjoy the heat of her soft flesh as you slowly drift off to sleep."
 
-            call SB_process_overnight_no_events() from _SB_process_overnight_no_events_SBA52
+            call advance_time_enhanced_next_day_no_events() from _call_advance_time_enhanced_next_day_no_events_SBA52
             $ the_person.apply_outfit(SB_anal_nude_outfit)
             "The next morning, you slowly wake up. The bed next to you is cold. You look around and see [the_person.possessive_title] getting ready for the day in the bathroom."
             $ mc.change_location(mom_bedroom)
@@ -668,10 +668,10 @@ label SB_mom_anal_friday_label():
             call fuck_person(the_person, start_position = doggy_anal, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBA53
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:
-                "[the_person.mc_title] lays there on the bed, speechless from your anal plundering."
+                "[the_person.possessive_title] lays there on the bed, speechless from your anal plundering."
             else:
-                "[the_person.mc_title] lays there on the bed"
-            mc.name "Mmm, thanks [the_person.mc_title]. That ass is amazing. Next friday, right?"
+                "[the_person.possessive_title] lays there on the bed"
+            mc.name "Mmm, thanks [the_person.title]. That ass is amazing. Next friday, right?"
             the_person.char "Yes [the_person.mc_title]. But don't feel like you HAVE to wait to take my ass. We can do it whenever you want. I'll be ready!"
             $ mc.business.mandatory_crises_list.append(SB_mom_weekly_anal_action)
         "Strip and ride me. -$200 (disabled)" if mc.business.funds <100:
@@ -679,7 +679,7 @@ label SB_mom_anal_friday_label():
         "Not this week.":
             mc.name "Sorry [the_person.title], work was hell and I'm exhausted. Maybe next week, okay?"
             "[the_person.possessive_title] frowns."
-            the_person.char "I understand sweetheart. Now don't let me keep you, I'm sure you were up to something important."
+            the_person.char "I understand [the_person.mc_title]. Now don't let me keep you, I'm sure you were up to something important."
             $ mc.business.mandatory_crises_list.append(SB_mom_weekly_anal_action)
 
     $ the_person.reset_arousal()

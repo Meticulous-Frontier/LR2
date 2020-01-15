@@ -1611,7 +1611,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         $ morning_fun_chance = 50 #She finished. Maybe she wants an encore in the morning, maybe not.
         "[the_person.title] nuzzles up against you and slowly drifts off to sleep. In your sex induced haze, you quickly drift off to sleep with her."
 
-    call SB_process_overnight_no_events() from _SB_process_overnight_no_events_SBS129
+    call advance_time_enhanced_next_day_no_events() from _call_advance_time_enhanced_next_day_no_events_SBS129
     #Good morning!
     $ renpy.scene("Active")
     $ the_roll = renpy.random.randint(0,100)

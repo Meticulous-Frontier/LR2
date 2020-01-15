@@ -1356,7 +1356,7 @@ label Sarah_stripclub_story_label():
     if staying_over:
         $ scene_manager.update_actor(the_person, position = "walking_away")
         "Worn out from your date with [the_person.possessive_title], you cuddle up with her and quickly fall asleep."
-        call SB_process_overnight_no_events() from _sarah_overnight_after_stripclub
+        call advance_time_enhanced_next_day_no_events() from _sarah_overnight_after_stripclub
         call Sarah_spend_the_night() from sarah_stripclub_spend_the_night_sequence
     else:
         $ scene_manager.update_actor(the_person, position = "stand3")

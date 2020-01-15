@@ -154,6 +154,23 @@ init 2 python:
                 return True
         return False
 
+    def get_fetish_cum_dosage_employee():
+        meets_fetish_list = []
+        for person in mc.business.get_employee_list():
+            if SB_check_fetish(person, cum_internal_role) or SB_check_fetish(person, cum_external_role):
+                meets_fetish_list.append(person)
+
+        return get_random_from_list(meets_fetish_list)
+
+    def get_fetish_shower_cum_girl():
+        meets_fetish_list = []
+        if SB_check_fetish(mom, cum_internal_role) or SB_check_fetish(mom, cum_external_role):
+            meets_fetish_list.append(mom)
+        if SB_check_fetish(lily, cum_internal_role) or SB_check_fetish(lily, cum_external_role):
+            meets_fetish_list.append(lily)
+
+        return get_random_from_list(meets_fetish_list)
+
     SB_fetish_cum_dosage_crisis = Action("Cum Fetish Dosage Crisis",SB_fetish_cum_dosage_requirement,"SB_fetish_cum_dosage_label")
     crisis_list.append([SB_fetish_cum_dosage_crisis, 5])
 
@@ -163,14 +180,7 @@ init 2 python:
 
 #SBC2
 label SB_fetish_cum_dosage_label():
-    $ meets_fetish_list = []
-    python:
-        for person in mc.business.get_employee_list():
-            if SB_check_fetish(person, cum_internal_role) or SB_check_fetish(person, cum_external_role):
-                meets_fetish_list.append(person)
-
-        the_person = get_random_from_list(meets_fetish_list)
-        del meets_fetish_list
+    $ the_person = get_fetish_cum_dosage_employee()
     "As you finish up with one of your work tasks, you decide to take a quick break."
     "You step into your office and sit down for a minute. You hop on your laptop and start browsing the internet."
     "*KNOCK KNOCK*"
@@ -279,7 +289,7 @@ label SB_fetish_mom_cum_label():
     "Wow! [the_person.possessive_title] just woke you up, in the middle of the night, with an amazing blowjob, took your load, then cuddled up and fell asleep with you."
     "You have a feeling that this is only the beginning of things between you and her."
     "You slowly fall asleep, enjoying the warmth of her body."
-    call SB_process_overnight_no_events() from _SB_overnight_SBC030
+    call advance_time_enhanced_next_day_no_events() from _SB_overnight_SBC030
     "When morning comes, you feel a stirring in your loins again as you start to slowly wake up. The now familiar feeling of [the_person.possessive_title]'s mouth feels amazing."
     $ the_person.apply_outfit(SB_cum_nude_outfit)
     $ the_person.draw_person( position = "blowjob")
@@ -404,19 +414,7 @@ label SB_fetish_lily_cum_label():
 
 #SBC5
 label SB_fetish_shower_cum_label():
-    $ meets_fetish_list = []
-    python:
-        if SB_check_fetish(mom, cum_internal_role):
-            meets_fetish_list.append(mom)
-        elif SB_check_fetish(mom, cum_external_role):
-            meets_fetish_list.append(mom)
-        if SB_check_fetish(lily, cum_internal_role):
-            meets_fetish_list.append(lily)
-        elif SB_check_fetish(lily, cum_external_role):
-            meets_fetish_list.append(lily)
-
-        the_person = get_random_from_list(meets_fetish_list)
-        del meets_fetish_list
+    $ the_person = get_fetish_shower_cum_girl()
     "You wake up a little groggy. Your head kinda hurts, so you grab some clothes and head towards the bathroom to take a hot shower. Hopefully the steam will help you feel better."
     $ home_shower.show_background()
     "You stand in the shower, enjoying the hot water for several minutes. The steam is beginning to cloud up the bathroom."

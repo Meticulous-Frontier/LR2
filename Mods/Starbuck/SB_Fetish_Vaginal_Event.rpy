@@ -174,7 +174,7 @@ label SB_fetish_vaginal_label(the_person):
     $ FETISH_VAGINAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
-    call SB_process_overnight_no_events() from _SB_overnight_SBV010
+    call advance_time_enhanced_next_day_no_events() from _SB_overnight_SBV010
 
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV010
     return
@@ -302,7 +302,7 @@ label SB_fetish_vaginal_event_label(the_person):
     $ FETISH_VAGINAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
-    call SB_process_overnight_no_events() from _SB_overnight_SBV020
+    call advance_time_enhanced_next_day_no_events() from _SB_overnight_SBV020
 
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV020
     return
@@ -356,7 +356,7 @@ label SB_fetish_mom_vaginal_label():
     $ FETISH_VAGINAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
-    call SB_process_overnight_no_events() from _SB_overnight_SBV030
+    call advance_time_enhanced_next_day_no_events() from _SB_overnight_SBV030
 
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV030
 
@@ -420,7 +420,7 @@ label SB_fetish_lily_vaginal_label():
     $ FETISH_VAGINAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
-    call SB_process_overnight_no_events() from _SB_overnight_SBV040
+    call advance_time_enhanced_next_day_no_events() from _SB_overnight_SBV040
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV040
     return
 
@@ -488,21 +488,22 @@ init 2 python:
                 return True
         return False
 
+    def get_vaginal_fetish_employee():
+        meets_fetish_list = []
+        for person in mc.business.get_employee_list():
+            if SB_check_fetish(person, vaginal_fetish_role):
+                meets_fetish_list.append(person)
+        if SB_check_fetish(mom, vaginal_fetish_role):
+            meets_fetish_list.append(mom)
+
+        return get_random_from_list(meets_fetish_list)
+
     SB_fetish_vaginal_lily_recurring_crisis = Action("Vaginal Fetish lily Recurring Crisis",SB_fetish_vaginal_lily_recurring_requirement,"SB_fetish_vaginal_lily_recurring_label")
     crisis_list.append([SB_fetish_vaginal_lily_recurring_crisis, 5])
 
 #SBV6
 label SB_fetish_vaginal_recurring_label():
-    $ meets_fetish_list = []
-    python:
-        for person in mc.business.get_employee_list():
-            if person.sex_skills["Vaginal"] > 5:
-                meets_fetish_list.append(person)
-        if mom.sex_skills["Vaginal"] > 5:
-            meets_fetish_list.append(mom)
-        the_person = get_random_from_list(meets_fetish_list)
-        del meets_fetish_list
-
+    $ the_person = get_vaginal_fetish_employee()
     if the_person == mom:
         "Before going to bed, you hear a knock on your door. You hear [the_person.possessive_title]'s sweet and familiar voice from the other side."
         the_person.char "Hey honey, its [the_person.title]... I was just wondering if I could come in for a bit?"
@@ -583,7 +584,7 @@ label SB_fetish_vaginal_recurring_label():
     #SBMOD Start hacked wakeup sex code. To be copy/pasted to other similar places#
 
     $ FETISH_VAGINAL_EVENT_INUSE = False
-    call SB_process_overnight_no_events() from _SB_overnight_SBV060
+    call advance_time_enhanced_next_day_no_events() from _SB_overnight_SBV060
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV060
     return
 
@@ -652,33 +653,6 @@ label SB_fetish_vaginal_lily_recurring_label():
     $ FETISH_VAGINAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
-    call SB_process_overnight_no_events() from _SB_overnight_SBV070
+    call advance_time_enhanced_next_day_no_events() from _SB_overnight_SBV070
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV070
-    return
-
-label SB_process_overnight_no_events():   #Use this label for overnights where the morning should be random event free, or when we want to control what happens in the morning.
-    $ time_of_day = 0
-    $ day += 1
-    python:
-        for (person, place) in people_to_process:
-            person.run_day()
-
-    $ mc.run_day()
-    $ mc.business.run_day()
-
-    if mc.business.funds < 0:
-        $ mc.business.bankrupt_days += 1
-        if mc.business.bankrupt_days == mc.business.max_bankrupt_days:
-            $ renpy.say("","With no funds to pay your creditors you are forced to close your business and auction off all of your materials at a fraction of their value. Your story ends here.")
-            $ renpy.full_restart()
-        else:
-            $ days_remaining = mc.business.max_bankrupt_days-mc.business.bankrupt_days
-            $ renpy.say("","Warning! Your company is losing money and unable to pay salaries or purchase necessary supplies! You have [days_remaining] days to restore yourself to positive funds or you will be foreclosed upon!")
-    else:
-        $ mc.business.bankrupt_days = 0
-    $ mc.energy = mc.max_energy
-
-
-    call screen end_of_day_update() # We have to keep this outside of a python block, because the renpy.call_screen function does not properly fade out the text bar.
-    $ mc.business.clear_messages()
     return
