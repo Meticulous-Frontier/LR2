@@ -9,6 +9,10 @@ init 2:     #This init must be a later number than the original position declara
         doggy.outro = "outro_stealth_doggy"             #Completely replace the orgasm scene
         doggy.intro = "intro_stealth_doggy"             #Rewrite intro to make sure stealth_orgasm = False so we don't have weird dialogue in follow up sessions
 
+
+        doggy_anal.transitions.remove([doggy,"transition_doggy_anal_doggy"])
+
+        doggy_anal.transitions.append([doggy,"transition_stealth_doggy_anal_doggy"])
         #Other variables we could change to enhance the position
 
         # doggy.strip_description = "strip_doggy"         #Make her notice the condom is off when she strips
@@ -134,4 +138,32 @@ label outro_stealth_doggy(the_girl, the_location, the_object, the_round):
                 the_girl.char "Oh wow, there's so much of it..."
             "You sit back and sigh contentedly, enjoying the sight of [the_girl.title] covered in your semen."
     $ stealth_orgasm = False
+    return
+
+label transition_stealth_doggy_anal_doggy(the_girl, the_location, the_object, the_round):
+    $ stealth_orgasm = False   #This is the only change made from the existing transition.
+#     #transition from anal to normal doggy style.
+    "You pull out of [the_girl.title]'s asshole, leaving it gaping and her sighing in relief."
+    "You shift your cock downwards and rub the tip of it along the slit of her vagina."
+    $ wants_condom = True
+    if the_girl.effective_sluttiness() < the_girl.get_no_condom_threshold(): #She wants a condom
+        the_girl.char "Mmm, fuck me [the_girl.mc_title]. Use all of my holes for your pleasure!"
+        $ wants_condom = False
+    else: #She doesn't care.
+        the_girl.char "Wait, wait... I can't risk getting pregnant, I need you to put on a condom."
+        $ wants_condom = True
+
+    menu:
+        "Put on a condom.":
+            "You pull your dick back and find a condom in your wallet. It takes you a moment to spread it over your cock, then you line yourself up again."
+
+        "Ram it home!":
+            if wants_condom:
+                mc.name "Don't worry, I'll pull out."
+                $ the_girl.change_happiness(-5)
+
+            else:
+                pass
+
+    "You pull on her hips and thrust yourself inside her tight, wet pussy."
     return
