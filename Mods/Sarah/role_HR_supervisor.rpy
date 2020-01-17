@@ -266,7 +266,7 @@ init 5 python:
 
 init 1301 python:
     def HR_director_creation_requirement():
-        return True
+        return sarah.event_triggers_dict.get("first_meeting", False) == True
 
     HR_director_creation_policy = Policy(name = "Create HR Director Position",
         desc = "Create a new position for an HR Director. Increases maximum employee count by one.",
@@ -274,6 +274,8 @@ init 1301 python:
         requirement =  HR_director_creation_requirement,
         on_buy_function = increase_max_employee_size,
         on_buy_arguments = {"amount":1})
+
+    organisation_policies_list.append(HR_director_creation_policy)
 
 
 #####HR Director ACTION LABELS#####
@@ -354,6 +356,7 @@ label HR_director_first_monday_label(the_person):
         return
     "It's lunchtime, so you prepare to have your first meeting with your new HR Direction, [the_person.title]."
     "You grab your lunch from the break head to your office and sit down."
+    $ scene_manager = Scene()
     $ mc.change_location(office)
     $ mc.location.show_background()
     $ the_person.draw_person()

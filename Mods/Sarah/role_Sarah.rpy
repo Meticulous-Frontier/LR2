@@ -257,9 +257,6 @@ label Sarah_intro_label():
             $ Sarah_hire = Action("Sarah hire",Sarah_hire_requirement,"Sarah_hire_label")
             $ mc.business.mandatory_crises_list.append(Sarah_hire) #Add the event here so that it pops when the requirements are met.
 
-            if HR_director_creation_policy not in organisation_policies_list:       #Hopefully by testint to see if it is already there we can avoid any issues in the future with mod compatability.... *shrug*
-                $ organisation_policies_list.append(HR_director_creation_policy)
-
         "Don't offer to hire her":
             "You decide maybe down the line you could make a new HR director position, but you decide the [the_person.title] is probably not the best fit for it."
             mc.name "I'm sorry it didn't work out, I hope you are able to find something in your field."
@@ -267,6 +264,7 @@ label Sarah_intro_label():
             "You say goodbye to [the_person.title]. If you want to hire an HR director, you will need to create the position via the policy menu."
             #TODO figure out a way to delete sarah and remove her from the game.
 
+    $ sarah.event_triggers_dict["first_meeting"] = True
     return
 
 label Sarah_hire_label():
