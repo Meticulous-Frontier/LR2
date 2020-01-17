@@ -7,6 +7,30 @@ init 5 python:
     config.label_overrides["pick_object"] = "pick_object_enhanced"
     config.label_overrides["watcher_check"] = "watcher_check_enhanced"
 
+    def girl_choose_position_enhanced(person):
+        position_option_list = []
+        for position in list_of_girl_positions:
+            if mc.location.has_object_with_trait(position.requires_location):
+                if position.her_position_willingness_check(the_person):
+                    position_option_list.append(position)
+        return get_random_from_list(position_option_list)
+
+    def girl_choose_object_enhanced(person, position):
+        possible_object_list = []
+        if position is None:
+            person.clear_situational_slut("sex_object")
+            person.clear_situational_obedience("sex_object")
+            return None
+
+        for an_object in mc.location.objects_with_trait(position.requires_location):
+            possible_object_list.append(an_object)
+
+        picked_object = get_random_from_list(possible_object_list)
+
+        person.add_situational_slut("sex_object", picked_object.sluttiness_modifier, position.verbing + " on a " + picked_object.name)
+        person.add_situational_obedience("sex_object",picked_object.obedience_modifier, position.verbing + " on a " + picked_object.name)
+        return picked_object
+
 label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
     if report_log is None:
@@ -68,22 +92,25 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
     $ round_choice = "Change" # We start any encounter by letting them pick what position they want (unless something is forced or the girl is in charge)
     $ first_round = True
+    $ has_taken_control = False
     while not finished:
         if girl_in_charge:
             # The girls decisions set round_choice here.
             if position_choice is None:
-                call girl_choose_position(the_person) from _call_girl_choose_position_bugfix #Get her to pick a position based on what's available #TODO: This function
-                $ position_choice = _return #Can be none, if no option was available for her to take.
+                $ position_choice = girl_choose_position_enhanced(the_person) #Can be none, if no option was available for her to take.
                 if position_choice is not None:
                     # We need to make sure we're using an appropriate object
-                    call girl_choose_object(the_person, position_choice) from _call_girl_choose_object_bugfix
-                    $ object_choice = _return
+                    $ object_choice = girl_choose_object_enhanced(the_person, position_choice)
             if position_choice is None: #There's no position we can take
                 "[the_person.title] can't think of anything more to do with you."
                 $ round_choice = "Girl Leave"
             elif object_choice is None:
                 "[the_person.title] looks around, but can't see anywhere to have fun with you."
-                $ round_choice = "Girl Leave"                
+                $ round_choice = "Girl Leave"
+            elif has_taken_control:
+                $ has_taken_control = False
+                $ the_person.call_dialogue("sex_take_control")
+                $ round_choice = "Continue"
             elif report_log.get("guy orgasms", 0) > 0 and report_log.get("girl orgasms", 0) > 0: #Both parties have been satisfied
                 the_person.char "Whew, that felt amazing. It's good to know it was as good for you as it was for me."
                 $ round_choice = "Girl Leave"
@@ -211,10 +238,10 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             # only consider continue when the girl and the mc have enough energy
             if the_person.energy > 15 and mc.energy > 15:
                 if renpy.random.randint(0,the_person.arousal) + 50 > the_person.obedience: #She's disobedient and will take control of the encounter. disobed disobd
-                    $ the_person.call_dialogue("sex_take_control")
                     $ the_person.change_obedience(-3)
                     $ girl_in_charge = True
                     $ finished = False
+                    $ has_taken_control = True #After successful position and object choice she will let you know she wants to keep going.
                     $ position_choice = None #She picks the position now, because she has her own list of possibilities
 
                 elif (the_person.arousal > the_person.max_arousal - 30) and (report_log.get("girl orgasms", 0) == 0) and report_log.get("beg finish", 0) == 0: #Within 30 of orgasming and she hasn't cum yet
