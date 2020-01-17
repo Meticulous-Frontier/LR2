@@ -144,7 +144,6 @@ label SB_fetish_vaginal_label(the_person):
             "You get down on your knees and get behind [the_person.possessive_title]. You line yourself up with her soaking wet slit and push yourself in."
             ###Sex Doggy Style###
             $ stealth_orgasm = False
-            $ stealth_orgasm = False 
             call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True) from _call_fuck_person_SBV13
 
             "Exhausted from your night with [the_person.possessive_title], you get back up into your bed. [the_person.possessive_title] joins you and you quickly fall asleep, cuddling together."
