@@ -6,6 +6,8 @@ init -1:
                 new_amount = 1
             elif new_amount is "0": #Figure out exactly how this works and then make it work :)
                 new_amount = 1
+            elif int(new_amount) == 0:
+                new_amount = 1
             store.serum_transfer_amount = new_amount
 
 init -2 style serum_text_style: # Cheat Text Style
