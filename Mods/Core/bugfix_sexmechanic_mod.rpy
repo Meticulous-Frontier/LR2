@@ -381,9 +381,9 @@ label watcher_check_enhanced(the_person, the_position, the_object, the_report): 
     if watcher:
         $ the_relationship = town_relationships.get_relationship(watcher, the_person)
         if the_relationship and the_relationship.get_type() in ["Mother", "Daughter", "Sister", "Cousin", "Niece", "Aunt", "Grandmother", "Granddaughter"]:
-            call relationship_sex_watch(watcher, the_relationship.get_type().lower(), the_position) from _call_relationship_sex_watch
+            call relationship_sex_watch(watcher, town_relationships.get_relationship_type(watcher, the_person).lower(), the_position) from _call_relationship_sex_watch
             $ the_position.redraw_scene(the_person)
-            call relationship_being_watched(the_person, watcher, the_relationship.get_type().lower(), the_position) from _call_relationship_being_watched
+            call relationship_being_watched(the_person, watcher, town_relationships.get_relationship_type(the_person, watcher).lower(), the_position) from _call_relationship_being_watched
             $ the_person.change_arousal(the_person.get_opinion_score("public sex"))
             $ the_person.discover_opinion("public sex")
         else:
