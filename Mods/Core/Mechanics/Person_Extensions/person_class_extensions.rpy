@@ -120,6 +120,20 @@ init -1:
         # attach change weight function to the Person class
         Person.change_weight = change_weight
 
+        ## HAPPINESS SCORE ENHANCED VERSION
+        # Takes into account their liking for working (if she doesn't she is more likely to quit) 
+        def get_job_happiness_score_enhanced(self):
+            happy_points = self.happiness - 100 #Happiness over 100 gives a bonus to staying, happiness less than 100 gives a penalty
+            happy_points += self.obedience - 95 #A more obedient character is more likely to stay, even if they're unhappy. Default characters can be a little disobedint without any problems.
+            happy_points += self.salary - self.calculate_base_salary() #A real salary greater than her base is a bonus, less is a penalty. TODO: Make this dependent on salary fraction, not abosolute pay.
+            happy_points += self.get_opinion_score("working") * 5 # Does she like working? It affects her happiness score.
+
+            if (day - self.event_triggers_dict.get("employed_since",0)) < 14:
+                happy_points += 14 - (day - self.event_triggers_dict.get("employed_since",0)) #Employees are much less likely to quit over the first two weeks.
+            return happy_points
+
+        Person.get_job_happiness_score = get_job_happiness_score_enhanced
+
         def is_employee(self):
             employment_title = mc.business.get_employee_title(self)
             if employment_title != "None":
