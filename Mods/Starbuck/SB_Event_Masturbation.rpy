@@ -32,7 +32,7 @@ init 2 python:
                 masturbating_people.append(person)
         return get_random_from_list(masturbating_people)
 
-    SB_caught_masturbating_crisis = ActionMod("Office Masturbation",SB_caught_masturbating_requirement,"SB_caught_masturbating_crisis_label", 
+    SB_caught_masturbating_crisis = ActionMod("Office Masturbation",SB_caught_masturbating_requirement,"SB_caught_masturbating_crisis_label",
         menu_tooltip = "You find an employee masturbating in an empty storage room.", category = "Business", is_crisis = True, crisis_weight = SB_caught_masturbating_crisis_weight)
 
 label SB_caught_masturbating_crisis_label():
@@ -245,6 +245,7 @@ label SB_caught_masturbating_crisis_label():
                             "You quickly pull your pants down. [the_person.possessive_title] is wiggling her ass back and forth, waiting for you."
                             "You rub the tip of your penis against [the_person.possessive_title]'s cunt. She is already soaking wet."
                             "When you're ready you push forward, slipping your shaft deep inside of [the_person.possessive_title]. She moans and quivers as you start to pump in and out."
+                            $ stealth_orgasm = False   
                             call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True) from _call_sex_sb_event_masturbation_010
                             $ the_report = _return
                             if the_report.get("girl orgasms", 0) > 1:

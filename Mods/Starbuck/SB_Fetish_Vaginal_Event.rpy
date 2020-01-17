@@ -143,6 +143,8 @@ label SB_fetish_vaginal_label(the_person):
             the_person.char "Come and get it, [the_person.mc_title]... its yours for the taking!"
             "You get down on your knees and get behind [the_person.possessive_title]. You line yourself up with her soaking wet slit and push yourself in."
             ###Sex Doggy Style###
+            $ stealth_orgasm = False
+            $ stealth_orgasm = False 
             call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True) from _call_fuck_person_SBV13
 
             "Exhausted from your night with [the_person.possessive_title], you get back up into your bed. [the_person.possessive_title] joins you and you quickly fall asleep, cuddling together."
@@ -404,6 +406,7 @@ label SB_fetish_lily_vaginal_label():
     "You moan into her mouth and quickly prepare yourself to penetrate [the_person.possessive_title]."
     $ the_person.sex_skills["Vaginal"] = 6
     ###Sex scene, missionary###   ###TODO: consider writing a variant of this because the default intro is going to be confusing###
+    $ stealth_orgasm = False
     call fuck_person(the_person, start_position = doggy, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBV40
     #$ the_person.SB_fetish = "vaginal sex"
     $ SB_random_fetish_key = get_random_from_list(FETISH_VAGINAL_OPINION_LIST)
@@ -558,6 +561,7 @@ label SB_fetish_vaginal_recurring_label():
         "[the_person.possessive_title] turns away from you and gets down on her hands and knees. She sticks her ass up in the air and starts to wiggle it back and forth."
         the_person.char "Come fuck me, [the_person.mc_title]. Don't worry, I'm ready for you!"
         "You quickly take your position behind her and slowly sink your cock into her greedy cunt."
+        $ stealth_orgasm = False
         call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True) from _call_fuck_person_SBV60
     elif the_person.get_opinion_score("sex standing up") > 2:
         "[the_person.possessive_title] resumes kissing you. You grab her ass with both hands and pick her up. She grinds her crotch into you."
@@ -626,6 +630,7 @@ label SB_fetish_vaginal_lily_recurring_label():
         "[the_person.possessive_title] turns away from you and gets down on her hands and knees. She sticks her ass up in the air and starts to wiggle it back and forth."
         the_person.char "Come fuck me, [the_person.mc_title]. Don't worry, I'm ready for you!"
         "You quickly take your position behind her and slowly sink your cock into her greedy cunt."
+        $ stealth_orgasm = False
         call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True) from _call_fuck_person_SBV70
     elif  the_person.get_opinion_score("sex standing up") > 2:
         "[the_person.possessive_title] resumes kissing you. You grab her ass with both hands and pick her up. She grinds her crotch into you."
