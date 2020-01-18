@@ -279,7 +279,7 @@ label starbuck_vaginal_skillup_label(the_person):
                             the_person.char "Let's do that again soon!"
                         else:
                             the_person.char "Thanks for the fuck!"
-                        
+
                         "You leave [the_person.possessive_title] to get cleaned up and get back to work."
                         $ the_person.reset_arousal()
                         $ the_person.review_outfit(dialogue = False)
@@ -791,6 +791,9 @@ label starbuck_sex_store_promo_one_label(the_person):
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:
                 "[the_person.possessive_title] takes a few minutes to recover from her orgasm. Eventually she gets up."
+                $ foreplay_perk = Stat_Perk(description = "Increase foreplay skill after helping Starbuck with her advtertisement photos", foreplay_bonus = 1, bonus_is_temp =False)
+                $ perk_system.add_stat_perk(foreplay_perk, "Starbuck Foreplay Bonus")
+                "Getting [the_person.title] an orgasm makes you feel more confident in your foreplay skills."
             else:
                 "After you finish, [the_person.possessive_title] takes a second, then gets up."
             $ starbuck.draw_person(position = "stand2", emotion = "happy")
@@ -943,6 +946,9 @@ label starbuck_sex_store_promo_two_label(the_person):
             $ the_person.change_happiness(10)
             $ the_person.change_slut_core(3)
             $ the_person.change_slut_temp(5)
+            $ vaginal_perk = Stat_Perk(description = "Increase vaginal skill after helping Starbuck with her demonstration video", vaginal_bonus = 1, bonus_is_temp =False)
+            $ perk_system.add_stat_perk(vaginal_perk, "Starbuck Vaginal Bonus")
+            "Fucking and pleasing an experienced woman like [the_person.title] makes you feel more confident in your vaginal skills."
             "You go back and take a look at the camera. You accidentally left it recording! It has a recording of you and [the_person.possessive_title] fucking!"
             "You decide you should probably just be honest and tell her."
             mc.name "So... I accidentally forgot to stop the camera... it caught the whole scene of us having sex."
@@ -1141,6 +1147,9 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
     "You grab the camera, and start looking at the footage. The first thing you do is copy it on a thumb drive, for you to enjoy at a later date."
     "You head out to start work on the advertisement video."
+    $ oral_perk = Stat_Perk(description = "Increase oral skill after helping Starbuck demonstrate edible panties.", oral_bonus = 1, bonus_is_temp =False)
+    $ perk_system.add_stat_perk(oral_perk, "Starbuck Oral Bonus")
+    "Getting [the_person.title] an orgasm with your tongue gives you more confidence in your oral skills."
     $ mc.location.show_background()
     $ renpy.scene("Active")
     return
@@ -1289,6 +1298,9 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     mc.name "Okay, you take it easy for a bit, I'm gonna go work on that advertisement video!"
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] starts to walk away. She is walking a little funny."
+    $ anal_perk = Stat_Perk(description = "Increase anal skill after helping Starbuck demonstrate double penetration with a dildo.", anal_bonus = 1, bonus_is_temp =False)
+    $ perk_system.add_stat_perk(anal_perk, "Starbuck Anal Bonus")
+    "Fucking [the_person.title] anally makes you more confident in your anal skills."
     $ the_person.shop_investment_rate = 5.0
     $ the_person.reset_arousal()
     $ the_person.review_outfit(dialogue = False)
@@ -1403,6 +1415,9 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     $the_person.draw_person(position = "stand2")
     the_person.char "Okay, its time for me to get to the shop. See you soon [the_person.mc_title]!"
     "You walk her to the door and say goodbye. Wow, you are now the proud owner of a sex swing! And with everything going on with [the_person.possessive_title], you brain is swimming a bit."
+    $ sex_perk = Stat_Perk(description = "Increase sexual skill cap from repeated sexual activity with Starbuck.", sex_cap = 1, bonus_is_temp =False)
+    $ perk_system.add_stat_perk(sex_perk, "Starbuck Sex Bonus")
+    "After having multiple sexual encounters with a woman like [the_person.title], you feel like if you put in the effort, you could become an even more skilled lover."
     $ sex_store.add_object(SB_make_swing())
     $ bedroom.add_object(SB_make_swing())
     return
@@ -1613,6 +1628,10 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
 
     call advance_time_enhanced_next_day_no_events() from _call_advance_time_enhanced_next_day_no_events_SBS129
     #Good morning!
+    $ good_rest_perk = Stat_Perk(description = "Temporary increase max energy after sleeping with a lover.", energy_bonus = 20, bonus_is_temp = True, duration = 2,  energy_cap = 20)
+    $ perk_system.add_stat_perk(good_rest_perk, "Overnight Lover")
+
+
     $ renpy.scene("Active")
     $ the_roll = renpy.random.randint(0,100)
     if the_roll < morning_fun_chance:        #Roll for morning sex is successful

@@ -3,7 +3,7 @@
 # it adds a way of preventing the same crisis popping up over and over, whilst others never get triggered by remembering a set of occurred events
 init -1 python:
     def advance_time_next_requirement():
-        return True 
+        return True
 
     def advance_time_end_of_day_requirement():
         return time_of_day == 0
@@ -11,9 +11,9 @@ init -1 python:
     def advance_time_random_crisis_requirement():
         return time_of_day != 0 and renpy.random.randint(0,100) < crisis_chance
 
-    # only trigger mandatory crisis events in timeslot 4 when in bedroom (actually end of day after pressing sleep button, required for dialog consistency)   
+    # only trigger mandatory crisis events in timeslot 4 when in bedroom (actually end of day after pressing sleep button, required for dialog consistency)
     def advance_time_mandatory_crisis_requirement():
-        return True 
+        return True
 
     def advance_time_bankrupt_check_requirement():
         return time_of_day == 4
@@ -21,7 +21,7 @@ init -1 python:
     def advance_time_mandatory_morning_crisis_requirement():
         return time_of_day == 0
 
-    def advance_time_random_morning_crisis_requirement():       
+    def advance_time_random_morning_crisis_requirement():
         return time_of_day == 0 and renpy.random.randint(0,100) < morning_crisis_chance
 
     def advance_time_daily_serum_dosage_requirement():
@@ -160,7 +160,7 @@ label advance_time_enhanced:
     $ renpy.free_memory()
     $ mc.location.show_background()
     if mandatory_advance_time: #If a crisis has told us to advance time after it we do so.
-        call advance_time from _call_advance_time_advance_time_enhanced    
+        call advance_time from _call_advance_time_advance_time_enhanced
     return
 
 label advance_time_enhanced_next_day_no_events:
@@ -246,7 +246,7 @@ label advance_time_people_run_turn_label():
             person.run_turn()
         mc.business.run_turn()
         mc.run_turn()
-        
+
     return
 
 label advance_time_people_run_day_label():
@@ -266,6 +266,7 @@ label advance_time_end_of_day_label():
     $ mc.business.clear_messages()
     # increase morning crisis chance (once a day)
     $ morning_crisis_chance += 2
+    $ perk_system.update()  #TEST to see if this is a good time for this.
     return
 
 label advance_time_mandatory_morning_crisis_label():
@@ -307,7 +308,7 @@ label advance_time_random_morning_crisis_label():
             $ morning_crisis_tracker.append([c[0] for c in morning_crisis_list].index(the_morning_crisis)) # add crisis index to recent crisis list
         $ the_morning_crisis.call_action()
         if _return == "Advance Time":
-            $ mandatory_advance_time = True        
+            $ mandatory_advance_time = True
         $ del the_morning_crisis
     $ mc.location.show_background()
     return
@@ -345,5 +346,5 @@ label advance_time_people_run_move_label():
 
                         elif the_crisis[2] == "on_enter" and len(person.on_room_enter_event_list) == 0: # prevent multiple on enter events for person
                             person.on_room_enter_event_list.append(limited_time_event)
-                
+
     return
