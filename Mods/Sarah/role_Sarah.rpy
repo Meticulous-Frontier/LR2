@@ -262,7 +262,8 @@ label Sarah_intro_label():
             mc.name "I'm sorry it didn't work out, I hope you are able to find something in your field."
             the_person.char "Thanks... well, it was good seeing you. I'd better keep at it."
             "You say goodbye to [the_person.title]. If you want to hire an HR director, you will need to create the position via the policy menu."
-            #TODO figure out a way to delete sarah and remove her from the game.
+            $ sarah.event_triggers_dict["rejected"] = True
+            $ sarah.set_schedule([1,2,3], None)   # make her a free roaming character
 
     $ sarah.event_triggers_dict["first_meeting"] = True
     return
