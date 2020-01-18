@@ -1,6 +1,3 @@
-
-
-
 init 1 python:
     def Perk_mod_initialization():
 

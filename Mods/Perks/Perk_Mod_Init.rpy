@@ -12,5 +12,9 @@ label activate_perk_mod_core(stack):
 
 label update_perk_mod_core(stack):
     python:
+        try:
+            perk_system
+        except NameError:
+            Perk_mod_initialization()
         execute_hijack_call(stack)
     return
