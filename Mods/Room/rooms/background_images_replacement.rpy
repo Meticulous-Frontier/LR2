@@ -18,6 +18,7 @@ label updated_room_background(stack):
         thumbs_up_image = Image(get_file_handle("thumbs_up_small.png"))
         thumbs_down_image = Image(get_file_handle("thumbs_down_small.png"))
         vial_image = Image(get_file_handle("vial.png"))
+        question_image = Image(get_file_handle("question.png"))
 
 
         # continue on the hijack stack if needed
@@ -26,5 +27,6 @@ label updated_room_background(stack):
     image thumbs_up = "[thumbs_up_image.filename]"
     image thumbs_down = "[thumbs_down_image.filename]"
     image serum_vial = "[vial_image.filename]"
+    image question_mark = "[question_image.filename]"
 
     return
