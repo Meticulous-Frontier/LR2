@@ -42,3 +42,12 @@ init -1 python:
             if the_person_two.outfit.vagina_available():
                 return True
         return False
+
+    def requirement_hard_both_vagina_male_strapon(the_person_one, the_person_two):
+        if mc.recently_orgasmed:
+            return False
+        if the_person_one.outfit.vagina_available():
+            if the_person_two.outfit.vagina_available():
+                if perk_system.has_item_perk("Male Strapon"):
+                    return True
+        return False

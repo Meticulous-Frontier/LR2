@@ -403,7 +403,7 @@ label casual_athlete_phase_two_label(the_person):
         mc.name "Yeah right, I'll be bending you over before you can even get your front door closed."
         "[the_person.title] has a spark in her eyes. Whoever wins, you have a feeling the sex is going to be amazing after the race."
         "You wave goodbye to [the_person.title], wondering what you've gotten yourself in to."
-    
+
     $ the_person.review_outfit(dialogue = False)
     call advance_time from _call_advance_casual_athlete_race_challenge
     return
@@ -502,6 +502,9 @@ label casual_athlete_race_crisis_label(the_person):
     the_person.char "Ayup! Don't worry. Alright, if its okay with you, I think I'm gonna take a nap..."
     "You excuse yourself. You grab your clothes and head out. You now know [the_person.title]'s address, with a standing offer to come over and fuck her silly!"
     $ the_person.event_triggers_dict["athlete_progress"] = 4
+    $ casual_athlete_energy_perk = Stat_Perk(description = "Training for the big race has helped improve your energy level.", energy_bonus = 20, bonus_is_temp = False, energy_cap = 40)
+    $ perk_system.add_stat_perk(casual_athlete_energy_perk, "Athlete Energy Bonus")
+    "You walk away with a spring in your step. You feel like training for and running the race has given you more energy."
     return
 
 label casual_athlete_buy_protein_shake_label(the_person):
@@ -531,7 +534,7 @@ label casual_athlete_buy_protein_shake_label(the_person):
             mc.name "No problem at all."
             $ renpy.scene("Active")
 
-    $ the_person.review_outfit(dialogue = False)            
+    $ the_person.review_outfit(dialogue = False)
     call advance_time from _call_advance_casual_athlete_smoothie
     return
 

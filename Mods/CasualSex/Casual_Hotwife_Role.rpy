@@ -61,7 +61,7 @@ init -2 python:
             return False
         if the_person.event_triggers_dict.get("hotwife_progress", 0) < 2:
             return False
-        
+
         if mc.location != downtown_bar:
             return "Not in Bar"
         elif mc.charisma < 5:
@@ -652,6 +652,8 @@ label casual_hotwife_her_place_label(the_person):
     "[the_person.possessive_title] gasps as you begin to slide in and out of her."
     call fuck_person(the_person, start_position = doggy, start_object = make_bed(), skip_intro = True) from _call_sex_description_CSH040
 
+
+
     #Finishing dialogue based on sexual performance
     if the_person.arousal > 130:   #She had more than one orgasm
         the_person.char "Oh my god... I came so many times..."
@@ -674,6 +676,8 @@ label casual_hotwife_her_place_label(the_person):
         the_person.char "Oh... [the_person.SO_name], I've been a bad girl... what are you gonna do with those handcuffs?"
         "[the_person.SO_name] begins cuffing [the_person.title]'s behind her back. You finish getting dress and quietly excuse yourself from the bedroom."
     "You make your way back home. You can hardly believe your luck, fucking [the_person.title] in her house, in front of her husband, who is also the bartender!"
+    $ casual_hotwife_cha_perk = Stat_Perk(description = "Fucking a hotwife in front of her husband has made you feel more charismatic.", cha_bonus = 1, bonus_is_temp = False)
+    $ perk_system.add_stat_perk(casual_hotwife_cha_perk, "Hotwife Charisma Bonus")
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     $ the_person.event_triggers_dict["hotwife_progress"] = 5

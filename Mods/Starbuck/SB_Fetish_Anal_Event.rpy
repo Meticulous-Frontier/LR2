@@ -719,7 +719,16 @@ label SB_lily_anal_dp_fetish_label():
     $ starbuck.draw_person(emotion = "happy")
     starbuck.char "Oh! I've got just the thing! Follow me!"
     $ starbuck.draw_person(position = "walking_away")
-    "Starbuck leads you over to a selection of dildos. They have special straps that go around the man so that they are secured, just below penis, and can be used for double penetration."
+    if perk_system.has_item_perk("Male Strapon"):
+        "As you are following, remembering you already have something similar, you show [the_person.title] what you have in your backpack."
+        mc.name "Hey... I already kinda have something like that..."
+        "She looks at what you've got and her eyes get bright."
+        the_person.char "Ah! Bro! Why didn't you tell me you had one of these?"
+        "Starbuck turns to you as you reach a selection of dildos."
+        the_person.char "Just pretend like we are looking then, that will totally work!"
+    else:
+        "Starbuck leads you over to a selection of dildos. They have special straps that go around the man so that they are secured, just below penis, and can be used for double penetration."
+
     $ the_person.draw_person(position = "stand4")
     the_person.char "Hmm... I don't know, what do you think about this one?"
     "Lily picks up one. It has an extra little vibrating unit."
@@ -730,10 +739,12 @@ label SB_lily_anal_dp_fetish_label():
     "You decide to offer to pay for it."
     mc.name "Here, let me just put this on the company card..."
     $ mc.business.funds += -20
+    if perk_system.has_item_perk("Male Strapon"):
+        "Well, now you have an extra, in case anything ever happens to your other one..."
     starbuck.char "Okay! You're all set! Do you two want to try it out? I have a special room in the back, sometimes people just can't WAIT to get home before trying out a purchase!"
     $ the_person.draw_person(position = "stand4")
     "Lily quickly speaks up."
-    the_person.char "That would be great! Come one [the_person.mc_title]!"
+    the_person.char "That would be great! Come on [the_person.mc_title]!"
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] grabs your hand and you follow her to the backroom. It has a familiar smell of body fluids and sweat."
     $ the_person.draw_person(position = "stand4")
@@ -789,6 +800,9 @@ label SB_lily_anal_dp_fetish_label():
 
     $ FETISH_ANAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
+
+    $ item_perk_male_strapon = Item_Perk("A strap on designed to be worn by men. Useful for dual penetration!")
+    $ perk_system.add_item_perk(item_perk_male_strapon, "Male Strapon")
 
     $ the_person.reset_arousal()
     $ the_person.review_outfit(dialogue = False)

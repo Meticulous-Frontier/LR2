@@ -86,6 +86,30 @@ init:
             requirement = requirement_disable_position) #WIP
 
 
+        Threesome_doggy_deluxe_dp_girl_two = Threesome_MC_position(name = "DP_girl_2",
+            description = "Fuck [the_person_two.title]'s ass and pussy using strapon",
+            skill_tag_p1 = "Oral",
+            skill_tag_p2 = "Anal",
+            girl_one_arousal = 18,
+            girl_two_arousal = 25,   #Intense sex for girl 2
+            girl_one_source = 2,
+            girl_two_source = 0,
+            girl_one_energy = 8,
+            girl_two_energy = 14,
+            guy_arousal = 22,
+            guy_source = 2,
+            guy_energy = 10,
+            skill_tag_guy = "Anal",
+            intro = "intro_threesome_doggy_deluxe_dp_girl_two",
+            scenes = ["scene_threesome_doggy_deluxe_dp_girl_two_1", "scene_threesome_doggy_deluxe_dp_girl_two_2"],
+            outro = "outro_threesome_doggy_deluxe_dp_girl_two",
+            strip_description = "strip_threesome_doggy_deluxe_dp_girl_two",
+            strip_ask_description = "strip_ask_threesome_doggy_deluxe_dp_girl_two",
+            orgasm_description = "orgasm_threesome_doggy_deluxe_dp_girl_two",
+            swap_description = "swap_threesome_doggy_deluxe_dp_girl_two",
+            requirement = requirement_hard_both_vagina_male_strapon) #WIP for now
+
+
         Threesome_doggy_deluxe = Threesome_Position(name = "Doggy Deluxe",
             slut_requirement = 60,
             position_one_tag = "missionary",
@@ -99,7 +123,7 @@ init:
             p2_transform = Threesome_doggy_deluxe_girl_two_transform,
             can_swap = True,)
 
-        Threesome_doggy_deluxe.mc_position = [Threesome_doggy_deluxe_fuck_girl_two,Threesome_doggy_deluxe_anal_girl_two, Threesome_doggy_deluxe_watch_girls]
+        Threesome_doggy_deluxe.mc_position = [Threesome_doggy_deluxe_fuck_girl_two,Threesome_doggy_deluxe_anal_girl_two, Threesome_doggy_deluxe_watch_girls, Threesome_doggy_deluxe_dp_girl_two]
         list_of_threesomes.append(Threesome_doggy_deluxe)
 
 
@@ -286,6 +310,139 @@ label orgasm_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_lo
 
 
 label swap_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_location, the_object, the_round):
-    pass #TODO
-    "This needs to be written"
+    "You put your cock between [the_girl_2.title]'s cheeks, enjoying the feeling of her soft, pliant flesh. She wiggles her hips back at you for a second before turning her head to look at you."
+    if SB_check_fetish(the_girl_2, vaginal_fetish_role):
+        the_girl_2.char "Go ahead and fuck me! I can't wait to feel you deep inside me again..."
+    else:
+        the_girl_2.char "I'm ready for you... go ahead and push it in!"
+    "You don't need any encouragement!"
+    return
+
+
+label intro_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_location, the_object, the_round):
+    "[the_girl_1.possessive_title] lays down on her back. [the_girl_2.possessive_title] gets down between her legs and start to lick her threesome partner."
+    "You spend a moment, admiring the ass exposed in front of you, waiting for you to have your way."
+    "You grab your strap on and secure it. It hangs below your cock, ready to fuck [the_girl_2.title]'s cunt while you fuck her ass."
+    "You use some spit to make sure your cock is lubed, then grab [the_girl_2.possessive_title]'s hips and get into position."
+    "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
+    if SB_check_fetish(the_girl_2, anal_fetish_role):
+        "[the_girl_2.title] moans pushes herself back against you, eagerly taking you inside her ass."
+    elif the_girl_2.get_opinion_score("anal sex") > 0 :
+        "[the_girl_2.title] moans. Her ass grips you tightly, but you can feel her forcing herself to relax to make it easier to take you."
+        $ the_girl_2.discover_opinion("anal sex")
+    else:
+        "[the_girl_2.title] grimaces a bit, but manages to take you completely by forcing herself to relax."
+
+    return
+
+label scene_threesome_doggy_deluxe_dp_girl_two_1(the_girl_1, the_girl_2, the_location, the_object, the_round):
+    "You give [the_girl_2.possessive_title]'s ass a good hard spank. She lets out a loud yelp, but its muffled between [the_girl_1.title]'s legs."
+    the_girl_1.char "Mmm, that felt good. You should spank her again [the_girl_1.mc_title]!"
+    "[the_girl_2.title] wiggles her hips in front of you. It's like she's asking for a good spanking!"
+    "You rub her ass with your hand, affectionately. You slowly pull out, almost completely, and look down, enjoying watching as her body grips the dildo and your dick as they slide out."
+    "You grope her ass roughly with both hands, then shove them back in all the way."
+    "You give [the_girl_2.title] a few rapid thrusts and then spank her again."
+    return
+
+label scene_threesome_doggy_deluxe_dp_girl_two_2(the_girl_1, the_girl_2, the_location, the_object, the_round):
+    "You reach forward and place your hands on [the_girl_2.possessive_title]'s shoulders. With each thrust you pull her back onto you forcefully, your hips smacking her ass cheeks loudly."
+    the_girl_1.char "Yeah, that's it [the_girl_1.mc_title], give it to her good!"
+    "The double penetration of your cock and the strapon is making the experience much more intense for her."
+    "[the_girl_2.possessive_title]'s pussy is dripping wet. A damp spot has begun to accumulate below her pussy as a result of your rutting."
+    if SB_check_fetish(the_girl_2, anal_fetish_role):
+        "She is moaning so loudly, she is having a hard time concentrating on eating out [the_girl_1.title]."
+        mc.name "You are such a butt slut [the_girl_2.title]. Is it nice to finally have a real cock, stuffed deep in your tight little asshole?"
+        "[the_girl_2.possessive_title] can only moan louder in response. You grab her hair and pull her face away from [the_girl_1.title]'s cunt while you whisper in her ear."
+        mc.name "Don't worry, this won't be the last time I stuff your holes. Especially this one."
+        "As you finish your sentence, you give her an extra rough thrust, your hips slamming against her ass."
+    else:
+        "You grab her hair and pull her face away from [the_girl_1.title]'s cunt while you whisper in her ear."
+        mc.name "Your backdoor is so tight, especially with your cunt stuffed at the same time."
+        "As you finish your sentence, you give her an extra rough thrust, your hips slamming against her ass."
+    the_girl_2.char "So full... its so good!"
+    "You push her head back down, into [the_girl_1.title]'s juicy slit."
+
+    return
+
+
+label outro_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_location, the_object, the_round):
+    "[the_girl_2.possessive_title]'s tight ass draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
+    mc.name "Ah, I'm going to cum!"
+    menu:
+        "Cum inside of her.":
+            if mc.condom:
+                "You grab [the_girl_2.possessive_title]'s hips and thrust deep. You dump your load inside of the condom, filling it up."
+                $ condom_break_chance = renpy.random.randint(0, 100)
+                if condom_break_chance < 15: #15% chance of breaking, because its a game condoms don't actually break this much #TODO make a game condom break chance and rewrite some scenes.
+                    "This time though, you feel something give way. You give her a couple more strokes as you finish dumping your load, then slightly pull back."
+                    $ the_girl_2.cum_in_ass()
+                    $ scene_manager.draw_scene()
+                    "Around the base of your cock you see the remains of a broken condom. You just dumped your load in [the_girl_2.title]'s ass!"
+                    mc.name "Hey, sorry, but the condom broke..."
+                    #TODO a variety of responses
+                    the_girl_2.char "Mmmm, so that's what felt so good. It's okay, it happens!"
+                    "When you pull back, you see your cum leaking out around her tight puckered hole and down her legs. You enjoy your after orgasm bliss."
+                else:
+                    "You wait until your orgasm has passed completely, then pull out and sit back. The condom is ballooned and sagging with the weight of your seed."
+                    "You tie the end in a knot and sit back, enjoying the post-orgasm feeling of relaxation."
+                return
+            "You pull back on [the_girl_2.possessive_title]'s hips and drive your cock deep inside of her as you cum. She moans at the sensations but never stops licking [the_girl_1.title]'s cunt."
+            $ the_girl_2.cum_in_ass()
+            $ scene_manager.draw_scene()
+            "You wait until your orgasm has passed completely, then pull out and sit back. Her asshole gapes slightly and you can see a hint of your cum start to dribble out, but most of it stays buried with her bowel"
+        "Cum on her ass.":
+            if mc.condom:
+                "You pull out of [the_girl_2.possessive_title] at the last moment, pulling your condom off as your blow your load all over her ass."
+                "She holds still for you as you cover her with your sperm."
+            else:
+                "You pull out of [the_girl_2.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
+            $ the_girl_2.cum_on_ass()
+            $ scene_manager.draw_scene()
+            "You sit back and sigh contentedly, enjoying the sight of [the_girl_2.possessive_title]'s ass covered in your semen."
+
+    return
+
+label strip_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_location, the_object, the_round):
+    "This is just a test to see if this position is working."
+    "This is the Strip Scene!"
+    return
+
+label strip_ask_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_location, the_object, the_round):
+    "This is just a test to see if this position is working."
+    "This is the ask Strip Scene!"
+    return
+
+label orgasm_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_location, the_object, the_round):
+    if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
+        "[the_girl_2.possessive_title] is moaning urgently now as she continues to service [the_girl_1.title] orally."
+        the_girl_1.char "Oh hell that's so good. You're gonna cum soon too aren't you? Cum with me [the_girl_2.name]!"
+        "[the_girl_2.title] is moaning loudly but it all gets muffled as [the_girl_1.title] grinds against her face roughly."
+        "They both orgasm. You can feel [the_girl_2.possessive_title]'s sphincter gripping you in time with her orgasmic waves."
+        "As they start to wind down, you continue fucking [the_girl_2.title]'s tight back passage."
+        return
+
+    elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
+        "[the_girl_1.possessive_title] is starting to moan more urgently. Her hips are moving on their own in time with [the_girl_2.title]'s oral ministrations."
+        the_girl_1.char "Yes! That's it... right there! YES!!!"
+        "[the_girl_1.title] grinds her pussy against the other girl's face as she orgasms."
+        return
+
+    elif the_girl_2.arousal > 100:   #Just girl 2 orgasms
+        "[the_girl_2.possessive_title]'s legs start to quiver, and then suddenly she tenses up. She pulls her head back from between [the_girl_1.title]'s legs."
+        $ the_girl_2.call_dialogue("climax_responses_anal")
+        "She orgasms, her ass quaking around your cock. You grab her hips and give a few extra rough thrusts."
+
+    return
+
+label swap_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_location, the_object, the_round):
+    "You grab your strap on and secure it around you. You use a little saliva to make sure your cock is good and lubed up."
+    "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
+    if SB_check_fetish(the_girl_2, anal_fetish_role):
+        "[the_girl_2.title] moans pushes herself back against you, eagerly taking you inside her ass."
+    elif the_girl_2.get_opinion_score("anal sex") > 0 :
+        "[the_girl_2.title] moans. Her ass grips you tightly, but you can feel her forcing herself to relax to make it easier to take you."
+        $ the_girl_2.discover_opinion("anal sex")
+    else:
+        "[the_girl_2.title] grimaces a bit, but manages to take you completely by forcing herself to relax."
+
     return

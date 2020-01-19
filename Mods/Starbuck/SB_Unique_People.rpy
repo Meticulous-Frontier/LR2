@@ -712,7 +712,7 @@ label starbuck_sex_store_promo_one_label(the_person):
     $ starbuck.draw_person(position = "stand4", emotion = "happy")
     "[the_person.possessive_title] strikes a pose for you. You take several pictures, trying to find the best angles to show off her body... and the product."
     "You can tell that [the_person.possessive_title] is actually enjoying herself and your attention. Her cheeks are starting to get a little flushed."
-    $ the_person.change_arousal(12)
+    $ the_person.change_arousal(15)
     "The next item for her to model will be a male masturbation sleeve."
     "It is designed to look like a famous porn actress' asshole, so you figure to model this product, [the_person.possessive_title] should have her back to you."
     "Which lingerie should you have her use for this?"
@@ -744,7 +744,7 @@ label starbuck_sex_store_promo_one_label(the_person):
     mc.name "Perfect! These pictures are perfect, you are going to get a flood of guys in here looking for this!"
     "Once you are done [the_person.possessive_title] turns back to face you."
     $ starbuck.draw_person(position = "stand2", emotion = "happy")
-    $ the_person.change_arousal(24)
+    $ the_person.change_arousal(30)
     "The attention you are giving her is really starting to excite [the_person.possessive_title]. You can see her nipples sticking out proudly in her outfit."
     "The last item for her to model is a dildo. You figure since you are mainly targeting a male audience with this advertisement, a good pose for her would be on her knees, like shes getting ready to put it in her mouth."
     "Which lingerie should you have her use for this?"
@@ -773,7 +773,7 @@ label starbuck_sex_store_promo_one_label(the_person):
     the_person.char "Oh! That sounds like fun... sucking on a... a dildo, right!"
     $ starbuck.draw_person(position = "blowjob")
     "[the_person.possessive_title] gets down on her knees. She looks at the dildo longingly. You take multiple pictures of her."
-    $ the_person.change_arousal(36)
+    $ the_person.change_arousal(45)
     the_person.char "Mmm... it looks so tasty..."
     "[the_person.possessive_title] opens her mouth, and slowly starting to run her tongue along the dildo. You see one of her hands slowly drift down between her legs and she begins to touch herself."
     "She has her eyes closed, so you snap a few more pictures of her sucking on the dildo. She suddenly realizes what she is doing and pulls off."
@@ -791,11 +791,11 @@ label starbuck_sex_store_promo_one_label(the_person):
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:
                 "[the_person.possessive_title] takes a few minutes to recover from her orgasm. Eventually she gets up."
-                $ SB_foreplay_perk = Stat_Perk(description = "Increase foreplay skill after helping Starbuck with her advtertisement photos.", foreplay_bonus = 1, bonus_is_temp =False)
-                $ perk_system.add_stat_perk(SB_foreplay_perk, "Starbuck Foreplay Bonus")
                 "Getting [the_person.title] an orgasm makes you feel more confident in your foreplay skills."
             else:
                 "After you finish, [the_person.possessive_title] takes a second, then gets up."
+            $ SB_foreplay_perk = Stat_Perk(description = "Increase foreplay skill after helping Starbuck with her advtertisement photos.", foreplay_bonus = 1, bonus_is_temp =False)
+            $ perk_system.add_stat_perk(SB_foreplay_perk, "Starbuck Foreplay Bonus")
             $ starbuck.draw_person(position = "stand2", emotion = "happy")
             the_person.char "Mmm... That was nice. It's been a while since I sucked on a hard cock. It was kinda nice!"
             if the_person.get_opinion_score("giving blowjobs") < 1:
@@ -1288,6 +1288,15 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     "[the_person.possessive_title] rubs her ass a bit where you spanked her earlier."
     the_person.char "I remember when... my husband use to use me like that... bending me over, spanking me like the naughty girl that a I am."
     the_person.char "We should do this again. It felt so good when your cock started pushing into my ass..."
+    if not perk_system.has_item_perk("Male Strapon"):
+        "She looks at the strapon, then looks back at you."
+        the_person.char "Actually... do you want this strapon? I'm sure I probably can't sell it now. I could give it to you if you want it..."
+        $the_person.draw_person(position = "stand4")
+        "She gets closer and whispers in your ear."
+        the_person.char "Just promise me you'll use it on me again..."
+        mc.name "I promise!"
+        $ item_perk_male_strapon = Item_Perk("A strap on designed to be worn by men. Useful for dual penetration!")
+        $ perk_system.add_item_perk(item_perk_male_strapon, "Male Strapon")
     if the_person.get_opinion_score("being submissive") < 2:
         $ the_person.sexy_opinions["being submissive"] = [2, True]
         "[the_person.possessive_title] now loves being submissive!"
