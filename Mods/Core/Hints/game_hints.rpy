@@ -15,7 +15,7 @@ init -1 python:
     game_hints.append(Hint("HR Director", "Purchase the business policy for the HR Director at your main office.", "HR_director_creation_requirement() and not HR_director_creation_policy.is_owned()", "HR_director_creation_policy.is_owned()"))
 
     # Hints for Cousin
-    game_hints.append(Hint("Cousin at your house", "You should go home in the afternoon, why is your cousin in your house?", "exists_in_room_enter_list(cousin, 'cousin_house_phase_two_label')", "not exists_in_room_enter_list(cousin, 'cousin_house_phase_two_label')"))
+    game_hints.append(Hint("Cousin at your house", "You should go home in the afternoon, why is your cousin in your house?", "exists_in_room_enter_list(cousin, 'cousin_house_phase_two_label') and cousin.schedule[2] == hall", "not exists_in_room_enter_list(cousin, 'cousin_house_phase_two_label')"))
     game_hints.append(Hint("Catch Cousin", "You should check your sisters bedroom in the afternoon, something is happening there.", "exists_in_room_enter_list(cousin, 'cousin_blackmail_intro_label') and cousin.schedule[2] == lily_bedroom", "not exists_in_room_enter_list(cousin, 'cousin_blackmail_intro_label')"))
 
     # Hints for Alexia
@@ -26,6 +26,11 @@ init -1 python:
     game_hints.append(Hint("Nora's Research", "Don't try to research the Nora serum, just create a serum with the Nora trait and give it a person, then interact with them until you have increased your mastery level sufficiently.", "exists_in_location_action_list(university, 'nora_research_up_label') and mc.business.research_tier == 1 and round(mc.business.event_triggers_dict.get('nora_trait_researched').mastery_level, 1) < 2", "exists_in_location_action_list(university, 'nora_research_up_label') and mc.business.research_tier == 2"))
     game_hints.append(Hint("Nora's Research Finished", "Go to the university during business hours to hand in the trait you researched for Nora.", "exists_in_location_action_list(university, 'nora_research_up_label') and mc.business.research_tier == 1 and round(mc.business.event_triggers_dict.get('nora_trait_researched').mastery_level, 1) >= 2", "exists_in_location_action_list(university, 'nora_research_up_label') and mc.business.research_tier == 2"))
 
+
+    # Hints for Research
+    game_hints.append(Hint("Research Idle", "Your research department is not working on anything at the moment, this is the core of your business so give them something to do.", "mc.business.active_research_design is None", "not mc.business.active_research_design is None"))
+    game_hints.append(Hint("Research Mastered", "Your development effort is directed at a well researched component, your efforts might be better spent on something else.", "mc.business.active_research_design and isinstance(mc.business.active_research_design, SerumTrait) and mc.business.active_research_design.get_effective_side_effect_chance() < 5", "mc.business.active_research_design and isinstance(mc.business.active_research_design, SerumTrait) and mc.business.active_research_design.get_effective_side_effect_chance() > 5"))
+    game_hints.append(Hint("Advance Research", "You have researched all traits for your current research level, talk to your head researcher about advancing your research to the next level.", "mc.business.research_tier < 3 and researched_all_at_level()", "not researched_all_at_level()"))
 
     # DEBUG HINTS (for fitting an positioning)
     # game_hints.append(Hint("Always Visible Hint", "This hint is always visible in the hint list.", "True", "False"))
@@ -51,8 +56,19 @@ init -1 python:
     def exists_in_location_action_list(location, effect_name):
         return find_in_list(lambda x: x.effect == effect_name, location.actions)
 
+    def researched_all_at_level():
+        for trait in list_of_traits:
+            if not trait.researched and trait.tier == mc.business.research_tier:
+                return False
+        return True
 
 init 2:
+    # remove research reminder crisis (we have a hint for it)
+    python:
+        found = find_in_list(lambda x: x[0].effect == "research_reminder_crisis_label", crisis_list)
+        if found:
+            crisis_list.remove(found)
+
     screen game_hints_tooltip():
         $ count = number_of_hints()
         $ hint_height = 90
