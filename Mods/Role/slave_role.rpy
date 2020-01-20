@@ -86,7 +86,12 @@ label slave_collar_person_label(the_person):
         "You remove the collar from your [the_person.possessive_title]'s neck"
     else:
         $ collar_list = ["Select Collar"] + [["Breed Me", breed_collar], ["Cum Slut", cum_slut_collar], ["Fuck Doll", fuck_doll_collar], ["Back", "Back"]]
-        call screen main_choice_display(build_menu_items([collar_list]))
+
+        if "build_menu_items" in globals():
+            call screen main_choice_display(build_menu_items([collar_list]))
+        else:
+            call screen main_choice_display([collar_list])
+
         $ collar_choice = _return
 
         if collar_choice == "Back":
