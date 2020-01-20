@@ -598,22 +598,21 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     elif opinion_chat == "work uniforms":
         mc.name "I know that it feels like we are taking some of your creativity away when we assign uniforms. I understand that, but it is also important that we keep a professional atmosphere here."
     elif opinion_chat == "skimpy uniforms":
-        mc.name "I know that it feels weird, being asked to come in to work wearing clothes that show a lot of skin, but in the market we are in, dressing to impress can be a key business advantage."
+        mc.name "I know that it feels weird, being asked to come in to work wearing clothes that show a little skin, but in the market we are in, dressing to impress can be a key business advantage."
     else:
-        mc.name "I know the policy in place feels weird, but I want you to rethink your opinion on [opinion_chat]. It would be helpful if you would "
+        mc.name "I know the policy in place feels weird, but I want you to rethink your opinion on [opinion_chat]. It would be helpful if you would."
     the_person.char "All of our employees are valued here, not just as employees, but as people."
-    person_choice.char "Thanks... I guess... I've never really thought about it like that."
+    person_choice.char "Thanks... I guess... I've never really thought about [opinion_chat] like that."
     if person_choice.obedience > 120: #She is obedient
-        person_choice.char "I'm not sure I really thought about things here as more than just another job... but I want this place to succeed. I want you to succeed, [person_choice.mc_title]."
+        person_choice.char "I'm not sure I really thought about being here as more than just another job... but I want this place to succeed. I want you to succeed, [person_choice.mc_title]."
     else:
-        person_choice.char "I guess I never really though about it like that. I mean, if I have to have a job... I guess I might as well try to be more positive about it, right?"
+        person_choice.char "I guess I never really thought about it like that. I mean, if I have to have a job... I guess I might as well try to be more positive about it, right?"
     "She stops for a moment and gathers her thoughts."
-    person_choice.char "I'll think about this for a bit, but I think I understand what you are saying. I'll try to have a better attitude about things going forward."
+    person_choice.char "I'll think about this for a bit, but I think I understand what you are saying. I'll try to have a better attitude about [opinion_chat] going forward."
     $ scene_manager.update_actor(person_choice, position = "sitting", character_placement = character_left_flipped, emotion = "happy")
     "[person_choice.title] thinks for a moment, then smiles at both of you."
     if person_choice.sluttiness > 80 and the_person.sluttiness > 80: # TODO come back after writing sarah threesome content to unlock this instead
         person_choice.char "Thanks for calling me in. Is that all? Or was there maybe someone... I mean someTHING else on the to do list?"
-        "Are you done with her?"
         menu:
             "Attempt a threesome with [the_person.title]":
                 mc.name "I have one more thing for you before you go..."
