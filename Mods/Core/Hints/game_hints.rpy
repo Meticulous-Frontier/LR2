@@ -15,7 +15,7 @@ init -1 python:
     game_hints.append(Hint("HR Director", "Purchase the business policy for the HR Director at your main office.", "HR_director_creation_requirement() and not HR_director_creation_policy.is_owned()", "HR_director_creation_policy.is_owned()"))
 
     # Hints for Cousin
-    game_hints.append(Hint("Cousin at your house", "You should go home in the afternoon, why is your cousin in your house?", "exists_in_room_enter_list(cousin, 'cousin_house_phase_two_label') and cousin.schedule[2] == hall", "not exists_in_room_enter_list(cousin, 'cousin_house_phase_two_label')"))
+    game_hints.append(Hint("Cousin at your house", "You should go home in the afternoon, why is your cousin in your house?", "exists_in_room_enter_list(cousin, 'cousin_house_phase_two_label') and cousin.schedule[2] == hall", "exists_in_mandatory_crisis_list('cousin_house_phase_three_label') or exists_in_room_enter_list(cousin, 'cousin_blackmail_intro_label') or cousin.event_triggers_dict.get('blackmail_level', 0) > 0"))
     game_hints.append(Hint("Catch Cousin", "You should check your sisters bedroom in the afternoon, something is happening there.", "exists_in_room_enter_list(cousin, 'cousin_blackmail_intro_label') and cousin.schedule[2] == lily_bedroom", "not exists_in_room_enter_list(cousin, 'cousin_blackmail_intro_label')"))
 
     # Hints for Alexia
