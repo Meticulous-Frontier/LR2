@@ -26,6 +26,12 @@ init -1 python:
 
         def add_stat_perk(self, this_perk, perk_name):
             if perk_name in self.stat_perks:  #We already have this perk, don't add it again.
+                if this_perk.bonus_is_temp:
+                    comp_perk = self.get_stat_perk(perk_name)  #Figure out if new duration is longer than existing, if so change it.
+                    if (comp_perk.duration + comp_perk.start_day) < (this_perk.duration + this_perk.start_day):
+                        comp_perk.duration = this_perk.duration
+                        comp_perk.start_day = this_perk.start_day
+
                 return
             else:
                 self.stat_perks[perk_name] = this_perk

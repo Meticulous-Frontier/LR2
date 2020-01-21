@@ -4,10 +4,10 @@ init 2 python:
     SB_SHOP_STAGE_TWO_DAY = 9999
 
     #starbuck ACTIONS#
-    starbuck_vaginal_skillup = Action("Ask about improving vaginal skill", starbuck_vaginal_skillup_requirement, "starbuck_vaginal_skillup_label")
-    starbuck_anal_skillup = Action("Ask about improving anal skill", starbuck_anal_skillup_requirement, "starbuck_anal_skillup_label")
-    starbuck_oral_skillup = Action("Ask about improving oral skill", starbuck_oral_skillup_requirement, "starbuck_oral_skillup_label")
-    starbuck_foreplay_skillup = Action("Ask about improving foreplay", starbuck_foreplay_skillup_requirement, "starbuck_foreplay_skillup_label")
+    starbuck_vaginal_skillup = Action("Ask about temporarily improving vaginal skill", starbuck_vaginal_skillup_requirement, "starbuck_vaginal_skillup_label")
+    starbuck_anal_skillup = Action("Ask about temporarily improving anal skill", starbuck_anal_skillup_requirement, "starbuck_anal_skillup_label")
+    starbuck_oral_skillup = Action("Ask about temporarily improving oral skill", starbuck_oral_skillup_requirement, "starbuck_oral_skillup_label")
+    starbuck_foreplay_skillup = Action("Ask about temporarily improving foreplay", starbuck_foreplay_skillup_requirement, "starbuck_foreplay_skillup_label")
     starbuck_arousal_reduction_one = Action("Ask about lasting longer", starbuck_arousal_reduction_one_requirement, "starbuck_arousal_reduction_one_label")
     starbuck_arousal_reduction_two = Action("Ask about lasting even longer", starbuck_arousal_reduction_two_requirement, "starbuck_arousal_reduction_two_label")
     starbuck_sex_store_investment_one = Action("Ask about investing in her store", starbuck_sex_store_investment_one_requirement, "starbuck_sex_store_investment_one_label")
@@ -88,55 +88,39 @@ init -1 python:
 
     def starbuck_vaginal_skillup_requirement(the_person):
         if starbuck.shop_progress_stage >= 2:
-            if mc.sex_skills["Vaginal"] == 8:
-                if mc.business.funds >= 5000:
-                    if mc.location == sex_store:
-                        return True
-                else:
-                    return "You need more money."
-            elif mc.sex_skills["Vaginal"] < 8:
-                return "Max out your vaginal skill first."
-            return False
+            if mc.business.funds >= 500:
+                if mc.location == sex_store:
+                    return True
+            else:
+                return "You need more money."
         return False
 
 
     def starbuck_anal_skillup_requirement(the_person):
         if starbuck.shop_progress_stage >= 3:
-            if mc.sex_skills["Anal"] == 8:
-                if mc.business.funds >= 8000:
-                    if mc.location == sex_store:
-                        return True
-                else:
-                    return "You need more money."
-            elif mc.sex_skills["Anal"] < 8:
-                return "Max out your anal skill first."
-            return False
+            if mc.business.funds >= 800:
+                if mc.location == sex_store:
+                    return True
+            else:
+                return "You need more money."
         return False
 
     def starbuck_foreplay_skillup_requirement(the_person):
         if starbuck.shop_progress_stage >= 1:
-            if mc.sex_skills["Foreplay"] == 8:
-                if mc.business.funds >= 1000:
-                    if mc.location == sex_store:
-                        return True
-                else:
-                    return "You need more money."
-            elif mc.sex_skills["Foreplay"] < 8:
-                return "Max out your foreplay skill first."
-            return False
+            if mc.business.funds >= 100:
+                if mc.location == sex_store:
+                    return True
+            else:
+                return "You need more money."
         return False
 
     def starbuck_oral_skillup_requirement(the_person):
         if starbuck.shop_progress_stage >= 2:
-            if mc.sex_skills["Oral"] == 8:
-                if mc.business.funds >= 2500:
-                    if mc.location == sex_store:
-                        return True
-                else:
-                    return "You need more money."
-            elif mc.sex_skills["Oral"] < 8:
-                return "Max out your oral skill first."
-            return False
+            if mc.business.funds >= 250:
+                if mc.location == sex_store:
+                    return True
+            else:
+                return "You need more money."
         return False
 
     def starbuck_arousal_reduction_one_requirement(the_person):
@@ -241,17 +225,17 @@ init -1 python:
 
 #SBS10
 label starbuck_vaginal_skillup_label(the_person):
-    "You explain to [the_person.possessive_title] that you feel like you've stopped improving your skill at vaginal sex. You ask if she has any tips or products for further improvement."
+    "You explain to [the_person.possessive_title] that you feel like you've stopped improving your skill at vaginal sex. You ask if she has any tips or products for further improvement, even if its temporary."
     the_person.char "Oh [the_person.mc_title], I have just the thing to help!"
     "[the_person.possessive_title] leads you over to an area of the store where she sells a number of cock rings."
-    the_person.char "Personally, I recommend this one, although it is definitely a little pricey..."
-    "[the_person.possessive_title] picks one off the shelf, it looks like it has a number of features, like vibration and heat. You eye the price tag warily"
-    mc.name "I dunno... is it really worth that much?"
-    the_person.char "DEFINITELY. If you can afford it, [the_person.mc_title], it will help take your girl's orgasms to the next level..."
+    the_person.char "Personally, I recommend this one."
+    "[the_person.possessive_title] picks one off the shelf, it looks like it has a number of features, like vibration and heat."
+    "It looks like a good buy, but unfortunately it has a built in battery that cannot be recharge. Once it's done, its done!"
     menu:
-        "Purchase ($5000)":
-            $ mc.business.funds += -5000
-            $ mc.sex_skills["Vaginal"] = 10
+        "Purchase ($500)":
+            $ mc.business.funds += -500
+            $ SB_temp_vaginal_perk = Stat_Perk(description = "Cock ring that increases pleasure during vaginal sex. Lasts one week.", vaginal_bonus = 2, bonus_is_temp =True, duration = 7)
+            $ perk_system.add_stat_perk(SB_temp_vaginal_perk, "Vibrating Cock Ring")
             the_person.char "Oh! I'll ring this right up. You won't regret it, [the_person.mc_title]!"
             if the_person.sluttiness > 70:
                 "[the_person.possessive_title] hands you your purchase after she rings you up. She smiles at you and blushes a bit."
@@ -294,20 +278,19 @@ label starbuck_vaginal_skillup_label(the_person):
 #SBS20
 label starbuck_anal_skillup_label(the_person):
     #TODO you offer to make dinner. It takes up time, but you can slip serum to your mom and sister.
-    "You explain to [the_person.possessive_title] that you feel like you need something to help take anal sex to the next level. You ask if she has any tips or products for further improvement."
+    "You explain to [the_person.possessive_title] that you feel like you need something to help take anal sex to the next level. You ask if she has any tips or products for further improvement, even if the benefits are temporary."
     the_person.char "Oh [the_person.mc_title], I have just the thing to help!"
     "[the_person.possessive_title] leads you over to an area of the store where she sells a number of lubrications."
     the_person.char "You see [the_person.mc_title], the key to great anal sex, is using the perfect lube!"
-    the_person.char "Personally, I recommend this one, although it is definitely a little pricey..."
-    "[the_person.possessive_title] picks one off the shelf. You eye the price tag warily"
+    the_person.char "Personally, I recommend this one."
+    "[the_person.possessive_title] picks one off the shelf."
     the_person.char "This company has made a ton of advances in lube technology recently."
     the_person.char "This one has full effectiveness with just a small application, and is designed to both lubricate, AND increases blood flow to the nerve endings, making anal more pleasurable for the receiver!"
-    mc.name "I dunno... is it really worth that much?"
-    the_person.char "DEFINITELY. If you can afford it, [the_person.mc_title], it will help take butt play to the next level..."
     menu:
-        "Purchase ($8000)":
-            $ mc.business.funds += -8000
-            $ mc.sex_skills["Anal"] = 10
+        "Purchase ($800)":
+            $ mc.business.funds += -800
+            $ SB_temp_anal_perk = Stat_Perk(description = "Sensitizing and highly effective anal lubricant. Lasts one week.", anal_bonus = 2, bonus_is_temp =True, duration = 7)
+            $ perk_system.add_stat_perk(SB_temp_anal_perk, "Perfect Anal Lube")
             the_person.char "Oh! I'll ring this right up. You won't regret it, [the_person.mc_title]!"
             if the_person.sluttiness > 90:
                 "[the_person.possessive_title] hands you your purchase after she rings you up. She smiles at you and blushes a bit."
@@ -349,19 +332,16 @@ label starbuck_anal_skillup_label(the_person):
 
 #SBS30
 label starbuck_oral_skillup_label(the_person):
-    #TODO you offer to make dinner. It takes up time, but you can slip serum to your mom and sister.
-    "You explain to [the_person.possessive_title] that you feel like you've stopped improving your skill at oral sex. You ask if she has any tips or products for further improvement."
+    "You explain to [the_person.possessive_title] that you feel like you've stopped improving your skill at oral sex. You ask if she has any tips or products for further improvement, even if the effects are temporary."
     the_person.char "Oh [the_person.mc_title]... I think I can probably help you with that!"
-    "[the_person.possessive_title] leads you over to an area of the store where she sells a number of instructional books and videos."
-    the_person.char "Personally, I recommend this one, although it is definitely a little pricey..."
-    "[the_person.possessive_title] picks a video off the shelf. You eye the price tag warily."
-    mc.name "Cunnilingus, multiple orgasms, and squirting. The all in one how to guide."
-    mc.name "I dunno... is it really worth that much?"
-    the_person.char "DEFINITELY. If you can afford it, [the_person.mc_title], it will help you make your girl orgasm over and over again..."
+    "[the_person.possessive_title] leads you over to an area of the store where she sells a number of balms and oils."
+    "She picks a balm up off the shelf. It looks like its some kind of lip balm, but its designed to increase blood flow and pleasure to female partners genitals it comes into contact with."
+    the_person.char "Personally, I recommend this one."
     menu:
-        "Purchase ($2500)":
-            $ mc.business.funds += -2500
-            $ mc.sex_skills["Oral"] = 10
+        "Purchase ($250)":
+            $ mc.business.funds += -250
+            $ SB_temp_oral_perk = Stat_Perk(description = "Lip balm that feels good when you go down on women. Lasts one week.", oral_bonus = 2, bonus_is_temp =True, duration = 7)
+            $ perk_system.add_stat_perk(SB_temp_oral_perk, "Stimulating Lip Balm")
             the_person.char "Oh! I'll ring this right up. You won't regret it, [the_person.mc_title]!"
             if the_person.sluttiness > 45:
                 "[the_person.possessive_title] hands you your purchase after she rings you up. She smiles at you and blushes a bit."
@@ -369,10 +349,7 @@ label starbuck_oral_skillup_label(the_person):
                 menu:
                     "Eat her pussy":
                         mc.name "Sounds good, [the_person.title]."
-                        the_person.char "Ah... okay! Let me close up really quick, I have a movie player in the back. We can go back and watch it together and then try it out!"
-                        "You head to the back of hte store with [the_person.possessive_title]. Watching the video, you learn several new tips and tricks for giving awesome oral."
-                        "When you finish, you see [the_person.possessive_title] looking at you."
-                        the_person.char "Wow, that was interesting!... you ready to give it a try, [the_person.mc_title]?"
+                        the_person.char "Ah yes!"
                         "She quickly takes off some clothes to give you easy access."
                         $ the_person.strip_outfit_to_max_sluttiness(exclude_upper = True)
                         call fuck_person(the_person, start_position = cunnilingus, start_object = mc.location.get_object_with_name("floor"), skip_intro = True) from _call_fuck_person_SBS30
@@ -407,37 +384,30 @@ label starbuck_oral_skillup_label(the_person):
 #SBS40
 label starbuck_foreplay_skillup_label(the_person):
     #TODO you offer to make dinner. It takes up time, but you can slip serum to your mom and sister.
-    "You explain to [the_person.possessive_title] that you feel like you've stopped improving your skill at foreplay. You ask if she has any tips or products for further improvement."
+    "You explain to [the_person.possessive_title] that you feel like you've stopped improving your skill at foreplay. You ask if she has any tips or products for further improvement, even if its only temporary."
     the_person.char "Oh [the_person.mc_title], I have just the thing to help!"
     "[the_person.possessive_title] leads you over to an area of the store where she sells a number of sex toys."
-    the_person.char "Personally, I recommend this one, although it is definitely a little pricey..."
-    "[the_person.possessive_title] picks one off the shelf, it looks like it has a number of features, like vibration and heat. You eye the price tag warily"
-    mc.name "I dunno... is it really worth that much?"
-    the_person.char "DEFINITELY. If you can afford it, [the_person.mc_title], it will help take your girl's orgasms to the next level..."
+    the_person.char "Personally, I recommend this one."
+    "[the_person.possessive_title] picks a small vibrator off the shelf. It looks like it has a number of features, like vibration and heat."
     menu:
-        "Purchase ($1000)":
-            $ mc.business.funds += -1000
-            $ mc.sex_skills["Foreplay"] = 10
+        "Purchase ($100)":
+            $ mc.business.funds += -100
+            $ SB_temp_foreplay_perk = Stat_Perk(description = "Small, finger mounted vibrator. Lasts one week.", foreplay_bonus = 2, bonus_is_temp =True, duration = 7)
+            $ perk_system.add_stat_perk(SB_temp_foreplay_perk, "Small Finger Vibrator")
             the_person.char "Oh! I'll ring this right up. You won't regret it, [the_person.mc_title]!"
             if the_person.sluttiness > 30:
                 "[the_person.possessive_title] hands you your purchase after she rings you up. She smiles at you and blushes a bit."
                 the_person.char "Now... did you maybe want some help... trying this out?"
                 menu:
                     "Finger her":
-                        "You take a quick look at the instructions. Looks like it should be fairly easy to keep with you and use with your partners from now on..."
+                        "You take a quick look at the instructions. Looks like it should be fairly easy to keep with you and use with your partners."
                         mc.name "Sounds good, [the_person.title]. Since you recommended it, its only fair you be the first to feel it."
                         the_person.char "Ah... I can't wait! Let's go!"
                         "She quickly takes off some clothes to give you easy access."
                         $ the_person.strip_outfit_to_max_sluttiness(exclude_upper = True)
                         call fuck_person(the_person, start_position = standing_grope, skip_intro = True) from _call_fuck_person_SBS40
                         $ the_report = _return
-                        if the_report.get("girl orgasms", 0) > 1:
-                            the_person.char "Oh wow... I've never... I came so many times..."
-                            $ the_person.change_obedience (5)
-                            $ the_person.change_slut_temp (5)
-                            $ the_person.change_slut_core (5)
-                            the_person.char "Let's do that again soon!"
-                        elif the_report.get("girl orgasms", 0) > 0:
+                        if the_report.get("girl orgasms", 0) > 0:
                             the_person.char "Oh wow... The orgasms that thing gives..."
                             $ the_person.change_obedience (2)
                             $ the_person.change_slut_temp (2)
