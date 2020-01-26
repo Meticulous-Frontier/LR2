@@ -490,6 +490,8 @@ label Sarah_get_drinks_label():
             "Her face shows visible signs of relief."
             the_person.char "Okay! This will be fun! Do want to get out of here now, or do you need some time to finish up?"
             $ sarah.event_triggers_dict["dating_path"] = True
+            $ the_person.add_situational_slut("Date", 20, "There's no reason to hold back, he's here to fuck me!") # Bonus to sluttiness since she really likes you.
+
             $ the_person.change_happiness(20)
             $ the_person.change_love(10)
         "Just as friends.":
@@ -501,6 +503,7 @@ label Sarah_get_drinks_label():
             $ the_person.change_obedience(20)
             $ the_person.change_love(-10)
             $ sarah.event_triggers_dict["dating_path"] = False
+            $ the_person.add_situational_slut("Date", 10, "There's no reason to hold back, he's here to fuck me!") # Bonus to sluttiness not so high since we go as friends.
 
     mc.name "I'm actually at a great stopping point now. Let's go!"
     the_person.char "Great! Do you want to walk again tonight? It was kind of nice when we walked together last time."
@@ -509,6 +512,7 @@ label Sarah_get_drinks_label():
 
     $ mc.change_location(downtown)
     $ mc.location.show_background()
+
 
     "You enjoy pleasant conversation with [the_person.possessive_title] as you walk downtown."
     if the_person.event_triggers_dict.get("dating_path", False) == True:
@@ -837,6 +841,8 @@ label Sarah_get_drinks_label():
     the_person.char "Don't worry, I can see myself out. I had a great time tonight! I'll see you on Monday, okay?"
     mc.name "Goodbye!"
     $ scene_manager.remove_actor(the_person)
+    $ the_person.clear_situational_slut("Date")
+
     "[the_person.possessive_title] lets herself out of your room and leaves. Wow, what an evening!"
 
     $ Sarah_stripclub_story_action = Action("Sarah Strip Club",Sarah_stripclub_story_requirement,"Sarah_stripclub_story_label")  #Create the next storyline event
