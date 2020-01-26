@@ -764,7 +764,7 @@ label starbuck_sex_store_promo_one_label(the_person):
                 "Getting [the_person.title] an orgasm makes you feel more confident in your foreplay skills."
             else:
                 "After you finish, [the_person.possessive_title] takes a second, then gets up."
-            $ SB_foreplay_perk = Stat_Perk(description = "Increase foreplay skill after helping Starbuck with her advtertisement photos.", foreplay_bonus = 1, bonus_is_temp =False)
+            $ SB_foreplay_perk = Stat_Perk(description = "Increase foreplay skill after helping Starbuck with her advertisement photos.", foreplay_bonus = 1, bonus_is_temp =False)
             $ perk_system.add_stat_perk(SB_foreplay_perk, "Starbuck Foreplay Bonus")
             $ starbuck.draw_person(position = "stand2", emotion = "happy")
             the_person.char "Mmm... That was nice. It's been a while since I sucked on a hard cock. It was kinda nice!"
