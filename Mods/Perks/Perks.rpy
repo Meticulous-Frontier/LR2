@@ -71,7 +71,7 @@ init -1 python:
     class Stat_Perk(renpy.store.object):
         # owner can be MC or any other Person object (default is MC)
         # when owner is Person object we can add temporary stats without using a serum
-        def __init__(self, description, owner = mc, cha_bonus = 0, int_bonus = 0, foc_bonus = 0,
+        def __init__(self, description, owner = None, cha_bonus = 0, int_bonus = 0, foc_bonus = 0,
             hr_bonus = 0, market_bonus = 0, research_bonus = 0, production_bonus = 0, supply_bonus = 0,
             foreplay_bonus = 0, oral_bonus = 0, vaginal_bonus = 0, anal_bonus = 0, energy_bonus = 0,
             stat_cap = 0, skill_cap = 0, sex_cap = 0, energy_cap = 0,
@@ -100,6 +100,8 @@ init -1 python:
             self.duration = duration
             self.start_day = day
 
+            if self.owner is None:
+                self.owner = mc
             if description == None:
                 self.description = ""
 
@@ -138,6 +140,10 @@ init -1 python:
             self.owner.sex_skills["Vaginal"] -= self.vaginal_bonus
             self.owner.sex_skills["Anal"] -= self.anal_bonus
             self.owner.max_energy -= self.energy_bonus
+            # make sure energy is not > max energy
+            if self.owner.energy > self.owner.max_energy:   
+                self.owner.energy = self.owner.max_energy
+
             if isinstance(self.owner, MainCharacter):
                 self.owner.max_stats -= self.stat_cap
                 self.owner.max_work_skills -= self.skill_cap
@@ -147,10 +153,13 @@ init -1 python:
 
     class Item_Perk(renpy.store.object):
         # owner can be MC or any other Person object (default is MC)
-        def __init__(self, description, owner = mc, usable = False, bonus_is_temp = False, duration = 0):
+        def __init__(self, description, owner = None, usable = False, bonus_is_temp = False, duration = 0):           
             self.owner = owner
             self.description = description
             self.usable = usable
             self.bonus_is_temp = bonus_is_temp
             self.duration = duration
             self.start_day = day
+
+            if self.owner is None:
+                self.owner = mc
