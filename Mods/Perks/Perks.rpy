@@ -1,11 +1,3 @@
-init 1 python:
-    def Perk_mod_initialization():
-
-        global perk_system
-        perk_system = Perks()
-        return
-
-
 init -1 python:
     class Perks(renpy.store.object):
         def __init__(self):
@@ -14,28 +6,42 @@ init -1 python:
             self.ability_perks = {}
 
         def update(self):  #By adding an update, we can add temporary perks that may expire.
-            for x in self.stat_perks.copy():
-                if self.stat_perks[x].update():
-                    self.stat_perks.pop(x)
-            for x in self.item_perks.copy():  #Note, we probably don't need this, since items are generally unlocks
-                if self.item_perks[x].update():
-                    self.item_perks.pop(x)
-            for x in self.ability_perks:
-                x.update()
+            def expired_perks(perk_dict):
+                perk_names = []
+                for key, item in perk_dict.items():
+                    if item.bonus_is_temp and day >= item.duration + item.start_day:
+                        perk_names.append(key)
+                return perk_names
+
+            def remove_perk(perk_dict, perk_name):
+                perk_dict[perk_name].remove()
+                perk_dict.pop(perk_name)
+
+            for perk_name in expired_perks(self.stat_perks):
+                remove_perk(self.stat_perks, perk_name)
+
+            for perk_name in expired_perks(self.item_perks):
+                remove_perk(self.item_perks, perk_name)
+
+            for perk_name in expired_perks(self.ability_perks):
+                remove_perk(self.ability_perks, perk_name)
             return
 
-        def add_stat_perk(self, this_perk, perk_name):
-            if perk_name in self.stat_perks:  #We already have this perk, don't add it again.
-                if this_perk.bonus_is_temp:
-                    comp_perk = self.get_stat_perk(perk_name)  #Figure out if new duration is longer than existing, if so change it.
-                    if (comp_perk.duration + comp_perk.start_day) < (this_perk.duration + this_perk.start_day):
-                        comp_perk.duration = this_perk.duration
-                        comp_perk.start_day = this_perk.start_day
+        def add_stat_perk(self, perk, perk_name):
+            if self.has_stat_perk(perk_name):
+                #We already have this perk, check if we need to update temporary bonus.
+                if not perk.bonus_is_temp:
+                    return
 
-                return
+                # Update duration for existing temporary perk.
+                comp_perk = self.get_stat_perk(perk_name)  
+                if comp_perk.duration < perk.duration:
+                    comp_perk.duration = perk.duration
+                if comp_perk.start_day < perk.start_day:
+                    comp_perk.start_day = perk.start_day
             else:
-                self.stat_perks[perk_name] = this_perk
-                self.stat_perks[perk_name].apply()
+                perk.apply()
+                self.stat_perks[perk_name] = perk
             return
 
         def has_stat_perk(self, perk_name):
@@ -44,15 +50,13 @@ init -1 python:
             return False
 
         def get_stat_perk(self, perk_name):
-            if perk_name in self.stat_perks:
+            if self.has_stat_perk(perk_name):
                 return self.stat_perks[perk_name]
             return None
 
-        def add_item_perk(self, this_perk, perk_name):
-            if perk_name in self.item_perks:
-                return
-            else:
-                self.item_perks[perk_name] = this_perk
+        def add_item_perk(self, perk, perk_name):
+            if not self.has_item_perk(perk_name):
+                self.item_perks[perk_name] = perk
 
         def has_item_perk(self, perk_name):
             if perk_name in self.item_perks:
@@ -60,22 +64,21 @@ init -1 python:
             return False
 
         def get_item_perk(self, perk_name):
-            if perk_name in self.item_perks:
+            if self.has_item_perk(perk_name):
                 return self.item_perks[perk_name]
             return None
 
     class Stat_Perk(renpy.store.object):
-        def __init__(self, description, cha_bonus = 0, int_bonus = 0, foc_bonus = 0,
+        # owner can be MC or any other Person object (default is MC)
+        # when owner is Person object we can add temporary stats without using a serum
+        def __init__(self, description, owner = mc, cha_bonus = 0, int_bonus = 0, foc_bonus = 0,
             hr_bonus = 0, market_bonus = 0, research_bonus = 0, production_bonus = 0, supply_bonus = 0,
             foreplay_bonus = 0, oral_bonus = 0, vaginal_bonus = 0, anal_bonus = 0, energy_bonus = 0,
             stat_cap = 0, skill_cap = 0, sex_cap = 0, energy_cap = 0,
             bonus_is_temp = False, duration = 0):
 
-            if description == None:
-                self.description = " "
-            else:
-                self.description = description
-
+            self.owner = owner
+            self.description = description
             self.cha_bonus = cha_bonus
             self.int_bonus = int_bonus
             self.foc_bonus = foc_bonus
@@ -97,65 +100,57 @@ init -1 python:
             self.duration = duration
             self.start_day = day
 
+            if description == None:
+                self.description = ""
+
         def apply(self):
-            mc.charisma += self.cha_bonus
-            mc.int += self.int_bonus
-            mc.focus += self.foc_bonus
-            mc.hr_skill += self.hr_bonus
-            mc.market_skill += self.market_bonus
-            mc.research_skill += self.research_bonus
-            mc.production_skill += self.production_bonus
-            mc.supply_skill += self.supply_bonus
-            mc.sex_skills["Foreplay"] += self.foreplay_bonus
-            mc.sex_skills["Oral"] += self.oral_bonus
-            mc.sex_skills["Vaginal"] += self.vaginal_bonus
-            mc.sex_skills["Anal"] += self.anal_bonus
-            mc.max_energy += self.energy_bonus
-            mc.max_stats += self.stat_cap
-            mc.max_work_skills += self.skill_cap
-            mc.max_sex_skills += self.sex_cap
-            mc.max_energy_cap += self.energy_cap
+            self.owner.charisma += self.cha_bonus
+            self.owner.int += self.int_bonus
+            self.owner.focus += self.foc_bonus
+            self.owner.hr_skill += self.hr_bonus
+            self.owner.market_skill += self.market_bonus
+            self.owner.research_skill += self.research_bonus
+            self.owner.production_skill += self.production_bonus
+            self.owner.supply_skill += self.supply_bonus
+            self.owner.sex_skills["Foreplay"] += self.foreplay_bonus
+            self.owner.sex_skills["Oral"] += self.oral_bonus
+            self.owner.sex_skills["Vaginal"] += self.vaginal_bonus
+            self.owner.sex_skills["Anal"] += self.anal_bonus
+            self.owner.max_energy += self.energy_bonus
+            if isinstance(self.owner, MainCharacter):
+                self.owner.max_stats += self.stat_cap
+                self.owner.max_work_skills += self.skill_cap
+                self.owner.max_sex_skills += self.sex_cap
+                self.owner.max_energy_cap += self.energy_cap
             return
 
         def remove(self):
-            mc.charisma -= self.cha_bonus
-            mc.int -= self.int_bonus
-            mc.focus -= self.foc_bonus
-            mc.hr_skill -= self.hr_bonus
-            mc.market_skill -= self.market_bonus
-            mc.research_skill -= self.research_bonus
-            mc.production_skill -= self.production_bonus
-            mc.supply_skill -= self.supply_bonus
-            mc.sex_skills["Foreplay"] -= self.foreplay_bonus
-            mc.sex_skills["Oral"] -= self.oral_bonus
-            mc.sex_skills["Vaginal"] -= self.vaginal_bonus
-            mc.sex_skills["Anal"] -= self.anal_bonus
-            mc.max_energy -= self.energy_bonus
-            mc.max_stats -= self.stat_cap
-            mc.max_work_skills -= self.skill_cap
-            mc.max_sex_skills -= self.sex_cap
-            mc.max_energy_cap -= self.energy_cap
+            self.owner.charisma -= self.cha_bonus
+            self.owner.int -= self.int_bonus
+            self.owner.focus -= self.foc_bonus
+            self.owner.hr_skill -= self.hr_bonus
+            self.owner.market_skill -= self.market_bonus
+            self.owner.research_skill -= self.research_bonus
+            self.owner.production_skill -= self.production_bonus
+            self.owner.supply_skill -= self.supply_bonus
+            self.owner.sex_skills["Foreplay"] -= self.foreplay_bonus
+            self.owner.sex_skills["Oral"] -= self.oral_bonus
+            self.owner.sex_skills["Vaginal"] -= self.vaginal_bonus
+            self.owner.sex_skills["Anal"] -= self.anal_bonus
+            self.owner.max_energy -= self.energy_bonus
+            if isinstance(self.owner, MainCharacter):
+                self.owner.max_stats -= self.stat_cap
+                self.owner.max_work_skills -= self.skill_cap
+                self.owner.max_sex_skills -= self.sex_cap
+                self.owner.max_energy_cap -= self.energy_cap
             return
 
-        def update(self):
-            if self.bonus_is_temp:
-                if day > self.duration + self.start_day:
-                    self.remove()
-                    return True
-            return False
-
     class Item_Perk(renpy.store.object):
-        def __init__(self,  description, usable = False, bonus_is_temp = False, duration = 0):
+        # owner can be MC or any other Person object (default is MC)
+        def __init__(self, description, owner = mc, usable = False, bonus_is_temp = False, duration = 0):
+            self.owner = owner
             self.description = description
             self.usable = usable
             self.bonus_is_temp = bonus_is_temp
             self.duration = duration
             self.start_day = day
-
-
-        def update(self):
-            if self.bonus_is_temp:
-                if day > self.duration + self.start_day:
-                    self.remove()
-                    return True
-            return False

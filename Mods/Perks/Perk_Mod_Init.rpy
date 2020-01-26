@@ -2,6 +2,10 @@ init 5 python:
     add_label_hijack("normal_start", "activate_perk_mod_core")
     add_label_hijack("after_load", "update_perk_mod_core")
 
+    def Perk_mod_initialization():
+        global perk_system
+        perk_system = Perks()
+        return
 
 label activate_perk_mod_core(stack):
     python:
