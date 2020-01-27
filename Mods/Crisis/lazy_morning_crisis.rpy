@@ -37,7 +37,7 @@ label lazy_morning_crisis_action_label:
     elif the_person == aunt:
         the_person.char "I'm sorry, I didn't realize you weren't up yet!"
     elif the_person == cousin:        #Wow, congrats on getting her so slutty while shes living with you!
-        the_person.char "Wow, I can't beieve you're still sleeping. Up late beating off to crazy porn or something, ya perv?."
+        the_person.char "Wow, I can't believe you're still sleeping. Up late beating off to crazy porn or something, ya perv?."
     else:                           #Someone else someday? A live in girlfriend maybe?
         the_person.char "I'm sorry [the_person.mc_title], I forgot its the weekend!"
 

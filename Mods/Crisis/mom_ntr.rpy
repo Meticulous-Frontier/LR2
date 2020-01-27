@@ -2255,7 +2255,7 @@ label mom_ntr_mod_action_label:
                                 man_name "It really turned me on! I feel I can do another round shortly."
                                 the_person.char "We will discuss it later, [man_name2]. First - I need to taste [man_name]."
                                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
-                                "She puts another dick int oher mouth and sucks it off."
+                                "She puts another dick into her mouth and sucks it off."
                                 man_name "This is so great. I can't hold much longer!"
                                 $ the_person.cum_in_mouth()
                                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
