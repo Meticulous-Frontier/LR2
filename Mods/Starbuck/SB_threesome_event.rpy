@@ -59,8 +59,8 @@ label SB_fetish_vaginal_family_threesome_label():
     "Laying in your bed, you hear a knock on your door. You hear [the_person_one.possessive_title] from the other side of the door."
     the_person_one.char "Hey [the_person_one.mc_title], you still up? I was just wondering if I could come in for a bit?"
     "You invite [the_person_one.possessive_title] in. You immediately start to get aroused when you see what she is wearing."
-    $ the_person_one.apply_outfit(the_person_one.wardrobe.get_random_appropriate_underwear(the_person_one.sluttiness))
-    $ the_person_two.apply_outfit(the_person_two.wardrobe.get_random_appropriate_underwear(the_person_two.sluttiness))
+    $ the_person_one.apply_outfit(the_person_one.wardrobe.get_random_appropriate_underwear(the_person_one.sluttiness, guarantee_output = True))
+    $ the_person_two.apply_outfit(the_person_two.wardrobe.get_random_appropriate_underwear(the_person_two.sluttiness, guarantee_output = True))
     $ scene_manager.add_actor(the_person_one)
     the_person_one.char "So... I was wondering... is it okay if I sleep in here with you tonight?"
     menu:

@@ -9,11 +9,11 @@ label family_morning_breakfast_enhanced_label():
         sis_slutty = False
         if mom.sluttiness > 40:
             mom_slutty = True
-            mom.apply_outfit(mom.wardrobe.get_random_appropriate_underwear(mom.sluttiness))
+            mom.apply_outfit(mom.wardrobe.get_random_appropriate_underwear(mom.sluttiness, guarantee_output = True))
 
         if lily.sluttiness > 40:
             sis_slutty = True
-            lily.apply_outfit(lily.wardrobe.get_random_appropriate_underwear(lily.sluttiness))
+            lily.apply_outfit(lily.wardrobe.get_random_appropriate_underwear(lily.sluttiness, guarantee_output = True))
 
         #Make sure we're in our bedroom when the event starts.
         mc.change_location(bedroom)
