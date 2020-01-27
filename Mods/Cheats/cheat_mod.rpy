@@ -88,9 +88,7 @@ screen cheat_menu():
         "Intelligence": ["int", "int", 1],
 
         "Age": ["age", "age", 1],
-
-        "Arousal": ["arousal", "arousal", 10],
-        "Energy": ["max_energy", "max_energy", 10.0],
+        "Height": ["height", "height", .005],
 
         "Funds": ["funds", "funds", 10000],
         "Supplies": ["supply_count", "supply_count", 10000],
@@ -111,12 +109,16 @@ screen cheat_menu():
 
         }
     default relation_stats = {
+        "Energy": ["energy", "energy", 10.0],
+        "Max Energy": ["max_energy", "max_energy", 10.0],
+        
         "Love": ["love", "love", 10],
         "Suggestibility": ["suggestibility", "suggestibility", 10],
         "Sluttiness": ["sluttiness", "sluttiness", 10],
         "Core Sluttiness": ["core_sluttiness", "core_sluttiness", 10],
         "Obedience": ["obedience", "obedience", 10],
-        "Happiness": ["happiness", "happiness", 10]
+        "Happiness": ["happiness", "happiness", 10],
+        "Arousal": ["arousal", "arousal", 10]
         }
     default sex_stats = { # Sex Skills are stored in a dict
         "Foreplay": ["sex_skills", "Foreplay", 1],
@@ -286,18 +288,32 @@ screen cheat_menu():
                                                         Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] - main_stats[x][2])
                                                     ]
 
-                                                textbutton x + ": " + str(vars(editing_target)[main_stats[x][1]]):
-                                                    xsize 198
-                                                    style "textbutton_no_padding_highlight"
-                                                    text_style "cheat_text_style"
+                                                if isinstance(vars(editing_target)[main_stats[x][1]], int):
+                                                    textbutton x + ": " + str(vars(editing_target)[main_stats[x][1]]):
+                                                        xsize 198
+                                                        style "textbutton_no_padding_highlight"
+                                                        text_style "cheat_text_style"
 
-                                                    action [
-                                                        Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] + main_stats[x][2])
-                                                    ]
+                                                        action [
+                                                            Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] + main_stats[x][2])
+                                                        ]
 
-                                                    alternate [
-                                                        Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] - main_stats[x][2])
-                                                    ]
+                                                        alternate [
+                                                            Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] - main_stats[x][2])
+                                                        ]
+                                                else:
+                                                    textbutton x + ": " + str(round(vars(editing_target)[main_stats[x][1]], 3)):
+                                                        xsize 198
+                                                        style "textbutton_no_padding_highlight"
+                                                        text_style "cheat_text_style"
+
+                                                        action [
+                                                            Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] + main_stats[x][2])
+                                                        ]
+
+                                                        alternate [
+                                                            Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] - main_stats[x][2])
+                                                        ]
 
                                                 textbutton " + ":
                                                     xsize 36
