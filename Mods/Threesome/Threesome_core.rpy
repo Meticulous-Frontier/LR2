@@ -490,9 +490,10 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
     $ mc.condom = False
     $ mc.recently_orgasmed = False
 
-    if affair_ask_after and private and ask_girlfriend_requirement(the_person_one) is True and not the_person_one.relationship == "Single":
-        if the_person_one.love >= 60 and the_person_one.sluttiness >= 30 - (the_person_one.get_opinion_score("cheating on men") * 5) and report_log.get("girl orgasms",0) >= 1: #If she loves you enoguh, is moderately slutty, and you made her cum
-            call affair_check(the_person_one, report_log) from _call_affair_check_threesome_one
+    #Disabling affair check for now. Doesn't really make sense in a threesome.
+    # if affair_ask_after and private and ask_girlfriend_requirement(the_person_one) is True and not the_person_one.relationship == "Single":
+    #     if the_person_one.love >= 60 and the_person_one.sluttiness >= 30 - (the_person_one.get_opinion_score("cheating on men") * 5) and report_log.get("girl orgasms",0) >= 1: #If she loves you enoguh, is moderately slutty, and you made her cum
+    #         call affair_check(the_person_one, report_log) from _call_affair_check_threesome_one
 
 
     python: #Log all of the different classes of sex, but only once per class.
