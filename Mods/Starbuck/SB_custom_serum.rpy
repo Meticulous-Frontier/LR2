@@ -369,16 +369,22 @@ init -1 python:
                                 if FETISH_CUM_EVENT_INUSE:
                                     return
 
-                                FETISH_CUM_EVENT_INUSE = True
+
                                 SB_SET_RANDOM_EVENT_CHANCE(0)
                                 #renpy.say("", "Trigger cum fetish " + the_person.name)
                                 if the_person == lily:
                                     mc.business.mandatory_morning_crises_list.append(SB_fetish_lily_cum)
+                                    FETISH_CUM_EVENT_INUSE = True
                                 elif the_person == mom:
                                     mc.business.mandatory_crises_list.append(SB_fetish_mom_cum)
-                                else:
+                                    FETISH_CUM_EVENT_INUSE = True
+                                elif the_person == stephanie and head_researcher in the_person.special_role and the_person.personality != bimbo_personality:
+                                    mc.business.mandatory_crises_list.append(SB_fetish_stephanie_cum_action)
+                                    FETISH_CUM_EVENT_INUSE = True
+                                elif employee_role in the_person.special_role:
                                     SB_fetish_cum_crisis.args = [the_person]
                                     mc.business.mandatory_crises_list.append(SB_fetish_cum_crisis)
+                                    FETISH_CUM_EVENT_INUSE = True
         return
 
 label serum_mod_starbuck_traits(stack):

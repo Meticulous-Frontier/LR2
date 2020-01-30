@@ -20,7 +20,7 @@ init 1 python:
 
     def SB_stephanie_anal_fetish_requirement():
         if mc.business.is_open_for_business():
-            if renpy.random.randint(0,100) < 80:
+            if renpy.random.randint(0,100) < 15:
                 return True
         return False
 
@@ -1239,7 +1239,7 @@ label SB_stephanie_anal_fetish_label():
                 $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
                 "She wiggles her ass back and forth in front of you as you pull your dick out."
                 the_person.char "Stick it in [the_person.mc_title]! I want to earn my special present!"
-                call fuck_person(the_person, start_position = SB_anal_standing) from _call_fuck_person_SBA091
+                call fuck_person(the_person, start_position = SB_anal_standing) from _call_fuck_person_SBA092
                 $ the_person.sexy_opinions["anal sex"] = [FETISH_OPINION_VALUE, True]
                 $ the_person.sexy_opinions["anal creampies"] = [FETISH_OPINION_VALUE, True]
                 $ the_person.special_role.append(anal_fetish_role)
@@ -1282,7 +1282,7 @@ label SB_stephanie_anal_fetish_label():
             $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
         "She looks at you expectantly."
         the_person.char "Well? Why are you still wearing clothes? You said you would help!"
-        call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_desk(), girl_in_charge = True, position_locked = True) from _call_sex_description_SBA092
+        call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_desk(), girl_in_charge = True, position_locked = True) from _call_sex_description_SBA093
         $ the_person.sexy_opinions["anal sex"] = [FETISH_OPINION_VALUE, True]
         $ the_person.sexy_opinions["anal creampies"] = [FETISH_OPINION_VALUE, True]
         $ the_person.special_role.append(anal_fetish_role)
@@ -1331,7 +1331,7 @@ label SB_stephanie_anal_fetish_label():
             $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
         "She looks at you expectantly."
         the_person.char "Well? Why are you still wearing clothes? You said you would help!"
-        call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_desk(), skip_intro = False, girl_in_charge = True, position_locked = True) from _call_sex_description_SBA093
+        call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_desk(), skip_intro = False, girl_in_charge = True, position_locked = True) from _call_sex_description_SBA094
         $ the_person.sexy_opinions["anal sex"] = [FETISH_OPINION_VALUE, True]
         $ the_person.sexy_opinions["anal creampies"] = [FETISH_OPINION_VALUE, True]
         $ the_person.special_role.append(anal_fetish_role)
