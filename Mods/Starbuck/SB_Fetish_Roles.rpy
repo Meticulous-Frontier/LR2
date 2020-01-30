@@ -65,6 +65,8 @@ init -1 python:
         else:
             return "You're too tired"
 
+
+
     # Initialize vaginal fetish role
     SB_fetish_vaginal_visit = Action("Sleepover Tonight", SB_fetish_vaginal_visit_requirement, "SB_fetish_vaginal_visit_label",
         menu_tooltip = "Ask her over for some fun tonight.")
@@ -115,6 +117,18 @@ init 1 python:
                     description += ", "
                 description += role.role_name
         return description
+
+    def SB_fetish_get_employee_percent():
+        total_count = 0
+        fetish_count = 0
+        if len(mc.business.get_employee_list()) == 0:
+            return 0
+        for person in mc.business.get_employee_list():
+            total_count += 1
+            if SB_get_fetish_count(person) > 0:
+                fetish_count += 1
+        return int((fetish_count / total_count) * 100)
+
 
 #Vaginal Fetish Events#
 label SB_fetish_vaginal_visit_label(the_person):
