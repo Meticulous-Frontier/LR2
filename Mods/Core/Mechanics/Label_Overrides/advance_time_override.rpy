@@ -156,11 +156,11 @@ label advance_time_enhanced:
 
     # increase crisis chance (every time slot)
     $ crisis_chance += 1
-    $ del people_to_process
     $ renpy.free_memory()
     $ mc.location.show_background()
     if mandatory_advance_time: #If a crisis has told us to advance time after it we do so.
         call advance_time from _call_advance_time_advance_time_enhanced
+    $ people_to_process = []
     return
 
 label advance_time_enhanced_next_day_no_events:
