@@ -574,12 +574,18 @@ init -1:
 
         Person.review_outfit = review_outfit_enhanced
 
-        def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, lighting = None, character_placement = None, from_scene = False): #Draw the person, standing as default if they aren't standing in any other position.
+        def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0, character_placement = None, from_scene = False): #Draw the person, standing as default if they aren't standing in any other position.
             if position is None:
                 position = self.idle_pose
 
             if emotion is None:
                 emotion = self.get_emotion()
+
+            if the_animation is None:
+                the_animation = self.idle_animation
+
+            if not can_use_animation():
+                the_animation = None
 
             if character_placement is None: # make sure we don't need to pass the position with each draw
                 character_placement = character_right
@@ -600,21 +606,22 @@ init -1:
                 if show_person_info:
                     renpy.show_screen("person_info_ui",self)
 
-            final_image = self.build_person_displayable(position, emotion, special_modifier, show_person_info, lighting)
-            renpy.show(self.name,at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=(self.name + self.last_name + str(self.age)))
+            if the_animation:
+                final_image = self.build_person_animation(the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength)
+            else:
+                final_image = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill)
+
+            renpy.show(self.name + self.last_name + "_anim",at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=self.name + self.last_name +"_anim")
 
         # replace the default draw_person function of the person class
         Person.draw_person = draw_person_enhanced
         # add location to store original personality
         Person.original_personality = None
 
-        def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, special_modifier = None, lighting = None, character_placement = None, scene_manager = None): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
+        def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, special_modifier = None, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0, character_placement = None, scene_manager = None): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
             #Note: this function includes a call to remove_clothing, it is not needed seperately.
             if position is None:
                 position = self.idle_pose
-
-            bottom_displayable = [] #Displayables under the piece of clothing being removed.
-            top_displayable = []
 
             if emotion is None:
                 emotion = self.get_emotion()
@@ -625,50 +632,29 @@ init -1:
             if character_placement is None: # make sure we don't need to pass the position with each draw
                 character_placement = character_right
 
+            if not can_use_animation():
+                the_animation = None
+
             renpy.scene("Active") # clear layer for new draw action
             if scene_manager is None:
                 renpy.show_screen("person_info_ui",self)
-            else:   # when we are called from the scenemanager we have to draw the other characters
+            else:   # when we are called from the scene manager we have to draw the other characters
                 scene_manager.draw_scene_without(self)
 
-            bottom_displayable.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier, eye_colour = self.eyes[1], lighting = lighting)) #Get the face displayable, also always under clothing.
-            bottom_displayable.append(self.body_images.generate_item_displayable(self.body_type,self.tits,position, lighting = lighting))  #Body is always under clothing
-            bottom_displayable.append(self.pubes_style.generate_item_displayable(self.body_type,self.tits, position, lighting = lighting)) #Pubes are also always under clothing and can't be removed.
+            if the_animation:
+                bottom_displayable = self.build_person_animation(the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength = 1.0)
+            else:
+                bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
 
-            size_render = renpy.render(bottom_displayable[1], 10, 10, 0, 0) #We need a render object to check the actual size of the body displayable so we can build our composite accordingly.
-            the_size = size_render.get_size()
-            x_size = __builtin__.int(the_size[0])
-            y_size = __builtin__.int(the_size[1])
+            self.outfit.remove_clothing(the_clothing)
 
-            bottom_clothing, split_clothing, top_clothing = self.outfit.generate_split_draw_list(the_clothing, self, position, emotion, special_modifier, lighting = lighting) #Gets a split list of all of our clothing items.
-            #We should remember that middle item can be None.
-            for item in bottom_clothing:
-                bottom_displayable.append(item)
+            if the_animation:
+                top_displayable = self.build_person_animation(the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength)
+            else:
+                top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
 
-            for item in top_clothing:
-                top_displayable.append(item)
-
-            top_displayable.append(self.hair_style.generate_item_displayable("standard_body",self.tits,position, lighting = lighting)) #Hair is always on top
-
-            #Now we build our two composites, one for the bottom image and one for the top.
-            composite_bottom_params = [(x_size,y_size)]
-            for display in bottom_displayable:
-                composite_bottom_params.append((0,0))
-                composite_bottom_params.append(display)
-
-            composite_top_params = [(x_size,y_size)]
-            for display in top_displayable:
-                composite_top_params.append((0,0))
-                composite_top_params.append(display)
-
-            final_bottom = Composite(*composite_bottom_params)
-            final_top = Composite(*composite_top_params)
-
-            renpy.show("Bottom Composite", at_list=[character_placement, scale_person(self.height)], layer="Active", what=final_bottom, tag=self.name+"Bottom")
-            if split_clothing: #Only show this if we actually had something returned to us.
-                renpy.show("Removed Item", at_list=[character_placement, scale_person(self.height), clothing_fade], layer="Active", what=split_clothing, tag=self.name+"Middle")
-                self.outfit.remove_clothing(the_clothing)
-            renpy.show("Top Composite", at_list=[character_placement, scale_person(self.height)], layer="Active", what=final_top, tag=self.name+"Top")
+            renpy.show(self.name+self.last_name+"_new", at_list=[character_placement, scale_person(self.height)], layer = "Active", what = top_displayable, tag = self.name + self.last_name +"_new")
+            renpy.show(self.name+self.last_name+"_old", at_list=[character_placement, scale_person(self.height), clothing_fade], layer = "Active", what = bottom_displayable, tag = self.name + self.last_name +"_old")
 
         Person.draw_animated_removal = draw_animated_removal_enhanced
 

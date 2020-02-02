@@ -3,7 +3,7 @@ init -1 python:
     # instead of the fixed weight on zoom factor
     # currently between 60 inch (152.4) - 70 inch (177.8) (based on * 50 + 20).
     def height_to_string(person_height): #Height is a value between 0.8 and 1.0
-        total_inches = __builtin__.round((person_height * 50) + 20)
+        total_inches = __builtin__.round(((person_height + .3) * 50) + 20)
         feet = int(__builtin__.round(total_inches // 12))
         inches = int(__builtin__.round(total_inches % 12))
 
