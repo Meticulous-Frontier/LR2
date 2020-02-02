@@ -39,6 +39,16 @@ init 1 python:
             return True
         return False
 
+    def add_breed_me_collar_to_base_outfit(person):
+        person.base_outfit.remove_all_collars()
+
+        bm_collar = breed_collar.get_copy()
+        bm_collar.colour = [1,.41,.71,.9]
+        bm_collar.pattern = "Pattern_1"
+        bm_collar.colour_pattern = [.1,.1,.1,.9]
+        person.base_outfit.add_accessory(bm_collar)
+        return
+
     SB_fetish_mom_vaginal_crisis = Action("Mom Loves Vaginal Sex", SB_fetish_mom_vaginal_requirement, "SB_fetish_mom_vaginal_label")
     SB_fetish_lily_vaginal_crisis = Action("Lily Loves Vaginal Sex", SB_fetish_lily_vaginal_requirement, "SB_fetish_lily_vaginal_label")
     SB_fetish_vaginal_crisis = Action("Loves Vaginal Sex", SB_fetish_vaginal_requirement, "SB_fetish_vaginal_label")
@@ -50,7 +60,7 @@ label SB_fetish_vaginal_label(the_person):
     "*Ding Dong*"
     "You're roused from your bed by a ring on your doorbell."
     "You head to your front door and see [the_person.possessive_title] standing there... outside... in a very provocative outfit."
-    $ the_person.outfit = SB_vaginal_outfit.get_copy()
+    $ the_person.apply_outfit(SB_vaginal_outfit)
     $ the_person.draw_person()
     ###Draw the girl###
     "You quickly open the door and invite her inside."
@@ -76,7 +86,7 @@ label SB_fetish_vaginal_label(the_person):
             call fuck_person(the_person, start_position = SB_facing_wall, start_object = make_window(), skip_intro = True) from _call_fuck_person_SBV11
 
             "[the_person.possessive_title] walks over to your bed and lays down on her back and takes off any remaining clothing."
-            $ the_person.outfit = SB_vaginal_nude_outfit.get_copy()
+            $ the_person.apply_outfit(SB_vaginal_nude_outfit)
             $ the_person.draw_person(position = "missionary")
             ###If The girl is still wearing any clothing, have her take it off###
             "You join her on the bed. She raises her arm and you lay your head down on her breast."
@@ -133,6 +143,7 @@ label SB_fetish_vaginal_label(the_person):
             the_person.char "Come and get it, [the_person.mc_title]... its yours for the taking!"
             "You get down on your knees and get behind [the_person.possessive_title]. You line yourself up with her soaking wet slit and push yourself in."
             ###Sex Doggy Style###
+            $ stealth_orgasm = False
             call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True) from _call_fuck_person_SBV13
 
             "Exhausted from your night with [the_person.possessive_title], you get back up into your bed. [the_person.possessive_title] joins you and you quickly fall asleep, cuddling together."
@@ -145,6 +156,7 @@ label SB_fetish_vaginal_label(the_person):
 
             "She's been under the influence of your serums for a while now... you wonder if she's developed a fetish..."
             $ the_person.special_role.append(vaginal_fetish_role)
+            $ add_breed_me_collar_to_base_outfit(the_person)
         "Refuse":       # allow for player to decide if he wants to induce fetish
             mc.name "I'm sorry [the_person.title], I really need to get some sleep."
             $ the_person.change_obedience(-10)
@@ -163,7 +175,7 @@ label SB_fetish_vaginal_label(the_person):
     $ FETISH_VAGINAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
-    call SB_process_overnight_no_events() from _SB_overnight_SBV010
+    call advance_time_enhanced_next_day_no_events() from _SB_overnight_SBV010
 
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV010
     return
@@ -174,7 +186,7 @@ label SB_fetish_vaginal_event_label(the_person):
         "You hear a knock on your door. You hear [the_person.possessive_title]'s sweet and familiar voice from the other side."
         the_person.char "Hey honey, its [the_person.possessive_title]..."
         "You invite [the_person.possessive_title] in. You immediately start to get aroused when you see what she is wearing."
-        $ the_person.outfit = SB_vaginal_outfit.get_copy()
+        $ the_person.apply_outfit(SB_vaginal_outfit)
         $ the_person.draw_person()
         the_person.char "Thanks for letting me come spend the night with you. I know you're a grown man with..."
         "Her voice trails off a bit."
@@ -216,7 +228,7 @@ label SB_fetish_vaginal_event_label(the_person):
         "There is a quick a knock on your door. You hear [the_person.possessive_title] from the other side of the door."
         the_person.char "Hey [the_person.mc_title], you still up? I hope you're ready for me!"
         "You invite [the_person.possessive_title] in. You immediately start to get aroused when you see what she is wearing."
-        $ the_person.outfit = SB_vaginal_lily_outfit.get_copy()
+        $ the_person.apply_outfit(SB_vaginal_lily_outfit)
         $ the_person.draw_person()
         the_person.char "So... do you want a free show tonight? I've been thinking about this all day!"
         menu:
@@ -251,7 +263,7 @@ label SB_fetish_vaginal_event_label(the_person):
         "Your phones rings. Its [the_person.possessive_title]! You quickly pick it up"
         the_person.char "Hey [the_person.mc_title]! I'm here out front!"
         "You head to your front door and see [the_person.possessive_title] standing there... outside... in a very provocative outfit."
-        $ the_person.outfit = SB_vaginal_outfit.get_copy()
+        $ the_person.apply_outfit(SB_vaginal_outfit)
         $ the_person.draw_person()
         ###Draw the girl###
         "You quickly open the door and invite her inside."
@@ -291,7 +303,7 @@ label SB_fetish_vaginal_event_label(the_person):
     $ FETISH_VAGINAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
-    call SB_process_overnight_no_events() from _SB_overnight_SBV020
+    call advance_time_enhanced_next_day_no_events() from _SB_overnight_SBV020
 
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV020
     return
@@ -303,7 +315,7 @@ label SB_fetish_mom_vaginal_label():
     the_person.char "Hey Honey... its [the_person.title]... can I come in?"
     "It is unusual for her to come around this time of night."
     mc.name "Sure thing [the_person.title]."
-    $ the_person.outfit = SB_vaginal_outfit.get_copy()
+    $ the_person.apply_outfit(SB_vaginal_outfit)
     $ the_person.draw_person()
     "[the_person.possessive_title] slowly opens your door and walks in. Her outfit makes her body look incredible."
     mc.name "Everything ok [the_person.title]?"
@@ -341,10 +353,11 @@ label SB_fetish_mom_vaginal_label():
     "Her naked flesh soft up against yours gives you many sexy dreams that night."
 
     $ the_person.special_role.append(vaginal_fetish_role)
+    $ add_breed_me_collar_to_base_outfit(the_person)
     $ FETISH_VAGINAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
-    call SB_process_overnight_no_events() from _SB_overnight_SBV030
+    call advance_time_enhanced_next_day_no_events() from _SB_overnight_SBV030
 
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV030
 
@@ -357,7 +370,7 @@ label SB_fetish_lily_vaginal_label():
     the_person.char "Hey [the_person.mc_title]... Are you still up? Can I come in for a bit?"
     "[the_person.possessive_title] almost never comes to your room, unless she needs something."
     mc.name "Sure thing [the_person.title]."
-    $ the_person.outfit = SB_vaginal_lily_outfit.get_copy()
+    $ the_person.apply_outfit(SB_vaginal_lily_outfit)
     $ the_person.draw_person()
     "[the_person.possessive_title] slowly opens your door and walks in."
     mc.name "Hey [the_person.title], looking great! Are you going out tonight?"
@@ -392,6 +405,7 @@ label SB_fetish_lily_vaginal_label():
     "You moan into her mouth and quickly prepare yourself to penetrate [the_person.possessive_title]."
     $ the_person.sex_skills["Vaginal"] = 6
     ###Sex scene, missionary###   ###TODO: consider writing a variant of this because the default intro is going to be confusing###
+    $ stealth_orgasm = False
     call fuck_person(the_person, start_position = doggy, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBV40
     #$ the_person.SB_fetish = "vaginal sex"
     $ SB_random_fetish_key = get_random_from_list(FETISH_VAGINAL_OPINION_LIST)
@@ -404,10 +418,11 @@ label SB_fetish_lily_vaginal_label():
     #SBMOD Start hacked wakeup sex code. To be copy/pasted to other similar places#
 
     $ the_person.special_role.append(vaginal_fetish_role)
+    $ add_breed_me_collar_to_base_outfit(the_person)
     $ FETISH_VAGINAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
-    call SB_process_overnight_no_events() from _SB_overnight_SBV040
+    call advance_time_enhanced_next_day_no_events() from _SB_overnight_SBV040
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV040
     return
 
@@ -427,7 +442,7 @@ label SB_cowgirl_wakeup_label(the_person):
 
     "When morning comes, you feel a stirring in your loins again as you start to slowly wake up. This time, however, there are some very pleasant sensations coming from your crotch."
 
-    $ the_person.outfit = SB_vaginal_nude_outfit.get_copy()
+    $ the_person.apply_outfit(SB_vaginal_nude_outfit)
     $ the_person.draw_person(position = "cowgirl")
     $ the_person.change_arousal(35)
     $ mc.arousal = 25
@@ -448,7 +463,7 @@ label SB_cowgirl_wakeup_label(the_person):
     else:
         "[the_person.title] looks at you and winks."
         the_person.char "Anytime [the_person.mc_title]! I'd better go get ready!"
-    $ the_person.review_outfit(show_review_message = False)
+    $ the_person.review_outfit(dialogue = False)
     "You fall back asleep. When you wake up, [the_person.possessive_title] has left."
     "Looks like you slept in!"
     $ FETISH_VAGINAL_EVENT_INUSE = False
@@ -475,25 +490,27 @@ init 2 python:
                 return True
         return False
 
+    def get_vaginal_fetish_employee():
+        meets_fetish_list = []
+        for person in mc.business.get_employee_list():
+            if SB_check_fetish(person, vaginal_fetish_role):
+                meets_fetish_list.append(person)
+        if SB_check_fetish(mom, vaginal_fetish_role):
+            meets_fetish_list.append(mom)
+
+        return get_random_from_list(meets_fetish_list)
+
     SB_fetish_vaginal_lily_recurring_crisis = Action("Vaginal Fetish lily Recurring Crisis",SB_fetish_vaginal_lily_recurring_requirement,"SB_fetish_vaginal_lily_recurring_label")
     crisis_list.append([SB_fetish_vaginal_lily_recurring_crisis, 5])
 
 #SBV6
 label SB_fetish_vaginal_recurring_label():
-    $ meets_fetish_list = []
-    python:
-        for person in mc.business.get_employee_list():
-            if person.sex_skills["Vaginal"] > 5:
-                meets_fetish_list.append(person)
-        if mom.sex_skills["Vaginal"] > 5:
-            meets_fetish_list.append(mom)
-    $ the_person = get_random_from_list(meets_fetish_list)
-
+    $ the_person = get_vaginal_fetish_employee()
     if the_person == mom:
         "Before going to bed, you hear a knock on your door. You hear [the_person.possessive_title]'s sweet and familiar voice from the other side."
         the_person.char "Hey honey, its [the_person.title]... I was just wondering if I could come in for a bit?"
         "You invite [the_person.possessive_title] in. You immediately start to get aroused when you see what she is wearing."
-        $ the_person.outfit = SB_vaginal_outfit.get_copy()
+        $ the_person.apply_outfit(SB_vaginal_outfit)
         $ the_person.draw_person()
         the_person.char "So... I was wondering... is it okay if I sleep in here with you again tonight?"
         menu:
@@ -525,7 +542,7 @@ label SB_fetish_vaginal_recurring_label():
                 "She responds right away."
                 the_person.char "Be right there!"
                 "You hang out for a few minutes, until you hear the doorbell. You go to your front door and open it."
-                $ the_person.outfit = SB_vaginal_outfit.get_copy()
+                $ the_person.apply_outfit(SB_vaginal_outfit)
                 $ the_person.draw_person()
                 ###Draw the girl###
                 "[the_person.possessive_title] is standing there, and she looks amazing."
@@ -543,6 +560,7 @@ label SB_fetish_vaginal_recurring_label():
         "[the_person.possessive_title] turns away from you and gets down on her hands and knees. She sticks her ass up in the air and starts to wiggle it back and forth."
         the_person.char "Come fuck me, [the_person.mc_title]. Don't worry, I'm ready for you!"
         "You quickly take your position behind her and slowly sink your cock into her greedy cunt."
+        $ stealth_orgasm = False
         call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True) from _call_fuck_person_SBV60
     elif the_person.get_opinion_score("sex standing up") > 2:
         "[the_person.possessive_title] resumes kissing you. You grab her ass with both hands and pick her up. She grinds her crotch into you."
@@ -569,7 +587,7 @@ label SB_fetish_vaginal_recurring_label():
     #SBMOD Start hacked wakeup sex code. To be copy/pasted to other similar places#
 
     $ FETISH_VAGINAL_EVENT_INUSE = False
-    call SB_process_overnight_no_events() from _SB_overnight_SBV060
+    call advance_time_enhanced_next_day_no_events() from _SB_overnight_SBV060
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV060
     return
 
@@ -580,7 +598,7 @@ label SB_fetish_vaginal_lily_recurring_label():
     "Before going to bed, you hear a knock on your door. You hear [the_person.possessive_title] from the other side of the door."
     the_person.char "Hey [the_person.mc_title], you still up? I was just wondering if I could come in for a bit?"
     "You invite Lily in. You immediately start to get aroused when you see what she is wearing."
-    $ the_person.outfit = SB_vaginal_lily_outfit.get_copy()
+    $ the_person.apply_outfit(SB_vaginal_lily_outfit)
     $ the_person.draw_person()
     the_person.char "So... I was wondering... is it okay if I sleep in here with you again tonight?"
     menu:
@@ -611,6 +629,7 @@ label SB_fetish_vaginal_lily_recurring_label():
         "[the_person.possessive_title] turns away from you and gets down on her hands and knees. She sticks her ass up in the air and starts to wiggle it back and forth."
         the_person.char "Come fuck me, [the_person.mc_title]. Don't worry, I'm ready for you!"
         "You quickly take your position behind her and slowly sink your cock into her greedy cunt."
+        $ stealth_orgasm = False
         call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True) from _call_fuck_person_SBV70
     elif  the_person.get_opinion_score("sex standing up") > 2:
         "[the_person.possessive_title] resumes kissing you. You grab her ass with both hands and pick her up. She grinds her crotch into you."
@@ -638,33 +657,6 @@ label SB_fetish_vaginal_lily_recurring_label():
     $ FETISH_VAGINAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
-    call SB_process_overnight_no_events() from _SB_overnight_SBV070
+    call advance_time_enhanced_next_day_no_events() from _SB_overnight_SBV070
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV070
-    return
-
-label SB_process_overnight_no_events():   #Use this label for overnights where the morning should be random event free, or when we want to control what happens in the morning.
-    $ time_of_day = 0
-    $ day += 1
-    python:
-        for (person, place) in people_to_process:
-            person.run_day()
-
-    $ mc.run_day()
-    $ mc.business.run_day()
-
-    if mc.business.funds < 0:
-        $ mc.business.bankrupt_days += 1
-        if mc.business.bankrupt_days == mc.business.max_bankrupt_days:
-            $ renpy.say("","With no funds to pay your creditors you are forced to close your business and auction off all of your materials at a fraction of their value. Your story ends here.")
-            $ renpy.full_restart()
-        else:
-            $ days_remaining = mc.business.max_bankrupt_days-mc.business.bankrupt_days
-            $ renpy.say("","Warning! Your company is losing money and unable to pay salaries or purchase necessary supplies! You have [days_remaining] days to restore yourself to positive funds or you will be foreclosed upon!")
-    else:
-        $ mc.business.bankrupt_days = 0
-
-
-
-    call screen end_of_day_update() # We have to keep this outside of a python block, because the renpy.call_screen function does not properly fade out the text bar.
-    $ mc.business.clear_messages()
     return

@@ -301,7 +301,7 @@ init 2:
 
         $ renpy.block_rollback()
 
-        $ fluids_list = [face_cum, mouth_cum, stomach_cum, tits_cum, ass_cum]
+        $ fluids_list = [face_cum, mouth_cum, stomach_cum, tits_cum, ass_cum, creampie_cum]
 
         default category_selected = "Panties"
         default mannequin = "mannequin"
@@ -323,7 +323,7 @@ init 2:
         default demo_outfit = starting_outfit.get_copy()
         default item_outfit = starting_outfit.get_copy()
         default outfit_builder = WardrobeBuilder(None)
-        default max_slut = outfit_type == "over" and 6 or 12
+        default max_slut = outfit_type == "over" and 8 or 12
 
         if outfit_type == "under":
             $ valid_layers = [0,1]

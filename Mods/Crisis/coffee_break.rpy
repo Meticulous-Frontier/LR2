@@ -112,7 +112,7 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
 
                     # switch to SB ui
                     #$ SB_draw_two_person_scene(person_one = person_two, person_two = person_three, one_pos_x = 0.7, one_position = "stand3", two_position = "stand4")
-                    call start_threesome(person_two, person_three) from coffe_break_threesome_test_3
+                    call start_threesome(person_two, person_three) from _call_coffee_break_threesome_test_3
                     #call SB_threesome_description(person_two, person_three, SB_threesome_sixty_nine, make_floor(), 0, private = True, girl_in_charge = False) from _call_SB_threesome_description
                     #$ SB_draw_two_person_scene(person_one = person_two, person_two = person_three, one_pos_x = 0.7)
                     person_two.char "Wow...this was...really good actually... You can join us anytime you want boss..."
@@ -122,14 +122,14 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                     "They pickup their clothes and leave you feeling very proud of yourself."
 
                     # cleanup scene
-                    $ renpy.scene("Active")
+                    $ scene_manager.clear_scene()
                     $ update_opinion(person_two, "threesomes")
                     $ person_two.reset_arousal()
-                    $ person_two.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+                    $ person_two.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
 
                     $ update_opinion(person_three, "threesomes")
                     $ person_three.reset_arousal()
-                    $ person_three.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+                    $ person_three.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
 
                     $ town_relationships.improve_relationship(person_two, person_three)
 

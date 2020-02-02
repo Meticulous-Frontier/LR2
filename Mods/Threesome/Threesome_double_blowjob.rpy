@@ -63,7 +63,7 @@ init:
             requirement = requirement_always_true)
 
 
-        threesome_double_blowjob = Threesome_Position(name = "Sixty Nine Plus One",
+        threesome_double_blowjob = Threesome_Position(name = "Double Blowjob",
             slut_requirement = 60,
             position_one_tag = "blowjob",
             position_two_tag = "blowjob",
@@ -87,7 +87,7 @@ label intro_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_loca
     else:
         the_girl_1.char "I don't usually give blowjobs, but with [the_girl_2.name] here it should be fun!"
     if the_girl_2.get_opinion_score("giving blowjobs") > 0:
-        the_girl_1.char "This is gonna great, I can lick your balls while she's blowing you, [the_girl_2.mc_title]!"
+        the_girl_1.char "This is gonna be great, I can lick your balls while she's blowing you, [the_girl_2.mc_title]!"
     else:
         the_girl_2.char "I wonder how long you can last with two girls on their knees for you, [the_girl_2.mc_title]."
     "[the_girl_1.possessive_title] and [the_girl_2.possessive_title] get to work servicing your cock."
@@ -107,7 +107,7 @@ label scene_threesome_double_blowjob_focus_oral_1(the_girl_1, the_girl_2, the_lo
     return
 
 label scene_threesome_double_blowjob_focus_oral_2(the_girl_1, the_girl_2, the_location, the_object, the_round):
-    "[the_girl_2.title] opens up and takes a turn focusing on your. She takes the base in her hand and gives you long, deep strokes."
+    "[the_girl_2.title] opens up and takes a turn focusing on your hard on. She takes the base in her hand and gives you long, deep strokes."
     $ scene_manager.update_actor(the_girl_1, position = "kissing")
     "[the_girl_1.title] takes a moment and stands up, wrapping her hands around you. She begins kissing your neck and along your jawline."
     "[the_girl_1.possessive_title]'s lips on your neck, her body against yours, and [the_girl_2.possessive_title]'s mouth on your cock. This must be heaven."
@@ -195,7 +195,7 @@ label swap_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_locat
     else:
         the_girl_1.char "I don't usually give blowjobs, but with [the_girl_2.name] here it should be fun!"
     if the_girl_2.get_opinion_score("giving blowjobs") > 0:
-        the_girl_1.char "This is gonna great, I can lick your balls while she's blowing you, [the_girl_2.mc_title]!"
+        the_girl_1.char "This is gonna be great, I can lick your balls while she's blowing you, [the_girl_2.mc_title]!"
     else:
         the_girl_2.char "I wonder how long you can last with two girls on their knees for you, [the_girl_2.mc_title]."
     "[the_girl_1.possessive_title] and [the_girl_2.possessive_title] get to work servicing your cock."

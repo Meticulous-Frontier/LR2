@@ -42,14 +42,14 @@ init 2 python:
             #if self.alternate_on_buy_arguments is not None:
             #    self.on_buy_function(**self.alternate_on_buy_arguments)
                 #if hasattr(persistent_policy, "refund"): TODO: Find a way to deal with refunds when you "sell" multiple at a time.
-                #    mc.business.pay(+persistent_policy.refund)
+                #    mc.business.change_funds(+persistent_policy.refund)
 
         else: # Left click actions
             if self.on_buy_function is not None:
                 self.on_buy_function(**self.on_buy_arguments)
 
             if not persistent_policy.enabled:
-                mc.business.pay(-self.cost) # Currently do not deduct cost for the alternate_on_buy_arguments
+                mc.business.change_funds(-self.cost) # Currently do not deduct cost for the alternate_on_buy_arguments
                 persistent_policy.refund = self.cost
 
         if self.refresh:

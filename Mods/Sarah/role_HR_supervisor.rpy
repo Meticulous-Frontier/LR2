@@ -28,10 +28,12 @@ init -0 python:
         if business_HR_director:
             return business_HR_director.HR_tags.get(key, default)
 
+    # used for unlocked sex positions
     def set_HR_director_unlock(key, value):
         if business_HR_director:
             business_HR_director.HR_unlocks[key] = value
 
+    # used for unlocked sex positions
     def get_HR_director_unlock(key, default = False):
         if business_HR_director:
             return business_HR_director.HR_unlocks.get(key, default)
@@ -119,7 +121,7 @@ init 5 python:
 
     def HR_director_coffee_tier_1_requirement(the_person):
         if get_HR_director_tag("business_HR_coffee_tier", 0) == 0:
-            if get_HR_director_tag("business_HR_serum_tier", 0) == 1:
+            if get_HR_director_tag("business_HR_serum_tier", 0) > 0:
                 if mc.business.funds > 500:
                     return True
                 else:
@@ -129,7 +131,7 @@ init 5 python:
 
     def HR_director_coffee_tier_2_requirement(the_person):
         if get_HR_director_tag("business_HR_coffee_tier", 0) == 1:
-            if get_HR_director_tag("business_HR_serum_tier", 0) == 2:
+            if get_HR_director_tag("business_HR_serum_tier", 0) > 1:
                 if mc.business.funds > 1500:
                     return True
                 else:
@@ -184,6 +186,24 @@ init 5 python:
                 return "One meeting per day."
         return False
 
+    def HR_director_headhunt_initiate_requirement(the_person):
+        if get_HR_director_tag("business_HR_headhunter_initial", False) == True:
+            if get_HR_director_tag("business_HR_headhunter_progress", 0) == 0:
+                if mc.business.max_employee_count == mc.business.get_employee_count():
+                    return "You have too many employees"
+                if mc.business.is_open_for_business():
+                    return True
+                else:
+                    return "Only during work day"
+        return False
+
+    def HR_director_headhunt_interview_requirement():
+        if day >= get_HR_director_tag("recruit_day"):
+            if mc.business.is_open_for_business():
+                if time_of_day == 1:
+                    return True
+        return False
+
     def is_HR_director_employed(hr_director):
         if hr_director in mc.business.get_employee_list():
             return True
@@ -212,9 +232,11 @@ init 5 python:
         remove_mandatory_crisis_list_action("Sarah_new_tits_label")
         remove_mandatory_crisis_list_action("Sarah_third_wheel_label")
         remove_mandatory_crisis_list_action("Sarah_catch_stealing_label")
+        remove_mandatory_crisis_list_action("Sarah_stripclub_story_label")
         remove_mandatory_crisis_list_action("HR_director_initial_hire_label")
         remove_mandatory_crisis_list_action("HR_director_first_monday_label")
         remove_mandatory_crisis_list_action("HR_director_monday_meeting_label")
+        remove_mandatory_crisis_list_action("HR_director_headhunt_interview_label")
         return
 
 
@@ -234,7 +256,9 @@ init 5 python:
         menu_tooltip = "Changes how often employees ask for employment for their daughters")
     HR_director_meeting_on_demand_action = Action("Meet with employee {image=gui/heart/Time_Advance.png}", HR_director_meeting_on_demand_requirement, "HR_director_meeting_on_demand_label",
         menu_tooltip = "Arrange a meeting with an employee")
-    HR_director_role = Role("HR Director", [HR_director_meeting_on_demand_action, HR_director_coffee_tier_1_action, HR_director_coffee_tier_2_action, HR_director_gym_membership_tier_1_action, HR_director_gym_membership_tier_2_action, HR_director_mind_control_action, HR_director_mind_control_attempt, HR_director_change_relative_recruitment_action]) #Actions go in block
+    HR_director_headhunt_initiate_action = Action("Initiate employee search", HR_director_headhunt_initiate_requirement, "HR_director_headhunt_initiate_label",
+        menu_tooltip = "Try and find a new employee for a specific job")
+    HR_director_role = Role("HR Director", [HR_director_meeting_on_demand_action, HR_director_coffee_tier_1_action, HR_director_coffee_tier_2_action, HR_director_gym_membership_tier_1_action, HR_director_gym_membership_tier_2_action, HR_director_mind_control_action, HR_director_mind_control_attempt, HR_director_change_relative_recruitment_action, HR_director_headhunt_initiate_action]) #Actions go in block
 
     HR_director_appointment_action = Action("Appoint HR Director.", can_appoint_HR_director_requirement, "HR_director_appointment_action_label",
             menu_tooltip = "Pick a member of your HR staff to be your HR director. The HR director will help you manage your employees wellbeing and motivation.")
@@ -242,7 +266,7 @@ init 5 python:
 
 init 1301 python:
     def HR_director_creation_requirement():
-        return True
+        return sarah.event_triggers_dict.get("first_meeting", False) == True
 
     HR_director_creation_policy = Policy(name = "Create HR Director Position",
         desc = "Create a new position for an HR Director. Increases maximum employee count by one.",
@@ -250,6 +274,8 @@ init 1301 python:
         requirement =  HR_director_creation_requirement,
         on_buy_function = increase_max_employee_size,
         on_buy_arguments = {"amount":1})
+
+    organisation_policies_list.append(HR_director_creation_policy)
 
 
 #####HR Director ACTION LABELS#####
@@ -302,7 +328,7 @@ label HR_director_initial_hire_label(the_person):
 
         business_HR_director = the_person
         business_HR_director.HR_tags = {}
-        business_HR_director.HR_unlocks = {}       
+        business_HR_director.HR_unlocks = {}
 
         if the_person is sarah:
             the_person.set_schedule([1,2,3], None)
@@ -330,6 +356,7 @@ label HR_director_first_monday_label(the_person):
         return
     "It's lunchtime, so you prepare to have your first meeting with your new HR Direction, [the_person.title]."
     "You grab your lunch from the break head to your office and sit down."
+    $ scene_manager = Scene()
     $ mc.change_location(office)
     $ mc.location.show_background()
     $ the_person.draw_person()
@@ -458,8 +485,17 @@ label HR_director_monday_meeting_label(the_person):
                 mc.name "Yes I want to do that."
                 the_person.char "Ok! Let me see who I have on my list here..."
                 call HR_director_personnel_interview_label(the_person, max_opinion = get_HR_director_tag("business_HR_coffee_tier", 0)) from HR_DIR_INTERVIEW_CALL_2
+                $ set_HR_director_tag("business_HR_meeting_last_day", day)
     the_person.char "Hmm, let's see, what's next..."
     call HR_director_manage_gym_membership(the_person) from HR_Gym_manage_1
+
+    if get_HR_director_tag("business_HR_headhunter_initial", False) == False and recruitment_batch_two_policy.is_owned():  #Unlock the new headhunter rewards
+        the_person.char "Our new recruiting software is useful for widening the pool of applicants to hire from, but when you cast a wider net, sometimes you get less than desirable results."
+        the_person.char "After this meeting, I'll see if I can rework some of the software to better find applicants for specific departments."
+        the_person.char "If you want to find an employee for a specific job, let me know, I might be able to get more fitting results!"
+        $ set_HR_director_tag("business_HR_headhunter_initial", True)
+    elif get_HR_director_tag("business_HR_headhunter_initial", False) == True:
+        call HR_director_monday_headhunt_update_label(the_person) from HR_headhunter_monday_update_1
 
     the_person.char "Ok, next up, I wanted to review progress made on serums and policy changes from the past week to see if anything might be useful."
     call HR_director_review_discoveries_label(the_person) from HR_DIR_INTERVIEW_CALL_3
@@ -469,6 +505,7 @@ label HR_director_monday_meeting_label(the_person):
 
     $ HR_director_monday_meeting = Action("Monday HR Lunch",HR_director_monday_meeting_requirement,"HR_director_monday_meeting_label", args = the_person) #Set the trigger day for the next monday. Monday is day%7 == 0
     $ mc.business.mandatory_crises_list.append(HR_director_monday_meeting) #Add the event here so that it pops when the requirements are met.
+    $ the_person.review_outfit(dialogue = False)
     return
 
 label HR_director_personnel_interview_label(the_person, max_opinion = 0):
@@ -561,22 +598,21 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     elif opinion_chat == "work uniforms":
         mc.name "I know that it feels like we are taking some of your creativity away when we assign uniforms. I understand that, but it is also important that we keep a professional atmosphere here."
     elif opinion_chat == "skimpy uniforms":
-        mc.name "I know that it feels weird, being asked to come in to work wearing clothes that show a lot of skin, but in the market we are in, dressing to impress can be a key business advantage."
+        mc.name "I know that it feels weird, being asked to come in to work wearing clothes that show a little skin, but in the market we are in, dressing to impress can be a key business advantage."
     else:
-        mc.name "I know the policy in place feels weird, but I want you to rethink your opinion on [opinion_chat]. It would be helpful if you would "
+        mc.name "I know the policy in place feels weird, but I want you to rethink your opinion on [opinion_chat]. It would be helpful if you would."
     the_person.char "All of our employees are valued here, not just as employees, but as people."
-    person_choice.char "Thanks... I guess... I've never really thought about it like that."
+    person_choice.char "Thanks... I guess... I've never really thought about [opinion_chat] like that."
     if person_choice.obedience > 120: #She is obedient
-        person_choice.char "I'm not sure I really thought about things here as more than just another job... but I want this place to succeed. I want you to succeed, [person_choice.mc_title]."
+        person_choice.char "I'm not sure I really thought about being here as more than just another job... but I want this place to succeed. I want you to succeed, [person_choice.mc_title]."
     else:
-        person_choice.char "I guess I never really though about it like that. I mean, if I have to have a job... I guess I might as well try to be more positive about it, right?"
+        person_choice.char "I guess I never really thought about it like that. I mean, if I have to have a job... I guess I might as well try to be more positive about it, right?"
     "She stops for a moment and gathers her thoughts."
-    person_choice.char "I'll think about this for a bit, but I think I understand what you are saying. I'll try to have a better attitude about things going forward."
+    person_choice.char "I'll think about this for a bit, but I think I understand what you are saying. I'll try to have a better attitude about [opinion_chat] going forward."
     $ scene_manager.update_actor(person_choice, position = "sitting", character_placement = character_left_flipped, emotion = "happy")
     "[person_choice.title] thinks for a moment, then smiles at both of you."
     if person_choice.sluttiness > 80 and the_person.sluttiness > 80: # TODO come back after writing sarah threesome content to unlock this instead
         person_choice.char "Thanks for calling me in. Is that all? Or was there maybe someone... I mean someTHING else on the to do list?"
-        "Are you done with her?"
         menu:
             "Attempt a threesome with [the_person.title]":
                 mc.name "I have one more thing for you before you go..."
@@ -605,6 +641,9 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     $ scene_manager.update_actor(the_person, position = "stand2")
     "[the_person.title] gets up and walks [person_choice.title] to the door."
     "They exchange a few pleasantries before [person_choice.title] leaves the room."
+    $ scene_manager.remove_actor(person_choice)
+    # remove actor first (without reset), so she continues the meeting as she was dressed before
+    $ scene_manager.remove_actor(the_person, reset_actor = False)
     $ scene_manager.clear_scene()
     "[the_person.title] comes back to the desk and sits down."
     $ the_person.draw_person(position = "sitting")
@@ -790,11 +829,11 @@ label HR_director_manage_gym_membership(the_person):
                     x.change_happiness(2 * x.get_opinion_score("sports"))
             cost = len(mc.business.get_employee_list()) * 15
     the_person.char "Just to let you know, I wrote out the check this morning for this week's employee health program."
-    $ mc.business.pay(-cost)
+    $ mc.business.change_funds(-cost)
     return
 
 label HR_director_coffee_tier_1_label(the_person):
-    $ mc.business.pay(- 500)
+    $ mc.business.change_funds(- 500)
     mc.name "I've been thinking about your proposal to add serums to the coffee we serve to employees when we meet with them. I'm giving you approval to set it up."
     the_person.char "Sounds good sir! I'll head over to research and have them synthesize me some."
     the_person.char "I'll keep it in a locked cabinet and from now on I'll only use it when we give an employee coffee during our monday meetings."
@@ -804,7 +843,7 @@ label HR_director_coffee_tier_1_label(the_person):
     return
 
 label HR_director_coffee_tier_2_label(the_person):
-    $ mc.business.pay(- 1500)
+    $ mc.business.change_funds(- 1500)
     mc.name "I've been thinking about your proposal to add the stronger serum to the coffee we serve to employees when we meet with them. I'm giving you approval to set it up."
     the_person.char "Sounds good sir! I'll head over to research and have them synthesize me some."
     the_person.char "I'll keep it in a locked cabinet and from now on I'll only use it when we give an employee coffee during our monday meetings."
@@ -897,7 +936,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         $ set_HR_director_unlock("blowjob", True)
         "She cleans herself up and makes herself presentable again."
 
-        $ the_person.review_outfit(show_review_message = False)
+        $ the_person.review_outfit(dialogue = False)
         return
 
     if get_HR_director_unlock("titfuck") == False:
@@ -924,7 +963,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             the_person.char "Mmm, god that was hot. Let me just enjoy this a minute before we move on with the meeting..."
             "You run your hands through her hair for a bit while she enjoys the warmth of your cum on her skin."
             "Eventually she cleans herself up and makes herself presentable again."
-            $ the_person.review_outfit(show_review_message = False)
+            $ the_person.review_outfit(dialogue = False)
             return
 
     if get_HR_director_unlock("missionary on desk") == False:
@@ -955,7 +994,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             mc.name "You were right, [the_person.title]. It IS really hot to fuck you on my desk!"
             the_person.char "Ah, yes, I suspected it would be, sir!"
             "Eventually she cleans herself up and makes herself presentable again."
-            $ the_person.review_outfit(show_review_message = False)
+            $ the_person.review_outfit(dialogue = False)
             return
 
     if get_HR_director_unlock("bent over desk") == False:
@@ -992,7 +1031,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                     "[the_person.possessive_title] slowly recovers from using her body for your pleasure."
                     the_person.char "Mmm, happy to be of service, sir. We can do that again next time... if you want!"
                 "Eventually she cleans herself up and makes herself presentable again."
-                $ the_person.review_outfit(show_review_message = False)
+                $ the_person.review_outfit(dialogue = False)
                 return
 
 
@@ -1006,6 +1045,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         tuple_list.append(["Surprise me", "any"])
 
         position_choice = renpy.display_menu(tuple_list,True,"Choice")
+        del tuple_list
 
     if position_choice == "any":
         the_person.char "Mmmm, I can do that! "
@@ -1024,7 +1064,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_mid_one
 
     elif position_choice == "titfuck":
-        if the_person.outfit.tits_available() == False:
+        if not the_person.outfit.tits_available():
             "[the_person.possessive_title] begins to take off her top. "
             $ scene_manager.strip_actor_outfit(the_person, exclude_lower = True)
             "With her tits out and ready to be used, she gives you a big smile."
@@ -1036,9 +1076,9 @@ label HR_director_sexy_meeting_start_label(the_person):
         call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_mid_two
 
     elif position_choice == "missionary on desk":
-        if the_person.outfit.vagina_available() == False:
+        if not (the_person.outfit.vagina_available() and the_person.outfit.vagina_visible()):
             "[the_person.possessive_title] begins to take off her clothes. "
-            $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
+            $ scene_manager.strip_actor_outfit(the_person, exclude_upper = True, exclude_lower = False)
             "When she finishes getting naked, she gives you a big smile."
         the_person.char "Oh my, fucking me on your desk? You are so naughty, [the_person.mc_title]!"
         $ scene_manager.update_actor(the_person, position = "missionary")
@@ -1059,11 +1099,11 @@ label HR_director_sexy_meeting_start_label(the_person):
         $ scene_manager.update_actor(the_person, position="standing_doggy")
         the_person.char "Oh my!"
 
-        if the_person.outfit.vagina_available():
+        if the_person.outfit.vagina_available() and the_person.outfit.vagina_visible():
             "She wiggles her hips back at you a bit. Her pussy lips glisten with a bit of moisture."
         else:
             "You start to strip [the_person.possessive_title] down."
-            $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
+            $ scene_manager.strip_actor_outfit(the_person, exclude_upper = True, exclude_lower = False)
             "Soon her ass is on full display in front of you, bent over your desk."
         "You don't waste any time. You pull your cock out and point it at her slit. You pull her hips back as you push inside of her with one smooth push."
         the_person.char "Mmm, fuck me good [the_person.mc_title]!"
@@ -1072,7 +1112,6 @@ label HR_director_sexy_meeting_start_label(the_person):
         call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_mid_four
 
 
-    "She quickly starts to get dressed to continue your meeting."
     if ((the_person.obedience - 100) + the_person.sluttiness) > 100: #If she is either very obedient, slutty, or a mixture
         menu:
             "Tell her to stay like that for the meeting":
@@ -1080,13 +1119,16 @@ label HR_director_sexy_meeting_start_label(the_person):
                 "[the_person.title] opens her mouth for a second, ready to protest, but quickly reconsiders."
                 the_person.char "Of course, [the_person.mc_title]. Let's see what is next."
             "Let her clean herself up":
-                $ the_person.review_outfit(show_review_message = False)
+                $ the_person.review_outfit(dialogue = False)
                 "[the_person.possessive_title] quickly cleans herself up, ready to continue the meeting."
+    else:
+        "She quickly starts to get dressed to continue your meeting."
+
 
     return
 
 label HR_director_mind_control_label(the_person):
-    $ mc.business.pay(- 5000)
+    $ mc.business.change_funds(- 5000)
     mc.name "I've been thinking about your proposal to create a specialized serum for mind control attempts. I would like to move forward with it."
     the_person.char "Sounds good sir! I'll head over to research and have them synthesize me some."
     the_person.char "I'll make sure it stay locked away, and only you and I will have a key to get some out."
@@ -1154,7 +1196,7 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
                         "Her face softens when you appeal to her emotionally."
                     "I'll reward you financially ($1000)":
                         the_person.char "Oh... well I suppose I could really use the extra pay."
-                        $ mc.business.pay(- 1000)
+                        $ mc.business.change_funds(- 1000)
                     "I'll fire you if you don't.":
                         $ scene_manager.update_actor(the_person, emotion = "angry")
                         the_person.char "What!?! You're kidding me? I can't afford to lose this job right now!"
@@ -1217,6 +1259,152 @@ label HR_director_appointment_action_label:
     call HR_director_initial_hire_label(person_choice) from _call_HR_director_initial_hire_label_appointment
     return
 
+label HR_director_headhunt_initiate_label(the_person):
+    mc.name "I'd like to initiate a search for a specific job opening."
+    the_person.char "Ah! Okay, just fill out this form with your requirements."
+
+    $ reset_headhunter_criteria()
+    $ hide_ui()
+    call screen HR_director_recruitment_screen(the_person)
+    $ show_ui()
+    if _return:
+        python:
+            days_to_find = 1
+            if get_HR_director_tag("recruit_obedience", None) is not None:
+                days_to_find += 1
+            if get_HR_director_tag("recruit_focused", None) is not None:
+                days_to_find += 1
+            if get_HR_director_tag("recruit_marital", None) is not None:
+                days_to_find += 1
+            if get_HR_director_tag("recruit_slut", None) is not None:
+                days_to_find += 1
+            if get_HR_director_tag("recruit_kids", 0) != 0:
+                days_to_find += 1
+            if get_HR_director_tag("recruit_height", None) is not None:
+                days_to_find += 1
+            if get_HR_director_tag("recruit_body", None) is not None:
+                days_to_find += 1
+            if get_HR_director_tag("recruit_bust", None) is not None:
+                days_to_find += 1
+
+        the_person.char "Okay, I'll go ahead and start the search."
+        if days_to_find <= 2:
+            the_person.char "This shouldn't take me long. Hopefully just a day or two!"
+        elif days_to_find <= 5:
+            the_person.char "Alright, this is fairly specific, so give me a few days to see what I can find and I'll get back to you."
+        else:
+            the_person.char "This is... pretty specific. It'll probably take me at least a week to find someone who meets all these criteria!"
+        mc.name "Thank you. Let me know when you have found someone and we'll do the interview."
+
+        $ set_HR_director_tag("recruit_day", day + days_to_find)
+        $ set_HR_director_tag("business_HR_headhunter_progress", 1)
+
+        $ HR_director_headhunt_interview_action = Action("Prospect Interview",HR_director_headhunt_interview_requirement,"HR_director_headhunt_interview_label", args = the_person) #Set the trigger day for the next monday. Monday is day%7 == 0
+        $ mc.business.mandatory_crises_list.append(HR_director_headhunt_interview_action) #Add the event here so that it pops when the requirements are met.
+        the_person.char "Is there anything else you need?"
+    else:
+        mc.name "I've changed my mind."
+        the_person.char "No problem, just let me know if you want me to start recruiting someone."
+    return
+
+label HR_director_headhunt_interview_label(the_person):
+    $ prospect = generate_HR_recruit()
+    $ scene_manager = Scene()  #Start fresh like Trist always says
+    $ set_HR_director_tag("business_HR_headhunter_progress", 2)
+    if mc.location != office:
+        "You are hard at work when you get a message from your HR supervisor."
+        the_person.char "Hey, I got a hit on criteria you had for a prospective employee. Want me to send you the info?"
+        if mc.business.max_employee_count == mc.business.get_employee_count():  #We accidentally filled all available slots
+            mc.name "Actually, I accidentally filled that position already. Sorry, I must have forgotten to tell you."
+            "A few minutes later, she responds to you."
+            the_person.char "Ah... ok, well try to let me know next time, okay?"
+            "You promise to do so."
+            return
+        mc.name "Sure, meet me in my office"
+        $ mc.change_location(office)
+        $ mc.location.show_background()
+        "Hello [the_person.mc_title]!"
+        $ scene_manager.add_actor(the_person)
+        mc.name "Hi [the_person.title], come in and take a seat."
+    else:
+        "Hello [the_person.mc_title]!"
+        $ scene_manager.add_actor(the_person)
+        "Your HR Director appears in the doorway to your office."
+        the_person.char "Hey, I got a hit on criteria you had for a prospective employee. I think you are going to like this."
+        if mc.business.max_employee_count == mc.business.get_employee_count():  #We accidentally filled all available slots
+            mc.name "Actually, I accidentally filled that position already. Sorry, I must have forgotten to tell you."
+            the_person.char "You... ahh, okay. Try to remember to let me know next okay?"
+            "You promise to do so."
+            return
+    $ scene_manager.update_actor(the_person, position = "sitting")
+
+    call hire_select_process([prospect, 1]) from _call_hire_prospect_process_1  #Copying how Vren calls this... hopefully this is right...
+
+    if _return == prospect: #MC chooses to hire her
+        mc.name "Alright [the_person.title], this looks promising. Good work finding her."
+        $ the_person.change_happiness(5)
+        $ the_person.change_obedience(5)
+        the_person.char "Alright! I'll give her the news."
+        $ prospect.generate_home()
+        call hire_someone(prospect, add_to_location = True) from _call_hire_HR_prospect_1
+        $ prospect.set_title(get_random_title(prospect))
+        $ prospect.set_possessive_title(get_random_possessive_title(prospect))
+        $ prospect.set_mc_title(get_random_player_title(prospect))
+        the_person.char "Give me the rest of the week to catch up on my normal HR work. If you want me to start the process again, talk to me on Monday."
+    else:
+        mc.name "I'm sorry, this wasn't exactly what I had in mind."
+        the_person.char "Ah, okay. Well give me the rest of the week to catch up on my normal HR work. If you want me to start the process again, talk to me on Monday."
+    $ del prospect
+    return
+
+
+#Headhunter unlocks and requirements:
+#Initial unlock: recruitment_batch_two_policy.is_owned()  second screening pool size increase ###
+#obedience unlock: recruitment_obedience_improvement_policy.is_owned() ###
+#slutty unlock: recruitment_slut_improvement_policy.is_owned() ###
+#Married / unmarried unlock: recruitment_knowledge_two_policy.is_owned()  ###
+#Has kids unlock: recruitment_knowledge_three_policy.is_owned()
+#focused production unlock: recruitment_batch_three_policy.is_owned() ###
+#Big / small tits unlock: recruitment_knowledge_four_policy.is_owned()
+
+label HR_director_monday_headhunt_update_label(the_person):
+    the_person.char "Let's see if I have any updates to the targeted recruiting program."
+    if get_HR_director_tag("business_HR_headhunter_progress", 0) == 0:
+        the_person.char "Looks like I'm not currently running any target searches. Let me know if you want me to initiate one."
+    elif get_HR_director_tag("business_HR_headhunter_progress", 0) == 1:
+        the_person.char "I'm still working on the current search. Give me a few more days to finish it up."
+    else:
+        the_person.char "I should have the time now to initiate another search. If you want me to start another talent search let me know!"
+        $ set_HR_director_tag("business_HR_headhunter_progress", 0)
+
+    # all updates researched (quick exit)
+    if get_HR_director_tag("headhunter_kids", False) == True:
+        return
+
+    the_person.char "Let's see if any recent recruiting policy updates will change how we look for employees."
+    if get_HR_director_tag("headhunter_obedience", False) == False and recruitment_obedience_improvement_policy.is_owned():
+        the_person.char "I can now target a new employee based on their free will! I can either scout for an obedient, or free spirited prospect."
+        $ set_HR_director_tag("headhunter_obedience", True)
+    elif get_HR_director_tag("headhunter_focused", False) == False and recruitment_batch_three_policy.is_owned():
+        the_person.char "I can now target highly specialized prospects. They will be more skilled in an area, but may not be well rounded individuals."
+        $ set_HR_director_tag("headhunter_focused", True)
+    elif get_HR_director_tag("headhunter_physical", False) == False and recruitment_knowledge_one_policy.is_owned():
+        the_person.char "With the new software update, I can now search by a variety of physical preferences. Busty? Short? Thick? I can make it happen!"
+        $ set_HR_director_tag("headhunter_physical", True)
+    elif get_HR_director_tag("headhunter_marital", False) == False and recruitment_knowledge_two_policy.is_owned():
+        the_person.char "I can now target married or single individuals. It might be illegal in most states, but not here!"
+        $ set_HR_director_tag("headhunter_marital", True)
+    elif get_HR_director_tag("headhunter_slut", False) == False and recruitment_slut_improvement_policy.is_owned():
+        the_person.char "I can now narrow down prospects based on general promiscuity. Want a prude or a slut? I can do that."
+        $ set_HR_director_tag("headhunter_slut", True)
+    elif get_HR_director_tag("headhunter_kids", False) == False and recruitment_knowledge_three_policy.is_owned():
+        the_person.char "I can now pick prospects based on whether or not they have kids. More MILFs around here? I could handle that!"
+        $ set_HR_director_tag("headhunter_kids", True)
+    else:
+        "Looks like I don't have any additions to the prospecting system this week."
+    return
+
+
 init 1200 python:
     def mind_control_backfire(the_person):
         the_person.change_cha(-2)
@@ -1224,3 +1412,90 @@ init 1200 python:
         the_person.change_focus(-2)
         # Use this function to create random backfire to person. Ideas: Bimbo, loss of stats, decrease all opinions.
         return "Backfire: Stat Loss"
+
+    def reset_headhunter_criteria():
+        set_HR_director_tag("recruit_dept", None)
+        set_HR_director_tag("recruit_obedience", None)
+        set_HR_director_tag("recruit_focused", None)
+        set_HR_director_tag("recruit_marital", None)
+        set_HR_director_tag("recruit_slut", None)
+        set_HR_director_tag("recruit_kids", None)
+        set_HR_director_tag("recruit_age", None)
+        set_HR_director_tag("recruit_bust", None)
+        set_HR_director_tag("recruit_height", None)
+        set_HR_director_tag("recruit_body", None)
+        set_HR_director_tag("recruit_day", day)
+        return
+
+    def generate_HR_recruit():
+        # department boosted stats
+        main_stat = renpy.random.randint(5,7)
+        main_skill = renpy.random.randint(5,7)
+        other_stat = 0
+
+        min_slut = (get_HR_director_tag("recruit_slut", 0) or 0) // 10
+        sex_array = [renpy.random.randint(min_slut,5), renpy.random.randint(min_slut,5), renpy.random.randint(min_slut,5), renpy.random.randint(min_slut,5)]
+
+        # extra boost for focused recruit
+        if get_HR_director_tag("recruit_focused", False) == True:
+            main_stat += 2
+            main_skill += 2
+            other_stat = 2
+
+        recruit = create_random_person(tits = get_HR_director_tag("recruit_bust", None),
+            start_obedience = get_HR_director_tag("recruit_obedience", None),
+            start_sluttiness = get_HR_director_tag("recruit_slut", None),
+            relationship = get_HR_director_tag("recruit_marital", None),
+            age = get_HR_director_tag("recruit_age", None),
+            kids = get_HR_director_tag("recruit_kids", None),
+            body_type = get_HR_director_tag("recruit_body", None),
+            height = get_HR_director_tag("recruit_height", None),
+            sex_array = sex_array)
+
+        # make balanced stats
+        recruit.int = renpy.random.randint(3,6)
+        recruit.focus = renpy.random.randint(3,6)
+        recruit.charisma = renpy.random.randint(3,6)
+        recruit.production_skill = renpy.random.randint(3,6)
+        recruit.hr_skill = renpy.random.randint(3,6)
+        recruit.supply_skill = renpy.random.randint(3,6)
+        recruit.market_skill = renpy.random.randint(3,6)
+        recruit.research_skill = renpy.random.randint(3,6)
+
+        if get_HR_director_tag("recruit_dept") == "HR":
+            recruit.charisma = main_stat
+            recruit.hr_skill = main_skill
+            recruit.focus -= other_stat
+            recruit.opinions["HR work"] = [2, True]
+        elif get_HR_director_tag("recruit_dept") == "supply":
+            recruit.focus = main_stat
+            recruit.supply_skill = main_skill
+            recruit.int -= other_stat
+            recruit.opinions["supply work"] = [2, True]
+        elif get_HR_director_tag("recruit_dept") == "market":
+            recruit.charisma = main_stat
+            recruit.market_skill = main_skill
+            recruit.int -= other_stat
+            recruit.opinions["marketing work"] = [2, True]
+        elif get_HR_director_tag("recruit_dept") == "research":
+            recruit.int = main_stat
+            recruit.research_skill = main_skill
+            recruit.charisma -= other_stat
+            recruit.opinions["research work"] = [2, True]
+        elif get_HR_director_tag("recruit_dept") == "production":
+            recruit.focus = main_stat
+            recruit.production_skill = main_skill
+            recruit.charisma -= other_stat
+            recruit.opinions["production work"] = [2, True]
+
+        # use enhanced make person options
+        update_person_opinions(recruit)
+        update_random_person(recruit)
+        rebuild_wardrobe(recruit)
+        update_person_outfit(recruit, -0.2) # choose a less slutty outfit as planned outfit
+
+        # discover some opinions
+        for x in __builtin__.range(0, 6):
+            recruit.discover_opinion(recruit.get_random_opinion(include_known = False, include_sexy = True),add_to_log = False)
+
+        return recruit

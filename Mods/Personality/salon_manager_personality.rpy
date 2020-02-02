@@ -38,6 +38,7 @@ label salon_manager_greetings(the_person):
                     title_tuple.append([title,title])
 
             $ title_choice = renpy.display_menu(title_tuple,True,"Choice")
+            $ del title_tuple
             mc.name "[title_choice], nice to meet you."
             $ the_person.set_mc_title(title_choice)
 

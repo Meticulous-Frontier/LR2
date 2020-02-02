@@ -4,6 +4,9 @@ init -1 python:
         if preferences is None:
             preferences = WardrobePreference()
 
+        if sluttiness_min < 0:
+            sluttiness_min = 0
+
         valid_overwear = []
         for overwear in self.overwear_sets:
             if preferences.evaluate_outfit(overwear, sluttiness_limit, sluttiness_min):
@@ -27,6 +30,9 @@ init -1 python:
         if preferences is None:
             preferences = WardrobePreference()
 
+        if sluttiness_min < 0:
+            sluttiness_min = 0
+
         valid_outfits = []
         for outfit in self.outfits:
             if preferences.evaluate_outfit(outfit, sluttiness_limit, sluttiness_min):
@@ -48,6 +54,9 @@ init -1 python:
     def get_random_appropriate_underwear_enhanced(self, sluttiness_limit, sluttiness_min = 0, guarantee_output = False, preferences = None): #Get an underwear outfit that is considered appropriate (based on underwear sluttiness, not full outfit sluttiness)
         if preferences is None:
             preferences = WardrobePreference()
+
+        if sluttiness_min < 0:
+            sluttiness_min = 0
 
         valid_underwear = []
         for underwear in self.underwear_sets:
@@ -79,7 +88,7 @@ init -1 python:
             if selected_outfit is None or outfit.get_full_outfit_slut_score() < selected_outfit.get_full_outfit_slut_score():
                 selected_outfit = outfit
 
-        return outfit.get_copy() # Get a copy of _any_ full outfit in this character's wardrobe.
+        return selected_outfit.get_copy() # Get a copy of _any_ full outfit in this character's wardrobe.
 
     Wardrobe.pick_outfit_with_lowest_sluttiness = pick_outfit_with_lowest_sluttiness
 

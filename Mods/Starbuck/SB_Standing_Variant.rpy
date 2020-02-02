@@ -337,7 +337,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object, the_round):
             "Play with her asshole":
                 "You look down and admire [the_girl.possessive_title]'s amazing ass and get a naughty idea."
                 "You release her soft titflesh with your hand and bring it up to [the_girl.possessive_title]'s mouth. She immediately takes them in her mouth and starts to suck on them, mimicking a blowjob on your fingers."
-                "Satisfied there is enough lubrication, you pull yourself partyway out of her cunt to give yourself a bit of room to work. You tentatively circle her ass a few times with your finger."
+                "Satisfied there is enough lubrication, you pull yourself partway out of her cunt to give yourself a bit of room to work. You tentatively circle her ass a few times with your finger."
                 if the_girl.get_opinion_score("anal sex") > 0:
                     "At the sudden stimulation of her back door, [the_girl.possessive_title] moans and immediately thrusts her ass back at you."
                     the_girl.char "Mmm, thats it [the_girl.mc_title]! I can't wait to feel your fingers in one hole and your cock in the other..."
@@ -349,7 +349,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object, the_round):
                     "[the_girl.possessive_title] groans and her holes quiver in pleasure each time you penetrate her completely"
                     "You fuck her for a while like this, but eventually withdraw your fingers from her and let her leg go."
                     $ the_girl.change_arousal((the_girl.get_opinion_score("anal sex") * 2) + mc.sex_skills["Anal"])
-                if the_girl.get_opinion_score("anal sex") < 0:
+                elif the_girl.get_opinion_score("anal sex") < 0:
                     "When you begin to stimulating her backdoor, [the_girl.possessive_title] immediately begins to protest."
                     the_girl.char "Hey! That hole's not for that... Keep your hands away from there, [the_girl.mc_title]!"        ####TODO FINISH THIS
                     $ the_girl.discover_opinion("anal sex")

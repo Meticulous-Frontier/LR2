@@ -80,7 +80,7 @@ init -2 python:
 
 init 2 python:
     def set_gym_outfit(person):
-        person.outfit = workout_wardrobe.decide_on_outfit2(person)
+        person.apply_outfit(workout_wardrobe.decide_on_outfit2(person))
         return
 
 label train_in_gym(person):
@@ -144,9 +144,9 @@ label train_in_gym(person):
 
     $ person.draw_person(position="walking_away")
 
-    $ mc.business.pay(-gym_session_cost)
+    $ mc.business.change_funds(-gym_session_cost)
     "You pay for the gym session and $ [gym_session_cost] has been deducted from the company's credit card."
 
-    $ person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+    $ person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
     $ mc.location.show_background()
     return

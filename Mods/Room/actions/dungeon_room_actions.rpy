@@ -22,21 +22,20 @@ init 10 python:
 label dungeon_room_action_label():
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-                dungeon_options = []
-                for act in dungeon_room_actions:
-                    dungeon_options.append(act)
-                dungeon_options.append("Back")
-                act_choice = call_formated_action_choice(dungeon_options)
+            dungeon_options = []
+            for act in dungeon_room_actions:
+                dungeon_options.append(act)
+            dungeon_options.append("Back")
+            act_choice = call_formated_action_choice(dungeon_options)
+            del dungeon_options
 
         if act_choice == "Back":
             return
         else:
             $ act_choice.call_action()
-
-    return
+            $ del act_choice
 
 label dungeon_room_appoint_slave_label():
-
     while True:
         $ people_list = get_sorted_people_list(mc.location.people, "Turn into slave", ["Back"])
 
@@ -50,24 +49,22 @@ label dungeon_room_appoint_slave_label():
 
         if person_choice == "Back":
             return # Where to go if you hit "Back"
-
         else:
             call dungeon_room_appoint_slave_label_2(person_choice) from dungeon_room_appoint_slave_label_1
-
-    return
+            $ del person_choice
 
 label dungeon_room_appoint_slave_label_2(the_person):
 
     if slave_role not in the_person.special_role: # What happens when you try to appoint them
 
-        if the_person.obedience >= 130:
-            if the_person.get_opinion_score("being submissive") > 0:
-                "[the_person.possessive_title] seems to be into the idea of serving you."
+        if the_person.obedience >= 130 and the_person.get_opinion_score("being submissive") > 0:
+            "[the_person.possessive_title] seems to be into the idea of serving you."
 
-            python:
-
-                the_person.call_dialogue("sex_obedience_accept")
-
+            $ the_person.call_dialogue("sex_obedience_accept")
+        elif the_person.get_opinion_score("being submissive") <= 0 and the_person.obedience >= 200:
+            "[the_person.possessive_title] is willing to serve you as her master and now likes being submissive."
+            $ the_person.sexy_opinions["being submissive"] = [1, True]               
+            $ the_person.call_dialogue("sex_obedience_accept")
         else:
             "[the_person.possessive_title] needs to be more obedient before being willing to commit to being your slave."
             return

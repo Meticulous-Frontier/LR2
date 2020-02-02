@@ -51,6 +51,6 @@ label casual_sex_booty_call_label:
             $ the_person.draw_person(position = the_person.event_triggers_dict.get("reject_position", "missionary"))
             "She sends you a pic of herself masturbating."
     $ the_person.reset_arousal()
-    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
     $renpy.scene("Active")
     return

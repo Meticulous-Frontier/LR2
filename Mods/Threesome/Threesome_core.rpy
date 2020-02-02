@@ -16,9 +16,10 @@ transform threesome_test_2():
 init -1 python:
     list_of_threesomes = []
     girl_swap_pos = False  #Nasty hack to tell threesome code to swap girl 1 and girl 2. #TODO find a better way to do this
+    THREESOME_BASE_SLUT_REQ = 80  #A constant to hold the usual base sluttiness requirements for threesomes.
     class Threesome_Position(renpy.store.object):
         def __init__(self,name,slut_requirement,position_one_tag, position_two_tag,girl_one_final_description,girl_two_final_description,requires_location,requirements,
-        p1_transform, p2_transform, can_swap = False, verb = "fuck" ):
+        p1_transform, p2_transform, can_swap = False, verb = "fuck", verbing = None):
             self.name = name
             self.slut_requirement = slut_requirement #The required slut score of the girl. Obedience will help fill the gap if possible, at a happiness penalty. Value from 0 (almost always possible) to ~100
             self.position_one_tag = position_one_tag # The tag used to get the correct position image set
@@ -29,18 +30,23 @@ init -1 python:
             self.requirements = requirements        #The requirements to run this position. Should be a function
             self.mc_position = []                   #Holds the positions that MC can take during this position
             self.verb = verb #A verb used to describe the position. "Fuck" is default, and mostly used for sex positions or blowjobs etc. Kiss, Fool around, etc. are also possibilities.
+            self.verbing = verbing
             self.current_modifier = None #We will update this if the posisiion has a special modifier that shoudl be applied, like blowjob.
             self.p1_transform = p1_transform
             self.p2_transform = p2_transform
             self.can_swap = can_swap
 
-        def create_scene(self, the_person_one, the_person_two):
+            if verbing is None:
+                self.verbing = verb + "ing"
+
+        # requires the existence of a scene_manager with both actors
+        def update_scene(self, the_person_one, the_person_two):
             if girl_swap_pos:
-                scene_manager.add_actor(the_person_two, position = self.position_one_tag, character_placement = self.p1_transform)
-                scene_manager.add_actor(the_person_one, position = self.position_two_tag, character_placement = self.p2_transform)
+                scene_manager.update_actor(the_person_two, position = self.position_one_tag, character_placement = self.p1_transform)
+                scene_manager.update_actor(the_person_one, position = self.position_two_tag, character_placement = self.p2_transform)
             else:
-                scene_manager.add_actor(the_person_one, position = self.position_one_tag, character_placement = self.p1_transform)
-                scene_manager.add_actor(the_person_two, position = self.position_two_tag, character_placement = self.p2_transform)
+                scene_manager.update_actor(the_person_one, position = self.position_one_tag, character_placement = self.p1_transform)
+                scene_manager.update_actor(the_person_two, position = self.position_two_tag, character_placement = self.p2_transform)
             scene_manager.draw_scene()
             return
 
@@ -187,7 +193,7 @@ init -1 python:
                     his_arousal_change += 0.1 * the_person_two.sex_skills[self.skill_tag_guy]
 
 
-                mc.change_arousal(his_arousal_change)
+            mc.change_arousal(his_arousal_change)
 
 
 label threesome_test():
@@ -196,7 +202,7 @@ label threesome_test():
 
 label threesome_alignment():
     $ position_choice = threesome_double_blowjob
-    $ position_choice.create_scene(mom, lily)
+    $ position_choice.update_scene(mom, lily)
     $ finished = False
     while not finished:
         menu:
@@ -269,13 +275,9 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
     #     $ report_log["girl one orgasms"] = report_log["girl two orgasms"]
     #     $ report_log["girl two orgasms"] = int_swap
 
-    #TODO fix this fucking stupid hack
-    $ scene_manager.remove_actor(the_person_one, reset_actor = False)
-    $ scene_manager.remove_actor(the_person_two, reset_actor = False)
-    #end TODO
-
-    $ position_choice.create_scene(the_person_one, the_person_two)
-    "As the girls get into position, you consider how to begin your threesome."
+    $ position_choice.update_scene(the_person_one, the_person_two)
+    if round == 0:
+        "As the girls get into position, you consider how to begin your threesome."
     $ option_list = []
     python:
         for options in position_choice.mc_position:
@@ -286,6 +288,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
     $ round_choice = None # We start any encounter by letting them pick what position they want (unless something is forced or the girl is in charge)
     $ active_mc_position = None
     $ round_choice = renpy.display_menu(option_list,True,"Choice")
+    $ del option_list
     if round_choice == "Leave":
         "Really? You changed your mind? You leave the poor girls after you got them all ready for some action."
     else:
@@ -296,14 +299,16 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
         if active_mc_position == None:
             "Something broke..."
             $ round_choice = "Leave"
-        else:
+        elif round == 0:
             $ active_mc_position.call_intro(the_person_one, the_person_two, mc.location, object_choice, round)
+            $ round_choice = None
+        else:
             $ round_choice = None
     while not finished:
         # if girl_in_charge:
         #     # For now, default to guys only in charge
         if round_choice is None: #If there is no set round_choice
-            #TODO: Add a varient of this list when the girl is in control to ask if you want to resist or ask/beg for something.
+            #TODO: Add a variant of this list when the girl is in control to ask if you want to resist or ask/beg for something.
             $ option_list = []
             python:
                 if position_choice is not None:
@@ -321,7 +326,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
 
                     if not position_locked:
                         option_list.append(["Pause and change position.\n-5 {image=gui/extra_images/arousal_token.png}","Change"])
-                        ##### For now, no implemantation of connections
+                        #### For now, no implementation of connections
                         # for position in position_choice.connections:
                         #     if object_choice.has_trait(position.requires_location):
                         #         appended_name = "Transition to " + position.build_position_willingness_string(the_person) #Note: clothing and energy checks are done inside of build_position_willingness, invalid positiosn marked (disabled)
@@ -337,7 +342,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                         option_list.append(["Stop and leave.", "Leave"])
 
             $ round_choice = renpy.display_menu(option_list,True,"Choice") #This gets the players choice for what to do this round.
-
+            $ del option_list
 
         # Now that a round_choice has been picked we can do something.
         if round_choice == "Change" or round_choice == "Continue":
@@ -352,11 +357,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                 #     $ int_swap = report_log["girl one orgasms"]
                 #     $ report_log["girl one orgasms"] = report_log["girl two orgasms"]
                 #     $ report_log["girl two orgasms"] = int_swap
-                #TODO fix this fucking stupid hack
-                $ scene_manager.remove_actor(the_person_one, reset_actor = False)
-                $ scene_manager.remove_actor(the_person_two, reset_actor = False)
-                #end TODO
-                $ position_choice.create_scene(the_person_one, the_person_two)
+                $ position_choice.update_scene(the_person_one, the_person_two)
                 "As the girls get into position, you consider how to resume your threesome."
                 $ option_list = []
                 python:
@@ -367,6 +368,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                 $ round_choice = None # We start any encounter by letting them pick what position they want (unless something is forced or the girl is in charge)
                 $ active_mc_position = None
                 $ round_choice = renpy.display_menu(option_list,True,"Choice")
+                $ del option_list
                 if round_choice == "Leave":
                     $ finished = True
                     "You decide to finish the threesome instead."
@@ -396,7 +398,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                     $ active_mc_position = None
                 elif not active_mc_position.check_girl_one_energy(the_person_one):
 
-                    the_person_one.char "I'm exhausted [the_person.mc_title], I can't keep this up..."
+                    the_person_one.char "I'm exhausted [the_person_one.mc_title], I can't keep this up..."
                     $ position_choice = None
                     $ active_mc_position = None
                     if the_person_two.energy > 30:
@@ -406,9 +408,13 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                         menu:
                             "Fuck [the_person_two.title]":
                                 "[the_person_one.title] moves to the side and recovers while you resume activities with [the_person_two.title]."
-                                $ scene_manager.remove_actor(the_person_one)
+                                $ scene_manager.remove_actor(the_person_one, reset_actor = False)
                                 $ report_log["girl orgasms"] = report_log["girl two orgasms"]
                                 call fuck_person(the_person_two, private = private, report_log = report_log) from threesome_to_twosome_transition_1
+                                $ scene_manager.add_actor(the_person_one, character_placement = character_center_flipped)
+                                $ temp_log = _return
+                                $ report_log["girl two orgasms"] = temp_log["girl orgasms"]
+
                             "Done for now":
                                 "I think we should just be done for now." #TODO girl takes over if she needs to cum and hasn't yet
                         $ finished = True
@@ -416,7 +422,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                         the_person_two.char "Yeah me too. I think I need a break!"
                         $ finished = True
                 elif not active_mc_position.check_girl_two_energy(the_person_two):
-                    the_person_two.char "I'm exhausted [the_person.mc_title], I can't keep this up..."
+                    the_person_two.char "I'm exhausted [the_person_two.mc_title], I can't keep this up..."
                     $ position_choice = None
                     $ active_mc_position = None
                     if the_person_one.energy > 30:
@@ -425,9 +431,12 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                         menu:
                             "Fuck [the_person_one.title]":
                                 "[the_person_two.title] moves to the side and recovers while you resume activities with [the_person_one.title]."
-                                $ scene_manager.remove_actor(the_person_two)
+                                $ scene_manager.remove_actor(the_person_two, reset_actor = False)
                                 $ report_log["girl orgasms"] = report_log["girl one orgasms"]
                                 call fuck_person(the_person_one, private = private, report_log = report_log) from threesome_to_twosome_transition_2
+                                $ scene_manager.add_actor(the_person_two, character_placement = character_center_flipped)
+                                $ temp_log = _return
+                                $ report_log["girl one orgasms"] = temp_log["girl orgasms"]
                             "Done for now":
                                 "I think we should just be done for now." #TODO girl takes over if she needs to cum and hasn't yet
                         $ finished = True
@@ -481,9 +490,10 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
     $ mc.condom = False
     $ mc.recently_orgasmed = False
 
-    if affair_ask_after and private and ask_girlfriend_requirement(the_person_one) is True and not the_person_one.relationship == "Single":
-        if the_person_one.love >= 60 and the_person_one.sluttiness >= 30 - (the_person_one.get_opinion_score("cheating on men") * 5): #If she loves you enoguh, is moderately slutty, and you made her cum
-            call affaire_check(the_person_one, report_log) from _call_affaire_check_threesome_one
+    #Disabling affair check for now. Doesn't really make sense in a threesome.
+    # if affair_ask_after and private and ask_girlfriend_requirement(the_person_one) is True and not the_person_one.relationship == "Single":
+    #     if the_person_one.love >= 60 and the_person_one.sluttiness >= 30 - (the_person_one.get_opinion_score("cheating on men") * 5) and report_log.get("girl orgasms",0) >= 1: #If she loves you enoguh, is moderately slutty, and you made her cum
+    #         call affair_check(the_person_one, report_log) from _call_affair_check_threesome_one
 
 
     python: #Log all of the different classes of sex, but only once per class.
@@ -510,7 +520,7 @@ label threesome_round(the_person_one, the_person_two, position_choice, round = 0
         $ report_log["total rounds"] += 1
 
     #Calculate arousal gains
-    $position_choice.calc_arousal_changes(the_person_one, the_person_two)
+    $ position_choice.calc_arousal_changes(the_person_one, the_person_two)
     #
     # $ girl_one_arousal_change = position_choice.girl_one_arousal + ((the_person_one.get_opinion_score("threesomes") / 5) * position_choice.girl_one_arousal)   #20% arousal bonus for each level of threesome like/dislike
     # if position_choice.girl_one_source == 0:  #MC is source#
@@ -598,6 +608,7 @@ label pick_threesome(the_person_one, the_person_two, girl_one_position = None, o
                         girl_one_list.append(get_initial_threesome_pairing(threeway.position_two_tag))
         "What do you want [the_person_one.title] to do?"
         $ girl_one_choice = renpy.display_menu(girl_one_list,True,"Choice")
+        $ del girl_one_list
     else:
         $ girl_one_choice = girl_one_position
     python:
@@ -611,6 +622,7 @@ label pick_threesome(the_person_one, the_person_two, girl_one_position = None, o
     if len(girl_two_list) == 0:
         "Something has gone wrong, no available positions"  #Return something default?
     $ girl_two_choice = renpy.display_menu(girl_two_list,True,"Choice")
+    $ del girl_two_list
 
     python:
         for threeway in list_of_threesomes:
@@ -635,6 +647,7 @@ label threesome_strip_menu(the_person_one, the_person_two):
     else:
         $ strip_menu.append (["Strip " + the_person_two.title, "strip_two"])
     $ strip_choice = renpy.display_menu(strip_menu,True,"Choice")
+    $ del strip_menu
     if strip_choice == "strip_one":
         mc.name "[the_person_one.title], I want you to get naked now."
         the_person_one.char "Of course!"
@@ -663,7 +676,7 @@ label threesome_strip_menu(the_person_one, the_person_two):
 #                     return_bool =  True
 #     return return_bool                                                          #No acceptable position found, cannot join threesome
 
-label join_threesome(the_person_one, the_person_two, initial_position, private = true):  #We can use this function to add a second girl to an existing sex scene.
+label join_threesome(the_person_one, the_person_two, initial_position, private = True):  #We can use this function to add a second girl to an existing sex scene.
                                                                          #Works by selecting a position then calling threesome with the first position pre-set
 
     call pick_threesome(the_person_one, the_person_two, girl_one_position = initial_position) from _join_threesome_position_selection_1
@@ -712,3 +725,12 @@ init python:
                 elif threeway.position_two_tag == initial_position_tag:
                     return_bool =  True
         return return_bool
+
+    def willing_to_threesome(the_person_one, the_person_two):    #Use this function to check and see if two people are willing to engage in a threesome
+        person_one_slut_req = THREESOME_BASE_SLUT_REQ
+        person_two_slut_req = THREESOME_BASE_SLUT_REQ
+        if the_person_one.sluttiness < person_one_slut_req:
+            return False
+        if the_person_two.sluttiness < person_two_slut_req:
+            return False
+        return True

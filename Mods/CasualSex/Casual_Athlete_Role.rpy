@@ -268,7 +268,7 @@ label casual_athlete_phase_one_label(the_person):
         $ the_person.draw_person( position = "walking_away")
         "You watch [the_person.title] walk off, fighting off an erection. Looks like you're about to hookup at the gym!"
         "After three minutes, you follow after [the_person.title]. When you find the family use room, you let yourself in."
-        $ the_person.outfit = Outfit("Nude").get_copy()
+        $ the_person.apply_outfit(Outfit("Nude"))
         $ the_person.draw_person( position = "stand2")
         "As you enter, you see that [the_person.title] is already naked."
         the_person.char "[the_person.mc_title], we can work out the details later... I haven't been fucked in months!"
@@ -294,7 +294,7 @@ label casual_athlete_phase_one_label(the_person):
         the_person.char "That sounds good. But its not a date, okay? Just need to set boundaries."
         "You agree. You and [the_person.title] take a quick shower, then get ready and leave the gym."
 
-        $ the_person.review_outfit(show_review_message = False)
+        $ the_person.review_outfit(dialogue = False)
 
         "You head to a nearby coffee shop. You grab yourself a coffee, letting [the_person.title] pay for her own. You grab a seat at a booth away from any other people."
         $ renpy.show("restaurant", what = restaraunt_background)
@@ -339,7 +339,7 @@ label casual_athlete_phase_one_label(the_person):
                 "You give her a few minutes, then follow after her."
 
                 #Lockerroom sex scene.
-                $ the_person.outfit = Outfit("Nude").get_copy()
+                $ the_person.apply_outfit(Outfit("Nude"))
                 $ the_person.draw_person( position = "stand2")
                 "As you enter, you see that [the_person.title] is already naked."
                 the_person.char "[the_person.mc_title], give me that cock! It's been too long since fucked me good!"
@@ -361,7 +361,7 @@ label casual_athlete_phase_one_label(the_person):
                 the_person.char "Oh. Okay, I understand. Well, I'll see you around, [the_person.mc_title]!"
                 $ the_person.change_happiness(-3)
 
-    $ the_person.review_outfit(show_review_message = False)
+    $ the_person.review_outfit(dialogue = False)
     call advance_time from _call_advance_casual_athlete_workout
     return
 
@@ -403,8 +403,8 @@ label casual_athlete_phase_two_label(the_person):
         mc.name "Yeah right, I'll be bending you over before you can even get your front door closed."
         "[the_person.title] has a spark in her eyes. Whoever wins, you have a feeling the sex is going to be amazing after the race."
         "You wave goodbye to [the_person.title], wondering what you've gotten yourself in to."
-    
-    $ the_person.review_outfit(show_review_message = False)
+
+    $ the_person.review_outfit(dialogue = False)
     call advance_time from _call_advance_casual_athlete_race_challenge
     return
 
@@ -491,7 +491,7 @@ label casual_athlete_race_crisis_label(the_person):
     "You consider for a second putting on a condom first. Nope, not a fucking chance. In one smooth motion you push yourself into her sopping, needy cunt."
     the_person.char "Yes!!! Oh god, please fuck me good!"
     "You have every intention of doing exactly that."
-    call fuck_person(the_person, private=True, start_position = doggy, start_object = make_bed(), skip_intro = True, hide_leave = True) from _call_casual_sex_mod_CS030
+    call fuck_person(the_person, private=True, start_position = doggy, start_object = make_bed(), skip_intro = True) from _call_casual_sex_mod_CS030
     $ the_person.clear_situational_slut("Lost Bet")
     "When you finish with her, [the_person.possessive_title] lays down on her bed."
     $ the_person.draw_person(position = "missionary")
@@ -502,6 +502,9 @@ label casual_athlete_race_crisis_label(the_person):
     the_person.char "Ayup! Don't worry. Alright, if its okay with you, I think I'm gonna take a nap..."
     "You excuse yourself. You grab your clothes and head out. You now know [the_person.title]'s address, with a standing offer to come over and fuck her silly!"
     $ the_person.event_triggers_dict["athlete_progress"] = 4
+    $ casual_athlete_energy_perk = Stat_Perk(description = "Training for the big race has helped improve your energy level.", energy_bonus = 20, bonus_is_temp = False, energy_cap = 40)
+    $ perk_system.add_stat_perk(casual_athlete_energy_perk, "Athlete Energy Bonus")
+    "You walk away with a spring in your step. You feel like training for and running the race has given you more energy."
     return
 
 label casual_athlete_buy_protein_shake_label(the_person):
@@ -531,7 +534,7 @@ label casual_athlete_buy_protein_shake_label(the_person):
             mc.name "No problem at all."
             $ renpy.scene("Active")
 
-    $ the_person.review_outfit(show_review_message = False)            
+    $ the_person.review_outfit(dialogue = False)
     call advance_time from _call_advance_casual_athlete_smoothie
     return
 
@@ -597,10 +600,10 @@ init 1301 python:              #Because Vren Init personality functions at 1300
         return mc.name
 
     athlete_personality = Personality("athlete", default_prefix = "wild",
-    common_likes = [],
-    common_sexy_likes = ["casual sex"],
-    common_dislikes = ["relationships"],
-    common_sexy_dislikes = [],
+    common_likes = ["small talk", "the colour blue", "sports", "taking control"],
+    common_sexy_likes = ["casual sex", "doggy style sex", "giving blowjobs", "showing her ass", "drinking cum"],
+    common_dislikes = ["relationships", "conservative outfits", "makeup", "the colour pink", "dresses", "high heels", "the colour purple"],
+    common_sexy_dislikes = ["lingerie", "being submissive", "skimpy outfits"],
     titles_function = athlete_titles, possessive_titles_function = athlete_possessive_titles, player_titles_function = athlete_player_titles)
 
 #************* Personality labels***************#

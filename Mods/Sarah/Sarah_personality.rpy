@@ -26,10 +26,10 @@ init 1301 python:
 ##### Sarah Personality#####
 ############################
 # <editor-fold
-label Sarah_introduction(the_person):
+label Sarah_introduction(the_person):  #This shouldn't proc... ever?
     mc.name "Excuse me, could I bother you for a moment?"
     "She turns around and looks you up and down."
-    #TODO: Have this differ based on personality
+
     $ the_person.set_title("???")
     the_person.char "Uh, sure? What do you want?"
     mc.name "I know this sounds crazy, but I saw you and just wanted to say hi and get your name."
@@ -46,13 +46,15 @@ label Sarah_greetings(the_person):
     if the_person.love < 0:
         the_person.char "Ugh, what do you want?"
     elif the_person.happiness < 90:
-        the_person.char "Hey, today is not what I hoped it to be."
+        the_person.char "Hey. Did you need something? I'm sorry I'm having a bit of a rough day."
     else:
         if the_person.sluttiness > 60:
-            if the_person.obedience > 130:
-                the_person.char "Hello there [the_person.mc_title]. How can I help you, do you have anything that needs attention? Anything at all?"
+            if the_person.event_triggers_dict.get("dating_path", False) == True:
+                the_person.char "Hello babe! I hope you aren't here just to talk."
+            elif the_person.obedience > 130:
+                the_person.char "Hello there [the_person.mc_title]. It's good to see you, is there anything I can help you with?"
             else:
-                the_person.char "Hey there [the_person.mc_title], I hope this is for pleasure and not business."
+                the_person.char "Hey there [the_person.mc_title]. I was just thinking about some fun things we could do together..."
         else:
             if the_person.obedience > 130:
                 the_person.char "Hello [the_person.mc_title]"
@@ -63,37 +65,47 @@ label Sarah_greetings(the_person):
 label Sarah_sex_responses(the_person):
     if the_person.arousal < 25:
         if the_person.sluttiness > 50:
-            the_person.char "Oh fuck, I never get tired of this feeling!"
+            the_person.char "Oh fuck, I love that rush when you first get started."
         else:
-            the_person.char "Oh... Oh fuck me that feels nice..."
+            the_person.char "Oh... [the_person.mc_title] that feels really good..."
 
     elif the_person.arousal < 50:
         if the_person.sluttiness > 50:
-            the_person.char "Mmm, keep going [the_person.mc_title]. Just keep going, that feels perfect."
+            the_person.char "Mmm, keep going [the_person.mc_title]. You are getting me so hot."
         else:
-            the_person.char "That... That feels so fucking good!"
+            the_person.char "That... That feels great [the_person.mc_title]!"
 
     elif the_person.arousal < 75:
         if the_person.sluttiness > 50:
-            the_person.char "That's right, use me like your dirty little slut!"
+            if the_person.event_triggers_dict.get("dating_path", False) == True:
+                the_person.char "Oh god, I'm your dirty little slut [the_person.mc_title]! It feels so good!"
+            else:
+                the_person.char "The things you do to me, it feel so good [the_person.mc_title]!"
         else:
             the_person.char "Does it feel as good for you as it does for me? Mmm, it feels so good!"
     else:
         if the_person.sluttiness > 50:
-            if the_person.relationship == "Single":
+            if the_person.event_triggers_dict.get("dating_path", False) == True:
+                the_person.char "You fuck me so good, I can't imagine being with anyone else. Make me cum baby!"
+            elif the_person.relationship == "Single":
                 the_person.char "Fuck! I'm... You're going to make me cum! I want you to make me cum!"
             else:
                 $ so_title = SO_relationship_to_title(the_person.relationship)
-                the_person.char "I might have a [so_title], but he doesn't drive me crazy like you do [the_person.mc_title]!"
+                the_person.char "Oh god, why am I even with my [so_title]? He doesn't drive me crazy like you do [the_person.mc_title]!"
                 the_person.char "Make me cum my brains out! Screw my [so_title], he's not half the man you are!"
         else:
+            if the_person.event_triggers_dict.get("dating_path", False) == True and the_person.love > 80:
+                the_person.char "Oh my god, [the_person.mc_title], I love you so much, you're gonna make me explode! Don't stop!"
             the_person.char "Don't stop! You're going to make me cum, don't you dare stop!"
 
     return
 
 label Sarah_climax_responses_foreplay(the_person):
     if the_person.sluttiness > 50:
-        the_person.char "Oh fuck yes, I'm going to cum! I'm cumming!"
+        if the_person.event_triggers_dict.get("dating_path", False) == True:
+            the_person.char "Oh god, even like this, you still make me cum! I'm cumming [the_person.mc_title]!"
+        else:
+            the_person.char "Oh fuck yes, I'm going to cum! I'm cumming!"
     else:
         the_person.char "Oh fuck, you're going to make me cum! Fuck!"
         "She goes silent, then lets out a shuddering moan."
@@ -126,7 +138,7 @@ label Sarah_climax_responses_anal(the_person):
 
 label Sarah_clothing_accept(the_person):
     if the_person.obedience > 130:
-        the_person.char "You think it will look good on me? I guess that's all I need to hear then."
+        the_person.char "You picked this out for me? That's all I need to hear. Thanks!"
     else:
         the_person.char "Hey, thanks. That's a good look, I like it."
     return
@@ -162,7 +174,9 @@ label Sarah_strip_reject(the_person):
 
 label Sarah_sex_accept(the_person):
     if the_person.sluttiness > 70:
-        if the_person.obedience < 70:
+        if the_person.event_triggers_dict.get("dating_path", False) == True:
+            the_person.char "Yes! Let's go! I'm glad I'm not the only one feeling needy."
+        elif the_person.obedience < 70:
             the_person.char "Let's do it. Once you've had your fill I have a few ideas we could try out."
         else:
             the_person.char "I was hoping you would suggest that, just thinking about it gets me excited."
@@ -172,7 +186,10 @@ label Sarah_sex_accept(the_person):
 
 label Sarah_sex_obedience_accept(the_person):
     if the_person.sluttiness > 70:
-        the_person.char "God, what have you done to me? I should say no, but... I just want you to use me however you want, [the_person.mc_title]."
+        if the_person.event_triggers_dict.get("dating_path", False) == True:
+            the_person.char "I can't say no to you, can I? I want you feel good, use me however you want, [the_person.mc_title]!"
+        else:
+            the_person.char "God, what have you done to me? I should say no, but... I just want you to use me however you want, [the_person.mc_title]."
     else:
         if the_person.obedience > 130:
             the_person.char "If that's what you want to do then I'll what you tell me to do."
@@ -415,7 +432,7 @@ label Sarah_being_watched(the_person, the_watcher, the_position):
 
     elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
         #She's super slutty and doesn't care what people think.
-        the_person.char "I bet she just wishes she was the one being [the_position.verb]ed you."
+        the_person.char "I bet she just wishes she was the one being [the_position.verb]ed by you."
 
     elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #She's super slutty and encourages the watcher to be slutty.

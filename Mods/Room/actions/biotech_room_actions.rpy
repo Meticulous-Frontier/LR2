@@ -127,8 +127,6 @@ label clone_person():
         else:
             call cloning_process(person_choice) from _call_cloning_process
 
-    return
-
 label cloning_process(person = the_person): # default to the_person when not passed as parameter
     $ person.draw_person(emotion = "default")
     while True:
@@ -196,44 +194,45 @@ label modification_process(person = the_person): # when called without specific 
     $ person.draw_person(emotion = "default")
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-                body_modification_options = []
-                for act in biotech_body_modifications:
-                    body_modification_options.append(act)
-                body_modification_options.append("Back")
-                act_choice = call_formated_action_choice(body_modification_options)
+            body_modification_options = []
+            for act in biotech_body_modifications:
+                body_modification_options.append(act)
+            body_modification_options.append("Back")
+            act_choice = call_formated_action_choice(body_modification_options)
+            del body_modification_options
 
         if act_choice == "Back":
             $ renpy.scene("Active")
             return
         else:
             $ act_choice.call_action()
+            $ del act_choice
 
 label change_body():
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-                body_types = []
-                for n in list_of_body_types:
-                    body_types.append(n)
-                body_types.append("Back")
-                body_choice = renpy.display_menu(simple_list_format(body_types, n, string = "Body Type: ", ignore = "Back"),True,"Choice")
+            body_types = []
+            for n in list_of_body_types:
+                body_types.append(n)
+            body_types.append("Back")
+            body_choice = renpy.display_menu(simple_list_format(body_types, n, string = "Body Type: ", ignore = "Back"),True,"Choice")
+            del body_types
 
         if body_choice == "Back":
             return
         else:
             $ person.body_type = body_choice
             $ person.draw_person()
+            $ del body_choice
 
 label change_skin():
     while True:
-
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-
-
-
             skin_styles = [x[0] for x in list_of_skins]
 
             skin_styles.append("Back")
             skin_choice = renpy.display_menu(simple_list_format(skin_styles, x[0], string = "Skin Type: ", ignore = "Back"),True,"Choice")
+            del skin_styles
 
         if skin_choice == "Back":
             return
@@ -242,15 +241,17 @@ label change_skin():
             $ person.skin = skin_choice
             $ person.match_skin(skin_choice)
             $ person.draw_person()
+            $ del skin_choice
 
 label change_face():
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-                face_styles = []
-                for face in list_of_faces:
-                    face_styles.append(face)
-                face_styles.append("Back")
-                face_choice = renpy.display_menu(simple_list_format(face_styles, face, string = "Face Type: ", ignore = "Back"),True,"Choice")
+            face_styles = []
+            for face in list_of_faces:
+                face_styles.append(face)
+            face_styles.append("Back")
+            face_choice = renpy.display_menu(simple_list_format(face_styles, face, string = "Face Type: ", ignore = "Back"),True,"Choice")
+            del face_styles
 
         if face_choice == "Back":
             return
@@ -258,16 +259,19 @@ label change_face():
             $ person.face_style = face_choice
             $ person.match_skin(person.skin)
             $ person.draw_person()
+            $ del face_choice
 
 label change_breasts():
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-                cup_sizes = [x[0] for x in list_of_tits]
-                cup_sizes.append("Back")
-                cup_choice = renpy.display_menu(simple_list_format(cup_sizes, x[0], string = "Cup Size: ", ignore = "Back"),True,"Choice")
+            cup_sizes = [x[0] for x in list_of_tits]
+            cup_sizes.append("Back")
+            cup_choice = renpy.display_menu(simple_list_format(cup_sizes, x[0], string = "Cup Size: ", ignore = "Back"),True,"Choice")
+            del cup_sizes
 
         if cup_choice == "Back":
             return
         else:
             $ person.tits = cup_choice
             $ person.draw_person()
+            $ del cup_choice

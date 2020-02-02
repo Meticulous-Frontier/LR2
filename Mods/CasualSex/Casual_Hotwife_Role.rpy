@@ -61,7 +61,7 @@ init -2 python:
             return False
         if the_person.event_triggers_dict.get("hotwife_progress", 0) < 2:
             return False
-        
+
         if mc.location != downtown_bar:
             return "Not in Bar"
         elif mc.charisma < 5:
@@ -366,19 +366,12 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             "Wow... I can't believe I came... while I was blowing you! That was fucking hot!"
         else:
             "Wow... that was hot!"
-        $ cum_face = False
-        $ cum_mouth = False
-        python:
-            for cs_access in the_person.outfit.accessories:
-                if cs_access.name == "Mouth Cum":    #You came in her mouth!
-                    cum_mouth = True
-                if cs_access.name == "Face Cum":     #You came on her face!
-                    cum_face = True
-        if cum_mouth:
+
+        if the_person.outfit.has_mouth_cum():
             "[the_person.possessive_title] looks up at you. She couldn't quiet swallow all your cum, some of it is slowly dripping down the sides of her mouth."
             the_person.char "Hey! Don't forget to take pictures!"
             "You suddenly remember the phone. You snap a couple pictures of her face with your traces of cum on it."
-        else:
+        elif the_person.outfit.has_face_cum():
             "[the_person.possessive_title] looks up at you. Her face is plastered with your sticky seed."
             the_person.char "Hey! Don't forget to take pictures!"
             "You suddenly remember the phone. You snap a couple pictures of her face with your cum covering it."
@@ -393,7 +386,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         "You sneak your way out of the bathroom while [the_person.possessive_title] cleans herself up. You hope everything goes well with her tonight!"
         $ the_person.event_triggers_dict["hotwife_blowjob_text_enable"] = 1
         $ the_person.event_triggers_dict["hotwife_progress"] = 2
-        $ the_person.review_outfit(show_review_message = False)
+        $ the_person.review_outfit(dialogue = False)
     else:   #This is not our first time getting blown#
         mc.name "Hey, you wanna sneak off for a bit?"
         "[the_person.possessive_title] flashes you her beautiful smile."
@@ -432,25 +425,17 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             "You decide to just enjoy her skilled mouth going down on you."
             call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_CSH012
 
-        $ cum_face = False
-        $ cum_mouth = False
-        python:
-            for cs_access in the_person.outfit.accessories:
-                if cs_access.name == "Mouth Cum":    #You came in her mouth!
-                    cum_mouth = True
-                if cs_access.name == "Face Cum":     #You came on her face!
-                    cum_face = True
-        if cum_mouth:
+        if the_person.outfit.has_mouth_cum():
             "[the_person.possessive_title] looks up at you. She couldn't quiet swallow all your cum, some of it is slowly dripping down the sides of her mouth."
             the_person.char "Hey! Don't forget to take pictures!"
             "You suddenly remember the phone. You snap a couple pictures of her face with your traces of cum on it."
-        else:
+        elif the_person.outfit.has_face_cum():
             "[the_person.possessive_title] looks up at you. Her face is plastered with your sticky seed."
             the_person.char "Hey! Don't forget to take pictures!"
             "You suddenly remember the phone. You snap a couple pictures of her face with your cum covering it."
         the_person.char "Mmm, that was great [the_person.mc_title]! I can't wait until I get home tonight... I hope daddy gets the handcuffs out again..."
         "You say goodbye and excuse yourself while she gets herself cleaned up. This arrangement is working out to be very beneficial!"
-        $ the_person.review_outfit(show_review_message = False)
+        $ the_person.review_outfit(dialogue = False)
         call advance_time from _call_advance_casual_hotwife_bathroom_blowjob
     return
 
@@ -548,30 +533,16 @@ label casual_hotwife_dancing_sex_label(the_person):
         $ mc.condom = False
         call fuck_person(the_person, start_position = SB_doggy_standing, start_object = SB_make_counter(), skip_intro = True) from _call_sex_description_CSH020
         #TODO description for all possible cum locations
-        $ cum_face = False
-        $ cum_mouth = False
-        $ cum_tits = False
-        $ cum_ass = False
-        python:
-            for cs_access in the_person.outfit.accessories:
-                if cs_access.name == "Mouth Cum":    #You came in her mouth!
-                    cum_mouth = True
-                if cs_access.name == "Face Cum":     #You came on her face!
-                    cum_face = True
-                if cs_access.name == "Ass Cum":
-                    cum_ass = True
-                if cs_access.name == "Tit Cum":
-                    cum_tits = True
-        if cum_mouth:
+        if the_person.outfit.has_mouth_cum():
             "[the_person.possessive_title] looks up at you. She couldn't quiet swallow all your cum, some of it is slowly dripping down the sides of her mouth."
             "You grab her phone and snap a couple pictures of her face with your traces of cum on it."
-        elif cum_face:
+        elif the_person.outfit.has_face_cum():
             "[the_person.possessive_title] looks up at you. Her face is plastered with your sticky seed."
             "You grab her phone and snap a couple pictures of her face with your cum covering it."
-        elif cum_tits:
+        elif the_person.outfit.has_tits_cum():
             "[the_person.possessive_title] looks up at you. Her tits are plastered with your sticky seed."
             "You grab her phone and snap a couple pictures of her tits with your cum covering it."
-        elif cum_ass:
+        elif the_person.outfit.has_ass_cum():
             "[the_person.possessive_title] looks back at you. Her ass is plastered with your sticky seed."
             "You grab her phone and snap a couple pictures of her ass with your cum covering it."
         else:       #We assume we finished inside her#
@@ -585,7 +556,7 @@ label casual_hotwife_dancing_sex_label(the_person):
         $ the_person.event_triggers_dict["hotwife_progress"] = 3
         "She takes her phone from you and starts going through the pictures you took."
         the_person.char "You'd better get going, [the_person.mc_title]. I'm going to send these to my husband..."
-        $ the_person.review_outfit(show_review_message = False)
+        $ the_person.review_outfit(dialogue = False)
 
     else:   #We've done this before
         mc.name "Hey, [the_person.title]. You up for some dancing?"
@@ -627,7 +598,7 @@ label casual_hotwife_dancing_sex_label(the_person):
         the_person.char "Thanks again [the_person.mc_title]. You know where to look for me next time you need some... action."
         "She takes her phone from you and starts going through the pictures you took."
         the_person.char "You'd better get going. I'm going to send these to my husband..."
-        $ the_person.review_outfit(show_review_message = False)
+        $ the_person.review_outfit(dialogue = False)
 
     "You grab your clothes and quickly get yourself presentable, before sneaking your way out of the lady's room."
     call advance_time from _call_advance_casual_hotwife_dancing
@@ -661,7 +632,7 @@ label casual_hotwife_her_place_label(the_person):
     $ CS_hotwife_lingerie.add_upper(teddy.get_copy(),colour_white)
     $ CS_hotwife_lingerie.add_feet(garter_with_fishnets.get_copy(), colour_white)
     $ CS_hotwife_lingerie.add_feet(high_heels.get_copy(), colour_white)
-    $ the_person.outfit = CS_hotwife_lingerie.get_copy()
+    $ the_person.apply_outfit(CS_hotwife_lingerie)
     $ del CS_hotwife_lingerie
     $ the_person.draw_person(position = "stand4")
     the_person.char "You made it! I wasn't sure you would actually come!"
@@ -680,6 +651,8 @@ label casual_hotwife_her_place_label(the_person):
     "Your cock now free, you line yourself up with [the_person.possessive_title]'s pussy. You put her husband out of your mind as you slowly push into her."
     "[the_person.possessive_title] gasps as you begin to slide in and out of her."
     call fuck_person(the_person, start_position = doggy, start_object = make_bed(), skip_intro = True) from _call_sex_description_CSH040
+
+
 
     #Finishing dialogue based on sexual performance
     if the_person.arousal > 130:   #She had more than one orgasm
@@ -703,6 +676,8 @@ label casual_hotwife_her_place_label(the_person):
         the_person.char "Oh... [the_person.SO_name], I've been a bad girl... what are you gonna do with those handcuffs?"
         "[the_person.SO_name] begins cuffing [the_person.title]'s behind her back. You finish getting dress and quietly excuse yourself from the bedroom."
     "You make your way back home. You can hardly believe your luck, fucking [the_person.title] in her house, in front of her husband, who is also the bartender!"
+    $ casual_hotwife_cha_perk = Stat_Perk(description = "Fucking a hotwife in front of her husband has made you feel more charismatic.", cha_bonus = 1, bonus_is_temp = False)
+    $ perk_system.add_stat_perk(casual_hotwife_cha_perk, "Hotwife Charisma Bonus")
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     $ the_person.event_triggers_dict["hotwife_progress"] = 5
@@ -717,7 +692,7 @@ label casual_hotwife_home_sex_label(the_person):
     $ CS_hotwife_lingerie2 = Outfit("Pink Lingerie")
     $ CS_hotwife_lingerie2.add_upper(teddy.get_copy(),colour_pink)
     $ CS_hotwife_lingerie2.add_feet(garter_with_fishnets.get_copy(), colour_pink)
-    $ the_person.outfit = CS_hotwife_lingerie2.get_copy()
+    $ the_person.apply_outfit(CS_hotwife_lingerie2)
     $ the_person.draw_person(position = "stand4")
     $ del CS_hotwife_lingerie2
     "She opens up the bedroom door and motions for you to follow her. As you step into her bedroom you see [the_person.SO_name] sitting at the edge of the bed again."
@@ -781,10 +756,10 @@ init 1301 python:              #Because Vren Init personality functionns at 1300
     def hotwife_player_titles(the_person):
         return mc.name
     hotwife_personality = Personality("hotwife", default_prefix = "wild",
-    common_likes = [],
-    common_sexy_likes = ["casual sex"],
-    common_dislikes = ["relationships"],
-    common_sexy_dislikes = [],
+    common_likes = ["skirts", "dresses", "the weekend", "the colour red", "makeup", "flirting", "high heels"],
+    common_sexy_likes = ["casual sex", "doggy style sex", "giving blowjobs", "vaginal sex", "public sex", "lingerie", "not wearing underwear", "being submissive", "drinking cum", "cheating on men"],
+    common_dislikes = ["relationships", "pants", "working", "the colour yellow", "conservative outfits", "sports"],
+    common_sexy_dislikes = ["taking control", "giving handjobs", "not wearing anything"],
     titles_function = hotwife_titles, possessive_titles_function = hotwife_possessive_titles, player_titles_function = hotwife_player_titles)
 
 

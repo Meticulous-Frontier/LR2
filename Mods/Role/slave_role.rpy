@@ -85,8 +85,34 @@ label slave_collar_person_label(the_person):
         $ the_person.slave_collar = False
         "You remove the collar from your [the_person.possessive_title]'s neck"
     else:
-        $ the_person.slave_collar = True
-        "You put one of the collars you created around your [the_person.possessive_title]'s neck"
+        $ collar_list = ["Select Collar"] + [["Breed Me", breed_collar], ["Cum Slut", cum_slut_collar], ["Fuck Doll", fuck_doll_collar], ["Back", "Back"]]
+
+        if "build_menu_items" in globals():
+            call screen main_choice_display(build_menu_items([collar_list]))
+        else:
+            call screen main_choice_display([collar_list])
+
+        $ collar_choice = _return
+
+        if collar_choice == "Back":
+            return
+
+        python:
+            del collar_list
+
+            the_person.outfit.remove_all_collars()
+
+            new_collar = collar_choice.get_copy()
+            new_collar.colour = [.1,.1,.1,.9]
+            new_collar.pattern = "Pattern_1"
+            new_collar.colour_pattern = [.95,.95,.95,.9]
+            the_person.base_outfit.add_accessory(new_collar)
+
+            the_person.slave_collar = True
+            the_person.apply_outfit(the_person.planned_outfit)
+            the_person.draw_person()
+
+        "You put one of the collars you created around your [the_person.possessive_title]'s neck."
 
     return
 
@@ -107,23 +133,22 @@ label wakeup_duty_label(the_person):
     return
 
 label slave_training_label(the_person): # TODO: Add variations to these. They are supposed to be rather short interactions that do not take up time. Both "rewards" and punishments should be available. Some characters might see certain "punishments" as rewards too.
-
     menu:
 
         "Give her a head pat":
             "You give [the_person.possessive_title] a quick head pat as to signal approval of her actions." #Or something like that. I don't do writing.
             $ the_person.change_stats(2, 2, 10, 2)
-            pass
 
         "Give her a quick kiss.":
             $ the_person.draw_person("kissing")
             "You give [the_person.possessive_title] a quick kiss"
             $ the_person.change_stats(0, 2, 10, 5)
-            pass
 
         "Give her a serum.":
             $ the_person.change_stats(2)
             call give_serum(the_person) from _slave_training_label
+
+        "Send her away.":
             pass
 
     return
@@ -349,10 +374,10 @@ label slave_alarm_clock_label(the_person):
                     "She rolls over and kisses you, then rests her head on your chest."
                     "After a minute she sighs and starts to get up."
                     the_person.char "I shouldn't be keeping you from your work, I don't want to make you any more late!"
-                    "She reaches down to help you up. She smiles at you longingly, eyes lingering on your crotch, and leaves you alone in your room."
+                    "She reaches down to help you up. She smiles at you longingly, eyes lingering on your crotch, patiently waiting for your next move."
                 else:
                     the_person.char "I'm glad I could help [the_person.mc_title]. Now you should hurry up before you're late!"
-                    "[the_person.possessive_title] kisses you on the forehead and stands up to leave."
+                    "[the_person.possessive_title] kisses you on the forehead and stands up arms behind her back."
                 $ the_person.review_outfit()
 
             "Ask her to get off.":
@@ -363,19 +388,12 @@ label slave_alarm_clock_label(the_person):
                 $ the_person.draw_person()
                 the_person.char "Of course [the_person.mc_title], if you need me for anything just let me know. I hope you aren't running too late!"
                 if removed_something:
-                    "[the_person.possessive_title] collects some of her discarded clothing from the floor and heads for the door."
+                    "[the_person.possessive_title] collects some of her discarded clothing from the floor and starts to dress herself."
                 else:
-                    "[the_person.possessive_title] gives you a kiss on the forehead and heads for the door."
+                    "[the_person.possessive_title] gives you a kiss on the forehead and stands patiently by your side."
 
 
-
-    "Give some \"Feedback\" to [the_person.possessive_title]?" # Not exactly sure as to how I want this worded yet.
-    menu:
-        "Yes":
-            call slave_training_label(the_person) from _slave_alarm_clock_label
-            pass
-        "No":
-            pass
+    call slave_training_label(the_person) from _slave_alarm_clock_label
 
     "You finally get out of bed and prepare yourself for the day ahead."
     # At the end we would want the "Slave" to be in the room and interactable after the crisis event. Moving them during the event causes issues with scheduled destinations on run_move

@@ -135,7 +135,7 @@ label intro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_locat
     "You push yourself into [the_girl_1.title]'s steamy cunt and start to fuck her while [the_girl_2.title] rides on her face."
     return
 
-label intro_threesome_sixty_nine_fuck_oral_girl_2(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label intro_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_location, the_object, the_round):
     mc.name "I want you to warm me up before I fuck [the_girl_1.title]."
     if SB_check_fetish(the_girl_2, oral_fetish_role):
         the_girl_2.char "Oh my god, a mouth on my pussy and my lips on your cock... this is going to be incredible!"
@@ -252,16 +252,14 @@ label outro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_locat
                 "As you slowly pull out of [the_girl_1.title], a trickle of your cum starts to escape her."
                 "[the_girl_2.title] immediately moves her head down to [the_girl_1.title]'s pussy and starts to lick up the cum leaking out."
                 "Desperate for more of your cum, she sticks her tongue deep into [the_girl_1.title]."
-                if the_girl_2.outfit.can_add_accessory(mouth_cum):
-                    $the_cumshot = mouth_cum.get_copy()
-                    $the_cumshot.layer = 0 #TODO: make sure this doesn't break things by being on layer 0
-                    $the_girl_2.outfit.add_accessory(the_cumshot)
+                $ the_girl_2.cum_in_mouth()
                 $ scene_manager.draw_scene()
                 if the_girl_2.arousal > 100:
                     "Getting a dose of your cum triggers another orgasm in [the_girl_2.possessive_title]. Her body twitches as orgasm goes through it."
                 "When she finally sits up, you can see traces of your cum on the corners of [the_girl_2.title]'s mouth."
             else:
                 "As you slowly pull out of [the_girl_1.title], a trickle of your cum starts to escape her."
+
             "You give a sigh, deeply contented with having dumped your load inside of [the_girl_1.title]."
 
         "Cum on [the_girl_2.title]'s face.":
@@ -342,8 +340,8 @@ label orgasm_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_loca
 
     elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
         "You can feel [the_girl_1.title] trembling beneath you. She moans loudly but its muffled by [the_girl_2.title] grinding her pussy in her face."
-        "She orgasms, per pussy quivering around your cock. You grab her hips and give a few extra rough thrusts."
-        "You don't even both to slow down. As [the_girl_1.title] comes down from her orgasm you continue your relentless fucking."
+        "She orgasms, her pussy quivering around your cock. You grab her hips and give a few extra rough thrusts."
+        "You don't even bother to slow down. As [the_girl_1.title] comes down from her orgasm you continue your relentless fucking."
         return
 
     elif the_girl_2.arousal > 100:   #Just girl 2 orgasms

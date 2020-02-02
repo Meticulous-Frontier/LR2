@@ -19,30 +19,67 @@ init 2 python:
                     return True
         return False
 
+    def display_topic_opinions(person, topics):
+        def person_opinion_to_string(person, topic):
+            score = person.get_opinion_score(topic)
+            if score <= -2:
+                return (score, "actually hate")
+            if score == -1:
+                return (score, "don't like")
+            if score == 0:
+                return (score, "have no opinion about")
+            if score == 1:
+                return (score, "like")
+            if score >= 2:
+                return (score, "actually love")
+        def get_topic_text(topic):
+            if topic == "getting head":
+                return "when guys lick my pussy"
+            if topic == "creampies":
+                return "when guys cum inside me"
+            if topic == "being covered in cum":
+                return "when guys cum all over me"
+            if topic == "cum facials":
+                return "when guys cum all over my face"
+            if topic == "drinking cum":
+                return "swallowing cum"
+            if topic == "bareback sex":
+                return "having sex without a condom."
+            if topic == "showing her tits":
+                return "showing my tits"
+            if topic == "showing her ass":
+                return "showing my ass"
+            if topic == "lingerie":
+                return "wearing lingerie"
+            return topic
+
+        counter = 0
+        for topic in topics:
+            (score, opinion) = person_opinion_to_string(person, topic)
+            if score != 0:
+                display_text = get_topic_text(topic)
+                renpy.say(person.char, "I " + opinion + " " + display_text + ".")
+                counter += 1
+                person.discover_opinion(topic)
+        return counter
+
     SB_working_weekend_crisis = ActionMod("Working Weekend",SB_working_weekend_requirement,"SB_working_weekend_crisis_label",
         menu_tooltip = "While working weekends an employee comes into the office.", category = "Business", is_crisis = True, crisis_weight = SB_working_weekend_crisis_weight)
 
 label SB_working_weekend_crisis_label():
-    python:
-        the_person = get_random_from_list(mc.business.get_employee_list())
+    $ the_person = get_random_from_list(mc.business.get_employee_list())
 
     if the_person is None:
-        "Apperently no one can come see you."
         return
 
-    $ SB_LOW_SLUT_VALUE = 30    #Declare constants to tweak later
-    $ SB_HIGH_SLUT_VALUE = 70
     $ the_place = mc.business.get_employee_workstation(the_person)
-    # $ ordered_bottom = the_person.outfit.get_lower_ordered()
-    #if len(ordered_bottom) > 0:
-        #$ the_clothing = the_person.outfit.get_lower_ordered()[-1] #Get the very top item of clothing.
 
     "Even though it is the weekend, you find yourself working."
     "Deep in thought, and with the company normally deserted, it takes you by surprise when you see movement out of the corner of your eye."
     "Looking aside, you see [the_person.possessive_title]."
     $ the_person.draw_person()
     "You can tell by the look on her face that [the_person.possessive_title] is also surprised to see you."
-    if the_person.sluttiness < SB_LOW_SLUT_VALUE:
+    if the_person.sluttiness < 30:
         #if she is not slutty at all
         the_person.char "Oh hey there [the_person.mc_title], I didn't expect to see you here! I just stopped by because I forgot something in my desk. Are you... working? You know its the weekend right?"
         "You can tell by the look on her face that she is impressed by your work ethic. You consider the chance to impress on her the values of the company in this one on one situation."
@@ -73,7 +110,7 @@ label SB_working_weekend_crisis_label():
                 the_person.char "Oh! I suppose I might be up for something like that, sometime anyway."
 
         "After a minute of chit chat, [the_person.possessive_title] eventually says goodbye and walks out of the room."
-    elif the_person.sluttiness < SB_HIGH_SLUT_VALUE:
+    elif the_person.sluttiness < 70:
         "Before you can respond, [the_person.possessive_title] pulls up a chair and sits beside you."
         $ the_person.draw_person(position = "sitting")
         the_person.char "Wow, your dedication to this place is pretty incredible... Don't you ever do something... you know, to blow off steam?"
@@ -106,6 +143,7 @@ label SB_working_weekend_crisis_label():
 
                 $ the_person.clear_situational_slut("seduction_approach")
                 $ the_person.clear_situational_obedience("seduction_approach")
+                $ the_person.review_outfit(dialogue = False)
                 "Eventually, [the_person.possessive_title] gets up. She says goodbye after giving you a quick kiss"
                 return
             "Just Talk":
@@ -114,37 +152,18 @@ label SB_working_weekend_crisis_label():
                 $ SB_discover_opinion_count = 0
                 menu:
                     "Ask about general opinions":
-                            "You decide to ask about her general opinions."
-                            $ SB_get_opinion_and_print_text(the_person=the_person, the_opinion="flirting")
-                            $ SB_get_opinion_and_print_text(the_person=the_person, the_opinion="sports")
-                            $ SB_get_opinion_and_print_text(the_person=the_person, the_opinion="hiking")
-                            $ SB_get_opinion_and_print_text(the_person=the_person, the_opinion="Mondays")
-                            $ SB_get_opinion_and_print_text(the_person=the_person, the_opinion="Fridays")
-                            $ SB_get_opinion_and_print_text(the_person=the_person, the_opinion="the weekend")
+                        "You decide to ask about her general opinions."
+                        $ topic_list = ["flirting", "sports", "hiking", "Mondays", "Fridays", "the weekend"]
 
                     "Ask about a work opinions":
-                            "You decide to ask about her opinions about work."
-                            $ SB_get_opinion_and_print_text(the_person=the_person, the_opinion="working")
-                            $ SB_get_opinion_and_print_text(the_person=the_person, the_opinion="work uniforms")
-                            $ SB_get_opinion_and_print_text(the_person=the_person, the_opinion="research work")
-                            $ SB_get_opinion_and_print_text(the_person=the_person, the_opinion="marketing work")
-                            $ SB_get_opinion_and_print_text(the_person=the_person, the_opinion="HR work")
-                            $ SB_get_opinion_and_print_text(the_person=the_person, the_opinion="supply work")
-                            $ SB_get_opinion_and_print_text(the_person=the_person, the_opinion="production work")
-
+                        "You decide to ask about her opinions about work."
+                        $ topic_list = ["working", "work uniforms", "research work", "marketing work", "HR work", "supply work", "production work"]
 
                     "Ask about a style opinions":
-                            "You decide to ask about her opinions about her personal style."
-                            $ SB_get_opinion_and_print_text(the_person=the_person, the_opinion="skirts")
-                            $ SB_get_opinion_and_print_text(the_person=the_person, the_opinion="pants")
-                            $ SB_get_opinion_and_print_text(the_person=the_person, the_opinion="the colour blue")
-                            $ SB_get_opinion_and_print_text(the_person=the_person, the_opinion="makeup")
-                            $ SB_get_opinion_and_print_text(the_person=the_person, the_opinion="the colour yellow")
-                            $ SB_get_opinion_and_print_text(the_person=the_person, the_opinion="the colour red")
-                            $ SB_get_opinion_and_print_text(the_person=the_person, the_opinion="the colour pink")
-                            $ SB_get_opinion_and_print_text(the_person=the_person, the_opinion="conservative outfits")
+                        "You decide to ask about her opinions about her personal style."
+                        $ topic_list = ["skirts", "pants", "dresses", "boots", "high heels", "makeup", "conservative outfits", "the colour blue", "the colour yellow", "the colour red", "the colour pink", "the colour green", "the colour purple", "the colour white", "the colour black"]
 
-
+                $ SB_discover_opinion_count = display_topic_opinions(the_person, topic_list)
 
                 "You chat with [the_person.possessive_title] for a bit longer, but eventually she says goodbye and leaves."
 
@@ -165,7 +184,6 @@ label SB_working_weekend_crisis_label():
                 call SB_free_strip_scene(the_person) from _SB_free_strip_scene_3
 
             "Just Talk":
-                $ SEXUAL_TOPIC_COUNTER = 0
                 "While her offer is tempting, you decide to take the opportunity to learn a little more about [the_person.possessive_title]"
                 mc.name "Sorry, I can't while I'm in the middle of this, but maybe you could stay and talk to me for a little while."
                 "[the_person.possessive_title] is clearly disappointed, so you decide to keep the topic of conversation sexual to keep her interested."
@@ -175,362 +193,38 @@ label SB_working_weekend_crisis_label():
                         mc.name "So, how do you feel about different sex positions, [the_person.title]?"
                         "[the_person.possessive_title] smiles when she realizes you are going to keep the topic interesting."
                         the_person.char "Well..."
-                        #$ SEXUAL_TOPIC_COUNTER =SB_get_and_print_opinion(the_person, "missionary style sex")
-                        if the_person.get_opinion_score("missionary style sex") > 1:
-                            the_person.char "I actually LOVE missionary style sex."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("missionary style sex") > 0:
-                            the_person.char "I like missionary style sex."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("missionary style sex") < -1:
-                            the_person.char "I  actually HATE missionary style sex."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("missionary style sex") < 0:
-                            the_person.char "I don't like missionary style sex."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("missionary style sex")
 
-
-                        if the_person.get_opinion_score("doggy style sex") > 1:
-                            the_person.char "I actually LOVE doggy style sex."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("doggy style sex") > 0:
-                            the_person.char "I like doggy style sex."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("doggy style sex") < -1:
-                            the_person.char "I  actually HATE doggy style sex."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("doggy style sex") < 0:
-                            the_person.char "I don't like doggy style sex."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("doggy style sex")
-
-
-                        if the_person.get_opinion_score("sex standing up") > 1:
-                            the_person.char "I actually LOVE sex standing up."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("sex standing up") > 0:
-                            the_person.char "I likesex standing up."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("sex standing up") < -1:
-                            the_person.char "I  actually HATE sex standing up."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("sex standing up") < 0:
-                            the_person.char "I don't like sex standing up."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("sex standing up")
+                        $ topic_list = ["missionary style sex", "doggy style sex", "sex standing up"]
 
                     "Sex types":
                         mc.name "So, how do you feel about different sex types, [the_person.title]?"
                         "[the_person.possessive_title] smiles when she realizes you are going to keep the topic interesting."
-                        if the_person.get_opinion_score("vaginal sex") > 1:
-                            the_person.char "I actually LOVE vaginal sex."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("vaginal sex") > 0:
-                            the_person.char "I like vaginal sex."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("vaginal sex") < -1:
-                            the_person.char "I actually HATE vaginal sex."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("vaginal sex") < 0:
-                            the_person.char "I don't like vaginal sex."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("vaginal sex")
 
-                        if the_person.get_opinion_score("anal sex") > 1:
-                            the_person.char "I actually LOVE anal sex."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("anal sex") > 0:
-                            the_person.char "I like anal sex."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("anal sex") < -1:
-                            the_person.char "I actually HATE anal sex."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("anal sex") < 0:
-                            the_person.char "I don't like anal sex."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("anal sex")
-
-                        if the_person.get_opinion_score("giving blowjobs") > 1:
-                            the_person.char "I actually LOVE giving blowjobs."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("giving blowjobs") > 0:
-                            the_person.char "I like giving blowjobs."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("giving blowjobs") < -1:
-                            the_person.char "I actually HATE giving blowjobs."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("giving blowjobs") < 0:
-                            the_person.char "I don't like giving blowjobs."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("giving blowjobs")
-
-                        if the_person.get_opinion_score("getting head") > 1:
-                            the_person.char "I actually LOVE when guys eat me out."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("getting head") > 0:
-                            the_person.char "I like when guys eat me out."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("getting head") < -1:
-                            the_person.char "I actually HATE when guys eat me out."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("getting head") < 0:
-                            the_person.char "I don't like when guys eat me out."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("getting head")
-
+                        $ topic_list = ["vaginal sex", "anal sex", "giving blowjobs", "getting head"]
 
                     "Cum":
                         mc.name "So, how do you feel about cum, [the_person.title]?"
                         "[the_person.possessive_title] smiles when she realizes you are going to keep the topic interesting."
-                        if the_person.get_opinion_score("creampies") > 1:
-                            the_person.char "I actually LOVE when guys cum inside me."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("creampies") > 0:
-                            the_person.char "I like when guys cum inside me."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("creampies") < -1:
-                            the_person.char "I actually HATE when guys cum inside me."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("creampies") < 0:
-                            the_person.char "I don't like when guys cum inside me."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("creampies")
 
-                        if the_person.get_opinion_score("being covered in cum") > 1:
-                            the_person.char "I actually LOVE when guys cum all over me."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("being covered in cum") > 0:
-                            the_person.char "I like when guys cum all over me."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("being covered in cum") < -1:
-                            the_person.char "I actually HATE when guys cum all over me."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("being covered in cum") < 0:
-                            the_person.char "I don't like when guys cum all over me."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("being covered in cum")
-
-                        if the_person.get_opinion_score("cum facials") > 1:
-                            the_person.char "I actually LOVE when guys cum all over my face."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("cum facials") > 0:
-                            the_person.char "I like when guys cum all over my face."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("cum facials") < -1:
-                            the_person.char "I actually HATE when guys cum all over my face."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("cum facials") < 0:
-                            the_person.char "I don't like when guys cum all over my face."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("cum facials")
-
-                        if the_person.get_opinion_score("drinking cum") > 1:
-                            the_person.char "I actually LOVE swallowing cum."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("drinking cum") > 0:
-                            the_person.char "I like swallowing cum."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("drinking cum") < -1:
-                            the_person.char "I actually HATE swallowing cum."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("drinking cum") < 0:
-                            the_person.char "I don't like swallowing cum."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("drinking cum")
-
-                        if the_person.get_opinion_score("bareback sex") > 1:
-                            the_person.char "I actually LOVE the thrill of pregnancy risk though. Shoot it inside me deep!"
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("bareback sex") > 0:
-                            the_person.char "I kinda like when guys cum inside me. It feels kinda risky, right?"
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("bareback sex") < -1:
-                            the_person.char "I am so scared of getting pregnant."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("bareback sex") < 0:
-                            the_person.char "I am a little afraid of getting pregnant, to be honest."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("bareback sex")
+                        $ topic_list = ["creampies", "being covered in cum", "cum facials", "drinking cum", "bareback sex"]
 
                     "Sexy Clothing":
                         mc.name "So, how do you feel about sexy clothing and outfits, [the_person.title]?"
                         "[the_person.possessive_title] smiles when she realizes you are going to keep the topic interesting."
-                        if the_person.get_opinion_score("skimpy outfits") > 1:
-                            the_person.char "I actually LOVE skimpy outfits."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("skimpy outfits") > 0:
-                            the_person.char "I like skimpy outfits."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("skimpy outfits") < -1:
-                            the_person.char "I actually HATE skimpy outfits."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("skimpy outfits") < 0:
-                            the_person.char "I don't like skimpy outfits."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("skimpy outfits")
 
-                        if the_person.get_opinion_score("skimpy uniforms") > 1:
-                            the_person.char "I actually LOVE skimpy uniforms."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("skimpy uniforms") > 0:
-                            the_person.char "I like skimpy uniforms."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("skimpy uniforms") < -1:
-                            the_person.char "I actually HATE skimpy uniforms."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("skimpy uniforms") < 0:
-                            the_person.char "I don't like skimpy uniforms."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("skimpy uniforms")
-
-                        if the_person.get_opinion_score("not wearing underwear") > 1:
-                            the_person.char "I actually LOVE not wearing underwear."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("not wearing underwear") > 0:
-                            the_person.char "I like not wearing underwear."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("not wearing underwear") < -1:
-                            the_person.char "I actually HATE not wearing underwear."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("not wearing underwear") < 0:
-                            the_person.char "I don't like not wearing underwear."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("not wearing underwear")
-
-                        if the_person.get_opinion_score("not wearing anything") > 1:
-                            the_person.char "I actually LOVE not wearing anything."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("not wearing anything") > 0:
-                            the_person.char "I like not wearing anything."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("not wearing anything") < -1:
-                            the_person.char "I actually HATE not wearing anything."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("not wearing anything") < 0:
-                            the_person.char "I don't like not wearing anything."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("not wearing anything")
-
-                        if the_person.get_opinion_score("showing her tits") > 1:
-                            the_person.char "I actually LOVE showing my tits."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("showing her tits") > 0:
-                            the_person.char "I like showing my tits."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("showing her tits") < -1:
-                            the_person.char "I actually HATE showing my tits."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("showing her tits") < 0:
-                            the_person.char "I don't like showing my tits."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("showing her tits")
-
-                        if the_person.get_opinion_score("showing her ass") > 1:
-                            the_person.char "I actually LOVE showing my ass."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("showing her ass") > 0:
-                            the_person.char "I like showing my ass."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("showing her ass") < -1:
-                            the_person.char "I actually HATE showing my ass."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("showing her ass") < 0:
-                            the_person.char "I don't like showing my ass."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("showing her ass")
-
-                        if the_person.get_opinion_score("lingerie") > 1:
-                            the_person.char "I actually LOVE wearing lingerie."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("lingerie") > 0:
-                            the_person.char "I like wearing lingerie."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("lingerie") < -1:
-                            the_person.char "I actually HATE wearing lingerie."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("lingerie") < 0:
-                            the_person.char "I don't like wearing lingerie."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("lingerie")
-
+                        $ topic_list = ["skimpy outfits", "skimpy uniforms", "not wearing underwear", "not wearing anything", "showing her tits", "showing her ass", "lingerie"]
 
                     "Other Kinks":
                         mc.name "So, do you have any kinks, [the_person.title]? Something that might be more fun for me to know about?"
                         "[the_person.possessive_title] smiles when she realizes you are going to keep the topic interesting."
-                        if the_person.get_opinion_score("masturbating") > 1:
-                            the_person.char "I actually LOVE masturbating."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("masturbating") > 0:
-                            the_person.char "I like masturbating."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("masturbating") < -1:
-                            the_person.char "I actually HATE masturbating."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("masturbating") < 0:
-                            the_person.char "I don't like masturbating."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("masturbating")
 
-                        if the_person.get_opinion_score("giving handjobs") > 1:
-                            the_person.char "I actually LOVE giving handjobs."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("giving handjobs") > 0:
-                            the_person.char "I like giving handjobs."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("giving handjobs") < -1:
-                            the_person.char "I actually HATE giving handjobs."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("giving handjobs") < 0:
-                            the_person.char "I don't like giving handjobs."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("giving handjobs")
+                        $ topic_list = ["masturbating", "giving handjobs", "being fingered", "being submissive", "taking control"]
 
-                        if the_person.get_opinion_score("being fingered") > 1:
-                            the_person.char "I actually LOVE being fingered."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("being fingered") > 0:
-                            the_person.char "I like being fingered."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("being fingered") < -1:
-                            the_person.char "I actually HATE being fingered."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("being fingered") < 0:
-                            the_person.char "I don't like being fingered."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("being fingered")
+                $ SB_discover_opinion_count = display_topic_opinions(the_person, topic_list)
 
-                        if the_person.get_opinion_score("being submissive") > 1:
-                            the_person.char "I actually LOVE being submissive."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("being submissive") > 0:
-                            the_person.char "I like being submissive."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("being submissive") < -1:
-                            the_person.char "I actually HATE being submissive."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("being submissive") < 0:
-                            the_person.char "I don't like being submissive."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("being submissive")
-
-                        if the_person.get_opinion_score("taking control") > 1:
-                            the_person.char "I actually LOVE taking control."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("taking control") > 0:
-                            the_person.char "I like taking control."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("taking control") < -1:
-                            the_person.char "I actually HATE taking control."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        elif the_person.get_opinion_score("taking control") < 0:
-                            the_person.char "I don't like taking control."
-                            $ SEXUAL_TOPIC_COUNTER += 1
-                        $ the_person.discover_opinion("taking control")
-
-                if SEXUAL_TOPIC_COUNTER == 0:
+                if SB_discover_opinion_count == 0:
                     the_person.char "I guess you could say I don't care too much about that."
-                elif SEXUAL_TOPIC_COUNTER < 2:
+                elif SB_discover_opinion_count < 2:
                     the_person.char "So I guess you could say I don't have a lot of strong feelings about that."
                 else:
                     the_person.char "So I guess you could say I have a lot of opinions on that."
@@ -540,7 +234,7 @@ label SB_working_weekend_crisis_label():
         $ the_person_two = get_random_from_list(mc.business.get_employee_list())
         if the_person == the_person_two:
             "You're pretty sure she's ready for next step if you are ready."
-        elif the_person_two.sluttiness > SB_HIGH_SLUT_VALUE :  #Someone walks in, threesome opportunity#
+        elif the_person_two.sluttiness > 70:  #Someone walks in, threesome opportunity#
             "You walk over to [the_person.possessive_title]. She wraps her arms around you as you roughly grab her ass and pick her up. She's grinding herself against you as you carry her over to your desk."
             "[the_person.possessive_title] is just pulling your cock out when you hear a cough from the doorway."
             the_person_two.char "Wow, looks like you guys are getting ready for some fun!"
@@ -573,8 +267,8 @@ label SB_working_weekend_crisis_label():
                 $ the_person.change_love(5)
             the_person.char "Holy fuck [the_person.mc_title], that was so hot."
             "She eventually gets up and gets herself dressed again. You say goodbye as she leaves the office."
-            $ the_person_two.reset_arousal()
-            $ the_person.reset_arousal()
+            $ the_person_two.review_outfit(dialogue = False)
+            $ the_person.review_outfit(dialogue = False)
 
             return
         menu:
@@ -594,11 +288,10 @@ label SB_working_weekend_crisis_label():
                     $ the_person.change_slut_temp(5)
                     $ the_person.change_happiness(-5)
                 "She eventually gets up and gets herself dressed again. You say goodbye as she leaves the office."
-                $ the_person.reset_arousal()
             "Thank her for the show":
                 mc.name "Thanks for that very pleasant distraction, [the_person.title], but I need to get back to work now."
                 "[the_person.possessive_title] can barely hide their disappointment. There's a hint of anger in their voice when they reply."
-                the_person.char "Wow, really? After I stripped for you? Okay then, hope you day goes better than mine..."
+                the_person.char "Wow, really? After I stripped for you? Okay then, I hope your day goes better than mine..."
                 $ the_person.change_slut_temp(5)
                 $ the_person.change_slut_core(2)
                 $ the_person.change_happiness(-5)
@@ -606,24 +299,6 @@ label SB_working_weekend_crisis_label():
                 return
         "Eventually, [the_person.possessive_title] gets up. She says goodbye after giving you a peck on the cheek and is soon walking out the door."
 
-    $ the_person.reset_arousal()
-    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
     $ mc.location.show_background()
     return
-
-init 3 python :
-    def SB_get_opinion_and_print_text(the_person, the_opinion):
-        the_person.discover_opinion(the_opinion)
-        if the_person.get_opinion_score(the_opinion) > 1:
-            renpy.say (the_person.name, "I actually LOVE " + the_opinion + ".")
-            return 1
-        elif the_person.get_opinion_score(the_opinion) > 0:
-            renpy.say (the_person.name, "I like " + the_opinion + ".")
-            return 1
-        elif the_person.get_opinion_score(the_opinion) < -1:
-            renpy.say (the_person.name, "I actually HATE " + the_opinion + ".")
-            return 1
-        elif the_person.get_opinion_score(the_opinion) < 0:
-            renpy.say (the_person.name, "I don't like " + the_opinion + ".")
-            return 1
-        return 0

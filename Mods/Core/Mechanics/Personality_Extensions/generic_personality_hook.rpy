@@ -21,7 +21,7 @@ init -1 python:
         update_person_opinions(return_character)
         update_random_person(return_character)
         rebuild_wardrobe(return_character)
-        update_person_outfit(return_character)
+        update_person_outfit(return_character, -0.2) # choose a less slutty outfit as planned outfit
 
         return return_character
 
@@ -68,10 +68,10 @@ init -1 python:
             person.sexy_opinions[the_opinion_key] = [degree, False]
 
     # make sure new character has a more appropriate outfit to wear
-    def update_person_outfit(person):
-        if not person in unique_character_list:
-            person.planned_outfit = person.wardrobe.decide_on_outfit2(person) # Use enhanced outfit selector
-            person.outfit = person.planned_outfit.get_copy()
+    def update_person_outfit(person, sluttiness_modifier = 0.0):
+        if not "unique_character_list" in globals() or not person in unique_character_list:
+            person.planned_outfit = person.wardrobe.decide_on_outfit2(person, sluttiness_modifier) # Use enhanced outfit selector
+            person.apply_outfit(person.planned_outfit)
             person.planned_uniform = None
         return
 
@@ -85,10 +85,10 @@ init -1 python:
         return
 
     def update_cougar_personality(person):
-        if "cougar_personality" in globals():
+        if "cougar_personality" in globals() and "unique_character_list" in globals():
             # change personality to cougar if we meet age requirement
             if find_in_list(lambda x: x.effect == "cougar_personality_dummy_label", action_mod_list).enabled:
-                if person not in unique_character_list and person.age > 45:
+                if  person.age > 45 and person not in unique_character_list:
                     if not person.personality == cougar_personality:
                         person.original_personality = person.personality
                         person.personality = cougar_personality
@@ -106,7 +106,7 @@ init -1 python:
 
     def rebuild_wardrobe(person):
         # skip personalized wardrobes
-        if not person.wardrobe.name == "Master_Default_Wardrobe":
+        if not person.wardrobe.name.startswith(person.name + "'s Wardrobe"):
             return
 
         base_wardrobe = Wardrobe("[person.name]_[person.last_name]_wardrobe")
@@ -144,6 +144,27 @@ init -1 python:
             base_wardrobe.remove_outfit(sorted(base_wardrobe.overwear_sets, key = lambda x: x.slut_requirement)[renpy.random.randint(2,len(base_wardrobe.overwear_sets)-1)])
 
         person.wardrobe = base_wardrobe
+
+        # when she likes makeup add it to her base_outfit
+        eye_shadow_colours = [[.1,.1,.12,.9], [.4,.5,.9,.9], [0.644, 0.418, 0.273,.9]]
+        lipstick_colours = [[0.745, 0.117, 0.235, .9], [1,0.5,0.8, .9], [.80, .26, .04, .9]]
+
+        if person.get_opinion_score("makeup") > 0:
+            girl_light_eye_shadow = light_eye_shadow.get_copy()
+            girl_light_eye_shadow.colour = get_random_from_list(eye_shadow_colours)
+            person.base_outfit.add_accessory(girl_light_eye_shadow)
+            girl_lipstick = lipstick.get_copy()
+            girl_lipstick.colour = get_random_from_list(lipstick_colours)
+            person.base_outfit.add_accessory(girl_lipstick)
+        if person.get_opinion_score("makeup") > 1:
+            girl_heavy_eye_shadow = heavy_eye_shadow.get_copy()
+            girl_heavy_eye_shadow.colour = get_random_from_list(eye_shadow_colours)
+            person.base_outfit.add_accessory(girl_heavy_eye_shadow)
+            if not person.body_images == black_skin: # dark skin does not blush
+                girl_blush = blush.get_copy()
+                girl_blush.colour = [.7,.4,.4,.75]
+                person.base_outfit.add_accessory(girl_blush)
+
 
         enhance_existing_wardrobe(person, 8)
         return

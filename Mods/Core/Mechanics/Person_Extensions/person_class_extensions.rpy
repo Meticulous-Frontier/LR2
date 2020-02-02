@@ -120,6 +120,20 @@ init -1:
         # attach change weight function to the Person class
         Person.change_weight = change_weight
 
+        ## HAPPINESS SCORE ENHANCED VERSION
+        # Takes into account their liking for working (if she doesn't she is more likely to quit) 
+        def get_job_happiness_score_enhanced(self):
+            happy_points = self.happiness - 100 #Happiness over 100 gives a bonus to staying, happiness less than 100 gives a penalty
+            happy_points += self.obedience - 95 #A more obedient character is more likely to stay, even if they're unhappy. Default characters can be a little disobedint without any problems.
+            happy_points += self.salary - self.calculate_base_salary() #A real salary greater than her base is a bonus, less is a penalty. TODO: Make this dependent on salary fraction, not abosolute pay.
+            happy_points += self.get_opinion_score("working") * 5 # Does she like working? It affects her happiness score.
+
+            if (day - self.event_triggers_dict.get("employed_since",0)) < 14:
+                happy_points += 14 - (day - self.event_triggers_dict.get("employed_since",0)) #Employees are much less likely to quit over the first two weeks.
+            return happy_points
+
+        Person.get_job_happiness_score = get_job_happiness_score_enhanced
+
         def is_employee(self):
             employment_title = mc.business.get_employee_title(self)
             if employment_title != "None":
@@ -204,8 +218,8 @@ init -1:
                 height = self.height * (renpy.random.randint(95,105)/100.0)
                 if height > 1.0:
                     height = 1.0
-                elif height < 0.9:
-                    height = 0.9
+                elif height < 0.8:
+                    height = 0.8
             else:
                 height = None
 
@@ -230,7 +244,7 @@ init -1:
             # make her a little bit more unique by changing wardrobe and opinions
             update_person_opinions(the_daughter)
             rebuild_wardrobe(the_daughter)
-            update_person_outfit(the_daughter)
+            update_person_outfit(the_daughter, -0.2)
 
             return the_daughter
 
@@ -271,7 +285,7 @@ init -1:
             # renpy.say("", strip_choice.name + "  (required: " + str(test_outfit.slut_requirement) +  ", sluttiness: " +  str(self.effective_sluttiness() + temp_sluttiness_boost) + ")")
             while strip_choice and self.judge_outfit(test_outfit, temp_sluttiness_boost):
                 self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
-                self.outfit = test_outfit.get_copy() #Swap our current outfit out for the test outfit.
+                self.apply_outfit(test_outfit, ignore_base = True) #Swap our current outfit out for the test outfit.
                 if msg_count > 0:   # do we need to show a random message and replace titles and outfit name
                     msg_idx = renpy.random.randint(1, msg_count)
                     msg = messages[msg_idx - 1]
@@ -316,12 +330,12 @@ init -1:
 
         Person.strip_outfit = strip_outfit
 
-        def run_move_enhanced(self,location): 
+        def run_move_enhanced(self,location):
             self.sexed_count = 0 #Reset the counter for how many times you've been seduced, you might be seduced multiple times in one day!
 
             if time_of_day == 0: #It's a new day, get a new outfit out to wear!
-                self.planned_outfit = self.wardrobe.decide_on_outfit(self.sluttiness)
-                self.outfit = self.planned_outfit.get_copy()
+                self.planned_outfit = self.wardrobe.decide_on_outfit2(self)
+                self.apply_outfit(self.planned_outfit)
                 self.planned_uniform = None
 
             destination = self.schedule[time_of_day] #None destination means they have free time
@@ -339,13 +353,13 @@ init -1:
                             self.change_slut_temp(self.get_opinion_score("skimpy uniforms"), add_to_log = False)
 
                 elif destination == self.home:
-                    self.outfit = self.planned_outfit.get_copy() #We're at home, so we can get back into our casual outfit.
+                    self.apply_outfit(self.planned_outfit) #We're at home, so we can get back into our casual outfit.
 
                 #NOTE: There is no else here because all of the destinations should be set. If it's just a location they travel there and that's the end of it.
 
             else:
                 #She finds somewhere to burn some time
-                self.outfit = self.planned_outfit.get_copy() #Get changed back into our proper outfit if we aren't in it already.
+                self.apply_outfit(self.planned_outfit) #Get changed back into our proper outfit if we aren't in it already.
                 available_locations = [] #Check to see where is public (or where you are white listed) and move to one of those locations randomly
                 for potential_location in list_of_places:
                     if potential_location.public:
@@ -356,9 +370,9 @@ init -1:
             if self.outfit and self.planned_outfit.slut_requirement > self.sluttiness * 0.75:
                 # only changes sluttiness in low sluttiness range after that she won't care anymore
                 if self.sluttiness < 40:
-                    self.change_slut_temp(self.get_opinion_score("skimpy outfits"), add_to_log = False)         
-            
-            #A conservative outfit is defined as the bottom 25% of a girls natural sluttiness.                    
+                    self.change_slut_temp(self.get_opinion_score("skimpy outfits"), add_to_log = False)
+
+            #A conservative outfit is defined as the bottom 25% of a girls natural sluttiness.
             if self.outfit and self.planned_outfit.slut_requirement < self.sluttiness * 0.25:
                 # happiness won't go below 80 or over 120 by this trait and only affects in low sluttiness range, after that she won't care
                 if self.happiness > 80 and self.happiness < 120 and self.sluttiness < 40:
@@ -500,6 +514,22 @@ init -1:
         # Add decrease opinion function to person class
         Person.decrease_opinion_score = decrease_opinion_score
 
+        ##Max the opinion on a specific topic (opinion)
+        def max_opinion_score(self, topic, add_to_log = True):
+            score = self.get_opinion_score(topic)
+            if score < 2:
+                if topic in self.sexy_opinions:
+                    self.sexy_opinions[topic][0] = 2
+                if topic in self.opinions:
+                    self.opinions[topic][0] = 2
+
+                if add_to_log:
+                    mc.log_event((self.title or self.name) + " " + opinion_score_to_string(2) + " " + str(topic), "float_text_green")
+            return
+
+        # Add max opinion function to person class
+        Person.max_opinion_score = max_opinion_score
+
         # Change Multiple Stats for a person at once (less lines of code, better readability)
         def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut_temp = None, slut_core = None, add_to_log = True):
             if not obedience is None:
@@ -529,7 +559,7 @@ init -1:
         # attach to person object
         Person.change_willpower = change_willpower
 
-        def review_outfit_enhanced(self, show_review_message = True):
+        def review_outfit_enhanced(self, dialogue = True):
             self.outfit.remove_all_cum()
 
             if self.should_wear_uniform():
@@ -537,9 +567,9 @@ init -1:
             else:
                 self.outfit.update_slut_requirement()
                 # only show review message when parameter is true and she doesn't feel comfortable in her current outfit
-                show_review_message = show_review_message and self.outfit.slut_requirement > self.sluttiness   
-                self.outfit = self.planned_outfit.get_copy()    # always restore outfit
-                if show_review_message:
+                dialogue = dialogue and self.outfit.slut_requirement > self.sluttiness
+                self.apply_outfit(self.planned_outfit)    # always restore outfit
+                if dialogue:
                     self.call_dialogue("clothing_review") # must be last call in function
 
         Person.review_outfit = review_outfit_enhanced
@@ -561,8 +591,8 @@ init -1:
             if self.outfit is None:
                 if self.planned_outfit is None:
                     self.planned_outfit = self.wardrobe.decide_on_outfit2(self) # Use enhanced outfit function
-                self.outfit = self.planned_outfit.get_copy()
-                self.review_outfit(show_review_message = False)
+                self.apply_outfit(self.planned_outfit)
+                self.review_outfit(dialogue = False)
 
             # if normal draw person call, clear scene
             if not from_scene:

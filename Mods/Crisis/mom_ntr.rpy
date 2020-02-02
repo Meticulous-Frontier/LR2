@@ -10,13 +10,9 @@ init 2 python:
                 return True
         return False
 
-    def mom_ntr_mod_init(self):
-        self.enabled = False
-        return
-
     mom_ntr_mod_action = ActionMod("Mom NTR",mom_ntr_mod_requirement,"mom_ntr_mod_action_label",
         menu_tooltip = "At night you hear strange sounds out of [mom.possessive_title]'s bedroom", category = "NTR", 
-        initialization = mom_ntr_mod_init,
+        initialization = init_action_mod_disabled,
         is_crisis = True, crisis_weight = mom_ntr_mod_weight)
 
 label mom_ntr_mod_action_label:
@@ -2259,7 +2255,7 @@ label mom_ntr_mod_action_label:
                                 man_name "It really turned me on! I feel I can do another round shortly."
                                 the_person.char "We will discuss it later, [man_name2]. First - I need to taste [man_name]."
                                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
-                                "She puts another dick int oher mouth and sucks it off."
+                                "She puts another dick into her mouth and sucks it off."
                                 man_name "This is so great. I can't hold much longer!"
                                 $ the_person.cum_in_mouth()
                                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
@@ -2294,7 +2290,8 @@ label mom_ntr_mod_action_label:
                 "You decide that it is wrong to interfere into [the_person.possessive_title]'s private life so you go back to your room to sleep."
     $ the_person.sluttiness += 5
     $ the_person.reset_arousal()
-    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
     $ mc.location.show_background()
     $ renpy.scene("Active")
+    $ del finishes
     return

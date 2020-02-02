@@ -79,41 +79,40 @@ init 3 python: # Put this behind a mod init to ensure compatibility
 
 
 label security_overview():
-
-
 #    "You seat yourself at the control panel."
 #    "From here you can run investigations, watch the CCTV... (tooltip)Unlock more options by investing."
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-                security_options = []
-                for act in security_room_actions:
-                    security_options.append(act)
-                security_options.append("Back")
-                act_choice = call_formated_action_choice(security_options)
+            security_options = []
+            for act in security_room_actions:
+                security_options.append(act)
+            security_options.append("Back")
+            act_choice = call_formated_action_choice(security_options)
+            del security_options
 
         if act_choice == "Back":
             return
         else:
             $ act_choice.call_action()
-
+            $ del act_choice
 
 
 label cctv_label():
     "Select location to observe"
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-                cctv_options = []
-                for act in security_room_cctv_actions:
-                    cctv_options.append(act)
-                cctv_options.append("Back")
-                act_choice = call_formated_action_choice(cctv_options)
+            cctv_options = []
+            for act in security_room_cctv_actions:
+                cctv_options.append(act)
+            cctv_options.append("Back")
+            act_choice = call_formated_action_choice(cctv_options)
+            del cctv_options
 
         if act_choice == "Back":
             return
         else:
             $ act_choice.call_action()
-
-
+            $ del act_choice
 
 label m_division_observation_label():
     "[m_division.formalName]"
@@ -180,21 +179,24 @@ label investigation_employee_label():
             return # Where to go if you hit "Back".
         else:
             call investigate_person(person_choice) from _call_investigate_person# What to do if "Back" was not the choice taken.
+            $ del person_choice
 
 label investigate_person(person_choice = the_person): # Need to default to the_person for return calls.
     $ the_person = person_choice
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-                investigative_options = []
-                for act in security_room_investigation_actions:
-                    investigative_options.append(act)
-                investigative_options.append("Back")
-                act_choice = call_formated_action_choice(investigative_options)
+            investigative_options = []
+            for act in security_room_investigation_actions:
+                investigative_options.append(act)
+            investigative_options.append("Back")
+            act_choice = call_formated_action_choice(investigative_options)
+            del investigative_options
 
         if act_choice == "Back":
             return
         else:
             $ act_choice.call_action()
+            $ del act_choice
 
 label investigation_home_label():
     "You conveniently find [the_person.name]'s address in the yellow pages."

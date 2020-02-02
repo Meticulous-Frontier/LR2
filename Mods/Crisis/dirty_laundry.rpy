@@ -8,7 +8,7 @@
 # high sluttiness they put the panties on and have MC cum in the panties while they wear them
 
 init -1 python:
-    dirty_laundry_weight = 4
+    dirty_laundry_weight = 5
 
 init 2 python:
     def dirty_laundry_requirement():
@@ -37,11 +37,11 @@ init 3 python:
 
     def set_night_outfit(person):
         if person.sluttiness > 70 or person.arousal > 70:
-            person.outfit = night_clothes_slutty.get_copy()
+            person.apply_outfit(night_clothes_slutty)
         elif person.sluttiness > 40 or person.arousal > 35:
-            person.outfit = night_clothes_sexy.get_copy()
+            person.apply_outfit(night_clothes_sexy)
         else:
-            person.outfit = night_clothes.get_copy()
+            person.apply_outfit(night_clothes)
         return
 
 label dirty_laundry_action_label:
@@ -310,5 +310,5 @@ label dirty_laundry_action_label:
             "You say goodnight to [the_person.title] and then swap your clothes from the washer to the dryer. They should be dry in the morning!"
 
     $ renpy.scene("Active")
-    $ the_person.review_outfit(show_review_message = False)
+    $ the_person.review_outfit(dialogue = False)
     return

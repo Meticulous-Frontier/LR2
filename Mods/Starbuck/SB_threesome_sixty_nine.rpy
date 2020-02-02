@@ -174,10 +174,7 @@ label outro_SB_threesome_sixty_nine(the_girl_1, the_girl_2, the_location, the_ob
                     "As you slowly pull out of [the_girl_1.title], a trickle of your cum starts to escape her."
                     "[the_girl_2.title] immediately moves her head down to [the_girl_1.title]'s pussy and starts to lick up the cum leaking out."
                     "Desperate for more of your cum, she sticks her tongue deep into [the_girl_1.title]."
-                    if the_girl_2.outfit.can_add_accessory(mouth_cum):
-                        $the_cumshot = mouth_cum.get_copy()
-                        $the_cumshot.layer = 0 #TODO: make sure this doesn't break things by being on layer 0
-                        $the_girl_2.outfit.add_accessory(the_cumshot)
+                    $ the_girl_2.cum_in_mouth()
                     $ SB_threesome_sixty_nine.redraw_scene(the_girl_1, the_girl_2)
                     if the_girl_2.arousal > 100:
                         "Getting a dose of your cum triggers another orgasm in [the_girl_2.possessive_title]. Her body twitches as orgasm goes through it."

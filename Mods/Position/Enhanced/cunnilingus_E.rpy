@@ -7,7 +7,9 @@ init 2:   #Initial declaration made in init 0
 label scene_SB_Oral_Laying_1(the_girl, the_location, the_object, the_round):
     # CHOICE CONCEPT: Finger Fuck // Tongue Fuck her
     # Intro concept. Short difference depending on if she's wet or not.
-    if the_girl.arousal > 70:
+    if the_girl.outfit.has_creampie_cum():
+        "You lap at the juices flowing down from [the_girl.possessive_title]'s slit. It's an arousing mix of her juices and semen."
+    elif the_girl.arousal > 70:
         "[the_girl.possessive_title]'s juices are beginning to flow freely from her slit. You lap them up before circling your tongue aroud her clit a few times."
     else:
         "[the_girl.possessive_title]'s pussy is still getting wet. You lick it slow, giving her time to warm up."
@@ -40,6 +42,8 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object, the_round):
             "After licking at her clit, you move your tongue down to her entrance. You push your tongue up inside her as far as it will go."
             if mc.sex_skills["Oral"] > 3:
                 "You push your tongue deep and twirl it all around her juicy canal. Your nose is pressing up against her clit, making her gasp."
+                if the_girl.outfit.has_creampie_cum():
+                    "Your tongue is deep. The salty cum deposited there flows out and begins to run down your chin."
                 if the_girl.get_opinion_score("taking control") > 0:
                     "[the_girl.possessive_title] puts her hand on the back of your head, urging your tongue deeper and your nose more firmly against her clit."
                     "She starts to rock her hips, grinding herself against your face."
@@ -94,7 +98,10 @@ label scene_SB_Oral_Laying_2(the_girl, the_location, the_object, the_round):
             "You take her enthusiasm as a sign that you must be doing well. You double down on her clit, sucking and licking at it."
             if the_girl.get_opinion_score("taking control") > 0:
                 "[the_girl.possessive_title] uses the leverage her legs give her, wrapped around your back, to force your face down into her cunt roughly."
-                "She starts to rock her hips, grinding herself against your face."
+                if the_girl.outfit.has_creampie_cum():
+                    "She starts to rock her hips. Your face is getting slick from the combination of juices around her pussy."
+                else:
+                    "She starts to rock her hips, grinding herself against your face."
                 the_girl.char "Mmm, that's it [the_girl.mc_title]! Fuck that feels good!"
                 $ the_girl.discover_opinion("taking control")
                 $ the_girl.change_arousal(the_girl.get_opinion_score("taking control") * 3)

@@ -7,6 +7,10 @@ init 2 python:
         if emotion is None:
             emotion = mannequin.get_emotion()
 
+        draw_outfit = outfit
+        if mannequin.base_outfit:
+            draw_outfit = outfit.get_copy().merge_outfit(mannequin.base_outfit)
+
         lighting = [0.98,0.98,0.98]
 
         displayable_list = [] # We will be building up a list of displayables passed to us by the various objects on the person (their body, clothing, etc.)
@@ -20,7 +24,7 @@ init 2 python:
         x_size = __builtin__.int(the_size[0])
         y_size = __builtin__.int(the_size[1])
 
-        displayable_list.extend(outfit.generate_draw_list(mannequin,position,emotion,special_modifier, lighting = lighting)) #Get the displayables for everything we wear. Note that extnsions do not return anything because they have nothing to show.
+        displayable_list.extend(draw_outfit.generate_draw_list(mannequin,position,emotion,special_modifier, lighting = lighting)) #Get the displayables for everything we wear. Note that extnsions do not return anything because they have nothing to show.
         displayable_list.append(mannequin.hair_style.generate_item_displayable("standard_body",mannequin.tits,position, lighting = lighting)) #Get hair
 
         #NOTE: default return for the_size is floats, even though it is in exact pixels. Use int here otherwise positional modifiers like xanchor and yalign do not work (no displayable is shown at all!)

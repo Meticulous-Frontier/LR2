@@ -4,7 +4,7 @@ init -1 python:
     def remove_all_cum(self):
         remove_list = []
         for acc in self.accessories:
-            if acc in [mouth_cum, tits_cum, stomach_cum, face_cum, ass_cum]:
+            if acc.name in [mouth_cum.name, tits_cum.name, stomach_cum.name, face_cum.name, ass_cum.name, creampie_cum.name]:
                 remove_list.append(acc)
         for acc in remove_list:
             self.accessories.remove(acc)
@@ -14,12 +14,51 @@ init -1 python:
 
     def check_outfit_cum(self):                                             #Checks if the person has any cum on them
         for acc in self.accessories:
-            if acc in [mouth_cum, tits_cum, stomach_cum, face_cum, ass_cum]:
+            if acc.name in [mouth_cum.name, tits_cum.name, stomach_cum.name, face_cum.name, ass_cum.name, creampie_cum.name]:
                 return True
         return False
 
     Outfit.check_outfit_cum = check_outfit_cum
 
+    def has_mouth_cum(self):
+        return any(x.name == mouth_cum.name for x in self.accessories)
+
+    Outfit.has_mouth_cum = has_mouth_cum
+
+    def has_tits_cum(self):
+        return any(x.name == tits_cum.name for x in self.accessories)
+
+    Outfit.has_tits_cum = has_tits_cum
+
+    def has_stomach_cum(self):
+        return any(x.name == stomach_cum.name for x in self.accessories)
+
+    Outfit.has_stomach_cum = has_stomach_cum
+
+    def has_face_cum(self):
+        return any(x.name == face_cum.name for x in self.accessories)
+
+    Outfit.has_face_cum = has_face_cum
+
+    def has_ass_cum(self):
+        return any(x.name == ass_cum.name for x in self.accessories)
+
+    Outfit.has_ass_cum = has_ass_cum
+
+    def has_creampie_cum(self):
+        return any(x.name == creampie_cum.name for x in self.accessories)
+
+    Outfit.has_creampie_cum = has_creampie_cum
+
+
+    def remove_all_collars(self):
+        for proper_name in ["Collar_Breed", "Collar_Cum_Slut", "Collar_Fuck_Doll"]:
+            found = find_in_list(lambda x: x.proper_name == proper_name, self.accessories)
+            if found:
+                self.accessories.remove(found)
+        return
+
+    Outfit.remove_all_collars = remove_all_collars
 
     def get_overwear_slut_score_enhanced(self): #Calculates the sluttiness of this outfit assuming it's an overwear set. That means we assume a modest underwear set is used (ie. one that denies access).
         new_score = 0
@@ -87,6 +126,14 @@ init -1 python:
 
 # initialize this part after wardrobe builder is initialized
 init 6 python:
+    def tits_available_enhanced(self):
+        for cloth in self.upper_body:
+            if cloth.anchor_below and not cloth in [cincher, heart_pasties]:
+                return False
+        return True
+
+    Outfit.tits_available = tits_available_enhanced
+
     def get_total_slut_modifiers_enhanced(self):
         def clothing_in_preferences(topic, clothing):
             for layer in WardrobeBuilder.preferences[topic].keys():
@@ -113,9 +160,9 @@ init 6 python:
                 new_score += 5 # small extra modifier
             if cloth in [summer_dress, virgin_killer, evening_dress]:
                 new_score += 10 # sexy modifier
-            if cloth in [two_part_dress, thin_dress, nightgown_dress, thigh_high_boots, leotard]:
+            if cloth in [two_part_dress, thin_dress, nightgown_dress, thigh_high_boots, micro_skirt]:
                 new_score += 15 # extremely slutty clothing (applies extra modifier)
-            if cloth in [lacy_one_piece_underwear, lingerie_one_piece]:
+            if cloth in [lacy_one_piece_underwear, lingerie_one_piece, leotard]:
                 if not any(x for x in self.upper_body if x.layer == 2):
                     new_score += 10 # upper part not covered
                 if not any(x for x in self.lower_body if x.layer == 2):

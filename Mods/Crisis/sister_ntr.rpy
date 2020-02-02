@@ -11,10 +11,6 @@ init 3 python:
                     return True
         return False
 
-    def sister_ntr_mod_init(self):
-        self.enabled = False
-        return        
-
     def select_position(the_person):
         positions = ["bj"]
         if the_person.outfit.vagina_available():
@@ -26,7 +22,7 @@ init 3 python:
 
     sister_ntr_mod_action = ActionMod("Sister NTR",sister_ntr_crisis_requirement,"sister_ntr_crisis_action_label", 
         menu_tooltip = "At night you hear strange sounds out of [lily.possessive_title]'s bedroom", category = "NTR",
-        initialization = sister_ntr_mod_init,
+        initialization = init_action_mod_disabled,
         is_crisis = True, crisis_weight = sister_ntr_mod_weight)
 
 label sister_ntr_crisis_action_label:
@@ -931,7 +927,8 @@ label sister_ntr_crisis_action_label:
                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
 
     $ the_person.reset_arousal()
-    $ the_person.review_outfit(show_review_message = False) #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
     $ mc.location.show_background()
     $ renpy.scene("Active")
+    $ del finishes
     return

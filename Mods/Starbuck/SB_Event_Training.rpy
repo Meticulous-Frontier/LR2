@@ -43,6 +43,7 @@ label SB_one_on_one_label():
                 if person.int > 1:
                     training_eligible.append(person)
         the_person = get_random_from_list(training_eligible)
+        del training_eligible
 
     if the_person is None:
         # "No one eligible for training!"
@@ -89,7 +90,7 @@ label SB_one_on_one_label():
             #show screen float_up_screen(["+[change_amount] Researching Skill"],["float_text_grey"])
 
         "Train Production" if the_person.production_skill < mc.production_skill:
-            "You share some insights withh [the_person.possessive_title] about the chemical processes and reactions between common serum elements."
+            "You share some insights with [the_person.possessive_title] about the chemical processes and reactions between common serum elements."
             $ change_amount = renpy.random.randint(1,(mc.production_skill - the_person.production_skill))
             $ the_person.production_skill += change_amount
             $ mc.log_event(the_person.title + ": +[change_amount] Production skill", "float_text_grey")

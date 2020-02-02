@@ -38,13 +38,13 @@ init 5 python:
 
         return
 
-    real_dress_list = [x for x in dress_list if x not in [bath_robe, leotard, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, apron]]
+    real_dress_list = [x for x in dress_list if x not in [bath_robe, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, apron]]
 
     class WardrobeBuilder():
         preferences = {}
         preferences["skimpy outfits"] = {}
         preferences["skimpy outfits"]["upper_body"] = [two_part_dress, thin_dress, leotard, lace_sweater, belted_top, lace_crop_top, tanktop, tube_top, business_vest]
-        preferences["skimpy outfits"]["lower_body"] = [booty_shorts, jean_hotpants, daisy_dukes, belted_skirt, mini_skirt]
+        preferences["skimpy outfits"]["lower_body"] = [booty_shorts, jean_hotpants, daisy_dukes, belted_skirt, mini_skirt, micro_skirt]
         preferences['skimpy outfits']["feet"] = [thigh_highs, fishnets, garter_with_fishnets, pumps, heels, high_heels, thigh_high_boots]
         preferences["skimpy outfits"]["accessories"] = [lace_choker, wide_choker, spiked_choker]
         preferences["conservative outfits"] = {}
@@ -59,10 +59,10 @@ init 5 python:
         preferences["pants"] = {}
         preferences["pants"]["lower_body"] = pants_list
         preferences["showing her tits"] = {}
-        preferences["showing her tits"]["upper_body"] = [strapless_bra, lace_bra, strappy_bra, thin_dress, two_part_dress, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, lace_sweater, sweater, belted_top, tube_top, business_vest, suit_jacket, vest]
+        preferences["showing her tits"]["upper_body"] = [strapless_bra, lace_bra, strappy_bra, quarter_cup_bustier, cincher, heart_pasties, thin_dress, two_part_dress, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, lace_sweater, sweater, belted_top, tube_top, business_vest, suit_jacket, vest]
         preferences["showing her ass"] = {}
         preferences["showing her ass"]["upper_body"] = [two_part_dress, thin_dress, summer_dress, virgin_killer, leotard, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear]
-        preferences["showing her ass"]["lower_body"] = [cute_panties, lace_panties, cute_lace_panties, tiny_lace_panties, thong, tiny_g_string, string_panties, strappy_panties, leggings, booty_shorts, jean_hotpants, daisy_dukes]
+        preferences["showing her ass"]["lower_body"] = [cute_panties, lace_panties, cute_lace_panties, tiny_lace_panties, thong, tiny_g_string, string_panties, strappy_panties, crotchless_panties, leggings, booty_shorts, jean_hotpants, daisy_dukes, micro_skirt]
         preferences["high heels"] = {}
         preferences["high heels"]["feet"] = [sandle_heels, pumps, heels, high_heels, boot_heels, thigh_high_boots]
         preferences["boots"] = {}
@@ -70,7 +70,7 @@ init 5 python:
         preferences["makeup"] = {}
         preferences["makeup"]["accessories"] = [light_eye_shadow, heavy_eye_shadow, blush, lipstick]
         preferences['lingerie'] = {}
-        preferences['lingerie']["upper_body"] = [lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, strapless_bra, lace_bra, thin_bra, strappy_bra, corset]
+        preferences['lingerie']["upper_body"] = [lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, strapless_bra, lace_bra, thin_bra, strappy_bra, cincher, corset, heart_pasties]
         preferences['lingerie']["lower_body"] = [lace_panties, cute_lace_panties, tiny_lace_panties, thin_panties, thong, tiny_g_string, string_panties, strappy_panties]
         preferences['lingerie']["feet"] = [thigh_highs, fishnets, garter_with_fishnets]
         preferences['lingerie']['accessories'] = [lace_choker, wide_choker]
@@ -78,9 +78,12 @@ init 5 python:
         matching_underwear = {}
         matching_underwear["Bralette"] = [boy_shorts, cute_lace_panties, tiny_lace_panties, thong, tiny_g_string]
         matching_underwear["Sports_Bra"] = [cotton_panties, panties, lace_panties]
-        matching_underwear["Lace_Bra"] = [cute_lace_panties, lace_panties, tiny_lace_panties, thong, tiny_g_string]
+        matching_underwear["Lace_Bra"] = [cute_lace_panties, lace_panties, tiny_lace_panties, thong, tiny_g_string, crotchless_panties]
         matching_underwear["Strappy_Bra"] = [strappy_panties]
-        matching_underwear["Corset"] = [panties, thin_panties, thong, tiny_lace_panties, tiny_g_string, string_panties]
+        matching_underwear["Corset"] = [panties, thin_panties, thong, tiny_lace_panties, tiny_g_string, string_panties, crotchless_panties]
+
+        clashing_overwear = {}
+        clashing_overwear[""] = []
 
         color_prefs = {}
         color_prefs["the colour blue"] = {}
@@ -118,6 +121,7 @@ init 5 python:
         #color_prefs[""][""] = [, , , ]
 
         earings_only_list = [chandelier_earings, gold_earings, modern_glasses]
+        neckwear_without_collars = [x for x in neckwear_list if x.proper_name not in ["Collar_Breed", "Collar_Cum_Slut", "Collar_Fuck_Doll"]]
 
         def __init__(self, person):
             if person and isinstance(person, Person):
@@ -204,7 +208,7 @@ init 5 python:
                     outfit.add_upper(item.get_copy(), color_lower)
 
             # find lowerbody item
-            if item is None or not item.has_extension:
+            if item is None or (not item.has_extension or item is leotard):
                 item = self.get_item_from_list("lower_body", self.build_filter_list(pants_list + skirts_list, points), points, ["not wearing anything"])
                 if item:
                     outfit.add_lower(item.get_copy(), [color_lower[0] * .9, color_lower[1] * .9, color_lower[2] * .9, color_lower[3]])
@@ -215,10 +219,10 @@ init 5 python:
             if item:
                 outfit.add_feet(item.get_copy(), [color_feet[0] * .8, color_feet[1] * .8, color_feet[2] * .8, color_feet[3]])
 
-            self.add_accessory_from_list(outfit, self.build_filter_list(self.earings_only_list, points), 3, color_lower)
-            self.add_accessory_from_list(outfit, self.build_filter_list(rings_list, points), 3, color_lower)
-            self.add_accessory_from_list(outfit, self.build_filter_list(bracelet_list, points), 3, color_upper)
-            self.add_accessory_from_list(outfit, self.build_filter_list(neckwear_list, points), 3, color_upper)
+            self.add_accessory_from_list(outfit, self.build_filter_list(self.earings_only_list, points, self.person.base_outfit.accessories), 3, color_lower)
+            self.add_accessory_from_list(outfit, self.build_filter_list(rings_list, points, self.person.base_outfit.accessories), 3, color_lower)
+            self.add_accessory_from_list(outfit, self.build_filter_list(bracelet_list, points, self.person.base_outfit.accessories), 3, color_upper)
+            self.add_accessory_from_list(outfit, self.build_filter_list(self.neckwear_without_collars, points, self.person.base_outfit.accessories), 3, color_upper)
 
             outfit.build_outfit_name()
 
@@ -268,10 +272,10 @@ init 5 python:
             return outfit
 
 
-        def build_filter_list(self, item_list, points, min_points = 0):
+        def build_filter_list(self, item_list, points, min_points = 0, filter_list = []):
             items = []
             while len(items) == 0 and points < 15:  # make sure we got some items to choose from
-                items = list(filter(lambda x: x.slut_value >= min_points and x.slut_value <= points, item_list))
+                items = list(filter(lambda x: x.slut_value >= min_points and x.slut_value <= points and x not in filter_list, item_list))
                 points += 1
 
             return list(filter(lambda x: x.slut_value <= points, item_list))
@@ -323,7 +327,8 @@ init 5 python:
 
             item = get_random_from_weighted_list(weighted_list)
 
-            if item and hasattr(item, "supported_patterns") and item.supported_patterns and renpy.random.randint(0, 1) == 1:
+            # force pattern for certain items, others random 50/50
+            if item and hasattr(item, "supported_patterns") and item.supported_patterns and (renpy.random.randint(0, 1) == 1 or item in [apron, breed_collar, cum_slut_collar, fuck_doll_collar]):
                 key_value = get_random_from_list(list(item.supported_patterns.keys()))
                 item.pattern = item.supported_patterns[key_value]
                 item.colour_pattern = self.get_color()
