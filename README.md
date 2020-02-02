@@ -3,13 +3,19 @@
 This mod collection extends the base game with a range of new features and enhancements to make the game more enjoyable and configurable to your own preferences.
 
 ## New Features:
-* Adds over 14 new crisis events with new dialogs and situations.
+* Adds over 15 new crisis events with new dialogs and situations.
 * The sex shop owner with a complete storyline
+* Two smaller story lines for college athletes and wife in a bar
 * Adds over 8 new sex positions with dialogs
+* Adds 4 threesome positions (triggered in various situations)
+* Enhances 3 existing sex positions with new dialogs
+* Outfit generator built into the outfit creator (use mannequin selector for wardrobe edit)
 * A hair salon with options to change hair styles and colours.
 * Some extra actions in the gym studio.
 * A large collection of new serums to influence characters in the game.
 * Extra personalities and random character enhancements with dialogs and story lines.
+* Dungeon where you can convert a girl into a slave and collar her (with extra actions for a slave)
+* Machinery room to boost your production lines
 * Purchasable new rooms with extra functions
 
 ## Enhancements:
@@ -18,11 +24,14 @@ This mod collection extends the base game with a range of new features and enhan
 * Enhanced main map for faster navigation
 * Enhanced interview UI
 * Enhanced end of day dialog
+* Enhanced person details UI
+* Enhanced UI for setting daily serum dosages
 * Multiple characters on screen (in some dialogs)
 
 ## Cheat Mod:
 * Trollden Cheat Mod (press 'z' in game)
-* Opinion Editor (press 'p' while talking to someone)
+* Cheat Mod new version ('x' key or 'cheats' in bottom action menu)
+* Opinion Editor (press 'p' while talking to someone or 'opinions' in bottom action menu)
 
 ## Authors:
 * Trollden
