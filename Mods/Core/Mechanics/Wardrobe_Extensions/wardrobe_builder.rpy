@@ -9,7 +9,7 @@ init 5 python:
     # make business vest layer 2
     shirts_list.remove(business_vest)
     business_vest = Clothing("Business Vest", 2, True, True, "Tight_Vest", True, False, 2, opacity_adjustment = 1.3)
-    shirts_list.append(business_vest)    
+    shirts_list.append(business_vest)
 
     # generate a more useable default color palette
     if len(persistent.colour_palette) == 10:
@@ -127,7 +127,7 @@ init 5 python:
             if person and isinstance(person, Person):
                 self.person = person
             else:
-                self.person = create_random_person("Ema","Hesire", 23, "thin_body", "B", 0.91)
+                self.person = create_random_person(name ="Ema", last_name = "Hesire", age = 23, body_type = "thin_body", tits = "B", height = 0.91)
                 self.person.opinions.clear() # reset opinions so every item has an equal chance
                 self.person.sexy_opinions.clear()
 
@@ -151,11 +151,11 @@ init 5 python:
             for item in underwear.upper_body:
                 if overwear.can_add_upper(item):
                     overwear.add_upper(item)
-            
+
             for item in underwear.lower_body:
                 if overwear.can_add_lower(item):
                     overwear.add_lower(item)
-            
+
             for item in underwear.feet:
                 if overwear.can_add_feet(item):
                     overwear.add_feet(item)
@@ -232,7 +232,7 @@ init 5 python:
             outfit = Outfit("Underwear")
 
             color_upper, color_lower, color_feet = self.get_main_color_scheme()
-            
+
             # find upper body item
             item = self.get_item_from_list("upper_body", self.build_filter_list(bra_list + [lingerie_one_piece, lacy_one_piece_underwear, bodysuit_underwear], points), points, ["showing her tits", "not wearing underwear"])
             if item:
@@ -246,7 +246,7 @@ init 5 python:
                     item = self.get_item_from_list("lower_body", self.build_filter_list(panties_list, points), points, ["showing her ass", "not wearing underwear"])
                 if item:
                     outfit.add_lower(item.get_copy(), color_lower)
-            
+
             if renpy.random.randint(0, 3 if points >= 5 else 1) == 0:
                 if points >= 5:
                     item = self.get_item_from_list("feet", self.build_filter_list([x for x in socks_list if x not in [short_socks, medium_socks]], points))
@@ -254,7 +254,7 @@ init 5 python:
                     item = self.get_item_from_list("feet", self.build_filter_list(socks_list, points))
                 if item:
                     outfit.add_feet(item.get_copy(), color_feet)
-            
+
             make_up_score = self.person.get_opinion_score("makeup")
             if make_up_score > 0 or (make_up_score == 0 and renpy.random.randint(0, 4) == 0):
                 make_up_score += renpy.random.randint(1, 2)
@@ -279,7 +279,7 @@ init 5 python:
                 points += 1
 
             return list(filter(lambda x: x.slut_value <= points, item_list))
-        
+
         def add_accessory_from_list(self, outfit, filtered_list, chance, item_color = [.8, .1, .1, .95]):
             if renpy.random.randint(0, chance) == 0:
                 item = get_random_from_list(filtered_list)
@@ -290,7 +290,7 @@ init 5 python:
         def get_main_color_scheme(self):
             primary_color = self.get_color()
             alternate_color = self.get_color()
-            
+
             col_choice = renpy.random.randint(0, 50)
             if col_choice < 10:
                 color_upper = primary_color
@@ -316,7 +316,7 @@ init 5 python:
                         item_list = [x for x in weighted_list if x[0] not in self.preferences[pref][item_group]]
                         if item_list: # check if we have any items left, if not use original weighted list
                             weighted_list = item_list
-            
+
             if points > 4:  # we want high sluttiness so add chance for not wearing an item based on opinion
                 for opinion in empty_item_opinions:
                     score = self.person.get_opinion_score(opinion)
@@ -344,7 +344,7 @@ init 5 python:
                 for name in self.preferences[pref]:
                     if name == item_group:
                         for item in self.preferences[pref][name]:
-                            if item in filtered_list:                      
+                            if item in filtered_list:
                                 [x for x in item_list if item in x][0][1] += (score + 2) * 10
 
             return [x for x in item_list if x[1] > 0]
