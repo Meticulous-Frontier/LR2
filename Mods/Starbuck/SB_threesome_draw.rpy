@@ -27,7 +27,7 @@ init 1 python:
         transform_one.zoom = one_scale
 
         one_final_image = person_one.build_person_displayable(one_position, one_emotion, one_special_modifier, False, lighting)            
-        renpy.show(person_one.name,at_list=[transform_one, scale_person(person_one.height)],layer="Active",what=one_final_image,tag=person_one.name)
+        renpy.show(person_one.name,at_list=[transform_one, scale_person2(person_one.height)],layer="Active",what=one_final_image,tag=person_one.name)
 
         #Now do person two
 
@@ -42,7 +42,7 @@ init 1 python:
         transform_two.zoom = two_scale
 
         two_final_image = person_two.build_person_displayable(two_position, two_emotion, two_special_modifier, False, lighting)            
-        renpy.show(person_two.name,at_list=[transform_two, scale_person(person_two.height)],layer="Active",what=two_final_image,tag=person_two.name)
+        renpy.show(person_two.name,at_list=[transform_two, scale_person2(person_two.height)],layer="Active",what=two_final_image,tag=person_two.name)
         return
 
 label SB_threesome_setup_helper(): #This function is designed to help come up with number for threesome positions.

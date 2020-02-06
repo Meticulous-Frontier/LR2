@@ -58,7 +58,7 @@ init -1:
         # Returns True when the persons height has changed; otherwise False
         # chance is probability percentage that height change for amount will occur (used by serums)
         def change_height(self, amount, chance):
-            if amount == 0 or (self.height == .8 and amount < 0) or (self.height == 1 and amount > 0):
+            if amount == 0 or (self.height == .5 and amount < 0) or (self.height == .7 and amount > 0):
                 return False
 
             if renpy.random.randint(0, 100) <= chance:
@@ -66,11 +66,11 @@ init -1:
             else:
                 return False
 
-            if self.height > 1:
-                self.height == 1
+            if self.height > .7:
+                self.height == .7
 
-            if self.height < .8:
-                self.height = .8
+            if self.height < .5:
+                self.height = .5
 
             return True
 
@@ -89,10 +89,10 @@ init -1:
                 self.weight += amount
 
             # maximum and minimum weight are dependant on height
-            max_weight = self.height * 100
-            min_weight = self.height * 50
-            switch_point_low = self.height * 68
-            switch_point_high = self.height * 83
+            max_weight = (self.height + .3) * 100
+            min_weight = (self.height + .3) * 50
+            switch_point_low = (self.height + .3) * 68
+            switch_point_high = (self.height + .3) * 83
 
             if (amount > 0):
                 if self.weight > switch_point_low + 3 and self.body_type == "thin_body":
@@ -216,10 +216,10 @@ init -1:
 
             if renpy.random.randint(0,100) < 60: #Have heights that roughly match (but o
                 height = self.height * (renpy.random.randint(95,105)/100.0)
-                if height > 1.0:
-                    height = 1.0
-                elif height < 0.8:
-                    height = 0.8
+                if height > 0.7:
+                    height = 0.7
+                elif height < 0.5:
+                    height = 0.5
             else:
                 height = None
 
@@ -608,10 +608,11 @@ init -1:
 
             if the_animation:
                 final_image = self.build_person_animation(the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength)
+                renpy.show(self.name + self.last_name + "_anim",at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=self.name + self.last_name +"_anim")
             else:
                 final_image = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill)
+                renpy.show(self.name + self.last_name + "_anim",at_list=[character_placement, scale_person2(self.height)],layer="Active",what=final_image,tag=self.name + self.last_name +"_anim")
 
-            renpy.show(self.name + self.last_name + "_anim",at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=self.name + self.last_name +"_anim")
 
         # replace the default draw_person function of the person class
         Person.draw_person = draw_person_enhanced
@@ -650,11 +651,13 @@ init -1:
 
             if the_animation:
                 top_displayable = self.build_person_animation(the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength)
+
+                renpy.show(self.name+self.last_name+"_new", at_list=[character_placement, scale_person(self.height)], layer = "Active", what = top_displayable, tag = self.name + self.last_name +"_new")
+                renpy.show(self.name+self.last_name+"_old", at_list=[character_placement, scale_person(self.height), clothing_fade], layer = "Active", what = bottom_displayable, tag = self.name + self.last_name +"_old")
             else:
                 top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
-
-            renpy.show(self.name+self.last_name+"_new", at_list=[character_placement, scale_person(self.height)], layer = "Active", what = top_displayable, tag = self.name + self.last_name +"_new")
-            renpy.show(self.name+self.last_name+"_old", at_list=[character_placement, scale_person(self.height), clothing_fade], layer = "Active", what = bottom_displayable, tag = self.name + self.last_name +"_old")
+                renpy.show(self.name+self.last_name+"_new", at_list=[character_placement, scale_person2(self.height)], layer = "Active", what = top_displayable, tag = self.name + self.last_name +"_new")
+                renpy.show(self.name+self.last_name+"_old", at_list=[character_placement, scale_person2(self.height), clothing_fade], layer = "Active", what = bottom_displayable, tag = self.name + self.last_name +"_old")
 
         Person.draw_animated_removal = draw_animated_removal_enhanced
 
@@ -666,11 +669,11 @@ init -1:
         def check_person_weight_attribute(person):
             if not hasattr(person, "weight"):
                 if (person.body_type == "thin_body"):
-                    setattr(person, "weight", 60 * person.height)   # default weight thin body
+                    setattr(person, "weight", 60 * (person.height + .3))   # default weight thin body
                 elif (person.body_type == "standard_body"):
-                    setattr(person, "weight", 75 * person.height)   # default weight standard body
+                    setattr(person, "weight", 75 * (person.height + .3))   # default weight standard body
                 else:
-                    setattr(person, "weight", 90 * person.height)   # default weight curvy body
+                    setattr(person, "weight", 90 * (person.height + .3))   # default weight curvy body
             return
 
         # calculates current player mental powers
@@ -698,3 +701,7 @@ init -1:
             message += " Willpower"
             mc.log_event(message, "float_text_blue")
             return
+
+# special scale transform for when animations are disabled
+transform scale_person2(scale_factor = 1):
+    zoom (scale_factor + .2)
