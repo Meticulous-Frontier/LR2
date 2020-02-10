@@ -2,7 +2,7 @@
 #At first, you may only over hear conversations. Then girls talking about sexual fantasies, then gloryhole options.
 
 init -1 python:
-    unisex_restroom_mod_weight = 20
+    unisex_restroom_mod_weight = 8
 
 init 1301 python:
 
