@@ -137,48 +137,48 @@ init -2 python:
 ##########################################
 init -1:
     transform character_right_flipped():
-        yalign 1.0
-        yanchor 1.0
+        yalign 0.5
+        yanchor 0.5
         xalign 1.0
         xanchor 1.0
         xzoom -1
 
     transform character_center():
-        yalign 1.0
-        yanchor 1.0
+        yalign 0.5
+        yanchor 0.5
         xalign 0.75
         xanchor 1.0
 
     transform character_center_flipped():
-        yalign 1.0
-        yanchor 1.0
+        yalign 0.5
+        yanchor 0.5
         xalign 0.75
         xanchor 1.0
         xzoom -1
 
     transform character_left():
-        yalign 1.0
-        yanchor 1.0
+        yalign 0.5
+        yanchor 0.5
         xalign 0.5
         xanchor 1.0
 
     transform character_left_flipped():
-        yalign 1.0
-        yanchor 1.0
+        yalign 0.5
+        yanchor 0.5
         xalign 0.5
         xanchor 1.0
         xzoom -1
 
     transform character_69_bottom():
-        yalign 1.0
-        yanchor 1.0
+        yalign 0.62
+        yanchor 0.5
         xalign 1.0
         xanchor 0.95
         zoom 0.8
 
     transform character_69_on_top():
-        yalign 0.7
-        yanchor 1.0
+        yalign 0.38
+        yanchor 0.5
         xalign 1.0
         xanchor 1.02
         zoom 0.75
