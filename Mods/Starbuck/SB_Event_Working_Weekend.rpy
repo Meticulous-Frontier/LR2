@@ -19,39 +19,42 @@ init 2 python:
                     return True
         return False
 
+    def person_opinion_to_string(person, topic):
+        score = person.get_opinion_score(topic)
+        if score <= -2:
+            return (score, "actually hate")
+        if score == -1:
+            return (score, "don't like")
+        if score == 0:
+            return (score, "have no opinion about")
+        if score == 1:
+            return (score, "like")
+        if score >= 2:
+            return (score, "actually love")
+
+    def get_topic_text(topic):
+        if topic == "getting head":
+            return "when guys lick my pussy"
+        if topic == "creampies":
+            return "when guys cum inside me"
+        if topic == "being covered in cum":
+            return "when guys cum all over me"
+        if topic == "cum facials":
+            return "when guys cum all over my face"
+        if topic == "drinking cum":
+            return "swallowing cum"
+        if topic == "bareback sex":
+            return "having sex without a condom."
+        if topic == "showing her tits":
+            return "showing my tits"
+        if topic == "showing her ass":
+            return "showing my ass"
+        if topic == "lingerie":
+            return "wearing lingerie"
+        return topic
+
     def display_topic_opinions(person, topics):
-        def person_opinion_to_string(person, topic):
-            score = person.get_opinion_score(topic)
-            if score <= -2:
-                return (score, "actually hate")
-            if score == -1:
-                return (score, "don't like")
-            if score == 0:
-                return (score, "have no opinion about")
-            if score == 1:
-                return (score, "like")
-            if score >= 2:
-                return (score, "actually love")
-        def get_topic_text(topic):
-            if topic == "getting head":
-                return "when guys lick my pussy"
-            if topic == "creampies":
-                return "when guys cum inside me"
-            if topic == "being covered in cum":
-                return "when guys cum all over me"
-            if topic == "cum facials":
-                return "when guys cum all over my face"
-            if topic == "drinking cum":
-                return "swallowing cum"
-            if topic == "bareback sex":
-                return "having sex without a condom."
-            if topic == "showing her tits":
-                return "showing my tits"
-            if topic == "showing her ass":
-                return "showing my ass"
-            if topic == "lingerie":
-                return "wearing lingerie"
-            return topic
+
 
         counter = 0
         for topic in topics:
