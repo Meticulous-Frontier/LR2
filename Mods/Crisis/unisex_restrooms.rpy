@@ -145,7 +145,8 @@ label unisex_restroom_door_greet_label():   #You have a chance to learn a couple
     $ the_person_one = get_random_from_list(emp_list)
     $ emp_list.remove(the_person_one)
     $ the_person_two = get_random_from_list(emp_list)
-    "During the workday, you get up and head toward's the restroom."
+    $ del emp_list
+    "During the workday, you get up and head towards the restroom."
     $ scene_manager = Scene()
     $ scene_manager.add_actor(the_person_one, character_placement = character_center_flipped)
     $ scene_manager.add_actor(the_person_two)
@@ -170,8 +171,8 @@ label unisex_restroom_door_greet_label():   #You have a chance to learn a couple
         "Wow, you can learn all kinds of stuff just hanging out in the bathroom stall, or so it seems..."
     "The girls are still talking but you hear the bathroom door open. Their voices fade away as they exit."
 
+    $ town_relationships.improve_relationship(the_person_one, the_person_two)
     $ del overhear_topic
-    $ del emp_list
     return
 
 label unisex_restroom_sexy_overhear_label():
@@ -179,6 +180,7 @@ label unisex_restroom_sexy_overhear_label():
     $ the_person_one = get_random_from_list(emp_list)
     $ emp_list.remove(the_person_one)
     $ the_person_two = get_random_from_list(emp_list)
+    $ del emp_list
     $ discover_identity = False
     $ anon_char_one = get_anon_person(the_person_one)
     #$ anon_char_one.name = "?????"
@@ -237,12 +239,11 @@ label unisex_restroom_sexy_overhear_label():
                 "Don't snoop":
                     "You decide for now not to do that. It just feels creepy, trying to figure out who was talking by looking at security footage..."
 
-
+    $ town_relationships.improve_relationship(the_person_one, the_person_two)
     $ del the_person_one
     $ del the_person_two
     $ del anon_char_one
     $ del anon_char_two
-
     return
 
 label unisex_restroom_fantasy_overhear_label():
@@ -250,8 +251,8 @@ label unisex_restroom_fantasy_overhear_label():
     $ the_person_one = get_random_from_list(emp_list)
     $ emp_list.remove(the_person_one)
     $ the_person_two = get_random_from_list(emp_list)
+    $ del emp_list
     if the_person_one.sluttiness < 30: #She's not slutty enough for this.
-        $ del emp_list
         call unisex_restroom_sexy_overhear_label() from unisex_restroom_fantasy_redirect_1
         return
     $ discover_identity = False
@@ -314,6 +315,7 @@ label unisex_restroom_fantasy_overhear_label():
                 "Don't snoop":
                     "You decide for now not to do that. It just feels creepy, trying to figure out who was talking by looking at security footage..."
 
+    $ town_relationships.improve_relationship(the_person_one, the_person_two)
     if discover_identity:
         $ the_person_one.on_talk_event_list.append(unisex_restroom_fantasy_actout)
     $ del the_person_one
@@ -479,7 +481,7 @@ label unisex_restroom_gloryhole_vaginal_label(the_person):
     "It's so hot, not knowing for sure who is on the other side of the wall. You have some guesses, based on her voice, but there's no way to know for sure."
     "You're giving whoever it is good hard thrusts now. Once in a while you thrust a little too hard and your hips ram into the stall wall."
     "The mystery cunt you are fucking feels like its getting wetter and wetter. The slippery channel feels so good wrapped around you."
-    #TODO determine if she finsihes or not. For now she always finishes with MC.
+    #TODO determine if she finishes or not. For now she always finishes with MC.
     "Moaning and panting coming from the other stall is getting urgent now. She must be enjoying this as much as your are!"
     anon_char "Oh god don't stop, please don't stop!"
     "Ha! Stopping was never even an option. You can feel her cunt starting to quiver and twitch. It feels TOO good!"
@@ -507,7 +509,7 @@ label unisex_restroom_gloryhole_anal_label(the_person):
     "You start to thrust a little bit, testing the limits on how far to pull back without pulling out."
     anon_char "Oh fuck its good. Mmmmm"
     "One of your employees is on the other side of that wall, taking your cock in her ass. But who? You have some guesses, based on her voice, but there's no way to know for sure."
-    "You are thrusting vigourosly now. Her ass is so tight, it's like it it is trying to milk the cum out of you."
+    "You are thrusting vigorously now. Her ass is so tight, it's like it it is trying to milk the cum out of you."
     "Moaning and panting coming from the other stall is getting urgent now. She must be enjoying this as much as your are!"
     anon_char "Oh god don't stop, please don't stop!"
     "You feel yourself getting ready to nut. The urge to bury your cum deep in whoever this girl is ass is too strong."
