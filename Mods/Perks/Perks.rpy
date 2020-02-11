@@ -78,7 +78,16 @@ init -1 python:
             return None
 
         def add_ability_perk(self, perk, perk_name):
-            if not self.has_ability_perk(perk_name):
+            if self.has_ability_perk(perk_name):
+                if not perk.bonus_is_temp:
+                    return
+
+                comp_perk = self.get_ability_perk(perk_name)
+                if comp_perk.duration < perk.duration:
+                    comp_perk.duration = perk.duration
+                if comp_perk.start_day < perk.start_day:
+                    comp_perk.start_day = perk.start_day    
+            else:
                 self.ability_perks[perk_name] = perk
 
         def has_ability_perk(self, perk_name):  #Only checks if the ability is available at all
