@@ -392,7 +392,7 @@ label starbuck_foreplay_skillup_label(the_person):
     menu:
         "Purchase ($100)":
             $ mc.business.funds += -100
-            $ SB_temp_foreplay_perk = Stat_Perk(description = "Small, finger mounted vibrator. Lasts one week.", foreplay_bonus = 2, bonus_is_temp =True, duration = 7)
+            $ SB_temp_foreplay_perk = Stat_Perk(description = "Small, finger mounted vibrator. Increases foreplay skill. Lasts one week.", foreplay_bonus = 2, bonus_is_temp =True, duration = 7)
             $ perk_system.add_stat_perk(SB_temp_foreplay_perk, "Small Finger Vibrator")
             the_person.char "Oh! I'll ring this right up. You won't regret it, [the_person.mc_title]!"
             if the_person.sluttiness > 30:
