@@ -355,7 +355,7 @@ label unisex_restroom_fantasy_actout_label(the_person):
     "Without saying a word, you push yourself into her slick fuckhole. It feels amazing."
     call fuck_person(the_person, start_position = SB_doggy_standing, start_object = mc.location.get_object_with_name("desk"), skip_intro = True, private = False, position_locked = True) from _call_fantasy_actout_1
     $ the_report = _return
-    if the_report.get("girl orgasms") > 0:
+    if the_report.get("girl orgasms", 0) > 0:
         the_person.char "Oh god, it was even better than I thought... oh my god."
         $ update_opinion(the_person, "public sex")
         $ the_person.change_happiness(10)
