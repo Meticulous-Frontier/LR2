@@ -55,22 +55,21 @@ init 2 python:
             gloryhole_list.append("Refuse")
         else:
             gloryhole_list.append("Handjob")
+            # actions based on sluttiness
             if the_person.sluttiness > 35:
-                if SB_check_fetish(the_person, cum_internal_role) or SB_check_fetish(the_person, cum_external_role):
-                    gloryhole_list.append("Blowjob")
-                else:
-                    gloryhole_list.append("Blowjob")
-            if the_person.sluttiness > 50:
-                if SB_check_fetish(the_person, vaginal_fetish_role):
-                    gloryhole_list.append("Vaginal")
-                else:
-                    gloryhole_list.append("Vaginal")
-            if the_person.sluttiness > 57:
-                if SB_check_fetish(the_person, anal_fetish_role):
-                    gloryhole_list.append("Anal")
-                else:
-                    gloryhole_list.append("Anal")
-        renpy.say("","Renpy pause here and check var")
+                gloryhole_list.append("Blowjob")
+            if the_person.sluttiness > 60:
+                gloryhole_list.append("Vaginal")
+            if the_person.sluttiness > 85:
+                gloryhole_list.append("Anal")
+
+        # actions based on fetishes (will always be added regardless of sluttiness)
+        if SB_check_fetish(the_person, cum_internal_role) or SB_check_fetish(the_person, cum_external_role):
+            gloryhole_list.append("Blowjob")
+        if SB_check_fetish(the_person, vaginal_fetish_role):
+            gloryhole_list.append("Vaginal")
+        if SB_check_fetish(the_person, anal_fetish_role):
+            gloryhole_list.append("Anal")
 
         return get_random_from_list(gloryhole_list)
 
@@ -270,7 +269,7 @@ label unisex_restroom_fantasy_overhear_label():
         anon_char_one "Well, you know I've always had this fantasy of have sex like... out in front of other people..."
     "Damn! you like where this conversation is going. You focus and try and figure out who is talking, but it is hard to focus, considering they are talking about sex with you!"
     if renpy.random.randint(0,100) < (25 + (mc.focus * 15)):  #base 25% chance, +15% for every point of focus.
-        "As they talk, you pick up on sublte voice inflections and personality. It's [the_person_one.title] and [the_person_two.title]!"
+        "As they talk, you pick up on subtle voice inflections and personality. It's [the_person_one.title] and [the_person_two.title]!"
         $ discover_identity = True
     else:
         "You try, but the identity of the girls eludes you for now."
@@ -279,7 +278,7 @@ label unisex_restroom_fantasy_overhear_label():
         the_person_one.char "I was just at my desk, getting work done, when suddenly my hands were cuffed my desk!"
         the_person_one.char "At first, I got really scared, but then I felt [the_person_one.mc_title]'s strong hands on my hips and he whispers in my ear, 'shh just hold still'."
         the_person_two.char "Damn that's hot..."
-        the_person_one.char "I know right? I felt my skirt lifting up and my panties getting pulled down. I could't move, I just let him do it!"
+        the_person_one.char "I know right? I felt my skirt lifting up and my panties getting pulled down. I couldn't move, I just let him do it!"
         "Wow! Maybe you should pay her a visit later, and act out this fantasy of hers."
         the_person_one.char "When he started fucking me I looked around saw the other girls pointing at me, trying not to watch. It was so hot!"
         the_person_two.char "God, you gotta calm down, now you're getting me worked up!"
@@ -290,7 +289,7 @@ label unisex_restroom_fantasy_overhear_label():
         anon_char_one "I was just at my desk, getting work done, when suddenly my hands were cuffed my desk!"
         anon_char_one "At first, I got really scared, but then I felt [the_person_one.mc_title]'s strong hands on my hips and he whispers in my ear, 'shh just hold still'."
         anon_char_two "Damn that's hot..."
-        anon_char_one "I know right? I felt my skirt lifting up and my panties getting pulled down. I could't move, I just let him do it!"
+        anon_char_one "I know right? I felt my skirt lifting up and my panties getting pulled down. I couldn't move, I just let him do it!"
         "Oh god, who is it? You wish you knew who it was so you could act this fantasy out later..."
         anon_char_one "When he started fucking me I looked around saw the other girls pointing at me, trying not to watch. It was so hot!"
         anon_char_two "God, you gotta calm down, now you're getting me worked up!"
@@ -403,7 +402,7 @@ label unisex_restroom_gloryhole_option_label():
 label unisex_restroom_use_gloryhole_label():
     $ the_person = get_random_from_list(mc.business.get_employee_list())
     "As you are waiting, you hear someone enter the restroom and walk into the stall next to yours."
-    "This is crazy. It could be anybody in there! You hear on the other side the toilet flush as the person finishes relieving themself. You take a deep breath, then go for it."
+    "This is crazy. It could be anybody in there! You hear on the other side the toilet flush as the person finishes relieving herself. You take a deep breath, then go for it."
     "You give yourself a couple of strokes to make sure you are good and hard, then stick your cock through the glory hole."
     $ person_response = gloryhole_get_response(the_person)
     if person_response == "Refuse":
@@ -439,6 +438,11 @@ label unisex_restroom_gloryhole_handjob_label(the_person):
     "The hand never stops stroking you as you start to blow your load. Thank god whoever it is knows how to finish the job!"
     "After you finishes, she gives you a few extra strokes, drawing out any remaining cum. You feel a pair of lips lightly kiss the tip."
     "You slowly pull back. You grab some toilet paper and wipe your cock off."
+
+    # the person is happy and a sluttier (don't log as to preserve anonymity)
+    $ the_person.change_slut_temp(1, add_to_log = False)
+    $ the_person.change_happiness(2, add_to_log = False)
+
     $ del anon_char
     return
 
@@ -461,6 +465,10 @@ label unisex_restroom_gloryhole_blowjob_label(the_person):
     anon_char "Oh! Ummmfff.... mmmmmmmm..."
     "She moans in delight as your cream fills her mouth. She eagerly works every last drop from your pulsating prick."
     "You slowly pull back. You grab some toilet paper and wipe your cock off."
+
+    # the person is happy and a sluttier (don't log as to preserve anonymity)
+    $ the_person.change_slut_temp(3, add_to_log = False)
+    $ the_person.change_happiness(3, add_to_log = False)
 
     $ del anon_char
     return
@@ -489,6 +497,11 @@ label unisex_restroom_gloryhole_vaginal_label(the_person):
     anon_char "Yes. Yes! Oh fuck yes!"
     "You cum as deep inside of her as you can manage. You wonder if she is on birth control. Maybe you knocked her up? Who even is it!?!"
     "You pull out. You grab some toilet paper and wipe your cock off."
+
+    # the person is happy and a sluttier (don't log as to preserve anonymity)
+    $ the_person.change_slut_temp(5, add_to_log = False)
+    $ the_person.change_happiness(5, add_to_log = False)
+
     $ del anon_char
     return
 
@@ -517,6 +530,10 @@ label unisex_restroom_gloryhole_anal_label(the_person):
     anon_char "Yes! Fuck my ass! YES!"
     "You cum as deep inside her ass as you can manage. Your cum spurts deep inside her bowel, farther than your cock can penetrate."
     "You pull out. You grab some toilet paper and wipe your cock off."
+
+    # the person is happy and a sluttier (don't log as to preserve anonymity)
+    $ the_person.change_slut_temp(7, add_to_log = False)
+    $ the_person.change_happiness(7, add_to_log = False)
 
     $ del anon_char
     return
