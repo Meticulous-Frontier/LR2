@@ -228,7 +228,7 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object, the_round):
             $ the_girl.cum_in_vagina()
             $ SB_doggy_standing.redraw_scene(the_girl)
             if SB_check_fetish(the_girl, cum_internal_role):
-                "[the_girl.possessive_title]'s body goes rigid as your cum poors into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
+                "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
                 the_girl.char "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
                 "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
             if the_girl.get_opinion_score("bareback sex") > 0:
