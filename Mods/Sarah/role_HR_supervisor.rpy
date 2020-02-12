@@ -1378,7 +1378,7 @@ label HR_director_monday_headhunt_update_label(the_person):
         $ set_HR_director_tag("business_HR_headhunter_progress", 0)
 
     # all updates researched (quick exit)
-    if get_HR_director_tag("headhunter_kids", False) == True:
+    if get_HR_director_tag("headhunter_kids", False) == True and get_HR_director_tag("headhunter_slut", False) == True and get_HR_director_tag("headhunter_focused", False) == True and et_HR_director_tag("headhunter_obedience", False) == True:
         return
 
     the_person.char "Let's see if any recent recruiting policy updates will change how we look for employees."
