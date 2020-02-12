@@ -234,7 +234,7 @@ label starbuck_vaginal_skillup_label(the_person):
     menu:
         "Purchase ($500)":
             $ mc.business.funds += -500
-            $ SB_temp_vaginal_perk = Stat_Perk(description = "Cock ring that increases pleasure during vaginal sex. Lasts one week.", vaginal_bonus = 2, bonus_is_temp =True, duration = 7)
+            $ SB_temp_vaginal_perk = Stat_Perk(description = "Cock ring that increases pleasure during vaginal sex. Lasts one week. +2 Vaginal skill", vaginal_bonus = 2, bonus_is_temp =True, duration = 7)
             $ perk_system.add_stat_perk(SB_temp_vaginal_perk, "Vibrating Cock Ring")
             the_person.char "Oh! I'll ring this right up. You won't regret it, [the_person.mc_title]!"
             if the_person.sluttiness > 70:
@@ -289,7 +289,7 @@ label starbuck_anal_skillup_label(the_person):
     menu:
         "Purchase ($800)":
             $ mc.business.funds += -800
-            $ SB_temp_anal_perk = Stat_Perk(description = "Sensitizing and highly effective anal lubricant. Lasts one week.", anal_bonus = 2, bonus_is_temp =True, duration = 7)
+            $ SB_temp_anal_perk = Stat_Perk(description = "Sensitizing and highly effective anal lubricant. Lasts one week. +2 Anal Skill", anal_bonus = 2, bonus_is_temp =True, duration = 7)
             $ perk_system.add_stat_perk(SB_temp_anal_perk, "Perfect Anal Lube")
             the_person.char "Oh! I'll ring this right up. You won't regret it, [the_person.mc_title]!"
             if the_person.sluttiness > 90:
@@ -340,7 +340,7 @@ label starbuck_oral_skillup_label(the_person):
     menu:
         "Purchase ($250)":
             $ mc.business.funds += -250
-            $ SB_temp_oral_perk = Stat_Perk(description = "Lip balm that feels good when you go down on women. Lasts one week.", oral_bonus = 2, bonus_is_temp =True, duration = 7)
+            $ SB_temp_oral_perk = Stat_Perk(description = "Lip balm that feels good when you go down on women. Lasts one week. +2 Oral Skill", oral_bonus = 2, bonus_is_temp =True, duration = 7)
             $ perk_system.add_stat_perk(SB_temp_oral_perk, "Stimulating Lip Balm")
             the_person.char "Oh! I'll ring this right up. You won't regret it, [the_person.mc_title]!"
             if the_person.sluttiness > 45:
@@ -392,7 +392,7 @@ label starbuck_foreplay_skillup_label(the_person):
     menu:
         "Purchase ($100)":
             $ mc.business.funds += -100
-            $ SB_temp_foreplay_perk = Stat_Perk(description = "Small, finger mounted vibrator. Increases foreplay skill. Lasts one week.", foreplay_bonus = 2, bonus_is_temp =True, duration = 7)
+            $ SB_temp_foreplay_perk = Stat_Perk(description = "Small, finger mounted vibrator. Increases foreplay skill. Lasts one week. +2 Foreplay Skill", foreplay_bonus = 2, bonus_is_temp =True, duration = 7)
             $ perk_system.add_stat_perk(SB_temp_foreplay_perk, "Small Finger Vibrator")
             the_person.char "Oh! I'll ring this right up. You won't regret it, [the_person.mc_title]!"
             if the_person.sluttiness > 30:
@@ -764,7 +764,7 @@ label starbuck_sex_store_promo_one_label(the_person):
                 "Getting [the_person.title] an orgasm makes you feel more confident in your foreplay skills."
             else:
                 "After you finish, [the_person.possessive_title] takes a second, then gets up."
-            $ SB_foreplay_perk = Stat_Perk(description = "Increase foreplay skill after helping Starbuck with her advertisement photos.", foreplay_bonus = 1, bonus_is_temp =False)
+            $ SB_foreplay_perk = Stat_Perk(description = "Increase foreplay skill after helping Starbuck with her advertisement photos. +1 Foreplay Skill", foreplay_bonus = 1, bonus_is_temp =False)
             $ perk_system.add_stat_perk(SB_foreplay_perk, "Starbuck Foreplay Bonus")
             $ starbuck.draw_person(position = "stand2", emotion = "happy")
             the_person.char "Mmm... That was nice. It's been a while since I sucked on a hard cock. It was kinda nice!"
@@ -916,7 +916,7 @@ label starbuck_sex_store_promo_two_label(the_person):
             $ the_person.change_happiness(10)
             $ the_person.change_slut_core(3)
             $ the_person.change_slut_temp(5)
-            $ SB_vaginal_perk = Stat_Perk(description = "Increase vaginal skill after helping Starbuck with her demonstration video.", vaginal_bonus = 1, bonus_is_temp =False)
+            $ SB_vaginal_perk = Stat_Perk(description = "Increase vaginal skill after helping Starbuck with her demonstration video. +1 Vaginal Skill", vaginal_bonus = 1, bonus_is_temp =False)
             $ perk_system.add_stat_perk(SB_vaginal_perk, "Starbuck Vaginal Bonus")
             "Fucking and pleasing an experienced woman like [the_person.title] makes you feel more confident in your vaginal skills."
             "You go back and take a look at the camera. You accidentally left it recording! It has a recording of you and [the_person.possessive_title] fucking!"
@@ -1117,7 +1117,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
     "You grab the camera, and start looking at the footage. The first thing you do is copy it on a thumb drive, for you to enjoy at a later date."
     "You head out to start work on the advertisement video."
-    $ SB_oral_perk = Stat_Perk(description = "Increase oral skill after helping Starbuck demonstrate edible panties.", oral_bonus = 1, bonus_is_temp =False)
+    $ SB_oral_perk = Stat_Perk(description = "Increase oral skill after helping Starbuck demonstrate edible panties. + 1 Oral Skill", oral_bonus = 1, bonus_is_temp =False)
     $ perk_system.add_stat_perk(SB_oral_perk, "Starbuck Oral Bonus")
     "Getting [the_person.title] an orgasm with your tongue gives you more confidence in your oral skills."
     $ mc.location.show_background()
@@ -1277,7 +1277,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     mc.name "Okay, you take it easy for a bit, I'm gonna go work on that advertisement video!"
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] starts to walk away. She is walking a little funny."
-    $ SB_anal_perk = Stat_Perk(description = "Increase anal skill after helping Starbuck demonstrate double penetration with a dildo.", anal_bonus = 1, bonus_is_temp = False)
+    $ SB_anal_perk = Stat_Perk(description = "Increase anal skill after helping Starbuck demonstrate double penetration with a dildo. +1 Anal Skill", anal_bonus = 1, bonus_is_temp = False)
     $ perk_system.add_stat_perk(SB_anal_perk, "Starbuck Anal Bonus")
     "Fucking [the_person.title] anally makes you more confident in your anal skills."
     $ the_person.shop_investment_rate = 5.0
@@ -1394,7 +1394,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     $the_person.draw_person(position = "stand2")
     the_person.char "Okay, its time for me to get to the shop. See you soon [the_person.mc_title]!"
     "You walk her to the door and say goodbye. Wow, you are now the proud owner of a sex swing! And with everything going on with [the_person.possessive_title], you brain is swimming a bit."
-    $ SB_sex_perk = Stat_Perk(description = "Increase sexual skill cap from repeated sexual activity with Starbuck.", sex_cap = 1, bonus_is_temp =False)
+    $ SB_sex_perk = Stat_Perk(description = "Increase sexual skill cap from repeated sexual activity with Starbuck. +1 Sex Skill Cap", sex_cap = 1, bonus_is_temp =False)
     $ perk_system.add_stat_perk(SB_sex_perk, "Starbuck Sex Bonus")
     "After having multiple sexual encounters with a woman like [the_person.title], you feel like if you put in the effort, you could become an even more skilled lover."
     $ sex_store.add_object(SB_make_swing())
@@ -1607,7 +1607,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
 
     call advance_time_enhanced_next_day_no_events() from _call_advance_time_enhanced_next_day_no_events_SBS129
     #Good morning!
-    $ good_rest_perk = Stat_Perk(description = "Temporary increase max energy after sleeping with a lover.", energy_bonus = 20, bonus_is_temp = True, duration = 2,  energy_cap = 20)
+    $ good_rest_perk = Stat_Perk(description = "Temporary increase max energy after sleeping with a lover. +20 Energy Cap", energy_bonus = 20, bonus_is_temp = True, duration = 2,  energy_cap = 20)
     $ perk_system.add_stat_perk(good_rest_perk, "Overnight Lover")
 
 
