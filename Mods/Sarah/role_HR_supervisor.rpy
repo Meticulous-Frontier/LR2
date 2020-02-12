@@ -1323,11 +1323,11 @@ label HR_director_headhunt_interview_label(the_person):
         mc.name "Sure, meet me in my office"
         $ mc.change_location(office)
         $ mc.location.show_background()
-        "Hello [the_person.mc_title]!"
+        the_person.char "Hello [the_person.mc_title]!"
         $ scene_manager.add_actor(the_person)
         mc.name "Hi [the_person.title], come in and take a seat."
     else:
-        "Hello [the_person.mc_title]!"
+        the_person.char "Hello [the_person.mc_title]!"
         $ scene_manager.add_actor(the_person)
         "Your HR Director appears in the doorway to your office."
         the_person.char "Hey, I got a hit on criteria you had for a prospective employee. I think you are going to like this."
