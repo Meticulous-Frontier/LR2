@@ -420,11 +420,11 @@ label HR_director_monday_meeting_label(the_person):
         "You hurry to your office for your weekly meeting with your HR director [the_person.title]."
         $ mc.change_location(office)
         $ mc.location.show_background()
-        "Hello [the_person.mc_title]!"
+        the_person.char "Hello [the_person.mc_title]!"
         $ scene_manager.add_actor(the_person)
         mc.name "Hi [the_person.title], come in and take a seat."
     else:
-        "Hello [the_person.mc_title]!"
+        the_person.char "Hello [the_person.mc_title]!"
         $ scene_manager.add_actor(the_person)
         "Your HR Director appears in the doorway to your office. It is time for your weekly HR meeting."
         "She sits down across from you and starts to eat her lunch."
