@@ -86,7 +86,7 @@ init -1 python:
                 if comp_perk.duration < perk.duration:
                     comp_perk.duration = perk.duration
                 if comp_perk.start_day < perk.start_day:
-                    comp_perk.start_day = perk.start_day    
+                    comp_perk.start_day = perk.start_day
             else:
                 self.ability_perks[perk_name] = perk
 
@@ -286,4 +286,9 @@ init -1 python:
     def second_wind_func():
         mc.change_energy(mc.max_energy / 2)
         #renpy.say("","You take a deep breath, getting your second wind. You recover some energy!") #TODO this doesn't work. probably just delete
+        return
+
+    def time_of_need_func():
+        mc.change_energy(100)
+
         return

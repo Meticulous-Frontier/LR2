@@ -128,6 +128,17 @@ screen mc_perk_sheet():
                     Hide("perk_tooltip")]
         textbutton "Return" align [0.5,0.5] text_style "return_button_style"
 
+    $ design_tutorial_length = 4 #The number of  tutorial screens we have.
+    if mc.business.event_triggers_dict.get("perk_tutorial",1) > 0 and mc.business.event_triggers_dict.get("perk_tutorial",1)  <= design_tutorial_length: #We use negative numbers to symbolize the tutorial not being enabled
+        imagebutton:
+            auto
+            sensitive True
+            xsize 1920
+            ysize 1080
+            idle Image(get_file_handle("perk_tutorial_"+__builtin__.str(mc.business.event_triggers_dict.get("perk_tutorial",1))+".png"))
+            hover Image(get_file_handle("perk_tutorial_"+__builtin__.str(mc.business.event_triggers_dict.get("perk_tutorial",1))+".png"))
+            action Function(mc.business.advance_tutorial,"perk_tutorial")
+
 screen perk_tooltip(the_perk):
     $ hint_height = 120
     $ window_height = hint_height
