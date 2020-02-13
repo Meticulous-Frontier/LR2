@@ -266,7 +266,9 @@ init 5 python:
 
 init 1301 python:
     def HR_director_creation_requirement():
-        return sarah.event_triggers_dict.get("first_meeting", False) == True
+        if "sarah" in globals():
+            return sarah.event_triggers_dict.get("first_meeting", False) == True
+        return False
 
     HR_director_creation_policy = Policy(name = "Create HR Director Position",
         desc = "Create a new position for an HR Director. Increases maximum employee count by one.",
