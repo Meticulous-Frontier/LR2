@@ -150,7 +150,7 @@ init 5 python:
         return False
 
     def HR_director_mind_control_requirement(the_person):
-        if get_HR_director_tag("business_serum_tier", 0) == 2:
+        if get_HR_director_tag("business_HR_serum_tier", 0) == 3:
             if mc.business.funds > 5000:
                 return True
             else:
@@ -158,7 +158,7 @@ init 5 python:
         return False
 
     def HR_director_mind_control_attempt_requirement(the_person):
-        if get_HR_director_tag("business_serum_tier", 0) == 3:
+        if get_HR_director_tag("business_HR_serum_tier", 0) == 4:
             if get_HR_director_tag("business_HR_meeting_last_day", 0) < day:
                 if mc.business.is_open_for_business():
                     return True
@@ -1136,7 +1136,7 @@ label HR_director_mind_control_label(the_person):
     the_person.char "I'll make sure it stay locked away, and only you and I will have a key to get some out."
     mc.name "Sounds good."
     the_person.char "Did you need anything else, [the_person.mc_title]?"
-    $ set_HR_director_tag("business_HR_serum_tier", 3)
+    $ set_HR_director_tag("business_HR_serum_tier", 4)
     return
 
 label HR_director_mind_control_attempt_label(the_person):
