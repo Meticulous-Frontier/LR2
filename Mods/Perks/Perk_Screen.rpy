@@ -151,7 +151,7 @@ screen perk_tooltip(the_perk):
         #xalign 0.1
         yalign 0.065
         xsize 760
-        ysize window_height - ((count-1) * 5)
+        ysize window_height
 
         vbox:
             spacing 5

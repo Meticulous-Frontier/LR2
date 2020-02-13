@@ -26,7 +26,9 @@ label update_perk_mod_core(stack):
         except NameError:
             Perk_mod_initialization()
         execute_hijack_call(stack)
+    if mc.business.event_triggers_dict.get("perk_tutorial", 1) < 2:
+        $ mc.business.event_triggers_dict["perk_tutorial"] = 1
     if not perk_system.has_ability_perk("Time of Need"):
         if Perk_Tutorial_Crisis not in mc.business.mandatory_crises_list:
-            $ mc.business.mandatory_crises_list.append(Perk_Tutorial_Crisis) 
+            $ mc.business.mandatory_crises_list.append(Perk_Tutorial_Crisis)
     return
