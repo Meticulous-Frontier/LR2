@@ -1234,9 +1234,10 @@ label Sarah_stripclub_story_label():
     "[mom.title] pops around the corner when she hears you walking down the hall and unknowingly interrupts."
     mom.char "Hey [mom.mc_title]. You missed dinner! Leftovers are in the fridge. Oh! Hello again!"
     mc.name "Thanks, we're just going to go to my room for a bit to discuss some... work related matters."
-    "You see [mom.title] quick appraising the situation."
-    mom.char "Right. Have fun talking about... work stuff! Nice to see you again!"
+    "You see [mom.title] quickly appraises the situation."
+    mom.char "Right. Have fun talking about work stuff! HAH! Nice to see you again!"
     the_person.char "Nice to see you again too."
+    "[mom.possessive_title] walks away, chuckling to herself."
     $ scene_manager.remove_actor(mom)
 
     $ mc.change_location(bedroom)

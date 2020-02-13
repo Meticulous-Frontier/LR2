@@ -60,8 +60,10 @@ init 2 python:
                 gloryhole_list.append("Blowjob")
             if the_person.sluttiness > 60:
                 gloryhole_list.append("Vaginal")
+                gloryhole_list.append("JoinMe")
             if the_person.sluttiness > 85:
                 gloryhole_list.append("Anal")
+
 
         # actions based on fetishes (will always be added regardless of sluttiness)
         if SB_check_fetish(the_person, cum_internal_role) or SB_check_fetish(the_person, cum_external_role):
@@ -407,7 +409,10 @@ label unisex_restroom_use_gloryhole_label():
     $ person_response = gloryhole_get_response(the_person)
     if person_response == "Refuse":
         pass #TODO
-        "The person inside refuses to do anything."
+        "The person inside clears her throat, but doesn't say or do anything."
+        "Soon, you hear her exit her stall and quickly leave the restroom. Yikes, looks like whoever it was, wasn't very interested!"
+        $ the_person.change_slut_temp(4, add_to_log = False)
+        $ the_person.change_happiness(-5, add_to_log = False)
     elif person_response == "Handjob":
         call unisex_restroom_gloryhole_handjob_label(the_person) from gloryhole_HJ_response_1
     elif person_response == "Blowjob":
@@ -416,6 +421,8 @@ label unisex_restroom_use_gloryhole_label():
         call unisex_restroom_gloryhole_vaginal_label(the_person) from gloryhole_sex_response_1
     elif person_response == "Anal":
         call unisex_restroom_gloryhole_anal_label(the_person) from gloryhole_anal_response_1
+    elif person_response == "JoinMe":
+        call unisex_restroom_gloryhole_joinme_label(the_person) from gloryhole_joinme_response_1
     else:
         "Why aren't we catching anything here?"
 
@@ -534,6 +541,64 @@ label unisex_restroom_gloryhole_anal_label(the_person):
     # the person is happy and a sluttier (don't log as to preserve anonymity)
     $ the_person.change_slut_temp(7, add_to_log = False)
     $ the_person.change_happiness(7, add_to_log = False)
+
+    $ del anon_char
+    return
+
+label unisex_restroom_gloryhole_joinme_label(the_person):
+    $ anon_char = get_anon_person(the_person)
+    $ scene_manager = Scene()
+    anon_char "Oh! Mmmm, it's so hard."
+    "Sounds like she's taking the bait."
+    "You feel a soft hand begin to stroke you. Her delicate fingers feel great wrapped around your erection."
+    "She gives you a few good strokes, but then she stops."
+    anon_char "Sir, I want to feel you... would you please come over into my stall?"
+    menu:
+        "Go over":
+            "You quickly exit your stall and go into the one next to yours."
+            $ scene_manager.add_actor(the_person, position = "kissing")
+            "[the_person.title] is waiting for you as you step inside. You lock the stall and she immediately wraps her arms around you."
+            the_person.char "Mmm, the glory hole is hot, but I am craving a more personal touch..."
+            if not the_person.outfit.vagina_available():
+                "You grab her ass for a bit, then start to peel off her clothes."
+                $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False, exclude_feet = True, exclude_upper = True)
+            "You pin her to the stall wall. She lifts up one leg to give you better access and grabs your cock in her hand."
+            $ scene_manager.update_actor(the_person, position = "against_wall")
+            "She lines it up with her slit as you slowly slide into her. She stifles a moan when you finally bottom out."
+            call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_gloryhole_joinme_1
+            $ scene_manager.update_actor(the_person, position = "against_wall")
+            "When you finish, you stand there with her, her leg still in the air for a moment."
+            $ scene_manager.update_actor(the_person, position = "stand4")
+            "You grab some toilet paper and wipe your dick off before leaving the stall so [the_person.title] can clean up."
+            $ scene_manager.clear_scene()
+        "Stay like this":  #Defaults to vaginal sex
+            mc.name "I don't think that's how this is supposed to work..."
+            anon_char "Ohhhh, fine."
+            "You aren't sure who is on the other side of the wall but her disappointment is tangible."
+            "You hear movement coming from the stall next to you but you aren't sure what's they are doing."
+            "You feel her hand hold you rigidly in place as you begin to slowly feel a hot, wet sleeve enveloping your cock."
+            "It feels like she is taking you in her pussy! You let out a moan of appreciation."
+            anon_char "Mmmm, its so good when it goes in."
+            "You press yourself against the wall to try and push yourself as deep as you can. You are almost balls deep, but the thin wall is in the way."
+            "You start to work your hips a bit, testing the limits of how far you can pull back without pulling all the way out of her."
+            anon_char "Yes! Mmm that feels good."
+            "It's so hot, not knowing for sure who is on the other side of the wall. You have some guesses, based on her voice, but there's no way to know for sure."
+            "You're giving whoever it is good hard thrusts now. Once in a while you thrust a little too hard and your hips ram into the stall wall."
+            "The mystery cunt you are fucking feels like its getting wetter and wetter. The slippery channel feels so good wrapped around you."
+
+            "Moaning and panting coming from the other stall is getting urgent now. She must be enjoying this as much as your are!"
+            anon_char "Oh god don't stop, please don't stop!"
+            "Ha! Stopping was never even an option. You can feel her cunt starting to quiver and twitch. It feels TOO good!"
+            "You give several more strong thrusts as you pass the point of no return. You moan as you begin to dump your load inside of her."
+            anon_char "Yes. Yes! Oh fuck yes!"
+            "You cum as deep inside of her as you can manage. You wonder if she is on birth control. Maybe you knocked her up? Who even is it!?!"
+            "You pull out. You grab some toilet paper and wipe your cock off."
+
+            # the person is happy and a sluttier (don't log as to preserve anonymity)
+            $ the_person.change_slut_temp(5, add_to_log = False)
+            $ the_person.change_happiness(5, add_to_log = False)
+
+
 
     $ del anon_char
     return

@@ -70,7 +70,7 @@ label SB_one_on_one_label():
                 if mc.hr_skill < mc.max_work_skills:
                     $ mc.hr_skill += 1
                     $ mc.log_event("+1 HR skill from Perk", None)
-            #show screen float_up_screen(["+[change_amount] HR Skill"],["float_text_grey"])
+
 
         "Train Supply" if the_person.supply_skill < mc.supply_skill:
             if mc.supply_skill == mc.max_work_skills:
@@ -84,7 +84,7 @@ label SB_one_on_one_label():
                 if mc.supply_skill < mc.max_work_skills:
                     $ mc.supply_skill += 1
                     $ mc.log_event("+1 Supply skill from Perk", None)
-            #show screen float_up_screen(["+[change_amount] Supply Skill"],["float_text_grey"])
+
 
         "Train Marketing" if the_person.market_skill < mc.market_skill:
             if mc.market_skill == mc.max_work_skills:
@@ -98,7 +98,7 @@ label SB_one_on_one_label():
                 if mc.market_skill < mc.max_work_skills:
                     $ mc.market_skill += 1
                     $ mc.log_event("+1 Market skill from Perk", None)
-            #show screen float_up_screen(["+[change_amount] Marketing Skill"],["float_text_grey"])
+
 
         "Train Research" if the_person.research_skill < mc.research_skill:
             if mc.research_skill == mc.max_work_skills:
@@ -112,7 +112,7 @@ label SB_one_on_one_label():
                 if mc.research_skill < mc.max_work_skills:
                     $ mc.research_skill += 1
                     $ mc.log_event("+1 Research skill from Perk", None)
-            #show screen float_up_screen(["+[change_amount] Researching Skill"],["float_text_grey"])
+
 
         "Train Production" if the_person.production_skill < mc.production_skill:
             if mc.production_skill == mc.max_work_skills:
@@ -126,8 +126,6 @@ label SB_one_on_one_label():
                 if mc.production_skill < mc.max_work_skills:
                     $ mc.production_skill += 1
                     $ mc.log_event("+1 Production skill from Perk", None)
-            #show screen float_up_screen(["+[change_amount] Production Skill"],["float_text_grey"])
-
 
         "Too Busy":
             "You apologize. You are just too busy to offer one on one training right now."
