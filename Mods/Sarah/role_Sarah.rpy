@@ -214,6 +214,47 @@ init -1 python:
     def test_bra_function(the_person):
         Sarah_remove_bra_from_wardrobe(the_person.wardrobe)
 
+    def add_sarah_epic_tits_action():
+        Sarah_epic_tits_action = Action("Sarah Epic Tits Action", Sarah_epic_tits_requirement, "Sarah_epic_tits_label")
+        mc.business.mandatory_crises_list.append(Sarah_epic_tits_action)
+
+    def add_sarah_get_drinks_action():
+        Sarah_get_drinks_action = Action("Sarah get drinks",Sarah_get_drinks_requirement,"Sarah_get_drinks_label")
+        mc.business.mandatory_crises_list.append(Sarah_get_drinks_action)
+
+    def add_sarah_stripclub_story_action():
+        Sarah_stripclub_story_action = Action("Sarah Strip Club",Sarah_stripclub_story_requirement,"Sarah_stripclub_story_label")
+        mc.business.mandatory_crises_list.append(Sarah_stripclub_story_action)
+
+    def add_sarah_weekend_surprise_action():
+        sarah_weekend_surprise_action = Action("Sarah's Weekend Surprise", Sarah_weekend_surprise_crisis_requirement, "Sarah_weekend_surprise_crisis_label")
+        mc.business.mandatory_crises_list.append(sarah_weekend_surprise_action)
+
+    def add_sarah_hire_action():
+        Sarah_hire_action = Action("Sarah hire",Sarah_hire_requirement,"Sarah_hire_label")
+        mc.business.mandatory_crises_list.append(Sarah_hire_action)
+
+    def add_sarah_new_tits_action():
+        Sarah_new_tits_action = Action("Sarah new tits",Sarah_new_tits_requirement,"Sarah_new_tits_label")
+        mc.business.mandatory_crises_list.append(Sarah_new_tits_action)
+
+    def add_sarah_threesome_request_action():
+        Sarah_threesome_request_action = Action("Sarah Threesome Request",Sarah_threesome_request_requirement,"Sarah_threesome_request_label")
+        mc.business.mandatory_crises_list.append(Sarah_threesome_request_action)
+
+    def add_sarah_arrange_threesome_action(person):
+        Sarah_arrange_threesome_action = Action("Sarah_threesome_arrange",Sarah_arrange_threesome_requirement,"Sarah_arrange_threesome_label")
+        person.on_talk_event_list.append(Sarah_arrange_threesome_action)
+
+    def add_sarah_initial_threesome_action():
+        Sarah_initial_threesome_action = Action("Sarah initial threesome",Sarah_initial_threesome_requirement,"Sarah_initial_threesome_label")
+        mc.business.mandatory_crises_list.append(Sarah_initial_threesome_action)
+
+    def add_hr_director_initial_hire_action(person):
+        HR_director_initial_hire_action = Action("Hire HR Director",HR_director_initial_hire_requirement,"HR_director_initial_hire_label", args = person)
+        mc.business.mandatory_crises_list.append(HR_director_initial_hire_action)
+
+
 label Sarah_intro_label():
     $ the_person = sarah
     "*DING DONG*"
@@ -282,8 +323,8 @@ label Sarah_intro_label():
             the_person.char "This is great, [the_person.mc_title], you won't regret this, I promise!"
             "You say goodbye to her, and she goes to keep selling solar panels until you get back to her after creating the HR director position."
             "In order to hire [the_person.title], you will need to create a new HR Director position via the policy menu."
-            $ Sarah_hire = Action("Sarah hire",Sarah_hire_requirement,"Sarah_hire_label")
-            $ mc.business.mandatory_crises_list.append(Sarah_hire) #Add the event here so that it pops when the requirements are met.
+
+            $ add_sarah_hire_action()
 
         "Don't offer to hire her":
             "You decide maybe down the line you could make a new HR director position, but you decide the [the_person.title] is probably not the best fit for it."
@@ -308,9 +349,7 @@ label Sarah_hire_label():
     mc.name "[day_name] morning. I'll text the address after this call. We will go over your role and responsibilities when you get there."
     the_person.char "Yes! I'm so glad to finally be done selling solar panels. I'll see you in the morning!"
     "You hang up the phone. You quickly text [the_person.title] the address of your business."
-    #TODO Hire Sarah officially here?
-    $ HR_director_initial_hire = Action("Hire HR Director",HR_director_initial_hire_requirement,"HR_director_initial_hire_label", args = the_person) #Set the trigger day for the next monday. Monday is day%7 == 0
-    $ mc.business.mandatory_crises_list.append(HR_director_initial_hire) #Add the event here so that it pops when the requirements are met.
+    $ add_hr_director_initial_hire_action(the_person)
     $ set_HR_director_tag("business_HR_meeting_last_day", day) # used to make sure we meet the next day
     return
 
@@ -481,9 +520,7 @@ label Sarah_third_wheel_label():
     "She turns and heads into her building. You check your watch and realize how late it is."
     $ scene_manager.remove_actor(the_person, reset_actor = False)
     $ del sarah_friend #Cleanup?
-
-    $ Sarah_get_drinks_action = Action("Sarah get drinks",Sarah_get_drinks_requirement,"Sarah_get_drinks_label")
-    $ mc.business.mandatory_crises_list.append(Sarah_get_drinks_action) #Add the event here so that it pops when the requirements are met.
+    $ add_sarah_get_drinks_action()
     return
 
 label Sarah_get_drinks_label():
@@ -873,12 +910,8 @@ label Sarah_get_drinks_label():
 
     "[the_person.possessive_title] lets herself out of your room and leaves. Wow, what an evening!"
 
-    $ Sarah_stripclub_story_action = Action("Sarah Strip Club",Sarah_stripclub_story_requirement,"Sarah_stripclub_story_label")  #Create the next storyline event
-    $ mc.business.mandatory_crises_list.append(Sarah_stripclub_story_action) #Add the event here so that it pops when the requirements are met.
-
-    $ sarah_weekend_surprise_action = ActionMod("Sarah's Weekend Surprise", Sarah_weekend_surprise_crisis_requirement, "Sarah_weekend_surprise_crisis_label",
-        menu_tooltip = "Sarah catches you at work on the weekend again.", category = "Business", is_crisis = True, crisis_weight = 5)
-    $ mc.business.mandatory_crises_list.append(sarah_weekend_surprise_action) #Add the event here so that it pops when the requirements are met.
+    $ add_sarah_stripclub_story_action()
+    $ add_sarah_weekend_surprise_action()
 
     return
 
@@ -931,8 +964,7 @@ label Sarah_catch_stealing_label():
                     mc.name "Sounds good. I'll look forward to seeing... all of you... on Monday."
                     "She blushes and nods."
                     the_person.char "Alright, see you Monday!"
-                    $ Sarah_epic_tits = Action("Sarah epic tits",Sarah_epic_tits_requirement,"Sarah_epic_tits_label")
-                    $ mc.business.mandatory_crises_list.append(Sarah_epic_tits) #Add the event here so that it pops when the requirements are met.
+                    $ add_sarah_epic_tits_action()
                     return
                 "Stop wearing bras":
                     #TODO make new function to iterate through her wardrobe and remove the bra from every outfit.
@@ -948,8 +980,7 @@ label Sarah_catch_stealing_label():
                         "She blushes and nods."
                         the_person.char "Alright, see you Monday!"
                         $ Sarah_remove_bra_from_wardrobe(the_person.wardrobe)
-                        $ Sarah_epic_tits = Action("Sarah epic tits",Sarah_epic_tits_requirement,"Sarah_epic_tits_label")
-                        $ mc.business.mandatory_crises_list.append(Sarah_epic_tits) #Add the event here so that it pops when the requirements are met.
+                        $ add_sarah_epic_tits_action()
                         return
                     else:
                         the_person.char "I just... I don't think I can do that right now. I'm sorry [the_person.mc_title]!"
@@ -963,9 +994,8 @@ label Sarah_catch_stealing_label():
     mc.name "Alright, you be careful this weekend. I'll look forward to seeing... all of you... on Monday."
     "She blushes and nods."
     the_person.char "Alright, see you Monday!"
-    $ Sarah_new_tits = Action("Sarah new tits",Sarah_new_tits_requirement,"Sarah_new_tits_label")
-    $ mc.business.mandatory_crises_list.append(Sarah_new_tits) #Add the event here so that it pops when the requirements are met.
 
+    $ add_sarah_new_tits_action()
     return
 
 label Sarah_epic_tits_label():
@@ -1446,9 +1476,7 @@ label Sarah_stripclub_story_label():
         "You lay on your bed and watch as [the_person.possessive_title] slowly gets her clothes on. She says goodbye then lets herself out."
         $ scene_manager.remove_actor(the_person)
 
-    $ Sarah_threesome_request_action = Action("Sarah Threesome Request",Sarah_threesome_request_requirement,"Sarah_threesome_request_label")  #Create the next storyline event
-    $ mc.business.mandatory_crises_list.append(Sarah_threesome_request_action) #Add the event here so that it pops when the requirements are met.
-
+    $ add_sarah_threesome_request_action()
     return
 
 label Sarah_threesome_request_label():
@@ -1586,11 +1614,9 @@ label Sarah_threesome_request_label():
     $ sarah.event_triggers_dict["initial_threesome_target"] = person_choice
     $ sarah.event_triggers_dict["initial_threesome_arranged"] = False
 
-    $ Sarah_arrange_threesome = Action("Sarah_threesome_arrange",Sarah_arrange_threesome_requirement,"Sarah_arrange_threesome_label")
-    $ person_choice.on_talk_event_list.append(Sarah_arrange_threesome)
+    $ add_sarah_arrange_threesome_action(person_choice)
 
-    $ Sarah_initial_threesome = Action("Sarah initial threesome",Sarah_initial_threesome_requirement,"Sarah_initial_threesome_label")
-    $ mc.business.mandatory_crises_list.append(Sarah_initial_threesome) #Add the event here so that it pops when the requirements are met.
+    $ add_sarah_initial_threesome_action()
 
     $ scene_manager.update_actor(the_person, position = "stand2")
     the_person.char "Oh man, all this talk about sex is starting to get me all hot. Or is it just warm in here?"
@@ -1801,8 +1827,7 @@ label Sarah_initial_threesome_label():
         sarah.char "Okay..."
         $ sarah.change_happiness(-10)
         $ sarah.change_love(-3)
-        $ Sarah_initial_threesome = Action("Sarah initial threesome",Sarah_initial_threesome_requirement,"Sarah_initial_threesome_label")
-        $ mc.business.mandatory_crises_list.append(Sarah_initial_threesome)
+        $ add_sarah_initial_threesome_action()
         return
 
     $ the_person_one = sarah
@@ -1903,6 +1928,8 @@ label Sarah_initial_threesome_label():
     call advance_time_enhanced_next_day_no_events() from _sarah_overnight_after_threesome_1
     call Sarah_spend_the_night() from sarah_threesome_spend_the_night
 
+    $ del the_person_one
+    $ del the_person_two
     return
 
 

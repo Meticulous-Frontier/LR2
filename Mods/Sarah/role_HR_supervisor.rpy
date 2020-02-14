@@ -232,13 +232,34 @@ init 5 python:
         remove_mandatory_crisis_list_action("Sarah_new_tits_label")
         remove_mandatory_crisis_list_action("Sarah_third_wheel_label")
         remove_mandatory_crisis_list_action("Sarah_catch_stealing_label")
-        remove_mandatory_crisis_list_action("Sarah_stripclub_story_label")
+        remove_mandatory_crisis_list_action("Sarah_weekend_surprise_crisis_label")
+        remove_mandatory_crisis_list_action("Sarah_threesome_request_label")
+        remove_mandatory_crisis_list_action("Sarah_initial_threesome_label")
         remove_mandatory_crisis_list_action("HR_director_initial_hire_label")
         remove_mandatory_crisis_list_action("HR_director_first_monday_label")
         remove_mandatory_crisis_list_action("HR_director_monday_meeting_label")
         remove_mandatory_crisis_list_action("HR_director_headhunt_interview_label")
         return
 
+    def add_sarah_catch_stealing_action():
+        Sarah_catch_stealing_action = Action("Catch Sarah Stealing",Sarah_catch_stealing_requirement,"Sarah_catch_stealing_label")
+        mc.business.mandatory_crises_list.append(Sarah_catch_stealing_action)
+
+    def add_sarah_third_wheel_action():
+        Sarah_third_wheel_action = Action("Sarah's third wheel event",Sarah_third_wheel_requirement,"Sarah_third_wheel_label")
+        mc.business.mandatory_crises_list.append(Sarah_third_wheel_action)
+
+    def add_hr_director_first_monday_action(person):
+        HR_director_first_monday_action = Action("First Monday",HR_director_first_monday_requirement,"HR_director_first_monday_label", args = person)
+        mc.business.mandatory_crises_list.append(HR_director_first_monday_action)
+
+    def add_hr_director_monday_meeting_action(person):
+        HR_director_monday_meeting_action = Action("Monday HR Lunch",HR_director_monday_meeting_requirement,"HR_director_monday_meeting_label", args = person)
+        mc.business.mandatory_crises_list.append(HR_director_monday_meeting_action)
+
+    def add_hr_director_headhunt_interview_action(person):
+        HR_director_headhunt_interview_action = Action("Prospect Interview",HR_director_headhunt_interview_requirement,"HR_director_headhunt_interview_label", args = person)
+        mc.business.mandatory_crises_list.append(HR_director_headhunt_interview_action)
 
     HR_director_coffee_tier_1_action = Action("Add serum to coffee during meetings.", HR_director_coffee_tier_1_requirement, "HR_director_coffee_tier_1_label",
         menu_tooltip = "Costs $500 but makes meetings more impactful.")
@@ -346,10 +367,7 @@ label HR_director_initial_hire_label(the_person):
         business_HR_director.set_work([1,2,3], mc.business.h_div)
 
         set_HR_director_tag("business_HR_eff_bonus", mc.business.effectiveness_cap - 100)
-
-
-    $ HR_director_first_monday = Action("First Monday",HR_director_first_monday_requirement,"HR_director_first_monday_label", args = the_person) #Set the trigger day for the next monday. Monday is day%7 == 0
-    $ mc.business.mandatory_crises_list.append(HR_director_first_monday) #Add the event here so that it pops when the requirements are met.
+        add_hr_director_first_monday_action(the_person)        
     return
 
 label HR_director_first_monday_label(the_person):
@@ -400,15 +418,12 @@ label HR_director_first_monday_label(the_person):
     mc.name "Alright, I think that is all for today. Unless something comes up, same time next week?"
     $ the_person.draw_person(position = "stand2")
     the_person.char "Sounds great! I'll see you then!"
-    $ HR_director_monday_meeting = Action("Monday HR Lunch",HR_director_monday_meeting_requirement,"HR_director_monday_meeting_label", args = the_person) #Set the trigger day for the next monday. Monday is day%7 == 0
-    $ mc.business.mandatory_crises_list.append(HR_director_monday_meeting) #Add the event here so that it pops when the requirements are met.
-
+    $ add_hr_director_monday_meeting_action(the_person)
     # HR tiers based on progression. 1 = hired someone. 2 = training videos. 3 = company sponsored sexual training.
     $ set_HR_director_tag('business_HR_tier', 1)
 
     if the_person is sarah:
-        $ Sarah_third_wheel_action = Action("Sarah's third wheel event",Sarah_third_wheel_requirement,"Sarah_third_wheel_label")
-        $ mc.business.mandatory_crises_list.append(Sarah_third_wheel_action)
+        $ add_sarah_third_wheel_action()
     return
 
 label HR_director_monday_meeting_label(the_person):
@@ -505,8 +520,7 @@ label HR_director_monday_meeting_label(the_person):
     $ the_person.draw_person(position = "stand2")
     the_person.char "Sounds great! I'll see you then!"
 
-    $ HR_director_monday_meeting = Action("Monday HR Lunch",HR_director_monday_meeting_requirement,"HR_director_monday_meeting_label", args = the_person) #Set the trigger day for the next monday. Monday is day%7 == 0
-    $ mc.business.mandatory_crises_list.append(HR_director_monday_meeting) #Add the event here so that it pops when the requirements are met.
+    $ add_hr_director_monday_meeting_action(the_person)
     $ the_person.review_outfit(dialogue = False)
     return
 
@@ -723,8 +737,7 @@ label HR_director_review_discoveries_label(the_person):
                 the_person.char "I mean uh, it'll be interesting to see how this progresses..."
                 "You notice [the_person.title] writing herself a note to visit the research department later."
                 #TODO add breast serum sneak event to mandatory list
-                $ Sarah_catch_stealing_action = Action("Catch Sarah Stealing",Sarah_catch_stealing_requirement,"Sarah_catch_stealing_label") #Set the trigger day for the next monday. Monday is day%7 == 0
-                $ mc.business.mandatory_crises_list.append(Sarah_catch_stealing_action) #Insert the event to the top of the list
+                $ add_sarah_catch_stealing_action()
     "You spend a few minutes with [the_person.title] going over the progress in the research department over the last week or so."
     the_person.char "That's it for research, let's take a look at policy changes from the last week."
     if get_HR_director_tag("business_HR_uniform", False) == False:
@@ -1301,8 +1314,7 @@ label HR_director_headhunt_initiate_label(the_person):
         $ set_HR_director_tag("recruit_day", day + days_to_find)
         $ set_HR_director_tag("business_HR_headhunter_progress", 1)
 
-        $ HR_director_headhunt_interview_action = Action("Prospect Interview",HR_director_headhunt_interview_requirement,"HR_director_headhunt_interview_label", args = the_person) #Set the trigger day for the next monday. Monday is day%7 == 0
-        $ mc.business.mandatory_crises_list.append(HR_director_headhunt_interview_action) #Add the event here so that it pops when the requirements are met.
+        $ add_hr_director_headhunt_interview_action(the_person)
         the_person.char "Is there anything else you need?"
     else:
         mc.name "I've changed my mind."
