@@ -174,6 +174,8 @@ label unisex_restroom_door_greet_label():   #You have a chance to learn a couple
 
     $ town_relationships.improve_relationship(the_person_one, the_person_two)
     $ del overhear_topic
+    $ del the_person_one
+    $ del the_person_two
     return
 
 label unisex_restroom_sexy_overhear_label():
