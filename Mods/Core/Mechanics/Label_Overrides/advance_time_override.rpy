@@ -154,10 +154,12 @@ label advance_time_enhanced:
 
         $ advance_time_count += 1
 
-    # increase crisis chance (every time slot)
-    $ crisis_chance += 1
-    $ renpy.free_memory()
-    $ mc.location.show_background()
+    python:
+        # increase crisis chance (every time slot)
+        crisis_chance += 1
+        renpy.free_memory()
+        mc.location.show_background()
+
     if mandatory_advance_time: #If a crisis has told us to advance time after it we do so.
         call advance_time from _call_advance_time_advance_time_enhanced
     $ people_to_process = []
@@ -172,19 +174,19 @@ label advance_time_enhanced_next_day_no_events:
     return
 
 label advance_time_bankrupt_check_label():
-    if mc.business.funds < 0:
-        # "advance_time_bankrupt_check_label" # DEBUG
-        $ mc.business.bankrupt_days += 1
-        if mc.business.bankrupt_days == mc.business.max_bankrupt_days:
-            $ renpy.say("","With no funds to pay your creditors you are forced to close your business and auction off all of your materials at a fraction of their value. Your story ends here.")
-            $ renpy.full_restart()
+    python:
+        if mc.business.funds < 0:
+            # "advance_time_bankrupt_check_label" # DEBUG
+            mc.business.bankrupt_days += 1
+            if mc.business.bankrupt_days == mc.business.max_bankrupt_days:
+                renpy.say("","With no funds to pay your creditors you are forced to close your business and auction off all of your materials at a fraction of their value. Your story ends here.")
+                renpy.full_restart()
+            else:
+                days_remaining = mc.business.max_bankrupt_days-mc.business.bankrupt_days
+                renpy.say("","Warning! Your company is losing money and unable to pay salaries or purchase necessary supplies! You have [days_remaining] days to restore yourself to positive funds or you will be foreclosed upon!")
         else:
-            $ days_remaining = mc.business.max_bankrupt_days-mc.business.bankrupt_days
-            $ renpy.say("","Warning! Your company is losing money and unable to pay salaries or purchase necessary supplies! You have [days_remaining] days to restore yourself to positive funds or you will be foreclosed upon!")
-    else:
-        $ mc.business.bankrupt_days = 0
+            mc.business.bankrupt_days = 0
     return
-
 
 label advance_time_random_crisis_label():
     # "advance_time_random_crisis_label - timeslot [time_of_day]" #DEBUG
@@ -241,7 +243,6 @@ label advance_time_people_run_turn_label():
             for person in place.people:
                 people_to_process.append([person, place])
 
-    python:
         for (person, place) in people_to_process: #Run the results of people spending their turn in their current location.
             person.run_turn()
         mc.business.run_turn()
@@ -256,17 +257,19 @@ label advance_time_people_run_day_label():
         for (person, place) in people_to_process:
             person.run_day()
 
-    $ mc.run_day()
-    $ mc.business.run_day()
+        mc.run_day()
+        mc.business.run_day()
     return
 
 label advance_time_end_of_day_label():
     # "advance_time_end_of_day_label - timeslot [time_of_day]" # DEBUG
     call screen end_of_day_update() # We have to keep this outside of a python block, because the renpy.call_screen function does not properly fade out the text bar.
-    $ mc.business.clear_messages()
-    # increase morning crisis chance (once a day)
-    $ morning_crisis_chance += 2
-    $ perk_system.update()  #TEST to see if this is a good time for this.
+
+    python:
+        mc.business.clear_messages()
+        # increase morning crisis chance (once a day)
+        morning_crisis_chance += 2
+        perk_system.update()  #TEST to see if this is a good time for this.
     return
 
 label advance_time_mandatory_morning_crisis_label():
@@ -315,11 +318,12 @@ label advance_time_random_morning_crisis_label():
 
 label advance_time_next_label():
     # "advance_time_next_label  - timeslot [time_of_day]" #DEBUG
-    if time_of_day == 4: # NOTE: Take care of resetting it to 0 here rather than during end_day_label
-        $ time_of_day = 0
-        $ day += 1
-    else:
-        $ time_of_day += 1 ##Otherwise, just run the end of day code.
+    python:
+        if time_of_day == 4: # NOTE: Take care of resetting it to 0 here rather than during end_day_label
+            time_of_day = 0
+            day += 1
+        else:
+            time_of_day += 1 ##Otherwise, just run the end of day code.
     return
 
 label advance_time_daily_serum_dosage_label():

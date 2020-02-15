@@ -32,12 +32,14 @@ init 5 python:
 
 
 label small_talk_person_enhanced(person):
-    $ mc.change_energy(-15)
-    $ smalltalk_opinion = person.get_opinion_score("small talk")
-    mc.name "So [person.title], what's been on your mind recently?"
-    $ person.discover_opinion("small talk")
-    $ successful_smalltalk = 60 + (smalltalk_opinion * 20) + (mc.charisma * 5)
-    $ ran_num = renpy.random.randint(0,100)
+    python:
+        mc.change_energy(-15)
+        smalltalk_opinion = person.get_opinion_score("small talk")
+        renpy.say(mc.name, "So [person.title], what's been on your mind recently?")
+        person.discover_opinion("small talk")
+        successful_smalltalk = 60 + (smalltalk_opinion * 20) + (mc.charisma * 5)
+        ran_num = renpy.random.randint(0,100)
+
     # TODO: Add a chance that she wants to talk about someone she knows.
     if ran_num < successful_smalltalk:
         if smalltalk_opinion >= 0:
