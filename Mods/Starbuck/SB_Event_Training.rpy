@@ -32,18 +32,19 @@ init 2 python:
                     return True
         return False
 
-    one_on_one_action = ActionMod("One on One Training", one_on_one_training_requirement, "SB_one_on_one_label",
-        menu_tooltip = "You give an employee on the job training.", category = "Business", is_crisis = True, crisis_weight = one_on_one_weight)
-
-label SB_one_on_one_label():
-    python:
+    def get_training_employee():
         training_eligible = []
         for person in mc.business.get_employee_list():
             if person.obedience > 110:
                 if person.int > 1:
                     training_eligible.append(person)
-        the_person = get_random_from_list(training_eligible)
-        del training_eligible
+        return get_random_from_list(training_eligible)
+
+    one_on_one_action = ActionMod("One on One Training", one_on_one_training_requirement, "SB_one_on_one_label",
+        menu_tooltip = "You give an employee on the job training.", category = "Business", is_crisis = True, crisis_weight = one_on_one_weight)
+
+label SB_one_on_one_label():
+    $ the_person = get_training_employee()
 
     if the_person is None:
         # "No one eligible for training!"
