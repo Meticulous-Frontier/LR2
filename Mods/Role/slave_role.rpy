@@ -70,13 +70,11 @@ label stay_wet_label(the_person): # Can expand with dialogue options and degrees
     return
 
 label advance_time_stay_wet_label():
-
     python:
-        for (person, place) in people_to_process:
-            if person.stay_wet and person.arousal < 50:
-                person.arousal = 50
-                if person.sluttiness < 15:
-                    person.sluttiness = 15 # Doesn't make sense for them to be "ready" if they cannot be seduced.
+        for (person, place) in [x for x in people_to_process if x[0].stay_wet and x[0].arousal < 50]:
+            person.arousal = 50
+            if person.sluttiness < 15:
+                person.sluttiness = 15 # Doesn't make sense for them to be "ready" if they cannot be seduced.
     return
 
 label slave_collar_person_label(the_person):
@@ -117,11 +115,9 @@ label slave_collar_person_label(the_person):
     return
 
 label advance_time_collar_person_label():
-
     python:
-        for (person,place) in people_to_process:
-            if person.slave_collar and person.obedience < 130: # 130 is the highest value for dialogues and various acts.
-                person.obedience = 130
+        for (person,place) in [x for x in people_to_process if x[0].slave_collar and x[0].obedience < 130]:
+            person.obedience = 130
     return
 
 label wakeup_duty_label(the_person):

@@ -3,7 +3,7 @@
 # so we can add / change person characteristics based on custom personalities.
 # if you need person customizations, extend the hijacked labels
 
-init 5 python:
+init 10 python: # add to stack later then other mods
     add_label_hijack("normal_start", "activate_generic_personality")
     add_label_hijack("after_load", "update_generic_personality")
 

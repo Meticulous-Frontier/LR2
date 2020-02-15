@@ -20,8 +20,9 @@ label store_expansion_policies(stack):
             cost = 5000,
             desc = "Allows the business to further expand the production area.",
             requirement = purchase_room_requirement,
-            on_buy_function = purchase_room_on_buy_function,
-            on_buy_arguments = {"room": p_division_basement})
+            # on_buy_function = purchase_room_on_buy_function,
+            # on_buy_arguments = {"room": p_division_basement}
+        )
 
         if p_division_policy not in expansion_policies_list:
             expansion_policies_list.append(p_division_policy)
@@ -33,28 +34,14 @@ label store_expansion_policies(stack):
             cost = 5000,
             desc = "Allows for the installation of additional equipment.",
             requirement = purchase_room_requirement,
-            #on_buy_function = purchase_room_on_buy_function,
-            #on_buy_arguments = {"room": rd_division_basement}
+            on_buy_function = purchase_room_on_buy_function,
+            on_buy_arguments = {"room": rd_division_basement}
         )
 
         if rd_division_policy not in expansion_policies_list:
             expansion_policies_list.append(rd_division_policy)
         else:
             update_policy(rd_division_policy, expansion_policies_list)
-
-
-        purchase_machinery_room_policy = Policy(
-            name = "[p_division_basement.formalName]", # NOTE: Do not use e.g "[room.formalName] as it breaks the hash check"
-            cost = 20000,
-            desc = "Gives you access to the [p_division_basement.formalName] where you can further increase the productivity of your business.",
-            requirement = purchase_room_requirement,
-            on_buy_function = purchase_room_on_buy_function,
-            on_buy_arguments = {"room": p_division_basement})
-
-        # #if purchase_machinery_room_policy not in expansion_policies_list:
-        #     expansion_policies_list.append(purchase_machinery_room_policy)
-        # else:
-        #     update_policy(purchase_machinery_room_policy, expansion_policies_list)
 
         purchase_biotech_lab_room_policy = Policy(
             name = "[rd_division_basement.formalName]",

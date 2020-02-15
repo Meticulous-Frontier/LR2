@@ -3,12 +3,6 @@ init 2 python:
     overload_cost = 10000
     machinery_room_overload = 100
 
-    def machinery_room_actions_requirement():
-        return True
-
-    machinery_room_action = Action("Machinery Sub- Menu", machinery_room_actions_requirement, "machinery_room_action_label", menu_tooltip = "...")
-    machinery_room_actions = [] # Add actions to show up in the sub- menu here or append them to this list.
-
     def machinery_room_construct_production_line_requirement():
         production_lines_cost = mc.business.production_lines * 5000
         if time_of_day is 4:
@@ -21,7 +15,6 @@ init 2 python:
         return "Requires: $" + str(production_lines_cost)
 
     machinery_room_construct_production_line_action = Action("Create Production Line {image=gui/heart/Time_Advance.png}", machinery_room_construct_production_line_requirement, "machinery_room_construct_production_line_label", menu_tooltip = "...")
-    machinery_room_actions.append(machinery_room_construct_production_line_action)
 
     def machinery_room_overload_requirement():
         if time_of_day is 4:
@@ -34,22 +27,6 @@ init 2 python:
         return "Requires: $[overload_cost]"
 
     machinery_room_overload_action = Action("Overclock Production Lines {image=gui/heart/Time_Advance.png}", machinery_room_overload_requirement, "machinery_room_overload_label", menu_tooltip = "Increase the capacity of your production lines above the maximum required by safety standards")
-    machinery_room_actions.append(machinery_room_overload_action)
-
-label machinery_room_action_label():
-    while True:
-        python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-            act_list = []
-            for act in machinery_room_actions:
-                act_list.append(act)
-            act_choice = call_formated_action_choice(act_list + ["Back"])
-            del act_list
-
-        if act_choice == "Back":
-            return
-        else:
-            $ act_choice.call_action()
-            $ del act_choice
 
 label machinery_room_construct_production_line_label():
     python:

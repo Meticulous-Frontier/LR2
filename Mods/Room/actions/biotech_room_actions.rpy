@@ -1,41 +1,26 @@
 init -1 python:
-    biotech_room_actions = []
-    biotech_gene_modifications = []
     biotech_body_modifications = []
 
 init 3 python:
-
-    def biotech_lab_requirement():
-        return True
-
-    biotech_lab_action = Action("Do things in the lab", biotech_lab_requirement, "biotechs",
-        menu_tooltip = "Do stuff")
-
-    def gene_modification_requirement():
-        return True
-
-    gene_modification = Action("Do genetic modifications", gene_modification_requirement, "biotech_gene_modifications",
-        menu_tooltip = "Do stuff with genes or cosmetic alterations")
-    biotech_room_actions.append(gene_modification)
-
-    def clone_person_requirement():
+    def biotech_clone_person_requirement():
         if not time_of_day == 4:
             return True
         else:
             return "Too late."
 
-    clone_person = Action("Clone a person {image=gui/heart/Time_Advance.png}", clone_person_requirement, "clone_person",
+    biotech_clone_person = Action("Clone a person {image=gui/heart/Time_Advance.png}", biotech_clone_person_requirement, "biotech_clone_person",
         menu_tooltip = "Create a near identical clone of the targeted person")
-    biotech_gene_modifications.append(clone_person)
 
-    def modify_person_requirement():
-        return True
+    def biotech_modify_person_requirement():
+        if "body_customizer_policy" in globals():
+            if rd_division_policy.is_owned() and body_customizer_policy.is_owned():
+                return True
+        return "Requires: [body_customizer_policy.name] policy upgrade"
 
-    modify_person = Action("Modify a person", modify_person_requirement, "modify_person",
+    biotech_modify_person = Action("Modify a person", biotech_modify_person_requirement, "biotech_modify_person",
         menu_tooltip = "Modify the appearance of a person through magic, not science")
-    biotech_gene_modifications.append(modify_person)
 
-    def change_body_requirement():
+    def biotech_change_body_requirement():
         hypothyroidism = find_in_list(lambda x: x.name == hypothyroidism_serum_trait.name, list_of_traits)
         anorexia = find_in_list(lambda x: x.name == anorexia_serum_trait.name, list_of_traits)
 
@@ -44,62 +29,47 @@ init 3 python:
         else:
             return "Requires: [hypothyroidism_serum_trait.name] and [anorexia_serum_trait.name] researched"
 
-    change_body = Action("Change body: [person.body_type]", change_body_requirement, "change_body",
+    biotech_change_body = Action("Change body: [person.body_type]", biotech_change_body_requirement, "biotech_change_body",
         menu_tooltip = "Modify [person.title]'s body type.")
-    biotech_body_modifications.append(change_body)
+    biotech_body_modifications.append(biotech_change_body)
 
-    def change_skin_requirement():
+    def biotech_change_skin_requirement():
         pigment = find_in_list(lambda x: x.name == pigment_serum_trait.name, list_of_traits)
         if not pigment is None and pigment.researched:
             return True
         else:
             return "Requires: [pigment_serum_trait.name] researched"
 
-    change_skin = Action("Change skin: [person.skin]", change_skin_requirement, "change_skin",
+    biotech_change_skin = Action("Change skin: [person.skin]", biotech_change_skin_requirement, "biotech_change_skin",
         menu_tooltip = "Modify [person.title]'s skin tone.")
-    biotech_body_modifications.append(change_skin)
+    biotech_body_modifications.append(biotech_change_skin)
 
-    def change_face_requirement():
+    def biotech_change_face_requirement():
         return True
 
-    change_face = Action("Change face: [person.face_style]", change_face_requirement, "change_face",
+    biotech_change_face = Action("Change face: [person.face_style]", biotech_change_face_requirement, "biotech_change_face",
         menu_tooltip = "Modify [person.title]'s face style.")
-    biotech_body_modifications.append(change_face)
+    biotech_body_modifications.append(biotech_change_face)
 
-    def change_breasts_requirement():
+    def biotech_change_breasts_requirement():
         if breast_enhancement.researched and breast_reduction.researched:
             return True
         else:
             return "Requires: [breast_enhancement.name] and [breast_reduction.name]"
 
-    change_breasts = Action("Change breasts: [person.tits]", change_breasts_requirement, "change_breasts",
+    biotech_change_breasts = Action("Change breasts: [person.tits]", biotech_change_breasts_requirement, "biotech_change_breasts",
         menu_tooltip = "Modify [person.title]'s cup size.")
-    biotech_body_modifications.append(change_breasts)
+    biotech_body_modifications.append(biotech_change_breasts)
 
-
-
-label biotechs():
-    while True:
-        python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-                biotech_options = []
-                for act in biotech_room_actions:
-                    biotech_options.append(act)
-                biotech_options.append("Back")
-                act_choice = call_formated_action_choice(biotech_options)
-
-        if act_choice == "Back":
-            return
-        else:
-            $ act_choice.call_action()
 
 label biotech_gene_modifications():
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-                gene_modification_options = []
-                for act in biotech_gene_modifications:
-                    gene_modification_options.append(act)
-                gene_modification_options.append("Back")
-                act_choice = call_formated_action_choice(gene_modification_options)
+            gene_modification_options = []
+            for act in biotech_gene_modifications:
+                gene_modification_options.append(act)
+            gene_modification_options.append("Back")
+            act_choice = call_formated_action_choice(gene_modification_options)
 
         if act_choice == "Back":
             return
@@ -107,13 +77,14 @@ label biotech_gene_modifications():
             $ act_choice.call_action()
 
 
-label clone_person():
+label biotech_clone_person():
     $ clone_name = None
     $ clone_last_name = None
     $ clone_age = None
 
     while True:
-        $ people_list = get_sorted_people_list(known_people_in_the_game([mc]), "Clone Person", ["Back"])
+        # only known people who are not unique character or clone herself (genetic degradation too high)
+        $ people_list = get_sorted_people_list([x for x in known_people_in_the_game([mc] + unique_character_list) if not clone_role in x.special_role], "Clone Person", ["Back"])
 
         if "build_menu_items" in globals():
             call screen main_choice_display(build_menu_items([people_list]))
@@ -174,7 +145,7 @@ label cloning_process(person = the_person): # default to the_person when not pas
             "Back":
                 return
 
-label modify_person():
+label biotech_modify_person():
     while True:
         $ people_list = get_sorted_people_list(known_people_in_the_game([mc]), "Modify Person", ["Back"])
 
@@ -208,7 +179,7 @@ label modification_process(person = the_person): # when called without specific 
             $ act_choice.call_action()
             $ del act_choice
 
-label change_body():
+label biotech_change_body():
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
             body_types = []
@@ -225,7 +196,7 @@ label change_body():
             $ person.draw_person()
             $ del body_choice
 
-label change_skin():
+label biotech_change_skin():
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
             skin_styles = [x[0] for x in list_of_skins]
@@ -243,7 +214,7 @@ label change_skin():
             $ person.draw_person()
             $ del skin_choice
 
-label change_face():
+label biotech_change_face():
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
             face_styles = []
@@ -261,7 +232,7 @@ label change_face():
             $ person.draw_person()
             $ del face_choice
 
-label change_breasts():
+label biotech_change_breasts():
     while True:
         python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
             cup_sizes = [x[0] for x in list_of_tits]

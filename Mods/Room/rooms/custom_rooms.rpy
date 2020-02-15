@@ -2,6 +2,7 @@
 init -1 python:
     business_basement = [] # List of rooms that are supposed to be in the basement.
 
+
 init 15 python:
     # Marketing Division Basement - Security Room | security_room_actions.rpy
     m_division_basement_objects = [
@@ -9,13 +10,13 @@ init 15 python:
         make_chair(),
         make_floor()
     ]
-    m_division_basement = Room("security", "Security Room", [], room_background_image("Security_Background.jpg"), m_division_basement_objects,[], [security_overview_action], False, [12,2], None, False, lighting_conditions = standard_indoor_lighting)
+    m_division_basement = Room("security", "Security Room", [], room_background_image("Security_Background.jpg"), m_division_basement_objects,[], [investigation_employee_action, cctv_action], False, [12,2], None, False, lighting_conditions = standard_indoor_lighting)
 
     # Production Division Basement - Machinery Room | machinery_room_actions.rpy
-    p_division_basement_objects = [
-        make_table()
-    ]
-    p_division_basement = Room("machinery", "Machinery Room", [], office_background, p_division_basement_objects, [], [machinery_room_action], False, [11,5], None, False, lighting_conditions = standard_indoor_lighting)
+    # p_division_basement_objects = [
+    #     make_table()
+    # ]
+    # p_division_basement = Room("machinery", "Machinery Room", [], office_background, p_division_basement_objects, [], [machinery_room_construct_production_line_action, machinery_room_overload_action], False, [11,5], None, False, lighting_conditions = standard_indoor_lighting)
 
     # Research Division Basement - Biotechnology Lab | biotech_room_actions.rpy
     rd_division_basement_objects = [
@@ -24,7 +25,7 @@ init 15 python:
         make_desk(),
         make_table()
     ]
-    rd_division_basement = Room("biotech", "Biotechnology Lab", [], room_background_image("Biotech_Background.jpg"), rd_division_basement_objects, [], [biotech_lab_action], False, [12,5], None, False, lighting_conditions = standard_indoor_lighting)
+    rd_division_basement = Room("biotech", "Biotechnology Lab", [], room_background_image("Biotech_Background.jpg"), rd_division_basement_objects, [], [biotech_clone_person, biotech_modify_person], False, [12,5], None, False, lighting_conditions = standard_indoor_lighting)
 
     # Main Office Basement - Dungeon | dungeon_room_actions.rpy
     office_basement_objects = [
@@ -32,7 +33,7 @@ init 15 python:
         make_pillory(),
         make_woodhorse()
     ]
-    office_basement = Room("dungeon", "Dungeon", [], bar_background, office_basement_objects, [], [dungeon_room_action], False, [11,1], None, False, lighting_conditions = standard_club_lighting)
+    office_basement = Room("dungeon", "Dungeon", [], bar_background, office_basement_objects, [], [dungeon_room_appoint_slave_action], False, [11,1], None, False, lighting_conditions = standard_club_lighting)
 
     # Downtown Bar - The Downtown Distillery | downtown_bar_actions.rpy
     # This bar gets updated when a save game is loaded, regardless of its existence
@@ -41,7 +42,7 @@ init 15 python:
         make_chair(),
         make_floor()
     ]
-    downtown_bar = Room("bar", "The Downtown Distillery", [], bar_background, downtown_bar_objects, [], [downtown_bar_action], True, [5,4], None, True, lighting_conditions = standard_indoor_lighting)
+    downtown_bar = Room("bar", "The Downtown Distillery", [], bar_background, downtown_bar_objects, [], [downtown_bar_drink_action], True, [5,4], None, True, lighting_conditions = standard_indoor_lighting)
 
     # Hotel Room - The Hotel | No actions at this time.
     # This hotel gets updated when a save game is loaded, regardless of its existence
@@ -79,7 +80,7 @@ init 5  python:
 label activate_custom_rooms(stack):
 
     call store_m_division_basement() from _store_m_division_basement_1
-    call store_p_division_basement() from _store_p_division_basement_1
+    #call store_p_division_basement() from _store_p_division_basement_1
     call store_rd_division_basement() from _store_rd_division_basement_1
     call store_office_basement() from _store_office_basement_1
     call store_downtown_bar() from _call_store_downtown_bar_1
@@ -95,7 +96,7 @@ label update_custom_rooms(stack):
     #     call update_downtown_bar() from _call_update_downtown_bar
 
     call store_m_division_basement() from _store_m_division_basement_2
-    call store_p_division_basement() from _store_p_division_basement_2
+    #call store_p_division_basement() from _store_p_division_basement_2
     call store_rd_division_basement() from _store_rd_division_basement_2
     call store_office_basement() from _store_office_basement_2
     call store_downtown_bar() from _call_store_downtown_bar_2
@@ -114,13 +115,13 @@ label store_m_division_basement():
     $ m_division_basement = update_custom_rooms(m_division_basement)
     return
 
-label store_p_division_basement():
-    if p_division_basement not in list_of_places:
-        #$ p_division_basement.link_locations(p_division)
-        $ list_of_places.append(p_division_basement)
+# label store_p_division_basement():
+#     if p_division_basement not in list_of_places:
+#         #$ p_division_basement.link_locations(p_division)
+#         $ list_of_places.append(p_division_basement)
 
-    $ p_division_basement = update_custom_rooms(p_division_basement)
-    return
+#     $ p_division_basement = update_custom_rooms(p_division_basement)
+#     return
 
 label store_rd_division_basement():
     if rd_division_basement not in list_of_places:
