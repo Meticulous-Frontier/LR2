@@ -1483,14 +1483,9 @@ label Sarah_threesome_request_label():
     $ scene_manager = Scene()
     $ the_person = sarah
     $ meets_sluttiness_list = []
-    python:
-        for person in mc.business.get_employee_list():
-            if person.sluttiness >= 50:
-                if person != sarah:
-                    meets_sluttiness_list.append(person)
-    $ gossip_target = get_random_from_list(meets_sluttiness_list)
+    $ gossip_target = get_random_employees(1, exclude_list = [sarah], slut_required = 50)
     $ threesome_target_list = get_Sarah_willing_threesome_list()
-    $ del meets_sluttiness_list
+
     "Another Saturday, another extra workday for you. You are hardly surprised when you here [the_person.title]'s familiar voice."
     the_person.char "Hey [the_person.mc_title]. I figured you'd be around here."
     $ scene_manager.add_actor(the_person)

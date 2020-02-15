@@ -43,3 +43,18 @@ init -1 python:
     def people_in_role(role):
         all_people = all_people_in_the_game([mc])
         return [x for x in all_people if role in x.special_role]
+
+    # returns a single employee when number of employees == 1
+    # returns a tuple of employees when number of employees > 1
+    def get_random_employees(number_of_employees, exclude_list = None, **employee_args):
+        result = set([])
+        list_of_possible_people = mc.business.get_requirement_employee_list(exclude_list = exclude_list, **employee_args)
+        for i in range(number_of_employees):
+            person = get_random_from_list(list_of_possible_people)
+            result.add(person)
+            list_of_possible_people.remove(person)
+
+        if number_of_employees == 1:
+            return list(result)[0]
+
+        return tuple(result)

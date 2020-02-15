@@ -142,11 +142,8 @@ label unisex_restroom_overhear_label():
 
 label unisex_restroom_door_greet_label():   #You have a chance to learn a couple new opinions
     #TODO change background to restroom
-    $ emp_list = mc.business.get_employee_list()
-    $ the_person_one = get_random_from_list(emp_list)
-    $ emp_list.remove(the_person_one)
-    $ the_person_two = get_random_from_list(emp_list)
-    $ del emp_list
+    $ (the_person_one, the_person_two) = get_random_employees(2)
+
     "During the workday, you get up and head towards the restroom."
     $ scene_manager = Scene()
     $ scene_manager.add_actor(the_person_one, character_placement = character_center_flipped)
@@ -179,11 +176,8 @@ label unisex_restroom_door_greet_label():   #You have a chance to learn a couple
     return
 
 label unisex_restroom_sexy_overhear_label():
-    $ emp_list = mc.business.get_employee_list()
-    $ the_person_one = get_random_from_list(emp_list)
-    $ emp_list.remove(the_person_one)
-    $ the_person_two = get_random_from_list(emp_list)
-    $ del emp_list
+    $ (the_person_one, the_person_two) = get_random_employees(2)
+
     $ discover_identity = False
     $ anon_char_one = get_anon_person(the_person_one)
     #$ anon_char_one.name = "?????"
@@ -250,11 +244,7 @@ label unisex_restroom_sexy_overhear_label():
     return
 
 label unisex_restroom_fantasy_overhear_label():
-    $ emp_list = mc.business.get_employee_list()
-    $ the_person_one = get_random_from_list(emp_list)
-    $ emp_list.remove(the_person_one)
-    $ the_person_two = get_random_from_list(emp_list)
-    $ del emp_list
+    $ (the_person_one, the_person_two) = get_random_employees(2)
     if the_person_one.sluttiness < 30: #She's not slutty enough for this.
         call unisex_restroom_sexy_overhear_label() from unisex_restroom_fantasy_redirect_1
         return
@@ -404,7 +394,7 @@ label unisex_restroom_gloryhole_option_label():
     return
 
 label unisex_restroom_use_gloryhole_label():
-    $ the_person = get_random_from_list(mc.business.get_employee_list())
+    $ the_person = get_random_employees(1)
     "As you are waiting, you hear someone enter the restroom and walk into the stall next to yours."
     "This is crazy. It could be anybody in there! You hear on the other side the toilet flush as the person finishes relieving herself. You take a deep breath, then go for it."
     "You give yourself a couple of strokes to make sure you are good and hard, then stick your cock through the glory hole."

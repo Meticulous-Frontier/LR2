@@ -70,7 +70,7 @@ init 2 python:
         menu_tooltip = "While working weekends an employee comes into the office.", category = "Business", is_crisis = True, crisis_weight = SB_working_weekend_crisis_weight)
 
 label SB_working_weekend_crisis_label():
-    $ the_person = get_random_from_list(mc.business.get_employee_list())
+    $ the_person = get_random_employees(1)    
 
     if the_person is None:
         return
@@ -234,7 +234,7 @@ label SB_working_weekend_crisis_label():
                 "You chat with [the_person.possessive_title] for a little longer. Eventually she says goodbye and heads out."
                 return #TODO Make sure this returns correctly
         "You are just finishing up with your work, and now [the_person.possessive_title] is here, naked, in your office."
-        $ the_person_two = get_random_from_list(mc.business.get_employee_list())
+        $ the_person_two = get_random_employees(1)
         if the_person == the_person_two:
             "You're pretty sure she's ready for next step if you are ready."
         elif the_person_two.sluttiness > 70:  #Someone walks in, threesome opportunity#
