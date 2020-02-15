@@ -58,6 +58,70 @@ init 5 python:
 
         return get_random_from_list(other_people) #Get a random person from the people in the area, if there are any.
 
+    def apply_sex_modifiers(the_person):
+        #Family situational modifiers
+        if the_person.has_family_taboo(): #Check if any of the roles the person has belong to the list of family roles.
+            the_person.add_situational_slut("taboo_sex", -20, "We're related, we shouldn't be doing this.")
+
+        #Cheating modifiers
+        the_person.discover_opinion("cheating on men")
+        if the_person.relationship == "Girlfriend":
+            if the_person.get_opinion_score("cheating on men") > 0:
+                the_person.add_situational_slut("cheating", the_person.get_opinion_score("cheating on men") * 5, "I'm cheating on my boyfriend!")
+            else:
+                the_person.add_situational_slut("cheating", -5 + (the_person.get_opinion_score("cheating on men") * -10), "I can't cheat on my boyfriend!")
+        elif the_person.relationship == "Fiancée":
+            if the_person.get_opinion_score("cheating on men") > 0:
+                the_person.add_situational_slut("cheating", the_person.get_opinion_score("cheating on men") * 8, "I'm cheating on my fiancé!")
+            else:
+                the_person.add_situational_slut("cheating", -15 + (the_person.get_opinion_score("cheating on men") * -15), "I could never cheat on my fiancé!")
+        elif the_person.relationship == "Married":
+            if the_person.get_opinion_score("cheating on men") > 0:
+                the_person.add_situational_slut("cheating", the_person.get_opinion_score("cheating on men") * 10, "I'm cheating on my husband!")
+            else:
+                the_person.add_situational_slut("cheating", -20 + (the_person.get_opinion_score("cheating on men") * -20), "I could never cheat on my husband!")
+
+        #Privacy modifiers
+        if not private:
+            if the_person.sluttiness < 50:
+                the_person.add_situational_slut("public_sex", -10 + the_person.get_opinion_score("public sex") * 5, "There are people watching...")
+            else:
+                the_person.add_situational_slut("public_sex", the_person.get_opinion_score("public sex") * 5, "There are people watching!")
+
+        #Love modifiers. Always applies if negative, but only adds a bonus if you are in private.
+        if the_person.love < 0:
+            the_person.add_situational_slut("love_modifier", the_person.love, "I hate you, get away from me!")
+        elif private:
+            if girlfriend_role in the_person.special_role: #Girlfriend and affairs gain full Love
+                the_person.add_situational_slut("love_modifier", the_person.love, "You're my special someone, I love you!")
+            elif affair_role in the_person.special_role:
+                the_person.add_situational_slut("love_modifier", the_person.love, "We may keep it a secret, but I love you!")
+            elif the_person.has_family_taboo(): #Family now only gains 1/4 (but this now helps offset the taboo penalty)
+                if mother_role in the_person.special_role:
+                    the_person.add_situational_slut("love_modifier", __builtin__.int(the_person.love/4), "Even if it's wrong, a mother should do everything she can for her son!")
+                elif sister_role in the_person.special_role:
+                    the_person.add_situational_slut("love_modifier", __builtin__.int(the_person.love/4), "I love my brother, and even if it's wrong I want to be close to him!")
+                else: #Generic family one
+                    the_person.add_situational_slut("love_modifier", __builtin__.int(the_person.love/4), "I love you, even though we're related!")
+            else: #If you aren't in a relationship with them only half their Love applies.
+                the_person.add_situational_slut("love_modifier", __builtin__.int(the_person.love/2), "I really like you, let's see where this goes!")
+
+    def clear_sex_modifiers(the_person):
+        # Teardown the sex modifiers
+        the_person.clear_situational_slut("love_modifier")
+        the_person.clear_situational_slut("public_sex")
+        the_person.clear_situational_slut("cheating")
+        the_person.clear_situational_slut("taboo_sex")
+        the_person.clear_situational_slut("sex_object")
+        the_person.clear_situational_obedience("sex_object")
+
+    def update_person_sex_record(the_person, report_log):
+        types_seen = []
+        for position_type in report_log.get("positions_used",[]): #Note: Clears out duplicates
+            if position_type.record_class and position_type.record_class not in types_seen:
+                the_person.sex_record[position_type.record_class] += 1
+                types_seen.append(position_type.record_class)
+
 label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
     if report_log is None:
@@ -69,53 +133,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     $ object_choice = start_object # initialize with start_object (in case girl is in charge or position is locked)
 
     # $ renpy.say("", "Fuck Person Enhanced => start position: " + ("None" if start_position is None else start_position.name) + " , object: " + ("None" if start_object is None else start_object.name))
-
-    #Family situational modifiers
-    if the_person.has_family_taboo(): #Check if any of the roles the person has belong to the list of family roles.
-        $ the_person.add_situational_slut("taboo_sex", -20, "We're related, we shouldn't be doing this.")
-
-    #Cheating modifiers
-    $ the_person.discover_opinion("cheating on men")
-    if the_person.relationship == "Girlfriend":
-        if the_person.get_opinion_score("cheating on men") > 0:
-            $ the_person.add_situational_slut("cheating", the_person.get_opinion_score("cheating on men") * 5, "I'm cheating on my boyfriend!")
-        else:
-            $ the_person.add_situational_slut("cheating", -5 + (the_person.get_opinion_score("cheating on men") * -10), "I can't cheat on my boyfriend!")
-    elif the_person.relationship == "Fiancée":
-        if the_person.get_opinion_score("cheating on men") > 0:
-            $ the_person.add_situational_slut("cheating", the_person.get_opinion_score("cheating on men") * 8, "I'm cheating on my fiancé!")
-        else:
-            $ the_person.add_situational_slut("cheating", -15 + (the_person.get_opinion_score("cheating on men") * -15), "I could never cheat on my fiancé!")
-    elif the_person.relationship == "Married":
-        if the_person.get_opinion_score("cheating on men") > 0:
-            $ the_person.add_situational_slut("cheating", the_person.get_opinion_score("cheating on men") * 10, "I'm cheating on my husband!")
-        else:
-            $ the_person.add_situational_slut("cheating", -20 + (the_person.get_opinion_score("cheating on men") * -20), "I could never cheat on my husband!")
-
-    #Privacy modifiers
-    if not private:
-        if the_person.sluttiness < 50:
-            $ the_person.add_situational_slut("public_sex", -10 + the_person.get_opinion_score("public sex") * 5, "There are people watching...")
-        else:
-            $ the_person.add_situational_slut("public_sex", the_person.get_opinion_score("public sex") * 5, "There are people watching!")
-
-    #Love modifiers. Always applies if negative, but only adds a bonus if you are in private.
-    if the_person.love < 0:
-        $ the_person.add_situational_slut("love_modifier", the_person.love, "I hate you, get away from me!")
-    elif private:
-        if girlfriend_role in the_person.special_role: #Girlfriend and affairs gain full Love
-            $ the_person.add_situational_slut("love_modifier", the_person.love, "You're my special someone, I love you!")
-        elif affair_role in the_person.special_role:
-            $ the_person.add_situational_slut("love_modifier", the_person.love, "We may keep it a secret, but I love you!")
-        elif the_person.has_family_taboo(): #Family now only gains 1/4 (but this now helps offset the taboo penalty)
-            if mother_role in the_person.special_role:
-                $ the_person.add_situational_slut("love_modifier", __builtin__.int(the_person.love/4), "Even if it's wrong, a mother should do everything she can for her son!")
-            elif sister_role in the_person.special_role:
-                $ the_person.add_situational_slut("love_modifier", __builtin__.int(the_person.love/4), "I love my brother, and even if it's wrong I want to be close to him!")
-            else: #Generic family one
-                $ the_person.add_situational_slut("love_modifier", __builtin__.int(the_person.love/4), "I love you, even though we're related!")
-        else: #If you aren't in a relationship with them only half their Love applies.
-            $ the_person.add_situational_slut("love_modifier", __builtin__.int(the_person.love/2), "I really like you, let's see where this goes!")
+    $ apply_sex_modifiers(the_person)
 
     $ round_choice = "Change" # We start any encounter by letting them pick what position they want (unless something is forced or the girl is in charge)
     $ first_round = True
@@ -300,20 +318,13 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             $ finished = True
         $ round_choice = None #Get rid of our round choice at the end of the round to prepare for the next one. By doing this at the end instead of the begining of the loop we can set a mandatory choice for the first one.
 
-
-    # Teardown the sex modifiers
-    $ the_person.clear_situational_slut("love_modifier")
-    $ the_person.clear_situational_slut("cheating")
-    $ the_person.clear_situational_slut("taboo_sex")
-    $ the_person.clear_situational_slut("sex_object")
-    $ the_person.clear_situational_obedience("sex_object")
+    $ clear_sex_modifiers(the_person)
 
     $ report_log["end arousal"] = the_person.arousal
     if report_log.get("girl orgasms",0) > 0:
         $ the_person.arousal = 0 # If she came she's satisfied.
     else:
         $ the_person.change_arousal(-the_person.arousal/2) #Otherwise they are half as aroused as you leave them.
-
 
     $ mc.condom = False
     $ mc.recently_orgasmed = False
@@ -322,13 +333,9 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
         if the_person.love >= 60 and the_person.sluttiness >= 30 - (the_person.get_opinion_score("cheating on men") * 5) and report_log.get("girl orgasms",0) >= 1: #If she loves you enoguh, is moderately slutty, and you made her cum
             call affair_check(the_person, report_log) from _call_affair_check_bugfix
 
-    python: #Log all of the different classes of sex, but only once per class.
-        types_seen = []
-        for position_type in report_log.get("positions_used",[]): #Note: Clears out duplicates
-            if position_type.record_class and position_type.record_class not in types_seen:
-                the_person.sex_record[position_type.record_class] += 1
-                types_seen.append(position_type.record_class)
-        del types_seen
+
+    $ update_person_sex_record(the_person, report_log)
+
     # We return the report_log so that events can use the results of the encounter to figure out what to do.
     return report_log
 
