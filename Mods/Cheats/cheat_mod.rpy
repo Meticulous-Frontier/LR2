@@ -82,51 +82,53 @@ screen cheat_menu():
     default editing_target = the_person # default open the_person cheat menu
 
     # Lists for common skill attributes.
-    default main_stats = { #The arrays are utilized in this order: key = "DisplayName", [0 = hasattr check], [1 = variable / key], [2 = amount to changed] NOTE: Fields are duplicated incase things change later, less likely that the buttons will need to be re formated
-        "Charisma": ["charisma", "charisma", 1],
-        "Focus": ["focus", "focus", 1],
-        "Intelligence": ["int", "int", 1],
+    # The arrays are utilized in this order: key = "DisplayName", [0 = hasattr check], [1 = variable / key], [2 = amount to changed], [3 = sort order] 
+    # NOTE: Fields are duplicated incase things change later, less likely that the buttons will need to be re formated
+    default main_stats = { 
+        "Charisma": ["charisma", "charisma", 1, 0],
+        "Focus": ["focus", "focus", 1 , 1],
+        "Intelligence": ["int", "int", 1, 2],
 
-        "Age": ["age", "age", 1],
-        "Height": ["height", "height", .005],
+        "Age": ["age", "age", 1, 3],
+        "Height": ["height", "height", .005, 4],
+        "Energy": ["energy", "energy", 10.0, 5],
+        "Max Energy": ["max_energy", "max_energy", 10.0, 6],
 
-        "Funds": ["funds", "funds", 10000],
-        "Supplies": ["supply_count", "supply_count", 10000],
-        "Effectivity": ["team_effectiveness", "team_effectiveness", 10],
-        "Max Effectivity": ["effectiveness_cap", "effectiveness_cap", 10] # Might add If statement to combine these two as they go hand in hand
+        "Funds": ["funds", "funds", 10000, 7],
+        "Supplies": ["supply_count", "supply_count", 10000, 8],
+        "Effectivity": ["team_effectiveness", "team_effectiveness", 10, 9],
+        "Max Effectivity": ["effectiveness_cap", "effectiveness_cap", 10, 10] # Might add If statement to combine these two as they go hand in hand
         }
     default work_skills = {
-        "HR": ["hr_skill", "hr_skill", 1],
-        "Marketing": ["market_skill", "market_skill", 1],
-        "Researching": ["research_skill", "research_skill", 1],
-        "Production": ["production_skill", "production_skill", 1],
-        "Supplying": ["supply_skill", "supply_skill", 1],
+        "HR": ["hr_skill", "hr_skill", 1, 0],
+        "Marketing": ["market_skill", "market_skill", 1, 1],
+        "Researching": ["research_skill", "research_skill", 1, 2],
+        "Production": ["production_skill", "production_skill", 1, 3],
+        "Supplying": ["supply_skill", "supply_skill", 1, 4],
 
-        "Max Employees": ["max_employee_count", "max_employee_count", 5],
-        "Production Lines": ["production_lines", "production_lines", 1],
-        "Serum Batch Size": ["batch_size", "batch_size", 5],
-        "Research Tier": ["research_tier", "research_tier", 1]
-
+        "Max Employees": ["max_employee_count", "max_employee_count", 5, 5],
+        "Production Lines": ["production_lines", "production_lines", 1, 6],
+        "Serum Batch Size": ["batch_size", "batch_size", 5, 7],
+        "Research Tier": ["research_tier", "research_tier", 1, 8]
         }
     default relation_stats = {
-        "Energy": ["energy", "energy", 10.0],
-        "Max Energy": ["max_energy", "max_energy", 10.0],
-        
-        "Love": ["love", "love", 10],
-        "Suggestibility": ["suggestibility", "suggestibility", 10],
-        "Sluttiness": ["sluttiness", "sluttiness", 10],
-        "Core Sluttiness": ["core_sluttiness", "core_sluttiness", 10],
-        "Obedience": ["obedience", "obedience", 10],
-        "Happiness": ["happiness", "happiness", 10],
-        "Arousal": ["arousal", "arousal", 10]
+        "Love": ["love", "love", 10, 0],
+        "Suggestibility": ["suggestibility", "suggestibility", 10, 1],
+        "Obedience": ["obedience", "obedience", 10, 2],
+        "Happiness": ["happiness", "happiness", 10, 3],
+        "Arousal": ["arousal", "arousal", 10, 4],
+        "Sluttiness": ["sluttiness", "sluttiness", 10, 5],
+        "Core Sluttiness": ["core_sluttiness", "core_sluttiness", 10, 6]
         }
     default sex_stats = { # Sex Skills are stored in a dict
-        "Foreplay": ["sex_skills", "Foreplay", 1],
-        "Oral": ["sex_skills", "Oral", 1],
-        "Vaginal": ["sex_skills", "Vaginal", 1],
-        "Anal": ["sex_skills", "Anal", 1]
+        "Foreplay": ["sex_skills", "Foreplay", 1, 0],
+        "Oral": ["sex_skills", "Oral", 1, 1],
+        "Vaginal": ["sex_skills", "Vaginal", 1, 2],
+        "Anal": ["sex_skills", "Anal", 1, 3]
         }
-    default available_naming = { # Consider making it update the respective lists custom titles when it becomes possible
+
+    # Consider making it update the respective lists custom titles when it becomes possible
+    default available_naming = { 
         "Title": ["title"],
         "Player's Title": ["mc_title"],
         "Reference Title": ["possessive_title"],
@@ -261,7 +263,7 @@ screen cheat_menu():
             frame:
                 xoffset 400
                 yoffset 200
-                xysize (1100, 260)
+                xysize (1100, 300)
                 grid 4 1:
                     xfill True
                     vbox:
@@ -277,7 +279,7 @@ screen cheat_menu():
                                 mousewheel True
                                 draggable True
                                 vbox:
-                                    for x in main_stats:
+                                    for (x, i) in sorted(main_stats.items(), key=lambda x:x[1][3]):
                                         if hasattr(editing_target, str(main_stats[x][0])):
                                             hbox:
                                                 textbutton " - ":
@@ -336,7 +338,7 @@ screen cheat_menu():
                                 mousewheel True
                                 draggable True
                                 vbox:
-                                    for x in work_skills:
+                                    for (x, y) in sorted(work_skills.items(), key=lambda x:x[1][3]):
                                         if hasattr(editing_target, str(work_skills[x][0])):
                                             hbox:
                                                 textbutton " - ":
@@ -380,7 +382,7 @@ screen cheat_menu():
                                 mousewheel True
                                 draggable True
                                 vbox:
-                                    for x in sex_stats:
+                                    for (x, y) in sorted(sex_stats.items(), key=lambda x:x[1][3]):
                                         if hasattr(editing_target, str(sex_stats[x][0])):
                                             hbox:
                                                 textbutton " - ":
@@ -427,7 +429,7 @@ screen cheat_menu():
                                 mousewheel True
                                 draggable True
                                 vbox:
-                                    for x in relation_stats:
+                                    for (x, y) in sorted(relation_stats.items(), key=lambda x:x[1][3]):
                                         if hasattr(editing_target, str(relation_stats[x][0])):
                                             hbox:
                                                 textbutton " - ":
@@ -509,7 +511,7 @@ screen cheat_menu():
         if editing_target is not None and type(editing_target) is not Business and type(editing_target) is not MainCharacter:
             frame:
                 xoffset 400
-                yoffset 470
+                yoffset 510
                 xysize (515, 520)
                 hbox:
                     vbox:
