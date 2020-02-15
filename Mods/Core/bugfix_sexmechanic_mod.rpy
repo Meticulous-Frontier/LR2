@@ -31,28 +31,32 @@ init 5 python:
         person.add_situational_obedience("sex_object",picked_object.obedience_modifier, position.verbing + " on a " + picked_object.name)
         return picked_object
 
-    def add_caught_cheating_action(a_person, the_person):
-        caught_cheating_action = Action("Caught cheating action", caught_cheating_requirement, "caught_cheating_label", args = the_person)
-        not_already_in = True
-        for an_action in a_person.on_room_enter_event_list:
-            if an_action == caught_cheating_action:
-                not_already_in = False
+    def cheating_check_get_watcher(the_person):
+        other_people = [person for person in mc.location.people if person is not the_person] #Build a list with all the _other_ people in the room other than the one we're fucking.
+        for a_person in other_people:
+            if girlfriend_role in a_person.special_role and the_position.slut_requirement > (a_person.sluttiness/2): #You can get away with stuff half as slutty as she would do
+                caught_cheating_action = Action("Caught cheating action", caught_cheating_requirement, "caught_cheating_label", args = the_person)
+                not_already_in = True
+                for an_action in a_person.on_room_enter_event_list:
+                    if an_action == caught_cheating_action:
+                        not_already_in = False
 
-        if not_already_in:
-            a_person.on_room_enter_event_list.append(caught_cheating_action)
-            renpy.say("",a_person.title + " gasps when she sees what you and " + the_person.title + " are doing.")
+                if not_already_in:
+                    a_person.on_room_enter_event_list.append(caught_cheating_action)
+                    renpy.say("",a_person.title + " gasps when she sees what you and " + the_person.title + " are doing.")
 
-    def add_caught_affair_cheating_action(a_person, the_person):
-        caught_affair_cheating_action = Action("Caught affair cheating action", caught_affair_cheating_requirement, "caught_affair_cheating_label", args = the_person)
-        not_already_in = True
-        for an_action in a_person.on_room_enter_event_list:
-            if an_action == caught_affair_cheating_action:
-                not_already_in = False
+            elif affair_role in a_person.special_role and the_position.slut_requirement > ((a_person.sluttiness*2)/3): #You can get away with stuff two thirds as slutty as what she would do.
+                caught_affair_cheating_action = Action("Caught affair cheating action", caught_affair_cheating_requirement, "caught_affair_cheating_label", args = the_person)
+                not_already_in = True
+                for an_action in a_person.on_room_enter_event_list:
+                    if an_action == caught_affair_cheating_action:
+                        not_already_in = False
 
-        if not_already_in:
-            a_person.on_room_enter_event_list.append(caught_affair_cheating_action)
-            renpy.say("",a_person.title + " gasps when she sees what you and " + the_person.title + " are doing.")
+                if not_already_in:
+                    a_person.on_room_enter_event_list.append(caught_affair_cheating_action)
+                    renpy.say("",a_person.title + " gasps when she sees what you and " + the_person.title + " are doing.")
 
+        return get_random_from_list(other_people) #Get a random person from the people in the area, if there are any.
 
 label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
@@ -400,17 +404,7 @@ label pick_object_enhanced(the_person, the_position, forced_object = None):
     return picked_object
 
 label watcher_check_enhanced(the_person, the_position, the_object, the_report): # Check to see if anyone is around to comment on the characters having sex.
-    $ other_people = [person for person in mc.location.people if person is not the_person] #Build a list with all the _other_ people in the room other than the one we're fucking.
-    python: #Checks to see if anyone watching is in a relationship, and if they are sets up an event where they confront you later about you actively cheating in front of the,
-        for a_person in other_people:
-            if girlfriend_role in a_person.special_role and the_position.slut_requirement > (a_person.sluttiness/2): #You can get away with stuff half as slutty as she would do
-                add_caught_cheating_action(a_person, the_person)
-
-            elif affair_role in a_person.special_role and the_position.slut_requirement > ((a_person.sluttiness*2)/3): #You can get away with stuff two thirds as slutty as what she would do.
-                add_caught_affair_cheating_action(a_person, the_person)
-
-    $ watcher = get_random_from_list(other_people) #Get a random person from the people in the area, if there are any.
-    $ del other_people
+    $ watcher = cheating_check_get_watcher(the_person)
     if watcher:
         $ the_relationship = town_relationships.get_relationship(watcher, the_person)
         if the_relationship and the_relationship.get_type() in ["Mother", "Daughter", "Sister", "Cousin", "Niece", "Aunt", "Grandmother", "Granddaughter"]:
