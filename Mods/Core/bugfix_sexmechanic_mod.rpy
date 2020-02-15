@@ -152,10 +152,6 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             elif object_choice is None:
                 "[the_person.title] looks around, but can't see anywhere to have fun with you."
                 $ round_choice = "Girl Leave"
-            elif has_taken_control:
-                $ has_taken_control = False
-                $ the_person.call_dialogue("sex_take_control")
-                $ round_choice = "Continue"
             elif report_log.get("guy orgasms", 0) > 0 and report_log.get("girl orgasms", 0) > 0: #Both parties have been satisfied
                 the_person.char "Whew, that felt amazing. It's good to know it was as good for you as it was for me."
                 $ round_choice = "Girl Leave"
@@ -165,6 +161,10 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             elif report_log.get("girl orgasms", 0) == 0 and the_person.energy < 15 :
                 the_person.char "That was nice, but i'm tired. We will continue this another time."
                 $ round_choice = "Girl Leave"
+            elif has_taken_control:
+                $ has_taken_control = False
+                $ the_person.call_dialogue("sex_take_control")
+                $ round_choice = "Continue"
             else:
                 # Don't show control message, it breaks the flow, because it pops up every round.
                 #"[the_person.possessive_title] is in control, and keeps on [position_choice.verbing] you."
