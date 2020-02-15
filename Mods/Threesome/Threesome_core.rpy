@@ -727,10 +727,8 @@ init python:
         return return_bool
 
     def willing_to_threesome(the_person_one, the_person_two):    #Use this function to check and see if two people are willing to engage in a threesome
-        person_one_slut_req = THREESOME_BASE_SLUT_REQ
-        person_two_slut_req = THREESOME_BASE_SLUT_REQ
-        if the_person_one.sluttiness < person_one_slut_req:
+        if the_person_one.sluttiness < THREESOME_BASE_SLUT_REQ:
             return False
-        if the_person_two.sluttiness < person_two_slut_req:
+        if the_person_two.sluttiness < THREESOME_BASE_SLUT_REQ:
             return False
         return True
