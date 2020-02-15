@@ -159,6 +159,8 @@ label advance_time_enhanced:
         crisis_chance += 1
         renpy.free_memory()
         mc.location.show_background()
+        x = None
+        c = None
 
     if mandatory_advance_time: #If a crisis has told us to advance time after it we do so.
         call advance_time from _call_advance_time_advance_time_enhanced
