@@ -400,7 +400,6 @@ label unisex_restroom_use_gloryhole_label():
     "You give yourself a couple of strokes to make sure you are good and hard, then stick your cock through the glory hole."
     $ person_response = gloryhole_get_response(the_person)
     if person_response == "Refuse":
-        pass #TODO
         "The person inside clears her throat, but doesn't say or do anything."
         "Soon, you hear her exit her stall and quickly leave the restroom. Yikes, looks like whoever it was, wasn't very interested!"
         $ the_person.change_slut_temp(4, add_to_log = False)
@@ -418,7 +417,7 @@ label unisex_restroom_use_gloryhole_label():
     else:
         "Why aren't we catching anything here?"
 
-    return
+    return _return
 
 label unisex_restroom_gloryhole_handjob_label(the_person):
     $ anon_char = get_anon_person(the_person)
@@ -443,7 +442,7 @@ label unisex_restroom_gloryhole_handjob_label(the_person):
     $ the_person.change_happiness(2, add_to_log = False)
 
     $ del anon_char
-    return
+    return "Advance Time"
 
 label unisex_restroom_gloryhole_blowjob_label(the_person):
     $ anon_char = get_anon_person(the_person)
@@ -470,7 +469,7 @@ label unisex_restroom_gloryhole_blowjob_label(the_person):
     $ the_person.change_happiness(3, add_to_log = False)
 
     $ del anon_char
-    return
+    return "Advance Time"
 
 label unisex_restroom_gloryhole_vaginal_label(the_person):
     $ anon_char = get_anon_person(the_person)
@@ -502,7 +501,7 @@ label unisex_restroom_gloryhole_vaginal_label(the_person):
     $ the_person.change_happiness(5, add_to_log = False)
 
     $ del anon_char
-    return
+    return "Advance Time"
 
 label unisex_restroom_gloryhole_anal_label(the_person):
     $ anon_char = get_anon_person(the_person)
@@ -535,7 +534,7 @@ label unisex_restroom_gloryhole_anal_label(the_person):
     $ the_person.change_happiness(7, add_to_log = False)
 
     $ del anon_char
-    return
+    return "Advance Time"
 
 label unisex_restroom_gloryhole_joinme_label(the_person):
     $ anon_char = get_anon_person(the_person)
@@ -593,4 +592,4 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
 
 
     $ del anon_char
-    return
+    return "Advance Time"

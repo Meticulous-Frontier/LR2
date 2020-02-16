@@ -34,7 +34,7 @@ label coffee_break_action_label:
         del person_two
         del person_three
         mc.location.show_background()
-    return
+    return "Advance Time"
 
 label coffee_break_chit_chat_label(person_one, person_two, person_three):
     python:
