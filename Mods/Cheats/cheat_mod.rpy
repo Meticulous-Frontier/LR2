@@ -40,6 +40,7 @@ init 2 python:
         cs.scope["body_options"] = False
         cs.scope["breast_options"] = False
         cs.scope["hair_style_options"] = False
+        cs.scope["pubes_options"] = False
         cs.scope["font_color_options"] = False
 
 init python:
