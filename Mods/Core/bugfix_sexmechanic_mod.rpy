@@ -140,6 +140,10 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     $ has_taken_control = False
     while not finished:
         if girl_in_charge:
+            if not position_choice is None and position_choice.skill_tag == "Foreplay" and not mc.recently_orgasmed:
+                # girl has got you hard again, now let her pick an actual sex position (clear foreplay position)
+                $ position_choice = None
+
             # The girls decisions set round_choice here.
             if position_choice is None:
                 $ position_choice = girl_choose_position_enhanced(the_person) #Can be none, if no option was available for her to take.
@@ -282,7 +286,8 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
             # only consider continue when the girl and the mc have enough energy
             if the_person.energy > 15 and mc.energy > 15:
-                if renpy.random.randint(0,the_person.arousal) + 50 > the_person.obedience: #She's disobedient and will take control of the encounter. disobed disobd
+                # In 20% of the cases she takes control regardless of obedience
+                if renpy.random.randint(0,the_person.arousal) + 50 > the_person.obedience or renpy.random.randint(1, 5) = 3: #She's disobedient and will take control of the encounter. disobed disobd
                     $ the_person.change_obedience(-3)
                     $ girl_in_charge = True
                     $ finished = False
