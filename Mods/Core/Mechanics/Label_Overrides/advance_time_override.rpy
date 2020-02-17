@@ -41,7 +41,7 @@ init 5 python:
     global morning_crisis_base_chance
 
     # some crisis events have impact on game dynamic and should be allowed to trigger often
-    excluded_crisis_tracker_events = [work_relationship_change_crisis]
+    excluded_crisis_tracker_events = [work_relationship_change_crisis, unisex_restroom_crisis_action]
 
     crisis_base_chance = 8
     morning_crisis_base_chance = 4
