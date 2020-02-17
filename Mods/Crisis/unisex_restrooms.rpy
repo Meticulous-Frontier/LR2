@@ -101,10 +101,8 @@ label unisex_restroom_action_label():
 
     if ran_num == 0:
         call unisex_restroom_door_greet_label() from unisex_restroom_greet_call_1
-        pass
     if ran_num == 1:
         call unisex_restroom_sexy_overhear_label() from unisex_restroom_over_call_2
-
     if ran_num == 2:
         call unisex_restroom_fantasy_overhear_label() from unisex_restroom_over_call_3
     if ran_num >= 3:
