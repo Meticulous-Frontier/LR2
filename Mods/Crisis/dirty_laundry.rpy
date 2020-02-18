@@ -27,8 +27,8 @@ init 3 python:
     night_clothes.add_upper(long_tshirt.get_copy(),colour_white)
 
     night_clothes_sexy = Outfit("Sexy Night Clothes")
-    night_clothes_sexy.add_upper(nightgown_dress.get_copy(),colour_black)
-    night_clothes_sexy.add_lower(cute_lace_panties.get_copy(),colour_black)
+    night_clothes_sexy.add_upper(nightgown_dress.get_copy(),colour_pink)
+    night_clothes_sexy.add_lower(cute_lace_panties.get_copy(),colour_pink)
 
     night_clothes_slutty = Outfit("Slutty Night Clothes")
     night_clothes_slutty.add_upper(lingerie_one_piece.get_copy(),colour_yellow)
@@ -77,9 +77,7 @@ label dirty_laundry_action_label:
                     "You try to respond but just stammer. You're pretty sure theres no way to salvage this."
                     the_person.char "God I can't believe you. Don't touch my stuff! This is so gross! I'm gonna have to rewash these!"
                     "She quickly grabs her panties from your hand. She grabs the rest of her laundry and walks out of the laundry room."
-                    $ the_person.change_happiness(-10)
-                    $ the_person.change_obedience(-10)
-                    $ the_person.change_slut_temp(10)
+                    $ the_person.change_stats(happiness = -10, obedience = -10, slut_temp = 10)
                     "Soon the washer is done. You swap your clothes to the dryer and start it, then head for bed. They should be dry in the morning!"
                 elif the_person.sluttiness < 50:
                     $ the_person.draw_person(position = "stand4")
@@ -151,9 +149,7 @@ label dirty_laundry_action_label:
                         "You wait a few minutes until the washer is done. You move your laundry over to the dryer then walk to your room."
                         "You walk by [the_person.title]'s room as you go. You stop for a second outside her door and can hear soft moans coming from inside. You wonder if she is playing with those panties..."
                         "You go back to your room and get to sleep. Your laundry should be dry in the morning!"
-                        $ the_person.change_happiness(3)
-                        $ the_person.change_slut_core(2)
-                        $ the_person.change_slut_temp(3)
+                        $ the_person.change_stats(happiness = 3, slut_core = 2, slut_temp = 3)
                 elif the_person.sluttiness < 75:
                     $ the_person.draw_person(position = "stand4", emotion = "happy")
                     the_person.char "Oh! You're using my panties!"
