@@ -1,19 +1,3 @@
-transform Threesome_sixty_nine_girl_one_transform():
-    xalign 1.0
-    yalign 1.0
-    xpos 1.0
-    ypos 1.05
-    zoom 0.8
-
-
-transform Threesome_sixty_nine_girl_two_transform():
-    xalign 1.0
-    yalign 1.0
-    xpos 0.97
-    ypos 0.7
-    zoom 0.8
-
-
 init:
     python:
         Threesome_sixty_nine_fuck_girl_one = Threesome_MC_position(name = "fuck_girl_1",
@@ -95,9 +79,9 @@ init:
             requires_location = "Lay",
             requirements = requirement_test,
             verb = "fuck",
-            p1_transform = Threesome_sixty_nine_girl_one_transform,
-            p2_transform = Threesome_sixty_nine_girl_two_transform,
-            can_swap = True,)
+            p1_transform = character_69_bottom,
+            p2_transform = character_69_on_top,
+            can_swap = True)
 
         Threesome_sixty_nine.mc_position = [Threesome_sixty_nine_fuck_girl_one,Threesome_sixty_nine_oral_girl_two, Threesome_sixty_nine_watch_girls]
         list_of_threesomes.append(Threesome_sixty_nine)

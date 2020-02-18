@@ -1,16 +1,16 @@
 transform Threesome_doggy_deluxe_girl_one_transform():
+    yalign 0.47
+    yanchor 0.5
     xalign 1.0
-    yalign 1.0
-    xpos 1.0
-    ypos 0.92
+    xanchor 1.0
     zoom 0.65
 
 
 transform Threesome_doggy_deluxe_girl_two_transform():
+    yalign 0.51
+    yanchor 0.5
     xalign 1.0
-    yalign 1.0
-    xpos 1.0
-    ypos 1.0
+    xanchor 1.0
     zoom 0.8
 
 

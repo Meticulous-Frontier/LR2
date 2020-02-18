@@ -1,10 +1,14 @@
 transform transform_one():
+    yalign 0.5
+    yanchor 0.5
+    xalign 1.0
     xanchor 1.0
-    yanchor 1.0
 
 transform transform_two():
+    yalign 0.5
+    yanchor 0.5
+    xalign 1.0
     xanchor 1.0
-    yanchor 1.0
 
 init 1 python:
     sexy_opinions_list.append("threesomes")

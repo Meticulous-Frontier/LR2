@@ -1,17 +1,16 @@
 transform threesome_double_blowjob_one_transform():
-    xalign 1.0
-    yalign 1.0
-    xpos 0.87
-    ypos 1.0
-    xzoom -1.0
+    yalign 0.6
+    yanchor 0.5
+    xalign 0.85
+    xanchor 1.0
 
 
 transform threesome_double_blowjob_two_transform():
+    yalign 0.6
+    yanchor 0.5
     xalign 1.0
-    yalign 1.0
-    xpos 1.0
-    ypos 1.0
-    zoom 1.0
+    xanchor 1.0
+    xzoom -1
 
 init:
     python:

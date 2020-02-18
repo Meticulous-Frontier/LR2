@@ -1,19 +1,17 @@
 transform Threesome_double_down_girl_one_transform():
+    yalign 0.40
+    yanchor 0.5
     xalign 1.0
-    yalign 1.0
-    xpos 1.0
-    ypos 0.7
+    xanchor 1.0
     zoom 0.8
 
 
 transform Threesome_double_down_girl_two_transform():
-    xalign 1.0
-    yalign 1.0
-    xpos 1.0
-    ypos 1.05
-    zoom 1.5 #Her ass is in your face!
-
-
+    yalign 0.57
+    yanchor 0.5
+    xalign 1.07
+    xanchor 1.0
+    zoom 1.4 #Her ass is in your face!
 
 
 init:

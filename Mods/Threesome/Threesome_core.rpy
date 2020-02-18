@@ -6,10 +6,14 @@ init python:
 
 
 transform threesome_test_1():
+    yalign 0.5
+    yanchor 0.5
     function set_pos_align
     zoom 1.0
 
 transform threesome_test_2():
+    yalign 0.5
+    yanchor 0.5
     function set_pos_align
     zoom 1.0
 
