@@ -288,7 +288,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             if the_person.energy > 15 and mc.energy > 15:
                 # In 13% of the cases she takes control regardless of obedience 
                 # higher chance when she likes taking control lower when she doesn't
-                if renpy.random.randint(0,the_person.arousal) + 50 + the_person.get_opinion_score("taking control") * 10 > the_person.obedience or renpy.random.randint(1, 7 - (the_person.get_opinion_score("taking control") * 2)) == 3: #She's disobedient and will take control of the encounter. disobed disobd
+                if renpy.random.randint(0,the_person.arousal) + 50 + the_person.get_opinion_score("taking control") * 20 > the_person.obedience or renpy.random.randint(1, 7 - (the_person.get_opinion_score("taking control") * 2)) == 1: #She's disobedient and will take control of the encounter. disobed disobd
                     $ the_person.change_obedience(-3)
                     $ girl_in_charge = True
                     $ finished = False
