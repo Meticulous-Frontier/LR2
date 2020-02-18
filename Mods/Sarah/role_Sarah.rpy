@@ -96,7 +96,7 @@ init 2 python:
     def get_Sarah_willing_threesome_list():
         target_list = []
         for person in mc.business.get_employee_list():
-            if willing_to_threesome(sarah, person):
+            if not person is sarah and willing_to_threesome(sarah, person):
                 target_list.append(person)
         if willing_to_threesome(sarah, mom):
             target_list.append(mom)
