@@ -916,7 +916,7 @@ label athlete_hookup_accept(the_person):
     if the_person.sluttiness > 40: #She asks if you want to use a condom
         the_person.char "Do you want to put on a condom first?"
         menu:
-            "Yes":
+            "Put on a condom":
                 mc.name "Yeah, I'd probably better. I may not be able to resist pulling out."
                 if the_person.sluttiness > 60:
                     the_person.char "I mean... its okay with me if you wanted to stick it in for a little bit without one on, you know, just to get started..."
@@ -925,7 +925,7 @@ label athlete_hookup_accept(the_person):
                     mc.name "Maybe next time!"
                 "You get a condom and put it on quickly."
                 $ mc.condom = True
-            "No":
+            "Fuck her raw":
                 $ mc.condom = False
                 mc.name "No way, I want to feel everything."
                 if the_person.sluttiness > 60:
