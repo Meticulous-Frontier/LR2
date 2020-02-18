@@ -310,9 +310,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                             $ the_person.call_dialogue("sex_end_early")
 
                 elif report_log.get("beg finish", 0) > 0 and report_log.get("girl orgasms", 0) == 0: #You promised to make her cum but didn't
-                    $ the_person.change_obedience(-5)
-                    $ the_person.change_happiness(-10)
-                    $ the_person.change_love(-3)
+                    $ the_person.change_stats(obedience = -5, happiness = -10, love = -3)
                     the_person.char "But you promised..."
                     #TODO: Add some personality specific dialgoue for this
 
@@ -324,21 +322,21 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             $ finished = True
         $ round_choice = None #Get rid of our round choice at the end of the round to prepare for the next one. By doing this at the end instead of the begining of the loop we can set a mandatory choice for the first one.
 
-    $ clear_sex_modifiers(the_person)
+    python:
+        clear_sex_modifiers(the_person)
 
-    $ report_log["end arousal"] = the_person.arousal
-    if report_log.get("girl orgasms",0) > 0:
-        $ the_person.arousal = 0 # If she came she's satisfied.
-    else:
-        $ the_person.change_arousal(-the_person.arousal/2) #Otherwise they are half as aroused as you leave them.
+        report_log["end arousal"] = the_person.arousal
+        if report_log.get("girl orgasms",0) > 0:
+            the_person.arousal = 0 # If she came she's satisfied.
+        else:
+            the_person.change_arousal(-the_person.arousal/2) #Otherwise they are half as aroused as you leave them.
 
-    $ mc.condom = False
-    $ mc.recently_orgasmed = False
+        mc.condom = False
+        mc.recently_orgasmed = False
 
     if affair_ask_after and private and ask_girlfriend_requirement(the_person) is True and not the_person.relationship == "Single":
         if the_person.love >= 60 and the_person.sluttiness >= 30 - (the_person.get_opinion_score("cheating on men") * 5) and report_log.get("girl orgasms",0) >= 1: #If she loves you enoguh, is moderately slutty, and you made her cum
             call affair_check(the_person, report_log) from _call_affair_check_bugfix
-
 
     $ update_person_sex_record(the_person, report_log)
 
@@ -353,25 +351,28 @@ label check_position_willingness_bugfix(the_person, the_position, skip_dialog = 
 
     elif the_person.effective_sluttiness() + (the_person.obedience-100) >= the_position.slut_requirement:
         # She's willing to be commanded to do it. Reduce her happiness by the difference (increase arousal if she likes being submissive)
-        $ happiness_drop = the_person.effective_sluttiness() - the_position.slut_requirement #Our initial conditions mean this is a negative number
-        $ the_person.change_arousal(the_person.get_opinion_score("being submissive")*2)
-        $ the_person.discover_opinion("being submissive")
-        $ the_person.change_happiness(happiness_drop)
+        python:
+            happiness_drop = the_person.effective_sluttiness() - the_position.slut_requirement #Our initial conditions mean this is a negative number
+            the_person.change_arousal(the_person.get_opinion_score("being submissive")*2)
+            the_person.discover_opinion("being submissive")
+            the_person.change_happiness(happiness_drop)
+        
         $ the_person.call_dialogue("sex_obedience_accept")
-        $ willing = True
 
     elif the_person.effective_sluttiness() > the_position.slut_requirement/2:
         # She's not willing to do it, but gives you a soft reject.
-        $ the_person.call_dialogue("sex_angry_reject")
+        $ the_person.call_dialogue("sex_gentle_reject")
         $ willing = False
 
     else:
         # You're nowhere close to the required sluttiness, lose some love for even trying.
-        $ love_loss = the_person.effective_sluttiness() - the_position.slut_requirement #A negative number
-        $ love_loss = round(love_loss/5)
-        $ the_person.change_love(love_loss)
-        $ the_person.call_dialogue("sex_gentle_reject")
-        $ willing = False
+        python:
+            love_loss = the_person.effective_sluttiness() - the_position.slut_requirement #A negative number
+            love_loss = round(love_loss/5)
+            the_person.change_love(love_loss)
+            willing = False
+        
+        $ the_person.call_dialogue("sex_angry_reject")
 
     if willing and the_position.skill_tag == "Vaginal" and not mc.condom: #We might need a condom, which means she might say no. TODO: Add an option to pull _off_ a condom while having sex.
         if the_person.effective_sluttiness() < the_person.get_no_condom_threshold() + 50:
@@ -440,8 +441,7 @@ label relationship_sex_watch(the_person, the_relation, the_position):
     if the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person.char "Oh my god [the_relation], I can't believe you're doing that here in front of everyone. Don't either of you have any decency?"
-        $ the_person.change_obedience(-2)
-        $ the_person.change_happiness(-1)
+        $ the_person.change_stats(obedience = -2, happiness = -1)
         "[the_person.title] looks away while you and her [the_relation] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:
@@ -491,15 +491,13 @@ label relationship_being_watched(the_person, the_watcher, the_relation, the_posi
     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
         #She's into it but shamed by the prude watching her.
         the_person.char "[the_person.mc_title], maybe we shouldn't be doing this here..."
-        $ the_person.change_arousal(-1)
-        $ the_person.change_slut_temp(-1)
+        $ the_person.change_stats(arousal = -1, slut_temp = -1)
         "[the_person.title] seems uncomfortable with her [the_relation] nearby."
 
     else: #the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #They're both into it but not fanatical about it.
         the_person.char "Oh my god, having you watch us do this feels so dirty. I think I like it!"
-        $ the_person.change_arousal(1)
-        $ the_person.change_slut_temp(1)
+        $ the_person.change_stats(arousal = 1, slut_temp = 1)
         "[the_person.title] seems more comfortable [the_position.verbing] you with her [the_relation] around."
 
     return
