@@ -915,6 +915,7 @@ label HR_director_change_relative_recruitment_label(the_person):
         return
 
 label HR_director_meeting_on_demand_label(the_person):
+    $ scene_manager = Scene() # make sure we have an empty scene manager for on-demand meetings
     the_person.char "Okay, I think I have time for that! Let me grab my dossiers from Monday and I'll meet you in your office."
     "You head to your office and [the_person.possessive_title] quickly arrives with her papers."
     $ the_person.draw_person(position = "sitting")
@@ -922,7 +923,7 @@ label HR_director_meeting_on_demand_label(the_person):
     call HR_director_personnel_interview_label(the_person, max_opinion = get_HR_director_tag("business_HR_coffee_tier", 0)) from HR_DIR_INTERVIEW_CALL_4
     the_person.char "I'd say that went pretty well! I'm going to head back to work, if that is okay with you, [the_person.mc_title]?"
     "You thank her for her help and excuse her. She gets up and leaves you to get back to work."
-    $ renpy.scene("Active")
+    $ scene_manager.clear_scene()
     $ set_HR_director_tag("business_HR_meeting_last_day", day)
     call advance_time from hr_advance_time_one
     return
@@ -1153,6 +1154,7 @@ label HR_director_mind_control_label(the_person):
     return
 
 label HR_director_mind_control_attempt_label(the_person):
+    $ scene_manager = Scene()
     $ backfire_odds = 100
     $ HR_employee_list = build_HR_mc_list(the_person)
     if len(HR_employee_list) == 0: #No one qualifies!
@@ -1181,7 +1183,7 @@ label HR_director_mind_control_attempt_label(the_person):
     $ renpy.scene("Active")
     call HR_mind_control_attempt(person_choice, the_person) from HR_mind_control_attempt_call_1
 
-    $ renpy.scene("Active")
+    $ scene_manager.clear_scene()
     $ set_HR_director_tag("business_HR_meeting_last_day", day)
     call advance_time from hr_advance_time_two
     return True
