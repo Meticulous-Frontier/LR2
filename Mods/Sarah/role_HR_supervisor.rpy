@@ -654,7 +654,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     else:
         $ person_choice.sexy_opinions[opinion_chat] = [max_opinion, True]
     $ scene_manager.update_actor(person_choice, position = "walking_away", character_placement = character_left_flipped)
-    $ scene_manager.update_actor(the_person, position = "stand2")
+    $ scene_manager.update_actor(the_person, position = "stand2", character_placement = character_right)
     "[the_person.title] gets up and walks [person_choice.title] to the door."
     "They exchange a few pleasantries before [person_choice.title] leaves the room."
     $ scene_manager.remove_actor(person_choice)

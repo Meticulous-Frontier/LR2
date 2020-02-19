@@ -23,7 +23,7 @@ init -1 python:
     THREESOME_BASE_SLUT_REQ = 80  #A constant to hold the usual base sluttiness requirements for threesomes.
     class Threesome_Position(renpy.store.object):
         def __init__(self,name,slut_requirement,position_one_tag, position_two_tag,girl_one_final_description,girl_two_final_description,requires_location,requirements,
-        p1_transform, p2_transform, can_swap = False, verb = "fuck", verbing = None):
+        p1_transform, p2_transform, p1_z_order = 0, p2_z_order = 1, can_swap = False, verb = "fuck", verbing = None):
             self.name = name
             self.slut_requirement = slut_requirement #The required slut score of the girl. Obedience will help fill the gap if possible, at a happiness penalty. Value from 0 (almost always possible) to ~100
             self.position_one_tag = position_one_tag # The tag used to get the correct position image set
@@ -38,6 +38,8 @@ init -1 python:
             self.current_modifier = None #We will update this if the posisiion has a special modifier that shoudl be applied, like blowjob.
             self.p1_transform = p1_transform
             self.p2_transform = p2_transform
+            self.p1_z_order = p1_z_order
+            self.p2_z_order = p2_z_order
             self.can_swap = can_swap
 
             if verbing is None:
@@ -46,11 +48,11 @@ init -1 python:
         # requires the existence of a scene_manager with both actors
         def update_scene(self, the_person_one, the_person_two):
             if girl_swap_pos:
-                scene_manager.update_actor(the_person_two, position = self.position_one_tag, character_placement = self.p1_transform)
-                scene_manager.update_actor(the_person_one, position = self.position_two_tag, character_placement = self.p2_transform)
+                scene_manager.update_actor(the_person_two, position = self.position_one_tag, character_placement = self.p1_transform, z_order = self.p1_z_order)
+                scene_manager.update_actor(the_person_one, position = self.position_two_tag, character_placement = self.p2_transform, z_order = self.p2_z_order)
             else:
-                scene_manager.update_actor(the_person_one, position = self.position_one_tag, character_placement = self.p1_transform)
-                scene_manager.update_actor(the_person_two, position = self.position_two_tag, character_placement = self.p2_transform)
+                scene_manager.update_actor(the_person_one, position = self.position_one_tag, character_placement = self.p1_transform, z_order = self.p1_z_order)
+                scene_manager.update_actor(the_person_two, position = self.position_two_tag, character_placement = self.p2_transform, z_order = self.p2_z_order)
             scene_manager.draw_scene()
             return
 

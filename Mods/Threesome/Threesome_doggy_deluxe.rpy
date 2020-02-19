@@ -121,6 +121,8 @@ init:
             verb = "fuck",
             p1_transform = Threesome_doggy_deluxe_girl_one_transform,
             p2_transform = Threesome_doggy_deluxe_girl_two_transform,
+            p1_z_order = 0,
+            p2_z_order = 1,
             can_swap = True,)
 
         Threesome_doggy_deluxe.mc_position = [Threesome_doggy_deluxe_fuck_girl_two,Threesome_doggy_deluxe_anal_girl_two, Threesome_doggy_deluxe_watch_girls, Threesome_doggy_deluxe_dp_girl_two]

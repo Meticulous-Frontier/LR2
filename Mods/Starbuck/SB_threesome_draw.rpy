@@ -223,9 +223,11 @@ label SB_test_draw_scene_two():
     return
 
 label trist_draw_69():
-    $ renpy.scene("Active")
-    $ lily.draw_person("missionary", character_placement = character_69_bottom, from_scene = True)
-    $ mom.draw_person("cowgirl", character_placement = character_69_on_top, from_scene = True)
+    python:
+        scene_manager = Scene()
+        scene_manager.add_actor(lily, position = "missionary", character_placement = character_69_bottom, z_order = 0)
+        scene_manager.add_actor(mom, position = "cowgirl", character_placement = character_69_on_top, z_order = 1)
+        scene_manager.draw_scene() # required for draw with z_order
     return
 
 screen SB_two_person_info_ui(the_person_one, the_person_two): #Used to display stats for a person while you're talking to them.

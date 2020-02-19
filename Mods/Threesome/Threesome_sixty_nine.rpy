@@ -81,6 +81,8 @@ init:
             verb = "fuck",
             p1_transform = character_69_bottom,
             p2_transform = character_69_on_top,
+            p1_z_order = 0,
+            p2_z_order = 1,
             can_swap = True)
 
         Threesome_sixty_nine.mc_position = [Threesome_sixty_nine_fuck_girl_one,Threesome_sixty_nine_oral_girl_two, Threesome_sixty_nine_watch_girls]
