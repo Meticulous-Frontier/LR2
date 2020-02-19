@@ -81,13 +81,13 @@ init -2 python:
 init 2 python:
     def set_gym_outfit(person):
         person.apply_outfit(workout_wardrobe.decide_on_outfit2(person))
+        person.draw_person(emotion="default")
         return
 
 label train_in_gym(person):
     python:
         gym.show_background()
         set_gym_outfit(person)
-        person.draw_person(emotion="default")
         change = renpy.random.random() * 4 # Maximum change is 4 pounds
 
     if change < 1:
