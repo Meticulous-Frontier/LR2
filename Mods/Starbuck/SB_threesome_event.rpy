@@ -84,7 +84,7 @@ label SB_fetish_vaginal_family_threesome_label():
         "Hop in!" if (the_person_one.outfit.vagina_available() and the_person_one.outfit.tits_available()):
             mc.name "I was just thinking my bed felt cold."
             the_person_one.char "Mmmm, I can think of a few ways to keep you warm."
-            $ scene_manager.update_actor(the_person_two, position="kneeling1", character_placement = character_center_flipped)
+            $ scene_manager.update_actor(the_person_one, position="kneeling1", character_placement = character_center_flipped)
             "[the_person_one.possessive_title] gives you a wink and then begins to crawl up the bed towards you."
 
     "You are so busy checking out [the_person_one.possessive_title], your brain barely registers a knock on your door. [the_person_one.possessive_title] is just sitting down in your lap when you hear a gasp from your door."
