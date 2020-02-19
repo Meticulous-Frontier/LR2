@@ -350,7 +350,7 @@ label advance_time_people_run_move_label():
                         if the_crisis[2] == "on_talk" and len(person.on_talk_event_list) == 0: # prevent multiple on talk events for person
                             person.on_talk_event_list.append(limited_time_event)
 
-                        elif the_crisis[2] == "on_enter" and len(person.on_room_enter_event_list) == 0: # prevent multiple on enter events for person
+                        elif the_crisis[2] == "on_enter":
                             person.on_room_enter_event_list.append(limited_time_event)
 
     return
