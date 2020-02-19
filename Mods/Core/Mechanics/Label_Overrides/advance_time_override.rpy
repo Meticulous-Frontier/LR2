@@ -101,6 +101,9 @@ init 5 python:
                 if crisis[0].is_action_enabled(): #Get the first element of the weighted tuple, the action.
                     possible_crisis_list.append(crisis) #Build a list of valid crises from ones that pass their requirement.
         renpy.random.shuffle(possible_crisis_list)    # shuffle the list in random order
+
+        #renpy.say("", str(len(possible_crisis_list)) + " - ".join((o[0].name) for o in possible_crisis_list))
+
         return get_random_from_weighted_list(possible_crisis_list)
 
     def get_limited_time_action_for_person(person):
@@ -123,12 +126,12 @@ init 5 python:
         return get_random_from_weighted_list(possible_morning_crises_list)
 
     def cleanup_crisis_tracker():
-        while len(crisis_tracker) > 6: # release old tracked events
+        while len(crisis_tracker) > 10: # release old tracked events
             del crisis_tracker[0]
         return
 
     def cleanup_morning_crisis_tracker():
-        while len(morning_crisis_tracker) > 2: # release old tracked events
+        while len(morning_crisis_tracker) > 3: # release old tracked events
             del morning_crisis_tracker[0]
         return
 
