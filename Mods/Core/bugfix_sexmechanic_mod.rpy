@@ -131,6 +131,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     $ finished = False #When True we exit the main loop (or never enter it, if we can't find anything to do)
     $ position_choice = start_position # initialize with start_position (in case girl is in charge or position is locked)
     $ object_choice = start_object # initialize with start_object (in case girl is in charge or position is locked)
+    $ guy_orgasms_before_control = 0
 
     # $ renpy.say("", "Fuck Person Enhanced => start position: " + ("None" if start_position is None else start_position.name) + " , object: " + ("None" if start_object is None else start_object.name))
     $ apply_sex_modifiers(the_person)
@@ -156,7 +157,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             elif object_choice is None:
                 "[the_person.title] looks around, but can't see anywhere to have fun with you."
                 $ round_choice = "Girl Leave"
-            elif report_log.get("guy orgasms", 0) > 0 and report_log.get("girl orgasms", 0) > 0: #Both parties have been satisfied
+            elif report_log.get("guy orgasms", 0) > guy_orgasms_before_control and report_log.get("girl orgasms", 0) > 0: #Both parties have been satisfied
                 the_person.char "Whew, that felt amazing. It's good to know it was as good for you as it was for me."
                 $ round_choice = "Girl Leave"
             elif report_log.get("girl orgasms", 0) > 0 and the_person.love < 10 and the_person.obedience < 110: #She's cum and doesn't care about you finishing.
@@ -292,6 +293,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     $ the_person.change_obedience(-3)
                     $ girl_in_charge = True
                     $ finished = False
+                    $ guy_orgasms_before_control = report_log.get("guy orgasms", 0)
                     $ has_taken_control = True #After successful position and object choice she will let you know she wants to keep going.
                     $ position_choice = None #She picks the position now, because she has her own list of possibilities
 
