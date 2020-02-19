@@ -399,7 +399,7 @@ label starbuck_foreplay_skillup_label(the_person):
                 "[the_person.possessive_title] hands you your purchase after she rings you up. She smiles at you and blushes a bit."
                 the_person.char "Now... did you maybe want some help... trying this out?"
                 menu:
-                    "Finger her":
+                    "Grope her":
                         "You take a quick look at the instructions. Looks like it should be fairly easy to keep with you and use with your partners."
                         mc.name "Sounds good, [the_person.title]. Since you recommended it, its only fair you be the first to feel it."
                         the_person.char "Ah... I can't wait! Let's go!"
