@@ -1,7 +1,8 @@
 init:
     python:
         Threesome_sixty_nine_fuck_girl_one = Threesome_MC_position(name = "fuck_girl_1",
-            description = "Fuck [the_person_one.title]",
+            action_description = "Fuck [the_person_{0}.title]",
+            default_action_person = "one",
             skill_tag_p1 = "Vaginal",
             skill_tag_p2 = "Oral",
             girl_one_arousal = 22,
@@ -24,7 +25,8 @@ init:
             requirement = requirement_hard_both_vagina_available)
 
         Threesome_sixty_nine_oral_girl_two = Threesome_MC_position(name = "oral_girl_2",
-            description = "Get Blowjob from [the_person_two.title]",
+            action_description = "Get Blowjob from [the_person_{0}.title]",
+            default_action_person = "two",
             skill_tag_p1 = "Foreplay",
             skill_tag_p2 = "Oral",
             girl_one_arousal = 16,

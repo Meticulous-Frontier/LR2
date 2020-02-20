@@ -17,7 +17,8 @@ transform Threesome_doggy_deluxe_girl_two_transform():
 init:
     python:
         Threesome_doggy_deluxe_fuck_girl_two = Threesome_MC_position(name = "fuck_girl_2",
-            description = "Fuck [the_person_two.title]",
+            action_description = "Fuck [the_person_{0}.title]",
+            default_action_person = "two",
             skill_tag_p1 = "Oral",
             skill_tag_p2 = "Vaginal",
             girl_one_arousal = 18,
@@ -40,7 +41,8 @@ init:
             requirement = requirement_hard_both_vagina_available)
 
         Threesome_doggy_deluxe_anal_girl_two = Threesome_MC_position(name = "anal_girl_2",
-            description = "Fuck [the_person_two.title]'s ass",
+            action_description = "Fuck [the_person_{0}.title]'s ass",
+            default_action_person = "two",
             skill_tag_p1 = "Oral",
             skill_tag_p2 = "Anal",
             girl_one_arousal = 18,
@@ -87,7 +89,8 @@ init:
 
 
         Threesome_doggy_deluxe_dp_girl_two = Threesome_MC_position(name = "DP_girl_2",
-            description = "Fuck [the_person_two.title]'s ass and pussy using strapon",
+            action_description = "Fuck [the_person_{two}.title]'s ass and pussy using strapon",
+            default_action_person = "two",
             skill_tag_p1 = "Oral",
             skill_tag_p2 = "Anal",
             girl_one_arousal = 18,

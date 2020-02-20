@@ -68,10 +68,13 @@ init -1 python:
 
 
     class Threesome_MC_position(renpy.store.object):
-        def __init__(self,name,description,skill_tag_p1,skill_tag_p2,girl_one_arousal,girl_two_arousal,girl_one_source,girl_two_source,girl_one_energy,girl_two_energy,
-        guy_arousal,skill_tag_guy,guy_source,guy_energy,intro,scenes,outro,strip_description,strip_ask_description,orgasm_description,swap_description,requirement):
+        def __init__(self,name,skill_tag_p1,skill_tag_p2,girl_one_arousal,girl_two_arousal,girl_one_source,girl_two_source,girl_one_energy,girl_two_energy,
+            guy_arousal,skill_tag_guy,guy_source,guy_energy,intro,scenes,outro,strip_description,strip_ask_description,orgasm_description,swap_description,requirement,
+            description = None, action_description = None, default_action_person = None):
             self.name = name
             self.description = description #Describes the position the MC is in
+            self.action_description = action_description # Template for action {0} will be replaced with the action person number (one/two -> used for swap girls - description update)
+            self.default_action_person = default_action_person
             self.skill_tag_p1 = skill_tag_p1 #The skill that will provide a bonus to this for girl 1
             self.skill_tag_p2 = skill_tag_p2 #The skill that will provide a bonus to this for girl 2
             self.girl_one_arousal = girl_one_arousal # The base arousal the girl recieves from this position.
@@ -203,7 +206,13 @@ init -1 python:
 
 
 label threesome_test():
-    call join_threesome(mom, lily, "missionary") from threesome_test_call_1
+    $ scene_manager = Scene()
+    $ scene_manager.add_actor(mom)
+    $ scene_manager.add_actor(lily, character_placement = character_center_flipped)
+    $ scene_manager.strip_actor_outfit(mom)
+    $ scene_manager.strip_actor_outfit(lily)
+    call start_threesome(mom, lily) from threesome_test_call_1
+    $ scene_manager.clear_scene()
     return "Test Complete"
 
 label threesome_alignment():
@@ -638,6 +647,14 @@ label pick_threesome(the_person_one, the_person_two, girl_one_position = None, o
             if girl_one_choice == threeway.position_two_tag and girl_two_choice == threeway.position_one_tag:
                 position_choice = threeway
                 girl_swap_pos = True
+        for mc_pos in position_choice.mc_position:
+            if mc_pos.action_description:
+                if girl_swap_pos:
+                    mc_pos.description = mc_pos.action_description.replace("{0}", "one" if mc_pos.default_action_person == "two" else "two")
+                else:
+                    mc_pos.description = mc_pos.action_description.replace("{0}", "two" if mc_pos.default_action_person == "two" else "one")
+
+
     #TODO figure out if position requires an object, if so select the object#
     return position_choice
 
