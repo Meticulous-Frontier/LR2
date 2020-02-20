@@ -571,6 +571,14 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         else:
             person_choice.char "Is that... I'm sorry, what is that you needed, [person_choice.mc_title]?"
         $ person_choice.change_slut_temp(10) # give her a temp slut boost to maybe have a threesome later...
+    elif the_person.outfit.vagina_visible():
+        "[person_choice.title] sits down across from you, but is clearly distracted by [the_person.title] showing off her pussy."
+        $ person_choice.change_slut_temp(5)
+        person_choice.char "Uh...right, what can I do for you, [person_choice.mc_title]"
+    elif the_person.outfit.tits_visible():
+        "[person_choice.title] sits down across from you, but is clearly distracted by the tits of [the_person.title]."
+        $ person_choice.change_slut_temp(3)
+        person_choice.char "Oh...what can I do for you, [person_choice.mc_title]"
 
     if get_HR_director_tag("business_HR_coffee_tier", 0) > 0:
         "[person_choice.title] sits down across from you at your desk. [the_person.title] pours a cup of coffee while talking."
