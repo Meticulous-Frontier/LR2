@@ -59,15 +59,15 @@ label dirty_laundry_action_label:
             "You take a quick look out the door to make sure the coast is clear, then close it behind you. You grab the panties and then pull your pants down."
             "You wrap the cloth of the panties around your cock and start to work them up and down. The satin texture feels great."
             "You close your eyes and imagine [the_person.title]. You imagine her in the morning, pulling up her cum filled panties up and wearing them around all day long."
-            $ rnd_num = renpy.random.randint(1,2) # increase for more situations
-            if rnd_num == 1: #No one catches you
+            $ ran_num = renpy.random.randint(1,2) # increase for more situations
+            if ran_num == 1: #No one catches you
                 "Images of [the_person.title] flood you brain as you continue to jack off. She's bent over now, begging you to cum all over her ass."
                 "You go past the point of no return. You wrap the panties around the tip and then fire your load off into them."
                 "When you finish, you take a look at them. Your cum is all over [the_person.title]'s panties."
                 "You do your best to fold them back up and put them back at the top of her laundry pile. You wonder if she'll notice."
                 "Soon the washer is done. You swap your clothes to the dryer and start it, then head for bed. They should be dry in the morning!"
                 #TODO mandatory event the next day when the girl discovers her used panties
-            elif rnd_num == 2:                               #the panty owner catches you!
+            elif ran_num == 2:                               #the panty owner catches you!
                 "Your imagination is running wild and lewd images of [the_person.title] run through your head. Suddenly, you hear the laundry room door open!"
                 the_person.char "Holy fuck!"
                 "You are totally busted! You stop what you are doing and open you eyes, seeing [the_person.title] looking at you wide eyed."
