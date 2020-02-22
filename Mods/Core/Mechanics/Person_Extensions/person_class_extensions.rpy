@@ -292,6 +292,7 @@ init -1:
             while strip_choice and self.judge_outfit(test_outfit, temp_sluttiness_boost):
                 self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
                 self.apply_outfit(test_outfit, ignore_base = True) #Swap our current outfit out for the test outfit.
+                removed_something = True
                 if msg_count > 0:   # do we need to show a random message and replace titles and outfit name
                     msg_idx = renpy.random.randint(1, msg_count)
                     msg = messages[msg_idx - 1]
