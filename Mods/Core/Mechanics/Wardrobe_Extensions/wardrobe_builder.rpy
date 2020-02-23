@@ -41,6 +41,8 @@ init 5 python:
     real_dress_list = [x for x in dress_list if x not in [bath_robe, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, apron]]
 
     class WardrobeBuilder():
+        default_person = None
+
         preferences = {}
         preferences["skimpy outfits"] = {}
         preferences["skimpy outfits"]["upper_body"] = [two_part_dress, thin_dress, leotard, lace_sweater, belted_top, lace_crop_top, tanktop, tube_top, business_vest]
@@ -123,13 +125,17 @@ init 5 python:
         earings_only_list = [chandelier_earings, gold_earings, modern_glasses]
         neckwear_without_collars = [x for x in neckwear_list if x.proper_name not in ["Collar_Breed", "Collar_Cum_Slut", "Collar_Fuck_Doll"]]
 
+
         def __init__(self, person):
             if person and isinstance(person, Person):
                 self.person = person
             else:
-                self.person = create_random_person(name ="Ema", last_name = "Hesire", age = 23, body_type = "thin_body", tits = "B", height = 0.91)
-                self.person.opinions.clear() # reset opinions so every item has an equal chance
-                self.person.sexy_opinions.clear()
+                if self.default_person is None:
+                    self.default_person = create_random_person(name ="Ema", last_name = "Hesire", age = 23, body_type = "thin_body", tits = "B")
+                    self.person.opinions.clear() # reset opinions so every item has an equal chance
+                    self.person.sexy_opinions.clear()
+
+                self.person = self.default_person
 
             skirts_score = self.person.get_opinion_score("skirts")
             pants_score = self.person.get_opinion_score("pants")
