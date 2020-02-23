@@ -29,6 +29,12 @@ init -1 python:
                     known_people.append(person)
         return known_people
 
+    def unknown_people_in_the_game(excluded_people = []):
+        unknown_people = []
+        for location in list_of_places:
+            unknown_people += unknown_people_at_location(location, excluded_people)
+        return unknown_people
+
     def unknown_people_at_location(location, excluded_people = []):
         unknown_people = []
         for person in location.people:
