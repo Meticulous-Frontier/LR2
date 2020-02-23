@@ -1,11 +1,13 @@
 # Fix for sex mechanic for people who don't have the bugfix branch installed
 # Enhancement for pick object (don't show list when only one object can be selected (auto-select it))
+# Added condom ask enhancements (Original by BadRabbit)
 
 init 5 python:
     config.label_overrides["fuck_person"] = "fuck_person_bugfix"
     config.label_overrides["check_position_willingness"] = "check_position_willingness_bugfix"
     config.label_overrides["pick_object"] = "pick_object_enhanced"
     config.label_overrides["watcher_check"] = "watcher_check_enhanced"
+    config.label_overrides["condom_ask"] = "condom_ask_enhanced"
 
     def girl_choose_position_enhanced(person):
         position_option_list = []
@@ -132,6 +134,8 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     $ position_choice = start_position # initialize with start_position (in case girl is in charge or position is locked)
     $ object_choice = start_object # initialize with start_object (in case girl is in charge or position is locked)
     $ guy_orgasms_before_control = 0
+    $ ask_for_condom = False
+    $ use_condom = False
 
     # $ renpy.say("", "Fuck Person Enhanced => start position: " + ("None" if start_position is None else start_position.name) + " , object: " + ("None" if start_object is None else start_object.name))
     $ apply_sex_modifiers(the_person)
@@ -253,6 +257,8 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             if position_choice and object_choice: #If we have both an object and a position we're good to go, otherwise we loop and they have a chance to choose again.
                 call sex_description(the_person, position_choice, object_choice, private = private, report_log = report_log) from _call_sex_description_bugfix
                 $ first_round = False
+                if mc.condom and mc.recently_orgasmed: # you orgasmed so you used your condom.
+                    $ mc.condom = False
                 if position_choice.requires_hard and mc.recently_orgasmed:
                     "Your post orgasm cock softens, stopping you from [position_choice.verbing] [the_person.possessive_title] for now."
                     $ position_choice = None
@@ -376,16 +382,215 @@ label check_position_willingness_bugfix(the_person, the_position, skip_dialog = 
         
         $ the_person.call_dialogue("sex_angry_reject")
 
-    if willing and the_position.skill_tag == "Vaginal" and not mc.condom: #We might need a condom, which means she might say no. TODO: Add an option to pull _off_ a condom while having sex.
-        if the_person.effective_sluttiness() < the_person.get_no_condom_threshold() + 50:
-            # she is not slutty enough and we have the condom dialog
-            call condom_ask(the_person) from _call_condom_ask_bugfix
-            $ willing = _return
-        else:
-            # she is so slutty we are going to fuck her raw (we don't care anymore)
-            mc.name "I'm going to fuck your little pussy raw."
+    if willing and (the_position.skill_tag == "Vaginal" or the_position.skill_tag == "Anal") and not mc.condom: #We might need a condom, which means she might say no. TODO: Add an option to pull _off_ a condom while having sex.
+        if not ask_for_condom:
+            $ ask_for_condom = True
+            if the_person.effective_sluttiness() < the_person.get_no_condom_threshold() + 50:
+                # she is not slutty enough and we have the condom dialog
+                call condom_ask(the_person) from _call_condom_ask_bugfix
+                $ willing = _return
+                $ use_condom = mc.condom
+            else:
+                # she is so slutty we are going to fuck her raw (we don't care anymore)
+                mc.name "I'm going to fuck your little pussy raw."
+        elif use_condom:  # you already determined you are going to fuck her with condom
+            "You quickly put on another condom and continue to fuck her."
+            $ mc.condom = True
 
     return willing
+
+label condom_ask_enhanced(the_person):
+    $ condom_threshold = the_person.get_no_condom_threshold()
+
+    if SB_check_fetish(the_person, cum_internal_role):
+        "[the_person.possessive_title] eyes your cock greedily. You could put a condom on if you wanted."
+        menu:
+            "Put on a condom":
+                "You pull a condom out of your wallet and tear open the package."
+                "[the_person.title] takes a hold of the condom in your hand."
+                the_person.char "I want your cum inside me and this is going to stop that."
+                the_person.char "You don't really need that, do you?"
+                menu:
+                    "Insist on condom":
+                        mc.name "I think a condom is a good idea."
+                        if the_person.get_opinion_score("taking control") > -1:
+                            the_person.char "OK. Let me put this another way."
+                            "[the_person.title] grabs the condom and throws it off to the side."
+                            the_person.char "Either we fuck and you come inside me or we don't fuck at all."
+                            menu:
+                                "Fuck her raw.":
+                                    mc.name "Fine."
+                                    the_person.char "I knew you would make the right choice."
+                                "Don't":
+                                    mc.name "If it's that important to you let's just do something else."
+                                    return False
+                        else:
+                            the_person.char "OK."
+                            $ mc.condom = True
+                    "Fuck her raw":
+                        return True
+            "Don't":
+                return True
+
+    elif prostitute_role in the_person.special_role:
+        if the_person.love < 50:
+            the_person.char "Are you remembering that I'm a 'working girl'?"
+            the_person.char "That means 'safety first' - always."
+            the_person.char "We're going to have to use one of these."
+            "She gets out a condom."
+            the_person.char "But don't you worry."
+            the_person.char "You're going to feel EVERY thing we do."
+            menu:
+                "Put on condom":
+                    call put_on_condom_routine(the_person) from _call_put_on_condom_routine_1
+
+                "Refuse and do something else.":
+                    "[the_person.title] doesn't seem like she's going to change her mind."
+                    mc.name "If it's that important to you let's just do something else."
+                    return False
+
+
+        elif the_person.sex_record.get("Vaginal Creampies", 0) < 5:
+            the_person.char "Normally we would have to use one of these."
+            "She gets out a condom."
+            the_person.char "But maybe not. What do you think?"
+            menu:
+                "Condom":
+                    call put_on_condom_routine(the_person) from _call_put_on_condom_routine_2
+
+                "No condom":
+                    if the_person.get_opinion_score("bareback sex") > 0:
+                        the_person.char "Good choice. I hate those things but I have to use them."
+                    if the_person.get_opinion_score("creampies") < 0:
+                        the_person.char "Just make sure to pull out when you cum, okay?"
+
+
+        else:
+            the_person.char "I know you like to do me bare."
+            the_person.char "So maybe no condom today?"
+            menu:
+                "Agree no condom":
+                    if the_person.get_opinion_score("bareback sex") > 0:
+                        the_person.char "Good choice. I hate those things but I have to use them."
+                    if the_person.get_opinion_score("creampies") < 0:
+                        the_person.char "Just make sure to pull out when you cum, okay?"
+                    "[the_person.title] smiles at you."
+                "Use condom":
+                    mc.name "I still think that it's good idea."
+                    the_person.char "Alright."
+
+                    call put_on_condom_routine(the_person) from _call_put_on_condom_routine_3
+
+    elif the_person.effective_sluttiness() < condom_threshold:
+        # they demand you put on a condom.
+        #TODO: Make this dialogue personality based
+        if the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0:
+            the_person.char "I hate do say it, but you really should wear a condom."
+        else:
+            the_person.char "Do you have a condom? You're going to have to put one on."
+
+        menu:
+            "Put on a condom.":
+                call put_on_condom_routine(the_person) from _call_put_on_condom_routine_4
+
+            "Refuse and do something else.":
+                "[the_person.title] doesn't seem like she's going to change her mind."
+                mc.name "If it's that important to you let's just do something else."
+                return False
+
+        if the_person.get_opinion_score("bareback sex") < 0 :
+            the_person.char "There we go, a nice big rubbery cock."
+
+    elif the_person.effective_sluttiness() < condom_threshold + 20:
+        # They suggest you put on a condom.
+        if the_person.get_opinion_score("creampies") > 0 and the_person.get_opinion_score("bareback sex") > 0: # likes everything a condom stops
+            $ the_person.discover_opinion("creampies")
+            $ the_person.discover_opinion("bareback sex")
+            the_person.char "We should use a condom, though I don't really see why."
+        elif the_person.get_opinion_score("creampies") < 0 and the_person.get_opinion_score("bareback sex") > 0: #no to pie yes to ride
+            the_person.char "We should use a condom, I don't want you to come inside me."
+        elif the_person.get_opinion_score("bareback sex") < 0:
+            the_person.char "We should use a condom, I think that that would be the best idea."
+        else:
+            the_person.char "Do you think you should put a condom on? Maybe it's a good idea."
+        menu:
+            "Agree to put on a condom":
+                mc.name "I think you're right."
+                call put_on_condom_routine(the_person) from _call_put_on_condom_routine_5
+
+            "Fuck her raw":
+                mc.name "No way. I want to feel you wrapped around me."
+                if the_person.get_opinion_score("bareback sex") > 0:
+                    the_person.char "Tell me about it - nothing beats skin on skin."
+                if the_person.get_opinion_score("creampies") < 0:
+                    the_person.char "Just make sure to pull out when you cum, okay?"
+
+    else:
+        if the_person.get_opinion_score("bareback sex") < 0 or the_person.get_opinion_score("creampies") < 0 or the_person.get_opinion_score("anal creampies") < 0: 
+            the_person.char "I think that we should use a condom."
+        menu:
+            "Put on a condom":
+                if the_person.get_opinion_score("taking control") > 0 and the_person.get_opinion_score("bareback sex") > 0: # likes it bare and is not a pushover
+                    "[the_person.title] takes a hold of your hand."
+                    the_person.char "You don't really need that, do you?"
+                    menu:
+                        "Insist on condom":
+                            mc.name "I think a condom is a good idea."
+                            if the_person.get_opinion_score("taking control") > 1:
+                                the_person.char "OK. Let me put this another way."
+                                "[the_person.title] grabs the condom and throws it off to the side."
+                                the_person.char "Either you fuck me raw or we don't fuck at all."
+                                menu:
+                                    "Fuck her raw.":
+                                        mc.name "Fine."
+                                        the_person.char "I knew you would make the right choice."
+                                    "Don't":
+                                        mc.name "If it's that important to you let's just do something else."
+                                        return False
+                            else:
+                                the_person.char "Fine, just make it quick!"
+                                "[the_person.title] watches impatiently while you roll the condom on."
+                                $ mc.condom = True
+                        "Relent":
+                            mc.name "I suppose not."
+                            the_person.char "Thanks, [the_person.mc_title]."
+                else:
+                    call put_on_condom_routine(the_person) from _call_put_on_condom_routine_6
+                    
+            "Fuck her raw":
+                if the_person.get_opinion_score("creampies") < 0:
+                    the_person.char "Alright, but don't want cum inside."
+
+    return True #If we make it to the end of the scene everything is fine and sex can continue. If we returned false we should go back to the position select, as if we asked for something to extreme.
+
+label put_on_condom_routine(the_person):
+    if the_person.sex_skills["Oral"] > 3 and the_person.get_opinion_score("giving blowjobs") > 1: #Knows what she's doing
+        "[the_person.title] gets a condom out of their own bag and opens it."
+        "She carefully puts it in her mouth, behind her teeth."
+        "She starts bobbing up and down on your cock."
+        "As she goes down on your dick she unrolls the condom onto it with her mouth."
+        if the_person.get_opinion_score("being submissive") > 0:
+            "She keeps going to the very base of your cock, deepthroating you and entirely covering your cock."
+        else:
+            "Once she has rolled on about two thirds of the condom she brings her head back up and rolls the rest on with her hand."
+    elif the_person.get_opinion_score("giving handjobs") > 0:
+        "You pull out a condom from your wallet and rip open the package."
+        the_person.char "Let me help with that."
+        "[the_person.title] takes the condom out of your hand."
+        "She holds it at the top of your cock with one hand as she strokes further and further with the other hand, rolling the condom down onto it."
+    elif the_person.get_opinion_score("bareback sex") < 0: # dislikes everything a condom stops
+        if the_person.get_opinion_score("taking control") > 0:
+            the_person.char "Good choice."
+            "You roll the condom onto your cock as [the_person.title] watches eagerly."
+        else:
+            "[the_person.title] watches impatiently while you roll the condom on."
+    elif the_person.get_opinion_score("bareback sex") > 0:
+        "You pull out a condom from your wallet and rip open the package. [the_person.title] watches disappointedly while you slide it on."
+    else:
+        "You pull out a condom from your wallet and rip open the package. [the_person.title] watches while you slide it on."
+
+    $ mc.condom = True
+    return
 
 label pick_object_enhanced(the_person, the_position, forced_object = None):
     if the_position is None:
