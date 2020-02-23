@@ -103,26 +103,16 @@ init 2 python:
     #     return
 
     def casual_sex_create_athlete():
-        new_athlete = create_random_person( body_type = "thin_body", age = renpy.random.randint(19,25), personality = athlete_personality, relationship = "Single")
-        new_athlete.generate_home()
+        new_athlete = make_person(body_type = "thin_body", age = renpy.random.randint(19,25), personality = athlete_personality, relationship = "Single")
         assign_casual_athlete_role(new_athlete)
-        update_person_opinions(new_athlete)
-        update_random_person(new_athlete)
-        rebuild_wardrobe(new_athlete)
-        update_person_outfit(new_athlete, -0.2) # choose a less slutty outfit as planned outfit
-
+        new_athlete.generate_home()
         gym.add_person(new_athlete)
         return True
 
     def casual_sex_create_hotwife():
-        new_hotwife = create_random_person(age = renpy.random.randint(30,40), personality = hotwife_personality, relationship = "Married")
-        new_hotwife.generate_home()
+        new_hotwife = make_person(age = renpy.random.randint(30,40), personality = hotwife_personality, relationship = "Married")
         assign_casual_hotwife_role(new_hotwife)
-        update_person_opinions(new_hotwife)
-        update_random_person(new_hotwife)
-        rebuild_wardrobe(new_hotwife)
-        update_person_outfit(new_hotwife, -0.2) # choose a less slutty outfit as planned outfit
-
+        new_hotwife.generate_home()
         downtown_bar.add_person(new_hotwife)
         return True
 

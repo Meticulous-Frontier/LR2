@@ -23,7 +23,7 @@ init 2 python: # Declare variables to use
         # Place the stylist character so it is in a room in the world.
         global salon_manager
 
-        salon_manager = create_random_person(name = "Ophelia", last_name = "von Friseur", height = .9, age = renpy.random.randint(21,30), body_type = "thin_body",
+        salon_manager = make_person(name = "Ophelia", last_name = "von Friseur", height = .9, age = renpy.random.randint(21,30), body_type = "thin_body",
             personality =  None if not "salon_manager_personality" in globals() else salon_manager_personality, job = "Hair Stylist", starting_wardrobe = salon_wardrobe, eyes="light blue", start_sluttiness = 10,
             possessive_title = "My stylist")
 

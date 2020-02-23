@@ -235,7 +235,7 @@ init -1:
                 start_home  = None
 
 
-            the_daughter = create_random_person(last_name = self.last_name, age = age, body_type = body_type, face_style = face_style, tits = tits, height = height,
+            the_daughter = make_person(last_name = self.last_name, age = age, body_type = body_type, face_style = face_style, tits = tits, height = height,
                 hair_colour = hair_colour, skin = self.skin, eyes = eyes, start_home = start_home)
 
             if start_home is None:
@@ -246,11 +246,6 @@ init -1:
                 town_relationships.update_relationship(the_daughter, sister, "Sister") #Set them as sisters
 
             town_relationships.update_relationship(self, the_daughter, "Daughter", "Mother") #Now set the mother/daughter relationship (not before, otherwise she's a sister to herself!)
-
-            # make her a little bit more unique by changing wardrobe and opinions
-            update_person_opinions(the_daughter)
-            rebuild_wardrobe(the_daughter)
-            update_person_outfit(the_daughter, -0.2)
 
             return the_daughter
 

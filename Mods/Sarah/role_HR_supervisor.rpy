@@ -1466,7 +1466,7 @@ init 1200 python:
             main_skill += 2
             other_stat = 2
 
-        recruit = create_random_person(tits = get_HR_director_tag("recruit_bust", None),
+        recruit = make_person(tits = get_HR_director_tag("recruit_bust", None),
             start_obedience = get_HR_director_tag("recruit_obedience", None),
             start_sluttiness = get_HR_director_tag("recruit_slut", None),
             relationship = get_HR_director_tag("recruit_marital", None),
@@ -1511,12 +1511,6 @@ init 1200 python:
             recruit.production_skill = main_skill
             recruit.charisma -= other_stat
             recruit.opinions["production work"] = [2, True]
-
-        # use enhanced make person options
-        update_person_opinions(recruit)
-        update_random_person(recruit)
-        rebuild_wardrobe(recruit)
-        update_person_outfit(recruit, -0.2) # choose a less slutty outfit as planned outfit
 
         # discover some opinions
         for x in __builtin__.range(0, 6):

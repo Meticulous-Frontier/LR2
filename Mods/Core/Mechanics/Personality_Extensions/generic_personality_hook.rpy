@@ -9,14 +9,26 @@ init 10 python: # add to stack later then other mods
 
 init -1 python:
     # This will be called in game when a person is created original function in script.rpy
-    def make_person():
+    def make_person(name = None, last_name = None, age = None, body_type = None, face_style = None, tits = None, height = None,
+        hair_colour = None, hair_style = None, pubes_colour = None, pubes_style = None, skin = None, eyes = None, job = None,
+        personality = None, custom_font = None, name_color = None, dial_color = None, starting_wardrobe = None, stat_array = None, skill_array = None, sex_array = None,
+        start_sluttiness = None, start_obedience = None, start_happiness = None, start_love = None, start_home = None,
+        title = None, possessive_title = None, mc_title = None, relationship = None, kids = None, SO_name = None, base_outfit = None):
+
         return_character = None
         if renpy.random.randint(1,100) < 20:
             return_character = get_premade_character()
 
+        if height is None:
+            height = 0.825 + (renpy.random.random()/7)
+
         if return_character is None: #Either we aren't getting a pre-made, or we are out of them.
             # Use larger height range of person object (not full)
-            return_character = create_random_person(height = 0.825 + (renpy.random.random()/7))
+            return_character = create_random_person(name = name, last_name = last_name, age = age, body_type = body_type, face_style = face_style, tits = tits, height = height,
+                hair_colour = hair_colour, hair_style = hair_style, pubes_colour = pubes_colour, pubes_style = pubes_style, skin = skin, eyes = eyes, job = job,
+                personality = personality, custom_font = custom_font, name_color = name_color, dial_color = dial_color, starting_wardrobe = starting_wardrobe, stat_array = stat_array, skill_array = skill_array, sex_array = sex_array,
+                start_sluttiness = start_sluttiness, start_obedience = start_obedience, start_happiness = start_happiness, start_love = start_love, start_home = start_home,
+                title = title, possessive_title = possessive_title, mc_title = mc_title, relationship = relationship, kids = kids, SO_name = SO_name, base_outfit = base_outfit)
 
         update_person_opinions(return_character)
         update_random_person(return_character)
@@ -178,10 +190,19 @@ label activate_generic_personality(stack):
 
     python:
         # add one bimbo to the game (on start of game)
-        the_person = create_random_person(age=renpy.random.randint(25, 35), tits="DD", body_type = "standard_body", face_style = "Face_4", skin = "tan",
+        the_person = make_person(age=renpy.random.randint(25, 35), tits="DD", body_type = "standard_body", face_style = "Face_4", skin = "tan",
             hair_colour = ["platinum blonde", [0.789, 0.746, 0.691,1]], hair_style = messy_hair, eyes = ["light blue", [0.60, 0.75, 0.98, 1.0]], personality = bimbo_personality)
         the_person.generate_home()
         the_person.home.add_person(the_person)
+
+        # add two random hookers to the game (on start of game)
+        for i in range(2):
+            the_person = make_person(start_sluttiness = renpy.random.randint(25, 40))
+            the_person.sexy_opinions["bareback sex"] = [-2, False]
+            the_person.set_mc_title("Sir")
+            the_person.special_role.append(prostitute_role)
+            the_person.generate_home()
+            the_person.home.add_person(the_person)
 
         # add mc actions
         for action in main_character_actions_list:
@@ -189,8 +210,19 @@ label activate_generic_personality(stack):
                 mc.main_character_actions.append(action)
 
         # update characters in game
-        for person in all_people_in_the_game():
+        for person in all_people_in_the_game(unique_character_list):
             update_random_person(person)
+
+        # update default special characters opinions
+        for person in unique_character_list:
+            update_person_opinions(person)
+
+        # update random characters in game
+        for person in list_of_premade_characters:
+            update_person_opinions(person)
+            update_random_person(person)
+            rebuild_wardrobe(person)
+            update_person_outfit(person, -0.2) # choose a less slutty outfit as planned outfit
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
@@ -211,7 +243,7 @@ label update_generic_personality(stack):
                 mc.main_character_actions.append(action)
 
         # update characters in game (save game)
-        for person in all_people_in_the_game():
+        for person in all_people_in_the_game(unique_character_list):
             update_random_person(person)
 
         # continue on the hijack stack if needed
