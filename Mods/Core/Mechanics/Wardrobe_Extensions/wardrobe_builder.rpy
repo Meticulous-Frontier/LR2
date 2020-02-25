@@ -132,8 +132,8 @@ init 5 python:
             else:
                 if self.default_person is None:
                     self.default_person = create_random_person(name ="Ema", last_name = "Hesire", age = 23, body_type = "thin_body", tits = "B")
-                    self.person.opinions.clear() # reset opinions so every item has an equal chance
-                    self.person.sexy_opinions.clear()
+                    self.default_person.opinions.clear() # reset opinions so every item has an equal chance
+                    self.default_person.sexy_opinions.clear()
 
                 self.person = self.default_person
 
