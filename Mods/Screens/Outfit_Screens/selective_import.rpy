@@ -20,12 +20,11 @@ init 2 python:
                 else: #outfit_type = full
                     wardrobe.add_outfit(the_outfit)
 
-    def remove_outfit_from_wardrobes(list_of_wardrobes, the_outfit, outfit_type = "full"):
+    def remove_outfit_from_wardrobes(list_of_wardrobes, the_outfit):
 
         for wardrobe in list_of_wardrobes:
-            if  wardrobe.has_outfit_with_name(the_outfit.name):
-                    wardrobe.remove_outfit(the_outfit)
-
+            if wardrobe.has_outfit_with_name(the_outfit.name):
+                wardrobe.remove_outfit(the_outfit)
 
     def wardrobes_has_outfit_with_name(list_of_wardrobes, the_name): # Check if every Wardrobe in the list has the outfit already
 
@@ -46,14 +45,10 @@ init 2 python:
         renpy.show_screen("outfit_creator", outfit.get_copy())
 
 init 2:
-    screen import_outfit_manager(target_wardrobe, xml_filename = None, show_export = True, slut_limit = None, limited_to_top = False): ##Brings up a list of the players current saved outfits, returns the selected outfit or None.
+    screen import_outfit_manager(target_wardrobe, xml_filename = None, show_export = True, slut_limit = None, underwear_limit = None, limited_to_top = False): ##Brings up a list of the players current saved outfits, returns the selected outfit or None.
         # NOTE: slut_limited and limited_to_top is passed from label set_uniform_description in script.rpy and is only used in that situation
 
-        python:
-            if xml_filename:
-                wardrobe = wardrobe_from_xml(xml_filename)
-            else:
-                wardrobe = mc.designed_wardrobe
+
 
 
         default outfit_categories = {"Full": ["FullSets", "full", "get_outfit_list", "reduced_coverage_uniform_policy"], "Overwear": ["OverwearSets", "over", "get_overwear_sets_list", "strict_uniform_policy"], "Underwear": ["UnderwearSets", "under", "get_underwear_sets_list", "reduced_coverage_uniform_policy"]} #NOTE: Key is display name, [0] is XML's category type, [1] is outfit type, [2] is function to retrive [0]
@@ -77,6 +72,27 @@ init 2:
             import_wardrobes["Supply Division"] = [[mc.business.s_uniform]]
             import_wardrobes["HR Division"] = [[mc.business.h_uniform]]
             import_wardrobes["All Division"] = [[mc.business.all_uniform]]
+
+        python:
+            if xml_filename:
+                wardrobe = wardrobe_from_xml(xml_filename)
+            else:
+                temp_wardrobe = Wardrobe("Temporary Wardrobe")
+                for category in import_wardrobes:
+                    for wardrobes in import_wardrobes[category][0]:
+                        for outfit in wardrobes.outfits + mc.designed_wardrobe.outfits:
+                            if outfit not in temp_wardrobe.outfits:
+                                temp_wardrobe.outfits.append(outfit)
+
+                        for outfit in wardrobes.overwear_sets + mc.designed_wardrobe.overwear_sets:
+                            if outfit not in temp_wardrobe.overwear_sets:
+                                temp_wardrobe.overwear_sets.append(outfit)
+
+                        for outfit in wardrobes.underwear_sets + mc.designed_wardrobe.underwear_sets:
+                            if outfit not in temp_wardrobe.underwear_sets:
+                                temp_wardrobe.underwear_sets.append(outfit)
+
+                wardrobe = temp_wardrobe
 
         # default import_wardrobes = {"Your Wardrobe": [[mc.designed_wardrobe]], "Marketing Division": [[mc.business.m_uniform]], "Research Division": [[mc.business.r_uniform]], "Production Division": [[mc.business.p_uniform]], "Supply Division": [[mc.business.s_uniform]], "HR Division": [[mc.business.h_uniform]], "All Divisions": [[mc.business.all_uniform]]}
         # $ import_wardrobes["Slaves"] = [[x.wardrobe for x in people_in_role(slave_role)]]
@@ -113,6 +129,12 @@ init 2:
                                                                 Show("outfit_creator", None, outfit.get_copy(), target_wardrobe, outfit_type = outfit_categories[category][1]), # Bring the outfit into the outfit_creator for editing when left clicked
                                                                 Hide(renpy.current_screen().screen_name)
                                                                 ]
+                                                        else:
+                                                            if slut_limit >= outfit.slut_requirement:
+                                                                action NullAction()
+                                                            else:
+                                                                background "#222222"
+                                                                action Function(renpy.notify, "Can not assign due to slut limit " + str(slut_limit) + ". Purchase new uniform policies to increase")
 
                                                         hovered Show("mannequin", None, outfit)
 
@@ -137,8 +159,16 @@ init 2:
                                                         style "textbutton_no_padding_highlight"
                                                         text_style "serum_text_style"
                                                         xfill True
+                                                        #sensitive slut_limit >= outfit.slut_requirement
 
-                                                        action ToggleScreenVariable("targeted_outfit", renpy.get_widget(renpy.current_screen(), str(outfit)), None)
+                                                        if slut_limit is None:
+                                                            action ToggleScreenVariable("targeted_outfit", renpy.get_widget(renpy.current_screen(), str(outfit)), None)
+                                                        else:
+                                                            if slut_limit >= outfit.slut_requirement:
+                                                                action ToggleScreenVariable("targeted_outfit", renpy.get_widget(renpy.current_screen(), str(outfit)), None)
+                                                            else:
+                                                                background "#222222"
+                                                                action Function(renpy.notify, "Can not assign due to slut limit " + str(slut_limit) + ". Purchase new uniform policies to increase")
 
                                                     if targeted_outfit == renpy.get_widget(renpy.current_screen(), str(outfit)):
                                                         frame:
@@ -149,17 +179,29 @@ init 2:
                                                                         text_style "serum_text_style"
                                                                         xfill True
 
-                                                                        sensitive not wardrobes_has_outfit_with_name(import_wardrobes[wardrobes][0], outfit.name)# in getattr(wardrobes, outfit_categories[category][2])()
+
+
+
+                                                                        # if slut_limit is None:
+                                                                        #     sensitive not wardrobes_has_outfit_with_name(import_wardrobes[wardrobes][0], outfit.name)# in getattr(wardrobes, outfit_categories[category][2])()
 
                                                                         if not wardrobes_has_outfit_with_name(import_wardrobes[wardrobes][0], outfit.name):
                                                                             action [
-                                                                                 Function(add_outfit_to_wardrobes, import_wardrobes[wardrobes][0], outfit, outfit_type = outfit_categories[category][1]),
-                                                                                 Function(renpy.notify, "Outfit imported to " + wardrobes)
-                                                                                 ]
-                                                                        else:
-                                                                            action [
+                                                                                If(slut_limit != None, Function(mc.business.listener_system.fire_event, "add_uniform", the_outfit = outfit, the_type = outfit_categories[category][1])), # Make sure it registers progress towards work_goals. #NOTE: Needs testing as I have been unable to setup proper test
+                                                                                Function(add_outfit_to_wardrobes, import_wardrobes[wardrobes][0], outfit, outfit_type = outfit_categories[category][1]),
+                                                                                Function(renpy.notify, ("Outfit imported to " + wardrobes if slut_limit is None else "Outfit assigned to " + wardrobes)),
 
-                                                                            ]
+                                                                                ]
+                                                                        else:
+
+                                                                            if slut_limit is not None:
+                                                                                if wardrobes_has_outfit_with_name(import_wardrobes[wardrobes][0], outfit.name):
+                                                                                    background "#3ffc45"
+                                                                                #If the outfit is imported / assigned already then attempt to remove it.
+                                                                                action [
+                                                                                    Function(remove_outfit_from_wardrobes, import_wardrobes[wardrobes][0], outfit),
+                                                                                    Function(renpy.notify, "Outfit removed from " + wardrobes)
+                                                                                    ]
 
                                                         #
                                                         # action [
@@ -178,5 +220,8 @@ init 2:
                 align [0.5,0.5]
                 auto "gui/button/choice_%s_background.png"
                 focus_mask "gui/button/choice_idle_background.png"
-                action Hide("import_outfit_manager")
+                if slut_limit is None:
+                    action Hide("import_outfit_manager")
+                else:
+                    action Return("No Return")
             textbutton "Return" align [0.5,0.5] text_style "return_button_style"
