@@ -142,7 +142,10 @@ label slave_training_label(the_person): # TODO: Add variations to these. They ar
 
         "Give her a serum.":
             $ the_person.change_stats(2)
-            call give_serum(the_person) from _slave_training_label
+            call give_serum(the_person) from _call_give_serum_slave_training
+
+        "Increase submission" if person.get_opinion_score("being submissive") < 2:
+            call increase_slave_submission_label(the_person) from _call_increase_slave_submission_slave_training
 
         "Send her away.":
             pass
@@ -150,8 +153,9 @@ label slave_training_label(the_person): # TODO: Add variations to these. They ar
     return
 
 label slave_alarm_clock_label(the_person):
-
-    #TODO: Finish all of the side functionalit this event requires to be implemented.
+    # start with some MC arousal to shorten the sex loops.
+    $ mc.change_arousal(40)
+    #TODO: Finish all of the side functionality this event requires to be implemented.
     if the_person.sluttiness < 50:
         the_person.char "[the_person.mc_title], it's time to wake up."
         "You're woken up by the voice of [the_person.possessive_title]. You struggle to open your eyes and find her sitting on the edge of your bed."
@@ -231,7 +235,7 @@ label slave_alarm_clock_label(the_person):
                                 "Continue": # An escape if you get locked since obedience is less than 140 and has_large_tits() is false. #NOTE: Can write other alternatives
                                     pass
 
-                        "Order her to get on her kness.\nRequires: 130 Obedience (disabled)" if the_person.obedience < 130:
+                        "Order her to get on her knees.\nRequires: 130 Obedience (disabled)" if the_person.obedience < 130:
                             pass
 
                         "Climax.":
@@ -339,17 +343,9 @@ label slave_alarm_clock_label(the_person):
 
 
     else:
-        #TODO: We need a girl_on_top position. Missionary images until then.
         # First we need to take her and remove enough clothing that we can get to her vagina, otherwise none of this stuff makes sense.
-        # We do that by getting her lowest level pieces of bottom clothing and removing it, then working our way up until we can use her vagina.
         # This makes sure skirts are kept on (because this is suppose to be a quicky).
-        $ bottom_list = the_person.outfit.get_lower_ordered()
-        $ removed_something = False
-        $ the_index = 0
-        while not the_person.outfit.vagina_available and the_index < __builtin__.len(bottom_list):
-            $ the_person.outfit.remove(bottom_list[index])
-            $ removed_something = True
-            $ the_index += 1
+        $ the_person.strip_outfit(top_layer_first = False, exclude_upper = True, position = "cowgirl", emotion = "happy")
         "You're woken up by your bed shifting under you and a sudden weight around your waist."
         $ the_person.draw_person(position = "cowgirl", emotion = "happy")
         "[the_person.possessive_title] has pulled down your sheets and underwear and is straddling you. The tip of your morning wood is brushing against her pussy."
@@ -388,10 +384,47 @@ label slave_alarm_clock_label(the_person):
                 else:
                     "[the_person.possessive_title] gives you a kiss on the forehead and stands patiently by your side."
 
-
-    call slave_training_label(the_person) from _slave_alarm_clock_label
-
+    $ the_person.draw_person(position = "stand3", emotion = "happy")
     "You finally get out of bed and prepare yourself for the day ahead."
+
+    call slave_training_label(the_person) from _call_slave_training_slave_alarm_clock_label
+
     # At the end we would want the "Slave" to be in the room and interactable after the crisis event. Moving them during the event causes issues with scheduled destinations on run_move
     $ renpy.scene("Active")
+    return
+
+label increase_slave_submission_label(the_person):
+    mc.name "[the_person.title] get on your knees."
+    "[the_person.possessive_title] looks at you, meekly nods and drops to her knees."
+    $ the_person.draw_person(position = "kneeling1")
+
+    mc.name "[the_person.title], i sense you have not yet completely accepted me as your master."
+    "[the_person.possessive_title] starts to shake her head, but you simply hold up your hand to stop her before she starts."
+    mc.name "Do you want to be my devoted and loyal slave?"
+    if the_person.obedience < 200:
+        "She looks at you intently..."
+        the_person.char "No Master, i've got other duties that prevent that."
+        mc.name "It seems you need a punishment for this insolence."
+        if not the_person.outfit.vagina_visible():
+            mc.name "Take off your clothes and bend over against the desk."
+            $ the_person.strip_outfit(exclude_upper = True, position = "stand3", emotion = "sad")
+        else:
+            mc.name "Bend over against the desk."
+        $ the_person.draw_person(position = "standing_doggy", emotion = "sad")
+        "You slowly walk over to her and start to rub her ass cheeks."
+        $ the_person.change_stats(arousal = 10)
+        "Suddenly you pull you hand back and start giving her the spanking she deserves."
+        "SMACK! SMACK! SMACK!"
+        the_person.char "Please Master...OUCH, i'll try to obey...AH...your wishes...OW, please...YELP...let me...OUCH...prove it to you...AW."
+        mc.name "Very well, Slave, see that you do, I won't be so forgiving next time."
+        $ the_person.draw_person(position = "stand2", emotion = "angry")
+        $ the_person.change_obedience(10)
+        "She turns around with a defiant stare..."
+        the_person.char "Yes Master, i will try to please you better next time."
+    else:
+        "She looks at you with tears in her eyes."
+        the_person.char "Yes Master, I want to serve you as a good slave should, unconditionally and loyal."
+        "You smile and pat her on the head."
+        $ the_person.sexy_opinions["being submissive"] = [2, True]
+        $ the_person.change_stats(happiness = 10, love = 10, arousal = 10)
     return
