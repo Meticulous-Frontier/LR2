@@ -56,15 +56,29 @@ init 2:
         default preview_outfit = None
         default targeted_outfit = None
         #default business_wardrobes = [mc.business.m_uniform, mc.business.p_uniform, mc.business.r_uniform, mc.business.s_uniform, mc.business.h_uniform, mc.business.all_uniform]
-        default import_wardrobes = {"Your Wardrobe": [[mc.designed_wardrobe]], "Marketing Division": [[mc.business.m_uniform]], "Research Division": [[mc.business.r_uniform]], "Production Division": [[mc.business.p_uniform]], "Supply Division": [[mc.business.s_uniform]], "HR Division": [[mc.business.h_uniform]], "All Divisions": [[mc.business.all_uniform]]}
-        $ import_wardrobes["Slaves"] = [[x.wardrobe for x in people_in_role(slave_role)]] #NOTE: Make sure it is a list inside of a list [[]]
+
+        default import_wardrobes = {}
+        python:
+            if slut_limit is None: # If slut_limit is None then add any and all options #NOTE: Make sure it is a list inside of a list [[]]
+                import_wardrobes["Your Wardrobe"] = [[mc.designed_wardrobe]]
+                import_wardrobes["Slaves"] = [[x.wardrobe for x in people_in_role(slave_role)]]
+
+            import_wardrobes["Marketing Division"] = [[mc.business.m_uniform]]
+            import_wardrobes["Research Division"] = [[mc.business.r_uniform]]
+            import_wardrobes["Production Division"] = [[mc.business.p_uniform]]
+            import_wardrobes["Supply Division"] = [[mc.business.s_uniform]]
+            import_wardrobes["HR Division"] = [[mc.business.h_uniform]]
+            import_wardrobes["All Division"] = [[mc.business.all_uniform]]
+
+        # default import_wardrobes = {"Your Wardrobe": [[mc.designed_wardrobe]], "Marketing Division": [[mc.business.m_uniform]], "Research Division": [[mc.business.r_uniform]], "Production Division": [[mc.business.p_uniform]], "Supply Division": [[mc.business.s_uniform]], "HR Division": [[mc.business.h_uniform]], "All Divisions": [[mc.business.all_uniform]]}
+        # $ import_wardrobes["Slaves"] = [[x.wardrobe for x in people_in_role(slave_role)]]
 
         grid len(outfit_categories) 1:
             for category in sorted(outfit_categories): # NOTE: Dictionary is not sorted. Don't know the best way to make it so.
                 vbox:
                     xsize 480
                     frame:
-                        textbutton (category if slut_limit is None else "[category] (Requires: )" if not getattr(reduced_coverage_uniform_policy, "is_owned")()) style "serum_text_style" xalign 0.5
+                        text category style "serum_text_style" xalign 0.5
                         xfill True
                     viewport:
                         ysize 880
