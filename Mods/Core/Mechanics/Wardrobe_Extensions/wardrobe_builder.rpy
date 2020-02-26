@@ -38,6 +38,30 @@ init 5 python:
 
         return
 
+    def add_make_up_to_outfit(person, outfit, make_up_score_boost = 0):
+        # determine make-up colors based on skin-tone
+        if person.body_images == black_skin:
+            eye_shadow_colours = [[.569, .349, .263, .9], [0, .2, .4, .9], [.47, .318, .663, .9]]
+            lipstick_colours = [[.569, .318, .212, .9], [.451, .416, .526, .9], [.492, .419, .384, .9]]
+            blush_colours = [[.435, .306, .216, .8], [.588, .251, 0, .8], [.451, .412, .576, .8]]
+        else:
+            eye_shadow_colours = [[.1, .1, .12, .9], [.4, .5, .9, .9], [.644, .418, .273, .9]]
+            lipstick_colours = [[.745, .117, .235, .9], [1, .5, .8, .9], [ .8, .26, .04, .9]]
+            blush_colours = [[.34, .34, .32, .8], [1, .898, .706, .8], [.867, .627, .867, .8]]
+
+        make_up_score = person.get_opinion_score("makeup") + make_up_score_boost
+        if make_up_score > 0 or (make_up_score == 0 and renpy.random.randint(0, 4) == 0):
+            make_up_score += renpy.random.randint(1, 2)
+            if make_up_score > 0:
+                outfit.add_accessory(lipstick.get_copy(), get_random_from_list(lipstick_colours))
+            if make_up_score > 1:
+                outfit.add_accessory(light_eye_shadow.get_copy(), get_random_from_list(eye_shadow_colours))
+            if make_up_score > 2:
+                outfit.add_accessory(blush.get_copy(), get_random_from_list(blush_colours))
+            if make_up_score > 3:
+                outfit.add_accessory(heavy_eye_shadow.get_copy(), get_random_from_list(eye_shadow_colours))
+        return
+
     real_dress_list = [x for x in dress_list if x not in [bath_robe, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, apron]]
 
     class WardrobeBuilder():
@@ -261,17 +285,10 @@ init 5 python:
                 if item:
                     outfit.add_feet(item.get_copy(), color_feet)
 
-            make_up_score = self.person.get_opinion_score("makeup")
-            if make_up_score > 0 or (make_up_score == 0 and renpy.random.randint(0, 4) == 0):
-                make_up_score += renpy.random.randint(1, 2)
-                if make_up_score > 0:
-                    outfit.add_accessory(lipstick.get_copy(), get_random_from_list([[.5, .18, .18, .95], [.75, .05, .05, .95], [.9, .45, .6, .95]]))
-                if make_up_score > 1:
-                    outfit.add_accessory(blush.get_copy(), [.9, .45, .6, .95])
-                if make_up_score > 2:
-                    outfit.add_accessory(light_eye_shadow.get_copy(), get_random_from_list([[.15, .15, .15, .95], [.5, .18, .18, .95]]))
-                if make_up_score > 3:
-                    outfit.add_accessory(heavy_eye_shadow.get_copy(), get_random_from_list([[.15, .15, .15, .95], [.1, .15, .55, .9]]))
+            # random chance of adding outfit custom makeup (base on pref for make-up)
+            if self.person.get_opinion_score("makeup") > -2 and renpy.random.randint(0, 4 - self.person.get_opinion_score("makeup")) == 0:
+                # add makeup to outfit (overrides makeup in base_outfit)
+                add_make_up_to_outfit(self.person, outfit)
 
             outfit.build_outfit_name()
 
@@ -335,6 +352,7 @@ init 5 python:
 
             # force pattern for certain items, others random 50/50
             if item and hasattr(item, "supported_patterns") and item.supported_patterns and (renpy.random.randint(0, 1) == 1 or item in [apron, breed_collar, cum_slut_collar, fuck_doll_collar]):
+                item = item.get_copy() # get copy before applying pattern
                 key_value = get_random_from_list(list(item.supported_patterns.keys()))
                 item.pattern = item.supported_patterns[key_value]
                 item.colour_pattern = self.get_color()

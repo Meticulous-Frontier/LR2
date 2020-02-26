@@ -157,30 +157,8 @@ init -1 python:
 
         person.wardrobe = base_wardrobe
 
-        # when she likes makeup add it to her base_outfit
-        if person.body_images == black_skin:
-            eye_shadow_colours = [[0.569, 0.349, 0.263, .9], [0, 0.2, 0.4, .9], [0.47, 0.318, 0.663, .9]]
-            lipstick_colours = [[0.569, 0.318, 0.212, .9], [0.451, 0.416, 0.526, .9], [0.492, 0.419, 0.384, .9]]
-        else:
-            eye_shadow_colours = [[.1,.1,.12,.9], [.4,.5,.9,.9], [0.644, 0.418, 0.273,.9]]
-            lipstick_colours = [[0.745, 0.117, 0.235, .9], [1,0.5,0.8, .9], [.80, .26, .04, .9]]
-
-        if person.get_opinion_score("makeup") > 0:
-            girl_light_eye_shadow = light_eye_shadow.get_copy()
-            girl_light_eye_shadow.colour = get_random_from_list(eye_shadow_colours)
-            person.base_outfit.add_accessory(girl_light_eye_shadow)
-            girl_lipstick = lipstick.get_copy()
-            girl_lipstick.colour = get_random_from_list(lipstick_colours)
-            person.base_outfit.add_accessory(girl_lipstick)
-        if person.get_opinion_score("makeup") > 1:
-            girl_heavy_eye_shadow = heavy_eye_shadow.get_copy()
-            girl_heavy_eye_shadow.colour = get_random_from_list(eye_shadow_colours)
-            person.base_outfit.add_accessory(girl_heavy_eye_shadow)
-            if not person.body_images == black_skin: # dark skin does not blush
-                girl_blush = blush.get_copy()
-                girl_blush.colour = [.7,.4,.4,.75]
-                person.base_outfit.add_accessory(girl_blush)
-
+        # add make-up to base outfit (based on pref)
+        add_make_up_to_outfit(person, person.base_outfit)
 
         enhance_existing_wardrobe(person, 8)
         return
