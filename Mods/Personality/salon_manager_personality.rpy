@@ -31,9 +31,9 @@ label salon_manager_greetings(the_person):
             $ the_person.set_possessive_title(get_random_possessive_title(the_person))
             "She holds her hand out to shake yours."
             the_person.char "And how may I call you?"
-            $ title_tuple = []
-            $ title_choice = None
             python:
+                title_tuple = []
+                title_choice = None
                 for title in get_player_titles(the_person):
                     title_tuple.append([title,title])
 

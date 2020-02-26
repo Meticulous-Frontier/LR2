@@ -98,5 +98,5 @@ label store_expansion_policies(stack):
         if ["Expansion Rooms", expansion_policies_list] not in policy_selection_screen_categories:
             policy_selection_screen_categories.append(["Expansion Rooms", expansion_policies_list]) # NOTE: Put this at the bottom so it gets appended after all policies have been created.
 
-    $ execute_hijack_call(stack)
+        execute_hijack_call(stack)
     return
