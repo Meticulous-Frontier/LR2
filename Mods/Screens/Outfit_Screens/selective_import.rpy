@@ -79,13 +79,13 @@ init 2:
                                                         style "textbutton_no_padding_highlight"
                                                         text_style "serum_text_style"
                                                         action [
-                                                            Show("outfit_creator", None, outfit.get_copy(), target_wardrobe, outfit_type = outfit_categories[category][1]),
+                                                            Show("outfit_creator", None, outfit.get_copy(), target_wardrobe, outfit_type = outfit_categories[category][1]), # Bring the outfit into the outfit_creator for editing when left clicked
                                                             Hide(renpy.current_screen().screen_name)
                                                             ]
 
                                                         hovered Show("mannequin", None, outfit)
 
-                                                    if show_export:
+                                                    if show_export: # If export mode is on show the export button that saves the outfits into Exported_Wardrobe.xml NOTE: Consider specifying specific XML file later (to quickly make wardrobe sets for sharing)
                                                         default exported = []
 
                                                         textbutton "Export to .xml File":
@@ -101,7 +101,7 @@ init 2:
                                                             sensitive outfit not in exported
 
 
-                                                        textbutton "Direct Import Selection:":
+                                                        textbutton "Direct Import Selection:": # Put the outfit directly into wardrobe(s), see the import_wardrobes dictionary to add more alternatives.
 
                                                             style "textbutton_no_padding_highlight"
                                                             text_style "serum_text_style"
