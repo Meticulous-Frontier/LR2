@@ -1,6 +1,24 @@
 
 
 init -1 python:
+    def feet_available(self):
+        reachable = True
+        for cloth in self.feet:
+            if cloth.anchor_below:
+                reachable = False
+        return reachable
+
+    Outfit.feet_available = feet_available
+
+    def feet_visible(self):
+        visible = True
+        for cloth in self.feet:
+            if cloth.hide_below:
+                visible = False
+        return visible
+
+    Outfit.feet_visible = feet_visible
+
     def remove_all_cum(self):
         remove_list = []
         for acc in self.accessories:
@@ -128,7 +146,7 @@ init -1 python:
 init 6 python:
     def tits_available_enhanced(self):
         for cloth in self.upper_body:
-            if cloth.anchor_below and not cloth in [cincher, heart_pasties]:
+            if cloth.anchor_below and not cloth in [cincher, heart_pasties, vest]:
                 return False
         return True
 

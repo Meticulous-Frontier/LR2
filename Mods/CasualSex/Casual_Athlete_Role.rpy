@@ -479,7 +479,7 @@ label casual_athlete_race_crisis_label(the_person):
     else:
         "Your mind red with lust, you begin to rip [the_person.title]'s clothes off."
 
-        $ the_person.strip_outfit(position = "missionary")
+        $ the_person.strip_outfit(top_layer_first = False, position = "missionary")
         $ the_person.change_arousal(20)
 
         "[the_person.possessive_title] moans as you strip her down, enjoying your rough treatment of her."
@@ -561,7 +561,7 @@ label casual_athlete_house_call_label(the_person):
     else:
         "Your mind red with lust, you begin to rip [the_person.title]'s clothes off."
 
-        $ the_person.strip_outfit(position = "missionary")
+        $ the_person.strip_outfit(top_layer_first = False, position = "missionary")
         $ the_person.change_arousal(20)
 
         "[the_person.possessive_title] moans as you strip her down, enjoying your rough treatment of her."

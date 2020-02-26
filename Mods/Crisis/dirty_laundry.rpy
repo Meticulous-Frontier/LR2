@@ -115,7 +115,7 @@ label dirty_laundry_action_label:
                         else:                                              #Otherwise, strip her down.
                             "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy"
 
-                            $ the_person.strip_outfit(position = "missionary")
+                            $ the_person.strip_outfit(top_layer_first = False, exclude_upper = True, position = "missionary")
 
                             "With her pussy finally exposed you waste no time diving right in"
                         "Cupping her ass with your hands, you circle your tongue all around her wet, inviting cunt."
