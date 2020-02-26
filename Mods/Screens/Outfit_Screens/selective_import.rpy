@@ -20,6 +20,13 @@ init 2 python:
                 else: #outfit_type = full
                     wardrobe.add_outfit(the_outfit)
 
+    def remove_outfit_from_wardrobes(list_of_wardrobes, the_outfit, outfit_type = "full"):
+
+        for wardrobe in list_of_wardrobes:
+            if  wardrobe.has_outfit_with_name(the_outfit.name):
+                    wardrobe.remove_outfit(the_outfit)
+
+
     def wardrobes_has_outfit_with_name(list_of_wardrobes, the_name): # Check if every Wardrobe in the list has the outfit already
 
         max_count = len(list_of_wardrobes)
@@ -57,9 +64,10 @@ init 2:
         default targeted_outfit = None
         #default business_wardrobes = [mc.business.m_uniform, mc.business.p_uniform, mc.business.r_uniform, mc.business.s_uniform, mc.business.h_uniform, mc.business.all_uniform]
 
-        default import_wardrobes = {}
+        default import_wardrobes = {} # Holds the wardrobes you want to be able to import into or select #NOTE: Make sure it is a list inside of a list [[]]
         python:
-            if slut_limit is None: # If slut_limit is None then add any and all options #NOTE: Make sure it is a list inside of a list [[]]
+            if slut_limit is None: # If slut_limit is None then add any and all options
+
                 import_wardrobes["Your Wardrobe"] = [[mc.designed_wardrobe]]
                 import_wardrobes["Slaves"] = [[x.wardrobe for x in people_in_role(slave_role)]]
 
@@ -98,10 +106,13 @@ init 2:
                                                         xfill True
                                                         style "textbutton_no_padding_highlight"
                                                         text_style "serum_text_style"
-                                                        action [
-                                                            Show("outfit_creator", None, outfit.get_copy(), target_wardrobe, outfit_type = outfit_categories[category][1]), # Bring the outfit into the outfit_creator for editing when left clicked
-                                                            Hide(renpy.current_screen().screen_name)
-                                                            ]
+
+
+                                                        if slut_limit is None:
+                                                            action [
+                                                                Show("outfit_creator", None, outfit.get_copy(), target_wardrobe, outfit_type = outfit_categories[category][1]), # Bring the outfit into the outfit_creator for editing when left clicked
+                                                                Hide(renpy.current_screen().screen_name)
+                                                                ]
 
                                                         hovered Show("mannequin", None, outfit)
 
@@ -140,10 +151,15 @@ init 2:
 
                                                                         sensitive not wardrobes_has_outfit_with_name(import_wardrobes[wardrobes][0], outfit.name)# in getattr(wardrobes, outfit_categories[category][2])()
 
-                                                                        action [
-                                                                             Function(add_outfit_to_wardrobes, import_wardrobes[wardrobes][0], outfit, outfit_type = outfit_categories[category][1]),
-                                                                             Function(renpy.notify, "Outfit imported to " + wardrobes)
-                                                                             ]
+                                                                        if not wardrobes_has_outfit_with_name(import_wardrobes[wardrobes][0], outfit.name):
+                                                                            action [
+                                                                                 Function(add_outfit_to_wardrobes, import_wardrobes[wardrobes][0], outfit, outfit_type = outfit_categories[category][1]),
+                                                                                 Function(renpy.notify, "Outfit imported to " + wardrobes)
+                                                                                 ]
+                                                                        else:
+                                                                            action [
+
+                                                                            ]
 
                                                         #
                                                         # action [
