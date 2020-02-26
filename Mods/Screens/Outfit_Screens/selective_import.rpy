@@ -224,4 +224,5 @@ init 2:
                     action Hide("import_outfit_manager")
                 else:
                     action Return("No Return")
+                    hovered Hide("mannequin")
             textbutton "Return" align [0.5,0.5] text_style "return_button_style"
