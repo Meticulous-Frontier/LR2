@@ -61,8 +61,7 @@ label downtown_bar_drink_label():
 
     mc.name "Stay healthy and hydrated, [the_person.title]."
 
-    python: # release variables
-        del new_person
+    $ del new_person
 
     if time_of_day == 4:
         "After a night of drinks you decide to head back home to bed."

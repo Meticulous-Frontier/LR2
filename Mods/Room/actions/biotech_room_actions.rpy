@@ -57,6 +57,30 @@ init 3 python:
         else:
             return "Requires: [breast_enhancement.name] and [breast_reduction.name]"
 
+    def create_clone(person, clone_name, clone_last_name, clone_age):
+        if clone_name is None:
+            clone_name = person.name
+        if clone_last_name is None:
+            clone_last_name = person.last_name
+        if clone_age is None:
+            clone_age = person.age
+
+        clone = make_person(name = clone_name, last_name = clone_last_name, age = clone_age, body_type = person.body_type, face_style = person.face_style, tits = person.tits, height = person.height, hair_colour = person.hair_colour, hair_style = person.hair_style, skin = person.skin, eyes = person.eyes, job = None,
+            personality = person.personality, custom_font = None, name_color = None, dial_color = None, starting_wardrobe = person.wardrobe, stat_array = None, skill_array = None, sex_array = None,
+            start_sluttiness = person.sluttiness, start_obedience = person.obedience, start_happiness = person.happiness, start_love = person.love, start_home = None, title = "Clone", possessive_title = "Your creation", mc_title = "Creator", relationship = "Single", kids = 0)
+
+        clone.generate_home()
+        clone.schedule[0] = rd_division_basement
+        clone.schedule[1] = rd_division_basement
+        clone.schedule[2] = rd_division_basement
+        clone.schedule[3] = rd_division_basement
+        clone.schedule[4] = rd_division_basement
+
+        clone.special_role.append(clone_role)
+
+        rd_division_basement.add_person(clone) #Create rooms for the clones to inhabit until a schedule is given (through being hired or player input)
+        return
+
     biotech_change_breasts = Action("Change breasts: [person.tits]", biotech_change_breasts_requirement, "biotech_change_breasts",
         menu_tooltip = "Modify [person.title]'s cup size.")
     biotech_body_modifications.append(biotech_change_breasts)
@@ -70,6 +94,7 @@ label biotech_gene_modifications():
                 gene_modification_options.append(act)
             gene_modification_options.append("Back")
             act_choice = call_formated_action_choice(gene_modification_options)
+            del gene_modification_options
 
         if act_choice == "Back":
             return
@@ -100,6 +125,11 @@ label biotech_clone_person():
 
 label cloning_process(person = the_person): # default to the_person when not passed as parameter
     $ person.draw_person(emotion = "default")
+    python:
+        clone_name = None
+        clone_last_name = None
+        clone_age = None
+
     while True:
         menu:
 
@@ -110,36 +140,9 @@ label cloning_process(person = the_person): # default to the_person when not pas
                 $ clone_age = int(renpy.input("Age: ", person.age))
                 if clone_age < 18:
                     $ clone_age = 18
-
-
-
             "Begin production:{image=gui/heart/Time_Advance.png} \n{size=22}Name: [clone_name] [clone_last_name], Age: [clone_age]{/size}":
-                python:
-                    if clone_name is None:
-                        clone_name = person.name
-                    if clone_last_name is None:
-                        clone_last_name = person.last_name
-                    if clone_age is None:
-                        clone_age = person.age
-
-                    clone = make_person(name = clone_name, last_name = clone_last_name, age = clone_age, body_type = person.body_type, face_style = person.face_style, tits = person.tits, height = person.height, hair_colour = person.hair_colour, hair_style = person.hair_style, skin = person.skin, eyes = person.eyes, job = None,
-                        personality = person.personality, custom_font = None, name_color = None, dial_color = None, starting_wardrobe = person.wardrobe, stat_array = None, skill_array = None, sex_array = None,
-                        start_sluttiness = person.sluttiness, start_obedience = person.obedience, start_happiness = person.happiness, start_love = person.love, start_home = None, title = "Clone", possessive_title = "Your creation", mc_title = "Creator", relationship = "Single", kids = 0)
-
-                    clone.generate_home()
-                    clone.schedule[0] = rd_division_basement
-                    clone.schedule[1] = rd_division_basement
-                    clone.schedule[2] = rd_division_basement
-                    clone.schedule[3] = rd_division_basement
-                    clone.schedule[4] = rd_division_basement
-
-                    clone.special_role.append(clone_role)
-
-                    rd_division_basement.add_person(clone) #Create rooms for the clones to inhabit until a schedule is given (through being hired or player input)
-
-                "[clone.name] [clone.last_name] created and is now awaiting you in [rd_division_basement.formalName]"
-
-                $ del clone    # Release variable
+                $ create_clone(person, clone_name, clone_last_name, clone_age)
+                "The clone has been created and is now awaiting you in [rd_division_basement.formalName]"
                 call advance_time from _call_advance_time_cloning_process
                 return
             "Back":
