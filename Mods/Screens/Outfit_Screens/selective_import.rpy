@@ -39,11 +39,17 @@ init 2 python:
         renpy.show_screen("outfit_creator", outfit.get_copy())
 
 init 2:
-    screen import_outfit_manager(target_wardrobe, xml_filename, show_export = True): ##Brings up a list of the players current saved outfits, returns the selected outfit or None.
-        $ wardrobe = wardrobe_from_xml(xml_filename)
+    screen import_outfit_manager(target_wardrobe, xml_filename = None, show_export = True, slut_limit = None, limited_to_top = False): ##Brings up a list of the players current saved outfits, returns the selected outfit or None.
+        # NOTE: slut_limited and limited_to_top is passed from label set_uniform_description in script.rpy and is only used in that situation
+
+        python:
+            if xml_filename:
+                wardrobe = wardrobe_from_xml(xml_filename)
+            else:
+                wardrobe = mc.designed_wardrobe
 
 
-        default outfit_categories = {"Full": ["FullSets", "full", "get_outfit_list"], "Overwear": ["OverwearSets", "over", "get_overwear_sets_list"], "Underwear": ["UnderwearSets", "under", "get_underwear_sets_list"]}
+        default outfit_categories = {"Full": ["FullSets", "full", "get_outfit_list", "reduced_coverage_uniform_policy"], "Overwear": ["OverwearSets", "over", "get_overwear_sets_list", "strict_uniform_policy"], "Underwear": ["UnderwearSets", "under", "get_underwear_sets_list", "reduced_coverage_uniform_policy"]} #NOTE: Key is display name, [0] is XML's category type, [1] is outfit type, [2] is function to retrive [0]
         add "Paper_Background.png"
         modal True
         zorder 100
@@ -51,14 +57,14 @@ init 2:
         default targeted_outfit = None
         #default business_wardrobes = [mc.business.m_uniform, mc.business.p_uniform, mc.business.r_uniform, mc.business.s_uniform, mc.business.h_uniform, mc.business.all_uniform]
         default import_wardrobes = {"Your Wardrobe": [[mc.designed_wardrobe]], "Marketing Division": [[mc.business.m_uniform]], "Research Division": [[mc.business.r_uniform]], "Production Division": [[mc.business.p_uniform]], "Supply Division": [[mc.business.s_uniform]], "HR Division": [[mc.business.h_uniform]], "All Divisions": [[mc.business.all_uniform]]}
-        $ import_wardrobes["Slaves"] = [[x.wardrobe for x in people_in_role(slave_role)]]
+        $ import_wardrobes["Slaves"] = [[x.wardrobe for x in people_in_role(slave_role)]] #NOTE: Make sure it is a list inside of a list [[]]
 
         grid len(outfit_categories) 1:
             for category in sorted(outfit_categories): # NOTE: Dictionary is not sorted. Don't know the best way to make it so.
                 vbox:
                     xsize 480
                     frame:
-                        text category style "serum_text_style" xalign 0.5
+                        textbutton (category if slut_limit is None else "[category] (Requires: )" if not getattr(reduced_coverage_uniform_policy, "is_owned")()) style "serum_text_style" xalign 0.5
                         xfill True
                     viewport:
                         ysize 880
@@ -101,29 +107,29 @@ init 2:
                                                             sensitive outfit not in exported
 
 
-                                                        textbutton "Direct Import Selection:": # Put the outfit directly into wardrobe(s), see the import_wardrobes dictionary to add more alternatives.
+                                                    textbutton ("Direct Import Selection:" if slut_limit is None else "Assign to Division:"): # Put the outfit directly into wardrobe(s), see the import_wardrobes dictionary to add more alternatives.
 
-                                                            style "textbutton_no_padding_highlight"
-                                                            text_style "serum_text_style"
-                                                            xfill True
+                                                        style "textbutton_no_padding_highlight"
+                                                        text_style "serum_text_style"
+                                                        xfill True
 
-                                                            action ToggleScreenVariable("targeted_outfit", renpy.get_widget(renpy.current_screen(), str(outfit)), None)
+                                                        action ToggleScreenVariable("targeted_outfit", renpy.get_widget(renpy.current_screen(), str(outfit)), None)
 
-                                                        if targeted_outfit == renpy.get_widget(renpy.current_screen(), str(outfit)):
-                                                            frame:
-                                                                vbox:
-                                                                    for wardrobes in import_wardrobes:
-                                                                        textbutton str(wardrobes):
-                                                                            style "textbutton_no_padding_highlight"
-                                                                            text_style "serum_text_style"
-                                                                            xfill True
+                                                    if targeted_outfit == renpy.get_widget(renpy.current_screen(), str(outfit)):
+                                                        frame:
+                                                            vbox:
+                                                                for wardrobes in import_wardrobes:
+                                                                    textbutton str(wardrobes):
+                                                                        style "textbutton_no_padding_highlight"
+                                                                        text_style "serum_text_style"
+                                                                        xfill True
 
-                                                                            sensitive not wardrobes_has_outfit_with_name(import_wardrobes[wardrobes][0], outfit.name)# in getattr(wardrobes, outfit_categories[category][2])()
+                                                                        sensitive not wardrobes_has_outfit_with_name(import_wardrobes[wardrobes][0], outfit.name)# in getattr(wardrobes, outfit_categories[category][2])()
 
-                                                                            action [
-                                                                                 Function(add_outfit_to_wardrobes, import_wardrobes[wardrobes][0], outfit, outfit_type = outfit_categories[category][1]),
-                                                                                 Function(renpy.notify, "Outfit imported to " + wardrobes)
-                                                                                 ]
+                                                                        action [
+                                                                             Function(add_outfit_to_wardrobes, import_wardrobes[wardrobes][0], outfit, outfit_type = outfit_categories[category][1]),
+                                                                             Function(renpy.notify, "Outfit imported to " + wardrobes)
+                                                                             ]
 
                                                         #
                                                         # action [
