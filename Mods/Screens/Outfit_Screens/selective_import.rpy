@@ -51,7 +51,8 @@ init 2:
 
 
 
-        default outfit_categories = {"Full": ["FullSets", "full", "get_outfit_list", "reduced_coverage_uniform_policy"], "Overwear": ["OverwearSets", "over", "get_overwear_sets_list", "strict_uniform_policy"], "Underwear": ["UnderwearSets", "under", "get_underwear_sets_list", "reduced_coverage_uniform_policy"]} #NOTE: Key is display name, [0] is XML's category type, [1] is outfit type, [2] is function to retrive [0]
+        default outfit_categories = {"Full": ["FullSets", "full", "get_outfit_list"], "Overwear": ["OverwearSets", "over", "get_overwear_sets_list"], "Underwear": ["UnderwearSets", "under", "get_underwear_sets_list"]} #NOTE: Key is display name, [0] is XML's category type, [1] is outfit type, [2] is function to retrive [0]
+        default import_mode = {"Import": [], "Assign": []}
         add "Paper_Background.png"
         modal True
         zorder 100
@@ -130,6 +131,10 @@ init 2:
                                                                 Hide(renpy.current_screen().screen_name)
                                                                 ]
                                                         else:
+                                                            if limited_to_top:
+                                                                if outfit in wardrobe.outfits or outfit in wardrobe.underwear_sets:
+                                                                    background "#222222"
+
                                                             if slut_limit >= outfit.slut_requirement:
                                                                 action NullAction()
                                                             else:
@@ -159,13 +164,23 @@ init 2:
                                                         style "textbutton_no_padding_highlight"
                                                         text_style "serum_text_style"
                                                         xfill True
-                                                        #sensitive slut_limit >= outfit.slut_requirement
 
                                                         if slut_limit is None:
                                                             action ToggleScreenVariable("targeted_outfit", renpy.get_widget(renpy.current_screen(), str(outfit)), None)
                                                         else:
-                                                            if slut_limit >= outfit.slut_requirement:
+
+                                                            if limited_to_top:
+                                                                if outfit not in wardrobe.outfits and outfit not in wardrobe.underwear_sets:
+                                                                    action ToggleScreenVariable("targeted_outfit", renpy.get_widget(renpy.current_screen(), str(outfit)), None)
+                                                                else:
+                                                                    background "#222222"
+                                                                    action Function(renpy.notify, "Full and underwear uniforms require [reduced_coverage_uniform_policy.name]")
+
+                                                            elif underwear_limit >= outfit.slut_requirement and outfit in wardrobe.underwear_sets:
                                                                 action ToggleScreenVariable("targeted_outfit", renpy.get_widget(renpy.current_screen(), str(outfit)), None)
+                                                            elif slut_limit >= outfit.slut_requirement and outfit not in wardrobe.underwear_sets:
+                                                                action ToggleScreenVariable("targeted_outfit", renpy.get_widget(renpy.current_screen(), str(outfit)), None)
+
                                                             else:
                                                                 background "#222222"
                                                                 action Function(renpy.notify, "Can not assign due to slut limit " + str(slut_limit) + ". Purchase new uniform policies to increase")
@@ -178,12 +193,6 @@ init 2:
                                                                         style "textbutton_no_padding_highlight"
                                                                         text_style "serum_text_style"
                                                                         xfill True
-
-
-
-
-                                                                        # if slut_limit is None:
-                                                                        #     sensitive not wardrobes_has_outfit_with_name(import_wardrobes[wardrobes][0], outfit.name)# in getattr(wardrobes, outfit_categories[category][2])()
 
                                                                         if not wardrobes_has_outfit_with_name(import_wardrobes[wardrobes][0], outfit.name):
                                                                             action [
@@ -202,14 +211,6 @@ init 2:
                                                                                     Function(remove_outfit_from_wardrobes, import_wardrobes[wardrobes][0], outfit),
                                                                                     Function(renpy.notify, "Outfit removed from " + wardrobes)
                                                                                     ]
-
-                                                        #
-                                                        # action [
-                                                        #     Function(add_outfit, target_wardrobe, outfit, outfit_type = outfit_categories[category][1]),
-                                                        #     Function(renpy.notify, "Outfit imported to " + target_wardrobe.name)
-                                                        #     ]
-                                                        # sensitive not target_wardrobe.has_outfit_with_name(outfit.name)
-
 
         frame:
             background None
