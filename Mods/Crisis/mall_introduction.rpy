@@ -3,42 +3,39 @@ init -1 python:
     mall_introduction_weight = 5
 
 init 2 python:
-    def get_people_with_status():
+    def mall_introduction_get_people_with_status():
         strangers = []
         known_people = []
         for loc in [mall, mall_salon, gym, home_store, clothing_store, sex_store]:
-            strangers += loc.get_strangers()
-            known_people += loc.get_known_people()
+            strangers += unknown_people_at_location(loc, unique_character_list) # don't introduce unique characters
+            known_people += known_people_at_location(loc)
         return strangers, known_people
 
     def mall_introduction_requirement():
         if time_of_day > 0 and time_of_day < 4: # only during morning afternoon or evening
             if mc.location in [mall, mall_salon, gym, home_store, clothing_store, sex_store]:
-                strangers, known_people = get_people_with_status()
+                strangers, known_people = mall_introduction_get_people_with_status()
                 if len(strangers) > 0 and len(known_people) > 0:
                     return True
         return False
+
+    def mall_introduction_get_actors():
+        strangers, known_people = mall_introduction_get_people_with_status()
+        # pick a person from each
+        known_person = get_random_from_list(known_people)
+        stranger = get_random_from_list(strangers)
+        return (known_person, stranger)
 
     mall_introduction_action = ActionMod("Mall Introduction", mall_introduction_requirement, "mall_introduction_action_label",
         menu_tooltip = "You meet a stranger and a friend introduces you.", category = "Mall", is_crisis = True, crisis_weight = mall_introduction_weight)
 
 label mall_introduction_action_label:
+    $ (known_person, stranger) = mall_introduction_get_actors()
+
+    if known_person is None or stranger is None:
+        return
+    
     python:
-        strangers, known_people = get_people_with_status()
-        # double check that we have at least one stranger and one person we know
-        if len(strangers) == 0 or len(known_people) == 0:
-            renpy.return_statement()
-
-        # pick a person from each
-        known_person = get_random_from_list(known_people)
-        stranger = get_random_from_list(strangers)
-        # don't random introduce unique characters
-        while stranger in unique_character_list:
-            strangers.remove(stranger)
-            if len(strangers) == 0:
-                renpy.return_statement() # no strangers left, exit
-            stranger = get_random_from_list(strangers)
-
         scene_manager = Scene()
 
         scene_manager.add_actor(known_person, position = "stand4", emotion = "happy", character_placement = character_center_flipped)
@@ -48,17 +45,19 @@ label mall_introduction_action_label:
     mc.name "Hello [known_person.title], nice to see you too."
 
     # set titles for unknown person
-    $ title_choice = get_random_title(stranger)
-    $ formatted_title = stranger.create_formatted_title(title_choice)
-    $ stranger.set_title(title_choice)
-    $ stranger.set_possessive_title(get_random_possessive_title(stranger))
+    python:
+        title_choice = get_random_title(stranger)
+        formatted_title = stranger.create_formatted_title(title_choice)
+        stranger.set_title(title_choice)
+        stranger.set_possessive_title(get_random_possessive_title(stranger))
 
     known_person.char "Let me, introduce my friend [formatted_title]."
     "[formatted_title] holds her hand out to shake yours."
 
     # sets your title for unknown person
-    $ title_choice = get_random_from_list(get_player_titles(stranger))
-    $ stranger.set_mc_title(title_choice)
+    python:
+        title_choice = get_random_from_list(get_player_titles(stranger))
+        stranger.set_mc_title(title_choice)
 
     if known_person.is_employee():
         known_person.char "And this is my boss, [title_choice]."
@@ -108,8 +107,6 @@ label mall_introduction_action_label:
 
     python: # Release variables
         scene_manager.clear_scene()
-        del strangers
-        del known_people
         del stranger
         del known_person
     return

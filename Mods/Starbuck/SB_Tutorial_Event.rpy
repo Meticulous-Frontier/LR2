@@ -4,31 +4,17 @@ init -1 python:
 init 2 python:
     def SB_tutorial_event_requirement():
         if mc.location in [mall, mall_salon, gym, home_store, clothing_store, sex_store]:
-            unknown, known = get_people_with_status()
-            if (len(known) > 0):
-                return True
+            return len(known_people_at_location(mc.location, unique_character_list)) > 0
         return False
 
-    def get_known_person():
-        unknown, known = get_people_with_status()
-        if len(known) == 0:
-            return None
-
-        person = get_random_from_list(known)
-        # don't flirt in the mall with family members, the dialog feels wrong for this.
-        while person in [mom, lily, aunt, cousin]:
-            known.remove(person)
-            if len(known) == 0:
-                return None
-            person = get_random_from_list(known)
-        return person
+    def SB_tutorial_event_get_known_person():
+        return get_random_from_list(known_people_at_location(mc.location, unique_character_list))
 
     SB_tutorial_crisis = ActionMod("Mall Flirt", SB_tutorial_event_requirement, "SB_tutorial_event",
         menu_tooltip = "You have a short flirt with someone in the mall.", category = "Mall", is_crisis = True, crisis_weight = SB_tutorial_crisis_weight)
 
 label SB_tutorial_event():
-    $ the_person = get_known_person()
-
+    $ the_person = SB_tutorial_event_get_known_person()
     if the_person is None:
         return
 
