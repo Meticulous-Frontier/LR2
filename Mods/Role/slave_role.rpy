@@ -12,9 +12,6 @@ init 10 python:
     def calm_down_requirement(the_person):
         return the_person.stay_wet
 
-    def advance_time_stay_wet_requirement():
-        return stay_wet_action.enabled
-
     def collar_slave_requirement(the_person):
         if the_person.slave_collar == False:
             return True
@@ -23,9 +20,6 @@ init 10 python:
 
     def uncollar_slave_requirement(the_person):
         return the_person.slave_collar
-
-    def advance_time_collar_person_requirement():
-        return collar_slave_action.enabled
 
     def wakeup_duty_requirement(the_person):
         if wakeup_duty_action.enabled and wakeup_duty_crisis not in mc.business.mandatory_morning_crises_list:
@@ -39,13 +33,9 @@ init 10 python:
 
     stay_wet_action = ActionMod("Stay wet", stay_wet_requirement, "stay_wet_label", menu_tooltip = "Have the person stay aroused at all times.", category = "Slave Role")
     calm_down_action = ActionMod("Calm down", calm_down_requirement, "stay_wet_label", menu_tooltip = "Have the person calm down.", category = "Slave Role", allow_disable = False)
-    advance_time_stay_wet_action = ActionMod("Enable 'stay wet' functionality", advance_time_stay_wet_requirement, "advance_time_stay_wet_label", priority = 20, allow_disable = False, menu_tooltip = "People with 'stay_wet = True' have their minimum arousal set to 50%")
-    if advance_time_stay_wet_action not in advance_time_action_list:
-        advance_time_action_list.append(advance_time_stay_wet_action)
 
     collar_slave_action = ActionMod("Place collar on [the_person.title].", collar_slave_requirement, "slave_collar_person_label", menu_tooltip = "Put a collar of ownership on the target, ensure that their obedience stays high.", category = "Slave Role")
     uncollar_slave_action = ActionMod("Remove collar from [the_person.title].", uncollar_slave_requirement, "slave_collar_person_label", menu_tooltip = "Remove the collar, declaring them a free spirit.", category = "Dungeon Actions", allow_disable = False)
-    advance_time_collar_person_action = ActionMod("Enable 'collar' functionality", advance_time_collar_person_requirement, "advance_time_collar_person_label", allow_disable = False, priority = 20, menu_tooltip = "Allows the collar_slave_action to do what it is intended to.")
     if advance_time_collar_person_action not in advance_time_action_list:
         advance_time_action_list.append(advance_time_collar_person_action)
 
@@ -69,16 +59,7 @@ label stay_wet_label(the_person): # Can expand with dialogue options and degrees
 
     return
 
-label advance_time_stay_wet_label():
-    python:
-        for (person, place) in [x for x in people_to_process if x[0].stay_wet and x[0].arousal < 50]:
-            person.arousal = 50
-            if person.sluttiness < 15:
-                person.sluttiness = 15 # Doesn't make sense for them to be "ready" if they cannot be seduced.
-    return
-
 label slave_collar_person_label(the_person):
-
     if the_person.slave_collar:
         $ the_person.slave_collar = False
         "You remove the collar from your [the_person.possessive_title]'s neck"
@@ -112,12 +93,6 @@ label slave_collar_person_label(the_person):
 
         "You put one of the collars you created around your [the_person.possessive_title]'s neck."
 
-    return
-
-label advance_time_collar_person_label():
-    python:
-        for (person,place) in [x for x in people_to_process if x[0].slave_collar and x[0].obedience < 130]:
-            person.obedience = 130
     return
 
 label wakeup_duty_label(the_person):

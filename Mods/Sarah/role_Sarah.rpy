@@ -1469,7 +1469,7 @@ label Sarah_stripclub_story_label():
     if staying_over:
         $ scene_manager.update_actor(the_person, position = "walking_away")
         "Worn out from your date with [the_person.possessive_title], you cuddle up with her and quickly fall asleep."
-        call advance_time_enhanced_next_day_no_events() from _sarah_overnight_after_stripclub
+        call advance_time_enhanced(no_events = True) from _sarah_overnight_after_stripclub
         call Sarah_spend_the_night() from sarah_stripclub_spend_the_night_sequence
     else:
         $ scene_manager.update_actor(the_person, position = "stand3")
@@ -1719,7 +1719,7 @@ label Sarah_threesome_request_label():
     "You look at her face. She passed out."
     "Worn out, you cuddle up with her and quickly fall asleep as well."
     $ scene_manager.clear_scene()
-    call advance_time_enhanced_next_day_no_events() from _sarah_overnight_after_threesome_request
+    call advance_time_enhanced(no_events = True) from _sarah_overnight_after_threesome_request
     call Sarah_spend_the_night() from sarah_threesome_request_spend_the_night_sequence
 
     return
@@ -1914,13 +1914,13 @@ label Sarah_initial_threesome_label():
         the_person_one.char "That was more than I could have hoped for. Thank you so much for this!"
         $ scene_manager.remove_actor(the_person_one)
         "You say goodbye, and slowly drift off to sleep."
-        call advance_time_enhanced_next_day_no_events() from _sarah_initial_threesome_no_overnight
+        call advance_time_enhanced(no_events = True) from _sarah_initial_threesome_no_overnight
         return
     mc.name "You're staying tonight... right?"
     the_person_one.char "Oh god, I don't think I could get up, even if I wanted to. Which I don't."
     "Worn out, you cuddle up with her and quickly fall asleep as well."
     $ scene_manager.clear_scene()
-    call advance_time_enhanced_next_day_no_events() from _sarah_overnight_after_threesome_1
+    call advance_time_enhanced(no_events = True) from _sarah_overnight_after_threesome_1
     call Sarah_spend_the_night() from sarah_threesome_spend_the_night
 
     $ del the_person_one
@@ -2108,7 +2108,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         "You both get ready for the day."
         the_person.char "Alright, I need to get some things done today. Thanks for letting me spend the night!"
         $ scene_manager.remove_actor(the_person)
-    return
+    return "Advance Time"
 
 label watch_strip_show(the_person):  #This scene assumes scene manager is running and the_person is with you, so she won't strip for you.
     $ showgirl = get_random_from_list(stripclub_strippers)

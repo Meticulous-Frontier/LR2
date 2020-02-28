@@ -549,7 +549,7 @@ label SB_mom_anal_pay_label():
             "It seems your serums have given her an anal fetish!"
             "You cuddle up behind her and enjoy the heat of her soft flesh as you slowly drift off to sleep."
 
-            call advance_time_enhanced_next_day_no_events() from _call_advance_time_enhanced_next_day_no_events_SBA42
+            call advance_time_enhanced(no_events = True) from _call_advance_time_enhanced_next_day_no_events_SBA42
             $ the_person.apply_outfit(SB_anal_nude_outfit)
             "The next morning, you slowly wake up. The bed next to you is cold. You look around and see [the_person.possessive_title] getting ready for the day in the bathroom."
             $ mc.change_location(mom_bedroom)
@@ -649,7 +649,7 @@ label SB_mom_anal_friday_label():
 
             "You cuddle up behind her and enjoy the heat of her soft flesh as you slowly drift off to sleep."
 
-            call advance_time_enhanced_next_day_no_events() from _call_advance_time_enhanced_next_day_no_events_SBA52
+            call advance_time_enhanced(no_events = True) from _call_advance_time_enhanced_next_day_no_events_SBA52
             $ the_person.apply_outfit(SB_anal_nude_outfit)
             "The next morning, you slowly wake up. The bed next to you is cold. You look around and see [the_person.possessive_title] getting ready for the day in the bathroom."
             $ mc.change_location(mom_bedroom)

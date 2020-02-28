@@ -175,10 +175,10 @@ label SB_fetish_vaginal_label(the_person):
     $ FETISH_VAGINAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
-    call advance_time_enhanced_next_day_no_events() from _SB_overnight_SBV010
+    call advance_time_enhanced(no_events = True) from _SB_overnight_SBV010
 
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV010
-    return
+    return "Advance Time"
 
 #SBV2
 label SB_fetish_vaginal_event_label(the_person):
@@ -303,10 +303,10 @@ label SB_fetish_vaginal_event_label(the_person):
     $ FETISH_VAGINAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
-    call advance_time_enhanced_next_day_no_events() from _SB_overnight_SBV020
+    call advance_time_enhanced(no_events = True) from _SB_overnight_SBV020
 
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV020
-    return
+    return "Advance Time"
 
 #SBV3
 label SB_fetish_mom_vaginal_label():
@@ -357,11 +357,11 @@ label SB_fetish_mom_vaginal_label():
     $ FETISH_VAGINAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
-    call advance_time_enhanced_next_day_no_events() from _SB_overnight_SBV030
+    call advance_time_enhanced(no_events = True) from _SB_overnight_SBV030
 
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV030
 
-    return
+    return "Advance Time"
 
 #SBV4
 label SB_fetish_lily_vaginal_label():
@@ -422,9 +422,9 @@ label SB_fetish_lily_vaginal_label():
     $ FETISH_VAGINAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
-    call advance_time_enhanced_next_day_no_events() from _SB_overnight_SBV040
+    call advance_time_enhanced(no_events = True) from _SB_overnight_SBV040
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV040
-    return
+    return "Advance Time"
 
 
 
@@ -587,9 +587,9 @@ label SB_fetish_vaginal_recurring_label():
     #SBMOD Start hacked wakeup sex code. To be copy/pasted to other similar places#
 
     $ FETISH_VAGINAL_EVENT_INUSE = False
-    call advance_time_enhanced_next_day_no_events() from _SB_overnight_SBV060
+    call advance_time_enhanced(no_events = True) from _SB_overnight_SBV060
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV060
-    return
+    return "Advance Time"
 
 #SBV7
 label SB_fetish_vaginal_lily_recurring_label():
@@ -657,6 +657,6 @@ label SB_fetish_vaginal_lily_recurring_label():
     $ FETISH_VAGINAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
-    call advance_time_enhanced_next_day_no_events() from _SB_overnight_SBV070
+    call advance_time_enhanced(no_events = True) from _SB_overnight_SBV070
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV070
-    return
+    return "Advance Time"
