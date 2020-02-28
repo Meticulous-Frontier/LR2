@@ -346,7 +346,7 @@ init 5 python:
                     if score > 0:
                         weighted_list.append([None, score * (20 + points)])
 
-            renpy.random.shuffle(weighted_list)
+            # renpy.random.shuffle(weighted_list)
 
             item = get_random_from_weighted_list(weighted_list)
 
@@ -381,5 +381,5 @@ init 5 python:
                     for col in self.color_prefs[cp]:
                         color_list.append([self.color_prefs[cp][col], (score + 2) * 10])
 
-            renpy.random.shuffle(color_list)
+            # renpy.random.shuffle(color_list)
             return get_random_from_weighted_list([x for x in color_list if x[1] > 0])
