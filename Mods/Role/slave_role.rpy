@@ -119,7 +119,7 @@ label slave_training_label(the_person): # TODO: Add variations to these. They ar
             $ the_person.change_stats(2)
             call give_serum(the_person) from _call_give_serum_slave_training
 
-        "Increase submission" if person.get_opinion_score("being submissive") < 2:
+        "Increase submission" if the_person.get_opinion_score("being submissive") < 2:
             call increase_slave_submission_label(the_person) from _call_increase_slave_submission_slave_training
 
         "Send her away.":
