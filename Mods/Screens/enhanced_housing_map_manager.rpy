@@ -37,7 +37,7 @@ init 2:
                         anchor [0.5,0.5]
                         auto "gui/LR2_Hex_Button_%s.png"
                         focus_mask "gui/LR2_Hex_Button_idle.png"
-                        action [Hide("housing_map_manager"), Return(place), Call("change_location_label", place)]
+                        action [Hide("housing_map_manager"), Return(place), Function(mc.change_location, place)]
                         sensitive place.accessable
                     text (place.formalName + " (" + str(len(place.people)) + ")").replace(" ", "\n", 2) anchor [0.5,0.5] style "map_text_style"
 
@@ -51,7 +51,7 @@ init 2:
                         anchor [0.5,0.5]
                         idle "gui/LR2_Hex_Button_Alt_idle.png"
                         focus_mask "gui/LR2_Hex_Button_Alt_idle.png"
-                        action [Hide("housing_map_manager"), Return(place), Call("change_location_label", place)]
+                        action [Hide("housing_map_manager"), Return(place), Function(mc.change_location, place)]
                         sensitive False
                     text place.formalName + "\n(" + str(len(place.people)) + ")" anchor [0.5,0.5] style "map_text_style"
             $ places_so_far += 1

@@ -41,7 +41,7 @@ init 2:
                             auto "gui/LR2_Hex_Button_%s.png"
                             focus_mask "gui/LR2_Hex_Button_idle.png"
 
-                            action [Call("change_location_label", place), Return(place)]
+                            action [Function(mc.change_location, place), Return(place)]
                             sensitive place.accessable #TODO: replace once we want limited travel again with: place in mc.location.connections
                             tooltip get_location_tooltip(place)
                         text place.formalName + "\n(" + str(len(place.people)) + ")" anchor [0.5,0.5] style "map_text_style"
@@ -55,7 +55,7 @@ init 2:
                             anchor [0.5,0.5]
                             idle "gui/LR2_Hex_Button_Alt_idle.png"
                             focus_mask "gui/LR2_Hex_Button_Alt_idle.png"
-                            action [Call("change_location_label", place), Return(place)]
+                            action [Function(mc.change_location, place), Return(place)]
                             sensitive True
                             tooltip get_location_tooltip(place)
                         text place.formalName + "\n(" + str(len(place.people)) + ")" anchor [0.5,0.5] style "map_text_style"
