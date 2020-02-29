@@ -630,7 +630,7 @@ label Sarah_get_drinks_label():
         mc.name "That sounds great, I'll meet you over there."
         $ scene_manager.update_actor(the_person, position = "walking_away")
         "[the_person.possessive_title] gets up and walks over to the dart boards while you grab a couple more drinks."
-        "You feel like, so far atleast, this date is going pretty well!"
+        "You feel like, so far at least, this date is going pretty well!"
         $ scene_manager.update_actor(the_person, position = "stand4")
         "You walk over to [the_person.title], drinks in hand. You hand her a drink."
         mc.name "How about a toast? To tonight! May we love as long as we live, and live as long as we love."
@@ -1563,33 +1563,33 @@ label Sarah_threesome_request_label():
     if employee_role in person_choice.special_role:
         mc.name "I was thinking about [person_choice.title]. She seems like she would be down for just about anything, to be honest."
         the_person.char "Oh! She's cute! Damn, that would be great!"
-    elif person_choice == mom:
+    elif person_choice is mom:
         mc.name "So, uh, this might sound kind of weird, but, I actually have a family member in mind."
         "[the_person.title] stays quiet for a moment before she responds."
         the_person.char "I mean... that's a little weird, sure. But, I mean, we're already pushing boundaries having a threesome in the first place."
         the_person.char "Who did you have in mind?"
         mc.name "It's actually my mom."
         the_person.char "Oh! Well, I mean, she DOES have a really nice body..."
-    elif person_choice == lily:
+    elif person_choice is lily:
         mc.name "So, uh, this might sound kind of weird, but, I actually have a family member in mind."
         "[the_person.title] stays quiet for a moment before she responds."
         the_person.char "I mean... that's a little weird, sure. But, I mean, we're already pushing boundaries having a threesome in the first place."
         the_person.char "Who did you have in mind?"
         mc.name "It's actually my sister, [lily.title]."
         the_person.char "Oh! Well, I mean, she DOES have a really nice body..."
-    elif person_choice == cousin:
+    elif person_choice is cousin:
         "You consider carefully whether or not you should reveal that [cousin.title] is your cousin, but you decide not to."
         mc.name "Actually, one of the strippers at the club we went to the other night is a good friend of mine."
         the_person.char "Ah. Are you friends with a lot of... strippers?"
         mc.name "Ha! Not really, but she and I go back a ways. And she actually owes me a favor or two."
-    elif person_choice == aunt:
+    elif person_choice is aunt:
         mc.name "So, uh, this might sound kind of weird, but, I actually have a family member in mind."
         "[the_person.title] stays quiet for a moment before she responds."
         the_person.char "I mean... that's a little weird, sure. But, I mean, we're already pushing boundaries having a threesome in the first place."
         the_person.char "Who did you have in mind?"
         mc.name "It's actually my aunt. She's been going through a rough patch after her divorce. I think it would really help pick her up."
         the_person.char "Oh! Well, I mean, an aunt is fairly distant relation. And it sounds like she could use a good opportunity to cut loose..."
-    elif person_choice == starbuck:
+    elif person_choice is starbuck:
         if starbuck.shop_progress_stage >= 1:
             mc.name "I actually have a joint venture in another business. There's a woman who owns the mall sex shop, and I invested a decent some of money in it recently."
             the_person.char "Ah, so, she's a business partner?"
@@ -1599,7 +1599,7 @@ label Sarah_threesome_request_label():
         mc.name "Yeah. Her husband died a while ago, and she opened the shop in memory of him. It's a little weird, but also kinda sweet."
         mc.name "Anyway, she is very open to experimentation. I think a threesome would be right up her alley, so to speak."
         the_person.char "Aww, you are a sweetheart."
-    elif person_choice == nora:
+    elif person_choice is nora:
         mc.name "I have an old college professor, who helped develop some of the original formulas that we make here."
         mc.name "She works full time over at the university, and is overworked a bit. I'm sure she would appreciate the chance to blow off some steam with us."
     "A few moments go by as she thinks about it."
@@ -1769,7 +1769,7 @@ label Sarah_arrange_threesome_label(the_person):
         the_person.char "Oh jesus I can tell where this is going already."
         mc.name "Anyway, she's been asking, so I promised her I'd try to arrange something for Saturday. I need you to come over to my place Saturday night."
         if cousin.event_triggers_dict["blackmail_level"] >= 2:
-            the_person.char "That's rediculous. I'm gonna make a ton of money in tips on a Saturday night. You're gonna have to convince me..."
+            the_person.char "That's ridiculous. I'm gonna make a ton of money in tips on a Saturday night. You're gonna have to convince me..."
             mc.name "How about I promise not to tell your mom where you make all those tips at? Does that sound good?"
             the_person.char "Look, I need that money. I'm sorry but I can't just give up the most lucrative night of the week."
             mc.name "Fine, I'll give you $500, right now."
