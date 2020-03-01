@@ -1,7 +1,7 @@
 # Overrides part of the existing Position class with enhanced versions
 init 5 python:
     # include a visual indication
-    def build_position_willingness_string_enhanced(self, the_person, ignore_taboo = False): #Generates a string for this position that includes a tooltip and coloured willingness for the person given.
+    def build_position_willingness_string_enhanced(self, the_person): #Generates a string for this position that includes a tooltip and coloured willingness for the person given.
         willingness_string = ""
         tooltip_string = ""
 
@@ -13,24 +13,14 @@ init 5 python:
 
         disable = False
 
-        if hasattr(self, "associated_taboo"):
-            position_taboo = self.associated_taboo
-
-        if ignore_taboo:
-            position_taboo = None
-
         slut_modifier = 0
         if self.opinion_tags:
             for opinion_tag in self.opinion_tags:
                 slut_modifier += the_person.get_opinion_score(opinion_tag)
 
-        effective_sluttiness = the_person.effective_sluttiness() + slut_modifier
+        effective_sluttiness = the_person.effective_sluttiness() + slut_modifier 
 
-        taboo_break_string = ""
-        if the_person.has_taboo(position_taboo):
-            taboo_break_string = " {image=gui/extra_images/taboo_break_token.png} "
-
-        if the_person.effective_sluttiness(position_taboo) > self.slut_cap:
+        if effective_sluttiness > self.slut_cap:
             if the_person.arousal > self.slut_cap:
                 willingness_string = "{color=#6b6b6b}Boring{/color}" #No sluttiness gain AND half arousal gain
                 tooltip_string = " (tooltip)This position is too boring to interest her when she is this horny. No sluttiness increase and her arousal gain is halved."
@@ -46,9 +36,6 @@ init 5 python:
         else:
             willingness_string = "{color=#FF3D3D}Likely Too Slutty{/color}"
             tooltip_string = " (tooltip)This position is so far beyond what she considers appropriate that she would never dream of it."
-
-        if the_person.has_taboo(position_taboo):
-            tooltip_string +="\nSuccessfully selecting this position will break a taboo, making it easier to convince " + the_person.title + " to do it and similar acts in the future."
 
         if not self.check_clothing(the_person):
             disable = True
@@ -82,8 +69,8 @@ init 5 python:
             position_opinion = " {image=thumbs_down}"
 
         if disable:
-            return taboo_break_string + self.name + position_opinion + "\n{size=22}"+ willingness_string + "{/size}" + " (disabled)" #Don't show the arousal and energy string if it's disabled to prevent overrun
+            return self.name + position_opinion + "\n{size=22}"+ willingness_string + "{/size}" + " (disabled)" #Don't show the arousal and energy string if it's disabled to prevent overrun
         else:
-            return taboo_break_string + self.name + position_opinion + "\n{size=22}" + willingness_string + energy_string + arousal_string + "{/size}" + tooltip_string
+            return self.name + position_opinion + "\n{size=22}" + willingness_string + energy_string + arousal_string + "{/size}" + tooltip_string
 
     Position.build_position_willingness_string = build_position_willingness_string_enhanced
