@@ -67,7 +67,9 @@ init 5 python:
 
         #Cheating modifiers
         the_person.discover_opinion("cheating on men")
-        if the_person.relationship == "Girlfriend":
+        if prostitute_role in the_person.special_role:
+            the_person.add_situational_slut("cheating", 20, "Prostitutes don't care about cheating")
+        elif the_person.relationship == "Girlfriend":
             if the_person.get_opinion_score("cheating on men") > 0:
                 the_person.add_situational_slut("cheating", the_person.get_opinion_score("cheating on men") * 5, "I'm cheating on my boyfriend!")
             else:
