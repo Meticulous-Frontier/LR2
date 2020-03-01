@@ -211,7 +211,7 @@ label threesome_test():
     $ scene_manager.add_actor(lily, character_placement = character_center_flipped)
     $ scene_manager.strip_actor_outfit(mom)
     $ scene_manager.strip_actor_outfit(lily)
-    call start_threesome(mom, lily) from threesome_test_call_1
+    call start_threesome(mom, lily, start_position = Threesome_sixty_nine) from threesome_test_call_1
     $ scene_manager.clear_scene()
     return "Test Complete"
 
