@@ -218,7 +218,7 @@ label SB_fetish_vaginal_event_label(the_person):
                 $ the_person.clear_situational_obedience("crisis_stuff")
                 mc.name "Wait! Hey [the_person.title] why don't you, ya know, sleep in here tonight?"
                 the_person.char "Oh? I mean... I suppose that would be okay"
-            "Just cuddle.":
+            "Just cuddle":
                 mc.name "Actually, [the_person.title], I'm really worn out. Would you wanna just cuddle for a bit and get some sleep?"
                 "[the_person.possessive_title] is surprised by your answer, but happy that you want to be close to her."
                 $ the_person.change_happiness(2)
@@ -254,7 +254,7 @@ label SB_fetish_vaginal_event_label(the_person):
                     $ the_person.change_love(-2)
                     $ the_person.change_happiness(-5)
                 $ the_person.reset_arousal()
-            "Just cuddle.":
+            "Just cuddle":
                 mc.name "Actually, [the_person.title], I'm really worn out. Would you wanna just cuddle for a bit and get some sleep?"
                 "[the_person.possessive_title] is surprised by your answer."
                 the_person.char "Oh! Well okay. I mean hey, tomorrow is a new day..."
@@ -292,7 +292,7 @@ label SB_fetish_vaginal_event_label(the_person):
                     $ the_person.change_love(-2)
                     $ the_person.change_happiness(-5)
                 $ the_person.reset_arousal()
-            "Just cuddle.":
+            "Just cuddle":
                 mc.name "Actually, [the_person.title], I'm really sorry about this, but I'm really worn out. Would you wanna just cuddle for a bit and get some sleep?"
                 "[the_person.possessive_title] is surprised by your answer, and clearly a little disappointed."
                 $ the_person.change_happiness(-2)

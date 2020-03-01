@@ -482,7 +482,7 @@ label starbuck_sex_store_investment_one_label(the_person):
     "That sounds like a pretty list of stuff that you would be interested in buying if you were to go to a sex shop."
     "Do you want to invest?"
     menu:
-        "Invest $1000":
+        "Invest ($1000)":
             "You discuss with [the_person.possessive_title] for a while what the terms of your investment are. Once you are both happy, you write her a check from your business account."
             $ mc.business.funds += -1000
             $ the_person.change_happiness (20)
@@ -521,7 +521,7 @@ label starbuck_sex_store_investment_two_label(the_person):
         "It might also open up new opportunities with [the_person.possessive_title]. You wouldn't mind a few more excuses to get intimate with her..."
     "Do you want to invest?"
     menu:
-        "Invest $5000":
+        "Invest ($5000)":
             "You discuss with [the_person.possessive_title] for a while what the terms of your investment are. Once you are both happy, you write her a check from your business account."
             $ mc.business.funds += -5000
             $ the_person.change_happiness (20)
@@ -535,7 +535,6 @@ label starbuck_sex_store_investment_two_label(the_person):
             $ starbuck.shop_progress_stage = 2
             "She is so excited, you can tell already, this is an investment that is going to pay off for you... one way or another!"
             $ SB_SHOP_STAGE_TWO_DAY = day
-
         "Reconsider":
             "You decide you need more time to consider the investment."
             mc.name "Sorry, [the_person.title], I haven't made up my mind yet. Thanks for the info though, I'll be back when I've reconsidered."
@@ -565,7 +564,7 @@ label starbuck_sex_store_investment_three_label(the_person):
     the_person.char "Well... my estimates put it at about $15000. But please, don't think you have to do that! I'm making decent money, I'll be able to afford it eventually..."
     "You consider the investment."
     menu:
-        "Invest $15000":
+        "Invest ($15000)":
             "How about this. You've done an incredible job managing this place. How about if I front the money, and from now on we're partners?"
             the_person.char "Wow... partners?... I mean... you're talking business partners, right?"
             if starbuck.shop_investment_rate > 3.0:
@@ -586,7 +585,6 @@ label starbuck_sex_store_investment_three_label(the_person):
             $ starbuck.shop_investment_total += 15000
             $ starbuck.shop_stage_three_investment_total += 15000
             $ starbuck.shop_progress_stage = 3
-
         "Reconsider":
             "You decide you need more time to consider the investment."
             mc.name "Sorry, [the_person.title], I haven't made up my mind yet. Thanks for the info though, I'll be back when I've reconsidered."

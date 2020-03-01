@@ -87,7 +87,7 @@ label SB_working_weekend_crisis_label():
         the_person.char "Oh hey there [the_person.mc_title], I didn't expect to see you here! I just stopped by because I forgot something in my desk. Are you... working? You know its the weekend right?"
         "You can tell by the look on her face that she is impressed by your work ethic. You consider the chance to impress on her the values of the company in this one on one situation."
         menu:
-            "Stress the importance of obedience.":
+            "Stress the importance of obedience":
                 mc.name "It is no accident that this place is accomplishing great things. The work I am trying to do requires many long hours, but also organization and commitment to procedures."
                 mc.name "A highly organized workplace is important, especially in a lab setting. I need employees who are able to listen to my instructions and follow them."
                 "[the_person.possessive_title] nods in agreement."
@@ -95,7 +95,7 @@ label SB_working_weekend_crisis_label():
                 $ the_person.change_obedience(10)
                 the_person.char "Yes, absolutely. I'll do everything I can to make sure this business is successful."
 
-            "Stress the importance of satisfaction.":
+            "Stress the importance of satisfaction":
                 mc.name "I've worked hard to build this place into what it is. Even though it is the weekend, I can't help but come out here and work on improving the business in anyway I can..."
                 mc.name "But it can be easy to burn yourself out in this line of business. Pay might not always be great and the hours might be long, but a good attitude is key."
                 "[the_person.possessive_title] nods in agreement."
@@ -103,7 +103,7 @@ label SB_working_weekend_crisis_label():
                 $ the_person.change_happiness(10)
                 the_person.char "Yes sir, I do enjoy being here."
 
-            "Stress the importance of work hard, play hard.":
+            "Stress the importance of work hard, play hard":
                 mc.name "Yes, it is true that I work late into the days and even on the weekends, but that doesn't mean that I'm all business."
                 mc.name "It is important though, that when you work heard, you can also play hard."
                 "[the_person.possessive_title] nods in agreement."
