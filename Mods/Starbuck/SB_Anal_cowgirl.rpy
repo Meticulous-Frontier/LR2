@@ -48,7 +48,7 @@ label scene_SB_anal_cowgirl_1(the_girl, the_location, the_object, the_round):
     if the_girl.arousal > 50:
         "[the_girl.possessive_title] leans back, putting her hands in line with your feet."
         "In her reclined position you have a perfect view of her drooling pussy. Just below it you can see your cock stretching her nice little asshole."
-        if the_girl == mom:
+        if the_girl is mom:
             the_girl.char "Oh god [the_girl.mc_title], you make [the_girl.title] feel so good... You grew up into such a good man!"
             mc.name "Mmm, [the_girl.title] your ass is amazing. Its so tight!"
         else:
@@ -124,7 +124,7 @@ label scene_SB_anal_cowgirl_2(the_girl, the_location, the_object, the_round):
                     "You stroke yourself a bit through her vagina while she fucks you. It's a very unique feeling, and very pleasurable!"
                     return
     "You give her nipple a pinch. You roll it between your finger and thumb."
-    if the_girl == mom:
+    if the_girl is mom:
         the_girl.char "[the_girl.mc_title]! [the_girl.title] loves it when you play with her nipples."
     else:
         the_girl.char "Mmm, I love it when you play with my tits!"
@@ -174,7 +174,7 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_round):
         the_girl.char "Yes! Ah!"
         "[the_girl.possessive_title] drops herself down, grinding her hips against yours and pushing your cock as deep into her ass as possible."
         "Her breath catches in her throat when you pulse out your hot load of cum deep inside of her."
-        if the_girl.char == mom:
+        if the_girl.char is mom:
             the_girl.char "That's it baby! Give your cum to [the_girl.title]!"
         else:
             the_girl.char "Oh my god... Give it all to me [the_girl.mc_title]... Fill my ass up!"

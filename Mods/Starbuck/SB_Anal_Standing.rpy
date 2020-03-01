@@ -37,13 +37,13 @@ label intro_SB_anal_standing(the_girl, the_location, the_object, the_round):
         the_girl.char "I don't know, are you sure that thing is gonna fit in me back there?"
 
     if SB_check_fetish(the_girl, anal_fetish_role):
-        if the_girl == mom:
+        if the_girl is mom:
             "You work your cock up and down [the_girl.possessive_title]'s slit a few times, her wetness lubricating it."
             "You lean forward and whisper into her ear."
             mc.name "[the_girl.title]... your [the_girl.mc_title] is about to fuck your ass now, just the way you like."
             "Her body shudders from your dirty talk. She wiggles her ass back up against you."
             the_girl.char "Do it honey. [the_girl.title] is ready for you!"
-        elif the_girl == lily:
+        elif the_girl is lily:
             "You work your cock up and down [the_girl.possessive_title]'s slit a few times, her wetness lubricating it."
             "You lean forward and whisper into her ear."
             mc.name "Hey [the_girl.title], your [the_girl.mc_title] is about to fuck your ass now, just the way you like."
@@ -83,9 +83,9 @@ label scene_SB_anal_standing_1(the_girl, the_location, the_object, the_round):
         "Next time you push yourself in it goes in a bit easier, but you can tell she is having a hard time taking you in her back passage."
     elif SB_check_fetish(the_girl, anal_fetish_role):           #Anal fetish
         "After a particularly hard thrust, [the_girl.possessive_title] moans lewdly."
-        if the_girl == mom:
+        if the_girl is mom:
             the_girl.char "That's it honey, fuck me harder! God I wish I could walk around with you inside me all day..."
-        elif the_girl == lily:
+        elif the_girl is lily:
             the_girl.char "That's it [the_girl.mc_title]! Fuck me harder! God I wish I could walk around with you inside me all day..."
         else:
             the_girl.char "That's it, fuck me harder! This is so much better than that plug, I wish I could walk around with you inside me all day..."

@@ -650,7 +650,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
                 mc.name "Of course. Let's get started."
                 call start_threesome(person_choice, the_person) from threesome_HR_meeting_happy_ending
                 person_choice.char "Oh my... that was fun. Thanks for calling me in! I guess I'd better go get back to work..."
-                if the_person == sarah:
+                if the_person is sarah:
                     $ the_person.change_happiness(10)
             "That's all":
                 person_choice.char "Thanks for calling me in... I guess I'd better go get back to work!"
@@ -964,7 +964,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         return
 
     if get_HR_director_unlock("titfuck") == False:
-        if the_person == sarah and sarah.event_triggers_dict.get("epic_tits_progress", 0) > 1:
+        if the_person is sarah and sarah.event_triggers_dict.get("epic_tits_progress", 0) > 1:
             the_person.char "So... I was thinking this week maybe I could do that thing again. You know, where I put your cock between my tits?"
             the_person.char "It felt soooo good last time. I've been thinking about it a lot."
             mc.name "That sounds great, I'll admit it, seeing my cock between your tits is hot."

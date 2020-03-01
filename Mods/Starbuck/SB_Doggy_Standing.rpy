@@ -80,7 +80,7 @@ label scene_SB_doggy_standing_1(the_girl, the_location, the_object, the_round):
                 mc.name "Do you let any guy with a hard cock fuck you and spank you like this? Or just me?"
                 "[the_girl.possessive_title] responds quietly."
                 the_girl.char "Just you, [the_girl.mc_title]. I don't know why but it just feels so good... so right when you dominate me..."
-                if the_girl == mom:
+                if the_girl is mom:
                     the_girl.char "It makes [the_girl.title] so happy to serve you like this... To be [the_girl.possessive_title]!"
                 "You give her pussy a few rough thrusts before bottoming out again."
                 mc.name "That's right bitch, you're my little fuckhole. I'll bend you over and fuck you anytime I please."

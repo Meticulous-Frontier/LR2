@@ -83,7 +83,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object, the_round):
         "Rim Her Ass" if the_girl.get_opinion_score("anal sex") > 0:
             "As you continue to lick around [the_girl.possessive_title]'s cunt, you slowly work your way towards her ass."
             if SB_check_fetish(the_girl, anal_fetish_role):
-                if the_girl == mom or the_girl == lily:
+                if the_girl is mom or the_girl is lily:
                     the_girl.char "Oh!!!"
                 else:
                     "You reach out and gently pull out the buttplug that is in her ass."

@@ -620,8 +620,7 @@ label SB_mom_anal_friday_label():
     the_person.char "[the_person.mc_title]! Hey, it time for our Friday night date! Are you ready for your show and, well you know what comes afterword..."
     "[the_person.title] smiles wide, waiting for your response."
     menu:
-        "Strip and ride me":
-
+        "Strip and ride me\nPay $200" if mc.business.funds >= 200:
             "You sit down on the bed. [the_person.title] walks over to you."
             the_person.char "Remember, no touching! Atleast during this part. Now, are you ready a show?"
             call SB_free_strip_scene(the_person) from _call_SB_free_strip_scene_SBA50
@@ -681,7 +680,7 @@ label SB_mom_anal_friday_label():
             mc.name "Mmm, thanks [the_person.title]. That ass is amazing. Next friday, right?"
             the_person.char "Yes [the_person.mc_title]. But don't feel like you HAVE to wait to take my ass. We can do it whenever you want. I'll be ready!"
             $ mc.business.mandatory_crises_list.append(SB_mom_weekly_anal_action)
-        "Strip and ride me\nPay $200 (disabled)" if mc.business.funds <100:
+        "Strip and ride me\nPay $200 (disabled)" if mc.business.funds < 200:
             pass
         "Not this week":
             mc.name "Sorry [the_person.title], work was hell and I'm exhausted. Maybe next week, okay?"

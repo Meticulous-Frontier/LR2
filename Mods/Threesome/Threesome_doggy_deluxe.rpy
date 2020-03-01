@@ -164,7 +164,7 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_1(the_girl_1, the_girl_2, the_l
                 the_girl_1.char "It feels great... keep going!"
             if the_girl_2.get_opinion_score("being submissive") > 0 or the_girl_2.get_opinion_score("threesomes") > 0:
                 "[the_girl_2.title] reaches back with one hand and spreads her cheeks and pushes back against you. She moans when you push deep into her."
-                if the_girl_2 == mom and the_girl_1 == lily: #Special dialogue
+                if the_girl_2 is mom and the_girl_1 is lily: #Special dialogue
                     mc.name "Mmm, you do like it, don't you? Your son and daughter, using you for their own pleasure. A slutty mommy's biggest dream!"
                 else:
                     mc.name "Mmm, you do like it don't you. A guy and a girl at the same time, using you for their pleasure. Every slut's biggest dream!"

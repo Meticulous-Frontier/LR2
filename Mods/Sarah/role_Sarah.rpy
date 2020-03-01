@@ -1168,7 +1168,7 @@ label Sarah_stripclub_story_label():
         the_person.char "Damn! That girl had a nice chest. Wish I could get my hands on her..."
     else:
         the_person.char "That was impressive! Even though her chest was small, she certainly knows how to work her body. Wish I could get my hands on her..."
-    if showgirl == cousin:
+    if showgirl is cousin:
         "While it was true, you aren't sure you have the guts to tell her that the girl on stage was your cousin, [cousin.title]."
         "Either way, she seemed to really enjoy her performance."
     else:
@@ -1187,7 +1187,7 @@ label Sarah_stripclub_story_label():
     $ scene_manager.remove_actor(the_person, reset_actor = False)
     "You get up and head over to the counter where the owner is."
     if cousin.event_triggers_dict["blackmail_level"] == 2:
-        if showgirl == cousin:
+        if showgirl is cousin:
             "You arrange two private lap dances. For [the_person.title], you get [cousin.possessive_title], since she enjoyed her so much."
         else:
             "You arrange two private lap dances. For [the_person.title], you ask for the girl that did the second dance on stage."
@@ -1201,7 +1201,7 @@ label Sarah_stripclub_story_label():
     $ showgirl.apply_outfit(stripclub_wardrobe.pick_random_outfit())
     $ scene_manager.add_actor(showgirl, character_placement = character_center_flipped)
     if cousin.event_triggers_dict["blackmail_level"] == 2:  #We have blackmailed Gabrielle about stripping already#
-        if showgirl == cousin:
+        if showgirl is cousin:
             $ showgirl_2 = get_random_from_list([x for x in stripclub_strippers if x != showgirl])
         else:
             $ showgirl_2 = cousin
@@ -1210,14 +1210,14 @@ label Sarah_stripclub_story_label():
     $ showgirl_2.apply_outfit(stripclub_wardrobe.pick_random_outfit())
     $ scene_manager.add_actor(showgirl_2)
     showgirl_2.char "Alright! We got a couple in here tonight, this should be fun!"
-    if showgirl_2 == cousin:
+    if showgirl_2 is cousin:
         "Suddenly, [showgirl_2.title] realizes its you she is getting ready to dance for."
         "[showgirl_2.possessive_title] lowers her face to your ear and whispers in it."
         showgirl_2.char "What the fuck? You want me to give you a lap dance? Here??? In front of your little bimbo? You're a sick fuck..."
         mc.name "Don't worry, I'll make it worth it."
         showgirl_2.char "You better..."
         "She stands back up and acts as if nothing happened."
-    if showgirl == cousin:
+    if showgirl is cousin:
         "You see [showgirl.title] look over at you, realizing that you are gonna be in the room as she performs for [the_person.title]"
         "She gives you a quick wink."
     showgirl.char "Alright, lets get the fun started!"
@@ -1229,7 +1229,7 @@ label Sarah_stripclub_story_label():
     "You glance over and notice the girl in front of [the_person.title] is doing something similar."
     $ scene_manager.strip_actor_outfit(showgirl, exclude_lower = True, exclude_feet = True)
     showgirl_2.char "For $100, you two can play with our tits for a bit."
-    if showgirl_2 == cousin:
+    if showgirl_2 is cousin:
         "[showgirl_2.title] lowers her lips to your ear again."
         showgirl_2.char "Don't you wanna grab your cousin's tits, pervert?"
     "You see [the_person.title] look over at you. You can see her mouth the word 'please'"
@@ -1239,7 +1239,7 @@ label Sarah_stripclub_story_label():
     "She seems to be really enjoying the show so far!"
     $ mc.change_arousal(10)
     $ the_person.change_arousal(12)
-    if showgirl_2 == cousin:
+    if showgirl_2 is cousin:
         "You reach up and grope [showgirl_2.possessive_title]'s tits. You're mesmerized by how soft and warm they are."
     else:
         "You reach up and begin to fondle your stripper's tits. They are so soft and warm. They feel amazing."
@@ -1256,7 +1256,7 @@ label Sarah_stripclub_story_label():
     $ mc.change_arousal(15)
     $ the_person.change_arousal(20)
     showgirl_2.char "For $200, you two can touch, anywhere you want other than pussies while we dance for you."
-    if showgirl_2 == cousin and showgirl_2.sluttiness > 50:
+    if showgirl_2 is cousin and showgirl_2.sluttiness > 50:
         "[showgirl_2.title] looks bank and whispers at you."
         showgirl_2.char "Maybe later you can touch me there..."
     "You don't hesitate. You grab $200 and put it in the tip jar."
@@ -1270,10 +1270,10 @@ label Sarah_stripclub_story_label():
     $ scene_manager.update_actor(showgirl, position = "stand4")
     $ scene_manager.update_actor(showgirl_2, position = "stand5")
     showgirl.char "Mmm, that was fun! It's been forever since I had a female client. They always love getting to touch..."
-    if showgirl_2 == cousin and showgirl_2.sluttiness > 70:
+    if showgirl_2 is cousin and showgirl_2.sluttiness > 70:
         "[showgirl_2.possessive_title] whispers in your ear before she leaves."
         showgirl_2.char "That was fun... how soon until I get to play with your girlfriend too? Soon I hope?"
-    elif showgirl_2 == cousin:
+    elif showgirl_2 is cousin:
         "[showgirl_2.possessive_title] whispers in your ear before she leaves."
         showgirl_2.char "I hope your little slut doesn't realize we're related. That would be an unfortunate event, for sure..."
     "The strippers leave, leaving you and [the_person.title] alone and highly aroused."
@@ -1652,7 +1652,7 @@ label Sarah_threesome_request_label():
     $ mc.change_location(hall)
     $ mc.location.show_background()
 
-    if person_choice == aunt:
+    if person_choice is aunt:
         $ scene_manager.add_actor(mom, character_placement = character_left_flipped, position = "sitting")
         $ scene_manager.add_actor(aunt, character_placement = character_center, position = "sitting")
         "As you walk down the hall, you see that [aunt.possessive_title] is sitting with [mom.possessive_title], having coffee."
@@ -1673,7 +1673,7 @@ label Sarah_threesome_request_label():
         mom.char "She's been over a few times... I think they are great together..."
         $ scene_manager.remove_actor(mom)
         $ scene_manager.remove_actor(aunt)
-    elif person_choice == mom:
+    elif person_choice is mom:
         $ scene_manager.add_actor(mom, character_placement = character_left, position = "sitting")
         "As you walk down the hall past the kitchen, you see [mom.possessive_title] sitting at the table, having a cup of coffee. She notices you in the hall."
         mom.char "Oh, hey [mom.mc_title]."
@@ -1689,7 +1689,7 @@ label Sarah_threesome_request_label():
         mc.name "We've had a few drinks. I think we're gonna go sleep it off. Goodnight!"
         mom.char "Make sure you drink a glass of water so you aren't hungover in the morning. Goodnight you two!"
         $ scene_manager.remove_actor(mom)
-    elif person_choice == lily:
+    elif person_choice is lily:
         $ scene_manager.add_actor(mom, character_placement = character_left_flipped, position = "sitting")
         $ scene_manager.add_actor(lily, character_placement = character_center, position = "sitting")
         "As you walk down the hall and past the living room, you see [mom.possessive_title] and [lily.possessive_title] sitting at the couch, watching a movie."
@@ -1736,7 +1736,7 @@ label Sarah_arrange_threesome_label(the_person):
         the_person.char "That sounds really fun! You better believe I'll go! Just let me know what time to be there."
         mc.name "Thanks!"
         $ sarah.event_triggers_dict["initial_threesome_arranged"] = True
-    elif the_person == mom:
+    elif the_person is mom:
         mc.name "Hello [the_person.title]. I've got something I need help with I was hoping to talk to you about."
         the_person.char "Hey Honey. What can I help you with?"
         mc.name "Well, you know how I've been seeing that girl, [the_person.title]."
@@ -1748,7 +1748,7 @@ label Sarah_arrange_threesome_label(the_person):
         "She thinks for a moment."
         the_person.char "Okay... I'll do it! I'll see you two on Saturday!"
         $ sarah.event_triggers_dict["initial_threesome_arranged"] = True
-    elif the_person == lily:
+    elif the_person is lily:
         mc.name "Hello [the_person.title]. I've got something I need help with I was hoping to talk to you about."
         the_person.char "Hey Bro. What do you need?"
         mc.name "Well, you know how I've been seeing that girl, [the_person.title]."
@@ -1761,7 +1761,7 @@ label Sarah_arrange_threesome_label(the_person):
         mc.name "I've actually already talked to her about it, and she's okay with it. Are you in?"
         the_person.char "Oh! She's kinky? That sounds like fun. Okay, I'll clear my schedule for Saturday night."
         $ sarah.event_triggers_dict["initial_threesome_arranged"] = True
-    elif the_person == cousin:
+    elif the_person is cousin:
         mc.name "Hello [the_person.title]. I need a favor I was hoping to talk to you about."
         the_person.char "Seriously?"
         mc.name "Yeah seriously. Don't worry you'll like it."
@@ -1793,11 +1793,11 @@ label Sarah_arrange_threesome_label(the_person):
             the_person.char "Alright, I'll see you on Saturday. It's been a pleasure doing business with you."
         "You give her the details. maybe picking [the_person.possessive_title] was a bad idea..."
         $ sarah.event_triggers_dict["initial_threesome_arranged"] = True
-    elif the_person == aunt:
+    elif the_person is aunt:
         "Note, this dialogue is not yet written. I'm waiting until [aunt.name] gets further developed as a character."  #TODO
         "At the end of the dialogue, she agrees to be the threesome partner..."
         $ sarah.event_triggers_dict["initial_threesome_arranged"] = True
-    elif the_person == starbuck:
+    elif the_person is starbuck:
         mc.name "Hello [the_person.title]. I've got something I need help with I was hoping to talk to you about."
         the_person.char "Hello! What can I help you with?"
         mc.name "Well, there's this girl I've been seeing lately. She is pretty bi-curious, and has never had a threesome before."
@@ -1807,7 +1807,7 @@ label Sarah_arrange_threesome_label(the_person):
         mc.name "Thanks!"
         "You give her the details. This is going to be a fun night!"
         $ sarah.event_triggers_dict["initial_threesome_arranged"] = True
-    elif the_person == nora:
+    elif the_person is nora:
         "Note, this dialogue is not yet written. I'm waiting until Nora gets further developed as a character."  #TODO
         "At the end of the dialogue, she agrees to be the threesome partner... for science..."
         $ sarah.event_triggers_dict["initial_threesome_arranged"] = True
@@ -1843,7 +1843,7 @@ label Sarah_initial_threesome_label():
     $ scene_manager.update_actor(the_person_one, position = "sitting", character_placement = character_center_flipped)
     the_person_one.char "Oh god, I've got butterflies in my stomach. I cant believe this is finally happening. Do I look okay?"
     mc.name "You look incredible, as always."
-    if the_person_two == lily or the_person_two == mom:
+    if the_person_two is lily or the_person_two is mom:
         "Okay, let me go get [the_person_two.title], I'll be right back."
         "You walk into her room. She follows you back to your room."
     else:
@@ -2058,7 +2058,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
             the_person.char "Oh wow, that was so hot..."
             if the_person.get_opinion_score("incest") < 1:
                 $ update_opinion(the_person, "incest")
-            if threesome_partner == mom:
+            if threesome_partner is mom:
                 threesome_partner.char "I know... I just had a threesome with my son and his girlfriend... and I loved it!"
                 $ update_opinion(threesome_partner, "incest")
             else:
@@ -2116,7 +2116,7 @@ label watch_strip_show(the_person):  #This scene assumes scene manager is runnin
     $ pose_list = ["walking_away","back_peek","standing_doggy","stand2","stand3","stand4","stand5", "doggy","kneeling1"]
     "You watch as a girl gets on stage and starts to do her routine."
     $ scene_manager.add_actor(showgirl, character_placement = character_left_flipped)
-    if showgirl == cousin:
+    if showgirl is cousin:
         if showgirl.event_triggers_dict.get("blackmail_level",-1) < 2 and not showgirl.event_triggers_dict.get("seen_cousin_stripping",False):
             python:
                 blackmail_2_confront_action = Action("Confront her about her stripping", blackmail_2_confront_requirement, "cousin_blackmail_level_2_confront_label",

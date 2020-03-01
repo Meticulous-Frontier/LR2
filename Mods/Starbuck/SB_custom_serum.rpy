@@ -218,13 +218,13 @@ init -1 python:
 
                         SB_SET_RANDOM_EVENT_CHANCE(0)
                         #renpy.say("", "Trigger cum fetish " + the_person.name)
-                        if the_person == lily:
+                        if the_person is lily:
                             mc.business.mandatory_morning_crises_list.append(SB_fetish_lily_cum)
                             FETISH_CUM_EVENT_INUSE = True
-                        elif the_person == mom:
+                        elif the_person is mom:
                             mc.business.mandatory_crises_list.append(SB_fetish_mom_cum)
                             FETISH_CUM_EVENT_INUSE = True
-                        elif the_person == stephanie and head_researcher in the_person.special_role and the_person.personality != bimbo_personality:
+                        elif the_person is stephanie and head_researcher in the_person.special_role and the_person.personality != bimbo_personality:
                             mc.business.mandatory_crises_list.append(SB_fetish_stephanie_cum_action)
                             FETISH_CUM_EVENT_INUSE = True
                         elif employee_role in the_person.special_role:

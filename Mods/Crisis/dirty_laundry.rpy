@@ -162,19 +162,19 @@ label dirty_laundry_action_label:
                     "She walks over to you and puts her arms around your neck."
                     $ the_person.draw_person(position = "kissing")
                     "[the_person.title] starts to kiss you softly on the side of your neck. She nibbles at your ear and then whispers."
-                    if the_person == mom:
+                    if the_person is mom:
                         if day % 7 == 4 or day % 7 == 5: # tomorrow is weekend
                             the_person.char "Mommy wants your cum in her panties. I wanna wear them going out tomorrow, knowing your cum is rubbing against me all day long."
                         else:
                             the_person.char "Mommy wants your cum in her panties. I wanna wear them to work tomorrow, knowing your cum is rubbing against me all day long."
-                    elif the_person == lily:
+                    elif the_person is lily:
                         if day % 7 == 4 or day % 7 == 5: # tomorrow is weekend
                             the_person.char "Your little sister wants your cum in her panties. I wanna wear them all day tomorrow, talking to my friends, knowing your cum is kissing my pussy."
                         else:
                             the_person.char "Your little sister wants your cum in her panties. I wanna wear them when I go to class tomorrow, squirming in my seat through the lecture, knowing your cum is rubbing against me."
-                    elif the_person == aunt:        #Wow, congrats on getting her so slutty while shes living with you!
+                    elif the_person is aunt:        #Wow, congrats on getting her so slutty while shes living with you!
                         the_person.char "Your aunt wants your cum in her panties. When I wear them around tomorrow I'll remember your cum is filling them up."
-                    elif the_person == cousin:        #Wow, congrats on getting her so slutty while shes living with you!
+                    elif the_person is cousin:        #Wow, congrats on getting her so slutty while shes living with you!
                         the_person.char "Go ahead and fill up my panties, you perv. Turns out, I'm as much of a perv as you are. I'm totally wearing these all day tomorrow."
                     else:                           #Someone else someday? A live in girlfriend maybe?
                         the_person.char "I want you to cum in my panties. I'm going to wear them all day tomorrow, knowing you've marked me as yours with your hot cum..."
