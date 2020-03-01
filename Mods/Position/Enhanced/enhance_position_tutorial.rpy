@@ -81,7 +81,7 @@ label outro_stealth_doggy(the_girl, the_location, the_object, the_round):
                 if the_girl.get_opinion_score("creampies") > 0:         #She likes creampies...
                     the_girl.char "Wait... that's... you took the condom off, didn't you? Oh fuck that's why it felt so good!"
                     $ the_girl.discover_opinion("creampies")
-                    the_girl.char "Oh god that's so hot. You could knock me up you know? Next time atleast warn me, so I can enjoy it too!"
+                    the_girl.char "Oh god that's so hot. You could knock me up you know? Next time at least warn me, so I can enjoy it too!"
                     $ the_girl.change_happiness(2)
                     $ the_girl.change_obedience(3)
                 elif the_girl.sluttiness > 80:                          #She is slutty enough she doesn't mind the cream filling
