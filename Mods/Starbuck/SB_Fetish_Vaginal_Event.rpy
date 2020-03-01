@@ -59,12 +59,18 @@ init 1 python:
 label SB_fetish_vaginal_label(the_person):
     "*Ding Dong*"
     "You're roused from your bed by a ring on your doorbell."
+    # make sure we are at the hall
+    $ mc.change_location(hall)
+    $ mc.location.show_background()
     "You head to your front door and see [the_person.possessive_title] standing there... outside... in a very provocative outfit."
     $ the_person.apply_outfit(SB_vaginal_outfit)
     $ the_person.draw_person()
     ###Draw the girl###
     "You quickly open the door and invite her inside."
     "To avoid any situations with [mom.possessive_title] or [lily.possessive_title], you quickly invite her to your room."
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
+    $ the_person.draw_person(position="kissing")
     "Once you close your door, [the_person.possessive_title] quickly turns and embraces you."
     the_person.char "Oh, [the_person.mc_title], I'm sorry to just come over without asking like this but... I was at home... by myself... and I just..."
     "She stumbles over her words for a second."
@@ -182,7 +188,7 @@ label SB_fetish_vaginal_label(the_person):
 
 #SBV2
 label SB_fetish_vaginal_event_label(the_person):
-    if the_person == mom:
+    if the_person is mom:
         "You hear a knock on your door. You hear [the_person.possessive_title]'s sweet and familiar voice from the other side."
         the_person.char "Hey honey, its [the_person.possessive_title]..."
         "You invite [the_person.possessive_title] in. You immediately start to get aroused when you see what she is wearing."
@@ -224,7 +230,7 @@ label SB_fetish_vaginal_event_label(the_person):
                 $ the_person.change_happiness(2)
                 the_person.char "Oh! Well okay. I mean hey, tomorrow is a new day, and you know I like to be close to you..."
         "[the_person.possessive_title] lays down on your bed. You cuddle up behind her and slowly drift off to sleep."
-    elif the_person == lily:
+    elif the_person is lily:
         "There is a quick a knock on your door. You hear [the_person.possessive_title] from the other side of the door."
         the_person.char "Hey [the_person.mc_title], you still up? I hope you're ready for me!"
         "You invite [the_person.possessive_title] in. You immediately start to get aroused when you see what she is wearing."
@@ -262,12 +268,16 @@ label SB_fetish_vaginal_event_label(the_person):
     else:
         "Your phones rings. Its [the_person.possessive_title]! You quickly pick it up"
         the_person.char "Hey [the_person.mc_title]! I'm here out front!"
+        $ mc.change_location(hall)
+        $ mc.location.show_background()
         "You head to your front door and see [the_person.possessive_title] standing there... outside... in a very provocative outfit."
         $ the_person.apply_outfit(SB_vaginal_outfit)
         $ the_person.draw_person()
         ###Draw the girl###
         "You quickly open the door and invite her inside."
         "To avoid any situations with [mom.possessive_title] or [lily.possessive_title], you quickly invite her to your room."
+        $ mc.change_location(bedroom)
+        $ mc.location.show_background()
         "Once you close your door, [the_person.possessive_title] quickly turns and embraces you."
         "You wrap your arms around her and start to makeout."
         $ the_person.draw_person(position = "kissing")
@@ -454,10 +464,10 @@ label SB_cowgirl_wakeup_label(the_person):
     "You decide to lay back and enjoy the ride"
     call fuck_person(the_person, start_position = cowgirl, skip_intro = True) from _call_sex_description_SBV50
     mc.name "Oh god what a wakeup. I think I'm gonna go back to sleep for a bit. Thanks!"
-    if the_person == mom:
+    if the_person is mom:
         "[the_person.possessive_title] looks at you and smiles."
         the_person.char "Oh, anything for you honey. Well, I'd better go get ready for the day!"
-    elif the_person == starbuck:
+    elif the_person is starbuck:
         "[the_person.possessive_title] giggles for a second then says goodbye."
         the_person.char "Yeah well, just don't tell my other customers about this, I can't make house calls for everyone!"
     else:
@@ -506,7 +516,7 @@ init 2 python:
 #SBV6
 label SB_fetish_vaginal_recurring_label():
     $ the_person = get_vaginal_fetish_employee()
-    if the_person == mom:
+    if the_person is mom:
         "Before going to bed, you hear a knock on your door. You hear [the_person.possessive_title]'s sweet and familiar voice from the other side."
         the_person.char "Hey honey, its [the_person.title]... I was just wondering if I could come in for a bit?"
         "You invite [the_person.possessive_title] in. You immediately start to get aroused when you see what she is wearing."
@@ -621,7 +631,7 @@ label SB_fetish_vaginal_lily_recurring_label():
             the_person.char "Hey... if you want to I could... you know... take care of that tent you are sporting there [the_person.mc_title]."
             "You stand up and embrace her, your dick straining against your clothes, eager to begin another incestuous tryst with [the_person.possessive_title]."
 
-    if  the_person.get_opinion_score("doggy style sex") > 2:
+    if the_person.get_opinion_score("doggy style sex") > 2:
         "[the_person.possessive_title] lets go of you, and starts to slowly back up."
         the_person.char "I don't know what has come over me lately... I can't stop thinking about you fucking me from behind..."
         $ the_person.draw_person(position = "doggy")
@@ -631,7 +641,7 @@ label SB_fetish_vaginal_lily_recurring_label():
         "You quickly take your position behind her and slowly sink your cock into her greedy cunt."
         $ stealth_orgasm = False
         call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True) from _call_fuck_person_SBV70
-    elif  the_person.get_opinion_score("sex standing up") > 2:
+    elif the_person.get_opinion_score("sex standing up") > 2:
         "[the_person.possessive_title] resumes kissing you. You grab her ass with both hands and pick her up. She grinds her crotch into you."
         $ the_person.change_arousal(20)
         the_person.char "I need you so bad, just do me right here, up against the wall!"
