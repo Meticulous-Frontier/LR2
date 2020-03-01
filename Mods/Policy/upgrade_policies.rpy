@@ -38,7 +38,7 @@ init 10 python:
     body_customizer_action = Action("Modify Person", body_customizer_policy_requirement, "body_customizer_action_label", menu_tooltip = "Bring a person in for modifications")
     mandatory_vibe_company_action = ActionMod("Attach vibes to outfits", mandatory_vibe_action_requirement, "mandatory_vibe_company_label", priority = 2, enabled = False, allow_disable = False, category = "Business")
 
-label store_mod_policies(stack):
+label store_mod_policies(stack = None):
 
     python: # NOTE: Feel free to rename things and change the costs up.
 
@@ -95,7 +95,8 @@ label store_mod_policies(stack):
 
           ###################################################
 
-        execute_hijack_call(stack)
+        if not stack is None:
+            execute_hijack_call(stack)
     return
 
 label mandatory_vibe_company_label():
