@@ -392,7 +392,10 @@ label check_position_willingness_bugfix(the_person, the_position, skip_dialog = 
                 $ use_condom = mc.condom
             else:
                 # she is so slutty we are going to fuck her raw (we don't care anymore)
-                mc.name "I'm going to fuck your little pussy raw."
+                if the_position.skill_tag == "Vaginal":
+                    mc.name "I'm going to fuck your little pussy raw."
+                else:
+                    mc.name "I'm going to fuck your slutty asshole raw."
         elif use_condom:  # you already determined you are going to fuck her with condom
             "You quickly put on another condom and continue to fuck her."
             $ mc.condom = True
