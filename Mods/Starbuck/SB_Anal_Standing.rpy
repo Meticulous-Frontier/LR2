@@ -421,22 +421,17 @@ label transition_SB_anal_standing_SB_doggy_standing(the_girl, the_location, the_
     "You shift your cock downwards and rub the tip of it along the slit of her vagina."
     if the_girl.effective_sluttiness() < the_girl.get_no_condom_threshold():
         the_girl.char "Mmm, fuck me [the_girl.mc_title]. Use all of my holes for your pleasure!"
-        $ wants_condom = False
-    else:
+    elif not mc.condom:
         the_girl.char "Wait, wait... I can't risk getting pregnant, I need you to put on a condom."
-        $ wants_condom = True
 
-    if wants_condom and not mc.condom:
         menu:
             "Put on a condom":
                 "You pull your dick back and quickly put on a condom. Then you line up your dick with her dripping wet pussy."
+                $ mc.condom = True
 
             "Ram it home!":
-                if wants_condom:
-                    mc.name "Don't worry, I'll pull out."
-                    $ the_girl.change_happiness(-5)
-                else:
-                    pass
+                mc.name "Don't worry, I'll pull out."
+                $ the_girl.change_happiness(-5)
 
     "You grab her by the hips and thrust yourself deep inside her tight, pulsating pussy."
     return    

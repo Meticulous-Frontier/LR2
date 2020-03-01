@@ -145,25 +145,20 @@ label transition_stealth_doggy_anal_doggy(the_girl, the_location, the_object, th
 #     #transition from anal to normal doggy style.
     "You pull out of [the_girl.title]'s asshole, leaving it gaping and her sighing in relief."
     "You shift your cock downwards and rub the tip of it along the slit of her vagina."
-    $ wants_condom = True
-    if the_girl.effective_sluttiness() < the_girl.get_no_condom_threshold(): #She wants a condom
+
+    if the_girl.effective_sluttiness() < the_girl.get_no_condom_threshold(): #She doesn't care.
         the_girl.char "Mmm, fuck me [the_girl.mc_title]. Use all of my holes for your pleasure!"
-        $ wants_condom = False
-    else: #She doesn't care.
+    elif not mc.condom: #She wants a condom
         the_girl.char "Wait, wait... I can't risk getting pregnant, I need you to put on a condom."
-        $ wants_condom = True
 
-    menu:
-        "Put on a condom.":
-            "You pull your dick back and find a condom in your wallet. It takes you a moment to spread it over your cock, then you line yourself up again."
+        menu:
+            "Put on a condom.":
+                "You pull your dick back and find a condom in your wallet. It takes you a moment to spread it over your cock, then you line yourself up again."
+                $ mc.condom = True
 
-        "Ram it home!":
-            if wants_condom:
+            "Ram it home!":
                 mc.name "Don't worry, I'll pull out."
                 $ the_girl.change_happiness(-5)
-
-            else:
-                pass
 
     "You pull on her hips and thrust yourself inside her tight, wet pussy."
     return
