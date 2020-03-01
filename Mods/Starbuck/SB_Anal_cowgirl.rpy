@@ -48,7 +48,7 @@ label scene_SB_anal_cowgirl_1(the_girl, the_location, the_object, the_round):
     if the_girl.arousal > 50:
         "[the_girl.possessive_title] leans back, putting her hands in line with your feet."
         "In her reclined position you have a perfect view of her drooling pussy. Just below it you can see your cock stretching her nice little asshole."
-        if the_girl == mom:
+        if the_girl is mom:
             the_girl.char "Oh god [the_girl.mc_title], you make [the_girl.title] feel so good... You grew up into such a good man!"
             mc.name "Mmm, [the_girl.title] your ass is amazing. Its so tight!"
         else:
@@ -124,7 +124,7 @@ label scene_SB_anal_cowgirl_2(the_girl, the_location, the_object, the_round):
                     "You stroke yourself a bit through her vagina while she fucks you. It's a very unique feeling, and very pleasurable!"
                     return
     "You give her nipple a pinch. You roll it between your finger and thumb."
-    if the_girl == mom:
+    if the_girl is mom:
         the_girl.char "[the_girl.mc_title]! [the_girl.title] loves it when you play with her nipples."
     else:
         the_girl.char "Mmm, I love it when you play with my tits!"
@@ -174,7 +174,7 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_round):
         the_girl.char "Yes! Ah!"
         "[the_girl.possessive_title] drops herself down, grinding her hips against yours and pushing your cock as deep into her ass as possible."
         "Her breath catches in her throat when you pulse out your hot load of cum deep inside of her."
-        if the_girl.char == mom:
+        if the_girl.char is mom:
             the_girl.char "That's it baby! Give your cum to [the_girl.title]!"
         else:
             the_girl.char "Oh my god... Give it all to me [the_girl.mc_title]... Fill my ass up!"
@@ -200,7 +200,7 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_round):
         the_girl.char "I... I really shouldn't let you..."
         "She bites her lip and moans, unsure of what to do."
         menu:
-            "Pull her down and cum inside her.":
+            "Pull her down and cum inside her":
                 "You reach up and grab [the_girl.possessive_title] by the hips. With one confident pull she plunges back onto your cock, gasping with pleasure."
                 "The feeling of her tight, warm ass sliding down and engulfing your cock again pushes you over the edge. You pull [the_girl.possessive_title] tight against you and unload inside of her."
                 the_girl.char "Ah! Fuck..."
@@ -209,7 +209,7 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_round):
                 $ SB_anal_cowgirl.redraw_scene(the_girl)
                 "You give a few half-hearted pumps when you're done, then tap [the_girl.possessive_title] on the ass. She slides off of your dick and collapses beside you."
 
-            "Let her pull off and cum on her stomach.":
+            "Let her pull off and cum on her stomach":
                 "You stay silent. [the_girl.possessive_title] waits another second, as if waiting to be convinced, then pulls off of your cock."
                 "She grinds the lips of her pussy against your shaft as you climax. You fire your hot load over her stomach."
                 $ the_girl.cum_on_stomach()
@@ -239,12 +239,12 @@ label strip_SB_anal_cowgirl(the_girl, the_clothing, the_location, the_object, th
 label strip_ask_SB_anal_cowgirl(the_girl, the_clothing, the_location, the_object, the_round):
     the_girl.char "Sir, I'd like to take off my [the_clothing.name], would you mind?"
     menu:
-        "Let her strip.":
+        "Let her strip":
             mc.name "Take it off for me."
             $ the_girl.draw_animated_removal(the_clothing, position = SB_anal_cowgirl.position_tag)
             "[the_girl.possessive_title] slows down her pace while she strips out of her [the_clothing.name]. When she's free of it she puts her hands on your chest and fucks you faster again."
 
-        "Leave it on.":
+        "Leave it on":
             mc.name "No, I like how you look with it on."
             if the_girl.sluttiness < 70:
                 the_girl.char "Yeah? Do I look sexy in it?"

@@ -11,42 +11,9 @@ init 3 python:
         self.enabled = False
         return
 
-    company_wardrobe_action = ActionMod("Add Company Wardrobe", company_wardrobe_requirement, "append_company_wardrobe", initialization = company_wardrobe_initialization,  
-        menu_tooltip = "Adds a collection of over- and underwear for your company to your outfit manager.", category = "Wardrobe")
-
-label append_company_wardrobe:
-    if mc.designed_wardrobe.has_outfit_with_name("[mc.business.name] - Sexy Uniform"):
-        "Company wardrobe is already in your outfit manager"
-        return
-
-    "Choose you primary business color"
-    menu:
-        "Primary Color Red":
-            python:
-                upper_color = [.7, .1, .2, .95]
-                under_color = [.97, .97, 1, .95]
-                upper_color_dim = [.63, .09, 0.18, .95]
-
-        "Primary Color Yellow":
-            python:
-                upper_color = [.96, .77, .19, .95]
-                under_color = [.15, .15, .15, .95]                
-                upper_color_dim = [.87, .69, .17, .95]
-
-        "Primary Color Blue":
-            python:
-                upper_color = [.17, .32, .75, .95]
-                under_color = [.87, .69, .17, .95]                
-                upper_color_dim = [0.15, 0.29, .68, .95]
-
-        "Primary Color White":
-            python:
-                upper_color = [.97, .97, 1, .95]
-                under_color = [.97, .97, 1, .95]
-                upper_color_dim = [.93, .93, 0.96, .95]
-
-    python:
+    def build_company_wardrobe(upper_color, under_color):
         lower_color = [.15, .15, .15, .95]
+        upper_color_dim = [under_color[0] *.9, under_color[1] *.9, under_color[2] * .9, .9]
         uniform_mode = "under"
 
         normalu = Outfit("[mc.business.name] - Normal Underwear")
@@ -94,6 +61,14 @@ label append_company_wardrobe:
         normalu.add_accessory(heavy_eye_shadow.get_copy(), [0,0,0,.8])
         normalu.add_accessory(light_eye_shadow.get_copy(), upper_color)
         normalu.add_accessory(lipstick.get_copy(), [0.6,0.1,0.1,0.8])
+        mc.save_design(normalu, normalu.name, outfit_type = uniform_mode)
+
+        normalu = Outfit("[mc.business.name] - Kinky Underwear")
+        normalu.add_upper(cincher.get_copy(), under_color)
+        normalu.add_lower(crotchless_panties.get_copy(), under_color)
+        normalu.add_feet(thigh_highs.get_copy(), under_color)
+        normalu.add_accessory(heavy_eye_shadow.get_copy(), [0,0,0,.8])
+        normalu.add_accessory(light_eye_shadow.get_copy(), upper_color)
         mc.save_design(normalu, normalu.name, outfit_type = uniform_mode)
 
         uniform_mode = "over"
@@ -153,6 +128,13 @@ label append_company_wardrobe:
         normalo.add_feet(high_heels.get_copy(), upper_color)
         mc.save_design(normalo, normalo.name, outfit_type = uniform_mode)
 
+        normalo = Outfit("[mc.business.name] - Easy Access Overwear")
+        normalo.add_lower(micro_skirt.get_copy(), lower_color)
+        normalo.add_upper(vest.get_copy(), upper_color)
+        normalo.add_feet(pumps.get_copy(), upper_color)
+        mc.save_design(normalo, normalo.name, outfit_type = uniform_mode)
+
+
         uniform_mode = "full"
         normalf = Outfit("[mc.business.name] - Normal Uniform")
         normalf.add_upper(bralette.get_copy(), under_color)
@@ -160,7 +142,7 @@ label append_company_wardrobe:
         normalf.add_lower(cute_panties.get_copy(), under_color)
         normalf.add_lower(pencil_skirt.get_copy(), lower_color)
         normalf.add_feet(slips.get_copy(), upper_color)
-        normalf.add_accessory(lipstick.get_copy(), [0.6,0.1,0.1,0.8])
+        normalf.add_accessory(lipstick.get_copy(), [.745, .117, .235, .9])
         mc.save_design(normalf, normalf.name, outfit_type = uniform_mode)
 
         normalf = Outfit("[mc.business.name] - Normal Pants Uniform")
@@ -170,7 +152,7 @@ label append_company_wardrobe:
         normalf.add_lower(cute_panties.get_copy(), under_color)
         normalf.add_lower(suitpants.get_copy(), lower_color)
         normalf.add_feet(slips.get_copy(), upper_color)
-        normalf.add_accessory(lipstick.get_copy(), [0.6,0.1,0.1,0.8])
+        normalf.add_accessory(lipstick.get_copy(), [.745, .117, .235, .9])
         mc.save_design(normalf, normalf.name, outfit_type = uniform_mode)
 
         normalf = Outfit("[mc.business.name] - Sexy Uniform")
@@ -179,8 +161,8 @@ label append_company_wardrobe:
         normalf.add_lower(pencil_skirt.get_copy(), lower_color)
         normalf.add_feet(thigh_highs.get_copy(), under_color)
         normalf.add_feet(boot_heels.get_copy(), upper_color)
-        normalf.add_accessory(light_eye_shadow.get_copy(), [0.1,0.2,0.7,.9])
-        normalf.add_accessory(lipstick.get_copy(), [0.6,0.1,0.1,0.8])
+        normalf.add_accessory(light_eye_shadow.get_copy(), [.1, .1, .12, .9])
+        normalf.add_accessory(lipstick.get_copy(), [.745, .117, .235, .9])
         mc.save_design(normalf, normalf.name, outfit_type = uniform_mode)
 
         normalf = Outfit("[mc.business.name] - Sexy Uniform Boots")
@@ -189,8 +171,8 @@ label append_company_wardrobe:
         normalf.add_lower(pencil_skirt.get_copy(), lower_color)
         normalf.add_feet(thigh_highs.get_copy(), under_color)
         normalf.add_feet(tall_boots.get_copy(), upper_color)
-        normalf.add_accessory(light_eye_shadow.get_copy(), [0.1,0.2,0.7,.9])
-        normalf.add_accessory(lipstick.get_copy(), [0.6,0.1,0.1,0.8])
+        normalf.add_accessory(light_eye_shadow.get_copy(), [.1, .1, .12, .9])
+        normalf.add_accessory(lipstick.get_copy(), [.745, .117, .235, .9])
         mc.save_design(normalf, normalf.name, outfit_type = uniform_mode)
 
         normalf = Outfit("[mc.business.name] - Fitness Uniform")
@@ -198,8 +180,8 @@ label append_company_wardrobe:
         normalf.add_lower(lace_panties.get_copy(), under_color)
         normalf.add_lower(leggings.get_copy(), lower_color)
         normalf.add_feet(sneakers.get_copy(), upper_color)
-        normalf.add_accessory(light_eye_shadow.get_copy(), [0.1,0.2,0.7,.9])
-        normalf.add_accessory(lipstick.get_copy(), [0.6,0.1,0.1,0.8])
+        normalf.add_accessory(light_eye_shadow.get_copy(), [.1, .1, .12, .9])
+        normalf.add_accessory(lipstick.get_copy(), [.745, .117, .235, .9])
         mc.save_design(normalf, normalf.name, outfit_type = uniform_mode)
 
         normalf = Outfit("[mc.business.name] - Hotpants Uniform")
@@ -208,8 +190,8 @@ label append_company_wardrobe:
         normalf.add_lower(jean_hotpants.get_copy(), lower_color)
         normalf.add_feet(heels.get_copy(), upper_color)
         normalf.add_feet(thigh_highs.get_copy(), under_color)
-        normalf.add_accessory(light_eye_shadow.get_copy(), [0.1,0.2,0.7,.9])
-        normalf.add_accessory(lipstick.get_copy(), [0.6,0.1,0.1,0.8])
+        normalf.add_accessory(light_eye_shadow.get_copy(), [.1, .1, .12, .9])
+        normalf.add_accessory(lipstick.get_copy(), [.745, .117, .235, .9])
         mc.save_design(normalf, normalf.name, outfit_type = uniform_mode)
 
         normalf = Outfit("[mc.business.name] - Risque Uniform")
@@ -217,9 +199,9 @@ label append_company_wardrobe:
         normalf.add_upper(business_vest.get_copy(), upper_color)
         normalf.add_feet(garter_with_fishnets.get_copy(), under_color)
         normalf.add_feet(pumps.get_copy(), upper_color)
-        normalf.add_accessory(heavy_eye_shadow.get_copy(), [0,0,0,.8])
-        normalf.add_accessory(light_eye_shadow.get_copy(), [0,0,0,1])
-        normalf.add_accessory(lipstick.get_copy(), [0.6,0.1,0.1,0.8])
+        normalf.add_accessory(heavy_eye_shadow.get_copy(), [.1, .1, .12, .9])
+        normalf.add_accessory(light_eye_shadow.get_copy(), [.1, .1, .12, .9])
+        normalf.add_accessory(lipstick.get_copy(), [.745, .117, .235, .9])
         mc.save_design(normalf, normalf.name, outfit_type = uniform_mode)
 
         normalf = Outfit("[mc.business.name] - Slutty Uniform")
@@ -228,13 +210,47 @@ label append_company_wardrobe:
         normalf.add_feet(fishnets.get_copy(), under_color)
         normalf.add_feet(high_heels.get_copy(), upper_color)
         normalf.add_accessory(wide_choker.get_copy(), upper_color_dim)
-        normalf.add_accessory(heavy_eye_shadow.get_copy(), [0,0,0,.8])
-        normalf.add_accessory(light_eye_shadow.get_copy(), [0,0,0,1])
+        normalf.add_accessory(heavy_eye_shadow.get_copy(), [.1, .1, .12, .9])
+        normalf.add_accessory(light_eye_shadow.get_copy(), [.1, .1, .12, .9])
         normalf.add_accessory(blush.get_copy(), [0.76, 0.376, 0.368, 0.8])
-        normalf.add_accessory(lipstick.get_copy(), [0.6,0.1,0.1,0.8])
+        normalf.add_accessory(lipstick.get_copy(), [.745, .117, .235, .9])
         mc.save_design(normalf, normalf.name, outfit_type = uniform_mode)
 
-        company_wardrobe_loaded = True
+        normalf = Outfit("[mc.business.name] - Easy Access Uniform")
+        normalf.add_lower(micro_skirt.get_copy(), lower_color)
+        normalf.add_upper(cincher.get_copy(), upper_color)
+        normalf.add_upper(vest.get_copy(), upper_color)
+        normalf.add_feet(thigh_highs.get_copy(), under_color)
+        normalf.add_feet(pumps.get_copy(), upper_color)
+        normalf.add_accessory(heavy_eye_shadow.get_copy(), [.1, .1, .12, .9])
+        normalf.add_accessory(light_eye_shadow.get_copy(), [.1, .1, .12, .9])
+        normalf.add_accessory(lipstick.get_copy(), [.745, .117, .235, .9])
+        mc.save_design(normalf, normalf.name, outfit_type = uniform_mode)
+        return
+
+    company_wardrobe_action = ActionMod("Add Company Wardrobe", company_wardrobe_requirement, "append_company_wardrobe", initialization = company_wardrobe_initialization,  
+        menu_tooltip = "Adds a collection of over- and underwear for your company to your outfit manager.", category = "Wardrobe")
+
+label append_company_wardrobe:
+    if mc.designed_wardrobe.has_outfit_with_name("[mc.business.name] - Sexy Uniform"):
+        "Company wardrobe is already in your outfit manager"
+        return
+
+    "Choose you primary business color"
+    menu:
+        "Primary Color Red":
+            $ build_company_wardrobe([.7, .1, .2, .95], [.97, .97, 1, .95])
+        "Primary Color Yellow":
+            $ build_company_wardrobe([.96, .77, .19, .95], [.15, .15, .15, .95])
+        "Primary Color Blue":
+            $ build_company_wardrobe([.17, .32, .75, .95], [.87, .69, .17, .95])
+        "Primary Color Pink":
+            $ build_company_wardrobe([1, .41, .71, .95], [.15, .15, .15, .95])
+        "Primary Color White":
+            $ build_company_wardrobe([.97, .97, 1, .95], [.97, .97, 1, .95])
+
+
+    $ company_wardrobe_loaded = True
     
     "Company wardrobe complete. Check your outfit manager."
     return

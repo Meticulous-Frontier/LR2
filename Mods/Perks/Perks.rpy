@@ -27,6 +27,15 @@ init -1 python:
                 remove_perk(self.ability_perks, perk_name)
             return
 
+        def get_perk_desc(self, perk_name):
+            if self.has_stat_perk(perk_name):
+                return self.stat_perks[perk_name].description
+            elif self.has_item_perk(perk_name):
+                return self.item_perks[perk_name].description
+            elif self.has_ability_perk(perk_name):
+                return self.ability_perks[perk_name].description
+            return "None"
+
         def add_stat_perk(self, perk, perk_name):
             if self.has_stat_perk(perk_name):
                 #We already have this perk, check if we need to update temporary bonus.
@@ -34,7 +43,7 @@ init -1 python:
                     return
 
                 # Update duration for existing temporary perk.
-                comp_perk = self.get_stat_perk(perk_name)  
+                comp_perk = self.get_stat_perk(perk_name)
                 if comp_perk.duration < perk.duration:
                     comp_perk.duration = perk.duration
                 if comp_perk.start_day < perk.start_day:
@@ -67,6 +76,80 @@ init -1 python:
             if self.has_item_perk(perk_name):
                 return self.item_perks[perk_name]
             return None
+
+        def add_ability_perk(self, perk, perk_name):
+            if self.has_ability_perk(perk_name):
+                if not perk.bonus_is_temp:
+                    return
+
+                comp_perk = self.get_ability_perk(perk_name)
+                if comp_perk.duration < perk.duration:
+                    comp_perk.duration = perk.duration
+                if comp_perk.start_day < perk.start_day:
+                    comp_perk.start_day = perk.start_day
+            else:
+                self.ability_perks[perk_name] = perk
+
+        def has_ability_perk(self, perk_name):  #Only checks if the ability is available at all
+            if perk_name in self.ability_perks:
+                return True
+            return False
+
+        def get_ability_perk(self, perk_name):
+            if self.has_ability_perk(perk_name):
+                return self.ability_perks[perk_name]
+            return False
+
+        def get_ability_flag(self, perk_name):  #Returns if ability is unlocked, and if so, if it is toggled on
+            if self.has_ability_perk(perk_name):
+                if self.ability_perks[perk_name].togglable:
+                    if self.ability_perks[perk_name].toggle:
+                        return True
+                    else:
+                        return False
+                return True
+            return False
+
+        def get_ability_clickable(self, perk_name):  #Returns true if perk should be available for clicking in screen
+            if self.has_ability_perk(perk_name):
+                if self.ability_perks[perk_name].togglable == True:
+                    return True
+                if self.ability_perks[perk_name].usable == True:
+                    if self.ability_perks[perk_name].usable_day <= day:
+                        return True
+                return False
+            return False
+
+        def click_ability(self, perk_name):
+            if self.has_ability_perk(perk_name):
+                self.ability_perks[perk_name].click_perk()
+            return
+
+
+
+        def get_stat_perk_list(self):  #This function returns a list of all three perk lists.
+            return self.stat_perks
+
+        def get_item_perk_list(self):
+            return self.item_perks
+
+        def get_ability_perk_list(self):
+            return self.ability_perks
+
+        def get_ability_perk_text_desc(self, perk_name):
+            ret_text = perk_name
+            if self.has_ability_perk(perk_name):
+                if self.ability_perks[perk_name].togglable == True:
+                    if self.ability_perks[perk_name].toggle == True:
+                        ret_text += " (active)"
+                    else:
+                        ret_text += " (inactive)"
+                if self.ability_perks[perk_name].usable == True:
+                    if self.ability_perks[perk_name].usable_day > day:
+                        ret_text += " (On Cooldown)"
+            return ret_text
+
+
 
     class Stat_Perk(renpy.store.object):
         # owner can be MC or any other Person object (default is MC)
@@ -141,7 +224,7 @@ init -1 python:
             self.owner.sex_skills["Anal"] -= self.anal_bonus
             self.owner.max_energy -= self.energy_bonus
             # make sure energy is not > max energy
-            if self.owner.energy > self.owner.max_energy:   
+            if self.owner.energy > self.owner.max_energy:
                 self.owner.energy = self.owner.max_energy
 
             if isinstance(self.owner, MainCharacter):
@@ -153,7 +236,7 @@ init -1 python:
 
     class Item_Perk(renpy.store.object):
         # owner can be MC or any other Person object (default is MC)
-        def __init__(self, description, owner = None, usable = False, bonus_is_temp = False, duration = 0):           
+        def __init__(self, description, owner = None, usable = False, bonus_is_temp = False, duration = 0):
             self.owner = owner
             self.description = description
             self.usable = usable
@@ -163,3 +246,49 @@ init -1 python:
 
             if self.owner is None:
                 self.owner = mc
+
+    class Ability_Perk(renpy.store.object):
+        def __init__(self, description, owner = None, toggle = True, togglable = False, usable = False, bonus_is_temp = False, duration = 0, usable_func = None, usable_cd = 0):
+            self.owner = owner
+            self.description = description
+            self.usable = usable            #Is this a usable ability
+            self.usable_func = usable_func  #What to do if ability is used
+            self.usable_cd = usable_cd      #How long to wait after this ability to use it again.
+            self.togglable = togglable     #Can you toggle this ability
+            self.toggle = toggle            #Is this ability currently active
+            self.bonus_is_temp = bonus_is_temp   #Should we take away this ability
+            self.duration = duration
+            self.start_day = day
+            self.usable_day = 0
+
+            if self.owner is None:
+                self.owner = mc
+
+        def click_perk(self):
+            if self.usable:
+                self.activate_perk()
+            if self.togglable:
+                self.toggle_perk()
+            return
+
+        def activate_perk(self):
+            if self.usable and self.usable_day <= day:
+                self.usable_func()
+                self.usable_day = day + self.usable_cd
+                return True
+            return False
+
+        def toggle_perk(self):
+            if self.togglable:
+                self.toggle = not self.toggle
+            return
+
+    def second_wind_func():
+        mc.change_energy(mc.max_energy / 2)
+        #renpy.say("","You take a deep breath, getting your second wind. You recover some energy!") #TODO this doesn't work. probably just delete
+        return
+
+    def time_of_need_func():
+        mc.change_energy(100)
+
+        return

@@ -27,8 +27,8 @@ init 3 python:
     night_clothes.add_upper(long_tshirt.get_copy(),colour_white)
 
     night_clothes_sexy = Outfit("Sexy Night Clothes")
-    night_clothes_sexy.add_upper(nightgown_dress.get_copy(),colour_black)
-    night_clothes_sexy.add_lower(cute_lace_panties.get_copy(),colour_black)
+    night_clothes_sexy.add_upper(nightgown_dress.get_copy(),colour_pink)
+    night_clothes_sexy.add_lower(cute_lace_panties.get_copy(),colour_pink)
 
     night_clothes_slutty = Outfit("Slutty Night Clothes")
     night_clothes_slutty.add_upper(lingerie_one_piece.get_copy(),colour_yellow)
@@ -59,15 +59,15 @@ label dirty_laundry_action_label:
             "You take a quick look out the door to make sure the coast is clear, then close it behind you. You grab the panties and then pull your pants down."
             "You wrap the cloth of the panties around your cock and start to work them up and down. The satin texture feels great."
             "You close your eyes and imagine [the_person.title]. You imagine her in the morning, pulling up her cum filled panties up and wearing them around all day long."
-            $ rnd_num = renpy.random.randint(1,2) # increase for more situations
-            if rnd_num == 1: #No one catches you
+            $ ran_num = renpy.random.randint(1,2) # increase for more situations
+            if ran_num == 1: #No one catches you
                 "Images of [the_person.title] flood you brain as you continue to jack off. She's bent over now, begging you to cum all over her ass."
                 "You go past the point of no return. You wrap the panties around the tip and then fire your load off into them."
                 "When you finish, you take a look at them. Your cum is all over [the_person.title]'s panties."
                 "You do your best to fold them back up and put them back at the top of her laundry pile. You wonder if she'll notice."
                 "Soon the washer is done. You swap your clothes to the dryer and start it, then head for bed. They should be dry in the morning!"
                 #TODO mandatory event the next day when the girl discovers her used panties
-            elif rnd_num == 2:                               #the panty owner catches you!
+            elif ran_num == 2:                               #the panty owner catches you!
                 "Your imagination is running wild and lewd images of [the_person.title] run through your head. Suddenly, you hear the laundry room door open!"
                 the_person.char "Holy fuck!"
                 "You are totally busted! You stop what you are doing and open you eyes, seeing [the_person.title] looking at you wide eyed."
@@ -77,9 +77,7 @@ label dirty_laundry_action_label:
                     "You try to respond but just stammer. You're pretty sure theres no way to salvage this."
                     the_person.char "God I can't believe you. Don't touch my stuff! This is so gross! I'm gonna have to rewash these!"
                     "She quickly grabs her panties from your hand. She grabs the rest of her laundry and walks out of the laundry room."
-                    $ the_person.change_happiness(-10)
-                    $ the_person.change_obedience(-10)
-                    $ the_person.change_slut_temp(10)
+                    $ the_person.change_stats(happiness = -10, obedience = -10, slut_temp = 10)
                     "Soon the washer is done. You swap your clothes to the dryer and start it, then head for bed. They should be dry in the morning!"
                 elif the_person.sluttiness < 50:
                     $ the_person.draw_person(position = "stand4")
@@ -117,7 +115,7 @@ label dirty_laundry_action_label:
                         else:                                              #Otherwise, strip her down.
                             "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy"
 
-                            $ the_person.strip_outfit(position = "missionary")
+                            $ the_person.strip_outfit(top_layer_first = False, exclude_upper = True, position = "missionary")
 
                             "With her pussy finally exposed you waste no time diving right in"
                         "Cupping her ass with your hands, you circle your tongue all around her wet, inviting cunt."
@@ -151,9 +149,7 @@ label dirty_laundry_action_label:
                         "You wait a few minutes until the washer is done. You move your laundry over to the dryer then walk to your room."
                         "You walk by [the_person.title]'s room as you go. You stop for a second outside her door and can hear soft moans coming from inside. You wonder if she is playing with those panties..."
                         "You go back to your room and get to sleep. Your laundry should be dry in the morning!"
-                        $ the_person.change_happiness(3)
-                        $ the_person.change_slut_core(2)
-                        $ the_person.change_slut_temp(3)
+                        $ the_person.change_stats(happiness = 3, slut_core = 2, slut_temp = 3)
                 elif the_person.sluttiness < 75:
                     $ the_person.draw_person(position = "stand4", emotion = "happy")
                     the_person.char "Oh! You're using my panties!"
@@ -166,19 +162,19 @@ label dirty_laundry_action_label:
                     "She walks over to you and puts her arms around your neck."
                     $ the_person.draw_person(position = "kissing")
                     "[the_person.title] starts to kiss you softly on the side of your neck. She nibbles at your ear and then whispers."
-                    if the_person == mom:
+                    if the_person is mom:
                         if day % 7 == 4 or day % 7 == 5: # tomorrow is weekend
                             the_person.char "Mommy wants your cum in her panties. I wanna wear them going out tomorrow, knowing your cum is rubbing against me all day long."
                         else:
                             the_person.char "Mommy wants your cum in her panties. I wanna wear them to work tomorrow, knowing your cum is rubbing against me all day long."
-                    elif the_person == lily:
+                    elif the_person is lily:
                         if day % 7 == 4 or day % 7 == 5: # tomorrow is weekend
                             the_person.char "Your little sister wants your cum in her panties. I wanna wear them all day tomorrow, talking to my friends, knowing your cum is kissing my pussy."
                         else:
                             the_person.char "Your little sister wants your cum in her panties. I wanna wear them when I go to class tomorrow, squirming in my seat through the lecture, knowing your cum is rubbing against me."
-                    elif the_person == aunt:        #Wow, congrats on getting her so slutty while shes living with you!
+                    elif the_person is aunt:        #Wow, congrats on getting her so slutty while shes living with you!
                         the_person.char "Your aunt wants your cum in her panties. When I wear them around tomorrow I'll remember your cum is filling them up."
-                    elif the_person == cousin:        #Wow, congrats on getting her so slutty while shes living with you!
+                    elif the_person is cousin:        #Wow, congrats on getting her so slutty while shes living with you!
                         the_person.char "Go ahead and fill up my panties, you perv. Turns out, I'm as much of a perv as you are. I'm totally wearing these all day tomorrow."
                     else:                           #Someone else someday? A live in girlfriend maybe?
                         the_person.char "I want you to cum in my panties. I'm going to wear them all day tomorrow, knowing you've marked me as yours with your hot cum..."

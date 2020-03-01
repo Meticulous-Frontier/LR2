@@ -95,9 +95,9 @@ label store_mod_policies(stack = None):
 
           ###################################################
 
-    if stack is not None:
-        $ execute_hijack_call(stack)
-        return
+        if not stack is None:
+            execute_hijack_call(stack)
+    return
 
 label mandatory_vibe_company_label():
     python:

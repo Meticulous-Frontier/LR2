@@ -15,14 +15,7 @@ init 2 python:
         menu_tooltip = "A group of employees is having a coffee break.", category = "Business", is_crisis = True, crisis_weight = coffee_break2_weight)
 
 label coffee_break2_action_label:
-    python:
-        #Generate list of people with at least a little sluttiness, pick 3 for coffee machine encounters
-        list_of_possible_people = mc.business.get_requirement_employee_list(slut_required = 20)
-        person_one = get_random_from_list(list_of_possible_people)
-        list_of_possible_people.remove(person_one)
-        person_two = get_random_from_list(list_of_possible_people)
-        list_of_possible_people.remove(person_two)
-        person_three = get_random_from_list(list_of_possible_people)
+    $ (person_one, person_two, person_three) = get_random_employees(3, slut_required = 20)
 
     mc.name "As you are walking around the office, you see several employees at the coffee machine. They haven't noticed you, but you can hear what they are saying."
     call coffee_break2_food_delivery_label(person_one, person_two, person_three) from _call_coffee_break2_food_delivery_label_1
@@ -30,11 +23,10 @@ label coffee_break2_action_label:
     python:
         mc.location.show_background()
         # Release variables
-        del list_of_possible_people
         del person_one
         del person_two
         del person_three
-    return
+    return "Advance Time"
 
 label coffee_break2_food_delivery_label(person_one, person_two, person_three):
     python:

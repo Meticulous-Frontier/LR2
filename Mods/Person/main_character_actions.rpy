@@ -102,11 +102,10 @@ label mc_pay_to_strip_label(person):
 
     # reset the person outfit to the one prior to the strip
     python:
-        outfit_sluttiness = person.outfit.slut_requirement
         person.review_outfit(dialogue = False)
         person.draw_person(emotion = "happy")
 
-    if person.sluttiness > outfit_sluttiness:
+    if person.sluttiness > person.outfit.slut_requirement:
         "She slowly puts her clothes back on, while looking at you seductively."
     else:
         "She quickly puts her clothes back on."
@@ -230,6 +229,7 @@ label mc_schedule_person_label(*args):
         tuple_list = format_rooms(build_schedule_location_list(person))
         tuple_list.append(["Back","Back"]) # Have a back button to exit the choice list.
         room_choice = renpy.display_menu(tuple_list,True,"Choice") # Turns person_choice into the selected person (Choice).
+        del tuple_list
 
     if room_choice == "Back":
         return

@@ -1,20 +1,10 @@
 # I'll want to use transition into using appendable Action lists when the content is laid down.
 # TODO: A) Make a requirement fo reach room or B) Find a way to display Cost only while requirement is met
 init -1 python:
-    security_room_actions = []
     security_room_cctv_actions = []
     security_room_investigation_actions = []
 
 init 3 python: # Put this behind a mod init to ensure compatibility
-
-
-    def security_overview_requirement():
-        return True
-
-    security_overview_action = Action("Security Overview", security_overview_requirement, "security_overview",
-    menu_tooltip = "Oversee your business, employees plus more.")
-
-
 
     def investigation_requirement():
         if len(mc.business.get_employee_list()) > 0:
@@ -23,7 +13,6 @@ init 3 python: # Put this behind a mod init to ensure compatibility
 
     investigation_employee_action = Action("Investigate an employee", investigation_requirement, "investigation_employee_label",
         menu_tooltip = "Find out information about the selected person.")
-    security_room_actions.append(investigation_employee_action)
 
     def investigation_opinion_requirement():
         if the_person.get_random_opinion(False, True) is None:
@@ -50,7 +39,6 @@ init 3 python: # Put this behind a mod init to ensure compatibility
 
     cctv_action = Action("Watch CCTV", cctv_requirement, "cctv_label",
         menu_tooltip = "Check what's happening via the CCTV system.")
-    security_room_actions.append(cctv_action)
 
     def observation_requirement():
         return True
@@ -74,28 +62,6 @@ init 3 python: # Put this behind a mod init to ensure compatibility
     office_observation_action = Action("Observe the [office.formalName]", observation_requirement, "office_observation_label",
         menu_tooltip = "See what's going on in ")
     security_room_cctv_actions.append(office_observation_action)
-
-
-
-
-label security_overview():
-#    "You seat yourself at the control panel."
-#    "From here you can run investigations, watch the CCTV... (tooltip)Unlock more options by investing."
-    while True:
-        python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-            security_options = []
-            for act in security_room_actions:
-                security_options.append(act)
-            security_options.append("Back")
-            act_choice = call_formated_action_choice(security_options)
-            del security_options
-
-        if act_choice == "Back":
-            return
-        else:
-            $ act_choice.call_action()
-            $ del act_choice
-
 
 label cctv_label():
     "Select location to observe"

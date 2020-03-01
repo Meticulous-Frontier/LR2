@@ -512,7 +512,7 @@ label SB_mom_anal_pay_label():
     "She stops herself before she says too much."
     the_person.char "The bills are just really starting to pile up. I'm sorry, I know its wrong but, I promise I'll make it good for you!"
     menu:
-        "Strip and ride me. -$1000" if mc.business.funds >= 1000:
+        "Strip and ride me\nPay $1000" if mc.business.funds >= 1000:
             $ mc.business.funds += -1000
             "[the_person.possessive_title] smiles wide when you give her the money."
             the_person.char "Thank you [the_person.mc_title]! Now, are you ready a show?"
@@ -549,7 +549,7 @@ label SB_mom_anal_pay_label():
             "It seems your serums have given her an anal fetish!"
             "You cuddle up behind her and enjoy the heat of her soft flesh as you slowly drift off to sleep."
 
-            call advance_time_enhanced_next_day_no_events() from _call_advance_time_enhanced_next_day_no_events_SBA42
+            call advance_time_enhanced(no_events = True) from _call_advance_time_enhanced_next_day_no_events_SBA42
             $ the_person.apply_outfit(SB_anal_nude_outfit)
             "The next morning, you slowly wake up. The bed next to you is cold. You look around and see [the_person.possessive_title] getting ready for the day in the bathroom."
             $ mc.change_location(mom_bedroom)
@@ -587,9 +587,9 @@ label SB_mom_anal_pay_label():
             "[the_person.possessive_title] meekly responds."
             the_person.char "Yes [the_person.mc_title]. You know it will be... take my ass, whenever you want. I'll be ready!"
             $ mc.business.mandatory_crises_list.append(SB_mom_weekly_anal_action)
-        "Strip and ride me. -$1000 (disabled)" if mc.business.funds <1000:
+        "Strip and ride me\nPay $1000 (disabled)" if mc.business.funds <1000:
             pass
-        "Not this week.":
+        "Not this week":
             mc.name "Sorry [the_person.title], but I'm tight on cash right now as well. Maybe next week, okay?"
             "[the_person.possessive_title] nods and turns back to her bills."
             the_person.char "I understand [the_person.mc_title]. Now don't let me keep you, I'm sure you were up to something important."
@@ -620,8 +620,7 @@ label SB_mom_anal_friday_label():
     the_person.char "[the_person.mc_title]! Hey, it time for our Friday night date! Are you ready for your show and, well you know what comes afterword..."
     "[the_person.title] smiles wide, waiting for your response."
     menu:
-        "Strip and ride me.":
-
+        "Strip and ride me\nPay $200" if mc.business.funds >= 200:
             "You sit down on the bed. [the_person.title] walks over to you."
             the_person.char "Remember, no touching! Atleast during this part. Now, are you ready a show?"
             call SB_free_strip_scene(the_person) from _call_SB_free_strip_scene_SBA50
@@ -649,7 +648,7 @@ label SB_mom_anal_friday_label():
 
             "You cuddle up behind her and enjoy the heat of her soft flesh as you slowly drift off to sleep."
 
-            call advance_time_enhanced_next_day_no_events() from _call_advance_time_enhanced_next_day_no_events_SBA52
+            call advance_time_enhanced(no_events = True) from _call_advance_time_enhanced_next_day_no_events_SBA52
             $ the_person.apply_outfit(SB_anal_nude_outfit)
             "The next morning, you slowly wake up. The bed next to you is cold. You look around and see [the_person.possessive_title] getting ready for the day in the bathroom."
             $ mc.change_location(mom_bedroom)
@@ -667,7 +666,7 @@ label SB_mom_anal_friday_label():
             mc.name "Of course [the_person.title]. I'll fuck you in the ass, just the way you like it."
             the_person.char "Yes... Please! Please [the_person.mc_title]! Fuck me in the ass!"
             "You pick her up from behind and take her back to the bed. You throw her on the bed. She quickly gets on her hands and knees and starts wiggling her ass at you."
-            #Draw doggystyle
+            #Draw doggy style
             $ the_person.draw_person(position = "doggy")
             "You grab the lube leftover from the night before. You quickly apply another glob to [the_person.mc_title]'s back side. You apply some more to your cock until it is good and slick."
             "You get yourself lined up with [the_person.possessive_title]'s back passage. You slowly begin your anal penetration."
@@ -681,9 +680,9 @@ label SB_mom_anal_friday_label():
             mc.name "Mmm, thanks [the_person.title]. That ass is amazing. Next friday, right?"
             the_person.char "Yes [the_person.mc_title]. But don't feel like you HAVE to wait to take my ass. We can do it whenever you want. I'll be ready!"
             $ mc.business.mandatory_crises_list.append(SB_mom_weekly_anal_action)
-        "Strip and ride me. -$200 (disabled)" if mc.business.funds <100:
+        "Strip and ride me\nPay $200 (disabled)" if mc.business.funds < 200:
             pass
-        "Not this week.":
+        "Not this week":
             mc.name "Sorry [the_person.title], work was hell and I'm exhausted. Maybe next week, okay?"
             "[the_person.possessive_title] frowns."
             the_person.char "I understand [the_person.mc_title]. Now don't let me keep you, I'm sure you were up to something important."
@@ -970,7 +969,7 @@ label SB_starbuck_anal_swing_demo(the_person):
                     the_person.char "Alright, lets give em a good show."
                     $ scene_private = False
                 $ del audience_list
-            "Keep it private.":
+            "Keep it private":
                 mc.name "I think I'd like to keep it between me and you, if that's okay."
                 "You can tell she is a little disappointed, but she quickly smiles again when she remembers that you are about to fuck her in the ass..."
                 the_person.char "Okay! Lets go!"

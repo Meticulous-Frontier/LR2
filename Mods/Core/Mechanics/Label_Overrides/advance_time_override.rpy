@@ -33,6 +33,13 @@ init -1 python:
     def advance_time_people_run_turn_requirement():
         return True
 
+    def advance_time_stay_wet_requirement():
+        return stay_wet_action.enabled
+
+    def advance_time_collar_person_requirement():
+        return collar_slave_action.enabled
+
+
 init 5 python:
     global crisis_chance
     global morning_crisis_chance
@@ -41,7 +48,7 @@ init 5 python:
     global morning_crisis_base_chance
 
     # some crisis events have impact on game dynamic and should be allowed to trigger often
-    excluded_crisis_tracker_events = [work_relationship_change_crisis]
+    excluded_crisis_tracker_events = [work_relationship_change_crisis, unisex_restroom_crisis_action, friends_help_friends_be_sluts_crisis]
 
     crisis_base_chance = 8
     morning_crisis_base_chance = 4
@@ -54,7 +61,7 @@ init 5 python:
 
     mandatory_advance_time = False
 
-    advance_time_people_run_turn_action = ActionMod("End of day run people", advance_time_people_run_turn_requirement,
+    advance_time_people_run_turn_action = ActionMod("Run people turn", advance_time_people_run_turn_requirement,
         "advance_time_people_run_turn_label", priority = 1, allow_disable = False)
 
     advance_time_mandatory_crisis_action = ActionMod("Run mandatory crisis events", advance_time_mandatory_crisis_requirement,
@@ -83,13 +90,23 @@ init 5 python:
     advance_time_daily_serum_dosage_action = ActionMod("Employees daily Serum", advance_time_daily_serum_dosage_requirement,
         "advance_time_daily_serum_dosage_label", priority = 10, allow_disable = False)
 
-    # NOTE: Depends on people_to_process being up to date.
-    advance_time_people_run_move_action = ActionMod("Moves people_to_process to their destinations", advance_time_next_requirement,
+    advance_time_people_run_move_action = ActionMod("Moves people to their destinations", advance_time_next_requirement,
         "advance_time_people_run_move_label", priority = 15, allow_disable = False)
+
+    # Slave Role Advance Time Actions
+    advance_time_stay_wet_action = ActionMod("Execute slave 'stay wet'", advance_time_stay_wet_requirement, 
+        "advance_time_stay_wet_label", priority = 20, allow_disable = False, menu_tooltip = "People with 'stay_wet = True' have their minimum arousal set to 50%")
+
+    advance_time_collar_person_action = ActionMod("Execute slave 'collar'", advance_time_collar_person_requirement,
+        "advance_time_collar_person_label", allow_disable = False, priority = 22, menu_tooltip = "Allows the collar_slave_action to do what it is intended to.")
+
 
     advance_time_action_list = [advance_time_people_run_turn_action, advance_time_people_run_day_action, advance_time_end_of_day_action, advance_time_next_action, advance_time_mandatory_crisis_action,
         advance_time_random_crisis_action, advance_time_mandatory_morning_crisis_action, advance_time_random_morning_crisis_action, advance_time_daily_serum_dosage_action,
-        advance_time_people_run_move_action, advance_time_bankrupt_check_action]
+        advance_time_people_run_move_action, advance_time_bankrupt_check_action, advance_time_stay_wet_action, advance_time_collar_person_action]
+
+    # actions that trigger events
+    advance_time_event_action_list = [advance_time_mandatory_crisis_action, advance_time_random_crisis_action, advance_time_mandatory_morning_crisis_action, advance_time_random_morning_crisis_action]
 
     config.label_overrides["advance_time"] = "advance_time_enhanced"
 
@@ -100,7 +117,10 @@ init 5 python:
             if not ic in crisis_tracker: # skip events in tracker list
                 if crisis[0].is_action_enabled(): #Get the first element of the weighted tuple, the action.
                     possible_crisis_list.append(crisis) #Build a list of valid crises from ones that pass their requirement.
-        renpy.random.shuffle(possible_crisis_list)    # shuffle the list in random order
+        #renpy.random.shuffle(possible_crisis_list)    # shuffle the list in random order
+
+        #renpy.say("", str(len(possible_crisis_list)) + " - ".join((o[0].name) for o in possible_crisis_list))
+
         return get_random_from_weighted_list(possible_crisis_list)
 
     def get_limited_time_action_for_person(person):
@@ -108,7 +128,7 @@ init 5 python:
         for crisis in limited_time_event_pool:
             if crisis[0].is_action_enabled(person): #Get the first element of the weighted tuple, the action.
                 possible_crisis_list.append(crisis) #Build a list of valid crises from ones that pass their requirement.
-        renpy.random.shuffle(possible_crisis_list)    # shuffle the list in random order
+        #renpy.random.shuffle(possible_crisis_list)    # shuffle the list in random order
         return get_random_from_weighted_list(possible_crisis_list, return_everything = True)
 
 
@@ -119,20 +139,73 @@ init 5 python:
             if not ic in morning_crisis_tracker: # skip events in tracker list
                 if crisis[0].is_action_enabled(): #Get the first element of the weighted tuple, the action.
                     possible_morning_crises_list.append(crisis) # Build a list of valid crises from ones that pass their requirement.
-        renpy.random.shuffle(possible_morning_crises_list)    # shuffle the list in random order
+        #renpy.random.shuffle(possible_morning_crises_list)    # shuffle the list in random order
         return get_random_from_weighted_list(possible_morning_crises_list)
 
     def cleanup_crisis_tracker():
-        while len(crisis_tracker) > 6: # release old tracked events
+        while len(crisis_tracker) > 10: # release old tracked events
             del crisis_tracker[0]
         return
 
     def cleanup_morning_crisis_tracker():
-        while len(morning_crisis_tracker) > 2: # release old tracked events
+        while len(morning_crisis_tracker) > 3: # release old tracked events
             del morning_crisis_tracker[0]
         return
 
-label advance_time_enhanced:
+    def build_people_to_process():
+        people = [] #This is a master list of turns of need to process, stored as tuples [character,location]. Used to avoid modifying a list while we iterate over it, and to avoid repeat movements.
+        for place in list_of_places:
+            for person in place.people:
+                people.append([person, place])
+        return people
+
+    def advance_time_run_turn(people):
+        for (person, place) in people: #Run the results of people spending their turn in their current location.
+            person.run_turn()
+        mc.business.run_turn()
+        mc.run_turn()
+        return
+
+    def advance_time_run_day(people):
+        for (person, place) in people:
+            person.run_day()
+
+        mc.run_day()
+        mc.business.run_day()
+        return
+
+    def advance_time_run_move(people):
+        for (person, place) in people: #Now move everyone to where the should be in the next time chunk. That may be home, work, etc.
+            person.run_move(place)
+            if person.follow_mc: # move follower to mc location
+                person.location().move_person(person, mc.location)
+        return
+
+    def advance_time_assign_limited_time_events(people):
+        for (person, place) in people:
+            if person.mc_title != "Stranger" and renpy.random.randint(0,100) < 12: #Only assign one to 12% of people, to cut down on the number of people we're checking.
+                the_crisis = get_limited_time_action_for_person(person)
+                if the_crisis:
+                    #renpy.notify("Created event: " + the_crisis[0].name + " for " + people.name)
+                    if the_crisis[2] == "on_talk" and len(person.on_talk_event_list) == 0: # prevent multiple on talk events for person
+                        person.on_talk_event_list.append(Limited_Time_Action(the_crisis[0], the_crisis[0].event_duration))
+                    elif the_crisis[2] == "on_enter":
+                        person.on_room_enter_event_list.append(Limited_Time_Action(the_crisis[0], the_crisis[0].event_duration))
+        return
+
+    def advance_time_slave_stay_wet(people):
+        for (person, place) in [x for x in people if x[0].stay_wet and x[0].arousal < 50]:
+            person.arousal = 50
+            if person.sluttiness < 15:
+                person.sluttiness = 15 # Doesn't make sense for them to be "ready" if they cannot be seduced.
+        return
+
+    def advance_time_slave_collar(people):
+        for (person,place) in [x for x in people if x[0].slave_collar and x[0].obedience < 130]:
+            person.obedience = 130
+        return
+
+label advance_time_enhanced(no_events = False):
     # 1) Turns are processed _before_ the time is advanced.
     # 1a) crises are processed if they are triggered.
     # 2) Time is advanced, day is advanced if required.
@@ -145,46 +218,45 @@ label advance_time_enhanced:
         advance_time_count = 0 # NOTE: Count and Max might need to be unique for each label since it carries over.
         advance_time_max_actions = len(advance_time_action_list) # This list is automatically sorted by priority due to the class properties.
         advance_time_action_list_sorted = sorted(advance_time_action_list, key = lambda x: x.priority)
+        people_to_process = build_people_to_process()
 
     while advance_time_count < advance_time_max_actions:
         $ act = advance_time_action_list_sorted[advance_time_count]
-        if act.is_action_enabled(): # Only run actions that have their requirement met.
-            $ act.call_action()
-            $ renpy.scene("Active")
+        if not no_events or (not act in advance_time_event_action_list):
+            if act.is_action_enabled(): # Only run actions that have their requirement met.
+                # $ renpy.say("", "Run: " + act.name)
+                $ act.call_action()
+                $ renpy.scene("Active")
 
         $ advance_time_count += 1
 
-    # increase crisis chance (every time slot)
-    $ crisis_chance += 1
-    $ del people_to_process
-    $ renpy.free_memory()
-    $ mc.location.show_background()
+    python:
+        # increase crisis chance (every time slot)
+        crisis_chance += 1
+        renpy.free_memory()
+        mc.location.show_background()
+        x = None
+        c = None
+        people_to_process = []
+
     if mandatory_advance_time: #If a crisis has told us to advance time after it we do so.
         call advance_time from _call_advance_time_advance_time_enhanced
     return
 
-label advance_time_enhanced_next_day_no_events:
-    call advance_time_next_label() from _call_advance_time_next_label_no_events
-    call advance_time_people_run_day_label() from _call_advance_time_people_run_day_label_no_events
-    if advance_time_bankrupt_check_action.enabled:
-        call advance_time_bankrupt_check_label() from _call_advance_time_bankrupt_check_label_no_events
-    call advance_time_end_of_day_label() from _call_advance_time_end_of_day_label_no_events
-    return
-
 label advance_time_bankrupt_check_label():
-    if mc.business.funds < 0:
-        # "advance_time_bankrupt_check_label" # DEBUG
-        $ mc.business.bankrupt_days += 1
-        if mc.business.bankrupt_days == mc.business.max_bankrupt_days:
-            $ renpy.say("","With no funds to pay your creditors you are forced to close your business and auction off all of your materials at a fraction of their value. Your story ends here.")
-            $ renpy.full_restart()
+    python:
+        if mc.business.funds < 0:
+            # "advance_time_bankrupt_check_label" # DEBUG
+            mc.business.bankrupt_days += 1
+            if mc.business.bankrupt_days == mc.business.max_bankrupt_days:
+                renpy.say("","With no funds to pay your creditors you are forced to close your business and auction off all of your materials at a fraction of their value. Your story ends here.")
+                renpy.full_restart()
+            else:
+                days_remaining = mc.business.max_bankrupt_days-mc.business.bankrupt_days
+                renpy.say("","Warning! Your company is losing money and unable to pay salaries or purchase necessary supplies! You have [days_remaining] days to restore yourself to positive funds or you will be foreclosed upon!")
         else:
-            $ days_remaining = mc.business.max_bankrupt_days-mc.business.bankrupt_days
-            $ renpy.say("","Warning! Your company is losing money and unable to pay salaries or purchase necessary supplies! You have [days_remaining] days to restore yourself to positive funds or you will be foreclosed upon!")
-    else:
-        $ mc.business.bankrupt_days = 0
+            mc.business.bankrupt_days = 0
     return
-
 
 label advance_time_random_crisis_label():
     # "advance_time_random_crisis_label - timeslot [time_of_day]" #DEBUG
@@ -235,38 +307,24 @@ label advance_time_people_run_turn_label():
     # "advance_time_people_run_turn_label - timeslot [time_of_day]" #DEBUG
     python:
         mandatory_advance_time = False
-
-        people_to_process = [] #This is a master list of turns of need to process, stored as tuples [character,location]. Used to avoid modifying a list while we iterate over it, and to avoid repeat movements.
-        for place in list_of_places:
-            for person in place.people:
-                people_to_process.append([person, place])
-
-    python:
-        for (person, place) in people_to_process: #Run the results of people spending their turn in their current location.
-            person.run_turn()
-        mc.business.run_turn()
-        mc.run_turn()
-
+        advance_time_run_turn(people_to_process)
     return
 
 label advance_time_people_run_day_label():
     # "advance_time_people_run_day_label - timeslot [time_of_day]" # DEBUG
     #if time_of_day == 4: ##First, determine if we're going into the next chunk of time. If we are, advance the day and run all of the end of day code. NOTE: We can do checks like these with Action.requirements
-    python:
-        for (person, place) in people_to_process:
-            person.run_day()
-
-    $ mc.run_day()
-    $ mc.business.run_day()
+    $ advance_time_run_day(people_to_process)
     return
 
 label advance_time_end_of_day_label():
     # "advance_time_end_of_day_label - timeslot [time_of_day]" # DEBUG
     call screen end_of_day_update() # We have to keep this outside of a python block, because the renpy.call_screen function does not properly fade out the text bar.
-    $ mc.business.clear_messages()
-    # increase morning crisis chance (once a day)
-    $ morning_crisis_chance += 2
-    $ perk_system.update()  #TEST to see if this is a good time for this.
+
+    python:
+        mc.business.clear_messages()
+        # increase morning crisis chance (once a day)
+        morning_crisis_chance += 2
+        perk_system.update()  #TEST to see if this is a good time for this.
     return
 
 label advance_time_mandatory_morning_crisis_label():
@@ -315,11 +373,12 @@ label advance_time_random_morning_crisis_label():
 
 label advance_time_next_label():
     # "advance_time_next_label  - timeslot [time_of_day]" #DEBUG
-    if time_of_day == 4: # NOTE: Take care of resetting it to 0 here rather than during end_day_label
-        $ time_of_day = 0
-        $ day += 1
-    else:
-        $ time_of_day += 1 ##Otherwise, just run the end of day code.
+    python:
+        if time_of_day == 4: # NOTE: Take care of resetting it to 0 here rather than during end_day_label
+            time_of_day = 0
+            day += 1
+        else:
+            time_of_day += 1 ##Otherwise, just run the end of day code.
     return
 
 label advance_time_daily_serum_dosage_label():
@@ -329,22 +388,15 @@ label advance_time_daily_serum_dosage_label():
 
 label advance_time_people_run_move_label():
     # "advance_time_people_run_move_label - timeslot [time_of_day]" #DEBUG
-    python:
-        for (person, place) in people_to_process: #Now move everyone to where the should be in the next time chunk. That may be home, work, etc.
-            person.run_move(place)
-            if person.follow_mc: # move follower to mc location
-                person.location().move_person(person, mc.location)
-
-            if person.title is not None: #We don't assign events to people we haven't met.
-                if renpy.random.randint(0,100) < 12: #Only assign one to 12% of people, to cut down on the number of people we're checking.
-                    the_crisis = get_limited_time_action_for_person(person)
-                    if the_crisis is not None:
-                        limited_time_event = Limited_Time_Action(the_crisis[0], the_crisis[0].event_duration) #Wraps the action so that we can have an instanced duration counter and add/remove it easily.\
-                        #renpy.notify("Created event: " + the_crisis[0].name + " for " + people.name)
-                        if the_crisis[2] == "on_talk" and len(person.on_talk_event_list) == 0: # prevent multiple on talk events for person
-                            person.on_talk_event_list.append(limited_time_event)
-
-                        elif the_crisis[2] == "on_enter" and len(person.on_room_enter_event_list) == 0: # prevent multiple on enter events for person
-                            person.on_room_enter_event_list.append(limited_time_event)
-
+    $ advance_time_run_move(people_to_process)
+    $ advance_time_assign_limited_time_events(people_to_process)
     return
+
+label advance_time_stay_wet_label():
+    $ advance_time_slave_stay_wet(people_to_process)
+    return
+
+label advance_time_collar_person_label():
+    $ advance_time_slave_collar(people_to_process)
+    return
+

@@ -1,3 +1,6 @@
+init -2 python:
+    height_calculation_correction = .2
+
 init -1:
     python:
         import hashlib
@@ -58,7 +61,10 @@ init -1:
         # Returns True when the persons height has changed; otherwise False
         # chance is probability percentage that height change for amount will occur (used by serums)
         def change_height(self, amount, chance):
-            if amount == 0 or (self.height == .8 and amount < 0) or (self.height == 1 and amount > 0):
+            lower_limit = 1 - height_calculation_correction - .2
+            upper_limit = 1 - height_calculation_correction
+
+            if amount == 0 or (self.height == lower_limit and amount < 0) or (self.height == upper_limit and amount > 0):
                 return False
 
             if renpy.random.randint(0, 100) <= chance:
@@ -66,11 +72,11 @@ init -1:
             else:
                 return False
 
-            if self.height > 1:
-                self.height == 1
+            if self.height > upper_limit:
+                self.height == upper_limit
 
-            if self.height < .8:
-                self.height = .8
+            if self.height < lower_limit:
+                self.height = lower_limit
 
             return True
 
@@ -89,10 +95,10 @@ init -1:
                 self.weight += amount
 
             # maximum and minimum weight are dependant on height
-            max_weight = self.height * 100
-            min_weight = self.height * 50
-            switch_point_low = self.height * 68
-            switch_point_high = self.height * 83
+            max_weight = (self.height + height_calculation_correction) * 100
+            min_weight = (self.height + height_calculation_correction) * 50
+            switch_point_low = (self.height + height_calculation_correction) * 68
+            switch_point_high = (self.height + height_calculation_correction) * 83
 
             if (amount > 0):
                 if self.weight > switch_point_low + 3 and self.body_type == "thin_body":
@@ -216,10 +222,10 @@ init -1:
 
             if renpy.random.randint(0,100) < 60: #Have heights that roughly match (but o
                 height = self.height * (renpy.random.randint(95,105)/100.0)
-                if height > 1.0:
-                    height = 1.0
-                elif height < 0.8:
+                if height > 0.8:
                     height = 0.8
+                elif height < 0.6:
+                    height = 0.6
             else:
                 height = None
 
@@ -229,7 +235,7 @@ init -1:
                 start_home  = None
 
 
-            the_daughter = create_random_person(last_name = self.last_name, age = age, body_type = body_type, face_style = face_style, tits = tits, height = height,
+            the_daughter = make_person(last_name = self.last_name, age = age, body_type = body_type, face_style = face_style, tits = tits, height = height,
                 hair_colour = hair_colour, skin = self.skin, eyes = eyes, start_home = start_home)
 
             if start_home is None:
@@ -240,11 +246,6 @@ init -1:
                 town_relationships.update_relationship(the_daughter, sister, "Sister") #Set them as sisters
 
             town_relationships.update_relationship(self, the_daughter, "Daughter", "Mother") #Now set the mother/daughter relationship (not before, otherwise she's a sister to herself!)
-
-            # make her a little bit more unique by changing wardrobe and opinions
-            update_person_opinions(the_daughter)
-            rebuild_wardrobe(the_daughter)
-            update_person_outfit(the_daughter, -0.2)
 
             return the_daughter
 
@@ -286,6 +287,7 @@ init -1:
             while strip_choice and self.judge_outfit(test_outfit, temp_sluttiness_boost):
                 self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
                 self.apply_outfit(test_outfit, ignore_base = True) #Swap our current outfit out for the test outfit.
+                removed_something = True
                 if msg_count > 0:   # do we need to show a random message and replace titles and outfit name
                     msg_idx = renpy.random.randint(1, msg_count)
                     msg = messages[msg_idx - 1]
@@ -302,6 +304,17 @@ init -1:
         Person.strip_outfit_to_max_sluttiness = strip_outfit_to_max_sluttiness
 
         def strip_outfit(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, delay = 1, character_placement = None, position = None, emotion = None, lighting = None, scene_manager = None):
+            def extra_strip_check(person, top_layer_first, exclude_upper, exclude_lower, exclude_feet):
+                if top_layer_first: # normal strip continue
+                    return True
+                
+                done = exclude_upper or person.outfit.tits_available()
+                if done and (exclude_lower or person.outfit.vagina_available()):
+                    if done and (exclude_feet or person.outfit.feet_available()):
+                        return False
+
+                return True # not done continue stripping
+
             if position is None:
                 self.position = person.idle_pose
 
@@ -315,7 +328,7 @@ init -1:
                 self.character_placement = character_right
 
             strip_choice = self.outfit.remove_random_any(top_layer_first, exclude_upper, exclude_lower, exclude_feet, do_not_remove = True)
-            while not strip_choice is None:
+            while not strip_choice is None and extra_strip_check(self, top_layer_first, exclude_upper, exclude_lower, exclude_feet):
                 self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
                 strip_choice = self.outfit.remove_random_any(top_layer_first, exclude_upper, exclude_lower, exclude_feet, do_not_remove = True)
                 renpy.pause(delay)
@@ -574,12 +587,18 @@ init -1:
 
         Person.review_outfit = review_outfit_enhanced
 
-        def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, lighting = None, character_placement = None, from_scene = False): #Draw the person, standing as default if they aren't standing in any other position.
+        def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0, character_placement = None, from_scene = False): #Draw the person, standing as default if they aren't standing in any other position.
             if position is None:
                 position = self.idle_pose
 
             if emotion is None:
                 emotion = self.get_emotion()
+
+            if the_animation is None:
+                the_animation = self.idle_animation
+
+            if not can_use_animation():
+                the_animation = None
 
             if character_placement is None: # make sure we don't need to pass the position with each draw
                 character_placement = character_right
@@ -600,21 +619,22 @@ init -1:
                 if show_person_info:
                     renpy.show_screen("person_info_ui",self)
 
-            final_image = self.build_person_displayable(position, emotion, special_modifier, show_person_info, lighting)
-            renpy.show(self.name,at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=(self.name + self.last_name + str(self.age)))
+            if the_animation:
+                final_image = self.build_person_animation(the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength)
+            else:
+                final_image = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill)
+
+            renpy.show(self.name + self.last_name + "_anim",at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=self.name + self.last_name +"_anim")
 
         # replace the default draw_person function of the person class
         Person.draw_person = draw_person_enhanced
         # add location to store original personality
         Person.original_personality = None
 
-        def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, special_modifier = None, lighting = None, character_placement = None, scene_manager = None): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
+        def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, special_modifier = None, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0, character_placement = None, scene_manager = None): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
             #Note: this function includes a call to remove_clothing, it is not needed seperately.
             if position is None:
                 position = self.idle_pose
-
-            bottom_displayable = [] #Displayables under the piece of clothing being removed.
-            top_displayable = []
 
             if emotion is None:
                 emotion = self.get_emotion()
@@ -625,50 +645,29 @@ init -1:
             if character_placement is None: # make sure we don't need to pass the position with each draw
                 character_placement = character_right
 
+            if not can_use_animation():
+                the_animation = None
+
             renpy.scene("Active") # clear layer for new draw action
             if scene_manager is None:
                 renpy.show_screen("person_info_ui",self)
-            else:   # when we are called from the scenemanager we have to draw the other characters
+            else:   # when we are called from the scene manager we have to draw the other characters
                 scene_manager.draw_scene_without(self)
 
-            bottom_displayable.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier, eye_colour = self.eyes[1], lighting = lighting)) #Get the face displayable, also always under clothing.
-            bottom_displayable.append(self.body_images.generate_item_displayable(self.body_type,self.tits,position, lighting = lighting))  #Body is always under clothing
-            bottom_displayable.append(self.pubes_style.generate_item_displayable(self.body_type,self.tits, position, lighting = lighting)) #Pubes are also always under clothing and can't be removed.
+            if the_animation:
+                bottom_displayable = self.build_person_animation(the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength = 1.0)
+            else:
+                bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
 
-            size_render = renpy.render(bottom_displayable[1], 10, 10, 0, 0) #We need a render object to check the actual size of the body displayable so we can build our composite accordingly.
-            the_size = size_render.get_size()
-            x_size = __builtin__.int(the_size[0])
-            y_size = __builtin__.int(the_size[1])
+            self.outfit.remove_clothing(the_clothing)
 
-            bottom_clothing, split_clothing, top_clothing = self.outfit.generate_split_draw_list(the_clothing, self, position, emotion, special_modifier, lighting = lighting) #Gets a split list of all of our clothing items.
-            #We should remember that middle item can be None.
-            for item in bottom_clothing:
-                bottom_displayable.append(item)
+            if the_animation:
+                top_displayable = self.build_person_animation(the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength)
+            else:
+                top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
 
-            for item in top_clothing:
-                top_displayable.append(item)
-
-            top_displayable.append(self.hair_style.generate_item_displayable("standard_body",self.tits,position, lighting = lighting)) #Hair is always on top
-
-            #Now we build our two composites, one for the bottom image and one for the top.
-            composite_bottom_params = [(x_size,y_size)]
-            for display in bottom_displayable:
-                composite_bottom_params.append((0,0))
-                composite_bottom_params.append(display)
-
-            composite_top_params = [(x_size,y_size)]
-            for display in top_displayable:
-                composite_top_params.append((0,0))
-                composite_top_params.append(display)
-
-            final_bottom = Composite(*composite_bottom_params)
-            final_top = Composite(*composite_top_params)
-
-            renpy.show("Bottom Composite", at_list=[character_placement, scale_person(self.height)], layer="Active", what=final_bottom, tag=self.name+"Bottom")
-            if split_clothing: #Only show this if we actually had something returned to us.
-                renpy.show("Removed Item", at_list=[character_placement, scale_person(self.height), clothing_fade], layer="Active", what=split_clothing, tag=self.name+"Middle")
-                self.outfit.remove_clothing(the_clothing)
-            renpy.show("Top Composite", at_list=[character_placement, scale_person(self.height)], layer="Active", what=final_top, tag=self.name+"Top")
+            renpy.show(self.name+self.last_name+"_new", at_list=[character_placement, scale_person(self.height)], layer = "Active", what = top_displayable, tag = self.name + self.last_name +"_new")
+            renpy.show(self.name+self.last_name+"_old", at_list=[character_placement, scale_person(self.height), clothing_fade], layer = "Active", what = bottom_displayable, tag = self.name + self.last_name +"_old")
 
         Person.draw_animated_removal = draw_animated_removal_enhanced
 
@@ -680,11 +679,11 @@ init -1:
         def check_person_weight_attribute(person):
             if not hasattr(person, "weight"):
                 if (person.body_type == "thin_body"):
-                    setattr(person, "weight", 60 * person.height)   # default weight thin body
+                    setattr(person, "weight", 60 * (person.height + height_calculation_correction))   # default weight thin body
                 elif (person.body_type == "standard_body"):
-                    setattr(person, "weight", 75 * person.height)   # default weight standard body
+                    setattr(person, "weight", 75 * (person.height + height_calculation_correction))   # default weight standard body
                 else:
-                    setattr(person, "weight", 90 * person.height)   # default weight curvy body
+                    setattr(person, "weight", 90 * (person.height + height_calculation_correction))   # default weight curvy body
             return
 
         # calculates current player mental powers

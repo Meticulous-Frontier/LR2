@@ -1,10 +1,14 @@
 transform transform_one():
+    yalign 0.5
+    yanchor 0.5
+    xalign 1.0
     xanchor 1.0
-    yanchor 1.0
 
 transform transform_two():
+    yalign 0.5
+    yanchor 0.5
+    xalign 1.0
     xanchor 1.0
-    yanchor 1.0
 
 init 1 python:
     sexy_opinions_list.append("threesomes")
@@ -26,7 +30,7 @@ init 1 python:
         transform_one.ypos = one_pos_y
         transform_one.zoom = one_scale
 
-        one_final_image = person_one.build_person_displayable(one_position, one_emotion, one_special_modifier, False, lighting)            
+        one_final_image = person_one.build_person_displayable(one_position, one_emotion, one_special_modifier, lighting = lighting, background_fill = False)
         renpy.show(person_one.name,at_list=[transform_one, scale_person(person_one.height)],layer="Active",what=one_final_image,tag=person_one.name)
 
         #Now do person two
@@ -41,7 +45,7 @@ init 1 python:
         transform_two.ypos = two_pos_y
         transform_two.zoom = two_scale
 
-        two_final_image = person_two.build_person_displayable(two_position, two_emotion, two_special_modifier, False, lighting)            
+        two_final_image = person_two.build_person_displayable(two_position, two_emotion, two_special_modifier, lighting = lighting, background_fill = False)
         renpy.show(person_two.name,at_list=[transform_two, scale_person(person_two.height)],layer="Active",what=two_final_image,tag=person_two.name)
         return
 
@@ -219,9 +223,11 @@ label SB_test_draw_scene_two():
     return
 
 label trist_draw_69():
-    $ renpy.scene("Active")
-    $ lily.draw_person("missionary", character_placement = character_69_bottom, from_scene = True)
-    $ mom.draw_person("cowgirl", character_placement = character_69_on_top, from_scene = True)
+    python:
+        scene_manager = Scene()
+        scene_manager.add_actor(lily, position = "missionary", character_placement = character_69_bottom, z_order = 0)
+        scene_manager.add_actor(mom, position = "cowgirl", character_placement = character_69_on_top, z_order = 1)
+        scene_manager.draw_scene() # required for draw with z_order
     return
 
 screen SB_two_person_info_ui(the_person_one, the_person_two): #Used to display stats for a person while you're talking to them.

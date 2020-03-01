@@ -1,9 +1,5 @@
 init -3 python:
     FETISH_DEBUG_MODE = False #A basic cheat mode, makes it easy to test fetish serums
-    FETISH_OPINION_MAX = 2
-    FETISH_SEX_SKILL_MAX = 5
-    FETISH_SKILL_RAISE_CHANCE = 50
-    FETISH_DEVELOPMENT_CHANCE = 50
     FETISH_BASIC_OPINION_LIST = ["giving handjobs", "giving tit fucks", "being fingered", "kissing", "masturbating", "big dicks"]
     FETISH_ANAL_OPINION_LIST = ["anal sex", "doggy style sex", "sex standing up", "anal creampies" ]
     FETISH_ORAL_OPINION_LIST = ["giving blowjobs", "getting head", "drinking cum"]

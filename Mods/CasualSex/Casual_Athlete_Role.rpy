@@ -433,6 +433,9 @@ label casual_athlete_race_crisis_label(the_person):
     "As you approach the third kilometer marker, you can see yourself catching up to a familiar form."
     $ the_person.draw_person(position = "walking_away")
     "God she is hot, her ass sways back and forth with each step she takes. You imagine all the things you want to do with those delightfully tight cheeks."
+    "You are breathing hard. It's getting so hard to keep up. She starts to pull away from you."
+    "No! It's time to dig deep! You pump your arms and breath deep."
+    "After a few moments, you catch your second wind. You get a burst of energy and race faster."
     "You are catching up to her, and you find yourself running with a renewed vigor from the flow of testosterone in your bloodstream, day dreaming about [the_person.possessive_title]."
     "You pass the marker for the fourth kilometer. This is it, its now or never!"
     "You surge forward, and soon you are right beside her. She is gasping for air, she is completely winded!"
@@ -476,7 +479,7 @@ label casual_athlete_race_crisis_label(the_person):
     else:
         "Your mind red with lust, you begin to rip [the_person.title]'s clothes off."
 
-        $ the_person.strip_outfit(position = "missionary")
+        $ the_person.strip_outfit(top_layer_first = False, position = "missionary")
         $ the_person.change_arousal(20)
 
         "[the_person.possessive_title] moans as you strip her down, enjoying your rough treatment of her."
@@ -502,9 +505,12 @@ label casual_athlete_race_crisis_label(the_person):
     the_person.char "Ayup! Don't worry. Alright, if its okay with you, I think I'm gonna take a nap..."
     "You excuse yourself. You grab your clothes and head out. You now know [the_person.title]'s address, with a standing offer to come over and fuck her silly!"
     $ the_person.event_triggers_dict["athlete_progress"] = 4
-    $ casual_athlete_energy_perk = Stat_Perk(description = "Training for the big race has helped improve your energy level.", energy_bonus = 20, bonus_is_temp = False, energy_cap = 40)
+    $ casual_athlete_energy_perk = Stat_Perk(description = "Training for the big race has helped improve your energy level. +20 max energy, +40 energy cap.", energy_bonus = 20, bonus_is_temp = False, energy_cap = 40)
     $ perk_system.add_stat_perk(casual_athlete_energy_perk, "Athlete Energy Bonus")
+    $ second_wind = Ability_Perk(description = "You take a few deep breaths and recover a bit of your energy. Use this perk to regain half your max energy, once per day.", toggle = False, usable = True, usable_func = second_wind_func, usable_cd = 1)
+    $ perk_system.add_ability_perk(second_wind, "Second Wind")
     "You walk away with a spring in your step. You feel like training for and running the race has given you more energy."
+    "You have gained the second wind ability perk. You can now recover half your max energy, once per day!"
     return
 
 label casual_athlete_buy_protein_shake_label(the_person):
@@ -555,7 +561,7 @@ label casual_athlete_house_call_label(the_person):
     else:
         "Your mind red with lust, you begin to rip [the_person.title]'s clothes off."
 
-        $ the_person.strip_outfit(position = "missionary")
+        $ the_person.strip_outfit(top_layer_first = False, position = "missionary")
         $ the_person.change_arousal(20)
 
         "[the_person.possessive_title] moans as you strip her down, enjoying your rough treatment of her."
@@ -910,7 +916,7 @@ label athlete_hookup_accept(the_person):
     if the_person.sluttiness > 40: #She asks if you want to use a condom
         the_person.char "Do you want to put on a condom first?"
         menu:
-            "Yes":
+            "Put on a condom":
                 mc.name "Yeah, I'd probably better. I may not be able to resist pulling out."
                 if the_person.sluttiness > 60:
                     the_person.char "I mean... its okay with me if you wanted to stick it in for a little bit without one on, you know, just to get started..."
@@ -919,7 +925,7 @@ label athlete_hookup_accept(the_person):
                     mc.name "Maybe next time!"
                 "You get a condom and put it on quickly."
                 $ mc.condom = True
-            "No":
+            "Fuck her raw":
                 $ mc.condom = False
                 mc.name "No way, I want to feel everything."
                 if the_person.sluttiness > 60:

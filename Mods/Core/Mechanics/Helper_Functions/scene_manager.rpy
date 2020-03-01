@@ -18,8 +18,8 @@ init -2 python:
         def __init__(self):
             self.actors = []
 
-        def add_actor(self, person, position = None, emotion = None, special_modifier = None, lighting = None, character_placement = None):
-            self.actors.append(Actor(person, position, emotion, special_modifier, lighting, character_placement))
+        def add_actor(self, person, position = None, emotion = None, special_modifier = None, lighting = None, character_placement = None, z_order = None):
+            self.actors.append(Actor(person, position, emotion, special_modifier, lighting, character_placement, z_order))
             self.draw_scene()
 
         # Removes all actors from the scene
@@ -28,7 +28,7 @@ init -2 python:
             for person in people_in_scene:
                 self.remove_actor(person)
 
-        def update_actor(self, person, position = None, emotion = None, special_modifier = None, lighting = None, character_placement = None):
+        def update_actor(self, person, position = None, emotion = None, special_modifier = None, lighting = None, character_placement = None, z_order = None):
             actor = find_in_list(lambda x: x.person is person, self.actors)
             if actor is None:
                 return
@@ -42,6 +42,8 @@ init -2 python:
                 actor.lighting = lighting
             if not character_placement is None:
                 actor.character_placement = character_placement
+            if not z_order is None:
+                actor.z_order = z_order
             self.draw_scene()
 
         def strip_actor_outfit_to_max_sluttiness(self, person, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, narrator_messages = None, temp_sluttiness_boost = 0):
@@ -75,9 +77,8 @@ init -2 python:
             actor_to_remove = find_in_list(lambda x: x.person is person, self.actors)
             if not actor_to_remove is None:
                 if reset_actor:
-                    # reset actor clothing and arousal
+                    # reset actor clothing
                     actor_to_remove.person.review_outfit(dialogue = False)
-                    actor_to_remove.person.reset_arousal()
                 self.actors.remove(actor_to_remove)
                 self.draw_scene()
 
@@ -90,7 +91,7 @@ init -2 python:
 
         def draw_scene(self):
             self.draw_info_ui()
-            for actor in self.actors:
+            for actor in sorted(self.actors, key = lambda x: x.z_order):
                 actor.draw_actor()
 
         # helper function for strip and animated removal functions
@@ -101,8 +102,9 @@ init -2 python:
                 if not actor is actor_missing:
                     actor.draw_actor()
 
+    # z_order determines the order in which the actors are drawn, low number first, high number later
     class Actor():
-        def __init__(self, person, position = None, emotion = None, special_modifier = None, lighting = None, character_placement = None):
+        def __init__(self, person, position = None, emotion = None, special_modifier = None, lighting = None, character_placement = None, z_order = None):
             self.person = person
             self.position = position
             self.emotion = emotion
@@ -110,6 +112,7 @@ init -2 python:
             self.lighting = lighting
             self.character_placement = character_placement
             self.sort_order = 2
+            self.z_order = 0
 
             if position is None:
                 self.position = person.idle_pose
@@ -122,6 +125,9 @@ init -2 python:
 
             if character_placement is None:
                 self.character_placement = character_right
+
+            if not z_order is None:
+                self.z_order = z_order
 
             if character_placement == character_center or character_placement == character_center_flipped:
                 self.sort_order = 1
@@ -137,48 +143,48 @@ init -2 python:
 ##########################################
 init -1:
     transform character_right_flipped():
-        yalign 1.0
-        yanchor 1.0
+        yalign 0.5
+        yanchor 0.5
         xalign 1.0
         xanchor 1.0
         xzoom -1
 
     transform character_center():
-        yalign 1.0
-        yanchor 1.0
+        yalign 0.5
+        yanchor 0.5
         xalign 0.75
         xanchor 1.0
 
     transform character_center_flipped():
-        yalign 1.0
-        yanchor 1.0
+        yalign 0.5
+        yanchor 0.5
         xalign 0.75
         xanchor 1.0
         xzoom -1
 
     transform character_left():
-        yalign 1.0
-        yanchor 1.0
+        yalign 0.5
+        yanchor 0.5
         xalign 0.5
         xanchor 1.0
 
     transform character_left_flipped():
-        yalign 1.0
-        yanchor 1.0
+        yalign 0.5
+        yanchor 0.5
         xalign 0.5
         xanchor 1.0
         xzoom -1
 
     transform character_69_bottom():
-        yalign 1.0
-        yanchor 1.0
+        yalign 0.62
+        yanchor 0.5
         xalign 1.0
         xanchor 0.95
         zoom 0.8
 
     transform character_69_on_top():
-        yalign 0.7
-        yanchor 1.0
+        yalign 0.38
+        yanchor 0.5
         xalign 1.0
         xanchor 1.02
         zoom 0.75

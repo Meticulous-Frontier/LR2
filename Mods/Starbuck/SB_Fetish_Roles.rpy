@@ -8,7 +8,7 @@ init -1 python:
         return
 
     def SB_fetish_vaginal_mom_kitchen_requirement(the_person):
-        if the_person == mom:
+        if the_person is mom:
             if mc.location == kitchen:
                 if mc.energy > 30:
                     return True
@@ -18,7 +18,7 @@ init -1 python:
         return
 
     def SB_fetish_anal_mom_kitchen_requirement(the_person):
-        if the_person == mom:
+        if the_person is mom:
             if  mc.location == kitchen:
                 if mc.energy > 30:
                     return True
@@ -28,9 +28,9 @@ init -1 python:
         return
 
     def SB_lily_anal_in_room_requirement(the_person): #She'll only strip if you're in her bedroom and alone.
-        if the_person != lily:
+        if not the_person is lily:
             return
-        if mc.location != lily_bedroom:
+        if not mc.location is lily_bedroom:
             return "Must be in Lily's bedroom"
         elif len(lily_bedroom.people) > 1:
             return "Must be alone with Lily"
@@ -49,7 +49,7 @@ init -1 python:
         return
 
     def SB_fetish_starbuck_anal_swing_demo_requirement(the_person):
-        if the_person == starbuck:
+        if the_person is starbuck:
             if mc.location == sex_store:
                 return True
             else:
@@ -132,13 +132,13 @@ init 1 python:
 
 #Vaginal Fetish Events#
 label SB_fetish_vaginal_visit_label(the_person):
-    if the_person == mom:
+    if the_person is mom:
         mc.name "Hey [the_person.title], it's been kind of a rough day, would you be willing to spend the night in my room tonight?"
         "[the_person.possessive_title] smiles at you before replying."
         the_person.char "Oh [the_person.mc_title], I love it that we are so close that you feel comfortable asking me that. That souds fine."
         "You coordinate with [the_person.possessive_title] on what time you'll be home tonight."
         the_person.char "I'll see you tonight then!"
-    elif the_person == lily:
+    elif the_person is lily:
         mc.name "Hey [the_person.title]. What are you up to tonight?"
         "[the_person.possessive_title] frowns at you before replying."
         the_person.char "Well, I was supposed to have a date tonight and I was hoping to get lucky, but he just called and cancelled on me!"
@@ -202,7 +202,7 @@ label SB_fetish_vaginal_mom_kitchen_label():
     else:                                              #Otherwise, strip her down.
         "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy"
 
-        $ the_person.strip_outfit(position = "standing_doggy", exclude_upper = True)
+        $ the_person.strip_outfit(top_layer_first = False, position = "standing_doggy", exclude_upper = True)
 
         "With her pussy finally exposed you waste no time. You quickly pull your cock out and line it up with her wet slit."
 
@@ -280,7 +280,7 @@ label SB_fetish_anal_mom_kitchen_label(the_person):
     else:                                              #Otherwise, strip her down.
         "You don't bother to reply, instead you begin stripping away anything between you and her supple ass."
 
-        $ the_person.strip_outfit(position = "standing_doggy", exclude_upper = True)
+        $ the_person.strip_outfit(top_layer_first = False, position = "standing_doggy", exclude_upper = True)
 
         "With her ass finally exposed you waste no time. You quickly pull your cock out and rub it between her cheeks."
     "[the_person.possessive_title] pulls some lube out of one of the kitchen drawers."

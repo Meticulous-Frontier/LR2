@@ -6,10 +6,14 @@ init python:
 
 
 transform threesome_test_1():
+    yalign 0.5
+    yanchor 0.5
     function set_pos_align
     zoom 1.0
 
 transform threesome_test_2():
+    yalign 0.5
+    yanchor 0.5
     function set_pos_align
     zoom 1.0
 
@@ -19,7 +23,7 @@ init -1 python:
     THREESOME_BASE_SLUT_REQ = 80  #A constant to hold the usual base sluttiness requirements for threesomes.
     class Threesome_Position(renpy.store.object):
         def __init__(self,name,slut_requirement,position_one_tag, position_two_tag,girl_one_final_description,girl_two_final_description,requires_location,requirements,
-        p1_transform, p2_transform, can_swap = False, verb = "fuck", verbing = None):
+        p1_transform, p2_transform, p1_z_order = 0, p2_z_order = 1, can_swap = False, verb = "fuck", verbing = None):
             self.name = name
             self.slut_requirement = slut_requirement #The required slut score of the girl. Obedience will help fill the gap if possible, at a happiness penalty. Value from 0 (almost always possible) to ~100
             self.position_one_tag = position_one_tag # The tag used to get the correct position image set
@@ -34,6 +38,8 @@ init -1 python:
             self.current_modifier = None #We will update this if the posisiion has a special modifier that shoudl be applied, like blowjob.
             self.p1_transform = p1_transform
             self.p2_transform = p2_transform
+            self.p1_z_order = p1_z_order
+            self.p2_z_order = p2_z_order
             self.can_swap = can_swap
 
             if verbing is None:
@@ -42,11 +48,11 @@ init -1 python:
         # requires the existence of a scene_manager with both actors
         def update_scene(self, the_person_one, the_person_two):
             if girl_swap_pos:
-                scene_manager.update_actor(the_person_two, position = self.position_one_tag, character_placement = self.p1_transform)
-                scene_manager.update_actor(the_person_one, position = self.position_two_tag, character_placement = self.p2_transform)
+                scene_manager.update_actor(the_person_two, position = self.position_one_tag, character_placement = self.p1_transform, z_order = self.p1_z_order)
+                scene_manager.update_actor(the_person_one, position = self.position_two_tag, character_placement = self.p2_transform, z_order = self.p2_z_order)
             else:
-                scene_manager.update_actor(the_person_one, position = self.position_one_tag, character_placement = self.p1_transform)
-                scene_manager.update_actor(the_person_two, position = self.position_two_tag, character_placement = self.p2_transform)
+                scene_manager.update_actor(the_person_one, position = self.position_one_tag, character_placement = self.p1_transform, z_order = self.p1_z_order)
+                scene_manager.update_actor(the_person_two, position = self.position_two_tag, character_placement = self.p2_transform, z_order = self.p2_z_order)
             scene_manager.draw_scene()
             return
 
@@ -62,10 +68,13 @@ init -1 python:
 
 
     class Threesome_MC_position(renpy.store.object):
-        def __init__(self,name,description,skill_tag_p1,skill_tag_p2,girl_one_arousal,girl_two_arousal,girl_one_source,girl_two_source,girl_one_energy,girl_two_energy,
-        guy_arousal,skill_tag_guy,guy_source,guy_energy,intro,scenes,outro,strip_description,strip_ask_description,orgasm_description,swap_description,requirement):
+        def __init__(self,name,skill_tag_p1,skill_tag_p2,girl_one_arousal,girl_two_arousal,girl_one_source,girl_two_source,girl_one_energy,girl_two_energy,
+            guy_arousal,skill_tag_guy,guy_source,guy_energy,intro,scenes,outro,strip_description,strip_ask_description,orgasm_description,swap_description,requirement,
+            description = None, action_description = None, default_action_person = None):
             self.name = name
             self.description = description #Describes the position the MC is in
+            self.action_description = action_description # Template for action {0} will be replaced with the action person number (one/two -> used for swap girls - description update)
+            self.default_action_person = default_action_person
             self.skill_tag_p1 = skill_tag_p1 #The skill that will provide a bonus to this for girl 1
             self.skill_tag_p2 = skill_tag_p2 #The skill that will provide a bonus to this for girl 2
             self.girl_one_arousal = girl_one_arousal # The base arousal the girl recieves from this position.
@@ -197,7 +206,13 @@ init -1 python:
 
 
 label threesome_test():
-    call join_threesome(mom, lily, "missionary") from threesome_test_call_1
+    $ scene_manager = Scene()
+    $ scene_manager.add_actor(mom)
+    $ scene_manager.add_actor(lily, character_placement = character_center_flipped)
+    $ scene_manager.strip_actor_outfit(mom)
+    $ scene_manager.strip_actor_outfit(lily)
+    call start_threesome(mom, lily, start_position = Threesome_sixty_nine) from threesome_test_call_1
+    $ scene_manager.clear_scene()
     return "Test Complete"
 
 label threesome_alignment():
@@ -632,6 +647,14 @@ label pick_threesome(the_person_one, the_person_two, girl_one_position = None, o
             if girl_one_choice == threeway.position_two_tag and girl_two_choice == threeway.position_one_tag:
                 position_choice = threeway
                 girl_swap_pos = True
+        for mc_pos in position_choice.mc_position:
+            if mc_pos.action_description:
+                if girl_swap_pos:
+                    mc_pos.description = mc_pos.action_description.replace("{0}", "one" if mc_pos.default_action_person == "two" else "two")
+                else:
+                    mc_pos.description = mc_pos.action_description.replace("{0}", "two" if mc_pos.default_action_person == "two" else "one")
+
+
     #TODO figure out if position requires an object, if so select the object#
     return position_choice
 
@@ -727,10 +750,8 @@ init python:
         return return_bool
 
     def willing_to_threesome(the_person_one, the_person_two):    #Use this function to check and see if two people are willing to engage in a threesome
-        person_one_slut_req = THREESOME_BASE_SLUT_REQ
-        person_two_slut_req = THREESOME_BASE_SLUT_REQ
-        if the_person_one.sluttiness < person_one_slut_req:
+        if the_person_one.sluttiness < THREESOME_BASE_SLUT_REQ:
             return False
-        if the_person_two.sluttiness < person_two_slut_req:
+        if the_person_two.sluttiness < THREESOME_BASE_SLUT_REQ:
             return False
         return True

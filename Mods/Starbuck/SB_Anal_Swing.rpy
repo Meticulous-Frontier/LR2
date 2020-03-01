@@ -34,19 +34,19 @@ label intro_SB_anal_swing(the_girl, the_location, the_object, the_round):
         the_girl.char "I don't know, are you sure this thing is safe?"
 
     if SB_check_fetish(the_girl, anal_fetish_role):
-        if the_girl == mom:
+        if the_girl is mom:
             "You work your cock up and down [the_girl.possessive_title]'s slit a few times, her wetness lubricating it."
             "You lean forward and whisper into her ear."
             mc.name "[the_girl.title]... your [the_girl.mc_title] is about to fuck your ass now, just the way you like."
             "Her body shudders from your dirty talk. She wiggles her ass back up against you."
             the_girl.char "Do it honey. [the_girl.title] is ready for you!"
-        elif the_girl == lily:
+        elif the_girl is lily:
             "You work your cock up and down [the_girl.possessive_title]'s slit a few times, her wetness lubricating it."
             "You lean forward and whisper into her ear."
             mc.name "Hey [the_girl.title], your [the_girl.mc_title] is about to fuck your ass now, just the way you like."
             "Her body shudders from your dirty talk. She wiggles her ass back up against you."
             the_girl.char "Do it! Stick it in me, you know I can take it!"
-        elif the_girl == starbuck:
+        elif the_girl is starbuck:
             "You work your cock up and down [the_girl.possessive_title]'s slit a few times, her wetness lubricating it."
             "You lean forward and whisper into her ear."
             mc.name "Baby... I'm going to fuck your ass now... just the way you like it!"
@@ -84,17 +84,17 @@ label scene_SB_anal_swing_1(the_girl, the_location, the_object, the_round):
 
     if SB_check_fetish(the_girl, anal_fetish_role):           #Anal fetish
         "After a particularly hard bounce, [the_girl.possessive_title] moans ecstatically."
-        if the_girl == mom:
+        if the_girl is mom:
             the_girl.char "That's it honey, fuck [the_girl.title] harder! Tie me up and hang me from a swing and pound [the_girl.title]'s ass any way you want! It feels so good!"
-        elif the_girl == lily:
+        elif the_girl is lily:
             the_girl.char "That's it [the_girl.mc_title]! Fuck me harder! I'm [the_girl.possessive_title], hanging from a swing just to please you!"
-        elif the_girl == starbuck:
+        elif the_girl is starbuck:
             the_girl.char "Yes! Don't let up! I think about you stringing me up like this everytime I see the swing in the store."
         else:
             the_girl.char "That's it, fuck me harder! Make me walk funny for a week!"
         "With your hands wrapped around the straps, you control the pace of your fucking."
         "[the_girl.possessive_title] clenches each time you pull back, and relaxes each time your push forward. The sensation is exquisite."
-        "You grab the swing and pull her into you hard, slmaming yourself into her."
+        "You grab the swing and pull her into you hard, slamming yourself into her."
     else:
         "Fucking her hard, [the_girl.possessive_title] moans. She clutches onto the swing, holding on while you have your way with her ass."
         the_girl.char "Oh god, you fuck me so good."
@@ -113,7 +113,7 @@ label scene_SB_anal_swing_2(the_girl, the_location, the_object, the_round):
     if the_girl.outfit.tits_available():
         "You reach around her body with both hands and grab her tits. You pinch and pull at her nipple roughly being careful to keep your cock deep inside her."
     else:
-        "You reach around her body with both hands and grab as her tits. The frabric covering them is maddening. You decide to strip her down."
+        "You reach around her body with both hands and grab as her tits. The fabric covering them is maddening. You decide to strip her down."
         mc.name "[the_girl.title]... I need to feel your skin!"
         while not the_girl.outfit.tits_available():    #If covered up, have her take her top off
             $ the_clothing = the_girl.outfit.get_upper_ordered()[-1]
@@ -174,7 +174,7 @@ label scene_SB_anal_swing_2(the_girl, the_location, the_object, the_round):
                 the_girl.char "[the_girl.mc_title]... use me... fuck me! Make me your little slut!"
                 "You give her what she wants. You grab her hips and start thrusting into her hard and fast."
                 $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 3 + 3)
-                "You give her the anal reeming she is begging for."
+                "You give her the anal reaming she is begging for."
             else:
                 "[the_girl.possessive_title] looks back at you and manages to smile through the intense sensation of having her ass fucked."
                 the_girl.char "You are stretching me out so much... Be careful back there, I'm not sure how much of this I can take!"
@@ -197,7 +197,7 @@ label outro_SB_anal_swing(the_girl, the_location, the_object, the_round):
         the_girl.char "That's it baby, cum for me! Show me how much you love my ass!"
 
     menu:
-        "Cum inside of her.":
+        "Cum inside of her":
             "[the_girl.possessive_title]'s ass is just too good. You decide to cum inside it."
             if mc.condom:
                 "You pull back on the swing straps and drive your cock deep inside of her as you cum. You hope the condom can handle your load."
@@ -229,7 +229,7 @@ label outro_SB_anal_swing(the_girl, the_location, the_object, the_round):
 
             "You wait until your orgasm has passed completely, then pull out. Her asshole gapes and you can see a hint of your cum start to dribble out, but most of it stays buried with her bowel"
 
-        "Cum on her ass.":
+        "Cum on her ass":
             if mc.condom:
                 "You pull out of [the_girl.possessive_title] at the last moment. You pull the condom off and blow your load all over her heart shaped ass cheeks."
             else:
@@ -248,7 +248,7 @@ label outro_SB_anal_swing(the_girl, the_location, the_object, the_round):
             else:
                 the_girl.char "Oh! Its so warm..."
             "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
-        "Cum on her tits.":
+        "Cum on her tits":
             mc.name "Fuck, get ready [the_girl.title], I wanna cum on your tits!"
             if mc.condom:
                 "You pull your cock out of [the_girl.possessive_title]'s ass with a satisfying pop. You spin the swing around quickly so she faces you, pulling your condom off at the same time."
@@ -305,13 +305,13 @@ label strip_ask_SB_anal_swing(the_girl, the_clothing, the_location, the_object, 
     the_girl.char "Sir, I'd like to take off my [the_clothing.name], would you mind?"
     "[the_girl.char] pants as you fuck her from behind."
     menu:
-        "Let her strip.":
+        "Let her strip":
             mc.name "Take it off for me."
             $ the_girl.draw_animated_removal(the_clothing, position = SB_anal_swing.position_tag)
             "[the_girl.possessive_title] struggles out of her [the_clothing.name] and throws it to the side."
             "She groans happily when you resume fucking her tight rear."
 
-        "Leave it on.":
+        "Leave it on":
             mc.name "No, I like how you look with it on."
             if the_girl.sluttiness < 80:
                 the_girl.char "Do you think I look sexy in it?"

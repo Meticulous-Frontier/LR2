@@ -30,13 +30,13 @@ label lazy_morning_crisis_action_label:
     the_person.char "[the_person.mc_title] I have a quick question about... OH!"
     $ the_person.draw_person()
 
-    if the_person == mom:
+    if the_person is mom:
         the_person.char "I'm sorry honey! I didn't realize you were sleeping in!"
-    elif the_person == lily:
+    elif the_person is lily:
         the_person.char "What? You're still sleeping? You know the morning is almost over right?"
-    elif the_person == aunt:
+    elif the_person is aunt:
         the_person.char "I'm sorry, I didn't realize you weren't up yet!"
-    elif the_person == cousin:        #Wow, congrats on getting her so slutty while shes living with you!
+    elif the_person is cousin:        #Wow, congrats on getting her so slutty while shes living with you!
         the_person.char "Wow, I can't believe you're still sleeping. Up late beating off to crazy porn or something, ya perv?."
     else:                           #Someone else someday? A live in girlfriend maybe?
         the_person.char "I'm sorry [the_person.mc_title], I forgot its the weekend!"

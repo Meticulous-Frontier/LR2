@@ -81,7 +81,7 @@ label outro_stealth_doggy(the_girl, the_location, the_object, the_round):
                 if the_girl.get_opinion_score("creampies") > 0:         #She likes creampies...
                     the_girl.char "Wait... that's... you took the condom off, didn't you? Oh fuck that's why it felt so good!"
                     $ the_girl.discover_opinion("creampies")
-                    the_girl.char "Oh god that's so hot. You could knock me up you know? Next time atleast warn me, so I can enjoy it too!"
+                    the_girl.char "Oh god that's so hot. You could knock me up you know? Next time at least warn me, so I can enjoy it too!"
                     $ the_girl.change_happiness(2)
                     $ the_girl.change_obedience(3)
                 elif the_girl.sluttiness > 80:                          #She is slutty enough she doesn't mind the cream filling
@@ -145,25 +145,20 @@ label transition_stealth_doggy_anal_doggy(the_girl, the_location, the_object, th
 #     #transition from anal to normal doggy style.
     "You pull out of [the_girl.title]'s asshole, leaving it gaping and her sighing in relief."
     "You shift your cock downwards and rub the tip of it along the slit of her vagina."
-    $ wants_condom = True
-    if the_girl.effective_sluttiness() < the_girl.get_no_condom_threshold(): #She wants a condom
+
+    if the_girl.effective_sluttiness() < the_girl.get_no_condom_threshold(): #She doesn't care.
         the_girl.char "Mmm, fuck me [the_girl.mc_title]. Use all of my holes for your pleasure!"
-        $ wants_condom = False
-    else: #She doesn't care.
+    elif not mc.condom: #She wants a condom
         the_girl.char "Wait, wait... I can't risk getting pregnant, I need you to put on a condom."
-        $ wants_condom = True
 
-    menu:
-        "Put on a condom.":
-            "You pull your dick back and find a condom in your wallet. It takes you a moment to spread it over your cock, then you line yourself up again."
+        menu:
+            "Put on a condom.":
+                "You pull your dick back and find a condom in your wallet. It takes you a moment to spread it over your cock, then you line yourself up again."
+                $ mc.condom = True
 
-        "Ram it home!":
-            if wants_condom:
+            "Ram it home!":
                 mc.name "Don't worry, I'll pull out."
                 $ the_girl.change_happiness(-5)
-
-            else:
-                pass
 
     "You pull on her hips and thrust yourself inside her tight, wet pussy."
     return

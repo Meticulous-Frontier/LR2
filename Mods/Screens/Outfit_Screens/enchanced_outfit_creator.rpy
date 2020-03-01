@@ -112,6 +112,11 @@ init 10 python:
         cs.scope["demo_outfit"] = outfit
         switch_outfit_category(category)
 
+    def get_outfit_copy_with_name(outfit):
+        new_outfit = outfit.get_copy()
+        new_outfit.build_outfit_name()
+        return new_outfit
+
     def switch_outfit_category(category):
 
         cs = renpy.current_screen()
@@ -1062,18 +1067,18 @@ init 2:
                                                 else:
                                                     if outfit_type == "full":
                                                         action [
-                                                            Function(mannequin.wardrobe.add_outfit, item_outfit.get_copy()),
+                                                            Function(mannequin.wardrobe.add_outfit, get_outfit_copy_with_name(item_outfit)),
                                                             Function(renpy.notify, "Outfit added to " + mannequin.name + " wardrobe")
                                                         ]
                                                     elif outfit_type == "over":
                                                         action [
-                                                            Function(mannequin.wardrobe.add_overwear_set, item_outfit.get_copy()),
+                                                            Function(mannequin.wardrobe.add_overwear_set, get_outfit_copy_with_name(item_outfit)),
                                                             Function(renpy.notify, "Outfit added to " + mannequin.name + " wardrobe")
                                                         ]
 
                                                     elif outfit_type == "under":
                                                         action [
-                                                            Function(mannequin.wardrobe.add_underwear_set, item_outfit.get_copy()),
+                                                            Function(mannequin.wardrobe.add_underwear_set, get_outfit_copy_with_name(item_outfit)),
                                                             Function(renpy.notify, "Outfit added to " + mannequin.name + " wardrobe")
                                                         ]
 

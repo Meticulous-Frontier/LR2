@@ -20,7 +20,7 @@ init 2 python:
         menu_tooltip = "An employee wants to discuss some business with you.", category = "Business", is_crisis = True, crisis_weight = business_meeting_weight)
 
 label business_meeting_action_label:
-    $ the_person = get_random_from_list(mc.business.get_employee_list())
+    $ the_person = get_random_employees(1)
     $ the_place = mc.business.get_employee_workstation(the_person)
     $ day_part = time_of_day_string()
 
@@ -68,7 +68,7 @@ label business_meeting_action_label:
     $ the_person.reset_arousal()
     $ mc.location.show_background()
     $ renpy.scene("Active")
-    return
+    return "Advance Time"
 
 label business_meeting_introduction(person):
     person.char "Hello [person.mc_title], thank you for meeting me on such short notice."

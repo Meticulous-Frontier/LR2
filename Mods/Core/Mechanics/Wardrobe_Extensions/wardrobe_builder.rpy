@@ -9,7 +9,7 @@ init 5 python:
     # make business vest layer 2
     shirts_list.remove(business_vest)
     business_vest = Clothing("Business Vest", 2, True, True, "Tight_Vest", True, False, 2, opacity_adjustment = 1.3)
-    shirts_list.append(business_vest)    
+    shirts_list.append(business_vest)
 
     # generate a more useable default color palette
     if len(persistent.colour_palette) == 10:
@@ -38,9 +38,35 @@ init 5 python:
 
         return
 
+    def add_make_up_to_outfit(person, outfit, make_up_score_boost = 0):
+        # determine make-up colors based on skin-tone
+        if person.body_images == black_skin:
+            eye_shadow_colours = [[.569, .349, .263, .9], [0, .2, .4, .9], [.47, .318, .663, .9]]
+            lipstick_colours = [[.569, .318, .212, .9], [.451, .416, .526, .9], [.492, .419, .384, .9]]
+            blush_colours = [[.435, .306, .216, .8], [.588, .251, 0, .8], [.451, .412, .576, .8]]
+        else:
+            eye_shadow_colours = [[.1, .1, .12, .9], [.4, .5, .9, .9], [.644, .418, .273, .9]]
+            lipstick_colours = [[.745, .117, .235, .9], [1, .5, .8, .9], [ .8, .26, .04, .9]]
+            blush_colours = [[.34, .34, .32, .8], [1, .898, .706, .8], [.867, .627, .867, .8]]
+
+        make_up_score = person.get_opinion_score("makeup") + make_up_score_boost
+        if make_up_score > 0 or (make_up_score == 0 and renpy.random.randint(0, 4) == 0):
+            make_up_score += renpy.random.randint(1, 2)
+            if make_up_score > 0:
+                outfit.add_accessory(lipstick.get_copy(), get_random_from_list(lipstick_colours))
+            if make_up_score > 1:
+                outfit.add_accessory(light_eye_shadow.get_copy(), get_random_from_list(eye_shadow_colours))
+            if make_up_score > 2:
+                outfit.add_accessory(blush.get_copy(), get_random_from_list(blush_colours))
+            if make_up_score > 3:
+                outfit.add_accessory(heavy_eye_shadow.get_copy(), get_random_from_list(eye_shadow_colours))
+        return
+
     real_dress_list = [x for x in dress_list if x not in [bath_robe, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, apron]]
 
     class WardrobeBuilder():
+        default_person = None
+
         preferences = {}
         preferences["skimpy outfits"] = {}
         preferences["skimpy outfits"]["upper_body"] = [two_part_dress, thin_dress, leotard, lace_sweater, belted_top, lace_crop_top, tanktop, tube_top, business_vest]
@@ -123,13 +149,17 @@ init 5 python:
         earings_only_list = [chandelier_earings, gold_earings, modern_glasses]
         neckwear_without_collars = [x for x in neckwear_list if x.proper_name not in ["Collar_Breed", "Collar_Cum_Slut", "Collar_Fuck_Doll"]]
 
+
         def __init__(self, person):
             if person and isinstance(person, Person):
                 self.person = person
             else:
-                self.person = create_random_person("Ema","Hesire", 23, "thin_body", "B", 0.91)
-                self.person.opinions.clear() # reset opinions so every item has an equal chance
-                self.person.sexy_opinions.clear()
+                if self.default_person is None:
+                    self.default_person = create_random_person(name ="Ema", last_name = "Hesire", age = 23, body_type = "thin_body", tits = "B")
+                    self.default_person.opinions.clear() # reset opinions so every item has an equal chance
+                    self.default_person.sexy_opinions.clear()
+
+                self.person = self.default_person
 
             skirts_score = self.person.get_opinion_score("skirts")
             pants_score = self.person.get_opinion_score("pants")
@@ -151,11 +181,11 @@ init 5 python:
             for item in underwear.upper_body:
                 if overwear.can_add_upper(item):
                     overwear.add_upper(item)
-            
+
             for item in underwear.lower_body:
                 if overwear.can_add_lower(item):
                     overwear.add_lower(item)
-            
+
             for item in underwear.feet:
                 if overwear.can_add_feet(item):
                     overwear.add_feet(item)
@@ -232,7 +262,7 @@ init 5 python:
             outfit = Outfit("Underwear")
 
             color_upper, color_lower, color_feet = self.get_main_color_scheme()
-            
+
             # find upper body item
             item = self.get_item_from_list("upper_body", self.build_filter_list(bra_list + [lingerie_one_piece, lacy_one_piece_underwear, bodysuit_underwear], points), points, ["showing her tits", "not wearing underwear"])
             if item:
@@ -246,7 +276,7 @@ init 5 python:
                     item = self.get_item_from_list("lower_body", self.build_filter_list(panties_list, points), points, ["showing her ass", "not wearing underwear"])
                 if item:
                     outfit.add_lower(item.get_copy(), color_lower)
-            
+
             if renpy.random.randint(0, 3 if points >= 5 else 1) == 0:
                 if points >= 5:
                     item = self.get_item_from_list("feet", self.build_filter_list([x for x in socks_list if x not in [short_socks, medium_socks]], points))
@@ -254,18 +284,11 @@ init 5 python:
                     item = self.get_item_from_list("feet", self.build_filter_list(socks_list, points))
                 if item:
                     outfit.add_feet(item.get_copy(), color_feet)
-            
-            make_up_score = self.person.get_opinion_score("makeup")
-            if make_up_score > 0 or (make_up_score == 0 and renpy.random.randint(0, 4) == 0):
-                make_up_score += renpy.random.randint(1, 2)
-                if make_up_score > 0:
-                    outfit.add_accessory(lipstick.get_copy(), get_random_from_list([[.5, .18, .18, .95], [.75, .05, .05, .95], [.9, .45, .6, .95]]))
-                if make_up_score > 1:
-                    outfit.add_accessory(blush.get_copy(), [.9, .45, .6, .95])
-                if make_up_score > 2:
-                    outfit.add_accessory(light_eye_shadow.get_copy(), get_random_from_list([[.15, .15, .15, .95], [.5, .18, .18, .95]]))
-                if make_up_score > 3:
-                    outfit.add_accessory(heavy_eye_shadow.get_copy(), get_random_from_list([[.15, .15, .15, .95], [.1, .15, .55, .9]]))
+
+            # random chance of adding outfit custom makeup (base on pref for make-up)
+            if self.person.get_opinion_score("makeup") > -2 and renpy.random.randint(0, 4 - self.person.get_opinion_score("makeup")) == 0:
+                # add makeup to outfit (overrides makeup in base_outfit)
+                add_make_up_to_outfit(self.person, outfit)
 
             outfit.build_outfit_name()
 
@@ -279,7 +302,7 @@ init 5 python:
                 points += 1
 
             return list(filter(lambda x: x.slut_value <= points, item_list))
-        
+
         def add_accessory_from_list(self, outfit, filtered_list, chance, item_color = [.8, .1, .1, .95]):
             if renpy.random.randint(0, chance) == 0:
                 item = get_random_from_list(filtered_list)
@@ -290,7 +313,7 @@ init 5 python:
         def get_main_color_scheme(self):
             primary_color = self.get_color()
             alternate_color = self.get_color()
-            
+
             col_choice = renpy.random.randint(0, 50)
             if col_choice < 10:
                 color_upper = primary_color
@@ -316,19 +339,20 @@ init 5 python:
                         item_list = [x for x in weighted_list if x[0] not in self.preferences[pref][item_group]]
                         if item_list: # check if we have any items left, if not use original weighted list
                             weighted_list = item_list
-            
+
             if points > 4:  # we want high sluttiness so add chance for not wearing an item based on opinion
                 for opinion in empty_item_opinions:
                     score = self.person.get_opinion_score(opinion)
                     if score > 0:
                         weighted_list.append([None, score * (20 + points)])
 
-            renpy.random.shuffle(weighted_list)
+            # renpy.random.shuffle(weighted_list)
 
             item = get_random_from_weighted_list(weighted_list)
 
             # force pattern for certain items, others random 50/50
             if item and hasattr(item, "supported_patterns") and item.supported_patterns and (renpy.random.randint(0, 1) == 1 or item in [apron, breed_collar, cum_slut_collar, fuck_doll_collar]):
+                item = item.get_copy() # get copy before applying pattern
                 key_value = get_random_from_list(list(item.supported_patterns.keys()))
                 item.pattern = item.supported_patterns[key_value]
                 item.colour_pattern = self.get_color()
@@ -344,7 +368,7 @@ init 5 python:
                 for name in self.preferences[pref]:
                     if name == item_group:
                         for item in self.preferences[pref][name]:
-                            if item in filtered_list:                      
+                            if item in filtered_list:
                                 [x for x in item_list if item in x][0][1] += (score + 2) * 10
 
             return [x for x in item_list if x[1] > 0]
@@ -357,5 +381,5 @@ init 5 python:
                     for col in self.color_prefs[cp]:
                         color_list.append([self.color_prefs[cp][col], (score + 2) * 10])
 
-            renpy.random.shuffle(color_list)
+            # renpy.random.shuffle(color_list)
             return get_random_from_weighted_list([x for x in color_list if x[1] > 0])

@@ -1,23 +1,24 @@
 transform Threesome_doggy_deluxe_girl_one_transform():
+    yalign 0.47
+    yanchor 0.5
     xalign 1.0
-    yalign 1.0
-    xpos 1.0
-    ypos 0.92
+    xanchor 1.0
     zoom 0.65
 
 
 transform Threesome_doggy_deluxe_girl_two_transform():
+    yalign 0.51
+    yanchor 0.5
     xalign 1.0
-    yalign 1.0
-    xpos 1.0
-    ypos 1.0
+    xanchor 1.0
     zoom 0.8
 
 
 init:
     python:
         Threesome_doggy_deluxe_fuck_girl_two = Threesome_MC_position(name = "fuck_girl_2",
-            description = "Fuck [the_person_two.title]",
+            action_description = "Fuck [the_person_{0}.title]",
+            default_action_person = "two",
             skill_tag_p1 = "Oral",
             skill_tag_p2 = "Vaginal",
             girl_one_arousal = 18,
@@ -40,7 +41,8 @@ init:
             requirement = requirement_hard_both_vagina_available)
 
         Threesome_doggy_deluxe_anal_girl_two = Threesome_MC_position(name = "anal_girl_2",
-            description = "Fuck [the_person_two.title]'s ass",
+            action_description = "Fuck [the_person_{0}.title]'s ass",
+            default_action_person = "two",
             skill_tag_p1 = "Oral",
             skill_tag_p2 = "Anal",
             girl_one_arousal = 18,
@@ -87,7 +89,8 @@ init:
 
 
         Threesome_doggy_deluxe_dp_girl_two = Threesome_MC_position(name = "DP_girl_2",
-            description = "Fuck [the_person_two.title]'s ass and pussy using strapon",
+            action_description = "Fuck [the_person_{two}.title]'s ass and pussy using strapon",
+            default_action_person = "two",
             skill_tag_p1 = "Oral",
             skill_tag_p2 = "Anal",
             girl_one_arousal = 18,
@@ -121,6 +124,8 @@ init:
             verb = "fuck",
             p1_transform = Threesome_doggy_deluxe_girl_one_transform,
             p2_transform = Threesome_doggy_deluxe_girl_two_transform,
+            p1_z_order = 0,
+            p2_z_order = 1,
             can_swap = True,)
 
         Threesome_doggy_deluxe.mc_position = [Threesome_doggy_deluxe_fuck_girl_two,Threesome_doggy_deluxe_anal_girl_two, Threesome_doggy_deluxe_watch_girls, Threesome_doggy_deluxe_dp_girl_two]
@@ -159,7 +164,7 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_1(the_girl_1, the_girl_2, the_l
                 the_girl_1.char "It feels great... keep going!"
             if the_girl_2.get_opinion_score("being submissive") > 0 or the_girl_2.get_opinion_score("threesomes") > 0:
                 "[the_girl_2.title] reaches back with one hand and spreads her cheeks and pushes back against you. She moans when you push deep into her."
-                if the_girl_2 == mom and the_girl_1 == lily: #Special dialogue
+                if the_girl_2 is mom and the_girl_1 is lily: #Special dialogue
                     mc.name "Mmm, you do like it, don't you? Your son and daughter, using you for their own pleasure. A slutty mommy's biggest dream!"
                 else:
                     mc.name "Mmm, you do like it don't you. A guy and a girl at the same time, using you for their pleasure. Every slut's biggest dream!"

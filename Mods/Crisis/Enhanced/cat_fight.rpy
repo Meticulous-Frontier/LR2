@@ -295,8 +295,8 @@ label cat_fight_crisis_enhanced_label():
                 $ scene_manager.update_actor(person_two, emotion="sad")
                 person_two.char "Understood sir, there won't be any more problems."
                 mc.name "Good to hear. Now get back to work."
-                $ scene_manager.update_actor(person_one, position = "walking_away")
-                $ scene_manager.update_actor(person_two, position = "walking_away")
+                $ scene_manager.update_actor(person_one, position = "walking_away", character_placement = character_right)
+                $ scene_manager.update_actor(person_two, position = "walking_away", character_placement = character_center_flipped)
 
             $ town_relationships.improve_relationship(person_one, person_two)
 

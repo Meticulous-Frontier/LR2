@@ -511,7 +511,7 @@ label casual_hotwife_dancing_sex_label(the_person):
         else:
             "Piece by piece, you take [the_person.title]'s clothes off."
 
-            $ the_person.strip_outfit(position = "against_wall")
+            $ the_person.strip_outfit(top_layer_first = False, position = "against_wall")
             $ the_person.change_arousal(20)
 
             "Once finished, You stop for a second and admire [the_person.title], her body on display in front of you."
@@ -532,23 +532,25 @@ label casual_hotwife_dancing_sex_label(the_person):
         "You set the phone down and begin to fuck her."
         $ mc.condom = False
         call fuck_person(the_person, start_position = SB_doggy_standing, start_object = SB_make_counter(), skip_intro = True) from _call_sex_description_CSH020
-        #TODO description for all possible cum locations
-        if the_person.outfit.has_mouth_cum():
-            "[the_person.possessive_title] looks up at you. She couldn't quiet swallow all your cum, some of it is slowly dripping down the sides of her mouth."
-            "You grab her phone and snap a couple pictures of her face with your traces of cum on it."
-        elif the_person.outfit.has_face_cum():
-            "[the_person.possessive_title] looks up at you. Her face is plastered with your sticky seed."
-            "You grab her phone and snap a couple pictures of her face with your cum covering it."
-        elif the_person.outfit.has_tits_cum():
-            "[the_person.possessive_title] looks up at you. Her tits are plastered with your sticky seed."
-            "You grab her phone and snap a couple pictures of her tits with your cum covering it."
-        elif the_person.outfit.has_ass_cum():
-            "[the_person.possessive_title] looks back at you. Her ass is plastered with your sticky seed."
-            "You grab her phone and snap a couple pictures of her ass with your cum covering it."
-        else:       #We assume we finished inside her#
-            "[the_person.possessive_title]'s pussy is dripping cum from your creampie."
-            "You grab her phone and snap a couple pictures of her well used pussy with your cum dripping out of it."
-        if the_person.arousal > 110:
+        $ the_report = _return
+        if the_report.get("guy orgasms", 0) > 0:
+            #TODO description for all possible cum locations
+            if the_person.outfit.has_mouth_cum():
+                "[the_person.possessive_title] looks up at you. She couldn't quiet swallow all your cum, some of it is slowly dripping down the sides of her mouth."
+                "You grab her phone and snap a couple pictures of her face with your traces of cum on it."
+            elif the_person.outfit.has_face_cum():
+                "[the_person.possessive_title] looks up at you. Her face is plastered with your sticky seed."
+                "You grab her phone and snap a couple pictures of her face with your cum covering it."
+            elif the_person.outfit.has_tits_cum():
+                "[the_person.possessive_title] looks up at you. Her tits are plastered with your sticky seed."
+                "You grab her phone and snap a couple pictures of her tits with your cum covering it."
+            elif the_person.outfit.has_ass_cum():
+                "[the_person.possessive_title] looks back at you. Her ass is plastered with your sticky seed."
+                "You grab her phone and snap a couple pictures of her ass with your cum covering it."
+            else:       #We assume we finished inside her#
+                "[the_person.possessive_title]'s pussy is dripping cum from your creampie."
+                "You grab her phone and snap a couple pictures of her well used pussy with your cum dripping out of it."
+        if the_report.get("girl orgasms", 0) > 0:
             the_person.char "Oh my god... that was amazing. That felt so good."
         $ the_person.draw_person("stand3")
         the_person.char "Wow, I never knew cheating could feel so good. God, I can't wait until my husband reclaims me later... oh fuck."
@@ -1070,7 +1072,7 @@ label hotwife_hookup_accept(the_person):
     if the_person.sluttiness > 40: #She asks if you want to use a condom
         the_person.char "Do you want to put on a condom first?"
         menu:
-            "Yes":
+            "Put on a condom":
                 mc.name "Yeah, I'd probably better. I may not be able to resist pulling out."
                 if the_person.sluttiness > 60:
                     the_person.char "I mean... its okay with me if you wanted to stick it in for a little bit without one on, you know, just to get started..."
@@ -1079,7 +1081,7 @@ label hotwife_hookup_accept(the_person):
                     mc.name "Maybe next time!"
                 "You get a condom and put it on quickly."
                 $ mc.condom = True
-            "No":
+            "Fuck her raw":
                 $ mc.condom = False
                 mc.name "No way, I want to feel everything."
                 if the_person.sluttiness > 60:
