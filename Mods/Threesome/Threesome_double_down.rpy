@@ -1,3 +1,5 @@
+#Girl one cowgirl while girl two sits on MC's face
+
 transform Threesome_double_down_girl_one_transform():
     yalign 0.40
     yanchor 0.5
@@ -136,7 +138,7 @@ label scene_threesome_double_down_fuck_girl_one_2(the_girl_1, the_girl_2, the_lo
             "The girls continue to make out as they ride you. You notice [the_girl_1.title] reach back and spank [the_girl_2.possessive_title]'s ass."
             the_girl_2.char "Mmmm..."
             "[the_girl_2.title] begins to twist and pull at [the_girl_1.possessive_title]'s nipples. You can feel her pussy clamp down on you as she stimulates her breasts."
-            
+
         "Finger her ass":
             "You lick your index finger quickly, getting it lubed up, then press it against [the_girl_2.title]'s ass. You slowly push it inside of her."
             if the_girl_2.get_opinion_score("anal sex") < 0:

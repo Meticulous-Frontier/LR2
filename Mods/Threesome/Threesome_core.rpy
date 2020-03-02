@@ -307,6 +307,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
     if round_choice == "Leave":
         "Really? You changed your mind? You leave the poor girls after you got them all ready for some action."
     else:
+        $ mc.listener_system.fire_event("threesome", the_person_one = the_person_one, the_person_two = the_person_two)
         python:
             for options in position_choice.mc_position:
                 if round_choice == options.name:

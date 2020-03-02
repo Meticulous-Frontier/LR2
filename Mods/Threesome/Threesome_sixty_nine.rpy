@@ -1,3 +1,5 @@
+#Girls 69, can get oral from girl 2 or vaginal with girl 1 who is in missionary
+
 init:
     python:
         Threesome_sixty_nine_fuck_girl_one = Threesome_MC_position(name = "fuck_girl_1",
