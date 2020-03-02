@@ -15,7 +15,7 @@ init 1:
     python:
         SB_Oral_Laying.link_positions_two_way(missionary, "transition_SB_Oral_Laying_missionary", "transition_missionary_SB_Oral_Laying")
 
-label intro_SB_Oral_Laying(the_girl, the_location, the_object, the_round):
+label intro_SB_Oral_Laying(the_girl, the_location, the_object):
     "You run your hands along [the_girl.possessive_title]'s hips. You grab her ass and pull her close to you."
     mc.name "I want you to lie down for me. I want to taste you."
     "She nods and lies down on the [the_object.name]. You get on top off her for moment, grinding into her while you make out for a few seconds."
@@ -31,7 +31,7 @@ label intro_SB_Oral_Laying(the_girl, the_location, the_object, the_round):
     "A moan escapes her lips as you run your tongue up [the_girl.possessive_title]'s slit."
     return
 
-label scene_SB_Oral_Laying_1(the_girl, the_location, the_object, the_round):
+label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
     # CHOICE CONCEPT: Finger Fuck // Tongue Fuck her
     # Intro concept. Short difference depending on if she's wet or not.
     if the_girl.arousal > 70:
@@ -111,7 +111,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object, the_round):
         "While you aren't being stimulated, [the_girl.possessive_title]'s gasps and breathing are starting to turn you on."
     return
 
-label scene_SB_Oral_Laying_2(the_girl, the_location, the_object, the_round):
+label scene_SB_Oral_Laying_2(the_girl, the_location, the_object):
     # CHOICE CONCEPT: Submit // Control her
     "[the_girl.possessive_title]'s hips are beginng to rock side to side, grinding against you as you lick her."
     "You feel her legs cross behind your back while she runs her hands through your hair. She starts to grind against you more aggresively."
@@ -156,7 +156,7 @@ label scene_SB_Oral_Laying_2(the_girl, the_location, the_object, the_round):
         "While you aren't being stimulated, [the_girl.possessive_title]'s gasps and breathing are starting to turn you on."
     return
 
-label outro_SB_Oral_Laying(the_girl, the_location, the_object, the_round):
+label outro_SB_Oral_Laying(the_girl, the_location, the_object):
     if the_girl.arousal > 100:
         "Watching her cum has gotten you more excited than you thought you would be. You're grinding your face into her pussy, rubbing your erection through your pants."
     elif the_girl.arousal > 40:
@@ -168,19 +168,19 @@ label outro_SB_Oral_Laying(the_girl, the_location, the_object, the_round):
     return
 
 
-label transition_default_SB_Oral_Laying(the_girl, the_location, the_object, the_round):
+label transition_default_SB_Oral_Laying(the_girl, the_location, the_object):
     "You put [the_girl.possessive_title] on her back and lie down on top of her, lining your hard cock up with her tight cunt."
     "After running the tip of your penis along her slit a few times you press forward, sliding inside of her. She gasps softly and closes her eyes."
     return
 
-label strip_SB_Oral_Laying(the_girl, the_clothing, the_location, the_object, the_round):
+label strip_SB_Oral_Laying(the_girl, the_clothing, the_location, the_object):
     $ the_girl.call_dialogue("sex_strip")
     $ the_girl.draw_animated_removal(the_clothing, position = SB_Oral_Laying.position_tag)
     "[the_girl.possessive_title] struggles out of her [the_clothing.name] and throws it to the side."
     "She sighs happily as you lap at her cunt with your tongue."
     return
 
-label strip_ask_SB_Oral_Laying(the_girl, the_clothing, the_location, the_object, the_round):
+label strip_ask_SB_Oral_Laying(the_girl, the_clothing, the_location, the_object):
     the_girl.char "Sir, I'd like to take off my [the_clothing.name], would you mind?"
     "[the_girl.possessive_title] pants as you lick her."
     menu:
@@ -203,7 +203,7 @@ label strip_ask_SB_Oral_Laying(the_girl, the_clothing, the_location, the_object,
                 "She grinds her hips against your face and moans ecstatically."
     return
 
-label orgasm_SB_Oral_Laying(the_girl, the_location, the_object, the_round):
+label orgasm_SB_Oral_Laying(the_girl, the_location, the_object):
     "[the_girl.possessive_title] is bucking her hips wildy as you lick her. Suddenly, she grabs the back of your head and gasps."
     $ the_girl.call_dialogue("climax_responses_oral")
     "Her pussy is drooling wet as she climaxes. She paws at the [the_object.name], trying to find something to hold onto."
@@ -211,7 +211,7 @@ label orgasm_SB_Oral_Laying(the_girl, the_location, the_object, the_round):
     the_girl.char "Oh fuck [the_girl.mc_title], your tongue feels so good."
     return
 
-label transition_SB_Oral_Laying_missionary(the_girl, the_location, the_object, the_round):
+label transition_SB_Oral_Laying_missionary(the_girl, the_location, the_object):
     "You push yourself up on your hands, satisfied with the licking you gave her pussy. You slowly start to crawl up [the_girl.possessive_title]'s body."
     "[the_girl.possessive_title] wraps her arms around you and holds you close as you line your cock up with her pussy. She sighs happily into your ear as you slide into her."
     if the_girl.arousal > 100:
@@ -221,7 +221,7 @@ label transition_SB_Oral_Laying_missionary(the_girl, the_location, the_object, t
 
     return
 
-label transition_missionary_SB_Oral_Laying(the_girl, the_location, the_object, the_round):
+label transition_missionary_SB_Oral_Laying(the_girl, the_location, the_object):
     "You pull out of her pussy. She begins to protest."
     mc.name "I want to taste you."
     "[the_girl.possessive_title] nods"

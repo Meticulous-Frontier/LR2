@@ -9,6 +9,8 @@ init python:
         outro = "outro_SB_doggy_anal_dildo_dp",
         transition_default = "transition_default_SB_doggy_anal_dildo_dp",
         strip_description = "strip_SB_doggy_anal_dildo_dp", strip_ask_description = "strip_ask_SB_doggy_anal_dildo_dp",
+        taboo_break_description = "taboo_break_missionary",
+        associated_taboo = "vaginal_sex",
         orgasm_description = "orgasm_SB_doggy_anal_dildo_dp",
         verb = "ass fuck",
         opinion_tags = ["doggy style sex", "anal sex", "vaginal sex"], record_class = "Anal Sex")
@@ -19,7 +21,7 @@ init python:
 #    python:
 #        SB_doggy_anal_dildo_dp.link_positions_two_way(doggy, "transition_SB_doggy_anal_dildo_dp_doggy", "transition_doggy_SB_doggy_anal_dildo_dp")
 
-label intro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object, the_round):
+label intro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
     mc.name "[the_girl.title], I want you to get on your hands and knees for me. I want to fuck your ass and your pussy."
     "You secure the strap on dildo to your cock. A quick lube application later, you get behind [the_girl.possessive_title]"
     if the_girl.effective_sluttiness() > 110:
@@ -41,7 +43,7 @@ label intro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object, the_round
         the_girl.char "Holy fuck! Go slow [the_girl.mc_title]. This is really intense..."
     return
 
-label scene_SB_doggy_anal_dildo_dp_1(the_girl, the_location, the_object, the_round):
+label scene_SB_doggy_anal_dildo_dp_1(the_girl, the_location, the_object):
     "You give [the_girl.possessive_title]'s ass a good hard spank. She lets out a loud yelp"
     $ the_girl.call_dialogue("sex_responses_anal")
     if the_girl.sex_skills["Anal"] < 2: #Inexperienced
@@ -134,7 +136,7 @@ label scene_SB_doggy_anal_dildo_dp_1(the_girl, the_location, the_object, the_rou
     return
 
 
-label scene_SB_doggy_anal_dildo_dp_2(the_girl, the_location, the_object, the_round):
+label scene_SB_doggy_anal_dildo_dp_2(the_girl, the_location, the_object):
     "[the_girl.possessive_title] lowers her shoulders against the [the_object.name] and groans as you fuck her from behind."
     the_girl.char "Ah... I feel so full!"
     "The dildo is clearly making the experience much more intense for her."
@@ -190,7 +192,7 @@ label scene_SB_doggy_anal_dildo_dp_2(the_girl, the_location, the_object, the_rou
     return
 
 
-label scene_SB_doggy_anal_dildo_dp_3(the_girl, the_location, the_object, the_round):
+label scene_SB_doggy_anal_dildo_dp_3(the_girl, the_location, the_object):
     "third scene here"
 
 
@@ -199,7 +201,7 @@ label scene_SB_doggy_anal_dildo_dp_3(the_girl, the_location, the_object, the_rou
 
     return
 
-label outro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object, the_round):
+label outro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
     "[the_girl.possessive_title]'s tight ass draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
     $the_girl.call_dialogue("sex_responses_anal")
     mc.name "Ah, I'm going to cum!"
@@ -285,14 +287,14 @@ label outro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object, the_round
 
     return
 
-label transition_SB_doggy_anal_dildo_dp_doggy(the_girl, the_location, the_object, the_round):
+label transition_SB_doggy_anal_dildo_dp_doggy(the_girl, the_location, the_object):
     "You decide to give [the_girl.possessive_title] a break. She murmurs a bit in disappointment when you slowly pull your dick out of her ass completely."
     "You bounce your hard shaft on her ass a couple of times before lining yourself up with her pussy."
     the_girl.char "Wait, are you sure its okay to stick in there after its been in my ass?"
     "You ignore her question and push forward, slipping your shaft deep inside of [the_girl.possessive_title]'s cunt. She gasps and quivers ever so slightly as you start to pump in and out."
     return
 
-label transition_doggy_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object, the_round):
+label transition_doggy_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
     "You stop your thrusting for a moment and she looks back at you. You put two fingers in front of her mouth, and after a moment she takes them in her mouth and starts to suck on them"
     "[the_girl.possessive_title] slobbers all over your fingers for a few a seconds before you pull them out with a loud pop"
     "You use your fingers to crudely work in and out of her ass a few times to help get it lubricated. [the_girl.possessive_title] moans at the feeling of your penis in one hole and your fingers in another"
@@ -304,12 +306,12 @@ label transition_doggy_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object
         $ the_girl.discover_opinion("anal sex")
     return
 
-label transition_default_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object, the_round):
+label transition_default_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
     "[the_girl.possessive_title] gets on her hands and knees as you kneel behind her. You bounce your hard shaft on her ass a couple of times before lining yourself up with her sphincter."
     "Once you're both ready you push yourself forward, slipping your hard shaft deep inside of her. She lets out a gasp under her breath."
     return
 
-label strip_SB_doggy_anal_dildo_dp(the_girl, the_clothing, the_location, the_object, the_round):
+label strip_SB_doggy_anal_dildo_dp(the_girl, the_clothing, the_location, the_object):
     "[the_girl.possessive_title] leans forward a little further and pops off your cock."
     $ the_girl.call_dialogue("sex_strip")
     $ the_girl.draw_animated_removal(the_clothing, position = doggy.position_tag)
@@ -317,7 +319,7 @@ label strip_SB_doggy_anal_dildo_dp(the_girl, the_clothing, the_location, the_obj
     "She groans happily when you push back inside of her."
     return
 
-label strip_ask_SB_doggy_anal_dildo_dp(the_girl, the_clothing, the_location, the_object, the_round):
+label strip_ask_SB_doggy_anal_dildo_dp(the_girl, the_clothing, the_location, the_object):
     the_girl.char "Sir, I'd like to take off my [the_clothing.name], would you mind?"
     "[the_girl.char] pants as you fuck her from behind."
     menu:
@@ -340,7 +342,7 @@ label strip_ask_SB_doggy_anal_dildo_dp(the_girl, the_clothing, the_location, the
                 "She grinds her hips back into you and moans ecstatically."
     return
 
-label orgasm_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object, the_round):
+label orgasm_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
     if the_girl.arousal > 150:
         "[the_girl.possessive_title] has stopped being able to put together coherent sentences. She moans and gasps as yet another orgasm wracks her body."
         "You bury your cock in deep in [the_girl.possessive_title]'s ass while she cums. Her bowel grips you tightly. The vibrations from the dildo intensify her orgasm."

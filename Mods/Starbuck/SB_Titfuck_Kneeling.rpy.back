@@ -29,7 +29,7 @@ init 1 python:
 #        SB_Titfuck_Kneeling.link_positions(deepthroat,"transition_SB_Titfuck_Kneeling_deepthroat")
 
 #This label describes getting into position
-label intro_SB_Titfuck_Kneeling(the_girl, the_location, the_object, the_round):
+label intro_SB_Titfuck_Kneeling(the_girl, the_location, the_object):
     "[the_girl.possessive_title] eagerly begins opening your pants. She pulls out your cock and gives it a few gentle strokes."
     the_girl.char "How about I take care of this for you?"
     if mc.condom:
@@ -42,7 +42,7 @@ label intro_SB_Titfuck_Kneeling(the_girl, the_location, the_object, the_round):
     return
 
 #The first position label
-label scene_SB_Titfuck_Kneeling_1(the_girl, the_location, the_object, the_round):
+label scene_SB_Titfuck_Kneeling_1(the_girl, the_location, the_object):
 
     "[the_girl.possessive_title] sticks her tongue out and licks at the tip of your dick each time she moves her body down."
     "She moans slightly as she pauses to stroke you with her soft, velvet lips. She gets your shaft nice and wet and then continues heaving her chest up and down."
@@ -63,7 +63,7 @@ label scene_SB_Titfuck_Kneeling_1(the_girl, the_location, the_object, the_round)
     return
 
 #The second position label
-label scene_SB_Titfuck_Kneeling_2(the_girl, the_location, the_object, the_round):
+label scene_SB_Titfuck_Kneeling_2(the_girl, the_location, the_object):
     "You run your hand through [the_girl.title]'s hair while she bounces her mammaries up and down."
     "You move your hand down to her shoulder and grasp it firmly, stopping her motion. You begin to buck your hips, giving her a break from her motions."
     "Her hands move to your ass, and you can feel her gently urging you as you thrust up against her."
@@ -90,13 +90,13 @@ label scene_SB_Titfuck_Kneeling_2(the_girl, the_location, the_object, the_round)
     return
 
 #You can make more than 2 position labels. This one is currently unused. To use it, add the label name to the position declaration at the beginning of the file with the other two labels
-label scene_SB_Titfuck_Kneeling_3(the_girl, the_location, the_object, the_round):
+label scene_SB_Titfuck_Kneeling_3(the_girl, the_location, the_object):
     "This scene is currently unused."
 
     return
 
 #This label describes when the player orgasms
-label outro_SB_Titfuck_Kneeling(the_girl, the_location, the_object, the_round):
+label outro_SB_Titfuck_Kneeling(the_girl, the_location, the_object):
     $ SB_Titfuck_Kneeling.current_modifier = "blowjob"
     $ SB_Titfuck_Kneeling.redraw_scene(the_girl)
     "Little by little the soft, pillowy flesh of [the_girl.possessive_title]'s tits brings you closer to orgasm. You look down and see the hunger in her eyes and it pushes you over the edge."
@@ -142,14 +142,14 @@ label outro_SB_Titfuck_Kneeling(the_girl, the_location, the_object, the_round):
     return
 
 #This label describes transition from this position to a blowjob
-label transition_SB_Titfuck_Kneeling_blowjob(the_girl, the_location, the_object, the_round):
+label transition_SB_Titfuck_Kneeling_blowjob(the_girl, the_location, the_object):
     mc.name "Why don't you suck on me now? I bet those pouty lips of yours would feel amazing around my cock."
     "[the_girl.possessive_title] takes your hard cock in her hands. She strokes it tentatively a few times, then leans in and slides the tip into her mouth."
     mc.name "That's it, that's a good girl."
     return
 
 #This label describes transitions from blowjob to this position
-label transition_blowjob_SB_Titfuck_Kneeling(the_girl, the_location, the_object, the_round):
+label transition_blowjob_SB_Titfuck_Kneeling(the_girl, the_location, the_object):
     mc.name "Those tits look great. Why don't you wrap those around my cock for a bit..."
     if mc.condom:
         the_girl.char "Why are you wearing this thing? Lets take this off so I can take care of you better..."
@@ -160,7 +160,7 @@ label transition_blowjob_SB_Titfuck_Kneeling(the_girl, the_location, the_object,
     return
 
 #This label describes the girl deciding to take something off
-label strip_SB_Titfuck_Kneeling(the_girl, the_clothing, the_location, the_object, the_round):
+label strip_SB_Titfuck_Kneeling(the_girl, the_clothing, the_location, the_object):
     "[the_girl.possessive_title] looks up at you."
     $ the_girl.call_dialogue("sex_strip")
     $ the_girl.draw_animated_removal(the_clothing)
@@ -169,7 +169,7 @@ label strip_SB_Titfuck_Kneeling(the_girl, the_clothing, the_location, the_object
     return
 
 #This label describes the girl asking to take something off
-label strip_ask_SB_Titfuck_Kneeling(the_girl, the_clothing, the_location, the_object, the_round):
+label strip_ask_SB_Titfuck_Kneeling(the_girl, the_clothing, the_location, the_object):
     "[the_girl.possessive_title] looks up at you from her knees."
     the_girl.char "Sir, I'd like to take off my [the_clothing.name], would you mind?"
     menu:
@@ -184,7 +184,7 @@ label strip_ask_SB_Titfuck_Kneeling(the_girl, the_clothing, the_location, the_ob
     return
 
 #This label describes when she orgasms
-label orgasm_SB_Titfuck_Kneeling(the_girl, the_location, the_object, the_round):
+label orgasm_SB_Titfuck_Kneeling(the_girl, the_location, the_object):
     "[the_girl.possessive_title] pauses suddenly. She looks up at you, her face a mixture of pleasure and confusion."
     the_girl.char "I'm... I'm gonna cum!"
     "You place a firm hand on her shoulder and begin to pump your hips."

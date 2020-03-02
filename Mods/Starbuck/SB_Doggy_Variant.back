@@ -14,7 +14,7 @@ init 1:
     python:
         SB_doggy_anal.link_positions_two_way(doggy, "transition_SB_doggy_anal_doggy", "transition_doggy_SB_doggy_anal")
 
-label intro_SB_doggy_anal(the_girl, the_location, the_object, the_round):
+label intro_SB_doggy_anal(the_girl, the_location, the_object):
     mc.name "[the_girl.title], I want you to get on your hands and knees for me. I want to fuck your ass today."
     if the_girl.effective_sluttiness() > 110:
         the_girl.char "Oh god I love it when you do this to me..."
@@ -37,7 +37,7 @@ label intro_SB_doggy_anal(the_girl, the_location, the_object, the_round):
         $ the_girl.discover_opinion("anal sex")
     return
 
-label scene_SB_doggy_anal_1(the_girl, the_location, the_object, the_round):
+label scene_SB_doggy_anal_1(the_girl, the_location, the_object):
     "You give [the_girl.possessive_title]'s ass a good hard spank. She lets out a loud yelp."
     $ the_girl.call_dialogue("sex_responses")
     if the_girl.sex_skills["Anal"] < 2: #Inexperienced
@@ -133,7 +133,7 @@ label scene_SB_doggy_anal_1(the_girl, the_location, the_object, the_round):
     return
 
 
-label scene_SB_doggy_anal_2(the_girl, the_location, the_object, the_round):
+label scene_SB_doggy_anal_2(the_girl, the_location, the_object):
     "[the_girl.possessive_title] lowers her shoulders against the [the_object.name] and groans as you fuck her from behind."
     the_girl.char "Ah... I feel so full!"
     "You reach forward and place your hands on [the_girl.possessive_title]'s shoulders. With each thrust you pull her back onto you forcefully, your hips smacking her ass cheeks loudly. She arches her back and lets out a series of satisfied yelps."
@@ -216,7 +216,7 @@ label scene_SB_doggy_anal_2(the_girl, the_location, the_object, the_round):
     return
 
 
-label scene_SB_doggy_anal_3(the_girl, the_location, the_object, the_round):
+label scene_SB_doggy_anal_3(the_girl, the_location, the_object):
     "third scene here"
 
 
@@ -225,7 +225,7 @@ label scene_SB_doggy_anal_3(the_girl, the_location, the_object, the_round):
 
     return
 
-label outro_SB_doggy_anal(the_girl, the_location, the_object, the_round):
+label outro_SB_doggy_anal(the_girl, the_location, the_object):
     "[the_girl.possessive_title]'s tight ass draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
     $the_girl.call_dialogue("sex_responses")
     mc.name "Ah, I'm going to cum!"
@@ -325,14 +325,14 @@ label outro_SB_doggy_anal(the_girl, the_location, the_object, the_round):
 
     return
 
-label transition_SB_doggy_anal_doggy(the_girl, the_location, the_object, the_round):
+label transition_SB_doggy_anal_doggy(the_girl, the_location, the_object):
     "You decide to give [the_girl.possessive_title] a break. She murmurs a bit in disappointment when you slowly pull your dick out of her ass completely."
     "You bounce your hard shaft on her ass a couple of times before lining yourself up with her pussy."
     the_girl.char "Wait, are you sure its okay to stick in there after its been in my ass?"
     "You ignore her question and push forward, slipping your shaft deep inside of [the_girl.possessive_title]'s cunt. She gasps and quivers ever so slightly as you start to pump in and out."
     return
 
-label transition_doggy_SB_doggy_anal(the_girl, the_location, the_object, the_round):
+label transition_doggy_SB_doggy_anal(the_girl, the_location, the_object):
     "You stop your thrusting for a moment and she looks back at you. You put two fingers in front of her mouth, and after a moment she takes them in her mouth and starts to suck on them."
     "[the_girl.possessive_title] slobbers all over your fingers for a few a seconds before you pull them out with a loud pop"
     "You use your fingers to crudely work in and out of her ass a few times to help get it lubricated. [the_girl.possessive_title] moans at the feeling of your penis in one hole and your fingers in another."
@@ -344,12 +344,12 @@ label transition_doggy_SB_doggy_anal(the_girl, the_location, the_object, the_rou
         $ the_girl.discover_opinion("anal sex")
     return
 
-label transition_default_SB_doggy_anal(the_girl, the_location, the_object, the_round):
+label transition_default_SB_doggy_anal(the_girl, the_location, the_object):
     "[the_girl.possessive_title] gets on her hands and knees as you kneel behind her. You bounce your hard shaft on her ass a couple of times before lining yourself up with her sphincter."
     "Once you're both ready you push yourself forward, slipping your hard shaft deep inside of her. She lets out a gasp under her breath."
     return
 
-label strip_SB_doggy_anal(the_girl, the_clothing, the_location, the_object, the_round):
+label strip_SB_doggy_anal(the_girl, the_clothing, the_location, the_object):
     "[the_girl.possessive_title] leans forward a little further and pops off your cock."
     $ the_girl.call_dialogue("sex_strip")
     $ the_girl.draw_animated_removal(the_clothing, position = doggy.position_tag)
@@ -357,7 +357,7 @@ label strip_SB_doggy_anal(the_girl, the_clothing, the_location, the_object, the_
     "She groans happily when you push back inside of her."
     return
 
-label strip_ask_SB_doggy_anal(the_girl, the_clothing, the_location, the_object, the_round):
+label strip_ask_SB_doggy_anal(the_girl, the_clothing, the_location, the_object):
     the_girl.char "Sir, I'd like to take off my [the_clothing.name], would you mind?"
     "[the_girl.char] pants as you fuck her from behind."
     menu:
@@ -380,7 +380,7 @@ label strip_ask_SB_doggy_anal(the_girl, the_clothing, the_location, the_object, 
                 "She grinds her hips back into you and moans ecstatically."
     return
 
-label orgasm_SB_doggy_anal(the_girl, the_location, the_object, the_round):
+label orgasm_SB_doggy_anal(the_girl, the_location, the_object):
     "[the_girl.possessive_title]'s tight back passage starts to quiver, and suddenly tenses up."
     $ the_girl.call_dialogue("climax_responses_anal")
     "You bury your cock in deep in [the_girl.possessive_title]'s ass while she cums. Her bowel grips you tightly."

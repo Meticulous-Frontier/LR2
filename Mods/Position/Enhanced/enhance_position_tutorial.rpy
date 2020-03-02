@@ -22,7 +22,7 @@ init 2:     #This init must be a later number than the original position declara
         # doggy.guy_energy = 20                           #Change energy requirements
 
 #We redefine intro because stealth_orgasm could be set to true from a previous sex encounter if we swapped positions before finishing
-label intro_stealth_doggy(the_girl, the_location, the_object, the_round):
+label intro_stealth_doggy(the_girl, the_location, the_object):
     $ stealth_orgasm = False   #This is the only change made from the existing intro.
     mc.name "[the_girl.title], I want you to get on your hands and knees for me."
     if the_girl.effective_sluttiness() > 100:
@@ -40,7 +40,7 @@ label intro_stealth_doggy(the_girl, the_location, the_object, the_round):
     return
 
 
-label doggy_stealth_attempt(the_girl, the_location, the_object, the_round):  #Write the new scene here
+label doggy_stealth_attempt(the_girl, the_location, the_object):  #Write the new scene here
     "[the_girl.possessive_title] moans, clearly enjoying herself as your cock hits all the right places."
     "She lowers her face to the [the_object.name] and arches her back. Her ass jiggles pleasantly with each stroke."
     if mc.condom:
@@ -65,7 +65,7 @@ label doggy_stealth_attempt(the_girl, the_location, the_object, the_round):  #Wr
 
     return
 
-label outro_stealth_doggy(the_girl, the_location, the_object, the_round):
+label outro_stealth_doggy(the_girl, the_location, the_object):
     "[the_girl.title]'s tight cunt draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
     $the_girl.call_dialogue("sex_responses_vaginal")
     mc.name "Ah, I'm going to cum!"
@@ -140,7 +140,7 @@ label outro_stealth_doggy(the_girl, the_location, the_object, the_round):
     $ stealth_orgasm = False
     return
 
-label transition_stealth_doggy_anal_doggy(the_girl, the_location, the_object, the_round):
+label transition_stealth_doggy_anal_doggy(the_girl, the_location, the_object):
     $ stealth_orgasm = False   #This is the only change made from the existing transition.
 #     #transition from anal to normal doggy style.
     "You pull out of [the_girl.title]'s asshole, leaving it gaping and her sighing in relief."

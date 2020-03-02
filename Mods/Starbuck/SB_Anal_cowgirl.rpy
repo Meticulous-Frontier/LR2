@@ -9,6 +9,8 @@
         outro = "outro_SB_anal_cowgirl",
         transition_default = "transition_default_SB_anal_cowgirl",
         strip_description = "strip_SB_anal_cowgirl", strip_ask_description = "strip_ask_SB_anal_cowgirl",
+        taboo_break_description = "taboo_break_missionary",
+        associated_taboo = "vaginal_sex",
         orgasm_description = "orgasm_SB_anal_cowgirl",
         verb = "ass fuck",
         opinion_tags = ["taking control", "anal sex"], record_class = "Anal Sex")
@@ -19,7 +21,7 @@
 #    python:
 #        ##Here is where you would put connections if they existed.
 
-label intro_SB_anal_cowgirl(the_girl, the_location, the_object, the_round):
+label intro_SB_anal_cowgirl(the_girl, the_location, the_object):
     the_girl.char "Lie down for me, I want to be on top."
     "You lie down on the [the_object.name] and undo your pants. [the_girl.possessive_title] swings a leg over your body and straddles you."
     the_girl.char "I'm gonna put it in my ass. Lets get you lubed up first though..."
@@ -44,7 +46,7 @@ label intro_SB_anal_cowgirl(the_girl, the_location, the_object, the_round):
     "After pausing for a second to adjust [the_girl.possessive_title] starts to ride your dick."
     return
 
-label scene_SB_anal_cowgirl_1(the_girl, the_location, the_object, the_round):
+label scene_SB_anal_cowgirl_1(the_girl, the_location, the_object):
     if the_girl.arousal > 50:
         "[the_girl.possessive_title] leans back, putting her hands in line with your feet."
         "In her reclined position you have a perfect view of her drooling pussy. Just below it you can see your cock stretching her nice little asshole."
@@ -63,7 +65,7 @@ label scene_SB_anal_cowgirl_1(the_girl, the_location, the_object, the_round):
     "[the_girl.possessive_title] rocks her hips back and forth. Each movement feels like her tight back passage is milking you, begging for you to cum in it."
     return
 
-label scene_SB_anal_cowgirl_2(the_girl, the_location, the_object, the_round):
+label scene_SB_anal_cowgirl_2(the_girl, the_location, the_object):
     "[the_girl.possessive_title] speeds up, working her thighs to pump herself up and down your cock."
     "Her ass makes a few lewd squelching noises from her aggressive fucking. Her buttery smooth puckered hole strokes your erection with every pump."
     if the_girl.has_large_tits():
@@ -134,7 +136,7 @@ label scene_SB_anal_cowgirl_2(the_girl, the_location, the_object, the_round):
         "You give her modest tits another squeeze. They are supple yet firm in your hands."
     return
 
-label scene_SB_anal_cowgirl_3(the_girl, the_location, the_object, the_round):
+label scene_SB_anal_cowgirl_3(the_girl, the_location, the_object):
     "You put your hands on [the_girl.possessive_title]'s hips and guide her up and down at a steady pace."
     if the_girl.arousal > 75:
         "Your cock glides in and out of her tight, supple ass. [the_girl.possessive_title] is so excited her pussy is dripping her juices onto you."
@@ -148,7 +150,7 @@ label scene_SB_anal_cowgirl_3(the_girl, the_location, the_object, the_round):
         "With [the_girl.possessive_title] in control you're able to relax and focus entirely on enjoying the feeling."
     return
 
-label outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_round):
+label outro_SB_anal_cowgirl(the_girl, the_location, the_object):
     "With each stroke of her hips [the_girl.possessive_title]'s impossibly tight ass brings you closer and closer to cumming. You're finally driven past the point of no return."
     mc.name "Fuck, I'm going to cum!"
 
@@ -218,7 +220,7 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_round):
                 "She rolls off and lies next to you on the [the_object.name]."
     return
 
-label transition_default_SB_anal_cowgirl(the_girl, the_location, the_object, the_round):
+label transition_default_SB_anal_cowgirl(the_girl, the_location, the_object):
     "You lie down on [the_object.name]. [the_girl.possessive_title] swings a leg over your waist and straddles you."
     if the_girl.sex_skills["Anal"] >= 3:
         "You nod. She grinds forward one last time, then lifts herself up. She reaches back behind her and guides your cock to the entrance of her puckered hole."
@@ -230,13 +232,13 @@ label transition_default_SB_anal_cowgirl(the_girl, the_location, the_object, the
     "After pausing for a second to adjust [the_girl.possessive_title] starts to ride your dick."
     return
 
-label strip_SB_anal_cowgirl(the_girl, the_clothing, the_location, the_object, the_round):
+label strip_SB_anal_cowgirl(the_girl, the_clothing, the_location, the_object):
     $ the_girl.call_dialogue("sex_strip")
     $ the_girl.draw_animated_removal(the_clothing, position = SB_anal_cowgirl.position_tag)
     "[the_girl.possessive_title] struggles out of her [the_clothing.name] and throws it to the side."
     return
 
-label strip_ask_SB_anal_cowgirl(the_girl, the_clothing, the_location, the_object, the_round):
+label strip_ask_SB_anal_cowgirl(the_girl, the_clothing, the_location, the_object):
     the_girl.char "Sir, I'd like to take off my [the_clothing.name], would you mind?"
     menu:
         "Let her strip":
@@ -254,7 +256,7 @@ label strip_ask_SB_anal_cowgirl(the_girl, the_clothing, the_location, the_object
                 "She sighs happily while she rides your cock hard and fast."
     return
 
-label orgasm_SB_anal_cowgirl(the_girl, the_location, the_object, the_round):
+label orgasm_SB_anal_cowgirl(the_girl, the_location, the_object):
     "[the_girl.possessive_title] works her hips faster and her breathing grows heavier."
     $ the_girl.call_dialogue("climax_responses_anal")
     the_girl.char "With one last gasp she collapses down against you. Her thighs quiver as she climaxes. Her velvet smooth ass quivers around your erection as she cums."
