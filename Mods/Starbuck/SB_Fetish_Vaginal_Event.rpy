@@ -169,6 +169,7 @@ label SB_fetish_vaginal_label(the_person):
             $ the_person.change_happiness(-10)
             the_person.char "Oh! I'm sorry... Maybe tomorrow then?"
             "[the_person.possessive_title] quickly sulks off."
+            $ FETISH_VAGINAL_EVENT_INUSE = False
             return # EXIT
         "Too Tired" if mc.energy < 30:     # not enough energy for the player to induce fetish
             "[the_person.possessive_title] is surprised by your answer."
@@ -176,6 +177,7 @@ label SB_fetish_vaginal_label(the_person):
             $ the_person.change_happiness(-5)
             the_person.char "Oh! I'm sorry... I didn't think about that. Maybe tomorrow then?"
             "[the_person.possessive_title] quickly sulks off."
+            $ FETISH_VAGINAL_EVENT_INUSE = False
             return  # EXIT
 
     $ FETISH_VAGINAL_EVENT_INUSE = False
@@ -478,7 +480,7 @@ label SB_cowgirl_wakeup_label(the_person):
     "Looks like you slept in!"
     $ FETISH_VAGINAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
-    return
+    return "Advance Time"
 
 init 2 python:
     def SB_fetish_vaginal_recurring_requirement():
@@ -547,6 +549,7 @@ label SB_fetish_vaginal_recurring_label():
                 "You head for bed, looking forward to a restful night's sleep."
                 $ the_person.change_obedience(-2)
                 $ the_person.change_happiness(-5)
+                $ FETISH_VAGINAL_EVENT_INUSE = False
                 return
             "Cum on over :)":
                 "She responds right away."
@@ -619,6 +622,7 @@ label SB_fetish_vaginal_lily_recurring_label():
             "You head for bed, looking forward to a restful night's sleep."
             $ the_person.change_obedience(-2)
             $ the_person.change_happiness(-5)
+            $ FETISH_VAGINAL_EVENT_INUSE = False
             return
         "Strip first":
             mc.name "That sounds good [the_person.title]... why don't you give me a show before we go to bed?"
