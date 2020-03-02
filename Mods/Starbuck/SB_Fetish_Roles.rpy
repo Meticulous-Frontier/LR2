@@ -166,7 +166,7 @@ label SB_fetish_vaginal_visit_label(the_person):
     return
 
 #SBR10
-label SB_fetish_vaginal_mom_kitchen_label():
+label SB_fetish_vaginal_mom_kitchen_label(the_person):
     $ the_person = mom
     $ ordered_bottom = the_person.outfit.get_lower_ordered()
     if len(ordered_bottom) > 0:
