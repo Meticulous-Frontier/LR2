@@ -127,7 +127,7 @@ init -1:
         Person.change_weight = change_weight
 
         ## HAPPINESS SCORE ENHANCED VERSION
-        # Takes into account their liking for working (if she doesn't she is more likely to quit) 
+        # Takes into account their liking for working (if she doesn't she is more likely to quit)
         def get_job_happiness_score_enhanced(self):
             happy_points = self.happiness - 100 #Happiness over 100 gives a bonus to staying, happiness less than 100 gives a penalty
             happy_points += self.obedience - 95 #A more obedient character is more likely to stay, even if they're unhappy. Default characters can be a little disobedint without any problems.
@@ -307,7 +307,7 @@ init -1:
             def extra_strip_check(person, top_layer_first, exclude_upper, exclude_lower, exclude_feet):
                 if top_layer_first: # normal strip continue
                     return True
-                
+
                 done = exclude_upper or person.outfit.tits_available()
                 if done and (exclude_lower or person.outfit.vagina_available()):
                     if done and (exclude_feet or person.outfit.feet_available()):
@@ -436,10 +436,29 @@ init -1:
 
         # BUGFIXED: Judge Outfit function uses the_person instead of self to check effective sluttiness
         #Judge an outfit and determine if it's too slutty or not. Can be used to judge other people's outfits to determine if she thinks they look like a slut.
-        def judge_outfit_extension(self, outfit, temp_sluttiness_boost = 0):
+        def judge_outfit_extension(self, outfit, temp_sluttiness_boost = 0, use_taboos = True, as_underwear = False, as_overwear = False):
             outfit.update_slut_requirement()    # reevaluate sluttiness requirement
+
+            if as_underwear or as_overwear:
+                use_taboos = False
+
+            if use_taboos and not (outfit.bra_covered() and outfit.panties_covered()) and "underwear_nudity" not in self.broken_taboos:
+                taboo_modifier = "underwear_nudity"
+            elif use_taboos and outfit.tits_visible() and "bare_tits" not in self.broken_taboos:
+                taboo_modifier = "bare_tits"
+            elif use_taboos and outfit.vagina_visible() and "bare_pussy" not in self.broken_taboos:
+                taboo_modifier = "bare_pussy"
+            else:
+                taboo_modifier = None
+
+            slut_require = outfit.slut_requirement
+            if as_underwear:
+                slut_require = outfit.get_underwear_slut_score()
+            elif as_overwear:
+                slut_require = outfit.get_overwear_slut_score()
+
             # renpy.say("", "Judge Outfit:  " + str(outfit.slut_requirement) +  "  (validation sluttiness: " +  str(self.effective_sluttiness() + temp_sluttiness_boost) + ")")
-            return outfit.slut_requirement < (self.effective_sluttiness() + temp_sluttiness_boost)
+            return slut_require < (self.effective_sluttiness(taboo_modifier) + temp_sluttiness_boost)
 
         Person.judge_outfit = judge_outfit_extension
 
@@ -670,6 +689,124 @@ init -1:
             renpy.show(self.name+self.last_name+"_old", at_list=[character_placement, scale_person(self.height), clothing_fade], layer = "Active", what = bottom_displayable, tag = self.name + self.last_name +"_old")
 
         Person.draw_animated_removal = draw_animated_removal_enhanced
+
+        ####### Begin cum override functions ######
+
+        def cum_in_mouth_enhanced(self): #Add the appropriate stuff to their current outfit, and peform any personal checks if rquired.
+            mc.listener_system.fire_event("sex_cum_mouth", the_person = self)
+            if self.outfit.can_add_accessory(mouth_cum):
+                the_cumshot = mouth_cum.get_copy()
+                the_cumshot.layer = 0
+                self.outfit.add_accessory(the_cumshot)
+
+            self.change_slut_temp(5*self.get_opinion_score("drinking cum"))
+            self.change_happiness(5*self.get_opinion_score("drinking cum"))
+            self.discover_opinion("drinking cum")
+
+            self.sex_record["Cum in Mouth"] += 1
+
+
+        def cum_in_vagina_enhanced(self):
+            mc.listener_system.fire_event("sex_cum_vagina", the_person = self)
+            if self.outfit.can_add_accessory(creampie_cum):
+                the_cumshot = creampie_cum.get_copy()
+                the_cumshot.layer = 0
+                self.outfit.add_accessory(the_cumshot)
+
+            self.change_slut_temp(5*self.get_opinion_score("creampies"))
+            self.change_happiness(5*self.get_opinion_score("creampies"))
+            self.discover_opinion("creampies")
+
+            self.sex_record["Vaginal Creampies"] += 1
+
+        def cum_in_ass_enhanced(self):
+            mc.listener_system.fire_event("sex_cum_ass", the_person = self)
+            #TODO: Add an anal specific cumshot once we have renders for it.
+            if self.outfit.can_add_accessory(creampie_cum):
+                the_cumshot = creampie_cum.get_copy()
+                the_cumshot.layer = 0
+                self.outfit.add_accessory(the_cumshot)
+            self.change_slut_temp(5*self.get_opinion_score("anal creampies"))
+            self.change_happiness(5*self.get_opinion_score("anal creampies"))
+            self.discover_opinion("anal creampies")
+
+            self.sex_record["Anal Creampies"] += 1
+
+        def cum_on_face_enhanced(self):
+            mc.listener_system.fire_event("sex_cum_on_face", the_person = self)
+            if self.outfit.can_add_accessory(face_cum):
+                the_cumshot = face_cum.get_copy()
+                the_cumshot.layer = 0
+                self.outfit.add_accessory(the_cumshot)
+
+            self.change_slut_temp(5*self.get_opinion_score("cum facials"))
+            self.change_happiness(5*self.get_opinion_score("cum facials"))
+            self.discover_opinion("cum facials")
+
+            self.change_slut_temp(5*self.get_opinion_score("being covered in cum"))
+            self.change_happiness(5*self.get_opinion_score("being covered in cum"))
+            self.discover_opinion("being covered in cum")
+
+            self.sex_record["Cum Facials"] += 1
+
+        def cum_on_tits_enhanced(self):
+            mc.listener_system.fire_event("sex_cum_on_tits", the_person = self)
+            if self.outfit.can_add_accessory(tits_cum):
+                the_cumshot = tits_cum.get_copy()
+                if self.outfit.get_upper_visible():
+                    top_layer = self.outfit.get_upper_visible()[0].layer #Get the top most pice of clothing and get it's layer.
+                else:
+                    top_layer = -1
+                the_cumshot.layer = top_layer+1 #The cumshot lives on a layer it hit, above the one it hit. Accessories are drawn first in the hirearchy, so they have to be on a level higehr than what they hit.
+                self.outfit.add_accessory(the_cumshot)
+
+            self.change_slut_temp(5*self.get_opinion_score("being covered in cum"))
+            self.change_happiness(5*self.get_opinion_score("being covered in cum"))
+            self.discover_opinion("being covered in cum")
+
+            self.sex_record["Cum Covered"] += 1
+
+        def cum_on_stomach_enhanced(self):
+            mc.listener_system.fire_event("sex_cum_on_stomach", the_person = self)
+            if self.outfit.can_add_accessory(stomach_cum):
+                the_cumshot = stomach_cum.get_copy()
+                if self.outfit.get_upper_visible():
+                    top_layer = self.outfit.get_upper_visible()[0].layer #Get the top most pice of clothing and get it's layer.
+                else:
+                    top_layer = -1
+                the_cumshot.layer = top_layer+1 #The cumshot lives on a layer it hit, above the one it hit. Accessories are drawn first in the hirearchy, so they have to be on a level higehr than what they hit.
+                self.outfit.add_accessory(the_cumshot)
+
+            self.change_slut_temp(5*self.get_opinion_score("being covered in cum"))
+            self.change_happiness(5*self.get_opinion_score("being covered in cum"))
+            self.discover_opinion("being covered in cum")
+
+            self.sex_record["Cum Covered"] += 1
+
+        def cum_on_ass_enhanced(self):
+            mc.listener_system.fire_event("sex_cum_on_ass", the_person = self)
+            if self.outfit.can_add_accessory(ass_cum):
+                the_cumshot = ass_cum.get_copy()
+                if self.outfit.get_lower_visible():
+                    top_layer = self.outfit.get_lower_visible()[0].layer #Get the top most pice of clothing and get it's layer.
+                else:
+                    top_layer = -1
+                the_cumshot.layer = top_layer+1 #The cumshot lives on a layer it hit, above the one it hit. Accessories are drawn first in the hirearchy, so they have to be on a level higehr than what they hit.
+                self.outfit.add_accessory(the_cumshot)
+
+            self.change_slut_temp(5*self.get_opinion_score("being covered in cum"))
+            self.change_happiness(5*self.get_opinion_score("being covered in cum"))
+            self.discover_opinion("being covered in cum")
+
+            self.sex_record["Cum Covered"] += 1
+
+        Person.cum_in_mouth = cum_in_mouth_enhanced
+        Person.cum_in_vagina = cum_in_vagina_enhanced
+        Person.cum_in_ass = cum_in_ass_enhanced
+        Person.cum_on_face = cum_on_face_enhanced
+        Person.cum_on_tits = cum_on_tits_enhanced
+        Person.cum_on_stomach = cum_on_stomach_enhanced
+        Person.cum_on_ass = cum_on_ass_enhanced
 
     #######################################
     # HELPER METHODS FOR CLASS EXTENSIONS #

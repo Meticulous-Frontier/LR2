@@ -28,8 +28,20 @@ init 1301 python:
                 return True
         return False
 
+    def unisex_restroom_gloryhole_wait_requirement():
+        if mc.business.is_open_for_business():
+            if len(mc.business.get_employee_list()) < 4:
+                return True
+            else:
+                return "You should hire more employees"
+        else:
+            return "The business isn't open!"
+        return False
+
+
 
     unisex_restroom_fantasy_actout = Action("Actout dream fantasy", unisex_restroom_fantasy_actout_requirement, "unisex_restroom_fantasy_actout_label", event_duration = 5)
+    unisex_restroom_gloryhole_wait = Action("Wait by the glory hole", unisex_restroom_gloryhole_wait_requirement, "unisex_restroom_gloryhole_wait_label")
 
 init 2 python:
     def unisex_restroom_crisis_requirement():
@@ -363,6 +375,7 @@ label unisex_restroom_unlock_gloryhole_label():
     "The restroom is empty, so you find an empty stall and enter it."
     "Much to your surprise, you discover a small hole cut out. The girls have made a gloryhole!"
     $ unisex_restroom_unlocks["unisex_restroom_gloryhole"] = 1
+    $ office.actions.append(unisex_restroom_gloryhole_wait)
     "Since you are the only man in the company, you have to assume that this was made with you in mind."
     "You finish relieving yourself, and then consider. Should you wait and see if someone comes along? Or maybe try some other time?"
     menu:
@@ -416,6 +429,21 @@ label unisex_restroom_use_gloryhole_label():
         "Why aren't we catching anything here?"
 
     return _return
+
+label unisex_restroom_gloryhole_wait_label():
+    "You decide you could use a little anonymous action to break up the monotony of the day."
+    "You step into the restroom and walk into one of the stalls."
+    "You see the glory hole in the stall that has been cutout."
+    if get_business_corruption_tier() == 4:
+        "You can see around it, someone has drawn multiple hearts in red lipstick."
+    elif get_business_corruption_tier() > 4:
+        "You can see around it, multiple hearts dawn in lipstick."
+        "Above the hole, someone has drawn a phallus, then the text 'dick goes here plz' with an arrow drawn to the hole."
+        "Below, in different handwriting, someone else has written 'cum inside me please!' with another arrow pointed up to the hole."
+    call unisex_restroom_use_gloryhole_label from use_dat_gloryhole_wait_2
+    #TODO advance time?
+
+    return
 
 label unisex_restroom_gloryhole_handjob_label(the_person):
     $ anon_char = get_anon_person(the_person)

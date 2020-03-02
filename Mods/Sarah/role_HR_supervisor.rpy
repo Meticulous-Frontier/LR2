@@ -367,7 +367,7 @@ label HR_director_initial_hire_label(the_person):
         business_HR_director.set_work([1,2,3], mc.business.h_div)
 
         set_HR_director_tag("business_HR_eff_bonus", mc.business.effectiveness_cap - 100)
-        add_hr_director_first_monday_action(the_person)        
+        add_hr_director_first_monday_action(the_person)
     return
 
 label HR_director_first_monday_label(the_person):
@@ -661,6 +661,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         $ person_choice.opinions[opinion_chat] = [max_opinion, True]
     else:
         $ person_choice.sexy_opinions[opinion_chat] = [max_opinion, True]
+    $ mc.listener_system.fire_event("HR_opinion_improvement", the_person = person_choice)
     $ scene_manager.update_actor(person_choice, position = "walking_away", character_placement = character_left_flipped)
     $ scene_manager.update_actor(the_person, position = "stand2", character_placement = character_right)
     "[the_person.title] gets up and walks [person_choice.title] to the door."

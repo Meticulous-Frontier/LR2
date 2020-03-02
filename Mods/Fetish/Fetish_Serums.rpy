@@ -1,5 +1,4 @@
-
-init -1 python:
+init -2 python:
     def get_suggest_tier(the_person):   #Returns a value of 0-3 depending on the person's suggestibility.
         if the_person.suggestibility < 15:
             return 0
@@ -26,59 +25,7 @@ init -1 python:
         else:
             return 5
 
-
-    def pheremone_therapy_on_apply(the_person, add_to_log):
-        the_person.change_slut_core(15, add_to_log, fire_event = False)
-        the_person.change_slut_temp(15, add_to_log)
-
-    def pheremone_therapy_on_remove(the_person, add_to_log):
-        the_person.change_slut_core(-15, add_to_log, fire_event = False)
-        the_person.change_slut_temp(-15, add_to_log)
-
-    def ovulation_function_on_turn(the_person, add_to_log):
-        if get_slut_tier(the_person) < 5:
-            if renpy.random.randint(0,100) <50:  #chance to increase core sluttiness
-                the_person.change_slut_core    (1, add_to_log)
-            the_person.change_slut_temp(2, add_to_log)
-
-    def constant_stimulation_on_turn(the_person, add_to_log, fire_event = True):
-        if get_suggest_tier(the_person) > get_slut_tier(the_person):  #If the tier of sluttiness is less than the suggest tier
-            the_person.change_slut_core(1, add_to_log)
-            the_person.change_slut_temp(1, add_to_log)
-        elif get_suggest_tier(the_person) == get_slut_tier(the_person): #If they are equal
-            if renpy.random.randint(0,100) <50:
-                the_person.change_slut_core(1, add_to_log)
-                the_person.change_slut_temp(1, add_to_log)
-        elif get_slut_tier(the_person) < 5:
-            if renpy.random.randint(0,100) < (30 - (5 * get_slut_tier(the_person))):
-                the_person.change_slut_core(1, add_to_log)
-                the_person.change_slut_temp(1, add_to_log)
-
-
-    def dopamine_therapy_on_turn(the_person, add_to_log, fire_event = True):
-        if renpy.random.randint(0,100) < (the_person.suggestibility - (the_person.happiness - 100)) * 5:
-            the_person.change_happiness(1, add_to_log)
-
-
-    def behavior_adjustment_on_turn(the_person, add_to_log, fire_event = True):
-        if renpy.random.randint(0,100) < (the_person.suggestibility - (the_person.obedience - 90)) * 5:
-            the_person.change_obedience(1, add_to_log)
-
-    def submission_function_on_apply(the_person, add_to_log):
-        the_person.change_slut_core(-15, add_to_log, fire_event = False)
-        the_person.change_slut_temp(-15, add_to_log)
-
-    def submission_function_on_remove(the_person, add_to_log):
-        the_person.change_slut_core(15, add_to_log, fire_event = False)
-        the_person.change_slut_temp(15, add_to_log)
-
-    def submission_function_on_turn(the_person, add_to_log):
-        the_person.change_obedience(3, add_to_log)
-
-    def increase_person_sex_skill(the_person, skill_name, max_skill):
-        if the_person.sex_skills[skill_name] < max_skill:
-            the_person.sex_skills[skill_name] += 1
-
+init -1 python:
     def increase_fetish_sexy_opinion(the_person, fetish_list, max_score):
         random_fetish_key = get_random_from_list(fetish_list)
         opinion_score = the_person.get_opinion_score(random_fetish_key)
@@ -233,74 +180,13 @@ init -1 python:
                             FETISH_CUM_EVENT_INUSE = True
         return
 
-label serum_mod_starbuck_traits(stack):
+    def increase_person_sex_skill(the_person, skill_name, max_skill):
+        if the_person.sex_skills[skill_name] < max_skill:
+            the_person.sex_skills[skill_name] += 1
+
+# any label that starts with serum_mod is added to the serum mod list
+label serum_mod_fetish_serum_trait(stack):
     python:
-        pher_ther = SerumTraitMod(name = "Pheremone Therapy",
-                desc = "By mimicing pheremones found in closely related animals, this serum can recreate feelings of going into heat in women.",
-                positive_slug = "+$40 Value, +15 Sluttiness",
-                negative_slug = "+200 Serum Research",
-                value_added = 40,
-                research_added = 200,
-        #     slots_added = a_number,
-        #     production_added = a_number,
-        #     duration_added = a_number,
-                base_side_effect_chance = 20,
-                on_apply = pheremone_therapy_on_apply,
-                on_remove = pheremone_therapy_on_remove,
-        #     on_turn = a_function,
-        #     on_day = a_function,
-        #     requires = [list_of_other_traits],
-                tier = 2,
-                start_researched =  False,
-                research_needed = 800,
-        #     exclude_tags = [list_of_other_tags],
-        #     is_side_effect = a_bool)
-            )
-
-        sub_ther = SerumTraitMod(name = "Submission Therapy",
-                desc = "Introduces substances that naturally incline females to obey males, found in many mammals. Reduces feeling in the skin, including erogenous zones.",
-                positive_slug = "+3 Obedience/Turn, +$20 Value",
-                negative_slug = "-15 Sluttiness, +80 Serum Research",
-                value_added = 20,
-                research_added = 80,
-        #     slots_added = a_number,
-        #     production_added = a_number,
-        #     duration_added = a_number,
-                base_side_effect_chance = 20,
-                on_apply = submission_function_on_apply,
-                on_remove = submission_function_on_remove,
-                on_turn = submission_function_on_turn,
-        #     on_day = a_function,
-        #     requires = [list_of_other_traits],
-                tier = 2,
-                start_researched =  False,
-                research_needed = 800,
-        #     exclude_tags = [list_of_other_tags],
-        #     is_side_effect = a_bool)
-            )
-
-        ovulation_ther = SerumTraitMod(name = "Hormonal Ovulation",
-                desc = "Reproduces hormones naturally occuring during ovulation to make females more receptive to sex. Increases sluttiness over time.",
-                positive_slug = "+(0-2) Sluttiness/Turn, +$40 Value",
-                negative_slug = "+200 Serum Research",
-                value_added = 40,
-                research_added = 200,
-        #     slots_added = a_number,
-        #     production_added = a_number,
-        #     duration_added = a_number,
-                base_side_effect_chance = 20,
-        #     on_apply = submission_function_on_apply,
-        #     on_remove = submission_function_on_remove,
-                on_turn = ovulation_function_on_turn,
-        #     on_day = a_function,
-        #     requires = [list_of_other_traits],
-                tier = 3,
-                start_researched =  False,
-                research_needed = 1500,
-        #     exclude_tags = [list_of_other_tags],
-        #     is_side_effect = a_bool)
-            )
-
         fetish_basic_ther = SerumTraitMod(name = "Initial Fetish Therapy",
                 desc = "Over time, increases general positivity towards basic sexual acts. Increases effectiveness with greater suggestability.",
                 positive_slug = "Slowly increases sexual opinions, Slowly increases Foreplay skill, +$20 Value",
@@ -433,72 +319,6 @@ label serum_mod_starbuck_traits(stack):
         #     is_side_effect = a_bool)
             )
 
-        constant_stimulation_ther = SerumTraitMod(name = "Constant Stimulation",
-                desc = "Slowly increases sluttiness. Strong wills can resist it, but it increases effect based on suggestability.",
-                positive_slug = "Slowly increases sluttiness based on suggestability, +$15 Value",
-                negative_slug = "+100 Serum Research",
-                value_added = 15,
-                research_added = 100,
-        #     slots_added = a_number,
-        #     production_added = FETISH_PRODUCTION_COST,
-        #     duration_added = a_number,
-                base_side_effect_chance = 50,
-        #     on_apply = submission_function_on_apply,
-        #     on_remove = submission_function_on_remove,
-                on_turn = constant_stimulation_on_turn,
-        #     on_day = a_function,
-        #     requires = [fetish_oral_ther],
-                tier = 1,
-                start_researched =  False,
-                research_needed = 500,
-        #     exclude_tags = [list_of_other_tags],
-        #     is_side_effect = a_bool)
-            )
 
-        dopamine_therapy_ther = SerumTraitMod(name = "Dopamine Therapy",
-                desc = "Slowly increases happiness. Increases effect based on suggestability.",
-                positive_slug = "Slowly increases happiness based on suggestability, +$10 Value",
-                negative_slug = "+100 Serum Research",
-                value_added = 10,
-                research_added = 100,
-        #     slots_added = a_number,
-        #     production_added = FETISH_PRODUCTION_COST,
-        #     duration_added = a_number,
-                base_side_effect_chance = 20,
-        #     on_apply = submission_function_on_apply,
-        #     on_remove = submission_function_on_remove,
-                on_turn = dopamine_therapy_on_turn,
-        #     on_day = a_function,
-        #     requires = [fetish_oral_ther],
-                tier = 1,
-                start_researched =  False,
-                research_needed = 500,
-        #     exclude_tags = [list_of_other_tags],
-        #     is_side_effect = a_bool)
-            )
-
-        behavior_adjustment_ther = SerumTraitMod(name = "Behavior Adjustment",
-                desc = "Slowly increases obedience. Increases effect based on suggestability.",
-                positive_slug = "Slowly increases obedience based on suggestability, +$10 Value",
-                negative_slug = "+100 Serum Research",
-                value_added = 10,
-                research_added = 100,
-        #     slots_added = a_number,
-        #     production_added = FETISH_PRODUCTION_COST,
-        #     duration_added = a_number,
-                base_side_effect_chance = 20,
-        #     on_apply = submission_function_on_apply,
-        #     on_remove = submission_function_on_remove,
-                on_turn = behavior_adjustment_on_turn,
-        #     on_day = a_function,
-        #     requires = [fetish_oral_ther],
-                tier = 1,
-                start_researched =  False,
-                research_needed = 500,
-        #     exclude_tags = [list_of_other_tags],
-        #     is_side_effect = a_bool)
-            )
-
-        # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return
