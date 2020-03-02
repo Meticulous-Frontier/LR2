@@ -348,7 +348,7 @@ label SB_fetish_mom_vaginal_label():
     the_person.char "I just can't stop thinking about your cock... When you put it in me I feel so good."
     "Feeling the moment is right, you move your lips to hers and begin to make out. Your tongues dance around each other in unison."
     $ the_person.change_arousal(10)
-    "[the_person.mc_title] begins to pull off your clothes. It isn't long until you are naked, your flesh now against hers."
+    "[the_person.possessive_title] begins to pull off your clothes. It isn't long until you are naked, your flesh now against hers."
     the_person.char "[the_person.mc_title]! Please, I need you inside me again. Will you please... make love to me?"
     "You moan into her mouth and quickly prepare yourself to penetrate [the_person.possessive_title]."
     $ the_person.sex_skills["Vaginal"] = 6

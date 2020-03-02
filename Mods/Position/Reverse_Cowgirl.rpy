@@ -10,6 +10,8 @@ init python:
         transition_default = "transition_default_SB_reverse_cowgirl",
         strip_description = "strip_SB_reverse_cowgirl", strip_ask_description = "strip_ask_SB_reverse_cowgirl",
         orgasm_description = "orgasm_SB_reverse_cowgirl",
+        taboo_break_description = "taboo_break_missionary",
+        associated_taboo = "vaginal_sex",
         verb = "ride", verbing = "riding",
         opinion_tags = ["taking control","vaginal sex"], record_class = "Vaginal Sex")
 
@@ -24,13 +26,13 @@ init 1:
 #    python:
 #        #Here is where you would put connections if they existed.
 
-label intro_SB_reverse_cowgirl(the_girl, the_location, the_object, the_round):
+label intro_SB_reverse_cowgirl(the_girl, the_location, the_object):
     mc.name "[the_girl.title], why don't you ride me for a bit?"
     "You lay down on the [the_object.name], and [the_girl.possessive_title] gets on top, facing away from you."
     "She reaches between her legs and wraps her hand around your cock. She slowly guides it into her slit and then slides the length of it inside her."
     return
 
-label scene_SB_reverse_cowgirl_1(the_girl, the_location, the_object, the_round):
+label scene_SB_reverse_cowgirl_1(the_girl, the_location, the_object):
     # CHOICE CONCEPT: She fucks you, skill based lists#
     "You lay back on the [the_object.name] while [the_girl.possessive_title] works your cock in and out of her."
     if the_girl.arousal > 80:
@@ -75,7 +77,7 @@ label scene_SB_reverse_cowgirl_1(the_girl, the_location, the_object, the_round):
 
     return
 
-label scene_SB_reverse_cowgirl_2(the_girl, the_location, the_object, the_round):
+label scene_SB_reverse_cowgirl_2(the_girl, the_location, the_object):
     # CHOICE CONCEPT: She bottoms out and grinds on you for a bit. Spank or finger her
     "[the_girl.possessive_title] bounces up and down a few times on your cock, then and you holds you deep inside her."
     "Instead of bouncing up and down, she starts to grind herself back and forth."
@@ -161,7 +163,7 @@ label scene_SB_reverse_cowgirl_2(the_girl, the_location, the_object, the_round):
             pass
     return
 
-label outro_SB_reverse_cowgirl(the_girl, the_location, the_object, the_round):
+label outro_SB_reverse_cowgirl(the_girl, the_location, the_object):
     "[the_girl.possessive_title]'s sweet cunt milks your cock, the wet friction pushes you past the point of no return."
     mc.name "Ah, I'm going to cum!"
     "[the_girl.possessive_title] looks back at you and smiles."
@@ -262,12 +264,12 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object, the_round):
 
     return
 
-label transition_default_SB_reverse_cowgirl(the_girl, the_location, the_object, the_round):
+label transition_default_SB_reverse_cowgirl(the_girl, the_location, the_object):
     "You lay down on the [the_object.name], and [the_girl.possessive_title] gets on top, facing away from you."
     "She reaches between her legs and wraps her hand around your cock. She slowly guides it into her slit and then slides the length of it inside her."
     return
 
-label strip_SB_reverse_cowgirl(the_girl, the_clothing, the_location, the_object, the_round):
+label strip_SB_reverse_cowgirl(the_girl, the_clothing, the_location, the_object):
     "[the_girl.possessive_title] straightens up a bit and peaks back at you."
     $ the_girl.call_dialogue("sex_strip")
     $ the_girl.draw_animated_removal(the_clothing, position = SB_reverse_cowgirl.position_tag)
@@ -275,7 +277,7 @@ label strip_SB_reverse_cowgirl(the_girl, the_clothing, the_location, the_object,
     "She resumes working her hips up and down on top of you with a sigh."
     return
 
-label strip_ask_SB_reverse_cowgirl(the_girl, the_clothing, the_location, the_object, the_round):
+label strip_ask_SB_reverse_cowgirl(the_girl, the_clothing, the_location, the_object):
     "[the_girl.possessive_title] straightens up a bit and peaks back at you."
     the_girl.char "Sir, I'd like to take off my [the_clothing.name], would you mind?"
     menu:
@@ -298,7 +300,7 @@ label strip_ask_SB_reverse_cowgirl(the_girl, the_clothing, the_location, the_obj
                 "She grinds her hips back into you and moans ecstatically."
     return
 
-label transition_missionary_SB_reverse_cowgirl(the_girl, the_location, the_object, the_round):
+label transition_missionary_SB_reverse_cowgirl(the_girl, the_location, the_object):
     "Looking down at [the_girl.possessive_title], you decide it's time to change things up a little bit."
     mc.name "Hey, why don't we change it up a bit, do you wanna be on top for a bit?"
     if the_girl.get_opinion_score("taking control") > 0:
@@ -319,7 +321,7 @@ label transition_missionary_SB_reverse_cowgirl(the_girl, the_location, the_objec
     "She pushes her hips back onto you slowly, until you are fully embedded inside her."
     return
 
-label transition_SB_reverse_cowgirl_doggy(the_girl, the_location, the_object, the_round):
+label transition_SB_reverse_cowgirl_doggy(the_girl, the_location, the_object):
     "While the view of her ass is amazing, you decide it is time that you took control of the situation."
     "You grab [the_girl.possessive_title]'s hips and slowly push her up off you. She looks back at you for a moment in confusion."
     mc.name "Don't worry [the_girl.title], I'm just gonna change things up. I'll be back inside you in a second."
@@ -331,7 +333,7 @@ label transition_SB_reverse_cowgirl_doggy(the_girl, the_location, the_object, th
     "When you're ready you push forward, slipping your shaft deep inside of [the_girl.possessive_title]. She gasps and quivers ever so slightly as you start to pump in and out."
     return
 
-label orgasm_SB_reverse_cowgirl(the_girl, the_location, the_object, the_round):
+label orgasm_SB_reverse_cowgirl(the_girl, the_location, the_object):
     "[the_girl.possessive_title]'s cunt quivers and spasms around you, and then suddenly tenses up."
     $ the_girl.call_dialogue("climax_responses_vaginal")
     "[the_girl.possessive_title] stirs her womb with your erection aggressively through her climax"

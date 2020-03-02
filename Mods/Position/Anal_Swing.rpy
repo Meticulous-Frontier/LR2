@@ -9,6 +9,8 @@ init python:
         outro = "outro_SB_anal_swing",
         transition_default = "transition_default_SB_anal_swing",
         strip_description = "strip_SB_anal_swing",  strip_ask_description = "strip_ask_SB_anal_swing",
+        taboo_break_description = "taboo_break_missionary",
+        associated_taboo = "vaginal_sex",
         orgasm_description = "orgasm_SB_anal_swing",
         verb = "ass fuck",
         opinion_tags = ["doggy style sex", "anal sex", "sex standing up"], record_class = "Anal Sex")
@@ -19,7 +21,7 @@ init python:
     #python:
         #SB_anal_swing.link_positions_two_way(doggy, "transition_SB_anal_swing_doggy", "transition_doggy_SB_anal_swing")
 
-label intro_SB_anal_swing(the_girl, the_location, the_object, the_round):
+label intro_SB_anal_swing(the_girl, the_location, the_object):
     "[the_girl.possessive_title] sits down in the [the_object.name]. Her ass is hanging off the back end."
     "You run your hands along her supple hips."
     if SB_check_fetish(the_girl, anal_fetish_role):
@@ -77,7 +79,7 @@ label intro_SB_anal_swing(the_girl, the_location, the_object, the_round):
         $ the_girl.discover_opinion("anal sex")
     return
 
-label scene_SB_anal_swing_1(the_girl, the_location, the_object, the_round):
+label scene_SB_anal_swing_1(the_girl, the_location, the_object):
     "Your hips slap against [the_girl.possessive_title]'s as you plunder her rectum. You keep a slow but steady pace."
     "With each bounce in the swing, [the_girl.possessive_title]'s ass pulls off you almost completely, but you grab the ropes of the swing and forcefully slam her ass back into you."
     $ the_girl.call_dialogue("sex_responses_anal")
@@ -108,7 +110,7 @@ label scene_SB_anal_swing_1(the_girl, the_location, the_object, the_round):
     return
 
 
-label scene_SB_anal_swing_2(the_girl, the_location, the_object, the_round):
+label scene_SB_anal_swing_2(the_girl, the_location, the_object):
     "[the_girl.possessive_title] quivers as you slow up the pace a bit. You pull the straps on the swing towards you and thrust your hips forward, burying your cock as deep in her ass as you can."
     if the_girl.outfit.tits_available():
         "You reach around her body with both hands and grab her tits. You pinch and pull at her nipple roughly being careful to keep your cock deep inside her."
@@ -183,7 +185,7 @@ label scene_SB_anal_swing_2(the_girl, the_location, the_object, the_round):
     return
 
 
-label outro_SB_anal_swing(the_girl, the_location, the_object, the_round):
+label outro_SB_anal_swing(the_girl, the_location, the_object):
     "[the_girl.possessive_title]'s tight ass draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
     $the_girl.call_dialogue("sex_responses_anal")
     mc.name "Ah, I'm going to cum!"
@@ -288,12 +290,12 @@ label outro_SB_anal_swing(the_girl, the_location, the_object, the_round):
     return
 
 
-label transition_default_SB_anal_swing(the_girl, the_location, the_object, the_round):
+label transition_default_SB_anal_swing(the_girl, the_location, the_object):
     "[the_girl.possessive_title] turns and puts her hands on [the_object.name]. You bounce your hard shaft on her ass a couple of times before lining yourself up with her sphincter."
     "Once you're both ready you push yourself forward, slipping your hard shaft deep inside of her. She lets out a gasp under her breath."
     return
 
-label strip_SB_anal_swing(the_girl, the_clothing, the_location, the_object, the_round):
+label strip_SB_anal_swing(the_girl, the_clothing, the_location, the_object):
     #"[the_girl.possessive_title] leans forward a little further and pops off your cock."
     $ the_girl.call_dialogue("sex_strip")
     $ the_girl.draw_animated_removal(the_clothing, position =  SB_anal_swing.position_tag)
@@ -301,7 +303,7 @@ label strip_SB_anal_swing(the_girl, the_clothing, the_location, the_object, the_
     "She groans happily when you push back inside of her."
     return
 
-label strip_ask_SB_anal_swing(the_girl, the_clothing, the_location, the_object, the_round):
+label strip_ask_SB_anal_swing(the_girl, the_clothing, the_location, the_object):
     the_girl.char "Sir, I'd like to take off my [the_clothing.name], would you mind?"
     "[the_girl.char] pants as you fuck her from behind."
     menu:
@@ -325,7 +327,7 @@ label strip_ask_SB_anal_swing(the_girl, the_clothing, the_location, the_object, 
     return
 
 
-label orgasm_SB_anal_swing(the_girl, the_location, the_object, the_round):
+label orgasm_SB_anal_swing(the_girl, the_location, the_object):
     "[the_girl.possessive_title]'s whole body starts to tremble, and then suddenly she tenses up."
     $ the_girl.call_dialogue("climax_responses_anal")
     "You bury your cock in deep in [the_girl.possessive_title]'s ass while she cums. Her bowel grips you tightly."

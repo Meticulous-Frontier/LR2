@@ -10,6 +10,8 @@ init python:
         transition_default = "transition_default_SB_doggy_standing",
         strip_description = "strip_SB_doggy_standing",  strip_ask_description = "strip_ask_SB_doggy_standing",
         orgasm_description = "orgasm_SB_doggy_standing",
+        taboo_break_description = "taboo_break_missionary",
+        associated_taboo = "vaginal_sex",
         verb = "fuck",
         opinion_tags = ["doggy style sex", "vaginal sex", "sex standing up"], record_class = "Vaginal Sex")
 
@@ -19,7 +21,7 @@ init 1 python:
     SB_doggy_standing.link_positions(SB_anal_standing, "transition_SB_doggy_standing_SB_anal_standing")
     SB_doggy_standing.link_positions(doggy, "transition_SB_doggy_standing_doggy")
 
-label intro_SB_doggy_standing(the_girl, the_location, the_object, the_round):
+label intro_SB_doggy_standing(the_girl, the_location, the_object):
     "You turn [the_girl.possessive_title] around, and she leans over [the_object.name], presenting her ass to you."
     mc.name "Good girl, [the_girl.title], I'm going to fuck you hard."
     if the_girl.get_opinion_score("doggy style sex") > 2 :
@@ -50,7 +52,7 @@ label intro_SB_doggy_standing(the_girl, the_location, the_object, the_round):
         $ the_girl.discover_opinion("sex standing up")
     return
 
-label scene_SB_doggy_standing_1(the_girl, the_location, the_object, the_round):
+label scene_SB_doggy_standing_1(the_girl, the_location, the_object):
     "Your hips slap against [the_girl.possessive_title]'s ass as you fuck her vigorously."
     $ the_girl.call_dialogue("sex_responses_vaginal")
     if the_girl.sex_skills["Vaginal"] < 2: #Inexperienced
@@ -146,7 +148,7 @@ label scene_SB_doggy_standing_1(the_girl, the_location, the_object, the_round):
     return
 
 
-label scene_SB_doggy_standing_2(the_girl, the_location, the_object, the_round):
+label scene_SB_doggy_standing_2(the_girl, the_location, the_object):
     "You take a breather and slow up the pace a bit."
     if the_girl.outfit.tits_available():
         "You reach around her body with one hand and grasp her tit. You pinch and pull at her nipple roughly as you fuck her saturated slit."
@@ -198,7 +200,7 @@ label scene_SB_doggy_standing_2(the_girl, the_location, the_object, the_round):
     return
 
 
-label outro_SB_doggy_standing(the_girl, the_location, the_object, the_round):
+label outro_SB_doggy_standing(the_girl, the_location, the_object):
     "[the_girl.possessive_title]'s creamy cunt draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
     $the_girl.call_dialogue("sex_responses_vaginal")
     mc.name "Ah, I'm going to cum!"
@@ -308,12 +310,12 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object, the_round):
 
     return
 
-label transition_SB_doggy_standing_doggy(the_girl, the_location, the_object, the_round):
+label transition_SB_doggy_standing_doggy(the_girl, the_location, the_object):
     mc.name "Get down on your knees [the_girl.title], i'm going to fuck you like the little bitch you are."
     the_girl.char "Oh yes, [the_girl.mc_title], make me your little bitch."
     return
 
-label transition_SB_doggy_standing_SB_anal_standing(the_girl, the_location, the_object, the_round):
+label transition_SB_doggy_standing_SB_anal_standing(the_girl, the_location, the_object):
     "You pull out of [the_girl.title]'s wet pussy, leaving it dripping fluids on the floor."
     "You line your cock up with her asshole, the tip just barely pressing against it."
     if the_girl.sex_skills["Anal"] > 2 or the_girl.get_opinion_score("anal sex") > 0:
@@ -342,12 +344,12 @@ label transition_SB_doggy_standing_SB_anal_standing(the_girl, the_location, the_
             "When she's finally ready you start to move, fucking her cute little ass."
     return
 
-label transition_default_SB_doggy_standing(the_girl, the_location, the_object, the_round):
+label transition_default_SB_doggy_standing(the_girl, the_location, the_object):
     "[the_girl.possessive_title] turns and puts her hands on [the_object.name]. You bounce your hard shaft on her ass a couple of times before lining yourself up with her pussy."
     "Once you're both ready you push yourself forward, slipping your hard shaft deep inside of her. She lets out a gasp under her breath."
     return
 
-label strip_SB_doggy_standing(the_girl, the_clothing, the_location, the_object, the_round):
+label strip_SB_doggy_standing(the_girl, the_clothing, the_location, the_object):
     "[the_girl.possessive_title] leans forward a little further and pops off your cock."
     $ the_girl.call_dialogue("sex_strip")
     $ the_girl.draw_animated_removal(the_clothing, position =  SB_doggy_standing.position_tag)
@@ -355,7 +357,7 @@ label strip_SB_doggy_standing(the_girl, the_clothing, the_location, the_object, 
     "She groans happily when you push back inside of her."
     return
 
-label strip_ask_SB_doggy_standing(the_girl, the_clothing, the_location, the_object, the_round):
+label strip_ask_SB_doggy_standing(the_girl, the_clothing, the_location, the_object):
     the_girl.char "Sir, I'd like to take off my [the_clothing.name], would you mind?"
     "[the_girl.char] pants as you fuck her from behind."
     menu:
@@ -379,7 +381,7 @@ label strip_ask_SB_doggy_standing(the_girl, the_clothing, the_location, the_obje
     return
 
 
-label orgasm_SB_doggy_standing(the_girl, the_location, the_object, the_round):
+label orgasm_SB_doggy_standing(the_girl, the_location, the_object):
     "[the_girl.possessive_title]'s legs start to quiver, and then suddenly she tenses up."
     $ the_girl.call_dialogue("climax_responses_vaginal")
     "You bury your cock in deep in [the_girl.possessive_title]'s cunt while she cums. Her pussy spasms around you."

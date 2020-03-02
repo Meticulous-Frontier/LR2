@@ -6,7 +6,7 @@ init 2:   #Initial declaration made in init 0
 
 
 
-label scene_SB_doggy_anal_1(the_girl, the_location, the_object, the_round):
+label scene_SB_doggy_anal_1(the_girl, the_location, the_object):
     "You give [the_girl.possessive_title]'s ass a good hard spank. She lets out a loud yelp."
     $ the_girl.call_dialogue("sex_responses_anal")
     if the_girl.sex_skills["Anal"] < 2: #Inexperienced
@@ -102,7 +102,7 @@ label scene_SB_doggy_anal_1(the_girl, the_location, the_object, the_round):
     return
 
 
-label scene_SB_doggy_anal_2(the_girl, the_location, the_object, the_round):
+label scene_SB_doggy_anal_2(the_girl, the_location, the_object):
     "[the_girl.possessive_title] lowers her shoulders against the [the_object.name] and groans as you fuck her from behind."
     the_girl.char "Ah... I feel so full!"
     "You reach forward and place your hands on [the_girl.possessive_title]'s shoulders. With each thrust you pull her back onto you forcefully, your hips smacking her ass cheeks loudly. She arches her back and lets out a series of satisfied yelps."

@@ -10,6 +10,8 @@
         transition_default = "transition_default_SB_cum_fetish_blowjob",
         strip_description = "strip_SB_cum_fetish_blowjob", strip_ask_description = "strip_ask_SB_cum_fetish_blowjob",
         orgasm_description = "orgasm_SB_cum_fetish_blowjob",
+        taboo_break_description = "taboo_break_blowjob",
+        associated_taboo = "oral_sex",
         verb = "throat",
         opinion_tags = ["giving blowjobs"], record_class = "Blowjobs")
 
@@ -19,7 +21,7 @@
 #    python:
 #        blowjob.link_positions(deepthroat,"transition_blowjob_deepthroat")
 
-label intro_SB_cum_fetish_blowjob(the_girl, the_location, the_object, the_round):
+label intro_SB_cum_fetish_blowjob(the_girl, the_location, the_object):
     "[the_girl.possessive_title] eagerly begins opening your pants. She pulls out your cock and gives it a few gentle strokes."
     if mc.condom:
         the_girl.char "Why are you wearing this thing? Lets take this off so I can take care of you better..."
@@ -31,7 +33,7 @@ label intro_SB_cum_fetish_blowjob(the_girl, the_location, the_object, the_round)
     $ SB_cum_fetish_blowjob.redraw_scene(the_girl)
     return
 
-label scene_SB_cum_fetish_blowjob_1(the_girl, the_location, the_object, the_round):
+label scene_SB_cum_fetish_blowjob_1(the_girl, the_location, the_object):
     $ SB_cum_fetish_blowjob.current_modifier = "blowjob"
     $ SB_cum_fetish_blowjob.redraw_scene(the_girl)
     "[the_girl.possessive_title] keeps her mouth open wide and bobs her head back and forth to slide your cock in and out. The feeling of her soft, warm mouth sends shivers up your spine."
@@ -69,7 +71,7 @@ label scene_SB_cum_fetish_blowjob_1(the_girl, the_location, the_object, the_roun
 
     return
 
-label scene_SB_cum_fetish_blowjob_2(the_girl, the_location, the_object, the_round):
+label scene_SB_cum_fetish_blowjob_2(the_girl, the_location, the_object):
     $ SB_cum_fetish_blowjob.current_modifier = None
     $ SB_cum_fetish_blowjob.redraw_scene(the_girl)
 
@@ -118,7 +120,7 @@ label scene_SB_cum_fetish_blowjob_2(the_girl, the_location, the_object, the_roun
 
     return
 
-label outro_SB_cum_fetish_blowjob(the_girl, the_location, the_object, the_round):
+label outro_SB_cum_fetish_blowjob(the_girl, the_location, the_object):
     $ SB_cum_fetish_blowjob.current_modifier = "blowjob"
     $ SB_cum_fetish_blowjob.redraw_scene(the_girl)
     "Little by little the soft, warm mouth of [the_girl.possessive_title] brings you closer to orgasm. One last pass across her velvet tongue is enough to push you past the point of no return."
@@ -154,7 +156,7 @@ label outro_SB_cum_fetish_blowjob(the_girl, the_location, the_object, the_round)
         the_girl.char "Yes.. its so hot... It feels so good on my skin..."
     return
 
-label transition_SB_cum_fetish_blowjob_blowjob(the_girl, the_location, the_object, the_round):
+label transition_SB_cum_fetish_blowjob_blowjob(the_girl, the_location, the_object):
     $ SB_cum_fetish_blowjob.current_modifier = "blowjob"
     $ SB_cum_fetish_blowjob.redraw_scene(the_girl)
     if mc.condom:
@@ -165,7 +167,7 @@ label transition_SB_cum_fetish_blowjob_blowjob(the_girl, the_location, the_objec
     mc.name "That's it, that's a good girl."
     return
 
-label strip_SB_cum_fetish_blowjob(the_girl, the_clothing, the_location, the_object, the_round):
+label strip_SB_cum_fetish_blowjob(the_girl, the_clothing, the_location, the_object):
     $ SB_cum_fetish_blowjob.current_modifier = None
     $ SB_cum_fetish_blowjob.redraw_scene(the_girl)
 
@@ -177,7 +179,7 @@ label strip_SB_cum_fetish_blowjob(the_girl, the_clothing, the_location, the_obje
     $ SB_cum_fetish_blowjob.redraw_scene(the_girl)
     return
 
-label strip_ask_SB_cum_fetish_blowjob(the_girl, the_clothing, the_location, the_object, the_round):
+label strip_ask_SB_cum_fetish_blowjob(the_girl, the_clothing, the_location, the_object):
     $ SB_cum_fetish_blowjob.current_modifier = None
     $ SB_cum_fetish_blowjob.redraw_scene(the_girl)
 
@@ -200,7 +202,7 @@ label strip_ask_SB_cum_fetish_blowjob(the_girl, the_clothing, the_location, the_
             "She slides you back into her mouth and presses you all the way to the back, rubbing your tip against the back of her throat for a second before she goes back to blowing you."
     return
 
-label orgasm_SB_cum_fetish_blowjob(the_girl, the_location, the_object, the_round):
+label orgasm_SB_cum_fetish_blowjob(the_girl, the_location, the_object):
     $ SB_cum_fetish_blowjob.current_modifier = "blowjob"
     $ SB_cum_fetish_blowjob.redraw_scene(the_girl)
     "[the_girl.possessive_title] pauses suddenly. You hear her whimper softly - the noise party muffled by your cock."

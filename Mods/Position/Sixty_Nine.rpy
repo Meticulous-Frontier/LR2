@@ -14,17 +14,19 @@ init python:
         transition_default = "transition_default_SB_sixty_nine",
         strip_description = "strip_SB_sixty_nine", strip_ask_description = "strip_ask_SB_sixty_nine",
         orgasm_description = "orgasm_SB_sixty_nine",
+        taboo_break_description = "taboo_break_missionary",
+        associated_taboo = "vaginal_sex",
         verb = "sixty-nine",
         verbing = "sixty-nining",
         opinion_tags = ["giving blowjobs", "getting head"], record_class = "Cunnilingus")
-    
+
     list_of_positions.append(SB_sixty_nine)
 
 #init 1:
     #python:
         #SB_sixty_nine.link_positions(deepthroat,"transition_SB_sixty_nine_deepthroat")
 
-label intro_SB_sixty_nine(the_girl, the_location, the_object, the_round):
+label intro_SB_sixty_nine(the_girl, the_location, the_object):
     "You give her ass a good hard smack and then look at [the_girl.possessive_title]."
     mc.name "Hey, wanna sixty nine?"
     if SB_check_fetish(the_girl, oral_fetish_role):
@@ -49,7 +51,7 @@ label intro_SB_sixty_nine(the_girl, the_location, the_object, the_round):
     #$ SB_sixty_nine.redraw_scene(the_girl)
     return
 
-label scene_SB_sixty_nine_1(the_girl, the_location, the_object, the_round):
+label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
     $ SB_sixty_nine.redraw_scene(the_girl)
     if the_girl.sex_skills["Oral"] < 2: #Inexperienced.
         "You rest your hands on [the_girl.possessive_title]'s ass as she bobs her head up and down. She struggles to take your very deep, so she focuses on licking and sucking your tip."
@@ -245,7 +247,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object, the_round):
 
     return
 
-label scene_SB_sixty_nine_2(the_girl, the_location, the_object, the_round):
+label scene_SB_sixty_nine_2(the_girl, the_location, the_object):
 
     "[the_girl.possessive_title] pulls your cock out of her her mouth and starts to stroke you with her hand while her tongue circles around the tip."
     if the_girl.arousal > 50:
@@ -316,7 +318,7 @@ label scene_SB_sixty_nine_2(the_girl, the_location, the_object, the_round):
 
     return
 
-label outro_SB_sixty_nine(the_girl, the_location, the_object, the_round):
+label outro_SB_sixty_nine(the_girl, the_location, the_object):
     #$ SB_sixty_nine.current_modifier = "SB_sixty_nine"
     $ SB_sixty_nine.redraw_scene(the_girl)
     "Little by little the soft, warm mouth of [the_girl.possessive_title] brings you closer to orgasm. One last pass across her velvet tongue is enough to push you past the point of no return."
@@ -408,7 +410,7 @@ label outro_SB_sixty_nine(the_girl, the_location, the_object, the_round):
 
     return
 
-label transition_SB_sixty_nine_deepthroat(the_girl, the_location, the_object, the_round):  #Delete this?
+label transition_SB_sixty_nine_deepthroat(the_girl, the_location, the_object):  #Delete this?
     mc.name "Fuck that feels great [the_girl.possessive_title]. Think you can take it any deeper?"
     #$ SB_sixty_nine.current_modifier = None
     $ SB_sixty_nine.redraw_scene(the_girl)
@@ -419,7 +421,7 @@ label transition_SB_sixty_nine_deepthroat(the_girl, the_location, the_object, th
     "Once she's caught her breath she opens her mouth wide and slides you back down her throat. She doesn't stop until her nose taps your stomach and she has your entire cock in her mouth."
     return
 
-label transition_default_SB_sixty_nine(the_girl, the_location, the_object, the_round):
+label transition_default_SB_sixty_nine(the_girl, the_location, the_object):
     $ SB_sixty_nine.redraw_scene(the_girl)
     "You lay down on the [the_object.name]. [the_girl.possessive_title] swings one leg over your head and slowly moves her body into position on top of yours."
     if mc.condom:
@@ -428,7 +430,7 @@ label transition_default_SB_sixty_nine(the_girl, the_location, the_object, the_r
         $ mc.condom = False
     return
 
-label strip_SB_sixty_nine(the_girl, the_clothing, the_location, the_object, the_round):
+label strip_SB_sixty_nine(the_girl, the_clothing, the_location, the_object):
     "[the_girl.possessive_title] pops off your cock."
     $ the_girl.call_dialogue("sex_strip")
     $ the_girl.draw_animated_removal(the_clothing)
@@ -436,7 +438,7 @@ label strip_SB_sixty_nine(the_girl, the_clothing, the_location, the_object, the_
     $ SB_sixty_nine.redraw_scene(the_girl)
     return
 
-label strip_ask_SB_sixty_nine(the_girl, the_clothing, the_location, the_object, the_round):
+label strip_ask_SB_sixty_nine(the_girl, the_clothing, the_location, the_object):
     #$ SB_sixty_nine.current_modifier = None
     $ SB_sixty_nine.redraw_scene(the_girl)
 
@@ -455,7 +457,7 @@ label strip_ask_SB_sixty_nine(the_girl, the_clothing, the_location, the_object, 
             "She slides you back into her mouth and presses you all the way to the back, rubbing your tip against the back of her throat for a second before she goes back to blowing you."
     return
 
-label orgasm_SB_sixty_nine(the_girl, the_location, the_object, the_round):
+label orgasm_SB_sixty_nine(the_girl, the_location, the_object):
     "Licking and probing all around [the_girl.possessive_title]'s clit, you can feel her start to quiver."
     "[the_girl.possessive_title] pauses suddenly. You hear her moaning, the sound muffled by your cock in her mouth."
     if the_girl.sex_skills["Oral"] < 4:

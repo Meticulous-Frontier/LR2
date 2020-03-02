@@ -12,9 +12,11 @@ init python:
         transition_default = "transition_default_SB_facing_wall",
         strip_description = "strip_SB_facing_wall", strip_ask_description = "strip_ask_SB_facing_wall",
         orgasm_description = "orgasm_SB_facing_wall",
+        taboo_break_description = "taboo_break_missionary",
+        associated_taboo = "vaginal_sex",
         verb = "fuck",
         opinion_tags = ["sex standing up", "vaginal sex"], record_class = "Vaginal Sex")
-    
+
     #list_of_positions.append(SB_facing_wall)     #Consider adding later, but for now, transition from the other standing scene
 
 init 1:
@@ -22,7 +24,7 @@ init 1:
         SB_facing_wall.link_positions_two_way(against_wall, "transition_SB_facing_wall_against_wall", "transition_against_wall_SB_facing_wall")
         #SB_facing_wall.link_positions(against_wall,"transition_SB_facing_wall_against_wall")
 
-label intro_SB_facing_wall(the_girl, the_location, the_object, the_round):
+label intro_SB_facing_wall(the_girl, the_location, the_object):
     "You turn [the_girl.possessive_title] so she faces away from you and push her up against the [the_object.name]"
     "You rub your dick along her slit a few times, first up and down, and then side to side. You line yourself up and begin to push inside of her."
     the_girl.char "Oh my god..."
@@ -57,7 +59,7 @@ label intro_SB_facing_wall(the_girl, the_location, the_object, the_round):
     #  "being submissive"
     #  "taking control"
 
-label scene_SB_facing_wall_1(the_girl, the_location, the_object, the_round):
+label scene_SB_facing_wall_1(the_girl, the_location, the_object):
     "You grab [the_girl.possessive_title] hips an begin trusting eagerly. You hips slap against her ass in lewd smacking noises as you fuck her."
     $ the_girl.call_dialogue("sex_responses_vaginal")
     if the_girl.sex_skills["Vaginal"] < 2: #Inexperienced, option to dominate her a bit
@@ -288,7 +290,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object, the_round):
     return
 
 
-label scene_SB_facing_wall_2(the_girl, the_location, the_object, the_round):
+label scene_SB_facing_wall_2(the_girl, the_location, the_object):
     "You grab one of [the_girl.possessive_title]'s legs and lift it up to the side, giving you better access to thrust deep inside her"
     "The change of angle of your penetration is very stimulating for both of you."
     the_girl.char "Oh, that's it [the_girl.mc_title], don't stop, it feels so good!"
@@ -471,7 +473,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object, the_round):
 
     return
 
-label outro_SB_facing_wall(the_girl, the_location, the_object, the_round):
+label outro_SB_facing_wall(the_girl, the_location, the_object):
     "[the_girl.possessive_title]'s sweet cunt draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
     $the_girl.call_dialogue("sex_responses_vaginal")
     mc.name "Ah, I'm going to cum!"
@@ -560,7 +562,7 @@ label outro_SB_facing_wall(the_girl, the_location, the_object, the_round):
 
     return
 
-label transition_SB_facing_wall_against_wall(the_girl, the_location, the_object, the_round):
+label transition_SB_facing_wall_against_wall(the_girl, the_location, the_object):
     "You decide to turn [the_girl.possessive_title] around to face you. You want to feel her chest against yours and kiss her deep while you fuck."
     "You pull out and back off for a second while you spin her hips."
     "[the_girl.possessive_title] plants her back against [the_object.name] and watches you as you line yourself back up."
@@ -568,7 +570,7 @@ label transition_SB_facing_wall_against_wall(the_girl, the_location, the_object,
 
     return
 
-label transition_against_wall_SB_facing_wall(the_girl, the_location, the_object, the_round):
+label transition_against_wall_SB_facing_wall(the_girl, the_location, the_object):
     "You decide you want to turn her around so you can really give her a good pounding. You pull out and turn her around, facing [the_object.name]"
     $ SB_facing_wall.redraw_scene(the_girl)
     "You rub your dick along her slit a few times, first up and down, and then side to side. You line yourself up and being to push inside of her."
@@ -591,12 +593,12 @@ label transition_against_wall_SB_facing_wall(the_girl, the_location, the_object,
         $ the_girl.discover_opinion("sex standing up")
     return
 
-label transition_default_SB_facing_wall(the_girl, the_location, the_object, the_round):
+label transition_default_SB_facing_wall(the_girl, the_location, the_object):
     "You turn [the_girl.possessive_title] so she is is facing [the_object.name]"
     "Once you're ready you push yourself forward, slipping your hard shaft deep inside of her. She lets out a gasp under her breath."
     return
 
-label strip_SB_facing_wall(the_girl, the_clothing, the_location, the_object, the_round):
+label strip_SB_facing_wall(the_girl, the_clothing, the_location, the_object):
     "[the_girl.possessive_title] leans forward a little further and pops off your cock."
     $ the_girl.call_dialogue("sex_strip")
     $ the_girl.draw_animated_removal(the_clothing, position = SB_facing_wall.position_tag)
@@ -604,7 +606,7 @@ label strip_SB_facing_wall(the_girl, the_clothing, the_location, the_object, the
     "She groans happily when you push back inside of her."
     return
 
-label strip_ask_SB_facing_wall(the_girl, the_clothing, the_location, the_object, the_round):
+label strip_ask_SB_facing_wall(the_girl, the_clothing, the_location, the_object):
     the_girl.char "Sir, I'd like to take off my [the_clothing.name], would you mind?"
     "[the_girl.char] pants as you fuck her from behind."
     menu:
@@ -627,7 +629,7 @@ label strip_ask_SB_facing_wall(the_girl, the_clothing, the_location, the_object,
                 "She grinds her hips back into you and moans ecstatically."
     return
 
-label orgasm_SB_facing_wall(the_girl, the_location, the_object, the_round):
+label orgasm_SB_facing_wall(the_girl, the_location, the_object):
     "[the_girl.possessive_title] gasps. Her hands grasp at the [the_object.name] as she starts to cum."
     $ the_girl.call_dialogue("climax_responses_vaginal")
     "You push her roughly up against [the_object.name] and keep fucking her through her orgasm."
