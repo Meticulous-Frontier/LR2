@@ -233,7 +233,7 @@ label advance_time_enhanced(no_events = False):
     python:
         # increase crisis chance (every time slot)
         crisis_chance += 1
-        renpy.free_memory()
+        # renpy.free_memory()
         mc.location.show_background()
         x = None
         c = None
