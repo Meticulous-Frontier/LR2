@@ -55,6 +55,8 @@ init 1 python:
 
 #SBC1
 label SB_fetish_cum_label(the_person):
+    $ FETISH_CUM_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     #$ the_person = FETISH_cum_EVENT_TARGET
     "You are just finishing up with with some work before you get ready for lunch. You hear a friendly voice greet you as you pull your packed lunch from the desk."
     the_person.char "Hey [the_person.mc_title]! That sure looks good!"
@@ -137,9 +139,6 @@ label SB_fetish_cum_label(the_person):
             the_person.char "I'm sorry to hear that..." #TODO finish this
             $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
-    $ FETISH_CUM_EVENT_INUSE = False
-    $ the_person.reset_arousal()
     $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
     $ mc.location.show_background()
     $ renpy.scene("Active")
@@ -237,6 +236,8 @@ label SB_fetish_cum_dosage_label():
 
 #SBC3
 label SB_fetish_mom_cum_label():
+    $ FETISH_CUM_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ the_person = mom
     "Tired from a long day, you quickly fall asleep."
     "You are having some very pleasant dreams. [the_person.possessive_title] is posing for you in some sexy lingerie, then gets down on her knees..."
@@ -320,8 +321,6 @@ label SB_fetish_mom_cum_label():
     "[the_person.possessive_title] leave your room. Wow! What a night!"
     "You grab some clothes and head for the shower."
 
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
-    $ FETISH_CUM_EVENT_INUSE = False
     python:
         the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
         mc.location.show_background()
@@ -331,6 +330,8 @@ label SB_fetish_mom_cum_label():
 
 #SBC4
 label SB_fetish_lily_cum_label():
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
+    $ FETISH_CUM_EVENT_INUSE = False
     $ the_person = lily
     "You wake up a little groggy. Your head kinda hurts, so you grab some clothes and head towards the bathroom to take a hot shower. Hopefully the steam will help you feel better."
     $ home_shower.show_background()
@@ -404,10 +405,6 @@ label SB_fetish_lily_cum_label():
     the_person.char "Okay... I'm going to hop out of the shower now."
     "[the_person.possessive_title] gets out. You finish up with your shower, balls empty and ready for the day!"
 
-
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
-    $ FETISH_CUM_EVENT_INUSE = False
-
     python:
         the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
         bedroom.show_background()
@@ -455,8 +452,9 @@ label SB_fetish_shower_cum_label():
 
 #SBC060
 label SB_fetish_stephanie_cum_label():
-    $ the_person = stephanie
     $ FETISH_CUM_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
+    $ the_person = stephanie
     if mc.location == mc.business.r_div: #Already in research
         "Suddenly, [the_person.possessive_title] looks up from her work and and speaks up."
         the_person.char "Hey [the_person.mc_title], I need to talk to you about something. Can we go somewhere private?"
@@ -786,7 +784,6 @@ label SB_fetish_stephanie_cum_label():
         $ scene_manager.update_actor(the_person, position = "walking_away")
         "You say goodbye, and [the_person.possessive_title] turns and walks out of your office."
         "Looks like [the_person.title] has a cum fetish now!"
-
 
     $ the_person.review_outfit(dialogue = False)
     $ renpy.scene("Active")

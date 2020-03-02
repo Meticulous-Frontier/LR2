@@ -57,6 +57,9 @@ init 1 python:
 
 #SBV1
 label SB_fetish_vaginal_label(the_person):
+    $ FETISH_VAGINAL_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
+
     "*Ding Dong*"
     "You're roused from your bed by a ring on your doorbell."
     # make sure we are at the hall
@@ -178,9 +181,6 @@ label SB_fetish_vaginal_label(the_person):
             "[the_person.possessive_title] quickly sulks off."
             return  # EXIT
 
-    $ FETISH_VAGINAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
-
     call advance_time_enhanced(no_events = True) from _SB_overnight_SBV010
 
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV010
@@ -188,6 +188,9 @@ label SB_fetish_vaginal_label(the_person):
 
 #SBV2
 label SB_fetish_vaginal_event_label(the_person):
+    $ FETISH_VAGINAL_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
+
     if the_person is mom:
         "You hear a knock on your door. You hear [the_person.possessive_title]'s sweet and familiar voice from the other side."
         the_person.char "Hey honey, its [the_person.possessive_title]..."
@@ -309,10 +312,6 @@ label SB_fetish_vaginal_event_label(the_person):
                 the_person.char "Oh! Well okay. I mean hey, tomorrow is a new day, and you know I like to be close to you..."
         "[the_person.possessive_title] lays down on your bed. You cuddle up behind her and slowly drift off to sleep."
 
-
-    $ FETISH_VAGINAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
-
     call advance_time_enhanced(no_events = True) from _SB_overnight_SBV020
 
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV020
@@ -320,6 +319,8 @@ label SB_fetish_vaginal_event_label(the_person):
 
 #SBV3
 label SB_fetish_mom_vaginal_label():
+    $ FETISH_VAGINAL_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ the_person = mom
     "You are just starting to drift off to sleep, when you hear a knock at your door."
     the_person.char "Hey Honey... its [the_person.title]... can I come in?"
@@ -364,8 +365,6 @@ label SB_fetish_mom_vaginal_label():
 
     $ the_person.special_role.append(vaginal_fetish_role)
     $ add_breed_me_collar_to_base_outfit(the_person)
-    $ FETISH_VAGINAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
     call advance_time_enhanced(no_events = True) from _SB_overnight_SBV030
 
@@ -375,6 +374,8 @@ label SB_fetish_mom_vaginal_label():
 
 #SBV4
 label SB_fetish_lily_vaginal_label():
+    $ FETISH_VAGINAL_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ the_person = lily
     "You are just starting to drift off to sleep, when you hear a knock at your door."
     the_person.char "Hey [the_person.mc_title]... Are you still up? Can I come in for a bit?"
@@ -429,8 +430,6 @@ label SB_fetish_lily_vaginal_label():
 
     $ the_person.special_role.append(vaginal_fetish_role)
     $ add_breed_me_collar_to_base_outfit(the_person)
-    $ FETISH_VAGINAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
     call advance_time_enhanced(no_events = True) from _SB_overnight_SBV040
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV040
@@ -447,6 +446,8 @@ init 1 python:
 #SBV5
 #I'm leaving this code for now, but it should be unused#
 label SB_cowgirl_wakeup_label(the_person):
+    $ FETISH_VAGINAL_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     "All night long, you have sexy dreams centered around [the_person.possessive_title]."
     "She's on her knees, sucking you off expertly. Later, shes on her back while you pin her to the bed. Sometime later, shes on her hands and knees, taking your cock like a pro."
 
@@ -476,9 +477,7 @@ label SB_cowgirl_wakeup_label(the_person):
     $ the_person.review_outfit(dialogue = False)
     "You fall back asleep. When you wake up, [the_person.possessive_title] has left."
     "Looks like you slept in!"
-    $ FETISH_VAGINAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
-    return
+    return "Advance Time"
 
 init 2 python:
     def SB_fetish_vaginal_recurring_requirement():
@@ -515,6 +514,8 @@ init 2 python:
 
 #SBV6
 label SB_fetish_vaginal_recurring_label():
+    $ FETISH_VAGINAL_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ the_person = get_vaginal_fetish_employee()
     if the_person is mom:
         "Before going to bed, you hear a knock on your door. You hear [the_person.possessive_title]'s sweet and familiar voice from the other side."
@@ -593,16 +594,14 @@ label SB_fetish_vaginal_recurring_label():
 
     "After you finish your rutting, you and [the_person.possessive_title] get under the covers of your bed."
     "Spooning behind [the_person.possessive_title], you drift off to a wonderful night's sleep. Her body heat and the feeling of her naked skin against yours give you very pleasant dreams."
-    $ SB_SET_RANDOM_EVENT_CHANCE(0)
-    #SBMOD Start hacked wakeup sex code. To be copy/pasted to other similar places#
-
-    $ FETISH_VAGINAL_EVENT_INUSE = False
     call advance_time_enhanced(no_events = True) from _SB_overnight_SBV060
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV060
     return "Advance Time"
 
 #SBV7
 label SB_fetish_vaginal_lily_recurring_label():
+    $ FETISH_VAGINAL_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ the_person = lily
 
     "Before going to bed, you hear a knock on your door. You hear [the_person.possessive_title] from the other side of the door."
@@ -663,9 +662,6 @@ label SB_fetish_vaginal_lily_recurring_label():
     "After you finish your rutting, you and [the_person.possessive_title] get under the covers of your bed."
     "Spooning behind [the_person.possessive_title], you drift off to a wonderful night's sleep. Her body heat and the feeling of her naked skin against yours give you very pleasant dreams."
     #SBMOD Start hacked wakeup sex code. To be copy/pasted to other similar places#
-
-    $ FETISH_VAGINAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
     call advance_time_enhanced(no_events = True) from _SB_overnight_SBV070
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV070
