@@ -67,17 +67,17 @@ init -2 style custom_outfit_style: ##The text style used for text inside of the 
     italic False
 
 init 2 style textbutton_text_style: ##The generic style used for text button backgrounds. TODO: Replace this with a pretty background image instead of a flat colour.
-    size 18
+    size 20 # NOTE: Text size is constricted to 18 in the display_menu_choice, have requested for this to be changed.
     italic False
     bold False
     color "#dddddd"
-    outlines [(2,"#222222",0,0)]
+    outlines [(1,"#222222",0,0)]
     text_align 0.5
 
 init 2 style menu_text_style:
-    size 18
+    size 19
     italic False
     bold False
     color "#dddddd"
-    outlines [(2,"#222222",0,0)]
+    outlines [(1,"#222222",0,0)]
     text_align 0.5
