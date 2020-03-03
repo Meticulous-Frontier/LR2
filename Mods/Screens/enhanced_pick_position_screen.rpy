@@ -1,81 +1,103 @@
 screen pick_position_screen(the_person, allow_none = True, ignore_taboo = False):
 
-    zorder 49
-
-    # default positon_option_list = []
-    # python:
-    #     for position in list_of_positions:
-    #         if mc.location.has_object_with_trait(position.requires_location) and (the_person.has_large_tits() or not position.requires_large_tits):
-    #             position_option_list.append([position.build_position_willingness_string(the_person, ignore_taboo = ignore_taboo), position])
-    #     if allow_none:
-    #         position_option_list.append([["Nothing"], "Nothing"])
-
-    #test = [[["Nothing", "exciting"], "Nothing"]]
+    default non_sex_options = {} # Add options that are not of the Position class. Key is display, [0] is return value
+    python:
+        if allow_none:
+            non_sex_options["Nothing"] = "None"
+    zorder 49 # Tooltip screen is zorder 50
     $ tooltip = GetTooltip(renpy.current_screen().screen_name)
-    frame:
-        vbox:
-            xalign 0.5
-            yalign 0.5
-            xsize 500
-            ysize 900
-            viewport:
-                mousewheel True
-                draggable True
-                scrollbars "vertical"
+    vbox:
+        spacing -12
+        xalign 0.3
+        yalign 0.7
+        ysize 675
+        frame:
+            vbox:
+                xsize 500
+                viewport:
+                    mousewheel True
+                    draggable True
+                    if len(list_of_positions) + 1 > 6:
+                        scrollbars "vertical"
+                    vbox:
+                        for position in list_of_positions:
+                            if isinstance(position, Position):
+                                $ position_info_list = position.build_position_willingness_string(the_person, ignore_taboo)
+                                $ taboo_break_string = position_info_list[0]
+                                $ position_opinion = position_info_list[2]
+                                $ willingness_string = position_info_list[3]
+                                $ tooltip_string = position_info_list[4]
+
+                                textbutton taboo_break_string + position.name + position_opinion + willingness_string:
+                                    tooltip tooltip_string
+                                    if tooltip_string == "Disabled": #Visual indication that it is disabled
+                                        background "#222222"
+                                        action NullAction()
+
+                                    else:
+                                        action Return(position)
+                                    style "textbutton_no_padding_highlight"
+                                    text_style "serum_text_style"
+                                    xfill True
+                                    ysize 125
+        if len(non_sex_options) != 0: # Collect any non- position options in a frame below.
+            frame:
+                #yalign 0.7
                 vbox:
-                    for position in list_of_positions:
+                    xsize 500
+                    ysize 125
+                    viewport:
+                        mousewheel True
+                        draggable True
+                        if len(non_sex_options) > 1:
+                            scrollbars "vertical"
                         vbox:
-                            textbutton position.build_position_willingness_string(the_person, ignore_taboo = ignore_taboo)[0] + position.build_position_willingness_string(the_person, ignore_taboo = ignore_taboo)[1] + "\n" + position.build_position_willingness_string(the_person, ignore_taboo = ignore_taboo)[2] + position.build_position_willingness_string(the_person, ignore_taboo = ignore_taboo)[3]:
+                            for option in non_sex_options:
+                                textbutton option:
+                                    style "textbutton_no_padding_highlight"
+                                    text_style "serum_text_style"
+                                    xfill True
+                                    ysize 125
 
-                                tooltip position.build_position_willingness_string(the_person, ignore_taboo = ignore_taboo)[4]
-                                if position.build_position_willingness_string(the_person, ignore_taboo = ignore_taboo)[4] == "Disabled": #Visual indication that it is disabled
-                                    background "#222222"
-                                    action NullAction()
-                                else:
-                                    action Return(position)
-
-                                style "textbutton_no_padding_highlight"
-                                text_style "serum_text_style"
-                                xfill True
-
-                    if allow_none:
-                        textbutton "Nothing":
-                            style "textbutton_no_padding_highlight"
-                            text_style "serum_text_style"
-                            xfill True
-
-                            action Return("None")
+                                    action Return(non_sex_options[option])
 
 screen pick_round_choice_screen(the_person, option_list, position_choice, ignore_taboo = False):
 
+    # This screen gets passed a list in a format like this: [["Transition to" + Position.name, Position], ["Strip her down", "Strip"]] #NOTE Position objects or strings.
     $ tooltip = GetTooltip(renpy.current_screen().screen_name)
     zorder 49
     frame:
+        xalign 0.3
+        yalign 0.7
+        ysize 800
         vbox:
-            xalign 0.5
-            yalign 0.5
             xsize 500
-            ysize 900
             viewport:
                 mousewheel True
                 draggable True
-                scrollbars "vertical"
+                if len(option_list) + 1 > 6:
+                    scrollbars "vertical"
                 vbox:
-                    for option in option_list:
-                        vbox:
+                    for position in option_list:
+                        if isinstance(position[1], Position):
+                            $ position_info_list = position[1].build_position_willingness_string(the_person, ignore_taboo) # Instead of doing too much formating in the function or in the sexmechanics file we take care of it here. #NOTE: Should revisit this for a better solution.
+                            $ taboo_break_string = position_info_list[0]
+                            $ position_opinion = position_info_list[2]
+                            $ willingness_string = position_info_list[3]
+                            $ tooltip_string = position_info_list[4]
 
-                            if hasattr(option[1], "connections"): # Prevent errors when "None" is passed
-                                textbutton option[1].build_position_willingness_string(the_person, ignore_taboo = ignore_taboo)[0] + option[0] + "\n" + option[1].build_position_willingness_string(the_person, ignore_taboo = ignore_taboo)[2] + option[1].build_position_willingness_string(the_person, ignore_taboo = ignore_taboo)[3]:
-                                    tooltip option[1].build_position_willingness_string(the_person, ignore_taboo = ignore_taboo)[4]
-                                    style "textbutton_no_padding_highlight"
-                                    text_style "serum_text_style"
-                                    xfill True
+                            textbutton taboo_break_string + position[0] + position_opinion + willingness_string:
+                                tooltip tooltip_string
+                                style "textbutton_no_padding_highlight"
+                                text_style "serum_text_style"
+                                xfill True
+                                ysize 125
+                                action Return(position[1])
+                        else:
+                            textbutton position[0]:
+                                style "textbutton_no_padding_highlight"
+                                text_style "serum_text_style"
+                                xfill True
+                                ysize 125
 
-                                    action Return(option[1])
-                            else:
-                                textbutton option[0]:
-                                    style "textbutton_no_padding_highlight"
-                                    text_style "serum_text_style"
-                                    xfill True
-
-                                    action Return(option[1])
+                                action Return(position[1])
