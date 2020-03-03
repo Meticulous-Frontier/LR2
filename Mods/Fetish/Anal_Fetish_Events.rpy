@@ -69,6 +69,9 @@ init 1 python:
 
 #SBA1
 label SB_fetish_anal_label(the_person):
+    $ FETISH_ANAL_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
+
     "You are just finishing up with business for the day when you hear a pleasant voice call out to you."
     the_person.char "Hey [the_person.mc_title]."
     $ the_person.draw_person()
@@ -124,7 +127,6 @@ label SB_fetish_anal_label(the_person):
             "[the_person.possessive_title] gets her butt plug. She slowly pushes it back into her ass."
             the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
             "You wave goodbye to [the_person.possessive_title] and get ready to head home for the night."
-            $ SB_CALCULATE_RANDOM_EVENT_RATE()
         "Refuse":
             the_person.char "I'm sorry to hear that..." #TODO finish this
             $ the_person.change_obedience(-10)
@@ -136,13 +138,12 @@ label SB_fetish_anal_label(the_person):
             $ the_person.change_happiness(-5)
             the_person.char "Oh! I'm sorry... I didn't think about that. Maybe tomorrow then?"
             "[the_person.possessive_title] quickly sulks off."
-
-    $ FETISH_ANAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     return
 
 #SBA2
 label SB_fetish_anal_staylate_event_label(the_person):
+    $ FETISH_ANAL_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     if not mc.is_at_work():
         "Your phone rings. It's [the_person.possessive_title]. You answer it."
         the_person.char "Hey, are you at work? I can't find you."
@@ -150,9 +151,6 @@ label SB_fetish_anal_staylate_event_label(the_person):
         mc.name "Sorry, I had something come up and had to leave early."
         "[the_person.possessive_title] tries to mask disappointment in her voice but it is still obvious."
         the_person.char "Oh... okay... well try to let me know next time before I stay late. I thought... anyway, maybe some other time. Bye!"
-
-        $ FETISH_ANAL_EVENT_INUSE = False
-        $ SB_CALCULATE_RANDOM_EVENT_RATE()
         return
     "You finish up with your work for the day and return to your office. You are organizing some papers when [the_person.possessive_title] enters the room."
     $ the_person.apply_outfit(SB_anal_outfit)
@@ -216,10 +214,7 @@ label SB_fetish_anal_staylate_event_label(the_person):
 
             "[the_person.possessive_title] gets up and starts getting ready to go home."
             "You say goodbye to her as she walks out your office door."
-            $ FETISH_ANAL_EVENT_INUSE = False
-            $ SB_CALCULATE_RANDOM_EVENT_RATE()
             return
-
 
     menu:
         "Fuck Her Ass":
@@ -259,9 +254,6 @@ label SB_fetish_anal_staylate_event_label(the_person):
             $ the_person.change_love(-2)
             $ the_person.change_happiness(-5)
             $ the_person.change_obedience(10)
-
-    $ FETISH_ANAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     return
 
 init 2 python:
@@ -483,9 +475,13 @@ label SB_free_strip_scene(the_person):
 
 #SBA40
 label SB_mom_anal_pay_label():
-    $ the_person = mom
-    $ mc.change_location(bedroom)
-    $ mc.location.show_background()
+    python:
+        FETISH_ANAL_EVENT_INUSE = False
+        SB_CALCULATE_RANDOM_EVENT_RATE()
+        the_person = mom
+        mc.change_location(bedroom)
+        mc.location.show_background()
+
     "You're getting ready for bed when [the_person.possessive_title] calls from downstairs."
     the_person.char "[the_person.mc_title], could we talk for a moment?"
     mc.name "Sure, down in a second."
@@ -596,10 +592,6 @@ label SB_mom_anal_pay_label():
             $ mc.business.mandatory_crises_list.append(SB_mom_weekly_pay_action)
             $ the_person.review_outfit(dialogue = False)
 
-    $ FETISH_ANAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
-
-    $ the_person.reset_arousal()
     $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
     $ mc.location.show_background()
     $ renpy.scene("Active")
@@ -688,7 +680,6 @@ label SB_mom_anal_friday_label():
             the_person.char "I understand [the_person.mc_title]. Now don't let me keep you, I'm sure you were up to something important."
             $ mc.business.mandatory_crises_list.append(SB_mom_weekly_anal_action)
 
-    $ the_person.reset_arousal()
     $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
     $ mc.location.show_background()
     $ renpy.scene("Active")
@@ -696,6 +687,9 @@ label SB_mom_anal_friday_label():
 
 #SBA60
 label SB_lily_anal_dp_fetish_label():
+    $ FETISH_ANAL_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
+
     $ the_person = lily # make sure we use lily for the event
     "As you are finishing up with work for the day, you get a text on your phone. It is from Lily, [the_person.possessive_title]."
     the_person.char "Hey [the_person.mc_title]! Can you do me a favor? Meet me at the mall when you get off work. I need your help with something..."
@@ -804,19 +798,17 @@ label SB_lily_anal_dp_fetish_label():
     else:
         "You wave goodbye to [the_person.possessive_title] and head out."
 
-    $ FETISH_ANAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
-
     $ item_perk_male_strapon = Item_Perk("A strap on designed to be worn by men. Useful for dual penetration!")
     $ perk_system.add_item_perk(item_perk_male_strapon, "Male Strapon")
 
-    $ the_person.reset_arousal()
     $ the_person.review_outfit(dialogue = False)
     $ renpy.scene("Active")
     return
 
 #SBA70
 label SB_starbuck_anal_intro():
+    $ FETISH_ANAL_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ the_person = starbuck
 
     "You get a text message from [the_person.title]."
@@ -898,9 +890,6 @@ label SB_starbuck_anal_intro():
     the_person.char "Well, I'd better get home. Feel free to uh, check in on me whenever you want [the_person.mc_title]!"
     "You say goodbye and head out so she can finish locking up the sex shop."
 
-    $ FETISH_ANAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
-    $ the_person.reset_arousal()
     $ the_person.review_outfit(dialogue = False)
     $ renpy.scene("Active")
     return

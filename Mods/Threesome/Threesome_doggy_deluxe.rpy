@@ -91,7 +91,7 @@ init:
 
 
         Threesome_doggy_deluxe_dp_girl_two = Threesome_MC_position(name = "DP_girl_2",
-            action_description = "Fuck [the_person_{two}.title]'s ass and pussy using strapon",
+            action_description = "Fuck [the_person_{0}.title]'s ass and pussy using strapon",
             default_action_person = "two",
             skill_tag_p1 = "Oral",
             skill_tag_p2 = "Anal",
