@@ -239,6 +239,8 @@ label SB_fetish_mom_cum_label():
     $ FETISH_CUM_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ the_person = mom
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
     "Tired from a long day, you quickly fall asleep."
     "You are having some very pleasant dreams. [the_person.possessive_title] is posing for you in some sexy lingerie, then gets down on her knees..."
     "Her velvet soft mouth wraps around your cock, and she begins to bob her head eagerly up and down your erection."
@@ -333,6 +335,8 @@ label SB_fetish_lily_cum_label():
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ FETISH_CUM_EVENT_INUSE = False
     $ the_person = lily
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
     "You wake up a little groggy. Your head kinda hurts, so you grab some clothes and head towards the bathroom to take a hot shower. Hopefully the steam will help you feel better."
     $ home_shower.show_background()
     "You stand in the shower, enjoying the hot water for several minutes. The steam is beginning to cloud up the bathroom."

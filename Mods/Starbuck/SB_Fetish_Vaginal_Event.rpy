@@ -190,6 +190,8 @@ label SB_fetish_vaginal_label(the_person):
 label SB_fetish_vaginal_event_label(the_person):
     $ FETISH_VAGINAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
 
     if the_person is mom:
         "You hear a knock on your door. You hear [the_person.possessive_title]'s sweet and familiar voice from the other side."
@@ -269,7 +271,7 @@ label SB_fetish_vaginal_event_label(the_person):
                 the_person.char "Oh! Well okay. I mean hey, tomorrow is a new day..."
         "[the_person.possessive_title] lays down on your bed. You cuddle up behind her and slowly drift off to sleep."
     else:
-        "Your phones rings. Its [the_person.possessive_title]! You quickly pick it up"
+        "Your phones rings. Its [the_person.possessive_title]! You quickly pick it up."
         the_person.char "Hey [the_person.mc_title]! I'm here out front!"
         $ mc.change_location(hall)
         $ mc.location.show_background()
@@ -322,6 +324,8 @@ label SB_fetish_mom_vaginal_label():
     $ FETISH_VAGINAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ the_person = mom
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
     "You are just starting to drift off to sleep, when you hear a knock at your door."
     the_person.char "Hey Honey... its [the_person.title]... can I come in?"
     "It is unusual for her to come around this time of night."
@@ -377,6 +381,8 @@ label SB_fetish_lily_vaginal_label():
     $ FETISH_VAGINAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ the_person = lily
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
     "You are just starting to drift off to sleep, when you hear a knock at your door."
     the_person.char "Hey [the_person.mc_title]... Are you still up? Can I come in for a bit?"
     "[the_person.possessive_title] almost never comes to your room, unless she needs something."
@@ -517,6 +523,8 @@ label SB_fetish_vaginal_recurring_label():
     $ FETISH_VAGINAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ the_person = get_vaginal_fetish_employee()
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
     if the_person is mom:
         "Before going to bed, you hear a knock on your door. You hear [the_person.possessive_title]'s sweet and familiar voice from the other side."
         the_person.char "Hey honey, its [the_person.title]... I was just wondering if I could come in for a bit?"
@@ -603,6 +611,8 @@ label SB_fetish_vaginal_lily_recurring_label():
     $ FETISH_VAGINAL_EVENT_INUSE = False
     $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ the_person = lily
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
 
     "Before going to bed, you hear a knock on your door. You hear [the_person.possessive_title] from the other side of the door."
     the_person.char "Hey [the_person.mc_title], you still up? I was just wondering if I could come in for a bit?"
