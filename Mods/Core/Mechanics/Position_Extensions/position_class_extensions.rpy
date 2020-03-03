@@ -1,7 +1,9 @@
 # Overrides part of the existing Position class with enhanced versions
 init 5 python:
     # include a visual indication
-    def build_position_willingness_string_enhanced(self, the_person, ignore_taboo = False): #Generates a string for this position that includes a tooltip and coloured willingness for the person given.
+    def build_position_willingness_string_enhanced(self, the_person, ignore_taboo = False): #NOTE: Returns a list instead of string. If you want it to be a single string then do "".join(position.build_position_willingness_string(the_person))
+    #Generates a list of strings for this position that includes a tooltip and coloured willingness for the person given.
+
         willingness_string = ""
         tooltip_string = ""
 
@@ -30,22 +32,23 @@ init 5 python:
         if the_person.has_taboo(position_taboo):
             taboo_break_string = " {image=gui/extra_images/taboo_break_token.png} "
 
+        #NOTE: Removed the (tooltip) and (disabled) tags as they aren't needed in the screen which is their only use case at the moment, but consider adding those back in if being used in the renpy.display_menu
         if the_person.effective_sluttiness(position_taboo) > self.slut_cap:
             if the_person.arousal > self.slut_cap:
                 willingness_string = "{color=#6b6b6b}Boring{/color}" #No sluttiness gain AND half arousal gain
-                tooltip_string = " (tooltip)This position is too boring to interest her when she is this horny. No sluttiness increase and her arousal gain is halved."
+                tooltip_string = "This position is too boring to interest her when she is this horny. No sluttiness increase and her arousal gain is halved."
             else:
                 willingness_string = "{color=#3C3CFF}Comfortable{/color}" #No sluttiness
-                tooltip_string = " (tooltip)This position is too tame for her tastes. No sluttiness increase, but it may still be a good way to get warmed up and ready for other positions."
+                tooltip_string = "This position is too tame for her tastes. No sluttiness increase, but it may still be a good way to get warmed up and ready for other positions."
         elif effective_sluttiness > self.slut_requirement:
             willingness_string = "{color=#3DFF3D}Exciting{/color}" #Normal sluttiness gain
-            tooltip_string = " (tooltip)This position pushes the boundary of what she is comfortable with. Increases temporary sluttiness, which may become permanent over time or with serum application."
+            tooltip_string = "This position pushes the boundary of what she is comfortable with. Increases temporary sluttiness, which may become permanent over time or with serum application."
         elif effective_sluttiness + the_person.obedience-100 > self.slut_requirement:
             willingness_string = "{color=#FFFF3D}Likely Willing if Commanded{/color}"
-            tooltip_string = " (tooltip)This position is beyond what she would normally consider. She is obedient enough to do it if she is commanded, at the cost of some happiness."
+            tooltip_string = "This position is beyond what she would normally consider. She is obedient enough to do it if she is commanded, at the cost of some happiness."
         else:
             willingness_string = "{color=#FF3D3D}Likely Too Slutty{/color}"
-            tooltip_string = " (tooltip)This position is so far beyond what she considers appropriate that she would never dream of it."
+            tooltip_string = "This position is so far beyond what she considers appropriate that she would never dream of it."
 
         if the_person.has_taboo(position_taboo):
             tooltip_string +="\nSuccessfully selecting this position will break a taboo, making it easier to convince " + the_person.title + " to do it and similar acts in the future."
@@ -82,8 +85,8 @@ init 5 python:
             position_opinion = " {image=thumbs_down}"
 
         if disable:
-            return taboo_break_string + self.name + position_opinion + "\n{size=22}"+ willingness_string + "{/size}" + " (disabled)" #Don't show the arousal and energy string if it's disabled to prevent overrun
+            return [taboo_break_string, self.name, position_opinion, "\n{size=22}"+ willingness_string + "{/size}", "Disabled"] #Don't show the arousal and energy string if it's disabled to prevent overrun
         else:
-            return taboo_break_string + self.name + position_opinion + "\n{size=22}" + willingness_string + energy_string + arousal_string + "{/size}" + tooltip_string
+            return [taboo_break_string, self.name, position_opinion, "\n{size=22}" + willingness_string + energy_string + arousal_string + "{/size}", tooltip_string]
 
     Position.build_position_willingness_string = build_position_willingness_string_enhanced
