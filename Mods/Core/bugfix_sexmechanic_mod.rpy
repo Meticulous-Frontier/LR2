@@ -126,7 +126,7 @@ init 5 python:
                 the_person.sex_record[position_type.record_class] += 1
                 types_seen.append(position_type.record_class)
 
-label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True):
+label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
     if report_log is None:
         $ report_log = defaultdict(int) #Holds information about the encounter: what positions were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
@@ -192,22 +192,23 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             #TODO: Add a variant of this list when the girl is in control to ask if you want to resist or ask/beg for something.
             $ option_list = []
             python:
+                option_list.append(["Pause and strip her down.","Strip"])
                 if position_choice is not None:
-                    option_list.append(["Keep " + position_choice.verbing + " her.","Continue"]) #Note: you're prevented from continuing if the energy cost would be too high by the pre-round checks.
-                    option_list.append(["Pause and strip her down.","Strip"])
+                    option_list.append(["Keep " + position_choice.verbing + " her.","Continue"]) #NOTE: you're prevented from continuing if the energy cost would be too high by the pre-round checks.
+
 
                     if not position_locked and object_choice:
                         option_list.append(["Pause and change position.\n-5 {image=gui/extra_images/arousal_token.png}","Change"])
                         for position in position_choice.connections:
                             if object_choice.has_trait(position.requires_location):
-                                appended_name = "Transition to " + position.build_position_willingness_string(the_person) #Note: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
+                                appended_name = "Transition to " + position.name #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                                 option_list.append([appended_name,position])
 
                     if position_locked and object_choice:
                         # allow transition to positions with same traits and skill requirements
                         for position in position_choice.connections:
                             if object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag:
-                                appended_name = "Transition to " + position.build_position_willingness_string(the_person) #Note: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
+                                appended_name = "Transition to " + position.name #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                                 option_list.append([appended_name,position])
 
                     if not hide_leave: #TODO: Double check that we can always get out
@@ -219,7 +220,8 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     if not hide_leave:
                         option_list.append(["Stop and leave.", "Leave"])
 
-            $ round_choice = renpy.display_menu(option_list,True,"Choice") #This gets the players choice for what to do this round.
+            call screen pick_round_choice_screen(the_person, option_list, position_choice, ignore_taboo)
+            $ round_choice = _return #This gets the players choice for what to do this round.
             $ del option_list
 
         # Now that a round_choice has been picked we can do something.
@@ -288,14 +290,14 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 pass
 
         elif round_choice == "Strip":
-            call strip_menu(the_person, position_choice.verbing) from _call_strip_menu_bugfix
+            call strip_menu(the_person, (position_choice.verbing if isinstance(position_choice, Position) else "wooing")) from _call_strip_menu_bugfix
 
         elif round_choice == "Leave":
             $ finished = True # Unless something stops us the encounter is over and we can end
 
             # only consider continue when the girl and the mc have enough energy
             if the_person.energy > 15 and mc.energy > 15:
-                # In 13% of the cases she takes control regardless of obedience 
+                # In 13% of the cases she takes control regardless of obedience
                 # higher chance when she likes taking control lower when she doesn't
                 if renpy.random.randint(0,the_person.arousal) + 50 + the_person.get_opinion_score("taking control") * 20 > the_person.obedience or renpy.random.randint(1, 7 - (the_person.get_opinion_score("taking control") * 2)) == 1: #She's disobedient and will take control of the encounter. disobed disobd
                     $ the_person.change_obedience(-3)
@@ -366,7 +368,7 @@ label check_position_willingness_bugfix(the_person, the_position, skip_dialog = 
             the_person.change_arousal(the_person.get_opinion_score("being submissive")*2)
             the_person.discover_opinion("being submissive")
             the_person.change_happiness(happiness_drop)
-        
+
         $ the_person.call_dialogue("sex_obedience_accept")
 
     elif the_person.effective_sluttiness() > the_position.slut_requirement/2:
@@ -381,7 +383,7 @@ label check_position_willingness_bugfix(the_person, the_position, skip_dialog = 
             love_loss = round(love_loss/5)
             the_person.change_love(love_loss)
             willing = False
-        
+
         $ the_person.call_dialogue("sex_angry_reject")
 
     if willing and (the_position.skill_tag == "Vaginal" or the_position.skill_tag == "Anal") and not mc.condom: #We might need a condom, which means she might say no. TODO: Add an option to pull _off_ a condom while having sex.
@@ -531,7 +533,7 @@ label condom_ask_enhanced(the_person):
                     the_person.char "Just make sure to pull out when you cum, okay?"
 
     else:
-        if the_person.get_opinion_score("bareback sex") < 0 or the_person.get_opinion_score("creampies") < 0 or the_person.get_opinion_score("anal creampies") < 0: 
+        if the_person.get_opinion_score("bareback sex") < 0 or the_person.get_opinion_score("creampies") < 0 or the_person.get_opinion_score("anal creampies") < 0:
             the_person.char "I think that we should use a condom."
         menu:
             "Put on a condom":
@@ -561,7 +563,7 @@ label condom_ask_enhanced(the_person):
                             the_person.char "Thanks, [the_person.mc_title]."
                 else:
                     call put_on_condom_routine(the_person) from _call_put_on_condom_routine_6
-                    
+
             "Fuck her raw":
                 if the_person.get_opinion_score("creampies") < 0:
                     the_person.char "Alright, but don't want cum inside."
@@ -621,7 +623,7 @@ label pick_object_enhanced(the_person, the_position, forced_object = None):
                 picked_object = object_option_list[0][1]
             else:
                 picked_object = renpy.display_menu(object_option_list,True,"Choice")
-            
+
             #renpy.say("", "Pick object: " + picked_object.name)
         del object_option_list
 
