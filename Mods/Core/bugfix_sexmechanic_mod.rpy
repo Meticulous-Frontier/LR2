@@ -207,9 +207,10 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     if position_locked and object_choice:
                         # allow transition to positions with same traits and skill requirements
                         for position in position_choice.connections:
-                            if object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag:
-                                appended_name = "Transition to " + position.name #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
-                                option_list.append([appended_name,position])
+                            if isinstance(object_choice, Object): # Had an error with cousin's kissing blackmail where it would pass object_choice as a list, haven't looked further into it
+                                if object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag:
+                                    appended_name = "Transition to " + position.name #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
+                                    option_list.append([appended_name, position])
 
                     if not hide_leave: #TODO: Double check that we can always get out
                         option_list.append(["Stop " + position_choice.verbing + " her and leave.", "Leave"]) #TODO: Have this appear differently depending on if you've cum yet, she's cum yet, or you've both cum.
