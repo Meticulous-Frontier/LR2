@@ -68,16 +68,16 @@ init -1 python:
 
 
     # Initialize vaginal fetish role
-    SB_fetish_vaginal_visit = Action("Sleepover Tonight", SB_fetish_vaginal_visit_requirement, "SB_fetish_vaginal_visit_label",
+    SB_fetish_vaginal_visit = Action("Sleepover Tonight (Vaginal)", SB_fetish_vaginal_visit_requirement, "SB_fetish_vaginal_visit_label",
         menu_tooltip = "Ask her over for some fun tonight.")
-    SB_fetish_vaginal_mom_kitchen = Action("Kitchen Sex", SB_fetish_vaginal_mom_kitchen_requirement, "SB_fetish_vaginal_mom_kitchen_label",
+    SB_fetish_vaginal_mom_kitchen = Action("Kitchen Sex (Vaginal)", SB_fetish_vaginal_mom_kitchen_requirement, "SB_fetish_vaginal_mom_kitchen_label",
         menu_tooltip = "Bend her over the kitchen counter.")
     vaginal_fetish_role = Role(role_name ="Vaginal Fetish", actions =[SB_fetish_vaginal_visit, SB_fetish_vaginal_mom_kitchen])
 
     # Initialize anal fetsh role
     SB_fetish_anal_staylate = Action("See me after work", SB_fetish_anal_staylate_requirement, "SB_fetish_anal_staylate_label",
         menu_tooltip = "Ask her to stay after work is over.")
-    SB_fetish_anal_mom_kitchen = Action("Kitchen Sex", SB_fetish_anal_mom_kitchen_requirement, "SB_fetish_anal_mom_kitchen_label",
+    SB_fetish_anal_mom_kitchen = Action("Kitchen Sex (Anal)", SB_fetish_anal_mom_kitchen_requirement, "SB_fetish_anal_mom_kitchen_label",
         menu_tooltip = "Bend her over the kitchen counter.")
     SB_lily_anal_in_room = Action("Use Strap On", SB_lily_anal_in_room_requirement, "SB_lily_anal_in_room_label",
         menu_tooltip = "Double Penetration on the bed.")

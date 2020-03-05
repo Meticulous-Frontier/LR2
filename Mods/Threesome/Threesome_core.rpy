@@ -673,16 +673,14 @@ label threesome_strip_menu(the_person_one, the_person_two):
     $ strip_choice = renpy.display_menu(strip_menu,True,"Choice")
     $ del strip_menu
     if strip_choice == "strip_one":
-        mc.name "[the_person_one.title], I want you to get naked now."
+        mc.name "[the_person_one.title], I want you to give me full access."
         the_person_one.char "Of course!"
-        $ scene_manager.strip_actor_outfit(the_person_one, exclude_feet = False)
-        "[the_person_one.title] is now naked."
+        $ scene_manager.strip_actor_outfit(the_person_one, top_layer_first = False)
         $ scene_manager.draw_scene()
     elif strip_choice == "strip_two":
-        mc.name "[the_person_two.title], I want you to get naked now."
+        mc.name "[the_person_two.title], I want you to give me full access."
         the_person_two.char "Sounds good!"
-        $ scene_manager.strip_actor_outfit(the_person_two, exclude_feet = False)
-        "[the_person_two.title] is now naked."
+        $ scene_manager.strip_actor_outfit(the_person_two, top_layer_first = False)
         $ scene_manager.draw_scene()
     else:
         return

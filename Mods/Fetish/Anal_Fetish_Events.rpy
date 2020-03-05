@@ -277,6 +277,8 @@ init 2 python:
 
 #SBA3
 label SB_fetish_anal_recurring_label():
+    $ FETISH_ANAL_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()    
     $ the_person = get_anal_fetish_employee()
     "As you are packing up your stuff to head home for the day, you hear [the_person.possessive_title]'s sweet voice call out to you."
 
@@ -1041,6 +1043,7 @@ label SB_starbuck_anal_swing_demo(the_person):
 label SB_stephanie_anal_fetish_label():
     $ the_person = stephanie
     $ FETISH_ANAL_EVENT_INUSE = False
+    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     if mc.location == mc.business.r_div: #Already in research
         "Suddenly, [the_person.possessive_title] looks up from her work and and speaks up."
         the_person.char "Hey [the_person.mc_title], I need to talk to you about something. Can we go somewhere private?"
