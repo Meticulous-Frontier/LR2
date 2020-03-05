@@ -201,7 +201,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                         option_list.append(["Pause and change position.\n-5 {image=gui/extra_images/arousal_token.png}","Change"])
                         for position in position_choice.connections:
                             if object_choice.has_trait(position.requires_location):
-                                appended_name = "Transition to " + position.name #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
+                                appended_name = "Transition to " + position.build_position_willingness_string(the_person) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                                 option_list.append([appended_name,position])
 
                     if position_locked and object_choice:
@@ -209,7 +209,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                         for position in position_choice.connections:
                             if isinstance(object_choice, Object): # Had an error with cousin's kissing blackmail where it would pass object_choice as a list, haven't looked further into it
                                 if object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag:
-                                    appended_name = "Transition to " + position.name #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
+                                    appended_name = "Transition to " + position.build_position_willingness_string(the_person) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                                     option_list.append([appended_name, position])
 
                     if not hide_leave: #TODO: Double check that we can always get out
@@ -220,8 +220,9 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                         option_list.append(["Pick a new position.\n-5 {image=gui/extra_images/arousal_token.png}","Change"])
                     if not hide_leave:
                         option_list.append(["Stop and leave.", "Leave"])
+                option_list.insert(0, "Round Choices")
 
-            call screen pick_round_choice_screen(the_person, option_list, position_choice, ignore_taboo)
+            call screen main_choice_display([option_list])
             $ round_choice = _return #This gets the players choice for what to do this round.
             $ del option_list
 
