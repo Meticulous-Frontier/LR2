@@ -74,6 +74,11 @@ init -2 python:
                 return True
         return False
 
+    def casual_athlete_ghost_requirement(the_person):
+        if renpy.random.randint(0,100) < 20:
+            return True
+        return False
+
 
 #*************Create Casual Athlete Role***********#
 init -1 python:
@@ -576,6 +581,19 @@ label casual_athlete_house_call_label(the_person):
     $ mc.change_location(bedroom) # go home
     call advance_time from _call_advance_casual_athlete_house_call
     return
+
+
+label casual_athlete_ghost_label(the_person):
+    "You get a message on your phone. Looks like it is from [the_person.possessive_title]."
+    the_person.char "Hey, I'm really sorry to have to do this, but I think I'm catching feelings."
+    the_person.char "We agreed at the beginning we wouldn't let that happen, so I don't think we should see each other anymore."
+    the_person.char "I'm changing to a different gym, and after I send this, I'm going to block your number. I'm sorry."
+    "Damn. Sounds like you pushed things with her a little too far"
+    python:
+        del the_person.home  #Delete her
+        del the_person
+        casual_sex_create_athlete() #Create a new athlete so MC can try again if they choose.
+    return
 #************* Personality****************#
 #Override some of her personality functions so that her conversation options makes sense.
 
@@ -619,6 +637,9 @@ label athlete_greetings(the_person):
     if mc.location == gym:
         if the_person.love > 50:  #She loves you too much and is going to or already has called things off
             the_person.char "Oh... hello [the_person.mc_title]"
+            $ remove_mandatory_crisis_list_action("casual_athlete_ghost_label")
+            $ casual_athlete_ghost = Action("Casual Athlete Ghosts you", casual_athlete_ghost_requirement, "casual_athlete_ghost_label", args = the_person)
+            $ mandatory_crises_list.append(casual_athlete_ghost)
             return
         if the_person.event_triggers_dict.get("athlete_progress", 0) >= 2:
             the_person.char "Hey there [the_person.mc_title]"
