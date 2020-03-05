@@ -1607,7 +1607,8 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
     #Good morning!
     $ good_rest_perk = Stat_Perk(description = "Temporary increase max energy after sleeping with a lover. +20 Energy Cap", energy_bonus = 20, bonus_is_temp = True, duration = 2,  energy_cap = 20)
     $ perk_system.add_stat_perk(good_rest_perk, "Overnight Lover")
-
+    $ mc.change_location(the_person.home)
+    $ mc.location.show_background()
 
     $ renpy.scene("Active")
     $ the_roll = renpy.random.randint(0,100)
@@ -1627,16 +1628,14 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         "[the_person.title] slowly gets up and heads to the bathroom. You grab your stuff and head out."
     else:                                    #No morning sex
         "You wake up in the next morning after sleeping soundly the night before. As your stir it wakes up your bedwarmer, [the_person.title]. She yawns and stretches."
-        "Slowy, [the_person.title] yawns and sits up at the side of the bed."
+        "Slowly, [the_person.title] yawns and sits up at the side of the bed."
         $ the_person.draw_person(position = "sitting")
         the_person.char "Good morning, sleepyhead! Wow, I slept so good last night... you really wore me out!"
         "You chat for a few minutes, enjoying the warmth of her bed, until she gets up."
         $ the_person.draw_person(position = "stand3")
         the_person.char "I'm gonna go hop in the shower. Feel free to let yourself out! Thanks for spending the night [the_person.mc_title]!"
         "[the_person.title]heads to the bathroom. You grab your stuff and head out."
-    $ the_person.reset_arousal()
     $ the_person.apply_outfit(the_person.wardrobe.decide_on_outfit(40))
-    $ mc.location.show_background()
     $ renpy.scene("Active")
     return "Advance Time"
 
