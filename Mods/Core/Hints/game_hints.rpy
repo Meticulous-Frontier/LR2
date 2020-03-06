@@ -50,6 +50,9 @@ init -1 python:
     def exists_in_room_enter_list(person, effect_name):
         return find_in_list(lambda x: x.effect == effect_name, person.on_room_enter_event_list)
 
+    def exists_in_talk_event_list(person, effect_name):
+        return find_in_list(lambda x: x.effect == effect_name, person.on_talk_event_list)
+
     def exists_in_role_action_list(role, effect_name):
         return find_in_list(lambda x: x.effect == effect_name, role.actions)
 
