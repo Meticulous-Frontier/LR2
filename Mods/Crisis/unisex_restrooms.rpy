@@ -310,7 +310,7 @@ label unisex_restroom_fantasy_overhear_label():
             "If you went back through the footage, you could probably figure out who was in the restroom with you and possibly even deduce who is having fantasies of getting bent over by you!"
             menu:
                 "Go to security room":
-                    #TODO change to security room background
+                    $ m_division_basement.show_background()
                     "You head down to the security room. Going through the footage from the cameras in the hall, you watch yourself entering the restroom."
                     "A short time later, you see [the_person_one.title] and [the_person_two.title] entering. They must have been the ones talking!"
                     "It must have been [the_person_one.title]! You can picture her now, talking about all the things you heard as you were in the restroom."
@@ -319,8 +319,9 @@ label unisex_restroom_fantasy_overhear_label():
                     "You decide for now not to do that. It just feels creepy, trying to figure out who was talking by looking at security footage..."
 
     $ town_relationships.improve_relationship(the_person_one, the_person_two)
-    if discover_identity:
-        $ the_person_one.on_talk_event_list.append(unisex_restroom_fantasy_actout)
+    # if we don't have the fantasy actout limited time event for the person, add it to the on_talk_event_list.
+    if discover_identity and not exists_in_room_enter_list(the_person_one, "unisex_restroom_fantasy_actout_label"):
+        $ the_person_one.on_talk_event_list.append(Limited_Time_Action(unisex_restroom_fantasy_actout, 5))
     $ del the_person_one
     $ del the_person_two
     $ del anon_char_one
