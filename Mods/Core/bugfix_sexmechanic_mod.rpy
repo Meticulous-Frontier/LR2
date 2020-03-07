@@ -38,13 +38,13 @@ init 5 python:
         for a_person in other_people:
             if girlfriend_role in a_person.special_role and the_position.slut_requirement > (a_person.sluttiness/2): #You can get away with stuff half as slutty as she would do
                 caught_cheating_action = Action("Caught cheating action", caught_cheating_requirement, "caught_cheating_label", args = the_person)
-                if exists_in_room_enter_list(a_person, "caught_cheating_label"):
+                if not exists_in_room_enter_list(a_person, "caught_cheating_label"):
                     a_person.on_room_enter_event_list.append(caught_cheating_action)
                     renpy.say("",a_person.title + " gasps when she sees what you and " + the_person.title + " are doing.")
 
             elif affair_role in a_person.special_role and the_position.slut_requirement > ((a_person.sluttiness*2)/3): #You can get away with stuff two thirds as slutty as what she would do.
                 caught_affair_cheating_action = Action("Caught affair cheating action", caught_affair_cheating_requirement, "caught_affair_cheating_label", args = the_person)
-                if exists_in_room_enter_list(a_person, "caught_affair_cheating_label"):
+                if not exists_in_room_enter_list(a_person, "caught_affair_cheating_label"):
                     a_person.on_room_enter_event_list.append(caught_affair_cheating_action)
                     renpy.say("",a_person.title + " gasps when she sees what you and " + the_person.title + " are doing.")
 
