@@ -19,7 +19,7 @@ init 2 python:
                 anal_positions.append([willingness, position])
         
         if allow_none:
-            foreplay_positions.append(["Nothing", None])
+            foreplay_positions.append(["Nothing", "None"])
 
         foreplay_positions.insert(0, "Pick Foreplay")
         oral_positions.insert(0, "Pick Oral")
@@ -33,4 +33,4 @@ label pick_position_enhanced(the_person, allow_none = True, ignore_taboo = False
     else:
         call screen main_choice_display(build build_grouped_sex_position_menu(the_person, allow_none = allow_none, ignore_taboo = ignore_taboo))
     $ position_choice = _return
-    return position_choice
+    return None if position_choice == "None" else position_choice
