@@ -124,22 +124,19 @@ init 2:
                                                         style "textbutton_no_padding_highlight"
                                                         text_style "serum_text_style"
 
-
-                                                        if slut_limit is None:
+                                                        if limited_to_top and (outfit in wardrobe.outfits or outfit in wardrobe.underwear_sets):
+                                                            background "#222222"
+                                                        elif slut_limit and (outfit in wardrobe.outfits or outfit in wardrobe.overwear_sets) and outfit.slut_requirement > slut_limit:
+                                                            background "#222222"
+                                                            action Function(renpy.notify, "Can not assign due to policy enforced sluttiness limit [" + str(slut_limit) + "].\nPurchase new uniform policies to increase limit.")
+                                                        elif underwear_limit and outfit in wardrobe.underwear_sets and outfit.slut_requirement > underwear_limit:
+                                                            background "#222222"
+                                                            action Function(renpy.notify, "Can not assign due to policy enforced sluttiness limit [" + str(underwear_limit) + "].\nPurchase new uniform policies to increase limit.")
+                                                        else:
                                                             action [
                                                                 Show("outfit_creator", None, outfit.get_copy(), target_wardrobe, outfit_type = outfit_categories[category][1]), # Bring the outfit into the outfit_creator for editing when left clicked
                                                                 Hide(renpy.current_screen().screen_name)
                                                                 ]
-                                                        else:
-                                                            if limited_to_top:
-                                                                if outfit in wardrobe.outfits or outfit in wardrobe.underwear_sets:
-                                                                    background "#222222"
-
-                                                            if slut_limit >= outfit.slut_requirement:
-                                                                action NullAction()
-                                                            else:
-                                                                background "#222222"
-                                                                action Function(renpy.notify, "Can not assign due to slut limit " + str(slut_limit) + ". Purchase new uniform policies to increase")
 
                                                         hovered Show("mannequin", None, outfit)
 
@@ -165,30 +162,22 @@ init 2:
                                                         text_style "serum_text_style"
                                                         xfill True
 
-                                                        if slut_limit is None:
-                                                            action ToggleScreenVariable("targeted_outfit", renpy.get_widget(renpy.current_screen(), str(outfit)), None)
+                                                        if limited_to_top and (outfit in wardrobe.outfits or outfit in wardrobe.underwear_sets):
+                                                            background "#222222"
+                                                            action Function(renpy.notify, "Full and underwear uniforms require [reduced_coverage_uniform_policy.name]")
+                                                        elif slut_limit and (outfit in wardrobe.outfits or outfit in wardrobe.overwear_sets) and outfit.slut_requirement > slut_limit:
+                                                            background "#222222"
+                                                            action Function(renpy.notify, "Can not assign due to policy enforced sluttiness limit [" + str(slut_limit) + "].\nPurchase new uniform policies to increase limit.")
+                                                        elif underwear_limit and outfit in wardrobe.underwear_sets and outfit.slut_requirement > underwear_limit:
+                                                            background "#222222"
+                                                            action Function(renpy.notify, "Can not assign due to policy enforced sluttiness limit [" + str(underwear_limit) + "].\nPurchase new uniform policies to increase limit.")
                                                         else:
-
-                                                            if limited_to_top:
-                                                                if outfit not in wardrobe.outfits and outfit not in wardrobe.underwear_sets:
-                                                                    action ToggleScreenVariable("targeted_outfit", renpy.get_widget(renpy.current_screen(), str(outfit)), None)
-                                                                else:
-                                                                    background "#222222"
-                                                                    action Function(renpy.notify, "Full and underwear uniforms require [reduced_coverage_uniform_policy.name]")
-
-                                                            elif underwear_limit >= outfit.slut_requirement and outfit in wardrobe.underwear_sets:
-                                                                action ToggleScreenVariable("targeted_outfit", renpy.get_widget(renpy.current_screen(), str(outfit)), None)
-                                                            elif slut_limit >= outfit.slut_requirement and outfit not in wardrobe.underwear_sets:
-                                                                action ToggleScreenVariable("targeted_outfit", renpy.get_widget(renpy.current_screen(), str(outfit)), None)
-
-                                                            else:
-                                                                background "#222222"
-                                                                action Function(renpy.notify, "Can not assign due to slut limit " + str(slut_limit) + ". Purchase new uniform policies to increase")
+                                                            action ToggleScreenVariable("targeted_outfit", renpy.get_widget(renpy.current_screen(), str(outfit)), None)
 
                                                     if targeted_outfit == renpy.get_widget(renpy.current_screen(), str(outfit)):
                                                         frame:
                                                             vbox:
-                                                                for wardrobes in import_wardrobes:
+                                                                for wardrobes in sorted(import_wardrobes):
                                                                     textbutton str(wardrobes):
                                                                         style "textbutton_no_padding_highlight"
                                                                         text_style "serum_text_style"
