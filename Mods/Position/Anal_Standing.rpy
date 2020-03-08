@@ -11,8 +11,8 @@ init python:
         outro = "outro_SB_anal_standing",
         transition_default = "transition_default_SB_anal_standing",
         strip_description = "strip_SB_anal_standing",  strip_ask_description = "strip_ask_SB_anal_standing",
-        taboo_break_description = "taboo_break_missionary",
-        associated_taboo = "vaginal_sex",
+        taboo_break_description = "taboo_break_SB_anal_standing",
+        associated_taboo = "anal_sex",
         orgasm_description = "orgasm_SB_anal_standing",
         verb = "ass fuck",
         opinion_tags = ["doggy style sex", "anal sex", "sex standing up"], record_class = "Anal Sex")
@@ -479,4 +479,49 @@ label orgasm_SB_anal_standing(the_girl, the_location, the_object):
         the_girl.char "I can't believe that just happened... oh god now you're going to keep going, aren't you?"
     else:
         the_girl.char "Don't stop... it still feels so good!"
+    return
+
+label taboo_break_SB_anal_standing(the_girl, the_location, the_object):
+    "You grab [the_girl.possessive_title]'s ass and give it a squeeze, then a hard slap."
+    if the_girl.effective_sluttiness(doggy_anal.associated_taboo) > doggy_anal.slut_cap or the_girl.get_opinion_score("showing her ass") > 0:
+        mc.name "Stand over here, I want to get a look at this ass."
+        $ the_girl.draw_person(position = "back_peek", the_animation = ass_bob)
+        "She turns around and jiggles her butt playfully for you."
+        the_girl.char "This big fat ass? You finally want to take a closer look?"
+        mc.name "I said stand here, come on."
+        $ the_girl.draw_person(position = "standing_doggy", the_animation = ass_bob, animation_effect_strength = 0.7)
+        "She leans into the [the_object.name] and points her butt in your direction. She lowers her shoulders and works her hips for you."
+
+    else:
+        mc.name "Stand over here."
+        $ the_girl.draw_person(position = "stand2")
+        "She slowly walks to the indicated position in front of you."
+        mc.name "Good girl, now spin around and show me that ass."
+        "She nods and turns around."
+        $ the_girl.draw_person(position = "walking_away")
+        mc.name "Nice. Now shake it for me."
+        the_girl.char "Like... this?"
+        $ the_girl.draw_person(position = "standing_doggy", the_animation = ass_bob, animation_effect_strength = 0.4)
+        "[the_girl.title] works her hips and jiggles her ass for you."
+        mc.name "Getting there, a little faster now."
+        $ the_girl.draw_person(position = "standing_doggy", the_animation = ass_bob, animation_effect_strength = 0.7)
+        "She speeds up."
+    the_girl.char "Is that what you wanted?"
+    "You slap your cock down on her ass and grab her tight cheeks, spreading them apart to get a look at her asshole."
+    mc.name "Almost. I think it's time we stretched you open."
+    $ the_girl.call_dialogue(SB_anal_standing.associated_taboo+"_taboo_break")
+    "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you press it against her tight hole."
+    if the_girl.sex_skills["Anal"] > 2:
+        "She gasps as your tip starts to spread her open. She lowers her shoulders and pushes her hips against you, helping the process."
+        the_girl.char "Oh god... Mfphhhh!"
+
+    else:
+        "She gasps as your tip tries to spread open her impossibly tight asshole. She tries to pull away, but you pull on her waist and bring her closer."
+        mc.name "Come on, you'll get there."
+        "You spit onto your cock and try again. This time making better progress, sliding the tip of your dick into [the_girl.title]'s ass."
+        the_girl.char "Oh god... Fuck!"
+    "Inch by inch you slide your entire length into [the_girl.possessive_title]. She grunts and gasps the whole way down."
+    "When stop when you've bottomed out, to give your cock time to properly stretch her out."
+    the_girl.char "I think... I'm ready for you to move some more..."
+    "You pull back a little bit and give her a few testing strokes. When she can handle those you speed up, until you're thrusting your entire length."
     return
