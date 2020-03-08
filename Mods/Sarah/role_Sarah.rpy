@@ -1547,7 +1547,7 @@ label Sarah_threesome_request_label():
     the_person.char "God, I know. She is so hot, wish I could get my hands on her..."
     "So, at this point, [the_person.possessive_title] has brought it up multiple times that she would like to have some action with another girl sometime."
     "As you think through your business and all the people you have interacted with, you are pretty sure you have some girls who would love to join a threesome with you and [the_person.title]"
-    mc.name "So, I know we've talked about this before, but, is a threesome still something that you would be inerested in doing sometime?"
+    mc.name "So, I know we've talked about this before, but, is a threesome still something that you would be interested in doing sometime?"
     the_person.char "Oh god I would do anything, just to try it once. I know it may not turn out to be as good as I hope, but, I just want to TRY, you know!?!"
     "You don't remember pouring this shot, but you grab the drink in front of you and drain it."
     mc.name "Alright, how about this. This time, next week, I'll have something setup."
