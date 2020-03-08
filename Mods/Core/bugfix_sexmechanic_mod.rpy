@@ -9,11 +9,11 @@ init 5 python:
     config.label_overrides["watcher_check"] = "watcher_check_enhanced"
     config.label_overrides["condom_ask"] = "condom_ask_enhanced"
 
-    def girl_choose_position_enhanced(person):
+    def girl_choose_position_enhanced(person, ignore_taboo = False):
         position_option_list = []
         for position in list_of_girl_positions:
             if mc.location.has_object_with_trait(position.requires_location):
-                if position.her_position_willingness_check(the_person):
+                if position.her_position_willingness_check(the_person, ignore_taboo = ignore_taboo):
                     position_option_list.append(position)
         return get_random_from_list(position_option_list)
 
@@ -99,6 +99,7 @@ init 5 python:
                     the_person.add_situational_slut("love_modifier", __builtin__.int(the_person.love/4), "I love you, even though we're related!")
             else: #If you aren't in a relationship with them only half their Love applies.
                 the_person.add_situational_slut("love_modifier", __builtin__.int(the_person.love/2), "I really like you, let's see where this goes!")
+        return
 
     def clear_sex_modifiers(the_person):
         # Teardown the sex modifiers
@@ -108,6 +109,7 @@ init 5 python:
         the_person.clear_situational_slut("taboo_sex")
         the_person.clear_situational_slut("sex_object")
         the_person.clear_situational_obedience("sex_object")
+        return
 
     def update_person_sex_record(the_person, report_log):
         types_seen = []
@@ -115,6 +117,39 @@ init 5 python:
             if position_type.record_class and position_type.record_class not in types_seen:
                 the_person.sex_record[position_type.record_class] += 1
                 types_seen.append(position_type.record_class)
+        return
+
+    def build_round_choice_menu(the_person, position_choice, ignore_taboo = False):
+        option_list = []
+        option_list.append(["Pause and strip her down.","Strip"])
+        if position_choice is not None:
+            option_list.append(["Keep " + position_choice.verbing + " her.","Continue"]) #NOTE: you're prevented from continuing if the energy cost would be too high by the pre-round checks.
+
+            if not position_locked and object_choice:
+                option_list.append(["Pause and change position.\n-5 {image=gui/extra_images/arousal_token.png}","Change"])
+                for position in position_choice.connections:
+                    if object_choice.has_trait(position.requires_location):
+                        appended_name = "Transition to " + position.build_position_willingness_string(the_person, ignore_taboo = ignore_taboo) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
+                        option_list.append([appended_name,position])
+
+            if position_locked and object_choice:
+                # allow transition to positions with same traits and skill requirements
+                for position in position_choice.connections:
+                    if isinstance(object_choice, Object): # Had an error with cousin's kissing blackmail where it would pass object_choice as a list, haven't looked further into it
+                        if object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag:
+                            appended_name = "Transition to " + position.build_position_willingness_string(the_person, ignore_taboo = ignore_taboo) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
+                            option_list.append([appended_name, position])
+
+            if not hide_leave: #TODO: Double check that we can always get out
+                option_list.append(["Stop " + position_choice.verbing + " her and leave.", "Leave"]) #TODO: Have this appear differently depending on if you've cum yet, she's cum yet, or you've both cum.
+
+        else:
+            if not position_locked:
+                option_list.append(["Pick a new position.\n-5 {image=gui/extra_images/arousal_token.png}","Change"])
+            if not hide_leave:
+                option_list.append(["Stop and leave.", "Leave"])
+        option_list.insert(0, "Round Choices")
+        return option_list
 
 label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
@@ -143,7 +178,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
             # The girls decisions set round_choice here.
             if position_choice is None:
-                $ position_choice = girl_choose_position_enhanced(the_person) #Can be none, if no option was available for her to take.
+                $ position_choice = girl_choose_position_enhanced(the_person, ignore_taboo = ignore_taboo) #Can be none, if no option was available for her to take.
                 if position_choice is not None:
                     # We need to make sure we're using an appropriate object
                     $ object_choice = girl_choose_object_enhanced(the_person, position_choice)
@@ -180,47 +215,14 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
         if round_choice is None: #If there is no set round_choice
             #TODO: Add a variant of this list when the girl is in control to ask if you want to resist or ask/beg for something.
-            $ option_list = []
-            python:
-                option_list.append(["Pause and strip her down.","Strip"])
-                if position_choice is not None:
-                    option_list.append(["Keep " + position_choice.verbing + " her.","Continue"]) #NOTE: you're prevented from continuing if the energy cost would be too high by the pre-round checks.
-
-
-                    if not position_locked and object_choice:
-                        option_list.append(["Pause and change position.\n-5 {image=gui/extra_images/arousal_token.png}","Change"])
-                        for position in position_choice.connections:
-                            if object_choice.has_trait(position.requires_location):
-                                appended_name = "Transition to " + position.build_position_willingness_string(the_person) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
-                                option_list.append([appended_name,position])
-
-                    if position_locked and object_choice:
-                        # allow transition to positions with same traits and skill requirements
-                        for position in position_choice.connections:
-                            if isinstance(object_choice, Object): # Had an error with cousin's kissing blackmail where it would pass object_choice as a list, haven't looked further into it
-                                if object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag:
-                                    appended_name = "Transition to " + position.build_position_willingness_string(the_person) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
-                                    option_list.append([appended_name, position])
-
-                    if not hide_leave: #TODO: Double check that we can always get out
-                        option_list.append(["Stop " + position_choice.verbing + " her and leave.", "Leave"]) #TODO: Have this appear differently depending on if you've cum yet, she's cum yet, or you've both cum.
-
-                else:
-                    if not position_locked:
-                        option_list.append(["Pick a new position.\n-5 {image=gui/extra_images/arousal_token.png}","Change"])
-                    if not hide_leave:
-                        option_list.append(["Stop and leave.", "Leave"])
-                option_list.insert(0, "Round Choices")
-
-            call screen main_choice_display([option_list])
+            call screen main_choice_display([build_round_choice_menu(the_person, position_choice, ignore_taboo = ignore_taboo)])
             $ round_choice = _return #This gets the players choice for what to do this round.
-            $ del option_list
 
         # Now that a round_choice has been picked we can do something.
         if round_choice == "Change" or round_choice == "Continue":
             if round_choice == "Change": # If we are changing we first select and transition/intro the position, then run a round of sex. If we are continuing we ignroe all of that
                 if start_position is None: #The first time we get here,
-                    call pick_position(the_person) from _call_pick_position_bugfix
+                    call pick_position(the_person, ignore_taboo = ignore_taboo) from _call_pick_position_bugfix
                     $ position_choice = _return
                 else:
                     $ position_choice = start_position
@@ -229,7 +231,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 $ object_choice = _return
 
                 if position_choice and object_choice:
-                    call check_position_willingness_bugfix(the_person, position_choice, skip_dialog = True) from _call_check_position_willingness_bugfix
+                    call check_position_willingness_bugfix(the_person, position_choice, ignore_taboo = ignore_taboo, skip_dialog = True) from _call_check_position_willingness_bugfix
                     if not _return: #If she wasn't willing for whatever reason (too slutty a position, not willing to wear a condom) we clear our settings and try again.
                         $ position_choice = None
                         $ object_choice = None
@@ -241,11 +243,19 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                         pass
                     elif first_round:
                         $ the_person.draw_person() #Draw her standing until we pick a new position
-                        $ position_choice.call_intro(the_person, mc.location, object_choice)
+                        if the_person.has_taboo(position_choice.associated_taboo) and not ignore_taboo:
+                            $ position_choice.call_taboo_break(the_person, mc.location, object_choice)
+                            $ the_person.break_taboo(position_choice.associated_taboo)
+                        else:
+                            $ position_choice.call_intro(the_person, mc.location, object_choice)
                     else:
                         $ the_person.change_arousal(-5) #Changing position lowers your arousal slightly
                         $ mc.change_arousal(-5)
-                        $ position_choice.call_transition(None, the_person, mc.location, object_choice)
+                        if the_person.has_taboo(position_choice.associated_taboo) and not ignore_taboo:
+                            $ position_choice.call_taboo_break(the_person, mc.location, object_choice)
+                            $ the_person.break_taboo(position_choice.associated_taboo)
+                        else:
+                            $ position_choice.call_transition(None, the_person, mc.location, object_choice)
 
             $ start_position = None #Clear start positions/objects so they aren't noticed next round.
             $ start_object = None
@@ -272,10 +282,14 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
 
         elif isinstance(round_choice, Position): #The only non-strings on the list are positions we are changing to
-            call check_position_willingness_bugfix(the_person, round_choice) from _call_check_position_willingness_bugfix_1
+            call check_position_willingness_bugfix(the_person, round_choice, ignore_taboo = ignore_taboo) from _call_check_position_willingness_bugfix_1
             if _return:
                 $ round_choice.redraw_scene(the_person)
-                $ position_choice.call_transition(round_choice, the_person, mc.location, object_choice)
+                if the_person.has_taboo(position_choice.associated_taboo) and not ignore_taboo:
+                    $ position_choice.call_taboo_break(the_person, mc.location, object_choice)
+                    $ the_person.break_taboo(position_choice.associated_taboo)
+                else:
+                    $ position_choice.call_transition(round_choice, the_person, mc.location, object_choice)
                 $ position_choice = round_choice
 
             else: #If she wasn't willing we keep going with what we were doing, so just loop around.
@@ -347,23 +361,31 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     # We return the report_log so that events can use the results of the encounter to figure out what to do.
     return report_log
 
-label check_position_willingness_bugfix(the_person, the_position, skip_dialog = False): #Returns if hte person is willing to do this position or not, and charges the appropriate happiness hit if they needed obedience to be willing.
+label check_position_willingness_bugfix(the_person, the_position, ignore_taboo = False, skip_dialog = False): #Returns if hte person is willing to do this position or not, and charges the appropriate happiness hit if they needed obedience to be willing.
     $ willing = True
-    if the_person.effective_sluttiness() >= the_position.slut_requirement:
-        if not skip_dialog:
+
+    $ the_taboo = the_position.associated_taboo
+    if ignore_taboo:
+        $ the_taboo = None
+
+    if the_person.effective_sluttiness(the_taboo) >= the_position.slut_requirement:
+        if not (skip_dialog or the_person.has_taboo(the_taboo)):
             $ the_person.call_dialogue("sex_accept")
 
-    elif the_person.effective_sluttiness() + (the_person.obedience-100) >= the_position.slut_requirement:
+    elif the_person.effective_sluttiness(the_taboo) + (the_person.obedience-100) >= the_position.slut_requirement:
         # She's willing to be commanded to do it. Reduce her happiness by the difference (increase arousal if she likes being submissive)
         python:
-            happiness_drop = the_person.effective_sluttiness() - the_position.slut_requirement #Our initial conditions mean this is a negative number
+            happiness_drop = the_person.effective_sluttiness(the_position.associated_taboo) - the_position.slut_requirement #Our initial conditions mean this is a negative number
             the_person.change_arousal(the_person.get_opinion_score("being submissive")*2)
             the_person.discover_opinion("being submissive")
             the_person.change_happiness(happiness_drop)
 
-        $ the_person.call_dialogue("sex_obedience_accept")
+        if the_person.has_taboo(the_taboo):
+            pass #If there is a taboo being broken we have special taboo break dialogue called from the position.
+        else:
+            $ the_person.call_dialogue("sex_obedience_accept")
 
-    elif the_person.effective_sluttiness() > the_position.slut_requirement/2:
+    elif the_person.effective_sluttiness(the_taboo) > the_position.slut_requirement/2:
         # She's not willing to do it, but gives you a soft reject.
         $ the_person.call_dialogue("sex_gentle_reject")
         $ willing = False
@@ -371,7 +393,7 @@ label check_position_willingness_bugfix(the_person, the_position, skip_dialog = 
     else:
         # You're nowhere close to the required sluttiness, lose some love for even trying.
         python:
-            love_loss = the_person.effective_sluttiness() - the_position.slut_requirement #A negative number
+            love_loss = the_person.effective_sluttiness(the_taboo) - the_position.slut_requirement #A negative number
             love_loss = round(love_loss/5)
             the_person.change_love(love_loss)
             willing = False
