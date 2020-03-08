@@ -9,11 +9,11 @@ init python:
         outro = "outro_SB_anal_swing",
         transition_default = "transition_default_SB_anal_swing",
         strip_description = "strip_SB_anal_swing",  strip_ask_description = "strip_ask_SB_anal_swing",
-        taboo_break_description = "taboo_break_missionary",
-        associated_taboo = "vaginal_sex",
+        taboo_break_description = "taboo_break_SB_anal_swing",
         orgasm_description = "orgasm_SB_anal_swing",
         verb = "ass fuck",
-        opinion_tags = ["doggy style sex", "anal sex", "sex standing up"], record_class = "Anal Sex")
+        opinion_tags = ["doggy style sex", "anal sex", "sex standing up"], record_class = "Anal Sex",
+        associated_taboo = "anal_sex")
 
     list_of_positions.append(SB_anal_swing)
 
@@ -336,4 +336,8 @@ label orgasm_SB_anal_swing(the_girl, the_location, the_object):
         the_girl.char "I can't believe that just happened... oh god now you're going to keep going, aren't you?"
     else:
         the_girl.char "Don't stop... it still feels so good!"
+    return
+
+label taboo_break_SB_anal_swing(the_girl, the_location, the_object):
+    # TODO: Add custom taboo break
     return

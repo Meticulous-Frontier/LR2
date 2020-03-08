@@ -10,10 +10,10 @@
         transition_default = "transition_default_SB_anal_cowgirl",
         strip_description = "strip_SB_anal_cowgirl", strip_ask_description = "strip_ask_SB_anal_cowgirl",
         taboo_break_description = "taboo_break_missionary",
-        associated_taboo = "vaginal_sex",
         orgasm_description = "orgasm_SB_anal_cowgirl",
         verb = "ass fuck",
-        opinion_tags = ["taking control", "anal sex"], record_class = "Anal Sex")
+        opinion_tags = ["taking control", "anal sex"], record_class = "Anal Sex",
+        associated_taboo = "anal_sex")
 
     list_of_girl_positions.append(SB_anal_cowgirl)
 
@@ -267,3 +267,26 @@ label orgasm_SB_anal_cowgirl(the_girl, the_location, the_object):
         the_girl.char "I can't stop now, I want you to make me cum again!"
     "She leans back and starts to ride you faster than ever."
     return
+
+label taboo_break_SB_anal_cowgirl(the_girl, the_location, the_object):
+    # TODO: initial dialog needs a little more substance.
+    "You slap [the_girl.possessive_title]'s ass and give it a squeeze."
+    if the_girl.effective_sluttiness(SB_anal_standing.associated_taboo) > SB_anal_standing.slut_cap or the_girl.get_opinion_score("showing her ass") > 0:
+        mc.name "Now sit on my cock and shove it into your cute little but."
+        "You lay down on the [the_object.name] and she straddles your body getting herself into position to ride your cock."
+    else:
+        "You lay down on the [the_object.name] and tell her to crouch down on your dick."
+        mc.name "Now sit down and push it into your cute little ass."
+
+    $ the_girl.call_dialogue(SB_anal_standing.associated_taboo+"_taboo_break")
+
+    "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you press it against her tight hole."
+    if the_girl.sex_skills["Anal"] > 2:
+        "She gasps as your tip starts to spread her open, but continues to lower herself down on your throbbing cock."
+        the_girl.char "Oh god... Mfphhhh!"
+    else:
+        "She gasps as your tip tries to spread open her impossibly tight asshole."
+        mc.name "Come on, you'll get there."
+        "She spits on your cock and tries again. This time making better progress, sliding the tip of your dick into her ass."
+        the_girl.char "Oh god... Fuck!"
+    return    

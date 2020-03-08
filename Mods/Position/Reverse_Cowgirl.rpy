@@ -10,10 +10,10 @@ init python:
         transition_default = "transition_default_SB_reverse_cowgirl",
         strip_description = "strip_SB_reverse_cowgirl", strip_ask_description = "strip_ask_SB_reverse_cowgirl",
         orgasm_description = "orgasm_SB_reverse_cowgirl",
-        taboo_break_description = "taboo_break_missionary",
-        associated_taboo = "vaginal_sex",
+        taboo_break_description = "taboo_break_SB_reverse_cowgirl",
         verb = "ride", verbing = "riding",
-        opinion_tags = ["taking control","vaginal sex"], record_class = "Vaginal Sex")
+        opinion_tags = ["taking control","vaginal sex"], record_class = "Vaginal Sex",
+        associated_taboo = "vaginal_sex")
 
     list_of_girl_positions.append(SB_reverse_cowgirl)
 
@@ -339,4 +339,8 @@ label orgasm_SB_reverse_cowgirl(the_girl, the_location, the_object):
     "[the_girl.possessive_title] stirs her womb with your erection aggressively through her climax"
     "After a couple of seconds [the_girl.possessive_title] sighs and the tension drains from her body."
     the_girl.char "God it feels so good, I wonder if you can last long enough to let me cum again..."
+    return
+
+label taboo_break_SB_reverse_cowgirl(the_girl, the_location, the_object):
+    # TODO: Add custom taboo break
     return

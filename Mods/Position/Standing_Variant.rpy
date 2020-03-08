@@ -12,10 +12,10 @@ init python:
         transition_default = "transition_default_SB_facing_wall",
         strip_description = "strip_SB_facing_wall", strip_ask_description = "strip_ask_SB_facing_wall",
         orgasm_description = "orgasm_SB_facing_wall",
-        taboo_break_description = "taboo_break_missionary",
-        associated_taboo = "vaginal_sex",
+        taboo_break_description = "taboo_break_SB_facing_wall",
         verb = "fuck",
-        opinion_tags = ["sex standing up", "vaginal sex"], record_class = "Vaginal Sex")
+        opinion_tags = ["sex standing up", "vaginal sex"], record_class = "Vaginal Sex",
+        associated_taboo = "vaginal_sex")
 
     #list_of_positions.append(SB_facing_wall)     #Consider adding later, but for now, transition from the other standing scene
 
@@ -635,4 +635,8 @@ label orgasm_SB_facing_wall(the_girl, the_location, the_object):
     "You push her roughly up against [the_object.name] and keep fucking her through her orgasm."
     "After a couple of seconds [the_girl.possessive_title] takes a couple of deep breathes. You slow down your pace and give her a chance to recover."
     the_girl.char "Keep fucking me... Make me cum again!"
+    return
+
+label taboo_break_SB_facing_wall(the_girl, the_location, the_object):
+    # TODO: Add custom taboo break
     return

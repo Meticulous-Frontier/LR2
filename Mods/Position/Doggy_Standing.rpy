@@ -10,10 +10,10 @@ init python:
         transition_default = "transition_default_SB_doggy_standing",
         strip_description = "strip_SB_doggy_standing",  strip_ask_description = "strip_ask_SB_doggy_standing",
         orgasm_description = "orgasm_SB_doggy_standing",
-        taboo_break_description = "taboo_break_missionary",
-        associated_taboo = "vaginal_sex",
+        taboo_break_description = "taboo_break_SB_doggy_standing",
         verb = "fuck",
-        opinion_tags = ["doggy style sex", "vaginal sex", "sex standing up"], record_class = "Vaginal Sex")
+        opinion_tags = ["doggy style sex", "vaginal sex", "sex standing up"], record_class = "Vaginal Sex",
+        associated_taboo = "vaginal_sex")
 
     list_of_positions.append(SB_doggy_standing)
 
@@ -389,4 +389,8 @@ label orgasm_SB_doggy_standing(the_girl, the_location, the_object):
     if the_girl.get_opinion_score("doggy style sex") > 0:
         the_girl.char "Oh god, you've got me bent over and it feels so good I'm just cumming all over you..."
     the_girl.char "Don't stop... it still feels so good!"
+    return
+
+label taboo_break_SB_doggy_standing(the_girl, the_location, the_object):
+    # TODO: Add custom taboo break
     return

@@ -12,10 +12,10 @@ init python:
         transition_default = "transition_default_SB_anal_standing",
         strip_description = "strip_SB_anal_standing",  strip_ask_description = "strip_ask_SB_anal_standing",
         taboo_break_description = "taboo_break_SB_anal_standing",
-        associated_taboo = "anal_sex",
         orgasm_description = "orgasm_SB_anal_standing",
         verb = "ass fuck",
-        opinion_tags = ["doggy style sex", "anal sex", "sex standing up"], record_class = "Anal Sex")
+        opinion_tags = ["doggy style sex", "anal sex", "sex standing up"], record_class = "Anal Sex",
+        associated_taboo = "anal_sex")
 
     list_of_positions.append(SB_anal_standing)
 
@@ -483,7 +483,7 @@ label orgasm_SB_anal_standing(the_girl, the_location, the_object):
 
 label taboo_break_SB_anal_standing(the_girl, the_location, the_object):
     "You grab [the_girl.possessive_title]'s ass and give it a squeeze, then a hard slap."
-    if the_girl.effective_sluttiness(doggy_anal.associated_taboo) > doggy_anal.slut_cap or the_girl.get_opinion_score("showing her ass") > 0:
+    if the_girl.effective_sluttiness(SB_anal_standing.associated_taboo) > SB_anal_standing.slut_cap or the_girl.get_opinion_score("showing her ass") > 0:
         mc.name "Stand over here, I want to get a look at this ass."
         $ the_girl.draw_person(position = "back_peek", the_animation = ass_bob)
         "She turns around and jiggles her butt playfully for you."
@@ -514,7 +514,6 @@ label taboo_break_SB_anal_standing(the_girl, the_location, the_object):
     if the_girl.sex_skills["Anal"] > 2:
         "She gasps as your tip starts to spread her open. She lowers her shoulders and pushes her hips against you, helping the process."
         the_girl.char "Oh god... Mfphhhh!"
-
     else:
         "She gasps as your tip tries to spread open her impossibly tight asshole. She tries to pull away, but you pull on her waist and bring her closer."
         mc.name "Come on, you'll get there."

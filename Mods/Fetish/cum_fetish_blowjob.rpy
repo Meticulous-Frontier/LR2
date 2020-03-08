@@ -10,10 +10,10 @@
         transition_default = "transition_default_SB_cum_fetish_blowjob",
         strip_description = "strip_SB_cum_fetish_blowjob", strip_ask_description = "strip_ask_SB_cum_fetish_blowjob",
         orgasm_description = "orgasm_SB_cum_fetish_blowjob",
-        taboo_break_description = "taboo_break_blowjob",
-        associated_taboo = "oral_sex",
+        taboo_break_description = "taboo_break_SB_cum_fetish_blowjob",
         verb = "throat",
-        opinion_tags = ["giving blowjobs"], record_class = "Blowjobs")
+        opinion_tags = ["giving blowjobs"], record_class = "Blowjobs",
+        associated_taboo = "sucking_cock")
 
     list_of_girl_positions.append(SB_cum_fetish_blowjob)
 
@@ -240,4 +240,8 @@ label orgasm_SB_cum_fetish_blowjob(the_girl, the_location, the_object):
         the_girl.char "Wow, that was amazing... Okay, I came... now its your turn!"
         "She slides you back into her mouth and presses you all the way to the back, rubbing your tip against the back of her throat for a second before she goes back to blowing you."
 
+    return
+
+label taboo_break_SB_cum_fetish_blowjob(the_girl, the_location, the_object):
+    # TODO: Add custom taboo break
     return

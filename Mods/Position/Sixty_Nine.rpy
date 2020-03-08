@@ -14,11 +14,11 @@ init python:
         transition_default = "transition_default_SB_sixty_nine",
         strip_description = "strip_SB_sixty_nine", strip_ask_description = "strip_ask_SB_sixty_nine",
         orgasm_description = "orgasm_SB_sixty_nine",
-        taboo_break_description = "taboo_break_missionary",
-        associated_taboo = "vaginal_sex",
+        taboo_break_description = "taboo_break_SB_sixty_nine",
         verb = "sixty-nine",
         verbing = "sixty-nining",
-        opinion_tags = ["giving blowjobs", "getting head"], record_class = "Cunnilingus")
+        opinion_tags = ["giving blowjobs", "getting head"], record_class = "Cunnilingus",
+        associated_taboo = ["sucking_cock", "licking_pussy", "touching_penis", "touching_vagina"])
 
     list_of_positions.append(SB_sixty_nine)
 
@@ -467,6 +467,8 @@ label orgasm_SB_sixty_nine(the_girl, the_location, the_object):
     the_girl.char "mmmmm....MMMMM....MMMMMMMFFFF"
     "She moans loudly as orgasmic waves wash over her. Once you think you hear her call your name, but the sound is muffled and mostly incomprehensible with your cock in her mouth."
     "After several seconds [the_girl.possessive_title] sighs and then begins to bob her head up and down on your again."
+    return
 
-
+label taboo_break_SB_sixty_nine(the_girl, the_location, the_object):
+    # TODO: Add custom taboo break
     return
