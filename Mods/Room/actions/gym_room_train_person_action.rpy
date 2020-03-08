@@ -97,11 +97,11 @@ label train_in_gym(person):
             $ person.draw_person(emotion="happy")
             "There is a subtle undertone in that remark that makes you smile."
         $ person.change_max_energy(5)
-        "She seems to be building up her endurance"
+        "She seems to be building up her endurance."
     elif change < 2.5:
         "You and [person.possessive_title] spend a few hours working out."
         $ person.change_max_energy(10)
-        "She seems to be building up her endurance"
+        "She seems to be building up her endurance."
     else:
         "You put [person.possessive_title] through a vigorous training session."
         if person.sluttiness > 20:
@@ -109,7 +109,7 @@ label train_in_gym(person):
             person.char "It seems you have plans with my body, [person.mc_title]."
             "If she only knew what dirty things you have her doing in your mind."
         $ person.change_max_energy(10)
-        "She seems to be building up her endurance"
+        "She seems to be building up her endurance."
 
     $ body_changed = person.change_weight(-change, 100)
     $ new_weight = get_person_weight_string(person)
