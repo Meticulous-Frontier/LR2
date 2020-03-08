@@ -128,7 +128,8 @@ label train_in_gym(person):
                     $ gym_shower.show_background()
 
                     "As soon as you get into the showers, [person.possessive_title] moves closer and starts kissing you."
-
+                    # intro breaks kissing taboo for person
+                    $ the_person.break_taboo("kissing")
                     call fuck_person(person, start_position = kissing, start_object = mc.location.get_object_with_name("floor"), skip_intro = True) from _call_fuck_person_gym_training
                     $ the_report = _return
                     if the_report.get("girl orgasms", 0) > 0:
