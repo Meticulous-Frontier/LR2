@@ -48,7 +48,7 @@ init 5 python:
         elif the_person.effective_sluttiness(position_taboo) >= final_slut_requirement:
             willingness_string = "{color=#3DFF3D}Exciting{/color}" #Normal sluttiness gain
             tooltip_string = " (tooltip) This position pushes the boundary of what she is comfortable with. Increases temporary sluttiness, which may become permanent over time or with serum application."
-        elif he_person.effective_sluttiness(position_taboo) + the_person.obedience-100 >= final_slut_requirement:
+        elif the_person.effective_sluttiness(position_taboo) + the_person.obedience-100 >= final_slut_requirement:
             willingness_string = "{color=#FFFF3D}Likely Willing if Commanded{/color}"
             tooltip_string = " (tooltip) This position is beyond what she would normally consider. She is obedient enough to do it if she is commanded, at the cost of some happiness."
         else:
