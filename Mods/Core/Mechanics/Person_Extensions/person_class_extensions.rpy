@@ -236,7 +236,7 @@ init -1:
 
 
             the_daughter = make_person(last_name = self.last_name, age = age, body_type = body_type, face_style = face_style, tits = tits, height = height,
-                hair_colour = hair_colour, skin = self.skin, eyes = eyes, start_home = start_home)
+                hair_colour = hair_colour, skin = self.skin, eyes = eyes, start_home = start_home, force_random = True)
 
             if start_home is None:
                 the_daughter.generate_home()

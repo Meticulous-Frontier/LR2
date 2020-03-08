@@ -25,7 +25,7 @@ init 2 python: # Declare variables to use
 
         salon_manager = make_person(name = "Ophelia", last_name = "von Friseur", height = .9, age = renpy.random.randint(21,30), body_type = "thin_body",
             personality =  None if not "salon_manager_personality" in globals() else salon_manager_personality, job = "Hair Stylist", starting_wardrobe = salon_wardrobe, eyes="light blue", start_sluttiness = 10,
-            possessive_title = "My stylist")
+            possessive_title = "My stylist", force_random = True)
 
         if "salon_manager_role" in globals():
             salon_manager.special_role.append(salon_manager_role)

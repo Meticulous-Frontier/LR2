@@ -50,7 +50,7 @@ init 2 python:
         sarah = make_person(name = "Sarah", last_name ="Cooper", age = 21, body_type = "thin_body", face_style = "Face_3", tits = "A", height = 0.90, hair_colour = "brown", hair_style = windswept_hair, skin="white",\
             eyes = "dark blue", personality = Sarah_personality, name_color = "#d62cff", dial_color = "#d62cff", starting_wardrobe = Sarah_wardrobe, \
             stat_array = [4,3,3], skill_array = [5,3,2,1,1], sex_array = [1,2,3,1], start_sluttiness = 3, start_obedience = 0, start_happiness = 102, start_love = 3, \
-            title = "Sarah", possessive_title = "Your childhood friend",mc_title = mc.name, relationship = "Single", kids = 0, base_outfit = Sarah_base_outfit)
+            title = "Sarah", possessive_title = "Your childhood friend",mc_title = mc.name, relationship = "Single", kids = 0, base_outfit = Sarah_base_outfit, force_random = True)
 
         sarah.set_schedule([0,4], Sarah_home)
         sarah.set_schedule([1,2,3], Sarah_home)
@@ -418,7 +418,7 @@ label Sarah_third_wheel_label():
     $ mc.change_location(downtown_bar)
     $ mc.location.show_background()
 
-    $ sarah_friend = make_person(tits = "F") #TODO figure out how to properly delete this character later
+    $ sarah_friend = make_person(tits = "F", force_random = True) #TODO figure out how to properly delete this character later
     $ sarah_friend.title = sarah_friend.name
     $ sarah_friend.mc_title = mc.name
     "When you get to the bar, [the_person.title] quickly spots her friend and leads you over to the table."
