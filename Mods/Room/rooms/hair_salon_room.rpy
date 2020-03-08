@@ -34,17 +34,15 @@ init 2 python: # Declare variables to use
             salon_manager.on_room_enter_event_list.append(salon_introduction_action)
 
         # create home for salon manager
-        salon_manager.generate_home()            
+        salon_manager.generate_home()
+        salon_manager.home.add_person(salon_manager)
 
         # We want whoever the salon_manager is to be in the salon during work hours.
-        salon_manager.set_schedule([0,4], salon_manager.home)
         salon_manager.set_schedule([1,2,3], mall_salon)
 
-        # Add to mall
-        mall_salon.add_person(salon_manager)
         # Add to map
         list_of_places.append(mall_salon)
-        mall_salon.link_locations_two_way(mall)
+        #mall_salon.link_locations_two_way(mall)
         return
 
     def salon_introduction_action_requirement(the_person):

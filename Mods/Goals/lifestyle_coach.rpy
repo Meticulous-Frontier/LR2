@@ -15,37 +15,24 @@ init 3 python:
 
 
     def lifestyle_coach_init():
-        dawn_home = Room("Dawn's home", "Dawn's home", [], apartment_background, [],[],[],False,[0,0], visible = False, hide_in_known_house_map = False, lighting_conditions = standard_indoor_lighting)
-        dawn_home.add_object(make_wall())
-        dawn_home.add_object(make_floor())
-        dawn_home.add_object(make_bed())
-        dawn_home.add_object(make_window())
-
-        list_of_places.append(dawn_home)
-
         lifestyle_coach_review_goals = Action("Review Goals", lifestyle_coach_review_goals_requirement, "lifestyle_coach_review_goals_label")
-
         lifestyle_coach_role = Role(role_name ="Lifestyle Coach", actions =[lifestyle_coach_review_goals], hidden = False)
 
         global dawn
-        dawn = create_random_person(name = "Dawn", age = 42, body_type = "thin_body", \
-            personality = relaxed_personality, \
+        dawn = make_person(name = "Dawn", age = 42, body_type = "thin_body", \
+            personality = relaxed_personality,  \
             sex_array = [3,3,4,3], start_obedience = -28, start_happiness = 129, start_love = 0, \
-            title = "Dawn", possessive_title = "Your lifestyle coach", mc_title = mc.name)
+            title = "Dawn", possessive_title = "Your lifestyle coach", mc_title = mc.name, force_random = True)
 
+        dawn.generate_home()
+        dawn.set_schedule([1,2,3], mall)
         dawn.special_role.append(lifestyle_coach_role)
 
-        dawn.set_schedule([0,4], dawn_home)
-        dawn.set_schedule([1,2,3], mall)
-        dawn.home = dawn_home
-
         dawn.home.add_person(dawn)
-
 
         #Set opinions up here.
         dawn.opinions["HR work"] = [2, True]
         dawn.sexy_opinions["taking control"] = [1, False]
-
 
         lifestyle_coach_intro = Action("Meet the Lifestyle Coach", lifestyle_coach_intro_requirement, "lifestyle_coach_intro_label")
         dawn.on_room_enter_event_list.append(lifestyle_coach_intro)
