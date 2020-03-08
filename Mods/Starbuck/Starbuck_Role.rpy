@@ -82,7 +82,7 @@ init 2 python:
 
 init -1 python:
     def starbuck_introduction_requirement(the_person):
-        if mc.location == sex_store:    # only trigger event when in sex store
+        if starbuck.location() is sex_store:    # only trigger event when starbuck is there
             return True
         return False
 

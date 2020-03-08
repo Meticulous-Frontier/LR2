@@ -71,9 +71,8 @@ init 3 python:
 
 init 2 python:
     def lifestyle_coach_intro_requirement(the_person):
-        if mc.location == mall:
-            if day > 0:   #TODO after testing change this to something different
-                return True
+        if the_person.location() is mall: # only trigger event when Dawn at mall
+            return True
         return False
 
     def lifestyle_coach_review_goals_requirement(the_person):

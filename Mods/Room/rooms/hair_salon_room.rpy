@@ -48,7 +48,7 @@ init 2 python: # Declare variables to use
         return
 
     def salon_introduction_action_requirement(the_person):
-        if mc.location == mall_salon:    # only trigger event when in hair salon
+        if salon_manager.location() is mall_salon:    # only trigger event when ophelia is there
             return True
         return False
 
