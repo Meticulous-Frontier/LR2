@@ -121,15 +121,14 @@ init 5 python:
 
     def build_round_choice_menu(the_person, position_choice, ignore_taboo = False):
         option_list = []
-        option_list.append(["Pause and strip her down.","Strip"])
         if position_choice is not None:
             option_list.append(["Keep " + position_choice.verbing + " her.","Continue"]) #NOTE: you're prevented from continuing if the energy cost would be too high by the pre-round checks.
 
             if not position_locked and object_choice:
-                option_list.append(["Pause and change position.\n-5 {image=gui/extra_images/arousal_token.png}","Change"])
+                option_list.append(["Pause and change position.\n-5 {image=arousal_token_small}","Change"])
                 for position in position_choice.connections:
                     if object_choice.has_trait(position.requires_location):
-                        appended_name = "Transition to " + position.build_position_willingness_string(the_person, ignore_taboo = ignore_taboo) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
+                        appended_name = "Transition to " + position.build_position_willingness_string(the_person, ignore_taboo = ignore_taboo).replace("{size=22}", "{size=12}") #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                         option_list.append([appended_name,position])
 
             if position_locked and object_choice:
@@ -137,15 +136,17 @@ init 5 python:
                 for position in position_choice.connections:
                     if isinstance(object_choice, Object): # Had an error with cousin's kissing blackmail where it would pass object_choice as a list, haven't looked further into it
                         if object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag:
-                            appended_name = "Transition to " + position.build_position_willingness_string(the_person, ignore_taboo = ignore_taboo) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
+                            appended_name = "Transition to " + position.build_position_willingness_string(the_person, ignore_taboo = ignore_taboo).replace("{size=22}", "{size=12}") #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                             option_list.append([appended_name, position])
+
+            option_list.append(["Pause and strip her down.","Strip"])
 
             if not hide_leave: #TODO: Double check that we can always get out
                 option_list.append(["Stop " + position_choice.verbing + " her and leave.", "Leave"]) #TODO: Have this appear differently depending on if you've cum yet, she's cum yet, or you've both cum.
 
         else:
             if not position_locked:
-                option_list.append(["Pick a new position.\n-5 {image=gui/extra_images/arousal_token.png}","Change"])
+                option_list.append(["Pick a new position.\n-5 {image=arousal_token_small}","Change"])
             if not hide_leave:
                 option_list.append(["Stop and leave.", "Leave"])
         option_list.insert(0, "Round Choices")
@@ -215,7 +216,10 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
         if round_choice is None: #If there is no set round_choice
             #TODO: Add a variant of this list when the girl is in control to ask if you want to resist or ask/beg for something.
-            call screen main_choice_display([build_round_choice_menu(the_person, position_choice, ignore_taboo = ignore_taboo)])
+            if "build_menu_items" in globals():
+                call screen main_choice_display(build_menu_items([build_round_choice_menu(the_person, position_choice, ignore_taboo = ignore_taboo)]))
+            else:
+                call screen main_choice_display([build_round_choice_menu(the_person, position_choice, ignore_taboo = ignore_taboo)])
             $ round_choice = _return #This gets the players choice for what to do this round.
 
         # Now that a round_choice has been picked we can do something.
