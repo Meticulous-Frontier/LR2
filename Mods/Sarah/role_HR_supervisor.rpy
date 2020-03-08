@@ -1474,7 +1474,7 @@ init 1200 python:
             kids = get_HR_director_tag("recruit_kids", None),
             body_type = get_HR_director_tag("recruit_body", None),
             height = get_HR_director_tag("recruit_height", None),
-            sex_array = sex_array)
+            sex_array = sex_array, force_random = True)
 
         # make balanced stats
         recruit.int = renpy.random.randint(3,6)

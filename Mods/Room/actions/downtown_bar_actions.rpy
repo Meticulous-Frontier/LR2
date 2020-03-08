@@ -6,7 +6,7 @@ init -1 python:
    downtown_bar_drink_action = Action("Order a drink for... {image=gui/heart/Time_Advance.png}", downtown_bar_drink_requirement, "downtown_bar_drink_label", menu_tooltip = "Treat someone with a drink...")
 
 label downtown_bar_drink_label():
-    $ new_person = make_person()
+    $ new_person = make_person(force_random = True)
 
     "[downtown_bar.formalName] is Under Construction - Placeholder Action (Probably will be removed)" # A way to generate new people.
 

@@ -103,14 +103,14 @@ init 2 python:
     #     return
 
     def casual_sex_create_athlete():
-        new_athlete = make_person(body_type = "thin_body", age = renpy.random.randint(19,25), personality = athlete_personality, relationship = "Single")
+        new_athlete = make_person(body_type = "thin_body", age = renpy.random.randint(19,25), personality = athlete_personality, relationship = "Single", force_random = True)
         assign_casual_athlete_role(new_athlete)
         new_athlete.generate_home()
         gym.add_person(new_athlete)
         return True
 
     def casual_sex_create_hotwife():
-        new_hotwife = make_person(age = renpy.random.randint(30,40), personality = hotwife_personality, relationship = "Married")
+        new_hotwife = make_person(age = renpy.random.randint(30,40), personality = hotwife_personality, relationship = "Married", force_random = True)
         assign_casual_hotwife_role(new_hotwife)
         new_hotwife.generate_home()
         downtown_bar.add_person(new_hotwife)

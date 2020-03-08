@@ -13,10 +13,10 @@ init -1 python:
         hair_colour = None, hair_style = None, pubes_colour = None, pubes_style = None, skin = None, eyes = None, job = None,
         personality = None, custom_font = None, name_color = None, dial_color = None, starting_wardrobe = None, stat_array = None, skill_array = None, sex_array = None,
         start_sluttiness = None, start_obedience = None, start_happiness = None, start_love = None, start_home = None,
-        title = None, possessive_title = None, mc_title = None, relationship = None, kids = None, SO_name = None, base_outfit = None):
+        title = None, possessive_title = None, mc_title = None, relationship = None, kids = None, SO_name = None, base_outfit = None, force_random = False):
 
         return_character = None
-        if renpy.random.randint(1,100) < 20:
+        if not force_random and renpy.random.randint(1,100) < 20:
             return_character = get_premade_character()
 
         if height is None:
