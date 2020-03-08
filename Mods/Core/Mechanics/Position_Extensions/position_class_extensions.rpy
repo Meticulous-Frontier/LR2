@@ -14,36 +14,41 @@ init 5 python:
         arousal_string =  ", {color=#3C3CFF}" + guy_expected_arousal + "{/color}/{color=#F0A8C0}" + girl_expected_arousal + "{/color} {image=gui/extra_images/arousal_token.png}"
 
         disable = False
-
-        if hasattr(self, "associated_taboo"):
-            position_taboo = self.associated_taboo
+        position_taboo = self.associated_taboo
 
         if ignore_taboo:
             position_taboo = None
 
-        slut_modifier = 0
+        final_slut_requirement = self.slut_requirement
+        final_slut_cap = self.slut_cap
+        if self.skill_tag == "Anal" and the_person.has_family_taboo():
+            final_slut_requirement += -10 #It's easier to convince a family member to have anal sex, since it's not "real" incest or something.
+            final_slut_cap += -10
+        elif self.skill_tag == "Vaginal" and the_person.has_family_taboo():
+            final_slut_requirement += 10 #It's harder to convince a family member to have vaginal sex
+            final_slut_cap += 10
+
         if self.opinion_tags:
             for opinion_tag in self.opinion_tags:
-                slut_modifier += the_person.get_opinion_score(opinion_tag)
-
-        effective_sluttiness = the_person.effective_sluttiness() + slut_modifier
+                final_slut_cap += the_person.get_opinion_score(opinion_tag)
+                final_slut_requirement += the_person.get_opinion_score(opinion_tag)
 
         taboo_break_string = ""
         if the_person.has_taboo(position_taboo):
             taboo_break_string = " {image=gui/extra_images/taboo_break_token.png} "
 
         #NOTE: Removed the (tooltip) and (disabled) tags as they aren't needed in the screen which is their only use case at the moment, but consider adding those back in if being used in the renpy.display_menu
-        if the_person.effective_sluttiness(position_taboo) > self.slut_cap:
-            if the_person.arousal > self.slut_cap:
+        if the_person.effective_sluttiness(position_taboo) > final_slut_cap:
+            if the_person.arousal > final_slut_cap:
                 willingness_string = "{color=#6b6b6b}Boring{/color}" #No sluttiness gain AND half arousal gain
                 tooltip_string = " (tooltip) This position is too boring to interest her when she is this horny. No sluttiness increase and her arousal gain is halved."
             else:
                 willingness_string = "{color=#3C3CFF}Comfortable{/color}" #No sluttiness
                 tooltip_string = " (tooltip) This position is too tame for her tastes. No sluttiness increase, but it may still be a good way to get warmed up and ready for other positions."
-        elif effective_sluttiness > self.slut_requirement:
+        elif the_person.effective_sluttiness(position_taboo) >= final_slut_requirement:
             willingness_string = "{color=#3DFF3D}Exciting{/color}" #Normal sluttiness gain
             tooltip_string = " (tooltip) This position pushes the boundary of what she is comfortable with. Increases temporary sluttiness, which may become permanent over time or with serum application."
-        elif effective_sluttiness + the_person.obedience-100 > self.slut_requirement:
+        elif he_person.effective_sluttiness(position_taboo) + the_person.obedience-100 >= final_slut_requirement:
             willingness_string = "{color=#FFFF3D}Likely Willing if Commanded{/color}"
             tooltip_string = " (tooltip) This position is beyond what she would normally consider. She is obedient enough to do it if she is commanded, at the cost of some happiness."
         else:
