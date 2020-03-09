@@ -245,7 +245,7 @@ label mc_start_follow_label(person):
     #if the_person.get_opinion_score("being submissive"):
 
     $ the_person.follow_mc = True
-    $ the_person.personality.get_dialogue(the_person, "seduction_accept_crowded")
+    $ the_person.personality.call_dialogue("seduction_accept_crowded")
 
     return
 
