@@ -18,7 +18,7 @@ init 2 python:
                     vaginal_positions.append([willingness, position])
                 if position.skill_tag == "Anal":
                     anal_positions.append([willingness, position])
-        
+
         if allow_none:
             foreplay_positions.append(["Nothing", "Nothing"])
 
@@ -32,6 +32,6 @@ label pick_position_enhanced(the_person, allow_none = True, ignore_taboo = False
     if "build_menu_items" in globals():
         call screen main_choice_display(build_menu_items(build_grouped_sex_position_menu(the_person, allow_none = allow_none, ignore_taboo = ignore_taboo)))
     else:
-        call screen main_choice_display(build build_grouped_sex_position_menu(the_person, allow_none = allow_none, ignore_taboo = ignore_taboo))
+        call screen main_choice_display(build_grouped_sex_position_menu(the_person, allow_none = allow_none, ignore_taboo = ignore_taboo))
     $ position_choice = _return
     return None if position_choice == "Nothing" else position_choice
