@@ -5,6 +5,49 @@ init -1:
     python:
         import hashlib
 
+        def remove_person_from_game(self):
+            self.location().remove_person(self) # remove person from current location
+            list_of_places.remove(self.home) # remove home location from list_of_places
+            found = find_in_list(lambda x: x[0].name == self.name and x[0].last_name == self.last_name and x[0].age == self.age, people_to_process)
+            if found: # remove from processing list
+                people_to_process.remove(found)
+            # clear all references held by person object.
+            self.home = None
+            self.work = None
+            self.schedule = None
+            self.job = None
+            self.relationship = None
+            self.personality = None
+            self.char = None
+            self.body_images = None
+            self.face_style = None
+            self.expression_images = None
+            self.hair_colour = None
+            self.hair_style = None
+            self.pubes_style = None
+            self.skin = None
+            self.eyes = None
+            self.serum_effects = None
+            self.special_role = None
+            self.on_room_enter_event_list = []
+            self.on_talk_event_list = []
+            self.event_triggers_dict = {}
+            self.idle_animation = None
+            self.personal_region_modifiers = None
+            self.suggest_bag = []
+            self.sex_record = {}
+            self.situational_sluttiness = None
+            self.situational_obedience = None
+            self.broken_taboos = []
+            self.wardrobe = None
+            self.base_outfit = None
+            self.planned_outfit = None
+            self.planned_uniform = None
+            # now let the Garbage Collector do the rest (we are no longer referenced in any objects).
+            return
+
+        Person.remove_person_from_game = remove_person_from_game
+
         def location(self): # Check what location a person is in e.g the_person.location() == downtown. Use to trigger events?
             for location in list_of_places:
                 if self in location.people:

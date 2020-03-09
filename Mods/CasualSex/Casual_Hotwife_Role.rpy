@@ -100,10 +100,16 @@ init -2 python:
                 return "You can only do this at her place."
         return False
 
-    def casual_hotwife_ghost_requirement(the_person):
+    def casual_hotwife_ghost_requirement():
         if renpy.random.randint(0,100) < 20:
             return True
         return False
+
+    def add_hotwife_ghost_action(the_person):
+        remove_mandatory_crisis_list_action("casual_hotwife_ghost_label")
+        casual_hotwife_ghost = Action("Casual hotwife Ghosts you", casual_hotwife_ghost_requirement, "casual_hotwife_ghost_label", args = the_person)
+        mc.business.mandatory_crises_list.append(casual_hotwife_ghost)
+        return
 
 
 #*************Create Casual Hotwife Role***********#
@@ -737,14 +743,12 @@ label casual_hotwife_home_sex_label(the_person):
 
 label casual_hotwife_ghost_label(the_person):
     "You get a message on your phone. Looks like it is from [the_person.possessive_title]."
-    the_person.char "Hey, I'm really sorry to have to do this, but I don't want to see you anymore."
+    the_person.char "Hey, I'm really sorry to have to do this, but we can't hookup anymore."
     the_person.char "I'm dedicated to my husband, but I find myself thinking about you constantly."
     the_person.char "This is beginning to turn into an emotional affair, and I can't do it anymore. I'm sorry."
-    "Damn. Sounds like you pushed things with her a little too far"
-    python:
-        del the_person.home  #Delete her
-        del the_person
-        casual_sex_create_hotwife() #Create a new hotwife so MC can try again if they choose.
+    "Damn. Sounds like you pushed things with her a little too far..."
+    $ the_person.remove_person_from_game()
+    $ casual_sex_create_hotwife() #Create a new hotwife so MC can try again if they choose.
     return
 
 #************* Personality****************#
@@ -791,9 +795,7 @@ label hotwife_greetings(the_person):
     if mc.location == downtown_bar:
         if the_person.love > 50:  #She loves you too much and is going to or already has called things off
             the_person.char "Oh... hello [the_person.mc_title]"
-            $ remove_mandatory_crisis_list_action("casual_hotwife_ghost_label")
-            $ casual_athlete_ghost = Action("Casual hotwife Ghosts you", casual_hotwife_ghost_requirement, "casual_hotwife_ghost_label", args = the_person)
-            $ mandatory_crises_list.append(casual_hotwife_ghost)
+            $ add_hotwife_ghost_action(the_person)
             return
         if the_person.event_triggers_dict.get("hotwife_progress", 0) >= 2:
             the_person.char "Hey there [the_person.mc_title]"
