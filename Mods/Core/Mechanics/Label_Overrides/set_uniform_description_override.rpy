@@ -8,27 +8,27 @@ label set_uniform_description_enhanced():
         $underwear_limit = 999
         $limited_to_top = False
     elif corporate_enforced_nudity_policy.is_owned():
-        $slut_limit = 80
-        $underwear_limit = 80
-        $limited_to_top = False
-    elif minimal_coverage_uniform_policy.is_owned():
-        $slut_limit = 60
+        $slut_limit = 100
         $underwear_limit = 60
         $limited_to_top = False
-    elif reduced_coverage_uniform_policy.is_owned():
-        $slut_limit = 40
+    elif minimal_coverage_uniform_policy.is_owned():
+        $slut_limit = 80
         $underwear_limit = 40
         $limited_to_top = False
+    elif reduced_coverage_uniform_policy.is_owned():
+        $slut_limit = 60
+        $underwear_limit = 25
+        $limited_to_top = False
     elif casual_uniform_policy.is_owned():
-        $slut_limit = 25
+        $slut_limit = 45
         $underwear_limit = 0
         $limited_to_top = True
     elif relaxed_uniform_policy.is_owned():
-        $slut_limit = 15
+        $slut_limit = 30
         $underwear_limit = 0
         $limited_to_top = True
     elif strict_uniform_policy.is_owned():
-        $slut_limit = 5
+        $slut_limit = 25
         $underwear_limit = 0
         $limited_to_top = True
     else:
