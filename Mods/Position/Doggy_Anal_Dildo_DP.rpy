@@ -13,7 +13,10 @@ init python:
         orgasm_description = "orgasm_SB_doggy_anal_dildo_dp",
         verb = "ass fuck",
         opinion_tags = ["doggy style sex", "anal sex", "vaginal sex"], record_class = "Anal Sex",
-        associated_taboo = ["vaginal_sex", "anal_sex"])
+        associated_taboo = "anal_sex")
+
+    # only one associated taboo is allowed in code ["anal_sex", "vaginal_sex"]
+
 
     #list_of_positions.append(SB_doggy_anal_dildo_dp)
 

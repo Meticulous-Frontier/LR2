@@ -18,7 +18,9 @@ init python:
         verb = "sixty-nine",
         verbing = "sixty-nining",
         opinion_tags = ["giving blowjobs", "getting head"], record_class = "Cunnilingus",
-        associated_taboo = ["sucking_cock", "licking_pussy", "touching_penis", "touching_vagina"])
+        associated_taboo = "sucking_cock")
+
+        # only one associated taboo is allowed in code ["sucking_cock", "licking_pussy", "touching_penis", "touching_vagina"]
 
     list_of_positions.append(SB_sixty_nine)
 
