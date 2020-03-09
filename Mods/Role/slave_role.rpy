@@ -96,11 +96,11 @@ label slave_collar_person_label(the_person):
     return
 
 label wakeup_duty_label(the_person):
-
     "You tell [the_person.possessive_title] to make sure you wake up in the morning."
-    $ wakeup_duty_crisis = Action("Slave Alarm Clock", wakeup_duty_crisis_requirement, "slave_alarm_clock_label", the_person)
-    $ mc.business.mandatory_morning_crises_list.append(wakeup_duty_crisis)
-
+    python:
+        remove_mandatory_crisis_list_action("slave_alarm_clock_label")
+        wakeup_duty_crisis.args = [the_person]
+        mc.business.mandatory_morning_crises_list.append(wakeup_duty_crisis)
     return
 
 label slave_training_label(the_person): # TODO: Add variations to these. They are supposed to be rather short interactions that do not take up time. Both "rewards" and punishments should be available. Some characters might see certain "punishments" as rewards too.
