@@ -237,6 +237,7 @@ label advance_time_enhanced(no_events = False):
         x = None
         c = None
         people_to_process = []
+        person = None
 
     if mandatory_advance_time: #If a crisis has told us to advance time after it we do so.
         call advance_time from _call_advance_time_advance_time_enhanced
