@@ -25,6 +25,7 @@ init -1:
             self.wardrobe.overwear_sets.clear()
             self.wardrobe = None
 
+            self.special_role.clear()
             self.on_room_enter_event_list.clear()
             self.event_triggers_dict.clear()
             self.suggest_bag.clear()
@@ -48,7 +49,6 @@ init -1:
             self.skin = None
             self.eyes = None
             self.serum_effects = None
-            self.special_role = None
             self.idle_animation = None
             self.personal_region_modifiers = None
             self.situational_sluttiness = None
