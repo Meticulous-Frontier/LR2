@@ -1379,6 +1379,8 @@ label HR_director_headhunt_interview_label(the_person):
     else:
         mc.name "I'm sorry, this wasn't exactly what I had in mind."
         the_person.char "Ah, okay. Well give me the rest of the week to catch up on my normal HR work. If you want me to start the process again, talk to me on Monday."
+        $ prospect.remove_person_from_game()
+        
     $ del prospect
     return
 
