@@ -17,6 +17,10 @@ init 2 python: # Declare variables to use
             return True
 
     def hair_salon_mod_initialization(self):
+        # Create the room(s) I want to use.
+        global mall_salon
+        mall_salon = Room("salon", "Hair Salon", [], room_background_image("Salon_Background.jpg"), [make_floor(), make_wall(), make_chair(), make_window()], [], [salon_action], True, [7,2], None, True, lighting_conditions = standard_indoor_lighting)
+
         # Wardrobe for employees in the salon
         salon_wardrobe = wardrobe_from_xml("Salon_Wardrobe")
 
@@ -51,5 +55,3 @@ init 2 python: # Declare variables to use
 
     salon_introduction_action = Action("Ophelia's Hair Salon", salon_introduction_action_requirement, "salon_manager_greetings", menu_tooltip = "Ophelia's Hair Salon")
 
-    # Create the room(s) I want to use.
-    mall_salon = Room("salon", "Hair Salon", [], room_background_image("Salon_Background.jpg"), [make_floor(), make_wall(), make_chair(), make_window()], [], [salon_action], True, [7,2], None, True, lighting_conditions = standard_indoor_lighting)
