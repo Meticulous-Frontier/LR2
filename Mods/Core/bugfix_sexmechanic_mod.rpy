@@ -323,8 +323,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     menu:
                         "Give her what she wants.":
                             $ the_person.change_obedience(2)
-                            if "beg finished" in report_log:
-                                $ report_log["beg finish"] += 1
+                            $ report_log["beg finish"] = report_log.get("beg finish", 0) + 1
                             $ finished = False
                             $ position_locked = False
 
