@@ -92,6 +92,26 @@ init -1 python:
 
     Wardrobe.pick_outfit_with_lowest_sluttiness = pick_outfit_with_lowest_sluttiness
 
+    def pick_overwear_with_lowest_sluttiness(self):
+        selected_overwear = None
+        for overwear in self.overwear_sets:
+            if selected_overwear is None or overwear.get_overwear_slut_score() < selected_overwear.get_overwear_slut_score():
+                selected_overwear = overwear
+        return selected_overwear.get_copy()
+
+    Wardrobe.pick_overwear_with_lowest_sluttiness = pick_overwear_with_lowest_sluttiness
+
+    def pick_underwear_with_lowest_sluttiness(self):
+        selected_underwear = None
+        for underwear in self.underwear_sets:
+            if selected_underwear is None or underwear.get_underwear_slut_score() < selected_underwear.get_underwear_slut_score():
+                selected_underwear = underwear
+        return selected_underwear.get_copy()
+
+    Wardrobe.pick_underwear_with_lowest_sluttiness = pick_underwear_with_lowest_sluttiness
+
+
+
     def calculate_minimum_sluttiness(person, target_sluttiness):
         minimum_sluttiness = target_sluttiness - person.sluttiness # raise minimum sluttiness by the amount over normal sluttiness
         if target_sluttiness > 40 and minimum_sluttiness == 0: # when there is no minimum sluttiness, increase it when the girl is slutty
@@ -203,6 +223,7 @@ init -1 python:
 
         #If we get to here we are assembling an outfit out of underwear or overwear.
         uniform_over = None
+        uniform_under = None
         count = 0
         while not uniform_over and count < 4:   # Try to find a valid uniform by stretching the sluttiness range, returns none when not successful
             uniform_over = self.get_random_appropriate_overwear(target_sluttiness + (count * 2), minimum_sluttiness - (count * 10), preferences = preferences)
@@ -215,6 +236,8 @@ init -1 python:
 
             uniform_under = get_random_appropriate_underwear_from_wardrobes(self, person, slut_limit_remaining, preferences)
 
+            if not uniform_under:
+                uniform_under = self.pick_underwear_with_lowest_sluttiness()
         else:
             #There are no tops, so we're going to try and get a bottom and use one of the persons tops.
             uniform_under = get_random_appropriate_underwear_from_wardrobes(self, person, target_sluttiness, preferences)
@@ -225,6 +248,9 @@ init -1 python:
                     slut_limit_remaining = 10 # don't expect 0 sluttiness overwear to be in personal wardrobe.
 
                 uniform_over = get_random_appropriate_overwear_from_wardrobes(self, person, slut_limit_remaining, preferences)
+
+            if not uniform_over:
+                uniform_over = self.pick_overwear_with_lowest_sluttiness()
 
         #At this point we have our under and over, if at all possible.
         if not uniform_over or not uniform_under:
@@ -288,6 +314,9 @@ init -1 python:
 
             #We got a top, now get a bottom.
             outfit_under = get_random_appropriate_underwear_from_wardrobes(self, person, slut_limit_remaining, preferences)
+
+            if not outfit_under:
+                outfit_under = self.pick_underwear_with_lowest_sluttiness()
         else:
             outfit_under = get_random_appropriate_underwear_from_wardrobes(self, person, target_sluttiness, preferences)
 
@@ -297,6 +326,9 @@ init -1 python:
                     slut_limit_remaining = 10 # don't expect 0 sluttiness overwear to be in wardrobe.
 
                 outfit_over = get_random_appropriate_overwear_from_wardrobes(self, person, slut_limit_remaining, preferences)
+
+            if not outfit_over:
+                outfit_over = self.pick_overwear_with_lowest_sluttiness()
 
         #At this point we have our under and over, if at all possible.
         if not outfit_over or not outfit_under:

@@ -23,7 +23,7 @@ label downtown_bar_drink_label():
 
         "Do you wish to introduce yourself, perhaps grace her with a free- of charge drink?"
 
-    $ people_list = get_sorted_people_list(known_people_at_location(mc.location) + unknown_people_at_location(mc.location), "Drink with", [new_person, "Back"])
+    $ people_list = get_sorted_people_list(known_people_at_location(mc.location) + unknown_people_at_location(mc.location) + [new_person], "Drink with", ["Back"])
 
     if "build_menu_items" in globals():
         call screen main_choice_display(build_menu_items([people_list]))
@@ -38,18 +38,23 @@ label downtown_bar_drink_label():
             "Not seeing any reason to stick around she promptly leaves, never to be seen again."
 
         python: # release variables
-            del new_person
+            new_person.remove_person_from_game()
             renpy.scene("Active")
+            del new_person
 
         return # Where to go if you hit "Back".
     else:
         $ the_person = person_choice
+        $ del new_person
+        $ del person_choice
 
     # add person to game
     python:
-        if not new_person in mc.location.people:
+        if not the_person in mc.location.people:
             the_person.generate_home()
-            mc.location.add_person(new_person)
+            mc.location.add_person(the_person)
+
+    $ the_person.draw_person()
 
     if the_person.mc_title == "Stranger": # First time introduction that does not return to talk_person
         call person_introduction(the_person) from _call_person_introduction_downtown_bar_drink
@@ -61,7 +66,6 @@ label downtown_bar_drink_label():
 
     mc.name "Stay healthy and hydrated, [the_person.title]."
 
-    $ del new_person
 
     if time_of_day == 4:
         "After a night of drinks you decide to head back home to bed."
