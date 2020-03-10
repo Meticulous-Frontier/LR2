@@ -23,41 +23,29 @@
 init 2 python:
 
     def Sarah_mod_initialization(): #Add actionmod as argument#
+        sarah_wardrobe = wardrobe_from_xml("Sarah_Wardrobe")
 
-        Sarah_wardrobe = wardrobe_from_xml("Sarah_Wardrobe")
-        Sarah_base_outfit = Outfit("Sarah's base accessories")
+        sarah_base_outfit = Outfit("Sarah's base accessories")
         the_glasses = modern_glasses.get_copy()
         the_glasses.colour = [.15, .15, .15, 1.0]
         the_eyeshadow = light_eye_shadow.get_copy()
         the_eyeshadow.colour = [.45,.31,.59,1.0]
-        Sarah_base_outfit.add_accessory(the_glasses)
-        Sarah_base_outfit.add_accessory(the_eyeshadow)
-
-        Sarah_home = Room("Sarah's home", "Sarah's home", [], apartment_background, [],[],[],False,[0,0], visible = False, hide_in_known_house_map = False, lighting_conditions = standard_indoor_lighting)
-        Sarah_home.add_object(make_wall())
-        Sarah_home.add_object(make_floor())
-        Sarah_home.add_object(make_bed())
-        Sarah_home.add_object(make_window())
-
-        #Sarah_home.link_locations_two_way(downtown)
-        list_of_places.append(Sarah_home)
+        sarah_base_outfit.add_accessory(the_glasses)
+        sarah_base_outfit.add_accessory(the_eyeshadow)
 
         # init Sarah role
-        Sarah_role = Role(role_name ="Childhood Friend", actions =[])
+        # sarah_role = Role(role_name ="Childhood Friend", actions =[])
 
-        #global Sarah_role
         global sarah
         sarah = make_person(name = "Sarah", last_name ="Cooper", age = 21, body_type = "thin_body", face_style = "Face_3", tits = "A", height = 0.90, hair_colour = "brown", hair_style = windswept_hair, skin="white",\
-            eyes = "dark blue", personality = Sarah_personality, name_color = "#d62cff", dial_color = "#d62cff", starting_wardrobe = Sarah_wardrobe, \
+            eyes = "dark blue", personality = Sarah_personality, name_color = "#d62cff", dial_color = "#d62cff", starting_wardrobe = sarah_wardrobe, \
             stat_array = [4,3,3], skill_array = [5,3,2,1,1], sex_array = [1,2,3,1], start_sluttiness = 3, start_obedience = 0, start_happiness = 102, start_love = 3, \
-            title = "Sarah", possessive_title = "Your childhood friend",mc_title = mc.name, relationship = "Single", kids = 0, base_outfit = Sarah_base_outfit, force_random = True)
+            title = "Sarah", possessive_title = "Your childhood friend",mc_title = mc.name, relationship = "Single", kids = 0, base_outfit = sarah_base_outfit, force_random = True)
 
-        sarah.set_schedule([0,4], Sarah_home)
-        sarah.set_schedule([1,2,3], Sarah_home)
-
-        sarah.home = Sarah_home
-
+        sarah.generate_home()
+        sarah.set_schedule([1,2,3], sarah.home)
         sarah.home.add_person(sarah)
+
         sarah.event_triggers_dict["epic_tits_progress"] = 0    # 0 = not started, 1 = mandatory event triggered, 2 = tits epic
         sarah.event_triggers_dict["drinks_out_progress"] = 0   # 0 = not started, 1 = third wheel event complete, 2 = grab drinks complete
         sarah.event_triggers_dict["dating_path"] = False       # False = not started, or doing FWB during story, True = dating her.
@@ -78,7 +66,6 @@ init 2 python:
         sarah.opinions["the colour purple"] = [2, False] #She loves purple!
         sarah.opinions["skirts"] = [1, False]  #And Skirts
         sarah.opinions["the colour red"] = [-2, False] #She hates red
-
 
         sarah.sexy_opinions["taking control"] = [1, False]  # she likes taking control, type A
         sarah.sexy_opinions["giving handjobs"] = [2, False] # Not afraid to get her hands dirty ;)
