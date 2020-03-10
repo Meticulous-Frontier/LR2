@@ -43,12 +43,12 @@ label meet_person_enhanced_label():
 
 
         "Keep the cash.\n{color=#0F0}+$200{/color}":
-            $ mc.business.funds += 200
+            $ mc.business.change_funds(200)
             $ mc.business.listener_system.fire_event("side_money", count = 200)
             "You slip the cash out of the womans wallet and watch as she rushes to catch her bus."
             $ renpy.scene("Active")
             "She gets on and the bus pulls away. When you pass a mailbox you slide the wallet inside - at least she'll get it back."
-            $ del the_person
+            $ the_person.remove_person_from_game()
 
 
     return

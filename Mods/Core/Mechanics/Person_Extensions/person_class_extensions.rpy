@@ -6,11 +6,30 @@ init -1:
         import hashlib
 
         def remove_person_from_game(self):
-            self.location().remove_person(self) # remove person from current location
-            list_of_places.remove(self.home) # remove home location from list_of_places
+            my_location = self.location()
+            if my_location:
+                my_location.remove_person(self) # remove person from current location
+            if self.home in list_of_places:
+                list_of_places.remove(self.home) # remove home location from list_of_places
             found = find_in_list(lambda x: x[0].name == self.name and x[0].last_name == self.last_name and x[0].age == self.age, people_to_process)
             if found: # remove from processing list
                 people_to_process.remove(found)
+
+            self.base_outfit = None
+            self.planned_outfit = None
+            self.planned_uniform = None
+
+            self.wardrobe.outfits.clear()
+            self.wardrobe.underwear_sets.clear()
+            self.wardrobe.overwear_sets.clear()
+            self.wardrobe = None
+
+            self.on_room_enter_event_list.clear()
+            self.event_triggers_dict.clear()
+            self.suggest_bag.clear()
+            self.broken_taboos.clear()
+            self.sex_record.clear()
+
             # clear all references held by person object.
             self.home = None
             self.work = None
@@ -29,20 +48,10 @@ init -1:
             self.eyes = None
             self.serum_effects = None
             self.special_role = None
-            self.on_room_enter_event_list = []
-            self.on_talk_event_list = []
-            self.event_triggers_dict = {}
             self.idle_animation = None
             self.personal_region_modifiers = None
-            self.suggest_bag = []
-            self.sex_record = {}
             self.situational_sluttiness = None
             self.situational_obedience = None
-            self.broken_taboos = []
-            self.wardrobe = None
-            self.base_outfit = None
-            self.planned_outfit = None
-            self.planned_uniform = None
             # now let the Garbage Collector do the rest (we are no longer referenced in any objects).
             return
 
