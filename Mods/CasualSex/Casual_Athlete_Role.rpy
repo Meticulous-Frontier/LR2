@@ -532,7 +532,7 @@ label casual_athlete_buy_protein_shake_label(the_person):
     $ renpy.scene("Active")
 
     "You head over to the counter where they have the supplements. You order her a protein shake."
-    $ mc.business.funds += 5
+    $ mc.business.change_funds(-5)
     "Before you take it back to her, you have a moment with no one around. You can add a serum to it if you do it quickly!"
     menu:
         "Add a dose of serum to [the_person.title]'s shake.":

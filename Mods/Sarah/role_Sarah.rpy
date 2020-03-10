@@ -957,7 +957,7 @@ label Sarah_catch_stealing_label():
             the_person.char "But... I've already bought all new bras and lingerie... I don't have the money right now to do that all over again!"
             menu:
                 "Buy her new bras ($300)":
-                    $ mc.business.funds += -300
+                    $ mc.business.change_funds(-300)
                     mc.name "I'll consider it an investment, from the business. It is the least we can do if you are willing to test the new serum prototypes."
                     the_person.char "Oh... that's very generous! I mean, I suppose if you're willing to do that. I can probably return a bunch of the other ones too."
                     "She stands there for a few moments, considering her options."
@@ -1775,7 +1775,7 @@ label Sarah_arrange_threesome_label(the_person):
             the_person.char "Look, I need that money. I'm sorry but I can't just give up the most lucrative night of the week."
             mc.name "Fine, I'll give you $500, right now."
             the_person.char "Deal!"
-            $ mc.business.funds += -500
+            $ mc.business.change_funds(-500)
             "You give her the cash. She counts it twice to make sure its all there."
             the_person.char "Alright, I'll call in sick on Saturday. It's been a pleasure doing business with you."
         else:
@@ -1789,7 +1789,7 @@ label Sarah_arrange_threesome_label(the_person):
             mc.name "You're crazy."
             "She looks at you, unwavering."
             mc.name "Fine, I'll give you $500, right now."
-            $ mc.business.funds += -500
+            $ mc.business.change_funds(-500)
             "You give her the cash. She counts it twice to make sure its all there."
             the_person.char "Alright, I'll see you on Saturday. It's been a pleasure doing business with you."
         "You give her the details. maybe picking [the_person.possessive_title] was a bad idea..."

@@ -233,7 +233,7 @@ label starbuck_vaginal_skillup_label(the_person):
     "It looks like a good buy, but unfortunately it has a built in battery that cannot be recharge. Once it's done, its done!"
     menu:
         "Purchase ($500)":
-            $ mc.business.funds += -500
+            $ mc.business.change_funds(-500)
             $ SB_temp_vaginal_perk = Stat_Perk(description = "Cock ring that increases pleasure during vaginal sex. Lasts one week. +2 Vaginal skill", vaginal_bonus = 2, bonus_is_temp =True, duration = 7)
             $ perk_system.add_stat_perk(SB_temp_vaginal_perk, "Vibrating Cock Ring")
             the_person.char "Oh! I'll ring this right up. You won't regret it, [the_person.mc_title]!"
@@ -288,7 +288,7 @@ label starbuck_anal_skillup_label(the_person):
     the_person.char "This one has full effectiveness with just a small application, and is designed to both lubricate, AND increases blood flow to the nerve endings, making anal more pleasurable for the receiver!"
     menu:
         "Purchase ($800)":
-            $ mc.business.funds += -800
+            $ mc.business.change_funds(-800)
             $ SB_temp_anal_perk = Stat_Perk(description = "Sensitizing and highly effective anal lubricant. Lasts one week. +2 Anal Skill", anal_bonus = 2, bonus_is_temp =True, duration = 7)
             $ perk_system.add_stat_perk(SB_temp_anal_perk, "Perfect Anal Lube")
             the_person.char "Oh! I'll ring this right up. You won't regret it, [the_person.mc_title]!"
@@ -339,7 +339,7 @@ label starbuck_oral_skillup_label(the_person):
     the_person.char "Personally, I recommend this one."
     menu:
         "Purchase ($250)":
-            $ mc.business.funds += -250
+            $ mc.business.change_funds(-250)
             $ SB_temp_oral_perk = Stat_Perk(description = "Lip balm that feels good when you go down on women. Lasts one week. +2 Oral Skill", oral_bonus = 2, bonus_is_temp =True, duration = 7)
             $ perk_system.add_stat_perk(SB_temp_oral_perk, "Stimulating Lip Balm")
             the_person.char "Oh! I'll ring this right up. You won't regret it, [the_person.mc_title]!"
@@ -391,7 +391,7 @@ label starbuck_foreplay_skillup_label(the_person):
     "[the_person.possessive_title] picks a small vibrator off the shelf. It looks like it has a number of features, like vibration and heat."
     menu:
         "Purchase ($100)":
-            $ mc.business.funds += -100
+            $ mc.business.change_funds(-100)
             $ SB_temp_foreplay_perk = Stat_Perk(description = "Small, finger mounted vibrator. Increases foreplay skill. Lasts one week. +2 Foreplay Skill", foreplay_bonus = 2, bonus_is_temp =True, duration = 7)
             $ perk_system.add_stat_perk(SB_temp_foreplay_perk, "Small Finger Vibrator")
             the_person.char "Oh! I'll ring this right up. You won't regret it, [the_person.mc_title]!"
@@ -441,7 +441,7 @@ label starbuck_arousal_reduction_one_label(the_person):
     the_person.char "Perfect to last just a bit longer, no matter when you have sex that day!"
     menu:
         "Purchase ($500)":
-            $ mc.business.funds += -500
+            $ mc.business.change_funds(-500)
             $ SB_MOD_MC_AROUSAL_MULT = SB_MOD_MC_AROUSAL_1ST_MULT
             the_person.char "Oh! I'll ring this right up. You won't regret it, [the_person.mc_title]!"
             "[the_person.possessive_title] hands you your purchase after she rings you up. She smiles at you and blushes a bit."
@@ -465,7 +465,7 @@ label starbuck_arousal_reduction_two_label(the_person):
     the_person.char "They've done numerous double blind studies. Almost all men who took it daily found they lasted longer in bed!"
     menu:
         "Purchase ($5000)":
-            $ mc.business.funds += -5000
+            $ mc.business.change_funds(-5000)
             $ SB_MOD_MC_AROUSAL_MULT = SB_MOD_MC_AROUSAL_2ND_MULT
             the_person.char "Oh! I'll ring this right up. You won't regret it, [the_person.mc_title]!"
             "[the_person.possessive_title] hands you your purchase after she rings you up. She smiles at you and blushes a bit."
@@ -484,7 +484,7 @@ label starbuck_sex_store_investment_one_label(the_person):
     menu:
         "Invest ($1000)":
             "You discuss with [the_person.possessive_title] for a while what the terms of your investment are. Once you are both happy, you write her a check from your business account."
-            $ mc.business.funds += -1000
+            $ mc.business.change_funds(-1000)
             $ the_person.change_happiness (20)
             $ the_person.change_obedience (5)
             the_person.char "Don't worry, [the_person.mc_title]! You won't regret this!"
@@ -523,7 +523,7 @@ label starbuck_sex_store_investment_two_label(the_person):
     menu:
         "Invest ($5000)":
             "You discuss with [the_person.possessive_title] for a while what the terms of your investment are. Once you are both happy, you write her a check from your business account."
-            $ mc.business.funds += -5000
+            $ mc.business.change_funds(-5000)
             $ the_person.change_happiness (20)
             $ the_person.change_love (5)
             $ the_person.change_obedience (5)
@@ -576,7 +576,7 @@ label starbuck_sex_store_investment_three_label(the_person):
                     the_person.char "Wow... that's nice to hear! I'm interesting in spending more time with you in the future too."
             else:
                 mc.name "Of course, we'll keep things perfectly professional..."
-            $ mc.business.funds += -15000
+            $ mc.business.change_funds(-15000)
             $ the_person.change_happiness (20)
             $ the_person.change_love (10)
             $ the_person.change_obedience (10)

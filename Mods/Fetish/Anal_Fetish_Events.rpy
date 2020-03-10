@@ -510,7 +510,7 @@ label SB_mom_anal_pay_label():
     the_person.char "The bills are just really starting to pile up. I'm sorry, I know its wrong but, I promise I'll make it good for you!"
     menu:
         "Strip and ride me\nPay $1000" if mc.business.funds >= 1000:
-            $ mc.business.funds += -1000
+            $ mc.business.change_funds(-1000)
             "[the_person.possessive_title] smiles wide when you give her the money."
             the_person.char "Thank you [the_person.mc_title]! Now, are you ready a show?"
             call SB_free_strip_scene(the_person) from _call_SB_free_strip_scene_SBA40
@@ -735,10 +735,10 @@ label SB_lily_anal_dp_fetish_label():
     mc.name "That looks pretty good, actually."
     "Lily takes it up to the counter."
     $ starbuck.draw_person(emotion = "happy", position = "stand2")
-    starbuck.char "Great! This one is actually on sale, but I hadn't gotten around to marking it yet. Its only $20!"
+    starbuck.char "Great! This one is actually on sale, but I hadn't gotten around to marking it yet. Its only $200!"
     "You decide to offer to pay for it."
     mc.name "Here, let me just put this on the company card..."
-    $ mc.business.funds += -20
+    $ mc.business.change_funds(-200)
     if perk_system.has_item_perk("Male Strapon"):
         "Well, now you have an extra, in case anything ever happens to your other one..."
     starbuck.char "Okay! You're all set! Do you two want to try it out? I have a special room in the back, sometimes people just can't WAIT to get home before trying out a purchase!"
