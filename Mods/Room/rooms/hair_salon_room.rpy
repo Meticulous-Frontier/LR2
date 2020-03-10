@@ -23,15 +23,12 @@ init 2 python: # Declare variables to use
         # Place the stylist character so it is in a room in the world.
         global salon_manager
 
-        salon_manager = make_person(name = "Ophelia", last_name = "von Friseur", height = .9, age = renpy.random.randint(21,30), body_type = "thin_body",
-            personality =  None if not "salon_manager_personality" in globals() else salon_manager_personality, job = "Hair Stylist", starting_wardrobe = salon_wardrobe, eyes="light blue", start_sluttiness = 10,
+        salon_manager = make_person(name = "Ophelia", last_name = "von Friseur", age = renpy.random.randint(21,30), body_type = "thin_body",
+            personality = salon_manager_personality, job = "Hair Stylist", starting_wardrobe = salon_wardrobe, eyes="light blue", start_sluttiness = 10,
             possessive_title = "My stylist", force_random = True)
 
-        if "salon_manager_role" in globals():
-            salon_manager.special_role.append(salon_manager_role)
-
-        if "salon_manager_personality" in globals():
-            salon_manager.on_room_enter_event_list.append(salon_introduction_action)
+        salon_manager.special_role.append(salon_manager_role)
+        salon_manager.on_room_enter_event_list.append(salon_introduction_action)
 
         # create home for salon manager
         salon_manager.generate_home()
@@ -42,7 +39,6 @@ init 2 python: # Declare variables to use
 
         # Add to map
         list_of_places.append(mall_salon)
-        #mall_salon.link_locations_two_way(mall)
         return
 
     def salon_introduction_action_requirement(the_person):
