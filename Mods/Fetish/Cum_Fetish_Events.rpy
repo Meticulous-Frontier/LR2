@@ -1,10 +1,9 @@
 init 1 python:
     def SB_fetish_cum_requirement():
-        if time_of_day == 1:
-            if mc.energy > 30:
-                if mc.business.is_open_for_business():
-                    if mc.is_at_work():
-                        return True
+        if time_of_day == 1 and mc.energy > 30:
+            if mc.business.is_open_for_business():
+                if mc.is_at_work():
+                    return True
         return False
 
     def SB_fetish_mom_cum_requirement():
@@ -146,8 +145,8 @@ label SB_fetish_cum_label(the_person):
 
 init 2 python:
     def SB_fetish_cum_dosage_requirement():
-        if time_of_day < 4:
-            if mc.is_at_work():
+        if time_of_day > 0 and time_of_day < 4:
+            if mc.business.is_open_for_business() and mc.is_at_work():
                 return True
         return False
 
