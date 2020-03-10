@@ -183,6 +183,9 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 if position_choice is not None:
                     # We need to make sure we're using an appropriate object
                     $ object_choice = girl_choose_object_enhanced(the_person, position_choice)
+                    if object_choice:
+                        # show dialog of girl changing position on her own
+                        $ position_choice.call_transition(round_choice, the_person, mc.location, object_choice)
             if position_choice is None: #There's no position we can take
                 "[the_person.title] can't think of anything more to do with you."
                 $ round_choice = "Girl Leave"
@@ -201,6 +204,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             elif has_taken_control:
                 $ has_taken_control = False
                 $ the_person.call_dialogue("sex_take_control")
+                $ position_choice.call_transition(round_choice, the_person, mc.location, object_choice)
                 $ round_choice = "Continue"
             else:
                 # Don't show control message, it breaks the flow, because it pops up every round.
