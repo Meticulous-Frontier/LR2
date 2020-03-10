@@ -148,8 +148,7 @@ init 2 python:
     def SB_fetish_cum_dosage_requirement():
         if time_of_day < 4:
             if mc.is_at_work():
-                if SB_check_fetish(person, cum_internal_role) or SB_check_fetish(person, cum_external_role):
-                    return True
+                return True
         return False
 
     def SB_fetish_shower_cum_requirement():
@@ -187,6 +186,9 @@ init 2 python:
 #SBC2
 label SB_fetish_cum_dosage_label():
     $ the_person = get_fetish_cum_dosage_employee()
+    if the_person is None:
+        return
+        
     "As you finish up with one of your work tasks, you decide to take a quick break."
     "You step into your office and sit down for a minute. You hop on your laptop and start browsing the internet."
     "*KNOCK KNOCK*"
