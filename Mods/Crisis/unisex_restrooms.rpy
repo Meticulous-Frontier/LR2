@@ -391,9 +391,9 @@ label unisex_restroom_gloryhole_option_label():
     "You step into the restroom and walk into one of the stalls."
     "As you relieve yourself, you see the glory hole in the stall that has been cutout."
     if get_business_corruption_tier() == 4:
-        "You can see around it, someone has drawn multiple hearts in red lipstick."
+        "You see that someone has drawn multiple hearts in red lipstick around it."
     elif get_business_corruption_tier() > 4:
-        "You can see around it, multiple hearts dawn in lipstick."
+        "You see that someone has drawn an open mouth around it in lipstick."
         "Above the hole, someone has drawn a phallus, then the text 'dick goes here plz' with an arrow drawn to the hole."
         "Below, in different handwriting, someone else has written 'cum inside me please!' with another arrow pointed up to the hole."
     "You finish relieving yourself, and then consider. Should you wait and see if someone comes along? Or maybe try some other time?"
@@ -436,9 +436,9 @@ label unisex_restroom_gloryhole_wait_label():
     "You step into the restroom and walk into one of the stalls."
     "You see the glory hole in the stall that has been cutout."
     if get_business_corruption_tier() == 4:
-        "You can see around it, someone has drawn multiple hearts in red lipstick."
+        "You see that someone has drawn multiple hearts in red lipstick around it."
     elif get_business_corruption_tier() > 4:
-        "You can see around it, multiple hearts dawn in lipstick."
+        "You see that someone has drawn an open mouth around it in lipstick."
         "Above the hole, someone has drawn a phallus, then the text 'dick goes here plz' with an arrow drawn to the hole."
         "Below, in different handwriting, someone else has written 'cum inside me please!' with another arrow pointed up to the hole."
     call unisex_restroom_use_gloryhole_label from use_dat_gloryhole_wait_2
