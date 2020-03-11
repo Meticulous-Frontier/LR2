@@ -287,19 +287,25 @@ label casual_athlete_phase_one_label(the_person):
         $ the_person.draw_person( position = "against_wall")
         "[the_person.possessive_title] is grinding her hips up against yours. The sweat from your workouts mingles together as you prepare yourself to enter her."
 
-        ###TODO new version figure out condom stuff here###
+        $ the_person.add_situational_slut("horny", 20, "She is desperate to be fucked")
+        
+        # NOTE skip intro prevents taboo break from executing
+
         call condom_ask(the_person) from _casual_athlete_mod_condom_ask_CS010
 
-        ###TODO situational sluttiness to make sure this position succeeds###
-
         "As you begin to push yourself inside her, she drags her nails across your back."
+        $ the_person.break_taboo("vaginal_sex")
+        if not mc.condom:
+             $ the_person.break_taboo("condomless_sex")
         the_person.char "Oh fuck, that's good. Give it to me good, [the_person.mc_title]!"
-        call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True) from _call_casual_sex_mod_CS010
+        call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, asked_for_condom = True) from _call_casual_sex_mod_CS010
         $ the_report = _return
         if the_report.get("girl orgasms", 0) > 0:
             "As you slowly let [the_person.title] down from the wall, you can see her trembling, caused by aftershocks from her orgasm."
+
         the_person.char "Mmm... that was nice..."
         "[the_person.title] stutters for a moment."
+        $ the_person.clear_situational_slut("horny")
         the_person.char "But... you know... I really can't get involved in a serious relationship right now."
         mc.name "I agree. We need some ground rules. Want to have coffee and figure it out?"
         the_person.char "That sounds good. But its not a date, okay? Just need to set boundaries."
@@ -357,15 +363,22 @@ label casual_athlete_phase_one_label(the_person):
                 "You walk over to her and quickly strip. You grab [the_person.title] by that ass and pick her up. You carry her to the wall and pin her up against it."
                 $ the_person.draw_person( position = "against_wall")
                 "[the_person.possessive_title] is grinding her hips up against yours. The sweat from your workouts mingles together as you prepare yourself to enter her."
-                call condom_ask(the_person) from _casual_athlete_mod_condom_ask_CS011
 
+                $ the_person.add_situational_slut("horny", 20, "She is desperate to be fucked")
+
+                # NOTE skip intro prevents taboo break from executing
+
+                call condom_ask(the_person) from _casual_athlete_mod_condom_ask_CS011
                 "As you begin to push yourself inside her, she drags her nails across your back."
+                if not mc.condom:
+                    $ the_person.break_taboo("condomless_sex")
                 the_person.char "Oh fuck, that's good. Give it to me good, [the_person.mc_title]!"
-                call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True) from _call_casual_sex_mod_CS011
+                call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, asked_for_condom = True) from _call_casual_sex_mod_CS011
                 $ the_report = _return
                 if the_report.get("girl orgasms", 0) > 0:
                     "As you slowly let [the_person.title] down from the wall, you can see her trembling, caused by aftershocks from her orgasm."
                     the_person.char "Mmm... god I'm glad you know how to use that cock."
+                $ the_person.clear_situational_slut("horny")
                 "Without another word, you and [the_person.title] take a quick shower, then get ready and leave the gym."
 
             "Not Today":  #lol what a tease#
