@@ -1,6 +1,3 @@
-init -2 python:
-    height_calculation_correction = .2
-
 init -1:
     python:
         import hashlib
@@ -114,8 +111,8 @@ init -1:
         # Returns True when the persons height has changed; otherwise False
         # chance is probability percentage that height change for amount will occur (used by serums)
         def change_height(self, amount, chance):
-            lower_limit = 1 - height_calculation_correction - .2
-            upper_limit = 1 - height_calculation_correction
+            lower_limit = 1 - .2
+            upper_limit = 1
 
             if amount == 0 or (self.height == lower_limit and amount < 0) or (self.height == upper_limit and amount > 0):
                 return False
@@ -148,10 +145,10 @@ init -1:
                 self.weight += amount
 
             # maximum and minimum weight are dependant on height
-            max_weight = (self.height + height_calculation_correction) * 100
-            min_weight = (self.height + height_calculation_correction) * 50
-            switch_point_low = (self.height + height_calculation_correction) * 68
-            switch_point_high = (self.height + height_calculation_correction) * 83
+            max_weight = (self.height) * 100
+            min_weight = (self.height) * 50
+            switch_point_low = (self.height) * 68
+            switch_point_high = (self.height) * 83
 
             if (amount > 0):
                 if self.weight > switch_point_low + 3 and self.body_type == "thin_body":
@@ -274,7 +271,7 @@ init -1:
                 eyes = None
 
             if renpy.random.randint(0,100) < 60: #Have heights that roughly match (but o
-                height = (self.height/0.8) * (renpy.random.randint(95,105)/100.0)
+                height = (self.height / 0.8) * (renpy.random.randint(95,105)/100.0)
                 if height > 1.0:
                     height = 1.0
                 elif height < 0.8:
@@ -869,11 +866,11 @@ init -1:
         def check_person_weight_attribute(person):
             if not hasattr(person, "weight"):
                 if (person.body_type == "thin_body"):
-                    setattr(person, "weight", 60 * (person.height + height_calculation_correction))   # default weight thin body
+                    setattr(person, "weight", 60 * person.height)   # default weight thin body
                 elif (person.body_type == "standard_body"):
-                    setattr(person, "weight", 75 * (person.height + height_calculation_correction))   # default weight standard body
+                    setattr(person, "weight", 75 * person.height)   # default weight standard body
                 else:
-                    setattr(person, "weight", 90 * (person.height + height_calculation_correction))   # default weight curvy body
+                    setattr(person, "weight", 90 * person.height)   # default weight curvy body
             return
 
         # calculates current player mental powers
