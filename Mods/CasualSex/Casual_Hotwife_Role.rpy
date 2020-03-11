@@ -423,6 +423,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             the_person.char "Mmm, I've been working on a new skill lately... since we started doing this. Mind if I practice on you?"
             mc.name "Sure I guess, but what is..."
             "She doesn't wait for you to finish your response. In one, smooth motion, she opens her mouth and swallows your cock whole."
+            $ the_person.break_taboo("sucking_cock")
             "Past her lips, to the back of her tongue, and down her throat the tip of your dick goes."
             mc.name "Oh fuck!"
             "You make sure to snap more pictures of her. She's getting good at this!"
@@ -430,6 +431,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             call fuck_person(the_person, start_position = deepthroat, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_CSH011
         else:
             the_person.char "Mmmm, I can't wait any longer... I have to taste it!"
+            $ the_person.break_taboo("sucking_cock")
             "She opens up her mouth and wraps her lips around your meat."
             "You snap some pictures as she pulls of and begin to run her tongue up and down along the sides of your cock."
             mc.name "Mmm, that feels great [the_person.title]."
@@ -537,12 +539,14 @@ label casual_hotwife_dancing_sex_label(the_person):
         "You snap a few more pictures as you dry hump her ass crack a bit. Then you pull back a bit and get yourself pointed at her juicy slit."
         "You change the camera app to take a video. You figure since this is her first time getting fucked by a man other than her husband it might come in handy..."
         "With one hand firmly on [the_person.possessive_title]'s hip, you steadily push yourself into her. She moans loudly and you capture the whole thing on glorious video."
+        $ the_person.break_taboo("vaginal_sex")
+        $ the_person.break_taboo("condomless_sex")
         the_person.char "Oh fuck that feels good. Fuck me good [the_person.mc_title]!"
         "You stop the video, you figure this is as good of a place as any to stop it. You take a few nice and slow strokes, snapping pictures of your cock penetrating her at various depths."
         "You look up and get one last picture of [the_person.title] in the mirror. Her mouth is open and she has one hand groping one of her own tits while her other hand is reaching back and grabbing your hip."
         "You set the phone down and begin to fuck her."
         $ mc.condom = False
-        call fuck_person(the_person, start_position = SB_doggy_standing, start_object = SB_make_counter(), skip_intro = True) from _call_sex_description_CSH020
+        call fuck_person(the_person, start_position = SB_doggy_standing, start_object = SB_make_counter(), skip_intro = True, asked_for_condom = True) from _call_sex_description_CSH020
         $ the_report = _return
         if the_report.get("guy orgasms", 0) > 0:
             #TODO description for all possible cum locations
@@ -597,7 +601,7 @@ label casual_hotwife_dancing_sex_label(the_person):
         the_person.char "Ok! I didn't think that song was ever going to end. I'll meet you in the Lady's room in just a minute."
         "You head to women's restroom and [the_person.title] soon meets you there."
         $ the_person.draw_person (position = "stand4")
-        the_person.char "Okay, I want you sit on the counter. I'm gonna get naked for you."
+        the_person.char "Okay, I want you to sit on the counter. I'm gonna get naked for you."
         "She hands you her phone."
         the_person.char "Here we go! Get lots of good pics!"
         call SB_free_strip_scene(the_person) from _CS_free_strip_scene_CSH021
@@ -663,7 +667,7 @@ label casual_hotwife_her_place_label(the_person):
     "With one hand you start to undo your trousers. With your other hand, you run you fingers along her slit. She is wet and ready for you."
     "Your cock now free, you line yourself up with [the_person.possessive_title]'s pussy. You put her husband out of your mind as you slowly push into her."
     "[the_person.possessive_title] gasps as you begin to slide in and out of her."
-    call fuck_person(the_person, start_position = doggy, start_object = make_bed(), skip_intro = True) from _call_sex_description_CSH040
+    call fuck_person(the_person, start_position = doggy, start_object = make_bed(), skip_intro = True, asked_for_condom = True) from _call_sex_description_CSH040
 
 
 

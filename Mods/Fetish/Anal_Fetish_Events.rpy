@@ -344,7 +344,7 @@ label SB_fetish_anal_recurring_label():
 
 
 
-label SB_free_strip_scene(the_person):
+label SB_free_strip_scene(the_person, must_be_naked = True):
     #Shamelessly copied and modified from Vrens base function, but this one is free :)
 
     $ pose_list = [["Turn around","walking_away"],["Turn around and look back","back_peek"],["Hands down, ass up.","standing_doggy"],["Be flirty","stand2"],["Be casual","stand3"],["Strike a pose","stand4"],["Move your hands out of the way","stand5"]]
@@ -397,7 +397,7 @@ label SB_free_strip_scene(the_person):
             "She wiggles her hips for you and winks."
 
         $menu_list = [] #Tuple of menu things.
-        # High obedience characters are more willing to be told to strip down (althoug they still expect to be paid for it)
+        # High obedience characters are more willing to be told to strip down (although they still expect to be paid for it)
         # Low obedience characters will strip off less when told but can be left to run the show on their own and will remove some.
         python:
             for item in the_person.outfit.get_unanchored():
@@ -411,7 +411,7 @@ label SB_free_strip_scene(the_person):
 
             menu_list.append(["Just watch.","Watch"])
             menu_list.append(["Tell her to pose.","Pose"])
-            if the_person.outfit.vagina_visible() and the_person.outfit.tits_visible():
+            if not must_be_naked or (the_person.outfit.vagina_visible() and the_person.outfit.tits_visible()):
                 menu_list.append(["Finish the show.","Finish"])
 
         $ strip_choice = renpy.display_menu(menu_list,True,"Choice")
@@ -464,7 +464,11 @@ label SB_free_strip_scene(the_person):
         elif strip_choice == "Finish":
             $ keep_stripping = False
             mc.name "Wow [the_person.title], that was amazing."
-            the_person.char "Oh, are we done already? It feels like something is just getting started!"
+            call break_strip_outfit_taboos(the_person) from _call_break_strip_outfit_taboos_SB_free_strip_scene
+            if _return:
+                the_person.char "Oh my, I didn't think I could go that far, i'm glad you enjoyed it."
+            else:
+                the_person.char "Oh, are we done already? It feels like something is just getting started!"
 
         else:
             $ the_clothing = strip_choice[0]

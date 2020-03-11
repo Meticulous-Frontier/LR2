@@ -736,3 +736,39 @@ label relationship_being_watched(the_person, the_watcher, the_relation, the_posi
         "[the_person.title] seems more comfortable [the_position.verbing] you with her [the_relation] around."
 
     return
+
+# call after striping to show the stripping taboo break dialog
+label break_strip_outfit_taboos(the_person):
+    $ taboo_broken = False
+    if the_person.outfit.tits_visible() and the_person.outfit.vagina_visible():
+        "Once she's done stripping [the_person.possessive_title] is practically naked."
+        if the_person.has_taboo(["bare_pussy", "bare_tits"]):
+            "She makes a vain attempt to keep herself covered with her hands, but soon enough seems to be comfortable being nude in front of you."
+            $ the_person.break_taboo("bare_pussy")
+            $ the_person.break_taboo("bare_tits")
+            $ taboo_broken = True
+    elif the_person.outfit.tits_visible():
+        "Once she's done stripping [the_person.possessive_title] has her nice [the_person.tits] tits out on display."
+        if the_person.has_taboo("bare_tits"):
+            if the_person.has_large_tits():
+                "She makes a hopeless attempt to cover her large tits with her hands, but comes to the realization it's pointless."
+            else:
+                "She tries to hide her tits from you with her hands, but quickly realizes how impractical that would be."
+            "Soon enough she doesn't even mind having them out."
+            $ the_person.break_taboo("bare_tits")
+            $ taboo_broken = True
+    elif the_person.outfit.vagina_visible():
+        "Once she's done stripping [the_person.possessive_title] has her pretty little pussy out on display for everyone."
+        if the_person.has_taboo("bare_pussy"):
+            "She tries to hide herself from you with her hand, but quickly realizes how impractical that would be."
+            "Soon enough she doesn't seem to mind."
+            $ the_person.break_taboo("bare_pussy")
+            $ taboo_broken = True
+    else:
+        "[the_person.possessive_title] finishes stripping and looks back at you."
+        if (the_person.outfit.wearing_panties() and not the_person.outfit.panties_covered()) or (the_person.outfit.wearing_bra() and not the_person.outfit.bra_covered()):
+            if the_person.has_taboo("underwear_nudity"):
+                "She seems nervous at first, but quickly gets use to being in her underwear in front of you."
+                $ the_person.break_taboo("underwear_nudity")
+                $ taboo_broken = True
+    return taboo_broken
