@@ -26,15 +26,12 @@ init 3 python:
         initialization = gym_initialization, menu_tooltip = "Bring a person to the gym to train their body.", category="Mall")
 
 label select_person_for_gym():
-    $ people_list = get_sorted_people_list(known_people_in_the_game([mc]), "Train with", ["Back"])
-
     if "build_menu_items" in globals():
-        call screen main_choice_display(build_menu_items([people_list]))
+        call screen main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game([mc]), "Train with", ["Back"])]))
     else:
-        call screen main_choice_display([people_list])
+        call screen main_choice_display([get_sorted_people_list(known_people_in_the_game([mc]), "Train with", ["Back"])])
+    
     $ person_choice = _return
-    $ del people_list
-
     if person_choice != "Back":
         "You send a text message to [person_choice.title] about a gym session."
         "After some time you get a response..."
