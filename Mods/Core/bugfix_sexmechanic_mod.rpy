@@ -768,7 +768,7 @@ label break_strip_outfit_taboos(the_person):
         "[the_person.possessive_title] finishes stripping and looks back at you."
         if (the_person.outfit.wearing_panties() and not the_person.outfit.panties_covered()) or (the_person.outfit.wearing_bra() and not the_person.outfit.bra_covered()):
             if the_person.has_taboo("underwear_nudity"):
-                "She seems nervous at first, but quickly gets use to being in her underwear in front of you."
+                "She seems nervous at first, but quickly gets used to being in her underwear in front of you."
                 $ the_person.break_taboo("underwear_nudity")
                 $ taboo_broken = True
     return taboo_broken
