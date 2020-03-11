@@ -183,7 +183,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 if position_choice is not None:
                     # We need to make sure we're using an appropriate object
                     $ object_choice = girl_choose_object_enhanced(the_person, position_choice)
-                    if object_choice:
+                    if object_choice and not has_taken_control:
                         # show dialog of girl changing position on her own
                         $ position_choice.call_transition(round_choice, the_person, mc.location, object_choice)
             if position_choice is None: #There's no position we can take
