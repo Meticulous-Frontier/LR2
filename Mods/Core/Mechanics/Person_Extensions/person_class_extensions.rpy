@@ -369,10 +369,10 @@ init -1:
                 return True # not done continue stripping
 
             if position is None:
-                self.position = person.idle_pose
+                self.position = self.idle_pose
 
             if emotion is None:
-                self.emotion = person.get_emotion()
+                self.emotion = self.get_emotion()
 
             if lighting is None:
                 lighting = mc.location.get_lighting_conditions()
