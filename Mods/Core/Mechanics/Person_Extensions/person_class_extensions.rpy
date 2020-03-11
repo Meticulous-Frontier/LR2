@@ -274,11 +274,11 @@ init -1:
                 eyes = None
 
             if renpy.random.randint(0,100) < 60: #Have heights that roughly match (but o
-                height = self.height * (renpy.random.randint(95,105)/100.0)
-                if height > 0.8:
+                height = (self.height/0.8) * (renpy.random.randint(95,105)/100.0)
+                if height > 1.0:
+                    height = 1.0
+                elif height < 0.8:
                     height = 0.8
-                elif height < 0.6:
-                    height = 0.6
             else:
                 height = None
 
