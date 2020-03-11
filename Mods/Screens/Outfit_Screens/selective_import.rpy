@@ -33,6 +33,13 @@ init 2 python:
         else:
             return False
 
+    def calculate_outfit_slut_score(wardrobe, outfit):
+        if outfit in wardrobe.outfits:
+            return outfit.get_full_outfit_slut_score() 
+        elif outfit in wardrobe.overwear_sets:
+            return outfit.get_overwear_slut_score()
+        return outfit.get_underwear_slut_score()
+
     def selected_xml_wardrobe(target_wardrobe, xml_filename): # TODO: Use this instead -> Show("import_outfit_manager", None, target_wardrobe, n)
         renpy.show_screen("import_outfit_manager", target_wardrobe, xml_filename)
     def selected_xml_clothing(outfit):
@@ -105,21 +112,22 @@ init 2:
                                 frame:
                                     vbox:
                                         for outfit in sorted(getattr(wardrobe, outfit_categories[category][2])(), key = lambda outfit: (outfit.slut_requirement, outfit.name)):  # Not sure if there's any good reason to sort XML lists since the default way it works is to place the newest outfit at the bottom which is predictable.
+                                            $ effective_slut_score = calculate_outfit_slut_score(wardrobe, outfit)
                                             frame:
                                                 vbox:
                                                     id str(outfit)
                                                     xfill True
-                                                    textbutton outfit.name + "\n" + get_heart_image_list_cloth(outfit.slut_requirement, 1):
+                                                    textbutton outfit.name + "\n" + get_heart_image_list_cloth(effective_slut_score, 1):
                                                         xfill True
                                                         style "textbutton_no_padding_highlight"
                                                         text_style "serum_text_style"
 
                                                         if underwear_limit == -1 and (outfit in wardrobe.outfits or outfit in wardrobe.underwear_sets) :
                                                             background "#222222"
-                                                        elif slut_limit and (outfit in wardrobe.outfits or outfit in wardrobe.overwear_sets) and outfit.slut_requirement > slut_limit:
+                                                        elif slut_limit and (outfit in wardrobe.outfits or outfit in wardrobe.overwear_sets) and effective_slut_score > slut_limit:
                                                             background "#222222"
                                                             action Function(renpy.notify, "Can not assign due to policy enforced sluttiness limit [" + str(slut_limit) + "].\nPurchase new uniform policies to increase limit.")
-                                                        elif underwear_limit and outfit in wardrobe.underwear_sets and outfit.slut_requirement > underwear_limit:
+                                                        elif underwear_limit and outfit in wardrobe.underwear_sets and effective_slut_score > underwear_limit:
                                                             background "#222222"
                                                             action Function(renpy.notify, "Can not assign due to policy enforced sluttiness limit [" + str(underwear_limit) + "].\nPurchase new uniform policies to increase limit.")
                                                         else:
@@ -155,10 +163,10 @@ init 2:
                                                         if underwear_limit == -1 and (outfit in wardrobe.outfits or outfit in wardrobe.underwear_sets):
                                                             background "#222222"
                                                             action Function(renpy.notify, "Full and underwear uniforms require [reduced_coverage_uniform_policy.name]")
-                                                        elif slut_limit and (outfit in wardrobe.outfits or outfit in wardrobe.overwear_sets) and outfit.slut_requirement > slut_limit:
+                                                        elif slut_limit and (outfit in wardrobe.outfits or outfit in wardrobe.overwear_sets) and effective_slut_score > slut_limit:
                                                             background "#222222"
                                                             action Function(renpy.notify, "Can not assign due to policy enforced sluttiness limit [" + str(slut_limit) + "].\nPurchase new uniform policies to increase limit.")
-                                                        elif underwear_limit and outfit in wardrobe.underwear_sets and outfit.slut_requirement > underwear_limit:
+                                                        elif underwear_limit and outfit in wardrobe.underwear_sets and effective_slut_score > underwear_limit:
                                                             background "#222222"
                                                             action Function(renpy.notify, "Can not assign due to policy enforced sluttiness limit [" + str(underwear_limit) + "].\nPurchase new uniform policies to increase limit.")
                                                         else:
