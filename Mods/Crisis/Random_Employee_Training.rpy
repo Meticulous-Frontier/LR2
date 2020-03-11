@@ -53,7 +53,7 @@ label SB_one_on_one_label():
     "You take a quick break from work to go get a quick snack from the vending machine. While you are trying do decide what snack to buy, [the_person.possessive_title] enters the break room."
     $ the_person.draw_person()
     the_person.char "Oh, hey [the_person.mc_title]!"
-    "You make small with [the_person.possessive_title] for a while. Eventually, the subject of your role in the company and the various jobs you fulfill around the lab comes up."
+    "You keep chatting with [the_person.possessive_title] for a while. Eventually, the subject of your role in the company and the various jobs you fulfill around the lab comes up."
     the_person.char "Yeah, I've heard that you are pretty skilled at some of the different jobs are the lab here. I was wondering if maybe you could give me some pointers?"
     "You consider [the_person.possessive_title]'s request for a moment."
     $ change_amount = 0
