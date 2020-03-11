@@ -40,7 +40,7 @@ init -2 python:
             return "Not in Bar"
         elif mc.charisma < 4:
             return "Requires higher Charisma"
-        elif the_person.sluttiness < 25:
+        elif the_person.effective_sluttiness() < 25:
             return "Requires higher sluttiness"
         elif the_person.event_triggers_dict.get("hotwife_blowjob_enable", 0) == 1:
             return True
@@ -66,7 +66,7 @@ init -2 python:
             return "Not in Bar"
         elif mc.charisma < 5:
             return "Requires higher Charisma"
-        elif the_person.sluttiness < 40:
+        elif the_person.effective_sluttiness() < 40:
             return "Requires higher sluttiness"
         elif the_person.event_triggers_dict.get("hotwife_dancing_enable", 0) == 1:
             return True
@@ -79,7 +79,7 @@ init -2 python:
             return False
         elif mc.charisma < 6:
             return "Requires higher Charisma"
-        elif the_person.sluttiness < 50:
+        elif the_person.effective_sluttiness() < 50:
             return "Requires higher sluttiness"
         elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 4:
             return "She's already invited you over!"
@@ -153,7 +153,7 @@ label casual_hotwife_get_a_drink_label(the_person):
     else:
         the_person.char "Hey [the_person.mc_title]! A drink sounds great!"
     "You consider for a moment. If you offer to buy her a drink, you'll have a chance to slip a serum into it."
-    $ offer_drink_chance = ((mc.charisma + (the_person.sluttiness / 10) + 2) * 10)  #More willing to let you buy a drink for her as she gets sluttier
+    $ offer_drink_chance = ((mc.charisma + (the_person.effective_sluttiness() / 10) + 2) * 10)  #More willing to let you buy a drink for her as she gets sluttier
     $ rand_chance = renpy.random.randint(0,100)
     #$ bartender_name = get_random_male_name()
     menu:
@@ -199,7 +199,7 @@ label casual_hotwife_get_a_drink_label(the_person):
     #***Event State 1 ####
     elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 1:  #You are acquainted, but not yet done anything sexual
         mc.name "So, any luck going squirrel hunting?"
-        if the_person.sluttiness > 25:
+        if the_person.effective_sluttiness() > 25:
             "[the_person.possessive_title] laughs."
             the_person.char "No, not yet. I have a feeling though, the right opportunity may come a long soon..."
             "She lowers her voice a bit."
@@ -255,10 +255,10 @@ label casual_hotwife_get_a_drink_label(the_person):
         "You just about choke on your drink."
         mc.name "Hey, I'd be glad to help out. But obviously, don't rush into it if you aren't ready yet."
         "[the_person.title] takes a long sip from her cocktail."
-        if mc.charisma < 5 or the_person.sluttiness < 40:
+        if mc.charisma < 5 or the_person.effective_sluttiness() < 40:
             if mc.charisma < 5:
                 "Charisma check failed! Raise your charisma and try this conversation again."
-            if the_person.sluttiness < 40:
+            if the_person.effective_sluttiness() < 40:
                 "Sluttiness check failed! Raise her sluttiness and try this conversation again."
             the_person.char "I'm sorry, [the_person.mc_title], I just don't think I'm ready to try that yet."
             "You nod in understanding."
@@ -284,7 +284,7 @@ label casual_hotwife_get_a_drink_label(the_person):
         the_person.char "Well, he wants to be there. He wants to watch."
         "Wow, her husband is really getting into the cuckolding thing!"
         mc.name "And how do you feel about it? Do you feel like you're ready for that?"
-        if mc.charisma < 6 or the_person.sluttiness < 50:  #Checks Fail
+        if mc.charisma < 6 or the_person.effective_sluttiness() < 50:  #Checks Fail
             the_person.char "Honestly? I'm still adapting to how things are now."
             mc.name "That's understandable. Theres no reason to take things too fast."
             "[the_person.title] takes another long sip from her beverage."
@@ -405,7 +405,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         "You head to the lady's room. [the_person.title] soon follows behind you. She locks the door as she closes it."
         $ the_person.draw_person (position = "kissing")
         "You waste no time. She throws her arms around you and you begin to make out."
-        if the_person.sluttiness > 30 and not the_person.outfit.tits_available():
+        if the_person.effective_sluttiness() > 30 and not the_person.outfit.tits_available():
             "[the_person.possessive_title] steps back suddenly."
             the_person.char "Let me just get this off... daddy loves it when I have my tits out for this..."
             "She hands you her phone with the camera app out. You snap some pictures as she starts to strip."
@@ -419,7 +419,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         $ the_person.draw_person(position = "blowjob")
         "You can tell that [the_person.title] is hungry. She wastes no time pulling your pants off, followed quickly by your underwear."
         "Your hardened cock springs out. Her agile hands grasp it and begin to stroke."
-        if the_person.sluttiness > 50:
+        if the_person.effective_sluttiness() > 50:
             the_person.char "Mmm, I've been working on a new skill lately... since we started doing this. Mind if I practice on you?"
             mc.name "Sure I guess, but what is..."
             "She doesn't wait for you to finish your response. In one, smooth motion, she opens her mouth and swallows your cock whole."
@@ -765,7 +765,7 @@ init 1301 python:              #Because Vren Init personality functionns at 1300
     def hotwife_titles(the_person):
         valid_titles = []
         valid_titles.append(the_person.name)
-        if the_person.sluttiness > 40:
+        if the_person.effective_sluttiness() > 40:
             valid_titles.append("Slutwife")
             valid_titles.append("Cuckold Wife")
         return valid_titles
@@ -773,11 +773,11 @@ init 1301 python:              #Because Vren Init personality functionns at 1300
     def hotwife_possessive_titles(the_person):
         valid_possessive_titles = [the_person.title]
 
-        if the_person.sluttiness > 60:
+        if the_person.effective_sluttiness() > 60:
             valid_possessive_titles.append("The Slutwife")
             valid_possessive_titles.append("Your Swinging Slut")
 
-        if the_person.sluttiness > 100:
+        if the_person.effective_sluttiness() > 100:
             valid_possessive_titles.append("The Bar Cumdump")
         return valid_possessive_titles
     def hotwife_player_titles(the_person):
@@ -807,7 +807,7 @@ label hotwife_greetings(the_person):
         else:
             the_person.char "Hey there!"
 
-    elif the_person.sluttiness > 60:
+    elif the_person.effective_sluttiness() > 60:
         if the_person.obedience > 130:
             the_person.char "Hello [the_person.mc_title], it's good to see you."
         else:
@@ -820,7 +820,7 @@ label hotwife_greetings(the_person):
     return
 
 label hotwife_sex_responses(the_person):
-    if the_person.sluttiness > 50:
+    if the_person.effective_sluttiness() > 50:
         if the_person.obedience > 130:
             the_person.char "Oh my, keep doing that please!"
         else:
@@ -830,7 +830,7 @@ label hotwife_sex_responses(the_person):
     return
 
 label hotwife_climax_responses_foreplay(the_person):
-    if the_person.sluttiness > 50:
+    if the_person.effective_sluttiness() > 50:
         the_person.char "Oh fuck yes, I'm going to cum! I'm cumming!"
     else:
         the_person.char "Oh fuck, you're going to make me cum! Fuck!"
@@ -838,14 +838,14 @@ label hotwife_climax_responses_foreplay(the_person):
     return
 
 label hotwife_climax_responses_oral(the_person):
-    if the_person.sluttiness > 70:
+    if the_person.effective_sluttiness() > 70:
         the_person.char "Fuck yes, I'm going to cum! Make me cum!"
     else:
         the_person.char "Oh my god, you're good at that! I'm going to... I'm going to cum!"
     return
 
 label hotwife_climax_responses_vaginal(the_person):
-    if the_person.sluttiness > 70:
+    if the_person.effective_sluttiness() > 70:
         the_person.char "I'm going to cum! Ah! Make me cum [the_person.mc_title], I want to cum so badly! Ah!"
         "She closes her eyes and squeals with pleasure."
     else:
@@ -854,7 +854,7 @@ label hotwife_climax_responses_vaginal(the_person):
     return
 
 label hotwife_climax_responses_anal(the_person):
-    if the_person.sluttiness > 70:
+    if the_person.effective_sluttiness() > 70:
         the_person.char "Oh fuck, your cock feels so huge in my ass! It's going to make me cum!"
         the_person.char "Ah! Mmhmmm!"
     else:
@@ -874,7 +874,7 @@ label hotwife_clothing_accept(the_person):
 #    if the_person.obedience > 130:
 #        the_person.char "Is that really for me [the_person.mc_title]? I want to... but I don't think I could wear that without getting in some sort of trouble."
 #    else:
-#        if the_person.sluttiness > 60:
+#        if the_person.effective_sluttiness() > 60:
 #            the_person.char "Wow. I'm usually up for anything but I think that's going too far."
 #        else:
 #            the_person.char "Wow. It's a little... skimpy. I don't think I could wear that."
@@ -882,14 +882,14 @@ label hotwife_clothing_accept(the_person):
 
 # label hotwife_clothing_review(the_person):
 #     if mc.location == downtown_bar:
-#         if the_person.sluttiness > 40:
+#         if the_person.effective_sluttiness() > 40:
 #             the_person.char "I love when you look at me like that, but I don't think the downtown_bar staff would appreciate it as much. I'd better clean up a bit."
 #         else:
 #             the_person.char "I'd better clean up some before I go to leave the downtown_bar..."
 #     elif the_person.obedience > 130:
 #         the_person.char "I'm sorry [the_person.mc_title], you shouldn't have to see me like this. I'll go and get cleaned up so I'm presentable again."
 #     else:
-#         if the_person.sluttiness > 40:
+#         if the_person.effective_sluttiness() > 40:
 #             the_person.char "Whew, I think we messed up my clothes a bit. Just give me a quick second to get dressed into something more decent."
 #         else:
 #             the_person.char "My clothes are a mess! I'll be back in a moment, I'm going to go get cleaned up."
@@ -905,7 +905,7 @@ label hotwife_clothing_accept(the_person):
 #    return
 
 # label hotwife_sex_accept(the_person):
-#     if the_person.sluttiness > 70:
+#     if the_person.effective_sluttiness() > 70:
 #         if the_person.obedience < 70:
 #             the_person.char "I was just about to suggest the same thing."
 #         else:
@@ -915,7 +915,7 @@ label hotwife_clothing_accept(the_person):
 #     return
 
 label hotwife_sex_obedience_accept(the_person):
-    if the_person.sluttiness > 70:
+    if the_person.effective_sluttiness() > 70:
         the_person.char "Oh god [the_person.mc_title], I should really say no... but thinking about daddy doing this to me too gets me so hot!"
     else:
         if the_person.obedience > 130:
@@ -925,14 +925,14 @@ label hotwife_sex_obedience_accept(the_person):
     return
 
 # label hotwife_sex_gentle_reject(the_person):
-#     if the_person.sluttiness > 50:
+#     if the_person.effective_sluttiness() > 50:
 #         the_person.char "Wait, I don't think I'm warmed up enough for this [the_person.mc_title]. How about we do something else first?"
 #     else:
 #         the_person.char "Wait. I don't think I'm comfortable with this. Could we just do something else instead?"
 #     return
 
 label hotwife_sex_angry_reject(the_person):
-    if the_person.sluttiness < 20:
+    if the_person.effective_sluttiness() < 20:
         the_person.char "What the fuck! Do you think I'm just some whore who puts out for anyone who asks?"
         the_person.char "Not even daddy asks me to do that! Get the fuck away from me."
     else:
@@ -942,14 +942,14 @@ label hotwife_sex_angry_reject(the_person):
 
 label hotwife_seduction_response(the_person):
     if the_person.obedience > 130:
-        if the_person.sluttiness > 50:
+        if the_person.effective_sluttiness() > 50:
             the_person.char "Yes [the_person.mc_title]? Want to take some pics together?"
         else:
             the_person.char "Yes [the_person.mc_title]? Is there something I can help you with?"
     else:
-        if the_person.sluttiness > 50:
+        if the_person.effective_sluttiness() > 50:
             the_person.char "Mmm, I know that look. Do you want to fool around a little?"
-        elif the_person.sluttiness > 10:
+        elif the_person.effective_sluttiness() > 10:
             the_person.char "Oh, do you see something you like?"
         else:
             the_person.char "Oh, I don't really know what to say [the_person.mc_title]..."
@@ -957,17 +957,17 @@ label hotwife_seduction_response(the_person):
 
 # label hotwife_seduction_accept_crowded(the_person):
 #     if mc.location == downtown_bar:
-#         if the_person.sluttiness < 20:
+#         if the_person.effective_sluttiness() < 20:
 #             the_person.char "I suppose we could sneak away into the locker room... There's nothing wrong with that, right?"
-#         elif the_person.sluttiness < 70:
+#         elif the_person.effective_sluttiness() < 70:
 #             the_person.char "Come on, let's sneak into the locker room and do it!"
 #         else:
 #             the_person.char "Oh fuck that sounds nice. I'm not sure I can wait until we sneak into the locker room, maybe we should just do it right here!"
 #         return
 #
-#     if the_person.sluttiness < 20:
+#     if the_person.effective_sluttiness() < 20:
 #         the_person.char "I suppose we could sneak away for a few minutes. There's nothing wrong with that, right?"
-#     elif the_person.sluttiness < 50:
+#     elif the_person.effective_sluttiness() < 50:
 #         the_person.char "Come on, let's go find someplace quiet where we won't be interupted."
 #     else:
 #         the_person.char "No point waisting any time then, right? Let's get to it!"
@@ -975,27 +975,27 @@ label hotwife_seduction_response(the_person):
 
 # label hotwife_seduction_accept_alone(the_person):
 #     if mc.location == downtown_bar:
-#         if the_person.sluttiness < 20:
+#         if the_person.effective_sluttiness() < 20:
 #             the_person.char "Well, there's nobody around to see us..."
-#         elif the_person.sluttiness < 50:
+#         elif the_person.effective_sluttiness() < 50:
 #             the_person.char "I can't believe how empty the gym is right now. Let's do it right here!"
 #         else:
 #             the_person.char "Oh [the_person.mc_title], the gym is empty, fuck me now!"
 #         return
-#     if the_person.sluttiness < 20:
+#     if the_person.effective_sluttiness() < 20:
 #         the_person.char "Well, there's nobody around to stop us..."
-#     elif the_person.sluttiness < 50:
+#     elif the_person.effective_sluttiness() < 50:
 #         the_person.char "Mmm, that's a fun idea. Come on, let's get to it!"
 #     else:
 #         the_person.char "Oh [the_person.mc_title], don't make me wait!"
 #     return
 
 #label hotwife_seduction_refuse(the_person):
-#    if the_person.sluttiness < 20:
+#    if the_person.effective_sluttiness() < 20:
 #        "[the_person.title] blushes and looks away from you awkwardly."
 #        the_person.char "I, uh... Sorry [the_person.mc_title], I just don't feel that way about you."
 #
-#    elif the_person.sluttiness < 50:
+#    elif the_person.effective_sluttiness() < 50:
 #        the_person.char "Oh, it's tempting, but I'm just not feeling like it right now. Maybe some other time?"
 #        "[the_person.title] smiles and gives you a wink."
 #
@@ -1016,12 +1016,12 @@ label hotwife_flirt_response(the_person):
         return
 
     if the_person.obedience > 130:
-        if the_person.sluttiness > 50:
+        if the_person.effective_sluttiness() > 50:
             the_person.char "If that's what you want I'm sure I could help with that [the_person.mc_title]."
         else:
             the_person.char "Thank you for the compliment, [the_person.mc_title]."
     else:
-        if the_person.sluttiness > 50:
+        if the_person.effective_sluttiness() > 50:
             the_person.char "Mmm, if that's what you want I'm sure I could find a chance to give you a quick peak."
             "[the_person.title] smiles at you and spins around, giving you a full look at her body."
         else:
@@ -1095,14 +1095,14 @@ label hotwife_hookup_accept(the_person):
     #TODO write blwjob finish scene#
     mc.name "That feels great, but I don't want to finish in your mouth. Why don't you stand up and turn around..."
     $ the_person.draw_person( position = "standing_doggy")
-    if the_person.sluttiness > 40: #She asks if you want to use a condom
+    if the_person.effective_sluttiness() > 40: #She asks if you want to use a condom
         the_person.char "Do you want to put on a condom first?"
         menu:
             "Put on a condom":
                 mc.name "Yeah, I'd probably better. I may not be able to resist pulling out."
-                if the_person.sluttiness > 60:
+                if the_person.effective_sluttiness() > 60:
                     the_person.char "I mean... its okay with me if you wanted to stick it in for a little bit without one on, you know, just to get started..."
-                    if the_person.sluttiness > 90:
+                    if the_person.effective_sluttiness() > 90:
                         the_person.char "...or even just finish inside me. I promise I wouldn't mind at all!"
                     mc.name "Maybe next time!"
                 "You get a condom and put it on quickly."
@@ -1110,9 +1110,9 @@ label hotwife_hookup_accept(the_person):
             "Fuck her raw":
                 $ mc.condom = False
                 mc.name "No way, I want to feel everything."
-                if the_person.sluttiness > 60:
+                if the_person.effective_sluttiness() > 60:
                     the_person.char "Mmmm, sounds good. I was hoping you would say that!"
-                    if the_person.sluttiness > 80:
+                    if the_person.effective_sluttiness() > 80:
                         "She wiggles her ass back and forth a little bit."
                         the_person.char "You don't need to worry about pulling out. My husband goes crazy when another man cums inside me!"
                 else:
@@ -1139,7 +1139,7 @@ label hotwife_hookup_accept(the_person):
             $ the_person.change_happiness(2)
         "After the stimulation from hew blowjob earlier, you know you aren't going to last long. You give her ass a loud spank."
         mc.name "That's it, bitch. I'm about to cum!"
-        if the_person.sluttiness > 100: #She is so slutty, she begs for your cum.
+        if the_person.effective_sluttiness() > 100: #She is so slutty, she begs for your cum.
             the_person.char "The condom! Take it off! Please!?! Your cock is so good, I want to feel you dump your load inside me!"
             "Your brain is getting a little hazy with lust. Surely there's nothing wrong with that, right?"
             menu:
@@ -1179,7 +1179,7 @@ label hotwife_hookup_accept(the_person):
             "You can feel [the_person.title]'s pussy begin to spasm as she cums. Her silky wetness contracting around you feels amazing."
             $ the_person.change_slut_temp(1)
             $ the_person.change_happiness(2)
-    if the_person.sluttiness > 70:
+    if the_person.effective_sluttiness() > 70:
         the_person.char "You should stick a finger in my other hole while you fuck me and take a picture. Then hubby will have to reclaim both holes!"
         "Wow, its not every day you have a beautiful married woman ask you to finger her ass while you bend her over and fuck her!"
         "You reach a hand forward and put your index finger in front of her face. She quickly gets the idea and opens her mouth with her tongue out, and begins slathering your finger with saliva."
@@ -1196,11 +1196,11 @@ label hotwife_hookup_accept(the_person):
             menu:
                 "Stay Vaginal":
                     "As [the_person.title]'s pussy quivers around you, you decide to just keep doing what you are doing."
-                "Fuck Her Ass" if the_person.sluttiness > 80:
+                "Fuck Her Ass" if the_person.effective_sluttiness() > 80:
                     "You pull out of her pussy. Her juices leave a strand attached to you, connecting you to her cunt."
                     the_person.char "Mmm, [the_person.mc_title]? Why did you pull out... OH!"
                     "Her question is swiftly answered when she feels your manhood poking her puckered hole."
-                    if the_person.sluttiness > 100:
+                    if the_person.effective_sluttiness() > 100:
                         the_person.char "Yes! Fuck my ass good!"
                     else:
                         the_person.char "Oh my... be careful!"
@@ -1225,12 +1225,12 @@ label hotwife_hookup_accept(the_person):
                     the_person.char "That was SO good. You'll be hearing from me again, I'm sure. I can't wait to send hubby those pictures..."
                     "You and [the_person.title] get cleaned up and dressed, then sneak out of the restroom."
                     return
-                "Fuck Her Ass\n{size=22}Requires 80 sluttiness{/size} (disabled)" if the_person.sluttiness < 80:
+                "Fuck Her Ass\n{size=22}Requires 80 sluttiness{/size} (disabled)" if the_person.effective_sluttiness() < 80:
                     pass
     "[the_person.possessive_title]'s creamy cunt draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
     mc.name "Get ready, I'm gonna cum!"
     $ the_person.change_arousal(35)
-    if the_person.sluttiness > 90:
+    if the_person.effective_sluttiness() > 90:
         "To your surprise [the_person.title] reaches back with both hands and grabs your hips, pulling you deep inside of her."
         "Her grip is startlingly strong. You don't think you could pull out even if you wanted to!"
         the_person.char "That's it, cum with me!"
@@ -1241,7 +1241,7 @@ label hotwife_hookup_accept(the_person):
         "You use her phone and get several close up pictures of her well used snatch with your load dripping out of it."
         "You take a moment to recover. Then you and [the_person.title] get cleaned up and dress. You quietly sneak out of the restroom."
         return
-    elif the_person.sluttiness > 60:
+    elif the_person.effective_sluttiness() > 60:
         the_person.char "Oh god... you should probably pull out but... it feels so good..."
         "You briefly consider pulling out."
         menu:
@@ -1276,14 +1276,14 @@ label hotwife_hookup_accept(the_person):
 
 #label hotwife_cum_face(the_person):
 #    if the_person.obedience > 130:
-#        if the_person.sluttiness > 60:
+#        if the_person.effective_sluttiness() > 60:
 #            the_person.char "Do I look cute covered in your cum, [the_person.mc_title]?"
 #            "[the_person.title] licks her lips, cleaning up a few drops of your semen that had run down her face."
 #        else:
 #            the_person.char "I hope this means I did a good job."
 #            "[the_person.title] runs a finger along her cheek, wiping away some of your semen."
 #    else:
-#        if the_person.sluttiness > 80:
+#        if the_person.effective_sluttiness() > 80:
 #            the_person.char "Ah... I love a nice, hot load on my face. Don't you think I look cute like this?"
 #        else:
 #            the_person.char "Fuck me, you really pumped it out, didn't you?"
@@ -1292,22 +1292,22 @@ label hotwife_hookup_accept(the_person):
 
 label hotwife_cum_mouth(the_person):
     if mc.location == downtown_bar:
-        if the_person.sluttiness > 80:
+        if the_person.effective_sluttiness() > 80:
             the_person.char "Your cum tastes great [the_person.mc_title]! I bet I get another tasty load later..."
             "[the_person.possessive_title] winks at you as she swallows your cum."
-        elif the_person.sluttiness > 50:
+        elif the_person.effective_sluttiness() > 50:
             the_person.char "Thanks [the_person.mc_title]. I hope daddy cums in my mouth later too!"
         else:
             "[the_person.title]'s face grimaces as she tastes your sperm in her mouth."
             the_person.char "Thank you [the_person.mc_title]. It doesn't taste the best, but I'm always a good little slut."
     elif the_person.obedience > 130:
-        if the_person.sluttiness > 60:
+        if the_person.effective_sluttiness() > 60:
             the_person.char "That was very nice [the_person.mc_title], thank you."
         else:
             "[the_person.title]'s face grimaces as she tastes your sperm in her mouth."
             the_person.char "Thank you [the_person.mc_title], I hope you had a good time."
     else:
-        if the_person.sluttiness > 80:
+        if the_person.effective_sluttiness() > 80:
             the_person.char "Your cum tastes great [the_person.mc_title], thanks for giving me so much of it."
             "[the_person.title] licks her lips and sighs happily."
         else:
@@ -1329,13 +1329,13 @@ label hotwife_cum_mouth(the_person):
 #     return
 
 #label hotwife_sex_strip(the_person):
-#    if the_person.sluttiness < 20:
+#    if the_person.effective_sluttiness() < 20:
 #        if the_person.arousal < 50:
 #            the_person.char "Let me get this out of the way..."
 #        else:
 #            the_person.char "Let me get this out of the way for you..."
 #
-#    elif the_person.sluttiness < 60:
+#    elif the_person.effective_sluttiness() < 60:
 #        if the_person.arousal < 50:
 #            the_person.char "This is just getting in the way..."
 #        else:
@@ -1350,25 +1350,25 @@ label hotwife_cum_mouth(the_person):
 #    return
 
 # label hotwife_sex_watch(the_person, the_sex_person, the_position):
-#     if the_person.sluttiness < the_position.slut_requirement - 20:
+#     if the_person.effective_sluttiness() < the_position.slut_requirement - 20:
 #         $ the_person.draw_person(emotion = "angry")
 #         the_person.char "Holy shit, are you really doing this in front of everyone?"
 #         $ the_person.change_obedience(-2)
 #         $ the_person.change_happiness(-1)
 #         "[the_person.title] looks away while you and [the_sex_person.name] [the_position.verb]."
 #
-#     elif the_person.sluttiness < the_position.slut_requirement - 10:
+#     elif the_person.effective_sluttiness() < the_position.slut_requirement - 10:
 #         $ the_person.draw_person()
 #         $ the_person.change_happiness(-1)
 #         "[the_person.title] tries to avert her gaze while you and [the_sex_person.name] [the_position.verb]."
 #
-#     elif the_person.sluttiness < the_position.slut_requirement:
+#     elif the_person.effective_sluttiness() < the_position.slut_requirement:
 #         $ the_person.draw_person()
 #         the_person.char "Oh my god, you two are just... Wow..."
 #         $ change_report = the_person.change_slut_temp(1)
 #         "[the_person.title] averts her gaze, but keeps glancing over while you and [the_sex_person.name] [the_position.verb]."
 #
-#     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
+#     elif the_person.effective_sluttiness() > the_position.slut_requirement and the_person.effective_sluttiness() < the_position.slut_cap:
 #         $ the_person.draw_person()
 #         the_person.char "Oh my god that's... Wow that looks...Hot."
 #         $ change_report = the_person.change_slut_temp(2)
@@ -1382,35 +1382,35 @@ label hotwife_cum_mouth(the_person):
 #     return
 
 # label hotwife_being_watched(the_person, the_watcher, the_position):
-#     if the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness >= the_position.slut_cap:
+#     if the_person.effective_sluttiness() >= the_position.slut_cap and the_watcher.sluttiness >= the_position.slut_cap:
 #         #They agree you should give it to her harder
 #         the_person.char "I can handle it [the_person.mc_title], you can be rough with me."
 #         $ the_person.change_arousal(1)
 #         "[the_person.title] seems turned on by [the_watcher.title] watching you and her [the_position.verb]."
 #
-#     elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
+#     elif the_person.effective_sluttiness() >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
 #         #She's super slutty and doesn't care what people think.
 #         the_person.char "Don't listen to [the_watcher.title], I'm having a great time. Look, she can't stop peeking over."
 #
-#     elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
+#     elif the_person.effective_sluttiness() >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
 #         #She's super slutty and encourages the watcher to be slutty.
 #         $ the_person.change_arousal(1)
 #         "[the_person.title] seems turned on by [the_watcher.title] watching you and her [the_position.verb]."
 #
-#     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness >= the_position.slut_cap:
+#     elif the_person.effective_sluttiness() < the_position.slut_cap and the_watcher.sluttiness >= the_position.slut_cap:
 #         #She's into it and encouraged by the slut watching her.
 #         the_person.char "Oh god, having you watch us like this..."
 #         $ the_person.change_arousal(1)
 #         "[the_person.title] seems turned on by [the_watcher.title] watching you and her [the_position.verb]."
 #
-#     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
+#     elif the_person.effective_sluttiness() < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
 #         #She's into it but shamed by the prude watching her.
 #         the_person.char "[the_person.mc_title], maybe we shouldn't be doing this here..."
 #         $ the_person.change_arousal(-1)
 #         $ the_person.change_slut_temp(-1)
 #         "[the_person.title] seems uncomfortable with [the_watcher.title] nearby."
 #
-#     else: #the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
+#     else: #the_person.effective_sluttiness() < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
 #         #They're both into it but not fanatical about it.
 #         the_person.char "Oh my god, having you watch us do this feels so dirty. I think I like it!"
 #         $ the_person.change_arousal(1)
@@ -1427,7 +1427,7 @@ label hotwife_cum_mouth(the_person):
 #             "[the_person.title] glances at you when you enters the room then looks away quickly to avoid starting a conversation."
 #
 #     elif the_person.happiness > 120:
-#         if the_person.sluttiness > 50:
+#         if the_person.effective_sluttiness() > 50:
 #             "[the_person.title] looks up from her work when you enter the room."
 #             the_person.char "Hey [the_person.mc_title]. Let me know if you need any help with anything. Anything at all."
 #             "She smiles and winks, then turns back to what she was doing."
@@ -1445,8 +1445,8 @@ label hotwife_cum_mouth(the_person):
 #     return
 
 # label hotwife_date_seduction(the_person):
-#     if the_person.sluttiness > the_person.love:
-#         if the_person.sluttiness > 40:
+#     if the_person.effective_sluttiness() > the_person.love:
+#         if the_person.effective_sluttiness() > 40:
 #             the_person.char "I had a great time [the_person.mc_title], but I can think of a few more things we could do together. Want to come back to my place?"
 #             # the_person.char "I had a great night [the_person.mc_title], would you like to come back to my place and let me repay the favour?"
 #         else:
