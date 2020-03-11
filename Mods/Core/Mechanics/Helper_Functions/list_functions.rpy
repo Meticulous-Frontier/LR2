@@ -5,6 +5,17 @@ init -2 python:
         for i in range(0, len(list), blok_size):
             yield list[i:i + blok_size]
 
+    # splits an item_array in a number of blocks about equal in size (remainders are added to last bloks)
+    def split_list_in_even_blocks(list, blok_count):
+        avg = len(list) / float(blok_count)
+        result = []
+        last = 0.0
+
+        while last < len(list):
+            result.append(list[int(last):int(last + avg)])
+            last += avg
+
+        return result
 
     # finds an item in a list, where search(item) == True
     # search as lambda could be a lambda ==> x: x.name == 'searchname'
