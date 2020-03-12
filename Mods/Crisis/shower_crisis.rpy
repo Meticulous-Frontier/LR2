@@ -46,7 +46,7 @@ label shower_crisis_action_label:
         "You can't help but admire [the_person.possessive_title]'s slim body and perky tits."
         "Just as this thought flashes through your mind, she starts rubbing her breasts, pinching her small nipples."
     $ the_person.change_arousal(renpy.random.randint(10,50))
-    if the_person.sluttiness >=50 or the_person.get_opinion_score("masturbating") > 0 or the_person.arousal > 35:
+    if the_person.effective_sluttiness() >=50 or the_person.get_opinion_score("masturbating") > 0 or the_person.arousal > 35:
         "The warmth of the water and her caresses seem to turn [the_person.possessive_title] on."
         $ the_person.draw_person(position = "missionary")
         "She sits on the shower floor, spreads her legs and begins to masturbate with her hand."
@@ -82,24 +82,35 @@ label shower_crisis_action_label:
         "She gets up and returns to washing her body."
         "You see her love juices mixing with the water dripping on the floor."
         $ the_person.reset_arousal()
-        $ the_person.change_stats(arousal = renpy.random.randint(10,50), slut_temp = renpy.random.randint(2,5))
+        $ the_person.change_stats(arousal = renpy.random.randint(10,50), slut_temp = renpy.random.randint(5,10))
     else:
         pass
     menu:
         "Join her.":
             "You decide to use this opportunity and join her."
             mc.name "The door was not closed, how about we shower together, [the_person.title]?"
-            if the_person.sluttiness > 70 or the_person.arousal > 35:
+            if the_person.effective_sluttiness() > 70 or the_person.arousal > 35:
                 $ the_person.draw_person(position = "back_peek", emotion = "happy")
-                "[the_person.possessive_title] turns her head when she hears your voice. You see her smile."
-                the_person.char "Well, that sounds like a plan, [the_person.mc_title]. Come on, get in here."
+                "[the_person.possessive_title] turns her head when she hears your voice."
+                if the_person.has_taboo("bare_pussy", "bare_tits"):
+                    "She tries to cover herself as best as the situation allows."
+                    the_person.char "Oh my god, [the_person.mc_title], you startled me! You are not supposed to see me like this."
+                    mc.name "Come on [the_person.tile], we are all family here, you don't need to be shy with me. I just thought we could share the shower today."
+                    the_person.char "Hmm, well, it is better for the environment...Ok, get in here."
+                    $ the_person.break_taboo("bare_pussy")
+                    $ the_person.break_taboo("bare_tits")                    
+                else:
+                    the_person.char "Well, that sounds like a plan, [the_person.mc_title]. Come on, get in here."
+
                 "You quickly take off your clothes and step into the shower."
-                "[the_person.possessive_title] stands still as you hug her from behind. Your erect dick pushing against her bottom."
+                "[the_person.possessive_title] stands still as you hug her from behind. Your growing member softly brushing against her bottom."
+                    
                 the_person.char "Ow, I feel that someone is happy to see me. Why don't you slide it in?"
                 # move to shower for fucking, then go back to original location
                 $ current_location = mc.location
                 $ mc.location = home_shower
                 call fuck_person(the_person) from _call_fuck_person_shower
+                "After a while, you get out of the shower and get ready for your day."
                 $ mc.location = current_location
             else:
                 $ the_person.draw_person(position = "back_peek", emotion = "angry")
