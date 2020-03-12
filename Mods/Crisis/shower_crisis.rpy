@@ -92,7 +92,7 @@ label shower_crisis_action_label:
             if the_person.effective_sluttiness() > 70 or the_person.arousal > 35:
                 $ the_person.draw_person(position = "back_peek", emotion = "happy")
                 "[the_person.possessive_title] turns her head when she hears your voice."
-                if the_person.has_taboo("bare_pussy", "bare_tits"):
+                if the_person.has_taboo(["bare_pussy", "bare_tits"]):
                     "She tries to cover herself as best as the situation allows."
                     the_person.char "Oh my god, [the_person.mc_title], you startled me! You are not supposed to see me like this."
                     mc.name "Come on [the_person.tile], we are all family here, you don't need to be shy with me. I just thought we could share the shower today."
