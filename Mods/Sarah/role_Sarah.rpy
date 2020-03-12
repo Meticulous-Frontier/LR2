@@ -496,6 +496,7 @@ label Sarah_third_wheel_label():
     "You step close and put your arms around her."
     $ scene_manager.update_actor(the_person, position = "kissing")
     "She quickly wraps her arms around you and embraces you. You move your head to kiss her on the cheek, but at the last second she moves her head and you find your lips pressing into hers."
+    $ the_person.break_taboo("kissing") # break her kissing taboo
     the_person.char "Ohhh! Mmmmm..."
     "At first she opens her eyes in surprise, but quickly closes them and begins to kiss you back."
     "Her lips part and your tongue quickly takes advantage and begins to explore her soft lips. They taste sweet, with just a hint of appletini."
@@ -507,7 +508,8 @@ label Sarah_third_wheel_label():
     $ time_of_day = 3
     "She turns and heads into her building. You check your watch and realize how late it is."
     $ scene_manager.remove_actor(the_person, reset_actor = False)
-    $ del sarah_friend #Cleanup?
+    $ sarah_friend.remove_person_from_game()
+    $ del sarah_friend
     $ add_sarah_get_drinks_action()
     return
 
