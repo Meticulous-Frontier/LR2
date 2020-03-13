@@ -30,6 +30,17 @@ init 5 python:
 
     config.label_overrides["small_talk_person"] = "small_talk_person_enhanced"
 
+    text_opinion_list = ["I hate", "I don't like", "I have no opinion on", "I like", "I love"]
+
+    def build_opinion_smalltalk_list(opinion_text, opinion_score):
+        opinion_list = []
+        for menu_score in __builtin__.range(5):
+            opinion_string = text_opinion_list[4 - menu_score] + " " + opinion_text
+            if opinion_score[1] and opinion_score[0] == 2 - menu_score:
+                opinion_string = "{color=00E000}" + opinion_string + "{/color}"
+            opinion_list.append([opinion_string, 2 - menu_score])
+        opinion_list.insert(0, "Smalltalk")
+        return opinion_list
 
 label small_talk_person_enhanced(person):
     python:
@@ -38,24 +49,21 @@ label small_talk_person_enhanced(person):
         renpy.say(mc.name, "So [person.title], what's been on your mind recently?")
         person.discover_opinion("small talk")
         successful_smalltalk = 60 + (smalltalk_opinion * 20) + (mc.charisma * 5)
-        ran_num = renpy.random.randint(0,100)
 
     # TODO: Add a chance that she wants to talk about someone she knows.
-    if ran_num < successful_smalltalk:
+    if renpy.random.randint(0,100) < successful_smalltalk:
         if smalltalk_opinion >= 0:
             $ person.draw_person(emotion = "happy")
             "She seems glad to have a chance to take a break and make small talk with you."
-
         else:
             "She seems uncomfortable with making small talk, but after a little work you manage to get her talking."
 
         python:
-            casual_sex_talk = person.sluttiness > 50
+            casual_sex_talk = person.effective_sluttiness() > 50
             opinion_learned = person.get_random_opinion(include_known = True, include_sexy = casual_sex_talk)
             talk_opinion_text = opinion_learned
             if opinion_learned in opinions_talk_mapping:
                 talk_opinion_text = opinions_talk_mapping[opinion_learned]
-
 
         if not opinion_learned is None:
             $ opinion_state = person.get_opinion_topic(opinion_learned)
@@ -65,26 +73,12 @@ label small_talk_person_enhanced(person):
             person.char "So [person.mc_title], I'm curious what you think about about [opinion_learned]. Do you have any opinions on it?"
             $ love_gain = 4
             $ prediction = 0
-            menu:
-                "I love [talk_opinion_text].":
-                    $ prediction = 2
-                    mc.name "Me? I love [talk_opinion_text]. Absolutely love it."
 
-                "I like [talk_opinion_text].":
-                    $ prediction = 1
-                    mc.name "I really like [talk_opinion_text]."
-
-                "I don't have any opinion about [talk_opinion_text].":
-                    $ prediction = 0
-                    mc.name "I don't really have any thoughts on it, I guess I just don't think it's a big deal."
-
-                "I don't like [talk_opinion_text].":
-                    $ prediction = -1
-                    mc.name "I'm not a fan, that's for sure."
-
-                "I hate [talk_opinion_text].":
-                    $ prediction = -2
-                    mc.name "I'll be honest, I absolutely hate [talk_opinion_text]. I just can't stand it."
+            if "build_menu_items" in globals():
+                call screen main_choice_display(build_menu_items([build_opinion_smalltalk_list(talk_opinion_text, opinion_state)]))
+            else:
+                call screen main_choice_display([build_opinion_smalltalk_list(talk_opinion_text, opinion_state)])
+            $ prediction = _return            
 
             $ prediction_difference = abs(prediction - opinion_state[0])
             if prediction_difference == 4: #as wrong as possible
@@ -97,7 +91,6 @@ label small_talk_person_enhanced(person):
                 person.char "Yeah, I'm glad you get it. I feel like we're both on the same wavelength."
             else: #prediction_difference == 0
                 person.char "Exactly! It's so rare that someone feels exactly the same way about [opinion_learned] as me!"
-
 
             if opinion_state[1]:
                 "You listen while [person.possessive_title] talks about how she [opinion_string] [opinion_learned]."
