@@ -100,6 +100,9 @@ label daughter_work_crisis_label_enhanced():
 
     $ the_daughter = the_person.generate_daughter() #Produces a person who has a high chance to share characteristics with her mother.
 
+    # block rollback before this point
+    $ renpy.block_rollback()
+    
     call hire_select_process([the_daughter, 1]) from _call_hire_select_process_daughter_work_crisis_enhanced #Hire her or reject her. Padded with an extra item in the array or we crash due to trying to pre-calculate forward/backwards buttons
     
     if _return == the_daughter: #You've chosen to hire her.
@@ -141,6 +144,6 @@ label daughter_work_crisis_label_enhanced():
             $ the_person.change_obedience(1)
             the_person.char "I understand, thank you for at least taking a look for me."
 
-    $ del the_daughter
+    $ the_daughter = None
     $ renpy.scene("Active")
     return
