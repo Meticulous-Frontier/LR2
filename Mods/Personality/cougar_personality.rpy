@@ -421,32 +421,41 @@ label cougar_flirt_response(the_person):
     return
 
 label cougar_cum_face(the_person):
-    if the_person.obedience > 130:
-        if the_person.sluttiness > 50:
+    if SB_check_fetish(the_person, cum_external_role) or the_person.obedience > 130:
+        if SB_check_fetish(the_person, cum_external_role) or the_person.effective_sluttiness() > 70 or the_person.get_opinion_score("cum facials") > 0:
             $ pronoun = person_body_shame_string(the_person, "little cum slut")
             the_person.char "Ah... do you like to see my face covered [the_person.mc_title]? Am I your good [pronoun]?"
         else:
             the_person.char "Oh, it's everywhere! Next time be more careful, I'm only doing this for you."
     else:
-        if the_person.sluttiness > 70:
+        if the_person.effective_sluttiness() > 70  or the_person.get_opinion_score("cum facials") > 0:
             the_person.char "Oh, yes [the_person.mc_title], I'm covered with your load!"
         else:
-            the_person.char "[the_person.mc_title], next time don't mess up my makeup like this."
-            "She pulls out a tissue and wipes her face quickly"
+            if the_person.sex_record.get("Cum Facials", 0) < 3:
+                the_person.char "[the_person.mc_title], next time don't mess up my makeup like this."
+            elif the_person.sex_record.get("Cum Facials", 0) < 6:
+                the_person.char "Again? Are you not listening? Cum messes up make up."
+            else:
+                "[the_person.title] just sighs."
+            "She pulls out a tissue and wipes her face quickly."
     return
 
 label cougar_cum_mouth(the_person):
-    if the_person.obedience > 130:
-        if the_person.sluttiness > 50:
+    if SB_check_fetish(the_person, cum_internal_role) or the_person.obedience > 130:
+        if SB_check_fetish(the_person, cum_internal_role) or the_person.effective_sluttiness() > 70 or the_person.get_opinion_score("drinking cum") > 0:
             the_person.char "It seems I did a good job, you have a wonderful taste [the_person.mc_title]."
         else:
-            the_person.char "I'm not sure I'm really into this, I'll try to like it for you [the_person.mc_title]."
+            if the_person.sex_record.get("Cum in Mouth", 0) < 3:
+                the_person.char "I'm not sure I'm really into this, I'll try to like it for you [the_person.mc_title]."
+            else:
+                "[the_person.title] smiles at you in an obviously fake manner. She clearly doesn't like you cumming in her mouth."
     else:
-        if the_person.sluttiness > 70:
+        if the_person.effective_sluttiness() > 70 or the_person.get_opinion_score("drinking cum") > 0:
             the_person.char "Mmm, you taste great [the_person.mc_title], you can fill my mouth with your load anytime..."
         else:
             "She spits your cum on the floor..."
-            the_person.char "Give me a little heads up next time, [the_person.mc_title]."
+            if the_person.sex_record.get("Cum in Mouth", 0) < 4:
+                the_person.char "Give me a little heads up next time, [the_person.mc_title]."
     return
 
 label cougar_cum_vagina(the_person):

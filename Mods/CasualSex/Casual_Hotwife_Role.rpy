@@ -1291,27 +1291,27 @@ label hotwife_hookup_accept(the_person):
 #    return
 
 label hotwife_cum_mouth(the_person):
-    if mc.location == downtown_bar:
-        if the_person.effective_sluttiness() > 80:
+    if mc.location == downtown_bar or SB_check_fetish(the_person, cum_internal_role):
+        if SB_check_fetish(the_person, cum_internal_role) or the_person.effective_sluttiness() > 80 or the_person.get_opinion_score("drinking cum") > 1:
             the_person.char "Your cum tastes great [the_person.mc_title]! I bet I get another tasty load later..."
             "[the_person.possessive_title] winks at you as she swallows your cum."
-        elif the_person.effective_sluttiness() > 50:
+        elif the_person.effective_sluttiness() > 50 or the_person.get_opinion_score("drinking cum") > 0:
             the_person.char "Thanks [the_person.mc_title]. I hope daddy cums in my mouth later too!"
         else:
             "[the_person.title]'s face grimaces as she tastes your sperm in her mouth."
             the_person.char "Thank you [the_person.mc_title]. It doesn't taste the best, but I'm always a good little slut."
     elif the_person.obedience > 130:
-        if the_person.effective_sluttiness() > 60:
+        if the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("drinking cum") > 0:
             the_person.char "That was very nice [the_person.mc_title], thank you."
         else:
             "[the_person.title]'s face grimaces as she tastes your sperm in her mouth."
             the_person.char "Thank you [the_person.mc_title], I hope you had a good time."
     else:
-        if the_person.effective_sluttiness() > 80:
+        if the_person.effective_sluttiness() > 80 or the_person.get_opinion_score("drinking cum") > 0:
             the_person.char "Your cum tastes great [the_person.mc_title], thanks for giving me so much of it."
             "[the_person.title] licks her lips and sighs happily."
         else:
-            the_person.char "Bleh, I don't know if I'll ever get use to that."
+            the_person.char "Bleh, I don't know if I'll ever get used to that."
     return
 
 #label hotwife_suprised_exclaim(the_person):
