@@ -15,7 +15,7 @@
         opinion_tags = ["giving blowjobs"], record_class = "Blowjobs",
         associated_taboo = "sucking_cock")
 
-    list_of_girl_positions.append(SB_cum_fetish_blowjob)
+    #list_of_girl_positions.append(SB_cum_fetish_blowjob)
 
 #init 1:
 #    python:
