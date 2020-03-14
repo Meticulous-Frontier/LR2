@@ -369,6 +369,7 @@ label unisex_restroom_fantasy_actout_label(the_person):
         $ the_person.change_happiness(-10)
         $ the_person.change_love(-5)
 
+    $ the_person.review_outfit()
     return
 
 label unisex_restroom_unlock_gloryhole_label():
