@@ -248,7 +248,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 if position_choice and object_choice:
                     $ position_choice.redraw_scene(the_person)
                     if skip_intro:
-                        pass
+                        skip_intro = False  # turn off skip, for when we get here the second time.
                     elif first_round:
                         $ the_person.draw_person() #Draw her standing until we pick a new position
                         if not ignore_taboo and the_person.has_taboo(position_choice.associated_taboo):
