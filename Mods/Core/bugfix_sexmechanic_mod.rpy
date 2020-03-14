@@ -516,7 +516,7 @@ label condom_ask_enhanced(the_person):
         # they demand you put on a condom.
         #TODO: Make this dialogue personality based
         if the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0:
-            the_person.char "I hate do say it, but you really should wear a condom."
+            the_person.char "I hate to say it, but you really should wear a condom."
         else:
             the_person.char "Do you have a condom? You're going to have to put one on."
 
