@@ -144,47 +144,47 @@ label transition_stealth_doggy_anal_doggy(the_girl, the_location, the_object):
     #transition from anal to normal doggy style.
     $ stealth_orgasm = False
 
-    if the_person.has_taboo("anal_sex"):
-        "You pull out of [the_girl.title]'s pussy and lean back to admire her ass."
-        "You grab it and give it a squeeze, then a hard slap."
-        if the_girl.effective_sluttiness(doggy_anal.associated_taboo) > doggy_anal.slut_cap or the_girl.get_opinion_score("showing her ass") > 0:
-            the_girl.char "Mmmm."
-            $ the_girl.draw_person(position = "doggy", the_animation = ass_bob, animation_effect_strength = 0.7)
-            "[the_girl.possessive_title] points her butt in your direction. She lowers her shoulders and works her hips for you."
-        else:
-            mc.name "Nice. Now shake it for me."
-            the_girl.char "Like... this?"
-            $ the_girl.draw_person(position = "doggy", the_animation = ass_bob, animation_effect_strength = 0.4)
-            "[the_girl.title] works her hips and jiggles her ass for you."
-            mc.name "Getting there, a little faster now."
-            $ the_girl.draw_person(position = "doggy", the_animation = ass_bob, animation_effect_strength = 0.7)
-            "She speeds up."
-        the_girl.char "Is that what you wanted?"
-        "You slap your cock down on her ass and grab her tight cheeks, spreading them apart to get a look at her asshole."
-        mc.name "It's a start. I think it's time we stretched you open."
-        $ the_girl.call_dialogue(doggy_anal.associated_taboo+"_taboo_break")
-        "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you press it against her tight hole."
-        if the_girl.sex_skills["Anal"] > 2:
-            "She gasps as your tip starts to spread her open. She lowers her shoulders and pushes her hips against you, helping the process."
-            the_girl.char "Oh god... Mfphhhh!"
+    if the_girl.arousal >= 70 or report_log.get("girl orgasms", 0) > 0:
+        "You pull out of [the_girl.title]'s wet pussy, leaving it dripping fluids on the floor."
 
-        else:
-            "She gasps as your tip tries to spread open her impossibly tight asshole. She tries to pull away, but you pull on her waist and bring her closer."
-            mc.name "Come on, you'll get there."
-            if the_girl.arousal >= 70 or report_log.get("girl orgasms", 0) > 0:
-                "Your cock is still wet from [the_girl.title]'s pussy. You push steadily as you slide the tip into [the_girl.title]'s ass."
-            else:
-                "You pull back slightly, spit onto your cock and try again. This time making better progress, sliding the tip of your dick into [the_girl.title]'s ass."
-            the_girl.char "Oh god... Fuck!"
-        "Inch by inch you slide your entire length into [the_girl.possessive_title]. She grunts and gasps the whole way down."
-        "You stop when you've bottomed out, to give your cock time to properly stretch her out."
-        the_girl.char "I think... I'm ready for you to move some more..."
-        "You pull back a little bit and give her a few testing strokes. When she can handle those you speed up, until you're thrusting your entire length."
-        $ the_girl.break_taboo("anal_sex")
+    "You line your cock up with her asshole, the tip just barely pressing against it."
+    call transition_default_anal_penetration_dialog(the_girl, the_location, the_object) from _call_transition_default_anal_penetration_dialog_3
+    return
+
+label transition_doggy_to_anal_doggy_taboo_break_label(the_girl, the_location, the_object):
+    "You pull out of [the_girl.title]'s pussy and lean back to admire her ass."
+    "You grab it and give it a squeeze, then a hard slap."
+    if the_girl.effective_sluttiness(doggy_anal.associated_taboo) > doggy_anal.slut_cap or the_girl.get_opinion_score("showing her ass") > 0:
+        the_girl.char "Mmmm."
+        $ the_girl.draw_person(position = "doggy", the_animation = ass_bob, animation_effect_strength = 0.7)
+        "[the_girl.possessive_title] points her butt in your direction. She lowers her shoulders and works her hips for you."
     else:
-        if the_girl.arousal >= 70 or report_log.get("girl orgasms", 0) > 0:
-            "You pull out of [the_girl.title]'s wet pussy, leaving it dripping fluids on the floor."
+        mc.name "Nice. Now shake it for me."
+        the_girl.char "Like... this?"
+        $ the_girl.draw_person(position = "doggy", the_animation = ass_bob, animation_effect_strength = 0.4)
+        "[the_girl.title] works her hips and jiggles her ass for you."
+        mc.name "Getting there, a little faster now."
+        $ the_girl.draw_person(position = "doggy", the_animation = ass_bob, animation_effect_strength = 0.7)
+        "She speeds up."
+    the_girl.char "Is that what you wanted?"
+    "You slap your cock down on her ass and grab her tight cheeks, spreading them apart to get a look at her asshole."
+    mc.name "It's a start. I think it's time we stretched you open."
+    $ the_girl.call_dialogue(doggy_anal.associated_taboo+"_taboo_break")
+    "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you press it against her tight hole."
+    if the_girl.sex_skills["Anal"] > 2:
+        "She gasps as your tip starts to spread her open. She lowers her shoulders and pushes her hips against you, helping the process."
+        the_girl.char "Oh god... Mfphhhh!"
 
-        "You line your cock up with her asshole, the tip just barely pressing against it."
-        call transition_default_anal_penetration_dialog(the_girl, the_location, the_object) from _call_transition_default_anal_penetration_dialog_3
+    else:
+        "She gasps as your tip tries to spread open her impossibly tight asshole. She tries to pull away, but you pull on her waist and bring her closer."
+        mc.name "Come on, you'll get there."
+        if the_girl.arousal >= 70 or report_log.get("girl orgasms", 0) > 0:
+            "Your cock is still wet from [the_girl.title]'s pussy. You push steadily as you slide the tip into [the_girl.title]'s ass."
+        else:
+            "You pull back slightly, spit onto your cock and try again. This time making better progress, sliding the tip of your dick into [the_girl.title]'s ass."
+        the_girl.char "Oh god... Fuck!"
+    "Inch by inch you slide your entire length into [the_girl.possessive_title]. She grunts and gasps the whole way down."
+    "You stop when you've bottomed out, to give your cock time to properly stretch her out."
+    the_girl.char "I think... I'm ready for you to move some more..."
+    "You pull back a little bit and give her a few testing strokes. When she can handle those you speed up, until you're thrusting your entire length."
     return

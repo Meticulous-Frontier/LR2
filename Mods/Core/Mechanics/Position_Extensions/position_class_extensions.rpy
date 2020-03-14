@@ -95,3 +95,32 @@ init 5 python:
             return taboo_break_string + self.name + position_opinion + "\n{size=22}" + willingness_string + energy_string + arousal_string + "{/size}" + tooltip_string
 
     Position.build_position_willingness_string = build_position_willingness_string_enhanced
+
+    # try different types of taboo break, the final choice is the break for the actual position broken
+    # added an extra check to make sure the label exists, if not the taboo is broken without dialog
+    def call_transition_taboo_break(self, new_position, the_person, the_location, the_object):
+        def get_position_name(position):
+            return position.name.lower().replace(" ", "_")
+
+        if not new_position is None:
+            transition_scene = "transition_" + get_position_name(self) + "_to_" + get_position_name(new_position) + "_taboo_break_label"
+            #renpy.say("", "Custom taboo break function is: " + transition_scene)
+            if renpy.has_label(transition_scene):
+                #renpy.say("", "Calling custom taboo break: " + transition_scene)
+                renpy.call(transition_scene, the_person, the_location, the_object)
+
+            #renpy.say("", "Default taboo break function: " + new_position.taboo_break_description)
+            if renpy.has_label(new_position.taboo_break_description):
+                #renpy.say("", "Calling default taboo break: " + new_position.taboo_break_description)
+                renpy.call(self.taboo_break_description, the_person, the_location, the_object)
+
+        else: # we are calling from the new position (we don't have an old position to start from)
+            #renpy.say("", "Default taboo break function: " + self.taboo_break_description)
+            if renpy.has_label(self.taboo_break_description):
+                #renpy.say("", "Calling default taboo break: " + self.taboo_break_description)
+                renpy.call(self.taboo_break_description, the_person, the_location, the_object)
+        return
+
+    Position.call_transition_taboo_break = call_transition_taboo_break
+
+

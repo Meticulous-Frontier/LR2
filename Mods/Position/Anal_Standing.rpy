@@ -414,28 +414,23 @@ label transition_default_SB_anal_standing(the_girl, the_location, the_object):
         "[the_girl.possessive_title] obeys then leans forward and puts her hands on [the_object.name]. You bounce your hard shaft on her ass a couple of times before lining yourself up with her sphincter."
     else:
         mc.name "Come stand over here."
-    if the_person.has_taboo("anal_sex"):
-        "[the_girl.possessive_title] leans forward and puts her hands on [the_object.name]. You slide your member between her ass cheeks before lining yourself up with her sphincter."
-        "You lean forward to whisper in her ear."
-        mc.name "I think it's time we stretched your behind open."
-        if the_girl.get_opinion_score("anal sex") > 0:
-            "[the_girl.title] shivers with anticipation."
-        $ the_girl.call_dialogue(doggy_anal.associated_taboo+"_taboo_break")
-        "You move your hand to hold onto [the_girl.title]'s hips with one hand and keep your cock in the other, guiding it as you press it against her tight hole."
-        if the_girl.sex_skills["Anal"] > 2:
-            "She gasps as your tip starts to spread her open. She tilts her head back and pushes her hips against you, helping the process."
-            the_girl.char "Oh god... Mfphhhh!"
-        else:
-            "She gasps as your tip tries to spread open her impossibly tight asshole. She tries to pull away, but you pull on her waist and bring her closer."
-            mc.name "Come on, you'll get there."
-            the_girl.char "Oh god... Fuck!"
-        "Inch by inch you slide your entire length into [the_girl.possessive_title]. She grunts and gasps the whole way down."
-        "You stop when you've bottomed out, to give your cock time to properly stretch her out."
-        the_girl.char "I think... I'm ready for you to move some more..."
-        "You pull back a little bit and give her a few testing strokes. When she can handle those you speed up, until you're thrusting your entire length."
-        $ the_girl.break_taboo("anal_sex")
-    else:
-        call transition_default_anal_penetration_dialog(the_girl, the_location, the_object) from _call_transition_default_anal_penetration_dialog_1
+
+    call transition_default_anal_penetration_dialog(the_girl, the_location, the_object) from _call_transition_default_anal_penetration_dialog_1
+    return
+
+label transition_standing_anal_to_standing_doggy_taboo_break_label(the_girl, the_location, the_object):
+    "You pull your cock out of [the_girl.title]'s ass."
+    "You continue your back and forth motion, rubbing your cock along her pussy lips."
+    if the_girl.get_opinion_score("vaginal sex") > 0:
+        the_girl.char "Oh....Please..."
+    "You continue to move your cock forwards and backwards teasing her pussy."
+    mc.name "Ready."
+    "The word is a command not a question."
+    $ the_girl.call_dialogue(SB_doggy_standing.associated_taboo+"_taboo_break")
+    "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you push forward."
+    "After a moment of resistance your cock spreads her pussy open and you slide smoothly inside of her."
+    the_girl.char "Oh god.... Ah...."
+    "You start with short thrusts, each time going a little bit deeper. Soon you're working your full length in and out of her wet hole."
     return
 
 label transition_SB_anal_standing_doggy_anal(the_girl, the_location, the_object):
@@ -476,38 +471,19 @@ label transition_default_anal_penetration_dialog(the_girl, the_location, the_obj
 label transition_SB_anal_standing_SB_doggy_standing(the_girl, the_location, the_object):
     "You pull out of [the_girl.title]'s asshole, leaving it gaping and her sighing in relief."
     "You shift your cock downwards and rub the tip of it along the slit of her vagina."
-
-    if the_person.has_taboo("vaginal_sex"):
-        "You pull your cock out of [the_girl.title]'s ass."
-        "You continue your back and forth motion, rubbing your cock along her pussy lips."
-        if the_girl.get_opinion_score("vaginal sex") > 0:
-            the_girl.char "Oh....Please..."
-        "You continue to move your cock forwards and backwards teasing her pussy."
-        mc.name "Ready."
-        "The word is a command not a question."
-        $ the_girl.call_dialogue(doggy.associated_taboo+"_taboo_break")
-        "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you push forward."
-        "After a moment of resistance your cock spreads her pussy open and you slide smoothly inside of her."
-        the_girl.char "Oh god.... Ah...."
-        "You start with short thrusts, each time going a little bit deeper. Soon you're working your full length in and out of her wet hole."
-        $ the_girl.break_taboo("vaginal_sex")
-
-    else:
-        "You pull out of [the_girl.title]'s asshole, leaving it gaping and her sighing in relief."
-        "You shift your cock downwards and rub the tip of it along the slit of her vagina."
-        if the_girl.effective_sluttiness() < the_girl.get_no_condom_threshold():
-            the_girl.char "Mmm, fuck me [the_girl.mc_title]. Use all of my holes for your pleasure!"
-        elif not mc.condom:
-            the_girl.char "Wait, wait... I can't risk getting pregnant, I need you to put on a condom."
-            menu:
-                "Put on a condom":
-                    "You pull your dick back and quickly put on a condom. Then you line up your dick with her dripping wet pussy."
-                    $ mc.condom = True
-                "Ram it home!":
-                    mc.name "Don't worry, I'll pull out."
-                    $ the_girl.change_happiness(-5)
+    if the_girl.effective_sluttiness() < the_girl.get_no_condom_threshold():
         the_girl.char "Mmm, fuck me [the_girl.mc_title]. Use all of my holes for your pleasure!"
-        "You grab her by the hips and thrust yourself deep inside her tight, pulsating pussy."
+    elif not mc.condom:
+        the_girl.char "Wait, wait... I can't risk getting pregnant, I need you to put on a condom."
+        menu:
+            "Put on a condom":
+                "You pull your dick back and quickly put on a condom. Then you line up your dick with her dripping wet pussy."
+                $ mc.condom = True
+            "Ram it home!":
+                mc.name "Don't worry, I'll pull out."
+                $ the_girl.change_happiness(-5)
+    the_girl.char "Mmm, fuck me [the_girl.mc_title]. Use all of my holes for your pleasure!"
+    "You grab her by the hips and thrust yourself deep inside her tight, pulsating pussy."
     return
 
 label strip_SB_anal_standing(the_girl, the_clothing, the_location, the_object):

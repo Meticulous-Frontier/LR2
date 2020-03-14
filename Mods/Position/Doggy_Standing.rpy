@@ -315,41 +315,32 @@ label transition_SB_doggy_standing_doggy(the_girl, the_location, the_object):
     the_girl.char "Oh yes, [the_girl.mc_title], make me your little bitch."
     return
 
-label transition_SB_doggy_standing_SB_anal_standing(the_girl, the_location, the_object):
-    #transition from normal doggy style to anal. Include section to pull off condom.
-    if the_person.has_taboo("anal_sex"):
-        "You hold onto [the_girl.title]'s ass cheeks with each hand. You spread them apart, giving you a clear view of her asshole as you continue to fuck her pussy."
-        "You hold her ass cheeks in place with one hand as you pull back and out of [the_girl.title]'s pussy. You hold your cock with the other hand, guiding it as you press the head against her tight hole."
-        "You lean forward to whisper in her ear."
-        mc.name "I think it's time we stretched you open."
-        if the_girl.get_opinion_score("anal sex") > 0:
-            "[the_girl.title] shivers with anticipation."
-        $ the_girl.call_dialogue(doggy_anal.associated_taboo+"_taboo_break")
-        "You move your hand to hold onto [the_girl.title]'s hips with one hand and keep your cock in the other, guiding it as you press it against her tight hole."
-        if the_girl.sex_skills["Anal"] > 2:
-            "She gasps as your tip starts to spread her open. She tilts her head back and pushes her hips against you, helping the process."
-            the_girl.char "Oh god... Mfphhhh!"
-
-        else:
-            "She gasps as your tip tries to spread open her impossibly tight asshole. She tries to pull away, but you pull on her waist and bring her closer."
-            mc.name "Come on, you'll get there."
-            if the_girl.arousal >= 70 or report_log.get("girl orgasms", 0) > 0:
-                "Your cock is still wet from [the_girl.title]'s pussy. You push steadily as you slide the tip into [the_girl.title]'s ass."
-            else:
-                "You pull back slightly, spit onto your cock and try again. This time making better progress, sliding the tip of your dick into [the_girl.title]'s ass."
-            the_girl.char "Oh god... Fuck!"
-        "Inch by inch you slide your entire length into [the_girl.possessive_title]. She grunts and gasps the whole way down."
-        "You stop when you've bottomed out, to give your cock time to properly stretch her out."
-        the_girl.char "I think... I'm ready for you to move some more..."
-        "You pull back a little bit and give her a few testing strokes. When she can handle those you speed up, until you're thrusting your entire length."
-
-        $ the_girl.break_taboo("anal_sex")
+label transition_standing_doggy_to_standing_anal_taboo_break_label(the_girl, the_location, the_object):
+    "You hold onto [the_girl.title]'s ass cheeks with each hand. You spread them apart, giving you a clear view of her asshole as you continue to fuck her pussy."
+    if the_girl.arousal >= 70 or report_log.get("girl orgasms", 0) > 0:
+        "You pull out of [the_girl.title]'s wet pussy, leaving it dripping fluids on the floor. You hold her ass cheeks in place with one hand, while you guide your well lubed cock to her tight hole."
     else:
+        "You hold her ass cheeks in place with one hand as you pull back and out of [the_girl.title]'s pussy. You hold your cock with the other hand, guiding it as you press the head against her tight hole."
+    "You lean forward to whisper in her ear."
+    mc.name "I think it's time we stretched you open."
+    $ the_girl.call_dialogue(SB_anal_standing.associated_taboo+"_taboo_break")
+    if the_girl.get_opinion_score("anal sex") > 0:
+        "[the_girl.title] shivers with anticipation."
+    if the_girl.sex_skills["Anal"] > 2:
+        "She gasps as your tip starts to spread her open. She tilts her head back and pushes her hips against you, helping the process."
+        the_girl.char "Oh god... Mfphhhh!"
+    else:
+        "She gasps as your tip tries to spread open her impossibly tight asshole. She tries to pull away, but you pull on her waist and bring her closer."
+        mc.name "Come on, you'll get there."
         if the_girl.arousal >= 70 or report_log.get("girl orgasms", 0) > 0:
-            "You pull out of [the_girl.title]'s wet pussy, leaving it dripping fluids on the floor."
-
-        "You line your cock up with her asshole, the tip just barely pressing against it."
-        call transition_default_anal_penetration_dialog(the_girl, the_location, the_object) from _call_transition_default_anal_penetration_dialog_2
+            "Your cock is still wet from [the_girl.title]'s pussy. You push steadily as you slide the tip into [the_girl.title]'s ass."
+        else:
+            "You pull back slightly, spit onto your cock and try again. This time making better progress, sliding the tip of your dick into [the_girl.title]'s ass."
+        the_girl.char "Oh god... Fuck!"
+    "Inch by inch you slide your entire length into [the_girl.possessive_title]. She grunts and gasps the whole way down."
+    "You stop when you've bottomed out, to give your cock time to properly stretch her out."
+    the_girl.char "I think... I'm ready for you to move some more..."
+    "You pull back a little bit and give her a few testing strokes. When she can handle those you speed up, until you're thrusting your entire length."
     return
 
 label transition_default_SB_doggy_standing(the_girl, the_location, the_object):

@@ -183,53 +183,25 @@ label scene_SB_doggy_anal_2(the_girl, the_location, the_object):
     return
 
 label transition_default_doggy_anal_enhanced(the_girl, the_location, the_object):
-    if the_person.has_taboo("anal_sex"):
-        if the_girl.effective_sluttiness(doggy_anal.associated_taboo) > doggy_anal.slut_cap or the_girl.get_opinion_score("showing her ass") > 0:
-            $ the_girl.draw_person(position = "back_peek", the_animation = ass_bob)
-            "She stands facing away from you and jiggles her butt playfully."
-            mc.name "Get on your knees, I want to get a look at this ass."
-            the_girl.char "This big fat ass? You finally want to take a closer look?"
-            mc.name "I said on your knees."
-            $ the_girl.draw_person(position = "doggy", the_animation = ass_bob, animation_effect_strength = 0.7)
-            "She gets onto the [the_object.name] and points her butt in your direction. She lowers her shoulders and works her hips for you."
+    "[the_girl.title] gets on her hands and knees as you kneel behind her. You bounce your hard shaft on her ass a couple of times before lining yourself up with tight asshole."
+    mc.name "Ready?"
+    the_girl.char "I... I think so."
+    "You hold onto her hips and push forward, spreading her ass with your large cock. She gasps and balls her fists, until finally you've buried your shaft in her."
+    "After giving her a second to acclimatize you start to thrust in and out, slowly at first but picking up speed."
+    return
 
-        else:
-            $ the_girl.draw_person(position = "kneeling1")
-            mc.name "Get on your knees."
-            mc.name "Good girl, now spin around and show me that ass."
-            "She nods and turns around."
-            $ the_girl.draw_person(position = "doggy")
-            mc.name "Nice. Now shake it for me."
-            the_girl.char "Like... this?"
-            $ the_girl.draw_person(position = "doggy", the_animation = ass_bob, animation_effect_strength = 0.4)
-            "[the_girl.title] works her hips and jiggles her ass for you."
-            mc.name "Getting there, a little faster now."
-            $ the_girl.draw_person(position = "doggy", the_animation = ass_bob, animation_effect_strength = 0.7)
-            "She speeds up."
-        the_girl.char "Is that what you wanted?"
-        "You slap your cock down on her ass and grab her tight cheeks, spreading them apart to get a look at her asshole."
-        mc.name "It's a start. I think it's time we stretched you open."
-        $ the_girl.call_dialogue(doggy_anal.associated_taboo+"_taboo_break")
-        "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you press it against her tight hole."
-        if the_girl.sex_skills["Anal"] > 2:
-            "She gasps as your tip starts to spread her open. She lowers her shoulders and pushes her hips against you, helping the process."
-            the_girl.char "Oh god... Mfphhhh!"
-
-        else:
-            "She gasps as your tip tries to spread open her impossibly tight asshole. She tries to pull away, but you pull on her waist and bring her closer."
-            mc.name "Come on, you'll get there."
-            "You spit onto your cock and try again. This time making better progress, sliding the tip of your dick into [the_girl.title]'s ass."
-            the_girl.char "Oh god... Fuck!"
-        "Inch by inch you slide your entire length into [the_girl.possessive_title]. She grunts and gasps the whole way down."
-        "When stop when you've bottomed out, to give your cock time to properly stretch her out."
-        the_girl.char "I think... I'm ready for you to move some more..."
-        "You pull back a little bit and give her a few testing strokes. When she can handle those you speed up, until you're thrusting your entire length."
-        $ the_girl.break_taboo("anal_sex")
+# slightly modified dialog for when going the other way (she doesn't need to get on her hand and knees anymore)
+label transition_anal_doggy_to_doggy_taboo_break_label(the_girl, the_location, the_object):
+    the_girl.char "Are you enjoying pounding my tight asshole?"
+    "You slide your cock out of her ass and drag it down between her legs, ending with your tip resting against her pussy."
+    mc.name "No, this is what I really want."
+    $ the_girl.call_dialogue(doggy.associated_taboo+"_taboo_break")
+    "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you push forward."
+    "After a moment of resistance your cock spreads her pussy open and you slide smoothly inside of her."
+    if the_girl.sex_skills["Vaginal"] > 2:
+        the_girl.char "Oh god yes.... keep sliding that monster into me...."
+        "You ram your whole length into her wet pussy and start pounding her."
     else:
-        "[the_girl.title] gets on her hands and knees as you kneel behind her. You bounce your hard shaft on her ass a couple of times before lining yourself up with tight asshole."
-        mc.name "Ready?"
-        the_girl.char "I... I think so."
-        "You hold onto her hips and push forward, spreading her ass with your large cock. She gasps and balls her fists, until finally you've buried your shaft in her."
-        "After giving her a second to acclimatize you start to thrust in and out, slowly at first but picking up speed."
-
+        the_girl.char "Oh god... take it slow... "
+        "You give her short thrusts, each time going a little bit deeper. Soon you're working your full length in and out of her wet hole."
     return
