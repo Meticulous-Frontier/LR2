@@ -1,7 +1,8 @@
 # overrides default transition for now (it has no taboo break support)
 # Original Code by BadRabbit
 init 5 python:
-    config.label_overrides["transition_standing_grope_standing_fingering"] = "transition_standing_grope_standing_fingering_enhanced"
+    standing_grope.transitions.remove([standing_finger, "transition_standing_grope_standing_fingering"])
+    standing_grope.transitions.append([standing_finger, "transition_standing_grope_standing_fingering_enhanced"])
 
 label transition_standing_grope_standing_fingering_enhanced(the_girl, the_location, the_object):
     "You kiss [the_girl.title]'s neck from behind, distracting her from your hand sliding along her inner thigh and towards her crotch."

@@ -2,7 +2,7 @@ init 5 python:
     doggy_anal.scenes.append("scene_SB_doggy_anal_1")
     doggy_anal.scenes.append("scene_SB_doggy_anal_2")
 
-    config.label_overrides["transition_default_doggy_anal"] = "transition_default_doggy_anal_enhanced"
+    doggy_anal.transition_default = "transition_default_doggy_anal_enhanced"
 
 label scene_SB_doggy_anal_1(the_girl, the_location, the_object):
     "You give [the_girl.possessive_title]'s ass a good hard spank. She lets out a loud yelp."

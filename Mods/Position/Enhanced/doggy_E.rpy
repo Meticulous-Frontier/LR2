@@ -1,5 +1,5 @@
 init 5 python:
-    config.label_overrides["transition_default_doggy"] = "transition_default_doggy_enhanced"
+    doggy.transition_default = "transition_default_doggy_enhanced"
 
 label transition_default_doggy_enhanced(the_girl, the_location, the_object):
     if the_person.has_taboo("vaginal_sex"):

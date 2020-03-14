@@ -2,14 +2,15 @@
 # Original code by BadRabbit
 
 init 5 python:
-    config.label_overrides["intro_blowjob"] = "intro_blowjob_enhanced"
-    config.label_overrides["outro_blowjob"] = "outro_blowjob_enhanced"
-    config.label_overrides["outro_deepthroat"] = "outro_deepthroat_enhanced"
-    config.label_overrides["outro_skull_fuck"] = "outro_skull_fuck_enhanced"
+    blowjob.intro = "intro_blowjob_enhanced"
+    blowjob.outro = "outro_blowjob_enhanced"
+    blowjob.transition_default = "transition_default_blowjob_enhanced"
+    deepthroat.outro = "outro_deepthroat_enhanced"
+    deepthroat.transition_default = "transition_default_deepthroat_enhanced"
+    skull_fuck.outro = "outro_skull_fuck_enhanced"
 
-    config.label_overrides["transition_default_blowjob"] = "transition_default_blowjob_enhanced"
-    config.label_overrides["transition_blowjob_deepthroat"] = "transition_blowjob_deepthroat_enhanced"
-    config.label_overrides["transition_default_deepthroat"] = "transition_default_deepthroat_enhanced"
+    blowjob.transitions.remove([deepthroat, "transition_blowjob_deepthroat"])
+    blowjob.transitions.append([deepthroat, "transition_blowjob_deepthroat_enhanced"])
 
 label intro_blowjob_enhanced(the_girl, the_location, the_object):
     "You unzip your pants and pull your underwear down far enough to let your hard cock out."
@@ -268,61 +269,57 @@ label blowjob_enhanced_kneel_mouth_cum(the_girl):
                if the_girl.get_opinion_score("being submissive") > 0:
                    $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive"))
                else:
-                   $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive"))
-                   $ the_girl.change_love(the_girl.get_opinion_score("drinking cum"))
-                   $ the_girl.change_happiness(the_girl.get_opinion_score("drinking cum"))
+                   $ the_girl.change_stats(arousal = the_girl.get_opinion_score("being submissive"), love = the_girl.get_opinion_score("drinking cum"), happiness = the_girl.get_opinion_score("drinking cum"))
     else:
-       if SB_check_fetish(the_girl, oral_fetish_role):
-           "[the_girl.possessive_title] goes as deep as she can on your dick, trying to get as much of it in her mouth as possible."
-           "You feel [the_girl.possessive_title] take you all the way in her mouth as you start to orgasm."
-           "You grunt and twitch as you start to empty your balls right into her throat."
-           "She tightens and relaxes her throat, swallowing your erection over and over as it spurts every last drop of cum straight down her throat."
-           $ the_girl.cum_in_mouth()
-           $ blowjob.redraw_scene(the_girl)
-           "When you're completely finished she pulls back slightly so that she can breathe more easily."
-           $ the_girl.call_dialogue("cum_mouth")
-       elif SB_check_fetish(the_girl, cum_internal_role):
-           "She keeps blowing you until you tense up and start to pump your load out into her mouth."
-           "[the_girl.possessive_title] pulls her head back until just the tip of your cock is in her mouth and she begins to stroke you."
-           "You erupt in orgasm into her greedy mouth. Her expert mouth milks you with every spurt."
-           "[the_girl.possessive_title] begins moaning uncontrollably around your spasming cock when her cum addicted brain registers her cum dosage."
-           $ the_girl.cum_in_mouth()
-           $ blowjob.redraw_scene(the_girl)
-           $ the_girl.change_arousal(10)
-           $ the_girl.call_dialogue("cum_mouth")
-       elif the_girl.effective_sluttiness() > 70 or the_girl.get_opinion_score("giving blowjobs") > 0:
-           "[the_girl.possessive_title] doesn't even flinch as you shoot your hot cum across the back of her throat."
-           "She keeps bobbing her head up and down until you've let out every last drop, then slides back carefully. She looks up at you and opens her mouth to shows it full of sperm."
-           $ the_girl.cum_in_mouth()
-           $ blowjob.redraw_scene(the_girl)
-       else:
-           "[the_girl.possessive_title] stops when you shoot your first blast of hot cum across the back of her throat."
-           "She pulls back, leaving just the tip of your cock in her mouth as you fill it up with semen. Once you've finished she slides off, looks up at you and opens her mouth to shows it full of sperm."
-           $ the_girl.cum_in_mouth()
-           $ blowjob.redraw_scene(the_girl)
+        if SB_check_fetish(the_girl, oral_fetish_role):
+            "[the_girl.possessive_title] goes as deep as she can on your dick, trying to get as much of it in her mouth as possible."
+            "You feel [the_girl.possessive_title] take you all the way in her mouth as you start to orgasm."
+            "You grunt and twitch as you start to empty your balls right into her throat."
+            "She tightens and relaxes her throat, swallowing your erection over and over as it spurts every last drop of cum straight down her throat."
+            $ the_girl.cum_in_mouth()
+            $ blowjob.redraw_scene(the_girl)
+            "When you're completely finished she pulls back slightly so that she can breathe more easily."
+            $ the_girl.call_dialogue("cum_mouth")
+        elif SB_check_fetish(the_girl, cum_internal_role):
+            "She keeps blowing you until you tense up and start to pump your load out into her mouth."
+            "[the_girl.possessive_title] pulls her head back until just the tip of your cock is in her mouth and she begins to stroke you."
+            "You erupt in orgasm into her greedy mouth. Her expert mouth milks you with every spurt."
+            "[the_girl.possessive_title] begins moaning uncontrollably around your spasming cock when her cum addicted brain registers her cum dosage."
+            $ the_girl.cum_in_mouth()
+            $ blowjob.redraw_scene(the_girl)
+            $ the_girl.change_arousal(10)
+            $ the_girl.call_dialogue("cum_mouth")
+        elif the_girl.effective_sluttiness() > 70 or the_girl.get_opinion_score("giving blowjobs") > 0:
+            "[the_girl.possessive_title] doesn't even flinch as you shoot your hot cum across the back of her throat."
+            "She keeps bobbing her head up and down until you've let out every last drop, then slides back carefully. She looks up at you and opens her mouth to shows it full of sperm."
+            $ the_girl.cum_in_mouth()
+            $ blowjob.redraw_scene(the_girl)
+        else:
+            "[the_girl.possessive_title] stops when you shoot your first blast of hot cum across the back of her throat."
+            "She pulls back, leaving just the tip of your cock in her mouth as you fill it up with semen. Once you've finished she slides off, looks up at you and opens her mouth to shows it full of sperm."
+            $ the_girl.cum_in_mouth()
+            $ blowjob.redraw_scene(the_girl)
 
 
-       if not SB_check_fetish(the_girl, oral_fetish_role) and not SB_check_fetish(the_girl, cum_internal_role):
-           if (SB_check_fetish(the_girl, cum_external_role) or the_girl.get_opinion_score("being covered in cum") > 0) and the_girl.outfit.tits_available():
-               "[the_girl.possessive_title] tilts her head forward and let your cum dribble out of her mouth onto her bare tits."
-               $ the_girl.call_dialogue("cum_mouth")
-               $ the_girl.cum_on_tits()
-               $ blowjob.redraw_scene(the_girl)
-               "She starts to rub your cum on her breasts."
-               if SB_check_fetish(the_girl, cum_external_role):
-                   $ the_girl.change_arousal(10)
-           elif the_girl.effective_sluttiness() > 80 or the_girl.get_opinion_score("drinking cum") > 0:
-               "Once you've had a good long look at your work [the_girl.title] closes her mouth and swallows loudly."
-               "It takes a few big gulps to get every last drop of your cum down, but when she opens up again it's all gone."
-               $ blowjob.current_modifier = None
-               $ blowjob.redraw_scene(the_girl)
-               $ the_girl.call_dialogue("cum_mouth")
-           else:
-               "Once you've had a good long look at your work [the_girl.title] leans over to the side and lets your cum dribble out slowly onto the ground."
-               "She straightens up and wipes her lips with the back of her hand."
-               $ blowjob.current_modifier = None
-               $ blowjob.redraw_scene(the_girl)
-               $ the_girl.call_dialogue("cum_mouth")
+        if not (SB_check_fetish(the_girl, oral_fetish_role) or SB_check_fetish(the_girl, cum_internal_role)):
+            if the_girl.get_opinion_score("being covered in cum") > 0 and the_girl.outfit.tits_available():
+                "[the_girl.possessive_title] tilts her head forward and let your cum dribble out of her mouth onto her bare tits."
+                $ the_girl.call_dialogue("cum_mouth")
+                $ the_girl.cum_on_tits()
+                $ blowjob.redraw_scene(the_girl)
+                "She starts to rub your cum on her breasts."
+            elif the_girl.effective_sluttiness() > 80 or the_girl.get_opinion_score("drinking cum") > 0:
+                "Once you've had a good long look at your work [the_girl.title] closes her mouth and swallows loudly."
+                "It takes a few big gulps to get every last drop of your cum down, but when she opens up again it's all gone."
+                $ blowjob.current_modifier = None
+                $ blowjob.redraw_scene(the_girl)
+                $ the_girl.call_dialogue("cum_mouth")
+            else:
+                "Once you've had a good long look at your work [the_girl.title] leans over to the side and lets your cum dribble out slowly onto the ground."
+                "She straightens up and wipes her lips with the back of her hand."
+                $ blowjob.current_modifier = None
+                $ blowjob.redraw_scene(the_girl)
+                $ the_girl.call_dialogue("cum_mouth")
     return
 
 
