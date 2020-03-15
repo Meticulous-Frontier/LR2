@@ -58,10 +58,10 @@ label wardrobe_change_label_enhanced(the_person):
         call screen girl_outfit_select_manager(the_person.wardrobe, show_sets = True, slut_limit = the_person.effective_sluttiness() + 20)
         if _return != "None":
             $ the_person.set_outfit(_return)
+            if the_person.update_outfit_taboos():
+                "[the_person.title] seems nervous wearing her new outfit in front of you, but quickly warms up to it."
+            the_person.char "Is this better?"
         else:
             $ the_person.review_outfit(dialogue = False)
         $ the_person.draw_person()
-        if the_person.update_outfit_taboos():
-            "[the_person.title] seems nervous wearing her new outfit in front of you, but quickly warms up to it."
-        the_person.char "Is this better?"
     return
