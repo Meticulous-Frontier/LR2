@@ -17,7 +17,7 @@ transform Threesome_standing_embrace_girl_two_transform():
 init:
     python:
         Threesome_standing_embrace_fuck_girl_two = Threesome_MC_position(name = "fuck_girl_2",
-            description = "Fuck [the_person_{0}.title]",
+            action_description = "Fuck [the_person_{0}.title]",
             default_action_person = "two",
             skill_tag_p1 = "Foreplay",
             skill_tag_p2 = "Vaginal",
@@ -41,7 +41,7 @@ init:
             requirement = requirement_hard_both_vagina_available)
 
         Threesome_standing_embrace_oral_girl_two = Threesome_MC_position(name = "Oral_girl_2",
-            description = "Lick [the_person_{0}.title]",
+            action_description = "Lick [the_person_{0}.title]",
             default_action_person = "two",
             skill_tag_p1 = "Foreplay",
             skill_tag_p2 = "Oral",
