@@ -590,7 +590,7 @@ label threesome_round(the_person_one, the_person_two, position_choice, round = 0
             $ report_log["total orgasms"] += 1
         if the_person_two.arousal >= the_person_two.max_arousal:
             $ mc.listener_system.fire_event("girl_climax", the_person = the_person_two)
-            $ the_person_one.change_stats(arousal = -the_person_two.arousal/2, happiness = 5, slut_temp = 5)
+            $ the_person_two.change_stats(arousal = -the_person_two.arousal/2, happiness = 5, slut_temp = 5)
             $ report_log["girl two orgasms"] += 1
             $ report_log["total orgasms"] += 1
 
