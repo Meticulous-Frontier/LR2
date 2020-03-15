@@ -156,7 +156,7 @@ init -1 python:
 
     def Sarah_stripclub_story_requirement():
         epic_tits_progress = sarah.event_triggers_dict.get("epic_tits_progress", 0)
-        if epic_tits_progress < 3 and not epic_tits_progress == -1:  #Don't run until after she has bigger tits of you convinced her not to do it
+        if epic_tits_progress < 2 and not epic_tits_progress == -1:  #Don't run until after she has bigger tits of you convinced her not to do it
             return False
         if time_of_day > 2:   #Only in the evening when the strippers are at the club
             if sarah.sluttiness > 50:
