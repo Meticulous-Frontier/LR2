@@ -27,7 +27,7 @@ init -2 python:
             if person.situational_obedience[situation][0] > 0:
                 positive_effects += get_coloured_arrow(1)+"+"+__builtin__.str(person.situational_obedience[situation][0])+ " Obedience - " + person.situational_obedience[situation][1] + "\n"
             elif person.situational_obedience[situation][0] < 0:
-                negative_effects += get_coloured_arrow(1)+""+__builtin__.str(person.situational_obedience[situation][0])+ " Obedience - " + person.situational_obedience[situation][1] + "\n"
+                negative_effects += get_coloured_arrow(-1)+""+__builtin__.str(person.situational_obedience[situation][0])+ " Obedience - " + person.situational_obedience[situation][1] + "\n"
         tooltip += positive_effects + negative_effects
         return tooltip
 
