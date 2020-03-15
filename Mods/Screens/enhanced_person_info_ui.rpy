@@ -1,16 +1,22 @@
 # Override default person_info_ui screen by VREN to show extra information about character
 init -2 python:
+    def person_info_ui_format_hearts(value):
+        heart_value = abs(value)
+        if (heart_value / 4) > 10:
+            return get_gold_heart(heart_value / 4)
+        return get_red_heart(heart_value)
+
+
     def person_info_ui_get_formatted_tooltip(person):
         tooltip = ""
         positive_effects = ""
         negative_effects = ""
         for situation in person.situational_sluttiness:
             if person.situational_sluttiness[situation][0] > 0: #We purposefully ignore 0 so we don't show null sluttiness modifiers.
-                positive_effects += get_coloured_arrow(1)+get_red_heart(person.situational_sluttiness[situation][0])+" - " + person.situational_sluttiness[situation][1] + "\n"
+                positive_effects += get_coloured_arrow(1) + " " + person_info_ui_format_hearts(person.situational_sluttiness[situation][0]) + " - " + person.situational_sluttiness[situation][1] + "\n"
             elif person.situational_sluttiness[situation][0] < 0:
-                negative_effects += get_coloured_arrow(-1)+get_red_heart(-person.situational_sluttiness[situation][0])+" - " + person.situational_sluttiness[situation][1] + "\n"
+                negative_effects += get_coloured_arrow(-1) + " " + person_info_ui_format_hearts(person.situational_sluttiness[situation][0]) + " - " + person.situational_sluttiness[situation][1] + "\n"
         tooltip += positive_effects + negative_effects
-        tooltip += "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is easier to raise but drops slowly over time. Core sluttiness (" + get_gold_heart(20) + ") is permanent, but only increases slowly unless a girl is suggestible."
         return tooltip
 
     def person_info_ui_get_formatted_obedience_tooltip(person):
@@ -23,7 +29,6 @@ init -2 python:
             elif person.situational_obedience[situation][0] < 0:
                 negative_effects += get_coloured_arrow(1)+""+__builtin__.str(person.situational_obedience[situation][0])+ " Obedience - " + person.situational_obedience[situation][1] + "\n"
         tooltip += positive_effects + negative_effects
-        tooltip += "Girls with high obedience will listen to commands even when they would prefer not to and are willing to work for less pay. Girls who are told to do things they do not like will lose happiness, and low obedience girls are likely to refuse altogether."
         return tooltip
 
 init 2:
@@ -92,12 +97,21 @@ init 2:
                     #     action NullAction()
                     #     sensitive True
 
-                    textbutton "Sluttiness: " + get_heart_image_list(person):
-                        ysize 28
-                        text_style "menu_text_style"
-                        tooltip person_info_ui_get_formatted_tooltip(person)
-                        action NullAction()
-                        sensitive True
+                    hbox:
+                        textbutton "Sluttiness: " + get_heart_image_list(person):
+                            ysize 28
+                            text_style "menu_text_style"
+                            tooltip "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is easier to raise but drops slowly over time. Core sluttiness (" + get_gold_heart(20) + ") is permanent, but only increases slowly unless a girl is suggestible."
+                            action NullAction()
+                            sensitive True
+
+                        if any(x[0] > 0 or x[0] < 0 for x in person.situational_sluttiness.itervalues()):
+                            textbutton "{image=question_mark_small}":
+                                yoffset 6
+                                ysize 28
+                                tooltip person_info_ui_get_formatted_tooltip(person)
+                                action NullAction()
+                                sensitive True
 
                     textbutton "Love: [person.love]":
                         ysize 28
@@ -106,13 +120,21 @@ init 2:
                         action NullAction()
                         sensitive True
 
-                    textbutton "Obedience: [person.obedience] - " + get_obedience_plaintext(person.obedience):
-                        ysize 28
-                        text_style "menu_text_style"
-                        tooltip person_info_ui_get_formatted_obedience_tooltip(person)
-                        action NullAction()
-                        sensitive True
+                    hbox:
+                        textbutton "Obedience: [person.obedience] - " + get_obedience_plaintext(person.obedience):
+                            ysize 28
+                            text_style "menu_text_style"
+                            tooltip "Girls with high obedience will listen to commands even when they would prefer not to and are willing to work for less pay. Girls who are told to do things they do not like will lose happiness, and low obedience girls are likely to refuse altogether."
+                            action NullAction()
+                            sensitive True
 
+                        if any(x[0] > 0 or x[0] < 0 for x in person.situational_obedience.itervalues()):
+                            textbutton "{image=question_mark_small}":
+                                yoffset 6
+                                ysize 28
+                                tooltip person_info_ui_get_formatted_obedience_tooltip(person)
+                                action NullAction()
+                                sensitive True
 
                 vbox:
                     hbox:

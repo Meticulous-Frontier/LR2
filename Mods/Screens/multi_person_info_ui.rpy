@@ -66,18 +66,36 @@ screen multi_person_info_ui(actors):
                         action NullAction()
                         sensitive True
 
-                    textbutton "Sluttiness: " + get_heart_image_list(actor.person):
-                        ysize 23
-                        yoffset -10
-                        text_style "menu_text_style"
-                        tooltip person_info_ui_get_formatted_tooltip(actor.person)
-                        action NullAction()
-                        sensitive True
+                    hbox:
+                        textbutton "Sluttiness: " + get_heart_image_list(actor.person):
+                            ysize 23
+                            yoffset -10
+                            text_style "menu_text_style"
+                            tooltip "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is easier to raise but drops slowly over time. Core sluttiness (" + get_gold_heart(20) + ") is permanent, but only increases slowly unless a girl is suggestible."
+                            action NullAction()
+                            sensitive True
 
-                    textbutton "Obedience: [actor.person.obedience] - " + get_obedience_plaintext(actor.person.obedience):
-                        ysize 23
-                        yoffset -10
-                        text_style "menu_text_style"
-                        tooltip person_info_ui_get_formatted_obedience_tooltip(actor.person)
-                        action NullAction()
-                        sensitive True
+                        if any(x[0] > 0 or x[0] < 0 for x in actor.person.situational_sluttiness.itervalues()):
+                            textbutton "{image=question_mark_small}":
+                                yoffset 4
+                                ysize 23
+                                tooltip person_info_ui_get_formatted_tooltip(actor.person)
+                                action NullAction()
+                                sensitive True
+
+                    hbox:
+                        textbutton "Obedience: [actor.person.obedience] - " + get_obedience_plaintext(actor.person.obedience):
+                            ysize 23
+                            yoffset -10
+                            text_style "menu_text_style"
+                            tooltip "Girls with high obedience will listen to commands even when they would prefer not to and are willing to work for less pay. Girls who are told to do things they do not like will lose happiness, and low obedience girls are likely to refuse altogether."
+                            action NullAction()
+                            sensitive True
+
+                        if any(x[0] > 0 or x[0] < 0 for x in actor.person.situational_obedience.itervalues()):
+                            textbutton "{image=question_mark_small}":
+                                yoffset 4
+                                ysize 23
+                                tooltip person_info_ui_get_formatted_obedience_tooltip(actor.person)
+                                action NullAction()
+                                sensitive True

@@ -16,6 +16,9 @@ init 5 python:
     arousal_token_small_image = im.Scale(Image(get_file_handle("arousal_token.png")), 18, 18)
     renpy.image("arousal_token_small", arousal_token_small_image)
 
+    question_mark_small_image = im.Scale(Image(get_file_handle("question.png")), 18, 18)
+    renpy.image("question_mark_small", question_mark_small_image)
+
 
 label updated_room_background(stack):
     python:
