@@ -1,31 +1,5 @@
-init -2 python:
-    def get_sluttiness_info_tooltip(person):
-        tooltip = ""
-        positive_effects = ""
-        negative_effects = ""
-        for situation in person.situational_sluttiness:
-            if person.situational_sluttiness[situation][0] > 0: #We purposefully ignore 0 so we don't show null sluttiness modifiers.
-                positive_effects += get_coloured_arrow(1)+get_red_heart(person.situational_sluttiness[situation][0])+" - " + person.situational_sluttiness[situation][1] + "\n"
-            elif person.situational_sluttiness[situation][0] < 0:
-                negative_effects += get_coloured_arrow(-1)+get_red_heart(-person.situational_sluttiness[situation][0])+" - " + person.situational_sluttiness[situation][1] + "\n"
-        tooltip += positive_effects + negative_effects
-        tooltip += "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is easier to raise but drops slowly over time. Core sluttiness (" + get_gold_heart(20) + ") is permanent, but can only be created by using serum to raise suggestability or by making a girl climax."
-        return tooltip
-
-    def get_obedience_info_tooltip(person):
-        tooltip = ""
-        positive_effects = ""
-        negative_effects = ""
-        for situation in person.situational_obedience:
-            if person.situational_obedience[situation][0] > 0:
-                positive_effects += get_coloured_arrow(1)+"+"+__builtin__.str(person.situational_obedience[situation][0])+ " Obedience - " + person.situational_obedience[situation][1] + "\n"
-            elif person.situational_obedience[situation][0] < 0:
-                negative_effects += get_coloured_arrow(1)+""+__builtin__.str(person.situational_obedience[situation][0])+ " Obedience - " + person.situational_obedience[situation][1] + "\n"
-        tooltip += positive_effects + negative_effects
-        tooltip += "Girls with high obedience will listen to commands even when they would prefer not to and are willing to work for less pay. Girls who are told to do things they do not like will lose happiness, and low obedience girls are likely to refuse altogether."
-        return tooltip
-
-screen multi_person_info_ui(actors): #Used to display stats for multi people while you're talking to them, takes an array of Actor objects.
+#Used to display stats for multi people while you're talking to them, takes an array of Actor objects.
+screen multi_person_info_ui(actors): 
     layer "Active"
     frame:
         background Frame("gui/topbox.png")
@@ -96,7 +70,7 @@ screen multi_person_info_ui(actors): #Used to display stats for multi people whi
                         ysize 23
                         yoffset -10
                         text_style "menu_text_style"
-                        tooltip get_sluttiness_info_tooltip(actor.person)
+                        tooltip person_info_ui_get_formatted_tooltip(actor.person)
                         action NullAction()
                         sensitive True
 
@@ -104,6 +78,6 @@ screen multi_person_info_ui(actors): #Used to display stats for multi people whi
                         ysize 23
                         yoffset -10
                         text_style "menu_text_style"
-                        tooltip get_obedience_info_tooltip(actor.person)
+                        tooltip person_info_ui_get_formatted_obedience_tooltip(actor.person)
                         action NullAction()
                         sensitive True
