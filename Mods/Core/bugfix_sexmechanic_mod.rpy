@@ -8,6 +8,7 @@ init 5 python:
     config.label_overrides["pick_object"] = "pick_object_enhanced"
     config.label_overrides["watcher_check"] = "watcher_check_enhanced"
     config.label_overrides["condom_ask"] = "condom_ask_enhanced"
+    config.label_overrides["girl_strip_event"] = "girl_strip_event_enhanced"
 
     def girl_choose_position_enhanced(person, ignore_taboo = False):
         position_option_list = []
@@ -739,6 +740,31 @@ label relationship_being_watched(the_person, the_watcher, the_relation, the_posi
         $ the_person.change_stats(arousal = 1, slut_temp = 1)
         "[the_person.title] seems more comfortable [the_position.verbing] you with her [the_relation] around."
 
+    return
+
+label girl_strip_event_enhanced(the_person, the_position, the_object):
+    # first we determine if we should strip at all (when we have full access there is no need for this blocking dialog)
+    if the_person.outfit.tits_available() and not the_person.outfit.wearing_bra() and the_person.outfit.vagina_available() and not the_person.outfit.wearing_panties():
+        # she is fully fuckable exit
+        return
+
+    # Called when the girl has a chance of stripping down. Checks what she's prefer to strip based on her opinions.
+    $ strip_chance = the_person.effective_sluttiness() - the_person.outfit.slut_requirement
+    $ strip_chance += the_person.get_opinion_score("not wearing anything") * 5
+    $ the_clothing = None
+    if the_person.get_opinion_score("showing her tits") > the_person.get_opinion_score("showing her ass"): # If she has a preference (even a least-bad preference) she'll strip that down first.
+        $ the_clothing = the_person.outfit.remove_random_any(exclude_feet = True, exclude_lower = True, do_not_remove = True)
+    elif the_person.get_opinion_score("showing her tits") < the_person.get_opinion_score("showing her ass"):
+        $ the_clothing = the_person.outfit.remove_random_any(exclude_feet = True, exclude_upper = True, do_not_remove = True)
+    if the_clothing is None: #Either our previous checks failed to produce anything OR they were equal
+        $ the_clothing = the_person.outfit.remove_random_any(exclude_feet = True, do_not_remove = True)
+
+    if renpy.random.randint(0,100) < strip_chance and the_clothing:
+        $ ask_chance = renpy.random.randint(0,100)
+        if ask_chance < the_person.obedience - the_person.arousal:
+            $ the_position.call_strip_ask(the_person, the_clothing, mc.location, the_object)
+        else:
+            $ the_position.call_strip(the_person, the_clothing, mc.location, the_object) #If a girl's outfit is less slutty than she is currently feeling (with arousal factored in) she will want to strip stuff off.
     return
 
 # call after striping to show the stripping taboo break dialog

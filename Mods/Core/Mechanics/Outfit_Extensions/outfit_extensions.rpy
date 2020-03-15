@@ -144,13 +144,13 @@ init -1 python:
 
 # initialize this part after wardrobe builder is initialized
 init 6 python:
-    def tits_available_enhanced(self):
-        for cloth in self.upper_body:
-            if cloth.anchor_below and not cloth in [cincher, heart_pasties, vest]:
-                return False
-        return True
+    def wearing_bra_enhanced(self):
+        if self.get_upper_ordered():
+            if self.get_upper_ordered()[0].underwear and not self.get_upper_ordered()[0] in [cincher, heart_pasties]:
+                return True
+        return False
 
-    Outfit.tits_available = tits_available_enhanced
+    Outfit.wearing_bra = wearing_bra_enhanced
 
     def get_total_slut_modifiers_enhanced(self):
         def clothing_in_preferences(topic, clothing):
