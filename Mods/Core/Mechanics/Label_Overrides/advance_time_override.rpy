@@ -267,9 +267,9 @@ label advance_time_random_crisis_label():
         $ crisis_chance = crisis_base_chance
         if not the_crisis in excluded_crisis_tracker_events:
             $ crisis_tracker.append([c[0] for c in crisis_list].index(the_crisis)) # add crisis index to recent crisis list
+        $ the_crisis.call_action()
         if _return == "Advance Time":
             $ mandatory_advance_time = True
-        $ the_crisis.call_action()
         $ del the_crisis
     $ mc.location.show_background()
     show screen business_ui
