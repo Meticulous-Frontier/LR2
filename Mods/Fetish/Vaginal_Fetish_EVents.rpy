@@ -181,8 +181,7 @@ label SB_fetish_vaginal_label(the_person):
             "[the_person.possessive_title] quickly sulks off."
             return  # EXIT
 
-    call advance_time_enhanced(no_events = True) from _SB_overnight_SBV010
-
+    call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_SBV010
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV010
     return "Advance Time"
 
@@ -314,8 +313,7 @@ label SB_fetish_vaginal_event_label(the_person):
                 the_person.char "Oh! Well okay. I mean hey, tomorrow is a new day, and you know I like to be close to you..."
         "[the_person.possessive_title] lays down on your bed. You cuddle up behind her and slowly drift off to sleep."
 
-    call advance_time_enhanced(no_events = True) from _SB_overnight_SBV020
-
+    call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_SBV020
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV020
     return "Advance Time"
 
@@ -370,8 +368,7 @@ label SB_fetish_mom_vaginal_label():
     $ the_person.special_role.append(vaginal_fetish_role)
     $ add_breed_me_collar_to_base_outfit(the_person)
 
-    call advance_time_enhanced(no_events = True) from _SB_overnight_SBV030
-
+    call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_SBV030
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV030
 
     return "Advance Time"
@@ -437,7 +434,7 @@ label SB_fetish_lily_vaginal_label():
     $ the_person.special_role.append(vaginal_fetish_role)
     $ add_breed_me_collar_to_base_outfit(the_person)
 
-    call advance_time_enhanced(no_events = True) from _SB_overnight_SBV040
+    call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_SBV040
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV040
     return "Advance Time"
 
@@ -602,7 +599,7 @@ label SB_fetish_vaginal_recurring_label():
 
     "After you finish your rutting, you and [the_person.possessive_title] get under the covers of your bed."
     "Spooning behind [the_person.possessive_title], you drift off to a wonderful night's sleep. Her body heat and the feeling of her naked skin against yours give you very pleasant dreams."
-    call advance_time_enhanced(no_events = True) from _SB_overnight_SBV060
+    call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_SBV060
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV060
     return "Advance Time"
 
@@ -673,6 +670,6 @@ label SB_fetish_vaginal_lily_recurring_label():
     "Spooning behind [the_person.possessive_title], you drift off to a wonderful night's sleep. Her body heat and the feeling of her naked skin against yours give you very pleasant dreams."
     #SBMOD Start hacked wakeup sex code. To be copy/pasted to other similar places#
 
-    call advance_time_enhanced(no_events = True) from _SB_overnight_SBV070
+    call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_SBV070
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV070
     return "Advance Time"

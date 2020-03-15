@@ -1603,7 +1603,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         $ morning_fun_chance = 50 #She finished. Maybe she wants an encore in the morning, maybe not.
         "[the_person.title] nuzzles up against you and slowly drifts off to sleep. In your sex induced haze, you quickly drift off to sleep with her."
 
-    call advance_time_enhanced(no_events = True) from _call_advance_time_enhanced_next_day_no_events_SBS129
+    call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_SBS129
     #Good morning!
     $ good_rest_perk = Stat_Perk(description = "Temporary increase max energy after sleeping with a lover. +20 Energy Cap", energy_bonus = 20, bonus_is_temp = True, duration = 2,  energy_cap = 20)
     $ perk_system.add_stat_perk(good_rest_perk, "Overnight Lover")

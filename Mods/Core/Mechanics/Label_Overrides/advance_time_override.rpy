@@ -205,6 +205,12 @@ init 5 python:
             person.obedience = 130
         return
 
+label advance_time_move_to_next_day(no_events = True):
+    $ current_day = day
+    while day == current_day:
+        call advance_time_enhanced(no_events = no_events) from _call_advance_time_advance_time_move_to_next_day
+    return
+
 label advance_time_enhanced(no_events = False):
     # 1) Turns are processed _before_ the time is advanced.
     # 1a) crises are processed if they are triggered.

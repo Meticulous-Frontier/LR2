@@ -300,7 +300,7 @@ label SB_fetish_mom_cum_label():
     "Wow! [the_person.possessive_title] just woke you up, in the middle of the night, with an amazing blowjob, took your load, then cuddled up and fell asleep with you."
     "You have a feeling that this is only the beginning of things between you and her."
     "You slowly fall asleep, enjoying the warmth of her body."
-    call advance_time_enhanced(no_events = True) from _SB_overnight_SBC030
+    call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_SBC030
     "When morning comes, you feel a stirring in your loins again as you start to slowly wake up. The now familiar feeling of [the_person.possessive_title]'s mouth feels amazing."
     $ the_person.apply_outfit(SB_cum_nude_outfit)
     $ the_person.draw_person( position = "blowjob")
