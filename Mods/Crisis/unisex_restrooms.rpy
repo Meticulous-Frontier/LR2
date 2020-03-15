@@ -30,7 +30,7 @@ init 1301 python:
 
     def unisex_restroom_gloryhole_wait_requirement():
         if mc.business.is_open_for_business():
-            if len(mc.business.get_employee_list()) < 4:
+            if len(mc.business.get_employee_list()) > 3:
                 return True
             else:
                 return "You should hire more employees"
