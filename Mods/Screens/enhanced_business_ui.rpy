@@ -20,7 +20,7 @@ init 2:
                     sensitive True
 
                 if mc.business.funds < 0:
-                    textbutton "Company Funds: $[mc.business.funds]":
+                    textbutton "Company Funds: $" + str(int(mc.business.funds)):
                         ysize 28
                         text_style "menu_text_style"
                         text_color "#DD0000"
@@ -28,14 +28,14 @@ init 2:
                         action NullAction()
                         sensitive True
                 else:
-                    textbutton "Company Funds: $[mc.business.funds]":
+                    textbutton "Company Funds: $" + str(int(mc.business.funds)):
                         ysize 28
                         text_style "menu_text_style"
                         tooltip "The amount of money in your business account. If you are in the negatives for more than three days your loan defaults and the game is over!"
                         action NullAction()
                         sensitive True
 
-                textbutton "Daily Salary Cost: $"+ str(mc.business.calculate_salary_cost()):
+                textbutton "Daily Salary Cost: $"+ str(int(mc.business.calculate_salary_cost())):
                     ysize 28
                     text_style "menu_text_style"
                     tooltip "The amount of money spent daily to pay your employees. Employees are not paid on weekends."
@@ -45,7 +45,7 @@ init 2:
                 textbutton "Company Efficency: [mc.business.team_effectiveness]%":
                     ysize 28
                     text_style "menu_text_style"
-                    tooltip "The more employees you have the faster your company will become inefficent. Perform HR work at your office or hire someone to do it for you to raise your company efficency. All productivity is modified by company efficency."
+                    tooltip "The more employees you have the faster your company will become inefficient. Perform HR work at your office or hire someone to do it for you to raise your company efficency. All productivity is modified by company efficency."
                     action NullAction()
                     sensitive True
 
