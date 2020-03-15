@@ -18,6 +18,7 @@ init:
     python:
         Threesome_standing_embrace_fuck_girl_two = Threesome_MC_position(name = "fuck_girl_2",
             description = "Fuck [the_person_{0}.title]",
+            default_action_person = "two",
             skill_tag_p1 = "Foreplay",
             skill_tag_p2 = "Vaginal",
             girl_one_arousal = 10,
@@ -41,6 +42,7 @@ init:
 
         Threesome_standing_embrace_oral_girl_two = Threesome_MC_position(name = "Oral_girl_2",
             description = "Lick [the_person_{0}.title]",
+            default_action_person = "two",
             skill_tag_p1 = "Foreplay",
             skill_tag_p2 = "Oral",
             girl_one_arousal = 15,
