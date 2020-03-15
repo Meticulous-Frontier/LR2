@@ -56,9 +56,15 @@ init 2:
                     if mc.business.get_employee_title(person) != "None":
                         text "     Job: " + mc.business.get_employee_title(person) style "menu_text_style"
 
-                    for role in person.special_role:
-                        if not role.hidden:
-                            text "       - " + role.role_name style "menu_text_style" size 14
+                    viewport:
+                        scrollbars "vertical"
+                        mousewheel True
+                        xsize 220
+                        ysize 100
+                        vbox:
+                            for role in person.special_role:
+                                if not role.hidden:
+                                    text "       - " + role.role_name style "menu_text_style" size 14
 
                 vbox:
                     if person.arousal > 0:
