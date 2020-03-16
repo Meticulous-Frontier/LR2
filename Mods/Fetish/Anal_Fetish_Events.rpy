@@ -39,15 +39,39 @@ init 1 python:
         person.base_outfit.add_accessory(fd_collar)
         return
 
-    #Mandatory Events
-    SB_lily_anal_dp_fetish = Action("Lily Anal Sex", SB_fetish_anal_requirement, "SB_lily_anal_dp_fetish_label")
-    SB_mom_anal_fetish = Action("Mom Anal Sex", SB_mom_anal_pay_requirement, "SB_mom_anal_pay_label")
-    SB_fetish_anal_crisis = Action("Loves Anal Sex.", SB_fetish_anal_requirement, "SB_fetish_anal_label")
-    SB_fetish_anal_staylate_event = Action("Employee stays late", SB_fetish_anal_staylate_event_requirement, "SB_fetish_anal_staylate_event_label")
-    SB_mom_weekly_anal_action = Action("mom friday anal ", SB_mom_anal_pay_requirement, "SB_mom_anal_friday_label")
-    SB_starbuck_anal_intro_event = Action("Starbuck Anal Sex", SB_starbuck_anal_requirement, "SB_starbuck_anal_intro")
-    SB_stephanie_anal_fetish_action = Action("Stephanie Anal Fetish", SB_stephanie_anal_fetish_requirement, "SB_stephanie_anal_fetish_label")
+                        
 
+    def add_SB_lily_anal_dp_fetish_event():
+        SB_lily_anal_dp_fetish = Action("Lily Anal Sex", SB_fetish_anal_requirement, "SB_lily_anal_dp_fetish_label")
+        mc.business.mandatory_crises_list.append(SB_lily_anal_dp_fetish)
+        return
+
+    def add_mom_anal_fetish_event():
+        SB_mom_anal_fetish = Action("Mom Anal Sex", SB_mom_anal_pay_requirement, "SB_mom_anal_pay_label")
+        mc.business.mandatory_crises_list.append(SB_mom_anal_fetish)
+        return
+
+    def add_sb_fetish_anal_crisis(person):
+        SB_fetish_anal_crisis = Action("Loves Anal Sex.", SB_fetish_anal_requirement, "SB_fetish_anal_label", args = person)
+        mc.business.mandatory_crises_list.append(SB_fetish_anal_crisis)
+        return
+    
+    def add_sb_fetish_anal_staylate_event(person):
+        SB_fetish_anal_staylate_event = Action("Employee stays late", SB_fetish_anal_staylate_event_requirement, "SB_fetish_anal_staylate_event_label", args = person)
+        mc.business.mandatory_crises_list.append(SB_fetish_anal_staylate_event)
+        return
+
+    def add_mom_weekly_anal_action():
+        SB_mom_weekly_anal_action = Action("mom friday anal ", SB_mom_anal_pay_requirement, "SB_mom_anal_friday_label")
+        mc.business.mandatory_crises_list.append(SB_mom_weekly_anal_action)
+    
+    def add_sb_starbuck_anal_intro_event():
+        SB_starbuck_anal_intro_event = Action("Starbuck Anal Sex", SB_starbuck_anal_requirement, "SB_starbuck_anal_intro")
+        mc.business.mandatory_crises_list.append(SB_starbuck_anal_intro_event)
+
+    def add_stephanie_anal_fetish_action():
+        SB_stephanie_anal_fetish_action = Action("Stephanie Anal Fetish", SB_stephanie_anal_fetish_requirement, "SB_stephanie_anal_fetish_label")
+        mc.business.mandatory_crises_list.append(SB_stephanie_anal_fetish_action)
 
     SB_anal_outfit = Outfit("A Special Night")
     SB_anal_outfit.add_upper(lace_bra.get_copy(),colour_pink)
@@ -56,21 +80,13 @@ init 1 python:
 
     SB_anal_nude_outfit = Outfit("Nude")
 
-    SB_list_of_ass_positions = []           #This is a list of positions that show off a person's ass. Can grab one randomly for when a girl wants to show off ass specifically
-    SB_list_of_ass_positions.append("back_peek")
-    SB_list_of_ass_positions.append("standing_doggy")
-    SB_list_of_ass_positions.append("doggy")
-    SB_list_of_ass_positions.append("walking_away")
-
+    #This is a list of positions that show off a person's ass. Can grab one randomly for when a girl wants to show off ass specifically
     def SB_get_random_ass_position():
-        return get_random_from_list(SB_list_of_ass_positions)
+        return get_random_from_list(["back_peek", "standing_doggy", "doggy", "walking_away"])
 
 
 #SBA1
 label SB_fetish_anal_label(the_person):
-    $ FETISH_ANAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
-
     "You are just finishing up with business for the day when you hear a pleasant voice call out to you."
     the_person.char "Hey [the_person.mc_title]."
     $ the_person.draw_person()
@@ -98,7 +114,7 @@ label SB_fetish_anal_label(the_person):
             the_person.char "I went over to the sex shop and bought a new toy... I've been wearing it for a few days now... and I was wondering what you thought?"
             $ the_person.draw_person(position = "standing_doggy")
             "[the_person.possessive_title] turns and bends over in front of you, with her hands on your desk."
-            "You can see, nestled between her curvacious ass cheeks, a matching pink jewel on the base of a butt plug."
+            "You can see, nestled between her curvaceous ass cheeks, a matching pink jewel on the base of a butt plug."
             the_person.char "I think I'm ready for something a bit more... substantial... don't you think?"
             "You slowly pull out the pink jewelled butt plug from [the_person.possessive_title]'s rectum. She quivers in anticipation of what you are about to do to her."
             $ the_person.change_arousal(the_person.get_opinion_score("anal sex"))
@@ -125,6 +141,7 @@ label SB_fetish_anal_label(the_person):
             $ add_fuck_doll_collar_to_base_outfit(the_person)
             "[the_person.possessive_title] gets her butt plug. She slowly pushes it back into her ass."
             the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
+            $ the_person.draw_person(position = "walking_away")
             "You wave goodbye to [the_person.possessive_title] and get ready to head home for the night."
         "Refuse":
             the_person.char "I'm sorry to hear that..." #TODO finish this
@@ -141,8 +158,6 @@ label SB_fetish_anal_label(the_person):
 
 #SBA2
 label SB_fetish_anal_staylate_event_label(the_person):
-    $ FETISH_ANAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     if not mc.is_at_work():
         "Your phone rings. It's [the_person.possessive_title]. You answer it."
         the_person.char "Hey, are you at work? I can't find you."
@@ -151,6 +166,7 @@ label SB_fetish_anal_staylate_event_label(the_person):
         "[the_person.possessive_title] tries to mask disappointment in her voice but it is still obvious."
         the_person.char "Oh... okay... well try to let me know next time before I stay late. I thought... anyway, maybe some other time. Bye!"
         return
+
     "You finish up with your work for the day and return to your office. You are organizing some papers when [the_person.possessive_title] enters the room."
     $ the_person.apply_outfit(SB_anal_outfit)
     $ the_person.draw_person()
@@ -176,10 +192,10 @@ label SB_fetish_anal_staylate_event_label(the_person):
             the_person.char "Yes sir!"
             "You murmur a soft approval. You give her ass another hard spank."
             "SMACK"
-            "[the_person.possessive_title]'s accommodating ass ripples in shockwaves out from where you hand spanks it."
+            "[the_person.possessive_title]'s accommodating ass ripples in shock waves out from where you hand spanks it."
             "You give her hind quarters a few more spanks, giving her few seconds in between."
             $ the_person.change_arousal(20)
-            "[the_person.possessive_title] barely stifles a moan as you spank her again. Her cheeks are beginning to glow a rosey red. Her pussy lips are growing puffy with clear signs of arousal."
+            "[the_person.possessive_title] barely stifles a moan as you spank her again. Her cheeks are beginning to glow a rosy red. Her pussy lips are growing puffy with clear signs of arousal."
             "You decide it is time to move on."
         "Fuck Her Ass":
             "You firmly grasp one of her ass cheeks in one hand before responding."
@@ -277,8 +293,6 @@ init 2 python:
 
 #SBA3
 label SB_fetish_anal_recurring_label():
-    $ FETISH_ANAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()    
     $ the_person = get_anal_fetish_employee()
     "As you are packing up your stuff to head home for the day, you hear [the_person.possessive_title]'s sweet voice call out to you."
 
@@ -481,8 +495,6 @@ label SB_free_strip_scene(the_person, must_be_naked = True):
 #SBA40
 label SB_mom_anal_pay_label():
     python:
-        FETISH_ANAL_EVENT_INUSE = False
-        SB_CALCULATE_RANDOM_EVENT_RATE()
         the_person = mom
         mc.change_location(bedroom)
         mc.location.show_background()
@@ -519,7 +531,8 @@ label SB_mom_anal_pay_label():
             the_person.char "Thank you [the_person.mc_title]! Now, are you ready a show?"
             call SB_free_strip_scene(the_person) from _call_SB_free_strip_scene_SBA40
             "Now that she is naked, [the_person.possessive_title] quickly grabs your hand and leads you to her bedroom. When you get to her bed, she shoves you down on your back."
-            $ mom_bedroom.show_background()
+            $ mc.change_location(mom_bedroom)
+            $ mc.location.show_background()
             the_person.char "Oh god, I need this so bad honey. You just lay back and let momma take care of you now."
             "[the_person.possessive_title] quickly strips you down. She reaches into her nightstand and grabs some lube. She hands it to you."
             the_person.char "Here! Can you get me, you know... ready?"
@@ -587,20 +600,19 @@ label SB_mom_anal_pay_label():
             mc.name "BUT, I am a man. I may have needs more often then that. Be ready for me with that amazing ass of yours anytime."
             "[the_person.possessive_title] meekly responds."
             the_person.char "Yes [the_person.mc_title]. You know it will be... take my ass, whenever you want. I'll be ready!"
-            $ mc.business.mandatory_crises_list.append(SB_mom_weekly_anal_action)
+            $ add_mom_weekly_anal_action()
         "Strip and ride me\nPay $1000 (disabled)" if mc.business.funds <1000:
             pass
         "Not this week":
             mc.name "Sorry [the_person.title], but I'm tight on cash right now as well. Maybe next week, okay?"
             "[the_person.possessive_title] nods and turns back to her bills."
             the_person.char "I understand [the_person.mc_title]. Now don't let me keep you, I'm sure you were up to something important."
-            $ mc.business.mandatory_crises_list.append(SB_mom_weekly_pay_action)
+            $ add_mom_anal_fetish_event() # trigger this event again next week
             $ the_person.review_outfit(dialogue = False)
 
     $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
     $ mc.location.show_background()
     $ renpy.scene("Active")
-
     return
 
 #SBA50
@@ -677,13 +689,13 @@ label SB_mom_anal_friday_label():
                 "[the_person.possessive_title] lays there on the bed"
             mc.name "Mmm, thanks [the_person.title]. That ass is amazing. Next friday, right?"
             the_person.char "Yes [the_person.mc_title]. But don't feel like you HAVE to wait to take my ass. We can do it whenever you want. I'll be ready!"
-            $ mc.business.mandatory_crises_list.append(SB_mom_weekly_anal_action)
+            
         "Not this week":
             mc.name "Sorry [the_person.title], work was hell and I'm exhausted. Maybe next week, okay?"
             "[the_person.possessive_title] frowns."
             the_person.char "I understand [the_person.mc_title]. Now don't let me keep you, I'm sure you were up to something important."
-            $ mc.business.mandatory_crises_list.append(SB_mom_weekly_anal_action)
 
+    $ add_mom_weekly_anal_action()  # re-add event for next week
     $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
     $ mc.location.show_background()
     $ renpy.scene("Active")
@@ -691,9 +703,6 @@ label SB_mom_anal_friday_label():
 
 #SBA60
 label SB_lily_anal_dp_fetish_label():
-    $ FETISH_ANAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
-
     $ the_person = lily # make sure we use lily for the event
     "As you are finishing up with work for the day, you get a text on your phone. It is from Lily, [the_person.possessive_title]."
     the_person.char "Hey [the_person.mc_title]! Can you do me a favor? Meet me at the mall when you get off work. I need your help with something..."
@@ -811,8 +820,6 @@ label SB_lily_anal_dp_fetish_label():
 
 #SBA70
 label SB_starbuck_anal_intro():
-    $ FETISH_ANAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ the_person = starbuck
 
     "You get a text message from [the_person.title]."
@@ -822,7 +829,6 @@ label SB_starbuck_anal_intro():
     $ the_person.draw_person(position = SB_get_random_ass_position())
     "She attached a picture. It looks like she is bending over her counter. Between her ass cheeks you spy a good sized glass butt plug!"
     "You decide this is too good of an opportunity to pass up. You head over to the sex shop."
-    #TODO Change locations to the sex shop
 
     $ mc.change_location(sex_store)
     $ mc.location.show_background()
@@ -1046,8 +1052,6 @@ label SB_starbuck_anal_swing_demo(the_person):
 #SBA90
 label SB_stephanie_anal_fetish_label():
     $ the_person = stephanie
-    $ FETISH_ANAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     if mc.location == mc.business.r_div: #Already in research
         "Suddenly, [the_person.possessive_title] looks up from her work and and speaks up."
         the_person.char "Hey [the_person.mc_title], I need to talk to you about something. Can we go somewhere private?"
@@ -1178,7 +1182,7 @@ label SB_stephanie_anal_fetish_label():
                 $ scene_manager.update_actor(the_person, position = "walking_away")
                 "You say goodbye, and [the_person.possessive_title] turns and walks out of your office, her plug just peaking out between her rosey ass cheeks."
                 "Looks like [the_person.title] has an anal fetish now! But she is also a bimbo."
-                "You are guessing she is probably not particularely fit for her job in research. Maybe you can move her somewhere else in the company?"
+                "You are guessing she is probably not particularly fit for her job in research. Maybe you can move her somewhere else in the company?"
 
             "Try to talk her down \n{size=22}Requires High Charisma{/size}(disabled)" if mc.charisma <= 6:
                 pass
@@ -1290,7 +1294,7 @@ label SB_stephanie_anal_fetish_label():
         the_person.char "Okay. I hope you realize the serums also greatly increase libido."
         mc.name "Don't worry. I have something that can help with that."
         "You reach inside the bottom drawer of your desk. You pull out a pink glass anal plug and hand it to her. Her eyes are transfixed on the plug."
-        mc.name "If the urgres get crazy strong, and I'm not available to satisfy you, use this."
+        mc.name "If the urges get crazy strong, and I'm not available to satisfy you, use this."
         the_person.char "Oh! Okay! I think I'll try it out now..."
         "You see her reach behind herself and easily slide it in, her body still lubed up from your prior fucking."
         the_person.char "Ah! Mmm I feel full. That's really nice. Not as good as you, but I guess in a pinch I could use it as a substitute."

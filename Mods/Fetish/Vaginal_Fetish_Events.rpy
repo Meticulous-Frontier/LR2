@@ -35,6 +35,9 @@ init 1 python:
         return False
 
     def SB_fetish_vaginal_event_requirement():
+        if SB_FETISH_EVENT_ACTIVE():
+            return False
+
         if mc_asleep():
             return True
         return False
@@ -49,17 +52,29 @@ init 1 python:
         person.base_outfit.add_accessory(bm_collar)
         return
 
-    SB_fetish_mom_vaginal_crisis = Action("Mom Loves Vaginal Sex", SB_fetish_mom_vaginal_requirement, "SB_fetish_mom_vaginal_label")
-    SB_fetish_lily_vaginal_crisis = Action("Lily Loves Vaginal Sex", SB_fetish_lily_vaginal_requirement, "SB_fetish_lily_vaginal_label")
-    SB_fetish_vaginal_crisis = Action("Loves Vaginal Sex", SB_fetish_vaginal_requirement, "SB_fetish_vaginal_label")
-    SB_fetish_vaginal_event = Action("Vaginal Sex Visit", SB_fetish_vaginal_event_requirement, "SB_fetish_vaginal_event_label")
+    def add_sb_fetish_mom_vaginal_event():
+        SB_fetish_mom_vaginal_crisis = Action("Mom Loves Vaginal Sex", SB_fetish_mom_vaginal_requirement, "SB_fetish_mom_vaginal_label")
+        mc.business.mandatory_crises_list.append(SB_fetish_mom_vaginal_crisis)
+        return
+
+    def add_sb_fetish_lily_vaginal_event():
+        SB_fetish_lily_vaginal_crisis = Action("Lily Loves Vaginal Sex", SB_fetish_lily_vaginal_requirement, "SB_fetish_lily_vaginal_label")
+        mc.business.mandatory_crises_list.append(SB_fetish_lily_vaginal_crisis)
+        return
+
+    def add_sb_fetish_vaginal_crisis(person):
+        SB_fetish_vaginal_crisis = Action("Loves Vaginal Sex", SB_fetish_vaginal_requirement, "SB_fetish_vaginal_label", args = person)
+        mc.business.mandatory_crises_list.append(SB_fetish_vaginal_crisis)
+        return
+
+    def add_sb_fetish_vaginal_event(person):
+        SB_fetish_vaginal_event = Action("Vaginal Sex Visit", SB_fetish_vaginal_event_requirement, "SB_fetish_vaginal_event_label", args = person)
+        mc.business.mandatory_crises_list.append(SB_fetish_vaginal_event)
+        return
 
 
 #SBV1
 label SB_fetish_vaginal_label(the_person):
-    $ FETISH_VAGINAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
-
     "*Ding Dong*"
     "You're roused from your bed by a ring on your doorbell."
     # make sure we are at the hall
@@ -187,8 +202,6 @@ label SB_fetish_vaginal_label(the_person):
 
 #SBV2
 label SB_fetish_vaginal_event_label(the_person):
-    $ FETISH_VAGINAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
 
@@ -319,8 +332,6 @@ label SB_fetish_vaginal_event_label(the_person):
 
 #SBV3
 label SB_fetish_mom_vaginal_label():
-    $ FETISH_VAGINAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ the_person = mom
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
@@ -370,13 +381,10 @@ label SB_fetish_mom_vaginal_label():
 
     call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_SBV030
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV030
-
     return "Advance Time"
 
 #SBV4
 label SB_fetish_lily_vaginal_label():
-    $ FETISH_VAGINAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ the_person = lily
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
@@ -439,7 +447,6 @@ label SB_fetish_lily_vaginal_label():
     return "Advance Time"
 
 
-
 init 1 python:
     def SB_cowgirl_wakeup_requirement():
         if time_of_day == 0:
@@ -449,8 +456,6 @@ init 1 python:
 #SBV5
 #I'm leaving this code for now, but it should be unused#
 label SB_cowgirl_wakeup_label(the_person):
-    $ FETISH_VAGINAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     "All night long, you have sexy dreams centered around [the_person.possessive_title]."
     "She's on her knees, sucking you off expertly. Later, shes on her back while you pin her to the bed. Sometime later, shes on her hands and knees, taking your cock like a pro."
 
@@ -480,7 +485,7 @@ label SB_cowgirl_wakeup_label(the_person):
     $ the_person.review_outfit(dialogue = False)
     "You fall back asleep. When you wake up, [the_person.possessive_title] has left."
     "Looks like you slept in!"
-    return "Advance Time"
+    return
 
 init 2 python:
     def SB_fetish_vaginal_recurring_requirement():
@@ -517,8 +522,6 @@ init 2 python:
 
 #SBV6
 label SB_fetish_vaginal_recurring_label():
-    $ FETISH_VAGINAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ the_person = get_vaginal_fetish_employee()
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
@@ -605,8 +608,6 @@ label SB_fetish_vaginal_recurring_label():
 
 #SBV7
 label SB_fetish_vaginal_lily_recurring_label():
-    $ FETISH_VAGINAL_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ the_person = lily
     $ mc.change_location(bedroom)
     $ mc.location.show_background()

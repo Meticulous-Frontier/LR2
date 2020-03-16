@@ -1,7 +1,7 @@
 init -1 python:
     def SB_fetish_vaginal_visit_requirement(the_person):
         if the_person.sex_skills["Vaginal"] >= 6:
-            if SB_MOD_RANDOM_EVENT_CHANCE > 0:
+            if not SB_FETISH_EVENT_ACTIVE():
                 return True
             else:
                 return "Someone else is coming over tonight"
@@ -42,11 +42,11 @@ init -1 python:
     def SB_fetish_anal_staylate_requirement(the_person):
         if mc.is_at_work():
             if the_person.sex_skills["Anal"] >= 6:
-                if SB_MOD_RANDOM_EVENT_CHANCE > 0:  #TODO this shit is probably broke. It just need to check for employee status?
+                if not SB_FETISH_EVENT_ACTIVE():
                     return True
                 else:
                     return "Someone else is coming over tonight"
-        return
+        return False
 
     def SB_fetish_starbuck_anal_swing_demo_requirement(the_person):
         if the_person is starbuck:
@@ -157,12 +157,8 @@ label SB_fetish_vaginal_visit_label(the_person):
         mc.name "Don't forget to bring a toothbrush, [the_person.title]..."
         "[the_person.possessive_title] smiles, clearly enjoying your obvious innuendo."
         the_person.char "I'll see you tonight then!"
-    python:
-        if SB_fetish_vaginal_event not in mc.business.mandatory_crises_list:
-            SB_fetish_vaginal_event.args = [the_person] # Set Action event args to person
-            mc.business.mandatory_crises_list.append(SB_fetish_vaginal_event)
-            FETISH_VAGINAL_EVENT_INUSE = True
-            SB_SET_RANDOM_EVENT_CHANCE(0)
+    
+    $ add_sb_fetish_vaginal_event(the_person)
     return
 
 #SBR10
@@ -229,12 +225,7 @@ label SB_fetish_anal_staylate_label(the_person):
     "You look [the_person.possessive_title] in the eyes. Her pupils dilate a bit as she realizes the reasoning behind asking her to stay late."
     the_person.char "Oh! Thank you sir! I'll look forward to it!"
     "You say goodbye to [the_person.possessive_title]."
-    python:
-        FETISH_ANAL_EVENT_INUSE = True
-        SB_SET_RANDOM_EVENT_CHANCE(0)
-        if SB_fetish_anal_staylate_event not in mc.business.mandatory_crises_list:
-            SB_fetish_anal_staylate_event.args = [the_person]  # set current person as action argument
-            mc.business.mandatory_crises_list.append(SB_fetish_anal_staylate_event)
+    $ add_sb_fetish_anal_staylate_event(the_person)
     return
 
 #SBR30

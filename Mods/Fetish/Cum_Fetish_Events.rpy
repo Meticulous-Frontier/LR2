@@ -47,16 +47,27 @@ init 1 python:
 
     SB_cum_nude_outfit = Outfit("Nude")
 
-    SB_fetish_mom_cum = Action("Mom Cum Fetish", SB_fetish_mom_cum_requirement, "SB_fetish_mom_cum_label")
-    SB_fetish_lily_cum = Action("Sister Cum Fetish", SB_fetish_lily_cum_requirement, "SB_fetish_lily_cum_label")
-    SB_fetish_cum_crisis = Action("Loves Cum.", SB_fetish_cum_requirement, "SB_fetish_cum_label")
-    SB_fetish_stephanie_cum_action = Action("Stephanie Cum Fetish", SB_stephanie_cum_fetish_requirement, "SB_fetish_stephanie_cum_label")
+    def add_sb_fetish_mom_cum_event():
+        SB_fetish_mom_cum_event = Action("Mom Cum Fetish", SB_fetish_mom_cum_requirement, "SB_fetish_mom_cum_label")
+        mc.business.mandatory_crises_list.append(SB_fetish_mom_cum_event)
+    
+    def add_sb_fetish_lily_cum_event():
+        SB_fetish_lily_cum_event = Action("Sister Cum Fetish", SB_fetish_lily_cum_requirement, "SB_fetish_lily_cum_label")
+        mc.business.mandatory_crises_list.append(SB_fetish_lily_cum_event)
+        return
+
+    def add_sb_fetish_cum_crisis(person):
+        SB_fetish_cum_crisis = Action("Loves Cum.", SB_fetish_cum_requirement, "SB_fetish_cum_label", args = person)
+        mc.business.mandatory_crises_list.append(SB_fetish_cum_crisis)
+        return
+
+    def add_sb_fetish_stephanie_cum_event():
+        SB_fetish_stephanie_cum_action = Action("Stephanie Cum Fetish", SB_stephanie_cum_fetish_requirement, "SB_fetish_stephanie_cum_label")
+        mc.business.mandatory_crises_list.append(SB_fetish_stephanie_cum_action)
+        return
 
 #SBC1
 label SB_fetish_cum_label(the_person):
-    $ FETISH_CUM_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
-    #$ the_person = FETISH_cum_EVENT_TARGET
     "You are just finishing up with with some work before you get ready for lunch. You hear a friendly voice greet you as you pull your packed lunch from the desk."
     the_person.char "Hey [the_person.mc_title]! That sure looks good!"
     $ the_person.draw_person()
@@ -133,10 +144,8 @@ label SB_fetish_cum_label(the_person):
             "[the_person.possessive_title] runs her hand through her hair. She licks her lips and smiles at you."
             the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
             "You wave goodbye to [the_person.possessive_title] and finish eating your lunch."
-            $ SB_CALCULATE_RANDOM_EVENT_RATE()
         "Refuse":
             the_person.char "I'm sorry to hear that..." #TODO finish this
-            $ SB_CALCULATE_RANDOM_EVENT_RATE()
 
     $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
     $ mc.location.show_background()
@@ -237,8 +246,6 @@ label SB_fetish_cum_dosage_label():
 
 #SBC3
 label SB_fetish_mom_cum_label():
-    $ FETISH_CUM_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ the_person = mom
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
@@ -333,8 +340,6 @@ label SB_fetish_mom_cum_label():
 
 #SBC4
 label SB_fetish_lily_cum_label():
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
-    $ FETISH_CUM_EVENT_INUSE = False
     $ the_person = lily
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
@@ -414,12 +419,7 @@ label SB_fetish_lily_cum_label():
         the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
         bedroom.show_background()
         renpy.scene("Active")
-
-        for morn_event in morning_crisis_list:
-            if morn_event[0].name == "Sister Cum Fetish":
-                #renpy.say("","DEBUG: Successfully located shower, attempting removal and replacement.")
-                morning_crisis_list.remove(morn_event)
-    return "True"
+    return
 
 #SBC5
 label SB_fetish_shower_cum_label():
@@ -451,14 +451,11 @@ label SB_fetish_shower_cum_label():
         the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
         mc.location.show_background()
         renpy.scene("Active")
-
     return
 
 
 #SBC060
 label SB_fetish_stephanie_cum_label():
-    $ FETISH_CUM_EVENT_INUSE = False
-    $ SB_CALCULATE_RANDOM_EVENT_RATE()
     $ the_person = stephanie
     if mc.location == mc.business.r_div: #Already in research
         "Suddenly, [the_person.possessive_title] looks up from her work and and speaks up."
@@ -603,7 +600,7 @@ label SB_fetish_stephanie_cum_label():
                 $ scene_manager.update_actor(the_person, position = "walking_away")
                 "You say goodbye, and [the_person.possessive_title] turns and walks out of your office."
                 "Looks like [the_person.title] has a  cum fetish now! But she is also a bimbo."
-                "You are guessing she is probably not particularely fit for her job in research. Maybe you can move her somewhere else in the company?"
+                "You are guessing she is probably not particularly fit for her job in research. Maybe you can move her somewhere else in the company?"
 
             "Try to talk her down \n{size=22}Requires High Charisma{/size}(disabled)" if mc.charisma <= 6:
                 pass
@@ -692,7 +689,7 @@ label SB_fetish_stephanie_cum_label():
                 $ scene_manager.update_actor(the_person, position = "walking_away")
                 "You say goodbye, and [the_person.possessive_title] turns and walks out of your office."
                 "Looks like [the_person.title] has a  cum fetish now! But she is also a bimbo."
-                "You are guessing she is probably not particularely fit for her job in research. Maybe you can move her somewhere else in the company?"
+                "You are guessing she is probably not particularly fit for her job in research. Maybe you can move her somewhere else in the company?"
                 $ the_person.review_outfit(dialogue = False)
                 $ renpy.scene("Active")
                 return

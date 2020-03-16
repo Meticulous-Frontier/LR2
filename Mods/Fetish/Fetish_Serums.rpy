@@ -65,8 +65,6 @@ init -1 python:
         return
 
     def fetish_vaginal_function_on_turn(the_person, add_to_log):
-        global FETISH_VAGINAL_EVENT_INUSE
-
         fetish_random_roll_1 = renpy.random.randint(0,100)
         fetish_random_roll_2 = renpy.random.randint(0,100)
 
@@ -76,29 +74,22 @@ init -1 python:
         if fetish_random_roll_2 < 25 + (tier * 5):
             increase_fetish_sexy_opinion(the_person, FETISH_VAGINAL_OPINION_LIST, tier - 1)
 
+        if SB_FETISH_EVENT_ACTIVE(): # quick exit fetish event is active, so skip check
+            return
+
         if tier >= 3 and the_person.sex_skills["Vaginal"] >= 5 and the_person.get_opinion_score("vaginal sex") >= 2:
             if the_person.sluttiness >= 80 and not SB_check_fetish(the_person, vaginal_fetish_role):
                 if SB_get_fetish_count(the_person) < store.max_fetishes_per_person:
-                    # renpy.say("", "Evaluate Vaginal Fetish (In Use: " + str(FETISH_VAGINAL_EVENT_INUSE) + ")")
-                    if FETISH_VAGINAL_EVENT_INUSE:
-                        return
-
-                    FETISH_VAGINAL_EVENT_INUSE = True
-                    SB_SET_RANDOM_EVENT_CHANCE(0)
                     # renpy.say("", "Trigger vaginal fetish " + the_person.name)
-
                     if the_person is mom:
-                        mc.business.mandatory_crises_list.append(SB_fetish_mom_vaginal_crisis)
+                        add_sb_fetish_mom_vaginal_event()
                     elif the_person is lily:
-                        mc.business.mandatory_crises_list.append(SB_fetish_lily_vaginal_crisis)
+                        add_sb_fetish_lily_vaginal_event()
                     else:
-                        SB_fetish_vaginal_crisis.args = [the_person]    # set the current person as action argument
-                        mc.business.mandatory_crises_list.append(SB_fetish_vaginal_crisis)
+                        add_sb_fetish_vaginal_crisis(the_person)
         return
 
     def fetish_anal_function_on_turn(the_person, add_to_log):
-        global FETISH_ANAL_EVENT_INUSE
-
         fetish_random_roll_1 = renpy.random.randint(0,100)
         fetish_random_roll_2 = renpy.random.randint(0,100)
 
@@ -108,76 +99,54 @@ init -1 python:
         if fetish_random_roll_2 < 25 + (tier * 5):
             increase_fetish_sexy_opinion(the_person, FETISH_ANAL_OPINION_LIST, tier - 1)
 
+        if SB_FETISH_EVENT_ACTIVE(): # quick exit fetish event is active, so skip check
+            return
+
         if tier >= 3 and the_person.sex_skills["Anal"] >= 5 and the_person.get_opinion_score("anal sex") >= 2:
             if the_person.sluttiness >= 90 and not SB_check_fetish(the_person, anal_fetish_role):
                 if SB_get_fetish_count(the_person) < store.max_fetishes_per_person:
-                    # renpy.say("", "Evaluate Anal Fetish (In Use: " + str(FETISH_ANAL_EVENT_INUSE) + ")")
-                    if FETISH_ANAL_EVENT_INUSE:
-                        return
-
                     # renpy.say("", "Trigger anal fetish " + the_person.name)
                     if the_person is lily:
-                        mc.business.mandatory_crises_list.append(SB_lily_anal_dp_fetish)
-                        FETISH_ANAL_EVENT_INUSE = True
-                        SB_SET_RANDOM_EVENT_CHANCE(0)
+                        add_SB_lily_anal_dp_fetish_event()
                     elif the_person is mom:
-                        for mand_event in mc.business.mandatory_crises_list:
-                            if mand_event.name == "mom weekly pay":
-                                # renpy.say("","DEBUG: Succesfully located mom event, attempting removal and replacement.")
-                                mc.business.mandatory_crises_list.remove(mand_event)
-                                mc.business.mandatory_crises_list.append(SB_mom_anal_fetish)
-                                FETISH_ANAL_EVENT_INUSE = True
-                                SB_SET_RANDOM_EVENT_CHANCE(0)
+                        mom_weekly_pay = exists_in_mandatory_crisis_list("mom_weekly_pay_label")
+                        if mom_weekly_pay: # replace default mom weekly pay with new event
+                            # renpy.say("", "Replacing default mom weekly pay event")
+                            mc.business.mandatory_crises_list.remove(mom_weekly_pay)
+                            add_mom_anal_fetish_event()
                     elif the_person is starbuck:
                         if starbuck.shop_investment_rate == 6.0:
-                            mc.business.mandatory_crises_list.append(SB_starbuck_anal_intro_event)
-                            FETISH_ANAL_EVENT_INUSE = True
-                            SB_SET_RANDOM_EVENT_CHANCE(0)
+                            add_sb_starbuck_anal_intro_event()
                     elif the_person is stephanie and head_researcher in the_person.special_role and the_person.personality != bimbo_personality:
-                        mc.business.mandatory_crises_list.append(SB_stephanie_anal_fetish_action)
-                        FETISH_ANAL_EVENT_INUSE = True
-                        SB_SET_RANDOM_EVENT_CHANCE(0)
+                        add_stephanie_anal_fetish_action()
                     elif employee_role in the_person.special_role:
-                        SB_fetish_anal_crisis.args = [the_person]    # set the current person as action argument
-                        mc.business.mandatory_crises_list.append(SB_fetish_anal_crisis)
-                        FETISH_ANAL_EVENT_INUSE = True
-                        SB_SET_RANDOM_EVENT_CHANCE(0)
+                        add_sb_fetish_anal_crisis(the_person)
         return
 
-
     def fetish_cum_function_on_turn(the_person, add_to_log):
-        global FETISH_CUM_EVENT_INUSE
-
         fetish_random_roll_2 = renpy.random.randint(0,100)
 
         tier = get_suggest_tier(the_person)
         if fetish_random_roll_2 < 25 + (tier * 5):
             increase_fetish_sexy_opinion(the_person, FETISH_CUM_OPINION_LIST,  tier - 1)
 
+        if SB_FETISH_EVENT_ACTIVE(): # quick exit fetish event is active, so skip check
+            return
+
         if tier >= 3 and the_person.sex_skills["Oral"] >= 4:
             if the_person.sluttiness >= 90 and SB_get_cum_score(the_person) >= 8:
                 # only allow one cum fetish either internal or external
                 if not (SB_check_fetish(the_person, cum_external_role) or SB_check_fetish(the_person, cum_internal_role)):
                     if SB_get_fetish_count(the_person) < store.max_fetishes_per_person:
-                        #renpy.say("", "Evaluate Cum Fetish (In Use: " + str(FETISH_CUM_EVENT_INUSE) + ")")
-                        if FETISH_CUM_EVENT_INUSE:
-                            return
-
-                        SB_SET_RANDOM_EVENT_CHANCE(0)
-                        #renpy.say("", "Trigger cum fetish " + the_person.name)
+                        # renpy.say("", "Trigger cum fetish " + the_person.name)
                         if the_person is lily:
-                            mc.business.mandatory_morning_crises_list.append(SB_fetish_lily_cum)
-                            FETISH_CUM_EVENT_INUSE = True
+                            add_sb_fetish_lily_cum_event()
                         elif the_person is mom:
-                            mc.business.mandatory_crises_list.append(SB_fetish_mom_cum)
-                            FETISH_CUM_EVENT_INUSE = True
+                            add_sb_fetish_mom_cum_event()
                         elif the_person is stephanie and head_researcher in the_person.special_role and the_person.personality != bimbo_personality:
-                            mc.business.mandatory_crises_list.append(SB_fetish_stephanie_cum_action)
-                            FETISH_CUM_EVENT_INUSE = True
+                            add_sb_fetish_stephanie_cum_event()
                         elif employee_role in the_person.special_role:
-                            SB_fetish_cum_crisis.args = [the_person]
-                            mc.business.mandatory_crises_list.append(SB_fetish_cum_crisis)
-                            FETISH_CUM_EVENT_INUSE = True
+                            add_sb_fetish_cum_crisis(the_person)
         return
 
     def increase_person_sex_skill(the_person, skill_name, max_skill):
