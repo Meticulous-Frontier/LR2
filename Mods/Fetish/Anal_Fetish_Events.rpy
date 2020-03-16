@@ -357,25 +357,44 @@ label SB_fetish_anal_recurring_label():
     return
 
 
+init 2 python:
+    sb_free_strip_pose_list = [["Turn around","walking_away"],["Turn around and look back","back_peek"],["Hands down, ass up.","standing_doggy"],["Be flirty","stand2"],["Be casual","stand3"],["Strike a pose","stand4"],["Move your hands out of the way","stand5"]]
+
+    def sb_free_strip_build_strip_menu(person, must_be_naked):
+        option_list = []
+        option_list.append("Choose Strip Action")
+        for item in the_person.outfit.get_unanchored():
+            if not item.is_extension:
+                test_outfit = the_person.outfit.get_copy()
+                test_outfit.remove_clothing(item)
+
+                display_string = "Strip " + item.name
+                option_list.append([display_string, [item, 0]])
+
+        option_list.append(["Just watch","Watch"])
+        option_list.append(["Tell her to pose","Pose"])
+        if not must_be_naked or (the_person.outfit.vagina_visible() and the_person.outfit.tits_visible()):
+            option_list.append(["Finish the show","Finish"])
+        return option_list
+
+    def sb_free_strip_build_pose_menu(current_pose):
+        option_list = []
+        option_list.append("Choose Pose")
+        for pose in sb_free_strip_pose_list:
+            if not pose[1] == current_pose:
+                option_list.append(pose)
+        option_list.append(["Nevermind",None])
+        return option_list
 
 label SB_free_strip_scene(the_person, must_be_naked = True):
-    #Shamelessly copied and modified from Vrens base function, but this one is free :)
-
-    $ pose_list = [["Turn around","walking_away"],["Turn around and look back","back_peek"],["Hands down, ass up.","standing_doggy"],["Be flirty","stand2"],["Be casual","stand3"],["Strike a pose","stand4"],["Move your hands out of the way","stand5"]]
-
     $ picked_pose = the_person.idle_pose #She starts in her idle pose (which is a string)
-    $ rand_strip_desc = renpy.random.randint(0,3) #Produce 4 different descriptions at each level to help keep this interesting.
-
-    $ strip_willingness = the_person.sluttiness + (5*the_person.get_opinion_score("not wearing anything")) - the_person.outfit.slut_requirement
-    #If there are other things that influence how willing a person is to strip they go here!
-
     $ keep_stripping = True #When set to false the loop ends and the strip show stops.
 
     while keep_stripping:
-        $ rand_strip_desc = renpy.random.randint(0,3)
+        $ ran_num = renpy.random.randint(0,3) #Produce 4 different descriptions at each level to help keep this interesting.
         $ the_person.draw_person(position = picked_pose)
         $ clothing = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True) #She's slutty enough that she wants to tease you a little more
-        if rand_strip_desc == 0:
+        if ran_num == 0:
             if clothing is not None:
                 "[the_person.possessive_title] pulls at her [clothing.name] seductively."
                 the_person.char "Mmm, I bet you want me to take this off, right?"
@@ -385,7 +404,7 @@ label SB_free_strip_scene(the_person, must_be_naked = True):
                 the_person.char "Mmm, I bet you want to get your hands on me now, right?"
                 "[the_person.possessive_title] wiggles her hips side to side and bites her bottom lip, as if imagining some greater pleasure yet to come."
 
-        elif rand_strip_desc == 1:
+        elif ran_num == 1:
             if the_person.has_large_tits():
                 "[the_person.possessive_title] moves her body side to side for you, letting her large tits bounce and jiggle while you watch."
                 "[the_person.possessive_title] takes a wider stances and slides her hands down her own thighs, all while maintaining eye contact with you."
@@ -395,7 +414,7 @@ label SB_free_strip_scene(the_person, must_be_naked = True):
                 "[the_person.possessive_title] takes a wider stances and slides her hands down her own thighs, all while maintaining eye contact with you."
                 the_person.char "You're looking so good today [the_person.mc_title], did you know that?"
 
-        elif rand_strip_desc == 2:
+        elif ran_num == 2:
             if clothing is not None:
                 "[the_person.possessive_title] slips a hand under her [clothing.name] and starts to pull it off."
                 the_person.char "Maybe I should just... slip this off. What do you think?"
@@ -410,71 +429,46 @@ label SB_free_strip_scene(the_person, must_be_naked = True):
             the_person.char "I hope you're enjoying the show [the_person.mc_title]."
             "She wiggles her hips for you and winks."
 
-        $menu_list = [] #Tuple of menu things.
-        # High obedience characters are more willing to be told to strip down (although they still expect to be paid for it)
-        # Low obedience characters will strip off less when told but can be left to run the show on their own and will remove some.
-        python:
-            for item in the_person.outfit.get_unanchored():
-                if not item.is_extension:
-                    test_outfit = the_person.outfit.get_copy()
-                    test_outfit.remove_clothing(item)
+        if "build_menu_items" in globals():
+            call screen main_choice_display(build_menu_items([sb_free_strip_build_strip_menu(the_person, must_be_naked)]))
+        else:
+            call screen main_choice_display([sb_free_strip_build_strip_menu(the_person, must_be_naked)])
+        $ strip_choice = _return
 
-                    display_string = "Strip " + item.name
-
-                    menu_list.append([display_string, [item, 0]])
-
-            menu_list.append(["Just watch.","Watch"])
-            menu_list.append(["Tell her to pose.","Pose"])
-            if not must_be_naked or (the_person.outfit.vagina_visible() and the_person.outfit.tits_visible()):
-                menu_list.append(["Finish the show.","Finish"])
-
-        $ strip_choice = renpy.display_menu(menu_list,True,"Choice")
         if strip_choice == "Watch":
             if renpy.random.randint(0,1) == 0:
                 $ tease_item = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True) #The clothing item she's considering taking off
-                if renpy.random.randint(0,100) < 50: #She's independent enough to strip, change pose, etc. on her own.
+                if renpy.random.randint(0,100) < 67: #She's independent enough to strip, change pose, etc. on her own.
                     if tease_item is not None : #A more obedient person is less willing to strip without being told to. A less obedient person will strip further on their own.
-
                         $ the_person.draw_animated_removal(tease_item, position = picked_pose)
                         "You watch as [the_person.possessive_title] grabs their [tease_item.name] and pulls it off."
                     else:
                         #She has nothing to strip off or she's as slutty as she's willing to get
                         "[the_person.possessive_title] seems comfortable just the way she is."
-
                 else: #She doesn't quite know what to do without you telling her.
                     "Without any direction [the_person.possessive_title] just keeps doing what she was doing."
-
             else:
                 #She decides to change pose half the time.
-                $ new_pose = get_random_from_list(pose_list)
+                $ new_pose = get_random_from_list(sb_free_strip_pose_list)
                 if not new_pose[1] == picked_pose:
                     $ picked_pose = new_pose[1]
                     "While you're watching [the_person.possessive_title] changes pose so you can see her from a different angle."
                 else:
                     "[the_person.possessive_title] seems comfortable just the way she is."
-
-
-
         elif strip_choice == "Pose":
             #You ask her to change into a different pose
             mc.name "I want to see you from a different angle."
-            $pose_menu_tuple = []
-            python:
-                for pose_tuple in pose_list:
-                    if not pose_tuple[1] == picked_pose:
-                        pose_menu_tuple.append(pose_tuple)
-                pose_menu_tuple.append(["Nevermind.",None])
 
-            $ pose_choice = renpy.display_menu(pose_menu_tuple,True,"Choice")
-            $ del pose_menu_tuple
-            if pose_choice is not None:
-                $ picked_pose = pose_choice
+            if "build_menu_items" in globals():
+                call screen main_choice_display(build_menu_items([sb_free_strip_build_pose_menu(picked_pose)]))
+            else:
+                call screen main_choice_display([sb_free_strip_build_pose_menu(picked_pose)])
+
+            if _return:
+                $ picked_pose = _return
                 "[the_person.possessive_title] nods and moves for you."
-
             else:
                 mc.name "Nevermind, you look perfect like this."
-            $ del pose_choice
-
         elif strip_choice == "Finish":
             $ keep_stripping = False
             mc.name "Wow [the_person.title], that was amazing."
@@ -483,13 +477,11 @@ label SB_free_strip_scene(the_person, must_be_naked = True):
                 the_person.char "Oh my, I didn't think I could go that far, i'm glad you enjoyed it."
             else:
                 the_person.char "Oh, are we done already? It feels like something is just getting started!"
-
         else:
             $ the_clothing = strip_choice[0]
             the_person.char "This you mean? You want me to take this off?"
             $ the_person.draw_animated_removal(strip_choice[0], position = picked_pose)
             "[the_person.possessive_title] strips off her [the_clothing.name]. She throws it playfully, hitting you in the face." #Hopefully this wasn't shoes, lol
-
     return
 
 #SBA40
