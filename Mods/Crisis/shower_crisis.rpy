@@ -95,7 +95,7 @@ label shower_crisis_action_label:
                 if the_person.has_taboo(["bare_pussy", "bare_tits"]):
                     "She tries to cover herself as best as the situation allows."
                     the_person.char "Oh my god, [the_person.mc_title], you startled me! You are not supposed to see me like this."
-                    mc.name "Come on [the_person.tile], we are all family here, you don't need to be shy with me. I just thought we could share the shower today."
+                    mc.name "Come on [the_person.title], we are all family here, you don't need to be shy with me. I just thought we could share the shower today."
                     the_person.char "Hmm, well, it is better for the environment...Ok, get in here."
                     $ the_person.break_taboo("bare_pussy")
                     $ the_person.break_taboo("bare_tits")                    
