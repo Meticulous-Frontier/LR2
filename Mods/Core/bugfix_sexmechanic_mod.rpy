@@ -163,7 +163,7 @@ init 5 python:
                         if object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag:
                             appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo).replace("{size=22}", "{size=12}") #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                             option_list.append([appended_name, position])
-            if not (person.outfit.tits_available() and person.outfit.vagina_available()):
+            if not person.outfit.full_access():
                 option_list.append(["Pause and strip her down.","Strip"])
 
             if not hide_leave: #TODO: Double check that we can always get out
@@ -172,7 +172,7 @@ init 5 python:
         else:
             if not position_locked:
                 option_list.append(["Pick a new position\n-5 {image=arousal_token_small}","Change"])
-            if not (person.outfit.tits_available() and person.outfit.vagina_available()):
+            if not person.outfit.full_access():
                 option_list.append(["Pause and strip her down.","Strip"])
             if not hide_leave:
                 option_list.append(["Stop and leave", "Leave"])
@@ -737,8 +737,7 @@ label relationship_being_watched(the_person, the_watcher, the_relation, the_posi
 
 label girl_strip_event_enhanced(the_person, the_position, the_object):
     # first we determine if we should strip at all (when we have full access there is no need for this blocking dialog)
-    if the_person.outfit.tits_available() and not the_person.outfit.wearing_bra() and the_person.outfit.vagina_available() and not the_person.outfit.wearing_panties():
-        # she is fully fuckable exit
+    if the_person.outfit.full_access():
         return
 
     # Called when the girl has a chance of stripping down. Checks what she's prefer to strip based on her opinions.

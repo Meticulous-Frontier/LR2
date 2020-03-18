@@ -68,6 +68,10 @@ init -1 python:
 
     Outfit.has_creampie_cum = has_creampie_cum
 
+    def full_access(self):
+        return self.tits_visible() and not self.wearing_bra() and self.vagina_visible() and not self.wearing_panties()
+
+    Outfit.full_access = full_access
 
     def remove_all_collars(self):
         for proper_name in ["Collar_Breed", "Collar_Cum_Slut", "Collar_Fuck_Doll"]:

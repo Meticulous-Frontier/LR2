@@ -264,13 +264,11 @@ init 5 python:
         return option_list
 
     def build_threesome_round_choice_menu(position_choice, the_person_one, the_person_two, position_locked, hide_leave):
-        show_strip_option = not (the_person_one.outfit.tits_available() and the_person_one.outfit.vagina_available() and the_person_two.outfit.tits_available() and the_person_two.outfit.vagina_available())
-
         option_list = []
         option_list.append("Round Choice")
         if position_choice is not None:
             option_list.append(["Keep going","Continue"]) #Note: you're prevented from continuing if the energy cost would be too high by the pre-round checks.
-            if show_strip_option:
+            if not (the_person_one.outfit.full_access() or the_person_two.outfit.full_access()):
                 option_list.append(["Pause and strip them down","Strip"])
 
             #Give option for MC to change position without changing the girls positions
@@ -293,7 +291,7 @@ init 5 python:
         else:
             if not position_locked:
                 option_list.append(["Pick a new position\n-5 {image=gui/extra_images/arousal_token.png}","Change"])
-            if show_strip_option:
+            if not (the_person_one.outfit.full_access() or the_person_two.outfit.full_access()):
                 option_list.append(["Strip them down","Strip"])
             if not hide_leave:
                 option_list.append(["Stop and leave", "Leave"])
@@ -326,9 +324,9 @@ init 5 python:
     def build_threesome_strip_menu(the_person_one, the_person_two):
         option_list = []
         option_list.append("Stripping Choice")
-        if not (the_person_one.outfit.tits_available() and the_person_one.outfit.vagina_available()):
+        if not the_person_one.outfit.full_access():
             option_list.append (["Strip " + the_person_one.title, "strip_one"])
-        if not (the_person_two.outfit.tits_available() and the_person_two.outfit.vagina_available()):
+        if not the_person_two.outfit.full_access():
             option_list.append (["Strip " + the_person_two.title, "strip_two"])
         option_list.append (["Finished", "leave"])
         return option_list
