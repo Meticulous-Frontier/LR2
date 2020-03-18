@@ -34,7 +34,7 @@ init 5 python:
         return picked_object
 
     def cheating_check_get_watcher(person):
-        other_people = [person for person in mc.location.people if person is not person] #Build a list with all the _other_ people in the room other than the one we're fucking.
+        other_people = [a_person for a_person in mc.location.people if a_person is not person] #Build a list with all the _other_ people in the room other than the one we're fucking.
         for a_person in other_people:
             if girlfriend_role in a_person.special_role and the_position.slut_requirement > (a_person.sluttiness/2): #You can get away with stuff half as slutty as she would do
                 caught_cheating_action = Action("Caught cheating action", caught_cheating_requirement, "caught_cheating_label", args = person)
