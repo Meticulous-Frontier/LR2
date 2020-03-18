@@ -157,7 +157,7 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_1(the_girl_1, the_girl_2, the_l
     else:
         "You hear a low and steady moan coming from [the_girl_2.possessive_title], but its getting muffled by [the_girl_1.title]'s cunt."
     menu:
-        "Talk dirty to [the_girl_2.title].":
+        "Talk dirty to [the_girl_2.title]":
             mc.name "How does that feel? Do you like getting used? I bet you do."
             mc.name "Your pussy feels great, hows her tongue, [the_girl_1.title]?"
             if the_girl_1.arousal > 65:
@@ -175,7 +175,7 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_1(the_girl_1, the_girl_2, the_l
             else:
                 "You tighten your grip on her hips and fuck her faster."
             "You fuck her a little faster for a while then settle back down to a slower, more sustainable rhythm."
-        "Spank her ass.":
+        "Spank her ass":
             "You take a hand off of [the_girl_1.title]'s hips and squeeze her ass cheeks with it. When she gives a yelp in response you give her a hard slap."
             the_girl_1.char "Oh! She's been a bad girl [the_girl_1.mc_title]. Give her a good spanking!"
             if the_girl_2.get_opinion_score("being submissive") > 0: #She likes it
@@ -186,7 +186,7 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_1(the_girl_1, the_girl_2, the_l
                 "*SMACK*"
                 "She moans loudly. You look up and see [the_girl_1.possessive_title] is enjoying the extra stimulation."
                 "*SMACK*"
-                "She moans again. A red handprint is starting to form on her ass cheek."
+                "She moans again. A red hand print is starting to form on her ass cheek."
                 "*SMACK*"
                 the_girl_2.char "Ahh! Mmmmmmmm"
                 "She cries out, enjoying your rough treatment of her body."
@@ -239,7 +239,7 @@ label outro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
     "Pounding [the_girl_2.possessive_title] tight cunt, and watching her pleasure [the_girl_1.title] soon has you passing the point of no return."
     mc.name "Ah, I'm going to cum!"
     menu:
-        "Cum inside of her.":
+        "Cum inside of her":
             "Her pussy is just too good. There's no way you are going to pull out."
             if mc.condom:  #Not sure how we have a condom on but I guess it could happen
                 "You grab [the_girl_2.possessive_title]'s hips and thrust deep. You dump your load inside of the condom, filling it up."
@@ -268,7 +268,7 @@ label outro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
                     "She revels in having her cum fetish fulfilled."
                 "You slowly pull back. Your cum is dripping out of her cunt and down the inside of her legs."
                 "You sit back and enjoy the feeling of post orgasm bliss."
-        "Cum on her ass.":
+        "Cum on her ass":
             if mc.condom:
                 "You pull out of [the_girl_2.title] at the last moment. You whip your condom off and stroke your cock as you blow your load over her ass."
                 "She wiggles her ass for you as you cover her with your special sauce."
@@ -376,7 +376,7 @@ label outro_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_locat
     "[the_girl_2.possessive_title]'s tight ass draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
     mc.name "Ah, I'm going to cum!"
     menu:
-        "Cum inside of her.":
+        "Cum inside of her":
             if mc.condom:
                 "You grab [the_girl_2.possessive_title]'s hips and thrust deep. You dump your load inside of the condom, filling it up."
                 $ condom_break_chance = renpy.random.randint(0, 100)
@@ -397,7 +397,7 @@ label outro_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_locat
             $ the_girl_2.cum_in_ass()
             $ scene_manager.draw_scene()
             "You wait until your orgasm has passed completely, then pull out and sit back. Her asshole gapes slightly and you can see a hint of your cum start to dribble out, but most of it stays buried with her bowel"
-        "Cum on her ass.":
+        "Cum on her ass":
             if mc.condom:
                 "You pull out of [the_girl_2.possessive_title] at the last moment, pulling your condom off as your blow your load all over her ass."
                 "She holds still for you as you cover her with your sperm."

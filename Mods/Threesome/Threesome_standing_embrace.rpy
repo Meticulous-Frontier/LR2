@@ -118,7 +118,7 @@ label outro_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the
     $the_girl_2.call_dialogue("sex_responses_vaginal")
     mc.name "Ah, I'm going to cum!"
     menu:
-        "Cum inside of her.":
+        "Cum inside of her":
             if mc.condom:
                 "You pull back on [the_girl_2.possessive_title]'s hips and drive your cock as deep inside of her as you cum. She gasps when she feels you filling the condom deep inside of her."
                 "You wait until your orgasm has passed completely, then pull out and stand back. You condom is bulged on the end where it is filled with your seed."
@@ -134,7 +134,7 @@ label outro_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the
             $ scene_manager.draw_scene()
             the_girl_1.char "Damn that was hot... is it my turn next?"
 
-        "Cum on her ass.":
+        "Cum on her ass":
             if mc.condom:
                 "You pull out of [the_girl_2.possessive_title] at the last moment, pulling your condom off as your blow your load all over her ass."
                 "She holds still for you as you cover her with your sperm."

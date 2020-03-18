@@ -232,7 +232,7 @@ label scene_threesome_double_blowjob_makeout_1(the_girl_1, the_girl_2, the_locat
         "[the_girl_2.title] starts to pull at her clothes."
         $ scene_manager.strip_actor_outfit(the_girl_1, exclude_upper = True)
         "Once her pussy is bare, the girls waste no time and begin to pet each other."
-    "[the_girl_1.title] and [the_girl_2.title] begin moaning into each others mouths as they make out, while simulteanously fingering each other."
+    "[the_girl_1.title] and [the_girl_2.title] begin moaning into each others mouths as they make out, while simultaneously fingering each other."
     "You start to stroke yourself, watching the impressive show in front of, but you soon feel another hand on yours."
     if mc.recently_orgasmed:
         "[the_girl_1.title]'s hand bumps yours away, and she begins to stroke your semi-erect cock."
