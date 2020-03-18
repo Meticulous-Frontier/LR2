@@ -69,7 +69,9 @@ init -1 python:
     Outfit.has_creampie_cum = has_creampie_cum
 
     def full_access(self):
-        return self.tits_visible() and not self.wearing_bra() and self.vagina_visible() and not self.wearing_panties()
+        return ((self.tits_visible() and self.tits_available() and not self.wearing_bra() 
+            and self.vagina_visible() and self.vagina_available() and not self.wearing_panties())
+            and not any(x.layer == 2 for x in self.upper_body))
 
     Outfit.full_access = full_access
 
