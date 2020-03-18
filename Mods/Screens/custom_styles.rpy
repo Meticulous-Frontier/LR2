@@ -81,3 +81,9 @@ init 2 style menu_text_style:
     color "#dddddd"
     outlines [(2,"#222222",0,0)]
     text_align 0.5
+
+init 2 style float_text:
+    size 24
+    italic False
+    bold False
+    outlines [(2,"#222222",0,0)]
