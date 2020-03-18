@@ -2,8 +2,8 @@ init 2:
 
     screen phone_hud_ui():
         default phone_up = False
-        default start_phone_pos = 0
-        default end_phone_pos = 0
+        default start_phone_pos = 1.4
+        default end_phone_pos = 1.4
         frame:
             background "#1a45a1aa"
             xsize 300
