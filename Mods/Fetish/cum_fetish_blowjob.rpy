@@ -39,7 +39,7 @@ label scene_SB_cum_fetish_blowjob_1(the_girl, the_location, the_object):
     "[the_girl.possessive_title] keeps her mouth open wide and bobs her head back and forth to slide your cock in and out. The feeling of her soft, warm mouth sends shivers up your spine."
     "She moans slightly as she strokes you with her soft, velvet lips."
     menu:
-            "Talk dirty to her.":
+            "Talk dirty to her":
                 mc.name "You are such a good cum slut. You are so eager to suck that cum straight outta me, aren't you?"
                 "[the_girl.possessive_title] strokes you a few more times with her skill mouth. She twirls her tongue around the tip a few times before taking a second to respond."
                 if SB_check_fetish(the_girl, cum_internal_role) or the_girl.get_opinion_score("drinking cum") > the_girl.get_opinion_score("cum facials"):
@@ -49,7 +49,7 @@ label scene_SB_cum_fetish_blowjob_1(the_girl, the_location, the_object):
                     the_girl.char "Mmm, I can't wait until I feel it, your balls tighten and that pre-cum twitching... then I'm gonna pull off and stroke you while you cover my face in your hot cum..."
                     $ the_girl.discover_opinion("cum facials")
                     "She slips you back into her mouth and resumes blowing you."
-            "Stay quiet.":
+            "Stay quiet":
                 "You rest your hand on her head, guiding her as she sucks you off."
                 "With a little encouragement, you pull [the_girl.possessive_title]'s head down a little further with each stroke."
                 if the_girl.get_opinion_score("masturbating") > 0:
@@ -186,7 +186,7 @@ label strip_ask_SB_cum_fetish_blowjob(the_girl, the_clothing, the_location, the_
     "[the_girl.possessive_title] pops off your cock and looks up at you from her knees."
     the_girl.char "Sir, I'd like to take off my [the_clothing.name], would you mind?"
     menu:
-        "Let her strip.":
+        "Let her strip":
             mc.name "Take it off for me."
             $ the_girl.draw_animated_removal(the_clothing, position = SB_cum_fetish_blowjob.position_tag)
             "[the_girl.possessive_title] stands up and strips out of her [the_clothing.name]. Then she gets back onto her knees and slides your cock all the way to the back of her mouth."
@@ -194,7 +194,7 @@ label strip_ask_SB_cum_fetish_blowjob(the_girl, the_clothing, the_location, the_
             $ SB_cum_fetish_blowjob.redraw_scene(the_girl)
 
 
-        "Leave it on.":
+        "Leave it on":
             mc.name "No, I like how you look with it on."
             the_girl.char "Is it sexy? Does it make you just want to blow your load, looking at me wearing this?"
             $ SB_cum_fetish_blowjob.current_modifier = "blowjob"

@@ -172,7 +172,7 @@ label casual_hotwife_get_a_drink_label(the_person):
                 "You head over to the bar and order yourself a beer, [the_person.title] orders herself a fruity sounding cocktail."
                 the_person.char "Hey there, [the_person.SO_name]! I'll have a flora dora tonight. You know how I like it!"
                 "It sounds like she knows the bartender. She must be in here pretty often!"
-        "Grab Drinks Seperately":
+        "Grab Drinks Separately":
             the_person.char "That's okay! I prefer to go dutch anyway."
             "You head over to the bar and order yourself a beer, [the_person.title] orders herself a fruity sounding cocktail."
             the_person.char "Hey there, [the_person.SO_name]! I'll have a flora dora tonight. You know how I like it!"

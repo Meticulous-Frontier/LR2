@@ -1377,7 +1377,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
         "She stutters for a minute."
         the_person.char "I understand that you aren't looking to be tied down to one girl, and I just want you to know that I understand that. I just want to know if you, maybe have feelings for me too..."
         menu:
-            "It's mutual.":
+            "It's mutual":
                 mc.name "Don't worry, [the_person.title]. The feeling is mutual. I love spending time with you."
                 $ the_person.draw_person(position = "stand2", emotion = "happy")
                 the_person.char "Oh! That is such a relief to hear."
@@ -1516,7 +1516,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         "You head into her kitchen and notice her coffee pot is on and full. Was she expecting you? You pour yourself a cup and take a few sips."
         "You sit down and enjoy your coffee. It has been about 5 minutes now. The crack in the door is calling you. Should you join her in the shower? Or let her finish?"
         menu:
-            "Shower with her.":
+            "Shower with her":
                 $ the_person.apply_outfit(Outfit("Nude"))
                 #TODO shower background?
                 "You decide you've waited long enough and make your way into the bathroom. Inside you smell the scent of lavender body wash and quickly spy [the_person.title]'s soapy body through the hazy steam."

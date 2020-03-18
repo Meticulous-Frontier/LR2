@@ -1176,7 +1176,7 @@ label SB_stephanie_anal_fetish_label():
                 "Looks like [the_person.title] has an anal fetish now! But she is also a bimbo."
                 "You are guessing she is probably not particularly fit for her job in research. Maybe you can move her somewhere else in the company?"
 
-            "Try to talk her down \n{size=22}Requires High Charisma{/size}(disabled)" if mc.charisma <= 6:
+            "Try to talk her down\n{size=22}Requires High Charisma{/size}(disabled)" if mc.charisma <= 6:
                 pass
 
     elif the_person.love < 70 and not girlfriend_role in the_person.special_role:   #She kinda trusts / loves you, but isn't fully committed and needs some convincing.

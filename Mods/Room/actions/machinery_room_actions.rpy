@@ -35,7 +35,7 @@ label machinery_room_construct_production_line_label():
     "[mc.business.name] currently has [mc.business.production_lines] production lines. Expanding and creating a new line will cost [production_line_cost]"
 
     menu:
-        "Purchase Production Line \nCosts: $[production_line_cost]":
+        "Purchase Production Line\nCosts: $[production_line_cost]":
             $ add_production_lines(1)
             $ mc.business.change_funds(- production_line_cost)
 
@@ -56,7 +56,7 @@ label machinery_room_overload_label():
     "Do you wish to spend $[overload_cost] to increase the maximum capacity by 10%%?"
 
     menu:
-        "Yes \nCosts: $[overload_cost]":
+        "Yes\nCosts: $[overload_cost]":
             $ mc.business.change_funds(- overload_cost)
 
             $ machinery_room_overload += 10

@@ -148,7 +148,7 @@ label late_for_work_action_label:
                     "Satisfied with her work, you enjoy the afterglow of your orgasm."
                 else:
                     "You decide not to cum for her at this time."
-                mc.name "That's enough for now. Try to be on time from now on, or atleast be ready to service me again if you ARE going to be late."
+                mc.name "That's enough for now. Try to be on time from now on, or at least be ready to service me again if you ARE going to be late."
                 the_person.char "Yes sir!"
                 $ the_person.change_obedience(2)
                 $ the_person.change_slut_temp(2)

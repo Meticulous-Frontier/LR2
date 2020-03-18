@@ -98,16 +98,16 @@ label scene_SB_threesome_sixty_nine_1(the_girl_1, the_girl_2, the_location, the_
                     $ SB_threesome_sixty_nine.redraw_scene(the_girl_1, the_girl_2)
 
         menu:
-            "Squeeze her tits.":
+            "Squeeze her tits":
                 "You grab [the_girl_2.title]'s tits. They feel warm and soft in your hands. You pinch and tug at her nipples."
                 the_girl_2.char "Mmmm, [the_girl_2.mc_title]. I love your hands on me."
                 $the_girl_2.change_arousal(mc.sex_skills["Foreplay"])
-            "Suck her nipples." if the_girl_2.outfit.tits_available():
+            "Suck her nipples" if the_girl_2.outfit.tits_available():
                 "You lean forward and run your tongue all around one of [the_girl_2.title]'s nipples."
                 the_girl_2.char "Oh! [the_girl_2.mc_title]! That feels good!."
                 "You suck one of [the_girl_2.possessive_title]'s nipples into your mouth. You flip it up and down with your tongue a few times."
                 $the_girl_2.change_arousal(mc.sex_skills["Oral"])
-            "Suck her nipples.\n{size=22}Obstucted by Clothing{/size} (disabled)" if not the_girl_2.outfit.tits_available():
+            "Suck her nipples\n{size=22}Obstructed by Clothing{/size} (disabled)" if not the_girl_2.outfit.tits_available():
                 pass
                 
         "While you give attention to [the_girl_2.possessive_title]'s tits, you never stop pistoning your cock in and out of [the_girl_1.title]'s slick pussy."
@@ -163,7 +163,7 @@ label outro_SB_threesome_sixty_nine(the_girl_1, the_girl_2, the_location, the_ob
         "Between [the_girl_1.title]'s steamy pussy and [the_girl_2.title]'s heaving tits in front of you, you find yourself going past the point of no return."
         mc.name "Oh fuck I'm gonna cum!"
         menu:
-            "Cum inside [the_girl_1.title].":
+            "Cum inside [the_girl_1.title]":
                 "You thrust yourself deep inside of [the_girl_1.title]'s cunt as you climax."
                 if the_girl_1.arousal > 100:
                     "Your cock bursting deep inside her triggers another orgasm for [the_girl_1.title]. She is moaning non stop."
@@ -183,7 +183,7 @@ label outro_SB_threesome_sixty_nine(the_girl_1, the_girl_2, the_location, the_ob
                     "As you slowly pull out of [the_girl_1.title], a trickle of your cum starts to escape her."
                 "You give a sigh, deeply contented with having dumped your load inside of [the_girl_1.title]."
 
-            "Cum on [the_girl_2.title]'s face.":
+            "Cum on [the_girl_2.title]'s face":
                 "You pull out of [the_girl_1.title] and grab the back of [the_girl_2.title]'s head, bringing it toward your cock."
                 "She instinctively reaches out and starts to stroke you, pointing your cock right at her face."
                 "Your orgasm erupts and you begin spraying cum across her face."
@@ -204,7 +204,7 @@ label outro_SB_threesome_sixty_nine(the_girl_1, the_girl_2, the_location, the_ob
         "[the_girl_2.possessive_title]'s talented mouth suddenly pushes you past the point of no return. Her tongue slithers and swirly relentlessly around your cock."
         mc.name "Oh fuck I'm gonna cum!"
         menu:
-            "Cum inside [the_girl_2.title]'s mouth'.":
+            "Cum inside [the_girl_2.title]'s mouth":
                 "You put your hand on the back of [the_girl_2.possessive_title]'s head."
                 mc.name "That's it [the_girl_2.title]. I want you to swallow it all!"
                 "[the_girl_2.title] moans and looks you in the eyes. She pulls off until just the tip of your cock is in her mouth and she begins to stroke out off eagerly."
@@ -218,7 +218,7 @@ label outro_SB_threesome_sixty_nine(the_girl_1, the_girl_2, the_location, the_ob
                 "After you finish cumming, [the_girl_2.possessive_title] slowly pulls away from your cock."
                 "You give a sigh, deeply contented with having dumped your load inside of [the_girl_2.possessive_title]'s mouth."
 
-            "Cum on [the_girl_2.title]'s face.":
+            "Cum on [the_girl_2.title]'s face":
                 "You pull out of [the_girl_2.title]'s mouth."
                 "She instinctively reaches out and starts to stroke you, pointing your cock right at her face."
                 "Your orgasm erupts and you begin spraying cum across her face."

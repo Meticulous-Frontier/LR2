@@ -164,7 +164,7 @@ init 5 python:
                             appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo).replace("{size=22}", "{size=12}") #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                             option_list.append([appended_name, position])
             if not person.outfit.full_access():
-                option_list.append(["Pause and strip her down.","Strip"])
+                option_list.append(["Pause and strip her down","Strip"])
 
             if not hide_leave: #TODO: Double check that we can always get out
                 option_list.append(["Stop " + position_choice.verbing + " her and leave", "Leave"]) #TODO: Have this appear differently depending on if you've cum yet, she's cum yet, or you've both cum.
@@ -173,7 +173,7 @@ init 5 python:
             if not position_locked:
                 option_list.append(["Pick a new position\n-5 {image=arousal_token_small}","Change"])
             if not person.outfit.full_access():
-                option_list.append(["Pause and strip her down.","Strip"])
+                option_list.append(["Pause and strip her down","Strip"])
             if not hide_leave:
                 option_list.append(["Stop and leave", "Leave"])
         return option_list
@@ -354,13 +354,13 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     # They're close to their orgasm and beg you to help them finish.
                     $ the_person.call_dialogue("sex_beg_finish")
                     menu:
-                        "Give her what she wants.":
+                        "Give her what she wants":
                             $ the_person.change_obedience(2)
                             $ report_log["beg finish"] = report_log.get("beg finish", 0) + 1
                             $ finished = False
                             $ position_locked = False
 
-                        "Stop and leave.":
+                        "Stop and leave":
                             $ the_person.call_dialogue("sex_end_early")
 
                 elif report_log.get("beg finish", 0) > 0 and report_log.get("girl orgasms", 0) == 0: #You promised to make her cum but didn't
@@ -475,7 +475,7 @@ label condom_ask_enhanced(the_person):
                             "[the_person.title] grabs the condom and throws it off to the side."
                             the_person.char "Either we fuck and you come inside me or we don't fuck at all."
                             menu:
-                                "Fuck her raw.":
+                                "Fuck her raw":
                                     mc.name "Fine."
                                     the_person.char "I knew you would make the right choice."
                                 "Don't":
@@ -501,7 +501,7 @@ label condom_ask_enhanced(the_person):
                 "Put on condom":
                     call put_on_condom_routine(the_person) from _call_put_on_condom_routine_1
 
-                "Refuse and do something else.":
+                "Refuse and do something else":
                     "[the_person.title] doesn't seem like she's going to change her mind."
                     mc.name "If it's that important to you let's just do something else."
                     return False
@@ -547,10 +547,10 @@ label condom_ask_enhanced(the_person):
             the_person.char "Do you have a condom? You're going to have to put one on."
 
         menu:
-            "Put on a condom.":
+            "Put on a condom":
                 call put_on_condom_routine(the_person) from _call_put_on_condom_routine_4
 
-            "Refuse and do something else.":
+            "Refuse and do something else":
                 "[the_person.title] doesn't seem like she's going to change her mind."
                 mc.name "If it's that important to you let's just do something else."
                 return False
@@ -598,7 +598,7 @@ label condom_ask_enhanced(the_person):
                                 "[the_person.title] grabs the condom and throws it off to the side."
                                 the_person.char "Either you fuck me raw or we don't fuck at all."
                                 menu:
-                                    "Fuck her raw.":
+                                    "Fuck her raw":
                                         mc.name "Fine."
                                         the_person.char "I knew you would make the right choice."
                                     "Don't":

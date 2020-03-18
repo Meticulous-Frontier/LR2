@@ -164,27 +164,27 @@ label mc_hire_person_label(person):
 
     "You complete the necessary paperwork and hire [person.title]. What division do you assign them to?"
     menu:
-        "Research and Development.":
+        "Research and Development":
             $ mc.business.add_employee_research(person)
             $ mc.location.move_person(person, mc.business.r_div)
             $ person.set_work([1,2,3], mc.business.r_div)
 
-        "Production.":
+        "Production":
             $ mc.business.add_employee_production(person)
             $ mc.location.move_person(person, mc.business.p_div)
             $ person.set_work([1,2,3], mc.business.p_div)
 
-        "Supply Procurement.":
+        "Supply Procurement":
             $ mc.business.add_employee_supply(person)
             $ mc.location.move_person(person, mc.business.s_div)
             $ person.set_work([1,2,3], mc.business.s_div)
 
-        "Marketing.":
+        "Marketing":
             $ mc.business.add_employee_marketing(person)
             $ mc.location.move_person(person, mc.business.m_div)
             $ person.set_work([1,2,3], mc.business.m_div)
 
-        "Human Resources.":
+        "Human Resources":
             $ mc.business.add_employee_hr(person)
             $ mc.location.move_person(person, mc.business.h_div)
             $ person.set_work([1,2,3], mc.business.h_div)

@@ -281,13 +281,13 @@ label strip_ask_SB_reverse_cowgirl(the_girl, the_clothing, the_location, the_obj
     "[the_girl.possessive_title] straightens up a bit and peaks back at you."
     the_girl.char "Sir, I'd like to take off my [the_clothing.name], would you mind?"
     menu:
-        "Let her strip.":
+        "Let her strip":
             mc.name "Take it off for me."
             $ the_girl.draw_animated_removal(the_clothing, position = SB_reverse_cowgirl.position_tag)
             "[the_girl.possessive_title] struggles out of her [the_clothing.name] and throws it to the side."
             "She resumes working her hips up and down on top of you with a sigh."
 
-        "Leave it on.":
+        "Leave it on":
             mc.name "No, I like how you look with it on."
             if the_girl.sluttiness < 80:
                 the_girl.char "Do you think I look sexy in it?"

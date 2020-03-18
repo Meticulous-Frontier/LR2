@@ -70,9 +70,9 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
     $the_girl.call_dialogue("sex_responses_vaginal")
     mc.name "Ah, I'm going to cum!"
     menu:
-        "Cum inside of her.":
+        "Cum inside of her":
             if stealth_orgasm:  #You sly dog
-                "You know you should probably pull out after stealthing the condom off, but you can't. You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum."
+                "You know you should probably pull out after pulling the condom off, but you can't. You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum."
                 the_girl.char "Oh god, you are cumming so hard, I swear I can almost feel it splashing inside of me!"
                 $ the_girl.cum_in_vagina()
                 $ doggy.redraw_scene(the_girl)
@@ -122,7 +122,7 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
 
                 "You wait until your orgasm has passed completely, then pull out and sit back. Your cum starts to drip out of [the_girl.title]'s slit almost immediately."
 
-        "Cum on her ass.":
+        "Cum on her ass":
             $ stealth_orgasm = False
             if mc.condom:
                 "You pull out of [the_girl.title] at the last moment. You whip your condom off and stroke your cock as you blow your load over her ass."

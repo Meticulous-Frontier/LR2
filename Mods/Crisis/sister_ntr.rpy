@@ -32,7 +32,7 @@ label sister_ntr_crisis_action_label:
     menu:
         "Investigate?":
             pass
-        "Ignore it.":
+        "Ignore it":
             return
     "As it seems to not let you sleep, you decide to investigate."
     "You drag yourself out of bed and enter the hallway. There is a trace of light down the door to [the_person.possessive_title]'s bedroom."

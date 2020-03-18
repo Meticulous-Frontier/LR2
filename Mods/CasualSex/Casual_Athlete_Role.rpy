@@ -548,7 +548,7 @@ label casual_athlete_buy_protein_shake_label(the_person):
     $ mc.business.change_funds(-5)
     "Before you take it back to her, you have a moment with no one around. You can add a serum to it if you do it quickly!"
     menu:
-        "Add a dose of serum to [the_person.title]'s shake.":
+        "Add a dose of serum to [the_person.title]'s shake":
             call give_serum(the_person) from _call_give_serum_casual_athlete
             $ the_person.draw_person(emotion = "happy")
             "You mix the serum into [the_person.title]'s protein shake. You take it over to her."
@@ -560,7 +560,7 @@ label casual_athlete_buy_protein_shake_label(the_person):
         "Leave her drink alone.":
             "You decide not to test a dose of serum out on [the_person.title] and take the shake back to her."
             $ the_person.draw_person(emotion = "happy")
-            the_person.char "Thanks [the_person.mc_title]."
+            the_person.char "Thanks [the_person.mc_title]"
             mc.name "No problem at all."
             $ renpy.scene("Active")
 

@@ -78,13 +78,13 @@ label scene_SB_anal_cowgirl_2(the_girl, the_location, the_object):
             $ the_clothing = the_girl.outfit.get_upper_visible()[0]
             "Her large tits are barely contained by her [the_clothing.name]. You watch them bounce around as she fucks you vigorously."
             menu:
-                "Pull her [the_clothing.name] off.":
+                "Pull her [the_clothing.name] off":
                     "You reach up and start to pull at her [the_clothing.name]. She stops fucking you for a moment as she moves her arms to give you better access."
                     mc.name "I want a better look at your tits while you fuck me."
                     $ the_girl.draw_animated_removal(the_clothing, position = SB_anal_cowgirl.position_tag) #Hopefully this copy paste works.
                     "Now free of her [the_clothing.name], [the_girl.possessive_title] resumes fucking you."
                     return
-                "Play with her pussy.":
+                "Play with her pussy":
                     "You quickly stick your thumb in your mouth to get it wet, then reach down and start to rub her clit with your thumb as she rides you."
                     if the_girl.get_opinion_score("being fingered"):
                         "[the_girl.possessive_title] moans as you start to play with her."
@@ -108,13 +108,13 @@ label scene_SB_anal_cowgirl_2(the_girl, the_location, the_object):
             "She reaches up and grabs onto one of her small tits through her [the_clothing.name]. She kneads it through the fabric and moans loudly while she rides you."
             the_girl.char "Ah!"
             menu:
-                "Pull her [the_clothing.name] off.":
+                "Pull her [the_clothing.name] off":
                     "You reach up and start to pull at her [the_clothing.name]. She stops fucking you for a moment as she moves her arms to give you better access."
                     mc.name "I want a better look at your tits while you fuck me."
                     $ the_girl.draw_animated_removal(the_clothing, position = SB_anal_cowgirl.position_tag) #Hopefully this copy paste works.
                     "Now free of her [the_clothing.name], [the_girl.possessive_title] resumes fucking you."
                     return
-                "Play with her pussy.":
+                "Play with her pussy":
                     "You quickly stick your thumb in your mouth to get it wet, then reach down and start to rub her clit with your thumb as she rides you."
                     if the_girl.get_opinion_score("being fingered"):
                         "[the_girl.possessive_title] moans as you start to play with her."

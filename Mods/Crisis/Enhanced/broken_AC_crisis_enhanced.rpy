@@ -70,7 +70,7 @@ label broken_AC_crisis_label_enhanced:
         "The air conditioner was under warranty, and a quick call has one of their repair men over in a couple of hours. Until then, the production staff want to know what to do."
 
     menu:
-        "Take a break.":
+        "Take a break":
             "You tell everyone in the production lab to take a break for a few hours while the air conditioning is repaired."
             "The unexpected break raises moral and makes the production staff feel more independent."
             $ broken_AC_crisis_update_stats(5, -2)
@@ -81,7 +81,7 @@ label broken_AC_crisis_label_enhanced:
             $ broken_AC_crisis_update_stats(-5, 2)
             "The repair man shows up early and it turns out to be an easy fix. The lab is soon back up and running."
 
-        "Tell everyone to strip down and keep working." if casual_uniform_policy.is_owned():
+        "Tell everyone to strip down and keep working" if casual_uniform_policy.is_owned():
             if len(mc.business.production_team) > 1: #We have more than one person, do a group strip scene.
                 mc.name "I know it's uncomfortable in here right now, but we're just going to have to make due."
                 mc.name "If anyone feels the need to take something off to get comfortable, I'm lifting the dress code until the air conditioning is fixed."

@@ -39,7 +39,7 @@ label interview_action_description_enhanced:
     $ count = get_candidate_count()
     "Bringing in [count] people for an interview will cost $50. Do you want to spend time interviewing potential employees?"
     menu:
-        "Yes, I'll pay the cost. -$50":
+        "Yes, I'll pay the cost   -$50":
             $ mc.business.change_funds(-50)
             $ renpy.scene("Active")
 
@@ -66,6 +66,6 @@ label interview_action_description_enhanced:
                 candidates.clear() #Prevent it from using up extra memory
 
             call advance_time from _call_advance_time_interview_action_enhanced
-        "Nevermind.":
+        "Nevermind":
             pass
     return

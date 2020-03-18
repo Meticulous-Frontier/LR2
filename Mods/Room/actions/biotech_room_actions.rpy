@@ -140,7 +140,7 @@ label cloning_process(person = the_person): # default to the_person when not pas
                 $ clone_age = int(renpy.input("Age: ", person.age))
                 if clone_age < 18:
                     $ clone_age = 18
-            "Begin production:{image=gui/heart/Time_Advance.png} \n{size=22}Name: [clone_name] [clone_last_name], Age: [clone_age]{/size}":
+            "Begin production: {image=gui/heart/Time_Advance.png}\n{size=22}Name: [clone_name] [clone_last_name], Age: [clone_age]{/size}":
                 $ create_clone(person, clone_name, clone_last_name, clone_age)
                 "The clone has been created and is now awaiting you in [rd_division_basement.formalName]"
                 call advance_time from _call_advance_time_cloning_process

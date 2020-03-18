@@ -478,7 +478,7 @@ label outro_SB_facing_wall(the_girl, the_location, the_object):
     $the_girl.call_dialogue("sex_responses_vaginal")
     mc.name "Ah, I'm going to cum!"
     menu:
-        "Cum inside of her.":
+        "Cum inside of her":
             if mc.condom:
                 "You pull back on [the_girl.possessive_title]'s hips and drive your cock as deep inside of her as you cum. She gasps when she feels you filling the condom deep inside of her."
                 "You wait until your orgasm has passed completely, then pull out and stand back. You condom is bulged on the end where it is filled with your seed."
@@ -503,7 +503,7 @@ label outro_SB_facing_wall(the_girl, the_location, the_object):
             if the_girl.get_opinion_score("bareback sex") > 0:
                 "[the_girl.possessive_title] reaches back and desperately tries to stop any more from leaking out with her hand."
 
-        "Cum on her ass.":
+        "Cum on her ass":
             if mc.condom:
                 "You pull out of [the_girl.possessive_title] at the last moment, pulling your condom off as your blow your load all over her ass."
                 "She holds still for you as you cover her with your sperm."
@@ -522,7 +522,7 @@ label outro_SB_facing_wall(the_girl, the_location, the_object):
             else:
                 the_girl.char "Oh! Its so warm..."
             "You stand back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
-        "Cum on her face.":
+        "Cum on her face":
             mc.name "Fuck, get ready [the_girl.title], I wanna cum on your face!"
             if mc.condom:
                 "You pull your cock out of [the_girl.possessive_title] with a satisfying pop. You pull your condom off as she turns around on gets on her knees in front of you."
@@ -610,13 +610,13 @@ label strip_ask_SB_facing_wall(the_girl, the_clothing, the_location, the_object)
     the_girl.char "Sir, I'd like to take off my [the_clothing.name], would you mind?"
     "[the_girl.char] pants as you fuck her from behind."
     menu:
-        "Let her strip.":
+        "Let her strip":
             mc.name "Take it off for me."
             $ the_girl.draw_animated_removal(the_clothing, position = SB_facing_wall.position_tag)
             "[the_girl.possessive_title] struggles out of her [the_clothing.name] and throws it to the side. Then she gets herself lined up in front of you again."
             "She groans happily when you push back inside of her."
 
-        "Leave it on.":
+        "Leave it on":
             mc.name "No, I like how you look with it on."
             if the_girl.sluttiness < 80:
                 the_girl.char "Do you think I look sexy in it?"

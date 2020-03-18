@@ -549,7 +549,7 @@ label Sarah_get_drinks_label():
 
             $ the_person.change_happiness(20)
             $ the_person.change_love(10)
-        "Just as friends.":
+        "Just as friends":
             mc.name "I wouldn't mind going out for a few drinks, with a friend of course."
             $ scene_manager.add_actor(the_person, emotion = "sad")
             "Her face shows visible signs of disappointment."
@@ -1436,7 +1436,7 @@ label Sarah_stripclub_story_label():
                     the_person.char "But the things you do to me... my husband doesn't even come close!"
                     $ the_person.special_role.append(affair_role)
                     $ the_person.change_slut_temp(2)
-                "Let's keep it casual.":
+                "Let's keep it casual":
                     the_person.char "Ah, okay. So like, friends with benefits? Is that what we are talking about here?"
                     mc.name "Exactly."
                     the_person.char "Okay. That actually makes things a little easier for me. I can manage that!"
@@ -1463,7 +1463,7 @@ label Sarah_stripclub_story_label():
                     $ ex_title = so_title[:4]
                     $ the_person.relationship = "Single"
                     $ the_person.SO_name = None
-                "Let's keep it casual.":
+                "Let's keep it casual":
                     the_person.char "Ah, okay. So like, friends with benefits? Is that what we are talking about here?"
                     mc.name "Exactly."
                     the_person.char "Okay. That actually makes things a little easier for me. I can manage that!"

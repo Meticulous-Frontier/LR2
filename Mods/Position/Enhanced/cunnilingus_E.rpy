@@ -92,9 +92,9 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
             if the_girl.outfit.has_ass_cum():
                 "As you lick her you notice that [the_girl.title] still has cum in her ass."
                 menu:
-                    "Ignore it.":
+                    "Ignore it":
                         "You decide to focus on her ass."
-                    "Suck it up.":
+                    "Suck it up":
                         "You start to gently lick around her asshole and then start to suck the cum out of her ass, gently at first but with increasing pressure."
                         $ the_girl.change_arousal(2 + the_girl.get_opinion_score("anal sex"))
                         "You go back to rimming [the_girl.possessive_title]."

@@ -59,7 +59,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
         "You rest your hands on [the_girl.possessive_title]'s ass as she bobs her head up and down. She struggles to take your very deep, so she focuses on licking and sucking your tip."
         "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smackin noise"
         menu:
-            "Focus on her." if mc.sex_skills["Oral"] > 2:
+            "Focus on her" if mc.sex_skills["Oral"] > 2:
                 "After a few teasing licks, you bury your face in her pussy. You make a few swiping licks across her clit and the lap up some of the juices flowing from her nethers."
                 "[the_girl.possessive_title] is overwhelmed by the sensations and momentarily pulls off your dick."
                 the_girl.char "Mmm! God [the_girl.mc_title] that feels so good..."
@@ -75,9 +75,9 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                     "You pause your licking to give her some encouragement."
                     mc.name "Don't worry, you just need more practice."
                 "You knead her ass cheeks with your hands a few times, then spread her cheeks apart and continue to eat her out."
-            "Focus on her.\n{size=22}Requires Oral Skill{/size} (disabled)" if mc.sex_skills["Oral"] < 3:
+            "Focus on her\n{size=22}Requires Oral Skill{/size} (disabled)" if mc.sex_skills["Oral"] < 3:
                     pass
-            "Focus on you.":
+            "Focus on you":
                 "You pause your licking to give her some encouragement."
                 mc.name "It's okay you can't go deep. Use your hands a little!"
                 if the_girl.sex_skills["Foreplay"] < 2:
@@ -114,7 +114,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
         "[the_girl.possessive_title] bobs her head up and down to slide your cock in and out. The feeling of her soft, warm mouth sends shivers up your spine."
         "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smackin noise"
         menu:
-            "Focus on her." if mc.sex_skills["Oral"] > 2:
+            "Focus on her" if mc.sex_skills["Oral"] > 2:
                 "After a few teasing licks, you bury your face in her pussy. You make a few swiping licks across her clit and the lap up some of the juices flowing from her nethers."
                 "[the_girl.possessive_title] is overwhelmed by the sensations and momentarily pulls off your dick."
                 the_girl.char "Mmm! God [the_girl.mc_title] that feels so good..."
@@ -127,9 +127,9 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                     "You pause your licking to give her some encouragement."
                     mc.name "That's it, [the_girl.title], suck my cock!"
                 "You knead her ass cheeks with your hands a few times, then spread her cheeks apart and continue to eat her out."
-            "Focus on her.\n{size=22}Requires Oral Skill{/size} (disabled)" if mc.sex_skills["Oral"] < 3:
+            "Focus on her\n{size=22}Requires Oral Skill{/size} (disabled)" if mc.sex_skills["Oral"] < 3:
                     pass
-            "Focus on you.":
+            "Focus on you":
                 "You pause your licking to talk dirty to her."
                 mc.name "Wow that feels good. Take it deep, slut!"
                 if the_girl.get_opinion_score("taking control") > 0:
@@ -209,7 +209,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
         "You can feel [the_girl.possessive_title]'s throat contracting around you as she uses a swallowing motion to pleasure you. The sensation is intensly pleasurable."
         "It feels so good it is making it hard for you to concentrate on pleasuring her."
         menu:
-            "Focus on her." if mc.sex_skills["Oral"] > 5:
+            "Focus on her" if mc.sex_skills["Oral"] > 5:
                 "Not to be outdone, you double down on your efforts to please [the_girl.possessive_title] orally."
                 "You aggressively lick her clit, while simultaneously kneading her ass cheeks with your hands. You pull her clit into your mouth and suck on it lightly."
                 the_girl.char "mmmmmmmfff"
@@ -224,9 +224,9 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                 "You can feel [the_girl.possessive_title]'s tongue slithering back and forth across the base of your dick, and her nose brushes up against your scrotum."
                 "You and [the_girl.possessive_title] continue to please each other orally. You often you hear a muffled moan, accompanied by a pleasant vibration in your groin."
 
-            "Focus on her.\n{size=22}Requires More Oral Skill{/size} (disabled)" if mc.sex_skills["Oral"] < 6:
+            "Focus on her\n{size=22}Requires More Oral Skill{/size} (disabled)" if mc.sex_skills["Oral"] < 6:
                 pass
-            "Focus on you.":
+            "Focus on you":
                 "It feels so good, you don't even realize it but you stop licking her and close your eyes."
                 mc.name "[the_girl.title]! Holy hell girl that feels so good."
                 "You can feel [the_girl.possessive_title]'s tongue slithering back and forth across the base of your dick."
@@ -258,7 +258,7 @@ label scene_SB_sixty_nine_2(the_girl, the_location, the_object):
         "Her pristine pussy beckons you tongue. You eagerly push your tongue up into her moist, wet hole."
 
     menu:
-        "Play with her ass.":
+        "Play with her ass":
             "You take a finger and push it into her pussy a few times and get it nice and lubed up."
             "[the_girl.possessive_title] moans as she working her tongue over your cock. She licks it bottom to top, then sucks on the tip, then licks it from the top back to the bottom."
             "You pull your finger out of her and start to slowly circle her asshole with it as you tongue moves around her clit."
@@ -291,7 +291,7 @@ label scene_SB_sixty_nine_2(the_girl, the_location, the_object):
             "You decide that is enough ass play for now, so you resume eating [the_girl.possessive_title] out."
 
 
-        "Finger Her.":
+        "Finger Her":
             "You take a finger and push it into her pussy, while your tongue slithers back and forth across her slit."
             "[the_girl.possessive_title] moans as she working her tongue over your cock. She licks it bottom to top, then sucks on the tip, then licks it from the top back to the bottom."
             if mc.sex_skills["Foreplay"] > 2:   #MC is competent at foreplay
@@ -447,13 +447,13 @@ label strip_ask_SB_sixty_nine(the_girl, the_clothing, the_location, the_object):
     "[the_girl.possessive_title] pops off your cock."
     the_girl.char "Sir, I'd like to take off my [the_clothing.name], would you mind?"
     menu:
-        "Let her strip.":
+        "Let her strip":
             mc.name "Take it off for me."
             $ the_girl.draw_animated_removal(the_clothing, position = SB_sixty_nine.position_tag)
             "[the_girl.possessive_title] wiggles out of her [the_clothing.name]. She throws it to the side, then slides your cock all the way to the back of her mouth."
             $ SB_sixty_nine.redraw_scene(the_girl)
 
-        "Leave it on.":
+        "Leave it on":
             mc.name "No, don't interrupt this for that."
             the_girl.char "Okay... I just wanted to feel you up against me a little more..."
             "She slides you back into her mouth and presses you all the way to the back, rubbing your tip against the back of her throat for a second before she goes back to blowing you."

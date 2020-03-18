@@ -26,7 +26,7 @@ label shower_crisis_action_label:
     menu:
         "Take a peek?":
             pass
-        "Ignore it.":
+        "Ignore it":
             return
     "You decide to take a peek."
     $ home_shower.show_background()
@@ -86,7 +86,7 @@ label shower_crisis_action_label:
     else:
         pass
     menu:
-        "Join her.":
+        "Join her":
             "You decide to use this opportunity and join her."
             mc.name "The door was not closed, how about we shower together, [the_person.title]?"
             if the_person.effective_sluttiness() > 70 or the_person.arousal > 35:

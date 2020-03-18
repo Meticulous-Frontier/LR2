@@ -30,7 +30,7 @@ label SB_tutorial_event():
             $ the_person.change_slut_temp(5)
             "You flirt back and forth with [the_person.possessive_title], but soon it is time to part ways."
             the_person.char "It was great seeing you! Take care [the_person.mc_title]!"
-        "Thank you.":
+        "Thank you":
             "You make some small talk with [the_person.possessive_title]. You catch up on a few various things, but soon it is time to part ways."
             the_person.char "It was great seeing you! Take care [the_person.mc_title]!"
             $ the_person.change_happiness(5)
