@@ -163,7 +163,7 @@ init 5 python:
                         if object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag:
                             appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo).replace("{size=22}", "{size=12}") #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                             option_list.append([appended_name, position])
-            if not (person.tits_available() and person.vagina_available()):
+            if not (person.outfit.tits_available() and person.outfit.vagina_available()):
                 option_list.append(["Pause and strip her down.","Strip"])
 
             if not hide_leave: #TODO: Double check that we can always get out
@@ -172,7 +172,7 @@ init 5 python:
         else:
             if not position_locked:
                 option_list.append(["Pick a new position\n-5 {image=arousal_token_small}","Change"])
-            if not (person.tits_available() and person.vagina_available()):
+            if not (person.outfit.tits_available() and person.outfit.vagina_available()):
                 option_list.append(["Pause and strip her down.","Strip"])
             if not hide_leave:
                 option_list.append(["Stop and leave", "Leave"])
