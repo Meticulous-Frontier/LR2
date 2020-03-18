@@ -5,7 +5,6 @@
 init 5 python:
     config.label_overrides["fuck_person"] = "fuck_person_bugfix"
     config.label_overrides["check_position_willingness"] = "check_position_willingness_bugfix"
-    config.label_overrides["pick_object"] = "pick_object_enhanced"
     config.label_overrides["watcher_check"] = "watcher_check_enhanced"
     config.label_overrides["condom_ask"] = "condom_ask_enhanced"
     config.label_overrides["girl_strip_event"] = "girl_strip_event_enhanced"
@@ -34,102 +33,127 @@ init 5 python:
         person.add_situational_obedience("sex_object",picked_object.obedience_modifier, position.verbing + " on a " + picked_object.name)
         return picked_object
 
-    def cheating_check_get_watcher(the_person):
-        other_people = [person for person in mc.location.people if person is not the_person] #Build a list with all the _other_ people in the room other than the one we're fucking.
+    def cheating_check_get_watcher(person):
+        other_people = [person for person in mc.location.people if person is not person] #Build a list with all the _other_ people in the room other than the one we're fucking.
         for a_person in other_people:
             if girlfriend_role in a_person.special_role and the_position.slut_requirement > (a_person.sluttiness/2): #You can get away with stuff half as slutty as she would do
-                caught_cheating_action = Action("Caught cheating action", caught_cheating_requirement, "caught_cheating_label", args = the_person)
+                caught_cheating_action = Action("Caught cheating action", caught_cheating_requirement, "caught_cheating_label", args = person)
                 if not exists_in_room_enter_list(a_person, "caught_cheating_label"):
                     a_person.on_room_enter_event_list.append(caught_cheating_action)
-                    renpy.say("",a_person.title + " gasps when she sees what you and " + the_person.title + " are doing.")
+                    renpy.say("",a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
 
             elif affair_role in a_person.special_role and the_position.slut_requirement > ((a_person.sluttiness*2)/3): #You can get away with stuff two thirds as slutty as what she would do.
-                caught_affair_cheating_action = Action("Caught affair cheating action", caught_affair_cheating_requirement, "caught_affair_cheating_label", args = the_person)
+                caught_affair_cheating_action = Action("Caught affair cheating action", caught_affair_cheating_requirement, "caught_affair_cheating_label", args = person)
                 if not exists_in_room_enter_list(a_person, "caught_affair_cheating_label"):
                     a_person.on_room_enter_event_list.append(caught_affair_cheating_action)
-                    renpy.say("",a_person.title + " gasps when she sees what you and " + the_person.title + " are doing.")
+                    renpy.say("",a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
 
         return get_random_from_list(other_people) #Get a random person from the people in the area, if there are any.
 
-    def apply_sex_modifiers(the_person):
+    def apply_sex_modifiers(person):
         #Family situational modifiers
-        if the_person.has_family_taboo(): #Check if any of the roles the person has belong to the list of family roles.
-            the_person.add_situational_slut("taboo_sex", -20, "We're related, we shouldn't be doing this.")
+        if person.has_family_taboo(): #Check if any of the roles the person has belong to the list of family roles.
+            person.add_situational_slut("taboo_sex", -20, "We're related, we shouldn't be doing this.")
 
         #Cheating modifiers
-        the_person.discover_opinion("cheating on men")
-        if prostitute_role in the_person.special_role:
-            the_person.add_situational_slut("cheating", 20, "Prostitutes don't care about cheating")
-        elif the_person.relationship == "Girlfriend":
-            if the_person.get_opinion_score("cheating on men") > 0:
-                the_person.add_situational_slut("cheating", the_person.get_opinion_score("cheating on men") * 5, "I'm cheating on my boyfriend!")
+        person.discover_opinion("cheating on men")
+        if prostitute_role in person.special_role:
+            person.add_situational_slut("cheating", 20, "Prostitutes don't care about cheating")
+        elif person.relationship == "Girlfriend":
+            if person.get_opinion_score("cheating on men") > 0:
+                person.add_situational_slut("cheating", person.get_opinion_score("cheating on men") * 5, "I'm cheating on my boyfriend!")
             else:
-                the_person.add_situational_slut("cheating", -5 + (the_person.get_opinion_score("cheating on men") * -10), "I can't cheat on my boyfriend!")
-        elif the_person.relationship == "Fiancée":
-            if the_person.get_opinion_score("cheating on men") > 0:
-                the_person.add_situational_slut("cheating", the_person.get_opinion_score("cheating on men") * 8, "I'm cheating on my fiancé!")
+                person.add_situational_slut("cheating", -5 + (person.get_opinion_score("cheating on men") * -10), "I can't cheat on my boyfriend!")
+        elif person.relationship == "Fiancée":
+            if person.get_opinion_score("cheating on men") > 0:
+                person.add_situational_slut("cheating", person.get_opinion_score("cheating on men") * 8, "I'm cheating on my fiancé!")
             else:
-                the_person.add_situational_slut("cheating", -15 + (the_person.get_opinion_score("cheating on men") * -15), "I could never cheat on my fiancé!")
-        elif the_person.relationship == "Married":
-            if the_person.get_opinion_score("cheating on men") > 0:
-                the_person.add_situational_slut("cheating", the_person.get_opinion_score("cheating on men") * 10, "I'm cheating on my husband!")
+                person.add_situational_slut("cheating", -15 + (person.get_opinion_score("cheating on men") * -15), "I could never cheat on my fiancé!")
+        elif person.relationship == "Married":
+            if person.get_opinion_score("cheating on men") > 0:
+                person.add_situational_slut("cheating", person.get_opinion_score("cheating on men") * 10, "I'm cheating on my husband!")
             else:
-                the_person.add_situational_slut("cheating", -20 + (the_person.get_opinion_score("cheating on men") * -20), "I could never cheat on my husband!")
+                person.add_situational_slut("cheating", -20 + (person.get_opinion_score("cheating on men") * -20), "I could never cheat on my husband!")
 
         #Privacy modifiers
         if not private:
-            if the_person.sluttiness < 50:
-                the_person.add_situational_slut("public_sex", -10 + the_person.get_opinion_score("public sex") * 5, "There are people watching...")
+            if person.sluttiness < 50:
+                person.add_situational_slut("public_sex", -10 + person.get_opinion_score("public sex") * 5, "There are people watching...")
             else:
-                the_person.add_situational_slut("public_sex", the_person.get_opinion_score("public sex") * 5, "There are people watching!")
+                person.add_situational_slut("public_sex", person.get_opinion_score("public sex") * 5, "There are people watching!")
 
         #Love modifiers. Always applies if negative, but only adds a bonus if you are in private.
-        if the_person.love < 0:
-            the_person.add_situational_slut("love_modifier", the_person.love, "I hate you, get away from me!")
+        if person.love < 0:
+            person.add_situational_slut("love_modifier", person.love, "I hate you, get away from me!")
         elif private:
-            if girlfriend_role in the_person.special_role: #Girlfriend and affairs gain full Love
-                the_person.add_situational_slut("love_modifier", the_person.love, "You're my special someone, I love you!")
-            elif affair_role in the_person.special_role:
-                the_person.add_situational_slut("love_modifier", the_person.love, "We may keep it a secret, but I love you!")
-            elif the_person.has_family_taboo(): #Family now only gains 1/4 (but this now helps offset the taboo penalty)
-                if mother_role in the_person.special_role:
-                    the_person.add_situational_slut("love_modifier", __builtin__.int(the_person.love/4), "Even if it's wrong, a mother should do everything she can for her son!")
-                elif sister_role in the_person.special_role:
-                    the_person.add_situational_slut("love_modifier", __builtin__.int(the_person.love/4), "I love my brother, and even if it's wrong I want to be close to him!")
+            if girlfriend_role in person.special_role: #Girlfriend and affairs gain full Love
+                person.add_situational_slut("love_modifier", person.love, "You're my special someone, I love you!")
+            elif affair_role in person.special_role:
+                person.add_situational_slut("love_modifier", person.love, "We may keep it a secret, but I love you!")
+            elif person.has_family_taboo(): #Family now only gains 1/4 (but this now helps offset the taboo penalty)
+                if mother_role in person.special_role:
+                    person.add_situational_slut("love_modifier", __builtin__.int(person.love/4), "Even if it's wrong, a mother should do everything she can for her son!")
+                elif sister_role in person.special_role:
+                    person.add_situational_slut("love_modifier", __builtin__.int(person.love/4), "I love my brother, and even if it's wrong I want to be close to him!")
                 else: #Generic family one
-                    the_person.add_situational_slut("love_modifier", __builtin__.int(the_person.love/4), "I love you, even though we're related!")
+                    person.add_situational_slut("love_modifier", __builtin__.int(person.love/4), "I love you, even though we're related!")
             else: #If you aren't in a relationship with them only half their Love applies.
-                the_person.add_situational_slut("love_modifier", __builtin__.int(the_person.love/2), "I really like you, let's see where this goes!")
+                person.add_situational_slut("love_modifier", __builtin__.int(person.love/2), "I really like you, let's see where this goes!")
         return
 
-    def clear_sex_modifiers(the_person):
+    def clear_sex_modifiers(person):
         # Teardown the sex modifiers
-        the_person.clear_situational_slut("love_modifier")
-        the_person.clear_situational_slut("public_sex")
-        the_person.clear_situational_slut("cheating")
-        the_person.clear_situational_slut("taboo_sex")
-        the_person.clear_situational_slut("sex_object")
-        the_person.clear_situational_obedience("sex_object")
+        person.clear_situational_slut("love_modifier")
+        person.clear_situational_slut("public_sex")
+        person.clear_situational_slut("cheating")
+        person.clear_situational_slut("taboo_sex")
+        person.clear_situational_slut("sex_object")
+        person.clear_situational_obedience("sex_object")
         return
 
-    def update_person_sex_record(the_person, report_log):
+    def update_person_sex_record(person, report_log):
         types_seen = []
         for position_type in report_log.get("positions_used",[]): #Note: Clears out duplicates
             if position_type.record_class and position_type.record_class not in types_seen:
-                the_person.sex_record[position_type.record_class] += 1
+                person.sex_record[position_type.record_class] += 1
                 types_seen.append(position_type.record_class)
         return
 
-    def build_round_choice_menu(the_person, position_choice, ignore_taboo = False):
+    def pick_object_enhanced(person, position, forced_object = None):
+        if position is None:
+            person.clear_situational_slut("sex_object")
+            person.clear_situational_obedience("sex_object")
+            return None
+
+        if forced_object:
+            picked_object = forced_object
+        else:
+            object_option_list = []
+            for loc_object in mc.location.objects:
+                if loc_object.has_trait(position_choice.requires_location):
+                    object_option_list.append([loc_object.get_formatted_name(), loc_object]) #Displays a list of objects in the room related to that position and their appropriate bonuses/penalties
+
+            # if we have only one object to pick for position, select it automatically (saves the user for selecting the only obvious choice)
+            if len(object_option_list) == 1:
+                picked_object = object_option_list[0][1]
+            else:
+                picked_object = renpy.display_menu(object_option_list,True,"Choice")
+
+        person.add_situational_slut("sex_object", picked_object.sluttiness_modifier, position.verbing + " on a " + picked_object.name)
+        person.add_situational_obedience("sex_object",picked_object.obedience_modifier, position.verbing + " on a " + picked_object.name)
+        return picked_object
+
+    def build_round_choice_menu(person, position_choice, ignore_taboo = False):
         option_list = []
+        option_list.append("Round Choices")
         if position_choice is not None:
-            option_list.append(["Keep " + position_choice.verbing + " her.","Continue"]) #NOTE: you're prevented from continuing if the energy cost would be too high by the pre-round checks.
+            option_list.append(["Keep " + position_choice.verbing + " her","Continue"]) #NOTE: you're prevented from continuing if the energy cost would be too high by the pre-round checks.
 
             if not position_locked and object_choice:
-                option_list.append(["Pause and change position.\n-5 {image=arousal_token_small}","Change"])
+                option_list.append(["Pause and change position\n-5 {image=arousal_token_small}","Change"])
                 for position in position_choice.connections:
                     if object_choice.has_trait(position.requires_location):
-                        appended_name = "Transition to " + position.build_position_willingness_string(the_person, ignore_taboo = ignore_taboo).replace("{size=22}", "{size=12}") #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
+                        appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo).replace("{size=22}", "{size=12}") #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                         option_list.append([appended_name,position])
 
             if position_locked and object_choice:
@@ -137,20 +161,21 @@ init 5 python:
                 for position in position_choice.connections:
                     if isinstance(object_choice, Object): # Had an error with cousin's kissing blackmail where it would pass object_choice as a list, haven't looked further into it
                         if object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag:
-                            appended_name = "Transition to " + position.build_position_willingness_string(the_person, ignore_taboo = ignore_taboo).replace("{size=22}", "{size=12}") #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
+                            appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo).replace("{size=22}", "{size=12}") #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                             option_list.append([appended_name, position])
-
-            option_list.append(["Pause and strip her down.","Strip"])
+            if not (person.tits_available() and person.vagina_available()):
+                option_list.append(["Pause and strip her down.","Strip"])
 
             if not hide_leave: #TODO: Double check that we can always get out
-                option_list.append(["Stop " + position_choice.verbing + " her and leave.", "Leave"]) #TODO: Have this appear differently depending on if you've cum yet, she's cum yet, or you've both cum.
+                option_list.append(["Stop " + position_choice.verbing + " her and leave", "Leave"]) #TODO: Have this appear differently depending on if you've cum yet, she's cum yet, or you've both cum.
 
         else:
             if not position_locked:
-                option_list.append(["Pick a new position.\n-5 {image=arousal_token_small}","Change"])
+                option_list.append(["Pick a new position\n-5 {image=arousal_token_small}","Change"])
+            if not (person.tits_available() and person.vagina_available()):
+                option_list.append(["Pause and strip her down.","Strip"])
             if not hide_leave:
-                option_list.append(["Stop and leave.", "Leave"])
-        option_list.insert(0, "Round Choices")
+                option_list.append(["Stop and leave", "Leave"])
         return option_list
 
 label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, asked_for_condom = False):
@@ -236,8 +261,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 else:
                     $ position_choice = start_position
 
-                call pick_object_enhanced(the_person, position_choice, forced_object = start_object) from _call_pick_object_bugfix
-                $ object_choice = _return
+                $ object_choice = pick_object_enhanced(the_person, position_choice, forced_object = start_object)
 
                 if position_choice and object_choice:
                     call check_position_willingness_bugfix(the_person, position_choice, ignore_taboo = ignore_taboo, skip_dialog = True) from _call_check_position_willingness_bugfix
@@ -625,37 +649,6 @@ label put_on_condom_routine(the_person):
     $ mc.condom = True
     return
 
-label pick_object_enhanced(the_person, the_position, forced_object = None):
-    if the_position is None:
-        return None
-
-    $ object_option_list = []
-    if the_position is None:
-        $ the_person.clear_situational_slut("sex_object")
-        $ the_person.clear_situational_obedience("sex_object")
-        return None
-
-    python:
-        if forced_object:
-            #renpy.say("", "Pick object forced: " + forced_object.name)
-            picked_object = forced_object
-        else:
-            for object in mc.location.objects:
-                if object.has_trait(position_choice.requires_location):
-                    object_option_list.append([object.get_formatted_name(),object]) #Displays a list of objects in the room related to that position and their appropriate bonuses/penalties
-
-            # if we have only one object to pick for position, select it automatically (saves the user for selecting the only obvious choice)
-            if len(object_option_list) == 1:
-                picked_object = object_option_list[0][1]
-            else:
-                picked_object = renpy.display_menu(object_option_list,True,"Choice")
-
-            #renpy.say("", "Pick object: " + picked_object.name)
-        del object_option_list
-
-    $ the_person.add_situational_slut("sex_object", picked_object.sluttiness_modifier, the_position.verbing + " on a " + picked_object.name)
-    $ the_person.add_situational_obedience("sex_object",picked_object.obedience_modifier, the_position.verbing + " on a " + picked_object.name)
-    return picked_object
 
 label watcher_check_enhanced(the_person, the_position, the_object, the_report): # Check to see if anyone is around to comment on the characters having sex.
     $ watcher = cheating_check_get_watcher(the_person)
@@ -749,19 +742,19 @@ label girl_strip_event_enhanced(the_person, the_position, the_object):
         return
 
     # Called when the girl has a chance of stripping down. Checks what she's prefer to strip based on her opinions.
-    $ strip_chance = the_person.effective_sluttiness() - the_person.outfit.slut_requirement
-    $ strip_chance += the_person.get_opinion_score("not wearing anything") * 5
-    $ the_clothing = None
-    if the_person.get_opinion_score("showing her tits") > the_person.get_opinion_score("showing her ass"): # If she has a preference (even a least-bad preference) she'll strip that down first.
-        $ the_clothing = the_person.outfit.remove_random_any(exclude_feet = True, exclude_lower = True, do_not_remove = True)
-    elif the_person.get_opinion_score("showing her tits") < the_person.get_opinion_score("showing her ass"):
-        $ the_clothing = the_person.outfit.remove_random_any(exclude_feet = True, exclude_upper = True, do_not_remove = True)
-    if the_clothing is None: #Either our previous checks failed to produce anything OR they were equal
-        $ the_clothing = the_person.outfit.remove_random_any(exclude_feet = True, do_not_remove = True)
+    python:
+        strip_chance = the_person.effective_sluttiness() - the_person.outfit.slut_requirement
+        strip_chance += the_person.get_opinion_score("not wearing anything") * 5
+        the_clothing = None
+        if the_person.get_opinion_score("showing her tits") > the_person.get_opinion_score("showing her ass"): # If she has a preference (even a least-bad preference) she'll strip that down first.
+            the_clothing = the_person.outfit.remove_random_any(exclude_feet = True, exclude_lower = True, do_not_remove = True)
+        elif the_person.get_opinion_score("showing her tits") < the_person.get_opinion_score("showing her ass"):
+            the_clothing = the_person.outfit.remove_random_any(exclude_feet = True, exclude_upper = True, do_not_remove = True)
+        if the_clothing is None: #Either our previous checks failed to produce anything OR they were equal
+            the_clothing = the_person.outfit.remove_random_any(exclude_feet = True, do_not_remove = True)
 
     if renpy.random.randint(0,100) < strip_chance and the_clothing:
-        $ ask_chance = renpy.random.randint(0,100)
-        if ask_chance < the_person.obedience - the_person.arousal:
+        if renpy.random.randint(0,100) < the_person.obedience - the_person.arousal:
             $ the_position.call_strip_ask(the_person, the_clothing, mc.location, the_object)
         else:
             $ the_position.call_strip(the_person, the_clothing, mc.location, the_object) #If a girl's outfit is less slutty than she is currently feeling (with arousal factored in) she will want to strip stuff off.
