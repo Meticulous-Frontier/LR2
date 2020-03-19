@@ -331,6 +331,15 @@ init 5 python:
         option_list.append (["Finished", "leave"])
         return option_list
 
+    def update_threesome_action_description(position):
+        for mc_pos in position.mc_position:
+            if mc_pos.action_description:
+                if girl_swap_pos:
+                    mc_pos.description = mc_pos.action_description.replace("{0}", "one" if mc_pos.default_action_person == "two" else "two")
+                else:
+                    mc_pos.description = mc_pos.action_description.replace("{0}", "two" if mc_pos.default_action_person == "two" else "one")
+        return
+
 label start_threesome(the_person_one, the_person_two, start_position = None, start_object = None, round = 0, private = True, girl_in_charge = False, position_locked = False, report_log = None, affair_ask_after = True, hide_leave = False):
     # When called
     if report_log is None:
@@ -358,6 +367,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
         $ position_choice = _return
     else:
         $ position_choice = start_position
+        $ update_threesome_action_description(position_choice)
     #pick_threesome can give use the option to swap the girls opening spots
     # if girl_swap_pos:
     #     $ the_person = the_person_one
@@ -681,12 +691,7 @@ label pick_threesome(the_person_one, the_person_two, girl_one_position = None, o
             if girl_one_choice == threeway.position_two_tag and girl_two_choice == threeway.position_one_tag:
                 position_choice = threeway
                 girl_swap_pos = True
-        for mc_pos in position_choice.mc_position:
-            if mc_pos.action_description:
-                if girl_swap_pos:
-                    mc_pos.description = mc_pos.action_description.replace("{0}", "one" if mc_pos.default_action_person == "two" else "two")
-                else:
-                    mc_pos.description = mc_pos.action_description.replace("{0}", "two" if mc_pos.default_action_person == "two" else "one")
+        update_threesome_action_description(position_choice)
 
     #TODO figure out if position requires an object, if so select the object#
     return position_choice
