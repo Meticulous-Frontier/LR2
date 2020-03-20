@@ -143,7 +143,7 @@ init 5 python:
         person.add_situational_obedience("sex_object",picked_object.obedience_modifier, position.verbing + " on a " + picked_object.name)
         return picked_object
 
-    def build_round_choice_menu(person, position_choice, ignore_taboo = False):
+    def build_round_choice_menu(person, position_choice, position_locked, object_choice, ignore_taboo = False):
         option_list = []
         option_list.append("Round Choices")
         if position_choice is not None:
@@ -172,8 +172,8 @@ init 5 python:
         else:
             if not position_locked:
                 option_list.append(["Pick a new position\n-5 {image=arousal_token_small}","Change"])
-            if not person.outfit.full_access():
-                option_list.append(["Pause and strip her down","Strip"])
+                if not person.outfit.full_access(): # only show strip option if we can choose another position
+                    option_list.append(["Pause and strip her down","Strip"])
             if not hide_leave:
                 option_list.append(["Stop and leave", "Leave"])
         return option_list
@@ -247,9 +247,9 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
         if round_choice is None: #If there is no set round_choice
             #TODO: Add a variant of this list when the girl is in control to ask if you want to resist or ask/beg for something.
             if "build_menu_items" in globals():
-                call screen main_choice_display(build_menu_items([build_round_choice_menu(the_person, position_choice, ignore_taboo = ignore_taboo)]))
+                call screen main_choice_display(build_menu_items([build_round_choice_menu(the_person, position_choice, position_locked, object_choice, ignore_taboo = ignore_taboo)]))
             else:
-                call screen main_choice_display([build_round_choice_menu(the_person, position_choice, ignore_taboo = ignore_taboo)])
+                call screen main_choice_display([build_round_choice_menu(the_person, position_choice, position_locked, object_choice, ignore_taboo = ignore_taboo)])
             $ round_choice = _return #This gets the players choice for what to do this round.
 
         # Now that a round_choice has been picked we can do something.
