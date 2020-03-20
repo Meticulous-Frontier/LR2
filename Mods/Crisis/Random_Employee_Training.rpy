@@ -29,7 +29,7 @@ init 2 python:
         if not mc.business.is_weekend():
             if mc.is_at_work():
                 if time_of_day > 0 and time_of_day < 4: # only during morning afternoon or evening
-                    return True
+                    return not get_training_employee() is None
         return False
 
     def get_training_employee():

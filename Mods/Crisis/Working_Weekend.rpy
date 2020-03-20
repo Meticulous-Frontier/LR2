@@ -54,8 +54,6 @@ init 2 python:
         return topic
 
     def display_topic_opinions(person, topics):
-
-
         counter = 0
         for topic in topics:
             (score, opinion) = person_opinion_to_string(person, topic)
