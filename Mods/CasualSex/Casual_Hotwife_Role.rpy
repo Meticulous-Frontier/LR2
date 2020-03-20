@@ -649,7 +649,7 @@ label casual_hotwife_her_place_label(the_person):
     $ CS_hotwife_lingerie.add_upper(teddy.get_copy(),colour_white)
     $ CS_hotwife_lingerie.add_feet(garter_with_fishnets.get_copy(), colour_white)
     $ CS_hotwife_lingerie.add_feet(high_heels.get_copy(), colour_white)
-    $ the_person.apply_outfit(CS_hotwife_lingerie)
+    $ the_person.apply_outfit(CS_hotwife_lingerie, update_taboo = True)
     $ del CS_hotwife_lingerie
     $ the_person.draw_person(position = "stand4")
     the_person.char "You made it! I wasn't sure you would actually come!"
@@ -709,7 +709,7 @@ label casual_hotwife_home_sex_label(the_person):
     $ CS_hotwife_lingerie2 = Outfit("Pink Lingerie")
     $ CS_hotwife_lingerie2.add_upper(teddy.get_copy(),colour_pink)
     $ CS_hotwife_lingerie2.add_feet(garter_with_fishnets.get_copy(), colour_pink)
-    $ the_person.apply_outfit(CS_hotwife_lingerie2)
+    $ the_person.apply_outfit(CS_hotwife_lingerie2, update_taboo = True)
     $ the_person.draw_person(position = "stand4")
     $ del CS_hotwife_lingerie2
     "She opens up the bedroom door and motions for you to follow her. As you step into her bedroom you see [the_person.SO_name] sitting at the edge of the bed again."
