@@ -446,7 +446,7 @@ label transition_default_anal_penetration_dialog(the_girl, the_location, the_obj
         menu:
             "Ram it home!":
                 "You get a firm grip on her hips, make sure you're lined up, and push yourself in with all your might."
-                if the_girl.get_opinion_score("being submissive") > 0 or the_girl.get_opinion_score("anal sex") > 0:
+                if the_girl.get_opinion_score("being submissive") > 0 or the_girl.get_opinion_score("anal sex") > 2:
                     the_girl.char "Ah! Yes! Tear that ass up!"
                     $ the_girl.change_arousal(5*( the_girl.get_opinion_score("being submissive") + the_girl.get_opinion_score("anal sex") + 1))
                     "Using her pussy juice as lube you lay into her tight ass, wasting no time in fucking her hard."
@@ -458,7 +458,7 @@ label transition_default_anal_penetration_dialog(the_girl, the_location, the_obj
                     "You wait a moment, then start to move again. Using her pussy juices as lube you've soon got a good rhythm going."
 
             "Take it slow":
-                if the_girl.get_opinion_score("being submissive") > 0 or the_girl.get_opinion_score("anal sex") > 0:
+                if the_girl.get_opinion_score("being submissive") > 0 or the_girl.get_opinion_score("anal sex") > 2:
                     the_girl.char "Mmmm."
                     "[the_girl.possessive_title] reaches behind her and grabs one of your butt cheeks. She pulls on you to get your cock as deep in her ass as she can."
                 else:

@@ -315,6 +315,12 @@ label transition_SB_doggy_standing_doggy(the_girl, the_location, the_object):
     the_girl.char "Oh yes, [the_girl.mc_title], make me your little bitch."
     return
 
+label transition_SB_doggy_standing_SB_anal_standing(the_girl, the_location, the_object):
+    "You pull out of [the_girl.title]'s wet pussy, leaving it dripping fluids on the floor."
+    "You line your cock up with her asshole, the tip just barely pressing against it."
+    call transition_default_anal_penetration_dialog(the_girl, the_location, the_object) from _call_transition_default_anal_penetration_dialog_2
+    return
+
 label transition_standing_doggy_to_standing_anal_taboo_break_label(the_girl, the_location, the_object):
     "You hold onto [the_girl.title]'s ass cheeks with each hand. You spread them apart, giving you a clear view of her asshole as you continue to fuck her pussy."
     if the_girl.arousal >= 70 or report_log.get("girl orgasms", 0) > 0:
