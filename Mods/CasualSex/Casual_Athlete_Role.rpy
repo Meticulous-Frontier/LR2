@@ -166,7 +166,7 @@ label casual_athlete_get_to_know_label(the_person):
             the_person.char "Anyway, I'm going to get back to my workout. I'll see you around [the_person.title]!"
             "If you want to get further with her, maybe you should work on increasing your energy!"
 
-        #Had sex in the lockerroom#
+        #Had sex in the locker room#
     elif the_person.event_triggers_dict.get("athlete_progress", 0) == 2:
         "You notice that [the_person.title] is really pushing herself hard today on the treadmill."
         mc.name "Hey [the_person.title]. You're really going at it! Have an event coming up?"
@@ -215,7 +215,7 @@ label casual_athlete_phase_one_label(the_person):
         mc.name "Hey [the_person.title]. I figured I would find you here. Want to workout together?"
         "[the_person.title] is just hopping off the treadmill. You can tell she just finished getting warmed up."
         the_person.char "[the_person.mc_title]! Hey, I was wondering if you would take me up on my offer to workout sometime. That sounds great! I'm going to be doing free weights today."
-        mc.name "Sounds good! I'll head to the lockerroom and get changed and meet you over by the free weights."
+        mc.name "Sounds good! I'll head to the locker room and get changed and meet you over by the free weights."
         "You quickly get yourself changed into workout clothes and meet [the_person.title]."
         the_person.char "This will be perfect! Today is strength day and with you around to spot me I can really push myself to the limit."
         $ the_person.draw_person( position = "stand4")
@@ -275,11 +275,11 @@ label casual_athlete_phase_one_label(the_person):
         "You lift your head up for a second, making contact with her crotch with your face. She stifles a groan as you finish up your set."
         $ the_person.change_arousal(20)
         "[the_person.title] backs off and you quickly get up. She puts a hand on your shoulder and whispers in your ear."
-        the_person.char "There's a lockerroom here families can use with a lock on it. Meet me there in three minutes."
+        the_person.char "There's a locker room here families can use with a lock on it. Meet me there in three minutes."
         $ the_person.draw_person( position = "walking_away")
         "You watch [the_person.title] walk off, fighting off an erection. Looks like you're about to hookup at the gym!"
         "After three minutes, you follow after [the_person.title]. When you find the family use room, you let yourself in."
-        $ the_person.apply_outfit(Outfit("Nude"))
+        $ the_person.apply_outfit(Outfit("Nude"), update_taboo = True)
         $ the_person.draw_person( position = "stand2")
         "As you enter, you see that [the_person.title] is already naked."
         the_person.char "[the_person.mc_title], we can work out the details later... I haven't been fucked in months!"
@@ -335,7 +335,7 @@ label casual_athlete_phase_one_label(the_person):
     elif the_person.event_triggers_dict.get("athlete_progress", 0) > 1:
         mc.name "Hey [the_person.title]. I figured I would find you here. Want to workout together?"
         the_person.char "That sounds great, [the_person.mc_title]! I always enjoy working up a sweat with you."
-        mc.name "Sounds good! I'll head to the lockerroom and get changed and meet you over by the free weights."
+        mc.name "Sounds good! I'll head to the locker room and get changed and meet you over by the free weights."
         "You quickly get yourself changed into workout clothes and meet [the_person.title]."
         $ the_person.draw_person( position = "stand4")
         "It is obvious from the beginning of your workout with [the_person.possessive_title] that she intends to get frisky with you when you get done."
@@ -343,7 +343,7 @@ label casual_athlete_phase_one_label(the_person):
         "You try to be as covert as possible, but a couple of the other guys in the gym shoot you knowing looks as you go about your workout."
         "During the bench press, [the_person.title] stands right above you, her crotch tantalizingly close to your face."
         the_person.char "Wow, what a workout! So... are you gonna go hit the showers now?"
-        "It is clear from the way she is asking she is curious if you are gonna follow her to the secluded lockerroom."
+        "It is clear from the way she is asking she is curious if you are gonna follow her to the secluded locker room."
         menu:
             "Hit the Shower":
                 #TODO some kind of innuendo joke here#
@@ -355,8 +355,8 @@ label casual_athlete_phase_one_label(the_person):
                 "You watch [the_person.title]'s amazing ass as she walks away. You swear there's a bit of a swagger there."
                 "You give her a few minutes, then follow after her."
 
-                #Lockerroom sex scene.
-                $ the_person.apply_outfit(Outfit("Nude"))
+                #locker room sex scene.
+                $ the_person.apply_outfit(Outfit("Nude"), update_taboo = True)
                 $ the_person.draw_person( position = "stand2")
                 "As you enter, you see that [the_person.title] is already naked."
                 the_person.char "[the_person.mc_title], give me that cock! It's been too long since fucked me good!"
@@ -820,11 +820,11 @@ label athlete_seduction_response(the_person):
 label athlete_seduction_accept_crowded(the_person):
     if mc.location == gym:
         if the_person.effective_sluttiness() < 20:
-            the_person.char "I suppose we could sneak away into the lockerroom... There's nothing wrong with that, right?"
+            the_person.char "I suppose we could sneak away into the locker room... There's nothing wrong with that, right?"
         elif the_person.effective_sluttiness() < 70:
-            the_person.char "Come on, let's sneak into the lockerroom and do it!"
+            the_person.char "Come on, let's sneak into the locker room and do it!"
         else:
-            the_person.char "Oh fuck that sounds nice. I'm not sure I can wait until we sneak into the lockerroom, maybe we should just do it right here!"
+            the_person.char "Oh fuck that sounds nice. I'm not sure I can wait until we sneak into the locker room, maybe we should just do it right here!"
         return
 
     if the_person.effective_sluttiness() < 20:
@@ -902,7 +902,7 @@ label athlete_hookup_accept(the_person):
     $ mc.change_location(gym)
     $ mc.location.show_background()
 
-    "A few minutes later, you walk into the gym. You locate the family lockerroom and discover it to be unlocked. You quietly let yourself in."
+    "A few minutes later, you walk into the gym. You locate the family locker room and discover it to be unlocked. You quietly let yourself in."
     $ the_person.draw_person(position = "missionary")
     $ the_person.arousal = 20
     "You discover [the_person.possessive_title] sitting at one of the sinks, touching herself while waiting for you. Her pussy glistens with arousal."
@@ -1007,7 +1007,7 @@ label athlete_hookup_accept(the_person):
                     $ the_person.change_slut_temp(1)
                     $ the_person.change_happiness(2)
                     "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
-                    "You take a moment to recover. Then you and [the_person.title] get cleaned up and dress. You quietly sneak out of the lockerroom."
+                    "You take a moment to recover. Then you and [the_person.title] get cleaned up and dress. You quietly sneak out of the locker room."
                     return
                 "Leave It On":
                     mc.name "I can't pull out, even for a second!"
@@ -1020,7 +1020,7 @@ label athlete_hookup_accept(the_person):
             "She is a bit disappointed she didn't finish."
         else:
             the_person.char "That was nice. I'll make sure next time I'm in the mood to hit you up again..."
-        "You take your condom off and throw it in the trash can. You both get dressed before sneaking out of the lockerroom."
+        "You take your condom off and throw it in the trash can. You both get dressed before sneaking out of the locker room."
         return
     else: #You went in raw
         "You push yourself in as deep as you can go. [the_person.possessive_title] moans as you fill her completely."
@@ -1073,7 +1073,7 @@ label athlete_hookup_accept(the_person):
                     "You slowly let her down. Her legs buckle for a second, but she catches herself."
                     "You see a faint trace of your semen running down the back of her leg."
                     the_person.char "That was SO good. You'll be hearing from me again, I'm sure... I came so many times..."
-                    "You and [the_person.title] get cleaned up and dressed, then sneak out of the lockerroom."
+                    "You and [the_person.title] get cleaned up and dressed, then sneak out of the locker room."
                     return
                 "Fuck Her Ass\n{size=22}Requires 80 sluttiness{/size} (disabled)" if the_person.effective_sluttiness() < 80:
                     pass
@@ -1088,7 +1088,7 @@ label athlete_hookup_accept(the_person):
         $ the_person.change_happiness(5)
         $ the_person.change_slut_temp(1)
         "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
-        "You take a moment to recover. Then you and [the_person.title] get cleaned up and dress. You quietly sneak out of the lockerroom."
+        "You take a moment to recover. Then you and [the_person.title] get cleaned up and dress. You quietly sneak out of the locker room."
         return
     elif the_person.effective_sluttiness() > 60:
         the_person.char "Oh god... you should probably pull out but... it feels so good..."
@@ -1100,7 +1100,7 @@ label athlete_hookup_accept(the_person):
                 $ the_person.cum_on_ass()
                 $ the_person.draw_person(position = "standing_doggy")
                 "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title]'s ass covered in your semen."
-                "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the lockerroom."
+                "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the locker room."
                 return
             "Creampie":
                 "Her pussy feels too good. You bottom out and cum, dumping wave after wave of your semen deep inside of her."
@@ -1108,7 +1108,7 @@ label athlete_hookup_accept(the_person):
                 $ the_person.change_happiness(5)
                 $ the_person.change_slut_temp(1)
                 "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
-                "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the lockerroom."
+                "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the locker room."
                 return
     else:
         "[the_person.title] suddenly moves her hips forward, your cock slides out of her."
@@ -1117,7 +1117,7 @@ label athlete_hookup_accept(the_person):
         $ the_person.cum_on_ass()
         $ the_person.draw_person(position = "standing_doggy")
         "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title]'s ass covered in your semen."
-        "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the lockerroom."
+        "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the locker room."
     return
 
 #label athlete_cum_face(the_person):
