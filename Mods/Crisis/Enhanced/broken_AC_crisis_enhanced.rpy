@@ -22,37 +22,16 @@ init 5 python:
 
     def broken_ac_crisis_strip_other_girls(person, girl):
         for other_girl in [x for x in mc.business.production_team if x not in [person, girl]]:
-            test_outfit = other_girl.outfit.get_copy()
-            clothing = test_outfit.remove_random_any(top_layer_first = True, exclude_feet = True) #Remove something from our test outfit.
-            while clothing and other_girl.judge_outfit(test_outfit, 20): #This will loop over and over until she is out of things to remove OR nolonger can strip something that is appropriate.
-                other_girl.outfit.remove_clothing(clothing)
-                clothing = test_outfit.remove_random_any(top_layer_first = True, exclude_feet = True)
+            # only remove clothing, don't show it on screen
+            removed_something = other_girl.strip_outfit_to_max_sluttiness(temp_sluttiness_boost = 20)
+            if removed_something:
+                if other_girl.outfit.tits_visible():
+                    other_girl.break_taboo("bare_tits")
+                if other_girl.outfit.vagina_visible():
+                    other_girl.break_taboo("bare_pussy")
+                if (other_girl.outfit.wearing_panties() and not other_girl.outfit.panties_covered()) or (other_girl.outfit.wearing_bra() and not other_girl.outfit.bra_covered()):
+                    other_girl.break_taboo("underwear_nudity")
         return
-
-    def broken_AC_crisis_strip_outfit(person):
-        test_outfit = person.outfit.get_copy()
-        removed_something = False
-
-        clothing = test_outfit.remove_random_any(top_layer_first = True, exclude_feet = True) #Remove something from our test outfit.
-        while clothing and person.judge_outfit(test_outfit, 20): #This will loop over and over until she is out of things to remove OR nolonger can strip something that is appropriate.
-            #Note: there can be some variation in this event depending on if the upper or lower was randomly checked first.
-            person.draw_animated_removal(clothing) #Draw the item being removed from our current outfit
-            #$ person.outfit = test_outfit.get_copy() #Swap our current outfit out for the test outfit. Changed in v0.24.1
-            person.apply_outfit(test_outfit, ignore_base = True, update_taboo = False) #Swap our current outfit out for the test outfit, apply any taboo effects that happen as a result.
-            ran_num = renpy.random.randint(0,4)
-            if ran_num == 0 or not removed_something:
-                renpy.say("", person.title + " pulls off her " + clothing.name + " and puts it aside.") #Always called first.
-            elif ran_num == 1:
-                renpy.say("", person.title + " takes off her " + clothing.name + " and adds it to the pile of clothing.")
-            elif ran_num == 2:
-                renpy.say("", person.title + " strips off her " + clothing.name + " and tosses it to the side.")
-            elif ran_num == 3:
-                renpy.say("", person.title + " removes her " + clothing.name + " and tosses it with the rest of her stuff.")
-            else: # ran_num == 4:
-                renpy.say("", person.title + " quickly slides off her " + clothing.name + " and leaves it on the ground.")
-            removed_something = True
-            clothing = test_outfit.remove_random_any(top_layer_first = True, exclude_feet = True)
-        return removed_something
 
 label broken_AC_crisis_label_enhanced:
     $ the_person = broken_AC_crisis_get_sluttiest_person()
@@ -102,7 +81,8 @@ label broken_AC_crisis_label_enhanced:
                 else:
                     the_person.char "I might as well. You don't mind seeing a little skin, do you?"
 
-            $ removed_something = broken_AC_crisis_strip_outfit(the_person)
+            $ removed_something = the_person.strip_outfit_to_max_sluttiness(temp_sluttiness_boost = 20) 
+
             if removed_something:
                 call broken_AC_crisis_break_taboo(the_person) from _call_broken_AC_crisis_break_taboo_the_person
             else:
@@ -123,7 +103,7 @@ label broken_AC_crisis_label_enhanced:
 
                     "You pay special attention to [girl_choice.title] as she follows the lead of [the_person.possessive_title]."
 
-                    $ removed_something = broken_AC_crisis_strip_outfit(girl_choice)
+                    $ removed_something = girl_choice.strip_outfit_to_max_sluttiness(temp_sluttiness_boost = 20) 
                     if removed_something:
                         call broken_AC_crisis_break_taboo(girl_choice) from _call_broken_AC_crisis_break_taboo_other_girl
                         $ slut_report = girl_choice.change_slut_temp(10)
@@ -136,21 +116,21 @@ label broken_AC_crisis_label_enhanced:
                         "[girl_choice.title] fiddles with some of her clothing, then shrugs meekly."
                         girl_choice.char "I'm not sure I'm comfortable taking any of this off... I'm sure I'll be fine in the heat for a little bit."
 
-                    $ broken_ac_crisis_strip_other_girls(the_person, girl_choice)
                     $ girl_choice = None
                     "The girls laugh and tease each other as they strip down, and they all seem to be more comfortable with the heat once they are less clothed."
                     "For a while all of the girls work in various states of undress while under your watchful eye."
-                    "The repair man shows up early, and you lead him directly to the the AC unit. The problem turns out to be a quick fix, and production is back to a comfortable temperature within a couple of hours."
+                    $ broken_ac_crisis_strip_other_girls(the_person, girl_choice)
+                    "The repair man shows up early, and you lead him directly to the the AC unit. The problem turns out to be a quick fix, and production will be back to a comfortable temperature the next day."
                 else:
                     "The other girls exchange glances, and everyone seems decides it's best not to take this too far."
-                    "They get back to work fully dressed, and soon the repair man has shown up. The problem turns out to be a quick fix, and production is back to a comfortable temperature within a couple of hours."
+                    "They get back to work fully dressed, and soon the repair man has shown up. The problem turns out to be a quick fix, and production will be back to a comfortable temperature the next day."
             else:
                 if removed_something:
                     "[the_person.title] gets back to work. Working in her stripped down attire seems to make her more comfortable with the idea in general."
-                    "The repair man shows up early, and you lead him directly to the AC unit. The problem turns out to be a quick fix, and production is back to a comfortable temperature within a couple of hours."
+                    "The repair man shows up early, and you lead him directly to the AC unit. The problem turns out to be a quick fix, and production will be back to a comfortable temperature the next day."
                 else:
                     "[the_person.title] gets back to work, still fully clothed."
-                    "The repair man shows up early, and you lead him directly to the the AC unit. The problem turns out to be a quick fix, and production is back to a comfortable temperature within a couple of hours."
+                    "The repair man shows up early, and you lead him directly to the the AC unit. The problem turns out to be a quick fix, and production will be back to a comfortable temperature the next day."
 
             if removed_something:
                 $ broken_AC_crisis_update_sluttiness();
