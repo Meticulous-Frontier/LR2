@@ -61,7 +61,7 @@ init 2 python:
         the_goal.arg_dict["required"] = 1
         return
 
-    daily_profit_goal = Goal("Daily Profit", "Profitibility is always a concern when running a business. Have your business make atleast a certain amount in one day.", "daily_profit", "Business", always_valid_goal_function, daily_profit_count_function,
+    daily_profit_goal = Goal("Daily Profit", "Profitibility is always a concern when running a business. Have your business make at least a certain amount in one day.", "daily_profit", "Business", always_valid_goal_function, daily_profit_count_function,
     {"count": 0, "required": 50},
     difficulty_scale_function = daily_profit_difficulty_function, report_function = standard_count_report, progress_fraction_function = standard_progress_fraction)
 

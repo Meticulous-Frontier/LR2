@@ -169,7 +169,7 @@ init -1 python:
         if time_of_day > 2:
             if day%7 == 5:  #Saturday
                 if mc.is_at_work():
-                    if len(get_Sarah_willing_threesome_list()) >= 3: #Atleast three choices for who to hook up with.
+                    if len(get_Sarah_willing_threesome_list()) >= 3: #at least three choices for who to hook up with.
                         return True
         return False        #Return false while I write the events
 

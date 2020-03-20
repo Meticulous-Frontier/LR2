@@ -45,7 +45,7 @@ init 1301 python:
 
 init 2 python:
     def unisex_restroom_crisis_requirement():
-        if len(mc.business.get_employee_list()) > 5: #Have atleast 6 employees.
+        if len(mc.business.get_employee_list()) > 5: #Have at least 6 employees.
             if mc.business.is_open_for_business(): #Only trigger if people are in the office.
                 if mc.is_at_work(): #Check to see if the main character is at work
                     return True

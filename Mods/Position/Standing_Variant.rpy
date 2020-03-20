@@ -305,7 +305,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
             "It is a wonder that [the_girl.possessive_title] can even stand."
             $ mc.change_arousal( 5)
         elif the_girl.arousal > 100:
-            "The heat and moisture radiating from [the_girl.possessive_title]'s groin is intense, having already orgasmed atleast once. You groan in appreciation of her eager cunt."
+            "The heat and moisture radiating from [the_girl.possessive_title]'s groin is intense, having already orgasmed at least once. You groan in appreciation of her eager cunt."
             $ mc.change_arousal( 3)
         else:
             "[the_girl.possessive_title]'s pussy is growing wetter with each thrust, the pleasure from your skillful fucking quickly bringing her to the brink of orgasm."

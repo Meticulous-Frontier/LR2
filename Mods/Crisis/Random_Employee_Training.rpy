@@ -1,6 +1,6 @@
 #####################################  Scene Idea  ##############################################
 # Scene: One one One Training
-#        Pick a random (obedient? intelligent? Probably not bimbo) employee during business hours. Verify they have atleast one work skill lower than MC
+#        Pick a random (obedient? intelligent? Probably not bimbo) employee during business hours. Verify they have at least one work skill lower than MC
 #        Give MC the option to train the NPC in the skill for a random (small) increase
 #        ***Optional:
 #        If NPC is slutty (>60?), check and see if MC has sex skill greater than NPC

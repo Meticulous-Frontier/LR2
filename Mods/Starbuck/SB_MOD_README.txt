@@ -37,7 +37,7 @@ You may have to start a new game for this mod to work correctly, but it SHOULD w
 0.15.0
 	-This update is primarily under the hood. I've pulled as much code as I can out of script.rpy, so that I can make this mod as compatible with other mods as possible.
 	-NOTE: This involved some... pretty awful code. I still have several known issues, but for now the mod is playable.
-	-New content: Cum fetish! The cum fetish serum now works to give girls a cum fetish. Fetish requires and oral skill and a vaginal skill of atleast 3, so on some girls you may need to use applicable serums first.
+	-New content: Cum fetish! The cum fetish serum now works to give girls a cum fetish. Fetish requires and oral skill and a vaginal skill of at least 3, so on some girls you may need to use applicable serums first.
 		-For now, cum fetish is not available for Lily and Jennifer. Also some conversations don't make sense if you give the cum fetish to non-employees or Starbuck.
 	-Cum fetish currently includes 2 new crisis and one new conversation option.
 	-Also included is one new position. It is a variation of the blowjob, but specifically for a few of the cum fetish scenes.
