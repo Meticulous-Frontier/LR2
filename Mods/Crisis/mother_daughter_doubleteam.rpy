@@ -43,7 +43,7 @@ label mother_daughter_doubleteam_action_label():
     the_daughter.char "I know, I know, dad always said you were good in bed. I'm not disputing that! I'm just saying I'm pretty good at giving blowjobs and I might even be better than you..."
     the_mother.char "Honey, blowjobs are an art that takes YEARS to master. I understand that you have enthusiasm, but that doesn't make up for practiced technique."
     the_daughter.char "What makes you think I don't have practice? Oh! Hey [the_daughter.mc_title]"
-    "They both look at you as you walk into the breakroom."
+    "They both look at you as you walk into the break room."
     the_mother.char "Hey [the_mother.mc_title], maybe you could help us settle something. In your experience, who gives better blowjobs, enthusiastic, younger girls or experienced older women?"
     "Oh boy, you walked into hornet's nest."
     mc.name "Well, to be honest I've had both that were amazing, it really just depends on the situation."
@@ -81,14 +81,14 @@ label mother_daughter_doubleteam_action_label():
                     the_mother.char "Alright, I'll make dinner tonight, but this isn't over girl! We'll revisit this another time!"
             $ scene_manager.update_actor(the_mother, position = "walking_away", character_placement = character_right)
             $ scene_manager.update_actor(the_daughter, position = "walking_away", character_placement = character_center_flipped)
-            "The two girls walk out of the breakroom, the competition settled.... for now..."
+            "The two girls walk out of the break room, the competition settled.... for now..."
         "Too busy":
             mc.name "I'm sorry, I have a lot on my to do list right now. Perhaps another time."
             the_daughter.char "Oof. Okay, maybe we're both bad if [the_daughter.mc_title] won't even accept a free blowjob from us mom?"
             the_mother.char "That's... no, I'm sure he's just busy honey."
             $ scene_manager.update_actor(the_mother, position = "walking_away")
             $ scene_manager.update_actor(the_daughter, position = "walking_away")
-            "The two girls walk out of the breakroom, still discussing their issue."
+            "The two girls walk out of the break room, still discussing their issue."
 
     $ scene_manager.clear_scene()
     python:

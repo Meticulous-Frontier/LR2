@@ -51,16 +51,6 @@ init 2 python:
                     return True
         return False
 
-    def get_business_corruption_tier():
-        total_count = 0
-        employee_count = 0
-        if len(mc.business.get_employee_list()) == 0:
-            return 0
-        for person in mc.business.get_employee_list():
-            total_count += person.core_sluttiness
-            employee_count += 1
-        return int((total_count / employee_count) / 20)  #average sluttiness of the whole company / 20 rounded down. so <20 = 0, 20-39 = 1, etc.
-
     def gloryhole_get_response(the_person):    #this function creates a weight list of possible outcomes for the glory hole responses.
         gloryhole_list = []
         if the_person.sluttiness < 20: #They get pissed and refuse to do anything
@@ -105,23 +95,26 @@ init 2 python:
 
 label unisex_restroom_action_label():
     if unisex_restroom_unlocks.get("unisex_policy_unlock", 0) == 0:  #unisex restroom not yet created. Go to suggestion label
-        call unisex_restroom_overhear_label() from unisex_restroom_over_call_1
+        call unisex_restroom_overhear_label() from _call_unisex_restroom_over_call_1
         return
-    $ ran_num = renpy.random.randint(0,4) #Five possible corruption tiers, but at max corruption give a slightly increased chance of the sexiest path.
-    if ran_num > get_business_corruption_tier():
-        $ ran_num = get_business_corruption_tier()   #If the total business corruption is too low, cap the event at the corruption tier
 
-    if ran_num == 0:
-        call unisex_restroom_door_greet_label() from unisex_restroom_greet_call_1
+    if unisex_restroom_unlocks.get("unisex_policy_unlock", 0) < 6:
+        $ ran_num = unisex_restroom_unlocks.get("unisex_policy_unlock", 0)
+        $ unisex_bathroom_policy_unlock(ran_num + 1)
+    else:
+        $ ran_num = renpy.random.randint(1, unisex_restroom_unlocks.get("unisex_policy_unlock", 0))
+
     if ran_num == 1:
-        call unisex_restroom_sexy_overhear_label() from unisex_restroom_over_call_2
+        call unisex_restroom_door_greet_label() from _call_unisex_restroom_greet_call_1
     if ran_num == 2:
-        call unisex_restroom_fantasy_overhear_label() from unisex_restroom_over_call_3
-    if ran_num >= 3:
+        call unisex_restroom_sexy_overhear_label() from _call_unisex_restroom_over_call_2
+    if ran_num == 3:
+        call unisex_restroom_fantasy_overhear_label() from _call_unisex_restroom_over_call_3
+    if ran_num >= 4:
         if unisex_restroom_unlocks.get("unisex_restroom_gloryhole", 0) == 0:  #If not already, unlock the glory hole
-            call unisex_restroom_unlock_gloryhole_label() from unisex_restroom_gloryhole_unlock_1
+            call unisex_restroom_unlock_gloryhole_label() from _call_unisex_restroom_gloryhole_unlock_1
         else:
-            call unisex_restroom_gloryhole_option_label() from unisex_restroom_gloryhole_option_1
+            call unisex_restroom_gloryhole_option_label() from _call_unisex_restroom_gloryhole_option_1
 
     return
 
@@ -131,7 +124,7 @@ label unisex_restroom_overhear_label():
         $ the_person = get_random_from_list(mc.business.production_team)
     else:
         $ the_person = get_random_from_list(mc.business.get_employee_list())
-    "As you pass by the breakroom, you happen to hear one of your employees complaining to someone else."
+    "As you pass by the break room, you happen to hear one of your employees complaining to someone else."
     if the_person in mc.business.production_team:
         if the_person.relationship == "Single":
             the_person.char "So I went out with this guy the other day I met on Tinder and we had some lunch together. It went okay, but we got food truck tacos."
@@ -160,7 +153,7 @@ label unisex_restroom_door_greet_label():   #You have a chance to learn a couple
     $ scene_manager.add_actor(the_person_two)
     "As you step in the door, you pause for a second when you see [the_person_one.title] and [the_person_two.title] there at the sinks, freshing up."
     "You recently made all the bathrooms in the office unisex, and you aren't quite used to having women in the restroom when you walk in yet."
-    "However, the girls seem completely unphased when you walk through the door."
+    "However, the girls seem completely unfazed when you walk through the door."
     the_person_one.char "Oh hey [the_person_one.mc_title]. So anyway..."
     "It seems like they are having a pretty active conversation. Trying not to be awkward, you head into one of the stalls and close the door. They keep talking."
     $ scene_manager.clear_scene()
@@ -256,7 +249,7 @@ label unisex_restroom_sexy_overhear_label():
 label unisex_restroom_fantasy_overhear_label():
     $ (the_person_one, the_person_two) = get_random_employees(2)
     if the_person_one.sluttiness < 30: #She's not slutty enough for this.
-        call unisex_restroom_sexy_overhear_label() from unisex_restroom_fantasy_redirect_1
+        call unisex_restroom_sexy_overhear_label() from _call_unisex_restroom_fantasy_redirect_1
         return
     $ discover_identity = False
     $ anon_char_one = get_anon_person(the_person_one)
@@ -382,7 +375,7 @@ label unisex_restroom_unlock_gloryhole_label():
     "You finish relieving yourself, and then consider. Should you wait and see if someone comes along? Or maybe try some other time?"
     menu:
         "Wait for a few minutes":
-            call unisex_restroom_use_gloryhole_label from use_dat_gloryhole_1
+            call unisex_restroom_use_gloryhole_label from _call_use_dat_gloryhole_1
             pass
         "Finish up and maybe try it another time":
             pass
@@ -390,18 +383,16 @@ label unisex_restroom_unlock_gloryhole_label():
 
 label unisex_restroom_gloryhole_option_label():
     "You step into the restroom and walk into one of the stalls."
-    "As you relieve yourself, you see the glory hole in the stall that has been cutout."
-    if get_business_corruption_tier() == 4:
+    if unisex_restroom_unlocks.get("unisex_policy_unlock", 0) < 6:
         "You see that someone has drawn multiple hearts in red lipstick around it."
-    elif get_business_corruption_tier() > 4:
+    else:
         "You see that someone has drawn an open mouth around it in lipstick."
         "Above the hole, someone has drawn a phallus, then the text 'dick goes here plz' with an arrow drawn to the hole."
         "Below, in different handwriting, someone else has written 'cum inside me please!' with another arrow pointed up to the hole."
     "You finish relieving yourself, and then consider. Should you wait and see if someone comes along? Or maybe try some other time?"
     menu:
         "Wait for a few minutes":
-            call unisex_restroom_use_gloryhole_label from use_dat_gloryhole_2
-            pass
+            call unisex_restroom_use_gloryhole_label from _call_use_dat_gloryhole_2
         "Finish up and maybe try it another time":
             pass
     return
@@ -418,15 +409,15 @@ label unisex_restroom_use_gloryhole_label():
         $ the_person.change_slut_temp(4, add_to_log = False)
         $ the_person.change_happiness(-5, add_to_log = False)
     elif person_response == "Handjob":
-        call unisex_restroom_gloryhole_handjob_label(the_person) from gloryhole_HJ_response_1
+        call unisex_restroom_gloryhole_handjob_label(the_person) from _call_gloryhole_HJ_response_1
     elif person_response == "Blowjob":
-        call unisex_restroom_gloryhole_blowjob_label(the_person) from gloryhole_BJ_response_1
+        call unisex_restroom_gloryhole_blowjob_label(the_person) from _call_gloryhole_BJ_response_1
     elif person_response == "Vaginal":
-        call unisex_restroom_gloryhole_vaginal_label(the_person) from gloryhole_sex_response_1
+        call unisex_restroom_gloryhole_vaginal_label(the_person) from _call_gloryhole_sex_response_1
     elif person_response == "Anal":
-        call unisex_restroom_gloryhole_anal_label(the_person) from gloryhole_anal_response_1
+        call unisex_restroom_gloryhole_anal_label(the_person) from _call_gloryhole_anal_response_1
     elif person_response == "JoinMe":
-        call unisex_restroom_gloryhole_joinme_label(the_person) from gloryhole_joinme_response_1
+        call unisex_restroom_gloryhole_joinme_label(the_person) from _call_gloryhole_joinme_response_1
     else:
         "Why aren't we catching anything here?"
 
@@ -436,13 +427,13 @@ label unisex_restroom_gloryhole_wait_label():
     "You decide you could use a little anonymous action to break up the monotony of the day."
     "You step into the restroom and walk into one of the stalls."
     "You see the glory hole in the stall that has been cutout."
-    if get_business_corruption_tier() == 4:
+    if unisex_restroom_unlocks.get("unisex_policy_unlock", 0) < 6:
         "You see that someone has drawn multiple hearts in red lipstick around it."
-    elif get_business_corruption_tier() > 4:
+    else:
         "You see that someone has drawn an open mouth around it in lipstick."
         "Above the hole, someone has drawn a phallus, then the text 'dick goes here plz' with an arrow drawn to the hole."
         "Below, in different handwriting, someone else has written 'cum inside me please!' with another arrow pointed up to the hole."
-    call unisex_restroom_use_gloryhole_label from use_dat_gloryhole_wait_2
+    call unisex_restroom_use_gloryhole_label from _call_use_dat_gloryhole_wait_2
     #TODO advance time?
 
     return
