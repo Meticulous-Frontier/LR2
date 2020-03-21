@@ -1505,7 +1505,6 @@ label Sarah_threesome_request_label():
     $ the_person = sarah
     $ meets_sluttiness_list = []
     $ gossip_target = get_random_employees(1, exclude_list = [sarah], slut_required = 50)
-    $ threesome_target_list = get_Sarah_willing_threesome_list()
 
     "Another Saturday, another extra workday for you. You are hardly surprised when you here [the_person.title]'s familiar voice."
     the_person.char "Hey [the_person.mc_title]. I figured you'd be around here."
@@ -1576,9 +1575,9 @@ label Sarah_threesome_request_label():
     the_person.char "That would be incredible... but... I mean, I feel like I have a right to know... who do you have in mind?"
     # use new menu layout for selecting people
     if "build_menu_items" in globals():
-        call screen main_choice_display(build_menu_items([["Request Threesome From"] + threesome_target_list], draw_hearts_for_people = False))
+        call screen main_choice_display(build_menu_items([["Request Threesome From"] + get_Sarah_willing_threesome_list()], draw_hearts_for_people = False))
     else:
-        call screen main_choice_display([["Request Threesome From"] + threesome_target_list])
+        call screen main_choice_display([["Request Threesome From"] + get_Sarah_willing_threesome_list()])
     $ person_choice = _return
     $ scene_manager.update_actor(the_person, position = "sitting")
     if employee_role in person_choice.special_role:
