@@ -156,7 +156,7 @@ init 2 python:
     def SB_fetish_cum_dosage_requirement():
         if time_of_day > 0 and time_of_day < 4:
             if mc.business.is_open_for_business() and mc.is_at_work():
-                return True
+                return not get_fetish_cum_dosage_employee() is None
         return False
 
     def SB_fetish_shower_cum_requirement():
