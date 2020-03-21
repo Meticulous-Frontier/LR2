@@ -262,6 +262,8 @@ label cat_fight_crisis_enhanced_label():
                     winner.char "I should probably go get cleaned up too. Sorry about all of this [winner.mc_title]."
                     $ scene_manager.update_actor(loser, position = "walking_away")
                     "[winner.title] leaves and you get back to work."
+            $ del winner
+            $ del loser
 
         "Have a team building exercise" if willing_to_threesome(person_one, person_two) and mc.energy > 30:
             mc.name "Enough! It is obvious to me that we are too busy working against one another, and not enough working as a team."
