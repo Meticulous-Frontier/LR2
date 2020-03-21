@@ -205,8 +205,8 @@ init -1 python:
                 full_outfit = None
                 count = 0
 
-                while not full_outfit and count < 4:    # Try to find a valid uniform by stretching the sluttiness range, returns none when not successful
-                    full_outfit = self.get_random_appropriate_outfit(target_sluttiness + (count * 2), minimum_sluttiness - (count * 10), preferences = preferences)
+                while not full_outfit and count < 2:    # Try to find a valid uniform by stretching the sluttiness range, returns none when not successful
+                    full_outfit = self.get_random_appropriate_outfit(target_sluttiness + (count * 5), minimum_sluttiness - (count * 10), preferences = preferences)
                     count += 1
 
                 if not full_outfit: # fallback if we cannot find anything for our sluttiness or preferences
@@ -223,8 +223,8 @@ init -1 python:
         uniform_over = None
         uniform_under = None
         count = 0
-        while not uniform_over and count < 4:   # Try to find a valid uniform by stretching the sluttiness range, returns none when not successful
-            uniform_over = self.get_random_appropriate_overwear(target_sluttiness + (count * 2), minimum_sluttiness - (count * 10), preferences = preferences)
+        while not uniform_over and count < 2:   # Try to find a valid uniform by stretching the sluttiness range, returns none when not successful
+            uniform_over = self.get_random_appropriate_overwear(target_sluttiness + (count * 5), minimum_sluttiness - (count * 10), preferences = preferences)
             count += 1
 
         if uniform_over:
@@ -284,8 +284,8 @@ init -1 python:
             if outfit_choice > chance_to_use_full or len(self.underwear_sets + self.overwear_sets) == 0:
                 full_outfit = None
                 count = 0
-                while not full_outfit and count < 4:    # Try to find a valid outfit by stretching the sluttiness range, returns none when not successful
-                    full_outfit = self.get_random_appropriate_outfit(target_sluttiness + (count * 3), minimum_sluttiness - (count * 5), preferences = preferences)
+                while not full_outfit and count < 2:    # Try to find a valid outfit by stretching the sluttiness range, returns none when not successful
+                    full_outfit = self.get_random_appropriate_outfit(target_sluttiness + (count * 5), minimum_sluttiness - (count * 10), preferences = preferences)
                     count += 1
 
                 if not full_outfit: # fallback if we cannot find anything for our sluttiness or preferences
@@ -301,8 +301,8 @@ init -1 python:
         #If we get to here we are assembling an outfit out of underwear or overwear.
         outfit_over = None
         count = 0
-        while not outfit_over and count < 4:   # Try to find a valid uniform by stretching the sluttiness range, returns none when not successful
-            outfit_over = self.get_random_appropriate_overwear(target_sluttiness + (count * 3), minimum_sluttiness - (count * 5), preferences = preferences)
+        while not outfit_over and count < 2:   # Try to find a valid uniform by stretching the sluttiness range, returns none when not successful
+            outfit_over = self.get_random_appropriate_overwear(target_sluttiness + (count * 5), minimum_sluttiness - (count * 10), preferences = preferences)
             count += 1
 
         if outfit_over:
