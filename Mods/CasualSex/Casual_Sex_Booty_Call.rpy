@@ -7,7 +7,7 @@ init 3 python:
     def casual_sex_booty_call_requirement():
         if time_of_day > 0 : #Not early morning
             if time_of_day < 4: #Not night
-                return True
+                return not get_casual_sex_booty_call_person() is None
         return False
 
     def get_casual_sex_booty_call_person():
