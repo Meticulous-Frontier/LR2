@@ -910,7 +910,7 @@ label HR_director_change_relative_recruitment_label(the_person):
         menu:
             "Take the Sign Down":
                 the_person.char "Ok, I'll take it down as soon as we are finished here. Is there anything else I can do for you?"
-                $ update_hire_daughter_crisis(2)
+                $ update_hire_daughter_crisis(0)
                 $ set_HR_director_tag("business_HR_relative_recruitment", 1)
             "Leave the Sign Up":
                 the_person.char "Oh... sorry I thought you said you wanted to change it. Is there anything else I can do for you?"

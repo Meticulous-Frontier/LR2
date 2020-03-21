@@ -28,8 +28,8 @@ label activate_change_crisis_chance(stack):
     python:
         bedroom.actions.append(change_crisis_chance_action)
 
-        crisis_base_chance = 10
-        morning_crisis_base_chance = 5
+        crisis_base_chance = 20
+        morning_crisis_base_chance = 10
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
@@ -39,8 +39,8 @@ label update_change_crisis_chance(stack):
     python:
         if not change_crisis_chance_action in bedroom.actions:
             bedroom.actions.append(change_crisis_chance_action)
-            crisis_base_chance = 10
-            morning_crisis_base_chance = 5
+            crisis_base_chance = 20
+            morning_crisis_base_chance = 10
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
