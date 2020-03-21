@@ -164,14 +164,12 @@ label SB_fetish_vaginal_visit_label(the_person):
 #SBR10
 label SB_fetish_vaginal_mom_kitchen_label(the_person):
     $ the_person = mom
-    $ ordered_bottom = the_person.outfit.get_lower_ordered()
-    if len(ordered_bottom) > 0:
+    if len(the_person.outfit.get_lower_ordered()) > 0:
         $ the_clothing = the_person.outfit.get_lower_ordered()[-1] #Get the very top item of clothing.
-    $ del ordered_bottom
 
     mc.name "Hey [the_person.title], dinner sure smells good. Just keep working on it, don't mind me!"
     "[the_person.possessive_title] hesitates for a second, clearly realizing you are up to something."
-    "You pretend to look in the fridge for something as [the_person.possessive_title] resumes dinner preperations. She bends over the counter and starts to chop up some vegetables."
+    "You pretend to look in the fridge for something as [the_person.possessive_title] resumes dinner preparations. She bends over the counter and starts to chop up some vegetables."
     $ the_person.draw_person(position = "standing_doggy")
     if the_person.outfit.vagina_available():
         "You steal a few glances over at [the_person.possessive_title]'s exposed ass. It looks soft and supple, and shakes a bit as she prepares dinner."
@@ -212,6 +210,8 @@ label SB_fetish_vaginal_mom_kitchen_label(the_person):
 
     $ the_person.review_outfit(dialogue = False)
     "As [the_person.possessive_title] continues dinner preparation, you take a quick look around. It doesn't look like Lily noticed anything happened between you and [the_person.possessive_title]."
+
+    $ the_clothing = None
     return
 
 #Anal Fetish Events#
@@ -240,10 +240,8 @@ label SB_fetish_cum_getdosage_label(the_person):
 
 #SBR40
 label SB_fetish_anal_mom_kitchen_label(the_person):
-    $ ordered_bottom = the_person.outfit.get_lower_ordered()
-    if len(ordered_bottom) > 0:
+    if len(the_person.outfit.get_lower_ordered()) > 0:
         $ the_clothing = the_person.outfit.get_lower_ordered()[-1] #Get the very top item of clothing.
-    $ del ordered_bottom
 
     mc.name "Hey [the_person.title], dinner sure smells good. Just keep working on it, don't mind me!"
     "[the_person.possessive_title] hesitates for a second, clearly realizing you are up to something."
@@ -289,6 +287,8 @@ label SB_fetish_anal_mom_kitchen_label(the_person):
 
     $ the_person.review_outfit(dialogue = False)
     "As [the_person.possessive_title] continues dinner preparation, you take a quick look around. It doesn't look like Lily noticed anything happened between you and [the_person.possessive_title]."
+
+    $ the_clothing = None
     return
 
 #SBR50

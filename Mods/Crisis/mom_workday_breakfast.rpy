@@ -128,10 +128,7 @@ label mom_breakfast_action_label():
                     menu:
                         "Pull Her Top Up" if the_person.sluttiness > 40:
                             while not the_person.outfit.tits_available():    #If covered up, have her take her top off
-                                #the_person.char "Here... let me take this off. I bet that will help ease some of your stress."
-                                $ the_clothing = the_person.outfit.get_upper_ordered()[-1]
-                                #"[the_person.possessive_title] takes off her [the_clothing.name]"
-                                $ scene_manager.draw_animated_removal(the_person, the_clothing)
+                                $ scene_manager.draw_animated_removal(the_person, the_person.outfit.get_upper_ordered()[-1])
                             "You reach down and slowly remove her top, exposing her creamy tits."
                             "Your hands return to her chest, her boobs feel hot and soft in your hands."
 

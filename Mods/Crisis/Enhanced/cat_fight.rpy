@@ -304,6 +304,7 @@ label cat_fight_crisis_enhanced_label():
 
     python:     # Release variables
         scene_manager.clear_scene()
+        the_clothing = None
         del the_relationship
         del person_one
         del person_two

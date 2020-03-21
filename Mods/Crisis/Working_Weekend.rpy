@@ -132,6 +132,7 @@ label SB_working_weekend_crisis_label():
                     $ the_clothing = person_one.outfit.get_upper_ordered()[-1]
                     "[person_one.possessive_title] takes off her [the_clothing.name]"
                     $ person_one.draw_animated_removal(the_clothing)
+                    $ the_clothing = None
                 "Your eyes wander down to [person_one.possessive_title]'s tits."
                 if person_one.outfit.tits_available():
                     if person_one.get_opinion_score("showing her tits") > 0:

@@ -757,16 +757,13 @@ label Sarah_get_drinks_label():
     $ mc.change_location(hall)
     $ mc.location.show_background()
 
-    $ ordered_top = the_person.outfit.get_upper_ordered()
-    $ ordered_bot = the_person.outfit.get_lower_ordered()
-    if len(ordered_top) != 0:
-        $ the_clothing_top = the_person.outfit.get_upper_ordered()[-1] #Get the very top item of clothing.
-        $ the_clothing_top.colour[3] = the_clothing_top.colour[3] * 0.75
-    if len(ordered_bot) != 0:
-        $ the_clothing_bot = the_person.outfit.get_lower_ordered()[-1] #Get the very top item of clothing.
-        $ the_clothing_bot.colour[3] = the_clothing_bot.colour[3] * 0.75
+    if len(the_person.outfit.get_upper_ordered()) != 0:
+        $ the_person.outfit.get_upper_ordered()[-1].colour[3] *= .75 #make top transparent
+    if len(the_person.outfit.get_lower_ordered()) != 0:
+        $ the_person.outfit.get_lower_ordered()[-1].colour[3] *= .75 #make bottom transparent
+
     $ scene_manager.update_actor(the_person, position = "stand4")
-    if (len(ordered_top) > 0 or len(ordered_bot) < 0):
+    if (len(the_person.outfit.get_upper_ordered()) > 0 or len(the_person.outfit.get_lower_ordered()) > 0):
         "You look at [the_person.title]. Her clothing is soaked and you can practically see through it. She looks cold."
     else:  #She's... naked?
         "Barely clothed, [the_person.title] is shivering from the cold."
@@ -1065,6 +1062,8 @@ label Sarah_tits_reveal_label():
             $ the_clothing = the_person.outfit.get_upper_ordered()[-1]
             "[the_person.possessive_title] takes off her [the_clothing.name]"
             $ the_person.draw_animated_removal(the_clothing)
+        $ the_clothing = None
+
         "Her chest now bare before you, [the_person.title] takes a breast in her hand, enjoying the weight."
         the_person.char "Go ahead and touch them. These are so much better than implants, I can't believe how good they feel. And they are so sensitive too..."
     "With both hands your reach and cup her considerable chest. The skin is soft and pliable in your hands."

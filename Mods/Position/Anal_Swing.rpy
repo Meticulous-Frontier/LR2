@@ -121,6 +121,7 @@ label scene_SB_anal_swing_2(the_girl, the_location, the_object):
             $ the_clothing = the_girl.outfit.get_upper_ordered()[-1]
             "You take off [the_girl.possessive_title]'s [the_clothing.name]"
             $ the_girl.draw_animated_removal(the_clothing)
+        $ the_clothing = None
 
         mc.name "Mmm, you tits are amazing."
         if the_girl.get_opinion_score("showing her tits") > 0:

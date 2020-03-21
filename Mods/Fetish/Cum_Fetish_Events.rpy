@@ -97,6 +97,7 @@ label SB_fetish_cum_label(the_person):
                     $ the_clothing = the_person.outfit.get_upper_ordered()[-1]
                     "[the_person.possessive_title] takes off her [the_clothing.name]"
                     $ the_person.draw_animated_removal(the_clothing)
+                $ the_clothing = None
             "[the_person.possessive_title] gropes her breasts with both hands, looking for your approval."
             mc.name "Mmm, that looks great. I think I'll eat my lunch now..."
             "[the_person.possessive_title] giggles."

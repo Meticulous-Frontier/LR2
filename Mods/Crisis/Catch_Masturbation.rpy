@@ -42,10 +42,8 @@ label SB_caught_masturbating_crisis_label():
         return
 
     $ the_place = mc.business.get_employee_workstation(the_person)
-    $ ordered_bottom = the_person.outfit.get_lower_ordered()
-    if len(ordered_bottom) > 0:
+    if len(the_person.outfit.get_lower_ordered()) > 0:
         $ the_clothing = the_person.outfit.get_lower_ordered()[-1] #Get the very top item of clothing.
-    $ del ordered_bottom
 
     "You decide to take a quick break from what you are doing. You stand up and stretch your legs, and go for a quick walk."
     "While you are walking by an unused storage room, you hear some muffled sounds coming from inside."
@@ -298,5 +296,6 @@ label SB_caught_masturbating_crisis_label():
     $ the_person.reset_arousal()
     $ the_person.review_outfit() #Make sure to reset her outfit so she is dressed properly.
     $ mc.location.show_background()
+    $ the_clothing = None
     $ renpy.scene("Active")
     return

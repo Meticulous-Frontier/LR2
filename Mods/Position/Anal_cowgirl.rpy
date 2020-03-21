@@ -83,6 +83,7 @@ label scene_SB_anal_cowgirl_2(the_girl, the_location, the_object):
                     mc.name "I want a better look at your tits while you fuck me."
                     $ the_girl.draw_animated_removal(the_clothing, position = SB_anal_cowgirl.position_tag) #Hopefully this copy paste works.
                     "Now free of her [the_clothing.name], [the_girl.possessive_title] resumes fucking you."
+                    $ the_clothing = None
                     return
                 "Play with her pussy":
                     "You quickly stick your thumb in your mouth to get it wet, then reach down and start to rub her clit with your thumb as she rides you."
@@ -94,8 +95,8 @@ label scene_SB_anal_cowgirl_2(the_girl, the_location, the_object):
                         the_girl.char "That feels good... Keep going that makes this easier."
                     "You push a finger up inside her while you continue to use your thumb to rub her love button. As she bounces up and down on your cock you can feel your cock deep inside her ass through the thin vaginal wall."
                     "You stroke yourself a bit through her vagina while she fucks you. It's a very unique feeling, and very pleasurable!"
+                    $ the_clothing = None
                     return
-
 
     else:
         if the_girl.outfit.tits_visible():
@@ -113,6 +114,7 @@ label scene_SB_anal_cowgirl_2(the_girl, the_location, the_object):
                     mc.name "I want a better look at your tits while you fuck me."
                     $ the_girl.draw_animated_removal(the_clothing, position = SB_anal_cowgirl.position_tag) #Hopefully this copy paste works.
                     "Now free of her [the_clothing.name], [the_girl.possessive_title] resumes fucking you."
+                    $ the_clothing = None
                     return
                 "Play with her pussy":
                     "You quickly stick your thumb in your mouth to get it wet, then reach down and start to rub her clit with your thumb as she rides you."
@@ -124,6 +126,7 @@ label scene_SB_anal_cowgirl_2(the_girl, the_location, the_object):
                         the_girl.char "That feels good... Keep going that makes this easier."
                     "You push a finger up inside her while you continue to use your thumb to rub her love button. As she bounces up and down on your cock you can feel your cock deep inside her ass through the thin vaginal wall."
                     "You stroke yourself a bit through her vagina while she fucks you. It's a very unique feeling, and very pleasurable!"
+                    $ the_clothing = None
                     return
     "You give her nipple a pinch. You roll it between your finger and thumb."
     if the_girl is mom:

@@ -482,6 +482,7 @@ label SB_free_strip_scene(the_person, must_be_naked = True):
             the_person.char "This you mean? You want me to take this off?"
             $ the_person.draw_animated_removal(strip_choice[0], position = picked_pose)
             "[the_person.possessive_title] strips off her [the_clothing.name]. She throws it playfully, hitting you in the face." #Hopefully this wasn't shoes, lol
+            $ the_clothing = None
     return
 
 #SBA40

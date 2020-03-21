@@ -348,6 +348,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             $ the_clothing = the_person.outfit.get_upper_ordered()[-1]
             "[the_person.possessive_title] takes off her [the_clothing.name]"
             $ the_person.draw_animated_removal(the_clothing)
+            $ the_clothing = None
         else:
             "[the_person.possessive_title] strikes a pose, her tits on display."
             the_person.char "Don't forget to take pictures!"
@@ -413,6 +414,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
                 $ the_clothing = the_person.outfit.get_upper_ordered()[-1]
                 "[the_person.possessive_title] takes off her [the_clothing.name]"
                 $ the_person.draw_animated_removal(the_clothing)
+                $ the_clothing = None
             "With her tits completely exposed, she saunters back over to you then starts to get down on her knees."
         else:
             "[the_person.possessive_title] slowly starts to get down on her knees in front of you."

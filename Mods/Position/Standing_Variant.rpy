@@ -403,14 +403,15 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                         "You enjoy teasing her suuple breasts for a few moments. You hold one in place while you fuck her, feeling the weight of it sway with each motion."
                         $ the_girl.change_arousal(5)
                     else:
-                        $top_clothing = the_girl.outfit.get_upper_ordered()[-1]
+                        $ top_clothing = the_girl.outfit.get_upper_ordered()[-1]
                         "You plant a hand on [the_girl.possessive_title]'s big tits and fondle them through her [top_clothing.name]."
+                        $ top_clothing = None
                         the_girl.char "Mmm, you should just pull that out of the way. I want you to be able to grab them and squeeze them."
                         "For now, you decide to continue fondling her through her clothing."
                         $ the_girl.change_arousal(5)
                     if the_girl.arousal > 130:
                         "[the_girl.possessive_title] moans loudly from your attention to her voluptuous chest. She thrusts herself back against you."
-                        "You feel yet another orgasm roll through her. Her drenched pussy is pulsating wildy and its just too much. You are definitely about to cum!"
+                        "You feel yet another orgasm roll through her. Her drenched pussy is pulsating wildly and its just too much. You are definitely about to cum!"
                         $ mc.change_arousal( 100)
                         return
                 else:
@@ -421,12 +422,13 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                         $ the_girl.change_arousal(5)
                         if the_girl.arousal > 130:
                             "[the_girl.possessive_title] moans loudly from your attention to her petite chest. She thrusts herself back against you."
-                            "You feel yet another orgasm roll through her. Her drenched pussy is pulsating wildy and its just too much. You are definitely about to cum!"
+                            "You feel yet another orgasm roll through her. Her drenched pussy is pulsating wildly and its just too much. You are definitely about to cum!"
                             $ mc.change_arousal( 100)
                             return
                     else:
-                        $top_clothing = the_girl.outfit.get_upper_ordered()[-1]
+                        $ top_clothing = the_girl.outfit.get_upper_ordered()[-1]
                         "You try and feel up [the_girl.possessive_title]'s little tits, but her [top_clothing.name] stops you from getting much more than a handful of fabric."
+                        $ top_clothing = None
                         "You give up and focus on fucking her instead."
                         $ the_girl.change_arousal(5)
                 if the_girl.arousal > 105:
