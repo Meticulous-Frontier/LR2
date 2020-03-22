@@ -189,12 +189,13 @@ init -1 python:
         for person in unique_character_list:
             update_person_opinions(person)
 
-        # update random characters in game
-        for person in list_of_premade_characters:
-            update_person_opinions(person)
-            update_random_person(person)
-            rebuild_wardrobe(person)
-            update_person_outfit(person, -0.2) # choose a less slutty outfit as planned outfit
+        if "list_of_premade_characters" in globals():
+            # update random characters in game
+            for person in list_of_premade_characters:
+                update_person_opinions(person)
+                update_random_person(person)
+                rebuild_wardrobe(person)
+                update_person_outfit(person, -0.2) # choose a less slutty outfit as planned outfit
         return
 
     def update_unique_character_wardrobes():
