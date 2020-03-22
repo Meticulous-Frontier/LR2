@@ -373,12 +373,12 @@ label increase_slave_submission_label(the_person):
     "[the_person.possessive_title] looks at you, meekly nods and drops to her knees."
     $ the_person.draw_person(position = "kneeling1")
 
-    mc.name "[the_person.title], i sense you have not yet completely accepted me as your master."
+    mc.name "[the_person.title], I sense you have not yet completely accepted me as your master."
     "[the_person.possessive_title] starts to shake her head, but you simply hold up your hand to stop her before she starts."
     mc.name "Do you want to be my devoted and loyal slave?"
     if the_person.obedience < 200:
         "She looks at you intently..."
-        the_person.char "No Master, i've got other duties that prevent that."
+        the_person.char "No Master, I've got other duties that prevent that."
         mc.name "It seems you need a punishment for this insolence."
         if not the_person.outfit.vagina_visible():
             mc.name "Take off your clothes and bend over against the desk."
@@ -390,7 +390,7 @@ label increase_slave_submission_label(the_person):
         $ the_person.change_stats(arousal = 10)
         "Suddenly you pull you hand back and start giving her the spanking she deserves."
         "SMACK! SMACK! SMACK!"
-        the_person.char "Please Master...OUCH, i'll try to obey...AH...your wishes...OW, please...YELP...let me...OUCH...prove it to you...AW."
+        the_person.char "Please Master...OUCH, I'll try to obey...AH...your wishes...OW, please let me...OUCH...prove it to you...AW."
         mc.name "Very well, Slave, see that you do, I won't be so forgiving next time."
         $ the_person.draw_person(position = "stand2", emotion = "angry")
         $ the_person.change_obedience(10)
