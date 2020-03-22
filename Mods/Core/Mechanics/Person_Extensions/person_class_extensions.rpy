@@ -17,19 +17,19 @@ init -1:
             self.planned_outfit = None
             self.planned_uniform = None
 
-            for outfit in [wardrobe.outfits + wardrobe.underwear_sets + wardrobe.overwear_sets]:
+            for outfit in self.wardrobe.outfits + self.wardrobe.underwear_sets + self.wardrobe.overwear_sets:
                 for clothing in outfit.upper_body:
                     clothing.position_sets.clear()
-                self.upper_body.clear()
+                outfit.upper_body.clear()
                 for clothing in outfit.lower_body:
                     clothing.position_sets.clear()
-                self.lower_body.clear()
+                outfit.lower_body.clear()
                 for clothing in outfit.feet:
                     clothing.position_sets.clear()
-                self.feet.clear()
+                outfit.feet.clear()
                 for clothing in outfit.accessories:
                     clothing.position_sets.clear()
-                self.accessories.clear()
+                outfit.accessories.clear()
 
             self.wardrobe.outfits.clear()
             self.wardrobe.underwear_sets.clear()
