@@ -37,7 +37,7 @@ init 1400 python:
     def cougar_player_titles(person):
         valid_player_titles = [reserved_player_titles(person)]
         if person.happiness < 70:
-            valid_player_titles.append("Litle Boy")
+            valid_player_titles.append("Little Boy")
         if person.love > 25:
             valid_player_titles.append("Darling")
         if person.sluttiness > 60:

@@ -66,7 +66,7 @@ init 2 python:
 
             Policy.__init__(self, name, desc, requirement, cost, on_buy_function, on_buy_arguments)
             self.children = [] # A list that gets filled with child elements
-            self.parent = parent # The parent of a policy is where you want it to be subcatagorized
+            self.parent = parent # The parent of a policy is where you want it to be sub-categorized
 
             if self.parent:
                 if not hasattr(self.parent, "children"): # Allow non- ModPolicy (normal Policy) class to be used as parents

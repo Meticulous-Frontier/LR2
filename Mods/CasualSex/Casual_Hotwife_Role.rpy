@@ -1467,7 +1467,7 @@ label hotwife_cum_mouth(the_person):
 #     the_person.char "Okay, how can I help?"
 #     mc.name "All of our research and development up until this point has been based on the limited notes I have from my university days. I'm sure there's more we could learn, and I want you to look into it for me."
 #     "[the_person.title] smiles mischievously."
-#     the_person.char "I've got an idea that you might want to hear then. It's not the most... orthodox testing procedure but I think it is nessesary if we want to see rapid results."
+#     the_person.char "I've got an idea that you might want to hear then. It's not the most... orthodox testing procedure but I think it is necessary if we want to see rapid results."
 #     mc.name "Go on, I'm interested."
 #     the_person.char "Our testing procedures focus on human safety, which I'll admit is important, but it doesn't leave us with much information about the subjective effects of our creations."
 #     the_person.char "What I want to do is take a dose of our serum myself, then have you record me while you run me through some questions."

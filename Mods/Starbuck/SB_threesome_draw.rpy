@@ -412,11 +412,11 @@ init -1 python:
             self.skill_tag_p1 = skill_tag_p1 #The skill that will provide a bonus to this for girl 1
             self.skill_tag_p2 = skill_tag_p2 #The skill that will provide a bonus to this for girl 2
             self.opinion_tags = opinion_tags #The opinion that will be checked each round.
-            self.girl_one_arousal = girl_one_arousal # The base arousal the girl recieves from this position.
-            self.girl_two_arousal = girl_two_arousal # The base arousal the girl recieves from this position.
+            self.girl_one_arousal = girl_one_arousal # The base arousal the girl receives from this position.
+            self.girl_two_arousal = girl_two_arousal # The base arousal the girl receives from this position.
             self.girl_one_source = girl_one_source  #Who is giving girl 1 pleasure. 0 = MC, 1 = herself, 2 = girl 2
             self.girl_two_source = girl_two_source  #Who is giving girl 2 pleasure. 0 = MC, 1 = girl 1, 2 = herself
-            self.guy_arousal = guy_arousal # The base arousal the guy recieves from this position.
+            self.guy_arousal = guy_arousal # The base arousal the guy receives from this position.
             self.skill_tag_guy = skill_tag_guy #The skill that will decide how much arousal MC receives.
             self.guy_source = guy_source # Who is giving MC pleasure. 0 = MC, 1 = girl 1, 2 = girl 2
             self.current_girl = current_girl
