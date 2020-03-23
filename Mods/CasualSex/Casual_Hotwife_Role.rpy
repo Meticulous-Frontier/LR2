@@ -153,7 +153,7 @@ label casual_hotwife_get_a_drink_label(the_person):
     else:
         the_person.char "Hey [the_person.mc_title]! A drink sounds great!"
     "You consider for a moment. If you offer to buy her a drink, you'll have a chance to slip a serum into it."
-    $ offer_drink_chance = ((mc.charisma + (the_person.effective_sluttiness() / 10) + 2) * 10)  #More willing to let you buy a drink for her as she gets sluttier
+    $ offer_drink_chance = (mc.charisma + (the_person.effective_sluttiness() / 10)) * 10  #More willing to let you buy a drink for her as she gets sluttier
     $ rand_chance = renpy.random.randint(0,100)
     #$ bartender_name = get_random_male_name()
     menu:
@@ -1094,7 +1094,7 @@ label hotwife_hookup_accept(the_person):
     "[the_person.title] keeps her mouth open wide and bobs her head back and forth to slide your cock in and out. The feeling of her soft, warm mouth sends shivers up your spine."
     "As she slides her tongue along your length you snap a few more pictures."
     "It feels amazing, you can tell if you let her keep going you will cum quickly."
-    #TODO write blwjob finish scene#
+    #TODO write blowjob finish scene#
     mc.name "That feels great, but I don't want to finish in your mouth. Why don't you stand up and turn around..."
     $ the_person.draw_person( position = "standing_doggy")
     if the_person.effective_sluttiness() > 40: #She asks if you want to use a condom
@@ -1198,7 +1198,7 @@ label hotwife_hookup_accept(the_person):
             menu:
                 "Stay Vaginal":
                     "As [the_person.title]'s pussy quivers around you, you decide to just keep doing what you are doing."
-                "Fuck Her Ass" if the_person.effective_sluttiness() > 80:
+                "Fuck Her Ass" if the_person.effective_sluttiness() >= 80:
                     "You pull out of her pussy. Her juices leave a strand attached to you, connecting you to her cunt."
                     the_person.char "Mmm, [the_person.mc_title]? Why did you pull out... OH!"
                     "Her question is swiftly answered when she feels your manhood poking her puckered hole."

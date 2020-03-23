@@ -5,6 +5,17 @@ init 5 python:
     def build_wardrobe_change_menu():
         return ["Choose", ["Add an outfit", "add"], ["Delete an outfit", "delete"], ["Wear an outfit right now", "wear"], ["Back", "back"]]
 
+    def build_wardrobe_change_save_menu(outfit):
+        option_list = []
+        option_list.append("Save Outfit As")
+        option_list.append(["Full outfit", "full"])
+        if outfit.is_suitable_underwear_set():
+            option_list.append(["Underwear set", "under"])
+        if outfit.is_suitable_overwear_set():
+            option_list.append(["Overwear set", "over"])
+        option_list.append(["Forget it", "none"])
+        return option_list
+
 label wardrobe_change_label_enhanced(the_person):
     if "build_menu_items" in globals():
         call screen main_choice_display(build_menu_items([build_wardrobe_change_menu()]))
@@ -23,19 +34,12 @@ label wardrobe_change_label_enhanced(the_person):
             return
 
         $ new_outfit = _return
-        menu:
-            "Save as a full outfit":
-                $ outfit_type = "full"
-            "Save as an underwear set" if new_outfit.is_suitable_underwear_set():
-                $ outfit_type = "under"
-            "Save as an underwear set (disabled)" if not new_outfit.is_suitable_underwear_set():
-                pass
-            "Save as an over wear set" if new_outfit.is_suitable_overwear_set():
-                $ outfit_type = "over"
-            "Save as an over wear set (disabled)" if not new_outfit.is_suitable_overwear_set():
-                pass
-            "Forget it":
-                $ outfit_type = "none"
+        if "build_menu_items" in globals():
+            call screen main_choice_display(build_menu_items([build_wardrobe_change_save_menu(new_outfit)]))
+        else:
+            call screen main_choice_display([build_wardrobe_change_save_menu(new_outfit)])
+
+        $ outfit_type = _return
 
         if outfit_type != "none":
             if the_person.judge_outfit(new_outfit, as_underwear = outfit_type == "under", as_overwear = outfit_type == "over"):
