@@ -41,6 +41,7 @@ init 2 python:
         cs.scope["breast_options"] = False
         cs.scope["hair_style_options"] = False
         cs.scope["pubes_options"] = False
+        cs.scope["pubes_color_options"] = False
         cs.scope["font_color_options"] = False
 
 init python:
@@ -74,6 +75,7 @@ screen cheat_menu():
     default breast_options = False
     default hair_style_options = False
     default pubes_options = False
+    default pubes_color_options = False
     default font_color_options = False
 
     # Input management variables
@@ -571,6 +573,15 @@ screen cheat_menu():
                                 hover_background "#4f7ad6"
                             action [Function(cheat_collapse_menus), ToggleScreenVariable("pubes_options")]
 
+                        textbutton "Pubes Color":
+                            style "textbutton_no_padding_highlight"
+                            text_style "cheat_text_style"
+                            xfill True
+                            if pubes_color_options:
+                                background "#4f7ad6"
+                                hover_background "#4f7ad6"
+                            action [Function(cheat_collapse_menus), ToggleScreenVariable("pubes_color_options")]
+
 
                         if hasattr(editing_target, "personality") and editing_target.personality.personality_type_prefix in available_personalities:
                             textbutton "Personality":
@@ -725,9 +736,32 @@ screen cheat_menu():
                                                 hover_background "#4f7ad6"
 
                                             action [
+                                                SetField(editing_target, "pubes_style.colour", editing_target.pubes_colour),
                                                 SetField(editing_target, "pubes_style", x),
                                                 Function(cheat_appearance)
                                             ]                                
+
+                        if pubes_color_options:
+                            vbox:
+                                for x in list_of_hairs[:14]:
+                                    $ color = x[1]
+                                    $ color[3] = 1
+                                    if hasattr(editing_target, "pubes_colour"):
+                                        textbutton str(x[0]):
+                                            xfill True
+                                            style "textbutton_no_padding_highlight"
+                                            text_style "cheat_text_style"
+
+                                            if editing_target.pubes_colour == color:
+                                                background "#4f7ad6"
+                                                hover_background "#4f7ad6"
+
+                                            action [
+                                                SetField(editing_target, "pubes_colour", color),
+                                                SetField(editing_target, "pubes_style.colour", color),
+                                                Function(cheat_appearance)
+                                            ]                                
+
 
                         if font_color_options:
                             vbox:
