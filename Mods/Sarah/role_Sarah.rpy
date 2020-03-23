@@ -1750,7 +1750,7 @@ label Sarah_arrange_threesome_label(the_person):
         mc.name "Well, you know [sarah.title], right? From HR?"
         the_person.char "Oh yeah, I was just talking to her this morning about the best way to get a guy to go down on you."
         mc.name "You were... what?"
-        mc.name "Nevermind. Anyway, she's never been in a threesome before, and she really wants to try one sometime."
+        mc.name "Never mind. Anyway, she's never been in a threesome before, and she really wants to try one sometime."
         mc.name "She keeps hinting, so I promised her I'd try to arrange something for Saturday. Would you be interested in coming over Saturday night?"
         the_person.char "That sounds really fun! You better believe I'll go! Just let me know what time to be there."
         mc.name "Thanks!"

@@ -66,6 +66,6 @@ label interview_action_description_enhanced:
                 candidates.clear() #Prevent it from using up extra memory
 
             call advance_time from _call_advance_time_interview_action_enhanced
-        "Nevermind":
+        "Never mind":
             pass
     return

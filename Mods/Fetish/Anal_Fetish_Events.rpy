@@ -383,7 +383,7 @@ init 2 python:
         for pose in sb_free_strip_pose_list:
             if not pose[1] == current_pose:
                 option_list.append(pose)
-        option_list.append(["Nevermind",None])
+        option_list.append(["Never mind",None])
         return option_list
 
 label SB_free_strip_scene(the_person, must_be_naked = True):
@@ -468,7 +468,7 @@ label SB_free_strip_scene(the_person, must_be_naked = True):
                 $ picked_pose = _return
                 "[the_person.possessive_title] nods and moves for you."
             else:
-                mc.name "Nevermind, you look perfect like this."
+                mc.name "Never mind, you look perfect like this."
         elif strip_choice == "Finish":
             $ keep_stripping = False
             mc.name "Wow [the_person.title], that was amazing."

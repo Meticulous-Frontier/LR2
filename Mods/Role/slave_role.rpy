@@ -395,7 +395,7 @@ label increase_slave_submission_label(the_person):
         $ the_person.draw_person(position = "stand2", emotion = "angry")
         $ the_person.change_obedience(10)
         "She turns around with a defiant stare..."
-        the_person.char "Yes Master, i will try to please you better next time."
+        the_person.char "Yes Master, I will try to please you better next time."
     else:
         "She looks at you with tears in her eyes."
         the_person.char "Yes Master, I want to serve you as a good slave should, unconditionally and loyal."

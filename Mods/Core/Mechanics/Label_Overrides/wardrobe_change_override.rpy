@@ -19,7 +19,7 @@ label wardrobe_change_label_enhanced(the_person):
         call screen outfit_select_manager()
         $ the_person.draw_person()
         if _return == "No Return":
-            mc.name "On second thought, nevermind."
+            mc.name "On second thought, never mind."
             return
 
         $ new_outfit = _return
