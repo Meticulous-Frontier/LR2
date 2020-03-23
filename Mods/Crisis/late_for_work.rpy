@@ -70,9 +70,10 @@ label late_for_work_action_label:
                 else:
                     mc.name "That's right. Get on your knees, I won't be content with just your tits."
                 if the_person.get_opinion_score("being submissive") > 0:
-                    $ the_person.change_stats(obedience = 5, happiness = 5, slut_temp = 5)
+                    $ the_person.change_stats(arousal = 30, obedience = 5, happiness = 5, slut_temp = 5)
                     the_person.char "Oh god, I love it when you take charge like this..."
                 else:
+                    $ the_person.change_stats(arousal = 20, obedience = 2, happiness = 2, slut_temp = 2)
                     the_person.char "Mmm, sounds fun..."
                 $ the_person.draw_person(position = "blowjob")
                 "She quickly gets down on her knees. She pulls your cock out of you pants and gives it a couple strokes."
@@ -120,10 +121,12 @@ label late_for_work_action_label:
             "Make it up to me":
                 mc.name "If you want to make it up to me, get on your knees."
                 if the_person.get_opinion_score("being submissive") > 0:
-                    $ the_person.change_stats(obedience = 5, happiness = 5, slut_temp = 5)
+                    $ the_person.change_stats(arousal = 35, obedience = 5, happiness = 5, slut_temp = 5)
                     the_person.char "Oh god, I love it when you take charge like this..."
                 else:
-                    the_person.char "I you insist, [the_person.mc_title]!"
+                    $ the_person.change_stats(arousal = 25, obedience = 2, happiness = 2, slut_temp = 2)
+                    the_person.char "If you insist, [the_person.mc_title]!"
+
                 $ the_person.draw_person(position = "blowjob")
                 "She quickly gets down on her knees. She pulls your cock out of you pants and gives it a couple strokes."
                 if the_person.get_opinion_score("giving blowjobs") > 0:
@@ -147,13 +150,43 @@ label late_for_work_action_label:
         $ the_person.cum_on_tits()
         $ the_person.draw_person(position="stand3", emotion="default")
         the_person.char "Sorry [the_person.mc_title], a client caught me in the parking lot and wanted to have a business meeting in his car. You can let marketing know I made the sale."
-        mc.name "Well, it sure does look like it was a productive meeting. Go clean yourself up before you get back to work. I don't want you dripping that all over the building."
-        if the_person.get_opinion_score("cum facials") > 0:
-            the_person.char "Aww. But I like the way it feels."
-        elif the_person.get_opinion_score("cum facials") < 0:
-            the_person.char "Definitely, I hate feeling all sticky."
-        else:
-            the_person.char "Of Course [the_person.mc_title]."
+        menu:
+            "Send her to work":
+                mc.name "Well, it sure does look like it was a productive meeting. Go clean yourself up before you get back to work. I don't want you dripping that all over the building."
+                if the_person.get_opinion_score("cum facials") > 0:
+                    the_person.char "Aww. But I like the way it feels."
+                elif the_person.get_opinion_score("cum facials") < 0:
+                    the_person.char "Definitely, I hate feeling all sticky."
+                else:
+                    the_person.char "Of course [the_person.mc_title]."
+            "Request her service":
+                mc.name "Very good, now I require the same level of dedication, make your boss happy and get on your knees."
+                if the_person.get_opinion_score("being submissive") > 0:
+                    $ the_person.change_stats(arousal = 50, obedience = 5, happiness = 5, slut_temp = 5)
+                    the_person.char "Yes boss, I love it when command me..."
+                else:
+                    $ the_person.change_stats(arousal = 30, obedience = 2, happiness = 2, slut_temp = 2)
+                    the_person.char "If you insist, [the_person.mc_title]!"
+
+                $ the_person.draw_person(position = "blowjob")
+                "She quickly gets down on her knees. She pulls your cock out of you pants and gives it a couple strokes."
+                if the_person.get_opinion_score("giving blowjobs") > 0:
+                    the_person.char "Mmm, I just love to suck your cock. This really makes my day, two blowjobs..."
+                "Her mouth opens and envelopes your cock. She begins to suck you off eagerly."
+                call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True, private = True) from _call_late_for_work_BJ_3
+                $ the_report = _return
+                if the_report.get("girl orgasms",0) > 0:
+                    "It takes [the_person.title] a minute before she finally stands up, recovering from her orgasm."
+                $ the_person.draw_person(position="stand3", emotion="default")
+                if the_report.get("guy orgasms",0) > 0:
+                    "Satisfied with her work, you give her a smack on her bottom."
+                else:
+                    "You decide to deny her your cum this time."
+                mc.name "Now get back to work, my little cocksucker."
+                if the_person.get_opinion_score("being submissive") > 0:
+                    the_person.char "Yes boss, as you wish."
+                else:
+                    the_person.char "Alright [the_person.mc_title], right away."
 
         $ the_person.draw_person(position = 'walking_away')
         "The client wires the money to your company account, but must have forgot to actually place an order."
