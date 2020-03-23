@@ -7,6 +7,8 @@ init -1 python:
 
 
 label Perk_Tutorial_Crisis_label():
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
     $ the_person = mom
     $ scene_manager = Scene()
     $ mc.business.event_triggers_dict["perk_tutorial"] = 1
@@ -21,7 +23,7 @@ label Perk_Tutorial_Crisis_label():
     $ perk_system.add_ability_perk(time_of_need, "Time of Need")
     "You have gained the Perk: Time of Need!"
     while mc.energy < 40:
-        "Open the perk screen to use your new perk."
+        "Open the perk screen and click on your new perk to continue."
     "You get up and follow your mom to her room."
     the_person.char "Thank you! I just had this overwhelming urge to move some of my furniture around. You know how it is, once you get the urge its hard to put it off..."
     "You help [the_person.possessive_title] move her furniture around. She seems extremely grateful."
