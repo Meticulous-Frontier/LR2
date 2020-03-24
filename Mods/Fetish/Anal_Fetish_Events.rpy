@@ -373,7 +373,7 @@ init 2 python:
 
         option_list.append(["Just watch","Watch"])
         option_list.append(["Tell her to pose","Pose"])
-        if not must_be_naked or (the_person.outfit.vagina_visible() and the_person.outfit.tits_visible()):
+        if not must_be_naked or person.outfit.full_access():
             option_list.append(["Finish the show","Finish"])
         return option_list
 

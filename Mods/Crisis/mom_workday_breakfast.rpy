@@ -271,7 +271,7 @@ label mom_breakfast_action_label():
                     lily.char "Huh? Really!?! I'll be right there!"
                     "You walk back to the kitchen and [lily.title] quickly joins you."
                     $ scene_manager.add_actor(lily, character_placement = character_center)
-                    if lily.outfit.vagina_visible() and lily.outfit.tits_available():
+                    if lily.outfit.full_access():
                         "Already basically ready to go, [lily.title] looks to you for direction."
                     else:
                         "Seeing [the_person.possessive_title] already naked, [lily.title] strips down also."

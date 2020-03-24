@@ -72,7 +72,7 @@ label SB_fetish_vaginal_family_threesome_label():
             $ the_person_one.change_obedience(-2)
             $ the_person_one.change_happiness(-5)
             return
-        "Strip first" if (not the_person_one.outfit.vagina_available() or not the_person_one.outfit.tits_available()):
+        "Strip first" if not the_person_one.outfit.full_access():
             mc.name "That sounds good [the_person_one.title], I could use a bed warmer. Why don't you get naked first?"
             "[the_person_one.possessive_title] smiles at you."
             the_person_one.char "Aww, does my [the_person_one.mc_title] wanna see his [the_person_one.title] get naked for him? What a pervert!"
@@ -81,7 +81,7 @@ label SB_fetish_vaginal_family_threesome_label():
             mc.name "Damn [the_person_one.title], you are really getting good at that..."
             $ scene_manager.update_actor(the_person_one, position="kneeling1", character_placement = character_center_flipped)
             "She begins to crawl up your bed towards you."
-        "Hop in!" if (the_person_one.outfit.vagina_available() and the_person_one.outfit.tits_available()):
+        "Hop in!" if the_person_one.outfit.full_access():
             mc.name "I was just thinking my bed felt cold."
             the_person_one.char "Mmmm, I can think of a few ways to keep you warm."
             $ scene_manager.update_actor(the_person_one, position="kneeling1", character_placement = character_center_flipped)

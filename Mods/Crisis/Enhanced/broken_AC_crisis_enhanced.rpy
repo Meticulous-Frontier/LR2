@@ -141,7 +141,7 @@ label broken_AC_crisis_label_enhanced:
     return
 
 label broken_AC_crisis_break_taboo(the_girl):
-    if the_girl.outfit.tits_visible() and the_girl.outfit.vagina_visible():
+    if the_girl.outfit.full_access():
         "Once she's done stripping [the_girl.possessive_title] is practically naked."
         if the_girl.has_taboo(["bare_pussy","bare_tits"]):
             "She makes a vain attempt to keep herself covered with her hands, but soon enough seems to be comfortable being nude in front of you."

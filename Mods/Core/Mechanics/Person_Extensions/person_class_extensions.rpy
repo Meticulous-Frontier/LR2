@@ -474,7 +474,7 @@ init -1:
                 self.change_slut_temp(self.get_opinion_score("showing her ass"), add_to_log = False)
 
             # showing everything only impacts sluttiness to level 80
-            if self.sluttiness < 80 and self.outfit.tits_available() and self.outfit.tits_visible() and self.outfit.vagina_available() and self.outfit.vagina_visible():
+            if self.sluttiness < 80 and self.outfit.full_access():
                 self.change_slut_temp(self.get_opinion_score("not wearing anything"), add_to_log = False)
 
             for event_list in [self.on_room_enter_event_list, self.on_talk_event_list]: #Go through both of these lists and curate them, ie trim out events that should have expired.
