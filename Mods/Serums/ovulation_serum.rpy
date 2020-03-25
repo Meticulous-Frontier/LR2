@@ -11,7 +11,7 @@ init -1 python:
 label serum_mod_ovulation_serum_trait(stack):
     python:
         ovulation_ther = SerumTraitMod(name = "Hormonal Ovulation",
-                desc = "Reproduces hormones naturally occuring during ovulation to make females more receptive to sex. Increases sluttiness over time.",
+                desc = "Reproduces hormones naturally occurring during ovulation to make females more receptive to sex. Increases sluttiness over time.",
                 positive_slug = "+(0-2) Sluttiness/Turn, +$40 Value",
                 negative_slug = "+200 Serum Research",
                 value_added = 40,

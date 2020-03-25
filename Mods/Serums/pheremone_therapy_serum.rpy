@@ -12,8 +12,8 @@ init -1 python:
 # any label that starts with serum_mod is added to the serum mod list
 label serum_mod_pheremone_therapy_serum_trait(stack):
     python:
-        pher_ther = SerumTraitMod(name = "Pheremone Therapy",
-                desc = "By mimicing pheremones found in closely related animals, this serum can recreate feelings of going into heat in women.",
+        pher_ther = SerumTraitMod(name = "Pheromone Therapy",
+                desc = "By mimicking pheromones found in closely related animals, this serum can recreate feelings of going into heat in women.",
                 positive_slug = "+$40 Value, +15 Sluttiness",
                 negative_slug = "+200 Serum Research",
                 value_added = 40,

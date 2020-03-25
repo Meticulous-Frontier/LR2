@@ -9,8 +9,8 @@ init -1 python:
 label serum_mod_behavior_adjustment_serum_trait(stack):
     python:
         behavior_adjustment_ther = SerumTraitMod(name = "Behavior Adjustment",
-                desc = "Slowly increases obedience. Increases effect based on suggestability.",
-                positive_slug = "Slowly increases obedience based on suggestability, +$10 Value",
+                desc = "Slowly increases obedience. Increases effect based on suggestibility.",
+                positive_slug = "Slowly increases obedience based on suggestibility, +$10 Value",
                 negative_slug = "+100 Serum Research",
                 value_added = 10,
                 research_added = 100,

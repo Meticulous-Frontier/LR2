@@ -9,8 +9,8 @@ init -1 python:
 label serum_mod_dopamine_therapy_serum_trait(stack):
     python:
         dopamine_therapy_ther = SerumTraitMod(name = "Dopamine Therapy",
-                desc = "Slowly increases happiness. Increases effect based on suggestability.",
-                positive_slug = "Slowly increases happiness based on suggestability, +$10 Value",
+                desc = "Slowly increases happiness. Increases effect based on suggestibility.",
+                positive_slug = "Slowly increases happiness based on suggestibility, +$10 Value",
                 negative_slug = "+100 Serum Research",
                 value_added = 10,
                 research_added = 100,

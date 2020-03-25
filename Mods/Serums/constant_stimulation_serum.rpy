@@ -18,8 +18,8 @@ init -1 python:
 label serum_mod_constant_stimulation_serum_trait(stack):
     python:
         constant_stimulation_ther = SerumTraitMod(name = "Constant Stimulation",
-                desc = "Slowly increases sluttiness. Strong wills can resist it, but it increases effect based on suggestability.",
-                positive_slug = "Slowly increases sluttiness based on suggestability, +$15 Value",
+                desc = "Slowly increases sluttiness. Strong wills can resist it, but it increases effect based on suggestibility.",
+                positive_slug = "Slowly increases sluttiness based on suggestibility, +$15 Value",
                 negative_slug = "+100 Serum Research",
                 value_added = 15,
                 research_added = 100,
