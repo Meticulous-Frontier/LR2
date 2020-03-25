@@ -16,3 +16,17 @@ init -1 python:
         return hash(self.name)
 
     SerumTrait.__hash__ = serum_trait_hash
+
+    def serum_trait_eq(self, other):
+        if isinstance(self, SerumTrait):
+            return self.name == other.name
+        return False
+
+    SerumTrait.__eq__ = serum_trait_eq
+
+    def serum_trait_ne(self, other):
+        if isinstance(self, SerumTrait):
+            return self.name != other.name
+        return True
+
+    SerumTrait.__ne__ = serum_trait_ne
