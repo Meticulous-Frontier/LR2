@@ -210,10 +210,33 @@ init -1 python:
         stephanie.wardrobe.outfits.remove(find_in_list(lambda x: x.name == "Nude", stephanie.wardrobe.outfits))
         return
 
-label activate_generic_personality(stack):
-    call create_unique_character_list from _call_create_unique_character_list_activate
+    unique_character_list = []  # global not stored variable (since not defined in label function)
 
+    def create_unique_character_list():
+        # use extend when adding a list to another list
+        unique_character_list.extend([mom, lily, aunt, cousin, stephanie, alexia, nora])
+
+        # mod unique characters (check for existence first)
+        if "salon_manager" in globals():
+            unique_character_list.append(salon_manager)
+
+        if "starbuck" in globals():
+            unique_character_list.append(starbuck)
+
+        if "sarah" in globals():
+            unique_character_list.append(sarah)
+
+        # disable for now, random outfits remove uniqueness of character in story line
+        # make sure unique characters have at least six outfits / overwear sets to choose from
+        #python:
+        #    for person in unique_character_list:
+        #        enhance_existing_wardrobe(person, 6)
+        return
+
+label activate_generic_personality(stack):
     python:
+        create_unique_character_list()
+
         create_bimbo()
 
         # add two random hookers to the game (on start of game)
@@ -234,13 +257,8 @@ label activate_generic_personality(stack):
     return
 
 label update_generic_personality(stack):
-    call create_unique_character_list from _call_create_unique_character_list_update
-
     python:
-        # fix for old save games (can be removed in future):
-        if "cougar_personality" in globals():
-            if not find_in_list(lambda x: x == cougar_personality, list_of_personalities) is None:
-                list_of_personalities.remove(cougar_personality)
+        create_unique_character_list()
 
         # add mc actions
         for action in main_character_actions_list:
@@ -253,26 +271,4 @@ label update_generic_personality(stack):
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
-    return
-
-label create_unique_character_list:
-    # original unique game characters
-    $ unique_character_list = [mom, lily, aunt, cousin, stephanie, alexia, nora]
-
-    # mod unique characters (check for existence first)
-    if "salon_manager" in globals():
-        $ unique_character_list.append(salon_manager)
-
-    if "starbuck" in globals():
-        $ unique_character_list.append(starbuck)
-
-    if "sarah" in globals():
-        $ unique_character_list.append(sarah)
-
-    # disable for now, random outfits remove uniqueness of character in story line
-    # make sure unique characters have at least six outfits / overwear sets to choose from
-    #python:
-    #    for person in unique_character_list:
-    #        enhance_existing_wardrobe(person, 6)
-
     return
