@@ -16,6 +16,7 @@ init -1 python:
         return hash(self.name)
 
     SerumTrait.__hash__ = serum_trait_hash
+    SerumTrait.hash = serum_trait_hash
 
     def serum_trait_eq(self, other):
         if isinstance(self, SerumTrait):
