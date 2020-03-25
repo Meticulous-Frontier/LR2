@@ -41,7 +41,6 @@ label SB_caught_masturbating_crisis_label():
         # "No one eligible for masturbating!"
         return
 
-    $ the_place = mc.business.get_employee_workstation(the_person)
     if len(the_person.outfit.get_lower_ordered()) > 0:
         $ the_clothing = the_person.outfit.get_lower_ordered()[-1] #Get the very top item of clothing.
 

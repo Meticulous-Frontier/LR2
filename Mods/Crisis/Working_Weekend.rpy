@@ -74,7 +74,6 @@ label SB_working_weekend_crisis_label():
         return
 
     $ scene_manager = Scene()
-    $ the_place = mc.business.get_employee_workstation(person_one)
 
     "Even though it is the weekend, you find yourself working."
     "Deep in thought, and with the company normally deserted, it takes you by surprise when you see movement out of the corner of your eye."

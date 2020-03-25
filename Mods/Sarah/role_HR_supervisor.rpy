@@ -427,6 +427,8 @@ label HR_director_first_monday_label(the_person):
 
     if the_person is sarah:
         $ add_sarah_third_wheel_action()
+
+    $ HR_employee_list = None
     return
 
 label HR_director_monday_meeting_label(the_person):

@@ -32,6 +32,7 @@ label business_meeting_action_label:
     "You meet up in an empty office of the [the_place.name] department."
 
     $ the_place.show_background()
+    $ the_place = None
     $ the_person.draw_person(position="sitting", emotion="happy")
 
     call business_meeting_introduction(the_person) from _call_business_meeting_introduction_1
