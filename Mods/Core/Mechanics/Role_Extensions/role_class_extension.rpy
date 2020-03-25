@@ -3,7 +3,7 @@
 init -1 python:
     # Compare on role_name when comparing to another role otherwise use hash function
     def role_compare(self,other):
-        if isinstance(other, Role):
+        if isinstance(self, other.__class__):
             if self.role_name == other.role_name:
                 return 0
 
@@ -18,3 +18,18 @@ init -1 python:
         return hash(self.role_name)
 
     Role.__hash__ = role_hash
+    Role.hash = role_hash
+
+    def role_eq(self, other):
+        if isinstance(self, other.__class__):
+            return self.role_name == other.role_name
+        return False
+
+    Role.__eq__ = role_eq
+
+    def role_ne(self, other):
+        if isinstance(self, other.__class__):
+            return self.role_name != other.role_name
+        return True
+
+    Role.__ne__ = role_ne   

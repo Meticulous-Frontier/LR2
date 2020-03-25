@@ -3,7 +3,7 @@
 init -1 python:
     # Compare on personality type prefix when comparing to another personality otherwise use hash function
     def personality_compare(self,other):
-        if isinstance(other, Personality):
+        if isinstance(self, other.__class__):
             if self.personality_type_prefix == other.personality_type_prefix:
                 return 0
 
@@ -18,6 +18,21 @@ init -1 python:
         return hash(self.personality_type_prefix)
 
     Personality.__hash__ = personality_hash
+    Personality.hash = personality_hash
+
+    def personality_eq(self, other):
+        if isinstance(self, other.__class__):
+            return self.personality_type_prefix == other.personality_type_prefix
+        return False
+
+    Personality.__eq__ = personality_eq
+
+    def personality_ne(self, other):
+        if isinstance(self, other.__class__):
+            return self.personality_type_prefix != other.personality_type_prefix
+        return True
+
+    Personality.__ne__ = personality_ne
 
 init 4 python:
     list_of_extra_personalities = [] # Personalities not included in list_of_personalities

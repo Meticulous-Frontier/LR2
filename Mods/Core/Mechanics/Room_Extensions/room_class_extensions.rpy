@@ -9,7 +9,7 @@ init -1 python:
 
     # add room compare function
     def room_compare(self, other):
-        if isinstance(other, Room):
+        if isinstance(self, other.__class__):
             if self.name == other.name:
                 return 0
 
@@ -25,6 +25,21 @@ init -1 python:
         return hash(self.name)
 
     Room.__hash__ = room_hash
+    Room.hash = room_hash
+
+    def room_eq(self, other):
+        if isinstance(self, other.__class__):
+            return self.name == other.name
+        return False
+
+    Room.__eq__ = room_eq
+
+    def room_ne(self, other):
+        if isinstance(self, other.__class__):
+            return self.name != other.name
+        return True
+
+    Room.__ne__ = room_ne       
 
     def update_custom_rooms(room): # Replaces the room in the list with the updated version.
         room_update = find_in_list(lambda x: x.name == room.name, list_of_places)

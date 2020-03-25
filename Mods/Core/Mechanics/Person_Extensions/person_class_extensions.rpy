@@ -908,26 +908,23 @@ init -1 python:
 # Add hash (unique id) to Person object #
 #########################################
 
-    def __hash__(self):
+    def person__hash__(self):
         return hash((self.name, self.last_name, self.age))
 
-    Person.__hash__ = __hash__
+    Person.__hash__ = person__hash__
+    Person.hash = person__hash__
 
-    def __eq__(self, other):
+    def person__eq__(self, other):
         if isinstance(self, other.__class__):
             return hash((self.name, self.last_name, self.age)) == hash((other.name, other.last_name, other.age))
         return False
 
-    Person.__eq__ = __eq__
+    Person.__eq__ = person__eq__
 
-    def __ne__(self, other):
+    def person__ne__(self, other):
         if isinstance(self, other.__class__):
             return hash((self.name, self.last_name, self.age)) != hash((other.name, other.last_name, other.age))
         return True
 
-    Person.__ne__ = __ne__
-
-    def hash(self):
-        return self.__hash__()
-
-    Person.hash = hash
+    Person.__ne__ = person__ne__
+    
