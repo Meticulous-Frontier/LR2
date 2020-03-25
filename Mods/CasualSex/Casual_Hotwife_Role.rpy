@@ -154,12 +154,11 @@ label casual_hotwife_get_a_drink_label(the_person):
         the_person.char "Hey [the_person.mc_title]! A drink sounds great!"
     "You consider for a moment. If you offer to buy her a drink, you'll have a chance to slip a serum into it."
     $ offer_drink_chance = (mc.charisma + (the_person.effective_sluttiness() / 10)) * 10  #More willing to let you buy a drink for her as she gets sluttier
-    $ rand_chance = renpy.random.randint(0,100)
     #$ bartender_name = get_random_male_name()
     menu:
         "Offer to Buy\n{size=22}Success Chance: [offer_drink_chance]%%{/size}":
             mc.name "Hey, let me buy you a drink."
-            if rand_chance < offer_drink_chance:  #Success
+            if renpy.random.randint(0,100) < offer_drink_chance:  #Success
                 the_person.char "Hmm... Okay! That sounds great! I'll go find us a table!"
                 "You head over to the bar and order yourself a beer, and a cocktail for [the_person.title]."
                 the_person.SO_name "Here you go, one beer, and a cocktail for the beautiful [the_person.name]."
