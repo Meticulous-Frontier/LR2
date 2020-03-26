@@ -1,3 +1,7 @@
+init 5 python:
+    add_label_hijack("normal_start", "activate_goal_mod_core")
+    add_label_hijack("after_load", "update_goal_mod_core")
+
 init 2 python:
     def daily_profit_count_function(the_goal, profit):
         if profit >= the_goal.arg_dict["required"]:
@@ -61,22 +65,80 @@ init 2 python:
         the_goal.arg_dict["required"] = 1
         return
 
-    daily_profit_goal = Goal("Daily Profit", "Profitibility is always a concern when running a business. Have your business make at least a certain amount in one day.", "daily_profit", "Business", always_valid_goal_function, daily_profit_count_function,
+    daily_profit_goal = Goal("Daily Profit", "Profitability is always a concern when running a business. Have your business make at least a certain amount in one day.", "daily_profit", "Business", always_valid_goal_function, daily_profit_count_function,
     {"count": 0, "required": 50},
-    difficulty_scale_function = daily_profit_difficulty_function, report_function = standard_count_report, progress_fraction_function = standard_progress_fraction)
+    difficulty_scale_function = daily_profit_difficulty_function, report_function = standard_count_report, progress_fraction_function = standard_progress_fraction, enabled = False)
 
     side_money_goal = Goal("Side Hustles", "Earn money from ways other than through pharmaceuticals.", "side_money", "Business", always_valid_goal_function, side_money_count_function,
     {"count": 0, "required": 100},
-    difficulty_scale_function = side_money_difficulty_function, report_function = standard_count_report, progress_fraction_function = standard_progress_fraction)
+    difficulty_scale_function = side_money_difficulty_function, report_function = standard_count_report, progress_fraction_function = standard_progress_fraction, enabled = False)
 
     HR_interview_goal = Goal("HR meetings", "Use the HR director to conduct meetings with employees.", "HR_opinion_improvement", "MC", always_valid_goal_function, HR_interview_count_function,
     {"count": 0, "required": 1},
-    difficulty_scale_function = HR_interview_difficulty_function, report_function = standard_count_report, progress_fraction_function = standard_progress_fraction)
+    difficulty_scale_function = HR_interview_difficulty_function, report_function = standard_count_report, progress_fraction_function = standard_progress_fraction, enabled = False)
 
     ass_cum_goal = Goal("Anal Seeding", "There's nothing like dumping a load in a tight asshole. Cum inside a few different asses.", "sex_cum_ass", "MC", always_valid_goal_function, ass_cum_count_function,
     {"count": 0, "required": 1, "people": []},
-    difficulty_scale_function = ass_cum_count_difficulty_function, report_function = standard_count_report, progress_fraction_function = standard_progress_fraction)
+    difficulty_scale_function = ass_cum_count_difficulty_function, report_function = standard_count_report, progress_fraction_function = standard_progress_fraction, enabled = False)
 
     threesome_goal = Goal("Have a Threesome", "You don't need a million dollars to do two girls at the same time.", "threesome", "MC", always_valid_goal_function, threesome_count_function,
     {"count": 0, "required": 1},
-    difficulty_scale_function = threesome_difficulty_function, report_function = standard_count_report, progress_fraction_function = standard_progress_fraction)
+    difficulty_scale_function = threesome_difficulty_function, report_function = standard_count_report, progress_fraction_function = standard_progress_fraction, enabled = False)
+
+    sex_goals.append(ass_cum_goal)
+    sex_goals.append(threesome_goal)
+    stat_goals.append(daily_profit_goal)
+    stat_goals.append(side_money_goal)
+    work_goals.append(HR_interview_goal)
+
+    def update_goal_enabled_states_for_list(option_list, goal_list):
+        for goal in option_list:
+            if not goal.enabled: # remove disabled, when in list
+                found = find_in_list(lambda x: x.hash() == goal.hash(), goal_list)
+                if found:
+                    goal_list.remove(found)
+            else: # add enabled, when not in list
+                found = find_in_list(lambda x: x.hash() == goal.hash(), goal_list)
+                if not found:
+                    goal_list.append(goal)
+
+
+    def update_goal_enabled_states():
+        update_goal_enabled_states_for_list(stat_goals_options_list, stat_goals)
+        update_goal_enabled_states_for_list(work_goals_options_list, work_goals)
+        update_goal_enabled_states_for_list(sex_goals_options_list, sex_goals)
+        return
+
+label activate_goal_mod_core(stack):
+    python:
+        stat_goals_options_list = set(stat_goals)
+        work_goals_options_list = set(work_goals)
+        sex_goals_options_list = set(sex_goals)
+
+        update_goal_enabled_states()
+        # execute after stack has run
+        execute_hijack_call(stack)
+    return
+
+label update_goal_mod_core(stack):
+    python:
+        unmodded = False
+        try:
+            stat_goals_options_list
+        except NameError:
+            unmodded = True
+
+        # extra check to validate that serum mod list exists correctly
+        if not unmodded and not isinstance(stat_goals_options_list, set):
+            unmodded = True
+
+        if unmodded:
+            stat_goals_options_list = set(stat_goals)
+            work_goals_options_list = set(work_goals)
+            sex_goals_options_list = set(sex_goals)
+
+        update_goal_enabled_states()
+        # execute after stack has run
+        execute_hijack_call(stack)
+
+    return

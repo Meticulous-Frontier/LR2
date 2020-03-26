@@ -22,7 +22,7 @@ screen lifestyle_goal_sheet():
                 xsize 770
                 text mc.name + " " + mc.last_name style "menu_text_style" size 40
                 text "Goal Lists" style "menu_text_style" size 30
-                text "Each category requires a minimum of " + str(MIN_GOAL_LiST_LENGTH) + " selections" size 24
+                text "Each category requires a minimum of 2 selections" size 24
         null height 60
         hbox:
             xanchor 0.5
@@ -39,31 +39,35 @@ screen lifestyle_goal_sheet():
                     xsize 500
                     text "Stat Goals" style "menu_text_style" size 32 xalign 0.5
                     text "Current Total: " + str(len(stat_goals)) style "menu_text_style" size 24 xalign 0.5
-                    for stat_goal in stat_goals_options_list:
+                    for goal in sorted(stat_goals_options_list, key = lambda x: x.name):
                         hbox:
                             xalign 0.5
 
-                            if stat_goal in stat_goals:
-                                textbutton stat_goal.name:
+                            if goal in stat_goals:
+                                textbutton goal.name:
                                     xalign 0.5
                                     yalign 0.5
                                     style "textbutton_green_style"
                                     text_style "textbutton_text_style"
                                     sensitive True
-                                    action Function(toggle_goal_avail, stat_goal)
+                                    action [
+                                        Function(goal.toggle_enabled)
+                                    ]
                                     hovered [
-                                    None
+                                        None
                                     ]
                             else:
-                                textbutton stat_goal.name:
+                                textbutton goal.name:
                                     xalign 0.5
                                     yalign 0.5
                                     style "textbutton_style"
                                     text_style "textbutton_text_style"
                                     sensitive True
-                                    action Function(toggle_goal_avail, stat_goal)
+                                    action [
+                                        Function(goal.toggle_enabled)
+                                    ]
                                     hovered [
-                                    None
+                                        None
                                     ]
             frame:
                 background "#1a45a1aa"
@@ -74,28 +78,32 @@ screen lifestyle_goal_sheet():
                     xsize 500
                     text "Work Goals" style "menu_text_style" size 32 xalign 0.5
                     text "Current Total: " + str(len(work_goals)) style "menu_text_style" size 24 xalign 0.5
-                    for work_goal in work_goals_options_list:
+                    for goal in sorted(work_goals_options_list, key = lambda x: x.name):
                         hbox:
                             xalign 0.5
-                            if work_goal in work_goals:
-                                textbutton work_goal.name:
+                            if goal in work_goals:
+                                textbutton goal.name:
                                     xalign 0.5
                                     yalign 0.5
                                     style "textbutton_green_style"
                                     text_style "textbutton_text_style"
                                     sensitive True
-                                    action Function(toggle_goal_avail, work_goal)
+                                    action [
+                                        Function(goal.toggle_enabled)
+                                    ]
                                     hovered [
                                     None
                                     ]
                             else:
-                                textbutton work_goal.name:
+                                textbutton goal.name:
                                     xalign 0.5
                                     yalign 0.5
                                     style "textbutton_style"
                                     text_style "textbutton_text_style"
                                     sensitive True
-                                    action Function(toggle_goal_avail, work_goal)
+                                    action [
+                                        Function(goal.toggle_enabled)
+                                    ]
                                     hovered [
                                     None
                                     ]
@@ -109,29 +117,33 @@ screen lifestyle_goal_sheet():
                     xsize 500
                     text "Sex Goals" style "menu_text_style" size 32 xalign 0.5
                     text "Current Total: " + str(len(sex_goals)) style "menu_text_style" size 24 xalign 0.5
-                    for sex_goal in sex_goals_options_list:
+                    for goal in sorted(sex_goals_options_list, key = lambda x: x.name):
                         hbox:
                             xalign 0.5
 
-                            if sex_goal in sex_goals:
-                                textbutton sex_goal.name:
+                            if goal in sex_goals:
+                                textbutton goal.name:
                                     xalign 0.5
                                     yalign 0.5
                                     style "textbutton_green_style"
                                     text_style "textbutton_text_style"
                                     sensitive True
-                                    action Function(toggle_goal_avail, sex_goal)
+                                    action [
+                                        Function(goal.toggle_enabled)
+                                    ]
                                     hovered [
                                     None
                                     ]
                             else:
-                                textbutton sex_goal.name:
+                                textbutton goal.name:
                                     xalign 0.5
                                     yalign 0.5
                                     style "textbutton_style"
                                     text_style "textbutton_text_style"
                                     sensitive True
-                                    action Function(toggle_goal_avail, sex_goal)
+                                    action [
+                                        Function(goal.toggle_enabled)
+                                    ]
                                     hovered [
                                     None
                                     ]
