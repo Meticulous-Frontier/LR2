@@ -102,34 +102,57 @@ init 2:
 
                 yanchor 0.0
                 background "#1a45a1aa"
-                grid grid_count 1 ysize 30 spacing 10 xfill True:
+                grid grid_count 1 ysize 30 xfill True:
                     if person_select:
                         text "" style "menu_text_style" xsize 130
                     for attributes in sort_attributes:
-                        textbutton attributes[0]:
-                            style "textbutton_no_padding_highlight"
-                            text_style "textbutton_text_style"
-                            xfill True
-                            action [
-                                SetScreenVariable("sort_employees_by", attributes[1]),
-                                ToggleScreenVariable("reverse_sort")
+                        frame:
+                            textbutton attributes[0]:
+                                style "textbutton_no_padding_highlight"
+                                text_style "textbutton_text_style"
+                                xfill True
+                                action [
+                                    SetScreenVariable("sort_employees_by", attributes[1]),
+                                    ToggleScreenVariable("reverse_sort")
+                                    ]
+                                if sort_employees_by == attributes[1]:
+                                    background "#4f7ad6"
+                                margin [0, 0]
             frame:
                 ypos -20
                 yanchor 0.0
                 background "#1a45a1aa"
+                xfill True
                 viewport:
-                    scrollbars "vertical"
+                    if len(display_list) > 5:
+                        scrollbars "vertical"
                     mousewheel True
-                    ysize 680
-                    grid grid_count len(display_list) spacing 10 xfill True:
+                    ysize 580
+                    grid (1 if not person_select else 2) len(display_list) spacing -10 xfill True:
                         for person in sorted(display_list, key = lambda person: getattr(person, renpy.current_screen().scope["sort_employees_by"]), reverse = renpy.current_screen().scope["reverse_sort"]):
                             if person_select:
-                                textbutton "Select" style "textbutton_style" text_style "menu_text_style" action Return(person) xsize 90 yalign 0.5
-                            textbutton person.name + "\n" + person.last_name style "textbutton_style" text_style "menu_text_style" action Show("person_info_detailed",None,person) xsize 120
-                            for attributes in sort_attributes[1:]: #Omit name
-                                text (str(getattr(person, attributes[1])) if attributes[1] != "salary" else "$" + str(getattr(person, attributes[1])) +"/day") style "menu_text_style" xsize 120 yalign 0.5 xalign 0.5
+                                textbutton "Select" style "textbutton_style" text_style "menu_text_style" action Return(person) xsize 90
+                            frame:
+                                background None
+                                hbox:
 
-                        
+                                    frame:
+                                        xsize 130
+                                        ysize 120
+                                        textbutton person.name + " " + person.last_name style "textbutton_style" text_style "menu_text_style" action Show("person_info_detailed",None,person) xfill True xalign 0.0 yfill True margin [0, 0]
+                                    grid (grid_count - 1) 1:
+                                        spacing -10
+                                        xfill True
+                                        for attributes in sort_attributes[1:]:
+                                            frame:
+                                                xsize 130
+                                                text (str(getattr(person, attributes[1])) if attributes[1] != "salary" else "$" + str(getattr(person, attributes[1])) +"/day") style "menu_text_style" xfill True xalign 0.5
+            frame: # Create a frame that displays production / research / supply / hr per turn when filtering by departments
+                xfill True
+                textbutton "SAMPLE TEXT" action NullAction()
+
+
+
 
         if not person_select:
             frame:
