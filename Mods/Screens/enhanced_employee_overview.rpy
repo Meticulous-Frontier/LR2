@@ -5,11 +5,33 @@ init 2:
         add "Paper_Background.png"
         default division_select = "none"
         default division_name = "All"
+        default sort_employees_by = "name"
+        default reverse_sort = True
+        default sort_attributes = [
+            ["Name", "name"],
+            ["Salary", "salary"],
+            ["Happiness", "happiness"],
+            ["Obedience", "obedience"],
+            ["Love", "love"],
+            ["Sluttiness", "sluttiness"],
+            ["Suggest", "suggestibility"],
+            ["Charisma", "charisma"],
+            ["Intelligence", "int"],
+            ["Focus", "focus"],
+            ["Research", "research_skill"],
+            ["Production", "production_skill"],
+            ["Supply", "supply_skill"],
+            ["Marketing", "market_skill"],
+            ["HR", "hr_skill"]
+            ]
+
+
         python:
             if not white_list: #If a white list is passed we will only display people that are on the list
                 white_list = []
             if not black_list:
                 black_list = [] #IF a black list is passed we will not include anyone on the blacklist. Blacklist takes priority
+
 
         $ showing_team = []
         $ display_list = []
@@ -43,6 +65,7 @@ init 2:
             yalign 0.05
             yanchor 0.0
             spacing 20
+            xsize 1860
             frame:
                 background "#1a45a1aa"
                 xsize 1860
@@ -52,8 +75,8 @@ init 2:
                 else:
                     text "Staff Review" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 size 36 style "menu_text_style"
             frame:
-                background "#1a45a1aa" 
-                xsize 1860
+                background "#1a45a1aa"
+
                 hbox:
                     xalign 0.5
                     xanchor 0.5
@@ -76,57 +99,68 @@ init 2:
             if person_select:
                 $ grid_count += 1
             frame:
-                xsize 1860
+
                 yanchor 0.0
                 background "#1a45a1aa"
-                grid grid_count 1 ysize 30 spacing 10:
-                    text "Name" style "menu_text_style" xsize 150
+                grid grid_count 1 ysize 30 spacing 10 xfill True:
                     if person_select:
                         text "" style "menu_text_style" xsize 130
-                    text "Salary" style "menu_text_style" xsize 120
-                    text "Happiness" style "menu_text_style" xsize 120
-                    text "Obedience" style "menu_text_style" xsize 120
-                    text "Love" style "menu_text_style" xsize 120
-                    text "Sluttiness" style "menu_text_style" xsize 120
-                    text "Suggest" style "menu_text_style" xsize 120
-                    text "Charisma" style "menu_text_style" xsize 120
-                    text "Int" style "menu_text_style" xsize 120
-                    text "Focus" style "menu_text_style" xsize 120
-                    text "Research" style "menu_text_style" xsize 120
-                    text "Production " style "menu_text_style" xsize 120
-                    text "Supply" style "menu_text_style" xsize 120
-                    text "Marketing " style "menu_text_style" xsize 120
-                    text "HR" style "menu_text_style" xsize 120
+                    for attributes in sort_attributes:
+                        textbutton attributes[0]:
+                            style "textbutton_no_padding_highlight"
+                            text_style "textbutton_text_style"
+                            xfill True
+                            action [
+                                SetScreenVariable("sort_employees_by", attributes[1]),
+                                ToggleScreenVariable("reverse_sort")
+                                ]
+                    # textbutton "Name"
+                    # textbutton "Salary" style "textbutton_no_padding_highlight" text_style "textbutton_text_style" xsize 120 action [SetScreenVariable("sort_employees_by", "salary"), ToggleScreenVariable("reverse_sort")]
+                    # textbutton "Happiness" style "textbutton_no_padding_highlight" text_style "textbutton_text_style" xsize 120 action [SetScreenVariable("sort_employees_by", "happiness"), ToggleScreenVariable("reverse_sort")]
+                    # textbutton "Obedience" style "textbutton_no_padding_highlight" text_style "textbutton_text_style" xsize 120 action [SetScreenVariable("sort_employees_by", "obedience"), ToggleScreenVariable("reverse_sort")]
+                    # textbutton "Love" style "textbutton_no_padding_highlight" text_style "textbutton_text_style" xsize 120 action [SetScreenVariable("sort_employees_by", "love"), ToggleScreenVariable("reverse_sort")]
+                    # textbutton "Sluttiness" style "textbutton_no_padding_highlight" text_style "textbutton_text_style" xsize 120 action [SetScreenVariable("sort_employees_by", "sluttiness"), ToggleScreenVariable("reverse_sort")]
+                    # textbutton "Suggest" style "textbutton_no_padding_highlight" text_style "textbutton_text_style" xsize 120 action [SetScreenVariable("sort_employees_by", "suggestibility"), ToggleScreenVariable("reverse_sort")]
+                    # textbutton "Charisma" style "textbutton_no_padding_highlight" text_style "textbutton_text_style" xsize 120 action [SetScreenVariable("sort_employees_by", "charisma"), ToggleScreenVariable("reverse_sort")]
+                    # textbutton "Int" style "textbutton_no_padding_highlight" text_style "textbutton_text_style" xsize 120 action [SetScreenVariable("sort_employees_by", "int"), ToggleScreenVariable("reverse_sort")]
+                    # textbutton "Focus" style "textbutton_no_padding_highlight" text_style "textbutton_text_style" xsize 120 action [SetScreenVariable("sort_employees_by", "focus"), ToggleScreenVariable("reverse_sort")]
+                    # textbutton "Research" style "textbutton_no_padding_highlight" text_style "textbutton_text_style" xsize 120 action [SetScreenVariable("sort_employees_by", "research_skill"), ToggleScreenVariable("reverse_sort")]
+                    # textbutton "Production " style "textbutton_no_padding_highlight" text_style "textbutton_text_style" xsize 120 action [SetScreenVariable("sort_employees_by", "production_skill"), ToggleScreenVariable("reverse_sort")]
+                    # textbutton "Supply" style "textbutton_no_padding_highlight" text_style "textbutton_text_style" xsize 120 action [SetScreenVariable("sort_employees_by", "supply_skill"), ToggleScreenVariable("reverse_sort")]
+                    # textbutton "Marketing " style "textbutton_no_padding_highlight" text_style "textbutton_text_style" xsize 120 action [SetScreenVariable("sort_employees_by", "market_skill"), ToggleScreenVariable("reverse_sort")]
+                    # textbutton "HR" style "textbutton_no_padding_highlight" text_style "textbutton_text_style" xsize 120 action [SetScreenVariable("sort_employees_by", "hr_skill"), ToggleScreenVariable("reverse_sort")]
 
             # text "Position: " + division_name style "menu_text_style" size 24 yalign 0.18 xalign 0.02 xanchor 0.0
             frame:
                 ypos -20
-                xsize 1860
                 yanchor 0.0
                 background "#1a45a1aa"
                 viewport:
                     scrollbars "vertical"
-                    mousewheel True      
-                    ysize 680              
-                    grid grid_count len(display_list) spacing 0:
-                        for person in display_list:
-                            textbutton person.name + "\n" + person.last_name style "textbutton_style" text_style "menu_text_style" action Show("person_info_detailed",None,person) xsize 120
+                    mousewheel True
+                    ysize 680
+                    grid grid_count len(display_list) spacing 10 xfill True:
+                        for person in sorted(display_list, key = lambda person: getattr(person, renpy.current_screen().scope["sort_employees_by"]), reverse = renpy.current_screen().scope["reverse_sort"]):
                             if person_select:
                                 textbutton "Select" style "textbutton_style" text_style "menu_text_style" action Return(person) xsize 90 yalign 0.5
-                            text "$" + str(person.salary) + "/day" style "menu_text_style" xsize 120 yalign 0.5
-                            text str(int(person.happiness)) style "menu_text_style" xsize 120 yalign 0.5
-                            text str(int(person.obedience)) style "menu_text_style" xsize 120 yalign 0.5
-                            text str(int(person.love)) style "menu_text_style" xsize 120 yalign 0.5
-                            text str(int(person.sluttiness)) style "menu_text_style" xsize 120 yalign 0.5
-                            text str(int(person.suggestibility)) style "menu_text_style" xsize 120 yalign 0.5
-                            text str(int(person.charisma)) style "menu_text_style" xsize 120 yalign 0.5
-                            text str(int(person.int)) style "menu_text_style" xsize 120 yalign 0.5
-                            text str(int(person.focus)) style "menu_text_style" xsize 120 yalign 0.5
-                            text str(int(person.research_skill)) style "menu_text_style" xsize 120 yalign 0.5
-                            text str(int(person.production_skill)) style "menu_text_style" xsize 120 yalign 0.5
-                            text str(int(person.supply_skill)) style "menu_text_style" xsize 120 yalign 0.5
-                            text str(int(person.market_skill)) style "menu_text_style" xsize 120 yalign 0.5
-                            text str(int(person.hr_skill)) style "menu_text_style" xsize 120 yalign 0.5
+                            textbutton person.name + "\n" + person.last_name style "textbutton_style" text_style "menu_text_style" action Show("person_info_detailed",None,person) xsize 120
+                            for attributes in sort_attributes[1:]: #Omit name
+                                text (str(getattr(person, attributes[1])) if attributes[1] != "salary" else "$" + str(getattr(person, attributes[1])) +"/day") style "menu_text_style" xsize 120 yalign 0.5 xalign 0.5
+
+                            # text "$" + str(person.salary) + "/day"
+                            # text str(int(person.happiness)) style "menu_text_style" xsize 120 yalign 0.5 xalign 0.5
+                            # text str(int(person.obedience)) style "menu_text_style" xsize 120 yalign 0.5 xalign 0.5
+                            # text str(int(person.love)) style "menu_text_style" xsize 120 yalign 0.5 xalign 0.5
+                            # text str(int(person.sluttiness)) style "menu_text_style" xsize 120 yalign 0.5 xalign 0.5
+                            # text str(int(person.suggestibility)) style "menu_text_style" xsize 120 yalign 0.5 xalign 0.5
+                            # text str(int(person.charisma)) style "menu_text_style" xsize 120 yalign 0.5 xalign 0.5
+                            # text str(int(person.int)) style "menu_text_style" xsize 120 yalign 0.5 xalign 0.5
+                            # text str(int(person.focus)) style "menu_text_style" xsize 120 yalign 0.5 xalign 0.5
+                            # text str(int(person.research_skill)) style "menu_text_style" xsize 120 yalign 0.5 xalign 0.5
+                            # text str(int(person.production_skill)) style "menu_text_style" xsize 120 yalign 0.5 xalign 0.5
+                            # text str(int(person.supply_skill)) style "menu_text_style" xsize 120 yalign 0.5 xalign 0.5
+                            # text str(int(person.market_skill)) style "menu_text_style" xsize 120 yalign 0.5 xalign 0.5
+                            # text str(int(person.hr_skill)) style "menu_text_style" xsize 120 yalign 0.5 xalign 0.5
 
         if not person_select:
             frame:
@@ -139,5 +173,5 @@ init 2:
                     idle im.Scale("gui/button/choice_idle_background.png", 400, 80)
                     hover im.Scale("gui/button/choice_hover_background.png", 400, 80)
                     focus_mask im.Scale("gui/button/choice_idle_background.png", 400, 80)
-                    action Hide("employee_overview")                  
+                    action Hide("employee_overview")
                 textbutton "Return" align [0.5,0.5] style "return_button_style"
