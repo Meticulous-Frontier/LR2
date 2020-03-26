@@ -6,7 +6,7 @@ init 2:
         default division_select = "none"
         default division_name = "All"
         default sort_employees_by = "name"
-        default reverse_sort = True
+        default reverse_sort = False
         default sort_attributes = [
             ["Name", "name"],
             ["Salary", "salary"],
@@ -78,12 +78,14 @@ init 2:
                 background "#1a45a1aa"
 
                 hbox:
+                    xfill True
                     xalign 0.5
                     xanchor 0.5
                     spacing 40
                     $ button_mappings = [["All","none"],["Research","r"],["Production","p"],["Supply","s"],["Marketing","m"],["Human Resources","h"]]
                     for button_map in button_mappings:
                         frame:
+                            xsize 274
                             ysize 60
                             if division_select == button_map[1]:
                                 background "#4f7ad6"
@@ -104,7 +106,9 @@ init 2:
                 background "#1a45a1aa"
                 grid grid_count 1 ysize 30 xfill True:
                     if person_select:
-                        text "" style "menu_text_style" xsize 130
+                        frame:
+                            background None
+                            xsize 90
                     for attributes in sort_attributes:
                         frame:
                             textbutton attributes[0]:
@@ -128,27 +132,22 @@ init 2:
                         scrollbars "vertical"
                     mousewheel True
                     ysize 580
-                    grid (1 if not person_select else 2) len(display_list) spacing -10 xfill True:
+                    grid grid_count len(display_list) spacing -10 xfill True:
                         for person in sorted(display_list, key = lambda person: getattr(person, renpy.current_screen().scope["sort_employees_by"]), reverse = renpy.current_screen().scope["reverse_sort"]):
                             if person_select:
-                                textbutton "Select" style "textbutton_style" text_style "menu_text_style" action Return(person) xsize 90
+                                textbutton "Select" style "textbutton_style" text_style "menu_text_style" action Return(person) xsize 100
                             frame:
-                                background None
-                                hbox:
-
-                                    frame:
-                                        xsize 130
-                                        ysize 120
-                                        textbutton person.name + " " + person.last_name style "textbutton_style" text_style "menu_text_style" action Show("person_info_detailed",None,person) xfill True xalign 0.0 yfill True margin [0, 0]
-                                    grid (grid_count - 1) 1:
-                                        spacing -10
-                                        xfill True
-                                        for attributes in sort_attributes[1:]:
-                                            frame:
-                                                xsize 130
-                                                text (str(getattr(person, attributes[1])) if attributes[1] != "salary" else "$" + str(getattr(person, attributes[1])) +"/day") style "menu_text_style" xfill True xalign 0.5
+                                xsize 120
+                                ysize 80
+                                textbutton person.name + " " + person.last_name style "textbutton_style" text_style "menu_text_style" action Show("person_info_detailed",None,person) xfill True xalign 0.0 yfill True margin [0, 0]
+                            for attributes in sort_attributes[1:]:
+                                frame:
+                                    xsize 124
+                                    margin (2,0)
+                                    text (str(getattr(person, attributes[1])) if attributes[1] != "salary" else "$" + str(getattr(person, attributes[1])) +"/day") style "menu_text_style" xfill True xalign 0.5
             frame: # Create a frame that displays production / research / supply / hr per turn when filtering by departments
                 xfill True
+                yoffset -30
                 textbutton "SAMPLE TEXT" action NullAction()
 
 
