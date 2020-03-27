@@ -31,9 +31,11 @@ init 2 python:
 
     # Hire Person Requirements
     def mc_hire_person_requirement(person):
-        if mc.business.get_employee_count() < mc.business.max_employee_count:
-            if person not in mc.business.get_employee_list() + unique_character_list:
-                return True
+        if mc.business.get_employee_count() >= mc.business.max_employee_count:
+            return "At employee limit."
+
+        if person not in mc.business.get_employee_list() + unique_character_list:
+            return True
         return False
 
     # Rename Person Requirements
