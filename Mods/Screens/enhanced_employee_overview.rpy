@@ -17,7 +17,7 @@ init 1 python:
             bonus_percent = (mc.business.head_researcher.int - 2) * 0.05
             result *= (1.0 + bonus_percent) #Every point above int 2 gives a 5% bonus.
         else:
-            result *= research_amount * 0.9 #No head researcher is treated like int 0.
+            result *= 0.9 #No head researcher is treated like int 0.
         return result
 
     def people_list_potential_stat(people):
