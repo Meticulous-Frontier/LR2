@@ -153,17 +153,24 @@ init 2:
                             xsize 90
                     for attributes in sort_attributes:
                         frame:
+                            background None
                             textbutton attributes[0]:
                                 style "textbutton_no_padding_highlight"
                                 text_style "textbutton_text_style"
                                 xfill True
-                                action [
-                                    SetScreenVariable("sort_employees_by", attributes[1]),
-                                    ToggleScreenVariable("reverse_sort")
+                                if sort_employees_by == attributes[1]:
+                                    action [
+                                        SetScreenVariable("sort_employees_by", attributes[1]),
+                                        ToggleScreenVariable("reverse_sort")
+                                    ]
+                                else:
+                                    action [
+                                        SetScreenVariable("sort_employees_by", attributes[1]),
                                     ]
                                 if sort_employees_by == attributes[1]:
                                     background "#4f7ad6"
                                 margin [0, 0]
+
             frame:
                 ypos -20
                 yanchor 0.0
@@ -179,14 +186,16 @@ init 2:
                             if person_select:
                                 textbutton "Select" style "textbutton_style" text_style "menu_text_style" action Return(person) xsize 100
                             frame:
+                                background None
                                 xsize 120
                                 ysize 80
                                 textbutton person.name + " " + person.last_name style "textbutton_style" text_style "menu_text_style" action Show("person_info_detailed",None,person) xfill True xalign 0.0 yfill True margin [0, 0]
                             for attributes in sort_attributes[1:]:
                                 frame:
+                                    background None
                                     xsize 124
                                     margin (2,0)
-                                    text (str(getattr(person, attributes[1])) if attributes[1] != "salary" else "$" + str(getattr(person, attributes[1])) +"/day") style "menu_text_style" xfill True xalign 0.5
+                                    text (str(getattr(person, attributes[1])) if attributes[1] != "salary" else "$ " + '{:0.2f}'.format(getattr(person, attributes[1]))) style "menu_text_style" xfill True xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
 
             $ stats_list = people_list_potential_stat(display_list)
             frame: # Create a frame that displays production / research / supply / hr per turn when filtering by departments
