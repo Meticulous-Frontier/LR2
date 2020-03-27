@@ -1,3 +1,45 @@
+init 1 python:
+    def human_resource_potential_stat(person):
+        return (3*person.charisma) + (person.int) + (2 * person.hr_skill) + 5
+
+    def production_potential_stat(person):
+        return __builtin__.round(((3*person.focus) + (person.int) + (2*person.production_skill) + 10) * (mc.business.team_effectiveness))/100
+
+    def marketing_potential_stat(person):
+        return __builtin__.round(((3*person.charisma) + (person.focus) + (2*person.market_skill) + 5) * (mc.business.team_effectiveness))/100 #Total number of doses of serum that can be sold by this person.
+
+    def supply_potential_stat(person):
+        return __builtin__.round(((3*person.focus) + (person.charisma) + (2*person.supply_skill) + 10) * (mc.business.team_effectiveness))/100
+
+    def research_potential_stat(person):
+        result = __builtin__.round(((3*person.int) + (person.focus) + (2*person.research_skill) + 10) * (mc.business.team_effectiveness))/100
+        if mc.business.head_researcher:
+            bonus_percent = (mc.business.head_researcher.int - 2) * 0.05
+            result *= (1.0 + bonus_percent) #Every point above int 2 gives a 5% bonus.
+        else:
+            result *= research_amount * 0.9 #No head researcher is treated like int 0.
+        return result
+
+    def people_list_potential_stat(people):
+        r_stat = 0
+        p_stat = 0
+        s_stat = 0
+        m_stat = 0
+        h_stat = 0
+        for person in people:
+            if person in mc.business.research_team:
+                r_stat += research_potential_stat(person)
+            if person in mc.business.production_team:
+                p_stat += production_potential_stat(person)
+            if person in mc.business.supply_team:
+                s_stat += supply_potential_stat(person)
+            if person in mc.business.market_team:
+                m_stat += marketing_potential_stat(person)
+            if person in mc.business.hr_team:
+                h_stat += human_resource_potential_stat(person)
+
+        return [["Research", r_stat], ["Production", p_stat], ["Supply", s_stat], ["Marketing", m_stat], ["HR", h_stat]]
+
 init 2:
     screen employee_overview(white_list = None, black_list = None, person_select = False): #If select is True it returns the person's name who you click on. If it is false it is a normal overview menu that lets you bring up their detailed info.
         modal True
@@ -145,13 +187,22 @@ init 2:
                                     xsize 124
                                     margin (2,0)
                                     text (str(getattr(person, attributes[1])) if attributes[1] != "salary" else "$" + str(getattr(person, attributes[1])) +"/day") style "menu_text_style" xfill True xalign 0.5
+
+            $ stats_list = people_list_potential_stat(display_list)
             frame: # Create a frame that displays production / research / supply / hr per turn when filtering by departments
-                xfill True
-                yoffset -30
-                textbutton "SAMPLE TEXT" action NullAction()
-
-
-
+                background "#1a45a1aa"
+                yoffset -20
+                hbox:
+                    xfill True
+                    xalign 0.5
+                    xanchor 0.5
+                    spacing 10
+                    for stat in stats_list:
+                        frame:
+                            background None
+                            xsize 300
+                            ysize 60
+                            text stat[0] + ": " + str(stat[1]) xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 style "textbutton_text_style"
 
         if not person_select:
             frame:
