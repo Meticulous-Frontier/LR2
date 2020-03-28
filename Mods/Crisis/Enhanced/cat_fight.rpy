@@ -45,17 +45,17 @@ label cat_fight_crisis_enhanced_label():
 
     $ scene_manager.update_actor(person_one, position = "stand2")
     menu:
-        "Side with [person_one.title].":
+        "Side with [person_one.title]":
             #Obedience and happiness boost to p1, reduction for p2
             call cat_fight_pick_winner_enhanced(scene_manager, person_one, person_two) from _call_cat_fight_pick_winner_enhanced_1
 
 
-        "Side with [person_two.title].":
+        "Side with [person_two.title]":
             #Obedience and happiness boost to p2, reductio n for p1
             call cat_fight_pick_winner_enhanced(scene_manager, person_two, person_one) from _call_cat_fight_pick_winner_enhanced_2
 
 
-        "Stop the argument, side with no one.":
+        "Stop the argument, side with no one":
             #Obedience boost to both, happiness drop to both. At high sluttiness have them "kiss and make up"
             mc.name "Enough! I can't be the arbitrator for every single conflict we have in this office. You two are going to have to figure this out between yourselves."
             $ scene_manager.update_actor(person_one, emotion="sad")
@@ -100,7 +100,7 @@ label cat_fight_crisis_enhanced_label():
                 $ scene_manager.update_actor(person_two, position = "walking_away")
                 "You watch them both walking off in a different direction."
 
-        "Stay silent and let them fight it out.":
+        "Stay silent and let them fight it out":
             "Both of the girls look at you, waiting to see who's side you take."
             mc.name "This isn't my fight. You two are going to have to sort this out yourselves."
             if renpy.random.randint(0,1) == 0: #Establish a winner and loser for the fight, random here so that the earlieer section of the event doesn't suggest which one it is.
@@ -262,6 +262,8 @@ label cat_fight_crisis_enhanced_label():
                     winner.char "I should probably go get cleaned up too. Sorry about all of this [winner.mc_title]."
                     $ scene_manager.update_actor(loser, position = "walking_away")
                     "[winner.title] leaves and you get back to work."
+            $ del winner
+            $ del loser
 
         "Have a team building exercise" if willing_to_threesome(person_one, person_two) and mc.energy > 30:
             mc.name "Enough! It is obvious to me that we are too busy working against one another, and not enough working as a team."
@@ -302,6 +304,7 @@ label cat_fight_crisis_enhanced_label():
 
     python:     # Release variables
         scene_manager.clear_scene()
+        the_clothing = None
         del the_relationship
         del person_one
         del person_two

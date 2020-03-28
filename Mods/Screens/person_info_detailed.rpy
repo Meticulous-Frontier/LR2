@@ -73,6 +73,8 @@ init 2: # Need to allow for None name roles in this screen as well.
                         text "Intelligence: [the_person.int]" style "menu_text_style"
                         text "Focus: [the_person.focus]" style "menu_text_style"
                         text "Love: [the_person.love]" style "menu_text_style"
+                        if the_person not in unique_character_list:
+                            text "Personality: " + the_person.personality.personality_type_prefix.capitalize() style "menu_text_style"
 
                 frame:
                     background "#1a45a1aa"

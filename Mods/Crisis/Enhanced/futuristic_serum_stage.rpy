@@ -31,10 +31,10 @@ label futuristic_serum_stage_2_enhanced_label(the_person):
     "[the_person.title] looks over the files of the employees you suggested and nods approvingly."
     the_person.char "I think they will do. You're sure you want me to bring in [pick_1.name], [pick_2.name], and [pick_3.name] for testing?"
     menu:
-        "Begin the testing.":
+        "Begin the testing":
             pass
 
-        "Reconsider.":
+        "Reconsider":
             mc.name "On second thought, I don't think I want them involved. I'll think about it and come back."
             the_person.char "I'll be here."
             return

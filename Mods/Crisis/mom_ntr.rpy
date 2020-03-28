@@ -22,7 +22,7 @@ label mom_ntr_mod_action_label:
     menu:
         "Investigate?":
             pass
-        "Ignore it.":
+        "Ignore it":
             return
     "As it seems to go on and on, you decide to investigate."
     "You drag yourself out of bed and enter the hallway. There is some rustling in [the_person.possessive_title]'s bedroom."
@@ -85,7 +85,7 @@ label mom_ntr_mod_action_label:
             "Now, when you heard the name, you recognize the man. It's [man_name], one of [the_person.possessive_title] colleagues."
             "You are unsure what to do here."
         menu:
-            "Keep looking.":
+            "Keep looking":
                 "You decide to see what they are up to."
                 "They go on kissing. After a while [man_name] places his hands on [the_person.possessive_title]'s ass, slightly caressing it."
                 if the_person.sluttiness <= 30 or (the_person.get_opinion_score("taking control") > 0 and the_person.sluttiness <= 45):
@@ -1288,7 +1288,7 @@ label mom_ntr_mod_action_label:
                                     the_person.char "I really like the taste of big john, [man_name]."
                                     the_person.char "Now go the bathroom, I will join shortly."
                                     "You go back to your bedroom accompanied by shower sounds from [the_person.possessive_title]'s room."
-            "Get back to bed.":
+            "Get back to bed":
                 "You decide that it is wrong to interfere into [the_person.possessive_title]'s private life so you go back to your room to sleep."
     elif encounter is 2: ##For a scene with 2 men
         $ man_name2 = get_random_male_name()
@@ -1325,7 +1325,7 @@ label mom_ntr_mod_action_label:
             "As you open the door a little more, you recognize them . It's [man_name] and [man_name2], [the_person.possessive_title] colleagues."
             "You are unsure what to do here."
         menu:
-            "Keep looking.":
+            "Keep looking":
                 "You decide to see what they are up to."
                 "They go on kissing. After a while [man_name] places his hands on [the_person.possessive_title]'s ass, slightly caressing it, while [man_name2] is fondling her tits."
                 the_person.char "Oh, [man_name]. You clearly have some plans for tonight, don't you?."
@@ -2286,7 +2286,7 @@ label mom_ntr_mod_action_label:
                                     "It seems that men are planning to have some more fun with [the_person.possessive_title]..."
                                 else:
                                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
-            "Get back to bed.":
+            "Get back to bed":
                 "You decide that it is wrong to interfere into [the_person.possessive_title]'s private life so you go back to your room to sleep."
     $ the_person.sluttiness += 5
     $ the_person.reset_arousal()

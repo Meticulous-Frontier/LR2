@@ -1,16 +1,16 @@
 screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person and the variables holding the current hair style
     modal True
-    default catagory_selected = "Hair Style"
+    default category_selected = "Hair Style"
 
-    default valid_catagories = ["Hair Style"] #Holds the valid list of catagories strings to be shown at the top.
+    default valid_categories = ["Hair Style"] #Holds the valid list of categories strings to be shown at the top.
 
-    $ catagories_mapping = {
+    $ categories_mapping = {
         "Hair Style": [hair_styles]
     }
 
     default bar_select = 0 # 0 is nothing selected, 1 is red, 2 is green, 3 is blue, and 4 is alpha
 
-    default selected_colour = "colour" #If secondary we are alterning the patern colour. When changed it updates the colour of the clothing item. Current values are "colour" and "colour_pattern"
+    default selected_colour = "colour" #If secondary we are alternating the pattern colour. When changed it updates the colour of the clothing item. Current values are "colour" and "colour_pattern"
     default current_r = person.hair_colour[1][0]
     default current_g = person.hair_colour[1][1]
     default current_b = person.hair_colour[1][2]
@@ -31,13 +31,13 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
             xysize (880, 1015)
             hbox:
                 spacing 15
-                vbox: #Catagories select on far left
+                vbox: #Categories select on far left
                     spacing 15
-                    for catagory in valid_catagories:
-                        textbutton catagory:
+                    for category in valid_categories:
+                        textbutton category:
                             style "textbutton_style"
                             text_style "textbutton_text_style"
-                            if catagory == catagory_selected:
+                            if category == category_selected:
                                 background "#4f7ad6"
                                 hover_background "#4f7ad6"
                             else:
@@ -47,7 +47,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                             text_anchor(0.5,0.5)
                             tooltip ""
                             xysize (220, 60)
-                            action [SetScreenVariable("catagory_selected",catagory),
+                            action [SetScreenVariable("category_selected",category),
                                 SetScreenVariable("selected_colour", "colour")]
                     # textbutton old_hair_colour:
                     #     style "textbutton_style"
@@ -70,11 +70,11 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                             yminimum 480
                             background "#888888"
                             vbox:
-                                if catagory_selected in catagories_mapping:
-                                    #    $ valid_check = catagories_mapping[catagory_selected][1]
-                                    #    $ apply_method = catagories_mapping[catagory_selected][2]
-                                    #    $ cloth_list_length = len(catagories_mapping[catagory_selected][0])
-                                    for hair_style_item in sorted(catagories_mapping[catagory_selected][0], key = lambda x: x.name):
+                                if category_selected in categories_mapping:
+                                    #    $ valid_check = categories_mapping[category_selected][1]
+                                    #    $ apply_method = categories_mapping[category_selected][2]
+                                    #    $ cloth_list_length = len(categories_mapping[category_selected][0])
+                                    for hair_style_item in sorted(categories_mapping[category_selected][0], key = lambda x: x.name):
                                         textbutton hair_style_item.name:
                                             style "textbutton_style"
                                             text_style "textbutton_text_style"

@@ -116,13 +116,13 @@ label movie_date_plan_enhanced_label(the_person):
             the_person.char "Oh, a movie sounds fun! I don't have anything going on Tuesday night, would that work for you?"
 
     menu:
-        "Plan a date for Tuesday night.":
+        "Plan a date for Tuesday night":
             mc.name "Tuesday would be perfect, I'm already looking forward to it."
             the_person.char "Me too!"
 
             $ add_movie_date_action(the_person)
 
-        "Maybe some other time.":
+        "Maybe some other time":
             mc.name "I'm busy on Friday unfortunately."
             the_person.char "Well maybe next week then. Let me know, okay?"
             "She gives you a warm smile."
@@ -182,13 +182,13 @@ label dinner_date_plan_enhanced_label(the_person):
 
 
     menu:
-        "Plan a date for Friday night.":
+        "Plan a date for Friday night":
             mc.name "It's a date. I'm already looking forward to it."
             the_person.char "Me too!"
 
             $ add_dinner_date_action(the_person)
 
-        "Maybe some other time.":
+        "Maybe some other time":
             mc.name "I'm busy on Friday unfortunately."
             the_person.char "Well maybe next week then. Let me know, okay?"
             "She gives you a warm smile."

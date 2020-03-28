@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Wardrobe name="Mom_Enhanced_Wardrobe">
+    <FullSets>
+        <Outfit name="Conservative Leotard">
+            <UpperBody>
+                <Item alpha="0.95" blue="0.38" green="0.16" name="Leotard" red="0.41" />
+            </UpperBody>
+            <LowerBody>
+                <Item alpha="0.95" blue="0.34" green="0.27" name="Pencil_Skirt" red="0.21" />
+            </LowerBody>
+            <Feet>
+                <Item alpha="0.95" blue="0.304" green="0.128" name="Pumps" red="0.328" />
+                <Item alpha="0.95" blue="0.304" green="0.128" name="Thigh_Highs" red="0.328" />
+            </Feet>
+            <Accessories>
+                <Item alpha="0.95" blue="0.545" green="0.239" name="Modern_Glasses" red="0.282" />
+                <Item alpha="0.95" blue="0.36" green="0.92" name="Gold_Chain_Necklace" red="0.98" />
+            </Accessories>
+        </Outfit>		
+        <Outfit name="Conservative Lace Sweater and Long Skirt">
+            <UpperBody>
+                <Item alpha="0.95" blue="0.63" green="0.44" name="Lace_Sweater" red="0.87" />
+                <Item alpha="0.95" blue="0.38" green="0.16" name="Quarter_Cup_Bra" red="0.41" />
+            </UpperBody>
+            <LowerBody>
+                <Item alpha="0.95" blue="0.567" green="0.396" name="Long_Skirt" red="0.783" />
+                <Item alpha="0.95" blue="0.38" green="0.16" name="Tiny_Lace_Panties" red="0.41" />
+            </LowerBody>
+            <Feet>
+                <Item alpha="0.95" blue="0.63" green="0.44" name="Pumps" red="0.87" />
+                <Item alpha="0.95" blue="0.38" green="0.16" name="Garter_and_Fishnets" palpha="0.95" pattern="Pattern_1" pblue="0.63" pgreen="0.44" pred="0.87" red="0.41" />
+            </Feet>
+            <Accessories>
+                <Item alpha="0.85" blue="0.63" green="0.44" name="Lipstick" red="0.87" />
+                <Item alpha="0.95" blue="0.15" green="0.15" name="Upper_Eye_Shadow" red="0.15" />
+            </Accessories>
+        </Outfit>
+    </FullSets>
+    <UnderwearSets>
+        <Outfit name="Red Lingerie">
+            <UpperBody>
+                <Item alpha="1.0" blue="0.27" green="0.27" name="Lace_Bra" palpha="1.0" pattern="Pattern_1" pblue="0.15" pgreen="0.15" pred="0.15" red="0.8" />
+            </UpperBody>
+            <LowerBody>
+                <Item alpha="1.0" blue="0.27" green="0.27" name="Thong" palpha="1.0" pattern="Pattern_1" pblue="0.15" pgreen="0.15" pred="0.15" red="0.8" />
+            </LowerBody>
+            <Feet>
+                <Item alpha="1.0" blue="0.27" green="0.27" name="Fishnets" red="0.8" />
+            </Feet>
+            <Accessories />
+        </Outfit>
+    </UnderwearSets>
+    <OverwearSets>
+        <Outfit name="Leggings, lace top and pumps">
+            <UpperBody>
+                <Item alpha="0.95" blue="0.36" green="0.92" name="Lace_Sweater" red="0.98" />
+            </UpperBody>
+            <LowerBody>
+                <Item alpha="0.95" blue="0.34" green="0.27" name="Leggings" red="0.21" />
+            </LowerBody>
+            <Feet>
+                <Item alpha="0.95" blue="0.36" green="0.92" name="Pumps" red="0.98" />
+            </Feet>
+            <Accessories />
+        </Outfit>
+	</OverwearSets>
+</Wardrobe>

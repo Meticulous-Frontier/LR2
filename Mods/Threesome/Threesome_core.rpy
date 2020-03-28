@@ -77,13 +77,13 @@ init -1 python:
             self.default_action_person = default_action_person
             self.skill_tag_p1 = skill_tag_p1 #The skill that will provide a bonus to this for girl 1
             self.skill_tag_p2 = skill_tag_p2 #The skill that will provide a bonus to this for girl 2
-            self.girl_one_arousal = girl_one_arousal # The base arousal the girl recieves from this position.
-            self.girl_two_arousal = girl_two_arousal # The base arousal the girl recieves from this position.
+            self.girl_one_arousal = girl_one_arousal # The base arousal the girl receives from this position.
+            self.girl_two_arousal = girl_two_arousal # The base arousal the girl receives from this position.
             self.girl_one_source = girl_one_source  #Who is giving girl 1 pleasure. 0 = MC, 1 = herself, 2 = girl 2
             self.girl_two_source = girl_two_source  #Who is giving girl 2 pleasure. 0 = MC, 1 = girl 1, 2 = herself
             self.girl_one_energy = girl_one_energy  #energy cost for girl 1
             self.girl_two_energy = girl_two_energy  #energy cost for girl 2
-            self.guy_arousal = guy_arousal # The base arousal the guy recieves from this position.
+            self.guy_arousal = guy_arousal # The base arousal the guy receives from this position.
             self.skill_tag_guy = skill_tag_guy #The skill that will decide how much arousal MC receives.
             self.guy_source = guy_source # Who is giving MC pleasure. 0 = MC, 1 = girl 1, 2 = girl 2
             self.guy_energy = guy_energy #Energy burn for guy
@@ -211,7 +211,7 @@ label threesome_test():
     $ scene_manager.add_actor(lily, character_placement = character_center_flipped)
     $ scene_manager.strip_actor_outfit(mom)
     $ scene_manager.strip_actor_outfit(lily)
-    call start_threesome(mom, lily, start_position = Threesome_sixty_nine) from threesome_test_call_1
+    call start_threesome(mom, lily) from threesome_test_call_1
     $ scene_manager.clear_scene()
     return "Test Complete"
 
@@ -253,6 +253,92 @@ label threesome_alignment():
                 pass
         $ position_choice.align_position(the_person_one, the_person_two)  #This doesn't work lol. Delete? I hate transforms
 
+init 5 python:
+    def build_threesome_round_start_menu(position_choice, the_person_one, the_person_two):
+        option_list = []
+        option_list.append("Start Choice")
+        for options in position_choice.mc_position:
+            if options.requirement(the_person_one, the_person_two):
+                option_list.append([options.description,options.name])
+        option_list.append(["Change your mind and leave", "Leave"])
+        return option_list
+
+    def build_threesome_round_choice_menu(position_choice, the_person_one, the_person_two, position_locked, hide_leave):
+        option_list = []
+        option_list.append("Round Choice")
+        if position_choice is not None:
+            option_list.append(["Keep going","Continue"]) #Note: you're prevented from continuing if the energy cost would be too high by the pre-round checks.
+            if not (the_person_one.outfit.full_access() or the_person_two.outfit.full_access()):
+                option_list.append(["Pause and strip them down","Strip"])
+
+            #Give option for MC to change position without changing the girls positions
+            for options in position_choice.mc_position:
+                if options != active_mc_position:
+                    if options.requirement(the_person_one, the_person_two):
+                        option_list.append([options.description,options.name])
+
+            if not position_locked:
+                option_list.append(["Pause and change position.\n-5 {image=gui/extra_images/arousal_token.png}","Change"])
+                #### For now, no implementation of connections
+                # for position in position_choice.connections:
+                #     if object_choice.has_trait(position.requires_location):
+                #         appended_name = "Transition to " + position.build_position_willingness_string(the_person) #Note: clothing and energy checks are done inside of build_position_willingness, invalid positiosn marked (disabled)
+                #         option_list.append([appended_name,position])
+
+            if not hide_leave: #TODO: Double check that we can always get out
+                option_list.append(["Stop fucking and leave", "Leave"]) #TODO: Have this appear differently depending on if you've cum yet, she's cum yet, or you've both cum.
+
+        else:
+            if not position_locked:
+                option_list.append(["Pick a new position\n-5 {image=gui/extra_images/arousal_token.png}","Change"])
+            if not (the_person_one.outfit.full_access() or the_person_two.outfit.full_access()):
+                option_list.append(["Strip them down","Strip"])
+            if not hide_leave:
+                option_list.append(["Stop and leave", "Leave"])
+        return option_list
+
+    def build_threesome_person_one_position_choice_menu(the_person_one, the_person_two):
+        option_list = []
+        option_list.append(the_person_one.name + " position:")
+        for threeway in list_of_threesomes:
+            if threeway.requirements(the_person_one, the_person_two):
+                if (get_initial_threesome_pairing(threeway.position_one_tag)) not in option_list: #This doesn't work for stand2-5 TODO
+                    option_list.append(get_initial_threesome_pairing(threeway.position_one_tag))
+                if (get_initial_threesome_pairing(threeway.position_two_tag)) not in option_list:
+                    option_list.append(get_initial_threesome_pairing(threeway.position_two_tag))
+        return option_list
+
+    def build_threesome_person_two_position_choice_menu(the_person_one, the_person_two):
+        option_list = []
+        option_list.append(the_person_two.name + " position:")
+        for threeway in list_of_threesomes:
+            if threeway.requirements(the_person_one, the_person_two):
+                if threeway.position_one_tag == girl_one_choice:            #Look for positions that match with any position taken by girl 1
+                    option_list.append([threeway.girl_two_final_description, threeway.position_two_tag])
+                elif threeway.position_two_tag == girl_one_choice:
+                    option_list.append([threeway.girl_one_final_description, threeway.position_one_tag])
+        if len(option_list) == 0:
+            renpy.say("", "Something has gone wrong, no available positions")  #Return something default?
+        return option_list
+
+    def build_threesome_strip_menu(the_person_one, the_person_two):
+        option_list = []
+        option_list.append("Stripping Choice")
+        if not the_person_one.outfit.full_access():
+            option_list.append (["Strip " + the_person_one.title, "strip_one"])
+        if not the_person_two.outfit.full_access():
+            option_list.append (["Strip " + the_person_two.title, "strip_two"])
+        option_list.append (["Finished", "leave"])
+        return option_list
+
+    def update_threesome_action_description(position):
+        for mc_pos in position.mc_position:
+            if mc_pos.action_description:
+                if girl_swap_pos:
+                    mc_pos.description = mc_pos.action_description.replace("{0}", "one" if mc_pos.default_action_person == "two" else "two")
+                else:
+                    mc_pos.description = mc_pos.action_description.replace("{0}", "two" if mc_pos.default_action_person == "two" else "one")
+        return
 
 label start_threesome(the_person_one, the_person_two, start_position = None, start_object = None, round = 0, private = True, girl_in_charge = False, position_locked = False, report_log = None, affair_ask_after = True, hide_leave = False):
     # When called
@@ -281,6 +367,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
         $ position_choice = _return
     else:
         $ position_choice = start_position
+        $ update_threesome_action_description(position_choice)
     #pick_threesome can give use the option to swap the girls opening spots
     # if girl_swap_pos:
     #     $ the_person = the_person_one
@@ -293,20 +380,19 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
     $ position_choice.update_scene(the_person_one, the_person_two)
     if round == 0:
         "As the girls get into position, you consider how to begin your threesome."
-    $ option_list = []
-    python:
-        for options in position_choice.mc_position:
-            if options.requirement(the_person_one, the_person_two):
-                option_list.append([options.description,options.name])
-            pass
-    $ option_list.append(["Change your mind and leave.", "Leave"])
-    $ round_choice = None # We start any encounter by letting them pick what position they want (unless something is forced or the girl is in charge)
+
+    # We start any encounter by letting them pick what position they want (unless something is forced or the girl is in charge)
     $ active_mc_position = None
-    $ round_choice = renpy.display_menu(option_list,True,"Choice")
-    $ del option_list
+    if "build_menu_items" in globals():
+        call screen main_choice_display(build_menu_items([build_threesome_round_start_menu(position_choice, the_person_one, the_person_two)]))
+    else:
+        call screen main_choice_display([build_threesome_round_start_menu(position_choice, the_person_one, the_person_two)])
+    $ round_choice = _return
+
     if round_choice == "Leave":
         "Really? You changed your mind? You leave the poor girls after you got them all ready for some action."
     else:
+        $ mc.listener_system.fire_event("threesome", the_person_one = the_person_one, the_person_two = the_person_two)
         python:
             for options in position_choice.mc_position:
                 if round_choice == options.name:
@@ -324,40 +410,12 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
         #     # For now, default to guys only in charge
         if round_choice is None: #If there is no set round_choice
             #TODO: Add a variant of this list when the girl is in control to ask if you want to resist or ask/beg for something.
-            $ option_list = []
-            python:
-                if position_choice is not None:
-                    if active_mc_position is not None:
-                        option_list.append(["Keep going.","Continue"]) #Note: you're prevented from continuing if the energy cost would be too high by the pre-round checks.
 
-
-                    option_list.append(["Pause and strip her down.","Strip"])
-
-                    #Give option for MC to change position without changing the girls positions
-                    for options in position_choice.mc_position:
-                        if options != active_mc_position:
-                            if options.requirement(the_person_one, the_person_two):
-                                option_list.append([options.description,options.name])
-
-                    if not position_locked:
-                        option_list.append(["Pause and change position.\n-5 {image=gui/extra_images/arousal_token.png}","Change"])
-                        #### For now, no implementation of connections
-                        # for position in position_choice.connections:
-                        #     if object_choice.has_trait(position.requires_location):
-                        #         appended_name = "Transition to " + position.build_position_willingness_string(the_person) #Note: clothing and energy checks are done inside of build_position_willingness, invalid positiosn marked (disabled)
-                        #         option_list.append([appended_name,position])
-
-                    if not hide_leave: #TODO: Double check that we can always get out
-                        option_list.append(["Stop fucking and leave.", "Leave"]) #TODO: Have this appear differently depending on if you've cum yet, she's cum yet, or you've both cum.
-
-                else:
-                    if not position_locked:
-                        option_list.append(["Pick a new position.\n-5 {image=gui/extra_images/arousal_token.png}","Change"])
-                    if not hide_leave:
-                        option_list.append(["Stop and leave.", "Leave"])
-
-            $ round_choice = renpy.display_menu(option_list,True,"Choice") #This gets the players choice for what to do this round.
-            $ del option_list
+            if "build_menu_items" in globals():
+                call screen main_choice_display(build_menu_items([build_threesome_round_choice_menu(position_choice, the_person_one, the_person_two, position_locked, hide_leave)]))
+            else:
+                call screen main_choice_display([build_threesome_round_choice_menu(position_choice, the_person_one, the_person_two, position_locked, hide_leave)])
+            $ round_choice = _return
 
         # Now that a round_choice has been picked we can do something.
         if round_choice == "Change" or round_choice == "Continue":
@@ -584,12 +642,12 @@ label threesome_round(the_person_one, the_person_two, position_choice, round = 0
 
         if the_person_one.arousal >= the_person_one.max_arousal:
             $ mc.listener_system.fire_event("girl_climax", the_person = the_person_one)
-            $ the_person_one.change_arousal(-the_person_one.arousal/2)
+            $ the_person_one.change_stats(arousal = -the_person_one.arousal/2, happiness = 5, slut_temp = 5)
             $ report_log["girl one orgasms"] += 1
             $ report_log["total orgasms"] += 1
         if the_person_two.arousal >= the_person_two.max_arousal:
             $ mc.listener_system.fire_event("girl_climax", the_person = the_person_two)
-            $ the_person_two.change_arousal(-the_person_two.arousal/2)
+            $ the_person_two.change_stats(arousal = -the_person_two.arousal/2, happiness = 5, slut_temp = 5)
             $ report_log["girl two orgasms"] += 1
             $ report_log["total orgasms"] += 1
 
@@ -608,37 +666,23 @@ label threesome_round(the_person_one, the_person_two, position_choice, round = 0
     return
 
 label pick_threesome(the_person_one, the_person_two, girl_one_position = None, object_choice = None):  #We can pass in a position for girl one if the second girl "walks in" on the sex event
-    $ girl_two_list = []
-    $ girl_swap_pos = False
-    $ position_choice = None
     if girl_one_position == None:
-        python:
-            girl_one_choice = None
-            girl_one_list = []
-            for threeway in list_of_threesomes:
-                if threeway.requirements(the_person_one, the_person_two):
-                    if (get_initial_threesome_pairing(threeway.position_one_tag)) not in girl_one_list: #This doesn't work for stand2-5 TODO
-                        girl_one_list.append(get_initial_threesome_pairing(threeway.position_one_tag))
-                    if (get_initial_threesome_pairing(threeway.position_two_tag)) not in girl_one_list:
-                        girl_one_list.append(get_initial_threesome_pairing(threeway.position_two_tag))
-        "What do you want [the_person_one.title] to do?"
-        $ girl_one_choice = renpy.display_menu(girl_one_list,True,"Choice")
-        $ del girl_one_list
+        if "build_menu_items" in globals():
+            call screen main_choice_display(build_menu_items([build_threesome_person_one_position_choice_menu(the_person_one, the_person_two)]))
+        else:
+            call screen main_choice_display([build_threesome_person_one_position_choice_menu(the_person_one, the_person_two)])
+        $ girl_one_choice = _return
     else:
         $ girl_one_choice = girl_one_position
-    python:
-        for threeway in list_of_threesomes:
-            if threeway.requirements(the_person_one, the_person_two):
-                if threeway.position_one_tag == girl_one_choice:            #Look for positions that match with any position taken by girl 1
-                    girl_two_list.append([threeway.girl_two_final_description, threeway.position_two_tag])
-                elif threeway.position_two_tag == girl_one_choice:
-                    girl_two_list.append([threeway.girl_one_final_description, threeway.position_one_tag])
-    "What do you want [the_person_two.title] to do?"
-    if len(girl_two_list) == 0:
-        "Something has gone wrong, no available positions"  #Return something default?
-    $ girl_two_choice = renpy.display_menu(girl_two_list,True,"Choice")
-    $ del girl_two_list
 
+    if "build_menu_items" in globals():
+        call screen main_choice_display(build_menu_items([build_threesome_person_two_position_choice_menu(the_person_one, the_person_two)]))
+    else:
+        call screen main_choice_display([build_threesome_person_two_position_choice_menu(the_person_one, the_person_two)])
+    $ girl_two_choice = _return
+
+    $ position_choice = None
+    $ girl_swap_pos = False
     python:
         for threeway in list_of_threesomes:
             if girl_one_choice == threeway.position_one_tag and girl_two_choice == threeway.position_two_tag:
@@ -647,30 +691,18 @@ label pick_threesome(the_person_one, the_person_two, girl_one_position = None, o
             if girl_one_choice == threeway.position_two_tag and girl_two_choice == threeway.position_one_tag:
                 position_choice = threeway
                 girl_swap_pos = True
-        for mc_pos in position_choice.mc_position:
-            if mc_pos.action_description:
-                if girl_swap_pos:
-                    mc_pos.description = mc_pos.action_description.replace("{0}", "one" if mc_pos.default_action_person == "two" else "two")
-                else:
-                    mc_pos.description = mc_pos.action_description.replace("{0}", "two" if mc_pos.default_action_person == "two" else "one")
-
+        update_threesome_action_description(position_choice)
 
     #TODO figure out if position requires an object, if so select the object#
     return position_choice
 
 label threesome_strip_menu(the_person_one, the_person_two):
-    $ strip_menu = []
-    $ strip_menu.append (["Finished Stripping", "leave"])
-    if the_person_one.outfit.tits_available() and the_person_one.outfit.vagina_available():
-        pass
+    if "build_menu_items" in globals():
+        call screen main_choice_display(build_menu_items([build_threesome_strip_menu(the_person_one, the_person_two)]))
     else:
-        $ strip_menu.append (["Strip " + the_person_one.title, "strip_one"])
-    if the_person_two.outfit.tits_available() and the_person_two.outfit.vagina_available():
-        pass
-    else:
-        $ strip_menu.append (["Strip " + the_person_two.title, "strip_two"])
-    $ strip_choice = renpy.display_menu(strip_menu,True,"Choice")
-    $ del strip_menu
+        call screen main_choice_display([build_threesome_strip_menu(the_person_one, the_person_two)])
+    $ strip_choice = _return
+
     if strip_choice == "strip_one":
         mc.name "[the_person_one.title], I want you to give me full access."
         the_person_one.char "Of course!"

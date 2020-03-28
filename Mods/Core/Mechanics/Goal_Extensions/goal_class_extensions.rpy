@@ -1,0 +1,87 @@
+
+init -1 python:
+    def goal__init__(self, goal_name, goal_description, event_name, listener_type, valid_goal_function, on_trigger_function, arg_dict = None, difficulty_scale_function = None, report_function = None, progress_fraction_function = None, mandatory = False, enabled = True):
+        self.name = goal_name #Short form name to be displayed to the player, generally on a progress bar of some sort.
+        self.description = goal_description #A long form fluff description of the goal purpose.
+        self.event_name = event_name #The event (aka a string to give to a listener manager) that this goal listens to.
+        self.listener_type = listener_type #Either "MC" or "Business", decides which object the goal will grab as their listener manager when you ask it to enroll.
+        self.valid_goal_function = valid_goal_function #A function called to check to see if the goal is a valid/reasonable one to give to the player. Also is used to make sure goals aren't completed when they are assigned.
+        self.on_trigger_function = on_trigger_function #A function called by an event listener that that this goal is hooked up to.
+        if arg_dict: #A dict to hold arguments you want to be used by the on_trigger function without having to get specific about what they are here.
+            self.arg_dict = arg_dict
+        else:
+            self.arg_dict = {}
+
+        self.completed = False #A flag set to true when the goal is finished, so the player can complete the objective and claim their bonus point.
+
+        self.difficulty_scale_function = difficulty_scale_function #A function called when the goal is activated (aka when it is copied from the default goal) to scale the parameters to the current difficulty.
+        self.report_function = report_function
+        self.progress_fraction_function = progress_fraction_function
+        self.mandatory = mandatory
+        self.enabled = enabled
+
+    Goal.__init__ = goal__init__
+
+    def goal_toggle_enabled(self):
+        def enable_in_list(the_goal, the_list):
+            found = find_in_list(lambda x: x.hash() == self.hash(), the_list)
+            if not found:
+                the_list.append(the_goal)
+
+        def disable_in_list(the_goal, the_list):
+            found = find_in_list(lambda x: x.hash() == self.hash(), the_list)
+            if found:
+                the_list.remove(found)
+
+        self.enabled = not self.enabled
+        #renpy.notify(self.name + " is now [" + str(hex(id(self))) + "] :" + str(self.enabled))
+        if self.enabled:
+            if self in stat_goals_options_list:
+                enable_in_list(self, stat_goals)
+            if self in work_goals_options_list:
+                enable_in_list(self, work_goals)
+            if self in sex_goals_options_list:
+                enable_in_list(self, sex_goals)
+        else:
+            if self in stat_goals_options_list:
+                disable_in_list(self, stat_goals)
+            if self in work_goals_options_list:
+                disable_in_list(self, work_goals)
+            if self in sex_goals_options_list:
+                disable_in_list(self, sex_goals)
+        return
+
+    Goal.toggle_enabled = goal_toggle_enabled
+
+    def goal__cmp__(self, other):
+        if isinstance(self, other.__class__):
+            if self.name == other.name:
+                return 0
+
+        if self.__hash__() > other.__hash__():
+            return 1
+        else:
+            return -1
+    
+    Goal.__cmp__ == goal__cmp__
+
+    def goal__hash__(self):
+        return hash((self.name))
+
+    Goal.__hash__ = goal__hash__
+    Goal.hash = goal__hash__
+
+    def goal_eq(self, other):
+        if isinstance(self, other.__class__):
+            return self.name == other.name
+        return False
+
+    Goal.__eq__ = goal_eq
+
+    def goal_ne(self, other):
+        if isinstance(self, other.__class__):
+            return self.name != other.name
+        return True
+
+    Goal.__ne__ = goal_ne
+

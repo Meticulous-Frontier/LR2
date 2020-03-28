@@ -17,38 +17,38 @@ init 2 python: # Declare variables to use
             return True
 
     def hair_salon_mod_initialization(self):
+        # Create the room(s) I want to use.
+        global mall_salon
+        mall_salon = Room("salon", "Hair Salon", [], room_background_image("Salon_Background.jpg"), [make_floor(), make_wall(), make_chair(), make_window()], [], [salon_action], True, [7,2], None, True, lighting_conditions = standard_indoor_lighting)
+
         # Wardrobe for employees in the salon
         salon_wardrobe = wardrobe_from_xml("Salon_Wardrobe")
 
         # Place the stylist character so it is in a room in the world.
         global salon_manager
 
-        salon_manager = make_person(name = "Ophelia", last_name = "von Friseur", height = .9, age = renpy.random.randint(21,30), body_type = "thin_body",
-            personality =  None if not "salon_manager_personality" in globals() else salon_manager_personality, job = "Hair Stylist", starting_wardrobe = salon_wardrobe, eyes="light blue", start_sluttiness = 10,
+        salon_manager = make_person(name = "Ophelia", last_name = "von Friseur", age = renpy.random.randint(21,30), body_type = "thin_body",
+            personality = salon_manager_personality, job = "Hair Stylist", starting_wardrobe = salon_wardrobe, eyes="light blue", start_sluttiness = 10,
             possessive_title = "My stylist", force_random = True)
 
-        if "salon_manager_role" in globals():
-            salon_manager.special_role.append(salon_manager_role)
-
-        if "salon_manager_personality" in globals():
-            salon_manager.on_room_enter_event_list.append(salon_introduction_action)
+        salon_manager.special_role.append(salon_manager_role)
+        salon_manager.on_room_enter_event_list.append(salon_introduction_action)
 
         # create home for salon manager
-        salon_manager.generate_home()            
+        salon_manager.generate_home()
+        salon_manager.home.add_person(salon_manager)
 
         # We want whoever the salon_manager is to be in the salon during work hours.
-        salon_manager.set_schedule([0,4], salon_manager.home)
         salon_manager.set_schedule([1,2,3], mall_salon)
 
-        # Add to mall
-        mall_salon.add_person(salon_manager)
         # Add to map
         list_of_places.append(mall_salon)
-        mall_salon.link_locations_two_way(mall)
         return
 
     def salon_introduction_action_requirement(the_person):
-        if mc.location == mall_salon:    # only trigger event when in hair salon
+        if not "mall_salon" in globals():
+            return False
+        if the_person.location() is mall_salon:    # only trigger event when ophelia is there
             return True
         return False
 
@@ -57,5 +57,3 @@ init 2 python: # Declare variables to use
 
     salon_introduction_action = Action("Ophelia's Hair Salon", salon_introduction_action_requirement, "salon_manager_greetings", menu_tooltip = "Ophelia's Hair Salon")
 
-    # Create the room(s) I want to use.
-    mall_salon = Room("salon", "Hair Salon", [], room_background_image("Salon_Background.jpg"), [make_floor(), make_wall(), make_chair(), make_window()], [], [salon_action], True, [7,2], None, True, lighting_conditions = standard_indoor_lighting)

@@ -32,10 +32,10 @@ label town_walk_crisis_action_label:
     "You see [the_person.possessive_title] is standing in front of a mirror, studying herself."
     "There is a glass of water right near the window. This is a good opportunity to test a serum for free."
     menu:
-        "Add a dose of serum to [the_person.title]'s drink.":
+        "Add a dose of serum to [the_person.title]'s drink":
             call give_serum(the_person) from _call_give_serum_town_walk_1
             "You quickly retreat away from the window."
-        "Keep watching.":
+        "Keep watching":
             "You decide not to risk being seen and stay away from her sight"
     the_person.char "I should get dressed for lunch. Don't have much time..."
 
@@ -104,7 +104,7 @@ label town_walk_crisis_action_label:
     else:
         pass
     menu:
-        "Join her.":
+        "Join her":
             "You decide to use this opportunity and join her."
             mc.name "I was passing by, heard some noise  and decided to investigate. All these robberies, you know..."
             mc.name "And I see that that you indeed require some attention, [the_person.title]. Should I join?"

@@ -12,19 +12,14 @@ init -3 python:
     # these fetishes could be used for 'slave' / 'dominatrix'
     FETISH_BDSM_OPTION_LIST = ["being submissive", "taking control"]
 
-    FETISH_EVENT_TARGET = None
-    #global FETISH_VAGINAL_EVENT_INUSE, FETISH_ANAL_EVENT_INUSE
-    FETISH_VAGINAL_EVENT_INUSE = False
-    FETISH_ANAL_EVENT_INUSE = False
-    FETISH_CUM_EVENT_INUSE = False
     FETISH_RESEARCH_PERCENT = 1     #1 = 100%
     FETISH_RESEARCH_BASE_TIER = 1        #Default = 1
     FETISH_RESEARCH_MID_TIER = 2          #Default = 2
     FETISH_RESEARCH_FINAL_TIER = 3      #Default = 3
+
     FETISH_PRODUCTION_COST = 20     #Default 100
     FETISH_OPINION_VALUE = 2       #To work on balance issues#
-    SB_MOD_RANDOM_EVENT_CHANCE = 20
-    SB_MOD_DEFAULT_RANDOM_EVENT_CHANCE = 20
+
     SB_MOD_MC_AROUSAL_MULT = 1.0     #Default arousal multiplier for the MC
     SB_MOD_MC_AROUSAL_1ST_MULT = 0.9     #Arousal multiplier after the first upgrade
     SB_MOD_MC_AROUSAL_2ND_MULT = 0.8     #Arousal multiplier after second upgrade
@@ -39,12 +34,31 @@ init -3 python:
         FETISH_SKILL_RAISE_CHANCE = 100
         FETISH_DEVELOPMENT_CHANCE = 100
 
-    def SB_CALCULATE_RANDOM_EVENT_RATE():
-        global SB_MOD_RANDOM_EVENT_CHANCE
-        SB_MOD_RANDOM_EVENT_CHANCE = SB_MOD_DEFAULT_RANDOM_EVENT_CHANCE
-        return
+    FETISH_VAGINAL_EVENT_LABEL_LIST = [
+        "SB_fetish_mom_vaginal_label",
+        "SB_fetish_lily_vaginal_label",
+        "SB_fetish_vaginal_label",
+        "SB_fetish_vaginal_event_label",
+    ]
 
-    def SB_SET_RANDOM_EVENT_CHANCE(chance_percent):
-        global SB_MOD_RANDOM_EVENT_CHANCE
-        SB_MOD_RANDOM_EVENT_CHANCE = chance_percent
-        return
+    FETISH_ANAL_EVENT_LABEL_LIST = [
+        "SB_lily_anal_dp_fetish_label",
+        "SB_mom_anal_pay_label",
+        "SB_fetish_anal_label",
+        "SB_fetish_anal_staylate_event_label",
+        "SB_starbuck_anal_intro",
+        "SB_stephanie_anal_fetish_label",
+    ]
+
+    FETISH_CUM_EVENT_LABEL_LIST = [
+        "SB_fetish_mom_cum_label",
+        "SB_fetish_lily_cum_label",
+        "SB_fetish_cum_label",
+        "SB_fetish_stephanie_cum_label",
+    ]
+
+    def SB_FETISH_EVENT_ACTIVE():
+        for effect in FETISH_VAGINAL_EVENT_LABEL_LIST + FETISH_ANAL_EVENT_LABEL_LIST + FETISH_CUM_EVENT_LABEL_LIST:
+            if exists_in_mandatory_crisis_list(effect):
+                return True
+        return False

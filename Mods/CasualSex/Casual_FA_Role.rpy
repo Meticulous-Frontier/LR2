@@ -408,7 +408,7 @@ label casual_FA_get_a_drink_label(the_person):
         the_person.char "Yeah, well, I got kicked out."
         mc.name "What for?"
         the_person.char "Well, it was an all female crash pad, but uhh, I got caught bringing a boy back... We were really quiet but apparently we woke up one of the other flight attendants."
-        the_person.char "Anyway, I haven't been able to find another crash pad yet, so for now I'm staying at the hotel attached to this bar. Its expensive, but atleast I have a place to sleep when I'm in town."
+        the_person.char "Anyway, I haven't been able to find another crash pad yet, so for now I'm staying at the hotel attached to this bar. Its expensive, but at least I have a place to sleep when I'm in town."
         "You nod, understanding. Sounds like a tough predicament to be in."
         the_person.char "Anyway, I don't really talk about it anymore right now. How about you? What do you do?"
         "You chat with [the_person.title] for a while, talking about what you do for a living. You enjoy flirting and chatting with her."

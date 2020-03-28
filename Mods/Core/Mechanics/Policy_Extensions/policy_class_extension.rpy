@@ -1,6 +1,6 @@
 init 2 python:
     def policy_compare(self,other): #
-        if isinstance(other, Policy):
+        if isinstance(self, other.__class__):
             if self.name == other.name:
                 return 0
 
@@ -15,6 +15,22 @@ init 2 python:
         return hash(self.name)
 
     Policy.__hash__ = policy_hash
+    Policy.hash = policy_hash
+
+    def policy_eq(self, other):
+        if isinstance(self, other.__class__):
+            return self.name == other.name
+        return False
+
+    Policy.__eq__ = policy_eq
+
+    def policy_ne(self, other):
+        if isinstance(self, other.__class__):
+            return self.name != other.name
+        return True
+
+    Policy.__ne__ = policy_ne
+
 
     def update_policy(policy, policy_list): # Arguments such as rooms are not up to date on save reloads
         policy_to_update = find_in_list(lambda x: x.name == policy.name, policy_list)
@@ -66,7 +82,7 @@ init 2 python:
 
             Policy.__init__(self, name, desc, requirement, cost, on_buy_function, on_buy_arguments)
             self.children = [] # A list that gets filled with child elements
-            self.parent = parent # The parent of a policy is where you want it to be subcatagorized
+            self.parent = parent # The parent of a policy is where you want it to be sub-categorized
 
             if self.parent:
                 if not hasattr(self.parent, "children"): # Allow non- ModPolicy (normal Policy) class to be used as parents

@@ -39,7 +39,6 @@ init -1 python:
     def advance_time_collar_person_requirement():
         return collar_slave_action.enabled
 
-
 init 5 python:
     global crisis_chance
     global morning_crisis_chance
@@ -48,16 +47,14 @@ init 5 python:
     global morning_crisis_base_chance
 
     # some crisis events have impact on game dynamic and should be allowed to trigger often
-    excluded_crisis_tracker_events = [work_relationship_change_crisis, unisex_restroom_crisis_action, friends_help_friends_be_sluts_crisis]
-
-    crisis_base_chance = 8
-    morning_crisis_base_chance = 4
-
-    crisis_tracker = []
-    morning_crisis_tracker = []
+    crisis_base_chance = 20
+    morning_crisis_base_chance = 10
 
     crisis_chance = crisis_base_chance
     morning_crisis_chance = morning_crisis_base_chance
+
+    # some crisis events should always trigger (not tracked in crisis tracker and always available when is_action_enabled())
+    excluded_crisis_tracker_events = [work_relationship_change_crisis, so_relationship_improve_crisis, so_relationship_worsen_crisis]
 
     mandatory_advance_time = False
 
@@ -110,18 +107,51 @@ init 5 python:
 
     config.label_overrides["advance_time"] = "advance_time_enhanced"
 
+    def update_crisis_tracker(active_crisis_list):
+        for crisis in [x for x in active_crisis_list if x not in excluded_crisis_tracker_events]:
+            if not (crisis.effect in crisis_tracker_dict.keys()):
+                crisis_tracker_dict[crisis.effect] = 0
+        return
+
+    def find_next_crisis(active_crisis_list):
+        update_crisis_tracker(active_crisis_list)
+
+        # append excluded events to list
+        active_excluded_events = []
+        for ex_crisis in excluded_crisis_tracker_events:
+            if ex_crisis.is_action_enabled():
+                active_excluded_events.append(ex_crisis)
+
+        # get active events from crisis_tracker_dict (only those with lowest counter)
+        tracker_info = { key:value for (key,value) in crisis_tracker_dict.items() if key in [x.effect for x in active_crisis_list] }
+        key_list = [] # sometimes tracker_info is empty, to prevent error only choose from active_excluded_events
+        if tracker_info.items():
+            min_value =  min(tracker_info.items(), key=lambda x: x[1])[1]
+            key_list = [key for (key, value) in tracker_info.items() if value == min_value]
+
+        # add active events from exclusion list to possible events list
+        if len(key_list) == 0 or len(key_list) > len(active_excluded_events):
+            # when the key_list is getting smaller we are exhausting the possible crisis events
+            # if we keep adding the excluded items, they will start to occur more and more frequent (>50%)
+            # so we don't add them anymore, until we are back to a more comprehensive list of events
+            key_list.extend([x.effect for x in active_excluded_events])
+
+        random_crisis = get_random_from_list(key_list)
+        # renpy.say("", "Run Crisis [" + str(len(key_list)) +"]: " + random_crisis)
+        if random_crisis in crisis_tracker_dict.keys():
+            crisis_tracker_dict[random_crisis] += min_value + 1     # set to min_value +1 to prevent the event from triggering a lot (its count maybe low due to being disabled)
+        return find_in_list(lambda x: x.effect == random_crisis, active_crisis_list + active_excluded_events)
+
     def get_crisis_from_crisis_list():
         possible_crisis_list = []
         for crisis in crisis_list:
-            ic = [c[0] for c in crisis_list].index(crisis[0]) # get index of crisis
-            if not ic in crisis_tracker: # skip events in tracker list
-                if crisis[0].is_action_enabled(): #Get the first element of the weighted tuple, the action.
-                    possible_crisis_list.append(crisis) #Build a list of valid crises from ones that pass their requirement.
-        #renpy.random.shuffle(possible_crisis_list)    # shuffle the list in random order
+            if crisis[1] > 0 and crisis[0].is_action_enabled(): #Get the first element of the weighted tuple, the action.
+                possible_crisis_list.append(crisis[0]) #Build a list of valid crises from ones that pass their requirement.
 
+        return find_next_crisis(possible_crisis_list)
         #renpy.say("", str(len(possible_crisis_list)) + " - ".join((o[0].name) for o in possible_crisis_list))
 
-        return get_random_from_weighted_list(possible_crisis_list)
+        #return get_random_from_weighted_list(possible_crisis_list)
 
     def get_limited_time_action_for_person(person):
         possible_crisis_list = []
@@ -135,22 +165,12 @@ init 5 python:
     def get_morning_crisis_from_crisis_list():
         possible_morning_crises_list = []
         for crisis in morning_crisis_list:
-            ic = [c[0] for c in morning_crisis_list].index(crisis[0]) # get index of crisis
-            if not ic in morning_crisis_tracker: # skip events in tracker list
-                if crisis[0].is_action_enabled(): #Get the first element of the weighted tuple, the action.
-                    possible_morning_crises_list.append(crisis) # Build a list of valid crises from ones that pass their requirement.
+            if crisis[1] > 0 and crisis[0].is_action_enabled(): #Get the first element of the weighted tuple, the action.
+                possible_morning_crises_list.append(crisis[0]) # Build a list of valid crises from ones that pass their requirement.
+        
+        return find_next_crisis(possible_morning_crises_list)
         #renpy.random.shuffle(possible_morning_crises_list)    # shuffle the list in random order
-        return get_random_from_weighted_list(possible_morning_crises_list)
-
-    def cleanup_crisis_tracker():
-        while len(crisis_tracker) > 10: # release old tracked events
-            del crisis_tracker[0]
-        return
-
-    def cleanup_morning_crisis_tracker():
-        while len(morning_crisis_tracker) > 3: # release old tracked events
-            del morning_crisis_tracker[0]
-        return
+        #return get_random_from_weighted_list(possible_morning_crises_list)
 
     def build_people_to_process():
         people = [] #This is a master list of turns of need to process, stored as tuples [character,location]. Used to avoid modifying a list while we iterate over it, and to avoid repeat movements.
@@ -205,6 +225,12 @@ init 5 python:
             person.obedience = 130
         return
 
+label advance_time_move_to_next_day(no_events = True):
+    $ current_day = day
+    while day == current_day:
+        call advance_time_enhanced(no_events = no_events) from _call_advance_time_advance_time_move_to_next_day
+    return
+
 label advance_time_enhanced(no_events = False):
     # 1) Turns are processed _before_ the time is advanced.
     # 1a) crises are processed if they are triggered.
@@ -237,6 +263,7 @@ label advance_time_enhanced(no_events = False):
         x = None
         c = None
         people_to_process = []
+        person = None
 
     if mandatory_advance_time: #If a crisis has told us to advance time after it we do so.
         call advance_time from _call_advance_time_advance_time_enhanced
@@ -259,16 +286,13 @@ label advance_time_bankrupt_check_label():
 
 label advance_time_random_crisis_label():
     # "advance_time_random_crisis_label - timeslot [time_of_day]" #DEBUG
-    $ cleanup_crisis_tracker()
     $ the_crisis = get_crisis_from_crisis_list()
     if the_crisis:
         #$ mc.log_event("General [[" + str(len(possible_crisis_list)) + "]: " + the_crisis.name, "float_text_grey")
         $ crisis_chance = crisis_base_chance
-        if not the_crisis in excluded_crisis_tracker_events:
-            $ crisis_tracker.append([c[0] for c in crisis_list].index(the_crisis)) # add crisis index to recent crisis list
+        $ the_crisis.call_action()
         if _return == "Advance Time":
             $ mandatory_advance_time = True
-        $ the_crisis.call_action()
         $ del the_crisis
     $ mc.location.show_background()
     show screen business_ui
@@ -313,6 +337,9 @@ label advance_time_people_run_day_label():
     # "advance_time_people_run_day_label - timeslot [time_of_day]" # DEBUG
     #if time_of_day == 4: ##First, determine if we're going into the next chunk of time. If we are, advance the day and run all of the end of day code. NOTE: We can do checks like these with Action.requirements
     $ advance_time_run_day(people_to_process)
+    $ renpy.free_memory()
+    # $ renpy.profile_memory(.05, 16384)
+    $ renpy.block_rollback()
     return
 
 label advance_time_end_of_day_label():
@@ -324,7 +351,6 @@ label advance_time_end_of_day_label():
         # increase morning crisis chance (once a day)
         morning_crisis_chance += 2
         perk_system.update()  #TEST to see if this is a good time for this.
-        renpy.free_memory()
     return
 
 label advance_time_mandatory_morning_crisis_label():
@@ -357,13 +383,10 @@ label advance_time_mandatory_morning_crisis_label():
 
 label advance_time_random_morning_crisis_label():
     # "advance_time_random_morning_crisis_label  - timeslot [time_of_day]" #DEBUG
-    $ cleanup_morning_crisis_tracker()
     $ the_morning_crisis = get_morning_crisis_from_crisis_list()
     if the_morning_crisis:
         #$ mc.log_event("Morning: [[" + str(len(possible_morning_crises_list)) + "] : " +  the_morning_crisis.name, "float_text_grey")
         $ morning_crisis_chance = morning_crisis_base_chance
-        if not the_morning_crisis in excluded_crisis_tracker_events:
-            $ morning_crisis_tracker.append([c[0] for c in morning_crisis_list].index(the_morning_crisis)) # add crisis index to recent crisis list
         $ the_morning_crisis.call_action()
         if _return == "Advance Time":
             $ mandatory_advance_time = True

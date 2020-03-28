@@ -26,15 +26,12 @@ init 3 python:
         initialization = gym_initialization, menu_tooltip = "Bring a person to the gym to train their body.", category="Mall")
 
 label select_person_for_gym():
-    $ people_list = get_sorted_people_list(known_people_in_the_game([mc]), "Train with", ["Back"])
-
     if "build_menu_items" in globals():
-        call screen main_choice_display(build_menu_items([people_list]))
+        call screen main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game([mc]), "Train with", ["Back"])]))
     else:
-        call screen main_choice_display([people_list])
+        call screen main_choice_display([get_sorted_people_list(known_people_in_the_game([mc]), "Train with", ["Back"])])
+    
     $ person_choice = _return
-    $ del people_list
-
     if person_choice != "Back":
         "You send a text message to [person_choice.title] about a gym session."
         "After some time you get a response..."
@@ -97,11 +94,11 @@ label train_in_gym(person):
             $ person.draw_person(emotion="happy")
             "There is a subtle undertone in that remark that makes you smile."
         $ person.change_max_energy(5)
-        "She seems to be building up her endurance"
+        "She seems to be building up her endurance."
     elif change < 2.5:
         "You and [person.possessive_title] spend a few hours working out."
         $ person.change_max_energy(10)
-        "She seems to be building up her endurance"
+        "She seems to be building up her endurance."
     else:
         "You put [person.possessive_title] through a vigorous training session."
         if person.sluttiness > 20:
@@ -109,7 +106,7 @@ label train_in_gym(person):
             person.char "It seems you have plans with my body, [person.mc_title]."
             "If she only knew what dirty things you have her doing in your mind."
         $ person.change_max_energy(10)
-        "She seems to be building up her endurance"
+        "She seems to be building up her endurance."
 
     $ body_changed = person.change_weight(-change, 100)
     $ new_weight = get_person_weight_string(person)
@@ -128,7 +125,8 @@ label train_in_gym(person):
                     $ gym_shower.show_background()
 
                     "As soon as you get into the showers, [person.possessive_title] moves closer and starts kissing you."
-
+                    # intro breaks kissing taboo for person
+                    $ the_person.break_taboo("kissing")
                     call fuck_person(person, start_position = kissing, start_object = mc.location.get_object_with_name("floor"), skip_intro = True) from _call_fuck_person_gym_training
                     $ the_report = _return
                     if the_report.get("girl orgasms", 0) > 0:

@@ -6,7 +6,7 @@ init 2:   #Initial declaration made in init 0
         cunnilingus.scenes.append("scene_SB_Oral_Laying_2")
 
 
-label scene_SB_Oral_Laying_1(the_girl, the_location, the_object, the_round):
+label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
     # CHOICE CONCEPT: Finger Fuck // Tongue Fuck her
     # Intro concept. Short difference depending on if she's wet or not.
     if the_girl.outfit.has_creampie_cum():
@@ -92,9 +92,9 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object, the_round):
             if the_girl.outfit.has_ass_cum():
                 "As you lick her you notice that [the_girl.title] still has cum in her ass."
                 menu:
-                    "Ignore it.":
+                    "Ignore it":
                         "You decide to focus on her ass."
-                    "Suck it up.":
+                    "Suck it up":
                         "You start to gently lick around her asshole and then start to suck the cum out of her ass, gently at first but with increasing pressure."
                         $ the_girl.change_arousal(2 + the_girl.get_opinion_score("anal sex"))
                         "You go back to rimming [the_girl.possessive_title]."
@@ -182,7 +182,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object, the_round):
         "While you aren't being stimulated, [the_girl.possessive_title]'s gasps and breathing are starting to turn you on."
     return
 
-label scene_SB_Oral_Laying_2(the_girl, the_location, the_object, the_round):
+label scene_SB_Oral_Laying_2(the_girl, the_location, the_object):
     # CHOICE CONCEPT: Submit // Control her
     "[the_girl.possessive_title]'s hips are beginning to rock side to side, grinding against you as you lick her."
     "You feel her legs cross behind your back while she runs her hands through your hair. She starts to grind against you more aggresively."

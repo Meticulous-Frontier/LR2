@@ -8,7 +8,7 @@ init 2:
             yoffset 20
             spacing 200
             ysize 100
-            
+
             text mc.business.name style "textbutton_text_style" size 40 color "#cccccc"
 
         frame:
@@ -35,8 +35,10 @@ init 2:
                     xsize 800
                     $ salaray_costs = 0
                     if day % 7 > 1 and day % 7 < 6: # day count already changed before summary is shown
-                        $ salaray_costs = mc.business.calculate_salary_cost()                   
+                        $ salaray_costs = mc.business.calculate_salary_cost()
                     $ profit = mc.business.sales_made + starbuck.calc_investment_return() - salaray_costs - mc.business.supplies_purchased
+                    $ mc.business.listener_system.fire_event("daily_profit", profit = profit)
+                    $ mc.business.listener_system.fire_event("side_money", count = starbuck.calc_investment_return())
                     if profit > 0:
                         text "Profit: $" + str(profit)  style "textbutton_text_style" size 26 color "#00A000"
                     else:

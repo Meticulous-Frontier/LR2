@@ -27,7 +27,7 @@ init -1 python:
     def known_people_at_location(location, excluded_people = []):
         known_people = []
         for person in [x for x in location.people if not x in excluded_people]:
-            if person.mc_title != "Stranger":
+            if not (person.mc_title == "Stranger" or not person.title):
                 known_people.append(person)
         return known_people
 
@@ -40,7 +40,7 @@ init -1 python:
     def unknown_people_at_location(location, excluded_people = []):
         unknown_people = []
         for person in [x for x in location.people if not x in excluded_people]:
-            if person.mc_title == "Stranger":
+            if person.mc_title == "Stranger" or not person.title:
                 unknown_people.append(person)
         return unknown_people
 

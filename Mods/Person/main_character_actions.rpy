@@ -31,6 +31,9 @@ init 2 python:
 
     # Hire Person Requirements
     def mc_hire_person_requirement(person):
+        if mc.business.get_employee_count() >= mc.business.max_employee_count:
+            return "At employee limit."
+
         if person not in mc.business.get_employee_list() + unique_character_list:
             return True
         return False
@@ -164,27 +167,27 @@ label mc_hire_person_label(person):
 
     "You complete the necessary paperwork and hire [person.title]. What division do you assign them to?"
     menu:
-        "Research and Development.":
+        "Research and Development":
             $ mc.business.add_employee_research(person)
             $ mc.location.move_person(person, mc.business.r_div)
             $ person.set_work([1,2,3], mc.business.r_div)
 
-        "Production.":
+        "Production":
             $ mc.business.add_employee_production(person)
             $ mc.location.move_person(person, mc.business.p_div)
             $ person.set_work([1,2,3], mc.business.p_div)
 
-        "Supply Procurement.":
+        "Supply Procurement":
             $ mc.business.add_employee_supply(person)
             $ mc.location.move_person(person, mc.business.s_div)
             $ person.set_work([1,2,3], mc.business.s_div)
 
-        "Marketing.":
+        "Marketing":
             $ mc.business.add_employee_marketing(person)
             $ mc.location.move_person(person, mc.business.m_div)
             $ person.set_work([1,2,3], mc.business.m_div)
 
-        "Human Resources.":
+        "Human Resources":
             $ mc.business.add_employee_hr(person)
             $ mc.location.move_person(person, mc.business.h_div)
             $ person.set_work([1,2,3], mc.business.h_div)
@@ -245,7 +248,7 @@ label mc_start_follow_label(person):
     #if the_person.get_opinion_score("being submissive"):
 
     $ the_person.follow_mc = True
-    $ the_person.personality.get_dialogue(the_person, "seduction_accept_crowded")
+    $ the_person.call_dialogue("seduction_accept_crowded")
 
     return
 

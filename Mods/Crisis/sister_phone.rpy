@@ -176,6 +176,7 @@ label sister_phone_crisis_action_label:
                 $ the_person.draw_person(emotion = "default")
                 "[the_person.possessive_title] sends you a short video of herself walking around your home. Her bare tits bounce with each step."
                 the_person.char "You don't happen to know where it is, do you? I'm wandering around looking for it and it's getting chilly!"
+            $ the_clothing = None
 
     elif lowest_stat >= 20:
         #Sends you normal texts but talks about wanting to get away to talk to you instead

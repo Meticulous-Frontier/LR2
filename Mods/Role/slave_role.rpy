@@ -96,11 +96,11 @@ label slave_collar_person_label(the_person):
     return
 
 label wakeup_duty_label(the_person):
-
     "You tell [the_person.possessive_title] to make sure you wake up in the morning."
-    $ wakeup_duty_crisis = Action("Slave Alarm Clock", wakeup_duty_crisis_requirement, "slave_alarm_clock_label", the_person)
-    $ mc.business.mandatory_morning_crises_list.append(wakeup_duty_crisis)
-
+    python:
+        remove_mandatory_crisis_list_action("slave_alarm_clock_label")
+        wakeup_duty_crisis.args = [the_person]
+        mc.business.mandatory_morning_crises_list.append(wakeup_duty_crisis)
     return
 
 label slave_training_label(the_person): # TODO: Add variations to these. They are supposed to be rather short interactions that do not take up time. Both "rewards" and punishments should be available. Some characters might see certain "punishments" as rewards too.
@@ -108,21 +108,21 @@ label slave_training_label(the_person): # TODO: Add variations to these. They ar
 
         "Give her a head pat":
             "You give [the_person.possessive_title] a quick head pat as to signal approval of her actions." #Or something like that. I don't do writing.
-            $ the_person.change_stats(2, 2, 10, 2)
+            $ the_person.change_stats(obedience = 2, happiness = 2, arousal = 10, love = 2)
 
-        "Give her a quick kiss.":
+        "Give her a quick kiss":
             $ the_person.draw_person("kissing")
             "You give [the_person.possessive_title] a quick kiss"
-            $ the_person.change_stats(0, 2, 10, 5)
+            $ the_person.change_stats(happiness = 2, arousal = 10, love = 3)
 
-        "Give her a serum.":
-            $ the_person.change_stats(2)
+        "Give her a serum":
+            $ the_person.change_stats(obedience = 2)
             call give_serum(the_person) from _call_give_serum_slave_training
 
         "Increase submission" if the_person.get_opinion_score("being submissive") < 2:
             call increase_slave_submission_label(the_person) from _call_increase_slave_submission_slave_training
 
-        "Send her away.":
+        "Send her away":
             pass
 
     return
@@ -162,7 +162,7 @@ label slave_alarm_clock_label(the_person):
             $ the_person.draw_person(position = "walking_away")
             the_person.char "I'll find you a nice outfit to wear to save you some time. Go ahead [the_person.mc_title], pretend I'm not even here. It's nothing I haven't seen before."
             menu:
-                "Masturbate.":
+                "Masturbate":
                     "You pull your underwear down, grab your hard cock, and start to stroke it."
                     mc.name "Thanks [the_person.title], you're really helping me out this morning."
                     the_person.char "Anything to help you succeed."
@@ -173,12 +173,12 @@ label slave_alarm_clock_label(the_person):
                     "You're getting close when [the_person.possessive_title] turns around and walks back towards your bed with a handful of clothes."
                     the_person.char "I think you'll look really cute in this. Are you almost done [the_person.mc_title]?"
                     menu:
-                        "Order [the_person.possessive_title] to get on her knees." if the_person.obedience >= 130:
+                        "Order [the_person.possessive_title] to get on her knees" if the_person.obedience >= 130:
                             mc.name "I'm so close. Get on your knees [the_person.title]."
                             $ the_person.call_dialogue("sex_obedience_accept")
                             $ the_person.draw_person(position = "blowjob")
                             menu:
-                                "Order her to open her mouth." if the_person.obedience >= 140:
+                                "Order her to open her mouth" if the_person.obedience >= 140:
                                     mc.name "Open your mouth [the_person.title]."
                                     "She hesitates for a split second, then closes her eyes and opens her mouth."
                                     $ the_person.draw_person(position = "blowjob", special_modifier = "blowjob")
@@ -188,15 +188,14 @@ label slave_alarm_clock_label(the_person):
                                     "You slide forward a little, place the tip of your cock on her bottom lip, and start to fire your load into her mouth."
                                     "[the_person.possessive_title] stays perfectly still while you cum. When you're done you sit back and sigh."
                                     $ the_person.call_dialogue("cum_mouth")
-                                    $ the_person.change_obedience(5)
-                                    $ the_person.change_slut_temp(5)
+                                    $ the_person.change_stats(obedience = 5, slut_temp = 5)
                                     $ the_person.draw_person()
                                     "She stands up and heads for the door."
 
-                                "Order her to open her mouth.\nRequires: 140 Obedience (disabled)" if the_person.obedience < 140:
+                                "Order her to open her mouth\nRequires: 140 Obedience (disabled)" if the_person.obedience < 140:
                                     pass
 
-                                "Order her to hold up her tits." if the_person.has_large_tits():
+                                "Order her to hold up her tits" if the_person.has_large_tits():
                                     mc.name "Hold up your tits, I'm going to cum!"
                                     "[the_person.possessive_title] mumbles something but does as she's told. She cups her large breasts in her hands and presents them in front of you."
                                     "You grunt and climax, firing your load out and right onto [the_person.possessive_title]'s chest."
@@ -204,16 +203,16 @@ label slave_alarm_clock_label(the_person):
                                     #TODO: have more clothing aware stuff here
                                     $ the_person.call_dialogue("cum_face")
                                     $ the_person.draw_person()
-                                    $ the_person.change_obedience(3)
-                                    $ the_person.change_slut_temp(5)
+                                    $ the_person.change_stats(obedience = 3, slut_temp = 5)
+
                                     # TODO: She should seem a little shocked, but otherwise okay with how things turned out
                                 "Continue": # An escape if you get locked since obedience is less than 140 and has_large_tits() is false. #NOTE: Can write other alternatives
                                     pass
 
-                        "Order her to get on her knees.\nRequires: 130 Obedience (disabled)" if the_person.obedience < 130:
+                        "Order her to get on her knees\nRequires: 130 Obedience (disabled)" if the_person.obedience < 130:
                             pass
 
-                        "Climax.":
+                        "Climax":
                             "Knowing that [the_person.possessive_title] is just a step away watching you stroke your cock and waiting for you to cum pushes you over the edge."
                             "You grunt and climax, firing your load out in an arc. [the_person.title] gasps softly and watches it fly, looks away."
                             the_person.char "Well done [the_person.mc_title]. I'll make sure to clean that up while you're out today."
@@ -222,7 +221,7 @@ label slave_alarm_clock_label(the_person):
                             $ renpy.scene("Active")
 
 
-                "Ask her to leave.":
+                "Ask her to leave":
                     mc.name "I think it will take care of itself [the_person.title]. Thanks for the offer but I can pick out my own outfit."
                     the_person.char "Oh, okay [the_person.mc_title]. Just make sure don't give any of those nice girls you work with a shock when you walk in."
                     $ the_person.draw_person()
@@ -243,7 +242,7 @@ label slave_alarm_clock_label(the_person):
         the_person.char "Anything for you [the_person.mc_title], I just want to make sure you're happy and successful."
         "After a few minutes you can feel your orgasm starting to build. [the_person.title] rubs your precum over your shaft and keeps stroking."
         menu:
-            "Order her to take your cum in her mouth." if the_person.obedience >= 130:
+            "Order her to take your cum in her mouth" if the_person.obedience >= 130:
                 mc.name "I'm almost there [the_person.title], I need to cum in your mouth."
                 $ the_person.change_obedience(5)
                 $ the_person.call_dialogue("sex_obedience_accept")
@@ -253,7 +252,7 @@ label slave_alarm_clock_label(the_person):
                 "[the_person.title] pulls back off your cock slowly. She spits your cum out into her hand and straightens up."
                 $ the_person.call_dialogue("cum_mouth")
 
-            "Order her to take your cum in her mouth.\nRequires: 130 Obedience (disabled)" if the_person.obedience<130:
+            "Order her to take your cum in her mouth\nRequires: 130 Obedience (disabled)" if the_person.obedience<130:
                 pass
             "Climax":
                 mc.name "I'm almost there [the_person.title], keep going!"
@@ -262,9 +261,7 @@ label slave_alarm_clock_label(the_person):
                 "[the_person.possessive_title] strokes you slowly for a few seconds, then lets go and places her hand on her lap while you take a second to recover."
 
         the_person.char "Whew, that was a lot. I hope that leaves you feeling relaxed for the rest of the day."
-        $ the_person.change_love(2)
-        $ the_person.change_slut_temp(5)
-        $ the_person.change_happiness(5)
+        $ the_person.change_stats(love = 2, happiness = 5, slut_temp = 5)
         $ the_person.draw_person(position = "back_peek")
         "She smiles and gets up. She pauses before she leaves your room."
         the_person.char "You better get ready now or you're going to be late!"
@@ -294,7 +291,7 @@ label slave_alarm_clock_label(the_person):
         "She pulls back until the tip of your cock is just inside her lips and holds there, collecting each new spurt of semen until you're completely spent."
         "When you're done she pulls up and off, keeping her lips tight to avoid spilling any onto you."
         menu:
-            "Order her to swallow." if the_person.obedience >= 130:
+            "Order her to swallow" if the_person.obedience >= 130:
                 mc.name "That was great [the_person.title], now I want you to swallow."
                 "She looks at you and hesitates for a split second, then you see her throat bob as she sucks down your cum."
                 $ the_person.change_obedience(5)
@@ -302,17 +299,16 @@ label slave_alarm_clock_label(the_person):
                 $ the_person.call_dialogue("cum_mouth")
 
 
-            "Order her to swallow.\nRequires: 130 Obedience (disabled)" if the_person.obedience < 130:
+            "Order her to swallow\nRequires: 130 Obedience (disabled)" if the_person.obedience < 130:
                 pass
 
-            "Let her spit it out.":
+            "Let her spit it out":
                 $ the_person.draw_person(position = "sitting")
                 "You watch as she slides her legs off the side of your bed, holds out a hand, and spits your cum out into it."
 
         the_person.char "Whew, I'm glad I was able to help with that [the_person.mc_title]. That was a lot more than I was expecting."
         mc.name "Thanks [the_person.title], you're the best."
-        $ the_person.change_love(2)
-        $ the_person.change_slut_temp(5)
+        $ the_person.change_stats(love = 2, slut_temp = 5)
         the_person.char "My pleasure, now you should be getting up or you'll be late for work!"
 
 
@@ -328,10 +324,9 @@ label slave_alarm_clock_label(the_person):
         "She grinds her hips back and forth, rubbing your shaft along the lips of her cunt."
         the_person.char "Would you like me to take care of this for you?"
         menu:
-            "Let [the_person.possessive_title] fuck you.":
+            "Let [the_person.possessive_title] fuck you":
                 mc.name "That would be great [the_person.title]."
-                $ the_person.change_happiness(5)
-                $ the_person.change_love(2)
+                $ the_person.change_stats(happiness = 5, love = 2)
                 "You lie back relax as [the_person.possessive_title] lowers herself down onto your hard cock."
                 call fuck_person(the_person, start_position = cowgirl, start_object = bedroom.get_object_with_name("bed"), skip_intro = True, girl_in_charge = True, position_locked = True) from _slave_alarm_clock_label_2
                 $ the_report = _return
@@ -347,10 +342,9 @@ label slave_alarm_clock_label(the_person):
                     "[the_person.possessive_title] kisses you on the forehead and stands up arms behind her back."
                 $ the_person.review_outfit()
 
-            "Ask her to get off.":
+            "Ask her to get off":
                 mc.name "Sorry [the_person.title], but I need to save my energy for later today."
-                $ the_person.change_happiness(-3)
-                $ the_person.change_obedience(5)
+                $ the_person.change_stats(obedience = 5, happiness = -3)
                 "She frowns but nods. She swings her leg back over you and stands up."
                 $ the_person.draw_person()
                 the_person.char "Of course [the_person.mc_title], if you need me for anything just let me know. I hope you aren't running too late!"
@@ -364,7 +358,7 @@ label slave_alarm_clock_label(the_person):
 
     call slave_training_label(the_person) from _call_slave_training_slave_alarm_clock_label
 
-    # At the end we would want the "Slave" to be in the room and interactable after the crisis event. Moving them during the event causes issues with scheduled destinations on run_move
+    # At the end we would want the "Slave" to be in the room and intractable after the crisis event. Moving them during the event causes issues with scheduled destinations on run_move
     $ renpy.scene("Active")
     return
 
@@ -373,12 +367,12 @@ label increase_slave_submission_label(the_person):
     "[the_person.possessive_title] looks at you, meekly nods and drops to her knees."
     $ the_person.draw_person(position = "kneeling1")
 
-    mc.name "[the_person.title], i sense you have not yet completely accepted me as your master."
+    mc.name "[the_person.title], I sense you have not yet completely accepted me as your master."
     "[the_person.possessive_title] starts to shake her head, but you simply hold up your hand to stop her before she starts."
     mc.name "Do you want to be my devoted and loyal slave?"
     if the_person.obedience < 200:
         "She looks at you intently..."
-        the_person.char "No Master, i've got other duties that prevent that."
+        the_person.char "No Master, I've got other duties that prevent that."
         mc.name "It seems you need a punishment for this insolence."
         if not the_person.outfit.vagina_visible():
             mc.name "Take off your clothes and bend over against the desk."
@@ -390,16 +384,39 @@ label increase_slave_submission_label(the_person):
         $ the_person.change_stats(arousal = 10)
         "Suddenly you pull you hand back and start giving her the spanking she deserves."
         "SMACK! SMACK! SMACK!"
-        the_person.char "Please Master...OUCH, i'll try to obey...AH...your wishes...OW, please...YELP...let me...OUCH...prove it to you...AW."
-        mc.name "Very well, Slave, see that you do, I won't be so forgiving next time."
+        the_person.char "Please Master...OUCH, I'll try to obey...AH...your wishes...OW, please let me...OUCH...prove it to you...AW..."
+        mc.name "Be quiet, slave and take your punishment with pride."
+        "You keep on punishing her for another minute, while she tries to stifle her cries."
+        mc.name "Very well, slave, I will be demanding your complete submission next time."
         $ the_person.draw_person(position = "stand2", emotion = "angry")
         $ the_person.change_obedience(10)
-        "She turns around with a defiant stare..."
-        the_person.char "Yes Master, i will try to please you better next time."
+        if the_person.obedience < 200:
+            "She turns around with a slight defiant stare..."
+        else:
+            "She turns around, with a faint smile and devotion in her eyes."
+            $ the_person.change_stats(arousal = 20)
+        the_person.char "Yes Master, I will try to please you better next time."
     else:
         "She looks at you with tears in her eyes."
         the_person.char "Yes Master, I want to serve you as a good slave should, unconditionally and loyal."
+        $ the_person.change_stats(happiness = 10, love = 10, arousal = 30)
         "You smile and pat her on the head."
         $ the_person.sexy_opinions["being submissive"] = [2, True]
-        $ the_person.change_stats(happiness = 10, love = 10, arousal = 10)
+        if not the_person.outfit.full_access():
+            mc.name "Now standup and take of your clothes."
+            $ the_person.strip_outfit(position = "stand3", emotion = "happy")
+            $ the_person.change_stats(obedience = 2, arousal = 10)
+        mc.name "I think you deserve a reward, get on your hands and knees, like a good little pet."
+        $ the_person.change_stats(obedience = 3, arousal = 10)
+        the_person.char "Yes Master, as you command."
+        $ the_person.draw_person(position = "doggy")
+        $ mc.change_arousal(40) # make the fuck loop a little shorter
+        "You pull out your hard cock and shove it right into her ass."
+        call fuck_person(the_person, start_position = doggy_anal, start_object = make_floor(), skip_intro = True, position_locked = True, affair_ask_after = False)
+        $ the_report = _return
+        if the_report.get("girl orgasms", 0) > 0:
+            the_person.char "Thank you Master, for giving me such satisfaction."
+        else:
+            the_person.char "Thank you Master, for allowing me to satisfy you."
+        $ the_person.review_outfit(dialogue = False)
     return

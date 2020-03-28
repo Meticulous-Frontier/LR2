@@ -142,7 +142,7 @@ label family_morning_breakfast_enhanced_label():
             $ scene_manager.update_actor(mom, position = "stand3")
             mom.char "What do you think [mom.mc_title], do you think it's \"weird\" for your mother to want to be comfortable in her own house?"
             menu:
-                "Side with Mom.":
+                "Side with Mom":
                     mc.name "I think Mom's right [lily.title]. It's nothing we haven't seen before, she's just trying to relax on her days off."
                     $ mom.change_obedience(-5)
                     $ lily.change_obedience(5)
@@ -154,7 +154,7 @@ label family_morning_breakfast_enhanced_label():
                     $ mom.change_happiness(10)
 
 
-                "Side with [lily.title].":
+                "Side with [lily.title]":
                     mc.name "I actually think [lily.title] is right, this is a little weird. Could you go put something on, for our sakes?"
                     $ lily.change_stats(obedience = -2, slut_temp = 2)
                     $ mom.change_stats(obedience = 5, slut_temp = 5)

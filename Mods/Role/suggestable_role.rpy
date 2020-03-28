@@ -13,7 +13,7 @@ init 2 python: # Define actions and requirements for the actual mod here.
     influence_opinion_action = Action("Influence an opinion", influence_opinion_requirement, "influence_opinion_label",
         menu_tooltip = "Influence a persons opinion regarding a specific topic")
 
-    suggestable_role = Role("Suggestable", [influence_opinion_action])
+    suggestable_role = Role("Suggestible", [influence_opinion_action])
 
 # Actions for the receptive role in suggestable_role.rpy
 
@@ -74,7 +74,7 @@ label influence_opinion_label(person): #Input a custom opinion, check if they ha
         "Speaker" "Making her more suggestible might help you out."
 
     $ person.special_role.remove(suggestable_role)
-    $ mc.log_event((person.title or person.name) + " is no longer suggestable.", "float_text_blue")
+    $ mc.log_event((person.title or person.name) + " is no longer suggestible.", "float_text_blue")
 
     $ renpy.scene("Active")
     return

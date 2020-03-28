@@ -6,7 +6,7 @@ init 1400 python:
             valid_possessive_titles.append("My intimate stylist")
         return valid_possessive_titles
 
-    salon_manager_personality = Personality("salon_manager", default_prefix = "wild", #Based on wild style personality
+    salon_manager_personality = Personality("salon_manager", default_prefix = "relaxed", #Based on wild style personality
         common_likes = ["skirts", "small talk", "the weekend", "the colour purple", "makeup", "hiking", "flirting"],
         common_sexy_likes = ["doggy style sex", "giving blowjobs", "getting head", "anal sex", "public sex", "skimpy outfits", "anal creampies", "showing her tits", "showing her ass", "being submissive", "creampies", "drinking cum", "cum facials"],
         common_dislikes = ["Mondays", "the colour yellow", "supply work", "conservative outfits", "work uniforms", "pants"],

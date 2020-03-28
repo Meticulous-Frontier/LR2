@@ -1,12 +1,10 @@
-init 2:   #Initial declaration made in init 0
-    python:
-        doggy_anal.scenes.append("scene_SB_doggy_anal_1")
-        doggy_anal.scenes.append("scene_SB_doggy_anal_2")
+init 5 python:
+    doggy_anal.scenes.append("scene_SB_doggy_anal_1")
+    doggy_anal.scenes.append("scene_SB_doggy_anal_2")
 
+    doggy_anal.transition_default = "transition_default_doggy_anal_enhanced"
 
-
-
-label scene_SB_doggy_anal_1(the_girl, the_location, the_object, the_round):
+label scene_SB_doggy_anal_1(the_girl, the_location, the_object):
     "You give [the_girl.possessive_title]'s ass a good hard spank. She lets out a loud yelp."
     $ the_girl.call_dialogue("sex_responses_anal")
     if the_girl.sex_skills["Anal"] < 2: #Inexperienced
@@ -102,7 +100,7 @@ label scene_SB_doggy_anal_1(the_girl, the_location, the_object, the_round):
     return
 
 
-label scene_SB_doggy_anal_2(the_girl, the_location, the_object, the_round):
+label scene_SB_doggy_anal_2(the_girl, the_location, the_object):
     "[the_girl.possessive_title] lowers her shoulders against the [the_object.name] and groans as you fuck her from behind."
     the_girl.char "Ah... I feel so full!"
     "You reach forward and place your hands on [the_girl.possessive_title]'s shoulders. With each thrust you pull her back onto you forcefully, your hips smacking her ass cheeks loudly. She arches her back and lets out a series of satisfied yelps."
@@ -182,4 +180,28 @@ label scene_SB_doggy_anal_2(the_girl, the_location, the_object, the_round):
                 "You take a few seconds to enjoy being engulfed by her back passage, then give her a few slow, probing thrusts."
                 "After a minute or two slow, deep thrusts you decide to move back to doggy. You push yourself up off of [the_girl.possessive_title]'s back, and she follows, getting on all fours again to resume your fucking."
 
+    return
+
+label transition_default_doggy_anal_enhanced(the_girl, the_location, the_object):
+    "[the_girl.title] gets on her hands and knees as you kneel behind her. You bounce your hard shaft on her ass a couple of times before lining yourself up with tight asshole."
+    mc.name "Ready?"
+    the_girl.char "I... I think so."
+    "You hold onto her hips and push forward, spreading her ass with your large cock. She gasps and balls her fists, until finally you've buried your shaft in her."
+    "After giving her a second to acclimatize you start to thrust in and out, slowly at first but picking up speed."
+    return
+
+# slightly modified dialog for when going the other way (she doesn't need to get on her hand and knees anymore)
+label transition_anal_doggy_to_doggy_taboo_break_label(the_girl, the_location, the_object):
+    the_girl.char "Are you enjoying pounding my tight asshole?"
+    "You slide your cock out of her ass and drag it down between her legs, ending with your tip resting against her pussy."
+    mc.name "No, this is what I really want."
+    $ the_girl.call_dialogue(doggy.associated_taboo+"_taboo_break")
+    "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you push forward."
+    "After a moment of resistance your cock spreads her pussy open and you slide smoothly inside of her."
+    if the_girl.sex_skills["Vaginal"] > 2:
+        the_girl.char "Oh god yes.... keep sliding that monster into me...."
+        "You ram your whole length into her wet pussy and start pounding her."
+    else:
+        the_girl.char "Oh god... take it slow... "
+        "You give her short thrusts, each time going a little bit deeper. Soon you're working your full length in and out of her wet hole."
     return

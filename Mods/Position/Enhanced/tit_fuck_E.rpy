@@ -5,7 +5,7 @@ init 2:   #Initial declaration made in init 0
 
 
 #The first position label
-label scene_SB_Titfuck_Kneeling_1(the_girl, the_location, the_object, the_round):
+label scene_SB_Titfuck_Kneeling_1(the_girl, the_location, the_object):
 
     "[the_girl.possessive_title] sticks her tongue out and licks at the tip of your dick each time she moves her body down."
     "She moans slightly as she pauses to stroke you with her soft, velvet lips. She gets your shaft nice and wet and then continues heaving her chest up and down."
@@ -26,7 +26,7 @@ label scene_SB_Titfuck_Kneeling_1(the_girl, the_location, the_object, the_round)
     return
 
 #The second position label
-label scene_SB_Titfuck_Kneeling_2(the_girl, the_location, the_object, the_round):
+label scene_SB_Titfuck_Kneeling_2(the_girl, the_location, the_object):
     "You run your hand through [the_girl.title]'s hair while she bounces her mammaries up and down."
     "You move your hand down to her shoulder and grasp it firmly, stopping her motion. You begin to buck your hips, giving her a break from her motions."
     "Her hands move to your ass, and you can feel her gently urging you as you thrust up against her."

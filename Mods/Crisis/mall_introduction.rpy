@@ -3,17 +3,23 @@ init -1 python:
     mall_introduction_weight = 5
 
 init 2 python:
+    def get_mall_locations():
+        locations = [mall, gym, home_store, clothing_store, sex_store]
+        if "mall_salon" in globals():
+            locations.append(mall_salon)
+        return locations
+
     def mall_introduction_get_people_with_status():
         strangers = []
         known_people = []
-        for loc in [mall, mall_salon, gym, home_store, clothing_store, sex_store]:
+        for loc in get_mall_locations():
             strangers += unknown_people_at_location(loc, unique_character_list) # don't introduce unique characters
             known_people += known_people_at_location(loc)
         return strangers, known_people
 
     def mall_introduction_requirement():
         if time_of_day > 0 and time_of_day < 4: # only during morning afternoon or evening
-            if mc.location in [mall, mall_salon, gym, home_store, clothing_store, sex_store]:
+            if mc.location in get_mall_locations():
                 strangers, known_people = mall_introduction_get_people_with_status()
                 if len(strangers) > 0 and len(known_people) > 0:
                     return True

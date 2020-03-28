@@ -52,24 +52,26 @@ init -1 python:
         def toggle_enabled(self):
             self.enabled = not self.enabled
             if self.enabled:
-                if not self in list_of_traits:
+                found = find_in_list(lambda x: x.hash() == self.hash(), list_of_traits)
+                if not found:
                     list_of_traits.append(self)
             else:
-                if self in list_of_traits:
-                    list_of_traits.remove(self)
+                found = find_in_list(lambda x: x.hash() == self.hash(), list_of_traits)
+                if found:
+                    list_of_traits.remove(found)
 
 init 2 python:
     def initialize_serum_mod_traits():
         # check if SerumMod class is already in the game append if needed and update serum_mod_list / list_of_traits list
         for serum_mod in SerumTraitMod._instances:
             if not serum_mod in serum_mod_list:
-                serum_mod_list.append(serum_mod)
+                serum_mod_list.add(serum_mod)
                 serum_mod.toggle_enabled()
 
-        remove_list = []
+        remove_list = set()
         for serum_mod in serum_mod_list:
             if serum_mod not in SerumTraitMod._instances:
-                remove_list.append(serum_mod)
+                remove_list.add(serum_mod)
 
         # remove serum mods not in instance list
         for serum_mod in remove_list:
@@ -87,7 +89,7 @@ init 2 python:
 
 
 label activate_serum_mod_core(stack):
-    $ serum_mod_list = []
+    $ serum_mod_list = set()
     python:
         stack = append_serum_mods_to_stack(stack)
 
@@ -107,16 +109,14 @@ label update_serum_mod_core(stack):
             unmodded = True
 
         # extra check to validate that serum mod list exists correctly
-        if not unmodded and not isinstance(serum_mod_list, list):
+        if not unmodded and not isinstance(serum_mod_list, set):
             unmodded = True
 
     if unmodded:
-        $ serum_mod_list = []
+        $ serum_mod_list = set()
 
     python:
         stack = append_serum_mods_to_stack(stack)
-
-        
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)

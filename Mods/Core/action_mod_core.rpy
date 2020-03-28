@@ -96,19 +96,6 @@ init 2 python:
 
             ActionMod._instances.add(self)
 
-        def __cmp__(self,other):
-            if isinstance(other, Action):
-                if self.effect == other.effect:
-                    return 0
-
-            if self.__hash__() < other.__hash__():
-                return -1
-            else:
-                return 1
-
-        def __hash__(self):
-            return hash(self.effect)
-
         def initialize(self):
             if not self.initialization is None:
                 self.initialization(self)
