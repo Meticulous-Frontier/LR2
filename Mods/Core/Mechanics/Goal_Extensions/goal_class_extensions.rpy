@@ -27,15 +27,18 @@ init -1 python:
             found = find_in_list(lambda x: x.hash() == self.hash(), the_list)
             if not found:
                 the_list.append(the_goal)
+                the_goal.enabled = True
 
         def disable_in_list(the_goal, the_list):
+            if len(the_list) < 3: # minimum of two active items
+                return
             found = find_in_list(lambda x: x.hash() == self.hash(), the_list)
             if found:
                 the_list.remove(found)
+                the_goal.enabled = False
 
-        self.enabled = not self.enabled
         #renpy.notify(self.name + " is now [" + str(hex(id(self))) + "] :" + str(self.enabled))
-        if self.enabled:
+        if not self.enabled:
             if self in stat_goals_options_list:
                 enable_in_list(self, stat_goals)
             if self in work_goals_options_list:

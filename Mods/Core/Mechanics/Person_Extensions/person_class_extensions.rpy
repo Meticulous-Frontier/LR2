@@ -863,6 +863,18 @@ init -1 python:
     Person.cum_on_stomach = cum_on_stomach_enhanced
     Person.cum_on_ass = cum_on_ass_enhanced
 
+######################################
+# Override give serum for added goal #
+######################################
+
+    def give_serum_enhanced(self,the_serum_design, add_to_log = True): ##Make sure you are passing a copy of the serum, not a reference.
+        mc.listener_system.fire_event("give_random_serum", the_person = self)
+        self.serum_effects.append(the_serum_design)
+        the_serum_design.run_on_apply(self, add_to_log)
+
+    Person.give_serum = give_serum_enhanced
+
+
 #######################################
 # HELPER METHODS FOR CLASS EXTENSIONS #
 #######################################
