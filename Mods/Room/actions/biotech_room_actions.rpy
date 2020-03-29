@@ -24,7 +24,7 @@ init 3 python:
         hypothyroidism = find_in_list(lambda x: x.name == hypothyroidism_serum_trait.name, list_of_traits)
         anorexia = find_in_list(lambda x: x.name == anorexia_serum_trait.name, list_of_traits)
 
-        if not hypothyroidism is None and not anorexia is None and hypothyroidism.researched and anorexia.researched:
+        if mc.business.is_trait_researched(hypothyroidism_serum_trait) and mc.business.is_trait_researched(anorexia_serum_trait):
             return True
         else:
             return "Requires: [hypothyroidism_serum_trait.name] and [anorexia_serum_trait.name] researched"
@@ -34,8 +34,7 @@ init 3 python:
     biotech_body_modifications.append(biotech_change_body)
 
     def biotech_change_skin_requirement():
-        pigment = find_in_list(lambda x: x.name == pigment_serum_trait.name, list_of_traits)
-        if not pigment is None and pigment.researched:
+        if mc.business.is_trait_researched(pigment_serum_trait):
             return True
         else:
             return "Requires: [pigment_serum_trait.name] researched"
@@ -52,7 +51,7 @@ init 3 python:
     biotech_body_modifications.append(biotech_change_face)
 
     def biotech_change_breasts_requirement():
-        if breast_enhancement.researched and breast_reduction.researched:
+        if mc.business.is_trait_researched(breast_enhancement):
             return True
         else:
             return "Requires: [breast_enhancement.name] and [breast_reduction.name]"
