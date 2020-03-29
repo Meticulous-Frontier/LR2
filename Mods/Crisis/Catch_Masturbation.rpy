@@ -230,7 +230,6 @@ label SB_caught_masturbating_crisis_label():
                             "You quickly pull your pants down. [the_person.possessive_title] is wiggling her ass back and forth, waiting for you."
                             "You rub the tip of your penis against [the_person.possessive_title]'s cunt. She is already soaking wet."
                             "When you're ready you push forward, slipping your shaft deep inside of [the_person.possessive_title]. She moans and quivers as you start to pump in and out."
-                            $ stealth_orgasm = False   
                             call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True) from _call_sex_sb_event_masturbation_010
                             $ the_report = _return
                             if the_report.get("girl orgasms", 0) > 1:

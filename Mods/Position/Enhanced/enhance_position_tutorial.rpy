@@ -7,11 +7,8 @@ init 2:     #This init must be a later number than the original position declara
         doggy.scenes.append("doggy_stealth_attempt")    #Adding to doggy.scenes gives a new scene that could be randomly selected
         stealth_orgasm = False                          #Create a new variable to find out if orgasm was stealthed
         doggy.outro = "outro_stealth_doggy"             #Completely replace the orgasm scene
-        doggy.intro = "intro_stealth_doggy"             #Rewrite intro to make sure stealth_orgasm = False so we don't have weird dialogue in follow up sessions
-
 
         doggy_anal.transitions.remove([doggy,"transition_doggy_anal_doggy"])
-
         doggy_anal.transitions.append([doggy,"transition_stealth_doggy_anal_doggy"])
         #Other variables we could change to enhance the position
 
@@ -20,25 +17,6 @@ init 2:     #This init must be a later number than the original position declara
         # doggy.orgasm_description = "orgasm_doggy"       #change her orgasm in some way
         # doggy.girl_energy = 14                          #Change energy requirements
         # doggy.guy_energy = 20                           #Change energy requirements
-
-#We redefine intro because stealth_orgasm could be set to true from a previous sex encounter if we swapped positions before finishing
-label intro_stealth_doggy(the_girl, the_location, the_object):
-    $ stealth_orgasm = False   #This is the only change made from the existing intro.
-    mc.name "[the_girl.title], I want you to get on your hands and knees for me."
-    if the_girl.effective_sluttiness() > 100:
-        the_girl.char "I want you inside of me so badly..."
-    elif the_girl.effective_sluttiness() > 80:
-        the_girl.char "Mmm, you know just what I like [the_girl.mc_title]."
-    else:
-        the_girl.char "Like this?"
-    "[the_girl.title] gets onto all fours in front of you on the [the_object.name]. She wiggles her ass impatiently at you as you get your hard cock lined up."
-    if the_girl.arousal > 60:
-        "You rub the tip of your penis against [the_girl.title]'s cunt, feeling how nice and wet she is already. She moans softly when you slide the head of your dick over her clit."
-    else:
-        "You rub the tip of your penis against [the_girl.title]'s cunt, getting ready to slide yourself inside."
-    "When you're ready you push forward, slipping your shaft deep inside of [the_girl.possessive_title]. She gasps and quivers ever so slightly as you start to pump in and out."
-    return
-
 
 label doggy_stealth_attempt(the_girl, the_location, the_object):  #Write the new scene here
     "[the_girl.possessive_title] moans, clearly enjoying herself as your cock hits all the right places."

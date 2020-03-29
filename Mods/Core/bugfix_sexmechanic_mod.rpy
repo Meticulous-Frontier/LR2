@@ -190,6 +190,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     $ guy_orgasms_before_control = 0
     $ ask_for_condom = asked_for_condom
     $ use_condom = mc.condom if asked_for_condom else False
+    $ stealth_orgasm = False
 
     # $ renpy.say("", "Fuck Person Enhanced => start position: " + ("None" if start_position is None else start_position.name) + " , object: " + ("None" if start_object is None else start_object.name))
     $ apply_sex_modifiers(the_person)
