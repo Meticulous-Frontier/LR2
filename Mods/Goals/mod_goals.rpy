@@ -32,7 +32,7 @@ init 2 python:
         if the_goal.arg_dict["required"] > 3000:
             the_goal.arg_dict["required"]  = 3000
 
-    def HR_interview_count_function(the_goal):
+    def HR_interview_count_function(the_goal, the_person):
         the_goal.arg_dict["count"] += 1
         if the_goal.arg_dict["count"] >= the_goal.arg_dict["required"]:
             return True
