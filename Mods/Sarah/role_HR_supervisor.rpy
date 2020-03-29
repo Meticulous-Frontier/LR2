@@ -689,7 +689,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
 label HR_director_review_discoveries_label(the_person):
     "[the_person.title] pulls out a report on all the latest achievements of the research department."
     if get_HR_director_tag("business_HR_serum_tier", 0) == 0:
-        if off_label_drugs.researched: #Researched!
+        if mc.business.is_trait_researched(off_label_drugs): #Researched!
             $ set_HR_director_tag("business_HR_serum_tier", 1)
             the_person.char "Hmmm... interesting."
             "[the_person.title] looks closely at one of the serums that has been researched."
@@ -703,7 +703,7 @@ label HR_director_review_discoveries_label(the_person):
             the_person.char "Sounds good [the_person.mc_title]!"
 
     if get_HR_director_tag("business_HR_serum_tier", 0) == 1:
-        if blood_brain_pen.researched: #Researched!
+        if mc.business.is_trait_researched(blood_brain_pen): #Researched!
             $ set_HR_director_tag("business_HR_serum_tier", 2)
             the_person.char "Hmmm... interesting."
             "[the_person.title] looks closely at one of the serums that has been researched."
@@ -723,7 +723,7 @@ label HR_director_review_discoveries_label(the_person):
                 the_person.char "Sounds good [the_person.mc_title]!"
 
     if get_HR_director_tag("business_HR_serum_tier", 0) == 2:
-        if mind_control_agent.researched: #Researched
+        if mc.business.is_trait_researched(mind_control_agent): #Researched
             $ set_HR_director_tag("business_HR_serum_tier", 3)
             the_person.char "Wow... this is crazy."
             "[the_person.title] looks closely at one of the serums that has been researched."
@@ -739,7 +739,7 @@ label HR_director_review_discoveries_label(the_person):
 
     if the_person is sarah:
         if get_HR_director_tag("business_HR_serum_breast", False)  == False:
-            if breast_enhancement.researched: #Researched!
+            if mc.business.is_trait_researched(breast_enhancement): #Researched!
                 $ set_HR_director_tag("business_HR_serum_breast", True)
                 "Suddenly, [the_person.title] sits straight up in her chair as she reads the report."
                 the_person.char "Wait wait... you managed to synthesize a serum that can increase breast size?"

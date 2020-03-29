@@ -46,3 +46,11 @@ init -1 python:
             self.serum_production_array[production_line] = [new_serum, int(production_max - self.get_used_line_weight()), 0, -1]
 
     Business.change_production = change_production_enhanced
+
+    def is_trait_researched(self, trait):
+        research_trait = find_in_list(lambda x: x.name == trait.name, list_of_traits)
+        if research_trait:
+            return research_trait.researched
+        return False
+
+    Business.is_trait_researched = is_trait_researched
