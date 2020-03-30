@@ -121,64 +121,64 @@ label scene_SB_doggy_anal_2(the_girl, the_location, the_object):
         "[the_girl.possessive_title] reaches back with both hands and spreads her ass cheeks apart."
     "With her ass cheeks spread, you consider for a moment, should you pull back and admire the view, or shove yourself down deep?"
     menu:
-            "Admire her ass":
-                "You pull yourself out of [the_girl.possessive_title]'s ass for moment and admire the soft, round cheeks of carnal pleasure in front of you."
-                "Her asshole gapes a bit from your sudden pullout, and she quickly turns her head to see why she suddenly feels so empty."
-                "[the_girl.possessive_title] realizes you are taking a moment to check out her backside."
-                if the_girl.get_opinion_score("showing her ass"):
-                    the_girl.char "Do you like my ass, [the_girl.mc_title]? I've caught you checking it out before. It gets me so hot when I feel your eyes checking out my backside..."
-                    $ the_girl.change_arousal(the_girl.get_opinion_score("showing her ass" * 5))###
-                    $ the_girl.discover_opinion("showing her ass")
-                    "[the_girl.possessive_title] moves her ass side to side, gyrating her hips for you while keeping her ass cheeks spread wide."
-                elif the_girl.get_opinion_score("being covered in cum"):
-                    the_girl.char "Do you like what you see, [the_girl.mc_title]? I bet it is going to look even more amazing covered in your hot cum."
-                    $mc.change_arousal(5)
-                    "The thought of painting [the_girl.possessive_title]'s ass with your semen makes your cock twitch in anticipation."
-                elif the_girl.sluttiness > 100:
-                    the_girl.char "Hey, you can check my ass out later, right now you're supposed to be fucking it, [the_girl.mc_title]!"
-                    "[the_girl.possessive_title] tries to push herself back on to you, but from her angle she is unable to get you to penetrate her again unless you help."
-                    "She quickly gives up an resorts to rubbing her ass up and down along the length of your penis."
-                elif the_girl.obedience > 130:
-                    "[the_girl.possessive_title] blushes. The conflict of the dirtiness of the act of anal sex and her obedience to you are clear in her face."
-                    the_girl.char "Sir... don't you find my ass pleasing? Why did you pull out?"
-                    mc.name "Dont worry, [the_girl.title], I'll fuck your ass some more in a second, I just needed to take a moment and how loose your backdoor has gotten so far."
-                    $ the_girl.change_slut_temp(2)
-                    "[the_girl.possessive_title]'s cheeks turn even redder with your dirty talk. She puts her head down again, but leaves her cheeks spread, ready for you to resume fucking her whenever you are ready."
-                else:
-                    the_girl.char "Hey, why'd you pull out? I was just getting used to how thick you are..."
-                "After taking a moment appraising [the_girl.possessive_title]'s buttocks, you decide to get back to the act."
-                "With gentle pressure, you slowly fill her ass with your erection again. [the_girl.possessive_title] groans as you resume your thrusting."
-            "Shove it in deep":
-                "You decide with her cheeks spread wide to see how deep you can get yourself into [the_girl.possessive_title]. "
-                "With her hands busy, she has no way of holding up your weight as you push yourself forward and then down on top of her, your full body weight pushing her prone down onto the [the_object.name]."
-                "[the_girl.possessive_title] whimpers, her body now pinned between your body and [the_object.name]."
-                if SB_check_fetish(the_girl, anal_fetish_role):
-                    "Despite having no leverage, [the_girl.possessive_title] wriggles her ass against you as best as she can. Even with no room to move, her love for anal sex drives her to try to milk your cock."
-                    "You enjoy her efforts before you speak clearly to her."
-                    mc.name "Does this feel better than that plug? Is this what you're imagining everytime you push that plug up your ass?"
-                    "[the_girl.possessive_title] is writhing in pleasure, having her fetish of anal sex fulfilled."
-                    the_girl.char "Oh god it is. Everytime I play with my ass and all I can think about is your big meaty dick buried inside me."
-                    "You grab her hair at the base of her scalp and pull her head back before whispering into her ear."
-                    mc.name "Don't worry, slut. This won't be the last time I fill your ass with my cock."
-                    "You can see goosebumps all over [the_girl.possessive_title]'s skin. She moans and then begs you to keep fucking her."
-                elif the_girl.get_opinion_score("creampies") > 0:
-                    the_girl.char "Holy hell that is deep... tell me... tell me you'll push it this deep again when you cum... that would be so hot!"
-                    $mc.change_arousal(5)
-                    "In your mind, you play out the fantasy of cumming so deep in [the_girl.possessive_title]'s ass, even when you pull out not a drop of your seed leaks out."
-                    "You give the idea serious consideration. You can tell she would love it if you did."
-                elif the_girl.get_opinion_score("anal sex") > 0:
-                    "Despite having no leverage, [the_girl.possessive_title] wriggles her ass against you as best as she can. Even with no room to move, her love for anal sex drives her to milk your cock."
-                    "You lower your face down behind her head and whisper into her ear."
-                    mc.name "Mmm, so rear entry is how you like it, slut? Don't worry, this won't be the last time you feel my cock ravage your back door."
-                    "You can see goosebumps all over [the_girl.possessive_title]'s skin. You wonder how many times you can make her cum before you blow your load."
-                    $ the_girl.change_slut_temp(2)
-                elif the_girl.sluttiness > 100:
-                    the_girl.char "Oh fuck, bury it in me [the_girl.mc_title]! I don't think I've ever felt so full..."
-                else:
-                    "[the_girl.possessive_title] lets out a loud groan. You can tell she isn't used to being penetrated like this, but she is taking it as best as she can."
-                    the_girl.char "God [the_girl.mc_title] that is so intense... please just try to be a little more gentle okay?"
-                "You take a few seconds to enjoy being engulfed by her back passage, then give her a few slow, probing thrusts."
-                "After a minute or two slow, deep thrusts you decide to move back to doggy. You push yourself up off of [the_girl.possessive_title]'s back, and she follows, getting on all fours again to resume your fucking."
+        "Admire her ass":
+            "You pull yourself out of [the_girl.possessive_title]'s ass for moment and admire the soft, round cheeks of carnal pleasure in front of you."
+            "Her asshole gapes a bit from your sudden pullout, and she quickly turns her head to see why she suddenly feels so empty."
+            "[the_girl.possessive_title] realizes you are taking a moment to check out her backside."
+            if the_girl.get_opinion_score("showing her ass"):
+                the_girl.char "Do you like my ass, [the_girl.mc_title]? I've caught you checking it out before. It gets me so hot when I feel your eyes checking out my backside..."
+                $ the_girl.change_arousal(the_girl.get_opinion_score("showing her ass" * 5))###
+                $ the_girl.discover_opinion("showing her ass")
+                "[the_girl.possessive_title] moves her ass side to side, gyrating her hips for you while keeping her ass cheeks spread wide."
+            elif the_girl.get_opinion_score("being covered in cum"):
+                the_girl.char "Do you like what you see, [the_girl.mc_title]? I bet it is going to look even more amazing covered in your hot cum."
+                $mc.change_arousal(5)
+                "The thought of painting [the_girl.possessive_title]'s ass with your semen makes your cock twitch in anticipation."
+            elif the_girl.sluttiness > 100:
+                the_girl.char "Hey, you can check my ass out later, right now you're supposed to be fucking it, [the_girl.mc_title]!"
+                "[the_girl.possessive_title] tries to push herself back on to you, but from her angle she is unable to get you to penetrate her again unless you help."
+                "She quickly gives up an resorts to rubbing her ass up and down along the length of your penis."
+            elif the_girl.obedience > 130:
+                "[the_girl.possessive_title] blushes. The conflict of the dirtiness of the act of anal sex and her obedience to you are clear in her face."
+                the_girl.char "Sir... don't you find my ass pleasing? Why did you pull out?"
+                mc.name "Dont worry, [the_girl.title], I'll fuck your ass some more in a second, I just needed to take a moment and how loose your backdoor has gotten so far."
+                $ the_girl.change_slut_temp(2)
+                "[the_girl.possessive_title]'s cheeks turn even redder with your dirty talk. She puts her head down again, but leaves her cheeks spread, ready for you to resume fucking her whenever you are ready."
+            else:
+                the_girl.char "Hey, why'd you pull out? I was just getting used to how thick you are..."
+            "After taking a moment appraising [the_girl.possessive_title]'s buttocks, you decide to get back to the act."
+            "With gentle pressure, you slowly fill her ass with your erection again. [the_girl.possessive_title] groans as you resume your thrusting."
+        "Shove it in deep":
+            "You decide with her cheeks spread wide to see how deep you can get yourself into [the_girl.possessive_title]. "
+            "With her hands busy, she has no way of holding up your weight as you push yourself forward and then down on top of her, your full body weight pushing her prone down onto the [the_object.name]."
+            "[the_girl.possessive_title] whimpers, her body now pinned between your body and [the_object.name]."
+            if SB_check_fetish(the_girl, anal_fetish_role):
+                "Despite having no leverage, [the_girl.possessive_title] wriggles her ass against you as best as she can. Even with no room to move, her love for anal sex drives her to try to milk your cock."
+                "You enjoy her efforts before you speak clearly to her."
+                mc.name "Does this feel better than that plug? Is this what you're imagining everytime you push that plug up your ass?"
+                "[the_girl.possessive_title] is writhing in pleasure, having her fetish of anal sex fulfilled."
+                the_girl.char "Oh god it is. Everytime I play with my ass and all I can think about is your big meaty dick buried inside me."
+                "You grab her hair at the base of her scalp and pull her head back before whispering into her ear."
+                mc.name "Don't worry, slut. This won't be the last time I fill your ass with my cock."
+                "You can see goosebumps all over [the_girl.possessive_title]'s skin. She moans and then begs you to keep fucking her."
+            elif the_girl.get_opinion_score("creampies") > 0:
+                the_girl.char "Holy hell that is deep... tell me... tell me you'll push it this deep again when you cum... that would be so hot!"
+                $mc.change_arousal(5)
+                "In your mind, you play out the fantasy of cumming so deep in [the_girl.possessive_title]'s ass, even when you pull out not a drop of your seed leaks out."
+                "You give the idea serious consideration. You can tell she would love it if you did."
+            elif the_girl.get_opinion_score("anal sex") > 0:
+                "Despite having no leverage, [the_girl.possessive_title] wriggles her ass against you as best as she can. Even with no room to move, her love for anal sex drives her to milk your cock."
+                "You lower your face down behind her head and whisper into her ear."
+                mc.name "Mmm, so rear entry is how you like it, slut? Don't worry, this won't be the last time you feel my cock ravage your back door."
+                "You can see goosebumps all over [the_girl.possessive_title]'s skin. You wonder how many times you can make her cum before you blow your load."
+                $ the_girl.change_slut_temp(2)
+            elif the_girl.sluttiness > 100:
+                the_girl.char "Oh fuck, bury it in me [the_girl.mc_title]! I don't think I've ever felt so full..."
+            else:
+                "[the_girl.possessive_title] lets out a loud groan. You can tell she isn't used to being penetrated like this, but she is taking it as best as she can."
+                the_girl.char "God [the_girl.mc_title] that is so intense... please just try to be a little more gentle okay?"
+            "You take a few seconds to enjoy being engulfed by her back passage, then give her a few slow, probing thrusts."
+            "After a minute or two slow, deep thrusts you decide to move back to doggy. You push yourself up off of [the_girl.possessive_title]'s back, and she follows, getting on all fours again to resume your fucking."
 
     return
 

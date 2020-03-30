@@ -65,6 +65,7 @@ label lifestyle_coach_intro_label(the_person):
     $ show_ui()
     the_person.char "I hope that was helpful! Come back again and see me if you want to adjust your goals again in the future!"
     mc.name "I think it was. I'll be sure to check back with you again if I need to. Thanks!"
+    $ scene_manager.clear_scene()
     return
 
 label lifestyle_coach_review_goals_label(the_person):
@@ -76,4 +77,5 @@ label lifestyle_coach_review_goals_label(the_person):
     call screen lifestyle_goal_sheet()
     $ show_ui()
     mc.name "Thanks for the help!"
+    $ scene_manager.clear_scene()
     return

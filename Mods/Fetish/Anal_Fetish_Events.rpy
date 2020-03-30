@@ -1344,7 +1344,7 @@ label SB_stephanie_anal_fetish_label():
         "You say goodbye, and [the_person.possessive_title] turns and walks out of your office, her plug just peaking out between her rosey ass cheeks."
         "Looks like [the_person.title] has an anal fetish now!"
 
-
+    $ scene_manager.clear_scene()
     $ the_person.review_outfit(dialogue = False)
     $ renpy.scene("Active")
     return
