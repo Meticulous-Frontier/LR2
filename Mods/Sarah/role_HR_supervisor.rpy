@@ -264,6 +264,17 @@ init 5 python:
         HR_director_headhunt_interview_action = Action("Prospect Interview",HR_director_headhunt_interview_requirement,"HR_director_headhunt_interview_label", args = person)
         mc.business.mandatory_crises_list.append(HR_director_headhunt_interview_action)
 
+    def build_HR_interview_discussion_topic_menu(person):
+        opinion_list = create_HR_review_topic_list(person_choice)
+        opinion_chat_list = []
+        for opinion in opinion_list:
+            if person_choice.get_opinion_score(opinion) <  max_opinion:
+                title_desc = opinion.title() + "\n{size=14}" + "She " + opinion_score_to_string(person_choice.get_opinion_score(opinion)) + " it{/size}"
+                opinion_chat_list.append([title_desc, opinion])
+
+        opinion_chat_list.insert(0, "Discuss Topic")
+        return opinion_chat_list
+
     HR_director_coffee_tier_1_action = Action("Add serum to coffee during meetings.", HR_director_coffee_tier_1_requirement, "HR_director_coffee_tier_1_label",
         menu_tooltip = "Costs $500 but makes meetings more impactful.")
     HR_director_coffee_tier_2_action = Action("Add stronger serum to coffee during meetings.", HR_director_coffee_tier_2_requirement, "HR_director_coffee_tier_2_label",
@@ -412,7 +423,7 @@ label HR_director_first_monday_label(the_person):
         the_person.char "That sounds great! Alright, I actually have a set of possibilities arranged for a meeting today if you would like. Do you want to go over my list of girls?"
         menu:
             "Let's start next week":
-                pass
+                $ del HR_employee_list
             "Let's start today":
                 mc.name "If you think meeting with some of these girls would be helpful, I think we should start immediately."
                 the_person.char "Ok! Let me see who I have on my list here..."
@@ -428,7 +439,6 @@ label HR_director_first_monday_label(the_person):
     if the_person is sarah:
         $ add_sarah_third_wheel_action()
 
-    $ HR_employee_list = None
     return
 
 label HR_director_monday_meeting_label(the_person):
@@ -502,12 +512,13 @@ label HR_director_monday_meeting_label(the_person):
         the_person.char "Can do! Did you want to call in a girl for a counseling session this week?"
         menu:
             "Let's not this week":
-                pass
+                $ del HR_employee_list
             "Call one in":
                 mc.name "Yes I want to do that."
                 the_person.char "Ok! Let me see who I have on my list here..."
                 call HR_director_personnel_interview_label(the_person, max_opinion = get_HR_director_tag("business_HR_coffee_tier", 0)) from HR_DIR_INTERVIEW_CALL_2
                 $ set_HR_director_tag("business_HR_meeting_last_day", day)
+
     the_person.char "Hmm, let's see, what's next..."
     call HR_director_manage_gym_membership(the_person) from HR_Gym_manage_1
 
@@ -597,19 +608,10 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
 
     mc.name "That's right. As you know, we run a small business here, and I like to make sure all my employees enjoy their work here."
     mc.name "Recently, I've become concerned you may not like the work environment."
-    python:
-        opinion_list = create_HR_review_topic_list(person_choice)
-        opinion_chat_list = []
-        for opinion in opinion_list:
-            if person_choice.get_opinion_score(opinion) <  max_opinion:
-                title_desc = opinion.title() + "\n{size=14}" + "She " + opinion_score_to_string(person_choice.get_opinion_score(opinion)) + " it{/size}"
-                opinion_chat_list.append([title_desc, opinion])
-
-    $ opinion_chat_list.insert(0, "Discuss Topic")
     if "build_menu_items" in globals():
-        call screen main_choice_display(build_menu_items([opinion_chat_list]))
+        call screen main_choice_display(build_menu_items([build_HR_interview_discussion_topic_menu(person_choice)]))
     else:
-        call screen main_choice_display([opinion_chat_list])
+        call screen main_choice_display([build_HR_interview_discussion_topic_menu(person_choice)])
     $ opinion_chat = _return
 
     if opinion_chat == "working":
@@ -678,11 +680,8 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     "[the_person.title] comes back to the desk and sits down."
     $ the_person.draw_person(position = "sitting")
 
-    #Cleanup?
     python:
         del HR_employee_list
-        del opinion_list
-        del opinion_chat_list
         del person_choice
     return
 
@@ -1192,7 +1191,7 @@ label HR_director_mind_control_attempt_label(the_person):
         call screen main_choice_display([["Call in"] + HR_employee_list])
 
     $ person_choice = _return
-
+    $ del HR_employee_list
     the_person.char "Okay. I'll go get her."
     $ renpy.scene("Active")
     call HR_mind_control_attempt(person_choice, the_person) from HR_mind_control_attempt_call_1
