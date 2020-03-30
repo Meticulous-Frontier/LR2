@@ -210,7 +210,8 @@ init 5 python:
                     if the_crisis[2] == "on_talk" and len(person.on_talk_event_list) == 0: # prevent multiple on talk events for person
                         person.on_talk_event_list.append(Limited_Time_Action(the_crisis[0], the_crisis[0].event_duration))
                     elif the_crisis[2] == "on_enter":
-                        person.on_room_enter_event_list.append(Limited_Time_Action(the_crisis[0], the_crisis[0].event_duration))
+                        if not exists_in_room_enter_list(person, the_crisis[0].effect): # prevent adding the same event twice
+                            person.on_room_enter_event_list.append(Limited_Time_Action(the_crisis[0], the_crisis[0].event_duration))
         return
 
     def advance_time_slave_stay_wet(people):
