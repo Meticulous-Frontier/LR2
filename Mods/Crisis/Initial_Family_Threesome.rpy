@@ -177,6 +177,7 @@ label SB_fetish_vaginal_family_threesome_label():
         $ scene_manager.remove_actor(the_person_one)
 
     python:
+        scene_manager.clear_scene()
         the_person_one.reset_arousal()
         the_person_one.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
 

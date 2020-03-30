@@ -899,7 +899,7 @@ label Sarah_get_drinks_label():
 
     $ add_sarah_stripclub_story_action()
     $ add_sarah_weekend_surprise_action()
-
+    $ scene_manager.clear_scene()
     return
 
 label Sarah_catch_stealing_label():
@@ -1497,7 +1497,8 @@ label Sarah_stripclub_story_label():
         $ scene_manager.remove_actor(the_person)
 
     $ add_sarah_threesome_request_action()
-    return "Advance "
+    $ scene_manager.clear_scene()
+    return "Advance Time"
 
 label Sarah_threesome_request_label():
     $ scene_manager = Scene()
@@ -2308,6 +2309,7 @@ label play_darts_301(the_person, focus_mod = 0): #Label returns true if mc wins,
 
 label Sarah_weekend_surprise_crisis_label():
     $ the_person = sarah
+    $ scene_manager = Scene()
     #TODO going out outfit
     "Lost in thought as you get your work done in the silence of the weekend, a sudden voice startles you."
     the_person.char "[the_person.mc_title]! Working away your weekend again I see!"
@@ -2360,8 +2362,8 @@ label Sarah_weekend_surprise_crisis_label():
                 the_person.char "Wow, okay. Sorry, I didn't realize you were so busy. Maybe next time I guess?"
                 "[the_person.title] quickly turns and walks out, leaving you to your work."
                 $ scene_manager.remove_actor(the_person)
-                return
 
+    $ scene_manager.clear_scene()    
     return
 
 init 5 python:

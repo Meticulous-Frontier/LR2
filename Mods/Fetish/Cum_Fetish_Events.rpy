@@ -788,6 +788,7 @@ label SB_fetish_stephanie_cum_label():
         "You say goodbye, and [the_person.possessive_title] turns and walks out of your office."
         "Looks like [the_person.title] has a cum fetish now!"
 
+    $ scene_manager.clear_scene()
     $ the_person.review_outfit(dialogue = False)
     $ renpy.scene("Active")
     return
