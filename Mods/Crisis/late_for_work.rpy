@@ -76,9 +76,25 @@ label late_for_work_action_label:
                     $ the_person.change_stats(arousal = 20, obedience = 2, happiness = 2, slut_temp = 2)
                     the_person.char "Mmm, sounds fun..."
                 $ the_person.draw_person(position = "blowjob")
-                "She quickly gets down on her knees. She pulls your cock out of you pants and gives it a couple strokes."
-                the_person.char "Mmm, can't believe I get to suck my two favorite cocks in the same morning..."
-                "Her mouth opens and envelopes your cock. She begins to suck you off eagerly."
+
+                if the_person.has_taboo(["touching_penis"]):
+                    "She slowly gets down on her knees and opens the zipper on your pants."
+                    the_person.char "Oh my, that's a nice specimen, if only I had known sooner..."
+                    "She pull your cock out and starts pumping until its fully erect."
+                    $ the_person.break_taboo("touching_penis")
+                else:
+                    "She quickly gets down on her knees. She pulls your cock out of you pants and gives it a couple strokes."
+
+                if the_person.has_taboo(["sucking_cock"]):
+                    mc.name "Ok, now get to work, I have a busy day today."
+                    the_person.char "Yes [the_person.mc_title], I was just wondering if I can fit that into my mouth."
+                    "She bends forward, slowly sliding your cock into her mouth."
+                    $ the_person.break_taboo("sucking_cock")
+                else:
+                    if the_person.get_opinion_score("giving blowjobs") > 0:
+                        the_person.char "Mmm, can't believe I get to suck my two favorite cocks in the same morning..."
+                    "Her mouth opens and envelopes your cock. She begins to suck you off eagerly."
+
                 call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True, private = True) from _call_late_for_work_BJ_1
                 $ the_report = _return
                 if the_report.get("girl orgasms",0) > 0:
@@ -129,10 +145,24 @@ label late_for_work_action_label:
                     the_person.char "If you insist, [the_person.mc_title]!"
 
                 $ the_person.draw_person(position = "blowjob")
-                "She quickly gets down on her knees. She pulls your cock out of you pants and gives it a couple strokes."
-                if the_person.get_opinion_score("giving blowjobs") > 0:
-                    the_person.char "Mmm, can't believe I get to suck your cock. This is how to start the day off right..."
-                "Her mouth opens and envelopes your cock. She begins to suck you off eagerly."
+                if the_person.has_taboo(["touching_penis"]):
+                    "She slowly gets down on her knees and opens the zipper on your pants."
+                    the_person.char "Oh my, that's a nice specimen, if only I had known sooner..."
+                    "She pull your cock out and starts pumping until its fully erect."
+                    $ the_person.break_taboo("touching_penis")
+                else:
+                    "She quickly gets down on her knees. She pulls your cock out of you pants and gives it a couple strokes."
+
+                if the_person.has_taboo(["sucking_cock"]):
+                    mc.name "Ok, now get to work, I have a busy day today."
+                    the_person.char "Yes [the_person.mc_title], I was just wondering if I can fit that into my mouth."
+                    "She bends forward, slowly sliding your cock into her mouth."
+                    $ the_person.break_taboo("sucking_cock")
+                else:
+                    if the_person.get_opinion_score("giving blowjobs") > 0:
+                        the_person.char "Mmm, can't believe I get to suck your cock. This is how to start the day off right..."
+                    "Her mouth opens and envelopes your cock. She begins to suck you off eagerly."
+
                 call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True, private = True) from _call_late_for_work_BJ_2
                 $ the_report = _return
                 if the_report.get("girl orgasms",0) > 0:
@@ -170,10 +200,24 @@ label late_for_work_action_label:
                     the_person.char "If you insist, [the_person.mc_title]!"
 
                 $ the_person.draw_person(position = "blowjob")
-                "She quickly gets down on her knees. She pulls your cock out of you pants and gives it a couple strokes."
-                if the_person.get_opinion_score("giving blowjobs") > 0:
-                    the_person.char "Mmm, I just love to suck your cock. This really makes my day, two blowjobs..."
-                "Her mouth opens and envelopes your cock. She begins to suck you off eagerly."
+                if the_person.has_taboo(["touching_penis"]):
+                    "She slowly gets down on her knees and opens the zipper on your pants."
+                    the_person.char "Oh my, that's a nice specimen, if only I had known sooner..."
+                    "She pull your cock out and starts pumping until its fully erect."
+                    $ the_person.break_taboo("touching_penis")
+                else:
+                    "She quickly gets down on her knees. She pulls your cock out of you pants and gives it a couple strokes."
+                
+                if the_person.has_taboo(["sucking_cock"]):
+                    mc.name "Ok, now get to work, I have a busy day today."
+                    the_person.char "Yes [the_person.mc_title], I was just wondering if I can fit that into my mouth."
+                    "She bends forward, slowly sliding your cock into her mouth."
+                    $ the_person.break_taboo("sucking_cock")
+                else:
+                    if the_person.get_opinion_score("giving blowjobs") > 0:
+                        the_person.char "Mmm, I just love to suck your cock. This really makes my day, two blowjobs..."
+                    "Her mouth opens and envelopes your cock. She begins to suck you off eagerly."
+
                 call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True, private = True) from _call_late_for_work_BJ_3
                 $ the_report = _return
                 if the_report.get("girl orgasms",0) > 0:

@@ -118,6 +118,8 @@ label dirty_laundry_action_label:
                             $ the_person.strip_outfit(top_layer_first = False, exclude_upper = True, position = "missionary")
 
                             "With her pussy finally exposed you waste no time diving right in"
+                        $ the_person.break_taboo("bare_pussy")
+                        $ the_person.break_taboo("licking_pussy")
                         "Cupping her ass with your hands, you circle your tongue all around her wet, inviting cunt."
                         the_person.char "Oh [the_person.mc_title], you have no idea how bad I need this."
                         "[the_person.possessive_title] runs her hands your hair. You bury your nose in her mound and flick your tongue in and out of her slick hole"
@@ -181,6 +183,7 @@ label dirty_laundry_action_label:
                     "Wow! The dirty talking really turns you on. You start stroking yourself again."
                     "Soon, you feel a hand on yours. There's another whisper in your ear."
                     the_person.char "Let me... I want to feel you in my hand when you blow your load."
+                    $ the_person.break_taboo("touching_penis")
                     "You let go, and feel [the_person.title]'s hand take over. She continues you kiss and nibble on your neck."
                     "The sensations are overwhelming, and soon you are ready to cum. She can sense it and jacks you enthusiastically."
                     the_person.char "Do it! Cum in my panties!"
@@ -210,6 +213,8 @@ label dirty_laundry_action_label:
 
                     $ the_person.strip_outfit(position = "stand2")
 
+                    $ the_person.break_taboo("bare_tits")
+                    $ the_person.break_taboo("bare_pussy")
                     "Once she is naked, [the_person.title] turns to you."
                     the_person.char "Here, let me have those!"
                     "You hand her the panties. She quickly puts them on."
@@ -237,6 +242,8 @@ label dirty_laundry_action_label:
                         "'Accidentally' slip it in":
                             "You slowly start to change the angle of your thrusting, and making thrusts a bit shallower. She gets frustrated that you aren't going full forward against her clit and starts to push herself back against you."
                             "One time, when she is about to thrust back, you bend your knees a bit, but angle your hips back up. When she thrusts back your cock slips inside her."
+                            $ the_person.break_taboo("vaginal_sex")
+                            $ the_person.break_taboo("condomless_sex")
                             "You grab [the_person.title]'s hips and thrust your hips forward, pushing yourself deep inside her. You hold her hips place, enjoying being finally buried in her cunt. She moans loudly at the sudden penetration."
                             mc.name "Whoops! Sorry about that!"
                             "You apologize, but don't let go of her hips. She starts to grind against you."

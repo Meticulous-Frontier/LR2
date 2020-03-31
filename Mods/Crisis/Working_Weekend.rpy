@@ -140,6 +140,7 @@ label SB_working_weekend_crisis_label():
                         $ person_one.change_slut_core(2)
                         $ person_one.change_slut_temp(5)
                 "You back your chair up and move it to the side while [person_one.possessive_title] gets down on her knees in front of you."
+                $ person_one.break_taboo("sucking_cock")
                 $ scene_manager.update_actor(person_one, position = "blowjob")
                 $ person_one.add_situational_slut("seduction_approach",20)
                 $ person_one.add_situational_obedience("seduction_approach", 5)
@@ -242,6 +243,7 @@ label SB_working_weekend_crisis_label():
             "You walk over to [person_one.possessive_title]. She wraps her arms around you as you roughly grab her ass and pick her up. She's grinding herself against you as you carry her over to your desk."
             $ scene_manager.update_actor(person_one, position = "kissing")
             "[person_one.possessive_title] is just pulling your cock out when you hear a cough from the doorway."
+            $ person_one.break_taboo("touching_penis")
             person_two.char "Wow, looks like you guys are getting ready for some fun!"
             $ scene_manager.add_actor(person_two, position = "stand3", character_placement = character_left, emotion = "happy")
             "You turn and see [person_two.possessive_title] standing in the doorway. You aren't sure how long she has been standing there."
@@ -250,6 +252,8 @@ label SB_working_weekend_crisis_label():
             person_two.char "Yes! Oh just give me one second!!!"
             "She starts to strip down."
             $ scene_manager.strip_actor_outfit(person_two)
+            $ person_two.break_taboo("bare_tits")
+            $ person_two.break_taboo("bare_pussy")
             "Now naked, she walks over to you and [person_one.possessive_title]."
             person_two.char "Okay, how do you want to do this?"
             call start_threesome(person_one, person_two) from _call_start_threesome_SB_working_weekend_crisis
@@ -277,6 +281,8 @@ label SB_working_weekend_crisis_label():
             "Fuck her on your desk":
                 "You walk over to [person_one.possessive_title]. She wraps her arms around you as you roughly grab her ass and pick her up. She's grinding herself against you as you carry her over to your desk."
                 "When her ass runs up against the desk, she reaches down and begins unzipping your pants."
+                $ person_one.break_taboo("condomless_sex")
+                $ person_one.break_taboo("vaginal_sex")
                 "She pulls your your dick out and lays back. She lines you up with her pussy and push yourself into her."
                 call fuck_person(person_one, start_position = missionary, start_object = make_desk(), skip_intro = True) from _call_sex_description_SB15
                 $ the_report = _return

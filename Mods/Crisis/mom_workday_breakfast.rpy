@@ -113,6 +113,7 @@ label mom_breakfast_action_label():
                     "Grope her breasts" if the_person.sluttiness > 30:
                         "You work on her shoulders for a couple of minutes, then slowly run your hands down to her considerable chest."
                         the_person.char "Oh [the_person.mc_title]... I'm not sure..."
+                        $ the_person.break_taboo("touching_body")
                         "You interrupt her and whisper in her ear."
                         mc.name "Sshhh, just relax. Close your eyes and relax."
                         $ the_person.change_arousal(15)
@@ -130,6 +131,7 @@ label mom_breakfast_action_label():
                             while not the_person.outfit.tits_available():    #If covered up, have her take her top off
                                 $ scene_manager.draw_animated_removal(the_person, the_person.outfit.get_upper_ordered()[-1])
                             "You reach down and slowly remove her top, exposing her creamy tits."
+                            $ the_person.break_taboo("bare_tits")
                             "Your hands return to her chest, her boobs feel hot and soft in your hands."
 
                         "Finish Massage":
@@ -153,6 +155,7 @@ label mom_breakfast_action_label():
                         menu:
                             "Finger Her" if the_person.sluttiness > 60:
                                 "You bring your hand up a bit, then slowly down again, this time beneath her clothing."
+                                $ the_person.break_taboo("touching_vagina")
                                 "This time, she doesn't put up a fight, she is too close to cumming."
                                 "Your fingers are now sliding across the flesh of her moistened cunt."
                                 pass
@@ -178,6 +181,7 @@ label mom_breakfast_action_label():
                         "You whisper in her ear."
                         mc.name "I've got a better idea."
                         "You let one hand slowly descend from her breast down to her exposed cunt."
+                        $ the_person.break_taboo("touching_vagina")
                         $ the_person.change_arousal(30) #65
                 #We assume here we are fingering her to completion.
                 "You dip two fingers into her honeypot. She moans as your begin to stir your fingers for a bit."
@@ -239,10 +243,12 @@ label mom_breakfast_action_label():
             #fetish blowjob path
             the_person.char "Oh! I know! You just keep eating your breakfast, mommy will just help herself!"
             $ scene_manager.update_actor(mom, position = "blowjob")
+            $ the_person.break_taboo("touching_penis")
             "[the_person.possessive_title] quickly gets down on her knees and under the table. You feel her expert hands removing your belt and trousers. She sighs when your cock springs free."
             the_person.char "Mmm, that's what I was dreaming about... I had a dream that I was blowing you, and you started cumming, and you just kept cumming and cumming and it was everywhere..."
             "She opens her mouth and runs her tongue along your length, breathing in your masculine musk."
             the_person.char "It was amazing... I want some of the real thing!"
+            $ the_person.break_taboo("sucking_cock")
             "She opens her mouth and slides your penis in. She dances circles all around it while she suckles the tip. You look down and notice that she is touching herself."
             $ the_person.change_arousal(20)
             call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_workday_breakfast_01
