@@ -108,7 +108,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                  mc.name "I love the way it sounds when I fuck you. Hear it?"
                  "You thrust yourself back into her forcefully, her ass smacking against your hips with a loud smack."
                  "[the_girl.possessive_title] moans and pushes herself back against you."
-                 mc.name "Thats it, you’re my bitch. I love how naughty you are"
+                 mc.name "Thats it, you’re my bitch. I love how naughty you are."
                  "She seems to be into it. Maybe you should tell her how you want to finish."
                  menu:
                      "I wanna creampie you":
@@ -221,7 +221,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                  mc.name "I love the way it sounds when I fuck you. Hear it?"
                  "You thrust yourself back into her forcefully, her ass smacking against your hips with a loud smack."
                  "[the_girl.possessive_title] moans and pushes herself back against you."
-                 mc.name "Thats it, you’re such a talented slut. I love how naughty you are"
+                 mc.name "Thats it, you’re such a talented slut. I love how naughty you are."
                  "She seems to be into it. Maybe you should tell her how you want to finish."
                  menu:
                      "I wanna creampie you":
