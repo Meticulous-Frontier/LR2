@@ -310,7 +310,7 @@ init 1301 python:
         cost = 500,
         requirement =  HR_director_creation_requirement,
         on_buy_function = increase_max_employee_size,
-        on_buy_arguments = {"amount":1})
+        extra_arguments = {"amount":1})
 
     organisation_policies_list.append(HR_director_creation_policy)
 
@@ -1384,7 +1384,7 @@ label HR_director_headhunt_interview_label(the_person):
         mc.name "I'm sorry, this wasn't exactly what I had in mind."
         the_person.char "Ah, okay. Well give me the rest of the week to catch up on my normal HR work. If you want me to start the process again, talk to me on Monday."
         $ prospect.remove_person_from_game()
-        
+
     $ del prospect
     return
 

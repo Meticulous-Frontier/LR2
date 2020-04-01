@@ -104,7 +104,7 @@ init python: # This space is reserved for definitions used to simplify the code
 
         for policy in mc.business.policy_list:
             if policy.on_buy_function is not None:
-                policy.on_buy_function(**policy.on_buy_arguments)
+                policy.on_buy_function(**policy.extra_arguments)
 
     def chunks(items, size):
         for i in range(0, len(items), size):

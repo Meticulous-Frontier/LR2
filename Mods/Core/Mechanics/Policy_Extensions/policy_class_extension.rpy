@@ -41,7 +41,7 @@ init 2 python:
         policy_to_update.cost = policy.cost
         policy_to_update.desc = policy.desc
         policy_to_update.requirement = policy.requirement
-        policy_to_update.on_buy_arguments = policy.on_buy_arguments
+        policy_to_update.extra_arguments = policy.extra_arguments
 
         return policy_to_update
 
@@ -55,17 +55,17 @@ init 2 python:
             renpy.say("Error", "No policy found named [self.name] in mc.business.policy_list")
 
         #if alternate_click is True: # This is true if you right click the policy in the policy_selection_screen
-            #if self.alternate_on_buy_arguments is not None:
-            #    self.on_buy_function(**self.alternate_on_buy_arguments)
+            #if self.alternate_extra_arguments is not None:
+            #    self.on_buy_function(**self.alternate_extra_arguments)
                 #if hasattr(persistent_policy, "refund"): TODO: Find a way to deal with refunds when you "sell" multiple at a time.
                 #    mc.business.change_funds(+persistent_policy.refund)
 
         else: # Left click actions
             if self.on_buy_function is not None:
-                self.on_buy_function(**self.on_buy_arguments)
+                self.on_buy_function(**self.extra_arguments)
 
             if not persistent_policy.enabled:
-                mc.business.change_funds(-self.cost) # Currently do not deduct cost for the alternate_on_buy_arguments
+                mc.business.change_funds(-self.cost) # Currently do not deduct cost for the alternate_extra_arguments
                 persistent_policy.refund = self.cost
 
         if self.refresh:
@@ -78,9 +78,9 @@ init 2 python:
 
     class ModPolicy(Policy): # Allows you to attach parent / child relation to the policies which display when the parent is selected.
 
-        def __init__(self, name, desc, requirement, cost, on_buy_function = None, on_buy_arguments = None, alternate_on_buy_arguments = None, parent = None, image = None, upgrade = False, refresh = None):
+        def __init__(self, name, desc, requirement, cost, on_buy_function = None, extra_arguments = None, alternate_extra_arguments = None, parent = None, image = None, upgrade = False, refresh = None):
 
-            Policy.__init__(self, name, desc, requirement, cost, on_buy_function, on_buy_arguments)
+            Policy.__init__(self, name, desc, requirement, cost, on_buy_function, extra_arguments)
             self.children = [] # A list that gets filled with child elements
             self.parent = parent # The parent of a policy is where you want it to be sub-categorized
 
@@ -94,7 +94,7 @@ init 2 python:
                     self.parent.children[self.parent.children.index(self)].cost = self.cost
                     self.parent.children[self.parent.children.index(self)].desc = self.desc # Some text can't be interpolated e.g the return of a function
 
-            self.alternate_on_buy_arguments = alternate_on_buy_arguments # Arguments sent to on_buy_function when right clicking in policy_selection_screen
+            self.alternate_extra_arguments = alternate_extra_arguments # Arguments sent to on_buy_function when right clicking in policy_selection_screen
             self.upgrade = upgrade # A multi- stage or endless policy upgrade must be set to True so that it doesn't become "purchased" | is_owned() == True
             self.refresh = refresh # Set this to the label that creates the policy in the first place. This will refresh descriptions, cost, parents etc.
             self.image = image # Image background or icons to use?
@@ -108,10 +108,10 @@ init 2 python:
     #     if self.on_buy_function is not None and type(self.on_buy_function) is list: # TODO: Find a better way to call listed functions in order with arguments.
     #         count = 0
     #         while count < len(self.on_buy_function):
-    #             self.on_buy_function[count](self.on_buy_arguments[str(count)])
+    #             self.on_buy_function[count](self.extra_arguments[str(count)])
     #             count += 1
     #     else:
     #         if self.on_buy_function is not None:
-    #             self.on_buy_function(**self.on_buy_arguments)
+    #             self.on_buy_function(**self.extra_arguments)
     #
     #     Policy.buy_mod_policy = buy_mod_policy

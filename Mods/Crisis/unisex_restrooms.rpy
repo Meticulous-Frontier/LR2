@@ -12,14 +12,16 @@ init 1301 python:
         return False
 
     def unisex_bathroom_policy_unlock(unlock = 1):
-        unisex_restroom_unlocks["unisex_policy_unlock"] = unlock
+        if "unisex_restroom_unlocks" in globals(): # NOTE: was getting not in global errors, look further into it later
+            unisex_restroom_unlocks["unisex_policy_unlock"] = unlock
 
     Unisex_bathroom_creation_policy = Policy(name = "Make Restrooms Unisex",
         desc = "Some basic remodeling and a change of signs will make all company restrooms unisex.",
         cost = 1000,
         requirement =  unisex_bathroom_creation_requirement,
-        on_buy_function = unisex_bathroom_policy_unlock,
-        on_buy_arguments = {"unlock":1})
+        toggleable = True,
+        on_buy_function = unisex_bathroom_policy_unlock(unlock = 1),
+        on_remove_function = unisex_bathroom_policy_unlock(unlock = 0))
     organisation_policies_list.append(Unisex_bathroom_creation_policy)
 
     def unisex_restroom_fantasy_actout_requirement(the_person):

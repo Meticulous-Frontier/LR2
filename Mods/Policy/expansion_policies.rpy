@@ -21,7 +21,7 @@ label store_expansion_policies(stack):
             desc = "Allows the business to further expand the production area.",
             requirement = purchase_room_requirement,
             # on_buy_function = purchase_room_on_buy_function,
-            # on_buy_arguments = {"room": p_division_basement}
+            # extra_arguments = {"room": p_division_basement}
         )
 
         if p_division_policy not in expansion_policies_list:
@@ -35,7 +35,7 @@ label store_expansion_policies(stack):
             desc = "Allows for the installation of additional equipment.",
             requirement = purchase_room_requirement,
             on_buy_function = purchase_room_on_buy_function,
-            on_buy_arguments = {"room": rd_division_basement}
+            extra_arguments = {"room": rd_division_basement}
         )
 
         if rd_division_policy not in expansion_policies_list:
@@ -49,7 +49,7 @@ label store_expansion_policies(stack):
             desc = "Gives you access to the [rd_division_basement.formalName] where you can clone people or do genetic manipulations in order to change appearance.",
             requirement = purchase_room_requirement,
             on_buy_function = purchase_room_on_buy_function,
-            on_buy_arguments = {"room": rd_division_basement}
+            extra_arguments = {"room": rd_division_basement}
         )
 
         # if purchase_biotech_lab_room_policy not in expansion_policies_list:
@@ -63,7 +63,7 @@ label store_expansion_policies(stack):
             desc = "Gives you access to the [m_division_basement.formalName] where you can oversee your employees, investigate their opinions and home location.",
             requirement = purchase_room_requirement,
             on_buy_function = purchase_room_on_buy_function,
-            on_buy_arguments = {"room": m_division_basement}
+            extra_arguments = {"room": m_division_basement}
         )
 
         if purchase_security_room_policy not in expansion_policies_list:
@@ -77,7 +77,7 @@ label store_expansion_policies(stack):
             desc = "Gives you access to the [office_basement.formalName] where *undecided*",
             requirement = purchase_room_requirement,
             on_buy_function = purchase_room_on_buy_function,
-            on_buy_arguments = {"room": office_basement}
+            extra_arguments = {"room": office_basement}
         )
 
         if purchase_dungeon_room_policy not in expansion_policies_list:
@@ -91,7 +91,7 @@ label store_expansion_policies(stack):
         #     desc = ,
         #     requirement = ,
         #     on_buy_function = ,
-        #     on_buy_arguments = {"room": }
+        #     extra_arguments = {"room": }
         # )
 
 
