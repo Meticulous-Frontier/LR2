@@ -757,10 +757,15 @@ label Sarah_get_drinks_label():
     $ mc.change_location(hall)
     $ mc.location.show_background()
 
-    if len(the_person.outfit.get_upper_ordered()) != 0:
-        $ the_person.outfit.get_upper_ordered()[-1].colour[3] *= .75 #make top transparent
-    if len(the_person.outfit.get_lower_ordered()) != 0:
-        $ the_person.outfit.get_lower_ordered()[-1].colour[3] *= .75 #make bottom transparent
+    # make sure we don't alter the outfit in her wardrobe
+    $ test_outfit = the_person.outfit.get_copy()
+    if len(test_outfit.get_upper_ordered()) != 0:
+        $ test_outfit.get_upper_ordered()[-1].colour[3] *= .75 #make top transparent
+    if len(test_outfit.get_lower_ordered()) != 0:
+        $ test_outfit.get_lower_ordered()[-1].colour[3] *= .75 #make bottom transparent
+
+    $ the_person.apply_outfit(test_outfit)
+    $ del test_outfit
 
     $ scene_manager.update_actor(the_person, position = "stand4")
     if (len(the_person.outfit.get_upper_ordered()) > 0 or len(the_person.outfit.get_lower_ordered()) > 0):
