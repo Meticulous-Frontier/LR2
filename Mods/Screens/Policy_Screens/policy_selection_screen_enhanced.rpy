@@ -7,17 +7,46 @@ init 2 python:
             return False
         return persistent_policy
 
+    def format_policy_name(policy):
+        if policy.cost <= mc.business.funds:
+            policy_cost = "$" + str(policy.cost) + " - "
+        else:
+            policy_cost = "$" + str(policy.cost) + " - "
+
+        if not policy.is_owned():
+            if not (policy.requirement() and (policy.cost <= mc.business.funds)):
+                policy_name = policy_cost + policy.name
+            policy_name = "Purchase: " + policy_cost + policy.name
+        else:
+            policy_name = policy.name
+        if policy.is_active() and policy.toggleable:
+            policy_name += "\n[[Active]"
+            blocking_policies = [a_policy for a_policy in policy.depender_policies if a_policy.is_active()]
+            if blocking_policies:
+                policy_name += "\n{size=12}Required for: "
+            for requirement in blocking_policies:
+                policy_name += requirement.name
+                if requirement is not blocking_policies[-1]:
+                    policy_name += ","
+                policy_name += "{/size}"
+        elif policy.is_owned() and policy.toggleable:
+            policy_name += "\n[[Disabled]"
+
+
+
+        return policy_name
+
 init 2: # Will give this a polish later, just wanted to enable categories from lists.
     screen policy_selection_screen():
         add "Paper_Background.png"
         modal True
-        zorder 100
+        zorder 49
         $ tooltip = GetTooltip()
 
         $ categories = sorted(policy_selection_screen_categories) #This way we can append extra categories and lists with ease.
 
 
-
+        default hovered_enough_time = False
         default selected_category = categories[0] #Default to the first in our categories list
         default selected_policy = None
         default selected_tooltip = None
@@ -56,7 +85,7 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                                     style "textbutton_no_padding_highlight"
                                     text_style "serum_text_style"
 
-            frame: #Holds the list of business policies. Needs to be scrollable.
+            frame: #Holds the list of business policies, that do not depend on other policies (parent policy). Needs to be scrollable. Child policies of the parent are displayed
                 xsize 1320
                 ysize 650
                 background "#1a45a1aa"
@@ -67,167 +96,81 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                         xsize 660
                         viewport:
                             mousewheel True
-                            if len(selected_category[1]) > 5: #Only take up scrollbar space if needed.
+                            if len([policy for policy in selected_category[1] if not policy.dependant_policies]) > 5: #Only take up scrollbar space if needed.
                                  scrollbars "vertical"
                             xfill True
                             #yfill True
 
-                            grid 1 len(selected_category[1]):
-                                for policy in sorted(sorted(sorted(selected_category[1], key = lambda x: x.cost), key = lambda x: x.is_owned()), key = lambda x: x.requirement(), reverse = True):
-                                    if policy.is_owned():
+                            grid 1 len([policy for policy in selected_category[1] if not policy.dependant_policies]): # Filter out any non- parent Policies
+                                for policy in sorted(sorted(selected_category[1], key = lambda x: x.cost), key = lambda x: x.requirement(), reverse = True):
+                                    if not policy.dependant_policies:
 
-                                        textbutton "$" + str(policy.cost) + " - " + policy.name + ("\n[[Upgrades]" if (hasattr(policy, "children") and policy.children) else ""):
+
+                                        textbutton format_policy_name(policy):
                                             tooltip policy.desc
-                                            action [ToggleScreenVariable("selected_policy", policy, None)]
-                                            hovered SetScreenVariable("selected_tooltip", policy.desc)
+                                            if selected_policy != policy: # TODO: Make diagnoal hovers less tedious, use a timer?
+                                                hovered [ToggleScreenVariable("selected_policy", policy, None)]
                                             style "textbutton_no_padding_highlight"
                                             xalign 0.5
                                             text_style "serum_text_style"
-
-                                            if selected_tooltip is policy.desc:
-                                                background "#78b156"
-                                            else:
-                                                background "#59853f"
-
                                             sensitive True
                                             xfill True
                                             ysize 100
+                                            action NullAction()
+                                            if policy.is_owned():
+                                                background "#59853f"
+                                                hover_background "#a9d59f"
+                                                insensitive_background "#222222"
 
-                                    else:
-                                        if policy.requirement() and (policy.cost < mc.business.funds or policy.cost == mc.business.funds):
-                                            textbutton "$" + str(policy.cost) + " - " + policy.name:
-                                                tooltip policy.desc
-                                                style "textbutton_no_padding_highlight"
-                                                text_style "serum_text_style"
-
-                                                if selected_tooltip is policy.desc:
-                                                    background "#aaaaaa"
-
-                                                action [Function(purchase_policy, policy), ToggleScreenVariable("selected_policy", policy, None)]
-                                                hovered SetScreenVariable("selected_tooltip", policy.desc)
-                                                sensitive policy.requirement() and (policy.cost < mc.business.funds or policy.cost == mc.business.funds)
-                                                xfill True
-                                                ysize 100
-
-                                        else:
-                                            textbutton "$" + str(policy.cost) + " - " + policy.name:
-                                                tooltip policy.desc
-                                                style "textbutton_no_padding_highlight"
-                                                text_style "serum_text_style"
-
-                                                if selected_tooltip is policy.desc:
-                                                    background "#aaaaaa"
+                                                if policy.is_toggleable():
+                                                    action Function(toggle_policy, policy)
+                                            else:
+                                                if policy.requirement() and (policy.cost <= mc.business.funds):
+                                                    background "#000080"
+                                                    action Function(purchase_policy, policy)
                                                 else:
-                                                    background "#666666"
-
-                                                action [ToggleScreenVariable("selected_policy", policy, None)]
-                                                hovered SetScreenVariable("selected_tooltip", policy.desc)
-                                                sensitive True
-                                                xfill True
-                                                ysize 100
+                                                    background "#000040"
+                                                hover_background "#1a45a1"
+                                                insensitive_background "#222222"
 
 
 
-                    vbox:
-                        # if tooltip:
-                        if selected_tooltip is not None:
-                            frame:
-                                xfill True
-                                ysize 100
-                                viewport:
-                                    scrollbars "vertical"
-                                    draggable True
-                                    mousewheel True
-                                    vbox:
-                                        text selected_tooltip style "serum_text_style" #tooltip
-                        else:
-                            frame: # A hidden frame to avoid things from moving around
-                                background None
-                                xfill True
-                                ysize 100
-
-                        if (selected_policy is not None and (hasattr(selected_policy, "children") and selected_policy.children)):
+                    if (selected_policy is not None and selected_policy.depender_policies):
+                        vbox:
                             frame:
                                 viewport:
                                     mousewheel True
-                                    if len(selected_policy.children) > 5: #Only take up scrollbar space if needed.
+                                    if len(selected_policy.depender_policies) > 5: #Only take up scrollbar space if needed.
                                          scrollbars "vertical"
                                     xfill True
 
-                                    grid 1 len(selected_policy.children):
-                                        for policy in sorted(sorted(sorted(selected_policy.children, key = lambda x: x.cost), key = lambda x: x.is_owned()), key = lambda x: x.requirement(), reverse = True):
-                                            if policy.is_owned():
+                                    grid 1 len(selected_policy.depender_policies):
+                                        for policy in sorted(sorted(selected_policy.depender_policies, key = lambda x: x.cost), key = lambda x: x.requirement(), reverse = True):
+                                            textbutton format_policy_name(policy):
+                                                tooltip policy.desc
+                                                style "textbutton_no_padding_highlight"
+                                                xalign 0.5
+                                                text_style "serum_text_style"
+                                                sensitive True
+                                                xfill True
+                                                ysize 100
+                                                action NullAction()
+                                                if policy.is_owned():
+                                                    background "#59853f"
+                                                    hover_background "#a9d59f"
+                                                    insensitive_background "#222222"
 
-                                                textbutton ("$" + str(policy.cost) + " - " if policy.upgrade else "") + policy.name:
-                                                    #tooltip policy.desc
-
-                                                    if not policy.upgrade and policy.refresh is not None:
-                                                        action [ToggleField(get_from_policy_list(policy), "enabled", True, False), If(policy.refresh is not None, Function(renpy.call_in_new_context, policy.refresh))]
-                                                    elif policy.upgrade and policy.requirement() and (policy.cost <= mc.business.funds):
-                                                        action Function(policy.buy_policy)
-                                                    else:
-                                                        action NullAction()
-                                                    #alternate [Function(policy.buy_policy, True)]
-
-                                                    hovered SetScreenVariable("selected_tooltip", policy.desc)
-
-                                                    style "textbutton_no_padding_highlight"
-                                                    xalign 0.5
-                                                    text_style "serum_text_style"
-
-                                                    if selected_tooltip is policy.desc:
-                                                        background "#78b156"
-
-                                                    elif not get_from_policy_list(policy).enabled and (not policy.upgrade and policy.refresh is not None):
-                                                        background "#666666"
-
-                                                    elif policy.upgrade and (policy.cost > mc.business.funds):
-                                                        background "#666666"
-
-                                                    else:
-                                                        background "#59853f"
-
-                                                    sensitive True
-                                                    xfill True
-                                                    ysize 100
-
-                                            else:
-                                                if policy.requirement() and (policy.cost <= mc.business.funds):
-                                                    textbutton "$" + str(policy.cost) + " - " + policy.name:
-                                                        #tooltip policy.desc
-                                                        style "textbutton_no_padding_highlight"
-                                                        text_style "serum_text_style"
-
-                                                        if selected_tooltip is policy.desc:
-                                                            background "#aaaaaa"
-
-                                                        action [Function(policy.buy_policy), If(policy.refresh is not None, Function(renpy.call_in_new_context, policy.refresh))]
-                                                        #alternate [Function(policy.buy_policy, True), If(policy.refresh is not None, Function(renpy.call_in_new_context, policy.refresh))]
-
-                                                        hovered SetScreenVariable("selected_tooltip", policy.desc)
-                                                        sensitive policy.requirement() and (policy.cost < mc.business.funds or policy.cost == mc.business.funds)
-                                                        xfill True
-                                                        ysize 100
-
+                                                    if policy.is_toggleable():
+                                                        action Function(toggle_policy, policy)
                                                 else:
-                                                    textbutton "$" + str(policy.cost) + " - "  + policy.name:
-                                                        #tooltip policy.desc
-                                                        style "textbutton_no_padding_highlight"
-                                                        text_style "serum_text_style"
+                                                    if policy.requirement() and (policy.cost <= mc.business.funds):
+                                                        background "#000080"
+                                                        action Function(purchase_policy, policy)
+                                                    else:
+                                                        background "#000040"
+                                                    hover_background "#1a45a1"
+                                                    insensitive_background "#222222"
 
-                                                        if selected_tooltip is policy.desc:
-                                                            background "#aaaaaa"
-                                                        else:
-                                                            background "#666666"
-
-                                                        action NullAction()
-                                                        #if policy.requirement():
-                                                            #alternate [Function(policy.buy_policy, True), If(policy.refresh is not None, Function(renpy.call_in_new_context, policy.refresh))]
-
-                                                        hovered SetScreenVariable("selected_tooltip", policy.desc)
-                                                        sensitive True
-                                                        xfill True
-                                                        ysize 100
         frame:
             background None
             anchor [0.5,0.5]
