@@ -36,6 +36,23 @@ init 2 python:
 
         return policy_name
 
+    def get_policy_tree(policy):
+
+        check_policy = policy
+        policy_tree = []
+        count = 0
+        while check_policy.depender_policies:
+            policy_tree.append(check_policy.depender_policies[count])
+            if (len(check_policy.depender_policies) - 1) > count:
+                count += 1
+                #check_policy = check_policy.depender_policies[count]
+                renpy.say("X", str(count) + " " + check_policy.name)
+            else:
+                count = 0
+                renpy.say("X", str(count) + " " + check_policy.name)
+                check_policy = check_policy.depender_policies[count]
+
+        return policy_tree
 init 2: # Will give this a polish later, just wanted to enable categories from lists.
     screen policy_selection_screen():
         add "Paper_Background.png"
