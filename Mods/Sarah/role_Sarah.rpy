@@ -1753,7 +1753,7 @@ label Sarah_arrange_threesome_label(the_person):
     if employee_role in the_person.special_role:
         mc.name "Hello [the_person.title]. I've got something I need help with I was hoping to talk to you about."
         the_person.char "Hello! What can I help you with?"
-        mc.name "Well, you know [sarah.title], right? From HR?"
+        mc.name "Well, you know [sarah.name], right? From HR?"
         the_person.char "Oh yeah, I was just talking to her this morning about the best way to get a guy to go down on you."
         mc.name "You were... what?"
         mc.name "Never mind. Anyway, she's never been in a threesome before, and she really wants to try one sometime."
@@ -1764,7 +1764,7 @@ label Sarah_arrange_threesome_label(the_person):
     elif the_person is mom:
         mc.name "Hello [the_person.title]. I've got something I need help with I was hoping to talk to you about."
         the_person.char "Hey Honey. What can I help you with?"
-        mc.name "Well, you know how I've been seeing that girl, [the_person.title]."
+        mc.name "Well, you know how I've been seeing that girl, [sarah.name]."
         the_person.char "I know! It's so great that you're seeing someone. I'm so proud of you."
         mc.name "Well, as it turns out, she's a little curious about the fairer sex. She's never been in a threesome before."
         mc.name "Anyway, she's been asking, so I promised her I'd try to arrange something for Saturday. I was wondering if you would be willing to join us?"
@@ -1776,7 +1776,7 @@ label Sarah_arrange_threesome_label(the_person):
     elif the_person is lily:
         mc.name "Hello [the_person.title]. I've got something I need help with I was hoping to talk to you about."
         the_person.char "Hey Bro. What do you need?"
-        mc.name "Well, you know how I've been seeing that girl, [the_person.title]."
+        mc.name "Well, you know how I've been seeing that girl, [sarah.name]."
         the_person.char "I know! Damn when you brought her in here the other night, that was impressive!"
         the_person.char "You know you guys woke me up the next morning? I know you we're trying to be quiet, but the bed banging against the wall is really loud in the rest of the house..."
         mc.name "Sorry about that."
@@ -1876,6 +1876,8 @@ label Sarah_initial_threesome_label():
         the_person_two.char "I'm here now. Come let me in?"
         mc.name "She's here, give me one second."
         "You go to the front door and let in [the_person_two.title]. She follows you quietly to your room."
+    # make the second person wear a more sexy outfit (50% sluttiness boost)
+    $ the_person.apply_outfit(the_person_two.wardrobe.decide_on_outfit2(the_person_two, sluttiness_modifier = .5))
     $ scene_manager.add_actor(the_person_two)
     "Alright, here you are, in your room, with [the_person_one.title] and [the_person_two.possessive_title]."
     the_person_one.char "Hi..."
