@@ -27,7 +27,8 @@ init 2 python:
             for requirement in blocking_policies:
                 policy_name += requirement.name
                 if requirement is not blocking_policies[-1]:
-                    policy_name += ","
+                    policy_name += "\n"
+            if blocking_policies:
                 policy_name += "{/size}"
         elif policy.is_owned() and policy.toggleable:
             policy_name += "\n[[Disabled]"
@@ -36,7 +37,7 @@ init 2 python:
 
         return policy_name
 
-    def get_policy_tree(policy):
+    def get_policy_tree(policy): #Iterates through a policy's depender_policies, should look into adding support for branching later
 
         check_policy = policy
         policy_tree = []
@@ -46,10 +47,10 @@ init 2 python:
             if (len(check_policy.depender_policies) - 1) > count:
                 count += 1
                 #check_policy = check_policy.depender_policies[count]
-                renpy.say("X", str(count) + " " + check_policy.name)
+                #renpy.say("X", str(count) + " " + check_policy.name)
             else:
                 count = 0
-                renpy.say("X", str(count) + " " + check_policy.name)
+                #renpy.say("X", str(count) + " " + check_policy.name)
                 check_policy = check_policy.depender_policies[count]
 
         return policy_tree
@@ -67,6 +68,8 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
         default selected_category = categories[0] #Default to the first in our categories list
         default selected_policy = None
         default selected_tooltip = None
+        if selected_policy:
+            default policy_tree = get_policy_tree(selected_policy)
         vbox:
             xalign 0.5
             yalign 0.15
@@ -126,7 +129,7 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                                         textbutton format_policy_name(policy):
                                             tooltip policy.desc
                                             if selected_policy != policy: # TODO: Make diagnoal hovers less tedious, use a timer?
-                                                hovered [ToggleScreenVariable("selected_policy", policy, None)]
+                                                hovered [ToggleScreenVariable("selected_policy", policy, None), SetScreenVariable("policy_tree", get_policy_tree(policy))]
                                             style "textbutton_no_padding_highlight"
                                             xalign 0.5
                                             text_style "serum_text_style"
@@ -157,12 +160,12 @@ init 2: # Will give this a polish later, just wanted to enable categories from l
                             frame:
                                 viewport:
                                     mousewheel True
-                                    if len(selected_policy.depender_policies) > 5: #Only take up scrollbar space if needed.
+                                    if len(policy_tree) > 5: #Only take up scrollbar space if needed.
                                          scrollbars "vertical"
                                     xfill True
 
-                                    grid 1 len(selected_policy.depender_policies):
-                                        for policy in sorted(sorted(selected_policy.depender_policies, key = lambda x: x.cost), key = lambda x: x.requirement(), reverse = True):
+                                    grid 1 len(policy_tree):
+                                        for policy in sorted(sorted(policy_tree, key = lambda x: x.cost), key = lambda x: x.requirement(), reverse = True):
                                             textbutton format_policy_name(policy):
                                                 tooltip policy.desc
                                                 style "textbutton_no_padding_highlight"
