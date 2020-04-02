@@ -205,4 +205,4 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
         del winner_two
         del loser
         scene_manager.clear_scene()
-    return
+    return "Advance Time"

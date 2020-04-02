@@ -125,7 +125,6 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                     $ town_relationships.improve_relationship(person_two, person_three)
 
                     "Amazing you just fucked two of your employees, wondering if other girls in your company might also be up for this."
-                    return
         else:
             person_two.char "Another time, [person_three.name], let's get back to work."
 
@@ -147,4 +146,4 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
     # clear scene
     $ mc.location.show_background()
     $ scene_manager.clear_scene()
-    return
+    return "Advance Time"
