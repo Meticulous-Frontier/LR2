@@ -331,7 +331,7 @@ init 5 python:
         option_list.append (["Finished", "leave"])
         return option_list
 
-    def update_threesome_action_description(position):
+    def update_threesome_action_description(position, girl_swap_pos):
         for mc_pos in position.mc_position:
             if mc_pos.action_description:
                 if girl_swap_pos:
@@ -340,16 +340,28 @@ init 5 python:
                     mc_pos.description = mc_pos.action_description.replace("{0}", "two" if mc_pos.default_action_person == "two" else "one")
         return
 
+    def choose_threesome_position(girl_one_choice, girl_two_choice):
+        for threeway in list_of_threesomes:
+            if girl_one_choice == threeway.position_one_tag and girl_two_choice == threeway.position_two_tag:
+                position_choice = threeway
+                girl_swap_pos = False
+            if girl_one_choice == threeway.position_two_tag and girl_two_choice == threeway.position_one_tag:
+                position_choice = threeway
+                girl_swap_pos = True
+        update_threesome_action_description(position_choice, girl_swap_pos)
+        return (position_choice, girl_swap_pos)
+
 label start_threesome(the_person_one, the_person_two, start_position = None, start_object = None, round = 0, private = True, girl_in_charge = False, position_locked = False, report_log = None, affair_ask_after = True, hide_leave = False):
     # When called
     if report_log is None:
-        $ report_log = defaultdict(int) #Holds information about the encounter: what positiosn were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
+        $ report_log = defaultdict(int) #Holds information about the encounter: what positions were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
         $ report_log["positions_used"] = []  #We don't need to add threesome to the list, because we add it manually at the end of this function.
         #$ report_log["positions_used"]
 
     $ finished = False #When True we exit the main loop (or never enter it, if we can't find anything to do)
     $ position_choice = None
     $ object_choice = None
+    $ girl_swap_pos = False
 
     #Family situational modifiers
     #Omitting these for now
@@ -367,7 +379,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
         $ position_choice = _return
     else:
         $ position_choice = start_position
-        $ update_threesome_action_description(position_choice)
+        $ update_threesome_action_description(position_choice, girl_swap_pos)
     #pick_threesome can give use the option to swap the girls opening spots
     # if girl_swap_pos:
     #     $ the_person = the_person_one
@@ -681,17 +693,7 @@ label pick_threesome(the_person_one, the_person_two, girl_one_position = None, o
         call screen main_choice_display([build_threesome_person_two_position_choice_menu(the_person_one, the_person_two)])
     $ girl_two_choice = _return
 
-    $ position_choice = None
-    $ girl_swap_pos = False
-    python:
-        for threeway in list_of_threesomes:
-            if girl_one_choice == threeway.position_one_tag and girl_two_choice == threeway.position_two_tag:
-                position_choice = threeway
-                girl_swap_pos = False
-            if girl_one_choice == threeway.position_two_tag and girl_two_choice == threeway.position_one_tag:
-                position_choice = threeway
-                girl_swap_pos = True
-        update_threesome_action_description(position_choice)
+    $ (position_choice, girl_swap_pos) = choose_threesome_position(girl_one_choice, girl_two_choice)
 
     #TODO figure out if position requires an object, if so select the object#
     return position_choice
