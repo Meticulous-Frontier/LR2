@@ -669,6 +669,7 @@ label watcher_check_enhanced(the_person, the_position, the_object, the_report): 
             $ the_person.call_dialogue("being_watched", the_watcher = watcher, the_position = the_position) #Call her response to the person watching her.
             $ the_person.change_arousal(the_person.get_opinion_score("public sex"))
             $ the_person.discover_opinion("public sex")
+        $ the_relationship = None
     $ del watcher
     return
 
