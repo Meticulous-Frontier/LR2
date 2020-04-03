@@ -489,41 +489,13 @@ init -1 python:
 
     Person.run_move = run_move_enhanced
 
-    # BUGFIXED: Judge Outfit function uses the_person instead of self to check effective sluttiness
-    #Judge an outfit and determine if it's too slutty or not. Can be used to judge other people's outfits to determine if she thinks they look like a slut.
-    def judge_outfit_extension(self, outfit, temp_sluttiness_boost = 0, use_taboos = True, as_underwear = False, as_overwear = False):
-        outfit.update_slut_requirement()    # reevaluate sluttiness requirement
-
-        if as_underwear or as_overwear:
-            use_taboos = False
-
-        if use_taboos and not (outfit.bra_covered() and outfit.panties_covered()) and "underwear_nudity" not in self.broken_taboos:
-            taboo_modifier = "underwear_nudity"
-        elif use_taboos and outfit.tits_visible() and "bare_tits" not in self.broken_taboos:
-            taboo_modifier = "bare_tits"
-        elif use_taboos and outfit.vagina_visible() and "bare_pussy" not in self.broken_taboos:
-            taboo_modifier = "bare_pussy"
-        else:
-            taboo_modifier = None
-
-        slut_require = outfit.slut_requirement
-        if as_underwear:
-            slut_require = outfit.get_underwear_slut_score()
-        elif as_overwear:
-            slut_require = outfit.get_overwear_slut_score()
-
-        # renpy.say("", "Judge Outfit:  " + str(outfit.slut_requirement) +  "  (validation sluttiness: " +  str(self.effective_sluttiness() + temp_sluttiness_boost) + ")")
-        return slut_require < (self.effective_sluttiness(taboo_modifier) + temp_sluttiness_boost)
-
-    Person.judge_outfit = judge_outfit_extension
-
     # BUGFIX: Remove suggest effect
     # Sometimes an effect is no longer in bag causing an exception, fix: check if effect exists before trying to remove
     def remove_suggest_effect_fixed(self, amount):
         self.change_suggest(- __builtin__.max(self.suggest_bag or [0])) #Subtract the max
         if amount in self.suggest_bag:
             self.suggest_bag.remove(amount)
-        self.change_suggest(__builtin__.max(self.suggest_bag or [0])) # Add the new max. If we were max, it is now lower, otherwie it cancels out.
+        self.change_suggest(__builtin__.max(self.suggest_bag or [0])) # Add the new max. If we were max, it is now lower, otherwise it cancels out.
 
     Person.remove_suggest_effect = remove_suggest_effect_fixed
 
