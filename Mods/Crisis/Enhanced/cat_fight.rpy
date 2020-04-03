@@ -3,6 +3,18 @@
 init 5 python:
     config.label_overrides["cat_fight_crisis_label"] = "cat_fight_crisis_enhanced_label"
 
+    def cat_fight_crisis_get_girls():
+        the_relationship = get_random_from_list(town_relationships.get_business_relationships(["Rival","Nemesis"])) #Get a random rival or nemesis relationship within the company
+        if the_relationship is None:
+            return (None, None)
+            
+        if renpy.random.randint(0,1) == 1: #Randomize the order so that repeated events with the same people alternate who is person_one and two.
+            person_one = the_relationship.person_a
+            person_two = the_relationship.person_b
+        else:
+            person_one = the_relationship.person_b
+            person_two = the_relationship.person_a
+        return (person_one, person_two)
 
 label cat_fight_crisis_enhanced_label():
     #Two girls have an argument. Side with one over the other or neither (for about break even cost). At higher sluttiness have them kiss and make up.
@@ -10,16 +22,9 @@ label cat_fight_crisis_enhanced_label():
         return
 
     python:
-        the_relationship = get_random_from_list(town_relationships.get_business_relationships(["Rival","Nemesis"])) #Get a random rival or nemesis relationship within the company
-        if the_relationship is None:
+        (person_one, person_two) = cat_fight_crisis_get_girls()
+        if not person_one or not person_two:
             renpy.return_statement() #Just in case something goes wrong getting a relationship we'll exit gracefully.
-        if renpy.random.randint(0,1) == 1: #Randomize the order so that repeated events with the same people alternate who is person_one and two.
-            person_one = the_relationship.person_a
-            person_two = the_relationship.person_b
-        else:
-            person_one = the_relationship.person_b
-            person_two = the_relationship.person_a
-
         scene_manager = Scene()
 
     person_one.char "Excuse me, [person_one.mc_title]?"
@@ -305,7 +310,6 @@ label cat_fight_crisis_enhanced_label():
     python:     # Release variables
         scene_manager.clear_scene()
         the_clothing = None
-        del the_relationship
         del person_one
         del person_two
     return
