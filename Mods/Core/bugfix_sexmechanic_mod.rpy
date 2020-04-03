@@ -12,7 +12,7 @@ init 5 python:
     def girl_choose_position_enhanced(person, ignore_taboo = False):
         position_option_list = []
         for position in list_of_girl_positions:
-            if mc.location.has_object_with_trait(position.requires_location) and (the_person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
+            if mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
                 if position.her_position_willingness_check(the_person, ignore_taboo = ignore_taboo):
                     weight = 3 if position.skill_tag == "Foreplay" else 10
                     position_option_list.append([position, weight])
