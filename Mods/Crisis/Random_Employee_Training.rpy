@@ -134,13 +134,11 @@ label SB_one_on_one_label():
         the_person.char "Thanks for the help, [the_person.mc_title] I'm sure that will come in handy during work around here!"
         if not perk_system.has_ability_perk("Those Who Can't, Teach"):
             "Teaching someone else has given you new insights into your own skills. You realize by teaching others, you increase you own mastery in a given skill set."
-            $ those_who_teach = Ability_Perk(description = "When you teach someone else a skill, you also gain a skill point in that area.", toggle = False, usable = False)
-            $ perk_system.add_ability_perk(those_who_teach, "Those Who Can't, Teach")
+            $ perk_system.add_ability_perk(Ability_Perk(description = "When you teach someone else a skill, you also gain a skill point in that area.", toggle = False, usable = False), "Those Who Can't, Teach")
         elif not perk_system.has_ability_perk("Those Who Can, Do"):
             if skill_master:
                 "Sharing with someone a skill you thought you had wholly mastered reveals a few final deficient areas. You feel like you can take your skills even further now."
-                $ those_who_do = Stat_Perk(description = "Teaching others has raised your skill ceiling to new levels. +1 work skills cap", skill_cap = 1)
-                $ perk_system.add_stat_perk(those_who_do, "Those Who Can, Do")
+                $ perk_system.add_stat_perk(Stat_Perk(description = "Teaching others has raised your skill ceiling to new levels. +1 work skills cap", skill_cap = 1), "Those Who Can, Do")
     else:
         the_person.char "Thats okay, [the_person.mc_title], I understand. Maybe another time then!"
 

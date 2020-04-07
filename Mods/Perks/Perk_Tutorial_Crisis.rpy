@@ -19,8 +19,7 @@ label Perk_Tutorial_Crisis_label():
     mc.name "Seriously? Right now?"
     the_person.char "I'm sorry, I know you're tired, but it'll just be a moment I promise!"
     "You aren't sure you can get up. You try to dig deep so you can help [the_person.title] in her time of need."
-    $ time_of_need = Ability_Perk(description = "You dig deep and summon reserves of energy to meet the needs of others. Recovers 100 energy, usable once per week.", toggle = False, usable = True, usable_func = time_of_need_func, usable_cd = 7)
-    $ perk_system.add_ability_perk(time_of_need, "Time of Need")
+    $ perk_system.add_ability_perk(Ability_Perk(description = "You dig deep and summon reserves of energy to meet the needs of others. Recovers 100 energy, usable once per week.", toggle = False, usable = True, usable_func = time_of_need_func, usable_cd = 7), "Time of Need")
     "You have gained the Perk: Time of Need!"
     while mc.energy < 40:
         "Open the perk screen and click on your new perk to continue."

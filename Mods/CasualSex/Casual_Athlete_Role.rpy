@@ -529,10 +529,8 @@ label casual_athlete_race_crisis_label(the_person):
     the_person.char "Ayup! Don't worry. Alright, if its okay with you, I think I'm gonna take a nap..."
     "You excuse yourself. You grab your clothes and head out. You now know [the_person.title]'s address, with a standing offer to come over and fuck her silly!"
     $ the_person.event_triggers_dict["athlete_progress"] = 4
-    $ casual_athlete_energy_perk = Stat_Perk(description = "Training for the big race has helped improve your energy level. +20 max energy, +40 energy cap.", energy_bonus = 20, bonus_is_temp = False, energy_cap = 40)
-    $ perk_system.add_stat_perk(casual_athlete_energy_perk, "Athlete Energy Bonus")
-    $ second_wind = Ability_Perk(description = "You take a few deep breaths and recover a bit of your energy. Use this perk to regain half your max energy, once per day.", toggle = False, usable = True, usable_func = second_wind_func, usable_cd = 1)
-    $ perk_system.add_ability_perk(second_wind, "Second Wind")
+    $ perk_system.add_stat_perk(Stat_Perk(description = "Training for the big race has helped improve your energy level. +20 max energy, +40 energy cap.", energy_bonus = 20, bonus_is_temp = False, energy_cap = 40), "Athlete Energy Bonus")
+    $ perk_system.add_ability_perk(Ability_Perk(description = "You take a few deep breaths and recover a bit of your energy. Use this perk to regain half your max energy, once per day.", toggle = False, usable = True, usable_func = second_wind_func, usable_cd = 1), "Second Wind")
     "You walk away with a spring in your step. You feel like training for and running the race has given you more energy."
     "You have gained the second wind ability perk. You can now recover half your max energy, once per day!"
     return
