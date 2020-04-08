@@ -12,10 +12,7 @@ init 3 python:
         menu_tooltip = "Create a near identical clone of the targeted person")
 
     def biotech_modify_person_requirement():
-        if "body_customizer_policy" in globals():
-            if rd_division_policy.is_owned() and body_customizer_policy.is_owned():
-                return True
-        return "Requires: [body_customizer_policy.name] policy upgrade"
+        return True
 
     biotech_modify_person = Action("Modify a person", biotech_modify_person_requirement, "biotech_modify_person",
         menu_tooltip = "Modify the appearance of a person through magic, not science")
@@ -98,32 +95,23 @@ label biotech_gene_modifications():
 
 
 label biotech_clone_person():
-    $ clone_name = None
-    $ clone_last_name = None
-    $ clone_age = None
-
     while True:
         # only known people who are not unique character or clone herself (genetic degradation too high)
-        $ people_list = get_sorted_people_list([x for x in known_people_in_the_game([mc] + unique_character_list) if not clone_role in x.special_role], "Clone Person", ["Back"])
-
         if "build_menu_items" in globals():
-            call screen main_choice_display(build_menu_items([people_list]))
+            call screen main_choice_display(build_menu_items([get_sorted_people_list([x for x in known_people_in_the_game([mc] + unique_character_list) if not clone_role in x.special_role], "Clone Person", ["Back"])]))
         else:
-            call screen main_choice_display([people_list])
-        $ person_choice = _return
-        $ del people_list
+            call screen main_choice_display([get_sorted_people_list([x for x in known_people_in_the_game([mc] + unique_character_list) if not clone_role in x.special_role], "Clone Person", ["Back"])])
 
-        if person_choice == "Back":
+        if _return == "Back":
             return # Where to go if you hit "Back".
         else:
-            call cloning_process(person_choice) from _call_cloning_process
+            call cloning_process(_return) from _call_cloning_process
 
 label cloning_process(person = the_person): # default to the_person when not passed as parameter
     $ person.draw_person(emotion = "default")
-    python:
-        clone_name = None
-        clone_last_name = None
-        clone_age = None
+    $ clone_name = None
+    $ clone_last_name = None
+    $ clone_age = None
 
     while True:
         menu:
@@ -145,19 +133,15 @@ label cloning_process(person = the_person): # default to the_person when not pas
 
 label biotech_modify_person():
     while True:
-        $ people_list = get_sorted_people_list(known_people_in_the_game([mc]), "Modify Person", ["Back"])
-
         if "build_menu_items" in globals():
-            call screen main_choice_display(build_menu_items([people_list]))
+            call screen main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game([mc]), "Modify Person", ["Back"])]))
         else:
-            call screen main_choice_display([people_list])
-        $ person_choice = _return
-        $ del people_list
+            call screen main_choice_display([get_sorted_people_list(known_people_in_the_game([mc]), "Modify Person", ["Back"])])
 
-        if person_choice == "Back":
+        if _return == "Back":
             return # Where to go if you hit "Back".
         else:
-            call modification_process(person_choice) from _call_modification_process
+            call modification_process(_return) from _call_modification_process
 
 label modification_process(person = the_person): # when called without specific person use the_person variable
     $ person.draw_person(emotion = "default")
