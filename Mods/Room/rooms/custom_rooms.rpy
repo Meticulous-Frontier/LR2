@@ -61,6 +61,9 @@ label activate_custom_rooms(stack):
     call store_downtown_hotel() from _call_store_downtown_hotel_1
     call store_purgatory_room() from _call_store_purgatory_room_1
 
+    # initialize dungeon room creation action
+    $ add_dungeon_intro_action()
+
     $ execute_hijack_call(stack)
     return
 
