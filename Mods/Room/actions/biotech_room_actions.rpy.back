@@ -69,15 +69,11 @@ init 3 python:
             start_sluttiness = person.sluttiness, start_obedience = person.obedience, start_happiness = person.happiness, start_love = person.love, start_home = None, title = "Clone", possessive_title = "Your creation", mc_title = "Creator", relationship = "Single", kids = 0, force_random = True)
 
         clone.generate_home()
-        clone.schedule[0] = rd_division_basement
-        clone.schedule[1] = rd_division_basement
-        clone.schedule[2] = rd_division_basement
-        clone.schedule[3] = rd_division_basement
-        clone.schedule[4] = rd_division_basement
+        clone.set_schedule([0,1,2,3,4], dungeon)
 
         clone.special_role.append(clone_role)
 
-        rd_division_basement.add_person(clone) #Create rooms for the clones to inhabit until a schedule is given (through being hired or player input)
+        dungeon.add_person(clone) #Create rooms for the clones to inhabit until a schedule is given (through being hired or player input)
         return
 
     biotech_change_breasts = Action("Change breasts: [person.tits]", biotech_change_breasts_requirement, "biotech_change_breasts",
@@ -141,7 +137,7 @@ label cloning_process(person = the_person): # default to the_person when not pas
                     $ clone_age = 18
             "Begin production: {image=gui/heart/Time_Advance.png}\n{size=22}Name: [clone_name] [clone_last_name], Age: [clone_age]{/size}":
                 $ create_clone(person, clone_name, clone_last_name, clone_age)
-                "The clone has been created and is now awaiting you in [rd_division_basement.formalName]"
+                "The clone has been created and is now awaiting you in [dungeon.formalName]"
                 call advance_time from _call_advance_time_cloning_process
                 return
             "Back":

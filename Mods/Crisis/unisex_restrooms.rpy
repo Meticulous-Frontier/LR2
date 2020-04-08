@@ -227,19 +227,6 @@ label unisex_restroom_sexy_overhear_label():
         anon_char_two "...But I [text_one] [text_two], so I'm not sure what to do."
         "Wow, you can learn all kinds of stuff just hanging out in the bathroom stall. If only you knew who it was!"
     "You hear the girls finish up and leave the restroom. You wash your hands and leave as well."
-    if purchase_security_room_policy.is_owned(): #You have purchased the security room policy.
-        if not discover_identity:
-            "You look around, and notice as you exit the restroom the security cameras in the hall. You could head down to the security room."
-            "If you went back through the footage, you could probably figure out who was in the restroom with you, but you also feel like this would also be a bit of an invasion of privacy..."
-            menu:
-                "Go to security room":
-                    #TODO change to security room background
-                    "You head down to the security room. Going through the footage from the cameras in the hall, you watch yourself entering the restroom."
-                    "A short time later, you see [the_person_one.title] and [the_person_two.title] entering. They must have been the ones talking!"
-                    $ the_person_one.discover_opinion(overhear_topic)
-                    $ the_person_two.discover_opinion(overhear_topic_two)
-                "Don't snoop":
-                    "You decide for now not to do that. It just feels creepy, trying to figure out who was talking by looking at security footage..."
 
     $ town_relationships.improve_relationship(the_person_one, the_person_two)
     $ del the_person_one
@@ -298,20 +285,6 @@ label unisex_restroom_fantasy_overhear_label():
     "The girls finish up and leave the restroom, leaving you alone inside."
     if discover_identity:
         "That was some pretty hot storytelling. You should definitely go see [the_person_one.title] later and act it out maybe?"
-    else:
-        if purchase_security_room_policy.is_owned(): #You have purchased the security room policy.
-            "You finish up and wash your hands, then leave the restroom, looking around. No sign of the girls."
-            "However, you notice as you exit the restroom the security cameras in the hall. You could head down to the security room."
-            "If you went back through the footage, you could probably figure out who was in the restroom with you and possibly even deduce who is having fantasies of getting bent over by you!"
-            menu:
-                "Go to security room":
-                    $ m_division_basement.show_background()
-                    "You head down to the security room. Going through the footage from the cameras in the hall, you watch yourself entering the restroom."
-                    "A short time later, you see [the_person_one.title] and [the_person_two.title] entering. They must have been the ones talking!"
-                    "It must have been [the_person_one.title]! You can picture her now, talking about all the things you heard as you were in the restroom."
-                    $ discover_identity = True
-                "Don't snoop":
-                    "You decide for now not to do that. It just feels creepy, trying to figure out who was talking by looking at security footage..."
 
     $ town_relationships.improve_relationship(the_person_one, the_person_two)
     # if we don't have the fantasy actout limited time event for the person, add it to the on_talk_event_list.

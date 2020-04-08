@@ -36,8 +36,6 @@ init 10 python:
 
     collar_slave_action = ActionMod("Place collar on [the_person.title].", collar_slave_requirement, "slave_collar_person_label", menu_tooltip = "Put a collar of ownership on the target, ensure that their obedience stays high.", category = "Slave Role")
     uncollar_slave_action = ActionMod("Remove collar from [the_person.title].", uncollar_slave_requirement, "slave_collar_person_label", menu_tooltip = "Remove the collar, declaring them a free spirit.", category = "Dungeon Actions", allow_disable = False)
-    if advance_time_collar_person_action not in advance_time_action_list:
-        advance_time_action_list.append(advance_time_collar_person_action)
 
     wakeup_duty_action = ActionMod("Wake me up in the morning.", wakeup_duty_requirement, "wakeup_duty_label", menu_tooltip = "Have your slave wake you up in the morning", category = "Slave Role")
     wakeup_duty_crisis = Action("Slave Alarm Clock", wakeup_duty_crisis_requirement, "slave_alarm_clock_label")

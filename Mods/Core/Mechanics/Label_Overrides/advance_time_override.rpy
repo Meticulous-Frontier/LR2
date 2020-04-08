@@ -39,6 +39,15 @@ init -1 python:
     def advance_time_collar_person_requirement():
         return collar_slave_action.enabled
 
+    def advance_time_mandatory_vibe_action_requirement():
+        # Only run while employees are at work. # Action runs if the policy is owned. Is_owned() checks if it is in the mc.business.policy_list
+        if mc.business.is_open_for_business():
+            return man
+            policy = get_from_policy_list(mandatory_vibe_policy)
+            if policy:
+                return policy.is_owned() and policy.enabled
+        return False
+
 init 5 python:
     global crisis_chance
     global morning_crisis_chance
@@ -97,10 +106,13 @@ init 5 python:
     advance_time_collar_person_action = ActionMod("Execute slave 'collar'", advance_time_collar_person_requirement,
         "advance_time_collar_person_label", allow_disable = False, priority = 22, menu_tooltip = "Allows the collar_slave_action to do what it is intended to.")
 
+    # Mandatory Vibe Company Action
+    advance_time_mandatory_vibe_company_action = ActionMod("Attach vibes to outfits", advance_time_mandatory_vibe_action_requirement, 
+        "advance_time_mandatory_vibe_company_label", priority = 2, enabled = False, allow_disable = False, category = "Business")
 
     advance_time_action_list = [advance_time_people_run_turn_action, advance_time_people_run_day_action, advance_time_end_of_day_action, advance_time_next_action, advance_time_mandatory_crisis_action,
         advance_time_random_crisis_action, advance_time_mandatory_morning_crisis_action, advance_time_random_morning_crisis_action, advance_time_daily_serum_dosage_action,
-        advance_time_people_run_move_action, advance_time_bankrupt_check_action, advance_time_stay_wet_action, advance_time_collar_person_action]
+        advance_time_people_run_move_action, advance_time_bankrupt_check_action, advance_time_stay_wet_action, advance_time_collar_person_action, advance_time_mandatory_vibe_company_action]
 
     # actions that trigger events
     advance_time_event_action_list = [advance_time_mandatory_crisis_action, advance_time_random_crisis_action, advance_time_mandatory_morning_crisis_action, advance_time_random_morning_crisis_action]
@@ -217,13 +229,17 @@ init 5 python:
     def advance_time_slave_stay_wet(people):
         for (person, place) in [x for x in people if x[0].stay_wet and x[0].arousal < 50]:
             person.arousal = 50
-            if person.sluttiness < 15:
-                person.sluttiness = 15 # Doesn't make sense for them to be "ready" if they cannot be seduced.
         return
 
     def advance_time_slave_collar(people):
         for (person,place) in [x for x in people if x[0].slave_collar and x[0].obedience < 130]:
             person.obedience = 130
+        return
+
+    def advance_time_mandatory_vibe():
+        if mc.business.is_open_for_business():
+            for person in [x for x in mc.business.get_employee_list() if x.arousal < 30]:
+                person.arousal = 30
         return
 
 label advance_time_move_to_next_day(no_events = True):
@@ -422,5 +438,9 @@ label advance_time_stay_wet_label():
 
 label advance_time_collar_person_label():
     $ advance_time_slave_collar(people_to_process)
+    return
+
+label advance_time_mandatory_vibe_company_label():
+    $ advance_time_mandatory_vibe()
     return
 

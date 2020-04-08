@@ -32,11 +32,6 @@ init -1 python:
 
     # Based on suggestion from DaMatt on F95Zone
     def change_production_enhanced(self,new_serum,production_line):
-        if "machinery_room_overload" in globals(): # Should not cause issues if not present.
-            production_max = machinery_room_overload
-        else:
-            production_max = 100
-
         if production_line in self.serum_production_array: #If it already exists, change the serum type and production points stored, but keep the weight for that line (it can be changed later)
             self.serum_production_array[production_line][0] = new_serum
             self.serum_production_array[production_line][1] = int(production_max - self.get_used_line_weight() + self.serum_production_array[production_line][1]) #Set the production weight to everything we have remaining
