@@ -78,7 +78,7 @@ init 5 python:
 
         #Privacy modifiers
         if not private:
-            if person.sluttiness < 50:
+            if person.effective_sluttiness() < 50:
                 person.add_situational_slut("public_sex", -10 + person.get_opinion_score("public sex") * 5, "There are people watching...")
             else:
                 person.add_situational_slut("public_sex", person.get_opinion_score("public sex") * 5, "There are people watching!")
@@ -90,7 +90,7 @@ init 5 python:
             if girlfriend_role in person.special_role: #Girlfriend and affairs gain full Love
                 person.add_situational_slut("love_modifier", person.love, "You're my special someone, I love you!")
             elif affair_role in person.special_role:
-                person.add_situational_slut("love_modifier", person.love, "We may keep it a secret, but I love you!")
+                person.add_situational_slut("love_modifier", person.love, "I have kept it a secret, but I love you!")
             elif person.has_family_taboo(): #Family now only gains 1/4 (but this now helps offset the taboo penalty)
                 if mother_role in person.special_role:
                     person.add_situational_slut("love_modifier", __builtin__.int(person.love/4), "Even if it's wrong, a mother should do everything she can for her son!")
@@ -100,10 +100,25 @@ init 5 python:
                     person.add_situational_slut("love_modifier", __builtin__.int(person.love/4), "I love you, even though we're related!")
             else: #If you aren't in a relationship with them only half their Love applies.
                 person.add_situational_slut("love_modifier", __builtin__.int(person.love/2), "I really like you, let's see where this goes!")
+
+        # Happiness modifiers
+        if the_person.happiness <= 95:
+            happiness_effect = __builtin__.round((100 - the_person.happiness)/5.0)
+            if the_person.happiness <= 75:
+                the_person.add_situational_slut("happiness_modifier", happiness_effect, "I'm so unhappy, I just don't want to do anything!")
+            else:
+                the_person.add_situational_slut("happiness_modifier", happiness_effect, "I'm just not in the mood right now.")
+        elif the_person.happiness >= 105:
+            happiness_effect = __builtin__.round((the_person.happiness - 100)/5.0)
+            if the_person.happiness >= 125:
+                the_person.add_situational_slut("happiness_modifier", happiness_effect, "I'm so happy, I'm up for anything!")
+            else:
+                the_person.add_situational_slut("happiness_modifier", happiness_effect, "Today's a good day, let's see where this goes!")
         return
 
     def clear_sex_modifiers(person):
         # Teardown the sex modifiers
+        person.clear_situational_slut("happiness_modifier")
         person.clear_situational_slut("love_modifier")
         person.clear_situational_slut("public_sex")
         person.clear_situational_slut("cheating")
@@ -193,6 +208,10 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     $ use_condom = mc.condom if asked_for_condom else False
     $ stealth_orgasm = False
 
+    #Privacy modifiers
+    if mc.location.get_person_count() == 1 and not private:
+        $ private = True #If we're alone in the space we're always Private, even if we had left the possibility for people being around.
+
     # $ renpy.say("", "Fuck Person Enhanced => start position: " + ("None" if start_position is None else start_position.name) + " , object: " + ("None" if start_object is None else start_object.name))
     $ apply_sex_modifiers(the_person)
 
@@ -213,7 +232,12 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     $ object_choice = girl_choose_object_enhanced(the_person, position_choice)
                     if object_choice and not has_taken_control:
                         # show dialog of girl changing position on her own
-                        $ position_choice.call_transition(round_choice, the_person, mc.location, object_choice)
+                        if the_person.has_taboo(position_choice.associated_taboo) and not ignore_taboo:
+                            $ position_choice.call_taboo_break(the_person, mc.location, object_choice)
+                            $ the_person.break_taboo(position_choice.associated_taboo)
+                        else:
+                            $ position_choice.call_transition(round_choice, the_person, mc.location, object_choice)
+
             if position_choice is None: #There's no position we can take
                 "[the_person.title] can't think of anything more to do with you."
                 $ round_choice = "Girl Leave"
@@ -307,7 +331,10 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     "Your post orgasm cock softens, stopping you from [position_choice.verbing] [the_person.possessive_title] for now."
                     $ position_choice = None
                 elif position_choice.guy_energy > mc.energy:
-                    "You're too exhausted to continue [position_choice.verbing] [the_person.possessive_title]."
+                    if girl_in_charge:
+                        "You're too exhausted to let [the_person.possessive_title] keep [position_choice.verbing] you."
+                    else:
+                        "You're too exhausted to continue [position_choice.verbing] [the_person.possessive_title]."
                     $ position_choice = None
                 elif position_choice.girl_energy > the_person.energy:
                     #TODO: Add some differentiated dialgoue depending on the position.
@@ -340,39 +367,37 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
         elif round_choice == "Leave":
             $ finished = True # Unless something stops us the encounter is over and we can end
 
-            # only consider continue when the girl and the mc have enough energy
-            if the_person.energy > 15 and mc.energy > 15:
-                # In 13% of the cases she takes control regardless of obedience, but only when she came only once
-                # higher chance when she likes taking control lower when she doesn't
-                if report_log.get("girl orgasms", 0) < 2 and (renpy.random.randint(0,the_person.arousal) + 50 + the_person.get_opinion_score("taking control") * 20 > the_person.obedience or renpy.random.randint(1, 7 - (the_person.get_opinion_score("taking control") * 2)) == 1):
-                    $ the_person.change_obedience(-3)
-                    $ girl_in_charge = True
-                    $ finished = False
-                    $ guy_orgasms_before_control = report_log.get("guy orgasms", 0)
-                    $ has_taken_control = True #After successful position and object choice she will let you know she wants to keep going.
-                    $ position_choice = None #She picks the position now, because she has her own list of possibilities
+            # In 13% of the cases she takes control regardless of obedience, but only when she came only once
+            # higher chance when she likes taking control lower when she doesn't
+            if the_person.energy >= 30 and report_log.get("girl orgasms", 0) < 2 and (renpy.random.randint(0,the_person.arousal) + 50 + the_person.get_opinion_score("taking control") * 20 > the_person.obedience or renpy.random.randint(1, 7 - (the_person.get_opinion_score("taking control") * 2)) == 1):
+                $ the_person.change_obedience(-3)
+                $ girl_in_charge = True
+                $ finished = False
+                $ guy_orgasms_before_control = report_log.get("guy orgasms", 0)
+                $ has_taken_control = True #After successful position and object choice she will let you know she wants to keep going.
+                $ position_choice = None #She picks the position now, because she has her own list of possibilities
 
-                elif (the_person.arousal > the_person.max_arousal - 30) and (report_log.get("girl orgasms", 0) == 0) and report_log.get("beg finish", 0) == 0: #Within 30 of orgasming and she hasn't cum yet
-                    # They're close to their orgasm and beg you to help them finish.
-                    $ the_person.call_dialogue("sex_beg_finish")
-                    menu:
-                        "Give her what she wants":
-                            $ the_person.change_obedience(2)
-                            $ report_log["beg finish"] = report_log.get("beg finish", 0) + 1
-                            $ finished = False
-                            $ position_locked = False
+            elif the_person.energy >= 30 and (the_person.arousal > the_person.max_arousal - 30) and (report_log.get("girl orgasms", 0) == 0) and report_log.get("beg finish", 0) == 0: #Within 30 of orgasming and she hasn't cum yet
+                # They're close to their orgasm and beg you to help them finish.
+                $ the_person.call_dialogue("sex_beg_finish")
+                menu:
+                    "Give her what she wants":
+                        $ the_person.change_obedience(2)
+                        $ report_log["beg finish"] = report_log.get("beg finish", 0) + 1
+                        $ finished = False
+                        $ position_locked = False
 
-                        "Stop and leave":
-                            $ the_person.call_dialogue("sex_end_early")
+                    "Stop and leave":
+                        $ the_person.call_dialogue("sex_end_early")
 
-                elif report_log.get("beg finish", 0) > 0 and report_log.get("girl orgasms", 0) == 0: #You promised to make her cum but didn't
-                    $ the_person.change_stats(obedience = -5, happiness = -10, love = -3)
-                    the_person.char "But you promised..."
-                    #TODO: Add some personality specific dialgoue for this
+            elif report_log.get("beg finish", 0) > 0 and report_log.get("girl orgasms", 0) == 0: #You promised to make her cum but didn't
+                $ the_person.change_stats(obedience = -5, happiness = -10, love = -3)
+                the_person.char "But you promised..."
+                #TODO: Add some personality specific dialgoue for this
 
-                else: # You end the encounter and nothing special happens.
-                    #TODO: Add some personality specific dialogue
-                    pass
+            else: # You end the encounter and nothing special happens.
+                #TODO: Add some personality specific dialogue
+                pass
 
         elif round_choice == "Girl Leave":
             $ finished = True
@@ -745,8 +770,8 @@ label girl_strip_event_enhanced(the_person, the_position, the_object):
 
     # Called when the girl has a chance of stripping down. Checks what she's prefer to strip based on her opinions.
     python:
-        strip_chance = the_person.effective_sluttiness() - the_person.outfit.slut_requirement
-        strip_chance += the_person.get_opinion_score("not wearing anything") * 5
+        ran_num = the_person.effective_sluttiness() - the_person.outfit.slut_requirement
+        ran_num += the_person.get_opinion_score("not wearing anything") * 5
         the_clothing = None
         if the_person.get_opinion_score("showing her tits") > the_person.get_opinion_score("showing her ass"): # If she has a preference (even a least-bad preference) she'll strip that down first.
             the_clothing = the_person.outfit.remove_random_any(exclude_feet = True, exclude_lower = True, do_not_remove = True)
@@ -755,11 +780,14 @@ label girl_strip_event_enhanced(the_person, the_position, the_object):
         if the_clothing is None: #Either our previous checks failed to produce anything OR they were equal
             the_clothing = the_person.outfit.remove_random_any(exclude_feet = True, do_not_remove = True)
 
-    if renpy.random.randint(0,100) < strip_chance and the_clothing:
+    if renpy.random.randint(0,100) < ran_num and the_clothing:
         if renpy.random.randint(0,100) < the_person.obedience - the_person.arousal:
             $ the_position.call_strip_ask(the_person, the_clothing, mc.location, the_object)
         else:
             $ the_position.call_strip(the_person, the_clothing, mc.location, the_object) #If a girl's outfit is less slutty than she is currently feeling (with arousal factored in) she will want to strip stuff off.
+
+        $ the_person.update_outfit_taboos()       
+        $ the_clothing = None
     return
 
 # call after striping to show the stripping taboo break dialog
