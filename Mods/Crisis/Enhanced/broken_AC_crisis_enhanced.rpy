@@ -60,7 +60,7 @@ label broken_AC_crisis_label_enhanced:
             $ broken_AC_crisis_update_stats(-5, 2)
             "The repair man shows up early and it turns out to be an easy fix. The lab is soon back up and running."
 
-        "Tell everyone to strip down and keep working" if casual_uniform_policy.is_owned():
+        "Tell everyone to strip down and keep working" if casual_uniform_policy.is_active():
             if len(mc.business.production_team) > 1: #We have more than one person, do a group strip scene.
                 mc.name "I know it's uncomfortable in here right now, but we're just going to have to make due."
                 mc.name "If anyone feels the need to take something off to get comfortable, I'm lifting the dress code until the air conditioning is fixed."
@@ -135,7 +135,7 @@ label broken_AC_crisis_label_enhanced:
             if removed_something:
                 $ broken_AC_crisis_update_sluttiness();
 
-        "Tell everyone to strip down and keep working.\n{color=#ff0000}{size=22}Requires: [casual_uniform_policy.name]{/color} (disabled)" if not casual_uniform_policy.is_owned():
+        "Tell everyone to strip down and keep working.\n{color=#ff0000}{size=22}Requires: [casual_uniform_policy.name]{/color} (disabled)" if not casual_uniform_policy.is_active():
             pass
     $renpy.scene("Active")
     return

@@ -186,7 +186,7 @@ init -1 python:
         work_uniforms_score = person.get_opinion_score("work uniforms") / 40.0 # low impact on sluttiness
         marketing_score = 0
         # girls working in marketing know they make more sales when wearing a sluttier outfit, so this affects their uniform choice
-        if male_focused_marketing_policy.is_owned() and mc.business.get_employee_title(person) == "Marketing":
+        if male_focused_marketing_policy.is_active() and mc.business.get_employee_title(person) == "Marketing":
             marketing_score = .05
 
         # modify target sluttiness based on opinions
@@ -266,7 +266,7 @@ init -1 python:
         skimpy_outfit_score = person.get_opinion_score("skimpy outfits") / 20.0
         marketing_score = 0
         # girls working in marketing know they make more sales when wearing a sluttier outfit, so this affects their uniform choice
-        if male_focused_marketing_policy.is_owned() and mc.business.get_employee_title(person) == "Marketing":
+        if male_focused_marketing_policy.is_active() and mc.business.get_employee_title(person) == "Marketing":
             marketing_score = .05
 
         target_sluttiness = __builtin__.int(person.sluttiness * (1 + skimpy_outfit_score + marketing_score + sluttiness_modifier - conservative_score))
