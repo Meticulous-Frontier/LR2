@@ -97,7 +97,10 @@ init -1 python:
         for overwear in self.overwear_sets:
             if selected_overwear is None or overwear.get_overwear_slut_score() < selected_overwear.get_overwear_slut_score():
                 selected_overwear = overwear
-        return selected_overwear.get_copy()
+
+        if selected_overwear:               
+            return selected_overwear.get_copy()
+        return None
 
     Wardrobe.pick_overwear_with_lowest_sluttiness = pick_overwear_with_lowest_sluttiness
 
@@ -106,7 +109,10 @@ init -1 python:
         for underwear in self.underwear_sets:
             if selected_underwear is None or underwear.get_underwear_slut_score() < selected_underwear.get_underwear_slut_score():
                 selected_underwear = underwear
-        return selected_underwear.get_copy()
+        
+        if selected_underwear:
+            return selected_underwear.get_copy()
+        return None
 
     Wardrobe.pick_underwear_with_lowest_sluttiness = pick_underwear_with_lowest_sluttiness
 
