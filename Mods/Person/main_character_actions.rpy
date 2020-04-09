@@ -59,6 +59,9 @@ init 2 python:
                 return True
         return False
 
+    def mc_ask_take_serum_requirement(person):
+        return True #Consider only allow asking non employees to take serum.
+
 
 init 5 python:
     # Schedule Actions
@@ -94,7 +97,9 @@ init 5 python:
     # Pay to Strip | Allows you to enter the pay_strip label used in certain events if requirements are met.
     pay_to_strip_action = ActionMod("Pay [the_person.title] to strip", mc_action_pay_to_strip_requirement, "mc_pay_to_strip_label", menu_tooltip = "Pay the person to give you a strip tease.", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
-    main_character_actions_list = [mc_schedule_person_action, mc_start_follow_action, mc_stop_follow_action, mc_hire_person_action, mc_rename_person_action, mc_spend_the_night_action, pay_to_strip_action]
+    ask_take_serum = ActionMod("Ask [the_person.title] to test serum", mc_ask_take_serum_requirement, "mc_ask_take_serum_label", menu_tooltip = "Ask her to voluntarily test a serum.", category = "Generic People Actions", initialization = init_action_mod_disabled)
+
+    main_character_actions_list = [mc_schedule_person_action, mc_start_follow_action, mc_stop_follow_action, mc_hire_person_action, mc_rename_person_action, mc_spend_the_night_action, pay_to_strip_action, ask_take_serum]
 
 
 label mc_pay_to_strip_label(person):
@@ -270,4 +275,42 @@ label mc_stop_follow_label(person):
     the_person.title "Okay [the_person.mc_title], I'll head over to [schedule_destination]"
 
 
+    return
+
+label mc_ask_take_serum_label(person):  #TODO possibly temporary addition to the mod. Copies the old mechanics for asking a girl to take a serum.
+    $ ask_serum_chance = 10*mc.charisma + 5*person.int
+    if ask_serum_chance < 0:
+        $ ask_serum_chance = 0
+    elif ask_serum_chance > 100:
+        $ ask_serum_chance = 100
+    $ ran_num = renpy.random.randint(0,100)
+
+    "You consider asking [person.title] to voluntarily take one of your serums as a test."
+    menu:
+        "Ask her to take it.\n{size=22}Success Chance: [ask_serum_chance]%%{/size}":
+            if mc.business.get_employee_title(person) == "None":
+                mc.name "[person.title], I've got a project going on at work that could really use a test subject. Would you be interested in helping me out?"
+
+            else:
+                mc.name "[person.title], there's a serum design that is in need of a test subject. Would you be interested in helping out with a quick field study?"
+
+            if ran_num < ask_serum_chance:
+                #Success
+                if mc.business.get_employee_title(person) == "None":
+                    if person.personality.personality_type_prefix == "nora":
+                        person.char "I'd be happy to help. I've seen your work, I have complete confidence you've tested this design thoroughly."
+                    else:
+                        person.char "I'd be happy to help, as long as you promise it's not dangerous of course. I've always wanted to be a proper scientist!"
+                else:
+                    person.char "I'll admit I'm curious what it would do to me. Okay, as long as it's already passed the safety test requirements, of course."
+                mc.name "It's completely safe, we just need to test what the results from it will be. Thank you."
+                call give_serum(person) from _call_give_serum_modded_addition_2
+
+            else:
+                #Denies
+                $ person.change_obedience(-2)
+                person.char "I'm... I don't think I would be comfortable with that. Is that okay?"
+                mc.name "Of course it is, that's why I'm asking in the first place."
+        "Reconsider":
+            pass
     return
