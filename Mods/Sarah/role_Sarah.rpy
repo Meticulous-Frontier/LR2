@@ -52,6 +52,7 @@ init 2 python:
         sarah.event_triggers_dict["stripclub_progress"] = 0    # 0 = not complete, 1 = strip club even complete
         sarah.event_triggers_dict["initial_threesome_target"] = None    #this will hold who sarah decides she wants to have a threesome with.
         sarah.event_triggers_dict["threesome_unlock"] = False   #Set this to true after first threesome with Sarah
+        sarah.event_triggers_dict["favorite_drink"] = "appletini"
 
         # add appoint
         office.actions.append(HR_director_appointment_action)
@@ -193,7 +194,7 @@ init -1 python:
 
     def Sarah_weekend_surprise_crisis_requirement():
         if time_of_day > 1:
-            if sarah.sluttiness > 50:
+            if sarah.event_triggers_dict.get("drinks_out_progress", 0) >= 2:   #You've gotten drinks out with Sarah before.
                 if day%7 == 5:  #Saturday
                     if mc.is_at_work():
                         return True
@@ -1806,7 +1807,7 @@ label Sarah_arrange_threesome_label(the_person):
             the_person.char "Can't. I have other plans for Saturday night."
             mc.name "You're always doing something late at night. What have you been up to anyway?"
             the_person.char "Nothing! Its none of your business, even if I was doing something."
-            mc.name "Can't you just give up on Saturday night?"
+            mc.name "Can't you just give up one Saturday night?"
             the_person.char "What's it worth to you?"
             mc.name "What?"
             the_person.char "Give me $500, right now, and I'll be there."
@@ -2322,11 +2323,30 @@ label Sarah_weekend_surprise_crisis_label():
     the_person.char "[the_person.mc_title]! Working away your weekend again I see!"
     "You look up to see the now familiar face of [the_person.title] standing in the doorway."
     $ scene_manager.add_actor(the_person, emotion = "happy")
-    the_person.char "You work too much! Let's go head to the bar!"
+    the_person.char "You work too much! Let's go have some fun somewhere!"
     "You have been working quite a bit lately, it would be good to have a chance to blow off some steam."
     menu:
         "Let's Go":
-            "This option has not yet been implemented."
+            the_person.char "Yes! You won't regret this. Let's go!"
+            "You finish up what you are working on and grab your stuff. You make sure to lock up the business on your way out with [the_person.possessive_title]"
+            "As you exit the building, you consider where you should head for the night."
+            menu:
+                "The Bar" if sarah.event_triggers_dict.get("drinks_out_progress", 0) >= 2:    #If you've grabbed drinks before. In requirements, so this SHOULD always be true
+                    pass
+                    mc.name "What do you say we head to the bar and have a few drinks? Maybe play some darts?"
+                    the_person.char "Oh! That sounds great!"
+                    call Sarah_weekend_date_grab_drinks_label from sarah_weekend_date_crisis_01
+
+                "Strip Club" if sarah.event_triggers_dict.get("stripclub_progress", 0) >= 2:  #TODO currently inacessible while writing it.
+                    pass
+
+                "Your Place":   #Added as a default while testing. Probably limit this with sluttiness later #TODO
+                    the_person.char "Oh! A direct approach? Not even going to bother getting me boozed up?"
+                    mc.name "Nah. The sex is better when you are sober anyway."
+                    the_person.char "Ha! Okay, lead the way then stud!"
+                    "A short walk later, and you are walking through your front door."
+                    call Sarah_date_ends_at_your_place_label(the_person) from sarah_date_happy_ending_02
+
         "Not Today":
             the_person.char "Seriously? You're going to turn me down?"
             mc.name "I'm sorry, there is a lot I want to get done around here."
@@ -2353,7 +2373,7 @@ label Sarah_weekend_surprise_crisis_label():
                 the_person.char "Mmm, ever since I took those serums, I've been craving your cock between my tits..."
                 "She walks right up to you and starts to get down on her knees. You pull your cock out, which is now fully erect."
                 $ scene_manager.update_actor(the_person, position = "blowjob")
-                the_person.char "That's it. Let me just take of this for you..."
+                the_person.char "That's it. Let me just take care of this for you..."
                 call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_sarah_weekend_titfuck_1
                 "[the_person.possessive_title] moans as she rubs your cum into her chest."
                 the_person.char "It feels so sticky on my skin... Mmmm that was nice."
@@ -2370,7 +2390,194 @@ label Sarah_weekend_surprise_crisis_label():
                 "[the_person.title] quickly turns and walks out, leaving you to your work."
                 $ scene_manager.remove_actor(the_person)
 
-    $ scene_manager.clear_scene()    
+    $ scene_manager.clear_scene()
+    return
+
+
+label Sarah_weekend_date_grab_drinks_label():
+    $ the_person = sarah
+    $ scene_manager = Scene()
+    $ mc.change_location(downtown_bar)
+    $ mc.location.show_background()
+    $ scene_manager.add_actor(the_person, emotion = "happy")
+    $ favorite_drink = the_person.event_triggers_dict.get("favorite_drink" "appletini")
+    $ intoxication_level = 0 #Start at 0, options may open up depending on how drunk you get her.
+    "After a short walk, you arrive at the bar that you and [the_person.title] have been to a few times recently."
+    the_person.char "Oh! I think I see a booth over there."
+    mc.name "Perfect, go grab it while I get the first round."
+    "You wander over to the bar and buy drinks for you and [the_person.possessive_title]. You make sure to get her favorite, the [favorite_drink]."
+    "If you wanted to, now would be a good time to slip a serum into her drink..."
+    menu:
+        "Slip in a serum":
+            "After you get the drinks, you carefully add a serum to it."
+            call give_serum(the_person) from _call_give_sarah_serum_005
+        "Leave alone":
+            "You decide to leave her drink alone."
+    $ scene_manager.update_actor(the_person, position = "sitting")
+    "You join [the_person.title] at the booth and begin to enjoy your drinks together."
+    "You spend some time, shooting the breeze and enjoying each other's company."
+    "After a while the drinks are empty. You consider what to do next."
+    $ intoxication_level += 1
+    $ loop_count = 0
+    while loop_count < 5: #Limited number of rounds available
+        $ chance_service_him = the_person.sluttiness + ((the_person.obedience - 100) / 4 ) + (mc.charisma * 4) + (intoxication_level * 4)
+        if chance_service_him > 100:
+            $ chance_service_him = 100
+        elif chance_service_him < 0:
+            $ chance_service_him = 0
+        menu:
+            "Have another round" if intoxication_level < 7:
+                mc.name "Wow, drinks are empty already. Another round?"
+                the_person.char "Hell yeah!"
+                if renpy.random.randint(0,100) < 35:  #She offers to buy a round once in a while
+                    the_person.char "Tell you what, let me pick up this round. It's only fair!"
+                    $ scene_manager.update_actor(the_person, position = "walking_away")
+                    "[the_person.possessive_title] jumps up and walks away. You admire her figure as she makes her way over to the bartender."
+                    "After a short time, she returns with the drinks and sits down."
+                    $ scene_manager.update_actor(the_person, position = "sitting")
+                else:
+                    "You wander over to the bar and buy drinks for you and [the_person.possessive_title]. You make sure to get her favorite, the [favorite_drink]."
+                    "You come back to the booth with the drinks."
+                    the_person.char "Yum! Thank you!"
+                "You sit with [the_person.title], enjoying your drinks while chatting."
+                call Sarah_get_drunk_dialogue(the_person, intoxication_level) from sarah_drunk_dialogue_01 #found in personality file
+                $ intoxication_level += 2
+                "After a while the drinks are empty. You consider what to do next."
+            "Play some darts":
+                mc.name "How about a round of darts?"
+                the_person.char "Hell yeah!"
+                "You walk over to the dart boards and get ready to have a game."
+                call play_darts_301(the_person, focus_mod = -intoxication_level) from play_darts_301_call_date_night_1
+                if _return:
+                    $ scene_manager.add_actor(the_person, emotion = "sad")
+                    "[the_person.title] gives you a pathetically fake pout after you win your game of darts."
+                    the_person.char "Damn you're good at that!"
+                    $ the_person.change_obedience(5)
+                else:
+                    $ scene_manager.add_actor(the_person, emotion = "happy")
+                    "[the_person.title] gives you a huge smile after winning your game of darts!"
+                    the_person.char "Ha! In your face!"
+                    $ the_person.change_happiness(5)
+                $ intoxication_level += -1
+
+            "Propose sex in the bathroom\n{size=22}Success Chance: [chance_service_him]" if intoxication_level > 10: #TODO this option currently disabled while it is being written (10 is impossible)
+                "You lean in close and whisper to her."
+                mc.name "Why don't we take a break from the drinking and sneak back the restroom and do something a little more... physical."
+                the_person.char "Oh my..."
+                if renpy.random.randint(0,100) < chance_service_him: #Success
+                    the_person.char "That sounds hot... okay! Let's do it!"
+                    call Sarah_sex_in_the_bar_restroom_label(the_person) from sarah_seduction_public_restroom_1
+                else:
+                    the_person.char "I'm sorry... the restrooms are always so dirty... why don't we just get out of here?"
+                $ loop_count += 5
+            "Get outta here":
+                $ loop_count += 5
+
+
+        $ loop_count += 1
+    "You step out of the bar with [the_person.title]. You can tell she is hesitant to part ways with you already."
+    if intoxication_level < 5:
+        the_person.char "So... how about I walk you back to your place?"
+    else:
+        the_person.char "Sooooo, listen here. I had such a great time tonight. Why don't we go back to your place and mess around a bit?"
+        "Her slurred speech make you chuckle."
+    menu:
+        "Back to your place":
+            pass
+        "Part ways for tonight":
+            mc.name "I had a great time tonight, but I'm afraid we need to part ways for now."
+            if intoxication_level < 5:
+                the_person.char "Ah, okay. Well have a good night. I think I'm gonna grab a taxi home tonight!"
+            else:
+                the_person.char "Damn, thats cold! Fine... but could you think you could calls me a taxi? I'm not sure I'm good to walk home..."
+                "You call up a local taxi company, soon one is on the way."
+            "You stay out front of the bar with [the_person.title] until her cab arrives. You say goodnight and soon the cab is driving off."
+            return
+
+    mc.name "My place sounds great. Let's go!"
+    "A short walk later, and you are walking through your front door."
+    call Sarah_date_ends_at_your_place_label(the_person) from sarah_date_happy_ending_01
+    return
+
+label Sarah_sex_in_the_bar_restroom_label(the_person):
+    #TODO this function
+    "This option currently being written."
+
+    return
+
+label Sarah_date_ends_at_your_place_label(the_person):
+    $ mc.change_location(hall)
+    $ mc.location.show_background()
+    $ scene_manager = Scene()
+    $ scene_manager.add_actor(the_person, position = "stand2", character_placement = character_right)
+    the_person.char "Oh god I can't wait to feel your hands all over me again..."
+    $ scene_manager.add_actor(mom, character_placement = character_left_flipped)
+    "[mom.title] pops around the corner when she hears you walking down the hall and unknowingly interrupts."
+    mom.char "Ah! It's [the_person.name] again!"
+    "[mom.possessive_title] raises her arms and gives [the_person.title] a hug."
+    $ scene_manager.update_actor(the_person, position = "kissing")
+    $ scene_manager.update_actor(mom, position = "walking_away", character_placement = character_right)
+    if mom.sluttiness > 40:
+        "[mom.possessive_title] embraces her warmly. In fact it seems to be going on for quite some time..."
+        if mom.sluttiness > 80 and the_person.sluttiness > 80:
+            the_person.char "Mmmmm..."
+            "You hear the soft sound of lips smacking each other... wait are they kissing?"
+            "... yep... they are definitely kissing. Damn this is hot."
+        elif the_person.sluttiness < 40:
+            the_person.char "Awww. Hello [mom.name]. I was just coming over to spend some quality time with [the_person.mc_title]"
+    "Eventually they back away from each other."
+    $ scene_manager.update_actor(mom, position = "stand4", character_placement = character_left_flipped)
+    mom.char "Alright, well don't let me keep you. You two have fun!"
+    "[mom.possessive_title] walks away, chuckling to herself."
+    $ scene_manager.remove_actor(mom)
+
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
+
+    "You reach your bedroom and quickly close and lock the door."
+    "[the_person.possessive_title] looks at you."
+    the_person.char "Welp, I think we both know where this is going!"
+    $ scene_manager.strip_actor_outfit(the_person, exclude_feet = False)
+    the_person.char "What are you staring at? Let's go! I've been looking forward to this all night!"
+    call fuck_person(the_person,  skip_intro = False, girl_in_charge = False) from _call_sex_description_date_happy_ending_1
+    "When you finish with her, [the_person.title] collapses in the bed."
+    $ scene_manager.update_actor(the_person, position = "missionary")
+    "You cuddle up next to her as you both catch your breath."
+    #complex decision tree here.
+    # If dating path, have her ask to be your girlfriend officially.
+    # If she is already dating someone else, have her break up with them
+    # If she is already married, turn it into an affaire
+    # if she is engaged, have her break it off.
+    # If not dating path, she recovers, then heads out
+    if girlfriend_role in the_person.special_role:  #You are already dating her via other means. She just cuddles up with you.
+        "As you both recover, [the_person.possessive_title] starts kissing you along your neck, then whispers in your ear."
+        the_person.char "Thank you for the good time tonight. I love you."
+        mc.name "I love you too."
+        the_person.char "Do you care if I just stay here tonight? I umm... actually brought my toothbrush..."
+        mc.name "Of course! I wouldn't have it any other way!."
+        $ the_person.change_love(5)
+        $ scene_manager.update_actor(the_person, position = "walking_away")
+        "Worn out from your romp with [the_person.possessive_title], you cuddle up with her and quickly fall asleep."
+        call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_overnight_after_date
+        call Sarah_spend_the_night() from sarah_date_night_happy_ending_gf_path
+    elif affair_role in the_person.special_role:
+        the_person.char "It feels so good to be next to you, but I need to get home."
+        mc.name "You don't have to. Just spend the night here."
+        the_person.char "I'm sorry I can't. You know I can't. Thanks for the offer though!"
+        $ scene_manager.update_actor(the_person, position = "stand3")
+        "You lay on your bed and watch as [the_person.possessive_title] slowly gets her clothes on. She says goodbye then lets herself out."
+        $ scene_manager.remove_actor(the_person)
+    else:
+        the_person.char "I need to get going... I guess. Thanks for the evening though. It was great!"
+        mc.name "You don't have to. Just spend the night here."
+        the_person.char "That's tempting, believe me, but I need to get home. Thanks for the offer!"
+        $ scene_manager.update_actor(the_person, position = "stand3")
+        "You lay on your bed and watch as [the_person.possessive_title] slowly gets her clothes on. She says goodbye then lets herself out."
+        $ scene_manager.remove_actor(the_person)
+
+    $ scene_manager.clear_scene()
+
+
     return
 
 init 5 python:

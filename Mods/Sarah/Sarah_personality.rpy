@@ -542,9 +542,9 @@ label Sarah_sex_end_early(the_person):
 
 label Sarah_sex_take_control (the_person):
     if the_person.arousal > 60:
-        the_person.char "Oh hell no, you can't just get me wet and then walk away!"
+        the_person.char "Ha! That's funny. Get back here, I'm almost done!"
     else:
-        the_person.char "Are you getting bored already? Get back here, we aren't done yet!"
+        the_person.char "You wish! I'm not done with you yet."
     return
 
 label Sarah_sex_beg_finish(the_person):
@@ -561,4 +561,54 @@ label Sarah_improved_serum_unlock(the_person):
     mc.name "Go on, I'm interested."
     the_person.char "Our testing procedures focus on human safety, which I'll admit is important, but it doesn't leave us with much information about the subjective effects of our creations."
     the_person.char "What I want to do is take a dose of our serum myself, then have you record me while you run me through some questions."
+    return
+
+label Sarah_get_drunk_dialogue(the_person, intoxication_level):
+    if intoxication_level < 3: # mostly sober
+        if the_person.sluttiness > 60:
+            "[the_person.title] is carrying on, talking about a time that she was trying to hookup with a random guy on Tinder but it didn't go well."
+            the_person.char "...So anyway, that's when I decided to start making sure to keep my pubic hair trimmed."
+            mc.name "Yeah I bet. TO=o be honest though, I probably would have eaten you out anyway."
+            the_person.char "Yeah right, and risk getting hair in your mouth? Hey, that reminds me of a joke I heard. What do you call a roman with a hair stuck in his teeth?"
+            mc.name "I don't know, what?"
+            the_person.char "A gladiator!"
+            "You share a laugh together and continue having your drinks."
+        else:
+            "[the_person.title] is carrying on, talking about her time at her internship, before you hired her."
+            the_person.char "...So anyway, I still can't believe I didn't realize what was going on. That man can go fuck himself!"
+            mc.name "Well, I for one am glad that they let you go, or it is likely we never would have reconnected."
+            the_person.char "I mean... that's true! I guess everything happens for a reason?"
+
+    elif intoxication_level < 5: # drunk
+        if the_person.sluttiness > 60:
+            "[the_person.title] is carrying on. She's had a few drinks and is starting to get pretty obvious, flirting with you."
+            the_person.char "...So anyway, that's why I'm banned from the weekly wine tasting. They keep saying to spit it out, but I always swallow."
+            mc.name "Always?"
+            the_person.char "Don't believe me?"
+            "[the_person.possessive_title] takes a deep sip of her drink, then makes a show, tiling her head back and swallowing it all with a loud gulp."
+            the_person.char "The defense declares this evidence to be called exhibit A... maybe later I can show you exhibit D."
+        else:
+            "[the_person.title] is carrying on, talking about her time at her internship, before you hired her."
+            the_person.char "...So anyway, I still can't believe I didn't realize what was going on. That man can go fuck himself!"
+            mc.name "Well, I for one am glad that they let you go, or it is likely we never would have reconnected."
+            the_person.char "I mean... that's true! I guess everything happens for a reason?"
+
+    else:   #Absolutely wasted
+        if the_person.sluttiness > 60:
+            "[the_person.title] is wasted. She's trying to flirt with you, but can hardly get through her pick up lines."
+            mc.name "You doing okay over there?"
+            the_person.char "Me? Ummm... OF COURSE. Heyyyy, are you a candle?"
+            mc.name "Not exactly..."
+            the_person.char "BECAUSE I WOULD TOTALLY SUCK YOU OFF."
+            mc.name "You mean... blow me?"
+            the_person.char "Thatsh what I said!"
+            "You make a mental note that it's probably better to get her a water next instead of another drink."
+        else:
+            "[the_person.title] is carrying on, talking about her time at her internship, before you hired her."
+            the_person.char "I mean, there were a couple cute dudesh there... and girlsh too if I'm honest..."
+            the_person.char "But what ish going on now... I mean wow there issh sum incredible ass in your company!"
+            mc.name "Yeah, I really enjoy the company and the employees."
+            the_person.char "No kidding! Ugh my head hurtsss."
+            "You make a mental note that it's probably better to get her a water next instead of another drink."
+
     return
