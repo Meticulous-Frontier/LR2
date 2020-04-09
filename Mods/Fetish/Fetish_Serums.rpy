@@ -153,29 +153,25 @@ init -1 python:
         if the_person.sex_skills[skill_name] < max_skill:
             the_person.sex_skills[skill_name] += 1
 
-# any label that starts with serum_mod is added to the serum mod list
-label serum_mod_fetish_serum_trait(stack):
-    python:
+    def add_fetish_serum_traits():
+        FETISH_RESEARCH_PERCENT = 1     #1 = 100%
+        FETISH_PRODUCTION_COST = 20     #Default 100
+        FETISH_RESEARCH_BASE_TIER = 1        #Default = 1
+        FETISH_RESEARCH_MID_TIER = 2          #Default = 2
+        FETISH_RESEARCH_FINAL_TIER = 3      #Default = 3
+
         fetish_basic_ther = SerumTraitMod(name = "Initial Fetish Therapy",
                 desc = "Over time, increases general positivity towards basic sexual acts. Increases effectiveness with greater suggestability.",
                 positive_slug = "Slowly increases sexual opinions, Slowly increases Foreplay skill, +$20 Value",
                 negative_slug = "+100 Serum Research, +20 Production Cost",
                 value_added = 20,
                 research_added = 100 * FETISH_RESEARCH_PERCENT,
-        #     slots_added = a_number,
                 production_added = FETISH_PRODUCTION_COST,
-        #     duration_added = a_number,
                 base_side_effect_chance = 25,
-        #     on_apply = submission_function_on_apply,
-        #     on_remove = submission_function_on_remove,
                 on_turn = fetish_basic_function_on_turn,
-        #     on_day = a_function,
-        #     requires = [list_of_other_traits],
                 tier = FETISH_RESEARCH_BASE_TIER,
                 start_researched =  False,
                 research_needed = 400 * FETISH_RESEARCH_PERCENT,
-        #     exclude_tags = [list_of_other_tags],
-        #     is_side_effect = a_bool)
             )
 
         fetish_exhibition_ther = SerumTraitMod(name = "Exhibitionism Fetish Therapy",
@@ -184,20 +180,13 @@ label serum_mod_fetish_serum_trait(stack):
                 negative_slug = "+100 Serum Research, +20 Production Cost",
                 value_added = 20,
                 research_added = 100 * FETISH_RESEARCH_PERCENT,
-        #     slots_added = a_number,
                 production_added = FETISH_PRODUCTION_COST,
-        #     duration_added = a_number,
                 base_side_effect_chance = 25,
-        #     on_apply = submission_function_on_apply,
-        #     on_remove = submission_function_on_remove,
                 on_turn = fetish_exhibition_on_turn,
-        #     on_day = a_function,
                 requires = [fetish_basic_ther],
                 tier = FETISH_RESEARCH_BASE_TIER,
                 start_researched =  False,
                 research_needed = 400 * FETISH_RESEARCH_PERCENT,
-        #     exclude_tags = [list_of_other_tags],
-        #     is_side_effect = a_bool)
             )
 
         fetish_oral_ther = SerumTraitMod(name = "Oral Fetish Therapy",
@@ -206,20 +195,13 @@ label serum_mod_fetish_serum_trait(stack):
                 negative_slug = "+200 Serum Research, +20 Production Cost",
                 value_added = 20,
                 research_added = 200 * FETISH_RESEARCH_PERCENT,
-        #     slots_added = a_number,
                 production_added = FETISH_PRODUCTION_COST,
-        #     duration_added = a_number,
                 base_side_effect_chance = 50,
-        #     on_apply = submission_function_on_apply,
-        #     on_remove = submission_function_on_remove,
                 on_turn = fetish_oral_function_on_turn,
-        #     on_day = a_function,
                 requires = [fetish_basic_ther],
                 tier = FETISH_RESEARCH_MID_TIER,
                 start_researched =  False,
                 research_needed = 500 * FETISH_RESEARCH_PERCENT,
-        #     exclude_tags = [list_of_other_tags],
-        #     is_side_effect = a_bool)
             )
 
         fetish_vaginal_ther = SerumTraitMod(name = "Vaginal Fetish Therapy",
@@ -228,20 +210,13 @@ label serum_mod_fetish_serum_trait(stack):
                 negative_slug = "+200 Serum Research, +20 Production Cost",
                 value_added = 20,
                 research_added = 200 * FETISH_RESEARCH_PERCENT,
-        #     slots_added = a_number,
                 production_added = FETISH_PRODUCTION_COST,
-        #     duration_added = a_number,
                 base_side_effect_chance = 50,
-        #     on_apply = submission_function_on_apply,
-        #     on_remove = submission_function_on_remove,
                 on_turn = fetish_vaginal_function_on_turn,
-        #     on_day = a_function,
                 requires = [fetish_basic_ther],
                 tier = FETISH_RESEARCH_MID_TIER,
                 start_researched =  False,
                 research_needed = 500 * FETISH_RESEARCH_PERCENT,
-        #     exclude_tags = [list_of_other_tags],
-        #     is_side_effect = a_bool)
             )
 
         fetish_anal_ther = SerumTraitMod(name = "Anal Fetish Therapy",
@@ -250,20 +225,13 @@ label serum_mod_fetish_serum_trait(stack):
                 negative_slug = "+200 Serum Research, +20 Production Cost",
                 value_added = 25,
                 research_added = 200 * FETISH_RESEARCH_PERCENT,
-        #     slots_added = a_number,
                 production_added = FETISH_PRODUCTION_COST,
-        #     duration_added = a_number,
                 base_side_effect_chance = 75,
-        #     on_apply = submission_function_on_apply,
-        #     on_remove = submission_function_on_remove,
                 on_turn = fetish_anal_function_on_turn,
-        #     on_day = a_function,
                 requires = [fetish_vaginal_ther],
                 tier = FETISH_RESEARCH_FINAL_TIER,
                 start_researched =  False,
                 research_needed = 800 * FETISH_RESEARCH_PERCENT,
-        #     exclude_tags = [list_of_other_tags],
-        #     is_side_effect = a_bool)
             )
 
         fetish_cum_ther = SerumTraitMod(name = "Cum Fetish Therapy",
@@ -288,6 +256,9 @@ label serum_mod_fetish_serum_trait(stack):
         #     is_side_effect = a_bool)
             )
 
-
+# any label that starts with serum_mod is added to the serum mod list
+label serum_mod_fetish_serum_trait(stack):
+    python:
+        add_fetish_serum_traits()
         execute_hijack_call(stack)
     return
