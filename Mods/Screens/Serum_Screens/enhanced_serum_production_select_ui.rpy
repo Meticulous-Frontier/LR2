@@ -21,7 +21,8 @@ init 2:
         $ renpy.block_rollback()
 
         python:
-            production_remaining = production_max
+            production_max_use = production_max
+            production_remaining = production_max_use
             for key in mc.business.serum_production_array:
                 production_remaining -= mc.business.serum_production_array[key][1] # How much of the 100% capability are we using?
         hbox:
@@ -183,10 +184,10 @@ init 2:
                                                                 yoffset 8
                                                                 textbutton "<<":
                                                                     action [Function(mc.business.change_line_autosell,count,-10)]
-                                                                    style "textbutton_no_padding_highlight" 
+                                                                    style "textbutton_no_padding_highlight"
                                                                     text_style "serum_text_style"
                                                                     tooltip production_line_autosell_tooltip
-                                                                textbutton "<": 
+                                                                textbutton "<":
                                                                     action [Function(mc.business.change_line_autosell,count, -1)]
                                                                     style "textbutton_no_padding_highlight"
                                                                     text_style "serum_text_style"
@@ -212,14 +213,14 @@ init 2:
                                                                 xalign 1
                                                                 xsize 40
                                                                 yoffset 8
-                                                                textbutton ">": 
+                                                                textbutton ">":
                                                                     action [Function(mc.business.change_line_autosell,count, 1)]
                                                                     style "textbutton_no_padding_highlight"
                                                                     text_style "serum_text_style"
                                                                     tooltip production_line_autosell_tooltip
                                                                 textbutton ">>":
                                                                     action [Function(mc.business.change_line_autosell,count,10)]
-                                                                    style "textbutton_no_padding_highlight" 
+                                                                    style "textbutton_no_padding_highlight"
                                                                     text_style "serum_text_style"
                                                                     tooltip production_line_autosell_tooltip
 

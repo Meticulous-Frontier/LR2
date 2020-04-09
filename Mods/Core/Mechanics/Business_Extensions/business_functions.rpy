@@ -17,7 +17,7 @@ init -1 python:
 
         cs = renpy.current_screen()
         production_remaining = cs.scope["production_remaining"]
-        production_max = cs.scope["production_max"]
+        production_max = cs.scope["production_max_use"]
 
         if line in self.serum_production_array:
             used_production = self.get_used_line_weight()
