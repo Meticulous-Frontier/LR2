@@ -782,6 +782,13 @@ init python:
         return return_bool
 
     def willing_to_threesome(the_person_one, the_person_two):    #Use this function to check and see if two people are willing to engage in a threesome
+        the_person_one_slut_req = THREESOME_BASE_SLUT_REQ
+        the_person_two_slut_req = THREESOME_BASE_SLUT_REQ
+        if the_person_one == mom or the_person_one == lily or the_person_one == cousin or the_person_one == aunt:
+            the_person_one_slut_req += 5 #Incest modifier
+        if the_person_two == mom or the_person_one == lily or the_person_one == cousin or the_person_one == aunt:
+            the_person_two_slut_req += 5 #Incest modifier
+
         if the_person_one.sluttiness < THREESOME_BASE_SLUT_REQ:
             return False
         if the_person_two.sluttiness < THREESOME_BASE_SLUT_REQ:
