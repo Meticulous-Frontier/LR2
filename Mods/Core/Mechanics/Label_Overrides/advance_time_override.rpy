@@ -40,12 +40,9 @@ init -1 python:
         return collar_slave_action.enabled
 
     def advance_time_mandatory_vibe_action_requirement():
-        # Only run while employees are at work. # Action runs if the policy is owned. Is_owned() checks if it is in the mc.business.policy_list
+        # Only run while employees are at work.
         if mc.business.is_open_for_business():
-            return man
-            policy = get_from_policy_list(mandatory_vibe_policy)
-            if policy:
-                return policy.is_owned() and policy.enabled
+            return mandatory_vibe_policy.is_active()
         return False
 
 init 5 python:
