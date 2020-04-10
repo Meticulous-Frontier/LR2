@@ -279,7 +279,7 @@ label advance_time_enhanced(no_events = False):
         people_to_process = []
         person = None
 
-    if mandatory_advance_time: #If a crisis has told us to advance time after it we do so.
+    if mandatory_advance_time and not time_of_day == 4: #If a crisis has told us to advance time after it we do so (not when night to prevent spending night at current location).
         call advance_time from _call_advance_time_advance_time_enhanced
     return
 
