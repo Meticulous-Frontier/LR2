@@ -16,33 +16,25 @@
 
 
 #HR director functions
-init -0 python:
-    def get_HR_director():
-        return business_HR_director
-
+init 1 python:
     def set_HR_director_tag(key, value):
-        if business_HR_director:
-            business_HR_director.HR_tags[key] = value
+        if mc.business.hr_director:
+            mc.business.hr_director.HR_tags[key] = value
 
     def get_HR_director_tag(key, default = None):
-        if business_HR_director:
-            return business_HR_director.HR_tags.get(key, default)
+        if mc.business.hr_director:
+            return mc.business.hr_director.HR_tags.get(key, default)
 
     # used for unlocked sex positions
     def set_HR_director_unlock(key, value):
-        if business_HR_director:
-            business_HR_director.HR_unlocks[key] = value
+        if mc.business.hr_director:
+            mc.business.hr_director.HR_unlocks[key] = value
 
     # used for unlocked sex positions
     def get_HR_director_unlock(key, default = False):
-        if business_HR_director:
-            return business_HR_director.HR_unlocks.get(key, default)
+        if mc.business.hr_director:
+            return mc.business.hr_director.HR_unlocks.get(key, default)
 
-#HR director action requirements#
-init -2 python:
-    #TODO move all these true false flags to a dict so that in the future when I add more, I can call them by reference and not invalidate old saves games!
-
-    business_HR_director = None
 
 init 5 python:
     def build_HR_review_list(the_person, max_tier = 0):
@@ -110,7 +102,7 @@ init 5 python:
         return False
 
     def HR_director_monday_meeting_requirement():
-        if get_HR_director() is None:
+        if not mc.business.hr_director:
             return False
         if day%7 == 0 and time_of_day == 1: #Monday
             return True
@@ -207,14 +199,8 @@ init 5 python:
             return True
         return False
 
-    def is_HR_director_employed(hr_director):
-        if hr_director in mc.business.get_employee_list():
-            return True
-        cleanup_HR_director_meetings()
-        return False
-
     def can_appoint_HR_director_requirement():
-        if business_HR_director is None:
+        if not mc.business.hr_director:
             if HR_director_creation_policy.is_owned():
                 if len(mc.business.hr_team) > 0:
                     return True
@@ -331,7 +317,7 @@ label fire_HR_director(the_person):
         the_person.char "Whew! I have a really hard time working with people to be honest. I hope whoever replaces me can do a better job at it!"
 
     $ the_person.special_role.remove(HR_director_role)
-    $ business_HR_director = None
+    $ mc.business.hr_director = None
     $ cleanup_HR_director_meetings()
     return
 
@@ -360,34 +346,36 @@ label HR_director_initial_hire_label(the_person):
 
     # update employee relationships
     python:
-        for other_employee in mc.business.get_employee_list():
-            town_relationships.begin_relationship(the_person, other_employee) #They are introduced to everyone at work, with a starting value of "Acquaintance"
-
-        business_HR_director = the_person
-        business_HR_director.HR_tags = {}
-        business_HR_director.HR_unlocks = {}
+        mc.business.hr_director = the_person
+        mc.business.hr_director.HR_tags = {}
+        mc.business.hr_director.HR_unlocks = {}
 
         if the_person is sarah:
-            the_person.set_schedule([1,2,3], None)
             mc.business.add_employee_hr(the_person)
-            the_person.event_triggers_dict["employed_since"] = day
-            mc.business.listener_system.fire_event("new_hire", the_person = the_person)
         else:
             mc.business.remove_employee(the_person)
             mc.business.add_employee_hr(the_person)
 
-        business_HR_director.special_role.append(employee_role)
-        business_HR_director.special_role.append(HR_director_role)
-        business_HR_director.set_work([1,2,3], mc.business.h_div)
+        # assign special HR director role
+        mc.business.hr_director.special_role.append(HR_director_role)
+
+        # the bug fix has a simplified employ mechanism that handles everything below this
+        if not "bugfix_installed" in globals():
+            the_person.event_triggers_dict["employed_since"] = day
+            mc.business.listener_system.fire_event("new_hire", the_person = the_person)
+            the_person.special_role.append(employee_role)
+            for other_employee in mc.business.get_employee_list():
+                town_relationships.begin_relationship(the_person, other_employee) #She is introduced to everyone at work
+            the_person.set_work([1,2,3], mc.business.h_div)
 
         set_HR_director_tag("business_HR_eff_bonus", mc.business.effectiveness_cap - 100)
         add_hr_director_first_monday_action(the_person)
     return
 
 label HR_director_first_monday_label(the_person):
-    if not is_HR_director_employed(business_HR_director):
-        $ business_HR_director = None
+    if not mc.business.hr_director:
         return
+
     "It's lunchtime, so you prepare to have your first meeting with your new HR Direction, [the_person.title]."
     "You grab your lunch from the break head to your office and sit down."
     $ scene_manager = Scene()
@@ -442,8 +430,7 @@ label HR_director_first_monday_label(the_person):
     return
 
 label HR_director_monday_meeting_label(the_person):
-    if not is_HR_director_employed(business_HR_director):
-        $ business_HR_director = None
+    if not mc.business.hr_director:
         return
 
     $ scene_manager = Scene()
@@ -882,7 +869,7 @@ label HR_director_coffee_tier_2_label(the_person):
 
 label HR_director_calculate_eff(the_person):
     $ HR_dir_factor = 0
-    if not get_HR_director() is None:
+    if mc.business.hr_director:
         $ HR_dir_factor = ((the_person.charisma * 2 ) + the_person.hr_skill)   #Charisma + HR skill
         #TODO make events later on that factor this to be better
     $ HR_dir_factor += get_HR_director_tag("business_HR_eff_bonus")
@@ -1068,8 +1055,8 @@ label HR_director_sexy_meeting_start_label(the_person):
 
     python:
         tuple_list = []
-        for position in business_HR_director.HR_unlocks.keys():
-            if business_HR_director.HR_unlocks[position] == True:
+        for position in mc.business.hr_director.HR_unlocks.keys():
+            if mc.business.hr_director.HR_unlocks[position] == True:
                 tuple_list.append([position.title(), position])
         tuple_list.append(["Surprise me", "any"])
 
@@ -1081,7 +1068,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         $ mc.change_arousal(20)
         $ the_person.change_happiness(5)
         $ the_person.change_obedience(-5)
-        $ position_choice = get_random_from_list(business_HR_director.HR_unlocks.keys())
+        $ position_choice = get_random_from_list(mc.business.hr_director.HR_unlocks.keys())
 
     if position_choice == "blowjob":
         the_person.char "Get your cock out, I want to taste it!"
