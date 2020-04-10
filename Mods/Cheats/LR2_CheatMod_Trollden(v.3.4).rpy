@@ -120,65 +120,36 @@ init python: # This space is reserved for definitions used to simplify the code
 
         if the_person.job == "Researcher":
             mc.business.add_employee_research(the_person) # Add the_person to the employee overview
-            the_person.set_work([1,2,3], mc.business.r_div) # Set their schedule and work location
-            the_person.special_role.append(employee_role) # Append the employee_role to enable corresponding special actions
+            if not "bugfix_installed" in globals():
+                the_person.set_work([1,2,3], mc.business.r_div) # Set their schedule and work location
+                the_person.special_role.append(employee_role) # Append the employee_role to enable corresponding special actions
 
         elif the_person.job =="Production":
             mc.business.add_employee_production(the_person)
-            the_person.set_work([0,1,2,3,4], mc.business.p_div)
-            the_person.special_role.append(employee_role)
+            if not "bugfix_installed" in globals():
+                the_person.set_work([0,1,2,3,4], mc.business.p_div)
+                the_person.special_role.append(employee_role)
 
         elif the_person.job == "Supply":
             mc.business.add_employee_supply(the_person)
-            the_person.set_work([1,2,3], mc.business.s_div)
-            the_person.special_role.append(employee_role)
+            if not "bugfix_installed" in globals():
+                the_person.set_work([1,2,3], mc.business.s_div)
+                the_person.special_role.append(employee_role)
 
         elif the_person.job == "Marketing":
             mc.business.add_employee_marketing(the_person)
-            the_person.set_work([1,2,3], mc.business.m_div)
-            the_person.special_role.append(employee_role)
+            if not "bugfix_installed" in globals():            
+                the_person.set_work([1,2,3], mc.business.m_div)
+                the_person.special_role.append(employee_role)
 
         elif the_person.job == "Human Resources":
             mc.business.add_employee_hr(the_person)
-            the_person.set_work([1,2,3], mc.business.h_div)
-            the_person.special_role.append(employee_role)
+            if not "bugfix_installed" in globals():
+                the_person.set_work([1,2,3], mc.business.h_div)
+                the_person.special_role.append(employee_role)
 
     def cheat_fire_employee(): # Fire a person via the cheat menu, this does not remove them from the world, but changes their schedule to not include the work place.
-
-        if the_person in mc.business.research_team: # Check if they are in this team
-
-            mc.business.research_team.remove(the_person) # Remove them from the division / team
-            the_person.set_work(None,None) # Free up their schedule
-            the_person.special_role.remove(employee_role) # Remove the special role so they no longer have the "Special Actions..."
-            the_person.job = None # Sets their job description to None, could be replaced with e.g "Unemployeed"
-
-        elif the_person in mc.business.production_team:
-
-            mc.business.production_team.remove(the_person)
-            the_person.set_work(None,None)
-            the_person.special_role.remove(employee_role)
-            the_person.job = None
-
-        elif the_person in mc.business.supply_team:
-
-            mc.business.supply_team.remove(the_person)
-            the_person.set_work(None,None)
-            the_person.special_role.remove(employee_role)
-            the_person.job = None
-
-        elif the_person in mc.business.market_team:
-
-            mc.business.market_team.remove(the_person)
-            the_person.set_work(None,None)
-            the_person.special_role.remove(employee_role)
-            the_person.job = None
-
-        elif the_person in mc.business.hr_team:
-
-            mc.business.hr_team.remove(the_person)
-            the_person.set_work(None,None)
-            the_person.special_role.remove(employee_role)
-            the_person.job = None
+        mc.business.remove_employee(the_person)
 
     def cheat_redraw_hair(): # Call this whenever you have made changes to the hair style or hair color
                              # NOTE:  You can define your own colors here by following the established format.

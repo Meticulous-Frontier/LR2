@@ -159,10 +159,10 @@ label mc_rename_person_label(person):
 label mc_hire_person_label(person):
 
     python:
-        if mc.business.funds < person.calculate_base_salary():
-            renpy.say("", "Hiring [person.title] will cost you $" + str(person.calculate_base_salary()) + " and put you in debt due to low funds.")
+        if mc.business.funds < (person.calculate_base_salary() * 10):
+            renpy.say("", "Hiring [person.title] will cost you $" + str(person.calculate_base_salary() * 10) + " and put you in debt due to low funds.")
         else:
-            renpy.say("", "Hiring [person.title] will cost you $" + str(person.calculate_base_salary()) + ", do you wish to proceed?")
+            renpy.say("", "Hiring [person.title] will cost you $" + str(person.calculate_base_salary() * 10) + ", do you wish to proceed?")
 
     menu:
         "Yes":
@@ -199,11 +199,13 @@ label mc_hire_person_label(person):
 
         "Back":
             return
-    $ mc.business.change_funds(- person.calculate_base_salary())
 
-    $ person.event_triggers_dict["employed_since"] = day
-    $ mc.business.listener_system.fire_event("new_hire", the_person = person)
-    $ person.special_role.append(employee_role)
+    python:
+        mc.business.change_funds(- (person.calculate_base_salary() * 10))
+        if not "bugfix_installed" in globals():
+            person.event_triggers_dict["employed_since"] = day
+            mc.business.listener_system.fire_event("new_hire", the_person = person)
+            person.special_role.append(employee_role)
 
     $ work_station_destination = mc.business.get_employee_workstation(person).formalName
     "[person.title] heads over to the [work_station_destination]..."
