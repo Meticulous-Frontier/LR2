@@ -205,6 +205,53 @@ init -1 python:
                         return True
         return False
 
+    def roll_dart_odds(target = 50, focus_score = 0):
+        dart_roll = 0
+        ran_num = renpy.random.randint(0,100)
+        if target == 50:
+            if ran_num < (20 + (focus_score * 4)): #Bullseye!
+                dart_roll = 50
+            elif ran_num < (50 + (focus_score * 5)): #HIT
+                dart_roll = 25
+            else:
+                dart_roll = renpy.random.randint(1,20)
+            pass
+        elif target == 25:
+            if ran_num < (40 + (focus_score * 4)): #HIT
+                dart_roll = 25
+            elif ran_num < (50 + (focus_score * 4)): #Bullseye!
+                dart_roll = 50
+            else:
+                dart_roll = renpy.random.randint(1,20)
+        else:
+            if ran_num < (50 + (focus_score * 4)):
+                dart_roll = target
+            else:
+                dart_roll = renpy.random.randint(1,20)
+
+        renpy.say("", "The dart hits " + str(dart_roll) + "!")
+        return dart_roll
+
+    def get_sarah_spend_night_threesome_possibility():
+        threesome_wakeup = False
+        threesome_partner = None
+        if sarah.event_triggers_dict.get("threesome_unlock", 0) == 1 and renpy.random.randint(0,100) < 50: 
+            if renpy.random.randint(0,100) < 10: #Try lily first
+                if willing_to_threesome(the_person, lily):
+                    threesome_partner = lily
+                    threesome_wakeup = True
+                elif willing_to_threesome(the_person, mom):
+                    threesome_partner = mom
+                    threesome_wakeup = True
+            else:
+                if willing_to_threesome(the_person, mom):
+                    threesome_partner = mom
+                    threesome_wakeup = True
+                elif willing_to_threesome(the_person, lily):
+                    threesome_partner = lily
+                    threesome_wakeup = True
+        return (threesome_wakeup, threesome_partner)
+
     def test_bra_function(the_person):
         Sarah_remove_bra_from_wardrobe(the_person.wardrobe)
 
@@ -1514,7 +1561,6 @@ label Sarah_stripclub_story_label():
 label Sarah_threesome_request_label():
     $ scene_manager = Scene()
     $ the_person = sarah
-    $ meets_sluttiness_list = []
     $ gossip_target = get_random_employees(1, exclude_list = [sarah], slut_required = 50)
 
     "Another Saturday, another extra workday for you. You are hardly surprised when you here [the_person.title]'s familiar voice."
@@ -1960,34 +2006,15 @@ label Sarah_initial_threesome_label():
     $ del the_person_two
     return
 
-
 label Sarah_spend_the_night():      #She spends the night with you. Have a random chance of a threesome with mom or lily
     $ the_person = sarah
     $ scene_manager = Scene()
-    $ rand_roll = renpy.random.randint(0,100)
     $ the_person.apply_outfit(SB_vaginal_nude_outfit)
     $ the_person.change_energy(200)
 
-    $ threesome_wakeup = False
-    $ threesome_partner = None
-    if rand_roll < 50: #Wakeup to sexy times
-        if sarah.event_triggers_dict.get("threesome_unlock", 0) == 1 and rand_roll < 20: #If willing, Lily or mom have a threesome
-            if rand_roll < 10: #Try lily first
-                if willing_to_threesome(the_person, lily):
-                    $ threesome_partner = lily
-                    $ threesome_wakeup = True
-                elif willing_to_threesome(the_person, mom):
-                    $ threesome_partner = mom
-                    $ threesome_wakeup = True
-            else:
-                if willing_to_threesome(the_person, mom):
-                    $ threesome_partner = mom
-                    $ threesome_wakeup = True
-                elif willing_to_threesome(the_person, lily):
-                    $ threesome_partner = lily
-                    $ threesome_wakeup = True
-    else:
+    $ (threesome_wakeup, threesome_partner) = get_sarah_spend_night_threesome_possibility()
 
+    if not threesome_wakeup:
         $ scene_manager.add_actor(the_person, position = "walking_away")
         "You slowly wake up, with your arms around [the_person.possessive_title], spooning with her."
         "She is still sleeping, but her skin is setting off electric sparks everywhere it is touching yours."
@@ -2014,7 +2041,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         "She's still asleep, but is still responding to your touch. She must be a heavy sleeper! Or maybe she is just really worn out from last night..."
         "You give her a few gentle, smooth strokes. You can feel her pussy getting wetter with each stroke as her body begins to respond to the stimulation."
         $ the_person.change_arousal(20)
-        "With her legs closed and on her side like this, her pussy feels really tight. You can feel her gripping you everytime you start to pull it out."
+        "With her legs closed and on her side like this, her pussy feels really tight. You can feel her gripping you every time you start to pull it out."
         $ mc.change_arousal(15)
         "Your reach around her with your hand and grab one of her tits. You start to get a little rough with her and pinch and pull at one of her nipples."
         $ the_person.change_arousal(20)
@@ -2029,7 +2056,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         $ mc.change_arousal(25) #55
         the_person.char "Oh yes that feels so good, fuck me good!"
         "She reaches down and holds her leg for you, freeing up your hand. You reach down between her legs and start to play with her clit."
-        "Her ass is making smacking noises now, everytime your hips drive your cock deep inside of her."
+        "Her ass is making smacking noises now, every time your hips drive your cock deep inside of her."
         $ the_person.change_arousal(40) #110
         $ mc.change_arousal(35) #90
         the_person.char "Oh fuck, yes! YES!"
@@ -2050,10 +2077,9 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         "You both get ready for the day."
         the_person.char "Alright, I need to get some things done today. Thanks for letting me spend the night!"
         $ scene_manager.remove_actor(the_person)
-
+        $ scene_manager.clear_scene()
         return
 
-    pass
     #sexy morning wakeup starts here
     if threesome_wakeup:
         $ threesome_partner.apply_outfit(SB_vaginal_nude_outfit)
@@ -2112,6 +2138,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         "You both get ready for the day."
         the_person.char "Alright, I need to get some things done. Thanks for letting me spend the night!"
         $ scene_manager.remove_actor(the_person)
+        $ threesome_partner = None
 
     else:
         "You are slow to wakeup. You had several sexy dreams the night before, and you aren't ready to leave them yet."
@@ -2134,13 +2161,13 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
             "She rolls over and kisses you, then rests her head on your chest."
 
         "You lay in bed together for a little longer, but soon it is time to start the day."
-        $ the_person.reset_arousal()
-        $ mc.arousal = 0
         $ the_person.review_outfit(dialogue = False)
         $ scene_manager.update_actor(the_person, position = "stand4")
         "You both get ready for the day."
         the_person.char "Alright, I need to get some things done today. Thanks for letting me spend the night!"
         $ scene_manager.remove_actor(the_person)
+
+    $ scene_manager.clear_scene()        
     return "Advance Time"
 
 label watch_strip_show(the_person):  #This scene assumes scene manager is running and the_person is with you, so she won't strip for you.
@@ -2186,7 +2213,8 @@ label watch_strip_show(the_person):  #This scene assumes scene manager is runnin
     $ scene_manager.update_actor(showgirl, position = "walking_away")
     "After finishing, the showgirl grabs her tips then exits the stage."
     $ scene_manager.remove_actor(showgirl)
-    return showgirl
+    $ showgirl = None
+    return
 
 label play_darts_301(the_person, focus_mod = 0): #Label returns true if mc wins, false if the_person wins
     $ mc_score = 301
@@ -2530,7 +2558,7 @@ label Sarah_weekend_date_strip_club_label():
     while loop_count < 5: #Limited number of rounds available
         menu:
             "Watch a dance":
-                "You and [the_person.title] chat for a bit until the lights in the room dim in preperation for the next girl's show."
+                "You and [the_person.title] chat for a bit until the lights in the room dim in preparation for the next girl's show."
                 call watch_strip_show(the_person) from weekend_date_strip_club_strip_call_01
                 the_person.char "Ugh, the girls they have working here are so hot."
                 $ the_person.change_arousal(renpy.random.randint(5,15))
@@ -2642,13 +2670,12 @@ label Sarah_date_ends_at_your_place_label(the_person):
         $ scene_manager.remove_actor(the_person)
 
     $ scene_manager.clear_scene()
-
-
     return
 
 label Sarah_date_strip_club_private_dance_label(the_person):
-    $ showgirl_1 = None
-    $ showgirl_2 = None
+    $ showgirl_1 = get_random_from_list([x for x in stripclub_strippers if x not in [cousin]])
+    $ showgirl_2 = get_random_from_list([x for x in stripclub_strippers if x not in [showgirl_1, cousin]])
+
     "You get up and head over to the counter where the owner is."
     "You look through the list of girls available for private dances."
     if cousin.event_triggers_dict["blackmail_level"] >= 2:
@@ -2664,11 +2691,6 @@ label Sarah_date_strip_club_private_dance_label(the_person):
                 "You decide not to bring [cousin.possessive_title] into the private dance this time."
     else:
         "You don't really care too much about who does the dance, so you pick a couple random girls."
-
-    if showgirl_1 == None:
-        $ showgirl_1 = get_random_from_list([x for x in stripclub_strippers if (x != showgirl_2 and x != cousin)]) #Hopefully this works... test it a bunch probably #TODO
-    if showgirl_2 == None:
-        $ showgirl_2 = get_random_from_list([x for x in stripclub_strippers if (x != showgirl_1 and x != cousin)])
 
     $ mc.business.change_funds(-200)
     "You go to the back, and find a room with two chairs facing each other. [the_person.title] sits across from you."
@@ -2769,7 +2791,6 @@ label Sarah_date_strip_club_private_dance_label(the_person):
         showgirl_2.char "I hope your little slut doesn't realize we're related. That would be an unfortunate event, for sure..."
     "The strippers leave, leaving you and [the_person.title] alone and highly aroused."
 
-
     $ scene_manager.remove_actor(showgirl_1)
     $ scene_manager.remove_actor(showgirl_2)
     $ del showgirl_1
@@ -2777,32 +2798,3 @@ label Sarah_date_strip_club_private_dance_label(the_person):
     "You head back out to the main room and sit down at a booth."
     $ scene_manager.update_actor(the_person, position = "sitting", character_placement = character_right)
     return
-
-init 5 python:
-    def roll_dart_odds(target = 50, focus_score = 0):
-        dart_roll = 0
-        rand_roll = renpy.random.randint(0,100)
-        if target == 50:
-            if rand_roll < (20 + (focus_score * 4)): #Bullseye!
-                dart_roll = 50
-            elif rand_roll < (50 + (focus_score * 5)): #HIT
-                dart_roll = 25
-            else:
-                dart_roll = renpy.random.randint(1,20)
-            pass
-        elif target == 25:
-            if rand_roll < (40 + (focus_score * 4)): #HIT
-                dart_roll = 25
-            elif rand_roll < (50 + (focus_score * 4)): #Bullseye!
-                dart_roll = 50
-            else:
-                dart_roll = renpy.random.randint(1,20)
-        else:
-            if rand_roll < (50 + (focus_score * 4)):
-                dart_roll = target
-            else:
-                dart_roll = renpy.random.randint(1,20)
-
-
-        renpy.say("", "The dart hits " + str(dart_roll) + "!")
-        return dart_roll
