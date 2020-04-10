@@ -429,7 +429,7 @@ label SB_free_strip_scene(the_person, must_be_naked = True):
             the_person.char "I hope you're enjoying the show [the_person.mc_title]."
             "She wiggles her hips for you and winks."
 
-        if "build_menu_items" in globals():
+        if "bugfix_installed" in globals():
             call screen main_choice_display(build_menu_items([sb_free_strip_build_strip_menu(the_person, must_be_naked)]))
         else:
             call screen main_choice_display([sb_free_strip_build_strip_menu(the_person, must_be_naked)])
@@ -459,7 +459,7 @@ label SB_free_strip_scene(the_person, must_be_naked = True):
             #You ask her to change into a different pose
             mc.name "I want to see you from a different angle."
 
-            if "build_menu_items" in globals():
+            if "bugfix_installed" in globals():
                 call screen main_choice_display(build_menu_items([sb_free_strip_build_pose_menu(picked_pose)]))
             else:
                 call screen main_choice_display([sb_free_strip_build_pose_menu(picked_pose)])

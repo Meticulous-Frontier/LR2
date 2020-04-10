@@ -1631,7 +1631,7 @@ label Sarah_threesome_request_label():
     mc.name "Absolutely."
     the_person.char "That would be incredible... but... I mean, I feel like I have a right to know... who do you have in mind?"
     # use new menu layout for selecting people
-    if "build_menu_items" in globals():
+    if "bugfix_installed" in globals():
         call screen main_choice_display(build_menu_items([["Request Threesome From"] + get_Sarah_willing_threesome_list()], draw_hearts_for_people = False))
     else:
         call screen main_choice_display([["Request Threesome From"] + get_Sarah_willing_threesome_list()])

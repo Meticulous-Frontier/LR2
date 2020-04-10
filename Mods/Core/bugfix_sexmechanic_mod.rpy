@@ -272,7 +272,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
         if round_choice is None: #If there is no set round_choice
             #TODO: Add a variant of this list when the girl is in control to ask if you want to resist or ask/beg for something.
-            if "build_menu_items" in globals():
+            if "bugfix_installed" in globals():
                 call screen main_choice_display(build_menu_items([build_round_choice_menu(the_person, position_choice, position_locked, object_choice, ignore_taboo = ignore_taboo)]))
             else:
                 call screen main_choice_display([build_round_choice_menu(the_person, position_choice, position_locked, object_choice, ignore_taboo = ignore_taboo)])

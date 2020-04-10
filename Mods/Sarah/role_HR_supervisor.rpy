@@ -542,7 +542,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         the_person.char "Here's my list. Who do you want me to call in?"
 
     # use new menu layout for selecting people
-    if "build_menu_items" in globals():
+    if "bugfix_installed" in globals():
         call screen main_choice_display(build_menu_items([["Call in"] + HR_employee_list], draw_hearts_for_people = False))
     else:
         call screen main_choice_display([["Call in"] + HR_employee_list])
@@ -595,7 +595,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
 
     mc.name "That's right. As you know, we run a small business here, and I like to make sure all my employees enjoy their work here."
     mc.name "Recently, I've become concerned you may not like the work environment."
-    if "build_menu_items" in globals():
+    if "bugfix_installed" in globals():
         call screen main_choice_display(build_menu_items([build_HR_interview_discussion_topic_menu(person_choice)]))
     else:
         call screen main_choice_display([build_HR_interview_discussion_topic_menu(person_choice)])
@@ -1172,7 +1172,7 @@ label HR_director_mind_control_attempt_label(the_person):
             return
     the_person.char "Okay. Who do you want me to make the attempt on?"
 
-    if "build_menu_items" in globals():
+    if "bugfix_installed" in globals():
         call screen main_choice_display(build_menu_items([["Call in"] + HR_employee_list], draw_hearts_for_people = False))
     else:
         call screen main_choice_display([["Call in"] + HR_employee_list])
@@ -1263,7 +1263,7 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
 label HR_director_appointment_action_label:
     $ people_list = get_sorted_people_list(mc.business.hr_team, "Appoint", ["Back"])
 
-    if "build_menu_items" in globals():
+    if "bugfix_installed" in globals():
         call screen main_choice_display(build_menu_items([people_list]))
     else:
         call screen main_choice_display([people_list])
