@@ -13,7 +13,8 @@ init -1 python:
         hair_colour = None, hair_style = None, pubes_colour = None, pubes_style = None, skin = None, eyes = None, job = None,
         personality = None, custom_font = None, name_color = None, dial_color = None, starting_wardrobe = None, stat_array = None, skill_array = None, sex_array = None,
         start_sluttiness = None, start_obedience = None, start_happiness = None, start_love = None, start_home = None,
-        title = None, possessive_title = None, mc_title = None, relationship = None, kids = None, SO_name = None, base_outfit = None, force_random = False):
+        title = None, possessive_title = None, mc_title = None, relationship = None, kids = None, SO_name = None, base_outfit = None, 
+        force_random = False, forced_opinions = None, forced_sexy_opinions = None):
 
         return_character = None
         if not force_random and renpy.random.randint(1,100) < 20:
@@ -30,13 +31,22 @@ init -1 python:
                 start_sluttiness = start_sluttiness, start_obedience = start_obedience, start_happiness = start_happiness, start_love = start_love, start_home = start_home,
                 title = title, possessive_title = possessive_title, mc_title = mc_title, relationship = relationship, kids = kids, SO_name = SO_name, base_outfit = base_outfit)
 
+        if forced_opinions and isinstance(forced_opinions, list):
+            for opinion in forced_opinions:
+                return_character.opinions[opinion[0]] = [opinion[1], opinion[2]]
+
+        if forced_sexy_opinions and isinstance(forced_sexy_opinions, list):
+            for opinion in forced_sexy_opinions:
+                return_character.sexy_opinions[opinion[0]] = [opinion[1], opinion[2]]
+
         # when not using bugfix, remove the employed_since key from event trigger dictionary (this should only be used for employees)
         if return_character.event_triggers_dict.get("employed_since", -1) != -1:
             del return_character.event_triggers_dict["employed_since"]
 
         update_person_opinions(return_character)
         update_random_person(return_character)
-        rebuild_wardrobe(return_character)
+        if not starting_wardrobe:
+            rebuild_wardrobe(return_character)
         update_person_outfit(return_character, -0.2) # choose a less slutty outfit as planned outfit
 
         return return_character
@@ -176,13 +186,45 @@ init -1 python:
         return
 
     def create_hooker():
-        the_person = make_person(start_sluttiness = renpy.random.randint(25, 40))
-        the_person.sexy_opinions["bareback sex"] = [-2, False]
-        the_person.set_mc_title("Sir")
-        the_person.special_role.append(prostitute_role)
-        the_person.generate_home()
-        the_person.home.add_person(the_person)
-        return
+        person = make_person(start_sluttiness = renpy.random.randint(25, 40), force_random = True, forced_opinions = [
+                ["flirting", 2, True],
+                ["skirts", 2, True],
+                ["high heels", 2, True],
+                ["pants", -2, False],
+                ["makeup", 1, True],
+                ["skimpy outfits", 2, True],
+                ["the colour red", 2, False],
+                ["the colour yellow", 2, False],
+                ["the colour black", -2, False],
+                ["the colour white", -2, False],
+                ["the colour green", -2, False],
+            ], forced_sexy_opinions = [
+                ["being submissive", 1, False],
+                ["bareback sex", -2, True],
+                ["giving blowjobs", 2, False],
+                ["vaginal sex", 2, False],
+                ["public sex", 2, False],
+                ["showing her tits", 1, False],
+            ])
+        person.set_mc_title("Sir")
+        person.special_role.append(prostitute_role)
+        person.generate_home()
+        person.home.add_person(person)
+        return person
+
+    def create_stripper():
+        person = make_person(start_sluttiness = renpy.random.randint(15,30), force_random = True, forced_opinions = [
+                ["skimpy outfits", 2, True],
+                ["high heels", 2, True],
+            ], forced_sexy_opinions = [
+                ["showing her tits", 2, True],
+                ["showing her ass", 2, True],
+                ["taking control", 2, True],
+            ])
+        person.set_mc_title("Honey")
+        person.generate_home()
+        person.home.add_person(person)        
+        return person
 
     def update_characters():
         # update characters in game
@@ -240,6 +282,18 @@ init -1 python:
         #        enhance_existing_wardrobe(person, 6)
         return
 
+    def update_stripclub_strippers():
+        stripclub_strippers.clear()
+        for person in strip_club.people:
+            person.remove_person_from_game()
+        strip_club.people.clear()
+
+        for i in __builtin__.range(0,4):
+            person = create_stripper()
+            person.set_schedule([3,4],strip_club)
+            stripclub_strippers.append(person)
+        return
+
 label activate_generic_personality(stack):
     python:
         create_unique_character_list()
@@ -258,6 +312,8 @@ label activate_generic_personality(stack):
         update_characters()
 
         update_unique_character_wardrobes()
+
+        update_stripclub_strippers()
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)

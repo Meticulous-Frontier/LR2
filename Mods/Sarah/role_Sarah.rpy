@@ -42,7 +42,20 @@ init 2 python:
         sarah = make_person(name = "Sarah", last_name ="Cooper", age = 21, body_type = "thin_body", face_style = "Face_3", tits = "A", height = 0.90, hair_colour = "brown", hair_style = windswept_hair, skin="white",\
             eyes = "dark blue", personality = Sarah_personality, name_color = "#d62cff", dial_color = "#d62cff", starting_wardrobe = sarah_wardrobe, \
             stat_array = [4,3,3], skill_array = [5,3,2,1,1], sex_array = [1,2,3,1], start_sluttiness = 3, start_obedience = 0, start_happiness = 102, start_love = 3, \
-            title = "Sarah", possessive_title = "Your childhood friend",mc_title = mc.name, relationship = "Single", kids = 0, base_outfit = sarah_base_outfit, force_random = True)
+            title = "Sarah", possessive_title = "Your childhood friend",mc_title = mc.name, relationship = "Single", kids = 0, base_outfit = sarah_base_outfit, 
+            force_random = True, forced_opinions = [
+                ["HR work", 2, True],        # she loves HR work
+                ["work uniforms", 1, False], # she likes uniforms
+                ["Mondays", 1, False],       # she likes mondays, and monday meetings!
+                ["working", 1, False],       # a bit of a workaholic
+                ["the colour purple", 2, False], #She loves purple!
+                ["skirts", 1, False],        #And Skirts
+                ["the colour red", -2, False], #She hates red
+            ], forced_sexy_opinions = [
+                ["taking control", 1, False], # she likes taking control, type A
+                ["giving handjobs", 2, False], # Not afraid to get her hands dirty ;)
+                ["showing her tits", -2, False], # She hates showing her small tits
+            ])
 
         sarah.generate_home()
         sarah.set_schedule([1,2,3], sarah.home)
@@ -61,22 +74,6 @@ init 2 python:
 
         Sarah_intro = Action("Sarah_intro",Sarah_intro_requirement,"Sarah_intro_label") #Set the trigger day for the next monday. Monday is day%7 == 0
         mc.business.mandatory_crises_list.append(Sarah_intro) #Add the event here so that it pops when the requirements are met.
-
-
-
-
-        sarah.opinions["HR work"] = [2, True]  # she loves HR work
-        sarah.opinions["work uniforms"] = [1, False]  # she likes uniforms
-        sarah.opinions["Mondays"] = [1, False]  # she likes mondays, and monday meetings!
-        sarah.opinions["working"] = [1, False]  # a bit of a workaholic
-        sarah.opinions["the colour purple"] = [2, False] #She loves purple!
-        sarah.opinions["skirts"] = [1, False]  #And Skirts
-        sarah.opinions["the colour red"] = [-2, False] #She hates red
-
-        sarah.sexy_opinions["taking control"] = [1, False]  # she likes taking control, type A
-        sarah.sexy_opinions["giving handjobs"] = [2, False] # Not afraid to get her hands dirty ;)
-        sarah.sexy_opinions["showing her tits"] = [-2, False]  # She hates showing her small tits
-
         return
 
     def Sarah_reset_vars():

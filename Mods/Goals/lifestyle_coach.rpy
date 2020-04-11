@@ -24,18 +24,18 @@ init 3 python:
         dawn = make_person(name = "Dawn", age = 42, body_type = "thin_body", \
             personality = relaxed_personality,  \
             sex_array = [3,3,4,3], start_obedience = -28, start_happiness = 129, start_love = 0, \
-            title = "Dawn", possessive_title = "Your lifestyle coach", mc_title = mc.name, force_random = True)
+            title = "Dawn", possessive_title = "Your lifestyle coach", mc_title = mc.name, force_random = True,
+            forced_opinions = [
+                ["HR work", 2, True],
+            ], forced_sexy_opinions = [
+                ["taking control", 1, False]
+            ])
 
         dawn.generate_home()
         dawn.set_schedule([1,2,3], mall)
         dawn.special_role.append(lifestyle_coach_role)
 
         dawn.home.add_person(dawn)
-
-        #Set opinions up here.
-        dawn.opinions["HR work"] = [2, True]
-        dawn.sexy_opinions["taking control"] = [1, False]
-
         dawn.on_room_enter_event_list.append(lifestyle_coach_intro)
         return
 

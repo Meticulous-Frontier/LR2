@@ -12,10 +12,10 @@ init 1301 python:
     def Sarah_player_titles(the_person):
         return mc.name
     Sarah_personality = Personality("Sarah", default_prefix = "relaxed",
-    common_likes = ["skirts", "small talk", "Fridays", "the weekend", "the colour purple", "makeup", "flirting", "HR work","heavy metal","punk"],
-    common_sexy_likes = ["doggy style sex", "giving blowjobs", "getting head", "anal sex", "public sex", "skimpy outfits", "showing her tits", "showing her ass", "threesomes", "not wearing underwear", "creampies", "bareback sex"],
-    common_dislikes = ["Mondays", "the colour pink", "supply work", "conservative outfits", "work uniforms"],
-    common_sexy_dislikes = ["being submissive", "being fingered", "missionary style sex", "giving handjobs"],
+    common_likes = ["skirts", "small talk", "Fridays", "the weekend", "the colour purple", "makeup", "flirting", "heavy metal","punk"],
+    common_sexy_likes = ["doggy style sex", "giving blowjobs", "getting head", "anal sex", "public sex", "skimpy outfits", "showing her ass", "threesomes", "not wearing underwear", "creampies", "bareback sex"],
+    common_dislikes = ["the colour pink", "supply work", "conservative outfits", "work uniforms"],
+    common_sexy_dislikes = ["being submissive", "being fingered", "missionary style sex"],
     titles_function = Sarah_titles, possessive_titles_function = Sarah_possessive_titles, player_titles_function = Sarah_player_titles)
 
 
