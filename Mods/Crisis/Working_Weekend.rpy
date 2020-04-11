@@ -142,8 +142,8 @@ label SB_working_weekend_crisis_label():
                 "You back your chair up and move it to the side while [person_one.possessive_title] gets down on her knees in front of you."
                 $ person_one.break_taboo("sucking_cock")
                 $ scene_manager.update_actor(person_one, position = "blowjob")
-                $ person_one.add_situational_slut("seduction_approach",20)
-                $ person_one.add_situational_obedience("seduction_approach", 5)
+                $ person_one.add_situational_slut("seduction_approach",20, "Your dedication turns me on.")
+                $ person_one.add_situational_obedience("seduction_approach", 5, "I will do this for you.")
                 call fuck_person(person_one, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_SB1
 
                 $ person_one.clear_situational_slut("seduction_approach")
