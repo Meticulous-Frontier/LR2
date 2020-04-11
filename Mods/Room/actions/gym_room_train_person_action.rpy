@@ -26,7 +26,7 @@ init 3 python:
         initialization = gym_initialization, menu_tooltip = "Bring a person to the gym to train their body.", category="Mall")
 
 label select_person_for_gym():
-    if "bugfix_installed" in globals():
+    if bugfix_installed:
         call screen main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game([mc]), "Train with", ["Back"])]))
     else:
         call screen main_choice_display([get_sorted_people_list(known_people_in_the_game([mc]), "Train with", ["Back"])])

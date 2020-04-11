@@ -26,6 +26,10 @@
 # pre define variable for saving
 define action_mod_list = None
 
+# define bugfix_installed as False when variable does not exist
+if not "bugfix_installed" in globals():
+    define bugfix_installed = False
+
 init -1 python:
     def is_action_enabled(self, extra_args = None):
         if hasattr(self, "enabled"):

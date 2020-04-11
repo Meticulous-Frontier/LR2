@@ -395,7 +395,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
 
     # We start any encounter by letting them pick what position they want (unless something is forced or the girl is in charge)
     $ active_mc_position = None
-    if "bugfix_installed" in globals():
+    if bugfix_installed:
         call screen main_choice_display(build_menu_items([build_threesome_round_start_menu(position_choice, the_person_one, the_person_two)]))
     else:
         call screen main_choice_display([build_threesome_round_start_menu(position_choice, the_person_one, the_person_two)])
@@ -423,7 +423,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
         if round_choice is None: #If there is no set round_choice
             #TODO: Add a variant of this list when the girl is in control to ask if you want to resist or ask/beg for something.
 
-            if "bugfix_installed" in globals():
+            if bugfix_installed:
                 call screen main_choice_display(build_menu_items([build_threesome_round_choice_menu(position_choice, the_person_one, the_person_two, position_locked, hide_leave)]))
             else:
                 call screen main_choice_display([build_threesome_round_choice_menu(position_choice, the_person_one, the_person_two, position_locked, hide_leave)])
@@ -679,7 +679,7 @@ label threesome_round(the_person_one, the_person_two, position_choice, round = 0
 
 label pick_threesome(the_person_one, the_person_two, girl_one_position = None, object_choice = None):  #We can pass in a position for girl one if the second girl "walks in" on the sex event
     if girl_one_position == None:
-        if "bugfix_installed" in globals():
+        if bugfix_installed:
             call screen main_choice_display(build_menu_items([build_threesome_person_one_position_choice_menu(the_person_one, the_person_two)]))
         else:
             call screen main_choice_display([build_threesome_person_one_position_choice_menu(the_person_one, the_person_two)])
@@ -687,7 +687,7 @@ label pick_threesome(the_person_one, the_person_two, girl_one_position = None, o
     else:
         $ girl_one_choice = girl_one_position
 
-    if "bugfix_installed" in globals():
+    if bugfix_installed:
         call screen main_choice_display(build_menu_items([build_threesome_person_two_position_choice_menu(the_person_one, the_person_two)]))
     else:
         call screen main_choice_display([build_threesome_person_two_position_choice_menu(the_person_one, the_person_two)])
@@ -699,7 +699,7 @@ label pick_threesome(the_person_one, the_person_two, girl_one_position = None, o
     return position_choice
 
 label threesome_strip_menu(the_person_one, the_person_two):
-    if "bugfix_installed" in globals():
+    if bugfix_installed:
         call screen main_choice_display(build_menu_items([build_threesome_strip_menu(the_person_one, the_person_two)]))
     else:
         call screen main_choice_display([build_threesome_strip_menu(the_person_one, the_person_two)])

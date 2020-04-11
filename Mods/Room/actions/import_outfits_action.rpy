@@ -50,7 +50,7 @@ label import_wardrobe_label():
 
 label give_wardrobe_label():
     $ people_list = get_sorted_people_list(known_people_in_the_game([mc]), "Clothes for", ["Back"])
-    if "bugfix_installed" in globals():
+    if bugfix_installed:
         call screen main_choice_display(build_menu_items([people_list]))
     else:
         call screen main_choice_display([people_list])

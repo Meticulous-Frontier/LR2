@@ -350,23 +350,13 @@ label HR_director_initial_hire_label(the_person):
         mc.business.hr_director.HR_tags = {}
         mc.business.hr_director.HR_unlocks = {}
 
-        if the_person is sarah:
-            mc.business.add_employee_hr(the_person)
-        else:
+        if employee_role in the_person.special_role:
             mc.business.remove_employee(the_person)
-            mc.business.add_employee_hr(the_person)
+
+        mc.business.hire_person(the_person, "Marketing")
 
         # assign special HR director role
         mc.business.hr_director.special_role.append(HR_director_role)
-
-        # the bug fix has a simplified employ mechanism that handles everything below this
-        if not "bugfix_installed" in globals():
-            the_person.event_triggers_dict["employed_since"] = day
-            mc.business.listener_system.fire_event("new_hire", the_person = the_person)
-            the_person.special_role.append(employee_role)
-            for other_employee in mc.business.get_employee_list():
-                town_relationships.begin_relationship(the_person, other_employee) #She is introduced to everyone at work
-            the_person.set_work([1,2,3], mc.business.h_div)
 
         set_HR_director_tag("business_HR_eff_bonus", mc.business.effectiveness_cap - 100)
         add_hr_director_first_monday_action(the_person)
@@ -542,7 +532,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         the_person.char "Here's my list. Who do you want me to call in?"
 
     # use new menu layout for selecting people
-    if "bugfix_installed" in globals():
+    if bugfix_installed:
         call screen main_choice_display(build_menu_items([["Call in"] + HR_employee_list], draw_hearts_for_people = False))
     else:
         call screen main_choice_display([["Call in"] + HR_employee_list])
@@ -595,7 +585,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
 
     mc.name "That's right. As you know, we run a small business here, and I like to make sure all my employees enjoy their work here."
     mc.name "Recently, I've become concerned you may not like the work environment."
-    if "bugfix_installed" in globals():
+    if bugfix_installed:
         call screen main_choice_display(build_menu_items([build_HR_interview_discussion_topic_menu(person_choice)]))
     else:
         call screen main_choice_display([build_HR_interview_discussion_topic_menu(person_choice)])
@@ -1172,7 +1162,7 @@ label HR_director_mind_control_attempt_label(the_person):
             return
     the_person.char "Okay. Who do you want me to make the attempt on?"
 
-    if "bugfix_installed" in globals():
+    if bugfix_installed:
         call screen main_choice_display(build_menu_items([["Call in"] + HR_employee_list], draw_hearts_for_people = False))
     else:
         call screen main_choice_display([["Call in"] + HR_employee_list])
@@ -1263,7 +1253,7 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
 label HR_director_appointment_action_label:
     $ people_list = get_sorted_people_list(mc.business.hr_team, "Appoint", ["Back"])
 
-    if "bugfix_installed" in globals():
+    if bugfix_installed:
         call screen main_choice_display(build_menu_items([people_list]))
     else:
         call screen main_choice_display([people_list])

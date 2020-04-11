@@ -3,7 +3,7 @@ init 5 python:
 
 label lady_of_the_night_label_enhanced():
     # You run into a lady who propositions you for money.
-    $ the_person = create_random_person(start_sluttiness = renpy.random.randint(25, 40))
+    $ the_person = make_person(start_sluttiness = renpy.random.randint(25, 40), force_random = True)
     $ the_person.set_mc_title("Sir")
     $ the_person.special_role.append(prostitute_role)
     "You're lost in thought when a female voice calls out to you."

@@ -30,6 +30,10 @@ init -1 python:
                 start_sluttiness = start_sluttiness, start_obedience = start_obedience, start_happiness = start_happiness, start_love = start_love, start_home = start_home,
                 title = title, possessive_title = possessive_title, mc_title = mc_title, relationship = relationship, kids = kids, SO_name = SO_name, base_outfit = base_outfit)
 
+        # when not using bugfix, remove the employed_since key from event trigger dictionary (this should only be used for employees)
+        if return_character.event_triggers_dict.get("employed_since", -1) != -1:
+            del return_character.event_triggers_dict["employed_since"]
+
         update_person_opinions(return_character)
         update_random_person(return_character)
         rebuild_wardrobe(return_character)

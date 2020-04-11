@@ -173,40 +173,29 @@ label mc_hire_person_label(person):
     "You complete the necessary paperwork and hire [person.title]. What division do you assign them to?"
     menu:
         "Research and Development":
-            $ mc.business.add_employee_research(person)
+            $ mc.business.hire_person(the_person, "Research")
             $ mc.location.move_person(person, mc.business.r_div)
-            $ person.set_work([1,2,3], mc.business.r_div)
 
         "Production":
-            $ mc.business.add_employee_production(person)
+            $ mc.business.hire_person(the_person, "Production")
             $ mc.location.move_person(person, mc.business.p_div)
-            $ person.set_work([1,2,3], mc.business.p_div)
 
         "Supply Procurement":
-            $ mc.business.add_employee_supply(person)
+            $ mc.business.hire_person(the_person, "Supply")
             $ mc.location.move_person(person, mc.business.s_div)
-            $ person.set_work([1,2,3], mc.business.s_div)
 
         "Marketing":
-            $ mc.business.add_employee_marketing(person)
+            $ mc.business.hire_person(the_person, "Marketing")
             $ mc.location.move_person(person, mc.business.m_div)
-            $ person.set_work([1,2,3], mc.business.m_div)
 
         "Human Resources":
-            $ mc.business.add_employee_hr(person)
+            $ mc.business.hire_person(the_person, "HR")
             $ mc.location.move_person(person, mc.business.h_div)
-            $ person.set_work([1,2,3], mc.business.h_div)
 
         "Back":
             return
 
-    python:
-        mc.business.change_funds(- (person.calculate_base_salary() * 10))
-        if not "bugfix_installed" in globals():
-            person.event_triggers_dict["employed_since"] = day
-            mc.business.listener_system.fire_event("new_hire", the_person = person)
-            person.special_role.append(employee_role)
-
+    $ mc.business.change_funds(- (person.calculate_base_salary() * 10))
     $ work_station_destination = mc.business.get_employee_workstation(person).formalName
     "[person.title] heads over to the [work_station_destination]..."
     return

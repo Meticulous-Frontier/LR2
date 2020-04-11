@@ -64,7 +64,7 @@ label slave_collar_person_label(the_person):
     else:
         $ collar_list = ["Select Collar"] + [["Breed Me", breed_collar], ["Cum Slut", cum_slut_collar], ["Fuck Doll", fuck_doll_collar], ["Back", "Back"]]
 
-        if "bugfix_installed" in globals():
+        if bugfix_installed:
             call screen main_choice_display(build_menu_items([collar_list]))
         else:
             call screen main_choice_display([collar_list])

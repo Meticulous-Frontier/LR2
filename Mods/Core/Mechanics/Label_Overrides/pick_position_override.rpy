@@ -29,7 +29,7 @@ init 2 python:
         return [foreplay_positions, oral_positions, vaginal_positions, anal_positions]
 
 label pick_position_enhanced(the_person, allow_none = True, ignore_taboo = False):
-    if "bugfix_installed" in globals():
+    if bugfix_installed:
         call screen main_choice_display(build_menu_items(build_grouped_sex_position_menu(the_person, allow_none = allow_none, ignore_taboo = ignore_taboo)))
     else:
         call screen main_choice_display(build_grouped_sex_position_menu(the_person, allow_none = allow_none, ignore_taboo = ignore_taboo))

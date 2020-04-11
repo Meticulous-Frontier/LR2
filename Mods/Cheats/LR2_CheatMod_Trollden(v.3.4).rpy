@@ -119,34 +119,19 @@ init python: # This space is reserved for definitions used to simplify the code
 
 
         if the_person.job == "Researcher":
-            mc.business.add_employee_research(the_person) # Add the_person to the employee overview
-            if not "bugfix_installed" in globals():
-                the_person.set_work([1,2,3], mc.business.r_div) # Set their schedule and work location
-                the_person.special_role.append(employee_role) # Append the employee_role to enable corresponding special actions
+            mc.business.hire_person(the_person, "Research")
 
         elif the_person.job =="Production":
-            mc.business.add_employee_production(the_person)
-            if not "bugfix_installed" in globals():
-                the_person.set_work([0,1,2,3,4], mc.business.p_div)
-                the_person.special_role.append(employee_role)
+            mc.business.hire_person(the_person, "Production")
 
         elif the_person.job == "Supply":
-            mc.business.add_employee_supply(the_person)
-            if not "bugfix_installed" in globals():
-                the_person.set_work([1,2,3], mc.business.s_div)
-                the_person.special_role.append(employee_role)
+            mc.business.hire_person(the_person, "Supply")
 
         elif the_person.job == "Marketing":
-            mc.business.add_employee_marketing(the_person)
-            if not "bugfix_installed" in globals():            
-                the_person.set_work([1,2,3], mc.business.m_div)
-                the_person.special_role.append(employee_role)
+            mc.business.hire_person(the_person, "Marketing")
 
         elif the_person.job == "Human Resources":
-            mc.business.add_employee_hr(the_person)
-            if not "bugfix_installed" in globals():
-                the_person.set_work([1,2,3], mc.business.h_div)
-                the_person.special_role.append(employee_role)
+            mc.business.hire_person(the_person, "HR")
 
     def cheat_fire_employee(): # Fire a person via the cheat menu, this does not remove them from the world, but changes their schedule to not include the work place.
         mc.business.remove_employee(the_person)

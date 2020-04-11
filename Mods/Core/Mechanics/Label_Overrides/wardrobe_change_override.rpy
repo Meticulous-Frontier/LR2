@@ -17,7 +17,7 @@ init 5 python:
         return option_list
 
 label wardrobe_change_label_enhanced(the_person):
-    if "bugfix_installed" in globals():
+    if bugfix_installed:
         call screen main_choice_display(build_menu_items([build_wardrobe_change_menu()]))
     else:
         call screen main_choice_display([build_wardrobe_change_menu()])
@@ -34,7 +34,7 @@ label wardrobe_change_label_enhanced(the_person):
             return
 
         $ new_outfit = _return
-        if "bugfix_installed" in globals():
+        if bugfix_installed:
             call screen main_choice_display(build_menu_items([build_wardrobe_change_save_menu(new_outfit)]))
         else:
             call screen main_choice_display([build_wardrobe_change_save_menu(new_outfit)])
