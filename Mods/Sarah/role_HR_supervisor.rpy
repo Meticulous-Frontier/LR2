@@ -401,13 +401,12 @@ label HR_director_first_monday_label(the_person):
         the_person.char "That sounds great! Alright, I actually have a set of possibilities arranged for a meeting today if you would like. Do you want to go over my list of girls?"
         menu:
             "Let's start next week":
-                pass
+                $ del HR_employee_list
             "Let's start today":
                 mc.name "If you think meeting with some of these girls would be helpful, I think we should start immediately."
                 the_person.char "Ok! Let me see who I have on my list here..."
                 call HR_director_personnel_interview_label(the_person, max_opinion = 0) from HR_DIR_INTERVIEW_CALL_1
 
-    $ del HR_employee_list
     mc.name "Alright, I think that is all for today. Unless something comes up, same time next week?"
     $ the_person.draw_person(position = "stand2")
     the_person.char "Sounds great! I'll see you then!"
@@ -490,14 +489,13 @@ label HR_director_monday_meeting_label(the_person):
         the_person.char "Can do! Did you want to call in a girl for a counseling session this week?"
         menu:
             "Let's not this week":
-                pass
+                $ del HR_employee_list
             "Call one in":
                 mc.name "Yes I want to do that."
                 the_person.char "Ok! Let me see who I have on my list here..."
                 call HR_director_personnel_interview_label(the_person, max_opinion = get_HR_director_tag("business_HR_coffee_tier", 0)) from HR_DIR_INTERVIEW_CALL_2
                 $ set_HR_director_tag("business_HR_meeting_last_day", day)
 
-    $ del HR_employee_list
     the_person.char "Hmm, let's see, what's next..."
     call HR_director_manage_gym_membership(the_person) from HR_Gym_manage_1
 
