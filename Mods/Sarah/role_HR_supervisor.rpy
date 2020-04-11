@@ -353,8 +353,8 @@ label HR_director_initial_hire_label(the_person):
         if employee_role in the_person.special_role:
             mc.business.remove_employee(the_person)
 
-        mc.business.hire_person(the_person, "Marketing")
-
+        mc.business.hire_person(the_person, "HR")
+        
         # assign special HR director role
         mc.business.hr_director.special_role.append(HR_director_role)
 
