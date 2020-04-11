@@ -11,17 +11,15 @@ init 1301 python:
             return True
         return False
 
-    def unisex_bathroom_policy_unlock(unlock = 1):
-        if "unisex_restroom_unlocks" in globals(): # NOTE: was getting not in global errors, look further into it later
-            unisex_restroom_unlocks["unisex_policy_unlock"] = unlock
+    def unisex_bathroom_policy_unlock(unlock):
+        unisex_restroom_unlocks["unisex_policy_unlock"] = unlock
 
     Unisex_bathroom_creation_policy = Policy(name = "Make Restrooms Unisex",
         desc = "Some basic remodeling and a change of signs will make all company restrooms unisex.",
         cost = 1000,
         requirement =  unisex_bathroom_creation_requirement,
-        toggleable = True,
-        on_buy_function = unisex_bathroom_policy_unlock(unlock = 1),
-        on_remove_function = unisex_bathroom_policy_unlock(unlock = 0))
+        on_buy_function = unisex_bathroom_policy_unlock,
+        extra_arguments = { "unlock" : 1})
     organisation_policies_list.append(Unisex_bathroom_creation_policy)
 
     def unisex_restroom_fantasy_actout_requirement(the_person):
@@ -39,8 +37,6 @@ init 1301 python:
         else:
             return "The business isn't open!"
         return False
-
-
 
     unisex_restroom_fantasy_actout = Action("Actout dream fantasy", unisex_restroom_fantasy_actout_requirement, "unisex_restroom_fantasy_actout_label", event_duration = 5)
     unisex_restroom_gloryhole_wait = Action("Wait by the glory hole", unisex_restroom_gloryhole_wait_requirement, "unisex_restroom_gloryhole_wait_label")
