@@ -185,7 +185,7 @@ init -1 python:
         the_person.home.add_person(the_person)
         return
 
-    def create_hooker():
+    def create_hooker(add_to_game = True):
         person = make_person(start_sluttiness = renpy.random.randint(25, 40), force_random = True, forced_opinions = [
                 ["flirting", 2, True],
                 ["skirts", 2, True],
@@ -208,8 +208,9 @@ init -1 python:
             ])
         person.set_mc_title("Sir")
         person.special_role.append(prostitute_role)
-        person.generate_home()
-        person.home.add_person(person)
+        if add_to_game:
+            person.generate_home()
+            person.home.add_person(person)
         return person
 
     def create_stripper():

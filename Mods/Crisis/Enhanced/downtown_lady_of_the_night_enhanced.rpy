@@ -3,7 +3,7 @@ init 5 python:
 
 label lady_of_the_night_label_enhanced():
     # You run into a lady who propositions you for money.
-    $ the_person = create_hooker()
+    $ the_person = create_hooker(add_to_game = False)
 
     "You're lost in thought when a female voice calls out to you."
     the_person.char "Excuse me, [the_person.mc_title]."
