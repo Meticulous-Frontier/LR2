@@ -66,6 +66,7 @@ label business_meeting_action_label:
     #$ mc.log_event("Company Efficiency: " + str(mc.business.effectiveness_cap) + "%", "float_text_grey")
     "The changes increased your business effectivity by [change]%%."
 
+    $ hr_employee = None
     $ the_person.reset_arousal()
     $ mc.location.show_background()
     $ renpy.scene("Active")
