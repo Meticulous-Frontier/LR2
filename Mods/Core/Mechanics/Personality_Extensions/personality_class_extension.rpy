@@ -40,6 +40,16 @@ init 4 python:
     add_label_hijack("normal_start", "update_extra_personalities_list")
     add_label_hijack("after_load", "update_extra_personalities_list")
 
+init 1400 python:
+    # update default personalities with extra opinions (not in base game)
+    relaxed_personality.common_likes.append("high heels")
+    introvert_personality.common_likes.append("boots")
+    introvert_personality.common_dislikes.append("high heels")
+    reserved_personality.common_likes.append("dresses")
+    reserved_personality.common_dislikes.append("skirts")
+    wild_personality.common_likes.append("high heels")
+    wild_personality.common_likes.append("dresses")
+
 label update_extra_personalities_list(stack):
 
     if "starbuck_personality" in globals():
@@ -68,3 +78,4 @@ label update_extra_personalities_list(stack):
             $ list_of_extra_personalities.append(cousin_personality)
 
     $ execute_hijack_call(stack)
+

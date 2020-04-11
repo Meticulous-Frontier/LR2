@@ -45,7 +45,7 @@ init 1400 python:
         return valid_player_titles
 
     cougar_personality = Personality("cougar", default_prefix = "reserved", #Cougar style personality
-        common_likes = ["skirts", "small talk", "Mondays", "the weekend", "the colour red", "makeup", "sports", "flirting", "HR work"],
+        common_likes = ["skirts", "small talk", "Mondays", "the weekend", "the colour red", "makeup", "sports", "flirting", "HR work", "high heels", "dresses"],
         common_sexy_likes = ["doggy style sex", "giving blowjobs", "getting head", "anal sex", "public sex", "skimpy outfits", "anal creampies", "showing her tits", "showing her ass", "taking control", "not wearing underwear", "creampies", "drinking cum", "cum facials"],
         common_dislikes = ["Mondays", "the colour pink", "supply work", "conservative outfits", "work uniforms", "pants"],
         common_sexy_dislikes = ["being submissive", "being fingered", "missionary style sex", "bareback sex"],
