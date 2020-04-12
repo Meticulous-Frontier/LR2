@@ -1344,6 +1344,8 @@ label HR_director_headhunt_interview_label(the_person):
             return
     $ scene_manager.update_actor(the_person, position = "sitting")
 
+    the_person.char "Take a look at this file, she would be perfect for us."
+
     call hire_select_process([prospect, 1]) from _call_hire_prospect_process_1  #Copying how Vren calls this... hopefully this is right...
 
     if _return == prospect: #MC chooses to hire her
