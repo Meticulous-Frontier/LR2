@@ -442,6 +442,7 @@ label SB_free_strip_scene(the_person, must_be_naked = True):
                     if tease_item is not None : #A more obedient person is less willing to strip without being told to. A less obedient person will strip further on their own.
                         $ the_person.draw_animated_removal(tease_item, position = picked_pose)
                         "You watch as [the_person.possessive_title] grabs their [tease_item.name] and pulls it off."
+                        $ del tease_item
                     else:
                         #She has nothing to strip off or she's as slutty as she's willing to get
                         "[the_person.possessive_title] seems comfortable just the way she is."
