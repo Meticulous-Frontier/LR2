@@ -149,6 +149,7 @@ label SB_working_weekend_crisis_label():
                 $ person_one.clear_situational_slut("seduction_approach")
                 $ person_one.clear_situational_obedience("seduction_approach")
                 $ person_one.review_outfit(dialogue = False)
+                $ scene_manager.clear_scene()
                 "Eventually, [person_one.possessive_title] gets up. She says goodbye after giving you a quick kiss"
                 return
             "Just Talk":
@@ -272,7 +273,6 @@ label SB_working_weekend_crisis_label():
                 $ person_one.change_love(5)
             person_one.char "Holy fuck [person_one.mc_title], that was so hot."
             "She eventually gets up and gets herself dressed again. You say goodbye as she leaves the office."
-            $ scene_manager.remove_actor(person_one)
             $ person_two.review_outfit(dialogue = False)
             $ person_one.review_outfit(dialogue = False)
             $ scene_manager.clear_scene()
@@ -305,7 +305,6 @@ label SB_working_weekend_crisis_label():
                 $ person_one.change_happiness(-5)
                 $ person_one.change_love(-15)
 
-    $ scene_manager.remove_actor(person_one)
     $ scene_manager.clear_scene()
     $ person_one.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
     $ mc.location.show_background()
