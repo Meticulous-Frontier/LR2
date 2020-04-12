@@ -1,4 +1,6 @@
 init 2 python: # Declare variables to use
+    # Wardrobe for employees in the salon
+    salon_wardrobe = wardrobe_from_xml("Salon_Wardrobe")
 
      # Note that the class Room have a bunch of useful variables already for restricting access, adding objects etc.
     def salon_requirement():
@@ -20,9 +22,9 @@ init 2 python: # Declare variables to use
         # Create the room(s) I want to use.
         global mall_salon
         mall_salon = Room("salon", "Hair Salon", [], room_background_image("Salon_Background.jpg"), [make_floor(), make_wall(), make_chair(), make_window()], [], [salon_action], True, [7,2], None, True, lighting_conditions = standard_indoor_lighting)
+        # Add to map
+        list_of_places.append(mall_salon)
 
-        # Wardrobe for employees in the salon
-        salon_wardrobe = wardrobe_from_xml("Salon_Wardrobe")
 
         # Place the stylist character so it is in a room in the world.
         global salon_manager
@@ -40,9 +42,6 @@ init 2 python: # Declare variables to use
 
         # We want whoever the salon_manager is to be in the salon during work hours.
         salon_manager.set_schedule([1,2,3], mall_salon)
-
-        # Add to map
-        list_of_places.append(mall_salon)
         return
 
     def salon_introduction_action_requirement(the_person):

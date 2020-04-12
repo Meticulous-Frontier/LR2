@@ -20,6 +20,8 @@ init 2 python:
     starbuck_sex_store_promo_five = Action("Ask if couples are coming in", starbuck_sex_store_promo_five_requirement, "starbuck_sex_store_promo_five_label")
     starbuck_spend_the_night = Action("Spend the night with her", starbuck_spend_the_night_requirement, "starbuck_spend_the_night_label")
 
+    starbuck_wardrobe = wardrobe_from_xml("Starbuck_Wardrobe")
+
     def SB_make_swing():
         the_swing = Object("sex swing",["Sit","Low", "Swing"], sluttiness_modifier = 10, obedience_modifier = 10)
         return the_swing
@@ -35,8 +37,6 @@ init 2 python:
         common_dislikes = ["working", "research work", "production work"],
         common_sexy_dislikes = [ "masturbating", "giving handjobs"],
         titles_function = starbuck_titles, possessive_titles_function = starbuck_possessive_titles, player_titles_function = starbuck_player_titles)
-
-        starbuck_wardrobe = wardrobe_from_xml("Starbuck_Wardrobe")
 
         starbuck_home = Room("Starbuck's home", "Starbuck's home", [], apartment_background, [],[],[],False,[0.5,0.5], visible = False, hide_in_known_house_map = False, lighting_conditions = standard_indoor_lighting)
         starbuck_home.add_object(make_wall())
@@ -60,10 +60,7 @@ init 2 python:
             eyes = ["green",[0.245, 0.734, 0.269, 1.0]], job = "Sex Shop Owner", wardrobe = starbuck_wardrobe, personality = starbuck_personality, stat_list = [3,4,3],  skill_list = [1,1,4,2,1], sluttiness = 42, obedience = -22, suggest = 0, sex_list = [3,3,4,4], love = 0, happiness = 119, \
             home = starbuck_home, work = None, font = get_random_font(), name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", special_role = [starbuck_role], relationship = "Single", base_outfit = starbuck_base)
 
-        starbuck.schedule[1] = sex_store
-        starbuck.schedule[2] = sex_store
-        starbuck.schedule[3] = sex_store
-
+        starbuck.set_schedule([1, 2, 3], sex_store)
         starbuck.home.add_person(starbuck)
 
         # Add a counter to the sex shop

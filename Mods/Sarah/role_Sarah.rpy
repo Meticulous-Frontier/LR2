@@ -24,8 +24,9 @@ init 2 python:
     sarah_weekend_surprise_action = ActionMod("Sarah's Weekend Surprise",Sarah_weekend_surprise_crisis_requirement,"Sarah_weekend_surprise_crisis_label",
         menu_tooltip = "You find an employee masturbating in an empty storage room.", category = "Business", is_crisis = True, crisis_weight = 7)
 
+    sarah_wardrobe = wardrobe_from_xml("Sarah_Wardrobe")
+
     def Sarah_mod_initialization(): #Add actionmod as argument#
-        sarah_wardrobe = wardrobe_from_xml("Sarah_Wardrobe")
 
         sarah_base_outfit = Outfit("Sarah's base accessories")
         the_glasses = modern_glasses.get_copy()
