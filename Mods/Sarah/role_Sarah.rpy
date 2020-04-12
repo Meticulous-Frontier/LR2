@@ -2215,8 +2215,7 @@ label watch_strip_show(the_person):  #This scene assumes scene manager is runnin
     $ scene_manager.update_actor(showgirl, position = "walking_away")
     "After finishing, the showgirl grabs her tips then exits the stage."
     $ scene_manager.remove_actor(showgirl)
-    $ showgirl = None
-    return
+    return showgirl
 
 label play_darts_301(the_person, focus_mod = 0): #Label returns true if mc wins, false if the_person wins
     $ mc_score = 301
