@@ -1325,9 +1325,9 @@ label Sarah_stripclub_story_label():
     "Your girl puts her ass against your chest and starts to wiggle her hips back and forth as she slowly works herself down your body."
     "Soon she is working your erection with her hips, through both of your clothes."
     "She starts to strip down her remaining clothing."
-    $ scene_manager.strip_actor_outfit(showgirl_2, exclude_feet = False)
+    $ scene_manager.strip_actor_outfit(showgirl_2)
     "You notice that [the_person.title] and her stripper are in a similar state."
-    $ scene_manager.strip_actor_outfit(showgirl, exclude_feet = False)
+    $ scene_manager.strip_actor_outfit(showgirl)
     "Her ass bare now, you find it difficult to restrain your hands from molesting the girl in front of you."
     $ mc.change_arousal(15)
     $ the_person.change_arousal(20)
@@ -1371,6 +1371,7 @@ label Sarah_stripclub_story_label():
     "You see [mom.title] quickly appraises the situation."
     mom.char "Right. Have fun talking about work stuff! HAH! Nice to see you again!"
     the_person.char "Nice to see you again too."
+    $ scene_manager.update_actor(mom, position = "walking_away")
     "[mom.possessive_title] walks away, chuckling to herself."
     $ scene_manager.remove_actor(mom)
 
@@ -1416,10 +1417,10 @@ label Sarah_stripclub_story_label():
     "[the_person.possessive_title] stands up and turns away from you."
     if the_person.outfit.vagina_available():
         "Her hips sway back forth. Her shapely ass inches from your face makes a tantalizing target."
-        $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False, exclude_feet = False)
+        $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
     else:
         "She begins to slowly strip her bottom half down in front of you, swaying her hips tantalizingly as she does so."
-        $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False, exclude_feet = False)
+        $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
         "Now naked in front of you, you can't tear your eyes away from her base ass, mere inches from your face."
     "Her pussy is dripping with excitement. It looks like you could probably make her cum in seconds, she is so turned on."
     the_person.char "Oh god I'm so hot... I can't take it!"
@@ -2032,8 +2033,10 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
                 "When you come back, [the_person.title] is awake."
                 $ scene_manager.update_actor(the_person, position = "missionary")
                 the_person.char "Good morning! I slept great."
+                $ the_person.review_outfit(dialogue = False)
+                $ scene_manager.update_actor(the_person, position = "stand3")
                 "You both get ready for the day before heading out."
-                $ scene_manager.remove_actor(the_person)
+                $ scene_manager.clear_scene()
                 return
         "Your cock is already hard, being up against [the_person.title], but she may not be fully wet yet."
         "You spit into your hand and rub it on your dick a few times, getting it lubed up."
@@ -2624,7 +2627,7 @@ label Sarah_date_ends_at_your_place_label(the_person):
     $ scene_manager.update_actor(mom, position = "stand4", character_placement = character_left_flipped)
     $ scene_manager.update_actor(the_person, position = "stand2")
     mom.char "Alright, well don't let me keep you. You two have fun!"
-    $ scene_manager.update_actor(mom, position = "walking_away", character_placement = character_left_flipped)
+    $ scene_manager.update_actor(mom, position = "walking_away")
     "[mom.possessive_title] walks away, chuckling to herself."
     $ scene_manager.remove_actor(mom)
 
@@ -2748,9 +2751,9 @@ label Sarah_date_strip_club_private_dance_label(the_person):
     "Your girl puts her ass against your chest and starts to wiggle her hips back and forth as she slowly works herself down your body."
     "Soon she is working your erection with her hips, through both of your clothes."
     "She starts to strip down her remaining clothing."
-    $ scene_manager.strip_actor_outfit(showgirl_2, exclude_feet = False)
+    $ scene_manager.strip_actor_outfit(showgirl_2)
     "You notice that [the_person.title] and her stripper are in a similar state."
-    $ scene_manager.strip_actor_outfit(showgirl_1, exclude_feet = False)
+    $ scene_manager.strip_actor_outfit(showgirl_1)
     "Her ass bare now, you find it difficult to restrain your hands from molesting the girl in front of you."
     $ mc.change_arousal(10)
     $ the_person.change_arousal(10)
