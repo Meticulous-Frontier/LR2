@@ -1708,6 +1708,7 @@ label Sarah_threesome_request_label():
         the_person.char "Don't forget to talk to [person_choice.name]! I'll be looking forward to next Saturday!"
         "You both say goodbye, and [the_person.title] leaves you alone in the research lab."
         $ scene_manager.clear_scene()
+        $ del person_choice
         return
     else:
         the_person.char "God, you wore me out. I know I promised every room, but I don't think I can go on. I think I'd better catch a cab home..."
@@ -1715,6 +1716,7 @@ label Sarah_threesome_request_label():
         the_person.char "Don't forget to talk to [person_choice.name]! I'll be looking forward to next Saturday!"
         "You both say goodbye, and [the_person.title] leaves you alone in the research lab."
         $ scene_manager.clear_scene()
+        $ del person_choice
         return
     #Assume everything from her on, sarah is girlfriend status.
     the_person.char "God babe, you wore me out. I know I promised every room, but I don't think I can go on. I think I'd better catch a cab home..."
@@ -1793,6 +1795,8 @@ label Sarah_threesome_request_label():
     "You look at her face. She passed out."
     "Worn out, you cuddle up with her and quickly fall asleep as well."
     $ scene_manager.clear_scene()
+    $ del person_choice
+
     call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_overnight_threesome_request
     call Sarah_spend_the_night() from sarah_threesome_request_spend_the_night_sequence
 

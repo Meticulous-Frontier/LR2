@@ -38,7 +38,7 @@ label select_person_for_gym():
 
         call select_person_for_gym_response(person_choice) from _call_select_person_for_gym_response # What to do if "Back" was not the choice taken.
         call advance_time from _call_advance_time_gym_training
-
+        $ del person_choice
     return # Go back to main menu
 
 

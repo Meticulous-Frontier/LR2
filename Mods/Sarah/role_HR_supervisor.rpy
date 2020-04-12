@@ -1175,6 +1175,7 @@ label HR_director_mind_control_attempt_label(the_person):
 
     $ scene_manager.clear_scene()
     $ set_HR_director_tag("business_HR_meeting_last_day", day)
+    $ del person_choice
     call advance_time from hr_advance_time_two
     return True
 
@@ -1260,10 +1261,9 @@ label HR_director_appointment_action_label:
     $ person_choice = _return
     $ del people_list
 
-    if person_choice == "Back":
-        return
-
-    call HR_director_initial_hire_label(person_choice) from _call_HR_director_initial_hire_label_appointment
+    if person_choice != "Back":
+        call HR_director_initial_hire_label(person_choice) from _call_HR_director_initial_hire_label_appointment
+        $ del person_choice
     return
 
 label HR_director_headhunt_initiate_label(the_person):

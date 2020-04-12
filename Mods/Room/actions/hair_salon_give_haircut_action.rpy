@@ -21,6 +21,7 @@ label salon_label():
         "You send a message to [person_choice.name] about the appointment."
         "After some time you get a response..."
         call salon_response(person_choice) from _call_salon_response# What to do if "Back" was not the choice taken.
+        $ del person_choice
     return # Where to go if you hit "Back".
 
 label salon_response(person_choice): # How does the_person respond to a company paid haircut?
