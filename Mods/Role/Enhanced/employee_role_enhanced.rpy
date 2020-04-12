@@ -19,9 +19,9 @@ label employee_find_out_home_location_label(the_person):
     "You walk up to [the_person.possessive_title], who is sitting at her work station."
 
     mc.name "Hey [the_person.title], how long have you been working for me?"
-    $ ran_num = the_person.event_triggers_dict.get("employed_since", 0) // 7
+    $ ran_num = (day - the_person.event_triggers_dict.get("employed_since", 0)) // 7
     if ran_num == 0:
-        the_person.char "I just started working her, is there something wrong?"
+        the_person.char "I just started working here, is there something wrong?"
     elif ran_num == 1:
         the_person.char "Its about a week now, why do you ask?"
     else:
