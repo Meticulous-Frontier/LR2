@@ -2623,7 +2623,9 @@ label Sarah_date_ends_at_your_place_label(the_person):
             the_person.char "Awww. Hello [mom.name]. I was just coming over to spend some quality time with [the_person.mc_title]"
     "Eventually they back away from each other."
     $ scene_manager.update_actor(mom, position = "stand4", character_placement = character_left_flipped)
+    $ scene_manager.update_actor(the_person, position = "stand2")
     mom.char "Alright, well don't let me keep you. You two have fun!"
+    $ scene_manager.update_actor(mom, position = "walking_away", character_placement = character_left_flipped)
     "[mom.possessive_title] walks away, chuckling to herself."
     $ scene_manager.remove_actor(mom)
 
@@ -2635,7 +2637,7 @@ label Sarah_date_ends_at_your_place_label(the_person):
     the_person.char "Welp, I think we both know where this is going!"
     $ scene_manager.strip_actor_outfit(the_person, exclude_feet = False)
     the_person.char "What are you staring at? Let's go! I've been looking forward to this all night!"
-    call fuck_person(the_person,  skip_intro = False, girl_in_charge = False) from _call_sex_description_date_happy_ending_1
+    call fuck_person(the_person, skip_intro = False, girl_in_charge = False) from _call_sex_description_date_happy_ending_1
     "When you finish with her, [the_person.title] collapses in the bed."
     $ scene_manager.update_actor(the_person, position = "missionary")
     "You cuddle up next to her as you both catch your breath."
@@ -2662,14 +2664,12 @@ label Sarah_date_ends_at_your_place_label(the_person):
         the_person.char "I'm sorry I can't. You know I can't. Thanks for the offer though!"
         $ scene_manager.update_actor(the_person, position = "stand3")
         "You lay on your bed and watch as [the_person.possessive_title] slowly gets her clothes on. She says goodbye then lets herself out."
-        $ scene_manager.remove_actor(the_person)
     else:
         the_person.char "I need to get going... I guess. Thanks for the evening though. It was great!"
         mc.name "You don't have to. Just spend the night here."
         the_person.char "That's tempting, believe me, but I need to get home. Thanks for the offer!"
         $ scene_manager.update_actor(the_person, position = "stand3")
         "You lay on your bed and watch as [the_person.possessive_title] slowly gets her clothes on. She says goodbye then lets herself out."
-        $ scene_manager.remove_actor(the_person)
 
     $ scene_manager.clear_scene()
     return
