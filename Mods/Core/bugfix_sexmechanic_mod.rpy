@@ -7,12 +7,13 @@ init 5 python:
     config.label_overrides["check_position_willingness"] = "check_position_willingness_bugfix"
     config.label_overrides["watcher_check"] = "watcher_check_enhanced"
     config.label_overrides["condom_ask"] = "condom_ask_enhanced"
+    config.label_overrides["pick_position"] = "pick_position_enhanced"
     config.label_overrides["girl_strip_event"] = "girl_strip_event_enhanced"
 
     def girl_choose_position_enhanced(person, ignore_taboo = False):
         position_option_list = []
         for position in list_of_girl_positions:
-            if mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
+            if allow_position(person, position) and mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
                 if position.her_position_willingness_check(person, ignore_taboo = ignore_taboo):
                     weight = 3 if position.skill_tag == "Foreplay" else 10
                     position_option_list.append([position, weight])
@@ -124,6 +125,13 @@ init 5 python:
         person.clear_situational_obedience("sex_object")
         return
 
+    def allow_position(person, position):
+        if position.opinion_tags:
+            for opinion in position.opinion_tags:
+                if person.get_opinion_score(opinion) == -2:
+                    return False
+        return True
+
     def update_person_sex_record(person, report_log):
         types_seen = []
         for position_type in report_log.get("positions_used",[]): #Note: Clears out duplicates
@@ -165,7 +173,7 @@ init 5 python:
             if not position_locked and object_choice:
                 option_list.append(["Pause and change position\n-5 {image=arousal_token_small}","Change"])
                 for position in position_choice.connections:
-                    if object_choice.has_trait(position.requires_location):
+                    if allow_position(person, position) and object_choice.has_trait(position.requires_location):
                         appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo).replace("{size=22}", "{size=12}") #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                         option_list.append([appended_name,position])
 
@@ -173,7 +181,7 @@ init 5 python:
                 # allow transition to positions with same traits and skill requirements
                 for position in position_choice.connections:
                     if isinstance(object_choice, Object): # Had an error with cousin's kissing blackmail where it would pass object_choice as a list, haven't looked further into it
-                        if object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag:
+                        if allow_position(person, position) and object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag:
                             appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo).replace("{size=22}", "{size=12}") #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                             option_list.append([appended_name, position])
             if not person.outfit.full_access():
@@ -190,6 +198,35 @@ init 5 python:
             if not hide_leave:
                 option_list.append(["Stop and leave", "Leave"])
         return option_list
+
+    def build_grouped_sex_position_menu(person, allow_none = True, ignore_taboo = False):
+        foreplay_positions = []
+        oral_positions = []
+        vaginal_positions = []
+        anal_positions = []
+
+        for position in sorted(list_of_positions, key = lambda x: x.name):
+            if allow_position(person, position) and  mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
+                willingness = position.build_position_willingness_string(person, ignore_taboo = ignore_taboo).replace("{size=22}", "{size=12}")
+                if position.skill_tag == "Foreplay":
+                    foreplay_positions.append([willingness, position])
+                if position.skill_tag == "Oral":
+                    oral_positions.append([willingness, position])
+                if position.skill_tag == "Vaginal":
+                    vaginal_positions.append([willingness, position])
+                if position.skill_tag == "Anal":
+                    anal_positions.append([willingness, position])
+
+        if allow_none:
+            foreplay_positions.append(["Nothing", "Nothing"])
+
+        foreplay_positions.insert(0, "Pick Foreplay")
+        oral_positions.insert(0, "Pick Oral")
+        vaginal_positions.insert(0, "Pick Vaginal")
+        anal_positions.insert(0, "Pick Anal")
+        return [foreplay_positions, oral_positions, vaginal_positions, anal_positions]
+
+
 
 label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, asked_for_condom = False):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
@@ -822,3 +859,11 @@ label break_strip_outfit_taboos(the_person):
                 $ the_person.break_taboo("underwear_nudity")
                 $ taboo_broken = True
     return taboo_broken
+
+label pick_position_enhanced(the_person, allow_none = True, ignore_taboo = False):
+    if bugfix_installed:
+        call screen main_choice_display(build_menu_items(build_grouped_sex_position_menu(the_person, allow_none = allow_none, ignore_taboo = ignore_taboo)))
+    else:
+        call screen main_choice_display(build_grouped_sex_position_menu(the_person, allow_none = allow_none, ignore_taboo = ignore_taboo))
+    $ position_choice = _return
+    return None if position_choice == "Nothing" else position_choice
