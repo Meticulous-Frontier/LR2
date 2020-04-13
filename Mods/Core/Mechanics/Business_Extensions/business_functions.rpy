@@ -43,7 +43,10 @@ init -1 python:
     Business.change_production = change_production_enhanced
 
     def is_trait_researched(self, trait):
-        research_trait = find_in_list(lambda x: x.name == trait.name, list_of_traits)
+        if type(trait) is unicode:
+            research_trait = find_in_list(lambda x: x.name.startswith(trait), list_of_traits) # As long as the naming convention of the serums are consistent then this should be a lazy workaround for not having them accessible in the global scope anymore
+        else:
+            research_trait = find_in_list(lambda x: x.name == trait.name, list_of_traits)
         if research_trait:
             return research_trait.researched
         return False

@@ -18,10 +18,7 @@ init 3 python:
         menu_tooltip = "Modify the appearance of a person through magic, not science")
 
     def biotech_change_body_requirement():
-        hypothyroidism = find_in_list(lambda x: x.name == hypothyroidism_serum_trait.name, list_of_traits)
-        anorexia = find_in_list(lambda x: x.name == anorexia_serum_trait.name, list_of_traits)
-
-        if mc.business.is_trait_researched(hypothyroidism_serum_trait) and mc.business.is_trait_researched(anorexia_serum_trait):
+        if mc.business.is_trait_researched("Hypothyroidism") and mc.business.is_trait_researched("Methabolizer"):
             return True
         else:
             return "Requires: [hypothyroidism_serum_trait.name] and [anorexia_serum_trait.name] researched"
@@ -31,7 +28,7 @@ init 3 python:
     biotech_body_modifications.append(biotech_change_body)
 
     def biotech_change_skin_requirement():
-        if mc.business.is_trait_researched(pigment_serum_trait):
+        if mc.business.is_trait_researched("Pigment"):
             return True
         else:
             return "Requires: [pigment_serum_trait.name] researched"
