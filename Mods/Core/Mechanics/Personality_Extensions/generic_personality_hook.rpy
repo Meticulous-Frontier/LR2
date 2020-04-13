@@ -284,10 +284,11 @@ init -1 python:
         return
 
     def update_stripclub_strippers():
-        stripclub_strippers.clear()
-        for person in strip_club.people:
+        for person in stripclub_strippers:
+            person.location().people.remove(person)
+            list_of_places.remove(person.home)
             person.remove_person_from_game()
-        strip_club.people.clear()
+        stripclub_strippers.clear()
 
         for i in __builtin__.range(0,4):
             person = create_stripper()
