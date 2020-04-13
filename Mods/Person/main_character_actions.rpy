@@ -31,10 +31,9 @@ init 2 python:
 
     # Hire Person Requirements
     def mc_hire_person_requirement(person):
-        if mc.business.get_employee_count() >= mc.business.max_employee_count:
-            return "At employee limit."
-
         if person not in mc.business.get_employee_list() + unique_character_list:
+            if mc.business.get_employee_count() >= mc.business.max_employee_count:
+                return "At employee limit."
             return True
         return False
 
@@ -46,7 +45,7 @@ init 2 python:
 
     # Spend the Night Requirements
     def mc_action_spend_the_night_requirement(person):
-        if time_of_day is 4 and person.love > 50 and mc.location is person.home: #Has to be night, need to have some love and be in the_person's home location
+        if time_of_day == 4 and person.love > 50 and mc.location is person.home: #Has to be night, need to have some love and be in the_person's home location
             return True
         return False
 
