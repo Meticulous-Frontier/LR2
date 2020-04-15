@@ -26,15 +26,18 @@ label update_perk_mod_core(stack):
         except NameError:
             Perk_mod_initialization()
         execute_hijack_call(stack)
-    if mc.business.event_triggers_dict.get("perk_tutorial", 1) < 2:
-        $ mc.business.event_triggers_dict["perk_tutorial"] = 1
-    if not perk_system.has_ability_perk("Time of Need"):
-        if Perk_Tutorial_Crisis not in mc.business.mandatory_crises_list:
-            $ mc.business.mandatory_crises_list.append(Perk_Tutorial_Crisis)
 
-    if perk_system.has_item_perk("Male Strapon"):        #Male strapon was created before save_load method, so we check to see if it has the method before we call it for savegame compatability
-        $ temp_perk = perk_system.get_item_perk("Male Strapon")     #This code block should be deleted for the next cycle (28.1)
-        $ temp_perk.on_unlock = male_strapon_on_unlock
-        $ temp_perk.save_load = male_strapon_save_load
-    $ perk_system.save_load()
+        if mc.business.event_triggers_dict.get("perk_tutorial", 1) < 2:
+            mc.business.event_triggers_dict["perk_tutorial"] = 1
+        if not perk_system.has_ability_perk("Time of Need"):
+            if Perk_Tutorial_Crisis not in mc.business.mandatory_crises_list:
+                mc.business.mandatory_crises_list.append(Perk_Tutorial_Crisis)
+
+        if perk_system.has_item_perk("Male Strapon"):        #Male strapon was created before save_load method, so we check to see if it has the method before we call it for savegame compatability
+            temp_perk = perk_system.get_item_perk("Male Strapon")     #This code block should be deleted for the next cycle (28.1)
+            temp_perk.on_unlock = male_strapon_on_unlock
+            temp_perk.save_load = male_strapon_save_load
+            del temp_perk
+
+        perk_system.save_load()
     return
