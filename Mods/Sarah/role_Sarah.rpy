@@ -1549,6 +1549,7 @@ label Sarah_stripclub_story_label():
         call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_overnight_after_stripclub
         call Sarah_spend_the_night() from sarah_stripclub_spend_the_night_sequence
     else:
+        $ the_person.apply_outfit(the_person.planned_outfit)
         $ scene_manager.update_actor(the_person, position = "stand3")
         "You lay on your bed and watch as [the_person.possessive_title] slowly gets her clothes on. She says goodbye then lets herself out."
         $ scene_manager.remove_actor(the_person)
@@ -2661,12 +2662,14 @@ label Sarah_date_ends_at_your_place_label(the_person):
         the_person.char "It feels so good to be next to you, but I need to get home."
         mc.name "You don't have to. Just spend the night here."
         the_person.char "I'm sorry I can't. You know I can't. Thanks for the offer though!"
+        $ the_person.apply_outfit(the_person.planned_outfit)
         $ scene_manager.update_actor(the_person, position = "stand3")
         "You lay on your bed and watch as [the_person.possessive_title] slowly gets her clothes on. She says goodbye then lets herself out."
     else:
         the_person.char "I need to get going... I guess. Thanks for the evening though. It was great!"
         mc.name "You don't have to. Just spend the night here."
         the_person.char "That's tempting, believe me, but I need to get home. Thanks for the offer!"
+        $ the_person.apply_outfit(the_person.planned_outfit)
         $ scene_manager.update_actor(the_person, position = "stand3")
         "You lay on your bed and watch as [the_person.possessive_title] slowly gets her clothes on. She says goodbye then lets herself out."
 
