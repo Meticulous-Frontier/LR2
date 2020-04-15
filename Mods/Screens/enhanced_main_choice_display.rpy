@@ -54,7 +54,7 @@ init 2: # Change name back to main_choice_display once fixed
                                             action Return(item.return_value)
                                             tooltip item.the_tooltip
                                             sensitive item.is_sensitive
-                                    else:
+                                    elif not bugfix_installed:
                                         #Key values we want to know about to display our text button.
                                         $ title = ""
                                         $ return_value = None
