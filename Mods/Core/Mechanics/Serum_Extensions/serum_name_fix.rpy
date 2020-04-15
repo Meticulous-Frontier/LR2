@@ -17,7 +17,7 @@ init 5 python:
 
 label fix_nora_serum_traits(stack):
     python:
-        $ fix_nora_serum_traits_names()
+        fix_nora_serum_traits_names()
         # continue on the hijack stack if needed
         execute_hijack_call(stack)        
     return
