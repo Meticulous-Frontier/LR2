@@ -568,7 +568,7 @@ label Sarah_get_drunk_dialogue(the_person, intoxication_level):
         if the_person.sluttiness > 60:
             "[the_person.title] is carrying on, talking about a time that she was trying to hookup with a random guy on Tinder but it didn't go well."
             the_person.char "...So anyway, that's when I decided to start making sure to keep my pubic hair trimmed."
-            mc.name "Yeah I bet. TO=o be honest though, I probably would have eaten you out anyway."
+            mc.name "Yeah I bet. To be honest though, I probably would have eaten you out anyway."
             the_person.char "Yeah right, and risk getting hair in your mouth? Hey, that reminds me of a joke I heard. What do you call a roman with a hair stuck in his teeth?"
             mc.name "I don't know, what?"
             the_person.char "A gladiator!"
