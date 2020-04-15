@@ -8,14 +8,8 @@ init 2 python:
     salon_total_cost = salon_style_cost + salon_dye_cost
 
 label salon_label():
-    $ people_list = get_sorted_people_list(known_people_in_the_game([mc]), "Salon appointment", ["Back"])
-
-    if bugfix_installed:
-        call screen main_choice_display(build_menu_items([people_list]))
-    else:
-        call screen main_choice_display([people_list])
+    call screen main_choice_display([get_sorted_people_list(known_people_in_the_game([mc]), "Salon appointment", ["Back"])])
     $ person_choice = _return
-    $ del people_list
     
     if person_choice != "Back":
         "You send a message to [person_choice.name] about the appointment."

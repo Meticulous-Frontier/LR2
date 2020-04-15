@@ -532,12 +532,9 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         the_person.char "Here's my list. Who do you want me to call in?"
 
     # use new menu layout for selecting people
-    if bugfix_installed:
-        call screen main_choice_display(build_menu_items([["Call in"] + HR_employee_list], draw_hearts_for_people = False))
-    else:
-        call screen main_choice_display([["Call in"] + HR_employee_list])
-
+    call screen main_choice_display([["Call in"] + HR_employee_list], draw_hearts_for_people = False)
     $ person_choice = _return
+
     $ scene_manager.update_actor(the_person, position = "stand2")
     the_person.char "Alright, let me go get her."
     $ scene_manager.remove_actor(the_person, reset_actor = False)
@@ -585,10 +582,8 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
 
     mc.name "That's right. As you know, we run a small business here, and I like to make sure all my employees enjoy their work here."
     mc.name "Recently, I've become concerned you may not like the work environment."
-    if bugfix_installed:
-        call screen main_choice_display(build_menu_items([build_HR_interview_discussion_topic_menu(person_choice)]))
-    else:
-        call screen main_choice_display([build_HR_interview_discussion_topic_menu(person_choice)])
+
+    call screen main_choice_display([build_HR_interview_discussion_topic_menu(person_choice)])
     $ opinion_chat = _return
 
     if opinion_chat == "working":
@@ -660,6 +655,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     python:
         del HR_employee_list
         del person_choice
+        del opinion_chat
     return
 
 label HR_director_review_discoveries_label(the_person):
@@ -1162,12 +1158,9 @@ label HR_director_mind_control_attempt_label(the_person):
             return
     the_person.char "Okay. Who do you want me to make the attempt on?"
 
-    if bugfix_installed:
-        call screen main_choice_display(build_menu_items([["Call in"] + HR_employee_list], draw_hearts_for_people = False))
-    else:
-        call screen main_choice_display([["Call in"] + HR_employee_list])
-
+    call screen main_choice_display([["Call in"] + HR_employee_list], draw_hearts_for_people = False)
     $ person_choice = _return
+
     $ del HR_employee_list
     the_person.char "Okay. I'll go get her."
     $ renpy.scene("Active")
@@ -1252,14 +1245,8 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
     return
 
 label HR_director_appointment_action_label:
-    $ people_list = get_sorted_people_list(mc.business.hr_team, "Appoint", ["Back"])
-
-    if bugfix_installed:
-        call screen main_choice_display(build_menu_items([people_list]))
-    else:
-        call screen main_choice_display([people_list])
+    call screen main_choice_display([get_sorted_people_list(mc.business.hr_team, "Appoint", ["Back"])])
     $ person_choice = _return
-    $ del people_list
 
     if person_choice != "Back":
         call HR_director_initial_hire_label(person_choice) from _call_HR_director_initial_hire_label_appointment

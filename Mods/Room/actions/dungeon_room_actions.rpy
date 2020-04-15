@@ -51,15 +51,8 @@ label dungeon_completed_label():
 
 label dungeon_room_appoint_slave_label():
     while True:
-        $ people_list = get_sorted_people_list(mc.location.people, "Turn into slave", ["Back"])
-
-        if bugfix_installed:
-            call screen main_choice_display(build_menu_items([people_list]))
-        else:
-            call screen main_choice_display([people_list])
-            
+        call screen main_choice_display([get_sorted_people_list(mc.location.people, "Turn into slave", ["Back"])])
         $ person_choice = _return
-        $ del people_list
 
         if person_choice == "Back":
             return # Where to go if you hit "Back"

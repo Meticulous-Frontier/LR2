@@ -94,11 +94,7 @@ label broken_AC_crisis_label_enhanced:
                     "The rest of the department follows the lead of [the_person.title], stripping off various amounts of clothing."
                         #Gives you the chance to watch one of the other girls in the department strip.
                     
-                    if bugfix_installed:
-                        call screen main_choice_display(build_menu_items([broken_AC_crisis_get_watch_list_menu(the_person)]))
-                    else:
-                        call screen main_choice_display([broken_AC_crisis_get_watch_list_menu(the_person)])
-
+                    call screen main_choice_display([broken_AC_crisis_get_watch_list_menu(the_person)])
                     $ girl_choice = _return
 
                     "You pay special attention to [girl_choice.title] as she follows the lead of [the_person.possessive_title]."

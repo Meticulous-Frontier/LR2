@@ -49,13 +49,8 @@ label import_wardrobe_label():
     return
 
 label give_wardrobe_label():
-    $ people_list = get_sorted_people_list(known_people_in_the_game([mc]), "Clothes for", ["Back"])
-    if bugfix_installed:
-        call screen main_choice_display(build_menu_items([people_list]))
-    else:
-        call screen main_choice_display([people_list])
+    call screen main_choice_display([get_sorted_people_list(known_people_in_the_game([mc]), "Clothes for", ["Back"])])
     $ person_choice = _return
-    $ del people_list
     
     if not person_choice == "Back":
         call give_wardrobe_input(person_choice) from _call_give_wardrobe_input# What to do if "Back" was not the choice taken.

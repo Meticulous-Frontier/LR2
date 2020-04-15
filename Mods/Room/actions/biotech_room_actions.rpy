@@ -94,11 +94,7 @@ label biotech_gene_modifications():
 label biotech_clone_person():
     while True:
         # only known people who are not unique character or clone herself (genetic degradation too high)
-        if bugfix_installed:
-            call screen main_choice_display(build_menu_items([get_sorted_people_list([x for x in known_people_in_the_game([mc] + unique_character_list) if not clone_role in x.special_role], "Clone Person", ["Back"])]))
-        else:
-            call screen main_choice_display([get_sorted_people_list([x for x in known_people_in_the_game([mc] + unique_character_list) if not clone_role in x.special_role], "Clone Person", ["Back"])])
-
+        call screen main_choice_display([get_sorted_people_list([x for x in known_people_in_the_game([mc] + unique_character_list) if not clone_role in x.special_role], "Clone Person", ["Back"])])
         if _return == "Back":
             return # Where to go if you hit "Back".
         else:
@@ -130,11 +126,7 @@ label cloning_process(person = the_person): # default to the_person when not pas
 
 label biotech_modify_person():
     while True:
-        if bugfix_installed:
-            call screen main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game([mc]), "Modify Person", ["Back"])]))
-        else:
-            call screen main_choice_display([get_sorted_people_list(known_people_in_the_game([mc]), "Modify Person", ["Back"])])
-
+        call screen main_choice_display([get_sorted_people_list(known_people_in_the_game([mc]), "Modify Person", ["Back"])])
         if _return == "Back":
             return # Where to go if you hit "Back".
         else:
