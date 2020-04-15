@@ -1217,8 +1217,9 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
         "She gets closer and whispers in your ear."
         the_person.char "Just promise me you'll use it on me again..."
         mc.name "I promise!"
-        $ item_perk_male_strapon = Item_Perk("A strap on designed to be worn by men. Useful for dual penetration!")
-        $ perk_system.add_item_perk(item_perk_male_strapon, "Male Strapon")
+        # $ item_perk_male_strapon = Item_Perk("A strap on designed to be worn by men. Useful for dual penetration!")
+        # $ perk_system.add_item_perk(item_perk_male_strapon, "Male Strapon")
+        $ male_strapon_unlock() #TODO test this
     if the_person.get_opinion_score("being submissive") < 2:
         $ the_person.sexy_opinions["being submissive"] = [2, True]
         "[the_person.possessive_title] now loves being submissive!"

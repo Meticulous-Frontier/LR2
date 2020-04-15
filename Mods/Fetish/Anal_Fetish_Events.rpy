@@ -39,7 +39,7 @@ init 1 python:
         person.base_outfit.add_accessory(fd_collar)
         return
 
-                        
+
 
     def add_SB_lily_anal_dp_fetish_event():
         SB_lily_anal_dp_fetish = Action("Lily Anal Sex", SB_fetish_anal_requirement, "SB_lily_anal_dp_fetish_label")
@@ -55,7 +55,7 @@ init 1 python:
         SB_fetish_anal_crisis = Action("Loves Anal Sex.", SB_fetish_anal_requirement, "SB_fetish_anal_label", args = person)
         mc.business.mandatory_crises_list.append(SB_fetish_anal_crisis)
         return
-    
+
     def add_sb_fetish_anal_staylate_event(person):
         SB_fetish_anal_staylate_event = Action("Employee stays late", SB_fetish_anal_staylate_event_requirement, "SB_fetish_anal_staylate_event_label", args = person)
         mc.business.mandatory_crises_list.append(SB_fetish_anal_staylate_event)
@@ -64,7 +64,7 @@ init 1 python:
     def add_mom_weekly_anal_action():
         SB_mom_weekly_anal_action = Action("mom friday anal ", SB_mom_anal_pay_requirement, "SB_mom_anal_friday_label")
         mc.business.mandatory_crises_list.append(SB_mom_weekly_anal_action)
-    
+
     def add_sb_starbuck_anal_intro_event():
         SB_starbuck_anal_intro_event = Action("Starbuck Anal Sex", SB_starbuck_anal_requirement, "SB_starbuck_anal_intro")
         mc.business.mandatory_crises_list.append(SB_starbuck_anal_intro_event)
@@ -683,7 +683,7 @@ label SB_mom_anal_friday_label():
                 "[the_person.possessive_title] lays there on the bed"
             mc.name "Mmm, thanks [the_person.title]. That ass is amazing. Next friday, right?"
             the_person.char "Yes [the_person.mc_title]. But don't feel like you HAVE to wait to take my ass. We can do it whenever you want. I'll be ready!"
-            
+
         "Not this week":
             mc.name "Sorry [the_person.title], work was hell and I'm exhausted. Maybe next week, okay?"
             "[the_person.possessive_title] frowns."
@@ -805,8 +805,9 @@ label SB_lily_anal_dp_fetish_label():
     else:
         "You wave goodbye to [the_person.possessive_title] and head out."
 
-    $ item_perk_male_strapon = Item_Perk("A strap on designed to be worn by men. Useful for dual penetration!")
-    $ perk_system.add_item_perk(item_perk_male_strapon, "Male Strapon")
+    #$ item_perk_male_strapon = Item_Perk("A strap on designed to be worn by men. Useful for dual penetration!")
+    # $ perk_system.add_item_perk(item_perk_male_strapon, "Male Strapon")
+    $ male_strapon_unlock()  #TODO test this
 
     $ the_person.review_outfit(dialogue = False)
     $ renpy.scene("Active")

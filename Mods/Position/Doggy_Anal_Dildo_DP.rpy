@@ -290,23 +290,55 @@ label outro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
 
     return
 
-label transition_SB_doggy_anal_dildo_dp_doggy(the_girl, the_location, the_object):
-    "You decide to give [the_girl.possessive_title] a break. She murmurs a bit in disappointment when you slowly pull your dick out of her ass completely."
-    "You bounce your hard shaft on her ass a couple of times before lining yourself up with her pussy."
-    the_girl.char "Wait, are you sure its okay to stick in there after its been in my ass?"
-    "You ignore her question and push forward, slipping your shaft deep inside of [the_girl.possessive_title]'s cunt. She gasps and quivers ever so slightly as you start to pump in and out."
-    return
-
-label transition_doggy_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
-    "You stop your thrusting for a moment and she looks back at you. You put two fingers in front of her mouth, and after a moment she takes them in her mouth and starts to suck on them"
-    "[the_girl.possessive_title] slobbers all over your fingers for a few a seconds before you pull them out with a loud pop"
-    "You use your fingers to crudely work in and out of her ass a few times to help get it lubricated. [the_girl.possessive_title] moans at the feeling of your penis in one hole and your fingers in another"
-    mc.name "Are you ready for me, [the_girl.possessive_title]? I'm going to stick it in your ass now"
-    the_girl.char "Take me however you want, [the_girl.mc_title], just be careful with me!"
+label transition_doggy_anal_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
+    "[the_girl.possessive_title]'s tight sphincter feels amazing, but you decide it is time to take things up another notch."
+    "She groans as you pull out and reach for you backpack. She looks back, and her eyes go wide when you pull out your strap on."
+    the_girl.char "What... what is that for?"
+    mc.name "I'm gonna fuck both your holes at the same time."
+    if the_girl.effective_sluttiness() > 110:
+        the_girl.char "Oh god I love it when you do this to me..."
+    elif the_girl.effective_sluttiness() > 80:
+        the_girl.char "Ok, just be careful [the_girl.mc_title]..."
+    else:
+        the_girl.char "Oh jesus! I don't know..."
+        mc.name "Hush. Don't worry, it'll fit."
+    "[the_girl.possessive_title] waits patiently on all fours as you secure the strap on. She arches her back and presents her ass."
+    if the_girl.arousal > 60:
+        "Her pussy is already dripping with arousal. You line yourself up with her ass, while she reaches down and lines the dildo up with her pussy."
+    else:
+        "You line yourself up with her ass while [the_girl.possessive_title] reaches down and lines the dildo up with her pussy."
     "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
     if the_girl.get_opinion_score("anal sex") > 0 :
-        the_girl.char "Oh my god it's so dirty... but it is so good too..."
+        the_girl.char "Oh my god! I'm so full... Its so good [the_girl.mc_title]!"
         $ the_girl.discover_opinion("anal sex")
+    else:
+        the_girl.char "Holy fuck! Go slow [the_girl.mc_title]. This is really intense..."
+    return
+
+
+label transition_doggy_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
+    "[the_girl.possessive_title]'s slobbering cunt feels great, but you decide it is time to take things up a notch."
+    "She groans as you pull out and reach for you backpack. She looks back, and her eyes go wide when you pull out your strap on."
+    the_girl.char "What... what is that for?"
+    mc.name "I'm gonna fuck both your holes at the same time."
+    if the_girl.effective_sluttiness() > 110:
+        the_girl.char "Oh god I love it when you do this to me..."
+    elif the_girl.effective_sluttiness() > 80:
+        the_girl.char "Ok, just be careful [the_girl.mc_title]..."
+    else:
+        the_girl.char "Oh jesus! I don't know..."
+        mc.name "Hush. Don't worry, it'll fit."
+    "[the_girl.possessive_title] waits patiently on all fours as you secure the strap on. She arches her back and presents her ass."
+    if the_girl.arousal > 60:
+        "Her pussy is already dripping with arousal. You line yourself up with her ass, while she reaches down and lines the dildo up with her pussy."
+    else:
+        "You line yourself up with her ass while [the_girl.possessive_title] reaches down and lines the dildo up with her pussy."
+    "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
+    if the_girl.get_opinion_score("anal sex") > 0 :
+        the_girl.char "Oh my god! I'm so full... Its so good [the_girl.mc_title]!"
+        $ the_girl.discover_opinion("anal sex")
+    else:
+        the_girl.char "Holy fuck! Go slow [the_girl.mc_title]. This is really intense..."
     return
 
 label transition_default_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
