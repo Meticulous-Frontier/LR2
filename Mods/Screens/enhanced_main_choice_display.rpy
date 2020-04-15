@@ -1,8 +1,8 @@
 # The enhanced version will hide columns that have no actions in them,
 # does not work for columns with disabled actions (like special actions)
 # but does work for sex positions (when a girl hates anal, the anal column will not be visible)
-init 2:
-    screen main_choice_display(elements_list): #Elements_list is a list of lists, with each internal list receiving an individual column
+init 2: # Change name back to main_choice_display once fixed
+    screen main_choice_display_2(elements_list): #Elements_list is a list of lists, with each internal list receiving an individual column
         #The first element in a column should be the title, either text or a displayable. After that it should be a tuple of (displayable/text, return_value).
 
         #[["Title",["Item",Return] ]]
@@ -48,7 +48,7 @@ init 2:
                                             style "textbutton_style"
                                             text_style "textbutton_text_style"
                                             text_align (0.5,0.5)
-                                            if item.display_key:                                    
+                                            if item.display_key:
                                                 hovered [Function(show_menu_person, item)]
                                                 unhovered [Function(renpy.scene, "Active")]
                                             action Return(item.return_value)
