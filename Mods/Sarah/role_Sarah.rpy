@@ -1512,13 +1512,14 @@ label Sarah_stripclub_story_label():
                     "She crawls back into bed beside you."
                     $ scene_manager.update_actor(the_person, position = "missionary")
                     "Well, it's official. I'm all yours now!"
-                    $ the_person.special_role.append(girlfriend_role)
-                    $ the_person.change_love(10)
-                    $ the_person.change_obedience(5)
-                    $ so_title = SO_relationship_to_title(the_person.relationship)
-                    $ ex_title = so_title[:4]
-                    $ the_person.relationship = "Single"
-                    $ the_person.SO_name = None
+                    python:
+                        the_person.special_role.append(girlfriend_role)
+                        if affair_role in the_person.special_role: # remove affair role if we have an affair with her
+                            the_person.special_role.remove(affair_role)
+
+                        the_person.change_stats(love = 10, obedience = 5)
+                        the_person.relationship = "Single"
+                        the_person.SO_name = None
                 "Let's keep it casual":
                     the_person.char "Ah, okay. So like, friends with benefits? Is that what we are talking about here?"
                     mc.name "Exactly."
