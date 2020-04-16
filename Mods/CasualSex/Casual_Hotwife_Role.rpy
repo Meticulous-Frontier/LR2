@@ -481,10 +481,6 @@ label casual_hotwife_blowjob_text_label(the_person):
     the_person.char "Okay, well, I need to get going. I'm sure I'll see you around soon..."
     "You say goodbye and head out. Hot damn! You are now friends with benefits with a hot wife. You bet the sex is going to be amazing..."
     $ the_person.event_triggers_dict["hotwife_blowjob_text_enable"] = 0
-
-    $ the_person.event_triggers_dict["booty_call"] = True
-
-    "You now have [the_person.title]'s phone number. She may call you from time to time to hookup!"
     call advance_time from _call_advance_casual_hotwife_sex_discussion
     return
 
@@ -574,6 +570,10 @@ label casual_hotwife_dancing_sex_label(the_person):
         $ the_person.event_triggers_dict["hotwife_progress"] = 3
         "She takes her phone from you and starts going through the pictures you took."
         the_person.char "You'd better get going, [the_person.mc_title]. I'm going to send these to my husband..."
+
+        $ the_person.event_triggers_dict["booty_call"] = True # unlock casual encounters
+        "You now have [the_person.title]'s phone number. She may call you from time to time to hookup!"
+
         $ the_person.review_outfit(dialogue = False)
 
     else:   #We've done this before
