@@ -8,6 +8,8 @@ init 1301 python:
     def Sarah_possessive_titles(the_person):
         valid_possessive_titles = [Sarah_titles(the_person)]
         valid_possessive_titles.append("Your childhood friend")
+        if the_person.event_triggers_dict.get("try_for_baby", 0) >= 1:
+            valid_possessive_titles.append("Your breeding mare")
         return valid_possessive_titles
     def Sarah_player_titles(the_person):
         return mc.name
@@ -49,7 +51,11 @@ label Sarah_greetings(the_person):
         the_person.char "Hey. Did you need something? I'm sorry I'm having a bit of a rough day."
     else:
         if the_person.sluttiness > 60:
-            if the_person.event_triggers_dict.get("dating_path", False) == True:
+            if Sarah_is_fertile():
+                the_person.char "Hello. Need something? I hope so, I know I really need something soon..."
+                "She lowers her voice and whispers in your ear."
+                the_person.char "I'm fertile right now."
+            elif the_person.event_triggers_dict.get("dating_path", False) == True:
                 the_person.char "Hello babe! I hope you aren't here just to talk."
             elif the_person.obedience > 130:
                 the_person.char "Hello there [the_person.mc_title]. It's good to see you, is there anything I can help you with?"
@@ -174,7 +180,9 @@ label Sarah_strip_reject(the_person):
 
 label Sarah_sex_accept(the_person):
     if the_person.sluttiness > 70:
-        if the_person.event_triggers_dict.get("dating_path", False) == True:
+        if Sarah_is_fertile():
+            the_person.char "My body is yours to use, [the_person.mc_title]. Just try to cum inside me... it's a good time of the month for that!"
+        elif the_person.event_triggers_dict.get("dating_path", False) == True:
             the_person.char "Yes! Let's go! I'm glad I'm not the only one feeling needy."
         elif the_person.obedience < 70:
             the_person.char "Let's do it. Once you've had your fill I have a few ideas we could try out."

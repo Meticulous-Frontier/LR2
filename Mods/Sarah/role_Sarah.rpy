@@ -21,6 +21,7 @@
 # Hiring: mandatory event. Call up Sarah and hire her for the HR position.
 
 init 2 python:
+    SARAH_PER_CREAMPIE_PREGNANCY_CHANCE = 3 #A constant for odds of getting pregnant per creampie during fertile period.
     sarah_weekend_surprise_action = ActionMod("Sarah's Weekend Surprise",Sarah_weekend_surprise_crisis_requirement,"Sarah_weekend_surprise_crisis_label",
         menu_tooltip = "You find an employee masturbating in an empty storage room.", category = "Business", is_crisis = True, crisis_weight = 7)
 
@@ -43,7 +44,7 @@ init 2 python:
         sarah = make_person(name = "Sarah", last_name ="Cooper", age = 21, body_type = "thin_body", face_style = "Face_3", tits = "A", height = 0.90, hair_colour = "brown", hair_style = windswept_hair, skin="white",\
             eyes = "dark blue", personality = Sarah_personality, name_color = "#d62cff", dial_color = "#d62cff", starting_wardrobe = sarah_wardrobe, \
             stat_array = [4,3,3], skill_array = [5,3,2,1,1], sex_array = [1,2,3,1], start_sluttiness = 3, start_obedience = 0, start_happiness = 102, start_love = 3, \
-            title = "Sarah", possessive_title = "Your childhood friend",mc_title = mc.name, relationship = "Single", kids = 0, base_outfit = sarah_base_outfit, 
+            title = "Sarah", possessive_title = "Your childhood friend",mc_title = mc.name, relationship = "Single", kids = 0, base_outfit = sarah_base_outfit,
             force_random = True, forced_opinions = [
                 ["HR work", 2, True],        # she loves HR work
                 ["work uniforms", 1, False], # she likes uniforms
@@ -68,6 +69,9 @@ init 2 python:
         sarah.event_triggers_dict["stripclub_progress"] = 0    # 0 = not complete, 1 = strip club even complete
         sarah.event_triggers_dict["initial_threesome_target"] = None    #this will hold who sarah decides she wants to have a threesome with.
         sarah.event_triggers_dict["threesome_unlock"] = False   #Set this to true after first threesome with Sarah
+        sarah.event_triggers_dict["try_for_baby"] = 0         # 0 = not trying, 1 = trying for baby, 2 = knocked up
+        sarah.event_triggers_dict["fertile_start_day"] = -1    #-1 means not fertile, otherwise is the day that she tells MC she is fertile. Using math we can determine if she is fertile in the future.
+        sarah.event_triggers_dict["fertile_start_creampie_count"] = -1  #Set this to the total number of creampies she has had at the beginning of her fertile period.
         sarah.event_triggers_dict["favorite_drink"] = "appletini"
 
         # add appoint
@@ -187,6 +191,41 @@ init -1 python:
         return False
 
 
+    def Sarah_ask_for_baby_requirement():
+        if mc_asleep():
+            if sarah.event_triggers_dict.get("threesome_unlock", 0) >= 1:
+                if sarah.sex_record["Vaginal Creampies"] >= 10:
+                    if girlfriend_role in sarah.special_role:
+                        return True
+        return False
+
+    def Sarah_fertile_period_start_requirement():  #When this returns true, start the fertile period
+        if sarah.event_triggers_dict.get("try_for_baby", 0) == 1:
+            if Sarah_is_fertile():
+                return True
+        return False
+
+    def Sarah_fertile_period_end_requirement():     #When this returns true, end the fertile period
+        if sarah.event_triggers_dict.get("try_for_baby", 0) == 1:
+            if not Sarah_is_fertile():
+                return True
+        return False
+
+    def Sarah_try_for_baby_dialogue():  #Just a wrapper to make it easier to make if statements for baby making related dialogue
+        if sarah.event_triggers_dict.get("try_for_baby", 0) == 1:
+            return True
+        return False
+
+    def Sarah_is_fertile():
+        if sarah.event_triggers_dict.get("try_for_baby", 0) != 1:  #Only fertile if actively trying
+            return False
+        if sarah.event_triggers_dict.get("fertile_start_day", -1) == -1:
+            return False
+        elif (day - sarah.event_triggers_dict.get("fertile_start_day", -1)) % 28 < 5:   #  Generally fertile for 5 days every 28 days
+            return True
+        return False
+
+
     def Sarah_remove_bra_from_wardrobe(wardrobe):  #Test this function
         for outfit in wardrobe.outfits:
             if outfit.wearing_bra():
@@ -233,7 +272,7 @@ init -1 python:
     def get_sarah_spend_night_threesome_possibility():
         threesome_wakeup = False
         threesome_partner = None
-        if sarah.event_triggers_dict.get("threesome_unlock", 0) == 1 and renpy.random.randint(0,100) < 50: 
+        if sarah.event_triggers_dict.get("threesome_unlock", 0) == 1 and renpy.random.randint(0,100) < 50:
             if renpy.random.randint(0,100) < 10: #Try lily first
                 if willing_to_threesome(the_person, lily):
                     threesome_partner = lily
@@ -288,6 +327,18 @@ init -1 python:
     def add_sarah_initial_threesome_action():
         Sarah_initial_threesome_action = Action("Sarah initial threesome",Sarah_initial_threesome_requirement,"Sarah_initial_threesome_label")
         mc.business.mandatory_crises_list.append(Sarah_initial_threesome_action)
+
+    def add_sarah_ask_for_baby_action():
+        Sarah_ask_for_baby = Action("Sarah asks for a baby", Sarah_ask_for_baby_requirement, "Sarah_ask_for_baby_label")
+        mc.business.mandatory_crises_list.append(Sarah_ask_for_baby)
+
+    def add_sarah_fertile_period_start_action():
+        Sarah_fertile_period_start = Action("Sarah starts a fertile period", Sarah_fertile_period_start_requirement, "Sarah_fertile_period_start_label")
+        mc.business.mandatory_crises_list.append(Sarah_fertile_period_start)
+
+    def add_sarah_fertile_period_end_action():
+        Sarah_fertile_period_end = Action("Sarah ends a fertile period", Sarah_fertile_period_end_requirement, "Sarah_fertile_period_end_label")
+        mc.business.mandatory_crises_list.append(Sarah_fertile_period_end)
 
     def add_hr_director_initial_hire_action(person):
         HR_director_initial_hire_action = Action("Hire HR Director",HR_director_initial_hire_requirement,"HR_director_initial_hire_label", args = person)
@@ -2002,9 +2053,88 @@ label Sarah_initial_threesome_label():
     $ scene_manager.clear_scene()
     call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_overnight_after_threesome_1
     call Sarah_spend_the_night() from sarah_threesome_spend_the_night
-
+    $ add_sarah_ask_for_baby_action()
     $ del the_person_one
     $ del the_person_two
+    return
+
+label Sarah_ask_for_baby_label():
+    $ the_person = sarah
+    $ scene_manager = Scene()
+    "As you are getting ready for bed, you get a text on your phone. It's from [the_person.possessive_title]"
+    the_person.char "Hey, can I come over tonight? I had something I wanted to talk to you about."
+    "You quickly text her back."
+    mc.name "Sure. Want to spend the night?"
+    the_person.char "Hell yeah! I'll bring some stuff over."
+    "About 20 minutes later she texts you."
+    the_person.char "Hey, I'm here! Come let me in!"
+    "You head to your front door and open it."
+    "For once, you managed to get her back to your room while avoiding [mom.possessive_title] and [lily.title]."
+    $ scene_manager.add_actor(the_person, position = "sitting")
+    "She walks over and sits on your bed."
+    mc.name "So... what did you want to talk about?"
+    "She clears her throat. You can tell she is a little nervous."
+    the_person.char "Well, this is kind of hard to talk about. But... we've been having a lot of unprotected sex lately..."
+    mc.name "Oh my god, are you pregnant?"
+    the_person.char "No! No, not yet anyway..."
+    mc.name "Not... yet?"
+    the_person.char "Well, [the_person.mc_title], it's been like a dream, having you back in my life like this. Things are amazing, being with you."
+    the_person.char "I've been, well, tracking my cycles recently and, well, basically, I'm fertile right now."
+    "You can feel your cock twitch in your pants. You imagine [the_person.possessive_title], knocked up, her tits swelling with milk and her belly growing..."
+    the_person.char "Everytime you finish inside me, I find myself thinking about it, more and more, what it would be like to get pregnant and have a baby with you."
+    the_person.char "Look, you don't have to answer me right now, but, I thought maybe we could try and have a baby. Together?"
+    "This is quite a twist! You weren't expecting this so soon, but you have to admit that the thought is exciting..."
+    menu:
+        "Try for a baby":
+            mc.name "Honestly, I didn't realize this was something you were thinking about. But I would love to make a baby with you!"
+            $ the_person.change_happiness(15)
+            $ the_person.change_happiness(20)
+            $ the_person.change_obedience(10)
+            the_person.char "Oh! Wow, I honestly... I thought you we're gonna say no! This is... I can't believe it."
+            "She looks up at you, and you can see the changes in her facial expression. She goes from surprised, to happy, to sultry."
+            the_person.char "So umm, like I was saying, I'm pretty sure I'm actually fertile right now..."
+            mc.name "I think we should get naked now."
+            the_person.char "Yes sir!"
+            $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
+            "You get naked with [the_person.possessive_title]. She rolls on her back and spreads her legs."
+            the_person.char "Come fill me up, [the_person.mc_title]!"
+            if the_person.get_opinion_score("creampies") < 2:   #From now on, she loves getting creamed, and has relevant dialogue
+                $ the_person.sexy_opinions["creampies"] = [2, True]
+            if the_person.get_opinion_score("bareback sex") < 2:    #TODO see if we can actually make her refuse condoms?
+                $ the_person.sexy_opinions["bareback sex"] = [2, True]
+            $ the_person.event_triggers_dict["try_for_baby"] = 1
+            $ the_person.event_triggers_dict["fertile_start_day"] = day  #Her 5 day fertility period starts today.
+            call Sarah_fertile_period_start_label(the_person) from sarah_initial_fertile_period_start_01
+            #TODO create mandatory event for starting fertility period. Stores creampies before fertility period. Then second mandatory event at the end of the fertility period determines if pregnant based on # of creampies and RNG
+            call fuck_person(the_person, start_position = missionary, start_object = bedroom.get_object_with_name("bed"), skip_intro = False, girl_in_charge = False, position_locked = True) from _sarah_ask_for_baby_01
+            if sarah.outfit.has_creampie_cum():
+                the_person.char "Oh my god... we actually did it..."
+                "She grabs an extra pillow and puts it under her butt so her hips are elevated."
+                the_person.char "I'm just going to lay her like this for a bit, you know. Keep that seed nice and deep."
+            else:
+                mc.name "I'm sorry, I really want to, I'm just really tired."
+                "You can tell she is a little disappointed."
+                the_person.char "That's okay. Maybe in the morning?"
+            "You snuggle up with [the_person.possessive_title]. You both quickly fall asleep."
+
+            call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_breeding_request_1
+            call Sarah_spend_the_night() from sarah_ask_for_baby_overnight
+        "Think about it":
+            mc.name "This is a really big decision. Give me some time to think about it, okay?"
+            "You can tell she is a little disappointed, but she understands your answer."
+            the_person.char "Of course! I understand."
+            #TODO add ability to revisit this decision later.
+            the_person.char "I guess, umm, just be careful then. Wouldn't want to get knocked while you are still considering it, right?"
+            "You walk up to [the_person.possessive_title] as she stands up. You put your hands on her hips and draw her close."
+            $ scene_manager.update_actor(the_person, position = "kissing")
+            "Your tongues meet and you begin to make out. The kissing starts innocent, but quickly grows in urgency."
+            the_person.char "Mmm."
+            call fuck_person(the_person, start_position = kissing, skip_intro = True, girl_in_charge = False) from _sarah_ask_for_baby_reject_01
+            $ scene_manager.update_actor(the_person, position = "missionary")
+            "When you finish, you lay down next to [the_person.title] in your bed. You both quickly fall asleep together."
+            call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_breeding_request_2
+            call Sarah_spend_the_night() from sarah_ask_for_baby_overnight_reject
+
     return
 
 label Sarah_spend_the_night():      #She spends the night with you. Have a random chance of a threesome with mom or lily
@@ -2022,6 +2152,8 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         "Your hands cup and squeeze one of her breasts. It's so full and hot, they feel so good in your hands."
         the_person.char "Mmmmmmmm......"
         "[the_person.title] moans but doesn't stir. Maybe you could surprise her with a little good morning dicking."
+        if Sarah_is_fertile():
+            "You're sure she wouldn't mind an extra creampie to start the day. The more cum in her the better during her fertile period!"
         menu:
             "Try to slide yourself in":
                 pass
@@ -2066,7 +2198,10 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         "She shoves her ass back against you as she cums. Her helpless body quivers in delight. Her moans drive you even harder."
         $ mc.change_arousal(20) #110
         mc.name "I'm gonna cum!"
-        the_person.char "Shove it in deep! I want to feel your seed inside me all day long!"
+        if Sarah_is_fertile():
+            the_person.char "Cum deep! Knock me up with your hot cum [the_person.mc_title]!"
+        else:
+            the_person.char "Shove it in deep! I want to feel your seed inside me all day long!"
         $ the_person.cum_in_vagina()
         #TODO internal fetish specific dialogue
         "You grab her hip and shove your cock deep and hold it there, cumming deep inside her. She moans and gasps with every spurt."
@@ -2170,7 +2305,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         the_person.char "Alright, I need to get some things done today. Thanks for letting me spend the night!"
         $ scene_manager.remove_actor(the_person)
 
-    $ scene_manager.clear_scene()        
+    $ scene_manager.clear_scene()
     return "Advance Time"
 
 label watch_strip_show(the_person):  #This scene assumes scene manager is running and the_person is with you, so she won't strip for you.
@@ -2606,7 +2741,10 @@ label Sarah_date_ends_at_your_place_label(the_person):
     $ mc.location.show_background()
     $ scene_manager = Scene()
     $ scene_manager.add_actor(the_person, position = "stand2", character_placement = character_right)
-    the_person.char "Oh god I can't wait to feel your hands all over me again..."
+    if Sarah_is_fertile():
+        the_person.char "Oh god I can't wait to feel you fill me up again..."
+    else:
+        the_person.char "Oh god I can't wait to feel your hands all over me again..."
     $ scene_manager.add_actor(mom, character_placement = character_left_flipped)
     "[mom.title] pops around the corner when she hears you walking down the hall and unknowingly interrupts."
     mom.char "Ah! It's [the_person.name] again!"
@@ -2636,17 +2774,14 @@ label Sarah_date_ends_at_your_place_label(the_person):
     "[the_person.possessive_title] looks at you."
     the_person.char "Welp, I think we both know where this is going!"
     $ scene_manager.strip_actor_outfit(the_person, exclude_feet = False)
-    the_person.char "What are you staring at? Let's go! I've been looking forward to this all night!"
+    if Sarah_is_fertile():
+        the_person.char "Let's go! Ovulating is driving me crazy, I've been day dreaming about your cock fill me with seed all night long!"
+    else:
+        the_person.char "What are you staring at? Let's go! I've been looking forward to this all night!"
     call fuck_person(the_person, skip_intro = False, girl_in_charge = False) from _call_sex_description_date_happy_ending_1
     "When you finish with her, [the_person.title] collapses in the bed."
     $ scene_manager.update_actor(the_person, position = "missionary")
     "You cuddle up next to her as you both catch your breath."
-    #complex decision tree here.
-    # If dating path, have her ask to be your girlfriend officially.
-    # If she is already dating someone else, have her break up with them
-    # If she is already married, turn it into an affaire
-    # if she is engaged, have her break it off.
-    # If not dating path, she recovers, then heads out
     if girlfriend_role in the_person.special_role:  #You are already dating her via other means. She just cuddles up with you.
         "As you both recover, [the_person.possessive_title] starts kissing you along your neck, then whispers in your ear."
         the_person.char "Thank you for the good time tonight. I love you."
@@ -2801,4 +2936,21 @@ label Sarah_date_strip_club_private_dance_label(the_person):
     $ del showgirl_2
     "You head back out to the main room and sit down at a booth."
     $ scene_manager.update_actor(the_person, position = "sitting", character_placement = character_right)
+    return
+
+label Sarah_fertile_period_start_label(the_person):
+    $ sarah.event_triggers_dict["fertile_start_creampie_count"] = sarah.sex_record["Vaginal Creampies"]
+    #TODO add slutty crisis events where Sarah tries to get creampies from MC
+    $ add_sarah_fertile_period_end_action()
+    return
+
+label Sarah_fertile_period_end_label(the_person):
+    $ pregnant_chance = sarah.sex_record["Vaginal Creampies"] - sarah.event_triggers_dict.get("fertile_start_creampie_count", sarah.sex_record["Vaginal Creampies"])
+    $ pregnant_chance *= SARAH_PER_CREAMPIE_PREGNANCY_CHANCE
+    if pregnant_chance >=  renpy.random.randint(0,100): #She is pregnant!
+        $ add_sarah_fertile_period_end_action() #Until we write this segment, just let us have fun trying to make babies without ever actually getting pregnant.
+        #TODO make her pregnant!
+    else:
+        pass
+        $ add_sarah_fertile_period_start_action()
     return
