@@ -3,7 +3,7 @@
 init 2 python:
     # insert class from bugfix into mod (allows for cleaner and faster menus)
     class MenuItem():
-        def __init__(self, title = "", return_value = None, the_tooltip = None, extra_args = None, display = True, is_sensitive = True, display_key = None, display_scale = 0.9, displayable = None, display_func = None, person_preview_args = None):
+        def __init__(self, title = "", return_value = None, the_tooltip = None, extra_args = None, display = True, is_sensitive = True, display_key = None, display_scale = 0.9, display_func = None, person_preview_args = None):
             self.title = ""
             self.return_value = return_value
             self.the_tooltip = the_tooltip
@@ -12,7 +12,6 @@ init 2 python:
             self.is_sensitive = is_sensitive
             self.display_key = display_key
             self.display_scale = display_scale
-            self.displayable = displayable
             self.display_func = display_func
             self.person_preview_args = person_preview_args
 
@@ -94,9 +93,7 @@ init 2 python:
 
 
     def show_menu_person(item):
-        if not item.displayable:
-            item.displayable = item.display_func(lighting = mc.location.get_lighting_conditions(), **item.person_preview_args)
-        renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="Active", what=item.displayable, tag=item.display_key)
+        renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="Active", what= item.display_func(lighting = mc.location.get_lighting_conditions(), **item.person_preview_args), tag=item.display_key)
 
 
 init 2: # Change name back to main_choice_display once fixed
