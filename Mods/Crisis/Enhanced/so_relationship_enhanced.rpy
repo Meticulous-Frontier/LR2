@@ -9,7 +9,6 @@ init 2 python:
         return not get_so_relationship_worsen_person() is None
 
     def get_so_relationship_improve_person():
-        renpy.notify("Using enhanced version")
         potential_people = []
         for person in known_people_in_the_game(excluded_people = [mc] + unique_character_list):
             if person.love > 10 and person.love < 60 and not person.title is None and not person.relationship == "Married":
@@ -18,7 +17,6 @@ init 2 python:
         return get_random_from_list(potential_people)
 
     def get_so_relationship_worsen_person():
-        renpy.notify("Using enhanced version")
         potential_people = []
         for person in known_people_in_the_game(excluded_people = [mc] + unique_character_list):
             if person.love > 10 and not person.title is None and not person.relationship == "Single":
