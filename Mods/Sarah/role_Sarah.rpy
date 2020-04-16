@@ -810,10 +810,10 @@ label Sarah_get_drinks_label():
 
     # make sure we don't alter the outfit in her wardrobe
     $ test_outfit = the_person.outfit.get_copy()
-    if len(test_outfit.get_upper_ordered()) != 0:
-        $ test_outfit.get_upper_ordered()[-1].colour[3] *= .75 #make top transparent
-    if len(test_outfit.get_lower_ordered()) != 0:
-        $ test_outfit.get_lower_ordered()[-1].colour[3] *= .75 #make bottom transparent
+    if test_outfit.get_upper_top_layer():
+        $ test_outfit.get_upper_top_layer().colour[3] *= .75 #make top transparent
+    if test_outfit.get_lower_top_layer():
+        $ test_outfit.get_lower_top_layer().colour[3] *= .75 #make bottom transparent
 
     $ the_person.apply_outfit(test_outfit)
     $ del test_outfit
@@ -1114,8 +1114,8 @@ label Sarah_tits_reveal_label():
     else:
         the_person.char "Do you want to give them a closer look? I mean, you are the man who made this all possible..."
         "You quickly agree."
-        while not the_person.outfit.tits_available():    #If covered up, have her take her top off
-            $ the_clothing = the_person.outfit.get_upper_ordered()[-1]
+        while the_person.outfit.get_upper_top_layer():    #If covered up, have her take her top off
+            $ the_clothing = the_person.outfit.get_upper_top_layer()
             "[the_person.possessive_title] takes off her [the_clothing.name]"
             $ the_person.draw_animated_removal(the_clothing)
         $ the_clothing = None

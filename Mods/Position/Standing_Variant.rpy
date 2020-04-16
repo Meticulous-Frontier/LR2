@@ -403,7 +403,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                         "You enjoy teasing her suuple breasts for a few moments. You hold one in place while you fuck her, feeling the weight of it sway with each motion."
                         $ the_girl.change_arousal(5)
                     else:
-                        $ top_clothing = the_girl.outfit.get_upper_ordered()[-1]
+                        $ top_clothing = the_girl.outfit.get_upper_top_layer()
                         "You plant a hand on [the_girl.possessive_title]'s big tits and fondle them through her [top_clothing.name]."
                         $ top_clothing = None
                         the_girl.char "Mmm, you should just pull that out of the way. I want you to be able to grab them and squeeze them."
@@ -426,7 +426,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                             $ mc.change_arousal( 100)
                             return
                     else:
-                        $ top_clothing = the_girl.outfit.get_upper_ordered()[-1]
+                        $ top_clothing = the_girl.outfit.get_upper_top_layer()
                         "You try and feel up [the_girl.possessive_title]'s little tits, but her [top_clothing.name] stops you from getting much more than a handful of fabric."
                         $ top_clothing = None
                         "You give up and focus on fucking her instead."

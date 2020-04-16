@@ -128,8 +128,8 @@ label mom_breakfast_action_label():
                 else:
                     menu:
                         "Pull Her Top Up" if the_person.sluttiness > 40:
-                            while not the_person.outfit.tits_available():    #If covered up, have her take her top off
-                                $ scene_manager.draw_animated_removal(the_person, the_person.outfit.get_upper_ordered()[-1])
+                            while the_person.outfit.get_upper_top_layer():    #If covered up, have her take her top off
+                                $ scene_manager.draw_animated_removal(the_person, the_person.outfit.get_upper_top_layer())
                             "You reach down and slowly remove her top, exposing her creamy tits."
                             $ the_person.break_taboo("bare_tits")
                             "Your hands return to her chest, her boobs feel hot and soft in your hands."

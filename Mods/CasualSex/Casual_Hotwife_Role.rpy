@@ -344,7 +344,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         $ the_person.draw_person(position = "stand3")
         if not the_person.outfit.tits_available():    #If covered up, have her take her top off
             the_person.char "Here I go... don't forget to take pictures!"
-            $ the_clothing = the_person.outfit.get_upper_ordered()[-1]
+            $ the_clothing = the_person.outfit.get_upper_top_layer()
             "[the_person.possessive_title] takes off her [the_clothing.name]"
             $ the_person.draw_animated_removal(the_clothing)
             $ the_clothing = None
@@ -410,7 +410,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             the_person.char "Let me just get this off... daddy loves it when I have my tits out for this..."
             "She hands you her phone with the camera app out. You snap some pictures as she starts to strip."
             while not the_person.outfit.tits_available():
-                $ the_clothing = the_person.outfit.get_upper_ordered()[-1]
+                $ the_clothing = the_person.outfit.get_upper_top_layer()
                 "[the_person.possessive_title] takes off her [the_clothing.name]"
                 $ the_person.draw_animated_removal(the_clothing)
                 $ the_clothing = None

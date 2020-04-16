@@ -117,8 +117,8 @@ label scene_SB_anal_swing_2(the_girl, the_location, the_object):
     else:
         "You reach around her body with both hands and grab as her tits. The fabric covering them is maddening. You decide to strip her down."
         mc.name "[the_girl.title]... I need to feel your skin!"
-        while not the_girl.outfit.tits_available():    #If covered up, have her take her top off
-            $ the_clothing = the_girl.outfit.get_upper_ordered()[-1]
+        while the_girl.outfit.get_upper_top_layer():    #If covered up, have her take her top off
+            $ the_clothing = the_girl.outfit.get_upper_top_layer()
             "You take off [the_girl.possessive_title]'s [the_clothing.name]"
             $ the_girl.draw_animated_removal(the_clothing)
         $ the_clothing = None

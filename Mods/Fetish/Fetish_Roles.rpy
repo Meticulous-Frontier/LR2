@@ -164,8 +164,7 @@ label SB_fetish_vaginal_visit_label(the_person):
 #SBR10
 label SB_fetish_vaginal_mom_kitchen_label(the_person):
     $ the_person = mom
-    if len(the_person.outfit.get_lower_ordered()) > 0:
-        $ the_clothing = the_person.outfit.get_lower_ordered()[-1] #Get the very top item of clothing.
+    $ the_clothing = the_person.outfit.get_lower_top_layer() #Get the very top item of clothing.
 
     mc.name "Hey [the_person.title], dinner sure smells good. Just keep working on it, don't mind me!"
     "[the_person.possessive_title] hesitates for a second, clearly realizing you are up to something."
@@ -196,7 +195,7 @@ label SB_fetish_vaginal_mom_kitchen_label(the_person):
     else:                                              #Otherwise, strip her down.
         "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy"
 
-        $ the_person.strip_outfit(top_layer_first = False, position = "standing_doggy", exclude_upper = True)
+        $ the_person.strip_outfit(position = "standing_doggy", exclude_upper = True)
 
         "With her pussy finally exposed you waste no time. You quickly pull your cock out and line it up with her wet slit."
 
@@ -240,12 +239,11 @@ label SB_fetish_cum_getdosage_label(the_person):
 
 #SBR40
 label SB_fetish_anal_mom_kitchen_label(the_person):
-    if len(the_person.outfit.get_lower_ordered()) > 0:
-        $ the_clothing = the_person.outfit.get_lower_ordered()[-1] #Get the very top item of clothing.
+    $ the_clothing = the_person.outfit.get_lower_top_layer() #Get the very top item of clothing.
 
     mc.name "Hey [the_person.title], dinner sure smells good. Just keep working on it, don't mind me!"
     "[the_person.possessive_title] hesitates for a second, clearly realizing you are up to something."
-    "You pretend to look in the fridge for something as [the_person.possessive_title] resumes dinner preperations. She bends over the counter and starts to chop up some vegetables."
+    "You pretend to look in the fridge for something as [the_person.possessive_title] resumes dinner preparations. She bends over the counter and starts to chop up some vegetables."
     $ the_person.draw_person(position = "standing_doggy")
     if the_person.outfit.vagina_available():
         "You steal a few glances over at [the_person.possessive_title]'s exposed ass. It looks soft and supple, and shakes a bit as she prepares dinner."

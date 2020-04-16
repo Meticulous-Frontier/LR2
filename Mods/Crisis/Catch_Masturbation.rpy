@@ -41,8 +41,7 @@ label SB_caught_masturbating_crisis_label():
         # "No one eligible for masturbating!"
         return
 
-    if len(the_person.outfit.get_lower_ordered()) > 0:
-        $ the_clothing = the_person.outfit.get_lower_ordered()[-1] #Get the very top item of clothing.
+    $ the_clothing = the_person.outfit.get_lower_top_layer() #Get the very top item of clothing.
 
     "You decide to take a quick break from what you are doing. You stand up and stretch your legs, and go for a quick walk."
     "While you are walking by an unused storage room, you hear some muffled sounds coming from inside."
@@ -95,7 +94,7 @@ label SB_caught_masturbating_crisis_label():
                             "You drop down on the floor in front of her. With her pussy exposed you waste no time diving right in."
                         else:                                              #Otherwise, strip her down.
                             "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy."
-                            $ the_person.strip_outfit(top_layer_first = False, position = "missionary", exclude_upper = True)
+                            $ the_person.strip_outfit(position = "missionary", exclude_upper = True)
                             "With her pussy finally exposed you waste no time diving right in"
                         $ the_person.break_taboo("bare_pussy")
                         $ the_person.break_taboo("licking_pussy")
