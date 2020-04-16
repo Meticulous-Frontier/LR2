@@ -3,7 +3,7 @@
 init 2 python:
     # insert class from bugfix into mod (allows for cleaner and faster menus)
     class MenuItem():
-        def __init__(self, title = "", return_value = None, the_tooltip = None, extra_args = None, display = True, is_sensitive = True, display_key = None, display_scale = 0.9, displayable = None):
+        def __init__(self, title = "", return_value = None, the_tooltip = None, extra_args = None, display = True, is_sensitive = True, display_key = None, display_scale = 0.9, display_func = None, person_preview_args = None):
             self.title = ""
             self.return_value = return_value
             self.the_tooltip = the_tooltip
@@ -12,13 +12,18 @@ init 2 python:
             self.is_sensitive = is_sensitive
             self.display_key = display_key
             self.display_scale = display_scale
-            self.displayable = displayable
+            self.display_func = display_func
+            self.person_preview_args = person_preview_args
 
 
     def build_menu_items(elements_list, draw_hearts_for_people = True, person_preview_args = None):
         result = []
         for count in __builtin__.range(len(elements_list)):
-            result.append(build_menu_item_list(elements_list[count], draw_hearts_for_people, person_preview_args))
+            if len(elements_list[count]) > 1:
+                if not isinstance(elements_list[count][1], MenuItem):
+                    result.append(build_menu_item_list(elements_list[count], draw_hearts_for_people, person_preview_args))
+                else:
+                    result.append(elements_list[count])
         return result
 
     def build_menu_item_list(element_list, draw_hearts_for_people = True, person_preview_args = None):
@@ -47,9 +52,10 @@ init 2 python:
                 if person_preview_args is None:
                     person_preview_args = {}
 
+                mi.person_preview_args = person_preview_args
                 mi.display_key = item.name + item.last_name
                 mi.display_scale = scale_person(item.height)
-                mi.displayable = item.build_person_displayable(lighting = mc.location.get_lighting_conditions(), **person_preview_args)
+                mi.display_func = item.build_person_displayable
 
                 # prevent overlapping images of girls
                 renpy.scene("Active")
@@ -87,7 +93,7 @@ init 2 python:
 
 
     def show_menu_person(item):
-        renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="Active", what=item.displayable, tag=item.display_key)
+        renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="Active", what= item.display_func(lighting = mc.location.get_lighting_conditions(), **item.person_preview_args), tag=item.display_key)
 
 
 init 2: # Change name back to main_choice_display once fixed
@@ -95,6 +101,7 @@ init 2: # Change name back to main_choice_display once fixed
         #The first element in a column should be the title, either text or a displayable. After that it should be a tuple of (displayable/text, return_value).
 
         #[["Title",["Item",Return] ]]
+        default menu_items = build_menu_items(elements_list)
 
         hbox:
             spacing 10
@@ -102,23 +109,18 @@ init 2: # Change name back to main_choice_display once fixed
             yalign 0.2
             xanchor 0.5
             yanchor 0.0
-            for count in __builtin__.range(len(elements_list)):
-                $ elements = elements_list[count]
-                if len(elements_list[count]) > 1 and not isinstance(elements_list[count][1], MenuItem): # convert list to menu_items
-                    $ elements = build_menu_item_list(elements_list[count], draw_hearts_for_people, person_preview_args)
-
-                if len(elements[1:]) > 0:
+            for count in __builtin__.range(len(menu_items)):
+                if len(menu_items[count][1:]) > 0:
                     frame:
                         background "gui/LR2_Main_Choice_Box.png"
                         xsize 380
                         ysize 700
-                        $ title_element = elements[0]
+                        $ title_element = menu_items[count][0]
                         if isinstance(title_element, basestring):
                             text title_element xalign 0.5 ypos 45 anchor (0.5,0.5) size 22 style "menu_text_style" xsize 240
                         else:
                             add title_element xalign 0.5 ypos 45 anchor (0.5,0.5)
 
-                        $ column_elements = elements[1:]
                         viewport id title_element:
                             #scrollbars "vertical" #But if we aren't on a PC we need to make sure the player can scroll since they won't have a mouse wheel.
 
@@ -131,7 +133,7 @@ init 2: # Change name back to main_choice_display once fixed
                             xsize 360
                             ysize 588
                             vbox:
-                                for item in column_elements:
+                                for item in menu_items[count][1:]:
                                     if item.display:
                                         textbutton item.title:
                                             xsize 360

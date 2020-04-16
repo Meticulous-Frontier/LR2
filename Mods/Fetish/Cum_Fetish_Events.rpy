@@ -93,8 +93,8 @@ label SB_fetish_cum_label(the_person):
                 mc.name "Hey, before you get under the desk, why don't you get your tits out? It'd be great to have something to look at..."
                 "[the_person.possessive_title] smiles wide"
                 the_person.char "Of course! Let me get this off for you..."
-                while not the_person.outfit.tits_available():
-                    $ the_clothing = the_person.outfit.get_upper_ordered()[-1]
+                while the_person.outfit.get_upper_top_layer():
+                    $ the_clothing = the_person.outfit.get_upper_top_layer()
                     "[the_person.possessive_title] takes off her [the_clothing.name]"
                     $ the_person.draw_animated_removal(the_clothing)
                 $ the_clothing = None

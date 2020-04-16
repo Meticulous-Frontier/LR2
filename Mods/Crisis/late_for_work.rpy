@@ -41,7 +41,7 @@ label late_for_work_action_label:
         $ the_person.cum_on_tits()
         $ the_person.draw_person(position="stand3", emotion="default")
         the_person.char "I'm sorry [the_person.mc_title], [the_person.SO_name] needed some personal attention when he dropped me off at the office."
-        $ upper_clothing = the_person.outfit.get_upper_ordered()[-1]
+        $ upper_clothing = the_person.outfit.get_upper_top_layer()
         menu:
             "Lecture Her On Being Late":
                 $ the_person.draw_person(emotion = 'sad')

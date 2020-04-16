@@ -128,7 +128,7 @@ label SB_working_weekend_crisis_label():
                 person_one.char "Oh [person_one.mc_title], you work so hard. Don't worry, I'll take care of you."
                 if not person_one.outfit.tits_available():    #If covered up, have her take her top off
                     person_one.char "Here... let me take this off. I bet that will help ease some of your stress."
-                    $ the_clothing = person_one.outfit.get_upper_ordered()[-1]
+                    $ the_clothing = person_one.outfit.get_upper_top_layer()
                     "[person_one.possessive_title] takes off her [the_clothing.name]"
                     $ person_one.draw_animated_removal(the_clothing)
                     $ the_clothing = None

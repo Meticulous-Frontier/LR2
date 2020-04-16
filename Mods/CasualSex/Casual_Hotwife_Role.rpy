@@ -344,7 +344,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         $ the_person.draw_person(position = "stand3")
         if not the_person.outfit.tits_available():    #If covered up, have her take her top off
             the_person.char "Here I go... don't forget to take pictures!"
-            $ the_clothing = the_person.outfit.get_upper_ordered()[-1]
+            $ the_clothing = the_person.outfit.get_upper_top_layer()
             "[the_person.possessive_title] takes off her [the_clothing.name]"
             $ the_person.draw_animated_removal(the_clothing)
             $ the_clothing = None
@@ -410,7 +410,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             the_person.char "Let me just get this off... daddy loves it when I have my tits out for this..."
             "She hands you her phone with the camera app out. You snap some pictures as she starts to strip."
             while not the_person.outfit.tits_available():
-                $ the_clothing = the_person.outfit.get_upper_ordered()[-1]
+                $ the_clothing = the_person.outfit.get_upper_top_layer()
                 "[the_person.possessive_title] takes off her [the_clothing.name]"
                 $ the_person.draw_animated_removal(the_clothing)
                 $ the_clothing = None
@@ -481,10 +481,6 @@ label casual_hotwife_blowjob_text_label(the_person):
     the_person.char "Okay, well, I need to get going. I'm sure I'll see you around soon..."
     "You say goodbye and head out. Hot damn! You are now friends with benefits with a hot wife. You bet the sex is going to be amazing..."
     $ the_person.event_triggers_dict["hotwife_blowjob_text_enable"] = 0
-
-    $ the_person.event_triggers_dict["booty_call"] = True
-
-    "You now have [the_person.title]'s phone number. She may call you from time to time to hookup!"
     call advance_time from _call_advance_casual_hotwife_sex_discussion
     return
 
@@ -574,6 +570,10 @@ label casual_hotwife_dancing_sex_label(the_person):
         $ the_person.event_triggers_dict["hotwife_progress"] = 3
         "She takes her phone from you and starts going through the pictures you took."
         the_person.char "You'd better get going, [the_person.mc_title]. I'm going to send these to my husband..."
+
+        $ the_person.event_triggers_dict["booty_call"] = True # unlock casual encounters
+        "You now have [the_person.title]'s phone number. She may call you from time to time to hookup!"
+
         $ the_person.review_outfit(dialogue = False)
 
     else:   #We've done this before

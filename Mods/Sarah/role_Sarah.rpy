@@ -861,10 +861,10 @@ label Sarah_get_drinks_label():
 
     # make sure we don't alter the outfit in her wardrobe
     $ test_outfit = the_person.outfit.get_copy()
-    if len(test_outfit.get_upper_ordered()) != 0:
-        $ test_outfit.get_upper_ordered()[-1].colour[3] *= .75 #make top transparent
-    if len(test_outfit.get_lower_ordered()) != 0:
-        $ test_outfit.get_lower_ordered()[-1].colour[3] *= .75 #make bottom transparent
+    if test_outfit.get_upper_top_layer():
+        $ test_outfit.get_upper_top_layer().colour[3] *= .75 #make top transparent
+    if test_outfit.get_lower_top_layer():
+        $ test_outfit.get_lower_top_layer().colour[3] *= .75 #make bottom transparent
 
     $ the_person.apply_outfit(test_outfit)
     $ del test_outfit
@@ -1165,8 +1165,8 @@ label Sarah_tits_reveal_label():
     else:
         the_person.char "Do you want to give them a closer look? I mean, you are the man who made this all possible..."
         "You quickly agree."
-        while not the_person.outfit.tits_available():    #If covered up, have her take her top off
-            $ the_clothing = the_person.outfit.get_upper_ordered()[-1]
+        while the_person.outfit.get_upper_top_layer():    #If covered up, have her take her top off
+            $ the_clothing = the_person.outfit.get_upper_top_layer()
             "[the_person.possessive_title] takes off her [the_clothing.name]"
             $ the_person.draw_animated_removal(the_clothing)
         $ the_clothing = None
@@ -1563,13 +1563,14 @@ label Sarah_stripclub_story_label():
                     "She crawls back into bed beside you."
                     $ scene_manager.update_actor(the_person, position = "missionary")
                     "Well, it's official. I'm all yours now!"
-                    $ the_person.special_role.append(girlfriend_role)
-                    $ the_person.change_love(10)
-                    $ the_person.change_obedience(5)
-                    $ so_title = SO_relationship_to_title(the_person.relationship)
-                    $ ex_title = so_title[:4]
-                    $ the_person.relationship = "Single"
-                    $ the_person.SO_name = None
+                    python:
+                        the_person.special_role.append(girlfriend_role)
+                        if affair_role in the_person.special_role: # remove affair role if we have an affair with her
+                            the_person.special_role.remove(affair_role)
+
+                        the_person.change_stats(love = 10, obedience = 5)
+                        the_person.relationship = "Single"
+                        the_person.SO_name = None
                 "Let's keep it casual":
                     the_person.char "Ah, okay. So like, friends with benefits? Is that what we are talking about here?"
                     mc.name "Exactly."
