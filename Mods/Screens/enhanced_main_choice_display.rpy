@@ -110,19 +110,17 @@ init 2: # Change name back to main_choice_display once fixed
             xanchor 0.5
             yanchor 0.0
             for count in __builtin__.range(len(menu_items)):
-                $ elements = menu_items[count]
-                if len(elements[1:]) > 0:
+                if len(menu_items[count][1:]) > 0:
                     frame:
                         background "gui/LR2_Main_Choice_Box.png"
                         xsize 380
                         ysize 700
-                        $ title_element = elements[0]
+                        $ title_element = menu_items[count][0]
                         if isinstance(title_element, basestring):
                             text title_element xalign 0.5 ypos 45 anchor (0.5,0.5) size 22 style "menu_text_style" xsize 240
                         else:
                             add title_element xalign 0.5 ypos 45 anchor (0.5,0.5)
 
-                        $ column_elements = elements[1:]
                         viewport id title_element:
                             #scrollbars "vertical" #But if we aren't on a PC we need to make sure the player can scroll since they won't have a mouse wheel.
 
@@ -135,7 +133,7 @@ init 2: # Change name back to main_choice_display once fixed
                             xsize 360
                             ysize 588
                             vbox:
-                                for item in column_elements:
+                                for item in menu_items[count][1:]:
                                     if item.display:
                                         textbutton item.title:
                                             xsize 360
