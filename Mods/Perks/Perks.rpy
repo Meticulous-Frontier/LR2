@@ -1,4 +1,8 @@
 init -1 python:
+
+    def perk_save_load_null():  #TODO delete this with next release cycle, EG 28.1
+        return None
+        
     class Perks(renpy.store.object):
         def __init__(self):
             self.stat_perks = {}
