@@ -137,7 +137,6 @@ label SB_fetish_vaginal_family_threesome_label():
         "[the_person_one.possessive_title] looks back at you, still a little unsure of herself. You hold up your hands and beckon her."
         $ scene_manager.update_actor(the_person_one, position = "cowgirl")
         "You draw her into your arms. She melts into you giving you a kiss."
-        #$ SB_draw_two_person_scene(person_one = the_person_one, person_two = the_person_two, one_pos_x = 0.7, one_position = "kissing", two_position = "sitting")
         "Your lips lock together in a passionate kiss. [the_person_one.possessive_title]'s body melts into yours in surrender, even as [the_person_two.possessive_title] looks on."
         the_person_two.char "Oh my... [the_person_two.mc_title]... [the_person_one.name]..."
         "You move your hands down [the_person_one.possessive_title]'s waist and around to her butt. You give both cheeks a squeeze."

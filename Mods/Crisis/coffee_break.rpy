@@ -101,13 +101,9 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                         scene_manager.strip_actor_outfit_to_max_sluttiness(person_two, temp_sluttiness_boost = 50)
                         scene_manager.strip_actor_outfit_to_max_sluttiness(person_three, temp_sluttiness_boost = 50)
 
-                    # switch to SB ui
-                    #$ SB_draw_two_person_scene(person_one = person_two, person_two = person_three, one_pos_x = 0.7, one_position = "stand3", two_position = "stand4")
                     call start_threesome(person_two, person_three) from _call_coffee_break_threesome_test_3
-                    #call SB_threesome_description(person_two, person_three, SB_threesome_sixty_nine, make_floor(), 0, private = True, girl_in_charge = False) from _call_SB_threesome_description
-                    #$ SB_draw_two_person_scene(person_one = person_two, person_two = person_three, one_pos_x = 0.7)
+
                     person_two.char "Wow...this was...really good actually... You can join us anytime you want boss..."
-                    #$ SB_draw_two_person_scene(person_one = person_two, person_two = person_three, one_pos_x = 0.7, one_position = "walking_away", two_position = "walking_away")
                     $ scene_manager.update_actor(person_two, position = "walking_away", character_placement = character_center_flipped)
                     $ scene_manager.update_actor(person_three, position = "walking_away", character_placement = character_right)
                     "They pickup their clothes and leave you feeling very proud of yourself."
