@@ -127,8 +127,8 @@ label SB_fetish_anal_label(the_person):
             ###Anal Scene, standing variant###
             call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True) from _call_fuck_person_SBA10
             #$ the_person.SB_fetish = "anal sex"
-            $ the_person.sexy_opinions["anal sex"] = [FETISH_OPINION_VALUE, True]
-            $ the_person.sexy_opinions["anal creampies"] = [FETISH_OPINION_VALUE, True]
+            $ the_person.max_opinion_score("anal sex")
+            $ the_person.max_opinion_score("anal creampies")
             "[the_person.possessive_title] takes a few minutes to recover, then turns to you."
             $ the_person.draw_person()
             the_person.char "Wow, that was amazing, [the_person.mc_title]. I don't know what has been coming over me lately... I just can't stop thinking about you bending me over..."
@@ -856,8 +856,8 @@ label SB_starbuck_anal_intro():
     "Her body shudders from your dirty talk. She wiggles her ass back up against you."
     the_person.char "It's about fucking time! Give it to me good, [the_person.mc_title], you know I can take it!"
     call fuck_person(the_person, start_position = doggy_anal, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBA70
-    $ the_person.sexy_opinions["anal sex"] = [FETISH_OPINION_VALUE, True]
-    $ the_person.sexy_opinions["anal creampies"] = [FETISH_OPINION_VALUE, True]
+    $ the_person.max_opinion_score("anal sex")
+    $ the_person.max_opinion_score("anal creampies")
     $ the_person.special_role.append(anal_fetish_role)
     $ add_fuck_doll_collar_to_base_outfit(the_person)
     $ the_person.sex_skills["Anal"] = 6
@@ -1097,8 +1097,8 @@ label SB_stephanie_anal_fetish_label():
                 "She wiggles her ass back and forth in front of you as you pull your dick out."
                 the_person.char "Come on [the_person.mc_title], you know what I need!"
                 call fuck_person(the_person, start_position = SB_anal_standing) from _call_fuck_person_SBA090
-                $ the_person.sexy_opinions["anal sex"] = [FETISH_OPINION_VALUE, True]
-                $ the_person.sexy_opinions["anal creampies"] = [FETISH_OPINION_VALUE, True]
+                $ the_person.max_opinion_score("anal sex")
+                $ the_person.max_opinion_score("anal creampies")
                 $ the_person.special_role.append(anal_fetish_role)
                 $ add_fuck_doll_collar_to_base_outfit(the_person)
                 $ the_person.sex_skills["Anal"] = 6
@@ -1143,8 +1143,8 @@ label SB_stephanie_anal_fetish_label():
                 "She wiggles her ass back and forth in front of you as you pull your dick out."
                 the_person.char "Stick it in [the_person.mc_title]! I want to earn my special present!"
                 call fuck_person(the_person, start_position = SB_anal_standing) from _call_fuck_person_SBA091
-                $ the_person.sexy_opinions["anal sex"] = [FETISH_OPINION_VALUE, True]
-                $ the_person.sexy_opinions["anal creampies"] = [FETISH_OPINION_VALUE, True]
+                $ the_person.max_opinion_score("anal sex")
+                $ the_person.max_opinion_score("anal creampies")
                 $ the_person.special_role.append(anal_fetish_role)
                 $ add_fuck_doll_collar_to_base_outfit(the_person)
                 $ the_person.sex_skills["Anal"] = 6
@@ -1228,8 +1228,8 @@ label SB_stephanie_anal_fetish_label():
                 "She wiggles her ass back and forth in front of you as you pull your dick out."
                 the_person.char "Stick it in [the_person.mc_title]! I want to earn my special present!"
                 call fuck_person(the_person, start_position = SB_anal_standing) from _call_fuck_person_SBA092
-                $ the_person.sexy_opinions["anal sex"] = [FETISH_OPINION_VALUE, True]
-                $ the_person.sexy_opinions["anal creampies"] = [FETISH_OPINION_VALUE, True]
+                $ the_person.max_opinion_score("anal sex")
+                $ the_person.max_opinion_score("anal creampies")
                 $ the_person.special_role.append(anal_fetish_role)
                 $ add_fuck_doll_collar_to_base_outfit(the_person)
                 $ the_person.sex_skills["Anal"] = 6
@@ -1271,8 +1271,8 @@ label SB_stephanie_anal_fetish_label():
         "She looks at you expectantly."
         the_person.char "Well? Why are you still wearing clothes? You said you would help!"
         call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_desk(), girl_in_charge = True, position_locked = True) from _call_sex_description_SBA093
-        $ the_person.sexy_opinions["anal sex"] = [FETISH_OPINION_VALUE, True]
-        $ the_person.sexy_opinions["anal creampies"] = [FETISH_OPINION_VALUE, True]
+        $ the_person.max_opinion_score("anal sex")
+        $ the_person.max_opinion_score("anal creampies")
         $ the_person.special_role.append(anal_fetish_role)
         $ add_fuck_doll_collar_to_base_outfit(the_person)
         $ the_person.sex_skills["Anal"] = 6
@@ -1320,8 +1320,8 @@ label SB_stephanie_anal_fetish_label():
         "She looks at you expectantly."
         the_person.char "Well? Why are you still wearing clothes? You said you would help!"
         call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_desk(), skip_intro = False, girl_in_charge = True, position_locked = True) from _call_sex_description_SBA094
-        $ the_person.sexy_opinions["anal sex"] = [FETISH_OPINION_VALUE, True]
-        $ the_person.sexy_opinions["anal creampies"] = [FETISH_OPINION_VALUE, True]
+        $ the_person.max_opinion_score("anal sex")
+        $ the_person.max_opinion_score("anal creampies")
         $ the_person.special_role.append(anal_fetish_role)
         $ add_fuck_doll_collar_to_base_outfit(the_person)
         $ the_person.sex_skills["Anal"] = 6

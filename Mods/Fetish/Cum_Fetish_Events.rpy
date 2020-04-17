@@ -114,16 +114,16 @@ label SB_fetish_cum_label(the_person):
                 if the_person.outfit.has_mouth_cum():
                     #You came in her mouth! She now fetishes getting cum inside
                     #"Note, cum in mouth detected. Comment this later"
-                    the_person.sexy_opinions["drinking cum"] = [FETISH_OPINION_VALUE, True]
-                    the_person.sexy_opinions["creampies"] = [FETISH_OPINION_VALUE, True]
+                    the_person.max_opinion_score("drinking cum")
+                    the_person.max_opinion_score("creampies")
                     if not cum_internal_role in the_person.special_role:
                         the_person.special_role.append(cum_internal_role)
                         add_cum_slut_collar_to_base_outfit(the_person)
                 if the_person.outfit.has_face_cum():
                     #You came on her face! Now she fetishes facials and getting cum on her.
                     #"Note, cum on face detected. Comment this later"
-                    the_person.sexy_opinions["cum facials"] = [FETISH_OPINION_VALUE, True]
-                    the_person.sexy_opinions["being covered in cum"] = [FETISH_OPINION_VALUE, True]
+                    the_person.max_opinion_score("cum facials")
+                    the_person.max_opinion_score("being covered in cum")
                     if not cum_external_role in the_person.special_role:
                         the_person.special_role.append(cum_external_role)
                         add_cum_slut_collar_to_base_outfit(the_person)
@@ -279,8 +279,8 @@ label SB_fetish_mom_cum_label():
             "[the_person.possessive_title] is moaning uncontrollably around your spasming cock."
             $ the_person.cum_in_mouth()
             $ the_person.draw_person(position = "blowjob")
-            $ the_person.sexy_opinions["drinking cum"] = [FETISH_OPINION_VALUE, True]
-            $ the_person.sexy_opinions["creampies"] = [FETISH_OPINION_VALUE, True]
+            $ the_person.max_opinion_score("drinking cum")
+            $ the_person.max_opinion_score("creampies")
             $ the_person.special_role.append(cum_internal_role)
             $ add_cum_slut_collar_to_base_outfit(the_person)
             "You look down and see [the_person.possessive_title]. She uses her finger to wipe up a bit of cum that leaked out of her mouth and licks it clean."
@@ -295,8 +295,8 @@ label SB_fetish_mom_cum_label():
             "[the_person.possessive_title] moans uncontrollably with every spurt"
             $ the_person.cum_on_face()
             $ the_person.draw_person(position = "blowjob")
-            $ the_person.sexy_opinions["cum facials"] = [FETISH_OPINION_VALUE, True]
-            $ the_person.sexy_opinions["being covered in cum"] = [FETISH_OPINION_VALUE, True]
+            $ the_person.max_opinion_score("cum facials")
+            $ the_person.max_opinion_score("being covered in cum")
             $ the_person.special_role.append(cum_external_role)
             $ add_cum_slut_collar_to_base_outfit(the_person)
             "Slowly recovering, you look at [the_person.possessive_title]'s cum covered face. Her eyes are closed and she is absentmindedly playing with some of the cum that is starting to run down her neck."
@@ -381,16 +381,16 @@ label SB_fetish_lily_cum_label():
         if the_person.outfit.has_mouth_cum():
             #You came in her mouth! She now fetishes getting cum inside
             #"Note, cum in mouth detected. Comment this later"
-            the_person.sexy_opinions["drinking cum"] = [FETISH_OPINION_VALUE, True]
-            the_person.sexy_opinions["creampies"] = [FETISH_OPINION_VALUE, True]
+            the_person.max_opinion_score("drinking cum")
+            the_person.max_opinion_score("creampies")
             if not cum_internal_role in the_person.special_role:
                 the_person.special_role.append(cum_internal_role)
                 add_cum_slut_collar_to_base_outfit(the_person)
         if the_person.outfit.has_face_cum():
             #You came on her face! Now she fetishes facials and getting cum on her.
             #"Note, cum on face detected. Comment this later"
-            the_person.sexy_opinions["cum facials"] = [FETISH_OPINION_VALUE, True]
-            the_person.sexy_opinions["being covered in cum"] = [FETISH_OPINION_VALUE, True]
+            the_person.max_opinion_score("cum facials")
+            the_person.max_opinion_score("being covered in cum")
             if not cum_external_role in the_person.special_role:
                 the_person.special_role.append(cum_external_role)
                 add_cum_slut_collar_to_base_outfit(the_person)
@@ -520,16 +520,16 @@ label SB_fetish_stephanie_cum_label():
                     if the_person.outfit.has_mouth_cum():
                         #You came in her mouth! She now fetishes getting cum inside
                         #"Note, cum in mouth detected. Comment this later"
-                        the_person.sexy_opinions["drinking cum"] = [FETISH_OPINION_VALUE, True]
-                        the_person.sexy_opinions["creampies"] = [FETISH_OPINION_VALUE, True]
+                        the_person.max_opinion_score("drinking cum")
+                        the_person.max_opinion_score("creampies")
                         if not cum_internal_role in the_person.special_role:
                             the_person.special_role.append(cum_internal_role)
                             add_cum_slut_collar_to_base_outfit(the_person)
                     if the_person.outfit.has_face_cum():
                         #You came on her face! Now she fetishes facials and getting cum on her.
                         #"Note, cum on face detected. Comment this later"
-                        the_person.sexy_opinions["cum facials"] = [FETISH_OPINION_VALUE, True]
-                        the_person.sexy_opinions["being covered in cum"] = [FETISH_OPINION_VALUE, True]
+                        the_person.max_opinion_score("cum facials")
+                        the_person.max_opinion_score("being covered in cum")
                         if not cum_external_role in the_person.special_role:
                             the_person.special_role.append(cum_external_role)
                             add_cum_slut_collar_to_base_outfit(the_person)
@@ -576,16 +576,16 @@ label SB_fetish_stephanie_cum_label():
                     if the_person.outfit.has_mouth_cum():
                         #You came in her mouth! She now fetishes getting cum inside
                         #"Note, cum in mouth detected. Comment this later"
-                        the_person.sexy_opinions["drinking cum"] = [FETISH_OPINION_VALUE, True]
-                        the_person.sexy_opinions["creampies"] = [FETISH_OPINION_VALUE, True]
+                        the_person.max_opinion_score("drinking cum")
+                        the_person.max_opinion_score("creampies")
                         if not cum_internal_role in the_person.special_role:
                             the_person.special_role.append(cum_internal_role)
                             add_cum_slut_collar_to_base_outfit(the_person)
                     if the_person.outfit.has_face_cum():
                         #You came on her face! Now she fetishes facials and getting cum on her.
                         #"Note, cum on face detected. Comment this later"
-                        the_person.sexy_opinions["cum facials"] = [FETISH_OPINION_VALUE, True]
-                        the_person.sexy_opinions["being covered in cum"] = [FETISH_OPINION_VALUE, True]
+                        the_person.max_opinion_score("cum facials")
+                        the_person.max_opinion_score("being covered in cum")
                         if not cum_external_role in the_person.special_role:
                             the_person.special_role.append(cum_external_role)
                             add_cum_slut_collar_to_base_outfit(the_person)
@@ -665,16 +665,16 @@ label SB_fetish_stephanie_cum_label():
                     if the_person.outfit.has_mouth_cum():
                         #You came in her mouth! She now fetishes getting cum inside
                         #"Note, cum in mouth detected. Comment this later"
-                        the_person.sexy_opinions["drinking cum"] = [FETISH_OPINION_VALUE, True]
-                        the_person.sexy_opinions["creampies"] = [FETISH_OPINION_VALUE, True]
+                        the_person.max_opinion_score("drinking cum")
+                        the_person.max_opinion_score("creampies")
                         if not cum_internal_role in the_person.special_role:
                             the_person.special_role.append(cum_internal_role)
                             add_cum_slut_collar_to_base_outfit(the_person)
                     if the_person.outfit.has_face_cum():
                         #You came on her face! Now she fetishes facials and getting cum on her.
                         #"Note, cum on face detected. Comment this later"
-                        the_person.sexy_opinions["cum facials"] = [FETISH_OPINION_VALUE, True]
-                        the_person.sexy_opinions["being covered in cum"] = [FETISH_OPINION_VALUE, True]
+                        the_person.max_opinion_score("cum facials")
+                        the_person.max_opinion_score("being covered in cum")
                         if not cum_external_role in the_person.special_role:
                             the_person.special_role.append(cum_external_role)
                             add_cum_slut_collar_to_base_outfit(the_person)
@@ -709,16 +709,16 @@ label SB_fetish_stephanie_cum_label():
             if the_person.outfit.has_mouth_cum():
                 #You came in her mouth! She now fetishes getting cum inside
                 #"Note, cum in mouth detected. Comment this later"
-                the_person.sexy_opinions["drinking cum"] = [FETISH_OPINION_VALUE, True]
-                the_person.sexy_opinions["creampies"] = [FETISH_OPINION_VALUE, True]
+                the_person.max_opinion_score("drinking cum")
+                the_person.max_opinion_score("creampies")
                 if not cum_internal_role in the_person.special_role:
                     the_person.special_role.append(cum_internal_role)
                     add_cum_slut_collar_to_base_outfit(the_person)
             if the_person.outfit.has_face_cum():
                 #You came on her face! Now she fetishes facials and getting cum on her.
                 #"Note, cum on face detected. Comment this later"
-                the_person.sexy_opinions["cum facials"] = [FETISH_OPINION_VALUE, True]
-                the_person.sexy_opinions["being covered in cum"] = [FETISH_OPINION_VALUE, True]
+                the_person.max_opinion_score("cum facials")
+                the_person.max_opinion_score("being covered in cum")
                 if not cum_external_role in the_person.special_role:
                     the_person.special_role.append(cum_external_role)
                     add_cum_slut_collar_to_base_outfit(the_person)
@@ -766,16 +766,16 @@ label SB_fetish_stephanie_cum_label():
             if the_person.outfit.has_mouth_cum():
                 #You came in her mouth! She now fetishes getting cum inside
                 #"Note, cum in mouth detected. Comment this later"
-                the_person.sexy_opinions["drinking cum"] = [FETISH_OPINION_VALUE, True]
-                the_person.sexy_opinions["creampies"] = [FETISH_OPINION_VALUE, True]
+                the_person.max_opinion_score("drinking cum")
+                the_person.max_opinion_score("creampies")
                 if not cum_internal_role in the_person.special_role:
                     the_person.special_role.append(cum_internal_role)
                     add_cum_slut_collar_to_base_outfit(the_person)
             if the_person.outfit.has_face_cum():
                 #You came on her face! Now she fetishes facials and getting cum on her.
                 #"Note, cum on face detected. Comment this later"
-                the_person.sexy_opinions["cum facials"] = [FETISH_OPINION_VALUE, True]
-                the_person.sexy_opinions["being covered in cum"] = [FETISH_OPINION_VALUE, True]
+                the_person.max_opinion_score("cum facials")
+                the_person.max_opinion_score("being covered in cum")
                 if not cum_external_role in the_person.special_role:
                     the_person.special_role.append(cum_external_role)
                     add_cum_slut_collar_to_base_outfit(the_person)

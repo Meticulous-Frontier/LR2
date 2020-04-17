@@ -551,6 +551,25 @@ init -1 python:
     # Adds a function that edits and adds opinions. It also appends to the vanilla opinion pool.
     Person.add_opinion = add_opinion
 
+    def update_opinion_with_score(self, topic, score, add_to_log = True):
+        if topic in sexy_opinions_list:
+            if topic in self.sexy_opinions:
+                self.sexy_opinions[topic][0] = score
+            else:
+                self.sexy_opinions[topic] = [score, add_to_log]
+
+        if topic in opinions_list:                
+            if topic in self.opinions:
+                self.opinions[topic][0] = score
+            else:
+                self.opinions[topic] = [score, add_to_log]
+
+        if add_to_log:
+            mc.log_event((self.title or self.name) + " " + opinion_score_to_string(score) + " " + str(topic), "float_text_green")
+        return
+
+    Person.update_opinion_with_score = update_opinion_with_score
+
     ## Increase the opinion on a specific topic (opinion)
     def increase_opinion_score(self, topic, add_to_log = True):
         score = self.get_opinion_score(topic)
@@ -558,14 +577,9 @@ init -1 python:
         if score < 2:
             score += 1
 
-        if topic in self.sexy_opinions:
-            self.sexy_opinions[topic][0] = score
-        if topic in self.opinions:
-            self.opinions[topic][0] = score
-
-        if add_to_log:
-            mc.log_event((self.title or self.name) + " " + opinion_score_to_string(score) + " " + str(topic), "float_text_green")
+        self.update_opinion_with_score(topic, score, add_to_log)
         return
+
     # Add increase opinion function to person class
     Person.increase_opinion_score = increase_opinion_score
 
@@ -576,14 +590,9 @@ init -1 python:
         if score > -2:
             score -= 1
 
-        if topic in self.sexy_opinions:
-            self.sexy_opinions[topic][0] = score
-        if topic in self.opinions:
-            self.opinions[topic][0] = score
-
-        if add_to_log:
-            mc.log_event((self.title or self.name) + " " + opinion_score_to_string(score) + " " + str(topic), "float_text_green")
+        self.update_opinion_with_score(topic, score, add_to_log)
         return
+
     # Add decrease opinion function to person class
     Person.decrease_opinion_score = decrease_opinion_score
 
@@ -591,13 +600,7 @@ init -1 python:
     def max_opinion_score(self, topic, add_to_log = True):
         score = self.get_opinion_score(topic)
         if score < 2:
-            if topic in self.sexy_opinions:
-                self.sexy_opinions[topic][0] = 2
-            if topic in self.opinions:
-                self.opinions[topic][0] = 2
-
-            if add_to_log:
-                mc.log_event((self.title or self.name) + " " + opinion_score_to_string(2) + " " + str(topic), "float_text_green")
+            self.update_opinion_with_score(topic, 2, add_to_log)
         return
 
     # Add max opinion function to person class

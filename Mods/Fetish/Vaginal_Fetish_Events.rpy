@@ -174,8 +174,8 @@ label SB_fetish_vaginal_label(the_person):
             "That night, you have many pleasant dreams involving [the_person.possessive_title] and sex in all kinds of crazy positions."
             $ SB_random_fetish_key = get_random_from_list(FETISH_VAGINAL_OPINION_LIST)
             "A couple times in the night, you stir slightly when you hear [the_person.possessive_title] making moaning noises in their sleep, and talking about [SB_random_fetish_key]!"
-            $ the_person.sexy_opinions["vaginal sex"] = [FETISH_OPINION_VALUE, True]
-            $ the_person.sexy_opinions[SB_random_fetish_key] = [FETISH_OPINION_VALUE, True]
+            $ the_person.max_opinion_score("vaginal sex")
+            $ the_person.max_opinion_score(SB_random_fetish_key)
 
             "She's been under the influence of your serums for a while now... you wonder if she's developed a fetish..."
             $ the_person.special_role.append(vaginal_fetish_role)
@@ -368,9 +368,8 @@ label SB_fetish_mom_vaginal_label():
     ###Sex scene, missionary###   ###TODO: consider writing a variant of this because the default intro is going to be confusing###
     call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBV30
     #$ the_person.SB_fetish = "vaginal sex"
-    $ SB_random_fetish_key = get_random_from_list(FETISH_VAGINAL_OPINION_LIST)
-    $ the_person.sexy_opinions["vaginal sex"] = [FETISH_OPINION_VALUE, True]
-    $ the_person.sexy_opinions[SB_random_fetish_key] = [FETISH_OPINION_VALUE, True]
+    $ the_person.max_opinion_score("vaginal sex")
+    $ the_person.max_opinion_score(get_random_from_list(FETISH_VAGINAL_OPINION_LIST))
     "That night, after fucking [the_person.possessive_title], you share your bed together. As you fall asleep, you consider the implications of what happened. "
     "It is clear that [the_person.possessive_title] is now firmly under the influence of your serums and has developed a fetish for vaginal sex."
     "Her naked flesh soft up against yours gives you many sexy dreams that night."
@@ -428,9 +427,8 @@ label SB_fetish_lily_vaginal_label():
     ###Sex scene, missionary###   ###TODO: consider writing a variant of this because the default intro is going to be confusing###
     call fuck_person(the_person, start_position = doggy, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBV40
     #$ the_person.SB_fetish = "vaginal sex"
-    $ SB_random_fetish_key = get_random_from_list(FETISH_VAGINAL_OPINION_LIST)
-    $ the_person.sexy_opinions[SB_random_fetish_key] = [FETISH_OPINION_VALUE, True]
-    $ the_person.sexy_opinions["vaginal sex"] = [FETISH_OPINION_VALUE, True]
+    $ the_person.max_opinion_score("vaginal sex")
+    $ the_person.max_opinion_score(get_random_from_list(FETISH_VAGINAL_OPINION_LIST))
     the_person.char "Oh... that was so good. [the_person.mc_title]... can I spend the night with you? I don't wanna sleep alone tonight..."
     "That night, after fucking [the_person.possessive_title], you share your bed together. As you fall asleep, you consider the implications of what happened. "
     "It is clear that [the_person.possessive_title] is now firmly under the influence of your serums and has developed a fetish for vaginal sex."

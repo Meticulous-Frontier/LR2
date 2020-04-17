@@ -30,8 +30,7 @@ init -1 python:
         random_fetish_key = get_random_from_list(fetish_list)
         opinion_score = the_person.get_opinion_score(random_fetish_key)
         if opinion_score < max_score:
-            opinion_score += 1
-            the_person.sexy_opinions[random_fetish_key] = [opinion_score, True]
+            the_person.increase_opinion_score(random_fetish_key)
         return
 
     def fetish_basic_function_on_turn(the_person, add_to_log): #Developes basic sexual desires based on suggestability. At low tiers, turns hates to neutral.

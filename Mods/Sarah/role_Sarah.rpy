@@ -1196,13 +1196,11 @@ label Sarah_tits_reveal_label():
     if the_report.get("girl orgasms", 0) > 0:
         the_person.char "Oh my god, I came so hard... I can't believe it. That felt so good! I need to do that again soon!"
         if the_person.get_opinion_score("showing her tits") < 2:
-            $ the_person.sexy_opinions["showing her tits"] = [2, True]
-            "[the_person.title] now loves showing her tits!"
+            $ the_person.update_opinion_with_score("showing her tits", 2)
     else:
         the_person.char "Mmm that was so hot. I can't wait to try that again..."
         if the_person.get_opinion_score("showing her tits") < 1:
-            $ the_person.sexy_opinions["showing her tits"] = [1, True]
-            "[the_person.title] now likes showing her tits!"
+            $ the_person.update_opinion_with_score("showing her tits", 1)
     the_person.char "Okay... let me go get cleaned up... then I'll come back and we can start our regular Monday meeting!"
     $ the_person.draw_person(position = "walking_away")
     "She gets up and leaves the room. You smile to yourself, thinking about how good her new tits felt around your cock."
@@ -2100,9 +2098,9 @@ label Sarah_ask_for_baby_label():
             "You get naked with [the_person.possessive_title]. She rolls on her back and spreads her legs."
             the_person.char "Come fill me up, [the_person.mc_title]!"
             if the_person.get_opinion_score("creampies") < 2:   #From now on, she loves getting creamed, and has relevant dialogue
-                $ the_person.sexy_opinions["creampies"] = [2, True]
+                $ the_person.update_opinion_with_score("creampies", 2)
             if the_person.get_opinion_score("bareback sex") < 2:    #TODO see if we can actually make her refuse condoms?
-                $ the_person.sexy_opinions["bareback sex"] = [2, True]
+                $ the_person.update_opinion_with_score("bareback sex", 2)
             $ the_person.event_triggers_dict["try_for_baby"] = 1
             $ the_person.event_triggers_dict["fertile_start_day"] = day  #Her 5 day fertility period starts today.
             call Sarah_fertile_period_start_label(the_person) from sarah_initial_fertile_period_start_01

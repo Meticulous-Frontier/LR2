@@ -636,10 +636,8 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
 
     else:
         person_choice.char "Thanks for calling me in... I guess I'd better go get back to work!"
-    if opinion_chat in opinions_list:
-        $ person_choice.opinions[opinion_chat] = [max_opinion, True]
-    else:
-        $ person_choice.sexy_opinions[opinion_chat] = [max_opinion, True]
+    if person_choice.get_opinion_score(opinion_chat) < max_opinion:
+        $ person_choice.update_opinion_with_score(opinion_chat, max_opinion)
     $ mc.listener_system.fire_event("HR_opinion_improvement", the_person = person_choice)
     $ scene_manager.update_actor(person_choice, position = "walking_away", character_placement = character_left_flipped)
     $ scene_manager.update_actor(the_person, position = "stand2", character_placement = character_right)

@@ -360,7 +360,7 @@ label increase_slave_submission_label(the_person):
     mc.name "[the_person.title], I sense you have not yet completely accepted me as your master."
     "[the_person.possessive_title] starts to shake her head, but you simply hold up your hand to stop her before she starts."
     mc.name "Do you want to be my devoted and loyal slave?"
-    if the_person.obedience < 200:
+    if the_person.obedience < 200 or the_person.get_opinion_score("being submissive") < 2:
         "She looks at you intently..."
         the_person.char "No Master, I've got other duties that prevent that."
         mc.name "It seems you need a punishment for this insolence."
@@ -380,18 +380,20 @@ label increase_slave_submission_label(the_person):
         mc.name "Very well, slave, I will be demanding your complete submission next time."
         $ the_person.draw_person(position = "stand2", emotion = "angry")
         $ the_person.change_obedience(10)
-        if the_person.obedience < 200:
+        if the_person.obedience < 200 or the_person.get_opinion_score("being submissive") < 2:
             "She turns around with a slight defiant stare..."
+            $ the_person.increase_opinion_score("being submissive")
         else:
             "She turns around, with a faint smile and devotion in her eyes."
             $ the_person.change_stats(arousal = 20)
+
         the_person.char "Yes Master, I will try to please you better next time."
     else:
         "She looks at you with tears in her eyes."
         the_person.char "Yes Master, I want to serve you as a good slave should, unconditionally and loyal."
         $ the_person.change_stats(happiness = 10, love = 10, arousal = 30)
         "You smile and pat her on the head."
-        $ the_person.sexy_opinions["being submissive"] = [2, True]
+        $ the_person.max_opinion_score("being submissive")
         if not the_person.outfit.full_access():
             mc.name "Now standup and take of your clothes."
             $ the_person.strip_outfit(position = "stand3", emotion = "happy")

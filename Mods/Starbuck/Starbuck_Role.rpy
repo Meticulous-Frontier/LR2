@@ -739,8 +739,7 @@ label starbuck_sex_store_promo_one_label(the_person):
             $ starbuck.draw_person(position = "stand2", emotion = "happy")
             the_person.char "Mmm... That was nice. It's been a while since I sucked on a hard cock. It was kinda nice!"
             if the_person.get_opinion_score("giving blowjobs") < 1:
-                $ the_person.sexy_opinions["giving blowjobs"] = [1, True]
-                "[the_person.possessive_title] now likes giving blowjobs!"
+                $ the_person.update_opinion_with_score("giving blowjobs", 1)
             "You are still recovering from your orgasm. You take a look at her phone and start looking at the pictures you got."
             the_person.char "If this advertisement works, we'll have to make more right?"
             mc.name "Definitely. Alright, I'll go ahead and get some advertisements done, and we'll see if we can't get better foot traffic in here."
@@ -891,8 +890,7 @@ label starbuck_sex_store_promo_two_label(the_person):
             the_person.char "Oh my... this is hot... I didn't think I would like this but... its kinda hot watching yourself on video get fucked..."
             "You raise an eyebrow. Is she starting to like showing off a bit?"
             if the_person.get_opinion_score("public sex") < 1:
-                $ the_person.sexy_opinions["public sex"] = [1, True]
-                "[the_person.possessive_title] now likes public sex!"
+                $ the_person.update_opinion_with_score("public sex", 1)
             "You chat with her for a few minutes about the details of setting up a review site, but eventually its time to say goodbye."
             the_person.char "Thanks again for everything [the_person.mc_title]. Don't be a stranger now!"
         "Refuse":  #Lol really? I guess some people may not have the energy.
@@ -1054,8 +1052,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
         the_person.char "I've missed that, having someone take control of me and just fuck my brains out..."
         "While she is normally a very independent woman, you think maybe [the_person.possessive_title] is starting to get a bit of a submissive streak when you are around."
         if the_person.get_opinion_score("being submissive") < 1:
-            $ the_person.sexy_opinions["being submissive"] = [1, True]
-            "[the_person.possessive_title] now likes being submissive!"
+            $ the_person.update_opinion_with_score("being submissive", 1)
     the_person.char "So... I'm just gonna throw this out there. I have at least 4 other sets of fuzzy cuffs... we could totally try them out anytime you want..."
     "[the_person.possessive_title] slowly stands up. She walks over toward you."
     $ the_person.reset_arousal()
@@ -1221,11 +1218,9 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
         # $ perk_system.add_item_perk(item_perk_male_strapon, "Male Strapon")
         $ male_strapon_unlock() #TODO test this
     if the_person.get_opinion_score("being submissive") < 2:
-        $ the_person.sexy_opinions["being submissive"] = [2, True]
-        "[the_person.possessive_title] now loves being submissive!"
+        $ the_person.update_opinion_with_score("being submissive", 2)
     if the_person.get_opinion_score("anal sex") < 1:
-        $ the_person.sexy_opinions["anal sex"] = [1, True]
-        "[the_person.possessive_title] now likes being anal sex!"
+        $ the_person.update_opinion_with_score("anal sex", 1)
     "You grab the camera, and start looking at the footage."
     mc.name "Okay, you take it easy for a bit, I'm gonna go work on that advertisement video!"
     $ the_person.draw_person(position = "walking_away")

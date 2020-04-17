@@ -11,8 +11,6 @@ init -3 python:
     # these fetishes could be used for 'slave' / 'dominatrix'
     FETISH_BDSM_OPTION_LIST = ["being submissive", "taking control"]
 
-    FETISH_OPINION_VALUE = 2       #To work on balance issues#
-
     SB_MOD_MC_AROUSAL_MULT = 1.0     #Default arousal multiplier for the MC
     SB_MOD_MC_AROUSAL_1ST_MULT = 0.9     #Arousal multiplier after the first upgrade
     SB_MOD_MC_AROUSAL_2ND_MULT = 0.8     #Arousal multiplier after second upgrade
