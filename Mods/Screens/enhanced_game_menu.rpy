@@ -90,6 +90,13 @@ init 2:
 
         use navigation
 
+        if "stephanie" in globals():
+            textbutton _("Back To Game") ypos 970:
+                style "return_button"
+
+                action Return()
+
+
         label title
 
         imagebutton idle mod_image hover mod_hover_image action OpenURL("https://f95zone.to/threads/lab-rats-2-mods.32881/#post-2102913") xpos 20 ypos 1000
