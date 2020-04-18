@@ -34,7 +34,7 @@ init 2:
                 text "[config.version]":
                     style "main_menu_version"
 
-        imagebutton idle mod_image hover mod_hover_image action OpenURL("https://f95zone.to/threads/lab-rats-2-mods.32881/#post-2102913") xpos 20 ypos 1000
+        imagebutton idle mod_image hover mod_hover_image action OpenURL("https://f95zone.to/threads/lab-rats-2-mods.32881/#post-2102913") xpos 20 ypos 980
                 
 
     screen game_menu(title, scroll=None):
@@ -99,7 +99,7 @@ init 2:
 
         label title
 
-        imagebutton idle mod_image hover mod_hover_image action OpenURL("https://f95zone.to/threads/lab-rats-2-mods.32881/#post-2102913") xpos 20 ypos 1000
+        imagebutton idle mod_image hover mod_hover_image action OpenURL("https://f95zone.to/threads/lab-rats-2-mods.32881/#post-2102913") xpos 20 ypos 980
 
         if main_menu:
             key "game_menu" action ShowMenu("main_menu")
