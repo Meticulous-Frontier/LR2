@@ -7,8 +7,8 @@ init 5 python: # add to stack later then other mods
 
 init -1 python:
     # override some of the default settings to improve performance
-    config.image_cache_size = 12
-    config.image_cache_size_mb = 1024
+    config.image_cache_size = 20
+    config.image_cache_size_mb = 2048
 
 
 label activate_compatibility_fix(stack):

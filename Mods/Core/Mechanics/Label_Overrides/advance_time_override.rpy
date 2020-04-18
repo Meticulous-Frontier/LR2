@@ -111,6 +111,9 @@ init 5 python:
         advance_time_random_crisis_action, advance_time_mandatory_morning_crisis_action, advance_time_random_morning_crisis_action, advance_time_daily_serum_dosage_action,
         advance_time_people_run_move_action, advance_time_bankrupt_check_action, advance_time_stay_wet_action, advance_time_collar_person_action, advance_time_mandatory_vibe_company_action]
 
+    # sort list on execution priority
+    advance_time_action_list.sort(key = lambda x: x.priority)
+
     # actions that trigger events
     advance_time_event_action_list = [advance_time_mandatory_crisis_action, advance_time_random_crisis_action, advance_time_mandatory_morning_crisis_action, advance_time_random_morning_crisis_action]
 
@@ -255,20 +258,18 @@ label advance_time_enhanced(no_events = False):
 
     python:
         #renpy.say("", "advance_time_enhanced -> location: " + mc.location.name + ", time: [time_of_day]") # DEBUG
-        advance_time_count = 0 # NOTE: Count and Max might need to be unique for each label since it carries over.
+        count = 0 # NOTE: Count and Max might need to be unique for each label since it carries over.
         advance_time_max_actions = len(advance_time_action_list) # This list is automatically sorted by priority due to the class properties.
-        advance_time_action_list_sorted = sorted(advance_time_action_list, key = lambda x: x.priority)
         people_to_process = build_people_to_process()
 
-    while advance_time_count < advance_time_max_actions:
-        $ act = advance_time_action_list_sorted[advance_time_count]
-        if not no_events or (not act in advance_time_event_action_list):
-            if act.is_action_enabled(): # Only run actions that have their requirement met.
+    while count < advance_time_max_actions:
+        if not no_events or (not advance_time_action_list[count] in advance_time_event_action_list):
+            if advance_time_action_list[count].is_action_enabled(): # Only run actions that have their requirement met.
                 # $ renpy.say("", "Run: " + act.name)
-                $ act.call_action()
+                $ advance_time_action_list[count].call_action()
                 $ renpy.scene("Active")
 
-        $ advance_time_count += 1
+        $ count += 1
 
     python:
         # increase crisis chance (every time slot)
