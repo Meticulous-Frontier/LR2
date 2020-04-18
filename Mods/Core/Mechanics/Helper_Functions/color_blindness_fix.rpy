@@ -44,20 +44,21 @@ init 5 python:
     add_label_hijack("normal_start", "activate_color_blindness_fix")
     add_label_hijack("after_load", "update_color_blindness_fix")
 
-label activate_color_blindness_fix(stack):
-    python:
+    def color_blindness_fix_update_people():
         for person in all_people_in_the_game([mc]):
             updated_person_colors(person)
+        return
 
+label activate_color_blindness_fix(stack):
+    python:
+        color_blindness_fix_update_people()
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return
 
 label update_color_blindness_fix(stack):
     python:
-        for person in all_people_in_the_game([mc]):
-            updated_person_colors(person)
-
+        color_blindness_fix_update_people()
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return

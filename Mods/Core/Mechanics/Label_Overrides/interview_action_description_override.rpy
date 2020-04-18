@@ -64,6 +64,7 @@ label interview_action_description_enhanced:
                     person.remove_person_from_game()
 
                 candidates.clear() #Prevent it from using up extra memory
+                person = None
 
             call advance_time from _call_advance_time_interview_action_enhanced
         "Never mind":
