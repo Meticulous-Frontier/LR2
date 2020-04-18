@@ -88,7 +88,7 @@ init 2 python:
                 mi.is_sensitive = False
 
             if mi.display:
-                if mi.the_tooltip:
+                if the_person and the_person.title and isinstance(mi.the_tooltip, basestring):
                     mi.the_tooltip = mi.the_tooltip.replace("[the_person.title]", the_person.title)
                 result.append(mi)
         return result
