@@ -88,6 +88,8 @@ init 2 python:
                 mi.is_sensitive = False
 
             if mi.display:
+                if mi.the_tooltip:
+                    mi.the_tooltip = mi.the_tooltip.replace("[the_person.title]", the_person.title)
                 result.append(mi)
         return result
 
@@ -96,7 +98,7 @@ init 2 python:
         renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="Active", what= item.display_func(lighting = mc.location.get_lighting_conditions(), **item.person_preview_args), tag=item.display_key)
 
 
-init 2: # Change name back to main_choice_display once fixed
+init 2:
     screen main_choice_display(elements_list, draw_hearts_for_people = True, person_preview_args = None): #Elements_list is a list of lists, with each internal list receiving an individual column
         #The first element in a column should be the title, either text or a displayable. After that it should be a tuple of (displayable/text, return_value).
 
