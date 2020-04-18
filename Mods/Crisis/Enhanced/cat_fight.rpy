@@ -213,7 +213,8 @@ label cat_fight_crisis_enhanced_label():
                             "[winner.title] screams loudly and tries to grab [loser.title] by the waist. [loser.title] is fast enough to get out of the way, and they square off again as the fight continues."
 
                     $ the_clothing = loser.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
-
+                $ other_clothing = None
+                $ the_clothing = None
                 $ scene_manager.update_actor(loser, emotion = "sad")
                 "[loser.title] looks down at herself. She seems to realize for the first time how little she's wearing now."
                 loser.char "Look what you've done! Oh god, I need to... I need to go!"

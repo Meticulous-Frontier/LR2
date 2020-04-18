@@ -73,8 +73,7 @@ label futuristic_serum_stage_2_enhanced_label(the_person):
         if go_first != pick_2:
             scene_manager.remove_actor(pick_2)
 
-        free_position = scene_manager.get_free_position_tuple()
-        scene_manager.add_actor(the_person, position="stand4", emotion="happy", character_placement = free_position[1])
+        scene_manager.add_actor(the_person, position="stand4", emotion="happy", character_placement = scene_manager.get_free_position_tuple()[1])
 
     the_person.char "Are you ready [go_first.name]? Come with me, you two can wait here until we're done."
 

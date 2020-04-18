@@ -450,7 +450,10 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
         if the_person.love >= 60 and the_person.sluttiness >= 30 - (the_person.get_opinion_score("cheating on men") * 5) and report_log.get("girl orgasms",0) >= 1: #If she loves you enoguh, is moderately slutty, and you made her cum
             call affair_check(the_person, report_log) from _call_affair_check_bugfix
 
-    $ update_person_sex_record(the_person, report_log)
+    python:
+        update_person_sex_record(the_person, report_log)
+        position_choice = None
+        object_choice = None
 
     # We return the report_log so that events can use the results of the encounter to figure out what to do.
     return report_log

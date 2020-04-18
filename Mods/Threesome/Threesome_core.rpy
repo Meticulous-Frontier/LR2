@@ -565,10 +565,6 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
         $ the_person_two.arousal = (the_person_two.arousal / 2)
 
 
-
-    $ mc.condom = False
-    $ mc.recently_orgasmed = False
-
     #Disabling affair check for now. Doesn't really make sense in a threesome.
     # if affair_ask_after and private and ask_girlfriend_requirement(the_person_one) is True and not the_person_one.relationship == "Single":
     #     if the_person_one.love >= 60 and the_person_one.sluttiness >= 30 - (the_person_one.get_opinion_score("cheating on men") * 5) and report_log.get("girl orgasms",0) >= 1: #If she loves you enoguh, is moderately slutty, and you made her cum
@@ -585,6 +581,15 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
         else:
             the_person_two.sex_record["Threesomes"] += 1
 
+        mc.condom = False
+        mc.recently_orgasmed = False
+        active_mc_position = None
+        object_choice = None
+        position_choice = None
+        round_choice = None
+        options = None
+        the_person_one = None
+        the_person_two = None
 
     # We return the report_log so that events can use the results of the encounter to figure out what to do.
     return report_log

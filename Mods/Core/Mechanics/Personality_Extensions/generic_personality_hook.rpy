@@ -228,11 +228,11 @@ init -1 python:
         return person
 
     def update_characters():
-        # update characters in game
         for person in all_people_in_the_game(unique_character_list):
             update_random_person(person)
+        return
 
-        # update default special characters opinions
+    def update_special_characters_opinions():
         for person in unique_character_list:
             update_person_opinions(person)
 
@@ -296,6 +296,13 @@ init -1 python:
             stripclub_strippers.append(person)
         return
 
+    def update_main_character_actions():
+        for action in main_character_actions_list:
+            if action not in mc.main_character_actions:
+                mc.main_character_actions.append(action)
+        return
+
+
 label activate_generic_personality(stack):
     python:
         create_unique_character_list()
@@ -306,12 +313,11 @@ label activate_generic_personality(stack):
         for i in range(2):
             create_hooker()
 
-        # add mc actions
-        for action in main_character_actions_list:
-            if action not in mc.main_character_actions:
-                mc.main_character_actions.append(action)
+        update_main_character_actions()
 
         update_characters()
+
+        update_special_characters_opinions()
 
         update_unique_character_wardrobes()
 
@@ -325,14 +331,9 @@ label update_generic_personality(stack):
     python:
         create_unique_character_list()
 
-        # add mc actions
-        for action in main_character_actions_list:
-            if action not in mc.main_character_actions:
-                mc.main_character_actions.append(action)
+        update_main_character_actions()
 
-        # update characters in game (save game)
-        for person in all_people_in_the_game(unique_character_list):
-            update_random_person(person)
+        update_characters()
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
