@@ -3,6 +3,7 @@ init 10 python:
     add_label_hijack("after_load", "label_override_actions_hook")
 
     def update_advance_time_action_list():
+        global advance_time_action_list
         for adv_time_action in advance_time_action_list:
             found = find_in_set(adv_time_action, ActionMod._instances)
             if found:
