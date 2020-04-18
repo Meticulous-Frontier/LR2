@@ -32,19 +32,19 @@ init -2 python:
     def SB_mod_setting_maximum_fetishes_name():
         return "Max " + str(store.max_fetishes_per_person) + " Fetishes per person"
 
+    def SB_mod_change_action_mod_settings():
+        tuple_list = []
+        tuple_list.append(["Difficulty: " + SB_mod_setting_difficulty_name() + " (tooltip)Changes the return on investment you get from the sex shop.", "SB_mod_setting_change_difficulty"])
+        tuple_list.append([SB_mod_setting_maximum_fetishes_name(), "SB_mod_setting_change_maximum_fetishes"])
+        tuple_list.append(["Back","Back"])
+        return renpy.display_menu(tuple_list, True, "Choice")
+
 
 # TODO: Add difficulty configuration
 label SB_mod_options_menu:
     python:
         while True:
-            tuple_list = []
-
-            tuple_list.append(["Difficulty: " + SB_mod_setting_difficulty_name() + " (tooltip)Changes the return on investment you get from the sex shop.", "SB_mod_setting_change_difficulty"])
-            tuple_list.append([SB_mod_setting_maximum_fetishes_name(), "SB_mod_setting_change_maximum_fetishes"])
-            tuple_list.append(["Back","Back"])
-
-            action_mod_choice = renpy.display_menu(tuple_list, True, "Choice")
-
+            action_mod_choice = SB_mod_change_action_mod_settings()
             if action_mod_choice == "Back":
                 renpy.return_statement()
             else:

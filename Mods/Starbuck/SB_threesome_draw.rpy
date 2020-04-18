@@ -531,6 +531,24 @@ init -1 python:
             elif self.guy_source == 2:
                  mc.change_arousal(self.guy_arousal + (self.guy_arousal * the_person_two.sex_skills[self.skill_tag_guy] * 0.1))
 
+        def threesome_choose_position(the_person, the_position, the_object):
+            tuple_list = []
+            tuple_list.append(["Keep going.",the_position])
+            #tuple_list.append(["Back off and change positions.","Pull Out"])
+            if (mc.arousal > 80): #Only let you finish if you've got a high enough arousal score. #TODO: Add stat that controls how much control you have over this.
+                tuple_list.append(["Cum!","Finish"])
+            #tuple_list.append(["Strip her down.","Strip"])
+            if (the_position.can_swap == True):
+                tuple_list.append([the_position.swap_text,"Swap"])
+            for position in the_position.connections:
+                if the_object.has_trait(position.requires_location):
+                    if position.check_clothing(the_person):
+                        appended_name = "Change to " + position.name + ".\n{size=22}Max Effect: " + get_red_heart(position.slut_cap) + "\nSuggested Sluttiness: " + get_red_heart(position.slut_requirement) + "{/size}"
+                    else:
+                        appended_name = "Change to " + position.name + ".\n{size=22}Obstructed by Clothing\nSuggested Sluttiness: " + get_red_heart(position.slut_requirement) + "{/size} (disabled)"
+                    tuple_list.append([appended_name,position])
+            return renpy.display_menu(tuple_list,True,"Choice")
+
 
 label SB_threesome_description(the_person_one, the_person_two, the_position, the_object, round, private = True, girl_in_charge = False, current_girl = 1):
     #NOTE: the private variable decides if you are in private or not relative to the location you are in. If True other people in the room do not get a chance to interact.
@@ -613,22 +631,7 @@ label SB_threesome_description(the_person_one, the_person_two, the_position, the
                 position_choice = the_position
                 #TODO: this is where we perform any changes for the girl.
             else:
-                tuple_list = []
-                tuple_list.append(["Keep going.",the_position])
-                #tuple_list.append(["Back off and change positions.","Pull Out"])
-                if (mc.arousal > 80): #Only let you finish if you've got a high enough arousal score. #TODO: Add stat that controls how much control you have over this.
-                    tuple_list.append(["Cum!","Finish"])
-                #tuple_list.append(["Strip her down.","Strip"])
-                if (the_position.can_swap == True):
-                    tuple_list.append([the_position.swap_text,"Swap"])
-                for position in the_position.connections:
-                    if the_object.has_trait(position.requires_location):
-                        if position.check_clothing(the_person):
-                            appended_name = "Change to " + position.name + ".\n{size=22}Max Effect: " + get_red_heart(position.slut_cap) + "\nSuggested Sluttiness: " + get_red_heart(position.slut_requirement) + "{/size}"
-                        else:
-                            appended_name = "Change to " + position.name + ".\n{size=22}Obstructed by Clothing\nSuggested Sluttiness: " + get_red_heart(position.slut_requirement) + "{/size} (disabled)"
-                        tuple_list.append([appended_name,position])
-                position_choice = renpy.display_menu(tuple_list,True,"Choice")
+                position_choice = threesome_choose_position(the_person_one, the_position, the_object)
 
     if position_choice == "Finish":
         $ the_position.current_modifier = None

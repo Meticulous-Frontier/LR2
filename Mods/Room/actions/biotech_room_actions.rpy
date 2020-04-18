@@ -74,6 +74,29 @@ init 3 python:
         menu_tooltip = "Modify [person.title]'s cup size.")
     biotech_body_modifications.append(biotech_change_breasts)
 
+    def build_body_type_choice_menu():
+        body_types = []
+        for n in list_of_body_types:
+            body_types.append(n)
+        body_types.append("Back")
+        return renpy.display_menu(simple_list_format(body_types, n, string = "Body Type: ", ignore = "Back"), True, "Choice")
+
+    def build_skin_style_choice_menu():
+        skin_styles = [x[0] for x in list_of_skins]
+        skin_styles.append("Back")
+        return renpy.display_menu(simple_list_format(skin_styles, x[0], string = "Skin Type: ", ignore = "Back"), True, "Choice")
+
+    def build_face_style_choice_menu():
+        face_styles = []
+        for face in list_of_faces:
+            face_styles.append(face)
+        face_styles.append("Back")
+        return renpy.display_menu(simple_list_format(face_styles, face, string = "Face Type: ", ignore = "Back"), True, "Choice")
+
+    def build_cup_size_choice_menu():
+        cup_sizes = [x[0] for x in list_of_tits]
+        cup_sizes.append("Back")
+        return renpy.display_menu(simple_list_format(cup_sizes, x[0], string = "Cup Size: ", ignore = "Back"), True, "Choice")
 
 label biotech_gene_modifications():
     while True:
@@ -152,13 +175,8 @@ label modification_process(person = the_person): # when called without specific 
 
 label biotech_change_body():
     while True:
-        python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-            body_types = []
-            for n in list_of_body_types:
-                body_types.append(n)
-            body_types.append("Back")
-            body_choice = renpy.display_menu(simple_list_format(body_types, n, string = "Body Type: ", ignore = "Back"),True,"Choice")
-            del body_types
+        #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+        $ body_choice = build_body_type_choice_menu()
 
         if body_choice == "Back":
             return
@@ -169,12 +187,8 @@ label biotech_change_body():
 
 label biotech_change_skin():
     while True:
-        python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-            skin_styles = [x[0] for x in list_of_skins]
-
-            skin_styles.append("Back")
-            skin_choice = renpy.display_menu(simple_list_format(skin_styles, x[0], string = "Skin Type: ", ignore = "Back"),True,"Choice")
-            del skin_styles
+        #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+        $ skin_choice = build_skin_style_choice_menu()
 
         if skin_choice == "Back":
             return
@@ -187,13 +201,8 @@ label biotech_change_skin():
 
 label biotech_change_face():
     while True:
-        python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-            face_styles = []
-            for face in list_of_faces:
-                face_styles.append(face)
-            face_styles.append("Back")
-            face_choice = renpy.display_menu(simple_list_format(face_styles, face, string = "Face Type: ", ignore = "Back"),True,"Choice")
-            del face_styles
+        #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+        $ face_choice = build_face_style_choice_menu()
 
         if face_choice == "Back":
             return
@@ -205,11 +214,8 @@ label biotech_change_face():
 
 label biotech_change_breasts():
     while True:
-        python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-            cup_sizes = [x[0] for x in list_of_tits]
-            cup_sizes.append("Back")
-            cup_choice = renpy.display_menu(simple_list_format(cup_sizes, x[0], string = "Cup Size: ", ignore = "Back"),True,"Choice")
-            del cup_sizes
+        #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+        $ cup_choice = build_cup_size_choice_menu()
 
         if cup_choice == "Back":
             return

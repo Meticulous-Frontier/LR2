@@ -61,6 +61,15 @@ init 5 python:
         HR_employee_list = get_HR_review_list(the_person, tier = 2)
         return HR_employee_list
 
+    def HR_director_choose_position():
+        tuple_list = []
+        for position in mc.business.hr_director.HR_unlocks.keys():
+            if mc.business.hr_director.HR_unlocks[position] == True:
+                tuple_list.append([position.title(), position])
+        tuple_list.append(["Surprise me", "any"])
+
+        return renpy.display_menu(tuple_list,True,"Choice") 
+
     def create_HR_review_topic_list(the_person):
         topic_list = ["working"]
         if the_person in mc.business.production_team:
@@ -1050,16 +1059,7 @@ label HR_director_sexy_meeting_start_label(the_person):
 
     the_person.char "Okay! How do you want me to take care of you this week, [the_person.mc_title]?"
 
-    python:
-        tuple_list = []
-        for position in mc.business.hr_director.HR_unlocks.keys():
-            if mc.business.hr_director.HR_unlocks[position] == True:
-                tuple_list.append([position.title(), position])
-        tuple_list.append(["Surprise me", "any"])
-
-        position_choice = renpy.display_menu(tuple_list,True,"Choice")
-        del tuple_list
-
+    $ position_choice = HR_director_choose_position()
     if position_choice == "any":
         the_person.char "Mmmm, I can do that! "
         $ mc.change_arousal(20)

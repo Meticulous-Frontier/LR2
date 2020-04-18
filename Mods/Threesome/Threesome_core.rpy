@@ -351,6 +351,20 @@ init 5 python:
         update_threesome_action_description(position_choice, girl_swap_pos)
         return (position_choice, girl_swap_pos)
 
+    def get_mc_round_choice(position_choice, the_person_one, the_person_two):
+        option_list = []
+        for options in position_choice.mc_position:
+            if options.requirement(the_person_one, the_person_two):
+                option_list.append([options.description,options.name])
+        option_list.append(["Change your mind and leave.", "Leave"])
+        return renpy.display_menu(option_list,True,"Choice")
+    
+    def get_mc_active_position(position_choice, round_choice):
+        for options in position_choice.mc_position:
+            if round_choice == options.name:
+                return options
+        return None
+
 label start_threesome(the_person_one, the_person_two, start_position = None, start_object = None, round = 0, private = True, girl_in_charge = False, position_locked = False, report_log = None, affair_ask_after = True, hide_leave = False):
     # When called
     if report_log is None:
@@ -402,10 +416,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
         "Really? You changed your mind? You leave the poor girls after you got them all ready for some action."
     else:
         $ mc.listener_system.fire_event("threesome", the_person_one = the_person_one, the_person_two = the_person_two)
-        python:
-            for options in position_choice.mc_position:
-                if round_choice == options.name:
-                    active_mc_position = options
+        $ active_mc_position = get_mc_active_position(position_choice, round_choice)
         if active_mc_position == None:
             "Something broke..."
             $ round_choice = "Leave"
@@ -438,24 +449,12 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                 #     $ report_log["girl two orgasms"] = int_swap
                 $ position_choice.update_scene(the_person_one, the_person_two)
                 "As the girls get into position, you consider how to resume your threesome."
-                $ option_list = []
-                python:
-                    for options in position_choice.mc_position:
-                        if options.requirement(the_person_one, the_person_two):
-                            option_list.append([options.description,options.name])
-                $ option_list.append(["Change your mind and leave.", "Leave"])
-                $ round_choice = None # We start any encounter by letting them pick what position they want (unless something is forced or the girl is in charge)
-                $ active_mc_position = None
-                $ round_choice = renpy.display_menu(option_list,True,"Choice")
-                $ del option_list
+                $ round_choice = get_mc_round_choice(position_choice, the_person_one, the_person_two)
+                $ active_mc_position = get_mc_active_position(position_choice, round_choice)
                 if round_choice == "Leave":
                     $ finished = True
                     "You decide to finish the threesome instead."
 
-                python:
-                    for options in position_choice.mc_position:
-                        if round_choice == options.name:
-                            active_mc_position = options
                 if active_mc_position == None:
                     "Something broke..."
                     $ finished = True
@@ -544,11 +543,8 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
             $ finished = True
         #Need to catch position changes here.
         else:
-            python:
-                for options in position_choice.mc_position:
-                    if options.name == round_choice:
-                        active_mc_position = options
-                        active_mc_position.call_transition(the_person_one, the_person_two, mc.location, object_choice, round)
+            $ active_mc_position = get_mc_active_position(position_choice, round_choice)
+            $ active_mc_position.call_transition(the_person_one, the_person_two, mc.location, object_choice, round)
 
         $ round_choice = None #Get rid of our round choice at the end of the round to prepare for the next one. By doing this at the end instead of the begining of the loop we can set a mandatory choice for the first one.
 
