@@ -1113,16 +1113,18 @@ label HR_director_sexy_meeting_start_label(the_person):
             $ the_person.change_obedience(2)
         else:
             the_person.char "Ok."
-        "You stand up as she walks around to your side of the desk. You roughly bend her over your desk and give her ass a spank."
-        $ scene_manager.update_actor(the_person, position="standing_doggy")
+        "You stand up as she walks around to your side of the desk. You roughly pull her closer and give her ass a tight squeeze."
+        $ scene_manager.update_actor(the_person, position="stand3")
         the_person.char "Oh my!"
 
         if the_person.outfit.vagina_available() and the_person.outfit.vagina_visible():
-            "She wiggles her hips back at you a bit. Her pussy lips glisten with a bit of moisture."
+            "You give her pussy a little rub and show her your fingers glistening with a bit of moisture. You quickly turn her around and bent her over your desk."
         else:
             "You start to strip [the_person.possessive_title] down."
             $ scene_manager.strip_actor_outfit(the_person, exclude_upper = True, exclude_lower = False)
-            "Soon her ass is on full display in front of you, bent over your desk."
+            "As soon as her pussy is on full display in front of you, you bent her over your desk, exposing her round ass."
+        $ scene_manager.update_actor(the_person, position="standing_doggy")
+
         "You don't waste any time. You pull your cock out and point it at her slit. You pull her hips back as you push inside of her with one smooth push."
         the_person.char "Mmm, fuck me good [the_person.mc_title]!"
         $ mc.change_arousal(20)
