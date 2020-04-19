@@ -290,7 +290,12 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             elif has_taken_control:
                 $ has_taken_control = False
                 $ the_person.call_dialogue("sex_take_control")
-                $ position_choice.call_transition(round_choice, the_person, mc.location, object_choice)
+                # show dialog of girl changing position on her own
+                if the_person.has_taboo(position_choice.associated_taboo) and not ignore_taboo:
+                    $ position_choice.call_taboo_break(the_person, mc.location, object_choice)
+                    $ the_person.break_taboo(position_choice.associated_taboo)
+                else:
+                    $ position_choice.call_transition(round_choice, the_person, mc.location, object_choice)
                 $ round_choice = "Continue"
             else:
                 # Don't show control message, it breaks the flow, because it pops up every round.
