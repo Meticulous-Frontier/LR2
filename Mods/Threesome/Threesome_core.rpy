@@ -365,7 +365,7 @@ init 5 python:
                 return options
         return None
 
-label start_threesome(the_person_one, the_person_two, start_position = None, start_object = None, round = 0, private = True, girl_in_charge = False, position_locked = False, report_log = None, affair_ask_after = True, hide_leave = False):
+label start_threesome(the_person_one, the_person_two, start_position = None, start_object = None, round = 0, private = True, girl_in_charge = False, position_locked = False, report_log = None, affair_ask_after = True, hide_leave = False, swapped = False):
     # When called
     if report_log is None:
         $ report_log = defaultdict(int) #Holds information about the encounter: what positions were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
@@ -375,7 +375,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
     $ finished = False #When True we exit the main loop (or never enter it, if we can't find anything to do)
     $ position_choice = None
     $ object_choice = None
-    $ girl_swap_pos = False
+    $ girl_swap_pos = swapped
 
     #Family situational modifiers
     #Omitting these for now

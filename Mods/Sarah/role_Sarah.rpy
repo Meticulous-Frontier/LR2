@@ -68,7 +68,7 @@ init 2 python:
         sarah.event_triggers_dict["dating_path"] = False       # False = not started, or doing FWB during story, True = dating her.
         sarah.event_triggers_dict["stripclub_progress"] = 0    # 0 = not complete, 1 = strip club even complete
         sarah.event_triggers_dict["initial_threesome_target"] = None    #this will hold who sarah decides she wants to have a threesome with.
-        sarah.event_triggers_dict["threesome_unlock"] = False   #Set this to true after first threesome with Sarah
+        sarah.event_triggers_dict["threesome_unlock"] = 0     # 0 = not done, 1 = first threesome after event, 
         sarah.event_triggers_dict["try_for_baby"] = 0         # 0 = not trying, 1 = trying for baby, 2 = knocked up
         sarah.event_triggers_dict["fertile_start_day"] = -1    #-1 means not fertile, otherwise is the day that she tells MC she is fertile. Using math we can determine if she is fertile in the future.
         sarah.event_triggers_dict["fertile_start_creampie_count"] = -1  #Set this to the total number of creampies she has had at the beginning of her fertile period.
@@ -1995,7 +1995,7 @@ label Sarah_initial_threesome_label():
     the_person_one.char "That's what I keep hoping!"
     "[the_person_two.possessive_title] stands up and motions towards [the_person_one.title]"
 
-    the_person_two.char "Come here. This'll help..."
+    the_person_two.char "Come here. This will help..."
     $ scene_manager.update_actor(the_person_two, position = "walking_away")
     $ scene_manager.update_actor(the_person_one, position = "kissing", character_placement = character_right)
     "The two girls embrace. They begin to run their hands along each others bodies. Then they begin to kiss."
@@ -2013,17 +2013,19 @@ label Sarah_initial_threesome_label():
     $ the_person_two.change_arousal(10)
     "You grind your erection into her backside. She is beginning to pant heavily."
     the_person_one.char "Oh god... I need to stop... Give me as second!"
-    "You both pause while you wait for her. She looks at [the_person_two.title] in the eyes"
+    "You both pause while you wait for her. She looks [the_person_two.title] in the eyes..."
     the_person_one.char "I want to taste you. I've never kissed another woman down there... I want to try it!"
     the_person_two.char "Mmm, that sounds nice. Let's do it!"
     "[the_person_one.possessive_title] looks back at you."
     the_person_one.char "I want you to fuck me... fuck me while I eat out another woman!"
     mc.name "Glady! But I think everyone here is still wearing way too many clothes..."
     "The girls chuckle and then quickly agree."
+    $ scene_manager.update_actor(the_person_two, position = "stand2", character_placement = character_center_flipped)
+    $ scene_manager.update_actor(the_person_one, position = "stand3")
     $ scene_manager.strip_actor_outfit(the_person_one)
     $ scene_manager.strip_actor_outfit(the_person_two)
     "After everyone is naked, the action moves to the bed."
-    call start_threesome(the_person_one, the_person_two, start_position = Threesome_doggy_deluxe) from sarah_initial_threesome_1
+    call start_threesome(the_person_one, the_person_two, start_position = Threesome_doggy_deluxe, swapped = True) from sarah_initial_threesome_1
     $ scene_manager.update_actor(the_person_one, position = "missionary", character_placement = character_center)
     $ scene_manager.update_actor(the_person_two, position = "back_peek", character_placement = character_right)
     "As the activity winds down, you all lay down next to each other. You have [the_person_one.possessive_title] on one side and [the_person_two.possessive_title] on the other."
