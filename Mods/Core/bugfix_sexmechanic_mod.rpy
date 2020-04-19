@@ -826,7 +826,7 @@ label girl_strip_event_enhanced(the_person, the_position, the_object):
             $ the_position.call_strip(the_person, the_clothing, mc.location, the_object) #If a girl's outfit is less slutty than she is currently feeling (with arousal factored in) she will want to strip stuff off.
 
         $ the_person.update_outfit_taboos()       
-        $ the_clothing = None
+    $ the_clothing = None
     return
 
 # call after striping to show the stripping taboo break dialog
