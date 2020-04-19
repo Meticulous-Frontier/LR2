@@ -1744,8 +1744,8 @@ label Sarah_threesome_request_label():
     the_person.char "Aaahhhh, thats better."
     "You cock is getting hard, looking at [the_person.title], completely naked in front of you."
     call fuck_person(the_person) from _sarah_threesome_request_aftermath_1
-    $ afterglow_report = _return
-    if afterglow_report.get("girl orgasms", 0) > 0:
+    $ the_report = _return
+    if the_report.get("girl orgasms", 0) > 0:
         "[the_person.title] takes it easy for a moment, enjoying the afterglow of her orgasm."
     the_person.char "Mmm, that was hot as always."
     $ the_person.review_outfit(dialogue = False)
@@ -2248,11 +2248,11 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         "You waste no time and dive right into [the_person.possessive_title]'s delicious cunt."
         # TODO change this scene if the girls both like anal? Need to figure out how to handle starting in a specific threesome action
         call start_threesome(threesome_partner, the_person, start_position = Threesome_double_down, round = 1, private = True, position_locked = False, affair_ask_after = False, hide_leave = False) from sarah_overnight_threesome_wakeup
-        $ afterglow_report = _return
+        $ the_report = _return
         $ scene_manager.update_actor(the_person, position = "missionary", character_placement = character_center_flipped)
         $ scene_manager.update_actor(threesome_partner, position = "missionary", character_placement = character_right)
         "All finished, the girls flop onto their backs, one on each side of you."
-        if afterglow_report["girl one orgasms"] > 0 and afterglow_report["girl two orgasms"] > 0:  #They both finished.
+        if the_report["girl one orgasms"] > 0 and the_report["girl two orgasms"] > 0:  #They both finished.
             the_person.char "Oh wow, that was so hot..."
             if the_person.get_opinion_score("incest") < 1:
                 $ update_opinion(the_person, "incest")
