@@ -621,7 +621,12 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
 
     $ scene_manager.update_actor(person_choice, emotion = "happy")
     "[person_choice.title] thinks for a moment, then smiles at both of you."
-    if person_choice.sluttiness > 80 and the_person.sluttiness > 80: # TODO come back after writing sarah threesome content to unlock this instead
+    # start threesome attempt when sluttiness is high enough and she doesn't hate threesomes 
+    # when HR Director is Sarah, also wait for threesome unlock event
+    if (person_choice.sluttiness > 80 and the_person.sluttiness > 80
+        and person_choice.get_opinion_score("threesomes") > -2
+        and (not the_person is sarah or sarah.event_triggers_dict.get("threesome_unlock", 0) > 0)):
+
         person_choice.char "Thanks for calling me in. Is that all? Or was there maybe someone... I mean someTHING else on the to do list?"
         menu:
             "Attempt a threesome with [the_person.title]":
@@ -640,9 +645,9 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
                     $ the_person.change_happiness(10)
             "That's all":
                 person_choice.char "Thanks for calling me in... I guess I'd better go get back to work!"
-
     else:
         person_choice.char "Thanks for calling me in... I guess I'd better go get back to work!"
+
     if person_choice.get_opinion_score(opinion_chat) < max_opinion:
         $ person_choice.update_opinion_with_score(opinion_chat, max_opinion)
     $ mc.listener_system.fire_event("HR_opinion_improvement", the_person = person_choice)
