@@ -360,9 +360,6 @@ init -1 python:
 
     def strip_outfit(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, delay = 1, character_placement = None, position = None, emotion = None, lighting = None, scene_manager = None):
         def extra_strip_check(person, top_layer_first, exclude_upper, exclude_lower, exclude_feet):
-            if top_layer_first: # normal strip continue
-                return True
-
             done = exclude_upper or person.outfit.tits_available()
             if done and (exclude_lower or person.outfit.vagina_available()):
                 if done and (exclude_feet or person.outfit.feet_available()):
