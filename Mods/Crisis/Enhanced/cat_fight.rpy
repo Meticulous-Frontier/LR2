@@ -191,20 +191,20 @@ label cat_fight_crisis_enhanced_label():
                         $ scene_manager.draw_animated_removal(loser, the_clothing)
                         loser.char "Fuck, you're going to pay for that!"
 
-                    $ returns_favour = renpy.random.randint(0,2)
+                    $ ran_num = renpy.random.randint(0,2)
                     $ other_clothing = winner.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
 
-                    if returns_favour == 0: #Doesn't actually return the favour, because she's the loser she only retaliates %66 of the time.
+                    if ran_num == 0: #Doesn't actually return the favour, because she's the loser she only retaliates %66 of the time.
                         "[winner.title] laughs and crouches low."
                         winner.char "Come on! Come and get it, you cock sucking whore!"
-                    elif returns_favour == 1:
+                    elif ran_num == 1:
                         winner.char "Do you think I'm afraid of you? Come on!"
                         if other_clothing:
                             "[winner.title] rushes forward and grabs at [loser.title]. [loser.title] manages to get the upper hand, grabbing onto [winner.title]'s [other_clothing.name] and whipping her around. With a sharp rip it comes free."
                             $ scene_manager.draw_animated_removal(winner, other_clothing)
                             winner.char "Shit, get over here you skank!"
 
-                    elif returns_favour == 2:
+                    elif ran_num == 2:
                         if other_clothing:
                             $ scene_manager.draw_animated_removal(winner, other_clothing)
                             "[winner.title] screams loudly and tries to grab [loser.title] by the waist. [loser.title] is fast enough to get to the side. She grabs [loser.title]'s [other_clothing.name] and yanks on it hard."
