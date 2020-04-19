@@ -102,7 +102,7 @@ label mom_ntr_mod_action_label:
                         else:
                             man_name "Oh, no, [the_person.name]. You have been flirting around me the whole evening, brought me to your room and now thinking of stopping here?"
                         man_name "This will not do! I can't go back with blue balls. You have to do something about it. You just need a little push."
-                        $ mom_clothing = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True, exclude_feet = True)
+                        $ mom_clothing = the_person.choose_strip_clothing_item()
                         if mom_clothing is None:
                             pass
                         else:
@@ -115,7 +115,7 @@ label mom_ntr_mod_action_label:
                                 the_person.char "Please, [man_name]. Don't do it. I'm so ashamed..."
                                 man_name "Why don't you just shut up, [the_person.name]? It will make life easier for both of us?"
                         if clothes_number >1:
-                            $ mom_clothing = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True, exclude_feet = True)
+                            $ mom_clothing = the_person.choose_strip_clothing_item()
                             if not mom_clothing is None:
                                 the_person.char "Not my [mom_clothing.name]..."
                                 $ the_person.draw_animated_removal (mom_clothing, position = "stand3", emotion = "sad")
@@ -126,7 +126,7 @@ label mom_ntr_mod_action_label:
                                     the_person.char "Please stop, [man_name]. You can't see me like this."
                                     man_name "I can and I will. Didn't I say for you to shut up? Suggest you do it."
                         if clothes_number >2:
-                            $ mom_clothing = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True, exclude_feet = True)
+                            $ mom_clothing = the_person.outfit.choose_strip_clothing_item()
                             if not mom_clothing is None:
                                 man_name "You're not going to need this either, [the_person.name]. Trust me."
                                 $ the_person.draw_animated_removal (mom_clothing, position = "stand3", emotion = "sad")
@@ -137,7 +137,7 @@ label mom_ntr_mod_action_label:
                                     the_person.char "No, I beg you, [man_name]. I feel so naked..."
                                     man_name "One more word and it would be even worse. There will be pain involved."
                         if clothes_number >3:
-                            $ mom_clothing = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True, exclude_feet = True)
+                            $ mom_clothing = the_person.choose_strip_clothing_item()
                             if not mom_clothing is None:
                                 $ the_person.draw_animated_removal (mom_clothing, position = "stand3", emotion = "sad")
                                 "[man_name] continues even further. Now [the_person.title] is almost naked."
@@ -416,25 +416,25 @@ label mom_ntr_mod_action_label:
                         "She caresses the buldge on his pants."
                     the_person.char "I like those plans, as well as my little friend here. Now let me help you get rid of those clothes."
                     "You see them help each other undress."
-                    $ mom_clothing = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True, exclude_feet = True)
+                    $ mom_clothing = the_person.choose_strip_clothing_item()
                     if not mom_clothing is None:
                         man_name "I think you'd be better without [mom_clothing.name]..."
                         $ the_person.draw_animated_removal (mom_clothing, position = "kissing")
                         "He takes off [the_person.possessive_title]'s [mom_clothing.name] and throws it on a nearby chair."
                     if clothes_number >1:
-                        $ mom_clothing = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True, exclude_feet = True)
+                        $ mom_clothing = the_person.choose_strip_clothing_item()
                         if not mom_clothing is None:
                             the_person.char "I like the touch of your soft hands, [man_name]."
                             $ the_person.draw_animated_removal (mom_clothing, position = "kissing")
                             "You watch as [the_person.possessive_title]'s [mom_clothing.name] also getting off. [man_name]'s hand are softly caressing [the_person.possessive_title] naked skin."
                     if clothes_number >2:
-                        $ mom_clothing = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True, exclude_feet = True)
+                        $ mom_clothing = the_person.choose_strip_clothing_item()
                         if not mom_clothing is None:
                             the_person.char "Ooooh, [man_name], you are really turning me on with your touches."
                             $ the_person.draw_animated_removal (mom_clothing, position = "kissing")
                             "[man_name] takes off her [mom_clothing.name], his hands are all over [the_person.possessive_title]'s body."
                     if clothes_number >3:
-                        $ mom_clothing = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True, exclude_feet = True)
+                        $ mom_clothing = the_person.choose_strip_clothing_item()
                         if not mom_clothing is None:
                             the_person.char "I don't mind go even more naked, [man_name]. Please, take off my [mom_clothing.name] with that magical hands of yours."
                             $ the_person.draw_animated_removal (mom_clothing, position = "kissing")
@@ -1334,19 +1334,19 @@ label mom_ntr_mod_action_label:
                 else:
                     "She caresses their crotches."
                 the_person.char "I like that plan, as well as your little friends there. How about we get more comfortable by getting rid of those clothes?"
-                $ mom_clothing = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True, exclude_feet = True)
+                $ mom_clothing = the_person.choose_strip_clothing_item()
                 if not mom_clothing is None:
                     $ the_person.draw_animated_removal (mom_clothing, position = "kissing")
                     man_name "That's a nice [mom_clothing.name] you have, [the_person.name]. I wonder how you will look without it."
                     "He takes off [the_person.possessive_title]'s [mom_clothing.name] and throws it on a nearby chair."
                 if clothes_number >1:
-                    $ mom_clothing = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True, exclude_feet = True)
+                    $ mom_clothing = the_person.choose_strip_clothing_item()
                     if not mom_clothing is None:
                         the_person.char "I like the touch of your soft hands, [man_name]."
                         $ the_person.draw_animated_removal (mom_clothing, position = "kissing")
                         man_name2 "Let me help you too. Your [mom_clothing.name] need to go off, don't you agree?"
                 if clothes_number >2:
-                    $ mom_clothing = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True, exclude_feet = True)
+                    $ mom_clothing = the_person.choose_strip_clothing_item()
                     if not mom_clothing is None:
                         the_person.char "Ooooh, [man_name2], you are really turning me on with your touches."
                         $ the_person.draw_animated_removal (mom_clothing, position = "kissing")
@@ -1355,7 +1355,7 @@ label mom_ntr_mod_action_label:
                         else:
                             "[man_name] takes off her [mom_clothing.name], while [man_name2] and [the_person.possessive_title] kiss passionately."
                 if clothes_number >3:
-                    $ mom_clothing = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True, exclude_feet = True)
+                    $ mom_clothing = the_person.choose_strip_clothing_item()
                     if not mom_clothing is None:
                         the_person.char "I don't mind go even more naked, guys. Who would like to take my [mom_clothing.name] next?"
                         $ the_person.draw_animated_removal (mom_clothing, position = "kissing")

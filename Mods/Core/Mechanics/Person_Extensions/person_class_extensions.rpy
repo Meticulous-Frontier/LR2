@@ -395,6 +395,19 @@ init -1 python:
 
     Person.strip_outfit = strip_outfit
 
+    def choose_strip_clothing_item(self):
+        clothing = None
+        # If she has a preference (even a least-bad preference) she'll strip that down first.
+        if self.get_opinion_score("showing her tits") > self.get_opinion_score("showing her ass"):
+            clothing = self.outfit.remove_random_any(exclude_feet = True, exclude_lower = True, do_not_remove = True)
+        elif self.get_opinion_score("showing her tits") < self.get_opinion_score("showing her ass"):
+            clothing = self.outfit.remove_random_any(exclude_feet = True, exclude_upper = True, do_not_remove = True)
+        if clothing is None: #Either our previous checks failed to produce anything OR they were equal
+            clothing = self.outfit.remove_random_any(exclude_feet = True, do_not_remove = True)
+        return clothing
+
+    Person.choose_strip_clothing_item = choose_strip_clothing_item 
+
     def run_move_enhanced(self,location):
         self.sexed_count = 0 #Reset the counter for how many times you've been seduced, you might be seduced multiple times in one day!
 

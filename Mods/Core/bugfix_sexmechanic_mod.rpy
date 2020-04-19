@@ -164,16 +164,6 @@ init 5 python:
         person.add_situational_obedience("sex_object",picked_object.obedience_modifier, position.verbing + " on a " + picked_object.name)
         return picked_object
 
-    def pick_girl_strip_clothing_item(person):
-        clothing = None
-        if person.get_opinion_score("showing her tits") > person.get_opinion_score("showing her ass"): # If she has a preference (even a least-bad preference) she'll strip that down first.
-            clothing = person.outfit.remove_random_any(exclude_feet = True, exclude_lower = True, do_not_remove = True)
-        elif person.get_opinion_score("showing her tits") < person.get_opinion_score("showing her ass"):
-            clothing = person.outfit.remove_random_any(exclude_feet = True, exclude_upper = True, do_not_remove = True)
-        if clothing is None: #Either our previous checks failed to produce anything OR they were equal
-            clothing = person.outfit.remove_random_any(exclude_feet = True, do_not_remove = True)
-        return clothing
-
     def build_round_choice_menu(person, position_choice, position_locked, object_choice, ignore_taboo = False):
         option_list = []
         option_list.append("Round Choices")
@@ -818,7 +808,7 @@ label girl_strip_event_enhanced(the_person, the_position, the_object):
         return
 
     python:
-        the_clothing = pick_girl_strip_clothing_item(the_person)
+        the_clothing = the_person.choose_strip_clothing_item()
         ran_num = person.effective_sluttiness() - person.outfit.slut_requirement
         ran_num += person.get_opinion_score("not wearing anything") * 5
 

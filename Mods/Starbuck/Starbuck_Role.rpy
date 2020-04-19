@@ -971,7 +971,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     "She takes a bite of the panties, chews and swallows. While she does that you push your tongue deep into her cunt."
     $ the_person.change_arousal(15)#50
     the_person.char "Yes! Mmm they actually taste pretty good, I can see why [the_person.mc_title] here is so eager..."
-    $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+    $ strip_choice = the_person.choose_strip_clothing_item()
     $ the_person.draw_animated_removal(strip_choice)
     $ the_person.draw_person(position = "missionary")
     "Her panties now in shreds, [the_person.possessive_title] gathers what is left of them and pulls them off."

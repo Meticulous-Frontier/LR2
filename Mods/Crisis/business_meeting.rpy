@@ -96,7 +96,7 @@ label business_meeting_arrousal(the_person):
 
 label business_meeting_seduction(the_person):
     if the_person.effective_sluttiness() > 40:
-        $ strip_choice = the_person.outfit.remove_random_upper(top_layer_first = True, do_not_remove = True)
+        $ strip_choice = the_person.choose_strip_clothing_item()
         if strip_choice:
             "After talking for a while she takes off her [strip_choice.name]."
             $ the_person.draw_animated_removal(strip_choice, position="sitting", emotion="default")
