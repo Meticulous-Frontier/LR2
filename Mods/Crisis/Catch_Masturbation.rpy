@@ -220,7 +220,7 @@ label SB_caught_masturbating_crisis_label():
                     the_person.char "Oh [the_person.mc_title]! Thank god, I could really use your help here..."
                     if not the_person.outfit.vagina_available():
                         "[the_person.possessive_title] begins to pull off her clothes."
-                        $ the_person.strip_outfit(top_layer_first = False, position = "doggy", exclude_upper = True)
+                        $ the_person.strip_outfit(position = "doggy", exclude_upper = True)
                     $ the_person.break_taboo("bare_pussy")
                     the_person.char "Could you just give me a little quickie? I'm all warmed up, you could just stick it in right now..."
                     menu:

@@ -521,7 +521,7 @@ label casual_hotwife_dancing_sex_label(the_person):
         else:
             "Piece by piece, you take [the_person.title]'s clothes off."
 
-            $ the_person.strip_outfit(top_layer_first = False, position = "against_wall")
+            $ the_person.strip_outfit(position = "against_wall")
             $ the_person.change_arousal(20)
 
             "Once finished, You stop for a second and admire [the_person.title], her body on display in front of you."

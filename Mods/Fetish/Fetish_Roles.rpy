@@ -267,7 +267,7 @@ label SB_fetish_anal_mom_kitchen_label(the_person):
     else:                                              #Otherwise, strip her down.
         "You don't bother to reply, instead you begin stripping away anything between you and her supple ass."
 
-        $ the_person.strip_outfit(top_layer_first = False, position = "standing_doggy", exclude_upper = True)
+        $ the_person.strip_outfit(position = "standing_doggy", exclude_upper = True)
 
         "With her ass finally exposed you waste no time. You quickly pull your cock out and rub it between her cheeks."
     "[the_person.possessive_title] pulls some lube out of one of the kitchen drawers."

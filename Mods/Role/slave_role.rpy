@@ -306,7 +306,7 @@ label slave_alarm_clock_label(the_person):
     else:
         # First we need to take her and remove enough clothing that we can get to her vagina, otherwise none of this stuff makes sense.
         # This makes sure skirts are kept on (because this is suppose to be a quicky).
-        $ the_person.strip_outfit(top_layer_first = False, exclude_upper = True, position = "cowgirl", emotion = "happy")
+        $ the_person.strip_outfit(exclude_upper = True, position = "cowgirl", emotion = "happy")
         "You're woken up by your bed shifting under you and a sudden weight around your waist."
         $ the_person.draw_person(position = "cowgirl", emotion = "happy")
         "[the_person.possessive_title] has pulled down your sheets and underwear and is straddling you. The tip of your morning wood is brushing against her pussy."
