@@ -136,9 +136,9 @@ label casual_athlete_get_to_know_label(the_person):
             "You think about it for a bit. You could offer to buy her a protein shake, they serve them here at the gym. That would be a good opportunity to slip some serum in..."
             mc.name "They have protein shakes here. Maybe I could grab you one? It'd be no trouble."
             #Charisma role to unlock the buy protein shake option#
-            $ random_roll = renpy.random.randint(0,100)
-            $ random_roll += (mc.charisma * 10)
-            if random_roll > 50:   #Base line 50:50 chance at charisma = 0. 100% chance at charisma = 5
+            $ ran_num = renpy.random.randint(0,100)
+            $ ran_num += (mc.charisma * 10)
+            if ran_num > 50:   #Base line 50:50 chance at charisma = 0. 100% chance at charisma = 5
                 the_person.char "That... actually would be nice! You have to be careful with guys, but you seem genuine enough."
                 "You now have the option to buy [the_person.title] a protein shake at the gym."
                 $ the_person.event_triggers_dict["athlete_protein"] = 1

@@ -63,8 +63,8 @@ label production_failure_action_label:
             $ mc.change_location(the_person.work)
             $ mc.location.show_background()
 
-            $ the_effect_number = renpy.random.randint(0,100)
-            if the_effect_number > 45: # 55% chance its a mixture that alters behavior (slutty)
+            $ ran_num = renpy.random.randint(0,100)
+            if ran_num > 45: # 55% chance its a mixture that alters behavior (slutty)
                 "For the first half hour everything seems fine, but then you notice a sudden shift in behavior."
                 "The girls are clearly hot and bothered. They barely keep their focus on their work. Spending much of their time eyeing you and each other."
 
@@ -84,10 +84,10 @@ label production_failure_action_label:
                 $ production_failure_clear_situational_sluttiness(the_person)
 
                 "You leave [the_person.possessive_title] to get cleaned up and get back to work."
-            elif the_effect_number > 30: # 15% chance
+            elif ran_num > 30: # 15% chance
                 $ production_failure_change_obedience(the_person, 3)               
                 "The girls seem slightly more respectful."
-            elif the_effect_number > 15: # 15% chance
+            elif ran_num > 15: # 15% chance
                 "Everyone appears fine, there doesn't seem to be an effect."
             else: # 15% chance its a foul mixture
                 $ production_failure_change_obedience(the_person, -5)
