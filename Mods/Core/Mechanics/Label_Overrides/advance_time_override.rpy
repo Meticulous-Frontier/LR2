@@ -151,7 +151,7 @@ init 5 python:
         random_crisis = get_random_from_list(key_list)
         # renpy.say("", "Run Crisis [" + str(len(key_list)) +"]: " + random_crisis)
         if random_crisis in crisis_tracker_dict.keys():
-            crisis_tracker_dict[random_crisis] += min_value + 1     # set to min_value +1 to prevent the event from triggering a lot (its count maybe low due to being disabled)
+            crisis_tracker_dict[random_crisis] = min_value + 1     # set to min_value +1 to prevent the event from triggering a lot (its count maybe low due to being disabled)
         return find_in_list(lambda x: x.effect == random_crisis, active_crisis_list + active_excluded_events)
 
     def get_crisis_from_crisis_list():
