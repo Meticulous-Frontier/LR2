@@ -21,6 +21,7 @@
 # Hiring: mandatory event. Call up Sarah and hire her for the HR position.
 
 init 2 python:
+    sarah_strip_pose_list = ["walking_away","back_peek","standing_doggy","stand2","stand3","stand4","stand5", "doggy","kneeling1"]
     SARAH_PER_CREAMPIE_PREGNANCY_CHANCE = 3 #A constant for odds of getting pregnant per creampie during fertile period.
     sarah_weekend_surprise_action = ActionMod("Sarah's Weekend Surprise",Sarah_weekend_surprise_crisis_requirement,"Sarah_weekend_surprise_crisis_label",
         menu_tooltip = "You find an employee masturbating in an empty storage room.", category = "Business", is_crisis = True, crisis_weight = 7)
@@ -2312,7 +2313,6 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
 label watch_strip_show(the_person):  #This scene assumes scene manager is running and the_person is with you, so she won't strip for you.
     $ showgirl = get_random_from_list(stripclub_strippers)
     $ showgirl.apply_outfit(stripclub_wardrobe.pick_random_outfit())
-    $ pose_list = ["walking_away","back_peek","standing_doggy","stand2","stand3","stand4","stand5", "doggy","kneeling1"]
     "You watch as a girl gets on stage and starts to do her routine."
     $ scene_manager.add_actor(showgirl, character_placement = character_left_flipped)
     if showgirl is cousin:
@@ -2332,7 +2332,7 @@ label watch_strip_show(the_person):  #This scene assumes scene manager is runnin
     $ finished_chance = 0
     python:
         for x in range(6):
-            scene_manager.update_actor(showgirl, position = get_random_from_list(pose_list))
+            scene_manager.update_actor(showgirl, position = get_random_from_list(sarah_strip_pose_list))
             if renpy.random.randint(0,100) <76: #Take something off
                 showgirl.outfit.remove_random_any(top_layer_first = True)
             if renpy.random.randint(0,100) < finished_chance:
@@ -2348,7 +2348,7 @@ label watch_strip_show(the_person):  #This scene assumes scene manager is runnin
         $ scene_manager.update_actor(showgirl, position = "kneeling1")
     else:
         "As she finished, the showgirl gives one more pose, to the enjoyment of everyone in the crowd."
-        $ scene_manager.update_actor(showgirl, position = get_random_from_list(pose_list))
+        $ scene_manager.update_actor(showgirl, position = get_random_from_list(sarah_strip_pose_list))
     $ scene_manager.update_actor(showgirl, position = "walking_away")
     "After finishing, the showgirl grabs her tips then exits the stage."
     $ scene_manager.remove_actor(showgirl)
