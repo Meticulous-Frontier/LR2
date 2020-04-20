@@ -360,7 +360,7 @@ label increase_slave_submission_label(the_person):
     mc.name "[the_person.title], I sense you have not yet completely accepted me as your master."
     "[the_person.possessive_title] starts to shake her head, but you simply hold up your hand to stop her before she starts."
     mc.name "Do you want to be my devoted and loyal slave?"
-    if the_person.obedience < 200 or the_person.get_opinion_score("being submissive") < 2:
+    if the_person.obedience < 200 or the_person.get_opinion_score("being submissive") < 1:
         "She looks at you intently..."
         the_person.char "No Master, I've got other duties that prevent that."
         mc.name "It seems you need a punishment for this insolence."
@@ -374,17 +374,17 @@ label increase_slave_submission_label(the_person):
         $ the_person.change_stats(arousal = 10)
         "Suddenly you pull you hand back and start giving her the spanking she deserves."
         "SMACK! SMACK! SMACK!"
-        the_person.char "Please Master...OUCH, I'll try to obey...AH...your wishes...OW, please let me...OUCH...prove it to you...AW..."
+        the_person.char "Please Master...OUCH, I'll try to obey...AH...your wishes...OW, please let me...OUCH...prove it to you..."
         mc.name "Be quiet, slave and take your punishment with pride."
         "You keep on punishing her for another minute, while she tries to stifle her cries."
         mc.name "Very well, slave, I will be demanding your complete submission next time."
         $ the_person.draw_person(position = "stand2", emotion = "angry")
         $ the_person.change_obedience(10)
-        if the_person.obedience < 200 or the_person.get_opinion_score("being submissive") < 2:
+        if the_person.obedience < 200:
             "She turns around with a slight defiant stare..."
-            $ the_person.increase_opinion_score("being submissive")
         else:
             "She turns around, with a faint smile and devotion in her eyes."
+            $ the_person.increase_opinion_score("being submissive")
             $ the_person.change_stats(arousal = 20)
 
         the_person.char "Yes Master, I will try to please you better next time."
