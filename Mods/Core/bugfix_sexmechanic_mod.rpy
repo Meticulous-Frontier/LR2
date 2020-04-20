@@ -405,7 +405,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
             # In 13% of the cases she takes control regardless of obedience, but only when she came only once
             # higher chance when she likes taking control lower when she doesn't
-            if the_person.energy >= 30 and report_log.get("girl orgasms", 0) < 2 and (renpy.random.randint(0,the_person.arousal) + 50 + the_person.get_opinion_score("taking control") * 20 > the_person.obedience or renpy.random.randint(1, 7 - (the_person.get_opinion_score("taking control") * 2)) == 1):
+            if the_person.energy >= 30 and report_log.get("girl orgasms", 0) < 2 and (renpy.random.randint(0, int(the_person.arousal)) + 50 + the_person.get_opinion_score("taking control") * 20 > the_person.obedience or renpy.random.randint(1, 7 - (the_person.get_opinion_score("taking control") * 2)) == 1):
                 $ the_person.change_obedience(-3)
                 $ girl_in_charge = True
                 $ finished = False
