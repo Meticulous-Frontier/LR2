@@ -809,7 +809,7 @@ label girl_strip_event_enhanced(the_person, the_position, the_object):
 
     python:
         the_clothing = the_person.choose_strip_clothing_item()
-        ran_num = the_person.effective_sluttiness() - person.outfit.slut_requirement
+        ran_num = the_person.effective_sluttiness() - the_person.outfit.slut_requirement
         ran_num += the_person.get_opinion_score("not wearing anything") * 5
 
     if renpy.random.randint(0,100) < ran_num and the_clothing:
