@@ -224,7 +224,7 @@ label casual_hotwife_get_a_drink_label(the_person):
                 $ the_person.draw_person (position = "stand4")
                 the_person.char "See ya later [the_person.mc_title]"
                 $ the_person.event_triggers_dict["hotwife_blowjob_enable"] = 1
-                "Sounds like you might get lucky next time you meet up with [the_person.possessive_title]"
+                "Sounds like you might get lucky next time you meet up with [the_person.title]"
             else:
                 "Failed Charisma Check."
                 "She looks at you for a second, then hesitates."
