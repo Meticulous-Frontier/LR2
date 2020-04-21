@@ -328,7 +328,7 @@ label unisex_restroom_fantasy_actout_label(the_person):
     $ the_report = _return
     if the_report.get("girl orgasms", 0) > 0:
         the_person.char "Oh god, it was even better than I thought... oh my god."
-        $ update_opinion(the_person, "public sex")
+        $ the_person.increase_opinion_score("public sex")
         $ the_person.change_happiness(10)
         $ the_person.change_slut_core(3)
     else:

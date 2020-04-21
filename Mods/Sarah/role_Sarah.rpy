@@ -711,10 +711,9 @@ label Sarah_get_drinks_label():
     the_person.char "Oh, I'm not dedicated to it or anything, but I've always been curious about what it would be like to be with another woman."
     "She sighs."
     the_person.char "Don't get me wrong, I don't think I could ever date another woman, I prefer men, but I've always wanted to try a Ménage à trois..."
-    "You have discovered that [the_person.title] likes other girls!"
-    $ update_opinion(the_person, "other girls")
-    "You have discovered that [the_person.title] likes threesomes!"
-    $ update_opinion(the_person, "threesomes")
+    $ the_person.increase_opinion_score("other girls")
+    $ the_person.increase_opinion_score("threesomes")
+    "You have discovered that [the_person.title] is bi-curious and into threesomes!"
     mc.name "That's very open minded of you. I can certainly respect that!"
     "[the_person.title] tips her glass back and finishes her first drink. You make it a point to do the same."
     mc.name "Let me grab the next round."
@@ -2256,13 +2255,13 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         if the_report["girl one orgasms"] > 0 and the_report["girl two orgasms"] > 0:  #They both finished.
             the_person.char "Oh wow, that was so hot..."
             if the_person.get_opinion_score("incest") < 1:
-                $ update_opinion(the_person, "incest")
+                $ the_person.increase_opinion_score("incest")
             if threesome_partner is mom:
                 threesome_partner.char "I know... I just had a threesome with my son and his girlfriend... and I loved it!"
-                $ update_opinion(threesome_partner, "incest")
+                $ threesome_partner.increase_opinion_score("incest")
             else:
                 threesome_partner.char "I know! A threesome with my bro and his girl... and I loved it!"
-                $ update_opinion(threesome_partner, "incest")
+                $ threesome_partner.increase_opinion_score("incest")
             threesome_partner.char "It was amazing... [the_person.name] don't be a stranger now..."
         else:
             "You lay together for a few moments, enjoying each other's proximity."
