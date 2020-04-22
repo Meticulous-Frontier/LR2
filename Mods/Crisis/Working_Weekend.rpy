@@ -102,11 +102,11 @@ label SB_working_weekend_crisis_label():
     $ scene_manager.draw_scene()
     "You can tell by the look on her face that [person_one.possessive_title] is also surprised to see you."
     if person_one.sluttiness < 30:
-        call SB_working_weekend_crisis_label_low(person_one)
+        call SB_working_weekend_crisis_label_low(person_one) from _call_SB_working_weekend_crisis_label_low
     elif person_one.sluttiness < 70:
-        call SB_working_weekend_crisis_label_medium(person_one)
+        call SB_working_weekend_crisis_label_medium(person_one) from _call_SB_working_weekend_crisis_label_medium
     else:
-        call SB_working_weekend_crisis_label_high(person_one)
+        call SB_working_weekend_crisis_label_high(person_one) from _call_SB_working_weekend_crisis_label_high
 
     $ scene_manager.clear_scene()
     $ person_one.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
