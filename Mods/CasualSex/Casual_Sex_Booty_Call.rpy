@@ -33,10 +33,7 @@ label casual_sex_booty_call_label:
     menu:
         "Definitely":
             the_person.char "Great!"
-            python: #For now, make them naked upon arrival at the hookup scene.
-                for i in range(3):
-                    the_person.outfit.remove_random_upper(top_layer_first = True)
-                    the_person.outfit.remove_random_lower(top_layer_first = True)
+            $ the_person.strip_outfit(delay = 0)
             $ the_person.call_dialogue("hookup_accept")
             if the_person.arousal > 100 and the_person.core_sluttiness < 100:
                 $ the_person.change_slut_core(2)
@@ -44,10 +41,7 @@ label casual_sex_booty_call_label:
         "Not Now":
             "After a few minutes, you get a response."
             $ the_person.call_dialogue("hookup_rejection")
-            python:
-                for i in range(3):
-                    the_person.outfit.remove_random_upper(top_layer_first = True)
-                    the_person.outfit.remove_random_lower(top_layer_first = True)
+            $ the_person.strip_outfit(delay = 0)
             $ the_person.draw_person(position = the_person.event_triggers_dict.get("reject_position", "missionary"))
             "She sends you a pic of herself masturbating."
     $ the_person.reset_arousal()

@@ -27,7 +27,7 @@ label sister_phone_crisis_action_label:
         $ rand_chance = renpy.random.randint(1,3) #Used to determine which variant we use to avoid spamming the player with the exact same texts.
         if rand_chance == 1:
             if mc.business.is_weekend():
-                $ the_person.set_outfit(lingerie_wardrobe.pick_random_outfit())
+                $ the_person.apply_outfit(the_person.wardrobe.get_random_appropriate_underwear(lowest_stat, guarantee_output =  True))
                 $ the_person.draw_person(position = "missionary", emotion = "happy")
                 "Her first message is a selfie of herself lying down on your bed in lingerie."
                 the_person.char "I can't wait until you come home and give me what I need. I wish I could spend every minute of every day worshiping your cock like a [the_person.possessive_title] should."
@@ -36,16 +36,13 @@ label sister_phone_crisis_action_label:
                 the_person.char "My pussy full of your warm cum, knowing that I can take care of you the way only [the_person.possessive_title] could."
                 the_person.char "I think I'm going to go touch myself in the bathroom. I hope you are having a great day too [the_person.mc_title]!"
         elif rand_chance == 2:
-            python:
-                for i in range(3):
-                    the_person.outfit.remove_random_upper(top_layer_first = True)
-                    the_person.outfit.remove_random_lower(top_layer_first = True)
+            $ the_person.strip_outfit(delay = 0)
             the_person.char "Hi [the_person.mc_title], I hope I'm not interrupting your busy work day. This is just a quick reminder..."
             $ the_person.draw_person(emotion = "happy")
             "You get a selfie from [the_person.possessive_title] naked in front of her bedroom mirror."
             the_person.char "That [the_person.possessive_title] wants to feel you inside her tonight. Don't stay out too late!"
         else:
-            $ the_person.set_outfit(lingerie_wardrobe.pick_random_outfit())
+            $ the_person.apply_outfit(the_person.wardrobe.get_random_appropriate_underwear(lowest_stat, guarantee_output = True))
             $ the_person.draw_person(position = "blowjob", emotion = "happy")
             "[the_person.possessive_title] sends you a picture of herself sitting on her knees wearing some lingerie."
             the_person.char "I can't wait to see you. So I can suck your big dick, like the good little cocksucker that I am."
@@ -56,18 +53,12 @@ label sister_phone_crisis_action_label:
         if rand_chance == 1:
             if mc.business.is_weekend():
                 the_person.char "I'm here at home and wishing it was you could help me take these pictures..."
-                python:
-                    for i in range(3):
-                        the_person.outfit.remove_random_upper(top_layer_first = True)
-                        the_person.outfit.remove_random_lower(top_layer_first = True)
+                $ the_person.strip_outfit(delay = 0)
                 $ the_person.draw_person(position = "standing_doggy")
                 "[the_person.possessive_title] sends you a selfie her bedroom naked and bent over her bed."
             else:
                 the_person.char "I'm stuck here at school and all I can think about is you. Wish you were here..."
-                python:
-                    for i in range(3):
-                        the_person.outfit.remove_random_upper(top_layer_first = True)
-                        the_person.outfit.remove_random_lower(top_layer_first = True)
+                $ the_person.strip_outfit(delay = 0)
                 $ the_person.draw_person(position = "standing_doggy")
                 "[the_person.possessive_title] sends you a selfie of herself in the school bathroom, naked and bending over the sink."
 
@@ -83,31 +74,20 @@ label sister_phone_crisis_action_label:
         if rand_chance == 1:
             if mc.business.is_weekend():
                 the_person.char "I was just about to get in the shower and I thought you might like a peek. Love you [the_person.mc_title]!"
-                python:
-                    for i in range(3):
-                        the_person.outfit.remove_random_upper(top_layer_first = True)
-                        if the_person.outfit.panties_covered(): #If we get down to her panties keep them on, because that's sexier.
-                            the_person.outfit.remove_random_lower(top_layer_first = True)
+                $ the_person.strip_outfit_to_underwear(delay = 0)
                 $ the_person.draw_person(emotion = "happy")
                 "[the_person.possessive_title] sends you a picture of herself stripped down in front of her bedroom mirror."
 
             else:
                 the_person.char "I thought you might be stressed so I snuck away from school to take this for you."
-                python:
-                    for i in range(3):
-                        the_person.outfit.remove_random_upper(top_layer_first = True)
-                        if the_person.outfit.panties_covered():
-                            the_person.outfit.remove_random_lower(top_layer_first = True)
+                $ the_person.strip_outfit_to_underwear(delay = 0)
                 $ the_person.draw_person(emotion = "happy")
                 "[the_person.possessive_title] sends you a picture of herself stripped down in the park."
                 the_person.char "I've got to get back to class. I hope nobody noticed me gone!"
 
         elif rand_chance == 2:
             the_person.char "I thought you might enjoy this ;)"
-            python:
-                for i in range(3):
-                    the_person.outfit.remove_random_upper(top_layer_first = True)
-                    the_person.outfit.remove_random_lower(top_layer_first = True)
+            $ the_person.strip_outfit(delay = 0)
             $ the_person.draw_person(emotion = "happy")
             "[the_person.possessive_title] sends you a picture of herself stripped naked in front of her bathroom mirror."
         elif rand_chance == 3:
@@ -116,15 +96,12 @@ label sister_phone_crisis_action_label:
             "[the_person.possessive_title] doesn't wait for a reply and starts sending selfies."
             python:
                 for i in range(3):
-                    the_person.set_outfit(the_person.wardrobe.get_random_appropriate_underwear(lowest_stat))
+                    the_person.apply_outfit(the_person.wardrobe.get_random_appropriate_underwear(lowest_stat, guarantee_output = True))
                     the_person.draw_person(emotion = "happy")
-                    renpy.say("","")
+                    renpy.pause(2)
             the_person.char "I hope you think [the_person.possessive_title] looks sexy in her underwear ;)"
         else:
-            python:
-                while not the_person.outfit.tits_visible():
-                    the_person.outfit.remove_random_upper(top_layer_first = True)
-
+            $ the_person.strip_outfit(exclude_lower = True, delay = 0)
             if mc.business.is_weekend():
                 the_person.char "I'm so glad it's the weekend, I can finally let these girls out..."
                 $ the_person.draw_person(emotion = "happy")
