@@ -8,7 +8,7 @@ init -1:
                 new_amount = 1
             elif int(new_amount) == 0:
                 new_amount = 1
-            store.serum_transfer_amount = new_amount
+            store.serum_transfer_amount = int(new_amount)
 
 init -2 style serum_text_style: # Cheat Text Style
     text_align 0.5
