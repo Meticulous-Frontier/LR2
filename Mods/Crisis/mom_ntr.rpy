@@ -126,7 +126,7 @@ label mom_ntr_mod_action_label:
                                     the_person.char "Please stop, [man_name]. You can't see me like this."
                                     man_name "I can and I will. Didn't I say for you to shut up? Suggest you do it."
                         if clothes_number >2:
-                            $ mom_clothing = the_person.outfit.choose_strip_clothing_item()
+                            $ mom_clothing = the_person.choose_strip_clothing_item()
                             if not mom_clothing is None:
                                 man_name "You're not going to need this either, [the_person.name]. Trust me."
                                 $ the_person.draw_animated_removal (mom_clothing, position = "stand3", emotion = "sad")
