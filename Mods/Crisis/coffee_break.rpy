@@ -11,16 +11,6 @@ init 2 python:
                         return True
         return False
 
-    def has_opinion(person, topic):
-        return not (person.get_opinion_topic(topic) is None)
-
-    def update_opinion(person, topic):
-        if has_opinion(person, topic):
-            person.increase_opinion_score(topic)
-        else:
-            person.add_opinion(topic, 1)
-        return
-
     coffee_break_action = ActionMod("Coffee Break", coffee_break_requirement, "coffee_break_action_label",
         menu_tooltip = "A group of employees is having a coffee break.", category = "Business", is_crisis = True, crisis_weight = coffee_break_weight)
 
@@ -110,11 +100,11 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
 
                     # cleanup scene
                     $ scene_manager.clear_scene()
-                    $ update_opinion(person_two, "threesomes")
+                    $ person_two.increase_opinion_score("threesomes")
                     $ person_two.reset_arousal()
                     $ person_two.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
 
-                    $ update_opinion(person_three, "threesomes")
+                    $ person_three.increase_opinion_score("threesomes")
                     $ person_three.reset_arousal()
                     $ person_three.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
 

@@ -31,6 +31,26 @@ init 10 python:
     def wakeup_duty_crisis_requirement():
         return True
 
+    def slave_assign_new_collar(person, collar):
+        person.outfit.remove_all_collars()
+
+        new_collar = collar.get_copy()
+        new_collar.colour = [.1,.1,.1,.9]
+        new_collar.pattern = "Pattern_1"
+        new_collar.colour_pattern = [.95,.95,.95,.9]
+        person.base_outfit.add_accessory(new_collar)
+
+        person.slave_collar = True
+        person.apply_outfit(person.planned_outfit)
+        person.draw_person()
+        return
+
+    def slave_add_wakeup_duty_action(person):
+        remove_mandatory_crisis_list_action("slave_alarm_clock_label")
+        wakeup_duty_crisis.args = [person]
+        mc.business.mandatory_morning_crises_list.append(wakeup_duty_crisis)
+        return
+
     stay_wet_action = ActionMod("Stay wet", stay_wet_requirement, "stay_wet_label", menu_tooltip = "Have the person stay aroused at all times.", category = "Slave Role")
     calm_down_action = ActionMod("Calm down", calm_down_requirement, "stay_wet_label", menu_tooltip = "Have the person calm down.", category = "Slave Role", allow_disable = False)
 
@@ -60,6 +80,9 @@ label stay_wet_label(the_person): # Can expand with dialogue options and degrees
 label slave_collar_person_label(the_person):
     if the_person.slave_collar:
         $ the_person.slave_collar = False
+        $ the_person.outfit.remove_all_collars()
+        $ the_person.base_outfit.remove_all_collars()
+        $ the_person.draw_person()
         "You remove the collar from your [the_person.possessive_title]'s neck"
     else:
         call screen main_choice_display([["Select Collar"] + [["Breed Me", breed_collar], ["Cum Slut", cum_slut_collar], ["Fuck Doll", fuck_doll_collar], ["Back", "Back"]]])
@@ -68,18 +91,8 @@ label slave_collar_person_label(the_person):
         if collar_choice == "Back":
             return
 
-        python:
-            the_person.outfit.remove_all_collars()
-
-            new_collar = collar_choice.get_copy()
-            new_collar.colour = [.1,.1,.1,.9]
-            new_collar.pattern = "Pattern_1"
-            new_collar.colour_pattern = [.95,.95,.95,.9]
-            the_person.base_outfit.add_accessory(new_collar)
-
-            the_person.slave_collar = True
-            the_person.apply_outfit(the_person.planned_outfit)
-            the_person.draw_person()
+        $ slave_assign_new_collar(the_person, collar_choice)
+        $ del collar_choice
 
         "You put one of the collars you created around your [the_person.possessive_title]'s neck."
 
@@ -87,10 +100,7 @@ label slave_collar_person_label(the_person):
 
 label wakeup_duty_label(the_person):
     "You tell [the_person.possessive_title] to make sure you wake up in the morning."
-    python:
-        remove_mandatory_crisis_list_action("slave_alarm_clock_label")
-        wakeup_duty_crisis.args = [the_person]
-        mc.business.mandatory_morning_crises_list.append(wakeup_duty_crisis)
+    $ slave_add_wakeup_duty_action(the_person)
     return
 
 label slave_training_label(the_person): # TODO: Add variations to these. They are supposed to be rather short interactions that do not take up time. Both "rewards" and punishments should be available. Some characters might see certain "punishments" as rewards too.
@@ -360,7 +370,7 @@ label increase_slave_submission_label(the_person):
     mc.name "[the_person.title], I sense you have not yet completely accepted me as your master."
     "[the_person.possessive_title] starts to shake her head, but you simply hold up your hand to stop her before she starts."
     mc.name "Do you want to be my devoted and loyal slave?"
-    if the_person.obedience < 200 or the_person.get_opinion_score("being submissive") < 2:
+    if the_person.obedience < 200 or the_person.get_opinion_score("being submissive") < 1:
         "She looks at you intently..."
         the_person.char "No Master, I've got other duties that prevent that."
         mc.name "It seems you need a punishment for this insolence."
@@ -374,17 +384,17 @@ label increase_slave_submission_label(the_person):
         $ the_person.change_stats(arousal = 10)
         "Suddenly you pull you hand back and start giving her the spanking she deserves."
         "SMACK! SMACK! SMACK!"
-        the_person.char "Please Master...OUCH, I'll try to obey...AH...your wishes...OW, please let me...OUCH...prove it to you...AW..."
+        the_person.char "Please Master...OUCH, I'll try to obey...AH...your wishes...OW, please let me...OUCH...prove it to you..."
         mc.name "Be quiet, slave and take your punishment with pride."
         "You keep on punishing her for another minute, while she tries to stifle her cries."
         mc.name "Very well, slave, I will be demanding your complete submission next time."
         $ the_person.draw_person(position = "stand2", emotion = "angry")
         $ the_person.change_obedience(10)
-        if the_person.obedience < 200 or the_person.get_opinion_score("being submissive") < 2:
+        if the_person.obedience < 200:
             "She turns around with a slight defiant stare..."
-            $ the_person.increase_opinion_score("being submissive")
         else:
             "She turns around, with a faint smile and devotion in her eyes."
+            $ the_person.increase_opinion_score("being submissive")
             $ the_person.change_stats(arousal = 20)
 
         the_person.char "Yes Master, I will try to please you better next time."

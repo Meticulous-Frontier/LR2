@@ -270,6 +270,12 @@ init 5 python:
         opinion_chat_list.insert(0, "Discuss Topic")
         return opinion_chat_list
 
+    def hr_director_mind_control_update_opinions(person):
+        topic_list = create_HR_review_topic_list(person)
+        for topic in topic_list:
+            person.increase_opinion_score(topic)
+        return
+
     HR_director_coffee_tier_1_action = Action("Add serum to coffee during meetings.", HR_director_coffee_tier_1_requirement, "HR_director_coffee_tier_1_label",
         menu_tooltip = "Costs $500 but makes meetings more impactful.")
     HR_director_coffee_tier_2_action = Action("Add stronger serum to coffee during meetings.", HR_director_coffee_tier_2_requirement, "HR_director_coffee_tier_2_label",
@@ -1240,10 +1246,7 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
         #TODO add backfire string to event log
         $ is_backfire = True
     else:
-        python:
-            topic_list = create_HR_review_topic_list(the_person)
-            for topic in topic_list:
-                update_opinion(the_person, topic)
+        $ hr_director_mind_control_update_opinions(the_person)
 
     $ scene_manager.add_actor(the_HR_dir)
     "[the_HR_dir.title] eventually returns."

@@ -7,8 +7,14 @@ init 5 python: # add to stack later then other mods
 
 init -1 python:
     # override some of the default settings to improve performance
-    config.image_cache_size = 20
-    config.image_cache_size_mb = 2048
+    config.image_cache_size = 8
+    config.image_cache_size_mb = 1024
+
+    # cache all GUI images in memory
+    for fn in renpy.list_files():
+        if (re.search("gui", fn, re.IGNORECASE) 
+            and fn.endswith(".png")):
+            renpy.cache_pin(fn)
 
 
 label activate_compatibility_fix(stack):

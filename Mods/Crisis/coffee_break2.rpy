@@ -182,7 +182,13 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
         $ town_relationships.worsen_relationship(winner_one, loser)
 
         loser.char "Fine, I'll do it but only my top and if I get it a third time in a row I swear..."
-        $ scene_manager.strip_actor_outfit_to_max_sluttiness(loser, exclude_lower = True, temp_sluttiness_boost = 30)
+        # strip at least one item
+        $ the_clothing = loser.outfit.get_upper_top_layer()
+        if the_clothing:
+            $ loser.draw_animated_removal(the_clothing)
+            $ the_clothing = None
+        # do we strip more?
+        $ scene_manager.strip_actor_outfit_to_max_sluttiness(loser, exclude_lower = True, temp_sluttiness_boost = 10)
         if loser.outfit.tits_visible():
             "[loser.possessive_title] sheepishly walks down the lobby trying to cover her breasts."
         else:

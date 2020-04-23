@@ -7,6 +7,7 @@ init 3 python: # Room creation
     # Create Home shower and attach to hallway
     home_shower.add_object(make_wall())
     home_shower.add_object(make_floor())
+    home_shower.add_object(Object("shower door", ["Lean"], sluttiness_modifier = 5, obedience_modifier = 5))
 
     # Always check if the room or action is somehow added already before proceeding.
     # I don't want it accessible from the Elevator.

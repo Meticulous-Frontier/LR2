@@ -490,8 +490,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                                 $ report_log["girl orgasms"] = report_log["girl two orgasms"]
                                 call fuck_person(the_person_two, private = private, report_log = report_log) from threesome_to_twosome_transition_1
                                 $ scene_manager.add_actor(the_person_one, character_placement = character_center_flipped)
-                                $ temp_log = _return
-                                $ report_log["girl two orgasms"] = temp_log["girl orgasms"]
+                                $ report_log["girl two orgasms"] = _return["girl orgasms"]
 
                             "Done for now":
                                 "I think we should just be done for now." #TODO girl takes over if she needs to cum and hasn't yet
@@ -513,8 +512,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                                 $ report_log["girl orgasms"] = report_log["girl one orgasms"]
                                 call fuck_person(the_person_one, private = private, report_log = report_log) from threesome_to_twosome_transition_2
                                 $ scene_manager.add_actor(the_person_two, character_placement = character_center_flipped)
-                                $ temp_log = _return
-                                $ report_log["girl one orgasms"] = temp_log["girl orgasms"]
+                                $ report_log["girl one orgasms"] = _return["girl orgasms"]
                             "Done for now":
                                 "I think we should just be done for now." #TODO girl takes over if she needs to cum and hasn't yet
                         $ finished = True
