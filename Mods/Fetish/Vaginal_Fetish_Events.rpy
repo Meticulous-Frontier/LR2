@@ -486,12 +486,7 @@ label SB_cowgirl_wakeup_label(the_person):
 init 2 python:
     def SB_fetish_vaginal_recurring_requirement():
         if mc_asleep() and day % 7 is not 4: # not on Friday nights
-            if mc.business.get_employee_count() > 0:
-                for person in mc.business.get_employee_list():
-                    if SB_check_fetish(person, vaginal_fetish_role):
-                        return True
-            if SB_check_fetish(mom, vaginal_fetish_role):
-                return True
+            return not get_vaginal_fetish_employee() is None
         return False
 
     SB_fetish_vaginal_recurring_crisis = Action("Vaginal Fetish Recurring Crisis",SB_fetish_vaginal_recurring_requirement,"SB_fetish_vaginal_recurring_label")
@@ -500,16 +495,19 @@ init 2 python:
     def SB_fetish_vaginal_lily_recurring_requirement():
         if mc_asleep() and day % 7 is not 4: # not on Friday nights
             if SB_check_fetish(lily, vaginal_fetish_role):
-                return True
+                if lily.event_triggers_dict.get("LastVaginalFetish", 0) + 10 < day:
+                    return True
         return False
 
     def get_vaginal_fetish_employee():
         meets_fetish_list = []
         for person in mc.business.get_employee_list():
             if SB_check_fetish(person, vaginal_fetish_role):
-                meets_fetish_list.append(person)
+                if person.event_triggers_dict.get("LastVaginalFetish", 0) + 10 < day:
+                    meets_fetish_list.append(person)
         if SB_check_fetish(mom, vaginal_fetish_role):
-            meets_fetish_list.append(mom)
+            if mom.event_triggers_dict.get("LastVaginalFetish", 0) + 10 < day:
+                meets_fetish_list.append(mom)
 
         return get_random_from_list(meets_fetish_list)
 
@@ -519,6 +517,9 @@ init 2 python:
 #SBV6
 label SB_fetish_vaginal_recurring_label():
     $ the_person = get_vaginal_fetish_employee()
+    if the_person is None:
+        return
+    $ the_person.event_triggers_dict["LastVaginalFetish"] = day
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     if the_person is mom:
@@ -604,6 +605,7 @@ label SB_fetish_vaginal_recurring_label():
 #SBV7
 label SB_fetish_vaginal_lily_recurring_label():
     $ the_person = lily
+    $ the_person.event_triggers_dict["LastVaginalFetish"] = day
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
 
@@ -663,7 +665,6 @@ label SB_fetish_vaginal_lily_recurring_label():
 
     "After you finish your rutting, you and [the_person.possessive_title] get under the covers of your bed."
     "Spooning behind [the_person.possessive_title], you drift off to a wonderful night's sleep. Her body heat and the feeling of her naked skin against yours give you very pleasant dreams."
-    #SBMOD Start hacked wakeup sex code. To be copy/pasted to other similar places#
 
     call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_SBV070
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV070

@@ -162,26 +162,26 @@ init 2 python:
 
     def SB_fetish_shower_cum_requirement():
         if mc_at_home() and time_of_day==0:
-            if SB_check_fetish(mom, cum_internal_role) or SB_check_fetish(mom, cum_external_role):
-                return True
-            if SB_check_fetish(lily, cum_internal_role) or SB_check_fetish(lily, cum_external_role):
-                return True
+            return not get_fetish_shower_cum_girl() is None
         return False
 
     def get_fetish_cum_dosage_employee():
         meets_fetish_list = []
         for person in mc.business.get_employee_list():
             if SB_check_fetish(person, cum_internal_role) or SB_check_fetish(person, cum_external_role):
-                meets_fetish_list.append(person)
+                if person.event_triggers_dict.get("LastCumFetish", 0) + 10 < day:
+                    meets_fetish_list.append(person)
 
         return get_random_from_list(meets_fetish_list)
 
     def get_fetish_shower_cum_girl():
         meets_fetish_list = []
         if SB_check_fetish(mom, cum_internal_role) or SB_check_fetish(mom, cum_external_role):
-            meets_fetish_list.append(mom)
+            if mom.event_triggers_dict.get("LastCumFetish", 0) + 10 < day:
+                meets_fetish_list.append(mom)
         if SB_check_fetish(lily, cum_internal_role) or SB_check_fetish(lily, cum_external_role):
-            meets_fetish_list.append(lily)
+            if lily.event_triggers_dict.get("LastCumFetish", 0) + 10 < day:
+                meets_fetish_list.append(lily)
 
         return get_random_from_list(meets_fetish_list)
 
@@ -197,6 +197,7 @@ label SB_fetish_cum_dosage_label():
     $ the_person = get_fetish_cum_dosage_employee()
     if the_person is None:
         return
+    $ the_person.event_triggers_dict["LastCumFetish"] = day
         
     "As you finish up with one of your work tasks, you decide to take a quick break."
     "You step into your office and sit down for a minute. You hop on your laptop and start browsing the internet."
@@ -425,6 +426,9 @@ label SB_fetish_lily_cum_label():
 #SBC5
 label SB_fetish_shower_cum_label():
     $ the_person = get_fetish_shower_cum_girl()
+    if the_person is None:
+        return
+    $ the_person.event_triggers_dict["LastCumFetish"] = day
     "You wake up a little groggy. Your head kinda hurts, so you grab some clothes and head towards the bathroom to take a hot shower. Hopefully the steam will help you feel better."
     $ home_shower.show_background()
     "You stand in the shower, enjoying the hot water for several minutes. The steam is beginning to cloud up the bathroom."

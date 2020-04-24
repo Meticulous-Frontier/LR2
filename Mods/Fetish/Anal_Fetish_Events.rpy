@@ -273,18 +273,16 @@ label SB_fetish_anal_staylate_event_label(the_person):
 
 init 2 python:
     def SB_fetish_anal_recurring_requirement():
-        if time_of_day == 3:
-            if mc.is_at_work():
-                for person in mc.business.get_employee_list():
-                    if SB_check_fetish(person, anal_fetish_role):
-                        return True
+        if time_of_day == 3 and mc.is_at_work():
+            return not get_anal_fetish_employee() is None
         return False
 
     def get_anal_fetish_employee():
         meets_fetish_list = []
         for person in mc.business.get_employee_list():
             if SB_check_fetish(person, anal_fetish_role):
-                meets_fetish_list.append(person)
+                if person.event_triggers_dict.get("LastAnalFetish", 0) + 10 < day:
+                    meets_fetish_list.append(person)
 
         return get_random_from_list(meets_fetish_list)
 
@@ -294,6 +292,9 @@ init 2 python:
 #SBA3
 label SB_fetish_anal_recurring_label():
     $ the_person = get_anal_fetish_employee()
+    if the_person is None:
+        return
+    $ the_person.event_triggers_dict["LastAnalFetish"] = day
     "As you are packing up your stuff to head home for the day, you hear [the_person.possessive_title]'s sweet voice call out to you."
 
     if mc.business.is_open_for_business():
