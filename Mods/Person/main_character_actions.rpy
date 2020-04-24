@@ -250,9 +250,11 @@ label mc_start_follow_label(person):
 label mc_stop_follow_label(person):
     python:
         if the_person.schedule[time_of_day] is the_person.home:
-            schedule_destination = "my room."
+            schedule_destination = "my room"
+        elif the_person.schedule[time_of_day]:
+            schedule_destination = "the " + the_person.schedule[time_of_day].formalName
         else:
-            schedule_destination = "somewhere else." # If their destination is not their home it tends to be None so can't reliably use destination.formalName
+            schedule_destination = "somewhere else"
 
     "You tell [person.title] to stop following you around."
 
@@ -262,7 +264,7 @@ label mc_stop_follow_label(person):
 
     $ the_person.run_move(mc.location) # This will trigger stat changes based on clothing, but shouldn't be problematic although it can be exploited.
 
-    the_person.title "Okay [the_person.mc_title], I'll head over to [schedule_destination]"
+    the_person.title "Okay [the_person.mc_title], I'll head over to [schedule_destination]."
 
 
     return
