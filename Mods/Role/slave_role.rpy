@@ -389,13 +389,13 @@ label increase_slave_submission_label(the_person):
         "You keep on punishing her for another minute, while she tries to stifle her cries."
         mc.name "Very well, slave, I will be demanding your complete submission next time."
         $ the_person.draw_person(position = "stand2", emotion = "angry")
-        $ the_person.change_obedience(10)
         if the_person.obedience < 200:
+            $ the_person.change_obedience(10)
             "She turns around with a slight defiant stare..."
         else:
             "She turns around, with a faint smile and devotion in her eyes."
             $ the_person.increase_opinion_score("being submissive")
-            $ the_person.change_stats(arousal = 20)
+            $ the_person.change_stats(obedience = 10, arousal = 20)
 
         the_person.char "Yes Master, I will try to please you better next time."
     else:
