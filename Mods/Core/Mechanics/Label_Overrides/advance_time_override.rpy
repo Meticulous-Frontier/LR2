@@ -138,7 +138,8 @@ init 5 python:
         tracker_info = { key:value for (key,value) in crisis_tracker_dict.items() if key in [x.effect for x in active_crisis_list] }
         key_list = [] # sometimes tracker_info is empty, to prevent error only choose from active_excluded_events
         if tracker_info.items():
-            min_value =  min(tracker_info.items(), key=lambda x: x[1])[1]
+            min_value = min(tracker_info.items(), key=lambda x: x[1])[1]
+            average = int(sum(x[1] for x in tracker_info.items())/len(tracker_info.items()))
             key_list = [key for (key, value) in tracker_info.items() if value == min_value]
 
         # add active events from exclusion list to possible events list
@@ -151,7 +152,7 @@ init 5 python:
         random_crisis = get_random_from_list(key_list)
         # renpy.say("", "Run Crisis [" + str(len(key_list)) +"]: " + random_crisis)
         if random_crisis in crisis_tracker_dict.keys():
-            crisis_tracker_dict[random_crisis] = min_value + 1     # set to min_value +1 to prevent the event from triggering a lot (its count maybe low due to being disabled)
+            crisis_tracker_dict[random_crisis] = average + 1     # set to min_value +1 to prevent the event from triggering a lot (its count maybe low due to being disabled)
         return find_in_list(lambda x: x.effect == random_crisis, active_crisis_list + active_excluded_events)
 
     def get_crisis_from_crisis_list():
