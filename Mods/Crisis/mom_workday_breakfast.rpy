@@ -280,7 +280,7 @@ label mom_breakfast_action_label_high():
                     $ scene_manager.strip_actor_outfit(lily)
                 mc.name "Mom is feeling needy this morning sis, why don't we take care of her?"
                 lily.char "Sounds great!"
-                call start_threesome(the_person, lily, start_position = Threesome_doggy_deluxe) from _fuck_mom_for_breakfast_1
+                call start_threesome(the_person, lily, start_position = Threesome_doggy_deluxe, swapped = True) from _fuck_mom_for_breakfast_1
                 $ the_report = _return
                 if the_report["girl one orgasms"] > 0 and the_report["girl two orgasms"] > 0 and the_report["guy orgasms"] > 0: #Happy family
                     "The three of you remain together for a while, enjoying your orgasms."
