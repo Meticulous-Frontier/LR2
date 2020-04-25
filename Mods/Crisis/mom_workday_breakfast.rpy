@@ -38,24 +38,27 @@ label mom_breakfast_action_label():
         mc.location.show_background()
         the_person = mom
         scene_manager = Scene()
-        scene_manager.add_actor(the_person, position = "sitting")
     #"When you walk out to the kitchen, you see [the_person.title] just sitting down to some breakfast."
     #$ the_person.draw_person(position = "sitting")
 
-    mc.name "Good morning, [the_person.title]. That smells great!"
-    "She sees you walk into the kitchen and greets you warmly."
-    the_person.char "Good morning! I made extra, grab some breakfast! I want you well fed going to work today."
-    "You grab some coffee and some bacon and sit down next to [the_person.possessive_title]. She is shaking her head while she looks at her phone."
-    #$ the_person.draw_person(position = "sitting",emotion="angry")
-    $ scene_manager.update_actor(the_person, position = "sitting", emotion="angry")
-    mc.name "Everything okay?"
-    if the_person.sluttiness < 20:  #Low Sluttiness path
-        call mom_breakfast_action_label_low() from _call_mom_breakfast_action_label_low
-    elif the_person.sluttiness < 70: #mid sluttiness path
-        call mom_breakfast_action_label_medium() from _call_mom_breakfast_action_label_medium
+    # surprise scene, you walk into the kitchen an mom and lily are going at it
+    if mc.business.event_triggers_dict.get("family_threesome", False) == True and renpy.random.randint(0, 2) == 1:
+        call mom_breakfast_action_mom_and_lily_label() from _call_mom_breakfast_action_mom_and_lily_label
     else:
-        call mom_breakfast_action_label_high() from _call_mom_breakfast_action_label_high
-
+        $ scene_manager.add_actor(the_person, position = "sitting")
+        mc.name "Good morning, [the_person.title]. That smells great!"
+        "She sees you walk into the kitchen and greets you warmly."
+        the_person.char "Good morning! I made extra, grab some breakfast! I want you well fed going to work today."
+        "You grab some coffee and some bacon and sit down next to [the_person.possessive_title]. She is shaking her head while she looks at her phone."
+        #$ the_person.draw_person(position = "sitting",emotion="angry")
+        $ scene_manager.update_actor(the_person, position = "sitting", emotion="angry")
+        mc.name "Everything okay?"
+        if the_person.sluttiness < 20:  #Low Sluttiness path
+            call mom_breakfast_action_label_low() from _call_mom_breakfast_action_label_low
+        elif the_person.sluttiness < 70: #mid sluttiness path
+            call mom_breakfast_action_label_medium() from _call_mom_breakfast_action_label_medium
+        else:
+            call mom_breakfast_action_label_high() from _call_mom_breakfast_action_label_high
 
     $ scene_manager.clear_scene()
     return
@@ -382,4 +385,55 @@ label mom_commando_day_selfie_label():
     "You smile and resume your day."
     $ renpy.scene("Active")
     $ the_person.review_outfit(dialogue = False)
+    return
+
+label mom_breakfast_action_mom_and_lily_label():
+    $ ran_num = renpy.random.randint(0, 1)
+    if ran_num == 1:
+        "As you walk into the kitchen, you see your sister and your mom eating each other out on the breakfast table."
+        $ the_person.strip_outfit(delay = 0)
+        $ lily.strip_outfit(delay = 0)
+        $ scene_manager.add_actor(the_person, position = "missionary", character_placement = character_69_bottom)
+        $ scene_manager.add_actor(lily, position = "cowgirl", character_placement = character_69_on_top)
+
+        the_person.char "Oh yes baby, keep licking me right there, that feels wonderful."
+        $ the_person.change_arousal(20)
+        lily.char "Mmm, mom, you taste great...oh yes, push some fingers in there...ah, yes, right there..."
+        $ lily.change_arousal(20)
+
+        "While watching them going at it, you decide what to do next."
+        menu:
+            "Join them":
+                lily.char "Hi [lily.mc_title], why don't you join us."
+                mc.name "Wait a second [the_person.title], let me take care of that for you."
+                "You quickly undress and..."               
+                call start_threesome(the_person, lily, start_position = Threesome_sixty_nine, start_object = make_table(), position_locked = True, round = 1) from _call_start_threesome_mom_breakfast_action_mom_and_lily_label_1
+                "Once you're finished you pickup your clothes and say goodbye to the girls, who seem determined to continue for a while."
+                $ mc.change_location(hall)
+                $ mc.location.show_background()
+            "Walk away":
+                pass
+    else:
+        "As you walk into the kitchen, you see your sister on her knees eating out your mom."
+        $ the_person.strip_outfit(delay = 0)
+        $ lily.strip_outfit(delay = 0)
+        $ scene_manager.add_actor(the_person, position = "missionary", character_placement = Threesome_doggy_deluxe_girl_one_transform)
+        $ scene_manager.add_actor(lily, position = "doggy", character_placement = Threesome_doggy_deluxe_girl_two_transform)
+
+        the_person.char "Oh yes baby, keep licking me right there, that feels wonderful."
+        $ the_person.change_arousal(20)
+        "While licking your mom, your sister is furiously rubbing her pussy."
+        $ lily.change_arousal(20)
+        "While watching them going at it, you decide what to do next."
+        menu:
+            "Join them":
+                the_person.char "Hello [the_person.mc_title], why don't you join us."
+                mc.name "Wait a second [lily.title], let me take care of that for you."
+                "You quickly undress and..."               
+                call start_threesome(the_person, lily, start_position = Threesome_doggy_deluxe, start_object = make_floor(), position_locked = True, round = 1) from _call_start_threesome_mom_breakfast_action_mom_and_lily_label_2
+                "Once you're finished you pickup your clothes and say goodbye to the girls, who seem determined to continue for a while."
+                $ mc.change_location(hall)
+                $ mc.location.show_background()
+            "Walk away":
+                pass
     return
