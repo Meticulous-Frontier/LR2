@@ -122,28 +122,10 @@ label outro_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_loca
     "Soon, the mouths of the beautiful girls on their knees in front of you drive you past the point of no return. Your orgasm is swiftly approaching."
     mc.name "Oh god, I'm gonna cum!"
     if the_girl_1.get_opinion_score("drinking cum") > 1:
-        "[the_girl_1.possessive_title] immediately grabs your cock, opens up and takes your tip in her mouth."
-        "[the_girl_2.title] moves down and strokes the side of your cock as you begin to ejaculate into [the_girl_1.title]'s eager mouth."
-        $ the_girl_1.cum_in_mouth()
-        $ scene_manager.draw_scene()
-        "You dump wave after wave of cum into [the_girl_1.title]'s mouth."
-        if the_girl_2.get_opinion_score("drinking cum") > 0:
-            "As you finish, you slowly pull back. Some of your cum slowly dribbles out of her mouth."
-            the_girl_2.char "Hey! Save some for me!"
-            "[the_girl_2.title] leans towards her blowjob partner and begins kissing and licking your cum off her face."
-            "Soon, they are full on making out, swapping your cum between their mouths."
-            $ the_girl_2.cum_in_mouth()
-            $ scene_manager.draw_scene()
-            "When they finish, they look up at you, remnants of your cum still visible at the corner of their mouths."
-            return
-        "You slowly pull back. Some of your cum slowly dribbles out of her mouth."
+        call threesome_double_blowjob_girls_cum_drink(the_girl_1, the_girl_2, the_location, the_object, the_round) from _call_threesome_double_blowjob_girls_cum_drink_1
         return
     elif the_girl_2.get_opinion_score("drinking cum") > 0:
-        "[the_girl_2.possessive_title] immediately grabs your cock, opens up and takes your tip in her mouth."
-        "[the_girl_1.title] strokes your cock with her hand as you fire your load into the back of [the_girl_2.title]'s mouth."
-        $ the_girl_2.cum_in_mouth()
-        $ scene_manager.draw_scene()
-        "As you finish, you slowly pull back. Some of your cum slowly dribbles out of her mouth."
+        call threesome_double_blowjob_girls_cum_drink(the_girl_2, the_girl_1, the_location, the_object, the_round) from _call_threesome_double_blowjob_girls_cum_drink_2
         return
     "You take your cock and begin to stroke it. Both girls look up at you as you get ready to finish."
     "Your orgasm hits and you being spraying down their beautiful faces with their seed."
@@ -203,8 +185,6 @@ label swap_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_locat
     return
 
 
-
-
 #Makeout. In this scene 1, the girls makeout while on their knees in front of you, touching and caressing each other.
 #In scene 2, girls make out around MC's cock
 
@@ -260,28 +240,10 @@ label outro_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_locatio
     "Watching the girls, on their knees in front of you, kiss and please each other has you hot and bothered. You find yourself stroking yourself past the point of no return."
     mc.name "Oh god, I'm gonna cum!"
     if the_girl_1.get_opinion_score("drinking cum") > 1:
-        "[the_girl_1.possessive_title] immediately grabs your cock, opens up and takes your tip in her mouth."
-        "[the_girl_2.title] moves down and strokes the side of your cock as you begin to ejaculate into [the_girl_1.title]'s eager mouth."
-        $ the_girl_1.cum_in_mouth()
-        $ scene_manager.draw_scene()
-        "You dump wave after wave of cum into [the_girl_1.title]'s mouth."
-        if the_girl_2.get_opinion_score("drinking cum") > 0:
-            "As you finish, you slowly pull back. Some of your cum slowly dribbles out of her mouth."
-            the_girl_2.char "Hey! Save some for me!"
-            "[the_girl_2.title] leans towards her blowjob partner and begins kissing and licking your cum off her face."
-            "Soon, they are full on making out, swapping your cum between their mouths."
-            $ the_girl_2.cum_in_mouth()
-            $ scene_manager.draw_scene()
-            "When they finish, they look up at you, remnants of your cum still visible at the corner of their mouths."
-            return
-        "You slowly pull back. Some of your cum slowly dribbles out of her mouth."
+        call threesome_double_blowjob_girls_cum_drink(the_girl_1, the_girl_2, the_location, the_object, the_round) from _call_threesome_double_blowjob_girls_cum_drink_3
         return
     elif the_girl_2.get_opinion_score("drinking cum") > 0:
-        "[the_girl_2.possessive_title] immediately grabs your cock, opens up and takes your tip in her mouth."
-        "[the_girl_1.title] strokes your cock with her hand as you fire your load into the back of [the_girl_2.title]'s mouth."
-        $ the_girl_2.cum_in_mouth()
-        $ scene_manager.draw_scene()
-        "As you finish, you slowly pull back. Some of your cum slowly dribbles out of her mouth."
+        call threesome_double_blowjob_girls_cum_drink(the_girl_2, the_girl_1, the_location, the_object, the_round) from _call_threesome_double_blowjob_girls_cum_drink_4
         return
     "You take your cock and begin to stroke it. Both girls look up at you as you get ready to finish."
     "Your orgasm hits and you being spraying down their beautiful faces with their seed."
@@ -331,4 +293,22 @@ label swap_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location
     the_girl_1.char "Mmmm, I love your tits, [the_girl_2.name]!"
     the_girl_2.char "Yours are nice too... I kinda want to suck on them..."
     "The girls are heating up as they start to make out with each other."
+    return
+
+label threesome_double_blowjob_girls_cum_drink(the_girl_1, the_girl_2, the_location, the_object, the_round):
+    "[the_girl_1.possessive_title] immediately grabs your cock, opens up and takes your tip in her mouth."
+    "[the_girl_2.title] moves down and strokes the side of your cock as you begin to ejaculate into [the_girl_1.title]'s eager mouth."
+    $ the_girl_1.cum_in_mouth()
+    $ scene_manager.draw_scene()
+    "You dump wave after wave of cum into [the_girl_1.title]'s mouth."
+    if the_girl_2.get_opinion_score("drinking cum") > 0:
+        "As you finish, you slowly pull back. Some of your cum slowly dribbles out of her mouth."
+        the_girl_2.char "Hey girl, save some for me!"
+        "[the_girl_2.title] leans towards her blowjob partner and begins kissing and licking your cum off her face."
+        "Soon, they are full on making out, swapping your cum between their mouths."
+        $ the_girl_2.cum_in_mouth()
+        $ scene_manager.draw_scene()
+        "When they finish, they look up at you, remnants of your cum still visible at the corner of their mouths."
+    else:
+        "You slowly pull back. Some of your cum slowly dribbles out of her mouth."
     return
