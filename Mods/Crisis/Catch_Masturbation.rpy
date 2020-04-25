@@ -307,6 +307,7 @@ label SB_caught_masturbating_crisis_label():
 
         $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
         $ mc.location.show_background()
-        $ the_clothing = None
-        $ renpy.scene("Active")
+    $ the_clothing = None
+    $ the_person_two = None
+    $ renpy.scene("Active")
     return
