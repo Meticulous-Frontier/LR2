@@ -503,13 +503,13 @@ label HR_director_monday_meeting_label(the_person):
     else:
         the_person.char "Can do! Did you want to call in a girl for a counseling session this week?"
         menu:
-            "Let's not this week":
-                $ del HR_employee_list
             "Call one in":
                 mc.name "Yes I want to do that."
                 the_person.char "Ok! Let me see who I have on my list here..."
                 call HR_director_personnel_interview_label(the_person, max_opinion = get_HR_director_tag("business_HR_coffee_tier", 0)) from HR_DIR_INTERVIEW_CALL_2
                 $ set_HR_director_tag("business_HR_meeting_last_day", day)
+            "Let's not this week":
+                $ del HR_employee_list
 
     the_person.char "Hmm, let's see, what's next..."
     call HR_director_manage_gym_membership(the_person) from HR_Gym_manage_1
