@@ -2502,13 +2502,11 @@ label Sarah_weekend_surprise_crisis_label():
             "As you exit the building, you consider where you should head for the night."
             menu:
                 "The Bar" if sarah.event_triggers_dict.get("drinks_out_progress", 0) >= 2:    #If you've grabbed drinks before. In requirements, so this SHOULD always be true
-                    pass
                     mc.name "What do you say we head to the bar and have a few drinks? Maybe play some darts?"
                     the_person.char "Oh! That sounds great!"
                     call Sarah_weekend_date_grab_drinks_label from sarah_weekend_date_crisis_01
 
                 "Strip Club" if sarah.event_triggers_dict.get("stripclub_progress", 0) >= 1:
-                    pass
                     mc.name "In the mood for a titty bar?"
                     the_person.char "Oh! That sounds like a good evening!"
                     call Sarah_weekend_date_strip_club_label from sarah_weekend_date_crisis_02
@@ -2670,6 +2668,7 @@ label Sarah_weekend_date_grab_drinks_label():
     mc.name "My place sounds great. Let's go!"
     "A short walk later, and you are walking through your front door."
     call Sarah_date_ends_at_your_place_label(the_person) from sarah_date_happy_ending_01
+    $ scene_manager.clear_scene()
     return
 
 label Sarah_sex_in_the_bar_restroom_label(the_person):
@@ -2721,26 +2720,24 @@ label Sarah_weekend_date_strip_club_label():
         the_person.char "That was hot. I'm am SO worked up. Can we please go back to your place now?"
     menu:
         "Back to your place":
-            pass
+            mc.name "My place sounds great. Let's go!"
+            "A short walk later, and you are walking through your front door."
+            call Sarah_date_ends_at_your_place_label(the_person) from sarah_date_happy_ending_03
         "Part ways for tonight":
             mc.name "I had a great time tonight, but I'm afraid we need to part ways for now."
             the_person.char "Damn, thats cold! Fine... I'll grab a taxi. Your loss!"
             "You stay out front of the strip club with [the_person.title] until her cab arrives. You say goodnight and soon the cab is driving off."
-            return
         "Wait for [cousin.title]" if willing_to_threesome(sarah, cousin):
             "Sorry! This isn't written yet. You decide actually to not wait for her and just head back to your place."
 
-    mc.name "My place sounds great. Let's go!"
-    "A short walk later, and you are walking through your front door."
-    call Sarah_date_ends_at_your_place_label(the_person) from sarah_date_happy_ending_03
+    $ scene_manager.clear_scene()
     return
 
 
 label Sarah_date_ends_at_your_place_label(the_person):
     $ mc.change_location(hall)
     $ mc.location.show_background()
-    $ scene_manager = Scene()
-    $ scene_manager.add_actor(the_person, position = "stand2", character_placement = character_right)
+    $ scene_manager.update_actor(the_person, position = "stand2", character_placement = character_right)
     if Sarah_is_fertile():
         the_person.char "Oh god I can't wait to feel you fill me up again..."
     else:
@@ -2773,7 +2770,7 @@ label Sarah_date_ends_at_your_place_label(the_person):
     "You reach your bedroom and quickly close and lock the door."
     "[the_person.possessive_title] looks at you."
     the_person.char "Welp, I think we both know where this is going!"
-    $ scene_manager.strip_actor_outfit(the_person, exclude_feet = False)
+    $ scene_manager.strip_actor_outfit(the_person, exclude_feet = True)
     if Sarah_is_fertile():
         the_person.char "Let's go! Ovulating is driving me crazy, I've been day dreaming about your cock fill me with seed all night long!"
     else:
@@ -2789,6 +2786,7 @@ label Sarah_date_ends_at_your_place_label(the_person):
         the_person.char "Do you care if I just stay here tonight? I umm... actually brought my toothbrush..."
         mc.name "Of course! I wouldn't have it any other way!."
         $ the_person.change_love(5)
+        $ scene_manager.strip_actor_outfit(the_person, exclude_feet = False)
         $ scene_manager.update_actor(the_person, position = "walking_away")
         "Worn out from your romp with [the_person.possessive_title], you cuddle up with her and quickly fall asleep."
         call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_overnight_after_date
@@ -2807,8 +2805,6 @@ label Sarah_date_ends_at_your_place_label(the_person):
         $ the_person.apply_outfit(the_person.planned_outfit)
         $ scene_manager.update_actor(the_person, position = "stand3")
         "You lay on your bed and watch as [the_person.possessive_title] slowly gets her clothes on. She says goodbye then lets herself out."
-
-    $ scene_manager.clear_scene()
     return
 
 label Sarah_date_strip_club_private_dance_label(the_person):
