@@ -75,6 +75,7 @@ init 1 python:
 
 #SBV1
 label SB_fetish_vaginal_label(the_person):
+    $ the_person.event_triggers_dict["LastVaginalFetish"] = day
     "*Ding Dong*"
     "You're roused from your bed by a ring on your doorbell."
     # make sure we are at the hall
@@ -203,6 +204,7 @@ label SB_fetish_vaginal_label(the_person):
 label SB_fetish_vaginal_event_label(the_person):
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
+    $ the_person.event_triggers_dict["LastVaginalFetish"] = day
 
     if the_person is mom:
         "You hear a knock on your door. You hear [the_person.possessive_title]'s sweet and familiar voice from the other side."
@@ -261,7 +263,7 @@ label SB_fetish_vaginal_event_label(the_person):
                 "[the_person.possessive_title] winks at you before beginning her routine."
                 call SB_free_strip_scene(the_person) from _SB_free_strip_scene_2
                 mc.name "Damn [the_person.title], you are really getting good at that."
-                "[the_person.possessive_title] bites her lip, glancing down at your bulge. Her cheeks are flushed and rosey."
+                "[the_person.possessive_title] bites her lip, glancing down at your bulge. Her cheeks are flushed and rosy."
                 the_person.char "Hey... if you want to I could... you know... take care of that tent you are sporting there [the_person.mc_title]."
                 "You stand up and embrace her, your dick straining against your clothes, eager to begin another incestuous tryst with [the_person.possessive_title]."
                 call fuck_person(the_person) from _call_fuck_person_SBV21
@@ -332,6 +334,7 @@ label SB_fetish_vaginal_event_label(the_person):
 #SBV3
 label SB_fetish_mom_vaginal_label():
     $ the_person = mom
+    $ the_person.event_triggers_dict["LastVaginalFetish"] = day    
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     "You are just starting to drift off to sleep, when you hear a knock at your door."
@@ -384,6 +387,7 @@ label SB_fetish_mom_vaginal_label():
 #SBV4
 label SB_fetish_lily_vaginal_label():
     $ the_person = lily
+    $ the_person.event_triggers_dict["LastVaginalFetish"] = day
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     "You are just starting to drift off to sleep, when you hear a knock at your door."
@@ -479,7 +483,9 @@ label SB_cowgirl_wakeup_label(the_person):
         "[the_person.title] looks at you and winks."
         the_person.char "Anytime [the_person.mc_title]! I'd better go get ready!"
     $ the_person.review_outfit(dialogue = False)
+    $ the_person.draw_person(position = "stand3")
     "You fall back asleep. When you wake up, [the_person.possessive_title] has left."
+    $ renpy.scene("Active")
     "Looks like you slept in!"
     return
 
@@ -631,7 +637,7 @@ label SB_fetish_vaginal_lily_recurring_label():
             "[the_person.possessive_title] winks at you before beginning her routine."
             call SB_free_strip_scene(the_person) from _SB_free_strip_scene_70
             mc.name "Damn [the_person.title], you are really getting good at that."
-            "[the_person.possessive_title] bites her lip, glancing down at your bulge. Her cheeks are flushed and rosey."
+            "[the_person.possessive_title] bites her lip, glancing down at your bulge. Her cheeks are flushed and rosy."
             the_person.char "Hey... if you want to I could... you know... take care of that tent you are sporting there [the_person.mc_title]."
             "You stand up and embrace her, your dick straining against your clothes, eager to begin another incestuous tryst with [the_person.possessive_title]."
 

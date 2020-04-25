@@ -249,6 +249,7 @@ label SB_fetish_cum_dosage_label():
 #SBC3
 label SB_fetish_mom_cum_label():
     $ the_person = mom
+    $ the_person.event_triggers_dict["LastCumFetish"] = day
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     "Tired from a long day, you quickly fall asleep."
@@ -343,6 +344,7 @@ label SB_fetish_mom_cum_label():
 #SBC4
 label SB_fetish_lily_cum_label():
     $ the_person = lily
+    $ the_person.event_triggers_dict["LastCumFetish"] = day
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     "You wake up a little groggy. Your head kinda hurts, so you grab some clothes and head towards the bathroom to take a hot shower. Hopefully the steam will help you feel better."
@@ -462,6 +464,7 @@ label SB_fetish_shower_cum_label():
 #SBC060
 label SB_fetish_stephanie_cum_label():
     $ the_person = stephanie
+    $ the_person.event_triggers_dict["LastCumFetish"] = day
     if mc.location == mc.business.r_div: #Already in research
         "Suddenly, [the_person.possessive_title] looks up from her work and and speaks up."
         the_person.char "Hey [the_person.mc_title], I need to talk to you about something. Can we go somewhere private?"
@@ -487,7 +490,7 @@ label SB_fetish_stephanie_cum_label():
         the_person.char "The serums you've been giving out... I thought maybe you were just trying to make all the girls' lives here better."
         the_person.char "But... lately, I've found myself slipping further and further into these fantasies. It's making it hard to concentrate on my work!"
         the_person.char "I think you and I both know that this is a direct result of one of the serums we've been investigating lately... to give girls specific cravings. Fetishes even!"
-        "She takes a second, she looks like she is on the verge of getting emotional. Then she straightens up and looks you straight in the eye"
+        "She takes a second, she looks like she is on the verge of getting emotional. Then she straightens up and looks you straight in the eye."
         the_person.char "For god's sake, last night I had a dream that I was getting gangbanged and twelve guys came on, or in me, at the same time!"
         the_person.char "I'm sorry, but I can't do it anymore. You and I both know there isn't any real way to counter these effects. So, if I'm going to be a cum slut... I might as well enjoy it, right?"
         mc.name "I suppose so."
@@ -619,7 +622,7 @@ label SB_fetish_stephanie_cum_label():
         the_person.char "The serums you've been giving out... I thought maybe you were just trying to make all the girls' lives here better."
         the_person.char "But... lately, I've found myself slipping further and further into these fantasies. It's making it hard to concentrate on my work!"
         the_person.char "I think you and I both know that this is a direct result of one of the serums we've been investigating lately... to give girls specific cravings. Fetishes even!"
-        "She takes a second, she looks like she is on the verge of getting emotional. Then she straightens up and looks you straight in the eye"
+        "She takes a second, she looks like she is on the verge of getting emotional. Then she straightens up and looks you straight in the eye."
         the_person.char "For god's sake, last night I went to the bar and sucked off three different guys! In one night! That isn't normal!"
         the_person.char "I'm going to be honest here. I trust you, I'm sure you are just doing this for research or business purposes. But I'm at a tipping point here. I need you to answer this question honestly."
         mc.name "Okay, go ahead."
@@ -743,7 +746,7 @@ label SB_fetish_stephanie_cum_label():
         the_person.char "The serums you've been giving out... I thought maybe you were just trying to make all the girls' lives here better."
         the_person.char "But... lately, I've found myself slipping further and further into these fantasies. It's making it hard to concentrate on my work!"
         the_person.char "I think you and I both know that this is a direct result of one of the serums we've been investigating lately... to give girls specific cravings. Fetishes even!"
-        "She takes a second, she looks like she is on the verge of getting emotional. Then she straightens up and looks you straight in the eye"
+        "She takes a second, she looks like she is on the verge of getting emotional. Then she straightens up and looks you straight in the eye."
         the_person.char "For god's sake, all I can think about is your cock blowing load after load all over me, in me, anywhere you want!"
         the_person.char "I trust you. It took me a while to realize what is going on, but I understand it now."
         the_person.char "This is the next step in our relationship. The urges are SO intense! You're the only guy here, I need you to help me take care of these urges!"
