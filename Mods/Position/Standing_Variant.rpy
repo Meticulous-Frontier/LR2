@@ -194,7 +194,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                          elif the_girl.get_opinion_score("being submissive") > 0 or the_girl.effective_sluttiness() > 120:
                              the_girl.char "Yes sir!"
                              "[the_girl.possessive_title] immediately opens her mouth and begins sucking on your fingers. She bobs her head up and down on them a few times as if it were a cock"
-                             "Her mouth comes off your fingers with a pop"
+                             "Her mouth comes off your fingers with a pop."
                              the_girl.char "There you go sir, all clean!"
                              $ the_girl.change_arousal(2)
                          else:
