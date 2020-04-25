@@ -48,7 +48,7 @@ label SB_caught_masturbating_crisis_label():
     "You decide to take a quick break from what you are doing. You stand up and stretch your legs, and go for a quick walk."
     "While you are walking by an unused storage room, you hear some muffled sounds coming from inside."
 
-    if not the_person is the_person_two and willing_to_threesome(the_person, the_person_two):
+    if the_person_two and not the_person is the_person_two and willing_to_threesome(the_person, the_person_two):
         $ scene_manager = Scene()
         $ the_person.strip_outfit(delay = 0)
         $ the_person_two.strip_outfit(delay = 0)
