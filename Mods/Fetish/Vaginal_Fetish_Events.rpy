@@ -471,7 +471,7 @@ label SB_cowgirl_wakeup_label(the_person):
     the_person.char "Good morning [the_person.mc_title]... Sorry but when I woke up I noticed you were hard so... I figured you wouldn't mind if I hopped on for a bit..."
     "[the_person.possessive_title] moans during one slow stroke."
     "You decide to lay back and enjoy the ride"
-    call fuck_person(the_person, start_position = cowgirl, skip_intro = True) from _call_sex_description_SBV50
+    call fuck_person(the_person, start_position = cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True) from _call_sex_description_SBV50
     mc.name "Oh god what a wakeup. I think I'm gonna go back to sleep for a bit. Thanks!"
     if the_person is mom:
         "[the_person.possessive_title] looks at you and smiles."
