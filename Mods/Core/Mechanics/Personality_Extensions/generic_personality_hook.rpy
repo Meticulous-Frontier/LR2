@@ -257,6 +257,11 @@ init -1 python:
         stephanie.wardrobe.outfits.remove(find_in_list(lambda x: x.name == "Nude", stephanie.wardrobe.outfits))
         return
 
+    def update_lingerie_wardrobe():
+        lingerie_wardrobe = wardrobe_from_xml("Lingerie_Wardrobe")
+        lingerie_wardrobe = lingerie_wardrobe.merge_wardrobes(wardrobe_from_xml("Lingerie_Extended_Wardrobe"))
+        return
+
     unique_character_list = []  # global not stored variable (since not defined in label function)
 
     def create_unique_character_list():
@@ -321,6 +326,8 @@ label activate_generic_personality(stack):
 
         update_unique_character_wardrobes()
 
+        update_lingerie_wardrobe()
+
         update_stripclub_strippers()
 
         # continue on the hijack stack if needed
@@ -334,6 +341,8 @@ label update_generic_personality(stack):
         update_main_character_actions()
 
         update_characters()
+
+        update_lingerie_wardrobe()
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
