@@ -676,6 +676,7 @@ label SB_mom_anal_friday_label():
                 "[the_person.possessive_title] lays there on the bed, speechless from your anal plundering."
             else:
                 "[the_person.possessive_title] lays there on the bed"
+            $ the_person.draw_person(position = "missionary")
             mc.name "Mmm, thanks [the_person.title]. That ass is amazing. Next friday, right?"
             the_person.char "Yes [the_person.mc_title]. But don't feel like you HAVE to wait to take my ass. We can do it whenever you want. I'll be ready!"
 
