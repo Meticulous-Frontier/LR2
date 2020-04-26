@@ -67,6 +67,14 @@ init -1 python:
         tooltip += positive_effects + negative_effects
         return tooltip
 
+    def person_info_ui_get_serum_info_tooltip(person):
+        tooltip = ""
+        for serum in the_person.serum_effects:
+            if len(tooltip) > 0:
+                tooltip.append("\n")
+            tooltip += serum.name + " : " + str(serum.duration - serum.duration_counter) + " Turns Left"
+        return tooltip
+
 init 2:
     screen person_info_ui(person): #Used to display stats for a person while you're talking to them.
         layer "Active" #By making this layer active it is cleared whenever we draw a person or clear them off the screen.
@@ -186,7 +194,7 @@ init 2:
                                 yoffset 6
                                 ysize 24
                                 text_style "menu_text_style"
-                                tooltip "How likely this character is to increase her core sluttiness. Every time chunk there is a chance to change 1 point of temporary sluttiness (" + get_red_heart(5) + ") into core sluttiness (" + get_gold_heart(5) + ") as long as temporary sluttiness is higher."
+                                tooltip person_info_ui_get_serum_info_tooltip(the_person)
                                 action NullAction()
                                 sensitive True
 

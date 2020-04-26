@@ -39,12 +39,12 @@ screen multi_person_info_ui(actors):
                         else:
                             text "???" style "menu_text_style" font actor.person.char.what_args["font"] color actor.person.char.what_args["color"] size 30
                         
-                        if actor.person.serum_effects > 0:
+                        if actor.person.serum_effects:
                             textbutton "{image=serum_vial} +[actor.person.suggestibility]%":
                                 yoffset 6
                                 ysize 24
                                 text_style "menu_text_style"
-                                tooltip "How likely this character is to increase her core sluttiness. Every time chunk there is a chance to change 1 point of temporary sluttiness (" + get_red_heart(5) + ") into core sluttiness (" + get_gold_heart(5) + ") as long as temporary sluttiness is higher."
+                                tooltip person_info_ui_get_serum_info_tooltip(actor.person)
                                 action NullAction()
                                 sensitive True                        
 
