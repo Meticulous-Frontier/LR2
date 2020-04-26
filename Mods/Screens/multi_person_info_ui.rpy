@@ -1,4 +1,12 @@
 #Used to display stats for multi people while you're talking to them, takes an array of Actor objects.
+init -1 python:
+    def multi_person_info_ui_get_formatted_tooltip(person):
+        tooltip = "Age: " + str(person.age) + "\n"
+        tooltip += "Height: " + height_to_string(person.height) + "\n"
+        tooltip += "Cup size: " + str(person.tits) + "\n"
+        tooltip += "Weight: " + get_person_weight_string(person)
+        return tooltip
+
 screen multi_person_info_ui(actors): 
     layer "Active"
     frame:
@@ -19,12 +27,19 @@ screen multi_person_info_ui(actors):
             for actor in sorted(actors, key=lambda a: a.sort_order):
                 vbox:
                     hbox:
+                        textbutton "{image=question_mark_small}":
+                            yoffset 12
+                            ysize 28
+                            tooltip multi_person_info_ui_get_formatted_tooltip(actor.person)
+                            action NullAction()
+                            sensitive True
+
                         if actor.person.title:
                             text actor.person.title style "menu_text_style" size 30 ysize 30
                         else:
                             text "???" style "menu_text_style" font actor.person.char.what_args["font"] color actor.person.char.what_args["color"] size 30
                         
-                        if actor.person.suggestibility > 0:
+                        if actor.person.serum_effects > 0:
                             textbutton "{image=serum_vial} +[actor.person.suggestibility]%":
                                 yoffset 6
                                 ysize 24

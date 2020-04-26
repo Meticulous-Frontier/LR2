@@ -181,7 +181,7 @@ init 2:
                 vbox:
                     hbox:
                         textbutton "Detailed Information" action Show("person_info_detailed",the_person=person) style "textbutton_style" text_style "textbutton_text_style"
-                        if person.suggestibility > 0:
+                        if the_person.serum_effects:
                             textbutton "{image=serum_vial} +[person.suggestibility]%":
                                 yoffset 6
                                 ysize 24
