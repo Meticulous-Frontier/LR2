@@ -33,6 +33,7 @@ label business_meeting_action_label:
 
     $ the_place.show_background()
     $ the_place = None
+    $ done = False
     $ the_person.draw_person(position="sitting", emotion="happy")
 
     call business_meeting_introduction(the_person) from _call_business_meeting_introduction_1
@@ -41,6 +42,7 @@ label business_meeting_action_label:
         call business_meeting_arrousal(the_person) from _call_business_meeting_arrousal_1
         if (the_person.effective_sluttiness() > 40):
             call business_meeting_seduction(the_person) from _call_business_meeting_seduction_1
+            $ done = _return
         else:
             $ the_person.change_happiness(5)
             "After a while [the_person.title] wraps up her story."
@@ -50,7 +52,7 @@ label business_meeting_action_label:
 
     $ the_person.review_outfit(dialogue = False)
 
-    call business_meeting_end(the_person) from _call_business_meeting_end_1
+    call business_meeting_end(the_person, done) from _call_business_meeting_end_1
 
     $ change = renpy.random.randint(1, 3)
     $ hr_employee = get_random_from_list(mc.business.hr_team)
@@ -142,6 +144,7 @@ label business_meeting_seduction(the_person):
                         $ the_person.break_taboo("sucking_cock")
 
                     call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_business_meeting
+                    return True
                 "Not now":
                     mc.name "I'm sorry [the_person.title], i've got another meeting to attend."
                     $ the_person.draw_person(position = "stand4", emotion="sad")
@@ -152,28 +155,28 @@ label business_meeting_seduction(the_person):
     else:
         "After while [the_person.title] stops rubbing your exposed member."
         the_person.char "I will leave you now, it seems you have some other business to take care off."
-    return
+    return False
 
-label business_meeting_end(the_person):
+label business_meeting_end(the_person, done):
     if the_person.effective_sluttiness() < 20:
         the_person.char "Thank you for listening to my ideas, [the_person.mc_title]."
-    elif the_person.effective_sluttiness() < 40:
+    elif done:
         the_person.char "Thank you, [the_person.mc_title], I hope you 'come' to see things my way."
     else:
         the_person.char "Thank you, [the_person.mc_title], I hope you liked my contribution."
 
-    if the_person.effective_sluttiness() < 40:
+    if not done:
         "You thank [the_person.title] for her time and that you will look into the matter."
     else:
         mc.name "You did well [the_person.title], this was very productive and relaxing."
 
-    if the_person.effective_sluttiness() > 50:
-        "[the_person.possessive_title] puts on her clothes and walks away."
-
     $ the_person.draw_person(position="walking_away")
 
-    if the_person.effective_sluttiness() < 40:
+    if not done:
         "You watch her walking away, deciding what to do next."
     else:
-        "After contemplating what just happened, you decide what to do next."
+        $ the_person.review_outfit(dialogue = False)
+        "[the_person.possessive_title] puts on her clothes and walks away."
+
+    "After contemplating what just happened, you decide what to do next."
     return
