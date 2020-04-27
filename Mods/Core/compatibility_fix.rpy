@@ -10,6 +10,9 @@ init -1 python:
     config.image_cache_size = 8
     config.image_cache_size_mb = 1024
 
+    # for DEBUG only (uncomment when you get a cPickle error)
+    # config.use_cpickle = False
+
     # cache all GUI images in memory
     for fn in renpy.list_files():
         if (re.search("gui", fn, re.IGNORECASE) 
