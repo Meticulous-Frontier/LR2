@@ -1,7 +1,13 @@
 #Used to display stats for multi people while you're talking to them, takes an array of Actor objects.
 init -1 python:
     def multi_person_info_ui_get_formatted_tooltip(person):
-        tooltip = "Age: " + str(person.age) + "\n"
+        tooltip = ""
+        if mc.business.get_employee_title(person) != "None":
+            tooltip += "Job: " + mc.business.get_employee_title(person) + "\n"
+        for role in [x.role_name for x in person.special_role if not x.hidden]:
+            tooltip += role + "\n"
+        tooltip += "Love: " + str(person.love) + "\n"
+        tooltip += "Age: " + str(person.age) + "\n"
         tooltip += "Height: " + height_to_string(person.height) + "\n"
         tooltip += "Cup size: " + str(person.tits) + "\n"
         tooltip += "Weight: " + get_person_weight_string(person)
