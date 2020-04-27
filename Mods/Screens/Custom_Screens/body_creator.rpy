@@ -118,7 +118,7 @@ init 2 python:
             clone.love = 30
 
         clone.serum_effects = []
-        clone.schedule = {0: rd_division, 1: rd_division, 2: rd_division, 3: rd_division, 4: rd_division}
+        clone.set_schedule([0,1,2,3,4], dungeon)
         for record in clone.sex_record:
             clone.sex_record[record] = 0
 

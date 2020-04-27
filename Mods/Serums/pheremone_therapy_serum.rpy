@@ -9,9 +9,7 @@ init -1 python:
         the_person.change_slut_core(-15, add_to_log, fire_event = False)
         the_person.change_slut_temp(-15, add_to_log)
 
-# any label that starts with serum_mod is added to the serum mod list
-label serum_mod_pheremone_therapy_serum_trait(stack):
-    python:
+    def add_pheromone_therapy_serum():
         pher_ther = SerumTraitMod(name = "Pheromone Therapy",
                 desc = "By mimicking pheromones found in closely related animals, this serum can recreate feelings of going into heat in women.",
                 positive_slug = "+$40 Value, +15 Sluttiness",
@@ -34,5 +32,10 @@ label serum_mod_pheremone_therapy_serum_trait(stack):
         #     is_side_effect = a_bool)
             )
 
+
+# any label that starts with serum_mod is added to the serum mod list
+label serum_mod_pheremone_therapy_serum_trait(stack):
+    python:
+        add_pheromone_therapy_serum()
         execute_hijack_call(stack)
     return

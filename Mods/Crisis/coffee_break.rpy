@@ -11,16 +11,6 @@ init 2 python:
                         return True
         return False
 
-    def has_opinion(person, topic):
-        return not (person.get_opinion_topic(topic) is None)
-
-    def update_opinion(person, topic):
-        if has_opinion(person, topic):
-            person.increase_opinion_score(topic)
-        else:
-            person.add_opinion(topic, 1)
-        return
-
     coffee_break_action = ActionMod("Coffee Break", coffee_break_requirement, "coffee_break_action_label",
         menu_tooltip = "A group of employees is having a coffee break.", category = "Business", is_crisis = True, crisis_weight = coffee_break_weight)
 
@@ -101,31 +91,26 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                         scene_manager.strip_actor_outfit_to_max_sluttiness(person_two, temp_sluttiness_boost = 50)
                         scene_manager.strip_actor_outfit_to_max_sluttiness(person_three, temp_sluttiness_boost = 50)
 
-                    # switch to SB ui
-                    #$ SB_draw_two_person_scene(person_one = person_two, person_two = person_three, one_pos_x = 0.7, one_position = "stand3", two_position = "stand4")
                     call start_threesome(person_two, person_three) from _call_coffee_break_threesome_test_3
-                    #call SB_threesome_description(person_two, person_three, SB_threesome_sixty_nine, make_floor(), 0, private = True, girl_in_charge = False) from _call_SB_threesome_description
-                    #$ SB_draw_two_person_scene(person_one = person_two, person_two = person_three, one_pos_x = 0.7)
+
                     person_two.char "Wow...this was...really good actually... You can join us anytime you want boss..."
-                    #$ SB_draw_two_person_scene(person_one = person_two, person_two = person_three, one_pos_x = 0.7, one_position = "walking_away", two_position = "walking_away")
                     $ scene_manager.update_actor(person_two, position = "walking_away", character_placement = character_center_flipped)
                     $ scene_manager.update_actor(person_three, position = "walking_away", character_placement = character_right)
                     "They pickup their clothes and leave you feeling very proud of yourself."
 
                     # cleanup scene
                     $ scene_manager.clear_scene()
-                    $ update_opinion(person_two, "threesomes")
+                    $ person_two.increase_opinion_score("threesomes")
                     $ person_two.reset_arousal()
                     $ person_two.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
 
-                    $ update_opinion(person_three, "threesomes")
+                    $ person_three.increase_opinion_score("threesomes")
                     $ person_three.reset_arousal()
                     $ person_three.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
 
                     $ town_relationships.improve_relationship(person_two, person_three)
 
                     "Amazing you just fucked two of your employees, wondering if other girls in your company might also be up for this."
-                    return
         else:
             person_two.char "Another time, [person_three.name], let's get back to work."
 
@@ -147,4 +132,4 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
     # clear scene
     $ mc.location.show_background()
     $ scene_manager.clear_scene()
-    return
+    return "Advance Time"

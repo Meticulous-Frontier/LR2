@@ -10,13 +10,13 @@ init 5 python:
     def remove_clothing_based_on_preference(person):
         if person.get_opinion_score("showing her tits") > person.get_opinion_score("showing her ass"):
             # tits preference
-            return person.strip_outfit_to_max_sluttiness(top_layer_first = False, exclude_lower = True, temp_sluttiness_boost = 20)
+            return person.strip_outfit_to_max_sluttiness(exclude_lower = True, temp_sluttiness_boost = 20)
         elif person.get_opinion_score("showing her tits") < person.get_opinion_score("showing her ass"):
             # vagina/ass preference
-            return person.strip_outfit_to_max_sluttiness(top_layer_first = False, exclude_upper = True, temp_sluttiness_boost = 20)
+            return person.strip_outfit_to_max_sluttiness(exclude_upper = True, temp_sluttiness_boost = 20)
         else:
             # no preference
-            return person.strip_outfit_to_max_sluttiness(top_layer_first = False, temp_sluttiness_boost = 20)
+            return person.strip_outfit_to_max_sluttiness(temp_sluttiness_boost = 20)
 
     hijack_beg_finish_labels()
 

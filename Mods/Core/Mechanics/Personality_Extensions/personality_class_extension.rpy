@@ -37,34 +37,47 @@ init -1 python:
 init 4 python:
     list_of_extra_personalities = [] # Personalities not included in list_of_personalities
 
+    def update_list_of_extra_personalities():
+        if "starbuck_personality" in globals():
+            if starbuck_personality not in list_of_extra_personalities:
+                list_of_extra_personalities.append(starbuck_personality)
+        if "FA_personality" in globals():
+            if FA_personality not in list_of_extra_personalities:
+                list_of_extra_personalities.append(FA_personality)
+        if "Sarah_personality" in globals():
+            if Sarah_personality not in list_of_extra_personalities:
+                list_of_extra_personalities.append(Sarah_personality)
+        if "hotwife_personality" in globals():
+            if hotwife_personality not in list_of_extra_personalities:
+                list_of_extra_personalities.append(hotwife_personality)
+        if "athlete_personality" in globals():
+            if athlete_personality not in list_of_extra_personalities:
+                list_of_extra_personalities.append(athlete_personality)
+        if "nora_personality" in globals():
+            if nora_personality not in list_of_extra_personalities:
+                list_of_extra_personalities.append(nora_personality)
+        if "aunt_personality" in globals():
+            if aunt_personality not in list_of_extra_personalities:
+                list_of_extra_personalities.append(aunt_personality)
+        if "cousin_personality" in globals():
+            if cousin_personality not in list_of_extra_personalities:
+                list_of_extra_personalities.append(cousin_personality)
+        return
+
     add_label_hijack("normal_start", "update_extra_personalities_list")
     add_label_hijack("after_load", "update_extra_personalities_list")
 
+init 1400 python:
+    # update default personalities with extra opinions (not in base game)
+    relaxed_personality.common_likes.append("high heels")
+    introvert_personality.common_likes.append("boots")
+    introvert_personality.common_dislikes.append("high heels")
+    reserved_personality.common_likes.append("dresses")
+    reserved_personality.common_dislikes.append("skirts")
+    wild_personality.common_likes.append("high heels")
+    wild_personality.common_likes.append("dresses")
+
 label update_extra_personalities_list(stack):
-
-    if "starbuck_personality" in globals():
-        if starbuck_personality not in list_of_extra_personalities:
-            $ list_of_extra_personalities.append(starbuck_personality)
-    if "FA_personality" in globals():
-        if FA_personality not in list_of_extra_personalities:
-            $ list_of_extra_personalities.append(FA_personality)
-    if "Sarah_personality" in globals():
-        if Sarah_personality not in list_of_extra_personalities:
-            $ list_of_extra_personalities.append(Sarah_personality)
-    if "hotwife_personality" in globals():
-        if hotwife_personality not in list_of_extra_personalities:
-            $ list_of_extra_personalities.append(hotwife_personality)
-    if "athlete_personality" in globals():
-        if athlete_personality not in list_of_extra_personalities:
-            $ list_of_extra_personalities.append(athlete_personality)
-    if "nora_personality" in globals():
-        if nora_personality not in list_of_extra_personalities:
-            $ list_of_extra_personalities.append(nora_personality)
-    if "aunt_personality" in globals():
-        if aunt_personality not in list_of_extra_personalities:
-            $ list_of_extra_personalities.append(aunt_personality)
-    if "cousin_personality" in globals():
-        if cousin_personality not in list_of_extra_personalities:
-            $ list_of_extra_personalities.append(cousin_personality)
-
+    $ update_list_of_extra_personalities()
     $ execute_hijack_call(stack)
+    return

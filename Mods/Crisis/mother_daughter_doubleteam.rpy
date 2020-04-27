@@ -65,8 +65,8 @@ label mother_daughter_doubleteam_action_label():
                 the_mother.change_energy(50)
                 the_daughter.change_energy(50)
             call start_threesome(the_mother, the_daughter, start_position = threesome_double_blowjob, private = True, position_locked = True, affair_ask_after = False) from mother_daughter_teamup_call1
-            $ sex_log = _return
-            if sex_log.get("guy orgasms", 0) > 0:
+            $ the_report = _return
+            if the_report.get("guy orgasms", 0) > 0:
                 "You sigh happily after you finish receiving your double blowjob from the girls. For a moment, you forgot that it was a competition."
             else:
                 "You decide who you think is the better oral giver, so you pull back to deliver the news."

@@ -39,35 +39,35 @@ label scene_SB_cum_fetish_blowjob_1(the_girl, the_location, the_object):
     "[the_girl.possessive_title] keeps her mouth open wide and bobs her head back and forth to slide your cock in and out. The feeling of her soft, warm mouth sends shivers up your spine."
     "She moans slightly as she strokes you with her soft, velvet lips."
     menu:
-            "Talk dirty to her":
-                mc.name "You are such a good cum slut. You are so eager to suck that cum straight outta me, aren't you?"
-                "[the_girl.possessive_title] strokes you a few more times with her skill mouth. She twirls her tongue around the tip a few times before taking a second to respond."
-                if SB_check_fetish(the_girl, cum_internal_role) or the_girl.get_opinion_score("drinking cum") > the_girl.get_opinion_score("cum facials"):
-                    the_girl.char "Mmm, its been too long since you fed me... I cant wait to feel your cum sliding down my throat..."
-                    $ the_girl.discover_opinion("drinking cum")
-                else:
-                    the_girl.char "Mmm, I can't wait until I feel it, your balls tighten and that pre-cum twitching... then I'm gonna pull off and stroke you while you cover my face in your hot cum..."
-                    $ the_girl.discover_opinion("cum facials")
-                    "She slips you back into her mouth and resumes blowing you."
-            "Stay quiet":
-                "You rest your hand on her head, guiding her as she sucks you off."
-                "With a little encouragement, you pull [the_girl.possessive_title]'s head down a little further with each stroke."
-                if the_girl.get_opinion_score("masturbating") > 0:
-                    if the_girl.outfit.vagina_available():
-                        "[the_girl.possessive_title] puts a hand between her legs and starts to touch herself while she she blows you."
-                        $ the_girl.change_arousal(the_girl.get_opinion_score("masturbating"))
-                        $ the_girl.discover_opinion("masturbating")
-                        if the_girl.arousal > 60:
-                            "Her moans are muffled by your cock when she slides a finger into her pussy and starts to finger herself."
-                        else:
-                            "She rubs her clit with her middle finger, making little circles around the sensitive nub."
+        "Talk dirty to her":
+            mc.name "You are such a good cum slut. You are so eager to suck that cum straight outta me, aren't you?"
+            "[the_girl.possessive_title] strokes you a few more times with her skill mouth. She twirls her tongue around the tip a few times before taking a second to respond."
+            if SB_check_fetish(the_girl, cum_internal_role) or the_girl.get_opinion_score("drinking cum") > the_girl.get_opinion_score("cum facials"):
+                the_girl.char "Mmm, its been too long since you fed me... I cant wait to feel your cum sliding down my throat..."
+                $ the_girl.discover_opinion("drinking cum")
+            else:
+                the_girl.char "Mmm, I can't wait until I feel it, your balls tighten and that pre-cum twitching... then I'm gonna pull off and stroke you while you cover my face in your hot cum..."
+                $ the_girl.discover_opinion("cum facials")
+                "She slips you back into her mouth and resumes blowing you."
+        "Stay quiet":
+            "You rest your hand on her head, guiding her as she sucks you off."
+            "With a little encouragement, you pull [the_girl.possessive_title]'s head down a little further with each stroke."
+            if the_girl.get_opinion_score("masturbating") > 0:
+                if the_girl.outfit.vagina_available():
+                    "[the_girl.possessive_title] puts a hand between her legs and starts to touch herself while she she blows you."
+                    $ the_girl.change_arousal(the_girl.get_opinion_score("masturbating"))
+                    $ the_girl.discover_opinion("masturbating")
+                    if the_girl.arousal > 60:
+                        "Her moans are muffled by your cock when she slides a finger into her pussy and starts to finger herself."
                     else:
-                        if the_girl.arousal > 60:
-                            "[the_girl.possessive_title] puts a hand between her legs and eagerly rubs at her crotch through her clothing."
-                        else:
-                            "[the_girl.possessive_title] puts a hand between her legs and rubs at her crotch absentmindedly."
+                        "She rubs her clit with her middle finger, making little circles around the sensitive nub."
                 else:
-                    "[the_girl.possessive_title] keeps up a steady pace, bobbing her head back and forth and running your cock in and out of her soft mouth."
+                    if the_girl.arousal > 60:
+                        "[the_girl.possessive_title] puts a hand between her legs and eagerly rubs at her crotch through her clothing."
+                    else:
+                        "[the_girl.possessive_title] puts a hand between her legs and rubs at her crotch absentmindedly."
+            else:
+                "[the_girl.possessive_title] keeps up a steady pace, bobbing her head back and forth and running your cock in and out of her soft mouth."
 
     return
 
@@ -80,44 +80,42 @@ label scene_SB_cum_fetish_blowjob_2(the_girl, the_location, the_object):
     mc.name "Of course you can't wait. You are my perfect little cum slut."
     "When [the_girl.possessive_title] opens her mouth and resumes blowing you, you put your hand on the back of her head, intent to push yourself down her throat."
     if the_girl.get_opinion_score("being submissive") > 0:
-            "[the_girl.possessive_title] looks up at you. You can see her pupils dilate as you slowly pull her head towards you, until your cock is buried in her throat."
-            "[the_girl.possessive_title]'s knees quiver while her throat spasms around your shaft. You hold her deep while her body twitches with pleasure."
-            "You let go of her head and she slowly comes up for air."
-            the_girl.char "Oh god you taste so good. You can fuck my throat if you want to, just promise me you'll warn me before you cum..."
-            if SB_check_fetish(the_girl, cum_internal_role) or the_girl.get_opinion_score("drinking cum") > the_girl.get_opinion_score("cum facials"):
-                the_girl.char "...I want you to cum in my mouth, not down my throat. I want to feel it pool up inside my mouth until I can barely hold it all and taste your amazing cum filling my mouth completely..."
-                $ the_girl.discover_opinion("drinking cum")
-            else:
-                the_girl.char "...I want to wear your cum all over my face, like a good slut! I want to walk around the rest a day with it obvious you've blown your load all over to everyone who sees me..."
-                $ the_girl.discover_opinion("cum facials")
-            "Turned on by her filthy words, you grab the back of her head with both hands and force your dick right back down her throat."
-            "You fuck her face roughly. Her throat makes vulgar suction noises with each thrust, and you can see her throat bulging slightly."
-            $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 3)
+        "[the_girl.possessive_title] looks up at you. You can see her pupils dilate as you slowly pull her head towards you, until your cock is buried in her throat."
+        "[the_girl.possessive_title]'s knees quiver while her throat spasms around your shaft. You hold her deep while her body twitches with pleasure."
+        "You let go of her head and she slowly comes up for air."
+        the_girl.char "Oh god you taste so good. You can fuck my throat if you want to, just promise me you'll warn me before you cum..."
+        if SB_check_fetish(the_girl, cum_internal_role) or the_girl.get_opinion_score("drinking cum") > the_girl.get_opinion_score("cum facials"):
+            the_girl.char "...I want you to cum in my mouth, not down my throat. I want to feel it pool up inside my mouth until I can barely hold it all and taste your amazing cum filling my mouth completely..."
+            $ the_girl.discover_opinion("drinking cum")
+        else:
+            the_girl.char "...I want to wear your cum all over my face, like a good slut! I want to walk around the rest a day with it obvious you've blown your load all over to everyone who sees me..."
+            $ the_girl.discover_opinion("cum facials")
+        "Turned on by her filthy words, you grab the back of her head with both hands and force your dick right back down her throat."
+        "You fuck her face roughly. Her throat makes vulgar suction noises with each thrust, and you can see her throat bulging slightly."
+        $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 3)
     elif the_girl.get_opinion_score("taking control") > 0:
-            "[the_girl.possessive_title] grabs your hands in hers. She holds your hands as she looks up at you, making eye contant."
-            "With her hands holding yours, she opens her mouth wide and descends on your cock."
-            "She bottoms out and her nose is touching your pubic hair. You are balls deep down her throat."
-            mc.name "Mmmm, that's it bitch. Take it deep!"
-            "Still making eye contact, [the_girl.possessive_title] begins to bob her head up and down, completely deepthroating you with every stroke."
-            "Every few strokes you can feel the soft rumble of a moan, being stifled by your length she keeps impaling her throat on."
-            $ the_girl.discover_opinion("taking control")
-            $ the_girl.change_arousal(the_girl.get_opinion_score("taking control") * 3)
-
+        "[the_girl.possessive_title] grabs your hands in hers. She holds your hands as she looks up at you, making eye contant."
+        "With her hands holding yours, she opens her mouth wide and descends on your cock."
+        "She bottoms out and her nose is touching your pubic hair. You are balls deep down her throat."
+        mc.name "Mmmm, that's it bitch. Take it deep!"
+        "Still making eye contact, [the_girl.possessive_title] begins to bob her head up and down, completely deepthroating you with every stroke."
+        "Every few strokes you can feel the soft rumble of a moan, being stifled by your length she keeps impaling her throat on."
+        $ the_girl.discover_opinion("taking control")
+        $ the_girl.change_arousal(the_girl.get_opinion_score("taking control") * 3)
     else:
-            "[the_girl.possessive_title] turns her eyes up and meets your gaze. She eagerly swallows as your push yourself down her throat, her tongue eagerly licking at the bottom of your shaft."
-            mc.name "Fuck that feels good [the_girl.title]."
-            "In response she bottoms out on your dick. She rocks her head left and right, grinding her face into your crotch to take as much of your length as possible."
-            "She tenses and and relaxes her throat rhythmically, gently massaging your shaft with it."
-            "You moan at the intense sensations.You let go of her head and she slowly comes up for air."
-            the_girl.char "Oh god you taste so good. Just promise me you'll warn me before you cum..."
-            if SB_check_fetish(the_girl, cum_internal_role) or the_girl.get_opinion_score("drinking cum") > the_girl.get_opinion_score("cum facials"):
-                the_girl.char "...I want you to cum in my mouth, not down my throat. I want to feel it pool up inside my mouth until I can barely hold it all and taste your amazing cum filling my mouth completely..."
-                $ the_girl.discover_opinion("drinking cum")
-            else:
-                the_girl.char "...I want to wear your cum all over my face, like a good slut! I want to walk around the rest a day with it obvious you've blown your load all over to everyone who sees me..."
-                $ the_girl.discover_opinion("cum facials")
-            "You cock twitches in response to her filthy words. She notices and quickly opens her mouth and take you deep again."
-
+        "[the_girl.possessive_title] turns her eyes up and meets your gaze. She eagerly swallows as your push yourself down her throat, her tongue eagerly licking at the bottom of your shaft."
+        mc.name "Fuck that feels good [the_girl.title]."
+        "In response she bottoms out on your dick. She rocks her head left and right, grinding her face into your crotch to take as much of your length as possible."
+        "She tenses and and relaxes her throat rhythmically, gently massaging your shaft with it."
+        "You moan at the intense sensations.You let go of her head and she slowly comes up for air."
+        the_girl.char "Oh god you taste so good. Just promise me you'll warn me before you cum..."
+        if SB_check_fetish(the_girl, cum_internal_role) or the_girl.get_opinion_score("drinking cum") > the_girl.get_opinion_score("cum facials"):
+            the_girl.char "...I want you to cum in my mouth, not down my throat. I want to feel it pool up inside my mouth until I can barely hold it all and taste your amazing cum filling my mouth completely..."
+            $ the_girl.discover_opinion("drinking cum")
+        else:
+            the_girl.char "...I want to wear your cum all over my face, like a good slut! I want to walk around the rest a day with it obvious you've blown your load all over to everyone who sees me..."
+            $ the_girl.discover_opinion("cum facials")
+        "You cock twitches in response to her filthy words. She notices and quickly opens her mouth and take you deep again."
     return
 
 label outro_SB_cum_fetish_blowjob(the_girl, the_location, the_object):
@@ -220,11 +218,12 @@ label orgasm_SB_cum_fetish_blowjob(the_girl, the_location, the_object):
         if the_girl.outfit.vagina_visible():
             "You can see that [the_girl.possessive_title]'s pussy is dripping wet as she cums."
         else:
-            $ top_piece = the_girl.outfit.get_lower_ordered()[-1]
-            if top_piece.underwear:
+            $ top_piece = the_girl.outfit.get_lower_top_layer()
+            if top_piece and top_piece.underwear:
                 "[the_girl.possessive_title]'s dripping wet pussy has managed to soak through her underwear, leaving a wet mark on her [top_piece.name]."
             else:
                 "[the_girl.possessive_title] clenches her thighs together and rides out her orgasm."
+            $ del top_piece
         $ SB_cum_fetish_blowjob.current_modifier = None
         $ SB_cum_fetish_blowjob.redraw_scene(the_girl)
         "When she's stopped twitching and moaning you let [the_girl.possessive_title] slide back. She pants loudly, then licks along the length of your cock."

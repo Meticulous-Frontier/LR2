@@ -103,8 +103,8 @@ label SB_fetish_vaginal_family_threesome_label():
         call start_threesome(lily, mom) from _threesome_family_evening_event_1
         $ scene_manager.update_actor(the_person_one, position = "back_peek", character_placement = character_center_flipped)
         $ scene_manager.update_actor(the_person_two, position = "missionary", character_placement = character_right)
-        $ sex_report = _return
-        if sex_report["girl one orgasms"] > 0 and sex_report["girl two orgasms"] > 0 and sex_report["guy orgasms"] > 0:  #Happy family
+        $ the_report = _return
+        if the_report["girl one orgasms"] > 0 and the_report["girl two orgasms"] > 0 and the_report["guy orgasms"] > 0:  #Happy family
             "[the_person_one.possessive_title] falls into your bed on one side of you on her side, while [the_person_two.title] lays on her back next to you."
             the_person_two.char "Oh my god... you two... that was amazing!"
             $ the_person_two.change_happiness(10)
@@ -137,7 +137,6 @@ label SB_fetish_vaginal_family_threesome_label():
         "[the_person_one.possessive_title] looks back at you, still a little unsure of herself. You hold up your hands and beckon her."
         $ scene_manager.update_actor(the_person_one, position = "cowgirl")
         "You draw her into your arms. She melts into you giving you a kiss."
-        #$ SB_draw_two_person_scene(person_one = the_person_one, person_two = the_person_two, one_pos_x = 0.7, one_position = "kissing", two_position = "sitting")
         "Your lips lock together in a passionate kiss. [the_person_one.possessive_title]'s body melts into yours in surrender, even as [the_person_two.possessive_title] looks on."
         the_person_two.char "Oh my... [the_person_two.mc_title]... [the_person_one.name]..."
         "You move your hands down [the_person_one.possessive_title]'s waist and around to her butt. You give both cheeks a squeeze."

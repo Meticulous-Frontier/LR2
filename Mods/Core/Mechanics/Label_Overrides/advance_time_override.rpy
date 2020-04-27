@@ -25,7 +25,7 @@ init -1 python:
         return time_of_day == 0 and renpy.random.randint(0,100) < morning_crisis_chance
 
     def advance_time_daily_serum_dosage_requirement():
-        return time_of_day == 1 and daily_serum_dosage_policy.is_owned() # This runs if you have the corresponding policy
+        return time_of_day == 1 and daily_serum_dosage_policy.is_active() # This runs if you have the corresponding policy
 
     def advance_time_people_run_day_requirement():
         return time_of_day == 4
@@ -38,6 +38,12 @@ init -1 python:
 
     def advance_time_collar_person_requirement():
         return collar_slave_action.enabled
+
+    def advance_time_mandatory_vibe_action_requirement():
+        # Only run while employees are at work.
+        if mc.business.is_open_for_business():
+            return mandatory_vibe_policy.is_active()
+        return False
 
 init 5 python:
     global crisis_chance
@@ -97,10 +103,16 @@ init 5 python:
     advance_time_collar_person_action = ActionMod("Execute slave 'collar'", advance_time_collar_person_requirement,
         "advance_time_collar_person_label", allow_disable = False, priority = 22, menu_tooltip = "Allows the collar_slave_action to do what it is intended to.")
 
+    # Mandatory Vibe Company Action
+    advance_time_mandatory_vibe_company_action = ActionMod("Attach vibes to outfits", advance_time_mandatory_vibe_action_requirement, 
+        "advance_time_mandatory_vibe_company_label", priority = 2, enabled = False, allow_disable = False, category = "Business")
 
     advance_time_action_list = [advance_time_people_run_turn_action, advance_time_people_run_day_action, advance_time_end_of_day_action, advance_time_next_action, advance_time_mandatory_crisis_action,
         advance_time_random_crisis_action, advance_time_mandatory_morning_crisis_action, advance_time_random_morning_crisis_action, advance_time_daily_serum_dosage_action,
-        advance_time_people_run_move_action, advance_time_bankrupt_check_action, advance_time_stay_wet_action, advance_time_collar_person_action]
+        advance_time_people_run_move_action, advance_time_bankrupt_check_action, advance_time_stay_wet_action, advance_time_collar_person_action, advance_time_mandatory_vibe_company_action]
+
+    # sort list on execution priority
+    advance_time_action_list.sort(key = lambda x: x.priority)
 
     # actions that trigger events
     advance_time_event_action_list = [advance_time_mandatory_crisis_action, advance_time_random_crisis_action, advance_time_mandatory_morning_crisis_action, advance_time_random_morning_crisis_action]
@@ -126,7 +138,8 @@ init 5 python:
         tracker_info = { key:value for (key,value) in crisis_tracker_dict.items() if key in [x.effect for x in active_crisis_list] }
         key_list = [] # sometimes tracker_info is empty, to prevent error only choose from active_excluded_events
         if tracker_info.items():
-            min_value =  min(tracker_info.items(), key=lambda x: x[1])[1]
+            min_value = min(tracker_info.items(), key=lambda x: x[1])[1]
+            average = int(sum(x[1] for x in tracker_info.items())/len(tracker_info.items()))
             key_list = [key for (key, value) in tracker_info.items() if value == min_value]
 
         # add active events from exclusion list to possible events list
@@ -139,7 +152,7 @@ init 5 python:
         random_crisis = get_random_from_list(key_list)
         # renpy.say("", "Run Crisis [" + str(len(key_list)) +"]: " + random_crisis)
         if random_crisis in crisis_tracker_dict.keys():
-            crisis_tracker_dict[random_crisis] += min_value + 1     # set to min_value +1 to prevent the event from triggering a lot (its count maybe low due to being disabled)
+            crisis_tracker_dict[random_crisis] = average + 1     # set to min_value +1 to prevent the event from triggering a lot (its count maybe low due to being disabled)
         return find_in_list(lambda x: x.effect == random_crisis, active_crisis_list + active_excluded_events)
 
     def get_crisis_from_crisis_list():
@@ -217,13 +230,17 @@ init 5 python:
     def advance_time_slave_stay_wet(people):
         for (person, place) in [x for x in people if x[0].stay_wet and x[0].arousal < 50]:
             person.arousal = 50
-            if person.sluttiness < 15:
-                person.sluttiness = 15 # Doesn't make sense for them to be "ready" if they cannot be seduced.
         return
 
     def advance_time_slave_collar(people):
         for (person,place) in [x for x in people if x[0].slave_collar and x[0].obedience < 130]:
             person.obedience = 130
+        return
+
+    def advance_time_mandatory_vibe():
+        if mc.business.is_open_for_business():
+            for person in [x for x in mc.business.get_employee_list() if x.arousal < 30]:
+                person.arousal = 30
         return
 
 label advance_time_move_to_next_day(no_events = True):
@@ -242,20 +259,18 @@ label advance_time_enhanced(no_events = False):
 
     python:
         #renpy.say("", "advance_time_enhanced -> location: " + mc.location.name + ", time: [time_of_day]") # DEBUG
-        advance_time_count = 0 # NOTE: Count and Max might need to be unique for each label since it carries over.
+        count = 0 # NOTE: Count and Max might need to be unique for each label since it carries over.
         advance_time_max_actions = len(advance_time_action_list) # This list is automatically sorted by priority due to the class properties.
-        advance_time_action_list_sorted = sorted(advance_time_action_list, key = lambda x: x.priority)
         people_to_process = build_people_to_process()
 
-    while advance_time_count < advance_time_max_actions:
-        $ act = advance_time_action_list_sorted[advance_time_count]
-        if not no_events or (not act in advance_time_event_action_list):
-            if act.is_action_enabled(): # Only run actions that have their requirement met.
+    while count < advance_time_max_actions:
+        if not no_events or (not advance_time_action_list[count] in advance_time_event_action_list):
+            if advance_time_action_list[count].is_action_enabled(): # Only run actions that have their requirement met.
                 # $ renpy.say("", "Run: " + act.name)
-                $ act.call_action()
+                $ advance_time_action_list[count].call_action()
                 $ renpy.scene("Active")
 
-        $ advance_time_count += 1
+        $ count += 1
 
     python:
         # increase crisis chance (every time slot)
@@ -266,7 +281,7 @@ label advance_time_enhanced(no_events = False):
         people_to_process = []
         person = None
 
-    if mandatory_advance_time: #If a crisis has told us to advance time after it we do so.
+    if mandatory_advance_time and not time_of_day == 4: #If a crisis has told us to advance time after it we do so (not when night to prevent spending night at current location).
         call advance_time from _call_advance_time_advance_time_enhanced
     return
 
@@ -422,5 +437,9 @@ label advance_time_stay_wet_label():
 
 label advance_time_collar_person_label():
     $ advance_time_slave_collar(people_to_process)
+    return
+
+label advance_time_mandatory_vibe_company_label():
+    $ advance_time_mandatory_vibe()
     return
 

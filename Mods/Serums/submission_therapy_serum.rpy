@@ -12,9 +12,7 @@ init -1 python:
     def submission_function_on_turn(the_person, add_to_log):
         the_person.change_obedience(3, add_to_log)
 
-# any label that starts with serum_mod is added to the serum mod list
-label serum_mod_submission_therapy_serum_trait(stack):
-    python:
+    def add_submission_serum_trait():
         sub_ther = SerumTraitMod(name = "Submission Therapy",
                 desc = "Introduces substances that naturally incline females to obey males, found in many mammals. Reduces feeling in the skin, including erogenous zones.",
                 positive_slug = "+3 Obedience/Turn, +$20 Value",
@@ -37,5 +35,10 @@ label serum_mod_submission_therapy_serum_trait(stack):
         #     is_side_effect = a_bool)
             )
 
+
+# any label that starts with serum_mod is added to the serum mod list
+label serum_mod_submission_therapy_serum_trait(stack):
+    python:
+        add_submission_serum_trait()
         execute_hijack_call(stack)
     return

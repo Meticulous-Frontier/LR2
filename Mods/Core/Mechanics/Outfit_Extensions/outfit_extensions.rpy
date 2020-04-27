@@ -69,9 +69,10 @@ init -1 python:
     Outfit.has_creampie_cum = has_creampie_cum
 
     def full_access(self):
-        return ((self.tits_visible() and self.tits_available() and not self.wearing_bra() 
-            and self.vagina_visible() and self.vagina_available() and not self.wearing_panties())
-            and not any(x.layer == 2 for x in self.upper_body))
+        return (self.tits_visible() and self.tits_available() and not self.wearing_bra() 
+            and self.vagina_visible() and self.vagina_available() and not self.wearing_panties()
+            and not any(x.layer >= 2 for x in self.upper_body)
+            and not any(x.layer >= 2 for x in self.lower_body))
 
     Outfit.full_access = full_access
 
@@ -150,13 +151,23 @@ init -1 python:
 
 # initialize this part after wardrobe builder is initialized
 init 6 python:
-    def wearing_bra_enhanced(self):
+    def wearing_bra_enhanced(self): # specific cloth items don't count as bra
         if self.get_upper_ordered():
             if self.get_upper_ordered()[0].underwear and not self.get_upper_ordered()[0] in [cincher, heart_pasties]:
                 return True
         return False
 
     Outfit.wearing_bra = wearing_bra_enhanced
+
+    def tits_available_enhanced(self):  # tits are usable when specific cloth items are worn
+        reachable = True
+        for cloth in self.upper_body:
+            if cloth.anchor_below and not cloth in [suit_jacket, vest, cincher, heart_pasties]:
+                reachable = False
+        return reachable
+
+    Outfit.tits_available = tits_available_enhanced
+
 
     def get_total_slut_modifiers_enhanced(self):
         def clothing_in_preferences(topic, clothing):

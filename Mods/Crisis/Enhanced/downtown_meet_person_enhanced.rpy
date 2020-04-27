@@ -4,7 +4,7 @@ init 5 python:
 label meet_person_enhanced_label():
     # You see a women drop some cash out of her purse. YOu can either return it for an introduction+bonus love OR
     # Keep it because it's money and you like money.
-    $ the_person = create_random_person()
+    $ the_person = make_person(force_random = True)
     $ the_person.draw_person(position = "walking_away")
     #"This is a test to see if the override worked."
     "While you're wandering a woman hurries past you on the sidewalk, jogging for a bus waiting up the street."

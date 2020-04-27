@@ -6,10 +6,17 @@ init 1400 python:
             valid_possessive_titles.append("My intimate stylist")
         return valid_possessive_titles
 
+    def build_salon_manger_title_choice_menu(person):
+        title_tuple = []
+        title_choice = None
+        for title in get_player_titles(person):
+            title_tuple.append([title,title])
+        return renpy.display_menu(title_tuple, True, "Choice")
+
     salon_manager_personality = Personality("salon_manager", default_prefix = "relaxed", #Based on wild style personality
-        common_likes = ["skirts", "small talk", "the weekend", "the colour purple", "makeup", "hiking", "flirting"],
+        common_likes = ["skirts", "small talk", "the weekend", "the colour purple", "makeup", "hiking", "flirting", "high heels"],
         common_sexy_likes = ["doggy style sex", "giving blowjobs", "getting head", "anal sex", "public sex", "skimpy outfits", "anal creampies", "showing her tits", "showing her ass", "being submissive", "creampies", "drinking cum", "cum facials"],
-        common_dislikes = ["Mondays", "the colour yellow", "supply work", "conservative outfits", "work uniforms", "pants"],
+        common_dislikes = ["Mondays", "the colour yellow", "supply work", "conservative outfits", "work uniforms", "pants", "boots"],
         common_sexy_dislikes = ["taking control", "bareback sex"],
         titles_function = wild_titles, possessive_titles_function = salon_manager_possessive_titles, player_titles_function = wild_player_titles)
 
@@ -31,14 +38,7 @@ label salon_manager_greetings(the_person):
             $ the_person.set_possessive_title(get_random_possessive_title(the_person))
             "She holds her hand out to shake yours."
             the_person.char "And how may I call you?"
-            python:
-                title_tuple = []
-                title_choice = None
-                for title in get_player_titles(the_person):
-                    title_tuple.append([title,title])
-
-            $ title_choice = renpy.display_menu(title_tuple,True,"Choice")
-            $ del title_tuple
+            $ title_choice = build_salon_manger_title_choice_menu(the_person)
             mc.name "[title_choice], nice to meet you."
             $ the_person.set_mc_title(title_choice)
 

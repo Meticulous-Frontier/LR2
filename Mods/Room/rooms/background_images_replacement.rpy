@@ -19,6 +19,8 @@ init 5 python:
     question_mark_small_image = im.Scale(Image(get_file_handle("question.png")), 18, 18)
     renpy.image("question_mark_small", question_mark_small_image)
 
+    vial_image = Image(get_file_handle("vial.png"))
+    question_image = Image(get_file_handle("question.png"))
 
 label updated_room_background(stack):
     python:
@@ -32,13 +34,11 @@ label updated_room_background(stack):
         #As long a there is a mall background for the sex_store, replace it with our custom background (since SB uses this location)
         sex_store.background_image = room_background_image("Sex_Shop_Background.jpg")
 
-        # Load extra GUI images
-        vial_image = Image(get_file_handle("vial.png"))
-        question_image = Image(get_file_handle("question.png"))
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
 
+    # Load extra GUI images
     image serum_vial = "[vial_image.filename]"
     image question_mark = "[question_image.filename]"
 

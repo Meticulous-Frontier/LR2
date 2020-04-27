@@ -3,6 +3,18 @@
 init 5 python:
     config.label_overrides["cat_fight_crisis_label"] = "cat_fight_crisis_enhanced_label"
 
+    def cat_fight_crisis_get_girls():
+        the_relationship = get_random_from_list(town_relationships.get_business_relationships(["Rival","Nemesis"])) #Get a random rival or nemesis relationship within the company
+        if the_relationship is None:
+            return (None, None)
+            
+        if renpy.random.randint(0,1) == 1: #Randomize the order so that repeated events with the same people alternate who is person_one and two.
+            person_one = the_relationship.person_a
+            person_two = the_relationship.person_b
+        else:
+            person_one = the_relationship.person_b
+            person_two = the_relationship.person_a
+        return (person_one, person_two)
 
 label cat_fight_crisis_enhanced_label():
     #Two girls have an argument. Side with one over the other or neither (for about break even cost). At higher sluttiness have them kiss and make up.
@@ -10,16 +22,9 @@ label cat_fight_crisis_enhanced_label():
         return
 
     python:
-        the_relationship = get_random_from_list(town_relationships.get_business_relationships(["Rival","Nemesis"])) #Get a random rival or nemesis relationship within the company
-        if the_relationship is None:
+        (person_one, person_two) = cat_fight_crisis_get_girls()
+        if not person_one or not person_two:
             renpy.return_statement() #Just in case something goes wrong getting a relationship we'll exit gracefully.
-        if renpy.random.randint(0,1) == 1: #Randomize the order so that repeated events with the same people alternate who is person_one and two.
-            person_one = the_relationship.person_a
-            person_two = the_relationship.person_b
-        else:
-            person_one = the_relationship.person_b
-            person_two = the_relationship.person_a
-
         scene_manager = Scene()
 
     person_one.char "Excuse me, [person_one.mc_title]?"
@@ -121,11 +126,11 @@ label cat_fight_crisis_enhanced_label():
             "[winner.title] throws herself at [loser.title]. Before you can say anything else they're grabbing at each others hair, yelling and screaming as they bounce around the office."
             $ scene_manager.update_actor(winner, position = "stand3")
             #Random piece of clothing is lost from a random member of the fight, after which time they run off to get things organised again.
-            $ the_clothing = loser.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
+            $ the_clothing = loser.choose_strip_clothing_item()
 
             if person_one.sluttiness < 40 or person_two.sluttiness < 40:
                 #Catfight starts! Neither is particularly slutty, fight ends once one has their clothing damaged (if they're wearing some clothing, make sure to account for that).
-                $ the_clothing = loser.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
+                $ the_clothing = loser.choose_strip_clothing_item()
                 if the_clothing:
                     "While they fight [winner.title] gets a hold of [loser.title]'s [the_clothing.name]. She tugs on it hard while she swings [loser.title] around and there's a loud rip."
                     $ scene_manager.draw_animated_removal(loser, the_clothing)
@@ -186,20 +191,20 @@ label cat_fight_crisis_enhanced_label():
                         $ scene_manager.draw_animated_removal(loser, the_clothing)
                         loser.char "Fuck, you're going to pay for that!"
 
-                    $ returns_favour = renpy.random.randint(0,2)
-                    $ other_clothing = winner.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
+                    $ ran_num = renpy.random.randint(0,2)
+                    $ other_clothing = winner.choose_strip_clothing_item()
 
-                    if returns_favour == 0: #Doesn't actually return the favour, because she's the loser she only retaliates %66 of the time.
+                    if ran_num == 0: #Doesn't actually return the favour, because she's the loser she only retaliates %66 of the time.
                         "[winner.title] laughs and crouches low."
                         winner.char "Come on! Come and get it, you cock sucking whore!"
-                    elif returns_favour == 1:
+                    elif ran_num == 1:
                         winner.char "Do you think I'm afraid of you? Come on!"
                         if other_clothing:
                             "[winner.title] rushes forward and grabs at [loser.title]. [loser.title] manages to get the upper hand, grabbing onto [winner.title]'s [other_clothing.name] and whipping her around. With a sharp rip it comes free."
                             $ scene_manager.draw_animated_removal(winner, other_clothing)
                             winner.char "Shit, get over here you skank!"
 
-                    elif returns_favour == 2:
+                    elif ran_num == 2:
                         if other_clothing:
                             $ scene_manager.draw_animated_removal(winner, other_clothing)
                             "[winner.title] screams loudly and tries to grab [loser.title] by the waist. [loser.title] is fast enough to get to the side. She grabs [loser.title]'s [other_clothing.name] and yanks on it hard."
@@ -207,8 +212,9 @@ label cat_fight_crisis_enhanced_label():
                         else:
                             "[winner.title] screams loudly and tries to grab [loser.title] by the waist. [loser.title] is fast enough to get out of the way, and they square off again as the fight continues."
 
-                    $ the_clothing = loser.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
-
+                    $ the_clothing = loser.choose_strip_clothing_item()
+                $ other_clothing = None
+                $ the_clothing = None
                 $ scene_manager.update_actor(loser, emotion = "sad")
                 "[loser.title] looks down at herself. She seems to realize for the first time how little she's wearing now."
                 loser.char "Look what you've done! Oh god, I need to... I need to go!"
@@ -277,8 +283,8 @@ label cat_fight_crisis_enhanced_label():
             mc.name "Alright, I want you two to cooperate, FOR ONCE, and team up on this."
             "Both girls seem relieved. While unorthodox, you are pretty sure their slutty natures will come out and they'll bond while they blow you."
             call start_threesome(person_one, person_two, start_position = threesome_double_blowjob, position_locked = True) from _team_building_threesome_1
-            $ sex_report = _return
-            if sex_report["guy orgasms"] > 0:
+            $ the_report = _return
+            if the_report["guy orgasms"] > 0:
                 "You watch as [person_one.title] and [person_two.title] begin to kiss and lick your cum off of each other's faces"
                 "This turned out to be a success!"
                 $ person_one.change_stats(obedience = 5, slut_temp = 10, happiness = 5)
@@ -305,7 +311,6 @@ label cat_fight_crisis_enhanced_label():
     python:     # Release variables
         scene_manager.clear_scene()
         the_clothing = None
-        del the_relationship
         del person_one
         del person_two
     return

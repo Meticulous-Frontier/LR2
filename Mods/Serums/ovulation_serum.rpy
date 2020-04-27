@@ -7,9 +7,7 @@ init -1 python:
                 the_person.change_slut_core    (1, add_to_log)
             the_person.change_slut_temp(2, add_to_log)
 
-# any label that starts with serum_mod is added to the serum mod list
-label serum_mod_ovulation_serum_trait(stack):
-    python:
+    def add_ovulation_serum_trait():
         ovulation_ther = SerumTraitMod(name = "Hormonal Ovulation",
                 desc = "Reproduces hormones naturally occurring during ovulation to make females more receptive to sex. Increases sluttiness over time.",
                 positive_slug = "+(0-2) Sluttiness/Turn, +$40 Value",
@@ -32,5 +30,9 @@ label serum_mod_ovulation_serum_trait(stack):
         #     is_side_effect = a_bool)
             )
 
+# any label that starts with serum_mod is added to the serum mod list
+label serum_mod_ovulation_serum_trait(stack):
+    python:
+        add_ovulation_serum_trait()
         execute_hijack_call(stack)
     return

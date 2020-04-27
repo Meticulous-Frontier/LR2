@@ -74,10 +74,7 @@ label small_talk_person_enhanced(person):
             $ love_gain = 4
             $ prediction = 0
 
-            if "build_menu_items" in globals():
-                call screen main_choice_display(build_menu_items([build_opinion_smalltalk_list(talk_opinion_text, opinion_state)]))
-            else:
-                call screen main_choice_display([build_opinion_smalltalk_list(talk_opinion_text, opinion_state)])
+            call screen main_choice_display([build_opinion_smalltalk_list(talk_opinion_text, opinion_state)])
             $ prediction = _return            
 
             $ prediction_difference = abs(prediction - opinion_state[0])

@@ -75,6 +75,7 @@ init 1 python:
 
 #SBV1
 label SB_fetish_vaginal_label(the_person):
+    $ the_person.event_triggers_dict["LastVaginalFetish"] = day
     "*Ding Dong*"
     "You're roused from your bed by a ring on your doorbell."
     # make sure we are at the hall
@@ -174,8 +175,8 @@ label SB_fetish_vaginal_label(the_person):
             "That night, you have many pleasant dreams involving [the_person.possessive_title] and sex in all kinds of crazy positions."
             $ SB_random_fetish_key = get_random_from_list(FETISH_VAGINAL_OPINION_LIST)
             "A couple times in the night, you stir slightly when you hear [the_person.possessive_title] making moaning noises in their sleep, and talking about [SB_random_fetish_key]!"
-            $ the_person.sexy_opinions["vaginal sex"] = [FETISH_OPINION_VALUE, True]
-            $ the_person.sexy_opinions[SB_random_fetish_key] = [FETISH_OPINION_VALUE, True]
+            $ the_person.max_opinion_score("vaginal sex")
+            $ the_person.max_opinion_score(SB_random_fetish_key)
 
             "She's been under the influence of your serums for a while now... you wonder if she's developed a fetish..."
             $ the_person.special_role.append(vaginal_fetish_role)
@@ -203,6 +204,7 @@ label SB_fetish_vaginal_label(the_person):
 label SB_fetish_vaginal_event_label(the_person):
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
+    $ the_person.event_triggers_dict["LastVaginalFetish"] = day
 
     if the_person is mom:
         "You hear a knock on your door. You hear [the_person.possessive_title]'s sweet and familiar voice from the other side."
@@ -261,7 +263,7 @@ label SB_fetish_vaginal_event_label(the_person):
                 "[the_person.possessive_title] winks at you before beginning her routine."
                 call SB_free_strip_scene(the_person) from _SB_free_strip_scene_2
                 mc.name "Damn [the_person.title], you are really getting good at that."
-                "[the_person.possessive_title] bites her lip, glancing down at your bulge. Her cheeks are flushed and rosey."
+                "[the_person.possessive_title] bites her lip, glancing down at your bulge. Her cheeks are flushed and rosy."
                 the_person.char "Hey... if you want to I could... you know... take care of that tent you are sporting there [the_person.mc_title]."
                 "You stand up and embrace her, your dick straining against your clothes, eager to begin another incestuous tryst with [the_person.possessive_title]."
                 call fuck_person(the_person) from _call_fuck_person_SBV21
@@ -332,6 +334,7 @@ label SB_fetish_vaginal_event_label(the_person):
 #SBV3
 label SB_fetish_mom_vaginal_label():
     $ the_person = mom
+    $ the_person.event_triggers_dict["LastVaginalFetish"] = day    
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     "You are just starting to drift off to sleep, when you hear a knock at your door."
@@ -368,9 +371,8 @@ label SB_fetish_mom_vaginal_label():
     ###Sex scene, missionary###   ###TODO: consider writing a variant of this because the default intro is going to be confusing###
     call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBV30
     #$ the_person.SB_fetish = "vaginal sex"
-    $ SB_random_fetish_key = get_random_from_list(FETISH_VAGINAL_OPINION_LIST)
-    $ the_person.sexy_opinions["vaginal sex"] = [FETISH_OPINION_VALUE, True]
-    $ the_person.sexy_opinions[SB_random_fetish_key] = [FETISH_OPINION_VALUE, True]
+    $ the_person.max_opinion_score("vaginal sex")
+    $ the_person.max_opinion_score(get_random_from_list(FETISH_VAGINAL_OPINION_LIST))
     "That night, after fucking [the_person.possessive_title], you share your bed together. As you fall asleep, you consider the implications of what happened. "
     "It is clear that [the_person.possessive_title] is now firmly under the influence of your serums and has developed a fetish for vaginal sex."
     "Her naked flesh soft up against yours gives you many sexy dreams that night."
@@ -385,6 +387,7 @@ label SB_fetish_mom_vaginal_label():
 #SBV4
 label SB_fetish_lily_vaginal_label():
     $ the_person = lily
+    $ the_person.event_triggers_dict["LastVaginalFetish"] = day
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     "You are just starting to drift off to sleep, when you hear a knock at your door."
@@ -428,9 +431,8 @@ label SB_fetish_lily_vaginal_label():
     ###Sex scene, missionary###   ###TODO: consider writing a variant of this because the default intro is going to be confusing###
     call fuck_person(the_person, start_position = doggy, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBV40
     #$ the_person.SB_fetish = "vaginal sex"
-    $ SB_random_fetish_key = get_random_from_list(FETISH_VAGINAL_OPINION_LIST)
-    $ the_person.sexy_opinions[SB_random_fetish_key] = [FETISH_OPINION_VALUE, True]
-    $ the_person.sexy_opinions["vaginal sex"] = [FETISH_OPINION_VALUE, True]
+    $ the_person.max_opinion_score("vaginal sex")
+    $ the_person.max_opinion_score(get_random_from_list(FETISH_VAGINAL_OPINION_LIST))
     the_person.char "Oh... that was so good. [the_person.mc_title]... can I spend the night with you? I don't wanna sleep alone tonight..."
     "That night, after fucking [the_person.possessive_title], you share your bed together. As you fall asleep, you consider the implications of what happened. "
     "It is clear that [the_person.possessive_title] is now firmly under the influence of your serums and has developed a fetish for vaginal sex."
@@ -469,7 +471,7 @@ label SB_cowgirl_wakeup_label(the_person):
     the_person.char "Good morning [the_person.mc_title]... Sorry but when I woke up I noticed you were hard so... I figured you wouldn't mind if I hopped on for a bit..."
     "[the_person.possessive_title] moans during one slow stroke."
     "You decide to lay back and enjoy the ride"
-    call fuck_person(the_person, start_position = cowgirl, skip_intro = True) from _call_sex_description_SBV50
+    call fuck_person(the_person, start_position = cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True) from _call_sex_description_SBV50
     mc.name "Oh god what a wakeup. I think I'm gonna go back to sleep for a bit. Thanks!"
     if the_person is mom:
         "[the_person.possessive_title] looks at you and smiles."
@@ -481,19 +483,16 @@ label SB_cowgirl_wakeup_label(the_person):
         "[the_person.title] looks at you and winks."
         the_person.char "Anytime [the_person.mc_title]! I'd better go get ready!"
     $ the_person.review_outfit(dialogue = False)
+    $ the_person.draw_person(position = "stand3")
     "You fall back asleep. When you wake up, [the_person.possessive_title] has left."
+    $ renpy.scene("Active")
     "Looks like you slept in!"
     return
 
 init 2 python:
     def SB_fetish_vaginal_recurring_requirement():
         if mc_asleep() and day % 7 is not 4: # not on Friday nights
-            if mc.business.get_employee_count() > 0:
-                for person in mc.business.get_employee_list():
-                    if SB_check_fetish(person, vaginal_fetish_role):
-                        return True
-            if SB_check_fetish(mom, vaginal_fetish_role):
-                return True
+            return not get_vaginal_fetish_employee() is None
         return False
 
     SB_fetish_vaginal_recurring_crisis = Action("Vaginal Fetish Recurring Crisis",SB_fetish_vaginal_recurring_requirement,"SB_fetish_vaginal_recurring_label")
@@ -502,16 +501,19 @@ init 2 python:
     def SB_fetish_vaginal_lily_recurring_requirement():
         if mc_asleep() and day % 7 is not 4: # not on Friday nights
             if SB_check_fetish(lily, vaginal_fetish_role):
-                return True
+                if lily.event_triggers_dict.get("LastVaginalFetish", 0) + 10 < day:
+                    return True
         return False
 
     def get_vaginal_fetish_employee():
         meets_fetish_list = []
         for person in mc.business.get_employee_list():
             if SB_check_fetish(person, vaginal_fetish_role):
-                meets_fetish_list.append(person)
+                if person.event_triggers_dict.get("LastVaginalFetish", 0) + 10 < day:
+                    meets_fetish_list.append(person)
         if SB_check_fetish(mom, vaginal_fetish_role):
-            meets_fetish_list.append(mom)
+            if mom.event_triggers_dict.get("LastVaginalFetish", 0) + 10 < day:
+                meets_fetish_list.append(mom)
 
         return get_random_from_list(meets_fetish_list)
 
@@ -521,6 +523,9 @@ init 2 python:
 #SBV6
 label SB_fetish_vaginal_recurring_label():
     $ the_person = get_vaginal_fetish_employee()
+    if the_person is None:
+        return
+    $ the_person.event_triggers_dict["LastVaginalFetish"] = day
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     if the_person is mom:
@@ -606,6 +611,7 @@ label SB_fetish_vaginal_recurring_label():
 #SBV7
 label SB_fetish_vaginal_lily_recurring_label():
     $ the_person = lily
+    $ the_person.event_triggers_dict["LastVaginalFetish"] = day
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
 
@@ -631,7 +637,7 @@ label SB_fetish_vaginal_lily_recurring_label():
             "[the_person.possessive_title] winks at you before beginning her routine."
             call SB_free_strip_scene(the_person) from _SB_free_strip_scene_70
             mc.name "Damn [the_person.title], you are really getting good at that."
-            "[the_person.possessive_title] bites her lip, glancing down at your bulge. Her cheeks are flushed and rosey."
+            "[the_person.possessive_title] bites her lip, glancing down at your bulge. Her cheeks are flushed and rosy."
             the_person.char "Hey... if you want to I could... you know... take care of that tent you are sporting there [the_person.mc_title]."
             "You stand up and embrace her, your dick straining against your clothes, eager to begin another incestuous tryst with [the_person.possessive_title]."
 
@@ -665,7 +671,6 @@ label SB_fetish_vaginal_lily_recurring_label():
 
     "After you finish your rutting, you and [the_person.possessive_title] get under the covers of your bed."
     "Spooning behind [the_person.possessive_title], you drift off to a wonderful night's sleep. Her body heat and the feeling of her naked skin against yours give you very pleasant dreams."
-    #SBMOD Start hacked wakeup sex code. To be copy/pasted to other similar places#
 
     call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_SBV070
     call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV070

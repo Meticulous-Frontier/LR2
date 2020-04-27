@@ -31,10 +31,9 @@ init 2 python:
 
     # Hire Person Requirements
     def mc_hire_person_requirement(person):
-        if mc.business.get_employee_count() >= mc.business.max_employee_count:
-            return "At employee limit."
-
         if person not in mc.business.get_employee_list() + unique_character_list:
+            if mc.business.get_employee_count() >= mc.business.max_employee_count:
+                return "At employee limit."
             return True
         return False
 
@@ -46,7 +45,7 @@ init 2 python:
 
     # Spend the Night Requirements
     def mc_action_spend_the_night_requirement(person):
-        if time_of_day is 4 and person.love > 50 and mc.location is person.home: #Has to be night, need to have some love and be in the_person's home location
+        if time_of_day == 4 and person.love > 50 and mc.location is person.home: #Has to be night, need to have some love and be in the_person's home location
             return True
         return False
 
@@ -58,6 +57,9 @@ init 2 python:
                     return "Must be alone with " + person.title
                 return True
         return False
+
+    def mc_ask_take_serum_requirement(person):
+        return True #Consider only allow asking non employees to take serum.
 
 
 init 5 python:
@@ -94,7 +96,9 @@ init 5 python:
     # Pay to Strip | Allows you to enter the pay_strip label used in certain events if requirements are met.
     pay_to_strip_action = ActionMod("Pay [the_person.title] to strip", mc_action_pay_to_strip_requirement, "mc_pay_to_strip_label", menu_tooltip = "Pay the person to give you a strip tease.", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
-    main_character_actions_list = [mc_schedule_person_action, mc_start_follow_action, mc_stop_follow_action, mc_hire_person_action, mc_rename_person_action, mc_spend_the_night_action, pay_to_strip_action]
+    ask_take_serum = ActionMod("Ask [the_person.title] to test serum", mc_ask_take_serum_requirement, "mc_ask_take_serum_label", menu_tooltip = "Ask her to voluntarily test a serum.", category = "Generic People Actions", initialization = init_action_mod_disabled)
+
+    main_character_actions_list = [mc_schedule_person_action, mc_start_follow_action, mc_stop_follow_action, mc_hire_person_action, mc_rename_person_action, mc_spend_the_night_action, pay_to_strip_action, ask_take_serum]
 
 
 label mc_pay_to_strip_label(person):
@@ -154,10 +158,10 @@ label mc_rename_person_label(person):
 label mc_hire_person_label(person):
 
     python:
-        if mc.business.funds < person.calculate_base_salary():
-            renpy.say("", "Hiring [person.title] will cost you $" + str(person.calculate_base_salary()) + " and put you in debt due to low funds.")
+        if mc.business.funds < (person.calculate_base_salary() * 10):
+            renpy.say("", "Hiring [person.title] will cost you $" + str(person.calculate_base_salary() * 10) + " and put you in debt due to low funds.")
         else:
-            renpy.say("", "Hiring [person.title] will cost you $" + str(person.calculate_base_salary()) + ", do you wish to proceed?")
+            renpy.say("", "Hiring [person.title] will cost you $" + str(person.calculate_base_salary() * 10) + ", do you wish to proceed?")
 
     menu:
         "Yes":
@@ -168,38 +172,29 @@ label mc_hire_person_label(person):
     "You complete the necessary paperwork and hire [person.title]. What division do you assign them to?"
     menu:
         "Research and Development":
-            $ mc.business.add_employee_research(person)
+            $ mc.business.hire_person(the_person, "Research")
             $ mc.location.move_person(person, mc.business.r_div)
-            $ person.set_work([1,2,3], mc.business.r_div)
 
         "Production":
-            $ mc.business.add_employee_production(person)
+            $ mc.business.hire_person(the_person, "Production")
             $ mc.location.move_person(person, mc.business.p_div)
-            $ person.set_work([1,2,3], mc.business.p_div)
 
         "Supply Procurement":
-            $ mc.business.add_employee_supply(person)
+            $ mc.business.hire_person(the_person, "Supply")
             $ mc.location.move_person(person, mc.business.s_div)
-            $ person.set_work([1,2,3], mc.business.s_div)
 
         "Marketing":
-            $ mc.business.add_employee_marketing(person)
+            $ mc.business.hire_person(the_person, "Marketing")
             $ mc.location.move_person(person, mc.business.m_div)
-            $ person.set_work([1,2,3], mc.business.m_div)
 
         "Human Resources":
-            $ mc.business.add_employee_hr(person)
+            $ mc.business.hire_person(the_person, "HR")
             $ mc.location.move_person(person, mc.business.h_div)
-            $ person.set_work([1,2,3], mc.business.h_div)
 
         "Back":
             return
-    $ mc.business.change_funds(- person.calculate_base_salary())
 
-    $ person.event_triggers_dict["employed_since"] = day
-    $ mc.business.listener_system.fire_event("new_hire", the_person = person)
-    $ person.special_role.append(employee_role)
-
+    $ mc.business.change_funds(- (person.calculate_base_salary() * 10))
     $ work_station_destination = mc.business.get_employee_workstation(person).formalName
     "[person.title] heads over to the [work_station_destination]..."
     return
@@ -255,9 +250,11 @@ label mc_start_follow_label(person):
 label mc_stop_follow_label(person):
     python:
         if the_person.schedule[time_of_day] is the_person.home:
-            schedule_destination = "my room."
+            schedule_destination = "my room"
+        elif the_person.schedule[time_of_day]:
+            schedule_destination = "the " + the_person.schedule[time_of_day].formalName
         else:
-            schedule_destination = "somewhere else." # If their destination is not their home it tends to be None so can't reliably use destination.formalName
+            schedule_destination = "somewhere else"
 
     "You tell [person.title] to stop following you around."
 
@@ -267,7 +264,45 @@ label mc_stop_follow_label(person):
 
     $ the_person.run_move(mc.location) # This will trigger stat changes based on clothing, but shouldn't be problematic although it can be exploited.
 
-    the_person.title "Okay [the_person.mc_title], I'll head over to [schedule_destination]"
+    the_person.title "Okay [the_person.mc_title], I'll head over to [schedule_destination]."
 
 
+    return
+
+label mc_ask_take_serum_label(person):  #TODO possibly temporary addition to the mod. Copies the old mechanics for asking a girl to take a serum.
+    $ ask_serum_chance = 10*mc.charisma + 5*person.int
+    if ask_serum_chance < 0:
+        $ ask_serum_chance = 0
+    elif ask_serum_chance > 100:
+        $ ask_serum_chance = 100
+    $ ran_num = renpy.random.randint(0,100)
+
+    "You consider asking [person.title] to voluntarily take one of your serums as a test."
+    menu:
+        "Ask her to take it.\n{size=22}Success Chance: [ask_serum_chance]%%{/size}":
+            if mc.business.get_employee_title(person) == "None":
+                mc.name "[person.title], I've got a project going on at work that could really use a test subject. Would you be interested in helping me out?"
+
+            else:
+                mc.name "[person.title], there's a serum design that is in need of a test subject. Would you be interested in helping out with a quick field study?"
+
+            if ran_num < ask_serum_chance:
+                #Success
+                if mc.business.get_employee_title(person) == "None":
+                    if person.personality.personality_type_prefix == "nora":
+                        person.char "I'd be happy to help. I've seen your work, I have complete confidence you've tested this design thoroughly."
+                    else:
+                        person.char "I'd be happy to help, as long as you promise it's not dangerous of course. I've always wanted to be a proper scientist!"
+                else:
+                    person.char "I'll admit I'm curious what it would do to me. Okay, as long as it's already passed the safety test requirements, of course."
+                mc.name "It's completely safe, we just need to test what the results from it will be. Thank you."
+                call give_serum(person) from _call_give_serum_modded_addition_2
+
+            else:
+                #Denies
+                $ person.change_obedience(-2)
+                person.char "I'm... I don't think I would be comfortable with that. Is that okay?"
+                mc.name "Of course it is, that's why I'm asking in the first place."
+        "Reconsider":
+            pass
     return

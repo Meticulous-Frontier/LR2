@@ -16,9 +16,7 @@ init -1 python:
                 mc.log_event((person.title or person.name) + " is no longer suggestible.", "float_text_blue")
         return
 
-# any label that starts with serum_mod is added to the serum mod list
-label serum_mod_lysergide_n2o_serum_trait(stack):
-    python:
+    def add_lysergide_n2o_serum_trait():
         lysergide_n2o_serum_trait = SerumTraitMod(name = "Lysergide N2O Trait",
             desc = "Increases target subjects suggestibility, using LSD and Nitrous Oxide components to change the higher brain function to become more receptive to suggestions.",
             positive_slug = "+$25 Value, increases suggestibility while active",
@@ -32,6 +30,11 @@ label serum_mod_lysergide_n2o_serum_trait(stack):
             tier = 2,
             research_needed = 500)
 
+
+# any label that starts with serum_mod is added to the serum mod list
+label serum_mod_lysergide_n2o_serum_trait(stack):
+    python:
+        add_lysergide_n2o_serum_trait()
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return

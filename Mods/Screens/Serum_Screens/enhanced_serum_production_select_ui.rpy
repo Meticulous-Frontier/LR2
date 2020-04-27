@@ -1,4 +1,5 @@
 init -1:
+    $ production_max = 100
     $ array_to_change = None # Used to determine which line is passed to the serum_production_autosell function
     python:
         def serum_production_autosell(new_amount):
@@ -20,13 +21,8 @@ init 2:
         $ renpy.block_rollback()
 
         python:
-            if "machinery_room_overload" in globals(): # Should not cause issues if not present.
-                production_remaining = machinery_room_overload
-                production_max = machinery_room_overload
-            else:
-                production_remaining = 100
-                production_max = production_remaining
-
+            production_max_use = production_max
+            production_remaining = production_max_use
             for key in mc.business.serum_production_array:
                 production_remaining -= mc.business.serum_production_array[key][1] # How much of the 100% capability are we using?
         hbox:
@@ -188,10 +184,10 @@ init 2:
                                                                 yoffset 8
                                                                 textbutton "<<":
                                                                     action [Function(mc.business.change_line_autosell,count,-10)]
-                                                                    style "textbutton_no_padding_highlight" 
+                                                                    style "textbutton_no_padding_highlight"
                                                                     text_style "serum_text_style"
                                                                     tooltip production_line_autosell_tooltip
-                                                                textbutton "<": 
+                                                                textbutton "<":
                                                                     action [Function(mc.business.change_line_autosell,count, -1)]
                                                                     style "textbutton_no_padding_highlight"
                                                                     text_style "serum_text_style"
@@ -217,14 +213,14 @@ init 2:
                                                                 xalign 1
                                                                 xsize 40
                                                                 yoffset 8
-                                                                textbutton ">": 
+                                                                textbutton ">":
                                                                     action [Function(mc.business.change_line_autosell,count, 1)]
                                                                     style "textbutton_no_padding_highlight"
                                                                     text_style "serum_text_style"
                                                                     tooltip production_line_autosell_tooltip
                                                                 textbutton ">>":
                                                                     action [Function(mc.business.change_line_autosell,count,10)]
-                                                                    style "textbutton_no_padding_highlight" 
+                                                                    style "textbutton_no_padding_highlight"
                                                                     text_style "serum_text_style"
                                                                     tooltip production_line_autosell_tooltip
 

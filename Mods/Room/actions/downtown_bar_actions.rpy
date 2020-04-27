@@ -23,15 +23,8 @@ label downtown_bar_drink_label():
 
         "Do you wish to introduce yourself, perhaps grace her with a free- of charge drink?"
 
-    $ people_list = get_sorted_people_list(known_people_at_location(mc.location) + unknown_people_at_location(mc.location) + [new_person], "Drink with", ["Back"])
-
-    if "build_menu_items" in globals():
-        call screen main_choice_display(build_menu_items([people_list]))
-    else:
-        call screen main_choice_display([people_list])    
-    
+    call screen main_choice_display([get_sorted_people_list(known_people_at_location(mc.location) + unknown_people_at_location(mc.location) + [new_person], "Drink with", ["Back"])])
     $ person_choice = _return
-    $ del people_list
 
     if person_choice == "Back":
         if new_person.mc_title == "Stranger": # If the player had no interest in interacting with the character we remove it from the game. Assuming a proper "Back" button gets added during first time introduction we can do more with this.

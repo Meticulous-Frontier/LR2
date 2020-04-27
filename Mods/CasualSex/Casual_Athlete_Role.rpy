@@ -136,9 +136,9 @@ label casual_athlete_get_to_know_label(the_person):
             "You think about it for a bit. You could offer to buy her a protein shake, they serve them here at the gym. That would be a good opportunity to slip some serum in..."
             mc.name "They have protein shakes here. Maybe I could grab you one? It'd be no trouble."
             #Charisma role to unlock the buy protein shake option#
-            $ random_roll = renpy.random.randint(0,100)
-            $ random_roll += (mc.charisma * 10)
-            if random_roll > 50:   #Base line 50:50 chance at charisma = 0. 100% chance at charisma = 5
+            $ ran_num = renpy.random.randint(0,100)
+            $ ran_num += (mc.charisma * 10)
+            if ran_num > 50:   #Base line 50:50 chance at charisma = 0. 100% chance at charisma = 5
                 the_person.char "That... actually would be nice! You have to be careful with guys, but you seem genuine enough."
                 "You now have the option to buy [the_person.title] a protein shake at the gym."
                 $ the_person.event_triggers_dict["athlete_protein"] = 1
@@ -503,7 +503,7 @@ label casual_athlete_race_crisis_label(the_person):
     else:
         "Your mind red with lust, you begin to rip [the_person.title]'s clothes off."
 
-        $ the_person.strip_outfit(top_layer_first = False, position = "missionary")
+        $ the_person.strip_outfit(position = "missionary")
         $ the_person.change_arousal(20)
 
         "[the_person.possessive_title] moans as you strip her down, enjoying your rough treatment of her."
@@ -529,10 +529,8 @@ label casual_athlete_race_crisis_label(the_person):
     the_person.char "Ayup! Don't worry. Alright, if its okay with you, I think I'm gonna take a nap..."
     "You excuse yourself. You grab your clothes and head out. You now know [the_person.title]'s address, with a standing offer to come over and fuck her silly!"
     $ the_person.event_triggers_dict["athlete_progress"] = 4
-    $ casual_athlete_energy_perk = Stat_Perk(description = "Training for the big race has helped improve your energy level. +20 max energy, +40 energy cap.", energy_bonus = 20, bonus_is_temp = False, energy_cap = 40)
-    $ perk_system.add_stat_perk(casual_athlete_energy_perk, "Athlete Energy Bonus")
-    $ second_wind = Ability_Perk(description = "You take a few deep breaths and recover a bit of your energy. Use this perk to regain half your max energy, once per day.", toggle = False, usable = True, usable_func = second_wind_func, usable_cd = 1)
-    $ perk_system.add_ability_perk(second_wind, "Second Wind")
+    $ perk_system.add_stat_perk(Stat_Perk(description = "Training for the big race has helped improve your energy level. +20 max energy, +40 energy cap.", energy_bonus = 20, bonus_is_temp = False, energy_cap = 40), "Athlete Energy Bonus")
+    $ perk_system.add_ability_perk(Ability_Perk(description = "You take a few deep breaths and recover a bit of your energy. Use this perk to regain half your max energy, once per day.", toggle = False, usable = True, usable_func = second_wind_func, usable_cd = 1), "Second Wind")
     "You walk away with a spring in your step. You feel like training for and running the race has given you more energy."
     "You have gained the second wind ability perk. You can now recover half your max energy, once per day!"
     return
@@ -585,7 +583,7 @@ label casual_athlete_house_call_label(the_person):
     else:
         "Your mind red with lust, you begin to rip [the_person.title]'s clothes off."
 
-        $ the_person.strip_outfit(top_layer_first = False, position = "missionary")
+        $ the_person.strip_outfit(position = "missionary")
         $ the_person.change_arousal(20)
 
         "[the_person.possessive_title] moans as you strip her down, enjoying your rough treatment of her."

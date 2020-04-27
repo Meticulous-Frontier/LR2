@@ -31,7 +31,7 @@ init 2:
                     xsize 500
                     text "[the_trait.desc]" style "serum_text_style"
 
-    screen trait_list_tooltip(the_traits):
+    screen trait_list_tooltip(the_traits, y_height = 0):
         vbox:
             xalign 0.9
             yalign 0.1

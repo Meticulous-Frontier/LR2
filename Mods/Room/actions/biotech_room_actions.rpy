@@ -12,19 +12,13 @@ init 3 python:
         menu_tooltip = "Create a near identical clone of the targeted person")
 
     def biotech_modify_person_requirement():
-        if "body_customizer_policy" in globals():
-            if rd_division_policy.is_owned() and body_customizer_policy.is_owned():
-                return True
-        return "Requires: [body_customizer_policy.name] policy upgrade"
+        return True
 
     biotech_modify_person = Action("Modify a person", biotech_modify_person_requirement, "biotech_modify_person",
         menu_tooltip = "Modify the appearance of a person through magic, not science")
 
     def biotech_change_body_requirement():
-        hypothyroidism = find_in_list(lambda x: x.name == hypothyroidism_serum_trait.name, list_of_traits)
-        anorexia = find_in_list(lambda x: x.name == anorexia_serum_trait.name, list_of_traits)
-
-        if mc.business.is_trait_researched(hypothyroidism_serum_trait) and mc.business.is_trait_researched(anorexia_serum_trait):
+        if mc.business.is_trait_researched("Hypothyroidism") and mc.business.is_trait_researched("Methabolizer"):
             return True
         else:
             return "Requires: [hypothyroidism_serum_trait.name] and [anorexia_serum_trait.name] researched"
@@ -34,7 +28,7 @@ init 3 python:
     biotech_body_modifications.append(biotech_change_body)
 
     def biotech_change_skin_requirement():
-        if mc.business.is_trait_researched(pigment_serum_trait):
+        if mc.business.is_trait_researched("Pigment"):
             return True
         else:
             return "Requires: [pigment_serum_trait.name] researched"
@@ -69,21 +63,40 @@ init 3 python:
             start_sluttiness = person.sluttiness, start_obedience = person.obedience, start_happiness = person.happiness, start_love = person.love, start_home = None, title = "Clone", possessive_title = "Your creation", mc_title = "Creator", relationship = "Single", kids = 0, force_random = True)
 
         clone.generate_home()
-        clone.schedule[0] = rd_division_basement
-        clone.schedule[1] = rd_division_basement
-        clone.schedule[2] = rd_division_basement
-        clone.schedule[3] = rd_division_basement
-        clone.schedule[4] = rd_division_basement
+        clone.set_schedule([0,1,2,3,4], dungeon)
 
         clone.special_role.append(clone_role)
 
-        rd_division_basement.add_person(clone) #Create rooms for the clones to inhabit until a schedule is given (through being hired or player input)
+        dungeon.add_person(clone) #Create rooms for the clones to inhabit until a schedule is given (through being hired or player input)
         return
 
     biotech_change_breasts = Action("Change breasts: [person.tits]", biotech_change_breasts_requirement, "biotech_change_breasts",
         menu_tooltip = "Modify [person.title]'s cup size.")
     biotech_body_modifications.append(biotech_change_breasts)
 
+    def build_body_type_choice_menu():
+        body_types = []
+        for n in list_of_body_types:
+            body_types.append(n)
+        body_types.append("Back")
+        return renpy.display_menu(simple_list_format(body_types, n, string = "Body Type: ", ignore = "Back"), True, "Choice")
+
+    def build_skin_style_choice_menu():
+        skin_styles = [x[0] for x in list_of_skins]
+        skin_styles.append("Back")
+        return renpy.display_menu(simple_list_format(skin_styles, x[0], string = "Skin Type: ", ignore = "Back"), True, "Choice")
+
+    def build_face_style_choice_menu():
+        face_styles = []
+        for face in list_of_faces:
+            face_styles.append(face)
+        face_styles.append("Back")
+        return renpy.display_menu(simple_list_format(face_styles, face, string = "Face Type: ", ignore = "Back"), True, "Choice")
+
+    def build_cup_size_choice_menu():
+        cup_sizes = [x[0] for x in list_of_tits]
+        cup_sizes.append("Back")
+        return renpy.display_menu(simple_list_format(cup_sizes, x[0], string = "Cup Size: ", ignore = "Back"), True, "Choice")
 
 label biotech_gene_modifications():
     while True:
@@ -102,32 +115,19 @@ label biotech_gene_modifications():
 
 
 label biotech_clone_person():
-    $ clone_name = None
-    $ clone_last_name = None
-    $ clone_age = None
-
     while True:
         # only known people who are not unique character or clone herself (genetic degradation too high)
-        $ people_list = get_sorted_people_list([x for x in known_people_in_the_game([mc] + unique_character_list) if not clone_role in x.special_role], "Clone Person", ["Back"])
-
-        if "build_menu_items" in globals():
-            call screen main_choice_display(build_menu_items([people_list]))
-        else:
-            call screen main_choice_display([people_list])
-        $ person_choice = _return
-        $ del people_list
-
-        if person_choice == "Back":
+        call screen main_choice_display([get_sorted_people_list([x for x in known_people_in_the_game([mc] + unique_character_list) if not clone_role in x.special_role], "Clone Person", ["Back"])])
+        if _return == "Back":
             return # Where to go if you hit "Back".
         else:
-            call cloning_process(person_choice) from _call_cloning_process
+            call cloning_process(_return) from _call_cloning_process
 
 label cloning_process(person = the_person): # default to the_person when not passed as parameter
     $ person.draw_person(emotion = "default")
-    python:
-        clone_name = None
-        clone_last_name = None
-        clone_age = None
+    $ clone_name = None
+    $ clone_last_name = None
+    $ clone_age = None
 
     while True:
         menu:
@@ -141,7 +141,7 @@ label cloning_process(person = the_person): # default to the_person when not pas
                     $ clone_age = 18
             "Begin production: {image=gui/heart/Time_Advance.png}\n{size=22}Name: [clone_name] [clone_last_name], Age: [clone_age]{/size}":
                 $ create_clone(person, clone_name, clone_last_name, clone_age)
-                "The clone has been created and is now awaiting you in [rd_division_basement.formalName]"
+                "The clone has been created and is now awaiting you in [dungeon.formalName]"
                 call advance_time from _call_advance_time_cloning_process
                 return
             "Back":
@@ -149,19 +149,11 @@ label cloning_process(person = the_person): # default to the_person when not pas
 
 label biotech_modify_person():
     while True:
-        $ people_list = get_sorted_people_list(known_people_in_the_game([mc]), "Modify Person", ["Back"])
-
-        if "build_menu_items" in globals():
-            call screen main_choice_display(build_menu_items([people_list]))
-        else:
-            call screen main_choice_display([people_list])
-        $ person_choice = _return
-        $ del people_list
-
-        if person_choice == "Back":
+        call screen main_choice_display([get_sorted_people_list(known_people_in_the_game([mc]), "Modify Person", ["Back"])])
+        if _return == "Back":
             return # Where to go if you hit "Back".
         else:
-            call modification_process(person_choice) from _call_modification_process
+            call modification_process(_return) from _call_modification_process
 
 label modification_process(person = the_person): # when called without specific person use the_person variable
     $ person.draw_person(emotion = "default")
@@ -183,13 +175,8 @@ label modification_process(person = the_person): # when called without specific 
 
 label biotech_change_body():
     while True:
-        python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-            body_types = []
-            for n in list_of_body_types:
-                body_types.append(n)
-            body_types.append("Back")
-            body_choice = renpy.display_menu(simple_list_format(body_types, n, string = "Body Type: ", ignore = "Back"),True,"Choice")
-            del body_types
+        #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+        $ body_choice = build_body_type_choice_menu()
 
         if body_choice == "Back":
             return
@@ -200,12 +187,8 @@ label biotech_change_body():
 
 label biotech_change_skin():
     while True:
-        python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-            skin_styles = [x[0] for x in list_of_skins]
-
-            skin_styles.append("Back")
-            skin_choice = renpy.display_menu(simple_list_format(skin_styles, x[0], string = "Skin Type: ", ignore = "Back"),True,"Choice")
-            del skin_styles
+        #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+        $ skin_choice = build_skin_style_choice_menu()
 
         if skin_choice == "Back":
             return
@@ -218,13 +201,8 @@ label biotech_change_skin():
 
 label biotech_change_face():
     while True:
-        python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-            face_styles = []
-            for face in list_of_faces:
-                face_styles.append(face)
-            face_styles.append("Back")
-            face_choice = renpy.display_menu(simple_list_format(face_styles, face, string = "Face Type: ", ignore = "Back"),True,"Choice")
-            del face_styles
+        #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+        $ face_choice = build_face_style_choice_menu()
 
         if face_choice == "Back":
             return
@@ -236,11 +214,8 @@ label biotech_change_face():
 
 label biotech_change_breasts():
     while True:
-        python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-            cup_sizes = [x[0] for x in list_of_tits]
-            cup_sizes.append("Back")
-            cup_choice = renpy.display_menu(simple_list_format(cup_sizes, x[0], string = "Cup Size: ", ignore = "Back"),True,"Choice")
-            del cup_sizes
+        #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+        $ cup_choice = build_cup_size_choice_menu()
 
         if cup_choice == "Back":
             return

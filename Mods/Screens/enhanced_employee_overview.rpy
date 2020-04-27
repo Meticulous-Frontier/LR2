@@ -135,8 +135,9 @@ init 2:
                                 background "#1a45a1"
                             button:
                                 action SetScreenVariable("division_select", button_map[1])
-                                xsize 200
-                                ysize 40
+                                hover_background "#4f7ad6"
+                                xsize 262
+                                ysize 48
                                 text button_map[0] xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 style "textbutton_text_style"
 
             $ grid_count = 15

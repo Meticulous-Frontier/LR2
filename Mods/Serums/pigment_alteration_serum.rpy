@@ -6,8 +6,7 @@ init -1 python:
         new_skin = get_random_from_list(skin_styles)
         return person.match_skin(new_skin)
 
-label serum_mod_pigment_serum_trait(stack):
-    python:
+    def add_pigment_alteration_serum():
         pigment_serum_trait = SerumTraitMod(name = "Pigment Trait",
             desc = "Causes instantaneous alterations in the subject's pigment distribution causing noticeable changes in skin color",
             positive_slug = "-$15 Value, Changes the subject's skin color",
@@ -20,5 +19,9 @@ label serum_mod_pigment_serum_trait(stack):
             tier = 1,
             research_needed = 500)
 
+
+label serum_mod_pigment_serum_trait(stack):
+    python:
+        add_pigment_alteration_serum()
         execute_hijack_call(stack)
     return

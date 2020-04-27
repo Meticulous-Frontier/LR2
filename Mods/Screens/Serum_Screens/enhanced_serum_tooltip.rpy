@@ -1,7 +1,8 @@
 init -1:
     python:
         def serum_rename_func(new_name):
-            store.the_serum.name = new_name
+            cs = renpy.current_screen()
+            cs.scope["the_serum"].name = new_name
 
 
 init 2:

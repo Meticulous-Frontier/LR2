@@ -1,22 +1,25 @@
 init 5 python:
     config.label_overrides["futuristic_serum_stage_2_label"] = "futuristic_serum_stage_2_enhanced_label"
 
+    def show_satisfying_people_information(the_person):
+        my_string = "The following people currently satisfy the requirements: "
+        satisfying_list = mc.business.get_requirement_employee_list(core_slut_required = 50, obedience_required = 130, exclude_list = [the_person])
+        if satisfying_list:
+            for person in satisfying_list:
+                my_string += person.name + " " + person.last_name + ", "
+        else:
+            my_string = "There is currently nobody in your company who meets these requirements."
+        renpy.say("", my_string)
+        return
+
+
 label futuristic_serum_stage_2_enhanced_label(the_person):
     if __builtin__.len(mc.business.get_requirement_employee_list(core_slut_required = 50, obedience_required = 130)) <= 3: # If you don't have enough people who meet the requirements just get an update.
         mc.name "I'm still working on getting your test subjects ready. Could you remind me what you need?"
         the_person.char "To learn anything useful I need at least three girls who have been seriously affected by our serums. I need them to be obedient and open to some intimate testing procedures."
         "[the_person.title] requires three employees who satisfy the following requirements: Core Sluttiness 50+ and Obedience 130+"
-        $ satisfying_list = mc.business.get_requirement_employee_list(core_slut_required = 50, obedience_required = 130, exclude_list = [the_person])
-        $ my_string = "The following people currently satisfy the requirements: "
-        python:
-            if satisfying_list:
-                for person in satisfying_list:
-                    my_string += person.name + " " + person.last_name + ", "
-            else:
-                my_string = "There is currently nobody in your company who meets these requirements."
-        "[my_string]"
+        $ show_satisfying_people_information(the_person)
         the_person.char "Noted. I'll get back to you when I have your test subjects ready."
-        $ del satisfying_list
         return
 
     mc.name "[the_person.title], I have your group of test subjects ready."
@@ -73,8 +76,7 @@ label futuristic_serum_stage_2_enhanced_label(the_person):
         if go_first != pick_2:
             scene_manager.remove_actor(pick_2)
 
-        free_position = scene_manager.get_free_position_tuple()
-        scene_manager.add_actor(the_person, position="stand4", emotion="happy", character_placement = free_position[1])
+        scene_manager.add_actor(the_person, position="stand4", emotion="happy", character_placement = scene_manager.get_free_position_tuple()[1])
 
     the_person.char "Are you ready [go_first.name]? Come with me, you two can wait here until we're done."
 
@@ -83,10 +85,10 @@ label futuristic_serum_stage_2_enhanced_label(the_person):
 
     "[the_person.title] leads [go_first.title] into a side office, and you decide to leave her to her work."
     #TODO: Expand this event for more sexy stuff.
-    $ mc.business.research_tier = 3
-    $ mc.log_event("Max Research Tier Unlocked", "float_text_grey")
 
     python:
+        mc.business.research_tier = 3
+        mc.log_event("Max Research Tier Unlocked", "float_text_grey")
         scene_manager.clear_scene()
         del pick_1
         del pick_2

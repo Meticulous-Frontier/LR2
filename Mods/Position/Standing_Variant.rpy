@@ -108,7 +108,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                  mc.name "I love the way it sounds when I fuck you. Hear it?"
                  "You thrust yourself back into her forcefully, her ass smacking against your hips with a loud smack."
                  "[the_girl.possessive_title] moans and pushes herself back against you."
-                 mc.name "Thats it, you’re my bitch. I love how naughty you are"
+                 mc.name "Thats it, you’re my bitch. I love how naughty you are."
                  "She seems to be into it. Maybe you should tell her how you want to finish."
                  menu:
                      "I wanna creampie you":
@@ -194,7 +194,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                          elif the_girl.get_opinion_score("being submissive") > 0 or the_girl.effective_sluttiness() > 120:
                              the_girl.char "Yes sir!"
                              "[the_girl.possessive_title] immediately opens her mouth and begins sucking on your fingers. She bobs her head up and down on them a few times as if it were a cock"
-                             "Her mouth comes off your fingers with a pop"
+                             "Her mouth comes off your fingers with a pop."
                              the_girl.char "There you go sir, all clean!"
                              $ the_girl.change_arousal(2)
                          else:
@@ -221,7 +221,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                  mc.name "I love the way it sounds when I fuck you. Hear it?"
                  "You thrust yourself back into her forcefully, her ass smacking against your hips with a loud smack."
                  "[the_girl.possessive_title] moans and pushes herself back against you."
-                 mc.name "Thats it, you’re such a talented slut. I love how naughty you are"
+                 mc.name "Thats it, you’re such a talented slut. I love how naughty you are."
                  "She seems to be into it. Maybe you should tell her how you want to finish."
                  menu:
                      "I wanna creampie you":
@@ -403,7 +403,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                         "You enjoy teasing her suuple breasts for a few moments. You hold one in place while you fuck her, feeling the weight of it sway with each motion."
                         $ the_girl.change_arousal(5)
                     else:
-                        $ top_clothing = the_girl.outfit.get_upper_ordered()[-1]
+                        $ top_clothing = the_girl.outfit.get_upper_top_layer()
                         "You plant a hand on [the_girl.possessive_title]'s big tits and fondle them through her [top_clothing.name]."
                         $ top_clothing = None
                         the_girl.char "Mmm, you should just pull that out of the way. I want you to be able to grab them and squeeze them."
@@ -426,7 +426,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                             $ mc.change_arousal( 100)
                             return
                     else:
-                        $ top_clothing = the_girl.outfit.get_upper_ordered()[-1]
+                        $ top_clothing = the_girl.outfit.get_upper_top_layer()
                         "You try and feel up [the_girl.possessive_title]'s little tits, but her [top_clothing.name] stops you from getting much more than a handful of fabric."
                         $ top_clothing = None
                         "You give up and focus on fucking her instead."

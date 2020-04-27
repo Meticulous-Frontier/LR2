@@ -22,16 +22,28 @@ init 2 python:
                 wardrobe.remove_outfit(the_outfit)
 
     def import_wardrobes_has_outfit_with_name(list_of_wardrobes, the_name): # Check if every Wardrobe in the list has the outfit already
-        max_count = len(list_of_wardrobes)
         count = 0
         for wardrobe in list_of_wardrobes:
             for checked_outfit in wardrobe.outfits + wardrobe.underwear_sets + wardrobe.overwear_sets:
                 if checked_outfit.name == the_name:
                     count += 1
-        if count == max_count:
+        if count == len(list_of_wardrobes):
             return True
         else:
             return False
+
+    def get_wardrobe_name_for_outfit_with_name(import_wardrobes, the_name):
+        count = 0
+        found_in = []
+        for wardrobes in sorted(import_wardrobes):
+            if import_wardrobes_has_outfit_with_name(import_wardrobes[wardrobes][0], the_name):
+                found_in.append(wardrobes.split(" ")[0])
+                count+=1
+        if count > 0:
+            return "-".join(found_in)
+        elif count == len(import_wardrobes):
+            return "All"
+        return ""
 
     def calculate_outfit_slut_score(wardrobe, outfit):
         if outfit in wardrobe.outfits:
@@ -122,7 +134,7 @@ init 2:
                                                         style "textbutton_no_padding_highlight"
                                                         text_style "serum_text_style"
 
-                                                        if underwear_limit == -1 and (outfit in wardrobe.outfits or outfit in wardrobe.underwear_sets) :
+                                                        if underwear_limit == 0 and (outfit in wardrobe.outfits or outfit in wardrobe.underwear_sets) :
                                                             background "#222222"
                                                         elif slut_limit and (outfit in wardrobe.outfits or outfit in wardrobe.overwear_sets) and effective_slut_score > slut_limit:
                                                             background "#222222"
@@ -154,13 +166,13 @@ init 2:
                                                             sensitive outfit not in exported
 
 
-                                                    textbutton ("Direct Import Selection:" if slut_limit is None else "Assign to Division:"): # Put the outfit directly into wardrobe(s), see the import_wardrobes dictionary to add more alternatives.
+                                                    textbutton ("Direct Import Selection:" if slut_limit is None else "Assign to Division: " + get_wardrobe_name_for_outfit_with_name(import_wardrobes, outfit.name)): # Put the outfit directly into wardrobe(s), see the import_wardrobes dictionary to add more alternatives.
 
                                                         style "textbutton_no_padding_highlight"
                                                         text_style "serum_text_style"
                                                         xfill True
 
-                                                        if underwear_limit == -1 and (outfit in wardrobe.outfits or outfit in wardrobe.underwear_sets):
+                                                        if underwear_limit == 0 and (outfit in wardrobe.outfits or outfit in wardrobe.underwear_sets):
                                                             background "#222222"
                                                             action Function(renpy.notify, "Full and underwear uniforms require [reduced_coverage_uniform_policy.name]")
                                                         elif slut_limit and (outfit in wardrobe.outfits or outfit in wardrobe.overwear_sets) and effective_slut_score > slut_limit:

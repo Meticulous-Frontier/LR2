@@ -232,51 +232,6 @@ label trist_draw_69():
 
 screen SB_two_person_info_ui(the_person_one, the_person_two): #Used to display stats for a person while you're talking to them.
     layer "Active"
-    $ formatted_tooltip = ""
-    $ formatted_obedience_tooltip = ""
-    $ formatted_tooltip_2 = ""
-    $ formatted_obedience_tooltip_2 = ""
-    python:
-        positive_effects = ""
-        negative_effects = ""
-        for situation in the_person_one.situational_sluttiness:
-            if the_person_one.situational_sluttiness[situation][0] > 0: #We purposefully ignore 0 so we don't show null sluttiness modifiers.
-                positive_effects += get_coloured_arrow(1)+get_red_heart(the_person_one.situational_sluttiness[situation][0])+" - " + the_person_one.situational_sluttiness[situation][1] + "\n"
-            elif the_person_one.situational_sluttiness[situation][0] < 0:
-                negative_effects += get_coloured_arrow(-1)+get_red_heart(-the_person_one.situational_sluttiness[situation][0])+" - " + the_person_one.situational_sluttiness[situation][1] + "\n"
-        formatted_tooltip += positive_effects + negative_effects
-        formatted_tooltip += "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is easier to raise but drops slowly over time. Core sluttiness (" + get_gold_heart(20) + ") is permanent, but can only be created by using serum to raise suggestability or by making a girl climax."
-
-        positive_effects = ""
-        negative_effects = ""
-        for situation in the_person_one.situational_obedience:
-            if the_person_one.situational_obedience[situation][0] > 0:
-                positive_effects += get_coloured_arrow(1)+"+"+__builtin__.str(the_person_one.situational_obedience[situation][0])+ " Obedience - " + the_person_one.situational_obedience[situation][1] + "\n"
-            elif the_person_one.situational_obedience[situation][0] < 0:
-                negative_effects += get_coloured_arrow(1)+""+__builtin__.str(the_person_one.situational_obedience[situation][0])+ " Obedience - " + the_person_one.situational_obedience[situation][1] + "\n"
-        formatted_obedience_tooltip += positive_effects + negative_effects
-        formatted_obedience_tooltip += "Girls with high obedience will listen to commands even when they would prefer not to and are willing to work for less pay. Girls who are told to do things they do not like will lose happiness, and low obedience girls are likely to refuse altogether."
-
-        positive_effects_2 = ""
-        negative_effects_2 = ""
-        for situation in the_person_two.situational_sluttiness:
-            if the_person_two.situational_sluttiness[situation][0] > 0: #We purposefully ignore 0 so we don't show null sluttiness modifiers.
-                positive_effects += get_coloured_arrow(1)+get_red_heart(the_person_two.situational_sluttiness[situation][0])+" - " + the_person_two.situational_sluttiness[situation][1] + "\n"
-            elif the_person_two.situational_sluttiness[situation][0] < 0:
-                negative_effects += get_coloured_arrow(-1)+get_red_heart(-the_person_two.situational_sluttiness[situation][0])+" - " + the_person_two.situational_sluttiness[situation][1] + "\n"
-        formatted_tooltip_2 += positive_effects + negative_effects
-        formatted_tooltip_2 += "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is easier to raise but drops slowly over time. Core sluttiness (" + get_gold_heart(20) + ") is permanent, but can only be created by using serum to raise suggestability or by making a girl climax."
-
-        positive_effects_2 = ""
-        negative_effects_2 = ""
-        for situation in the_person_two.situational_obedience:
-            if the_person_two.situational_obedience[situation][0] > 0:
-                positive_effects += get_coloured_arrow(1)+"+"+__builtin__.str(the_person_two.situational_obedience[situation][0])+ " Obedience - " + the_person_two.situational_obedience[situation][1] + "\n"
-            elif the_person_two.situational_obedience[situation][0] < 0:
-                negative_effects += get_coloured_arrow(1)+""+__builtin__.str(the_person_two.situational_obedience[situation][0])+ " Obedience - " + the_person_two.situational_obedience[situation][1] + "\n"
-        formatted_obedience_tooltip_2 += positive_effects + negative_effects
-        formatted_obedience_tooltip_2 += "Girls with high obedience will listen to commands even when they would prefer not to and are willing to work for less pay. Girls who are told to do things they do not like will lose happiness, and low obedience girls are likely to refuse altogether."
-
     frame:
         background "gui/topbox.png"
         xsize 1100
@@ -328,19 +283,37 @@ screen SB_two_person_info_ui(the_person_one, the_person_two): #Used to display s
                 #    action NullAction()
                 #    sensitive True
 
-                textbutton "Sluttiness: " + get_heart_image_list(the_person_one):
-                    ysize 28
-                    text_style "menu_text_style"
-                    tooltip formatted_tooltip
-                    action NullAction()
-                    sensitive True
+                hbox:
+                    textbutton "Sluttiness: " + get_heart_image_list(the_person_one):
+                        ysize 28
+                        text_style "menu_text_style"
+                        tooltip "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is easier to raise but drops slowly over time. Core sluttiness (" + get_gold_heart(20) + ") is permanent, but only increases slowly unless a girl is suggestible."
+                        action NullAction()
+                        sensitive True
 
-                textbutton "Obedience: [the_person_one.obedience] - " + get_obedience_plaintext(the_person_one.obedience):
-                    ysize 28
-                    text_style "menu_text_style"
-                    tooltip formatted_obedience_tooltip
-                    action NullAction()
-                    sensitive True
+                    if any(x[0] > 0 or x[0] < 0 for x in the_person_one.situational_sluttiness.itervalues()):
+                        textbutton "{image=question_mark_small}":
+                            yoffset 6
+                            ysize 28
+                            tooltip person_info_ui_get_formatted_tooltip(the_person_one)
+                            action NullAction()
+                            sensitive True
+
+                hbox:
+                    textbutton "Obedience: [the_person_one.obedience] - " + get_obedience_plaintext(the_person_one.obedience):
+                        ysize 28
+                        text_style "menu_text_style"
+                        tooltip "Girls with high obedience will listen to commands even when they would prefer not to and are willing to work for less pay. Girls who are told to do things they do not like will lose happiness, and low obedience girls are likely to refuse altogether."
+                        action NullAction()
+                        sensitive True
+
+                    if any(x[0] > 0 or x[0] < 0 for x in the_person_one.situational_obedience.itervalues()):
+                        textbutton "{image=question_mark_small}":
+                            yoffset 6
+                            ysize 28
+                            tooltip person_info_ui_get_formatted_obedience_tooltip(the_person_one)
+                            action NullAction()
+                            sensitive True
 
             vbox:
                 vbox:
@@ -382,19 +355,37 @@ screen SB_two_person_info_ui(the_person_one, the_person_two): #Used to display s
                     #    action NullAction()
                     #    sensitive True
 
-                    textbutton "Sluttiness: " + get_heart_image_list(the_person_two):
-                        ysize 28
-                        text_style "menu_text_style"
-                        tooltip formatted_tooltip_2
-                        action NullAction()
-                        sensitive True
+                    hbox:
+                        textbutton "Sluttiness: " + get_heart_image_list(the_person_two):
+                            ysize 28
+                            text_style "menu_text_style"
+                            tooltip "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is easier to raise but drops slowly over time. Core sluttiness (" + get_gold_heart(20) + ") is permanent, but only increases slowly unless a girl is suggestible."
+                            action NullAction()
+                            sensitive True
 
-                    textbutton "Obedience: [the_person_two.obedience] - " + get_obedience_plaintext(the_person_two.obedience):
-                        ysize 28
-                        text_style "menu_text_style"
-                        tooltip formatted_obedience_tooltip_2
-                        action NullAction()
-                        sensitive True
+                        if any(x[0] > 0 or x[0] < 0 for x in the_person_two.situational_sluttiness.itervalues()):
+                            textbutton "{image=question_mark_small}":
+                                yoffset 6
+                                ysize 28
+                                tooltip person_info_ui_get_formatted_tooltip(the_person_two)
+                                action NullAction()
+                                sensitive True
+
+                    hbox:
+                        textbutton "Obedience: [the_person_two.obedience] - " + get_obedience_plaintext(the_person_two.obedience):
+                            ysize 28
+                            text_style "menu_text_style"
+                            tooltip "Girls with high obedience will listen to commands even when they would prefer not to and are willing to work for less pay. Girls who are told to do things they do not like will lose happiness, and low obedience girls are likely to refuse altogether."
+                            action NullAction()
+                            sensitive True
+
+                        if any(x[0] > 0 or x[0] < 0 for x in the_person_two.situational_obedience.itervalues()):
+                            textbutton "{image=question_mark_small}":
+                                yoffset 6
+                                ysize 28
+                                tooltip person_info_ui_get_formatted_obedience_tooltip(the_person_two)
+                                action NullAction()
+                                sensitive True
 
 init -1 python:
     SB_list_of_threesomes = []
@@ -540,6 +531,24 @@ init -1 python:
             elif self.guy_source == 2:
                  mc.change_arousal(self.guy_arousal + (self.guy_arousal * the_person_two.sex_skills[self.skill_tag_guy] * 0.1))
 
+        def threesome_choose_position(the_person, the_position, the_object):
+            tuple_list = []
+            tuple_list.append(["Keep going.",the_position])
+            #tuple_list.append(["Back off and change positions.","Pull Out"])
+            if (mc.arousal > 80): #Only let you finish if you've got a high enough arousal score. #TODO: Add stat that controls how much control you have over this.
+                tuple_list.append(["Cum!","Finish"])
+            #tuple_list.append(["Strip her down.","Strip"])
+            if (the_position.can_swap == True):
+                tuple_list.append([the_position.swap_text,"Swap"])
+            for position in the_position.connections:
+                if the_object.has_trait(position.requires_location):
+                    if position.check_clothing(the_person):
+                        appended_name = "Change to " + position.name + ".\n{size=22}Max Effect: " + get_red_heart(position.slut_cap) + "\nSuggested Sluttiness: " + get_red_heart(position.slut_requirement) + "{/size}"
+                    else:
+                        appended_name = "Change to " + position.name + ".\n{size=22}Obstructed by Clothing\nSuggested Sluttiness: " + get_red_heart(position.slut_requirement) + "{/size} (disabled)"
+                    tuple_list.append([appended_name,position])
+            return renpy.display_menu(tuple_list,True,"Choice")
+
 
 label SB_threesome_description(the_person_one, the_person_two, the_position, the_object, round, private = True, girl_in_charge = False, current_girl = 1):
     #NOTE: the private variable decides if you are in private or not relative to the location you are in. If True other people in the room do not get a chance to interact.
@@ -622,22 +631,7 @@ label SB_threesome_description(the_person_one, the_person_two, the_position, the
                 position_choice = the_position
                 #TODO: this is where we perform any changes for the girl.
             else:
-                tuple_list = []
-                tuple_list.append(["Keep going.",the_position])
-                #tuple_list.append(["Back off and change positions.","Pull Out"])
-                if (mc.arousal > 80): #Only let you finish if you've got a high enough arousal score. #TODO: Add stat that controls how much control you have over this.
-                    tuple_list.append(["Cum!","Finish"])
-                #tuple_list.append(["Strip her down.","Strip"])
-                if (the_position.can_swap == True):
-                    tuple_list.append([the_position.swap_text,"Swap"])
-                for position in the_position.connections:
-                    if the_object.has_trait(position.requires_location):
-                        if position.check_clothing(the_person):
-                            appended_name = "Change to " + position.name + ".\n{size=22}Max Effect: " + get_red_heart(position.slut_cap) + "\nSuggested Sluttiness: " + get_red_heart(position.slut_requirement) + "{/size}"
-                        else:
-                            appended_name = "Change to " + position.name + ".\n{size=22}Obstructed by Clothing\nSuggested Sluttiness: " + get_red_heart(position.slut_requirement) + "{/size} (disabled)"
-                        tuple_list.append([appended_name,position])
-                position_choice = renpy.display_menu(tuple_list,True,"Choice")
+                position_choice = threesome_choose_position(the_person_one, the_position, the_object)
 
     if position_choice == "Finish":
         $ the_position.current_modifier = None

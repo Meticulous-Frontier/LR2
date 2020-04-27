@@ -17,7 +17,7 @@ init -1 python:
 
         cs = renpy.current_screen()
         production_remaining = cs.scope["production_remaining"]
-        production_max = cs.scope["production_max"]
+        production_max = cs.scope["production_max_use"]
 
         if line in self.serum_production_array:
             used_production = self.get_used_line_weight()
@@ -32,11 +32,6 @@ init -1 python:
 
     # Based on suggestion from DaMatt on F95Zone
     def change_production_enhanced(self,new_serum,production_line):
-        if "machinery_room_overload" in globals(): # Should not cause issues if not present.
-            production_max = machinery_room_overload
-        else:
-            production_max = 100
-
         if production_line in self.serum_production_array: #If it already exists, change the serum type and production points stored, but keep the weight for that line (it can be changed later)
             self.serum_production_array[production_line][0] = new_serum
             self.serum_production_array[production_line][1] = int(production_max - self.get_used_line_weight() + self.serum_production_array[production_line][1]) #Set the production weight to everything we have remaining
@@ -48,7 +43,10 @@ init -1 python:
     Business.change_production = change_production_enhanced
 
     def is_trait_researched(self, trait):
-        research_trait = find_in_list(lambda x: x.name == trait.name, list_of_traits)
+        if type(trait) is unicode:
+            research_trait = find_in_list(lambda x: x.name.startswith(trait), list_of_traits) # As long as the naming convention of the serums are consistent then this should be a lazy workaround for not having them accessible in the global scope anymore
+        else:
+            research_trait = find_in_list(lambda x: x.name == trait.name, list_of_traits)
         if research_trait:
             return research_trait.researched
         return False

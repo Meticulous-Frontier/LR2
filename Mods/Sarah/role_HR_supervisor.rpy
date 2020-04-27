@@ -16,33 +16,25 @@
 
 
 #HR director functions
-init -0 python:
-    def get_HR_director():
-        return business_HR_director
-
+init 1 python:
     def set_HR_director_tag(key, value):
-        if business_HR_director:
-            business_HR_director.HR_tags[key] = value
+        if mc.business.hr_director:
+            mc.business.hr_director.HR_tags[key] = value
 
     def get_HR_director_tag(key, default = None):
-        if business_HR_director:
-            return business_HR_director.HR_tags.get(key, default)
+        if mc.business.hr_director:
+            return mc.business.hr_director.HR_tags.get(key, default)
 
     # used for unlocked sex positions
     def set_HR_director_unlock(key, value):
-        if business_HR_director:
-            business_HR_director.HR_unlocks[key] = value
+        if mc.business.hr_director:
+            mc.business.hr_director.HR_unlocks[key] = value
 
     # used for unlocked sex positions
     def get_HR_director_unlock(key, default = False):
-        if business_HR_director:
-            return business_HR_director.HR_unlocks.get(key, default)
+        if mc.business.hr_director:
+            return mc.business.hr_director.HR_unlocks.get(key, default)
 
-#HR director action requirements#
-init -2 python:
-    #TODO move all these true false flags to a dict so that in the future when I add more, I can call them by reference and not invalidate old saves games!
-
-    business_HR_director = None
 
 init 5 python:
     def build_HR_review_list(the_person, max_tier = 0):
@@ -68,6 +60,15 @@ init 5 python:
         HR_employee_list = []
         HR_employee_list = get_HR_review_list(the_person, tier = 2)
         return HR_employee_list
+
+    def HR_director_choose_position():
+        tuple_list = []
+        for position in mc.business.hr_director.HR_unlocks.keys():
+            if mc.business.hr_director.HR_unlocks[position] == True:
+                tuple_list.append([position.title(), position])
+        tuple_list.append(["Surprise me", "any"])
+
+        return renpy.display_menu(tuple_list,True,"Choice") 
 
     def create_HR_review_topic_list(the_person):
         topic_list = ["working"]
@@ -110,7 +111,7 @@ init 5 python:
         return False
 
     def HR_director_monday_meeting_requirement():
-        if get_HR_director() is None:
+        if not mc.business.hr_director:
             return False
         if day%7 == 0 and time_of_day == 1: #Monday
             return True
@@ -207,14 +208,8 @@ init 5 python:
             return True
         return False
 
-    def is_HR_director_employed(hr_director):
-        if hr_director in mc.business.get_employee_list():
-            return True
-        cleanup_HR_director_meetings()
-        return False
-
     def can_appoint_HR_director_requirement():
-        if business_HR_director is None:
+        if not mc.business.hr_director:
             if HR_director_creation_policy.is_owned():
                 if len(mc.business.hr_team) > 0:
                     return True
@@ -275,6 +270,12 @@ init 5 python:
         opinion_chat_list.insert(0, "Discuss Topic")
         return opinion_chat_list
 
+    def hr_director_mind_control_update_opinions(person):
+        topic_list = create_HR_review_topic_list(person)
+        for topic in topic_list:
+            person.increase_opinion_score(topic)
+        return
+
     HR_director_coffee_tier_1_action = Action("Add serum to coffee during meetings.", HR_director_coffee_tier_1_requirement, "HR_director_coffee_tier_1_label",
         menu_tooltip = "Costs $500 but makes meetings more impactful.")
     HR_director_coffee_tier_2_action = Action("Add stronger serum to coffee during meetings.", HR_director_coffee_tier_2_requirement, "HR_director_coffee_tier_2_label",
@@ -310,7 +311,7 @@ init 1301 python:
         cost = 500,
         requirement =  HR_director_creation_requirement,
         on_buy_function = increase_max_employee_size,
-        on_buy_arguments = {"amount":1})
+        extra_arguments = {"amount":1})
 
     organisation_policies_list.append(HR_director_creation_policy)
 
@@ -331,7 +332,7 @@ label fire_HR_director(the_person):
         the_person.char "Whew! I have a really hard time working with people to be honest. I hope whoever replaces me can do a better job at it!"
 
     $ the_person.special_role.remove(HR_director_role)
-    $ business_HR_director = None
+    $ mc.business.hr_director = None
     $ cleanup_HR_director_meetings()
     return
 
@@ -360,34 +361,26 @@ label HR_director_initial_hire_label(the_person):
 
     # update employee relationships
     python:
-        for other_employee in mc.business.get_employee_list():
-            town_relationships.begin_relationship(the_person, other_employee) #They are introduced to everyone at work, with a starting value of "Acquaintance"
+        mc.business.hr_director = the_person
+        mc.business.hr_director.HR_tags = {}
+        mc.business.hr_director.HR_unlocks = {}
 
-        business_HR_director = the_person
-        business_HR_director.HR_tags = {}
-        business_HR_director.HR_unlocks = {}
-
-        if the_person is sarah:
-            the_person.set_schedule([1,2,3], None)
-            mc.business.add_employee_hr(the_person)
-            the_person.event_triggers_dict["employed_since"] = day
-            mc.business.listener_system.fire_event("new_hire", the_person = the_person)
-        else:
+        if employee_role in the_person.special_role:
             mc.business.remove_employee(the_person)
-            mc.business.add_employee_hr(the_person)
 
-        business_HR_director.special_role.append(employee_role)
-        business_HR_director.special_role.append(HR_director_role)
-        business_HR_director.set_work([1,2,3], mc.business.h_div)
+        mc.business.hire_person(the_person, "HR")
+        
+        # assign special HR director role
+        mc.business.hr_director.special_role.append(HR_director_role)
 
         set_HR_director_tag("business_HR_eff_bonus", mc.business.effectiveness_cap - 100)
         add_hr_director_first_monday_action(the_person)
     return
 
 label HR_director_first_monday_label(the_person):
-    if not is_HR_director_employed(business_HR_director):
-        $ business_HR_director = None
+    if not mc.business.hr_director:
         return
+
     "It's lunchtime, so you prepare to have your first meeting with your new HR Direction, [the_person.title]."
     "You grab your lunch from the break head to your office and sit down."
     $ scene_manager = Scene()
@@ -442,8 +435,7 @@ label HR_director_first_monday_label(the_person):
     return
 
 label HR_director_monday_meeting_label(the_person):
-    if not is_HR_director_employed(business_HR_director):
-        $ business_HR_director = None
+    if not mc.business.hr_director:
         return
 
     $ scene_manager = Scene()
@@ -511,13 +503,14 @@ label HR_director_monday_meeting_label(the_person):
     else:
         the_person.char "Can do! Did you want to call in a girl for a counseling session this week?"
         menu:
-            "Let's not this week":
-                $ del HR_employee_list
             "Call one in":
                 mc.name "Yes I want to do that."
                 the_person.char "Ok! Let me see who I have on my list here..."
                 call HR_director_personnel_interview_label(the_person, max_opinion = get_HR_director_tag("business_HR_coffee_tier", 0)) from HR_DIR_INTERVIEW_CALL_2
-                $ set_HR_director_tag("business_HR_meeting_last_day", day)
+                if _return:
+                    $ set_HR_director_tag("business_HR_meeting_last_day", day)
+            "Let's not this week":
+                $ del HR_employee_list
 
     the_person.char "Hmm, let's see, what's next..."
     call HR_director_manage_gym_membership(the_person) from HR_Gym_manage_1
@@ -555,12 +548,12 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         the_person.char "Here's my list. Who do you want me to call in?"
 
     # use new menu layout for selecting people
-    if "build_menu_items" in globals():
-        call screen main_choice_display(build_menu_items([["Call in"] + HR_employee_list], draw_hearts_for_people = False))
-    else:
-        call screen main_choice_display([["Call in"] + HR_employee_list])
-
+    call screen main_choice_display([["Call in"] + HR_employee_list + ["Changed my mind"]], draw_hearts_for_people = False)
     $ person_choice = _return
+
+    if person_choice == "Changed my mind":
+        return False
+
     $ scene_manager.update_actor(the_person, position = "stand2")
     the_person.char "Alright, let me go get her."
     $ scene_manager.remove_actor(the_person, reset_actor = False)
@@ -608,10 +601,8 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
 
     mc.name "That's right. As you know, we run a small business here, and I like to make sure all my employees enjoy their work here."
     mc.name "Recently, I've become concerned you may not like the work environment."
-    if "build_menu_items" in globals():
-        call screen main_choice_display(build_menu_items([build_HR_interview_discussion_topic_menu(person_choice)]))
-    else:
-        call screen main_choice_display([build_HR_interview_discussion_topic_menu(person_choice)])
+
+    call screen main_choice_display([build_HR_interview_discussion_topic_menu(person_choice)])
     $ opinion_chat = _return
 
     if opinion_chat == "working":
@@ -633,16 +624,19 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     else:
         mc.name "I know the policy in place feels weird, but I want you to rethink your opinion on [opinion_chat]. It would be helpful if you would."
     the_person.char "All of our employees are valued here, not just as employees, but as people."
-    person_choice.char "Thanks... I guess... I've never really thought about [opinion_chat] like that."
     if person_choice.obedience > 120: #She is obedient
         person_choice.char "I'm not sure I really thought about being here as more than just another job... but I want this place to succeed. I want you to succeed, [person_choice.mc_title]."
     else:
-        person_choice.char "I guess I never really thought about it like that. I mean, if I have to have a job... I guess I might as well try to be more positive about it, right?"
-    "She stops for a moment and gathers her thoughts."
-    person_choice.char "I'll think about this for a bit, but I think I understand what you are saying. I'll try to have a better attitude about [opinion_chat] going forward."
-    $ scene_manager.update_actor(person_choice, position = "sitting", character_placement = character_left_flipped, emotion = "happy")
+        person_choice.char "I guess I never really thought about [opinion_chat] like that. I mean, if I have to have a job... I guess I might as well try to be more positive about it, right?"
+
+    $ scene_manager.update_actor(person_choice, emotion = "happy")
     "[person_choice.title] thinks for a moment, then smiles at both of you."
-    if person_choice.sluttiness > 80 and the_person.sluttiness > 80: # TODO come back after writing sarah threesome content to unlock this instead
+    # start threesome attempt when sluttiness is high enough and she doesn't hate threesomes 
+    # when HR Director is Sarah, also wait for threesome unlock event
+    if (person_choice.sluttiness > 80 and the_person.sluttiness > 80
+        and person_choice.get_opinion_score("threesomes") > -2
+        and (not the_person is sarah or sarah.event_triggers_dict.get("threesome_unlock", 0) > 0)):
+
         person_choice.char "Thanks for calling me in. Is that all? Or was there maybe someone... I mean someTHING else on the to do list?"
         menu:
             "Attempt a threesome with [the_person.title]":
@@ -661,13 +655,11 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
                     $ the_person.change_happiness(10)
             "That's all":
                 person_choice.char "Thanks for calling me in... I guess I'd better go get back to work!"
-
     else:
         person_choice.char "Thanks for calling me in... I guess I'd better go get back to work!"
-    if opinion_chat in opinions_list:
-        $ person_choice.opinions[opinion_chat] = [max_opinion, True]
-    else:
-        $ person_choice.sexy_opinions[opinion_chat] = [max_opinion, True]
+
+    if person_choice.get_opinion_score(opinion_chat) < max_opinion:
+        $ person_choice.update_opinion_with_score(opinion_chat, max_opinion)
     $ mc.listener_system.fire_event("HR_opinion_improvement", the_person = person_choice)
     $ scene_manager.update_actor(person_choice, position = "walking_away", character_placement = character_left_flipped)
     $ scene_manager.update_actor(the_person, position = "stand2", character_placement = character_right)
@@ -683,147 +675,163 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     python:
         del HR_employee_list
         del person_choice
-    return
+        del opinion_chat
+    return True
 
 label HR_director_review_discoveries_label(the_person):
-    "[the_person.title] pulls out a report on all the latest achievements of the research department."
-    if get_HR_director_tag("business_HR_serum_tier", 0) == 0:
-        if mc.business.is_trait_researched(off_label_drugs): #Researched!
-            $ set_HR_director_tag("business_HR_serum_tier", 1)
-            the_person.char "Hmmm... interesting."
-            "[the_person.title] looks closely at one of the serums that has been researched."
-            the_person.char "I see here that you've managed to create a serum that has the ability to increase a person's... suggestibility?"
-            mc.name "Right. Basically it sets up the brain to make new connections it might not have previously made, opening up a person to suggestions they may not normally consider."
-            the_person.char "That would actually be useful... We could use some, in the coffee we make when we bring them in for meetings?"
-            mc.name "A version of the serum with a short useful life would be useful for giving the meetings more impact."
-            "[the_person.title] looks into more details of the serum."
-            the_person.char "Looks like the serum is fairly easy to produce. I'd say for about $500 we could probably setup an something long term for the monday meetings..."
-            mc.name "Noted. I'll consider it and get back to you if I decide to do this."
-            the_person.char "Sounds good [the_person.mc_title]!"
+    # shorten the dialog when all research is reviewed
+    if not (get_HR_director_tag("business_HR_serum_tier", 0) >= 3 
+        and (not the_person is sarah or get_HR_director_tag("business_HR_serum_breast", False) == True)):
 
-    if get_HR_director_tag("business_HR_serum_tier", 0) == 1:
-        if mc.business.is_trait_researched(blood_brain_pen): #Researched!
-            $ set_HR_director_tag("business_HR_serum_tier", 2)
-            the_person.char "Hmmm... interesting."
-            "[the_person.title] looks closely at one of the serums that has been researched."
-            the_person.char "I see here that you've managed to improve on an earlier design to increase a person's suggestibility!"
-            mc.name "Right. It bypasses connections that would normally trigger a rejection response and causes the person to consider actions that would normally be rejected."
-            if get_HR_director_tag("business_HR_coffee_tier", 0) == 0:
-                the_person.char "I know I brought this up last time we researched a similar serum, but having a serum like that to give employees when they come in for reviews would be very useful."
-                the_person.char "You should definitely consider it. I think it would give our meetings more impact with employees."
-                the_person.char "This version of the serum... I think we could get something setup for about $1500. It's a little difficult to synthesize."
-                mc.name "Noted. I'll consider it and get back to you if I decide to do this."
-                the_person.char "Sounds good [the_person.mc_title]!"
-            else:
-                the_person.char "We already have the equipment setup form the previously researched serum. We should be able to modify it to take advantage of this advancement."
-                "[the_person.title] checks her notes on the synthesis process."
-                the_person.char "I think for about $1500 we could probably set something similar up for this one. It would give out meetings considerably more impact."
+        "[the_person.title] pulls out a report on all the latest achievements of the research department."
+        if get_HR_director_tag("business_HR_serum_tier", 0) == 0:
+            if mc.business.is_trait_researched(off_label_drugs): #Researched!
+                $ set_HR_director_tag("business_HR_serum_tier", 1)
+                the_person.char "Hmmm... interesting."
+                "[the_person.title] looks closely at one of the serums that has been researched."
+                the_person.char "I see here that you've managed to create a serum that has the ability to increase a person's... suggestibility?"
+                mc.name "Right. Basically it sets up the brain to make new connections it might not have previously made, opening up a person to suggestions they may not normally consider."
+                the_person.char "That would actually be useful... We could use some, in the coffee we make when we bring them in for meetings?"
+                mc.name "A version of the serum with a short useful life would be useful for giving the meetings more impact."
+                "[the_person.title] looks into more details of the serum."
+                the_person.char "Looks like the serum is fairly easy to produce. I'd say for about $500 we could probably setup an something long term for the monday meetings..."
                 mc.name "Noted. I'll consider it and get back to you if I decide to do this."
                 the_person.char "Sounds good [the_person.mc_title]!"
 
-    if get_HR_director_tag("business_HR_serum_tier", 0) == 2:
-        if mc.business.is_trait_researched(mind_control_agent): #Researched
-            $ set_HR_director_tag("business_HR_serum_tier", 3)
-            the_person.char "Wow... this is crazy."
-            "[the_person.title] looks closely at one of the serums that has been researched."
-            the_person.char "It says here, you have researched a serum that allows for temporary mind control!?!"
-            mc.name "Right. It bypasses all inhibitions and allows direct implantation of suggestions."
-            the_person.char "So... obviously the ethics of this are dubious but... You could do incredible things with it, from an HR standpoint."
-            mc.name "Well, we've had to dilute it quite a bit. High concentrations can have pretty bad side effects."
-            the_person.char "So... maybe we could consider creating a concentrated, single use version? With something like that, we could change a girl's work opinions all at once!"
-            the_person.char "Looks like for about $5000 we could stock a single use version like that. It would be pretty challenging to synthesize."
-            mc.name "Noted. I'll consider it and get back to you if I decide to do this."
-            the_person.char "Sounds good [the_person.mc_title]!"
+        if get_HR_director_tag("business_HR_serum_tier", 0) == 1:
+            if mc.business.is_trait_researched(blood_brain_pen): #Researched!
+                $ set_HR_director_tag("business_HR_serum_tier", 2)
+                the_person.char "Hmmm... interesting."
+                "[the_person.title] looks closely at one of the serums that has been researched."
+                the_person.char "I see here that you've managed to improve on an earlier design to increase a person's suggestibility!"
+                mc.name "Right. It bypasses connections that would normally trigger a rejection response and causes the person to consider actions that would normally be rejected."
+                if get_HR_director_tag("business_HR_coffee_tier", 0) == 0:
+                    the_person.char "I know I brought this up last time we researched a similar serum, but having a serum like that to give employees when they come in for reviews would be very useful."
+                    the_person.char "You should definitely consider it. I think it would give our meetings more impact with employees."
+                    the_person.char "This version of the serum... I think we could get something setup for about $1500. It's a little difficult to synthesize."
+                    mc.name "Noted. I'll consider it and get back to you if I decide to do this."
+                    the_person.char "Sounds good [the_person.mc_title]!"
+                else:
+                    the_person.char "We already have the equipment setup form the previously researched serum. We should be able to modify it to take advantage of this advancement."
+                    "[the_person.title] checks her notes on the synthesis process."
+                    the_person.char "I think for about $1500 we could probably set something similar up for this one. It would give out meetings considerably more impact."
+                    mc.name "Noted. I'll consider it and get back to you if I decide to do this."
+                    the_person.char "Sounds good [the_person.mc_title]!"
+
+        if get_HR_director_tag("business_HR_serum_tier", 0) == 2:
+            if mc.business.is_trait_researched(mind_control_agent): #Researched
+                $ set_HR_director_tag("business_HR_serum_tier", 3)
+                the_person.char "Wow... this is crazy."
+                "[the_person.title] looks closely at one of the serums that has been researched."
+                the_person.char "It says here, you have researched a serum that allows for temporary mind control!?!"
+                mc.name "Right. It bypasses all inhibitions and allows direct implantation of suggestions."
+                the_person.char "So... obviously the ethics of this are dubious but... You could do incredible things with it, from an HR standpoint."
+                mc.name "Well, we've had to dilute it quite a bit. High concentrations can have pretty bad side effects."
+                the_person.char "So... maybe we could consider creating a concentrated, single use version? With something like that, we could change a girl's work opinions all at once!"
+                the_person.char "Looks like for about $5000 we could stock a single use version like that. It would be pretty challenging to synthesize."
+                mc.name "Noted. I'll consider it and get back to you if I decide to do this."
+                the_person.char "Sounds good [the_person.mc_title]!"
 
 
-    if the_person is sarah:
-        if get_HR_director_tag("business_HR_serum_breast", False)  == False:
-            if mc.business.is_trait_researched(breast_enhancement): #Researched!
-                $ set_HR_director_tag("business_HR_serum_breast", True)
-                "Suddenly, [the_person.title] sits straight up in her chair as she reads the report."
-                the_person.char "Wait wait... you managed to synthesize a serum that can increase breast size?"
-                mc.name "Right. It works with the pancreas to deliver local growth of fatty tissue to the breasts."
-                the_person.char "That's amazing! And it says here it won't leave behind stretch marks?"
-                mc.name "Correct. We were able to combine the enhancement of fatty tissue with a temporary increase in skin elasticity."
-                the_person.char "That incredible... but I can't afford..."
-                "She furrows her brow when she sees the initial estimate of the cost of the synthesization."
-                the_person.char "I mean uh, it'll be interesting to see how this progresses..."
-                "You notice [the_person.title] writing herself a note to visit the research department later."
-                #TODO add breast serum sneak event to mandatory list
-                $ add_sarah_catch_stealing_action()
-    "You spend a few minutes with [the_person.title] going over the progress in the research department over the last week or so."
-    the_person.char "That's it for research, let's take a look at policy changes from the last week."
-    if get_HR_director_tag("business_HR_uniform", False) == False:
-        if relaxed_uniform_policy.is_owned():
-            the_person.char "Hmmm, I see here that we have recently opened up company policy to allow for uniform guidelines."
-            the_person.char "This is something that could potentially alienate some of our employees. It might be a good idea if we include opinions on work uniforms when meeting one on one with them."
-            "You hadn't considered how your employees would react when you instituted the uniform policy. You decide [the_person.possessive_title] is right."
-            mc.name "That's a good idea. Go ahead and implement that going forward."
-            the_person.char "Sure thing [the_person.mc_title]!"
-            $ set_HR_director_tag("business_HR_uniform", True)
-    elif get_HR_director_tag("business_HR_skimpy_uniform", False) == False:
-        if corporate_enforced_nudity_policy.is_owned():
-            if the_person.sluttiness > 40:  #She only volunteers to start doing this if she is slutty enough.
-                the_person.char "I see here that the uniform policy has recently been loosened further."
-                the_person.char "Personally, I think it is great that I can come to work and show off lots of skin, but with the latest change in uniform policy, it might be intimidating to employees who don't like skimpy uniforms."
-                the_person.char "It might be a good to idea to include opinions on skimpy uniforms when meeting one on one with employees."
-                "You realize the swing in the uniform policy might be a bit much for some girls, so this is probably a good thing to start counseling for."
+        if the_person is sarah:
+            if get_HR_director_tag("business_HR_serum_breast", False)  == False:
+                if mc.business.is_trait_researched(breast_enhancement): #Researched!
+                    $ set_HR_director_tag("business_HR_serum_breast", True)
+                    "Suddenly, [the_person.title] sits straight up in her chair as she reads the report."
+                    the_person.char "Wait wait... you managed to synthesize a serum that can increase breast size?"
+                    mc.name "Right. It works with the pancreas to deliver local growth of fatty tissue to the breasts."
+                    the_person.char "That's amazing! And it says here it won't leave behind stretch marks?"
+                    mc.name "Correct. We were able to combine the enhancement of fatty tissue with a temporary increase in skin elasticity."
+                    the_person.char "That incredible... but I can't afford..."
+                    "She furrows her brow when she sees the initial estimate of the cost of the synthesization."
+                    the_person.char "I mean uh, it'll be interesting to see how this progresses..."
+                    "You notice [the_person.title] writing herself a note to visit the research department later."
+                    #TODO add breast serum sneak event to mandatory list
+                    $ add_sarah_catch_stealing_action()
+
+        "You spend a few minutes with [the_person.title] going over the progress in the research department over the last week or so."
+
+    # shorten the dialog when all policies are reviewed
+    if not (get_HR_director_tag("business_HR_uniform", False) == True
+        and get_HR_director_tag("business_HR_skimpy_uniform", False) == True
+        and get_HR_director_tag("business_HR_relative_recruitment", 0) != 0
+        and get_HR_director_tag("business_HR_meeting_on_demand", False) == True
+        and get_HR_director_tag("business_HR_gym_tier", 0) >= 2):
+
+        the_person.char "Now let's take a look at policy changes from the last week."
+        if get_HR_director_tag("business_HR_uniform", False) == False:
+            if relaxed_uniform_policy.is_owned():
+                the_person.char "Hmmm, I see here that we have recently opened up company policy to allow for uniform guidelines."
+                the_person.char "This is something that could potentially alienate some of our employees. It might be a good idea if we include opinions on work uniforms when meeting one on one with them."
+                "You hadn't considered how your employees would react when you instituted the uniform policy. You decide [the_person.possessive_title] is right."
                 mc.name "That's a good idea. Go ahead and implement that going forward."
                 the_person.char "Sure thing [the_person.mc_title]!"
-                $ set_HR_director_tag("business_HR_skimpy_uniform", True)
-                if the_person is sarah:
-                    the_person.char "Mmm, I can't wait to see what some of the outfits other girls wear around the office..."
-                    $ the_person.change_slut_temp(5)
-    if get_HR_director_tag("business_HR_relative_recruitment", 0) == 0:
-        if (mc.business.max_employee_count - mc.business.get_employee_count()) > 4:
-            the_person.char "I see here that changes within the company have produced several vacancies."
-            the_person.char "If you like, I could post something in the break room that we are looking for more employees."
-            the_person.char "Several of the women who work here have children or relatives who could use the work. They might be more likely to come to you asking for employment if they know we need the help."
-            "You consider what she is saying. It might be good for company morale to have mothers and their daughters both employed by you. Who knows, it could lead to other situations too."
-            "You weigh the option. Do you want to post something?"
-            menu:
-                "Approve":
+                $ set_HR_director_tag("business_HR_uniform", True)
+        elif get_HR_director_tag("business_HR_skimpy_uniform", False) == False:
+            if corporate_enforced_nudity_policy.is_owned():
+                if the_person.sluttiness > 40:  #She only volunteers to start doing this if she is slutty enough.
+                    the_person.char "I see here that the uniform policy has recently been loosened further."
+                    the_person.char "Personally, I think it is great that I can come to work and show off lots of skin, but with the latest change in uniform policy, it might be intimidating to employees who don't like skimpy uniforms."
+                    the_person.char "It might be a good to idea to include opinions on skimpy uniforms when meeting one on one with employees."
+                    "You realize the swing in the uniform policy might be a bit much for some girls, so this is probably a good thing to start counseling for."
                     mc.name "That's a good idea. Go ahead and implement that going forward."
-                    $ update_hire_daughter_crisis(10)
-                    $ set_HR_director_tag("business_HR_relative_recruitment", 2)
-                "Deny":
-                    mc.name "I think for now I'd like to stick with more traditional recruiting methods."
-                    $ set_HR_director_tag("business_HR_relative_recruitment", 1)
+                    the_person.char "Sure thing [the_person.mc_title]!"
+                    $ set_HR_director_tag("business_HR_skimpy_uniform", True)
+                    if the_person is sarah:
+                        the_person.char "Mmm, I can't wait to see what some of the outfits other girls wear around the office..."
+                        $ the_person.change_slut_temp(5)
+        if get_HR_director_tag("business_HR_relative_recruitment", 0) == 0:
+            if (mc.business.max_employee_count - mc.business.get_employee_count()) > 4:
+                the_person.char "I see here that changes within the company have produced several vacancies."
+                the_person.char "If you like, I could post something in the break room that we are looking for more employees."
+                the_person.char "Several of the women who work here have children or relatives who could use the work. They might be more likely to come to you asking for employment if they know we need the help."
+                "You consider what she is saying. It might be good for company morale to have mothers and their daughters both employed by you. Who knows, it could lead to other situations too."
+                "You weigh the option. Do you want to post something?"
+                menu:
+                    "Approve":
+                        mc.name "That's a good idea. Go ahead and implement that going forward."
+                        $ update_hire_daughter_crisis(10)
+                        $ set_HR_director_tag("business_HR_relative_recruitment", 2)
+                    "Deny":
+                        mc.name "I think for now I'd like to stick with more traditional recruiting methods."
+                        $ set_HR_director_tag("business_HR_relative_recruitment", 1)
 
-            "Sure thing [the_person.mc_title]. If you change your mind in the future, just let me know. I can always put the sign up or down based on what we need at the time."
+                "Sure thing [the_person.mc_title]. If you change your mind in the future, just let me know. I can always put the sign up or down based on what we need at the time."
 
-    if get_HR_director_tag("business_HR_meeting_on_demand", False) == False:
-        if mc.business.get_employee_count() > 10:
-            the_person.char "I see the business has grown. We now have a double digit number of employees!"
-            the_person.char "I was thinking, with the number of employees we have now, we could probably do our one on one meetings more often without losing their effectiveness."
-            the_person.char "We still don't want to do it too often, but I was thinking we could have meetings as often as once a day?"
-            "With your growing number of employees, it makes sense that you would be able to have meetings more often."
-            mc.name "I'll keep that in mind going forward. If I want to have a meeting with an employee, I'll make sure to come find you first."
-            the_person.char "Great! I think that will work out nicely."
-            $ set_HR_director_tag("business_HR_meeting_on_demand", True)
+        if get_HR_director_tag("business_HR_meeting_on_demand", False) == False:
+            if mc.business.get_employee_count() > 10:
+                the_person.char "I see the business has grown. We now have a double digit number of employees!"
+                the_person.char "I was thinking, with the number of employees we have now, we could probably do our one on one meetings more often without losing their effectiveness."
+                the_person.char "We still don't want to do it too often, but I was thinking we could have meetings as often as once a day?"
+                "With your growing number of employees, it makes sense that you would be able to have meetings more often."
+                mc.name "I'll keep that in mind going forward. If I want to have a meeting with an employee, I'll make sure to come find you first."
+                the_person.char "Great! I think that will work out nicely."
+                $ set_HR_director_tag("business_HR_meeting_on_demand", True)
 
-    if HR_director_gym_membership_tier_1_requirement(the_person) and get_HR_director_tag("business_HR_gym_msg_tier", 0) == 0:
-        $ set_HR_director_tag("business_HR_gym_msg_tier", 1)
-        the_person.char "With our small, but growing employee group, I thought it might be worth looking into a company sponsored gym fitness program."
-        the_person.char "I did some research, and it turns out there is a local one with a nice facility with great pricing for companies."
-        mc.name "How much would it cost?"
-        the_person.char "For the company I found, the pricing is $5 per person, per week."
-        mc.name "That seems pretty reasonable actually. What benefits would it provide?"
-        the_person.char "Well, having something like that available to employees would certainly help employees get more fit."
-        the_person.char "It might take a while to see changes, but I would say girls would have more energy over all."
-        mc.name "Okay, I'll consider it and get back to you on that."
+        if HR_director_gym_membership_tier_1_requirement(the_person) and get_HR_director_tag("business_HR_gym_msg_tier", 0) == 0:
+            $ set_HR_director_tag("business_HR_gym_msg_tier", 1)
+            the_person.char "With our small, but growing employee group, I thought it might be worth looking into a company sponsored gym fitness program."
+            the_person.char "I did some research, and it turns out there is a local one with a nice facility with great pricing for companies."
+            mc.name "How much would it cost?"
+            the_person.char "For the company I found, the pricing is $5 per person, per week."
+            mc.name "That seems pretty reasonable actually. What benefits would it provide?"
+            the_person.char "Well, having something like that available to employees would certainly help employees get more fit."
+            the_person.char "It might take a while to see changes, but I would say girls would have more energy over all."
+            mc.name "Okay, I'll consider it and get back to you on that."
 
-    if HR_director_gym_membership_tier_2_requirement(the_person) and get_HR_director_tag("business_HR_gym_msg_tier", 0) == 1:
-        $ set_HR_director_tag("business_HR_gym_msg_tier", 2)
-        the_person.char "The company is getting bigger, and I was thinking about possible benefits to the company for increasing good health habits of the employees."
-        the_person.char "There is a company that specializes in information campaigns on healthy eating habits, exercise, and good mental health."
-        the_person.char "Combined with the company gym membership, I think we would see a sizable benefit to the company as a whole."
-        mc.name "How much would it cost?"
-        the_person.char "For the company I found, the pricing is $10 per person, per week. This would be on top of the $5 per person for the company gym membership."
-        mc.name "What would be the benefits we would see if we invest in this?"
-        the_person.char "Well, generally it would increase the energy of employees as they develop healthier eating patterns."
-        the_person.char "Additionally, I think employees with interests in sports and hiking would really appreciate the change also."
-        mc.name "Okay, I'll consider it and get back to you on that."
+        if HR_director_gym_membership_tier_2_requirement(the_person) and get_HR_director_tag("business_HR_gym_msg_tier", 0) == 1:
+            $ set_HR_director_tag("business_HR_gym_msg_tier", 2)
+            the_person.char "The company is getting bigger, and I was thinking about possible benefits to the company for increasing good health habits of the employees."
+            the_person.char "There is a company that specializes in information campaigns on healthy eating habits, exercise, and good mental health."
+            the_person.char "Combined with the company gym membership, I think we would see a sizable benefit to the company as a whole."
+            mc.name "How much would it cost?"
+            the_person.char "For the company I found, the pricing is $10 per person, per week. This would be on top of the $5 per person for the company gym membership."
+            mc.name "What would be the benefits we would see if we invest in this?"
+            the_person.char "Well, generally it would increase the energy of employees as they develop healthier eating patterns."
+            the_person.char "Additionally, I think employees with interests in sports and hiking would really appreciate the change also."
+            mc.name "Okay, I'll consider it and get back to you on that."
+
+        the_person.char "You finish up discussing the company policies."
     return
 
 label HR_director_manage_gym_membership(the_person):
@@ -882,7 +890,7 @@ label HR_director_coffee_tier_2_label(the_person):
 
 label HR_director_calculate_eff(the_person):
     $ HR_dir_factor = 0
-    if not get_HR_director() is None:
+    if mc.business.hr_director:
         $ HR_dir_factor = ((the_person.charisma * 2 ) + the_person.hr_skill)   #Charisma + HR skill
         #TODO make events later on that factor this to be better
     $ HR_dir_factor += get_HR_director_tag("business_HR_eff_bonus")
@@ -934,10 +942,14 @@ label HR_director_meeting_on_demand_label(the_person):
     $ the_person.draw_person(position = "sitting")
     the_person.char "Ok! Let me see who I have on my list here..."
     call HR_director_personnel_interview_label(the_person, max_opinion = get_HR_director_tag("business_HR_coffee_tier", 0)) from HR_DIR_INTERVIEW_CALL_4
-    the_person.char "I'd say that went pretty well! I'm going to head back to work, if that is okay with you, [the_person.mc_title]?"
+    if _return:
+        $ set_HR_director_tag("business_HR_meeting_last_day", day)
+        the_person.char "I'd say that went pretty well! I'm going to head back to work, if that is okay with you, [the_person.mc_title]?"
+    else:
+        the_person.char "No problem, we can pick this up another time."
+    
     "You thank her for her help and excuse her. She gets up and leaves you to get back to work."
     $ scene_manager.clear_scene()
-    $ set_HR_director_tag("business_HR_meeting_last_day", day)
     call advance_time from hr_advance_time_one
     return
 
@@ -1066,22 +1078,13 @@ label HR_director_sexy_meeting_start_label(the_person):
 
     the_person.char "Okay! How do you want me to take care of you this week, [the_person.mc_title]?"
 
-    python:
-        tuple_list = []
-        for position in business_HR_director.HR_unlocks.keys():
-            if business_HR_director.HR_unlocks[position] == True:
-                tuple_list.append([position.title(), position])
-        tuple_list.append(["Surprise me", "any"])
-
-        position_choice = renpy.display_menu(tuple_list,True,"Choice")
-        del tuple_list
-
+    $ position_choice = HR_director_choose_position()
     if position_choice == "any":
         the_person.char "Mmmm, I can do that! "
         $ mc.change_arousal(20)
         $ the_person.change_happiness(5)
         $ the_person.change_obedience(-5)
-        $ position_choice = get_random_from_list(business_HR_director.HR_unlocks.keys())
+        $ position_choice = get_random_from_list(mc.business.hr_director.HR_unlocks.keys())
 
     if position_choice == "blowjob":
         the_person.char "Get your cock out, I want to taste it!"
@@ -1124,16 +1127,18 @@ label HR_director_sexy_meeting_start_label(the_person):
             $ the_person.change_obedience(2)
         else:
             the_person.char "Ok."
-        "You stand up as she walks around to your side of the desk. You roughly bend her over your desk and give her ass a spank."
-        $ scene_manager.update_actor(the_person, position="standing_doggy")
+        "You stand up as she walks around to your side of the desk. You roughly pull her closer and give her ass a tight squeeze."
+        $ scene_manager.update_actor(the_person, position="stand3")
         the_person.char "Oh my!"
 
         if the_person.outfit.vagina_available() and the_person.outfit.vagina_visible():
-            "She wiggles her hips back at you a bit. Her pussy lips glisten with a bit of moisture."
+            "You give her pussy a little rub and show her your fingers glistening with a bit of moisture. You quickly turn her around and bent her over your desk."
         else:
             "You start to strip [the_person.possessive_title] down."
             $ scene_manager.strip_actor_outfit(the_person, exclude_upper = True, exclude_lower = False)
-            "Soon her ass is on full display in front of you, bent over your desk."
+            "As soon as her pussy is on full display in front of you, you bent her over your desk, exposing her round ass."
+        $ scene_manager.update_actor(the_person, position="standing_doggy")
+
         "You don't waste any time. You pull your cock out and point it at her slit. You pull her hips back as you push inside of her with one smooth push."
         the_person.char "Mmm, fuck me good [the_person.mc_title]!"
         $ mc.change_arousal(20)
@@ -1185,12 +1190,9 @@ label HR_director_mind_control_attempt_label(the_person):
             return
     the_person.char "Okay. Who do you want me to make the attempt on?"
 
-    if "build_menu_items" in globals():
-        call screen main_choice_display(build_menu_items([["Call in"] + HR_employee_list], draw_hearts_for_people = False))
-    else:
-        call screen main_choice_display([["Call in"] + HR_employee_list])
-
+    call screen main_choice_display([["Call in"] + HR_employee_list], draw_hearts_for_people = False)
     $ person_choice = _return
+
     $ del HR_employee_list
     the_person.char "Okay. I'll go get her."
     $ renpy.scene("Active")
@@ -1198,6 +1200,7 @@ label HR_director_mind_control_attempt_label(the_person):
 
     $ scene_manager.clear_scene()
     $ set_HR_director_tag("business_HR_meeting_last_day", day)
+    $ del person_choice
     call advance_time from hr_advance_time_two
     return True
 
@@ -1251,10 +1254,7 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
         #TODO add backfire string to event log
         $ is_backfire = True
     else:
-        python:
-            topic_list = create_HR_review_topic_list(the_person)
-            for topic in topic_list:
-                update_opinion(the_person, topic)
+        $ hr_director_mind_control_update_opinions(the_person)
 
     $ scene_manager.add_actor(the_HR_dir)
     "[the_HR_dir.title] eventually returns."
@@ -1274,19 +1274,12 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
     return
 
 label HR_director_appointment_action_label:
-    $ people_list = get_sorted_people_list(mc.business.hr_team, "Appoint", ["Back"])
-
-    if "build_menu_items" in globals():
-        call screen main_choice_display(build_menu_items([people_list]))
-    else:
-        call screen main_choice_display([people_list])
+    call screen main_choice_display([get_sorted_people_list(mc.business.hr_team, "Appoint", ["Back"])])
     $ person_choice = _return
-    $ del people_list
 
-    if person_choice == "Back":
-        return
-
-    call HR_director_initial_hire_label(person_choice) from _call_HR_director_initial_hire_label_appointment
+    if person_choice != "Back":
+        call HR_director_initial_hire_label(person_choice) from _call_HR_director_initial_hire_label_appointment
+        $ del person_choice
     return
 
 label HR_director_headhunt_initiate_label(the_person):
@@ -1367,6 +1360,8 @@ label HR_director_headhunt_interview_label(the_person):
             return
     $ scene_manager.update_actor(the_person, position = "sitting")
 
+    the_person.char "Take a look at this file, she would be perfect for us."
+
     call hire_select_process([prospect, 1]) from _call_hire_prospect_process_1  #Copying how Vren calls this... hopefully this is right...
 
     if _return == prospect: #MC chooses to hire her
@@ -1384,7 +1379,7 @@ label HR_director_headhunt_interview_label(the_person):
         mc.name "I'm sorry, this wasn't exactly what I had in mind."
         the_person.char "Ah, okay. Well give me the rest of the week to catch up on my normal HR work. If you want me to start the process again, talk to me on Monday."
         $ prospect.remove_person_from_game()
-        
+
     $ del prospect
     return
 
@@ -1399,7 +1394,6 @@ label HR_director_headhunt_interview_label(the_person):
 #Big / small tits unlock: recruitment_knowledge_four_policy.is_owned()
 
 label HR_director_monday_headhunt_update_label(the_person):
-    the_person.char "Let's see if I have any updates to the targeted recruiting program."
     if get_HR_director_tag("business_HR_headhunter_progress", 0) == 0:
         the_person.char "Looks like I'm not currently running any target searches. Let me know if you want me to initiate one."
     elif get_HR_director_tag("business_HR_headhunter_progress", 0) == 1:

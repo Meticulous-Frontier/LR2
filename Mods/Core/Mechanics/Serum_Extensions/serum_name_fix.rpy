@@ -7,13 +7,17 @@ init 5 python:
     add_label_hijack("normal_start", "fix_nora_serum_traits")
     add_label_hijack("after_load", "fix_nora_serum_traits")
 
-label fix_nora_serum_traits(stack):
-    python:
+    def fix_nora_serum_traits_names():
         nora_suggest_up.name = "Nora's Research Trait XRC"
         nora_nightmares.name = "Nora's Research Trait CBX"
         nora_obedience_swing.name = "Nora's Research Trait XBR"
         nora_sluttiness_boost.name = "Nora's Research Trait RXC"
+        return
 
+
+label fix_nora_serum_traits(stack):
+    python:
+        fix_nora_serum_traits_names()
         # continue on the hijack stack if needed
         execute_hijack_call(stack)        
     return

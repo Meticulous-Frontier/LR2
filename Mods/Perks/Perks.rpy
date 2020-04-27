@@ -1,4 +1,8 @@
 init -1 python:
+
+    def perk_save_load_null():  #TODO delete this with next release cycle, EG 28.1
+        return None
+        
     class Perks(renpy.store.object):
         def __init__(self):
             self.stat_perks = {}
@@ -26,6 +30,16 @@ init -1 python:
             for perk_name in expired_perks(self.ability_perks):
                 remove_perk(self.ability_perks, perk_name)
             return
+
+        def save_load(self):
+            #for perk in self.stat_perks:
+            #    perk.save_load()
+            for perk in self.item_perks:
+                if self.item_perks[perk].save_load:
+                    self.item_perks[perk].save_load()
+                #perk.save_load()
+            #for perk in self.ability_perks:
+            #    perk.save_load()
 
         def get_perk_desc(self, perk_name):
             if self.has_stat_perk(perk_name):
@@ -66,6 +80,8 @@ init -1 python:
         def add_item_perk(self, perk, perk_name):
             if not self.has_item_perk(perk_name):
                 self.item_perks[perk_name] = perk
+                if perk.on_unlock:
+                    perk.on_unlock()
 
         def has_item_perk(self, perk_name):
             if perk_name in self.item_perks:
@@ -158,7 +174,7 @@ init -1 python:
             hr_bonus = 0, market_bonus = 0, research_bonus = 0, production_bonus = 0, supply_bonus = 0,
             foreplay_bonus = 0, oral_bonus = 0, vaginal_bonus = 0, anal_bonus = 0, energy_bonus = 0,
             stat_cap = 0, skill_cap = 0, sex_cap = 0, energy_cap = 0,
-            bonus_is_temp = False, duration = 0):
+            bonus_is_temp = False, duration = 0, save_load = None):
 
             self.owner = owner
             self.description = description
@@ -182,11 +198,13 @@ init -1 python:
             self.bonus_is_temp = bonus_is_temp
             self.duration = duration
             self.start_day = day
+            self.save_load = save_load
 
             if self.owner is None:
                 self.owner = mc
             if description == None:
                 self.description = ""
+
 
         def apply(self):
             self.owner.charisma += self.cha_bonus
@@ -236,19 +254,22 @@ init -1 python:
 
     class Item_Perk(renpy.store.object):
         # owner can be MC or any other Person object (default is MC)
-        def __init__(self, description, owner = None, usable = False, bonus_is_temp = False, duration = 0):
+        def __init__(self, description, owner = None, usable = False, bonus_is_temp = False, duration = 0, on_unlock = None, save_load = None):
             self.owner = owner
             self.description = description
             self.usable = usable
             self.bonus_is_temp = bonus_is_temp
             self.duration = duration
-            self.start_day = day
+            #self.start_day = day
+            self.start_day = 0  #Consider getting rid of this. Is it necessary?
+            self.on_unlock = on_unlock
+            self.save_load = save_load
 
             if self.owner is None:
                 self.owner = mc
 
     class Ability_Perk(renpy.store.object):
-        def __init__(self, description, owner = None, toggle = True, togglable = False, usable = False, bonus_is_temp = False, duration = 0, usable_func = None, usable_cd = 0):
+        def __init__(self, description, owner = None, toggle = True, togglable = False, usable = False, bonus_is_temp = False, duration = 0, usable_func = None, usable_cd = 0, save_load = None):
             self.owner = owner
             self.description = description
             self.usable = usable            #Is this a usable ability
@@ -260,9 +281,11 @@ init -1 python:
             self.duration = duration
             self.start_day = day
             self.usable_day = 0
+            self.save_load = save_load
 
             if self.owner is None:
                 self.owner = mc
+
 
         def click_perk(self):
             if self.usable:

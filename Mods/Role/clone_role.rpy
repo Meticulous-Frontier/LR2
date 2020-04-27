@@ -1,6 +1,6 @@
 init 2 python:
     def clone_recall_requirement(person):
-        if person not in rd_division_basement.people:
+        if person not in dungeon.people:
             return True
 
     # Clone Recall - Brings the clone back to base
@@ -16,9 +16,9 @@ init 2 python:
 
 # Labels
 label clone_recall(person):
-    "You order [person.title] back to [rd_division_basement.name]"
+    "You order [person.title] back to [dungeon.name]"
 
-    $ mc.location.move_person(person, rd_division)
+    $ mc.location.move_person(person, dungeon)
 
     person.char "Okay, [person.mc_title]. I'll head there next."
     return

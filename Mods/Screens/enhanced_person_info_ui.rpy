@@ -1,5 +1,41 @@
 # Override default person_info_ui screen by VREN to show extra information about character
-init -2 python:
+init -1 python:
+    # override default function to limit call stack depth
+    def get_red_heart(sluttiness, depth = 0): #A recursive function, feet it a sluttiness and it will return a string of all red heart images for it. Heatrts taht are entirely empty are left out.
+        if depth >= 5:
+            return ""
+
+        the_final_string = ""
+        if sluttiness >= 20:
+            the_final_string += "{image=gui/heart/red_heart.png}"
+            the_final_string += get_red_heart(sluttiness - 20, depth + 1) #Call it recursively if we might have another heart after this.
+        elif sluttiness >= 15:
+            the_final_string += "{image=gui/heart/three_quarter_red_quarter_empty_heart.png}"
+        elif sluttiness >= 10:
+            the_final_string += "{image=gui/heart/half_red_half_empty_heart.png}"
+        elif sluttiness >= 5:
+            the_final_string += "{image=gui/heart/quarter_red_three_quarter_empty_heart.png}"
+
+        return the_final_string
+
+    # override default function to limit call stack depth
+    def get_gold_heart(sluttiness, depth = 0):
+        if depth >= 5:
+            return ""
+
+        the_final_string = ""
+        if sluttiness >= 20:
+            the_final_string += "{image=gui/heart/gold_heart.png}"
+            the_final_string += get_gold_heart(sluttiness - 20, depth + 1) #Call it recursively if we might have another heart after this.
+        elif sluttiness >= 15:
+            the_final_string += "{image=gui/heart/three_quarter_gold_quarter_empty_heart.png}"
+        elif sluttiness >= 10:
+            the_final_string += "{image=gui/heart/half_gold_half_empty_heart.png}"
+        elif sluttiness >= 5:
+            the_final_string += "{image=gui/heart/quarter_gold_three_quarter_empty_heart.png}"
+
+        return the_final_string
+
     def person_info_ui_format_hearts(value):
         heart_value = abs(value)
         if (heart_value / 4) > 10:
@@ -29,6 +65,14 @@ init -2 python:
             elif person.situational_obedience[situation][0] < 0:
                 negative_effects += get_coloured_arrow(-1)+""+__builtin__.str(person.situational_obedience[situation][0])+ " Obedience - " + person.situational_obedience[situation][1] + "\n"
         tooltip += positive_effects + negative_effects
+        return tooltip
+
+    def person_info_ui_get_serum_info_tooltip(person):
+        tooltip = ""
+        for serum in person.serum_effects:
+            if len(tooltip) > 0:
+                tooltip.append("\n")
+            tooltip += serum.name + " : " + str(serum.duration - serum.duration_counter) + " Turns Left"
         return tooltip
 
 init 2:
@@ -145,12 +189,12 @@ init 2:
                 vbox:
                     hbox:
                         textbutton "Detailed Information" action Show("person_info_detailed",the_person=person) style "textbutton_style" text_style "textbutton_text_style"
-                        if person.suggestibility > 0:
+                        if person.serum_effects:
                             textbutton "{image=serum_vial} +[person.suggestibility]%":
                                 yoffset 6
                                 ysize 24
                                 text_style "menu_text_style"
-                                tooltip "How likely this character is to increase her core sluttiness. Every time chunk there is a chance to change 1 point of temporary sluttiness (" + get_red_heart(5) + ") into core sluttiness (" + get_gold_heart(5) + ") as long as temporary sluttiness is higher."
+                                tooltip person_info_ui_get_serum_info_tooltip(person)
                                 action NullAction()
                                 sensitive True
 

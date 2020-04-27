@@ -26,6 +26,10 @@
 # pre define variable for saving
 define action_mod_list = None
 
+# define bugfix_installed as False when variable does not exist
+if not "bugfix_installed" in globals():
+    define bugfix_installed = False
+
 init -1 python:
     def is_action_enabled(self, extra_args = None):
         if hasattr(self, "enabled"):
@@ -142,6 +146,17 @@ init 2 python:
 
         return
 
+    def build_action_mod_configuration_menu():
+        tuple_list = []
+        for action_mod in action_mod_list:
+            if action_mod.enabled and hasattr(action_mod, "options_menu") and not action_mod.options_menu is None:
+                tuple_string = action_mod.name + " (tooltip)" + action_mod.menu_tooltip
+                tuple_list.append([tuple_string, action_mod])
+
+        tuple_list = sorted(tuple_list, key=lambda x: x[0])
+        tuple_list.append(["Back","Back"])
+        return renpy.display_menu(tuple_list, True, "Choice")
+
     def try_fix_game_issues():
         # to fix game with old hair colour linked to hair style changed from v0.17 to v0.18
         for person in all_people_in_the_game([mc]):
@@ -224,15 +239,7 @@ label show_action_mod_settings:
 label show_action_mod_configuration:
     python:
         while True:
-            tuple_list = []
-            for action_mod in action_mod_list:
-                if action_mod.enabled and hasattr(action_mod, "options_menu") and not action_mod.options_menu is None:
-                    tuple_string = action_mod.name + " (tooltip)" + action_mod.menu_tooltip
-                    tuple_list.append([tuple_string, action_mod])
-
-            tuple_list = sorted(tuple_list, key=lambda x: x[0])
-            tuple_list.append(["Back","Back"])
-            action_mod_choice = renpy.display_menu(tuple_list, True, "Choice")
+            action_mod_choice =  build_action_mod_configuration_menu()
 
             if action_mod_choice == "Back":
                 renpy.return_statement()

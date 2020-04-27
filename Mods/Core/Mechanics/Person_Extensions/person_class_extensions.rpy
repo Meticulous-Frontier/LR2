@@ -311,7 +311,7 @@ init -1 python:
     # narrator_messages: narrator voice after each item of clothing stripped, use '[person.<title>]' for titles and '[strip_choice.name]' for clothing item.
         # Can be an array of messages for variation in message per clothing item or just a single string or None for silent stripping
     # scene manager parameter is filled from that class so that all people present in scene are drawn
-    def strip_outfit_to_max_sluttiness(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, narrator_messages = None, character_placement = None, lighting = None, temp_sluttiness_boost = 0, position = None, emotion = None, scene_manager = None):
+    def strip_outfit_to_max_sluttiness(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, delay = 1, narrator_messages = None, character_placement = None, lighting = None, temp_sluttiness_boost = 0, position = None, emotion = None, scene_manager = None):
         # internal function to strip top clothing first.
         def get_strip_choice_max(outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet):
             strip_choice = None
@@ -340,16 +340,18 @@ init -1 python:
         strip_choice = get_strip_choice_max(test_outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet)
         # renpy.say("", strip_choice.name + "  (required: " + str(test_outfit.slut_requirement) +  ", sluttiness: " +  str(self.effective_sluttiness() + temp_sluttiness_boost) + ")")
         while strip_choice and self.judge_outfit(test_outfit, temp_sluttiness_boost):
-            self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
+            if delay > 0 and msg_count == 0:
+                self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
+                renpy.pause(delay) # if no message to show, wait a short while before automatically continue stripping
+            else:
+                test_outfit.remove_clothing(strip_choice)
             self.apply_outfit(test_outfit, ignore_base = True) #Swap our current outfit out for the test outfit.
             removed_something = True
             if msg_count > 0:   # do we need to show a random message and replace titles and outfit name
                 msg_idx = renpy.random.randint(1, msg_count)
                 msg = messages[msg_idx - 1]
-                msg = msg.replace("[the_person.possessive_title]", self.possessive_title).replace("[the_person.title]", self.title).replace("[the_person.mc_title]", self.mc_title).replace("[strip_choice.name]", strip_choice.name)
+                msg = msg.replace("[the_person.possessive_title]", self.possessive_title or "the unknown woman").replace("[the_person.title]", self.title or self.name).replace("[the_person.mc_title]", self.mc_title).replace("[strip_choice.name]", strip_choice.name)
                 renpy.say(None, msg)
-            else:
-                renpy.pause(1) # if no message to show, wait a short while before automatically continue stripping
 
             strip_choice = get_strip_choice_max(test_outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet)
 
@@ -358,11 +360,41 @@ init -1 python:
     # Monkey wrench Person class to have automatic strip function
     Person.strip_outfit_to_max_sluttiness = strip_outfit_to_max_sluttiness
 
+    def strip_outfit_to_underwear(self, delay = 1, character_placement = None, position = None, emotion = None, lighting = None, scene_manager = None):
+        if position is None:
+            self.position = self.idle_pose
+
+        if emotion is None:
+            self.emotion = self.get_emotion()
+
+        if lighting is None:
+            lighting = mc.location.get_lighting_conditions()
+
+        if character_placement is None:
+            self.character_placement = character_right
+
+        strip_choice = self.outfit.remove_random_upper(True, do_not_remove = True)
+        while not strip_choice is None and self.outfit.bra_covered():
+            if delay > 0:
+                self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
+                renpy.pause(delay)
+            else:
+                self.outfit.remove_clothing(strip_choice)
+            strip_choice = self.outfit.remove_random_upper(True, do_not_remove = True)
+
+        strip_choice = self.outfit.remove_random_lower(True, do_not_remove = True)
+        while not strip_choice is None and self.outfit.panties_covered():
+            if delay > 0:
+                self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
+                renpy.pause(delay)
+            else:
+                self.outfit.remove_clothing(strip_choice)
+            strip_choice = self.outfit.remove_random_lower(True, do_not_remove = True)
+
+    Person.strip_outfit_to_underwear = strip_outfit_to_underwear
+
     def strip_outfit(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, delay = 1, character_placement = None, position = None, emotion = None, lighting = None, scene_manager = None):
         def extra_strip_check(person, top_layer_first, exclude_upper, exclude_lower, exclude_feet):
-            if top_layer_first: # normal strip continue
-                return True
-
             done = exclude_upper or person.outfit.tits_available()
             if done and (exclude_lower or person.outfit.vagina_available()):
                 if done and (exclude_feet or person.outfit.feet_available()):
@@ -384,19 +416,38 @@ init -1 python:
 
         strip_choice = self.outfit.remove_random_any(top_layer_first, exclude_upper, exclude_lower, exclude_feet, do_not_remove = True)
         while not strip_choice is None and extra_strip_check(self, top_layer_first, exclude_upper, exclude_lower, exclude_feet):
-            self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
+            if delay > 0:
+                self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
+                renpy.pause(delay)
+            else:
+                self.outfit.remove_clothing(strip_choice)
             strip_choice = self.outfit.remove_random_any(top_layer_first, exclude_upper, exclude_lower, exclude_feet, do_not_remove = True)
-            renpy.pause(delay)
 
         # special case where she is wearing a two-part item that blocks her vagina, but we need it be available
         if not exclude_lower and not self.outfit.vagina_available():
             strip_choice = self.outfit.remove_random_any(top_layer_first, False, exclude_lower, exclude_feet, do_not_remove = True)
             while not strip_choice is None:
-                self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
+                if delay > 0:
+                    self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
+                    renpy.pause(delay)
+                else:
+                    self.outfit.remove_clothing(strip_choice)
                 strip_choice = self.outfit.remove_random_any(top_layer_first, False, exclude_lower, exclude_feet, do_not_remove = True)
-                renpy.pause(delay)
 
     Person.strip_outfit = strip_outfit
+
+    def choose_strip_clothing_item(self):
+        clothing = None
+        # If she has a preference (even a least-bad preference) she'll strip that down first.
+        if self.get_opinion_score("showing her tits") > self.get_opinion_score("showing her ass"):
+            clothing = self.outfit.remove_random_any(exclude_feet = True, exclude_lower = True, do_not_remove = True)
+        elif self.get_opinion_score("showing her tits") < self.get_opinion_score("showing her ass"):
+            clothing = self.outfit.remove_random_any(exclude_feet = True, exclude_upper = True, do_not_remove = True)
+        if clothing is None: #Either our previous checks failed to produce anything OR they were equal
+            clothing = self.outfit.remove_random_any(exclude_feet = True, do_not_remove = True)
+        return clothing
+
+    Person.choose_strip_clothing_item = choose_strip_clothing_item 
 
     def run_move_enhanced(self,location):
         self.sexed_count = 0 #Reset the counter for how many times you've been seduced, you might be seduced multiple times in one day!
@@ -489,33 +540,19 @@ init -1 python:
 
     Person.run_move = run_move_enhanced
 
-    # BUGFIXED: Judge Outfit function uses the_person instead of self to check effective sluttiness
-    #Judge an outfit and determine if it's too slutty or not. Can be used to judge other people's outfits to determine if she thinks they look like a slut.
-    def judge_outfit_extension(self, outfit, temp_sluttiness_boost = 0, use_taboos = True, as_underwear = False, as_overwear = False):
-        outfit.update_slut_requirement()    # reevaluate sluttiness requirement
+    # extend the default run day function
+    def run_day_extended(org_func):
+        def run_day_wrapper(person):
+            # run original function
+            org_func(person)
+            # run extension code (clean up situational dictionaries)
+            person.situational_sluttiness.clear()
+            person.situational_obedience.clear()
+        
+        return run_day_wrapper
 
-        if as_underwear or as_overwear:
-            use_taboos = False
-
-        if use_taboos and not (outfit.bra_covered() and outfit.panties_covered()) and "underwear_nudity" not in self.broken_taboos:
-            taboo_modifier = "underwear_nudity"
-        elif use_taboos and outfit.tits_visible() and "bare_tits" not in self.broken_taboos:
-            taboo_modifier = "bare_tits"
-        elif use_taboos and outfit.vagina_visible() and "bare_pussy" not in self.broken_taboos:
-            taboo_modifier = "bare_pussy"
-        else:
-            taboo_modifier = None
-
-        slut_require = outfit.slut_requirement
-        if as_underwear:
-            slut_require = outfit.get_underwear_slut_score()
-        elif as_overwear:
-            slut_require = outfit.get_overwear_slut_score()
-
-        # renpy.say("", "Judge Outfit:  " + str(outfit.slut_requirement) +  "  (validation sluttiness: " +  str(self.effective_sluttiness() + temp_sluttiness_boost) + ")")
-        return slut_require < (self.effective_sluttiness(taboo_modifier) + temp_sluttiness_boost)
-
-    Person.judge_outfit = judge_outfit_extension
+    # wrap up the run_day function
+    Person.run_day = run_day_extended(Person.run_day)
 
     # BUGFIX: Remove suggest effect
     # Sometimes an effect is no longer in bag causing an exception, fix: check if effect exists before trying to remove
@@ -523,7 +560,7 @@ init -1 python:
         self.change_suggest(- __builtin__.max(self.suggest_bag or [0])) #Subtract the max
         if amount in self.suggest_bag:
             self.suggest_bag.remove(amount)
-        self.change_suggest(__builtin__.max(self.suggest_bag or [0])) # Add the new max. If we were max, it is now lower, otherwie it cancels out.
+        self.change_suggest(__builtin__.max(self.suggest_bag or [0])) # Add the new max. If we were max, it is now lower, otherwise it cancels out.
 
     Person.remove_suggest_effect = remove_suggest_effect_fixed
 
@@ -565,6 +602,25 @@ init -1 python:
     # Adds a function that edits and adds opinions. It also appends to the vanilla opinion pool.
     Person.add_opinion = add_opinion
 
+    def update_opinion_with_score(self, topic, score, add_to_log = True):
+        if topic in sexy_opinions_list:
+            if topic in self.sexy_opinions:
+                self.sexy_opinions[topic][0] = score
+            else:
+                self.sexy_opinions[topic] = [score, add_to_log]
+
+        if topic in opinions_list:                
+            if topic in self.opinions:
+                self.opinions[topic][0] = score
+            else:
+                self.opinions[topic] = [score, add_to_log]
+
+        if add_to_log:
+            mc.log_event((self.title or self.name) + " " + opinion_score_to_string(score) + " " + str(topic), "float_text_green")
+        return
+
+    Person.update_opinion_with_score = update_opinion_with_score
+
     ## Increase the opinion on a specific topic (opinion)
     def increase_opinion_score(self, topic, add_to_log = True):
         score = self.get_opinion_score(topic)
@@ -572,14 +628,9 @@ init -1 python:
         if score < 2:
             score += 1
 
-        if topic in self.sexy_opinions:
-            self.sexy_opinions[topic][0] = score
-        if topic in self.opinions:
-            self.opinions[topic][0] = score
-
-        if add_to_log:
-            mc.log_event((self.title or self.name) + " " + opinion_score_to_string(score) + " " + str(topic), "float_text_green")
+        self.update_opinion_with_score(topic, score, add_to_log)
         return
+
     # Add increase opinion function to person class
     Person.increase_opinion_score = increase_opinion_score
 
@@ -590,14 +641,9 @@ init -1 python:
         if score > -2:
             score -= 1
 
-        if topic in self.sexy_opinions:
-            self.sexy_opinions[topic][0] = score
-        if topic in self.opinions:
-            self.opinions[topic][0] = score
-
-        if add_to_log:
-            mc.log_event((self.title or self.name) + " " + opinion_score_to_string(score) + " " + str(topic), "float_text_green")
+        self.update_opinion_with_score(topic, score, add_to_log)
         return
+
     # Add decrease opinion function to person class
     Person.decrease_opinion_score = decrease_opinion_score
 
@@ -605,13 +651,7 @@ init -1 python:
     def max_opinion_score(self, topic, add_to_log = True):
         score = self.get_opinion_score(topic)
         if score < 2:
-            if topic in self.sexy_opinions:
-                self.sexy_opinions[topic][0] = 2
-            if topic in self.opinions:
-                self.opinions[topic][0] = 2
-
-            if add_to_log:
-                mc.log_event((self.title or self.name) + " " + opinion_score_to_string(2) + " " + str(topic), "float_text_green")
+            self.update_opinion_with_score(topic, 2, add_to_log)
         return
 
     # Add max opinion function to person class
@@ -867,10 +907,11 @@ init -1 python:
 # Override give serum for added goal #
 ######################################
 
+    # the original signature still has the add_to_log parameter, but it is no longer passed to run_on_apply
     def give_serum_enhanced(self,the_serum_design, add_to_log = True): ##Make sure you are passing a copy of the serum, not a reference.
         mc.listener_system.fire_event("give_random_serum", the_person = self)
         self.serum_effects.append(the_serum_design)
-        the_serum_design.run_on_apply(self, add_to_log)
+        the_serum_design.run_on_apply(self) # add to log is done through SerumTrait.on_apply(), each trait effect gets logged
 
     Person.give_serum = give_serum_enhanced
 
@@ -939,4 +980,3 @@ init -1 python:
         return True
 
     Person.__ne__ = person__ne__
-    
