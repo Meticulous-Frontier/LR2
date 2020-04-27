@@ -8,3 +8,5 @@ init 1310 python:
             valid_titles.append("Danger Slut")        
 
         return valid_titles
+
+    wild_personality.titles_function = wild_titles

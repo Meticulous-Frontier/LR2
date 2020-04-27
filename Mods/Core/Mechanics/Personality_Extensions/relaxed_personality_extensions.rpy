@@ -10,3 +10,5 @@ init 1310 python:
             valid_titles.append("Easy Slut")
 
         return valid_titles
+
+    relaxed_personality.titles_function = relaxed_titles

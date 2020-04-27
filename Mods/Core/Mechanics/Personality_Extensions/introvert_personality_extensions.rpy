@@ -9,3 +9,5 @@ init 1310 python:
 
         return valid_titles
 
+
+    introvert_personality.titles_function = introvert_titles

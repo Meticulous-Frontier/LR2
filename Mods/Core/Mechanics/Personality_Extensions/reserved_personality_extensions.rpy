@@ -17,3 +17,6 @@ init 1310 python:
         if the_person.love > 30:
             valid_titles.append(mc.name)
         return valid_titles
+
+    reserved_personality.titles_function = reserved_titles
+    reserved_personality.player_titles_function = reserved_player_titles
