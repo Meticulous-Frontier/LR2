@@ -507,7 +507,8 @@ label HR_director_monday_meeting_label(the_person):
                 mc.name "Yes I want to do that."
                 the_person.char "Ok! Let me see who I have on my list here..."
                 call HR_director_personnel_interview_label(the_person, max_opinion = get_HR_director_tag("business_HR_coffee_tier", 0)) from HR_DIR_INTERVIEW_CALL_2
-                $ set_HR_director_tag("business_HR_meeting_last_day", day)
+                if _return:
+                    $ set_HR_director_tag("business_HR_meeting_last_day", day)
             "Let's not this week":
                 $ del HR_employee_list
 
@@ -547,8 +548,11 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         the_person.char "Here's my list. Who do you want me to call in?"
 
     # use new menu layout for selecting people
-    call screen main_choice_display([["Call in"] + HR_employee_list], draw_hearts_for_people = False)
+    call screen main_choice_display([["Call in"] + HR_employee_list + ["Changed my mind"]], draw_hearts_for_people = False)
     $ person_choice = _return
+
+    if person_choice == "Changed my mind":
+        return False
 
     $ scene_manager.update_actor(the_person, position = "stand2")
     the_person.char "Alright, let me go get her."
@@ -672,7 +676,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         del HR_employee_list
         del person_choice
         del opinion_chat
-    return
+    return True
 
 label HR_director_review_discoveries_label(the_person):
     # shorten the dialog when all research is reviewed
@@ -938,10 +942,14 @@ label HR_director_meeting_on_demand_label(the_person):
     $ the_person.draw_person(position = "sitting")
     the_person.char "Ok! Let me see who I have on my list here..."
     call HR_director_personnel_interview_label(the_person, max_opinion = get_HR_director_tag("business_HR_coffee_tier", 0)) from HR_DIR_INTERVIEW_CALL_4
-    the_person.char "I'd say that went pretty well! I'm going to head back to work, if that is okay with you, [the_person.mc_title]?"
+    if _return:
+        $ set_HR_director_tag("business_HR_meeting_last_day", day)
+        the_person.char "I'd say that went pretty well! I'm going to head back to work, if that is okay with you, [the_person.mc_title]?"
+    else:
+        the_person.char "No problem, we can pick this up another time."
+    
     "You thank her for her help and excuse her. She gets up and leaves you to get back to work."
     $ scene_manager.clear_scene()
-    $ set_HR_director_tag("business_HR_meeting_last_day", day)
     call advance_time from hr_advance_time_one
     return
 
