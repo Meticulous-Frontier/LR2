@@ -13,6 +13,19 @@ init -1 python:
     # add follow_mc attribute to person class (without sub-classing)
     Business.hr_director = property(get_hr_director, set_hr_director, del_hr_director, "The company HR director position.")
 
+    def get_unisex_restroom_unlocks(self):
+        if not hasattr(self, "_unisex_restroom_unlocks"):
+            self._unisex_restroom_unlocks = {}
+        return self._unisex_restroom_unlocks
+
+    def set_unisex_restroom_unlocks(self, value):
+        self._unisex_restroom_unlocks = value
+
+    def del_unisex_restroom_unlocks(self):
+        del self._unisex_restroom_unlocks
+
+    Business.unisex_restroom_unlocks = property(get_unisex_restroom_unlocks, set_unisex_restroom_unlocks, del_unisex_restroom_unlocks, "Tracking dictionary for the unisex restroom event.")
+
     def update_employee_status(self, new_person):
         if new_person.event_triggers_dict.get("employed_since", -1) == -1:
             new_person.event_triggers_dict["employed_since"] = day

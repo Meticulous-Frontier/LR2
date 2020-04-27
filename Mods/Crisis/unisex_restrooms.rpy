@@ -7,12 +7,12 @@ init -1 python:
 init 1301 python:
 
     def unisex_bathroom_creation_requirement():
-        if unisex_restroom_unlocks.get("unisex_policy_avail",0) == 1:
+        if mc.business.unisex_restroom_unlocks.get("unisex_policy_avail",0) == 1:
             return True
         return False
 
     def unisex_bathroom_policy_unlock(unlock):
-        unisex_restroom_unlocks["unisex_policy_unlock"] = unlock
+        mc.business.unisex_restroom_unlocks["unisex_policy_unlock"] = unlock
 
     Unisex_bathroom_creation_policy = Policy(name = "Make Restrooms Unisex",
         desc = "Some basic remodeling and a change of signs will make all company restrooms unisex.",
@@ -81,26 +81,19 @@ init 2 python:
 
         return anon_person
 
-    def unisex_restroom_mod_initialization(self):
-        # add home shower to active places
-        global unisex_restroom_unlocks
-        unisex_restroom_unlocks = {} #Dict allows for future expansion of this event series.
-
-        return
-
-    unisex_restroom_crisis_action = ActionMod("Unisex Restroom", unisex_restroom_crisis_requirement,"unisex_restroom_action_label", initialization = unisex_restroom_mod_initialization,
+    unisex_restroom_crisis_action = ActionMod("Unisex Restroom", unisex_restroom_crisis_requirement,"unisex_restroom_action_label",
         menu_tooltip = "Change company restrooms the unisex and enjoy the results.", category="Business", is_crisis = True, crisis_weight = unisex_restroom_mod_weight)
 
 label unisex_restroom_action_label():
-    if unisex_restroom_unlocks.get("unisex_policy_unlock", 0) == 0:  #unisex restroom not yet created. Go to suggestion label
+    if mc.business.unisex_restroom_unlocks.get("unisex_policy_unlock", 0) == 0:  #unisex restroom not yet created. Go to suggestion label
         call unisex_restroom_overhear_label() from _call_unisex_restroom_over_call_1
         return
 
-    if unisex_restroom_unlocks.get("unisex_policy_unlock", 0) < 6:
-        $ ran_num = unisex_restroom_unlocks.get("unisex_policy_unlock", 0)
+    if mc.business.unisex_restroom_unlocks.get("unisex_policy_unlock", 0) < 6:
+        $ ran_num = mc.business.unisex_restroom_unlocks.get("unisex_policy_unlock", 0)
         $ unisex_bathroom_policy_unlock(ran_num + 1)
     else:
-        $ ran_num = renpy.random.randint(1, unisex_restroom_unlocks.get("unisex_policy_unlock", 0))
+        $ ran_num = renpy.random.randint(1, mc.business.unisex_restroom_unlocks.get("unisex_policy_unlock", 0))
 
     if ran_num == 1:
         call unisex_restroom_door_greet_label() from _call_unisex_restroom_greet_call_1
@@ -109,7 +102,7 @@ label unisex_restroom_action_label():
     if ran_num == 3:
         call unisex_restroom_fantasy_overhear_label() from _call_unisex_restroom_over_call_3
     if ran_num >= 4:
-        if unisex_restroom_unlocks.get("unisex_restroom_gloryhole", 0) == 0:  #If not already, unlock the glory hole
+        if mc.business.unisex_restroom_unlocks.get("unisex_restroom_gloryhole", 0) == 0:  #If not already, unlock the glory hole
             call unisex_restroom_unlock_gloryhole_label() from _call_unisex_restroom_gloryhole_unlock_1
         else:
             call unisex_restroom_gloryhole_option_label() from _call_unisex_restroom_gloryhole_option_1
@@ -138,7 +131,7 @@ label unisex_restroom_overhear_label():
     "The complaint seems... actually fairly reasonable."
     "There are only two restrooms, one men and one women, and they are on opposite sides of the building."
     "It would be a pretty minor investment to convert them into unisex restrooms. Plus, you never know what you might overhear when you happen to be in there..."
-    $ unisex_restroom_unlocks["unisex_policy_avail"] = 1
+    $ mc.business.unisex_restroom_unlocks["unisex_policy_avail"] = 1
     return
 
 label unisex_restroom_door_greet_label():   #You have a chance to learn a couple new opinions
@@ -343,7 +336,7 @@ label unisex_restroom_unlock_gloryhole_label():
     "You feel the call of nature, so you get up from your work and head to the restroom."
     "The restroom is empty, so you find an empty stall and enter it."
     "Much to your surprise, you discover a small hole cut out. The girls have made a gloryhole!"
-    $ unisex_restroom_unlocks["unisex_restroom_gloryhole"] = 1
+    $ mc.business.unisex_restroom_unlocks["unisex_restroom_gloryhole"] = 1
     $ office.actions.append(unisex_restroom_gloryhole_wait)
     "Since you are the only man in the company, you have to assume that this was made with you in mind."
     "You finish relieving yourself, and then consider. Should you wait and see if someone comes along? Or maybe try some other time?"
@@ -357,7 +350,7 @@ label unisex_restroom_unlock_gloryhole_label():
 
 label unisex_restroom_gloryhole_option_label():
     "You step into the restroom and walk into one of the stalls."
-    if unisex_restroom_unlocks.get("unisex_policy_unlock", 0) < 6:
+    if mc.business.unisex_restroom_unlocks.get("unisex_policy_unlock", 0) < 6:
         "You see that someone has drawn multiple hearts in red lipstick around it."
     else:
         "You see that someone has drawn an open mouth around it in lipstick."
@@ -401,7 +394,7 @@ label unisex_restroom_gloryhole_wait_label():
     "You decide you could use a little anonymous action to break up the monotony of the day."
     "You step into the restroom and walk into one of the stalls."
     "You see the glory hole in the stall that has been cutout."
-    if unisex_restroom_unlocks.get("unisex_policy_unlock", 0) < 6:
+    if mc.business.unisex_restroom_unlocks.get("unisex_policy_unlock", 0) < 6:
         "You see that someone has drawn multiple hearts in red lipstick around it."
     else:
         "You see that someone has drawn an open mouth around it in lipstick."
