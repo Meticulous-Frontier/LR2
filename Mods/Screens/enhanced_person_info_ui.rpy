@@ -69,7 +69,7 @@ init -1 python:
 
     def person_info_ui_get_serum_info_tooltip(person):
         tooltip = ""
-        for serum in the_person.serum_effects:
+        for serum in person.serum_effects:
             if len(tooltip) > 0:
                 tooltip.append("\n")
             tooltip += serum.name + " : " + str(serum.duration - serum.duration_counter) + " Turns Left"
@@ -189,12 +189,12 @@ init 2:
                 vbox:
                     hbox:
                         textbutton "Detailed Information" action Show("person_info_detailed",the_person=person) style "textbutton_style" text_style "textbutton_text_style"
-                        if the_person.serum_effects:
+                        if person.serum_effects:
                             textbutton "{image=serum_vial} +[person.suggestibility]%":
                                 yoffset 6
                                 ysize 24
                                 text_style "menu_text_style"
-                                tooltip person_info_ui_get_serum_info_tooltip(the_person)
+                                tooltip person_info_ui_get_serum_info_tooltip(person)
                                 action NullAction()
                                 sensitive True
 
