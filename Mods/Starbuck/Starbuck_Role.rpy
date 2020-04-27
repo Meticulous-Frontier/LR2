@@ -2001,11 +2001,13 @@ label starbuck_being_watched(the_person, the_watcher, the_position):
     return
 init python:
     def starbuck_titles(person):
-        valid_titles = [reserved_titles(person)]
+        valid_titles = []
+        valid_titles.append("Mrs. " + person.last_name)
         valid_titles.append("Cara")
         return valid_titles
     def starbuck_possessive_titles(person):
-        valid_possessive_titles = [relaxed_titles(person)]
+        valid_possessive_titles = []
+        valid_possessive_titles.append("Mrs. " + person.last_name)
         if person.sluttiness > 60:
             valid_possessive_titles.append("Your slutty business partner")
         if person.sluttiness > 100 and person.sex_skills["Anal"] >= 4:
@@ -2015,7 +2017,8 @@ init python:
             valid_possessive_titles.append("Your cum catcher")
         return valid_possessive_titles
     def starbuck_player_titles(person):
-        valid_player_titles = [reserved_player_titles(person)]
+        valid_player_titles = []
+        valid_player_titles.append("Mr. " + mc.last_name)
         if starbuck.shop_progress_stage > 1:
             valid_player_titles.append("Business Partner")
         return valid_player_titles
