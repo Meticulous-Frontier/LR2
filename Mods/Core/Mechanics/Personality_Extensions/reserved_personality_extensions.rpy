@@ -5,7 +5,7 @@ init 1310 python:
         if the_person.love > 30:
             valid_titles.append(the_person.name)
         if the_person.sluttiness > 40:
-           valid_titles.append("Serene Bitch")
+            valid_titles.append("Serene Bitch")
         if the_person.sluttiness > 60:
             valid_titles.append("Cold Slut")        
 
