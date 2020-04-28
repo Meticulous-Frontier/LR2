@@ -414,7 +414,7 @@ label increase_slave_submission_label(the_person):
         $ the_person.draw_person(position = "doggy")
         $ mc.change_arousal(40) # make the fuck loop a little shorter
         "You pull out your hard cock and shove it right into her ass."
-        call fuck_person(the_person, start_position = doggy_anal, start_object = make_floor(), skip_intro = True, position_locked = True, affair_ask_after = False)
+        call fuck_person(the_person, start_position = doggy_anal, start_object = make_floor(), skip_intro = True, position_locked = True, affair_ask_after = False) from _call_fuck_person_increase_slave_submission
         $ the_report = _return
         if the_report.get("girl orgasms", 0) > 0:
             the_person.char "Thank you Master, for giving me such satisfaction."

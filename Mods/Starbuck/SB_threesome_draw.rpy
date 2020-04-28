@@ -117,22 +117,22 @@ label SB_threesome_setup_helper(): #This function is designed to help come up wi
         "What would you like to adjust?"
         menu:
             "Person One X":
-                call SB_change_value_amount()
+                call SB_change_value_amount() from _call_SB_change_value_amount
                 $ person_one_pos_x += _return
             "Person One Y":
-                call SB_change_value_amount()
+                call SB_change_value_amount() from _call_SB_change_value_amount_1
                 $ person_one_pos_y += _return
             "Person Two X":
-                call SB_change_value_amount()
+                call SB_change_value_amount() from _call_SB_change_value_amount_2
                 $ person_two_pos_x += _return
             "Person Two Y":
-                call SB_change_value_amount()
+                call SB_change_value_amount() from _call_SB_change_value_amount_3
                 $ person_two_pos_y += _return
             "Person One Scale":
-                call SB_change_value_amount()
+                call SB_change_value_amount() from _call_SB_change_value_amount_4
                 $ person_one_scale += _return
             "Person Two Scale":
-                call SB_change_value_amount()
+                call SB_change_value_amount() from _call_SB_change_value_amount_5
                 $ person_two_scale += _return
             "Finished":
                 $ SB_menu_choice = "Finish"
