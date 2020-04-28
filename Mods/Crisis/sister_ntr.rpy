@@ -51,14 +51,14 @@ label sister_ntr_crisis_action_label:
     $ submissive = the_person.get_opinion_score("being submissive") > 0
     ## Determine what type of encounter it is
     if the_person.sluttiness >= 60:
-        $ encounter = renpy.random.randint(1,2)
+        $ ran_num = renpy.random.randint(1,2)
     else:
-        $ encounter = 1
+        $ ran_num = 1
 
     $ bedroom.show_background()
     $ man_name = get_random_male_name()
 
-    if encounter is 1: ## a scene with one man
+    if ran_num == 1: ## a scene with one man
         if the_person.sluttiness < 40:
             $ the_person.draw_person(position = "kissing", emotion = "happy")
             "You see [the_person.possessive_title] kissing a young man. On the table there are some college books lying around. Seems they decided to take a break from studying."
@@ -451,7 +451,7 @@ label sister_ntr_crisis_action_label:
                         "Moans go on long into the night..."
                     else:
                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
-    if encounter is 2: ## a scene with two men
+    if ran_num == 2: ## a scene with two men
         $ the_person.strip_outfit_to_max_sluttiness()
         $ position = select_position(the_person)
         $ man_name2 = get_random_male_name()

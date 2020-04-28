@@ -42,9 +42,9 @@ label mom_ntr_mod_action_label:
     $ bj = the_person.get_opinion_score("giving blowjobs") > 0
     ## Determine what type of encounter it is
     if the_person.sluttiness >= 60:
-        $ encounter = renpy.random.randint (1,2)
+        $ ran_num = renpy.random.randint (1,2)
     else:
-        $ encounter = 1
+        $ ran_num = 1
 
     $ bedroom.show_background()
     $ man_name = get_random_male_name()
@@ -62,7 +62,7 @@ label mom_ntr_mod_action_label:
 
     $ detected = renpy.random.randint(0,2) == 1 #33% chance of detection.
     ## Now determine how many clothes mom will take off
-    if encounter is 1: ## a scene with one man
+    if ran_num == 1: ## a scene with one man
         if bj:
             $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
             "You take a look inside the room and your eyes widen. You see [the_person.possessive_title] sitting in front of an unknown man, sucking his cock."
@@ -1290,7 +1290,7 @@ label mom_ntr_mod_action_label:
                                     "You go back to your bedroom accompanied by shower sounds from [the_person.possessive_title]'s room."
             "Get back to bed":
                 "You decide that it is wrong to interfere into [the_person.possessive_title]'s private life so you go back to your room to sleep."
-    elif encounter is 2: ##For a scene with 2 men
+    elif ran_num == 2: ##For a scene with 2 men
         $ man_name2 = get_random_male_name()
         while man_name is man_name2: ## Just to make sure that names don't match or it will look stupid
             $ man_name2 = get_random_male_name()
