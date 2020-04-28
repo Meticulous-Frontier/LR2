@@ -81,9 +81,9 @@ label train_in_gym(person):
     python:
         gym.show_background()
         set_gym_outfit(person)
-        change = renpy.random.random() * 4 # Maximum change is 4 pounds
+        ran_num = renpy.random.random() * 4 # Maximum change is 4 pounds
 
-    if change < 1:
+    if ran_num < 1:
         "You decide to take a yoga class with [person.possessive_title]."
         person.char "This stretching is good my flexibility."
         if person.sluttiness > 20:
@@ -91,7 +91,7 @@ label train_in_gym(person):
             "There is a subtle undertone in that remark that makes you smile."
         $ person.change_max_energy(5)
         "She seems to be building up her endurance."
-    elif change < 2.5:
+    elif ran_num < 2.5:
         "You and [person.possessive_title] spend a few hours working out."
         $ person.change_max_energy(10)
         "She seems to be building up her endurance."
@@ -104,7 +104,7 @@ label train_in_gym(person):
         $ person.change_max_energy(10)
         "She seems to be building up her endurance."
 
-    $ body_changed = person.change_weight(-change, 100)
+    $ body_changed = person.change_weight(-ran_num, 100)
     $ new_weight = get_person_weight_string(person)
 
     "After the session [person.possessive_title] weighs [new_weight]."
