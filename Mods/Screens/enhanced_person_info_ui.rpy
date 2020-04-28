@@ -71,7 +71,7 @@ init -1 python:
         tooltip = ""
         for serum in person.serum_effects:
             if len(tooltip) > 0:
-                tooltip.append("\n")
+                tooltip += "\n"
             tooltip += serum.name + " : " + str(serum.duration - serum.duration_counter) + " Turns Left"
         return tooltip
 
