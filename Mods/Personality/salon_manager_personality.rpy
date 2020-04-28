@@ -1,7 +1,10 @@
 init 1400 python:
     def salon_manager_possessive_titles(person):
-        valid_possessive_titles = [wild_titles(person)]
+        valid_possessive_titles = []
+        valid_possessive_titles.append(person.name)
         valid_possessive_titles.append("My stylist")
+        if person.sluttiness > 40:
+            valid_possessive_titles.append("Crazy Bitch")
         if person.sluttiness > 50:
             valid_possessive_titles.append("My intimate stylist")
         return valid_possessive_titles
