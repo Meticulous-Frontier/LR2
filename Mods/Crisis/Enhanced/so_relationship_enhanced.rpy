@@ -8,6 +8,10 @@ init 2 python:
     def so_relationship_worsen_requirement():
         return not get_so_relationship_worsen_person() is None
 
+    # replace action requirement functions with newly defined functions (cPickle resolver)
+    so_relationship_improve_crisis.requirement = so_relationship_improve_requirement
+    so_relationship_worsen_crisis.requirement = so_relationship_worsen_requirement
+
     def get_so_relationship_improve_person():
         potential_people = []
         for person in known_people_in_the_game(excluded_people = [mc] + unique_character_list):
