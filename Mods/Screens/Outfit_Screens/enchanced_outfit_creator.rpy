@@ -1032,6 +1032,7 @@ init 2:
                                                 xfill True
 
                                                 action [
+                                                    Function(item_outfit.build_outfit_name),
                                                     Return(item_outfit),
                                                     Hide("mannequin"),
                                                     Hide("outfit_creator")
