@@ -239,6 +239,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     $ object_choice = start_object # initialize with start_object (in case girl is in charge or position is locked)
     $ guy_orgasms_before_control = 0
     $ ask_for_condom = asked_for_condom
+    $ ask_for_threesome = False
     $ use_condom = mc.condom if asked_for_condom else False
     $ stealth_orgasm = False
 
@@ -361,25 +362,26 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             if position_choice and object_choice: #If we have both an object and a position we're good to go, otherwise we loop and they have a chance to choose again.
                 call sex_description(the_person, position_choice, object_choice, private = private, report_log = report_log) from _call_sex_description_bugfix
                 $ first_round = False
-                if mc.condom and mc.recently_orgasmed: # you orgasmed so you used your condom.
-                    $ mc.condom = False
-                if position_choice.requires_hard and mc.recently_orgasmed:
-                    "Your post orgasm cock softens, stopping you from [position_choice.verbing] [the_person.possessive_title] for now."
-                    $ position_choice = None
-                elif position_choice.guy_energy > mc.energy:
-                    if girl_in_charge:
-                        "You're too exhausted to let [the_person.possessive_title] keep [position_choice.verbing] you."
-                    else:
-                        "You're too exhausted to continue [position_choice.verbing] [the_person.possessive_title]."
-                    $ position_choice = None
-                elif position_choice.girl_energy > the_person.energy:
-                    #TODO: Add some differentiated dialgoue depending on the position.
-                    #TODO: Add "no energy" transitions where you keep fucking her anyways. (double TODO: Add a way of "breaking" her like this)
-                    if not girl_in_charge:
-                        the_person.char "I'm exhausted [the_person.mc_title], I can't keep this up..."
-                    $ position_choice = None
-                elif not position_locked: #Nothing major has happened that requires us to change positions, we can have girls take over, strip
-                    call girl_strip_event(the_person, position_choice, object_choice) from _call_girl_strip_event_bugfix
+                if not finished:    # when we switched to threesome finished is True
+                    if mc.condom and mc.recently_orgasmed: # you orgasmed so you used your condom.
+                        $ mc.condom = False
+                    if position_choice.requires_hard and mc.recently_orgasmed:
+                        "Your post orgasm cock softens, stopping you from [position_choice.verbing] [the_person.possessive_title] for now."
+                        $ position_choice = None
+                    elif position_choice.guy_energy > mc.energy:
+                        if girl_in_charge:
+                            "You're too exhausted to let [the_person.possessive_title] keep [position_choice.verbing] you."
+                        else:
+                            "You're too exhausted to continue [position_choice.verbing] [the_person.possessive_title]."
+                        $ position_choice = None
+                    elif position_choice.girl_energy > the_person.energy:
+                        #TODO: Add some differentiated dialgoue depending on the position.
+                        #TODO: Add "no energy" transitions where you keep fucking her anyways. (double TODO: Add a way of "breaking" her like this)
+                        if not girl_in_charge:
+                            the_person.char "I'm exhausted [the_person.mc_title], I can't keep this up..."
+                        $ position_choice = None
+                    elif not position_locked: #Nothing major has happened that requires us to change positions, we can have girls take over, strip
+                        call girl_strip_event(the_person, position_choice, object_choice) from _call_girl_strip_event_bugfix
 
 
         elif isinstance(round_choice, Position): #The only non-strings on the list are positions we are changing to
@@ -443,7 +445,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
         clear_sex_modifiers(the_person)
 
         report_log["end arousal"] = the_person.arousal
-        if report_log.get("girl orgasms",0) > 0:
+        if report_log.get("girl orgasms",0) > 0 or report_log.get("girl one orgasms", 0) > 0:
             the_person.arousal = 0 # If she came she's satisfied.
         else:
             the_person.change_arousal(-the_person.arousal/2) #Otherwise they are half as aroused as you leave them.
@@ -719,6 +721,38 @@ label put_on_condom_routine(the_person):
 label watcher_check_enhanced(the_person, the_position, the_object, the_report): # Check to see if anyone is around to comment on the characters having sex.
     $ watcher = cheating_check_get_watcher(the_person)
     if watcher:
+        # you only get one chance for starting a threesome per public sex action (avoid spamming threesome question)
+        # threesome has no watcher loop, so all watching stops when threesome has started.
+        # TODO: add watchers to threesome core
+        if not ask_for_threesome and willing_to_threesome(the_person, watcher):
+            $ watcher.draw_person()
+            watcher.char "Oh my good, that looks amazing..."
+            if can_join_threesome(watcher, the_person, the_position.position_tag):
+                the_person.char "Can I... can I join you? I want some too!"
+                $ ask_for_threesome = True
+                menu:
+                    "Let her join":
+                        watcher.char "Yes! Thank you [watcher.mc_title]!"
+                        $ scene_manager = Scene()
+                        $ scene_manager.add_actor(the_person, position = the_position.position_tag)
+                        $ scene_manager.add_actor(watcher, character_placement = character_center_flipped)
+                        watcher.char "Let me take off some clothes."
+                        $ scene_manager.strip_actor_outfit(watcher)
+                        call join_threesome(the_person, watcher, the_position.position_tag) from _call_join_threesome_watcher_check_enhanced
+                        $ report_log = _return
+                        python:
+                            scene_manager.clear_scene()
+                            if report_log.get("girl two orgasms", 0) > 0:
+                                watcher.arousal = 0 # If she came she's satisfied.
+                            else:
+                                watcher.change_arousal(-watcher.arousal/2) #Otherwise they are half as aroused as you leave them.
+                            finished = True
+                            del watcher
+                        return
+                    "Not this time":
+                        the_person.char "Aww, okay. Maybe next time..."
+                        $ the_person.change_obedience(3)
+
         $ the_relationship = town_relationships.get_relationship(watcher, the_person)
         if the_relationship and the_relationship.get_type() in ["Mother", "Daughter", "Sister", "Cousin", "Niece", "Aunt", "Grandmother", "Granddaughter"]:
             call relationship_sex_watch(watcher, town_relationships.get_relationship_type(watcher, the_person).lower(), the_position) from _call_relationship_sex_watch
