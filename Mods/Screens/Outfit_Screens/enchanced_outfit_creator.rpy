@@ -117,6 +117,12 @@ init 10 python:
         new_outfit.build_outfit_name()
         return new_outfit
 
+    def update_outfit_name(outfit):
+        default_names = ["New Outfit", "New Overwear Set", "New Underwear Set"]
+        if outfit.name in default_names:
+            outfit.build_outfit_name()
+        return
+
     def switch_outfit_category(category):
 
         cs = renpy.current_screen()
@@ -1032,7 +1038,7 @@ init 2:
                                                 xfill True
 
                                                 action [
-                                                    Function(item_outfit.build_outfit_name),
+                                                    Function(update_outfit_name, item_outfit),
                                                     Return(item_outfit),
                                                     Hide("mannequin"),
                                                     Hide("outfit_creator")
