@@ -470,11 +470,11 @@ label casual_hotwife_blowjob_text_label(the_person):
     the_person.char "Haaa... sorry! I probably should have just said that it went well."
     mc.name "No it is quite alright. I was a little concerned with how things would go for you, but I'm glad that it turned out well!"
     $ the_person.draw_person(position = "stand4", emotion = "happy")
-    the_person.char "It really did! So uhh, wanna go again, just ask. I'd be happy to be. BUT, we need to set some ground rules first!"
+    the_person.char "It really did! So uhh, if you wanna go again, just ask. I'd be happy to be of service, BUT, we need to set some ground rules first!"
     mc.name "Okay, I'm down for that."
     the_person.char "Okay, well, like I said. I'm a good wife! I love my husband. If things between us ever start to get... you know... serious? I'm going to have to break it off."
     "You nod in understanding."
-    the_person.char "If you try to make me choose between you two, I'll choose him, everytime. So lets just keep this casual, okay?"
+    the_person.char "If you try to make me choose between you two, I'll choose him, every time. So lets just keep this casual, okay?"
     mc.name "Sounds good. Purely physical. I'm completely okay with that."
     the_person.char "Right... here, let's exchange numbers. I'll text you and if we're both free, we can screw around, no strings attached!"
     "You agree. You and [the_person.title] exchange numbers."
