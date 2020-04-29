@@ -77,16 +77,16 @@ label town_walk_crisis_action_label:
         else:
             "You notice that with one hand [the_person.possessive_title] squeezes her tits, while shoving the other between her legs."
         while the_person.arousal < 100:
-            $ rand_chance = renpy.random.randint(0,3)
-            if rand_chance == 0:
+            $ ran_num = renpy.random.randint(0,3)
+            if ran_num == 0:
                 "As she gets more and more turned on, her hand moves faster and faster."
-            elif rand_chance == 1:
+            elif ran_num == 1:
                 if the_person.outfit.vagina_available():
                     "Both her hands move really fast around her wide-spread pussy."
                 else:
                     "[the_person.possessive_title] pinches her nipples and squeezes the other vigorously between her legs."
                 the_person.char "Ahh, yes. That's it. Just what I need."
-            elif rand_chance == 2:
+            elif ran_num == 2:
                 if the_person.outfit.vagina_available():
                     "She pushes 3 fingers inside, making a deep guttural noise."
                     $ the_person.call_dialogue("sex_responses_foreplay")

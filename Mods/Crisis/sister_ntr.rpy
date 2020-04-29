@@ -20,13 +20,24 @@ init 3 python:
                 positions.append ("anal")
         return get_random_from_list(positions)
 
+    def sister_ntr_select_finish(the_person):
+        finishes = []
+        if the_person.get_opinion_score("being covered in cum") > 0 or the_person.get_opinion_score("cum facials") > 0:
+            finishes.append ("facial")
+        if the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("bareback sex") > 0:
+            finishes.append ("inside")
+        if the_person.get_opinion_score("giving blowjobs") > 0 or the_person.get_opinion_score("drinking cum") > 0:
+            finishes.append ("drink")
+        finishes.append ("usual")
+        return get_random_from_list(finishes)
+
     sister_ntr_mod_action = ActionMod("Sister NTR",sister_ntr_crisis_requirement,"sister_ntr_crisis_action_label", 
         menu_tooltip = "At night you hear strange sounds out of [lily.possessive_title]'s bedroom", category = "NTR",
         initialization = init_action_mod_disabled,
         is_crisis = True, crisis_weight = sister_ntr_mod_weight)
 
 label sister_ntr_crisis_action_label:
-    ## Lily studing with her friends
+    ## Lily studying with her friends
     $ the_person = lily
     "While to fall asleep, you're disturbed by some noise down the hallway."
     menu:
@@ -38,17 +49,6 @@ label sister_ntr_crisis_action_label:
     "You drag yourself out of bed and enter the hallway. There is a trace of light down the door to [the_person.possessive_title]'s bedroom."
     "The door itself seems to be not closed."
 
-    ## Now we determine which finishing scenes are available depending on traits
-    $ finishes = []
-    if the_person.get_opinion_score("being covered in cum") > 0 or the_person.get_opinion_score("cum facials") > 0:
-        $ finishes.append ("facial")
-    if the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("bareback sex") > 0:
-        $ finishes.append ("inside")
-    if the_person.get_opinion_score("giving blowjobs") > 0 or the_person.get_opinion_score("drinking cum") > 0:
-        $ finishes.append ("drink")
-    $ finishes.append ("usual")
-    ## Submission check for additional lines related to that
-    $ submissive = the_person.get_opinion_score("being submissive") > 0
     ## Determine what type of encounter it is
     if the_person.sluttiness >= 60:
         $ ran_num = renpy.random.randint(1,2)
@@ -89,7 +89,7 @@ label sister_ntr_crisis_action_label:
                 "You take a look inside the room and you see [the_person.possessive_title] lying on the table with wide spread legs. And some young man is between them with his pants down."
                 the_person.char "Oh, [man_name]! You are so good! Keep going!"
                 "You see some books lying on the table. Seems they were studying and got little bored. Judging by the sweat on their bodies and loud moans, the seem to be relaxing for some time now."
-                if submissive:
+                if the_person.get_opinion_score("being submissive") > 0:
                     "[man_name] grabs [the_person.possessive_title] legs and thrusts himself to her with some force."
                     the_person.char "Yes, [man_name]. Fuck me harder! Be rough with your [the_person.name]!"
                 $ the_person.change_arousal (26)
@@ -99,7 +99,7 @@ label sister_ntr_crisis_action_label:
                 "Her body shrugs and you see happy smile on her face."
                 the_person.char "You made me cum, [man_name]! I needed that so much!"
                 man_name "Don't think I can go on for long, [the_person.name]."
-                $ finish = get_random_from_list(finishes)
+                $ finish = sister_ntr_select_finish(the_person)
                 if finish == "facial":
                     the_person.char "Hold it, [man_name]! I have a better idea."
                     $ the_person.draw_person(position = "blowjob")
@@ -115,7 +115,7 @@ label sister_ntr_crisis_action_label:
                     man_name "You look marvelous, [the_person.name]. I really liked that."
                     the_person.char "I loved that too. Now I go wash my face and then we have to finish the tasks. Don't wanna get bad grade on that test."
                     "You go back to you room to finally have some sleep."
-                    if submissive or the_person.sluttiness > 60:
+                    if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                         "While trying to sleep, you hear some loud noises from outside the bedroom."
                         the_person.char "Do me again, [man_name]. Fuck me harder! Please cum on my face again!"
                         man_name "On your knees, [the_person.name]! I'm cumming again!"
@@ -134,7 +134,7 @@ label sister_ntr_crisis_action_label:
                     "She spreads her legs even more to show her cum drenched pussy."
                     the_person.char "Hope you like the view. Now I go wash myself and then we have to finish the tasks. Don't wanna get bad grade on that test."
                     "You go back to you room to finally have some sleep."
-                    if submissive or the_person.sluttiness > 60:
+                    if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                         "While trying to sleep, you hear some loud noises from outside the bedroom."
                         the_person.char "Take me again, [man_name]. Fuck me hard! I need you to fill me once more!"
                         man_name "On your knees, [the_person.name]! I want you from behind this time!"
@@ -160,7 +160,7 @@ label sister_ntr_crisis_action_label:
                     "His weakened dick falls out from [the_person.possessive_title]'s mouth. She looks up and smiles. She swallows the sperm, but you still see traces of it."
                     the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of cola and then we have to finish the tasks. Don't wanna get bad grade on that test."
                     "You go back to you room to finally have some sleep."
-                    if submissive or the_person.sluttiness > 60:
+                    if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                         "While trying to sleep, you hear some loud noises from outside the bedroom."
                         the_person.char "Mmmmmm... Brhkhmmm..."
                         man_name "Liked that, [the_person.name]? Now drink my hot stuff!"
@@ -175,7 +175,7 @@ label sister_ntr_crisis_action_label:
                     the_person.char "Yeah, [man_name]! It was great! We really should have done this sooner!"
                     the_person.char "Now I go wash my hands and then we go back to our books. I don't want to fail this test."
                     "You go back to you room to finally have some sleep."
-                    if submissive or the_person.sluttiness > 60:
+                    if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                         "While trying to sleep, you hear some loud noises from outside the bedroom."
                         the_person.char "Please, take me once more. I want to feel your hard dick inside again!"
                         man_name "Sure, [the_person.name]. Get your little pussy ready!"
@@ -187,7 +187,7 @@ label sister_ntr_crisis_action_label:
                 "You take a look inside the room and you see [the_person.possessive_title] pushed against the wall. And some young man is doing her with his pants down."
                 the_person.char "Oh, [man_name]! You are so good! Keep going!"
                 "You see some books lying on the table. Seems they were studying and got little bored. Judging by the sweat on their bodies and loud moans, the seem to be relaxing for some time now."
-                if submissive:
+                if the_person.get_opinion_score("being submissive") > 0:
                     "[man_name] grabs [the_person.possessive_title]'s buttocks and squeezes them with some force."
                     the_person.char "Oh, yes, [man_name]. Be rough with your [the_person.name]! I like being owned by a man."
                 $ the_person.change_arousal (26)
@@ -197,7 +197,7 @@ label sister_ntr_crisis_action_label:
                 "Her body shrugs and you see happy smile on her face."
                 the_person.char "You made me cum, [man_name]! I needed that so much!"
                 man_name "Don't think I can go on for long, [the_person.name]."
-                $ finish = get_random_from_list(finishes)
+                $ finish = sister_ntr_select_finish(the_person)
                 if finish == "facial":
                     the_person.char "Hold it, [man_name]! I have a better idea."
                     $ the_person.draw_person(position = "blowjob")
@@ -213,7 +213,7 @@ label sister_ntr_crisis_action_label:
                     man_name "You look marvelous, [the_person.name]. I really liked that."
                     the_person.char "I loved that too. Now I go wash my face and then we have to finish the tasks. Don't wanna get bad grade on that test."
                     "You go back to you room to finally have some sleep."
-                    if submissive or the_person.sluttiness > 60:
+                    if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                         "While trying to sleep, you hear some loud noises from outside the bedroom."
                         the_person.char "Do me again, [man_name]. Fuck me harder! Please cum on my face again!"
                         man_name "On your knees, [the_person.name]! I'm cumming again!"
@@ -232,7 +232,7 @@ label sister_ntr_crisis_action_label:
                     "She spreads her legs even more to show her cum drenched pussy."
                     the_person.char "Hope you like the view. Now I go wash myself and then we have to finish the tasks. Don't wanna get bad grade on that test."
                     "You go back to you room to finally have some sleep."
-                    if submissive or the_person.sluttiness > 60:
+                    if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                         "While trying to sleep, you hear some loud noises from outside the bedroom."
                         the_person.char "Take me again, [man_name]. Fuck me hard! I need you to fill me once more!"
                         man_name "On your knees, [the_person.name]! I want you from behind this time!"
@@ -258,7 +258,7 @@ label sister_ntr_crisis_action_label:
                     "His weakened dick falls out from [the_person.possessive_title]'s mouth. She looks up and smiles. She swallows the sperm, but you still see traces of it."
                     the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of cola and then we go back to our books. I don't want to fail this test."
                     "You go back to you room to finally have some sleep."
-                    if submissive or the_person.sluttiness > 60:
+                    if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                         "While trying to sleep, you hear some loud noises from outside the bedroom."
                         the_person.char "Mmmmmm... Brhkhmmm..."
                         man_name "Liked that, [the_person.name]? Now drink my hot stuff!"
@@ -273,7 +273,7 @@ label sister_ntr_crisis_action_label:
                     the_person.char "Yeah, [man_name]! It was great! We really should have done this sooner!"
                     the_person.char "Now I go wash my hands and then we have to finish the tasks. Don't wanna get bad grade on that test."
                     "You go back to you room to finally have some sleep."
-                    if submissive or the_person.sluttiness > 60:
+                    if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                         "While trying to sleep, you hear some loud noises from outside the bedroom."
                         the_person.char "Please, take me once more. I want to feel your hard dick inside again!"
                         man_name "Sure, [the_person.name]. Get your little pussy ready!"
@@ -285,7 +285,7 @@ label sister_ntr_crisis_action_label:
                 "You take a look inside the room and you see [the_person.possessive_title] bend over the chair. And some young man thrusts his dick into [the_person.possessive_title] little ass."
                 the_person.char "Oh, [man_name]! You are so good! I like it in my ass."
                 "You see some books lying on the table. Seems they were studying and got little bored. Judging by the sweat on their bodies and loud moans, the seem to be relaxing for some time now."
-                if submissive:
+                if the_person.get_opinion_score("being submissive") > 0:
                     "[man_name] slaps [the_person.possessive_title]'s buttocks. You see some red there. He must done so before."
                     the_person.char "Oh, [man_name]. Slap me more! I like that!"
                 $ the_person.change_arousal (26)
@@ -294,7 +294,7 @@ label sister_ntr_crisis_action_label:
                 "Her body shrugs and you hear a moan of pleasure."
                 the_person.char "You made me cum, [man_name]! I needed that so much!"
                 man_name "Don't think I can go on for long, [the_person.name]."
-                $ finish = get_random_from_list(finishes)
+                $ finish = sister_ntr_select_finish(the_person)
                 if finish == "facial":
                     the_person.char "Hold it, [man_name]! I have a better idea."
                     $ the_person.draw_person(position = "blowjob")
@@ -310,7 +310,7 @@ label sister_ntr_crisis_action_label:
                     man_name "You look marvelous, [the_person.name]. I really liked that."
                     the_person.char "I loved that too. Now I go wash my face and then we have to finish the tasks. Don't wanna get bad grade on that test."
                     "You go back to you room to finally have some sleep."
-                    if submissive or the_person.sluttiness > 60:
+                    if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                         "While trying to sleep, you hear some loud noises from outside the bedroom."
                         the_person.char "Take my ass again, [man_name]. Fuck me harder! And don't forget to cum on my face!"
                         man_name "On your knees, [the_person.name]! I'm cumming again!"
@@ -330,7 +330,7 @@ label sister_ntr_crisis_action_label:
                     "She spreads her legs even more to show her cum drenched pussy."
                     the_person.char "Hope you like the view. Now I go wash myself and then we go back to our books. I don't want to fail this test."
                     "You go back to you room to finally have some sleep."
-                    if submissive or the_person.sluttiness > 60:
+                    if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                         "While trying to sleep, you hear some loud noises from outside the bedroom."
                         the_person.char "Take me again, [man_name]. Fuck me hard! I need you to fill me once more!"
                         man_name "On your knees, [the_person.name]! I want you from behind this time!"
@@ -356,7 +356,7 @@ label sister_ntr_crisis_action_label:
                     "His weakened dick falls out from [the_person.possessive_title]'s mouth. She looks up and smiles. She swallows the sperm, but you still see traces of it."
                     the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of cola and then we have to finish the tasks. Don't wanna get bad grade on that test."
                     "You go back to you room to finally have some sleep."
-                    if submissive or the_person.sluttiness > 60:
+                    if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                         "While trying to sleep, you hear some loud noises from outside the bedroom."
                         the_person.char "Mmmmmm... Brhkhmmm..."
                         man_name "Liked that, [the_person.name]? Now drink my hot stuff!"
@@ -370,7 +370,7 @@ label sister_ntr_crisis_action_label:
                     the_person.char "Yeah, [man_name]! It was great! We really should have done this sooner!"
                     the_person.char "Now I go wash my hands and then we go back to our books. I don't want to fail this test."
                     "You go back to you room to finally have some sleep."
-                    if submissive or the_person.sluttiness > 60:
+                    if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                         "While trying to sleep, you hear some loud noises from outside the bedroom."
                         the_person.char "Please, take me once more. I want to feel your hard dick in my little ass!"
                         man_name "Sure, [the_person.name]. Get your little hole ready!"
@@ -383,7 +383,7 @@ label sister_ntr_crisis_action_label:
                 man_name "You mouth feels great, [the_person.name]. Keep going."
                 "You see some books lying on the table. Seems they were studying and got little bored. Judging by the sweat on their bodies and loud moans, the seem to be relaxing for some time now."
                 "The man grabs [the_person.possessive_title]'s head and tries to force her to take his member all way long."
-                if submissive:
+                if the_person.get_opinion_score("being submissive") > 0:
                     "[the_person.possessive_title] obediently takes it all in her mouth. You see some tears in her eyes but she does not object."
                     man_name "That's it, dear. Take it deep. I like the way you do it."
                 else:
@@ -392,7 +392,7 @@ label sister_ntr_crisis_action_label:
                 "You notice that with one hand [the_person.possessive_title] is rubbing between her legs."
                 "After a few more moves there her body shrugs and you hear a moan of pleasure."
                 man_name "Don't think I can go on for long, [the_person.name]."
-                $ finish = get_random_from_list(finishes)
+                $ finish = sister_ntr_select_finish(the_person)
                 if finish == "facial":
                     the_person.char "Hold it, [man_name]! I have a better idea."
                     $ the_person.draw_person(position = "blowjob")
@@ -408,7 +408,7 @@ label sister_ntr_crisis_action_label:
                     man_name "You look marvelous, [the_person.name]. I really liked that."
                     the_person.char "I loved that too. Now I go wash my face and then we have to finish the tasks. Don't wanna get bad grade on that test."
                     "You go back to you room to finally have some sleep."
-                    if submissive or the_person.sluttiness > 60:
+                    if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                         "While trying to sleep, you hear some loud noises from outside the bedroom."
                         the_person.char "Let me take care of you so that you could cum on my face!"
                         man_name "Don't mind if you do, [the_person.name]!"
@@ -429,7 +429,7 @@ label sister_ntr_crisis_action_label:
                     "His weakened dick falls out from [the_person.possessive_title]'s mouth. She looks up and smiles. She swallows the sperm, but you still see traces of it."
                     the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of cola and then we have to finish the tasks. Don't wanna get bad grade on that test."
                     "You go back to you room to finally have some sleep."
-                    if submissive or the_person.sluttiness > 60:
+                    if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                         "While trying to sleep, you hear some loud noises from outside the bedroom."
                         the_person.char "Mmmmmm... Brhkhmmm..."
                         man_name "Liked that, [the_person.name]? Now drink my hot stuff!"
@@ -444,7 +444,7 @@ label sister_ntr_crisis_action_label:
                     the_person.char "Yeah, [man_name]! It was great! We really should have done this sooner!"
                     the_person.char "Now I go wash my hands and then we go back to our books. I don't want to fail this test."
                     "You go back to you room to finally have some sleep."
-                    if submissive or the_person.sluttiness > 60:
+                    if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                         "While trying to sleep, you hear some loud noises from outside the bedroom."
                         man_name "Suck me again, [the_person.name]. I really loved it."
                         the_person.char "Let's finish this one first and then I will reward you."
@@ -455,18 +455,18 @@ label sister_ntr_crisis_action_label:
         $ the_person.strip_outfit_to_max_sluttiness()
         $ position = select_position(the_person)
         $ man_name2 = get_random_male_name()
-        while man_name is man_name2: ## Just to make sure that names don't match or it will look stupid
+        while man_name == man_name2: ## Just to make sure that names don't match or it will look stupid
             $ man_name2 = get_random_male_name()
         $ the_person.change_arousal (75)
 
         if position == "missionary":
             $ the_person.draw_person(position = "missionary", emotion = "happy")
             "You take a look inside the room and you see [the_person.possessive_title] lying on the table with wide spread legs. And some young man is between them with his pants down."
-            "Ther is another man, sitting on the bed. Stroking his cock. It seems that he is waiting for his turn."
+            "There is another man, sitting on the bed. Stroking his cock. It seems that he is waiting for his turn."
             the_person.char "Oh, [man_name]! You are so good! Keep going!"
             man_name "It seems that [the_person.name] likes my dick more than yours, [man_name2]."
             "You see some books lying on the table. Seems they were studying and got little bored. Judging by the sweat on their bodies and loud moans, the seem to be relaxing for some time now."
-            if submissive:
+            if the_person.get_opinion_score("being submissive") > 0:
                 "[man_name] grabs [the_person.possessive_title] legs and thrusts himself to her with some force."
                 the_person.char "Yes, [man_name]. Fuck me harder! Be rough with your [the_person.name]!"
                 man_name2 "Yeah, man, fuck our little classmate real hard."
@@ -478,7 +478,7 @@ label sister_ntr_crisis_action_label:
             "Her body shrugs and you see happy smile on her face."
             the_person.char "You made me cum, guys! I really love being fucked by both of you."
             man_name "Don't think I can go on for long, [the_person.name]."
-            $ finish = get_random_from_list(finishes)
+            $ finish = sister_ntr_select_finish(the_person)
             if finish == "facial":
                 the_person.char "Hold it, [man_name]! I have a better idea."
                 $ the_person.draw_person(position = "blowjob")
@@ -499,7 +499,7 @@ label sister_ntr_crisis_action_label:
                 man_name2 "Our little coed just got her sperm bath. What a view!"
                 the_person.char "I loved that too. Now I go wash my face and then we have to study. I need a straight A on that test."
                 "You go back to you room to finally have some sleep."
-                if submissive or the_person.sluttiness > 60:
+                if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from outside the bedroom."
                     the_person.char "Do me again, [man_name]. Fuck me harder! Please cum on my face again!"
                     man_name "On your knees, [the_person.name]! I'm cumming again!"
@@ -524,7 +524,7 @@ label sister_ntr_crisis_action_label:
                 "After both men shot their loads into [the_person.possessive_title], she is lying on the table and sperm is flowing out of her vagina."
                 the_person.char "Hope you like the view. Now I go wash myself and then we have to finish the tasks. Don't wanna get bad grade on that test."
                 "You go back to you room to finally have some sleep."
-                if submissive or the_person.sluttiness > 60:
+                if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from outside the bedroom."
                     the_person.char "Take me again, [man_name]. Fuck me hard! I need you to fill me once more!"
                     man_name "On your knees, [the_person.name]! I want you from behind this time!"
@@ -559,7 +559,7 @@ label sister_ntr_crisis_action_label:
                 "She gulps and looks up to men with a broad simle."
                 the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of water and then we have to study. I need a straight A on that test."
                 "You go back to you room to finally have some sleep."
-                if submissive or the_person.sluttiness > 60:
+                if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from outside the bedroom."
                     the_person.char "Mmmmmm... Brhkhmmm..."
                     man_name "Liked that, [the_person.name]? Now drink my hot stuff!"
@@ -577,7 +577,7 @@ label sister_ntr_crisis_action_label:
                 "She grabs his dick and strokes it for a while. Once he reaches an orgasm, [the_person.possessive_title] closes the tip with a hand so that the semen won't stain anything."
                 the_person.char "You really fucked me good, guys! Now I go wash my hands and then we have to get back to studying. I don't want a bad grade on that test."
                 "You go back to you room to finally have some sleep."
-                if submissive or the_person.sluttiness > 60:
+                if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from outside the bedroom."
                     the_person.char "Please, take me once more, guys. I want to feel your hard dicks inside again!"
                     man_name "Sure, [the_person.name]. Get your little pussy ready!"
@@ -592,7 +592,7 @@ label sister_ntr_crisis_action_label:
             the_person.char "Oh, [man_name]! You are so good! Keep going!"
             man_name "Wow, [man_name2], you really turned our little classmate on!"
             "You see some books lying on the table. Seems they were studying and got little bored. Judging by the sweat on their bodies and loud moans, the seem to be relaxing for some time now."
-            if submissive:
+            if the_person.get_opinion_score("being submissive") > 0:
                 "[man_name] slaps [the_person.possessive_title]'s buttocks with a loud sound."
                 the_person.char "Oh, yes, [man_name]. Be rough with your [the_person.name]! I like being owned by a man."
                 man_name2 "Like being owned, eh? How about this?"
@@ -604,7 +604,7 @@ label sister_ntr_crisis_action_label:
             "Her body shrugs and you hear a moan of pleasure."
             the_person.char "You made me cum, [man_name]! You guys have amazing cocks."
             man_name "Don't think I can go on for long, [the_person.name]."
-            $ finish = get_random_from_list(finishes)
+            $ finish = sister_ntr_select_finish(the_person)
             if finish == "facial":
                 the_person.char "Hold it, [man_name]! I have a better idea."
                 $ the_person.draw_person(position = "blowjob")
@@ -625,7 +625,7 @@ label sister_ntr_crisis_action_label:
                 man_name2 "Our little coed just got her sperm bath. What a view!"
                 the_person.char "I loved that too. Now I go wash my face and then we have to finish the tasks. Don't wanna get bad grade on that test."
                 "You go back to you room to finally have some sleep."
-                if submissive or the_person.sluttiness > 60:
+                if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from outside the bedroom."
                     the_person.char "Do me again, [man_name]. Fuck me harder! Please cum on my face again!"
                     man_name "On your knees, [the_person.name]! I'm cumming again!"
@@ -652,7 +652,7 @@ label sister_ntr_crisis_action_label:
                 "After both men shot their loads into [the_person.possessive_title], you see sperm flowing out of her vagina and down on her legs."
                 the_person.char "Hope you like the view. Now I go wash myself and then we have to get back to studying. I don't want a bad grade on that test.."
                 "You go back to you room to finally have some sleep."
-                if submissive or the_person.sluttiness > 60:
+                if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from outside the bedroom."
                     the_person.char "Take me again, [man_name]. Fuck me hard! I need you to fill me once more!"
                     man_name "On your knees, [the_person.name]! I want you from behind this time!"
@@ -687,7 +687,7 @@ label sister_ntr_crisis_action_label:
                 "She gulps and looks up to the men with a broad smile."
                 the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of water and then we have to study. I need a straight A on that test."
                 "You go back to you room to finally have some sleep."
-                if submissive or the_person.sluttiness > 60:
+                if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from outside the bedroom."
                     the_person.char "Mmmmmm... Brhkhmmm..."
                     man_name "Liked that, [the_person.name]? Now drink my hot stuff!"
@@ -704,7 +704,7 @@ label sister_ntr_crisis_action_label:
                 "She grabs his dick and strokes it for a while. Once he reaches an orgasm, [the_person.possessive_title] closes the tip with a hand so that the semen won't stain anything."
                 the_person.char "You really fucked me good, guys! Now I go wash my hands and then we have to finish the tasks. Don't wanna get bad grade on that test."
                 "You go back to you room to finally have some sleep."
-                if submissive or the_person.sluttiness > 60:
+                if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from outside the bedroom."
                     the_person.char "Please, take me once more, guys. I want to feel your hard dicks inside again!"
                     man_name "Sure, [the_person.name]. Get your little pussy ready!"
@@ -719,7 +719,7 @@ label sister_ntr_crisis_action_label:
             man_name "Never imagined I would fuck our classmate, sweet [the_person.name] [the_person.last_name] in the ass. Nad how you like her pussy, [man_name2]."
             man_name2 "Fresh and tight, just as I like it!"
             "You see some books lying on the table. Seems they were studying and got little bored. Judging by the sweat on their bodies and loud moans, the seem to be relaxing for some time now."
-            if submissive:
+            if the_person.get_opinion_score("being submissive") > 0:
                 "[man_name] slaps [the_person.possessive_title]'s buttocks. You see some red there. He must done so before."
                 the_person.char "Oh, [man_name]. Slap me more! I like that!"
                 man_name2 "Oh, like it rough? Then you gonna like this."
@@ -731,7 +731,7 @@ label sister_ntr_crisis_action_label:
             "Her body shrugs and you hear a moan of pleasure."
             the_person.char "You made me cum, guys! I guess I like being fucked by two men at once!"
             man_name "Don't think I can go on for long, [the_person.name]."
-            $ finish = get_random_from_list(finishes)
+            $ finish = sister_ntr_select_finish(the_person)
             if finish == "facial":
                 the_person.char "Hold it, [man_name]! I have a better idea."
                 $ the_person.draw_person(position = "blowjob")
@@ -752,7 +752,7 @@ label sister_ntr_crisis_action_label:
                 man_name2 "Our little coed just got her sperm bath. What a view!"
                 the_person.char "I loved that too. I'll go and clean up a little and then we need to study. I don't wanna get a bad grade on that test."
                 "You go back to you room to finally have some sleep."
-                if submissive or the_person.sluttiness > 60:
+                if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from [the_person.possessive_title]'s bedroom."
                     the_person.char "Do me again, guys. Fuck my both holes! Please cum on my face again!"
                     man_name "On your knees, [the_person.name]! I'm cumming again!"
@@ -772,7 +772,7 @@ label sister_ntr_crisis_action_label:
                 man_name2 "It felt so good to fill you up, [the_person.name]!"
                 the_person.char "Hope you like the view. Now I will cleanup so we can get back to studying. I don't want a bad grade on that test."
                 "You go back to you room to finally have some sleep."
-                if submissive or the_person.sluttiness > 60:
+                if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from outside the bedroom."
                     the_person.char "Take me again. Fuck my ass hard! I need you to fill me once more!"
                     man_name "Sit on me, [the_person.name]! I want your pussy this time!"
@@ -807,7 +807,7 @@ label sister_ntr_crisis_action_label:
                 "She also gulps his load down and looks up to men with a broad smile."
                 the_person.char "Such a wonderful taste, [man_name2]! Now I'll get a glass of water and then we go back to our books. I don't want to fail this test."
                 "You go back to you room to finally have some sleep."
-                if submissive or the_person.sluttiness > 60:
+                if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from [the_person.possessive_title]'s bedroom."
                     the_person.char "Mmmmmm... Brhkhmmm..."
                     man_name "Liked my dick all the way down your throat, [the_person.name]? Oh, here it comes..."
@@ -824,7 +824,7 @@ label sister_ntr_crisis_action_label:
                 "She gets off from him, grabs his dick and strokes it for a while. Once he reaches an orgasm, [the_person.possessive_title] also catches all his semen so it won't stain anything."
                 the_person.char "You did well, boys! Now I go and wash my hands and get back to our studies. I need a straight A on that test."
                 "You go back to you room to finally have some sleep."
-                if submissive or the_person.sluttiness > 60:
+                if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from outside the bedroom."
                     the_person.char "Please, guys. Cum for me once more!"
                     man_name "Sure, [the_person.name]. Stroke my cock slowly..."
@@ -839,7 +839,7 @@ label sister_ntr_crisis_action_label:
             man_name2 "Absolutely, [man_name]. College is there for little girls like [the_person.name] could learn to suck cocks."
             "You see some books lying on the table. Seems they were studying and got little bored. Judging by the sweat on their bodies and loud moans, the seem to be relaxing for some time now."
             "The man grabs [the_person.possessive_title]'s head and tries to force her to take his member all way long."
-            if submissive:
+            if the_person.get_opinion_score("being submissive") > 0:
                 "[the_person.possessive_title] obediently takes it all in her mouth. You see some tears in her eyes but she does not object."
                 man_name "That's it, dear. Take it deep. I like the way you do it."
                 man_name2 "Like being face-fucked, don't you , [the_person.name]?"
@@ -849,7 +849,7 @@ label sister_ntr_crisis_action_label:
             "You notice that with one hand [the_person.possessive_title] is rubbing between her legs."
             "After a few more moves there her body shrugs and you hear a moan of pleasure."
             man_name "Don't think I can go on for long, [the_person.name]."
-            $ finish = get_random_from_list(finishes)
+            $ finish = sister_ntr_select_finish(the_person)
             if finish == "facial":
                 "She takes his cock out of her mouth."
                 the_person.char "Hold it, [man_name]! I have a better idea."
@@ -869,7 +869,7 @@ label sister_ntr_crisis_action_label:
                 man_name2 "Our little coed just got her sperm bath. What a view!"
                 the_person.char "I loved that too. Now I go wash my face and then we go back to our books. I don't want to fail this test."
                 "You go back to you room to finally have some sleep."
-                if submissive or the_person.sluttiness > 60:
+                if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from outside the bedroom."
                     the_person.char "Let me take care of you so that you could cum on my face!"
                     man_name "Don't mind if you do, [the_person.name]!"
@@ -900,7 +900,7 @@ label sister_ntr_crisis_action_label:
                 "She gulps and looks up to men with a broad smile."
                 the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of water and then we have to finish the tasks. Don't wanna get bad grade on that test."
                 "You go back to you room to finally have some sleep."
-                if submissive or the_person.sluttiness > 60:
+                if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from outside the bedroom."
                     the_person.char "Mmmmmm... Brhkhmmm..."
                     man_name "Liked that, [the_person.name]? Now drink my hot stuff!"
@@ -917,7 +917,7 @@ label sister_ntr_crisis_action_label:
                 "She grabs his dick and strokes it for a while. Once he reaches an orgasm, [the_person.possessive_title] closes the tip with a hand so that the semen won't stain anything."
                 the_person.char "You have such sweet and tasty cocks, guys! Now I go wash my hands and then we have to study. I need a straight A on that test."
                 "You go back to you room to finally have some sleep."
-                if submissive or the_person.sluttiness > 60:
+                if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from [the_person.possessive_title]'s bedroom."
                     man_name "Suck me again, [the_person.name]. I really loved it."
                     the_person.char "Let me finish this one first and then I will reward you."
@@ -925,10 +925,12 @@ label sister_ntr_crisis_action_label:
                     "Moans go on long into the night..."
                 else:
                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
-
+        $ del man_name2
+    $ finish = None
+    $ position = None
+    $ del man_name
     $ the_person.reset_arousal()
     $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
     $ mc.location.show_background()
     $ renpy.scene("Active")
-    $ del finishes
     return

@@ -171,22 +171,22 @@ label cat_fight_crisis_enhanced_label():
             else: #both >= 40
                 #Girls start pulling clothing off of each other on purpose until one is naked enough to be very embarrassed, then they give up.
                 while the_clothing and loser.outfit.slut_requirement < 80:
-                    $ rand_chance = renpy.random.randint(0,3)
-                    if rand_chance == 0:
+                    $ ran_num = renpy.random.randint(0,3)
+                    if ran_num == 0:
                         "[winner.title] grabs [loser.title] by the [the_clothing.name] and yanks her around. There's a loud rip and the piece of clothing comes free."
                         $ scene_manager.draw_animated_removal(loser, the_clothing)
                         loser.char "You bitch!"
-                    elif rand_chance == 1:
+                    elif ran_num == 1:
                         "[loser.title] circles around [winner.title], then runs forward yelling and screaming. [winner.title] pushes her to the side, then grabs her by the [the_clothing.name] and tries to pull her to the ground."
                         "The girls struggle until [loser.title]'s [the_clothing.name] comes free and they separate. [winner.title] drops it to the ground."
                         $ scene_manager.draw_animated_removal(loser, the_clothing)
                         loser.char "You'll pay for that, slut!"
-                    elif rand_chance == 2:
+                    elif ran_num == 2:
                         "[winner.title] and [loser.title] collide, screaming profanities at each other."
                         "You aren't sure exactly what happens, but when they separate [winner.title] is holding a piece of fabric that use to be [loser.title]'s [the_clothing.name]."
                         $ scene_manager.draw_animated_removal(loser, the_clothing)
                         loser.char "Is that all you've got?"
-                    else: #rand_chance == 3
+                    else: #ran_num == 3
                         "[loser.title] gets an arm around [winner.title]'s waist and pushes her against a desk. The two grapple for a moment, then [winner.title] grabs [loser.title] by the [the_clothing.name] and pulls until the piece of clothing rips off."
                         $ scene_manager.draw_animated_removal(loser, the_clothing)
                         loser.char "Fuck, you're going to pay for that!"
