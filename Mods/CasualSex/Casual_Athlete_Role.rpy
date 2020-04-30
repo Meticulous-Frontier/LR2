@@ -102,6 +102,11 @@ init -1 python:
 
 #*************Mandatory Crisis******************#
 init 1 python:
+    def add_casual_athlete_race_crisis(the_person):
+        casual_athlete_race_crisis.args = [the_person]    # set the current person as action argument
+        mc.business.mandatory_crises_list.append(casual_athlete_race_crisis) #Add race crisis    TODO Find out if this breaks if two girls hit this stage a the same point in gameplay
+        return
+
     casual_athlete_race_crisis = Action("Charity Race", casual_athlete_race_crisis_requirement, "casual_athlete_race_crisis_label")
 
 
@@ -417,8 +422,7 @@ label casual_athlete_phase_two_label(the_person):
         "[the_person.title] seems pretty confident in herself, but you are pretty sure you have good odds in a race."
         "You wave goodbye to [the_person.title], wondering what you've gotten yourself in to."
 
-        $ casual_athlete_race_crisis.args = [the_person]    # set the current person as action argument
-        $ mc.business.mandatory_crises_list.append(casual_athlete_race_crisis) #Add race crisis    TODO Find out if this breaks if two girls hit this stage a the same point in gameplay
+        $ add_casual_athlete_race_crisis(the_person)
 
         $ the_person.event_triggers_dict["athlete_progress"] = 3
     elif the_person.event_triggers_dict.get("athlete_progress", 0) == 3:
@@ -519,14 +523,20 @@ label casual_athlete_race_crisis_label(the_person):
     the_person.char "Yes!!! Oh god, please fuck me good!"
     "You have every intention of doing exactly that."
     call fuck_person(the_person, private=True, start_position = doggy, start_object = make_bed(), skip_intro = True) from _call_casual_sex_mod_CS030
+    $ the_report = _return
+
     $ the_person.clear_situational_slut("Lost Bet")
     "When you finish with her, [the_person.possessive_title] lays down on her bed."
     $ the_person.draw_person(position = "missionary")
-    the_person.char "[the_person.mc_title]... I am so sore... My legs from the race... and... you know..."
-    the_person.char "But that was amazing... Look, I'll be your sexy bitch anytime you want, okay? You have my address now, feel free to stop by. Just promise you'll fuck me like that again."
-    "You laugh."
+    if the_report.get("girl orgasms", 0) > 0:
+        the_person.char "[the_person.mc_title]... I am so sore... My legs from the race... and... you know..."
+        the_person.char "But that was amazing... Look, I'll be your sexy bitch anytime you want, okay? You have my address now, feel free to stop by. Just promise you'll fuck me like that again."
+        "You laugh."
+    else:
+        the_person.char "This was really great... Look, I'll be your sexy bitch anytime you want, okay? You know where I live now, so stop by anytime you feel like it."
+
     mc.name "Sounds good. You have my number, let me know if you wanna hookup sometime, or if you want a rematch!"
-    the_person.char "Ayup! Don't worry. Alright, if its okay with you, I think I'm gonna take a nap..."
+    the_person.char "Ayup! Don't worry. If its all the same to you, I think I'm gonna take a nap now..."
     "You excuse yourself. You grab your clothes and head out. You now know [the_person.title]'s address, with a standing offer to come over and fuck her silly!"
     $ the_person.event_triggers_dict["athlete_progress"] = 4
     $ perk_system.add_stat_perk(Stat_Perk(description = "Training for the big race has helped improve your energy level. +20 max energy, +40 energy cap.", energy_bonus = 20, bonus_is_temp = False, energy_cap = 40), "Athlete Energy Bonus")
