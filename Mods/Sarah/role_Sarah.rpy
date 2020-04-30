@@ -345,6 +345,26 @@ init -1 python:
         HR_director_initial_hire_action = Action("Hire HR Director",HR_director_initial_hire_requirement,"HR_director_initial_hire_label", args = person)
         mc.business.mandatory_crises_list.append(HR_director_initial_hire_action)
 
+    def get_sarah_date_outfit_one():
+        outfit = Outfit("Sarah Date Outfit One")
+        outfit.add_upper(summer_dress.get_copy(), [.95, .7, .87, .95])
+        outfit.add_lower(tiny_lace_panties.get_copy(), [.95, .7, .87, .95])
+        outfit.add_feet(heels.get_copy(), [.95, .7, .87, .95])
+        outfit.add_feet(thigh_highs.get_copy(), [.95, .7, .87, .95])
+        outfit.add_accessory(light_eye_shadow.get_copy(), [.1, .1, .12, .9])
+        outfit.add_accessory(lipstick.get_copy(), [.745, .117, .235, .9])
+        return outfit
+
+    def get_sarah_date_outfit_two():
+        outfit = Outfit("Sarah Date Outfit Two")
+        outfit.add_upper(two_part_dress.get_copy(), [.95, .7, .87, .95])
+        outfit.add_feet(fishnets.get_copy(), [.95, .7, .87, .95])
+        outfit.add_feet(pumps.get_copy(), [.95, .7, .87, .95])
+        outfit.add_accessory(heavy_eye_shadow.get_copy(), [.1, .1, .12, .9])
+        outfit.add_accessory(light_eye_shadow.get_copy(), [.1, .1, .12, .9])
+        outfit.add_accessory(lipstick.get_copy(), [.745, .117, .235, .8])
+        return outfit
+
 
 label Sarah_intro_label():
     $ the_person = sarah
@@ -446,7 +466,8 @@ label Sarah_hire_label():
 
 label Sarah_third_wheel_label():
     $ the_person = sarah
-    #TODO going out outfit
+    $ the_person.apply_outfit(get_sarah_date_outfit_one())
+
     "By yourself on the weekend at work, you get up for a minute and decide to stretch your legs and walk the hallways for a bit."
     "As you pass by the HR offices, you notice the HR Director's office door is open and the light is on. You decide to investigate."
     $ scene_manager = Scene() # make sure we have a clean scene manager
@@ -524,6 +545,7 @@ label Sarah_third_wheel_label():
     the_person.char "Oh! That sounds great! Can you get me an appletini?"
     "As you start to get up, [sarah_friend.title]'s boyfriend also excuses himself to the restroom, leaving the girls alone."
     "It takes a few minutes to get the attention of the bartender. You order the drink for [the_person.title] and get yourself a nice bourbon, straight."
+    $ mc.business.change_funds(-20)
     $ scene_manager.update_actor(the_person, position = "sitting", emotion = "sad")
     "When you come back to the table, you notice that [the_person.possessive_title] is looking down at the table and looks upset about something."
     mc.name "Hey! Here's your drink... are you okay?"
@@ -575,11 +597,10 @@ label Sarah_third_wheel_label():
     the_person.char "Thank you for... I mean, everything you've done for me. You gave me a job, you let me drag you out to a bar with strangers, and then stuck with me even when you probably shouldn't have..."
     mc.name "You're crazy. It's not everyday a long last childhood friend literally knocks on your front door."
     the_person.char "You've always been amazing to me. I should have known better."
-    $ the_person.change_happiness(20)
-    $ the_person.change_obedience(10)
-    $ the_person.change_love(10)
+    $ the_person.change_stats(happiness = 20, obedience = 10, love = 10)
     "She takes a long sip of her drink. You begin to chat and catch up a bit."
     $ scene_manager.update_actor(the_person, position = "sitting")
+    $ mc.business.change_funds(-100)
     "You spend several hours with [the_person.title] sitting in a secluded booth catching up. After multiple appletinis and whiskeys, you are both feeling pretty good."
     the_person.char "Well, I suppose it is getting pretty late. You have no idea how great this was. I don't want to say goodbye yet..."
     "[the_person.title] thinks for a moment."
@@ -618,7 +639,8 @@ label Sarah_third_wheel_label():
 
 label Sarah_get_drinks_label():
     $ the_person = sarah
-    #TODO going out outfit
+    $ the_person.apply_outfit(get_sarah_date_outfit_one())
+
     "Lost in thought as you get your work done in the silence of the weekend, a sudden voice startles you."
     the_person.char "[the_person.mc_title]! I figured I'd find you around here on a Saturday again!"
     "You look up to see the now familiar face of [the_person.title] standing in the doorway."
@@ -690,6 +712,7 @@ label Sarah_get_drinks_label():
     $ scene_manager.update_actor(the_person, position = "walking_away")
     "She walks off to the booth while you head up to the bar."
     "You order your drinks with the bartender. If you wanted to, now would be a good time to slip a serum into her drink..."
+    $ mc.business.change_funds(-20)
     menu:
         "Slip in a serum":
             "After you get the drinks, you carefully add a serum to it."
@@ -722,6 +745,7 @@ label Sarah_get_drinks_label():
         mc.name "That sounds great, I'll meet you over there."
         $ scene_manager.update_actor(the_person, position = "walking_away")
         "[the_person.possessive_title] gets up and walks over to the dart boards while you grab a couple more drinks."
+        $ mc.business.change_funds(-20)
         "You feel like, so far at least, this date is going pretty well!"
         $ scene_manager.update_actor(the_person, position = "stand4")
         "You walk over to [the_person.title], drinks in hand. You hand her a drink."
@@ -754,6 +778,7 @@ label Sarah_get_drinks_label():
     $ scene_manager.update_actor(the_person, position = "stand4", emotion = "happy")
     the_person.char "Oh! That sounds great! I'll get it setup!"
     "You walk over to the bartender and order another round. You walk back to the dart board and give [the_person.possessive_title] her drink."
+    $ mc.business.change_funds(-20)
     the_person.char "Thanksh! I love these things..."
     "You notice her speech is starting to get a little slurred... You bet as you feed her drinks, she may have trouble focusing on the game."
     $ scene_manager.update_actor(the_person, position = "walking_away")
@@ -785,6 +810,7 @@ label Sarah_get_drinks_label():
     the_person.char "Another drink! I'm loooooveeeee going out with you, [the_person.mc_title]! You know how to keep the drinksh flowing!"
     mc.name "Haha, okay, let me go grab us another round."
     "You walk over to the bartender and order another round. You walk back to the dart board and give [the_person.possessive_title] her drink."
+    $ mc.business.change_funds(-20)
     the_person.char "OKAY, so, I've had a great warm up now, but I think for this next round, we should make it a littler more... intereshting."
     mc.name "Oh? What did you have in mind?"
     the_person.char "I think, whoever losses... HA thats a funny word... anyway whoever is the loser, should hafta walk the winner home!"
@@ -1120,20 +1146,18 @@ label Sarah_catch_stealing_label():
 label Sarah_epic_tits_label():
     python:
         the_person = sarah
-        sarah.tits = "F"
-        sarah.event_triggers_dict["epic_tits_progress"] = 3
-        the_person.change_slut_core(10)
-        the_person.change_slut_temp(10)
+        the_person.tits = "F"
+        the_person.event_triggers_dict["epic_tits_progress"] = 3
+        the_person.change_stats(slut_temp = 10, slut_core = 10)
     call Sarah_tits_reveal_label() from Sarah_epic_tits_call_1
     return
 
 label Sarah_new_tits_label():
     python:
         the_person = sarah
-        sarah.tits = "D"
-        sarah.event_triggers_dict["epic_tits_progress"] = 2
-        the_person.change_slut_core(5)
-        the_person.change_slut_temp(5)
+        the_person.tits = "D"
+        the_person.event_triggers_dict["epic_tits_progress"] = 2
+        the_person.change_stats(slut_temp = 5, slut_core = 5)
     call Sarah_tits_reveal_label() from Sarah_new_tits_call_1
     return
 
@@ -1948,13 +1972,12 @@ label Sarah_initial_threesome_label():
         "You text her back."
         mc.name "Actually, I haven't been able to talk to her yet. I'm sorry, It'll be ready next week."
         sarah.char "Okay..."
-        $ sarah.change_happiness(-10)
-        $ sarah.change_love(-3)
+        $ sarah.change_stats(happiness = -10, love = -3)
         $ add_sarah_initial_threesome_action()
         return
 
     $ the_person_one = sarah
-    $ the_person_two = sarah.event_triggers_dict.get("initial_threesome_target", None)
+    $ the_person_two = sarah.event_triggers_dict.pop("initial_threesome_target") # get and remove from dictionary
     $ scene_manager = Scene()
 
     if the_person_two == None:
@@ -2082,15 +2105,13 @@ label Sarah_ask_for_baby_label():
     the_person.char "Well, [the_person.mc_title], it's been like a dream, having you back in my life like this. Things are amazing, being with you."
     the_person.char "I've been, well, tracking my cycles recently and, well, basically, I'm fertile right now."
     "You can feel your cock twitch in your pants. You imagine [the_person.possessive_title], knocked up, her tits swelling with milk and her belly growing..."
-    the_person.char "Everytime you finish inside me, I find myself thinking about it, more and more, what it would be like to get pregnant and have a baby with you."
+    the_person.char "Every time you finish inside me, I find myself thinking about it, more and more, what it would be like to get pregnant and have a baby with you."
     the_person.char "Look, you don't have to answer me right now, but, I thought maybe we could try and have a baby. Together?"
     "This is quite a twist! You weren't expecting this so soon, but you have to admit that the thought is exciting..."
     menu:
         "Try for a baby":
             mc.name "Honestly, I didn't realize this was something you were thinking about. But I would love to make a baby with you!"
-            $ the_person.change_happiness(15)
-            $ the_person.change_happiness(20)
-            $ the_person.change_obedience(10)
+            $ the_person.change_stats(happiness = 15, obedience = 10)
             the_person.char "Oh! Wow, I honestly... I thought you we're gonna say no! This is... I can't believe it."
             "She looks up at you, and you can see the changes in her facial expression. She goes from surprised, to happy, to sultry."
             the_person.char "So umm, like I was saying, I'm pretty sure I'm actually fertile right now..."
@@ -2108,7 +2129,7 @@ label Sarah_ask_for_baby_label():
             call Sarah_fertile_period_start_label(the_person) from sarah_initial_fertile_period_start_01
             #TODO create mandatory event for starting fertility period. Stores creampies before fertility period. Then second mandatory event at the end of the fertility period determines if pregnant based on # of creampies and RNG
             call fuck_person(the_person, start_position = missionary, start_object = bedroom.get_object_with_name("bed"), skip_intro = False, girl_in_charge = False, position_locked = True) from _sarah_ask_for_baby_01
-            if sarah.outfit.has_creampie_cum():
+            if the_person.outfit.has_creampie_cum():
                 the_person.char "Oh my god... we actually did it..."
                 "She grabs an extra pillow and puts it under her butt so her hips are elevated."
                 the_person.char "I'm just going to lay her like this for a bit, you know. Keep that seed nice and deep."
@@ -2338,7 +2359,7 @@ label watch_strip_show(the_person):  #This scene assumes scene manager is runnin
                 finished = False
             else:
                 finished_chance += 5
-                renpy.pause()
+                renpy.pause(1)
     if showgirl.outfit.vagina_visible():
         "As she finishes, the showgirl gives one more pose, showing off her exposed ass to the crowd."
         $ scene_manager.update_actor(showgirl, position = "standing_doggy")
@@ -2487,8 +2508,9 @@ label play_darts_301(the_person, focus_mod = 0): #Label returns true if mc wins,
 
 label Sarah_weekend_surprise_crisis_label():
     $ the_person = sarah
+    $ the_person.apply_outfit(get_sarah_date_outfit_two())
     $ scene_manager = Scene()
-    #TODO going out outfit
+
     "Lost in thought as you get your work done in the silence of the weekend, a sudden voice startles you."
     the_person.char "[the_person.mc_title]! Working away your weekend again I see!"
     "You look up to see the now familiar face of [the_person.title] standing in the doorway."
@@ -2577,6 +2599,7 @@ label Sarah_weekend_date_grab_drinks_label():
     the_person.char "Oh! I think I see a booth over there."
     mc.name "Perfect, go grab it while I get the first round."
     "You wander over to the bar and buy drinks for you and [the_person.possessive_title]. You make sure to get her favorite, the [favorite_drink]."
+    $ mc.business.change_funds(-20)
     "If you wanted to, now would be a good time to slip a serum into her drink..."
     menu:
         "Slip in a serum":
@@ -2608,6 +2631,7 @@ label Sarah_weekend_date_grab_drinks_label():
                     $ scene_manager.update_actor(the_person, position = "sitting")
                 else:
                     "You wander over to the bar and buy drinks for you and [the_person.possessive_title]. You make sure to get her favorite, the [favorite_drink]."
+                    $ mc.business.change_funds(-20)
                     "You come back to the booth with the drinks."
                     the_person.char "Yum! Thank you!"
                 "You sit with [the_person.title], enjoying your drinks while chatting."
