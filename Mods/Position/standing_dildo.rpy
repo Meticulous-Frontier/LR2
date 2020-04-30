@@ -16,7 +16,8 @@ init:
             opinion_tags = ["being fingered"],
             default_animation = blowjob_bob,
             associated_taboo = "touching_vagina")
-        list_of_positions.append(standing_dildo)
+        # don't add to list of positions, you need to unlock it ;)
+        #list_of_positions.append(standing_dildo)
 
 
 label intro_standing_dildo(the_girl, the_location, the_object):
