@@ -743,7 +743,19 @@ label starbuck_sex_store_promo_one_label(the_person):
             "You are still recovering from your orgasm. You take a look at her phone and start looking at the pictures you got."
             the_person.char "If this advertisement works, we'll have to make more right?"
             mc.name "Definitely. Alright, I'll go ahead and get some advertisements done, and we'll see if we can't get better foot traffic in here."
-            "You say goodbye to [the_person.possessive_title] and head out. With pictures like these, you are sure the business here will increase."
+            if perk_system.has_item_perk("Dildo"):
+                pass
+            else:
+                "[the_person.possessive_title] looks at the dildo she was modeling for a few minutes ago."
+                the_person.char "Hey... I probably shouldn't sell this in the store anymore. Do you want it?"
+                "You consider... what would you need a dildo for?"
+                the_person.char "I know you may not use it on yourself, but, you never know when a toy like this can spice up an encounter."
+                mc.name "That's true. Sure, I'm sure I could find a use for it."
+                $ dildo_unlock()
+                "You are now the proud owner of a dildo."
+                the_person.char "Maybe even use it on me sometime..."
+            "You say goodbye to [the_person.possessive_title] and head out. You look through the pictures again."
+            "With pictures like these, you are sure the business here will increase."
         "Give her some privacy":
             "You decide to give her some time to yourself. You use her phone to forward all the pictures you took to your account."
             mc.name "Okay, those should be good. I'll go ahead and get some advertisements done, and we'll see if we can't get better traffic in here."
