@@ -95,6 +95,20 @@ init -1 python:
     # add follow_mc attribute to person class (without sub-classing)
     Person.identifier = property(get_person_identifier, set_person_identifier, del_person_identifier, "Unique identifier for person class.")
 
+    def get_person_next_day_outfit(self):
+        if not hasattr(self, "_next_day_outfit"):
+            self._next_day_outfit = None
+        return self._next_day_outfit
+
+    def set_person_next_day_outfit(self, value):
+        self._next_day_outfit = value
+
+    def del_person_next_day_outfit(self):
+        del self._next_day_outfit
+
+    # add follow_mc attribute to person class (without sub-classing)
+    Person.next_day_outfit = property(get_person_next_day_outfit, set_person_next_day_outfit, del_person_next_day_outfit, "Allow for forcing the next day outfit a girl will wear (set planned outfit).")
+
     ## MATCH SKIN COLOR
     # Matches skin, body, face and expression images based on input of skin color
     def match_skin(self, color):
@@ -453,7 +467,11 @@ init -1 python:
         self.sexed_count = 0 #Reset the counter for how many times you've been seduced, you might be seduced multiple times in one day!
 
         if time_of_day == 0: #It's a new day, get a new outfit out to wear!
-            self.planned_outfit = self.wardrobe.decide_on_outfit2(self)
+            if self.next_day_outfit:
+                self.planned_outfit = self.next_day_outfit
+                self.next_day_outfit = None
+            else:
+                self.planned_outfit = self.wardrobe.decide_on_outfit2(self)
             self.apply_outfit(self.planned_outfit)
             self.planned_uniform = None
 
