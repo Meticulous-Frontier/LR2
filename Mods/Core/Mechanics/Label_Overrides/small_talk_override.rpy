@@ -45,22 +45,20 @@ init 5 python:
 label small_talk_person_enhanced(person):
     python:
         mc.change_energy(-15)
-        smalltalk_opinion = person.get_opinion_score("small talk")
         renpy.say(mc.name, "So [person.title], what's been on your mind recently?")
         person.discover_opinion("small talk")
-        successful_smalltalk = 60 + (smalltalk_opinion * 20) + (mc.charisma * 5)
+        successful_smalltalk = 60 + (person.get_opinion_score("small talk") * 20) + (mc.charisma * 5)
 
     # TODO: Add a chance that she wants to talk about someone she knows.
     if renpy.random.randint(0,100) < successful_smalltalk:
-        if smalltalk_opinion >= 0:
+        if person.get_opinion_score("small talk") >= 0:
             $ person.draw_person(emotion = "happy")
             "She seems glad to have a chance to take a break and make small talk with you."
         else:
             "She seems uncomfortable with making small talk, but after a little work you manage to get her talking."
 
         python:
-            casual_sex_talk = person.effective_sluttiness() > 50
-            opinion_learned = person.get_random_opinion(include_known = True, include_sexy = casual_sex_talk)
+            opinion_learned = person.get_random_opinion(include_known = True, include_sexy = person.effective_sluttiness() > 50)
             talk_opinion_text = opinion_learned
             if opinion_learned in opinions_talk_mapping:
                 talk_opinion_text = opinions_talk_mapping[opinion_learned]
@@ -71,13 +69,10 @@ label small_talk_person_enhanced(person):
 
             "The two of you chat pleasantly for half an hour."
             person.char "So [person.mc_title], I'm curious what you think about about [opinion_learned]. Do you have any opinions on it?"
-            $ love_gain = 4
-            $ prediction = 0
 
             call screen main_choice_display([build_opinion_smalltalk_list(talk_opinion_text, opinion_state)])
-            $ prediction = _return            
 
-            $ prediction_difference = abs(prediction - opinion_state[0])
+            $ prediction_difference = abs(_return - opinion_state[0])
             if prediction_difference == 4: #as wrong as possible
                 person.char "Really? Wow, we really don't agree about [opinion_learned], that's for sure."
             elif prediction_difference == 3:
@@ -95,26 +90,26 @@ label small_talk_person_enhanced(person):
                 $ person.discover_opinion(opinion_learned)
                 "You listen while [person.possessive_title] talks and discover that she [opinion_string] [opinion_learned]."
 
-            $ person.change_love(love_gain - prediction_difference)
+            if person.love < 40:    # cap smalltalk bonus to 40 love
+                $ person.change_love(2 - prediction_difference)
 
         else:
             "You and [person.possessive_title] chat for a while. You don't feel like you've learned much about her, but you both enjoyed talking."
 
-        $ smalltalk_bonus = smalltalk_opinion + 1
-        $ person.change_happiness(smalltalk_bonus)
-        if smalltalk_opinion >= 0:
+        $ person.change_happiness(person.get_opinion_score("small talk") + 1)
+        if person.get_opinion_score("small talk") >= 0:
             person.char "It was nice chatting [person.mc_title], we should do it more often!"
         else:
             person.char "So uh... I guess that's all I have to say about that..."
             "[person.char] trails off awkwardly."
     else:
-        if smalltalk_opinion < 0:
+        if person.get_opinion_score("small talk") < 0:
             person.char "Oh, not much."
-            $ person.change_happiness(smalltalk_opinion)
+            $ person.change_happiness(person.get_opinion_score("small talk"))
             "You try and keep the conversation going, but making small talk with [person.title] is like talking to a wall."
         else:
             person.char "Oh, not much honestly. How about you?"
-            $ person.change_happiness(smalltalk_opinion)
+            $ person.change_happiness(person.get_opinion_score("small talk"))
             "[person.possessive_title] seems happy to chitchat, and you spend a couple of hours just hanging out."
             "You don't feel like you've learned much about her, but least she seems to have enjoyed talking."
 
