@@ -90,8 +90,7 @@ label small_talk_person_enhanced(person):
                 $ person.discover_opinion(opinion_learned)
                 "You listen while [person.possessive_title] talks and discover that she [opinion_string] [opinion_learned]."
 
-            if person.love < 40:    # cap smalltalk bonus to 40 love
-                $ person.change_love(2 - prediction_difference)
+            $ person.change_love(2 - prediction_difference, max_modified_to = 35)
 
         else:
             "You and [person.possessive_title] chat for a while. You don't feel like you've learned much about her, but you both enjoyed talking."
