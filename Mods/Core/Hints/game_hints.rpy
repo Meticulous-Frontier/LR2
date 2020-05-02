@@ -32,6 +32,9 @@ init -1 python:
     game_hints.append(Hint("Research Mastered", "Your development effort is directed at a well researched component, your efforts might be better spent on something else.", "mc.business.active_research_design and isinstance(mc.business.active_research_design, SerumTrait) and mc.business.active_research_design.mastery_level >= 2 and mc.business.active_research_design.get_effective_side_effect_chance() < 5", "mc.business.active_research_design and isinstance(mc.business.active_research_design, SerumTrait) and mc.business.active_research_design.get_effective_side_effect_chance() > 5"))
     game_hints.append(Hint("Advance Research", "You have researched all traits for your current research level, talk to your head researcher about advancing your research to the next level.", "mc.business.research_tier < 3 and researched_all_at_level()", "not researched_all_at_level()"))
 
+    # Hint for Dungeon
+    game_hints.append(Hint("Build Dungeon", "When you work in you company during the weekend, you might have a good idea.", "not dungeon.visible and day > 24 and mc.business.funds > 20000", "not exists_in_mandatory_crisis_list('dungeon_intro_label')"))
+
     # DEBUG HINTS (for fitting an positioning)
     # game_hints.append(Hint("Always Visible Hint", "This hint is always visible in the hint list.", "True", "False"))
     # hints with long text
