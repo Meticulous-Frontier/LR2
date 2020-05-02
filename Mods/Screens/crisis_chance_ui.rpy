@@ -13,24 +13,33 @@ screen crisis_chance_setting(disabled, morning_disabled):
         xalign 0.5
 
         vbox:
+            yalign 0
+            xalign .5
+            text "Crisis Event Chance" style "textbutton_text_style"
+
+
+        vbox:
             yalign 0.1
+            xalign .5
             text "Crisis Event [[Total: " + str(len(crisis_list) - disabled) + "]" style "textbutton_text_style"
             hbox:
-                bar value ScreenVariableValue("current_crisis_base_chance", 100.0, step = 1.0) range 100 xsize 800 ysize 45 style style.slider
+                bar value ScreenVariableValue("current_crisis_base_chance", 100, step = 1) range 100 xsize 800 ysize 45 style style.slider
                 yalign 1.0
                 text str(int(current_crisis_base_chance)) + "%" style "menu_text_style"
 
         vbox:
             yalign 0.5
+            xalign .5
             text "Morning Crisis Event [[Total: " + str(len(morning_crisis_list) - morning_disabled) + "]" style "textbutton_text_style"           
             hbox:
-                bar value ScreenVariableValue("current_morning_crisis_base_chance", 100.0, step = 1.0) range 100 xsize 800 ysize 45 style style.slider
+                bar value ScreenVariableValue("current_morning_crisis_base_chance", 100, step = 1) range 100 xsize 800 ysize 45 style style.slider
                 yalign 1.0
                 text str(int(current_morning_crisis_base_chance)) + "%" style "menu_text_style"
 
         hbox:
             yalign 0.7
-            xsize 900
+            xalign .5
+            xsize 800
             text "{size=16}Warning: high values will increase the chance of an event to occur on every time advance in the game." style "warning_text"
 
         hbox:
