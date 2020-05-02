@@ -72,7 +72,7 @@ label business_meeting_action_label:
     $ the_person.reset_arousal()
     $ mc.location.show_background()
     $ renpy.scene("Active")
-    return "Advance Time"
+    return
 
 label business_meeting_introduction(the_person):
     the_person.char "Hello [the_person.mc_title], thank you for meeting me on such short notice."

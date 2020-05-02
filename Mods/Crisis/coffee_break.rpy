@@ -24,7 +24,7 @@ label coffee_break_action_label:
         del person_two
         del person_three
         mc.location.show_background()
-    return "Advance Time"
+    return
 
 label coffee_break_chit_chat_label(person_one, person_two, person_three):
     python:
@@ -132,4 +132,4 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
     # clear scene
     $ mc.location.show_background()
     $ scene_manager.clear_scene()
-    return "Advance Time"
+    return

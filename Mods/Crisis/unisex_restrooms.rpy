@@ -435,7 +435,7 @@ label unisex_restroom_gloryhole_handjob_label(the_person):
     $ the_person.change_happiness(2, add_to_log = False)
 
     $ del anon_char
-    return "Advance Time"
+    return
 
 label unisex_restroom_gloryhole_blowjob_label(the_person):
     $ anon_char = get_anon_person(the_person)
@@ -475,7 +475,7 @@ label unisex_restroom_gloryhole_blowjob_label(the_person):
     $ the_person.change_happiness(3, add_to_log = False)
 
     $ del anon_char
-    return "Advance Time"
+    return
 
 label unisex_restroom_gloryhole_vaginal_label(the_person):
     $ anon_char = get_anon_person(the_person)
@@ -521,7 +521,7 @@ label unisex_restroom_gloryhole_vaginal_label(the_person):
     $ the_person.change_happiness(5, add_to_log = False)
 
     $ del anon_char
-    return "Advance Time"
+    return
 
 label unisex_restroom_gloryhole_anal_label(the_person):
     $ anon_char = get_anon_person(the_person)
@@ -568,7 +568,7 @@ label unisex_restroom_gloryhole_anal_label(the_person):
     $ the_person.change_happiness(7, add_to_log = False)
 
     $ del anon_char
-    return "Advance Time"
+    return
 
 label unisex_restroom_gloryhole_joinme_label(the_person):
     $ anon_char = get_anon_person(the_person)
@@ -638,4 +638,4 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
 
 
     $ del anon_char
-    return "Advance Time"
+    return

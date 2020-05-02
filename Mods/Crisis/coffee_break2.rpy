@@ -26,7 +26,7 @@ label coffee_break2_action_label:
         del person_one
         del person_two
         del person_three
-    return "Advance Time"
+    return
 
 label coffee_break2_food_delivery_label(person_one, person_two, person_three):
     python:
@@ -211,4 +211,4 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
         del winner_two
         del loser
         scene_manager.clear_scene()
-    return "Advance Time"
+    return
