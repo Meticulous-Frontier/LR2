@@ -1,10 +1,6 @@
 # Just a small function so you don't have to write the full path every time you make a room.
 # For background images just input bgImage("Background_Name")
 init -2 python:
-    build.archive("background_images") #When building all mod background images are placed into an archive.
-    build.classify("game/Mods/Room/images/**.jpg", "background_images")
-    build.classify("game/Mods/Room/images/**.png", "background_images")
-
     def darken_background(image):
         return im.MatrixColor(image, im.matrix.saturation(0.9)*im.matrix.tint(.9,.9,.9)*im.matrix.brightness(-0.15))
 
