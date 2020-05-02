@@ -1593,7 +1593,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         "You chat for a few minutes, enjoying the warmth of her bed, until she gets up."
         $ the_person.draw_person(position = "stand3")
         the_person.char "I'm gonna go hop in the shower. Feel free to let yourself out! Thanks for spending the night [the_person.mc_title]!"
-        "[the_person.title]heads to the bathroom. You grab your stuff and head out."
+        "[the_person.title] heads to the bathroom. You grab your stuff and head out."
     $ the_person.apply_outfit(the_person.wardrobe.decide_on_outfit(40))
     $ renpy.scene("Active")
     return "Advance Time"
