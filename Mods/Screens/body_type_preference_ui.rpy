@@ -4,9 +4,17 @@ init 2 python:
 
     def get_random_body_type():
         list_of_weighted_body_types = []
-        list_of_weighted_body_types.append(["thin_body", persistent.thin_body or 75])
-        list_of_weighted_body_types.append(["standard_body", persistent.normal_body or 20])
-        list_of_weighted_body_types.append(["curvy_body", persistent.curvy_body or 5])
+        if persistent.thin_body or 75 > 0:
+            list_of_weighted_body_types.append(["thin_body", persistent.thin_body or 75])
+        if persistent.normal_body or 20 > 0:
+            list_of_weighted_body_types.append(["standard_body", persistent.normal_body or 20])
+        if persistent.curvy_body or 5 > 0:
+            list_of_weighted_body_types.append(["curvy_body", persistent.curvy_body or 5])
+        if len(list_of_weighted_body_types) == 0:
+            list_of_weighted_body_types.append(["thin_body", 1])
+            list_of_weighted_body_types.append(["standard_body", 1])
+            list_of_weighted_body_types.append(["curvy_body", 1])
+
         return get_random_from_weighted_list(list_of_weighted_body_types)
 
     change_body_type_action = Action("Change Body Type Preference", change_body_type_requirement, "show_body_type_preference_ui", menu_tooltip = "Change the chance a certain body type will be generated for a random person.")
