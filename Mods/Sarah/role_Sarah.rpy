@@ -530,8 +530,8 @@ label Sarah_third_wheel_label():
     $ mc.location.show_background()
 
     $ sarah_friend = make_person(tits = "F", force_random = True) #TODO figure out how to properly delete this character later
-    $ sarah_friend.title = sarah_friend.name
-    $ sarah_friend.mc_title = mc.name
+    $ sarah_friend.set_title(sarah_friend.name)
+    $ sarah_friend.set_mc_title(mc.name)
     "When you get to the bar, [the_person.title] quickly spots her friend and leads you over to the table."
     $ scene_manager.update_actor(the_person, position = "sitting")
     $ scene_manager.add_actor(sarah_friend, position = "sitting", character_placement = character_left_flipped)
@@ -561,7 +561,7 @@ label Sarah_third_wheel_label():
     sarah_friend.char "What do you say we get out of here? Like back to my place?"
     mc.name "That sounds pretty good actually. [the_person.name] will be excited to hear that I think."
     sarah_friend.char "Ha! No no, I mean, just you. [the_person.name] is a good friend but..."
-    mc.name "but?"
+    mc.name "But?"
     if sarah.event_triggers_dict.get("epic_tits_progress", 0) < 2:
         sarah_friend.char "My boyfriend... he just isn't attracted to her. I mean, have you seen her chest? Like, neither have we!"
         "You feel yourself getting angry at her crude remarks."
