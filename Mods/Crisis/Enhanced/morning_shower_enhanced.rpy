@@ -1,6 +1,12 @@
 init 5 python:
     config.label_overrides["morning_shower_label"] = "morning_shower_enhanced_label"
 
+    def apply_towel_outfit(person):
+        towel_outfit = Outfit("Towel")
+        towel_outfit.add_dress(towel.get_copy()) #TODO: Decide if we want a head towel here, maybe just for mom or just for Lily
+        person.apply_outfit(towel_outfit)
+        return
+
 label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt's place.
     # You wake up and go to take a shower, lily or your mom are already in there.
     "You wake up in the morning uncharacteristically early feeling refreshed and energized. You decide to take an early shower to kickstart the day."
@@ -13,8 +19,6 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
         return
 
     "You head to the bathroom, but hear the shower already running inside when you arrive."
-    $ towel_outfit = Outfit("Towel")
-    $ towel_outfit.add_dress(towel.get_copy()) #TODO: Decide if we want a head towel here, maybe just for mom or just for Lily
 
     menu:
         "Skip your shower":
@@ -36,7 +40,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
 
         "Peek Inside":
             $ home_shower.show_background()
-            $ the_person.apply_outfit(towel_outfit)
+            $ apply_towel_outfit(the_person)
             $ the_person.draw_person(position = "walking_away")
             "You see [the_person.possessive_title] is standing in front of a mirror, getting ready for a shower, undressing herself."
 
@@ -115,7 +119,6 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
 
     $ the_person.apply_outfit(the_person.planned_outfit)
     $ mc.location.show_background()
-    $ towel_outfit = None
     $ renpy.scene("Active")
     return
 
@@ -175,7 +178,7 @@ label girl_shower_enter_enhanced(the_person):
             $ the_person.update_outfit_taboos()
             "Soon enough she's finished. She steps out and grabs a towel, but leaves the shower running for you."
 
-            $ the_person.apply_outfit(towel_outfit)
+            $ apply_towel_outfit(the_person)
             $ the_person.draw_person()
             the_person.char "There you go. Enjoy!"
             $ renpy.scene("Active")
@@ -203,7 +206,7 @@ label girl_shower_enter_enhanced(the_person):
                 "She wiggles her butt and strokes your tip against her cheeks."
                 $ the_person.change_slut_temp(3 + the_person.get_opinion_score("showing her ass"))
                 "She steps out of the shower and grabs a towel."
-                $ the_person.apply_outfit(towel_outfit)
+                $ apply_towel_outfit(the_person)
                 $ the_person.draw_person()
                 the_person.char "See you next time."
                 $ renpy.scene("Active")
@@ -233,7 +236,7 @@ label girl_shower_enter_enhanced(the_person):
                         call fuck_person(the_person, skip_intro = True) from _call_fuck_person_shower_enhanced_1
                         $ the_report = _return
 
-                        $ the_person.apply_outfit(towel_outfit)
+                        $ apply_towel_outfit(the_person)
                         $ the_person.draw_person()
                         "When you're finished [the_person.title] steps out of the shower and grabs a towel. She dries herself off, then wraps herself in it then turns to you."
                         if the_report.get("girl orgasms",0)>0:
