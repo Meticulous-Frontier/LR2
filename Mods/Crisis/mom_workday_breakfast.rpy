@@ -11,18 +11,18 @@ init -1 python:
 init 2 python:
     def mom_breakfast_crisis_requirement():
         if mc_at_home() and time_of_day == 0:
-            if day % 7 == 5 or day % 7 == 6: #Checks to see if it is saturday or sunday.
+            if day % 7 == 5 or day % 7 == 6: #Not on saturday or sunday.
                 return False
             return True
         return False
 
     def mom_commando_day_selfie_requirement():
-        if time_of_day == 2: #It is the end of the day on friday
+        if time_of_day == 2: #It is the end of the day
             return True
         return False
 
     def mom_breakfast_mod_initialization(self):
-        pass #???? Do I need something here? TODO
+        # No Init code for this yet.
         return
 
     shower_crisis_action = ActionMod("Breakfast with Mom", mom_breakfast_crisis_requirement,"mom_breakfast_action_label", initialization = mom_breakfast_mod_initialization,
@@ -61,7 +61,7 @@ label mom_breakfast_action_label():
             call mom_breakfast_action_label_high() from _call_mom_breakfast_action_label_high
 
     $ scene_manager.clear_scene()
-    return
+    return _return
 
 label mom_breakfast_action_label_low():
     "She wrinkles her nose for a second and then looks up at you."
@@ -93,7 +93,7 @@ label mom_breakfast_action_label_low():
     "You and [the_person.title] chat for a while longer, until you finish with your breakfast."
     mc.name "Thanks for the great breakfast! I'll see you tonight after work!"
     "You say goodbye to her and head out for the day."
-    return
+    return "Advance Time"
 
 label mom_breakfast_action_label_medium():
     "She wrinkles her nose for a second and then looks up at you."
@@ -115,7 +115,7 @@ label mom_breakfast_action_label_medium():
             $ the_person.change_stats(slut_temp = 10, obedience = 5)
             if the_person.sluttiness > 50:
                 $ mc.business.mandatory_crises_list.append(mom_commando_day_selfie_action)
-            return
+            return None
         "Give Her Some Attention":  #Sluttiness staircase event, take it farther the sluttier she is
             mc.name "I'm sorry [the_person.title], I didn't realize you were in need of some attention!"
             "You get up from your chair and walk around behind [the_person.possessive_title]"
@@ -133,7 +133,7 @@ label mom_breakfast_action_label_medium():
 
                 "Finish Massage":
                     "You work on her shoulders for a while. She sighs in relaxation. You finish up and go back to your breakfast."
-                    return
+                    return None
             if the_person.outfit.tits_available():
                 "This skin of [the_person.possessive_title]'s creamy tits feels hot and soft in your hands."
             else:
@@ -148,7 +148,7 @@ label mom_breakfast_action_label_medium():
                     "Finish Massage":
                         "[the_person.possessive_title] feel great, but eventually you decide it is too risky to keep going."
                         "[the_person.title] shakes her head a bit as you sit back down, as if trying to clear some thoughts from her head."
-                        return
+                        return None
             #Assume we are still going
             "She arches her back as the pleasurable feeling of having her tits played with begins to grow."
             $ the_person.change_arousal(20) #35
@@ -174,14 +174,14 @@ label mom_breakfast_action_label_medium():
                             mc.name "Don't want to go to far, [lily.name] could walk out at any moment..."
                             "She shakes her head for a moment, trying to clear her thoughts, but it is obvious her mind continues to dwell on how it could go if you had kept going..."
                             $ the_person.change_stats(obedience = 10, slut_temp = 3)
-                            return
+                            return "Advance Time"
                     pass
                 "Finish Massage":
                     "You pinch and pull at her nipples for a few more minutes, but eventually you decide just to tease her for now."
                     "[the_person.title] looks at you as you sit down, arousal clear in her eyes."
                     mc.name "Don't want to go to far, [lily.name] could walk out at any moment..."
                     $ the_person.change_stats(obedience = 5, slut_temp = 3)
-                    return
+                    return "Advance Time"
                 "Finger Her" if the_person.sluttiness > 60 and the_person.outfit.vagina_available():
                     "You whisper in her ear."
                     mc.name "I've got a better idea."
@@ -216,7 +216,7 @@ label mom_breakfast_action_label_medium():
             the_person.char "Oh my..."
             $ scene_manager.update_actor(mom, position = "walking_away")
             "[the_person.title] turns and leaves the kitchen in a hurry. You quickly finish breakfast and head out as well."
-    return
+    return "Advance Time"
 
 label mom_breakfast_action_label_high():
     "She wrinkles her nose for a second and then looks up at you."
@@ -246,7 +246,7 @@ label mom_breakfast_action_label_high():
             "Finished with her breakfast, [the_person.title] gets up from the table and excuses herself."
             $ scene_manager.update_actor(mom, position = "walking_away")
             the_person.char "Have a good day at work, I'm gonna go get ready for the day!"
-            return
+            return "Advance Time"
         
         "Long Day Ahead":
             mc.name "I'm sorry [the_person.title], but I have a long day scheduled today. I think I had better save my energy!"
@@ -254,7 +254,7 @@ label mom_breakfast_action_label_high():
             $ the_person.change_stats(happiness = -5, obedience = 5)
             the_person.char "That's okay, I understand. Well don't forget, dinner will be the usual time tonight. Maybe we can do something after that?"
             "You give her a non-committal shrug. The tension at the table is a little much, so you quickly finish your breakfast and head out."
-            return
+            return None
 
     $ scene_manager.update_actor(mom, position = "stand4")
     the_person.char "Oh! We'd better go quick, your sister could come out at any time..."
@@ -295,7 +295,7 @@ label mom_breakfast_action_label_high():
                     the_person.char "Thank you, [the_person.mc_title], for insisting on bringing your sister out. You were right, that felt so good."
                     lily.char "What? Mooooom! You were gonna fuck around without me?"
                 "You get up and excuse yourself. Time to start the day!"
-                return
+                return "Advance Time"
 
             "Relent":
                 mc.name "Ok... but I'm not going to keep it down just because she is home."
@@ -338,7 +338,7 @@ label mom_breakfast_action_label_high():
         the_person.char "I love you, have a good day at work!"
         $ scene_manager.remove_actor(mom)
         "You put your cock away and finish your breakfast before heading out for the day."
-        return
+        return "Advance Time"
 
     the_person.char "Remember, this is a quickie! Sit back and enjoy, but don't hold back! I want your cum!"
     "[the_person.possessive_title] unzips your pants and pulls out your firm cock. She sits down on your lap, facing you."
@@ -367,8 +367,7 @@ label mom_breakfast_action_label_high():
     the_person.char "I love you, have a good day at work!"
     $ scene_manager.clear_scene()
     "You put your cock away and finish your breakfast before heading out for the day."
-    return
-
+    return "Advance Time"
 
 label mom_commando_day_selfie_label():
     $ the_person = mom
@@ -411,8 +410,9 @@ label mom_breakfast_action_mom_and_lily_label():
                 "Once you're finished you pickup your clothes and say goodbye to the girls, who seem determined to continue for a while."
                 $ mc.change_location(hall)
                 $ mc.location.show_background()
+                return "Advance Time"
             "Walk away":
-                pass
+                return None
     else:
         "As you walk into the kitchen, you see your sister on her knees eating out your mom."
         $ the_person.strip_outfit(delay = 0)
@@ -434,6 +434,7 @@ label mom_breakfast_action_mom_and_lily_label():
                 "Once you're finished you pickup your clothes and say goodbye to the girls, who seem determined to continue for a while."
                 $ mc.change_location(hall)
                 $ mc.location.show_background()
+                return "Advance Time"
             "Walk away":
-                pass
+                return None
     return
