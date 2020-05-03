@@ -640,7 +640,7 @@ label starbuck_sex_store_promo_one_label(the_person):
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.apply_outfit(SB_advert_two_outfit)
             $ the_person.draw_person()
-        "the pink one piece":
+        "The pink one piece":
             "[the_person.possessive_title] starts to strip down."
             $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
@@ -670,7 +670,7 @@ label starbuck_sex_store_promo_one_label(the_person):
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.apply_outfit(SB_advert_two_outfit)
             $ the_person.draw_person()
-        "the pink one piece":
+        "The pink one piece":
             "[the_person.possessive_title] starts to strip down."
             $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
@@ -702,7 +702,7 @@ label starbuck_sex_store_promo_one_label(the_person):
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.apply_outfit(SB_advert_two_outfit)
             $ the_person.draw_person()
-        "the pink one piece":
+        "The pink one piece":
             "[the_person.possessive_title] starts to strip down."
             $ the_person.strip_outfit(position = "stand2", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
