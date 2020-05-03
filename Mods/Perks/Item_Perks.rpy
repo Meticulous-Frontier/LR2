@@ -23,7 +23,7 @@ init -1 python:
         perk_system.add_item_perk(item_perk_male_strapon, "Male Strapon")
 
     def dildo_on_unlock():
-        standing_finger.link_positions(standing_finger,"transition_standing_finger_standing_dildo")
+        standing_finger.link_positions(standing_dildo,"transition_standing_finger_standing_dildo")
         return
 
     def dildo_save_load():

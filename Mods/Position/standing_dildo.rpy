@@ -12,7 +12,7 @@ init:
             strip_description = "strip_standing_dildo", strip_ask_description = "strip_ask_standing_dildo",
             orgasm_description = "orgasm_standing_dildo",
             taboo_break_description = "taboo_break_standing_dildo",
-            verb = "fuck",
+            verb = "dildo",
             opinion_tags = ["being fingered"],
             default_animation = blowjob_bob,
             associated_taboo = "touching_vagina")
