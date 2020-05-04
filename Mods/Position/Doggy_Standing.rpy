@@ -356,7 +356,7 @@ label transition_default_SB_doggy_standing(the_girl, the_location, the_object):
     if the_girl.get_opinion_score("vaginal sex") > 0:
         the_girl.char "Oh....Please..."
     "You continue to move your cock forwards and backwards teasing her pussy."
-    if the_person.has_taboo("vaginal_sex"):
+    if the_girl.has_taboo("vaginal_sex"):
         $ the_girl.call_dialogue(doggy.associated_taboo+"_taboo_break")
         "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you push forward."
         "After a moment of resistance your cock spreads her pussy open and you slide smoothly inside of her."

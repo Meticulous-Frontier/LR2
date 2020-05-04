@@ -71,7 +71,7 @@ label scene_SB_reverse_cowgirl_1(the_girl, the_location, the_object):
     else:
         "[the_girl.possessive_title] works her hips up and down on you as best as she can."
         "She makes a couple shallow dips, then then sheathes you entirely. She makes a few awkward gyrations with her hips."
-        the_person.char "Mmm, it feels good. I wish I could fuck you as good as you fuck me."
+        the_girl.char "Mmm, it feels good. I wish I could fuck you as good as you fuck me."
         mc.name "Don't worry, it feels great, keep going."
         "[the_girl.title] moans as she continues to ride you."
 

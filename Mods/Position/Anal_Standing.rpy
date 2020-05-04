@@ -279,7 +279,7 @@ label scene_SB_anal_standing_2(the_girl, the_location, the_object):
             "You loosen your grip for a second and she moans loudly and takes a couple deep breaths. You cut the third one off and begin to really pound her ass."
             "Her ass cheeks quake from your relentless fucking. [the_girl.possessive_title] begins to squirm against you, fighting for air."
             $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 10)
-            "You hold on for a few more seconds, until you feel her knees start to buckle before letting go. [the_person.possessive_title] gasps for air."
+            "You hold on for a few more seconds, until you feel her knees start to buckle before letting go. [the_girl.possessive_title] gasps for air."
             the_girl.char "Oh my god, that was so hot..."
             "You spank her ass hard and continue to fuck her tightest hole."
         "Choke Her\n{size=22}Must be submissive{/size} (disabled)" if the_girl.get_opinion_score("being submissive") <= 0:
@@ -409,7 +409,7 @@ label outro_SB_anal_standing(the_girl, the_location, the_object):
 
 
 label transition_default_SB_anal_standing(the_girl, the_location, the_object):
-    if the_person.obedience > 120:
+    if the_girl.obedience > 120:
         mc.name "Stand here."
         "[the_girl.possessive_title] obeys then leans forward and puts her hands on [the_object.name]. You bounce your hard shaft on her ass a couple of times before lining yourself up with her sphincter."
     else:
