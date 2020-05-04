@@ -219,7 +219,7 @@ init -1 python:
 
     ## LEARN HOME EXTENSION
     def learn_home(self): # Adds the_person.home to mc.known_home_locations allowing it to be visited without having to go through date label
-        if not self.home in mc.known_home_locations:
+        if not self.home in mc.known_home_locations + [lily_bedroom, mom_bedroom, aunt_bedroom, cousin_bedroom]:
             mc.known_home_locations.append(self.home)
             return True # Returns true if it succeeds
         return False # Returns false otherwise, so it can be used for checks.

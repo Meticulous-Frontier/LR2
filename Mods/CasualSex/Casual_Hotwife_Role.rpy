@@ -649,8 +649,7 @@ label casual_hotwife_sex_invite_label(the_person):
     "[the_person.possessive_title] gives you her address."
     the_person.char "Come over tonight, around 10pm. You won't regret it! Is there anything else you want to do now?"
     $ add_hotwife_sex_at_her_place_action(the_person)
-    if not the_person.home in mc.known_home_locations:
-        $ mc.known_home_locations.append(the_person.home)
+    $ the_person.learn_home()
     $ the_person.event_triggers_dict["hotwife_progress"] = 4
 
     #call advance_time from _call_advance_casual_hotwife_sex_invite

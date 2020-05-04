@@ -582,12 +582,12 @@ label Sarah_third_wheel_label():
     "Inside you see [the_person.title] looking at herself in the mirror. She is forlorn and from the look of her makeup has obviously been crying."
     mc.name "Hey, are you okay? I don't mean to invade your privacy, but I was starting to get worried about you."
     "She quickly looks up and is surprised to see you. She briefly pulls herself together."
-    the_person.char "Is that [the_person.mc_title]? You're still here? I thought you would be gone by now..."
+    the_person.char "Is that you, [the_person.mc_title]? You're still here? I thought you would be gone by now..."
     mc.name "What are you talking about?"
     the_person.char "Well, [sarah_friend.title] said... she was asking me about you, asked if we were involved, and when I said no said she was going to make a pass at you tonight..."
     the_person.char "I just assumed, when I left the table that, I mean, why didn't you go with her?"
     "She assumed when her friend made a pass at you that you would bail on her! You quickly reassure her."
-    mc.name "[the_person.title]. I came here to support you, and to spend time with my long lost friend having fun and having a few drinks."
+    mc.name "[the_person.title], I came here to support you, and to spend time with my long lost friend having some fun and a few drinks."
     mc.name "If you think I'm going to miss out on that for a silly one night stand, you are mistaken."
     $ scene_manager.update_actor(the_person, position = "stand2", emotion = "happy")
     the_person.char "I'm sorry! I didn't mean that I think you're shallow or anything I just... Look, give me one more minute and I'll be right out, okay?"
@@ -595,7 +595,7 @@ label Sarah_third_wheel_label():
     "You step out of he lady's room and shortly after [the_person.title] steps out and joins you. You hand her the appletini."
     the_person.char "Thanks for waiting! I'm so sorry, I honestly thought you were going to go with them."
     the_person.char "Thank you for... I mean, everything you've done for me. You gave me a job, you let me drag you out to a bar with strangers, and then stuck with me even when you probably shouldn't have..."
-    mc.name "You're crazy. It's not everyday a long last childhood friend literally knocks on your front door."
+    mc.name "You're crazy, it's not everyday a long last childhood friend literally knocks on your front door."
     the_person.char "You've always been amazing to me. I should have known better."
     $ the_person.change_stats(happiness = 20, obedience = 10, love = 10)
     "She takes a long sip of her drink. You begin to chat and catch up a bit."
@@ -613,6 +613,8 @@ label Sarah_third_wheel_label():
     $ scene_manager.update_actor(the_person, position = "stand3")
     "You walk together with [the_person.title] through the streets as she slowly leads the way. You converse a bit, but things are mostly quiet as you walk."
     "Soon you are standing in front of the door to her apartment building."
+    # you now know were Sarah lives
+    $ the_person.learn_home()
     the_person.char "Thanks for today! It really means a lot to me that you spend the whole evening with me."
     mc.name "Consider it making up for lost time."
     "[the_person.possessive_title] blushes and looks down."
@@ -624,7 +626,7 @@ label Sarah_third_wheel_label():
     the_person.char "Ohhh! Mmmmm..."
     "At first she opens her eyes in surprise, but quickly closes them and begins to kiss you back."
     "Her lips part and your tongue quickly takes advantage and begins to explore her soft lips. They taste sweet, with just a hint of appletini."
-    "You stand there in front of [the_person.title]'s building, holding each other and making out for several seconds until the kiss stops and you step back. Her eyes are still closed."
+    "You stand there in front of [the_person.title]'s building, holding each other and making out for several minutes until the kiss stops and you step back. Her eyes are still closed."
     mc.name "I'll see you on Monday?"
     $ scene_manager.update_actor(the_person, position = "stand4")
     "She suddenly snaps back to reality. Her cheeks are flushed."

@@ -488,8 +488,7 @@ label casual_athlete_race_crisis_label(the_person):
     "You call for an Uber and she gives you here address. Soon you are walking into [the_person.title]'s apartment."
     $ mc.change_location(the_person.home)
     $ mc.location.show_background()
-    if not the_person.home in mc.known_home_locations:
-        $ mc.known_home_locations.append(the_person.home)
+    $ the_person.learn_home()
     "As soon as you walk in the door, you grab [the_person.title]. You pick her up and push her against the wall."
     $ the_person.draw_person(position = "against_wall")
     #TODO add temporary sluttiness to make sure she is up for anything###
