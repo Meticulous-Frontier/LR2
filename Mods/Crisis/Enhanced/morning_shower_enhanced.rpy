@@ -36,7 +36,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
                 call girl_shower_enter_enhanced(the_person) from _call_girl_shower_enter_enhanced_1
             else:
                 the_person.char "Just a second!"
-                call girl_shower_leave(the_person) from _call_girl_shower_leave_enhanced_1
+                call girl_shower_leave_enhanced(the_person) from _call_girl_shower_leave_enhanced_1
 
         "Peek Inside":
             $ home_shower.show_background()
@@ -71,7 +71,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
                         $ hall.show_background()
                         $ renpy.scene("Active")
                         $ the_person.change_stats(love = -2, slut_temp = 2, happiness = -2)
-                        call girl_shower_leave(the_person) from _call_girl_shower_leave_enhanced_4
+                        call girl_shower_leave_enhanced(the_person) from _call_girl_shower_leave_enhanced_4
                     else:
                         "She looks up at you, slightly startled, and turns her body away from you."
                         the_person.char "Oh, [the_person.mc_title]!"
@@ -88,7 +88,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
             if the_person.effective_sluttiness(["bare_tits", "bare_pussy"]) < 10:
                 "You try and open the door, but find it locked."
                 the_person.char "One second!"
-                call girl_shower_leave(the_person) from _call_girl_shower_leave_enhanced_2
+                call girl_shower_leave_enhanced(the_person) from _call_girl_shower_leave_enhanced_2
             elif the_person.effective_sluttiness(["bare_tits", "bare_pussy"]) <= 20:
                 $ home_shower.show_background()
                 #She's angry that you've barged in on her (but she doesn't mind enough to have locked the door).
@@ -104,7 +104,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
                 $ renpy.scene("Active")
                 $ the_person.change_love(-1)
                 $ the_person.change_slut_temp(2)
-                call girl_shower_leave(the_person) from _call_girl_shower_leave_enhanced_3
+                call girl_shower_leave_enhanced(the_person) from _call_girl_shower_leave_enhanced_3
             else:
                 $ home_shower.show_background()
                 $ the_person.apply_outfit(Outfit("Nude"))
@@ -159,6 +159,20 @@ label morning_shower_masturbation():
     "You see her love juices mixing with the water dripping on the floor."
     $ the_person.reset_arousal()
     return
+
+label girl_shower_leave_enhanced(the_person):
+    "After a short pause the shower stops and you hear movement on the other side of the door."
+    $ apply_towel_outfit(the_person)
+    $ the_person.draw_person()
+    "The bathroom door opens and [the_person.possessive_title] steps out from the steamy room in a towel."
+    if the_person is mom:
+        the_person.char "There you go [the_person.mc_title], go right ahead."
+        "She gives you a quick kiss and steps past you."
+    else:
+        the_person.char "There, it's all yours. I might have used up all of the hot water."
+        "She steps past you and heads to her room."
+    return
+
 
 label girl_shower_enter_enhanced(the_person):
     menu:
