@@ -33,7 +33,7 @@ label employee_find_out_home_location_label(the_person):
 
     mc.name "So tell me a little about yourself, [the_person.title]."
 
-    $ ran_num = renpy.random.randint(2, (the_person.age - 18) * 12)
+    $ ran_num = renpy.random.randint(2, ((the_person.age - 17) if (the_person.age - 17) > 0 else 1)  * 12)
     $ opinion = "months"
     if ran_num > 23:
         $ ran_num = ran_num // 12
