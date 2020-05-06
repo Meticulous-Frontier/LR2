@@ -255,7 +255,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     $ has_taken_control = False
     while not finished:
         if girl_in_charge:
-            if not position_choice is None and position_choice.skill_tag == "Foreplay" and not mc.recently_orgasmed:
+            if not position_choice is None and position_choice.skill_tag == "Foreplay" and not mc.recently_orgasmed and not first_round and not position_locked:
                 # girl has got you hard again, now let her pick an actual sex position (clear foreplay position)
                 $ position_choice = None
 
@@ -271,7 +271,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                             $ position_choice.call_taboo_break(the_person, mc.location, object_choice)
                             $ the_person.break_taboo(position_choice.associated_taboo)
                         else:
-                            $ position_choice.call_transition(round_choice, the_person, mc.location, object_choice)
+                            $ position_choice.call_transition(position_choice, the_person, mc.location, object_choice)
 
             if position_choice is None: #There's no position we can take
                 "[the_person.title] can't think of anything more to do with you."
@@ -296,7 +296,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     $ position_choice.call_taboo_break(the_person, mc.location, object_choice)
                     $ the_person.break_taboo(position_choice.associated_taboo)
                 else:
-                    $ position_choice.call_transition(round_choice, the_person, mc.location, object_choice)
+                    $ position_choice.call_transition(position_choice, the_person, mc.location, object_choice)
                 $ round_choice = "Continue"
             else:
                 # Don't show control message, it breaks the flow, because it pops up every round.
