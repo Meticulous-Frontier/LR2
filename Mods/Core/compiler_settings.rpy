@@ -13,7 +13,10 @@ init -2 python:
     build.classify("game/customizations/**.**", None)
     build.classify("**.", None)
     build.classify("game/OpenGL/DLLS/gle_**", None)
-    build.classify("game/Mods/Core/Images/icon.*", None) # exclude icon images from build
+    # exclude icon images from build
+    build.classify("game/Mods/Core/Images/**.ico", None) 
+    build.classify("game/Mods/Core/Images/**.icns", None) 
+    build.classify("game/Mods/Core/Images/**.pdn", None) 
 
     build.classify("game/wardrobes/Exported_Wardrobe.xml", "all") # make sure exported wardrobe file is included (but not archived)
 
