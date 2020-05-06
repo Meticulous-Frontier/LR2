@@ -40,3 +40,7 @@ init -2 python:
     build.archive("fonts")
     build.classify("game/**.ttf", "fonts")
     build.classify("game/**.otf", "fonts")
+
+init 2 python:
+    build.name = "Lab_Rats_2_Mod"
+    config.window_icon = "Mods/Core/Images/icon.png"
