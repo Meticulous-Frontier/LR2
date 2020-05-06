@@ -2551,8 +2551,18 @@ label Sarah_weekend_surprise_crisis_label():
                 $ scene_manager.update_actor(the_person, position = "kneeling1")
                 "She slowly climbs up onto your desk and begins to touch herself."
                 the_person.char "I know you have a lot to do. Feel free to watch... or blow a little steam off with me!"
-
-
+                mc.name "Right! I'm sure a short diversion wouldn't delay me too much."
+                "She walks right up to you and starts to get down on her knees. You pull your cock out, which is now fully erect."
+                $ scene_manager.update_actor(the_person, position = "blowjob")
+                the_person.char "That's it. Let me just take care of this for you..."
+                call fuck_person(the_person, start_position = deepthroat, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_sarah_weekend_deepthroat_1
+                "[the_person.possessive_title] moans while licking the last drops from her lips."
+                the_person.char "You taste so good, just call me when you need to blow off some more steam..."
+                "You clear your throat and then respond."
+                mc.name "That was great, thank you!"
+                $ scene_manager.update_actor(the_person, position = "stand4")
+                the_person.char "Alright, I know you wanted to get other things done, so I'll let you get back to it. But don't work too hard!"
+                "She quickly cleans herself up then leaves, giving you a chance to continue your work, but now with your balls empty."
             elif sarah.event_triggers_dict.get("epic_tits_progress", 0) > 1:
                 the_person.char "I got an idea. Why don't you let me help you, you know, relieve a little tension?"
                 mc.name "I'm not honestly that tense right now..."
@@ -2586,7 +2596,7 @@ label Sarah_weekend_surprise_crisis_label():
                 $ scene_manager.remove_actor(the_person)
 
     $ scene_manager.clear_scene()
-    return
+    return _return
 
 
 label Sarah_weekend_date_grab_drinks_label():
@@ -2689,7 +2699,7 @@ label Sarah_weekend_date_grab_drinks_label():
                 the_person.char "Damn, thats cold! Fine... but could you think you could calls me a taxi? I'm not sure I'm good to walk home..."
                 "You call up a local taxi company, soon one is on the way."
             "You stay out front of the bar with [the_person.title] until her cab arrives. You say goodnight and soon the cab is driving off."
-            return
+            return "Advance Time"
 
     mc.name "My place sounds great. Let's go!"
     "A short walk later, and you are walking through your front door."
@@ -2831,6 +2841,7 @@ label Sarah_date_ends_at_your_place_label(the_person):
         $ the_person.apply_outfit(the_person.planned_outfit)
         $ scene_manager.update_actor(the_person, position = "stand3")
         "You lay on your bed and watch as [the_person.possessive_title] slowly gets her clothes on. She says goodbye then lets herself out."
+        return "Advance Time"
     return
 
 label Sarah_date_strip_club_private_dance_label(the_person):
