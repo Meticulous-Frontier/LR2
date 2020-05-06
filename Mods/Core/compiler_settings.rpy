@@ -13,6 +13,8 @@ init -2 python:
     build.classify("game/customizations/**.**", None)
     build.classify("**.", None)
     build.classify("game/OpenGL/DLLS/gle_**", None)
+    build.classify("game/Mods/Core/Images/icon.*", None) # exclude icon images from build
+
     build.classify("game/wardrobes/Exported_Wardrobe.xml", "all") # make sure exported wardrobe file is included (but not archived)
 
     build.archive("background_images") #When building all mod background images are placed into an archive.
