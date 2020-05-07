@@ -282,8 +282,11 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             elif report_log.get("guy orgasms", 0) > guy_orgasms_before_control and report_log.get("girl orgasms", 0) > 0: #Both parties have been satisfied
                 the_person.char "Whew, that felt amazing. It's good to know it was as good for you as it was for me."
                 $ round_choice = "Girl Leave"
-            elif report_log.get("girl orgasms", 0) > 0 and the_person.love < 10 and the_person.obedience < 110: #She's cum and doesn't care about you finishing.
+            elif report_log.get("girl orgasms", 0) > 0 and not (the_person.love > 40 or the_person.obedience > 150): #She's cum and doesn't care about you finishing.
                 the_person.char "Whew, that felt great. Thanks for the good time [the_person.mc_title]!"
+                $ round_choice = "Girl Leave"
+            elif report_log.get("girl orgasms", 0) > 1: # she's had her fill and doesn't care about you anymore
+                the_person.char "Oh my god, I came so hard, thanks a lot [the_person.mc_title]!"
                 $ round_choice = "Girl Leave"
             elif report_log.get("girl orgasms", 0) == 0 and the_person.energy < 15 :
                 the_person.char "That was nice, but i'm tired. We will continue this another time."
