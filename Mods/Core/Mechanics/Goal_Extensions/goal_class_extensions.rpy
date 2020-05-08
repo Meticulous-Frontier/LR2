@@ -88,3 +88,31 @@ init -1 python:
 
     Goal.__ne__ = goal_ne
 
+init 2 python:
+    # replace existing create functions to prevent goal repetition (caused by random selection).
+    def create_new_stat_goal(goal_difficulty):
+        potential_goal = get_random_from_list(list(set(stat_goals) - set([mc.stat_goal])))
+        if potential_goal.check_valid(goal_difficulty):
+            goal_template = copy.deepcopy(potential_goal)
+            goal_template.activate_goal(goal_difficulty)
+            return goal_template
+        else:
+            return create_new_stat_goal(goal_difficulty) #Quick and dirty recursion to cycle through and get a goal. Note: Explodes if we don't have a goal.
+
+    def create_new_work_goal(goal_difficulty):
+        potential_goal = get_random_from_list(list(set(work_goals) - set([mc.work_goal])))
+        if potential_goal.check_valid(goal_difficulty):
+            goal_template = copy.deepcopy(potential_goal)
+            goal_template.activate_goal(goal_difficulty)
+            return goal_template
+        else:
+            return create_new_work_goal(goal_difficulty) #Quick and dirty recursion to cycle through and get a goal. Note: Explodes if we don't have a goal.
+
+    def create_new_sex_goal(goal_difficulty):
+        potential_goal = get_random_from_list(list(set(sex_goals) - set([mc.sex_goal])))
+        if potential_goal.check_valid(goal_difficulty):
+            goal_template = copy.deepcopy(potential_goal)
+            goal_template.activate_goal(goal_difficulty)
+            return goal_template
+        else:
+            return create_new_sex_goal(goal_difficulty) #Quick and dirty recursion to cycle through and get a goal. Note: Explodes if we don't have a goal.
