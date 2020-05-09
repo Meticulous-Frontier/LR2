@@ -50,6 +50,19 @@ label dirty_laundry_action_label:
 
     "You are just drifting off to sleep when you suddenly you remember. You don't have any clean clothes for tomorrow!"
     "You look a the clock. It is already pretty late. You guess that your family is already asleep, so you grab your laundry and take it to the laundry room just wearing your boxers."
+
+    $ ran_num = renpy.random.randint(0, 1)
+    if ran_num == 0:
+        call dirty_laundry_wash_your_clothes(the_person) from call_dirty_laundry_wash_your_clothes
+    else:
+        call dirty_laundry_stuck_in_dryer(the_person) from call_dirty_laundry_stuck_in_dryer
+
+    $ renpy.scene("Active")
+    $ the_person.review_outfit(dialogue = False)
+    return
+
+
+label dirty_laundry_wash_your_clothes(the_person):
     "You throw your laundry in the washing machine, add some detergent and start it up."
     "As you are thinking about what to do for the next 30 minutes while the washer runs and you can move your clothes to the dryer, you notice a laundry basket on the floor filled with clean, folded clothes."
     "It looks like they all belong to [the_person.title]. Sitting on top of the laundry is a pair of sexy black panties."
@@ -88,7 +101,7 @@ label dirty_laundry_action_label:
                     the_person.char "Oh god... can I... can I watch you?"
                     mc.name "Go ahead."
                     "Her eyes go back down to your crotch as you continue to stroke yourself."
-                    mc.name "You should do it to. We all need to get off once a while!"
+                    mc.name "You should do it too, we all need to get off once a while!"
                     "She looks at you, still a bit conflicted."
                     the_person.char "I could... I mean... you aren't going to tell anyone about this are you?"
                     mc.name "Of course not."
@@ -298,7 +311,7 @@ label dirty_laundry_action_label:
             else:      #Someone else catches you! for now this is disabled
                 pass
                 #TODO this
-            pass
+
         "Find something else to do":
             "You decide to do something else. You head back to room and hop on your PC, doing work related tasks until the washer is done."
             "While you are working on researching business methods, you accidentally get caught up in a click bait, 10 ways to increase your bottom line item on some random economics website."
@@ -312,6 +325,112 @@ label dirty_laundry_action_label:
             #TODO outfit and text based on her sluttiness.
             "You say goodnight to [the_person.title] and then swap your clothes from the washer to the dryer. They should be dry in the morning!"
 
-    $ renpy.scene("Active")
-    $ the_person.review_outfit(dialogue = False)
+    return
+
+label dirty_laundry_stuck_in_dryer(the_person):
+    "As you walk into the laundry room, you see [the_person.title] with her head in the dryer."
+    $ the_person.draw_person(position = "doggy")
+    "She is muttering to herself how she could be so clumsy and get her hair stuck in there somewhere preventing her from getting out."
+
+    menu:
+        "Help her get out":
+            mc.name "Hey [the_person.title], what are you doing in there?"
+            the_person.char "Hey [the_person.mc_title], good that you are here, i'm stuck in this infernal machine."
+            if the_person is mom:
+                mc.name "Don't worry mom, i'll have you out there in a jiffy."
+            elif the_person is lily:
+                mc.name "Don't worry little sis, let me help you."
+            else:
+                mc.name "No worries [the_person.title], here let me untangle this for you."
+
+            "You manage to untangle [the_person.possessive_title]'s hair."
+            the_person.char "Thank you [the_person.mc_title], now let met get this done."
+            $ the_person.change_stats(love = 2, happiness = 5)
+
+        "Masturbate":
+            "You don't say anything, but quickly pull out your already hard member."
+            "All the while you are masturbating, [the_person.possessive_title] keeps on muttering and wiggling her shapely ass, right in front of you."
+            "After a while you start cumming spraying your load right on her ass."
+            $ the_person.cum_on_ass()
+            $ the_person.draw_person(position="doggy")
+            the_person.char "Hey [the_person.mc_title], is that you? What's going on back there...don't just stand there, get me out of this thing."
+            mc.name "Hi [the_person.title], don't worry, just wait a sec, i'll get some scissors and get you out."
+            "When you return you carefully manage to untangle her from the machine and she looks at you, running a hand across her bum."
+            if the_person.effective_sluttiness() > 40 or the_person.get_opinion_score("being covered in cum") > 0:
+                $ the_person.draw_person(position = "stand4", emotion = "happy")
+                the_person.char "Did you just masturbate and sprayed your cum all over my ass?"
+                if the_person is mom:
+                    the_person.char "So your really like your mommies ass, you little pervert."
+                elif the_person is lily:
+                    the_person.char "So you enjoy masturbating to your little sisters bottom."
+                else:
+                    the_person.char "So you really liked masturbating to my wiggling ass."
+
+                the_person.char "Why don't you just ask the next time, so I can enjoy it too?"
+                if the_person.get_opinion_score("drinking cum") > 0:
+                    "[the_person.possessive_title] moves her hand to her mouth and licks off your seed from her fingers."
+
+                mc.name "Well, ah, yes, I will, see ya."
+
+                $ the_person.change_stats(obedience = -2, happiness = 5, slut_temp = 5)
+            else:
+                $ the_person.draw_person(position = "stand4", emotion = "angry")
+                if the_person is mom:
+                    the_person.char "Jesus, [the_person.mc_title], why did you cum on my ass, i'm your mother."
+                    "You just stare at her, while [the_person.possessive_title] continues her tirade."
+                    the_person.char "You shouldn't do that, what would your sister say if she saw this."
+                    the_person.char "Now be a good son and behave, don't let me catch you doing this ever again."
+                elif the_person is lily:
+                    the_person.char "What the fuck [the_person.mc_title], you bastard, you came on my ass."
+                    "You just stare at her, while [the_person.possessive_title] continues her tirade."
+                    the_person.char "Now I have to wash this too, dammit, don't you ever do this again."
+                else:
+                    the_person.char "Dammit [the_person.mc_title], you can't just cum on my ass like that."
+                    "You just stare at her, while [the_person.possessive_title] continues her tirade."
+                    the_person.char "What would your mom and sister say if they find out about your behavior."
+                    the_person.char "Now get out of my way, so I can get out of these clothes."
+
+                $ the_person.change_stats(happiness = -5, slut_temp = 2)
+            
+
+        "Fuck her" if not the_person.has_taboo("vaginal_sex") and the_person.effective_sluttiness("bare_pussy") > 40:
+            mc.name "Hey [the_person.title], what are you doing in there?"
+            the_person.char "Hey [the_person.mc_title], good that you are here, i've managed to get my hair stuck in this contraption."
+            mc.name "Don't worry, I know how to help you."
+
+            $ the_item = the_person.outfit.get_lower_top_layer()
+            if the_item.is_extension:
+                $ the_item = the_person.outfit.get_upper_top_layer()
+            if the_item:
+                "You move your hands along [the_person.possessive_title]'s ass and remove her [the_item.display_name]"
+                $ the_person.draw_animated_removal(the_item, position = "doggy")
+
+            the_person.char "Hey, I don't think taking of my [the_item.display_name], will get me out of here."
+            mc.name "Trust me [the_person.title], I have a good reason for doing it this way."
+            the_person.char "Okay, go ahead, just don't pull too much on my head."
+
+            $ del the_item
+            if not the_person.outfit.vagina_visible():
+                "You quickly start removing the remaining clothing from [the_person.possessive_title]."
+                $ the_person.strip_outfit(position = "doggy", exclude_upper = True)
+
+            "Now that you have clear access, you quickly remove your shorts and position yourself behind [the_person.possessive_title] and push the tip of your cock against her wet slit."
+            the_person.char "WTF!! Are you going to fuck me like this?"
+            mc.name "Yes, and don't pretend that you don't like it, because I know you do."
+            call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True, position_locked = True) from _call_fuck_person_dirty_laundry_stuck_in_dryer
+            $ the_report = _return
+            if the_report.get("girl orgasms", 0) > 1:
+                $ the_person.change_stats(happiness = 10, obedience = 5)
+                the_person.char "Oh my god, I came soo much, I didn't think that would be possible in this position."
+            elif the_report.get("girl orgasms", 0) > 0:
+                $ the_person.change_stats(happiness = 5, obedience = 3)
+                the_person.char "Oh wow, this really felt good, thank you [the_person.mc_title]."
+
+            the_person.char "It's not cool, that you took advantage of me like that."
+            mc.name "Haven't you noticed?"
+            the_person.char "What?"
+            mc.name "You hair came loose after about a minute in, you could have stopped at any point."
+            the_person.char "Oh...well, next time just get me out, and we can do this properly, now move..."
+
+    "[the_person.possessive_title] quickly grabs her laundry and scoots out of the laundry room."
     return
