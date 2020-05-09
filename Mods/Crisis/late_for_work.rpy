@@ -48,7 +48,7 @@ label late_for_work_action_label:
                 mc.name "Do you know what time we start here [the_person.title]?"
                 the_person.char "I am really sorry [the_person.mc_title]."
                 if (upper_clothing):
-                    mc.name "I don't care, next time be on time and cleanup your [upper_clothing.name]"
+                    mc.name "I don't care, next time be on time and cleanup your [upper_clothing.display_name]"
                 else:
                     mc.name "I don't care, next time be on time and make your tits presentable."
                 $ the_person.change_stats(obedience = 3, happiness = -2)
@@ -56,7 +56,7 @@ label late_for_work_action_label:
             "Let it slide":
                 $ the_person.draw_person(emotion = 'happy')
                 if (upper_clothing):
-                    mc.name "Well at least cleanup your [upper_clothing.name], before you start."
+                    mc.name "Well at least cleanup your [upper_clothing.display_name], before you start."
                 else:
                     mc.name "At least get that cum of your tits, before you go to work."
                 the_person.char "Thank you, [the_person.mc_title]!"
