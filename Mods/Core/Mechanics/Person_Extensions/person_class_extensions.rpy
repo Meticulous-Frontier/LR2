@@ -572,6 +572,17 @@ init -1 python:
     # wrap up the run_day function
     Person.run_day = run_day_extended(Person.run_day)
 
+    # extend the build person displayable function
+    def build_person_displayable_extended(org_func, *args, **kargs):
+        def build_person_displayable_wrapper(person, *args, **kargs):
+            # run original function and flatten result image
+            return Flatten(org_func(person, *args, **kargs))
+        
+        return build_person_displayable_wrapper
+
+    # wrap up the build_person_displayable function
+    Person.build_person_displayable = build_person_displayable_extended(Person.build_person_displayable)
+
     # BUGFIX: Remove suggest effect
     # Sometimes an effect is no longer in bag causing an exception, fix: check if effect exists before trying to remove
     def remove_suggest_effect_fixed(self, amount):

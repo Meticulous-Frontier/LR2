@@ -18,7 +18,7 @@ init 2 python:
 
         def load(self):
             # flatten image to reduce image_cache memory usage
-            self.display_image = Flatten(self.display_func(lighting = mc.location.get_lighting_conditions(), **self.person_preview_args))
+            self.display_image = self.display_func(lighting = mc.location.get_lighting_conditions(), **self.person_preview_args)
             # put flattened image in prediction cache
             renpy.start_predict(self.display_image) 
             # this will pre-load but will slow navigating
