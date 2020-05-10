@@ -364,9 +364,9 @@ label Sarah_flirt_response_high(the_person):
         if the_person.effective_sluttiness() > 25: # High sluttiness flirt
             if the_person.has_taboo("underwear_nudity"):
                 the_person.char "Oh [the_person.mc_title], you're so bad! Do you really want to... see me naked?"
-
             else:
                 the_person.char "Oh [the_person.mc_title]. You're always trying to get me naked."
+
             mc.name "You're so beautiful, I always want to see more."
             "She sighs and smiles."
             the_person.char "Don't worry, I want to get naked for you."
@@ -392,7 +392,7 @@ label Sarah_flirt_response_high(the_person):
         else:
             the_person.char "Oh [the_person.mc_title]... I don't know if I could go that far."
             mc.name "Relax, we're just joking around. Unless you want to get naked for me?"
-            "She laughs and shakes her head in disbelief. You see a glint of mischeif in her eye when she asks you."
+            "She laughs and shakes her head in disbelief. You see a glint of mischief in her eye when she asks you."
             the_person.char "Why don't you get naked first and we'll see what happens?"
             mc.name "You'll pull your phone out and start taking blackmail pictures. Theres no way I'm doing that."
             the_person.char "Me? Blackmail you? [the_person.mc_title] why I would never!"
@@ -420,7 +420,7 @@ label Sarah_flirt_response_high(the_person):
             the_person.char "Take me somewhere private and say something like that again and it might actually happen..."
             menu:
                 "Find someplace quiet.":
-                    mc.name "Then let's find somehwere private. Come on."
+                    mc.name "Then let's find somewhere private. Come on."
                     "You take her hand and start to lead her away. She follows you eagerly."
                     the_person.char "Wow, I wasn't expecting you to actually do it! This is gonna be fun!"
                     "When you find a quiet spot you pull [the_person.possessive_title] close to you."
@@ -447,7 +447,7 @@ label Sarah_flirt_response_high(the_person):
                     mc.name "Jesus woman, you win!"
                     the_person.char "I'm glad you understand."
 
-        else: #She's not slutty, so she's embarassed about what you're doing.
+        else: #She's not slutty, so she's embarrassed about what you're doing.
             "[the_person.possessive_title] gasps softly and glances around, checking to see if anyone else was listening."
             the_person.char "[the_person.mc_title], stop joking around! If other people overhear they might get the wrong idea!"
             mc.name "It's fine, nobody heard anything. Besides, who cares if other people know I want to see you naked?"
