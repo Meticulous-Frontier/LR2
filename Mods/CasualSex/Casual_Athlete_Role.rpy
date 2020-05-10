@@ -293,7 +293,7 @@ label casual_athlete_phase_one_label(the_person):
         "[the_person.possessive_title] is grinding her hips up against yours. The sweat from your workouts mingles together as you prepare yourself to enter her."
 
         $ the_person.add_situational_slut("horny", 20, "She is desperate to be fucked")
-        
+
         # NOTE skip intro prevents taboo break from executing
 
         call condom_ask(the_person) from _casual_athlete_mod_condom_ask_CS010
@@ -897,6 +897,39 @@ label athlete_flirt_response(the_person):
             the_person.char "Hey, maybe if you buy me dinner first."
             "[the_person.title] gives you a wink and smiles."
     return
+
+label athlete_flirt_response_low(the_person):
+    #She's in her own outfit.
+    "[the_person.possessive_title] blushes and smiles."
+    the_person.char "Thanks. I didn't think anyone even paid attention to what I wear. I mean its just gym clothes..."
+    mc.name "Yeah, and the way you dress makes it obvious how well you take care of yourself. It's pretty incredible."
+    return
+
+label athlete_flirt_response_mid(the_person):
+
+    if the_person.effective_sluttiness() < 20:
+        the_person.char "Thanks! I work hard to take of myself. Its kind of weird to hear, but I'm glad it shows."
+
+    else:
+        the_person.char "Thanks! One of the benefits of being in shape I guess, you can wear clothing to show off your body."
+        the_person.char "You want a better look, right? Here, how does it make my ass look?"
+        $ the_person.draw_person(position = "back_peek")
+        the_person.char "Good?"
+        mc.name "Fantastic. I wish I could get an even better look at it."
+        "[the_person.possessive_title] smiles and turns back to face you."
+        $ the_person.draw_person()
+        the_person.char "I'm sure you do. Maybe instead of shooting the breeze you should workout with me..."
+    return
+
+label athlete_flirt_response_high(the_person):
+    if the_person.love > 50: #She is going to ghost soon
+        the_person.char "I feel like you are going a little overboard there with the flattery. Could you please stop?"
+    else:
+        "She looks at you and her eyes narrow."
+        the_person.char "I appreciate the comment, I really do... but I'm worried you are taking things a little too far."
+        the_person.char "Remember, we need to keep things CASUAL. Okay?"
+    return
+
 
 label athlete_hookup_rejection(the_person):
     the_person.char "Your loss! I've been working out so much lately, and you could have had some of this..."
