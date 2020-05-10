@@ -1034,6 +1034,49 @@ label hotwife_flirt_response(the_person):
             "[the_person.title] gives you a wink and smiles."
     return
 
+label hotwife_flirt_response_low(the_person):
+    #She's in her own outfit.
+    the_person.char "Thanks! It's really cute, right? My husband helped me pick it out!"
+    $ the_person.draw_person(position = "walking_away")
+    "She smiles and gives you a quick spin, showing off her outfit from every angle."
+    $ the_person.draw_person()
+    return
+
+label hotwife_flirt_response_mid(the_person):
+
+    if the_person.effective_sluttiness() < 20 and mc.location.get_person_count() > 1:
+        if the_person.outfit.tits_visible():
+            the_person.char "Are you sure you don't mean my tits look good in this outfit?"
+            "She winks and wiggles her shoulders, setting her boobs jiggling for you."
+            mc.name "All of you looks good, tits included."
+            the_person.char "Good answer. I knew you would like this look when I was picking it out this morning."
+        else:
+            the_person.char "Aw, thanks! I thought this was a pretty hot look when I was getting dressed this morning."
+
+        the_person.char "Maybe hubby will let you come shopping with me one day, so you can tell me else you want to see me in."
+        mc.name "I think I would like that."
+
+    else:
+        the_person.char "Thanks, hubby thought I looked pretty hot in it too this morning when I picked it out."
+        the_person.char "You want a better look, right? Here, how does it make my ass look?"
+        $ the_person.draw_person(position = "back_peek")
+        the_person.char "Good?"
+        mc.name "Fantastic. I wish I could get an even better look at it."
+        "[the_person.possessive_title] smiles and turns back to face you."
+        $ the_person.draw_person()
+        the_person.char "I'm sure you do. Buy me a drink and we'll see what happens."
+    return
+
+label hotwife_flirt_response_high(the_person):
+    if the_person.love > 50: #She is going to ghost soon
+        the_person.char "Didn't your mother ever tell you its rude to hit on a married woman?"
+    else:
+        "She looks at you and her eyes narrow."
+        the_person.char "I appreciate the comment, I really do... but I'm worried you are taking things a little too far."
+        the_person.char "Remember, we need to keep things CASUAL. Okay?"
+    return
+
+
 label hotwife_hookup_rejection(the_person):
     the_person.char "Your loss! Just thinking about you makes me want to get on my knees, and you could have had some of this..."
     return
