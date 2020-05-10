@@ -409,7 +409,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
 
     # We start any encounter by letting them pick what position they want (unless something is forced or the girl is in charge)
     $ active_mc_position = None
-    call screen main_choice_display([build_threesome_round_start_menu(position_choice, the_person_one, the_person_two)])
+    call screen enhanced_main_choice_display([build_threesome_round_start_menu(position_choice, the_person_one, the_person_two)])
     $ round_choice = _return
 
     if round_choice == "Leave":
@@ -431,7 +431,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
         if round_choice is None: #If there is no set round_choice
             #TODO: Add a variant of this list when the girl is in control to ask if you want to resist or ask/beg for something.
 
-            call screen main_choice_display([build_threesome_round_choice_menu(position_choice, the_person_one, the_person_two, position_locked, hide_leave)])
+            call screen enhanced_main_choice_display([build_threesome_round_choice_menu(position_choice, the_person_one, the_person_two, position_locked, hide_leave)])
             $ round_choice = _return
 
         # Now that a round_choice has been picked we can do something.
@@ -672,12 +672,12 @@ label threesome_round(the_person_one, the_person_two, position_choice, round = 0
 
 label pick_threesome(the_person_one, the_person_two, girl_one_position = None, object_choice = None):  #We can pass in a position for girl one if the second girl "walks in" on the sex event
     if girl_one_position == None:
-        call screen main_choice_display([build_threesome_person_one_position_choice_menu(the_person_one, the_person_two)])
+        call screen enhanced_main_choice_display([build_threesome_person_one_position_choice_menu(the_person_one, the_person_two)])
         $ girl_one_choice = _return
     else:
         $ girl_one_choice = girl_one_position
 
-    call screen main_choice_display([build_threesome_person_two_position_choice_menu(the_person_one, the_person_two)])
+    call screen enhanced_main_choice_display([build_threesome_person_two_position_choice_menu(the_person_one, the_person_two)])
     $ girl_two_choice = _return
 
     $ (position_choice, girl_swap_pos) = choose_threesome_position(girl_one_choice, girl_two_choice)
@@ -686,7 +686,7 @@ label pick_threesome(the_person_one, the_person_two, girl_one_position = None, o
     return position_choice
 
 label threesome_strip_menu(the_person_one, the_person_two):
-    call screen main_choice_display([build_threesome_strip_menu(the_person_one, the_person_two)])
+    call screen enhanced_main_choice_display([build_threesome_strip_menu(the_person_one, the_person_two)])
     $ strip_choice = _return
 
     if strip_choice == "strip_one":

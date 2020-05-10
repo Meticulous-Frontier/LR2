@@ -430,7 +430,7 @@ label SB_free_strip_scene(the_person, must_be_naked = True):
             the_person.char "I hope you're enjoying the show [the_person.mc_title]."
             "She wiggles her hips for you and winks."
 
-        call screen main_choice_display([sb_free_strip_build_strip_menu(the_person, must_be_naked)])
+        call screen enhanced_main_choice_display(build_menu_items([sb_free_strip_build_strip_menu(the_person, must_be_naked)]))
         $ strip_choice = _return
 
         if strip_choice == "Watch":
@@ -457,7 +457,7 @@ label SB_free_strip_scene(the_person, must_be_naked = True):
             #You ask her to change into a different pose
             mc.name "I want to see you from a different angle."
 
-            call screen main_choice_display([sb_free_strip_build_pose_menu(picked_pose)])
+            call screen enhanced_main_choice_display(build_menu_items([sb_free_strip_build_pose_menu(picked_pose)]))
             if _return:
                 $ picked_pose = _return
                 "[the_person.possessive_title] nods and moves for you."

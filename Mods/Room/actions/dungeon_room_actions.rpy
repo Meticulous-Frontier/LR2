@@ -51,7 +51,7 @@ label dungeon_completed_label():
 
 label dungeon_room_appoint_slave_label():
     while True:
-        call screen main_choice_display([get_sorted_people_list(mc.location.people, "Turn into slave", ["Back"])])
+        call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(mc.location.people, "Turn into slave", ["Back"])]))
         $ person_choice = _return
 
         if person_choice == "Back":

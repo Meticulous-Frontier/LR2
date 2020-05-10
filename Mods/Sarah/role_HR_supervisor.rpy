@@ -548,7 +548,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         the_person.char "Here's my list. Who do you want me to call in?"
 
     # use new menu layout for selecting people
-    call screen main_choice_display([["Call in"] + HR_employee_list + ["Changed my mind"]], draw_hearts_for_people = False)
+    call screen enhanced_main_choice_display(build_menu_items([["Call in"] + HR_employee_list + ["Changed my mind"]], draw_hearts_for_people = False))
     $ person_choice = _return
 
     if person_choice == "Changed my mind":
@@ -602,7 +602,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     mc.name "That's right. As you know, we run a small business here, and I like to make sure all my employees enjoy their work here."
     mc.name "Recently, I've become concerned you may not like the work environment."
 
-    call screen main_choice_display([build_HR_interview_discussion_topic_menu(person_choice)])
+    call screen enhanced_main_choice_display(build_menu_items([build_HR_interview_discussion_topic_menu(person_choice)]))
     $ opinion_chat = _return
 
     if opinion_chat == "working":
@@ -1190,7 +1190,7 @@ label HR_director_mind_control_attempt_label(the_person):
             return
     the_person.char "Okay. Who do you want me to make the attempt on?"
 
-    call screen main_choice_display([["Call in"] + HR_employee_list], draw_hearts_for_people = False)
+    call screen enhanced_main_choice_display([["Call in"] + HR_employee_list], draw_hearts_for_people = False)
     $ person_choice = _return
 
     $ del HR_employee_list
@@ -1274,7 +1274,7 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
     return
 
 label HR_director_appointment_action_label:
-    call screen main_choice_display([get_sorted_people_list(mc.business.hr_team, "Appoint", ["Back"])])
+    call screen enhanced_main_choice_display([get_sorted_people_list(mc.business.hr_team, "Appoint", ["Back"])])
     $ person_choice = _return
 
     if person_choice != "Back":

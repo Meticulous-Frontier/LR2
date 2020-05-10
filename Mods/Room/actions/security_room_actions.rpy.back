@@ -132,7 +132,7 @@ label office_observation_label():
 label investigation_employee_label():
     while True:
         # NOTE: Create an upgrade that allows investigation of people outside of the business? known_people_in_the_game()
-        call screen main_choice_display([get_sorted_people_list(mc.business.get_employee_list(), "Investigate", ["Back"])])
+        call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(mc.business.get_employee_list(), "Investigate", ["Back"])]))
         $ person_choice = _return
 
         if person_choice == "Back":

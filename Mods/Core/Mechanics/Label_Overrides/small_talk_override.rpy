@@ -70,7 +70,7 @@ label small_talk_person_enhanced(person):
             "The two of you chat pleasantly for half an hour."
             person.char "So [person.mc_title], I'm curious what you think about about [opinion_learned]. Do you have any opinions on it?"
 
-            call screen main_choice_display([build_opinion_smalltalk_list(talk_opinion_text, opinion_state)])
+            call screen enhanced_main_choice_display(build_menu_items([build_opinion_smalltalk_list(talk_opinion_text, opinion_state)]))
 
             $ prediction_difference = abs(_return - opinion_state[0])
             if prediction_difference == 4: #as wrong as possible

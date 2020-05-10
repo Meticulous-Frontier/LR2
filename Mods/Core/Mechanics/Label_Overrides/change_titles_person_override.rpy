@@ -3,7 +3,7 @@ init -1 python:
 
 label change_titles_person_override(the_person):
 
-    call screen main_choice_display(build_title_selection_menu(the_person))
+    call screen enhanced_main_choice_display(build_menu_items(build_title_selection_menu(the_person)))
     if _return in get_titles(the_person): # Is it nescessary to check if it's already their title?
         $ the_person.set_title(_return)
     elif _return in get_player_titles(the_person):

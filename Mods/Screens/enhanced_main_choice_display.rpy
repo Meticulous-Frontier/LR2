@@ -1,6 +1,8 @@
 # The enhanced version will hide columns that have no actions in them.
 
 init 2 python:
+    import threading
+
     # insert class from bugfix into mod (allows for cleaner and faster menus)
     class MenuItem():
         def __init__(self, title = "", return_value = None, the_tooltip = None, extra_args = None, display = True, is_sensitive = True, display_key = None, display_scale = 0.9, display_func = None, person_preview_args = None):
@@ -13,8 +15,18 @@ init 2 python:
             self.display_key = display_key
             self.display_scale = display_scale
             self.display_func = display_func
+            self.display_image = None
             self.person_preview_args = person_preview_args
 
+        def load_person(self, person):
+            t = threading.Thread(target=render_image, args=(self, person, ));
+            t.start();
+            return
+
+    def render_image(item, person):
+        item.display_image = person.build_person_displayable(lighting = mc.location.get_lighting_conditions(), **item.person_preview_args)
+        renpy.predict(item.display_image)   # start prediction of display items
+        return
 
     def build_menu_items(elements_list, draw_hearts_for_people = True, person_preview_args = None):
         result = []
@@ -56,6 +68,7 @@ init 2 python:
                 mi.display_key = item.name + item.last_name
                 mi.display_scale = scale_person(item.height)
                 mi.display_func = item.build_person_displayable
+                mi.load_person(item) # start predicting person displayable
 
                 # prevent overlapping images of girls
                 renpy.scene("Active")
@@ -93,17 +106,16 @@ init 2 python:
                 result.append(mi)
         return result
 
-
     def show_menu_person(item):
-        renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="Active", what= item.display_func(lighting = mc.location.get_lighting_conditions(), **item.person_preview_args), tag=item.display_key)
-
+        if item.display_image:
+            renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="Active", what= item.display_image, tag=item.display_key)
+        else:
+            renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="Active", what= item.display_func(lighting = mc.location.get_lighting_conditions(), **item.person_preview_args), tag=item.display_key)
+        return
 
 init 2:
-    screen main_choice_display(elements_list, draw_hearts_for_people = True, person_preview_args = None): #Elements_list is a list of lists, with each internal list receiving an individual column
+    screen enhanced_main_choice_display(menu_items): #Elements_list is a list of lists, with each internal list receiving an individual column
         #The first element in a column should be the title, either text or a displayable. After that it should be a tuple of (displayable/text, return_value).
-
-        #[["Title",["Item",Return] ]]
-        default menu_items = build_menu_items(elements_list)
 
         hbox:
             spacing 10
