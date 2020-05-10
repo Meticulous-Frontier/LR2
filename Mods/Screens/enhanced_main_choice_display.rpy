@@ -1,8 +1,6 @@
 # The enhanced version will hide columns that have no actions in them.
 
 init 2 python:
-    import threading
-
     # insert class from bugfix into mod (allows for cleaner and faster menus)
     class MenuItem():
         def __init__(self, title = "", return_value = None, the_tooltip = None, extra_args = None, display = True, is_sensitive = True, display_key = None, display_scale = 0.9, display_func = None, person_preview_args = None):
@@ -18,17 +16,15 @@ init 2 python:
             self.display_image = None
             self.person_preview_args = person_preview_args
 
-        def load_person(self, person):
-            t = threading.Thread(target=render_image, args=(self, person, ));
-            t.start();
+        def load(self):
+            self.display_image = self.display_func(lighting = mc.location.get_lighting_conditions(), **self.person_preview_args)
+            renpy.start_predict(self.display_image)
+            # this will pre-load but will slow navigating
+            #renpy.show(self.display_key, at_list = [character_off_screen, self.display_scale], layer = "transient", what = self.display_image, tag = self.display_key)
             return
 
-    def render_image(item, person):
-        item.display_image = person.build_person_displayable(lighting = mc.location.get_lighting_conditions(), **item.person_preview_args)
-        renpy.predict(item.display_image)   # start prediction of display items
-        return
-
     def build_menu_items(elements_list, draw_hearts_for_people = True, person_preview_args = None):
+        renpy.start_predict_screen("enhanced_main_choice_display")
         result = []
         for count in __builtin__.range(len(elements_list)):
             if len(elements_list[count]) > 1:
@@ -68,10 +64,7 @@ init 2 python:
                 mi.display_key = item.name + item.last_name
                 mi.display_scale = scale_person(item.height)
                 mi.display_func = item.build_person_displayable
-                mi.load_person(item) # start predicting person displayable
-
-                # prevent overlapping images of girls
-                renpy.scene("Active")
+                mi.load()
 
             if isinstance(item, Action):
                 mi.title = ""
@@ -107,10 +100,7 @@ init 2 python:
         return result
 
     def show_menu_person(item):
-        if item.display_image:
-            renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="Active", what= item.display_image, tag=item.display_key)
-        else:
-            renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="Active", what= item.display_func(lighting = mc.location.get_lighting_conditions(), **item.person_preview_args), tag=item.display_key)
+        renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="Active", what= item.display_image, tag=item.display_key)
         return
 
 init 2:
@@ -168,3 +158,9 @@ init 2:
                             xalign 0.99
                             yalign 0.99
                             ysize 585
+
+transform character_off_screen():
+    yalign 0.5
+    yanchor 0.5
+    xalign 2.0
+    xanchor 1.0

@@ -7,11 +7,12 @@ init 5 python: # add to stack later then other mods
 
 init -1 python:
     # override some of the default settings to improve performance
-    config.image_cache_size = 8
+    config.image_cache_size = 12
     config.image_cache_size_mb = 1024
 
     # for DEBUG only (uncomment when you get a cPickle error)
     # config.use_cpickle = False
+    # config.debug_image_cache = True
 
     # cache all GUI images in memory
     for fn in renpy.list_files():
