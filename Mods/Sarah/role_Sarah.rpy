@@ -1707,7 +1707,7 @@ label Sarah_threesome_request_label():
     mc.name "Absolutely."
     the_person.char "That would be incredible... but... I mean, I feel like I have a right to know... who do you have in mind?"
     # use new menu layout for selecting people
-    call screen enhanced_main_choice_display([["Request Threesome From"] + get_Sarah_willing_threesome_list()], draw_hearts_for_people = False)
+    call screen enhanced_main_choice_display(build_menu_items([["Request Threesome From"] + get_Sarah_willing_threesome_list()], draw_hearts_for_people = False))
     $ person_choice = _return
     $ scene_manager.update_actor(the_person, position = "sitting")
     if employee_role in person_choice.special_role:

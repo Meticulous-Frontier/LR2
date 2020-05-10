@@ -1190,7 +1190,7 @@ label HR_director_mind_control_attempt_label(the_person):
             return
     the_person.char "Okay. Who do you want me to make the attempt on?"
 
-    call screen enhanced_main_choice_display([["Call in"] + HR_employee_list], draw_hearts_for_people = False)
+    call screen enhanced_main_choice_display(build_menu_items([["Call in"] + HR_employee_list], draw_hearts_for_people = False))
     $ person_choice = _return
 
     $ del HR_employee_list
@@ -1274,7 +1274,7 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
     return
 
 label HR_director_appointment_action_label:
-    call screen enhanced_main_choice_display([get_sorted_people_list(mc.business.hr_team, "Appoint", ["Back"])])
+    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(mc.business.hr_team, "Appoint", ["Back"])]))
     $ person_choice = _return
 
     if person_choice != "Back":
