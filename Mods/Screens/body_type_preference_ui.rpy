@@ -16,7 +16,6 @@ init 2 python:
             list_of_weighted_body_types.append(["standard_body", 1])
             list_of_weighted_body_types.append(["curvy_body", 1])
 
-        renpy.notify("Random Body Type: " + str(len(list_of_weighted_body_types)))
         return get_random_from_weighted_list(list_of_weighted_body_types)
 
     change_body_type_action = Action("Change Body Type Preference", change_body_type_requirement, "show_body_type_preference_ui", menu_tooltip = "Change the chance a certain body type will be generated for a random person.")
