@@ -30,8 +30,12 @@ init 2 python: # Declare variables to use
         global salon_manager
 
         salon_manager = make_person(name = "Ophelia", last_name = "von Friseur", age = renpy.random.randint(21,30), body_type = "thin_body",
-            personality = salon_manager_personality, job = "Hair Stylist", starting_wardrobe = salon_wardrobe, eyes="light blue", start_sluttiness = 10,
-            possessive_title = "My stylist", force_random = True)
+            personality = salon_manager_personality, job = "Hair Stylist", starting_wardrobe = salon_wardrobe, eyes="light blue", sex_array = [1,5,3,1], start_sluttiness = 10,
+            possessive_title = "Your Stylist", relationship = "Single", force_random = True, forced_sexy_opinions = [
+                ["cum facials", 2, False], # ITs good for the skin
+                ["giving blowjobs", 2, False],
+                ["skimpy outfits", 1, False], # Fashion forward
+            ])
 
         salon_manager.special_role.append(salon_manager_role)
         salon_manager.on_room_enter_event_list.append(salon_introduction_action)
@@ -42,6 +46,16 @@ init 2 python: # Declare variables to use
 
         # We want whoever the salon_manager is to be in the salon during work hours.
         salon_manager.set_schedule([1,2,3], mall_salon)
+        salon_manager.event_triggers_dict["introduced"] = 0
+        salon_manager.event_triggers_dict["day_met"] = -1
+        salon_manager.event_triggers_dict["ex_phone_overhear"] = 0
+        salon_manager.event_triggers_dict["pics_to_ex_plan_made"] = 0    #0 = not started. 1 = talked to her, but without resolution. 2 = pics planned. 3 = pics made
+        salon_manager.event_triggers_dict["pics_to_ex_sent"] = 0  #0 =incomplete, 1 = complete, not followed up with. 2 = complete and followed up with
+        salon_manager.event_triggers_dict["first_date_planned"] = 0
+        salon_manager.event_triggers_dict["first_date_finished"] = 0
+        salon_manager.event_triggers_dict["salon_and_spa_planned"] = 0
+        salon_manager.event_triggers_dict["salon_and_spa_finished"] = 0
+        salon_manager.event_triggers_dict["ex_name"] = get_random_male_name()
         return
 
     def salon_introduction_action_requirement(the_person):
@@ -55,4 +69,3 @@ init 2 python: # Declare variables to use
         menu_tooltip = "Change a persons hair style and color.", category="Mall")
 
     salon_introduction_action = Action("Ophelia's Hair Salon", salon_introduction_action_requirement, "salon_manager_greetings", menu_tooltip = "Ophelia's Hair Salon")
-

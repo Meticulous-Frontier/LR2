@@ -16,7 +16,7 @@ init 1400 python:
             title_tuple.append([title,title])
         return renpy.display_menu(title_tuple, True, "Choice")
 
-    salon_manager_personality = Personality("salon_manager", default_prefix = "relaxed", #Based on wild style personality
+    salon_manager_personality = Personality("salon_manager", default_prefix = "wild", #Based on relaxed style personality
         common_likes = ["skirts", "small talk", "the weekend", "the colour purple", "makeup", "hiking", "flirting", "high heels"],
         common_sexy_likes = ["doggy style sex", "giving blowjobs", "getting head", "anal sex", "public sex", "skimpy outfits", "anal creampies", "showing her tits", "showing her ass", "being submissive", "creampies", "drinking cum", "cum facials"],
         common_dislikes = ["Mondays", "the colour yellow", "supply work", "conservative outfits", "work uniforms", "pants", "boots"],
@@ -51,11 +51,14 @@ label salon_manager_greetings(the_person):
         the_person.char "No problem, just give me your credit card details and I will charge it whenever you sent someone by."
         "You smile at [the_person.name] and hand over your company credit card."
         the_person.char "Perfect! All done."
+        $ the_person.event_triggers_dict["introduced"] = 1
+        $ the_person.event_triggers_dict["day_met"] = day
+        $ the_person.on_room_enter_event_list.append(ophelia_ex_bf_phone_overhear)
     else:
         if the_person.love < 0:
             the_person.char "Hi, what can I do for you?"
         elif the_person.happiness < 90:
-            the_person.char "Hey. I hope you're having a better day than I am."        
+            the_person.char "Hey. I hope you're having a better day than I am."
         else:
             the_person.char "Hey there, [the_person.mc_title]! Its good to see you!"
             if the_person.sluttiness > 60:
