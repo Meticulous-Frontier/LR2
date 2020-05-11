@@ -12,14 +12,45 @@ init 2 python:
         else:
             return False
 
-    def ophelia_ex_bf_phone_overhear_requirement(the_person):
+    def ophelia_gets_dumped_requirement(the_person):
         if day >= ophelia_get_day_met() + 4:
-            if mc.location == mall_salon:
+            return True
+        return False
+
+    def ophelia_coworker_conversation_overhear_requirement(the_person):
+        if day >= ophelia_get_day_dumped() + 4:
+            if the_person.location() == mall_salon:
                 return True
         return False
 
+    def ophelia_learn_chocolate_love_requirement():
+        if salon_manager.get_opinion_topic("dark chocolate") == [2, True]:  #Only true if opinion is known
+            return True
+        return False
+
+    def ophelia_give_chocolate_requirement():
+        if ophelia_get_chocolate_gift_unlock():
+            if mc.business.funds > 50:
+                if time_of_day <= 3:
+                    if ophelia_get_day_of_last_gift() == day:
+                        return "Already gifted today"
+                    else:
+                        return True
+                else:
+                    return "Too late to give chocolates"
+            else:
+                return "Not enough money"
+        return False
+
+    def ophelia_ex_bf_phone_overhear_requirement(the_person):
+        if day >= ophelia_get_day_dumped() + 14: #Wait atleast two weeks after getting dumped
+            if the_person.location() == mall_salon:
+                if the_person.sluttiness >= 20:
+                    return True
+        return False
+
     def ophelia_ex_bf_plan_pics_requirement(the_person):
-        if mc.location == mall_salon:
+        if the_person.location() == mall_salon:
             if ophelia_get_ex_pics_planned() < 2:
                 if ophelia_get_phone_convo_heard() > 0:
                     return True
@@ -35,6 +66,10 @@ init 2 python:
 
 
     cut_hair_action = Action("Change hairstyle", cut_hair_requirement, "cut_hair_label", menu_tooltip = "Customize hair style and color")
+    ophelia_gets_dumped = Action("Ophelia gets dumped", ophelia_gets_dumped_requirement, "ophelia_gets_dumped_label", menu_tooltip = "Ophelia is back on the market")
+    ophelia_coworker_conversation_overhear = Action("Ophelia talks with a coworker", ophelia_coworker_conversation_overhear_requirement, "ophelia_coworker_conversation_overhear_label", menu_tooltip = "Ophelia vents to a coworker")
+    ophelia_give_chocolate = Action("Buy Ophelia Dark Chocolates $50", ophelia_give_chocolate_requirement, "ophelia_give_chocolate_label", menu_tooltip = "Buy Ophelia some chocolates. Can use to apply serum")
+    ophelia_learn_chocolate_love = Action("Learn Ophelia loves chocolate", ophelia_learn_chocolate_love_requirement, "ophelia_learn_chocolate_love_label")
     ophelia_ex_bf_plan_pics = Action("Ask about Ex", ophelia_ex_bf_plan_pics_requirement, "ophelia_ex_bf_plan_pics_label", menu_tooltip = "See if you can help")
     ophelia_ex_bf_phone_overhear = Action("Overhear a phone conversation", ophelia_ex_bf_phone_overhear_requirement, "ophelia_ex_bf_phone_overhear_label")
     ophelia_make_blowjob_pics = Action("Make blowjob pictures", ophelia_make_blowjob_pics_requirement, "ophelia_make_blowjob_pics_label")
@@ -63,6 +98,93 @@ label cut_hair_label(the_person):
     $ renpy.scene("Active")
     return
 
+label ophelia_gets_dumped_label(the_person):
+    $ ex_name = ophelia_get_ex_name()
+    "You walk into the salon. As you do, you can hear a man and a woman arguing. You look over and see [the_person.title] talking with a man you don't recognize."
+    the_person.char "I don't understand. You mean... you don't want to see each other anymore?"
+    "?????" "That's right. I think we should see other people."
+    the_person.char "But... we were gonna move in together? What happened to that?"
+    "He sighs and looks annoyed."
+    "?????" "Well, obviously that isn't going to happen anymore."
+    "It looks like [the_person.title] is struggling to hold back tears."
+    the_person.char "I don't... I thought you were the one! 8 months we've been dating... And now... its over?"
+    "?????" "I'm sorry. I need to get going. Take care [the_person.name]."
+    "The man turns and walks off. [the_person.possessive_title] is in shock."
+    $ the_person.change_happiness(-50)
+    $ the_person.event_triggers_dict["dump_witnessed"] = 1
+    $ the_person.event_triggers_dict["dump_day"] = day
+    $ the_person.on_room_enter_event_list.append(ophelia_coworker_conversation_overhear)
+    $ del ex_name
+    return
+
+label ophelia_coworker_conversation_overhear_label(the_person):
+    $ ex_name = ophelia_get_ex_name()
+    "You walk into the salon. You notice [the_person.title] talking to one of her coworkers, probably about her recent breakup."
+    the_person.char "I know! But it gets worse! He is still friends with me on Facebook, you know?"
+    the_person.char "This morning I got a notification, [ex_name] is now in a relationship. I was like... what the fuck?"
+    the_person.char "So I look her up. Its the fucking secretary at his office! They're already planning a vacation together this summer!"
+    "?????" "He's dipping his pen in company ink?"
+    the_person.char "Exactly. Ugh, you should see her too. She's bimbo looking with tits like..."
+    "[the_person.title] motions her hands in a way that makes it clear that this woman her ex is dating is very well endowed."
+    "?????" "It's not her fault she's blessed in the chest."
+    the_person.char "In her photo history was a pic of her in a bikini... there's absolutely no way they are real."
+    "[the_person.title] and her coworker continue their banter for a bit."
+    $ the_person.event_triggers_dict["coworker_overhear"] = 1
+    "Maybe you should chat with her for a bit? See if you can learn something about her that would give you an opportunity to cheer her up?"
+    "You never know what you might learn with some small talk."
+    # Should this just be a python block?
+    $ the_person.event_triggers_dict["coworker_overhear"] = 1
+    $ mc.business.mandatory_crises_list.append(ophelia_learn_chocolate_love)
+    $ the_person.on_room_enter_event_list.append(ophelia_ex_bf_phone_overhear)
+    $ del ex_name
+    return
+
+label ophelia_learn_chocolate_love_label():
+    $ the_person = salon_manager
+    "You consider what you learned about [the_person.title] while talking to her previously."
+    "She loves dark chocolate! Slowly a plan starts to form in your mind for how you can cheer her up."
+    "You are positive there is a candy store at the mall. You could buy her some, then leave a note saying something tacky, like \'from your Secret Admirer\'."
+    "You bet that would help her get her mind off her ex!"
+    "... plus... if you have sole control over the chocolates... you could easily add some serum to them if you want..."
+    $ the_person.event_triggers_dict["chocolate_gift_unlocked"] = 1
+    $ mall.actions.append(ophelia_give_chocolate)
+    return
+
+label ophelia_give_chocolate_label():
+    $ the_person = salon_manager
+    "You walk around the mall and find a candy store."
+    if ophelia_get_num_chocolates_received() < 3:  #Only done this a couple of times or not at all
+        "You look around the store for quite some time, looking for the perfect set of dark chocolates for [the_person.title]"
+        "After several minutes, you find the right one. Perfect!"
+    elif ophelia_get_num_chocolates_received() < 10:  #Getting to be a regular
+        "You go to the section with the dark chocolates. You pick out [the_person.title]'s favorite."
+    else:
+        "As you walk into the store, the clerk recognizes you and waves."
+        "You exchange a few pleasantries as you grab the usual box of dark chocolates that [the_person.title] loves."
+    "You take the candy to the counter and purchase it."
+    "You consider adding a serum to the candy before you leave it for [the_person.possessive_title]"
+    menu:
+        "Add a serum":
+            "You decide to add a serum to the candy."
+            call give_serum(the_person) from _call_ophelia_chocolates_with_serum_01
+        "Leave alone":
+            "You decide to leave the candy alone."
+    "You write a quick note for her."
+    if ophelia_get_knows_secret_admirer() and not ophelia_get_is_over_her_ex():
+        "\'From your not so secret admirer <3\'"
+    elif ophelia_get_is_over_her_ex():
+        if not ophelia_get_knows_secret_admirer():
+            "You consider for a while what to put down in your note. You decide eventually that it is time to come clean."
+            #TODO add new event where next time you see her, Ophelia confronts you about being her secret admirer the whole time.
+        "\'From [the_person.mc_title] XOXOXO\'"
+    else:
+        "\'From your secret admirer <3\'"
+    "When you finish, you drop the chocolate in the salon mailbox."
+    $ the_person.event_triggers_dict["day_of_last_chocolate"] = day
+    $ the_person.event_triggers_dict["chocolates_receieved"] += 1
+    $ the_person.change_happiness(5)
+    return
+
 label ophelia_ex_bf_phone_overhear_label(the_person):
     "You walk into the salon. You see [the_person.title] with her back to you, conversing on the phone, loudly."
     $ the_person.draw_person(position = "walking_away")
@@ -82,12 +204,22 @@ label ophelia_ex_bf_phone_overhear_label(the_person):
     return
 
 label ophelia_ex_bf_plan_pics_label(the_person):
-    if ophelia_get_ex_pics_planned() == 0:
+    if the_person.happiness < 100:
+        mc.name "Sorry, I don't mean to intrude, but..."
+        $ the_person.draw_person(emotion = "angry")
+        "She snaps back at you."
+        the_person.char "Well then you probably shouldn't. What happens between me and my ex is none of your business."
+        $ the_person.change_obedience(-2)
+        $ the_person.change_love(-2)
+        "Yikes! Maybe you should try and find a way to chear her up some before you talk to her about her ex again..."
+        $ the_person.event_triggers_dict["pics_to_ex_plan_made"] = 1
+        return
+    elif ophelia_get_ex_pics_planned() == 0:
         mc.name "Sorry, I don't mean to intrude, but, I couldn't help overhearing part of your phone conversation."
         the_person.char "Ah geeze, sorry, I was getting pretty fired up there."
         mc.name "Having some problems with someone?"
         "She sighs before she starts to explain."
-        the_person.char "Yeah, something like that. My boyfriend dumped me a couple months ago. I keep trying to convince him we should umm, hang out again sometime, just for fun."
+        the_person.char "Yeah, something like that. My boyfriend dumped me a few weeks ago. I keep trying to convince him we should umm, hang out again sometime, just for fun."
         the_person.char "But apparently he is already dating some slut he met at his job or something."
         the_person.char "I saw a picture of them on Facebook. She has huge tits, but she looks so dumb, I bet she doesn't give blowjobs like I do!"
         $ the_person.event_triggers_dict["pics_to_ex_plan_made"] = 1
@@ -259,6 +391,27 @@ label ophelia_blowjob_pics_review_label():
 #       These are solely to recall story variables
 
 init 2 python:
+    def ophelia_get_day_dumped():
+        return salon_manager.event_triggers_dict.get("dump_day", 0)
+
+    def ophelia_get_has_been_dumped():
+        return salon_manager.event_triggers_dict.get("dump_witnessed", 0)
+
+    def ophelia_get_coworker_overheard():
+        return salon_manager.event_triggers_dict.get("coworker_overhear", 0)
+
+    def ophelia_get_num_chocolates_received():
+        return salon_manager.event_triggers_dict.get("chocolates_receieved", 0)
+
+    def ophelia_get_chocolate_gift_unlock():
+        return salon_manager.event_triggers_dict.get("chocolate_gift_unlocked", 0)
+
+    def ophelia_get_day_of_last_gift():
+        return salon_manager.event_triggers_dict.get("day_of_last_chocolate", 0)
+
+    def ophelia_get_knows_secret_admirer():
+        return salon_manager.event_triggers_dict.get("secret_admirer_known", 0)
+
     def ophelia_get_phone_convo_heard():
         return salon_manager.event_triggers_dict.get("ex_phone_overhear", 0)
 
@@ -285,3 +438,11 @@ init 2 python:
 
     def ophelia_get_salon_and_spa_finished():
         return salon_manager.event_triggers_dict.get("salon_and_spa_finished", 0)
+
+    def ophelia_get_is_over_her_ex():  #TODO figure out where in the story she is officially over her ex and add the conditions here
+        return False
+
+    def ophelia_is_latest_verison():
+        if not salon_manager.event_triggers_dict.get("coworker_overhear", -2) == -2:   #Will only be true if variable doesn't exist
+            return True
+        return False

@@ -2,11 +2,11 @@ init 1400 python:
     def salon_manager_possessive_titles(person):
         valid_possessive_titles = []
         valid_possessive_titles.append(person.name)
-        valid_possessive_titles.append("My stylist")
+        valid_possessive_titles.append("Your stylist")
         if person.sluttiness > 40:
             valid_possessive_titles.append("Crazy Bitch")
         if person.sluttiness > 50:
-            valid_possessive_titles.append("My intimate stylist")
+            valid_possessive_titles.append("Your intimate stylist")
         return valid_possessive_titles
 
     def build_salon_manger_title_choice_menu(person):
@@ -53,7 +53,7 @@ label salon_manager_greetings(the_person):
         the_person.char "Perfect! All done."
         $ the_person.event_triggers_dict["introduced"] = 1
         $ the_person.event_triggers_dict["day_met"] = day
-        $ the_person.on_room_enter_event_list.append(ophelia_ex_bf_phone_overhear)
+        $ the_person.on_room_enter_event_list.append(ophelia_gets_dumped)
     else:
         if the_person.love < 0:
             the_person.char "Hi, what can I do for you?"
