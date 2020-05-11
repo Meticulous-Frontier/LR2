@@ -54,7 +54,7 @@ init 2 python:
             if ophelia_get_ex_pics_planned() < 2:
                 if ophelia_get_phone_convo_heard() > 0:
                     return True
-        return "Testing"
+        return False
 
     def ophelia_make_blowjob_pics_requirement():
         if time_of_day == 3:
