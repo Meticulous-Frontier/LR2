@@ -4,17 +4,19 @@ init 2 python:
 
     def get_random_body_type():
         list_of_weighted_body_types = []
-        if persistent.thin_body or 75 > 0:
-            list_of_weighted_body_types.append(["thin_body", persistent.thin_body or 75])
-        if persistent.normal_body or 20 > 0:
-            list_of_weighted_body_types.append(["standard_body", persistent.normal_body or 20])
-        if persistent.curvy_body or 5 > 0:
-            list_of_weighted_body_types.append(["curvy_body", persistent.curvy_body or 5])
+        if persistent.thin_body > 0:
+            list_of_weighted_body_types.append(["thin_body", persistent.thin_body])
+        if persistent.normal_body > 0:
+            list_of_weighted_body_types.append(["standard_body", persistent.normal_body])
+        if persistent.curvy_body > 0:
+            list_of_weighted_body_types.append(["curvy_body", persistent.curvy_body])
+
         if len(list_of_weighted_body_types) == 0:
             list_of_weighted_body_types.append(["thin_body", 1])
             list_of_weighted_body_types.append(["standard_body", 1])
             list_of_weighted_body_types.append(["curvy_body", 1])
 
+        renpy.notify("Random Body Type: " + str(len(list_of_weighted_body_types)))
         return get_random_from_weighted_list(list_of_weighted_body_types)
 
     change_body_type_action = Action("Change Body Type Preference", change_body_type_requirement, "show_body_type_preference_ui", menu_tooltip = "Change the chance a certain body type will be generated for a random person.")
@@ -24,11 +26,11 @@ init 5 python:
     add_label_hijack("after_load", "update_body_type_preference")
 
     def set_persistent_body_type_preferences():
-        if not isinstance(persistent.thin_body, int):
+        if not (persistent.thin_body or isinstance(persistent.thin_body, int)):
             persistent.thin_body = 75
-        if not isinstance(persistent.normal_body, int):
+        if not (persistent.normal_body or isinstance(persistent.normal_body, int)):
             persistent.normal_body = 20
-        if not isinstance(persistent.curvy_body, int):
+        if not (persistent.curvy_body or isinstance(persistent.curvy_body, int)):
             persistent.curvy_body = 5
         return
 
@@ -44,7 +46,7 @@ label update_body_type_preference(stack):
     python:
         if not change_body_type_action in bedroom.actions:
             bedroom.actions.append(change_body_type_action)
-            set_persistent_body_type_preferences()
+        set_persistent_body_type_preferences()
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
