@@ -27,6 +27,8 @@ label activate_compatibility_fix(stack):
     $ crisis_tracker_dict = {}
 
     $ update_pinned_cache()
+
+    $ execute_hijack_call(stack)
     return
 
 label update_compatibility_fix(stack):
