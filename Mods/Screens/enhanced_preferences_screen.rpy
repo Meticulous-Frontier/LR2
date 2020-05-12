@@ -58,6 +58,26 @@ init 2: # Add some additional
                         #bar value FieldValue(style.get("textbutton_text_style"), "size", range = 50, step = 2, force_step = True) changed style.rebuild #action SetField(style.get("textbutton_text_style"), "size")
                         #textbutton "Text Size:" + str(style.get("textbutton_text_style").size) action NullAction() #[SetField(style.get("textbutton_text_style"), "size", 1)), Function(style.rebuild)]
 
+                    if not renpy.mobile: #High Memory mode is always disabled on mobile.
+                        vbox:
+                            style_prefix "radio"
+                            label "Memory Mode" 
+                            textbutton "High":
+                                sensitive True
+                                tooltip "Allows the game to use a lot more memory for caching images, allowing for smoother menu's and transitions. Requires Restart to take effect."
+                                action [
+                                    SetField(persistent, "high_memory_mode", True),
+                                    Function(renpy.reload_script)
+                                ]
+                            textbutton "Low":
+                                sensitive True
+                                tooltip "The game uses a lot less memory for caching images, recommended on low memory devices. Requires Restart to take effect."
+                                action [
+                                    SetField(persistent, "high_memory_mode", False),
+                                    Function(renpy.reload_script)
+                                ]
+
+
                     ## Additional vboxes of type "radio_pref" or "check_pref" can be
                     ## added here, to add additional creator-defined preferences.
 

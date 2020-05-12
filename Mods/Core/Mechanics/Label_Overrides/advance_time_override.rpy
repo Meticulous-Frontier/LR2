@@ -353,7 +353,9 @@ label advance_time_people_run_day_label():
     # "advance_time_people_run_day_label - timeslot [time_of_day]" # DEBUG
     #if time_of_day == 4: ##First, determine if we're going into the next chunk of time. If we are, advance the day and run all of the end of day code. NOTE: We can do checks like these with Action.requirements
     $ advance_time_run_day(people_to_process)
-    $ renpy.free_memory()
+    # we don't have as much memory on mobile so do a cleanup
+    if renpy.mobile:
+        $ renpy.free_memory()
     # $ renpy.profile_memory(.05, 16384)
     $ renpy.block_rollback()
     return
