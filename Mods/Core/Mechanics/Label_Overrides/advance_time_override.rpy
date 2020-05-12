@@ -2,6 +2,8 @@
 # it adds a increased chance for a crisis to occur when more time passed without a crisis
 # it adds a way of preventing the same crisis popping up over and over, whilst others never get triggered by remembering a set of occurred events
 init -1 python:
+    import gc
+
     def advance_time_next_requirement():
         return True
 
@@ -356,7 +358,8 @@ label advance_time_people_run_day_label():
     # we don't have as much memory on mobile so do a cleanup
     if renpy.mobile:
         $ renpy.free_memory()
-    # $ renpy.profile_memory(.05, 16384)
+    $ gc.collect()
+    # $ renpy.profile_memory(.1, 16384)
     $ renpy.block_rollback()
     return
 

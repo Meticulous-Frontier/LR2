@@ -13,18 +13,20 @@ init 5 python: # add to stack later then other mods
 
 init -1 python:
     # override some of the default settings to improve performance
+    config.image_cache_size = None  # when None the image_cache_size_mb value is used
     if renpy.variant("pc"):
+        # disables renpy.free_memory() daily cleanup, thus requires enough memory to perform operations
         if persistent.high_memory_mode:
-            config.image_cache_size = 96
+            config.image_cache_size_mb = 1536
         else:
-            config.image_cache_size = 32
+            config.image_cache_size_mb = 768
     else:
-        config.image_cache_size = 8
-        # on a PC we should have enough memory to build a full image cache
+        config.image_cache_size_mb = 384 # low memory devices like phones (uses renpy.free_memory() for daily memory clean)
+
+    # allow for more idle objects
     config.automatic_images = None
     config.optimize_texture_bounds = True
-    config.predict_statements = 8
-    #config.image_cache_size_mb = 1024  # this setting does not have the desired effect (always 200 Mb of image_cache memory)
+    config.predict_statements = 16
     config.cache_surfaces = False
     config.predict_screens = False
 

@@ -17,12 +17,8 @@ init 2 python:
             self.person_preview_args = person_preview_args
 
         def load(self):
-            # flatten image to reduce image_cache memory usage
             self.display_image = self.display_func(lighting = mc.location.get_lighting_conditions(), **self.person_preview_args)
-            # put flattened image in prediction cache
             renpy.start_predict(self.display_image) 
-            # this will pre-load but will slow navigating
-            #renpy.show(self.display_key, at_list = [character_off_screen, self.display_scale], layer = "transient", what = self.display_image, tag = self.display_key)
             return
 
     def build_menu_items(elements_list, draw_hearts_for_people = True, person_preview_args = None):
