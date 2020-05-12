@@ -2,10 +2,7 @@
     # Fix compatibility of save games.
 
 init -2:
-    if renpy.variant("pc"):
-        default persistent.high_memory_mode = True
-    else:
-        default persistent.high_memory_mode = False        
+    default persistent.high_memory_mode = False
 
 init 5 python: # add to stack later then other mods
     add_label_hijack("normal_start", "activate_compatibility_fix")
