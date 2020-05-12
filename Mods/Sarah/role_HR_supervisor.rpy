@@ -276,6 +276,12 @@ init 5 python:
             person.increase_opinion_score(topic)
         return
 
+    def calculate_backfire_odds():
+        serum_trait = find_in_list(lambda x: x == mind_control_agent, list_of_traits)
+        if serum_trait:
+            return int(serum_trait.base_side_effect_chance / serum_trait.mastery_level)
+        return 100
+
     HR_director_coffee_tier_1_action = Action("Add serum to coffee during meetings.", HR_director_coffee_tier_1_requirement, "HR_director_coffee_tier_1_label",
         menu_tooltip = "Costs $500 but makes meetings more impactful.")
     HR_director_coffee_tier_2_action = Action("Add stronger serum to coffee during meetings.", HR_director_coffee_tier_2_requirement, "HR_director_coffee_tier_2_label",
@@ -1181,8 +1187,8 @@ label HR_director_mind_control_attempt_label(the_person):
 
     the_person.char "Okay... remember this act has a chance of backfiring, having all kinds of unknown side effects. Are you sure you want to continue?"
     "Note: The chance of the session backfiring is directly related to your mastery level of the Mind Control serum effect!"
-    $ backfire_odds = mind_control_agent.base_side_effect_chance / mind_control_agent.mastery_level
-    "Current odds of backfiring are: [backfire_odds]. Successful mind control will increase all current trainable opinions by 1 tier. Are you sure you want to attempt?"
+    $ ran_num = calculate_backfire_odds()
+    "Current odds of backfiring are: [ran_num]%%. Successful mind control will increase all current trainable opinions by 1 tier. Are you sure you want to attempt?"
     menu:
         "Yes":
             pass
@@ -1247,8 +1253,7 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
     "..."
     "....."
     $ is_backfire = False
-    $ backfire_odds = mind_control_agent.base_side_effect_chance / mind_control_agent.mastery_level
-    if int(backfire_odds) > renpy.random.randint(0,100): #FAIL
+    if calculate_backfire_odds() > renpy.random.randint(0,100): #FAIL
         $ backfire_string = mind_control_backfire(the_person)
         "The mind control event has backfired!"
         #TODO add backfire string to event log
