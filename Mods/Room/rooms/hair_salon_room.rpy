@@ -6,6 +6,15 @@ label ophelia_on_load(stack):
         if not ophelia_is_latest_verison():
             salon_manager.special_role = []   #TODO!!! This call also removes girlfriend and paramore roles. Find a way to detect and replace them.
             salon_manager.special_role.append(salon_manager_role)
+            if ophelia_get_ex_pics_sent == 1:
+                if ophelia_blowjob_pics_review not in salon_manager.on_room_enter_event_list:
+                    salon_manager.on_room_enter_event_list.append(ophelia_blowjob_pics_review)
+        #remove these in a future version
+        salon_manager.event_triggers_dict["foreplay_position_filter"] = ophelia_foreplay_position_filter
+        salon_manager.event_triggers_dict["oral_position_filter"] = ophelia_oral_position_filter
+        salon_manager.event_triggers_dict["vaginal_position_filter"] = ophelia_vaginal_position_filter
+        salon_manager.event_triggers_dict["anal_position_filter"] = ophelia_anal_position_filter
+        salon_manager.event_triggers_dict["unique_sex_positions"] = ophelia_unique_sex_positions
         execute_hijack_call(stack)
 
     return
@@ -70,10 +79,16 @@ init 2 python: # Declare variables to use
         salon_manager.event_triggers_dict["ex_phone_overhear"] = 0
         salon_manager.event_triggers_dict["pics_to_ex_plan_made"] = 0    #0 = not started. 1 = talked to her, but without resolution. 2 = pics planned. 3 = pics made
         salon_manager.event_triggers_dict["pics_to_ex_sent"] = 0  #0 =incomplete, 1 = complete, not followed up with. 2 = complete and followed up with
-        salon_manager.event_triggers_dict["first_date_planned"] = 0
+        salon_manager.event_triggers_dict["special_bj_unlock"] = 0
+        salon_manager.event_triggers_dict["first_date_planned"] = 0 #Misnomer... oh well...
         salon_manager.event_triggers_dict["first_date_finished"] = 0
         salon_manager.event_triggers_dict["salon_and_spa_planned"] = 0
         salon_manager.event_triggers_dict["salon_and_spa_finished"] = 0
+        salon_manager.event_triggers_dict["foreplay_position_filter"] = ophelia_foreplay_position_filter
+        salon_manager.event_triggers_dict["oral_position_filter"] = ophelia_oral_position_filter
+        salon_manager.event_triggers_dict["vaginal_position_filter"] = ophelia_vaginal_position_filter
+        salon_manager.event_triggers_dict["anal_position_filter"] = ophelia_anal_position_filter
+        salon_manager.event_triggers_dict["unique_sex_positions"] = ophelia_unique_sex_positions
         salon_manager.event_triggers_dict["ex_name"] = get_random_male_name()
         return
 

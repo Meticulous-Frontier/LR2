@@ -224,6 +224,25 @@ init 5 python:
         oral_positions.insert(0, "Pick Oral")
         vaginal_positions.insert(0, "Pick Vaginal")
         anal_positions.insert(0, "Pick Anal")
+        return replace_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions)
+
+    def replace_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions): #Use this function to get specific situations to replace or remove positions
+        #First, filter out any positions this person doesn't accept
+        #TODO move this to allow_position(), this probably very inefficient
+        foreplay_positions = filter(person.event_triggers_dict.get("foreplay_position_filter", None),foreplay_positions)
+        oral_positions = filter(person.event_triggers_dict.get("oral_position_filter", None),oral_positions)
+        vaginal_positions = filter(person.event_triggers_dict.get("vaginal_position_filter", None),vaginal_positions)
+        anal_positions = filter(person.event_triggers_dict.get("anal_position_filter", None),anal_positions)
+
+        #Add unique character specific positions. #TODO tie this some kind of individual person function.
+        # if person == salon_manager:
+        #     if ophelia_get_special_bj_unlocked():
+        #         oral_positions = filter(ophelia_oral_position_filter, oral_positions)
+        #         willingness = Ophelia_blowjob.build_position_willingness_string(person, ignore_taboo = True).replace("{size=22}", "{size=12}")
+        #         oral_positions.append([willingness, Ophelia_blowjob])
+        return person.event_triggers_dict.get("unique_sex_positions", default_unique_sex_positions)(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions)
+
+    def default_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions):
         return [foreplay_positions, oral_positions, vaginal_positions, anal_positions]
 
 
@@ -289,7 +308,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 the_person.char "Oh my god, I came so hard, thanks a lot [the_person.mc_title]!"
                 $ round_choice = "Girl Leave"
             elif report_log.get("girl orgasms", 0) == 0 and the_person.energy < 15 :
-                the_person.char "That was nice, but i'm tired. We will continue this another time."
+                the_person.char "That was nice, but I'm tired. We will continue this another time."
                 $ round_choice = "Girl Leave"
             elif has_taken_control:
                 $ has_taken_control = False
@@ -345,7 +364,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                             # call mod taboo break
                             $ position_choice.call_transition_taboo_break(None, the_person, mc.location, object_choice)
                             $ the_person.break_taboo(position_choice.associated_taboo)
-                        else:                        
+                        else:
                             $ position_choice.call_intro(the_person, mc.location, object_choice)
                     else:
                         $ the_person.change_arousal(-5) #Changing position lowers your arousal slightly
@@ -855,7 +874,7 @@ label girl_strip_event_enhanced(the_person, the_position, the_object):
         else:
             $ the_position.call_strip(the_person, the_clothing, mc.location, the_object) #If a girl's outfit is less slutty than she is currently feeling (with arousal factored in) she will want to strip stuff off.
 
-        $ the_person.update_outfit_taboos()       
+        $ the_person.update_outfit_taboos()
     $ the_clothing = None
     return
 

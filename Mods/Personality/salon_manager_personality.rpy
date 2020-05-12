@@ -7,6 +7,8 @@ init 1400 python:
             valid_possessive_titles.append("Crazy Bitch")
         if person.sluttiness > 50:
             valid_possessive_titles.append("Your intimate stylist")
+        if ophelia_get_special_bj_unlocked():
+            valid_possessive_titles.append("Your blowjob prodigy")
         return valid_possessive_titles
 
     def build_salon_manger_title_choice_menu(person):

@@ -61,8 +61,15 @@ init 2 python:
             return True
         return False
 
-    def ophelia_blowjob_pics_review_requirement(): #Disabled for now
+    def ophelia_blowjob_pics_review_requirement():
+        if time_of_day < 4:
+            return True
         return False
+
+    def ophelia_special_blowjob_requirement(the_person):
+        if the_person.sluttiness >= 40:
+            if the_person.energy > 60:
+                return True
 
 
     cut_hair_action = Action("Change hairstyle", cut_hair_requirement, "cut_hair_label", menu_tooltip = "Customize hair style and color")
@@ -73,6 +80,7 @@ init 2 python:
     ophelia_ex_bf_plan_pics = Action("Ask about Ex", ophelia_ex_bf_plan_pics_requirement, "ophelia_ex_bf_plan_pics_label", menu_tooltip = "See if you can help")
     ophelia_ex_bf_phone_overhear = Action("Overhear a phone conversation", ophelia_ex_bf_phone_overhear_requirement, "ophelia_ex_bf_phone_overhear_label")
     ophelia_make_blowjob_pics = Action("Make blowjob pictures", ophelia_make_blowjob_pics_requirement, "ophelia_make_blowjob_pics_label")
+    ophelia_blowjob_pics_review = Action("Review blowjob pictures",  ophelia_blowjob_pics_review_requirement, "ophelia_blowjob_pics_review_label")
 
     salon_manager_role = Role("Salon Manager", [cut_hair_action, ophelia_ex_bf_plan_pics])
 
@@ -379,12 +387,56 @@ label ophelia_make_blowjob_pics_label():
     the_person.char "Thanks for your help tonight. I have a couple more things to do before I head home. Gonna send those pics out..."
     "You say goodbye and then walk out of the salon. You wonder what her ex will think when he gets those pictures..."
     $ the_person.event_triggers_dict["pics_to_ex_plan_made"] = 3
+    $ the_person.event_triggers_dict["pics_to_ex_sent"] = 1
+    $ the_person.on_room_enter_event_list.append(ophelia_blowjob_pics_review)
     return
 
-label ophelia_blowjob_pics_review_label():
-    pass
-    #TODO pick up the story from here!
+label ophelia_blowjob_pics_review_label(the_person):
+    $ OP_ex_name = ophelia_get_ex_name()
+    "You walk into the salon. [the_person.title] notices you as you walk in."
+    $ the_person.draw_person(emotion = "sad")
+    the_person.char "Hello [the_person.mc_title]."
+    mc.name "Hey. How'd it go? Get any response?"
+    the_person.char "Ugh. See for yourself."
+    "She pulls out her phone and shows you the text conversation."
+    "It starts with a pic of [the_person.possessive_title] licking the tip of your cock."
+    the_person.char "Had so much fun last night baby..."
+    "Next is the video you took of her doing that move where she deepthroats and simultaneously licks your balls."
+    the_person.char "OH SHIT, sorry, wrong person."
+    op_ex_name "Just happy for you that you found someone."
+    the_person.char "Well, he's just a friend. Remember when I used to do that for you?"
+    op_ex_name "[the_person.name]... this isn't funny."
+    the_person.char "What? It's nothing serious, you should come over tomorrow, I'll do the same for you."
+    op_ex_name "I'm sorry, this is getting out of control. I'm sorry but I'm blocking you."
+    the_person.char "Wow, after everything we've been through together? \n \'message not received\'"
+    "...Ouch..."
+    mc.name "[the_person.title]... I'm sorry."
+    the_person.char "Yeah that's... not what I was hoping for. Oh well."
+    the_person.char "I was really thinking that, just maybe."
+    if ophelia_get_num_chocolates_received() > 3:
+        the_person.char "I've been getting these sweets that someone had been leaving me in the mailbox. They are my favorite dark chocolate! I thought maybe it was him..."
+        "Oh geeze, she is really hung up on this guy. Maybe you should be straight with her?"
+    else:
+        the_person.char "Sometimes guys do weird stuff. You know? I thought surely he'd realize what he has been missing out on."
+    mc.name "I guess it just wasn't meant to be."
+    the_person.char "Yeah, maybe. Who knows. Anyway if nothing else, I DID have a lot of fun making these pictures."
+    mc.name "Yeah, I did too."
+    $ the_person.draw_person(emotion = "happy")
+    "[the_person.possessive_title] smiles for a moment as she looks at you."
+    the_person.char "Yeah. I bet you did!"
+    the_person.char "You know, I'm not sure I'm ready to give up on [op_ex_name] yet, but, in the mean time I suppose that makes me single so... you know..."
+    mc.name "I'm not sure I do?"
+    the_person.char "It would be nice to be able to blow off a little steam once in a while with someone. Someone like you."
+    mc.name "I'm down for anything you want to blow. You were amazing."
+    the_person.char "Yeah. It might take some convincing but... I have a feeling you might be able to convince me to do that again."
+    "She gives you a wink."
+    the_person.char "I'd better get back to work."
+    $ the_person.event_triggers_dict["pics_to_ex_sent"] = 2
+    $ the_person.event_triggers_dict["special_bj_unlock"] = 1
     return
+
+label ophelia_special_blowjob_label(the_person):
+
 
 
 ##### Story variable python wrappers
@@ -439,10 +491,43 @@ init 2 python:
     def ophelia_get_salon_and_spa_finished():
         return salon_manager.event_triggers_dict.get("salon_and_spa_finished", 0)
 
+    def ophelia_get_special_bj_unlocked():
+        return salon_manager.event_triggers_dict.get("special_bj_unlock", 0)
+
     def ophelia_get_is_over_her_ex():  #TODO figure out where in the story she is officially over her ex and add the conditions here
         return False
 
     def ophelia_is_latest_verison():
-        if not salon_manager.event_triggers_dict.get("coworker_overhear", -2) == -2:   #Will only be true if variable doesn't exist
+        if not salon_manager.event_triggers_dict.get("special_bj_unlock", -2) == -2:   #Will only be true if variable doesn't exist
             return True
         return False
+
+
+#TESTING FUNCTIONS#
+#I am attempting to creat a unique person only position filter for determining what positions are available and when.
+
+    def ophelia_foreplay_position_filter(foreplay_positions):
+        return True
+
+    def ophelia_oral_position_filter(oral_positions):
+        if ophelia_get_special_bj_unlocked():
+            filter_out = [blowjob, deepthroat, skull_fuck]
+            if oral_positions[1] in filter_out:
+                return False
+            else:
+                return True
+        return False
+
+    def ophelia_vaginal_position_filter(vaginal_positions):
+        return False
+
+    def ophelia_anal_position_filter(anal_positions):
+        return False
+
+    def ophelia_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions):
+        if ophelia_get_special_bj_unlocked():
+            willingness = Ophelia_blowjob.build_position_willingness_string(person, ignore_taboo = True).replace("{size=22}", "{size=12}")
+            oral_positions.append([willingness, Ophelia_blowjob])
+
+
+        return [foreplay_positions, oral_positions, vaginal_positions, anal_positions]
