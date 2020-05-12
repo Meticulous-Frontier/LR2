@@ -22,7 +22,6 @@ init 2 python:
             return
 
     def build_menu_items(elements_list, draw_hearts_for_people = True, person_preview_args = None):
-        renpy.start_predict_screen("enhanced_main_choice_display")
         result = []
         for count in __builtin__.range(len(elements_list)):
             if len(elements_list[count]) > 1:
