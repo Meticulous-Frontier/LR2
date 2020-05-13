@@ -23,12 +23,12 @@ init 2 python:
                 return True
         return False
 
-    def ophelia_learn_chocolate_love_requirement():
+    def ophelia_learn_chocolate_love_requirement(person):
         if salon_manager.get_opinion_topic("dark chocolate") == [2, True]:  #Only true if opinion is known
             return True
         return False
 
-    def ophelia_give_chocolate_requirement():
+    def ophelia_give_chocolate_requirement(person):
         if ophelia_get_chocolate_gift_unlock():
             if mc.business.funds > 50:
                 if time_of_day <= 3:
@@ -56,12 +56,12 @@ init 2 python:
                     return True
         return False
 
-    def ophelia_make_blowjob_pics_requirement():
+    def ophelia_make_blowjob_pics_requirement(person):
         if time_of_day == 3:
             return True
         return False
 
-    def ophelia_blowjob_pics_review_requirement():
+    def ophelia_blowjob_pics_review_requirement(person):
         if time_of_day < 4:
             return True
         return False
