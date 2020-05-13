@@ -48,4 +48,4 @@ init -2 python:
 
 init 2 python:
     build.name = "Lab_Rats_2_Mod"
-    config.window_icon = "Mods/Core/Images/icon.png"
+    config.window_icon = get_file_handle("mod_icon.png")
