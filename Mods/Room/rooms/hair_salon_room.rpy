@@ -3,7 +3,7 @@ init 5 python:
 
 label ophelia_on_load(stack):
     python:
-        if not ophelia_is_latest_verison():
+        if not ophelia_is_latest_version():
             salon_manager.special_role = []   #TODO!!! This call also removes girlfriend and paramore roles. Find a way to detect and replace them.
             salon_manager.special_role.append(salon_manager_role)
             if ophelia_get_ex_pics_sent == 1:
@@ -72,7 +72,7 @@ init 2 python: # Declare variables to use
         salon_manager.event_triggers_dict["dump_witnessed"] = 0
         salon_manager.event_triggers_dict["dump_day"] = -1
         salon_manager.event_triggers_dict["coworker_overhear"] = 0
-        salon_manager.event_triggers_dict["chocolates_receieved"] = 0
+        salon_manager.event_triggers_dict["chocolates_received"] = 0
         salon_manager.event_triggers_dict["chocolate_gift_unlocked"] = 0
         salon_manager.event_triggers_dict["day_of_last_chocolate"] = -1
         salon_manager.event_triggers_dict["secret_admirer_known"] = 0

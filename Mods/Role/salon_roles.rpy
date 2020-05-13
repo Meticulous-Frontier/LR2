@@ -12,14 +12,14 @@ init 2 python:
         else:
             return False
 
-    def ophelia_gets_dumped_requirement(the_person):
+    def ophelia_gets_dumped_requirement(person):
         if day >= ophelia_get_day_met() + 4:
             return True
         return False
 
-    def ophelia_coworker_conversation_overhear_requirement(the_person):
+    def ophelia_coworker_conversation_overhear_requirement(person):
         if day >= ophelia_get_day_dumped() + 4:
-            if the_person.location() == mall_salon:
+            if person.location() == mall_salon:
                 return True
         return False
 
@@ -42,15 +42,15 @@ init 2 python:
                 return "Not enough money"
         return False
 
-    def ophelia_ex_bf_phone_overhear_requirement(the_person):
+    def ophelia_ex_bf_phone_overhear_requirement(person):
         if day >= ophelia_get_day_dumped() + 14: #Wait atleast two weeks after getting dumped
-            if the_person.location() == mall_salon:
-                if the_person.sluttiness >= 20:
+            if person.location() == mall_salon:
+                if person.sluttiness >= 20:
                     return True
         return False
 
-    def ophelia_ex_bf_plan_pics_requirement(the_person):
-        if the_person.location() == mall_salon:
+    def ophelia_ex_bf_plan_pics_requirement(person):
+        if person.location() == mall_salon:
             if ophelia_get_ex_pics_planned() < 2:
                 if ophelia_get_phone_convo_heard() > 0:
                     return True
@@ -66,10 +66,11 @@ init 2 python:
             return True
         return False
 
-    def ophelia_special_blowjob_requirement(the_person):
-        if the_person.sluttiness >= 40:
-            if the_person.energy > 60:
+    def ophelia_special_blowjob_requirement(person):
+        if person.sluttiness >= 40:
+            if person.energy > 60:
                 return True
+        return False
 
 
     cut_hair_action = Action("Change hairstyle", cut_hair_requirement, "cut_hair_label", menu_tooltip = "Customize hair style and color")
@@ -107,7 +108,6 @@ label cut_hair_label(the_person):
     return
 
 label ophelia_gets_dumped_label(the_person):
-    $ ex_name = ophelia_get_ex_name()
     "You walk into the salon. As you do, you can hear a man and a woman arguing. You look over and see [the_person.title] talking with a man you don't recognize."
     the_person.char "I don't understand. You mean... you don't want to see each other anymore?"
     "?????" "That's right. I think we should see other people."
@@ -122,7 +122,6 @@ label ophelia_gets_dumped_label(the_person):
     $ the_person.event_triggers_dict["dump_witnessed"] = 1
     $ the_person.event_triggers_dict["dump_day"] = day
     $ the_person.on_room_enter_event_list.append(ophelia_coworker_conversation_overhear)
-    $ del ex_name
     return
 
 label ophelia_coworker_conversation_overhear_label(the_person):
@@ -189,26 +188,26 @@ label ophelia_give_chocolate_label():
         "\'From your secret admirer <3\'"
     "When you finish, you drop the chocolate in the salon mailbox."
     $ the_person.event_triggers_dict["day_of_last_chocolate"] = day
-    $ the_person.event_triggers_dict["chocolates_receieved"] += 1
+    $ the_person.event_triggers_dict["chocolates_received"] += 1
     $ the_person.change_happiness(5)
     return
 
 label ophelia_ex_bf_phone_overhear_label(the_person):
     "You walk into the salon. You see [the_person.title] with her back to you, conversing on the phone, loudly."
     $ the_person.draw_person(position = "walking_away")
-    $ OP_ex_name = ophelia_get_ex_name()
+    $ ex_name = ophelia_get_ex_name()
     the_person.char "I know, I know you are seeing someone else now, but its not like she has to know about it!"
     "There's a small pause."
     the_person.char "I'm just going through a dry patch right now and could really use some physical... attention..."
     "Another pause."
     the_person.char "But she won't find out! I promise my lips are sealed..."
     "Hmm, sounds like she is having some problems with an ex..."
-    the_person.char "No no, [OP_ex_name] don't go! I can't... Hello? FUCK!"
+    the_person.char "No no, [ex_name] don't go! I can't... Hello? FUCK!"
     "She slams her phone down on the counter."
     the_person.char "UGH! I can't believe him!"
     "Hmm, you wonder if you should talk to her about her boy problems..."
     $ the_person.event_triggers_dict["ex_phone_overhear"] = 1
-    $ del OP_ex_name
+    $ del ex_name
     return
 
 label ophelia_ex_bf_plan_pics_label(the_person):
@@ -219,12 +218,12 @@ label ophelia_ex_bf_plan_pics_label(the_person):
         the_person.char "Well then you probably shouldn't. What happens between me and my ex is none of your business."
         $ the_person.change_obedience(-2)
         $ the_person.change_love(-2)
-        "Yikes! Maybe you should try and find a way to chear her up some before you talk to her about her ex again..."
+        "Yikes! Maybe you should try and find a way to cheer her up some before you talk to her about her ex again..."
         $ the_person.event_triggers_dict["pics_to_ex_plan_made"] = 1
         return
     elif ophelia_get_ex_pics_planned() == 0:
         mc.name "Sorry, I don't mean to intrude, but, I couldn't help overhearing part of your phone conversation."
-        the_person.char "Ah geeze, sorry, I was getting pretty fired up there."
+        the_person.char "Ah jeez, sorry, I was getting pretty fired up there."
         mc.name "Having some problems with someone?"
         "She sighs before she starts to explain."
         the_person.char "Yeah, something like that. My boyfriend dumped me a few weeks ago. I keep trying to convince him we should umm, hang out again sometime, just for fun."
@@ -271,7 +270,7 @@ label ophelia_ex_bf_plan_pics_label(the_person):
     mc.name "I'm listening."
     the_person.char "Why don't you come back later, after I close up?"
     "She lowers her voice to a whisper."
-    the_person.char "I'll get on my knees and pretend like I'm sucking your dick. You can take some pictures, and then I'll accidentily send them to my ex..."
+    the_person.char "I'll get on my knees and pretend like I'm sucking your dick. You can take some pictures, and then I'll accidentally send them to my ex..."
     mc.name "Hmm. That sounds like something that could work... but."
     the_person.char "But?"
     mc.name "What's in it for me?"
@@ -313,7 +312,7 @@ label ophelia_make_blowjob_pics_label():
     $ the_person.change_arousal(15)
     $ the_person.break_taboo("sucking_cock")
     "Her lips part and you feel a very talented tongue and set of lips, working over the tip of your dick."
-    "After teasing the tip for a bit, she opens wide and you feel her lips easily engulf your entire lenght. Her nose buries itself in your pubic hair."
+    "After teasing the tip for a bit, she opens wide and you feel her lips easily engulf your entire length. Her nose buries itself in your pubic hair."
     mc.name "Holy shit... you weren't lying..."
     "She gives a muffled mmmhmmmmm as her tongue dances along the underside of your now fully erect penis."
     "Phone in hand, you snap several picture of her working over your manhood."
@@ -330,7 +329,7 @@ label ophelia_make_blowjob_pics_label():
     the_person.char "Did you get it?"
     mc.name "Yes, I definitely did."
     "Even as she talks to you, she continues to stroke you with her hand. She is truly talented at this..."
-    the_person.char "Good! I'm surprised you didn't finish! My ex would blow his load pretty much everytime I did that."
+    the_person.char "Good! I'm surprised you didn't finish! My ex would blow his load pretty much every time I did that."
     the_person.char "But I bet he isn't my ex much longer... when I send him these pics he'll remember how I blew his mind and come around..."
     mc.name "If he doesn't, I'll happily help you make more pictures."
     the_person.char "Ha! I'm sure you would. Want me to do it again?"
@@ -338,7 +337,7 @@ label ophelia_make_blowjob_pics_label():
     "Without waiting for you to finish your sentence, she opens wide, tongue out, and easily throats you. Her tongue is lapping at your heavy sac."
     "You feel a strange session along your length. Is she... is her throat contracting around you? Is that even possible? Where the hell did she learn to do THIS?"
     mc.name "Oh god I'm gonna cum!"
-    "She quickly pulles off and starts rapidly stroking you with her hand."
+    "She quickly pulls off and starts rapidly stroking you with her hand."
     the_person.char "On my face! Give me your cum all over my face!"
     "You don't have the time to respond. Your body involuntarily begins pumping semen out at a frantic pace."
     $ the_person.cum_on_face()
@@ -392,7 +391,7 @@ label ophelia_make_blowjob_pics_label():
     return
 
 label ophelia_blowjob_pics_review_label(the_person):
-    $ OP_ex_name = ophelia_get_ex_name()
+    $ ex_name = ophelia_get_ex_name()
     "You walk into the salon. [the_person.title] notices you as you walk in."
     $ the_person.draw_person(emotion = "sad")
     the_person.char "Hello [the_person.mc_title]."
@@ -403,11 +402,11 @@ label ophelia_blowjob_pics_review_label(the_person):
     the_person.char "Had so much fun last night baby..."
     "Next is the video you took of her doing that move where she deepthroats and simultaneously licks your balls."
     the_person.char "OH SHIT, sorry, wrong person."
-    op_ex_name "Just happy for you that you found someone."
+    ex_name "Just happy for you that you found someone."
     the_person.char "Well, he's just a friend. Remember when I used to do that for you?"
-    op_ex_name "[the_person.name]... this isn't funny."
+    ex_name "[the_person.name]... this isn't funny."
     the_person.char "What? It's nothing serious, you should come over tomorrow, I'll do the same for you."
-    op_ex_name "I'm sorry, this is getting out of control. I'm sorry but I'm blocking you."
+    ex_name "I'm sorry, this is getting out of control. I'm sorry but I'm blocking you."
     the_person.char "Wow, after everything we've been through together? \n \'message not received\'"
     "...Ouch..."
     mc.name "[the_person.title]... I'm sorry."
@@ -415,7 +414,7 @@ label ophelia_blowjob_pics_review_label(the_person):
     the_person.char "I was really thinking that, just maybe."
     if ophelia_get_num_chocolates_received() > 3:
         the_person.char "I've been getting these sweets that someone had been leaving me in the mailbox. They are my favorite dark chocolate! I thought maybe it was him..."
-        "Oh geeze, she is really hung up on this guy. Maybe you should be straight with her?"
+        "Oh jeez, she is really hung up on this guy. Maybe you should be straight with her?"
     else:
         the_person.char "Sometimes guys do weird stuff. You know? I thought surely he'd realize what he has been missing out on."
     mc.name "I guess it just wasn't meant to be."
@@ -424,7 +423,7 @@ label ophelia_blowjob_pics_review_label(the_person):
     $ the_person.draw_person(emotion = "happy")
     "[the_person.possessive_title] smiles for a moment as she looks at you."
     the_person.char "Yeah. I bet you did!"
-    the_person.char "You know, I'm not sure I'm ready to give up on [op_ex_name] yet, but, in the mean time I suppose that makes me single so... you know..."
+    the_person.char "You know, I'm not sure I'm ready to give up on [ex_name] yet, but, in the mean time I suppose that makes me single so... you know..."
     mc.name "I'm not sure I do?"
     the_person.char "It would be nice to be able to blow off a little steam once in a while with someone. Someone like you."
     mc.name "I'm down for anything you want to blow. You were amazing."
@@ -433,10 +432,11 @@ label ophelia_blowjob_pics_review_label(the_person):
     the_person.char "I'd better get back to work."
     $ the_person.event_triggers_dict["pics_to_ex_sent"] = 2
     $ the_person.event_triggers_dict["special_bj_unlock"] = 1
+    $ del ex_name
     return
 
 label ophelia_special_blowjob_label(the_person):
-
+    return
 
 
 ##### Story variable python wrappers
@@ -453,7 +453,7 @@ init 2 python:
         return salon_manager.event_triggers_dict.get("coworker_overhear", 0)
 
     def ophelia_get_num_chocolates_received():
-        return salon_manager.event_triggers_dict.get("chocolates_receieved", 0)
+        return salon_manager.event_triggers_dict.get("chocolates_received", 0)
 
     def ophelia_get_chocolate_gift_unlock():
         return salon_manager.event_triggers_dict.get("chocolate_gift_unlocked", 0)
@@ -497,7 +497,7 @@ init 2 python:
     def ophelia_get_is_over_her_ex():  #TODO figure out where in the story she is officially over her ex and add the conditions here
         return False
 
-    def ophelia_is_latest_verison():
+    def ophelia_is_latest_version():
         if not salon_manager.event_triggers_dict.get("special_bj_unlock", -2) == -2:   #Will only be true if variable doesn't exist
             return True
         return False
