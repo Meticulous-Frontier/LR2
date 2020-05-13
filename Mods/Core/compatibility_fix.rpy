@@ -3,6 +3,10 @@
 
 init -2:
     default persistent.high_memory_mode = False
+    if renpy.mobile:
+        default persistent.use_free_memory = True
+    else:
+        default persistent.use_free_memory = False
 
 init 5 python: # add to stack later then other mods
     add_label_hijack("normal_start", "activate_compatibility_fix")

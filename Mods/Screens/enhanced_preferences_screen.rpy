@@ -58,7 +58,7 @@ init 2: # Add some additional
                         #bar value FieldValue(style.get("textbutton_text_style"), "size", range = 50, step = 2, force_step = True) changed style.rebuild #action SetField(style.get("textbutton_text_style"), "size")
                         #textbutton "Text Size:" + str(style.get("textbutton_text_style").size) action NullAction() #[SetField(style.get("textbutton_text_style"), "size", 1)), Function(style.rebuild)]
 
-                    if not renpy.mobile: #High Memory mode is always disabled on mobile.
+                    if not renpy.mobile: #High Memory mode is always disabled on mobile and free_memory is called daily.
                         vbox:
                             style_prefix "radio"
                             label "Memory Mode" 
@@ -76,6 +76,23 @@ init 2: # Add some additional
                                     SetField(persistent, "high_memory_mode", False),
                                     Function(renpy.reload_script)
                                 ]
+
+                        vbox:
+                            style_prefix "radio"
+                            label "Clean Memory" 
+                            textbutton "Off":
+                                sensitive True
+                                tooltip "Don't call the renpy.free_memory() function at the end of the day."
+                                action [
+                                    SetField(persistent, "use_free_memory", False)
+                                ]
+                            textbutton "Each Game Day":
+                                sensitive True
+                                tooltip "Daily call the renpy.free_memory() function, to prevent memory errors."
+                                action [
+                                    SetField(persistent, "use_free_memory", True)
+                                ]
+
 
 
                     ## Additional vboxes of type "radio_pref" or "check_pref" can be

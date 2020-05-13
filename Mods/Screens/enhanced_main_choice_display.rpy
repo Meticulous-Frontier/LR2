@@ -18,7 +18,8 @@ init 2 python:
 
         def load(self):
             self.display_image = self.display_func(lighting = mc.location.get_lighting_conditions(), **self.person_preview_args)
-            renpy.start_predict(self.display_image) 
+            if not persistent.use_free_memory: # only predict when not using free_memory() function.
+                renpy.start_predict(self.display_image) 
             return
 
     def build_menu_items(elements_list, draw_hearts_for_people = True, person_preview_args = None):
