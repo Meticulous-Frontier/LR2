@@ -21,7 +21,7 @@ init -1 python:
     list_of_threesomes = []
     girl_swap_pos = False  #Nasty hack to tell threesome code to swap girl 1 and girl 2. #TODO find a better way to do this
     THREESOME_BASE_SLUT_REQ = 80  #A constant to hold the usual base sluttiness requirements for threesomes.
-    class Threesome_Position(renpy.store.object):
+    class Threesome_Position():
         def __init__(self,name,slut_requirement,position_one_tag, position_two_tag,girl_one_final_description,girl_two_final_description,requires_location,requirements,
         p1_transform, p2_transform, p1_z_order = 0, p2_z_order = 1, can_swap = False, verb = "fuck", verbing = None):
             self.name = name
@@ -67,7 +67,7 @@ init -1 python:
 
 
 
-    class Threesome_MC_position(renpy.store.object):
+    class Threesome_MC_position():
         def __init__(self,name,skill_tag_p1,skill_tag_p2,girl_one_arousal,girl_two_arousal,girl_one_source,girl_two_source,girl_one_energy,girl_two_energy,
             guy_arousal,skill_tag_guy,guy_source,guy_energy,intro,scenes,outro,strip_description,strip_ask_description,orgasm_description,swap_description,requirement,
             description = None, action_description = None, default_action_person = None):

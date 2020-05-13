@@ -389,7 +389,7 @@ screen SB_two_person_info_ui(the_person_one, the_person_two): #Used to display s
 
 init -1 python:
     SB_list_of_threesomes = []
-    class SB_Threesome_Position(renpy.store.object):
+    class SB_Threesome_Position():
         def __init__(self,name,slut_requirement,slut_cap,position_one_tag, position_two_tag,requires_location,requires_clothing,skill_tag_p1,skill_tag_p2,girl_one_arousal,girl_two_arousal,girl_one_source,girl_two_source,guy_arousal,skill_tag_guy,guy_source,current_girl,connections,intro,scenes,outro,transition_default,
         strip_description, strip_ask_description, orgasm_description, swap_description,
         verb = "fuck" , opinion_tags = None, p1_x = 1.0, p1_y = 1.0, p1_zoom = 1.0, p2_x = 1.0, p2_y = 1.0, p2_zoom = 1.0, can_swap = False, swap_text = ""):
