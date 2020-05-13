@@ -11,11 +11,7 @@ init 5 python:
             if image_set is None:
                 image_set = self.position_sets.get("stand3") #Get a default image set if we are looking at a position we do not have.
 
-            the_image = image_set.get_image(face_type, emotion, special_modifiers)
-            if not the_image:
-                the_image = image_set.get_image(face_type, emotion) # If we weren't able to get something with the special modifier just use a default to prevent a crash.
-
-            return im.MatrixColor(im.MatrixColor(the_image, im.matrix.opacity(self.opacity_adjustment) * im.matrix.brightness(self.whiteness_adjustment) * im.matrix.contrast(self.contrast_adjustment)), im.matrix.opacity(self.colour[3]) * im.matrix.tint(self.colour[0], self.colour[1], self.colour[2]) * im.matrix.tint(*lighting)) #Now colour the final greyscale image
+            return im.MatrixColor(im.MatrixColor(image_set.get_image(face_type, emotion, special_modifiers), im.matrix.opacity(self.opacity_adjustment) * im.matrix.brightness(self.whiteness_adjustment) * im.matrix.contrast(self.contrast_adjustment)), im.matrix.opacity(self.colour[3]) * im.matrix.tint(self.colour[0], self.colour[1], self.colour[2]) * im.matrix.tint(*lighting)) #Now colour the final greyscale image
 
     Facial_Accessory.generate_item_displayable = optimized_generate_item_displayable_facial_accessory
 
@@ -31,37 +27,23 @@ init 5 python:
             if image_set is None:
                 image_set = self.position_sets.get("stand3")
 
-            if self.draws_breasts:
-                the_image = image_set.get_image(body_type, tit_size)
-            else:
-                the_image = image_set.get_image(body_type, "AA")
-
             if regions_constrained is None:
                 regions_constrained = []
+
+            #This is the base greyscale image we have
+            greyscale_image = im.MatrixColor(image_set.get_image(body_type, tit_size if self.draws_breasts else "AA"), im.matrix.opacity(self.opacity_adjustment) * im.matrix.brightness(self.whiteness_adjustment) * im.matrix.contrast(self.contrast_adjustment)) #Set the image, which will crush all modifiers to 1 (so that future modifiers are applied to a flat image correctly with no unusually large images
+            final_image = im.MatrixColor(greyscale_image, im.matrix.opacity(self.colour[3]) * im.matrix.tint(self.colour[0], self.colour[1], self.colour[2]) * im.matrix.tint(*lighting)) #Now colour the final greyscale image
 
             if self.pattern is not None:
                 pattern_set = self.pattern_sets.get(position+"_"+self.pattern)
                 if pattern_set is None:
                     mask_image = None
-                elif self.draws_breasts:
-                    mask_image = pattern_set.get_image(body_type, tit_size)
-                else:
-                    mask_image = pattern_set.get_image(body_type, "AA")
-
-                if mask_image is None:
                     self.pattern = None
+                else:
+                    mask_image = pattern_set.get_image(body_type, tit_size if self.draws_breasts else "AA")
 
-            #This is the base greyscale image we have
-            greyscale_image = im.MatrixColor(the_image, im.matrix.opacity(self.opacity_adjustment) * im.matrix.brightness(self.whiteness_adjustment) * im.matrix.contrast(self.contrast_adjustment)) #Set the image, which will crush all modifiers to 1 (so that future modifiers are applied to a flat image correctly with no unusually large images
-            final_image = im.MatrixColor(greyscale_image, im.matrix.opacity(self.colour[3]) * im.matrix.tint(self.colour[0], self.colour[1], self.colour[2]) * im.matrix.tint(*lighting)) #Now colour the final greyscale image
-
-            if self.pattern and mask_image:
-                #mask_red_alpha_invert = im.MatrixColor(mask_image, [0,0,0,1,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1]) #Inverts the pattern colour so the shader applies properly.
-                #shader_image = im.AlphaMask(base,
-                #im.composite(
-                # shader_red_invert = im.Alpha
-
-                final_image = AlphaBlend(mask_image, final_image, im.MatrixColor(greyscale_image, im.matrix.opacity(self.colour_pattern[3] * self.colour[3]) * im.matrix.tint(self.colour_pattern[0], self.colour_pattern[1], self.colour_pattern[2]) * im.matrix.tint(*lighting)), alpha=False)
+                if self.pattern and mask_image:
+                    final_image = AlphaBlend(mask_image, final_image, im.MatrixColor(greyscale_image, im.matrix.opacity(self.colour_pattern[3] * self.colour[3]) * im.matrix.tint(self.colour_pattern[0], self.colour_pattern[1], self.colour_pattern[2]) * im.matrix.tint(*lighting)), alpha=False)
 
             if len(regions_constrained)>0:
                 # We want to support clothing "constraining", or masking, lower images. This is done by region.
