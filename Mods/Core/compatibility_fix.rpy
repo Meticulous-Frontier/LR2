@@ -7,6 +7,7 @@ init -2:
 init 5 python: # add to stack later then other mods
     add_label_hijack("normal_start", "activate_compatibility_fix")
     add_label_hijack("after_load", "update_compatibility_fix")
+    add_label_hijack("start", "check_mod_installation")
 
 init -1 python:
     # override some of the default settings to improve performance
@@ -38,6 +39,19 @@ init -1 python:
             if (re.search("gui", fn, re.IGNORECASE) 
                 and fn.endswith(".png")):
                 renpy.cache_pin(fn)
+        return
+
+    def validate_mod_installation_location():
+        handle = get_file_handle("mod_icon.png")
+        if not "game/Mods" in handle:
+            renpy.say("Warning", "The mod is not installed correctly, make sure the 'Mod' folder is directly in your 'game' folder\nIt should read like '<base>/game/Mods'.")
+        return
+
+label check_mod_installation(stack):
+    $ validate_mod_installation_location()
+
+    $ execute_hijack_call(stack)
+    return
 
 label activate_compatibility_fix(stack):
     # make sure we store the crisis tracker in the save game
