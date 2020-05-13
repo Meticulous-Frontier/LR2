@@ -169,7 +169,7 @@ init -1 python:
 
 
 
-    class Stat_Perk(renpy.store.object):
+    class Stat_Perk():
         # owner can be MC or any other Person object (default is MC)
         # when owner is Person object we can add temporary stats without using a serum
         def __init__(self, description, owner = None, cha_bonus = 0, int_bonus = 0, foc_bonus = 0,
@@ -254,7 +254,7 @@ init -1 python:
                 self.owner.max_energy_cap -= self.energy_cap
             return
 
-    class Item_Perk(renpy.store.object):
+    class Item_Perk():
         # owner can be MC or any other Person object (default is MC)
         def __init__(self, description, owner = None, usable = False, bonus_is_temp = False, duration = 0, on_unlock = None, save_load = None):
             self.owner = owner
@@ -270,7 +270,7 @@ init -1 python:
             if self.owner is None:
                 self.owner = mc
 
-    class Ability_Perk(renpy.store.object):
+    class Ability_Perk():
         def __init__(self, description, owner = None, toggle = True, togglable = False, usable = False, bonus_is_temp = False, duration = 0, usable_func = None, usable_cd = 0, save_load = None):
             self.owner = owner
             self.description = description
