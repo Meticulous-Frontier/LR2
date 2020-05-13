@@ -498,9 +498,10 @@ init 2 python:
         return False
 
     def ophelia_is_latest_version():
-        if not salon_manager.event_triggers_dict.get("special_bj_unlock", -2) == -2:   #Will only be true if variable doesn't exist
-            return True
-        return False
+        if salon_manager.event_triggers_dict.get("ophelia_version", -1) < 1:   #Just increment the compare and set value when you have a new version
+            salon_manager.event_triggers_dict["ophelia_version"] = 1
+            return False
+        return True
 
 
 #TESTING FUNCTIONS#
