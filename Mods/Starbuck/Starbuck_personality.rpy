@@ -299,7 +299,7 @@ label starbuck_flirt_response_mid(the_person):
     return
 
 label starbuck_flirt_response_high(the_person):
-    if mc.location.get_person_count() > 1 and the_person.effective_sluttiness("kissing") < (25) and mc.location == sex_store):
+    if mc.location.get_person_count() > 1 and (the_person.effective_sluttiness("kissing") < 25 and mc.location == sex_store):
         # There are other people here, if she's not slutty she asks if you want to find somewhere quiet
         the_person.char "I'd say your chances are actually pretty good, if you don't mind sneaking to the back room with me."
         menu:
