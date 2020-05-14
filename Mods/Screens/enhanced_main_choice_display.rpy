@@ -18,8 +18,8 @@ init 2 python:
 
         def load(self):
             self.display_image = self.display_func(lighting = mc.location.get_lighting_conditions(), **self.person_preview_args)
-            if not persistent.use_free_memory: # only predict when not using free_memory() function.
-                renpy.start_predict(self.display_image) 
+            # always predict person displayable (the clear_function will remove them from the prediction cache)
+            renpy.start_predict(self.display_image) 
             return
 
     def build_menu_items(elements_list, draw_hearts_for_people = True, person_preview_args = None):
@@ -31,6 +31,12 @@ init 2 python:
                 else:
                     result.append(elements_list[count])
         return result
+
+    def clear_menu_items_list(menu_items):
+        for count in __builtin__.range(len(menu_items)):
+            for item in [x for x in menu_items[count][1:] if x.display_key]:
+                renpy.stop_predict(item.display_image)
+        return
 
     def build_menu_item_list(element_list, draw_hearts_for_people = True, person_preview_args = None):
         result = []
@@ -150,7 +156,10 @@ init 2:
                                             if item.display_key:
                                                 hovered [Function(show_menu_person, item)]
                                                 unhovered [Function(renpy.scene, "Active")]
-                                            action Return(item.return_value)
+                                            action [
+                                                Function(clear_menu_items_list, menu_items),
+                                                Return(item.return_value)
+                                            ]
                                             tooltip item.the_tooltip
                                             sensitive item.is_sensitive
                         vbar:
