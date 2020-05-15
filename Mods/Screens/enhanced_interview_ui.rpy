@@ -23,6 +23,7 @@ init 2:
                     ysize 550
                     vbox:
                         text "Personal Information" style "menu_text_style" size 26 xalign 0.5 xanchor 0.5 #Info about the person: age, height, happiness, obedience, etc.
+                        text "Age: [the_candidate.age]" style "menu_text_style" size 16
                         text "Required Salary: $[the_candidate.salary]/day" style "menu_text_style" size 16
                         if recruitment_knowledge_one_policy.is_owned():
                             text "Personality: " + the_candidate.personality.personality_type_prefix.capitalize() style "menu_text_style" size 16
@@ -39,7 +40,7 @@ init 2:
                             text "Obedience: [the_candidate.obedience] - " + get_obedience_plaintext(the_candidate.obedience) style "menu_text_style" size 16
                         if recruitment_knowledge_three_policy.is_owned():
                             text "" style "menu_text_style" size 16
-                            text "Age: [the_candidate.age]" style "menu_text_style" size 16
+
                             text "Height: " + height_to_string(the_candidate.height) style "menu_text_style" size 16
                             text "Cup size: [the_candidate.tits]" style "menu_text_style" size 16
                             text "Weight: " + get_person_weight_string(the_candidate) style "menu_text_style" size 16
@@ -171,4 +172,3 @@ init 2:
                 idle "/tutorial_images/hiring_tutorial_"+__builtin__.str(mc.business.event_triggers_dict["hiring_tutorial"])+".png"
                 hover "/tutorial_images/hiring_tutorial_"+__builtin__.str(mc.business.event_triggers_dict["hiring_tutorial"])+".png"
                 action Function(mc.business.advance_tutorial,"hiring_tutorial")
-
