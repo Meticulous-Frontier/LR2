@@ -1,10 +1,4 @@
 init 1 python:
-    def SB_fetish_vaginal_requirement():
-        if mc_asleep():
-            if mc.energy > 30:  #Must have the energy to handle a long sexy night
-                return True
-        return False
-
     SB_vaginal_outfit = Outfit("A Special Night")
     SB_vaginal_outfit.add_upper(lace_bra.get_copy(),colour_black)
     SB_vaginal_outfit.add_feet(garter_with_fishnets.get_copy(), colour_black)
@@ -31,6 +25,12 @@ init 1 python:
     def SB_fetish_lily_vaginal_requirement():
         if mc_asleep():
             if mc.energy > 30:
+                return True
+        return False
+
+    def SB_fetish_vaginal_requirement():
+        if mc_asleep():
+            if mc.energy > 30:  #Must have the energy to handle a long sexy night
                 return True
         return False
 
