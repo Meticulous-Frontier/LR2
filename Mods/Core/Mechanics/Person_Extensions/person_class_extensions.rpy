@@ -504,19 +504,17 @@ init -1 python:
             location.move_person(self, get_random_from_list(available_locations))
 
         #A skimpy outfit is defined as the top 25% of a girls natural sluttiness.
-        if self.outfit and self.planned_outfit.slut_requirement > self.sluttiness * 0.75:
-            # only changes sluttiness in low sluttiness range after that she won't care anymore
-            if self.sluttiness < 40:
-                self.change_slut_temp(self.get_opinion_score("skimpy outfits"), add_to_log = False)
+        if self.sluttiness < 40 and self.outfit and self.outfit.slut_requirement > self.sluttiness * 0.75:
+            self.change_slut_temp(self.get_opinion_score("skimpy outfits"), add_to_log = False)
 
         #A conservative outfit is defined as the bottom 25% of a girls natural sluttiness.
-        if self.outfit and self.planned_outfit.slut_requirement < self.sluttiness * 0.25:
+        if self.sluttiness < 40 and self.outfit and self.outfit.slut_requirement < self.sluttiness * 0.25:
             # happiness won't go below 80 or over 120 by this trait and only affects in low sluttiness range, after that she won't care
-            if self.happiness > 80 and self.happiness < 120 and self.sluttiness < 40:
+            if self.happiness > 80 and self.happiness < 120:
                 self.change_happiness(self.get_opinion_score("conservative outfits"), add_to_log = False)
 
         # lingerie only impacts to sluttiness level 40
-        if self.sluttiness < 40 and (self.outfit.get_bra() or self.outfit.get_panties()):
+        if self.sluttiness < 40 and self.outfit and (self.outfit.get_bra() or self.outfit.get_panties()):
             lingerie_bonus = 0
             if self.outfit.get_bra() and self.outfit.get_bra().slut_value > 1: #We consider underwear with an innate sluttiness of 2 or higher "lingerie" rather than just underwear.
                 lingerie_bonus += self.get_opinion_score("lingerie")
@@ -526,7 +524,7 @@ init -1 python:
             self.change_slut_temp(lingerie_bonus, add_to_log = False)
 
         # not wearing underwear only impacts sluttiness to level 60
-        if self.sluttiness < 60 and (not self.outfit.wearing_bra() or not self.outfit.wearing_panties()): #We need to determine how much underwear they are not wearing. Each piece counts as half, so a +2 "love" is +1 slut per chunk.
+        if self.sluttiness < 60 and self.outfit and (not self.outfit.wearing_bra() or not self.outfit.wearing_panties()): #We need to determine how much underwear they are not wearing. Each piece counts as half, so a +2 "love" is +1 slut per chunk.
             underwear_bonus = 0
             if not self.outfit.wearing_bra():
                 underwear_bonus += self.get_opinion_score("not wearing underwear")
@@ -536,13 +534,13 @@ init -1 python:
             self.change_slut_temp(underwear_bonus, add_to_log = False)
 
         # showing the goods only impacts sluttiness to level 80
-        if self.sluttiness < 80 and self.outfit.tits_visible():
+        if self.sluttiness < 80 and self.outfit and self.outfit.tits_visible():
             self.change_slut_temp(self.get_opinion_score("showing her tits"), add_to_log = False)
-        if self.sluttiness < 80 and self.outfit.vagina_visible():
+        if self.sluttiness < 80 and self.outfit and self.outfit.vagina_visible():
             self.change_slut_temp(self.get_opinion_score("showing her ass"), add_to_log = False)
 
         # showing everything only impacts sluttiness to level 80
-        if self.sluttiness < 80 and self.outfit.full_access():
+        if self.sluttiness < 80 and self.outfit and self.outfit.full_access():
             self.change_slut_temp(self.get_opinion_score("not wearing anything"), add_to_log = False)
 
         for event_list in [self.on_room_enter_event_list, self.on_talk_event_list]: #Go through both of these lists and curate them, ie trim out events that should have expired.
