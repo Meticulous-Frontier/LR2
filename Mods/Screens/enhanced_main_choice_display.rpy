@@ -2,7 +2,7 @@
 
 init 2 python:
     # insert class from bugfix into mod (allows for cleaner and faster menus)
-    class MenuItem(renpy.store.object):
+    class MenuItem():
         def __init__(self, title = "", return_value = None, the_tooltip = None, extra_args = None, display = True, is_sensitive = True, display_key = None, display_scale = 0.9, display_func = None, person_preview_args = None):
             self.title = ""
             self.return_value = return_value
