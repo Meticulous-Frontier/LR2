@@ -35,11 +35,9 @@ init 1 python:
         return False
 
     def SB_fetish_vaginal_event_requirement():
-        if SB_FETISH_EVENT_ACTIVE():
-            return False
-
         if mc_asleep():
-            return True
+            if mc.energy > 30:
+                return True
         return False
 
     def add_breed_me_collar_to_base_outfit(person):
