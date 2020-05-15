@@ -25,7 +25,7 @@ init 2 python:
         # No Init code for this yet.
         return
 
-    shower_crisis_action = ActionMod("Breakfast with Mom", mom_breakfast_crisis_requirement,"mom_breakfast_action_label", initialization = mom_breakfast_mod_initialization,
+    mom_breakfast_crisis_action = ActionMod("Breakfast with Mom", mom_breakfast_crisis_requirement,"mom_breakfast_action_label", initialization = mom_breakfast_mod_initialization,
         menu_tooltip = "You have breakfast with Mom before she goes to work..", category="Home", is_crisis = True, is_morning_crisis = True, crisis_weight = mom_breakfast_mod_weight)
 
     mom_commando_day_selfie_action = Action("Mom Commando Selfie", mom_commando_day_selfie_requirement, "mom_commando_day_selfie_label")
