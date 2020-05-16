@@ -77,6 +77,7 @@ label train_in_gym(the_person):
     python:
         gym.show_background()
         set_gym_outfit(the_person)
+        old_outfit = the_person.outfit.get_copy() # make a copy we can restore
         ran_num = renpy.random.random() * 4 # Maximum change is 4 pounds
 
     if ran_num < 1:
@@ -123,7 +124,8 @@ label train_in_gym(the_person):
                     $ the_report = _return
                     if the_report.get("girl orgasms", 0) > 0:
                         "[the_person.possessive_title] takes a few minutes to catch her breath, while looking at you getting dressed."
-                    $ set_gym_outfit(the_person)
+                    $ the_person.apply_outfit(old_outfit) # she puts on her gym clothes
+                    $ the_person.draw_person(emotion = "happy")
 
                 "Another Time":
                     mc.name "Sorry [the_person.title], another time."
@@ -139,5 +141,6 @@ label train_in_gym(the_person):
     "You pay for the gym session and $ [gym_session_cost] has been deducted from the company's credit card."
 
     $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
+    $ del old_outfit
     $ mc.location.show_background()
     return
