@@ -261,6 +261,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     $ ask_for_threesome = False
     $ use_condom = mc.condom if asked_for_condom else False
     $ stealth_orgasm = False
+    $ stop_stripping = False
 
     #Privacy modifiers
     if mc.location.get_person_count() == 1 and not private:
@@ -403,7 +404,8 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                             the_person.char "I'm exhausted [the_person.mc_title], I can't keep this up..."
                         $ position_choice = None
                     elif not position_locked: #Nothing major has happened that requires us to change positions, we can have girls take over, strip
-                        call girl_strip_event(the_person, position_choice, object_choice) from _call_girl_strip_event_bugfix
+                        if not stop_stripping:
+                            call girl_strip_event(the_person, position_choice, object_choice) from _call_girl_strip_event_bugfix
 
 
         elif isinstance(round_choice, Position): #The only non-strings on the list are positions we are changing to
@@ -423,6 +425,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
         elif round_choice == "Strip":
             call strip_menu(the_person, (position_choice.verbing if isinstance(position_choice, Position) else "wooing")) from _call_strip_menu_bugfix
+            $ stop_stripping = False
 
         elif round_choice == "Leave":
             $ finished = True # Unless something stops us the encounter is over and we can end
@@ -875,6 +878,11 @@ label girl_strip_event_enhanced(the_person, the_position, the_object):
             $ the_position.call_strip(the_person, the_clothing, mc.location, the_object) #If a girl's outfit is less slutty than she is currently feeling (with arousal factored in) she will want to strip stuff off.
 
         $ the_person.update_outfit_taboos()
+
+        if the_person.outfit.has_clothing(the_clothing):
+            # you told her not to strip, so we will not ask again until player initiates stripping
+            $ stop_stripping = True
+
     $ the_clothing = None
     return
 
