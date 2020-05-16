@@ -120,6 +120,11 @@ label hire_mother_work_crisis_label():
     call hire_select_process([the_mother, 1]) from _call_hire_mother_work_select_process #Hire her or reject her. Padded with an extra item in the array or we crash due to trying to pre-calculate forward/backwards buttons
     
     if _return == the_mother: #You've chosen to hire her.
+        if in_private:
+            # divorced so make sure she's single and the SO is cleared
+            $ the_mother.relationship = "Single"
+            $ the_mother.SO_name = None
+
         if promised_sex:
             mc.name "Alright, I'll admit this looks promising, but I need some convincing."
             the_person.char "Of course, [the_person.mc_title]."
