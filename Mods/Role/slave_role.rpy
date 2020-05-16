@@ -51,8 +51,8 @@ init 10 python:
         mc.business.mandatory_morning_crises_list.append(wakeup_duty_crisis)
         return
 
-    stay_wet_action = ActionMod("Stay wet", stay_wet_requirement, "stay_wet_label", menu_tooltip = "Have the person stay aroused at all times.", category = "Slave Role")
-    calm_down_action = ActionMod("Calm down", calm_down_requirement, "stay_wet_label", menu_tooltip = "Have the person calm down.", category = "Slave Role", allow_disable = False)
+    stay_wet_action = ActionMod("Stay wet", stay_wet_requirement, "stay_wet_label", menu_tooltip = "Order your slave to stay aroused at all times.", category = "Slave Role")
+    calm_down_action = ActionMod("Calm down", calm_down_requirement, "stay_wet_label", menu_tooltip = "Let your slave calm down.", category = "Slave Role", allow_disable = False)
 
     collar_slave_action = ActionMod("Place collar on [the_person.title].", collar_slave_requirement, "slave_collar_person_label", menu_tooltip = "Put a collar of ownership on the target, ensure that their obedience stays high.", category = "Slave Role")
     uncollar_slave_action = ActionMod("Remove collar from [the_person.title].", uncollar_slave_requirement, "slave_collar_person_label", menu_tooltip = "Remove the collar, declaring them a free spirit.", category = "Dungeon Actions", allow_disable = False)
