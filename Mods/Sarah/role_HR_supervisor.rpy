@@ -96,6 +96,14 @@ init 5 python:
             #renpy.say("", "Updated daughter at work crisis chance to: " + str(chance) + "%%")
         return
 
+    def update_hire_mother_crisis(chance):
+        found = find_in_list(lambda x: x[0] == hire_mother_work_crisis, crisis_list)
+        if found:
+            found[1] = chance
+            #renpy.say("", "Updated mother at work crisis chance to: " + str(chance) + "%%")
+        return
+
+
     def HR_director_initial_hire_requirement():
         if get_HR_director_tag("business_HR_meeting_last_day", 0) >= day:
             return False
@@ -797,6 +805,7 @@ label HR_director_review_discoveries_label(the_person):
                     "Approve":
                         mc.name "That's a good idea. Go ahead and implement that going forward."
                         $ update_hire_daughter_crisis(10)
+                        $ update_hire_mother_crisis(10)
                         $ set_HR_director_tag("business_HR_relative_recruitment", 2)
                     "Deny":
                         mc.name "I think for now I'd like to stick with more traditional recruiting methods."
@@ -926,6 +935,7 @@ label HR_director_change_relative_recruitment_label(the_person):
             "Take the Sign Down":
                 the_person.char "Ok, I'll take it down as soon as we are finished here. Is there anything else I can do for you?"
                 $ update_hire_daughter_crisis(0)
+                $ update_hire_mother_crisis(0)
                 $ set_HR_director_tag("business_HR_relative_recruitment", 1)
             "Leave the Sign Up":
                 the_person.char "Oh... sorry I thought you said you wanted to change it. Is there anything else I can do for you?"
@@ -936,6 +946,7 @@ label HR_director_change_relative_recruitment_label(the_person):
             "Put the Sign Up":
                 the_person.char "Ok, I'll put it up as soon as we are finished here. Is there anything else I can do for you?"
                 $ update_hire_daughter_crisis(10)
+                $ update_hire_mother_crisis(10)
                 $ set_HR_director_tag("business_HR_relative_recruitment", 2)
             "Leave the Sign Down":
                 the_person.char "Oh... sorry I thought you said you wanted to change it. Is there anything else I can do for you?"

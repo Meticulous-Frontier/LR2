@@ -274,7 +274,7 @@ init -1 python:
         else:
             face_style = None
 
-        if renpy.random.randint(0,100) < 60: #60% of the time they share hair colour
+        if renpy.random.randint(0,100) < 30: #30% of the time they share hair colour (girls dye their hair a lot)
             hair_colour = self.hair_colour
         else:
             hair_colour = None
@@ -289,7 +289,7 @@ init -1 python:
         else:
             eyes = None
 
-        if renpy.random.randint(0,100) < 60: #Have heights that roughly match (but o
+        if renpy.random.randint(0,100) < 80: #Have heights that roughly match (mostly)
             height = self.height * (renpy.random.randint(95,105)/100.0)
             if height > 1.0:
                 height = 1.0
@@ -319,6 +319,64 @@ init -1 python:
         return the_daughter
 
     Person.generate_daughter = generate_daughter_enhanced
+
+    def generate_mother_enhanced(self, lives_with_daughter = False): #Generates a random person who shares a number of similarities to the mother
+        age = renpy.random.randint(self.age + 16, 55)
+
+        if renpy.random.randint(0,100) < 60:
+            body_type = self.body_type
+        else:
+            body_type = None
+
+        if renpy.random.randint(0,100) < 40: #Slightly lower for facial similarities to keep characters looking distinct
+            face_style = self.face_style
+        else:
+            face_style = None
+
+        if renpy.random.randint(0,100) < 30: #30% of the time they share hair colour (girls dye their hair a lot)
+            hair_colour = self.hair_colour
+        else:
+            hair_colour = None
+
+        if renpy.random.randint(0,100) < 60: # 60% they share the same breast size
+            tits = self.tits
+        else:
+            tits = None
+
+        if renpy.random.randint(0,100) < 60: #Share the same eye colour
+            eyes = self.eyes
+        else:
+            eyes = None
+
+        if renpy.random.randint(0,100) < 80: #Have heights that roughly match (mostly)
+            height = self.height * (renpy.random.randint(95,105)/100.0)
+            if height > 1.0:
+                height = 1.0
+            elif height < 0.8:
+                height = 0.8
+        else:
+            height = None
+
+        if lives_with_daughter:
+            start_home  = self.home
+        else:
+            start_home  = None
+
+        the_mother = make_person(last_name = self.last_name, age = age, body_type = body_type, face_style = face_style, tits = tits, height = height,
+            hair_colour = hair_colour, skin = self.skin, eyes = eyes, start_home = start_home, force_random = True)
+
+        if start_home is None:
+            the_mother.generate_home()
+        the_mother.home.add_person(the_mother)
+
+        for sister in town_relationships.get_existing_sisters(self): #First find all of the sisters this person has
+            town_relationships.update_relationship(the_mother, sister, "Daughter", "Mother") #Set the mother/daughter relationship for the sisters
+
+        town_relationships.update_relationship(self, the_mother, "Mother", "Daughter") #Now set the mother/daughter relationship with person
+
+        return the_mother
+
+    Person.generate_mother = generate_mother_enhanced
 
     ## STRIP OUTFIT TO MAX SLUTTINESS EXTENSION
     # Strips down the person to a clothing their are comfortable with (starting with top, before bottom)
