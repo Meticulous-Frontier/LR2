@@ -355,7 +355,8 @@ label advance_time_people_run_day_label():
     # "advance_time_people_run_day_label - timeslot [time_of_day]" # DEBUG
     #if time_of_day == 4: ##First, determine if we're going into the next chunk of time. If we are, advance the day and run all of the end of day code. NOTE: We can do checks like these with Action.requirements
     $ advance_time_run_day(people_to_process)
-    if persistent.use_free_memory:
+    # we need to clear memory at least once a week (so the texture_cache gets cleared, it will throw an out of memory exception otherwise)
+    if persistent.use_free_memory or day%7 == 6:
         $ renpy.free_memory()
     $ gc.collect()
     # $ renpy.profile_memory(.1, 16384)
