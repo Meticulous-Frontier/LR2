@@ -93,7 +93,7 @@ label mom_breakfast_action_label_low():
     "You and [the_person.title] chat for a while longer, until you finish with your breakfast."
     mc.name "Thanks for the great breakfast! I'll see you tonight after work!"
     "You say goodbye to her and head out for the day."
-    return "Advance Time"
+    return None
 
 label mom_breakfast_action_label_medium():
     "She wrinkles her nose for a second and then looks up at you."
