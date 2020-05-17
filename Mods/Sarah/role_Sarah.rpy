@@ -640,6 +640,7 @@ label Sarah_third_wheel_label():
     return
 
 label Sarah_get_drinks_label():
+    $ scene_manager = Scene() # make sure we have a clean scene manager
     $ the_person = sarah
     $ the_person.apply_outfit(get_sarah_date_outfit_one())
 
