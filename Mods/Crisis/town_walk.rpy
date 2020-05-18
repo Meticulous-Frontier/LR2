@@ -25,6 +25,9 @@ label town_walk_crisis_action_label:
     if the_person is None: # this could be no one
         return
 
+    # now you know where she lives
+    $ the_person.learn_home()
+
     "While walking around town, you see that the window in [the_person.possessive_title]'s house is open..."
     menu:
         "Get closer and peek inside?":
@@ -76,7 +79,7 @@ label town_walk_crisis_action_label:
         else:
             "[the_person.possessive_title] only took off her top clothes, you just wonder why..."
 
-    if the_person.vagina_available() and (the_person.sluttiness >=50 or the_person.get_opinion_score("masturbating") > 0 or the_person.arousal > 35):
+    if the_person.outfit.vagina_available() and (the_person.sluttiness >=50 or the_person.get_opinion_score("masturbating") > 0 or the_person.arousal > 35):
         "[the_person.possessive_title] seems to get turned on by her own image in the mirror."
         $ the_person.draw_person(position = "missionary")
         "She lays down on the bed, spreads her legs and begins to masturbate slowly."
