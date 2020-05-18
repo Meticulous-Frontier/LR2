@@ -219,14 +219,14 @@ init 5 python:
     def advance_time_assign_limited_time_events(people):
         for (person, place) in people:
             if person.mc_title != "Stranger" and renpy.random.randint(0,100) < 12: #Only assign one to 12% of people, to cut down on the number of people we're checking.
-                the_crisis = get_limited_time_action_for_person(person)
-                if the_crisis:
-                    #renpy.notify("Created event: " + the_crisis[0].name + " for " + people.name)
-                    if the_crisis[2] == "on_talk" and len(person.on_talk_event_list) == 0: # prevent multiple on talk events for person
-                        person.on_talk_event_list.append(Limited_Time_Action(the_crisis[0], the_crisis[0].event_duration))
-                    elif the_crisis[2] == "on_enter":
-                        if not exists_in_room_enter_list(person, the_crisis[0].effect): # prevent adding the same event twice
-                            person.on_room_enter_event_list.append(Limited_Time_Action(the_crisis[0], the_crisis[0].event_duration))
+                crisis = get_limited_time_action_for_person(person)
+                if crisis:
+                    #renpy.notify("Created event: " + crisis[0].name + " for " + people.name)
+                    if crisis[2] == "on_talk" and len(person.on_talk_event_list) == 0: # prevent multiple on talk events for person
+                        person.on_talk_event_list.append(Limited_Time_Action(crisis[0], crisis[0].event_duration))
+                    elif crisis[2] == "on_enter":
+                        if not exists_in_room_enter_list(person, crisis[0].effect): # prevent adding the same event twice
+                            person.on_room_enter_event_list.append(Limited_Time_Action(crisis[0], crisis[0].event_duration))
         return
 
     def advance_time_slave_stay_wet(people):
@@ -304,14 +304,14 @@ label advance_time_bankrupt_check_label():
 
 label advance_time_random_crisis_label():
     # "advance_time_random_crisis_label - timeslot [time_of_day]" #DEBUG
-    $ the_crisis = get_crisis_from_crisis_list()
-    if the_crisis:
-        #$ mc.log_event("General [[" + str(len(possible_crisis_list)) + "]: " + the_crisis.name, "float_text_grey")
+    $ crisis = get_crisis_from_crisis_list()
+    if crisis:
+        #$ mc.log_event("General [[" + str(len(possible_crisis_list)) + "]: " + crisis.name, "float_text_grey")
         $ crisis_chance = crisis_base_chance
-        $ the_crisis.call_action()
+        $ crisis.call_action()
         if _return == "Advance Time":
             $ mandatory_advance_time = True
-        $ del the_crisis
+        $ del crisis
     $ mc.location.show_background()
     show screen business_ui
     return
@@ -325,14 +325,14 @@ label advance_time_mandatory_crisis_label():
 
     while mandatory_crisis_count < mandatory_crisis_max: #We need to keep this in a renpy loop, because a return call will always return to the end of an entire python block.
         if mandatory_crisis_count < len(mc.business.mandatory_crises_list): # extra check to make sure index still exists
-            $ the_crisis = mc.business.mandatory_crises_list[mandatory_crisis_count]
-            if the_crisis.is_action_enabled():
-                $ the_crisis.call_action()
+            $ crisis = mc.business.mandatory_crises_list[mandatory_crisis_count]
+            if crisis.is_action_enabled():
+                $ crisis.call_action()
                 if _return == "Advance Time":
                     $ mandatory_advance_time = True
                 $ renpy.scene("Active")
-                $ clear_list.append(the_crisis)
-            $ del the_crisis
+                $ clear_list.append(crisis)
+            $ del crisis
         $ mandatory_crisis_count += 1
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
@@ -384,15 +384,15 @@ label advance_time_mandatory_morning_crisis_label():
         clear_list = []
 
     while mandatory_morning_crisis_count < mandatory_morning_crisis_max: #We need to keep this in a renpy loop, because a return call will always return to the end of an entire python block.
-        $ the_crisis = mc.business.mandatory_morning_crises_list[mandatory_morning_crisis_count]
-        if the_crisis.is_action_enabled():
-            $ the_crisis.call_action()
+        $ crisis = mc.business.mandatory_morning_crises_list[mandatory_morning_crisis_count]
+        if crisis.is_action_enabled():
+            $ crisis.call_action()
             if _return == "Advance Time":
                 $ mandatory_advance_time = True
             $ renpy.scene("Active")
-            $ clear_list.append(the_crisis)
+            $ clear_list.append(crisis)
         $ mandatory_morning_crisis_count += 1
-        $ del the_crisis
+        $ del crisis
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
         mc.location.show_background()
