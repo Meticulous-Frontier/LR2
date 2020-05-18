@@ -1054,3 +1054,54 @@ init -1 python:
         return True
 
     Person.__ne__ = person__ne__
+
+##########################################
+# Expose outfit methods on Person object #
+##########################################
+    # many coding errors are related to missing .oufit in the sequence to check a persons state based on her outfit
+    # these extension methods on the Person class just redirect it to the outfit class, so the code still works as intended
+
+    def person_tits_available(self):
+        return self.outfit.tits_available()
+
+    Person.tits_available = person_tits_available
+
+    def person_tits_visible(self):
+        return self.outfit.tits_visible()
+
+    Person.tits_visible = person_tits_visible
+
+    def person_vagina_available(self):
+        return self.outfit.vagina_available()
+
+    Person.vagina_available = person_vagina_available
+
+    def person_vagina_visible(self):
+        return self.outfit.vagina_visible()
+
+    Person.vagina_visible = person_vagina_visible
+
+    def person_underwear_visible(self):
+        return self.outfit.underwear_visible()
+
+    Person.underwear_visible = person_underwear_visible
+
+    def person_wearing_bra(self):
+        return self.outfit.wearing_bra()
+
+    Person.wearing_bra = person_wearing_bra
+
+    def person_wearing_panties(self):
+        return self.outfit.wearing_panties()
+
+    Person.wearing_panties = person_wearing_panties
+
+    def person_bra_covered(self):
+        return self.outfit.bra_covered()
+
+    Person.bra_covered = person_bra_covered
+
+    def person_panties_covered(self):
+        return self.outfit.panties_covered()
+
+    Person.panties_covered = person_panties_covered
