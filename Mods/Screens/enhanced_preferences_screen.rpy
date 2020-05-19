@@ -66,14 +66,21 @@ init 2: # Add some additional
                                 sensitive True
                                 tooltip "Allows the game to use a lot more memory for caching images, allowing for smoother menu's and transitions. Requires Restart to take effect."
                                 action [
-                                    SetField(persistent, "high_memory_mode", True),
+                                    SetField(persistent, "memory_mode", 2),
+                                    Function(renpy.reload_script)
+                                ]
+                            textbutton "Medium":
+                                sensitive True
+                                tooltip "Allows the game to use a normal amount if memory for caching images, allowing for smoother menu's and transitions. Requires Restart to take effect."
+                                action [
+                                    SetField(persistent, "memory_mode", 1),
                                     Function(renpy.reload_script)
                                 ]
                             textbutton "Low":
                                 sensitive True
                                 tooltip "The game uses a lot less memory for caching images, recommended on low memory devices. Requires Restart to take effect."
                                 action [
-                                    SetField(persistent, "high_memory_mode", False),
+                                    SetField(persistent, "memory_mode", 0),
                                     Function(renpy.reload_script)
                                 ]
 

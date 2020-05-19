@@ -2,7 +2,7 @@
     # Fix compatibility of save games.
 
 init -2:
-    default persistent.high_memory_mode = False # default is low memory mode
+    default persistent.memory_mode = 0 # default is low memory mode
     default persistent.use_free_memory = True   # default is clean memory every day
 
 init 5 python: # add to stack later then other mods
@@ -15,10 +15,12 @@ init -1 python:
     config.image_cache_size = None  # when None the image_cache_size_mb value is used
     if renpy.variant("pc"):
         # disables renpy.free_memory() daily cleanup, thus requires enough memory to perform operations
-        if persistent.high_memory_mode:
-            config.image_cache_size_mb = 1536
-        else:
+        if persistent.memory_mode == 0:
+            config.image_cache_size_mb = 256
+        elif persistent.memory_mode == 1:
             config.image_cache_size_mb = 512
+        else:
+            config.image_cache_size_mb = 1536
     else:
         config.image_cache_size_mb = 384 # low memory devices like phones (uses renpy.free_memory() for daily memory clean)
 
