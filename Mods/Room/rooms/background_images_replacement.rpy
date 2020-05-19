@@ -3,20 +3,20 @@ init 5 python:
     add_label_hijack("after_load", "updated_room_background")
 
     # scaled images
-    taboo_break_image = im.FactorScale(Image(get_file_handle("taboo_lock_alt.png")), 16, 16, True)
+    taboo_break_image = im.Scale(Image(get_file_handle("taboo_lock_alt.png")), 16, 16)
     renpy.image("taboo_break", taboo_break_image)
-    thumbs_up_image = im.FactorScale(Image(get_file_handle("thumbs_up_small.png")), 18, 18, True)
+    thumbs_up_image = im.Scale(Image(get_file_handle("thumbs_up_small.png")), 18, 18)
     renpy.image("thumbs_up", thumbs_up_image)
-    thumbs_down_image = im.FactorScale(Image(get_file_handle("thumbs_down_small.png")), 18, 18, True)
+    thumbs_down_image = im.Scale(Image(get_file_handle("thumbs_down_small.png")), 18, 18)
     renpy.image("thumbs_down", thumbs_down_image)
 
-    energy_token_small_image = im.FactorScale(Image(get_file_handle("energy_token.png")), 18, 18, True)
+    energy_token_small_image = im.Scale(Image(get_file_handle("energy_token.png")), 18, 18)
     renpy.image("energy_token_small", energy_token_small_image)
 
-    arousal_token_small_image = im.FactorScale(Image(get_file_handle("arousal_token.png")), 18, 18, True)
+    arousal_token_small_image = im.Scale(Image(get_file_handle("arousal_token.png")), 18, 18)
     renpy.image("arousal_token_small", arousal_token_small_image)
 
-    question_mark_small_image = im.FactorScale(Image(get_file_handle("question.png")), 18, 18, True)
+    question_mark_small_image = im.Scale(Image(get_file_handle("question.png")), 18, 18)
     renpy.image("question_mark_small", question_mark_small_image)
 
     vial_image = Image(get_file_handle("vial.png"))
