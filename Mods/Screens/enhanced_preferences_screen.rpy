@@ -67,39 +67,38 @@ init 2: # Add some additional
                                 tooltip "Allows the game to use a lot more memory for caching images, allowing for smoother menu's and transitions. Requires Restart to take effect."
                                 action [
                                     SetField(persistent, "memory_mode", 2),
-                                    Function(renpy.reload_script)
+                                    Function(renpy.full_restart)
                                 ]
                             textbutton "Medium":
                                 sensitive True
                                 tooltip "Allows the game to use a normal amount if memory for caching images, allowing for smoother menu's and transitions. Requires Restart to take effect."
                                 action [
                                     SetField(persistent, "memory_mode", 1),
-                                    Function(renpy.reload_script)
+                                    Function(renpy.full_restart)
                                 ]
                             textbutton "Low":
                                 sensitive True
                                 tooltip "The game uses a lot less memory for caching images, recommended on low memory devices. Requires Restart to take effect."
                                 action [
                                     SetField(persistent, "memory_mode", 0),
-                                    Function(renpy.reload_script)
+                                    Function(renpy.full_restart)
                                 ]
-
-                        vbox:
-                            style_prefix "radio"
-                            label "Clean Memory" 
-                            textbutton "Off":
-                                sensitive True
-                                tooltip "Don't call the renpy.free_memory() function at the end of the day."
-                                action [
-                                    SetField(persistent, "use_free_memory", False)
-                                ]
-                            textbutton "Each Game Day":
-                                sensitive True
-                                tooltip "Daily call the renpy.free_memory() function, to prevent memory errors."
-                                action [
-                                    SetField(persistent, "use_free_memory", True)
-                                ]
-
+                        if persistent.memory_mode > 1:
+                            vbox:
+                                style_prefix "radio"
+                                label "Clean Memory" 
+                                textbutton "Off":
+                                    sensitive True
+                                    tooltip "Don't call the renpy.free_memory() function at the end of the day (once a week on sunday)."
+                                    action [
+                                        SetField(persistent, "use_free_memory", False)
+                                    ]
+                                textbutton "Each Game Day":
+                                    sensitive True
+                                    tooltip "Daily call the renpy.free_memory() function, to prevent memory errors."
+                                    action [
+                                        SetField(persistent, "use_free_memory", True)
+                                    ]
 
 
                     ## Additional vboxes of type "radio_pref" or "check_pref" can be
