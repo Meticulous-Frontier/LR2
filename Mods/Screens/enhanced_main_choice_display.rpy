@@ -17,7 +17,7 @@ init 2 python:
             self.person_preview_args = person_preview_args
 
         def load(self):
-            self.display_image = self.display_func(lighting = mc.location.get_lighting_conditions(), **self.person_preview_args)
+            self.display_image = Flatten(self.display_func(lighting = mc.location.get_lighting_conditions(), **self.person_preview_args))
             # always predict person displayable (the clear_function will remove them from the prediction cache)
             renpy.start_predict(self.display_image) 
             return

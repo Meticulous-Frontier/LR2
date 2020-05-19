@@ -30,7 +30,7 @@ init 1 python:
         transform_one.ypos = one_pos_y
         transform_one.zoom = one_scale
 
-        one_final_image = person_one.build_person_displayable(one_position, one_emotion, one_special_modifier, lighting = lighting, background_fill = False)
+        one_final_image = Flatten(person_one.build_person_displayable(one_position, one_emotion, one_special_modifier, lighting = lighting, background_fill = False))
         renpy.show(person_one.name,at_list=[transform_one, scale_person(person_one.height)],layer="Active",what=one_final_image,tag=person_one.name)
 
         #Now do person two
@@ -45,7 +45,7 @@ init 1 python:
         transform_two.ypos = two_pos_y
         transform_two.zoom = two_scale
 
-        two_final_image = person_two.build_person_displayable(two_position, two_emotion, two_special_modifier, lighting = lighting, background_fill = False)
+        two_final_image = Flatten(person_two.build_person_displayable(two_position, two_emotion, two_special_modifier, lighting = lighting, background_fill = False))
         renpy.show(person_two.name,at_list=[transform_two, scale_person(person_two.height)],layer="Active",what=two_final_image,tag=person_two.name)
         return
 

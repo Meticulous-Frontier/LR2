@@ -19,7 +19,7 @@ init 2 python:
 
         mannequin.apply_outfit(draw_outfit)
 
-        final_image = mannequin.build_person_displayable(position, emotion,special_modifier, lighting, background_fill)
+        final_image = Flatten(mannequin.build_person_displayable(position, emotion,special_modifier, lighting, background_fill))
 
         renpy.show(mannequin.name,at_list=[character_right, scale_person(mannequin.height)],layer="Active",what=final_image,tag=mannequin.name)
         renpy.restart_interaction()       
