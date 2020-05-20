@@ -80,10 +80,12 @@ label dungeon_room_appoint_slave_label_2(the_person):
 
 
     else: # What happens when they are already appointed
-
-        $ the_person.special_role.remove(slave_role)
-
-
-        "You release [the_person.possessive_title] from their duties as a slave."
+        "Releasing has a high impact on the girls stats, are you sure?"
+        menu:
+            "Release her":
+                $ slave_release_slave(the_person)
+                "You release [the_person.possessive_title] from their duties as a slave."
+            "Never mind":
+                pass
 
     return

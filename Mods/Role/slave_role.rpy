@@ -45,6 +45,24 @@ init 10 python:
         person.draw_person()
         return
 
+    def slave_remove_collar(person):
+        person.slave_collar = False
+        person.outfit.remove_all_collars()
+        person.base_outfit.remove_all_collars()
+        person.draw_person()
+        return
+
+    def slave_release_slave(person):
+        slave_remove_collar(person)
+        if slave_role in person.special_role:
+            person.special_role.remove(slave_role)
+        person.stay_wet = False
+        # she is not happy and will reset her obedience to 100
+        person.change_stats(love = -20, happiness = -20, obedience = 100 - person.obedience)
+        # she loses her submissive trait
+        person.update_opinion_with_score("being submissive", 0)
+        return
+
     def slave_add_wakeup_duty_action(person):
         remove_mandatory_crisis_list_action("slave_alarm_clock_label")
         wakeup_duty_crisis.args = [person]
@@ -79,10 +97,7 @@ label stay_wet_label(the_person): # Can expand with dialogue options and degrees
 
 label slave_collar_person_label(the_person):
     if the_person.slave_collar:
-        $ the_person.slave_collar = False
-        $ the_person.outfit.remove_all_collars()
-        $ the_person.base_outfit.remove_all_collars()
-        $ the_person.draw_person()
+        $ slave_remove_collar(the_person)
         "You remove the collar from your [the_person.possessive_title]'s neck"
     else:
         call screen enhanced_main_choice_display(build_menu_items([["Select Collar"] + [["Breed Me", breed_collar], ["Cum Slut", cum_slut_collar], ["Fuck Doll", fuck_doll_collar], ["Back", "Back"]]]))
