@@ -642,7 +642,8 @@ label Sarah_third_wheel_label():
 label Sarah_get_drinks_label():
     $ scene_manager = Scene() # make sure we have a clean scene manager
     $ the_person = sarah
-    $ the_person.apply_outfit(get_sarah_date_outfit_one())
+    $ the_person.planned_outfit = get_sarah_date_outfit_one()
+    $ the_person.apply_outfit(the_person.planned_outfit)
 
     "Lost in thought as you get your work done in the silence of the weekend, a sudden voice startles you."
     the_person.char "[the_person.mc_title]! I figured I'd find you around here on a Saturday again!"
@@ -1621,6 +1622,7 @@ label Sarah_stripclub_story_label():
         mc.name "You don't have to. Just spend the night here."
         the_person.char "That's tempting, believe me, but I need to get home. Thanks for the offer!"
     if staying_over:
+        $ the_person.next_day_outfit = the_person.planned_outfit # she stays the night so she will have to wear the same outfit again
         $ scene_manager.update_actor(the_person, position = "walking_away")
         "Worn out from your date with [the_person.possessive_title], you cuddle up with her and quickly fall asleep."
         call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_overnight_after_stripclub
@@ -1874,6 +1876,8 @@ label Sarah_threesome_request_label():
     $ scene_manager.clear_scene()
     $ del person_choice
 
+    $ the_person.next_day_outfit = the_person.planned_outfit # she stays the night so she will have to wear the same outfit again
+
     call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_overnight_threesome_request
     call Sarah_spend_the_night() from sarah_threesome_request_spend_the_night_sequence
 
@@ -2078,6 +2082,8 @@ label Sarah_initial_threesome_label():
     the_person_one.char "Oh god, I don't think I could get up, even if I wanted to. Which I don't."
     "Worn out, you cuddle up with her and quickly fall asleep as well."
     $ scene_manager.clear_scene()
+    $ the_person.next_day_outfit = the_person.planned_outfit # she stays the night so she will have to wear the same outfit again
+
     call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_overnight_after_threesome_1
     call Sarah_spend_the_night() from sarah_threesome_spend_the_night
     $ add_sarah_ask_for_baby_action()
@@ -2511,7 +2517,8 @@ label play_darts_301(the_person, focus_mod = 0): #Label returns true if mc wins,
 
 label Sarah_weekend_surprise_crisis_label():
     $ the_person = sarah
-    $ the_person.apply_outfit(get_sarah_date_outfit_two())
+    $ the_person.planned_outfit = get_sarah_date_outfit_two()
+    $ the_person.apply_outfit(the_person.planned_outfit)
     $ scene_manager = Scene()
 
     "Lost in thought as you get your work done in the silence of the weekend, a sudden voice startles you."
@@ -2806,7 +2813,7 @@ label Sarah_date_ends_at_your_place_label(the_person):
 
     "You reach your bedroom and quickly close and lock the door."
     "[the_person.possessive_title] looks at you."
-    the_person.char "Welp, I think we both know where this is going!"
+    the_person.char "Well, I think we both know where this is going!"
     $ scene_manager.strip_actor_outfit(the_person, exclude_feet = True)
     if Sarah_is_fertile():
         the_person.char "Let's go! Ovulating is driving me crazy, I've been day dreaming about your cock fill me with seed all night long!"
@@ -2826,6 +2833,7 @@ label Sarah_date_ends_at_your_place_label(the_person):
         $ scene_manager.strip_actor_outfit(the_person, exclude_feet = False)
         $ scene_manager.update_actor(the_person, position = "walking_away")
         "Worn out from your romp with [the_person.possessive_title], you cuddle up with her and quickly fall asleep."
+        $ the_person.next_day_outfit = the_person.planned_outfit # she stays the night so she will have to wear the same outfit again
         call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_overnight_after_date
         call Sarah_spend_the_night() from sarah_date_night_happy_ending_gf_path
     elif affair_role in the_person.special_role:
