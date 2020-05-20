@@ -575,6 +575,10 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
         else:
             the_person_two.sex_record["Threesomes"] += 1
 
+        # record the last time we had sex
+        the_person_one.sex_record["Last Sex Day"] = day
+        the_person_two.sex_record["Last Sex Day"] = day
+
         mc.condom = False
         mc.recently_orgasmed = False
         active_mc_position = None

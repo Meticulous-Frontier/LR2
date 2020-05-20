@@ -138,6 +138,9 @@ init 5 python:
             if position_type.record_class and position_type.record_class not in types_seen:
                 person.sex_record[position_type.record_class] += 1
                 types_seen.append(position_type.record_class)
+
+        # record the last time we had sex
+        person.sex_record["Last Sex Day"] = day
         return
 
     def pick_object_enhanced(person, position, forced_object = None):
