@@ -365,6 +365,9 @@ init -1 python:
         the_mother = make_person(last_name = self.last_name, age = age, body_type = body_type, face_style = face_style, tits = tits, height = height,
             hair_colour = hair_colour, skin = self.skin, eyes = eyes, start_home = start_home, force_random = True)
 
+        if the_mother.kids == 0:    # make sure she has at least one child
+            the_mother.kids = 1
+
         if start_home is None:
             the_mother.generate_home()
         the_mother.home.add_person(the_mother)
