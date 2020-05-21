@@ -543,9 +543,9 @@ init -1 python:
             for position in the_position.connections:
                 if the_object.has_trait(position.requires_location):
                     if position.check_clothing(the_person):
-                        appended_name = "Change to " + position.name + ".\n{size=22}Max Effect: " + get_red_heart(position.slut_cap) + "\nSuggested Sluttiness: " + get_red_heart(position.slut_requirement) + "{/size}"
+                        appended_name = "Change to " + position.name + ".\n{size=18}Max Effect: " + get_red_heart(position.slut_cap) + "\nSuggested Sluttiness: " + get_red_heart(position.slut_requirement) + "{/size}"
                     else:
-                        appended_name = "Change to " + position.name + ".\n{size=22}Obstructed by Clothing\nSuggested Sluttiness: " + get_red_heart(position.slut_requirement) + "{/size} (disabled)"
+                        appended_name = "Change to " + position.name + ".\n{size=18}Obstructed by Clothing\nSuggested Sluttiness: " + get_red_heart(position.slut_requirement) + "{/size} (disabled)"
                     tuple_list.append([appended_name,position])
             return renpy.display_menu(tuple_list,True,"Choice")
 

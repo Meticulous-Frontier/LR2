@@ -77,7 +77,7 @@ label slave_attention_crisis_action_label:
 
                     "Looking at her welted body, you decide what to do next."
                     jump slave_attention_comfort_menu
-                "Whip her\n{size=22}Requires at least 20 {image=gui/extra_images/energy_token.png}{/size} (disabled)" if mc.energy < 20:
+                "Whip her\n{color=#ff0000}{size=18}Requires at least 20 {image=gui/extra_images/energy_token.png}{/size}{/color} (disabled)" if mc.energy < 20:
                     pass
                 "Fuck her" if mc.energy >= 40:
                     "You quickly undress and start fucking her right there."
@@ -92,7 +92,7 @@ label slave_attention_crisis_action_label:
 
                     jump slave_attention_comfort_menu
 
-                "Fuck her\n{size=22}Requires at least 40 {image=gui/extra_images/energy_token.png}{/size} (disabled)" if mc.energy < 40:
+                "Fuck her\n{color=#ff0000}{size=18}Requires at least 40 {image=gui/extra_images/energy_token.png}{/size}{/color} (disabled)" if mc.energy < 40:
                     pass
                 "Dildo her" if mc.energy >= 40 and perk_system.has_item_perk("Dildo"):
                     "You pickup one of the bigger dildos from your cabinet."
@@ -106,7 +106,7 @@ label slave_attention_crisis_action_label:
                         the_person.char "Please [the_person.mc_title], stick that thing back into me, I need to cum so badly."
 
                     jump slave_attention_comfort_menu
-                "Dildo her\n{size=22}Requires at least 40 {image=gui/extra_images/energy_token.png}{/size} (disabled)" if mc.energy < 40:
+                "Dildo her\n{color=#ff0000}{size=18}Requires at least 40 {image=gui/extra_images/energy_token.png}{/size}{/color} (disabled)" if mc.energy < 40:
                     pass
                 "Let her go":
                     mc.name "Thats enough for now, you can get dressed."
@@ -150,7 +150,7 @@ label slave_attention_crisis_action_label:
                             the_person.char "As you wish, [the_person.mc_title]."
                             $ the_person.change_stats(happiness = 5, obedience = 5)
 
-                        "Fuck her\n{size=22}Requires at least 40 {image=gui/extra_images/energy_token.png}{/size} (disabled)" if mc.energy < 40:
+                        "Fuck her\n{color=#ff0000}{size=18}Requires at least 40 {image=gui/extra_images/energy_token.png}{/size}{/color} (disabled)" if mc.energy < 40:
                             pass
 
                         "Send her away":

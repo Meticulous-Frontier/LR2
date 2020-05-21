@@ -305,7 +305,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                             $ renpy.scene("Active")
                             "You wait a few minutes until the washer is done. You move your laundry over to the dryer then walk to your room."
                             "You go back to your room and get to sleep. Your laundry should be dry in the morning!"
-                        "Masturbate for me\n{size=22}Requires 130 Obedience{/size} (disabled)" if the_person.obedience < 130:
+                        "Masturbate for me\n{color=#ff0000}{size=18}Requires 130 Obedience{/size}{/color} (disabled)" if the_person.obedience < 130:
                             pass
                     $ the_person.change_stats(obedience = 5, happiness = 5, slut_temp = 5)
             else:      #Someone else catches you! for now this is disabled

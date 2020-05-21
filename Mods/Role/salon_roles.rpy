@@ -247,20 +247,20 @@ label ophelia_ex_bf_plan_pics_label(the_person):
             "You lower your voice a bit."
             mc.name "I'm sure if your oral skills are as good as you boast, you'll be able to figure out an way to remind him."
 
-        "Try making him jealous\n{color=#ff0000}{size=22}Requires: More Intelligence{/size}{/color} (disabled)" if mc.int<= 2:
+        "Try making him jealous\n{color=#ff0000}{size=18}Requires: More Intelligence{/size}{/color} (disabled)" if mc.int<= 2:
             pass
         "Forget about him" if mc.charisma > 2:
             mc.name "When one door closes, often times another may open."
             the_person.char "Yeah... you might be right."
             "You lower your voice a bit."
             mc.name "I'm sure if your oral skills are as good as you boast, you'll find someone new soon enough, anyway."
-        "Forget about him\n{color=#ff0000}{size=22}Requires: More Charisma{/size}{/color} (disabled)" if mc.charisma<= 2:
+        "Forget about him\n{color=#ff0000}{size=18}Requires: More Charisma{/size}{/color} (disabled)" if mc.charisma<= 2:
             pass
 
         "I don't believe you" if the_person.sluttiness > 40:
             mc.name "I don't know, just about every girl I've ever dated claimed to give the world's best blowjobs. Are you sure yours are so special?"
             the_person.char "Oh? Don't believe me?"
-        "I don't believe you\n{size=22}Not slutty enough to fall for this{/size} (disabled)" if the_person.sluttiness <= 40:
+        "I don't believe you\n{color=#ff0000}{size=18}}Not slutty enough to fall for this{/size}{/color} (disabled)" if the_person.sluttiness <= 40:
             pass
 
     "She considers what you said for a bit. Then, a light goes off and her eyes light up."
@@ -527,7 +527,7 @@ init 2 python:
 
     def ophelia_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions):
         if ophelia_get_special_bj_unlocked():
-            willingness = Ophelia_blowjob.build_position_willingness_string(person, ignore_taboo = True).replace("{size=22}", "{size=12}")
+            willingness = Ophelia_blowjob.build_position_willingness_string(person, ignore_taboo = True)
             oral_positions.append([willingness, Ophelia_blowjob])
 
 

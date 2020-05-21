@@ -177,7 +177,7 @@ init 5 python:
                 option_list.append(["Pause and change position\n-5 {image=arousal_token_small}","Change"])
                 for position in position_choice.connections:
                     if allow_position(person, position) and object_choice.has_trait(position.requires_location):
-                        appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo).replace("{size=22}", "{size=12}") #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
+                        appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                         option_list.append([appended_name,position])
 
             if position_locked and object_choice:
@@ -185,7 +185,7 @@ init 5 python:
                 for position in position_choice.connections:
                     if isinstance(object_choice, Object): # Had an error with cousin's kissing blackmail where it would pass object_choice as a list, haven't looked further into it
                         if allow_position(person, position) and object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag:
-                            appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo).replace("{size=22}", "{size=12}") #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
+                            appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                             option_list.append([appended_name, position])
             if not person.outfit.full_access():
                 option_list.append(["Pause and strip her down","Strip"])
@@ -210,7 +210,7 @@ init 5 python:
 
         for position in sorted(list_of_positions, key = lambda x: x.name):
             if allow_position(person, position) and  mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
-                willingness = position.build_position_willingness_string(person, ignore_taboo = ignore_taboo).replace("{size=22}", "{size=12}")
+                willingness = position.build_position_willingness_string(person, ignore_taboo = ignore_taboo)
                 if position.skill_tag == "Foreplay":
                     foreplay_positions.append([willingness, position])
                 if position.skill_tag == "Oral":
@@ -241,7 +241,7 @@ init 5 python:
         # if person == salon_manager:
         #     if ophelia_get_special_bj_unlocked():
         #         oral_positions = filter(ophelia_oral_position_filter, oral_positions)
-        #         willingness = Ophelia_blowjob.build_position_willingness_string(person, ignore_taboo = True).replace("{size=22}", "{size=12}")
+        #         willingness = Ophelia_blowjob.build_position_willingness_string(person, ignore_taboo = True)
         #         oral_positions.append([willingness, Ophelia_blowjob])
         return person.event_triggers_dict.get("unique_sex_positions", default_unique_sex_positions)(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions)
 

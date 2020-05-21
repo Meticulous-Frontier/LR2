@@ -77,7 +77,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
             "You continue for a while. [the_girl.title] clearly enjoys the anal penetration. Eventually you pull your finger out and resume eating her out normally."
             $ the_girl.change_arousal(the_girl.get_opinion_score("anal sex") * 10)
             the_girl.char "Fuck that was intense..."
-        "Finger Her Ass\n{size=22}Must like anal sex{/size} (disabled)" if the_girl.get_opinion_score("anal sex") <= 0:
+        "Finger Her Ass\n{color=#ff0000}{size=18}Must like anal sex{/size}{/color} (disabled)" if the_girl.get_opinion_score("anal sex") <= 0:
             pass
 
         "Rim Her Ass" if the_girl.get_opinion_score("anal sex") > 0:
@@ -170,7 +170,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
             if the_girl.get_opinion_score("anal sex") > 1:
                 the_girl.char "Fuck that was intense..."
 
-        "Rim Her Ass\n{size=22}Must like anal sex{/size} (disabled)" if the_girl.get_opinion_score("anal sex") <= 0:
+        "Rim Her Ass\n{color=#ff0000}{size=18}Must like anal sex{/size}{/color} (disabled)" if the_girl.get_opinion_score("anal sex") <= 0:
             pass
 
     if mc.arousal > 70:

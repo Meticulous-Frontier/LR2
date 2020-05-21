@@ -1115,7 +1115,7 @@ label athlete_hookup_accept(the_person):
                     the_person.char "That was SO good. You'll be hearing from me again, I'm sure... I came so many times..."
                     "You and [the_person.title] get cleaned up and dressed, then sneak out of the locker room."
                     return
-                "Fuck Her Ass\n{size=22}Requires 80 sluttiness{/size} (disabled)" if the_person.effective_sluttiness() < 80:
+                "Fuck Her Ass\n{color=#ff0000}{size=18}Requires 80 sluttiness{/size}{/color} (disabled)" if the_person.effective_sluttiness() < 80:
                     pass
     "[the_person.possessive_title]'s creamy cunt draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
     mc.name "Get ready, I'm gonna cum!"

@@ -2675,7 +2675,7 @@ label Sarah_weekend_date_grab_drinks_label():
                     $ the_person.change_happiness(5)
                 $ intoxication_level += -1
 
-            "Propose sex in the bathroom\n{size=22}Success Chance: [chance_service_him]" if intoxication_level > 10: #TODO this option currently disabled while it is being written (10 is impossible)
+            "Propose sex in the bathroom\n{color=#ff0000}{size=18}Success Chance: [chance_service_him]%%{/size}{/color}" if intoxication_level > 10: #TODO this option currently disabled while it is being written (10 is impossible)
                 "You lean in close and whisper to her."
                 mc.name "Why don't we take a break from the drinking and sneak back the restroom and do something a little more... physical."
                 the_person.char "Oh my..."

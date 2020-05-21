@@ -209,7 +209,7 @@ label scene_SB_anal_standing_1(the_girl, the_location, the_object):
                     "She pulls you into her ass, while at the same time trying to push your fingers further down her throat, causing her whole body to clench and unclench."
                     $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 4 + the_girl.get_opinion_score("anal sex") * 3)
                     "Once you're satisfied you withdraw your fingers."
-        "Gag her with your fingers\n{size=22}Must be submissive{/size} (disabled)" if the_girl.get_opinion_score("being submissive") <= 0:
+        "Gag her with your fingers\n{color=#ff0000}{size=18}Must be submissive{/size}{/color} (disabled)" if the_girl.get_opinion_score("being submissive") <= 0:
             pass
     return
 
@@ -282,7 +282,7 @@ label scene_SB_anal_standing_2(the_girl, the_location, the_object):
             "You hold on for a few more seconds, until you feel her knees start to buckle before letting go. [the_girl.possessive_title] gasps for air."
             the_girl.char "Oh my god, that was so hot..."
             "You spank her ass hard and continue to fuck her tightest hole."
-        "Choke Her\n{size=22}Must be submissive{/size} (disabled)" if the_girl.get_opinion_score("being submissive") <= 0:
+        "Choke Her\n{color=#ff0000}{size=18}Must be submissive{/size}{/color} (disabled)" if the_girl.get_opinion_score("being submissive") <= 0:
             pass
     return
 

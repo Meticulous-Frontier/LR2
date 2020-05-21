@@ -174,7 +174,7 @@ label casual_hotwife_get_a_drink_label(the_person):
     $ ran_num = (mc.charisma + (the_person.effective_sluttiness() / 10)) * 10  #More willing to let you buy a drink for her as she gets sluttier
     #$ bartender_name = get_random_male_name()
     menu:
-        "Offer to Buy\n{size=22}Success Chance: [ran_num]%%{/size}":
+        "Offer to Buy\n{color=#ff0000}{size=18}Success Chance: [ran_num]%%{/size}{/color}":
             mc.name "Hey, let me buy you a drink."
             if renpy.random.randint(0,100) < ran_num:  #Success
                 the_person.char "Hmm... Okay! That sounds great! I'll go find us a table!"
@@ -1273,7 +1273,7 @@ label hotwife_hookup_accept(the_person):
                     the_person.char "That was SO good. You'll be hearing from me again, I'm sure. I can't wait to send hubby those pictures..."
                     "You and [the_person.title] get cleaned up and dressed, then sneak out of the restroom."
                     return
-                "Fuck Her Ass\n{size=22}Requires 80 sluttiness{/size} (disabled)" if the_person.effective_sluttiness() < 80:
+                "Fuck Her Ass\n{color=#ff0000}{size=18}Requires 80 sluttiness{/size}{/color} (disabled)" if the_person.effective_sluttiness() < 80:
                     pass
     "[the_person.possessive_title]'s creamy cunt draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
     mc.name "Get ready, I'm gonna cum!"

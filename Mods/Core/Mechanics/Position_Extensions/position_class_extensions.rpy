@@ -90,9 +90,9 @@ init 5 python:
             position_opinion = " {image=thumbs_down}"
 
         if disable:
-            return taboo_break_string + self.name + position_opinion + "\n{size=22}" + willingness_string + "{/size}" + " (disabled)" #Don't show the arousal and energy string if it's disabled to prevent overrun
+            return taboo_break_string + self.name + position_opinion + "\n{size=12}" + willingness_string + "{/size}" + " (disabled)" #Don't show the arousal and energy string if it's disabled to prevent overrun
         else:
-            return taboo_break_string + self.name + position_opinion + "\n{size=22}" + willingness_string + energy_string + arousal_string + "{/size}" + tooltip_string
+            return taboo_break_string + self.name + position_opinion + "\n{size=12}" + willingness_string + energy_string + arousal_string + "{/size}" + tooltip_string
 
     Position.build_position_willingness_string = build_position_willingness_string_enhanced
 

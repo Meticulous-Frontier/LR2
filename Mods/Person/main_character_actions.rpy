@@ -105,7 +105,7 @@ init 5 python:
     # Pay to Strip | Allows you to enter the pay_strip label used in certain events if requirements are met.
     pay_to_strip_action = ActionMod("Pay [the_person.title] to strip", mc_action_pay_to_strip_requirement, "mc_pay_to_strip_label", menu_tooltip = "Pay [the_person.title] to give you a strip tease.", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
-    mc_lasik_surgery_action = ActionMod("Pay for LASIK surgery\n{size=22}Costs: $5000{/size}", mc_action_lasik_surgery_person_requirement, "mc_action_lasik_surgery_label", menu_tooltip = "You don't like her wearing glassing, offer to pay for LASIK surgery.", category = "Generic People Actions")
+    mc_lasik_surgery_action = ActionMod("Pay for LASIK surgery\n{color=#ff0000}{size=18}Costs: $5000{/size}{/color}", mc_action_lasik_surgery_person_requirement, "mc_action_lasik_surgery_label", menu_tooltip = "You don't like her wearing glassing, offer to pay for LASIK surgery.", category = "Generic People Actions")
 
     ask_take_serum = ActionMod("Ask [the_person.title] to test serum", mc_ask_take_serum_requirement, "mc_ask_take_serum_label", menu_tooltip = "Ask [the_person.title] to voluntarily test a serum.", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
@@ -313,7 +313,7 @@ label mc_ask_take_serum_label(person):  #TODO possibly temporary addition to the
 
     "You consider asking [person.title] to voluntarily take one of your serums as a test."
     menu:
-        "Ask her to take it.\n{size=22}Success Chance: [ask_serum_chance]%%{/size}":
+        "Ask her to take it.\n{color=#ff0000}{size=18}Success Chance: [ask_serum_chance]%%{/size}{/color}":
             if mc.business.get_employee_title(person) == "None":
                 mc.name "[person.title], I've got a project going on at work that could really use a test subject. Would you be interested in helping me out?"
 

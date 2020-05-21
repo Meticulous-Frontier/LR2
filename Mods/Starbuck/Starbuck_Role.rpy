@@ -1645,7 +1645,7 @@ label starbuck_close_up_label(the_person): #You offer to help her close up. Main
             else:
                 "You think about adding a dose of serum to [the_person.title]'s beer, but decide against it."
 
-        "Add some serum to her beer.\n{color=#ff0000}{size=22}Requires: Serum{/size}{/color} (disabled)" if mc.inventory.get_any_serum_count() == 0:
+        "Add some serum to her beer.\n{color=#ff0000}{size=18}Requires: Serum{/size}{/color} (disabled)" if mc.inventory.get_any_serum_count() == 0:
             pass
 
         "Leave her beer alone.":
