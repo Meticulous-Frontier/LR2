@@ -273,7 +273,7 @@ label girl_shower_enter_enhanced(the_person):
             $ mc.change_energy(20)
 
 
-        "Join her in the shower.\nRequires: 120 Obedience (disabled)" if the_person.obedience < 120:
+        "Join her in the shower.\n{color=#ff0000}{size=22}Requires: 120 Obedience{/size}{/color} (disabled)" if the_person.obedience < 120:
             pass
 
     return

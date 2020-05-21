@@ -97,6 +97,9 @@ init 2 python:
 
             if " (disabled)" in mi.title:
                 mi.title = mi.title.replace(" (disabled)", "")
+                parts = mi.title.split("\n")
+                if len(parts) > 1:
+                    mi.title = parts[0] + "\n{color=#ff0000}{size=18}" + parts[1] + "{/size}{/color}"
                 mi.is_sensitive = False
 
             if mi.display:

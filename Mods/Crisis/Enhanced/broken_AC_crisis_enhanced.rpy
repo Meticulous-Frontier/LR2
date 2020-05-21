@@ -131,7 +131,7 @@ label broken_AC_crisis_label_enhanced:
             if removed_something:
                 $ broken_AC_crisis_update_sluttiness();
 
-        "Tell everyone to strip down and keep working.\n{color=#ff0000}{size=22}Requires: [casual_uniform_policy.name]{/color} (disabled)" if not casual_uniform_policy.is_active():
+        "Tell everyone to strip down and keep working.\n{color=#ff0000}{size=22}Requires: [casual_uniform_policy.name]{/size}{/color} (disabled)" if not casual_uniform_policy.is_active():
             pass
     $renpy.scene("Active")
     return

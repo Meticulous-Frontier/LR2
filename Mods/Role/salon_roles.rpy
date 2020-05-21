@@ -247,14 +247,14 @@ label ophelia_ex_bf_plan_pics_label(the_person):
             "You lower your voice a bit."
             mc.name "I'm sure if your oral skills are as good as you boast, you'll be able to figure out an way to remind him."
 
-        "Try making him jealous\n{size=22}Requires: More Intelligence{/size} (disabled)" if mc.int<= 2:
+        "Try making him jealous\n{color=#ff0000}{size=22}Requires: More Intelligence{/size}{/color} (disabled)" if mc.int<= 2:
             pass
         "Forget about him" if mc.charisma > 2:
             mc.name "When one door closes, often times another may open."
             the_person.char "Yeah... you might be right."
             "You lower your voice a bit."
             mc.name "I'm sure if your oral skills are as good as you boast, you'll find someone new soon enough, anyway."
-        "Forget about him\n{size=22}Requires: More Charisma{/size} (disabled)" if mc.charisma<= 2:
+        "Forget about him\n{color=#ff0000}{size=22}Requires: More Charisma{/size}{/color} (disabled)" if mc.charisma<= 2:
             pass
 
         "I don't believe you" if the_person.sluttiness > 40:

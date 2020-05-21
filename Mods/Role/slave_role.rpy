@@ -241,7 +241,7 @@ label slave_alarm_clock_label(the_person):
                                     $ the_person.draw_person()
                                     "She stands up and heads for the door."
 
-                                "Order her to open her mouth\nRequires: 140 Obedience (disabled)" if the_person.obedience < 140:
+                                "Order her to open her mouth\n{color=#ff0000}{size=22}Requires: 140 Obedience{/size}{/color} (disabled)" if the_person.obedience < 140:
                                     pass
 
                                 "Order her to hold up her tits" if the_person.has_large_tits():
@@ -258,7 +258,7 @@ label slave_alarm_clock_label(the_person):
                                 "Continue": # An escape if you get locked since obedience is less than 140 and has_large_tits() is false. #NOTE: Can write other alternatives
                                     pass
 
-                        "Order her to get on her knees\nRequires: 130 Obedience (disabled)" if the_person.obedience < 130:
+                        "Order her to get on her knees\n{color=#ff0000}{size=22}Requires: 130 Obedience{/size}{/color} (disabled)" if the_person.obedience < 130:
                             pass
 
                         "Climax":
@@ -301,7 +301,7 @@ label slave_alarm_clock_label(the_person):
                 "[the_person.title] pulls back off your cock slowly. She spits your cum out into her hand and straightens up."
                 $ the_person.call_dialogue("cum_mouth")
 
-            "Order her to take your cum in her mouth\nRequires: 130 Obedience (disabled)" if the_person.obedience<130:
+            "Order her to take your cum in her mouth\n{color=#ff0000}{size=22}Requires: 130 Obedience{/size}{/color} (disabled)" if the_person.obedience<130:
                 pass
             "Climax":
                 mc.name "I'm almost there [the_person.title], keep going!"
@@ -348,7 +348,7 @@ label slave_alarm_clock_label(the_person):
                 $ the_person.call_dialogue("cum_mouth")
 
 
-            "Order her to swallow\nRequires: 130 Obedience (disabled)" if the_person.obedience < 130:
+            "Order her to swallow\n{color=#ff0000}{size=22}Requires: 130 Obedience{/size}{/color} (disabled)" if the_person.obedience < 130:
                 pass
 
             "Let her spit it out":
