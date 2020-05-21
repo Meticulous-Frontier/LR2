@@ -37,6 +37,15 @@ init 2 python:
             return True
         return False
 
+    def mc_action_lasik_surgery_person_requirement(person):
+        if big_glasses in person.base_outfit.accessories or modern_glasses in person.base_outfit.accessories:
+            if person in unique_character_list:
+                return False
+            if mc.business.funds < 5000:
+                return "Not enough money"
+            return True
+        return False
+
     # Rename Person Requirements
     def mc_action_rename_person_requirement(person):
         if person.obedience >= 120:
@@ -96,9 +105,11 @@ init 5 python:
     # Pay to Strip | Allows you to enter the pay_strip label used in certain events if requirements are met.
     pay_to_strip_action = ActionMod("Pay [the_person.title] to strip", mc_action_pay_to_strip_requirement, "mc_pay_to_strip_label", menu_tooltip = "Pay [the_person.title] to give you a strip tease.", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
+    mc_lasik_surgery_action = ActionMod("Pay for LASIK surgery\n{size=22}Costs: $5000{/size}", mc_action_lasik_surgery_person_requirement, "mc_action_lasik_surgery_label", menu_tooltip = "You don't like her wearing glassing, offer to pay for LASIK surgery.", category = "Generic People Actions")
+
     ask_take_serum = ActionMod("Ask [the_person.title] to test serum", mc_ask_take_serum_requirement, "mc_ask_take_serum_label", menu_tooltip = "Ask [the_person.title] to voluntarily test a serum.", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
-    main_character_actions_list = [mc_schedule_person_action, mc_start_follow_action, mc_stop_follow_action, mc_hire_person_action, mc_rename_person_action, mc_spend_the_night_action, pay_to_strip_action, ask_take_serum]
+    main_character_actions_list = [mc_schedule_person_action, mc_start_follow_action, mc_stop_follow_action, mc_hire_person_action, mc_rename_person_action, mc_spend_the_night_action, mc_lasik_surgery_action, pay_to_strip_action, ask_take_serum]
 
 
 label mc_pay_to_strip_label(person):
@@ -268,7 +279,30 @@ label mc_stop_follow_label(person):
 
 
     return
+# Lasik surgery Labels
+label mc_action_lasik_surgery_label(the_person):
+    mc.name "[the_person.title], your have beautiful eyes, but they are always hidden behind your glasses."
+    the_person.char "Don't you like them? I can wear different glasses tomorrow."
+    mc.name "I mean, that I really would like to see you without any glasses."
+    if renpy.random.randint(1,2) == 1:
+        the_person.char "I'm sorry, but I can't wear lenses."
+        mc.name "That's fine."
+    else:
+        the_person.char "If you like, I can start wearing lenses."
+        mc.name "I don't think that's the right solution."
+    mc.name "I made an appointment for you in the clinic for a LASIK surgery where your eyesight will be corrected."
+    "[the_person.title] gives you a spontaneous hug."
+    $ the_person.draw_person(position = "kissing")
+    the_person.char "You make me so happy [the_person.mc_title], thank you so much!"
+    python:
+        the_person.change_happiness(10)
+        the_person.change_love(5, max_modified_to = 80)
+        mc.business.change_funds(-5000)
+        the_person.base_outfit.accessories.remove(filter(lambda x : x in [big_glasses, modern_glasses], the_person.base_outfit.accessories)[0])
+    $ the_person.draw_person()
+    return    
 
+# Ask take serum Labels
 label mc_ask_take_serum_label(person):  #TODO possibly temporary addition to the mod. Copies the old mechanics for asking a girl to take a serum.
     $ ask_serum_chance = 10*mc.charisma + 5*person.int
     if ask_serum_chance < 0:
