@@ -18,6 +18,13 @@ init 10 python:
         if the_person.slave_collar == True:
             return False
 
+    def slave_trim_pubes_requirement(the_person):
+        if girlfriend_role in the_person.special_role or affair_role in the_person.special_role:
+            return False
+        if slave_role in the_person.special_role:
+            return True
+        return False        
+
     def uncollar_slave_requirement(the_person):
         return the_person.slave_collar
 
@@ -71,6 +78,7 @@ init 10 python:
 
     stay_wet_action = ActionMod("Stay wet", stay_wet_requirement, "stay_wet_label", menu_tooltip = "Order your slave to stay aroused at all times.", category = "Slave Role")
     calm_down_action = ActionMod("Calm down", calm_down_requirement, "stay_wet_label", menu_tooltip = "Let your slave calm down.", category = "Slave Role", allow_disable = False)
+    slave_trim_pubes_action = ActionMod("Trim pubes", slave_trim_pubes_requirement, "slave_trim_pubes_label", menu_tooltip = "Order her to do a little personal landscaping. Tell her to wax it off, grow it out, or shape it into anything in between.", category = "Slave Role")
 
     collar_slave_action = ActionMod("Place collar on [the_person.title].", collar_slave_requirement, "slave_collar_person_label", menu_tooltip = "Put a collar of ownership on the target, ensure that their obedience stays high.", category = "Slave Role")
     uncollar_slave_action = ActionMod("Remove collar from [the_person.title].", uncollar_slave_requirement, "slave_collar_person_label", menu_tooltip = "Remove the collar, declaring them a free spirit.", category = "Dungeon Actions", allow_disable = False)
@@ -78,7 +86,7 @@ init 10 python:
     wakeup_duty_action = ActionMod("Wake me up in the morning.", wakeup_duty_requirement, "wakeup_duty_label", menu_tooltip = "Have your slave wake you up in the morning", category = "Slave Role")
     wakeup_duty_crisis = Action("Slave Alarm Clock", wakeup_duty_crisis_requirement, "slave_alarm_clock_label")
 
-    slave_role = Role("Slave", [stay_wet_action, calm_down_action, collar_slave_action, uncollar_slave_action, wakeup_duty_action], hidden = False)
+    slave_role = Role("Slave", [stay_wet_action, calm_down_action, collar_slave_action, uncollar_slave_action, slave_trim_pubes_action, wakeup_duty_action], hidden = False)
 
 label stay_wet_label(the_person): # Can expand with dialogue options and degrees of arousal, but just setting up basic actions for now.
 
@@ -111,6 +119,32 @@ label slave_collar_person_label(the_person):
 
         "You put one of the collars you created around your [the_person.possessive_title]'s neck."
 
+    return
+
+label slave_trim_pubes_label(the_person):
+    mc.name "You're going to trim your pubes for me."
+    "[the_person.possessive_title] nods obediently."
+    the_person.char "Yes, Master. How do you prefer it?"
+    if the_person.event_triggers_dict.get("trimming_pubes", None) is not None:
+        # She was already planning on a different style, so we can have some change your mind dialogue here
+        $ mc.business.mandatory_crises_list.remove(the_person.event_triggers_dict.get("trimming_pubes",None)) #If she already had an event for this make sure to remove it.
+        $ the_person.event_triggers_dict["trimming_pubes"] = None
+
+    $ pubes_choice = renpy.display_menu(girlfriend_build_pubes_choice_menu(the_person),True,"Choice")
+
+    if pubes_choice == "Never mind.":
+        mc.name "On second thought, just leave them the way they are."
+        the_person.char "As you wish."
+    else:
+        "You show her a picture of the style you want on your phone..."
+        if pubes_choice.ordering_variable > the_person.pubes_style.ordering_variable:
+            the_person.char "Yes [the_person.mc_title], I'll will need to grow out a bit, but as soon as I can I'll trim them the way you prefer [the_person.mc_title]."
+            #It will take some time for them to grow out.
+            $ add_girlfriend_do_trim_pubes_action(the_person, pubes_choice, renpy.random.randint(2,5))
+        else:
+            the_person.char "Yes [the_person.mc_title], it will be ready for your inspection tomorrow."
+            $ add_girlfriend_do_trim_pubes_action(the_person, pubes_choice, 0)
+    $ del pubes_choice
     return
 
 label wakeup_duty_label(the_person):
