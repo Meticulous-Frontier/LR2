@@ -2093,6 +2093,8 @@ label Sarah_initial_threesome_label():
 
 label Sarah_ask_for_baby_label():
     $ the_person = sarah
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
     $ scene_manager = Scene()
     "As you are getting ready for bed, you get a text on your phone. It's from [the_person.possessive_title]"
     the_person.char "Hey, can I come over tonight? I had something I wanted to talk to you about."
