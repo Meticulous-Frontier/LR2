@@ -415,9 +415,10 @@ init -1 python:
         strip_choice = get_strip_choice_max(test_outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet)
         # renpy.say("", strip_choice.name + "  (required: " + str(test_outfit.slut_requirement) +  ", sluttiness: " +  str(self.effective_sluttiness() + temp_sluttiness_boost) + ")")
         while strip_choice and self.judge_outfit(test_outfit, temp_sluttiness_boost):
-            if delay > 0 and msg_count == 0:
+            if delay > 0:
                 self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
-                renpy.pause(delay) # if no message to show, wait a short while before automatically continue stripping
+                if msg_count == 0:
+                    renpy.pause(delay) # if no message to show, wait a short while before automatically continue stripping
             else:
                 test_outfit.remove_clothing(strip_choice)
             self.apply_outfit(test_outfit, ignore_base = True) #Swap our current outfit out for the test outfit.
