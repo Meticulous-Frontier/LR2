@@ -175,6 +175,14 @@ init -1:
         xanchor 1.0
         xzoom -1
 
+    transform character_left_flipped_distant():
+        yalign 0.5
+        yanchor 0.5
+        xalign 0.5
+        xanchor 1.0
+        xzoom -0.5
+        yzoom 0.5
+
     transform character_69_bottom():
         yalign 0.62
         yanchor 0.5

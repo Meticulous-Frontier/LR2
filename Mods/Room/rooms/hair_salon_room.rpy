@@ -90,6 +90,7 @@ init 2 python: # Declare variables to use
         salon_manager.event_triggers_dict["anal_position_filter"] = ophelia_anal_position_filter
         salon_manager.event_triggers_dict["unique_sex_positions"] = ophelia_unique_sex_positions
         salon_manager.event_triggers_dict["ex_name"] = get_random_male_name()
+        salon_manager.event_triggers_dict["favorite_drink"] = "gin sour"
         return
 
     def salon_introduction_action_requirement(the_person):

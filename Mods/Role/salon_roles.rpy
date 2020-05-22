@@ -66,6 +66,19 @@ init 2 python:
             return True
         return False
 
+    def ophelia_revenge_date_plan_requirement(person):
+        if person.sluttiness >= 40:
+            if person.location() is mall_salon:
+                if day >= ophelia_get_day_dumped() + 21:
+                    return True
+        return False
+
+    def ophelia_revenge_date_requirement():
+        if time_of_day == 3:
+            if day % 7 == 6:  #Sunday
+                return True
+        return False
+
     def ophelia_special_blowjob_requirement(person):
         if person.sluttiness >= 40:
             if person.energy > 60:
@@ -82,6 +95,8 @@ init 2 python:
     ophelia_ex_bf_phone_overhear = Action("Overhear a phone conversation", ophelia_ex_bf_phone_overhear_requirement, "ophelia_ex_bf_phone_overhear_label")
     ophelia_make_blowjob_pics = Action("Make blowjob pictures", ophelia_make_blowjob_pics_requirement, "ophelia_make_blowjob_pics_label")
     ophelia_blowjob_pics_review = Action("Review blowjob pictures",  ophelia_blowjob_pics_review_requirement, "ophelia_blowjob_pics_review_label")
+    ophelia_revenge_date_plan = Action("Ophelia asks you on a date",  ophelia_revenge_date_plan_requirement, "ophelia_revenge_date_plan_label")
+    ophelia_revenge_date =  Action("Date with Ophelia",  ophelia_revenge_date_requirement, "ophelia_revenge_date_label")
 
     salon_manager_role = Role("Salon Manager", [cut_hair_action, ophelia_ex_bf_plan_pics])
 
@@ -432,6 +447,292 @@ label ophelia_blowjob_pics_review_label(the_person):
     the_person.char "I'd better get back to work."
     $ the_person.event_triggers_dict["pics_to_ex_sent"] = 2
     $ the_person.event_triggers_dict["special_bj_unlock"] = 1
+    $ the_person.on_room_enter_event_list.append(ophelia_revenge_date_plan)
+    $ del ex_name
+    return
+
+label ophelia_revenge_date_plan_label(the_person):
+    $ ex_name = ophelia_get_ex_name()
+    $ the_person.draw_person(emotion = "happy")
+    "You step into the salon. No sooner have your eyes adjusted to the light then you see [the_person.title]"
+    the_person.char "Ah! [the_person.mc_title]! Just the man I was hoping to see today."
+    "A lump forms in your throat. You wander what she is going to rope you into."
+    the_person.char "What plans do you have for Sunday night?"
+    mc.name "Sunday? Oh, not much I guess..."
+    the_person.char "Great! Guess what! I got a reservation at Rafferty's! It's a date, so dress nice! Pick me up at 6 o'clock sharp!"
+    "Wow that's a pretty expensive steak house."
+    mc.name "Wow, that sounds very nice..."
+    "She cuts you off."
+    the_person.char "Don't worry about the expenses, it'll be my treat, okay?"
+    "Clearly there is something going on that she isn't tell you. Probably involving her ex boyfriend again?"
+    mc.name "And... its going to be just me and you there?"
+    the_person.char "Of course! What are you implying by that?"
+    "She tries to smile sincerely, but she can't pull it off. You raise an eyebrow at her horrible acting."
+    the_person.char "God... is it that obvious? [ex_name] is going to be there, on a date with his ho."
+    mc.name "And how exactly do you know this?"
+    "She groans audibly."
+    the_person.char "Well, he sorta left himself signed on to my laptop and I've been reading some of the messages he's been sending Tits-for-Brains..."
+    mc.name "That seems like a violation of privacy."
+    the_person.char "Whatever, its his fault for not changing his passwords! That's like, break up 101, lock down everything."
+    the_person.char "Anyway, I'm sorry, I know I'm kind of using you for this, but I'll pay for the meal and everything!"
+    "You aren't really doing anything on Sunday anyway..."
+    the_person.char "You'll get to escort me! I'm trying to make my ex jealous... I'll be dressed to impress!"
+    "Yup! That seems totally worth it."
+    mc.name "Okay, I'll do it. 6 o'clock here, right?"
+    the_person.char "You got it! You're the best, [the_person.mc_title]!"
+    $ the_person.draw_person(position = "kissing")
+    "She steps up and gives you a quick peck on the cheek."
+    $ the_person.event_triggers_dict["first_date_planned"] = 1
+    $ mc.business.mandatory_crises_list.append(ophelia_revenge_date)
+    $ del ex_name
+    return
+
+label ophelia_revenge_date_label():
+    $ the_person = salon_manager
+    $ ex_name = ophelia_get_ex_name()
+    $ candace_mod_initialization()  #Create Candace (Candi), the office bimbo / slut
+    #Slutty date outfits
+    python:
+        ophelia_date_night_outfit = Outfit("Sexy Plum Shirt And Khaki Skirt")
+        ophelia_date_night_outfit.add_upper(strappy_bra.get_copy(),[.15, .15, .15, 0.95])
+        ophelia_date_night_outfit.add_upper(belted_top.get_copy(),[.41, .16, .38, 0.95])
+        ophelia_date_night_outfit.add_lower(strappy_panties.get_copy(),[.15, .15, .15, 0.95])
+        ophelia_date_night_outfit.add_lower(belted_skirt.get_copy(),[.77, .7, .56, 0.95], "Pattern_1", [.41, .16, .38, 0.95])
+        ophelia_date_night_outfit.add_feet(garter_with_fishnets.get_copy(),[.15, .15, .15, 0.95])
+        ophelia_date_night_outfit.add_feet(high_heels.get_copy(),[.15, .15, .15, 0.95])
+        ophelia_date_night_outfit.add_accessory(lipstick.get_copy(),[.41, .16, .38, 0.52])
+        ophelia_date_night_outfit.add_accessory(heavy_eye_shadow.get_copy(),[.41, .16, .38, 0.52])
+        the_person.apply_outfit(ophelia_date_night_outfit)
+        the_person.wardrobe.add_outfit(ophelia_date_night_outfit)
+
+        candi_date_night_outfit = Outfit("Candi Sexy Date Night")
+        candi_date_night_outfit.add_upper(thin_dress.get_copy(),[1.0, 0.73, 0.85, 0.95])
+        candi_date_night_outfit.add_upper(corset.get_copy(),[1.0, 0.73, 0.85, 0.95])
+        candi_date_night_outfit.add_lower(thong.get_copy(),[.15, .15, .15, 0.95])
+        candi_date_night_outfit.add_feet(garter_with_fishnets.get_copy(),[.15, .15, .15, 0.95])
+        candi_date_night_outfit.add_feet(pumps.get_copy(),[.15, .15, .15, 0.95])
+        candi_date_night_outfit.add_accessory(heavy_eye_shadow.get_copy(),[1.0, 0.73, 0.85, 0.95])
+        candi_date_night_outfit.add_accessory(lipstick.get_copy(),[1.0, 0.73, 0.85, 0.50])
+        candace.apply_outfit(candi_date_night_outfit)
+        candace.wardrobe.add_outfit(ophelia_date_night_outfit)
+
+    if mc.location != mall_salon:
+        "It's time for your date with [the_person.title]. You head over to the hair salon."
+        $ mc.change_location(mall_salon)
+        $ mc.location.show_background()
+    else:
+        "You hang around at the Salon until it is time for your date with [the_person.title]"
+    $ scene_manager = Scene() # make sure we have a clean scene manager
+    $ scene_manager.add_actor(the_person)
+    "When you see her, you can't help but give her body your complete attention."
+    mc.name "Wow, you look amazing."
+    the_person.char "Thanks! I mean... you'd have to be crazy not to want some of this... right?"
+    mc.name "I mean, regardless of what happens with your ex tonight, you don't have to go home alone."
+    the_person.char "I appreciate the sentiment, but I'm sure once [ex_name] sees me in this he'll come back to his senses."
+    "You have your doubts, but you know better than to voice them right now."
+    the_person.char "Alright, let's get going. Don't want to be late!"
+    $ mc.change_location(downtown)
+    $ downtown.show_background() #TODO is this really what vren uses for fancy dates? :/
+    "You arrive at the restaurant. There are a few people in front of you, also waiting on their tables. It seems they are running a little bit behind tonight."
+    the_person.char "Hey, I'm just gonna run the lady's room to check my hair, I'll be right back!"
+    mc.name "Sure thing."
+    $ scene_manager.remove_actor(the_person, reset_actor = False)
+    "You continue to wait for a few moments. You hear someone walk up behind you in line. At first, you pay the person no attention, but then you feel a tap on your shoulder."
+    "You turn to the person."
+    $ scene_manager.add_actor(candace, character_placement = character_left_flipped)
+    candace.char "Hi! Sorry, I'm meeting someone here, and you please take me to my table?"
+    "At first you just stand there dumbfounded. Jesus this woman is stacked."
+    mc.name "I umm, don't work here. I'm waiting for a table also."
+    candace.char "Oh! Silly me!"
+    "She is giving you an obvious once over..."
+    candace.char "You know, you're pretty cute. I'm [candace.title]!"
+    mc.name "[candace.mc_title], nice to meet you."
+    candace.char "Oh the pleasure is all mine!"
+    "She giggles to herself... Wow, she is hot, but definitely not the brightest woman you've ever met."
+    "After a moment, you hear a phone ring. It rings multiple times until suddenly she startles."
+    candace.char "Oh! That's me!"
+    "She picks up her phone. You overhear her half of the conversation."
+    candace.char "Yes! HOW DID YOU KNOW I WAS IN LINE?"
+    candace.char "You can see me? What? Are you peeping on me boss?"
+    candace.char "You're already at the table? What? Look up? Now to the left?... What other left?"
+    "This is almost physically painful for you to listen to."
+    candace.char "Oh! I see you now! I'll be right there!"
+    "She hangs up her phone."
+    candace.char "Thank you, Maître d\', but I've found my table!"
+    "She still thinks you work here. You mutter a reply."
+    mc.name "Of course ma'am... enjoy your meal?"
+    $ scene_manager.remove_actor(candace, reset_actor = False)
+    "Well, that was... interesting..."
+    $ scene_manager.add_actor(the_person)
+    the_person.char "Hey, I'm back!"
+    "Thank god!"
+    mc.name "I'm glad you're back. I just met, the dumbest bitch, I have ever met in my life."
+    the_person.char "Is that so?"
+    "She crinkles her nose."
+    the_person.char "Blond hair? Huge tits? Dumb as a bag of rocks?"
+    mc.name "That's... yes that is completely accurate."
+    the_person.char "Good, that means they are here!"
+    "They?"
+    "As you consider what she said, the last person between you and the host walks towards their table."
+    "Host" "Hello there. Reservations?"
+    the_person.char "Yes! Under [the_person.name]."
+    "Host" "I see. Right this way then."
+    "You walk into the restaurant. You get led past several dining guests, eventually to an empty table set for two."
+    "You pull out [the_person.title]'s chair. When she sits down you push it in for her."
+    $ scene_manager.update_actor(the_person, position = "sitting")
+    "You sit down across from her. She is looking around the room. After a minute she spots her ex and points him out."
+    the_person.char "There they are! Over there..."
+    "You look in the direction that [the_person.title] is indicating."
+    $ scene_manager.add_actor(candace, character_placement = character_left_flipped_distant, position = "sitting")
+    "Sure enough, her ex is sitting across from the woman you ran into earlier."
+    "She must be incredible in bed, for him to be with her instead of [the_person.title], with the mental disadvatages she has."
+    the_person.char "Alright, let's just play it cool for now. I'm sure he'll notice us eventually."
+    "You decide to enjoy this wonderful meal and restaurant for now. You do your best to make conversation with [the_person.title], but you can tell she is a little distracted."
+    "You share a nice bottle of wine. The salad is crisp and fresh. Soon your entrees arrive."
+    "You steal a glance over at the other table now and then. Once in a while, [candace.title] gives you a wink, but [ex_name] seems to be completely oblivious."
+    "[the_person.possessive_title]'s mood seems to be deteriorating by the minute."
+    $ scene_manager.update_actor(candace, position = "walking_away")
+    "You notice that [candace.title] get's up and goes to the lady's room. You nudge [the_person.title]."
+    $ scene_manager.remove_actor(candace, reset_actor = False)
+    the_person.char "Okay... I guess it's now or never... I'm gonna go talk to him!"
+    "[the_person.title] gets up and walks towards the bathroom, but then stops next to her ex's table, pretending to be surprised to see him."
+    $ scene_manager.update_actor(the_person, character_placement = character_left_flipped_distant, position = "walking_away")
+    the_person.char "[ex_name]! Oh I just noticed you there..."
+    "You zone out a bit. Maybe it is the half a bottle of wine getting to you? Or you decide to just let their conversation be private."
+    "Damn, that [candace.title] though. What you wouldn't give to get your hands on those tits..."
+    "You spend some time daydreaming... how long? You aren't sure, but are quickly snapped back to attention when [the_person.title] sits down across from you."
+    $ scene_manager.update_actor(the_person, character_placement = character_right, position = "sitting", emotion = "angry")
+    "From the look on her face, you can guess how the conversation went."
+    mc.name "Hey... you okay?"
+    "You see a small tear at the corner of her eye."
+    the_person.char "He accused me of spying on him... that... I mean yeah I kind of was but, I thought... I thought I could convince him to take me back..."
+    "Oh boy."
+    the_person.char "He said I just wasn't his type, that we were over, and that I need to just move on."
+    "Here we go."
+    the_person.char "I tried to reason with him... but I started getting mad! That airhead isn't anyone's type! He's just dating her for the sex..."
+    "No shit."
+    the_person.char "I don't know... I just can't believe it..."
+    $ scene_manager.add_actor(candace, character_placement = character_left_flipped_distant, position = "sitting")
+    "You notice the aforementioned airhead return from the restroom. You can see that dessert has just arrived at the other table."
+    "You see [ex_name] lean across the table and whisper something into [candace.title]'s ear. She gets a big smile and nods. You wonder what is going on over there..."
+    $ scene_manager.update_actor(candace, position = "blowjob", character_placement = character_left_flipped_distant)
+    "You watch as [candace.title] gets down on her knees, then lifts the tablecloth up and disappears under it."
+    $ scene_manager.remove_actor(candace, reset_actor = False)
+    "You can hardly believe it... but you can just barely make out her legs just behind the tablecloth, on her knees, inches over towards [ex_name]."
+    "You see [ex_name] pick up his phone and dial someone... a moment later [the_person.possessive_title]'s phone is ringing. Oh boy, you can see where this is going..."
+    the_person.char "Hello? Why are you calling me?"
+    the_person.char "What do you mean? I would have done anything for you... look at what?"
+    "[the_person.title] turns and looks over at the other table. It takes her several moments to process what is going on."
+    "When she does, she goes completely silent. She hangs up the phone."
+    the_person.char "I umm... I'm not feeling well. I think I need to step outside for a minute..."
+    mc.name "Go ahead."
+    $ scene_manager.remove_actor(the_person, reset_actor = False)
+    "[the_person.possessive_title] gets up and excuses herself."
+    "While you imagined their previous conversation as a likely outcome of tonight's event, you would not have expected for them to do something so brazenly sexual in public."
+    "For a moment, you consider alerting one of the staff to the current situation, but you decide against it. If that were you, you would appreciate the discretion, even if you don't agree with how [ex_name] used it against [the_person.title]."
+    $ candace.cum_on_face()
+    $ scene_manager.add_actor(candace, character_placement = character_left_flipped_distant, position = "sitting")
+    "You ask for the check. You decide to just go ahead and pick it up. As you are waiting, you notice the bimbo return to her seat. It is hard to tell from this distance, but assume the liquid on her face is cum."
+    $ mc.business.change_funds(-200)
+    $ scene_manager.remove_actor(candace)
+    "You pay the tab, then head outside. You look around and eventually notice [the_person.title] around the corner."
+    $ scene_manager.add_actor(the_person, emotion = "sad")
+    mc.name "[the_person.title]... I'm sorry..."
+    the_person.char "No... no... don't be. You've been very nice throughout this whole thing."
+    "She takes a deep breath."
+    the_person.char "It was so dumb. I just couldn't let go. I don't know why. He is such a jerk sometimes..."
+    mc.name "Yeah to be honest that was kind of a dick move."
+    the_person.char "Yeah, I guess sometimes it just takes something like this to realize it."
+    mc.name "Can I take you home?"
+    $ scene_manager.update_actor(the_person, emotion = "happy")
+    "She gives you a slight smile. It warms your heart."
+    the_person.char "Ah, you did say that, didn't you? That I wouldn't have to go home alone tonight?"
+    mc.name "Only if you want."
+    the_person.char "I think I would like that. I don't know what is going to happen after this, but, for tonight, I think I don't want to be alone."
+    "Instead of answering with words, you just take her hand."
+    $ the_person.event_triggers_dict["first_date_finished"] = 1
+    $ mc.change_location(the_person.home)
+    $ mc.location.show_background()
+    "Soon, you are walking through her front door."
+    the_person.char "Well, this is it! The spoils of a modest hair stylist... its about the best I can afford..."
+    "Suddenly, she remembers the date."
+    the_person.char "Oh god! I said I would pay for the date tonight."
+    mc.name "Don't worry about it."
+    the_person.char "I didn't... I couldn't possibly expect you to pay for it, after..."
+    mc.name "I tell you what, have anything to drink around here?"
+    the_person.char "Umm, I have some gin and some lemons. I love gin sours, so that's usually all I really keep around the house..."
+    $ the_person.event_triggers_dict["favorite_drink"] = "gin sour"  #If not already set
+    mc.name "That sounds great. Why don't we just have a couple of drinks and relax for a bit? We can call it even."
+    the_person.char "Relax, huh? Alright, I suppose I could be convinced to along with that."
+    $ scene_manager.update_actor(the_person, position = "walking_away")
+    "[the_person.possessive_title] disappears for a bit. You take of your shoes and get comfortable on her couch."
+    "She returns with a couple of drinks."
+    $ scene_manager.update_actor(the_person, position = "stand4")
+    the_person.char "Two gin sours!"
+    "You take your drink and make a toast."
+    mc.name "Safety first! Never drink alone!"
+    "You take a sip. Hey this is actually pretty good!"
+    $ scene_manager.update_actor(the_person, position = "sitting")
+    "You do your best to make conversation, steering clear of the disaster that just happened. Gossip around the salon, you share some stories from your own personal life."
+    "Finished with your drinks, you notice her biting her lip now and then, looking at you with a smile, then getting shy and looking away."
+    "You stand up. [the_person.possessive_title] quickly stands also."
+    $ scene_manager.update_actor(the_person, position = "stand2")
+    the_person.char "Is it time... are you going so soon?"
+    mc.name "No, no, I was just stretching my legs for a moment."
+    the_person.char "Oh! That's good! I thought..."
+    "You stretch your arms up over your head."
+    mc.name "Now I'm stretching my arms for a moment."
+    "You slowly move towards her, you slowly let your arms come down in front of you. They come down over her shoulders."
+    the_person.char "Mmm, I think I need to stretch a bit too!"
+    $ scene_manager.update_actor(the_person, position = "kissing")
+    "[the_person.title] wraps her arms around you. Your faces close, you lean in and kiss her."
+    $ the_person.add_situational_slut("Date", 20, "There's no reason to hold back, he's here to fuck me!")
+    "She kisses you back, responding immediately. Her body melts into yours."
+    $ the_person.change_arousal(15)
+    $ mc.arousal += 10
+    "Your hands drops to her ass. You give it a squeeze, testing your limits with [the_person.possessive_title]. She sighs and gives a slight moan. She doesn't resist you at all."
+    "You bring your other hand down and grab the other cheek. You pull her toward you and begin to grind your hips against her."
+    "She is pressing her body against you."
+    the_person.char "Oh god... I haven't... in a while..."
+    "Sounds like she wants you! You pick her up and she gives a little yelp. Her nails are digging into your back."
+    $ scene_manager.update_actor(the_person, position = "against_wall")
+    "You start to walk down the hallway, but you've barely even entered it when you decide the bedroom is way too far away."
+    "She moans loudly when you push her up against the hall wall. Her legs are spread now and she is grinding her crotch against yours."
+    $ the_person.change_arousal(15)
+    the_person.char "Oh god... can you... can you wrap it? I'm sorry I need you to wrap it up!"
+    mc.name "Yeah, yeah."
+    "You set her down for a second. You grab a condom from your wallet and start to put it on."
+    $ scene_manager.strip_actor_outfit(the_person)
+    $ mc.condom = True
+    "When you finish, you notice [the_person.title] seems to be wearing less clothes..."
+    the_person.char "Oh god, I need you so bad. Fuck me [the_person.mc_title]!"
+    $ scene_manager.update_actor(the_person, position = "against_wall")
+    "You pull her leg up. She is so wet you slide inside of her easily. You feel her salon manicured nails scratching down your back as you fill her up."
+    $ the_person.break_taboo("vaginal_sex")
+    the_person.char "Yes! Oh god this is so hot, why didn't I let you do this earlier. Oh god."
+    call fuck_person(the_person, start_position = against_wall, skip_intro = True, asked_for_condom = True, prohibit_tags = ["Foreplay", "Oral", "Anal"]) from _ophelia_first_date_sex_scene_1
+    $ the_report = _return
+    if the_report.get("girl orgasms", 0) > 0:
+        the_person.char "Oh my god, I came harder than I ever did with [ex_name]. That was unbelievable!"
+        $ the_person.change_love(5)
+    else:
+        the_person.char "Mmm that was so hot. I can't wait to do that again!"
+    "As you both recover from your romp, there is an awkward silence in the room. You notice it is getting very late, and tomorrow is Monday."
+    mc.name "I'm really sorry, I wish I could stick around longer, but I have to work in the morning..."
+    the_person.char "Yeah, yeah, me too. I have to open the salon and all."
+    the_person.char "Look... I don't know how we are going to feel about this in the morning, but thank you for tonight."
+    the_person.char "You really helped me salvage a rough situation. I appreciate it."
+    mc.name "Of course. I had a great time."
+    "You get dressed and she walks you to the door."
+    the_person.char "Take care!"
+    mc.name "Goodnight!"
+    $ scene_manager.remove_actor(the_person)
+    $ mc.change_location(downtown)
+    $ downtown.show_background()
+    "You walk home. As you are walking, you consider the events of the evening."
+    "Tonight was a real breakthrough with [the_person.title]. She was a great fuck, hopefully you can get in her pants again soon."
+    "The scene at the restaurant was crazy, with that bimbo, [candace.title] and [ex_name]. You'll have to keep an eye out for her. Maybe you'll run into her again?"
+    $ the_person.clear_situational_slut("Date")
     $ del ex_name
     return
 
@@ -520,13 +821,17 @@ init 2 python:
         return False
 
     def ophelia_vaginal_position_filter(vaginal_positions):
+        if ophelia_get_first_date_finished():
+            return True
         return False
 
     def ophelia_anal_position_filter(anal_positions):
+        if ophelia_get_first_date_finished():
+            return True
         return False
 
-    def ophelia_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions):
-        if ophelia_get_special_bj_unlocked():
+    def ophelia_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions,  prohibit_tags = []):
+        if ophelia_get_special_bj_unlocked() and "Oral" not in prohibit_tags:
             willingness = Ophelia_blowjob.build_position_willingness_string(person, ignore_taboo = True)
             oral_positions.append([willingness, Ophelia_blowjob])
 

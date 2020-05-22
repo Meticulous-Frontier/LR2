@@ -202,7 +202,7 @@ init 5 python:
                 option_list.append(["Stop and leave", "Leave"])
         return option_list
 
-    def build_grouped_sex_position_menu(person, allow_none = True, ignore_taboo = False):
+    def build_grouped_sex_position_menu(person, allow_none = True, ignore_taboo = False, prohibit_tags = []):
         foreplay_positions = []
         oral_positions = []
         vaginal_positions = []
@@ -211,13 +211,15 @@ init 5 python:
         for position in sorted(list_of_positions, key = lambda x: x.name):
             if allow_position(person, position) and  mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
                 willingness = position.build_position_willingness_string(person, ignore_taboo = ignore_taboo)
-                if position.skill_tag == "Foreplay":
+                if position.skill_tag in prohibit_tags:
+                    pass
+                elif position.skill_tag == "Foreplay":
                     foreplay_positions.append([willingness, position])
-                if position.skill_tag == "Oral":
+                elif position.skill_tag == "Oral":
                     oral_positions.append([willingness, position])
-                if position.skill_tag == "Vaginal":
+                elif position.skill_tag == "Vaginal":
                     vaginal_positions.append([willingness, position])
-                if position.skill_tag == "Anal":
+                elif position.skill_tag == "Anal":
                     anal_positions.append([willingness, position])
 
         if allow_none:
@@ -227,9 +229,9 @@ init 5 python:
         oral_positions.insert(0, "Pick Oral")
         vaginal_positions.insert(0, "Pick Vaginal")
         anal_positions.insert(0, "Pick Anal")
-        return replace_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions)
+        return replace_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions,  prohibit_tags = prohibit_tags)
 
-    def replace_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions): #Use this function to get specific situations to replace or remove positions
+    def replace_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions,  prohibit_tags = []): #Use this function to get specific situations to replace or remove positions
         #First, filter out any positions this person doesn't accept
         #TODO move this to allow_position(), this probably very inefficient
         foreplay_positions = filter(person.event_triggers_dict.get("foreplay_position_filter", None),foreplay_positions)
@@ -243,14 +245,14 @@ init 5 python:
         #         oral_positions = filter(ophelia_oral_position_filter, oral_positions)
         #         willingness = Ophelia_blowjob.build_position_willingness_string(person, ignore_taboo = True)
         #         oral_positions.append([willingness, Ophelia_blowjob])
-        return person.event_triggers_dict.get("unique_sex_positions", default_unique_sex_positions)(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions)
+        return person.event_triggers_dict.get("unique_sex_positions", default_unique_sex_positions)(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions, prohibit_tags)
 
-    def default_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions):
+    def default_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions, prohibit_tags = []):
         return [foreplay_positions, oral_positions, vaginal_positions, anal_positions]
 
 
 
-label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, asked_for_condom = False):
+label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, asked_for_condom = False, prohibit_tags = []):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
     if report_log is None:
         $ report_log = defaultdict(int) #Holds information about the encounter: what positions were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
@@ -345,7 +347,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
         if round_choice == "Change" or round_choice == "Continue":
             if round_choice == "Change": # If we are changing we first select and transition/intro the position, then run a round of sex. If we are continuing we ignroe all of that
                 if start_position is None: #The first time we get here,
-                    call pick_position(the_person, ignore_taboo = ignore_taboo) from _call_pick_position_bugfix
+                    call pick_position(the_person, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags) from _call_pick_position_bugfix
                     $ position_choice = _return
                 else:
                     $ position_choice = start_position
@@ -925,7 +927,7 @@ label break_strip_outfit_taboos(the_person):
                 $ taboo_broken = True
     return taboo_broken
 
-label pick_position_enhanced(the_person, allow_none = True, ignore_taboo = False):
-    call screen enhanced_main_choice_display(build_menu_items(build_grouped_sex_position_menu(the_person, allow_none = allow_none, ignore_taboo = ignore_taboo)))
+label pick_position_enhanced(the_person, allow_none = True, ignore_taboo = False, prohibit_tags = []):
+    call screen enhanced_main_choice_display(build_menu_items(build_grouped_sex_position_menu(the_person, allow_none = allow_none, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags)))
     $ position_choice = _return
     return None if position_choice == "Nothing" else position_choice
