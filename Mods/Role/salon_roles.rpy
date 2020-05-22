@@ -85,6 +85,32 @@ init 2 python:
                 return True
         return False
 
+    def create_ophelia_date_night_outfit(person):
+        outfit = Outfit("Sexy Plum Shirt And Khaki Skirt")
+        outfit.add_upper(strappy_bra.get_copy(),[.15, .15, .15, 0.95])
+        outfit.add_upper(belted_top.get_copy(),[.41, .16, .38, 0.95])
+        outfit.add_lower(strappy_panties.get_copy(),[.15, .15, .15, 0.95])
+        outfit.add_lower(belted_skirt.get_copy(),[.77, .7, .56, 0.95], "Pattern_1", [.41, .16, .38, 0.95])
+        outfit.add_feet(garter_with_fishnets.get_copy(),[.15, .15, .15, 0.95])
+        outfit.add_feet(high_heels.get_copy(),[.15, .15, .15, 0.95])
+        outfit.add_accessory(lipstick.get_copy(),[.41, .16, .38, 0.52])
+        outfit.add_accessory(heavy_eye_shadow.get_copy(),[.41, .16, .38, 0.52])
+        person.apply_outfit(outfit)
+        person.wardrobe.add_outfit(outfit)
+        return
+
+    def create_candace_date_night_outfit(person):
+        outfit = Outfit("Candi Sexy Date Night")
+        outfit.add_upper(thin_dress.get_copy(),[1.0, 0.73, 0.85, 0.95])
+        outfit.add_upper(corset.get_copy(),[1.0, 0.73, 0.85, 0.95])
+        outfit.add_lower(thong.get_copy(),[.15, .15, .15, 0.95])
+        outfit.add_feet(garter_with_fishnets.get_copy(),[.15, .15, .15, 0.95])
+        outfit.add_feet(pumps.get_copy(),[.15, .15, .15, 0.95])
+        outfit.add_accessory(heavy_eye_shadow.get_copy(),[1.0, 0.73, 0.85, 0.95])
+        outfit.add_accessory(lipstick.get_copy(),[1.0, 0.73, 0.85, 0.50])
+        person.apply_outfit(outfit)
+        person.wardrobe.add_outfit(outfit)
+        return
 
     cut_hair_action = Action("Change hairstyle", cut_hair_requirement, "cut_hair_label", menu_tooltip = "Customize hair style and color")
     ophelia_gets_dumped = Action("Ophelia gets dumped", ophelia_gets_dumped_requirement, "ophelia_gets_dumped_label", menu_tooltip = "Ophelia is back on the market")
@@ -490,31 +516,11 @@ label ophelia_revenge_date_plan_label(the_person):
 label ophelia_revenge_date_label():
     $ the_person = salon_manager
     $ ex_name = ophelia_get_ex_name()
+    # WARNING: Make sure this label is only called once (or we end up with to Candace persons in the game)
     $ candace_mod_initialization()  #Create Candace (Candi), the office bimbo / slut
     #Slutty date outfits
-    python:
-        ophelia_date_night_outfit = Outfit("Sexy Plum Shirt And Khaki Skirt")
-        ophelia_date_night_outfit.add_upper(strappy_bra.get_copy(),[.15, .15, .15, 0.95])
-        ophelia_date_night_outfit.add_upper(belted_top.get_copy(),[.41, .16, .38, 0.95])
-        ophelia_date_night_outfit.add_lower(strappy_panties.get_copy(),[.15, .15, .15, 0.95])
-        ophelia_date_night_outfit.add_lower(belted_skirt.get_copy(),[.77, .7, .56, 0.95], "Pattern_1", [.41, .16, .38, 0.95])
-        ophelia_date_night_outfit.add_feet(garter_with_fishnets.get_copy(),[.15, .15, .15, 0.95])
-        ophelia_date_night_outfit.add_feet(high_heels.get_copy(),[.15, .15, .15, 0.95])
-        ophelia_date_night_outfit.add_accessory(lipstick.get_copy(),[.41, .16, .38, 0.52])
-        ophelia_date_night_outfit.add_accessory(heavy_eye_shadow.get_copy(),[.41, .16, .38, 0.52])
-        the_person.apply_outfit(ophelia_date_night_outfit)
-        the_person.wardrobe.add_outfit(ophelia_date_night_outfit)
-
-        candi_date_night_outfit = Outfit("Candi Sexy Date Night")
-        candi_date_night_outfit.add_upper(thin_dress.get_copy(),[1.0, 0.73, 0.85, 0.95])
-        candi_date_night_outfit.add_upper(corset.get_copy(),[1.0, 0.73, 0.85, 0.95])
-        candi_date_night_outfit.add_lower(thong.get_copy(),[.15, .15, .15, 0.95])
-        candi_date_night_outfit.add_feet(garter_with_fishnets.get_copy(),[.15, .15, .15, 0.95])
-        candi_date_night_outfit.add_feet(pumps.get_copy(),[.15, .15, .15, 0.95])
-        candi_date_night_outfit.add_accessory(heavy_eye_shadow.get_copy(),[1.0, 0.73, 0.85, 0.95])
-        candi_date_night_outfit.add_accessory(lipstick.get_copy(),[1.0, 0.73, 0.85, 0.50])
-        candace.apply_outfit(candi_date_night_outfit)
-        candace.wardrobe.add_outfit(ophelia_date_night_outfit)
+    $ create_ophelia_date_night_outfit(the_person)
+    $ create_candace_date_night_outfit(candace)
 
     if mc.location != mall_salon:
         "It's time for your date with [the_person.title]. You head over to the hair salon."
@@ -531,8 +537,8 @@ label ophelia_revenge_date_label():
     the_person.char "I appreciate the sentiment, but I'm sure once [ex_name] sees me in this he'll come back to his senses."
     "You have your doubts, but you know better than to voice them right now."
     the_person.char "Alright, let's get going. Don't want to be late!"
-    $ mc.change_location(downtown)
-    $ downtown.show_background() #TODO is this really what vren uses for fancy dates? :/
+    $ mc.change_location(fancy_restaurant)
+    $ mc.location.show_background()
     "You arrive at the restaurant. There are a few people in front of you, also waiting on their tables. It seems they are running a little bit behind tonight."
     the_person.char "Hey, I'm just gonna run the lady's room to check my hair, I'll be right back!"
     mc.name "Sure thing."
