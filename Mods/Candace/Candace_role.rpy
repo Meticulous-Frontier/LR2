@@ -31,6 +31,12 @@ init 2 python:
                         return True
         return False
 
+    #Candace Actions (define actions in init)
+    candace_meet_at_office_store = Action("Meet Candi", candace_meet_at_office_store_requirement, "candace_meet_at_office_store_label")
+    candace_get_to_know = Action("Get to know her", candace_get_to_know_requirement, "candace_get_to_know_label", menu_tooltip = "Find out more about Candi")
+    candace_convince_to_quit = Action("Convince her to quit", candace_convince_to_quit_requirement, "candace_convince_to_quit_label", menu_tooltip = "Quit her current job and join your company.")
+
+
     def candace_mod_initialization():
         #TODO candance wardrobe and base outfit
         candace_base_outfit = Outfit("Candace's base accessories")
@@ -39,12 +45,6 @@ init 2 python:
         candace_base_outfit.add_accessory(the_eyeshadow)
 
         candace_wardrobe = wardrobe_from_xml("Sarah_Wardrobe")
-
-        #Candace Actions
-        candace_meet_at_office_store = Action("Meet Candi", candace_meet_at_office_store_requirement, "candace_meet_at_office_store_label")
-        candace_get_to_know = Action("Get to know her", candace_get_to_know_requirement, "candace_get_to_know_label", menu_tooltip = "Find out more about Candi")
-        candace_convince_to_quit = Action("Convince her to quit", candace_convince_to_quit_requirement, "candace_convince_to_quit_label", menu_tooltip = "Quit her current job and join your company.")
-
 
         # init candace role
         candace_role = Role(role_name ="It\'s Complicated", actions =[candace_get_to_know, candace_convince_to_quit], hidden = False)
