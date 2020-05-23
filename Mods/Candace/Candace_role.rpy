@@ -43,27 +43,47 @@ init 2 python:
         #TODO candance wardrobe and base outfit
         candace_base_outfit = Outfit("Candace's base accessories")
         the_eyeshadow = light_eye_shadow.get_copy()
-        the_eyeshadow.colour = [.45,.31,.59,1.0]
+        the_eyeshadow.colour = [.15, .15, .15, 0.95]
         candace_base_outfit.add_accessory(the_eyeshadow)
 
-        candace_wardrobe = wardrobe_from_xml("Sarah_Wardrobe")
+        candace_wardrobe = Wardrobe("Candace's Wardrobe") # This name will allow the rebuild_wardrobe function to generate a new one
+
+        # her boyfriend only allows her to wear this 'company wardrobe'
+        outfit = Outfit("Pink Lace Top And Leggings")
+        outfit.add_upper(strappy_bra.get_copy(),[.15, .15, .15, 0.95])
+        outfit.add_upper(lace_crop_top.get_copy(),[.87, .44, .63, .95])
+        outfit.add_lower(strappy_panties.get_copy(),[.15, .15, .15, 0.95])
+        outfit.add_lower(leggings.get_copy(),[.87, .44, .63, .95])
+        outfit.add_feet(thigh_highs.get_copy(),[.15, .15, .15, 0.95])
+        outfit.add_feet(high_heels.get_copy(),[.87, .44, .63, .95])
+        outfit.add_accessory(lipstick.get_copy(),[.41, .16, .38, 0.5])
+        outfit.add_accessory(heavy_eye_shadow.get_copy(),[.87, .44, .63, .6])
+        candace_wardrobe.add_outfit(outfit)
 
         # init candace role
-        candace_role = Role(role_name ="It\'s Complicated", actions =[candace_get_to_know, candace_convince_to_quit], hidden = False)
+        candace_role = Role(role_name ="It\'s Complicated", actions =[candace_get_to_know, candace_convince_to_quit], hidden = True)
 
         global candace
-        candace = make_person(name = "Candi", age = 29, body_type = "curvy_body", face_style = "Face_3", tits = "FF", height = 0.94, hair_colour = ["platinum blonde", [0.789, 0.746, 0.691,1]], hair_style = bobbed_hair, skin="tan",\
-            eyes = "dark blue", personality = bimbo_personality, name_color = "#d62cff", dial_color = "#d62cff", starting_wardrobe = sarah_wardrobe, \
-            stat_array = [4,1,3], skill_array = [2,1,2,1,5], sex_array = [3,2,3,1], start_sluttiness = 35, start_obedience = -40, start_happiness = 76, start_love = 0, \
+        candace = make_person(name = "Candace", last_name = "Hooper", age = 29, body_type = "thin_body", face_style = "Face_3", tits = "F", height = 0.94, hair_colour = ["black",[0.09,0.07,0.09,1]], hair_style = curly_bun, skin="black",\
+            eyes = "light blue", personality = bimbo_personality, name_color = "#d62cff", dial_color = "#d62cff", starting_wardrobe = candace_wardrobe, \
+            stat_array = [3,1,5], skill_array = [2,1,2,1,5], sex_array = [2,3,4,1], start_sluttiness = 35, start_obedience = -40, start_happiness = 76, start_love = 0, \
             title = "Candi", possessive_title = "Your acquaintance",mc_title = mc.name, relationship = "Girlfriend", SO_name = ophelia_get_ex_name(), kids = 0, base_outfit = candace_base_outfit,
             force_random = True, forced_opinions = [
                 ["supply work", 2, True],        # she loves HR work
                 ["skirts", 1, False],        #And Skirts
                 ["the colour pink", 2, False], #She loves pink
-                ["pants", -2, False] #She hates pants!
+                ["the colour yellow", 1, False],
+                ["the colour purple", -2, False],
+                ["the colour green", -2, False],
+                ["pants", -2, False],        #She hates pants!
+                ["high heels", 2, False]
             ], forced_sexy_opinions = [
-                ["being_submissive", 1, False], # likes when others have their way with her
+                ["being submissive", 1, False], # likes when others have their way with her
                 ["giving handjobs", -2, False], # prefers to use other body parts...
+                ["skimpy outfits", 1, False],
+                ["showing her tits", 2, False],
+                ["not wearing underwear", 2, False],
+                ["cheating on men", 1, False]
             ])
 
         candace.generate_home()
@@ -179,7 +199,7 @@ label candace_get_to_know_label(the_person):
         the_person.char "And if he dumps me, whose going to fuck me every night? No, I think I'd better just stay where I'm at for now."
         $ the_person.event_triggers_dict["learned_about_unhappy"] = 1
         "?????""Ms. [the_person.name]? I have your order ready for you in the back now."
-        the_person.char "Oh! Finally! Some action! See you around [the_person.mc_title]"
+        the_person.char "Oh! Finally! Some action! See you around [the_person.mc_title]."
         $ the_person.draw_person(position = "walking_away")
         "You watch as [the_person.title] rushes to the back of the store. There is absolutely something not right with what is going on."
         "She may not be the brightest, but [the_person.title] doesn't deserve to be treated this way. You think about it for a while, but make up your mind."
@@ -431,6 +451,9 @@ label candace_convince_to_quit_label(the_person):
     salon_manager.char "Goodnight!"
     the_person.char "Bye!"
     $ candace.event_triggers_dict["quit_job"] = 1
+    # she has quit her job, give her a new wardrobe
+    $ rebuild_wardrobe(candace)
+
     return "Advance Time"
 #Character variable wrappers
 init 3 python:

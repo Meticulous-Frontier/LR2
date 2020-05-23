@@ -30,16 +30,16 @@ init 2 python:
 
     def ophelia_give_chocolate_requirement():
         if ophelia_get_chocolate_gift_unlock():
-            if mc.business.funds > 50:
-                if time_of_day <= 3:
-                    if ophelia_get_day_of_last_gift() == day:
-                        return "Already gifted today"
-                    else:
-                        return True
-                else:
-                    return "Too late to give chocolates"
-            else:
+            if mc.business.funds <= 50:
                 return "Not enough money"
+            if time_of_day < 1:
+                return "Wait for shops to open"
+            if time_of_day > 3:
+                return "Shops are closed"
+            if ophelia_get_day_of_last_gift() == day:
+                return "Already gifted today"
+            else:
+                return True
         return False
 
     def ophelia_ex_bf_phone_overhear_requirement(person):
@@ -124,13 +124,12 @@ init 2 python:
         outfit.add_accessory(heavy_eye_shadow.get_copy(),[1.0, 0.73, 0.85, 0.95])
         outfit.add_accessory(lipstick.get_copy(),[1.0, 0.73, 0.85, 0.50])
         person.apply_outfit(outfit)
-        person.wardrobe.add_outfit(outfit)
         return
 
     cut_hair_action = Action("Change hairstyle", cut_hair_requirement, "cut_hair_label", menu_tooltip = "Customize hair style and color")
     ophelia_gets_dumped = Action("Ophelia gets dumped", ophelia_gets_dumped_requirement, "ophelia_gets_dumped_label", menu_tooltip = "Ophelia is back on the market")
     ophelia_coworker_conversation_overhear = Action("Ophelia talks with a coworker", ophelia_coworker_conversation_overhear_requirement, "ophelia_coworker_conversation_overhear_label", menu_tooltip = "Ophelia vents to a coworker")
-    ophelia_give_chocolate = Action("Buy Ophelia Dark Chocolates $50", ophelia_give_chocolate_requirement, "ophelia_give_chocolate_label", menu_tooltip = "Buy Ophelia some chocolates. Can use to apply serum")
+    ophelia_give_chocolate = Action("Buy Ophelia Dark Chocolates", ophelia_give_chocolate_requirement, "ophelia_give_chocolate_label", menu_tooltip = "Buy Ophelia some chocolates. Can use to apply serum")
     ophelia_learn_chocolate_love = Action("Learn Ophelia loves chocolate", ophelia_learn_chocolate_love_requirement, "ophelia_learn_chocolate_love_label")
     ophelia_ex_bf_plan_pics = Action("Ask about Ex", ophelia_ex_bf_plan_pics_requirement, "ophelia_ex_bf_plan_pics_label", menu_tooltip = "See if you can help")
     ophelia_ex_bf_phone_overhear = Action("Overhear a phone conversation", ophelia_ex_bf_phone_overhear_requirement, "ophelia_ex_bf_phone_overhear_label")
@@ -245,6 +244,7 @@ label ophelia_give_chocolate_label():
     else:
         "\'From your secret admirer <3\'"
     "When you finish, you drop the chocolate in the salon mailbox."
+    $ mc.business.change_funds(-50)
     $ the_person.event_triggers_dict["day_of_last_chocolate"] = day
     $ the_person.event_triggers_dict["chocolates_received"] += 1
     $ the_person.change_happiness(5)
@@ -318,7 +318,7 @@ label ophelia_ex_bf_plan_pics_label(the_person):
         "I don't believe you" if the_person.sluttiness > 40:
             mc.name "I don't know, just about every girl I've ever dated claimed to give the world's best blowjobs. Are you sure yours are so special?"
             the_person.char "Oh? Don't believe me?"
-        "I don't believe you\n{color=#ff0000}{size=18}}Not slutty enough to fall for this{/size}{/color} (disabled)" if the_person.sluttiness <= 40:
+        "I don't believe you\n{color=#ff0000}{size=18}Not slutty enough to fall for this{/size}{/color} (disabled)" if the_person.sluttiness <= 40:
             pass
 
     "She considers what you said for a bit. Then, a light goes off and her eyes light up."
@@ -563,7 +563,7 @@ label ophelia_revenge_date_label():
     "You continue to wait for a few moments. You hear someone walk up behind you in line. At first, you pay the person no attention, but then you feel a tap on your shoulder."
     "You turn to the person."
     $ scene_manager.add_actor(candace, character_placement = character_left_flipped)
-    candace.char "Hi! Sorry, I'm meeting someone here, and you please take me to my table?"
+    candace.char "Hi! Sorry, I'm meeting someone here, could you please take me to my table?"
     "At first you just stand there dumbfounded. Jesus this woman is stacked."
     mc.name "I umm, don't work here. I'm waiting for a table also."
     candace.char "Oh! Silly me!"
