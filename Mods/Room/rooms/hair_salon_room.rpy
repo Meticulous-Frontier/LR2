@@ -6,9 +6,13 @@ label ophelia_on_load(stack):
         if not ophelia_is_latest_version():
             salon_manager.special_role = []   #TODO!!! This call also removes girlfriend and paramore roles. Find a way to detect and replace them.
             salon_manager.special_role.append(salon_manager_role)
-            if ophelia_get_ex_pics_sent == 1:
+            if ophelia_get_ex_pics_sent() == 1:
                 if ophelia_blowjob_pics_review not in salon_manager.on_room_enter_event_list:
                     salon_manager.on_room_enter_event_list.append(ophelia_blowjob_pics_review)
+            if ophelia_get_first_date_finished():
+                if ophelia_is_over_her_ex not in salon_manager.on_room_enter_event_list:
+                    salon_manager.on_room_enter_event_list.append(ophelia_is_over_her_ex)
+                    candace.event_triggers_dict["day_met"] = day
         #remove these in a future version
         salon_manager.event_triggers_dict["foreplay_position_filter"] = ophelia_foreplay_position_filter
         salon_manager.event_triggers_dict["oral_position_filter"] = ophelia_oral_position_filter
@@ -34,8 +38,8 @@ init 2 python: # Declare variables to use
         elif time_of_day == 4: # Can be removed
             return "Closed for the night."
 
-        elif mc.business.funds < 100: # $60 for hair cut, $30 for dye. You wont be spending your last money on haircuts.
-            return "Requires $90."
+        elif mc.business.funds < salon_total_cost: # $60 for hair cut, $30 for dye. You wont be spending your last money on haircuts.
+            return "Requires $[salon_total_cost]."
         else:
             return True
 
@@ -50,9 +54,9 @@ init 2 python: # Declare variables to use
         # Place the stylist character so it is in a room in the world.
         global salon_manager
 
-        salon_manager = make_person(name = "Ophelia", last_name = "von Friseur", age = renpy.random.randint(21,30), body_type = "thin_body",
+        salon_manager = make_person(name = "Ophelia", last_name = "von Friseur", age = renpy.random.randint(21,30), body_type = "thin_body", skin="black",
             personality = salon_manager_personality, job = "Hair Stylist", starting_wardrobe = salon_wardrobe, eyes="light blue", sex_array = [1,5,3,1], start_sluttiness = 10,
-            possessive_title = "Your Stylist", relationship = "Single", force_random = True,  forced_opinions = [["dark chocolate", 2, False]],forced_sexy_opinions = [
+            possessive_title = "Your Stylist", relationship = "Single", force_random = True,  forced_opinions = [["dark chocolate", 2, False], ["hiking", 2, False]],forced_sexy_opinions = [
                 ["cum facials", 2, False], # ITs good for the skin
                 ["giving blowjobs", 2, False],
                 ["skimpy outfits", 1, False], # Fashion forward
@@ -91,6 +95,9 @@ init 2 python: # Declare variables to use
         salon_manager.event_triggers_dict["unique_sex_positions"] = ophelia_unique_sex_positions
         salon_manager.event_triggers_dict["ex_name"] = get_random_male_name()
         salon_manager.event_triggers_dict["favorite_drink"] = "gin sour"
+        salon_manager.event_triggers_dict["over_her_ex"] = 0
+        salon_manager.event_triggers_dict["talk_about_candace"] = 0
+        salon_manager.event_triggers_dict["help_candace"] = 0
         return
 
     def salon_introduction_action_requirement(the_person):

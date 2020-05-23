@@ -79,6 +79,21 @@ init 2 python:
                 return True
         return False
 
+    def ophelia_is_over_her_ex_requirement(person):
+        if day >= ophelia_get_day_of_revenge_date() + 7:
+            if person.location() is mall_salon:
+                return True
+        return False
+
+    def ophelia_talk_about_candace_requirement(person):
+        if ophelia_get_is_over_her_ex():
+            if ophelia_get_can_talk_about_candace():
+                if ophelia_get_will_help_candace():
+                    return False
+                else:
+                    return True
+        return False
+
     def ophelia_special_blowjob_requirement(person):
         if person.sluttiness >= 40:
             if person.energy > 60:
@@ -123,8 +138,10 @@ init 2 python:
     ophelia_blowjob_pics_review = Action("Review blowjob pictures",  ophelia_blowjob_pics_review_requirement, "ophelia_blowjob_pics_review_label")
     ophelia_revenge_date_plan = Action("Ophelia asks you on a date",  ophelia_revenge_date_plan_requirement, "ophelia_revenge_date_plan_label")
     ophelia_revenge_date =  Action("Date with Ophelia",  ophelia_revenge_date_requirement, "ophelia_revenge_date_label")
+    ophelia_is_over_her_ex =  Action("Ophelia finally moves on",  ophelia_is_over_her_ex_requirement, "ophelia_is_over_her_ex_label")
+    ophelia_talk_about_candace =  Action("Talk about [candace.name]",  ophelia_talk_about_candace_requirement, "ophelia_talk_about_candace_label", menu_tooltip = "Tread carefully, this will be a sore subject")
 
-    salon_manager_role = Role("Salon Manager", [cut_hair_action, ophelia_ex_bf_plan_pics])
+    salon_manager_role = Role("Salon Manager", [cut_hair_action, ophelia_ex_bf_plan_pics, ophelia_talk_about_candace])
 
 
 label cut_hair_label(the_person):
@@ -568,6 +585,7 @@ label ophelia_revenge_date_label():
     "She still thinks you work here. You mutter a reply."
     mc.name "Of course ma'am... enjoy your meal?"
     $ scene_manager.remove_actor(candace, reset_actor = False)
+    $ candace.event_triggers_dict["day_met"] = day
     "Well, that was... interesting..."
     $ scene_manager.add_actor(the_person)
     the_person.char "Hey, I'm back!"
@@ -739,10 +757,102 @@ label ophelia_revenge_date_label():
     "Tonight was a real breakthrough with [the_person.title]. She was a great fuck, hopefully you can get in her pants again soon."
     "The scene at the restaurant was crazy, with that bimbo, [candace.title] and [ex_name]. You'll have to keep an eye out for her. Maybe you'll run into her again?"
     $ the_person.clear_situational_slut("Date")
+    $ the_person.on_room_enter_event_list.append(ophelia_is_over_her_ex)
     $ del ex_name
     return
 
 label ophelia_special_blowjob_label(the_person):
+    return
+
+label ophelia_is_over_her_ex_label(the_person):
+    the_person.char "Hey there! I was hoping I would see you today, [the_person.mc_title]!"
+    $ the_person.draw_person(emotion = "happy")
+    mc.name "Wow! I like the sound of that! And to what do I owe the pleasure?"
+    the_person.char "Oh, not much, I just wanted to chat with you for a minute."
+    mc.name "I'll always have a minute for you, [the_person.title]."
+    the_person.char "Well, something amazing happened to me this morning."
+    mc.name "Oh? What's that?"
+    the_person.char "When I woke up, for the first time in a long time, I didn't wake up mad. Or angry. Or Sad. Or Depressed."
+    the_person.char "I woke up... happy. And hopeful!"
+    if the_person.love > 50:
+        the_person.char "When I woke up, I wasn't thinking about my ex... I was thinking about you instead."
+    else:
+        the_person.char "When I woke up, I wasn't thinking about my ex. I was thinking about... well, just about everything else!"
+    the_person.char "For the first time in a long time, I feel like I'm finally moving on. Like I'm finally getting over him."
+    mc.name "That is great to hear! It makes me very happy to know that."
+    the_person.char "I just want to say thank you for everything you've done! I'm not sure I would have made it through this without you."
+    the_person.char "And even if I would have, you certainly made it a lot more fun."
+    "She gives you a big wink."
+    mc.name "Believe me, the pleasure was... maybe not all, but mostly mine."
+    the_person.char "Don't sell yourself short! Anyway, I was thinking about how I could repay you. We are both business owners, and so I thought, maybe we could partner up a bit."
+    mc.name "What do you have in mind?"
+    the_person.char "Well, I'll give you some referral cards you put up in your business. If any of your employees wants to come get their hair cut or dyed, I'll give them half off!"
+    mc.name "I know a few employees who will probably take you up on that."
+    the_person.char "I'm also thinking about other ways to expand my business too. I'm sure in the future I'll be able to do more."
+    mc.name "That sounds great. I really appreciate it."
+    "From now on, hair cuts and styles are half price. Sounds like there may be more business opportunities with [the_person.title] in the future!"
+    python:
+        salon_style_cost = int(30)
+        salon_dye_cost = int(15)
+
+        salon_total_cost = salon_style_cost + salon_dye_cost
+        the_person.event_triggers_dict["over_her_ex"] = 1
+    return
+
+label ophelia_talk_about_candace_label(the_person):
+    $ ex_name = ophelia_get_ex_name()
+    "You take a deep breath. This is a touchy subject, so you need to approach this carefully."
+    mc.name "So, I was wondering if I could talk to you for a few minutes about something."
+    the_person.char "Sure! You know I always have time for you, [the_person.mc_title]"
+    mc.name "Right, well, this might be kind of a sore subject, so please just hear me out before you rush to any judgements."
+    the_person.char "Ok... I'm listening..."
+    mc.name "Ok, well, I found out some things about [ex_name], your ex? And they have me a little bit concerned."
+    the_person.char "Concerned? Honey, me and him are over, theres no reason for you to be concerned."
+    mc.name "For you, sure."
+    the_person.char "Then for who? And how did you learn more about [ex_name], anyway?"
+    mc.name "Well, you see, I've been talking a little with the girl he is dating, [candace.name]."
+    $ the_person.draw_person(emotion = "angry")
+    the_person.char "What the fuck? That two timing hussy? What the fuck have you been talking to her for?"
+    mc.name "Just hear me out! You know how you said she is, well, dumb as a bag of rocks?"
+    the_person.char "Well yeah..."
+    mc.name "Well, it turns out, she pretty much is. At first I thought you were exaggerating. After talking to her, I found out that before she worked for your boyfriend, she used to work and a pharmaceutical company."
+    the_person.char "What? That sounds crazy. How could someone like her work in that field?"
+    mc.name "Well, I did some research into the company, and they went out of business a about 6 months ago, after multiple lawsuits were filed."
+    mc.name "I think maybe there was some kind of accident there, during research? That stunted her intelligence and made her into a bimbo..."
+    the_person.char "Okay... I mean, that is totally not my area of expertise, so I guess I'll trust you when you say its possible."
+    the_person.char "But what does that have to do with [ex_name]?"
+    mc.name "Well, I think he has been taking advantage of her."
+    $ the_person.draw_person(emotion ="sad")
+    the_person.char "Taking advantage? Like how?"
+    mc.name "Well, I found out, he is crazy controlling in their relationship. He controls everything from how she dresses to where she goes and does for fun."
+    the_person.char "That... actually sounds a bit like him. He never did like it that I like to go camping and hiking on my days off by myself. Said I was probably out cheating on him."
+    mc.name "Yeah... about that... that is called projection. I turns out he was dating [candace.name] while you two were also still together."
+    the_person.char "Yeah. To be honest, I had kind of come to the same conclusion."
+    mc.name "I'm sorry."
+    the_person.char "Its okay. So, I guess I can understand why you want to help her, what is the plan?"
+    mc.name "Well, right now, [ex_name] is paying her basically nothing. Labor laws would say her pay is illegaly low."
+    the_person.char "Oh god... [ex_name]... what are you doing?"
+    mc.name "for the last week or so, I've been slowly convincing her that she should quit, and if she does, I'll hire her at my company doing basically the same thing she is doing now, but for a fair wage."
+    the_person.char "Ok... why are you talking to me about this again? Seems like you've got it all figured out."
+    mc.name "[ex_name] has told her that if she quits, he is dumping her. But you and I both know, she isn't smart enough to secure her personal accounts and other things."
+    mc.name "Remember when you found his facebook logged on in your laptop? You said, locking down social media accounts is part of breakup 101!"
+    the_person.char "Yeah, that's true."
+    mc.name "I can get her job security, but I don't know how to handle [ex_name]. You have more experience with that!"
+    the_person.char "So... let me get this straight."
+    $ the_person.draw_person(emotion = "happy")
+    "She takes a deep breath."
+    the_person.char "You want me, to help the woman my ex boyfriend cheated on me with, to dump my ex, block him on social media, and if he comes after her, help blackmail him for breaking labor laws to keep him away from her?"
+    mc.name "Yeah, that's pretty much... wait. Blackmail?"
+    the_person.char "Yeah, I mean why else would you bring up the wage thing? Isn't that what you had in mind?"
+    mc.name "I was just trying to give examples of how he had been taking advantage of her..."
+    the_person.char "Alright, its obvious to me that you DO need my help. So fuck yeah, I'm in!"
+    the_person.char "Go ahead and talk to her about it, and when you feel like she is ready, have her come visit me here. We'll get it all setup!"
+    mc.name "Thanks [the_person.title]! I owe you one."
+    the_person.char "Nah, I still owe you a couple of favors. This is just you calling one in."
+    "Oh dear. It is a little scary how excited she is getting about this."
+    mc.name "Alright, well hopefully it will be soon. I'll let you know!"
+    $ the_person.event_triggers_dict["help_candace"] = 1
+    $ del ex_name
     return
 
 
@@ -801,14 +911,23 @@ init 2 python:
     def ophelia_get_special_bj_unlocked():
         return salon_manager.event_triggers_dict.get("special_bj_unlock", 0)
 
-    def ophelia_get_is_over_her_ex():  #TODO figure out where in the story she is officially over her ex and add the conditions here
-        return False
+    def ophelia_get_is_over_her_ex():
+        return salon_manager.event_triggers_dict.get("over_her_ex", 0)
 
     def ophelia_is_latest_version():
-        if salon_manager.event_triggers_dict.get("ophelia_version", -1) < 1:   #Just increment the compare and set value when you have a new version
-            salon_manager.event_triggers_dict["ophelia_version"] = 1
+        if salon_manager.event_triggers_dict.get("ophelia_version", -1) < 2:   #Just increment the compare and set value when you have a new version
+            salon_manager.event_triggers_dict["ophelia_version"] = 2
             return False
         return True
+
+    def ophelia_get_can_talk_about_candace():
+        return salon_manager.event_triggers_dict.get("talk_about_candace", 0)
+
+    def ophelia_get_will_help_candace():
+        return salon_manager.event_triggers_dict.get("help_candace", 0)
+
+    def ophelia_get_day_of_revenge_date():
+        return candace_get_day_met()
 
 
 #TESTING FUNCTIONS#
