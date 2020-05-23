@@ -145,7 +145,7 @@ label candace_get_to_know_label(the_person):
                 else:
                     "You feel like with one more push, you could probably get [the_person.title] to quit. But what will happen when you do?"
                     "You consider if for a few moments. You should probably ask for help. This guy sounds like a narcissist, and he could be trouble if you aren't careful."
-                    "[salon_manager.title] used to date him... and she seems pretty knowledgable about this kind of stuff. Maybe you should ask her for some help?"
+                    "[salon_manager.title] used to date him... and she seems pretty knowledgeable about this kind of stuff. Maybe you should ask her for some help?"
                     $ salon_manager.event_triggers_dict["talk_about_candace"] = 1
             else:
                 "You feel like you've just about convinced her that she could quit, but you need to learn more about her."
@@ -219,13 +219,13 @@ label candace_talk_about_bf_control(the_person):
         the_person.char "I mean, at first it was okay, and kinda made sense. No fucking other guys, stop spending all your paycheck at the strip club."
         the_person.char "But it feels like everyday he's adding some kind of new rule! I can hardly keep track of them all!"
         the_person.char "No going to the bar without him. No talking with the other men at his business. Leave my location setting shared with him on my phone."
-        "It really does seem to be what you feared it might be. Her boyfriend is an overcontrolling psychopath."
+        "It really does seem to be what you feared it might be. Her boyfriend is an overbearing psychopath."
         mc.name "[the_person.title]... that doesn't sounds like a healthy relationship."
         the_person.char "That's what I thought at first, but then he told me I'm not allowed to watch daytime talk shows anymore... I don't remember why I thought it was weird to be honest."
         $ candace.event_triggers_dict["learned_about_bf_control"] = 1
         $ candace.event_triggers_dict["relationship_doubt_score"] += 1
         "Yeah, you definitely need to help her get out of this."
-        mc.name "You know, I've had a few girlfriends thoughout the years. Part of the relationship is being open with each other, and trusting each other."
+        mc.name "You know, I've had a few girlfriends throughout the years. Part of the relationship is being open with each other, and trusting each other."
         the_person.char "Oh, don't worry! I trust him completely!"
         mc.name "But do you feel that he trusts you too?"
         the_person.char "Of course! I just feel bad. No one ever taught me relationships are supposed to have all these rules! Thankfully he is really patient with me though."
@@ -261,7 +261,7 @@ label candace_talk_about_previous_work(the_person):
     else:
         mc.name "I've heard you mention your previous job a couple of times. What did you do before?"
         the_person.char "Oh... well, to be honest, I don't actually remember much about it. It was at a place over on the east side of town, near the old car factory."
-        the_person.char "I remmeber taking these vials of stuff... liquids I think! Mixing things together, shaking them up, taking a bunch of notes."
+        the_person.char "I remember taking these vials of stuff... liquids I think! Mixing things together, shaking them up, taking a bunch of notes."
         mc.name "You were a researcher?"
         the_person.char "Yeah, a scientist or something like that! I don't remember how I did it, to be honest. Now it sounds so dull, but I remember really enjoying it at the time."
         mc.name "Do you know the name of the place? It sounds like somewhere I'd like to visit sometime."
@@ -290,7 +290,7 @@ label candace_talk_about_uniforms(the_person):
                 the_person.char "I think you might be right, but I don't think I'm ready. Its scary, you know? To leave what you know."
             mc.name "You would fit in wonderfully at my company."
     else:
-        mc.name "I can't help but notice, everytime I see you here, you have the same outfit on."
+        mc.name "I can't help but notice, every time I see you here, you have the same outfit on."
         the_person.char "Oh god, don't get me started. I fucking hate pants!"
         #TODO learn she hates pants
         mc.name "Ah, then why do you wear them?"
@@ -359,7 +359,7 @@ label candace_convince_to_quit_label(the_person):
     the_person.char "Oh! That's more than I make in a week! But I don't know..."
     mc.name "I know you used to work at a pharmaceuticals company. You told me you used to love that place! You could work at one again!"
     the_person.char "[the_person.mc_title], I really do have fond memories... from what I can remember... but I don't think I can do that kind of work again..."
-    mc.name "You don't have to do research. My company is constantly sourcing chemicals and reagants for different products. It wouldn't be any different than what you are doing now, helping keep supplies up!"
+    mc.name "You don't have to do research. My company is constantly sourcing chemicals and reagents for different products. It wouldn't be any different than what you are doing now, helping keep supplies up!"
     the_person.char "I just don't know. God, is it getting hot in here?"
     mc.name "Probably. Are you overheating? Wouldn't it be nicer if you could go back to wearing skirts again?"
     the_person.char "It really would be, to feel the breeze between my legs again."
@@ -390,18 +390,10 @@ label candace_convince_to_quit_label(the_person):
     "There is a small table to the side of the room. You sit down and start to go through it with [the_person.title]"
     $ scene_manager.update_actor(the_person, position = "Sitting")
 
-    $ the_person.event_triggers_dict["employed_since"] = day
-    $ mc.business.listener_system.fire_event("new_hire", the_person = the_person)
-    $ the_person.special_role.append(employee_role)
-    python:
-        for other_employee in mc.business.get_employee_list():
-            town_relationships.begin_relationship(ashley, other_employee) #They are introduced to everyone at work, with a starting value of "Acquaintance"
-        town_relationships.update_relationship(salon_manager, the_person, "Friend")
-        del other_employee
-    "You complete the nessesary paperwork and hire [the_person.title], assigning her to the supply department."
-    $ mc.business.add_employee_supply(the_person)
-    $ the_person.set_work([1,2,3], mc.business.s_div)
-    $ mc.business.s_div.add_person(the_person)
+    $ mc.business.hire_person(the_person, "Supply")
+    $ town_relationships.update_relationship(salon_manager, the_person, "Friend")
+
+    "You complete the necessary paperwork and hire [the_person.title], assigning her to the supply department."
     #TODO make sure her home is set to Stephanie's house somehow.
     "As you finish up, you notice [salon_manager.possessive_title] is walking over to the table."
     $ scene_manager.add_actor(salon_manager, position = "sitting", character_placement = character_left_flipped)
@@ -420,7 +412,7 @@ label candace_convince_to_quit_label(the_person):
     $ the_person.relationship = "Single"
     $ the_person.SO_name = None
     $ the_person.change_happiness(30)
-    "She's got new passwords on everything from bank accounts, to social media. A locksmith is already enroute to change her locks, and she's blocked her ex from her phone completely."
+    "She's got new passwords on everything from bank accounts, to social media. A locksmith is already en route to change her locks, and she's blocked her ex from her phone completely."
     "After a while, you notice they seem to be done, and now they are just trading stories and gossip. They actually seem to be getting along okay."
     "You stand up and stretch."
     mc.name "Well... I don't know about you two, but I'm pretty worn out. Take care. And [the_person.title], I'll see you at the office!"
