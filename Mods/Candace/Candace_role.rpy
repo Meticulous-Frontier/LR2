@@ -336,7 +336,7 @@ label candace_talk_about_pay(the_person):
         mc.name "Yeah, like, how much do you get paid per hour, or per day? Or do you have a salary?"
         the_person.char "Oh, no, its commission only! My boyfriend says working on commission will help keep me motivated to work hard!"
         mc.name "I see... and how much commission do you usually make?"
-        the_person.char "Oh, well, I average about $20, but sometimes when I let the stock boy her play with my ass I can make as much as $25!"
+        the_person.char "Oh, well, I average about $20, but sometimes when I let the stock boy play with my ass I can make as much as $25!"
         mc.name "Per day?"
         the_person.char "Oh no, not that much. Per week!"
         mc.name "I see... and how much do you work?"
