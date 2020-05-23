@@ -22,7 +22,6 @@
 
 init 2 python:
     sarah_strip_pose_list = ["walking_away","back_peek","standing_doggy","stand2","stand3","stand4","stand5", "doggy","kneeling1"]
-    SARAH_PER_CREAMPIE_PREGNANCY_CHANCE = 3 #A constant for odds of getting pregnant per creampie during fertile period.
     sarah_weekend_surprise_action = ActionMod("Sarah's Weekend Surprise",Sarah_weekend_surprise_crisis_requirement,"Sarah_weekend_surprise_crisis_label",
         menu_tooltip = "You find an employee masturbating in an empty storage room.", category = "Business", is_crisis = True, crisis_weight = 7)
 
@@ -2137,7 +2136,7 @@ label Sarah_ask_for_baby_label():
                 $ the_person.update_opinion_with_score("bareback sex", 2)
             $ the_person.event_triggers_dict["try_for_baby"] = 1
             $ the_person.event_triggers_dict["fertile_start_day"] = day  #Her 5 day fertility period starts today.
-            call Sarah_fertile_period_start_label(the_person) from sarah_initial_fertile_period_start_01
+            call Sarah_fertile_period_start_label() from sarah_initial_fertile_period_start_01
             #TODO create mandatory event for starting fertility period. Stores creampies before fertility period. Then second mandatory event at the end of the fertility period determines if pregnant based on # of creampies and RNG
             call fuck_person(the_person, start_position = missionary, start_object = bedroom.get_object_with_name("bed"), skip_intro = False, girl_in_charge = False, position_locked = True) from _sarah_ask_for_baby_01
             if the_person.outfit.has_creampie_cum():
@@ -2908,7 +2907,7 @@ label Sarah_date_strip_club_private_dance_label(the_person):
         showgirl_2.char "Don't you wanna grab your cousin's tits?"
     "You see [the_person.title] look over at you. You can see her mouth the word 'please'"
     menu:
-        "Pay $100":
+        "Pay\n{color=ff0000}{size=18}Costs: $100{/size}{/color}" if mc.business.funds >= 100:
             mc.name "That sounds fair."
             "You grab $100 and put it in the tip jar."
             $ mc.business.change_funds(-100)
@@ -2920,6 +2919,8 @@ label Sarah_date_strip_club_private_dance_label(the_person):
             else:
                 "You reach up and begin to fondle your stripper's tits. They are so soft and warm. They feel amazing."
             $ the_person.change_arousal(15)
+        "Pay\n{color=ff0000}{size=18}Requires: $100{/size}{/color} (disabled)" if mc.business.funds < 100:
+            pass
         "Not today":
             mc.name "We're just here to watch."
             "Glancing at [the_person.title], you can tell she is a little disappointed, but she quickly returns her attention to the girl in front of her."
@@ -2938,7 +2939,7 @@ label Sarah_date_strip_club_private_dance_label(the_person):
     $ the_person.change_arousal(10)
     showgirl_2.char "For $200, you two can grope and spank it!"
     menu:
-        "Pay $200":
+        "Pay\n{color=ff0000}{size=18}Costs: $200{/size}{/color}" if mc.business.funds >= 200:
             "You don't hesitate. You grab $200 and put it in the tip jar."
             $ mc.business.change_funds(-200)
             "[the_person.title] sees you do it and immediately starts to run her hands along her girl's hips."
@@ -2958,6 +2959,8 @@ label Sarah_date_strip_club_private_dance_label(the_person):
                 "You give her cheeks a few firm spanks."
             $ the_person.change_arousal(15)
             $ mc.change_arousal(15)
+        "Pay\n{color=ff0000}{size=18}Requires: $200{/size}{/color} (disabled)" if mc.business.funds < 200:
+            pass
         "Not today":
             mc.name "We're just here to watch."
             "Glancing at [the_person.title], you can tell she is a little disappointed, but she quickly returns her attention to the girl in front of her."
@@ -2982,19 +2985,19 @@ label Sarah_date_strip_club_private_dance_label(the_person):
     $ scene_manager.update_actor(the_person, position = "sitting", character_placement = character_right)
     return
 
-label Sarah_fertile_period_start_label(the_person):
-    $ sarah.event_triggers_dict["fertile_start_creampie_count"] = sarah.sex_record["Vaginal Creampies"]
+label Sarah_fertile_period_start_label():
+    $ the_person = sarah
+    $ the_person.event_triggers_dict["fertile_start_creampie_count"] = the_person.sex_record["Vaginal Creampies"]
     #TODO add slutty crisis events where Sarah tries to get creampies from MC
     $ add_sarah_fertile_period_end_action()
     return
 
-label Sarah_fertile_period_end_label(the_person):
-    $ pregnant_chance = sarah.sex_record["Vaginal Creampies"] - sarah.event_triggers_dict.get("fertile_start_creampie_count", sarah.sex_record["Vaginal Creampies"])
-    $ pregnant_chance *= SARAH_PER_CREAMPIE_PREGNANCY_CHANCE
-    if pregnant_chance >=  renpy.random.randint(0,100): #She is pregnant!
+label Sarah_fertile_period_end_label():
+    $ the_person = sarah
+    $ success_chance = the_person.sex_record["Vaginal Creampies"] - the_person.event_triggers_dict.get("fertile_start_creampie_count", the_person.sex_record["Vaginal Creampies"])
+    if (success_chance * 3) >=  renpy.random.randint(0,100): #She is pregnant!
         $ add_sarah_fertile_period_end_action() #Until we write this segment, just let us have fun trying to make babies without ever actually getting pregnant.
         #TODO make her pregnant!
     else:
-        pass
         $ add_sarah_fertile_period_start_action()
     return
