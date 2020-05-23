@@ -459,7 +459,7 @@ init 3 python:
         return False
 
     def candace_get_ready_to_quit():
-        if candace.event_triggers_dict["relationship_doubt_score"] >= 8:
+        if candace.event_triggers_dict.get("relationship_doubt_score", 0) >= 8:
             return True
         return False
 
