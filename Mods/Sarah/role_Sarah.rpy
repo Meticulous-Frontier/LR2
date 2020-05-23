@@ -2009,7 +2009,7 @@ label Sarah_initial_threesome_label():
         mc.name "She's here, give me one second."
         "You go to the front door and let in [the_person_two.title]. She follows you quietly to your room."
     # make the second person wear a more sexy outfit (50% sluttiness boost)
-    $ the_person.apply_outfit(the_person_two.wardrobe.decide_on_outfit2(the_person_two, sluttiness_modifier = .5))
+    $ the_person_two.apply_outfit(the_person_two.wardrobe.decide_on_outfit2(the_person_two, sluttiness_modifier = .5))
     $ scene_manager.add_actor(the_person_two)
     "Alright, here you are, in your room, with [the_person_one.title] and [the_person_two.possessive_title]."
     the_person_one.char "Hi..."
