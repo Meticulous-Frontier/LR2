@@ -12,10 +12,10 @@ init 2 python:
         return False
 
     def candace_get_to_know_requirement(person):
-        if not candace_can_talk():
-            return "Wait a few days"
         if person.location() is office_store:
             if not candace_get_has_quit_job():
+                if not candace_can_talk():
+                    return "Wait a few days"
                 return True
             else:
                 return False
@@ -311,7 +311,7 @@ label candace_talk_about_uniforms(the_person):
         mc.name "That sounds awfully restrictive. Don't you think you should be able to wear what you want to work?"
         the_person.char "Oh, I mean, it would be nice, but I kind of understand. It keeps accidents like getting fucked by random guys from happening!"
         "She says the last bit of that sentence with as much resolve as she can muster, but you can tell from the tone her voice, she wishes it would happen once in a while anyway..."
-        mc.name "You should talk to your boyfriend about. Maybe he would let you wear a skirt if you promise to make it a certain length? Or to wear panties?"
+        mc.name "You should talk to your boyfriend about it. Maybe he would let you wear a skirt if you promise to make it a certain length? Or to wear panties?"
         the_person.char "Hmm... that's not a bad idea! I'll have to try that sometime!"
         $ candace_increase_doubt()
     return
@@ -372,9 +372,9 @@ label candace_convince_to_quit_label(the_person):
     $ scene_manager.update_actor(the_person, emotion = "sad")
     the_person.char "I want to... I really do..."
     mc.name "Then why don't you?"
-    the_person.char "I'm... I'm scared to! [the_person.SO_name]... I think he knows I've been thinking about leaving! Last night he told me if I quit, he's going to expose that I've been trading sexual favors for discounts..."
+    the_person.char "I'm... I'm so scared! [the_person.SO_name]... I think he knows I've been thinking about leaving! Last night he told me if I quit, he's going to expose that I've been trading sexual favors for discounts..."
     the_person.char "He says its illegal! That I'll go to jail for being a prostitute!"
-    mc.name "Don't worry, I know someone who can help. I have a friend who has dealt with... lets say she can handle herself."
+    mc.name "Don't worry, I know someone who can help. I have a friend who has dealt with a similar situation... lets say she can handle herself."
     mc.name "She can help you. Take a leap of faith. You can trust me."
     "She thinks about it for a bit."
     "?????""Ms. [the_person.name]? I have your order ready for you in the back now."
@@ -392,8 +392,8 @@ label candace_convince_to_quit_label(the_person):
     "As you walk into the salon, you notice that [salon_manager.title] is working with a customer."
     mc.name "Okay, she's over there, but she's with a customer right now. While we wait for her, why don't we do the paperwork for your new employment?"
     the_person.char "Okay... let's do it!"
-    "There is a small table to the side of the room. You sit down and start to go through it with [the_person.title]"
-    $ scene_manager.update_actor(the_person, position = "Sitting")
+    "There is a small table to the side of the room. You sit down and start to go through it with [the_person.title]."
+    $ scene_manager.update_actor(the_person, position = "sitting")
 
     $ mc.business.hire_person(the_person, "Supply")
     $ town_relationships.update_relationship(salon_manager, the_person, "Friend")
