@@ -186,7 +186,7 @@ label candace_get_to_know_label(the_person):
         "It is going to take some convincing. You might have to plant a few seeds of doubt here and there, but surely you can get her to quit her job and dump this guy."
         "Maybe you could convince her to work for you? She seems to have quite the knack for maintaining office supplies... maybe she would have a similar skill for medical and chemical supplies?"
 
-    $ candace.event_triggers_dict["last_talk_day"] = day # prevent talk spamming (at least 3 days need to pass before you can plant the next seed)
+    $ candace.event_triggers_dict["last_talk_day"] = day # prevent talk spamming (at least two days need to pass before you can plant the next seed)
     return "Advance Time"
 
 label candace_talk_about_bf_control(the_person):
@@ -479,7 +479,7 @@ init 3 python:
         return candace.event_triggers_dict.get("quit_job", 0)
 
     def candace_can_talk():
-        return candace.event_triggers_dict.get("last_talk_day", 0) + 3 < day
+        return candace.event_triggers_dict.get("last_talk_day", 0) + 1 < day
 
     def candace_increase_doubt():
         score = candace.event_triggers_dict.get("relationship_doubt_score", 0)
