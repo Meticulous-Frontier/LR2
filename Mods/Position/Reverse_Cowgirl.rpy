@@ -159,7 +159,7 @@ label scene_SB_reverse_cowgirl_2(the_girl, the_location, the_object):
                 "She stops for a second when you hit just the right spot and works her hips side to side for a few moments instead of forward and back."
             "Eventually, she stops grinding and begins to work her body up and down again. You try to keep your finger inside her ass, but it soon slips out."
             "Instead of stopping to let you push your finger back inside her, she keeps riding you, so you give her ass a firm spank."
-        "Finger Her Ass\n{size=22}Must like anal sex{/size} (disabled)" if (the_girl.get_opinion_score("anal sex") <= 0 or not the_girl.get_opinion_status("anal sex")):
+        "Finger Her Ass\n{color=#ff0000}{size=18}Must like anal sex{/size}{/color} (disabled)" if (the_girl.get_opinion_score("anal sex") <= 0 or not the_girl.get_opinion_status("anal sex")):
             pass
     return
 

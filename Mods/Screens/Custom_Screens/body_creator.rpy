@@ -95,35 +95,7 @@ init -2 python:
             vars(the_person)[field] = (item.get_copy() if hasattr(item, "get_copy") else item) # face_style, body_type and tits are string while body_images and hair_style are cloth items.
 
 init 2 python:
-
     import collections
-
-    def create_clone(self, name = None, last_name = None, age = None):
-
-        clone = copy.copy(self)
-        clone.name = (name if name is not None else self.name)
-        clone.last_name = (last_name if last_name is not None else self.last_name)
-        clone.age = (age if age is not None else self.age)
-        clone.job = None
-        clone.wardrobe = Wardrobe(clone.name) # Empty wardrobe
-        clone.work = None
-        clone.relationship = None
-        clone.SO_name = None
-        clone.kids = None
-        clone.title = clone.create_formatted_title("Clone")
-        clone.special_role = [clone_role]
-        if clone.obedience < 120:
-            clone.obedience = 120
-        if clone.love < 30:
-            clone.love = 30
-
-        clone.serum_effects = []
-        clone.set_schedule([0,1,2,3,4], dungeon)
-        for record in clone.sex_record:
-            clone.sex_record[record] = 0
-
-        mc.location.add_person(clone)
-    Person.create_clone = create_clone
 
     def toggle_dict_key(key): # I'm still too dumb to understand the ToggleDict action
 
@@ -258,14 +230,6 @@ screen body_customizer(the_person = the_person):
                             ]
 
 
-                    textbutton "Clone":
-                        xfill True
-
-                        style "textbutton_no_padding_highlight"
-                        text_style "serum_text_style"
-                        action Show("name_select_popup", None, the_person)#Function(the_person.create_clone, clone_name, clone_last_name, clone_age)
-
-
 
 init 2 python:
 
@@ -326,12 +290,6 @@ screen name_select_popup(the_person): #
 
                     text_style "serum_text_style"
                     action Hide(renpy.current_screen().screen_name)
-            frame:
-                textbutton "Make Clone":
-                    xfill True
-
-                    text_style "serum_text_style"
-                    action [Function(the_person.create_clone, clone_name, clone_last_name), Function(renpy.notify, "Clone Created and placed in [mc.location.formalName]")]
 
 
 

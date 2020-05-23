@@ -17,7 +17,7 @@ init 5 python:
         return option_list
 
 label wardrobe_change_label_enhanced(the_person):
-    call screen main_choice_display([build_wardrobe_change_menu()])
+    call screen enhanced_main_choice_display(build_menu_items([build_wardrobe_change_menu()]))
     $ picked_option = _return
 
     if picked_option == "add":
@@ -31,7 +31,7 @@ label wardrobe_change_label_enhanced(the_person):
 
         $ new_outfit = _return
         
-        call screen main_choice_display([build_wardrobe_change_save_menu(new_outfit)])
+        call screen enhanced_main_choice_display(build_menu_items([build_wardrobe_change_save_menu(new_outfit)]))
         $ outfit_type = _return
 
         if outfit_type != "none":

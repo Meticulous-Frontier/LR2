@@ -23,7 +23,7 @@ label downtown_bar_drink_label():
 
         "Do you wish to introduce yourself, perhaps grace her with a free- of charge drink?"
 
-    call screen main_choice_display([get_sorted_people_list(known_people_at_location(mc.location) + unknown_people_at_location(mc.location) + [new_person], "Drink with", ["Back"])])
+    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(known_people_at_location(mc.location) + unknown_people_at_location(mc.location) + [new_person], "Drink with", ["Back"])]))
     $ person_choice = _return
 
     if person_choice == "Back":

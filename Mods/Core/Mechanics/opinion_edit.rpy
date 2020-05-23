@@ -85,17 +85,17 @@ label influence_opinion_input_label(person):
         python:
             score = person.get_opinion_score(opinion)
             degrees = [-2,-1,0,1,2]
-            change = abs(degrees.index(score) - degrees.index(degree)) # How far is the degree away from current opinion (max 4 steps)
+            ran_num = abs(degrees.index(score) - degrees.index(degree)) # How far is the degree away from current opinion (max 4 steps)
             cur_score = opinion_score_to_string(score)
-            person.change_willpower(change * 5)
+            person.change_willpower(ran_num * 5)
 
-        if change == 1: # small change
+        if ran_num == 1: # small change
             "Speaker" "[person.name] [cur_score] [opinion], so she will put up not much resistance."
-        elif change == 2: # medium change
+        elif ran_num == 2: # medium change
             "Speaker" "[person.name] [cur_score] [opinion], so she will put up a little resistance."
-        elif change == 3: # large change
+        elif ran_num == 3: # large change
             "Speaker" "[person.name] [cur_score] [opinion], so she will put up some resistance."
-        elif change == 4: # very large change
+        elif ran_num == 4: # very large change
             "Speaker" "[person.name] [cur_score] [opinion], so she will put up a lot of resistance."
 
     $ log_willpower(person)

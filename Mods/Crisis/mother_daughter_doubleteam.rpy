@@ -96,4 +96,4 @@ label mother_daughter_doubleteam_action_label():
         # Release variables
         del the_mother
         del the_daughter
-    return "Advance Time"
+    return

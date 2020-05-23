@@ -37,6 +37,15 @@ init 2 python:
             return True
         return False
 
+    def mc_action_lasik_surgery_person_requirement(person):
+        if big_glasses in person.base_outfit.accessories or modern_glasses in person.base_outfit.accessories:
+            if person in unique_character_list:
+                return False
+            if mc.business.funds < 5000:
+                return "Not enough money"
+            return True
+        return False
+
     # Rename Person Requirements
     def mc_action_rename_person_requirement(person):
         if person.obedience >= 120:
@@ -64,41 +73,43 @@ init 2 python:
 
 init 5 python:
     # Schedule Actions
-    mc_schedule_person_action = ActionMod("Schedule [the_person.title]", mc_schedule_person_requirement, "mc_schedule_menu_label", menu_tooltip = "Schedule where the person should be throughout the day.", category = "Generic People Actions", initialization = init_action_mod_disabled)
+    mc_schedule_person_action = ActionMod("Schedule [the_person.title]", mc_schedule_person_requirement, "mc_schedule_menu_label", menu_tooltip = "Schedule where [the_person.title] should be throughout the day.", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
-    schedule_early_morning_action = Action("Early Morning", schedule_early_morning_requirement, "mc_schedule_person_label", args = [0], menu_tooltip = "Schedule where the person should be during the Early Morning.")
+    schedule_early_morning_action = Action("Early Morning", schedule_early_morning_requirement, "mc_schedule_person_label", args = [0], menu_tooltip = "Schedule where [the_person.title] should be during the Early Morning.")
     schedule_actions_list.append(schedule_early_morning_action)
 
-    schedule_morning_action = Action("Morning", schedule_morning_requirement, "mc_schedule_person_label", args = [1], menu_tooltip = "Schedule where the person should be during the Morning.")
+    schedule_morning_action = Action("Morning", schedule_morning_requirement, "mc_schedule_person_label", args = [1], menu_tooltip = "Schedule where [the_person.title] should be during the Morning.")
     schedule_actions_list.append(schedule_morning_action)
 
-    schedule_afternoon_action = Action("Afternoon", schedule_afternoon_requirement, "mc_schedule_person_label", args = [2], menu_tooltip = "Schedule where the person should be during the Afternoon.")
+    schedule_afternoon_action = Action("Afternoon", schedule_afternoon_requirement, "mc_schedule_person_label", args = [2], menu_tooltip = "Schedule where [the_person.title] should be during the Afternoon.")
     schedule_actions_list.append(schedule_afternoon_action)
 
-    schedule_evening_action = Action("Evening", schedule_evening_requirement, "mc_schedule_person_label", args = [3], menu_tooltip = "Schedule where the person should be during the Evening.")
+    schedule_evening_action = Action("Evening", schedule_evening_requirement, "mc_schedule_person_label", args = [3], menu_tooltip = "Schedule where [the_person.title] should be during the Evening.")
     schedule_actions_list.append(schedule_evening_action)
 
-    schedule_night_action = Action("Night", schedule_night_requirement, "mc_schedule_person_label", args = [4], menu_tooltip = "Schedule where the person should be during the Night.")
+    schedule_night_action = Action("Night", schedule_night_requirement, "mc_schedule_person_label", args = [4], menu_tooltip = "Schedule where [the_person.title] should be during the Night.")
     schedule_actions_list.append(schedule_night_action)
 
-    mc_start_follow_action = ActionMod("Follow me.", mc_start_follow_requirement, "mc_start_follow_label", menu_tooltip = "Have the person follow you around.", category = "Generic People Actions")
-    mc_stop_follow_action = ActionMod("Stop following me.", mc_stop_follow_requirement, "mc_stop_follow_label", menu_tooltip = "Have the person stop following you.", allow_disable = False, category = "Generic People Actions")
+    mc_start_follow_action = ActionMod("Follow me", mc_start_follow_requirement, "mc_start_follow_label", menu_tooltip = "Ask [the_person.title] to follow you around.", category = "Generic People Actions")
+    mc_stop_follow_action = ActionMod("Stop following me", mc_stop_follow_requirement, "mc_stop_follow_label", menu_tooltip = "Have [the_person.title] stop following you.", allow_disable = False, category = "Generic People Actions")
 
     # Hire Person | Allows you to hire a person if they are not already hired. (Moves them to the appropriate division, no duplicates)
-    mc_hire_person_action = ActionMod("Employ [the_person.title]", mc_hire_person_requirement, "mc_hire_person_label", menu_tooltip = "Hire the the person to work for you in your business.", category = "Generic People Actions")
+    mc_hire_person_action = ActionMod("Employ [the_person.title]", mc_hire_person_requirement, "mc_hire_person_label", menu_tooltip = "Hire the [the_person.title] to work for you in your business.", category = "Generic People Actions")
 
     # Rename Person | Opens a menu that allows you to change first and last name plus a (non- appended) custom the_person.title
-    mc_rename_person_action = ActionMod("Rename [the_person.title]", mc_action_rename_person_requirement, "mc_rename_person_label", menu_tooltip = "Change the name of the person.", category = "Generic People Actions", initialization = init_action_mod_disabled)
+    mc_rename_person_action = ActionMod("Rename [the_person.title]", mc_action_rename_person_requirement, "mc_rename_person_label", menu_tooltip = "Change the name of [the_person.title].", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
     # Spend the Night | Allows you to sleep in the home of a person you have increased the love stat.
     mc_spend_the_night_action = ActionMod("Spend the night with [the_person.possessive_title]", mc_action_spend_the_night_requirement, "mc_spend_the_night_label", menu_tooltip = "Allows you to sleep in this location.", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
     # Pay to Strip | Allows you to enter the pay_strip label used in certain events if requirements are met.
-    pay_to_strip_action = ActionMod("Pay [the_person.title] to strip", mc_action_pay_to_strip_requirement, "mc_pay_to_strip_label", menu_tooltip = "Pay the person to give you a strip tease.", category = "Generic People Actions", initialization = init_action_mod_disabled)
+    pay_to_strip_action = ActionMod("Pay [the_person.title] to strip", mc_action_pay_to_strip_requirement, "mc_pay_to_strip_label", menu_tooltip = "Pay [the_person.title] to give you a strip tease.", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
-    ask_take_serum = ActionMod("Ask [the_person.title] to test serum", mc_ask_take_serum_requirement, "mc_ask_take_serum_label", menu_tooltip = "Ask her to voluntarily test a serum.", category = "Generic People Actions", initialization = init_action_mod_disabled)
+    mc_lasik_surgery_action = ActionMod("Pay for LASIK surgery\n{color=#ff0000}{size=18}Costs: $5000{/size}{/color}", mc_action_lasik_surgery_person_requirement, "mc_action_lasik_surgery_label", menu_tooltip = "You don't like her wearing glassing, offer to pay for LASIK surgery.", category = "Generic People Actions")
 
-    main_character_actions_list = [mc_schedule_person_action, mc_start_follow_action, mc_stop_follow_action, mc_hire_person_action, mc_rename_person_action, mc_spend_the_night_action, pay_to_strip_action, ask_take_serum]
+    ask_take_serum = ActionMod("Ask [the_person.title] to test serum", mc_ask_take_serum_requirement, "mc_ask_take_serum_label", menu_tooltip = "Ask [the_person.title] to voluntarily test a serum.", category = "Generic People Actions", initialization = init_action_mod_disabled)
+
+    main_character_actions_list = [mc_schedule_person_action, mc_start_follow_action, mc_stop_follow_action, mc_hire_person_action, mc_rename_person_action, mc_spend_the_night_action, mc_lasik_surgery_action, pay_to_strip_action, ask_take_serum]
 
 
 label mc_pay_to_strip_label(person):
@@ -268,7 +279,30 @@ label mc_stop_follow_label(person):
 
 
     return
+# Lasik surgery Labels
+label mc_action_lasik_surgery_label(the_person):
+    mc.name "[the_person.title], your have beautiful eyes, but they are always hidden behind your glasses."
+    the_person.char "Don't you like them? I can wear different glasses tomorrow."
+    mc.name "I mean, that I really would like to see you without any glasses."
+    if renpy.random.randint(1,2) == 1:
+        the_person.char "I'm sorry, but I can't wear lenses."
+        mc.name "That's fine."
+    else:
+        the_person.char "If you like, I can start wearing lenses."
+        mc.name "I don't think that's the right solution."
+    mc.name "I made an appointment for you in the clinic for a LASIK surgery where your eyesight will be corrected."
+    "[the_person.title] gives you a spontaneous hug."
+    $ the_person.draw_person(position = "kissing")
+    the_person.char "You make me so happy [the_person.mc_title], thank you so much!"
+    python:
+        the_person.change_happiness(10)
+        the_person.change_love(5, max_modified_to = 80)
+        mc.business.change_funds(-5000)
+        the_person.base_outfit.accessories.remove(filter(lambda x : x in [big_glasses, modern_glasses], the_person.base_outfit.accessories)[0])
+    $ the_person.draw_person()
+    return    
 
+# Ask take serum Labels
 label mc_ask_take_serum_label(person):  #TODO possibly temporary addition to the mod. Copies the old mechanics for asking a girl to take a serum.
     $ ask_serum_chance = 10*mc.charisma + 5*person.int
     if ask_serum_chance < 0:
@@ -279,7 +313,7 @@ label mc_ask_take_serum_label(person):  #TODO possibly temporary addition to the
 
     "You consider asking [person.title] to voluntarily take one of your serums as a test."
     menu:
-        "Ask her to take it.\n{size=22}Success Chance: [ask_serum_chance]%%{/size}":
+        "Ask her to take it.\n{color=#ff0000}{size=18}Success Chance: [ask_serum_chance]%%{/size}{/color}":
             if mc.business.get_employee_title(person) == "None":
                 mc.name "[person.title], I've got a project going on at work that could really use a test subject. Would you be interested in helping me out?"
 

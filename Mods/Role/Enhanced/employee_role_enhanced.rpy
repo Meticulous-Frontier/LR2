@@ -69,8 +69,7 @@ label employee_find_out_home_location_label(the_person):
         the_person.char "We have a beautiful home at the [opinion]."
 
     "You just learned her home address and can visit her anytime you want."
-    if not the_person.home in mc.known_home_locations:
-        $ mc.known_home_locations.append(the_person.home) #You know where she lives and can visit her.
+    $ the_person.learn_home()
 
     mc.name "Well, well, that is indeed a great place to live. Thank you for the talk, i'm sorry to cut this short, but I do have to get back to work."
     the_person.char "Any time [the_person.mc_title], I really enjoyed our little parley."

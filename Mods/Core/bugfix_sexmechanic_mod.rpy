@@ -138,6 +138,9 @@ init 5 python:
             if position_type.record_class and position_type.record_class not in types_seen:
                 person.sex_record[position_type.record_class] += 1
                 types_seen.append(position_type.record_class)
+
+        # record the last time we had sex
+        person.sex_record["Last Sex Day"] = day
         return
 
     def pick_object_enhanced(person, position, forced_object = None):
@@ -174,7 +177,7 @@ init 5 python:
                 option_list.append(["Pause and change position\n-5 {image=arousal_token_small}","Change"])
                 for position in position_choice.connections:
                     if allow_position(person, position) and object_choice.has_trait(position.requires_location):
-                        appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo).replace("{size=22}", "{size=12}") #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
+                        appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                         option_list.append([appended_name,position])
 
             if position_locked and object_choice:
@@ -182,7 +185,7 @@ init 5 python:
                 for position in position_choice.connections:
                     if isinstance(object_choice, Object): # Had an error with cousin's kissing blackmail where it would pass object_choice as a list, haven't looked further into it
                         if allow_position(person, position) and object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag:
-                            appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo).replace("{size=22}", "{size=12}") #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
+                            appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                             option_list.append([appended_name, position])
             if not person.outfit.full_access():
                 option_list.append(["Pause and strip her down","Strip"])
@@ -199,7 +202,7 @@ init 5 python:
                 option_list.append(["Stop and leave", "Leave"])
         return option_list
 
-    def build_grouped_sex_position_menu(person, allow_none = True, ignore_taboo = False):
+    def build_grouped_sex_position_menu(person, allow_none = True, ignore_taboo = False, prohibit_tags = []):
         foreplay_positions = []
         oral_positions = []
         vaginal_positions = []
@@ -207,14 +210,16 @@ init 5 python:
 
         for position in sorted(list_of_positions, key = lambda x: x.name):
             if allow_position(person, position) and  mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
-                willingness = position.build_position_willingness_string(person, ignore_taboo = ignore_taboo).replace("{size=22}", "{size=12}")
-                if position.skill_tag == "Foreplay":
+                willingness = position.build_position_willingness_string(person, ignore_taboo = ignore_taboo)
+                if position.skill_tag in prohibit_tags:
+                    pass
+                elif position.skill_tag == "Foreplay":
                     foreplay_positions.append([willingness, position])
-                if position.skill_tag == "Oral":
+                elif position.skill_tag == "Oral":
                     oral_positions.append([willingness, position])
-                if position.skill_tag == "Vaginal":
+                elif position.skill_tag == "Vaginal":
                     vaginal_positions.append([willingness, position])
-                if position.skill_tag == "Anal":
+                elif position.skill_tag == "Anal":
                     anal_positions.append([willingness, position])
 
         if allow_none:
@@ -224,11 +229,30 @@ init 5 python:
         oral_positions.insert(0, "Pick Oral")
         vaginal_positions.insert(0, "Pick Vaginal")
         anal_positions.insert(0, "Pick Anal")
+        return replace_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions,  prohibit_tags = prohibit_tags)
+
+    def replace_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions,  prohibit_tags = []): #Use this function to get specific situations to replace or remove positions
+        #First, filter out any positions this person doesn't accept
+        #TODO move this to allow_position(), this probably very inefficient
+        foreplay_positions = filter(person.event_triggers_dict.get("foreplay_position_filter", None),foreplay_positions)
+        oral_positions = filter(person.event_triggers_dict.get("oral_position_filter", None),oral_positions)
+        vaginal_positions = filter(person.event_triggers_dict.get("vaginal_position_filter", None),vaginal_positions)
+        anal_positions = filter(person.event_triggers_dict.get("anal_position_filter", None),anal_positions)
+
+        #Add unique character specific positions. #TODO tie this some kind of individual person function.
+        # if person == salon_manager:
+        #     if ophelia_get_special_bj_unlocked():
+        #         oral_positions = filter(ophelia_oral_position_filter, oral_positions)
+        #         willingness = Ophelia_blowjob.build_position_willingness_string(person, ignore_taboo = True)
+        #         oral_positions.append([willingness, Ophelia_blowjob])
+        return person.event_triggers_dict.get("unique_sex_positions", default_unique_sex_positions)(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions, prohibit_tags)
+
+    def default_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions, prohibit_tags = []):
         return [foreplay_positions, oral_positions, vaginal_positions, anal_positions]
 
 
 
-label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, asked_for_condom = False):
+label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, asked_for_condom = False, prohibit_tags = []):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
     if report_log is None:
         $ report_log = defaultdict(int) #Holds information about the encounter: what positions were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
@@ -239,8 +263,10 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     $ object_choice = start_object # initialize with start_object (in case girl is in charge or position is locked)
     $ guy_orgasms_before_control = 0
     $ ask_for_condom = asked_for_condom
+    $ ask_for_threesome = False
     $ use_condom = mc.condom if asked_for_condom else False
     $ stealth_orgasm = False
+    $ stop_stripping = False
 
     #Privacy modifiers
     if mc.location.get_person_count() == 1 and not private:
@@ -281,11 +307,14 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             elif report_log.get("guy orgasms", 0) > guy_orgasms_before_control and report_log.get("girl orgasms", 0) > 0: #Both parties have been satisfied
                 the_person.char "Whew, that felt amazing. It's good to know it was as good for you as it was for me."
                 $ round_choice = "Girl Leave"
-            elif report_log.get("girl orgasms", 0) > 0 and the_person.love < 10 and the_person.obedience < 110: #She's cum and doesn't care about you finishing.
+            elif report_log.get("girl orgasms", 0) > 0 and not (the_person.love > 40 or the_person.obedience > 150): #She's cum and doesn't care about you finishing.
                 the_person.char "Whew, that felt great. Thanks for the good time [the_person.mc_title]!"
                 $ round_choice = "Girl Leave"
+            elif report_log.get("girl orgasms", 0) > 1: # she's had her fill and doesn't care about you anymore
+                the_person.char "Oh my god, I came so hard, thanks a lot [the_person.mc_title]!"
+                $ round_choice = "Girl Leave"
             elif report_log.get("girl orgasms", 0) == 0 and the_person.energy < 15 :
-                the_person.char "That was nice, but i'm tired. We will continue this another time."
+                the_person.char "That was nice, but I'm tired. We will continue this another time."
                 $ round_choice = "Girl Leave"
             elif has_taken_control:
                 $ has_taken_control = False
@@ -311,14 +340,14 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
         if round_choice is None: #If there is no set round_choice
             #TODO: Add a variant of this list when the girl is in control to ask if you want to resist or ask/beg for something.
-            call screen main_choice_display([build_round_choice_menu(the_person, position_choice, position_locked, object_choice, ignore_taboo = ignore_taboo)])
+            call screen enhanced_main_choice_display(build_menu_items([build_round_choice_menu(the_person, position_choice, position_locked, object_choice, ignore_taboo = ignore_taboo)]))
             $ round_choice = _return #This gets the players choice for what to do this round.
 
         # Now that a round_choice has been picked we can do something.
         if round_choice == "Change" or round_choice == "Continue":
             if round_choice == "Change": # If we are changing we first select and transition/intro the position, then run a round of sex. If we are continuing we ignroe all of that
                 if start_position is None: #The first time we get here,
-                    call pick_position(the_person, ignore_taboo = ignore_taboo) from _call_pick_position_bugfix
+                    call pick_position(the_person, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags) from _call_pick_position_bugfix
                     $ position_choice = _return
                 else:
                     $ position_choice = start_position
@@ -341,7 +370,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                             # call mod taboo break
                             $ position_choice.call_transition_taboo_break(None, the_person, mc.location, object_choice)
                             $ the_person.break_taboo(position_choice.associated_taboo)
-                        else:                        
+                        else:
                             $ position_choice.call_intro(the_person, mc.location, object_choice)
                     else:
                         $ the_person.change_arousal(-5) #Changing position lowers your arousal slightly
@@ -361,25 +390,27 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             if position_choice and object_choice: #If we have both an object and a position we're good to go, otherwise we loop and they have a chance to choose again.
                 call sex_description(the_person, position_choice, object_choice, private = private, report_log = report_log) from _call_sex_description_bugfix
                 $ first_round = False
-                if mc.condom and mc.recently_orgasmed: # you orgasmed so you used your condom.
-                    $ mc.condom = False
-                if position_choice.requires_hard and mc.recently_orgasmed:
-                    "Your post orgasm cock softens, stopping you from [position_choice.verbing] [the_person.possessive_title] for now."
-                    $ position_choice = None
-                elif position_choice.guy_energy > mc.energy:
-                    if girl_in_charge:
-                        "You're too exhausted to let [the_person.possessive_title] keep [position_choice.verbing] you."
-                    else:
-                        "You're too exhausted to continue [position_choice.verbing] [the_person.possessive_title]."
-                    $ position_choice = None
-                elif position_choice.girl_energy > the_person.energy:
-                    #TODO: Add some differentiated dialgoue depending on the position.
-                    #TODO: Add "no energy" transitions where you keep fucking her anyways. (double TODO: Add a way of "breaking" her like this)
-                    if not girl_in_charge:
-                        the_person.char "I'm exhausted [the_person.mc_title], I can't keep this up..."
-                    $ position_choice = None
-                elif not position_locked: #Nothing major has happened that requires us to change positions, we can have girls take over, strip
-                    call girl_strip_event(the_person, position_choice, object_choice) from _call_girl_strip_event_bugfix
+                if not finished:    # when we switched to threesome finished is True
+                    if mc.condom and mc.recently_orgasmed: # you orgasmed so you used your condom.
+                        $ mc.condom = False
+                    if position_choice.requires_hard and mc.recently_orgasmed:
+                        "Your post orgasm cock softens, stopping you from [position_choice.verbing] [the_person.possessive_title] for now."
+                        $ position_choice = None
+                    elif position_choice.guy_energy > mc.energy:
+                        if girl_in_charge:
+                            "You're too exhausted to let [the_person.possessive_title] keep [position_choice.verbing] you."
+                        else:
+                            "You're too exhausted to continue [position_choice.verbing] [the_person.possessive_title]."
+                        $ position_choice = None
+                    elif position_choice.girl_energy > the_person.energy:
+                        #TODO: Add some differentiated dialgoue depending on the position.
+                        #TODO: Add "no energy" transitions where you keep fucking her anyways. (double TODO: Add a way of "breaking" her like this)
+                        if not girl_in_charge:
+                            the_person.char "I'm exhausted [the_person.mc_title], I can't keep this up..."
+                        $ position_choice = None
+                    elif not position_locked: #Nothing major has happened that requires us to change positions, we can have girls take over, strip
+                        if not stop_stripping:
+                            call girl_strip_event(the_person, position_choice, object_choice) from _call_girl_strip_event_bugfix
 
 
         elif isinstance(round_choice, Position): #The only non-strings on the list are positions we are changing to
@@ -399,6 +430,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
         elif round_choice == "Strip":
             call strip_menu(the_person, (position_choice.verbing if isinstance(position_choice, Position) else "wooing")) from _call_strip_menu_bugfix
+            $ stop_stripping = False
 
         elif round_choice == "Leave":
             $ finished = True # Unless something stops us the encounter is over and we can end
@@ -443,7 +475,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
         clear_sex_modifiers(the_person)
 
         report_log["end arousal"] = the_person.arousal
-        if report_log.get("girl orgasms",0) > 0:
+        if report_log.get("girl orgasms",0) > 0 or report_log.get("girl one orgasms", 0) > 0:
             the_person.arousal = 0 # If she came she's satisfied.
         else:
             the_person.change_arousal(-the_person.arousal/2) #Otherwise they are half as aroused as you leave them.
@@ -719,6 +751,38 @@ label put_on_condom_routine(the_person):
 label watcher_check_enhanced(the_person, the_position, the_object, the_report): # Check to see if anyone is around to comment on the characters having sex.
     $ watcher = cheating_check_get_watcher(the_person)
     if watcher:
+        # you only get one chance for starting a threesome per public sex action (avoid spamming threesome question)
+        # threesome has no watcher loop, so all watching stops when threesome has started.
+        # TODO: add watchers to threesome core
+        if not ask_for_threesome and willing_to_threesome(the_person, watcher):
+            $ watcher.draw_person()
+            watcher.char "Oh my good, that looks amazing..."
+            if can_join_threesome(watcher, the_person, the_position.position_tag):
+                the_person.char "Can I... can I join you? I want some too!"
+                $ ask_for_threesome = True
+                menu:
+                    "Let her join":
+                        watcher.char "Yes! Thank you [watcher.mc_title]!"
+                        $ scene_manager = Scene()
+                        $ scene_manager.add_actor(the_person, position = the_position.position_tag)
+                        $ scene_manager.add_actor(watcher, character_placement = character_center_flipped)
+                        watcher.char "Let me take off some clothes."
+                        $ scene_manager.strip_actor_outfit(watcher)
+                        call join_threesome(the_person, watcher, the_position.position_tag) from _call_join_threesome_watcher_check_enhanced
+                        $ report_log = _return
+                        python:
+                            scene_manager.clear_scene()
+                            if report_log.get("girl two orgasms", 0) > 0:
+                                watcher.arousal = 0 # If she came she's satisfied.
+                            else:
+                                watcher.change_arousal(-watcher.arousal/2) #Otherwise they are half as aroused as you leave them.
+                            finished = True
+                            del watcher
+                        return
+                    "Not this time":
+                        the_person.char "Aww, okay. Maybe next time..."
+                        $ the_person.change_obedience(3)
+
         $ the_relationship = town_relationships.get_relationship(watcher, the_person)
         if the_relationship and the_relationship.get_type() in ["Mother", "Daughter", "Sister", "Cousin", "Niece", "Aunt", "Grandmother", "Granddaughter"]:
             call relationship_sex_watch(watcher, town_relationships.get_relationship_type(watcher, the_person).lower(), the_position) from _call_relationship_sex_watch
@@ -818,7 +882,12 @@ label girl_strip_event_enhanced(the_person, the_position, the_object):
         else:
             $ the_position.call_strip(the_person, the_clothing, mc.location, the_object) #If a girl's outfit is less slutty than she is currently feeling (with arousal factored in) she will want to strip stuff off.
 
-        $ the_person.update_outfit_taboos()       
+        $ the_person.update_outfit_taboos()
+
+        if the_person.outfit.has_clothing(the_clothing):
+            # you told her not to strip, so we will not ask again until player initiates stripping
+            $ stop_stripping = True
+
     $ the_clothing = None
     return
 
@@ -858,7 +927,7 @@ label break_strip_outfit_taboos(the_person):
                 $ taboo_broken = True
     return taboo_broken
 
-label pick_position_enhanced(the_person, allow_none = True, ignore_taboo = False):
-    call screen main_choice_display(build_grouped_sex_position_menu(the_person, allow_none = allow_none, ignore_taboo = ignore_taboo))
+label pick_position_enhanced(the_person, allow_none = True, ignore_taboo = False, prohibit_tags = []):
+    call screen enhanced_main_choice_display(build_menu_items(build_grouped_sex_position_menu(the_person, allow_none = allow_none, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags)))
     $ position_choice = _return
     return None if position_choice == "Nothing" else position_choice

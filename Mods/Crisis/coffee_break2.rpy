@@ -26,7 +26,7 @@ label coffee_break2_action_label:
         del person_one
         del person_two
         del person_three
-    return "Advance Time"
+    return
 
 label coffee_break2_food_delivery_label(person_one, person_two, person_three):
     python:
@@ -185,7 +185,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
         # strip at least one item
         $ the_clothing = loser.outfit.get_upper_top_layer()
         if the_clothing:
-            $ loser.draw_animated_removal(the_clothing)
+            $ scene_manager.draw_animated_removal(loser, the_clothing)
             $ the_clothing = None
         # do we strip more?
         $ scene_manager.strip_actor_outfit_to_max_sluttiness(loser, exclude_lower = True, temp_sluttiness_boost = 10)
@@ -211,4 +211,4 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
         del winner_two
         del loser
         scene_manager.clear_scene()
-    return "Advance Time"
+    return

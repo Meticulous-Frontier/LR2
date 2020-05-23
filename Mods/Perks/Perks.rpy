@@ -32,14 +32,16 @@ init -1 python:
             return
 
         def save_load(self):
-            #for perk in self.stat_perks:
-            #    perk.save_load()
+            for perk in self.stat_perks:
+                if self.stat_perks[perk].save_load:
+                    self.stat_perks[perk].save_load()
             for perk in self.item_perks:
                 if self.item_perks[perk].save_load:
                     self.item_perks[perk].save_load()
-                #perk.save_load()
-            #for perk in self.ability_perks:
-            #    perk.save_load()
+            for perk in self.ability_perks:
+                if self.ability_perks[perk].save_load:
+                    self.ability_perks[perk].save_load()
+            return
 
         def get_perk_desc(self, perk_name):
             if self.has_stat_perk(perk_name):

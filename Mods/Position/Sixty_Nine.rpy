@@ -75,7 +75,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                     "You pause your licking to give her some encouragement."
                     mc.name "Don't worry, you just need more practice."
                 "You knead her ass cheeks with your hands a few times, then spread her cheeks apart and continue to eat her out."
-            "Focus on her\n{size=22}Requires Oral Skill{/size} (disabled)" if mc.sex_skills["Oral"] < 3:
+            "Focus on her\n{color=#ff0000}{size=18}Requires Oral Skill{/size}{color} (disabled)" if mc.sex_skills["Oral"] < 3:
                     pass
             "Focus on you":
                 "You pause your licking to give her some encouragement."
@@ -127,7 +127,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                     "You pause your licking to give her some encouragement."
                     mc.name "That's it, [the_girl.title], suck my cock!"
                 "You knead her ass cheeks with your hands a few times, then spread her cheeks apart and continue to eat her out."
-            "Focus on her\n{size=22}Requires Oral Skill{/size} (disabled)" if mc.sex_skills["Oral"] < 3:
+            "Focus on her\n{color=#ff0000}{size=18}Requires Oral Skill{/size}{/color} (disabled)" if mc.sex_skills["Oral"] < 3:
                     pass
             "Focus on you":
                 "You pause your licking to talk dirty to her."
@@ -224,7 +224,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                 "You can feel [the_girl.possessive_title]'s tongue slithering back and forth across the base of your dick, and her nose brushes up against your scrotum."
                 "You and [the_girl.possessive_title] continue to please each other orally. You often you hear a muffled moan, accompanied by a pleasant vibration in your groin."
 
-            "Focus on her\n{size=22}Requires More Oral Skill{/size} (disabled)" if mc.sex_skills["Oral"] < 6:
+            "Focus on her\n{color=#ff0000}{size=18}Requires More Oral Skill{/size}{/color} (disabled)" if mc.sex_skills["Oral"] < 6:
                 pass
             "Focus on you":
                 "It feels so good, you don't even realize it but you stop licking her and close your eyes."

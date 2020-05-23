@@ -94,7 +94,7 @@ label broken_AC_crisis_label_enhanced:
                     "The rest of the department follows the lead of [the_person.title], stripping off various amounts of clothing."
                         #Gives you the chance to watch one of the other girls in the department strip.
                     
-                    call screen main_choice_display([broken_AC_crisis_get_watch_list_menu(the_person)])
+                    call screen enhanced_main_choice_display(build_menu_items([broken_AC_crisis_get_watch_list_menu(the_person)]))
                     $ girl_choice = _return
 
                     "You pay special attention to [girl_choice.title] as she follows the lead of [the_person.possessive_title]."
@@ -131,7 +131,7 @@ label broken_AC_crisis_label_enhanced:
             if removed_something:
                 $ broken_AC_crisis_update_sluttiness();
 
-        "Tell everyone to strip down and keep working.\n{color=#ff0000}{size=22}Requires: [casual_uniform_policy.name]{/color} (disabled)" if not casual_uniform_policy.is_active():
+        "Tell everyone to strip down and keep working.\n{color=#ff0000}{size=18}Requires: [casual_uniform_policy.name]{/size}{/color} (disabled)" if not casual_uniform_policy.is_active():
             pass
     $renpy.scene("Active")
     return

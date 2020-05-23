@@ -21,3 +21,18 @@ init -1 python:
         save_load = male_strapon_save_load)
 
         perk_system.add_item_perk(item_perk_male_strapon, "Male Strapon")
+
+    def dildo_on_unlock():
+        standing_finger.link_positions(standing_dildo,"transition_standing_finger_standing_dildo")
+        return
+
+    def dildo_save_load():
+        if standing_dildo not in standing_finger.connections:
+            standing_finger.link_positions(standing_dildo,"transition_standing_finger_standing_dildo")
+
+    def dildo_unlock():
+        item_perk_dildo = Item_Perk("A dildo, useful for penetrating any consenting orifice.",
+        on_unlock = dildo_on_unlock,
+        save_load = dildo_save_load)
+
+        perk_system.add_item_perk(item_perk_dildo, "Dildo")

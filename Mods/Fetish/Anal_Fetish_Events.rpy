@@ -430,7 +430,7 @@ label SB_free_strip_scene(the_person, must_be_naked = True):
             the_person.char "I hope you're enjoying the show [the_person.mc_title]."
             "She wiggles her hips for you and winks."
 
-        call screen main_choice_display([sb_free_strip_build_strip_menu(the_person, must_be_naked)])
+        call screen enhanced_main_choice_display(build_menu_items([sb_free_strip_build_strip_menu(the_person, must_be_naked)]))
         $ strip_choice = _return
 
         if strip_choice == "Watch":
@@ -457,7 +457,7 @@ label SB_free_strip_scene(the_person, must_be_naked = True):
             #You ask her to change into a different pose
             mc.name "I want to see you from a different angle."
 
-            call screen main_choice_display([sb_free_strip_build_pose_menu(picked_pose)])
+            call screen enhanced_main_choice_display(build_menu_items([sb_free_strip_build_pose_menu(picked_pose)]))
             if _return:
                 $ picked_pose = _return
                 "[the_person.possessive_title] nods and moves for you."
@@ -1179,7 +1179,7 @@ label SB_stephanie_anal_fetish_label():
                 "Looks like [the_person.title] has an anal fetish now! But she is also a bimbo."
                 "You are guessing she is probably not particularly fit for her job in research. Maybe you can move her somewhere else in the company?"
 
-            "Try to talk her down\n{size=22}Requires High Charisma{/size}(disabled)" if mc.charisma <= 6:
+            "Try to talk her down\n{color=#ff0000}{size=18}Requires High Charisma{/size}{/color} (disabled)" if mc.charisma <= 6:
                 pass
 
     elif the_person.love < 70 and not girlfriend_role in the_person.special_role:   #She kinda trusts / loves you, but isn't fully committed and needs some convincing.

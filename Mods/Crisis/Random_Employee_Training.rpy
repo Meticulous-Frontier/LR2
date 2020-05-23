@@ -41,9 +41,9 @@ init 2 python:
         return get_random_from_list(training_eligible)
 
     def one_on_one_update_HR_skill(person):
-        ran_num = renpy.random.randint(1,(mc.hr_skill - person.hr_skill))
-        person.hr_skill += ran_num
-        mc.log_event(person.title + ": +[ran_num] HR Skill", "float_text_grey")
+        increase = renpy.random.randint(1,(mc.hr_skill - person.hr_skill))
+        person.hr_skill += increase
+        mc.log_event(person.title + ": +" + str(increase) + " HR Skill", "float_text_grey")
         increase_job_affection(person, "HR work")
         if perk_system.has_ability_perk("Those Who Can't, Teach"):
             if mc.hr_skill < mc.max_work_skills:
@@ -52,9 +52,9 @@ init 2 python:
         return True
 
     def one_on_one_update_supply_skill(person):
-        ran_num = renpy.random.randint(1,(mc.supply_skill - the_person.supply_skill))
-        the_person.supply_skill += ran_num
-        mc.log_event(the_person.title + ": +[ran_num] Supply skill", "float_text_grey")
+        increase = renpy.random.randint(1,(mc.supply_skill - the_person.supply_skill))
+        the_person.supply_skill += increase
+        mc.log_event(the_person.title + ": +" + str(increase) + " Supply skill", "float_text_grey")
         increase_job_affection(the_person, "supply work")
         if perk_system.has_ability_perk("Those Who Can't, Teach"):
             if mc.supply_skill < mc.max_work_skills:
@@ -63,9 +63,9 @@ init 2 python:
         return True
 
     def one_on_one_update_marketing_skill(person):
-        ran_num = renpy.random.randint(1,(mc.market_skill - person.market_skill))
-        person.market_skill += ran_num
-        mc.log_event(person.title + ": +[ran_num] Marketing skill", "float_text_grey")
+        increase = renpy.random.randint(1,(mc.market_skill - person.market_skill))
+        person.market_skill += increase
+        mc.log_event(person.title + ": +" + str(increase) + " Marketing skill", "float_text_grey")
         increase_job_affection(person, "marketing work")
         if perk_system.has_ability_perk("Those Who Can't, Teach"):
             if mc.market_skill < mc.max_work_skills:
@@ -74,9 +74,9 @@ init 2 python:
         return True
 
     def one_on_one_update_research_skill(person):
-        ran_num = renpy.random.randint(1,(mc.research_skill - person.research_skill))
-        person.research_skill += ran_num
-        mc.log_event(person.title + ": +[ran_num] Researching skill", "float_text_grey")
+        increase = renpy.random.randint(1,(mc.research_skill - person.research_skill))
+        person.research_skill += increase
+        mc.log_event(person.title + ": +" + str(increase) + " Researching skill", "float_text_grey")
         increase_job_affection(person, "research work")
         if perk_system.has_ability_perk("Those Who Can't, Teach"):
             if mc.research_skill < mc.max_work_skills:
@@ -85,9 +85,9 @@ init 2 python:
         return True
 
     def one_on_one_update_production_skill(person):
-        ran_num = renpy.random.randint(1,(mc.production_skill - person.production_skill))
-        person.production_skill += ran_num
-        mc.log_event(person.title + ": +[ran_num] Production skill", "float_text_grey")
+        increase = renpy.random.randint(1,(mc.production_skill - person.production_skill))
+        person.production_skill += increase
+        mc.log_event(person.title + ": +" + str(increase) + " Production skill", "float_text_grey")
         increase_job_affection(person, "production work")
         if perk_system.has_ability_perk("Those Who Can't, Teach"):
             if mc.production_skill < mc.max_work_skills:

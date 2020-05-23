@@ -30,7 +30,7 @@ init 1 python:
         transform_one.ypos = one_pos_y
         transform_one.zoom = one_scale
 
-        one_final_image = person_one.build_person_displayable(one_position, one_emotion, one_special_modifier, lighting = lighting, background_fill = False)
+        one_final_image = Flatten(person_one.build_person_displayable(one_position, one_emotion, one_special_modifier, lighting = lighting, background_fill = False))
         renpy.show(person_one.name,at_list=[transform_one, scale_person(person_one.height)],layer="Active",what=one_final_image,tag=person_one.name)
 
         #Now do person two
@@ -45,7 +45,7 @@ init 1 python:
         transform_two.ypos = two_pos_y
         transform_two.zoom = two_scale
 
-        two_final_image = person_two.build_person_displayable(two_position, two_emotion, two_special_modifier, lighting = lighting, background_fill = False)
+        two_final_image = Flatten(person_two.build_person_displayable(two_position, two_emotion, two_special_modifier, lighting = lighting, background_fill = False))
         renpy.show(person_two.name,at_list=[transform_two, scale_person(person_two.height)],layer="Active",what=two_final_image,tag=person_two.name)
         return
 
@@ -117,22 +117,22 @@ label SB_threesome_setup_helper(): #This function is designed to help come up wi
         "What would you like to adjust?"
         menu:
             "Person One X":
-                call SB_change_value_amount()
+                call SB_change_value_amount() from _call_SB_change_value_amount
                 $ person_one_pos_x += _return
             "Person One Y":
-                call SB_change_value_amount()
+                call SB_change_value_amount() from _call_SB_change_value_amount_1
                 $ person_one_pos_y += _return
             "Person Two X":
-                call SB_change_value_amount()
+                call SB_change_value_amount() from _call_SB_change_value_amount_2
                 $ person_two_pos_x += _return
             "Person Two Y":
-                call SB_change_value_amount()
+                call SB_change_value_amount() from _call_SB_change_value_amount_3
                 $ person_two_pos_y += _return
             "Person One Scale":
-                call SB_change_value_amount()
+                call SB_change_value_amount() from _call_SB_change_value_amount_4
                 $ person_one_scale += _return
             "Person Two Scale":
-                call SB_change_value_amount()
+                call SB_change_value_amount() from _call_SB_change_value_amount_5
                 $ person_two_scale += _return
             "Finished":
                 $ SB_menu_choice = "Finish"
@@ -389,7 +389,7 @@ screen SB_two_person_info_ui(the_person_one, the_person_two): #Used to display s
 
 init -1 python:
     SB_list_of_threesomes = []
-    class SB_Threesome_Position(renpy.store.object):
+    class SB_Threesome_Position():
         def __init__(self,name,slut_requirement,slut_cap,position_one_tag, position_two_tag,requires_location,requires_clothing,skill_tag_p1,skill_tag_p2,girl_one_arousal,girl_two_arousal,girl_one_source,girl_two_source,guy_arousal,skill_tag_guy,guy_source,current_girl,connections,intro,scenes,outro,transition_default,
         strip_description, strip_ask_description, orgasm_description, swap_description,
         verb = "fuck" , opinion_tags = None, p1_x = 1.0, p1_y = 1.0, p1_zoom = 1.0, p2_x = 1.0, p2_y = 1.0, p2_zoom = 1.0, can_swap = False, swap_text = ""):
@@ -543,9 +543,9 @@ init -1 python:
             for position in the_position.connections:
                 if the_object.has_trait(position.requires_location):
                     if position.check_clothing(the_person):
-                        appended_name = "Change to " + position.name + ".\n{size=22}Max Effect: " + get_red_heart(position.slut_cap) + "\nSuggested Sluttiness: " + get_red_heart(position.slut_requirement) + "{/size}"
+                        appended_name = "Change to " + position.name + ".\n{size=18}Max Effect: " + get_red_heart(position.slut_cap) + "\nSuggested Sluttiness: " + get_red_heart(position.slut_requirement) + "{/size}"
                     else:
-                        appended_name = "Change to " + position.name + ".\n{size=22}Obstructed by Clothing\nSuggested Sluttiness: " + get_red_heart(position.slut_requirement) + "{/size} (disabled)"
+                        appended_name = "Change to " + position.name + ".\n{size=18}Obstructed by Clothing\nSuggested Sluttiness: " + get_red_heart(position.slut_requirement) + "{/size} (disabled)"
                     tuple_list.append([appended_name,position])
             return renpy.display_menu(tuple_list,True,"Choice")
 

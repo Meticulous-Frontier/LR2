@@ -44,7 +44,7 @@ label influence_opinion_label(person): #Input a custom opinion, check if they ha
     python:
         score = person.get_opinion_score(opinion)
         degrees = [-2,-1,0,1,2]
-        change = abs(degrees.index(score) - degrees.index(degree)) # How far is the degree away from current opinion (max 4 steps)
+        ran_num = abs(degrees.index(score) - degrees.index(degree)) # How far is the degree away from current opinion (max 4 steps)
         cur_score = opinion_score_to_string(score)
 
     if score is not 0:
@@ -52,13 +52,13 @@ label influence_opinion_label(person): #Input a custom opinion, check if they ha
     else:
         "Speaker" "[person.possessive_title], currently has no opinion regarding [opinion], depending on how suggestible the person is you might succeed"
 
-    if change == 1: # small change
+    if ran_num == 1: # small change
         $ difficulty = renpy.random.randint(0, 20) # Using ranges so people can get lucky, and it can give different outcomes faking simulation of psychology
-    elif change == 2: # medium change
+    elif ran_num == 2: # medium change
         $ difficulty = renpy.random.randint(20, 40)
-    elif change == 3: # large change
+    elif ran_num == 3: # large change
         $ difficulty = renpy.random.randint(40, 60)
-    elif change == 4: # very large change
+    elif ran_num == 4: # very large change
         $ difficulty = renpy.random.randint(60, 80)
     else:
         $ difficulty = renpy.random.randint(0, 80) #Anything above 80 should be an auto- success

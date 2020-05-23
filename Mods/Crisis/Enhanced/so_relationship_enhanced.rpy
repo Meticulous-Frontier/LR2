@@ -2,6 +2,14 @@ init 2 python:
     config.label_overrides["so_relationship_improve_label"] = "so_relationship_improve_label_enhanced"
     config.label_overrides["so_relationship_worsen_label"] = "so_relationship_worsen_label_enhanced"
 
+    # the relationship will only worsen if the love of the person for the MC is higher than this threshold value
+    # so as long as you are not pursuing them, their relationships with their partners will only improve
+    relationship_worsen_stats = {
+        "Married" : 90,
+        "Fiancée" : 65,
+        "Girlfriend": 40
+    }
+
     def so_relationship_improve_requirement():
         return not get_so_relationship_improve_person() is None
 
@@ -15,7 +23,7 @@ init 2 python:
     def get_so_relationship_improve_person():
         potential_people = []
         for person in known_people_in_the_game(excluded_people = [mc] + unique_character_list):
-            if person.love > 10 and person.love < 60 and not person.title is None and not person.relationship == "Married":
+            if not person.title is None and not person.relationship == "Married" and person.relationship in relationship_worsen_stats and person.love <= relationship_worsen_stats[person.relationship] + (person.get_opinion_score("cheating on men") * 5) :
                 if not any(x in person.special_role for x in [girlfriend_role, affair_role]): # when in relationship with MC she will not improve her relationship with her SO
                     potential_people.append(person)
         return get_random_from_list(potential_people)
@@ -23,10 +31,9 @@ init 2 python:
     def get_so_relationship_worsen_person():
         potential_people = []
         for person in known_people_in_the_game(excluded_people = [mc] + unique_character_list):
-            if person.love > 10 and not person.title is None and not person.relationship == "Single":
+            if not person.title is None and person.relationship in relationship_worsen_stats and person.love > relationship_worsen_stats[person.relationship] + (person.get_opinion_score("cheating on men") * 5):
                 potential_people.append(person)
         return get_random_from_list(potential_people)
-
 
 label so_relationship_improve_label_enhanced():
     $ the_person = get_so_relationship_improve_person()

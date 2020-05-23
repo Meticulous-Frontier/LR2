@@ -95,6 +95,20 @@ init -1 python:
     # add follow_mc attribute to person class (without sub-classing)
     Person.identifier = property(get_person_identifier, set_person_identifier, del_person_identifier, "Unique identifier for person class.")
 
+    def get_person_next_day_outfit(self):
+        if not hasattr(self, "_next_day_outfit"):
+            self._next_day_outfit = None
+        return self._next_day_outfit
+
+    def set_person_next_day_outfit(self, value):
+        self._next_day_outfit = value
+
+    def del_person_next_day_outfit(self):
+        del self._next_day_outfit
+
+    # add follow_mc attribute to person class (without sub-classing)
+    Person.next_day_outfit = property(get_person_next_day_outfit, set_person_next_day_outfit, del_person_next_day_outfit, "Allow for forcing the next day outfit a girl will wear (set planned outfit).")
+
     ## MATCH SKIN COLOR
     # Matches skin, body, face and expression images based on input of skin color
     def match_skin(self, color):
@@ -205,7 +219,7 @@ init -1 python:
 
     ## LEARN HOME EXTENSION
     def learn_home(self): # Adds the_person.home to mc.known_home_locations allowing it to be visited without having to go through date label
-        if not self.home in mc.known_home_locations:
+        if not self.home in mc.known_home_locations + [lily_bedroom, mom_bedroom, aunt_bedroom, cousin_bedroom]:
             mc.known_home_locations.append(self.home)
             return True # Returns true if it succeeds
         return False # Returns false otherwise, so it can be used for checks.
@@ -260,7 +274,7 @@ init -1 python:
         else:
             face_style = None
 
-        if renpy.random.randint(0,100) < 60: #60% of the time they share hair colour
+        if renpy.random.randint(0,100) < 30: #30% of the time they share hair colour (girls dye their hair a lot)
             hair_colour = self.hair_colour
         else:
             hair_colour = None
@@ -275,8 +289,8 @@ init -1 python:
         else:
             eyes = None
 
-        if renpy.random.randint(0,100) < 60: #Have heights that roughly match (but o
-            height = (self.height / 0.8) * (renpy.random.randint(95,105)/100.0)
+        if renpy.random.randint(0,100) < 80: #Have heights that roughly match (mostly)
+            height = self.height * (renpy.random.randint(95,105)/100.0)
             if height > 1.0:
                 height = 1.0
             elif height < 0.8:
@@ -305,6 +319,67 @@ init -1 python:
         return the_daughter
 
     Person.generate_daughter = generate_daughter_enhanced
+
+    def generate_mother_enhanced(self, lives_with_daughter = False): #Generates a random person who shares a number of similarities to the mother
+        age = renpy.random.randint(self.age + 16, 55)
+
+        if renpy.random.randint(0,100) < 60:
+            body_type = self.body_type
+        else:
+            body_type = None
+
+        if renpy.random.randint(0,100) < 40: #Slightly lower for facial similarities to keep characters looking distinct
+            face_style = self.face_style
+        else:
+            face_style = None
+
+        if renpy.random.randint(0,100) < 30: #30% of the time they share hair colour (girls dye their hair a lot)
+            hair_colour = self.hair_colour
+        else:
+            hair_colour = None
+
+        if renpy.random.randint(0,100) < 60: # 60% they share the same breast size
+            tits = self.tits
+        else:
+            tits = None
+
+        if renpy.random.randint(0,100) < 60: #Share the same eye colour
+            eyes = self.eyes
+        else:
+            eyes = None
+
+        if renpy.random.randint(0,100) < 80: #Have heights that roughly match (mostly)
+            height = self.height * (renpy.random.randint(95,105)/100.0)
+            if height > 1.0:
+                height = 1.0
+            elif height < 0.8:
+                height = 0.8
+        else:
+            height = None
+
+        if lives_with_daughter:
+            start_home  = self.home
+        else:
+            start_home  = None
+
+        the_mother = make_person(last_name = self.last_name, age = age, body_type = body_type, face_style = face_style, tits = tits, height = height,
+            hair_colour = hair_colour, skin = self.skin, eyes = eyes, start_home = start_home, force_random = True)
+
+        if the_mother.kids == 0:    # make sure she has at least one child
+            the_mother.kids = 1
+
+        if start_home is None:
+            the_mother.generate_home()
+        the_mother.home.add_person(the_mother)
+
+        for sister in town_relationships.get_existing_sisters(self): #First find all of the sisters this person has
+            town_relationships.update_relationship(the_mother, sister, "Daughter", "Mother") #Set the mother/daughter relationship for the sisters
+
+        town_relationships.update_relationship(self, the_mother, "Mother", "Daughter") #Now set the mother/daughter relationship with person
+
+        return the_mother
+
+    Person.generate_mother = generate_mother_enhanced
 
     ## STRIP OUTFIT TO MAX SLUTTINESS EXTENSION
     # Strips down the person to a clothing their are comfortable with (starting with top, before bottom)
@@ -340,9 +415,10 @@ init -1 python:
         strip_choice = get_strip_choice_max(test_outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet)
         # renpy.say("", strip_choice.name + "  (required: " + str(test_outfit.slut_requirement) +  ", sluttiness: " +  str(self.effective_sluttiness() + temp_sluttiness_boost) + ")")
         while strip_choice and self.judge_outfit(test_outfit, temp_sluttiness_boost):
-            if delay > 0 and msg_count == 0:
+            if delay > 0:
                 self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
-                renpy.pause(delay) # if no message to show, wait a short while before automatically continue stripping
+                if msg_count == 0:
+                    renpy.pause(delay) # if no message to show, wait a short while before automatically continue stripping
             else:
                 test_outfit.remove_clothing(strip_choice)
             self.apply_outfit(test_outfit, ignore_base = True) #Swap our current outfit out for the test outfit.
@@ -453,7 +529,11 @@ init -1 python:
         self.sexed_count = 0 #Reset the counter for how many times you've been seduced, you might be seduced multiple times in one day!
 
         if time_of_day == 0: #It's a new day, get a new outfit out to wear!
-            self.planned_outfit = self.wardrobe.decide_on_outfit2(self)
+            if self.next_day_outfit:
+                self.planned_outfit = self.next_day_outfit
+                self.next_day_outfit = None
+            else:
+                self.planned_outfit = self.wardrobe.decide_on_outfit2(self)
             self.apply_outfit(self.planned_outfit)
             self.planned_uniform = None
 
@@ -486,19 +566,17 @@ init -1 python:
             location.move_person(self, get_random_from_list(available_locations))
 
         #A skimpy outfit is defined as the top 25% of a girls natural sluttiness.
-        if self.outfit and self.planned_outfit.slut_requirement > self.sluttiness * 0.75:
-            # only changes sluttiness in low sluttiness range after that she won't care anymore
-            if self.sluttiness < 40:
-                self.change_slut_temp(self.get_opinion_score("skimpy outfits"), add_to_log = False)
+        if self.sluttiness < 40 and self.outfit and self.outfit.slut_requirement > self.sluttiness * 0.75:
+            self.change_slut_temp(self.get_opinion_score("skimpy outfits"), add_to_log = False)
 
         #A conservative outfit is defined as the bottom 25% of a girls natural sluttiness.
-        if self.outfit and self.planned_outfit.slut_requirement < self.sluttiness * 0.25:
+        if self.sluttiness < 40 and self.outfit and self.outfit.slut_requirement < self.sluttiness * 0.25:
             # happiness won't go below 80 or over 120 by this trait and only affects in low sluttiness range, after that she won't care
-            if self.happiness > 80 and self.happiness < 120 and self.sluttiness < 40:
+            if self.happiness > 80 and self.happiness < 120:
                 self.change_happiness(self.get_opinion_score("conservative outfits"), add_to_log = False)
 
         # lingerie only impacts to sluttiness level 40
-        if self.sluttiness < 40 and (self.outfit.get_bra() or self.outfit.get_panties()):
+        if self.sluttiness < 40 and self.outfit and (self.outfit.get_bra() or self.outfit.get_panties()):
             lingerie_bonus = 0
             if self.outfit.get_bra() and self.outfit.get_bra().slut_value > 1: #We consider underwear with an innate sluttiness of 2 or higher "lingerie" rather than just underwear.
                 lingerie_bonus += self.get_opinion_score("lingerie")
@@ -508,7 +586,7 @@ init -1 python:
             self.change_slut_temp(lingerie_bonus, add_to_log = False)
 
         # not wearing underwear only impacts sluttiness to level 60
-        if self.sluttiness < 60 and (not self.outfit.wearing_bra() or not self.outfit.wearing_panties()): #We need to determine how much underwear they are not wearing. Each piece counts as half, so a +2 "love" is +1 slut per chunk.
+        if self.sluttiness < 60 and self.outfit and (not self.outfit.wearing_bra() or not self.outfit.wearing_panties()): #We need to determine how much underwear they are not wearing. Each piece counts as half, so a +2 "love" is +1 slut per chunk.
             underwear_bonus = 0
             if not self.outfit.wearing_bra():
                 underwear_bonus += self.get_opinion_score("not wearing underwear")
@@ -518,13 +596,13 @@ init -1 python:
             self.change_slut_temp(underwear_bonus, add_to_log = False)
 
         # showing the goods only impacts sluttiness to level 80
-        if self.sluttiness < 80 and self.outfit.tits_visible():
+        if self.sluttiness < 80 and self.outfit and self.outfit.tits_visible():
             self.change_slut_temp(self.get_opinion_score("showing her tits"), add_to_log = False)
-        if self.sluttiness < 80 and self.outfit.vagina_visible():
+        if self.sluttiness < 80 and self.outfit and self.outfit.vagina_visible():
             self.change_slut_temp(self.get_opinion_score("showing her ass"), add_to_log = False)
 
         # showing everything only impacts sluttiness to level 80
-        if self.sluttiness < 80 and self.outfit.full_access():
+        if self.sluttiness < 80 and self.outfit and self.outfit.full_access():
             self.change_slut_temp(self.get_opinion_score("not wearing anything"), add_to_log = False)
 
         for event_list in [self.on_room_enter_event_list, self.on_talk_event_list]: #Go through both of these lists and curate them, ie trim out events that should have expired.
@@ -736,7 +814,7 @@ init -1 python:
         if the_animation:
             final_image = self.build_person_animation(the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength)
         else:
-            final_image = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill)
+            final_image = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
 
         renpy.show(self.name + self.last_name + "_anim",at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=self.name + self.last_name +"_anim")
 
@@ -980,3 +1058,54 @@ init -1 python:
         return True
 
     Person.__ne__ = person__ne__
+
+##########################################
+# Expose outfit methods on Person object #
+##########################################
+    # many coding errors are related to missing .oufit in the sequence to check a persons state based on her outfit
+    # these extension methods on the Person class just redirect it to the outfit class, so the code still works as intended
+
+    def person_tits_available(self):
+        return self.outfit.tits_available()
+
+    Person.tits_available = person_tits_available
+
+    def person_tits_visible(self):
+        return self.outfit.tits_visible()
+
+    Person.tits_visible = person_tits_visible
+
+    def person_vagina_available(self):
+        return self.outfit.vagina_available()
+
+    Person.vagina_available = person_vagina_available
+
+    def person_vagina_visible(self):
+        return self.outfit.vagina_visible()
+
+    Person.vagina_visible = person_vagina_visible
+
+    def person_underwear_visible(self):
+        return self.outfit.underwear_visible()
+
+    Person.underwear_visible = person_underwear_visible
+
+    def person_wearing_bra(self):
+        return self.outfit.wearing_bra()
+
+    Person.wearing_bra = person_wearing_bra
+
+    def person_wearing_panties(self):
+        return self.outfit.wearing_panties()
+
+    Person.wearing_panties = person_wearing_panties
+
+    def person_bra_covered(self):
+        return self.outfit.bra_covered()
+
+    Person.bra_covered = person_bra_covered
+
+    def person_panties_covered(self):
+        return self.outfit.panties_covered()
+
+    Person.panties_covered = person_panties_covered

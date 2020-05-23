@@ -104,7 +104,7 @@ init 1310 python:
 #     while True:
 #         $ people_list = get_sorted_people_list(known_people_in_the_game([mc]), "Modify Person", ["Back"])
 
-#         call screen main_choice_display([people_list])
+#         call screen enhanced_main_choice_display(build_menu_items([people_list]))
 #         $ person_choice = _return
 #         $ del people_list
 

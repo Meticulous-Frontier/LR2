@@ -24,8 +24,8 @@ label sister_phone_crisis_action_label:
     "While you're going about your day you get a text from [the_person.possessive_title]."
     if lowest_stat >= 100:
         #Both love and sluttiness are very high, she sends you super slutty selfies and says she can't wait till you come home, fuck her, and make her your girl.
-        $ rand_chance = renpy.random.randint(1,3) #Used to determine which variant we use to avoid spamming the player with the exact same texts.
-        if rand_chance == 1:
+        $ ran_num = renpy.random.randint(1,3) #Used to determine which variant we use to avoid spamming the player with the exact same texts.
+        if ran_num == 1:
             if mc.business.is_weekend():
                 $ the_person.apply_outfit(the_person.wardrobe.get_random_appropriate_underwear(lowest_stat, guarantee_output =  True))
                 $ the_person.draw_person(position = "missionary", emotion = "happy")
@@ -35,7 +35,7 @@ label sister_phone_crisis_action_label:
                 the_person.char "It's so hard not to talk about you at school. The other girls are gossiping and I just want to tell them how good it feels when you try and breed me..."
                 the_person.char "My pussy full of your warm cum, knowing that I can take care of you the way only [the_person.possessive_title] could."
                 the_person.char "I think I'm going to go touch myself in the bathroom. I hope you are having a great day too [the_person.mc_title]!"
-        elif rand_chance == 2:
+        elif ran_num == 2:
             $ the_person.strip_outfit(delay = 0)
             the_person.char "Hi [the_person.mc_title], I hope I'm not interrupting your busy work day. This is just a quick reminder..."
             $ the_person.draw_person(emotion = "happy")
@@ -49,8 +49,8 @@ label sister_phone_crisis_action_label:
 
     elif lowest_stat >= 80:
         #Both are high. Sends you slutty selfies and talks about how she wants to fuck you. Sends them from work, etc.
-        $ rand_chance = renpy.random.randint(1,2) #Used to determine which variant we use to avoid spamming the player with the exact same texts.
-        if rand_chance == 1:
+        $ ran_num = renpy.random.randint(1,2) #Used to determine which variant we use to avoid spamming the player with the exact same texts.
+        if ran_num == 1:
             if mc.business.is_weekend():
                 the_person.char "I'm here at home and wishing it was you could help me take these pictures..."
                 $ the_person.strip_outfit(delay = 0)
@@ -70,8 +70,8 @@ label sister_phone_crisis_action_label:
 
     elif lowest_stat >= 60:
         #Sends you nudes and talks about how she'll help you blow off steam later.
-        $ rand_chance = renpy.random.randint(1,4) #Used to determine which variant we use to avoid spamming the player with the exact same texts.
-        if rand_chance == 1:
+        $ ran_num = renpy.random.randint(1,4) #Used to determine which variant we use to avoid spamming the player with the exact same texts.
+        if ran_num == 1:
             if mc.business.is_weekend():
                 the_person.char "I was just about to get in the shower and I thought you might like a peek. Love you [the_person.mc_title]!"
                 $ the_person.strip_outfit_to_underwear(delay = 0)
@@ -85,12 +85,12 @@ label sister_phone_crisis_action_label:
                 "[the_person.possessive_title] sends you a picture of herself stripped down in the park."
                 the_person.char "I've got to get back to class. I hope nobody noticed me gone!"
 
-        elif rand_chance == 2:
+        elif ran_num == 2:
             the_person.char "I thought you might enjoy this ;)"
             $ the_person.strip_outfit(delay = 0)
             $ the_person.draw_person(emotion = "happy")
             "[the_person.possessive_title] sends you a picture of herself stripped naked in front of her bathroom mirror."
-        elif rand_chance == 3:
+        elif ran_num == 3:
             the_person.char "I've been trying on underwear all day. Would you like a peek?"
 
             "[the_person.possessive_title] doesn't wait for a reply and starts sending selfies."
@@ -116,8 +116,8 @@ label sister_phone_crisis_action_label:
 
     elif lowest_stat >= 40:
         #Sends you teasing pictures (ie. no shirt or something) and talks about how much she loves you.
-        $ rand_chance = renpy.random.randint(1,3) #Used to determine which variant we use to avoid spamming the player with the exact same texts.
-        if rand_chance == 1:
+        $ ran_num = renpy.random.randint(1,3) #Used to determine which variant we use to avoid spamming the player with the exact same texts.
+        if ran_num == 1:
             the_person.char "You're such a hard worker [the_person.mc_title]. Here's a little gift from the girl who loves you most in the world!"
             $ the_person.outfit.remove_random_upper(top_layer_first = True)
             $ the_person.draw_person(emotion = "happy")
@@ -126,7 +126,7 @@ label sister_phone_crisis_action_label:
             else:
                 "[the_person.possessive_title] sends you a sends you a selfie without her shirt on. It looks like it was taken in a bathroom of her school."
 
-        elif rand_chance == 2:
+        elif ran_num == 2:
             $ the_person.outfit.remove_random_upper(top_layer_first = True)
             if mc.business.is_weekend():
                 the_person.char "I wish you were here spending time with me. Maybe this will convince you [the_person.possessive_title] is a cool person to hang out with!"
@@ -157,26 +157,26 @@ label sister_phone_crisis_action_label:
 
     elif lowest_stat >= 20:
         #Sends you normal texts but talks about wanting to get away to talk to you instead
-        $ rand_chance = renpy.random.randint(1,5) #Used to determine which variant we use to avoid spamming the player with the exact same texts.
-        if rand_chance == 1:
+        $ ran_num = renpy.random.randint(1,5) #Used to determine which variant we use to avoid spamming the player with the exact same texts.
+        if ran_num == 1:
             if mc.business.is_weekend():
                 the_person.char "I hope I'm not interrupting, I just wanted to say hi and check in. I'm stuck here at home wishing I could spend more time with you."
             else:
                 the_person.char "I hope I'm not interrupting, I just wanted to say hi and check in. I'm stuck here at school wishing I could spend more time with you."
             the_person.char "Have a great day, see you later tonight. Love, [the_person.possessive_title]."
 
-        elif rand_chance == 2:
+        elif ran_num == 2:
             the_person.char "I hope you are having a great day [the_person.mc_title]! Imagining you out there working so hard makes me prouder than you can imagine!"
             the_person.char "I'm looking forward to seeing you at home tonight. Love, [the_person.possessive_title]."
 
-        elif rand_chance == 3:
+        elif ran_num == 3:
             the_person.char "I hope you aren't busy, I was thinking about you and just wanted to say hi!"
             $ the_person.draw_person(emotion = "happy")
             if mc.business.is_weekend():
                 "[the_person.possessive_title] sends you a selfie she took in the living room of your house."
             else:
                 "[the_person.possessive_title] sends you a selfie she took from the bathroom at school."
-        elif rand_chance == 4:
+        elif ran_num == 4:
             the_person.char "I'm always sending selfies to my friends, so I hope you like me sending them to you too!"
             $ the_person.draw_person(emotion = "happy")
             if mc.business.is_weekend():
@@ -195,12 +195,12 @@ label sister_phone_crisis_action_label:
 
     else:
         #Sends you normal sisterly texts.
-        $ rand_chance = renpy.random.randint(1,3) #Used to determine which variant we use to avoid spamming the player with the exact same texts.
-        if rand_chance == 1:
+        $ ran_num = renpy.random.randint(1,3) #Used to determine which variant we use to avoid spamming the player with the exact same texts.
+        if ran_num == 1:
             the_person.char "I hope I'm not interrupting your busy day [the_person.mc_title]. I just wanted to let you know that I'm proud of you and you're doing great work."
             the_person.char "Keep it up! See you at dinner ;)"
 
-        elif rand_chance == 2:
+        elif ran_num == 2:
             the_person.char "Remember that [the_person.possessive_title] loves you! Have a great day!"
 
         else:

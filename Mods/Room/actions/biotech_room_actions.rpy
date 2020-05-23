@@ -3,10 +3,11 @@ init -1 python:
 
 init 3 python:
     def biotech_clone_person_requirement():
-        if not time_of_day == 4:
-            return True
-        else:
+        if time_of_day == 4:
             return "Too late."
+        elif not dungeon.visible:
+            return "Dungeon required."
+        return True
 
     biotech_clone_person = Action("Clone a person {image=gui/heart/Time_Advance.png}", biotech_clone_person_requirement, "biotech_clone_person",
         menu_tooltip = "Create a near identical clone of the targeted person")
@@ -52,19 +53,17 @@ init 3 python:
 
     def create_clone(person, clone_name, clone_last_name, clone_age):
         if clone_name is None:
-            clone_name = person.name
+            clone_name = get_random_name()
         if clone_last_name is None:
-            clone_last_name = person.last_name
+            clone_last_name = get_random_last_name()
         if clone_age is None:
             clone_age = person.age
 
         clone = make_person(name = clone_name, last_name = clone_last_name, age = clone_age, body_type = person.body_type, face_style = person.face_style, tits = person.tits, height = person.height, hair_colour = person.hair_colour, hair_style = person.hair_style, skin = person.skin, eyes = person.eyes, job = None,
             personality = person.personality, custom_font = None, name_color = None, dial_color = None, starting_wardrobe = person.wardrobe, stat_array = None, skill_array = None, sex_array = None,
-            start_sluttiness = person.sluttiness, start_obedience = person.obedience, start_happiness = person.happiness, start_love = person.love, start_home = None, title = "Clone", possessive_title = "Your creation", mc_title = "Creator", relationship = "Single", kids = 0, force_random = True)
+            start_sluttiness = person.sluttiness, start_obedience = person.obedience, start_happiness = person.happiness, start_love = person.love, start_home = dungeon, title = "Clone", possessive_title = "Your creation", mc_title = "Creator", relationship = "Single", kids = 0, force_random = True)
 
-        clone.generate_home()
         clone.set_schedule([0,1,2,3,4], dungeon)
-
         clone.special_role.append(clone_role)
 
         dungeon.add_person(clone) #Create rooms for the clones to inhabit until a schedule is given (through being hired or player input)
@@ -115,13 +114,11 @@ label biotech_gene_modifications():
 
 
 label biotech_clone_person():
-    while True:
-        # only known people who are not unique character or clone herself (genetic degradation too high)
-        call screen main_choice_display([get_sorted_people_list([x for x in known_people_in_the_game([mc] + unique_character_list) if not clone_role in x.special_role], "Clone Person", ["Back"])])
-        if _return == "Back":
-            return # Where to go if you hit "Back".
-        else:
-            call cloning_process(_return) from _call_cloning_process
+    # only known people who are not unique character or clone herself (genetic degradation too high)
+    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list([x for x in known_people_in_the_game([mc] + unique_character_list) if not clone_role in x.special_role], "Clone Person", ["Back"])]))
+    if _return != "Back":
+        call cloning_process(_return) from _call_cloning_process
+    return
 
 label cloning_process(person = the_person): # default to the_person when not passed as parameter
     $ person.draw_person(emotion = "default")
@@ -139,21 +136,19 @@ label cloning_process(person = the_person): # default to the_person when not pas
                 $ clone_age = int(renpy.input("Age: ", person.age))
                 if clone_age < 18:
                     $ clone_age = 18
-            "Begin production: {image=gui/heart/Time_Advance.png}\n{size=22}Name: [clone_name] [clone_last_name], Age: [clone_age]{/size}":
+            "Begin production: {image=gui/heart/Time_Advance.png}\n{color=#ff0000}{size=18}Name: [clone_name] [clone_last_name], Age: [clone_age]{/size}{/color}":
                 $ create_clone(person, clone_name, clone_last_name, clone_age)
-                "The clone has been created and is now awaiting you in [dungeon.formalName]"
+                "The clone has been created and is now awaiting you in the [dungeon.formalName]"
                 call advance_time from _call_advance_time_cloning_process
                 return
             "Back":
                 return
 
 label biotech_modify_person():
-    while True:
-        call screen main_choice_display([get_sorted_people_list(known_people_in_the_game([mc]), "Modify Person", ["Back"])])
-        if _return == "Back":
-            return # Where to go if you hit "Back".
-        else:
-            call modification_process(_return) from _call_modification_process
+    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game([mc]), "Modify Person", ["Back"])]))
+    if _return != "Back":
+        call modification_process(_return) from _call_modification_process
+    return
 
 label modification_process(person = the_person): # when called without specific person use the_person variable
     $ person.draw_person(emotion = "default")

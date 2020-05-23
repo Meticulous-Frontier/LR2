@@ -24,7 +24,7 @@ label coffee_break_action_label:
         del person_two
         del person_three
         mc.location.show_background()
-    return "Advance Time"
+    return
 
 label coffee_break_chit_chat_label(person_one, person_two, person_three):
     python:
@@ -35,9 +35,13 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
         scene_manager.add_actor(person_three, emotion="default")
         scene_manager.draw_scene()
 
-    if person_one.sluttiness > 40 and person_three.sluttiness > 40:
+    if person_one.sluttiness > 70 and person_three.sluttiness > 70:
+        person_one.char "Last night, I was dreaming of sucking [person_one.mc_title]'s big cock."
+        person_two.char "I would mind a giving that meat stick some affection myself."
+        person_three.char "That would be perfect, when you two are done, I can tame and ride that monster."
+    elif person_one.sluttiness > 40 and person_three.sluttiness > 40:
         person_one.char "Don't you think [person_one.mc_title] has a nice bulge in his pants."
-        person_two.char "I bet the he is hung like a horse."
+        person_two.char "I bet that he is hung like a horse."
         person_three.char "I've always wanted to take some horse riding lessons."
     else:
         person_one.char "Don't you think [person_one.mc_title] is really good looking."
@@ -132,4 +136,4 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
     # clear scene
     $ mc.location.show_background()
     $ scene_manager.clear_scene()
-    return "Advance Time"
+    return

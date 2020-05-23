@@ -96,6 +96,14 @@ init 5 python:
             #renpy.say("", "Updated daughter at work crisis chance to: " + str(chance) + "%%")
         return
 
+    def update_hire_mother_crisis(chance):
+        found = find_in_list(lambda x: x[0] == hire_mother_work_crisis, crisis_list)
+        if found:
+            found[1] = chance
+            #renpy.say("", "Updated mother at work crisis chance to: " + str(chance) + "%%")
+        return
+
+
     def HR_director_initial_hire_requirement():
         if get_HR_director_tag("business_HR_meeting_last_day", 0) >= day:
             return False
@@ -275,6 +283,12 @@ init 5 python:
         for topic in topic_list:
             person.increase_opinion_score(topic)
         return
+
+    def calculate_backfire_odds():
+        serum_trait = find_in_list(lambda x: x == mind_control_agent, list_of_traits)
+        if serum_trait:
+            return int(serum_trait.base_side_effect_chance / serum_trait.mastery_level)
+        return 100
 
     HR_director_coffee_tier_1_action = Action("Add serum to coffee during meetings.", HR_director_coffee_tier_1_requirement, "HR_director_coffee_tier_1_label",
         menu_tooltip = "Costs $500 but makes meetings more impactful.")
@@ -548,7 +562,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         the_person.char "Here's my list. Who do you want me to call in?"
 
     # use new menu layout for selecting people
-    call screen main_choice_display([["Call in"] + HR_employee_list + ["Changed my mind"]], draw_hearts_for_people = False)
+    call screen enhanced_main_choice_display(build_menu_items([["Call in"] + HR_employee_list + ["Changed my mind"]], draw_hearts_for_people = False))
     $ person_choice = _return
 
     if person_choice == "Changed my mind":
@@ -602,7 +616,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     mc.name "That's right. As you know, we run a small business here, and I like to make sure all my employees enjoy their work here."
     mc.name "Recently, I've become concerned you may not like the work environment."
 
-    call screen main_choice_display([build_HR_interview_discussion_topic_menu(person_choice)])
+    call screen enhanced_main_choice_display(build_menu_items([build_HR_interview_discussion_topic_menu(person_choice)]))
     $ opinion_chat = _return
 
     if opinion_chat == "working":
@@ -791,6 +805,7 @@ label HR_director_review_discoveries_label(the_person):
                     "Approve":
                         mc.name "That's a good idea. Go ahead and implement that going forward."
                         $ update_hire_daughter_crisis(10)
+                        $ update_hire_mother_crisis(10)
                         $ set_HR_director_tag("business_HR_relative_recruitment", 2)
                     "Deny":
                         mc.name "I think for now I'd like to stick with more traditional recruiting methods."
@@ -920,6 +935,7 @@ label HR_director_change_relative_recruitment_label(the_person):
             "Take the Sign Down":
                 the_person.char "Ok, I'll take it down as soon as we are finished here. Is there anything else I can do for you?"
                 $ update_hire_daughter_crisis(0)
+                $ update_hire_mother_crisis(0)
                 $ set_HR_director_tag("business_HR_relative_recruitment", 1)
             "Leave the Sign Up":
                 the_person.char "Oh... sorry I thought you said you wanted to change it. Is there anything else I can do for you?"
@@ -930,6 +946,7 @@ label HR_director_change_relative_recruitment_label(the_person):
             "Put the Sign Up":
                 the_person.char "Ok, I'll put it up as soon as we are finished here. Is there anything else I can do for you?"
                 $ update_hire_daughter_crisis(10)
+                $ update_hire_mother_crisis(10)
                 $ set_HR_director_tag("business_HR_relative_recruitment", 2)
             "Leave the Sign Down":
                 the_person.char "Oh... sorry I thought you said you wanted to change it. Is there anything else I can do for you?"
@@ -1181,8 +1198,8 @@ label HR_director_mind_control_attempt_label(the_person):
 
     the_person.char "Okay... remember this act has a chance of backfiring, having all kinds of unknown side effects. Are you sure you want to continue?"
     "Note: The chance of the session backfiring is directly related to your mastery level of the Mind Control serum effect!"
-    $ backfire_odds = mind_control_agent.base_side_effect_chance / mind_control_agent.mastery_level
-    "Current odds of backfiring are: [backfire_odds]. Successful mind control will increase all current trainable opinions by 1 tier. Are you sure you want to attempt?"
+    $ ran_num = calculate_backfire_odds()
+    "Current odds of backfiring are: [ran_num]%%. Successful mind control will increase all current trainable opinions by 1 tier. Are you sure you want to attempt?"
     menu:
         "Yes":
             pass
@@ -1190,7 +1207,7 @@ label HR_director_mind_control_attempt_label(the_person):
             return
     the_person.char "Okay. Who do you want me to make the attempt on?"
 
-    call screen main_choice_display([["Call in"] + HR_employee_list], draw_hearts_for_people = False)
+    call screen enhanced_main_choice_display(build_menu_items([["Call in"] + HR_employee_list], draw_hearts_for_people = False))
     $ person_choice = _return
 
     $ del HR_employee_list
@@ -1247,8 +1264,7 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
     "..."
     "....."
     $ is_backfire = False
-    $ backfire_odds = mind_control_agent.base_side_effect_chance / mind_control_agent.mastery_level
-    if int(backfire_odds) > renpy.random.randint(0,100): #FAIL
+    if calculate_backfire_odds() > renpy.random.randint(0,100): #FAIL
         $ backfire_string = mind_control_backfire(the_person)
         "The mind control event has backfired!"
         #TODO add backfire string to event log
@@ -1274,7 +1290,7 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
     return
 
 label HR_director_appointment_action_label:
-    call screen main_choice_display([get_sorted_people_list(mc.business.hr_team, "Appoint", ["Back"])])
+    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(mc.business.hr_team, "Appoint", ["Back"])]))
     $ person_choice = _return
 
     if person_choice != "Back":

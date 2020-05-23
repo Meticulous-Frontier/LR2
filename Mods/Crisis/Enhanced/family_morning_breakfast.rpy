@@ -238,4 +238,4 @@ label family_morning_breakfast_enhanced_label():
         "When you're done you help [mom.possessive_title] put the dirty dishes away and get on with your day."
 
     $ scene_manager.clear_scene()
-    return
+    return "Advance Time"

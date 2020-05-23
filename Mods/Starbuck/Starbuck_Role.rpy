@@ -19,6 +19,7 @@ init 2 python:
     starbuck_sex_store_promo_four = Action("Ask if couples are coming in", starbuck_sex_store_promo_four_requirement, "starbuck_sex_store_promo_four_label")
     starbuck_sex_store_promo_five = Action("Ask if couples are coming in", starbuck_sex_store_promo_five_requirement, "starbuck_sex_store_promo_five_label")
     starbuck_spend_the_night = Action("Spend the night with her", starbuck_spend_the_night_requirement, "starbuck_spend_the_night_label")
+    starbuck_close_up = Action("Help close the store", starbuck_close_up_requirement, "starbuck_close_up_label")
 
     starbuck_wardrobe = wardrobe_from_xml("Starbuck_Wardrobe")
 
@@ -48,7 +49,7 @@ init 2 python:
         list_of_places.append(starbuck_home)
 
         # init starbuck role
-        starbuck_role = Role(role_name ="Sex Shop Owner", actions =[starbuck_vaginal_skillup, starbuck_anal_skillup, starbuck_oral_skillup, starbuck_foreplay_skillup, starbuck_sex_store_investment_one, starbuck_sex_store_investment_two, starbuck_sex_store_investment_three, starbuck_sex_store_promo_one, starbuck_sex_store_promo_two, starbuck_sex_store_promo_three, starbuck_sex_store_promo_four, starbuck_sex_store_promo_five, starbuck_spend_the_night])
+        starbuck_role = Role(role_name ="Sex Shop Owner", actions =[starbuck_vaginal_skillup, starbuck_anal_skillup, starbuck_oral_skillup, starbuck_foreplay_skillup, starbuck_sex_store_investment_one, starbuck_sex_store_investment_two, starbuck_sex_store_investment_three, starbuck_sex_store_promo_one, starbuck_sex_store_promo_two, starbuck_sex_store_promo_three, starbuck_sex_store_promo_four, starbuck_sex_store_promo_five, starbuck_spend_the_night, starbuck_close_up])
 
         #global starbuck_role
         global starbuck
@@ -57,7 +58,7 @@ init 2 python:
         starbuck_lipstick.colour = [.80, .26, .04, .90]
         starbuck_base.add_accessory(starbuck_lipstick)
         starbuck = Sex_Shop_Owner(name = "Cara", last_name = "Thrace", age = 32, body_type = "curvy_body", tits="E",  height = 0.95,  body_images = white_skin, expression_images = Expression("Starbuck\'s Expression Set", "white", "Face_4"), hair_colour= ["golden blonde", [0.895, 0.781, 0.656,1]], hair_style = messy_short_hair.get_copy(), pubes_colour = None, pubes_style = landing_strip_pubes, skin="white", \
-            eyes = ["green",[0.245, 0.734, 0.269, 1.0]], job = "Sex Shop Owner", wardrobe = starbuck_wardrobe, personality = starbuck_personality, stat_list = [3,4,3],  skill_list = [1,1,4,2,1], sluttiness = 42, obedience = -22, suggest = 0, sex_list = [3,3,4,4], love = 0, happiness = 119, \
+            eyes = ["green",[0.245, 0.734, 0.269, 1.0]], job = "Sex Shop Owner", wardrobe = starbuck_wardrobe, personality = starbuck_personality, stat_list = [3,4,3],  skill_list = [1,1,4,2,1], sluttiness = 27, obedience = -22, suggest = 0, sex_list = [3,3,4,4], love = 0, happiness = 119, \
             home = starbuck_home, work = None, font = get_random_font(), name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", special_role = [starbuck_role], relationship = "Single", base_outfit = starbuck_base)
 
         starbuck.set_schedule([1, 2, 3], sex_store)
@@ -219,6 +220,14 @@ init -1 python:
                 return "It isn't night"
             else:
                 return True
+
+    def starbuck_close_up_requirement(the_person):
+        if the_person.shop_progress_stage > 0:
+            if mc.location == sex_store:
+                if time_of_day == 3:
+                    return True
+                else:
+                    return "She closes in the evening"
 
 #SBS10
 label starbuck_vaginal_skillup_label(the_person):
@@ -640,13 +649,14 @@ label starbuck_sex_store_promo_one_label(the_person):
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.apply_outfit(SB_advert_two_outfit)
             $ the_person.draw_person()
-        "the pink one piece":
+        "The pink one piece":
             "[the_person.possessive_title] starts to strip down."
             $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.apply_outfit(SB_advert_three_outfit)
             $ the_person.draw_person()
     "Now dressed in her outfit, [the_person.possessive_title] hands you her phone. She grabs the first item, the bottle of lubricant."
+    $ mc.change_arousal(10)
     mc.name "Wow... you look great..."
     "You murmur. She smiles at your compliment."
     mc.name "Okay, why don't you just stand and put your hand on your hip."
@@ -670,13 +680,14 @@ label starbuck_sex_store_promo_one_label(the_person):
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.apply_outfit(SB_advert_two_outfit)
             $ the_person.draw_person()
-        "the pink one piece":
+        "The pink one piece":
             "[the_person.possessive_title] starts to strip down."
             $ the_person.strip_outfit(position = "stand4", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.apply_outfit(SB_advert_three_outfit)
             $ the_person.draw_person()
     "Now dressed in her outfit, [the_person.possessive_title] looks to you for direction."
+    $ mc.change_arousal(15)
     mc.name "[the_person.title]. You look incredible..."
     "She clears her throat to get your attention."
     mc.name "Right! Why don't you turn around and peek back at me and hold this to the side, right next to your hip."
@@ -702,7 +713,7 @@ label starbuck_sex_store_promo_one_label(the_person):
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.apply_outfit(SB_advert_two_outfit)
             $ the_person.draw_person()
-        "the pink one piece":
+        "The pink one piece":
             "[the_person.possessive_title] starts to strip down."
             $ the_person.strip_outfit(position = "stand2", exclude_feet = False)
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
@@ -716,6 +727,7 @@ label starbuck_sex_store_promo_one_label(the_person):
     "[the_person.possessive_title] gets down on her knees. She looks at the dildo longingly. You take multiple pictures of her."
     $ the_person.change_arousal(45)
     the_person.char "Mmm... it looks so tasty..."
+    $ mc.change_arousal(15)
     "[the_person.possessive_title] opens her mouth, and slowly starting to run her tongue along the dildo. You see one of her hands slowly drift down between her legs and she begins to touch herself."
     "She has her eyes closed, so you snap a few more pictures of her sucking on the dildo. She suddenly realizes what she is doing and pulls off."
     the_person.char "Right! So, I thought maybe a picture like that... I mean maybe we could include a picture like that free with every purchase... or something?"
@@ -743,7 +755,19 @@ label starbuck_sex_store_promo_one_label(the_person):
             "You are still recovering from your orgasm. You take a look at her phone and start looking at the pictures you got."
             the_person.char "If this advertisement works, we'll have to make more right?"
             mc.name "Definitely. Alright, I'll go ahead and get some advertisements done, and we'll see if we can't get better foot traffic in here."
-            "You say goodbye to [the_person.possessive_title] and head out. With pictures like these, you are sure the business here will increase."
+            if perk_system.has_item_perk("Dildo"):
+                pass
+            else:
+                "[the_person.possessive_title] looks at the dildo she was modeling for a few minutes ago."
+                the_person.char "Hey... I probably shouldn't sell this in the store anymore. Do you want it?"
+                "You consider... what would you need a dildo for?"
+                the_person.char "I know you may not use it on yourself, but, you never know when a toy like this can spice up an encounter."
+                mc.name "That's true. Sure, I'm sure I could find a use for it."
+                $ dildo_unlock()
+                "You are now the proud owner of a dildo."
+                the_person.char "Maybe even use it on me sometime..."
+            "You say goodbye to [the_person.possessive_title] and head out. You look through the pictures again."
+            "With pictures like these, you are sure the business here will increase."
         "Give her some privacy":
             "You decide to give her some time to yourself. You use her phone to forward all the pictures you took to your account."
             mc.name "Okay, those should be good. I'll go ahead and get some advertisements done, and we'll see if we can't get better traffic in here."
@@ -811,6 +835,7 @@ label starbuck_sex_store_promo_two_label(the_person):
     $ the_person.draw_person()
     $ the_person.wardrobe.add_outfit(SB_advert_four_outfit)
     $ del SB_advert_four_outfit
+    $ mc.change_arousal(10)
     "You check out [the_person.possessive_title] in her outfit. Damn she looks hot!"
     the_person.char "Okay, so here's what I'm thinking..."
     "[the_person.possessive_title] starts going over the details of how she wants to do it. You take mental notes. Soon you are ready to begin."
@@ -841,6 +866,7 @@ label starbuck_sex_store_promo_two_label(the_person):
     "She looks directly at you and cries out."
     the_person.char "YES! OH god, fuck me... YES! FUCK ME!!!"
     $ the_person.change_arousal(25)
+    $ mc.change_arousal(25)
     $ the_person.draw_person(position = "missionary", emotion = "orgasm")
     "[the_person.possessive_title]'s body begins to spasm as she orgasms. She shoves the toy in deep inside her. Her juices are trickling down beneath her out of her cunt."
     "Her body relaxes after she finishes. She slowly pulls the toy from her sopping wet cunt."
@@ -901,7 +927,6 @@ label starbuck_sex_store_promo_two_label(the_person):
             the_person.char "Thanks for the help [the_person.mc_title], if you find yourself needing anything later... just ask okay?"
             $ the_person.change_stats(love = -5, happiness = -5, slut_core = 5, slut_temp = 5)
 
-    $ the_person.reset_arousal()
     $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
     $ mc.location.show_background()
     $ renpy.scene("Active")
@@ -1270,6 +1295,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     the_person.char "Alright. Before we get started, let me get ready. You should probably get naked too!"
     "You start to strip down, but watch intently while [the_person.possessive_title] strips down along side you."
     $ the_person.strip_outfit(position = "stand3")
+    $ mc.change_arousal(10)
     "Now that she is naked, [the_person.possessive_title] grabs some of her anal lube of a shelf. You raise an eyebrow as she squirts some onto her hand."
     mc.name "Anal lube? Wow... going all out are we?"
     "[the_person.possessive_title] chuckles as she reaches back and starts to spread the lube around her backside."
@@ -1289,6 +1315,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     the_person.char "Today, he is going to show us how it could be used for a relaxed sodomy session. I'll be able to relax here in the swing, while my ass is at just the right height for him to fuck it..."
     "As you get close behind her, you put your hands on her hips. She reaches back and grasps your cock, and begins to guide it toward her bottom."
     "When you cock begins poking up against her puckered hole, you can feel a bit of resistance. With your hands firmly on her hips, you pull her ass towards you."
+    $ mc.change_arousal(10)
     "[the_person.possessive_title] forces herself to relax her sphincter, and you penetrate her with wonderful pop. With more gentle pressure you are soon deep inside her bowel."
     the_person.char "Mmm... as you can see... I'm able to completely relax with my ass off the back of the swing, so I can just sit and enjoy the sensations."
     "You give her a modest thrust. The swing bounces forward for a second, but gravity soon causes her ass to pendulum back and smack against your hip."
@@ -1390,6 +1417,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         "*SMACK*"
         "You reach up and give her ass a firm spank. She gives a sigh."
         the_person.char "Ah! Here it is..."
+        $ mc.change_arousal(10)
         $ the_person.draw_person(position = "stand4")
         "She stands up and you see that she is holding a bottle of anal lubricant. You feel your dick twitch when you realize what she has in mind."
         "She squirts some of it out onto your cock and works her hand up and down you a few times. Then she squirts a bit more into her hand and then reaches back to her ass."
@@ -1397,6 +1425,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         $ the_person.draw_person(position = "cowgirl")
         "[the_person.possessive_title] climbs up on top of you. She takes you in her hand and points it towards her back passage."
         the_person.char "Oh god, [the_person.mc_title], its so big! Okay, here we go..."
+        $ mc.change_arousal(10)
         "[the_person.possessive_title] goes slow, but steadily slides down, impaling her sphincter on your throbbing erection. She bottoms out and moans loudly."
         #Fuck her#
         call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_SBS120
@@ -1407,7 +1436,6 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         else:
             the_person.char "Mmm, that was so good, thank you [the_person.mc_title]..."
             "[the_person.possessive_title] rolls off you and lays down on the bed next to you."
-        $ the_person.reset_arousal()
         "[the_person.title] doesn't bother to get up, she just cuddles up next to you."
         the_person.char "Thanks [the_person.mc_title], I needed that so bad."
         "She stretches her arms out and yawns."
@@ -1431,6 +1459,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
             "Your mind hazy with lust, you begin to pull [the_person.title]'s clothes off."
             $ the_person.strip_outfit(position = "missionary")
             "Now naked, you stop for a second and admire [the_person.title]'s incredible body."
+        $ mc.change_arousal(10)
         "Before you go any further, you decide to make sure that [the_person.title] is wet and ready for you. You pull her over so her legs are hanging off the edge of the bed and get down on your knees in front of her."
         "She spread's her legs instinctively as you begin to kiss along her knee. You trail wet kisses along the inside of her thigh, working your way further up."
         "When you reach her cunt, you waste no time, pushing your tongue between her lips and running it up and down her delicious slit."
@@ -1438,6 +1467,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         $ the_person.change_arousal(10)
         "You reach forward with your hands and grasp her tits. You roll her nipples in your fingers for a second causing her moans to grow louder."
         "You lick circles around her clit, then close your mouth over and gently suck on it."
+        $ mc.change_arousal(10)
         $ the_person.change_arousal(10)
         the_person.char "Oh! Baby I'm ready, come fuck me!"
         call fuck_person(the_person) from _call_fuck_person_SBS121
@@ -1473,12 +1503,15 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
                 the_person.char "Of course! I was hoping you would join me..."
                 "You strip down and enter the shower. [the_person.name] gives you a turn under the hot running water."
                 the_person.char "Great timing... can you wash my back?"
+                $ mc.change_arousal(10)
                 "She hands you her loofah and you begin to work circles up and down her back. The soap bubbles make her already smooth skin slick and soft."
                 "When her back is all soapy, you reach over her shoulder and hand the loofah back to her. You put your other hand against her hip and slowly pull her back against you."
                 "You now wrap your arms around her from behind, and she melts back into you. Your hands roam her body but quickly begin to grope her generous bosom, while she wiggles her ass back against you."
+                $ mc.change_arousal(10)
                 the_person.char "Mmm, I'm glad we're thinking the same thing. I'm really hungry for you tonight, [the_person.mc_title]!"
                 "You whisper into her ear."
                 mc.name "Is that so? I don't believe you... Why don't you show me."
+                $ mc.change_arousal(10)
                 if the_person.obedience > 110:  #She gets on her knees#
                     "[the_person.title] chuckles."
                     the_person.char "Mmm, for you, [the_person.mc_title]? I'll do just about anything..."
@@ -1513,6 +1546,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         "She gets to her bed and immediately opens her nightstand and begins looking for something."
         "She pulls out the strap on dildo you helped her demonstrate for her advertisement and some anal lube and turns to you."
         $ the_person.draw_person(position = "stand4")
+        $ mc.change_arousal(20)
         the_person.char "How about we give this another run? Last time we used it, the results were very good..."
         menu:
             "Agree":
@@ -1529,10 +1563,12 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
                 the_person.char "Lube me up, [the_person.mc_title]. Don't be stingy!"
                 "You squirt a generous amount of lube onto your fingers. You run your fingers along her ass crack, coating it in a glaze of lube."
                 "You take a finger and begin to push it up against her sphincter. You can feel her physically force herself to relax and then your finger eases right in."
+                $ mc.change_arousal(10)
                 the_person.char "Mmm... that feels good already. I think I'm getting better at this!"
                 "You apply some more lube, then slowly push two fingers into her smooth back passage. You feel like she is ready for you."
                 "You get into position behind her. She arches her back and presents her ass."
                 "[the_person.possessive_title]'s pussy is already dripping with arousal. You line yourself up with her ass, while she reaches down and lines the dildo up with her pussy."
+                $ mc.change_arousal(10)
                 "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
                 the_person.char "Oh my god! I'm so full... Its so good [the_person.mc_title]! Fuck me like you paid for this! Like I'm just a whore!"
                 call fuck_person(the_person, start_position = SB_doggy_anal_dildo_dp, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBS124
@@ -1562,10 +1598,12 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
     if the_roll < morning_fun_chance:        #Roll for morning sex is successful
         "[the_person.title]'s naked body against yours makes for a very pleasant night of sleep. A couple times throughout the night you stirred for a bit and gave her a grope, but quickly fell back asleep."
         "Pleasant sensations and the feeling of weight around your torso slowly wakes you up."
+        $ mc.change_arousal(10)
         $ the_person.change_arousal(30)
         $ the_person.draw_person(position = "cowgirl")
         "When you awaken, you discover that [the_person.title] is on top of you, with your morning wood already hilted inside her pussy."
         "You moan in appreciation at the wonderful wake up call."
+        $ mc.change_arousal(20)
         the_person.char "Mmm... Good morning [the_person.mc_title]... When I woke up this morning you were poking me pretty good... I figured you wouldn't mind if I took it for a quick ride."
         "You murmur your acceptance. Her mesmerizing tits are bouncing up and down right in front of you. You take them both in your palms and give them a good squeeze."
         call fuck_person(the_person, start_position = cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_SBS125
@@ -1581,10 +1619,199 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         "You chat for a few minutes, enjoying the warmth of her bed, until she gets up."
         $ the_person.draw_person(position = "stand3")
         the_person.char "I'm gonna go hop in the shower. Feel free to let yourself out! Thanks for spending the night [the_person.mc_title]!"
-        "[the_person.title]heads to the bathroom. You grab your stuff and head out."
+        "[the_person.title] heads to the bathroom. You grab your stuff and head out."
     $ the_person.apply_outfit(the_person.wardrobe.decide_on_outfit(40))
     $ renpy.scene("Active")
     return "Advance Time"
+
+#SBS130
+label starbuck_close_up_label(the_person): #You offer to help her close up. Mainly a chance to give her serum, also can screw around at higher sluttiness settings.
+    mc.name "Can I help you close up tonight?"
+    the_person.char "Oh! That would be great! I really appreciate it [the_person.mc_title]. I suppose it is about closing time..."
+    "You continue to chat with her for a while, until it reaches the regular closing time. [the_person.title] locks the front door."
+    the_person.char "I noticed earlier we had some pretty good lube sales. I think I'm going to bring out some boxes from the back. Want to help me restock?"
+    mc.name "Sure! I can do that. Got anything to drink around here?"
+    the_person.char "I have a mini fridge behind the counter. I have beer, some bottled water, maybe a soda or two in there."
+    mc.name "Nice. Want anything?"
+    the_person.char "A beer sounds great!"
+    $ the_person.draw_person(position = "walking_away")
+    "You grab two beers from the fridge and pop the caps on both with a bottle open magnet you find stuck to the front of the fridge."
+    "[the_person.possessive_title] is in the back, you could probably drop some serum into her beer if you want to."
+    menu:
+        "Add some serum to her beer." if mc.inventory.get_any_serum_count() > 0:
+            call give_serum(the_person) from _call_give_serum_SBS130
+            if _return:
+                "You double check to make sure she is still in the back, then add the serum to [the_person.title]'s food."
+            else:
+                "You think about adding a dose of serum to [the_person.title]'s beer, but decide against it."
+
+        "Add some serum to her beer.\n{color=#ff0000}{size=18}Requires: Serum{/size}{/color} (disabled)" if mc.inventory.get_any_serum_count() == 0:
+            pass
+
+        "Leave her beer alone.":
+            "You take a long sip of your drink, waiting until [the_person.title] returns."
+    $ the_person.draw_person(position = "stand4")
+    "[the_person.possessive_title] returns with several boxes and sets them down, the grabs the beer and takes a sip."
+    "You help her with the boxes and start to unpack as you both enjoy your drinks and each other's company."
+    "When the boxes are unpacked, you help her take the empty ones to the back and put them in the recycling."
+    the_person.char "Thanks for your help."
+    if the_person.sluttiness > 40 and the_person.energy > 50:
+        the_person.char "Is there something... ANYTHING I can do to return the favor?"
+        "She bats her eyelashes as she looks at you. She licks her lips as you notice she steals a glance between your legs..."
+    else:
+        mc.name "It's no problem. Take care!"
+        "You say goodbye to [the_person.title] and head out."
+        return
+    menu: #This menu is just to weed out if we don't want to have fun
+        "Have some fun with her.":
+            pass
+        "Some other time.":
+            mc.name "Honestly, I'm pretty tired out. Can I have a raincheck?"
+            "You can tell she is a little disappointed, but soon she is stretching and yawning."
+            the_person.char "You know what?... I'm pretty tired too. Good night [the_person.mc_title]."
+            "She walks you to the door of the business and you walk out together, before going your separate ways."
+            return
+    mc.name "I can definitely think of something."
+    the_person.char "Oh yeah? I hope its the same thing I'm thinking..."
+    menu:
+        "Just mess around some.":
+            "You grab [the_person.possessive_title]. She wraps her arms around you."
+            $ mc.change_arousal(20)
+            call fuck_person(the_person, skip_intro = False, private = True) from _call_fuck_person_SBS131
+            the_person.char "So... you'll help me close up every night, right?"
+            mc.name "I'm sorry, I can't promise something like that, my business keeps me busy."
+            the_person.char "Damn. A girl can dream though."
+            $ the_person.change_love(amount = 3, max_modified_to = 30)
+        "Dress up for you." if the_person.shop_investment_rate >= 2.0:
+            call starbuck_replay_dressup_label(the_person) from _call_starbuck_replay_SBS132
+        # "Play with a dildo for you." if the_person.shop_investment_rate >= 3.0:   #TODO these options.
+        #     pass
+        # "Try more edible underwear." if the_person.shop_investment_rate >= 4.0:
+        #     pass
+        # "Use whip and strap on." if the_person.shop_investment_rate >= 5.0:
+        #     pass
+        # "Anal on the swingset" if the_person.shop_investment_rate >= 6.0:
+    "[the_person.title] lets out a big yawn."
+    the_person.char "You really wore me out! Good night [the_person.mc_title]."
+    "She walks you to the door of the business and you walk out together, before going your separate ways."
+    return
+
+#SBS140
+label starbuck_replay_dressup_label(the_person):
+    mc.name "Remember that one time, you got dressed up in a bunch of different lingerie and I took pictures for that ad?"
+    the_person.char "Of course! The last picture I was sucking on a dildo and it got me all hot and bothered and..."
+    mc.name "Right... right... well, have any new lingerie sets that need modeled? Maybe before we head out I could umm, you know, take some pictures for another ad..."
+    the_person.char "Oh! I supposed I would be up for that. I don't really have any new sets though, but I do have a pretty wide selection!"
+    the_person.char "You know what would be fun? Why don't you go pick something out? I'll put it on and you can snap some pics."
+    "Oh god, she wants you to dress her up... in lingerie."
+    the_person.char "You're a guy, so I'm sure you probably have a better idea of what would be good for a new advertisement anyway, right?"
+    mc.name "Yes. I absolutely am the best person I know of to dress you up in lingerie."
+    "She laughs at your reply."
+    the_person.char "I guess when you put it that way. Anyway, go pick out something!"
+    "You head out into the store and look at the lingerie. You try to come up with a racy outfit to put [the_person.possessive_title] in."
+
+    call screen outfit_creator(Outfit("New Outfit"))
+    $ the_person.draw_person()
+    if _return:
+        $ created_outfit = _return
+        "You pull out a few pieces of clothing and take them to [the_person.possessive_title]."
+        "She looks at the outfit you've picked out for her and seems to think for a second."
+        if created_outfit.slut_requirement <= 40: #She likes it enough to try it on.
+            the_person.char "Are you sure? This seems kinda tame..."
+            mc.name "I know. I just want to see what it looks like on you."
+        elif created_outfit.slut_requirement >= 80:
+            the_person.char "Wow! I can honestly say I was not expecting you to go all in like this!"
+            mc.name "If you don't feel comfortable..."
+            "She interrupts you."
+            the_person.char "Ha! No way, I can't wait to see you start drooling after I get this on..."
+        else:
+            the_person.char "Ah, this look great! I bet this generates a lot of interest..."
+            "She gives you a quick wink."
+            the_person.char "And I bet if we put it on an ad it would get some interest too!"
+        "[the_person.possessive_title] starts to get undressed in front of you."
+        $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+        while strip_choice is not None:
+            $ the_person.draw_animated_removal(strip_choice)
+            "You watch as [the_person.possessive_title] takes off her [strip_choice.name]."
+            $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+
+        "Once she's stripped out of her clothing, [the_person.possessive_title] puts on the outfit you've made for her."
+        $ the_person.apply_outfit(created_outfit, update_taboo = True)
+        $ the_person.draw_person()
+
+        $ mc.change_arousal(10)
+        the_person.char "Mmm, I like it! Alright, lets take some pictures!"
+        $ the_person.wardrobe.add_outfit(created_outfit)
+        "[the_person.title] hands you her phone with the photo app already up."
+        $ the_person.draw_person(position = "back_peek")
+        "In the first photo, you get some great shots of her backside. She sways her ass slowly, being careful not to go too fast in a way that would make the photos blurry."
+        $ the_person.draw_person(position = "against_wall")
+        "Next, she props up her leg on a stool and adopts a really sultry pose, with her legs open. She runs her hands down her sides and then back up between her legs..."
+        $ the_person.change_arousal(10)
+        $ the_person.draw_person(position = "cowgirl")
+        "Finally, she gets down on her knees and slowly starts crawling over to you in a sultry display of her femininity."
+        $ the_person.change_arousal(10)
+        $ mc.change_arousal(10)
+        mc.name "Jesus girl, you are stunning..."
+        the_person.char "Showing off for you is getting me all worked up again. Will you ummm... lay down for me?"
+        "Thank god, things are about to get steamy."
+        mc.name "For you? Anything."
+        "You lay down on your back."
+        if not the_person.outfit.vagina_available():
+            "As you lay down, you notice [the_person.possessive_title] is stripping her bottoms off."
+            $the_person.strip_outfit(top_layer_first = True, exclude_upper = True, exclude_lower = False, exclude_feet = True)
+        $ the_person.draw_person(position = "stand4")
+        "From the floor, you look up at the stunning sex shop owner. You notice a hint of moisture starting to form on her labia."
+        the_person.char "When we made the first ad, I sucked you off. But this time, I want a little action too..."
+        "[the_person.title] gets down beside you, then swings her leg over your body, her pussy right in your face. She adjusts her body into the classic sixty nine positions."
+        $ the_person.draw_person(position = "doggy")
+        mc.name "I suppose that is only fair."
+        "You put your hands on her heavenly ass cheeks and get her to adjust her body a bit until she is in the perfect position for you to dive in."
+        "You push your nose into her slit and begin to lick and suck on her clit. She exhales forcefully and you feel her hot breath on your dick."
+        the_person.char "Mmmm, that's it. Oh god you are so hard, I have to taste it..."
+        $ the_person.change_arousal(10)
+        $ mc.change_arousal(10)
+        "You feel her tongue circling around the tip. She gives the head a couple of quick kisses and then parts her lips."
+        "Her lips slowly descend your length, entering her blissfully hot mouth. You refrain from bucking your hips to keep from gagging her."
+        call fuck_person(the_person, start_position = SB_sixty_nine, start_object = mc.location.get_object_with_name("floor"), skip_intro = True) from _call_fuck_person_SBS141
+        "When you finish, you slowly get up off the floor. You help [the_person.title] up as well."
+        $ the_person.draw_person()
+        the_person.char "So... you'll help me close up every night, right?"
+        mc.name "I'm sorry, I can't promise something like that, my business keeps me busy."
+        the_person.char "Damn. A girl can dream though."
+        $ the_person.change_love(amount = 3, max_modified_to = 40)
+
+    return
+
+#SBS150
+label starbuck_replay_dildo_demo_label(the_person):
+
+
+
+
+    return
+
+#SBS160
+label starbuck_replay_edible_undies_label(the_person):
+
+
+
+
+    return
+
+label starbuck_replay_anal_DP_label(the_person):
+
+
+
+    return
+
+label starbuck_replay_anal_on_swing_label(the_person):
+
+
+
+
+    return
+
 
 init 2 python:
     def starbuck_intro_choose_title(person):
@@ -1724,6 +1951,301 @@ label starbuck_anal_fetish_checkup(alert = False):
     $ the_person.change_arousal(20)
     "You decide that is enough for now and go back to what you were doing."
     return
+
+
+
+label starbuck_greetings(the_person):
+    call starbuck_intro from SB_starbuck_intro_1
+    return
+
+label starbuck_clothing_accept(the_person):
+    if the_person.obedience > 140:
+        the_person.char "Oh wow, I bet this will look great on me!"
+    else:
+        the_person.char "You think this would look good on me? I'll keep that in mind!"
+    return
+
+label starbuck_clothing_reject(the_person):
+    if the_person.obedience > 140:
+        the_person.char "Oh, I wish I could wear this [the_person.mc_title], but even at a sex shop you can go too far..."
+    else:
+        if the_person.sluttiness > 60:
+            the_person.char "Oh my god [the_person.mc_title]... It's hot, but I can't wear this here!"
+        else:
+            the_person.char "Oh my god [the_person.mc_title], an outfit like that should only be worn in private!"
+    return
+
+label starbuck_clothing_review(the_person):
+    if the_person.obedience > 130:
+        the_person.char "Sorry [the_person.mc_title], I should really get myself dressed properly again! Just a second!"
+    else:
+        if the_person.sluttiness > 50:
+            the_person.char "I love the way you're looking at me, but I should wear something else before another customer comes in."
+        else:
+            the_person.char "Oh my god, I shouldn't be dressed like this at the shop! Just give me a moment."
+    return
+
+label starbuck_strip_reject(the_person):
+    if the_person.obedience > 130:
+        the_person.char "I wish I could let you, but I don't think I should be taking that off yet."
+    elif the_person.obedience < 70:
+        the_person.char "Sorry [the_person.mc_title], but I love being a tease. I'm going to leave that on for a bit."
+    else:
+        the_person.char "I can't take that off right now [the_person.mc_title]!"
+    return
+
+label starbuck_sex_accept(the_person):
+    if the_person.sluttiness > 70:
+        if the_person.obedience < 100:
+            "[the_person.possessive_title] gives you a wink."
+            the_person.char "I was thinking the same thing!"
+        else:
+            the_person.char "You want to do that with me, [the_person.mc_title]? You're lucky I'm just as perverted."
+    else:
+        the_person.char "Hmmm, sounds good! Let's do it!"
+    return
+
+label starbuck_sex_obedience_accept(the_person):
+    if the_person.sluttiness > 70:
+        the_person.char "Oh god [the_person.mc_title], I don't think I could do this for anyone else..."
+        the_person.char "But I just can't say no to you."
+    else:
+        if the_person.obedience > 130:
+            the_person.char "If that's what my best customer needs me to do..."
+        else:
+            the_person.char "I'm not sure I should be letting a customer... sample the goods this way..."
+            "She seems conflicted for a second."
+            the_person.char "Okay, just promise you won't tell anyone!"
+    return
+
+label starbuck_sex_gentle_reject(the_person):
+    if the_person.sluttiness > 50:
+        the_person.char "Not yet, I need to get warmed up first. Let's start out with something a little more tame."
+    else:
+        the_person.char "I... we can't do that [the_person.mc_title]. You're one of my customers, after all!"
+    return
+
+label starbuck_sex_angry_reject(the_person):
+    if the_person.sluttiness < 20:
+        the_person.char "What the fuck! Do you think I'm just some whore who puts out for anyone who asks?"
+        the_person.char "Ugh! Get away from me, I don't even want to talk to you after that."
+    else:
+        the_person.char "What the fuck do you think you're doing, even I won't do that!"
+        the_person.char "Get the fuck away from me, I don't even want to talk to you after that!"
+    return
+
+label starbuck_seduction_response(the_person):
+    if the_person.obedience > 130:
+        if the_person.sluttiness > 50:
+            the_person.char "What's up [the_person.mc_title]? Do you need any help testing the merchandise?"
+        else:
+            the_person.char "What're you thinking about? You look like you're up to something."
+    else:
+        if the_person.sluttiness > 50:
+            the_person.char "Do you have something in mind? I wouldn't mind fooling around some..."
+        elif the_person.sluttiness > 10:
+            the_person.char "Oh, do you see something you like?"
+        else:
+            the_person.char "I... what do you mean [the_person.mc_title]?"
+    return
+
+label starbuck_seduction_accept_crowded(the_person):
+    if the_person.sluttiness < 20:
+        "[the_person.possessive_title] grabs your arm and smiles."
+        the_person.char "That sounds great. Let's head to the backroom and get started... let's at least find someplace quiet."
+
+    elif the_person.sluttiness < 50:
+        the_person.char "I... I mean, we shouldn't do anything like that without at least going to the back room... right?"
+
+    else:
+        the_person.char "Oh god, that sounds so hot. Let's get to it!"
+    return
+
+label starbuck_seduction_accept_alone(the_person):
+    if the_person.sluttiness < 20:
+        the_person.char "Well, there's nobody around to stop us..."
+    elif the_person.sluttiness < 50:
+        the_person.char "Mmm, that's a fun idea. Come on, let's get to it!"
+    else:
+        the_person.char "Oh [the_person.mc_title], I can't wait!"
+    return
+
+label starbuck_seduction_refuse(the_person):
+    if the_person.sluttiness < 20:
+        "[the_person.possessive_title] blushes and looks away from you awkwardly."
+        the_person.char "I, uh... Sorry [the_person.mc_title], I just don't feel that way about you."
+
+    elif the_person.sluttiness < 50:
+        the_person.char "Oh, it's tempting, but I'm just not feeling like it right now. Maybe some other time?"
+        "[the_person.possessive_title] smiles and gives you a wink."
+
+    else:
+        "[the_person.possessive_title] looks at you and frowns"
+        the_person.char "It's so, so tempting, but I've had a rough day and just don't feel up to it right now [the_person.mc_title]. Hold onto that thought though."
+    return
+
+label starbuck_flirt_response(the_person):
+    if the_person.obedience > 130:
+        if the_person.sluttiness > 50:
+            the_person.char "I hope you are ready to back that flirting up with some action!"
+        else:
+            the_person.char "Thank you for the compliment, sir."
+    else:
+        if the_person.sluttiness > 50:
+            the_person.char "Mmm, I like what I'm seeing too."
+            "[the_person.possessive_title] smiles at you and spins around, giving you a full look at her body."
+        else:
+            the_person.char "Hey, maybe if you buy something first."
+            "[the_person.possessive_title] gives you a wink and smiles."
+    return
+
+label starbuck_cum_face(the_person):
+    if the_person.obedience > 130:
+        if the_person.sluttiness > 60:
+            the_person.char "Mmm, that feels great. I love it when you blow a big load all over my face."
+            "[the_person.possessive_title] licks her lips, cleaning up a few drops of your semen that had run down her face."
+        else:
+            the_person.char "Mmm, thanks! I hope you enjoyed it as much as I did!"
+            "[the_person.possessive_title] runs a finger along her cheek, wiping away some of your semen."
+    else:
+        if the_person.sluttiness > 80:
+            the_person.char "Ah... I love a nice, hot load on my face. Don't you think I look hot like this?"
+            "[the_person.char] runs a finger through a puddle of your cum and then licks it clean, winking at you while she does."
+        else:
+            the_person.char "Fuck me, you really pumped it out, didn't you?"
+            "[the_person.possessive_title] runs a finger along her cheek, wiping away some of your semen."
+    return
+
+label starbuck_cum_mouth(the_person):
+    if the_person.obedience > 130:
+        if the_person.sluttiness > 60:
+            the_person.char "Oh god, you taste so good. Thank you for the treat [the_person.mc_title]."
+        else:
+            the_person.char "Mmm, thank you sir. Feel free to browse while I clean myself up!"
+    else:
+        if the_person.sluttiness > 80:
+            the_person.char "Mmm, your cum tastes so great [the_person.mc_title], are you sure there isn't any more of it for me?"
+            "[the_person.possessive_title] licks her lips and sighs happily."
+        else:
+            "[the_person.possessive_title] licks her lips and smiles at you."
+            the_person.char "Mmm, that was nice."
+    return
+
+label starbuck_sex_strip(the_person):
+    if the_person.sluttiness < 20:
+        if the_person.arousal < 50:
+            the_person.char "One sec, I want to take something off."
+        else:
+            the_person.char "Ah, I'm wearing way too much right now. One sec!"
+
+    elif the_person.sluttiness < 60:
+        if the_person.arousal < 50:
+            the_person.char "Why do I bother wearing all this?"
+        else:
+            the_person.char "Wait, I want to get a little more naked for you."
+
+    else:
+        if the_person.arousal < 50:
+            the_person.char "Give me a second, I'm going to strip something off just. For. You."
+        else:
+            the_person.char "Ugh let me get this off. I want to feel your skin pressed up against me!"
+    return
+
+label starbuck_talk_busy(the_person):
+    if the_person.obedience > 120:
+        the_person.char "I wish I could talk more, but I have other customers. Can we talk later [the_person.mc_title]?"
+    else:
+        the_person.char "Hey, I'd love to chat but I have a million things to get done around the store right now. Maybe later?"
+    return
+
+label starbuck_sex_watch(the_person, the_sex_person, the_position):
+    if the_person.sluttiness < the_position.slut_requirement - 20:
+        $ the_person.draw_person(emotion = "angry")
+        the_person.char "Ugh, jesus you two. Get a room or something, nobody wants to see this."
+        $ the_person.change_stats(happiness = -1, obedience = -2)
+        "[the_person.possessive_title] looks away while you and [the_sex_person.name] [the_position.verb]."
+
+    elif the_person.sluttiness < the_position.slut_requirement - 10:
+        $ the_person.draw_person()
+        the_person.char "Could you two at least keep it down? This is fucking ridiculous."
+        $ the_person.change_happiness(-1)
+        "[the_person.possessive_title] tries to avert her gaze and ignore you and [the_sex_person.name] [the_position.verb]."
+
+    elif the_person.sluttiness < the_position.slut_requirement:
+        $ the_person.draw_person()
+        the_person.char "You're certainly feeling bold today [the_sex_person.name]. At least it looks like you're having a good time..."
+        $ change_report = the_person.change_slut_temp(1)
+        "[the_person.possessive_title] watches for a moment, then turns away  while you and [the_sex_person.name] keep [the_position.verb]."
+
+    elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
+        $ the_person.draw_person()
+        the_person.char "Oh wow that's hot. I should sell tickets to this!"
+        $ change_report = the_person.change_slut_temp(2)
+        "[the_person.possessive_title] watches you and [the_sex_person.name] [the_position.verb]."
+
+    else:
+        $ the_person.draw_person(emotion = "happy")
+        the_person.char "Come on [the_person.mc_title], [the_sex_person.name] is going to fall asleep at this rate! You're going to have to give her a little more than that."
+        "[the_person.possessive_title] watches eagerly while you and [the_sex_person.name] [the_position.verb]."
+    return
+
+label starbuck_being_watched(the_person, the_watcher, the_position):
+    if the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness >= the_position.slut_cap:
+        #They agree you should give it to her harder
+        the_person.char "I can handle it [the_person.mc_title]. Let's show [the_watcher.name] how it's done!"
+        $ the_person.change_arousal(1)
+        "[the_person.possessive_title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
+
+    elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
+        #She's super slutty and doesn't care what people think.
+        the_person.char "Don't listen to [the_watcher.name]. This is a sex shop, surely they expect to see something like this when they walk in?"
+
+    elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
+        #She's super slutty and encourages the watcher to be slutty.
+        $ the_person.change_arousal(1)
+        the_person.char "I don't usually demonstrate the goods like this, [the_watcher.name]. You understand, right?"
+        "[the_person.possessive_title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
+
+    elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness >= the_position.slut_cap:
+        #She's into it and encouraged by the slut watching her.
+        the_person.char "Oh [the_person.mc_title], [the_watcher.name] is watching you fuck my brains out!"
+        $ the_person.change_arousal(2)
+        "[the_person.possessive_title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
+
+    elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
+        #She's into it but shamed by the prude watching her.
+        the_person.char "Fuck [the_person.mc_title], maybe we should have gone to the back room?"
+        $ the_person.change_stats(arousal= -1, slut_temp = -1)
+        "[the_person.possessive_title] seems uncomfortable with [the_watcher.name] nearby."
+
+    else: #the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
+        #They're both into it but not fanatical about it.
+        the_person.char "Ah, now this is a party! Maybe when he's done you can tap in and take a turn [the_watcher.name]!"
+        the_person.char "Orgy day at Starbuck's Sex Shop... that's actually a pretty good idea!"
+        $ the_person.change_stats(arousal = 1, slut_temp = 1)
+        "[the_person.possessive_title] seems more comfortable [the_position.verb]ing you with [the_watcher.name] around."
+
+    return
+init python:
+    def starbuck_titles(person):
+        valid_titles = [reserved_titles(person)]
+        valid_titles.append("Cara")
+        return valid_titles
+    def starbuck_possessive_titles(person):
+        valid_possessive_titles = [relaxed_titles(person)]
+        if person.sluttiness > 60:
+            valid_possessive_titles.append("Your slutty business partner")
+        if person.sluttiness > 100 and person.sex_skills["Anal"] >= 4:
+            valid_possessive_titles.append("Your buttslut")
+        if SB_check_fetish(person, cum_external_role) or SB_check_fetish(person, cum_internal_role):
+            valid_possessive_titles.append("Your cum guzzler")
+            valid_possessive_titles.append("Your cum catcher")
+        return valid_possessive_titles
+    def starbuck_player_titles(person):
+        valid_player_titles = [reserved_player_titles(person)]
+        if starbuck.shop_progress_stage > 1:
+            valid_player_titles.append("Business Partner")
+        return valid_player_titles
 
 
 

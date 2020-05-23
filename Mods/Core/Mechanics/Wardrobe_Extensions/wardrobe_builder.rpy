@@ -42,12 +42,12 @@ init 5 python:
         # determine make-up colors based on skin-tone
         if person.body_images == black_skin:
             eye_shadow_colours = [[.569, .349, .263, .9], [0, .2, .4, .9], [.47, .318, .663, .9]]
-            lipstick_colours = [[.569, .318, .212, .9], [.451, .416, .526, .9], [.492, .419, .384, .9]]
-            blush_colours = [[.435, .306, .216, .8], [.588, .251, 0, .8], [.451, .412, .576, .8]]
+            lipstick_colours = [[.569, .318, .212, .8], [.451, .416, .526, .8], [.492, .419, .384, .8]]
+            blush_colours = [[.435, .306, .216, .6], [.588, .251, 0, .6], [.451, .412, .576, .6]]
         else:
             eye_shadow_colours = [[.1, .1, .12, .9], [.4, .5, .9, .9], [.644, .418, .273, .9]]
-            lipstick_colours = [[.745, .117, .235, .9], [1, .5, .8, .9], [ .8, .26, .04, .9]]
-            blush_colours = [[.34, .34, .32, .8], [1, .898, .706, .8], [.867, .627, .867, .8]]
+            lipstick_colours = [[.745, .117, .235, .8], [1, .5, .8, .8], [ .8, .26, .04, .8]]
+            blush_colours = [[.34, .34, .32, .6], [1, .898, .706, .6], [.867, .627, .867, .6]]
 
         make_up_score = person.get_opinion_score("makeup") + make_up_score_boost
         if make_up_score > 0 or (make_up_score == 0 and renpy.random.randint(0, 4) == 0):

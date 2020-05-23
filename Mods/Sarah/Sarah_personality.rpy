@@ -313,6 +313,149 @@ label Sarah_flirt_response(the_person):
             the_person.char "You'll have to really impress me though, I have high standards."
     return
 
+label Sarah_flirt_response_low(the_person):
+    if sarah.event_triggers_dict.get("epic_tits_progress", 0)>= 2:  #She has gone through bigger tits story
+        the_person.char "Oh? You like how I look, now that I'm the total package?"
+        $ the_person.draw_person(position = "walking_away")
+        "[the_person.possessive_title] gives you a quick spin, showing off her body at the same time as her outfit."
+        $ the_person.draw_person()
+    else:
+        the_person.char "Oh? Thank you [the_person.mc_title]! I'm glad to hear you like the way I look."
+        the_person.char "I'm not sure why you feel that way though, I'm not wearing anything special."
+    mc.name "Your body is fantastic, and the outfit is the icing on the cake."
+    "She smiles and laughs."
+    the_person.char "Ah, so you are resorting to flattery then? You kind words are noted, [the_person.mc_title]!"
+    return
+
+label Sarah_flirt_response_mid(the_person):
+    if  the_person.relationship != "Single": # She is taken
+        the_person.char "Thank you [the_person.mc_title], but you know you shouldn't be saying that."
+        mc.name "Why not? You're hot and I'm just trying to give you a compliment."
+        the_person.char "Thank you, but I have a boyfriend. You know this."
+        "She sighs and looks away from you for a moment."
+        the_person.char "I... guess it's still nice to hear though. It's been a while since my boyfriend said I was hot."
+        mc.name "Well I'm happy to tell you that you are very, very hot [the_person.title]."
+        "[the_person.possessive_title] smiles and shrugs."
+        the_person.char "Thanks. It means a lot to hear that from my childhood friend."
+    elif the_person.effective_sluttiness("underwear_nudity") < 20:
+        the_person.char "I know we are childhood friends, and obviously I want you to be honest with me, but I'm not sure it's right for you to say stuff like that."
+        mc.name "Like what? That you're hot?"
+        the_person.char "I guess I'm just not used to hearing the guy I used to play hide and seek with when I was little call me \"hot\"."
+        mc.name "Well I suppose you'd better get used to, since its true and I'm not going to stop reminding you anytime soon."
+        "[the_person.title] rolls her eyes at you, but you also notice the corner of her mouth turn up in a slight smile."
+        the_person.char "Thank Romeo, though I will admit it is nice to hear."
+
+    else:
+        the_person.char "Buttering me up again, are you?"
+        the_person.char "You know, with that way you talk about me, a girl could get the wrong idea about what your intentions might be..."
+        "[the_person.possessive_title] smiles and runs her hands down her hips. She hesitates for a moment, then turns around and pats her ass."
+        $ the_person.draw_person(position = "back_peek")
+        the_person.char "What exactly are your intentions, [the_person.mc_title]? You seem to have a hard time taking your eyes off of me..."
+        "You zone out for a second, checking out [the_person.title]'s shapely hind end."
+        $ the_person.draw_person()
+        "She turns back and giggles."
+        if sarah.event_triggers_dict.get("epic_tits_progress", 0)>= 2:
+            the_person.char "Tongue tied?. That's okay, I've been having that effect on a lot of guys lately."
+        mc.name "What can I say? Your body is hypnotizing."
+    return
+
+label Sarah_flirt_response_high(the_person):
+    if mc.location.get_person_count() == 1: #If you are alone she'll flirt with you
+        if the_person.effective_sluttiness() > 25: # High sluttiness flirt
+            if the_person.has_taboo("underwear_nudity"):
+                the_person.char "Oh [the_person.mc_title], you're so bad! Do you really want to... see me naked?"
+            else:
+                the_person.char "Oh [the_person.mc_title]. You're always trying to get me naked."
+
+            mc.name "You're so beautiful, I always want to see more."
+            "She sighs and smiles."
+            the_person.char "Don't worry, I want to get naked for you."
+
+            menu:
+                "Kiss her.":
+                    "You put an arm around [the_person.possessive_title]'s waist and pull her close."
+
+                    if the_person.has_taboo("kissing"):
+                        $ the_person.call_dialogue("kissing_taboo_break")
+                        $ the_person.break_taboo("kissing")
+                        "You lean in and kiss her. She hesitates for a moment before gently pressing herself against your body."
+                    else:
+                        "Before you can take the initiative, she pushes herself on her toes and kisses you. You open your mouth and she devours your tongue eagerly."
+                    call fuck_person(the_person, private = True, start_position = kissing, skip_intro = True) from _call_fuck_sarah_flirt_01
+
+                "Just flirt.":
+                    mc.name "Believe me, I want to get naked for you too. Hopefully soon I'll have the time."
+                    "[the_person.possessive_title] gives you a little pout."
+                    the_person.char "We make time for what's important. But I understand, running a business is a lot of work."
+                    the_person.char "Hopefully you have time soon!"
+
+        else:
+            the_person.char "Oh [the_person.mc_title]... I don't know if I could go that far."
+            mc.name "Relax, we're just joking around. Unless you want to get naked for me?"
+            "She laughs and shakes her head in disbelief. You see a glint of mischief in her eye when she asks you."
+            the_person.char "Why don't you get naked first and we'll see what happens?"
+            mc.name "You'll pull your phone out and start taking blackmail pictures. Theres no way I'm doing that."
+            the_person.char "Me? Blackmail you? [the_person.mc_title] why I would never!"
+            if the_person.has_taboo("touching_penis"):
+                mc.name "Do you what would actually be really helpful? I've gotten all worked up, why don't you just touch me with your hand for a bit."
+                the_person.char "You want me... to give you a handjob?"
+                mc.name "You would be doing me a big favor..."
+                $ the_person.call_dialogue("touching_penis_taboo_break")
+                $ the_person.break_taboo("touching_penis")
+            else:
+                the_person.char "Ok fine, I've got a better idea. What if I put my hand in your pants and umm, you know, like we did the other day..."
+                mc.name "Mmm, I suppose I would be up for that."
+            "[the_person.possessive_title] places a hand on your chest and strokes it tenderly."
+            "She looks into your eyes as her hand moves lower, running over your abs, down to your waist."
+            "Her fingers slide into your pubic hair, then to the side of your cock and between your legs."
+            "She runs a finger along the bottom of your shaft, ending at the sensitive spot under your tip."
+            "Then she wraps her full hand around it and slides it back down to the base."
+            "[the_person.possessive_title] begins to stroke you off with long, deliberate motions."
+            call fuck_person(the_person, private = True, start_position = handjob, skip_intro = True) from _call_fuck_sarah_flirt_02
+
+    else: #She shushes you and rushes you off somewhere private.
+        if the_person.effective_sluttiness() > 25: #She's slutty, but you need to find somewhere private so people don't find out.
+            the_person.char "[the_person.mc_title]..."
+            "[the_person.possessive_title] glances around nervously."
+            the_person.char "Take me somewhere private and say something like that again and it might actually happen..."
+            menu:
+                "Find someplace quiet.":
+                    mc.name "Then let's find somewhere private. Come on."
+                    "You take her hand and start to lead her away. She follows you eagerly."
+                    the_person.char "Wow, I wasn't expecting you to actually do it! This is gonna be fun!"
+                    "When you find a quiet spot you pull [the_person.possessive_title] close to you."
+                    if the_person.has_taboo("kissing"):
+                        $ the_person.call_dialogue("kissing_taboo_break")
+                        $ the_person.break_taboo("kissing")
+                        "You lean in and kiss her. She hesitates for a moment before gently pressing herself against your body."
+                    else:
+                        the_person.char "Oh god... come here [the_person.mc_title]..."
+                        "She pushes herself up on her toes to meet your lips as you bring your head down to kiss her."
+                    call fuck_person(the_person, private = True, start_position = kissing, skip_intro = True) from _call_fuck_sarah_flirt_03
+
+                "Just flirt.":
+                    mc.name "I know, I just like to tease you."
+                    the_person.char "Oh, is that so? Well two can play at that game."
+                    if sarah.event_triggers_dict.get("epic_tits_progress", 0)>= 2:
+                        $ the_person.draw_person(the_animation = blowjob_bob)
+                        "She checks that nobody else is looking, then grabs her tits and jiggles them for you."
+                        the_person.char "Teasing a lady like me. You should be ashamed of yourself, [the_person.mc_title]"
+                        $ the_person.draw_person()
+                    else:
+                        "She checks that nobody else is looking, the reaches down and grabs your package. You harden rapidly as she gives it a couple of strokes."
+                        the_person.char "Teasing a lady like me. You should be ashamed of yourself, [the_person.mc_title]"
+                    mc.name "Jesus woman, you win!"
+                    the_person.char "I'm glad you understand."
+
+        else: #She's not slutty, so she's embarrassed about what you're doing.
+            "[the_person.possessive_title] gasps softly and glances around, checking to see if anyone else was listening."
+            the_person.char "[the_person.mc_title], stop joking around! If other people overhear they might get the wrong idea!"
+            mc.name "It's fine, nobody heard anything. Besides, who cares if other people know I want to see you naked?"
+            "[the_person.possessive_title] gives you a very convincing frown, but she eventually breaks and cracks a smile."
+            the_person.char "I guess, I just wish you would be a little more discrete."
+            "She places a gentle hand on your shoulder and kisses you on the cheek."
+    return
+
 label Sarah_cum_face(the_person):
     if the_person.obedience > 130:
         if the_person.sluttiness > 60:
@@ -384,23 +527,7 @@ label Sarah_sex_strip(the_person):
     return
 
 label Sarah_sex_watch(the_person, the_sex_person, the_position):
-    if the_person.sluttiness > 80 and the_sex_person.sluttiness > 80:
-        $ the_person.draw_person()
-        the_person.char "Oh my good, that looks amazing..."
-        if can_join_threesome(the_sex_person, the_person, the_position.position_tag):
-            the_person.char "Can I... can I join you? I want some too!"
-            menu:
-                "Let her join":
-                    the_person.char "Yes! Thank you [the_person.title]!"
-                    call join_threesome(the_sex_person, the_person, the_position.position_tag)
-                    $ renpy.pop_call()
-                    $ renpy.pop_call()
-                    $ renpy.pop_call() #Why does this take three tries to keep from going crazy? I have no idea
-                    return _return
-                "Not this time":
-                    the_person.char "Aww, okay. Maybe next time..."
-                    $ the_person.change_obedience(3)
-    elif the_person.sluttiness < the_position.slut_requirement - 20:
+    if the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person.char "Ugh, jesus you two. Get a room or something, nobody wants to see this."
         $ the_person.change_obedience(-2)

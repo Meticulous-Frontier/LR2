@@ -53,7 +53,7 @@ label serum_give_label_enhanced(the_person):
     $ ran_num = renpy.random.randint(0,100)
     $ chances = serum_give_calculate_chances(the_person)
 
-    call screen main_choice_display([serum_give_build_menu_options(the_person, chances)])
+    call screen enhanced_main_choice_display(build_menu_items([serum_give_build_menu_options(the_person, chances)]))
 
     if _return == "stealth":
         "You chat with [the_person.title] for a couple of minutes. Waiting to find a chance to deliver a dose of serum."

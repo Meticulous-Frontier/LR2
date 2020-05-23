@@ -251,14 +251,14 @@ label SB_working_weekend_crisis_label_medium(person_one):
     person_one.char "Oh! [person_one.mc_title], I was about to go out, but seeing you here still working on the weekend, I'd be glad to stay here with you a bit and give you a bit of a... distraction for a bit."
     "The suggestion in her voice is apparent with the last statement. You briefly consider her offer before making a request..."
     menu:
-        "How about a blowjob?\n{size=22}Modifiers: +20 Sluttiness, +5 Obedience{/size}":
+        "How about a blowjob?\n{color=#ff0000}{size=18}Modifiers: +20 Sluttiness, +5 Obedience{/size}{/color}":
             "[person_one.possessive_title] smiles."
             person_one.char "Oh [person_one.mc_title], you work so hard. Don't worry, I'll take care of you."
             if not person_one.outfit.tits_available():    #If covered up, have her take her top off
                 person_one.char "Here... let me take this off. I bet that will help ease some of your stress."
                 $ the_clothing = person_one.outfit.get_upper_top_layer()
                 "[person_one.possessive_title] takes off her [the_clothing.name]"
-                $ person_one.draw_animated_removal(the_clothing)
+                $ scene_manager.draw_animated_removal(person_one, the_clothing)
                 $ the_clothing = None
             "Your eyes wander down to [person_one.possessive_title]'s tits."
             if person_one.outfit.tits_available():

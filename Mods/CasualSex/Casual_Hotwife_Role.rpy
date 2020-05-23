@@ -111,6 +111,19 @@ init -2 python:
         mc.business.mandatory_crises_list.append(casual_hotwife_ghost)
         return
 
+    def get_hotwife_lingerie_set_white():
+        outfit = Outfit("Lingerie Set Classic White")
+        outfit.add_upper(teddy.get_copy(),colour_white)
+        outfit.add_feet(garter_with_fishnets.get_copy(), colour_white)
+        outfit.add_feet(high_heels.get_copy(), colour_white)
+        return outfit
+
+    def get_hotwife_lingerie_set_pink():
+        outfit = Outfit("Pink Lingerie")
+        outfit.add_upper(teddy.get_copy(),colour_pink)
+        outfit.add_feet(garter_with_fishnets.get_copy(), colour_pink)
+        outfit.add_feet(high_heels.get_copy(), colour_pink)
+        return outfit
 
 #*************Create Casual Hotwife Role***********#
 init -1 python:
@@ -131,6 +144,11 @@ init -1 python:
 #*************Mandatory Crisis******************#
 
 init 1 python:
+    def add_hotwife_sex_at_her_place_action(the_person):
+        casual_hotwife_her_place.args = [the_person]    # set the current person as action argument
+        mc.business.mandatory_crises_list.append(casual_hotwife_her_place) # TODO Find out if this breaks if two girls hit this stage a the same point in gameplay
+        return
+
     casual_hotwife_her_place = Action("Her Place", casual_hotwife_her_place_requirement, "casual_hotwife_her_place_label")
 
 
@@ -156,7 +174,7 @@ label casual_hotwife_get_a_drink_label(the_person):
     $ ran_num = (mc.charisma + (the_person.effective_sluttiness() / 10)) * 10  #More willing to let you buy a drink for her as she gets sluttier
     #$ bartender_name = get_random_male_name()
     menu:
-        "Offer to Buy\n{size=22}Success Chance: [ran_num]%%{/size}":
+        "Offer to Buy\n{color=#ff0000}{size=18}Success Chance: [ran_num]%%{/size}{/color}":
             mc.name "Hey, let me buy you a drink."
             if renpy.random.randint(0,100) < ran_num:  #Success
                 the_person.char "Hmm... Okay! That sounds great! I'll go find us a table!"
@@ -470,11 +488,11 @@ label casual_hotwife_blowjob_text_label(the_person):
     the_person.char "Haaa... sorry! I probably should have just said that it went well."
     mc.name "No it is quite alright. I was a little concerned with how things would go for you, but I'm glad that it turned out well!"
     $ the_person.draw_person(position = "stand4", emotion = "happy")
-    the_person.char "It really did! So uhh, wanna go again, just ask. I'd be happy to be. BUT, we need to set some ground rules first!"
+    the_person.char "It really did! So uhh, if you wanna go again, just ask. I'd be happy to be of service, BUT, we need to set some ground rules first!"
     mc.name "Okay, I'm down for that."
     the_person.char "Okay, well, like I said. I'm a good wife! I love my husband. If things between us ever start to get... you know... serious? I'm going to have to break it off."
     "You nod in understanding."
-    the_person.char "If you try to make me choose between you two, I'll choose him, everytime. So lets just keep this casual, okay?"
+    the_person.char "If you try to make me choose between you two, I'll choose him, every time. So lets just keep this casual, okay?"
     mc.name "Sounds good. Purely physical. I'm completely okay with that."
     the_person.char "Right... here, let's exchange numbers. I'll text you and if we're both free, we can screw around, no strings attached!"
     "You agree. You and [the_person.title] exchange numbers."
@@ -630,10 +648,8 @@ label casual_hotwife_sex_invite_label(the_person):
     mc.name "That would be great."
     "[the_person.possessive_title] gives you her address."
     the_person.char "Come over tonight, around 10pm. You won't regret it! Is there anything else you want to do now?"
-    $ casual_hotwife_her_place.args = [the_person]    # set the current person as action argument
-    $ mc.business.mandatory_crises_list.append(casual_hotwife_her_place) #Add race crisis    TODO Find out if this breaks if two girls hit this stage a the same point in gameplay
-    if not the_person.home in mc.known_home_locations:
-        $ mc.known_home_locations.append(the_person.home)
+    $ add_hotwife_sex_at_her_place_action(the_person)
+    $ the_person.learn_home()
     $ the_person.event_triggers_dict["hotwife_progress"] = 4
 
     #call advance_time from _call_advance_casual_hotwife_sex_invite
@@ -646,12 +662,7 @@ label casual_hotwife_her_place_label(the_person):
     $ mc.location.show_background()
     "You ring the doorbell. Soon [the_person.title] answers the door."
 
-    $ CS_hotwife_lingerie = Outfit("Lingerie Set Classic White")
-    $ CS_hotwife_lingerie.add_upper(teddy.get_copy(),colour_white)
-    $ CS_hotwife_lingerie.add_feet(garter_with_fishnets.get_copy(), colour_white)
-    $ CS_hotwife_lingerie.add_feet(high_heels.get_copy(), colour_white)
-    $ the_person.apply_outfit(CS_hotwife_lingerie, update_taboo = True)
-    $ del CS_hotwife_lingerie
+    $ the_person.apply_outfit(get_hotwife_lingerie_set_white(), update_taboo = True)
     $ the_person.draw_person(position = "stand4")
     the_person.char "You made it! I wasn't sure you would actually come!"
     mc.name "Of course!"
@@ -669,17 +680,16 @@ label casual_hotwife_her_place_label(the_person):
     "Your cock now free, you line yourself up with [the_person.possessive_title]'s pussy. You put her husband out of your mind as you slowly push into her."
     "[the_person.possessive_title] gasps as you begin to slide in and out of her."
     call fuck_person(the_person, start_position = doggy, start_object = make_bed(), skip_intro = True, asked_for_condom = True) from _call_sex_description_CSH040
-
-
+    $ the_report = _return
 
     #Finishing dialogue based on sexual performance
-    if the_person.arousal > 130:   #She had more than one orgasm
+    if the_report.get("girl orgasms", 0) > 1:   #She had more than one orgasm
         the_person.char "Oh my god... I came so many times..."
         "[the_person.possessive_title] collapses onto the bed after your performance. You get up and start to get dressed."
         "You nod at [the_person.SO_name], and he nods back. He goes over to a bedside table and gets out a set of handcuffs."
         "After you fucked her brains out, [the_person.title] lays helpless on the bed as he starts to cuff her hands behind her back."
         "You finished getting dressed and decide to leave them to it, so you quietly excuse yourself from the bedroom."
-    elif the_person.arousal > 101: #She had approximately one orgasm
+    elif if the_report.get("girl orgasms", 0) > 0: #She had one orgasm
         the_person.char "Oh god, I came so hard... That was good [the_person.mc_title]."
         $ the_person.draw_person (position = "missionary")
         "[the_person.possessive_title] rolls over on her back and spreads her legs wide."
@@ -706,12 +716,8 @@ label casual_hotwife_home_sex_label(the_person):
     the_person.char "Sounds great! Just give me a minute to get ready..."
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] walks into her bedroom and closes the door. You hang out in her living room for a few minutes while she gets ready."
-    $ CS_hotwife_lingerie2 = Outfit("Pink Lingerie")
-    $ CS_hotwife_lingerie2.add_upper(teddy.get_copy(),colour_pink)
-    $ CS_hotwife_lingerie2.add_feet(garter_with_fishnets.get_copy(), colour_pink)
-    $ the_person.apply_outfit(CS_hotwife_lingerie2, update_taboo = True)
+    $ the_person.apply_outfit(get_hotwife_lingerie_set_pink(), update_taboo = True)
     $ the_person.draw_person(position = "stand4")
-    $ del CS_hotwife_lingerie2
     "She opens up the bedroom door and motions for you to follow her. As you step into her bedroom you see [the_person.SO_name] sitting at the edge of the bed again."
     "You nod at him, and he gives a brief nod back. You turn your attention back to [the_person.title]"
     the_person.char "Mmm, I can't wait. Let's go!"
@@ -782,14 +788,13 @@ init 1301 python:              #Because Vren Init personality functionns at 1300
         return valid_possessive_titles
     def hotwife_player_titles(the_person):
         return mc.name
+
     hotwife_personality = Personality("hotwife", default_prefix = "wild",
     common_likes = ["skirts", "dresses", "the weekend", "the colour red", "makeup", "flirting", "high heels"],
     common_sexy_likes = ["casual sex", "doggy style sex", "giving blowjobs", "vaginal sex", "public sex", "lingerie", "not wearing underwear", "being submissive", "drinking cum", "cheating on men"],
     common_dislikes = ["relationships", "pants", "working", "the colour yellow", "conservative outfits", "sports"],
     common_sexy_dislikes = ["taking control", "giving handjobs", "not wearing anything"],
     titles_function = hotwife_titles, possessive_titles_function = hotwife_possessive_titles, player_titles_function = hotwife_player_titles)
-
-
 
 
 #************* Personality labels***************#
@@ -968,7 +973,7 @@ label hotwife_seduction_response(the_person):
 #     if the_person.effective_sluttiness() < 20:
 #         the_person.char "I suppose we could sneak away for a few minutes. There's nothing wrong with that, right?"
 #     elif the_person.effective_sluttiness() < 50:
-#         the_person.char "Come on, let's go find someplace quiet where we won't be interupted."
+#         the_person.char "Come on, let's go find someplace quiet where we won't be interrupted."
 #     else:
 #         the_person.char "No point waisting any time then, right? Let's get to it!"
 #     return
@@ -1028,6 +1033,49 @@ label hotwife_flirt_response(the_person):
             the_person.char "Hey, maybe if you buy me dinner first."
             "[the_person.title] gives you a wink and smiles."
     return
+
+label hotwife_flirt_response_low(the_person):
+    #She's in her own outfit.
+    the_person.char "Thanks! It's really cute, right? My husband helped me pick it out!"
+    $ the_person.draw_person(position = "walking_away")
+    "She smiles and gives you a quick spin, showing off her outfit from every angle."
+    $ the_person.draw_person()
+    return
+
+label hotwife_flirt_response_mid(the_person):
+
+    if the_person.effective_sluttiness() < 20 and mc.location.get_person_count() > 1:
+        if the_person.outfit.tits_visible():
+            the_person.char "Are you sure you don't mean my tits look good in this outfit?"
+            "She winks and wiggles her shoulders, setting her boobs jiggling for you."
+            mc.name "All of you looks good, tits included."
+            the_person.char "Good answer. I knew you would like this look when I was picking it out this morning."
+        else:
+            the_person.char "Aw, thanks! I thought this was a pretty hot look when I was getting dressed this morning."
+
+        the_person.char "Maybe hubby will let you come shopping with me one day, so you can tell me else you want to see me in."
+        mc.name "I think I would like that."
+
+    else:
+        the_person.char "Thanks, hubby thought I looked pretty hot in it too this morning when I picked it out."
+        the_person.char "You want a better look, right? Here, how does it make my ass look?"
+        $ the_person.draw_person(position = "back_peek")
+        the_person.char "Good?"
+        mc.name "Fantastic. I wish I could get an even better look at it."
+        "[the_person.possessive_title] smiles and turns back to face you."
+        $ the_person.draw_person()
+        the_person.char "I'm sure you do. Buy me a drink and we'll see what happens."
+    return
+
+label hotwife_flirt_response_high(the_person):
+    if the_person.love > 50: #She is going to ghost soon
+        the_person.char "Didn't your mother ever tell you its rude to hit on a married woman?"
+    else:
+        "She looks at you and her eyes narrow."
+        the_person.char "I appreciate the comment, I really do... but I'm worried you are taking things a little too far."
+        the_person.char "Remember, we need to keep things CASUAL. Okay?"
+    return
+
 
 label hotwife_hookup_rejection(the_person):
     the_person.char "Your loss! Just thinking about you makes me want to get on my knees, and you could have had some of this..."
@@ -1225,7 +1273,7 @@ label hotwife_hookup_accept(the_person):
                     the_person.char "That was SO good. You'll be hearing from me again, I'm sure. I can't wait to send hubby those pictures..."
                     "You and [the_person.title] get cleaned up and dressed, then sneak out of the restroom."
                     return
-                "Fuck Her Ass\n{size=22}Requires 80 sluttiness{/size} (disabled)" if the_person.effective_sluttiness() < 80:
+                "Fuck Her Ass\n{color=#ff0000}{size=18}Requires 80 sluttiness{/size}{/color} (disabled)" if the_person.effective_sluttiness() < 80:
                     pass
     "[the_person.possessive_title]'s creamy cunt draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
     mc.name "Get ready, I'm gonna cum!"

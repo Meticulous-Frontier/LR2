@@ -51,6 +51,9 @@ init 15 python:
         hide_in_known_house_map = True)
     purgatory.accessible = False
 
+    fancy_restaurant = Room("fancy_restaurant", "Restaurant", [], room_background_image("Fancy_Restaurant_Background.jpg"), [make_floor(), make_chair(), make_table()], [], [], False, [4,6], None, False, lighting_conditions = standard_indoor_lighting)
+
+
 init 5  python:
     add_label_hijack("normal_start", "activate_custom_rooms")
     add_label_hijack("after_load", "update_custom_rooms")
@@ -59,6 +62,7 @@ label activate_custom_rooms(stack):
     call store_dungeon() from _store_dungeon_1
     call store_downtown_bar() from _call_store_downtown_bar_1
     call store_downtown_hotel() from _call_store_downtown_hotel_1
+    call store_fancy_restaurant() from _call_store_fancy_restaurant_1
     call store_purgatory_room() from _call_store_purgatory_room_1
 
     # initialize dungeon room creation action
@@ -75,6 +79,7 @@ label update_custom_rooms(stack):
     call store_dungeon() from _store_dungeon_2
     call store_downtown_bar() from _call_store_downtown_bar_2
     call store_downtown_hotel() from _call_store_downtown_hotel_2
+    call store_fancy_restaurant() from _call_store_fancy_restaurant_2
     call store_purgatory_room() from _call_store_purgatory_room_2
 
     $ execute_hijack_call(stack)
@@ -107,6 +112,13 @@ label store_downtown_hotel():
 
     # This refreshes the properties of the existing bar, e.g move the position of the Room on the map, objects, actions, connections, background etc.
     $ downtown_hotel = update_custom_rooms(downtown_hotel)
+    return
+
+label store_fancy_restaurant():
+    if fancy_restaurant not in list_of_places:
+        $ list_of_places.append(fancy_restaurant)
+    
+    $ fancy_restaurant = update_custom_rooms(fancy_restaurant)
     return
 
 label store_purgatory_room():

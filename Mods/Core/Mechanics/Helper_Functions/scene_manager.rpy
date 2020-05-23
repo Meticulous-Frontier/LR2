@@ -14,7 +14,7 @@ init -2 python:
         renpy.show_screen("goal_hud_ui")
         return
 
-    class Scene():
+    class Scene(renpy.store.object):
         def __init__(self):
             self.actors = []
 
@@ -103,7 +103,7 @@ init -2 python:
                     actor.draw_actor()
 
     # z_order determines the order in which the actors are drawn, low number first, high number later
-    class Actor():
+    class Actor(renpy.store.object):
         def __init__(self, person, position = None, emotion = None, special_modifier = None, lighting = None, character_placement = None, z_order = None):
             self.person = person
             self.position = position
@@ -174,6 +174,14 @@ init -1:
         xalign 0.5
         xanchor 1.0
         xzoom -1
+
+    transform character_left_flipped_distant():
+        yalign 0.5
+        yanchor 0.5
+        xalign 0.5
+        xanchor 1.0
+        xzoom -0.5
+        yzoom 0.5
 
     transform character_69_bottom():
         yalign 0.62

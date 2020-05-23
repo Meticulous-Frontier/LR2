@@ -102,6 +102,11 @@ init -1 python:
 
 #*************Mandatory Crisis******************#
 init 1 python:
+    def add_casual_athlete_race_crisis(the_person):
+        casual_athlete_race_crisis.args = [the_person]    # set the current person as action argument
+        mc.business.mandatory_crises_list.append(casual_athlete_race_crisis) #Add race crisis    TODO Find out if this breaks if two girls hit this stage a the same point in gameplay
+        return
+
     casual_athlete_race_crisis = Action("Charity Race", casual_athlete_race_crisis_requirement, "casual_athlete_race_crisis_label")
 
 
@@ -288,7 +293,7 @@ label casual_athlete_phase_one_label(the_person):
         "[the_person.possessive_title] is grinding her hips up against yours. The sweat from your workouts mingles together as you prepare yourself to enter her."
 
         $ the_person.add_situational_slut("horny", 20, "She is desperate to be fucked")
-        
+
         # NOTE skip intro prevents taboo break from executing
 
         call condom_ask(the_person) from _casual_athlete_mod_condom_ask_CS010
@@ -417,8 +422,7 @@ label casual_athlete_phase_two_label(the_person):
         "[the_person.title] seems pretty confident in herself, but you are pretty sure you have good odds in a race."
         "You wave goodbye to [the_person.title], wondering what you've gotten yourself in to."
 
-        $ casual_athlete_race_crisis.args = [the_person]    # set the current person as action argument
-        $ mc.business.mandatory_crises_list.append(casual_athlete_race_crisis) #Add race crisis    TODO Find out if this breaks if two girls hit this stage a the same point in gameplay
+        $ add_casual_athlete_race_crisis(the_person)
 
         $ the_person.event_triggers_dict["athlete_progress"] = 3
     elif the_person.event_triggers_dict.get("athlete_progress", 0) == 3:
@@ -484,8 +488,7 @@ label casual_athlete_race_crisis_label(the_person):
     "You call for an Uber and she gives you here address. Soon you are walking into [the_person.title]'s apartment."
     $ mc.change_location(the_person.home)
     $ mc.location.show_background()
-    if not the_person.home in mc.known_home_locations:
-        $ mc.known_home_locations.append(the_person.home)
+    $ the_person.learn_home()
     "As soon as you walk in the door, you grab [the_person.title]. You pick her up and push her against the wall."
     $ the_person.draw_person(position = "against_wall")
     #TODO add temporary sluttiness to make sure she is up for anything###
@@ -519,14 +522,20 @@ label casual_athlete_race_crisis_label(the_person):
     the_person.char "Yes!!! Oh god, please fuck me good!"
     "You have every intention of doing exactly that."
     call fuck_person(the_person, private=True, start_position = doggy, start_object = make_bed(), skip_intro = True) from _call_casual_sex_mod_CS030
+    $ the_report = _return
+
     $ the_person.clear_situational_slut("Lost Bet")
     "When you finish with her, [the_person.possessive_title] lays down on her bed."
     $ the_person.draw_person(position = "missionary")
-    the_person.char "[the_person.mc_title]... I am so sore... My legs from the race... and... you know..."
-    the_person.char "But that was amazing... Look, I'll be your sexy bitch anytime you want, okay? You have my address now, feel free to stop by. Just promise you'll fuck me like that again."
-    "You laugh."
+    if the_report.get("girl orgasms", 0) > 0:
+        the_person.char "[the_person.mc_title]... I am so sore... My legs from the race... and... you know..."
+        the_person.char "But that was amazing... Look, I'll be your sexy bitch anytime you want, okay? You have my address now, feel free to stop by. Just promise you'll fuck me like that again."
+        "You laugh."
+    else:
+        the_person.char "This was really great... Look, I'll be your sexy bitch anytime you want, okay? You know where I live now, so stop by anytime you feel like it."
+
     mc.name "Sounds good. You have my number, let me know if you wanna hookup sometime, or if you want a rematch!"
-    the_person.char "Ayup! Don't worry. Alright, if its okay with you, I think I'm gonna take a nap..."
+    the_person.char "Ayup! Don't worry. If its all the same to you, I think I'm gonna take a nap now..."
     "You excuse yourself. You grab your clothes and head out. You now know [the_person.title]'s address, with a standing offer to come over and fuck her silly!"
     $ the_person.event_triggers_dict["athlete_progress"] = 4
     $ perk_system.add_stat_perk(Stat_Perk(description = "Training for the big race has helped improve your energy level. +20 max energy, +40 energy cap.", energy_bonus = 20, bonus_is_temp = False, energy_cap = 40), "Athlete Energy Bonus")
@@ -889,6 +898,39 @@ label athlete_flirt_response(the_person):
             "[the_person.title] gives you a wink and smiles."
     return
 
+label athlete_flirt_response_low(the_person):
+    #She's in her own outfit.
+    "[the_person.possessive_title] blushes and smiles."
+    the_person.char "Thanks. I didn't think anyone even paid attention to what I wear. I mean its just gym clothes..."
+    mc.name "Yeah, and the way you dress makes it obvious how well you take care of yourself. It's pretty incredible."
+    return
+
+label athlete_flirt_response_mid(the_person):
+
+    if the_person.effective_sluttiness() < 20:
+        the_person.char "Thanks! I work hard to take of myself. Its kind of weird to hear, but I'm glad it shows."
+
+    else:
+        the_person.char "Thanks! One of the benefits of being in shape I guess, you can wear clothing to show off your body."
+        the_person.char "You want a better look, right? Here, how does it make my ass look?"
+        $ the_person.draw_person(position = "back_peek")
+        the_person.char "Good?"
+        mc.name "Fantastic. I wish I could get an even better look at it."
+        "[the_person.possessive_title] smiles and turns back to face you."
+        $ the_person.draw_person()
+        the_person.char "I'm sure you do. Maybe instead of shooting the breeze you should workout with me..."
+    return
+
+label athlete_flirt_response_high(the_person):
+    if the_person.love > 50: #She is going to ghost soon
+        the_person.char "I feel like you are going a little overboard there with the flattery. Could you please stop?"
+    else:
+        "She looks at you and her eyes narrow."
+        the_person.char "I appreciate the comment, I really do... but I'm worried you are taking things a little too far."
+        the_person.char "Remember, we need to keep things CASUAL. Okay?"
+    return
+
+
 label athlete_hookup_rejection(the_person):
     the_person.char "Your loss! I've been working out so much lately, and you could have had some of this..."
     return
@@ -1073,7 +1115,7 @@ label athlete_hookup_accept(the_person):
                     the_person.char "That was SO good. You'll be hearing from me again, I'm sure... I came so many times..."
                     "You and [the_person.title] get cleaned up and dressed, then sneak out of the locker room."
                     return
-                "Fuck Her Ass\n{size=22}Requires 80 sluttiness{/size} (disabled)" if the_person.effective_sluttiness() < 80:
+                "Fuck Her Ass\n{color=#ff0000}{size=18}Requires 80 sluttiness{/size}{/color} (disabled)" if the_person.effective_sluttiness() < 80:
                     pass
     "[the_person.possessive_title]'s creamy cunt draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
     mc.name "Get ready, I'm gonna cum!"

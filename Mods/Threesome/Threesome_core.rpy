@@ -21,7 +21,7 @@ init -1 python:
     list_of_threesomes = []
     girl_swap_pos = False  #Nasty hack to tell threesome code to swap girl 1 and girl 2. #TODO find a better way to do this
     THREESOME_BASE_SLUT_REQ = 80  #A constant to hold the usual base sluttiness requirements for threesomes.
-    class Threesome_Position(renpy.store.object):
+    class Threesome_Position():
         def __init__(self,name,slut_requirement,position_one_tag, position_two_tag,girl_one_final_description,girl_two_final_description,requires_location,requirements,
         p1_transform, p2_transform, p1_z_order = 0, p2_z_order = 1, can_swap = False, verb = "fuck", verbing = None):
             self.name = name
@@ -67,7 +67,7 @@ init -1 python:
 
 
 
-    class Threesome_MC_position(renpy.store.object):
+    class Threesome_MC_position():
         def __init__(self,name,skill_tag_p1,skill_tag_p2,girl_one_arousal,girl_two_arousal,girl_one_source,girl_two_source,girl_one_energy,girl_two_energy,
             guy_arousal,skill_tag_guy,guy_source,guy_energy,intro,scenes,outro,strip_description,strip_ask_description,orgasm_description,swap_description,requirement,
             description = None, action_description = None, default_action_person = None):
@@ -409,7 +409,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
 
     # We start any encounter by letting them pick what position they want (unless something is forced or the girl is in charge)
     $ active_mc_position = None
-    call screen main_choice_display([build_threesome_round_start_menu(position_choice, the_person_one, the_person_two)])
+    call screen enhanced_main_choice_display(build_menu_items([build_threesome_round_start_menu(position_choice, the_person_one, the_person_two)]))
     $ round_choice = _return
 
     if round_choice == "Leave":
@@ -431,7 +431,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
         if round_choice is None: #If there is no set round_choice
             #TODO: Add a variant of this list when the girl is in control to ask if you want to resist or ask/beg for something.
 
-            call screen main_choice_display([build_threesome_round_choice_menu(position_choice, the_person_one, the_person_two, position_locked, hide_leave)])
+            call screen enhanced_main_choice_display(build_menu_items([build_threesome_round_choice_menu(position_choice, the_person_one, the_person_two, position_locked, hide_leave)]))
             $ round_choice = _return
 
         # Now that a round_choice has been picked we can do something.
@@ -575,6 +575,10 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
         else:
             the_person_two.sex_record["Threesomes"] += 1
 
+        # record the last time we had sex
+        the_person_one.sex_record["Last Sex Day"] = day
+        the_person_two.sex_record["Last Sex Day"] = day
+
         mc.condom = False
         mc.recently_orgasmed = False
         active_mc_position = None
@@ -672,12 +676,12 @@ label threesome_round(the_person_one, the_person_two, position_choice, round = 0
 
 label pick_threesome(the_person_one, the_person_two, girl_one_position = None, object_choice = None):  #We can pass in a position for girl one if the second girl "walks in" on the sex event
     if girl_one_position == None:
-        call screen main_choice_display([build_threesome_person_one_position_choice_menu(the_person_one, the_person_two)])
+        call screen enhanced_main_choice_display(build_menu_items([build_threesome_person_one_position_choice_menu(the_person_one, the_person_two)]))
         $ girl_one_choice = _return
     else:
         $ girl_one_choice = girl_one_position
 
-    call screen main_choice_display([build_threesome_person_two_position_choice_menu(the_person_one, the_person_two)])
+    call screen enhanced_main_choice_display(build_menu_items([build_threesome_person_two_position_choice_menu(the_person_one, the_person_two)]))
     $ girl_two_choice = _return
 
     $ (position_choice, girl_swap_pos) = choose_threesome_position(girl_one_choice, girl_two_choice)
@@ -686,7 +690,7 @@ label pick_threesome(the_person_one, the_person_two, girl_one_position = None, o
     return position_choice
 
 label threesome_strip_menu(the_person_one, the_person_two):
-    call screen main_choice_display([build_threesome_strip_menu(the_person_one, the_person_two)])
+    call screen enhanced_main_choice_display(build_menu_items([build_threesome_strip_menu(the_person_one, the_person_two)]))
     $ strip_choice = _return
 
     if strip_choice == "strip_one":
@@ -773,8 +777,8 @@ init python:
         if person_two in [mom, lily, cousin, aunt]:
             person_two_slut_req += 5 #Incest modifier
 
-        if person_one.sluttiness < THREESOME_BASE_SLUT_REQ:
+        if person_one.effective_sluttiness("threesomes") < person_one_slut_req:
             return False
-        if person_two.sluttiness < THREESOME_BASE_SLUT_REQ:
+        if person_two.effective_sluttiness("threesomes") < person_two_slut_req:
             return False
         return True

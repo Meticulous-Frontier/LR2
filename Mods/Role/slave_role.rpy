@@ -18,6 +18,13 @@ init 10 python:
         if the_person.slave_collar == True:
             return False
 
+    def slave_trim_pubes_requirement(the_person):
+        if girlfriend_role in the_person.special_role or affair_role in the_person.special_role:
+            return False
+        if slave_role in the_person.special_role:
+            return True
+        return False        
+
     def uncollar_slave_requirement(the_person):
         return the_person.slave_collar
 
@@ -45,14 +52,33 @@ init 10 python:
         person.draw_person()
         return
 
+    def slave_remove_collar(person):
+        person.slave_collar = False
+        person.outfit.remove_all_collars()
+        person.base_outfit.remove_all_collars()
+        person.draw_person()
+        return
+
+    def slave_release_slave(person):
+        slave_remove_collar(person)
+        if slave_role in person.special_role:
+            person.special_role.remove(slave_role)
+        person.stay_wet = False
+        # she is not happy and will reset her obedience to 100
+        person.change_stats(love = -20, happiness = -20, obedience = 100 - person.obedience)
+        # she loses her submissive trait
+        person.update_opinion_with_score("being submissive", 0)
+        return
+
     def slave_add_wakeup_duty_action(person):
         remove_mandatory_crisis_list_action("slave_alarm_clock_label")
         wakeup_duty_crisis.args = [person]
         mc.business.mandatory_morning_crises_list.append(wakeup_duty_crisis)
         return
 
-    stay_wet_action = ActionMod("Stay wet", stay_wet_requirement, "stay_wet_label", menu_tooltip = "Have the person stay aroused at all times.", category = "Slave Role")
-    calm_down_action = ActionMod("Calm down", calm_down_requirement, "stay_wet_label", menu_tooltip = "Have the person calm down.", category = "Slave Role", allow_disable = False)
+    stay_wet_action = ActionMod("Stay wet", stay_wet_requirement, "stay_wet_label", menu_tooltip = "Order your slave to stay aroused at all times.", category = "Slave Role")
+    calm_down_action = ActionMod("Calm down", calm_down_requirement, "stay_wet_label", menu_tooltip = "Let your slave calm down.", category = "Slave Role", allow_disable = False)
+    slave_trim_pubes_action = ActionMod("Trim pubes", slave_trim_pubes_requirement, "slave_trim_pubes_label", menu_tooltip = "Order her to do a little personal landscaping. Tell her to wax it off, grow it out, or shape it into anything in between.", category = "Slave Role")
 
     collar_slave_action = ActionMod("Place collar on [the_person.title].", collar_slave_requirement, "slave_collar_person_label", menu_tooltip = "Put a collar of ownership on the target, ensure that their obedience stays high.", category = "Slave Role")
     uncollar_slave_action = ActionMod("Remove collar from [the_person.title].", uncollar_slave_requirement, "slave_collar_person_label", menu_tooltip = "Remove the collar, declaring them a free spirit.", category = "Dungeon Actions", allow_disable = False)
@@ -60,7 +86,7 @@ init 10 python:
     wakeup_duty_action = ActionMod("Wake me up in the morning.", wakeup_duty_requirement, "wakeup_duty_label", menu_tooltip = "Have your slave wake you up in the morning", category = "Slave Role")
     wakeup_duty_crisis = Action("Slave Alarm Clock", wakeup_duty_crisis_requirement, "slave_alarm_clock_label")
 
-    slave_role = Role("Slave", [stay_wet_action, calm_down_action, collar_slave_action, uncollar_slave_action, wakeup_duty_action], hidden = False)
+    slave_role = Role("Slave", [stay_wet_action, calm_down_action, collar_slave_action, uncollar_slave_action, slave_trim_pubes_action, wakeup_duty_action], hidden = False)
 
 label stay_wet_label(the_person): # Can expand with dialogue options and degrees of arousal, but just setting up basic actions for now.
 
@@ -79,13 +105,10 @@ label stay_wet_label(the_person): # Can expand with dialogue options and degrees
 
 label slave_collar_person_label(the_person):
     if the_person.slave_collar:
-        $ the_person.slave_collar = False
-        $ the_person.outfit.remove_all_collars()
-        $ the_person.base_outfit.remove_all_collars()
-        $ the_person.draw_person()
+        $ slave_remove_collar(the_person)
         "You remove the collar from your [the_person.possessive_title]'s neck"
     else:
-        call screen main_choice_display([["Select Collar"] + [["Breed Me", breed_collar], ["Cum Slut", cum_slut_collar], ["Fuck Doll", fuck_doll_collar], ["Back", "Back"]]])
+        call screen enhanced_main_choice_display(build_menu_items([["Select Collar"] + [["Breed Me", breed_collar], ["Cum Slut", cum_slut_collar], ["Fuck Doll", fuck_doll_collar], ["Back", "Back"]]]))
         $ collar_choice = _return
 
         if collar_choice == "Back":
@@ -96,6 +119,32 @@ label slave_collar_person_label(the_person):
 
         "You put one of the collars you created around your [the_person.possessive_title]'s neck."
 
+    return
+
+label slave_trim_pubes_label(the_person):
+    mc.name "You're going to trim your pubes for me."
+    "[the_person.possessive_title] nods obediently."
+    the_person.char "Yes, Master. How do you prefer it?"
+    if the_person.event_triggers_dict.get("trimming_pubes", None) is not None:
+        # She was already planning on a different style, so we can have some change your mind dialogue here
+        $ mc.business.mandatory_crises_list.remove(the_person.event_triggers_dict.get("trimming_pubes",None)) #If she already had an event for this make sure to remove it.
+        $ the_person.event_triggers_dict["trimming_pubes"] = None
+
+    $ pubes_choice = renpy.display_menu(girlfriend_build_pubes_choice_menu(the_person),True,"Choice")
+
+    if pubes_choice == "Never mind.":
+        mc.name "On second thought, just leave them the way they are."
+        the_person.char "As you wish."
+    else:
+        "You show her a picture of the style you want on your phone..."
+        if pubes_choice.ordering_variable > the_person.pubes_style.ordering_variable:
+            the_person.char "Yes [the_person.mc_title], I'll will need to grow out a bit, but as soon as I can I'll trim them the way you prefer [the_person.mc_title]."
+            #It will take some time for them to grow out.
+            $ add_girlfriend_do_trim_pubes_action(the_person, pubes_choice, renpy.random.randint(2,5))
+        else:
+            the_person.char "Yes [the_person.mc_title], it will be ready for your inspection tomorrow."
+            $ add_girlfriend_do_trim_pubes_action(the_person, pubes_choice, 0)
+    $ del pubes_choice
     return
 
 label wakeup_duty_label(the_person):
@@ -192,7 +241,7 @@ label slave_alarm_clock_label(the_person):
                                     $ the_person.draw_person()
                                     "She stands up and heads for the door."
 
-                                "Order her to open her mouth\nRequires: 140 Obedience (disabled)" if the_person.obedience < 140:
+                                "Order her to open her mouth\n{color=#ff0000}{size=18}Requires: 140 Obedience{/size}{/color} (disabled)" if the_person.obedience < 140:
                                     pass
 
                                 "Order her to hold up her tits" if the_person.has_large_tits():
@@ -209,7 +258,7 @@ label slave_alarm_clock_label(the_person):
                                 "Continue": # An escape if you get locked since obedience is less than 140 and has_large_tits() is false. #NOTE: Can write other alternatives
                                     pass
 
-                        "Order her to get on her knees\nRequires: 130 Obedience (disabled)" if the_person.obedience < 130:
+                        "Order her to get on her knees\n{color=#ff0000}{size=18}Requires: 130 Obedience{/size}{/color} (disabled)" if the_person.obedience < 130:
                             pass
 
                         "Climax":
@@ -252,7 +301,7 @@ label slave_alarm_clock_label(the_person):
                 "[the_person.title] pulls back off your cock slowly. She spits your cum out into her hand and straightens up."
                 $ the_person.call_dialogue("cum_mouth")
 
-            "Order her to take your cum in her mouth\nRequires: 130 Obedience (disabled)" if the_person.obedience<130:
+            "Order her to take your cum in her mouth\n{color=#ff0000}{size=18}Requires: 130 Obedience{/size}{/color} (disabled)" if the_person.obedience<130:
                 pass
             "Climax":
                 mc.name "I'm almost there [the_person.title], keep going!"
@@ -299,7 +348,7 @@ label slave_alarm_clock_label(the_person):
                 $ the_person.call_dialogue("cum_mouth")
 
 
-            "Order her to swallow\nRequires: 130 Obedience (disabled)" if the_person.obedience < 130:
+            "Order her to swallow\n{color=#ff0000}{size=18}Requires: 130 Obedience{/size}{/color} (disabled)" if the_person.obedience < 130:
                 pass
 
             "Let her spit it out":
@@ -414,7 +463,7 @@ label increase_slave_submission_label(the_person):
         $ the_person.draw_person(position = "doggy")
         $ mc.change_arousal(40) # make the fuck loop a little shorter
         "You pull out your hard cock and shove it right into her ass."
-        call fuck_person(the_person, start_position = doggy_anal, start_object = make_floor(), skip_intro = True, position_locked = True, affair_ask_after = False)
+        call fuck_person(the_person, start_position = doggy_anal, start_object = make_floor(), skip_intro = True, position_locked = True, affair_ask_after = False) from _call_fuck_person_increase_slave_submission
         $ the_report = _return
         if the_report.get("girl orgasms", 0) > 0:
             the_person.char "Thank you Master, for giving me such satisfaction."

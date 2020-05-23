@@ -1,6 +1,12 @@
 init 5 python:
     config.label_overrides["morning_shower_label"] = "morning_shower_enhanced_label"
 
+    def apply_towel_outfit(person):
+        towel_outfit = Outfit("Towel")
+        towel_outfit.add_dress(towel.get_copy()) #TODO: Decide if we want a head towel here, maybe just for mom or just for Lily
+        person.apply_outfit(towel_outfit)
+        return
+
 label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt's place.
     # You wake up and go to take a shower, lily or your mom are already in there.
     "You wake up in the morning uncharacteristically early feeling refreshed and energized. You decide to take an early shower to kickstart the day."
@@ -13,8 +19,6 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
         return
 
     "You head to the bathroom, but hear the shower already running inside when you arrive."
-    $ towel_outfit = Outfit("Towel")
-    $ towel_outfit.add_dress(towel.get_copy()) #TODO: Decide if we want a head towel here, maybe just for mom or just for Lily
 
     menu:
         "Skip your shower":
@@ -32,11 +36,11 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
                 call girl_shower_enter_enhanced(the_person) from _call_girl_shower_enter_enhanced_1
             else:
                 the_person.char "Just a second!"
-                call girl_shower_leave(the_person) from _call_girl_shower_leave_enhanced_1
+                call girl_shower_leave_enhanced(the_person) from _call_girl_shower_leave_enhanced_1
 
         "Peek Inside":
             $ home_shower.show_background()
-            $ the_person.apply_outfit(towel_outfit)
+            $ apply_towel_outfit(the_person)
             $ the_person.draw_person(position = "walking_away")
             "You see [the_person.possessive_title] is standing in front of a mirror, getting ready for a shower, undressing herself."
 
@@ -67,7 +71,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
                         $ hall.show_background()
                         $ renpy.scene("Active")
                         $ the_person.change_stats(love = -2, slut_temp = 2, happiness = -2)
-                        call girl_shower_leave(the_person) from _call_girl_shower_leave_enhanced_4
+                        call girl_shower_leave_enhanced(the_person) from _call_girl_shower_leave_enhanced_4
                     else:
                         "She looks up at you, slightly startled, and turns her body away from you."
                         the_person.char "Oh, [the_person.mc_title]!"
@@ -84,7 +88,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
             if the_person.effective_sluttiness(["bare_tits", "bare_pussy"]) < 10:
                 "You try and open the door, but find it locked."
                 the_person.char "One second!"
-                call girl_shower_leave(the_person) from _call_girl_shower_leave_enhanced_2
+                call girl_shower_leave_enhanced(the_person) from _call_girl_shower_leave_enhanced_2
             elif the_person.effective_sluttiness(["bare_tits", "bare_pussy"]) <= 20:
                 $ home_shower.show_background()
                 #She's angry that you've barged in on her (but she doesn't mind enough to have locked the door).
@@ -100,7 +104,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
                 $ renpy.scene("Active")
                 $ the_person.change_love(-1)
                 $ the_person.change_slut_temp(2)
-                call girl_shower_leave(the_person) from _call_girl_shower_leave_enhanced_3
+                call girl_shower_leave_enhanced(the_person) from _call_girl_shower_leave_enhanced_3
             else:
                 $ home_shower.show_background()
                 $ the_person.apply_outfit(Outfit("Nude"))
@@ -115,7 +119,6 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
 
     $ the_person.apply_outfit(the_person.planned_outfit)
     $ mc.location.show_background()
-    $ towel_outfit = None
     $ renpy.scene("Active")
     return
 
@@ -157,6 +160,20 @@ label morning_shower_masturbation():
     $ the_person.reset_arousal()
     return
 
+label girl_shower_leave_enhanced(the_person):
+    "After a short pause the shower stops and you hear movement on the other side of the door."
+    $ apply_towel_outfit(the_person)
+    $ the_person.draw_person()
+    "The bathroom door opens and [the_person.possessive_title] steps out from the steamy room in a towel."
+    if the_person is mom:
+        the_person.char "There you go [the_person.mc_title], go right ahead."
+        "She gives you a quick kiss and steps past you."
+    else:
+        the_person.char "There, it's all yours. I might have used up all of the hot water."
+        "She steps past you and heads to her room."
+    return
+
+
 label girl_shower_enter_enhanced(the_person):
     menu:
         "Wait and watch her shower.":
@@ -175,7 +192,7 @@ label girl_shower_enter_enhanced(the_person):
             $ the_person.update_outfit_taboos()
             "Soon enough she's finished. She steps out and grabs a towel, but leaves the shower running for you."
 
-            $ the_person.apply_outfit(towel_outfit)
+            $ apply_towel_outfit(the_person)
             $ the_person.draw_person()
             the_person.char "There you go. Enjoy!"
             $ renpy.scene("Active")
@@ -203,7 +220,7 @@ label girl_shower_enter_enhanced(the_person):
                 "She wiggles her butt and strokes your tip against her cheeks."
                 $ the_person.change_slut_temp(3 + the_person.get_opinion_score("showing her ass"))
                 "She steps out of the shower and grabs a towel."
-                $ the_person.apply_outfit(towel_outfit)
+                $ apply_towel_outfit(the_person)
                 $ the_person.draw_person()
                 the_person.char "See you next time."
                 $ renpy.scene("Active")
@@ -233,7 +250,7 @@ label girl_shower_enter_enhanced(the_person):
                         call fuck_person(the_person, skip_intro = True) from _call_fuck_person_shower_enhanced_1
                         $ the_report = _return
 
-                        $ the_person.apply_outfit(towel_outfit)
+                        $ apply_towel_outfit(the_person)
                         $ the_person.draw_person()
                         "When you're finished [the_person.title] steps out of the shower and grabs a towel. She dries herself off, then wraps herself in it then turns to you."
                         if the_report.get("girl orgasms",0)>0:
@@ -256,7 +273,7 @@ label girl_shower_enter_enhanced(the_person):
             $ mc.change_energy(20)
 
 
-        "Join her in the shower.\nRequires: 120 Obedience (disabled)" if the_person.obedience < 120:
+        "Join her in the shower.\n{color=#ff0000}{size=18}Requires: 120 Obedience{/size}{/color} (disabled)" if the_person.obedience < 120:
             pass
 
     return

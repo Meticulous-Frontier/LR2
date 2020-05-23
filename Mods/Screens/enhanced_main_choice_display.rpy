@@ -13,8 +13,14 @@ init 2 python:
             self.display_key = display_key
             self.display_scale = display_scale
             self.display_func = display_func
+            self.display_image = None
             self.person_preview_args = person_preview_args
 
+        def load(self):
+            self.display_image = Flatten(self.display_func(lighting = mc.location.get_lighting_conditions(), **self.person_preview_args))
+            # always predict person displayable (the clear_function will remove them from the prediction cache)
+            renpy.start_predict(self.display_image) 
+            return
 
     def build_menu_items(elements_list, draw_hearts_for_people = True, person_preview_args = None):
         result = []
@@ -25,6 +31,12 @@ init 2 python:
                 else:
                     result.append(elements_list[count])
         return result
+
+    def clear_menu_items_list(menu_items):
+        for count in __builtin__.range(len(menu_items)):
+            for item in [x for x in menu_items[count][1:] if x.display_key]:
+                renpy.stop_predict(item.display_image)
+        return
 
     def build_menu_item_list(element_list, draw_hearts_for_people = True, person_preview_args = None):
         result = []
@@ -44,6 +56,8 @@ init 2 python:
                     mi.return_value = item[1]
 
             if isinstance(item,Person): #It's a person. Format it for a person list.
+                renpy.scene("Active") # clear current Active layer and prepare for new menu screen with people.
+
                 mi.title = format_titles(item)
                 mi.return_value = item
 
@@ -56,9 +70,7 @@ init 2 python:
                 mi.display_key = item.name + item.last_name
                 mi.display_scale = scale_person(item.height)
                 mi.display_func = item.build_person_displayable
-
-                # prevent overlapping images of girls
-                renpy.scene("Active")
+                mi.load()
 
             if isinstance(item, Action):
                 mi.title = ""
@@ -85,25 +97,25 @@ init 2 python:
 
             if " (disabled)" in mi.title:
                 mi.title = mi.title.replace(" (disabled)", "")
+                parts = mi.title.split("\n")
+                if len(parts) > 1: # color and size disable reason
+                    parts[-1] = "{color=#ff0000}{size=16}" + parts[-1] + "{/color}{/size}"
+                    mi.title = "\n".join(parts)
                 mi.is_sensitive = False
 
             if mi.display:
-                if the_person and the_person.title and isinstance(mi.the_tooltip, basestring):
+                if the_person and isinstance(the_person.title, basestring) and isinstance(mi.the_tooltip, basestring):
                     mi.the_tooltip = mi.the_tooltip.replace("[the_person.title]", the_person.title)
                 result.append(mi)
         return result
 
-
     def show_menu_person(item):
-        renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="Active", what= item.display_func(lighting = mc.location.get_lighting_conditions(), **item.person_preview_args), tag=item.display_key)
-
+        renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="Active", what= item.display_image, tag=item.display_key)
+        return
 
 init 2:
-    screen main_choice_display(elements_list, draw_hearts_for_people = True, person_preview_args = None): #Elements_list is a list of lists, with each internal list receiving an individual column
+    screen enhanced_main_choice_display(menu_items): #Elements_list is a list of lists, with each internal list receiving an individual column
         #The first element in a column should be the title, either text or a displayable. After that it should be a tuple of (displayable/text, return_value).
-
-        #[["Title",["Item",Return] ]]
-        default menu_items = build_menu_items(elements_list)
 
         hbox:
             spacing 10
@@ -148,7 +160,10 @@ init 2:
                                             if item.display_key:
                                                 hovered [Function(show_menu_person, item)]
                                                 unhovered [Function(renpy.scene, "Active")]
-                                            action Return(item.return_value)
+                                            action [
+                                                Function(clear_menu_items_list, menu_items),
+                                                Return(item.return_value)
+                                            ]
                                             tooltip item.the_tooltip
                                             sensitive item.is_sensitive
                         vbar:
@@ -156,3 +171,9 @@ init 2:
                             xalign 0.99
                             yalign 0.99
                             ysize 585
+
+transform character_off_screen():
+    yalign 0.5
+    yanchor 0.5
+    xalign 2.0
+    xanchor 1.0
