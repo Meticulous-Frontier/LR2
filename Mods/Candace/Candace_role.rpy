@@ -12,6 +12,8 @@ init 2 python:
         return False
 
     def candace_get_to_know_requirement(person):
+        if not candace_can_talk():
+            return "Wait a few days"
         if person.location() is office_store:
             if not candace_get_has_quit_job():
                 return True
@@ -77,6 +79,7 @@ init 2 python:
         candace.event_triggers_dict["learned_about_pay"] = 0
         candace.event_triggers_dict["relationship_doubt_score"] = 0  #Everytime you plant a seed of doubt, increment this.
         candace.event_triggers_dict["quit_job"] = 0
+        candace.event_triggers_dict["last_talk_day"] = 0
 
         candace.special_role.append(candace_role)
 
@@ -182,6 +185,8 @@ label candace_get_to_know_label(the_person):
         "She may not be the brightest, but [the_person.title] doesn't deserve to be treated this way. You think about it for a while, but make up your mind."
         "It is going to take some convincing. You might have to plant a few seeds of doubt here and there, but surely you can get her to quit her job and dump this guy."
         "Maybe you could convince her to work for you? She seems to have quite the knack for maintaining office supplies... maybe she would have a similar skill for medical and chemical supplies?"
+
+    $ candace.event_triggers_dict["last_talk_day"] = day # prevent talk spamming (at least 3 days need to pass before you can plant the next seed)
     return "Advance Time"
 
 label candace_talk_about_bf_control(the_person):
@@ -195,7 +200,7 @@ label candace_talk_about_bf_control(the_person):
         the_person.char "Yeah... I guess? I don't know! I just don't like it when he gets mad at me."
         menu:
             "I would help meet your needs" if candace_get_mc_is_sexually_skilled():
-                $ candace.event_triggers_dict["relationship_doubt_score"] += 1
+                $ candace_increase_doubt()
                 mc.name "You know, at my job, I always reward my employees, with a multitude of different types of rewards, or bonuses."
                 mc.name "You work so hard, you deserve to have someone who meets your needs."
                 the_person.char "Ha, it's hard to imagine having a man who could actually meet my needs."
@@ -223,7 +228,7 @@ label candace_talk_about_bf_control(the_person):
         mc.name "[the_person.title]... that doesn't sounds like a healthy relationship."
         the_person.char "That's what I thought at first, but then he told me I'm not allowed to watch daytime talk shows anymore... I don't remember why I thought it was weird to be honest."
         $ candace.event_triggers_dict["learned_about_bf_control"] = 1
-        $ candace.event_triggers_dict["relationship_doubt_score"] += 1
+        $ candace_increase_doubt()
         "Yeah, you definitely need to help her get out of this."
         mc.name "You know, I've had a few girlfriends throughout the years. Part of the relationship is being open with each other, and trusting each other."
         the_person.char "Oh, don't worry! I trust him completely!"
@@ -251,7 +256,7 @@ label candace_talk_about_previous_work(the_person):
         the_person.char "Small run... what now?"
         mc.name "Drugs, basically. Like pills."
         the_person.char "Oh! Yeah I remember that! Checking boxes, taking notes, talking to people."
-        $ candace.event_triggers_dict["relationship_doubt_score"] += 1
+        $ candace_increase_doubt()
         mc.name "Yeah, my business does the same thing? You know, if you quit, I would totally hire you to work for me."
         if candace_get_ready_to_quit():
             the_person.char "That sounds amazing. Are you sure? I mean, I feel like theres something wrong with me sometimes. Are you sure you would take me?"
@@ -282,7 +287,7 @@ label candace_talk_about_uniforms(the_person):
             the_person.char "Oh? Those girls sure are luck!"
             mc.name "Yup! I have multiple uniforms available to choose from, from conservative business suites, to topless with a set of yoga pants."
             the_person.char "You... you let girls go topless? That sounds... SO COMFY!!!"
-            $ candace.event_triggers_dict["relationship_doubt_score"] += 1
+            $ candace_increase_doubt()
             mc.name "It is! You would like it there. You know if you quit, I would hire you to work there, right?"
             if candace_get_ready_to_quit():
                 the_person.char "I bet I would like it there! Maybe its about time to make a change in my life."
@@ -308,7 +313,7 @@ label candace_talk_about_uniforms(the_person):
         "She says the last bit of that sentence with as much resolve as she can muster, but you can tell from the tone her voice, she wishes it would happen once in a while anyway..."
         mc.name "You should talk to your boyfriend about. Maybe he would let you wear a skirt if you promise to make it a certain length? Or to wear panties?"
         the_person.char "Hmm... that's not a bad idea! I'll have to try that sometime!"
-        $ candace.event_triggers_dict["relationship_doubt_score"] += 1
+        $ candace_increase_doubt()
     return
 
 label candace_talk_about_pay(the_person):
@@ -316,7 +321,7 @@ label candace_talk_about_pay(the_person):
         mc.name "You know, the girls who work for me, make about as much money as you do per week in a day working for me."
         the_person.char "Aww, you pay so well! You must really take care of your employees."
         mc.name "I'm always on the lookout for talented employees. I think you would make a good employee. You interested? I promise you'll make a lot more than you are now!"
-        $ candace.event_triggers_dict["relationship_doubt_score"] += 1
+        $ candace_increase_doubt()
         if candace_get_ready_to_quit():
             the_person.char "You know, I can't believe I'm saying this, but I've been seriously considering it!."
         else:
@@ -472,3 +477,11 @@ init 3 python:
 
     def candace_get_has_quit_job():
         return candace.event_triggers_dict.get("quit_job", 0)
+
+    def candace_can_talk():
+        return candace.event_triggers_dict.get("last_talk_day", 0) + 3 < day
+
+    def candace_increase_doubt():
+        score = candace.event_triggers_dict.get("relationship_doubt_score", 0)
+        candace.event_triggers_dict["relationship_doubt_score"] = score + 1
+        return
