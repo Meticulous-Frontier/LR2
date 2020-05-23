@@ -80,7 +80,7 @@ init 2 python:
         return False
 
     def ophelia_is_over_her_ex_requirement(person):
-        if day >= ophelia_get_day_of_revenge_date() + 7:
+        if not ophelia_get_is_over_her_ex() and day >= ophelia_get_day_of_revenge_date() + 7:
             if person.location() is mall_salon:
                 return True
         return False
