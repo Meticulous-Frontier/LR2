@@ -4,7 +4,22 @@
 #After, based on sluttiness,  she picks out a set of new underwear. If not slutty, its regular underwear. If moderately slutty, its lingerie. If very slutty, pulls MC into room with her for sex scene.
 #Anytime girl tries on outfit that she REALLY likes, if she works for MC, asks MC to wear to work. If yes, add outfit to her department uniform options.
 #TODO, should we give option to add outfit to player's outfit selection?
+init 2 python:
+    def invite_to_clothes_shopping_requirement():
+        if not candace_get_has_gone_clothes_shopping():
+            return False
+        if time_of_day == 0:
+            return "Opens in the morning."
+        elif time_of_day == 4: # Can be removed
+            return "Closed for the night."
+        elif mc.business.funds < 100:
+            return "Requires $100."
+        else:
+            return True
 
+init 3 python:
+    invite_to_clothes_shopping = ActionMod("Invite someone to shop {image=gui/heart/Time_Advance.png}", invite_to_clothes_shopping_requirement, "invite_to_clothes_shopping_label",
+        menu_tooltip = "Invite a person to go clothes shopping.", category="Mall")
 
 label candace_goes_clothes_shopping_label(the_person):
     $ the_person.draw_person(position = "sitting")
@@ -72,8 +87,42 @@ label candace_goes_clothes_shopping_label(the_person):
     "You have now unlocked clothes shopping! Return to the clothing store anytime to invite a girl to go shopping with you."
     #TODO actually add this action
     $ candace.event_triggers_dict["clothes_shopping"] = 1
-
+    $ clothing_store.actions.append(invite_to_clothes_shopping)
+    call advance_time from _call_advance_time_clothes_shopping_candace_1
     return
+
+label invite_to_clothes_shopping_label():
+    "You decide to invite someone out for some clothes shopping."
+    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game([mc]), "Clothes shopping", ["Back"])]))
+    $ person_choice = _return
+    if person_choice != "Back":
+        "You send a message to [person_choice.name] about going clothes shopping."
+        "After some time you get a response..."
+        if person_choice.obedience > 100:
+            person_choice.char "Okay! I'll meet you there [person_choice.mc_title]!"
+        else:
+            person_choice.char "Oh! I suppose I could do that. You're buying though! I'll meet you there, [person_choice.mc_title]."
+        "You hang out for a few minutes. Soon you see [person_choice.title]"
+        $ person_choice.draw_person()
+        person_choice.char "Hey there! Thanks for offering! Let's see what we can find."
+        "She browses through the racks of clothes and eventually finds a couple things she likes."
+        person_choice.char "Okay, you wait right here, I'll be right back to show you what I picked out!"
+        $ renpy.scene("Active")
+        call trying_on_clothes_label(person_choice) from _clothes_shopping_choice_01
+        "You walk with [person_choice.title] up to the checkout line."
+        person_choice.char "God, that was fun! We should do that again sometime!"
+        mc.name "Yeah I'll let you know if I have the chance."
+        "At the checkout line, you pay for the new clothes for [person_choice.possessive_title]"
+        $ mc.business.change_funds(-100)
+        person_choice.char "You're sweet. Thanks for the shopping trip!"
+        $ person_choice.draw_person(position = "walking_away")
+        "You watch [person_choice.title] as she walks away..."
+        $ del person_choice
+        call advance_time from _call_advance_time_clothes_shopping_choice_1
+    else:
+        "You change your mind and decide to do something else instead."
+    return # Where to go if you hit "Back".
+
 
 label trying_on_clothes_label(the_person): #This label starts with trying on clothes, to finishing up with picking them out. The particulars of the setup and the transaction are for the calling label
     "You wait patiently while [the_person.title] changes." #lol make MC wait while we generate all the outfits.
