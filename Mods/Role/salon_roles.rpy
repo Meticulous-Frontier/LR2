@@ -677,6 +677,7 @@ label ophelia_revenge_date_label():
     $ the_person.event_triggers_dict["first_date_finished"] = 1
     $ mc.change_location(the_person.home)
     $ mc.location.show_background()
+    $ the_person.learn_home()
     "Soon, you are walking through her front door."
     the_person.char "Well, this is it! The spoils of a modest hair stylist... its about the best I can afford..."
     "Suddenly, she remembers the date."
