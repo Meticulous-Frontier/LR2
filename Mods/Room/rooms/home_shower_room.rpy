@@ -1,7 +1,7 @@
 init 1 python: # Declare variables to use
 
     # Create the room(s) I want to use.
-    home_shower = Room("home shower", "Home Shower", [], room_background_image("Home_Shower_Background.jpg"), [], [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
+    home_shower = Room("home shower", "Home Shower", [], standard_home_shower_backgrounds[:], [], [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
 
 init 3 python: # Room creation
     # Create Home shower and attach to hallway

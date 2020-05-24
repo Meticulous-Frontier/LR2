@@ -46,7 +46,7 @@ init 2 python: # Declare variables to use
     def hair_salon_mod_initialization(self):
         # Create the room(s) I want to use.
         global mall_salon
-        mall_salon = Room("salon", "Hair Salon", [], room_background_image("Salon_Background.jpg"), [make_floor(), make_wall(), make_chair(), make_window()], [], [salon_action], True, [7,2], None, True, lighting_conditions = standard_indoor_lighting)
+        mall_salon = Room("salon", "Hair Salon", [], standard_salon_backgrounds[:], [make_floor(), make_wall(), make_chair(), make_window()], [], [salon_action], True, [7,2], None, True, lighting_conditions = standard_indoor_lighting)
         # Add to map
         list_of_places.append(mall_salon)
 
