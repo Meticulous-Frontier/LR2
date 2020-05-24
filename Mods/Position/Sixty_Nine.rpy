@@ -75,7 +75,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                     "You pause your licking to give her some encouragement."
                     mc.name "Don't worry, you just need more practice."
                 "You knead her ass cheeks with your hands a few times, then spread her cheeks apart and continue to eat her out."
-            "Focus on her\n{color=#ff0000}{size=18}Requires Oral Skill{/size}{color} (disabled)" if mc.sex_skills["Oral"] < 3:
+            "Focus on her\n{color=#ff0000}{size=18}Requires Oral Skill{/size}{/color} (disabled)" if mc.sex_skills["Oral"] < 3:
                     pass
             "Focus on you":
                 "You pause your licking to give her some encouragement."
