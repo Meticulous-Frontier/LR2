@@ -816,7 +816,7 @@ init -1 python:
         else:
             final_image = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
 
-        renpy.show(self.name + self.last_name + "_anim",at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=self.name + self.last_name +"_anim")
+        renpy.show(self.name + self.last_name,at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=self.name + self.last_name)
 
     # replace the default draw_person function of the person class
     Person.draw_person = draw_person_enhanced
