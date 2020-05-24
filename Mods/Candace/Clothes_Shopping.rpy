@@ -313,7 +313,98 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
             menu:
                 "Looks sexy!":
                     mc.name "It certainly has my attention. Is there room for two in that dressing room?"
-                    the_person.char "Mmm, not today [the_person.mc_title]."
+                    if the_person.sluttiness < 60:
+                        the_person.char "Mmm, not today [the_person.mc_title]."
+                        "You gawk for another moment, but eventually the door closes and [the_person.title] begins changing back into her normal outfit."
+                    else:
+                        $ the_person.draw_person()
+                        "[the_person.title] looks to the left, then to right. There's no one around. She speaks in a whisper."
+                        the_person.char "Get in here!"
+                        "You slip into the changing room. [the_person.possessive_title] closes it behind her."
+                        if the_person.sluttiness < 80 and the_person.get_opinion_score("public sex") < 1: #She just wants to mess around a little
+                            the_person.char "Mmm... want to have a little fun? Nothing too crazy though, I don't want to get caught..."
+                            menu:
+                                "Have some fun":
+                                    "You grab her waist and pull her close."
+                                    call fuck_person(the_person, private = True, prohibit_tags = ["Vaginal", "Anal"]) from _clothes_shopping_sex_in_a_changing_room_1 #Nothing too serious
+                                    "When you finish, you sneak back out of the changing room. You turn and check her out for a moment."
+                                    #TODO chance if there is anyone else at the clothing store to get noticed.
+                                    the_person.char "I'll be out in a minute..."
+                                    "She closes the door slowly."
+                                "Too risky":
+                                    mc.name "I'm not sure I could keep it down... better play it safe."
+                                    $ the_person.change_obedience(2)
+                                    the_person.char "Hmmph, okay. Guess I'll change back into my regular clothes."
+                                    $ the_person.outfit.strip_outfit(exclude_feet = False)
+                                    "She strips out of her outfit and starts to reach for her regular clothes."
+                                    $ the_person.draw_person(position = "standing_doggy")
+                                    "You reach down and run your hands along her hips. She stops and just enjoys the feeling of your hands on her."
+                                    $ the_person.change_arousal(5)
+                                    the_person.char "Oh... so we're gonna do some teasing instead..."
+                                    "You grope her ass. She wiggles her hips."
+                                    $ the_person.change_arousal(5)
+                                    the_person.char "Mm... two can play that game..."
+                                    "She backs up a bit, pushing her ass up against you. She grinds her ass against your crotch."
+                                    $ mc.change_arousal(5)
+                                    $ the_person.change_arousal(5)
+                                    the_person.char "Ugh... we should get together later and do this again somewhere more private."
+                                    $ the_person.draw_person()
+                                    "She stands up and starts to shoo you."
+                                    the_person.char "That's enough, get out of here! I'm gonna change back now."
+                                    "You sneak back out of the changing room. You turn and check her out for a moment."
+                                    the_person.char "I'll be out in a minute..."
+                                    "She closes the door slowly."
+                        else:  #She wants to get a little crazy
+                            "She reaches down and begins to stroke you through your pants."
+                            $ the_person.change_arousal(10)
+                            the_person.char "Oh god, this is so crazy! I want you so bad."
+                            "Her hand goes up, then slips into your underwear and then goes back down. Her hand wraps around your cock. She begins to stroke it."
+                            the_person.char "Will you fuck me? Please? I promise I'll tryo to keep it down."
+                            $ mc.change_aroual(10)
+                            menu:
+                                "Fuck Her":
+                                    mc.name "Fuck yeah, lets do it."
+                                    the_person.char "Yes! But go quick, I don't want anyone getting suspicious."
+                                    $ the_person.outfit.strip_outfit()
+                                    $ the_person.change_arousal(10)
+                                    "You both quickly get naked. She looks like she really enjoys getting naked for you."
+                                    the_person.char "Just stick it in! I'm ready, no need to warm me up..."
+                                    call fuck_person(the_person, private = True, prohibit_tags = ["Foreplay", "Oral"]) from _clothes_shopping_sex_in_a_changing_room_12#Nothing too serious
+                                    $ the_report = _return
+                                    if the_report.get("girl orgasms", 0) > 0:
+                                        the_person.char "Oh my god, I can't believe how good that was. I hope no one heard me cumming..."
+                                        $ the_person.change_love(5)
+                                        $ the_person.change_happiness(10)
+                                    "When you finish, you sneak back out of the changing room. You turn and check her out for a moment."
+                                    #TODO chance if there is anyone else at the clothing store to get noticed.
+                                    the_person.char "I'll be out in a minute..."
+                                    "She closes the door slowly."
+                                "Too risky":
+                                    mc.name "I'm not sure I could keep it down... better play it safe."
+                                    $ the_person.change_obedience(2)
+                                    the_person.char "Hmmph, okay. Guess I'll change back into my regular clothes."
+                                    $ the_person.outfit.strip_outfit(exclude_feet = False)
+                                    "She strips out of her outfit and starts to reach for her regular clothes."
+                                    $ the_person.draw_person(position = "standing_doggy")
+                                    "You reach down and run your hands along her hips. She stops and just enjoys the feeling of your hands on her."
+                                    $ the_person.change_arousal(5)
+                                    the_person.char "Oh... so we're gonna do some teasing instead..."
+                                    "You grope her ass. She wiggles her hips."
+                                    $ the_person.change_arousal(5)
+                                    the_person.char "Mm... two can play that game..."
+                                    "She backs up a bit, pushing her ass up against you. She grinds her ass against your crotch."
+                                    $ mc.change_arousal(5)
+                                    $ the_person.change_arousal(5)
+                                    the_person.char "Ugh... we should get together later and do this again somewhere more private."
+                                    $ the_person.draw_person()
+                                    "She stands up and starts to shoo you."
+                                    the_person.char "That's enough, get out of here! I'm gonna change back now."
+                                    "You sneak back out of the changing room. You turn and check her out for a moment."
+                                    the_person.char "I'll be out in a minute..."
+                                    "She closes the door slowly."
+                                "Too risky\n{color=#ff0000}{size=18}Too aroused to say no{/size}{/color} (disabled)" if mc.arousal > 50:
+                                    pass
+
                     $ the_person.change_slut_temp(2)
                     $ the_person.change_happiness(2)
                     $ the_person.wardrobe.add_outfit(underwear_1)
@@ -322,7 +413,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                     the_person.char "Yeah I was afraid of that. Thank you for your honesty!"
                     $ the_person.change_slut_temp(2)
                     $ the_person.change_obedience(2)
-            "You gawk for another moment, but eventually the door closes and [the_person.title] begins changing back into her normal outfit."
+                    "You gawk for another moment, but eventually the door closes and [the_person.title] begins changing back into her normal outfit."
             $ renpy.scene("Active")
             $ the_person.apply_outfit(the_person.planned_outfit)
             "In another few moments, [the_person.title] emerges from the dressing room."
