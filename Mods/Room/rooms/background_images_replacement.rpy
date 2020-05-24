@@ -33,6 +33,7 @@ init -1 python:
     # updated (no existing backgrounds)
     standard_sex_store_backgrounds = room_background_image("Sex_Shop_Background.jpg")
     standard_gym_backgrounds = room_background_image("Gym_Background.jpg")
+    standard_clothing_store_backgrounds =  room_background_image("Clothing_Store_Background.jpg")
     # extra backgrounds
     standard_biotech_backgrounds = room_background_image("Biotech_Background.jpg")
     standard_dungeon_backgrounds = room_background_image("Dungeon_Background.jpg")
@@ -54,6 +55,7 @@ label updated_room_background(stack):
         #As long a there is a mall background for these, replace it with our custom background
         sex_store.background_image = standard_sex_store_backgrounds[:]
         gym.background_image = standard_gym_backgrounds[:]
+        clothing_store.background_image = standard_clothing_store_backgrounds[:]
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
