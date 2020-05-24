@@ -30,10 +30,11 @@ init -1 python:
     enhanced_production_backgrounds = room_background_image("Production_Background.jpg")
     enhanced_research_backgrounds = room_background_image("RandD_Background.jpg")
     enhanced_lobby_backgrounds = room_background_image("Lobby_Background.jpg")
-    enhanced_sex_store_backgrounds = room_background_image("Sex_Shop_Background.jpg")
+    # updated (no existing backgrounds)
+    standard_sex_store_backgrounds = room_background_image("Sex_Shop_Background.jpg")
+    standard_gym_backgrounds = room_background_image("Gym_Background.jpg")
     # extra backgrounds
     standard_biotech_backgrounds = room_background_image("Biotech_Background.jpg")
-    standard_gym_backgrounds = room_background_image("Gym_Background.jpg")
     standard_dungeon_backgrounds = room_background_image("Dungeon_Background.jpg")
     standard_hotel_backgrounds = room_background_image("Hotel_Room_Background.jpg")
     standard_fancy_restaurant_backgrounds = room_background_image("Fancy_Restaurant_Background.jpg")
@@ -50,9 +51,9 @@ label updated_room_background(stack):
         rd_division.background_image = enhanced_research_backgrounds[:]
         lobby.background_image = enhanced_lobby_backgrounds[:]
 
-        #As long a there is a mall background for the sex_store, replace it with our custom background (since SB uses this location)
-        sex_store.background_image = enhanced_sex_store_backgrounds[:]
-
+        #As long a there is a mall background for these, replace it with our custom background
+        sex_store.background_image = standard_sex_store_backgrounds[:]
+        gym.background_image = standard_gym_backgrounds[:]
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
