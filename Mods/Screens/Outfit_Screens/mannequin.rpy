@@ -8,11 +8,20 @@ init 2 python:
         if emotion is None:
             emotion = mannequin.get_emotion()
 
-        mannequin.apply_outfit(outfit)
+        if not persistent.vren_animation:
+            background_fill = None
 
-        final_image = Flatten(mannequin.build_person_displayable(position, emotion,special_modifier, [0.98,0.98,0.98], None, no_frame = True))
+        lighting = [0.98,0.98,0.98]
 
-        renpy.show(mannequin.name + mannequin.last_name,at_list=[character_right, scale_person(mannequin.height)],layer="Active",what=final_image,tag=mannequin.name + mannequin.last_name)
+        draw_outfit = outfit.get_copy()
+        if mannequin.base_outfit:
+            draw_outfit = outfit.merge_outfit(mannequin.base_outfit)
+
+        mannequin.apply_outfit(draw_outfit)
+
+        final_image = Flatten(mannequin.build_person_displayable(position, emotion,special_modifier, lighting, background_fill))
+
+        renpy.show(mannequin.name,at_list=[character_right, scale_person(mannequin.height)],layer="Active",what=final_image,tag=mannequin.name)
         renpy.restart_interaction()       
 
 init 2: # Moved to screen so that it can be refreshed upon changes made in outfit_creator
