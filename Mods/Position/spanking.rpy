@@ -1,0 +1,171 @@
+init:
+    python:
+        spanking = Position(name = "Spanking", slut_requirement = 25, slut_cap = 50, requires_hard = False, requires_large_tits = False,
+            position_tag = "standing_doggy", requires_location = "Low", requires_clothing = "None", skill_tag = "Foreplay",
+            girl_arousal = 0, girl_energy = 1,  #We use person specific variables to determine arousal
+            guy_arousal = 0, guy_energy = 1,
+            connections = [],
+            intro = "intro_spanking",
+            scenes = ["scene_spanking_1"],
+            outro = "outro_spanking",
+            transition_default = "transition_default_spanking",
+            strip_description = "strip_spanking", strip_ask_description = "strip_ask_spanking",
+            orgasm_description = "orgasm_spanking",
+            taboo_break_description = "taboo_break_spanking",
+            verb = "spank",
+            opinion_tags = ["being submissive"],
+            default_animation = blowjob_bob,
+            associated_taboo = "touching_body")
+
+        def calc_spank_factor(the_person):  #Returns an int that is representative of how much someone likes this round of spanking.
+            factor = 5 + (the_person.get_opinion_score("being submissive") * 2)
+            factor += (- (the_person.event_triggers_dict.get("spank_level", 0)))
+            return factor
+
+        def update_ass_condition(the_person): #update ass condition everytime spanking is initiated to make sure we describe it correctly.
+            if the_person.event_triggers_dict.get("day_last_spanked", 0) <= day:
+                heal_factor = day - the_person.event_triggers_dict.get("day_last_spanked", 0)
+                the_person.event_triggers_dict["spank_level"] = max((the_person.event_triggers_dict.get("spank_level", 0) - heal_factor), 0) #heal by 1 per day, minimum of zero
+            the_person.event_triggers_dict["last_day_spanked"] = day
+            return
+
+        def spank_factor_increment(the_person):
+            the_person.event_triggers_dict["spank_level"] = the_person.event_triggers_dict["spank_level"] + 1
+            return
+
+        #Returns a string based on the physical appears of the girl's ass
+        #Assume previous sentrance flows something like, "The girls ass is [this return value]"
+        def spanking_get_ass_description(the_person):
+            if the_person.event_triggers_dict.get("spank_level", 0) < 2:
+                return "flawless. It is perky and ready for you to discipline."
+            elif the_person.event_triggers_dict.get("spank_level", 0) < 4:
+                return "slightly red. There are a few marks, but it still looks ripe for further discipline."
+            elif the_person.event_triggers_dict.get("spank_level", 0) < 6:
+                return "red. It looks like she has been disciplined properly."
+            elif the_person.event_triggers_dict.get("spank_level", 0) < 8:
+                return "bright red. There are a few small bruises. She has been thoroughly punished."
+            else:
+                return "bruised. She has been punished nearly to her limit. You might want to stop soon."
+
+
+
+
+label intro_spanking(the_girl, the_location, the_object):
+    "You stand behind [the_girl.title] and put your arms around her waist, pushing her so she is bending over the [the_object.name]."
+    mc.name "Someone has been a bad girl. It's time for your punishment, [the_girl.title]."
+    if the_girl.outfit.vagina_available():
+        "You don't waste any time and put your hands on her ass, groping her cheeks."
+        "You raise one hand and bring it down hard, give her ass a firm spank."
+    else:
+        "Let's get these out of the way first."
+        $ the_girl.strip_outfit(exclude_upper = True)
+        "You put both hands on her ass, groping her cheeks."
+        "You raise one hand and bring it down hard, give her ass a firm spank."
+    $ update_ass_condition(the_girl)
+
+    return
+
+label taboo_break_spanking(the_girl, the_location, the_object):
+    mc.name "Someone has been a bad girl. It's time for you punishment, [girl.title]."
+    girl.char "What... what are you gonna do to me?"
+    mc.name "You need a spanking. It's only natural for a bad girl like you to get a spanking once in a while."
+    girl.char "Oh god... I... Okay [the_girl.mc_title]..."
+    "You stand behind [the_girl.title] and put your arms around her waist, pushing her so she is bending over [the_object.name]."
+    if the_girl.outfit.vagina_available():
+        "You don't waste any time and put your hands on her ass, groping her cheeks."
+        "You raise one hand and bring it down hard, give her ass a firm spank."
+    else:
+        "Let's get these out of the way first."
+        $ the_girl.strip_outfit(exclude_upper = True)
+        "You put both hands on her ass, groping her cheeks."
+        "You raise one hand and bring it down hard, give her ass a firm spank."
+    $ update_ass_condition(the_girl)
+
+    return
+
+label scene_spanking_1(the_girl, the_location, the_object):
+    $ spank_factor = calc_spank_factor(the_girl)
+    $ ass_desc = spanking_get_ass_description(the_girl)
+    "You look down at [the_girl.possessive_title]'s ass. It is [ass_desc]"
+    "*SMACK*"
+    "You give her a solid spank. She lets out a little yelp."
+    "*SMACK* *SMACK* SMACK*"
+    "You don't let up, giving her a solid spanking."
+    if spank_factor > 5: #She loves it.
+         the_girl.char "Oh god [the_girl.mc_title]! Give it to me good! Oh god!"
+         "She is really getting into this. With each spank she wiggles her ass, giving you an enticing target."
+         $ the_girl.change_arousal(spank_factor * ((mc.sex_skills["Foreplay"] / 10) + 1))
+         $ the_girl.change_slut_temp(spank_factor - 5)
+    elif spank_factor > 0:
+         the_girl.char "Oh... I'm sorry [the_girl.mc_title]! Oh god..."
+         "She keeps her ass still, taking your blows. Her ass makes an enticing target."
+         $ the_girl.change_arousal(spank_factor * ((mc.sex_skills["Foreplay"] / 10) + 1))
+         $ the_girl.change_obedience(spank_factor)
+    elif spank_factor > -5:
+        the_girl.char "Ouch! I'm sorry [the_girl.mc_title]! That really hurts..."
+        "With each spank, she flinches a bit."
+        $ the_girl.change_arousal(spank_factor * ((mc.sex_skills["Foreplay"] / 10) + 1))
+        $ the_girl.change_obedience(-(spank_factor-3))
+    else:
+        the_girl.char "Fuck! That hurts! Why are you doing this? Please stop!"
+        "She is trembling. With each spank she flinches and quakes."
+        $ the_girl.change_arousal(spank_factor * ((mc.sex_skills["Foreplay"] / 10) + 1))
+        $ the_girl.change_obedience(-spank_factor)
+        $ the_girl.change_love(spank_factor)
+    $ spank_factor_increment(the_girl)
+    return
+
+
+label outro_spanking(the_girl, the_location, the_object):
+    pass #arousal is zero for MC. this shouldn't be possible
+    return
+
+
+label transition_default_spanking(the_girl, the_location, the_object):
+    "You stand behind [the_girl.title] and put your arms around her waist, pushing her so she is bending over [the_object.name]."
+    mc.name "Someone has been a bad girl. It's time for you punishment, [girl.title]."
+    if the_girl.outfit.vagina_available():
+        "You don't waste any time and put your hands on her ass, groping her cheeks."
+        "You raise one hand and bring it down hard, give her ass a firm spank."
+    else:
+        "Let's get these out of the way first."
+        $ the_girl.strip_outfit(exclude_upper = True)
+        "You put both hands on her ass, groping her cheeks."
+        "You raise one hand and bring it down hard, give her ass a firm spank."
+    $ update_ass_condition(the_girl)
+
+    return
+
+label strip_spanking(the_girl, the_clothing, the_location, the_object):
+    the_girl.char "Oh my god... I'm so hot... I need to get this off!"
+    $ the_girl.draw_animated_removal(the_clothing, position = spanking.position_tag)
+    "She strips off her [the_clothing.name] while you're spanking her, moaning the whole time."
+    return
+
+label strip_ask_spanking(the_girl, the_clothing, the_location, the_object):
+    the_girl.char "Everything feels so tight, I want to take it all off... Please can I?"
+    "[the_girl.possessive_title] grabs onto her [the_clothing.name], waiting for you to tell her what to do."
+    menu:
+        "Let her strip.":
+            mc.name "Take it off.."
+            $ the_girl.draw_animated_removal(the_clothing, position = spanking.position_tag)
+            "[the_girl.possessive_title] takes off her [the_clothing.name] and drops it to the side while you grope her ass."
+
+        "Leave it on.":
+            mc.name "No, I like how you look with it on."
+            if the_girl.sluttiness < 80:
+                the_girl.char "Do you think I look sexy in it?"
+            else:
+                the_girl.char "Don't you think I would look better wearing your cum? That would be so fitting for your dirty little slut, wouldn't it?"
+    $ spanking.redraw_scene(the_girl)
+    return
+
+label orgasm_spanking(the_girl, the_location, the_object):
+    the_girl.char "Oh god, oh god, oh.. OH... OHHHH"
+    "Her whole body tenses up. You give her a few more spanks as she cums, just from the sensations of being spanked."
+    $ the_girl.call_dialogue("climax_responses_foreplay")
+    "She quivers with pleasure for a few seconds before her whole body relaxes."
+    the_girl.char "Ah... I'm sorry."
+    mc.name "There you go, being bad again!"
+    "You give her another hard spank."
+    return
