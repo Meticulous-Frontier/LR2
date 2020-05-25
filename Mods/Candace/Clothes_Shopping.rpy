@@ -17,6 +17,29 @@ init 2 python:
         else:
             return True
 
+    def build_outfit_selection(person):
+        outfits = []
+        builder = WardrobeBuilder(person)
+        outfit_slut_points = max(int(person.effective_sluttiness() / 8), 12)
+        for i in range(3):
+            outfits.append(builder.build_outfit(None, outfit_slut_points))
+        outfits.append(builder.build_outfit("UnderwearSets", outfit_slut_points))
+        return outfits
+
+    def clothes_shopping_get_work_wardrobe(person):
+        if person in mc.business.research_team:
+            return mc.business.r_uniform
+        if person in mc.business.market_team:
+            return mc.business.m_uniform
+        if person in mc.business.supply_team:
+            return mc.business.s_uniform
+        if person in mc.business.production_team:
+            return mc.business.p_uniform
+        if person in mc.business.hr_team:
+            return mc.business.h_uniform
+        return None
+
+
 init 3 python:
     invite_to_clothes_shopping = ActionMod("Invite someone to shop {image=gui/heart/Time_Advance.png}", invite_to_clothes_shopping_requirement, "invite_to_clothes_shopping_label",
         menu_tooltip = "Invite a person to go clothes shopping.", category="Mall")
@@ -109,12 +132,19 @@ label invite_to_clothes_shopping_label():
         person_choice.char "Okay, you wait right here, I'll be right back to show you what I picked out!"
         $ renpy.scene("Active")
         call trying_on_clothes_label(person_choice) from _clothes_shopping_choice_01
-        "You walk with [person_choice.title] up to the checkout line."
-        person_choice.char "God, that was fun! We should do that again sometime!"
-        mc.name "Yeah I'll let you know if I have the chance."
-        "At the checkout line, you pay for the new clothes for [person_choice.possessive_title]"
-        $ mc.business.change_funds(-100)
-        person_choice.char "You're sweet. Thanks for the shopping trip!"
+        if _return: # we bought some clothes
+            "You walk with [person_choice.title] up to the checkout line."
+            person_choice.char "God, that was fun! We should do that again sometime!"
+            mc.name "Yeah I'll let you know if I have the chance."
+            "At the checkout line, you pay for the new clothes for [person_choice.possessive_title]"
+            $ mc.business.change_funds(-100)
+            person_choice.char "You're sweet. Thanks for the shopping trip!"
+        else: # we didn't find anything
+            "You walk with [person_choice.title] to the exit."
+            person_choice.char "God, that was fun! Just a shame we didn't find anything we both like!"
+            mc.name "I'm sure we will find something next time."
+            person_choice.char "Oh that's so nice, I can't wait for our next shopping trip! See you next time."
+
         $ person_choice.draw_person(position = "walking_away")
         "You watch [person_choice.title] as she walks away..."
         $ del person_choice
@@ -123,25 +153,20 @@ label invite_to_clothes_shopping_label():
         "You change your mind and decide to do something else instead."
     return # Where to go if you hit "Back".
 
-
 label trying_on_clothes_label(the_person): #This label starts with trying on clothes, to finishing up with picking them out. The particulars of the setup and the transaction are for the calling label
     "You wait patiently while [the_person.title] changes." #lol make MC wait while we generate all the outfits.
     python:
-        outfit_slut_points = max(int(the_person.sluttiness / 8), 12)
-        outfit_counter = 0
-
-        outfit_1 = WardrobeBuilder(the_person).build_outfit(None, outfit_slut_points)
-        outfit_2 = WardrobeBuilder(the_person).build_outfit(None, outfit_slut_points)
-        outfit_3 = WardrobeBuilder(the_person).build_outfit(None, outfit_slut_points)
-        underwear_1 = WardrobeBuilder(the_person).build_outfit("UnderwearSets", outfit_slut_points)
+        count = 0
+        outfits = build_outfit_selection(the_person)
         preferences = WardrobePreference(the_person) #For determining if she loves the outfit or not
-        the_person.apply_outfit(outfit_1)
+        the_person.apply_outfit(outfits[0])
+
     "It isn't long until [the_person.title] emerges from the dressing room."
     $ the_person.draw_person()
     the_person.char "Hey! What do you think?"
     "She gives you a little turn so you can see all sides."
     $ the_person.draw_person(position = "back_peek")
-    if preferences.evaluate_outfit(outfit_1, the_person.sluttiness + 10, sluttiness_min = the_person.sluttiness - 10):
+    if preferences.evaluate_outfit(outfits[0], the_person.effective_sluttiness() + 10, sluttiness_min = the_person.effective_sluttiness() - 10):
          the_person.char "I actually really like this one!"
     else:
          the_person.char "I'm not certain about this one to be honest!"
@@ -152,16 +177,16 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
             #TODO change responses based on sluttiness of outfit
             mc.name "It looks really good on you."
             the_person.char "Aww, thank you! Okay!"
-            $ outfit_counter += 1
-            $ the_person.wardrobe.add_outfit(outfit_1)
-            call clothes_shopping_ask_to_add_to_uniform(the_person, outfit_1, preferences) from _clothes_shopping_uniform_addition_1
+            $ count += 1
+            $ the_person.wardrobe.add_outfit(outfits[0])
+            call clothes_shopping_ask_to_add_to_uniform(the_person, outfits[0], preferences) from _clothes_shopping_uniform_addition_1
         "Try something else":
             mc.name "I'm not sure that is the best look for you. Maybe try something else?"
             the_person.char "Hmm, yeah, I think you might be right."
     the_person.char "Okay, stay right there, I'll be right back with the next one."
     $ renpy.scene("Active")
     "You hang out for a bit. Your mind wanders a bit, thinking about [the_person.title] getting naked in the dressing room..."
-    $ the_person.apply_outfit(outfit_2)
+    $ the_person.apply_outfit(outfits[1])
     $ the_person.draw_person()
     the_person.char "Hey... you aren't dozing off on me are you?"
     "You look up and check out [the_person.title]'s next outfit."
@@ -174,15 +199,15 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
             #TODO change responses based on sluttiness of outfit
             mc.name "That one is definitely a keeper."
             the_person.char "Great!"
-            $ outfit_counter += 1
-            $ the_person.wardrobe.add_outfit(outfit_2)
-            call clothes_shopping_ask_to_add_to_uniform(the_person, outfit_2, preferences) from _clothes_shopping_uniform_addition_2
+            $ count += 1
+            $ the_person.wardrobe.add_outfit(outfits[1])
+            call clothes_shopping_ask_to_add_to_uniform(the_person, outfits[1], preferences) from _clothes_shopping_uniform_addition_2
         "Try something else":
             mc.name "I'm not sure that outfit works. What else do you have?"
     the_person.char "Okay, I have one more, I'll be right back with the last one."
     $ renpy.scene("Active")
     "Hmm... [the_person.title] is back there right now, stripping down, slipping into something else... maybe you should try and sneak a peak..."
-    $ the_person.apply_outfit(outfit_3)
+    $ the_person.apply_outfit(outfits[2])
     $ the_person.draw_person()
     "You are just starting to consider trying to sneak back there when she pops out of the dressing room."
     the_person.char "Alright! Third time is a charm. How about this?"
@@ -194,12 +219,12 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
             #TODO change responses based on sluttiness of outfit
             mc.name "Yep! That outfit was MADE for you."
             the_person.char "Aww. Okay!"
-            $ outfit_counter += 1
-            $ the_person.wardrobe.add_outfit(outfit_3)
-            call clothes_shopping_ask_to_add_to_uniform(the_person, outfit_3, preferences) from _clothes_shopping_uniform_addition_3
+            $ count += 1
+            $ the_person.wardrobe.add_outfit(outfits[2])
+            call clothes_shopping_ask_to_add_to_uniform(the_person, outfits[2], preferences) from _clothes_shopping_uniform_addition_3
         "Try something else":
             mc.name "Honestly I think you would be better off with something else. It just isn't flattering."
-    if outfit_counter == 0:
+    if count == 0:
         the_person.char "Seriously? Not a single outfit? You are impossible!"
         the_person.char "Tell you what. I'm gonna go change out of this. While I'm in there, pick out something for me to try on that YOU think is good and I'll try it on, okay?"
         mc.name "Okay."
@@ -209,14 +234,14 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
         if _return:
             $ created_outfit = _return
             "You put together an outfit and take them to the back."
-            if preferences.evaluate_outfit(created_outfit, the_person.sluttiness + 10, sluttiness_min = the_person.sluttiness - 10):
+            if preferences.evaluate_outfit(created_outfit, the_person.effective_sluttiness() + 10, sluttiness_min = the_person.effective_sluttiness() - 10):
                 the_person.char "Oh! This looks really nice! Ok give me just a minute and I'll be out, but I think I like it!"
             else:
                 the_person.char "Hmm, normally I probably wouldn't pick out something like this, but I'll try it on for you..."
             $ the_person.apply_outfit(created_outfit)
             $ the_person.draw_person()
             "The dressing room door opens and you see [the_person.title] standing there."
-            if created_outfit.get_full_outfit_slut_score() > the_person.sluttiness + 20:
+            if created_outfit.get_full_outfit_slut_score() > the_person.effective_sluttiness() + 20:
                 the_person.char "I umm... I don't think I can come out of here in this."
                 mc.name "What are you talking about? It looks fantastic!"
                 the_person.char "No. Get your looks in, [the_person.mc_title], but I understand now why you want me to come clothes shopping with you!"
@@ -235,12 +260,12 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                         #TODO change responses based on sluttiness of outfit
                         mc.name "What can I say, I have good taste!"
                         the_person.char "Alright!"
-                        $ outfit_counter += 1
+                        $ count += 1
                         $ the_person.wardrobe.add_outfit(created_outfit)
                     "Try something else":
                         mc.name "I'm sorry, I think maybe I'm not the one who should be doing this."
                         the_person.char "Geeze, you're awful! Whatever, I liked the last outfit, I'm gonna get it even if you didn't like it!"
-                        $ the_person.wardrobe.add_outfit(outfit_3)
+                        $ the_person.wardrobe.add_outfit(outfits[2])
                 the_person.char "Alright, I'm gonna change back into my other clothes now..."
                 $ renpy.scene("Active")
         $ the_person.apply_outfit(the_person.planned_outfit)
@@ -261,13 +286,13 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
         the_person.char "Oh! That's a really a good sale!"
         "Suddenly, [the_person.title] takes a detour into the underwear section."
         the_person.char "This is great!"
-        if the_person.sluttiness < 25:
+        if the_person.effective_sluttiness() < 25:
             "You see [the_person.title] looking at normal women's undergarments. You see her pick out a pair."
             the_person.char "I'm gonna go try these on real quick..."
             mc.name "Go ahead, I'll wait outside the door."
             the_person.char "Okay!"
             $ renpy.scene("Active")
-            $ the_person.apply_outfit(underwear_1)
+            $ the_person.apply_outfit(outfits[3])
             "Behind the closed door, you hear [the_person.title] shuffling around a bit."
             the_person.char "Okay... I can't decide if I like this set or not. I know this is kinda crazy but, would you tell me what you think?"
             mc.name "Absolutely."
@@ -279,7 +304,8 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                     the_person.char "Aww, thank you! Okay that's enough peaking..."
                     $ the_person.change_slut_temp(2)
                     $ the_person.change_happiness(2)
-                    $ the_person.wardrobe.add_outfit(underwear_1)
+                    $ count += 1
+                    $ the_person.wardrobe.add_outfit(outfits[3])
                 "Not your style":
                     mc.name "Your body looks great, but this particular cut isn't flattering."
                     the_person.char "Yeah I was afraid of that. Thank you for your honesty! Okay that's enough peaking..."
@@ -300,7 +326,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
             mc.name "Hell yeah I'll be right there."
             "She giggles and heads off to the dressing room."
             $ renpy.scene("Active")
-            $ the_person.apply_outfit(underwear_1)
+            $ the_person.apply_outfit(outfits[3])
             "Behind the closed door, you hear [the_person.title] shuffling around a bit."
             the_person.char "Okay, are you ready out there?"
             mc.name "Absolutely."
@@ -313,7 +339,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
             menu:
                 "Looks sexy!":
                     mc.name "It certainly has my attention. Is there room for two in that dressing room?"
-                    if the_person.sluttiness < 60:
+                    if the_person.effective_sluttiness() < 60:
                         the_person.char "Mmm, not today [the_person.mc_title]."
                         "You gawk for another moment, but eventually the door closes and [the_person.title] begins changing back into her normal outfit."
                     else:
@@ -321,21 +347,26 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                         "[the_person.title] looks to the left, then to right. There's no one around. She speaks in a whisper."
                         the_person.char "Get in here!"
                         "You slip into the changing room. [the_person.possessive_title] closes it behind her."
-                        if the_person.sluttiness < 80 and the_person.get_opinion_score("public sex") < 1: #She just wants to mess around a little
+                        if the_person.effective_sluttiness() < 80 and the_person.get_opinion_score("public sex") < 1: #She just wants to mess around a little
                             the_person.char "Mmm... want to have a little fun? Nothing too crazy though, I don't want to get caught..."
                             menu:
                                 "Have some fun":
                                     "You grab her waist and pull her close."
                                     call fuck_person(the_person, private = True, prohibit_tags = ["Vaginal", "Anal"]) from _clothes_shopping_sex_in_a_changing_room_1 #Nothing too serious
-                                    "When you finish, you sneak back out of the changing room. You turn and check her out for a moment."
+                                    $ the_report = _return
                                     #TODO chance if there is anyone else at the clothing store to get noticed.
+                                    if the_report.get("girl orgasms", 0) > 0:
+                                        the_person.char "Oh my god, I can't believe how good that was. I hope no one heard me cumming..."
+                                        $ the_person.change_love(5)
+                                        $ the_person.change_happiness(10)
+                                    "When you finish, you sneak back out of the changing room. You turn and check her out for a moment."
                                     the_person.char "I'll be out in a minute..."
                                     "She closes the door slowly."
                                 "Too risky":
                                     mc.name "I'm not sure I could keep it down... better play it safe."
                                     $ the_person.change_obedience(2)
                                     the_person.char "Hmmph, okay. Guess I'll change back into my regular clothes."
-                                    $ the_person.outfit.strip_outfit(exclude_feet = False)
+                                    $ the_person.strip_outfit(exclude_feet = False)
                                     "She strips out of her outfit and starts to reach for her regular clothes."
                                     $ the_person.draw_person(position = "standing_doggy")
                                     "You reach down and run your hands along her hips. She stops and just enjoys the feeling of your hands on her."
@@ -359,13 +390,13 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                             $ the_person.change_arousal(10)
                             the_person.char "Oh god, this is so crazy! I want you so bad."
                             "Her hand goes up, then slips into your underwear and then goes back down. Her hand wraps around your cock. She begins to stroke it."
-                            the_person.char "Will you fuck me? Please? I promise I'll tryo to keep it down."
-                            $ mc.change_aroual(10)
+                            the_person.char "Will you fuck me? Please? I promise I'll try to keep it down."
+                            $ mc.change_arousal(10)
                             menu:
                                 "Fuck Her":
                                     mc.name "Fuck yeah, lets do it."
                                     the_person.char "Yes! But go quick, I don't want anyone getting suspicious."
-                                    $ the_person.outfit.strip_outfit()
+                                    $ the_person.strip_outfit()
                                     $ the_person.change_arousal(10)
                                     "You both quickly get naked. She looks like she really enjoys getting naked for you."
                                     the_person.char "Just stick it in! I'm ready, no need to warm me up..."
@@ -383,7 +414,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                                     mc.name "I'm not sure I could keep it down... better play it safe."
                                     $ the_person.change_obedience(2)
                                     the_person.char "Hmmph, okay. Guess I'll change back into my regular clothes."
-                                    $ the_person.outfit.strip_outfit(exclude_feet = False)
+                                    $ the_person.strip_outfit(exclude_feet = False)
                                     "She strips out of her outfit and starts to reach for her regular clothes."
                                     $ the_person.draw_person(position = "standing_doggy")
                                     "You reach down and run your hands along her hips. She stops and just enjoys the feeling of your hands on her."
@@ -407,7 +438,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
 
                     $ the_person.change_slut_temp(2)
                     $ the_person.change_happiness(2)
-                    $ the_person.wardrobe.add_outfit(underwear_1)
+                    $ the_person.wardrobe.add_outfit(outfits[3])
                 "Not your style":
                     mc.name "Your body looks great, but this particular cut isn't flattering."
                     the_person.char "Yeah I was afraid of that. Thank you for your honesty!"
@@ -420,21 +451,15 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
             $ the_person.draw_person()
             the_person.char "Alright, let's go before I try on something else!"
     python:
-        del outfit_slut_points
-        del outfit_counter
-        del outfit_1
-        del outfit_2
-        del outfit_3
-        del underwear_1
+        del outfits
         del preferences
 
-    return
-
+    return count != 0
 
 label clothes_shopping_ask_to_add_to_uniform(the_person, the_outfit, preferences):
     if not the_person.is_employee():#Only run if person is employee
         return
-    if preferences.evaluate_outfit(the_outfit, the_person.sluttiness + 10, sluttiness_min = the_person.sluttiness - 25): #Only run if she loves the outfit
+    if preferences.evaluate_outfit(the_outfit, the_person.effective_sluttiness() + 10, sluttiness_min = the_person.effective_sluttiness() - 25): #Only run if she loves the outfit
         the_person.char "I really like this outfit. Do you think maybe, you could add it to the work uniform list?"
         the_person.char "I'd love to be able to wear it to work!"
         $ slut_limit, underwear_limit, limited_to_top = mc.business.get_uniform_limits()
@@ -455,16 +480,3 @@ label clothes_shopping_ask_to_add_to_uniform(the_person, the_outfit, preferences
                 mc.name "I looks great, but I don't think the other girls would wear it as well as you."
                 "She gives you a little pout, but seems to understand."
     return
-
-init python:
-    def clothes_shopping_get_work_wardrobe(the_person):
-        if the_person in mc.business.research_team:
-            return mc.business.r_uniform
-        if the_person in mc.business.market_team:
-            return mc.business.m_uniform
-        if the_person in mc.business.supply_team:
-            return mc.business.s_uniform
-        if the_person in mc.business.production_team:
-            return mc.business.p_uniform
-        if the_person in mc.business.hr_team:
-            return mc.business.h_uniform
