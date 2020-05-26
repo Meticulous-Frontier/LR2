@@ -12,8 +12,8 @@ init 2 python:
             return "Opens in the morning."
         elif time_of_day == 4: # Can be removed
             return "Closed for the night."
-        elif mc.business.funds < 100:
-            return "Requires $100."
+        elif mc.business.funds < 500:
+            return "Requires $500."
         else:
             return True
 
@@ -87,8 +87,13 @@ label candace_goes_clothes_shopping_label(the_person):
     the_person.char "Good, come on, just do it! I promise you won't regret it!"
     "A promise like that from [the_person.possessive_title] should not be taken lightly."
     mc.name "Ok. Let's go."
+    if the_person.should_wear_uniform():
+        the_person.char "Yay! I can't wait! Just let me get changed, real quick."
+        $ the_person.apply_outfit(the_person.planned_outfit)
+        "After a minute she comes back, ready to go."
+    else:
+        the_person.char "Yay! I can't wait!"
     $ the_person.draw_person()
-    the_person.char "Yay! I can't wait!"
 
     $ mc.change_location(clothing_store)
     $ mc.location.show_background()
@@ -98,11 +103,20 @@ label candace_goes_clothes_shopping_label(the_person):
     the_person.char "Okay, you wait right here, I'll be right back to show you what I picked out!"
     $ renpy.scene("Active")
     call trying_on_clothes_label(the_person) from _clothes_shopping_candace_intro_01
-    "You walk with [the_person.title] up to the checkout line."
-    the_person.char "God, that was fun! We should do that again sometime!"
-    "You are surprised to admit it, but you actually had a lot of fun too."
-    mc.name "Yeah I'd be up for doing that again sometime!"
-    "After checking out, you part ways with [the_person.possessive_title]."
+    if _return > 0: # we bought some clothes
+        "You walk with [the_person.title] up to the checkout line."
+        the_person.char "God, that was fun! We should do that again sometime!"
+        "You are surprised to admit it, but you actually had a lot of fun too."
+        mc.name "Yeah I'd be up for doing that again sometime!"
+        "At the checkout line, you pay for the new clothes for [the_person.possessive_title]"
+        $ mc.business.change_funds(-100 * _return)
+        the_person.char "You're sweet. Thanks for the shopping trip!"
+    else:
+        "You walk with [the_person.title] to the exit."
+        the_person.char "God, that was fun! Just a shame we didn't find anything we both like!"
+        mc.name "I'm sure we will find something next time."
+        the_person.char "Oh that's so nice, I can't wait for our next shopping trip!"
+    
     mc.name "I'm not going back to work right away. Feel free to take the rest of the day off if you want."
     the_person.char "You're sweet. Thanks for the shopping trip!"
     $ the_person.draw_person(position = "walking_away")
@@ -117,37 +131,36 @@ label candace_goes_clothes_shopping_label(the_person):
 label invite_to_clothes_shopping_label():
     "You decide to invite someone out for some clothes shopping."
     call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game([mc]), "Clothes shopping", ["Back"])]))
-    $ person_choice = _return
-    if person_choice != "Back":
-        "You send a message to [person_choice.name] about going clothes shopping."
+    $ the_person = _return
+    if the_person != "Back":
+        "You send a message to [the_person.name] about going clothes shopping."
         "After some time you get a response..."
-        if person_choice.obedience > 100:
-            person_choice.char "Okay! I'll meet you there [person_choice.mc_title]!"
+        if the_person.obedience > 100:
+            the_person.char "Okay! I'll meet you there [the_person.mc_title]!"
         else:
-            person_choice.char "Oh! I suppose I could do that. You're buying though! I'll meet you there, [person_choice.mc_title]."
-        "You hang out for a few minutes. Soon you see [person_choice.title]"
-        $ person_choice.draw_person()
-        person_choice.char "Hey there! Thanks for offering! Let's see what we can find."
+            the_person.char "Oh! I suppose I could do that. You're buying though! I'll meet you there, [the_person.mc_title]."
+        "You hang out for a few minutes. Soon you see [the_person.title]"
+        $ the_person.draw_person()
+        the_person.char "Hey there! Thanks for offering! Let's see what we can find."
         "She browses through the racks of clothes and eventually finds a couple things she likes."
-        person_choice.char "Okay, you wait right here, I'll be right back to show you what I picked out!"
+        the_person.char "Okay, you wait right here, I'll be right back to show you what I picked out!"
         $ renpy.scene("Active")
-        call trying_on_clothes_label(person_choice) from _clothes_shopping_choice_01
-        if _return: # we bought some clothes
-            "You walk with [person_choice.title] up to the checkout line."
-            person_choice.char "God, that was fun! We should do that again sometime!"
+        call trying_on_clothes_label(the_person) from _clothes_shopping_choice_01
+        if _return > 0: # we bought some clothes
+            "You walk with [the_person.title] up to the checkout line."
+            the_person.char "God, that was fun! We should do that again sometime!"
             mc.name "Yeah I'll let you know if I have the chance."
-            "At the checkout line, you pay for the new clothes for [person_choice.possessive_title]"
-            $ mc.business.change_funds(-100)
-            person_choice.char "You're sweet. Thanks for the shopping trip!"
+            "At the checkout line, you pay for the new clothes for [the_person.possessive_title]"
+            $ mc.business.change_funds(-100 * _return)
+            the_person.char "You're sweet. Thanks for the shopping trip!"
         else: # we didn't find anything
-            "You walk with [person_choice.title] to the exit."
-            person_choice.char "God, that was fun! Just a shame we didn't find anything we both like!"
+            "You walk with [the_person.title] to the exit."
+            the_person.char "God, that was fun! Just a shame we didn't find anything we both like!"
             mc.name "I'm sure we will find something next time."
-            person_choice.char "Oh that's so nice, I can't wait for our next shopping trip! See you next time."
+            the_person.char "Oh that's so nice, I can't wait for our next shopping trip! See you next time."
 
-        $ person_choice.draw_person(position = "walking_away")
-        "You watch [person_choice.title] as she walks away..."
-        $ del person_choice
+        $ the_person.draw_person(position = "walking_away")
+        "You watch [the_person.title] as she walks away..."
         call advance_time from _call_advance_time_clothes_shopping_choice_1
     else:
         "You change your mind and decide to do something else instead."
@@ -231,7 +244,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
         $ renpy.scene("Active")
         "[the_person.possessive_title] disappears to the back room to change. You look around at the different clothing racks, looking for something for her to try on."
         call screen outfit_creator(Outfit("New Outfit"))
-        if _return:
+        if _return != "Not_New":
             $ created_outfit = _return
             "You put together an outfit and take them to the back."
             if preferences.evaluate_outfit(created_outfit, the_person.effective_sluttiness() + 10, sluttiness_min = the_person.effective_sluttiness() - 10):
@@ -268,6 +281,10 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                         $ the_person.wardrobe.add_outfit(outfits[2])
                 the_person.char "Alright, I'm gonna change back into my other clothes now..."
                 $ renpy.scene("Active")
+        else:
+            mc.name "I'm sorry [the_person.title], but I can't find anything that would suit you."
+            the_person.char "Oh, I was so looking forward to your pick, a well, just let me get dressed so we can get out of here."
+
         $ the_person.apply_outfit(the_person.planned_outfit)
         #TODO consider something sexy here
         "You give her a minute to change back into her regular outfit."
@@ -339,6 +356,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
             menu:
                 "Looks sexy!":
                     mc.name "It certainly has my attention. Is there room for two in that dressing room?"
+                    $ count += 1
                     if the_person.effective_sluttiness() < 60:
                         the_person.char "Mmm, not today [the_person.mc_title]."
                         "You gawk for another moment, but eventually the door closes and [the_person.title] begins changing back into her normal outfit."
@@ -454,7 +472,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
         del outfits
         del preferences
 
-    return count != 0
+    return count
 
 label clothes_shopping_ask_to_add_to_uniform(the_person, the_outfit, preferences):
     if not the_person.is_employee():#Only run if person is employee

@@ -37,7 +37,7 @@ init 2 python:
         if candace_get_hire_date() == -1:
             return False
         if day > candace_get_hire_date() + 7:  #She's been working atleast a week.
-            if candace.location() == candace.work:
+            if mc.business.funds > 500 and candace.location() is candace.work:
                 return True
         return False
 
