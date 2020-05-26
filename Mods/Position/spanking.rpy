@@ -13,7 +13,7 @@ init:
             orgasm_description = "orgasm_spanking",
             taboo_break_description = "taboo_break_spanking",
             verb = "spank",
-            opinion_tags = ["being submissive"],
+            opinion_tags = ["being submissive"], record_class = "Spankings",
             default_animation = blowjob_bob,
             associated_taboo = "touching_body")
 

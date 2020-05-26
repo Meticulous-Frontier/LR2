@@ -136,8 +136,26 @@ init 5 python:
         types_seen = []
         for position_type in report_log.get("positions_used",[]): #Note: Clears out duplicates
             if position_type.record_class and position_type.record_class not in types_seen:
+                if not position_type.record_class in person.sex_record: # add missing sex_record key
+                    person.sex_record[position_type.record_class] = 0
                 person.sex_record[position_type.record_class] += 1
                 types_seen.append(position_type.record_class)
+
+        # enables slow corruption based on sex type (each category has a chance to increase sex stats / opinions)
+        # also higher suggestibility has a higher chance of increasing the stats (same as Fetish Serums)
+        for record_class in types_seen:
+            if record_class in ["Handjobs", "Kissing", "Fingered", "Tit Fucks"]:
+                fetish_basic_function_on_turn(person, True)
+            if record_class in ["Blowjobs", "Cunnilingus"]:
+                fetish_oral_function_on_turn(person, True)
+            if record_class in ["Vaginal Sex"]:
+                fetish_vaginal_function_on_turn(person, True)
+            if record_class in ["Anal Sex"]:
+                fetish_anal_function_on_turn(person, True)
+            if record_class in ["Cum Facials", "Cum in Mouth", "Cum Covered", "Vaginal Creampies", "Anal Creampies"]:
+                fetish_cum_function_on_turn(person, True)
+            if record_class in ["Threesomes", "Spanking", "Insertions"]:
+                fetish_exhibition_on_turn(person, True)
 
         # record the last time we had sex
         person.sex_record["Last Sex Day"] = day
