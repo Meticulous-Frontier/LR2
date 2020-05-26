@@ -36,6 +36,7 @@ init -3 python:
         "SB_fetish_lily_cum_label",
         "SB_fetish_cum_label",
         "SB_fetish_stephanie_cum_label",
+        "SB_fetish_cum_non_employee_label"
     ]
 
     def SB_FETISH_EVENT_ACTIVE():

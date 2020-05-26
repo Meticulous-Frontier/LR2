@@ -146,6 +146,8 @@ init -1 python:
                             add_sb_fetish_stephanie_cum_event()
                         elif employee_role in the_person.special_role:
                             add_sb_fetish_cum_crisis(the_person)
+                        else:
+                            add_sb_fetish_cum_crisis_non_employee(the_person)
         return
 
     def increase_person_sex_skill(the_person, skill_name, max_skill):

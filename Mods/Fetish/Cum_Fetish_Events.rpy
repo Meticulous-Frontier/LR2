@@ -6,6 +6,11 @@ init 1 python:
                     return True
         return False
 
+    def SB_fetish_cum_requirement_non_employee():
+        if mc_asleep():
+            return True
+        return False
+
     def SB_fetish_mom_cum_requirement():
         if mc_asleep() and day % 7 is not 4: # not on Friday nights
             if mc.energy > 30:  #Must have the energy to handle a long sexy night
@@ -65,6 +70,78 @@ init 1 python:
         SB_fetish_stephanie_cum_action = Action("Stephanie Cum Fetish", SB_stephanie_cum_fetish_requirement, "SB_fetish_stephanie_cum_label")
         mc.business.mandatory_crises_list.append(SB_fetish_stephanie_cum_action)
         return
+
+    def add_sb_fetish_cum_crisis_non_employee(person):
+        SB_fetish_cum_crisis_non_employee = Action("Loves Cum", SB_fetish_cum_requirement_non_employee, "SB_fetish_cum_non_employee_label", args = person)
+        mc.business.mandatory_crises_list.append(SB_fetish_cum_crisis_non_employee)
+        return
+
+label SB_fetish_cum_non_employee_label(the_person):
+    "Some time late in the night, you're awoken by the buzz of your phone getting a text. You roll over and ignore it."
+    "A few minutes later it buzzes again, then again. You're forced to wake up and see what is the matter."
+    "[the_person.title] has been texting you. She's sent you several messages, with the last ending:"
+    the_person.char "I'm here... Should I just knock on the door?"
+    "You drag yourself out of bed and stumble out to the front hall. You move to a window and peek out at your front door."
+    $ the_person.draw_person(emotion = "happy")
+    "You see [the_person.title] standing outside. You open the door before she goes to knock."
+    mc.name "[the_person.title], what are you doing here? It's the middle of the night."
+    "[the_person.possessive_title] takes a step towards you, running a hand down your chest. You guide her outside so she won't wake up your mother or sister."
+    the_person.char "Oh [the_person.mc_title], I just keep on thinking about your nice cock and its sweet nectar, you need to help me!"
+    "Even before you have time to respond, she drops to her knees and pulls out your flaccid member."
+    $ the_person.draw_person(position = "blowjob") 
+    menu:
+        "Ok, go aHead":
+            mc.name "Ok, go ahead, but make it quick, I don't want to disturb the neighbors."
+            $ mc.change_arousal(20)
+            "She quickly takes you in her mouth, slowly making your cock hard as rock."
+            the_person.char "Mmh, I love it when I can feel it grow in my mouth."
+            "[the_person.possessive_title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
+            call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC10B
+            #Try and figure out where you came
+            python:
+                if the_person.outfit.has_mouth_cum():
+                    #You came in her mouth! She now fetishes getting cum inside
+                    #"Note, cum in mouth detected. Comment this later"
+                    the_person.max_opinion_score("drinking cum")
+                    the_person.max_opinion_score("creampies")
+                    if not cum_internal_role in the_person.special_role:
+                        the_person.special_role.append(cum_internal_role)
+                        add_cum_slut_collar_to_base_outfit(the_person)
+                if the_person.outfit.has_face_cum():
+                    #You came on her face! Now she fetishes facials and getting cum on her.
+                    #"Note, cum on face detected. Comment this later"
+                    the_person.max_opinion_score("cum facials")
+                    the_person.max_opinion_score("being covered in cum")
+                    if not cum_external_role in the_person.special_role:
+                        the_person.special_role.append(cum_external_role)
+                        add_cum_slut_collar_to_base_outfit(the_person)
+            "[the_person.possessive_title] is moaning ecstatically."
+            if SB_check_fetish(the_person, cum_external_role):
+                "Glancing down, you see [the_person.possessive_title] running her hands along her face, rubbing your cum into her skin."
+                the_person.char "Mmm... it feels so good! That first splash is always the best..."
+            elif SB_check_fetish(the_person, cum_internal_role):
+                "Glancing down, you see [the_person.possessive_title] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
+                the_person.char "Mmm... your taste is so unique, I love it!"
+            "[the_person.possessive_title] stands up."
+            $ the_person.draw_person()
+            the_person.char "Wow, that was amazing, [the_person.mc_title]. I don't know what has been coming over me lately..."
+            "[the_person.possessive_title] blushes and pauses..."
+            mc.name "Did you get what you were hoping for?"
+            the_person.char "Oh, I think I'm good for today... but I'm sure it won't be long until I get hungry again..."
+            "[the_person.possessive_title] runs her hand through her hair. She licks her lips and smiles at you."
+            the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
+            $ the_person.draw_person(position = "walking_away", emotion = "happy")
+            "You wave goodbye to [the_person.possessive_title] and quickly put away your cock. You turn around and go to bed."
+        "Not tonight":
+            mc.name "I'm sorry, [the_person.title], but I can't right now."
+            $ the_person.draw_person(emotion = "angry")
+            the_person.char "Really?! I'm so stupid, thinking you would help me out."
+            $ the_person.draw_person(position = "walking_away", emotion = "angry")
+            "You watch her walk away while you put away your dick. You turn around and go to bed."
+    $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
+    $ mc.location.show_background()
+    $ renpy.scene("Active")
+    return       
 
 #SBC1
 label SB_fetish_cum_label(the_person):
