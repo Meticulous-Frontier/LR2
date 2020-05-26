@@ -1,6 +1,6 @@
 init:
     python:
-        spanking = Position(name = "Spanking", slut_requirement = 25, slut_cap = 50, requires_hard = False, requires_large_tits = False,
+        spanking = Position(name = "Spanking", slut_requirement = 30, slut_cap = 70, requires_hard = False, requires_large_tits = False,
             position_tag = "standing_doggy", requires_location = "Low", requires_clothing = "None", skill_tag = "Foreplay",
             girl_arousal = 0, girl_energy = 1,  #We use person specific variables to determine arousal
             guy_arousal = 0, guy_energy = 1,
@@ -17,35 +17,40 @@ init:
             default_animation = blowjob_bob,
             associated_taboo = "touching_body")
 
-        def calc_spank_factor(the_person):  #Returns an int that is representative of how much someone likes this round of spanking.
-            factor = 5 + (the_person.get_opinion_score("being submissive") * 2)
-            factor += (- (the_person.event_triggers_dict.get("spank_level", 0)))
-            return factor
+init 1 python:
+    spanking.link_positions(SB_doggy_standing, "transition_spanking_SB_doggy_standing")
 
-        def update_ass_condition(the_person): #update ass condition everytime spanking is initiated to make sure we describe it correctly.
-            if the_person.event_triggers_dict.get("day_last_spanked", 0) <= day:
-                heal_factor = day - the_person.event_triggers_dict.get("day_last_spanked", 0)
-                the_person.event_triggers_dict["spank_level"] = max((the_person.event_triggers_dict.get("spank_level", 0) - heal_factor), 0) #heal by 1 per day, minimum of zero
-            the_person.event_triggers_dict["last_day_spanked"] = day
-            return
+            #TODO transitions to standing anal
 
-        def spank_factor_increment(the_person):
-            the_person.event_triggers_dict["spank_level"] = the_person.event_triggers_dict["spank_level"] + 1
-            return
+    def calc_spank_factor(the_person):  #Returns an int that is representative of how much someone likes this round of spanking.
+        factor = 5 + (the_person.get_opinion_score("being submissive") * 2)
+        factor += (- (the_person.event_triggers_dict.get("spank_level", 0)))
+        return factor
 
-        #Returns a string based on the physical appears of the girl's ass
-        #Assume previous sentrance flows something like, "The girls ass is [this return value]"
-        def spanking_get_ass_description(the_person):
-            if the_person.event_triggers_dict.get("spank_level", 0) < 2:
-                return "flawless. It is perky and ready for you to discipline."
-            elif the_person.event_triggers_dict.get("spank_level", 0) < 4:
-                return "slightly red. There are a few marks, but it still looks ripe for further discipline."
-            elif the_person.event_triggers_dict.get("spank_level", 0) < 6:
-                return "red. It looks like she has been disciplined properly."
-            elif the_person.event_triggers_dict.get("spank_level", 0) < 8:
-                return "bright red. There are a few small bruises. She has been thoroughly punished."
-            else:
-                return "bruised. She has been punished nearly to her limit. You might want to stop soon."
+    def update_ass_condition(the_person): #update ass condition everytime spanking is initiated to make sure we describe it correctly.
+        if the_person.event_triggers_dict.get("day_last_spanked", 0) <= day:
+            heal_factor = (day - the_person.event_triggers_dict.get("day_last_spanked", 0)) * 2 #Heal 2 stages per day since last spanking
+            the_person.event_triggers_dict["spank_level"] = max((the_person.event_triggers_dict.get("spank_level", 0) - heal_factor), 0) #heal by 1 per day, minimum of zero
+        the_person.event_triggers_dict["last_day_spanked"] = day
+        return
+
+    def spank_factor_increment(the_person):
+        the_person.event_triggers_dict["spank_level"] = the_person.event_triggers_dict["spank_level"] + 1
+        return
+
+    #Returns a string based on the physical appears of the girl's ass
+    #Assume previous sentrance flows something like, "The girls ass is [this return value]"
+    def spanking_get_ass_description(the_person):
+        if the_person.event_triggers_dict.get("spank_level", 0) < 2:
+            return "flawless. It is perky and ready for you to discipline."
+        elif the_person.event_triggers_dict.get("spank_level", 0) < 4:
+            return "slightly red. There are a few marks, but it still looks ripe for further discipline."
+        elif the_person.event_triggers_dict.get("spank_level", 0) < 6:
+            return "red. It looks like she has been disciplined properly."
+        elif the_person.event_triggers_dict.get("spank_level", 0) < 8:
+            return "bright red. There are a few small bruises. She has been thoroughly punished."
+        else:
+            return "bruised. She has been punished nearly to her limit. You might want to stop soon."
 
 
 
@@ -66,10 +71,10 @@ label intro_spanking(the_girl, the_location, the_object):
     return
 
 label taboo_break_spanking(the_girl, the_location, the_object):
-    mc.name "Someone has been a bad girl. It's time for you punishment, [girl.title]."
-    girl.char "What... what are you gonna do to me?"
+    mc.name "Someone has been a bad girl. It's time for you punishment, [the_girl.title]."
+    the_girl.char "What... what are you gonna do to me?"
     mc.name "You need a spanking. It's only natural for a bad girl like you to get a spanking once in a while."
-    girl.char "Oh god... I... Okay [the_girl.mc_title]..."
+    the_girl.char "Oh god... I... Okay [the_girl.mc_title]..."
     "You stand behind [the_girl.title] and put your arms around her waist, pushing her so she is bending over [the_object.name]."
     if the_girl.outfit.vagina_available():
         "You don't waste any time and put your hands on her ass, groping her cheeks."
@@ -168,4 +173,24 @@ label orgasm_spanking(the_girl, the_location, the_object):
     the_girl.char "Ah... I'm sorry."
     mc.name "There you go, being bad again!"
     "You give her another hard spank."
+    return
+
+label transition_spanking_SB_doggy_standing(the_girl, the_location, the_object):
+    "You are done spanking her. You run your fingers along her slit a bit, getting a feel for how ready she is."
+    mc.name "That's enough spanking [the_girl.title]. Now I'll make it feel all better.."
+    the_girl.char "Oh yes, [the_girl.mc_title], make me feel good."
+    "You bounce your hard shaft on her ass a couple of times before sliding your cock between her thighs."
+    "You continue your back and forth motion, rubbing your cock along her pussy lips."
+    if the_girl.get_opinion_score("vaginal sex") > 0:
+        the_girl.char "Oh....Please..."
+    "You continue to move your cock forwards and backwards teasing her pussy."
+    if the_girl.has_taboo("vaginal_sex"):
+        $ the_girl.call_dialogue(doggy.associated_taboo+"_taboo_break")
+        "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you push forward."
+        "After a moment of resistance your cock spreads her pussy open and you slide smoothly inside of her."
+        the_girl.char "Oh god.... Ah...."
+        "You start with short thrusts, each time going a little bit deeper. Soon you're working your full length in and out of her wet hole."
+        $ the_girl.break_taboo("vaginal_sex")
+    else:
+        "Once you're both ready you push yourself forward, slipping your hard shaft deep inside of her. She lets out a gasp under her breath."
     return
