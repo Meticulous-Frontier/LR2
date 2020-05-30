@@ -2076,6 +2076,8 @@ label Sarah_initial_threesome_label():
         $ scene_manager.remove_actor(the_person_one)
         "You say goodbye, and slowly drift off to sleep."
         call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_initial_threesome_no_overnight
+        $ del the_person_one
+        $ del the_person_two
         return
     mc.name "You're staying tonight... right?"
     the_person_one.char "Oh god, I don't think I could get up, even if I wanted to. Which I don't."
