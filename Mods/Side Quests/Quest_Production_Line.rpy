@@ -152,6 +152,11 @@ init 1 python:
                 return True
         return False
 
+    def prod_line_target_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions,  prohibit_tags = []):
+        willingness = spanking.build_position_willingness_string(person, ignore_taboo = True)
+        foreplay_positions.append([willingness, spanking])
+        return [foreplay_positions, oral_positions, vaginal_positions, anal_positions]
+
     quest_production_line_intro = Action("Begin Production Quest", quest_production_line_intro_requirement, "quest_production_line_intro_label")
     quest_production_line_coffee_reminder = Action("Meeting Remind", quest_production_line_coffee_reminder_requirement, "quest_production_line_coffee_reminder_label")
     quest_production_line_coffee = Action("Business Meeting", quest_production_line_coffee_requirement, "quest_production_line_coffee_label")
@@ -173,7 +178,7 @@ label quest_production_line_intro_label(the_person):
     the_person.char "Yeah, he said he was surprised at a couple of our methods. He tried to explain some of it to me but to be honest I didn't really understand it."
     mc.name "Hmm, that sounds like it would be useful to have someone like that as a consultant."
     the_person.char "Yeah, his work keeps him pretty busy. Hey, you know what? Why don't I call him? Maybe he would be willing to meet with you for coffee or something?"
-    mc.name "That would be good. Any increase in efficiency is huge in maintaining profitibility."
+    mc.name "That would be good. Any increase in efficiency is huge in maintaining profitability."
     the_person.char "Ok! One second..."
     $ the_person.draw_person(position = "back_peek")
     "[the_person.possessive_title] turns away from you and calls her dad."
@@ -216,7 +221,7 @@ label quest_production_line_coffee_label():
     dad_name "She's right, I do. I'm willing to help you, however, I need you to do me a favor first."
     mc.name "Oh? What is that?"
     dad_name "This job that my baby girl is doing... its her first real job, you know? She's had a couple part time jobs, but nothing like this."
-    dad_name "She is right on the verge of being able to afford her own place, with no roomates."
+    dad_name "She is right on the verge of being able to afford her own place, with no roommates."
     dad_name "I'm not asking for much, even just a small raise in her salary would be enough to do it."
     mc.name "So... you are proposing an exchange? I give her a raise, and you give me an efficiency consultation?"
     dad_name "Exactly. I need you to keep it kinda quiet as well."
@@ -267,7 +272,7 @@ label quest_production_line_after_raise_consult_label():
     mc.name "That's right, I gave her a pay hike."
     dad_name "Alright. Glad to hear it."
     mc.name "So, would you like to come out to the lab for the consult?"
-    dad_name "No need! [the_person.name] told me about your process for seperating chemicals. The centrifuges you are currently using are ancient technology."
+    dad_name "No need! [the_person.name] told me about your process for separating chemicals. The centrifuges you are currently using are ancient technology."
     dad_name "I pulled some strings at work, we have some that are a bit more state of the art. I'll have them delivered to your lab ASAP."
     dad_name "Using the new centrifuges should increase your serum output."
     mc.name "Ah, well thank you for the help. I'm still new to this, owning a business thing, and every little bit helps."
@@ -333,6 +338,7 @@ label quest_production_line_help_move_label():
     "When you are done, you ride with her over to her new apartment."
     #TODO her apartment which is actually different than the place she was earlier.
     $ the_person.draw_person()
+    $ the_person.learn_home()
     "Before we get to work, would you do me a favor? Could you grab a couple bottles of water from the fridge? I'm so thirsty!"
     $ renpy.scene("Active")
     "You grab a couple of water bottles. [the_person.title] is still out in the trailer. Now would be a good time to drop a serum in her drink..."
@@ -447,10 +453,3 @@ label quest_production_line_help_move_label():
             the_person.char "Yes Sir!"
             $ quest_production_line.set_quest_flag(102)
     return
-
-init 5 python:
-
-    def prod_line_target_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions,  prohibit_tags = []):
-        willingness = spanking.build_position_willingness_string(person, ignore_taboo = True)
-        foreplay_positions.append([willingness, spanking])
-        return [foreplay_positions, oral_positions, vaginal_positions, anal_positions]
