@@ -1,12 +1,18 @@
 screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person and the variables holding the current hair style
     modal True
     default category_selected = "Hair Style"
+    default selected_style = person.hair_style
 
-    default valid_categories = ["Hair Style"] #Holds the valid list of categories strings to be shown at the top.
 
-    $ categories_mapping = {
-        "Hair Style": [hair_styles]
-    }
+    default use_current_outfit = person.outfit
+    default use_nude = Outfit("Nude")
+
+    #default valid_categories = ["Hair Style", "Pubic Style"] #Holds the valid list of categories strings to be shown at the top.
+    $ categories_mapping = { # list of clothing | Apply method | Valid / sensitive check | nudity switch | tooltip string
+        "Hair Style": [hair_styles, Person.set_hair_style, True, "use_current_outfit"],
+        "Pubic Style": [pube_styles, Person.set_pubic_style, True, "use_nude", "Example String"] #Set the False bool to either true or a custom requirement function
+        }
+
 
     default bar_select = 0 # 0 is nothing selected, 1 is red, 2 is green, 3 is blue, and 4 is alpha
 
@@ -18,7 +24,9 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
 
     default selected_hair_colour_name = person.hair_colour[0]
     default selected_hair_colour = person.hair_colour[1]
-    default selected_hair_style = person.hair_style
+    # default selected_style = person.hair_style
+    #
+    # default selected_pube_style = person.pubes_style
 
     hbox: #The main divider between the new item adder and the current outfit view.
         xpos 15
@@ -33,22 +41,34 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                 spacing 15
                 vbox: #Categories select on far left
                     spacing 15
-                    for category in valid_categories:
+                    for category in categories_mapping:
+
                         textbutton category:
                             style "textbutton_style"
                             text_style "textbutton_text_style"
                             if category == category_selected:
                                 background "#4f7ad6"
                                 hover_background "#4f7ad6"
+                            elif not categories_mapping[category][2]:
+                                background "#222222"
+
                             else:
                                 background "#1a45a1"
                                 hover_background "#3a65c1"
                             text_align(0.5,0.5)
                             text_anchor(0.5,0.5)
-                            tooltip ""
+                            #sensitive categories_mapping[category][2]
+                            if len(categories_mapping[category]) > 4 and categories_mapping[category][2] is False:
+                                tooltip categories_mapping[category][4]
                             xysize (220, 60)
-                            action [SetScreenVariable("category_selected",category),
-                                SetScreenVariable("selected_colour", "colour")]
+                            if categories_mapping[category][2]:
+                                action [
+                                    SetScreenVariable("category_selected", category),
+                                    SetScreenVariable("selected_style", None),
+                                    SetScreenVariable("selected_colour", "colour")
+                                    ]
+                            else:
+                                action NullAction()
                     # textbutton old_hair_colour:
                     #     style "textbutton_style"
                     #     text_style "textbutton_text_style"
@@ -74,8 +94,8 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                     #    $ valid_check = categories_mapping[category_selected][1]
                                     #    $ apply_method = categories_mapping[category_selected][2]
                                     #    $ cloth_list_length = len(categories_mapping[category_selected][0])
-                                    for hair_style_item in sorted(categories_mapping[category_selected][0], key = lambda x: x.name):
-                                        textbutton hair_style_item.name:
+                                    for style_item in sorted(categories_mapping[category_selected][0], key = lambda x: x.name):
+                                        textbutton style_item.name:
                                             style "textbutton_style"
                                             text_style "textbutton_text_style"
                                             background "#1a45a1"
@@ -83,12 +103,13 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                             tooltip ""
                                             xfill True
                                             sensitive True
+                                            hovered SetField(person, "outfit", renpy.current_screen().scope[categories_mapping[category_selected][3]])
+
                                             action [
-                                                SetField(hair_style_item, "colour", [current_r, current_g, current_b, current_a]),
+                                                SetField(style_item, "colour", [current_r, current_g, current_b, current_a]),
                                                 SetScreenVariable("selected_colour", "colour"),
-                                                SetScreenVariable("selected_hair_style", hair_style_item),
-                                                SetField(person, "hair_colour", [selected_hair_colour_name, [current_r, current_g, current_b, current_a]]),
-                                                SetField(person, "hair_style", hair_style_item),
+                                                SetScreenVariable("selected_style", style_item),
+                                                Function(categories_mapping[category_selected][1], person, style_item),
                                                 Function(person.draw_person, show_person_info = False)]
 
                     frame:
@@ -97,8 +118,8 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                         background "#888888"
                         vbox:
                             spacing 10
-                            if selected_hair_style is not None:
-                                text selected_hair_style.name style "textbutton_text_style"
+                            if selected_style:
+                                text selected_style.name style "textbutton_text_style"
 
                                 hbox:
                                     spacing -5 #We will manually handle spacing so we can have our colour predictor frames
@@ -130,9 +151,9 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                         tooltip ""
                                         xoffset 20
                                         action [
-                                            SetField(selected_hair_style, "colour", [current_r, current_g, current_b, current_a]),
+                                            SetField(selected_style, "colour", [current_r, current_g, current_b, current_a]),
                                             SetField(person, "hair_colour", [selected_hair_colour_name, [current_r, current_g, current_b, current_a]]),
-                                            SetField(person, "hair_style", selected_hair_style),
+                                            Function(categories_mapping[category_selected][1], person, selected_style),
                                             Function(person.draw_person, show_person_info = False)
                                         ]
 
@@ -239,13 +260,13 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                                     action [
                                                         SetScreenVariable("selected_hair_colour_name", hair_colour[0]),
                                                         SetScreenVariable("selected_hair_colour", hair_colour[1]),
-                                                        SetField(selected_hair_style, "colour", [hair_colour[1][0], hair_colour[1][1], hair_colour[1][2], hair_colour[1][3]]),
+                                                        SetField(selected_style, "colour", [hair_colour[1][0], hair_colour[1][1], hair_colour[1][2], hair_colour[1][3]]),
                                                         SetScreenVariable("current_r", hair_colour[1][0]),
                                                         SetScreenVariable("current_g", hair_colour[1][1]),
                                                         SetScreenVariable("current_b", hair_colour[1][2]),
                                                         SetScreenVariable("current_a", hair_colour[1][3]),
                                                         SetField(person, "hair_colour", hair_colour),
-                                                        SetField(person, "hair_style", selected_hair_style),
+                                                        Function(categories_mapping[category_selected][1], person, selected_style),
                                                         Function(person.draw_person, show_person_info = False)
                                                     ]
                                                     # We use a fixed pallette of hair colours
@@ -259,7 +280,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                 vbox:
                     frame:
                         background "#000080"
-                        xsize 400                       
+                        xsize 400
                         text "Current Hair Style" xalign 0.5 style "textbutton_text_style"
                     frame:
                         xfill True
@@ -272,7 +293,8 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                 xysize (390, 40)
                                 xalign 0.5
                                 yalign 0.0
-                                text selected_hair_style.name xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 style "outfit_style"
+                                if selected_style:
+                                    text selected_style.name xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 style "outfit_style"
 
             frame:
                 background "#aaaaaa"

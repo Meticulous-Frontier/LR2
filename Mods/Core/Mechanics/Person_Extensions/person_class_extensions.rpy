@@ -126,6 +126,29 @@ init -1 python:
         return
     Person.match_skin = match_skin
 
+
+    ## SET HAIRSTYLE VIA Clothing ITEM, maintain color etc.
+
+    def set_hair_style(self, new_clothing):
+        cs = renpy.current_screen()
+        self.hair_style = new_clothing
+
+        if cs:
+            self.hair_colour = [cs.scope["selected_hair_colour_name"], cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]
+
+    Person.set_hair_style = set_hair_style
+
+    # SET PUBIC STYLE Clothing ITEM
+
+    def set_pubic_style(self, new_clothing):
+        cs = renpy.current_screen()
+        self.pubes_style = new_clothing
+
+        if cs:
+            self.hair_colour = [cs.scope["selected_hair_colour_name"], cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]
+
+    Person.set_pubic_style = set_pubic_style
+
     ## CHANGE HEIGHT EXTENSION
     # Returns True when the persons height has changed; otherwise False
     # chance is probability percentage that height change for amount will occur (used by serums)
@@ -523,7 +546,7 @@ init -1 python:
             clothing = self.outfit.remove_random_any(exclude_feet = True, do_not_remove = True)
         return clothing
 
-    Person.choose_strip_clothing_item = choose_strip_clothing_item 
+    Person.choose_strip_clothing_item = choose_strip_clothing_item
 
     def run_move_enhanced(self,location):
         self.sexed_count = 0 #Reset the counter for how many times you've been seduced, you might be seduced multiple times in one day!
@@ -626,7 +649,7 @@ init -1 python:
             # run extension code (clean up situational dictionaries)
             person.situational_sluttiness.clear()
             person.situational_obedience.clear()
-        
+
         return run_day_wrapper
 
     # wrap up the run_day function
@@ -687,7 +710,7 @@ init -1 python:
             else:
                 self.sexy_opinions[topic] = [score, add_to_log]
 
-        if topic in opinions_list:                
+        if topic in opinions_list:
             if topic in self.opinions:
                 self.opinions[topic][0] = score
             else:
