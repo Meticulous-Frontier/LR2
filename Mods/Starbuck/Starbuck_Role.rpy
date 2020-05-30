@@ -1780,7 +1780,7 @@ label starbuck_replay_dressup_label(the_person):
         mc.name "I'm sorry, I can't promise something like that, my business keeps me busy."
         the_person.char "Damn. A girl can dream though."
         $ the_person.change_love(amount = 3, max_modified_to = 40)
-
+        $ created_outfit = None
     return
 
 #SBS150

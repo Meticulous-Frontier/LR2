@@ -281,6 +281,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                         $ the_person.wardrobe.add_outfit(outfits[2])
                 the_person.char "Alright, I'm gonna change back into my other clothes now..."
                 $ renpy.scene("Active")
+            $ created_outfit = None
         else:
             mc.name "I'm sorry [the_person.title], but I can't find anything that would suit you."
             the_person.char "Oh, I was so looking forward to your pick, a well, just let me get dressed so we can get out of here."

@@ -2744,7 +2744,7 @@ label Sarah_weekend_date_strip_club_label():
                 the_person.char "Ugh, the girls they have working here are so hot."
                 $ the_person.change_arousal(renpy.random.randint(5,15))
                 $ mc.change_arousal(renpy.random.randint(5,15))
-
+                $ showgirl = None
             "Get a private dance  -$200":
                 mc.name "Want to get a private dance? I'll get it setup."
                 the_person.char "Ohh, now we're talking! Sounds great!"
