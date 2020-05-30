@@ -10,7 +10,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
     #default valid_categories = ["Hair Style", "Pubic Style"] #Holds the valid list of categories strings to be shown at the top.
     $ categories_mapping = { # list of clothing | Apply method | Valid / sensitive check | nudity switch | tooltip string
         "Hair Style": [hair_styles, Person.set_hair_style, True, "use_current_outfit"],
-        "Pubic Style": [pube_styles, Person.set_pubic_style, True, "use_nude", "Example String"] #Set the False bool to either true or a custom requirement function
+        "Pubic Style": [pube_styles, Person.set_pubic_style, False, "use_nude", "Example String"] #Set the False bool to either true or a custom requirement function
         }
 
 
@@ -103,9 +103,9 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                             tooltip ""
                                             xfill True
                                             sensitive True
-                                            hovered SetField(person, "outfit", renpy.current_screen().scope[categories_mapping[category_selected][3]])
 
                                             action [
+                                                SetField(person, "outfit", renpy.current_screen().scope[categories_mapping[category_selected][3]]),
                                                 SetField(style_item, "colour", [current_r, current_g, current_b, current_a]),
                                                 SetScreenVariable("selected_colour", "colour"),
                                                 SetScreenVariable("selected_style", style_item),
@@ -307,5 +307,5 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                         xalign 0.5
                         xanchor 0.5
                         spacing 50
-                        textbutton "Save Haircut" action [Return] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (155,80)
-                        textbutton "Abandon Design" action [SetField(person, "hair_colour", old_hair_colour), SetField(person, "hair_style", old_hair_style), Return] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (185,80)
+                        textbutton "Save Haircut" action [Return, SetField(person, "outfit", use_current_outfit)] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (155,80)
+                        textbutton "Abandon Design" action [SetField(person, "hair_colour", old_hair_colour), SetField(person, "hair_style", old_hair_style), SetField(person, "outfit", use_current_outfit), Return] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (185,80)

@@ -134,7 +134,7 @@ init -1 python:
         self.hair_style = new_clothing
 
         if cs:
-            self.hair_colour = [cs.scope["selected_hair_colour_name"], cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]
+            self.hair_colour = [cs.scope["selected_hair_colour_name"], [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]]
 
     Person.set_hair_style = set_hair_style
 
@@ -145,7 +145,7 @@ init -1 python:
         self.pubes_style = new_clothing
 
         if cs:
-            self.hair_colour = [cs.scope["selected_hair_colour_name"], cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]
+            self.hair_colour = [cs.scope["selected_hair_colour_name"], [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]]
 
     Person.set_pubic_style = set_pubic_style
 
