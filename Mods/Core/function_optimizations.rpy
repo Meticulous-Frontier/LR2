@@ -15,7 +15,7 @@ init 5 python:
 
     Facial_Accessory.generate_item_displayable = optimized_generate_item_displayable_facial_accessory
 
-    def optimized_generate_item_displayable_clothing(self, body_type, tit_size, position, lighting = None, regions_constrained = None):
+    def optimized_generate_item_displayable_clothing(self, body_type, tit_size, position, lighting = None, regions_constrained = None, nipple_wetness = 0.0):
         if not self.is_extension: #We don't draw extension items, because the image is taken care of in the main object.
             if lighting is None:
                 lighting = [1,1,1]
@@ -62,6 +62,12 @@ init 5 python:
                 constrained_region_mask = im.MatrixColor(im.Blur(im.Composite(*composite_list), 8), [1,0,0,0,0, 0,1,0,0,0, 0,0,1,0,0, 0,0,0,8,0]) #This is the area to be subracted from the image.
                 composite_list.extend([(0,0), Image(all_regions.generate_item_image_name(body_type, tit_size, position))])
                 final_image = AlphaBlend(AlphaBlend(constrained_region_mask, Solid("#FFFFFFFF"), im.Composite(*composite_list)), Solid("#00000000"), final_image)
+
+            # if nipple_wetness > 0: #TODO: Expand this system to a generic "Wetness" system #NOTE v 0.29.0
+            #     region_mask = Image(wet_nipple_region.generate_item_image_name(body_type, tit_size, position)) #TODO: Add a much more specific "nipple region"
+            #     # darkness_factor = nipple_wetness * 0.1 #Used to darken clothing where it is wet
+            #     region_mask = im.MatrixColor(region_mask, [1,0,0,0,0, 0,1,0,0,0, 0,0,1,0,0, 0,0,0,-1*nipple_wetness,1])
+            #     final_image = AlphaBlend(region_mask, Solid("#00000000"), final_image)
 
             if self.half_off:
                 #NOTE: This actually produces some really good looking effects for water/stuff. We should add these kinds of effects as a general thing, probably on the pattern level.
