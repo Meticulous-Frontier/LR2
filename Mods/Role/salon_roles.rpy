@@ -593,7 +593,7 @@ label ophelia_revenge_date_label():
     mc.name "I'm glad you're back. I just met, the dumbest bitch, I have ever met in my life."
     the_person.char "Is that so?"
     "She crinkles her nose."
-    the_person.char "Blond hair? Huge tits? Dumb as a bag of rocks?"
+    the_person.char "Black hair? Huge tits? Dumb as a bag of rocks?"
     mc.name "That's... yes that is completely accurate."
     the_person.char "Good, that means they are here!"
     "They?"
