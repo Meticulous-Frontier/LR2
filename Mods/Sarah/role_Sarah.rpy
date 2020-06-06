@@ -2968,7 +2968,7 @@ label Sarah_date_strip_club_private_dance_label(the_person):
             "Glancing at [the_person.title], you can tell she is a little disappointed, but she quickly returns her attention to the girl in front of her."
 
     "Soon it is time for the private dance to end."
-    $ scene_manager.update_actor(showgirl, position = "stand4")
+    $ scene_manager.update_actor(showgirl_1, position = "stand4")
     $ scene_manager.update_actor(showgirl_2, position = "stand5")
     showgirl_1.char "Mmm, that was fun! It's been forever since I had a female client. They always give such soft touches..."
     if showgirl_2 is cousin and showgirl_2.sluttiness > 80:
