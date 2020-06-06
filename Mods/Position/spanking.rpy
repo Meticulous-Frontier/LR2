@@ -128,7 +128,7 @@ label outro_spanking(the_girl, the_location, the_object):
 
 label transition_default_spanking(the_girl, the_location, the_object):
     "You stand behind [the_girl.title] and put your arms around her waist, pushing her so she is bending over [the_object.name]."
-    mc.name "Someone has been a bad girl. It's time for you punishment, [girl.title]."
+    mc.name "Someone has been a bad girl. It's time for your punishment, [the_girl.title]."
     if the_girl.outfit.vagina_available():
         "You don't waste any time and put your hands on her ass, groping her cheeks."
         "You raise one hand and bring it down hard, give her ass a firm spank."
