@@ -122,13 +122,15 @@ label SB_fetish_cum_non_employee_label(the_person):
             elif SB_check_fetish(the_person, cum_internal_role):
                 "Glancing down, you see [the_person.possessive_title] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
                 the_person.char "Mmm... your taste is so unique, I love it!"
+            $ the_person.event_triggers_dict["LastCumFetish"] = day                
             "[the_person.possessive_title] stands up."
-            $ the_person.draw_person()
+            $ the_person.draw_person(emotion = "happy")
             the_person.char "Wow, that was amazing, [the_person.mc_title]. I don't know what has been coming over me lately..."
             "[the_person.possessive_title] blushes and pauses..."
             mc.name "Did you get what you were hoping for?"
             the_person.char "Oh, I think I'm good for today... but I'm sure it won't be long until I get hungry again..."
             "[the_person.possessive_title] runs her hand through her hair. She licks her lips and smiles at you."
+            $ the_person.apply_outfit(the_person.planned_outfit)
             the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
             $ the_person.draw_person(position = "walking_away", emotion = "happy")
             "You wave goodbye to [the_person.possessive_title] and quickly put away your cock. You turn around and go to bed."
@@ -211,6 +213,7 @@ label SB_fetish_cum_label(the_person):
             elif SB_check_fetish(the_person, cum_internal_role):
                 "Glancing down, you see [the_person.possessive_title] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
                 the_person.char "Mmm... it's all inside me now... right where it belongs!"
+            $ the_person.event_triggers_dict["LastCumFetish"] = day                
             "[the_person.possessive_title] stands up."
             $ the_person.draw_person()
             the_person.char "Wow, that was amazing, [the_person.mc_title]. I don't know what has been coming over me lately..."
@@ -237,6 +240,11 @@ init 2 python:
                 return not get_fetish_cum_dosage_employee() is None
         return False
 
+    def SB_fetish_cum_dosage_non_employee_requirement():
+        if time_of_day > 0 and time_of_day < 4:
+            return not get_fetish_cum_dosage_non_employee() is None
+        return False
+
     def SB_fetish_shower_cum_requirement():
         if mc_at_home() and time_of_day==0:
             return not get_fetish_shower_cum_girl() is None
@@ -245,6 +253,15 @@ init 2 python:
     def get_fetish_cum_dosage_employee():
         meets_fetish_list = []
         for person in mc.business.get_employee_list():
+            if SB_check_fetish(person, cum_internal_role) or SB_check_fetish(person, cum_external_role):
+                if person.event_triggers_dict.get("LastCumFetish", 0) + 10 < day:
+                    meets_fetish_list.append(person)
+
+        return get_random_from_list(meets_fetish_list)
+
+    def get_fetish_cum_dosage_non_employee():
+        meets_fetish_list = []
+        for person in known_people_in_the_game(excluded_people = mc.business.get_employee_list() + [mom, lily, mc]):
             if SB_check_fetish(person, cum_internal_role) or SB_check_fetish(person, cum_external_role):
                 if person.event_triggers_dict.get("LastCumFetish", 0) + 10 < day:
                     meets_fetish_list.append(person)
@@ -264,6 +281,9 @@ init 2 python:
 
     SB_fetish_cum_dosage_crisis = Action("Cum Fetish Dosage Crisis",SB_fetish_cum_dosage_requirement,"SB_fetish_cum_dosage_label")
     crisis_list.append([SB_fetish_cum_dosage_crisis, 5])
+
+    SB_fetish_cum_dosage_crisis_non_employee = Action("Cum Fetish Dosage Crisis",SB_fetish_cum_dosage_non_employee_requirement,"SB_fetish_cum_dosage_non_employee_label")
+    crisis_list.append([SB_fetish_cum_dosage_crisis_non_employee, 5])
 
     SB_fetish_shower_cum = Action("Shower Surprise", SB_fetish_shower_cum_requirement, "SB_fetish_shower_cum_label")
     morning_crisis_list.append([SB_fetish_shower_cum, 5])
@@ -308,19 +328,63 @@ label SB_fetish_cum_dosage_label():
             "You wave goodbye to [the_person.possessive_title] as she leaves your office. Damn that was good!"
         "No Thanks":
             "[the_person.possessive_title] is caught completely off guard by your refusal."
-            $ the_person.change_obedience(-10)
-            $ the_person.change_happiness(-10)
+            $ the_person.change_stats(happiness = -10, obedience = -10)
             the_person.char "Oh!... Okay... Well... hey I understand... Maybe some other time yeah?"
             "[the_person.possessive_title] quickly sulks off. Maybe you should've?"
         "Too Tired" if mc.energy < 30:
             "[the_person.possessive_title] is surprised by your answer."
-            $ the_person.change_obedience(-5)
-            $ the_person.change_happiness(-5)
+            $ the_person.change_stats(happiness = -5, obedience = -5)
             the_person.char "Oh! I'm sorry... I know you work so hard around here. Maybe tomorrow then?"
             "[the_person.possessive_title] quickly sulks off."
     python:
         the_person.review_outfit(dialogue = False)
         renpy.scene("Active")
+    return
+
+label SB_fetish_cum_dosage_non_employee_label():
+    $ the_person = get_fetish_cum_dosage_non_employee()
+    if the_person is None:
+        return
+    $ the_person.event_triggers_dict["LastCumFetish"] = day
+
+    "While going about your day, your phone suddenly rings."
+
+    the_person.char "Hello, [the_person.mc_title]? Do you have a minute?"
+    mc.name "Oh, hey [the_person.title], it's you. Sure, what's up?"
+    the_person.char "Could we meet up, right now? I have a little problem, that I need you to solve."
+    mc.name "What kind of problem?"
+    the_person.char "Well, eh, I'm desperately in need of some proteins."
+
+    "It seems she is desperate for you to satisfy her cum fetish, what will you do?"
+
+    menu:
+        "All right":
+            mc.name "All right, meet me at my place in 10 minutes."
+            $ mc.change_location(hall)
+            $ mc.location.show_background()
+            "You just got home, when your doorbell rings."
+
+            $ the_person.draw_person()
+            the_person.char "Hey [the_person.mc_title], I came as fast as I could."
+            "[the_person.possessive_title] pushes you inside and immediately drops down on her knees. You consider asking her to strip down a bit, but she is already fishing your cock out of your pants."
+            $ the_person.draw_person(position = "blowjob")
+            call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), girl_in_charge = False, position_locked = True) from _call_fuck_person_SB_fetish_cum_dosage_non_employee_label
+            the_person.char "Oh my god, thank you [the_person.mc_title]... I wish I had time make you cum again... but I know you're a busy a man..."
+            "[the_person.possessive_title] starts to get up. Her hunger for cum satisfied for now."
+            $ the_person.apply_outfit(the_person.planned_outfit)
+            $ the_person.draw_person(emotion = "happy")
+            the_person.char "Thanks again, [the_person.mc_title]. Don't hesitate to give me a call when... you know...need my service."
+            $ the_person.draw_person(position = "walking_away")
+            "She gives you a smile and a wink, turns around and walks out of the door."
+
+        "Sorry":
+            mc.name "I'm sorry, I don't have time right now."
+            "[the_person.possessive_title] is caught completely off guard by your refusal."
+            $ the_person.change_stats(happiness = -5, obedience = -5)
+            the_person.char "Oh!... Okay... Well... hey I understand... Maybe another time?"
+            "You hang up your phone and continue with your day."
+
+    $ renpy.scene("Active")
     return
 
 #SBC3

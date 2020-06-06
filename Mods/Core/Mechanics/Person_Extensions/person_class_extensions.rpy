@@ -723,13 +723,11 @@ init -1 python:
     Person.update_opinion_with_score = update_opinion_with_score
 
     ## Increase the opinion on a specific topic (opinion)
-    def increase_opinion_score(self, topic, add_to_log = True):
+    def increase_opinion_score(self, topic, max_value = 2, add_to_log = True):
         score = self.get_opinion_score(topic)
 
-        if score < 2:
-            score += 1
-
-        self.update_opinion_with_score(topic, score, add_to_log)
+        if score < max_value:
+            self.update_opinion_with_score(topic, score + 1, add_to_log)           
         return
 
     # Add increase opinion function to person class
@@ -740,9 +738,7 @@ init -1 python:
         score = self.get_opinion_score(topic)
 
         if score > -2:
-            score -= 1
-
-        self.update_opinion_with_score(topic, score, add_to_log)
+            self.update_opinion_with_score(topic, score - 1, add_to_log)
         return
 
     # Add decrease opinion function to person class
@@ -751,12 +747,52 @@ init -1 python:
     ##Max the opinion on a specific topic (opinion)
     def max_opinion_score(self, topic, add_to_log = True):
         score = self.get_opinion_score(topic)
-        if score < 2:
+        if score != 2:
             self.update_opinion_with_score(topic, 2, add_to_log)
         return
 
     # Add max opinion function to person class
     Person.max_opinion_score = max_opinion_score
+
+    # Change the sex skill of a person to specified score.
+    def update_sex_skill(self, skill, score, add_to_log = True):
+        if skill not in self.sex_skills:
+            return
+
+        current = self.sex_skills[skill]
+        if current == score:
+            return
+
+        self.sex_skills[skill] = score
+        if add_to_log:
+            mc.log_event((self.title or self.name) + " " + skill.lower() + " skill is now at level " + str(score), "float_text_green")
+        return
+
+    Person.update_sex_skill = update_sex_skill
+
+    # increase sex skill of person by one until max_value is reached.
+    def increase_sex_skill(self, skill, max_value = 5, add_to_log = True):
+        if skill not in self.sex_skills:
+            return
+
+        score = self.sex_skills[skill]
+        if score < max_value:
+            self.update_sex_skill(skill, score + 1, add_to_log)
+        return
+
+    Person.increase_sex_skill = increase_sex_skill
+
+    # decrease sex skill of person by one while greater than zero.
+    def decrease_sex_skill(self, skill, add_to_log = True):
+        if skill not in self.sex_skills:
+            return
+
+        score = self.sex_skills[skill]
+        if score > 0:
+            self.update_sex_skill(skill, score - 1, add_to_log)
+        return
+
+    Person.decrease_sex_skill = decrease_sex_skill
 
     # Change Multiple Stats for a person at once (less lines of code, better readability)
     def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut_temp = None, slut_core = None, add_to_log = True):
