@@ -133,5 +133,15 @@ init python: #For now default init. May change later if we know better.
         start_requirement = quest_production_line_start_requirement,
         quest_cleanup = quest_production_line_cleanup)
 
+        global quest_cure_discovery
+        quest_cure_discovery = Side_Quest(quest_name = "Medical Breakthrough",
+        quest_init_label = "quest_cure_discovery_init_label",
+        quest_tracker = quest_cure_discovery_tracker,
+        start_requirement = quest_cure_discovery_start_requirement,
+        quest_cleanup = quest_cure_discovery_cleanup)
+
         quest_director.add_new_quest(quest_production_line)
+        quest_director.add_new_quest(quest_cure_discovery)
         quest_director.unavailable_persons = [sarah, mom, lily, starbuck, nora, cousin, aunt, salon_manager]
+
+        return

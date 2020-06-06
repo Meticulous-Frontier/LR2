@@ -68,7 +68,7 @@ init 1 python:
                 mall.actions.remove(quest_production_line_coffee)
 
         elif quest_production_line.get_quest_flag() == 29:  #Bad end
-            quest_production_line.complete = True
+            quest_production_line.quest_complete = True
 
         elif quest_production_line.get_quest_flag() == 31: #agreed to give raise.
             if the_person.salary > quest_production_line.quest_event_dict.get("starting_pay", 0): #She has received a raise!
@@ -78,7 +78,7 @@ init 1 python:
                 mc.business.mandatory_crises_list.append(quest_production_line_raise_miss)
 
         elif quest_production_line.get_quest_flag() == 39: #Bad End
-            quest_production_line.complete = True
+            quest_production_line.quest_complete = True
 
         elif quest_production_line.get_quest_flag() == 41:
             if quest_production_line_after_raise_consult not in mc.business.mandatory_crises_list:
@@ -89,10 +89,10 @@ init 1 python:
                 mc.business.mandatory_crises_list.append(quest_production_line_help_move)
 
         elif quest_production_line.get_quest_flag() == 69:  #Moderate end. Really you won't help her move?
-            quest_production_line.complete = True
+            quest_production_line.quest_complete = True
 
         elif quest_production_line.get_quest_flag() >= 100:  #Good ends
-            quest_production_line.complete = True
+            quest_production_line.quest_complete = True
         return
 
     def quest_production_line_start_requirement():

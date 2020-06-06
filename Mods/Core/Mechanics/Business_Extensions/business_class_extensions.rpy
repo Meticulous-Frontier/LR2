@@ -54,6 +54,8 @@ init -1 python:
 
     Business.hire_person = hire_person
 
+    def add_unique_mandatory_crisis(self, the_crisis):
+        if the_crisis not in self.mandatory_crises_list:
+            self.mandatory_crises_list.append(the_crisis)
 
-        
-        
+    Business.add_unique_mandatory_crisis = add_unique_mandatory_crisis

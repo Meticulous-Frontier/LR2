@@ -1132,3 +1132,18 @@ init -1 python:
         return self.outfit.panties_covered()
 
     Person.panties_covered = person_panties_covered
+
+##########################################
+# Unique crisis addition functions       #
+##########################################
+    # Use these extensions to add only unique crisis. Checks to see if the event has already been added, so it won't duplicate.
+    def add_unique_on_talk_event(self, the_crisis):
+        if the_crisis not in self.on_talk_event_list:
+            self.on_talk_event_list.append(the_crisis)
+
+    def add_unique_on_room_enter_event(self, the_crisis):
+        if the_crisis not in self.on_room_enter_event_list:
+            self.on_room_enter_event_list.append(the_crisis)
+
+    Person.add_unique_on_talk_event = add_unique_on_talk_event
+    Person.add_unique_on_room_enter_event = add_unique_on_room_enter_event
