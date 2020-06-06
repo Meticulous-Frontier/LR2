@@ -10,6 +10,35 @@ init 5 python:
     config.label_overrides["pick_position"] = "pick_position_enhanced"
     config.label_overrides["girl_strip_event"] = "girl_strip_event_enhanced"
 
+    record_opinion_map = {
+        "Handjobs" : ["giving handjobs", "sex standing up"],
+        "Kissing" : ["kissing"],
+        "Fingered" : ["masturbating", "being fingered", "sex standing up"],
+        "Tit Fucks" : ["giving tit fucks", "showing her tits"],
+        "Blowjobs" : ["giving blowjobs"],
+        "Cunnilingus": ["getting head"],
+        "Vaginal Sex": ["vaginal sex", "missionary style sex", "lingerie"],
+        "Anal Sex": ["anal sex", "doggy style sex", "bareback sex"],
+        "Cum Facials": ["cum facials"],
+        "Cum in Mouth": ["drinking cum"],
+        "Cum Covered": ["being covered in cum"],
+        "Vaginal Creampies": ["creampies"],
+        "Anal Creampies": ["anal creampies"],
+        "Threesomes": ["not wearing anything", "skimpy outfits", "skimpy uniforms"],
+        "Spanking": ["not wearing underwear", "showing her ass"],
+        "Insertions": ["big dicks", "public sex"],
+    }
+
+    record_skill_map = {
+        "Kissing" : "Foreplay",
+        "Tit Fucks" : "Foreplay",
+        "Blowjobs" : "Oral",
+        "Cunnilingus": "Oral",
+        "Vaginal Sex": "Vaginal",
+        "Anal Sex": "Anal",
+    }
+
+
     def girl_choose_position_enhanced(person, ignore_taboo = False):
         position_option_list = []
         for position in list_of_girl_positions:
@@ -142,20 +171,18 @@ init 5 python:
                 types_seen.append(position_type.record_class)
 
         # enables slow corruption based on sex type (each category has a chance to increase sex stats / opinions)
-        # also higher suggestibility has a higher chance of increasing the stats (same as Fetish Serums)
-        for record_class in types_seen:
-            if record_class in ["Handjobs", "Kissing", "Fingered", "Tit Fucks"]:
-                fetish_basic_function_on_turn(person, True)
-            if record_class in ["Blowjobs", "Cunnilingus"]:
-                fetish_oral_function_on_turn(person, True)
-            if record_class in ["Vaginal Sex"]:
-                fetish_vaginal_function_on_turn(person, True)
-            if record_class in ["Anal Sex"]:
-                fetish_anal_function_on_turn(person, True)
-            if record_class in ["Cum Facials", "Cum in Mouth", "Cum Covered", "Vaginal Creampies", "Anal Creampies"]:
-                fetish_cum_function_on_turn(person, True)
-            if record_class in ["Threesomes", "Spanking", "Insertions"]:
-                fetish_exhibition_on_turn(person, True)
+        # also higher suggestibility has a higher chance of increasing the stats to a higher level
+        tier = get_suggest_tier(person)
+        gained_skill = False    # only one skill per session
+        gained_opinion = False  # only one opinion per session
+        renpy.random.shuffle(types_seen) # shuffle types seen so we don't know what skills and opinions are checked for increment first
+        for record_class in types_seen: 
+            if not gained_skill and record_class in record_skill_map and renpy.random.randint(0,100) < 5 + (tier * 5):
+                person.increase_sex_skill(record_skill_map[record_class], 2 + tier)
+                gained_skill = True
+            if not gained_opinion and record_class in record_opinion_map and renpy.random.randint(0,100) < 15 + (tier * 5):
+                person.increase_opinion_score(get_random_from_list(record_opinion_map[record_class]), tier - 1)
+                gained_opinion = True
 
         # record the last time we had sex
         person.sex_record["Last Sex Day"] = day
