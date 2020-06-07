@@ -375,6 +375,7 @@ label advance_time_end_of_day_label():
         # increase morning crisis chance (once a day)
         morning_crisis_chance += 2
         perk_system.update()  #TEST to see if this is a good time for this.
+        mc.business.funds_yesterday = mc.business.funds
     return
 
 label advance_time_mandatory_morning_crisis_label():

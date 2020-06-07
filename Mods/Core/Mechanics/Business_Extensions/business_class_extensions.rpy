@@ -13,6 +13,19 @@ init -1 python:
     # add follow_mc attribute to person class (without sub-classing)
     Business.hr_director = property(get_hr_director, set_hr_director, del_hr_director, "The company HR director position.")
 
+    def get_funds_yesterday(self):
+        if not hasattr(self, "_funds_yesterday")
+            self._funds_yesterday = 1000 # default start money
+        return self._funds_yesterday
+
+    def set_funds_yesterday(self, value):
+        self._funds_yesterday = value
+
+    def del_funds_yesterday(self):
+        del self._funds_yesterday
+
+    Business.funds_yesterday = property(get_funds_yesterday, set_funds_yesterday, del_funds_yesterday, "Holds business funds from day before")
+
     def get_unisex_restroom_unlocks(self):
         if not hasattr(self, "_unisex_restroom_unlocks"):
             self._unisex_restroom_unlocks = {}
