@@ -14,7 +14,7 @@ init -1 python:
     Business.hr_director = property(get_hr_director, set_hr_director, del_hr_director, "The company HR director position.")
 
     def get_funds_yesterday(self):
-        if not hasattr(self, "_funds_yesterday")
+        if not hasattr(self, "_funds_yesterday"):
             self._funds_yesterday = 1000 # default start money
         return self._funds_yesterday
 
