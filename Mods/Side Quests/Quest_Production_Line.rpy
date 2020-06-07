@@ -152,6 +152,11 @@ init 1 python:
                 return True
         return False
 
+    def quest_production_line_daddy_title_requirement(the_person):
+        if the_person.sluttiness > 40:
+            return True
+        return False
+
     def prod_line_target_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions,  prohibit_tags = []):
         willingness = spanking.build_position_willingness_string(person, ignore_taboo = True)
         foreplay_positions.append([willingness, spanking])
@@ -164,6 +169,7 @@ init 1 python:
     quest_production_line_raise_miss = Action("No Raise Given", quest_production_line_raise_miss_requirement, "quest_production_line_raise_miss_label")
     quest_production_line_after_raise_consult = Action("Production Consultation", quest_production_line_after_raise_consult_requirement, "quest_production_line_after_raise_consult_label")
     quest_production_line_help_move = Action("Help Her Move", quest_production_line_help_move_requirement, "quest_production_line_help_move_label")
+    quest_production_line_daddy_title =  Action("She Calls You Daddy", quest_production_line_daddy_title_requirement, "quest_production_line_daddy_title_label")
 
 
 label quest_production_line_intro_label(the_person):
@@ -381,6 +387,7 @@ label quest_production_line_help_move_label():
         mc.name "You're welcome [the_person.title]. I'll see you at work?"
         the_person.char "Yes Sir!"
         $ quest_production_line.set_quest_flag(101)
+        $ the_person.on_room_enter_event_list.append(quest_production_line_daddy_title)
     else:
         the_person.char "So... I was wondering something."
         mc.name "What might that be?"
@@ -428,6 +435,7 @@ label quest_production_line_help_move_label():
             mc.name "Oh [the_person.title]... you HAVE been bad..."
             "Your hand drops to her ass. You give it a squeeze."
             $ the_person.event_triggers_dict["unique_sex_positions"] = prod_line_target_unique_sex_positions
+            $ the_person.personality = get_daddy_girl_personality(the_person)
             call fuck_person(the_person, start_position = spanking) from _spank_production_assistant_01
             the_person.char "Oh god... that was wonderful [the_person.mc_title]."
             $ the_person.draw_person()
@@ -452,4 +460,131 @@ label quest_production_line_help_move_label():
             mc.name "You're welcome [the_person.title]. I'll see you at work?"
             the_person.char "Yes Sir!"
             $ quest_production_line.set_quest_flag(102)
+            $ the_person.on_room_enter_event_list.append(quest_production_line_daddy_title)
+    return
+
+label quest_production_line_daddy_title_label(the_person): #This label is activated if the MC does not gain "daddy" status in the quest but still finished with a good end.
+    $ the_person.draw_person()
+    the_person.char "Hey there [the_person.mc_title]... It's good to see you."
+    the_person.char "Do you have a minute?"
+    mc.name "Of course."
+    the_person.char "So... I was wondering something."
+    mc.name "What might that be?"
+    the_person.char "Since I've moved into my own place, it has been great, but, I haven't seen my daddy in weeks now. I miss him a lot."
+    the_person.char "Is... is it okay if I call you... daddy? From now on?"
+    mc.name "I don't see why not. I've been called worse!"
+    the_person.char "Yeah! You remind me a lot of him, you know? And being away from him now... It's nice having you around."
+    mc.name "As long as you don't mind if I reciprocate, Baby Girl."
+    $ the_person.change_arousal(10)
+    $ the_person.set_mc_title("Daddy")
+    $ the_person.set_title("Baby Girl")
+    $ the_person.set_possessive_title("Your Baby Girl")
+    "You notice she catches her breath when you say that. It is almost like she is getting excited."
+    $ the_person.draw_person(position = "kissing")
+    "She wraps her arms around you. She whispers in your ear."
+    the_person.char "Do you think you could... spank me? For a bit? Please [the_person.mc_title]?"
+    mc.name "Oh [the_person.title]... you HAVE been bad..."
+    "Your hand drops to her ass. You give it a squeeze."
+    $ the_person.event_triggers_dict["unique_sex_positions"] = prod_line_target_unique_sex_positions
+    $ the_person.personality = get_daddy_girl_personality(the_person)
+    call fuck_person(the_person, start_position = spanking) from _spank_production_assistant_02
+    the_person.char "Oh god... that was wonderful [the_person.mc_title]."
+    $ the_person.draw_person()
+    return
+
+#Daddy's girl personality overrides
+init 1301 python:
+    def daddy_girl_titles(the_person):
+        return "Baby Girl"
+    def daddy_girl_possessive_titles(the_person):
+        return "Your Baby Girl"
+    def daddy_girl_player_titles(the_person):
+        return "Daddy"
+    def get_daddy_girl_personality(the_person): #Use a function to get this so we can keep the girls prefix so her personality doesn't change TOO much
+        daddy_girl = Personality("princess", default_prefix = the_person.personality.personality_type_prefix,
+        common_likes = [],
+        common_sexy_likes = [],
+        common_dislikes = [],
+        common_sexy_dislikes = [],
+        titles_function = daddy_girl_titles, possessive_titles_function = daddy_girl_possessive_titles, player_titles_function = daddy_girl_player_titles)
+        return daddy_girl
+
+label princess_greetings(the_person):
+    $ update_ass_condition(the_person)
+    if the_person.sluttiness > 40:
+        if the_person.event_triggers_dict.get("spank_level", 0) < 2: #Flawless
+            the_person.char "Hi [the_person.mc_title]! I've been so good lately!"
+            "She lowers her voice a little."
+            the_person.char "But maybe a little too good... Are you sure I don't need a spanking?"
+        elif the_person.event_triggers_dict.get("spank_level", 0) < 6: #Flawless
+            the_person.char "Hi [the_person.mc_title]! I'm trying to be good!'"
+            "She lowers her voice a little."
+            the_person.char "I'm still a little sore, but if you need to spank me, I understand!"
+        else:
+            the_person.char "Hi [the_person.mc_title]! I'm being good I promise!"
+            the_person.char "I'm still sore, I swear I don't need a spanking!"
+        mc.name "Hello [the_person.title]. I'll be the judge of when you need spanking."
+    elif the_person.love < 0:
+        the_person.char "Ugh, what do you want?"
+    elif the_person.happiness < 90:
+        the_person.char "Hey..."
+    else:
+        if the_person.sluttiness > 60:
+            if the_person.obedience > 130:
+                the_person.char "Hello [the_person.mc_title], it's good to see you."
+            else:
+                the_person.char "Hey there handsome, feeling good?"
+        else:
+            if the_person.obedience > 130:
+                the_person.char "Hello [the_person.mc_title]."
+            else:
+                the_person.char "Hey there!"
+    return
+
+label princess_clothing_accept(the_person):
+    if the_person.obedience > 130:
+        the_person.char "You want me to wear this [the_person.mc_title]? Anything for you!"
+    else:
+        the_person.char "Oh [the_person.mc_title]! Are you sure I can wear this out of the house?"
+    return
+
+label princess_clothing_reject(the_person):
+    the_person.char "I want to wear this for you [the_person.mc_title], but I'm not sure I can!"
+    return
+
+label princess_sex_accept(the_person):
+    if the_person.sluttiness > 70:
+        the_person.char "Oh [the_person.mc_title]! I'll do ANYTHING for you."
+    else:
+        the_person.char "Okay [the_person.mc_title], we can give that a try."
+    return
+
+label princess_sex_obedience_accept(the_person):
+    the_person.char "I'll do it, but only because it's for you [the_person.mc_title]."
+
+    return
+
+label princess_cum_face(the_person):
+    the_person.char "Oh [the_person.mc_title], I look cute covered in your cum?"
+    if the_person.sluttiness > 60:
+        "[the_person.title] licks her lips, cleaning up a few drops of your semen that had run down her face."
+    else:
+        "[the_person.title] runs a finger along her cheek, wiping away some of your semen."
+    return
+
+label princess_cum_vagina(the_person):
+    if mc.condom:
+        if the_person.sluttiness > 75 or the_person.get_opinion_score("creampies") > 0:
+            the_person.char "God [the_person.mc_title], your cum feels so warm! If I'm good will you promise not to use a condom next time?"
+        else:
+            the_person.char "[the_person.mc_title]... I can feel how warm your cum is through the condom. It feels nice."
+
+    else: #TODO this probably hchanges with pregnancy stuff. change it later.
+        the_person.char "Your cum is so nice and warm [the_person.mc_title]!"
+        the_person.char "You can fill me up anytime you want."
+    return
+
+label princess_suprised_exclaim(the_person):
+    $rando = renpy.random.choice(["Daddy!","Shit!","Oh fuck!","Fuck me!","Ah! Oh fuck!", "Ah!", "Fucking tits!", "Holy shit Daddy!", "Fucking shit!"])
+    the_person.char "[rando]"
     return
