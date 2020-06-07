@@ -281,6 +281,9 @@ init -1 python:
         if "dawn" in globals():
             unique_character_list.append(dawn)
 
+        if "candace" in globals():
+            unique_character_list.append(candace)
+
         # disable for now, random outfits remove uniqueness of character in story line
         # make sure unique characters have at least six outfits / overwear sets to choose from
         #python:
