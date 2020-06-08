@@ -922,158 +922,73 @@ init -1 python:
 
     Person.draw_animated_removal = draw_animated_removal_enhanced
 
-    ####### Begin cum override functions ######
+    ####### Begin cum extension functions ######
 
-    def cum_in_mouth_enhanced(self): #Add the appropriate stuff to their current outfit, and peform any personal checks if rquired.
-        mc.listener_system.fire_event("sex_cum_mouth", the_person = self)
-        if self.outfit.can_add_accessory(mouth_cum):
-            the_cumshot = mouth_cum.get_copy()
-            the_cumshot.layer = 0
-            self.outfit.add_accessory(the_cumshot)
+    def cum_on_face_extended(org_func):
+        def cum_on_face_wrapper(person):
+            # run original function
+            org_func(person)
+            # run extension code (clean up situational dictionaries)
+            mc.listener_system.fire_event("sex_cum_on_face", the_person = person)
 
-        self.change_slut_temp(5*self.get_opinion_score("drinking cum"))
-        self.change_happiness(5*self.get_opinion_score("drinking cum"))
-        self.discover_opinion("drinking cum")
+        return cum_on_face_wrapper
 
-        self.sex_record["Cum in Mouth"] += 1
+    # wrap up the cum_on_face function
+    Person.cum_on_face = cum_on_face_extended(Person.cum_on_face)
+
+    def cum_on_tits_extended(org_func):
+        def cum_on_tits_wrapper(person):
+            # run original function
+            org_func(person)
+            # run extension code (clean up situational dictionaries)
+            mc.listener_system.fire_event("sex_cum_on_tits", the_person = person)
+
+        return cum_on_tits_wrapper
+
+    # wrap up the cum_on_tits function
+    Person.cum_on_tits = cum_on_tits_extended(Person.cum_on_tits)
 
 
-    def cum_in_vagina_enhanced(self):
-        mc.listener_system.fire_event("sex_cum_vagina", the_person = self)
-        if self.outfit.can_add_accessory(creampie_cum):
-            the_cumshot = creampie_cum.get_copy()
-            the_cumshot.layer = 0
-            self.outfit.add_accessory(the_cumshot)
+    def cum_on_stomach_extended(org_func):
+        def cum_on_stomach_wrapper(person):
+            # run original function
+            org_func(person)
+            # run extension code (clean up situational dictionaries)
+            mc.listener_system.fire_event("sex_cum_on_stomach", the_person = person)
 
-        self.change_slut_temp(5*self.get_opinion_score("creampies"))
-        self.change_happiness(5*self.get_opinion_score("creampies"))
-        self.discover_opinion("creampies")
+        return cum_on_stomach_wrapper
 
-        self.sex_record["Vaginal Creampies"] += 1
+    # wrap up the cum_on_stomach function
+    Person.cum_on_stomach = cum_on_stomach_extended(Person.cum_on_stomach)
 
-        if persistent.pregnancy_pref > 0 and pregnant_role not in self.special_role:
-            if persistent.pregnancy_pref == 1 and self.on_birth_control: #Establish how likely her birth contorl is to work (if needed, and if present)
-                bc_percent = 100 - self.bc_penalty
-            elif persistent.pregnancy_pref == 2 and self.on_birth_control:
-                bc_percent = 90 - self.bc_penalty
-            else:
-                bc_percent = 0
+    def cum_on_ass_extended(org_func):
+        def cum_on_ass_wrapper(person):
+            # run original function
+            org_func(person)
+            # run extension code (clean up situational dictionaries)
+            mc.listener_system.fire_event("sex_cum_on_ass", the_person = person)
 
-            preg_chance = renpy.random.randint(0,100)
-            bc_chance = renpy.random.randint(0,100)
-            if persistent.pregnancy_pref == 2: # On realistic pregnancy a girls chance to become pregnant fluctuates over the month.
-                day_difference = abs((day % 30) - self.ideal_fertile_day) # Gets the distance between the current day and the ideal fertile day.
-                if day_difference > 15:
-                    day_difference = 30 - day_difference #Wrap around to get correct distance between months.
-                multiplier = 2 - (float(day_difference)/10.0) # The multiplier is 2 when the day difference is 0, 0.5 when the day difference is 15.
-                modified_fertility = self.fertility_percent * multiplier
-            else:
-                modified_fertility = self.fertility_percent
+        return cum_on_ass_wrapper
 
-            if preg_chance < modified_fertility and pregnant_role not in self.special_role: #There's a chance she's pregnant
-                if bc_chance >= bc_percent : # Birth control failed to prevent the pregnancy
-                    become_pregnant(self) #Function in role_pregnant establishes all of the pregnancy related variables and events.
+    # wrap up the cum_on_ass function
+    Person.cum_on_ass = cum_on_ass_extended(Person.cum_on_ass)
 
-    def cum_in_ass_enhanced(self):
-        mc.listener_system.fire_event("sex_cum_ass", the_person = self)
-        #TODO: Add an anal specific cumshot once we have renders for it.
-        if self.outfit.can_add_accessory(creampie_cum):
-            the_cumshot = creampie_cum.get_copy()
-            the_cumshot.layer = 0
-            self.outfit.add_accessory(the_cumshot)
-        self.change_slut_temp(5*self.get_opinion_score("anal creampies"))
-        self.change_happiness(5*self.get_opinion_score("anal creampies"))
-        self.discover_opinion("anal creampies")
-
-        self.sex_record["Anal Creampies"] += 1
-
-    def cum_on_face_enhanced(self):
-        mc.listener_system.fire_event("sex_cum_on_face", the_person = self)
-        if self.outfit.can_add_accessory(face_cum):
-            the_cumshot = face_cum.get_copy()
-            the_cumshot.layer = 0
-            self.outfit.add_accessory(the_cumshot)
-
-        self.change_slut_temp(5*self.get_opinion_score("cum facials"))
-        self.change_happiness(5*self.get_opinion_score("cum facials"))
-        self.discover_opinion("cum facials")
-
-        self.change_slut_temp(5*self.get_opinion_score("being covered in cum"))
-        self.change_happiness(5*self.get_opinion_score("being covered in cum"))
-        self.discover_opinion("being covered in cum")
-
-        self.sex_record["Cum Facials"] += 1
-
-    def cum_on_tits_enhanced(self):
-        mc.listener_system.fire_event("sex_cum_on_tits", the_person = self)
-        if self.outfit.can_add_accessory(tits_cum):
-            the_cumshot = tits_cum.get_copy()
-            if self.outfit.get_upper_visible():
-                top_layer = self.outfit.get_upper_visible()[0].layer #Get the top most pice of clothing and get it's layer.
-            else:
-                top_layer = -1
-            the_cumshot.layer = top_layer+1 #The cumshot lives on a layer it hit, above the one it hit. Accessories are drawn first in the hirearchy, so they have to be on a level higehr than what they hit.
-            self.outfit.add_accessory(the_cumshot)
-
-        self.change_slut_temp(5*self.get_opinion_score("being covered in cum"))
-        self.change_happiness(5*self.get_opinion_score("being covered in cum"))
-        self.discover_opinion("being covered in cum")
-
-        self.sex_record["Cum Covered"] += 1
-
-    def cum_on_stomach_enhanced(self):
-        mc.listener_system.fire_event("sex_cum_on_stomach", the_person = self)
-        if self.outfit.can_add_accessory(stomach_cum):
-            the_cumshot = stomach_cum.get_copy()
-            if self.outfit.get_upper_visible():
-                top_layer = self.outfit.get_upper_visible()[0].layer #Get the top most pice of clothing and get it's layer.
-            else:
-                top_layer = -1
-            the_cumshot.layer = top_layer+1 #The cumshot lives on a layer it hit, above the one it hit. Accessories are drawn first in the hirearchy, so they have to be on a level higehr than what they hit.
-            self.outfit.add_accessory(the_cumshot)
-
-        self.change_slut_temp(5*self.get_opinion_score("being covered in cum"))
-        self.change_happiness(5*self.get_opinion_score("being covered in cum"))
-        self.discover_opinion("being covered in cum")
-
-        self.sex_record["Cum Covered"] += 1
-
-    def cum_on_ass_enhanced(self):
-        mc.listener_system.fire_event("sex_cum_on_ass", the_person = self)
-        if self.outfit.can_add_accessory(ass_cum):
-            the_cumshot = ass_cum.get_copy()
-            if self.outfit.get_lower_visible():
-                top_layer = self.outfit.get_lower_visible()[0].layer #Get the top most pice of clothing and get it's layer.
-            else:
-                top_layer = -1
-            the_cumshot.layer = top_layer+1 #The cumshot lives on a layer it hit, above the one it hit. Accessories are drawn first in the hirearchy, so they have to be on a level higehr than what they hit.
-            self.outfit.add_accessory(the_cumshot)
-
-        self.change_slut_temp(5*self.get_opinion_score("being covered in cum"))
-        self.change_happiness(5*self.get_opinion_score("being covered in cum"))
-        self.discover_opinion("being covered in cum")
-
-        self.sex_record["Cum Covered"] += 1
-
-    Person.cum_in_mouth = cum_in_mouth_enhanced
-    Person.cum_in_vagina = cum_in_vagina_enhanced
-    Person.cum_in_ass = cum_in_ass_enhanced
-    Person.cum_on_face = cum_on_face_enhanced
-    Person.cum_on_tits = cum_on_tits_enhanced
-    Person.cum_on_stomach = cum_on_stomach_enhanced
-    Person.cum_on_ass = cum_on_ass_enhanced
 
 ######################################
-# Override give serum for added goal #
+# Extend give serum for added goal #
 ######################################
 
-    # the original signature still has the add_to_log parameter, but it is no longer passed to run_on_apply
-    def give_serum_enhanced(self,the_serum_design, add_to_log = True): ##Make sure you are passing a copy of the serum, not a reference.
-        mc.listener_system.fire_event("give_random_serum", the_person = self)
-        self.serum_effects.append(the_serum_design)
-        the_serum_design.run_on_apply(self) # add to log is done through SerumTrait.on_apply(), each trait effect gets logged
+    def give_serum_extended(org_func):
+        def give_serum_wrapper(person):
+            # run original function
+            org_func(person)
+            # run extension code (clean up situational dictionaries)
+            mc.listener_system.fire_event("give_random_serum", the_person = person)
 
-    Person.give_serum = give_serum_enhanced
+        return give_serum_wrapper
+
+    # wrap up the give_serum function
+    Person.give_serum = give_serum_extended(Person.give_serum)
 
 
 #######################################
