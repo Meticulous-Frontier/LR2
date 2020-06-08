@@ -82,7 +82,7 @@ label scene_breeding_missionary_1(the_girl, the_location, the_object):
             the_girl.char "[the_girl.mc_title]... Oh [the_girl.mc_title] that feels so good."
             "She moans and runs her hands through your hair as you suckle her tits."
             mc.name "Mmm, I can't wait until I knock you up and your milk comes in. I'm going to suck them dry every chance I get!"
-            if the_girl.relationship == "single":
+            if the_girl.relationship == "Single":
                 the_girl.char "Mmm, that's for the baby! But if I have any extra I guess I wouldn't mind if you had some too..."
             else:
                 $ so_title = SO_relationship_to_title(the_girl.relationship)
