@@ -720,10 +720,15 @@ label condom_ask_enhanced(the_person):
 
             "Fuck her raw":
                 mc.name "No way. I want to feel you wrapped around me."
-                if the_person.get_opinion_score("bareback sex") > 0:
-                    the_person.char "Tell me about it - nothing beats skin on skin."
-                if the_person.get_opinion_score("creampies") < 0:
-                    the_person.char "Just make sure to pull out when you cum, okay?"
+                if the_person.has_taboo("condomless_sex"):
+                    $ the_person.call_dialogue("condomless_sex_taboo_break")
+                else:
+                    if the_person.get_opinion_score("bareback sex") > 0:
+                        the_person.char "Tell me about it, nothing beats skin on skin."
+                    if the_person.get_opinion_score("creampies") < 0 or not the_person.on_birth_control:
+                        the_person.char "Just make sure to pull out when you cum, okay?"
+                    if not the_person.on_birth_control:
+                        the_person.char "I'm not using any birth control at the moment."
 
     else:
         if the_person.get_opinion_score("bareback sex") < 0 or the_person.get_opinion_score("creampies") < 0 or the_person.get_opinion_score("anal creampies") < 0:
@@ -758,8 +763,17 @@ label condom_ask_enhanced(the_person):
                     call put_on_condom_routine(the_person) from _call_put_on_condom_routine_6
 
             "Fuck her raw":
-                if the_person.get_opinion_score("creampies") < 0:
-                    the_person.char "Alright, but don't want cum inside."
+                if the_person.has_taboo("condomless_sex"):
+                    $ the_person.call_dialogue("condomless_sex_taboo_break")
+                else:
+                    if the_person.on_birth_control:
+                        the_person.char "Okay. I'm on birth control, so it should be fine."
+                    else:
+                        the_person.char "Fine, but you {i}really{/i} need to pull out this time. We shouldn't be taking risks like that."
+
+
+    if not mc.condom:
+        $ the_person.break_taboo("condomless_sex")
 
     return True #If we make it to the end of the scene everything is fine and sex can continue. If we returned false we should go back to the position select, as if we asked for something to extreme.
 
