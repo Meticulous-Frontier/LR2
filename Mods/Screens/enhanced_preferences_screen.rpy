@@ -36,12 +36,25 @@ init 2: # Add some additional
                         textbutton _("After Choices") action Preference("after choices", "toggle")
                         textbutton _("Transitions") action InvertSelected(Preference("transitions", "toggle"))
 
+                    vbox:
+                        style_prefix "radio"
+                        label "Pregnancy Settings"
+                        textbutton "Disabled" action SetField(persistent, "pregnancy_pref", 0)
+                        textbutton "Predictable" action SetField(persistent, "pregnancy_pref", 1)
+                        textbutton "Realistic" action SetField(persistent, "pregnancy_pref", 2)
+
                     if not renpy.mobile: #Animations are always disabled on mobile.
                         vbox:
                             style_prefix "radio"
                             label "Animation"
                             textbutton "Enable" action SetField(persistent, "vren_animation", True)
                             textbutton "Disable" action SetField(persistent, "vren_animation", False)
+
+                        vbox:
+                            style_prefix "radio"
+                            label "Animation Scaling"
+                            textbutton "1.0" action SetField(persistent, "vren_mac_scale", 1.0)
+                            textbutton "2.0" action SetField(persistent, "vren_mac_scale", 2.0)
 
                     vbox:
                         style_prefix "check"
