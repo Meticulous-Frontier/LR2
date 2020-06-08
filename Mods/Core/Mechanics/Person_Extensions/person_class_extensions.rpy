@@ -928,7 +928,7 @@ init -1 python:
         def cum_on_face_wrapper(person):
             # run original function
             org_func(person)
-            # run extension code (clean up situational dictionaries)
+            # run extension code
             mc.listener_system.fire_event("sex_cum_on_face", the_person = person)
 
         return cum_on_face_wrapper
@@ -940,7 +940,7 @@ init -1 python:
         def cum_on_tits_wrapper(person):
             # run original function
             org_func(person)
-            # run extension code (clean up situational dictionaries)
+            # run extension code
             mc.listener_system.fire_event("sex_cum_on_tits", the_person = person)
 
         return cum_on_tits_wrapper
@@ -953,7 +953,7 @@ init -1 python:
         def cum_on_stomach_wrapper(person):
             # run original function
             org_func(person)
-            # run extension code (clean up situational dictionaries)
+            # run extension code
             mc.listener_system.fire_event("sex_cum_on_stomach", the_person = person)
 
         return cum_on_stomach_wrapper
@@ -965,7 +965,7 @@ init -1 python:
         def cum_on_ass_wrapper(person):
             # run original function
             org_func(person)
-            # run extension code (clean up situational dictionaries)
+            # run extension code
             mc.listener_system.fire_event("sex_cum_on_ass", the_person = person)
 
         return cum_on_ass_wrapper
@@ -979,10 +979,10 @@ init -1 python:
 ######################################
 
     def give_serum_extended(org_func):
-        def give_serum_wrapper(person):
+        def give_serum_wrapper(person, the_serum_design, add_to_log = True):
             # run original function
-            org_func(person)
-            # run extension code (clean up situational dictionaries)
+            org_func(person, the_serum_design, add_to_log)
+            # run extension code
             mc.listener_system.fire_event("give_random_serum", the_person = person)
 
         return give_serum_wrapper
