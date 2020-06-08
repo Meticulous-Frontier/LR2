@@ -46,12 +46,8 @@ init 5 python:
                     final_image = AlphaBlend(mask_image, final_image, im.MatrixColor(greyscale_image, im.matrix.opacity(self.colour_pattern[3] * self.colour[3]) * im.matrix.tint(self.colour_pattern[0], self.colour_pattern[1], self.colour_pattern[2]) * im.matrix.tint(*lighting)), alpha=False)
 
             if len(regions_constrained)>0:
-                # We want to support clothing "constraining", or masking, lower images. This is done by region.
-                # Each constraining region effectively subtracts itself + a blurred border around it, and then the body region is added back in so it appears through clothing.
-
                 composite_list = None
                 for region in regions_constrained:
-                    #Begin by building a total mask of all constrained regions
                     region_mask = Image(region.generate_item_image_name(body_type, tit_size, position))
 
                     if composite_list is None:
@@ -63,18 +59,12 @@ init 5 python:
                 composite_list.extend([(0,0), Image(all_regions.generate_item_image_name(body_type, tit_size, position))])
                 final_image = AlphaBlend(AlphaBlend(constrained_region_mask, Solid("#FFFFFFFF"), im.Composite(*composite_list)), Solid("#00000000"), final_image)
 
-            # if nipple_wetness > 0: #TODO: Expand this system to a generic "Wetness" system #NOTE v 0.29.0
-            #     region_mask = Image(wet_nipple_region.generate_item_image_name(body_type, tit_size, position)) #TODO: Add a much more specific "nipple region"
-            #     # darkness_factor = nipple_wetness * 0.1 #Used to darken clothing where it is wet
-            #     region_mask = im.MatrixColor(region_mask, [1,0,0,0,0, 0,1,0,0,0, 0,0,1,0,0, 0,0,0,-1*nipple_wetness,1])
-            #     final_image = AlphaBlend(region_mask, Solid("#00000000"), final_image)
+            if nipple_wetness > 0:
+                final_image = AlphaBlend(im.MatrixColor(Image(wet_nipple_region.generate_item_image_name(body_type, tit_size, position)), [1,0,0,0,0, 0,1,0,0,0, 0,0,1,0,0, 0,0,0,-1*nipple_wetness,1]), Solid("#00000000"), final_image)
 
             if self.half_off:
-                #NOTE: This actually produces some really good looking effects for water/stuff. We should add these kinds of effects as a general thing, probably on the pattern level.
-                #NOTE: Particularly for water/stains, this could work really well (and can use skin-tight region marking, ie. not clothing item dependant).
-
                 composite_list = None
-                for region_to_hide in self.half_off_regions: #We first add together all of the region masks so we only operate on a single displayable
+                for region_to_hide in self.half_off_regions:
                     region_mask = Image(region_to_hide.generate_item_image_name(body_type, tit_size, position))
                     if composite_list is None:
                         composite_list = [renpy.image_size(region_mask)]
