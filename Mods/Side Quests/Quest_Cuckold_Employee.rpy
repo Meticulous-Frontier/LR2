@@ -32,17 +32,15 @@
 # 101: Girl moves to marketing. Gain marketability based on sex video rating. (Good end)
 # Any 100 ending adds marketability. Also 40+ can refer to girl as porn star, personality tweak.
 
-
-label quest_cuckold_employee_init_label(): #Use this function to set quest specific variables.
-    $ quest_cuckold_employee.quest_event_dict["target"] = quest_cuckold_employee_person_find_employee()
-    $ quest_cuckold_employee.quest_event_dict["start_day"] = 9999
-    $ quest_cuckold_employee.quest_event_dict["creampie_count"] = 0
-    return
-
 ### The next three functions define the quest progress tracker, init requirements, and how we clean up after quest is done.
 init 1 python:
+    def setup_quest_cuckold_employee():
+        quest_cuckold_employee.quest_event_dict["target"] = quest_cuckold_employee_person_find_employee()
+        quest_cuckold_employee.quest_event_dict["start_day"] = 9999
+        quest_cuckold_employee.quest_event_dict["creampie_count"] = 0
+        return
+
     def quest_cuckold_employee_tracker():
-        pass
         return
 
     def quest_cuckold_employee_start_requirement():
@@ -51,7 +49,6 @@ init 1 python:
         return False
 
     def quest_cuckold_employee_cleanup():
-        pass
         return
 
 ###Declare any requirement functions
@@ -89,6 +86,10 @@ init 1 python:
 
 
 #Quest Labels. This is the story you want to tell!
+label quest_cuckold_employee_init_label(): #Use this function to set quest specific variables.
+    $ setup_quest_cuckold_employee()
+    return
+
 label quest_cuckold_employee_intro_label():
     $ the_person = quest_cuckold_employee.quest_event_dict.get("target", None)
     if the_person == None:
@@ -121,7 +122,7 @@ label quest_cuckold_employee_decision_label():
         #ABORT ABORT, we fucked up somewhere.
         return
     "You are lost in your work when a feminine voice clearing her throat nearby catches your attention. You look up and see [the_person.title] standing in front of you again."
-    mc.name "Hello [the_perosn.title]. Can I help you?"
+    mc.name "Hello [the_person.title]. Can I help you?"
     the_person.char "Well, kind of yes, kind of no."
     mc.name "I'm sorry?"
     the_person.char "I just... I need to vent to someone about something, but I don't trust the other girls around her not to gossip about it."
@@ -163,7 +164,7 @@ label quest_cuckold_employee_decision_label():
                 the_person.char "Oh! Oh fuck, I can't believe it. Okay. Let's go."
             else:
                 mc.name "It would be really no problem. I'd be glad to help you out with that..."
-                the_person.char "Umm, you? Oh geeze. I'm sorry, you're my boss! That wouldn't be right!"
+                the_person.char "Umm, you? Oh geez. I'm sorry, you're my boss! That wouldn't be right!"
                 "She changes her voice to imitate a masculinity."
                 the_person.char "Oh honey! The baby is so cute... but he looks just like your boss???"
                 "She shakes her head."
@@ -195,7 +196,7 @@ label quest_cuckold_employee_decision_label():
                     $ the_person.change_arousal(10)
                     the_person.char "I mean, that's really hot sounding but completely hypothetical of course..."
                     mc.name "Fuck yeah. I would do that in a heartbeat."
-                    the_person.char "Of course if you don't I comple... Wha? You would!?!"
+                    the_person.char "Of course if you don't I comple... What? You would!?!"
                     $ the_person.change_happiness(15)
                     the_person.char "That's amazing! I can't believe it."
                     "She bites her lip for a moment and looks down at the floor."
@@ -251,7 +252,7 @@ label quest_cuckold_employee_decision_label():
         the_person.char "Thank you [the_person.mc_title]. I can't believe this is really happening!"
         mc.name "Me neither."
         "With that, you leave your office, being careful to lock the door behind you."
-        "Your sperm might already be racing to her egg, ready to fertalize it. But it also might not be. To be certain, you should breed her as often as you can over the next few days."
+        "Your sperm might already be racing to her egg, ready to fertilize it. But it also might not be. To be certain, you should breed her as often as you can over the next few days."
     else:
         "[the_person.title] is completely silent."
         the_person.char "You... you didn't even finish inside of me?"
@@ -309,10 +310,10 @@ label quest_cuckold_employee_breeding_session_label(the_person):
         mc.name "Okay. I'll lock the door behind me  when I leave."
         the_person.char "Thank you [the_person.mc_title]. Let's keep our fingers crossed!"
         "With that, you leave your office, being careful to lock the door behind you."
-        "Your sperm might already be racing to her egg, ready to fertalize it. But it also might not be. To be certain, you should breed her as often as you can over the next few days."
+        "Your sperm might already be racing to her egg, ready to fertilize it. But it also might not be. To be certain, you should breed her as often as you can over the next few days."
     else:
         mc.name "Sorry, I'm just too tired, I shouldn't have tried this right now..."
-        the_person.char "It's okay... You've been pushing yoursel pretty hard."
+        the_person.char "It's okay... You've been pushing yourself pretty hard."
         the_person.char "Besides, I'm probably already pregnant. This is just making certain of it!"
         "You both get up and leave your office, resuming your day."
     call advance_time from cuckold_advance_time

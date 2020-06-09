@@ -24,24 +24,22 @@
 # Any 100 ending adds marketability. Also 40+ can refer to girl as porn star, personality tweak.
 
 
-label quest_porn_acress_init_label():
-    python:
+init 1 python:
+    def setup_quest_porn_actress():
         able_person_list = []
         for person in mc.business.get_employee_list(): #TODO is there a method that grabs ENTIRE employee list?
             if person not in quest_director.unavailable_persons:
                 if person.core_sluttiness > 60:
                     able_person_list.append(person)
 
-        quest_porn_acress.quest_event_dict["start_day"] = 9999
-        quest_porn_acress.quest_event_dict["target"] = get_random_from_list(able_person_list)
-        quest_porn_acress.quest_event_dict["disease_name"]  = quest_cure_discovery_disease_name()
-        quest_porn_acress.quest_event_dict["market_contact"] = None
-        quest_porn_acress.quest_event_dict["market_day"] = 9999
-        quest_porn_acress.set_quest_flag(1)
-    return
+        quest_porn_actress.quest_event_dict["start_day"] = 9999
+        quest_porn_actress.quest_event_dict["target"] = get_random_from_list(able_person_list)
+        quest_porn_actress.quest_event_dict["disease_name"]  = quest_cure_discovery_disease_name()
+        quest_porn_actress.quest_event_dict["market_contact"] = None
+        quest_porn_actress.quest_event_dict["market_day"] = 9999
+        quest_porn_actress.set_quest_flag(1)
+        return
 
-
-init 1 python:
     def rate_porn_video(the_report, the_person):  #Takes a sex report and person and returns a score of 1-10 on how good the video isself.
         porn_score = 0
         if len(the_report.get("positions_used", [])) <= 1:  #Max three points for number of positions used
@@ -95,6 +93,10 @@ init 1 python:
 
 
 #Quest Labels
+label quest_porn_actress_init_label():
+    $ setup_quest_porn_actress()
+    return
+
 label quest_porn_actress_intro_label():
     $ the_target = quest_porn_actress.quest_event_dict.get("target", None)
     $ personnel_list = mc.business.get_employee_list()
@@ -105,10 +107,10 @@ label quest_porn_actress_intro_label():
     while the_target == the_person:   #If they are same, get a different employee
         $ the_person = get_random_from_list(mc.business.get_employee_list())
     "You get up to stretch your legs for a bit and to check on the different departments, making sure everything is running smoothly."
-    "As you pass by the break room, you everhear something."
+    "As you pass by the break room, you overhear something."
     the_person_one.char "Oh my... is that really [the_target.name]? It looks just like her... That's what the other girls are saying!"
     the_person_two.char "Wow, I think it is! If not its her twin sister!"
-    "You walk into the breakroom."
+    "You walk into the break room."
     $ scene_manager = Scene() # make sure we have a clean scene manager
     $ scene_manager.add_actor(the_person_one)
     $ scene_manager.add_actor(the_person_two, character_placement = character_center_flipped)
@@ -124,7 +126,7 @@ label quest_porn_actress_intro_label():
     mc.name "Hmm... maybe I should ask her."
     the_person_one.char "Oh, I mean... wouldn't that be kind of violating her privacy? Like, she probably didn't realize we would all be passing this video around..."
     mc.name "You're right. If she wants to do porn videos in her spare time, she can certainly do so. I'll approach the subject carefully with her."
-    the_person_two.char "Yeah but... I wonder if she even knows this video is on the internet? It's pretty amatuer... maybe it was supposed to be private?"
+    the_person_two.char "Yeah but... I wonder if she even knows this video is on the internet? It's pretty amateur... maybe it was supposed to be private?"
     "This is a sticky situation. Should you respect her privacy? Or inspect the video?"
     menu:
         "Respect her privacy":
@@ -140,7 +142,7 @@ label quest_porn_actress_intro_label():
     $ scene_manager.remove_actor(the_person_one)
     $ scene_manager.remove_actor(the_person_two)
     "You excuse yourself from the break room and head to your office you pull up the video and watch it."
-    "It definitely has an amatuer feel to it. It is one of the POV videos where the man is also the cameraman."
+    "It definitely has an amateur feel to it. It is one of the POV videos where the man is also the cameraman."
     "[the_target.title], if it is her, has a pretty good performance in the video. But you have to wonder if she even knows the video is online."
     "You decide to speak with [the_target.title]. At the very least, make sure she knows the video is out there."
 

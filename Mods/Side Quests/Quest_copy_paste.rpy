@@ -11,35 +11,33 @@
 
 #TODO don't forget to add the quest to the list of quests in Side_quests_main.rpy
 
-label quest_QUEST_NAME_init_label(): #Use this function to set quest specific variables.
-    pass
-    return
-
 ### The next three functions define the quest progress tracker, init requirements, and how we clean up after quest is done.
 init 1 python:
+    def setup_quest_QUEST_NAME():
+        #Use this function to set quest specific variables.
+        return
+
     def quest_QUEST_NAME_tracker():
-        pass
         return
 
     def quest_QUEST_NAME_start_requirement():
-        pass
         return False
 
     def quest_QUEST_NAME_cleanup():
-        pass
         return
 
 ###Declare any requirement functions now
     def quest_QUEST_NAME_intro_requirement(the_person):
-        pass
         return True
 
 ###Functions unique to the quest
     def quest_QUEST_NAME_person_function_thing(the_person):
-        pass
         return True
 
 ###Declare quest actions###
 
 
 #Quest Labels. This is the story you want to tell!
+label quest_QUEST_NAME_init_label():
+    $ setup_quest_QUEST_NAME()
+    return

@@ -1,4 +1,4 @@
-#Anytime game quest. Available immediately, requires lab leader and atleast 1 person in marketing. Gains potency as the game progresses.
+#Anytime game quest. Available immediately, requires lab leader and at least 1 person in marketing. Gains potency as the game progresses.
 #MC and science leader discover cure for some disease.
 #At low tier research, discover cure for some obscure disease
 #Higher tiers, discover cure for high profile diseases.
@@ -13,11 +13,11 @@
 # 19: MC discovers girl secretly donated drug to large pharma company. (BAD END)
 # 21: MC decides to try and sell patent for the drug. Decides to work with someone from marketing.
 # 29: After 7 days, if MC hasn't initiated sale with marketing, MC discovers large PHARMA company just announced cure. His cure is worthless (BAD END)
-# 31: Talked to marketing about tryint to sell patent rights.
+# 31: Talked to marketing about trying to sell patent rights.
 # 101: A few days later, marketing returns and gives MC details on selling the patent rights. Payout!
 
-label quest_cure_discovery_init_label():
-    python:
+init 1 python:
+    def setup_quest_cure_discovery():
         quest_cure_discovery.quest_event_dict["start_day"] = 9999
         quest_cure_discovery.quest_event_dict["cure_tier"] = mc.business.research_tier  #Snapshot quest tier at the beginning.
         quest_cure_discovery.quest_event_dict["disease_name"]  = quest_cure_discovery_disease_name()
@@ -25,9 +25,8 @@ label quest_cure_discovery_init_label():
         quest_cure_discovery.quest_event_dict["market_day"] = 9999
         #TODO add start event
         quest_cure_discovery.set_quest_flag(1)
-    return
+        return
 
-init 1 python:
     def quest_cure_discovery_disease_name():
         if mc.business.research_tier == 0:
             return "Rabies"
@@ -121,6 +120,9 @@ init 1 python:
     quest_cure_discovery_market_missed = Action("Patent Worthless", quest_cure_discovery_market_missed_requirement, "quest_cure_discovery_market_missed_label")
 
 #Quest Labels
+label quest_cure_discovery_init_label():
+    $ setup_quest_cure_discovery()
+    return
 
 label quest_cure_discovery_intro_label():
     $ the_person = mc.business.head_researcher
@@ -187,8 +189,8 @@ label quest_cure_discovery_market_patent_label(the_person):
     the_person.char "Of course. What can I do for you sir?"
     mc.name "Well, I heard that you might have some prior experience working with drug patent rights..."
     the_person.char "Yes sir! At my last job, I worked for a pharmaceutical investment company, buying and selling patent rights to all kinds of different drugs."
-    mc.name "Wow, well, that is actually very useful. You see, our research deptartment made a discovery related to a possible treatment for [the_disease]."
-    the_person.char "Oh wow! There's currently some prevantative drugs for that, but no known cure."
+    mc.name "Wow, well, that is actually very useful. You see, our research department made a discovery related to a possible treatment for [the_disease]."
+    the_person.char "Oh wow! There's currently some preventative drugs for that, but no known cure."
     mc.name "I know. I wish we had the production and testing capabilities here to take it to market, but unfortunately, we just don't."
     the_person.char "Aahhh, I see. So you want me to test the waters and see what I can get for the patent rights to the discovery?"
     mc.name "That's exactly right."
@@ -220,12 +222,12 @@ label quest_cure_discovery_patent_sold_label():
         $ mc.business.funds += 3500
         mc.name "Thank you [the_person.title], I just hope the drug can be put to good use."
     elif quest_cure_discovery.quest_event_dict.get("cure_tier", 0) == 2:
-        the_person.char "[the_disease] is widespread in the developed world. However, becuase this treatment has only been shown effective in rats, the over all effectiveness is unknown."
+        the_person.char "[the_disease] is widespread in the developed world. However, because this treatment has only been shown effective in rats, the over all effectiveness is unknown."
         the_person.char "After negotiating, I was able to sell the patent for $15000. I hope that is okay."
         $ mc.business.funds += 15000
         mc.name "That is still a considerable sum. Thank you [the_person.title]."
     elif quest_cure_discovery.quest_event_dict.get("cure_tier", 0) >= 3:
-        the_person.char "[the_disease] is widespread in older populations. However, becuase this treatment has only been shown effective in rats, the over all effectiveness is unknown."
+        the_person.char "[the_disease] is widespread in older populations. However, because this treatment has only been shown effective in rats, the over all effectiveness is unknown."
         the_person.char "After negotiating, I was able to sell the patent for $50000. I hope that is okay."
         $ mc.business.funds += 50000
         mc.name "That is still a significant sum. Thank you [the_person.title]."
@@ -306,7 +308,7 @@ label quest_cure_discovery_patent_kept_label():
                     the_person.char "Yes sir."
                 mc.name "That'll be all for now."
                 $ the_person.draw_person(position = "walking_away")
-                "Well, you may have missed a financial opportunity, but atleast you got a blowjob out of it!"
+                "Well, you may have missed a financial opportunity, but at least you got a blowjob out of it!"
             else:
                 mc.name "I'm sure you will. Please try to let me know before you take actions like that in the future though."
                 $ the_person.change_slut_temp(obedience = 20, love = 20, happiness = 20) #Net gain to stats because MC still took a good path in the end.
