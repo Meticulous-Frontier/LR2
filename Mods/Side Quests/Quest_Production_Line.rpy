@@ -28,10 +28,8 @@
 # Any 100 ending adds personality tweak to girl that gives title change option of Daddy at high enough sluttiness, can call her "baby girl"
 # girl also gains being submissive opinion (sub / dom type relationship)
 
-
-
-label quest_production_line_init_label():
-    python:
+init 1 python:
+    def setup_quest_production_line():
         able_person_list = []
         for person in mc.business.production_team:
             if person.age < 25:
@@ -40,15 +38,24 @@ label quest_production_line_init_label():
                         able_person_list.append(person)
         # if len(able_person_list) == 0: #REquirement should have been true? How is this possible?
         #     return False
-        quest_production_line.quest_event_dict["target"] = get_random_from_list(able_person_list)
+        person = get_random_from_list(able_person_list)
+
+        # make sure 'selected person' is single and has no kids
+        # although the player might have seen other information
+        # it is more disturbing when this information does not 
+        # match the story line
+        person.kids = 0
+        person.relationship = "Single"
+        person.SO_name = None
+
+        quest_production_line.quest_event_dict["target"] = person
         quest_production_line.quest_event_dict["father_name"] = get_random_male_name()
         quest_production_line.quest_event_dict["initial_meeting_day"] = 9999
         quest_production_line.quest_event_dict["starting_pay"]  = quest_production_line.quest_event_dict["target"].salary
         quest_production_line.quest_event_dict["moving_day"] = 9999
-        del able_person_list
-    return
+        quest_production_line.set_quest_flag(1)
+        return
 
-init 1 python:
     def quest_production_line_tracker():  #I'm so sorry for anyone who tries to read this function
         the_person = quest_production_line.quest_event_dict.get("target", None)
         if quest_production_line.get_quest_flag() <= 1: #Intro
@@ -63,6 +70,7 @@ init 1 python:
 
         elif quest_production_line.get_quest_flag() == 21: #reminder went off.
             if time_of_day > 3: #Missed the meeting.
+                remove_mandatory_crisis_list_action("quest_production_line_coffee_reminder_label")
                 mc.business.mandatory_crises_list.append(quest_production_line_coffee_miss)
                 quest_production_line.set_quest_flag(22)
                 mall.actions.remove(quest_production_line_coffee)
@@ -71,6 +79,7 @@ init 1 python:
             quest_production_line.quest_complete = True
 
         elif quest_production_line.get_quest_flag() == 31: #agreed to give raise.
+            remove_mandatory_crisis_list_action("quest_production_line_coffee_reminder_label")
             if the_person.salary > quest_production_line.quest_event_dict.get("starting_pay", 0): #She has received a raise!
                 quest_production_line.set_quest_flag(41)
                 mc.business.mandatory_crises_list.append(quest_production_line_after_raise_consult)
@@ -81,10 +90,13 @@ init 1 python:
             quest_production_line.quest_complete = True
 
         elif quest_production_line.get_quest_flag() == 41:
+            remove_mandatory_crisis_list_action("quest_production_line_raise_miss_label")
+            remove_mandatory_crisis_list_action("quest_production_line_after_raise_consult_label")
             if quest_production_line_after_raise_consult not in mc.business.mandatory_crises_list:
                 mc.business.mandatory_crises_list.append(quest_production_line_after_raise_consult)
 
         elif quest_production_line.get_quest_flag() == 61:
+            remove_mandatory_crisis_list_action("quest_production_line_after_raise_consult_label")
             if quest_production_line_help_move not in mc.business.mandatory_crises_list:
                 mc.business.mandatory_crises_list.append(quest_production_line_help_move)
 
@@ -171,6 +183,9 @@ init 1 python:
     quest_production_line_help_move = Action("Help Her Move", quest_production_line_help_move_requirement, "quest_production_line_help_move_label")
     quest_production_line_daddy_title =  Action("She Calls You Daddy", quest_production_line_daddy_title_requirement, "quest_production_line_daddy_title_label")
 
+label quest_production_line_init_label():
+    $ setup_quest_production_line()
+    return
 
 label quest_production_line_intro_label(the_person):
     $ dad_name = quest_production_line.quest_event_dict.get("father_name", "Gregory")

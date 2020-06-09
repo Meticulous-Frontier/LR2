@@ -84,6 +84,9 @@ init python: #For now default init. May change later if we know better.
 
         def set_quest_flag(flag):
             self.active_quest.set_quest_flag(flag)
+            # update quest right after new flag is set to prevent old actions from being visible
+            if self.active_quest != None:
+                self.active_quest.quest_tracker()
             return
 
         def add_new_quest(self, new_quest):  #Adds new quest, but only if it is unique. Checks to see if same name quest already exists.
@@ -142,6 +145,6 @@ init python: #For now default init. May change later if we know better.
 
         quest_director.add_new_quest(quest_production_line)
         quest_director.add_new_quest(quest_cure_discovery)
-        quest_director.unavailable_persons = [sarah, mom, lily, starbuck, nora, cousin, aunt, salon_manager]
+        quest_director.unavailable_persons = unique_character_list
 
         return
