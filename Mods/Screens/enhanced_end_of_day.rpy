@@ -34,7 +34,7 @@ init 2:
                 vbox:
                     xsize 800
                     $ salary_costs = 0
-                    if day % 7 > 1 and day % 7 < 6: # day count already changed before summary is shown
+                    if day % 7 > 0 and day % 7 < 6: # day count already changed before summary is shown
                         $ salary_costs = mc.business.calculate_salary_cost()
                     $ profit = mc.business.funds - mc.business.funds_yesterday
                     $ mc.business.listener_system.fire_event("daily_profit", profit = profit)
