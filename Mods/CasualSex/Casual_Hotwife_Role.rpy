@@ -1053,7 +1053,7 @@ label hotwife_flirt_response_mid(the_person):
         else:
             the_person.char "Aw, thanks! I thought this was a pretty hot look when I was getting dressed this morning."
 
-        the_person.char "Maybe hubby will let you come shopping with me one day, so you can tell me else you want to see me in."
+        the_person.char "Maybe hubby will let you come shopping with me one day, so you can tell me what else you want to see me in."
         mc.name "I think I would like that."
 
     else:
