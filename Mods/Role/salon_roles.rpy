@@ -402,7 +402,7 @@ label ophelia_make_blowjob_pics_label():
     $ the_person.change_arousal(20)
     $ the_person.draw_person(position = "blowjob")
     "Spurt after spurt covers [the_person.possessive_title]'s face. You don't think you've ever cum so hard or so fast from a blowjob."
-    the_person.char "Mmm, I forgot to tell you... I learned in beauty school. Semen is great for your skin! Mmm and its nice and warm too..."
+    the_person.char "Mmm, I forgot to tell you... I learned in beauty school that semen is great for your skin! Mmm and its nice and warm too..."
     $ the_person.draw_person()
     "As [the_person.title] stands up, you put your cock away. You see her slowly rubbing your cum into the skin on her face with two fingers..."
     mc.name "Okay, I admit it. You have the best mouth I have ever experienced."
