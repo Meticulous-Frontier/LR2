@@ -74,8 +74,7 @@ init 1 python:
         remove_mandatory_crisis_list_action("quest_cure_discovery_patent_sold_label")
         remove_mandatory_crisis_list_action("quest_cure_discovery_patent_kept_label")
         remove_mandatory_crisis_list_action("quest_cure_discovery_market_missed_label")
-
-
+        quest_cure_discovery.quest_event_dict.clear()
         return
 
 

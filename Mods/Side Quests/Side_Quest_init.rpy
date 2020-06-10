@@ -6,6 +6,7 @@ init 5 python:
 label activate_side_quest_mod_core(stack):
     python:
         Quest_tracker_init()
+        Quest_tracker_update()
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return
@@ -16,5 +17,7 @@ label update_side_quest_mod_core(stack):
             quest_director  #Hopefully triggers for existing save games to create the quest director.
         except NameError:
             Quest_tracker_init()
+
+        Quest_tracker_update()
         execute_hijack_call(stack)
     return
