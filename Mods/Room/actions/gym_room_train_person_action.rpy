@@ -99,10 +99,15 @@ label train_in_gym(the_person):
         $ the_person.change_max_energy(10)
         "She seems to be building up her endurance."
 
-    $ body_changed = the_person.change_weight(-ran_num, 100)
-    $ new_weight = get_person_weight_string(the_person)
+    $ body_changed = False
+    if not the_person.get_is_pregnant():
+        $ body_changed = the_person.change_weight(-ran_num, 100)
+        $ new_weight = get_person_weight_string(the_person)
 
-    "After the session [the_person.possessive_title] weighs [new_weight]."
+        "After the session [the_person.possessive_title] weighs [new_weight]."
+
+    else:
+        "Since she is pregnant, there is no visible change to her body or weight."
 
     if body_changed or the_person.sluttiness > 50:
         $ the_person.draw_person()
