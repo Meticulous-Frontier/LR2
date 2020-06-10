@@ -1121,3 +1121,16 @@ init -1 python:
 
     Person.add_unique_on_talk_event = add_unique_on_talk_event
     Person.add_unique_on_room_enter_event = add_unique_on_room_enter_event
+
+    def remove_on_talk_event(self, the_crisis):
+        if the_crisis in self.on_talk_event_list:
+            self.on_talk_event_list.remove(the_crisis)
+
+    Person.remove_on_talk_event = remove_on_talk_event
+
+    def remove_on_room_enter_event(self, the_crisis):
+        if the_crisis in self.on_room_enter_event_list:
+            self.on_room_enter_event_list.remove(the_crisis)
+
+    Person.remove_on_room_enter_event = remove_on_room_enter_event
+
