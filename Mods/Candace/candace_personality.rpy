@@ -539,21 +539,33 @@ label candace_cum_vagina(the_person):
         if the_person.sluttiness > 75 or the_person.get_opinion_score("creampies") > 0:
             if the_person.relationship != "Single":
                 $ so_title = SO_relationship_to_title(the_person.relationship)
-                the_person.char "Mmm, I love having all your cum inside me. That might make me pregnant, right?"
+                if the_person.on_birth_control:
+                    the_person.char "Mmm, I love having all your cum inside me. I did take my pill, right?"
+                else:
+                    the_person.char "Mmm, I love having all your cum inside me. That might make me pregnant, right?"
                 "She thinks about this for a second, then shrugs."
                 the_person.char "Oh well, my [so_title] will just take care of it, so that doesn't matter!"
             else:
-                the_person.char "Mmm, I love having all your cum inside me. That might make me pregnant, right?"
+                if the_person.on_birth_control:
+                    the_person.char "Mmm, I love having all your cum inside me. I did take my pill, right?"
+                else:
+                    the_person.char "Mmm, I love having all your cum inside me. That might make me pregnant, right?"
                 "She thinks about this for a second, then shrugs."
                 the_person.char "Oh well, it's worth it to feel like this!"
         else:
             if the_person.relationship != "Single":
                 $ so_title = SO_relationship_to_title(the_person.relationship)
-                the_person.char "Oh, that's so hot... But wait, if I get pregnant what do I tell my [so_title]?"
+                if the_person.on_birth_control:
+                    the_person.char "Oh, that's so hot... But wait, I did take my pill, right?"
+                else:
+                    the_person.char "Oh, that's so hot... But wait, if I get pregnant what do I tell my [so_title]?"
                 "She bites her lip and looks worried."
                 the_person.char "We shouldn't do this too often. Next time you can cum somewhere else, okay?"
             else:
-                the_person.char "Oh, that's so hot... But what do I do if I get pregnant?"
+                if the_person.on_birth_control:
+                    the_person.char "Oh, that's so hot... But wait, I did take my pill, right?"
+                else:
+                    the_person.char "Oh, that's so hot... But what do I do if I get pregnant?"
                 "She bites her lip and looks worried."
                 the_person.char "We shouldn't do this too often, okay? Next time you can cum, like, somewhere else, right?"
     return

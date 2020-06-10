@@ -767,18 +767,29 @@ label cougar_cum_vagina(the_person):
             if the_person.relationship != "Single":
                 $ so_title = SO_relationship_to_title(the_person.relationship)
                 the_person.char "Yes, give me your seed!"
-                the_person.char "If I become pregnant I can say it's my [so_title]'s. I'm sure he would believe it."
+                if the_person.on_birth_control:
+                    the_person.char "Luckily I cannot get pregnant, but if I did, my [so_title] would believe it's his."
+                else:
+                    the_person.char "If I become pregnant I can say it's my [so_title]'s. I'm sure he would believe it."
             else:
                 the_person.char "Mmm, your semen is so nice and warm. I wonder how potent it is. You might have gotten me pregnant, you know."
         else:
             if the_person.relationship != "Single":
                 $ so_title = SO_relationship_to_title(the_person.relationship)
-                the_person.char "Oh no... You need to cum outside of me [the_person.mc_title]."
-                the_person.char "What would I tell my [so_title] if I got pregnant? He might not believe it's his!"
+                if the_person.on_birth_control:
+                    the_person.char "Oh yes, shoot your hot cum right inside me."
+                    the_person.char "My [so_title] hasn't touched me down there for months."
+                else:
+                    the_person.char "Oh no... You need to cum outside of me [the_person.mc_title]."
+                    the_person.char "What would I tell my [so_title] if I got pregnant? He might not believe it's his!"
             else:
-                the_person.char "Oh no... You need to cum outside of me [the_person.mc_title]."
-                the_person.char "I'm in no position to be getting pregnant."
-                the_person.char "Well, I suppose you have me in the literal position to get pregnant, but you know what I mean."
+                if the_person.on_birth_control:
+                    the_person.char "Oh yes, shoot your hot cum right inside me."
+                    the_person.char "Perhaps I should stop taking the pill and hope you get me pregnant again..."
+                else:
+                    the_person.char "Oh no... You need to cum outside of me [the_person.mc_title]."
+                    the_person.char "I'm in no position to be getting pregnant."
+                    the_person.char "Well, I suppose you have me in the literal position to get pregnant, but you know what I mean."
     return
 
 label cougar_cum_anal(the_person):

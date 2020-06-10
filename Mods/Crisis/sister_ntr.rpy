@@ -124,7 +124,9 @@ label sister_ntr_crisis_action_label:
                     else:
                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
                 elif finish == "inside":
-                    the_person.char "Yes! Do it, [man_name]! I want you to fill me. Don't worry, I'm on the pill."
+                    the_person.char "Yes! Do it, [man_name]! I want you to fill me."
+                    if the_person.on_birth_control:
+                        the_person.char "Don't worry, I'm on the pill."
                     $ the_person.cum_in_vagina()
                     $ the_person.draw_person(position = "missionary", emotion = "happy")
                     "After a few hard thrusts, [man_name] starts spilling his semen into [the_person.possessive_title]."
@@ -222,7 +224,9 @@ label sister_ntr_crisis_action_label:
                     else:
                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
                 elif finish == "inside":
-                    the_person.char "Yes! Do it, [man_name]! I want you to fill me. Don't worry, I'm on the pill."
+                    the_person.char "Yes! Do it, [man_name]! I want you to fill me."
+                    if the_person.on_birth_control:
+                        the_person.char "Don't worry, I'm on the pill."
                     $ the_person.cum_in_vagina()
                     $ the_person.draw_person(position = "against_wall", emotion = "happy")
                     "After a few hard thrusts, [man_name] starts spilling his semen into [the_person.possessive_title]."
@@ -319,7 +323,9 @@ label sister_ntr_crisis_action_label:
                     else:
                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
                 elif finish == "inside":
-                    the_person.char "Wait, [man_name]. Please cum in my pussy. I want you to fill me. Don't worry, I'm on the pill."
+                    the_person.char "Wait, [man_name]. Please cum in my pussy. I want you to fill me."
+                    if the_person.on_birth_control:
+                        the_person.char "Don't worry, I'm on the pill."
                     $ the_person.cum_in_vagina()
                     $ the_person.draw_person(position = "standing_doggy")
                     "The man take his cock from [the_person.possessive_title] ass and sticks it into her vagina."
@@ -509,7 +515,9 @@ label sister_ntr_crisis_action_label:
                 else:
                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
             elif finish == "inside":
-                the_person.char "Yes! Do it, [man_name]! I want you to fill me. Don't worry, I'm on the pill."
+                the_person.char "Yes! Do it, [man_name]! I want you to fill me"
+                if the_person.on_birth_control:
+                    the_person.char "Don't worry, I'm on the pill."
                 $ the_person.cum_in_vagina()
                 $ the_person.draw_person(position = "missionary", emotion = "happy")
                 "After a few hard thrusts, [man_name] starts spilling his semen into [the_person.possessive_title]."
@@ -635,7 +643,9 @@ label sister_ntr_crisis_action_label:
                 else:
                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
             elif finish == "inside":
-                the_person.char "Yes! Do it, [man_name]! I want you to fill me. Don't worry, I'm on the pill."
+                the_person.char "Yes! Do it, [man_name]! I want you to fill me up."
+                if the_person.on_birth_control:
+                    the_person.char "Don't worry, I'm on the pill."
                 $ the_person.cum_in_vagina()
                 $ the_person.draw_person(position = "standing_doggy")
                 "After a few hard thrusts, [man_name] starts spilling his semen into [the_person.possessive_title]."
@@ -762,7 +772,9 @@ label sister_ntr_crisis_action_label:
                 else:
                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
             elif finish == "inside":
-                the_person.char "Yes! Do it, guys! I want you to fill me. Don't worry, I'm on the pill."
+                the_person.char "Yes! Do it, guys! I want you to fill me up."
+                if the_person.on_birth_control:
+                    the_person.char "Don't worry, I'm on the pill."
                 $ the_person.cum_in_vagina()
                 $ the_person.draw_person(position = "doggy")
                 "After a few hard thrusts, both men start spilling his semen into [the_person.possessive_title] holes."

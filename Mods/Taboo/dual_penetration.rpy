@@ -158,7 +158,7 @@ label mom_dual_penetration_taboo_break(the_person):
                 the_person.char "Okay, for your happiness I'll give it a try."
 
             else:
-                mc.name "If I'm fucking your pussy I might get you pregnant, but with anal that can't hapen."
+                mc.name "If I'm fucking your pussy I might get you pregnant, but with anal that can't happen."
                 the_person.char "Or you could put on a condom."
                 mc.name "Those feel like crap though [the_person.title]. I want to feel you wrapped around my cock."
                 the_person.char "Well... Okay, if it would make you happy we can give it a try."
