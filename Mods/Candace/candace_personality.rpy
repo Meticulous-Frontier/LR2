@@ -10,7 +10,7 @@ init 1300:
             valid_mc_titles.append(mc.name)
             valid_mc_titles.append("cutie")
             return valid_mc_titles
-        candace_personality = Personality("candace", default_prefix = "relaxed",
+        candace_personality = Personality("candace", default_prefix = "bimbo",
         common_likes = ["skirts", "small talk", "the colour pink", "makeup", "pop"],
         common_sexy_likes = ["giving blowjobs", "missionary style sex", "being submissive", "skimpy outfits", "showing her tits", "showing her ass", "not wearing anything", "not wearing underwear", "lingerie", "cum facials"],
         common_dislikes = ["working", "research work", "work uniforms", "conservative outfits", "Mondays", "Pants"],
