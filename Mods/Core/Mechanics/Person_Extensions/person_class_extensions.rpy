@@ -1122,9 +1122,6 @@ init -1 python:
     Person.add_unique_on_talk_event = add_unique_on_talk_event
     Person.add_unique_on_room_enter_event = add_unique_on_room_enter_event
 
-<<<<<<< HEAD
-
-
 ##########################################
 # Pregnancy Functions                    #
 ##########################################
@@ -1151,7 +1148,7 @@ init -1 python:
     Person.get_knows_pregnant = get_knows_pregnant
     Person.get_is_lactating = get_is_lactating
     Person.get_due_date = get_due_date
-=======
+
     def remove_on_talk_event(self, the_crisis):
         if the_crisis in self.on_talk_event_list:
             self.on_talk_event_list.remove(the_crisis)
@@ -1163,5 +1160,3 @@ init -1 python:
             self.on_room_enter_event_list.remove(the_crisis)
 
     Person.remove_on_room_enter_event = remove_on_room_enter_event
-
->>>>>>> c1db077b513932b7ec4b5ff3bbc0fb8e93eb7900
