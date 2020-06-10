@@ -1126,28 +1126,38 @@ init -1 python:
 # Pregnancy Functions                    #
 ##########################################
 
-    def get_is_pregnant(self):
+    def is_pregnant(self):
         if pregnant_role in self.special_role:
             return True
         return False
+    Person.is_pregnant = is_pregnant
 
-    def get_knows_pregnant(self):
+    def knows_pregnant(self):
         return self.event_triggers_dict.get("preg_knows", False)
+    Person.knows_pregnant = knows_pregnant
 
-    def get_is_lactating(self):
-        if the_person.lactation_sources > 0:
+    def is_lactating(self):
+        if self.lactation_sources > 0:
             return True
         return False
+    Person.is_lactating = is_lactating
 
-    def get_due_date(self):
-        if self.get_is_pregnant():
-            return the_person.event_triggers_dict.get("preg_finish_announce_day", 0)
-        return None
+    def get_due_day(self):
+        if self.is_pregnant():
+            return self.event_triggers_dict.get("preg_finish_announce_day", 0)
+        return -1
+    Person.get_due_day = get_due_day
 
-    Person.get_is_pregnant = get_is_pregnant
-    Person.get_knows_pregnant = get_knows_pregnant
-    Person.get_is_lactating = get_is_lactating
-    Person.get_due_date = get_due_date
+    def pregnancy_is_visible(self):
+        if self.is_pregnant():
+            return day > self.pregnancy_show_day()
+        return False
+    Person.pregnancy_is_visible = pregnancy_is_visible
+
+    def pregnancy_show_day(self):
+        if self.is_pregnant():
+            return self.event_triggers_dict.get("preg_transform_day", 0)
+        return -1
 
     def remove_on_talk_event(self, the_crisis):
         if the_crisis in self.on_talk_event_list:
