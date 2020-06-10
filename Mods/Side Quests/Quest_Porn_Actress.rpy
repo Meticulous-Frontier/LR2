@@ -83,6 +83,8 @@ init 1 python:
         return
     def quest_porn_actress_cleanup():
 
+         # cleanup dictionary to save space and memory
+        quest_porn_actress.quest_event_dict.clear()
         return
 
 #Label requirement functions

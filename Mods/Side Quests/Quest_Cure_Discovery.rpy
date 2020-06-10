@@ -27,6 +27,12 @@ init 1 python:
         quest_cure_discovery.set_quest_flag(1)
         return
 
+    def quest_cure_get_market_contact():
+        return quest_cure_discovery.quest_event_dict.get("market_contact", None)
+
+    def quest_cure_set_market_contact(person):
+        quest_cure_discovery.quest_event_dict["market_contact"] = person
+
     def quest_cure_discovery_disease_name():
         if mc.business.research_tier == 0:
             return "Rabies"
@@ -39,6 +45,7 @@ init 1 python:
 
 #Quest defining functions
     def quest_cure_discovery_tracker():
+
         if quest_cure_discovery.get_quest_flag() <= 1:
             mc.business.add_unique_mandatory_crisis(quest_cure_discovery_intro)
         elif quest_cure_discovery.get_quest_flag() == 9:
@@ -48,10 +55,10 @@ init 1 python:
         elif quest_cure_discovery.get_quest_flag() == 19: #Bad End
             quest_cure_discovery.quest_complete = True
         elif quest_cure_discovery.get_quest_flag() == 21:
-            quest_cure_discovery.quest_event_dict.get("market_contact", None).add_unique_on_talk_event(quest_cure_discovery_market_patent)
+            quest_cure_get_market_contact().add_unique_on_talk_event(quest_cure_discovery_market_patent)
             mc.business.add_unique_mandatory_crisis(quest_cure_discovery_market_missed)
         elif quest_cure_discovery.get_quest_flag() == 29: #Bad End
-            quest_cure_discovery.quest_event_dict.get("market_contact", None).on_talk_event_list = []
+            quest_cure_get_market_contact().remove_on_talk_event(quest_cure_discovery_market_patent)
             quest_cure_discovery.quest_complete = True
         elif quest_cure_discovery.get_quest_flag() == 31: #Bad End
             remove_mandatory_crisis_list_action("quest_cure_discovery_market_missed_label")
@@ -176,7 +183,7 @@ label quest_cure_discovery_intro_label():
     "So... you should talk to [the_target.possessive_title] about selling your patent rights to the cure for [the_disease]."
 
     $ del the_disease
-    $ quest_cure_discovery.quest_event_dict["market_contact"] = the_target
+    $ quest_cure_set_market_contact(the_target)
     $ del the_target
     $ quest_cure_discovery.set_quest_flag(21)
     return
@@ -195,7 +202,7 @@ label quest_cure_discovery_market_patent_label(the_person):
     mc.name "That's exactly right."
     the_person.char "Okay! I can do that. Give me a couple of days to chat with some of my old contacts and I'll see what I can find!"
     mc.name "Thank you, [the_person.title]."
-    $ quest_cure_discovery.quest_event_dict["market_contact"] = the_person
+    $ quest_cure_set_market_contact(the_person)
     $ quest_cure_discovery.quest_event_dict["market_day"] = day
     $ del the_disease
     $ quest_cure_discovery.set_quest_flag(31)
@@ -203,7 +210,7 @@ label quest_cure_discovery_market_patent_label(the_person):
 
 label quest_cure_discovery_patent_sold_label():
     $ the_disease = quest_cure_discovery.quest_event_dict.get("disease_name", "Rabies")
-    $ the_person = quest_cure_discovery.quest_event_dict.get("market_contact",  None)
+    $ the_person = quest_cure_get_market_contact()
     if the_person == None:
         return
     #TODO test to make sure market contact still works for us.
