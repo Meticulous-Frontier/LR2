@@ -135,6 +135,8 @@ init 5 python:
             return False
         if mc.business.funds < 500:
             return "Requires $500"
+        if not mc.business.is_open_for_business():
+            return "Only during work hours"
         return True
 
     def HR_director_coffee_tier_2_requirement(the_person):
@@ -144,6 +146,8 @@ init 5 python:
             return False
         if mc.business.funds < 1500:
             return "Requires $1500"
+        if not mc.business.is_open_for_business():
+            return "Only during work hours"
         return True
 
     def HR_director_gym_membership_tier_1_requirement(the_person):
@@ -290,15 +294,15 @@ init 5 python:
             return int(serum_trait.base_side_effect_chance / serum_trait.mastery_level)
         return 100
 
-    HR_director_coffee_tier_1_action = Action("Add serum to coffee during meetings.", HR_director_coffee_tier_1_requirement, "HR_director_coffee_tier_1_label",
-        menu_tooltip = "Costs $500 but makes meetings more impactful.")
-    HR_director_coffee_tier_2_action = Action("Add stronger serum to coffee during meetings.", HR_director_coffee_tier_2_requirement, "HR_director_coffee_tier_2_label",
-        menu_tooltip = "Costs $1500 but makes meetings impactful.")
-    HR_director_gym_membership_tier_1_action = Action("Sponsor company gym membership.", HR_director_gym_membership_tier_1_requirement, "HR_director_gym_membership_tier_1_label",
+    HR_director_coffee_tier_1_action = Action("Add serum to coffee", HR_director_coffee_tier_1_requirement, "HR_director_coffee_tier_1_label",
+        menu_tooltip = "Costs $500 but makes monday HR meetings more impactful.")
+    HR_director_coffee_tier_2_action = Action("Add stronger serum to coffee", HR_director_coffee_tier_2_requirement, "HR_director_coffee_tier_2_label",
+        menu_tooltip = "Costs $1500 but makes monday HR meetings impactful.")
+    HR_director_gym_membership_tier_1_action = Action("Sponsor company gym membership", HR_director_gym_membership_tier_1_requirement, "HR_director_gym_membership_tier_1_label",
         menu_tooltip = "Costs money each week, but increases girls energy over time.")
-    HR_director_gym_membership_tier_2_action = Action("Sponsor company health program.", HR_director_gym_membership_tier_2_requirement, "HR_director_gym_membership_tier_2_label",
+    HR_director_gym_membership_tier_2_action = Action("Sponsor company health program", HR_director_gym_membership_tier_2_requirement, "HR_director_gym_membership_tier_2_label",
         menu_tooltip = "Costs money each week, but increases girls energy over time.")
-    HR_director_mind_control_action = Action("Produce mind control Serum.", HR_director_mind_control_requirement, "HR_director_mind_control_label",
+    HR_director_mind_control_action = Action("Produce mind control Serum", HR_director_mind_control_requirement, "HR_director_mind_control_label",
         menu_tooltip = "Costs $5000. Allows you to attempt mind control of employee.")
     HR_director_mind_control_attempt = Action("Attempt Mind Control {image=gui/heart/Time_Advance.png}", HR_director_mind_control_attempt_requirement, "HR_director_mind_control_attempt_label",
         menu_tooltip = "WARNING: May have side effects!")
