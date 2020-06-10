@@ -1121,3 +1121,32 @@ init -1 python:
 
     Person.add_unique_on_talk_event = add_unique_on_talk_event
     Person.add_unique_on_room_enter_event = add_unique_on_room_enter_event
+
+
+
+##########################################
+# Pregnancy Functions                    #
+##########################################
+
+    def get_is_pregnant(self):
+        if pregnant_role in self.special_role:
+            return True
+        return False
+
+    def get_knows_pregnant(self):
+        return self.event_triggers_dict.get("preg_knows", False)
+
+    def get_is_lactating(self):
+        if the_person.lactation_sources > 0:
+            return True
+        return False
+
+    def get_due_date(self):
+        if self.get_is_pregnant():
+            return the_person.event_triggers_dict.get("preg_finish_announce_day", 0)
+        return None
+
+    Person.get_is_pregnant = get_is_pregnant
+    Person.get_knows_pregnant = get_knows_pregnant
+    Person.get_is_lactating = get_is_lactating
+    Person.get_due_date = get_due_date
