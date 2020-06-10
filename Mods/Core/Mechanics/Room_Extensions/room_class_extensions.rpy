@@ -114,7 +114,16 @@ init -1 python:
 
         return possible_locations
 
-    def add_action(self, act): # Adds an action to the room if not already present. Used with PolicyMod.
+    # Adds an action to the room if not already present. Used with PolicyMod.
+    def add_action(self, act): 
         if act not in self.actions:
             self.actions.append(act)
+
     Room.add_action = add_action
+
+    # Remove an action from from if present.
+    def remove_action(self, act):
+        if act in self.actions:
+            self.actions.remove(act)
+
+    Room.remove_action = remove_action

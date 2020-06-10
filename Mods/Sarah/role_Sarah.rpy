@@ -75,7 +75,7 @@ init 2 python:
         sarah.event_triggers_dict["favorite_drink"] = "appletini"
 
         # add appoint
-        office.actions.append(HR_director_appointment_action)
+        office.add_action(HR_director_appointment_action)
 
         Sarah_intro = Action("Sarah_intro",Sarah_intro_requirement,"Sarah_intro_label") #Set the trigger day for the next monday. Monday is day%7 == 0
         mc.business.mandatory_crises_list.append(Sarah_intro) #Add the event here so that it pops when the requirements are met.
@@ -2352,7 +2352,7 @@ label watch_strip_show(the_person):  #This scene assumes scene manager is runnin
             python:
                 blackmail_2_confront_action = Action("Confront her about her stripping", blackmail_2_confront_requirement, "cousin_blackmail_level_2_confront_label",
                     menu_tooltip = "Tell her that you know about her job as a stripper and use it as further leverage.")
-                cousin_role.actions.append(blackmail_2_confront_action)
+                cousin_role.add_action(blackmail_2_confront_action)
                 showgirl.event_triggers_dict["seen_cousin_stripping"] = True
 
             "It takes you a moment to recognize your cousin, [showgirl.title], as she struts out onto the stage."

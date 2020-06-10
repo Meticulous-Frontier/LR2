@@ -12,7 +12,7 @@ init python: #For now default init. May change later if we know better.
             #TODO
             self.quest_name = quest_name #Not sure if we even need this but its here for now.
             self.quest_init_label = quest_init_label #Run this function if this quest is selected to begin.
-            self.quest_tracker = quest_tracker #Run this function evey turn to update quest status. Needs to assign appropriate events, crisis, actions, etc. and remove them as necessary.
+            self.quest_tracker = quest_tracker #Run this function every turn to update quest status. Needs to assign appropriate events, crisis, actions, etc. and remove them as necessary.
             self.start_requirement = start_requirement #This function determines if the side quest is available to be run.
             self.quest_cleanup = quest_cleanup  #Function that will be run when the quest goes inactive, to cleanup any appropriate leftover variables, crisis, actions, etc.
             self.quest_flag = 0 #an int used to describe the current state of the quest. Comments in new quest file should explain different flag params
@@ -26,6 +26,7 @@ init python: #For now default init. May change later if we know better.
 
         def set_quest_flag(self, flag):
             self.quest_flag = flag
+            self.quest_tracker()
             return
 
         def get_quest_flag(self):
@@ -41,17 +42,14 @@ init python: #For now default init. May change later if we know better.
             self.unavailable_persons = [] #List of people that are unable to used for quest purposes. Girls get added to this as quests progress, so we don't give multiple quests to same girl
             self.quest_chance = SIDE_QUEST_INITIAL_CHANCE
 
-
         def run_day(self): #AT the end of each day.
-            if self.active_quest == None: #There is no active quest, so have a chance at beginning a new quest.
+            if not self.active_quest: #There is no active quest, so have a chance at beginning a new quest.
                 ran_num = renpy.random.randint(0,100)
                 if ran_num < self.quest_chance:  #Currently a 4% chance of beginning a new quest everyday. SHOULD average out to
-                    if self.start_new_quest():
-                        pass
-                    else:
+                    if not self.start_new_quest():
                         self.quest_chance = SIDE_QUEST_INITIAL_CHANCE  #No quest started because none avail. Reset quest chance.
                 else:
-                    self.quest_chance += SIDE_QUEST_DAILY_CHANCE_INCREASE #EVery day add an additional chance of a quest. Should elminate 20+ day quest droughts.
+                    self.quest_chance += SIDE_QUEST_DAILY_CHANCE_INCREASE #EVery day add an additional chance of a quest. Should eliminate 20+ day quest droughts.
             else:
                 if self.active_quest.quest_complete == True: #Quest is done! clear the active and reset daily quest chances.
                     self.active_quest.quest_active = False
@@ -60,7 +58,7 @@ init python: #For now default init. May change later if we know better.
                     self.quest_chance = SIDE_QUEST_INITIAL_CHANCE
 
         def run_turn(self):
-            if self.active_quest != None:
+            if self.active_quest:
                 self.active_quest.quest_tracker()
             return
 
@@ -79,14 +77,9 @@ init python: #For now default init. May change later if we know better.
                 self.quest_start_day = day
             return True
 
-        def get_current_quest(self):
-            return self.active_quest
-
         def set_quest_flag(flag):
-            self.active_quest.set_quest_flag(flag)
-            # update quest right after new flag is set to prevent old actions from being visible
-            if self.active_quest != None:
-                self.active_quest.quest_tracker()
+            if self.active_quest:
+                self.active_quest.set_quest_flag(flag)
             return
 
         def add_new_quest(self, new_quest):  #Adds new quest, but only if it is unique. Checks to see if same name quest already exists.
@@ -98,16 +91,15 @@ init python: #For now default init. May change later if we know better.
         #DEBUG functions
 
         def debug_text_dump(self):  #Use this command in the console to get a dump of quest tracker status.
-            cur_quest = self.get_current_quest()
-            if self.get_current_quest() == None:
+            if not self.active_quest:
                 renpy.say("","There is currently no active quest.")
             else:
-                renpy.say("","The current active quest is [cur_quest.quest_name].")
+                renpy.say("","The current active quest: " + self.active_quest.quest_name)
+
             renpy.say("","The current list of quests is:")
             for quest in self.quest_list:
-                renpy.say("","[quest.quest_name].")
+                renpy.say("", quest.quest_name)
             return
-
 
         def attempt_force_quest(self, quest_name = None, override_active = False):  #Use this command in the console to attempt to for a new quest. optional param to force a specific quest for debug purpuses.
             if self.active_quest == None or override_action:
@@ -131,20 +123,31 @@ init python: #For now default init. May change later if we know better.
 
         global quest_production_line
         quest_production_line = Side_Quest(quest_name = "Chemists's Baby Girl",
-        quest_init_label = "quest_production_line_init_label",
-        quest_tracker = quest_production_line_tracker,
-        start_requirement = quest_production_line_start_requirement,
-        quest_cleanup = quest_production_line_cleanup)
+            quest_init_label = "quest_production_line_init_label",
+            quest_tracker = quest_production_line_tracker,
+            start_requirement = quest_production_line_start_requirement,
+            quest_cleanup = quest_production_line_cleanup)
+        quest_director.add_new_quest(quest_production_line)
 
         global quest_cure_discovery
         quest_cure_discovery = Side_Quest(quest_name = "Medical Breakthrough",
-        quest_init_label = "quest_cure_discovery_init_label",
-        quest_tracker = quest_cure_discovery_tracker,
-        start_requirement = quest_cure_discovery_start_requirement,
-        quest_cleanup = quest_cure_discovery_cleanup)
-
-        quest_director.add_new_quest(quest_production_line)
+            quest_init_label = "quest_cure_discovery_init_label",
+            quest_tracker = quest_cure_discovery_tracker,
+            start_requirement = quest_cure_discovery_start_requirement,
+            quest_cleanup = quest_cure_discovery_cleanup)
         quest_director.add_new_quest(quest_cure_discovery)
+
         quest_director.unavailable_persons = unique_character_list
 
+        return
+
+    def Quest_tracker_update():
+        # update existing quests to simplify debugging (only tracker and cleanup)
+        quest_director.unavailable_persons = unique_character_list
+
+        quest_production_line.quest_tracker = quest_production_line_tracker
+        quest_production_line.quest_cleanup = quest_production_line_cleanup
+
+        quest_cure_discovery.quest_tracker = quest_cure_discovery_tracker
+        quest_cure_discovery.quest_cleanup = quest_cure_discovery_cleanup
         return

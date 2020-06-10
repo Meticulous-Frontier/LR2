@@ -40,6 +40,9 @@ init 1 python:
         quest_cuckold_employee.quest_event_dict["creampie_count"] = 0
         return
 
+    def quest_cuckold_employee_get_target():
+        return quest_cuckold_employee.quest_event_dict.get("target", None)
+
     def quest_cuckold_employee_tracker():
         return
 
@@ -49,6 +52,9 @@ init 1 python:
         return False
 
     def quest_cuckold_employee_cleanup():
+
+        # cleanup dictionary to save space and memory
+        quest_cuckold_employee.quest_event_dict.clear()
         return
 
 ###Declare any requirement functions
@@ -91,7 +97,7 @@ label quest_cuckold_employee_init_label(): #Use this function to set quest speci
     return
 
 label quest_cuckold_employee_intro_label():
-    $ the_person = quest_cuckold_employee.quest_event_dict.get("target", None)
+    $ the_person = quest_cuckold_employee_get_target()
     if the_person == None:
         #ABORT ABORT, we fucked up somewhere.
         return
@@ -117,7 +123,7 @@ label quest_cuckold_employee_intro_label():
     return
 
 label quest_cuckold_employee_decision_label():
-    $ the_person = quest_cuckold_employee.quest_event_dict.get("target", None)
+    $ the_person = quest_cuckold_employee_get_target()
     if the_person == None:
         #ABORT ABORT, we fucked up somewhere.
         return
@@ -266,7 +272,9 @@ label quest_cuckold_employee_decision_label():
     return
 
 label quest_cuckold_employee_rethink_decision_label():
-    $ the_person = quest_cuckold_employee.quest_event_dict.get("target", None)
+    $ the_person = quest_cuckold_employee_get_target()
+
+    return
 
 label quest_cuckold_employee_breeding_session_label(the_person):
     "You walk up to [the_person.title]. When she sees you she smiles."

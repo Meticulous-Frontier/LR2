@@ -24,6 +24,8 @@ init 1 python:
         return False
 
     def quest_QUEST_NAME_cleanup():
+
+        quest_QUEST_NAME.quest_event_dict.clear()
         return
 
 ###Declare any requirement functions now

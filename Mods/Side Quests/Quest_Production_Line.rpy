@@ -11,7 +11,7 @@
 # 2: After 5 days, if MC hasn't talked to girl yet, she approaches MC on the next workday (We don't want these quests to drag out too long) TODO
 # 11: talked to girl, agreed to meet with girls dad the next day. X
 # 21: reminder has gone off on MC's phone (mandatory event) to remind MC to meet with dad. X
-# 22: MC doesn't meet with girls dad. Quest is set to unsat. X
+# 22: MC doesn't meet with girls dad. Quest is set to unset. X
 # 29: Next day girl texts MC to say she is disappointed he didn't make time to meet with dad. Quest END
 # 31: MC meets with dad, agrees to give girl a raise. X
 # 32: MC fails to give girl a raise after 10 days. X
@@ -63,8 +63,7 @@ init 1 python:
                 the_person.on_room_enter_event_list.append(quest_production_line_intro)
 
         elif quest_production_line.get_quest_flag() == 11: #Agreed to meet
-            if quest_production_line_coffee not in mall.actions:
-                mall.actions.append(quest_production_line_coffee)
+            mall.add_action(quest_production_line_coffee)
             if quest_production_line_coffee_reminder not in mc.business.mandatory_crises_list:
                 mc.business.mandatory_crises_list.append(quest_production_line_coffee_reminder)
 
@@ -73,12 +72,13 @@ init 1 python:
                 remove_mandatory_crisis_list_action("quest_production_line_coffee_reminder_label")
                 mc.business.mandatory_crises_list.append(quest_production_line_coffee_miss)
                 quest_production_line.set_quest_flag(22)
-                mall.actions.remove(quest_production_line_coffee)
+                mall.remove_action(quest_production_line_coffee)
 
         elif quest_production_line.get_quest_flag() == 29:  #Bad end
             quest_production_line.quest_complete = True
 
         elif quest_production_line.get_quest_flag() == 31: #agreed to give raise.
+            mall.remove_action(quest_production_line_coffee)
             remove_mandatory_crisis_list_action("quest_production_line_coffee_reminder_label")
             if the_person.salary > quest_production_line.quest_event_dict.get("starting_pay", 0): #She has received a raise!
                 quest_production_line.set_quest_flag(41)
@@ -111,11 +111,12 @@ init 1 python:
         for person in mc.business.production_team:
             if person.age < 25:
                 if person not in quest_director.unavailable_persons:
-                    if person.event_triggers_dict.get("employed_since", 9999) < day + 7: #Employed for atleast 7 days#
-                        return True #True if find atleast one person that meets criteria
+                    if person.event_triggers_dict.get("employed_since", 9999) < day + 7: #Employed for at least 7 days#
+                        return True #True if find at least one person that meets criteria
         return False
 
     def quest_production_line_cleanup():
+        mall.remove_action(quest_production_line_coffee)
         remove_mandatory_crisis_list_action("quest_production_line_intro_label")
         remove_mandatory_crisis_list_action("quest_production_line_coffee_reminder_label")
         remove_mandatory_crisis_list_action("quest_production_line_coffee_label")
@@ -123,6 +124,8 @@ init 1 python:
         remove_mandatory_crisis_list_action("quest_production_line_raise_miss_label")
         remove_mandatory_crisis_list_action("quest_production_line_after_raise_consult_label")
         remove_mandatory_crisis_list_action("quest_production_line_help_move_label")
+        # cleanup dictionary (quest is done)
+        quest_production_line.quest_event_dict.clear()
         return
 
     def quest_production_line_intro_requirement(the_person):

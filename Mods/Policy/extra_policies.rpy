@@ -56,7 +56,7 @@ init 1310 python:
 
     def unlock_genetic_modification():
         rd_division.background_image = standard_biotech_backgrounds[:]
-        rd_division.actions.append(biotech_modify_person)
+        rd_division.add_action(biotech_modify_person)
 
     genetic_modification_policy = Policy(
         name = "Genetic Modification License",
@@ -71,7 +71,7 @@ init 1310 python:
         return mc.business.research_tier >= 3
 
     def unlock_genetic_manipulation():
-        rd_division.actions.append(biotech_clone_person)
+        rd_division.add_action(biotech_clone_person)
 
     genetic_manipulation_policy = Policy(
         name = "Genetic Experimentation License",

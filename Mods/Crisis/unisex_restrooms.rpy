@@ -337,7 +337,7 @@ label unisex_restroom_unlock_gloryhole_label():
     "The restroom is empty, so you find an empty stall and enter it."
     "Much to your surprise, you discover a small hole cut out. The girls have made a gloryhole!"
     $ mc.business.unisex_restroom_unlocks["unisex_restroom_gloryhole"] = 1
-    $ office.actions.append(unisex_restroom_gloryhole_wait)
+    $ office.add_action(unisex_restroom_gloryhole_wait)
     "Since you are the only man in the company, you have to assume that this was made with you in mind."
     "You finish relieving yourself, and then consider. Should you wait and see if someone comes along? Or maybe try some other time?"
     menu:

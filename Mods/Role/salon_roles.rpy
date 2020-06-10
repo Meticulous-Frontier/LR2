@@ -211,7 +211,7 @@ label ophelia_learn_chocolate_love_label():
     "You bet that would help her get her mind off her ex!"
     "... plus... if you have sole control over the chocolates... you could easily add some serum to them if you want..."
     $ the_person.event_triggers_dict["chocolate_gift_unlocked"] = 1
-    $ mall.actions.append(ophelia_give_chocolate)
+    $ mall.add_action(ophelia_give_chocolate)
     return
 
 label ophelia_give_chocolate_label():

@@ -33,3 +33,15 @@ init -1 python:
         return True
 
     Role.__ne__ = role_ne   
+
+    def add_action(self, act):
+        if not act in self.actions:
+            self.actions.append(act)
+
+    Role.add_action = add_action
+
+    def remove_action(self, act):
+        if act in self.actions:
+            self.actions.remove(act)
+
+    Role.remove_action = remove_action

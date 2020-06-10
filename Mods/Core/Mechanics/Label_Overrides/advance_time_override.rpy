@@ -199,6 +199,7 @@ init 5 python:
             person.run_turn()
         mc.business.run_turn()
         mc.run_turn()
+        quest_director.run_turn()
         return
 
     def advance_time_run_day(people):
