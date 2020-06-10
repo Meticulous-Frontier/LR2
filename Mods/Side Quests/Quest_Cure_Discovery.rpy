@@ -147,7 +147,7 @@ label quest_cure_discovery_intro_label():
     mc.name "That's great... but could we realistically manufacture that here?"
     "She considers your question for a moment."
     the_person.char "Realistically... not really. Not in the numbers that would be needed to have it available to large numbers of people."
-    "Hmm"
+    mc.name "Hmm, that's a shame."
     the_person.char "Maybe you could... I don't know... sell the patent? To a larger pharmaceutical company? One that could make it in the quantity needed to meet worldwide demand?"
     mc.name "That's an interesting idea..."
     menu:
