@@ -10,10 +10,7 @@ init 3 python:
         return False
 
     def daily_talk_initialization(self):
-        for action in lobby.actions:
-            if action.name == self.name:
-                return
-        lobby.actions.append(self)
+        lobby.add_action(self)
         return
 
     def daily_talk_update_employee_stats():

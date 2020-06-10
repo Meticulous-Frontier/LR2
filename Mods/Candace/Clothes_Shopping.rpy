@@ -124,7 +124,7 @@ label candace_goes_clothes_shopping_label(the_person):
     "You have now unlocked clothes shopping! Return to the clothing store anytime to invite a girl to go shopping with you."
     #TODO actually add this action
     $ candace.event_triggers_dict["clothes_shopping"] = 1
-    $ clothing_store.actions.append(invite_to_clothes_shopping)
+    $ clothing_store.add_action(invite_to_clothes_shopping)
     call advance_time from _call_advance_time_clothes_shopping_candace_1
     return
 

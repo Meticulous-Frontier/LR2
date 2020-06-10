@@ -17,7 +17,7 @@ init 3 python:
         # add gym shower to active places
         list_of_places.append(gym_shower)
         gym.link_locations_two_way(gym_shower)
-        gym.actions.append(self)
+        gym.add_action(self)
         return
 
     train_in_gym_action = ActionMod("Schedule Gym Session {image=gui/heart/Time_Advance.png}", gym_requirement, "select_person_for_gym",

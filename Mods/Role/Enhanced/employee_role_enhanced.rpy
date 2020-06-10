@@ -79,8 +79,7 @@ label employee_find_out_home_location_label(the_person):
 
 label activate_employee_role_enhancement(stack):
     python:
-        if not employee_find_out_home_location_action in employee_role.actions:
-            employee_role.actions.append(employee_find_out_home_location_action)
+        employee_role.add_action(employee_find_out_home_location_action)
 
         execute_hijack_call(stack)
     return

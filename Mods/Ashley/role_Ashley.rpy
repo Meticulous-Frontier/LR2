@@ -47,7 +47,7 @@ init 2 python:
         ashley.event_triggers_dict["threesome_unlock"] = False   #Set this to true after first threesome with ashley
 
         # add appoint
-        #office.actions.append(HR_director_appointment_action)
+        #office.add_action(HR_director_appointment_action)
 
         ashley_intro = Action("ashley_intro",ashley_intro_requirement,"ashley_intro_label") #Set the trigger day for the next monday. Monday is day%7 == 0
         mc.business.mandatory_crises_list.append(ashley_intro) #Add the event here so that it pops when the requirements are met.
@@ -175,7 +175,7 @@ label ashley_intro_label():
 label ashley_hire_later():  #This label adds an action to staphnie's role that allows you to talk to her about hiring her sister.
     $ ashley_hire_directed = Action("Reconsider hiring her sister.", ashley_hire_directed_requirement, "ashley_hire_directed_label",
     menu_tooltip = "Talk to Stephanie about hiring her sister. She might be disappointed if you decide not to again...")
-    $ head_researcher.actions.append(ashley_hire_directed)
+    $ head_researcher.add_action(ashley_hire_directed)
 
     return
 

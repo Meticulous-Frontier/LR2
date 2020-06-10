@@ -18,7 +18,7 @@
     #     gym.background_image =  room_background_image("Gym_Background.jpg") #As long a there is a mall background for the gym, replace it with our gym background
     #     # add gym shower to active places
     #     list_of_places.append(gym_shower)
-    #     gym.actions.append(self)
+    #     gym.add_action(self)
     #     return
 
     # train_in_gym_action = ActionMod("Schedule Gym Session {image=gui/heart/Time_Advance.png}", gym_requirement, "select_person_for_gym", initialization = gym_initialization,  menu_tooltip = "Bring a person to the gym to train their body.")
@@ -178,8 +178,8 @@ label activate_action_mod_core(stack):
     python:
         append_and_initialize_action_mods()
 
-        bedroom.actions.append(action_mod_options_action)
-        bedroom.actions.append(action_mod_configuration_action)
+        bedroom.add_action(action_mod_options_action)
+        bedroom.add_action(action_mod_configuration_action)
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
@@ -204,10 +204,8 @@ label update_action_mod_core(stack):
 
     python:
         append_and_initialize_action_mods()
-        if not action_mod_options_action in bedroom.actions:
-            bedroom.actions.append(action_mod_options_action)
-        if not action_mod_configuration_action in bedroom.actions:
-            bedroom.actions.append(action_mod_configuration_action)
+        bedroom.add_action(action_mod_options_action)
+        bedroom.add_action(action_mod_configuration_action)
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)

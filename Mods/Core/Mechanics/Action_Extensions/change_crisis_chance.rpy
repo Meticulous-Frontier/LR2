@@ -26,7 +26,7 @@ init 5 python:
 
 label activate_change_crisis_chance(stack):
     python:
-        bedroom.actions.append(change_crisis_chance_action)
+        bedroom.add_action(change_crisis_chance_action)
 
         crisis_base_chance = 20
         morning_crisis_base_chance = 10
@@ -38,7 +38,7 @@ label activate_change_crisis_chance(stack):
 label update_change_crisis_chance(stack):
     python:
         if not change_crisis_chance_action in bedroom.actions:
-            bedroom.actions.append(change_crisis_chance_action)
+            bedroom.add_action(change_crisis_chance_action)
             crisis_base_chance = 20
             morning_crisis_base_chance = 10
 
