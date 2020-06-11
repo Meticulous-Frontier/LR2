@@ -1,8 +1,10 @@
 
 init 2 python:
     def employee_find_out_home_location_requirement(the_person):
-        if the_person.obedience > 120 and the_person.effective_sluttiness() > 30:
-            return not the_person.home in mc.known_home_locations
+        if mc.business.is_open_for_business():
+            if mc.is_at_work():
+                if the_person.obedience > 120 and the_person.effective_sluttiness() > 30:
+                    return not the_person.home in mc.known_home_locations
         return False
 
     employee_find_out_home_location_action = Action("Have a personal chat.", employee_find_out_home_location_requirement, "employee_find_out_home_location_label",
