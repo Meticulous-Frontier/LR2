@@ -174,7 +174,7 @@ init 1 python:
 
     def prod_line_target_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions,  prohibit_tags = []):
         willingness = spanking.build_position_willingness_string(person, ignore_taboo = True)
-        foreplay_positions.append([willingness, spanking])
+        foreplay_positions.insert(0, [willingness, spanking])
         return [foreplay_positions, oral_positions, vaginal_positions, anal_positions]
 
     quest_production_line_intro = Action("Begin Production Quest", quest_production_line_intro_requirement, "quest_production_line_intro_label")
@@ -455,6 +455,7 @@ label quest_production_line_help_move_label():
             $ the_person.event_triggers_dict["unique_sex_positions"] = prod_line_target_unique_sex_positions
             $ the_person.personality = get_daddy_girl_personality(the_person)
             call fuck_person(the_person, start_position = spanking) from _spank_production_assistant_01
+            $ the_person.increase_opinion_score("being submissive")
             the_person.char "Oh god... that was wonderful [the_person.mc_title]."
             $ the_person.draw_person()
             "You stand up and get yourself together."
@@ -506,6 +507,7 @@ label quest_production_line_daddy_title_label(the_person): #This label is activa
     $ the_person.event_triggers_dict["unique_sex_positions"] = prod_line_target_unique_sex_positions
     $ the_person.personality = get_daddy_girl_personality(the_person)
     call fuck_person(the_person, start_position = spanking) from _spank_production_assistant_02
+    $ the_person.increase_opinion_score("being submissive")
     the_person.char "Oh god... that was wonderful [the_person.mc_title]."
     $ the_person.draw_person()
     return
