@@ -232,19 +232,20 @@ label quest_cuckold_employee_decision_label():
     $ mc.change_location(office)
     $ mc.location.show_background()
     "After you walk in, you close the door and lock it."
-    the_person.char "Let's do this. I'm ready "
+    the_person.char "Let's do this. I'm ready. I'm ready to get bred!"
     $ the_person.draw_person(position = "kissing")
     "You wrap your arms around [the_person.title]. She embraces you, and you start to kiss. You hands go down to her ass."
     $ the_person.change_arousal(5)
     the_person.char "Okay, so... the best way to do this that I've read anyway, is good old fashioned missionary."
-    mc.name "Get naked and lay down on my desk."
-    the_person.char "Oh my god, I can't believe I'm doing this."
+    mc.name "Get naked and lay down on my desk. I always wanted my own personal breeding stock."
+    the_person.char "Oh my god, I can't believe I'm doing this. I have a bull now, oh god!"
     $ the_person.strip_outfit()
-    the_person.char "Alright [the_person.mc_title]. This is it. Time to make a baby!"
+    the_person.char "Alright [the_person.mc_title]. This is it. Time to put a baby in me!"
     call fuck_person(the_person, starting_position = breeding_missionary, private= True, start_object = desk, position_locked = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_attempt_1
     if the_person.has_creampie_cum():
         the_person.char "Oh god, I can feel it inside me! We really did it."
         $ the_person.change_stats(happiness = 10, obedience = 10, love = 5)
+        the_person.char "There's so much, god I have such a good bull."
         mc.name "Do you think that did it?"
         the_person.char "I hope so!... but you never know."
         "She gives a deep sigh."
@@ -254,14 +255,14 @@ label quest_cuckold_employee_decision_label():
         mc.name "How often is best?"
         the_person.char "I mean, as often as possible during the window. It would give it the best possible chance of success."
         "[the_person.possessive_title] wants you balls deep and cumming inside her as much as possible over the next 5 days. You get goosebumps for a second just thinking about it."
-        mc.name "I'll do my best. Whenever I have time, I'll come find you."
-        the_person.char "Okay! I umm... I'm going to lay here for a while longer if thats okay with you."
+        mc.name "Sounds like for the next five days you are my personal cumdump."
+        the_person.char "Yum! I umm... I'm going to lay here for a while longer if thats okay with you."
         mc.name "Certainly. I'll lock the door behind me so you aren't disturbed."
         the_person.char "Thank you [the_person.mc_title]. I can't believe this is really happening!"
         mc.name "Me neither."
         "With that, you leave your office, being careful to lock the door behind you."
         "Your sperm might already be racing to her egg, ready to fertilize it. But it also might not be. To be certain, you should breed her as often as you can over the next few days."
-        quest_cuckold_employee.quest_event_dict["creampie_count"] = quest_cuckold_employee.quest_event_dict.get("creampie_count", 0) + 1
+        $ quest_cuckold_employee.quest_event_dict["creampie_count"] = quest_cuckold_employee.quest_event_dict.get("creampie_count", 0) + 1
     else:
         "[the_person.title] is completely silent."
         the_person.char "You... you didn't even finish inside of me?"
@@ -276,6 +277,63 @@ label quest_cuckold_employee_decision_label():
 
 label quest_cuckold_employee_rethink_decision_label():
     $ the_person = quest_cuckold_employee_get_target()
+    $ the_person.ideal_fertile_day = (day % 30) + 2  #Peak fertility is in 2 days.
+    "You are lost in paperwork when a figure enters your peripheral vision. You look up and see [the_person.title] standing in front of you."
+    $ the_person.draw_person()
+    mc.name "Hello [the_person.title]. Can I help you?"
+    the_person.char "I think so... can we talk in private?"
+    mc.name "Certainly, let's go to my office."
+    "[the_person.possessive_title] follows you to your office."
+    $ mc.change_location(office)
+    $ mc.location.show_background()
+    mc.name "So, what is on your mind?"
+    "She is fidgeting a bit. She is clearly nervous about what she has to say."
+    the_person.char "Well... ever since the other day, when you offered to help me with my... you know... fertility issue? I just can't seem to get the idea out of my head!"
+    the_person.char "It's been running through my head over and over. Should I? Shouldn't I? My head says its wrong, but my body says MAKE A BABY. I'm going crazy."
+    mc.name "Its okay. Do you need a few days off? Get out from the office for a while?"
+    the_person.char "No, not at all. I want to be here, every day, as much as possible, around you."
+    the_person.char "You offered... you know... to help me. Are you still willing to do that?"
+    mc.name "I'll do everything in my power to get your pregnant if that is what you want."
+    "She looks a little relieved, but also still nervous."
+    the_person.char "My hormones are going nuts. I'm going to ovulate... probably any day now!"
+    "You move a little closer to her."
+    mc.name "Do you want your bull to breed you?"
+    the_person.char "My bull? Oh god... Yes! I want to get bred like some kind of wild animal!"
+    mc.name "Get naked and lay down on my desk. I always wanted my own personal breeding stock."
+    the_person.char "Oh my god, I can't believe I'm doing this. I have a bull now, oh god!"
+    $ the_person.strip_outfit()
+    the_person.char "Alright [the_person.mc_title]. This is it. Time to put a baby in me!"
+    call fuck_person(the_person, starting_position = breeding_missionary, private= True, start_object = desk, position_locked = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_attempt_3
+    if the_person.has_creampie_cum():
+        the_person.char "Oh god, I can feel it inside me! We really did it."
+        $ the_person.change_stats(happiness = 10, obedience = 10, love = 5, slut_temp = 5)
+        the_person.char "There's so much, god I have such a good bull."
+        mc.name "Do you think that did it?"
+        the_person.char "I hope so!... but you never know."
+        "She gives a deep sigh."
+        the_person.char "My fertility window. It starts today, but realistically I'm at my most fertile over the next 5 days."
+        "She looks up at you."
+        the_person.char "If you are okay with it, we should probably try again."
+        mc.name "How often is best?"
+        the_person.char "I mean, as often as possible during the window. It would give it the best possible chance of success."
+        "[the_person.possessive_title] wants you balls deep and cumming inside her as much as possible over the next 5 days. You get goosebumps for a second just thinking about it."
+        mc.name "Sounds like for the next five days you are my personal cumdump."
+        the_person.char "Yum! I umm... I'm going to lay here for a while longer if thats okay with you."
+        mc.name "Certainly. I'll lock the door behind me so you aren't disturbed."
+        the_person.char "Thank you [the_person.mc_title]. I can't believe this is really happening!"
+        mc.name "Me neither."
+        "With that, you leave your office, being careful to lock the door behind you."
+        "Your sperm might already be racing to her egg, ready to fertilize it. But it also might not be. To be certain, you should breed her as often as you can over the next few days."
+        $ quest_cuckold_employee.quest_event_dict["creampie_count"] = quest_cuckold_employee.quest_event_dict.get("creampie_count", 0) + 1
+    else:
+        "[the_person.title] is completely silent."
+        the_person.char "You... you didn't even finish inside of me?"
+        $ the_person.change_stats(happiness = -20, obedience = -30, love = -30)
+        the_person.char "You... you just wanted to fuck me, didn't you!?!"
+        mc.name "I'm sorry, I want to help you, but it's been a long day and I'm just wore out..."
+        the_person.char "Fuck you! I see right through that charade. You just wanted to fuck a married woman!"
+        $ the_person.draw_person(position = "walking_away")
+        "[the_person.title] stands up and storms out of your office. Unfortunately, you may have damaged your relationship with her irreperably."
 
     return
 
@@ -299,10 +357,12 @@ label quest_cuckold_employee_breeding_session_label(the_person):
     $ mc.location.show_background()
     "After you walk in, you close the door and lock it."
     the_person.char "I've been looking forward to this. I know that we're doing this for practical reasons, but that doesn't mean it doesn't feel really good..."
+    mc.name "Get naked, cow. I'm just here to breed you."
+    the_person.char "Oh god, its so hot when you talk to me like that."
     "You and [the_person.title] get naked."
     $ the_person.strip_outfit()
-    mc.name "I'm gonna fuck you on my desk again."
-    the_person.char "Yes sir!"
+    mc.name "I'm gonna fuck you on my desk again. Tell your bull how much you want it."
+    the_person.char "Oh god please! I want you to fuck me over and over until my belly is popping with your seed!"
     call fuck_person(the_person, starting_position = breeding_missionary, private= True, start_object = desk, position_locked = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_attempt_2
     if the_person.has_creampie_cum():
         the_person.char "Oh god, every risky load feels even better than the last..."
@@ -310,7 +370,7 @@ label quest_cuckold_employee_breeding_session_label(the_person):
         "You gently rub her stomach."
         mc.name "Your hungry cunt feels like its sucking the cum out of me. It's amazing, honestly."
         mc.name "A little part of me is hoping it doesn't take right away and we have to keep trying for a while."
-        the_person.char "Mmm, I'd be lying if I said I didn't feel the same way."
+        the_person.char "Mmm, I'd be lying if I said I didn't feel the same way. You always cum so much, you are the perfect bull."
         if the_person.love > 60:
             the_person.char "Even if I do get pregnant... I'll already have one dirty little secret anyway. Maybe we could still fool around some..."
             "Sounds like she might be open to some kind of an affair in the future..."
@@ -323,7 +383,7 @@ label quest_cuckold_employee_breeding_session_label(the_person):
         the_person.char "Thank you [the_person.mc_title]. Let's keep our fingers crossed!"
         "With that, you leave your office, being careful to lock the door behind you."
         "Your sperm might already be racing to her egg, ready to fertilize it. But it also might not be. To be certain, you should breed her as often as you can over the next few days."
-        quest_cuckold_employee.quest_event_dict["creampie_count"] = quest_cuckold_employee.quest_event_dict.get("creampie_count", 0) + 1
+        $ quest_cuckold_employee.quest_event_dict["creampie_count"] = quest_cuckold_employee.quest_event_dict.get("creampie_count", 0) + 1
     else:
         mc.name "Sorry, I'm just too tired, I shouldn't have tried this right now..."
         the_person.char "It's okay... You've been pushing yourself pretty hard."
@@ -334,17 +394,17 @@ label quest_cuckold_employee_breeding_session_label(the_person):
 
 label quest_cuckold_employee_after_window_label():
     $ the_person = quest_cuckold_employee.quest_event_dict.get("target", None)
-    if not the_person.get_is_pregnant():
+    if not the_person.is_pregnant():
         if quest_cuckold_employee.quest_event_dict.get("creampie_count", 0) >= 5:  #You creamed her atleast 5 times via the event. #TODO we should probably track this via person.sex_record instead...
             $ become_pregnant(the_person)
 
-    if the_person.get_is_pregnant():#Success
+    if the_person.is_pregnant():#Success
         "You get a text message from [the_person.title]."
-        the_person.char "Hey... I was supposed to start my period a couple of days ago, but I haven't. Just thought you might find that interesting ;)"
+        the_person.char "Hey bull! I was supposed to start my period a couple of days ago, but I haven't. Just thought you might find that interesting ;)"
         "Oh boy, a missed period is a good sign! You wonder if your seed is growing inside of her..."
         the_person.char "I'll be able to test for sure in a couple of days! I wouldn't mind a couple more tries between now and then though... just in case my period is just late."
         "You text her back."
-        mc.name "I'll see what I can do <3"
+        mc.name "I'll make time to breed you again cow. Look forward to it."
         $ the_person.on_room_enter_event_list.remove(preg_announce_action)  #We are overriding this event and doing our own announcement. No reason to use vanilla one in this situation.
         return
 
@@ -354,7 +414,7 @@ label quest_cuckold_employee_after_window_label():
         "Damn, maybe you can try again next cycle!"
         mc.name "We can try again in a few weeks."
         the_person.char "Hmm... yeah, maybe..."
-        "Sounds like she miht be having second thoughts..."
+        "Sounds like she might be having second thoughts..."
     return
 
 label quest_cuckold_employee_knocked_up_label():
@@ -374,8 +434,117 @@ label quest_cuckold_employee_knocked_up_label():
             "[the_person.title] seems nervous, you can tell she is dealing with some guilt after cheating on her husband."
             the_person.char "I know... you're right. I know you're right! This has gone on long enough. I'll... I'll tell him later today."
             #call transform_affair(the_person) from _call_transform_affair_4  #TODO this isn't the right function, because you aren't currently having an affair? Figure this branch out.
+            the_person.char "I cant believe it, I'm really doing this. You're my one and only bull now."
 
         "You're doing the right thing.":      #Be the good guy
             mc.name "I'm really happy for you. Don't worry, your secret is safe with. For all purposes, the baby IS his."
             the_person.char "Yeah... I know... Its just hard, you know?"
             "She gets a sulty tone to her voice."
+            the_person.char "If you want to, you can still cum inside me once in a while... It was kinda hot, playing around with breeding."
+            mc.name "I'm happy to be your bull whenever you need it."
+    the_person.char "Do you think, I could just start calling you that? My bull?"
+    mc.name "As long as you are my happy cow."
+    $ the_person.set_mc_title("Bull")
+    $ the_person.set_title("Cow")
+    $ the_person.set_possessive_title("Your Personal Breeding Stock")
+    "She puts her hand on your chest. She traces a few circles around it, then slower lowers her hand to your crotch. She starts to stroke the shaft."
+    the_person.char "Mmm, it just feel so... virile..."
+    the_person.char "Do you need a little release? I know I'm alrady pregnant but..."
+    "You growl at her."
+    mc.name "Bend over, [the_person.title]. I need a hole for my seed."
+    $ the_person.change_arousal(20)
+    the_person.char "Yes my [the_person.mc_title]!"
+    $ the_person.draw_person(position = "doggy")
+    "Her ass in position, you quickly get her ready."
+    $ the_person.strip_outfit( exclude_upper = True)
+    call fuck_person(the_person, starting_position = doggy, private = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_victory_lap_01
+    if the_person.has_creampie_cum():
+        the_person.char "Sweet jesus, no wonder you knocked me up. I'm so full of your cum, its amazing..."
+    "After you both recover, you carefully leave your office. Sounds like you have your very own breeding stock available from now on!"
+    "It's going to be amazing to watch her belly swell with your seed."
+    $ the_person.change_stats(obedience = 20, slut_temp = 20, slut_core = 20)  #She is now your slutty breeding stock.
+    $ the_person.personality = get_breeding_stock_personality(the_person)
+    return
+
+init 1301 python:
+    def breeding_stock_titles(the_person):
+        return "Cow"
+    def breeding_stock_possessive_titles(the_person):
+        return "Your Breeding Stock"
+    def breeding_stock_player_titles(the_person):
+        return "Bull"
+    def get_breeding_stock_personality(the_person): #Use a function to get this so we can keep the girls prefix so her personality doesn't change TOO much
+        breeding_stock = Personality("breeding_stock", default_prefix = the_person.personality.personality_type_prefix,
+        common_likes = [],
+        common_sexy_likes = [],
+        common_dislikes = [],
+        common_sexy_dislikes = [],
+        titles_function = breeding_stock_titles, possessive_titles_function = breeding_stock_possessive_titles, player_titles_function = breeding_stock_player_titles)
+        return breeding_stock
+
+label breeding_stock_greetings(the_person):
+    $ update_ass_condition(the_person)
+    if the_person.has_creampie_cum():
+
+        the_person.char "Hi [the_person.mc_title]!"
+        "She lowers her voice to a whisper."
+        the_person.char "I can still feel your seed deep inside me, but if you want to go again, I'll happily take another load..."
+        if the_person.knows_pregnant():
+            "She rubs her belly, absent mindedly."
+
+    else:
+        he_person.char "Hi [the_person.mc_title]!"
+        "She lowers her voice to a whisper."
+        the_person.char "Its been a bit since you filled me up. Want to?"
+        if the_person.knows_pregnant():
+            "She rubs her belly, absent mindedly."
+    return
+
+label breeding_stock_anal_sex_taboo_break(the_person):
+    the_person.char "I can't believe we're doing this... Do you think when you get ready to cum you could... you know, slip it in my pussy?"
+    mc.name "Maybe, it depends on how good your ass is."
+    if not the_person.knows_pregnant():
+        the_person.char "Sure but like... how are you gonna get me pregnant if you don't put it in the right hole?"
+    else:
+        the_person.char "I know I'm already pregnant but, I just love it when you cum in my other hole, okay?"
+    mc.name "I'll do my best, but no promises."
+    return
+
+label breeding_stock_sex_responses_vaginal(the_person):
+    if mc.condom:
+        the_person.char "Mmm, your cock feel good inside me, but you know what would be better? If we took off that awful latex condom."
+        if the_person.knows_pregnant():
+            the_person.char "I mean, I'm already pregnant! What's the harm in going bare?"
+        else:
+            the_person.char "I want to feel everything, and the warmth that goes deep when you cum inside me..."
+        menu:
+            "Take the condom off":
+                mc.name "You're right, what was I thinking?"
+                "You pull out for a second, then pull the condom off and resume fucking her."
+                $ mc.condom = False
+                "She gets goosebumps when you bottom out inside of her, completely bareback."
+                $ the_person.change_arousal(20)
+                the_person.char "Oh fuck! That's it!"
+            "Leave it on":
+                mc.name "Sorry, I think this should stay on for now."
+                "She gives you a pouting face."
+                the_person.char "You know I'm just going to keep asking right?"
+
+    else:
+        the_person.char "Keep fucking me [the_person.mc_title], it feels fantastic!"
+
+    return
+
+label breeding_stock_cum_vagina(the_person):
+    if mc.condom:
+        the_person.char "Mmm, your cum feels so warm, but why did you waste it in that condom?"
+
+    else:
+        if the_person.on_birth_control:
+            the_person.char "Oh fuck, it's so warm. I can feel it inside me..."
+            "She sighs happily as you cum inside her."
+        elif the_person.is_pregnant():
+            the_person.char "Mmm, it's so warm... its feels so good, just like the load that knocked me up!"
+        else:
+            the_person.char "Oh my good its sooo good. Come on little swimmers, knock me up!"
+    return
