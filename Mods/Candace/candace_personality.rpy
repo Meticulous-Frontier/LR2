@@ -748,6 +748,14 @@ label candace_sex_end_early(the_person):
                 the_person.char "That's it? Well, I guess that was a fun time well it lasted."
     return
 
+label candace_sex_take_control(the_person):
+    if the_person.arousal > 60:
+        the_person.char "You're funny! I haven't even cum yet! There's not way I'm letting you leave yet!"
+    else:
+        the_person.char "Oh honey, we're just getting started! You just relax and leave this to me."
+    return
+
+
 ## Role Specific Section ##
 label candace_improved_serum_unlock(the_person):
     mc.name "[the_person.title], now that you've had some time in the lab there's something I wanted to talk to you about."
