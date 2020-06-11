@@ -48,20 +48,32 @@ init 2: # Need to allow for None name roles in this screen as well.
                     ysize 260
                     vbox:
                         text "Status and Info" style "menu_text_style" size 22
-                        text "Happiness: [the_person.happiness]" style "menu_text_style"
-                        text "Sluttiness: [the_person.sluttiness] (Core: [the_person.core_sluttiness])" style "menu_text_style"
-                        text "Obedience: [the_person.obedience] - " + get_obedience_plaintext(the_person.obedience) style "menu_text_style"
-                        text "Age: [the_person.age]" style "menu_text_style"
-                        if girlfriend_role in the_person.special_role:
-                            text "Relationship: Girlfriend" style "menu_text_style"
-                        else:
-                            text "Relationship: [the_person.relationship]" style "menu_text_style"
-                        if the_person.relationship != "Single":
-                            text "Significant Other: [the_person.SO_name]" style "menu_text_style"
-                        elif girlfriend_role in the_person.special_role:
-                            text "Significant Other: [mc.name]" style "menu_text_style"
-                        if the_person.kids > 0:
-                            text "Kids: [the_person.kids]" style "menu_text_style"
+                        viewport:
+                            scrollbars "vertical"
+                            mousewheel True
+                            frame:
+                                xsize 300
+                                background None
+                                vbox:
+                                    text "Happiness: [the_person.happiness]" style "menu_text_style"
+                                    text "Sluttiness: [the_person.sluttiness] (Core: [the_person.core_sluttiness])" style "menu_text_style"
+                                    text "Obedience: [the_person.obedience] - " + get_obedience_plaintext(the_person.obedience) style "menu_text_style"
+                                    text "Age: [the_person.age]" style "menu_text_style"
+                                    if girlfriend_role in the_person.special_role:
+                                        text "Relationship: Girlfriend" style "menu_text_style"
+                                    else:
+                                        text "Relationship: [the_person.relationship]" style "menu_text_style"
+                                    if the_person.relationship != "Single":
+                                        text "Significant Other: [the_person.SO_name]" style "menu_text_style"
+                                    elif girlfriend_role in the_person.special_role:
+                                        text "Significant Other: [mc.name]" style "menu_text_style"
+                                    if the_person.kids > 0:
+                                        text "Kids: [the_person.kids]" style "menu_text_style"
+                                    if persistent.pregnancy_pref > 0:
+                                        text "Fertility: " + str(round(the_person.fertility_percent, 1)) + "%" style "menu_text_style"
+                                        if persistent.pregnancy_pref == 2:
+                                            text "Monthly Peak Day: " + str(the_person.ideal_fertile_day) style "menu_text_style"
+                                        text "Birth Control: " + ("Yes" if the_person.on_birth_control else "No") style "menu_text_style"                            
 
                 frame:
                     background "#1a45a1aa"
