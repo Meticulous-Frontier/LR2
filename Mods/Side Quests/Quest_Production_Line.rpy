@@ -174,7 +174,7 @@ init 1 python:
 
     def prod_line_target_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions,  prohibit_tags = []):
         willingness = spanking.build_position_willingness_string(person, ignore_taboo = True)
-        foreplay_positions.insert(0, [willingness, spanking])
+        foreplay_positions.insert(1, [willingness, spanking])
         return [foreplay_positions, oral_positions, vaginal_positions, anal_positions]
 
     quest_production_line_intro = Action("Begin Production Quest", quest_production_line_intro_requirement, "quest_production_line_intro_label")
