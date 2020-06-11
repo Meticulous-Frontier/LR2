@@ -29,7 +29,7 @@ init 2 python:
         #TODO make most variables identical to Stephanie
         global ashley
         ashley = create_random_person(name = "Ashley", last_name =stephanie.last_name, age = 22, body_type = "standard_body", face_style = "Face_3",  tits="B", height = 0.92, hair_colour="brown", hair_style = ponytail, skin="white" , \
-            eyes = "brown", personality = Sarah_personality, name_color = "#228b22", dial_color = "228b22" , starting_wardrobe = ashley_wardrobe, \
+            eyes = "brown", personality = relaxed_personality, name_color = "#228b22", dial_color = "228b22" , starting_wardrobe = ashley_wardrobe, \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = -18, start_happiness = 119, start_love = 0, \
             title = "Ashley", possessive_title = "Your intern", mc_title = mc.name, relationship = "Single", kids = 0)
 

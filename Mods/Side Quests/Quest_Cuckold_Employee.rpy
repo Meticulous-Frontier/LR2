@@ -160,6 +160,7 @@ label quest_cuckold_employee_decision_label():
                 mc.name "The urges your body are giving you are completely natural. They are only going to get stronger over time, until they drive a wedge between you and your husband."
                 the_person.char "Oh god... you're right. I know you are. I don't want to admit it, but deep down inside, I know you are right."
                 "She bites her lip for a moment and looks down at the floor."
+                $ the_person.ideal_fertile_day = (day % 30) + 2  #Peak fertility is in 2 days.
                 the_person.char "I know this is kind of a crazy coincidence... but... I'm actually really fertile. Like right now."
                 mc.name "Oh?"
                 the_person.char "I've been tracking my cycles... I'm going to ovulate in the next few days almost for certain."
@@ -206,6 +207,7 @@ label quest_cuckold_employee_decision_label():
                     $ the_person.change_happiness(15)
                     the_person.char "That's amazing! I can't believe it."
                     "She bites her lip for a moment and looks down at the floor."
+                    $ the_person.ideal_fertile_day = (day % 30) + 2  #Peak fertility is in 2 days.
                     the_person.char "I know this is kind of a crazy coincidence... but... I'm actually really fertile. Like right now."
                     mc.name "Oh?"
                     the_person.char "I've been tracking my cycles... I'm going to ovulate in the next few days almost for certain."
@@ -259,6 +261,7 @@ label quest_cuckold_employee_decision_label():
         mc.name "Me neither."
         "With that, you leave your office, being careful to lock the door behind you."
         "Your sperm might already be racing to her egg, ready to fertilize it. But it also might not be. To be certain, you should breed her as often as you can over the next few days."
+        quest_cuckold_employee.quest_event_dict["creampie_count"] = quest_cuckold_employee.quest_event_dict.get("creampie_count", 0) + 1
     else:
         "[the_person.title] is completely silent."
         the_person.char "You... you didn't even finish inside of me?"
@@ -275,6 +278,7 @@ label quest_cuckold_employee_rethink_decision_label():
     $ the_person = quest_cuckold_employee_get_target()
 
     return
+
 
 label quest_cuckold_employee_breeding_session_label(the_person):
     "You walk up to [the_person.title]. When she sees you she smiles."
@@ -319,6 +323,7 @@ label quest_cuckold_employee_breeding_session_label(the_person):
         the_person.char "Thank you [the_person.mc_title]. Let's keep our fingers crossed!"
         "With that, you leave your office, being careful to lock the door behind you."
         "Your sperm might already be racing to her egg, ready to fertilize it. But it also might not be. To be certain, you should breed her as often as you can over the next few days."
+        quest_cuckold_employee.quest_event_dict["creampie_count"] = quest_cuckold_employee.quest_event_dict.get("creampie_count", 0) + 1
     else:
         mc.name "Sorry, I'm just too tired, I shouldn't have tried this right now..."
         the_person.char "It's okay... You've been pushing yourself pretty hard."
@@ -326,3 +331,51 @@ label quest_cuckold_employee_breeding_session_label(the_person):
         "You both get up and leave your office, resuming your day."
     call advance_time from cuckold_advance_time
     return
+
+label quest_cuckold_employee_after_window_label():
+    $ the_person = quest_cuckold_employee.quest_event_dict.get("target", None)
+    if not the_person.get_is_pregnant():
+        if quest_cuckold_employee.quest_event_dict.get("creampie_count", 0) >= 5:  #You creamed her atleast 5 times via the event. #TODO we should probably track this via person.sex_record instead...
+            $ become_pregnant(the_person)
+
+    if the_person.get_is_pregnant():#Success
+        "You get a text message from [the_person.title]."
+        the_person.char "Hey... I was supposed to start my period a couple of days ago, but I haven't. Just thought you might find that interesting ;)"
+        "Oh boy, a missed period is a good sign! You wonder if your seed is growing inside of her..."
+        the_person.char "I'll be able to test for sure in a couple of days! I wouldn't mind a couple more tries between now and then though... just in case my period is just late."
+        "You text her back."
+        mc.name "I'll see what I can do <3"
+        $ the_person.on_room_enter_event_list.remove(preg_announce_action)  #We are overriding this event and doing our own announcement. No reason to use vanilla one in this situation.
+        return
+
+    else:
+        "You get a text message from [the_person.title]."
+        the_person.char "Hey... just wanted to let you know I just started my period. I guess it didn't take."
+        "Damn, maybe you can try again next cycle!"
+        mc.name "We can try again in a few weeks."
+        the_person.char "Hmm... yeah, maybe..."
+        "Sounds like she miht be having second thoughts..."
+    return
+
+label quest_cuckold_employee_knocked_up_label():
+    $ the_person = quest_cuckold_employee.quest_event_dict.get("target", None)
+    "You get a text message from [the_person.title]."
+    the_person.char "Hey! I need to see you in your office, ASAP!"
+    $ mc.change_location(office)
+    $ mc.location.show_background()
+    $ the_person.draw_person(position = "stand4")
+    "As you step into your office, you see [the_person.possessive_title]."
+    the_person.char "Well [the_person.mc_title], you did it! Positive pregnancy test!"
+    mc.name "Oh my god, that's amazing! Congratulations!"
+    the_person.char "I know! I can't wait to tell my husband... Its so weird though, knowing in my head that it isn't even his?"
+    menu:
+        "Leave your [so_title] for me." if the_person.love + 10 > leave_SO_love_calculation(the_person):   #Hide yo wife
+            mc.name "[the_person.title], think it's time you left him so we can be together. It isn't right hiding this from him.."
+            "[the_person.title] seems nervous, you can tell she is dealing with some guilt after cheating on her husband."
+            the_person.char "I know... you're right. I know you're right! This has gone on long enough. I'll... I'll tell him later today."
+            #call transform_affair(the_person) from _call_transform_affair_4  #TODO this isn't the right function, because you aren't currently having an affair? Figure this branch out.
+
+        "You're doing the right thing.":      #Be the good guy
+            mc.name "I'm really happy for you. Don't worry, your secret is safe with. For all purposes, the baby IS his."
+            the_person.char "Yeah... I know... Its just hard, you know?"
+            "She gets a sulty tone to her voice."
