@@ -1158,6 +1158,7 @@ init -1 python:
         if self.is_pregnant():
             return self.event_triggers_dict.get("preg_transform_day", 0)
         return -1
+    Person.pregnancy_show_day = pregnancy_show_day
 
     def remove_on_talk_event(self, the_crisis):
         if the_crisis in self.on_talk_event_list:
