@@ -88,6 +88,11 @@ init python: #For now default init. May change later if we know better.
                     return False
             self.quest_list.append(new_quest)
 
+        def active_quest_name(self):
+            if self.active_quest:
+                return self.active_quest.quest_name
+            return ""
+
         #DEBUG functions
 
         def debug_text_dump(self):  #Use this command in the console to get a dump of quest tracker status.
@@ -122,7 +127,7 @@ init python: #For now default init. May change later if we know better.
         quest_director = Quest_Tracker()
 
         global quest_production_line
-        quest_production_line = Side_Quest(quest_name = "Chemists's Baby Girl",
+        quest_production_line = Side_Quest(quest_name = "Chemist's Baby Girl",
             quest_init_label = "quest_production_line_init_label",
             quest_tracker = quest_production_line_tracker,
             start_requirement = quest_production_line_start_requirement,
