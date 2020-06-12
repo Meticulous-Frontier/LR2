@@ -46,7 +46,7 @@ init -1 python:
     # Hint for Dungeon
     game_hints.append(Hint("Build Dungeon", "When you work in you company during the weekend, you might have a good idea.", "not dungeon.visible and day > 24 and mc.business.funds > 20000", "not bool(exists_in_mandatory_crisis_list('dungeon_intro_label'))"))
 
-    # Hint for Active Quest (description is retrieved by function)
+    # Hint for Active Quest (description is retrieved by object function)
     game_hints.append(Hint("Active Quest", None, "not quest_director.active_quest is None", "quest_director.active_quest is None", description_func_string = "quest_director.active_quest_name"))
 
     # DEBUG HINTS (for fitting an positioning)
