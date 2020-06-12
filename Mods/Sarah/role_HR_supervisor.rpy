@@ -1481,7 +1481,7 @@ init 1200 python:
         min_slut = (get_HR_director_tag("recruit_slut", 0) or 0) // 10
         sex_array = [renpy.random.randint(min_slut,5), renpy.random.randint(min_slut,5), renpy.random.randint(min_slut,5), renpy.random.randint(min_slut,5)]
 
-        # extra boost for focused recruit
+        # extra boost / penalty for focused recruit
         if get_HR_director_tag("recruit_focused", False) == True:
             main_stat += 2
             main_skill += 2
@@ -1501,16 +1501,16 @@ init 1200 python:
         recruit.int = renpy.random.randint(3,6)
         recruit.focus = renpy.random.randint(3,6)
         recruit.charisma = renpy.random.randint(3,6)
-        recruit.production_skill = renpy.random.randint(3,6)
-        recruit.hr_skill = renpy.random.randint(3,6)
-        recruit.supply_skill = renpy.random.randint(3,6)
-        recruit.market_skill = renpy.random.randint(3,6)
-        recruit.research_skill = renpy.random.randint(3,6)
+        recruit.production_skill = renpy.random.randint(3,6) - other_stat
+        recruit.hr_skill = renpy.random.randint(3,6) - other_stat
+        recruit.supply_skill = renpy.random.randint(3,6) - other_stat
+        recruit.market_skill = renpy.random.randint(3,6) - other_stat
+        recruit.research_skill = renpy.random.randint(3,6) - other_stat
 
         if get_HR_director_tag("recruit_dept") == "HR":
             recruit.charisma = main_stat
             recruit.hr_skill = main_skill
-            recruit.focus -= other_stat
+            recruit.focus -= other_stat           
             recruit.opinions["HR work"] = [2, True]
         elif get_HR_director_tag("recruit_dept") == "supply":
             recruit.focus = main_stat
