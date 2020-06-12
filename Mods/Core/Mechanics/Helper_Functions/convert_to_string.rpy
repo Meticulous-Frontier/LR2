@@ -18,21 +18,21 @@ init -1 python:
         check_person_weight_attribute(person)
 
         if use_imperial_system:
-            weight = person.weight * 2.205
+            lbs = person.weight * 2.205
     
             # add some weight based on number of days pregnant
             if person.pregnancy_is_visible():
                 # calculates a factor for the current day in relation to show day and due day, multiplied by average pregnancy weight of 25 pounds
-                weight += (1 - ((person.get_due_day() - day) / float(person.get_due_day() - person.pregnancy_show_day()))) * 25
+                lbs += (1 - ((person.get_due_day() - day) / float(person.get_due_day() - person.pregnancy_show_day()))) * 25
 
-            return str(round(weight, 1)) + " lbs"
+            return str(round(lbs, 1)) + " lbs"
         else:
             kg = person.weight
 
             # add some weight based on number of days pregnant
             if person.pregnancy_is_visible():
                 # calculates a factor for the current day in relation to show day and due day, multiplied by average pregnancy weight of 11.4 kg
-                weight += (1 - ((person.get_due_day() - day) / float(person.get_due_day() - person.pregnancy_show_day()))) * 11.4
+                kg += (1 - ((person.get_due_day() - day) / float(person.get_due_day() - person.pregnancy_show_day()))) * 11.4
 
             return str(round(kg, 1)) + " kg"
 
