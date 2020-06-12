@@ -70,7 +70,7 @@ init 2 python:
                 mi.display_key = item.name + item.last_name
                 mi.display_scale = scale_person(item.height)
                 mi.display_func = item.build_person_displayable
-                mi.load()
+                renpy.invoke_in_thread(mi.load)
 
             if isinstance(item, Action):
                 mi.title = ""
@@ -110,7 +110,8 @@ init 2 python:
         return result
 
     def show_menu_person(item):
-        renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="Active", what= item.display_image, tag=item.display_key)
+        if item.display_image:
+            renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="Active", what= item.display_image, tag=item.display_key)
         return
 
 init 2:
@@ -161,7 +162,7 @@ init 2:
                                                 hovered [Function(show_menu_person, item)]
                                                 unhovered [Function(renpy.scene, "Active")]
                                             action [
-                                                Function(clear_menu_items_list, menu_items),
+                                                Function(renpy.invoke_in_thread, clear_menu_items_list, menu_items),
                                                 Return(item.return_value)
                                             ]
                                             tooltip item.the_tooltip
