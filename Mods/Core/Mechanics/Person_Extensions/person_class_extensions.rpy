@@ -997,7 +997,7 @@ init -1 python:
 
     # Check if weight property exists on person, if not, add based on body type
     def check_person_weight_attribute(person):
-        if not hasattr(person, "weight"):
+        if not hasattr(person, "weight") or not isinstance(person.weight, float):
             if (person.body_type == "thin_body"):
                 setattr(person, "weight", 60 * person.height)   # default weight thin body
             elif (person.body_type == "standard_body"):
