@@ -15,8 +15,6 @@ init -1 python:
 
 
     def get_person_weight_string(person):
-        check_person_weight_attribute(person)
-
         if use_imperial_system:
             lbs = person.weight * 2.205
     

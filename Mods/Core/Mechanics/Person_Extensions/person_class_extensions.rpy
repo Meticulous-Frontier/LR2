@@ -109,6 +109,24 @@ init -1 python:
     # add follow_mc attribute to person class (without sub-classing)
     Person.next_day_outfit = property(get_person_next_day_outfit, set_person_next_day_outfit, del_person_next_day_outfit, "Allow for forcing the next day outfit a girl will wear (set planned outfit).")
 
+    def get_person_weight(self):
+        if not hasattr(self, "_weight"):
+            if self.body_type == "thin_body":
+                self._weight = 60 * self.height
+            elif self.body_type == "standard_body":
+                self._weight = 75 * self.height
+            else:
+                self._weight = 90 * self.height
+        return self._weight
+
+    def set_person_weight(self, value):
+        self._weight = value
+
+    def del_person_weight(self):
+        del self.weight
+
+    Person.weight = property(get_person_weight, set_person_weight, del_person_weight, "The weight of the person in KG.")
+
     ## MATCH SKIN COLOR
     # Matches skin, body, face and expression images based on input of skin color
     def match_skin(self, color):
@@ -179,7 +197,6 @@ init -1 python:
     # Returns True when the persons body type has changed; otherwise False
     # chance is probability percentage that weight change for amount will occur (used by serums)
     def change_weight(self, amount, chance):
-        check_person_weight_attribute(self)
         if (amount == 0):
             return False
 
@@ -845,11 +862,10 @@ init -1 python:
         if emotion is None:
             emotion = self.get_emotion()
 
-        if the_animation is None:
-            the_animation = self.idle_animation
-
         if not can_use_animation():
             the_animation = None
+        elif the_animation is None:
+            the_animation = self.idle_animation
 
         if character_placement is None: # make sure we don't need to pass the position with each draw
             character_placement = character_right
@@ -857,23 +873,16 @@ init -1 python:
         if lighting is None:
             lighting = mc.location.get_lighting_conditions()
 
-        # sometimes there is no outfit set, causing the generate drawlist to fail, not sure why, but try to fix it here.
-        if self.outfit is None:
-            if self.planned_outfit is None:
-                self.planned_outfit = self.wardrobe.decide_on_outfit2(self) # Use enhanced outfit function
-            self.apply_outfit(self.planned_outfit)
-            self.review_outfit(dialogue = False)
+        if the_animation:
+            final_image = self.build_person_animation(the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength)
+        else:
+            final_image = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
 
         # if normal draw person call, clear scene
         if not from_scene:
             renpy.scene("Active")
             if show_person_info:
                 renpy.show_screen("person_info_ui",self)
-
-        if the_animation:
-            final_image = self.build_person_animation(the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength)
-        else:
-            final_image = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
 
         renpy.show(self.name + self.last_name,at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=self.name + self.last_name)
 
@@ -898,12 +907,8 @@ init -1 python:
 
         if not can_use_animation():
             the_animation = None
-
-        renpy.scene("Active") # clear layer for new draw action
-        if scene_manager is None:
-            renpy.show_screen("person_info_ui",self)
-        else:   # when we are called from the scene manager we have to draw the other characters
-            scene_manager.draw_scene_without(self)
+        elif the_animation is None:
+            the_animation = self.idle_animation
 
         if the_animation:
             bottom_displayable = self.build_person_animation(the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength = 1.0)
@@ -916,6 +921,12 @@ init -1 python:
             top_displayable = self.build_person_animation(the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength)
         else:
             top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
+
+        renpy.scene("Active") # clear layer for new draw action
+        if scene_manager is None:
+            renpy.show_screen("person_info_ui",self)
+        else:   # when we are called from the scene manager we have to draw the other characters
+            scene_manager.draw_scene_without(self)
 
         renpy.show(self.name+self.last_name+"_new", at_list=[character_placement, scale_person(self.height)], layer = "Active", what = top_displayable, tag = self.name + self.last_name +"_new")
         renpy.show(self.name+self.last_name+"_old", at_list=[character_placement, scale_person(self.height), clothing_fade], layer = "Active", what = bottom_displayable, tag = self.name + self.last_name +"_old")
@@ -994,17 +1005,6 @@ init -1 python:
 #######################################
 # HELPER METHODS FOR CLASS EXTENSIONS #
 #######################################
-
-    # Check if weight property exists on person, if not, add based on body type
-    def check_person_weight_attribute(person):
-        if not hasattr(person, "weight") or not isinstance(person.weight, float):
-            if (person.body_type == "thin_body"):
-                setattr(person, "weight", 60 * person.height)   # default weight thin body
-            elif (person.body_type == "standard_body"):
-                setattr(person, "weight", 75 * person.height)   # default weight standard body
-            else:
-                setattr(person, "weight", 90 * person.height)   # default weight curvy body
-        return
 
     # calculates current player mental powers
     def player_willpower():
