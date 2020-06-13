@@ -39,8 +39,9 @@ init 1 python:
         quest_cuckold_employee.quest_event_dict["fertility_day"] = 9999
         quest_cuckold_employee.quest_event_dict["creampie_count"] = 0
         quest_cuckold_employee.set_quest_flag(1)
-        quest_cuckold_employee_get_target().add_opinion("creampies", 2, discovered = False)
-        quest_cuckold_employee_get_target().add_opinion("bareback sex", 2, discovered = False)
+        quest_cuckold_employee_get_target().add_opinion("creampies", 2, discovered = False, add_to_log = False)
+        quest_cuckold_employee_get_target().add_opinion("bareback sex", 2, discovered = False, add_to_log = False)
+        quest_cuckold_employee_get_target().on_birth_control = False
         return
 
     def quest_cuckold_employee_get_target():
@@ -80,8 +81,9 @@ init 1 python:
         return
 
     def quest_cuckold_employee_start_requirement():
-        if quest_cuckold_employee_person_find_employee():
-            return True
+        if persistent.pregnancy_pref > 0:
+            if quest_cuckold_employee_person_find_employee():
+                return True
         return False
 
     def quest_cuckold_employee_cleanup():
