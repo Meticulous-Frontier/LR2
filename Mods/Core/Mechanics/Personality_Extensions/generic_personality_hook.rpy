@@ -68,6 +68,23 @@ init -1 python:
         ensure_opinion_on_sexual_preference(person, "Vaginal", ["missionary style sex", "vaginal sex", "creampies"])
         ensure_opinion_on_sexual_preference(person, "Anal", ["anal sex", "anal creampies", "doggy style sex"])
 
+        # fix opinion contradictions
+        fix_opinion_contradiction(person, "drinking cum", "giving blowjobs")
+        fix_opinion_contradiction(person, "creampies", "bareback sex")
+        fix_opinion_contradiction(person, "anal creampies", "bareback sex")
+        fix_opinion_contradiction(person, "skimpy outfits", "showing her tits")
+        fix_opinion_contradiction(person, "skimpy outfits", "showing her ass")
+        fix_opinion_contradiction(person, "skimpy outfits", "high heels")
+        fix_opinion_contradiction(person, "masturbating", "being fingered")
+        return
+
+    # when she doesn't like base_topic, she should not like / love related topic (invert likeness of related topic)
+    def fix_opinion_contradiction(person, base_topic, related_topic):
+        # first skew related to positive base
+        if person.get_opinion_score(base_topic) > 0 and person.get_opinion_score(related_topic) < 0:
+            person.update_opinion_with_score(related_topic, -person.get_opinion_score(related_topic))
+        if person.get_opinion_score(base_topic) < 0 and person.get_opinion_score(related_topic) > 0:
+            person.update_opinion_with_score(related_topic, -person.get_opinion_score(related_topic))
         return
 
     def ensure_opinion_on_subject(person, opinions):
@@ -75,12 +92,14 @@ init -1 python:
             the_opinion_key = get_random_from_list(opinions)
             degree = get_random_from_list([-2,-1,1,2])
             person.opinions[the_opinion_key] = [degree, False]
+        return
 
     def ensure_sexy_opinion_on_subject(person, opinions):
         if not any(x[0] in person.opinions for x in opinions):
             the_opinion_key = get_random_from_list(opinions)
             degree = get_random_from_list([-2,-1,1,2])
             person.sexy_opinions[the_opinion_key] = [degree, False]
+        return
 
     def ensure_opinion_on_sexual_preference(person, sex_skill, opinions):
         if not any(x[0] in person.sexy_opinions for x in opinions):
@@ -92,6 +111,7 @@ init -1 python:
             else: # random
                 degree = get_random_from_list([-2,-1,1,2])
             person.sexy_opinions[the_opinion_key] = [degree, False]
+        return
 
     # make sure new character has a more appropriate outfit to wear
     def update_person_outfit(person, sluttiness_modifier = 0.0):
