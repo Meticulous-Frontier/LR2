@@ -22,7 +22,7 @@ init:
 label intro_breeding_missionary(the_girl, the_location, the_object):
     "You run your hands along [the_girl.title]'s hips, feeling the shape of her body."
     #TODO next line only if the girl is already pregnant. change this statement after 29.1 to match the pregnancy condition
-    if False:
+    if the_girl.knows_pregnant():
         mc.name "I want to practice putting another baby inside you. Let's pretend like we are trying to make another one."
         the_person.char "Mmm, sounds nice. Okay I'm up for a little roleplaying."
     else:
