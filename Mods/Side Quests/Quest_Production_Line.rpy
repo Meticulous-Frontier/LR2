@@ -43,11 +43,13 @@ init 1 python:
 
         # make sure 'selected person' is single and has no kids
         # although the player might have seen other information
-        # it is more disturbing when this information does not 
+        # it is more disturbing when this information does not
         # match the story line
         person.kids = 0
         person.relationship = "Single"
         person.SO_name = None
+        person.add_opinion("incest", 2, discovered = False, add_to_log = False)
+        person.add_opinion("being submissive", 2, discovered = False, add_to_log = False)
 
         quest_production_line.quest_event_dict["target"] = person
         quest_production_line.quest_event_dict["father_name"] = get_random_male_name()
