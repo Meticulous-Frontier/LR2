@@ -109,7 +109,7 @@ init 1 python:
         return
 
     def quest_production_line_start_requirement():
-        return not get_quest_production_line_person() is None
+        return day > 40 and not get_quest_production_line_person() is None
 
     def quest_production_line_cleanup():
         mall.remove_action(quest_production_line_coffee)
