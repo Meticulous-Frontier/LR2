@@ -60,8 +60,8 @@ init 5 python:
 
         picked_object = get_random_from_list(possible_object_list)
 
-        person.add_situational_slut("sex_object", picked_object.sluttiness_modifier, position.verbing + " on a " + picked_object.name)
-        person.add_situational_obedience("sex_object",picked_object.obedience_modifier, position.verbing + " on a " + picked_object.name)
+        person.add_situational_slut("sex_object", picked_object.sluttiness_modifier, picked_object.name + " " + position.verbing)
+        person.add_situational_obedience("sex_object",picked_object.obedience_modifier, picked_object.name + " " + position.verbing)
         return picked_object
 
     def cheating_check_get_watcher(person):
@@ -208,8 +208,8 @@ init 5 python:
             else:
                 picked_object = renpy.display_menu(object_option_list,True,"Choice")
 
-        person.add_situational_slut("sex_object", picked_object.sluttiness_modifier, position.verbing + " on a " + picked_object.name)
-        person.add_situational_obedience("sex_object",picked_object.obedience_modifier, position.verbing + " on a " + picked_object.name)
+        person.add_situational_slut("sex_object", picked_object.sluttiness_modifier, picked_object.name + " " + position.verbing)
+        person.add_situational_obedience("sex_object",picked_object.obedience_modifier, picked_object.name + " " + position.verbing)
         return picked_object
 
     def build_round_choice_menu(person, position_choice, position_locked, object_choice, ignore_taboo = False):
