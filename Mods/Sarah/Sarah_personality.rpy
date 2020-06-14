@@ -27,7 +27,6 @@ init 1301 python:
 ############################
 ##### Sarah Personality#####
 ############################
-# <editor-fold
 label Sarah_introduction(the_person):  #This shouldn't proc... ever?
     mc.name "Excuse me, could I bother you for a moment?"
     "She turns around and looks you up and down."
@@ -105,7 +104,15 @@ label Sarah_sex_responses(the_person):
             the_person.char "Don't stop! You're going to make me cum, don't you dare stop!"
 
     return
-
+label Sarah_sex_responses_oral(the_person):
+    call relaxed_sex_responses_oral(the_person) from _call_Sarah_sex_responses_oral
+    return
+label Sarah_sex_responses_vaginal(the_person):
+    call relaxed_sex_responses_vaginal(the_person) from _call_Sarah_sex_responses_vaginal
+    return
+label Sarah_sex_responses_anal(the_person):
+    call relaxed_sex_responses_anal(the_person) from _call_Sarah_sex_responses_anal
+    return    
 label Sarah_climax_responses_foreplay(the_person):
     if the_person.sluttiness > 50:
         if the_person.event_triggers_dict.get("dating_path", False) == True:
@@ -455,7 +462,12 @@ label Sarah_flirt_response_high(the_person):
             the_person.char "I guess, I just wish you would be a little more discrete."
             "She places a gentle hand on your shoulder and kisses you on the cheek."
     return
-
+label Sarah_flirt_response_girlfriend(the_person):
+    call relaxed_flirt_response_girlfriend(the_person) from _call_Sarah_flirt_response_girlfriend
+    return
+label Sarah_flirt_response_affair(the_person):
+    call relaxed_flirt_response_affair(the_person) from _call_Sarah_flirt_response_affair
+    return
 label Sarah_cum_face(the_person):
     if the_person.obedience > 130:
         if the_person.sluttiness > 60:
@@ -487,11 +499,11 @@ label Sarah_cum_mouth(the_person):
     return
 
 label Sarah_cum_vagina(the_person):
-    #TODO
+    call relaxed_cum_vagina(the_person) from _call_Sarah_cum_vagina
     return
 
 label Sarah_cum_anal(the_person):
-    #TODO
+    call relaxed_cum_anal(the_person) from _call_Sarah_cum_anal
     return
 
 label Sarah_suprised_exclaim(the_person):
@@ -696,6 +708,52 @@ label Sarah_improved_serum_unlock(the_person):
     mc.name "Go on, I'm interested."
     the_person.char "Our testing procedures focus on human safety, which I'll admit is important, but it doesn't leave us with much information about the subjective effects of our creations."
     the_person.char "What I want to do is take a dose of our serum myself, then have you record me while you run me through some questions."
+    return
+label Sarah_kissing_taboo_break(the_person):
+    call relaxed_kissing_taboo_break(the_person) from _call_Sarah_kissing_taboo_break
+    return
+label Sarah_touching_body_taboo_break(the_person):
+    call relaxed_touching_body_taboo_break(the_person) from _call_Sarah_touching_body_taboo_break
+    return
+label Sarah_touching_penis_taboo_break(the_person):
+    call relaxed_touching_penis_taboo_break(the_person) from _call_Sarah_touching_penis_taboo_break
+    return
+label Sarah_touching_vagina_taboo_break(the_person):
+    call relaxed_touching_vagina_taboo_break(the_person) from _call_Sarah_touching_vagina_taboo_break
+    return
+label Sarah_sucking_cock_taboo_break(the_person):
+    call relaxed_sucking_cock_taboo_break(the_person) from _call_Sarah_sucking_cock_taboo_break
+    return
+label Sarah_licking_pussy_taboo_break(the_person):
+    call relaxed_licking_pussy_taboo_break(the_person) from _call_Sarah_licking_pussy_taboo_break
+    return
+label Sarah_vaginal_sex_taboo_break(the_person):
+    call relaxed_vaginal_sex_taboo_break(the_person) from _call_Sarah_vaginal_sex_taboo_break
+    return
+label Sarah_anal_sex_taboo_break(the_person):
+    call relaxed_anal_sex_taboo_break(the_person) from _call_Sarah_anal_sex_taboo_break
+    return
+label Sarah_condomless_sex_taboo_break(the_person):
+    call relaxed_condomless_sex_taboo_break(the_person) from _call_Sarah_condomless_sex_taboo_break
+    return
+label Sarah_underwear_nudity_taboo_break(the_person, the_clothing):
+    call relaxed_underwear_nudity_taboo_break(the_person, the_clothing) from _call_Sarah_underwear_nudity_taboo_break
+    return
+label Sarah_bare_tits_taboo_break(the_person, the_clothing):
+    call relaxed_bare_tits_taboo_break(the_person, the_clothing) from _call_Sarah_bare_tits_taboo_break
+    return
+label Sarah_bare_pussy_taboo_break(the_person, the_clothing):
+    call relaxed_bare_pussy_taboo_break(the_person, the_clothing) from _call_Sarah_bare_pussy_taboo_break
+    return
+label Sarah_facial_cum_taboo_break(the_person):
+    return
+label Sarah_mouth_cum_taboo_break(the_person):
+    return
+label Sarah_body_cum_taboo_break(the_person):
+    return
+label Sarah_creampie_taboo_break(the_person):
+    return
+label Sarah_anal_creampie_taboo_break(the_person):
     return
 
 label Sarah_get_drunk_dialogue(the_person, intoxication_level):
