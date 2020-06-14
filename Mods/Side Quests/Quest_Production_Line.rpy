@@ -29,16 +29,17 @@
 # girl also gains being submissive opinion (sub / dom type relationship)
 
 init 1 python:
-    def setup_quest_production_line():
+    def get_quest_production_line_person():
         able_person_list = []
         for person in mc.business.production_team:
             if person.age < 25:
                 if person not in quest_director.unavailable_persons:
-                    if person.event_triggers_dict.get("employed_since", 9999) < day + 7: #Employed for atleast 7 days#
+                    if day > person.event_triggers_dict.get("employed_since", 9999) + 7: #Employed for atleast 7 days#
                         able_person_list.append(person)
-        # if len(able_person_list) == 0: #REquirement should have been true? How is this possible?
-        #     return False
-        person = get_random_from_list(able_person_list)
+        return get_random_from_list(able_person_list)
+
+    def setup_quest_production_line():
+        person = get_quest_production_line_person()
 
         # make sure 'selected person' is single and has no kids
         # although the player might have seen other information
@@ -108,12 +109,7 @@ init 1 python:
         return
 
     def quest_production_line_start_requirement():
-        for person in mc.business.production_team:
-            if person.age < 25:
-                if person not in quest_director.unavailable_persons:
-                    if person.event_triggers_dict.get("employed_since", 9999) < day + 7: #Employed for at least 7 days#
-                        return True #True if find at least one person that meets criteria
-        return False
+        return not get_quest_production_line_person() is None
 
     def quest_production_line_cleanup():
         mall.remove_action(quest_production_line_coffee)
