@@ -143,13 +143,21 @@ init python: #For now default init. May change later if we know better.
         quest_director.add_new_quest(quest_cure_discovery)
 
         #TODO this side quest is currently disabled becuase my coding is shit and I don't want to cause more CTDs until I can personally test this. - Starbuck
-        # global quest_cuckold_employee
-        # quest_cuckold_employee = Side_Quest(quest_name = "Cuckold Employee",
-        #     quest_init_label = "quest_cuckold_employee_init_label",
-        #     quest_tracker = quest_cuckold_employee_tracker,
-        #     start_requirement = quest_cuckold_employee_start_requirement,
-        #     quest_cleanup = quest_cuckold_employee_cleanup)
-        # quest_director.add_new_quest(quest_cuckold_employee)
+        global quest_cuckold_employee
+        quest_cuckold_employee = Side_Quest(quest_name = "Cuckold Employee",
+            quest_init_label = "quest_cuckold_employee_init_label",
+            quest_tracker = quest_cuckold_employee_tracker,
+            start_requirement = quest_cuckold_employee_start_requirement,
+            quest_cleanup = quest_cuckold_employee_cleanup)
+        quest_director.add_new_quest(quest_cuckold_employee)
+
+        global quest_essential_oils
+        quest_essential_oils = Side_Quest(quest_name = "Essential Oils",
+            quest_init_label = "quest_essential_oils_init_label",
+            quest_tracker = quest_essential_oils_tracker,
+            start_requirement = quest_essential_oils_start_requirement,
+            quest_cleanup = quest_essential_oils_cleanup)
+        quest_director.add_new_quest(quest_essential_oils)
 
         quest_director.unavailable_persons = unique_character_list
 

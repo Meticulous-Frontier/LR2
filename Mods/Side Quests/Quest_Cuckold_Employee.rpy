@@ -586,7 +586,7 @@ label quest_cuckold_employee_after_window_label():
         the_person.char "I'll be able to test for sure in a couple of days! I wouldn't mind a couple more tries between now and then though... just in case my period is just late."
         "You text her back."
         mc.name "I'll make time to breed you again cow. Look forward to it."
-        $ the_person.on_room_enter_event_list.remove(preg_announce_action)  #We are overriding this event and doing our own announcement. No reason to use vanilla one in this situation.
+        $ the_person.on_room_enter_event_list = []  #We are overriding this event and doing our own announcement. No reason to use vanilla one in this situation.
         $ quest_cuckold_employee.set_quest_flag(101)
         return
 
@@ -632,7 +632,7 @@ label quest_cuckold_employee_knocked_up_label():
             the_person.char "I cant believe it, I'm really doing this. You're my one and only bull now."
 
         "You're doing the right thing.":      #Be the good guy
-            mc.name "I'm really happy for you. Don't worry, your secret is safe with. For all purposes, the baby IS his."
+            mc.name "I'm really happy for you. Don't worry, your secret is safe with me. For all purposes, the baby IS his."
             the_person.char "Yeah... I know... Its just hard, you know?"
             "She gets a sulty tone to her voice."
             the_person.char "If you want to, you can still cum inside me once in a while... It was kinda hot, playing around with breeding."
@@ -689,7 +689,7 @@ label breeding_stock_greetings(the_person):
             "She rubs her belly, absent mindedly."
 
     else:
-        he_person.char "Hi [the_person.mc_title]!"
+        the_person.char "Hi [the_person.mc_title]!"
         "She lowers her voice to a whisper."
         the_person.char "Its been a bit since you filled me up. Want to?"
         if the_person.knows_pregnant():
@@ -708,7 +708,7 @@ label breeding_stock_anal_sex_taboo_break(the_person):
 
 label breeding_stock_sex_responses_vaginal(the_person):
     if mc.condom:
-        the_person.char "Mmm, your cock feel good inside me, but you know what would be better? If we took off that awful latex condom."
+        the_person.char "Mmm, your cock feel good inside me, but you know what would be better? If we took off that awful condom."
         if the_person.knows_pregnant():
             the_person.char "I mean, I'm already pregnant! What's the harm in going bare?"
         else:
