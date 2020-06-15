@@ -69,6 +69,8 @@ init 1 python:
         return
 
     def quest_cure_discovery_start_requirement():
+        if day < 60: # we need to have put in some research for this event to occur
+            return False
         if mc.business.head_researcher == None:
             return False
         if len(mc.business.market_team) == 0:
@@ -317,10 +319,10 @@ label quest_cure_discovery_patent_kept_label():
                 "Well, you may have missed a financial opportunity, but at least you got a blowjob out of it!"
             else:
                 mc.name "I'm sure you will. Please try to let me know before you take actions like that in the future though."
-                $ the_person.change_slut_temp(obedience = 20, love = 20, happiness = 20) #Net gain to stats because MC still took a good path in the end.
+                $ the_person.change_stats(obedience = 20, love = 20, happiness = 20) #Net gain to stats because MC still took a good path in the end.
                 the_person.char "Of course sir."
                 "You say goodbye and hang up the phone."
-                "Well, you may have missed out on a financial opportunity, but it sounds like you've gained some consideration from [the_person.title] in the process atleast."
+                "Well, you may have missed out on a financial opportunity, but it sounds like you've gained some consideration from [the_person.title] in the process."
     $ del the_disease
     return
 
