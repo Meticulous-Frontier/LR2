@@ -79,6 +79,10 @@ init 2 python:
                 return True
         return False
 
+    def ophelia_revenge_aftermath_requirement(person):
+        if day % 7 != 6:
+            return True
+
     def ophelia_is_over_her_ex_requirement(person):
         if not ophelia_get_is_over_her_ex() and day >= ophelia_get_day_of_revenge_date() + 7:
             if person.location() is mall_salon:
@@ -98,6 +102,9 @@ init 2 python:
         if person.sluttiness >= 40:
             if person.energy > 60:
                 return True
+        return False
+
+    def ophelia_increased_service_begin_requirement(person):
         return False
 
     def create_ophelia_date_night_outfit(person):
@@ -137,8 +144,10 @@ init 2 python:
     ophelia_blowjob_pics_review = Action("Review blowjob pictures",  ophelia_blowjob_pics_review_requirement, "ophelia_blowjob_pics_review_label")
     ophelia_revenge_date_plan = Action("Ophelia asks you on a date",  ophelia_revenge_date_plan_requirement, "ophelia_revenge_date_plan_label")
     ophelia_revenge_date =  Action("Date with Ophelia",  ophelia_revenge_date_requirement, "ophelia_revenge_date_label")
+    ophelia_revenge_aftermath = Action("Talk about what happened", ophelia_revenge_aftermath_requirement, "ophelia_revenge_aftermath_label")
     ophelia_is_over_her_ex =  Action("Ophelia finally moves on",  ophelia_is_over_her_ex_requirement, "ophelia_is_over_her_ex_label")
     ophelia_talk_about_candace =  Action("Talk about [candace.name]",  ophelia_talk_about_candace_requirement, "ophelia_talk_about_candace_label", menu_tooltip = "Tread carefully, this will be a sore subject")
+    ophelia_increased_service_begin = Action("Ophelia increases services",  ophelia_increased_service_begin_requirement, "ophelia_increased_service_begin_label")
 
     salon_manager_role = Role("Salon Manager", [cut_hair_action, ophelia_ex_bf_plan_pics, ophelia_talk_about_candace])
 
@@ -759,8 +768,25 @@ label ophelia_revenge_date_label():
     "The scene at the restaurant was crazy, with that bimbo, [candace.title] and [ex_name]. You'll have to keep an eye out for her. Maybe you'll run into her again?"
     $ the_person.clear_situational_slut("Date")
     $ the_person.on_room_enter_event_list.append(ophelia_is_over_her_ex)
+    $ the_person.add_unique_on_talk_event(ophelia_revenge_aftermath)
     $ del ex_name
     return
+
+label ophelia_revenge_aftermath_label(the_person):
+    $ the_person.draw_person()
+    "You step up to [the_person.title]"
+    mc.name "Hello"
+    the_person.char "Hey..."
+    "There is a bit of an awkward silence."
+    the_person.char "So... I guess you want to talk about the other night..."
+    mc.name "Only if you want to."
+    the_person.char "I'm going through a lot of... confusing feelings right now."
+    the_person.char "I really appreciate you putting up with me through all of this, but I think I just need a little time to myself right now."
+    mc.name "I understand. I'll still be around if you need anything though."
+    the_person.char "Of course! And feel free to send any of your employees my way. I'll still give them a discount!"
+    the_person.char "Is there anything else you wanted to talk about?"
+    return
+
 
 label ophelia_special_blowjob_label(the_person):
     return
@@ -798,6 +824,7 @@ label ophelia_is_over_her_ex_label(the_person):
 
         salon_total_cost = salon_style_cost + salon_dye_cost
         the_person.event_triggers_dict["over_her_ex"] = 1
+        the_person.add_unique_on_talk_event(ophelia_increased_service_begin)
     return
 
 label ophelia_talk_about_candace_label(the_person):
@@ -855,6 +882,76 @@ label ophelia_talk_about_candace_label(the_person):
     $ the_person.event_triggers_dict["help_candace"] = 1
     $ del ex_name
     return
+
+label ophelia_increased_service_begin_label(the_person):
+    $ the_person.draw_person()
+    the_person.char "Aha! Just the man I wanted to see."
+    mc.name "Last time I heard that, we planned to crash..."
+    the_person.char "YEAH, yeah I remember. Don't worry, this doesn't have anything to do with my ex."
+    the_person.char "With my spare time, I've really been putting the extra effort into my business, you know?"
+    the_person.char "Going the extra mile with every customer, that kind of things."
+    mc.name "Good, I bet that will pay off for you in the long run."
+    the_person.char "Yeah... and I've been thinking. There is a place on the other side of town that does a different kind of hairstyling."
+    mc.name "Oh?"
+    the_person.char "Yeah, but they really only do it one way. It's called waxing, and a lot of girls get their privates done, for a variety of reasons."
+    the_person.char "It is so... unimaginitive! I've been considering offering a new service by request to do a little extra hair styling, you know, down there."
+    the_person.char "I figure I'll call it a full body hair styling. I should probably offer to dye the hair too."
+    mc.name "Huh. Having a professional do something like that might be very beneficial for some women."
+    the_person.char "The problem is... I'm actually really scared to try it. Like, how would I even ask? Hey can I shave your pubes?"
+    mc.name "Yes I can see why that might be an issue."
+    the_person.char "So, I figure, you have a lot of female employees, right? I was wondering if you might know anyone who would be willing to try it out?"
+    mc.name "I think I can figure something out."
+    the_person.char "Great! No rush or anything, but when you think of someone, send them over and I'll take care of everything!"
+    "You probably need an employee who is pretty slutty to do something like this... or very obedient? You guess you could just order a few of your employees to do it."
+    "When you decide who, you should probably call them to your office first, so you can come over to the salon together."
+    #TODO change variables
+    return
+
+label ophelia_choose_service_test_label():
+    $ scene_manager = Scene() # make sure we have a clean scene manager
+
+    "Sitting down, alone, in your office, you pull up the employee list. Who should you have be the test case for [salon_manager.title]?"
+    python:
+        able_person_list = []
+        for person in mc.business.get_employee_list(): #TODO is there a method that grabs ENTIRE employee list?
+            if person.core_sluttiness > 50:
+                able_person_list.append(person)
+            elif person.sluttiness > 20:
+                if person.obedience > 150:
+                    able_person_list.append(person)
+    if len(able_person_list) > 0:
+        "After going through the list, you decide there probably aren't any girls willing to have their pubic hair styled."
+        "You should probably work on corrupting some of your employees before you try and send one to [salon_manager.title]."
+    $ able_person_list.insert(0, "Full Body Hairstyle Test")
+    $ able_person_list.append("Back")
+    call screen enhanced_main_choice_display(build_menu_items(able_person_list))
+    $ the_person = _return
+    $ del able_person._list
+    if the_person == "Back":
+        "You decide not to call an employee for the trial run of [salon_manager.possessive_title] full body hair styling right now."
+        return
+    "You call [the_person.title] down to your office. Soon she walks in your door."
+    $ scene_manager.add_actor(the_person)
+    the_person.char "Hey [the_person.mc_title], you wanted to see me?"
+    mc.name "I have a quick favor to ask."
+    mc.name "I have a friend who runs the salon over by the mall. She is considering offering a new service and is looking for someone to trial her serviec on."
+    the_person.char "Oh? At a hair salon? That sounds nice, I'm about due to have it cut. What is the new service she is offering?"
+    mc.name "Well, she is calling it a full body hair styling."
+    the_person.char "Full body? So like... body hair also?"
+    mc.name "Yeah, including the bikini area."
+    if the_person.sluttiness > 50:
+        the_person.char "Oh! That sounds great! It is such a pain trying to shave down there."
+        the_person.char "When can we go?"
+    else: #The person is not slutty but is here due to high obedience.
+        the_person.char "Oh my... I'm not sure I feel comfortable having another woman cutting my hair down there..."
+        mc.name "Well, not usually, I'm sure, but this would be a really big favor for me. Just this once?"
+        the_person.char "Oh, well I supposed I could do it. For your sake of course!"
+        the_person.char "So... when do we go?"
+
+    return # Where to go if you hit "Back".
+
+
+
 
 
 ##### Story variable python wrappers

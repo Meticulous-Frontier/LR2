@@ -1160,6 +1160,20 @@ init -1 python:
         return -1
     Person.pregnancy_show_day = pregnancy_show_day
 
+    def is_highly_fertile(self):
+        if self.is_pregnant():
+            return False
+        if persistent.pregnancy_pref < 2:
+            return False
+        day_difference = abs((day % 30) - self.ideal_fertile_day) # Gets the distance between the current day and the ideal fertile day.
+        if day_difference > 15:
+            day_difference = 30 - day_difference #Wrap around to get correct distance between months.
+        if day_difference < 4:
+            return True
+        return False
+
+    Person.is_highly_fertile = is_highly_fertile
+
     def remove_on_talk_event(self, the_crisis):
         if the_crisis in self.on_talk_event_list:
             self.on_talk_event_list.remove(the_crisis)

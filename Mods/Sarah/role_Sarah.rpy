@@ -225,6 +225,11 @@ init -1 python:
             return True
         return False
 
+    def Sarah_has_bigger_tits():
+        if sarah.event_triggers_dict.get("epic_tits_progress", 0) > 1 or sarah.has_large_tits():
+            return True
+        return False #Just in case we used serums later
+
 
     def Sarah_remove_bra_from_wardrobe(wardrobe):  #Test this function
         for outfit in wardrobe.outfits:

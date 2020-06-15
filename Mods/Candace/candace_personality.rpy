@@ -41,6 +41,12 @@ label candace_greetings(the_person):
         the_person.char "Oh, my, god... What do you want? Do I look like I want to be talking to you?"
     elif the_person.happiness < 90:
         the_person.char "Hi [the_person.mc_title]..."
+    elif renpy.random.randint(0,4) == 1:
+        the_person.char "Hi [the_person.mc_title]..."
+        mc.name "You doing okay today?"
+        the_person.char "Yeah... I guess. I just had a disappointing night last night."
+        mc.name "Oh?"
+        call candace_random_dumb_dialogue(the_person) from _candace_flavor_text_1
     else:
         if the_person.sluttiness > 60:
             if the_person.obedience > 130:
@@ -717,6 +723,8 @@ label candace_date_seduction(the_person):
             the_person.char "[the_person.mc_title], I don't know how you do it but I swear you've been driving me, like, totally crazy all night."
             "[the_person.title] runs her hand along your arm and giggles."
             the_person.char "I want you to come back to my place so I can have you all to my self."
+            "She looks around and thinks for a second."
+            the_person.char "I guess if I HAVE to stay and share you, I could do that too though!"
         else:
             the_person.char "Oh my god [the_person.mc_title], tonight has been so much fun. Do you want to, like, come back home with me and drink some more?"
     return
@@ -775,70 +783,95 @@ label candace_improved_serum_unlock(the_person):
     return
 
 ## Taboo break dialogue ##
-# label candace_kissing_taboo_break(the_person):
-#
-#     return
-#
-# label candace_touching_body_taboo_break(the_person):
-#
-#     return
-#
-# label candace_touching_penis_taboo_break(the_person):
-#
-#     return
-#
-# label candace_touching_vagina_taboo_break(the_person):
-#
-#     return
-#
-# label candace_sucking_cock_taboo_break(the_person):
-#
-#     return
-#
-# label candace_licking_pussy_taboo_break(the_person):
-#
-#     return
-#
-# label candace_vaginal_sex_taboo_break(the_person):
-#
-#     return
-#
-# label candace_anal_sex_taboo_break(the_person):
-#
-#     return
-#
-# label candace_condomless_sex_taboo_break(the_person):
-#
-#     return
-#
-# label candace_underwear_nudity_taboo_break(the_person, the_clothing):
-#
-#     return
-#
-# label candace_bare_tits_taboo_break(the_person, the_clothing):
-#
-#     return
-#
-# label candace_bare_pussy_taboo_break(the_person, the_clothing):
-#
-#     return
-#
-# label candace_facial_cum_taboo_break(the_person):
-#
-#     return
-#
-# label candace_mouth_cum_taboo_break(the_person):
-#
-#     return
-#
-# label candace_body_cum_taboo_break(the_person):
-#
-#     return
-#
-# label candace_creampie_taboo_break(the_person):
-#
-#     return
-#
-# label candace_anal_creampie_taboo_break(the_person):
-#
-#     return
+label candace_kissing_taboo_break(the_person):
+    the_person.char "Mmm, let's start with making out! But you don't plan on stopping there, do you?"
+    return
+
+label candace_touching_body_taboo_break(the_person):
+    the_person.char "Mmm, your hands feel so good on me! Make sure to play with my nipples, it feels so good!"
+    return
+
+label candace_touching_penis_taboo_break(the_person):
+    the_person.char "Your cock looks so hard... can I stroke it a little?"
+    mc.name "A little or a lot, your choice."
+    the_person.char "Oh good. Probably not too much, I need your cock to stroke me back a bit!"
+    return
+
+label candace_touching_vagina_taboo_break(the_person):
+    the_person.char "Yay! I was hoping we would get around to doing this soon!"
+    return
+
+label candace_sucking_cock_taboo_break(the_person):
+    mc.name "I want you to do something for me."
+    the_person.char "Oh yeah? What do you want me to do to you?"
+    mc.name "I want you to suck on my cock."
+    the_person.char "Yum! I was planning on doing that soon anyway!"
+    return
+
+label candace_licking_pussy_taboo_break(the_person):
+    mc.name "I want to taste your pussy [the_person.title]. Are you ready?"
+    the_person.char "Oh thank god, last guy I was with never returned the favor when I sucked his dick."
+    "She spreads her legs and waits for you to get to work."
+    return
+
+label candace_vaginal_sex_taboo_break(the_person):
+    the_person.char "Fucking. Finally. I was getting ready to ask you!"
+    if candace_get_has_quit_job():
+        the_person.char "It isn't right for a boss not to fuck his employee!"
+    return
+
+label candace_anal_sex_taboo_break(the_person):
+    the_person.char "Oh god, you're going to put that thing in my ass?"
+    "She grabs your cock and strokes it a few times. At first you think she might be a little scared."
+    the_person.char "This is like... a dream come true! Fuck my ass good [the_person.mc_title]!"
+    return
+
+label candace_condomless_sex_taboo_break(the_person):
+    the_person.char "Mmm, I love it bare. Skin on skin is the best!"
+    "She stops and thinks for a second."
+    if the_person.on_birth_control:
+        the_person.char "I remembered to take my pill this morning, so cum ANYWHERE."
+    else:
+        the_person.char "I'm not taking birth control right now. I'm not gonna tell you where to cum, but thought that, like, you might want to know that!"
+    return
+
+label candace_underwear_nudity_taboo_break(the_person, the_clothing):
+    the_person.char "You want to see my underwear? Sure! I'm actually surprised I remembered to put normal clothes on today!"
+    return
+
+label candace_bare_tits_taboo_break(the_person, the_clothing):
+    the_person.char "You want to see my tits? Of course! I'm actually surprised I don't already have them out!"
+    return
+
+label candace_bare_pussy_taboo_break(the_person, the_clothing):
+    the_person.char "You want to see my pussy?"
+    "[the_person.title] looks down."
+    the_person.char "Oh! I guess I did remember to wear clothes today! Just give me one second and I'll get this off for you."
+    return
+
+label candace_facial_cum_taboo_break(the_person):
+
+    return
+
+label candace_mouth_cum_taboo_break(the_person):
+
+    return
+
+label candace_body_cum_taboo_break(the_person):
+
+    return
+
+label candace_creampie_taboo_break(the_person):
+
+    return
+
+label candace_anal_creampie_taboo_break(the_person):
+
+    return
+
+label candace_random_dumb_dialogue(the_person):
+    $rando_dumb_dialogue = renpy.random.choice(["Did you know for cock fights... they use chickens? Like, what the fuck? What a waste of $50!",
+    "I asked the guy at the grocery store the other day if he had time for a little stuffing... he brought me some kind of herb?",
+    "I went to this place that was advertising footlongs. Turns out they are some kind of sandwhich?"])
+    the_person.char "[rando_dumb_dialogue]"
+    return
