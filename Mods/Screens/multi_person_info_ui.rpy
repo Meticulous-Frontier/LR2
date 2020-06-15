@@ -11,10 +11,10 @@ init 2 python:
         tooltip += "Height: " + height_to_string(person.height) + "\n"
         tooltip += "Cup size: " + str(person.tits) + "\n"
         #don't use this in the screen tooltip, it somehow messes up things badly
-        #tooltip += "Weight: " + get_person_weight_string(person)
+        tooltip += "Weight: " + get_person_weight_string(person)
         return tooltip
 
-screen multi_person_info_ui(actors): 
+screen multi_person_info_ui(actors):
     layer "Active"
     frame:
         background Frame("gui/topbox.png")
@@ -23,7 +23,7 @@ screen multi_person_info_ui(actors):
         yalign 0.0
         xalign 0.5
         xanchor 0.5
-        
+
         hbox:
             xanchor 0.5
             xalign 0.5
@@ -45,7 +45,7 @@ screen multi_person_info_ui(actors):
                             text actor.person.title style "menu_text_style" size 30 ysize 30
                         else:
                             text "???" style "menu_text_style" font actor.person.char.what_args["font"] color actor.person.char.what_args["color"] size 30
-                        
+
                         if actor.person.serum_effects:
                             textbutton "{image=serum_vial} +[actor.person.suggestibility]%":
                                 yoffset 6
@@ -53,7 +53,7 @@ screen multi_person_info_ui(actors):
                                 text_style "menu_text_style"
                                 tooltip person_info_ui_get_serum_info_tooltip(actor.person)
                                 action NullAction()
-                                sensitive True                        
+                                sensitive True
 
                     if actor.person.arousal > 0:
                         textbutton "Arousal: [actor.person.arousal]/[actor.person.max_arousal] (+" + get_red_heart(__builtin__.int(actor.person.arousal/4)) + ")":
