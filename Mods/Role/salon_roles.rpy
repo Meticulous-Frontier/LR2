@@ -104,6 +104,9 @@ init 2 python:
                 return True
         return False
 
+    def ophelia_increased_service_begin_requirement(person):
+        return False
+
     def create_ophelia_date_night_outfit(person):
         outfit = Outfit("Sexy Plum Shirt And Khaki Skirt")
         outfit.add_upper(strappy_bra.get_copy(),[.15, .15, .15, 0.95])
@@ -144,6 +147,7 @@ init 2 python:
     ophelia_revenge_aftermath = Action("Talk about what happened", ophelia_revenge_aftermath_requirement, "ophelia_revenge_aftermath_label")
     ophelia_is_over_her_ex =  Action("Ophelia finally moves on",  ophelia_is_over_her_ex_requirement, "ophelia_is_over_her_ex_label")
     ophelia_talk_about_candace =  Action("Talk about [candace.name]",  ophelia_talk_about_candace_requirement, "ophelia_talk_about_candace_label", menu_tooltip = "Tread carefully, this will be a sore subject")
+    ophelia_increased_service_begin = Action("Ophelia increases services",  ophelia_increased_service_begin_requirement, "ophelia_increased_service_begin_label")
 
     salon_manager_role = Role("Salon Manager", [cut_hair_action, ophelia_ex_bf_plan_pics, ophelia_talk_about_candace])
 
