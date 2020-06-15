@@ -95,7 +95,7 @@ init 1 python:
         quest_cuckold_employee_get_target().remove_on_talk_event(quest_cuckold_employee_breeding_session)
         #Leave knocked up and reconsider events in the stack to run after quest finishes.
         # cleanup dictionary to save space and memory
-        quest_cuckold_employee.quest_event_dict.clear()
+        #quest_cuckold_employee.quest_event_dict.clear()
         return
 
 ###Declare any requirement functions
@@ -214,6 +214,7 @@ label quest_cuckold_employee_decision_label():
     if the_person == None:
         #ABORT ABORT, we fucked up somewhere.
         return
+    $ the_person.draw_person()
     "You are lost in your work when a feminine voice clearing her throat nearby catches your attention. You look up and see [the_person.title] standing in front of you again."
     mc.name "Hello [the_person.title]. Can I help you?"
     the_person.char "Well, kind of yes, kind of no."
@@ -335,8 +336,8 @@ label quest_cuckold_employee_decision_label():
     the_person.char "Oh my god, I can't believe I'm doing this. I have a bull now, oh god!"
     $ the_person.strip_outfit()
     the_person.char "Alright [the_person.mc_title]. This is it. Time to put a baby in me!"
-    call fuck_person(the_person, starting_position = breeding_missionary, private= True, start_object = desk, position_locked = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_attempt_1
-    if the_person.has_creampie_cum():
+    call fuck_person(the_person, start_position = breeding_missionary, private= True, position_locked = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_attempt_1
+    if the_person.outfit.has_creampie_cum():
         the_person.char "Oh god, I can feel it inside me! We really did it."
         $ the_person.change_stats(happiness = 10, obedience = 10, love = 5)
         the_person.char "There's so much, god I have such a good bull."
@@ -399,8 +400,8 @@ label quest_cuckold_employee_rethink_decision_label():
     the_person.char "Oh my god, I can't believe I'm doing this. I have a bull now, oh god!"
     $ the_person.strip_outfit()
     the_person.char "Alright [the_person.mc_title]. This is it. Time to put a baby in me!"
-    call fuck_person(the_person, starting_position = breeding_missionary, private= True, start_object = desk, position_locked = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_attempt_3
-    if the_person.has_creampie_cum():
+    call fuck_person(the_person, start_position = breeding_missionary, private= True, position_locked = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_attempt_3
+    if the_person.outfit.has_creampie_cum():
         the_person.char "Oh god, I can feel it inside me! We really did it."
         $ the_person.change_stats(happiness = 10, obedience = 10, love = 5, slut_temp = 5)
         the_person.char "There's so much, god I have such a good bull."
@@ -459,8 +460,8 @@ label quest_cuckold_employee_breeding_session_label(the_person):
     $ the_person.strip_outfit()
     mc.name "I'm gonna fuck you on my desk again. Tell your bull how much you want it."
     the_person.char "Oh god please! I want you to fuck me over and over until my belly is popping with your seed!"
-    call fuck_person(the_person, starting_position = breeding_missionary, private= True, start_object = desk, position_locked = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_attempt_2
-    if the_person.has_creampie_cum():
+    call fuck_person(the_person, start_position = breeding_missionary, private= True, position_locked = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_attempt_2
+    if the_person.outfit.has_creampie_cum():
         the_person.char "Oh god, every risky load feels even better than the last..."
         $ the_person.change_stats(love = 10, happiness = 10, obedience = 10)
         "You gently rub her stomach."
@@ -642,7 +643,7 @@ label quest_cuckold_employee_knocked_up_label():
     $ the_person.set_title("Cow")
     $ the_person.set_possessive_title("Your Personal Breeding Stock")
     "She puts her hand on your chest. She traces a few circles around it, then slower lowers her hand to your crotch. She starts to stroke the shaft."
-    the_person.char "Mmm, it just feel so... virile..."
+    the_person.char "Mmm, it just feels so... virile..."
     the_person.char "Do you need a little release? I know I'm alrady pregnant but..."
     "You growl at her."
     mc.name "Bend over, [the_person.title]. I need a hole for my seed."
@@ -651,8 +652,8 @@ label quest_cuckold_employee_knocked_up_label():
     $ the_person.draw_person(position = "doggy")
     "Her ass in position, you quickly get her ready."
     $ the_person.strip_outfit( exclude_upper = True)
-    call fuck_person(the_person, starting_position = doggy, private = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_victory_lap_01
-    if the_person.has_creampie_cum():
+    call fuck_person(the_person, start_position = doggy, private = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_victory_lap_01
+    if the_person.outfit.has_creampie_cum():
         the_person.char "Sweet jesus, no wonder you knocked me up. I'm so full of your cum, its amazing..."
     "After you both recover, you carefully leave your office. Sounds like you have your very own breeding stock available from now on!"
     "It's going to be amazing to watch her belly swell with your seed."
@@ -679,7 +680,7 @@ init 1301 python:
 
 label breeding_stock_greetings(the_person):
     $ update_ass_condition(the_person)
-    if the_person.has_creampie_cum():
+    if the_person.outfit.has_creampie_cum():
 
         the_person.char "Hi [the_person.mc_title]!"
         "She lowers her voice to a whisper."

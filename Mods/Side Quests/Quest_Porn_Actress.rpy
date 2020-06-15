@@ -32,13 +32,19 @@ init 1 python:
                 if person.core_sluttiness > 60:
                     able_person_list.append(person)
 
+
+
         quest_porn_actress.quest_event_dict["start_day"] = 9999
         quest_porn_actress.quest_event_dict["target"] = get_random_from_list(able_person_list)
         quest_porn_actress.quest_event_dict["disease_name"]  = quest_cure_discovery_disease_name()
         quest_porn_actress.quest_event_dict["market_contact"] = None
         quest_porn_actress.quest_event_dict["market_day"] = 9999
+        quest_porn_actress_contact().add_opinion("public sex", 2, discovered = False, add_to_log = False)
         quest_porn_actress.set_quest_flag(1)
         return
+
+    def quest_porn_actress_contact():
+        return quest_cure_discovery.quest_event_dict.get("target", None)
 
     def rate_porn_video(the_report, the_person):  #Takes a sex report and person and returns a score of 1-10 on how good the video isself.
         porn_score = 0
