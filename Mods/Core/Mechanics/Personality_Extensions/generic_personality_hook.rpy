@@ -82,9 +82,9 @@ init -1 python:
     def fix_opinion_contradiction(person, base_topic, related_topic):
         # first skew related to positive base
         if person.get_opinion_score(base_topic) > 0 and person.get_opinion_score(related_topic) < 0:
-            person.update_opinion_with_score(related_topic, -person.get_opinion_score(related_topic))
+            person.update_opinion_with_score(related_topic, -person.get_opinion_score(related_topic), add_to_log = False)
         if person.get_opinion_score(base_topic) < 0 and person.get_opinion_score(related_topic) > 0:
-            person.update_opinion_with_score(related_topic, -person.get_opinion_score(related_topic))
+            person.update_opinion_with_score(related_topic, -person.get_opinion_score(related_topic), add_to_log = False)
         return
 
     def ensure_opinion_on_subject(person, opinions):
