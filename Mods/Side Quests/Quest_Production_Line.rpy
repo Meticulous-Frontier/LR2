@@ -48,8 +48,8 @@ init 1 python:
         person.kids = 0
         person.relationship = "Single"
         person.SO_name = None
-        person.add_opinion("incest", 2, discovered = False, add_to_log = False)
-        person.add_opinion("being submissive", 2, discovered = False, add_to_log = False)
+        person.update_opinion_with_score("incest", 2, add_to_log = False) # this method updates or adds the opinion
+        person.update_opinion_with_score("being submissive", 2, add_to_log = False) # this method updates or adds the opinion
 
         quest_production_line.quest_event_dict["target"] = person
         quest_production_line.quest_event_dict["father_name"] = get_random_male_name()
