@@ -714,7 +714,7 @@ label Sarah_kissing_taboo_break(the_person):
     if the_person.love >= 20:
         the_person.char "A kiss? Of course! After all these years, this is like a dream come true..."
     else:
-        the_perso.char "Oh! Of course! Just for you [the_person.mc_title]!"
+        the_person.char "Oh! Of course! Just for you [the_person.mc_title]!"
     return
 label Sarah_touching_body_taboo_break(the_person):
     if the_person.effective_sluttiness() >= 30:
@@ -774,7 +774,7 @@ label Sarah_sucking_cock_taboo_break(the_person):
         the_person.char "You mean a lot to me. I'll do it, just to make you feel good!"
     else:
         the_person.char "Oh my god, do you really want me to do that?"
-        "She laughs nerviously and shakes her head."
+        "She laughs nervously and shakes her head."
         the_person.char "You're crazy! I couldn't..."
         mc.name "Sure you could. Just kneel down and give it a taste."
         the_person.char "No, I mean what would people think?"

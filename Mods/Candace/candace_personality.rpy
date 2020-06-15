@@ -235,7 +235,7 @@ label candace_clothing_reject(the_person):
     else:
         if the_person.sluttiness > 60:
             the_person.char "That's not really an outfit, is it? I like something a little cuter - some heels, add a dash of pink, and a top to show off my tits!"
-            "[the_person.title] looks the outfit over again for a momnt and shakes her head."
+            "[the_person.title] looks the outfit over again for a moment and shakes her head."
             the_person.char "Yeah, this just isn't going to do it. Thanks for the thought though!"
         else:
             the_person.char "Aww, I don't think I could ever wear something like that! I wish I could though, could you imagine the looks I would get? It would be. So. Hot."
@@ -265,7 +265,7 @@ label candace_strip_reject(the_person):
 label candace_sex_accept(the_person):
     if the_person.sluttiness > 70:
         if the_person.obedience < 70:
-            the_person.char "Oh yeah, that's one of my favourite things to do! Come on, let's do it!"
+            the_person.char "Oh yeah, that's one of my favorite things to do! Come on, let's do it!"
         else:
             the_person.char "Yeah, let's do it! You're so cute when you're horny, did you know that?"
     else:
@@ -870,8 +870,8 @@ label candace_anal_creampie_taboo_break(the_person):
     return
 
 label candace_random_dumb_dialogue(the_person):
-    $rando_dumb_dialogue = renpy.random.choice(["Did you know for cock fights... they use chickens? Like, what the fuck? What a waste of $50!",
+    $rando = renpy.random.choice(["Did you know for cock fights... they use chickens? Like, what the fuck? What a waste of $50!",
     "I asked the guy at the grocery store the other day if he had time for a little stuffing... he brought me some kind of herb?",
-    "I went to this place that was advertising footlongs. Turns out they are some kind of sandwhich?"])
-    the_person.char "[rando_dumb_dialogue]"
+    "I went to this place that was advertising foot longs. Turns out they are some kind of sandwich?"])
+    the_person.char "[rando]"
     return
