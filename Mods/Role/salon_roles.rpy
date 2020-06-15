@@ -79,7 +79,7 @@ init 2 python:
                 return True
         return False
 
-    def opehlia_revenge_aftermath_requirement():
+    def ophelia_revenge_aftermath_requirement(person):
         if day % 7 != 6:
             return True
 
@@ -141,7 +141,7 @@ init 2 python:
     ophelia_blowjob_pics_review = Action("Review blowjob pictures",  ophelia_blowjob_pics_review_requirement, "ophelia_blowjob_pics_review_label")
     ophelia_revenge_date_plan = Action("Ophelia asks you on a date",  ophelia_revenge_date_plan_requirement, "ophelia_revenge_date_plan_label")
     ophelia_revenge_date =  Action("Date with Ophelia",  ophelia_revenge_date_requirement, "ophelia_revenge_date_label")
-    opehlia_revenge_aftermath = Action("Talk about what happened", opehlia_revenge_aftermath_requirement, "opehlia_revenge_aftermath_label")
+    ophelia_revenge_aftermath = Action("Talk about what happened", ophelia_revenge_aftermath_requirement, "ophelia_revenge_aftermath_label")
     ophelia_is_over_her_ex =  Action("Ophelia finally moves on",  ophelia_is_over_her_ex_requirement, "ophelia_is_over_her_ex_label")
     ophelia_talk_about_candace =  Action("Talk about [candace.name]",  ophelia_talk_about_candace_requirement, "ophelia_talk_about_candace_label", menu_tooltip = "Tread carefully, this will be a sore subject")
 
