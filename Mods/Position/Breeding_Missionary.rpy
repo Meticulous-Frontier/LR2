@@ -153,7 +153,7 @@ label scene_breeding_missionary_2(the_girl, the_location, the_object):
 label outro_breeding_missionary(the_girl, the_location, the_object):
     "You get to hear every little gasp and moan from [the_girl.title] as you're pressed up against her. Combined with the feeling of fucking her pussy it's not long before you're pushed past the point of no return."
     mc.name "Here it comes bitch! I'm going to cum now!"
-    "[the_girl.possessive_title] wrap around your waist. Even if you wanted to pull out, you couldn't, as she uses her legs to pull you into her."
+    "[the_girl.possessive_title] wraps her legs around your waist. Even if you wanted to pull out, you couldn't, as she uses her legs to pull you into her."
     "You use your full weight to push your cock deep inside of [the_girl.possessive_title]'s cunt as you climax. She gasps and claws at your back as you pump your seed into her."
     $ the_girl.call_dialogue("cum_vagina")
     $ the_girl.cum_in_vagina()
