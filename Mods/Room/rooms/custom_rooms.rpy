@@ -11,7 +11,7 @@ init 15 python:
         make_woodhorse(),
         make_floor(),
     ]
-    dungeon = Room("dungeon", "Dungeon", [], room_background_image("Dungeon_Background.jpg"), dungeon_objects, [], [dungeon_room_appoint_slave_action], False, [4,3], None, False, lighting_conditions = standard_indoor_lighting)
+    dungeon = Room("dungeon", "Dungeon", [], standard_dungeon_backgrounds[:], dungeon_objects, [], [dungeon_room_appoint_slave_action], False, [4,3], None, False, lighting_conditions = standard_indoor_lighting)
 
     # Downtown Bar - The Downtown Distillery | downtown_bar_actions.rpy
     # This bar gets updated when a save game is loaded, regardless of its existence
@@ -30,7 +30,7 @@ init 15 python:
         make_floor(),
         make_bed()
     ]
-    downtown_hotel = Room("hotel", "The Hotel", [], room_background_image("Hotel_Room_Background.jpg"), downtown_hotel_objects,[], [], False, [5,5], None, True, lighting_conditions = standard_indoor_lighting)
+    downtown_hotel = Room("hotel", "The Hotel", [], standard_hotel_backgrounds[:], downtown_hotel_objects,[], [], False, [5,5], None, True, lighting_conditions = standard_indoor_lighting)
 
     #Creates a room specifically to keep girls we don't want to be accessible, so they are still updated.
     purgatory_objects = [
@@ -51,7 +51,7 @@ init 15 python:
         hide_in_known_house_map = True)
     purgatory.accessible = False
 
-    fancy_restaurant = Room("fancy_restaurant", "Restaurant", [], room_background_image("Fancy_Restaurant_Background.jpg"), [make_floor(), make_chair(), make_table()], [], [], False, [4,6], None, False, lighting_conditions = standard_indoor_lighting)
+    fancy_restaurant = Room("fancy_restaurant", "Restaurant", [], standard_fancy_restaurant_backgrounds[:], [make_floor(), make_chair(), make_table()], [], [], False, [4,6], None, False, lighting_conditions = standard_indoor_lighting)
 
 
 init 5  python:

@@ -26,26 +26,26 @@ init 2:
                     xsize 800
                     text "Daily Statistics:" style "textbutton_text_style" size 26
                     text "     " + "Company Efficiency: " + str(mc.business.team_effectiveness) + "%" style "textbutton_text_style"
-                    text "     " + "Production Potential: " + str(mc.business.production_potential) style "textbutton_text_style"
+                    text "     " + "Production Potential: " + str(round(mc.business.production_potential, 2)) style "textbutton_text_style"
                     text "     " + "Supplies Procured: " + str(mc.business.supplies_purchased) + " Units" style "textbutton_text_style"
-                    text "     " + "Production Used: " + str(mc.business.production_used) + " Units" style "textbutton_text_style"
-                    text "     " + "Research Produced: " + str(mc.business.research_produced) style "textbutton_text_style"
+                    text "     " + "Production Used: " + str(round(mc.business.production_used, 2)) + " Units" style "textbutton_text_style"
+                    text "     " + "Research Produced: " + str(round(mc.business.research_produced, 2)) style "textbutton_text_style"
 
                 vbox:
                     xsize 800
-                    $ salaray_costs = 0
-                    if day % 7 > 1 and day % 7 < 6: # day count already changed before summary is shown
-                        $ salaray_costs = mc.business.calculate_salary_cost()
-                    $ profit = mc.business.sales_made + starbuck.calc_investment_return() - salaray_costs - mc.business.supplies_purchased
+                    $ salary_costs = 0
+                    if day % 7 > 0 and day % 7 < 6: # day count already changed before summary is shown
+                        $ salary_costs = mc.business.calculate_salary_cost()
+                    $ profit = mc.business.funds - mc.business.funds_yesterday
                     $ mc.business.listener_system.fire_event("daily_profit", profit = profit)
                     $ mc.business.listener_system.fire_event("side_money", count = starbuck.calc_investment_return())
                     if profit > 0:
-                        text "Profit: $" + str(profit)  style "textbutton_text_style" size 26 color "#00A000"
+                        text "Profit: $" + str(round(profit, 2))  style "textbutton_text_style" size 26 color "#00A000"
                     else:
-                        text "Loss: $" + str(abs(profit))  style "textbutton_text_style" size 26 color "#A00000"
+                        text "Loss: $" + str(round(abs(profit), 2))  style "textbutton_text_style" size 26 color "#A00000"
 
-                    text "     " + "Sales Made: $" + str(mc.business.sales_made) style "textbutton_text_style"
-                    text "     " + "Daily Salary Paid: $" + str(salaray_costs) style "textbutton_text_style"
+                    text "     " + "Sales Made: $" + str(round(mc.business.sales_made, 2)) style "textbutton_text_style"
+                    text "     " + "Daily Salary Paid: $" + str(round(salary_costs, 2)) style "textbutton_text_style"
                     text "     " + "Serums Sold Today: " + str(mc.business.serums_sold) style "textbutton_text_style"
                     text "     " + "Serums Ready for Sale: " + str(mc.business.sale_inventory.get_any_serum_count()) style "textbutton_text_style"
 

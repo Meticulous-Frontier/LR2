@@ -4,62 +4,44 @@ init 2:
         modal True
         zorder 101
 
-        $ x_size_percent = 0.07
-        $ y_size_percent = 0.145
-        $ grid_size = [14.0, 6.0]
-
-        $ total_places = len(mc.known_home_locations)
-        $ places_so_far = 0
-        $ n = grid_size[1] * grid_size[0]
-        $ k = grid_size[1] / grid_size[0]
-        $ height = math.ceil(math.sqrt(k * total_places))
-        $ width = math.ceil(math.sqrt(total_places / k))
-
-        $ start_row = int(math.floor((grid_size[1] - height)/2))
-        $ start_col = int(math.floor((grid_size[0] - width)/2))
-        $ current_row = start_row
-        $ current_col = start_col
-
+        $ x_pos = 0
+        $ y_pos = 0
+        $ max_places_per_row = 5
+        $ x_offset_per_place = 0.145
+        $ y_offset_per_row = 0.07
         for place in mc.known_home_locations:
-            $ hex_x = x_size_percent * current_col
-            $ hex_y = y_size_percent * current_row
-            if current_col % 2 == 1:
-                $ hex_y += y_size_percent/2
-
             if not place == mc.location and not place.hide_in_known_house_map:
                 frame:
                     background None
                     xysize [171,150]
                     anchor [0.0,0.0]
-                    align (hex_x,hex_y)
-                    #align place.map_pos #TODO arange this properly
+                    align [0.2+(x_offset_per_place*x_pos),0.4+(y_offset_per_row*y_pos)]
                     imagebutton:
                         anchor [0.5,0.5]
                         auto "gui/LR2_Hex_Button_%s.png"
                         focus_mask "gui/LR2_Hex_Button_idle.png"
                         action [Hide("housing_map_manager"), Return(place), Function(mc.change_location, place)]
                         sensitive place.accessable
-                    text (place.formalName + " (" + str(len(place.people)) + ")").replace(" ", "\n", 2) anchor [0.5,0.5] style "map_text_style"
+                    text (place.formalName + "\n(" + str(len(place.people)) + ")").replace(" ", "\n", 2) anchor [0.5,0.5] style "map_text_style"
 
             else:
                 frame:
                     background None
                     xysize [171,150]
                     anchor [0.0,0.0]
-                    align (hex_x,hex_y)
+                    align [0.1+(x_offset_per_place*x_pos),0.5+(y_offset_per_row*y_pos)]
                     imagebutton:
                         anchor [0.5,0.5]
                         idle "gui/LR2_Hex_Button_Alt_idle.png"
                         focus_mask "gui/LR2_Hex_Button_Alt_idle.png"
                         action [Hide("housing_map_manager"), Return(place), Function(mc.change_location, place)]
                         sensitive False
-                    text place.formalName + "\n(" + str(len(place.people)) + ")" anchor [0.5,0.5] style "map_text_style"
-            $ places_so_far += 1
-            $ current_col += 1
-            if places_so_far % width == 0:
-                $ current_row += 1
-                $ current_col = start_col
-
+                    text (place.formalName + "\n(" + str(len(place.people)) + ")").replace(" ", "\n", 2) anchor [0.5,0.5] style "map_text_style"
+            $ x_pos += 1
+            if x_pos >= max_places_per_row + 0.5:
+                $ x_pos += 0.5
+                $ x_pos += -max_places_per_row
+                $ y_pos += 1
 
         frame:
             background None

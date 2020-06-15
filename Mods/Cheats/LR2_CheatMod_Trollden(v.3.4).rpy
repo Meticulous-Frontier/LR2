@@ -708,7 +708,7 @@ screen cmw(): # Cheats affecting the general world
                     textbutton "Dinner Date" action Call("dinner_date", the_person) style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "dinner_date"
                     textbutton "Mom NTR" action Call("mom_ntr_mod_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Mom NTR Event"
                     textbutton "Sister NTR" action Call("sister_ntr_crisis_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Sister NTR Event"
-                    textbutton "Shower Scenes" action Call("shower_crisis_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Shower Spy Event"
+                    textbutton "Shower Scenes" action Call("morning_shower_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Shower Spy Event"
 
                 vbox:
                     textbutton "Sister Phone" action Call("sister_phone_crisis_action_label") style "cheatbutton_style" text_style "cheattext_style" xsize 220 tooltip "Your sister sends messages to your phone"

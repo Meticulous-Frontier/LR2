@@ -27,7 +27,6 @@ init 1301 python:
 ############################
 ##### Sarah Personality#####
 ############################
-# <editor-fold
 label Sarah_introduction(the_person):  #This shouldn't proc... ever?
     mc.name "Excuse me, could I bother you for a moment?"
     "She turns around and looks you up and down."
@@ -105,7 +104,15 @@ label Sarah_sex_responses(the_person):
             the_person.char "Don't stop! You're going to make me cum, don't you dare stop!"
 
     return
-
+label Sarah_sex_responses_oral(the_person):
+    call relaxed_sex_responses_oral(the_person) from _call_Sarah_sex_responses_oral
+    return
+label Sarah_sex_responses_vaginal(the_person):
+    call relaxed_sex_responses_vaginal(the_person) from _call_Sarah_sex_responses_vaginal
+    return
+label Sarah_sex_responses_anal(the_person):
+    call relaxed_sex_responses_anal(the_person) from _call_Sarah_sex_responses_anal
+    return
 label Sarah_climax_responses_foreplay(the_person):
     if the_person.sluttiness > 50:
         if the_person.event_triggers_dict.get("dating_path", False) == True:
@@ -455,7 +462,12 @@ label Sarah_flirt_response_high(the_person):
             the_person.char "I guess, I just wish you would be a little more discrete."
             "She places a gentle hand on your shoulder and kisses you on the cheek."
     return
-
+label Sarah_flirt_response_girlfriend(the_person):
+    call relaxed_flirt_response_girlfriend(the_person) from _call_Sarah_flirt_response_girlfriend
+    return
+label Sarah_flirt_response_affair(the_person):
+    call relaxed_flirt_response_affair(the_person) from _call_Sarah_flirt_response_affair
+    return
 label Sarah_cum_face(the_person):
     if the_person.obedience > 130:
         if the_person.sluttiness > 60:
@@ -487,11 +499,11 @@ label Sarah_cum_mouth(the_person):
     return
 
 label Sarah_cum_vagina(the_person):
-    #TODO
+    call relaxed_cum_vagina(the_person) from _call_Sarah_cum_vagina
     return
 
 label Sarah_cum_anal(the_person):
-    #TODO
+    call relaxed_cum_anal(the_person) from _call_Sarah_cum_anal
     return
 
 label Sarah_suprised_exclaim(the_person):
@@ -696,6 +708,263 @@ label Sarah_improved_serum_unlock(the_person):
     mc.name "Go on, I'm interested."
     the_person.char "Our testing procedures focus on human safety, which I'll admit is important, but it doesn't leave us with much information about the subjective effects of our creations."
     the_person.char "What I want to do is take a dose of our serum myself, then have you record me while you run me through some questions."
+    return
+
+label Sarah_kissing_taboo_break(the_person):
+    if the_person.love >= 20:
+        the_person.char "A kiss? Of course! After all these years, this is like a dream come true..."
+    else:
+        the_person.char "Oh! Of course! Just for you [the_person.mc_title]!"
+    return
+label Sarah_touching_body_taboo_break(the_person):
+    if the_person.effective_sluttiness() >= 30:
+        the_person.char "Are you as excited as I am? I've been imagining your hands on me for years..."
+    elif the_person.love >= 20:
+        the_person.char "Do you think we're ready for this? I like you, but it seems like a big step..."
+        mc.name "Tell me what you think?"
+        "You can see the answer in her eyes before she says anything."
+        the_person.char "I'm ready if you are."
+    else:
+        the_person.char "I don't know if I'm ready for this [the_person.mc_title]."
+        the_person.char "We've known each other for so long. You feel more like a brother..."
+        mc.name "This doesn't have to mean anything unless we want it to. Just relax and let your body tell you what's right."
+    return
+
+label Sarah_touching_penis_taboo_break(the_person):
+    if the_person.effective_sluttiness() >= 35:
+        the_person.char "Are you ready? I've wondered what your cock would feel like for years."
+        mc.name "I've wondered what your hand would feel like."
+        the_person.char "Well, let's both satisfy the other person's curiosity then!"
+    elif the_person.love >= 20:
+        the_person.char "Your cock looks so big. I just want to make it feel good."
+    else:
+        the_person.char "Oh my god, look at how hard you've gotten. I didn't think it would be so big."
+        mc.name "Go on, give it a touch."
+        the_person.char "I... I don't know if I should."
+        mc.name "Why not? It's right there, I certainly don't mind."
+        the_person.char "Fine, but just for a second or two..."
+    return
+
+label Sarah_touching_vagina_taboo_break(the_person):
+    if the_person.effective_sluttiness() >= 35:
+        the_person.char "Do it [the_person.mc_title]. I've been fantasizing about this moment since I hit puberty."
+    elif the_person.love >= 20:
+        the_person.char "I'm so nervous [the_person.mc_title]. After all these years... I never imagined this would happen!"
+        mc.name "Just take a deep breath and relax. You trust me, right?"
+        the_person.char "Of course. I trust you. I always have."
+    else:
+        the_person.char "I don't know if we should be doing this [the_person.mc_title]..."
+        mc.name "Just take a deep breath and relax. I'm just going to touch you a little, and if you don't like it I'll stop."
+        the_person.char "Just a little?"
+        mc.name "Just a little. Trust me, it's going to feel amazing."
+    return
+
+label Sarah_sucking_cock_taboo_break(the_person):
+    mc.name "I want you to do something for me."
+    the_person.char "Mhmm? What do you want me to do for you?"
+    mc.name "I want you to suck on my cock."
+    if the_person.effective_sluttiness() >= 45:
+        the_person.char "Do you really want me to try?"
+        "You nod and she bites her lip in anticipation."
+        the_person.char "Mmm, okay. I can't wait to hear you moan!"
+    elif the_person.love >= 30:
+        the_person.char "I figured this this was coming soon."
+        mc.name "So..."
+        "She gives you a warm smile."
+        the_person.char "You mean a lot to me. I'll do it, just to make you feel good!"
+    else:
+        the_person.char "Oh my god, do you really want me to do that?"
+        "She laughs nervously and shakes her head."
+        the_person.char "You're crazy! I couldn't..."
+        mc.name "Sure you could. Just kneel down and give it a taste."
+        the_person.char "No, I mean what would people think?"
+        mc.name "Who's going to know, and why do you care what people think?"
+        mc.name "Just suck on it a little, and if you don't like doing it you can stop."
+        "She shakes her head again, but you can see her resolve breaking the more she thinks about it."
+        the_person.char "...Fine. I'll do it."
+        mc.name "Do what?"
+        "She smiles and laughs."
+        the_person.char "You're the worst. I'll suck on your cock, [the_person.mc_title]. Happy?"
+        mc.name "Not as happy as I'm about to be, that's for sure."
+    return
+
+label Sarah_licking_pussy_taboo_break(the_person):
+    mc.name "I want to taste your pussy [the_person.title]. Are you ready?"
+    if the_person.effective_sluttiness() >= 45:
+        the_person.char "My body is as ready as its ever going to be."
+    elif the_person.love >= 30:
+        the_person.char "I'm not sure if \"ready\" is the right word, but you can keep going."
+        the_person.char "I'm all yours. If you want to do something like that, I'm not going to say no!"
+        mc.name "Just relax and enjoy, you'll have a great time."
+    else:
+        if the_person.has_taboo("sucking_cock"):
+            the_person.char "Whoa, really?"
+            "She laughs nervously, but watch a wave of arousal sweep through her."
+            the_person.char "Alright... You can eat me out if you really want to [the_person.mc_title]."
+
+        else:
+            the_person.char "I knew you wouldn't make me blow you without repaying the favor!"
+            the_person.char "Alright then, you go for it."
+        mc.name "Just relax and enjoy."
+    return
+
+label Sarah_vaginal_sex_taboo_break(the_person):
+        if the_person.effective_sluttiness() >= 60:
+            the_person.char "Oh my god... its actually happening."
+            "She looks at you a bit sheepishly."
+            the_person.char "You don't know how long I've fantasized about finally doing this. Let's do it!"
+        elif the_person.love >= 45:
+            "[the_person.title] nods eagerly."
+            the_person.char "I'm ready [the_person.mc_title], I'm ready to feel you inside me."
+        else:
+            if the_person.has_taboo("anal_sex"):
+                the_person.char "So this is it, huh?"
+                mc.name "Looks like it. Are you ready?"
+                the_person.char "No... But I don't want you to stop either."
+            else:
+                "[the_person.title] giggles."
+                the_person.char "This feels so backwards! You've already been in my ass, but now we're doing it properly."
+                "She shrugs."
+                the_person.char "At lest this time it should be easier for you to fit inside."
+        return
+
+label Sarah_anal_sex_taboo_break(the_person):
+        if the_person.effective_sluttiness() >= 75:
+            "[the_person.title] takes a few deep breaths."
+            the_person.char "Whew, I think I'm ready!"
+            the_person.char "Fuck me in the ass [the_person.mc_title]! Stretch me out and ruin me!"
+
+        elif the_person.love >= 60:
+            the_person.char "I would do anything for you. If you want to put it in there, I'm willing to try!"
+
+        else:
+            the_person.char "Oh my god, you're actually going to do it! Fuck, I hope you fit!"
+            mc.name "Don't worry, I'll make it fit."
+        return
+
+label Sarah_condomless_sex_taboo_break(the_person):
+        if the_person.get_opinion_score("bareback sex") > 0:
+            the_person.char "You want to do me bare? That's so hot to hear you say something like that."
+            if the_person.on_birth_control:
+                the_person.char "I'm on the pill, so it should be fine. Let's go!"
+            elif the_person.get_opinion_score("creampies") > 0:
+                the_person.char "You should probably know, before we start, that I'm not on birth control."
+                if the_person.is_highly_fertile():
+                    the_person.char "Also... I'm pretty much at peak fertility right now. I'd almost definitely get pregnant."
+                mc.name "Do you want me to pull out?"
+                "She bites her lip and shakes her head."
+                the_person.char "No, not particularly."
+            elif the_person.get_opinion_score("creampies") < 0:
+                the_person.char "You'll need to pull out though. The last thing in the world I want is to get knocked up."
+            else:
+                the_person.char "I'm not on the pill though. You'll need to pull out so you don't knock me up, got it?"
+
+        elif the_person.love > 60:
+            the_person.char "I want to feel close to you too [the_person.mc_title]."
+            if the_person.on_birth_control:
+                the_person.char "I'm on birth control, so you don't need to worry about getting me pregnant."
+            elif the_person.get_opinion_score("creampies") > 0:
+                the_person.char "If we're doing this, I don't want you to pull out when you finish either."
+                mc.name "Are you on the pill?"
+                "She shakes her head."
+                the_person.char "No, but for you I'm okay with that risk."
+            elif the_person.get_opinion_score("creampies") < 0:
+                the_person.char "You'll need to pull out though. I'm not ready to get pregnant yet, okay?"
+            else:
+                if the_person.kids == 0:
+                    the_person.char "You'll need to pull out though. I don't think either of us want a kid yet, right?"
+                else:
+                    the_person.char "You'll need to pull out though. I already have enough kids."
+
+        else:
+            if the_person.on_birth_control:
+                the_person.char "You don't want to use protection? I'm on birth control, but isn't there still a chance?"
+                the_person.char "As long as you pull out it should be fine, I think."
+            elif the_person.has_taboo("vaginal_sex"):
+                the_person.char "You don't want to use protection? I'm not on birth control, what if you get me pregnant?"
+                mc.name "I'll pull out. Don't you want our first time to be special?"
+                the_person.char "I do... Fine, just please be careful where you cum."
+            else:
+                the_person.char "You don't want to use protection? I'm not on birth control, what if you get me pregnant?"
+                mc.name "I'll pull out. Don't you want to know how much better it feels without a condom on?"
+                the_person.char "I do... Okay, you can go in raw. Please be careful where you cum though."
+        return
+
+label Sarah_underwear_nudity_taboo_break(the_person, the_clothing):
+    if the_person.effective_sluttiness() > 30 - (the_person.get_opinion_score("skimpy outfits") * 5):
+        the_person.char "You want to get a look at my underwear, huh?"
+        if the_person.has_taboo(["bare_tits","bare_pussy"]):
+            mc.name "I do. You've got good fashion sense, I bet you wear wear some cute underwear too."
+            the_person.char "Well, let's get this off and you can check for yourself."
+        else:
+            mc.name "I do. I've already seen you naked, but I appreciate your fashion sense."
+            the_person.char "Let's get this off then."
+
+    elif the_person.love > 15:
+        the_person.char "You want to see me in my underwear, huh? That's really cute."
+        if the_person.has_taboo(["bare_tits","bare_pussy"]):
+            mc.name "Damn right I do. Come on, let's get you out of this..."
+
+        else:
+            mc.name "I've already seen you naked, so what's there to hide? Let's get this off..."
+
+    else:
+        the_person.char "But I'll only be in my underwear if I take off my [the_clothing.display_name]."
+
+        if the_person.has_taboo(["bare_tits","bare_pussy"]):
+            mc.name "Yeah, that's kind of the point."
+            the_person.char "I get that, but don't you think it's going a little far?"
+            mc.name "What's so different between your underwear and your [the_clothing.display_name]? It's all just clothing."
+            the_person.char "I guess... Okay, let's do this before I chicken out!"
+        else:
+            mc.name "Yeah, that's kind of the point. I've already seen you naked, what's special about your underwear?"
+            the_person.char "I guess you're right. Okay, let's do it!"
+    return
+
+label Sarah_bare_tits_taboo_break(the_person, the_clothing):
+    if Sarah_has_bigger_tits():
+        the_person.char "Well... I guess you were the one who helped make my bigger tits happen."
+        the_person.char "Okay! I bet you're going to love them!"
+        "She shakes her chest for you, jiggling the large tits hidden underneath her [the_clothing.display_name]."
+    else:
+        the_person.char "Are you sure you want to see... my chest?"
+        mc.name "Well, I want to see ALL of you, but for now I'll settle with your top half."
+        the_person.char "Well... okay. Fuck it! Let's do it!"
+    return
+
+label Sarah_bare_pussy_taboo_break(the_person, the_clothing):
+    if the_person.effective_sluttiness() > (50 - the_person.get_opinion_score("showing her ass") * 5):
+        the_person.char "Ready to see my pussy? Well, what are you waiting for?"
+
+    elif the_person.love > 35:
+        the_person.char "If you take that off my pussy's going to be out, you know."
+        if the_person.has_taboo("touching_vagina"):
+            mc.name "I know, that was the plan."
+            the_person.char "Well... I guess we both knew where this was going. Okay, go for it."
+        else:
+            mc.name "You've let me touch it already, so what's the big deal about taking a look?"
+            the_person.char "Nothing, it's just... It feels like a big step, but I trust you."
+
+    else:
+        the_person.char "Wait! If you take that off you'll be able to see my pussy."
+        if the_person.has_taboo("touching_vagina"):
+            mc.name "That's the point, yeah. What's wrong?"
+        else:
+            mc.name "You've already let me feel it, so what's the issue?"
+
+        the_person.char "I... I don't know, I'm just nervous!"
+        mc.name "Just take a deep breath and relax. I'm going to get these [the_clothing.display_name] off of you."
+    return
+
+label Sarah_facial_cum_taboo_break(the_person):
+    return
+label Sarah_mouth_cum_taboo_break(the_person):
+    return
+label Sarah_body_cum_taboo_break(the_person):
+    return
+label Sarah_creampie_taboo_break(the_person):
+    return
+label Sarah_anal_creampie_taboo_break(the_person):
     return
 
 label Sarah_get_drunk_dialogue(the_person, intoxication_level):

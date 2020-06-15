@@ -75,7 +75,7 @@ init 2 python:
         sarah.event_triggers_dict["favorite_drink"] = "appletini"
 
         # add appoint
-        office.actions.append(HR_director_appointment_action)
+        office.add_action(HR_director_appointment_action)
 
         Sarah_intro = Action("Sarah_intro",Sarah_intro_requirement,"Sarah_intro_label") #Set the trigger day for the next monday. Monday is day%7 == 0
         mc.business.mandatory_crises_list.append(Sarah_intro) #Add the event here so that it pops when the requirements are met.
@@ -224,6 +224,11 @@ init -1 python:
         elif (day - sarah.event_triggers_dict.get("fertile_start_day", -1)) % 28 < 5:   #  Generally fertile for 5 days every 28 days
             return True
         return False
+
+    def Sarah_has_bigger_tits():
+        if sarah.event_triggers_dict.get("epic_tits_progress", 0) > 1 or sarah.has_large_tits():
+            return True
+        return False #Just in case we used serums later
 
 
     def Sarah_remove_bra_from_wardrobe(wardrobe):  #Test this function
@@ -2076,6 +2081,8 @@ label Sarah_initial_threesome_label():
         $ scene_manager.remove_actor(the_person_one)
         "You say goodbye, and slowly drift off to sleep."
         call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_initial_threesome_no_overnight
+        $ del the_person_one
+        $ del the_person_two
         return
     mc.name "You're staying tonight... right?"
     the_person_one.char "Oh god, I don't think I could get up, even if I wanted to. Which I don't."
@@ -2350,7 +2357,7 @@ label watch_strip_show(the_person):  #This scene assumes scene manager is runnin
             python:
                 blackmail_2_confront_action = Action("Confront her about her stripping", blackmail_2_confront_requirement, "cousin_blackmail_level_2_confront_label",
                     menu_tooltip = "Tell her that you know about her job as a stripper and use it as further leverage.")
-                cousin_role.actions.append(blackmail_2_confront_action)
+                cousin_role.add_action(blackmail_2_confront_action)
                 showgirl.event_triggers_dict["seen_cousin_stripping"] = True
 
             "It takes you a moment to recognize your cousin, [showgirl.title], as she struts out onto the stage."
@@ -2744,7 +2751,7 @@ label Sarah_weekend_date_strip_club_label():
                 the_person.char "Ugh, the girls they have working here are so hot."
                 $ the_person.change_arousal(renpy.random.randint(5,15))
                 $ mc.change_arousal(renpy.random.randint(5,15))
-
+                $ showgirl = None
             "Get a private dance  -$200":
                 mc.name "Want to get a private dance? I'll get it setup."
                 the_person.char "Ohh, now we're talking! Sounds great!"
@@ -2966,7 +2973,7 @@ label Sarah_date_strip_club_private_dance_label(the_person):
             "Glancing at [the_person.title], you can tell she is a little disappointed, but she quickly returns her attention to the girl in front of her."
 
     "Soon it is time for the private dance to end."
-    $ scene_manager.update_actor(showgirl, position = "stand4")
+    $ scene_manager.update_actor(showgirl_1, position = "stand4")
     $ scene_manager.update_actor(showgirl_2, position = "stand5")
     showgirl_1.char "Mmm, that was fun! It's been forever since I had a female client. They always give such soft touches..."
     if showgirl_2 is cousin and showgirl_2.sluttiness > 80:

@@ -474,7 +474,10 @@ label transition_SB_anal_standing_SB_doggy_standing(the_girl, the_location, the_
     if the_girl.effective_sluttiness() < the_girl.get_no_condom_threshold():
         the_girl.char "Mmm, fuck me [the_girl.mc_title]. Use all of my holes for your pleasure!"
     elif not mc.condom:
-        the_girl.char "Wait, wait... I can't risk getting pregnant, I need you to put on a condom."
+        if the_girl.on_birth_control:
+            the_girl.char "Wait, please put on a condom, I feel safer that way."
+        else:
+            the_girl.char "Wait, wait... I can't risk getting pregnant, I need you to put on a condom."
         menu:
             "Put on a condom":
                 "You pull your dick back and quickly put on a condom. Then you line up your dick with her dripping wet pussy."

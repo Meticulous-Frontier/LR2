@@ -35,7 +35,7 @@ init 5 python:
 
 label activate_body_type_preference(stack):
     python:
-        bedroom.actions.append(change_body_type_action)
+        bedroom.add_action(change_body_type_action)
         set_persistent_body_type_preferences()
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
@@ -43,8 +43,7 @@ label activate_body_type_preference(stack):
 
 label update_body_type_preference(stack):
     python:
-        if not change_body_type_action in bedroom.actions:
-            bedroom.actions.append(change_body_type_action)
+        bedroom.add_action(change_body_type_action)
         set_persistent_body_type_preferences()
 
         # continue on the hijack stack if needed

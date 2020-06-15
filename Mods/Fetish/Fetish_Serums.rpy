@@ -1,156 +1,154 @@
 init -2 python:
-    def get_suggest_tier(the_person):   #Returns a value of 0-3 depending on the person's suggestibility.
-        if the_person.suggestibility < 15:
+    def get_suggest_tier(person):   #Returns a value of 0-3 depending on the person's suggestibility.
+        if person.suggestibility < 15:
             return 0
-        elif the_person.suggestibility < 35:
+        elif person.suggestibility < 35:
             return 1
-        elif the_person.suggestibility < 55:
+        elif person.suggestibility < 55:
             return 2
-        elif the_person.suggestibility < 75:
+        elif person.suggestibility < 75:
             return 3
         else:
             return 4 #Edge case, has suggestibility not yet in game
 
-    def get_slut_tier(the_person):   #returns the heart value of the person
-        if the_person.core_sluttiness < 20:
+    def get_slut_tier(person):   #returns the heart value of the person
+        if person.core_sluttiness < 20:
             return 0
-        elif the_person.core_sluttiness < 40:
+        elif person.core_sluttiness < 40:
             return 1
-        elif the_person.core_sluttiness < 60:
+        elif person.core_sluttiness < 60:
             return 2
-        elif the_person.core_sluttiness < 80:
+        elif person.core_sluttiness < 80:
             return 3
-        elif the_person.core_sluttiness < 100:
+        elif person.core_sluttiness < 100:
             return 4
         else:
             return 5
 
 init -1 python:
-    def increase_fetish_sexy_opinion(the_person, fetish_list, max_score):
+    def increase_fetish_sexy_opinion(person, fetish_list, max_score):
         random_fetish_key = get_random_from_list(fetish_list)
-        opinion_score = the_person.get_opinion_score(random_fetish_key)
-        if opinion_score < max_score:
-            the_person.increase_opinion_score(random_fetish_key)
+        person.increase_opinion_score(random_fetish_key, max_score)
         return
 
-    def fetish_basic_function_on_turn(the_person, add_to_log): #Developes basic sexual desires based on suggestability. At low tiers, turns hates to neutral.
+    def fetish_basic_function_on_turn(person, add_to_log): #Developes basic sexual desires based on suggestability. At low tiers, turns hates to neutral.
         fetish_random_roll_1 = renpy.random.randint(0,100)
         fetish_random_roll_2 = renpy.random.randint(0,100)
 
-        tier = get_suggest_tier(the_person)
+        tier = get_suggest_tier(person)
         if fetish_random_roll_1 < 10 + (tier * 5):
-            increase_person_sex_skill(the_person, "Foreplay", 2 + tier)
+            person.increase_sex_skill("Foreplay", 2 + tier)
         if fetish_random_roll_2 < 25 + (tier * 5):
-            increase_fetish_sexy_opinion(the_person, FETISH_BASIC_OPINION_LIST, tier - 1)
+            increase_fetish_sexy_opinion(person, FETISH_BASIC_OPINION_LIST, tier - 1)
         return
 
-    def fetish_exhibition_on_turn(the_person, add_to_log):
+    def fetish_exhibition_on_turn(person, add_to_log):
         fetish_random_roll_2 = renpy.random.randint(0,100)
 
-        tier = get_suggest_tier(the_person)
+        tier = get_suggest_tier(person)
         if fetish_random_roll_2 < 25 + (tier * 5):
-            increase_fetish_sexy_opinion(the_person, FETISH_EXHIBITION_OPINION_LIST, tier - 1)
+            increase_fetish_sexy_opinion(person, FETISH_EXHIBITION_OPINION_LIST, tier - 1)
         return
 
-    def fetish_oral_function_on_turn(the_person, add_to_log):
+    def fetish_oral_function_on_turn(person, add_to_log):
         fetish_random_roll_1 = renpy.random.randint(0,100)
         fetish_random_roll_2 = renpy.random.randint(0,100)
 
-        tier = get_suggest_tier(the_person)
+        tier = get_suggest_tier(person)
         if fetish_random_roll_1 < 10 + (tier * 5):
-            increase_person_sex_skill(the_person, "Oral", 2 + tier)
+            person.increase_sex_skill("Oral", 2 + tier)
         if fetish_random_roll_2 < 25 + (tier * 5):
-            increase_fetish_sexy_opinion(the_person, FETISH_ORAL_OPINION_LIST, tier - 1)
+            increase_fetish_sexy_opinion(person, FETISH_ORAL_OPINION_LIST, tier - 1)
         return
 
-    def fetish_vaginal_function_on_turn(the_person, add_to_log):
+    def fetish_vaginal_function_on_turn(person, add_to_log):
         fetish_random_roll_1 = renpy.random.randint(0,100)
         fetish_random_roll_2 = renpy.random.randint(0,100)
 
-        tier = get_suggest_tier(the_person)
+        tier = get_suggest_tier(person)
         if fetish_random_roll_1 < 10 + (tier * 5):
-            increase_person_sex_skill(the_person, "Vaginal", 2 + tier)
+            person.increase_sex_skill("Vaginal", 2 + tier)
         if fetish_random_roll_2 < 25 + (tier * 5):
-            increase_fetish_sexy_opinion(the_person, FETISH_VAGINAL_OPINION_LIST, tier - 1)
+            increase_fetish_sexy_opinion(person, FETISH_VAGINAL_OPINION_LIST, tier - 1)
 
         if SB_FETISH_EVENT_ACTIVE(): # quick exit fetish event is active, so skip check
             return
 
-        if tier >= 3 and the_person.sex_skills["Vaginal"] >= 5 and the_person.get_opinion_score("vaginal sex") >= 2:
-            if the_person.sluttiness >= 80 and not SB_check_fetish(the_person, vaginal_fetish_role):
-                if SB_get_fetish_count(the_person) < store.max_fetishes_per_person:
-                    # renpy.say("", "Trigger vaginal fetish " + the_person.name)
-                    if the_person is mom:
+        if tier >= 3 and person.sex_skills["Vaginal"] >= 5 and person.get_opinion_score("vaginal sex") >= 2:
+            if person.sluttiness >= 80 and not SB_check_fetish(person, vaginal_fetish_role):
+                if SB_get_fetish_count(person) < store.max_fetishes_per_person:
+                    # renpy.say("", "Trigger vaginal fetish " + person.name)
+                    if person is mom:
                         add_sb_fetish_mom_vaginal_event()
-                    elif the_person is lily:
+                    elif person is lily:
                         add_sb_fetish_lily_vaginal_event()
                     else:
-                        add_sb_fetish_vaginal_crisis(the_person)
+                        add_sb_fetish_vaginal_crisis(person)
         return
 
-    def fetish_anal_function_on_turn(the_person, add_to_log):
+    def fetish_anal_function_on_turn(person, add_to_log):
         fetish_random_roll_1 = renpy.random.randint(0,100)
         fetish_random_roll_2 = renpy.random.randint(0,100)
 
-        tier = get_suggest_tier(the_person)
+        tier = get_suggest_tier(person)
         if fetish_random_roll_1 < 10 + (tier * 5):
-            increase_person_sex_skill(the_person, "Anal", 2 + tier)
+            person.increase_sex_skill("Anal", 2 + tier)
         if fetish_random_roll_2 < 25 + (tier * 5):
-            increase_fetish_sexy_opinion(the_person, FETISH_ANAL_OPINION_LIST, tier - 1)
+            increase_fetish_sexy_opinion(person, FETISH_ANAL_OPINION_LIST, tier - 1)
 
         if SB_FETISH_EVENT_ACTIVE(): # quick exit fetish event is active, so skip check
             return
 
-        if tier >= 3 and the_person.sex_skills["Anal"] >= 5 and the_person.get_opinion_score("anal sex") >= 2:
-            if the_person.sluttiness >= 90 and not SB_check_fetish(the_person, anal_fetish_role):
-                if SB_get_fetish_count(the_person) < store.max_fetishes_per_person:
-                    # renpy.say("", "Trigger anal fetish " + the_person.name)
-                    if the_person is lily:
+        if tier >= 3 and person.sex_skills["Anal"] >= 5 and person.get_opinion_score("anal sex") >= 2:
+            if person.sluttiness >= 90 and not SB_check_fetish(person, anal_fetish_role):
+                if SB_get_fetish_count(person) < store.max_fetishes_per_person:
+                    # renpy.say("", "Trigger anal fetish " + person.name)
+                    if person is lily:
                         add_SB_lily_anal_dp_fetish_event()
-                    elif the_person is mom:
+                    elif person is mom:
                         mom_weekly_pay = exists_in_mandatory_crisis_list("mom_weekly_pay_label")
                         if mom_weekly_pay: # replace default mom weekly pay with new event
                             # renpy.say("", "Replacing default mom weekly pay event")
                             mc.business.mandatory_crises_list.remove(mom_weekly_pay)
                             add_mom_anal_fetish_event()
-                    elif the_person is starbuck:
+                    elif person is starbuck:
                         if starbuck.shop_investment_rate == 6.0:
                             add_sb_starbuck_anal_intro_event()
-                    elif the_person is stephanie and head_researcher in the_person.special_role and the_person.personality != bimbo_personality:
+                    elif person is stephanie and head_researcher in person.special_role and person.personality != bimbo_personality:
                         add_stephanie_anal_fetish_action()
-                    elif employee_role in the_person.special_role:
-                        add_sb_fetish_anal_crisis(the_person)
+                    elif employee_role in person.special_role:
+                        add_sb_fetish_anal_crisis(person)
+                    else:
+                        add_sb_fetish_anal_crisis_non_employee(person)
         return
 
-    def fetish_cum_function_on_turn(the_person, add_to_log):
+    def fetish_cum_function_on_turn(person, add_to_log):
         fetish_random_roll_2 = renpy.random.randint(0,100)
 
-        tier = get_suggest_tier(the_person)
+        tier = get_suggest_tier(person)
         if fetish_random_roll_2 < 25 + (tier * 5):
-            increase_fetish_sexy_opinion(the_person, FETISH_CUM_OPINION_LIST,  tier - 1)
+            increase_fetish_sexy_opinion(person, FETISH_CUM_OPINION_LIST,  tier - 1)
 
         if SB_FETISH_EVENT_ACTIVE(): # quick exit fetish event is active, so skip check
             return
 
-        if tier >= 3 and the_person.sex_skills["Oral"] >= 4:
-            if the_person.sluttiness >= 90 and SB_get_cum_score(the_person) >= 8:
+        if tier >= 3 and person.sex_skills["Oral"] >= 4:
+            if person.sluttiness >= 90 and SB_get_cum_score(person) >= 8:
                 # only allow one cum fetish either internal or external
-                if not (SB_check_fetish(the_person, cum_external_role) or SB_check_fetish(the_person, cum_internal_role)):
-                    if SB_get_fetish_count(the_person) < store.max_fetishes_per_person:
-                        # renpy.say("", "Trigger cum fetish " + the_person.name)
-                        if the_person is lily:
+                if not (SB_check_fetish(person, cum_external_role) or SB_check_fetish(person, cum_internal_role)):
+                    if SB_get_fetish_count(person) < store.max_fetishes_per_person:
+                        # renpy.say("", "Trigger cum fetish " + person.name)
+                        if person is lily:
                             add_sb_fetish_lily_cum_event()
-                        elif the_person is mom:
+                        elif person is mom:
                             add_sb_fetish_mom_cum_event()
-                        elif the_person is stephanie and head_researcher in the_person.special_role and the_person.personality != bimbo_personality:
+                        elif person is stephanie and head_researcher in person.special_role and person.personality != bimbo_personality:
                             add_sb_fetish_stephanie_cum_event()
-                        elif employee_role in the_person.special_role:
-                            add_sb_fetish_cum_crisis(the_person)
+                        elif employee_role in person.special_role:
+                            add_sb_fetish_cum_crisis(person)
+                        else:
+                            add_sb_fetish_cum_crisis_non_employee(person)
         return
-
-    def increase_person_sex_skill(the_person, skill_name, max_skill):
-        if the_person.sex_skills[skill_name] < max_skill:
-            the_person.sex_skills[skill_name] += 1
 
     def add_fetish_serum_traits():
         FETISH_RESEARCH_PERCENT = 1     #1 = 100%

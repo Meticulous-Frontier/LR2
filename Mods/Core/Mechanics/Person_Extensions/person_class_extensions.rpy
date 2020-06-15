@@ -109,6 +109,24 @@ init -1 python:
     # add follow_mc attribute to person class (without sub-classing)
     Person.next_day_outfit = property(get_person_next_day_outfit, set_person_next_day_outfit, del_person_next_day_outfit, "Allow for forcing the next day outfit a girl will wear (set planned outfit).")
 
+    def get_person_weight(self):
+        if not hasattr(self, "_weight"):
+            if self.body_type == "thin_body":
+                self._weight = 60 * self.height
+            elif self.body_type == "standard_body":
+                self._weight = 75 * self.height
+            else:
+                self._weight = 90 * self.height
+        return self._weight
+
+    def set_person_weight(self, value):
+        self._weight = value
+
+    def del_person_weight(self):
+        del self.weight
+
+    Person.weight = property(get_person_weight, set_person_weight, del_person_weight, "The weight of the person in KG.")
+
     ## MATCH SKIN COLOR
     # Matches skin, body, face and expression images based on input of skin color
     def match_skin(self, color):
@@ -125,6 +143,29 @@ init -1 python:
         self.expression_images = Expression("default", self.skin, self.face_style)
         return
     Person.match_skin = match_skin
+
+
+    ## SET HAIRSTYLE VIA Clothing ITEM, maintain color etc.
+
+    def set_hair_style(self, new_clothing):
+        cs = renpy.current_screen()
+        self.hair_style = new_clothing
+
+        if cs:
+            self.hair_colour = [cs.scope["selected_hair_colour_name"], [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]]
+
+    Person.set_hair_style = set_hair_style
+
+    # SET PUBIC STYLE Clothing ITEM
+
+    def set_pubic_style(self, new_clothing):
+        cs = renpy.current_screen()
+        self.pubes_style = new_clothing
+
+        if cs:
+            self.hair_colour = [cs.scope["selected_hair_colour_name"], [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]]
+
+    Person.set_pubic_style = set_pubic_style
 
     ## CHANGE HEIGHT EXTENSION
     # Returns True when the persons height has changed; otherwise False
@@ -156,7 +197,6 @@ init -1 python:
     # Returns True when the persons body type has changed; otherwise False
     # chance is probability percentage that weight change for amount will occur (used by serums)
     def change_weight(self, amount, chance):
-        check_person_weight_attribute(self)
         if (amount == 0):
             return False
 
@@ -523,7 +563,7 @@ init -1 python:
             clothing = self.outfit.remove_random_any(exclude_feet = True, do_not_remove = True)
         return clothing
 
-    Person.choose_strip_clothing_item = choose_strip_clothing_item 
+    Person.choose_strip_clothing_item = choose_strip_clothing_item
 
     def run_move_enhanced(self,location):
         self.sexed_count = 0 #Reset the counter for how many times you've been seduced, you might be seduced multiple times in one day!
@@ -626,7 +666,7 @@ init -1 python:
             # run extension code (clean up situational dictionaries)
             person.situational_sluttiness.clear()
             person.situational_obedience.clear()
-        
+
         return run_day_wrapper
 
     # wrap up the run_day function
@@ -687,7 +727,7 @@ init -1 python:
             else:
                 self.sexy_opinions[topic] = [score, add_to_log]
 
-        if topic in opinions_list:                
+        if topic in opinions_list:
             if topic in self.opinions:
                 self.opinions[topic][0] = score
             else:
@@ -700,13 +740,11 @@ init -1 python:
     Person.update_opinion_with_score = update_opinion_with_score
 
     ## Increase the opinion on a specific topic (opinion)
-    def increase_opinion_score(self, topic, add_to_log = True):
+    def increase_opinion_score(self, topic, max_value = 2, add_to_log = True):
         score = self.get_opinion_score(topic)
 
-        if score < 2:
-            score += 1
-
-        self.update_opinion_with_score(topic, score, add_to_log)
+        if score < max_value:
+            self.update_opinion_with_score(topic, score + 1, add_to_log)
         return
 
     # Add increase opinion function to person class
@@ -717,9 +755,7 @@ init -1 python:
         score = self.get_opinion_score(topic)
 
         if score > -2:
-            score -= 1
-
-        self.update_opinion_with_score(topic, score, add_to_log)
+            self.update_opinion_with_score(topic, score - 1, add_to_log)
         return
 
     # Add decrease opinion function to person class
@@ -728,12 +764,52 @@ init -1 python:
     ##Max the opinion on a specific topic (opinion)
     def max_opinion_score(self, topic, add_to_log = True):
         score = self.get_opinion_score(topic)
-        if score < 2:
+        if score != 2:
             self.update_opinion_with_score(topic, 2, add_to_log)
         return
 
     # Add max opinion function to person class
     Person.max_opinion_score = max_opinion_score
+
+    # Change the sex skill of a person to specified score.
+    def update_sex_skill(self, skill, score, add_to_log = True):
+        if skill not in self.sex_skills:
+            return
+
+        current = self.sex_skills[skill]
+        if current == score:
+            return
+
+        self.sex_skills[skill] = score
+        if add_to_log:
+            mc.log_event((self.title or self.name) + " " + skill.lower() + " skill is now at level " + str(score), "float_text_green")
+        return
+
+    Person.update_sex_skill = update_sex_skill
+
+    # increase sex skill of person by one until max_value is reached.
+    def increase_sex_skill(self, skill, max_value = 5, add_to_log = True):
+        if skill not in self.sex_skills:
+            return
+
+        score = self.sex_skills[skill]
+        if score < max_value:
+            self.update_sex_skill(skill, score + 1, add_to_log)
+        return
+
+    Person.increase_sex_skill = increase_sex_skill
+
+    # decrease sex skill of person by one while greater than zero.
+    def decrease_sex_skill(self, skill, add_to_log = True):
+        if skill not in self.sex_skills:
+            return
+
+        score = self.sex_skills[skill]
+        if score > 0:
+            self.update_sex_skill(skill, score - 1, add_to_log)
+        return
+
+    Person.decrease_sex_skill = decrease_sex_skill
 
     # Change Multiple Stats for a person at once (less lines of code, better readability)
     def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut_temp = None, slut_core = None, add_to_log = True):
@@ -786,11 +862,10 @@ init -1 python:
         if emotion is None:
             emotion = self.get_emotion()
 
-        if the_animation is None:
-            the_animation = self.idle_animation
-
         if not can_use_animation():
             the_animation = None
+        elif the_animation is None:
+            the_animation = self.idle_animation
 
         if character_placement is None: # make sure we don't need to pass the position with each draw
             character_placement = character_right
@@ -798,12 +873,10 @@ init -1 python:
         if lighting is None:
             lighting = mc.location.get_lighting_conditions()
 
-        # sometimes there is no outfit set, causing the generate drawlist to fail, not sure why, but try to fix it here.
-        if self.outfit is None:
-            if self.planned_outfit is None:
-                self.planned_outfit = self.wardrobe.decide_on_outfit2(self) # Use enhanced outfit function
-            self.apply_outfit(self.planned_outfit)
-            self.review_outfit(dialogue = False)
+        if the_animation:
+            final_image = self.build_person_animation(the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength)
+        else:
+            final_image = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
 
         # if normal draw person call, clear scene
         if not from_scene:
@@ -811,12 +884,7 @@ init -1 python:
             if show_person_info:
                 renpy.show_screen("person_info_ui",self)
 
-        if the_animation:
-            final_image = self.build_person_animation(the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength)
-        else:
-            final_image = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
-
-        renpy.show(self.name + self.last_name + "_anim",at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=self.name + self.last_name +"_anim")
+        renpy.show(self.name + self.last_name,at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=self.name + self.last_name)
 
     # replace the default draw_person function of the person class
     Person.draw_person = draw_person_enhanced
@@ -839,12 +907,8 @@ init -1 python:
 
         if not can_use_animation():
             the_animation = None
-
-        renpy.scene("Active") # clear layer for new draw action
-        if scene_manager is None:
-            renpy.show_screen("person_info_ui",self)
-        else:   # when we are called from the scene manager we have to draw the other characters
-            scene_manager.draw_scene_without(self)
+        elif the_animation is None:
+            the_animation = self.idle_animation
 
         if the_animation:
             bottom_displayable = self.build_person_animation(the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength = 1.0)
@@ -858,156 +922,89 @@ init -1 python:
         else:
             top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
 
+        renpy.scene("Active") # clear layer for new draw action
+        if scene_manager is None:
+            renpy.show_screen("person_info_ui",self)
+        else:   # when we are called from the scene manager we have to draw the other characters
+            scene_manager.draw_scene_without(self)
+
         renpy.show(self.name+self.last_name+"_new", at_list=[character_placement, scale_person(self.height)], layer = "Active", what = top_displayable, tag = self.name + self.last_name +"_new")
         renpy.show(self.name+self.last_name+"_old", at_list=[character_placement, scale_person(self.height), clothing_fade], layer = "Active", what = bottom_displayable, tag = self.name + self.last_name +"_old")
 
     Person.draw_animated_removal = draw_animated_removal_enhanced
 
-    ####### Begin cum override functions ######
+    ####### Begin cum extension functions ######
 
-    def cum_in_mouth_enhanced(self): #Add the appropriate stuff to their current outfit, and peform any personal checks if rquired.
-        mc.listener_system.fire_event("sex_cum_mouth", the_person = self)
-        if self.outfit.can_add_accessory(mouth_cum):
-            the_cumshot = mouth_cum.get_copy()
-            the_cumshot.layer = 0
-            self.outfit.add_accessory(the_cumshot)
+    def cum_on_face_extended(org_func):
+        def cum_on_face_wrapper(person):
+            # run original function
+            org_func(person)
+            # run extension code
+            mc.listener_system.fire_event("sex_cum_on_face", the_person = person)
 
-        self.change_slut_temp(5*self.get_opinion_score("drinking cum"))
-        self.change_happiness(5*self.get_opinion_score("drinking cum"))
-        self.discover_opinion("drinking cum")
+        return cum_on_face_wrapper
 
-        self.sex_record["Cum in Mouth"] += 1
+    # wrap up the cum_on_face function
+    Person.cum_on_face = cum_on_face_extended(Person.cum_on_face)
+
+    def cum_on_tits_extended(org_func):
+        def cum_on_tits_wrapper(person):
+            # run original function
+            org_func(person)
+            # run extension code
+            mc.listener_system.fire_event("sex_cum_on_tits", the_person = person)
+
+        return cum_on_tits_wrapper
+
+    # wrap up the cum_on_tits function
+    Person.cum_on_tits = cum_on_tits_extended(Person.cum_on_tits)
 
 
-    def cum_in_vagina_enhanced(self):
-        mc.listener_system.fire_event("sex_cum_vagina", the_person = self)
-        if self.outfit.can_add_accessory(creampie_cum):
-            the_cumshot = creampie_cum.get_copy()
-            the_cumshot.layer = 0
-            self.outfit.add_accessory(the_cumshot)
+    def cum_on_stomach_extended(org_func):
+        def cum_on_stomach_wrapper(person):
+            # run original function
+            org_func(person)
+            # run extension code
+            mc.listener_system.fire_event("sex_cum_on_stomach", the_person = person)
 
-        self.change_slut_temp(5*self.get_opinion_score("creampies"))
-        self.change_happiness(5*self.get_opinion_score("creampies"))
-        self.discover_opinion("creampies")
+        return cum_on_stomach_wrapper
 
-        self.sex_record["Vaginal Creampies"] += 1
+    # wrap up the cum_on_stomach function
+    Person.cum_on_stomach = cum_on_stomach_extended(Person.cum_on_stomach)
 
-    def cum_in_ass_enhanced(self):
-        mc.listener_system.fire_event("sex_cum_ass", the_person = self)
-        #TODO: Add an anal specific cumshot once we have renders for it.
-        if self.outfit.can_add_accessory(creampie_cum):
-            the_cumshot = creampie_cum.get_copy()
-            the_cumshot.layer = 0
-            self.outfit.add_accessory(the_cumshot)
-        self.change_slut_temp(5*self.get_opinion_score("anal creampies"))
-        self.change_happiness(5*self.get_opinion_score("anal creampies"))
-        self.discover_opinion("anal creampies")
+    def cum_on_ass_extended(org_func):
+        def cum_on_ass_wrapper(person):
+            # run original function
+            org_func(person)
+            # run extension code
+            mc.listener_system.fire_event("sex_cum_on_ass", the_person = person)
 
-        self.sex_record["Anal Creampies"] += 1
+        return cum_on_ass_wrapper
 
-    def cum_on_face_enhanced(self):
-        mc.listener_system.fire_event("sex_cum_on_face", the_person = self)
-        if self.outfit.can_add_accessory(face_cum):
-            the_cumshot = face_cum.get_copy()
-            the_cumshot.layer = 0
-            self.outfit.add_accessory(the_cumshot)
+    # wrap up the cum_on_ass function
+    Person.cum_on_ass = cum_on_ass_extended(Person.cum_on_ass)
 
-        self.change_slut_temp(5*self.get_opinion_score("cum facials"))
-        self.change_happiness(5*self.get_opinion_score("cum facials"))
-        self.discover_opinion("cum facials")
-
-        self.change_slut_temp(5*self.get_opinion_score("being covered in cum"))
-        self.change_happiness(5*self.get_opinion_score("being covered in cum"))
-        self.discover_opinion("being covered in cum")
-
-        self.sex_record["Cum Facials"] += 1
-
-    def cum_on_tits_enhanced(self):
-        mc.listener_system.fire_event("sex_cum_on_tits", the_person = self)
-        if self.outfit.can_add_accessory(tits_cum):
-            the_cumshot = tits_cum.get_copy()
-            if self.outfit.get_upper_visible():
-                top_layer = self.outfit.get_upper_visible()[0].layer #Get the top most pice of clothing and get it's layer.
-            else:
-                top_layer = -1
-            the_cumshot.layer = top_layer+1 #The cumshot lives on a layer it hit, above the one it hit. Accessories are drawn first in the hirearchy, so they have to be on a level higehr than what they hit.
-            self.outfit.add_accessory(the_cumshot)
-
-        self.change_slut_temp(5*self.get_opinion_score("being covered in cum"))
-        self.change_happiness(5*self.get_opinion_score("being covered in cum"))
-        self.discover_opinion("being covered in cum")
-
-        self.sex_record["Cum Covered"] += 1
-
-    def cum_on_stomach_enhanced(self):
-        mc.listener_system.fire_event("sex_cum_on_stomach", the_person = self)
-        if self.outfit.can_add_accessory(stomach_cum):
-            the_cumshot = stomach_cum.get_copy()
-            if self.outfit.get_upper_visible():
-                top_layer = self.outfit.get_upper_visible()[0].layer #Get the top most pice of clothing and get it's layer.
-            else:
-                top_layer = -1
-            the_cumshot.layer = top_layer+1 #The cumshot lives on a layer it hit, above the one it hit. Accessories are drawn first in the hirearchy, so they have to be on a level higehr than what they hit.
-            self.outfit.add_accessory(the_cumshot)
-
-        self.change_slut_temp(5*self.get_opinion_score("being covered in cum"))
-        self.change_happiness(5*self.get_opinion_score("being covered in cum"))
-        self.discover_opinion("being covered in cum")
-
-        self.sex_record["Cum Covered"] += 1
-
-    def cum_on_ass_enhanced(self):
-        mc.listener_system.fire_event("sex_cum_on_ass", the_person = self)
-        if self.outfit.can_add_accessory(ass_cum):
-            the_cumshot = ass_cum.get_copy()
-            if self.outfit.get_lower_visible():
-                top_layer = self.outfit.get_lower_visible()[0].layer #Get the top most pice of clothing and get it's layer.
-            else:
-                top_layer = -1
-            the_cumshot.layer = top_layer+1 #The cumshot lives on a layer it hit, above the one it hit. Accessories are drawn first in the hirearchy, so they have to be on a level higehr than what they hit.
-            self.outfit.add_accessory(the_cumshot)
-
-        self.change_slut_temp(5*self.get_opinion_score("being covered in cum"))
-        self.change_happiness(5*self.get_opinion_score("being covered in cum"))
-        self.discover_opinion("being covered in cum")
-
-        self.sex_record["Cum Covered"] += 1
-
-    Person.cum_in_mouth = cum_in_mouth_enhanced
-    Person.cum_in_vagina = cum_in_vagina_enhanced
-    Person.cum_in_ass = cum_in_ass_enhanced
-    Person.cum_on_face = cum_on_face_enhanced
-    Person.cum_on_tits = cum_on_tits_enhanced
-    Person.cum_on_stomach = cum_on_stomach_enhanced
-    Person.cum_on_ass = cum_on_ass_enhanced
 
 ######################################
-# Override give serum for added goal #
+# Extend give serum for added goal #
 ######################################
 
-    # the original signature still has the add_to_log parameter, but it is no longer passed to run_on_apply
-    def give_serum_enhanced(self,the_serum_design, add_to_log = True): ##Make sure you are passing a copy of the serum, not a reference.
-        mc.listener_system.fire_event("give_random_serum", the_person = self)
-        self.serum_effects.append(the_serum_design)
-        the_serum_design.run_on_apply(self) # add to log is done through SerumTrait.on_apply(), each trait effect gets logged
+    def give_serum_extended(org_func):
+        def give_serum_wrapper(person, the_serum_design, add_to_log = True):
+            # run original function
+            org_func(person, the_serum_design, add_to_log)
+            # run extension code
+            mc.listener_system.fire_event("give_random_serum", the_person = person)
 
-    Person.give_serum = give_serum_enhanced
+        return give_serum_wrapper
+
+    # wrap up the give_serum function
+    Person.give_serum = give_serum_extended(Person.give_serum)
 
 
 #######################################
 # HELPER METHODS FOR CLASS EXTENSIONS #
 #######################################
-
-    # Check if weight property exists on person, if not, add based on body type
-    def check_person_weight_attribute(person):
-        if not hasattr(person, "weight"):
-            if (person.body_type == "thin_body"):
-                setattr(person, "weight", 60 * person.height)   # default weight thin body
-            elif (person.body_type == "standard_body"):
-                setattr(person, "weight", 75 * person.height)   # default weight standard body
-            else:
-                setattr(person, "weight", 90 * person.height)   # default weight curvy body
-        return
 
     # calculates current player mental powers
     def player_willpower():
@@ -1109,3 +1106,82 @@ init -1 python:
         return self.outfit.panties_covered()
 
     Person.panties_covered = person_panties_covered
+
+##########################################
+# Unique crisis addition functions       #
+##########################################
+    # Use these extensions to add only unique crisis. Checks to see if the event has already been added, so it won't duplicate.
+    def add_unique_on_talk_event(self, the_crisis):
+        if the_crisis not in self.on_talk_event_list:
+            self.on_talk_event_list.append(the_crisis)
+
+    def add_unique_on_room_enter_event(self, the_crisis):
+        if the_crisis not in self.on_room_enter_event_list:
+            self.on_room_enter_event_list.append(the_crisis)
+
+    Person.add_unique_on_talk_event = add_unique_on_talk_event
+    Person.add_unique_on_room_enter_event = add_unique_on_room_enter_event
+
+##########################################
+# Pregnancy Functions                    #
+##########################################
+
+    def is_pregnant(self):
+        if pregnant_role in self.special_role:
+            return True
+        return False
+    Person.is_pregnant = is_pregnant
+
+    def knows_pregnant(self):
+        return self.event_triggers_dict.get("preg_knows", False)
+    Person.knows_pregnant = knows_pregnant
+
+    def is_lactating(self):
+        if self.lactation_sources > 0:
+            return True
+        return False
+    Person.is_lactating = is_lactating
+
+    def get_due_day(self):
+        if self.is_pregnant():
+            return self.event_triggers_dict.get("preg_finish_announce_day", 0)
+        return -1
+    Person.get_due_day = get_due_day
+
+    def pregnancy_is_visible(self):
+        if self.is_pregnant():
+            return day > self.pregnancy_show_day()
+        return False
+    Person.pregnancy_is_visible = pregnancy_is_visible
+
+    def pregnancy_show_day(self):
+        if self.is_pregnant():
+            return self.event_triggers_dict.get("preg_transform_day", 0)
+        return -1
+    Person.pregnancy_show_day = pregnancy_show_day
+
+    def is_highly_fertile(self):
+        if self.is_pregnant():
+            return False
+        if persistent.pregnancy_pref < 2:
+            return False
+        day_difference = abs((day % 30) - self.ideal_fertile_day) # Gets the distance between the current day and the ideal fertile day.
+        if day_difference > 15:
+            day_difference = 30 - day_difference #Wrap around to get correct distance between months.
+        if day_difference < 4:
+            return True
+        return False
+
+    Person.is_highly_fertile = is_highly_fertile
+
+    def remove_on_talk_event(self, the_crisis):
+        if the_crisis in self.on_talk_event_list:
+            self.on_talk_event_list.remove(the_crisis)
+
+    Person.remove_on_talk_event = remove_on_talk_event
+
+    def remove_on_room_enter_event(self, the_crisis):
+        if the_crisis in self.on_room_enter_event_list:
+            self.on_room_enter_event_list.remove(the_crisis)
+
+    Person.remove_on_room_enter_event = remove_on_room_enter_event

@@ -7,7 +7,7 @@ init 3 python:
         return not company_wardrobe_loaded
 
     def company_wardrobe_initialization(self):
-        lobby.actions.append(self)
+        lobby.add_action(self)
         self.enabled = False
         return
 

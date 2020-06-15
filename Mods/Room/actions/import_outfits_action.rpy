@@ -12,15 +12,15 @@ init 2 python:
             return "Requires: [strict_uniform_policy.name] or higher"
 
     def import_wardrobe_mod_initialization(self):
-        bedroom.actions.append(self)
+        bedroom.add_action(self)
         self.enabled = False
         return
     def give_wardrobe_mod_initialization(self):
-        clothing_store.actions.append(self)
+        clothing_store.add_action(self)
         self.enabled = False
         return
     def give_uniform_mod_initialization(self):
-        office.actions.append(self)
+        office.add_action(self)
         self.enabled = False
         return
 

@@ -46,6 +46,9 @@ init -1 python:
     # Hint for Dungeon
     game_hints.append(Hint("Build Dungeon", "When you work in you company during the weekend, you might have a good idea.", "not dungeon.visible and day > 24 and mc.business.funds > 20000", "not bool(exists_in_mandatory_crisis_list('dungeon_intro_label'))"))
 
+    # Hint for Active Quest (description is retrieved by object function)
+    game_hints.append(Hint("Active Quest", None, "not quest_director.active_quest is None", "quest_director.active_quest is None", description_func_string = "quest_director.active_quest_name"))
+
     # DEBUG HINTS (for fitting an positioning)
     # game_hints.append(Hint("Always Visible Hint", "This hint is always visible in the hint list.", "True", "False"))
     # hints with long text
@@ -113,5 +116,5 @@ init 2:
                         vbox:
                             spacing 0
                             text "{size=18}[hint.title]{/size}" style "serum_text_style_header" xalign 0 text_align 0 xpos 2
-                            text "{size=14}[hint.description]{/size}" style "serum_text_style_traits" xalign 0 text_align 0 xpos 2
-
+                            $ opinion = hint.description
+                            text "{size=14}[opinion]{/size}" style "serum_text_style_traits" xalign 0 text_align 0 xpos 2

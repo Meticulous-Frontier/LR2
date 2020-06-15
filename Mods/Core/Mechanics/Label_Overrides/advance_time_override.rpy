@@ -99,14 +99,14 @@ init 5 python:
         "advance_time_people_run_move_label", priority = 15, allow_disable = False)
 
     # Slave Role Advance Time Actions
-    advance_time_stay_wet_action = ActionMod("Execute slave 'stay wet'", advance_time_stay_wet_requirement, 
+    advance_time_stay_wet_action = ActionMod("Execute slave 'stay wet'", advance_time_stay_wet_requirement,
         "advance_time_stay_wet_label", priority = 20, allow_disable = False, menu_tooltip = "People with 'stay_wet = True' have their minimum arousal set to 50%")
 
     advance_time_collar_person_action = ActionMod("Execute slave 'collar'", advance_time_collar_person_requirement,
         "advance_time_collar_person_label", allow_disable = False, priority = 22, menu_tooltip = "Allows the collar_slave_action to do what it is intended to.")
 
     # Mandatory Vibe Company Action
-    advance_time_mandatory_vibe_company_action = ActionMod("Attach vibes to outfits", advance_time_mandatory_vibe_action_requirement, 
+    advance_time_mandatory_vibe_company_action = ActionMod("Attach vibes to outfits", advance_time_mandatory_vibe_action_requirement,
         "advance_time_mandatory_vibe_company_label", priority = 2, enabled = False, allow_disable = False, category = "Business")
 
     advance_time_action_list = [advance_time_people_run_turn_action, advance_time_people_run_day_action, advance_time_end_of_day_action, advance_time_next_action, advance_time_mandatory_crisis_action,
@@ -182,7 +182,7 @@ init 5 python:
         for crisis in morning_crisis_list:
             if crisis[1] > 0 and crisis[0].is_action_enabled(): #Get the first element of the weighted tuple, the action.
                 possible_morning_crises_list.append(crisis[0]) # Build a list of valid crises from ones that pass their requirement.
-        
+
         return find_next_crisis(possible_morning_crises_list)
         #renpy.random.shuffle(possible_morning_crises_list)    # shuffle the list in random order
         #return get_random_from_weighted_list(possible_morning_crises_list)
@@ -199,6 +199,7 @@ init 5 python:
             person.run_turn()
         mc.business.run_turn()
         mc.run_turn()
+        quest_director.run_turn()
         return
 
     def advance_time_run_day(people):
@@ -207,6 +208,7 @@ init 5 python:
 
         mc.run_day()
         mc.business.run_day()
+        quest_director.run_day()
         return
 
     def advance_time_run_move(people):
@@ -373,6 +375,7 @@ label advance_time_end_of_day_label():
         # increase morning crisis chance (once a day)
         morning_crisis_chance += 2
         perk_system.update()  #TEST to see if this is a good time for this.
+        mc.business.funds_yesterday = mc.business.funds
     return
 
 label advance_time_mandatory_morning_crisis_label():
@@ -448,4 +451,3 @@ label advance_time_collar_person_label():
 label advance_time_mandatory_vibe_company_label():
     $ advance_time_mandatory_vibe()
     return
-

@@ -19,8 +19,8 @@ init 5 python:
 
 label activate_measurement_system(stack):
     python:
-        bedroom.actions.append(metric_system_action)
-        bedroom.actions.append(imperial_system_action)
+        bedroom.add_action(metric_system_action)
+        bedroom.add_action(imperial_system_action)
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
@@ -28,11 +28,8 @@ label activate_measurement_system(stack):
 
 label update_measurement_system(stack):
     python:
-        if not metric_system_action in bedroom.actions:
-            bedroom.actions.append(metric_system_action)
-
-        if not imperial_system_action in bedroom.actions:
-            bedroom.actions.append(imperial_system_action)
+        bedroom.add_action(metric_system_action)
+        bedroom.add_action(imperial_system_action)
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)

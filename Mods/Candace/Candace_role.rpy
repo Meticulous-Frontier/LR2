@@ -33,10 +33,19 @@ init 2 python:
                         return True
         return False
 
+    def candace_goes_clothes_shopping_requirement(person):
+        if candace_get_hire_date() == -1:
+            return False
+        if day > candace_get_hire_date() + 7:  #She's been working atleast a week.
+            if mc.business.funds > 500 and candace.location() is candace.work:
+                return True
+        return False
+
     #Candace Actions (define actions in init)
     candace_meet_at_office_store = Action("Meet Candi", candace_meet_at_office_store_requirement, "candace_meet_at_office_store_label")
     candace_get_to_know = Action("Get to know her", candace_get_to_know_requirement, "candace_get_to_know_label", menu_tooltip = "Find out more about Candi")
     candace_convince_to_quit = Action("Convince her to quit", candace_convince_to_quit_requirement, "candace_convince_to_quit_label", menu_tooltip = "Quit her current job and join your company.")
+    candace_goes_clothes_shopping = Action("Clothes shopping", candace_goes_clothes_shopping_requirement, "candace_goes_clothes_shopping_label")
 
 
     def candace_mod_initialization():
@@ -65,7 +74,7 @@ init 2 python:
 
         global candace
         candace = make_person(name = "Candace", last_name = "Hooper", age = 29, body_type = "thin_body", face_style = "Face_3", tits = "F", height = 0.94, hair_colour = ["black",[0.09,0.07,0.09,1]], hair_style = curly_bun, skin="black",\
-            eyes = "light blue", personality = bimbo_personality, name_color = "#d62cff", dial_color = "#d62cff", starting_wardrobe = candace_wardrobe, \
+            eyes = "light blue", personality = candace_personality, name_color = "#d62cff", dial_color = "#d62cff", starting_wardrobe = candace_wardrobe, \
             stat_array = [3,1,5], skill_array = [2,1,2,1,5], sex_array = [2,3,4,1], start_sluttiness = 35, start_obedience = -40, start_happiness = 76, start_love = 0, \
             title = "Candi", possessive_title = "Your acquaintance",mc_title = mc.name, relationship = "Girlfriend", SO_name = ophelia_get_ex_name(), kids = 0, base_outfit = candace_base_outfit,
             force_random = True, forced_opinions = [
@@ -100,6 +109,7 @@ init 2 python:
         candace.event_triggers_dict["relationship_doubt_score"] = 0  #Everytime you plant a seed of doubt, increment this.
         candace.event_triggers_dict["quit_job"] = 0
         candace.event_triggers_dict["last_talk_day"] = 0
+        candace.event_triggers_dict["clothes_shopping"] = 0
 
         candace.special_role.append(candace_role)
 
@@ -453,7 +463,7 @@ label candace_convince_to_quit_label(the_person):
     $ candace.event_triggers_dict["quit_job"] = 1
     # she has quit her job, give her a new wardrobe
     $ rebuild_wardrobe(candace)
-
+    $ candace.on_talk_event_list.append(candace_goes_clothes_shopping)
     return "Advance Time"
 #Character variable wrappers
 init 3 python:
@@ -507,4 +517,17 @@ init 3 python:
     def candace_increase_doubt():
         score = candace.event_triggers_dict.get("relationship_doubt_score", 0)
         candace.event_triggers_dict["relationship_doubt_score"] = score + 1
+        return
+
+    def candace_get_hire_date():
+        return candace.event_triggers_dict.get("employed_since", -1)
+
+    def candace_get_has_gone_clothes_shopping():
+        return candace.event_triggers_dict.get("clothes_shopping", 0)
+
+    def candace_update_action_lists():  #This function is designed to try and bring action lists up to date, from update to update, so we don't have to start a new game every time.
+        if candace_get_has_quit_job():
+            if not candace_get_has_gone_clothes_shopping():
+                if candace_goes_clothes_shopping not in candace.on_talk_event_list:
+                    candace.on_talk_event_list.append(candace_goes_clothes_shopping)
         return

@@ -10,6 +10,35 @@ init 5 python:
     config.label_overrides["pick_position"] = "pick_position_enhanced"
     config.label_overrides["girl_strip_event"] = "girl_strip_event_enhanced"
 
+    record_opinion_map = {
+        "Handjobs" : ["giving handjobs", "sex standing up"],
+        "Kissing" : ["kissing"],
+        "Fingered" : ["masturbating", "being fingered", "sex standing up"],
+        "Tit Fucks" : ["giving tit fucks", "showing her tits"],
+        "Blowjobs" : ["giving blowjobs"],
+        "Cunnilingus": ["getting head"],
+        "Vaginal Sex": ["vaginal sex", "missionary style sex", "lingerie"],
+        "Anal Sex": ["anal sex", "doggy style sex", "bareback sex"],
+        "Cum Facials": ["cum facials"],
+        "Cum in Mouth": ["drinking cum"],
+        "Cum Covered": ["being covered in cum"],
+        "Vaginal Creampies": ["creampies"],
+        "Anal Creampies": ["anal creampies"],
+        "Threesomes": ["not wearing anything", "skimpy outfits", "skimpy uniforms"],
+        "Spanking": ["not wearing underwear", "showing her ass"],
+        "Insertions": ["big dicks", "public sex"],
+    }
+
+    record_skill_map = {
+        "Kissing" : "Foreplay",
+        "Tit Fucks" : "Foreplay",
+        "Blowjobs" : "Oral",
+        "Cunnilingus": "Oral",
+        "Vaginal Sex": "Vaginal",
+        "Anal Sex": "Anal",
+    }
+
+
     def girl_choose_position_enhanced(person, ignore_taboo = False):
         position_option_list = []
         for position in list_of_girl_positions:
@@ -31,8 +60,8 @@ init 5 python:
 
         picked_object = get_random_from_list(possible_object_list)
 
-        person.add_situational_slut("sex_object", picked_object.sluttiness_modifier, position.verbing + " on a " + picked_object.name)
-        person.add_situational_obedience("sex_object",picked_object.obedience_modifier, position.verbing + " on a " + picked_object.name)
+        person.add_situational_slut("sex_object", picked_object.sluttiness_modifier, picked_object.name + " " + position.verbing)
+        person.add_situational_obedience("sex_object",picked_object.obedience_modifier, picked_object.name + " " + position.verbing)
         return picked_object
 
     def cheating_check_get_watcher(person):
@@ -136,8 +165,24 @@ init 5 python:
         types_seen = []
         for position_type in report_log.get("positions_used",[]): #Note: Clears out duplicates
             if position_type.record_class and position_type.record_class not in types_seen:
+                if not position_type.record_class in person.sex_record: # add missing sex_record key
+                    person.sex_record[position_type.record_class] = 0
                 person.sex_record[position_type.record_class] += 1
                 types_seen.append(position_type.record_class)
+
+        # enables slow corruption based on sex type (each category has a chance to increase sex stats / opinions)
+        # also higher suggestibility has a higher chance of increasing the stats to a higher level
+        tier = get_suggest_tier(person)
+        gained_skill = False    # only one skill per session
+        gained_opinion = False  # only one opinion per session
+        renpy.random.shuffle(types_seen) # shuffle types seen so we don't know what skills and opinions are checked for increment first
+        for record_class in types_seen: 
+            if not gained_skill and record_class in record_skill_map and renpy.random.randint(0,100) < 5 + (tier * 5):
+                person.increase_sex_skill(record_skill_map[record_class], 2 + tier)
+                gained_skill = True
+            if not gained_opinion and record_class in record_opinion_map and renpy.random.randint(0,100) < 15 + (tier * 5):
+                person.increase_opinion_score(get_random_from_list(record_opinion_map[record_class]), tier - 1)
+                gained_opinion = True
 
         # record the last time we had sex
         person.sex_record["Last Sex Day"] = day
@@ -163,8 +208,8 @@ init 5 python:
             else:
                 picked_object = renpy.display_menu(object_option_list,True,"Choice")
 
-        person.add_situational_slut("sex_object", picked_object.sluttiness_modifier, position.verbing + " on a " + picked_object.name)
-        person.add_situational_obedience("sex_object",picked_object.obedience_modifier, position.verbing + " on a " + picked_object.name)
+        person.add_situational_slut("sex_object", picked_object.sluttiness_modifier, picked_object.name + " " + position.verbing)
+        person.add_situational_obedience("sex_object",picked_object.obedience_modifier, picked_object.name + " " + position.verbing)
         return picked_object
 
     def build_round_choice_menu(person, position_choice, position_locked, object_choice, ignore_taboo = False):
@@ -675,10 +720,15 @@ label condom_ask_enhanced(the_person):
 
             "Fuck her raw":
                 mc.name "No way. I want to feel you wrapped around me."
-                if the_person.get_opinion_score("bareback sex") > 0:
-                    the_person.char "Tell me about it - nothing beats skin on skin."
-                if the_person.get_opinion_score("creampies") < 0:
-                    the_person.char "Just make sure to pull out when you cum, okay?"
+                if the_person.has_taboo("condomless_sex"):
+                    $ the_person.call_dialogue("condomless_sex_taboo_break")
+                else:
+                    if the_person.get_opinion_score("bareback sex") > 0:
+                        the_person.char "Tell me about it, nothing beats skin on skin."
+                    if the_person.get_opinion_score("creampies") < 0 or not the_person.on_birth_control:
+                        the_person.char "Just make sure to pull out when you cum, okay?"
+                    if not the_person.on_birth_control:
+                        the_person.char "I'm not using any birth control at the moment."
 
     else:
         if the_person.get_opinion_score("bareback sex") < 0 or the_person.get_opinion_score("creampies") < 0 or the_person.get_opinion_score("anal creampies") < 0:
@@ -713,8 +763,17 @@ label condom_ask_enhanced(the_person):
                     call put_on_condom_routine(the_person) from _call_put_on_condom_routine_6
 
             "Fuck her raw":
-                if the_person.get_opinion_score("creampies") < 0:
-                    the_person.char "Alright, but don't want cum inside."
+                if the_person.has_taboo("condomless_sex"):
+                    $ the_person.call_dialogue("condomless_sex_taboo_break")
+                else:
+                    if the_person.on_birth_control:
+                        the_person.char "Okay. I'm on birth control, so it should be fine."
+                    else:
+                        the_person.char "Fine, but you {i}really{/i} need to pull out this time. We shouldn't be taking risks like that."
+
+
+    if not mc.condom:
+        $ the_person.break_taboo("condomless_sex")
 
     return True #If we make it to the end of the scene everything is fine and sex can continue. If we returned false we should go back to the position select, as if we asked for something to extreme.
 

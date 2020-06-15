@@ -1046,6 +1046,7 @@ label athlete_hookup_accept(the_person):
                     "You feel her pussy spasming around your dick as she also starts to orgasm."
                     $ the_person.change_slut_temp(1)
                     $ the_person.change_happiness(2)
+                    $ the_person.cum_in_vagina()
                     "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
                     "You take a moment to recover. Then you and [the_person.title] get cleaned up and dress. You quietly sneak out of the locker room."
                     return
@@ -1108,6 +1109,7 @@ label athlete_hookup_accept(the_person):
                     mc.name "Get ready, I'm gonna cum!"
                     "[the_person.title] is incoherent, and doesn't process your words."
                     "You plunge deep into her ass and hold it there while you cum. She gasps in time with each new shot of hot semen inside of her."
+                    $ the_person.cum_in_ass()
                     "You stand there for a minute, holding her hips in the air, you dick buried in her bowel as it softens. Eventually she speaks up."
                     the_person.char "Wow... okay... I think I can stand now..."
                     "You slowly let her down. Her legs buckle for a second, but she catches herself."
@@ -1127,6 +1129,7 @@ label athlete_hookup_accept(the_person):
         "You cum erupts in a torrent. You seed spills deep inside [the_person.title]. Her entire body begins to spasm as she joins you in orgasm."
         $ the_person.change_happiness(5)
         $ the_person.change_slut_temp(1)
+        $ the_person.cum_in_vagina()
         "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
         "You take a moment to recover. Then you and [the_person.title] get cleaned up and dress. You quietly sneak out of the locker room."
         return
@@ -1147,6 +1150,7 @@ label athlete_hookup_accept(the_person):
                 "You seed spills deep inside [the_person.title]. Her entire body begins to spasm as she joins you in orgasm."
                 $ the_person.change_happiness(5)
                 $ the_person.change_slut_temp(1)
+                $ the_person.cum_in_vagina()
                 "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
                 "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the locker room."
                 return

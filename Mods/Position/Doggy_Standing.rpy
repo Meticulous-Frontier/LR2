@@ -238,9 +238,10 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object):
                 "[the_girl.possessive_title]'s voice starts to trail off."
             elif the_girl.sluttiness > 110:
                 the_girl.char "Oh god it's so deep."
-            else:
+            elif the_girl.on_birth_control:
                 the_girl.char "Oh fuck...  Good thing I'm on the pill..."
-
+            else:
+                the_girl.char "Oh fuck... I could get pregnant you know.."
 
 
             "You wait until your orgasm has passed completely, then pull out and stand back."

@@ -171,6 +171,9 @@ label slave_training_label(the_person): # TODO: Add variations to these. They ar
         "Increase submission" if the_person.get_opinion_score("being submissive") < 2:
             call increase_slave_submission_label(the_person) from _call_increase_slave_submission_slave_training
 
+        #"Anal Training" if the_person.obedience > 250 and the_person.effective_sluttiness() > 60 and (the_person.get_opinion_score("anal sex") < 2 or the_person.sex_skills["Anal"] < 5):
+        #    call slave_anal_training(the_person) from _call_slave_anal_training
+
         "Send her away":
             pass
 
@@ -470,4 +473,18 @@ label increase_slave_submission_label(the_person):
         else:
             the_person.char "Thank you Master, for allowing me to satisfy you."
         $ the_person.review_outfit(dialogue = False)
+    return
+
+label slave_anal_training(the_person):
+    $ ran_num = the_person.event_triggers_dict.get("anal_training", 0)
+    if ran_num == 0:
+        pass
+    elif ran_num == 1:
+        pass
+    elif ran_num > 1:
+        pass
+
+    $ the_person.increase_opinion_score("anal sex")
+    $ the_person.increase_sex_skill("Anal")
+    $ the_person.event_triggers_dict["anal_training"] = ran_num + 1
     return

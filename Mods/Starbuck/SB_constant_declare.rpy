@@ -26,6 +26,7 @@ init -3 python:
         "SB_lily_anal_dp_fetish_label",
         "SB_mom_anal_pay_label",
         "SB_fetish_anal_label",
+        "SB_fetish_anal_label_non_employee",
         "SB_fetish_anal_staylate_event_label",
         "SB_starbuck_anal_intro",
         "SB_stephanie_anal_fetish_label",
@@ -35,6 +36,7 @@ init -3 python:
         "SB_fetish_mom_cum_label",
         "SB_fetish_lily_cum_label",
         "SB_fetish_cum_label",
+        "SB_fetish_cum_non_employee_label",
         "SB_fetish_stephanie_cum_label",
     ]
 

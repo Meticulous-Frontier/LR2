@@ -737,6 +737,7 @@ label starbuck_sex_store_promo_one_label(the_person):
         "Want a real dick?":
             "[the_person.possessive_title] looks up at you, still on her knees."
             the_person.char "Oh [the_person.mc_title], getting all dressed up has me all turned on. If you'd let me do that, I would really appreciate it."
+            $ the_person.add_situational_slut("Excited", 20, "I want to suck your cock")
             mc.name "Go ahead, you look amazing. I can't wait to feel your mouth."
             "You walk up to [the_person.possessive_title]. She unzips your pants and pulls your cock out from your pants."
             "She runs her tongue up and down the sides a few times, then opens her mouth and sucks you into her hot mouth."
@@ -747,6 +748,7 @@ label starbuck_sex_store_promo_one_label(the_person):
                 "Getting [the_person.title] an orgasm makes you feel more confident in your foreplay skills."
             else:
                 "After you finish, [the_person.possessive_title] takes a second, then gets up."
+            $ the_person.clear_situational_slut("Excited")
             $ perk_system.add_stat_perk(Stat_Perk(description = "Increase foreplay skill after helping Starbuck with her advertisement photos. +1 Foreplay Skill", foreplay_bonus = 1, bonus_is_temp =False), "Starbuck Foreplay Bonus")
             $ starbuck.draw_person(position = "stand2", emotion = "happy")
             the_person.char "Mmm... That was nice. It's been a while since I sucked on a hard cock. It was kinda nice!"
@@ -1780,7 +1782,7 @@ label starbuck_replay_dressup_label(the_person):
         mc.name "I'm sorry, I can't promise something like that, my business keeps me busy."
         the_person.char "Damn. A girl can dream though."
         $ the_person.change_love(amount = 3, max_modified_to = 40)
-
+        $ created_outfit = None
     return
 
 #SBS150

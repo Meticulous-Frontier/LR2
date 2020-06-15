@@ -14,12 +14,10 @@ init 3 python:
 
     # the gym is initialized when the action mod is loaded and also links the gym_shower to the gym
     def gym_initialization(self):
-        gym.background_image = room_background_image("Gym_Background.jpg") #As long a there is a mall background for the gym, replace it with our gym background
-
         # add gym shower to active places
         list_of_places.append(gym_shower)
         gym.link_locations_two_way(gym_shower)
-        gym.actions.append(self)
+        gym.add_action(self)
         return
 
     train_in_gym_action = ActionMod("Schedule Gym Session {image=gui/heart/Time_Advance.png}", gym_requirement, "select_person_for_gym",
@@ -101,10 +99,15 @@ label train_in_gym(the_person):
         $ the_person.change_max_energy(10)
         "She seems to be building up her endurance."
 
-    $ body_changed = the_person.change_weight(-ran_num, 100)
-    $ new_weight = get_person_weight_string(the_person)
+    $ body_changed = False
+    if not the_person.is_pregnant():
+        $ body_changed = the_person.change_weight(-ran_num, 100)
+        $ new_weight = get_person_weight_string(the_person)
 
-    "After the session [the_person.possessive_title] weighs [new_weight]."
+        "After the session [the_person.possessive_title] weighs [new_weight]."
+
+    else:
+        "Since she is pregnant, there is no visible change to her body or weight."
 
     if body_changed or the_person.sluttiness > 50:
         $ the_person.draw_person()

@@ -1,5 +1,5 @@
 #Used to display stats for multi people while you're talking to them, takes an array of Actor objects.
-init -1 python:
+init 2 python:
     def multi_person_info_ui_get_formatted_tooltip(person):
         tooltip = ""
         if mc.business.get_employee_title(person) != "None":
@@ -10,7 +10,8 @@ init -1 python:
         tooltip += "Age: " + str(person.age) + "\n"
         tooltip += "Height: " + height_to_string(person.height) + "\n"
         tooltip += "Cup size: " + str(person.tits) + "\n"
-        tooltip += "Weight: " + get_person_weight_string(person)
+        #don't use this in the screen tooltip, it somehow messes up things badly
+        #tooltip += "Weight: " + get_person_weight_string(person)
         return tooltip
 
 screen multi_person_info_ui(actors): 
