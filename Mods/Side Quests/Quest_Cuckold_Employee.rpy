@@ -73,9 +73,10 @@ init 1 python:
         elif quest_cuckold_employee.get_quest_flag() == 49:   #BAD END
             quest_cuckold_employee_get_target().add_unique_on_talk_event(quest_cuckold_employee_reconsider)
             quest_cuckold_employee.quest_complete = True
+        elif quest_cuckold_employee.get_quest_flag() == 91:
+            mc.business.add_unique_mandatory_crisis(quest_cuckold_employee_knocked_up)
         elif quest_cuckold_employee.get_quest_flag() == 101:
             quest_cuckold_employee.quest_complete = True
-            mc.business.add_unique_mandatory_crisis(quest_cuckold_employee_knocked_up)
         elif quest_cuckold_employee.get_quest_flag() == 102:
             quest_cuckold_employee.quest_complete = True
         return
@@ -95,7 +96,7 @@ init 1 python:
         quest_cuckold_employee_get_target().remove_on_talk_event(quest_cuckold_employee_breeding_session)
         #Leave knocked up and reconsider events in the stack to run after quest finishes.
         # cleanup dictionary to save space and memory
-        #quest_cuckold_employee.quest_event_dict.clear()
+        quest_cuckold_employee.quest_event_dict.clear()
         return
 
 ###Declare any requirement functions
@@ -587,7 +588,7 @@ label quest_cuckold_employee_after_window_label():
         "You text her back."
         mc.name "I'll make time to breed you again cow. Look forward to it."
         $ the_person.on_room_enter_event_list = []  #We are overriding this event and doing our own announcement. No reason to use vanilla one in this situation.
-        $ quest_cuckold_employee.set_quest_flag(101)
+        $ quest_cuckold_employee.set_quest_flag(91)
         return
 
     else:
@@ -659,6 +660,7 @@ label quest_cuckold_employee_knocked_up_label():
     "It's going to be amazing to watch her belly swell with your seed."
     $ the_person.change_stats(obedience = 20, slut_temp = 20, slut_core = 20)  #She is now your slutty breeding stock.
     #TODO consider giving her a collar?
+    $ quest_cuckold_employee.set_quest_flag(101)
     $ the_person.personality = get_breeding_stock_personality(the_person)
     return
 
