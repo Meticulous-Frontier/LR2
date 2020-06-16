@@ -832,6 +832,23 @@ init -1 python:
 
     Person.change_stats = change_stats
 
+    # returns number of hearts of sluttiness for easy scene building.
+    def sluttiness_tier(self):
+        if self.sluttiness < 20:
+            return 0
+        if self.sluttiness < 40:
+            return 1
+        if self.sluttiness < 60:
+            return 2
+        if self.sluttiness < 80:
+            return 3
+        if self.sluttiness < 100:
+            return 4
+        else:
+            return 5
+
+    Person.sluttiness_tier = sluttiness_tier
+
     ## CHANGE WILLPOWER EXTENSION
     # changes the willpower of a person by set amount
     def change_willpower(self, amount): #Logs change in willpower and shows new total.
@@ -1145,6 +1162,8 @@ init -1 python:
 
     def is_pregnant(self):
         if self.has_role(pregnant_role):
+            return True
+        if silent_pregnant_role in self.special_role:
             return True
         return False
     Person.is_pregnant = is_pregnant
