@@ -385,7 +385,7 @@ label HR_director_initial_hire_label(the_person):
         mc.business.hr_director.HR_tags = {}
         mc.business.hr_director.HR_unlocks = {}
 
-        if employee_role in the_person.special_role:
+        if the_person.is_employee():
             mc.business.remove_employee(the_person)
 
         mc.business.hire_person(the_person, "HR")

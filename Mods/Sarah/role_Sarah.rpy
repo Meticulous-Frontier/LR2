@@ -195,7 +195,7 @@ init -1 python:
         if mc_asleep():
             if sarah.event_triggers_dict.get("threesome_unlock", 0) >= 1:
                 if sarah.sex_record["Vaginal Creampies"] >= 10:
-                    if girlfriend_role in sarah.special_role:
+                    if sarah.has_role(girlfriend_role):
                         return True
         return False
 
@@ -1534,7 +1534,7 @@ label Sarah_stripclub_story_label():
     # If she is already married, turn it into an affaire
     # if she is engaged, have her break it off.
     # If not dating path, she recovers, then heads out
-    if girlfriend_role in the_person.special_role:  #You are already dating her via other means. She just cuddles up with you.
+    if the_person.has_role(girlfriend_role):  #You are already dating her via other means. She just cuddles up with you.
         "As you both recover, [the_person.possessive_title] starts kissing you along your neck, then whispers in your ear."
         the_person.char "Thank you for the good time tonight. I love you."
         mc.name "I love you too."
@@ -1595,7 +1595,7 @@ label Sarah_stripclub_story_label():
                     "Well, it's official. I'm all yours now!"
                     python:
                         the_person.special_role.append(girlfriend_role)
-                        if affair_role in the_person.special_role: # remove affair role if we have an affair with her
+                        if the_person.has_role(affair_role): # remove affair role if we have an affair with her
                             the_person.special_role.remove(affair_role)
 
                         the_person.change_stats(love = 10, obedience = 5)
@@ -1612,12 +1612,12 @@ label Sarah_stripclub_story_label():
         the_person.char "Mmmm, that was such a fun night, [the_person.mc_title]. I don't want to get up..."
     $ the_person.event_triggers_dict["stripclub_progress"] = 1
     $ staying_over = False
-    if girlfriend_role in the_person.special_role:
+    if the_person.has_role(girlfriend_role):
         the_person.char "It feels so good to be next to you, I could lay like this all night."
         mc.name "Why don't you? Just spend the night here."
         the_person.char "Oh! That's a great idea!"
         $ staying_over = True
-    elif affair_role in the_person.special_role:
+    elif the_person.has_role(affair_role):
         the_person.char "It feels so good to be next to you, but I need to get home."
         mc.name "You don't have to. Just spend the night here."
         the_person.char "I'm sorry I can't. Thanks for the offer though!"
@@ -1650,9 +1650,9 @@ label Sarah_threesome_request_label():
     the_person.char "Hey [the_person.mc_title]. I figured you'd be around here."
     $ scene_manager.add_actor(the_person)
     mc.name "Hello [the_person.title]."
-    if girlfriend_role in the_person.special_role:
+    if the_person.has_role(girlfriend_role):
         "You admire your girlfriend as she stands in the door. God she is sexy"
-    elif affair_role in the_person.special_role:
+    elif the_person.has_role(affair_role):
         "You admire your mistress as she stands in the door. It's so hot fucking a taken woman."
     else:
         "You admire [the_person.title] as she stands in the door."
@@ -1717,7 +1717,7 @@ label Sarah_threesome_request_label():
     call screen enhanced_main_choice_display(build_menu_items([["Request Threesome From"] + get_Sarah_willing_threesome_list()], draw_hearts_for_people = False))
     $ person_choice = _return
     $ scene_manager.update_actor(the_person, position = "sitting")
-    if employee_role in person_choice.special_role:
+    if person_choice.is_employee():
         mc.name "I was thinking about [person_choice.title]. She seems like she would be down for just about anything, to be honest."
         the_person.char "Oh! She's cute! Damn, that would be great!"
     elif person_choice is mom:
@@ -1783,9 +1783,9 @@ label Sarah_threesome_request_label():
     the_person.char "Mmm, that was hot as always."
     $ the_person.review_outfit(dialogue = False)
     $ scene_manager.update_actor(the_person, position = "stand3")
-    if girlfriend_role in the_person.special_role:
+    if the_person.has_role(girlfriend_role):
         pass
-    elif affair_role in the_person.special_role:
+    elif the_person.has_role(affair_role):
         the_person.char "I don't want to go... but I know I probably should. I'm sure someone will be waiting for be to get home..."
         $ scene_manager.update_actor(the_person, position = "stand3")
         the_person.char "Don't forget to talk to [person_choice.name]! I'll be looking forward to next Saturday!"
@@ -1888,7 +1888,7 @@ label Sarah_threesome_request_label():
     return
 
 label Sarah_arrange_threesome_label(the_person):
-    if employee_role in the_person.special_role:
+    if the_person.is_employee():
         mc.name "Hello [the_person.title]. I've got something I need help with I was hoping to talk to you about."
         the_person.char "Hello! What can I help you with?"
         mc.name "Well, you know [sarah.name], right? From HR?"
@@ -2071,9 +2071,7 @@ label Sarah_initial_threesome_label():
     the_person_two.char "Well, I had a lot of fun, but I should be going. Goodnight you two."
     "You both say goodbye. [the_person_two.title] grabs her stuff and leaves the room."
     $ scene_manager.remove_actor(the_person_two)
-    if girlfriend_role in the_person_one.special_role:
-        pass
-    else:
+    if not the_person_one.has_role(girlfriend_role):
         the_person_one.char "Ohh, I'm not sure I can walk... but I should get going too..."
         "[the_person_one.title] slowly gets out of bed."
         $ scene_manager.update_actor(the_person_one, position = "stand4")
@@ -2831,7 +2829,7 @@ label Sarah_date_ends_at_your_place_label(the_person):
     "When you finish with her, [the_person.title] collapses in the bed."
     $ scene_manager.update_actor(the_person, position = "missionary")
     "You cuddle up next to her as you both catch your breath."
-    if girlfriend_role in the_person.special_role:  #You are already dating her via other means. She just cuddles up with you.
+    if the_person.has_role(girlfriend_role):  #You are already dating her via other means. She just cuddles up with you.
         "As you both recover, [the_person.possessive_title] starts kissing you along your neck, then whispers in your ear."
         the_person.char "Thank you for the good time tonight. I love you."
         mc.name "I love you too."
@@ -2844,7 +2842,7 @@ label Sarah_date_ends_at_your_place_label(the_person):
         $ the_person.next_day_outfit = the_person.planned_outfit # she stays the night so she will have to wear the same outfit again
         call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_overnight_after_date
         call Sarah_spend_the_night() from sarah_date_night_happy_ending_gf_path
-    elif affair_role in the_person.special_role:
+    elif the_person.has_role(affair_role):
         the_person.char "It feels so good to be next to you, but I need to get home."
         mc.name "You don't have to. Just spend the night here."
         the_person.char "I'm sorry I can't. You know I can't. Thanks for the offer though!"

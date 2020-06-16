@@ -59,13 +59,13 @@ init 2: # Need to allow for None name roles in this screen as well.
                                     text "Sluttiness: [the_person.sluttiness] (Core: [the_person.core_sluttiness])" style "menu_text_style"
                                     text "Obedience: [the_person.obedience] - " + get_obedience_plaintext(the_person.obedience) style "menu_text_style"
                                     text "Age: [the_person.age]" style "menu_text_style"
-                                    if girlfriend_role in the_person.special_role:
+                                    if the_person.has_role(girlfriend_role):
                                         text "Relationship: Girlfriend" style "menu_text_style"
                                     else:
                                         text "Relationship: [the_person.relationship]" style "menu_text_style"
                                     if the_person.relationship != "Single":
                                         text "Significant Other: [the_person.SO_name]" style "menu_text_style"
-                                    elif girlfriend_role in the_person.special_role:
+                                    elif the_person.has_role(girlfriend_role):
                                         text "Significant Other: [mc.name]" style "menu_text_style"
                                     if the_person.kids > 0:
                                         text "Kids: [the_person.kids]" style "menu_text_style"

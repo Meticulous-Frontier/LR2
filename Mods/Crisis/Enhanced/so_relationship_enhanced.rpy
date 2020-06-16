@@ -92,7 +92,7 @@ label so_relationship_worsen_label_enhanced():
         return #Something's changed and there is no longer a valid person
 
     $ so_title = SO_relationship_to_title(the_person.relationship)
-    if affair_role in the_person.special_role:
+    if the_person.has_role(affair_role):
         "You get a call from [the_person.title]. When you pick up she sounds tired, but happy."
         the_person.char "Hey [the_person.mc_title], I've got some news. Me and my [so_title], [the_person.SO_name], had a fight. We aren't together any more."
         the_person.char "We don't have to hide what's going on between us any more."

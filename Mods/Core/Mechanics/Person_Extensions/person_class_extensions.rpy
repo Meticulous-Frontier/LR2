@@ -250,12 +250,15 @@ init -1 python:
     Person.get_job_happiness_score = get_job_happiness_score_enhanced
 
     def is_employee(self):
-        employment_title = mc.business.get_employee_title(self)
-        if employment_title != "None":
-            return True
-        return False
-
+        return self.has_role(employee_role)
     Person.is_employee = is_employee
+
+    def has_role(self, role):
+        if isinstance(role, basestring):
+            return not find_in_list(lambda x: x.role_name == role, self.special_role) is None
+        else:
+            return role in self.special_role
+    Person.has_role = has_role
 
     ## LEARN HOME EXTENSION
     def learn_home(self): # Adds the_person.home to mc.known_home_locations allowing it to be visited without having to go through date label
@@ -1141,7 +1144,7 @@ init -1 python:
 ##########################################
 
     def is_pregnant(self):
-        if pregnant_role in self.special_role:
+        if self.has_role(pregnant_role):
             return True
         return False
     Person.is_pregnant = is_pregnant
