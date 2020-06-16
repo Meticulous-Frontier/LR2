@@ -166,7 +166,7 @@ init 1 python:
         return False
 
     def quest_production_line_daddy_title_requirement(the_person):
-        if the_person.sluttiness > 40:
+        if the_person.sluttiness > 40 and mc.is_at_work() and mc.business.is_open_for_business(): # only trigger at work
             return True
         return False
 
