@@ -85,7 +85,7 @@ init 2 python:
 #Requirement Labels
 init -1 python:
     def ashley_intro_requirement():   #After discovering an obedience serum trait and there is a position available. must be at work
-        if day > 1: #Not the first week #TODO change this number later for balance, for now 1 for testing
+        if day > 14: #Not the first week #TODO change this number later for balance, for now 1 for testing
             return True        #TODO
             if sedatives_trait.researched or obedience_enhancer.researched or large_obedience_enhancer.researched: #TODO find a better trigger for this since we aren't doing MC serums anymore.
                 if mc.business.max_employee_count == mc.business.get_employee_count():
