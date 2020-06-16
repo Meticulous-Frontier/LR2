@@ -11,17 +11,6 @@ init 2 python:
         ashley_base_outfit.add_accessory(the_eye_shadow)
         ashley_base_outfit.add_accessory(the_rings)
 
-        #TODO make ashley live with Stephanie
-
-        # ashley_home = Room("ashley's home", "ashley's home", [], apartment_background, [],[],[],False,[0,0], visible = False, hide_in_known_house_map = False, lighting_conditions = standard_indoor_lighting)
-        # ashley_home.add_object(make_wall())
-        # ashley_home.add_object(make_floor())
-        # ashley_home.add_object(make_bed())
-        # ashley_home.add_object(make_window())
-
-        #ashley_home.link_locations_two_way(downtown)
-        #list_of_places.append(ashley_home)
-
         # init ashley role
         ashley_role = Role(role_name ="Ashley", actions =[], hidden = True)
 
@@ -85,30 +74,24 @@ init 2 python:
 #Requirement Labels
 init -1 python:
     def ashley_intro_requirement():   #After discovering an obedience serum trait and there is a position available. must be at work
-        if day > 14: #Not the first week #TODO change this number later for balance, for now 1 for testing
-            return True        #TODO
-            if sedatives_trait.researched or obedience_enhancer.researched or large_obedience_enhancer.researched: #TODO find a better trigger for this since we aren't doing MC serums anymore.
-                if mc.business.max_employee_count == mc.business.get_employee_count():
+        if day > 14 and mc.is_at_work() and mc.business.is_open_for_business():
+            if mc.business.get_employee_count() < mc.business.max_employee_count:
+                return True        
+                #TODO Consider making this true only if recruiting increased via HR director? Would be much delayed intro
+                if sedatives_trait.researched or obedience_enhancer.researched or large_obedience_enhancer.researched: #TODO find a better trigger for this since we aren't doing MC serums anymore.
                     return False
-                else:
-                    if mc.is_at_work():
-                        if mc.business.is_open_for_business():
-                            return True
-        return False                    #TODO Consider making this true only if recruiting increased via HR director? Would be much delayed intro
+        return False
 
     def ashley_hire_directed_requirement(the_person):
-        if the_person == stephanie:
-            if ashley.event_triggers_dict.get("employed_since", 0) > 0:
-                return False
-            else:
-                if mc.is_at_work():
-                    if mc.business.max_employee_count == mc.business.get_employee_count():
-                        return "You have too many employees"
-                    else:
-                        return True
-                else:
-                    return "Talk to her at work"
-        return False
+        if not the_person is stephanie:
+            return False
+        if ashley.event_triggers_dict.get("employed_since", 0) > 0:
+            return False
+        if mc.business.max_employee_count == mc.business.get_employee_count():
+            return "At employee limit"
+        if not mc.is_at_work():
+            return "Talk to her at work"
+        return True
 
     def ashley_first_talk_requirement(the_person):
         if mc.is_at_work():
@@ -117,7 +100,7 @@ init -1 python:
 
     def ashley_room_excitement_overhear_requirement(the_person):
         if the_person.location() == the_person.work:
-            if ashley_get_days_employed() > 3: #Been working for atleast a few days week.
+            if ashley_get_days_employed() > 5: #Been working for at least a few days week.
                 return True
         return False
 
@@ -129,7 +112,7 @@ init -1 python:
 
     def ashley_room_warming_up_requirement(the_person):
         if the_person.location() == the_person.work:
-            if ashley_get_days_employed() > 7: #Been working for atleast a week.
+            if ashley_get_days_employed() > 12: #Been working for at least a week.
                 return True
         return False
 
@@ -155,6 +138,20 @@ init -1 python:
                 return True
         return False
 
+    def add_ashley_hire_later_action():
+        ashley_hire_directed = Action("Reconsider hiring her sister.", ashley_hire_directed_requirement, "ashley_hire_directed_label",
+            menu_tooltip = "Talk to Stephanie about hiring her sister. She might be disappointed if you decide not to again...")
+        head_researcher.add_action(ashley_hire_directed)
+        return
+
+    def hire_ashley():
+        mc.business.add_employee_production(ashley)
+        town_relationships.update_relationship(ashley, stephanie, "Sister")
+        town_relationships.update_relationship(nora, ashley, "Friend")
+        town_relationships.update_relationship(lily, ashley, "Rival")
+        head_researcher.remove_action_by_effect("ashley_hire_directed_label")
+        return
+
 #Story labels
 label ashley_intro_label():
     $ the_person = stephanie
@@ -169,14 +166,14 @@ label ashley_intro_label():
     the_person.char "She's is really smart, but very introverted, it's been hard for her to get through interviews."
     mc.name "What is her degree in?"
     the_person.char "Errrmm... well, it's in Art History. Look, I know this isn't going to be her final career, but even just putting something down as an internship would really help her get a career started."
-    the_person.char "I brought her resume, will you atleast take a look at it? I think she would be great over in production."
+    the_person.char "I brought her resume, will you at least take a look at it? I think she would be great over in production."
     menu:
         "Take a look":
             pass
         "Not right now":
             mc.name "I'm sorry, I'm not hiring anyone like that right now. But if I change my mind I'll come find you, okay?"
             the_person.char "Of course, that's all I can ask, is that you will keep her in mind. Thanks!"
-            call ashley_hire_later() from ashley_hire_later_1
+            $ add_ashley_hire_later_action()
             return
         "Blow me and I'll look" if the_person.sluttiness > 50:
             mc.name "I tell you what, why don't you come suck me off while I look over her documents."
@@ -189,7 +186,7 @@ label ashley_intro_label():
             $ the_report = _return
             $scene_manager.update_actor(the_person, position = "stand4")
             if the_report.get("guy orgasms", 0) > 0:
-                mc.name "God your mouth is amazing. If your sister sucks anything like you this'll be a no brainer..."
+                mc.name "God your mouth is amazing. If your sister sucks anything like you this will be a no brainer..."
                 the_person.char "Hah! Well, to be honest, I don't think she really cares for giving blowjobs, but I guess you never know."
     "You pick up her documents and look over them."
     "From her skill set, it is obvious the best choice of department for here would be in production. The only question is, should you hire her or not?"
@@ -200,22 +197,10 @@ label ashley_intro_label():
         $ the_person.change_happiness(5)
         $ the_person.change_obedience(5)
         the_person.char "Oh! I didn't think you would say yes. This is great news! I'm sure she'll probably want to get started right away!"
-        $ ashley.event_triggers_dict["employed_since"] = day
-        $ mc.business.listener_system.fire_event("new_hire", the_person = ashley)
-        $ ashley.special_role.append(employee_role)
-        python:
-            for other_employee in mc.business.get_employee_list():
-                if other_employee == stephanie:
-                    town_relationships.update_relationship(ashley,the_person, "Sister")
-                else:
-                    town_relationships.begin_relationship(ashley, other_employee) #They are introduced to everyone at work, with a starting value of "Acquaintance"
-            town_relationships.update_relationship(nora, ashley, "Friend")
-            town_relationships.update_relationship(lily, ashley, "Rival")
-            del other_employee
-        "You complete the nessesary paperwork and hire [ashley.name], assigning her to the production department."
-        $ mc.business.add_employee_production(ashley)
-        $ ashley.set_work([1,2,3], mc.business.p_div)
-        $ mc.business.p_div.add_person(ashley)
+
+        $ hire_ashley()
+
+        "You complete the necessary paperwork and hire [ashley.name], assigning her to the production department."
         #TODO make sure her home is set to Stephanie's house somehow.
         "As you finish up, you notice [the_person.possessive_title] is already calling her sister with the news."
         $ scene_manager.update_actor(the_person, position = "walking_away")
@@ -227,15 +212,7 @@ label ashley_intro_label():
         the_person.char "Ahhh, okay. I understand, but please let me know ASAP if you change your mind!"
         $ scene_manager.update_actor(the_person, position = "walking_away")
         "[the_person.possessive_title] gets up and leaves the room. Did you make the right decision? Oh well, if you change your mind, you can always talk to her again."
-        call ashley_hire_later() from ashley_hire_later_2
-
-    return
-
-label ashley_hire_later():  #This label adds an action to stephanie's role that allows you to talk to her about hiring her sister.
-    $ ashley_hire_directed = Action("Reconsider hiring her sister.", ashley_hire_directed_requirement, "ashley_hire_directed_label",
-    menu_tooltip = "Talk to Stephanie about hiring her sister. She might be disappointed if you decide not to again...")
-    $ head_researcher.add_action(ashley_hire_directed) #lol wtf is this and how does it work
-
+        $ add_ashley_hire_later_action
     return
 
 label ashley_hire_directed_label(the_person):
@@ -257,22 +234,10 @@ label ashley_hire_directed_label(the_person):
         $ the_person.change_happiness(5)
         $ the_person.change_obedience(5)
         the_person.char "Oh! This is great news! I'm sure she'll probably want to get started right away!"
-        $ ashley.event_triggers_dict["employed_since"] = day
-        $ mc.business.listener_system.fire_event("new_hire", the_person = ashley)
-        $ ashley.special_role.append(employee_role)
-        python:
-            for other_employee in mc.business.get_employee_list():
-                if other_employee == stephanie:
-                    town_relationships.update_relationship(ashley,the_person, "Sister")
-                else:
-                    town_relationships.begin_relationship(new_person, other_employee) #They are introduced to everyone at work, with a starting value of "Acquaintance"
-            town_relationships.update_relationship(nora, ashley, "Friend")
-            town_relationships.update_relationship(lily, ashley, "Rival")
-            del other_employee
-        "You complete the nessesary paperwork and hire [ashley.name], assigning her to the production department."
-        $ mc.business.add_employee_production(ashley)
-        $ ashley.set_work([1,2,3], mc.business.p_div)
-        $ mc.business.p_div.add_person(ashley)
+
+        $ hire_ashley()
+
+        "You complete the necessary paperwork and hire [ashley.name], assigning her to the production department."
         #TODO make sure her home is set to Stephanie's house somehow.
         "As you finish up and start to leave, you notice [the_person.possessive_title] is already calling her sister with the news."
         the_person.char "Hey Ash! Guess what? I got you a starting position at that place I've been..."
@@ -295,7 +260,7 @@ label ashley_first_talk_label(the_person):
     "She looks at you, and see a hint of surprise on her face."
     the_person.char "Oh!... hello sir. It's nice to meet you. I'm sorry, my sister said this place was all women..."
     mc.name "That's right. Except me, the owner."
-    the_person.char "Ah... I see... Well thank you for the opportuniy. I appreciate the work."
+    the_person.char "Ah... I see... Well thank you for the opportunity. I appreciate the work."
     mc.name "Of course, [stephanie.title] is a good friend. Do you go by [the_person.name]? Or something else?"
     the_person.char "[the_person.title] is fine..."
     mc.name "[the_person.title] it is then."
@@ -398,8 +363,8 @@ label ashley_porn_video_discover_label():
     $ scene_manager = Scene()
     "It's been a long day. You consider heading for bed, but you've got a lot of energy, you aren't sure you would be able to fall asleep."
     "You decide to hop on your PC and watch some porn and jack off before you go to bed. That always helps you fall asleep."
-    "You load up your porn accounts and start browsing thorugh some videos."
-    "'Desparate Slut Begs for Creampie'? Nah! 'Guy Fucks Step Sister Stuck In Bear Trap'? hmm... maybe later."
+    "You load up your porn accounts and start browsing through some videos."
+    "'Desperate Slut Begs for Creampie'? Nah! 'Guy Fucks Step Sister Stuck In Bear Trap'? hmm... maybe later."
     "As you browse, you notice a clip thumbnail with a girl riding a guy tied down and in restraints. She looks kinda familiar? Reminds you of someone from work maybe?"
     "'Naughty Co-Ed Ties Up Boyfriend. RUINED ORGASM'? EH, it's worth a shot anyway. You click on it and wait for the generic porn intro to finish."
     "You mouth falls open when the scene starts."
@@ -438,7 +403,7 @@ label ashley_porn_video_discover_label():
 label ashley_ask_sister_about_porn_video_label(the_person):
     $ scene_manager = Scene()
     $ scene_manager.add_actor(the_person)
-    mc.name "Hello [the_perosn.title]. I need to talk to you about something... sensitive. Could you please come with me to my office?"
+    mc.name "Hello [the_person.title]. I need to talk to you about something... sensitive. Could you please come with me to my office?"
     the_person.char "Of course."
     #TODO change background to office
     "You enter your office an gesture for her to sit down."
@@ -448,7 +413,7 @@ label ashley_ask_sister_about_porn_video_label(the_person):
     mc.name "I wanted to talk to you again, about your sister, [ashley.title]."
     the_person.char "Oh!... right..."
     if the_person.sluttiness > 50:
-        "Her back slumps noticably when you say that."
+        "Her back slumps noticeably when you say that."
     mc.name "This is not going to be an easy, or pleasant conversation, but uhh, I found a video of your sister..."
     the_person.char "UGH! I thought we got that deleted from everywhere."
     mc.name "Oh... deleted?"
