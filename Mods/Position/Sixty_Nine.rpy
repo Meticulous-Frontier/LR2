@@ -31,7 +31,7 @@ init python:
 label intro_SB_sixty_nine(the_girl, the_location, the_object):
     "You give her ass a good hard smack and then look at [the_girl.possessive_title]."
     mc.name "Hey, wanna sixty nine?"
-    if SB_check_fetish(the_girl, oral_fetish_role):
+    if the_girl.has_role(oral_fetish_role):
         "[the_girl.possessive_title] smiles wide and quickly responds."
         the_girl.char "That sounds amazing! Sixty nine has to be the absolute best position... I can't wait to taste you!"
     if the_girl.effective_sluttiness() > 45:
@@ -163,7 +163,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                         $ mc.change_arousal(5)
 
                     "[the_girl.possessive_title] wraps her right hand around the base of your cock and starts to slide it back and forth in time with her sucking. Her other hand begins to lightly cup and knead your balls."
-                    if SB_check_fetish(the_girl, cum_external_role):
+                    if the_girl.has_role(cum_external_role):
                         "After a moment she takes her lips off your dick and continues stroking you."
                         the_girl.char "Mmm, I can't wait to feel your hot cum all over my face..."
                         "She strokes you off faster and holds your cock right against her face."
@@ -173,7 +173,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                         $ the_girl.change_arousal(5)
                         "You give [the_girl.possessive_title]'s ass a hard smack and resume eating her pussy."
                         "[the_girl.possessive_title]'s cunt quivers as she slides your cock back into her mouth, sucking at it with renewed vigor."
-                    elif SB_check_fetish(the_girl, cum_internal_role):
+                    elif the_girl.has_role(cum_internal_role):
                         "After a moment she takes her lips off your dick and continues stroking you."
                         the_girl.char "Mmm, I can't wait to feel your cum sliding down my throat [the_girl.mc_title]."
                         "She latches back onto your cock, sucking at the tip eagerly before letting it slip out again."
@@ -328,7 +328,7 @@ label outro_SB_sixty_nine(the_girl, the_location, the_object):
     if the_girl.get_opinion_score("cum facials") > 0: #She loves facials
         if the_girl.get_opinion_score("cum facials") == the_girl.get_opinion_score("drinking cum"):   #She likes them equally, so do one randomly
             if renpy.random.randint(0,100) < 50: #In her mouth
-                if SB_check_fetish(the_girl, oral_fetish_role):
+                if the_girl.has_role(oral_fetish_role):
                     "You feel [the_girl.possessive_title] take you all the way in her mouth as you start to orgasm."
                     "You grunt and twitch as you start to empty your balls right into her stomach."
                     "She tightens and relaxes her throat, swallowing your erection over and over as it spurts every last drop of cum straight down her throat."
@@ -336,7 +336,7 @@ label outro_SB_sixty_nine(the_girl, the_location, the_object):
                     #$ SB_sixty_nine.redraw_scene(the_girl)
                     "When you're completely finished she pulls off slowly, kissing the tip before leaning back."
                     $ the_girl.call_dialogue("cum_mouth")
-                elif SB_check_fetish(the_girl, cum_internal_role):
+                elif the_girl.has_role(cum_internal_role):
                     "[the_girl.possessive_title] pulls off until just the tip of your cock is in her mouth and she begins to stroke you off eagerly."
                     "You erupt in orgasm into her greedy mouth. Her expert mouth milks you with every spurt."
                     "[the_girl.possessive_title] begins moaning uncontrollably around your spasming cock when her cum addicted brain registers her cum dosage."
@@ -352,7 +352,7 @@ label outro_SB_sixty_nine(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] pulls you out of her mouth, and begins stroking you eagerly."
                 the_girl.char "Thats it, [the_girl.mc_title], cum all over me!"
                 $ the_girl.cum_on_face()
-                if SB_check_fetish(the_girl, cum_external_role):
+                if the_girl.has_role(cum_external_role):
                     "[the_girl.possessive_title] begins moaning uncontrollably as she receives the cum her addicted brain has been begging her for."
                 #$ SB_sixty_nine.redraw_scene(the_girl)
                 "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She sighs when you're completely finished."
@@ -361,14 +361,14 @@ label outro_SB_sixty_nine(the_girl, the_location, the_object):
             "[the_girl.possessive_title] pulls you out of her mouth, and begins stroking you eagerly."
             the_girl.char "Thats it, [the_girl.mc_title], cum all over me!"
             $ the_girl.cum_on_face()
-            if SB_check_fetish(the_girl, cum_external_role):
+            if the_girl.has_role(cum_external_role):
                 "[the_girl.possessive_title] begins moaning uncontrollably as she receives the cum her addicted brain has been begging her for."
             #$ SB_sixty_nine.redraw_scene(the_girl)
             "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She sighs when you're completely finished."
             $ the_girl.call_dialogue("cum_face")
         "You give [the_girl.possessive_title]'s slit a few more appreciative licks, and then you both start to get up."
     elif the_girl.get_opinion_score("drinking cum") > 0:
-        if SB_check_fetish(the_girl, cum_internal_role):
+        if the_girl.has_role(cum_internal_role):
             "[the_girl.possessive_title] pulls off until just the  tip of your cock is in her mouth and she begins to stroke you off eagerly."
             "You erupt in orgasm into her greedy mouth. Her expert mouth milks you with every spurt."
             "[the_girl.possessive_title] begins moaning uncontrollably around your spasming cock when her cum addicted brain registers her cum dosage."

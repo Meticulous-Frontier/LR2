@@ -33,7 +33,7 @@ init 3 python:
 
         dawn.generate_home()
         dawn.set_schedule([1,2,3], mall)
-        dawn.special_role.append(lifestyle_coach_role)
+        dawn.add_role(lifestyle_coach_role)
 
         dawn.home.add_person(dawn)
         dawn.on_room_enter_event_list.append(lifestyle_coach_intro)

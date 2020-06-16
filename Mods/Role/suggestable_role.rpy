@@ -73,7 +73,7 @@ label influence_opinion_label(person): #Input a custom opinion, check if they ha
         "Speaker" "[person.possessive_title] doesn't seem to agree with your suggestion regarding [opinion]"
         "Speaker" "Making her more suggestible might help you out."
 
-    $ person.special_role.remove(suggestable_role)
+    $ person.remove_role(suggestable_role)
     $ mc.log_event((person.title or person.name) + " is no longer suggestible.", "float_text_blue")
 
     $ renpy.scene("Active")

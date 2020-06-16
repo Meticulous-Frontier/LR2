@@ -165,7 +165,7 @@ label outro_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_loca
     $ scene_manager.draw_scene()
     the_girl_1.char "Oh god! He's cumming inside me! I can feel it!"
     "She drops her hips down, taking you as deep as she can. She rotates her hips instead of thrusting, milking your cum as best she can."
-    if SB_check_fetish(the_girl_2, cum_external_role) or SB_check_fetish(the_girl_2, cum_internal_role):
+    if the_girl_2.has_role(cum_external_role) or the_girl_2.has_role(cum_internal_role):
         the_girl_2.char "Hey! No fair! I want some of that!"
         "You feel [the_girl_1.title] slowly pull off of you, your cock cold and aching to be back inside of her."
         "[the_girl_2.title] leans forward and takes your cock in her mouth, sucking the remains of your cum of your shaft."

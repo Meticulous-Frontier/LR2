@@ -61,7 +61,7 @@ init -1 python:
             silent_preg_transform_action = Action("Pregnancy Transform", silent_pregnant_transform_requirement, "silent_pregnant_transform", args = the_person, requirement_args = the_person)
             the_person.on_room_enter_event_list.append(silent_preg_transform_action) #This event adds an announcement event the next time you enter the same room as the girl.
 
-        the_person.special_role.append(silent_pregnant_role)
+        the_person.add_role(silent_pregnant_role)
 
     def silent_preg_transform_announce_requirement(the_person):
         return True
@@ -186,7 +186,7 @@ init 2 python:
         person.body_type = person.event_triggers_dict.get("pre_preg_body", "standard_body")
         person.schedule = person.event_triggers_dict.get("preg_old_schedule")
 
-        person.special_role.remove(pregnant_role) #Should this be triggered some time after instead of being instant?
+        person.remove_role(pregnant_role) #Should this be triggered some time after instead of being instant?
         person.kids += 1
 
         tit_shrink_one_day = day + renpy.random.randint(7,14)

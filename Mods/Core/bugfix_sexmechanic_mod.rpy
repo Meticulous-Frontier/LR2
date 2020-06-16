@@ -602,7 +602,7 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
 label condom_ask_enhanced(the_person):
     $ condom_threshold = the_person.get_no_condom_threshold()
 
-    if SB_check_fetish(the_person, cum_internal_role):
+    if the_person.has_role(cum_internal_role):
         "[the_person.possessive_title] eyes your cock greedily. You could put a condom on if you wanted."
         menu:
             "Put on a condom":

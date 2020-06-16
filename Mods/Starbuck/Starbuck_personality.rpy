@@ -380,7 +380,7 @@ init python:
             valid_possessive_titles.append("Your slutty business partner")
         if person.sluttiness > 100 and person.sex_skills["Anal"] >= 4:
             valid_possessive_titles.append("Your buttslut")
-        if SB_check_fetish(person, cum_external_role) or SB_check_fetish(person, cum_internal_role):
+        if person.has_role(cum_external_role) or person.has_role(cum_internal_role):
             valid_possessive_titles.append("Your cum guzzler")
             valid_possessive_titles.append("Your cum catcher")
         return valid_possessive_titles

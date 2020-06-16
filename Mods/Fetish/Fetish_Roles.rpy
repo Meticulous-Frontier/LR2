@@ -103,12 +103,6 @@ init 1 python:
                 fetish_count += 1
         return fetish_count
 
-    def SB_check_fetish(the_person, fetish):
-        for role in the_person.special_role:
-            if role == fetish:
-                return True
-        return False
-
     def SB_get_fetishes_description(the_person):
         description = ""
         for role in the_person.special_role:

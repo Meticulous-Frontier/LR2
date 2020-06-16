@@ -49,9 +49,9 @@ label scene_SB_doggy_anal_1(the_girl, the_location, the_object):
                       mc.name "Damn that feels good. You're gonna make me cum if you keep that up. Where do you want my load?"
                       if mc.condom:
                            the_girl.char "Just shove it in deep and dump it right in my ass. You still have that condom on, right?"
-                      elif SB_check_fetish(the_girl, cum_internal_role):
+                      elif the_girl.has_role(cum_internal_role):
                           the_girl.char "Just shove it in deep and dump it right in my ass. You know I need your cum inside me, right where it belongs!"
-                      elif SB_check_fetish(the_girl, cum_external_role):
+                      elif the_girl.has_role(cum_external_role):
                          the_girl.char "Anywhere on my skin! My ass, my face, I don't care, just spray me down with it! With you know I need it like that!"
                       elif the_girl.get_opinion_score("creampies") > 0:
                            the_girl.char "You should just shove it in as deep as you can and cum inside me."
@@ -65,7 +65,7 @@ label scene_SB_doggy_anal_1(the_girl, the_location, the_object):
                            the_girl.char "I don't know... wherever you want I guess?"
                  else:
                       mc.name "Wow, your ass is amazing. Where'd you learn to work it like that girl? Have you been practicing?"
-                      if SB_check_fetish(the_girl, anal_fetish_role):
+                      if the_girl.has_role(anal_fetish_role):
                            "In response, she slams her ass all the way back on your dick. She grinds her hips left and right up against you."
                            the_girl.char "Practicing, dreaming, begging for your cock in my ass! Every moment my rear is empty I'm craving your dick deep inside it."
                            "You can feel her tense and relax her muscles in her ass rhythmically, messaging your shaft while you remain totally engulfed inside her."
@@ -152,7 +152,7 @@ label scene_SB_doggy_anal_2(the_girl, the_location, the_object):
             "You decide with her cheeks spread wide to see how deep you can get yourself into [the_girl.possessive_title]. "
             "With her hands busy, she has no way of holding up your weight as you push yourself forward and then down on top of her, your full body weight pushing her prone down onto the [the_object.name]."
             "[the_girl.possessive_title] whimpers, her body now pinned between your body and [the_object.name]."
-            if SB_check_fetish(the_girl, anal_fetish_role):
+            if the_girl.has_role(anal_fetish_role):
                 "Despite having no leverage, [the_girl.possessive_title] wriggles her ass against you as best as she can. Even with no room to move, her love for anal sex drives her to try to milk your cock."
                 "You enjoy her efforts before you speak clearly to her."
                 mc.name "Does this feel better than that plug? Is this what you're imagining everytime you push that plug up your ass?"

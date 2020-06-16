@@ -1343,8 +1343,8 @@ label hotwife_hookup_accept(the_person):
 #    return
 
 label hotwife_cum_mouth(the_person):
-    if mc.location == downtown_bar or SB_check_fetish(the_person, cum_internal_role):
-        if SB_check_fetish(the_person, cum_internal_role) or the_person.effective_sluttiness() > 80 or the_person.get_opinion_score("drinking cum") > 1:
+    if mc.location == downtown_bar or the_person.has_role(cum_internal_role):
+        if the_person.has_role(cum_internal_role) or the_person.effective_sluttiness() > 80 or the_person.get_opinion_score("drinking cum") > 1:
             the_person.char "Your cum tastes great [the_person.mc_title]! I bet I get another tasty load later..."
             "[the_person.possessive_title] winks at you as she swallows your cum."
         elif the_person.effective_sluttiness() > 50 or the_person.get_opinion_score("drinking cum") > 0:

@@ -74,7 +74,7 @@ label dungeon_room_appoint_slave_label_2(the_person):
             "[the_person.possessive_title] needs to be more obedient before being willing to commit to being your slave."
             return
 
-        $ the_person.special_role.append(slave_role)
+        $ the_person.add_role(slave_role)
 
         "[the_person.title] is now a willing slave of yours."
 

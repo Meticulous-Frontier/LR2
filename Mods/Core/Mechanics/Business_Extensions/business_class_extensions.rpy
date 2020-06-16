@@ -58,7 +58,7 @@ init -1 python:
             "HR" : [ self.hr_team, self.h_div ]
         }
         div_func[target_division][0].append(new_person)
-        new_person.special_role.append(employee_role)
+        new_person.add_role(employee_role)
         new_person.job = self.get_employee_title(new_person)
         new_person.set_work([1,2,3], div_func[target_division][1])
         self.update_employee_status(new_person)

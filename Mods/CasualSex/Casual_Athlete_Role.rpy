@@ -1177,8 +1177,8 @@ label athlete_hookup_accept(the_person):
 #    return
 
 label athlete_cum_mouth(the_person):
-    if mc.location == gym or SB_check_fetish(the_person, cum_internal_role):
-        if SB_check_fetish(the_person, cum_internal_role) or the_person.effective_sluttiness() > 70 or the_person.get_opinion_score("drinking cum") > 1:
+    if mc.location == gym or the_person.has_role(cum_internal_role):
+        if the_person.has_role(cum_internal_role) or the_person.effective_sluttiness() > 70 or the_person.get_opinion_score("drinking cum") > 1:
             the_person.char "Your cum tastes great [the_person.mc_title]! Thanks for giving me so much extra protein!"
             "[the_person.possessive_title] winks at you as she swallows your load."
         elif the_person.effective_sluttiness() > 50 or the_person.get_opinion_score("drinking cum") > 0:

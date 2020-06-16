@@ -64,7 +64,7 @@ init 3 python:
             start_sluttiness = person.sluttiness, start_obedience = person.obedience, start_happiness = person.happiness, start_love = person.love, start_home = dungeon, title = "Clone", possessive_title = "Your creation", mc_title = "Creator", relationship = "Single", kids = 0, force_random = True)
 
         clone.set_schedule([0,1,2,3,4], dungeon)
-        clone.special_role.append(clone_role)
+        clone.add_role(clone_role)
 
         dungeon.add_person(clone) #Create rooms for the clones to inhabit until a schedule is given (through being hired or player input)
         return

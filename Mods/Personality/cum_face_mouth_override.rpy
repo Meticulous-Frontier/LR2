@@ -13,8 +13,8 @@ init 5 python:
     config.label_overrides["stephanie_cum_mouth"] = "stephanie_cum_mouth_enhanced"
 
 label wild_cum_face_enhanced(the_person):
-    if SB_check_fetish(the_person, cum_external_role) or the_person.obedience > 130:
-        if SB_check_fetish(the_person, cum_external_role) or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("cum facials") > 0:
+    if the_person.has_role(cum_external_role) or the_person.obedience > 130:
+        if the_person.has_role(cum_external_role) or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("cum facials") > 0:
             the_person.char "What do you think? Is this a good look [the_person.mc_title]?"
             "[the_person.title] licks her lips, moving a few drops of your semen that had run down her face with her fingers to her mouth."
         else:
@@ -29,8 +29,8 @@ label wild_cum_face_enhanced(the_person):
     return
 
 label wild_cum_mouth_enhanced(the_person):
-    if SB_check_fetish(the_person, cum_internal_role) or the_person.obedience > 130:
-        if SB_check_fetish(the_person, cum_internal_role) or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("drinking cum") > 0:
+    if the_person.has_role(cum_internal_role) or the_person.obedience > 130:
+        if the_person.has_role(cum_internal_role) or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("drinking cum") > 0:
             the_person.char "Mmm, thank you [the_person.mc_title]."
         else:
             "[the_person.title]'s face grimaces as she tastes your cum in her mouth."
@@ -43,8 +43,8 @@ label wild_cum_mouth_enhanced(the_person):
     return
 
 label reserved_cum_face_enhanced(the_person):
-    if SB_check_fetish(the_person, cum_external_role) or the_person.obedience > 130:
-        if SB_check_fetish(the_person, cum_external_role) or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("cum facials") > 0:
+    if the_person.has_role(cum_external_role) or the_person.obedience > 130:
+        if the_person.has_role(cum_external_role) or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("cum facials") > 0:
             the_person.char "Ah, that's always a pleasure, [the_person.mc_title]."
         else:
             the_person.char "Well that's certainly a lot. I hope that means I did a satisfactory job."
@@ -56,8 +56,8 @@ label reserved_cum_face_enhanced(the_person):
     return
 
 label reserved_cum_mouth_enhanced(the_person):
-    if SB_check_fetish(the_person, cum_internal_role) or the_person.obedience > 130:
-        if SB_check_fetish(the_person, cum_internal_role) or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("drinking cum") > 0:
+    if the_person.has_role(cum_internal_role) or the_person.obedience > 130:
+        if the_person.has_role(cum_internal_role) or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("drinking cum") > 0:
             the_person.char "Mmm, always a pleasure to taste you [the_person.mc_title]. I hope you had a good time."
         else:
             "[the_person.title] puckers her lips, obviously not happy with the taste but too polite to say anything."
@@ -69,8 +69,8 @@ label reserved_cum_mouth_enhanced(the_person):
     return
 
 label bimbo_cum_face_enhanced(the_person):
-    if SB_check_fetish(the_person, cum_external_role) or the_person.obedience > 130:
-        if SB_check_fetish(the_person, cum_external_role) or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("cum facials") > 0:
+    if the_person.has_role(cum_external_role) or the_person.obedience > 130:
+        if the_person.has_role(cum_external_role) or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("cum facials") > 0:
             the_person.char "Do I look cute covered in your cum, [the_person.mc_title]?"
             "[the_person.title] licks her lips, scooping up a few drops of your semen that dripped down her face with her finger and licking them off."
         else:
@@ -85,8 +85,8 @@ label bimbo_cum_face_enhanced(the_person):
     return
 
 label bimbo_cum_mouth_enhanced(the_person):
-    if SB_check_fetish(the_person, cum_internal_role) or the_person.obedience > 130:
-        if SB_check_fetish(the_person, cum_internal_role) or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("drinking cum") > 0:
+    if the_person.has_role(cum_internal_role) or the_person.obedience > 130:
+        if the_person.has_role(cum_internal_role) or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("drinking cum") > 0:
             the_person.char "That was very nice [the_person.mc_title], thank you."
         else:
             "[the_person.title]'s face grimaces as she tastes your sperm in her mouth."
@@ -103,8 +103,8 @@ label bimbo_cum_mouth_enhanced(the_person):
     return
 
 label introvert_cum_face_enhanced(the_person):
-    if SB_check_fetish(the_person, cum_external_role) or the_person.obedience > 130:
-        if SB_check_fetish(the_person, cum_external_role) or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("cum facials") > 0:
+    if the_person.has_role(cum_external_role) or the_person.obedience > 130:
+        if the_person.has_role(cum_external_role) or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("cum facials") > 0:
             "[the_person.title] licks her lips and moving her tongue up to catch a few drops of semen that spilled out of her nose."
         else:
             "[the_person.title] runs a finger along her cheek, wiping away some of your semen."
@@ -116,8 +116,8 @@ label introvert_cum_face_enhanced(the_person):
     return
 
 label introvert_cum_mouth_enhanced(the_person):
-    if SB_check_fetish(the_person, cum_internal_role) or the_person.obedience > 130:
-        if SB_check_fetish(the_person, cum_internal_role) or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("drinking cum") > 0:
+    if the_person.has_role(cum_internal_role) or the_person.obedience > 130:
+        if the_person.has_role(cum_internal_role) or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("drinking cum") > 0:
             the_person.char "Mmm. Thank you."
         else:
             the_person.char "Mmm."
@@ -129,8 +129,8 @@ label introvert_cum_mouth_enhanced(the_person):
     return
 
 label relaxed_cum_face_enhanced(the_person):
-    if SB_check_fetish(the_person, cum_external_role) or the_person.obedience > 130:
-        if SB_check_fetish(the_person, cum_external_role) or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("cum facials") > 0:
+    if the_person.has_role(cum_external_role) or the_person.obedience > 130:
+        if the_person.has_role(cum_external_role) or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("cum facials") > 0:
             the_person.char "Do I look cute covered in your cum, [the_person.mc_title]?"
             "[the_person.title] licks her lips, cleaning up a few drops of your semen that had run down her face."
         else:
@@ -145,8 +145,8 @@ label relaxed_cum_face_enhanced(the_person):
     return
 
 label relaxed_cum_mouth_enhanced(the_person):
-    if SB_check_fetish(the_person, cum_internal_role) or the_person.obedience > 130:
-        if SB_check_fetish(the_person, cum_internal_role) or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("drinking cum") > 0:
+    if the_person.has_role(cum_internal_role) or the_person.obedience > 130:
+        if the_person.has_role(cum_internal_role) or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("drinking cum") > 0:
             the_person.char "That was very nice [the_person.mc_title], thank you."
         else:
             "[the_person.title]'s face grimaces as she tastes your sperm in her mouth."
@@ -163,10 +163,10 @@ label relaxed_cum_mouth_enhanced(the_person):
     return
 
 label stephanie_cum_face_enhanced(the_person):
-    if SB_check_fetish(the_person, cum_external_role) or the_person.obedience > 130:
-        if SB_check_fetish(the_person, cum_external_role):
+    if the_person.has_role(cum_external_role) or the_person.obedience > 130:
+        if the_person.has_role(cum_external_role):
             the_person.char "Mmm, that feels nice."
-        elif SB_check_fetish(the_person, cum_internal_role):
+        elif the_person.has_role(cum_internal_role):
             if the_person.sex_record.get("Cum in Mouth", 0) > 0:
                 the_person.char "You should shoot it into my mouth next time. I love how your hot cum tastes."
             else:
@@ -178,7 +178,7 @@ label stephanie_cum_face_enhanced(the_person):
         else:
             the_person.char "There we go, all taken care of."
     else:
-        if SB_check_fetish(the_person, cum_internal_role) or the_person.effective_sluttiness() > 80 or the_person.get_opinion_score("drinking cum") > 1:
+        if the_person.has_role(cum_internal_role) or the_person.effective_sluttiness() > 80 or the_person.get_opinion_score("drinking cum") > 1:
             if the_person.sex_record.get("Cum in Mouth", 0) > 0:
                 the_person.char "Aww, you should shoot it into my mouth next time. I love how your hot cum tastes."
             else:
@@ -191,8 +191,8 @@ label stephanie_cum_face_enhanced(the_person):
     return
 
 label stephanie_cum_mouth_enhanced(the_person):
-    if SB_check_fetish(the_person, cum_internal_role) or the_person.obedience > 130:
-        if SB_check_fetish(the_person, cum_internal_role) or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("drinking cum") > 0:
+    if the_person.has_role(cum_internal_role) or the_person.obedience > 130:
+        if the_person.has_role(cum_internal_role) or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("drinking cum") > 0:
             the_person.char "Oh god, you taste so good. Thank you for the treat [the_person.mc_title]."
         else:
             the_person.char "Mmm, thank you [the_person.mc_title]."
