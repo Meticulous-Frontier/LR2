@@ -75,7 +75,7 @@ init 1 python:
         dawn.remove_on_talk_event(quest_essential_oils_decision)
         mc.business.head_researcher.remove_on_talk_event(quest_essential_oils_research_start)
         mc.business.head_researcher.remove_on_talk_event(quest_essential_oils_research_end)
-        # quest_essential_oils.quest_event_dict.clear()  #TODO this action will clear the invoice day
+        # quest_essential_oils.quest_event_dict.clear()  #TODO this action will clear the invoice day we do this manually after the invoice event instead
         return
 
     def quest_essential_oils_get_target():
@@ -274,6 +274,7 @@ label quest_essential_oils_decision_label(the_person):
     mc.name "Hey, I've procured an order of essential oils. They should be delivered sometime today."
     HR_temp.char "Okay. If you to research a new serum that uses them, let me know, we should be able to start developing one ASAP."
     "You hang up the phone. You now have access to the Essential Oils serum trait. It has a high value, but no positive effects and high chance of a negative side effect."
+    $ quest_essential_oils.quest_event_dict.clear()
     return
 
 label quest_essential_oils_abandon_label():
@@ -281,12 +282,14 @@ label quest_essential_oils_abandon_label():
     "You a run a legitimate pharmaceutical business, theres no room for that bullshit around here."
     "You decide just to scrap the whole idea."
     $ quest_essential_oils.set_quest_flag(99)
+    $ quest_essential_oils.quest_event_dict.clear()
     return
 
 label quest_essential_oils_invoice_label():
     "You get an invoice to your business for the essential oils you purchased."
     "You write a check and drop it in the mailbox."
     $ mc.business.change_funds(-500)
+    $ quest_essential_oils.quest_event_dict.clear()
     return
 
 
