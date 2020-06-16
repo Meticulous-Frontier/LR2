@@ -1,7 +1,3 @@
-init -2 python:
-    weight_round = round
-
-
 init -1 python:
     # Overrides VREN's height function, so we display the height based on the weight property
     # instead of the fixed weight on zoom factor
@@ -27,7 +23,7 @@ init -1 python:
                 # calculates a factor for the current day in relation to show day and due day, multiplied by average pregnancy weight of 25 pounds
                 lbs += (1 - ((person.get_due_day() - day) / float(person.get_due_day() - person.pregnancy_show_day()))) * 25
 
-            return str(weight_round(lbs, 1)) + " lbs"
+            return str(__builtin__.round(lbs, 1)) + " lbs"
         else:
             kg = person.weight
 
@@ -36,7 +32,7 @@ init -1 python:
                 # calculates a factor for the current day in relation to show day and due day, multiplied by average pregnancy weight of 11.4 kg
                 kg += (1 - ((person.get_due_day() - day) / float(person.get_due_day() - person.pregnancy_show_day()))) * 11.4
 
-            return str(weight_round(kg, 1)) + " kg"
+            return str(__builtin__.round(kg, 1)) + " kg"
 
     def time_of_day_string():
         return time_names[time_of_day].lower()

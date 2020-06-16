@@ -77,7 +77,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                                             elif day < the_person.get_due_day():
                                                 text "- Delivery Day: " + str(the_person.get_due_day()) style "menu_text_style"
                                         else:
-                                            text "Fertility: " + str(round(the_person.fertility_percent, 1)) + "%" style "menu_text_style"
+                                            text "Fertility: " + str(__builtin__.round(the_person.fertility_percent, 1)) + "%" style "menu_text_style"
                                             if persistent.pregnancy_pref == 2:
                                                 text "Monthly Peak Day: " + str(the_person.ideal_fertile_day) style "menu_text_style"
                                                 text "Birth Control: " + ("Yes" if the_person.on_birth_control else "No") style "menu_text_style"                            
