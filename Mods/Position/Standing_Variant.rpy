@@ -501,7 +501,7 @@ label outro_SB_facing_wall(the_girl, the_location, the_object):
             else:
                 the_girl.char "Oh my god, why do I let you do this to me... but it feels so good..."
 
-            "Once you finish, you slowly back up and pull yourself out of [the_girl.possessive_title]. A stream of semen trickles out of her and down her long for a few seconds."
+            "Once you finish, you slowly back up and pull yourself out of [the_girl.possessive_title]. A stream of semen trickles out of her and down her long legs for a few seconds."
             if the_girl.get_opinion_score("bareback sex") > 0:
                 "[the_girl.possessive_title] reaches back and desperately tries to stop any more from leaking out with her hand."
 
