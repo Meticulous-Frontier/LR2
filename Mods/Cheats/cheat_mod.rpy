@@ -306,7 +306,7 @@ screen cheat_menu():
                                                             Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] - main_stats[x][2])
                                                         ]
                                                 else:
-                                                    textbutton x + ": " + str(round(vars(editing_target)[main_stats[x][1]], 3)):
+                                                    textbutton x + ": " + str(__builtin__.round(vars(editing_target)[main_stats[x][1]], 3)):
                                                         xsize 198
                                                         style "textbutton_no_padding_highlight"
                                                         text_style "cheat_text_style"
