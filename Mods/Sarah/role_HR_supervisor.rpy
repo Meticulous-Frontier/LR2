@@ -851,7 +851,7 @@ label HR_director_review_discoveries_label(the_person):
             the_person.char "For the company I found, the pricing is $10 per person, per week. This would be on top of the $5 per person for the company gym membership."
             mc.name "What would be the benefits we would see if we invest in this?"
             the_person.char "Well, generally it would increase the energy of employees as they develop healthier eating patterns."
-            the_person.char "Additionally, I think employees with interests in sports and hiking would really appreciate the change also."
+            the_person.char "Additionally, I think employees with interests in sports and hiking would really appreciate the change also, we could even encourage them to like sports during our one on one meetings."
             mc.name "Okay, I'll consider it and get back to you on that."
 
         "You finish up discussing the company policies."
