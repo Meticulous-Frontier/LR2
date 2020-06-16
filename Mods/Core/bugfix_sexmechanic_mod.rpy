@@ -67,13 +67,13 @@ init 5 python:
     def cheating_check_get_watcher(person):
         other_people = [a_person for a_person in mc.location.people if a_person is not person] #Build a list with all the _other_ people in the room other than the one we're fucking.
         for a_person in other_people:
-            if girlfriend_role in a_person.special_role and the_position.slut_requirement > (a_person.sluttiness/2): #You can get away with stuff half as slutty as she would do
+            if a_person.has_role(girlfriend_role) and the_position.slut_requirement > (a_person.sluttiness/2): #You can get away with stuff half as slutty as she would do
                 caught_cheating_action = Action("Caught cheating action", caught_cheating_requirement, "caught_cheating_label", args = person)
                 if not exists_in_room_enter_list(a_person, "caught_cheating_label"):
                     a_person.on_room_enter_event_list.append(caught_cheating_action)
                     renpy.say("",a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
 
-            elif affair_role in a_person.special_role and the_position.slut_requirement > ((a_person.sluttiness*2)/3): #You can get away with stuff two thirds as slutty as what she would do.
+            elif a_person.has_role(affair_role) and the_position.slut_requirement > ((a_person.sluttiness*2)/3): #You can get away with stuff two thirds as slutty as what she would do.
                 caught_affair_cheating_action = Action("Caught affair cheating action", caught_affair_cheating_requirement, "caught_affair_cheating_label", args = person)
                 if not exists_in_room_enter_list(a_person, "caught_affair_cheating_label"):
                     a_person.on_room_enter_event_list.append(caught_affair_cheating_action)
@@ -88,7 +88,7 @@ init 5 python:
 
         #Cheating modifiers
         person.discover_opinion("cheating on men")
-        if prostitute_role in person.special_role:
+        if person.has_role(prostitute_role):
             person.add_situational_slut("cheating", 20, "Prostitutes don't care about cheating")
         elif person.relationship == "Girlfriend":
             if person.get_opinion_score("cheating on men") > 0:
@@ -117,9 +117,9 @@ init 5 python:
         if person.love < 0:
             person.add_situational_slut("love_modifier", person.love, "I hate you, get away from me!")
         elif private:
-            if girlfriend_role in person.special_role: #Girlfriend and affairs gain full Love
+            if person.has_role(girlfriend_role): #Girlfriend and affairs gain full Love
                 person.add_situational_slut("love_modifier", person.love, "You're my special someone, I love you!")
-            elif affair_role in person.special_role:
+            elif person.has_role(affair_role):
                 person.add_situational_slut("love_modifier", person.love, "I have kept it a secret, but I love you!")
             elif person.has_family_taboo(): #Family now only gains 1/4 (but this now helps offset the taboo penalty)
                 if mother_role in person.special_role:
@@ -632,7 +632,7 @@ label condom_ask_enhanced(the_person):
             "Don't":
                 return True
 
-    elif prostitute_role in the_person.special_role:
+    elif the_person.has_role(prostitute_role):
         if the_person.love < 50:
             the_person.char "Are you remembering that I'm a 'working girl'?"
             the_person.char "That means 'safety first' - always."

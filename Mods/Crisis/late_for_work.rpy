@@ -62,7 +62,7 @@ label late_for_work_action_label:
                 the_person.char "Thank you, [the_person.mc_title]!"
                 $ the_person.change_stats(obedience = -2, happiness = 2)
 
-            "What a coincidence..." if affair_role in the_person.special_role:
+            "What a coincidence..." if the_person.has_role(affair_role):
                 mc.name "I'm feeling the need for a little personal attention myself."
                 the_person.char "Oh, is that so?"
                 if (upper_clothing):

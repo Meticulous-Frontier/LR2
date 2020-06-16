@@ -114,9 +114,9 @@ init -1 python:
                     elif person is starbuck:
                         if starbuck.shop_investment_rate == 6.0:
                             add_sb_starbuck_anal_intro_event()
-                    elif person is stephanie and head_researcher in person.special_role and person.personality != bimbo_personality:
+                    elif person is stephanie and person.has_role(head_researcher) and person.personality != bimbo_personality:
                         add_stephanie_anal_fetish_action()
-                    elif employee_role in person.special_role:
+                    elif person.is_employee():
                         add_sb_fetish_anal_crisis(person)
                     else:
                         add_sb_fetish_anal_crisis_non_employee(person)
@@ -142,9 +142,9 @@ init -1 python:
                             add_sb_fetish_lily_cum_event()
                         elif person is mom:
                             add_sb_fetish_mom_cum_event()
-                        elif person is stephanie and head_researcher in person.special_role and person.personality != bimbo_personality:
+                        elif person is stephanie and person.has_role(head_researcher) and person.personality != bimbo_personality:
                             add_sb_fetish_stephanie_cum_event()
-                        elif employee_role in person.special_role:
+                        elif person.is_employee():
                             add_sb_fetish_cum_crisis(person)
                         else:
                             add_sb_fetish_cum_crisis_non_employee(person)

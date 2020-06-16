@@ -250,12 +250,15 @@ init -1 python:
     Person.get_job_happiness_score = get_job_happiness_score_enhanced
 
     def is_employee(self):
-        employment_title = mc.business.get_employee_title(self)
-        if employment_title != "None":
-            return True
-        return False
-
+        return self.has_role(employee_role)
     Person.is_employee = is_employee
+
+    def has_role(self, role):
+        if isinstance(role, basestring):
+            return not find_in_list(lambda x: x.role_name == role, self.special_role) is None
+        else:
+            return role in self.special_role
+    Person.has_role = has_role
 
     ## LEARN HOME EXTENSION
     def learn_home(self): # Adds the_person.home to mc.known_home_locations allowing it to be visited without having to go through date label
@@ -829,6 +832,23 @@ init -1 python:
 
     Person.change_stats = change_stats
 
+    # returns number of hearts of sluttiness for easy scene building.
+    def sluttiness_tier(self):
+        if self.sluttiness < 20:
+            return 0
+        if self.sluttiness < 40:
+            return 1
+        if self.sluttiness < 60:
+            return 2
+        if self.sluttiness < 80:
+            return 3
+        if self.sluttiness < 100:
+            return 4
+        else:
+            return 5
+
+    Person.sluttiness_tier = sluttiness_tier
+
     ## CHANGE WILLPOWER EXTENSION
     # changes the willpower of a person by set amount
     def change_willpower(self, amount): #Logs change in willpower and shows new total.
@@ -1141,7 +1161,7 @@ init -1 python:
 ##########################################
 
     def is_pregnant(self):
-        if pregnant_role in self.special_role:
+        if self.has_role(pregnant_role) or self.has_role(silent_pregnant_role):
             return True
         return False
     Person.is_pregnant = is_pregnant

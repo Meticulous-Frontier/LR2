@@ -7,7 +7,7 @@ init 2 python:
                     return not the_person.home in mc.known_home_locations
         return False
 
-    employee_find_out_home_location_action = Action("Have a personal chat.", employee_find_out_home_location_requirement, "employee_find_out_home_location_label",
+    employee_find_out_home_location_action = Action("Have a personal chat", employee_find_out_home_location_requirement, "employee_find_out_home_location_label",
         menu_tooltip = "Have a chat with an employee and find our more about her, including her home address.")
 
 
@@ -42,7 +42,7 @@ label employee_find_out_home_location_label(the_person):
         $ opinion = "years"
 
     if the_person.relationship == "Single":
-        the_person.char "I'm still single and living at home with my parents."
+        the_person.char "I'm still single, enjoying life and keeping things casual."
     elif the_person.relationship == "Girlfriend":
         the_person.char "My boyfriend is [the_person.SO_name] and we have been going out for about [ran_num] [opinion]."
     elif the_person.relationship == "Fiancée":

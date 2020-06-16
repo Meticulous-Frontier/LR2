@@ -19,9 +19,9 @@ init 10 python:
             return False
 
     def slave_trim_pubes_requirement(the_person):
-        if girlfriend_role in the_person.special_role or affair_role in the_person.special_role:
+        if the_person.has_role(girlfriend_role) or the_person.has_role(affair_role):
             return False
-        if slave_role in the_person.special_role:
+        if the_person.has_role(slave_role):
             return True
         return False        
 
