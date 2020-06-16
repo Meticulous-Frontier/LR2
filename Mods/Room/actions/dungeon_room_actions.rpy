@@ -18,7 +18,7 @@ init 10 python:
         return False
 
     def dungeon_completed_action_requirement(completion_day):
-        if day > completion_day and time_of_day > 0 and time_of_day < 4:
+        if day > completion_day and time_of_day > 0 and time_of_day < 4 and day%7 < 5:
             return True
         return False
 
