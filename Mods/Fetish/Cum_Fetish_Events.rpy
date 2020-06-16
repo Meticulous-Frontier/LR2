@@ -130,7 +130,7 @@ label SB_fetish_cum_non_employee_label(the_person):
             mc.name "Did you get what you were hoping for?"
             the_person.char "Oh, I think I'm good for today... but I'm sure it won't be long until I get hungry again..."
             "[the_person.possessive_title] runs her hand through her hair. She licks her lips and smiles at you."
-            $ the_person.apply_outfit(the_person.planned_outfit)
+            $ the_person.apply_planned_outfit()
             the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
             $ the_person.draw_person(position = "walking_away", emotion = "happy")
             "You wave goodbye to [the_person.possessive_title] and quickly put away your cock. You turn around and go to bed."
@@ -371,7 +371,7 @@ label SB_fetish_cum_dosage_non_employee_label():
             call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), girl_in_charge = False, position_locked = True) from _call_fuck_person_SB_fetish_cum_dosage_non_employee_label
             the_person.char "Oh my god, thank you [the_person.mc_title]... I wish I had time make you cum again... but I know you're a busy a man..."
             "[the_person.possessive_title] starts to get up. Her hunger for cum satisfied for now."
-            $ the_person.apply_outfit(the_person.planned_outfit)
+            $ the_person.apply_planned_outfit()
             $ the_person.draw_person(emotion = "happy")
             the_person.char "Thanks again, [the_person.mc_title]. Don't hesitate to give me a call when... you know...need my service."
             $ the_person.draw_person(position = "walking_away")

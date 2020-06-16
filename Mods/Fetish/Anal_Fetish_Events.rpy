@@ -214,7 +214,7 @@ label SB_fetish_anal_label_non_employee(the_person):
             $ the_person.event_triggers_dict["LastAnalFetish"] = day
             $ add_fuck_doll_collar_to_base_outfit(the_person)
             "[the_person.possessive_title] gets her butt plug and slowly pushes it back into her ass."
-            $ the_person.apply_outfit(the_person.planned_outfit)
+            $ the_person.apply_planned_outfit()
             the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
             $ the_person.draw_person(position = "walking_away")
             "With a big smile, she turns around and sneaks out into the night."
@@ -497,7 +497,7 @@ label SB_fetish_anal_recurring_non_employee_label():
             
             the_person.char "That was so good. I've been thinking about that all day."
             "[the_person.possessive_title] gets her butt plug and slowly pushes it back into her ass."
-            $ the_person.apply_outfit(the_person.planned_outfit)
+            $ the_person.apply_planned_outfit()
             $ the_person.draw_person(emotion = "happy")
             the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
             $ the_person.draw_person(position = "walking_away")

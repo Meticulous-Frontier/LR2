@@ -113,7 +113,6 @@ init 1 python:
 
 ###Athlete ACTION LABELS###
 label casual_athlete_get_to_know_label(the_person):
-    $ set_gym_outfit(the_person)
     if "athlete_progress" not in the_person.event_triggers_dict:
         $ the_person.event_triggers_dict["athlete_progress"] = 0
         #Introduction scene#
@@ -215,7 +214,6 @@ label casual_athlete_get_to_know_label(the_person):
 
 #CSA10
 label casual_athlete_phase_one_label(the_person):
-    $ set_gym_outfit(the_person)
     if the_person.event_triggers_dict.get("athlete_progress", 0) == 1:
         mc.name "Hey [the_person.title]. I figured I would find you here. Want to workout together?"
         "[the_person.title] is just hopping off the treadmill. You can tell she just finished getting warmed up."
@@ -396,7 +394,6 @@ label casual_athlete_phase_one_label(the_person):
 
 #CSA20
 label casual_athlete_phase_two_label(the_person):
-    $ set_gym_outfit(the_person)
     if the_person.event_triggers_dict.get("athlete_progress", 0) == 2:
         "You see [the_person.title] on the treadmill. She is running hard, and has been training for a race coming up soon. She pauses the treadmill as you walk up to her."
         the_person.char "Hey [the_person.mc_title], here for another workout?"
@@ -438,12 +435,12 @@ label casual_athlete_phase_two_label(the_person):
 
 #CSA30
 label casual_athlete_race_crisis_label(the_person):
-    $ set_gym_outfit(the_person)
     "It's race day! You make your way downtown, ready for your race with [the_person.title]."
     $ mc.change_location(downtown)
     $ mc.location.show_background()
     "You find where they are organizing the race. It is a 5 kilometer race, which is about three miles long."
     "You look around and eventually find [the_person.title]."
+    $ the_person.apply_gym_outfit()
     $ the_person.draw_person(position = "stand3")
     the_person.char "Hey, there you are! I was starting to think you had chickened out!"
     mc.name "Not a chance. I hope you don't have any plans for tomorrow, because when I get done with you tonight you won't be able to get out of bed until Monday at least!"
@@ -545,7 +542,6 @@ label casual_athlete_race_crisis_label(the_person):
     return
 
 label casual_athlete_buy_protein_shake_label(the_person):
-    $ set_gym_outfit(the_person)
     mc.name "Hey [the_person.name], I see you're working pretty hard today! Can I get you a protein shake?"
     "[the_person.possessive_title] looks at you and smiles."
     the_person.char "That sounds great!"

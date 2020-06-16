@@ -6,8 +6,9 @@ init -1 python:
 
     Room.assign_room_label = assign_room_label
 
-
-    # add room compare function
+    ###########################################
+    # Custom Compare Functions For Room Class #
+    ###########################################
     def room_compare(self, other):
         if isinstance(self, other.__class__):
             if self.name == other.name:
@@ -39,8 +40,29 @@ init -1 python:
             return self.name != other.name
         return True
 
-    Room.__ne__ = room_ne       
+    Room.__ne__ = room_ne
 
+    #################################
+    # Extend Default Room Functions #
+    #################################
+
+    # extend the default move_person function
+    def move_person_extended(org_func):
+        def move_person_wrapper(room, person, destination):
+            # run original function
+            org_func(room, person, destination)
+            # run extension code
+            if destination is gym:  # people change clothes when going to the gym
+                person.apply_gym_outfit()
+
+        return move_person_wrapper
+
+    Room.move_person = move_person_extended(Room.move_person)
+
+
+    ########################
+    # Added Room Functions #
+    ########################
     def update_custom_rooms(room): # Replaces the room in the list with the updated version.
         room_update = find_in_list(lambda x: x.name == room.name, list_of_places)
 

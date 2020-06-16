@@ -647,7 +647,7 @@ label Sarah_get_drinks_label():
     $ scene_manager = Scene() # make sure we have a clean scene manager
     $ the_person = sarah
     $ the_person.planned_outfit = get_sarah_date_outfit_one()
-    $ the_person.apply_outfit(the_person.planned_outfit)
+    $ the_person.apply_planned_outfit()
 
     "Lost in thought as you get your work done in the silence of the weekend, a sudden voice startles you."
     the_person.char "[the_person.mc_title]! I figured I'd find you around here on a Saturday again!"
@@ -1632,7 +1632,7 @@ label Sarah_stripclub_story_label():
         call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_overnight_after_stripclub
         call Sarah_spend_the_night() from sarah_stripclub_spend_the_night_sequence
     else:
-        $ the_person.apply_outfit(the_person.planned_outfit)
+        $ the_person.apply_planned_outfit()
         $ scene_manager.update_actor(the_person, position = "stand3")
         "You lay on your bed and watch as [the_person.possessive_title] slowly gets her clothes on. She says goodbye then lets herself out."
         $ scene_manager.remove_actor(the_person)
@@ -2526,7 +2526,7 @@ label play_darts_301(the_person, focus_mod = 0): #Label returns true if mc wins,
 label Sarah_weekend_surprise_crisis_label():
     $ the_person = sarah
     $ the_person.planned_outfit = get_sarah_date_outfit_two()
-    $ the_person.apply_outfit(the_person.planned_outfit)
+    $ the_person.apply_planned_outfit()
     $ scene_manager = Scene()
 
     "Lost in thought as you get your work done in the silence of the weekend, a sudden voice startles you."
@@ -2848,14 +2848,14 @@ label Sarah_date_ends_at_your_place_label(the_person):
         the_person.char "It feels so good to be next to you, but I need to get home."
         mc.name "You don't have to. Just spend the night here."
         the_person.char "I'm sorry I can't. You know I can't. Thanks for the offer though!"
-        $ the_person.apply_outfit(the_person.planned_outfit)
+        $ the_person.apply_planned_outfit()
         $ scene_manager.update_actor(the_person, position = "stand3")
         "You lay on your bed and watch as [the_person.possessive_title] slowly gets her clothes on. She says goodbye then lets herself out."
     else:
         the_person.char "I need to get going... I guess. Thanks for the evening though. It was great!"
         mc.name "You don't have to. Just spend the night here."
         the_person.char "That's tempting, believe me, but I need to get home. Thanks for the offer!"
-        $ the_person.apply_outfit(the_person.planned_outfit)
+        $ the_person.apply_planned_outfit()
         $ scene_manager.update_actor(the_person, position = "stand3")
         "You lay on your bed and watch as [the_person.possessive_title] slowly gets her clothes on. She says goodbye then lets herself out."
         return "Advance Time"

@@ -65,18 +65,13 @@ label select_person_for_gym_response(the_person):
 init -2 python:
     gym_session_cost = 40
 
-init 2 python:
-    def set_gym_outfit(person):
-        person.apply_outfit(workout_wardrobe.decide_on_outfit2(person))
-        person.draw_person(emotion="default")
-        return
-
 label train_in_gym(the_person):
     python:
         gym.show_background()
-        set_gym_outfit(the_person)
-        old_outfit = the_person.outfit.get_copy() # make a copy we can restore
+        if not the_person in gym.people:
+            the_person.location().move_person(the_person, gym)
         ran_num = renpy.random.random() * 4 # Maximum change is 4 pounds
+        the_person.draw_person(emotion = "happy")
 
     if ran_num < 1:
         "You decide to take a yoga class with [the_person.possessive_title]."
@@ -123,12 +118,15 @@ label train_in_gym(the_person):
                     "As soon as you get into the showers, [the_person.possessive_title] moves closer and starts kissing you."
                     # intro breaks kissing taboo for the_person
                     $ the_person.break_taboo("kissing")
+                    $ old_outfit = the_person.outfit.get_copy() # make a copy we can restore
+
                     call fuck_person(the_person, start_position = kissing, start_object = mc.location.get_object_with_name("floor"), skip_intro = True) from _call_fuck_person_gym_training
                     $ the_report = _return
                     if the_report.get("girl orgasms", 0) > 0:
                         "[the_person.possessive_title] takes a few minutes to catch her breath, while looking at you getting dressed."
                     $ the_person.apply_outfit(old_outfit) # she puts on her gym clothes
                     $ the_person.draw_person(emotion = "happy")
+                    $ del old_outfit
 
                 "Another Time":
                     mc.name "Sorry [the_person.title], another time."
@@ -143,7 +141,5 @@ label train_in_gym(the_person):
     $ mc.business.change_funds(-gym_session_cost)
     "You pay for the gym session and $ [gym_session_cost] has been deducted from the company's credit card."
 
-    $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
-    $ del old_outfit
     $ mc.location.show_background()
     return

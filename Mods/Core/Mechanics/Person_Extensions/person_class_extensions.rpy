@@ -959,7 +959,6 @@ init -1 python:
     # wrap up the cum_on_tits function
     Person.cum_on_tits = cum_on_tits_extended(Person.cum_on_tits)
 
-
     def cum_on_stomach_extended(org_func):
         def cum_on_stomach_wrapper(person):
             # run original function
@@ -984,6 +983,21 @@ init -1 python:
     # wrap up the cum_on_ass function
     Person.cum_on_ass = cum_on_ass_extended(Person.cum_on_ass)
 
+################################################
+# Outfit functions - wear a specialized outfit #
+################################################
+
+    def apply_gym_outfit(self):
+        self.apply_outfit(workout_wardrobe.decide_on_outfit2(self))
+        return
+
+    Person.apply_gym_outfit = apply_gym_outfit
+
+    def apply_planned_outfit(self):
+        self.apply_planned_outfit(self.planned_outfit)
+        return
+
+    Person.apply_planned_outfit = apply_planned_outfit
 
 ######################################
 # Extend give serum for added goal #

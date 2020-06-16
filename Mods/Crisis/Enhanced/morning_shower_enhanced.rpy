@@ -117,7 +117,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
                 $ the_person.update_outfit_taboos()
                 call girl_shower_enter_enhanced(the_person) from _call_girl_shower_enter_enhanced_3
 
-    $ the_person.apply_outfit(the_person.planned_outfit)
+    $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
     $ renpy.scene("Active")
     return
