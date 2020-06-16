@@ -854,7 +854,7 @@ label HR_director_review_discoveries_label(the_person):
             the_person.char "Additionally, I think employees with interests in sports and hiking would really appreciate the change also."
             mc.name "Okay, I'll consider it and get back to you on that."
 
-        the_person.char "You finish up discussing the company policies."
+        "You finish up discussing the company policies."
     return
 
 label HR_director_manage_gym_membership(the_person):
