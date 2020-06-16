@@ -2,13 +2,14 @@
 init 1300:
     python:
         def candace_titles(the_person):
-            return the_person.name
+            return "Candi"
         def candace_possessive_titles(the_person):
-            return candace_titles(the_person)
+            return "Your Office Bimbo"
         def candace_player_titles(the_person):
             valid_mc_titles = []
             valid_mc_titles.append(mc.name)
             valid_mc_titles.append("cutie")
+            valid_mc_titles.append("Boss")
             return valid_mc_titles
         candace_personality = Personality("candace", default_prefix = "bimbo",
         common_likes = ["skirts", "small talk", "the colour pink", "makeup", "pop"],
