@@ -351,7 +351,7 @@ label fire_HR_director(the_person):
         $ the_person.draw_person(emotion="happy")
         the_person.char "Whew! I have a really hard time working with people to be honest. I hope whoever replaces me can do a better job at it!"
 
-    $ the_person.special_role.remove(HR_director_role)
+    $ the_person.remove_role(HR_director_role)
     $ mc.business.hr_director = None
     $ cleanup_HR_director_meetings()
     return
@@ -391,7 +391,7 @@ label HR_director_initial_hire_label(the_person):
         mc.business.hire_person(the_person, "HR")
         
         # assign special HR director role
-        mc.business.hr_director.special_role.append(HR_director_role)
+        mc.business.hr_director.add_role(HR_director_role)
 
         set_HR_director_tag("business_HR_eff_bonus", mc.business.effectiveness_cap - 100)
         add_hr_director_first_monday_action(the_person)

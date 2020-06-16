@@ -36,7 +36,7 @@ init 2 python:
             common_dislikes = ["relationships"],
             common_sexy_dislikes = [],
             titles_function = FA_titles, possessive_titles_function = FA_possessive_titles, player_titles_function = FA_player_titles)
-            new_FA.special_role.append(casual_FA_role)
+            new_FA.add_role(casual_FA_role)
             local_FA_personality.response_dict["hookup_rejection"] = "FA_hookup_rejection"
             new_FA.personality = local_FA_personality
             new_FA.event_triggers_dict["reject_position"] = "blowjob"
@@ -84,7 +84,7 @@ init 2 python:
     #     #     common_dislikes = ["relationships"],
     #     #     common_sexy_dislikes = [],
     #     #     titles_function = FA_titles, possessive_titles_function = FA_possessive_titles, player_titles_function = FA_player_titles)
-    #     #     new_FA.special_role.append(casual_FA_role)
+    #     #     new_FA.add_role(casual_FA_role)
     #     #     local_FA_personality.response_dict["hookup_rejection"] = "FA_hookup_rejection"
     #     #     new_FA.personality = local_FA_personality
     #     #     new_FA.event_triggers_dict["reject_position"] = "blowjob"
@@ -161,7 +161,7 @@ init 3 python:
 
 init 1302 python:
     def assign_casual_athlete_role(the_person):
-        the_person.special_role.append(casual_athlete_role)
+        the_person.add_role(casual_athlete_role)
 
         athlete_personality.response_dict["hookup_rejection"] = "athlete_hookup_rejection"
         athlete_personality.response_dict["hookup_accept"] = "athlete_hookup_accept"
@@ -177,7 +177,7 @@ init 1302 python:
         return
 
     def remove_casual_athlete_role(the_person):
-        the_person.special_role.remove(casual_athlete_role)
+        the_person.remove_role(casual_athlete_role)
         #"relaxed", "reserved", "wild", "introvert", "cougar"
         if the_person.personality.default_prefix == "relaxed":
             the_person.personality = relaxed_personality
@@ -198,7 +198,7 @@ init 1302 python:
         return
 
     def assign_casual_hotwife_role(the_person):
-        the_person.special_role.append(casual_hotwife_role)
+        the_person.add_role(casual_hotwife_role)
 
         hotwife_personality.response_dict["hookup_rejection"] = "hotwife_hookup_rejection"
         hotwife_personality.response_dict["hookup_accept"] = "hotwife_hookup_accept"
@@ -213,7 +213,7 @@ init 1302 python:
         return
 
     def remove_casual_hotwife_role(the_person):
-        the_person.special_role.remove(casual_hotwife_role)
+        the_person.remove_role(casual_hotwife_role)
         #"relaxed", "reserved", "wild", "introvert", "cougar"
         if the_person.personality.default_prefix == "relaxed":
             the_person.personality = relaxed_personality
@@ -235,7 +235,7 @@ init 1302 python:
 
 
     def assign_casual_FA_role(the_person):
-        the_person.special_role.append(casual_FA_role)
+        the_person.add_role(casual_FA_role)
         local_FA_personality = Personality("Stewardess", default_prefix = the_person.personality.personality_type_prefix,
         common_likes = ["traveling"],
         common_sexy_likes = ["casual sex"],
@@ -251,7 +251,7 @@ init 1302 python:
         return
 
     def remove_casual_FA_role(the_person):
-        the_person.special_role.remove(casual_FA_role)
+        the_person.remove_role(casual_FA_role)
         #"relaxed", "reserved", "wild", "introvert", "cougar"
         if the_person.personality.default_prefix == "relaxed":
             the_person.personality = relaxed_personality

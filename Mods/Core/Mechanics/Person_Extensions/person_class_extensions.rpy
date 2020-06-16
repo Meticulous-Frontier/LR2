@@ -249,17 +249,6 @@ init -1 python:
 
     Person.get_job_happiness_score = get_job_happiness_score_enhanced
 
-    def is_employee(self):
-        return self.has_role(employee_role)
-    Person.is_employee = is_employee
-
-    def has_role(self, role):
-        if isinstance(role, basestring):
-            return not find_in_list(lambda x: x.role_name == role, self.special_role) is None
-        else:
-            return role in self.special_role
-    Person.has_role = has_role
-
     ## LEARN HOME EXTENSION
     def learn_home(self): # Adds the_person.home to mc.known_home_locations allowing it to be visited without having to go through date label
         if not self.home in mc.known_home_locations + [lily_bedroom, mom_bedroom, aunt_bedroom, cousin_bedroom]:
@@ -1002,6 +991,42 @@ init -1 python:
 
     # wrap up the cum_on_ass function
     Person.cum_on_ass = cum_on_ass_extended(Person.cum_on_ass)
+
+
+##################
+# Role Functions #
+##################
+    def is_employee(self):
+        return self.has_role(employee_role)
+    Person.is_employee = is_employee
+
+    def has_role(self, role):
+        if isinstance(role, basestring):
+            return not find_in_list(lambda x: x.role_name == role, self.special_role) is None
+        else:
+            return role in self.special_role
+    Person.has_role = has_role
+
+    def add_role(self, role):
+        if not role in self.special_role:
+            self.special_role.append(role)
+            return True
+
+        # special situation if she gets girlfriend role, she loses affair role and SO
+        if role is girlfriend_role:
+            self.remove_role(affair_role)
+            self.relationship = "Single" #Technically they aren't "single", but the MC has special roles for their girlfriend.
+            self.SO_name = None            
+
+        return False
+    Person.add_role = add_role
+    
+    def remove_role(self, role):
+        if role in self.special_role:
+            self.special_role.remove(role)
+            return True
+        return False
+    Person.remove_role = remove_role
 
 ################################################
 # Outfit functions - wear a specialized outfit #

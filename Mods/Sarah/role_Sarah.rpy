@@ -1551,7 +1551,7 @@ label Sarah_stripclub_story_label():
                     $ the_person.change_happiness(15)
                     $ the_person.change_love(5)
                     "She kisses you, and you kiss her back."
-                    $ the_person.special_role.append(girlfriend_role)
+                    $ the_person.add_role(girlfriend_role)
 
                 "Let's just be friends":
                     the_person.char "Ah... okay wow, I guess I was just... totally misinterpreting things between us..."
@@ -1571,7 +1571,7 @@ label Sarah_stripclub_story_label():
                     the_person.char "Okay. Wow, I never thought I would do this..."
                     "She reaches down and gives your softened cock a few strokes."
                     the_person.char "But the things you do to me... my husband doesn't even come close!"
-                    $ the_person.special_role.append(affair_role)
+                    $ the_person.add_role(affair_role)
                     $ the_person.change_slut_temp(2)
                 "Let's keep it casual":
                     the_person.char "Ah, okay. So like, friends with benefits? Is that what we are talking about here?"
@@ -1594,13 +1594,8 @@ label Sarah_stripclub_story_label():
                     $ scene_manager.update_actor(the_person, position = "missionary")
                     "Well, it's official. I'm all yours now!"
                     python:
-                        the_person.special_role.append(girlfriend_role)
-                        if the_person.has_role(affair_role): # remove affair role if we have an affair with her
-                            the_person.special_role.remove(affair_role)
-
+                        the_person.add_role(girlfriend_role)
                         the_person.change_stats(love = 10, obedience = 5)
-                        the_person.relationship = "Single"
-                        the_person.SO_name = None
                 "Let's keep it casual":
                     the_person.char "Ah, okay. So like, friends with benefits? Is that what we are talking about here?"
                     mc.name "Exactly."

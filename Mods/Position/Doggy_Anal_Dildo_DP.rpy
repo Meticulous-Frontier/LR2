@@ -120,7 +120,7 @@ label scene_SB_doggy_anal_dildo_dp_1(the_girl, the_location, the_object):
                  $ the_girl.call_dialogue("suprised_exclaim")
                  "You lean forward and whisper into [the_girl.possessive_title]'s ear."
                  mc.name "I know you dream about my dick in your ass constantly and it feels good to finally have that dream come true, but don't forget who is in charge around here."
-                 if SB_check_fetish(the_girl, anal_fetish_role):
+                 if the_girl.has_role(anal_fetish_role):
                      "[the_girl.possessive_title] whimpers in total submission to you."
                      the_girl.char "I dream about it... I beg for it... It completes me! I'm not me unless your dick is deep in my ass [the_girl.mc_title]!"
                      "You give her a couple slow, heavy thrusts before releasing her hair. She returns her hands to the ground and moans when you resume your slow, methodical fucking."
@@ -162,7 +162,7 @@ label scene_SB_doggy_anal_dildo_dp_2(the_girl, the_location, the_object):
         "You decide with her cheeks spread wide to see how deep you can get yourself into [the_girl.possessive_title]. "
         "With her hands busy, she has no way of holding up your weight as you push yourself forward and then down on top of her, your full body weight pushing her prone down onto the [the_object.name]"
         "[the_girl.possessive_title] whimpers, her body now pinned between your body and [the_object.name]. The vibrating dildo stimulates her pussy mercilessly."
-        if SB_check_fetish(the_girl, anal_fetish_role):
+        if the_girl.has_role(anal_fetish_role):
             "Despite having no leverage, [the_girl.possessive_title] wriggles her ass against you as best as she can. Even with no room to move, her love for anal sex drives her to try to milk your cock"
             "You enjoy her efforts before you speak clearly to her."
             mc.name "You are such a slut. Is it nice to finally have a real cock, stuffed deep in your tight little asshole?"
@@ -218,7 +218,7 @@ label outro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
                 else:
                     the_girl.char "That's it, cum deep!"
                 "You wait until your orgasm has passed completely, then pull out and sit back. Her asshole gapes slightly. You condom is full of your potent seed."
-                if SB_check_fetish(the_girl, cum_internal_role):
+                if the_girl.has_role(cum_internal_role):
                     "[the_girl.possessive_title] quickly reaches back and grabs your cock. She hastily pulls your condom off, careful not to spill a drop."
                     the_girl.char "I'm not letting a drop of this delicious cum go to waste!"
                     "She brings the condom to her mouth and drains it all into her mouth in one quick motion. You can see her pupils dilate as she feeds her cum fetish."

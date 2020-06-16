@@ -368,7 +368,7 @@ label quest_cuckold_employee_decision_label():
         mc.name "I'm sorry, I want to help you, but it's been a long day and I'm just wore out..."
         the_person.char "Fuck you! I see right through that charade. You just wanted to fuck a married woman!"
         $ the_person.draw_person(position = "walking_away")
-        "[the_person.title] stands up and storms out of your office. Unfortunately, you may have damaged your relationship with her irreperably."
+        "[the_person.title] stands up and storms out of your office. Unfortunately, you may have damaged your relationship with her irreparably."
         $ quest_cuckold_employee.set_quest_flag(28)
     return
 
@@ -629,13 +629,14 @@ label quest_cuckold_employee_knocked_up_label():
             mc.name "[the_person.title], think it's time you left him so we can be together. It isn't right hiding this from him.."
             "[the_person.title] seems nervous, you can tell she is dealing with some guilt after cheating on her husband."
             the_person.char "I know... you're right. I know you're right! This has gone on long enough. I'll... I'll tell him later today."
-            #call transform_affair(the_person) from _call_transform_affair_4  #TODO this isn't the right function, because you aren't currently having an affair? Figure this branch out.
+            # she becomes your girlfriend
+            $ the_person.add_role(girlfriend_role)
             the_person.char "I cant believe it, I'm really doing this. You're my one and only bull now."
 
         "You're doing the right thing.":      #Be the good guy
             mc.name "I'm really happy for you. Don't worry, your secret is safe with me. For all purposes, the baby IS his."
             the_person.char "Yeah... I know... Its just hard, you know?"
-            "She gets a sulty tone to her voice."
+            "She gets a sultry tone to her voice."
             the_person.char "If you want to, you can still cum inside me once in a while... It was kinda hot, playing around with breeding."
             mc.name "I'm happy to be your bull whenever you need it."
     the_person.char "Do you think, I could just start calling you that? My bull?"
@@ -645,7 +646,7 @@ label quest_cuckold_employee_knocked_up_label():
     $ the_person.set_possessive_title("Your Personal Breeding Stock")
     "She puts her hand on your chest. She traces a few circles around it, then slower lowers her hand to your crotch. She starts to stroke the shaft."
     the_person.char "Mmm, it just feels so... virile..."
-    the_person.char "Do you need a little release? I know I'm alrady pregnant but..."
+    the_person.char "Do you need a little release? I know I'm already pregnant but..."
     "You growl at her."
     mc.name "Bend over, [the_person.title]. I need a hole for my seed."
     $ the_person.change_arousal(20)

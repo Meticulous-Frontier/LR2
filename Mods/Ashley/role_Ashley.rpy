@@ -27,7 +27,7 @@ init 2 python:
 
         ashley.home = stephanie.home
 
-        # ashley.home.add_person(ashley)
+        ashley.home.add_person(ashley)
         ashley.event_triggers_dict["intro_complete"] = False    #
         ashley.event_triggers_dict["excitement_overhear"] = False   #
         ashley.event_triggers_dict["attitude_discussed"] = False   #
@@ -76,7 +76,7 @@ init -1 python:
     def ashley_intro_requirement():   #After discovering an obedience serum trait and there is a position available. must be at work
         if day > 14 and mc.is_at_work() and mc.business.is_open_for_business():
             if mc.business.get_employee_count() < mc.business.max_employee_count:
-                return True        
+                return True
                 #TODO Consider making this true only if recruiting increased via HR director? Would be much delayed intro
                 if sedatives_trait.researched or obedience_enhancer.researched or large_obedience_enhancer.researched: #TODO find a better trigger for this since we aren't doing MC serums anymore.
                     return False

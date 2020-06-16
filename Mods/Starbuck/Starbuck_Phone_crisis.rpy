@@ -5,7 +5,7 @@ init -1 python:
 
 init 2 python:
     def SB_fetish_phone_requirement():
-        if SB_check_fetish(starbuck, anal_fetish_role):
+        if starbuck.has_role(anal_fetish_role):
             if time_of_day > 0 and time_of_day < 4: # only during daytime
                 return True
         return False

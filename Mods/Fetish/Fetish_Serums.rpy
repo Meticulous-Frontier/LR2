@@ -75,7 +75,7 @@ init -1 python:
             return
 
         if tier >= 3 and person.sex_skills["Vaginal"] >= 5 and person.get_opinion_score("vaginal sex") >= 2:
-            if person.sluttiness >= 80 and not SB_check_fetish(person, vaginal_fetish_role):
+            if person.sluttiness >= 80 and not person.has_role(vaginal_fetish_role):
                 if SB_get_fetish_count(person) < store.max_fetishes_per_person:
                     # renpy.say("", "Trigger vaginal fetish " + person.name)
                     if person is mom:
@@ -100,7 +100,7 @@ init -1 python:
             return
 
         if tier >= 3 and person.sex_skills["Anal"] >= 5 and person.get_opinion_score("anal sex") >= 2:
-            if person.sluttiness >= 90 and not SB_check_fetish(person, anal_fetish_role):
+            if person.sluttiness >= 90 and not person.has_role(anal_fetish_role):
                 if SB_get_fetish_count(person) < store.max_fetishes_per_person:
                     # renpy.say("", "Trigger anal fetish " + person.name)
                     if person is lily:
@@ -135,7 +135,7 @@ init -1 python:
         if tier >= 3 and person.sex_skills["Oral"] >= 4:
             if person.sluttiness >= 90 and SB_get_cum_score(person) >= 8:
                 # only allow one cum fetish either internal or external
-                if not (SB_check_fetish(person, cum_external_role) or SB_check_fetish(person, cum_internal_role)):
+                if not (person.has_role(cum_external_role) or person.has_role(cum_internal_role)):
                     if SB_get_fetish_count(person) < store.max_fetishes_per_person:
                         # renpy.say("", "Trigger cum fetish " + person.name)
                         if person is lily:

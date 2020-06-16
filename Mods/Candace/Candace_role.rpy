@@ -111,7 +111,7 @@ init 2 python:
         candace.event_triggers_dict["last_talk_day"] = 0
         candace.event_triggers_dict["clothes_shopping"] = 0
 
-        candace.special_role.append(candace_role)
+        candace.add_role(candace_role)
 
         candace.on_room_enter_event_list.append(candace_meet_at_office_store)
 
