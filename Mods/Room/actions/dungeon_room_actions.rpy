@@ -11,14 +11,14 @@ init 10 python:
     dungeon_room_appoint_slave_action = Action("Appoint a slave", dungeon_room_appoint_slave_requirement, "dungeon_room_appoint_slave_label", menu_tooltip = "Assigns the person a role as a slave. Use the \"Follow Me\" Action on a person to bring them to the Dungeon.")
 
     def dungeon_intro_action_requirement():
-        if day > 24 and time_of_day > 1 and time_of_day < 4: #Early for testing
+        if day > 24 and time_of_day > 1 and time_of_day < 4:
             if mc.business.funds > 20000 and not mc.business.is_open_for_business(): #Only trigger when alone in the office
                 if mc.is_at_work():
                     return True
         return False
 
     def dungeon_completed_action_requirement(completion_day):
-        if day > completion_day and time_of_day > 0 and time_of_day < 4 and day%7 < 5:
+        if day > completion_day and mc.is_at_work() and mc.business.is_open_for_business():
             return True
         return False
 
