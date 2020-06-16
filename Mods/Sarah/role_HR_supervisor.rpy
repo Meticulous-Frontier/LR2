@@ -86,6 +86,8 @@ init 5 python:
             topic_list.append("work uniforms")
         if get_HR_director_tag("business_HR_skimpy_uniform", False) == True:
             topic_list.append("skimpy uniforms")
+        if get_HR_director_tag("business_HR_gym_tier", 0) > 1: # unlocks after health program
+            topic_list.append("sports")
 
         return topic_list
 
@@ -639,6 +641,8 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         mc.name "I know that it feels like we are taking some of your creativity away when we assign uniforms. I understand that, but it is also important that we keep a professional atmosphere here."
     elif opinion_chat == "skimpy uniforms":
         mc.name "I know that it feels weird, being asked to come in to work wearing clothes that show a little skin, but in the market we are in, dressing to impress can be a key business advantage."
+    elif opinion_chat == "sports":
+        mc.name "I know that it might be unconventional, but we feel that an employees physical health will benefit the company as much as their labor skills."
     else:
         mc.name "I know the policy in place feels weird, but I want you to rethink your opinion on [opinion_chat]. It would be helpful if you would."
     the_person.char "All of our employees are valued here, not just as employees, but as people."
