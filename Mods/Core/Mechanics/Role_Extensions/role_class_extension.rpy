@@ -40,8 +40,17 @@ init -1 python:
 
     Role.add_action = add_action
 
+    # Remove an action from if present
     def remove_action(self, act):
         if act in self.actions:
             self.actions.remove(act)
 
     Role.remove_action = remove_action
+
+    # Remove an action by the effect (label name), if present
+    def remove_action_by_effect(self, effect):
+        found = find_in_list(lambda x: x.effect == effect, self.actions)
+        if found:
+            self.actions.remove(found)
+        
+    Role.remove_action_by_effect = remove_action_by_effect
