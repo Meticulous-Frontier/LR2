@@ -18,7 +18,7 @@ init -1 python:
             if stat_serum not in self.stat_serums:
                 self.stat_serums.append(stat_serum)
 
-        def add_abliity_serm(self, ability_serum):
+        def add_ability_serum(self, ability_serum):
             if ability_serum not in self.ability_serums:
                 self.ability_serums.append(ability_serum)
 
