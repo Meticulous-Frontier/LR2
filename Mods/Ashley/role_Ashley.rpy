@@ -412,7 +412,7 @@ label ashley_ask_sister_about_porn_video_label(the_person):
     the_person.char "Oh!... right..."
     if the_person.sluttiness > 50:
         "Her back slumps noticeably when you say that."
-    mc.name "This is not going to be an easy, or pleasant conversation, but uhh, I found a video of your sister..."
+    mc.name "This is not going to be an easy or pleasant conversation, but uhh, I found a video of your sister..."
     the_person.char "UGH! I thought we got that deleted from everywhere."
     mc.name "Oh... deleted?"
     $ scene_manager.update_actor (the_person, emotion = "sad")
@@ -420,8 +420,8 @@ label ashley_ask_sister_about_porn_video_label(the_person):
     the_person.char "We did everything we could to shut it down once we found out, but the internet is crazy. Once it's out there, its out there!"
     mc.name "Wow, I feel awful, I had no idea."
     the_person.char "Yeah. Unfortunately, having that happen really got to her. That was like, over a year ago? And she hasn't been out with anyone since."
-    the_person.char "AS you probably saw... she was pretty... adventurous... with guys."
-    the_person.char "But now its almost like she can't trust any guys anymore."
+    the_person.char "As you probably saw... she was pretty... adventurous... with guys."
+    the_person.char "But now it's almost like she can't trust any guys anymore."
     "You both look at each other for a moment, considering the circumstance."
     mc.name "I want to do something, but I don't know what."
     if the_person.love > 30:
