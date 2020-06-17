@@ -819,7 +819,7 @@ label HR_director_review_discoveries_label(the_person):
                         mc.name "I think for now I'd like to stick with more traditional recruiting methods."
                         $ set_HR_director_tag("business_HR_relative_recruitment", 1)
 
-                "Sure thing [the_person.mc_title]. If you change your mind in the future, just let me know. I can always put the sign up or down based on what we need at the time."
+                the_person.char "Sure thing, [the_person.mc_title]. If you change your mind in the future, just let me know. I can always put the sign up or down based on what we need at the time."
 
         if get_HR_director_tag("business_HR_meeting_on_demand", False) == False:
             if mc.business.get_employee_count() > 10:
