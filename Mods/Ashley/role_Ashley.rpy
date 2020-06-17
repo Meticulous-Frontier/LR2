@@ -21,8 +21,7 @@ init 2 python:
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = -18, start_happiness = 119, start_love = 0, \
             title = "Ashley", possessive_title = "Your intern", mc_title = mc.name, relationship = "Single", kids = 0)
 
-        ashley.set_schedule([0,4], stephanie.home)
-        ashley.set_schedule([1,2,3], stephanie.home)
+        ashley.set_schedule([0,1,2,3,4], stephanie.home)
 
         ashley.home = stephanie.home
 

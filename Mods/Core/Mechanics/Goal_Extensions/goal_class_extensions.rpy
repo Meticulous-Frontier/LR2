@@ -106,7 +106,7 @@ init 2 python:
     def create_new_work_goal(goal_difficulty, recursion = 0):
         if recursion < 5:
             potential_goal = get_random_from_list(list(set(work_goals) - set([mc.work_goal])))
-        else
+        else:
             potential_goal = get_random_from_list(work_goals)
 
         if potential_goal.check_valid(goal_difficulty) or recursion > 10: # forced exit add random goal even if not valid.
