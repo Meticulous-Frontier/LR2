@@ -574,7 +574,6 @@ init -1 python:
             destination = None
 
         if destination is not None: #We have somewhere scheduled to be for this time chunk. Let's move over there.
-            location.move_person(self, destination) #Always go where you're scheduled to be.
             if self.schedule[time_of_day] == self.work: #We're going to work.
                 if self.should_wear_uniform(): #Get a uniform if we should be wearing one.
                     self.wear_uniform()
@@ -583,14 +582,15 @@ init -1 python:
                     if self.sluttiness < 40 and self.planned_uniform and self.planned_uniform.slut_requirement > self.sluttiness*0.75: #A skimpy outfit/uniform is defined as the top 25% of a girls natural sluttiness.
                         self.change_slut_temp(self.get_opinion_score("skimpy uniforms"), add_to_log = False)
 
-            elif destination == self.home:
-                self.apply_outfit(self.planned_outfit) #We're at home, so we can get back into our casual outfit.
+            else:
+                self.apply_planned_outfit() #We're at home, so we can get back into our casual outfit.
 
-            #NOTE: There is no else here because all of the destinations should be set. If it's just a location they travel there and that's the end of it.
+            # location might change outfit, so moved call to end of this loop
+            location.move_person(self, destination) #Always go where you're scheduled to be.
 
         else:
             #She finds somewhere to burn some time
-            self.apply_outfit(self.planned_outfit) #Get changed back into our proper outfit if we aren't in it already.
+            self.apply_planned_outfit() #Get changed back into our proper outfit if we aren't in it already.
             available_locations = [] #Check to see where is public (or where you are white listed) and move to one of those locations randomly
             for potential_location in list_of_places:
                 if potential_location.public:
