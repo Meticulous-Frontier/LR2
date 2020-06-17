@@ -158,7 +158,7 @@ init 5 python:
         if position.opinion_tags:
             for opinion in position.opinion_tags:
                 if person.get_opinion_score(opinion) == -2:
-                    if person.obedience > 200: #A slave does what she is told.
+                    if person.has_role(slave_role) and person.obedience > 200: #A slave does what she is told.
                         return True
                     return False
         return True
