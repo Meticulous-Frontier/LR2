@@ -158,6 +158,8 @@ init 5 python:
         if position.opinion_tags:
             for opinion in position.opinion_tags:
                 if person.get_opinion_score(opinion) == -2:
+                    if person.obedience > 200: #A slave does what she is told.
+                        return True
                     return False
         return True
 
@@ -176,7 +178,7 @@ init 5 python:
         gained_skill = False    # only one skill per session
         gained_opinion = False  # only one opinion per session
         renpy.random.shuffle(types_seen) # shuffle types seen so we don't know what skills and opinions are checked for increment first
-        for record_class in types_seen: 
+        for record_class in types_seen:
             if not gained_skill and record_class in record_skill_map and renpy.random.randint(0,100) < 5 + (tier * 5):
                 person.increase_sex_skill(record_skill_map[record_class], 2 + tier)
                 gained_skill = True

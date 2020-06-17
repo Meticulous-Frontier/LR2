@@ -48,6 +48,10 @@ init 1 python:
         return quest_cuckold_employee.quest_event_dict.get("target", None)
 
     def quest_cuckold_employee_tracker():
+        if quest_cuckold_employee.get_quest_flag() <= 101:
+            if quest_cuckold_employee_get_target() == None:
+                quest_cuckold_employee.quest_complete = True
+                return
         if quest_cuckold_employee.get_quest_flag() <= 1:
             mc.business.add_unique_mandatory_crisis(quest_cuckold_employee_intro)
         elif quest_cuckold_employee.get_quest_flag() == 11:

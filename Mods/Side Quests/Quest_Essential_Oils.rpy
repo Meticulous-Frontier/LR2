@@ -39,8 +39,22 @@ init 1 python:
         return
 
     def quest_essential_oils_tracker():
+        if quest_essential_oils.get_quest_flag() <= 101:    #If head researcher quits or get fired before quest completion then quest fails
+            if mc.business.head_researcher == None:
+                quest_essential_oils.quest_complete = True
+                return
+
         if quest_essential_oils.get_quest_flag() <= 1:
+            if quest_essential_oils_get_target() == None:
+                the_target =  quest_essential_oils_find_employee()
+                if the_target == None:
+                    quest_essential_oils.quest_complete = True
+                    return
+                quest_essential_oils.quest_event_dict["target"] = the_target
             quest_essential_oils_get_target().add_unique_on_room_enter_event(quest_essential_oils_intro)
+        elif quest_essential_oils.get_quest_flag() >= 11 and quest_essential_oils.get_quest_flag() <= 31:
+            if quest_essential_oils_get_target() == None:#The quest has started but we fired or the target quit.
+                quest_essential_oils.quest_complete = True
         elif quest_essential_oils.get_quest_flag() == 11:
             mc.business.head_researcher.add_unique_on_talk_event(quest_essential_oils_research_start)
             mc.business.add_unique_mandatory_crisis(quest_essential_oils_abandon)
@@ -64,7 +78,7 @@ init 1 python:
     def quest_essential_oils_start_requirement():
         if mc.business.head_researcher == None:
             return False
-        if quest_essential_oils_find_employee == None:
+        if quest_essential_oils_find_employee() == None:
             return False
         return True
 
