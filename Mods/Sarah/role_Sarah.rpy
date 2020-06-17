@@ -1072,7 +1072,7 @@ label Sarah_catch_stealing_label():
     mc.name "So, how many are you planning to take?"
     the_person.char "Oh, well, research says we don't know for sure how effective they are... I figure I'll just take one each day until I go up a few cup sizes."
     the_person.char "I've already ordered new bras and everything. I'm going to keep a careful record of how many I take and when, and then take measurements over the weekend."
-    "[stephanie.name] is going to stop by this weekend to help document everything, she said it would be good for research..."
+    the_person.char "[stephanie.name] is going to stop by this weekend to help document everything, she said it would be good for research..."
     "You think about it for a moment. You picture [the_person.title] for a moment with some nice 'C' cup tits... but then you can't help but imagine if she went crazy with it and took more."
     $ try_to_convince = True
     menu epic_tits_choice_menu:
