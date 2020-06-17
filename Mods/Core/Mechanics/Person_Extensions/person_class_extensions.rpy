@@ -582,7 +582,7 @@ init -1 python:
                     if self.sluttiness < 40 and self.planned_uniform and self.planned_uniform.slut_requirement > self.sluttiness*0.75: #A skimpy outfit/uniform is defined as the top 25% of a girls natural sluttiness.
                         self.change_slut_temp(self.get_opinion_score("skimpy uniforms"), add_to_log = False)
 
-            else:
+            elif not location is destination: # only change outfit if we change location
                 self.apply_planned_outfit() #We're at home, so we can get back into our casual outfit.
 
             # location might change outfit, so moved call to end of this loop
@@ -590,7 +590,8 @@ init -1 python:
 
         else:
             #She finds somewhere to burn some time
-            self.apply_planned_outfit() #Get changed back into our proper outfit if we aren't in it already.
+            if not location is destination: # only change outfit if we change location
+                self.apply_planned_outfit() #Get changed back into our proper outfit if we aren't in it already.
             available_locations = [] #Check to see where is public (or where you are white listed) and move to one of those locations randomly
             for potential_location in list_of_places:
                 if potential_location.public:
@@ -1038,8 +1039,14 @@ init -1 python:
 
     Person.apply_gym_outfit = apply_gym_outfit
 
+    def apply_university_outfit(self):
+        self.apply_outfit(university_wardrobe.decide_on_outfit2(self))
+        return
+
+    Person.apply_university_outfit = apply_university_outfit
+
     def apply_planned_outfit(self):
-        self.apply_planned_outfit(self.planned_outfit)
+        self.apply_outfit(self.planned_outfit)
         return
 
     Person.apply_planned_outfit = apply_planned_outfit
