@@ -78,7 +78,7 @@ init 1 python:
     def quest_essential_oils_start_requirement():
         if mc.business.head_researcher == None:
             return False
-        if quest_essential_oils_find_employee == None:
+        if quest_essential_oils_find_employee() == None:
             return False
         return True
 
