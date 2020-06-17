@@ -9,6 +9,7 @@ This mod collection extends the base game with a range of new features and enhan
 * Adds over 8 new sex positions with dialogs
 * Adds 4 threesome positions (triggered in various situations)
 * Enhances 3 existing sex positions with new dialogs
+* Side quest system to make playthroughs unique and to make generic employees more interesting
 * Outfit generator built into the outfit creator (use mannequin selector for wardrobe edit)
 * A hair salon with options to change hair styles and colours.
 * Some extra actions in the gym studio.
@@ -47,7 +48,7 @@ This mod collection extends the base game with a range of new features and enhan
 3. Launch Lab Rats 2 and load up a save or start fresh.
 4. The MOD settings can be configured or en-/disabled from your bedroom.
 5. Done.
- 
+
 ## Android
 The android version of the game including the mod is available on MEGA at https://mega.nz/#F!SvZEDIrR!NBqa7nibwW4toHCxlztLcg
 
@@ -58,5 +59,3 @@ Unfortunately the base game is not bug free. Check https://github.com/Tristimdor
 Report Issues here: https://gitgud.io/lab-rats-2-mods/lr2mods/issues
 
 Wiki for more information and solutions to common issues: https://gitgud.io/lab-rats-2-mods/lr2mods/wikis/home
-
-
