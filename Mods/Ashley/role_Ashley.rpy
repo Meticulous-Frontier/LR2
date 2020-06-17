@@ -1,4 +1,3 @@
-
 init 2 python:
     def ashley_mod_initialization(): #Add actionmod as argument#
 
@@ -379,7 +378,7 @@ label ashley_porn_video_discover_label():
     "She turns around and puts a condom on the guy. She starts to tease him."
     the_person.char "You want this in my pussy, bitch? Yeah right... like you deserve that."
     "Wow, she is definitely nailing the whole dominatrix role..."
-    "She starts to dry hump the poor guy. With his limbs down at his sides, there's not much her can really do."
+    "She starts to dry hump the poor guy. With his limbs down at his sides, there's not much he can really do."
     "She keeps going, speeding up and slowing down multiple times."
     "Eventually, you can hear the guy starting to moan, its clear he is getting ready to cum."
     "She quickly hops off. The guy fills up the condom while [the_person.title] basically ignores him."
