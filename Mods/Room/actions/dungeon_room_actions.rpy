@@ -30,6 +30,12 @@ init 10 python:
         dungeon_completed_action = Action("Dungeon Completed", dungeon_completed_action_requirement, "dungeon_completed_label", requirement_args = day + 7)
         mc.business.mandatory_crises_list.append(dungeon_completed_action)
 
+    def slave_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions, prohibit_tags = []):
+        willingness = spanking.build_position_willingness_string(person, ignore_taboo = True)
+        foreplay_positions.insert(1, [willingness, spanking])
+        return [foreplay_positions, oral_positions, vaginal_positions, anal_positions]
+
+
 label dungeon_intro_label():
     "By yourself on the weekend at work, you are taking a moment to relax. Suddenly you are struck by a brilliant idea..."
     "You decide to build a dungeon at your house that would allow you to turn obedient girls into slaves who fulfill your deepest desires."
@@ -76,6 +82,8 @@ label dungeon_room_appoint_slave_label_2(the_person):
 
         $ the_person.add_role(slave_role)
 
+        $ the_person.event_triggers_dict["unique_sex_positions"] = slave_unique_sex_positions
+
         "[the_person.title] is now a willing slave of yours."
 
 
@@ -84,6 +92,7 @@ label dungeon_room_appoint_slave_label_2(the_person):
         menu:
             "Release her":
                 $ slave_release_slave(the_person)
+                $ del the_person.event_triggers_dict["unique_sex_positions"]
                 "You release [the_person.possessive_title] from their duties as a slave."
             "Never mind":
                 pass
