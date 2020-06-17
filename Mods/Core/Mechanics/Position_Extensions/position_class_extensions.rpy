@@ -16,8 +16,8 @@ init 5 python:
 
         if self.opinion_tags:
             for opinion_tag in self.opinion_tags:
-                final_slut_cap += the_person.get_opinion_score(opinion_tag) * 5
-                final_slut_requirement += the_person.get_opinion_score(opinion_tag) * 5
+                final_slut_cap -= the_person.get_opinion_score(opinion_tag) * 5
+                final_slut_requirement -= the_person.get_opinion_score(opinion_tag) * 5
 
         if the_person.has_taboo(position_taboo):
             final_slut_requirement += 10    # when she has a taboo increase slut requirement
