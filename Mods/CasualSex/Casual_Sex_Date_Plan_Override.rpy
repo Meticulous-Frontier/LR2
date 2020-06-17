@@ -57,6 +57,6 @@ label dinner_date_plan_enhanced_label(the_person):
 
     # call original label
     $ del config.label_overrides["dinner_date_plan_label"]
-    call dinner_date_label(the_person) from _call_dinner_date_plan_label_enhanced
+    call dinner_date_plan_label(the_person) from _call_dinner_date_plan_label_enhanced
     $ config.label_overrides["dinner_date_plan_label"] = "dinner_date_plan_enhanced_label"
     return
