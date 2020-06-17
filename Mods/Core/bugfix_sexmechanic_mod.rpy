@@ -401,10 +401,13 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
                 if position_choice and object_choice:
                     call check_position_willingness_bugfix(the_person, position_choice, ignore_taboo = ignore_taboo, skip_dialog = True) from _call_check_position_willingness_bugfix
-                    if not _return: #If she wasn't willing for whatever reason (too slutty a position, not willing to wear a condom) we clear our settings and try again.
+                    if not _return == 1: #If she wasn't willing for whatever reason (too slutty a position, not willing to wear a condom) we clear our settings and try again.
+                        if _return == -1: # angry reject ends interactions
+                            $ finished = True
                         $ position_choice = None
                         $ object_choice = None
                         call clear_object_effects(the_person) from _call_clear_object_effects_bugfix
+
 
                 if position_choice and object_choice:
                     if skip_intro:
@@ -471,7 +474,8 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 $ position_choice = round_choice
 
             else: #If she wasn't willing we keep going with what we were doing, so just loop around.
-                pass
+                if _return == -1: # angry reject ends interactions
+                    $ finished = True
 
         elif round_choice == "Strip":
             call strip_menu(the_person, (position_choice.verbing if isinstance(position_choice, Position) else "wooing")) from _call_strip_menu_bugfix
@@ -541,50 +545,50 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     return report_log
 
 label check_position_willingness_bugfix(the_person, the_position, ignore_taboo = False, skip_dialog = False): #Returns if hte person is willing to do this position or not, and charges the appropriate happiness hit if they needed obedience to be willing.
-    $ willing = True
+    $ willing = 1
 
     $ the_taboo = the_position.associated_taboo
     if ignore_taboo:
         $ the_taboo = None
 
-    if the_person.effective_sluttiness(the_taboo) >= the_position.slut_requirement:
+    $ final_slut_requirement, final_slut_cap = the_position.calculate_position_requirements(the_person, ignore_taboo)
+
+    if the_person.effective_sluttiness(the_taboo) >= final_slut_requirement:
         if not (skip_dialog or the_person.has_taboo(the_taboo)):
             $ the_person.call_dialogue("sex_accept")
 
-    elif the_person.effective_sluttiness(the_taboo) + (the_person.obedience-100) >= the_position.slut_requirement:
+    elif the_person.effective_sluttiness(the_taboo) + (the_person.obedience-100) >= final_slut_requirement:
         # She's willing to be commanded to do it. Reduce her happiness by the difference (increase arousal if she likes being submissive)
         python:
-            happiness_drop = the_person.effective_sluttiness(the_position.associated_taboo) - the_position.slut_requirement #Our initial conditions mean this is a negative number
+            happiness_drop = the_person.effective_sluttiness(the_taboo) - final_slut_requirement #Our initial conditions mean this is a negative number
             the_person.change_arousal(the_person.get_opinion_score("being submissive")*2)
             the_person.discover_opinion("being submissive")
             the_person.change_happiness(happiness_drop)
 
-        if the_person.has_taboo(the_taboo):
-            pass #If there is a taboo being broken we have special taboo break dialogue called from the position.
-        else:
+        if not the_person.has_taboo(the_taboo):
             $ the_person.call_dialogue("sex_obedience_accept")
 
-    elif the_person.effective_sluttiness(the_taboo) > the_position.slut_requirement/2:
+    elif the_person.effective_sluttiness(the_taboo) > final_slut_requirement * .6:
         # She's not willing to do it, but gives you a soft reject.
         $ the_person.call_dialogue("sex_gentle_reject")
-        $ willing = False
+        $ willing = 0
 
     else:
-        # You're nowhere close to the required sluttiness, lose some love for even trying.
+        # You're nowhere close to the required sluttiness, lose some love for even trying and end interaction
         python:
-            love_loss = the_person.effective_sluttiness(the_taboo) - the_position.slut_requirement #A negative number
-            love_loss = __builtin__.round(love_loss/5)
-            the_person.change_love(love_loss)
-            willing = False
+            ran_num = the_person.effective_sluttiness(the_taboo) - final_slut_requirement #A negative number
+            ran_num = __builtin__.round(ran_num/5)
+            the_person.change_love(ran_num)
+            willing = -1
 
         $ the_person.call_dialogue("sex_angry_reject")
 
-    if willing and (the_position.skill_tag == "Vaginal" or the_position.skill_tag == "Anal") and not mc.condom: #We might need a condom, which means she might say no. TODO: Add an option to pull _off_ a condom while having sex.
+    if willing == 1 and (the_position.skill_tag == "Vaginal" or the_position.skill_tag == "Anal") and not mc.condom: #We might need a condom, which means she might say no. TODO: Add an option to pull _off_ a condom while having sex.
         if not ask_for_condom:
             $ ask_for_condom = True
             if the_person.effective_sluttiness() < the_person.get_no_condom_threshold() + 50:
                 # she is not slutty enough and we have the condom dialog
-                call condom_ask(the_person) from _call_condom_ask_bugfix
+                call condom_ask_enhanced(the_person) from _call_condom_ask_bugfix
                 $ willing = _return
                 $ use_condom = mc.condom
             else:
@@ -623,14 +627,14 @@ label condom_ask_enhanced(the_person):
                                     the_person.char "I knew you would make the right choice."
                                 "Don't":
                                     mc.name "If it's that important to you let's just do something else."
-                                    return False
+                                    return 0
                         else:
                             the_person.char "OK."
                             $ mc.condom = True
                     "Fuck her raw":
-                        return True
+                        return 1
             "Don't":
-                return True
+                return 1
 
     elif the_person.has_role(prostitute_role):
         if the_person.love < 50:
@@ -647,7 +651,7 @@ label condom_ask_enhanced(the_person):
                 "Refuse and do something else":
                     "[the_person.title] doesn't seem like she's going to change her mind."
                     mc.name "If it's that important to you let's just do something else."
-                    return False
+                    return 0
 
 
         elif the_person.sex_record.get("Vaginal Creampies", 0) < 5:
@@ -696,7 +700,7 @@ label condom_ask_enhanced(the_person):
             "Refuse and do something else":
                 "[the_person.title] doesn't seem like she's going to change her mind."
                 mc.name "If it's that important to you let's just do something else."
-                return False
+                return 0
 
         if the_person.get_opinion_score("bareback sex") < 0 :
             the_person.char "There we go, a nice big rubbery cock."
@@ -751,7 +755,7 @@ label condom_ask_enhanced(the_person):
                                         the_person.char "I knew you would make the right choice."
                                     "Don't":
                                         mc.name "If it's that important to you let's just do something else."
-                                        return False
+                                        return 0
                             else:
                                 the_person.char "Fine, just make it quick!"
                                 "[the_person.title] watches impatiently while you roll the condom on."
@@ -775,7 +779,7 @@ label condom_ask_enhanced(the_person):
     if not mc.condom:
         $ the_person.break_taboo("condomless_sex")
 
-    return True #If we make it to the end of the scene everything is fine and sex can continue. If we returned false we should go back to the position select, as if we asked for something to extreme.
+    return 1
 
 label put_on_condom_routine(the_person):
     if the_person.sex_skills["Oral"] > 3 and the_person.get_opinion_score("giving blowjobs") > 1: #Knows what she's doing

@@ -1,5 +1,32 @@
 # Overrides part of the existing Position class with enhanced versions
 init 5 python:
+    def calculate_position_requirements(self, the_person, ignore_taboo = False):
+        position_taboo = self.associated_taboo
+        if ignore_taboo:
+            position_taboo = None
+
+        final_slut_requirement = self.slut_requirement
+        final_slut_cap = self.slut_cap
+        if self.skill_tag == "Anal" and the_person.has_family_taboo():
+            final_slut_requirement -= 5 #It's easier to convince a family member to have anal sex, since it's not "real" incest or something.
+            final_slut_cap -= 5
+        elif self.skill_tag == "Vaginal" and the_person.has_family_taboo():
+            final_slut_requirement += 10 #It's harder to convince a family member to have vaginal sex
+            final_slut_cap += 10
+
+        if self.opinion_tags:
+            for opinion_tag in self.opinion_tags:
+                final_slut_cap += the_person.get_opinion_score(opinion_tag) * 5
+                final_slut_requirement += the_person.get_opinion_score(opinion_tag) * 5
+
+        if the_person.has_taboo(position_taboo):
+            final_slut_requirement += 10    # when she has a taboo increase slut requirement
+            final_slut_cap += 10
+
+        return final_slut_requirement, final_slut_cap
+
+    Position.calculate_position_requirements = calculate_position_requirements
+
     # include a visual indication
     def build_position_willingness_string_enhanced(self, the_person, ignore_taboo = False): #NOTE: Returns a list instead of string. If you want it to be a single string then do "".join(position.build_position_willingness_string(the_person))
     #Generates a list of strings for this position that includes a tooltip and coloured willingness for the person given.
@@ -19,19 +46,7 @@ init 5 python:
         if ignore_taboo:
             position_taboo = None
 
-        final_slut_requirement = self.slut_requirement
-        final_slut_cap = self.slut_cap
-        if self.skill_tag == "Anal" and the_person.has_family_taboo():
-            final_slut_requirement += -10 #It's easier to convince a family member to have anal sex, since it's not "real" incest or something.
-            final_slut_cap += -10
-        elif self.skill_tag == "Vaginal" and the_person.has_family_taboo():
-            final_slut_requirement += 10 #It's harder to convince a family member to have vaginal sex
-            final_slut_cap += 10
-
-        if self.opinion_tags:
-            for opinion_tag in self.opinion_tags:
-                final_slut_cap += the_person.get_opinion_score(opinion_tag)
-                final_slut_requirement += the_person.get_opinion_score(opinion_tag)
+        final_slut_requirement, final_slut_cap = self.calculate_position_requirements(the_person, ignore_taboo)
 
         taboo_break_string = ""
         if the_person.has_taboo(position_taboo):
@@ -81,7 +96,7 @@ init 5 python:
                 if opinion_topic:
                     # renpy.say("", the_person.name + ": " + opinion_tag + " => " + str(the_person.get_opinion_score(opinion_tag)))
                     if opinion_topic[1]: # only show info when opinion is known
-                        change_amount += the_person.get_opinion_score(opinion_tag) #Add a bonus or penalty if she likes or dislikes the position.
+                        change_amount += the_person.get_opinion_score(opinion_tag) * 3 #Add a bonus or penalty if she likes or dislikes the position.
 
         position_opinion = ""
         if change_amount > 0:
