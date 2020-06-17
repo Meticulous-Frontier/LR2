@@ -99,6 +99,8 @@ init 2 python: # Declare variables to use
         salon_manager.event_triggers_dict["over_her_ex"] = 0
         salon_manager.event_triggers_dict["talk_about_candace"] = 0
         salon_manager.event_triggers_dict["help_candace"] = 0
+        salon_manager.event_triggers_dict["full_style_state"] = 0
+        salon_manager.event_triggers_dict["offers_full_style"] = False
         return
 
     def salon_introduction_action_requirement(the_person):

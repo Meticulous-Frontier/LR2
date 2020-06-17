@@ -105,7 +105,22 @@ init 2 python:
         return False
 
     def ophelia_increased_service_begin_requirement(person):
+        if ophelia_get_is_over_her_ex():
+            if person.sluttiness_tier >= 3:
+                if person.location() is mall_salon:
+                    return True
         return False
+
+    def ophelia_choose_service_test_requirement():
+        if mc.business.is_open_for_business():
+            if ophelia_get_pubic_style_state() == 1:
+                return True
+            return "Only during business hours"
+        return False
+
+    def ophelia_add_service_full_body_massage_requirement(person):
+        return False
+
 
     def create_ophelia_date_night_outfit(person):
         outfit = Outfit("Sexy Plum Shirt And Khaki Skirt")
@@ -148,6 +163,8 @@ init 2 python:
     ophelia_is_over_her_ex =  Action("Ophelia finally moves on",  ophelia_is_over_her_ex_requirement, "ophelia_is_over_her_ex_label")
     ophelia_talk_about_candace =  Action("Talk about [candace.name]",  ophelia_talk_about_candace_requirement, "ophelia_talk_about_candace_label", menu_tooltip = "Tread carefully, this will be a sore subject")
     ophelia_increased_service_begin = Action("Ophelia increases services",  ophelia_increased_service_begin_requirement, "ophelia_increased_service_begin_label")
+    ophelia_choose_service_test = Action("Pick employee for salon visit",ophelia_choose_service_test_requirement ,"ophelia_choose_service_test_label", menu_tooltip = "Select a girl you want to have her hair and pubic hair cut and styled")
+    ophelia_add_service_full_body_massage = Action ("Ophelia wants to do massages", ophelia_add_service_full_body_massage_requirement, "ophelia_add_service_full_body_massage_label")
 
     salon_manager_role = Role("Salon Manager", [cut_hair_action, ophelia_ex_bf_plan_pics, ophelia_talk_about_candace])
 
@@ -889,7 +906,7 @@ label ophelia_increased_service_begin_label(the_person):
     mc.name "Last time I heard that, we planned to crash..."
     the_person.char "YEAH, yeah I remember. Don't worry, this doesn't have anything to do with my ex."
     the_person.char "With my spare time, I've really been putting the extra effort into my business, you know?"
-    the_person.char "Going the extra mile with every customer, that kind of things."
+    the_person.char "Going the extra mile with every customer, that kind of thing."
     mc.name "Good, I bet that will pay off for you in the long run."
     the_person.char "Yeah... and I've been thinking. There is a place on the other side of town that does a different kind of hairstyling."
     mc.name "Oh?"
@@ -904,6 +921,8 @@ label ophelia_increased_service_begin_label(the_person):
     the_person.char "Great! No rush or anything, but when you think of someone, send them over and I'll take care of everything!"
     "You probably need an employee who is pretty slutty to do something like this... or very obedient? You guess you could just order a few of your employees to do it."
     "When you decide who, you should probably call them to your office first, so you can come over to the salon together."
+    $ salon_manager.event_triggers_dict["full_style_state"] = 1
+    $ office.actions.append(ophelia_choose_service_test)
     #TODO change variables
     return
 
@@ -919,22 +938,22 @@ label ophelia_choose_service_test_label():
             elif person.sluttiness > 20:
                 if person.obedience > 150:
                     able_person_list.append(person)
-    if len(able_person_list) > 0:
+    if len(able_person_list) == 0:
         "After going through the list, you decide there probably aren't any girls willing to have their pubic hair styled."
         "You should probably work on corrupting some of your employees before you try and send one to [salon_manager.title]."
-    $ able_person_list.insert(0, "Full Body Hairstyle Test")
-    $ able_person_list.append("Back")
-    call screen enhanced_main_choice_display(build_menu_items(able_person_list))
+    #$ able_person_list.insert(0, "Full Body Hairstyle Test")
+    #$ able_person_list.append("Back")
+    call screen enhanced_main_choice_display(build_menu_items([["Call in"] + able_person_list + ["Changed my mind"]]))
     $ the_person = _return
-    $ del able_person._list
-    if the_person == "Back":
+    $ del able_person_list
+    if the_person == "Changed my mind":
         "You decide not to call an employee for the trial run of [salon_manager.possessive_title] full body hair styling right now."
         return
     "You call [the_person.title] down to your office. Soon she walks in your door."
     $ scene_manager.add_actor(the_person)
     the_person.char "Hey [the_person.mc_title], you wanted to see me?"
     mc.name "I have a quick favor to ask."
-    mc.name "I have a friend who runs the salon over by the mall. She is considering offering a new service and is looking for someone to trial her serviec on."
+    mc.name "I have a friend who runs the salon over by the mall. She is considering offering a new service and is looking for someone to trial her service on."
     the_person.char "Oh? At a hair salon? That sounds nice, I'm about due to have it cut. What is the new service she is offering?"
     mc.name "Well, she is calling it a full body hair styling."
     the_person.char "Full body? So like... body hair also?"
@@ -947,10 +966,69 @@ label ophelia_choose_service_test_label():
         mc.name "Well, not usually, I'm sure, but this would be a really big favor for me. Just this once?"
         the_person.char "Oh, well I supposed I could do it. For your sake of course!"
         the_person.char "So... when do we go?"
+    mc.name "Let's head over now."
+    $ mc.change_location(mall_salon)
+    $ mc.location.show_background()
+    "You go with [the_person.title] over to the salon."
+    $ scene_manager.add_actor(salon_manager, character_placement = character_center_flipped)
+    "[salon_manager.title] spots you as you walk in."
+    salon_manager.char "Oh hey [salon_manager.mc_title]. What can I do for you?"
+    mc.name "I brought you a customer, for that special service we talked about."
+    "[salon_manager.title] notices [the_person.title] with you."
+    salon_manager.char "Oh! This is perfect! Hi I'm [salon_manager.name]."
+    the_person.char "[the_person.name], nice to meet you."
+    salon_manager.char "I have a private room all setup for when a girl comes in looking for the full body hair cut style and dye. Let's head back there."
+    "You and [the_person.title] follow [salon_manager.possessive_title] to the private room. Its a great setup, with a very comfy looking styling chair."
+    salon_manager.char "When I open it, I plan to have wine coolers or mimosas I can offer, along with a hot towel."
+    mc.name "Nice, its a salon VIP lounge."
+    salon_manager.char "Exactly! Alright dear, go ahead and strip down and we'll get started."
+    if the_person.sluttiness > 50:
+        the_person.char "This place is amazing..."
+    else:
+        "[the_person.title] looks to you, unsure about getting naked."
+        mc.name "Don't worry she's a professional."
+    "[the_person.title] gets naked."
+    $ the_person.strip_outfit(exclude_feet = False)
+    salon_manager.char "Alright, here's a catalogue with what I can do. Take a look and tell me what you would like!"
+    python:
+        hair_style_check = the_person.hair_style #If hair_style_check is different than the_person.hair_style it means a "purchase" has been made.
+        hair_color_check = the_person.hair_colour
+        salon_manager.event_triggers_dict["offers_full_style"] = True
+    call screen hair_creator(the_person, hair_style_check, hair_color_check)
+    "You stay and observe as [salon_manager.title] does her work. She does an exceptional job."
+    "When she finishes, you check out [the_person.title], while she examines herself in the mirror"
 
+    if the_person.sluttiness > 50:
+        the_person.char "Wow! Great job! I'm going to have to come here from now on."
+    else:
+        the_person.char "That was... an interesting experience. My hair looks great though! And everything matches."
+        the_person.char "I think... I could get used to this."
+    salon_manager.char "Great! Let me get you a card so you can make an appointment when you want to come back."
+    $ scene_manager.update_actor(salon_manager, position = "walking_away")
+    "As [salon_manager.possessive_title] goes to the other room to get her card, [the_person.title] gets dressed."
+    $ the_person.apply_planned_outfit()
+    "Once dressed, she turns to you."
+    the_person.char "This was great [the_person.mc_title]. Thanks for asking me to do this!"
+    $ the_person.change_stats(happiness = 5, obedience = 5)
+    $ scene_manager.update_actor(salon_manager, position = "stand3")
+    "[salon_manager.title] returns and hands [the_person.possessive_title] her business card."
+    salon_manager.char "Thanks again, both of you, for doing this. I think I'm going to move forward with adding the service to general customers!"
+    salon_manager.char "From now on, if the girl wants me to, I'd be glad to give them the same treatment."
+    mc.name "That sounds great. I'll definitely keep that in mind."
+    "You turn to [the_person.title]"
+    mc.name "You can head back to work. I'm not sure if I'm going to head back right away."
+    the_person.char "Okay! See you later."
+    $ scene_manager.remove_actor(the_person)
+    "You say goodbye to [salon_manager.title] as well."
+    $ scene_manager.remove_actor(the_person)
+    "From now on, if a girl is slutty or obedient enough, when you schedule a haircut, you can also set a pubic hair style."
+    $ salon_manager.event_triggers_dict["full_style_state"] = 2
+    $ office.actions.remove(ophelia_choose_service_test)
     return # Where to go if you hit "Back".
 
-
+label ophelia_add_service_full_body_massage_label(the_person):
+    pass
+    return
 
 
 
@@ -1026,6 +1104,19 @@ init 2 python:
 
     def ophelia_get_day_of_revenge_date():
         return candace_get_day_met()
+
+    def ophelia_get_pubic_style_state():
+        return salon_manager.event_triggers_dict.get("full_style_state", 0)
+
+    def ophelia_get_will_change_pubic_hair(): #Testing
+        return salon_manager.event_triggers_dict.get("offers_full_style", False)
+
+    def ophelia_person_wants_pubic_hair_included(person):  #Check for each individual person if they are willing to have their pubic hair styled.
+        if person.sluttiness >= 50 or person.obedience >= 150:
+            if ophelia_get_will_change_pubic_hair():
+                return True
+
+        return False
 
 
 #TESTING FUNCTIONS#
