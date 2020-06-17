@@ -1067,7 +1067,7 @@ label Sarah_catch_stealing_label():
     $ the_person.change_love(3)
     $ the_person.draw_person(emotion = "happy")
     "She is very relieved to hear that."
-    the_person.char "Oh! Thank you [the_person.mc_title]! I'm sorry, I won't be sneaky like that again. I just... you know I've always had such a small chest and been really self concious about it."
+    the_person.char "Oh! Thank you [the_person.mc_title]! I'm sorry, I won't be sneaky like that again. I just... you know I've always had such a small chest and been really self-conscious about it."
     the_person.char "I've thought about getting implants before but... surgery seems so extreme for a cosmetic issue."
     mc.name "So, how many are you planning to take?"
     the_person.char "Oh, well, research says we don't know for sure how effective they are... I figure I'll just take one each day until I go up a few cup sizes."
