@@ -43,7 +43,7 @@ init 1310 python:
     mandatory_vibe_policy = Policy(
         name = "Mandatory Vibrator Policy",
         cost = 30000,
-        desc = "All employees are required to have a bullet vibrator inserted into their vagina's during work hours, ensuring they are aroused at work all the time.",
+        desc = "All employees are required to have a bullet vibrator inserted into their vaginas during work hours, ensuring they are aroused at work all the time.",
         toggleable = True,
         requirement = mandatory_vibe_policy_requirement,
         on_apply_function = toggle_mandatory_vibe_company_action,

@@ -1021,7 +1021,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             "She gets up and starts walking around the desk. By the time she gets to you, you already have your rock hard dick out."
             "She gets on her knees and gives you a couple strokes with her hand."
             $ mc.change_arousal(20)
-            the_person.char "Mmmm, I love the feeling of a cock buried between by big tits... this is gonna be great!"
+            the_person.char "Mmmm, I love the feeling of a cock buried between my big tits... this is gonna be great!"
             "With her hands on each side of her chest, she wraps her sizable boobs around you and begins to bounce them up and down."
             call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_start_two
             $ set_HR_director_unlock("titfuck", True)
