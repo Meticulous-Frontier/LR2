@@ -199,7 +199,7 @@ label quest_cure_discovery_market_patent_label(the_person):
     $ the_disease = quest_cure_discovery.quest_event_dict.get("disease_name", "Rabies")
     mc.name "Hello [the_person.title], do you have a moment?"
     the_person.char "Of course. What can I do for you sir?"
-    if the_target == alexia:
+    if the_person == alexia:
         mc.name "We made a big discovery in the research lab, but it is too big for our production department to handle. I was wondering if you could look into selling some patent rights."
         the_person.char "Oh? I think I could handle something like that. What is the patent for?"
         mc.name "Our research department made a discovery related to a possible treatment for [the_disease]."
@@ -225,7 +225,7 @@ label quest_cure_discovery_patent_sold_label():
     if the_person == None:
         return
     #TODO test to make sure market contact still works for us.
-    "You get a text message from "
+    "You get a text message from [the_person.title]."
     the_person.char "Hey there! I just got some good news on that patent you have for [the_disease]."
     mc.name "Glad to hear it. What is the news?"
     if quest_cure_discovery.quest_event_dict.get("cure_tier", 0) == 0:
