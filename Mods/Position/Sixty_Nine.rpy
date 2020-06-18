@@ -137,7 +137,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                     the_girl.char "[the_girl.mc_title]... I think you've forgotten who is on top!"
                     "[the_girl.possessive_title] pushes her pussy back up against your face and begins to grind herself on your face."
                     "You are caught unready. When you have a chance, you gasp a deep breath of air and begin to start licking her."
-                    the_girl.char "Mmm, thats it [the_girl.mc_title]"
+                    the_girl.char "Mmm, that's it [the_girl.mc_title]"
                     $ the_girl.change_arousal(5 * the_girl.get_opinion_score("taking control"))
                     "You eat her out for several seconds, as best as you can, while she grinds back against you. She moans lewdly and her pussy drips with excitement."
                     "Eventually she eases off your face, giving you a chance to catch your breath. She slowly lick you around the tip of your shaft a few times then resumes bobbing her head up and down on you."
@@ -236,7 +236,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                     the_girl.char "Hey now, don't forget about me!"
                     "You open your eyes just in time to see her back her pussy down onto your face as she begins to grind herself on you."
                     "You are caught unready. When you have a chance, you gasp a deep breath of air and begin to start licking her."
-                    the_girl.char "Mmm, thats it [the_girl.mc_title]"
+                    the_girl.char "Mmm, that's it [the_girl.mc_title]"
                     $ the_girl.change_arousal(5 * the_girl.get_opinion_score("taking control"))
                     "You eat her out for several seconds, as best as you can, while she grinds back against you. She strokes your shaft with her hand in time as she grinds on you."
                     "Eventually she eases off your face, giving you a chance to catch your breath. She slowly lick you around the tip of your shaft a few times then resumes bobbing her head up and down on you."
@@ -350,7 +350,7 @@ label outro_SB_sixty_nine(the_girl, the_location, the_object):
                 $ the_girl.call_dialogue("cum_mouth")
             else: #on her face
                 "[the_girl.possessive_title] pulls you out of her mouth, and begins stroking you eagerly."
-                the_girl.char "Thats it, [the_girl.mc_title], cum all over me!"
+                the_girl.char "That's it, [the_girl.mc_title], cum all over me!"
                 $ the_girl.cum_on_face()
                 if SB_check_fetish(the_girl, cum_external_role):
                     "[the_girl.possessive_title] begins moaning uncontrollably as she receives the cum her addicted brain has been begging her for."
@@ -359,7 +359,7 @@ label outro_SB_sixty_nine(the_girl, the_location, the_object):
                 $ the_girl.call_dialogue("cum_face")
         else:
             "[the_girl.possessive_title] pulls you out of her mouth, and begins stroking you eagerly."
-            the_girl.char "Thats it, [the_girl.mc_title], cum all over me!"
+            the_girl.char "That's it, [the_girl.mc_title], cum all over me!"
             $ the_girl.cum_on_face()
             if SB_check_fetish(the_girl, cum_external_role):
                 "[the_girl.possessive_title] begins moaning uncontrollably as she receives the cum her addicted brain has been begging her for."
