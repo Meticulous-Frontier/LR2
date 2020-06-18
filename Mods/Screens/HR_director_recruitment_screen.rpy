@@ -1,4 +1,3 @@
-
 init 2:
 
     screen HR_director_recruitment_screen(hr_director):
@@ -142,7 +141,7 @@ init 2:
             if get_HR_director_tag("headhunter_marital", False) == True:
                 hbox:
                     xalign 0.5
-                    textbutton "Maried":
+                    textbutton "Married":
                         style "textbutton_no_padding_highlight"
                         text_style "cheat_text_style"
                         xsize 250
