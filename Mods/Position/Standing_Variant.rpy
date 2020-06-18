@@ -108,7 +108,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                  mc.name "I love the way it sounds when I fuck you. Hear it?"
                  "You thrust yourself back into her forcefully, her ass smacking against your hips with a loud smack."
                  "[the_girl.possessive_title] moans and pushes herself back against you."
-                 mc.name "Thats it, you’re my bitch. I love how naughty you are."
+                 mc.name "That's it, you’re my bitch. I love how naughty you are."
                  "She seems to be into it. Maybe you should tell her how you want to finish."
                  menu:
                      "I wanna creampie you":
@@ -221,7 +221,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                  mc.name "I love the way it sounds when I fuck you. Hear it?"
                  "You thrust yourself back into her forcefully, her ass smacking against your hips with a loud smack."
                  "[the_girl.possessive_title] moans and pushes herself back against you."
-                 mc.name "Thats it, you’re such a talented slut. I love how naughty you are."
+                 mc.name "That's it, you’re such a talented slut. I love how naughty you are."
                  "She seems to be into it. Maybe you should tell her how you want to finish."
                  menu:
                      "I wanna creampie you":
@@ -316,7 +316,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                 "Holding yourself deep inside her, you give her clit a few light, playful smacks with a couple of your fingers."
                 if the_girl.get_opinion_score("being fingered") > 0:
                      "[the_girl.possessive_title] moans enthusiastically at the stimulation of your light slaps on her clit."
-                     the_girl.char "Thats it, [the_girl.mc_title]! Spank my pussy! I've been so naughty!"
+                     the_girl.char "That's it, [the_girl.mc_title]! Spank my pussy! I've been so naughty!"
                      $ the_girl.discover_opinion("being fingered")
                      $ the_girl.change_arousal((the_girl.get_opinion_score("being fingered") * 2) + mc.sex_skills["Foreplay"])
                      "You continue giving [the_girl.possessive_title]'s mound a few more swats. You can feel her pelvic muscles clench you a few times as you tap her."
@@ -342,7 +342,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                 "Satisfied there is enough lubrication, you pull yourself partway out of her cunt to give yourself a bit of room to work. You tentatively circle her ass a few times with your finger."
                 if the_girl.get_opinion_score("anal sex") > 0:
                     "At the sudden stimulation of her back door, [the_girl.possessive_title] moans and immediately thrusts her ass back at you."
-                    the_girl.char "Mmm, thats it [the_girl.mc_title]! I can't wait to feel your fingers in one hole and your cock in the other..."
+                    the_girl.char "Mmm, that's it [the_girl.mc_title]! I can't wait to feel your fingers in one hole and your cock in the other..."
                     "Wow, she clearly enjoys having her ass played with!"
                     $ the_girl.discover_opinion("anal sex")
                     "You firmly press two fingers against [the_girl.possessive_title]'s puckered opening. Her bottom greedily takes your fingers and soon they are completely sheathed."
@@ -497,7 +497,7 @@ label outro_SB_facing_wall(the_girl, the_location, the_object):
             if the_girl.sluttiness > 110:
                 the_girl.char "Oh god it's so good. I'm going to fall asleep dreaming about this tonight..."
             elif the_girl.sluttiness > 80:
-                the_girl.char "Oh fuck thats good. It feels so warm..."
+                the_girl.char "Oh fuck that's good. It feels so warm..."
             else:
                 the_girl.char "Oh my god, why do I let you do this to me... but it feels so good..."
 

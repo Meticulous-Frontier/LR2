@@ -203,7 +203,7 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_2(the_girl_1, the_girl_2, the_l
     "Your hips slap against [the_girl_2.possessive_title]'s ass as you fuck her vigorously."
     if the_girl_2.sex_skills["Vaginal"] < 2: #Inexperienced
         "After a particularly hard thrust, [the_girl_2.possessive_title] reflexively starts to pull away. You grab her hips to keep her from pulling off completely."
-        the_girl_2.char "I'm sorry [the_girl_2.mc_title], thats a little too rough. Can you go a little slower?"
+        the_girl_2.char "I'm sorry [the_girl_2.mc_title], that's a little too rough. Can you go a little slower?"
         "You pull her hips back toward you slowly. She sighs, still trying to get accustomed to your girth, penetrating her at such a deep angle."
         "The next time you push yourself in you push a little faster. [the_girl_2.title] goes back to licking [the_girl_1.title]."
     elif the_girl_2.has_role(vaginal_fetish_role):          #vaginal fetish

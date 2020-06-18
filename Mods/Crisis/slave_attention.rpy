@@ -109,7 +109,7 @@ label slave_attention_crisis_action_label:
                 "Dildo her\n{color=#ff0000}{size=18}Requires at least 40 {image=gui/extra_images/energy_token.png}{/size}{/color} (disabled)" if mc.energy < 40:
                     pass
                 "Let her go":
-                    mc.name "Thats enough for now, you can get dressed."
+                    mc.name "That's enough for now, you can get dressed."
                     $ the_person.review_outfit(dialogue = False)
                     $ the_person.draw_person(position = "stand3")
                     the_person.char "Thank you Master, for granting your slave this much pleasure."
@@ -143,7 +143,7 @@ label slave_attention_crisis_action_label:
                             mc.name "And now for the main course."
                             "Without any mercy you decide to fuck her ass hard."
                             call fuck_person(the_person, start_position = doggy_anal, start_object = make_floor(), skip_intro = True, position_locked = True) from _call_slave_attention_crisis_1
-                            mc.name "Thats enough, now get dressed and get out of here, I will call you when I have need for you."
+                            mc.name "That's enough, now get dressed and get out of here, I will call you when I have need for you."
                             $ the_person.review_outfit(dialogue = False)
                             $ the_person.draw_person(position = "stand3")
                             "She quickly puts on her clothes and bows her head."
@@ -154,7 +154,7 @@ label slave_attention_crisis_action_label:
                             pass
 
                         "Send her away":
-                            mc.name "Thats enough, now get dressed and get out of here, I will call you when I have need for you."
+                            mc.name "That's enough, now get dressed and get out of here, I will call you when I have need for you."
                             $ the_person.review_outfit(dialogue = False)
                             $ the_person.draw_person(position = "stand3")
                             "She quickly puts on her clothes and bows her head."

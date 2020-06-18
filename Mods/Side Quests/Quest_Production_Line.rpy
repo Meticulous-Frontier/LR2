@@ -422,7 +422,7 @@ label quest_production_line_help_move_label():
         "You notice she catches her breath when you say that. It is almost like she is getting excited."
         mc.name "You and your father... you umm, have a very special relationship... don't you?"
         if the_person.sluttiness > 40:  #She reveals her incest
-            the_person.char "Thats... I mean... kind of private!"
+            the_person.char "That's... I mean... kind of private!"
             mc.name "It's ok, [the_person.title]. You can tell me."
             "You can see her defenses breaking down."
             the_person.char "Oh god [the_person.mc_title], its like you see right through me..."
@@ -433,14 +433,14 @@ label quest_production_line_help_move_label():
             the_person.char "When he realized I was home and watching... he tried to tell me to go to my room, but I just couldn't! It's not his fault mom ditched us! Every man has needs..."
             the_person.char "I just wanted to take care of him... so... I did! And I don't regret it one bit!"
             mc.name "Just the one time?"
-            the_person.char "No... its... we've been intimate... on multiple occasions."
+            the_person.char "No... it's... we've been intimate... on multiple occasions."
             the_person.char "But now, I'm moved out. He has already started spending more time being social. Even been on a couple of dates!"
             the_person.char "I'm so proud to have him as my dad. But I always knew it wouldn't last forever. We both did."
             the_person.char "So we decided, together, to stop. Doing sexual things together anyway."
             "You take a moment to consider this revelation."
             mc.name "That's okay. I totally understand."
             the_person.char "You do?"
-            mc.name "There are multiple ways of telling someone you love them. Some are more intimate than others. If it feels right, and both people consent, whats the harm?"
+            mc.name "There are multiple ways of telling someone you love them. Some are more intimate than others. If it feels right, and both people consent, what's the harm?"
             the_person.char "Yeah! Exactly! Not many people think the way that we do though."
             $ the_person.change_stats(happiness = 20, love = 40, obedience = 40)
             $ the_person.draw_person()

@@ -194,7 +194,7 @@ label mom_breakfast_action_label_medium():
             $ the_person.change_arousal(20) #85
             "Her hip are beginning to move on their own now, needily grinding against your hand."
             "Her breathing is getting ragged. You begin to circle her clit with your fingers, trying to finish her off."
-            the_person.char "Oh! Thats it! Oh god I'm gonna..."
+            the_person.char "Oh! That's it! Oh god I'm gonna..."
             "[the_person.title]'s body tenses, then convulses. She is able to muffle her noises to a whimper, trying not to alarm your sister."
             $ the_person.call_dialogue("climax_responses_foreplay")
             $ mc.listener_system.fire_event("girl_climax", the_person = the_person) #TODO check and make sure this works...
