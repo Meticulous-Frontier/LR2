@@ -145,7 +145,7 @@ label SB_one_on_one_label():
                 "Sharing with someone a skill you thought you had wholly mastered reveals a few final deficient areas. You feel like you can take your skills even further now."
                 $ perk_system.add_stat_perk(Stat_Perk(description = "Teaching others has raised your skill ceiling to new levels. +1 work skills cap", skill_cap = 1), "Those Who Can, Do")
     else:
-        the_person.char "Thats okay, [the_person.mc_title], I understand. Maybe another time then!"
+        the_person.char "That's okay, [the_person.mc_title], I understand. Maybe another time then!"
 
     $ renpy.scene("Active")
     return

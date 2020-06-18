@@ -270,7 +270,7 @@ label scene_SB_anal_standing_2(the_girl, the_location, the_object):
                 "You reassure her, and then slowly begin to fuck her tightest hole again."
         "Choke Her" if the_girl.get_opinion_score("being submissive") > 0:
             "You take your hands off her hips and run them up her back. With one hand you grab the back of her hair and pull her head back."
-            the_girl.char "Mmm, thats it, you can be rough with me if you want..."
+            the_girl.char "Mmm, that's it, you can be rough with me if you want..."
             "You pull her hair back hard enough to hurt a little, she arches her back in pleasure as you start to fuck her ass more roughly."
             mc.name "Of course I can, I can do anything I want to you, my little slut."
             "You run your other hand along the side of her neck. She begins to say something but you squeeze her neck and she stops."

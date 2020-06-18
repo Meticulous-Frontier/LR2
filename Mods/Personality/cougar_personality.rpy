@@ -1289,7 +1289,7 @@ label cougar_bare_pussy_taboo_break(the_person, the_clothing):
         the_person.char "Oh, careful there [the_person.mc_title]. If you take off my [the_clothing.display_name] I won't be decent any more."
         if the_person.has_taboo("touching_vagina"):
             mc.name "I don't particularly want you to be decent at the moment, though. I want to get a look at your sweet pussy."
-            the_person.char "Oh stop it, thats no way to talk to a lady."
+            the_person.char "Oh stop it, that's no way to talk to a lady."
             "She thinks for a moment, then nods timidly."
             the_person.char "Okay, you can take it off and have a look, but only this once."
 
