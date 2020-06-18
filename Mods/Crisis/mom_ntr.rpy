@@ -153,7 +153,7 @@ label mom_ntr_mod_action_label:
                         man_name "That's better. Like the view of my friend? See how big he is because of you? Now start working on it, [the_person.name]!"
                         $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                         "She can't resist [man_name]'s urging and starts to suck him off."
-                        man_name "That's is, bitch! You like to suck my cock, don't you? Just too afraid to declare it in open."
+                        man_name "That's it, bitch! You like to suck my cock, don't you? Just too afraid to declare it in open."
                         man_name "If I knew you are so good at it, I have done it with you long time ago."
                         if the_person.get_opinion_score("giving blowjobs") > 0:
                             "[the_person.possessive_title] keeps sucking [man_name], and he clearly enjoys it. She also seems to get aroused a little."
@@ -497,7 +497,7 @@ label mom_ntr_mod_action_label:
                                         "She pushes him backwards. With a wet sound his dick leaves her pussy. [the_person.possessive_title] gets on her knees in front of [man_name] cock."
                                         the_person.char "Would you like to cover my face with your hot cum? I doubt that your wife allows you to do this!"
                                         man_name "No, [wife_name] never allows anything in bed. Sometimes I really hate it!"
-                                        the_person.char "Well, thats your chance to try something new, [man_name]!"
+                                        the_person.char "Well, that's your chance to try something new, [man_name]!"
                                         "She looks into [man_name]'s eyes while jerking your cocks with both hands."
                                         man_name "I'm cumming [the_person.name]!"
                                         "She leans closer so that [man_name] tip is just in front of her face."
@@ -558,7 +558,7 @@ label mom_ntr_mod_action_label:
                                         "She pushes him backwards. With a wet sound his dick leaves her pussy. [the_person.possessive_title] gets on her knees in front of [man_name] cock."
                                         the_person.char "I want to taste your hot cum. Don't think that your wife allows you to do this!"
                                         man_name "No, [wife_name] never allows anything in bed, she is so prudish and boring at times."
-                                        the_person.char "Well, thats your chance to try something new, [man_name]!"
+                                        the_person.char "Well, that's your chance to try something new, [man_name]!"
                                         $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                         "She looks into [man_name]'s eyes while sucking him off. One of her hands is working on you in meantime."
                                         man_name "I'm gonna cum, [the_person.name]!"
@@ -641,7 +641,7 @@ label mom_ntr_mod_action_label:
                                     "She pushes him backwards. With a wet sound his dick leaves her pussy. [the_person.possessive_title] gets on her knees in front of [man_name] cock."
                                     the_person.char "Would you like to cover my face with your hot cum? I doubt that your wife allows you to do this!"
                                     man_name "No, [wife_name] never allows anything in bed. Sometimes I really hate it!"
-                                    the_person.char "Well, thats your chance to try something new, [man_name]!"
+                                    the_person.char "Well, that's your chance to try something new, [man_name]!"
                                     "She looks into [man_name]'s eyes while jerking him with both hands."
                                     man_name "I'm cumming [the_person.name]!"
                                     "She leans closer so that [man_name] tip is just in front of her eyes."
@@ -697,7 +697,7 @@ label mom_ntr_mod_action_label:
                                     "She pushes him backwards. With a wet sound his dick leaves her pussy. [the_person.possessive_title] gets on her knees in front of [man_name] cock."
                                     the_person.char "I want to taste your hot cum. Don't think that your wife allows you to do this!"
                                     man_name "No, [wife_name] never allows anything in bed, she is so prudent and boring at times."
-                                    the_person.char "Well, thats your chance to try something new, [man_name]!"
+                                    the_person.char "Well, that's your chance to try something new, [man_name]!"
                                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                     "She looks into [man_name]'s eyes while sucking him off."
                                     man_name "I'm gonna cum, [the_person.name]!"
@@ -809,7 +809,7 @@ label mom_ntr_mod_action_label:
                                         "She pushes him backwards. With a wet sound his dick leaves her pussy. [the_person.possessive_title] gets on her knees in front of [man_name] cock."
                                         the_person.char "Would you like to cover my face with your hot cum? I doubt that your wife allows you to do this!"
                                         man_name "No, [wife_name] never allows anything in bed. Sometimes I really hate it! Never had a blowjob from her.."
-                                        the_person.char "Well, thats your chance to try something new, [man_name]!"
+                                        the_person.char "Well, that's your chance to try something new, [man_name]!"
                                         "She looks into [man_name]'s eyes while jerking your cocks with both hands."
                                         man_name "I'm cumming [the_person.name]!"
                                         "She leans closer so that [man_name] tip is just in front of her eyes."
@@ -1087,7 +1087,7 @@ label mom_ntr_mod_action_label:
                                     "She starts stroking you while [man_name] keeps driving his dick into her mouth."
                                     while the_person.arousal < 100:
                                         "[the_person.possessive_title] keeps sucking his dick. You notice that she is rubbing her clit with her free hand."
-                                        man_name "Oh, thats great, [the_person.name]! You are great at sucking cocks."
+                                        man_name "Oh, that's great, [the_person.name]! You are great at sucking cocks."
                                         if the_person.get_opinion_score("being submissive") > 0:
                                             "[the_person.possessive_title] grabs [man_name]'s ass and impales her mouth on his cock. His ball hit [the_person.possessive_title]'s jaw."
                                             man_name "Ow, that feels so good, [the_person.name]!"
@@ -1198,7 +1198,7 @@ label mom_ntr_mod_action_label:
                             else:
                                 while the_person.arousal < 100:
                                     "[the_person.possessive_title] keeps sucking his dick. You notice that she is rubbing her clit with a free hand."
-                                    man_name "Oh, thats great, [the_person.name]! Your mouth is so sweet and nice."
+                                    man_name "Oh, that's great, [the_person.name]! Your mouth is so sweet and nice."
                                     if the_person.get_opinion_score("being submissive") > 0:
                                         "[the_person.possessive_title] grabs [man_name]'s ass and impales her mouth on his cock. His ball hit [the_person.possessive_title]'s jaw."
                                         man_name "Ow, that feels so good, [the_person.name]!"
@@ -1507,7 +1507,7 @@ label mom_ntr_mod_action_label:
                                     the_person.char "I want to taste your hot cum. Don't think that your wife allows you to do this!"
                                     man_name2 "No, [wife_name2] never allows anything other than missionary with a condom, she is so prudent and boring at times."
                                     man_name "I asked [wife_name] once for a bj. She tried but it was awful and she called it disgusting..."
-                                    the_person.char "Well, thats your chance to try something new, guys!"
+                                    the_person.char "Well, that's your chance to try something new, guys!"
                                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                     "She looks into [man_name2]'s eyes while sucking him off. Her hands are working on two other dicks in meantime."
                                     man_name2 "I'm gonna cum, [the_person.name]!"
@@ -1592,7 +1592,7 @@ label mom_ntr_mod_action_label:
                                 the_person.char "Would you like to cover my face with your hot cum? I doubt that your wives allows you to do this!"
                                 man_name2 "No, [wife_name2] is not into lewd stuff. It's so boring. I wish to see [wife_name2] in sperm, just like in those movies."
                                 man_name "I once came on [wife_name] belly. She called me a pervert and didn't speak to me for a week!"
-                                the_person.char "Well, thats your chance to try something new, guys! Just like the movies."
+                                the_person.char "Well, that's your chance to try something new, guys! Just like the movies."
                                 "She looks into [man_name2]'s eyes while jerking him with both hands."
                                 man_name2 "I'm cumming [the_person.name]!"
                                 "She leans closer so that [man_name2] tip is just in front of her eyes."
@@ -1658,7 +1658,7 @@ label mom_ntr_mod_action_label:
                                 the_person.char "I want to taste your hot cum. Don't think that your wife allows you to do this!"
                                 man_name2 "No, [wife_name2] hates oral sex. It is so frustrating."
                                 man_name "I once asked [wife_name] for a blowjob. She said if I ever ask this again she will file a divorce!"
-                                the_person.char "Well, thats your chance to experience the feeling, guys!"
+                                the_person.char "Well, that's your chance to experience the feeling, guys!"
                                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                 "She looks into [man_name2]'s eyes while sucking him off."
                                 man_name2 "I'm gonna cum, [the_person.name]!"
@@ -1853,7 +1853,7 @@ label mom_ntr_mod_action_label:
                                     the_person.char "I want to taste your hot cum. Don't think that your wife allows you to do this!"
                                     man_name2 "No, [wife_name2] never allows anything other than missionary with a condom, she is so prudent and boring at times."
                                     man_name "I asked [wife_name] once for a bj. She tried but it was awful and she called it disgusting..."
-                                    the_person.char "Well, thats your chance to try something new, guys!"
+                                    the_person.char "Well, that's your chance to try something new, guys!"
                                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                     "She looks into [man_name2]'s eyes while sucking him off. Her hands are working on two other dicks in meantime."
                                     man_name2 "I'm gonna cum, [the_person.name]!"
@@ -1947,7 +1947,7 @@ label mom_ntr_mod_action_label:
                                 the_person.char "Would you like to cover my face with your hot cum? I doubt that your wives allows you to do this!"
                                 man_name2 "No, [wife_name2] is not into lewd stuff. It's so boring. I wish to see [wife_name2] in sperm, just like in those movies."
                                 man_name "I once came on [wife_name] belly. She called me a pervert and didn't speak to me for a week!"
-                                the_person.char "Well, thats your chance to try something new, guys! Just like the movies."
+                                the_person.char "Well, that's your chance to try something new, guys! Just like the movies."
                                 "She looks into [man_name2]'s eyes while jerking him with both hands."
                                 man_name2 "I'm cumming [the_person.name]!"
                                 "She leans closer so that [man_name2] tip is just in front of her eyes."
@@ -2012,7 +2012,7 @@ label mom_ntr_mod_action_label:
                                 the_person.char "I want to taste your hot cum. Don't think that your wife allows you to do this!"
                                 man_name2 "No, [wife_name2] never allows anything other than missionary with a condom, she is so prudent and boring at times."
                                 man_name "I asked [wife_name] once for a bj. She tried but it was awful and she called it disgusting..."
-                                the_person.char "Well, thats your chance to try something new, guys!"
+                                the_person.char "Well, that's your chance to try something new, guys!"
                                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                 "She looks into [man_name2]'s eyes while sucking him off. Her hands are working on [man_name]'s dick in meantime."
                                 man_name2 "I'm gonna cum, [the_person.name]!"
@@ -2207,7 +2207,7 @@ label mom_ntr_mod_action_label:
                                 the_person.char "Would you like to cover my face with your hot cum? I doubt that your wives allows you to do this!"
                                 man_name2 "No, [wife_name2] is not into lewd stuff. It's so boring. I wish to see [wife_name2] in sperm, just like in those movies."
                                 man_name "I once came on [wife_name] belly. She called me a pervert and didn't speak to me for a week!"
-                                the_person.char "Well, thats your chance to try something new, guys! Just like the movies."
+                                the_person.char "Well, that's your chance to try something new, guys! Just like the movies."
                                 "She looks into [man_name2]'s eyes while jerking him with both hands."
                                 man_name2 "I'm cumming [the_person.name]!"
                                 "She leans closer so that [man_name2] tip is just in front of her eyes."
@@ -2239,7 +2239,7 @@ label mom_ntr_mod_action_label:
                                 the_person.char "I want to taste your hot cum. Don't think that your wife allows you to do this!"
                                 man_name2 "No, [wife_name2] hates oral sex. It is so frustrating."
                                 man_name "I once asked [wife_name] for a blowjob. She said if I ever ask this again she will file a divorce!"
-                                the_person.char "Well, thats your chance to experience the feeling, guys!"
+                                the_person.char "Well, that's your chance to experience the feeling, guys!"
                                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                 "She looks into [man_name2]'s eyes while sucking him off."
                                 man_name2 "I'm gonna cum, [the_person.name]!"
