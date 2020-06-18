@@ -966,7 +966,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
         "You step up to her. Your hands go to her waist an she wraps her arms around you."
         $ the_person.draw_person(position = "kissing")
         the_person.char "Mmm... it feels so good when you hold me."
-        "She looks up into your eyes. Your bring your face down to hers and begin to kiss. Her lips open submissively to allowed you tongue to invade her mouth."
+        "She looks up into your eyes. Your bring your face down to hers and begin to kiss. Her lips open submissively to allow your tongue to invade her mouth."
         "You embrace each other for a while, just enjoying the heat and softness of her skin."
         the_person.char "Okay, are you ready to get this started?"
     else:
@@ -1135,7 +1135,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     $ the_person.draw_person()
     $ the_person.wardrobe.add_outfit(SB_advert_six_outfit)
     $ del SB_advert_six_outfit
-    mc.name "[the_person.title]... thats... you look amazing."
+    mc.name "[the_person.title]... that's... you look amazing."
     "[the_person.possessive_title] gives you a wide smile."
     the_person.char "Thank you! You know I can't give ALL my investors special views like this..."
     $ the_person.draw_person(position = "back_peek")
@@ -1174,7 +1174,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     the_person.char "Fuck! Oh that was good... That was just about perfect... now try and..."
     "SMACK"
     "You catch her off guard as you give her other ass cheek a whipping."
-    the_person.char "AHH! Oh that hurt so good... thats it baby, I've been a bad girl... spank me!"
+    the_person.char "AHH! Oh that hurt so good... that's it baby, I've been a bad girl... spank me!"
     "SMACK"
     $ the_person.change_arousal(10)#30
     "You give her a couple more spanks with the whip."

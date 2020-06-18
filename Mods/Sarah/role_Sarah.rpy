@@ -797,7 +797,7 @@ label Sarah_get_drinks_label():
     the_person.char "Oh? I thought I did okay, but if you have some... tips... for me that would be nice!"
     "The feminine smell in her hair enters your nostrils and you take a deep breath, enjoying your proximity with [the_person.title]."
     "You run your fingertips along her arm, until you are holding her hand as she holds her dart."
-    mc.name "Thats right, there was something about your posture that caught my eye."
+    mc.name "That's right, there was something about your posture that caught my eye."
     "You are now pushing yourself lightly up against [the_person.title]. She catches her breath when she feels your erection beginning to grow against her backside."
     the_person.char "Ah, something caught your eye then?"
     "You quickly release her and then walk back to the table."
@@ -1774,7 +1774,7 @@ label Sarah_threesome_request_label():
     the_person.char "Oh man, all this talk about sex is starting to get me all hot. Or is it just warm in here?"
     "Without prompting, [the_person.possessive_title] stands up and starts stripping down."
     $ scene_manager.strip_actor_outfit(the_person)
-    the_person.char "Aaahhhh, thats better."
+    the_person.char "Aaahhhh, that's better."
     "You cock is getting hard, looking at [the_person.title], completely naked in front of you."
     call fuck_person(the_person) from _sarah_threesome_request_aftermath_1
     $ the_report = _return
@@ -2712,7 +2712,7 @@ label Sarah_weekend_date_grab_drinks_label():
             if intoxication_level < 5:
                 the_person.char "Ah, okay. Well have a good night. I think I'm gonna grab a taxi home tonight!"
             else:
-                the_person.char "Damn, thats cold! Fine... but could you think you could calls me a taxi? I'm not sure I'm good to walk home..."
+                the_person.char "Damn, that's cold! Fine... but could you think you could calls me a taxi? I'm not sure I'm good to walk home..."
                 "You call up a local taxi company, soon one is on the way."
             "You stay out front of the bar with [the_person.title] until her cab arrives. You say goodnight and soon the cab is driving off."
             return "Advance Time"
@@ -2777,7 +2777,7 @@ label Sarah_weekend_date_strip_club_label():
             call Sarah_date_ends_at_your_place_label(the_person) from sarah_date_happy_ending_03
         "Part ways for tonight":
             mc.name "I had a great time tonight, but I'm afraid we need to part ways for now."
-            the_person.char "Damn, thats cold! Fine... I'll grab a taxi. Your loss!"
+            the_person.char "Damn, that's cold! Fine... I'll grab a taxi. Your loss!"
             "You stay out front of the strip club with [the_person.title] until her cab arrives. You say goodnight and soon the cab is driving off."
         "Wait for [cousin.title]" if willing_to_threesome(sarah, cousin):
             "Sorry! This isn't written yet. You decide actually to not wait for her and just head back to your place."

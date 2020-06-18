@@ -94,7 +94,7 @@ label intro_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_loca
 
 label scene_threesome_double_down_fuck_girl_one_1(the_girl_1, the_girl_2, the_location, the_object, the_round):
     #Scene: Make things rough. Spank her ass while she and the other girl play with each other.
-    "You run you tongue up and down [the_girl_2.title]'s slit, lapping up her juices, before plunging your tongue inside of her."
+    "You run your tongue up and down [the_girl_2.title]'s slit, lapping up her juices, before plunging your tongue inside of her."
     "[the_girl_1.title]'s ass is making lewd smacking noises as she rides you roughly."
     the_girl_2.char "Mmm, that's it [the_girl_2.mc_title]."
     "[the_girl_2.title] is pushing her pussy back against your face, smothering you with her pussy."

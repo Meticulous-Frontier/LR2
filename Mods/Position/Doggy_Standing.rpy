@@ -57,7 +57,7 @@ label scene_SB_doggy_standing_1(the_girl, the_location, the_object):
     $ the_girl.call_dialogue("sex_responses_vaginal")
     if the_girl.sex_skills["Vaginal"] < 2: #Inexperienced
         "After a particularly hard thrust, [the_girl.possessive_title] reflexively starts to pull away. You grab her hips to keep her from pulling off completely."
-        the_girl.char "I'm sorry [the_girl.mc_title], thats a little too rough. Can you go a little slower?"
+        the_girl.char "I'm sorry [the_girl.mc_title], that's a little too rough. Can you go a little slower?"
         "You pull her hips back toward you slowly. She sighs, still trying to get accustomed to your girth, penetrating her at such a deep angle."
         "The next time you push yourself in you push a little faster. She seems to be adapting to your fucking."
     elif SB_check_fetish(the_girl, vaginal_fetish_role):          #vaginal fetish

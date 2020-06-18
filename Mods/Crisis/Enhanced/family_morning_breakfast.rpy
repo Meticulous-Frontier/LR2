@@ -117,7 +117,7 @@ label family_morning_breakfast_enhanced_label():
                         lily.char "Thanks for breakfast, bro!"
                 "Refuse":
                     mc.name "That's okay, I have a ton of stuff to get done today. Maybe tonight after dinner?"
-                    mom.char "Okay, if thats what you want [mom.mc_title]."
+                    mom.char "Okay, if that's what you want [mom.mc_title]."
                     $ scene_manager.update_actor(mom, position="walking_away", character_placement = character_left_flipped)
                     "[mom.possessive_title] gets up and starts to do the dishes."
         "When you're done you help [mom.possessive_title] put the dirty dishes away and get on with your day."
