@@ -7,7 +7,7 @@ init -1 python:
     game_hints = []
 
     # Hints for Sarah
-    game_hints.append(Hint("Meet Sarah", "You should stay home for a day and see who knocks on your door.", "day > 2", "HR_director_creation_requirement() or employee_role in sarah.special_role or sarah.event_triggers_dict.get('rejected', False) == True"))
+    game_hints.append(Hint("Meet Sarah", "You should stay home for a day and see who knocks on your door.", "day > 2", "HR_director_creation_requirement() or sarah.is_employee() or sarah.event_triggers_dict.get('rejected', False) == True"))
     game_hints.append(Hint("Join Sarah and Friends", "While working on saturday, Sarah might ask you to join her for drinks with friends.", "bool(exists_in_mandatory_crisis_list('Sarah_third_wheel_label')) and sarah.core_sluttiness > 15", "not bool(exists_in_mandatory_crisis_list('Sarah_third_wheel_label'))"))
     game_hints.append(Hint("Date with Sarah", "While working on saturday, Sarah might ask you on a date.", "bool(exists_in_mandatory_crisis_list('Sarah_get_drinks_label')) and sarah.core_sluttiness > 30", "not bool(exists_in_mandatory_crisis_list('Sarah_get_drinks_label'))"))
 

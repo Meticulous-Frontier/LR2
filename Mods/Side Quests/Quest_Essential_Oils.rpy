@@ -39,8 +39,22 @@ init 1 python:
         return
 
     def quest_essential_oils_tracker():
+        if quest_essential_oils.get_quest_flag() <= 101:    #If head researcher quits or get fired before quest completion then quest fails
+            if mc.business.head_researcher == None:
+                quest_essential_oils.quest_complete = True
+                return
+
         if quest_essential_oils.get_quest_flag() <= 1:
+            if quest_essential_oils_get_target() == None:
+                the_target =  quest_essential_oils_find_employee()
+                if the_target == None:
+                    quest_essential_oils.quest_complete = True
+                    return
+                quest_essential_oils.quest_event_dict["target"] = the_target
             quest_essential_oils_get_target().add_unique_on_room_enter_event(quest_essential_oils_intro)
+        elif quest_essential_oils.get_quest_flag() >= 11 and quest_essential_oils.get_quest_flag() <= 31:
+            if quest_essential_oils_get_target() == None:#The quest has started but we fired or the target quit.
+                quest_essential_oils.quest_complete = True
         elif quest_essential_oils.get_quest_flag() == 11:
             mc.business.head_researcher.add_unique_on_talk_event(quest_essential_oils_research_start)
             mc.business.add_unique_mandatory_crisis(quest_essential_oils_abandon)
@@ -64,7 +78,7 @@ init 1 python:
     def quest_essential_oils_start_requirement():
         if mc.business.head_researcher == None:
             return False
-        if quest_essential_oils_find_employee == None:
+        if quest_essential_oils_find_employee() == None:
             return False
         return True
 
@@ -75,7 +89,7 @@ init 1 python:
         dawn.remove_on_talk_event(quest_essential_oils_decision)
         mc.business.head_researcher.remove_on_talk_event(quest_essential_oils_research_start)
         mc.business.head_researcher.remove_on_talk_event(quest_essential_oils_research_end)
-        # quest_essential_oils.quest_event_dict.clear()  #TODO this action will clear the invoice day
+        # quest_essential_oils.quest_event_dict.clear()  #TODO this action will clear the invoice day we do this manually after the invoice event instead
         return
 
     def quest_essential_oils_get_target():
@@ -274,6 +288,7 @@ label quest_essential_oils_decision_label(the_person):
     mc.name "Hey, I've procured an order of essential oils. They should be delivered sometime today."
     HR_temp.char "Okay. If you to research a new serum that uses them, let me know, we should be able to start developing one ASAP."
     "You hang up the phone. You now have access to the Essential Oils serum trait. It has a high value, but no positive effects and high chance of a negative side effect."
+    $ quest_essential_oils.quest_event_dict.clear()
     return
 
 label quest_essential_oils_abandon_label():
@@ -281,12 +296,14 @@ label quest_essential_oils_abandon_label():
     "You a run a legitimate pharmaceutical business, theres no room for that bullshit around here."
     "You decide just to scrap the whole idea."
     $ quest_essential_oils.set_quest_flag(99)
+    $ quest_essential_oils.quest_event_dict.clear()
     return
 
 label quest_essential_oils_invoice_label():
     "You get an invoice to your business for the essential oils you purchased."
     "You write a check and drop it in the mailbox."
     $ mc.business.change_funds(-500)
+    $ quest_essential_oils.quest_event_dict.clear()
     return
 
 

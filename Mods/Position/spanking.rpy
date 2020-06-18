@@ -6,7 +6,7 @@ init:
             guy_arousal = 0, guy_energy = 1,
             connections = [],
             intro = "intro_spanking",
-            scenes = ["scene_spanking_1"],
+            scenes = ["scene_spanking_1", "scene_spanking_2"],
             outro = "outro_spanking",
             transition_default = "transition_default_spanking",
             strip_description = "strip_spanking", strip_ask_description = "strip_ask_spanking",
@@ -118,6 +118,54 @@ label scene_spanking_1(the_girl, the_location, the_object):
         $ the_girl.change_obedience(-spank_factor)
         $ the_girl.change_love(spank_factor)
     $ spank_factor_increment(the_girl)
+    return
+
+label scene_spanking_2(the_girl, the_location, the_object):
+    $ spank_factor = calc_spank_factor(the_girl)
+    $ ass_desc = spanking_get_ass_description(the_girl)
+
+    "*SMACK*"
+    "You look at her bottom, deciding what to do next..."
+    menu:
+        "Continue spanking":
+            call scene_spanking_1(the_girl, the_location, the_object) from _call_scene_spanking_1_from_scene_2
+        "Rub her ass":
+            "Instead of smacking her ass again, you start rubbing, it's [ass_desc]"
+            if spank_factor > 5:
+                the_girl.char "Oh, that feels very nice, [the_girl.mc_title]."
+                "She starts to move her ass, moving along with your rubbing motions."
+            elif spank_factor > 0:
+                the_girl.char "Oh... I didn't expect that [the_girl.mc_title]! Oh god..."
+                "She keeps her ass motionless in order to minimize the discomfort."
+            elif spank_factor > -5:
+                the_girl.char "Ouch! I'm sorry [the_girl.mc_title]! I'm a little tender, could your rub a little softer..."
+                "You soften your touch and softly rub her apple red buttocks."
+            else:
+                the_girl.char "Jesus! That hurts! Please stop, even a feathers touch would be to painful!"
+                "She is trembling. With each touch of a finger her legs start shaking."
+        
+            $ the_girl.change_arousal(spank_factor * ((mc.sex_skills["Foreplay"] / 10) + 1))
+
+        "Finger her pussy" if the_girl.get_opinion_score("being fingered") > 0:
+            "You slide your fingers in and out of her pussy, stroking the inside of that soft tunnel."
+            "Each movement draws moans of pleasure from [the_girl.possessive_title], who presses herself against you."
+            "She places one of her own hands over yours, encouraging you to speed up."
+            the_girl.char "Just like that... Ah..."
+            $ the_girl.change_arousal((the_girl.get_opinion_score("being fingered") + 1) * 5)
+
+        "Finger Her pussy\n{color=#ff0000}{size=18}Must like being fingered{/size}{/color} (disabled)" if the_girl.get_opinion_score("being fingered") <= 0:
+            pass
+
+        "Finger her ass" if the_girl.get_opinion_score("anal sex") > 0:
+            "You slide your finger through her wet slit and move it up to her sphincter slightly lubricating it."
+            the_girl.char "Oh god I love it when you do this..."
+            "[the_girl.possessive_title] is pushing her ass against your finger, her breathing heavy, enticing you to keep going. You push your finger deep into her bowel."
+            the_girl.char "Oh!!! [the_girl.mc_title] YES!"
+            "You continue for a while. [the_girl.title] clearly enjoys the anal penetration. Eventually you pull your finger out and continue the punishment."
+            $ the_girl.change_arousal(the_girl.get_opinion_score("anal sex") * 10)
+
+        "Finger her ass\n{color=#ff0000}{size=18}Must like anal sex{/size}{/color} (disabled)" if the_girl.get_opinion_score("anal sex") <= 0:
+            pass
     return
 
 

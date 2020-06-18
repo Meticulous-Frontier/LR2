@@ -11,8 +11,8 @@ init 2 python:
     def SB_fetish_vaginal_family_threesome_requirement():
         if mc_asleep() and day % 7 is not 4: # not on Friday nights (we have the kitchen mom event here)
             if mc.energy > 50:  #Must have the energy to handle a long sexy night
-                if SB_check_fetish(mom, vaginal_fetish_role) or mom.sluttiness > 60:
-                    if SB_check_fetish(lily, vaginal_fetish_role) or lily.sluttiness > 60:
+                if mom.has_role(vaginal_fetish_role) or mom.sluttiness > 60:
+                    if lily.has_role(vaginal_fetish_role) or lily.sluttiness > 60:
                         return True
         return False
 

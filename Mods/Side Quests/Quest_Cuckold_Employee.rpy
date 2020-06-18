@@ -48,6 +48,10 @@ init 1 python:
         return quest_cuckold_employee.quest_event_dict.get("target", None)
 
     def quest_cuckold_employee_tracker():
+        if quest_cuckold_employee.get_quest_flag() <= 101:
+            if quest_cuckold_employee_get_target() == None:
+                quest_cuckold_employee.quest_complete = True
+                return
         if quest_cuckold_employee.get_quest_flag() <= 1:
             mc.business.add_unique_mandatory_crisis(quest_cuckold_employee_intro)
         elif quest_cuckold_employee.get_quest_flag() == 11:
@@ -73,9 +77,10 @@ init 1 python:
         elif quest_cuckold_employee.get_quest_flag() == 49:   #BAD END
             quest_cuckold_employee_get_target().add_unique_on_talk_event(quest_cuckold_employee_reconsider)
             quest_cuckold_employee.quest_complete = True
+        elif quest_cuckold_employee.get_quest_flag() == 91:
+            mc.business.add_unique_mandatory_crisis(quest_cuckold_employee_knocked_up)
         elif quest_cuckold_employee.get_quest_flag() == 101:
             quest_cuckold_employee.quest_complete = True
-            mc.business.add_unique_mandatory_crisis(quest_cuckold_employee_knocked_up)
         elif quest_cuckold_employee.get_quest_flag() == 102:
             quest_cuckold_employee.quest_complete = True
         return
@@ -95,7 +100,7 @@ init 1 python:
         quest_cuckold_employee_get_target().remove_on_talk_event(quest_cuckold_employee_breeding_session)
         #Leave knocked up and reconsider events in the stack to run after quest finishes.
         # cleanup dictionary to save space and memory
-        #quest_cuckold_employee.quest_event_dict.clear()
+        quest_cuckold_employee.quest_event_dict.clear()
         return
 
 ###Declare any requirement functions
@@ -154,17 +159,12 @@ init 1 python:
 ###Functions unique to the quest
     def quest_cuckold_employee_person_find_employee():
         able_person_list = []
-        for person in mc.business.get_employee_list(): #TODO is there a method that grabs ENTIRE employee list?
+        for person in mc.business.get_employee_list():
             if person not in quest_director.unavailable_persons:
-                if person.core_sluttiness > 50:
-                    if person.relationship == "Married":
-                        if person.kids == 0:
-                            #TODO isn't already pregnant
-                            able_person_list.append(person)
-        if len(able_person_list) > 0:
-            return get_random_from_list(able_person_list)
-        else:
-            return False
+                if person.core_sluttiness > 50 and not person.is_pregnant():
+                    if person.relationship == "Married" and person.kids == 0:
+                        able_person_list.append(person)
+        return get_random_from_list(able_person_list)
 
 ###Declare quest actions###
     quest_cuckold_employee_intro = Action("Begin Cuckold Quest", quest_cuckold_employee_intro_requirement, "quest_cuckold_employee_intro_label")
@@ -367,7 +367,7 @@ label quest_cuckold_employee_decision_label():
         mc.name "I'm sorry, I want to help you, but it's been a long day and I'm just wore out..."
         the_person.char "Fuck you! I see right through that charade. You just wanted to fuck a married woman!"
         $ the_person.draw_person(position = "walking_away")
-        "[the_person.title] stands up and storms out of your office. Unfortunately, you may have damaged your relationship with her irreperably."
+        "[the_person.title] stands up and storms out of your office. Unfortunately, you may have damaged your relationship with her irreparably."
         $ quest_cuckold_employee.set_quest_flag(28)
     return
 
@@ -586,8 +586,8 @@ label quest_cuckold_employee_after_window_label():
         the_person.char "I'll be able to test for sure in a couple of days! I wouldn't mind a couple more tries between now and then though... just in case my period is just late."
         "You text her back."
         mc.name "I'll make time to breed you again cow. Look forward to it."
-        $ the_person.on_room_enter_event_list.remove(preg_announce_action)  #We are overriding this event and doing our own announcement. No reason to use vanilla one in this situation.
-        $ quest_cuckold_employee.set_quest_flag(101)
+        $ the_person.on_room_enter_event_list = []  #We are overriding this event and doing our own announcement. No reason to use vanilla one in this situation.
+        $ quest_cuckold_employee.set_quest_flag(91)
         return
 
     else:
@@ -628,13 +628,14 @@ label quest_cuckold_employee_knocked_up_label():
             mc.name "[the_person.title], think it's time you left him so we can be together. It isn't right hiding this from him.."
             "[the_person.title] seems nervous, you can tell she is dealing with some guilt after cheating on her husband."
             the_person.char "I know... you're right. I know you're right! This has gone on long enough. I'll... I'll tell him later today."
-            #call transform_affair(the_person) from _call_transform_affair_4  #TODO this isn't the right function, because you aren't currently having an affair? Figure this branch out.
+            # she becomes your girlfriend
+            $ the_person.add_role(girlfriend_role)
             the_person.char "I cant believe it, I'm really doing this. You're my one and only bull now."
 
         "You're doing the right thing.":      #Be the good guy
-            mc.name "I'm really happy for you. Don't worry, your secret is safe with. For all purposes, the baby IS his."
+            mc.name "I'm really happy for you. Don't worry, your secret is safe with me. For all purposes, the baby IS his."
             the_person.char "Yeah... I know... Its just hard, you know?"
-            "She gets a sulty tone to her voice."
+            "She gets a sultry tone to her voice."
             the_person.char "If you want to, you can still cum inside me once in a while... It was kinda hot, playing around with breeding."
             mc.name "I'm happy to be your bull whenever you need it."
     the_person.char "Do you think, I could just start calling you that? My bull?"
@@ -644,7 +645,7 @@ label quest_cuckold_employee_knocked_up_label():
     $ the_person.set_possessive_title("Your Personal Breeding Stock")
     "She puts her hand on your chest. She traces a few circles around it, then slower lowers her hand to your crotch. She starts to stroke the shaft."
     the_person.char "Mmm, it just feels so... virile..."
-    the_person.char "Do you need a little release? I know I'm alrady pregnant but..."
+    the_person.char "Do you need a little release? I know I'm already pregnant but..."
     "You growl at her."
     mc.name "Bend over, [the_person.title]. I need a hole for my seed."
     $ the_person.change_arousal(20)
@@ -659,6 +660,7 @@ label quest_cuckold_employee_knocked_up_label():
     "It's going to be amazing to watch her belly swell with your seed."
     $ the_person.change_stats(obedience = 20, slut_temp = 20, slut_core = 20)  #She is now your slutty breeding stock.
     #TODO consider giving her a collar?
+    $ quest_cuckold_employee.set_quest_flag(101)
     $ the_person.personality = get_breeding_stock_personality(the_person)
     return
 
@@ -689,7 +691,7 @@ label breeding_stock_greetings(the_person):
             "She rubs her belly, absent mindedly."
 
     else:
-        he_person.char "Hi [the_person.mc_title]!"
+        the_person.char "Hi [the_person.mc_title]!"
         "She lowers her voice to a whisper."
         the_person.char "Its been a bit since you filled me up. Want to?"
         if the_person.knows_pregnant():
@@ -708,7 +710,7 @@ label breeding_stock_anal_sex_taboo_break(the_person):
 
 label breeding_stock_sex_responses_vaginal(the_person):
     if mc.condom:
-        the_person.char "Mmm, your cock feel good inside me, but you know what would be better? If we took off that awful latex condom."
+        the_person.char "Mmm, your cock feel good inside me, but you know what would be better? If we took off that awful condom."
         if the_person.knows_pregnant():
             the_person.char "I mean, I'm already pregnant! What's the harm in going bare?"
         else:

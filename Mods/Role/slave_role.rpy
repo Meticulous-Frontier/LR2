@@ -19,9 +19,9 @@ init 10 python:
             return False
 
     def slave_trim_pubes_requirement(the_person):
-        if girlfriend_role in the_person.special_role or affair_role in the_person.special_role:
+        if the_person.has_role(girlfriend_role) or the_person.has_role(affair_role):
             return False
-        if slave_role in the_person.special_role:
+        if the_person.has_role(slave_role):
             return True
         return False        
 
@@ -61,8 +61,7 @@ init 10 python:
 
     def slave_release_slave(person):
         slave_remove_collar(person)
-        if slave_role in person.special_role:
-            person.special_role.remove(slave_role)
+        person.remove_role(slave_role)
         person.stay_wet = False
         # she is not happy and will reset her obedience to 100
         person.change_stats(love = -20, happiness = -20, obedience = 100 - person.obedience)

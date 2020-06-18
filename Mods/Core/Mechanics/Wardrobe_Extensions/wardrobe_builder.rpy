@@ -1,4 +1,8 @@
 init 5 python:
+    #def casual_sex_mod_initialization(action_mod):
+    university_wardrobe = wardrobe_from_xml("University_Wardrobe")
+
+
     opinions_list.insert(7, "boots")
     opinions_list.insert(10, "high heels")
     opinions_list.insert(13, "dresses")

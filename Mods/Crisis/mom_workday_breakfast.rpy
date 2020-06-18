@@ -230,7 +230,7 @@ label mom_breakfast_action_label_high():
         "Have a Quickie":
             mc.name "That sounds pretty nice actually, what did you have in mind?"
 
-        "Feed Her" if SB_check_fetish(the_person, cum_internal_role) or SB_check_fetish(the_person, cum_external_role):
+        "Feed Her" if the_person.has_role(cum_internal_role) or the_person.has_role(cum_external_role):
             #fetish blowjob path
             the_person.char "Oh! I know! You just keep eating your breakfast, mommy will just help herself!"
             $ scene_manager.update_actor(mom, position = "blowjob")
@@ -306,7 +306,7 @@ label mom_breakfast_action_label_high():
     $ scene_manager.strip_actor_outfit(mom)
 
     "You take a quick sip of coffee. [the_person.possessive_title] is naked in the kitchen!"
-    if SB_check_fetish(the_person, anal_fetish_role): #The anal role
+    if the_person.has_role(anal_fetish_role): #The anal role
         "She opens one of the drawers and pulls out a bottle of lube..."
         mc.name "You keep lube in the kitchen?"
         the_person.char "Hush, you never know when you might have need of something like that, especially with all the urges I've been having lately..."

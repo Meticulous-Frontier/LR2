@@ -11,14 +11,14 @@ init 10 python:
     dungeon_room_appoint_slave_action = Action("Appoint a slave", dungeon_room_appoint_slave_requirement, "dungeon_room_appoint_slave_label", menu_tooltip = "Assigns the person a role as a slave. Use the \"Follow Me\" Action on a person to bring them to the Dungeon.")
 
     def dungeon_intro_action_requirement():
-        if day > 24 and time_of_day > 1 and time_of_day < 4: #Early for testing
+        if day > 24 and time_of_day > 1 and time_of_day < 4:
             if mc.business.funds > 20000 and not mc.business.is_open_for_business(): #Only trigger when alone in the office
                 if mc.is_at_work():
                     return True
         return False
 
     def dungeon_completed_action_requirement(completion_day):
-        if day > completion_day and time_of_day > 0 and time_of_day < 4:
+        if day > completion_day and mc.is_at_work() and mc.business.is_open_for_business():
             return True
         return False
 
@@ -29,6 +29,12 @@ init 10 python:
     def add_dungeon_completed_action():
         dungeon_completed_action = Action("Dungeon Completed", dungeon_completed_action_requirement, "dungeon_completed_label", requirement_args = day + 7)
         mc.business.mandatory_crises_list.append(dungeon_completed_action)
+
+    def slave_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions, prohibit_tags = []):
+        willingness = spanking.build_position_willingness_string(person, ignore_taboo = True)
+        foreplay_positions.insert(1, [willingness, spanking])
+        return [foreplay_positions, oral_positions, vaginal_positions, anal_positions]
+
 
 label dungeon_intro_label():
     "By yourself on the weekend at work, you are taking a moment to relax. Suddenly you are struck by a brilliant idea..."
@@ -74,7 +80,9 @@ label dungeon_room_appoint_slave_label_2(the_person):
             "[the_person.possessive_title] needs to be more obedient before being willing to commit to being your slave."
             return
 
-        $ the_person.special_role.append(slave_role)
+        $ the_person.add_role(slave_role)
+
+        $ the_person.event_triggers_dict["unique_sex_positions"] = slave_unique_sex_positions
 
         "[the_person.title] is now a willing slave of yours."
 
@@ -84,6 +92,7 @@ label dungeon_room_appoint_slave_label_2(the_person):
         menu:
             "Release her":
                 $ slave_release_slave(the_person)
+                $ del the_person.event_triggers_dict["unique_sex_positions"]
                 "You release [the_person.possessive_title] from their duties as a slave."
             "Never mind":
                 pass

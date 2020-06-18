@@ -17,7 +17,7 @@ init -1 python:
     def get_person_weight_string(person):
         if use_imperial_system:
             lbs = person.weight * 2.205
-    
+
             # add some weight based on number of days pregnant
             if person.pregnancy_is_visible():
                 # calculates a factor for the current day in relation to show day and due day, multiplied by average pregnancy weight of 25 pounds

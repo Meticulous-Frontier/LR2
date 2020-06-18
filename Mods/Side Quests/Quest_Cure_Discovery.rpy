@@ -60,7 +60,7 @@ init 1 python:
         elif quest_cure_discovery.get_quest_flag() == 29: #Bad End
             quest_cure_get_market_contact().remove_on_talk_event(quest_cure_discovery_market_patent)
             quest_cure_discovery.quest_complete = True
-        elif quest_cure_discovery.get_quest_flag() == 31: #Bad End
+        elif quest_cure_discovery.get_quest_flag() == 31:
             remove_mandatory_crisis_list_action("quest_cure_discovery_market_missed_label")
             mc.business.add_unique_mandatory_crisis(quest_cure_discovery_patent_sold)
         elif quest_cure_discovery.get_quest_flag() == 101: #Good End
@@ -178,8 +178,12 @@ label quest_cure_discovery_intro_label():
     $ the_target = get_random_from_list(mc.business.market_team)
     the_person.char "Personally, I think you should talk to [the_target.name]. You know, over in marketing?"
     mc.name "Oh?"
-    the_person.char "Yeah, I think she actually has experience doing something similar at a previous job. I bet she could help out!"
-    mc.name "Noted. I'm not sure I'll have to time, but I'll talk to her when I can."
+    if the_target == alexia:
+        the_person.char "She's a recent college graduate and seems to have a good handle on things over there. I bet she could manage it!"
+        mc.name "Noted. I'm not sure I'll have to time, but I'll talk to her when I can."
+    else:
+        the_person.char "Yeah, I think she actually has experience doing something similar at a previous job. I bet she could help out!"
+        mc.name "Noted. I'm not sure I'll have to time, but I'll talk to her when I can."
     the_person.char "If I were you, I'd get on it, quick! Modern day drug research is extremely fast paced. No telling when another lab might replicate our findings..."
     mc.name "Thank you, [the_person.title], for your research and for bringing this to my attention."
     "So... you should talk to [the_target.possessive_title] about selling your patent rights to the cure for [the_disease]."
@@ -195,14 +199,19 @@ label quest_cure_discovery_market_patent_label(the_person):
     $ the_disease = quest_cure_discovery.quest_event_dict.get("disease_name", "Rabies")
     mc.name "Hello [the_person.title], do you have a moment?"
     the_person.char "Of course. What can I do for you sir?"
-    mc.name "Well, I heard that you might have some prior experience working with drug patent rights..."
-    the_person.char "Yes sir! At my last job, I worked for a pharmaceutical investment company, buying and selling patent rights to all kinds of different drugs."
-    mc.name "Wow, well, that is actually very useful. You see, our research department made a discovery related to a possible treatment for [the_disease]."
+    if the_person == alexia:
+        mc.name "We made a big discovery in the research lab, but it is too big for our production department to handle. I was wondering if you could look into selling some patent rights."
+        the_person.char "Oh? I think I could handle something like that. What is the patent for?"
+        mc.name "Our research department made a discovery related to a possible treatment for [the_disease]."
+    else:
+        mc.name "Well, I heard that you might have some prior experience working with drug patent rights..."
+        the_person.char "Yes sir! At my last job, I worked for a pharmaceutical investment company, buying and selling patent rights to all kinds of different drugs."
+        mc.name "Wow, well, that is actually very useful. You see, our research department made a discovery related to a possible treatment for [the_disease]."
     the_person.char "Oh wow! There's currently some preventative drugs for that, but no known cure."
     mc.name "I know. I wish we had the production and testing capabilities here to take it to market, but unfortunately, we just don't."
     the_person.char "Aahhh, I see. So you want me to test the waters and see what I can get for the patent rights to the discovery?"
     mc.name "That's exactly right."
-    the_person.char "Okay! I can do that. Give me a couple of days to chat with some of my old contacts and I'll see what I can find!"
+    the_person.char "Okay! I can do that. Give me a couple of days and I'll see what I can find!"
     mc.name "Thank you, [the_person.title]."
     $ quest_cure_set_market_contact(the_person)
     $ quest_cure_discovery.quest_event_dict["market_day"] = day
@@ -216,7 +225,7 @@ label quest_cure_discovery_patent_sold_label():
     if the_person == None:
         return
     #TODO test to make sure market contact still works for us.
-    "You get a text message from "
+    "You get a text message from [the_person.title]."
     the_person.char "Hey there! I just got some good news on that patent you have for [the_disease]."
     mc.name "Glad to hear it. What is the news?"
     if quest_cure_discovery.quest_event_dict.get("cure_tier", 0) == 0:

@@ -142,7 +142,7 @@ label intro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
     "[the_girl_1.possessive_title] lays down on her back. [the_girl_2.possessive_title] gets down between her legs and start to lick her threesome partner."
     "Face down, ass up, exactly what you were looking for. You move forward behind [the_girl_2.title] and run your hands along her ass a few times."
     "You put your cock between her cheeks, enjoying the feeling of her soft, pliant flesh. She wiggles her hips back at you for a second before turning her head to look at you."
-    if SB_check_fetish(the_girl_2, vaginal_fetish_role):
+    if the_girl_2.has_role(vaginal_fetish_role):
         the_girl_2.char "Go ahead and fuck me! I can't wait to feel you deep inside me again..."
     else:
         the_girl_2.char "I think I'm ready for you... go ahead and push it in!"
@@ -206,7 +206,7 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_2(the_girl_1, the_girl_2, the_l
         the_girl_2.char "I'm sorry [the_girl_2.mc_title], that's a little too rough. Can you go a little slower?"
         "You pull her hips back toward you slowly. She sighs, still trying to get accustomed to your girth, penetrating her at such a deep angle."
         "The next time you push yourself in you push a little faster. [the_girl_2.title] goes back to licking [the_girl_1.title]."
-    elif SB_check_fetish(the_girl_2, vaginal_fetish_role):          #vaginal fetish
+    elif the_girl_2.has_role(vaginal_fetish_role):          #vaginal fetish
         "After a particularly hard thrust, [the_girl_2.possessive_title] moans lewdly. She stops eating out [the_girl_1.title] for a second and looks back at you."
         the_girl_2.char "It's so... fucking... GOOD. Fuck me hard [the_girl_2.mc_title], I want it so bad!"
         "With one hand on her hip to control the pace, you grope and worship her ass cheeks with the other hand. Each time you pull back you can see her labia clinging to you."
@@ -263,7 +263,7 @@ label outro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
                     "You can make out a few words of excitement from [the_girl_2.possessive_title] as she buries her face in [the_girl_1.title]'s cunt."
                 $ the_girl_2.cum_in_vagina()
                 $ scene_manager.draw_scene()
-                if SB_check_fetish(the_girl_2, cum_internal_role):
+                if the_girl_2.has_role(cum_internal_role):
                     "[the_girl_2.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
                     "She revels in having her cum fetish fulfilled."
                 "You slowly pull back. Your cum is dripping out of her cunt and down the inside of her legs."
@@ -276,7 +276,7 @@ label outro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
                 "You pull out of [the_girl_2.title] at the last moment. She wiggles her ass for you as you cover her with your cum."
             $ the_girl_2.cum_on_ass()
             $ scene_manager.draw_scene()
-            if SB_check_fetish(the_girl_2, cum_external_role):
+            if the_girl_2.has_role(cum_external_role):
                 "[the_girl_2.possessive_title]'s body goes rigid as your cum coats her ass. Goosebumps erupt all over her body as her brain registers your cum on her skin."
                 "[the_girl_2.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
                 "She truly is addicted to your cum."
@@ -318,7 +318,7 @@ label orgasm_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_lo
 
 label swap_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_location, the_object, the_round):
     "You put your cock between [the_girl_2.title]'s cheeks, enjoying the feeling of her soft, pliant flesh. She wiggles her hips back at you for a second before turning her head to look at you."
-    if SB_check_fetish(the_girl_2, vaginal_fetish_role):
+    if the_girl_2.has_role(vaginal_fetish_role):
         the_girl_2.char "Go ahead and fuck me! I can't wait to feel you deep inside me again..."
     else:
         the_girl_2.char "I'm ready for you... go ahead and push it in!"
@@ -332,7 +332,7 @@ label intro_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_locat
     "You grab your strap on and secure it. It hangs below your cock, ready to fuck [the_girl_2.title]'s cunt while you fuck her ass."
     "You use some spit to make sure your cock is lubed, then grab [the_girl_2.possessive_title]'s hips and get into position."
     "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
-    if SB_check_fetish(the_girl_2, anal_fetish_role):
+    if the_girl_2.has_role(anal_fetish_role):
         "[the_girl_2.title] moans pushes herself back against you, eagerly taking you inside her ass."
     elif the_girl_2.get_opinion_score("anal sex") > 0 :
         "[the_girl_2.title] moans. Her ass grips you tightly, but you can feel her forcing herself to relax to make it easier to take you."
@@ -356,7 +356,7 @@ label scene_threesome_doggy_deluxe_dp_girl_two_2(the_girl_1, the_girl_2, the_loc
     the_girl_1.char "Yeah, that's it [the_girl_1.mc_title], give it to her good!"
     "The double penetration of your cock and the strapon is making the experience much more intense for her."
     "[the_girl_2.possessive_title]'s pussy is dripping wet. A damp spot has begun to accumulate below her pussy as a result of your rutting."
-    if SB_check_fetish(the_girl_2, anal_fetish_role):
+    if the_girl_2.has_role(anal_fetish_role):
         "She is moaning so loudly, she is having a hard time concentrating on eating out [the_girl_1.title]."
         mc.name "You are such a butt slut [the_girl_2.title]. Is it nice to finally have a real cock, stuffed deep in your tight little asshole?"
         "[the_girl_2.possessive_title] can only moan louder in response. You grab her hair and pull her face away from [the_girl_1.title]'s cunt while you whisper in her ear."
@@ -444,7 +444,7 @@ label orgasm_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_loca
 label swap_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_location, the_object, the_round):
     "You grab your strap on and secure it around you. You use a little saliva to make sure your cock is good and lubed up."
     "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
-    if SB_check_fetish(the_girl_2, anal_fetish_role):
+    if the_girl_2.has_role(anal_fetish_role):
         "[the_girl_2.title] moans pushes herself back against you, eagerly taking you inside her ass."
     elif the_girl_2.get_opinion_score("anal sex") > 0 :
         "[the_girl_2.title] moans. Her ass grips you tightly, but you can feel her forcing herself to relax to make it easier to take you."

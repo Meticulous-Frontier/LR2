@@ -4,8 +4,9 @@ init 5 python:
 label ophelia_on_load(stack):
     python:
         if not ophelia_is_latest_version():
-            salon_manager.special_role = []   #TODO!!! This call also removes girlfriend and paramore roles. Find a way to detect and replace them.
-            salon_manager.special_role.append(salon_manager_role)
+            # reapply salon_manager role
+            salon_manager.remove_role(salon_manager_role)
+            salon_manager.add_role(salon_manager_role)
             if ophelia_get_ex_pics_sent() == 1:
                 if ophelia_blowjob_pics_review not in salon_manager.on_room_enter_event_list:
                     salon_manager.on_room_enter_event_list.append(ophelia_blowjob_pics_review)
@@ -62,7 +63,7 @@ init 2 python: # Declare variables to use
                 ["skimpy outfits", 1, False], # Fashion forward
             ])
 
-        salon_manager.special_role.append(salon_manager_role)
+        salon_manager.add_role(salon_manager_role)
         salon_manager.on_room_enter_event_list.append(salon_introduction_action)
 
         # create home for salon manager
@@ -98,6 +99,8 @@ init 2 python: # Declare variables to use
         salon_manager.event_triggers_dict["over_her_ex"] = 0
         salon_manager.event_triggers_dict["talk_about_candace"] = 0
         salon_manager.event_triggers_dict["help_candace"] = 0
+        salon_manager.event_triggers_dict["full_style_state"] = 0
+        salon_manager.event_triggers_dict["offers_full_style"] = False
         return
 
     def salon_introduction_action_requirement(the_person):

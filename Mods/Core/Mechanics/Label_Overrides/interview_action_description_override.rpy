@@ -27,11 +27,15 @@ init 2 python:
             reveal_sex = True
         if recruitment_knowledge_four_policy.is_owned():
             reveal_count += 2
-        
+
         for a_candidate in candidates:
             for x in __builtin__.range(0,reveal_count): #Reveal all of their opinions based on our policies.
                 a_candidate.discover_opinion(a_candidate.get_random_opinion(include_known = False, include_sexy = reveal_sex),add_to_log = False) #Get a random opinion and reveal it.
-        
+            if persistent.pregnancy_pref >= 2:
+                if renpy.random.randint(0,100) < 5:  #5% chance girl is already pregnant #TODO set to 50% for debugging
+                    silent_become_pregnant(a_candidate, renpy.random.randint(5,80))     #Can hire her up to 10 days from due date. Probably not hiring anyone a week from due!
+
+
         return candidates
 
 

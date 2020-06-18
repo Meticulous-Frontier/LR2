@@ -61,6 +61,10 @@ init 1 python:
 
     def quest_production_line_tracker():  #I'm so sorry for anyone who tries to read this function
         the_person = quest_production_line.quest_event_dict.get("target", None)
+        if quest_production_line.get_quest_flag() < 100:
+            if the_person == None:          #quest target is fired or otherwise out of the game
+                quest_production_line.quest_complete = True
+                return
         if quest_production_line.get_quest_flag() <= 1: #Intro
             if quest_production_line_intro not in the_person.on_room_enter_event_list:
                 the_person.on_room_enter_event_list.append(quest_production_line_intro)
@@ -166,7 +170,7 @@ init 1 python:
         return False
 
     def quest_production_line_daddy_title_requirement(the_person):
-        if the_person.sluttiness > 40:
+        if the_person.sluttiness > 40 and mc.is_at_work() and mc.business.is_open_for_business(): # only trigger at work
             return True
         return False
 

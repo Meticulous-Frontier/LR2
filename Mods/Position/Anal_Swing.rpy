@@ -24,7 +24,7 @@ init python:
 label intro_SB_anal_swing(the_girl, the_location, the_object):
     "[the_girl.possessive_title] sits down in the [the_object.name]. Her ass is hanging off the back end."
     "You run your hands along her supple hips."
-    if SB_check_fetish(the_girl, anal_fetish_role):
+    if the_girl.has_role(anal_fetish_role):
         the_girl.char "Oh my god. This is so kinky... fuck me good [the_girl.mc_title]!"
     elif the_girl.get_opinion_score("anal sex") > 0 :
         the_girl.char "I can't wait! It's so intense when you fuck me back there..."
@@ -35,7 +35,7 @@ label intro_SB_anal_swing(the_girl, the_location, the_object):
     else:
         the_girl.char "I don't know, are you sure this thing is safe?"
 
-    if SB_check_fetish(the_girl, anal_fetish_role):
+    if the_girl.has_role(anal_fetish_role):
         if the_girl is mom:
             "You work your cock up and down [the_girl.possessive_title]'s slit a few times, her wetness lubricating it."
             "You lean forward and whisper into her ear."
@@ -84,7 +84,7 @@ label scene_SB_anal_swing_1(the_girl, the_location, the_object):
     "With each bounce in the swing, [the_girl.possessive_title]'s ass pulls off you almost completely, but you grab the ropes of the swing and forcefully slam her ass back into you."
     $ the_girl.call_dialogue("sex_responses_anal")
 
-    if SB_check_fetish(the_girl, anal_fetish_role):           #Anal fetish
+    if the_girl.has_role(anal_fetish_role):           #Anal fetish
         "After a particularly hard bounce, [the_girl.possessive_title] moans ecstatically."
         if the_girl is mom:
             the_girl.char "That's it honey, fuck [the_girl.title] harder! Tie me up and hang me from a swing and pound [the_girl.title]'s ass any way you want! It feels so good!"
@@ -136,7 +136,7 @@ label scene_SB_anal_swing_2(the_girl, the_location, the_object):
     if the_girl.arousal > 130:
         the_girl.char "Ohhh my god, its so good..."
         "[the_girl.possessive_title]'s ass is quivering non stop."
-        if SB_check_fetish(the_girl, anal_fetish_role):
+        if the_girl.has_role(anal_fetish_role):
             the_girl.char "I just can't stop cumming! It feels so good [the_girl.mc_title]! Fuck my ass and make it yours!"
     elif the_girl.arousal > 80:
         the_girl.char "Ohhh, it feels so good. You're gonna make me cum like this... aren't you?"
@@ -164,7 +164,7 @@ label scene_SB_anal_swing_2(the_girl, the_location, the_object):
             "You kiss her neck one more time, then move your hands back to the swing straps and continue fucking her. She gives a little yelp when you pinch one of her nipples."
         "Talk Dirty":
             mc.name "I love to fuck your ass. It's so tight! You make such a great butt slut."
-            if SB_check_fetish(the_girl, anal_fetish_role):
+            if the_girl.has_role(anal_fetish_role):
                 "[the_girl.possessive_title] moans enthusiastically. She reaches back with one hand and grabs your hip, urging you to fuck her harder."
                 the_girl.char "[the_girl.mc_title]! I love being your butt slut. Now give it to your slut hard!"
                 "You give her what she wants. You grab her hips and start thrusting into her hard and fast."
@@ -219,7 +219,7 @@ label outro_SB_anal_swing(the_girl, the_location, the_object):
                 $ the_girl.change_happiness(5)
             $ the_girl.cum_in_ass()
             $ SB_anal_swing.redraw_scene(the_girl)
-            if SB_check_fetish(the_girl, cum_internal_role):
+            if the_girl.has_role(cum_internal_role):
                 "[the_girl.possessive_title]'s body goes rigid as your cum pours into her ass. Goosebumps erupt all over her body as her brain registers her creampie."
                 the_girl.char "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
                 "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
@@ -241,7 +241,7 @@ label outro_SB_anal_swing(the_girl, the_location, the_object):
                  the_girl.char "Yes! Paint me with your sticky cum!"
             $ the_girl.cum_on_ass()
             $ SB_anal_swing.redraw_scene(the_girl)
-            if SB_check_fetish(the_girl, cum_external_role):
+            if the_girl.has_role(cum_external_role):
                 "[the_girl.possessive_title]'s body goes rigid as your cum coats her ass. Goosebumps erupt all over her body as her brain registers your cum on her skin."
                 "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
                 "She truly is addicted to your cum."
@@ -262,7 +262,7 @@ label outro_SB_anal_swing(the_girl, the_location, the_object):
                 "Your orgasm hits hard. Your first jet sprays across her tits."
                 $ the_girl.cum_on_tits()
                 $ the_girl.draw_person(position = "sitting")
-                if SB_check_fetish(the_girl, cum_external_role):
+                if the_girl.has_role(cum_external_role):
                     "You can see [the_girl.possessive_title]'s pupils dilate as you fulfil her cum fetish."
                     "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her body. She moans lewdly."
                     "She truly is addicted to your cum."

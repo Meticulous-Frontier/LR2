@@ -3,6 +3,13 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
     default category_selected = "Hair Style"
     default selected_style = person.hair_style
 
+    python:
+        def revert_style(person, color, style): #Function to properly assign values to the fields as Screen Actions are flimsy.
+
+            person.hair_colour = color
+            person.hair_style = style
+            person.hair_style.colour = color[1]
+
 
     default use_current_outfit = person.outfit
     default use_nude = Outfit("Nude")
@@ -10,20 +17,20 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
     #default valid_categories = ["Hair Style", "Pubic Style"] #Holds the valid list of categories strings to be shown at the top.
     $ categories_mapping = { # list of clothing | Apply method | Valid / sensitive check | nudity switch | tooltip string
         "Hair Style": [hair_styles, Person.set_hair_style, True, "use_current_outfit"],
-        "Pubic Style": [pube_styles, Person.set_pubic_style, False, "use_nude", "Example String"] #Set the False bool to either true or a custom requirement function
+        "Pubic Style": [pube_styles, Person.set_pubic_style, ophelia_person_wants_pubic_hair_included(person), "use_nude", "Example String"] #Set the False bool to either true or a custom requirement function
         }
 
 
     default bar_select = 0 # 0 is nothing selected, 1 is red, 2 is green, 3 is blue, and 4 is alpha
 
     default selected_colour = "colour" #If secondary we are alternating the pattern colour. When changed it updates the colour of the clothing item. Current values are "colour" and "colour_pattern"
-    default current_r = person.hair_colour[1][0]
-    default current_g = person.hair_colour[1][1]
-    default current_b = person.hair_colour[1][2]
-    default current_a = person.hair_colour[1][3]
+    default current_r = selected_style.colour[0]
+    default current_g = selected_style.colour[1]
+    default current_b = selected_style.colour[2]
+    default current_a = selected_style.colour[3]
 
     default selected_hair_colour_name = person.hair_colour[0]
-    default selected_hair_colour = person.hair_colour[1]
+    default selected_hair_colour = selected_style.colour
     # default selected_style = person.hair_style
     #
     # default selected_pube_style = person.pubes_style
@@ -108,7 +115,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                                 SetField(person, "outfit", renpy.current_screen().scope[categories_mapping[category_selected][3]]),
                                                 SetField(style_item, "colour", [current_r, current_g, current_b, current_a]),
                                                 SetScreenVariable("selected_colour", "colour"),
-                                                SetScreenVariable("selected_style", style_item),
+                                                SetScreenVariable("selected_style", style_item.get_copy()),
                                                 Function(categories_mapping[category_selected][1], person, style_item),
                                                 Function(person.draw_person, show_person_info = False)]
 
@@ -152,6 +159,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                         xoffset 20
                                         action [
                                             SetField(selected_style, "colour", [current_r, current_g, current_b, current_a]),
+                                            SetScreenVariable("selected_hair_colour", [current_r, current_g, current_b, current_a]),
                                             SetField(person, "hair_colour", [selected_hair_colour_name, [current_r, current_g, current_b, current_a]]),
                                             Function(categories_mapping[category_selected][1], person, selected_style),
                                             Function(person.draw_person, show_person_info = False)
@@ -307,5 +315,5 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                         xalign 0.5
                         xanchor 0.5
                         spacing 50
-                        textbutton "Save Haircut" action [Return, SetField(person, "outfit", use_current_outfit)] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (155,80)
-                        textbutton "Abandon Design" action [SetField(person, "hair_colour", old_hair_colour), SetField(person, "hair_style", old_hair_style), SetField(person, "outfit", use_current_outfit), Return] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (185,80)
+                        textbutton "Save Haircut" action [Return, SetField(person, "outfit", use_current_outfit), Hide("hair_creator")] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (155,80)
+                        textbutton "Abandon Design" action [Function(revert_style, person, old_hair_colour, old_hair_style), SetField(person, "outfit", use_current_outfit), Return, Hide("hair_creator")] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (185,80)

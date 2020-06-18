@@ -35,6 +35,34 @@ init python: #For now default init. May change later if we know better.
         def quest_init(self):
             renpy.call(self.quest_init_label)
 
+        #################################################
+        # Custom Compare Functions For Side_Quest Class #
+        #################################################
+        def __cmp__(self, other):
+            if isinstance(self, other.__class__):
+                if self.quest_name == other.quest_name:
+                    return 0
+
+            if self.__hash__() < other.__hash__():
+                return -1
+            else:
+                return 1
+
+        # add side_quest hash function
+        def __hash__(self):
+            return hash(self.quest_name)
+
+        def __eq__(self, other):
+            if isinstance(self, other.__class__):
+                return self.quest_name == other.quest_name
+            return False
+
+        def __ne__(self, other):
+            if isinstance(self, other.__class__):
+                return self.quest_name != other.quest_name
+            return True
+          
+
     class Quest_Tracker(renpy.store.object):
         def __init__(self):
             self.quest_list = []
@@ -68,13 +96,14 @@ init python: #For now default init. May change later if we know better.
                 if not quest.quest_complete:
                     if quest.start_requirement():
                         able_quest_list.append(quest)
-            if len(able_quest_list) == 0: #No applicable quests available. Reset quest chance.
+
+            self.active_quest = get_random_from_list(able_quest_list)                        
+            if not self.active_quest: #No applicable quests available. Reset quest chance.
                 return False
-            else:
-                self.active_quest = get_random_from_list(able_quest_list)
-                self.active_quest.quest_init()
-                self.quest_active = True
-                self.quest_start_day = day
+                
+            self.active_quest.quest_init()
+            self.quest_active = True
+            self.quest_start_day = day
             return True
 
         def set_quest_flag(flag):
@@ -83,10 +112,10 @@ init python: #For now default init. May change later if we know better.
             return
 
         def add_new_quest(self, new_quest):  #Adds new quest, but only if it is unique. Checks to see if same name quest already exists.
-            for quest in self.quest_list:
-                if new_quest.quest_name == quest.quest_name:
-                    return False
-            self.quest_list.append(new_quest)
+            if not new_quest in self.quest_list:
+                self.quest_list.append(new_quest)
+                return True
+            return False
 
         def active_quest_name(self):
             if self.active_quest:
@@ -126,42 +155,64 @@ init python: #For now default init. May change later if we know better.
         global quest_director
         quest_director = Quest_Tracker()
 
-        global quest_production_line
-        quest_production_line = Side_Quest(quest_name = "Chemist's Baby Girl",
-            quest_init_label = "quest_production_line_init_label",
-            quest_tracker = quest_production_line_tracker,
-            start_requirement = quest_production_line_start_requirement,
-            quest_cleanup = quest_production_line_cleanup)
-        quest_director.add_new_quest(quest_production_line)
-
-        global quest_cure_discovery
-        quest_cure_discovery = Side_Quest(quest_name = "Medical Breakthrough",
-            quest_init_label = "quest_cure_discovery_init_label",
-            quest_tracker = quest_cure_discovery_tracker,
-            start_requirement = quest_cure_discovery_start_requirement,
-            quest_cleanup = quest_cure_discovery_cleanup)
-        quest_director.add_new_quest(quest_cure_discovery)
-
-        #TODO this side quest is currently disabled becuase my coding is shit and I don't want to cause more CTDs until I can personally test this. - Starbuck
-        # global quest_cuckold_employee
-        # quest_cuckold_employee = Side_Quest(quest_name = "Cuckold Employee",
-        #     quest_init_label = "quest_cuckold_employee_init_label",
-        #     quest_tracker = quest_cuckold_employee_tracker,
-        #     start_requirement = quest_cuckold_employee_start_requirement,
-        #     quest_cleanup = quest_cuckold_employee_cleanup)
-        # quest_director.add_new_quest(quest_cuckold_employee)
-
         quest_director.unavailable_persons = unique_character_list
 
+        Quest_tracker_update_quest_list()
+        return
+
+    def Quest_tracker_update_quest_list():
+        if not "quest_production_line" in globals():
+            global quest_production_line
+            quest_production_line = Side_Quest(quest_name = "Chemist's Baby Girl",
+                quest_init_label = "quest_production_line_init_label",
+                quest_tracker = quest_production_line_tracker,
+                start_requirement = quest_production_line_start_requirement,
+                quest_cleanup = quest_production_line_cleanup)
+            quest_director.add_new_quest(quest_production_line)
+
+        if not "quest_cure_discovery" in globals():
+            global quest_cure_discovery
+            quest_cure_discovery = Side_Quest(quest_name = "Medical Breakthrough",
+                quest_init_label = "quest_cure_discovery_init_label",
+                quest_tracker = quest_cure_discovery_tracker,
+                start_requirement = quest_cure_discovery_start_requirement,
+                quest_cleanup = quest_cure_discovery_cleanup)
+            quest_director.add_new_quest(quest_cure_discovery)
+
+        if not "quest_cuckold_employee" in globals():
+            global quest_cuckold_employee
+            quest_cuckold_employee = Side_Quest(quest_name = "Cuckold Employee",
+                quest_init_label = "quest_cuckold_employee_init_label",
+                quest_tracker = quest_cuckold_employee_tracker,
+                start_requirement = quest_cuckold_employee_start_requirement,
+                quest_cleanup = quest_cuckold_employee_cleanup)
+            quest_director.add_new_quest(quest_cuckold_employee)
+
+        if not "quest_essential_oils" in globals():
+            global quest_essential_oils
+            quest_essential_oils = Side_Quest(quest_name = "Essential Oils",
+                quest_init_label = "quest_essential_oils_init_label",
+                quest_tracker = quest_essential_oils_tracker,
+                start_requirement = quest_essential_oils_start_requirement,
+                quest_cleanup = quest_essential_oils_cleanup)
+            quest_director.add_new_quest(quest_essential_oils)
         return
 
     def Quest_tracker_update():
-        # update existing quests to simplify debugging (only tracker and cleanup)
         quest_director.unavailable_persons = unique_character_list
 
+        Quest_tracker_update_quest_list()
+
+        # update existing quests to simplify debugging (only tracker and cleanup)
         quest_production_line.quest_tracker = quest_production_line_tracker
         quest_production_line.quest_cleanup = quest_production_line_cleanup
 
         quest_cure_discovery.quest_tracker = quest_cure_discovery_tracker
         quest_cure_discovery.quest_cleanup = quest_cure_discovery_cleanup
+
+        quest_cuckold_employee.quest_tracker = quest_cuckold_employee_tracker
+        quest_cuckold_employee.quest_cleanup = quest_cuckold_employee_cleanup
+
+        quest_essential_oils.quest_tracker = quest_essential_oils_tracker
+        quest_essential_oils.quest_cleanup = quest_essential_oils_cleanup
         return

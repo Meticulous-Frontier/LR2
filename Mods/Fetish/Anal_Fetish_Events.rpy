@@ -145,7 +145,7 @@ label SB_fetish_anal_label(the_person):
             "You tease her."
             the_person.char "I can't stop thinking about how full it feels... it feels so right when you push into my ass. It gets me so hot imagining it..."
             "She's been under the influence of your serums for a while now... you wonder if she's developed an anal fetish..."
-            $ the_person.special_role.append(anal_fetish_role)
+            $ the_person.add_role(anal_fetish_role)
             $ the_person.update_sex_skill("Anal", 6)
             $ the_person.event_triggers_dict["LastAnalFetish"] = day
             $ add_fuck_doll_collar_to_base_outfit(the_person)
@@ -209,12 +209,12 @@ label SB_fetish_anal_label_non_employee(the_person):
             "[the_person.possessive_title] blushes and pauses..."
             mc.name "...And doing what, [the_person.title]?"
             the_person.char "I can't stop thinking about how full it feels... it feels so right when you push into my ass. It gets me so hot imagining it..."
-            $ the_person.special_role.append(anal_fetish_role)
+            $ the_person.add_role(anal_fetish_role)
             $ the_person.update_sex_skill("Anal", 6)
             $ the_person.event_triggers_dict["LastAnalFetish"] = day
             $ add_fuck_doll_collar_to_base_outfit(the_person)
             "[the_person.possessive_title] gets her butt plug and slowly pushes it back into her ass."
-            $ the_person.apply_outfit(the_person.planned_outfit)
+            $ the_person.apply_planned_outfit()
             the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
             $ the_person.draw_person(position = "walking_away")
             "With a big smile, she turns around and sneaks out into the night."
@@ -365,7 +365,7 @@ init 2 python:
     def get_anal_fetish_employee():
         meets_fetish_list = []
         for person in mc.business.get_employee_list():
-            if SB_check_fetish(person, anal_fetish_role):
+            if person.has_role(anal_fetish_role):
                 if person.event_triggers_dict.get("LastAnalFetish", 0) + 10 < day:
                     meets_fetish_list.append(person)
 
@@ -374,7 +374,7 @@ init 2 python:
     def get_anal_fetish_non_employee():
         meets_fetish_list = []
         for person in known_people_in_the_game(excluded_people = mc.business.get_employee_list() + [mom, lily, starbuck, stephanie, mc]):
-            if SB_check_fetish(person, anal_fetish_role):
+            if person.has_role(anal_fetish_role):
                 if person.event_triggers_dict.get("LastAnalFetish", 0) + 10 < day:
                     meets_fetish_list.append(person)
 
@@ -497,7 +497,7 @@ label SB_fetish_anal_recurring_non_employee_label():
             
             the_person.char "That was so good. I've been thinking about that all day."
             "[the_person.possessive_title] gets her butt plug and slowly pushes it back into her ass."
-            $ the_person.apply_outfit(the_person.planned_outfit)
+            $ the_person.apply_planned_outfit()
             $ the_person.draw_person(emotion = "happy")
             the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
             $ the_person.draw_person(position = "walking_away")
@@ -701,7 +701,7 @@ label SB_mom_anal_pay_label():
             "You start to get up to go to your room, but [the_person.possessive_title] calls out to you as you start to get up."
             the_person.char "[the_person.mc_title]? Why don't you just stay in here tonight? [the_person.title] loves you... its okay!"
             "You slip back into bed next to her."
-            $ the_person.special_role.append(anal_fetish_role)
+            $ the_person.add_role(anal_fetish_role)
             $ add_fuck_doll_collar_to_base_outfit(the_person)
             "[the_person.possessive_title] has already fallen asleep. You can hear her murmuring in her dreams about taking stuff in her ass."
             "It seems your serums have given her an anal fetish!"
@@ -942,7 +942,7 @@ label SB_lily_anal_dp_fetish_label():
     "You give her a reassuring smile."
     mc.name "Don't worry [the_person.title], we'll be careful."
     the_person.char "Good... because lately I've just been craving you so bad. We don't have to always use the strap on. But just thinking about you fucking my ass makes me so horny."
-    $ the_person.special_role.append(anal_fetish_role)
+    $ the_person.add_role(anal_fetish_role)
     $ add_fuck_doll_collar_to_base_outfit(the_person)
 
     #TODO come back and change other events involving lily to account for her anal fetish.
@@ -1018,7 +1018,7 @@ label SB_starbuck_anal_intro():
     call fuck_person(the_person, start_position = doggy_anal, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBA70
     $ the_person.max_opinion_score("anal sex")
     $ the_person.max_opinion_score("anal creampies")
-    $ the_person.special_role.append(anal_fetish_role)
+    $ the_person.add_role(anal_fetish_role)
     $ add_fuck_doll_collar_to_base_outfit(the_person)
     $ the_person.update_sex_skill("Anal", 6)
     "It's pretty clear from her sexual performance and the way she talks to you, that [the_person.title] has developed an anal fetish."
@@ -1261,7 +1261,7 @@ label SB_stephanie_anal_fetish_label():
                 call fuck_person(the_person, start_position = SB_anal_standing) from _call_fuck_person_SBA090
                 $ the_person.max_opinion_score("anal sex")
                 $ the_person.max_opinion_score("anal creampies")
-                $ the_person.special_role.append(anal_fetish_role)
+                $ the_person.add_role(anal_fetish_role)
                 $ add_fuck_doll_collar_to_base_outfit(the_person)
                 $ the_person.update_sex_skill("Anal", 6)
                 the_person.char "Oh god... It's even better than I dreamed about last night."
@@ -1307,7 +1307,7 @@ label SB_stephanie_anal_fetish_label():
                 call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True, position_locked = True) from _call_fuck_person_SBA091
                 $ the_person.max_opinion_score("anal sex")
                 $ the_person.max_opinion_score("anal creampies")
-                $ the_person.special_role.append(anal_fetish_role)
+                $ the_person.add_role(anal_fetish_role)
                 $ add_fuck_doll_collar_to_base_outfit(the_person)
                 $ the_person.update_sex_skill("Anal", 6)
                 the_person.char "That's it! That's just what I was hoping for."
@@ -1337,7 +1337,7 @@ label SB_stephanie_anal_fetish_label():
             "Try to talk her down\n{color=#ff0000}{size=18}Requires High Charisma{/size}{/color} (disabled)" if mc.charisma <= 6:
                 pass
 
-    elif the_person.love < 70 and not girlfriend_role in the_person.special_role:   #She kinda trusts / loves you, but isn't fully committed and needs some convincing.
+    elif the_person.love < 70 and not the_person.has_role(girlfriend_role):   #She kinda trusts / loves you, but isn't fully committed and needs some convincing.
         the_person.char "Look... I've been doing this for a while now. I know the real purpose of the serums you have me researching, and the effects they have on people..."
         the_person.char "I went along with things for a while because I trust you. You've always impressed me with the way you do things."
         "She shifts uncomfortably in her seat."
@@ -1392,7 +1392,7 @@ label SB_stephanie_anal_fetish_label():
                 call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True, position_locked = True) from _call_fuck_person_SBA092
                 $ the_person.max_opinion_score("anal sex")
                 $ the_person.max_opinion_score("anal creampies")
-                $ the_person.special_role.append(anal_fetish_role)
+                $ the_person.add_role(anal_fetish_role)
                 $ add_fuck_doll_collar_to_base_outfit(the_person)
                 $ the_person.update_sex_skill("Anal", 6)
                 the_person.char "That's it! That's just what I was hoping for."
@@ -1435,7 +1435,7 @@ label SB_stephanie_anal_fetish_label():
         call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_desk(), girl_in_charge = True, position_locked = True) from _call_sex_description_SBA093
         $ the_person.max_opinion_score("anal sex")
         $ the_person.max_opinion_score("anal creampies")
-        $ the_person.special_role.append(anal_fetish_role)
+        $ the_person.add_role(anal_fetish_role)
         $ add_fuck_doll_collar_to_base_outfit(the_person)
         $ the_person.update_sex_skill("Anal", 6)
         the_person.char "Oh god... It's even better than I dreamed about last night."
@@ -1484,7 +1484,7 @@ label SB_stephanie_anal_fetish_label():
         call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_desk(), skip_intro = False, girl_in_charge = True, position_locked = True) from _call_sex_description_SBA094
         $ the_person.max_opinion_score("anal sex")
         $ the_person.max_opinion_score("anal creampies")
-        $ the_person.special_role.append(anal_fetish_role)
+        $ the_person.add_role(anal_fetish_role)
         $ add_fuck_doll_collar_to_base_outfit(the_person)
         $ the_person.update_sex_skill("Anal", 6)
         the_person.char "Oh god... It's even better than I dreamed about last night."

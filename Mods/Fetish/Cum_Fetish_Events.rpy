@@ -76,6 +76,24 @@ init 1 python:
         mc.business.mandatory_crises_list.append(SB_fetish_cum_crisis_non_employee)
         return
 
+    def add_cum_fetish_role_based_on_cum(person):
+        if person.outfit.has_mouth_cum():
+            #You came in her mouth! She now fetishes getting cum inside
+            #"Note, cum in mouth detected. Comment this later"
+            person.max_opinion_score("drinking cum")
+            person.max_opinion_score("creampies")
+            if person.add_role(cum_internal_role):
+                add_cum_slut_collar_to_base_outfit(person)
+        if person.outfit.has_face_cum():
+            #You came on her face! Now she fetishes facials and getting cum on her.
+            #"Note, cum on face detected. Comment this later"
+            person.max_opinion_score("cum facials")
+            person.max_opinion_score("being covered in cum")
+            if person.add_role(cum_external_role):
+                add_cum_slut_collar_to_base_outfit(person)
+        return
+
+
 label SB_fetish_cum_non_employee_label(the_person):
     "Some time late in the night, you're awoken by the buzz of your phone getting a text. You roll over and ignore it."
     "A few minutes later it buzzes again, then again. You're forced to wake up and see what is the matter."
@@ -97,29 +115,13 @@ label SB_fetish_cum_non_employee_label(the_person):
             the_person.char "Mmh, I love it when I can feel it grow in my mouth."
             "[the_person.possessive_title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
             call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC10B
-            #Try and figure out where you came
-            python:
-                if the_person.outfit.has_mouth_cum():
-                    #You came in her mouth! She now fetishes getting cum inside
-                    #"Note, cum in mouth detected. Comment this later"
-                    the_person.max_opinion_score("drinking cum")
-                    the_person.max_opinion_score("creampies")
-                    if not cum_internal_role in the_person.special_role:
-                        the_person.special_role.append(cum_internal_role)
-                        add_cum_slut_collar_to_base_outfit(the_person)
-                if the_person.outfit.has_face_cum():
-                    #You came on her face! Now she fetishes facials and getting cum on her.
-                    #"Note, cum on face detected. Comment this later"
-                    the_person.max_opinion_score("cum facials")
-                    the_person.max_opinion_score("being covered in cum")
-                    if not cum_external_role in the_person.special_role:
-                        the_person.special_role.append(cum_external_role)
-                        add_cum_slut_collar_to_base_outfit(the_person)
+            $ add_cum_fetish_role_based_on_cum(the_person)
+
             "[the_person.possessive_title] is moaning ecstatically."
-            if SB_check_fetish(the_person, cum_external_role):
+            if the_person.has_role(cum_external_role):
                 "Glancing down, you see [the_person.possessive_title] running her hands along her face, rubbing your cum into her skin."
                 the_person.char "Mmm... it feels so good! That first splash is always the best..."
-            elif SB_check_fetish(the_person, cum_internal_role):
+            elif the_person.has_role(cum_internal_role):
                 "Glancing down, you see [the_person.possessive_title] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
                 the_person.char "Mmm... your taste is so unique, I love it!"
             $ the_person.event_triggers_dict["LastCumFetish"] = day                
@@ -130,7 +132,7 @@ label SB_fetish_cum_non_employee_label(the_person):
             mc.name "Did you get what you were hoping for?"
             the_person.char "Oh, I think I'm good for today... but I'm sure it won't be long until I get hungry again..."
             "[the_person.possessive_title] runs her hand through her hair. She licks her lips and smiles at you."
-            $ the_person.apply_outfit(the_person.planned_outfit)
+            $ the_person.apply_planned_outfit()
             the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
             $ the_person.draw_person(position = "walking_away", emotion = "happy")
             "You wave goodbye to [the_person.possessive_title] and quickly put away your cock. You turn around and go to bed."
@@ -188,29 +190,12 @@ label SB_fetish_cum_label(the_person):
             "You should be careful where you cum. It is likely her fetish may develop based on where you cum!"
             ###cum Scene, standing variant###
             call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC10
-            #Try and figure out where you came
-            python:
-                if the_person.outfit.has_mouth_cum():
-                    #You came in her mouth! She now fetishes getting cum inside
-                    #"Note, cum in mouth detected. Comment this later"
-                    the_person.max_opinion_score("drinking cum")
-                    the_person.max_opinion_score("creampies")
-                    if not cum_internal_role in the_person.special_role:
-                        the_person.special_role.append(cum_internal_role)
-                        add_cum_slut_collar_to_base_outfit(the_person)
-                if the_person.outfit.has_face_cum():
-                    #You came on her face! Now she fetishes facials and getting cum on her.
-                    #"Note, cum on face detected. Comment this later"
-                    the_person.max_opinion_score("cum facials")
-                    the_person.max_opinion_score("being covered in cum")
-                    if not cum_external_role in the_person.special_role:
-                        the_person.special_role.append(cum_external_role)
-                        add_cum_slut_collar_to_base_outfit(the_person)
+            $ add_cum_fetish_role_based_on_cum(the_person)
             "[the_person.possessive_title] is moaning ecstatically below your desk."
-            if SB_check_fetish(the_person, cum_external_role):
+            if the_person.has_role(cum_external_role):
                 "Glancing down, you see [the_person.possessive_title] running her hands along her face, then down to her chest. She is rubbing your cum into her skin."
                 the_person.char "Mmm... it feels so good! That first splash is always the best..."
-            elif SB_check_fetish(the_person, cum_internal_role):
+            elif the_person.has_role(cum_internal_role):
                 "Glancing down, you see [the_person.possessive_title] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
                 the_person.char "Mmm... it's all inside me now... right where it belongs!"
             $ the_person.event_triggers_dict["LastCumFetish"] = day                
@@ -253,7 +238,7 @@ init 2 python:
     def get_fetish_cum_dosage_employee():
         meets_fetish_list = []
         for person in mc.business.get_employee_list():
-            if SB_check_fetish(person, cum_internal_role) or SB_check_fetish(person, cum_external_role):
+            if person.has_role(cum_internal_role) or person.has_role(cum_external_role):
                 if person.event_triggers_dict.get("LastCumFetish", 0) + 10 < day:
                     meets_fetish_list.append(person)
 
@@ -262,7 +247,7 @@ init 2 python:
     def get_fetish_cum_dosage_non_employee():
         meets_fetish_list = []
         for person in known_people_in_the_game(excluded_people = mc.business.get_employee_list() + [mom, lily, mc]):
-            if SB_check_fetish(person, cum_internal_role) or SB_check_fetish(person, cum_external_role):
+            if person.has_role(cum_internal_role) or person.has_role(cum_external_role):
                 if person.event_triggers_dict.get("LastCumFetish", 0) + 10 < day:
                     meets_fetish_list.append(person)
 
@@ -270,10 +255,10 @@ init 2 python:
 
     def get_fetish_shower_cum_girl():
         meets_fetish_list = []
-        if SB_check_fetish(mom, cum_internal_role) or SB_check_fetish(mom, cum_external_role):
+        if mom.has_role(cum_internal_role) or mom.has_role(cum_external_role):
             if mom.event_triggers_dict.get("LastCumFetish", 0) + 10 < day:
                 meets_fetish_list.append(mom)
-        if SB_check_fetish(lily, cum_internal_role) or SB_check_fetish(lily, cum_external_role):
+        if lily.has_role(cum_internal_role) or lily.has_role(cum_external_role):
             if lily.event_triggers_dict.get("LastCumFetish", 0) + 10 < day:
                 meets_fetish_list.append(lily)
 
@@ -371,7 +356,7 @@ label SB_fetish_cum_dosage_non_employee_label():
             call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), girl_in_charge = False, position_locked = True) from _call_fuck_person_SB_fetish_cum_dosage_non_employee_label
             the_person.char "Oh my god, thank you [the_person.mc_title]... I wish I had time make you cum again... but I know you're a busy a man..."
             "[the_person.possessive_title] starts to get up. Her hunger for cum satisfied for now."
-            $ the_person.apply_outfit(the_person.planned_outfit)
+            $ the_person.apply_planned_outfit()
             $ the_person.draw_person(emotion = "happy")
             the_person.char "Thanks again, [the_person.mc_title]. Don't hesitate to give me a call when... you know...need my service."
             $ the_person.draw_person(position = "walking_away")
@@ -411,7 +396,7 @@ label SB_fetish_mom_cum_label():
     "She opens her mouth and goes back to work. Her skilled mouth is quickly bringing you to an orgasm!"
     "You carefully consider where to cum. This may have an effect on how her cum fetish develops!"
     menu:
-        "Cum in her mouth" if not SB_check_fetish(the_person, cum_internal_role):
+        "Cum in her mouth" if not the_person.has_role(cum_internal_role):
             "You rest your hand on her head, guiding her as she sucks you off."
             "With a little encouragement, you pull [the_person.possessive_title]'s head down a little further with each stroke."
             mc.name "That's it [the_person.title]. I'm going to cum in your mouth and I want you to swallow every drop."
@@ -424,11 +409,11 @@ label SB_fetish_mom_cum_label():
             $ the_person.draw_person(position = "blowjob")
             $ the_person.max_opinion_score("drinking cum")
             $ the_person.max_opinion_score("creampies")
-            $ the_person.special_role.append(cum_internal_role)
+            $ the_person.add_role(cum_internal_role)
             $ add_cum_slut_collar_to_base_outfit(the_person)
             "You look down and see [the_person.possessive_title]. She uses her finger to wipe up a bit of cum that leaked out of her mouth and licks it clean."
 
-        "Cum on her face" if not SB_check_fetish(the_person, cum_external_role):
+        "Cum on her face" if not the_person.has_role(cum_external_role):
             "You rest your hand on her head, slowly gathering her hair up."
             mc.name "That's it [the_person.title]. I'm going to cum all over that pretty little face of yours."
             "[the_person.possessive_title] moans. She is ready for her prize."
@@ -440,7 +425,7 @@ label SB_fetish_mom_cum_label():
             $ the_person.draw_person(position = "blowjob")
             $ the_person.max_opinion_score("cum facials")
             $ the_person.max_opinion_score("being covered in cum")
-            $ the_person.special_role.append(cum_external_role)
+            $ the_person.add_role(cum_external_role)
             $ add_cum_slut_collar_to_base_outfit(the_person)
             "Slowly recovering, you look at [the_person.possessive_title]'s cum covered face. Her eyes are closed and she is absentmindedly playing with some of the cum that is starting to run down her neck."
 
@@ -520,30 +505,12 @@ label SB_fetish_lily_cum_label():
     "[the_person.possessive_title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
     "You should be careful where you cum. It is likely her fetish may develop based on where you cum!"
     call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC40
-    #Try and figure out where you came
-    python:
-        if the_person.outfit.has_mouth_cum():
-            #You came in her mouth! She now fetishes getting cum inside
-            #"Note, cum in mouth detected. Comment this later"
-            the_person.max_opinion_score("drinking cum")
-            the_person.max_opinion_score("creampies")
-            if not cum_internal_role in the_person.special_role:
-                the_person.special_role.append(cum_internal_role)
-                add_cum_slut_collar_to_base_outfit(the_person)
-        if the_person.outfit.has_face_cum():
-            #You came on her face! Now she fetishes facials and getting cum on her.
-            #"Note, cum on face detected. Comment this later"
-            the_person.max_opinion_score("cum facials")
-            the_person.max_opinion_score("being covered in cum")
-            if not cum_external_role in the_person.special_role:
-                the_person.special_role.append(cum_external_role)
-                add_cum_slut_collar_to_base_outfit(the_person)
-
+    $ add_cum_fetish_role_based_on_cum(the_person)
     "[the_person.possessive_title] is moaning ecstatically. You start to worry that [mom.possessive_title] might hear."
-    if SB_check_fetish(the_person, cum_external_role):
+    if the_person.has_role(cum_external_role):
         "Glancing down, you see [the_person.possessive_title] running her hands along her face, then down to her chest. She is rubbing your cum into her skin."
         the_person.char "Mmm... it feels so good! That first splash is always the best..."
-    elif SB_check_fetish(the_person, cum_internal_role):
+    elif the_person.has_role(cum_internal_role):
         "Glancing down, you see [the_person.possessive_title] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
         the_person.char "Mmm... it's all inside me now... right where it belongs!"
     $ the_person.draw_person(position = "kissing")
@@ -663,24 +630,7 @@ label SB_fetish_stephanie_cum_label():
                 "She enthusiastically opens her mouth and sucks your hard cock into her mouth. She is desperate for your seed!"
                 "You should consider carefully where you cum, it might change where she prefers to take cum from now on."
                 call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBC060
-                #Try and figure out where you came
-                python:
-                    if the_person.outfit.has_mouth_cum():
-                        #You came in her mouth! She now fetishes getting cum inside
-                        #"Note, cum in mouth detected. Comment this later"
-                        the_person.max_opinion_score("drinking cum")
-                        the_person.max_opinion_score("creampies")
-                        if not cum_internal_role in the_person.special_role:
-                            the_person.special_role.append(cum_internal_role)
-                            add_cum_slut_collar_to_base_outfit(the_person)
-                    if the_person.outfit.has_face_cum():
-                        #You came on her face! Now she fetishes facials and getting cum on her.
-                        #"Note, cum on face detected. Comment this later"
-                        the_person.max_opinion_score("cum facials")
-                        the_person.max_opinion_score("being covered in cum")
-                        if not cum_external_role in the_person.special_role:
-                            the_person.special_role.append(cum_external_role)
-                            add_cum_slut_collar_to_base_outfit(the_person)
+                $ add_cum_fetish_role_based_on_cum(the_person)
                 the_person.char "Oh god... It's even better than I dreamed about last night."
                 "[the_person.possessive_title] takes a minute to recover before standing up."
                 $ scene_manager.update_actor(the_person, position = "stand2")
@@ -719,24 +669,7 @@ label SB_fetish_stephanie_cum_label():
                 "She enthusiastically opens her mouth and sucks your hard cock into her mouth. She is desperate for your seed!"
                 "You should consider carefully where you cum, it might change where she prefers to take cum from now on."
                 call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBC061
-                #Try and figure out where you came
-                python:
-                    if the_person.outfit.has_mouth_cum():
-                        #You came in her mouth! She now fetishes getting cum inside
-                        #"Note, cum in mouth detected. Comment this later"
-                        the_person.max_opinion_score("drinking cum")
-                        the_person.max_opinion_score("creampies")
-                        if not cum_internal_role in the_person.special_role:
-                            the_person.special_role.append(cum_internal_role)
-                            add_cum_slut_collar_to_base_outfit(the_person)
-                    if the_person.outfit.has_face_cum():
-                        #You came on her face! Now she fetishes facials and getting cum on her.
-                        #"Note, cum on face detected. Comment this later"
-                        the_person.max_opinion_score("cum facials")
-                        the_person.max_opinion_score("being covered in cum")
-                        if not cum_external_role in the_person.special_role:
-                            the_person.special_role.append(cum_external_role)
-                            add_cum_slut_collar_to_base_outfit(the_person)
+                $ add_cum_fetish_role_based_on_cum(the_person)
                 the_person.char "Your cum is amazing!"
                 $ scene_manager.update_actor(the_person, position = "stand2")
                 the_person.char "Mmm, thanks for that mister! I know this is kinda crazy but... I'm totally getting the urge for another load. Is there any more in those lonely looking balls for me?"
@@ -754,7 +687,7 @@ label SB_fetish_stephanie_cum_label():
             "Try to talk her down \n{color=#ff0000}{size=18}Requires High Charisma{/size}{/color} (disabled)" if mc.charisma <= 6:
                 pass
 
-    elif the_person.love < 70 and not girlfriend_role in the_person.special_role:   #She kinda trusts / loves you, but isn't fully committed and needs some convincing.
+    elif the_person.love < 70 and not the_person.has_role(girlfriend_role):   #She kinda trusts / loves you, but isn't fully committed and needs some convincing.
         the_person.char "Look... I've been doing this for a while now. I know the real purpose of the serums you have me researching, and the effects they have on people..."
         the_person.char "I went along with things for a while because I trust you. You've always impressed me with the way you do things."
         "She shifts uncomfortably in her seat."
@@ -808,24 +741,7 @@ label SB_fetish_stephanie_cum_label():
                 "She enthusiastically opens her mouth and sucks your hard cock into her mouth. She is desperate for your seed!"
                 "You should consider carefully where you cum, it might change where she prefers to take cum from now on."
                 call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBC062
-                #Try and figure out where you came
-                python:
-                    if the_person.outfit.has_mouth_cum():
-                        #You came in her mouth! She now fetishes getting cum inside
-                        #"Note, cum in mouth detected. Comment this later"
-                        the_person.max_opinion_score("drinking cum")
-                        the_person.max_opinion_score("creampies")
-                        if not cum_internal_role in the_person.special_role:
-                            the_person.special_role.append(cum_internal_role)
-                            add_cum_slut_collar_to_base_outfit(the_person)
-                    if the_person.outfit.has_face_cum():
-                        #You came on her face! Now she fetishes facials and getting cum on her.
-                        #"Note, cum on face detected. Comment this later"
-                        the_person.max_opinion_score("cum facials")
-                        the_person.max_opinion_score("being covered in cum")
-                        if not cum_external_role in the_person.special_role:
-                            the_person.special_role.append(cum_external_role)
-                            add_cum_slut_collar_to_base_outfit(the_person)
+                $ add_cum_fetish_role_based_on_cum(the_person)
                 the_person.char "Your cum is amazing!"
                 $ scene_manager.update_actor(the_person, position = "stand2")
                 the_person.char "Mmm, thanks for that mister! I know this is kinda crazy but... I'm totally getting the urge for another load. Is there any more in those lonely looking balls for me?"
@@ -852,24 +768,7 @@ label SB_fetish_stephanie_cum_label():
         "She enthusiastically opens her mouth and sucks your hard cock into her mouth. She is desperate for your seed!"
         "You should consider carefully where you cum, it might change where she prefers to take cum from now on."
         call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBC063
-        #Try and figure out where you came
-        python:
-            if the_person.outfit.has_mouth_cum():
-                #You came in her mouth! She now fetishes getting cum inside
-                #"Note, cum in mouth detected. Comment this later"
-                the_person.max_opinion_score("drinking cum")
-                the_person.max_opinion_score("creampies")
-                if not cum_internal_role in the_person.special_role:
-                    the_person.special_role.append(cum_internal_role)
-                    add_cum_slut_collar_to_base_outfit(the_person)
-            if the_person.outfit.has_face_cum():
-                #You came on her face! Now she fetishes facials and getting cum on her.
-                #"Note, cum on face detected. Comment this later"
-                the_person.max_opinion_score("cum facials")
-                the_person.max_opinion_score("being covered in cum")
-                if not cum_external_role in the_person.special_role:
-                    the_person.special_role.append(cum_external_role)
-                    add_cum_slut_collar_to_base_outfit(the_person)
+        $ add_cum_fetish_role_based_on_cum(the_person)
         the_person.char "Oh god... Every load just feels so good!"
         "[the_person.possessive_title] takes a minute to recover before standing up."
         $ scene_manager.update_actor(the_person, position = "stand2")
@@ -909,24 +808,7 @@ label SB_fetish_stephanie_cum_label():
         "She enthusiastically opens her mouth and sucks your hard cock into her mouth. She is desperate for your seed!"
         "You should consider carefully where you cum, it might change where she prefers to take cum from now on."
         call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBC064
-        #Try and figure out where you came
-        python:
-            if the_person.outfit.has_mouth_cum():
-                #You came in her mouth! She now fetishes getting cum inside
-                #"Note, cum in mouth detected. Comment this later"
-                the_person.max_opinion_score("drinking cum")
-                the_person.max_opinion_score("creampies")
-                if not cum_internal_role in the_person.special_role:
-                    the_person.special_role.append(cum_internal_role)
-                    add_cum_slut_collar_to_base_outfit(the_person)
-            if the_person.outfit.has_face_cum():
-                #You came on her face! Now she fetishes facials and getting cum on her.
-                #"Note, cum on face detected. Comment this later"
-                the_person.max_opinion_score("cum facials")
-                the_person.max_opinion_score("being covered in cum")
-                if not cum_external_role in the_person.special_role:
-                    the_person.special_role.append(cum_external_role)
-                    add_cum_slut_collar_to_base_outfit(the_person)
+        $ add_cum_fetish_role_based_on_cum(the_person)
         the_person.char "Oh god... I can't get enough of your cock! It tastes so good."
         "[the_person.possessive_title] takes a minute to recover before standing up."
         $ scene_manager.update_actor(the_person, position = "stand2")

@@ -86,6 +86,8 @@ init 5 python:
             topic_list.append("work uniforms")
         if get_HR_director_tag("business_HR_skimpy_uniform", False) == True:
             topic_list.append("skimpy uniforms")
+        if get_HR_director_tag("business_HR_gym_tier", 0) > 1: # unlocks after health program
+            topic_list.append("sports")
 
         return topic_list
 
@@ -349,7 +351,7 @@ label fire_HR_director(the_person):
         $ the_person.draw_person(emotion="happy")
         the_person.char "Whew! I have a really hard time working with people to be honest. I hope whoever replaces me can do a better job at it!"
 
-    $ the_person.special_role.remove(HR_director_role)
+    $ the_person.remove_role(HR_director_role)
     $ mc.business.hr_director = None
     $ cleanup_HR_director_meetings()
     return
@@ -383,13 +385,13 @@ label HR_director_initial_hire_label(the_person):
         mc.business.hr_director.HR_tags = {}
         mc.business.hr_director.HR_unlocks = {}
 
-        if employee_role in the_person.special_role:
+        if the_person.is_employee():
             mc.business.remove_employee(the_person)
 
         mc.business.hire_person(the_person, "HR")
         
         # assign special HR director role
-        mc.business.hr_director.special_role.append(HR_director_role)
+        mc.business.hr_director.add_role(HR_director_role)
 
         set_HR_director_tag("business_HR_eff_bonus", mc.business.effectiveness_cap - 100)
         add_hr_director_first_monday_action(the_person)
@@ -639,6 +641,8 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         mc.name "I know that it feels like we are taking some of your creativity away when we assign uniforms. I understand that, but it is also important that we keep a professional atmosphere here."
     elif opinion_chat == "skimpy uniforms":
         mc.name "I know that it feels weird, being asked to come in to work wearing clothes that show a little skin, but in the market we are in, dressing to impress can be a key business advantage."
+    elif opinion_chat == "sports":
+        mc.name "I know that it might be unconventional, but we feel that an employees physical health will benefit the company as much as their labor skills."
     else:
         mc.name "I know the policy in place feels weird, but I want you to rethink your opinion on [opinion_chat]. It would be helpful if you would."
     the_person.char "All of our employees are valued here, not just as employees, but as people."
@@ -815,7 +819,7 @@ label HR_director_review_discoveries_label(the_person):
                         mc.name "I think for now I'd like to stick with more traditional recruiting methods."
                         $ set_HR_director_tag("business_HR_relative_recruitment", 1)
 
-                "Sure thing [the_person.mc_title]. If you change your mind in the future, just let me know. I can always put the sign up or down based on what we need at the time."
+                the_person.char "Sure thing, [the_person.mc_title]. If you change your mind in the future, just let me know. I can always put the sign up or down based on what we need at the time."
 
         if get_HR_director_tag("business_HR_meeting_on_demand", False) == False:
             if mc.business.get_employee_count() > 10:
@@ -847,10 +851,10 @@ label HR_director_review_discoveries_label(the_person):
             the_person.char "For the company I found, the pricing is $10 per person, per week. This would be on top of the $5 per person for the company gym membership."
             mc.name "What would be the benefits we would see if we invest in this?"
             the_person.char "Well, generally it would increase the energy of employees as they develop healthier eating patterns."
-            the_person.char "Additionally, I think employees with interests in sports and hiking would really appreciate the change also."
+            the_person.char "Additionally, I think employees with interests in sports and hiking would really appreciate the change also, we could even encourage them to like sports during our one on one meetings."
             mc.name "Okay, I'll consider it and get back to you on that."
 
-        the_person.char "You finish up discussing the company policies."
+        "You finish up discussing the company policies."
     return
 
 label HR_director_manage_gym_membership(the_person):
@@ -1017,7 +1021,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             "She gets up and starts walking around the desk. By the time she gets to you, you already have your rock hard dick out."
             "She gets on her knees and gives you a couple strokes with her hand."
             $ mc.change_arousal(20)
-            the_person.char "Mmmm, I love the feeling of a cock buried between by big tits... this is gonna be great!"
+            the_person.char "Mmmm, I love the feeling of a cock buried between my big tits... this is gonna be great!"
             "With her hands on each side of her chest, she wraps her sizable boobs around you and begins to bounce them up and down."
             call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_start_two
             $ set_HR_director_unlock("titfuck", True)

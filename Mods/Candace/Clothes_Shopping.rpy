@@ -89,7 +89,7 @@ label candace_goes_clothes_shopping_label(the_person):
     mc.name "Ok. Let's go."
     if the_person.should_wear_uniform():
         the_person.char "Yay! I can't wait! Just let me get changed, real quick."
-        $ the_person.apply_outfit(the_person.planned_outfit)
+        $ the_person.apply_planned_outfit()
         "After a minute she comes back, ready to go."
     else:
         the_person.char "Yay! I can't wait!"
@@ -286,14 +286,14 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
             mc.name "I'm sorry [the_person.title], but I can't find anything that would suit you."
             the_person.char "Oh, I was so looking forward to your pick, a well, just let me get dressed so we can get out of here."
 
-        $ the_person.apply_outfit(the_person.planned_outfit)
+        $ the_person.apply_planned_outfit()
         #TODO consider something sexy here
         "You give her a minute to change back into her regular outfit."
         $ the_person.draw_person()
     else:
         the_person.char "Alright! I feel like this was actually a productive trip! I'm gonna go get changed back into my normal clothes."
         $ renpy.scene("Active")
-        $ the_person.apply_outfit(the_person.planned_outfit)
+        $ the_person.apply_planned_outfit()
         "You give her a minute to change back into her regular outfit."
         $ the_person.draw_person()
         the_person.char "Alright, I'm gonna go check out now."
@@ -330,7 +330,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                     $ the_person.change_slut_temp(2)
                     $ the_person.change_obedience(2)
             $ renpy.scene("Active")
-            $ the_person.apply_outfit(the_person.planned_outfit)
+            $ the_person.apply_planned_outfit()
             "In another few moments, [the_person.title] emerges from the dressing room."
             $ the_person.draw_person()
             the_person.char "Alright, let's go before I try on something else!"
@@ -465,7 +465,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                     $ the_person.change_obedience(2)
                     "You gawk for another moment, but eventually the door closes and [the_person.title] begins changing back into her normal outfit."
             $ renpy.scene("Active")
-            $ the_person.apply_outfit(the_person.planned_outfit)
+            $ the_person.apply_planned_outfit()
             "In another few moments, [the_person.title] emerges from the dressing room."
             $ the_person.draw_person()
             the_person.char "Alright, let's go before I try on something else!"

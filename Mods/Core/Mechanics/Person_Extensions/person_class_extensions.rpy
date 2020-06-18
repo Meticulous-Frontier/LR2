@@ -249,14 +249,6 @@ init -1 python:
 
     Person.get_job_happiness_score = get_job_happiness_score_enhanced
 
-    def is_employee(self):
-        employment_title = mc.business.get_employee_title(self)
-        if employment_title != "None":
-            return True
-        return False
-
-    Person.is_employee = is_employee
-
     ## LEARN HOME EXTENSION
     def learn_home(self): # Adds the_person.home to mc.known_home_locations allowing it to be visited without having to go through date label
         if not self.home in mc.known_home_locations + [lily_bedroom, mom_bedroom, aunt_bedroom, cousin_bedroom]:
@@ -582,7 +574,6 @@ init -1 python:
             destination = None
 
         if destination is not None: #We have somewhere scheduled to be for this time chunk. Let's move over there.
-            location.move_person(self, destination) #Always go where you're scheduled to be.
             if self.schedule[time_of_day] == self.work: #We're going to work.
                 if self.should_wear_uniform(): #Get a uniform if we should be wearing one.
                     self.wear_uniform()
@@ -591,14 +582,16 @@ init -1 python:
                     if self.sluttiness < 40 and self.planned_uniform and self.planned_uniform.slut_requirement > self.sluttiness*0.75: #A skimpy outfit/uniform is defined as the top 25% of a girls natural sluttiness.
                         self.change_slut_temp(self.get_opinion_score("skimpy uniforms"), add_to_log = False)
 
-            elif destination == self.home:
-                self.apply_outfit(self.planned_outfit) #We're at home, so we can get back into our casual outfit.
+            elif not location is destination: # only change outfit if we change location
+                self.apply_planned_outfit() #We're at home, so we can get back into our casual outfit.
 
-            #NOTE: There is no else here because all of the destinations should be set. If it's just a location they travel there and that's the end of it.
+            # location might change outfit, so moved call to end of this loop
+            location.move_person(self, destination) #Always go where you're scheduled to be.
 
         else:
             #She finds somewhere to burn some time
-            self.apply_outfit(self.planned_outfit) #Get changed back into our proper outfit if we aren't in it already.
+            if not location is destination: # only change outfit if we change location
+                self.apply_planned_outfit() #Get changed back into our proper outfit if we aren't in it already.
             available_locations = [] #Check to see where is public (or where you are white listed) and move to one of those locations randomly
             for potential_location in list_of_places:
                 if potential_location.public:
@@ -829,6 +822,23 @@ init -1 python:
 
     Person.change_stats = change_stats
 
+    # returns number of hearts of sluttiness for easy scene building.
+    def sluttiness_tier(self):
+        if self.sluttiness < 20:
+            return 0
+        if self.sluttiness < 40:
+            return 1
+        if self.sluttiness < 60:
+            return 2
+        if self.sluttiness < 80:
+            return 3
+        if self.sluttiness < 100:
+            return 4
+        else:
+            return 5
+
+    Person.sluttiness_tier = sluttiness_tier
+
     ## CHANGE WILLPOWER EXTENSION
     # changes the willpower of a person by set amount
     def change_willpower(self, amount): #Logs change in willpower and shows new total.
@@ -959,7 +969,6 @@ init -1 python:
     # wrap up the cum_on_tits function
     Person.cum_on_tits = cum_on_tits_extended(Person.cum_on_tits)
 
-
     def cum_on_stomach_extended(org_func):
         def cum_on_stomach_wrapper(person):
             # run original function
@@ -984,6 +993,63 @@ init -1 python:
     # wrap up the cum_on_ass function
     Person.cum_on_ass = cum_on_ass_extended(Person.cum_on_ass)
 
+
+##################
+# Role Functions #
+##################
+    def is_employee(self):
+        return self.has_role(employee_role)
+    Person.is_employee = is_employee
+
+    def has_role(self, role):
+        if isinstance(role, basestring):
+            return not find_in_list(lambda x: x.role_name == role, self.special_role) is None
+        else:
+            return role in self.special_role
+    Person.has_role = has_role
+
+    def add_role(self, role):
+        if not role in self.special_role:
+            self.special_role.append(role)
+            return True
+
+        # special situation if she gets girlfriend role, she loses affair role and SO
+        if role is girlfriend_role:
+            self.remove_role(affair_role)
+            self.relationship = "Single" #Technically they aren't "single", but the MC has special roles for their girlfriend.
+            self.SO_name = None            
+
+        return False
+    Person.add_role = add_role
+    
+    def remove_role(self, role):
+        if role in self.special_role:
+            self.special_role.remove(role)
+            return True
+        return False
+    Person.remove_role = remove_role
+
+################################################
+# Outfit functions - wear a specialized outfit #
+################################################
+
+    def apply_gym_outfit(self):
+        self.apply_outfit(workout_wardrobe.decide_on_outfit2(self))
+        return
+
+    Person.apply_gym_outfit = apply_gym_outfit
+
+    def apply_university_outfit(self):
+        self.apply_outfit(university_wardrobe.decide_on_outfit2(self))
+        return
+
+    Person.apply_university_outfit = apply_university_outfit
+
+    def apply_planned_outfit(self):
+        self.apply_outfit(self.planned_outfit)
+        return
+
+    Person.apply_planned_outfit = apply_planned_outfit
 
 ######################################
 # Extend give serum for added goal #
@@ -1127,7 +1193,7 @@ init -1 python:
 ##########################################
 
     def is_pregnant(self):
-        if pregnant_role in self.special_role:
+        if self.has_role(pregnant_role) or self.has_role(silent_pregnant_role):
             return True
         return False
     Person.is_pregnant = is_pregnant

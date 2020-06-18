@@ -92,11 +92,11 @@ label so_relationship_worsen_label_enhanced():
         return #Something's changed and there is no longer a valid person
 
     $ so_title = SO_relationship_to_title(the_person.relationship)
-    if affair_role in the_person.special_role:
+    if the_person.has_role(affair_role):
         "You get a call from [the_person.title]. When you pick up she sounds tired, but happy."
         the_person.char "Hey [the_person.mc_title], I've got some news. Me and my [so_title], [the_person.SO_name], had a fight. We aren't together any more."
         the_person.char "We don't have to hide what's going on between us any more."
-        call transform_affair(the_person) from _call_transform_affair_enhanced
+        $ the_person.add_role(girlfriend_role)
         mc.name "That's good news! I'm sure you'll want some rest, so we can talk more later. I love you."
         $ the_person.change_love(5)
         the_person.char "I love you too. Bye."
@@ -106,6 +106,4 @@ label so_relationship_worsen_label_enhanced():
         "You get a notification on your phone."
         "It looks like [the_person.title] has left her [so_title] and is single now."
 
-    $ the_person.relationship = "Single"
-    $ the_person.SO_name = None
     return

@@ -176,7 +176,7 @@ label SB_fetish_vaginal_label(the_person):
             $ the_person.max_opinion_score(SB_random_fetish_key)
 
             "She's been under the influence of your serums for a while now... you wonder if she's developed a fetish..."
-            $ the_person.special_role.append(vaginal_fetish_role)
+            $ the_person.add_role(vaginal_fetish_role)
             $ add_breed_me_collar_to_base_outfit(the_person)
             $ the_person.update_sex_skill("Vaginal", 6)
             $ the_person.event_triggers_dict["LastVaginalFetish"] = day
@@ -376,7 +376,7 @@ label SB_fetish_mom_vaginal_label():
     "It is clear that [the_person.possessive_title] is now firmly under the influence of your serums and has developed a fetish for vaginal sex."
     "Her naked flesh soft up against yours gives you many sexy dreams that night."
 
-    $ the_person.special_role.append(vaginal_fetish_role)
+    $ the_person.add_role(vaginal_fetish_role)
     $ add_breed_me_collar_to_base_outfit(the_person)
     $ the_person.update_sex_skill("Vaginal", 6)
 
@@ -438,7 +438,7 @@ label SB_fetish_lily_vaginal_label():
     "Her naked flesh soft up against makes your dreams very pleasant."
     #SBMOD Start hacked wakeup sex code. To be copy/pasted to other similar places#
 
-    $ the_person.special_role.append(vaginal_fetish_role)
+    $ the_person.add_role(vaginal_fetish_role)
     $ add_breed_me_collar_to_base_outfit(the_person)
     $ the_person.update_sex_skill("Vaginal", 6)
 
@@ -500,7 +500,7 @@ init 2 python:
 
     def SB_fetish_vaginal_lily_recurring_requirement():
         if mc_asleep() and day % 7 is not 4: # not on Friday nights
-            if SB_check_fetish(lily, vaginal_fetish_role):
+            if lily.has_role(vaginal_fetish_role):
                 if lily.event_triggers_dict.get("LastVaginalFetish", 0) + 10 < day:
                     return True
         return False
@@ -508,10 +508,10 @@ init 2 python:
     def get_vaginal_fetish_employee():
         meets_fetish_list = []
         for person in mc.business.get_employee_list():
-            if SB_check_fetish(person, vaginal_fetish_role):
+            if person.has_role(vaginal_fetish_role):
                 if person.event_triggers_dict.get("LastVaginalFetish", 0) + 10 < day:
                     meets_fetish_list.append(person)
-        if SB_check_fetish(mom, vaginal_fetish_role):
+        if mom.has_role(vaginal_fetish_role):
             if mom.event_triggers_dict.get("LastVaginalFetish", 0) + 10 < day:
                 meets_fetish_list.append(mom)
 
