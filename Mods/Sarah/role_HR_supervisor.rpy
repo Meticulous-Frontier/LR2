@@ -1035,7 +1035,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             the_person.char "What if I just layed down on your desk and you had your way with me, right here in your office?"
             the_person.char "Having my boss pin me to his desk and ravage me..."
             $ mc.change_arousal(20)
-            mc.name "I'm think thats a good idea. Why don't you get your ass over here and we'll find out for sure!"
+            mc.name "I think that's a good idea. Why don't you get your ass over here and we'll find out for sure!"
             the_person.char "Oh! Yes sir!"
             "[the_person.possessive_title] gets on your desk and lays on her back."
             $ scene_manager.update_actor(the_person, position = "missionary", emotion = "happy")
