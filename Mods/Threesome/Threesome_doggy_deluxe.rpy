@@ -159,7 +159,7 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_1(the_girl_1, the_girl_2, the_l
     menu:
         "Talk dirty to [the_girl_2.title]":
             mc.name "How does that feel? Do you like getting used? I bet you do."
-            mc.name "Your pussy feels great, hows her tongue, [the_girl_1.title]?"
+            mc.name "Your pussy feels great, how's her tongue, [the_girl_1.title]?"
             if the_girl_1.arousal > 65:
                 the_girl_1.char "Mmmmm... God... its so good..."
             else:
