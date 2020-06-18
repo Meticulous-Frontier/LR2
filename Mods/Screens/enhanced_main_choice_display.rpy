@@ -110,8 +110,10 @@ init 2 python:
         return result
 
     def show_menu_person(item):
-        if item.display_image:
-            renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="Active", what= item.display_image, tag=item.display_key)
+        if not item.display_image:
+            item.display_image = Flatten(item.display_func(lighting = mc.location.get_lighting_conditions(), **item.person_preview_args))
+
+        renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="Active", what= item.display_image, tag=item.display_key)
         return
 
 init 2:
