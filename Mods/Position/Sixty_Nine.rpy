@@ -255,13 +255,13 @@ label scene_SB_sixty_nine_2(the_girl, the_location, the_object):
     if the_girl.arousal > 50:
         "Her pussy glistens with moisture above you. You eagerly lap it up and the push your tongue into her moist, wet hole."
     else:
-        "Her pristine pussy beckons you tongue. You eagerly push your tongue up into her moist, wet hole."
+        "Her pristine pussy beckons your tongue. You eagerly push your tongue up into her moist, wet hole."
 
     menu:
         "Play with her ass":
             "You take a finger and push it into her pussy a few times and get it nice and lubed up."
             "[the_girl.possessive_title] moans as she working her tongue over your cock. She licks it bottom to top, then sucks on the tip, then licks it from the top back to the bottom."
-            "You pull your finger out of her and start to slowly circle her asshole with it as you tongue moves around her clit."
+            "You pull your finger out of her and start to slowly circle her asshole with it as your tongue moves around her clit."
             if the_girl.get_opinion_score("anal sex") > 0:
                 "[the_girl.possessive_title] bucks her hips slightly as you start to push your finger into her tight back passage. Her back arches in pleasure."
                 the_girl.char "Mmm! [the_girl.mc_title] don't stop, that feels so good."
