@@ -159,13 +159,11 @@ init 1 python:
 ###Functions unique to the quest
     def quest_cuckold_employee_person_find_employee():
         able_person_list = []
-        for person in mc.business.get_employee_list(): #TODO is there a method that grabs ENTIRE employee list?
+        for person in mc.business.get_employee_list():
             if person not in quest_director.unavailable_persons:
-                if person.core_sluttiness > 50:
-                    if person.relationship == "Married":
-                        if person.kids == 0:
-                            #TODO isn't already pregnant
-                            able_person_list.append(person)
+                if person.core_sluttiness > 50 and not person.is_pregnant():
+                    if person.relationship == "Married" and person.kids == 0:
+                        able_person_list.append(person)
         if len(able_person_list) > 0:
             return get_random_from_list(able_person_list)
         else:
