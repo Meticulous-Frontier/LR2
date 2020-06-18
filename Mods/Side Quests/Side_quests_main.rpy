@@ -132,7 +132,6 @@ init python: #For now default init. May change later if we know better.
             quest_tracker = quest_production_line_tracker,
             start_requirement = quest_production_line_start_requirement,
             quest_cleanup = quest_production_line_cleanup)
-        quest_director.add_new_quest(quest_production_line)
 
         global quest_cure_discovery
         quest_cure_discovery = Side_Quest(quest_name = "Medical Breakthrough",
@@ -140,16 +139,13 @@ init python: #For now default init. May change later if we know better.
             quest_tracker = quest_cure_discovery_tracker,
             start_requirement = quest_cure_discovery_start_requirement,
             quest_cleanup = quest_cure_discovery_cleanup)
-        quest_director.add_new_quest(quest_cure_discovery)
 
-        #TODO this side quest is currently disabled becuase my coding is shit and I don't want to cause more CTDs until I can personally test this. - Starbuck
         global quest_cuckold_employee
         quest_cuckold_employee = Side_Quest(quest_name = "Cuckold Employee",
             quest_init_label = "quest_cuckold_employee_init_label",
             quest_tracker = quest_cuckold_employee_tracker,
             start_requirement = quest_cuckold_employee_start_requirement,
             quest_cleanup = quest_cuckold_employee_cleanup)
-        quest_director.add_new_quest(quest_cuckold_employee)
 
         global quest_essential_oils
         quest_essential_oils = Side_Quest(quest_name = "Essential Oils",
@@ -157,19 +153,34 @@ init python: #For now default init. May change later if we know better.
             quest_tracker = quest_essential_oils_tracker,
             start_requirement = quest_essential_oils_start_requirement,
             quest_cleanup = quest_essential_oils_cleanup)
-        quest_director.add_new_quest(quest_essential_oils)
 
         quest_director.unavailable_persons = unique_character_list
 
+        Quest_tracker_update_quest_list()
+        return
+
+    def Quest_tracker_update_quest_list():
+        quest_director.add_new_quest(quest_production_line)
+        quest_director.add_new_quest(quest_cure_discovery)
+        quest_director.add_new_quest(quest_cuckold_employee)
+        quest_director.add_new_quest(quest_essential_oils)
         return
 
     def Quest_tracker_update():
-        # update existing quests to simplify debugging (only tracker and cleanup)
         quest_director.unavailable_persons = unique_character_list
 
+        Quest_tracker_update_quest_list()
+
+        # update existing quests to simplify debugging (only tracker and cleanup)
         quest_production_line.quest_tracker = quest_production_line_tracker
         quest_production_line.quest_cleanup = quest_production_line_cleanup
 
         quest_cure_discovery.quest_tracker = quest_cure_discovery_tracker
         quest_cure_discovery.quest_cleanup = quest_cure_discovery_cleanup
+
+        quest_cuckold_employee.quest_tracker = quest_cuckold_employee_tracker
+        quest_cuckold_employee.quest_cleanup = quest_cuckold_employee_cleanup
+
+        quest_essential_oils.quest_tracker = quest_essential_oils_tracker
+        quest_essential_oils.quest_cleanup = quest_essential_oils_cleanup
         return
