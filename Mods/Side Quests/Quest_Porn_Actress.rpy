@@ -26,22 +26,22 @@
 
 init 1 python:
     def setup_quest_porn_actress():
-        able_person_list = []
-        for person in mc.business.get_employee_list(): #TODO is there a method that grabs ENTIRE employee list?
-            if person not in quest_director.unavailable_persons:
-                if person.core_sluttiness > 60:
-                    able_person_list.append(person)
-
-
-
+        quest_porn_actress.quest_event_dict["target"] = quest_porn_actress_find_employee()
         quest_porn_actress.quest_event_dict["start_day"] = 9999
-        quest_porn_actress.quest_event_dict["target"] = get_random_from_list(able_person_list)
         quest_porn_actress.quest_event_dict["disease_name"]  = quest_cure_discovery_disease_name()
         quest_porn_actress.quest_event_dict["market_contact"] = None
         quest_porn_actress.quest_event_dict["market_day"] = 9999
         quest_porn_actress_contact().add_opinion("public sex", 2, discovered = False, add_to_log = False)
         quest_porn_actress.set_quest_flag(1)
         return
+
+    def quest_porn_actress_find_employee():
+        able_person_list = []
+        for person in mc.business.get_employee_list(): #TODO is there a method that grabs ENTIRE employee list?
+            if person not in quest_director.unavailable_persons:
+                if person.core_sluttiness > 60:
+                    able_person_list.append(person)
+        return get_random_from_list(able_person_list)
 
     def quest_porn_actress_contact():
         return quest_cure_discovery.quest_event_dict.get("target", None)
@@ -84,14 +84,27 @@ init 1 python:
 
         return
 
+
     def quest_porn_actress_start_requirement():
+        if quest_porn_actress_find_employee():
+            return True
+        return False
 
         return
+
     def quest_porn_actress_cleanup():
 
          # cleanup dictionary to save space and memory
         quest_porn_actress.quest_event_dict.clear()
         return
+
+    def quest_porn_actress_get_side_characters(target):
+        personnel_list = mc.business.get_employee_list()
+        personnel_list.remove(target)
+        person_one = get_random_from_list(personnel_list)
+        personnel_list.remove(person_one)
+        person_two = get_random_from_list(personnel_list)
+        return (person_one, person_two)
 
 #Label requirement functions
 
@@ -107,13 +120,10 @@ label quest_porn_actress_init_label():
 
 label quest_porn_actress_intro_label():
     $ the_target = quest_porn_actress.quest_event_dict.get("target", None)
-    $ personnel_list = mc.business.get_employee_list()
-    $ personnel_list.remove(the_target)
-    $ the_person_one = get_random_from_list(personnel_list)
-    $ personnel_list.remove(the_person_one)
-    $ the_person_two = get_random_from_list(personnel_list)
-    while the_target == the_person:   #If they are same, get a different employee
-        $ the_person = get_random_from_list(mc.business.get_employee_list())
+    if not the_target:
+        return
+    $ the_person_one, the_person_two = quest_porn_actress_get_side_characters(the_target)
+
     "You get up to stretch your legs for a bit and to check on the different departments, making sure everything is running smoothly."
     "As you pass by the break room, you overhear something."
     the_person_one.char "Oh my... is that really [the_target.name]? It looks just like her... That's what the other girls are saying!"
@@ -155,5 +165,6 @@ label quest_porn_actress_intro_label():
     "You decide to speak with [the_target.title]. At the very least, make sure she knows the video is out there."
 
     $ del the_target
-    $ del personnel_list
+    $ del the_person_one
+    $ del the_person_two
     return
