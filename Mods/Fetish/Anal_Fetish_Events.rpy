@@ -984,7 +984,7 @@ label SB_starbuck_anal_intro():
     "The door is locked so you give it a knock. [the_person.possessive_title] appears in the glass and quickly opens it for you."
     the_person.char "[the_person.mc_title]! You came!"
     "She gives you a quick wink."
-    the_person.char "Hopefully thats not the last time I say that tonight..."
+    the_person.char "Hopefully that's not the last time I say that tonight..."
     "You share a quick laugh."
     the_person.char "So... I take it you got my picture? We just got that plug in stock. As soon as I saw it I knew I had to try it."
     mc.name "Yeah... still got it in?"
