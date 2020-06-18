@@ -164,10 +164,7 @@ init 1 python:
                 if person.core_sluttiness > 50 and not person.is_pregnant():
                     if person.relationship == "Married" and person.kids == 0:
                         able_person_list.append(person)
-        if len(able_person_list) > 0:
-            return get_random_from_list(able_person_list)
-        else:
-            return False
+        return get_random_from_list(able_person_list)
 
 ###Declare quest actions###
     quest_cuckold_employee_intro = Action("Begin Cuckold Quest", quest_cuckold_employee_intro_requirement, "quest_cuckold_employee_intro_label")
