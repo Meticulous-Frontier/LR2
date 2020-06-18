@@ -966,7 +966,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
         "You step up to her. Your hands go to her waist an she wraps her arms around you."
         $ the_person.draw_person(position = "kissing")
         the_person.char "Mmm... it feels so good when you hold me."
-        "She looks up into your eyes. Your bring your face down to hers and begin to kiss. Her lips open submissively to allowed you tongue to invade her mouth."
+        "She looks up into your eyes. Your bring your face down to hers and begin to kiss. Her lips open submissively to allow your tongue to invade her mouth."
         "You embrace each other for a while, just enjoying the heat and softness of her skin."
         the_person.char "Okay, are you ready to get this started?"
     else:
