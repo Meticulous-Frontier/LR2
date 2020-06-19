@@ -1009,9 +1009,10 @@ init -1 python:
     Person.has_role = has_role
 
     def add_role(self, role):
+        added = False
         if not role in self.special_role:
             self.special_role.append(role)
-            return True
+            added = True
 
         # special situation if she gets girlfriend role, she loses affair role and SO
         if role is girlfriend_role:
@@ -1019,7 +1020,7 @@ init -1 python:
             self.relationship = "Single" #Technically they aren't "single", but the MC has special roles for their girlfriend.
             self.SO_name = None            
 
-        return False
+        return added
     Person.add_role = add_role
     
     def remove_role(self, role):
