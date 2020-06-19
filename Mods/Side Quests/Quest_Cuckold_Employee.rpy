@@ -256,7 +256,7 @@ label quest_cuckold_employee_decision_label():
                 the_person.char "Do you think... we could go to your office?"
                 "She leaves the question in the air for a moment..."
                 the_person.char "Oh my god! what am I thinking! This is crazy, I can't be..."
-                mc.name "Hush. Let's go, we can definitely find some privacy in my officer."
+                mc.name "Hush. Let's go, we can definitely find some privacy in my office."
                 the_person.char "Oh! Oh fuck, I can't believe it. Okay. Let's go."
             else:
                 mc.name "It would be really no problem. I'd be glad to help you out with that..."
