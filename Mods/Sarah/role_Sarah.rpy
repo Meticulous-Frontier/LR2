@@ -219,6 +219,8 @@ init -1 python:
     def Sarah_is_fertile():
         if sarah.event_triggers_dict.get("try_for_baby", 0) != 1:  #Only fertile if actively trying
             return False
+        if sarah.is_pregnant(): # we don't get fertile when being pregnant
+            return False
         if sarah.event_triggers_dict.get("fertile_start_day", -1) == -1:
             return False
         elif (day - sarah.event_triggers_dict.get("fertile_start_day", -1)) % 28 < 5:   #  Generally fertile for 5 days every 28 days
