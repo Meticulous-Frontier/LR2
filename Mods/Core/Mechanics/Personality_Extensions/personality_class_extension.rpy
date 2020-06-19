@@ -62,6 +62,12 @@ init 4 python:
         if "cousin_personality" in globals():
             if cousin_personality not in list_of_extra_personalities:
                 list_of_extra_personalities.append(cousin_personality)
+        if "cougar_personality" in globals():
+            if cougar_personality not in list_of_extra_personalities:
+                list_of_extra_personalities.append(cougar_personality)
+        if "alpha_personality" in globals():
+            if alpha_personality not in list_of_extra_personalities:
+                list_of_extra_personalities.append(alpha_personality)
         return
 
     add_label_hijack("normal_start", "update_extra_personalities_list")

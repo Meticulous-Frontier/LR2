@@ -125,6 +125,8 @@ init -1 python:
     def update_random_person(person):
         # turn cougars on or off
         update_cougar_personality(person)
+        # turn alpha personality on or off
+        update_alpha_personality(person)
         # A person could have dialog even if we don't know her
         if person.possessive_title is None:
             person.set_possessive_title("The unknown woman")
@@ -149,6 +151,27 @@ init -1 python:
                             person.personality = new_personality
                         # mc.log_event((person.title or person.name) + " D:" + str(person.age) + ": " + person.personality.personality_type_prefix, "float_text_grey")
         return
+
+    def update_alpha_personality(person):
+        if "alpha_personality" in globals() and "unique_character_list" in globals():
+            # change personality to alpha if we meet requirements
+            if find_in_list(lambda x: x.effect == "alpha_personality_dummy_label", action_mod_list).enabled:
+                if person.age > 25 and person.charisma >= 5 and person.int >= 4 and person.get_opinion_score("taking control") > 0 and person not in unique_character_list:
+                    if not person.personality == alpha_personality:
+                        person.original_personality = person.personality
+                        person.personality = alpha_personality
+                        # mc.log_event((person.title or person.name) + "  A:" + str(person.age) + ": " + person.personality.personality_type_prefix, "float_text_grey")
+            else:
+                if person.personality == alpha_personality:
+                    if person not in unique_character_list:
+                        if not (person.original_personality is None or person.original_personality == alpha_personality):
+                            person.personality = person.original_personality
+                        else:
+                            new_personality = get_random_from_list(list_of_personalities)
+                            person.personality = new_personality
+                        # mc.log_event((person.title or person.name) + " D:" + str(person.age) + ": " + person.personality.personality_type_prefix, "float_text_grey")
+        return
+
 
     def rebuild_wardrobe(person):
         # skip personalized wardrobes
