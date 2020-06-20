@@ -871,7 +871,7 @@ label cougar_sex_watch(the_person, the_sex_person, the_position):
         $ the_person.draw_person(emotion = "happy")
         $ pronoun = person_body_shame_string(the_sex_person, "slut")
         the_person.char "You can do better [the_person.mc_title], give that little [pronoun] what she needs."
-        "[the_person.possessive_title] watches you eagerly while [the_position.verb]ing [the_sex_person.name]."
+        "[the_person.possessive_title] watches you eagerly while [the_position.verbing] [the_sex_person.name]."
 
     return
 
@@ -911,7 +911,7 @@ label cougar_being_watched(the_person, the_watcher, the_position):
         the_person.char "People say I shouldn't do this, but this young man makes me feel alive."
         $ the_person.change_arousal(1)
         $ the_person.change_slut_temp(1)
-        "[the_person.possessive_title] seems more comfortable [the_position.verb]ing you with [the_watcher.name] around."
+        "[the_person.possessive_title] seems more comfortable [the_position.verbing] you with [the_watcher.name] around."
 
     return
 

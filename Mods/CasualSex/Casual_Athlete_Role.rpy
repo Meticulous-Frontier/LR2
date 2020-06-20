@@ -1301,7 +1301,7 @@ label athlete_being_watched(the_person, the_watcher, the_position):
         the_person.char "Oh my god, having you watch us do this feels so dirty. I think I like it!"
         $ the_person.change_arousal(1)
         $ the_person.change_slut_temp(1)
-        "[the_person.title] seems more comfortable [the_position.verb]ing you with [the_watcher.title] around."
+        "[the_person.title] seems more comfortable [the_position.verbing] you with [the_watcher.title] around."
 
     return
 
