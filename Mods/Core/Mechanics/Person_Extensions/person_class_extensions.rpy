@@ -652,7 +652,7 @@ init -1 python:
     Person.run_move = run_move_enhanced
 
     # extend the default run day function
-    def run_day_extended(org_func):
+    def person_run_day_extended(org_func):
         def run_day_wrapper(person):
             # run original function
             org_func(person)
@@ -663,7 +663,7 @@ init -1 python:
         return run_day_wrapper
 
     # wrap up the run_day function
-    Person.run_day = run_day_extended(Person.run_day)
+    Person.run_day = person_run_day_extended(Person.run_day)
 
     # BUGFIX: Remove suggest effect
     # Sometimes an effect is no longer in bag causing an exception, fix: check if effect exists before trying to remove
