@@ -219,5 +219,5 @@ label orgasm_breeding_missionary(the_girl, the_location, the_object):
     $ the_girl.call_dialogue("climax_responses_vaginal")
     "Her pussy is dripping wet as you fuck through her climax. She paws at the [the_object.name], trying to find something to hold onto."
     "After a few seconds she lets out a long sigh and all the tension drains out of her body. You slow down your thrusts to catch your own breath."
-    the_girl.char "Don't stop for me[the_girl.mc_title]! I still need your cum inside me."
+    the_girl.char "Don't stop for me [the_girl.mc_title]! I still need your cum inside me."
     return
