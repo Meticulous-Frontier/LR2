@@ -695,7 +695,7 @@ label alpha_flirt_response(the_person):
         if the_person.sluttiness > 50:
             the_person.char "Oh [the_person.mc_title] stop that, you're making me horny again."
         else:
-            the_person.char "Oh stop [the_person.mc_title], it's not nice to make fun of me like that."
+            the_person.char "Oh stop [the_person.mc_title], it's not nice to make fun of a lady like that."
             "[the_person.possessive_title] looks away."
     elif not the_person.relationship == "Single":
         $so_title = SO_relationship_to_title(the_person.relationship)
@@ -703,7 +703,7 @@ label alpha_flirt_response(the_person):
             the_person.char "Well thank you [the_person.mc_title]. Don't let my [so_title] hear you say that, he might get jealous."
             "She smiles and winks mischievously."
         else:
-            the_person.char "I have a [so_title], so you really shouldn't be talking to me like that..."
+            the_person.char "I have a [so_title], so you really shouldn't be talking to a lady like that..."
             "She looks around, but you can definitely see a slight smile on her face."
     else:
         if the_person.sluttiness > 50:
@@ -796,7 +796,7 @@ label alpha_cum_vagina(the_person):
 label alpha_cum_anal(the_person):
     if the_person.obedience > 130:
         if the_person.sluttiness > 200:
-            $ pronoun = person_body_shame_string(the_person, "little anal slave")
+            $ pronoun = person_body_shame_string(the_person, "little anal queen")
             the_person.char "Ah...yes pump your seed into your [pronoun]?"
         else:
             the_person.char "Oh my, you filled up my bottom... Remember [the_person.mc_title], you're the only one I let do this."
@@ -834,8 +834,8 @@ label alpha_suprised_exclaim(the_person):
 
 label alpha_talk_busy(the_person):
     if the_person.obedience > 120:
-        the_person.char "I'm sorry [the_person.mc_title], but I'm busy. Could we talk later?"
-        the_person.char "Maybe you could take me somewhere nice."
+        the_person.char "I'm sorry [the_person.mc_title], but I'm busy. We should talk later."
+        the_person.char "You should take me somewhere nice, like a theater or a restaurant."
     else:
         the_person.char "I'm sorry [the_person.mc_title], we will have to chit-chat later."
     return
@@ -856,13 +856,13 @@ label alpha_sex_watch(the_person, the_sex_person, the_position):
 
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person(emotion = "default")
-        the_person.char "[the_person.mc_title], Why are you doing this here..."
+        the_person.char "[the_person.mc_title], why are you doing this here..."
         $ the_person.change_slut_temp(1)
         "[the_person.possessive_title] looks in another direction, but she keeps glancing at you and [the_sex_person.name]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person(emotion = "happy")
-        the_person.char "Oh my, [the_person.mc_title]! You might want I show you my personal skills on that someday..."
+        the_person.char "Well, [the_person.mc_title]! I might show you my personal skills someday..."
         $ the_person.change_slut_temp(2)
         "[the_person.possessive_title] judges [the_sex_person.name]'s performance while you [the_position.verb] her."
 
@@ -870,7 +870,7 @@ label alpha_sex_watch(the_person, the_sex_person, the_position):
         $ the_person.draw_person(emotion = "happy")
         $ pronoun = person_body_shame_string(the_sex_person, "slut")
         the_person.char "You can do better [the_person.mc_title], give that little [pronoun] what she needs."
-        "[the_person.possessive_title] watches you eagerly while [the_position.verb]ing [the_sex_person.name]."
+        "[the_person.possessive_title] watches you eagerly while [the_position.verbing] [the_sex_person.name]."
 
     return
 
@@ -888,29 +888,28 @@ label alpha_being_watched(the_person, the_watcher, the_position):
     elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #She's super slutty and encourages the watcher to be slutty.
         $ the_person.change_arousal(1)
-        the_person.char "[the_person.mc_title], I need you so much. I think [the_watcher.name] sees that."
+        the_person.char "[the_person.mc_title], I think [the_watcher.name] sees that, you can satisfy me."
         "[the_person.possessive_title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness >= the_position.slut_cap:
         #She's into it and encouraged by the slut watching her.
-        the_person.char "Oh [the_person.mc_title], I know it's be wrong but being with you right here, just feels so right!"
+        the_person.char "Oh [the_person.mc_title], I know it's wrong, but what you are doing just feels right."
         $ the_person.change_arousal(1)
         "The longer [the_watcher.name] keeps watching, the more turned on [the_person.possessive_title] gets."
 
     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
         #She's into it but shamed by the prude watching her.
-        the_person.char "[the_person.mc_title], we shouldn't do this. Not here. What would people think of me?"
+        the_person.char "[the_person.mc_title], don't do that, not here. I have a reputation to keep."
         $ the_person.change_arousal(-1)
         $ the_person.change_slut_temp(-1)
-        "[the_person.possessive_title] seems uneasy with [the_watcher.name] nearby."
+        "[the_person.possessive_title] is very uneasy with [the_watcher.name] watching."
 
     else: #the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #They're both into it but not fanatical about it.
-        the_person.char "[the_watcher.name], I'm glad you don't criticize me."
-        the_person.char "I know I shouldn't do this, but this man makes me feel so live."
+        the_person.char "[the_watcher.name], just have a good look, I may let you try him one day."
         $ the_person.change_arousal(1)
         $ the_person.change_slut_temp(1)
-        "[the_person.possessive_title] seems more comfortable [the_position.verb]ing you with [the_watcher.name] around."
+        "[the_watcher.name] seems more comfortable, watching you [the_position.verbing] [the_person.possessive_title]."
 
     return
 
@@ -943,17 +942,17 @@ label alpha_date_seduction(the_person):
             if the_person.sluttiness > 40:
                 the_person.char "You've been good enough tonight! Come with me, I think you can make me feel even better..."
             else:
-                the_person.char "You were a perfect gentleman tonight [the_person.mc_title], would you like to join me at my place?"
+                the_person.char "You were a perfect gentleman tonight [the_person.mc_title], you may escort me to my place."
         else:
             if the_person.love > 40:
-                the_person.char "I had such a wonderful time tonight. You make me feel so good, do you want to take a nightcap at my place?"
+                the_person.char "I had such a wonderful time tonight, you may take me home."
             else:
                 the_person.char "You've been the wonderful date I deserve. Would you like to share a bottle of wine at my place?"
     else:
         $ so_title = SO_relationship_to_title(the_person.relationship)
         if the_person.sluttiness > the_person.love:
             if the_person.sluttiness > 40:
-                the_person.char "You've been such a gentleman tonight. My [so_title] went night fishing with some buddies, so..."
+                the_person.char "You've been such a gentleman tonight. My [so_title] is having his poker night, so..."
                 the_person.char "Join me at my place, I think you can do something else for me..."
             else:
                 the_person.char "You were a perfect gentleman tonight [the_person.mc_title]. It's been years since I had this much fun with my [so_title]."
@@ -1012,7 +1011,7 @@ label alpha_kissing_taboo_break(the_person):
     elif the_person.love >= 20:
         the_person.char "So you feel it too?"
         "She sighs contentedly."
-        the_person.char "I want to kiss you. I know you want the same..."
+        the_person.char "Come here, I need you to give me a kiss..."
     else:
         the_person.char "I don't think we should be doing this [the_person.mc_title]."
         mc.name "Let's just see how it feels and decide then."
