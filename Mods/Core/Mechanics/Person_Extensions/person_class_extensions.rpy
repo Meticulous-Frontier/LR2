@@ -1190,7 +1190,7 @@ init -1 python:
 
     def remove_on_talk_event(self, the_crisis):
         if isinstance(the_crisis, basestring):
-            found = find_in_list(lambda x: x.effect = the_crisis, self.on_talk_event_list)
+            found = find_in_list(lambda x: x.effect == the_crisis, self.on_talk_event_list)
             if found:
                 self.on_talk_event_list.remove(found)
 
@@ -1200,7 +1200,7 @@ init -1 python:
 
     def remove_on_room_enter_event(self, the_crisis):
         if isinstance(the_crisis, basestring):
-            found = find_in_list(lambda x: x.effect = the_crisis, self.on_room_enter_event_list)
+            found = find_in_list(lambda x: x.effect == the_crisis, self.on_room_enter_event_list)
             if found:
                 self.on_room_enter_event_list.remove(found)
 
