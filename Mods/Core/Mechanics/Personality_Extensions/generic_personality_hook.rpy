@@ -13,7 +13,7 @@ init -1 python:
         hair_colour = None, hair_style = None, pubes_colour = None, pubes_style = None, skin = None, eyes = None, job = None,
         personality = None, custom_font = None, name_color = None, dial_color = None, starting_wardrobe = None, stat_array = None, skill_array = None, sex_array = None,
         start_sluttiness = None, start_obedience = None, start_happiness = None, start_love = None, start_home = None,
-        title = None, possessive_title = None, mc_title = None, relationship = None, kids = None, SO_name = None, base_outfit = None, 
+        title = None, possessive_title = None, mc_title = None, relationship = None, kids = None, SO_name = None, base_outfit = None,
         force_random = False, forced_opinions = None, forced_sexy_opinions = None):
 
         return_character = None
@@ -126,7 +126,7 @@ init -1 python:
         # turn cougars on or off
         update_cougar_personality(person)
         # turn alpha personality on or off
-        update_alpha_personality(person)
+        #update_alpha_personality(person)
         # A person could have dialog even if we don't know her
         if person.possessive_title is None:
             person.set_possessive_title("The unknown woman")
@@ -267,7 +267,7 @@ init -1 python:
             ])
         person.set_mc_title("Honey")
         person.generate_home()
-        person.home.add_person(person)        
+        person.home.add_person(person)
         return person
 
     def update_characters():
