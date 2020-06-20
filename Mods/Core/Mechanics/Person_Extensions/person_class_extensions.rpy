@@ -1181,13 +1181,32 @@ init -1 python:
     def add_unique_on_talk_event(self, the_crisis):
         if the_crisis not in self.on_talk_event_list:
             self.on_talk_event_list.append(the_crisis)
+    Person.add_unique_on_talk_event = add_unique_on_talk_event
 
     def add_unique_on_room_enter_event(self, the_crisis):
         if the_crisis not in self.on_room_enter_event_list:
             self.on_room_enter_event_list.append(the_crisis)
-
-    Person.add_unique_on_talk_event = add_unique_on_talk_event
     Person.add_unique_on_room_enter_event = add_unique_on_room_enter_event
+
+    def remove_on_talk_event(self, the_crisis):
+        if isinstance(the_crisis, basestring):
+            found = find_in_list(lambda x: x.effect = the_crisis, self.on_talk_event_list)
+            if found:
+                self.on_talk_event_list.remove(found)
+
+        if the_crisis in self.on_talk_event_list:
+            self.on_talk_event_list.remove(the_crisis)
+    Person.remove_on_talk_event = remove_on_talk_event
+
+    def remove_on_room_enter_event(self, the_crisis):
+        if isinstance(the_crisis, basestring):
+            found = find_in_list(lambda x: x.effect = the_crisis, self.on_room_enter_event_list)
+            if found:
+                self.on_room_enter_event_list.remove(found)
+
+        if the_crisis in self.on_room_enter_event_list:
+            self.on_room_enter_event_list.remove(the_crisis)
+    Person.remove_on_room_enter_event = remove_on_room_enter_event    
 
 ##########################################
 # Pregnancy Functions                    #
@@ -1240,15 +1259,3 @@ init -1 python:
         return False
 
     Person.is_highly_fertile = is_highly_fertile
-
-    def remove_on_talk_event(self, the_crisis):
-        if the_crisis in self.on_talk_event_list:
-            self.on_talk_event_list.remove(the_crisis)
-
-    Person.remove_on_talk_event = remove_on_talk_event
-
-    def remove_on_room_enter_event(self, the_crisis):
-        if the_crisis in self.on_room_enter_event_list:
-            self.on_room_enter_event_list.remove(the_crisis)
-
-    Person.remove_on_room_enter_event = remove_on_room_enter_event

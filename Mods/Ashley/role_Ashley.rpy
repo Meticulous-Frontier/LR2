@@ -147,7 +147,7 @@ init -1 python:
         town_relationships.update_relationship(ashley, stephanie, "Sister")
         town_relationships.update_relationship(nora, ashley, "Friend")
         town_relationships.update_relationship(lily, ashley, "Rival")
-        head_researcher.remove_action_by_effect("ashley_hire_directed_label")
+        head_researcher.remove_action("ashley_hire_directed_label")
         return
 
 #Story labels
