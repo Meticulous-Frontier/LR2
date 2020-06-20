@@ -164,7 +164,7 @@ init 1 python:
         return False
 
     def quest_production_line_help_move_requirement():
-        if day == quest_production_line.quest_event_dict.get("moving_day", 0):
+        if day >= quest_production_line.quest_event_dict.get("moving_day", 0):
             if time_of_day == 3:
                 return True
         return False
