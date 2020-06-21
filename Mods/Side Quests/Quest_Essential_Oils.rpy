@@ -54,7 +54,7 @@ init 1 python:
         elif quest_essential_oils.get_quest_flag() >= 11 and quest_essential_oils.get_quest_flag() <= 31:
             if quest_essential_oils_get_target() == None:#The quest has started but we fired or the target quit.
                 quest_essential_oils.quest_complete = True
-        elif quest_essential_oils.get_quest_flag() == 11:
+        if quest_essential_oils.get_quest_flag() == 11:
             mc.business.head_researcher.add_unique_on_talk_event(quest_essential_oils_research_start)
             mc.business.add_unique_mandatory_crisis(quest_essential_oils_abandon)
         elif quest_essential_oils.get_quest_flag() == 19:
