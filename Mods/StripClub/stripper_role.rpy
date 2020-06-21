@@ -176,7 +176,7 @@ label strip_club_fire_employee_label(the_person):
             $ strip_club_fire_stripper(the_person)
     return
 
-label stripper_performance_review(the_person):
+label stripper_performance_review_label(the_person):
     $ the_person.event_triggers_dict["day_last_performance_review"] = day
     mc.name "[the_person.title], I'd like to have a talk with you about your recent performance here at the club. Can you follow me to my office?"
     if the_person.obedience > 100:
@@ -206,7 +206,8 @@ label stripper_performance_review(the_person):
         else: # She get less money as stripper in comparison with a 'regular' job
             the_person.char "I don't really have anything positive to say. The pay isn't great and it isn't exactly the most pleasant work environment."
     "You nod and take some notes while you think of how you want to respond."
-    "Her actual salary is $[the_person.stripper_salary] but right now, for her new ability, it should be $[calculate_stripper_salary(the_person)]."
+    $ ran_num = calculate_stripper_salary(the_person)
+    "Her actual salary is $[the_person.stripper_salary] but right now, for her new ability, it should be $[ran_num]."
     menu:
         "Reward her for work well done":
             $ raise_amount = __builtin__.round(the_person.stripper_salary * 0.1)
@@ -215,7 +216,7 @@ label stripper_performance_review(the_person):
                     mc.name "I've been very impressed by your work lately, and I'd like to make sure you stay happy with your decision to work here."
                     mc.name "I'm going to put you down for a 10%% raise. How does that sound?"
                     $ the_person.stripper_salary += raise_amount
-                    $ the_person.change_stats(change_happiness = 5 + mc.charisma, obedience = 3 + mc.charisma)
+                    $ the_person.change_stats(happiness = 5 + mc.charisma, obedience = 3 + mc.charisma)
                     $ the_person.draw_person(position = "sitting", emotion = "happy")
                     the_person.char "That sounds amazing! Thank you sir, I promise I won't let you down!"
                     mc.name "Good to hear it."
