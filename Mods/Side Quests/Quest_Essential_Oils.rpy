@@ -83,8 +83,9 @@ init 1 python:
 
     def quest_essential_oils_cleanup():
         remove_mandatory_crisis_list_action("quest_essential_oils_abandon_label")
-        quest_essential_oils_get_target().remove_on_room_enter_event(quest_essential_oils_intro)
-        quest_essential_oils_get_target().remove_on_talk_event(quest_essential_oils_discover_supplier)
+        if quest_essential_oils_get_target() != None:
+            quest_essential_oils_get_target().remove_on_room_enter_event(quest_essential_oils_intro)
+            quest_essential_oils_get_target().remove_on_talk_event(quest_essential_oils_discover_supplier)
         dawn.remove_on_talk_event(quest_essential_oils_decision)
         mc.business.head_researcher.remove_on_talk_event(quest_essential_oils_research_start)
         mc.business.head_researcher.remove_on_talk_event(quest_essential_oils_research_end)
