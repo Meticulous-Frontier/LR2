@@ -160,7 +160,7 @@ init 1 python:
     def quest_cuckold_employee_person_find_employee():
         able_person_list = []
         for person in mc.business.get_employee_list():
-            if person not in quest_director.unavailable_persons:
+            if not quest_director.is_person_blocked(person):
                 if person.core_sluttiness > 50 and not person.is_pregnant():
                     if person.relationship == "Married" and person.kids == 0:
                         able_person_list.append(person)

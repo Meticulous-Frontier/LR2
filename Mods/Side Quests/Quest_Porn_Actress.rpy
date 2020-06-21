@@ -38,7 +38,7 @@ init 1 python:
     def quest_porn_actress_find_employee():
         able_person_list = []
         for person in mc.business.get_employee_list(): #TODO is there a method that grabs ENTIRE employee list?
-            if person not in quest_director.unavailable_persons:
+            if not quest_director.is_person_blocked(person):
                 if person.core_sluttiness > 60:
                     able_person_list.append(person)
         return get_random_from_list(able_person_list)

@@ -67,7 +67,7 @@ init python: #For now default init. May change later if we know better.
         def __init__(self):
             self.quest_list = []
             self.active_quest = None
-            self.unavailable_persons = [] #List of people that are unable to used for quest purposes. Girls get added to this as quests progress, so we don't give multiple quests to same girl
+            self.unavailable_person_identifiers = [] #List of people that are unable to used for quest purposes. Girls get added to this as quests progress, so we don't give multiple quests to same girl
             self.quest_chance = SIDE_QUEST_INITIAL_CHANCE
 
         def run_day(self): #AT the end of each day.
@@ -122,6 +122,24 @@ init python: #For now default init. May change later if we know better.
                 return self.active_quest.quest_name
             return ""
 
+        def add_unavailable_person(self, person):
+            # compatibility code for old saves (remove for version 0.30)
+            if hasattr(self, "unavailable_persons"):
+                if not person in self.unavailable_persons:
+                    self.unavailable_persons.append(person)
+                return
+
+            if not person.identifier in self.unavailable_person_identifiers:
+                self.unavailable_person_identifiers.append(person.identifier)
+
+        def is_person_blocked(self, person):
+            # compatibility code for old saves (remove for version 0.30)
+            if hasattr(self, "unavailable_persons"):
+                return not person in self.unavailable_persons
+
+            return person.identifier in self.unavailable_person_identifiers
+
+
         #DEBUG functions
 
         def debug_text_dump(self):  #Use this command in the console to get a dump of quest tracker status.
@@ -155,12 +173,13 @@ init python: #For now default init. May change later if we know better.
         global quest_director
         quest_director = Quest_Tracker()
 
-        quest_director.unavailable_persons = unique_character_list
-
         Quest_tracker_update_quest_list()
         return
 
     def Quest_tracker_update_quest_list():
+        for person in unique_character_list:
+            quest_director.add_unavailable_person(person)
+
         if not "quest_production_line" in globals():
             global quest_production_line
             quest_production_line = Side_Quest(quest_name = "Chemist's Baby Girl",
@@ -199,8 +218,6 @@ init python: #For now default init. May change later if we know better.
         return
 
     def Quest_tracker_update():
-        quest_director.unavailable_persons = unique_character_list
-
         Quest_tracker_update_quest_list()
 
         # update existing quests to simplify debugging (only tracker and cleanup)

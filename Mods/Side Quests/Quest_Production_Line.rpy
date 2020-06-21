@@ -33,7 +33,7 @@ init 1 python:
         able_person_list = []
         for person in mc.business.production_team:
             if person.age < 25:
-                if person not in quest_director.unavailable_persons:
+                if not quest_director.is_person_blocked(person):
                     if day > person.event_triggers_dict.get("employed_since", 9999) + 7: #Employed for atleast 7 days#
                         able_person_list.append(person)
         return get_random_from_list(able_person_list)

@@ -29,8 +29,7 @@
 init 1 python:
     def setup_quest_essential_oils():
         #Use this function to set quest specific variables.
-        the_target =  quest_essential_oils_find_employee()
-        quest_essential_oils.quest_event_dict["target"] = the_target
+        quest_essential_oils.quest_event_dict["target"] = quest_essential_oils_find_employee()
         quest_essential_oils.quest_event_dict["start_day"] = 9999
         quest_essential_oils.quest_event_dict["research_day"] = 9999
         quest_essential_oils.quest_event_dict["timeout_day"] = 9999
@@ -46,7 +45,7 @@ init 1 python:
 
         if quest_essential_oils.get_quest_flag() <= 1:
             if quest_essential_oils_get_target() == None:
-                the_target =  quest_essential_oils_find_employee()
+                the_target = quest_essential_oils_find_employee()
                 if the_target == None:
                     quest_essential_oils.quest_complete = True
                     return
@@ -144,7 +143,7 @@ init 1 python:
     def quest_essential_oils_find_employee():
         able_person_list = []
         for person in mc.business.get_employee_list():
-            if person.int <= 2:
+            if person.int <= 2 and not quest_director.is_person_blocked(person):
                 able_person_list.append(person)
         if __builtin__.len(able_person_list) == 0:
             return None
@@ -171,7 +170,7 @@ label quest_essential_oils_intro_label(the_person):
     $ quest_essential_oils.quest_event_dict["start_day"] = day
     "As you walk into one of the business rooms, a very strange mixture of smells enter your nostrils."
     "You are having trouble placing the smell... Is there a chemical leak somewhere!?!"
-    "You quickly scan the room. You notice [the_person.title] at a desk... with a strenge chemical diffuser sitting next to her?"
+    "You quickly scan the room. You notice [the_person.title] at a desk... with a strange chemical diffuser sitting next to her?"
     $ the_person.draw_person(position = "sitting")
     "You walk over. The smell is definitely coming from the diffuser."
     mc.name "[the_person.title]... can I ask what you are diffusing into the room?"
@@ -193,7 +192,7 @@ label quest_essential_oils_intro_label(the_person):
             $ quest_essential_oils.quest_event_dict["timeout_day"] = day + 7
             $ quest_essential_oils.set_quest_flag(11)
         "Tell her to knock it off and leave it at home":
-            mc.name "Well don't bring them back. This could have triggered an evacaution."
+            mc.name "Well don't bring them back. This could have triggered an evacuation."
             the_person.char "Oh my... yes sir, I'll leave it at home from now on."
             $ quest_essential_oils.set_quest_flag(19)
     "You say goodbye to [the_person.title]."
@@ -228,7 +227,7 @@ label quest_essential_oils_research_end_label(the_person):
     the_person.char "Yup! Sorry, I don't know where you could source this stuff. Here's a list of which ones would be appropriate for us to use."
     mc.name "Thanks, that's exactly what I needed."
     $ oil_target = quest_essential_oils_get_target()
-    "You think back. It was [oil_target.title] that had some in the first place. Maybe you could ask her where she get's hers from?"
+    "You think back. It was [oil_target.title] that had some in the first place. Maybe you could ask her where she gets hers from?"
     $ del oil_target
     $ quest_essential_oils.set_quest_flag(31)
     return
