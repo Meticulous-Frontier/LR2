@@ -58,7 +58,7 @@ init -1 python:
             silent_preg_finish_announce_action = Action("Pregnancy Finish Announcement", silent_preg_finish_announcement_requirement, "silent_pregnant_finish_announce", args = the_person, requirement_args = the_person)
             mc.business.mandatory_crises_list.append(silent_preg_finish_announce_action)
         else:
-            silent_preg_transform_action = Action("Pregnancy Transform", silent_pregnant_transform_requirement, "silent_pregnant_transform", args = the_person, requirement_args = the_person)
+            silent_preg_transform_action = Action("Pregnancy Transform", silent_pregnant_transform_requirement, "silent_pregnant_transform")
             the_person.on_room_enter_event_list.append(silent_preg_transform_action) #This event adds an announcement event the next time you enter the same room as the girl.
 
         the_person.add_role(silent_pregnant_role)
