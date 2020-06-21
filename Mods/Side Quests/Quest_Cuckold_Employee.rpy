@@ -672,7 +672,7 @@ init 1301 python:
     def breeding_stock_player_titles(the_person):
         return "Bull"
     def get_breeding_stock_personality(the_person): #Use a function to get this so we can keep the girls prefix so her personality doesn't change TOO much
-        breeding_stock = Personality("breeding_stock", default_prefix = the_person.personality.personality_type_prefix,
+        breeding_stock = Personality("Breeding Stock", default_prefix = the_person.personality.personality_type_prefix,
         common_likes = [],
         common_sexy_likes = [],
         common_dislikes = [],
