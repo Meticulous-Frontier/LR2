@@ -356,6 +356,9 @@ label ashley_classical_concert_date_label():
     return
 
 label ashley_porn_video_discover_label():
+    # make sure we are in the bedroom
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
     $ the_person = ashley
     $ the_person.outfit = the_person.wardrobe.get_random_appropriate_underwear(50, sluttiness_min = 20, guarantee_output = True) #Hopefully this gets a slutty underwear set
     $ scene_manager = Scene()
@@ -403,7 +406,7 @@ label ashley_ask_sister_about_porn_video_label(the_person):
     $ scene_manager.add_actor(the_person)
     mc.name "Hello [the_person.title]. I need to talk to you about something... sensitive. Could you please come with me to my office?"
     the_person.char "Of course."
-    #TODO change background to office
+    $ office.show_background()
     "You enter your office an gesture for her to sit down."
     $ scene_manager.update_actor(the_person, position = "sitting")
     if the_person.sluttiness > 50:
@@ -435,6 +438,8 @@ label ashley_ask_sister_about_porn_video_label(the_person):
     "After a few solemn moments, you decide to move on with your day."
     mc.name "That's enough for now I suppose. Let me know if you think of anything."
     the_person.char "Yes sir... and the same for you."
+    "You both walk back to the [mc.location.formalName]."
+    $ mc.location.show_background()
     $ ashley.event_triggers_dict["porn_discussed"] = True
     return
 
