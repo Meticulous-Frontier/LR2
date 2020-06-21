@@ -27,8 +27,8 @@ init -1 python:
     # allow for more idle objects
     config.automatic_images = None
     config.optimize_texture_bounds = True
-    config.predict_statements = 16
-    config.rollback_length = 8      # limit rollback to reduce object tracking
+    config.predict_statements = 32
+    config.rollback_length = 16      # limit rollback to reduce object tracking
     config.cache_surfaces = False
     config.predict_screens = False
 
