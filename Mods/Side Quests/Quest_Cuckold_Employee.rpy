@@ -228,7 +228,7 @@ label quest_cuckold_employee_decision_label():
     the_person.char "No, no, that's not it. I keep thinking, maybe there is some way, you know? Maybe a miracle will happen, or some drug or something will be invented that can help."
     the_person.char "I can't leave him, but my body is screaming at me. The urge to make a baby is SO strong!"
     mc.name "Have you considered something like a sperm bank?"
-    the_person.char "No... I'd have to tell him. That he is infertile. It would crush him! I'm not sure our relationship would survive that."
+    the_person.char "No... I'd have to tell him that he is infertile. It would crush him! I'm not sure our relationship would survive that."
     "Hmmm... well... there is always another way of getting pregnant... You wonder if she has considered it at all."
     "You could always offer to knock her up. But then again, impregnating another man's wife could lead  you to some heavy drama down the road..."
     menu:
@@ -356,7 +356,7 @@ label quest_cuckold_employee_decision_label():
         the_person.char "Thank you [the_person.mc_title]. I can't believe this is really happening!"
         mc.name "Me neither."
         "With that, you leave your office, being careful to lock the door behind you."
-        "Your sperm might already be racing to her egg, ready to fertilize it. But it also might not be. To be certain, you should breed her as often as you can over the next few days."
+        "Your sperm might already be racing to her egg, ready to fertilize it, but it also might not be. To be certain, you should breed her as often as you can over the next few days."
         $ quest_cuckold_employee.quest_event_dict["creampie_count"] = quest_cuckold_employee.quest_event_dict.get("creampie_count", 0) + 1
         $ quest_cuckold_employee.set_quest_flag(22)
     else:
@@ -420,7 +420,7 @@ label quest_cuckold_employee_rethink_decision_label():
         the_person.char "Thank you [the_person.mc_title]. I can't believe this is really happening!"
         mc.name "Me neither."
         "With that, you leave your office, being careful to lock the door behind you."
-        "Your sperm might already be racing to her egg, ready to fertilize it. But it also might not be. To be certain, you should breed her as often as you can over the next few days."
+        "Your sperm might already be racing to her egg, ready to fertilize it, but it also might not be. To be certain, you should breed her as often as you can over the next few days."
         $ quest_cuckold_employee.quest_event_dict["creampie_count"] = quest_cuckold_employee.quest_event_dict.get("creampie_count", 0) + 1
         $ quest_cuckold_employee.set_quest_flag(22)
     else:
@@ -441,7 +441,7 @@ label quest_cuckold_employee_breeding_session_label(the_person):
     the_person.char "Hey [the_person.mc_title]! Do you need something? I can help you out with that thing in your office again... You know what I mean, right?"
     "She is still in her fertile window. Do you want to take her to your office and try and breed her again?"
     menu:
-        "Breeding session{image=gui/heart/Time_Advance.png}":
+        "Breeding session {image=gui/heart/Time_Advance.png}":
             pass
         "Not now":
             mc.name "Actually, I need to talk to you about something else."
@@ -479,7 +479,7 @@ label quest_cuckold_employee_breeding_session_label(the_person):
         mc.name "Okay. I'll lock the door behind me  when I leave."
         the_person.char "Thank you [the_person.mc_title]. Let's keep our fingers crossed!"
         "With that, you leave your office, being careful to lock the door behind you."
-        "Your sperm might already be racing to her egg, ready to fertilize it. But it also might not be. To be certain, you should breed her as often as you can over the next few days."
+        "Your sperm might already be racing to her egg, ready to fertilize it, but it also might not be. To be certain, you should breed her as often as you can over the next few days."
         $ quest_cuckold_employee.quest_event_dict["creampie_count"] = quest_cuckold_employee.quest_event_dict.get("creampie_count", 0) + 1
     else:
         mc.name "Sorry, I'm just too tired, I shouldn't have tried this right now..."
@@ -487,7 +487,7 @@ label quest_cuckold_employee_breeding_session_label(the_person):
         the_person.char "Besides, I'm probably already pregnant. This is just making certain of it!"
         "You both get up and leave your office, resuming your day."
     call advance_time from cuckold_advance_time
-    return
+    jump game_loop  # this a talk event, if another event triggers on advance time we pop back to talking to her, if we just "Return", the jump makes sure we go back to the main game menu
 
 label quest_cuckold_employee_gloryhole_label():
     $ the_person = quest_cuckold_employee.quest_event_dict.get("target", None)
@@ -559,7 +559,7 @@ label quest_cuckold_employee_gloryhole_label():
     "Ha! Stopping was never even an option. You can feel her cunt starting to quiver and twitch. It feels TOO good!"
     "You give several more strong thrusts as you pass the point of no return. You moan as you begin to dump your load inside of her."
     anon_char "Yes. Yes! Oh fuck yes!"
-    "You cum as deep inside of her as you can manage. Maybe you knocked her up? There's atleast some plausable deniability in it now, if it DOES happen to be [the_person.title]..."
+    "You cum as deep inside of her as you can manage. Maybe you knocked her up? There's at least some plausible deniability in it now, if it DOES happen to be [the_person.title]..."
     "You pull out. You grab some toilet paper and wipe your cock off."
 
     # the person is happy and a sluttier (don't log as to preserve anonymity)
