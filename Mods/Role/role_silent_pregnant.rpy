@@ -45,7 +45,7 @@ init -1 python:
             the_person.tits = get_larger_tits(the_person.tits) #Her tits start to swell.
             the_person.personal_region_modifiers["breasts"] = the_person.personal_region_modifiers["breasts"] + 0.1
         else:
-            silent_preg_tits_action = Action("Pregnancy Tits Grow", silent_pregnant_tits_requirement, "silent_pregnant_tits_start", args = the_person, requirement_args = the_person)
+            silent_preg_tits_action = Action("Pregnancy Tits Grow", silent_pregnant_tits_requirement, "silent_pregnant_tits_start")
             the_person.on_room_enter_event_list.append(silent_preg_tits_action)
 
         if day > the_person.event_triggers_dict.get("preg_transform_day", 0):
