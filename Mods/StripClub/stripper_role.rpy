@@ -52,7 +52,7 @@ init 5 python:
             return False
         if len(stripclub_strippers) > 7: # max 8 strippers.
             return "Maximum strippers reached"
-        if person.event_triggers_dict.get("stripper_ask_hire", 0) > day + 7:
+        if day < person.event_triggers_dict.get("stripper_ask_hire", 0) + 7:
             return "Asked too recently"
         return True
 
