@@ -4,13 +4,16 @@
 
 init 5 python:
     # override default strip_club show requirement
-    def stripclub_show_requirement():
+    def strip_club_show_requirement_enhanced():
         if __builtin__.len(stripclub_strippers) == 0:
             return False
         if time_of_day in [0,1,2]:
             return "Too early for performances"
         else:
             return True
+
+    # replace requirement on action to prevent CPickle errors
+    strip_club_show_action.requirement = strip_club_show_requirement_enhanced
 
     def strip_club_hire_stripper(person):
         person.add_role(stripper_role)
