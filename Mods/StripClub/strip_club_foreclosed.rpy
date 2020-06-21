@@ -29,10 +29,15 @@ init 3301 python:
         mc.business.event_triggers_dict["foreclosed_stage"] = value
         return
 
+    def strip_club_is_closed():
+        return len(stripclub_strippers) == 0 or (get_strip_club_foreclosed_stage() > 0 and get_strip_club_foreclosed_stage() < 5)
+
     def get_strip_club_foreclosed_last_action_day():
         return mc.business.event_triggers_dict.get("foreclosed_last_action_day", 0)
 
     def club_foreclosed_event_requirement():
+        if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 1: # don't start while Sarah epic tits event in progress
+            return False
         if mc.business.funds > 60000:
             if time_of_day > 2:
                 if cousin.event_triggers_dict.get("seen_cousin_stripping", False) == True and cousin.event_triggers_dict.get("blackmail_level", 0) >= 2:

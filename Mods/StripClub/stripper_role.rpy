@@ -3,8 +3,6 @@
 #  The role is appended to strippers after they start to work for you.
 
 init 5 python:
-    Person.stripper_salary = None
-
     # override default strip_club show requirement
     def stripclub_show_requirement():
         if len(stripclub_strippers) == 0:
@@ -16,12 +14,16 @@ init 5 python:
 
     def strip_club_hire_stripper(person):
         person.add_role(stripper_role)
-        person.stripper_salary = calculate_stripper_salary(person)
         # slightly altered schedule for these characters, so it does not interfere with the story-line or work schedule.
         if person.is_employee() or person in [lily, mom, aunt]:
+            person.event_triggers_dict["strip_club_shifts"] = 1
             person.set_schedule([4], strip_club)
         else:
+            person.event_triggers_dict["strip_club_shifts"] = 2
             person.set_schedule([3, 4], strip_club)
+
+        person.stripper_salary = calculate_stripper_salary(person)
+
         if not person in stripclub_strippers:
             stripclub_strippers.append(person)
         return
@@ -39,7 +41,20 @@ init 5 python:
         return
 
     def calculate_stripper_salary(person):
-        return 25 + (person.core_sluttiness / 5.0) + rank_tits(person.tits) * 2
+        shifts = person.event_triggers_dict.get("strip_club_shifts", 2)
+        tit_modifier = 10 - (abs(5 - rank_tits(person.tits)))   # optimal size is DD-Cup
+        age_modifier = 8 - (abs(25 - person.age) / 3.0)            # optimal age is 25
+        slut_modifier = person.core_sluttiness / 20.0
+
+        return __builtin__.round((tit_modifier + age_modifier + slut_modifier) * shifts, 1)
+
+    def calculate_stripper_profit(person):
+        shifts = person.event_triggers_dict.get("strip_club_shifts", 2)
+        profit_base = person.stripper_salary * 2
+        tit_modifier = person.get_opinion_score("showing her tits") * 2
+        ass_modifier = person.get_opinion_score("showing her ass") * 2
+        
+        return (profit_base + tit_modifier + ass_modifier + person.charisma) * shifts
 
     def is_strip_club_stripper_requirement(person):
         if get_strip_club_foreclosed_stage() >= 5:
@@ -69,12 +84,15 @@ label strip_club_hire_employee_label(the_person):
     mc.name "So [the_person.title], are you looking for a job?"
     $ ran_num = renpy.random.randint(0,100)
     if the_person is lily:
+        $ the_person.event_triggers_dict["strip_club_shifts"] = 1
         the_person.char "Hey [the_person.mc_title], you know I'm always looking for ways to boost my pocket money, a student has always a shortage of money."
         mc.name "Then you might like the proposal I have for you."
     elif the_person is mom:
+        $ the_person.event_triggers_dict["strip_club_shifts"] = 1
         the_person.char "Hi [the_person.mc_title], you know I have a lot of bills to pay, but I also have my job, so I'm not really looking for something else."
         mc.name "I think you are going to like this offer."
     elif the_person is aunt:
+        $ the_person.event_triggers_dict["strip_club_shifts"] = 1
         the_person.char "Hello [the_person.mc_title], i'm so tired of sitting around at home all day, I wouldn't mind a little diversion."
         mc.name "Well, it's not exactly a daytime job, but the hours and pay are very good."
     elif the_person is cousin:
@@ -83,6 +101,7 @@ label strip_club_hire_employee_label(the_person):
         $ the_person.draw_person(emotion = "happy", position = "stand5")
         the_person.char "Ok, but after what you did last time, the pay should be magnificent!"
     elif the_person.is_employee():
+        $ the_person.event_triggers_dict["strip_club_shifts"] = 1
         if mc.business.is_open_for_business():
             the_person.char "What do you mean, I already have a job, right here, right now."
             mc.name "Don't worry, it won't interfere with this job, I just thought you might like to make something extra on the side."

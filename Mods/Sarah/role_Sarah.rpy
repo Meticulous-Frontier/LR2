@@ -124,6 +124,8 @@ init -1 python:
         return False
 
     def Sarah_catch_stealing_requirement():
+        if strip_club_is_closed(): #Don't run while the strip club is closed
+            return False
         if time_of_day == 3:
             if day%7 == 4:  #friday
                 if mc.is_at_work():
@@ -165,6 +167,8 @@ init -1 python:
     def Sarah_stripclub_story_requirement():
         epic_tits_progress = sarah.event_triggers_dict.get("epic_tits_progress", 0)
         if epic_tits_progress < 2 and not epic_tits_progress == -1:  #Don't run until after she has bigger tits of you convinced her not to do it
+            return False
+        if strip_club_is_closed(): # Don't run while strip club is closed
             return False
         if time_of_day > 2:   #Only in the evening when the strippers are at the club
             if sarah.sluttiness > 50:
@@ -2541,7 +2545,7 @@ label Sarah_weekend_surprise_crisis_label():
                     the_person.char "Oh! That sounds great!"
                     call Sarah_weekend_date_grab_drinks_label from sarah_weekend_date_crisis_01
 
-                "Strip Club" if sarah.event_triggers_dict.get("stripclub_progress", 0) >= 1:
+                "Strip Club" if sarah.event_triggers_dict.get("stripclub_progress", 0) >= 1 and not strip_club_is_closed():
                     mc.name "In the mood for a titty bar?"
                     the_person.char "Oh! That sounds like a good evening!"
                     call Sarah_weekend_date_strip_club_label from sarah_weekend_date_crisis_02

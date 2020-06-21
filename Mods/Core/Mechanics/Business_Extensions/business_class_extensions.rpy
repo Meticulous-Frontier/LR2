@@ -77,7 +77,7 @@ init -1 python:
         income = 0
         if get_strip_club_foreclosed_stage() >= 5: # The player owns the club
             for stripper in people_in_role(stripper_role): # More strippers more money, and linked to the difficulty choice made...
-                income += stripper.stripper_salary * 3 * store.shop_difficulty_value 
+                income += calculate_stripper_profit(stripper)
                 # extra modifiers for later stages (not yet implemented)
                 #    if foreclosed_stage >= 6: # The club have a manager = +10% income
                 #        income += int (income * 0.1)

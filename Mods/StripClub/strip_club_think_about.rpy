@@ -37,7 +37,7 @@ init 3302 python:
         return False
 
     def cousin_meet_at_strip_club_requirement(the_person, target_day):
-        if time_of_day == 3 and target_day >= day:
+        if time_of_day == 3 and day >= target_day:
             return True
         return False 
     

@@ -8,6 +8,7 @@ init 5 python:
         return
 
 label strip_club_bought_strippers_selection_label(the_person): # Talk event
+    $ the_person.draw_person()
     mc.name "Hey [the_person.title], good, you came."
     the_person.char "Yeah, I'm here, now tell me why I'm here."
     mc.name "Not yet, can you call all your old coworkers from the strip club and get them here as soon as possible?"
@@ -64,7 +65,7 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
     $ the_person.change_obedience(10)
     $ the_person.draw_person(emotion = "happy")
     the_person.char "I like the job and most importantly, I like the money... I can manage a working relationship with you..."
-    mc.name "Ok girls, let's start the music and show me your best! Who wants to go the first?"
+    mc.name "Ok girls, if we haven't met before, do a quick introduction and then start stripping, let's start the music and show me your best! Who wants to go the first?"
 
     # loop remaining strippers and hire
     while len(mc.location.people) > 0:
@@ -100,26 +101,29 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
 
 label strip_club_evaluate_stripper(the_person):
     $ mc.location.show_background()
-    if the_person.title is None:
-        $ name_string = 'The stripper'
-    else:
-        $ name_string = the_person.title
     $ the_person.outfit = stripclub_wardrobe.pick_random_outfit()
     $ the_person.draw_person(emotion = "happy", position = "stand4")
-    "A new song starts playing over the speakers and [name_string] moves elegantly up on the stage."
+    "A new song starts playing over the speakers and a stripper moves elegantly up on the stage."
+
+    if the_person.title is None:
+        $ the_person.set_title(get_random_from_list(get_titles(the_person)))
+        $ the_person.set_mc_title("Boss")
+        $ the_person.set_possessive_title("The stripper")
+        the_person.char "Hi [the_person.mc_title], my name is [the_person.title]."
+
     "She poses for a moment in a few positions, then she starts to strut down the walkway and stops at the end of the stage."
-    "[name_string] starts to dance to the music, swinging her hips and turning slowly to show herself off."
+    "[the_person.title] starts to dance to the music, swinging her hips and turning slowly to show herself off."
     $ the_person.draw_person(position = "back_peek")
     "She spins and poses for you, and you can easily imagine a crowd responding with whoops and cheers."
     if the_person.has_large_tits():
         if the_person.outfit.tits_available():
-            "As the music builds, [name_string]'s dance becomes more energetic. Her big tits bounce and jiggle in rhythm with her movements."
+            "As the music builds, [the_person.title]'s dance becomes more energetic. Her big tits bounce and jiggle in rhythm with her movements."
         else:
-            "As the music builds, [name_string]'s dance becomes more energetic. Her big tits bounce and jiggle, looking almost desperate to escape her clothing."
+            "As the music builds, [the_person.title]'s dance becomes more energetic. Her big tits bounce and jiggle, looking almost desperate to escape her clothing."
     else:
-        "As the music builds, [name_string]'s dance becomes more energetic. She runs her hands over her tight body, accentuating her curves."
+        "As the music builds, [the_person.title]'s dance becomes more energetic. She runs her hands over her tight body, accentuating her curves."
     $ the_person.draw_person(position = get_random_from_list(cousin_strip_pose_list), the_animation = blowjob_bob, animation_effect_strength = 1.5)
-    "Her music hits it's crescendo and her dancing does the same. [name_string] holds onto the pole in the middle of the stage and spins herself around it."
+    "Her music hits it's crescendo and her dancing does the same. [the_person.title] holds onto the pole in the middle of the stage and spins herself around it."
     $ the_person.draw_person(position = "doggy", the_animation = ass_bob, animation_effect_strength = 1.5)
     if the_person.outfit.vagina_visible():
         "As the song comes to an end, the dancer lowers herself to all fours, showing off her ass and pussy."
@@ -128,19 +132,21 @@ label strip_club_evaluate_stripper(the_person):
     $ the_person.draw_person()
     "She stands up and gives you a coy smile, hoping for your final approval."
     $ the_person.draw_person(position = "walking_away")
-    "[name_string] stay like that and join me down here, letting you watch her body when she walk back to you and the other girls."
+    "[the_person.title] stay like that and join me down here, letting you watch her body when she walk back to you and the other girls."
     $ the_person.draw_person(emotion = "happy")
     the_person.char "So [mc.name] what do you think, am I good enough to be one of your girls?"
     "She put a hand on your shoulder pressing her bosom against your body..."
     menu:
         "Yes" if mc.business.funds > 500:
             $ strip_club_hire_stripper(the_person)
-            mc.name "Yes, you impressed me! Your salary will be $[the_person.stripper_salary] a day excluding tips, if you agree?"
+            mc.name "Yes, you impressed me! Your salary will be $[the_person.stripper_salary] per day excluding tips, if you agree?"
             $ name_string = mc.business.event_triggers_dict.get("old_strip_club_owner", "that cheap fuck")
-            the_person.char "If I agree? Of course, that's 30%% more than what [name_string] paid me before!"
+            $ ran_num = int(__builtin__.round(((the_person.stripper_salary / 20) - 1) * 100, 0))
+            the_person.char "If I agree? Of course, that's [ran_num]%% more than what [name_string] paid me before!"
             $ the_person.draw_person(emotion = "happy", position = "kissing")
             "Without any forewarning she pushes her tongue into your mouth showing you her happiness and gratitude."
             $ mc.business.change_funds(-500)
+            $ the_person.set_possessive_title("Your stripper")
             "After a few seconds, when she stops, you give her the promised signing bonus."
             $ the_person.change_stats(happiness = 10, obedience = 5, love = 5)
             $ strip_club.move_person(the_person, the_person.home) # Avoid to process the person again
@@ -148,17 +154,17 @@ label strip_club_evaluate_stripper(the_person):
             pass
         "Maybe later": # Don't need to reschedule
             $ the_person.draw_person(emotion = "sad", position = "stand2")
-            "[name_string] was so sure she would get back her job she can't utter a single word..."
+            "[the_person.title] was so sure she would get back her job she can't utter a single word..."
             "She can't believe your decision, in a few seconds her face is striped by copious tears..."
             $ the_person.apply_outfit(the_person.planned_outfit)
             $ the_person.draw_person(emotion = "sad", position = "walk_away")
             if the_person == cousin:
-                "Never humiliated like this, [name_string] quickly dresses back up and walks out of the club."
+                "Never humiliated like this, [the_person.title] quickly dresses back up and walks out of the club."
                 $ the_person.change_stats(happiness = -10, obedience = 5, love = -10)
                 $ stripclub_strippers.remove(the_person)
                 $ strip_club.move_person(the_person, the_person.home)
             else:
-                "Unable to argue with you, [name_string] quickly dresses back up and leaves the club, still in tears."
+                "Unable to argue with you, [the_person.title] quickly dresses back up and leaves the club, still in tears."
                 $ stripclub_strippers.remove(the_person)
                 $ strip_club.move_person(the_person, the_person.home)
             $ mc.location.show_background()

@@ -127,6 +127,19 @@ init -1 python:
 
     Person.weight = property(get_person_weight, set_person_weight, del_person_weight, "The weight of the person in KG.")
 
+    def get_person_stripper_salary(self):
+        if not hasattr(self, "_stripper_salary"):
+            self._stripper_salary = 0
+        return self._stripper_salary
+
+    def set_person_stripper_salary(self, value):
+        self._stripper_salary = value
+
+    def del_person_stripper_salary(self):
+        del self._stripper_salary
+
+    Person.stripper_salary = property(get_person_stripper_salary, set_person_stripper_salary, del_person_stripper_salary, "The salary when person is stripping.")
+
     ## MATCH SKIN COLOR
     # Matches skin, body, face and expression images based on input of skin color
     def match_skin(self, color):
