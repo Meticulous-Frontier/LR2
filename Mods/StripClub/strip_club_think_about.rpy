@@ -30,9 +30,9 @@ init 3302 python:
         return False
 
     def strip_club_offer_expire_requirement():
-        if strip_club_buy_days_left() % 5 == 0:
+        if strip_club_buy_days_left() % 5 == 0 and time_of_day == 1: # only show once per day
             return True
-        if strip_club_buy_days_left() <= 0:
+        if strip_club_buy_days_left() <= 0: # the event will be removed with this trigger
             return True
         return False
 
