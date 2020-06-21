@@ -410,8 +410,8 @@ init -1 python:
         the_mother = make_person(last_name = self.last_name, age = age, body_type = body_type, face_style = face_style, tits = tits, height = height,
             hair_colour = hair_colour, skin = self.skin, eyes = eyes, start_home = start_home, force_random = True)
 
-        if the_mother.kids == 0:    # make sure she has at least one child
-            the_mother.kids = 1
+        # set children fixed to one, to prevent circular relative creations (like create mom, has 3 children, so we can start hiring her other daughters)
+        the_mother.kids = 1
 
         if start_home is None:
             the_mother.generate_home()
@@ -419,6 +419,7 @@ init -1 python:
 
         for sister in town_relationships.get_existing_sisters(self): #First find all of the sisters this person has
             town_relationships.update_relationship(the_mother, sister, "Daughter", "Mother") #Set the mother/daughter relationship for the sisters
+            the_mother.kids += 1 # increase child count per sister
 
         town_relationships.update_relationship(self, the_mother, "Mother", "Daughter") #Now set the mother/daughter relationship with person
 
