@@ -186,6 +186,8 @@ label quest_cuckold_employee_intro_label():
     if the_person == None:
         #ABORT ABORT, we fucked up somewhere.
         return
+    # lock selected person out of other quests
+    $ quest_director.add_unavailable_person(the_person)
     "You working diligently when a figure appears in your peripheral vision. You look up and see [the_person.title] standing in front of you."
     $ the_person.draw_person(emotion = "sad")
     mc.name "Hello [the_person.title]. Can I help you?"

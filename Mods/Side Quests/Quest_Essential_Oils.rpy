@@ -168,6 +168,12 @@ label quest_essential_oils_init_label():
 
 label quest_essential_oils_intro_label(the_person):
     $ the_person = quest_essential_oils_get_target()
+    if the_person is None:
+        # Abort, something went wrong
+        return
+
+    # lock selected person out of other quests
+    $ quest_director.add_unavailable_person(the_person)
     $ quest_essential_oils.quest_event_dict["start_day"] = day
     "As you walk into one of the business rooms, a very strange mixture of smells enter your nostrils."
     "You are having trouble placing the smell... Is there a chemical leak somewhere!?!"

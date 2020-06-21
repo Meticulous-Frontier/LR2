@@ -119,14 +119,18 @@ label quest_porn_actress_init_label():
     return
 
 label quest_porn_actress_intro_label():
-    $ the_target = quest_porn_actress.quest_event_dict.get("target", None)
-    if not the_target:
+    $ the_person = quest_porn_actress.quest_event_dict.get("target", None)
+    if not the_person:
         return
-    $ the_person_one, the_person_two = quest_porn_actress_get_side_characters(the_target)
+
+    # lock selected person out of other quests
+    $ quest_director.add_unavailable_person(the_person)
+
+    $ the_person_one, the_person_two = quest_porn_actress_get_side_characters(the_person)
 
     "You get up to stretch your legs for a bit and to check on the different departments, making sure everything is running smoothly."
     "As you pass by the break room, you overhear something."
-    the_person_one.char "Oh my... is that really [the_target.name]? It looks just like her... That's what the other girls are saying!"
+    the_person_one.char "Oh my... is that really [the_person.name]? It looks just like her... That's what the other girls are saying!"
     the_person_two.char "Wow, I think it is! If not its her twin sister!"
     "You walk into the break room."
     $ scene_manager = Scene() # make sure we have a clean scene manager
@@ -135,9 +139,9 @@ label quest_porn_actress_intro_label():
     "You see [the_person_one.possessive_title] and [the_person_two.title] looking at a phone. The sound of erotic moaning is coming from the phone."
     "[the_person_one.title] notices you walk in."
     the_person_one.char "Oh hey [the_person_one.mc_title]. Have you seen this?"
-    the_person_two.char "Yeah, it looks just like [the_target.name]!"
-    "[the_person_one.title] turns the phone to you. It is a porn video of a woman who looks exactly like [the_target.title]. She is taking a cock like a champ doggy style."
-    "... And sounds suspiciously like [the_target.title]..."
+    the_person_two.char "Yeah, it looks just like [the_person.name]!"
+    "[the_person_one.title] turns the phone to you. It is a porn video of a woman who looks exactly like [the_person.title]. She is taking a cock like a champ doggy style."
+    "... And sounds suspiciously like [the_person.title]..."
     "... Wow, that has to be her!"
     mc.name "Looks like her? That... I'm almost positive that it IS her!"
     the_person_two.char "I know! That's what a lot of the other girls around the office are saying!"
@@ -161,10 +165,9 @@ label quest_porn_actress_intro_label():
     $ scene_manager.remove_actor(the_person_two)
     "You excuse yourself from the break room and head to your office you pull up the video and watch it."
     "It definitely has an amateur feel to it. It is one of the POV videos where the man is also the cameraman."
-    "[the_target.title], if it is her, has a pretty good performance in the video. But you have to wonder if she even knows the video is online."
-    "You decide to speak with [the_target.title]. At the very least, make sure she knows the video is out there."
+    "[the_person.title], if it is her, has a pretty good performance in the video. But you have to wonder if she even knows the video is online."
+    "You decide to speak with [the_person.title]. At the very least, make sure she knows the video is out there."
 
-    $ del the_target
     $ del the_person_one
     $ del the_person_two
     return

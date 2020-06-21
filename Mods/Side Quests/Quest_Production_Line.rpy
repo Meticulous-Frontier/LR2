@@ -41,6 +41,9 @@ init 1 python:
     def setup_quest_production_line():
         person = get_quest_production_line_person()
 
+        # lock selected person out of other quests
+        quest_director.add_unavailable_person(person)
+
         # make sure 'selected person' is single and has no kids
         # although the player might have seen other information
         # it is more disturbing when this information does not
