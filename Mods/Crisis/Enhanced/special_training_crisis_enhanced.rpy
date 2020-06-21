@@ -70,7 +70,7 @@ label enhanced_special_training_crisis_label():
                             the_person.char "You like when I'm a bit naked, huh?"
                             "You feel like you could explode just from the view of [the_person.title]'s naked body as she stands there, teasing you."
 
-                if the_person.sluttiness >= 90 or the_person.sluttiness >= 60 and the_person.get_opinion_score("being covered in cum") > 0 or the_person.sluttiness >= 60 and the_person.get_opinion_score("giving blowjobs") > 0 or the_person.sluttiness >= 60 and the_person.get_opinion_score("big dicks") > 0:
+                if the_person.sluttiness >= 90 or (the_person.sluttiness >= 60 and the_person.get_opinion_score("being covered in cum")) > 0 or (the_person.sluttiness >= 60 and the_person.get_opinion_score("giving blowjobs") > 0) or (the_person.sluttiness >= 60 and the_person.get_opinion_score("big dicks") > 0):
                     $ the_person.draw_person(emotion="sad")
                     "She stops to think for a second, putting on a frown before turning it into a bright, mischevious smile."
                     $ the_person.draw_person(emotion="happy")
