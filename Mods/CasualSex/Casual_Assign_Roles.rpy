@@ -14,7 +14,7 @@ init 2 python:
 
         for (people,place) in people_to_process: #Figure out if person already has an important role
             disqualifying_role = 0
-            if len(people.special_role) > 0: # Checking for any role since generic_people_role is removed
+            if __builtin__.len(people.special_role) > 0: # Checking for any role since generic_people_role is removed
                 disqualifying_role = 1
             if disqualifying_role == 0:         #Assign new casual sex roles#
                 if people.age < 30:

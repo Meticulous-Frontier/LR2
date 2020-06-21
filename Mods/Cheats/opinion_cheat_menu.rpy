@@ -55,7 +55,7 @@ screen opinion_edit_menu():
     default target = the_person
 
     if target is not None:
-        grid len(categories) 1:
+        grid __builtin__.len(categories) 1:
             xfill 0.5
             for n in categories:
                 frame:

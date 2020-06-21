@@ -402,7 +402,7 @@ init 2:
                         viewport:
                             mousewheel True
                             draggable True
-                            grid 1 len(valid_categories): #categories select on far left
+                            grid 1 __builtin__.len(valid_categories): #categories select on far left
                                 for category in valid_categories:
                                     textbutton category:
                                         style "textbutton_style"
@@ -430,7 +430,7 @@ init 2:
                                     if category_selected in categories_mapping:
                                         $ valid_check = categories_mapping[category_selected][1]
                                         $ apply_method = categories_mapping[category_selected][2]
-                                        $ cloth_list_length = len(categories_mapping[category_selected][0])
+                                        $ cloth_list_length = __builtin__.len(categories_mapping[category_selected][0])
 
                                         for cloth in sorted(categories_mapping[category_selected][0], key = lambda x: (x.layer, x.slut_value, x.name)):
                                             textbutton cloth.name + (" | " + get_heart_image_list_cloth(cloth.slut_value) if cloth.slut_value > 0 else ""):
@@ -528,7 +528,7 @@ init 2:
                                                                         mousewheel "horizontal"
                                                                         draggable True
 
-                                                                        grid len(selected_clothing.supported_patterns) 1:
+                                                                        grid __builtin__.len(selected_clothing.supported_patterns) 1:
                                                                             xfill True
                                                                             for pattern in selected_clothing.supported_patterns:
 
@@ -1148,14 +1148,14 @@ init 2:
                                                     yfill True
                                                     xsize 240
                                                     vbox:
-                                                        if len(love_list) > 0:
+                                                        if __builtin__.len(love_list) > 0:
                                                             for pref in love_list:
                                                                 frame:
                                                                     background "#007000"
                                                                     xsize 220
                                                                     padding [1,1]
                                                                     text pref style "serum_text_style_traits"
-                                                        if len(hate_list) > 0:
+                                                        if __builtin__.len(hate_list) > 0:
                                                             for pref in hate_list:
                                                                 frame:
                                                                     background "#930000"

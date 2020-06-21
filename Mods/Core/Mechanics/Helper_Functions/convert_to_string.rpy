@@ -4,8 +4,8 @@ init -1 python:
     # currently between 60 inch (152.4) - 70 inch (177.8) (based on * 50 + 20).
     def height_to_string(person_height): #Height is a value between 0.8 and 1.0
         total_inches = __builtin__.round((person_height * 50) + 20)
-        feet = int(__builtin__.round(total_inches // 12))
-        inches = int(__builtin__.round(total_inches % 12))
+        feet = __builtin__.int(__builtin__.round(total_inches // 12))
+        inches = __builtin__.int(__builtin__.round(total_inches % 12))
 
         if use_imperial_system:
             return str(feet) + "' " + str(inches) + "\""

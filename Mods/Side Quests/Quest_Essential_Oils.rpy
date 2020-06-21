@@ -146,7 +146,7 @@ init 1 python:
         for person in mc.business.get_employee_list():
             if person.int <= 2:
                 able_person_list.append(person)
-        if len(able_person_list) == 0:
+        if __builtin__.len(able_person_list) == 0:
             return None
         return get_random_from_list(able_person_list)
 

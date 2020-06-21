@@ -62,7 +62,7 @@ init 2 python:
     def mc_action_pay_to_strip_requirement(person):
         if not person is lily:
             if (person.obedience >= 130 and person.sluttiness >= 15) or (person.sluttiness >= 25 and person.get_opinion_score("not wearing anything") > 0) or person.obedience >= 150 or person.sluttiness >= 50:
-                if len(mc.location.people) > 1:
+                if __builtin__.len(mc.location.people) > 1:
                     return "Must be alone with " + person.title
                 return True
         return False

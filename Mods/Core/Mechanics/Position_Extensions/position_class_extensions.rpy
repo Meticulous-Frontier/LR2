@@ -34,8 +34,8 @@ init 5 python:
         willingness_string = ""
         tooltip_string = ""
 
-        girl_expected_arousal = str(int(self.girl_arousal * (1 + 0.1 * mc.sex_skills[self.skill_tag]))) #Estimate what they'll gain based on both of your skills to make the predictions as accurate as possible.
-        guy_expected_arousal = str(int(self.guy_arousal * (1 + 0.1 * the_person.sex_skills[self.skill_tag])))
+        girl_expected_arousal = str(__builtin__.int(self.girl_arousal * (1 + 0.1 * mc.sex_skills[self.skill_tag]))) #Estimate what they'll gain based on both of your skills to make the predictions as accurate as possible.
+        guy_expected_arousal = str(__builtin__.int(self.guy_arousal * (1 + 0.1 * the_person.sex_skills[self.skill_tag])))
 
         energy_string = "   {color=#A3A3FF}" + str(self.guy_energy) + "{/color}/{color=#FF6EC7}" + str(self.girl_energy) + "{/color} {image=energy_token_small}"
         arousal_string =  ", {color=#A3A3FF}" + guy_expected_arousal + "{/color}/{color=#FF6EC7}" + girl_expected_arousal + "{/color} {image=arousal_token_small}"

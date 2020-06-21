@@ -65,7 +65,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                             text_align(0.5,0.5)
                             text_anchor(0.5,0.5)
                             #sensitive categories_mapping[category][2]
-                            if len(categories_mapping[category]) > 4 and categories_mapping[category][2] is False:
+                            if __builtin__.len(categories_mapping[category]) > 4 and categories_mapping[category][2] is False:
                                 tooltip categories_mapping[category][4]
                             xysize (220, 60)
                             if categories_mapping[category][2]:
@@ -100,7 +100,7 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                                 if category_selected in categories_mapping:
                                     #    $ valid_check = categories_mapping[category_selected][1]
                                     #    $ apply_method = categories_mapping[category_selected][2]
-                                    #    $ cloth_list_length = len(categories_mapping[category_selected][0])
+                                    #    $ cloth_list_length = __builtin__.len(categories_mapping[category_selected][0])
                                     for style_item in sorted(categories_mapping[category_selected][0], key = lambda x: x.name):
                                         textbutton style_item.name:
                                             style "textbutton_style"

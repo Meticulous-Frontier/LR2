@@ -4,7 +4,7 @@ init -1 python:
 init 2 python:
     def SB_tutorial_event_requirement():
         if mc.location in get_mall_locations():
-            return len(known_people_at_location(mc.location, unique_character_list)) > 0
+            return __builtin__.len(known_people_at_location(mc.location, unique_character_list)) > 0
         return False
 
     def SB_tutorial_event_get_known_person():

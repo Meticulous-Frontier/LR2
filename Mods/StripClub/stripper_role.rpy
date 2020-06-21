@@ -5,7 +5,7 @@
 init 5 python:
     # override default strip_club show requirement
     def stripclub_show_requirement():
-        if len(stripclub_strippers) == 0:
+        if __builtin__.len(stripclub_strippers) == 0:
             return False
         if time_of_day in [0,1,2]:
             return "Too early for performances"
@@ -42,8 +42,8 @@ init 5 python:
 
     def calculate_stripper_salary(person):
         shifts = person.event_triggers_dict.get("strip_club_shifts", 2)
-        tit_modifier = 10 - (abs(5 - rank_tits(person.tits)))   # optimal size is DD-Cup
-        age_modifier = 8 - (abs(25 - person.age) / 3.0)            # optimal age is 25
+        tit_modifier = 10 - (__builtin__.abs(5 - rank_tits(person.tits)))   # optimal size is DD-Cup
+        age_modifier = 8 - (__builtin__.abs(25 - person.age) / 3.0)            # optimal age is 25
         slut_modifier = person.core_sluttiness / 20.0
 
         return __builtin__.round((tit_modifier + age_modifier + slut_modifier) * shifts, 1)
@@ -65,7 +65,7 @@ init 5 python:
     def strip_club_hire_employee_requirement(person):
         if person.has_role(stripper_role) or person in list(set(unique_character_list)-set([cousin, aunt, mom, lily])): # disqualified from action
             return False
-        if len(stripclub_strippers) > 7: # max 8 strippers.
+        if __builtin__.len(stripclub_strippers) > 7: # max 8 strippers.
             return "Maximum strippers reached"
         if day < person.event_triggers_dict.get("stripper_ask_hire", 0) + 7:
             return "Asked too recently"

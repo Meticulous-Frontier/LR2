@@ -312,7 +312,7 @@ init 2:
                 xalign 0.5
                 textbutton "Create Design":
                     action [Hide("trait_tooltip"), Hide("serum_design_ui"), Hide("serum_tooltip"), Return(starting_serum)]
-                    sensitive (starting_serum.slots >= effective_traits and len(starting_serum.traits) and starting_serum.has_tag("Production")) > 0
+                    sensitive (starting_serum.slots >= effective_traits and __builtin__.len(starting_serum.traits) and starting_serum.has_tag("Production")) > 0
 
                     style "textbutton_style"
                     text_style "serum_text_style"
@@ -400,7 +400,7 @@ init 2:
 #                                     spacing 0
 #
 #                                     vbox:
-#                                         for type_serum in range(0,len(type_serums)):
+#                                         for type_serum in range(0,__builtin__.len(type_serums)):
 #                                             button:
 #                                                 vbox:
 #                                                     xalign 0.5

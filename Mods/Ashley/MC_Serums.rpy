@@ -9,7 +9,7 @@ init -1 python:
             self.max_serum_count = 0
 
         def get_MC_serum_count(self):
-            return (len(self.stat_serums) + len(self.ability_serums) + len(self.other_serums))
+            return (__builtin__.len(self.stat_serums) + __builtin__.len(self.ability_serums) + __builtin__.len(self.other_serums))
 
         def get_MC_serum_count_remaining(self):
             return (self.max_serum_count - self.get_MC_serum_count())

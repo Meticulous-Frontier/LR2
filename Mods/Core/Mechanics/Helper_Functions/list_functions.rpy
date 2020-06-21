@@ -7,12 +7,12 @@ init -2 python:
 
     # splits an item_array in a number of blocks about equal in size (remainders are added to last bloks)
     def split_list_in_even_blocks(list, blok_count):
-        avg = len(list) / float(blok_count)
+        avg = __builtin__.len(list) / float(blok_count)
         result = []
         last = 0.0
 
-        while last < len(list):
-            result.append(list[int(last):int(last + avg)])
+        while last < __builtin__.len(list):
+            result.append(list[__builtin__.int(last):__builtin__.int(last + avg)])
             last += avg
 
         return result

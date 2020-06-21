@@ -73,7 +73,7 @@ init 1 python:
             return False
         if mc.business.head_researcher == None:
             return False
-        if len(mc.business.market_team) == 0:
+        if __builtin__.len(mc.business.market_team) == 0:
             return False
         return True
 

@@ -452,7 +452,7 @@ init -1 python:
             return messages
 
         messages = get_messages(narrator_messages)
-        msg_count = len(messages)
+        msg_count = __builtin__.len(messages)
 
         test_outfit = self.outfit.get_copy()
         removed_something = False
@@ -1090,13 +1090,13 @@ init -1 python:
     def player_willpower():
         mc.power = 0
 
-        mc.power += int(mc.charisma*5) # Positive character modifiers
-        mc.power += int((mc.energy / 20) * 1.5)
+        mc.power += __builtin__.int(mc.charisma*5) # Positive character modifiers
+        mc.power += __builtin__.int((mc.energy / 20) * 1.5)
         return mc.power
 
     # calculates current willpower of a person
     def calculate_willpower(person):
-        willpower = int(person.focus * 10 + person.happiness * 0.2 - person.obedience * 0.1 - person.love * 0.2 - person.suggestibility * 0.5)
+        willpower = __builtin__.int(person.focus * 10 + person.happiness * 0.2 - person.obedience * 0.1 - person.love * 0.2 - person.suggestibility * 0.5)
 
         if willpower < 0:
             willpower = 0
@@ -1264,7 +1264,7 @@ init -1 python:
             return False
         if persistent.pregnancy_pref < 2:
             return False
-        day_difference = abs((day % 30) - self.ideal_fertile_day) # Gets the distance between the current day and the ideal fertile day.
+        day_difference = __builtin__.abs((day % 30) - self.ideal_fertile_day) # Gets the distance between the current day and the ideal fertile day.
         if day_difference > 15:
             day_difference = 30 - day_difference #Wrap around to get correct distance between months.
         if day_difference < 4:

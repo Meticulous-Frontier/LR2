@@ -445,7 +445,7 @@ init -1 python:
             renpy.call(self.intro,the_person_one, the_person_two, the_location, the_object, round, current_girl)
 
         def call_scene(self, the_person_one, the_person_two, the_location, the_object, round, current_girl):
-            random_scene = renpy.random.randint(0,len(self.scenes)-1)
+            random_scene = renpy.random.randint(0,__builtin__.len(self.scenes)-1)
             renpy.call(self.scenes[random_scene],the_person_one, the_person_two, the_location, the_object, round, current_girl)
 
         def call_outro(self, the_person_one, the_person_two, the_location, the_object, round, current_girl):

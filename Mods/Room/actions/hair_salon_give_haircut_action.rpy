@@ -2,8 +2,8 @@
 # Do whatever you want with it.
 
 init 2 python:
-    salon_style_cost = int(60)
-    salon_dye_cost = int(30)
+    salon_style_cost = __builtin__.int(60)
+    salon_dye_cost = __builtin__.int(30)
 
     salon_total_cost = salon_style_cost + salon_dye_cost
 

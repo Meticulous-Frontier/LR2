@@ -68,7 +68,7 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
     mc.name "Ok girls, if we haven't met before, do a quick introduction and then start stripping, let's start the music and show me your best! Who wants to go the first?"
 
     # loop remaining strippers and hire
-    while len(mc.location.people) > 0:
+    while __builtin__.len(mc.location.people) > 0:
         $ the_person = get_random_from_list(mc.location.people)
         $ the_person.stripper_salary = calculate_stripper_salary(the_person)
         call strip_club_evaluate_stripper(the_person) from _call_strip_club_evaluate_stripper_selection
@@ -76,12 +76,12 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
     $ strip_club_call_in_all_strippers()
     $ renpy.scene("Active")
 
-    if len(stripclub_strippers) > 1:
+    if __builtin__.len(stripclub_strippers) > 1:
         $ the_person = get_random_from_list([x for x in stripclub_strippers if x not in [cousin]])
         $ the_person.draw_person(emotion = "happy", position = "stand5")
         mc.name "Ok girls, the team is built. Enjoy the rest of your day, we will re-open the club tomorrow evening."
         "Excited to have got back their job and the unexpected money raise, the girls get dressed and walk out of the club."
-    elif len(stripclub_strippers) > 0:
+    elif __builtin__.len(stripclub_strippers) > 0:
         mc.name "Ok [stripclub_strippers[0].name], I will count on you. Enjoy the rest of the day, we will re-open the club tomorrow evening."
         "Excited to have got back her job and the unexpected money raise, the girl puts her clothes back on and walks out."
     else:
@@ -141,7 +141,7 @@ label strip_club_evaluate_stripper(the_person):
             $ strip_club_hire_stripper(the_person)
             mc.name "Yes, you impressed me! Your salary will be $[the_person.stripper_salary] per day excluding tips, if you agree?"
             $ name_string = mc.business.event_triggers_dict.get("old_strip_club_owner", "that cheap fuck")
-            $ ran_num = int(__builtin__.round(((the_person.stripper_salary / 20) - 1) * 100, 0))
+            $ ran_num = __builtin__.int(((the_person.stripper_salary / 20) - 1) * 100, 0)
             the_person.char "If I agree? Of course, that's [ran_num]%% more than what [name_string] paid me before!"
             $ the_person.draw_person(emotion = "happy", position = "kissing")
             "Without any forewarning she pushes her tongue into your mouth showing you her happiness and gratitude."

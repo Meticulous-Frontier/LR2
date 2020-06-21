@@ -30,7 +30,7 @@ init -1 python:
                 the_goal.enabled = True
 
         def disable_in_list(the_goal, the_list):
-            if len(the_list) < 3: # minimum of two active items
+            if __builtin__.len(the_list) < 3: # minimum of two active items
                 return
             found = find_in_list(lambda x: x.hash() == self.hash(), the_list)
             if found:

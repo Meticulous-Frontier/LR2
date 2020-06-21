@@ -185,32 +185,32 @@ init -1 python:
             if not preferences.evaluate_outfit(outfit, 999):
                 continue
             base_wardrobe.add_outfit(outfit.get_copy())
-            if len(base_wardrobe.outfits) > 8:  # quick exit when we have enough
+            if __builtin__.len(base_wardrobe.outfits) > 8:  # quick exit when we have enough
                 break
 
         for underwear in default_wardrobe.underwear_sets:
             if not preferences.evaluate_underwear(underwear, 999):
                 continue
             base_wardrobe.add_underwear_set(underwear.get_copy())
-            if len(base_wardrobe.underwear_sets) > 8:   # quick exit when we have enough
+            if __builtin__.len(base_wardrobe.underwear_sets) > 8:   # quick exit when we have enough
                 break
 
         for overwear in default_wardrobe.overwear_sets:
             if not preferences.evaluate_outfit(overwear, 999):
                 continue
             base_wardrobe.add_overwear_set(overwear.get_copy())
-            if len(base_wardrobe.overwear_sets) > 8:    # quick exit when we have enough
+            if __builtin__.len(base_wardrobe.overwear_sets) > 8:    # quick exit when we have enough
                 break
 
         # ensure we have at least 3 auto generated outfits by removing surplus, but keep the 2 most decent outfits from default wardrobe
-        while len(base_wardrobe.outfits) > 5:
-            base_wardrobe.remove_outfit(sorted(base_wardrobe.outfits, key = lambda x: x.slut_requirement)[renpy.random.randint(2,len(base_wardrobe.outfits)-1)])
+        while __builtin__.len(base_wardrobe.outfits) > 5:
+            base_wardrobe.remove_outfit(sorted(base_wardrobe.outfits, key = lambda x: x.slut_requirement)[renpy.random.randint(2,__builtin__.len(base_wardrobe.outfits)-1)])
 
-        while len(base_wardrobe.underwear_sets) > 5:
-            base_wardrobe.remove_outfit(sorted(base_wardrobe.underwear_sets, key = lambda x: x.slut_requirement)[renpy.random.randint(2,len(base_wardrobe.underwear_sets)-1)])
+        while __builtin__.len(base_wardrobe.underwear_sets) > 5:
+            base_wardrobe.remove_outfit(sorted(base_wardrobe.underwear_sets, key = lambda x: x.slut_requirement)[renpy.random.randint(2,__builtin__.len(base_wardrobe.underwear_sets)-1)])
 
-        while len(base_wardrobe.overwear_sets) > 5:
-            base_wardrobe.remove_outfit(sorted(base_wardrobe.overwear_sets, key = lambda x: x.slut_requirement)[renpy.random.randint(2,len(base_wardrobe.overwear_sets)-1)])
+        while __builtin__.len(base_wardrobe.overwear_sets) > 5:
+            base_wardrobe.remove_outfit(sorted(base_wardrobe.overwear_sets, key = lambda x: x.slut_requirement)[renpy.random.randint(2,__builtin__.len(base_wardrobe.overwear_sets)-1)])
 
         person.wardrobe = base_wardrobe
 

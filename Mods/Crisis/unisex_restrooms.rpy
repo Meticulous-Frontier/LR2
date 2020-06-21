@@ -30,7 +30,7 @@ init 1301 python:
 
     def unisex_restroom_gloryhole_wait_requirement():
         if mc.business.is_open_for_business():
-            if len(mc.business.get_employee_list()) > 3:
+            if __builtin__.len(mc.business.get_employee_list()) > 3:
                 return True
             else:
                 return "You should hire more employees"
@@ -43,7 +43,7 @@ init 1301 python:
 
 init 2 python:
     def unisex_restroom_crisis_requirement():
-        if len(mc.business.get_employee_list()) > 5: #Have at least 6 employees.
+        if __builtin__.len(mc.business.get_employee_list()) > 5: #Have at least 6 employees.
             if mc.business.is_open_for_business(): #Only trigger if people are in the office.
                 if mc.is_at_work(): #Check to see if the main character is at work
                     return True
@@ -111,7 +111,7 @@ label unisex_restroom_action_label():
 
 label unisex_restroom_overhear_label():
     "You get up from your work. There is a problem you are having trouble figuring out, so you take a quick walk down the hall to clear your mind a bit."
-    if len(mc.business.production_team) > 0:
+    if __builtin__.len(mc.business.production_team) > 0:
         $ the_person = get_random_from_list(mc.business.production_team)
     else:
         $ the_person = get_random_from_list(mc.business.get_employee_list())

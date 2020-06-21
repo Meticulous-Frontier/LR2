@@ -84,9 +84,9 @@ init -2 python:
 
         def draw_info_ui(self):
             renpy.scene("Active")
-            if len(self.actors) > 1:
+            if __builtin__.len(self.actors) > 1:
                 renpy.show_screen("multi_person_info_ui", self.actors)
-            elif len(self.actors) == 1:
+            elif __builtin__.len(self.actors) == 1:
                 renpy.show_screen("person_info_ui", self.actors[0].person)
 
         def draw_scene(self):

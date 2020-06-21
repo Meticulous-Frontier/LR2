@@ -85,7 +85,7 @@ label influence_opinion_input_label(person):
         python:
             score = person.get_opinion_score(opinion)
             degrees = [-2,-1,0,1,2]
-            ran_num = abs(degrees.index(score) - degrees.index(degree)) # How far is the degree away from current opinion (max 4 steps)
+            ran_num = __builtin__.abs(degrees.index(score) - degrees.index(degree)) # How far is the degree away from current opinion (max 4 steps)
             cur_score = opinion_score_to_string(score)
             person.change_willpower(ran_num * 5)
 

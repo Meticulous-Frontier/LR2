@@ -27,7 +27,7 @@ init 2 python:
             for checked_outfit in wardrobe.outfits + wardrobe.underwear_sets + wardrobe.overwear_sets:
                 if checked_outfit.name == the_name:
                     count += 1
-        if count == len(list_of_wardrobes):
+        if count == __builtin__.len(list_of_wardrobes):
             return True
         else:
             return False
@@ -41,7 +41,7 @@ init 2 python:
                 count+=1
         if count > 0:
             return "-".join(found_in)
-        elif count == len(import_wardrobes):
+        elif count == __builtin__.len(import_wardrobes):
             return "All"
         return ""
 
@@ -107,7 +107,7 @@ init 2:
         # default import_wardrobes = {"Your Wardrobe": [[mc.designed_wardrobe]], "Marketing Division": [[mc.business.m_uniform]], "Research Division": [[mc.business.r_uniform]], "Production Division": [[mc.business.p_uniform]], "Supply Division": [[mc.business.s_uniform]], "HR Division": [[mc.business.h_uniform]], "All Divisions": [[mc.business.all_uniform]]}
         # $ import_wardrobes["Slaves"] = [[x.wardrobe for x in people_in_role(slave_role)]]
 
-        grid len(outfit_categories) 1:
+        grid __builtin__.len(outfit_categories) 1:
             for category in sorted(outfit_categories): # NOTE: Dictionary is not sorted. Don't know the best way to make it so.
                 vbox:
                     xsize 480
@@ -116,11 +116,11 @@ init 2:
                         xfill True
                     viewport:
                         ysize 880
-                        if len(getattr(wardrobe, outfit_categories[category][2])()) > 7:
+                        if __builtin__.len(getattr(wardrobe, outfit_categories[category][2])()) > 7:
                             scrollbars "vertical"
                         mousewheel True
                         vbox:
-                            if len(getattr(wardrobe, outfit_categories[category][2])()) > 0: #Don't show a frame if it is empty
+                            if __builtin__.len(getattr(wardrobe, outfit_categories[category][2])()) > 0: #Don't show a frame if it is empty
                                 frame:
                                     vbox:
                                         for outfit in sorted(getattr(wardrobe, outfit_categories[category][2])(), key = lambda outfit: (outfit.slut_requirement, outfit.name)):  # Not sure if there's any good reason to sort XML lists since the default way it works is to place the newest outfit at the bottom which is predictable.

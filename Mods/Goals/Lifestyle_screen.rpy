@@ -38,7 +38,7 @@ screen lifestyle_goal_sheet():
 
                     xsize 500
                     text "Stat Goals" style "menu_text_style" size 32 xalign 0.5
-                    text "Current Total: " + str(len(stat_goals)) style "menu_text_style" size 24 xalign 0.5
+                    text "Current Total: " + str(__builtin__.len(stat_goals)) style "menu_text_style" size 24 xalign 0.5
                     for goal in sorted(stat_goals_options_list, key = lambda x: x.name):
                         hbox:
                             xalign 0.5
@@ -77,7 +77,7 @@ screen lifestyle_goal_sheet():
 
                     xsize 500
                     text "Work Goals" style "menu_text_style" size 32 xalign 0.5
-                    text "Current Total: " + str(len(work_goals)) style "menu_text_style" size 24 xalign 0.5
+                    text "Current Total: " + str(__builtin__.len(work_goals)) style "menu_text_style" size 24 xalign 0.5
                     for goal in sorted(work_goals_options_list, key = lambda x: x.name):
                         hbox:
                             xalign 0.5
@@ -116,7 +116,7 @@ screen lifestyle_goal_sheet():
 
                     xsize 500
                     text "Sex Goals" style "menu_text_style" size 32 xalign 0.5
-                    text "Current Total: " + str(len(sex_goals)) style "menu_text_style" size 24 xalign 0.5
+                    text "Current Total: " + str(__builtin__.len(sex_goals)) style "menu_text_style" size 24 xalign 0.5
                     for goal in sorted(sex_goals_options_list, key = lambda x: x.name):
                         hbox:
                             xalign 0.5

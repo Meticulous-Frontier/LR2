@@ -57,7 +57,7 @@ init -1 python:
     # game_hints.append(Hint("Hire Alexia", "You should head downtown and get to know her a little better so you can hire her as employee in your company.", "True", "False"))
 
     def number_of_hints():
-        return len(active_hints())
+        return __builtin__.len(active_hints())
 
     def active_hints():
         return [x for x in game_hints if x.is_active and not x.is_complete]

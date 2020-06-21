@@ -107,7 +107,7 @@ init python: # This space is reserved for definitions used to simplify the code
                 policy.on_buy_function(**policy.extra_arguments)
 
     def chunks(items, size):
-        for i in range(0, len(items), size):
+        for i in range(0, __builtin__.len(items), size):
             yield items[i:i+size]
 
 #        batch_size_increase(increase_amount = 5)

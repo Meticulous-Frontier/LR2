@@ -23,7 +23,7 @@ init 2:
 
                     viewport:
 
-                        if len(target_wardrobe.get_outfit_list()) > 11:
+                        if __builtin__.len(target_wardrobe.get_outfit_list()) > 11:
                             scrollbars "vertical"
                         xfill True
                         yfill True
@@ -54,7 +54,7 @@ init 2:
                             text "Overwear Selection" style "serum_text_style"
 
                         viewport:
-                            if len(target_wardrobe.get_overwear_sets_list()) > 11:
+                            if __builtin__.len(target_wardrobe.get_overwear_sets_list()) > 11:
                                 scrollbars "vertical"
                             xfill True
                             yfill True
@@ -85,7 +85,7 @@ init 2:
                             text "Underwear Selection" style "serum_text_style"
 
                         viewport:
-                            if len(target_wardrobe.get_underwear_sets_list()) > 11:
+                            if __builtin__.len(target_wardrobe.get_underwear_sets_list()) > 11:
                                 scrollbars "vertical"
                             xfill True
                             yfill True

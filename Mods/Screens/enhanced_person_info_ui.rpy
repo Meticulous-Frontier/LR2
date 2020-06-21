@@ -37,7 +37,7 @@ init -1 python:
         return the_final_string
 
     def person_info_ui_format_hearts(value):
-        heart_value = abs(value)
+        heart_value = __builtin__.abs(value)
         if (heart_value / 4) > 10:
             return get_gold_heart(heart_value / 4)
         return get_red_heart(heart_value)

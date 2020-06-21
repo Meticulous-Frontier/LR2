@@ -48,7 +48,7 @@ init 1 python:
 
     def rate_porn_video(the_report, the_person):  #Takes a sex report and person and returns a score of 1-10 on how good the video isself.
         porn_score = 0
-        if len(the_report.get("positions_used", [])) <= 1:  #Max three points for number of positions used
+        if __builtin__.len(the_report.get("positions_used", [])) <= 1:  #Max three points for number of positions used
             porn_score += 1
         elif the_report.get("positions_used", []) <= 4:
             porn_score += 2

@@ -32,7 +32,7 @@ init -1 python:
             return
         if not mc.location is lily_bedroom:
             return "Must be in Lily's bedroom"
-        elif len(lily_bedroom.people) > 1:
+        elif __builtin__.len(lily_bedroom.people) > 1:
             return "Must be alone with Lily"
         elif mc.energy > 30:
             return True
@@ -107,7 +107,7 @@ init 1 python:
         description = ""
         for role in the_person.special_role:
             if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role]:
-                if len(description) > 0:
+                if __builtin__.len(description) > 0:
                     description += ", "
                 description += role.role_name
         return description
@@ -115,13 +115,13 @@ init 1 python:
     def SB_fetish_get_employee_percent():
         total_count = 0
         fetish_count = 0
-        if len(mc.business.get_employee_list()) == 0:
+        if __builtin__.len(mc.business.get_employee_list()) == 0:
             return 0
         for person in mc.business.get_employee_list():
             total_count += 1
             if SB_get_fetish_count(person) > 0:
                 fetish_count += 1
-        return int((fetish_count / total_count) * 100)
+        return __builtin__.int((fetish_count / total_count) * 100)
 
 
 #Vaginal Fetish Events#

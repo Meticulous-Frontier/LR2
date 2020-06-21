@@ -24,8 +24,8 @@ init 2 python:
 
     def build_menu_items(elements_list, draw_hearts_for_people = True, person_preview_args = None):
         result = []
-        for count in __builtin__.range(len(elements_list)):
-            if len(elements_list[count]) > 1:
+        for count in __builtin__.range(__builtin__.len(elements_list)):
+            if __builtin__.len(elements_list[count]) > 1:
                 if not isinstance(elements_list[count][1], MenuItem):
                     result.append(build_menu_item_list(elements_list[count], draw_hearts_for_people, person_preview_args))
                 else:
@@ -33,7 +33,7 @@ init 2 python:
         return result
 
     def clear_menu_items_list(menu_items):
-        for count in __builtin__.range(len(menu_items)):
+        for count in __builtin__.range(__builtin__.len(menu_items)):
             for item in [x for x in menu_items[count][1:] if x.display_key]:
                 renpy.stop_predict(item.display_image)
         return
@@ -98,7 +98,7 @@ init 2 python:
             if " (disabled)" in mi.title:
                 mi.title = mi.title.replace(" (disabled)", "")
                 parts = mi.title.split("\n")
-                if len(parts) > 1: # color and size disable reason
+                if __builtin__.len(parts) > 1: # color and size disable reason
                     parts[-1] = "{color=#ff0000}{size=16}" + parts[-1] + "{/color}{/size}"
                     mi.title = "\n".join(parts)
                 mi.is_sensitive = False
@@ -127,7 +127,7 @@ init 2:
             xanchor 0.5
             yanchor 0.0
             for count in __builtin__.range(len(menu_items)):
-                if len(menu_items[count][1:]) > 0:
+                if __builtin__.len(menu_items[count][1:]) > 0:
                     frame:
                         background "gui/LR2_Main_Choice_Box.png"
                         xsize 380

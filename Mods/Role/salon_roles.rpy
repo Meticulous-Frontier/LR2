@@ -842,8 +842,8 @@ label ophelia_is_over_her_ex_label(the_person):
     mc.name "That sounds great. I really appreciate it."
     "From now on, hair cuts and styles are half price. Sounds like there may be more business opportunities with [the_person.title] in the future!"
     python:
-        salon_style_cost = int(30)
-        salon_dye_cost = int(15)
+        salon_style_cost = __builtin__.int(30)
+        salon_dye_cost = __builtin__.int(15)
 
         salon_total_cost = salon_style_cost + salon_dye_cost
         the_person.event_triggers_dict["over_her_ex"] = 1
@@ -944,7 +944,7 @@ label ophelia_choose_service_test_label():
             elif person.sluttiness > 20:
                 if person.obedience > 150:
                     able_person_list.append(person)
-    if len(able_person_list) == 0:
+    if __builtin__.len(able_person_list) == 0:
         "After going through the list, you decide there probably aren't any girls willing to have their pubic hair styled."
         "You should probably work on corrupting some of your employees before you try and send one to [salon_manager.title]."
     #$ able_person_list.insert(0, "Full Body Hairstyle Test")

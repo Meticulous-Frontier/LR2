@@ -72,7 +72,7 @@ label small_talk_person_enhanced(person):
 
             call screen enhanced_main_choice_display(build_menu_items([build_opinion_smalltalk_list(talk_opinion_text, opinion_state)]))
 
-            $ prediction_difference = abs(_return - opinion_state[0])
+            $ prediction_difference = __builtin__.abs(_return - opinion_state[0])
             if prediction_difference == 4: #as wrong as possible
                 person.char "Really? Wow, we really don't agree about [opinion_learned], that's for sure."
             elif prediction_difference == 3:

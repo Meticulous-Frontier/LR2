@@ -30,7 +30,7 @@ init 3301 python:
         return
 
     def strip_club_is_closed():
-        return len(stripclub_strippers) == 0 or (get_strip_club_foreclosed_stage() > 0 and get_strip_club_foreclosed_stage() < 5)
+        return __builtin__.len(stripclub_strippers) == 0 or (get_strip_club_foreclosed_stage() > 0 and get_strip_club_foreclosed_stage() < 5)
 
     def get_strip_club_foreclosed_last_action_day():
         return mc.business.event_triggers_dict.get("foreclosed_last_action_day", 0)

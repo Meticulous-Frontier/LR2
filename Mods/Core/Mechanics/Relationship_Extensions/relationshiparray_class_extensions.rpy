@@ -9,7 +9,7 @@ init 2 python:
     RelationshipArray.get_existing_parents = get_existing_parents
 
     def get_existing_parent_count(self, person): #Returns a count of how many children this character has who are "real" characters, vs just a stat.
-        return len(self.get_existing_parents(person))
+        return __builtin__.len(self.get_existing_parents(person))
 
     RelationshipArray.get_existing_parent_count = get_existing_parent_count
 

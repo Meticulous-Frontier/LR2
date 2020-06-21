@@ -41,7 +41,7 @@ init 5 python:
         HR_tier_talk = -1 # init at -1 so we do the first collect with 0
         HR_employee_list = []
         # build list of girls that qualify for specified tier and max_tier score
-        while len(HR_employee_list) == 0 and HR_tier_talk < get_HR_director_tag("business_HR_coffee_tier", 0) and HR_tier_talk < max_tier:
+        while __builtin__.len(HR_employee_list) == 0 and HR_tier_talk < get_HR_director_tag("business_HR_coffee_tier", 0) and HR_tier_talk < max_tier:
             HR_tier_talk += 1
             HR_employee_list = get_HR_review_list(the_person, HR_tier_talk)
         return (HR_employee_list, HR_tier_talk)
@@ -225,7 +225,7 @@ init 5 python:
     def can_appoint_HR_director_requirement():
         if not mc.business.hr_director:
             if HR_director_creation_policy.is_owned():
-                if len(mc.business.hr_team) > 0:
+                if __builtin__.len(mc.business.hr_team) > 0:
                     return True
         return False
 
@@ -293,7 +293,7 @@ init 5 python:
     def calculate_backfire_odds():
         serum_trait = find_in_list(lambda x: x == mind_control_agent, list_of_traits)
         if serum_trait:
-            return int(serum_trait.base_side_effect_chance / serum_trait.mastery_level)
+            return __builtin__.int(serum_trait.base_side_effect_chance / serum_trait.mastery_level)
         return 100
 
     HR_director_coffee_tier_1_action = Action("Add serum to coffee", HR_director_coffee_tier_1_requirement, "HR_director_coffee_tier_1_label",
@@ -430,7 +430,7 @@ label HR_director_first_monday_label(the_person):
     $ the_person.draw_person(position = "sitting", emotion = "happy")
 
     $ (HR_employee_list, HR_tier_talk) = build_HR_review_list(the_person, 0)
-    if len(HR_employee_list) == 0:
+    if __builtin__.len(HR_employee_list) == 0:
         the_person.char "That sounds great! Alright, I currently have no employees that would benefit from a meeting, perhaps next week."
     else:
         the_person.char "That sounds great! Alright, I actually have a set of possibilities arranged for a meeting today if you would like. Do you want to go over my list of girls?"
@@ -518,7 +518,7 @@ label HR_director_monday_meeting_label(the_person):
     #$ scene_manager.clear_scene()
 
     $ (HR_employee_list, HR_tier_talk) = build_HR_review_list(the_person, get_HR_director_tag("business_HR_coffee_tier", 0))
-    if len(HR_employee_list) == 0:
+    if __builtin__.len(HR_employee_list) == 0:
         the_person.char "Can do! I have currently no girls on my counseling list, perhaps next week."
     else:
         the_person.char "Can do! Did you want to call in a girl for a counseling session this week?"
@@ -555,7 +555,7 @@ label HR_director_monday_meeting_label(the_person):
 
 label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     $ (HR_employee_list, HR_tier_talk) = build_HR_review_list(the_person, max_opinion)
-    if len(HR_employee_list) == 0: #No one qualifies!
+    if __builtin__.len(HR_employee_list) == 0: #No one qualifies!
         the_person.char "Actually, thing are running really smoothly right now, I didn't come across any dossiers this past weekend that drew my attention!"
         #TODO add another option here? Offer to bring in any girl?
         return
@@ -873,7 +873,7 @@ label HR_director_manage_gym_membership(the_person):
                     x.change_happiness(3 * x.get_opinion_score("sports"))
                 if x.get_opinion_score("hiking") > 0:
                     x.change_happiness(1 * x.get_opinion_score("sports"))
-            cost = len(mc.business.get_employee_list()) * 5
+            cost = __builtin__.len(mc.business.get_employee_list()) * 5
     elif get_HR_director_tag("business_HR_gym_tier", 0) == 2:
         python:
             for x in mc.business.get_employee_list():
@@ -886,7 +886,7 @@ label HR_director_manage_gym_membership(the_person):
                     x.change_happiness(5 * x.get_opinion_score("sports"))
                 if x.get_opinion_score("hiking") > 0:
                     x.change_happiness(2 * x.get_opinion_score("sports"))
-            cost = len(mc.business.get_employee_list()) * 15
+            cost = __builtin__.len(mc.business.get_employee_list()) * 15
     the_person.char "Just to let you know, I wrote out the check this morning for this week's employee health program."
     $ mc.business.change_funds(-cost)
     return
@@ -1200,7 +1200,7 @@ label HR_director_mind_control_attempt_label(the_person):
     $ scene_manager = Scene()
     $ backfire_odds = 100
     $ HR_employee_list = build_HR_mc_list(the_person)
-    if len(HR_employee_list) == 0: #No one qualifies!
+    if __builtin__.len(HR_employee_list) == 0: #No one qualifies!
         the_person.char "Actually, things are running really smoothly right now, I'm not sure that would be beneficial?"
         return
 

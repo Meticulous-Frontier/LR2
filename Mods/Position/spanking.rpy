@@ -30,7 +30,7 @@ init 1 python:
     def update_ass_condition(the_person): #update ass condition everytime spanking is initiated to make sure we describe it correctly.
         if the_person.event_triggers_dict.get("day_last_spanked", 0) <= day:
             heal_factor = (day - the_person.event_triggers_dict.get("day_last_spanked", 0)) * 2 #Heal 2 stages per day since last spanking
-            the_person.event_triggers_dict["spank_level"] = max((the_person.event_triggers_dict.get("spank_level", 0) - heal_factor), 0) #heal by 1 per day, minimum of zero
+            the_person.event_triggers_dict["spank_level"] = __builtin__.max((the_person.event_triggers_dict.get("spank_level", 0) - heal_factor), 0) #heal by 1 per day, minimum of zero
         the_person.event_triggers_dict["last_day_spanked"] = day
         return
 

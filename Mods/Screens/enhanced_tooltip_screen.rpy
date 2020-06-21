@@ -8,7 +8,7 @@ init 2:
         default hovered_enough_time = False
         $ tooltip = GetTooltip()
 
-        if tooltip and len(tooltip) > 0:
+        if tooltip and __builtin__.len(tooltip) > 0:
             timer 0.3 action SetScreenVariable("hovered_enough_time",True)
             if hovered_enough_time:
                 $ mouse_xy = renpy.get_mouse_pos()

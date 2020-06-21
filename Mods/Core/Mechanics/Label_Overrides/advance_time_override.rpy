@@ -140,19 +140,19 @@ init 5 python:
         tracker_info = { key:value for (key,value) in crisis_tracker_dict.items() if key in [x.effect for x in active_crisis_list] }
         key_list = [] # sometimes tracker_info is empty, to prevent error only choose from active_excluded_events
         if tracker_info.items():
-            min_value = min(tracker_info.items(), key=lambda x: x[1])[1]
-            average = int(sum(x[1] for x in tracker_info.items())/len(tracker_info.items()))
+            min_value = __builtin__.min(tracker_info.items(), key=lambda x: x[1])[1]
+            average = __builtin__.int(__builtin__.sum(x[1] for x in tracker_info.items())/len(tracker_info.items()))
             key_list = [key for (key, value) in tracker_info.items() if value == min_value]
 
         # add active events from exclusion list to possible events list
-        if len(key_list) == 0 or len(key_list) > len(active_excluded_events):
+        if __builtin__.len(key_list) == 0 or __builtin__.len(key_list) > __builtin__.len(active_excluded_events):
             # when the key_list is getting smaller we are exhausting the possible crisis events
             # if we keep adding the excluded items, they will start to occur more and more frequent (>50%)
             # so we don't add them anymore, until we are back to a more comprehensive list of events
             key_list.extend([x.effect for x in active_excluded_events])
 
         random_crisis = get_random_from_list(key_list)
-        # renpy.say("", "Run Crisis [" + str(len(key_list)) +"]: " + random_crisis)
+        # renpy.say("", "Run Crisis [" + str(__builtin__.len(key_list)) +"]: " + random_crisis)
         if random_crisis in crisis_tracker_dict.keys():
             crisis_tracker_dict[random_crisis] = average + 1     # set to min_value +1 to prevent the event from triggering a lot (its count maybe low due to being disabled)
         return find_in_list(lambda x: x.effect == random_crisis, active_crisis_list + active_excluded_events)
@@ -164,7 +164,7 @@ init 5 python:
                 possible_crisis_list.append(crisis[0]) #Build a list of valid crises from ones that pass their requirement.
 
         return find_next_crisis(possible_crisis_list)
-        #renpy.say("", str(len(possible_crisis_list)) + " - ".join((o[0].name) for o in possible_crisis_list))
+        #renpy.say("", str(__builtin__.len(possible_crisis_list)) + " - ".join((o[0].name) for o in possible_crisis_list))
 
         #return get_random_from_weighted_list(possible_crisis_list)
 
@@ -224,7 +224,7 @@ init 5 python:
                 crisis = get_limited_time_action_for_person(person)
                 if crisis:
                     #renpy.notify("Created event: " + crisis[0].name + " for " + people.name)
-                    if crisis[2] == "on_talk" and len(person.on_talk_event_list) == 0: # prevent multiple on talk events for person
+                    if crisis[2] == "on_talk" and __builtin__.len(person.on_talk_event_list) == 0: # prevent multiple on talk events for person
                         person.on_talk_event_list.append(Limited_Time_Action(crisis[0], crisis[0].event_duration))
                     elif crisis[2] == "on_enter":
                         if not exists_in_room_enter_list(person, crisis[0].effect): # prevent adding the same event twice
@@ -264,7 +264,7 @@ label advance_time_enhanced(no_events = False):
     python:
         #renpy.say("", "advance_time_enhanced -> location: " + mc.location.name + ", time: [time_of_day]") # DEBUG
         count = 0 # NOTE: Count and Max might need to be unique for each label since it carries over.
-        advance_time_max_actions = len(advance_time_action_list) # This list is automatically sorted by priority due to the class properties.
+        advance_time_max_actions = __builtin__.len(advance_time_action_list) # This list is automatically sorted by priority due to the class properties.
         people_to_process = build_people_to_process()
 
     while count < advance_time_max_actions:
@@ -308,7 +308,7 @@ label advance_time_random_crisis_label():
     # "advance_time_random_crisis_label - timeslot [time_of_day]" #DEBUG
     $ crisis = get_crisis_from_crisis_list()
     if crisis:
-        #$ mc.log_event("General [[" + str(len(possible_crisis_list)) + "]: " + crisis.name, "float_text_grey")
+        #$ mc.log_event("General [[" + str(__builtin__.len(possible_crisis_list)) + "]: " + crisis.name, "float_text_grey")
         $ crisis_chance = crisis_base_chance
         $ crisis.call_action()
         if _return == "Advance Time":
@@ -322,11 +322,11 @@ label advance_time_mandatory_crisis_label():
     # "advance_time_mandatory_crisis_label - timeslot [time_of_day]" #DEBUG
     python:
         mandatory_crisis_count = 0
-        mandatory_crisis_max = len(mc.business.mandatory_crises_list)
+        mandatory_crisis_max = __builtin__.len(mc.business.mandatory_crises_list)
         clear_list = []
 
     while mandatory_crisis_count < mandatory_crisis_max: #We need to keep this in a renpy loop, because a return call will always return to the end of an entire python block.
-        if mandatory_crisis_count < len(mc.business.mandatory_crises_list): # extra check to make sure index still exists
+        if mandatory_crisis_count < __builtin__.len(mc.business.mandatory_crises_list): # extra check to make sure index still exists
             $ crisis = mc.business.mandatory_crises_list[mandatory_crisis_count]
             if crisis.is_action_enabled():
                 $ crisis.call_action()
@@ -384,7 +384,7 @@ label advance_time_mandatory_morning_crisis_label():
     #Now we run mandatory morning crises. Nearly identical to normal crises, but these always trigger at the start of the day (ie when you wake up and before you have control of your character.)
     python:
         mandatory_morning_crisis_count = 0
-        mandatory_morning_crisis_max = len(mc.business.mandatory_morning_crises_list)
+        mandatory_morning_crisis_max = __builtin__.len(mc.business.mandatory_morning_crises_list)
         clear_list = []
 
     while mandatory_morning_crisis_count < mandatory_morning_crisis_max: #We need to keep this in a renpy loop, because a return call will always return to the end of an entire python block.
@@ -410,7 +410,7 @@ label advance_time_random_morning_crisis_label():
     # "advance_time_random_morning_crisis_label  - timeslot [time_of_day]" #DEBUG
     $ the_morning_crisis = get_morning_crisis_from_crisis_list()
     if the_morning_crisis:
-        #$ mc.log_event("Morning: [[" + str(len(possible_morning_crises_list)) + "] : " +  the_morning_crisis.name, "float_text_grey")
+        #$ mc.log_event("Morning: [[" + str(__builtin__.len(possible_morning_crises_list)) + "] : " +  the_morning_crisis.name, "float_text_grey")
         $ morning_crisis_chance = morning_crisis_base_chance
         $ the_morning_crisis.call_action()
         if _return == "Advance Time":

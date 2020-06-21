@@ -17,7 +17,7 @@ screen pick_position_screen(the_person, allow_none = True, ignore_taboo = False)
                 viewport:
                     mousewheel True
                     draggable True
-                    if len(list_of_positions) + 1 > 6:
+                    if __builtin__.len(list_of_positions) + 1 > 6:
                         scrollbars "vertical"
                     vbox:
                         for position in list_of_positions:
@@ -40,7 +40,7 @@ screen pick_position_screen(the_person, allow_none = True, ignore_taboo = False)
                                     text_style "serum_text_style"
                                     xfill True
                                     ysize 125
-        if len(non_sex_options) != 0: # Collect any non- position options in a frame below.
+        if __builtin__.len(non_sex_options) != 0: # Collect any non- position options in a frame below.
             frame:
                 #yalign 0.7
                 vbox:
@@ -49,7 +49,7 @@ screen pick_position_screen(the_person, allow_none = True, ignore_taboo = False)
                     viewport:
                         mousewheel True
                         draggable True
-                        if len(non_sex_options) > 1:
+                        if __builtin__.len(non_sex_options) > 1:
                             scrollbars "vertical"
                         vbox:
                             for option in non_sex_options:
@@ -75,7 +75,7 @@ screen pick_round_choice_screen(the_person, option_list, position_choice, ignore
             viewport:
                 mousewheel True
                 draggable True
-                if len(option_list) + 1 > 6:
+                if __builtin__.len(option_list) + 1 > 6:
                     scrollbars "vertical"
                 vbox:
                     for position in option_list:

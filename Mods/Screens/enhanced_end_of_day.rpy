@@ -67,7 +67,7 @@ init 2:
                         text "     " + item style "textbutton_text_style" size 20
 
                     for item in mc.business.counted_message_list:
-                        text "     " + item + " x " + str(int(mc.business.counted_message_list[item])) style "textbutton_text_style" size 20
+                        text "     " + item + " x " + str(__builtin__.int(mc.business.counted_message_list[item])) style "textbutton_text_style" size 20
 
         frame:
             background None

@@ -181,7 +181,7 @@ init -1 python:
         if time_of_day > 2:
             if day%7 == 5:  #Saturday
                 if mc.is_at_work():
-                    if len(get_Sarah_willing_threesome_list()) >= 3: #at least three choices for who to hook up with.
+                    if __builtin__.len(get_Sarah_willing_threesome_list()) >= 3: #at least three choices for who to hook up with.
                         return True
         return False        #Return false while I write the events
 
@@ -910,7 +910,7 @@ label Sarah_get_drinks_label():
     $ del test_outfit
 
     $ scene_manager.update_actor(the_person, position = "stand4")
-    if (len(the_person.outfit.get_upper_ordered()) > 0 or len(the_person.outfit.get_lower_ordered()) > 0):
+    if (len(the_person.outfit.get_upper_ordered()) > 0 or __builtin__.len(the_person.outfit.get_lower_ordered()) > 0):
         "You look at [the_person.title]. Her clothing is soaked and you can practically see through it. She looks cold."
     else:  #She's... naked?
         "Barely clothed, [the_person.title] is shivering from the cold."

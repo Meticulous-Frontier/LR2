@@ -21,7 +21,7 @@ init 2 python:
         if time_of_day > 0 and time_of_day < 4: # only during morning afternoon or evening
             if mc.location in get_mall_locations():
                 strangers, known_people = mall_introduction_get_people_with_status()
-                if len(strangers) > 0 and len(known_people) > 0:
+                if __builtin__.len(strangers) > 0 and __builtin__.len(known_people) > 0:
                     return True
         return False
 
