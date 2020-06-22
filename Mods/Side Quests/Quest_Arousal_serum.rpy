@@ -158,7 +158,7 @@ label quest_arousal_serum_intro_label():
     "Wow, these late night TV commercials are awful. There's no way that stuff is legitimate."
     "... or is it? The work you have been doing is beyond what many people would have considered possible just a few years ago."
     "You decide to look it up. You head to your room and pull up the info on your PC."
-    "The site is gaudy. Lots of claimed reviews call it a miracle druge. Taking a look, it is pretty pricey. Two doses for $100."
+    "The site is gaudy. Lots of claimed reviews call it a miracle drug. Taking a look, it is pretty pricey. Two doses for $100."
     menu:
         "Order it ($100)":
             $ mc.business.change_funds(-100)
@@ -177,7 +177,7 @@ label quest_arousal_serum_receive_drug_label():
     $ HR_temp = mc.business.head_researcher
     "As you are getting ready for bed, [mom.title] knocks on your door. You open it up."
     mom.char "Hey, you got this in the mail today. At first I thought it was junk, but it has your name on it, so I figured you could figure out what to do with it."
-    "She hands you a small manilla envelop."
+    "She hands you a small manila envelop."
     mc.name "Thanks [mom.title]"
     $ renpy.scene("Active")
     "She turns and walks way, closing your door behind her."

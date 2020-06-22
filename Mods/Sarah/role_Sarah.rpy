@@ -1219,7 +1219,7 @@ label Sarah_tits_reveal_label():
     the_person.char "Oh god, you are getting me so hot..."
     "Her knees buckle for a second when you start to play with her nipples. You pinch and roll them in your fingers."
     $ the_person.change_arousal(15)
-    the_person.char "Ah! Stop! God that feels amazing. But theres something else I want to try..."
+    the_person.char "Ah! Stop! God that feels amazing. But there's something else I want to try..."
     mc.name "Oh? What is that?"
     the_person.char "Well, I've tried this a couple times before but to be honest my chest was so small I don't think it was very good for the guy but... I want your cock between my tits!"
     mc.name "That sounds hot. Lets do it!"
