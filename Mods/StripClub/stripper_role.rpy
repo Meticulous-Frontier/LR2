@@ -234,7 +234,7 @@ label stripper_performance_review_label(the_person):
                     if the_report.get("girl orgasms", 0) > 1: #We made her cum multiple times! Congratulations!
                         $ the_person.change_stats(happiness = 10, slut_temp = 5, love = 2)
                         the_person.char "Oh [the_person.mc_title], that was wonderful! I couldn't have asked for a better performance bonus!"
-                    if the_report.get("girl orgasms", 0) == 1:
+                    elif the_report.get("girl orgasms", 0) == 1:
                         $ the_person.change_stats(happiness = 5, slut_temp = 2)
                         the_person.char "Well, that was a good time [the_person.mc_title]. It's a lot more fun than a normal performance bonus, that's for sure!"
                     else:
