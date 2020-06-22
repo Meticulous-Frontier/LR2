@@ -61,7 +61,7 @@ init python: #For now default init. May change later if we know better.
             if isinstance(self, other.__class__):
                 return self.quest_name != other.quest_name
             return True
-          
+
 
     class Quest_Tracker(renpy.store.object):
         def __init__(self):
@@ -97,10 +97,10 @@ init python: #For now default init. May change later if we know better.
                     if quest.start_requirement():
                         able_quest_list.append(quest)
 
-            self.active_quest = get_random_from_list(able_quest_list)                        
+            self.active_quest = get_random_from_list(able_quest_list)
             if not self.active_quest: #No applicable quests available. Reset quest chance.
                 return False
-                
+
             self.active_quest.quest_init()
             self.quest_active = True
             self.quest_start_day = day
@@ -215,6 +215,15 @@ init python: #For now default init. May change later if we know better.
                 start_requirement = quest_essential_oils_start_requirement,
                 quest_cleanup = quest_essential_oils_cleanup)
             quest_director.add_new_quest(quest_essential_oils)
+
+        if not "quest_arousal_serum" in globals():
+            global quest_arousal_serum
+            quest_arousal_serum = Side_Quest(quest_name = "Arousal Serum",
+                quest_init_label = "quest_arousal_serum_init_label",
+                quest_tracker = quest_arousal_serum_tracker,
+                start_requirement = quest_arousal_serum_start_requirement,
+                quest_cleanup = quest_arousal_serum_cleanup)
+            quest_director.add_new_quest(quest_arousal_serum)
         return
 
     def Quest_tracker_update():
