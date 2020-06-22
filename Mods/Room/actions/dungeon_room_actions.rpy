@@ -62,7 +62,7 @@ label dungeon_room_appoint_slave_label():
 
         if person_choice == "Back":
             return # Where to go if you hit "Back"
-        elif person.personality is alpha_personality:
+        elif person_choice.personality is alpha_personality:
             "This girl has an Alpha personality and will never submit into becoming your slave. You could turn her into a bimbo, that would remove her Alpha personality."
         else:
             call dungeon_room_appoint_slave_label_2(person_choice) from dungeon_room_appoint_slave_label_1
