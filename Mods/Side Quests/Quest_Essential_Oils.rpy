@@ -287,6 +287,8 @@ label quest_essential_oils_decision_label(the_person):
     $ renpy.scene("Active")
     #$ add_essential_oil_serum_trait()
     $ list_of_traits.append(essential_oil_trait)
+    # remove events / just wait for invoice if applicable
+    $ quest_essential_oils_cleanup()
     $ HR_temp = mc.business.head_researcher
     if HR_temp == None:
         pass #WE fire the HR, so we don't bother checking in with them.
