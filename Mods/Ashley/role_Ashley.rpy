@@ -147,7 +147,6 @@ init -1 python:
         town_relationships.update_relationship(ashley, stephanie, "Sister")
         town_relationships.update_relationship(nora, ashley, "Friend")
         town_relationships.update_relationship(lily, ashley, "Rival")
-        head_researcher.remove_action("ashley_hire_directed_label")
         return
 
 #Story labels
@@ -232,7 +231,7 @@ label ashley_hire_directed_label(the_person):
         $ the_person.change_happiness(5)
         $ the_person.change_obedience(5)
         the_person.char "Oh! This is great news! I'm sure she'll probably want to get started right away!"
-
+        $ head_researcher.remove_action("ashley_hire_directed_label")
         $ hire_ashley()
 
         "You complete the necessary paperwork and hire [ashley.name], assigning her to the production department."
