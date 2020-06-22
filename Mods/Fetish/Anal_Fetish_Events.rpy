@@ -182,7 +182,7 @@ label SB_fetish_anal_label_non_employee(the_person):
 
     menu:
         "Continue" if mc.energy >= 40:
-            "She quickly takes some of her clothes."
+            "She quickly takes some of her clothes off."
             $ the_person.strip_outfit(exclude_upper = True)
             the_person.char "So, [the_person.mc_title], I don't know why but... I decided recently I really want to try and get better at anal..."
             the_person.char "I went over to the sex shop and bought a new toy... I've been wearing it for a few days now... and I was wondering what you thought?"
