@@ -27,15 +27,11 @@ init 2: # Need to allow for None name roles in this screen as well.
                     $ visible_roles = []
                     $ role_string = "Special Roles: "
                     python:
-                        for role in the_person.special_role:
-                            if not role.hidden:
-                                visible_roles.append(role.role_name)
-
-                        if visible_roles:
-                            role_string += visible_roles[0]
-                            for role in visible_roles[1::]: #Slicing off the first manually let's us use commas correctly.
-                                role_string += ", " + role
+                        for role in [x for x in the_person.special_role if not x.hidden]:
+                            visible_roles.append(role.role_name)
+                            
                     if visible_roles:
+                        $ role_string += ", ".join(visible_roles)
                         text role_string style "menu_text_style" xalign 0.5 yalign 0.5 yanchor 0.5
             hbox:
                 xsize 1750

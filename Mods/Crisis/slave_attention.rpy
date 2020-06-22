@@ -12,7 +12,7 @@ init 3 python:
     def get_unhappy_slave():
         qualified = []
         for person in known_people_in_the_game([mc]):
-            if slave_role in person.special_role and person.sex_record.get("Last Sex Day", 0) > day + 7:
+            if person.has_role(slave_role) and person.sex_record.get("Last Sex Day", 0) > day + 7:
                 qualified.append(person)
         return get_random_from_list(qualified)
 

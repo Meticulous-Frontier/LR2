@@ -122,9 +122,9 @@ init 5 python:
             elif person.has_role(affair_role):
                 person.add_situational_slut("love_modifier", person.love, "I have kept it a secret, but I love you!")
             elif person.has_family_taboo(): #Family now only gains 1/4 (but this now helps offset the taboo penalty)
-                if mother_role in person.special_role:
+                if person.has_role(mother_role):
                     person.add_situational_slut("love_modifier", __builtin__.int(person.love/4), "Even if it's wrong, a mother should do everything she can for her son!")
-                elif sister_role in person.special_role:
+                elif person.has_role(sister_role):
                     person.add_situational_slut("love_modifier", __builtin__.int(person.love/4), "I love my brother, and even if it's wrong I want to be close to him!")
                 else: #Generic family one
                     person.add_situational_slut("love_modifier", __builtin__.int(person.love/4), "I love you, even though we're related!")

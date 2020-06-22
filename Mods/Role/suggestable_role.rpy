@@ -5,7 +5,7 @@
 init 2 python: # Define actions and requirements for the actual mod here.
 
     def influence_opinion_requirement(person): # Shows only if person has been affected by suggestibility serum.
-        if suggestable_role in person.special_role:
+        if person.has_role(suggestable_role):
             return True
         else:
             return False

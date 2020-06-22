@@ -106,9 +106,8 @@ init 2:
                         xsize 220
                         ysize 100
                         vbox:
-                            for role in person.special_role:
-                                if not role.hidden:
-                                    text "       - " + role.role_name style "menu_text_style" size 14
+                            for role in [x for x in person.special_role if not x.hidden]:
+                                text "       - " + role.role_name style "menu_text_style" size 14
 
                 vbox:
                     if person.arousal > 0:

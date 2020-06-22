@@ -138,7 +138,7 @@ label silent_pregnant_transform_announce(start_day, the_person):
     the_person.char "...but, I'm pregnant!"
     mc.name "Congratulations! You look fantastic. You really are glowing."
     $ the_person.change_happiness(10)
-    if employee_role in the_person.special_role:
+    if the_person.has_role(employee_role):
         the_person.char "Thank you! So obviously, when the baby comes, I'll need some time off work..."
         mc.name "Just let me know when the time comes, if you can. We'll make due without you while you are off."
     the_person.char "Thank you!"
@@ -164,7 +164,7 @@ label silent_pregnant_finish_announce(the_person): #TODO: have more variants for
     "You get a call from [the_person.possessive_title]. You answer it."
     mc.name "Hey [the_person.title], what's up?"
 
-    if employee_role in the_person.special_role:
+    if the_person.has_role(employee_role):
         the_person.char "Hi [the_person.mc_title]. I wanted to let you to know that I won't be at work for a few days."
     else:
         the_person.char "Hi [the_person.mc_title], I have some exciting news."
@@ -203,7 +203,7 @@ init 2 python:
         person.on_talk_event_list.append(silent_tit_shrink_one_announcement_action) #And here is where she tells you about those changes
         person.on_talk_event_list.append(silent_tit_shrink_two_announcement_action)
 
-        if silent_pregnant_role in person.special_role:
+        if person.has_role(silent_pregnant_role):
             person.remove(silent_pregnant_role)
         return
 

@@ -70,8 +70,7 @@ label dungeon_room_appoint_slave_label():
 
 label dungeon_room_appoint_slave_label_2(the_person):
 
-    if slave_role not in the_person.special_role: # What happens when you try to appoint them
-
+    if not the_person.has_role(slave_role): # What happens when you try to appoint them
         if the_person.obedience >= 130 and the_person.get_opinion_score("being submissive") > 0:
             "[the_person.possessive_title] seems to be into the idea of serving you."
             $ the_person.call_dialogue("sex_obedience_accept")
