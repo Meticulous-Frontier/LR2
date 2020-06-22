@@ -1,8 +1,16 @@
 ## Stripclub storyline Mod by Corrado
 #  Strippers role definition.
 #  The role is appended to strippers after they start to work for you.
+label update_strip_club_show_requirement(stack):
+    python:
+        strip_club_show_action.requirement = strip_club_show_requirement_enhanced #strip_club_show_action is not defined until we begin the game.
+        execute_hijack_call(stack)
+    return
 
 init 5 python:
+
+    add_label_hijack("normal_start", "update_strip_club_show_requirement")
+    add_label_hijack("after_load", "update_strip_club_show_requirement")
     # override default strip_club show requirement
     def strip_club_show_requirement_enhanced():
         if __builtin__.len(stripclub_strippers) == 0:
@@ -13,8 +21,6 @@ init 5 python:
             return True
 
     # replace requirement on action to prevent CPickle errors
-    strip_club_show_action.requirement = strip_club_show_requirement_enhanced
-
     def strip_club_hire_stripper(person):
         person.add_role(stripper_role)
         # slightly altered schedule for these characters, so it does not interfere with the story-line or work schedule.
@@ -56,7 +62,7 @@ init 5 python:
         profit_base = person.stripper_salary * 2
         tit_modifier = person.get_opinion_score("showing her tits") * 2
         ass_modifier = person.get_opinion_score("showing her ass") * 2
-        
+
         return (profit_base + tit_modifier + ass_modifier + person.charisma) * shifts
 
     def is_strip_club_stripper_requirement(person):
@@ -82,7 +88,7 @@ init 5 python:
     strip_club_stripper_performance_review_action = Action("Review her performance", is_strip_club_stripper_requirement, "stripper_performance_review_label", menu_tooltip = "Review [the_person.title]'s performances on stage.")
 
     stripper_role = Role("Stripper", [strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = False)
-    
+
 label strip_club_hire_employee_label(the_person):
     mc.name "So [the_person.title], are you looking for a job?"
     $ ran_num = renpy.random.randint(0,100)
