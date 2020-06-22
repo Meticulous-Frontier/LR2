@@ -75,6 +75,8 @@ init 1 python:
         return
 
     def quest_essential_oils_start_requirement():
+        if day < 21: # don't start this too soon
+            return False
         if mc.business.head_researcher == None:
             return False
         if quest_essential_oils_find_employee() == None:

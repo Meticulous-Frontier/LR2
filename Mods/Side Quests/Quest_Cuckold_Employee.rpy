@@ -86,6 +86,8 @@ init 1 python:
         return
 
     def quest_cuckold_employee_start_requirement():
+        if day < 50: # don't start this until we have a better employee base
+            return False
         if persistent.pregnancy_pref > 0:
             if quest_cuckold_employee_person_find_employee():
                 return True

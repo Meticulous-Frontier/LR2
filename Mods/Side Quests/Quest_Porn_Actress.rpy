@@ -86,6 +86,8 @@ init 1 python:
 
 
     def quest_porn_actress_start_requirement():
+        if day < 50: # don't start this until we have a better employee base
+            return False
         if quest_porn_actress_find_employee():
             return True
         return False
