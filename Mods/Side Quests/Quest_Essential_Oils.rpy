@@ -294,7 +294,7 @@ label quest_essential_oils_decision_label(the_person):
     "You step away from the kiosk. You give your head researcher a call."
     HR_temp.char "Hello?"
     mc.name "Hey, I've procured an order of essential oils. They should be delivered sometime today."
-    HR_temp.char "Okay. If you to research a new serum that uses them, let me know, we should be able to start developing one ASAP."
+    HR_temp.char "Okay. If you want to research a new serum that uses them, let me know, we should be able to start developing one ASAP."
     "You hang up the phone. You now have access to the Essential Oils serum trait. It has a high value, but no positive effects and high chance of a negative side effect."
     $ quest_essential_oils.quest_event_dict.clear()
     return
