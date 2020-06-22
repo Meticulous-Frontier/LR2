@@ -51,8 +51,8 @@ label dirty_laundry_action_label:
     "You are just drifting off to sleep when you suddenly you remember. You don't have any clean clothes for tomorrow!"
     "You look a the clock. It is already pretty late. You guess that your family is already asleep, so you grab your laundry and take it to the laundry room just wearing your boxers."
 
-    $ ran_num = renpy.random.randint(0, 1)
-    if ran_num == 0:
+    $ ran_num = renpy.random.randint(0, 3)
+    if ran_num < 3:
         call dirty_laundry_wash_your_clothes(the_person) from call_dirty_laundry_wash_your_clothes
     else:
         call dirty_laundry_stuck_in_dryer(the_person) from call_dirty_laundry_stuck_in_dryer
