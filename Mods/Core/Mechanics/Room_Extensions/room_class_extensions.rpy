@@ -148,7 +148,7 @@ init -1 python:
     # Remove an action from if present
     def remove_action(self, act):
         if isinstance(act, basestring):
-            found = find_in_list(lambda x: x.effect == effect, self.actions)
+            found = find_in_list(lambda x: x.effect == act, self.actions)
             if found:
                 self.actions.remove(found)
 
