@@ -262,7 +262,7 @@ label strip_ask_SB_anal_cowgirl(the_girl, the_clothing, the_location, the_object
 label orgasm_SB_anal_cowgirl(the_girl, the_location, the_object):
     "[the_girl.possessive_title] works her hips faster and her breathing grows heavier."
     $ the_girl.call_dialogue("climax_responses_anal")
-    the_girl.char "With one last gasp she collapses down against you. Her thighs quiver as she climaxes. Her velvet smooth ass quivers around your erection as she cums."
+    "With one last gasp she collapses down against you. Her thighs quiver as she climaxes. Her velvet smooth ass quivers around your erection as she cums."
     "After a second [the_girl.possessive_title] regains control of herself. Her breath is warm against your ear as she whispers to you."
     if the_girl.has_role(anal_fetish_role):
         the_girl.char "Everytime you're in my ass, it's like I just can't stop cumming..."
