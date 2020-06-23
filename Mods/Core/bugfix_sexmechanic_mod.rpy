@@ -588,7 +588,7 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
     if willing == 1 and (the_position.skill_tag == "Vaginal" or the_position.skill_tag == "Anal") and not mc.condom: #We might need a condom, which means she might say no. TODO: Add an option to pull _off_ a condom while having sex.
         if not ask_for_condom:
             $ ask_for_condom = True
-            if the_person.effective_sluttiness() < the_person.get_no_condom_threshold() + 50:
+            if the_person.effective_sluttiness("condomless_sex") < the_person.get_no_condom_threshold() + 50:
                 # she is not slutty enough and we have the condom dialog
                 call condom_ask_enhanced(the_person) from _call_condom_ask_bugfix
                 $ willing = _return
@@ -614,8 +614,13 @@ label condom_ask_enhanced(the_person):
             "Put on a condom":
                 "You pull a condom out of your wallet and tear open the package."
                 "[the_person.title] takes a hold of the condom in your hand."
+                if the_person.is_pregnant() and the_person.knows_pregnant():
+                    the_person.char "I'm already pregnant. It's a bit late for that, isn't it?"
+                elif the_person.on_birth_control:
+                    the_person.char "I'm on the pill so we really don't need one of those." # even if she is or not - she'll say it
+                else:
+                    the_person.char "You don't really need that thing, do you?"
                 the_person.char "I want your cum inside me and this is going to stop that."
-                the_person.char "You don't really need that, do you?"
                 menu:
                     "Insist on condom":
                         mc.name "I think a condom is a good idea."
@@ -632,7 +637,7 @@ label condom_ask_enhanced(the_person):
                                     return 0
                         else:
                             the_person.char "OK."
-                            $ mc.condom = True
+                            call put_on_condom_routine(the_person) from _call_put_on_condom_routine_8
                     "Fuck her raw":
                         return 1
             "Don't":
@@ -644,6 +649,8 @@ label condom_ask_enhanced(the_person):
             the_person.char "That means 'safety first' - always."
             the_person.char "We're going to have to use one of these."
             "She gets out a condom."
+            if the_person.is_pregnant() and the_person.knows_pregnant():
+                the_person.char "Me being pregnant doesn't change that."
             the_person.char "But don't you worry."
             the_person.char "You're going to feel EVERY thing we do."
             menu:
@@ -655,31 +662,44 @@ label condom_ask_enhanced(the_person):
                     mc.name "If it's that important to you let's just do something else."
                     return 0
 
-
-        elif the_person.sex_record.get("Vaginal Creampies", 0) < 5:
+        elif the_person.sex_record.get("Vaginal Creampies", 0) < 5 and the_person.sex_record.get("Anal Creampies", 0) < 5:
             the_person.char "Normally we would have to use one of these."
             "She gets out a condom."
-            the_person.char "But maybe not. What do you think?"
+            if the_person.is_pregnant() and the_person.knows_pregnant():
+                the_person.char "Would you like to fuck this pregnant whore without one?"
+            else:
+                the_person.char "But maybe not. What do you think?"
             menu:
                 "Condom":
+                    mc.name "Let's cover this bad boy up."
                     call put_on_condom_routine(the_person) from _call_put_on_condom_routine_2
 
                 "No condom":
+                    mc.name "I like fucking you like nature intended."
                     if the_person.get_opinion_score("bareback sex") > 0:
                         the_person.char "Good choice. I hate those things but I have to use them."
-                    if the_person.get_opinion_score("creampies") < 0:
+                    if the_person.get_opinion_score("creampies") < 0 or the_person.get_opinion_score("anal creampies") < 0 or not the_person.on_birth_control:
                         the_person.char "Just make sure to pull out when you cum, okay?"
+                    if not the_person.on_birth_control:
+                        the_person.char "I'm not using any birth control at the moment."
 
+                "[the_person.title] smiles at you."
 
         else:
             the_person.char "I know you like to do me bare."
-            the_person.char "So maybe no condom today?"
+            if the_person.is_pregnant() and the_person.knows_pregnant():
+                the_person.char "Would you like to shower my baby with your cum?"
+            else:
+                the_person.char "So maybe no condom today?"
             menu:
                 "Agree no condom":
                     if the_person.get_opinion_score("bareback sex") > 0:
                         the_person.char "Good choice. I hate those things but I have to use them."
-                    if the_person.get_opinion_score("creampies") < 0:
+                    if the_person.get_opinion_score("creampies") < 0 or the_person.get_opinion_score("anal creampies") < 0 or not the_person.on_birth_control:
                         the_person.char "Just make sure to pull out when you cum, okay?"
+                    if not the_person.on_birth_control:
+                        the_person.char "I'm not using any birth control at the moment."
+
                     "[the_person.title] smiles at you."
                 "Use condom":
                     mc.name "I still think that it's good idea."
@@ -690,7 +710,12 @@ label condom_ask_enhanced(the_person):
     elif the_person.effective_sluttiness() < condom_threshold:
         # they demand you put on a condom.
         #TODO: Make this dialogue personality based
-        if the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0:
+        if the_person.is_pregnant() and the_person.knows_pregnant():
+            if the_person.get_opinion_score("bareback sex") < 0:
+                the_person.char "You can't get me {i}more{/i} pregnant, but I really don't like bare sex."
+            else:
+                the_person.char "Although i'm pregnant, I would like you to wear a condom anyway."
+        elif the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("anal creampies") > 0:
             the_person.char "I hate to say it, but you really should wear a condom."
         else:
             the_person.char "Do you have a condom? You're going to have to put one on."
@@ -709,7 +734,12 @@ label condom_ask_enhanced(the_person):
 
     elif the_person.effective_sluttiness() < condom_threshold + 20:
         # They suggest you put on a condom.
-        if the_person.get_opinion_score("creampies") > 0 and the_person.get_opinion_score("bareback sex") > 0: # likes everything a condom stops
+        if the_person.is_pregnant() and the_person.knows_pregnant():
+            if the_person.get_opinion_score("bareback sex") < 0:
+                the_person.char "You can't get me {i}more{/i} pregnant, but I don't like bare sex. I think that you should put on a condom."
+            else:
+                the_person.char "There's not much point in a condom now that i'm pregnant."
+        elif the_person.get_opinion_score("creampies") > 0 and the_person.get_opinion_score("bareback sex") > 0: # likes everything a condom stops
             $ the_person.discover_opinion("creampies")
             $ the_person.discover_opinion("bareback sex")
             the_person.char "We should use a condom, though I don't really see why."
@@ -759,12 +789,30 @@ label condom_ask_enhanced(the_person):
                                         mc.name "If it's that important to you let's just do something else."
                                         return 0
                             else:
-                                the_person.char "Fine, just make it quick!"
-                                "[the_person.title] watches impatiently while you roll the condom on."
-                                $ mc.condom = True
+                                the_person.char "Fine, lets make this quick!"
+
+                                call put_on_condom_routine(the_person) from _call_put_on_condom_routine_9
+
                         "Relent":
                             mc.name "I suppose not."
                             the_person.char "Thanks, [the_person.mc_title]."
+
+                elif the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("anal creampies") > 0:
+                    if the_person.is_pregnant() and the_person.knows_pregnant():
+                        the_person.char "Remember that I'm pregnant, do we really need one of those now?"
+                    elif the_person.on_birth_control:
+                        the_person.char "I'm on the pill, do we really need one of those?"
+                    else:
+                        the_person.char "Really? I don't like using a condom."
+                    menu:
+                        "Insist on condom":
+                            mc.name "I think a condom is a good idea."
+                            call put_on_condom_routine(the_person) from _call_put_on_condom_routine_7
+
+                        "Relent":
+                            mc.name "I suppose not."
+                            the_person.char "Thanks, [the_person.mc_title]."
+
                 else:
                     call put_on_condom_routine(the_person) from _call_put_on_condom_routine_6
 
@@ -772,11 +820,14 @@ label condom_ask_enhanced(the_person):
                 if the_person.has_taboo("condomless_sex"):
                     $ the_person.call_dialogue("condomless_sex_taboo_break")
                 else:
-                    if the_person.on_birth_control:
-                        the_person.char "Okay. I'm on birth control, so it should be fine."
+                    if the_person.get_opinion_score("bareback sex") > 0:
+                        the_person.char "Tell me about it, nothing beats skin on skin."
                     else:
-                        the_person.char "Fine, but you {i}really{/i} need to pull out this time. We shouldn't be taking risks like that."
-
+                        the_person.char "I'm not a big fan of bare sex, but if you like it that way."
+                    if the_person.get_opinion_score("creampies") < 0 or the_person.get_opinion_score("anal creampies") < 0 or not the_person.on_birth_control:
+                        the_person.char "Just make sure to pull out when you cum, okay?"
+                    if not the_person.on_birth_control:
+                        the_person.char "I'm not using any birth control at the moment."
 
     if not mc.condom:
         $ the_person.break_taboo("condomless_sex")
@@ -790,7 +841,7 @@ label put_on_condom_routine(the_person):
         "She starts bobbing up and down on your cock."
         "As she goes down on your dick she unrolls the condom onto it with her mouth."
         if the_person.get_opinion_score("being submissive") > 0:
-            "She keeps going to the very base of your cock, deepthroating you and entirely covering your cock."
+            "She keeps going to the very base of your cock, deep-throating you and entirely covering your cock."
         else:
             "Once she has rolled on about two thirds of the condom she brings her head back up and rolls the rest on with her hand."
     elif the_person.get_opinion_score("giving handjobs") > 0:
@@ -798,12 +849,12 @@ label put_on_condom_routine(the_person):
         the_person.char "Let me help with that."
         "[the_person.title] takes the condom out of your hand."
         "She holds it at the top of your cock with one hand as she strokes further and further with the other hand, rolling the condom down onto it."
-    elif the_person.get_opinion_score("bareback sex") < 0: # dislikes everything a condom stops
+    elif the_person.get_opinion_score("bareback sex") < 0: # condoms are good
         if the_person.get_opinion_score("taking control") > 0:
             the_person.char "Good choice."
             "You roll the condom onto your cock as [the_person.title] watches eagerly."
         else:
-            "[the_person.title] watches impatiently while you roll the condom on."
+            "[the_person.title] watches eagerly while you roll the condom on."
     elif the_person.get_opinion_score("bareback sex") > 0:
         "You pull out a condom from your wallet and rip open the package. [the_person.title] watches disappointedly while you slide it on."
     else:

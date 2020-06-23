@@ -77,14 +77,14 @@ init 1 python:
         return
 
     def add_cum_fetish_role_based_on_cum(person):
-        if person.outfit.has_mouth_cum():
+        if person.has_mouth_cum():
             #You came in her mouth! She now fetishes getting cum inside
             #"Note, cum in mouth detected. Comment this later"
             person.max_opinion_score("drinking cum")
             person.max_opinion_score("creampies")
             if person.add_role(cum_internal_role):
                 add_cum_slut_collar_to_base_outfit(person)
-        if person.outfit.has_face_cum():
+        if person.has_face_cum():
             #You came on her face! Now she fetishes facials and getting cum on her.
             #"Note, cum on face detected. Comment this later"
             person.max_opinion_score("cum facials")

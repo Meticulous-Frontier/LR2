@@ -60,17 +60,17 @@ init 1 python:
         else:
             porn_score += 4
         cum_score = 0   #Max three points based on cum shots.
-        if the_person.outfit.has_ass_cum():
+        if the_person.has_ass_cum():
             cum_score += 1
-        if the_person.outfit.has_mouth_cum():
+        if the_person.has_mouth_cum():
             cum_score += 1
-        if the_person.outfit.has_tits_cum():
+        if the_person.has_tits_cum():
             cum_score += 1
-        if the_person.outfit.has_stomach_cum():
+        if the_person.has_stomach_cum():
             cum_score += 1
-        if the_person.outfit.has_face_cum():
+        if the_person.has_face_cum():
             cum_score += 1
-        if the_person.outfit.has_creampie_cum():
+        if the_person.has_creampie_cum():
             cum_score += 1
         if cum_score > 3:
             cum_score = 3

@@ -2145,7 +2145,7 @@ label Sarah_ask_for_baby_label():
             call Sarah_fertile_period_start_label() from sarah_initial_fertile_period_start_01
             #TODO create mandatory event for starting fertility period. Stores creampies before fertility period. Then second mandatory event at the end of the fertility period determines if pregnant based on # of creampies and RNG
             call fuck_person(the_person, start_position = missionary, start_object = bedroom.get_object_with_name("bed"), skip_intro = False, girl_in_charge = False, position_locked = True) from _sarah_ask_for_baby_01
-            if the_person.outfit.has_creampie_cum():
+            if the_person.has_creampie_cum():
                 the_person.char "Oh my god... we actually did it..."
                 "She grabs an extra pillow and puts it under her butt so her hips are elevated."
                 the_person.char "I'm just going to lay her like this for a bit, you know. Keep that seed nice and deep."

@@ -1,8 +1,4 @@
 init 2 python:
-    SB_STARBUCK_INTRO_COMPLETE = False
-    SB_SHOP_STAGE_ONE_DAY = 9999
-    SB_SHOP_STAGE_TWO_DAY = 9999
-
     #starbuck ACTIONS#
     starbuck_vaginal_skillup = Action("Ask about temporarily improving vaginal skill", starbuck_vaginal_skillup_requirement, "starbuck_vaginal_skillup_label")
     starbuck_anal_skillup = Action("Ask about temporarily improving anal skill", starbuck_anal_skillup_requirement, "starbuck_anal_skillup_label")
@@ -148,7 +144,7 @@ init -1 python:
 
     def starbuck_sex_store_investment_two_requirement(the_person):
         if the_person.shop_progress_stage == 1:
-            if (SB_SHOP_STAGE_ONE_DAY + 7) < day:
+            if (the_person.event_triggers_dict.get("shop_stage_one_day", 9999) + 7) < day:
                 if mc.business.funds >= 5000:
                     return True
                 else:
@@ -158,7 +154,7 @@ init -1 python:
 
     def starbuck_sex_store_investment_three_requirement(the_person):
         if the_person.shop_progress_stage == 2:
-            if (SB_SHOP_STAGE_TWO_DAY + 7) < day:
+            if (the_person.event_triggers_dict.get("shop_stage_two_day", 9999) + 7) < day:
                 if mc.business.funds >= 15000:
                     return True
                 else:
@@ -479,7 +475,7 @@ label starbuck_sex_store_investment_one_label(the_person):
             $ starbuck.shop_stage_one_investment_total += 1000
             $ starbuck.shop_progress_stage = 1
             $ starbuck.shop_investment_rate = 1.0
-            $ SB_SHOP_STAGE_ONE_DAY = day
+            $ starbuck.event_triggers_dict["shop_stage_one_day"] = day
         "Reconsider":
             "You decide you need more time to consider the investment."
             mc.name "Sorry, [the_person.title], I haven't made up my mind yet. Thanks for the info though, I'll be back when I've reconsidered."
@@ -518,7 +514,7 @@ label starbuck_sex_store_investment_two_label(the_person):
             $ starbuck.shop_stage_two_investment_total += 5000
             $ starbuck.shop_progress_stage = 2
             "She is so excited, you can tell already, this is an investment that is going to pay off for you... one way or another!"
-            $ SB_SHOP_STAGE_TWO_DAY = day
+            $ starbuck.event_triggers_dict["shop_stage_two_day"] = day
         "Reconsider":
             "You decide you need more time to consider the investment."
             mc.name "Sorry, [the_person.title], I haven't made up my mind yet. Thanks for the info though, I'll be back when I've reconsidered."
@@ -1827,10 +1823,10 @@ label starbuck_intro():
     $ the_person = starbuck
 
     $ the_person.draw_person(emotion = "happy")
-    if not SB_STARBUCK_INTRO_COMPLETE:
+    if not the_person.event_triggers_dict.get("starbuck_intro_complete", False):
         "You enter the sex shop. A beautiful woman comes up to you and begins to introduce herself."
         $ the_person.draw_person(position = "stand2", emotion = "happy")
-        $ SB_STARBUCK_INTRO_COMPLETE = True
+        $ the_person.event_triggers_dict["starbuck_intro_complete"] = True
         the_person.char "Hello there sir! Welcome to Starbuck's Sex Shop!"
 
         # uses parts of the in-game introduction sequence tailored to SB

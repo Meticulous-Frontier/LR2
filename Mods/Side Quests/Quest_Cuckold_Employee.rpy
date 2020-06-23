@@ -325,7 +325,7 @@ label quest_cuckold_employee_decision_label():
     $ the_person.strip_outfit()
     the_person.char "Alright [the_person.mc_title]. This is it. Time to put a baby in me!"
     call fuck_person(the_person, start_position = breeding_missionary, private= True, position_locked = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_attempt_1
-    if the_person.outfit.has_creampie_cum():
+    if the_person.has_creampie_cum():
         the_person.char "Oh god, I can feel it inside me! We really did it."
         $ the_person.change_stats(happiness = 10, obedience = 10, love = 5)
         the_person.char "There's so much, god I have such a good bull."
@@ -392,7 +392,7 @@ label quest_cuckold_employee_rethink_decision_label():
     $ the_person.strip_outfit()
     the_person.char "Alright [the_person.mc_title]. This is it. Time to put a baby in me!"
     call fuck_person(the_person, start_position = breeding_missionary, private= True, position_locked = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_attempt_3
-    if the_person.outfit.has_creampie_cum():
+    if the_person.has_creampie_cum():
         the_person.char "Oh god, I can feel it inside me! We really did it."
         $ the_person.change_stats(happiness = 10, obedience = 10, love = 5, slut_temp = 5)
         the_person.char "There's so much, god I have such a good bull."
@@ -456,7 +456,7 @@ label quest_cuckold_employee_breeding_session_label(the_person):
     mc.name "I'm gonna fuck you on my desk again. Tell your bull how much you want it."
     the_person.char "Oh god please! I want you to fuck me over and over until my belly is popping with your seed!"
     call fuck_person(the_person, start_position = breeding_missionary, private= True, position_locked = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_attempt_2
-    if the_person.outfit.has_creampie_cum():
+    if the_person.has_creampie_cum():
         the_person.char "Oh god, every risky load feels even better than the last..."
         $ the_person.change_stats(love = 10, happiness = 10, obedience = 10)
         "You gently rub her stomach."
@@ -655,7 +655,7 @@ label quest_cuckold_employee_knocked_up_label():
     "Her ass in position, you quickly get her ready."
     $ the_person.strip_outfit( exclude_upper = True)
     call fuck_person(the_person, start_position = doggy, private = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_victory_lap_01
-    if the_person.outfit.has_creampie_cum():
+    if the_person.has_creampie_cum():
         the_person.char "Sweet jesus, no wonder you knocked me up. I'm so full of your cum, its amazing..."
     "After you both recover, you carefully leave your office. Sounds like you have your very own breeding stock available from now on!"
     "It's going to be amazing to watch her belly swell with your seed."
@@ -684,7 +684,7 @@ init 1301 python:
 
 label breeding_stock_greetings(the_person):
     $ update_ass_condition(the_person)
-    if the_person.outfit.has_creampie_cum():
+    if the_person.has_creampie_cum():
 
         the_person.char "Hi [the_person.mc_title]!"
         "She lowers her voice to a whisper."

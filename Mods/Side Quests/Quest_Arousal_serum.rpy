@@ -158,7 +158,6 @@ label quest_arousal_serum_intro_label():
 
 label quest_arousal_serum_receive_drug_label():
     $ mom.draw_person()
-    $ HR_temp = mc.business.head_researcher
     "As you are getting ready for bed, [mom.title] knocks on your door. You open it up."
     mom.char "Hey, you got this in the mail today. At first I thought it was junk, but it has your name on it, so I figured you could figure out what to do with it."
     "She hands you a small manila envelop."
@@ -168,10 +167,10 @@ label quest_arousal_serum_receive_drug_label():
     "You open up the package. Its the two pills you ordered. The highly acclaimed Female Viagra."
     "You note on the package an expiration date. Holy hell, this stuff expires in a week?"
     "Hmm... what to do with this? With two doses, you figure you could test one dose, and if it works, use the second one to try and reverse engineer the drug."
-    if HR_temp == None:
+    if mc.business.head_researcher == None:
         "If only you had a head researcher... Well, if you want to this stuff, you should make sure you appoint a new one."
     else:
-        "Your head researcher, [HR_temp.title], is the obvious choice for who to give it to. And if it turns out to work, she could use the other one to analyze it."
+        "Your head researcher, [mc.business.head_researcher.title], is the obvious choice for who to give it to. And if it turns out to work, she could use the other one to analyze it."
 
     $ quest_arousal_serum.quest_event_dict["expiration_day"] = day + 7
     $ quest_arousal_serum.set_quest_flag(21)
