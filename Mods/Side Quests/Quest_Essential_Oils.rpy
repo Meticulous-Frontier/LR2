@@ -289,14 +289,13 @@ label quest_essential_oils_decision_label(the_person):
     $ list_of_traits.append(essential_oil_trait)
     # remove events / just wait for invoice if applicable
     $ quest_essential_oils_cleanup()
-    $ HR_temp = mc.business.head_researcher
-    if HR_temp == None:
+    if mc.business.head_researcher == None:
         pass #WE fire the HR, so we don't bother checking in with them.
         return
     "You step away from the kiosk. You give your head researcher a call."
-    HR_temp.char "Hello?"
+    mc.business.head_researcher.char "Hello?"
     mc.name "Hey, I've procured an order of essential oils. They should be delivered sometime today."
-    HR_temp.char "Okay. If you want to research a new serum that uses them, let me know, we should be able to start developing one ASAP."
+    mc.business.head_researcher.char "Okay. If you want to research a new serum that uses them, let me know, we should be able to start developing one ASAP."
     "You hang up the phone. You now have access to the Essential Oils serum trait. It has a high value, but no positive effects and high chance of a negative side effect."
     $ quest_essential_oils.quest_event_dict.clear()
     return
