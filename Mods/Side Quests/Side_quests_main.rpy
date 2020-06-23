@@ -35,6 +35,11 @@ init python: #For now default init. May change later if we know better.
         def quest_init(self):
             renpy.call(self.quest_init_label)
 
+        def quest_completed(self):
+            self.quest_complete = True
+            self.quest_cleanup()
+            return
+
         #################################################
         # Custom Compare Functions For Side_Quest Class #
         #################################################
@@ -154,7 +159,7 @@ init python: #For now default init. May change later if we know better.
             return
 
         def attempt_force_quest(self, quest_name = None, override_active = False):  #Use this command in the console to attempt to for a new quest. optional param to force a specific quest for debug purpuses.
-            if self.active_quest == None or override_action:
+            if self.active_quest == None or override_active:
                 if quest_name == None:
                     return self.start_new_quest()
 
@@ -168,6 +173,12 @@ init python: #For now default init. May change later if we know better.
                             self.quest_start_day = day
                             return True
             return "Unable to force quest"
+
+        def purge_active_quest(self):  #Use this to attempt to clean out an active quest in case it gets buggy during reload
+            if self.active_quest:
+                self.active_quest.set_quest_flag(0)
+                self.active_quest.quest_cleanup()
+                self.active_quest = false
 
     def Quest_tracker_init():
         global quest_director
