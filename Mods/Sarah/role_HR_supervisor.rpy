@@ -222,6 +222,15 @@ init 5 python:
             return True
         return False
 
+    def HR_director_calculate_eff(person):
+        HR_dir_factor = 0
+        if mc.business.hr_director:
+            HR_dir_factor = ((person.charisma * 2 ) + person.hr_skill)   #Charisma + HR skill
+            #TODO make events later on that factor this to be better
+        HR_dir_factor += get_HR_director_tag("business_HR_eff_bonus")
+        mc.business.effectiveness_cap = (100 + HR_dir_factor)   #100% base effectiveness
+        return
+
     def can_appoint_HR_director_requirement():
         if not mc.business.hr_director:
             if HR_director_creation_policy.is_owned():
@@ -419,7 +428,7 @@ label HR_director_first_monday_label(the_person):
     the_person.char "So far, aside from personnel, I've noted a few different areas where I think I can improve the efficiency of the business."
     the_person.char "With your approval, I can go ahead and get those started. Are you okay with that?"
     mc.name "Yes, definitely. Efficiency is always a concern at a small business like this."
-    call HR_director_calculate_eff(the_person) from HR_director_first_monday_1
+    $ HR_director_calculate_eff(the_person)
     the_person.char "Right, aside from that, I have an idea for a new program. Basically, I noted in the dossiers that there are several employees here who either don't enjoy what they are doing, or are unhappy for some other, unknown reason..."
     the_person.char "My proposal is to start a program where, every weekend I'll go through all the latest employee info and compile a list of girls most at risk at quitting."
     the_person.char "We can call one in, and see if we can have a productive discussion on their reservations. Maybe over time we can even change their opinions on work tasks they don't currently enjoy."
@@ -512,7 +521,7 @@ label HR_director_monday_meeting_label(the_person):
                 the_person.char "Ahh, damn. Okay, give me a second and we can get started here."
                 "She reaches down to her backpack and begins to pull out her notes from the previous week."
     the_person.char "Here are my plans for the week. I think I have a few tweaks to efficiency I can make, but overall I wouldn't expect to see a big change company wide."
-    call HR_director_calculate_eff(the_person) from HR_director_monday_meeting_1
+    $ HR_director_calculate_eff(the_person)
     "She hands you a few documents. You check them over."
     mc.name "Looks good. Go ahead and continue with those plans."
     #$ scene_manager.clear_scene()
@@ -911,15 +920,6 @@ label HR_director_coffee_tier_2_label(the_person):
     $ set_HR_director_tag("business_HR_coffee_tier", 2)
     return
 
-label HR_director_calculate_eff(the_person):
-    $ HR_dir_factor = 0
-    if mc.business.hr_director:
-        $ HR_dir_factor = ((the_person.charisma * 2 ) + the_person.hr_skill)   #Charisma + HR skill
-        #TODO make events later on that factor this to be better
-    $ HR_dir_factor += get_HR_director_tag("business_HR_eff_bonus")
-    $ mc.business.effectiveness_cap = (100 + HR_dir_factor)   #100% base effectiveness
-    return
-
 label HR_director_gym_membership_tier_1_label(the_person):
     mc.name "I've been thinking about your proposal to sponsor a company gym membership. I'm giving you approval to set it up."
     the_person.char "Sounds good sir! I'll have that set up and ready to begin next week."
@@ -1198,7 +1198,6 @@ label HR_director_mind_control_label(the_person):
 
 label HR_director_mind_control_attempt_label(the_person):
     $ scene_manager = Scene()
-    $ backfire_odds = 100
     $ HR_employee_list = build_HR_mc_list(the_person)
     if __builtin__.len(HR_employee_list) == 0: #No one qualifies!
         the_person.char "Actually, things are running really smoothly right now, I'm not sure that would be beneficial?"
