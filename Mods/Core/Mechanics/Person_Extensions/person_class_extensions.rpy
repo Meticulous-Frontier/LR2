@@ -1190,6 +1190,36 @@ init -1 python:
 
     Person.panties_covered = person_panties_covered
 
+    def person_has_mouth_cum(self):
+        return self.outfit.has_mouth_cum():
+
+    Person.has_mouth_cum = person_has_mouth_cum
+
+    def person_has_tits_cum(self):
+        return self.outfit.has_tits_cum():
+
+    Person.has_tits_cum = person_has_tits_cum
+
+    def person_has_stomach_cum(self):
+        return self.outfit.has_stomach_cum():
+
+    Person.has_stomach_cum = person_has_stomach_cum
+
+    def person_has_face_cum(self):
+        return self.outfit.has_face_cum():
+
+    Person.has_face_cum = person_has_face_cum
+
+    def person_has_ass_cum(self):
+        return self.outfit.has_ass_cum():
+
+    Person.has_ass_cum = person_has_ass_cum
+
+    def person_has_creampie_cum(self):
+        return self.outfit.has_creampie_cum():
+
+    Person.has_creampie_cum =person_has_creampie_cum
+
 ##########################################
 # Unique crisis addition functions       #
 ##########################################
