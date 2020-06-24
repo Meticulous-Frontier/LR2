@@ -59,14 +59,20 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
                 if the_girl.get_opinion_score("creampies") > 0:         #She likes creampies...
                     the_girl.char "Wait... that's... you took the condom off, didn't you? Oh fuck that's why it felt so good!"
                     $ the_girl.discover_opinion("creampies")
-                    the_girl.char "Oh god that's so hot. You could knock me up you know? Next time at least warn me, so I can enjoy it too!"
+                    if the_girl.on_birth_control:
+                        the_girl.char "Oh god that's so hot. I love feeling cum deep inside me."
+                    else:
+                        the_girl.char "Oh god that's so hot. You could knock me up you know? Next time be more careful!"
                     $ the_girl.change_happiness(2)
                     $ the_girl.change_obedience(3)
                 elif the_girl.sluttiness > 80:                          #She is slutty enough she doesn't mind the cream filling
                     the_girl.char "Oh my god you took the condom off? You know you can cum inside me anytime you want, no need to be stealthy about it!"
                     $ the_girl.change_obedience(3)
                 else:                                                   #She gets pissed
-                    the_girl.char "What the FUCK? You took the condom off? And then came inside me!?! I could get pregnant asshole!"
+                    if the_girl.on_birth_control:
+                        the_girl.char "What the FUCK? You took the condom off? And then came inside me!?! You asshole!"
+                    else:
+                        the_girl.char "What the FUCK? You took the condom off? And then came inside me!?! I could get pregnant asshole!"
                     $ the_girl.change_happiness(-5)
                     $ the_girl.change_obedience(3)
                     $ the_girl.change_love(-5)          #She loses trust
@@ -93,7 +99,7 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
                 $ the_girl.call_dialogue("cum_vagina")
                 $ the_girl.cum_in_vagina()
                 $ doggy.redraw_scene(the_girl)
-                if the_girl.sluttiness > 80:
+                if the_girl.on_birth_control:
                     the_girl.char "Oh wow, there's so much of it..."
                 else:
                     the_girl.char "Oh fuck, what if I get pregnant? Ah..."
