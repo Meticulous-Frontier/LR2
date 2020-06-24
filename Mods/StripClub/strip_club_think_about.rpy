@@ -212,7 +212,7 @@ label starbuck_celebration_strip_event(the_person):
             while not the_person.outfit.tits_visible():
                 $ the_item = the_person.outfit.remove_random_upper(top_layer_first = True, do_not_remove = True)
                 menu:
-                    "Throw some cash{color=#ff0000}{size=18}Costs: $20{/size}{/color}":
+                    "Throw some cash\n{color=#ff0000}{size=18}Costs: $20{/size}{/color}":
                         $ mc.business.change_funds(-20)
                         "You throw $20 on the counter, [the_person.title] is definitely intrigued by your game."
                         $ the_person.change_slut_temp(3 * the_person.get_opinion_score("showing her tits"))
