@@ -23,7 +23,7 @@ init 2 python:
     def get_so_relationship_improve_person():
         potential_people = []
         for person in known_people_in_the_game(excluded_people = [mc] + unique_character_list):
-            if not person.title is None and not person.relationship == "Married" and person.relationship in relationship_worsen_stats and person.love <= relationship_worsen_stats[person.relationship] + (person.get_opinion_score("cheating on men") * 5) :
+            if person.title and not person.relationship == "Married" and person.relationship in relationship_worsen_stats and person.love <= relationship_worsen_stats[person.relationship] + (person.get_opinion_score("cheating on men") * 5) :
                 if not any(x in person.special_role for x in [girlfriend_role, affair_role]): # when in relationship with MC she will not improve her relationship with her SO
                     potential_people.append(person)
         return get_random_from_list(potential_people)
@@ -31,7 +31,7 @@ init 2 python:
     def get_so_relationship_worsen_person():
         potential_people = []
         for person in known_people_in_the_game(excluded_people = [mc] + unique_character_list):
-            if not person.title is None and person.relationship in relationship_worsen_stats and person.love > relationship_worsen_stats[person.relationship] + (person.get_opinion_score("cheating on men") * 5):
+            if person.title and not person.relationship == "Single" and person.relationship in relationship_worsen_stats and person.love > relationship_worsen_stats[person.relationship] - (person.get_opinion_score("cheating on men") * 5):
                 potential_people.append(person)
         return get_random_from_list(potential_people)
 
