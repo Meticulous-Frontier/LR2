@@ -141,7 +141,7 @@ label SB_caught_masturbating_crisis_label():
                             "You double your efforts, licking, sucking, and teasing every corner of her pleasing slit."
                             $ the_person.change_arousal(10)
                             "[the_person.possessive_title] begins to orgasm convulsively, and she cries out."
-                            the_person.char "Yes [the_person.mc_title]! Yes! Yes! Oh fuck how do you do that."
+                            the_person.char "Yes [the_person.mc_title]! Yes! Yes! Oh fuck, how do you do that!"
                             $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "missionary")
                             $ the_person.change_happiness(5)
                             $ the_person.change_obedience(5)
