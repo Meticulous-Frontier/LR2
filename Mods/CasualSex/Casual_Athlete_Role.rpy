@@ -362,7 +362,7 @@ label casual_athlete_phase_one_label(the_person):
                 $ the_person.apply_outfit(Outfit("Nude"), update_taboo = True)
                 $ the_person.draw_person( position = "stand2")
                 "As you enter, you see that [the_person.title] is already naked."
-                the_person.char "[the_person.mc_title], give me that cock! It's been too long since fucked me good!"
+                the_person.char "[the_person.mc_title], give me that cock! It's been too long since you fucked me good!"
                 "You walk over to her and quickly strip. You grab [the_person.title] by that ass and pick her up. You carry her to the wall and pin her up against it."
                 $ the_person.draw_person( position = "against_wall")
                 "[the_person.possessive_title] is grinding her hips up against yours. The sweat from your workouts mingles together as you prepare yourself to enter her."
