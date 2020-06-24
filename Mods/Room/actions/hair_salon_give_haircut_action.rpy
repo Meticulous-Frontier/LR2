@@ -22,10 +22,6 @@ label salon_response(person_choice): # How does the_person respond to a company 
     $ the_person = person_choice
     $ the_person.draw_person()
 
-    python:
-        hair_style_check = the_person.hair_style #If hair_style_check is different than the_person.hair_style it means a "purchase" has been made.
-        hair_color_check = the_person.hair_colour
-
     # Add responses here: Currently just placeholders.
     # We don't need response that vary by sluttiness / obedience anymore
     # they are covered by the new title system.
@@ -52,7 +48,11 @@ label salon_response(person_choice): # How does the_person respond to a company 
     else:
         the_person.char "Sounds good, I'll be right there [the_person.mc_title]."
 
-    call screen hair_creator(the_person, hair_style_check, hair_color_check) # This is the "store" / "salon" part of the mod. TODO: Find a different way to check for changes in hair color
+    python:
+        hair_style_check = the_person.hair_style.get_copy()
+        pubes_style_check = the_person.pubes_style.get_copy()
+
+    call screen hair_creator(the_person, hair_style_check, pubes_style_check) # This is the "store" / "salon" part of the mod. TODO: Find a different way to check for changes in hair color
     call salon_checkout() from _call_salon_checkout #Will return here if nothing qualifies
     call advance_time from _call_advance_time_hair_salon
     $ renpy.scene("Active")
@@ -60,21 +60,21 @@ label salon_response(person_choice): # How does the_person respond to a company 
 
 label salon_checkout():
     # Check if any changes was made before leaving.
-    if hair_style_check != the_person.hair_style and hair_color_check[1] != the_person.hair_colour[1]: # Both was changed
+    if (hair_style_check != the_person.hair_style and hair_style_check.colour != the_person.hair_style.colour) or (pubes_style_check != the_person.pubes_style and pubes_style_check.colour != the_person.pubes_style.colour): # Both was changed
         $ salon_manager.draw_person(emotion = "happy")
         $ the_person.change_happiness(+10)
         salon_manager.char "That will be $[salon_style_cost] for the haircut and $[salon_dye_cost] for the dye. Who's paying?"
         mc.name "That will be me..."
         $ mc.business.change_funds(- salon_total_cost)
         "You complete the transaction and $[salon_total_cost] has been deducted from the company's credit card."
-    elif hair_style_check != the_person.hair_style: # Only the hair_style was changed.
+    elif hair_style_check != the_person.hair_style or pubes_style_check != the_person.pubes_style: # Only the hair_style was changed.
         $ salon_manager.draw_person(emotion = "happy")
         $ the_person.change_happiness(+5)
         salon_manager.char "That will be $[salon_style_cost] for the haircut. Who's paying?"
         mc.name "That will be me..."
         $ mc.business.change_funds(- salon_style_cost)
         "You complete the transaction and $[salon_style_cost] has been deducted from the company's credit card."
-    elif hair_color_check != the_person.hair_colour:
+    elif hair_style_check.colour != the_person.hair_style.colour or pubes_style_check.colour != the_person.pubes_style.colour:
         $ salon_manager.draw_person(emotion = "happy")
         $ the_person.change_happiness(+5)
         salon_manager.char "That will be $[salon_dye_cost] for the dye. Who's paying?"

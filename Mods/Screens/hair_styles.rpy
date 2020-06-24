@@ -1,14 +1,14 @@
-screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person and the variables holding the current hair style
+screen hair_creator(person, old_hair_style, old_pubes_style): ##Pass the person and the variables holding the current hair style
     modal True
     default category_selected = "Hair Style"
     default selected_style = person.hair_style
 
     python:
-        def revert_style(person, color, style): #Function to properly assign values to the fields as Screen Actions are flimsy.
+        def revert_style(person, hair_style, pubes_style): #Function to properly assign values to the fields as Screen Actions are flimsy.
 
-            person.hair_colour = color
-            person.hair_style = style
-            person.hair_style.colour = color[1]
+            person.hair_style = hair_style
+            person.hair_colour = hair_style.colour
+            person.pubes_style = pubes_style
 
 
     default use_current_outfit = person.outfit
@@ -316,4 +316,4 @@ screen hair_creator(person, old_hair_style, old_hair_colour): ##Pass the person 
                         xanchor 0.5
                         spacing 50
                         textbutton "Save Haircut" action [Return, SetField(person, "outfit", use_current_outfit), Hide("hair_creator")] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (155,80)
-                        textbutton "Abandon Design" action [Function(revert_style, person, old_hair_colour, old_hair_style), SetField(person, "outfit", use_current_outfit), Return, Hide("hair_creator")] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (185,80)
+                        textbutton "Abandon Design" action [Function(revert_style, person, old_hair_style, old_pubes_style), SetField(person, "outfit", use_current_outfit), Return, Hide("hair_creator")] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (185,80)

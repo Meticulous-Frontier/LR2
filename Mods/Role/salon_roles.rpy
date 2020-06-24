@@ -177,16 +177,16 @@ init 2 python:
 
 label cut_hair_label(the_person):
     python:
-        hair_style_check = the_person.hair_style #If hair_style_check is different than the_person.hair_style it means a "purchase" has been made.
-        hair_color_check = the_person.hair_colour
+        hair_style_check = the_person.hair_style.get_copy()
+        pubes_style_check = the_person.pubes_style.get_copy()
     "You ask [the_person.title] if she could change her hairstyle a bit."
     $ the_person.draw_person()
     the_person.char "Sure, [the_person.mc_title], I don't see why not. Let me get my kit."
 
-    call screen hair_creator(the_person, hair_style_check, hair_color_check)
+    call screen hair_creator(the_person, hair_style_check, pubes_style_check)
 
     $ the_person.draw_person(position = "stand2")
-    if hair_style_check != the_person.hair_style or hair_color_check != the_person.hair_colour: # Anything was changed
+    if hair_style_check != the_person.hair_style or hair_style_check.colour != the_person.hair_style.colour or pubes_style_check != the_person.pubes_style or pubes_style_check.colour != the_person.pubes_style.colour: # Anything was changed
         the_person.char "Better now?"
         $ the_person.draw_person(emotion = "happy")
         mc.name "You look wonderful, [the_person.possessive_title]!"
@@ -997,10 +997,10 @@ label ophelia_choose_service_test_label():
     $ the_person.strip_outfit(exclude_feet = False)
     salon_manager.char "Alright, here's a catalogue with what I can do. Take a look and tell me what you would like!"
     python:
-        hair_style_check = the_person.hair_style #If hair_style_check is different than the_person.hair_style it means a "purchase" has been made.
-        hair_color_check = the_person.hair_colour
+        hair_style_check = the_person.hair_style.get_copy()
+        pubes_style_check = the_person.pubes_style.get_copy()
         salon_manager.event_triggers_dict["offers_full_style"] = True
-    call screen hair_creator(the_person, hair_style_check, hair_color_check)
+    call screen hair_creator(the_person, hair_style_check, pubes_style_check)
     "You stay and observe as [salon_manager.title] does her work. She does an exceptional job."
     "When she finishes, you check out [the_person.title], while she examines herself in the mirror"
 
