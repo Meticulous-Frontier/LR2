@@ -109,6 +109,11 @@ label strip_club_hire_employee_label(the_person):
         mc.name "Actually I had a change of heart, how do you feel about coming back to work for me at the strip club?"
         $ the_person.draw_person(emotion = "happy", position = "stand5")
         the_person.char "Ok, but after what you did last time, the pay should be magnificent!"
+        mc.name "Your pay will be $[ran_num] a day. Do you think that will be good enough for you?"
+        the_person.char "Really you will pay me that much? Ok, then my answer is yes, I'll work as stripper again."
+        $ strip_club_hire_stripper(the_person)
+        mc.name "See you at the club."
+        return
     elif the_person.is_employee():
         $ the_person.event_triggers_dict["strip_club_shifts"] = 1
         if mc.business.is_open_for_business():
