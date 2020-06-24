@@ -56,6 +56,10 @@ init 1 python:
         return quest_cuckold_employee.quest_event_dict.get("target", None)
 
     def quest_cuckold_employee_tracker():
+        if quest_cuckold_employee.get_quest_flag() == 22:
+            if quest_cuckold_employee_get_target() and not quest_cuckold_employee_breeding_session in quest_cuckold_employee_get_target().on_talk_event_list:
+                # readd the breeding session (we talked to her without breeding)
+                quest_cuckold_employee_get_target().add_unique_on_talk_event(quest_cuckold_employee_breeding_session)
         if quest_cuckold_employee.get_quest_flag() <= 101:
             if quest_cuckold_employee_get_target() == None:
                 quest_cuckold_employee.quest_completed()
@@ -326,7 +330,8 @@ label quest_cuckold_employee_decision_label():
     $ the_person.strip_outfit()
     the_person.char "Alright [the_person.mc_title]. This is it. Time to put a baby in me!"
     call fuck_person(the_person, start_position = breeding_missionary, private= True, position_locked = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_attempt_1
-    if the_person.has_creampie_cum():
+    $ the_report = _return
+    if the_report.get("guy orgasms", 0) > 0 and the_person.has_creampie_cum():
         the_person.char "Oh god, I can feel it inside me! We really did it."
         $ the_person.change_stats(happiness = 10, obedience = 10, love = 5)
         the_person.char "There's so much, god I have such a good bull."
@@ -350,6 +355,29 @@ label quest_cuckold_employee_decision_label():
         $ quest_cuckold_employee.set_quest_flag(22)
         $ quest_cuckold_employee_get_target().add_unique_on_talk_event(quest_cuckold_employee_breeding_session)
         $ mc.business.add_unique_mandatory_crisis(quest_cuckold_employee_after_window)
+        $ the_person.apply_planned_outfit() # make sure she is dressed again after event
+    elif the_report.get("guy orgasms", 0) == 0:
+        "[the_person.title] is completely silent."
+        the_person.char "You... you didn't even finish. "
+        the_person.char "Don't you like breeding me?"
+        if mc.energy < 30:
+            mc.name "I'm really sorry, but I'm just to tired at the moment, we can try again tomorrow."
+            $ the_person.change_stats(happiness = -10, obedience = -10, love = -10)
+            the_person.char "Alright, for just this once, I will believe you, but you better cleanup your act."
+            $ the_person.apply_planned_outfit()
+            $ the_person.draw_person(position = "walking_away")
+            "[the_person.title] stands up, throws on her clothes and storms out of your office."
+            $ quest_cuckold_employee.set_quest_flag(22)
+            $ quest_cuckold_employee_get_target().add_unique_on_talk_event(quest_cuckold_employee_breeding_session)
+            $ mc.business.add_unique_mandatory_crisis(quest_cuckold_employee_after_window)
+        else:
+            mc.name "I'm sorry, I want to help you, but it's been a long day and I'm just wore out..."
+            the_person.char "Fuck you! I see right through that charade. You just wanted to fuck a married woman!"
+            $ the_person.apply_planned_outfit()
+            $ the_person.draw_person(position = "walking_away")
+            "[the_person.title] stands up, throws on her clothes and storms out of your office. Unfortunately, you may have damaged your relationship with her irreparably."
+            $ quest_cuckold_employee.set_quest_flag(28)
+            $ quest_cuckold_employee.quest_completed()
     else:
         "[the_person.title] is completely silent."
         the_person.char "You... you didn't even finish inside of me?"
@@ -357,8 +385,9 @@ label quest_cuckold_employee_decision_label():
         the_person.char "You... you just wanted to fuck me, didn't you!?!"
         mc.name "I'm sorry, I want to help you, but it's been a long day and I'm just wore out..."
         the_person.char "Fuck you! I see right through that charade. You just wanted to fuck a married woman!"
+        $ the_person.apply_planned_outfit()
         $ the_person.draw_person(position = "walking_away")
-        "[the_person.title] stands up and storms out of your office. Unfortunately, you may have damaged your relationship with her irreparably."
+        "[the_person.title] stands up, throws on her clothes and storms out of your office. Unfortunately, you may have damaged your relationship with her irreparably."
         $ quest_cuckold_employee.set_quest_flag(28)
         $ quest_cuckold_employee.quest_completed()
     return
@@ -393,7 +422,8 @@ label quest_cuckold_employee_rethink_decision_label():
     $ the_person.strip_outfit()
     the_person.char "Alright [the_person.mc_title]. This is it. Time to put a baby in me!"
     call fuck_person(the_person, start_position = breeding_missionary, private= True, position_locked = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_attempt_3
-    if the_person.has_creampie_cum():
+    $ the_report = _return
+    if the_report.get("guy orgasms", 0) > 0 and the_person.has_creampie_cum():
         the_person.char "Oh god, I can feel it inside me! We really did it."
         $ the_person.change_stats(happiness = 10, obedience = 10, love = 5, slut_temp = 5)
         the_person.char "There's so much, god I have such a good bull."
@@ -417,6 +447,29 @@ label quest_cuckold_employee_rethink_decision_label():
         $ quest_cuckold_employee.set_quest_flag(22)
         $ quest_cuckold_employee_get_target().add_unique_on_talk_event(quest_cuckold_employee_breeding_session)
         $ mc.business.add_unique_mandatory_crisis(quest_cuckold_employee_after_window)
+        $ the_person.apply_planned_outfit() # make sure she is dressed again after event
+    elif the_report.get("guy orgasms", 0) == 0:
+        "[the_person.title] is completely silent."
+        the_person.char "You... you didn't even finish. "
+        the_person.char "Don't you like breeding me?"
+        if mc.energy < 30:
+            mc.name "I'm really sorry, but I'm just to tired at the moment, we can try again tomorrow."
+            $ the_person.change_stats(happiness = -10, obedience = -10, love = -10)
+            the_person.char "Alright, for just this once, I will believe you, but you better cleanup your act."
+            $ the_person.apply_planned_outfit()
+            $ the_person.draw_person(position = "walking_away")
+            "[the_person.title] stands up, throws on her clothes and storms out of your office."
+            $ quest_cuckold_employee.set_quest_flag(22)
+            $ quest_cuckold_employee_get_target().add_unique_on_talk_event(quest_cuckold_employee_breeding_session)
+            $ mc.business.add_unique_mandatory_crisis(quest_cuckold_employee_after_window)
+        else:
+            mc.name "I'm sorry, I want to help you, but it's been a long day and I'm just wore out..."
+            the_person.char "Fuck you! I see right through that charade. You just wanted to fuck a married woman!"
+            $ the_person.apply_planned_outfit()
+            $ the_person.draw_person(position = "walking_away")
+            "[the_person.title] stands up, throws on her clothes and storms out of your office. Unfortunately, you may have damaged your relationship with her irreparably."
+            $ quest_cuckold_employee.set_quest_flag(28)
+            $ quest_cuckold_employee.quest_completed()
     else:
         "[the_person.title] is completely silent."
         the_person.char "You... you didn't even finish inside of me?"
@@ -424,8 +477,9 @@ label quest_cuckold_employee_rethink_decision_label():
         the_person.char "You... you just wanted to fuck me, didn't you!?!"
         mc.name "I'm sorry, I want to help you, but it's been a long day and I'm just wore out..."
         the_person.char "Fuck you! I see right through that charade. You just wanted to fuck a married woman!"
+        $ the_person.apply_planned_outfit()
         $ the_person.draw_person(position = "walking_away")
-        "[the_person.title] stands up and storms out of your office. Unfortunately, you may have damaged your relationship with her irreperably."
+        "[the_person.title] stands up, throws on her clothes and storms out of your office. Unfortunately, you may have damaged your relationship with her irreperably."
         $ quest_cuckold_employee.set_quest_flag(28)
         $ quest_cuckold_employee.quest_completed()
     return
@@ -441,7 +495,8 @@ label quest_cuckold_employee_breeding_session_label(the_person):
         "Not now":
             mc.name "Actually, I need to talk to you about something else."
             the_person.char "Oh! What can I do for you?"
-            $ the_person.add_unique_on_talk_event(quest_cuckold_employee_breeding_session)
+            # since this is triggered inside the talk event, it is still in the list
+            # so adding it here won't work, let the quest tracker reapply the talk event
             return
     mc.name "Yes that is exactly right. I really need help with something in my office, could you please come give me a hand?"
     the_person.char "Of course! Let's go!"
@@ -457,14 +512,18 @@ label quest_cuckold_employee_breeding_session_label(the_person):
     mc.name "I'm gonna fuck you on my desk again. Tell your bull how much you want it."
     the_person.char "Oh god please! I want you to fuck me over and over until my belly is popping with your seed!"
     call fuck_person(the_person, start_position = breeding_missionary, private= True, position_locked = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_attempt_2
-    if the_person.has_creampie_cum():
+    $ the_report = _return
+    if the_report.get("guy orgasms", 0) > 0 and the_person.has_creampie_cum():
         the_person.char "Oh god, every risky load feels even better than the last..."
         $ the_person.change_stats(love = 10, happiness = 10, obedience = 10)
         "You gently rub her stomach."
         mc.name "Your hungry cunt feels like its sucking the cum out of me. It's amazing, honestly."
         mc.name "A little part of me is hoping it doesn't take right away and we have to keep trying for a while."
         the_person.char "Mmm, I'd be lying if I said I didn't feel the same way. You always cum so much, you are the perfect bull."
-        if the_person.love > 60:
+        if the_person.has_role(affair_role) or the_person.has_role(girlfriend_role):
+            the_person.char "I'm so looking forward to you fucking my brains out, you will be my dirty little secret."
+            "She looks down at your crotch and smiles."
+        elif the_person.love > 60:
             the_person.char "Even if I do get pregnant... I'll already have one dirty little secret anyway. Maybe we could still fool around some..."
             "Sounds like she might be open to some kind of an affair in the future..."
         else:
@@ -483,6 +542,7 @@ label quest_cuckold_employee_breeding_session_label(the_person):
         the_person.char "Besides, I'm probably already pregnant. This is just making certain of it!"
         "You both get up and leave your office, resuming your day."
     $ the_person.add_unique_on_talk_event(quest_cuckold_employee_breeding_session)
+    $ the_person.apply_planned_outfit() # make sure she is dressed when back at workstation
     call advance_time from cuckold_advance_time
     jump game_loop  # this a talk event, if another event triggers on advance time we pop back to talking to her, if we just "Return", the jump makes sure we go back to the main game menu
 
@@ -621,6 +681,7 @@ label quest_cuckold_employee_knocked_up_label():
     $ mc.change_location(office)
     $ mc.location.show_background()
     $ the_person.draw_person(position = "stand4")
+    $ the_person.event_triggers_dict["preg_knows"] = True
     "As you step into your office, you see [the_person.possessive_title]."
     the_person.char "Well [the_person.mc_title], you did it! Positive pregnancy test!"
     mc.name "Oh my god, that's amazing! Congratulations!"
@@ -654,9 +715,10 @@ label quest_cuckold_employee_knocked_up_label():
     the_person.char "Yes my [the_person.mc_title]!"
     $ the_person.draw_person(position = "doggy")
     "Her ass in position, you quickly get her ready."
-    $ the_person.strip_outfit( exclude_upper = True)
-    call fuck_person(the_person, start_position = doggy, private = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_victory_lap_01
-    if the_person.has_creampie_cum():
+    $ the_person.strip_outfit(position = "doggy", exclude_upper = True)
+    call fuck_person(the_person, start_position = doggy, start_object = make_floor(), private = True, affair_ask_after = False, skip_intro = True, asked_for_condom = True) from _breed_cuckold_victory_lap_01
+    $ the_report = _return
+    if the_report.get("guy orgasms", 0) > 0 and the_person.has_creampie_cum():
         the_person.char "Sweet jesus, no wonder you knocked me up. I'm so full of your cum, its amazing..."
     "After you both recover, you carefully leave your office. Sounds like you have your very own breeding stock available from now on!"
     "It's going to be amazing to watch her belly swell with your seed."
