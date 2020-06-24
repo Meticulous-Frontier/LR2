@@ -141,7 +141,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                         $ the_person.draw_person(emotion="orgasm", position ="missionary")
                         "You double your efforts, licking, sucking, and teasing every corner of her pleasing slit"
                         "[the_person.possessive_title] begins to orgasm convulsively, and she cries out."
-                        the_person.char "Yes [the_person.mc_title]! Yes! Yes! Oh fuck how do you do that"
+                        the_person.char "Yes [the_person.mc_title]! Yes! Yes! Oh fuck, how do you do that!"
                         $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "missionary")
                         $ the_person.change_stats(obedience = 5, happiness = 5, love = 3, slut_temp = 5, slut_core = 2)
                         "[the_person.possessive_title] runs her hands through your hair one last time. She sits up and gives you a kiss, tasting herself on your tongue."
