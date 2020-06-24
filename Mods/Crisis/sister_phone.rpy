@@ -120,6 +120,9 @@ label sister_phone_crisis_action_label:
         if ran_num == 1:
             the_person.char "You're such a hard worker [the_person.mc_title]. Here's a little gift from the girl who loves you most in the world!"
             $ the_person.outfit.remove_random_upper(top_layer_first = True)
+            if the_person.wearing_bra() and the_person.bra_covered(): # when she is wearing a jacket, make sure to remove top
+                $ the_person.outfit.remove_random_upper(top_layer_first = True)
+
             $ the_person.draw_person(emotion = "happy")
             if mc.business.is_weekend():
                 "[the_person.possessive_title] sends you a selfie without her shirt on. The background looks like her bedroom."
@@ -128,6 +131,9 @@ label sister_phone_crisis_action_label:
 
         elif ran_num == 2:
             $ the_person.outfit.remove_random_upper(top_layer_first = True)
+            if the_person.wearing_bra() and the_person.bra_covered(): # when she is wearing a jacket, make sure to remove top
+                $ the_person.outfit.remove_random_upper(top_layer_first = True)
+
             if mc.business.is_weekend():
                 the_person.char "I wish you were here spending time with me. Maybe this will convince you [the_person.possessive_title] is a cool person to hang out with!"
                 $ the_person.draw_person(emotion = "happy")
