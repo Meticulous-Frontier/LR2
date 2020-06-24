@@ -883,7 +883,7 @@ label ophelia_talk_about_candace_label(the_person):
     the_person.char "Its okay. So, I guess I can understand why you want to help her, what is the plan?"
     mc.name "Well, right now, [ex_name] is paying her basically nothing. Labor laws would say her pay is illegally low."
     the_person.char "Oh god... [ex_name]... what are you doing?"
-    mc.name "For the last week or so, I've been slowly convincing her that she should quit, and if she does, I'll hire her at my company doing basically the same thing she is doing now, but for a fair wage."
+    mc.name "For the last few weeks, I've been slowly convincing her that she should quit, and if she does, I'll hire her at my company doing basically the same thing she is doing now, but for a fair wage."
     the_person.char "Ok... why are you talking to me about this again? Seems like you've got it all figured out."
     mc.name "[ex_name] has told her that if she quits, he is dumping her. But you and I both know, she isn't smart enough to secure her personal accounts and other things."
     mc.name "Remember when you found his facebook logged on in your laptop? You said, locking down social media accounts is part of breakup 101!"
