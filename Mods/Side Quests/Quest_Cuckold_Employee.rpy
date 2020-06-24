@@ -76,7 +76,8 @@ init 1 python:
         remove_mandatory_crisis_list_action("quest_cuckold_employee_rethink_decision_label")
         remove_mandatory_crisis_list_action("quest_cuckold_employee_after_window_label")
         remove_mandatory_crisis_list_action("quest_cuckold_employee_gloryhole_label")
-        quest_cuckold_employee_get_target().remove_on_talk_event(quest_cuckold_employee_breeding_session)
+        if quest_cuckold_employee_get_target():
+            quest_cuckold_employee_get_target().remove_on_talk_event(quest_cuckold_employee_breeding_session)
         #Leave knocked up and reconsider events in the stack to run after quest finishes.
         # cleanup dictionary to save space and memory
         quest_cuckold_employee.quest_event_dict.clear()
