@@ -1013,6 +1013,7 @@ label ophelia_choose_service_test_label():
     $ scene_manager.update_actor(salon_manager, position = "walking_away")
     "As [salon_manager.possessive_title] goes to the other room to get her card, [the_person.title] gets dressed."
     $ the_person.apply_planned_outfit()
+    $ scene_manager.update_actor(the_person)
     "Once dressed, she turns to you."
     the_person.char "This was great [the_person.mc_title]. Thanks for asking me to do this!"
     $ the_person.change_stats(happiness = 5, obedience = 5)
