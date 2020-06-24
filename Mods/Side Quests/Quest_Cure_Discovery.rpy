@@ -73,7 +73,8 @@ init 1 python:
         remove_mandatory_crisis_list_action("quest_cure_discovery_patent_sold_label")
         remove_mandatory_crisis_list_action("quest_cure_discovery_patent_kept_label")
         remove_mandatory_crisis_list_action("quest_cure_discovery_market_missed_label")
-        quest_cure_get_market_contact().remove_on_talk_event(quest_cure_discovery_market_patent)
+        if quest_cure_get_market_contact():
+            quest_cure_get_market_contact().remove_on_talk_event(quest_cure_discovery_market_patent)
         quest_cure_discovery.quest_event_dict.clear()
         return
 
@@ -133,7 +134,9 @@ label quest_cure_discovery_intro_label():
         "You get a text on your phone. It's from [the_person.possessive_title]."
         the_person.char "Hey, I need to see you in the lab ASAP!"
         "You quickly head to the lab."
-        #TODO change location to the lab.
+        $ mc.change_location(rd_division)
+        $ mc.location.show_background()
+
     $ the_person.draw_person()
     the_person.char "Hey! I need to talk to you about something."
     mc.name "What is it?"
@@ -284,7 +287,7 @@ label quest_cure_discovery_patent_kept_label():
             mc.name "It's okay, [the_person.title]. I'm sorry I didn't make that move right from the start. You did the right thing."
             "She sounds relieved."
             the_person.char "Oh [the_person.mc_title], I knew you were a reasonable man! I'll make it up to you, I promise!"
-            if the_person.sluttiness > 50: #MC can push for make up sex.
+            if the_person.effective_sluttiness() > 50: #MC can push for make up sex.
                 mc.name "I think I know how you can make it up to me. Come to my office."
                 the_person.char "Yes sir!"
                 #TODO change background to office
