@@ -134,12 +134,23 @@ label quest_arousal_serum_init_label():
     return
 
 label quest_arousal_serum_intro_label():
+    # make sure we are at home
+    $ mc.change_location(hall)
+    $ mc.location.show_background()
+
     "As you are getting ready for bed, you notice [mom.title] sitting on the couch, watching some TV. It is currently a commercial."
+    $ mom.draw_person(position = "sitting")
+
     "TV" "Call now for this special offer! Pinkacia is being called the female Viagra by those who have tried it!"
     "TV" "Low libido? Just take this! You'll be grabbing your man and headed for the sack in no time!"
     "Wow, these late night TV commercials are awful. There's no way that stuff is legitimate."
     "... or is it? The work you have been doing is beyond what many people would have considered possible just a few years ago."
     "You decide to look it up. You head to your room and pull up the info on your PC."
+
+    $ renpy.scene("Active")
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
+
     "The site is gaudy. Lots of claimed reviews call it a miracle drug. Taking a look, it is pretty pricey. Two doses for $100."
     menu:
         "Order it ($100)":
@@ -157,13 +168,17 @@ label quest_arousal_serum_intro_label():
     return
 
 label quest_arousal_serum_receive_drug_label():
+    # make sure we are in bedroom
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
     $ mom.draw_person()
     "As you are getting ready for bed, [mom.title] knocks on your door. You open it up."
     mom.char "Hey, you got this in the mail today. At first I thought it was junk, but it has your name on it, so I figured you could figure out what to do with it."
     "She hands you a small manila envelop."
-    mc.name "Thanks [mom.title]"
-    $ renpy.scene("Active")
+    mc.name "Thanks [mom.title]."
+    $ mom.draw_person(position = "walking_away")
     "She turns and walks way, closing your door behind her."
+    $ renpy.scene("Active")
     "You open up the package. Its the two pills you ordered. The highly acclaimed Female Viagra."
     "You note on the package an expiration date. Holy hell, this stuff expires in a week?"
     "Hmm... what to do with this? With two doses, you figure you could test one dose, and if it works, use the second one to try and reverse engineer the drug."
@@ -198,8 +213,7 @@ label quest_arousal_serum_test_label():
     $ the_person = mc.business.head_researcher
     $ the_person.arousal = 0 #Make sure we start at zero arousal for this event.
     if the_person == None: #we fired HR, bad end
-        #TODO bad end
-        pass
+        $ quest_arousal_serum.quest_completed()
         return
     "After closing up the lab, it is time for you to test the pills with [the_person.title]."
     $ mc.business.r_div.show_background()
@@ -238,9 +252,9 @@ label quest_arousal_serum_test_label():
         "[the_person.title] hops up on the table, lays back and spreads her legs."
     else:
         "[the_person.title] hops up on the table."
-        the_person.char "Ohh, I'm getting so warm. I need to get this off..."
-        $ the_person.strip_outfit()
         $ the_person.draw_person(position = "missionary")
+        the_person.char "Ohh, I'm getting so warm. I need to get this off..."
+        $ the_person.strip_outfit(position = "missionary")
         "She lays back and spreads her legs."
     $ the_person.change_arousal(20)
     "The lips of her vagina are puffy and swollen. Some of her lubrication has started to run down the sides of her legs."
@@ -316,10 +330,9 @@ label quest_arousal_serum_test_label():
 label quest_arousal_serum_researched_label():
     $ the_person = mc.business.head_researcher
     if the_person == None: #we fired HR, bad end
-        #TODO bad end
-        pass
         $ quest_arousal_serum.quest_completed()
         return
+
     "After you have closed up, you get a text from your head researcher."
     the_person.char "Meet me down in the lab, I have good news."
     $ mc.business.r_div.show_background()
@@ -328,7 +341,7 @@ label quest_arousal_serum_researched_label():
     the_person.char "I've just finished up synthesizing our first batch of the arousal serum. I followed your idea, to make something that takes effect over time."
     the_person.char "The results have been mixed, but overall I think successful. When combined with one of our serums, the drug slowly builds arousal over the course of the day."
     the_person.char "However, due to the extended time it takes to act, often time the tests show that the person is able to calm down to ignore the full effect."
-    the_person.char "Once we mixed it with our serums, however, we immediately noticed a pattern. The great the person's suggestability, the greater the arousal we were able to achieve."
+    the_person.char "Once we mixed it with our serums, however, we immediately noticed a pattern. The greater the person's suggestibility, the greater the arousal we were able to achieve."
     mc.name "Those sound like great results."
     the_person.char "Just let me know, and we can start to integrate it into our serums effective immediately."
     if the_person.sluttiness > 60:
@@ -353,13 +366,13 @@ label quest_arousal_serum_researched_label():
         the_person.char "Now that your hands are on my hips I am... oh god..."
         $ the_person.change_arousal(20)
         the_person.char "I need... oh god."
-        $ the_person.strip_outfit()
+        $ the_person.strip_outfit(position = "standing_doggy")
         $ the_person.draw_person(position = "standing_doggy")
         the_person.char "Oh fuck I need you! Fuck me [the_person.mc_title]! I need your cock inside me so bad!"
-        call fuck_person(the_person, start_position = SB_doggy_standing, private= True, affair_ask_after = False) from _arousal_serum_fuck_test_2
+        call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_floor(), private= True, affair_ask_after = False) from _arousal_serum_fuck_test_2
         $ the_report = _return
         if the_report.get("girl orgasms", 0) > 0:
-            "You fuck some sense back into your head researcher."
+            "You have fucked some sense back into your head researcher."
         $ the_person.draw_person()
     mc.name "Good work, [the_person.title]."
     "You leave the lab. You have unlocked a new serum trait."
@@ -394,7 +407,7 @@ init python:
 
 
     arousal_serum_trait = SerumTrait(name = "Female Viagra",
-            desc = "Reverse engineered from the pills you ordered. Increases arousal over time, maxing out based on suggestability.",
+            desc = "Reverse engineered from the pills you ordered. Increases arousal over time, maxing out based on suggestibility.",
             positive_slug = "+$20 Value, +15 Arousal over time",
             negative_slug = "+20 Serum Research",
             value_added = 20,
