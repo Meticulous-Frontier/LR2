@@ -1051,13 +1051,15 @@ init -1 python:
 ################################################
 
     def apply_gym_outfit(self):
-        self.apply_outfit(workout_wardrobe.decide_on_outfit2(self))
+        # get personal copy of outfit, so we don't change the gym wardrobe (in any events)
+        self.apply_outfit(workout_wardrobe.decide_on_outfit2(self).get_copy())
         return
 
     Person.apply_gym_outfit = apply_gym_outfit
 
     def apply_university_outfit(self):
-        self.apply_outfit(university_wardrobe.decide_on_outfit2(self))
+        # get personal copy of outfit, so we don't change the university wardrobe (in any events)
+        self.apply_outfit(university_wardrobe.decide_on_outfit2(self).get_copy())
         return
 
     Person.apply_university_outfit = apply_university_outfit
