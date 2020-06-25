@@ -67,6 +67,8 @@ init 5 python:
 
     def is_strip_club_stripper_requirement(person):
         if get_strip_club_foreclosed_stage() >= 5:
+            if not mc.location is strip_club:
+                return "Only in [strip_club.formalName]"
             if person.has_role(stripper_role):
                 return True
         return False
