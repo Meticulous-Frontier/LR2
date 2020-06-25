@@ -188,30 +188,24 @@ label mc_hire_person_label(person):
     menu:
         "Research and Development":
             $ mc.business.hire_person(the_person, "Research")
-            $ mc.location.move_person(person, mc.business.r_div)
 
         "Production":
             $ mc.business.hire_person(the_person, "Production")
-            $ mc.location.move_person(person, mc.business.p_div)
 
         "Supply Procurement":
             $ mc.business.hire_person(the_person, "Supply")
-            $ mc.location.move_person(person, mc.business.s_div)
 
         "Marketing":
             $ mc.business.hire_person(the_person, "Marketing")
-            $ mc.location.move_person(person, mc.business.m_div)
 
         "Human Resources":
             $ mc.business.hire_person(the_person, "HR")
-            $ mc.location.move_person(person, mc.business.h_div)
 
         "Back":
             return
 
     $ mc.business.change_funds(- (person.calculate_base_salary() * 10))
-    $ work_station_destination = mc.business.get_employee_workstation(person).formalName
-    "[person.title] heads over to the [work_station_destination]..."
+    "You have hired [person.title], she will start working as soon as possible."
     return
 
 
