@@ -8,6 +8,7 @@ init 5 python:
         renpy.random.shuffle(rotation)
         mc.business.event_triggers_dict["stripper_rotation_changed"] = day
         mc.business.event_triggers_dict["stripper_rotation"] = rotation
+        mc.business.event_triggers_dict["stripper_number"] = 0
         return rotation
 
     def get_next_stripper():
@@ -110,5 +111,6 @@ label stripclub_dance_enhanced_label():
     $ the_person.draw_person(position = "walking_away")
     "[title] blows a kiss and struts off stage."
 
+    $ the_person.apply_planned_outfit()
     $ renpy.scene("Active")
     return
