@@ -68,7 +68,7 @@ init -1 python:
         ensure_opinion_on_sexual_preference(person, "Vaginal", ["missionary style sex", "vaginal sex", "creampies"])
         ensure_opinion_on_sexual_preference(person, "Anal", ["anal sex", "anal creampies", "doggy style sex"])
 
-        # fix opinion contradictions
+        # fix opinion contradictions (one cannot exclude other)
         fix_opinion_contradiction(person, "drinking cum", "giving blowjobs")
         fix_opinion_contradiction(person, "creampies", "bareback sex")
         fix_opinion_contradiction(person, "anal creampies", "bareback sex")
@@ -76,6 +76,11 @@ init -1 python:
         fix_opinion_contradiction(person, "skimpy outfits", "showing her ass")
         fix_opinion_contradiction(person, "skimpy outfits", "high heels")
         fix_opinion_contradiction(person, "masturbating", "being fingered")
+
+        # fix opinion exclusion (one excludes other)
+        fix_opinion_exclusion(person, "lingerie", "not wearing underwear")
+        fix_opinion_exclusion(person, "skimpy outfits", "not wearing anything")
+        fix_opinion_exclusion(person, "being submissive", "taking control")
         return
 
     # when she doesn't like base_topic, she should not like / love related topic (invert likeness of related topic)
@@ -84,6 +89,13 @@ init -1 python:
         if person.get_opinion_score(base_topic) > 0 and person.get_opinion_score(related_topic) < 0:
             person.update_opinion_with_score(related_topic, -person.get_opinion_score(related_topic), add_to_log = False)
         if person.get_opinion_score(base_topic) < 0 and person.get_opinion_score(related_topic) > 0:
+            person.update_opinion_with_score(related_topic, -person.get_opinion_score(related_topic), add_to_log = False)
+        return
+
+    def fix_opinion_exclusion(person, base_topic, related_topic):
+        if person.get_opinion_score(base_topic) > 0 and person.get_opinion_score(related_topic) > 0:
+            person.update_opinion_with_score(related_topic, -person.get_opinion_score(related_topic), add_to_log = False)
+        if person.get_opinion_score(base_topic) < 0 and person.get_opinion_score(related_topic) < 0:
             person.update_opinion_with_score(related_topic, -person.get_opinion_score(related_topic), add_to_log = False)
         return
 
