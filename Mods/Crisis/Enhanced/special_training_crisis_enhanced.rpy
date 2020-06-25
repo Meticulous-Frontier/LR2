@@ -16,8 +16,8 @@ init 2 python:
         return mc.is_at_work()
 
     def add_return_from_seminar_action(person):
-        return_from_seminar_action = Action("Investment Representative Visit",return_from_seminar_action_requirement,"return_from_seminar_action_label", args = person) #Set the trigger day for the next monday. Monday is day%7 == 0
-        mc.business.mandatory_crises_list.append(return_from_seminar_action) #Add the event here so that it pops when the requirements are met.
+        return_from_seminar_action = Action("Return From Seminar Thank You",return_from_seminar_action_requirement,"return_from_seminar_action_label", args = person)
+        mc.business.mandatory_crises_list.append(return_from_seminar_action)
         return
 
 label enhanced_special_training_crisis_label():
@@ -43,7 +43,9 @@ label enhanced_special_training_crisis_label():
                 $ setattr(the_person, _return, getattr(the_person, _return) + 2) #TODO: Make this line be generic.
                 $ mc.log_event("[the_person.title]: " + "+2 " + get_work_skills()[_return][0], "float_text_grey")
                 "[the_person.title] leaves work for a few hours to attend the training seminar. When she returns she has learned several useful techniques." # NOTE: Make this less generic
-                $ add_return_from_seminar_action(the_person)
+                if the_person.sluttiness >= 20:
+                    # follow up on promise made
+                    $ add_return_from_seminar_action(the_person)
 
         "Tell her to stay at work.":
             "You type up a response."
