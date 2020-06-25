@@ -45,15 +45,17 @@ init -2 python:
         elif the_person.event_triggers_dict.get("hotwife_blowjob_enable", 0) == 1:
             return True
         else:
-            return "Grab a drink with her first"
+            return "Grab a drink first"
         return False
 
     def casual_hotwife_blowjob_text_requirement(the_person):
         if the_person.event_triggers_dict.get("hotwife_blowjob_text_enable", 0) == 1:
+            if day <= the_person.event_triggers_dict.get("hotwife_blowjob_ask_pictures", 0):
+                return "Wait a few days"
             if time_of_day < 3:
                 return True
             else:
-                return "You should ask her another time"
+                return "Ask her another time"
         return False
 
     def casual_hotwife_dancing_sex_requirement(the_person):
@@ -71,7 +73,7 @@ init -2 python:
         elif the_person.event_triggers_dict.get("hotwife_dancing_enable", 0) == 1:
             return True
         else:
-            return "Grab a drink with her first"
+            return "Grab a drink first"
         return False
 
     def casual_hotwife_sex_invite_requirement(the_person):
@@ -82,7 +84,7 @@ init -2 python:
         elif the_person.effective_sluttiness() < 50:
             return "Requires higher sluttiness"
         elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 4:
-            return "She's already invited you over!"
+            return "Already invited you over!"
         elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 3:
             return True
         return False
@@ -97,7 +99,7 @@ init -2 python:
             if mc.location == the_person.home:
                 return True
             else:
-                return "You can only do this at her place."
+                return "Only at her place."
         return False
 
     def casual_hotwife_ghost_requirement():
@@ -415,6 +417,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         "You sneak your way out of the bathroom while [the_person.possessive_title] cleans herself up. You hope everything goes well with her tonight!"
         $ the_person.event_triggers_dict["hotwife_blowjob_text_enable"] = 1
         $ the_person.event_triggers_dict["hotwife_progress"] = 2
+        $ the_person.event_triggers_dict["hotwife_blowjob_ask_pictures"] = day + 1
         $ the_person.review_outfit(dialogue = False)
     else:   #This is not our first time getting blown#
         mc.name "Hey, you wanna sneak off for a bit?"
