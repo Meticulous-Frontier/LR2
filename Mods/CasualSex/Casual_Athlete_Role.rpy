@@ -276,6 +276,7 @@ label casual_athlete_phase_one_label(the_person):
         "As you lift the weight up over the bar and begin to bring it down to your chest, [the_person.title] slowly moves forward, maneuvering her legs until her crotch is right above your face."
         "You breathe deep. There is the normal gym smells of weights, rubber, and sweat, but also a smell that is distinctly, sweetly feminine."
         "You lift your head up for a second, making contact with her crotch with your face. She stifles a groan as you finish up your set."
+        $ the_person.change_max_energy(5)
         $ the_person.change_arousal(20)
         "[the_person.title] backs off and you quickly get up. She puts a hand on your shoulder and whispers in your ear."
         the_person.char "There's a locker room here families can use with a lock on it. Meet me there in three minutes."
@@ -345,6 +346,7 @@ label casual_athlete_phase_one_label(the_person):
         "While doing squats, she gets right behind you, pressing her body against yours as she spots you."
         "You try to be as covert as possible, but a couple of the other guys in the gym shoot you knowing looks as you go about your workout."
         "During the bench press, [the_person.title] stands right above you, her crotch tantalizingly close to your face."
+        $ the_person.change_max_energy(5)
         the_person.char "Wow, what a workout! So... are you gonna go hit the showers now?"
         "It is clear from the way she is asking she is curious if you are gonna follow her to the secluded locker room."
         menu:
@@ -478,6 +480,7 @@ label casual_athlete_race_crisis_label(the_person):
     $ the_person.draw_person(position = "stand4")
     "She stands up and turns to face you."
     the_person.char "Yeah!... I mean, its all for a good cause, right?"
+    $ the_person.change_max_energy(10)
     $ the_person.draw_person(position = "stand4", emotion = "happy")
     "You think you see a little smirk on the corner of her mouth."
     "You both take a few minutes to recover, and soon you are ready to go."

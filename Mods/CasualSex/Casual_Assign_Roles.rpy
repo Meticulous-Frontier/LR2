@@ -104,6 +104,7 @@ init 2 python:
 
     def casual_sex_create_athlete():
         new_athlete = make_person(body_type = "thin_body", age = renpy.random.randint(19,25), personality = athlete_personality, relationship = "Single", force_random = True)
+        new_athlete.max_energy = 120
         assign_casual_athlete_role(new_athlete)
         new_athlete.generate_home()
         gym.add_person(new_athlete)
