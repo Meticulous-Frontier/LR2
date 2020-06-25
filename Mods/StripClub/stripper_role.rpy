@@ -13,7 +13,8 @@ init 5 python:
     add_label_hijack("after_load", "update_strip_club_show_requirement")
     # override default strip_club show requirement
     def strip_club_show_requirement_enhanced():
-        if __builtin__.len(stripclub_strippers) == 0:
+        # check available strippers in club (not possible strippers)
+        if __builtin__.len([x for x in stripclub_strippers if x in mc.location.people]) == 0:
             return False
         if time_of_day in [0,1,2]:
             return "Too early for performances"
