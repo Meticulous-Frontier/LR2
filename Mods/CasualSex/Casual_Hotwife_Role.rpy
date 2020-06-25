@@ -232,7 +232,7 @@ label casual_hotwife_get_a_drink_label(the_person):
                 the_person.char "Just let me know when you have the time... I think we would both really enjoy our time."
                 "[the_person.title] licks her lips, then gets up."
                 $ the_person.draw_person (position = "stand4")
-                the_person.char "See ya later [the_person.mc_title]"
+                the_person.char "See ya later, [the_person.mc_title]."
             elif mc.charisma > 3:
                 the_person.char "Tell you what... I have to get going for now... but next time you see me here..."
                 "She gives you a wink."
@@ -240,16 +240,16 @@ label casual_hotwife_get_a_drink_label(the_person):
                 mc.name "Damn. Sounds good. I'll be sure to look for your soon."
                 "[the_person.title] licks her lips, then gets up."
                 $ the_person.draw_person (position = "stand4")
-                the_person.char "See ya later [the_person.mc_title]"
+                the_person.char "See ya later, [the_person.mc_title]."
                 $ the_person.event_triggers_dict["hotwife_blowjob_enable"] = 1
-                "Sounds like you might get lucky next time you meet up with [the_person.title]"
+                "Sounds like you might get lucky next time you meet up with [the_person.title]."
             else:
                 "Failed Charisma Check."
                 "She looks at you for a second, then hesitates."
                 the_person.char "Soon... anyway..."
                 $ the_person.draw_person (position = "stand4")
                 "[the_person.title] stands up abruptly."
-                the_person.char "Sorry, I gotta get going. See ya later [the_person.mc_title]!"
+                the_person.char "Sorry, I gotta get going. See ya later, [the_person.mc_title]!"
                 "You wave goodbye as she walks off. You should work on your Charisma more and talk to her again sometime..."
         else:
             "[the_person.possessive_title] sighs."
@@ -482,7 +482,7 @@ label casual_hotwife_blowjob_text_label(the_person):
     the_person.char "So I opened up and I let him use my mouth... god I never could have imagined my husband doing that to me could be so hot."
     the_person.char "Now... I'm a good wife... I've always, you know, swallowed for him. But this time..."
     "Her voice trails off a bit as she recalls the details. A smile on her face."
-    the_person.char "I've never, ever had so swallow soooooo much. It was so hot, like a firehose it just kept cumming..."
+    the_person.char "I've never, ever had to swallow soooooo much. It was so hot, like a firehose it just kept cumming..."
     "You shift uncomfortably. This story is starting to turn you on!"
     $ mc.change_arousal (20)
     the_person.char "Haaa... sorry! I probably should have just said that it went well."
@@ -1221,7 +1221,7 @@ label hotwife_hookup_accept(the_person):
         return
     else: #You went in raw
         "You push yourself in as deep as you can go. [the_person.possessive_title] moans as you fill her completely."
-        "With every thrust, her ass ripples pleasantly. You give her cheek and open handed spank and watch as shockwaves expand from the epicenter."
+        "With every thrust, her ass ripples pleasantly. You give her cheek an open handed spank and watch as shockwaves expand from the epicenter."
         "[the_person.title] moans at your rough treatment."
         $ the_person.change_arousal(20) #70 + 8
         if the_person.arousal > 100:

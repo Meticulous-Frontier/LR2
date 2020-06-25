@@ -1061,7 +1061,7 @@ label athlete_hookup_accept(the_person):
         return
     else: #You went in raw
         "You push yourself in as deep as you can go. [the_person.possessive_title] moans as you fill her completely."
-        "With every thrust, her ass ripples pleasantly. You give her cheek and open handed spank and watch as shockwaves expand from the epicenter."
+        "With every thrust, her ass ripples pleasantly. You give her cheek an open handed spank and watch as shockwaves expand from the epicenter."
         "[the_person.title] moans at your rough treatment."
         $ the_person.change_arousal(20) #70 + 8
         if the_person.arousal > 100:

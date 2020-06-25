@@ -314,7 +314,7 @@ label candace_talk_about_uniforms(the_person):
         the_person.char "No, I've tried to talk to him, but he shut it down and just said it was non negotiable."
         if candace_get_employees_have_lax_uniforms():
             mc.name "You know, the girls at my company have a much more... relaxed... dress code."
-            the_person.char "Oh? Those girls sure are luck!"
+            the_person.char "Oh? Those girls sure are lucky!"
             mc.name "Yup! I have multiple uniforms available to choose from, from conservative business suites, to topless with a set of yoga pants."
             the_person.char "You... you let girls go topless? That sounds... SO COMFY!!!"
             $ candace_increase_doubt()
