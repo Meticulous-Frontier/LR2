@@ -43,36 +43,36 @@ label enhanced_special_training_crisis_label():
                 if the_person.sluttiness >= 20:
                     $ the_person.draw_person(position="stand4")
                     "[the_person.title] returns from the seminar and enters your office where you are in your chair, idly tending to your duties."
-                    the_person.char "There you are, [the_person.mc_title]! I'm back from the seminar and ready to show you the gratidude I promised."
-                    $ seminar_clothing = the_person.outfit.remove_random_upper(top_layer_first = True, do_not_remove = True)
-                    if seminar_clothing is not None:
-                        $ the_person.draw_animated_removal (seminar_clothing)
-                        "Before you have time to reply, [the_person.title] begins stripping off her [seminar_clothing.name] right in front of you."
+                    the_person.char "There you are, [the_person.mc_title]! I'm back from the seminar and ready to show you the gratitude I promised."
+                    $ the_clothing = the_person.outfit.remove_random_upper(top_layer_first = True, do_not_remove = True)
+                    if the_clothing is not None:
+                        $ the_person.draw_animated_removal (the_clothing)
+                        "Before you have time to reply, [the_person.title] begins stripping off her [the_clothing.display_name] right in front of you."
                         the_person.char "I thought it wouldn't hurt to show you a bit of skin, hope you don't mind?"
                         the_person.mc_title "Not at all, I always appreciate a pleasant sight, [the_person.title]."
                     if the_person.sluttiness >= 50:
-                        $ seminar_clothing = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
-                        if seminar_clothing is not None:
+                        $ the_clothing = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
+                        if the_clothing is not None:
                             "[the_person.possessive_title] isn't impressed by your reaction to her display.\nWanting to sweeten the deal for you, she continues on."
-                            the_person.char "You deserve a bit more I guess... How about I take off my [seminar_clothing.name] for you?"
-                            $ the_person.draw_animated_removal (seminar_clothing)
+                            the_person.char "You deserve a bit more I guess... How about I take off my [the_clothing.display_name] for you?"
+                            $ the_person.draw_animated_removal (the_clothing)
                             the_person.char "Do you like the view of [the_person.possessive_title] undressing?"
                         if the_person.age > 30:
                             "Your dick twitches at the sight of [the_person.title]'s mature body."
                         else:
                             "Your dick twitches at the sight of [the_person.title]'s nubile body."
                         if the_person.sluttiness >= 80:
-                            $ seminar_clothing = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
-                            if seminar_clothing is not None:
+                            $ the_clothing = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
+                            if the_clothing is not None:
                                 the_person.char "You know... the seminar really did help me out..."
-                                #$ seminar_clothing = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
-                                $ the_person.draw_animated_removal(seminar_clothing)
+                                #$ the_clothing = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
+                                $ the_person.draw_animated_removal(the_clothing)
                             the_person.char "You like when I'm a bit naked, huh?"
                             "You feel like you could explode just from the view of [the_person.title]'s naked body as she stands there, teasing you."
-
+                    $ the_clothing = None
                 if the_person.sluttiness >= 90 or (the_person.sluttiness >= 60 and the_person.get_opinion_score("being covered in cum")) > 0 or (the_person.sluttiness >= 60 and the_person.get_opinion_score("giving blowjobs") > 0) or (the_person.sluttiness >= 60 and the_person.get_opinion_score("big dicks") > 0):
                     $ the_person.draw_person(emotion="sad")
-                    "She stops to think for a second, putting on a frown before turning it into a bright, mischevious smile."
+                    "She stops to think for a second, putting on a frown before turning it into a bright, mischievous smile."
                     $ the_person.draw_person(emotion="happy")
                     the_person.char "Being naked in front of you made so... horny! You deserve some real gratitude! How about a quick BJ?"
                     "\"There's always time for a quick blowjob\" you think to yourself before swiftly unzipping your pants as [the_person.possessive_title] gets onto her knees."
@@ -82,9 +82,9 @@ label enhanced_special_training_crisis_label():
                     "[the_person.title] opens her mouth and begins to vigorously suck on your dick with the full intent of giving you at least $500's worth of suction." #Nice. SUUUCTIIIIOOON
                     the_person.mc_title "I truly appreciate having such gracious employees; keep on going [the_person.title]."
                     $ the_person.draw_person(position="blowjob")
-                    "[the_person.title] lets your cock drop out of her mouth as she grabs a hold of it, ministrating an enthusiastic handjob as she looks at your eyes with a smile plastered onto her face."
+                    "[the_person.title] lets your cock drop out of her mouth as she grabs a hold of it, administrating an enthusiastic handjob as she looks at your eyes with a smile plastered onto her face."
                     the_person.char "\", and I truly appreciate working for such a wonderful man!\" she replies while tugging at your length, cherishing your compliment."
-                    the_person.char "You know... [the_person.mc_title], I owe you and your company a lot. I hope you know that I'll go to any lenghts to make the company succeed."
+                    the_person.char "You know... [the_person.mc_title], I owe you and your company a lot. I hope you know that I'll go to any lengths to make the company succeed."
                     "She speeds up stroking your dick while cupping and massaging your balls with her other hand."
                     the_person.char "I hope the company will come to benefit from the techniques the seminar taught me... It will, right, [the_person.mc_title]?" # I would do anything to win the promotion.
                     $ the_person.draw_person(position="blowjob", special_modifier="blowjob")
@@ -134,18 +134,18 @@ label enhanced_special_training_crisis_label():
                         "[the_person.title] straightens her back then walks towards the door to that leads out of your office. In the doorway she stops and turns to you."
                         the_person.char "Remember [the_person.mc_title], anything for the company."
                     else:
-                        $ seminar_cum = renpy.random.randint(1,4)
-                        if seminar_cum > 3:
+                        $ ran_num = renpy.random.randint(1,4)
+                        if ran_num > 3:
                             $ the_person.cum_on_face()
                             "She pulls your cock out of her mouth then looks intently at your eyes."
                             the_person.char "Yes, [the_person.mc_title]. Shoot it right onto me! Give me one... big... facial."
                         else:
-                            if seminar_cum > 2:
+                            if ran_num > 2:
                                 $ the_person.cum_on_stomach()
                                 "She pulls your cock out of her mouth then looks up into your eyes as she leans away from you."
                                 the_person.char "Oh, [the_person.mc_title]. I just applied new makeup. Please, don't ruin it."
                             else:
-                                if seminar_cum > 1:
+                                if ran_num > 1:
                                     $ the_person.cum_in_mouth()
                                     "She withdraws her mouth from your cock, resting it by the tip as she looks into your eyes with her mouth wide open."
                                     the_person.char "Yes, [the_person.mc_title]! Shoot your load right into my mouth. I love the taste of you."
