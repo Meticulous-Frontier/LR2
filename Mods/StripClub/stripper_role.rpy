@@ -75,6 +75,8 @@ init 5 python:
         return False
 
     def strip_club_hire_employee_requirement(person):
+        if person.has_role(casual_hotwife_role) or person.has_role(casual_athlete_role) or person.has_role(casual_FA_role):
+            return False
         if person.has_role(stripper_role) or person in list(set(unique_character_list)-set([cousin, aunt, mom, lily])): # disqualified from action
             return False
         if __builtin__.len(stripclub_strippers) > 7: # max 8 strippers.

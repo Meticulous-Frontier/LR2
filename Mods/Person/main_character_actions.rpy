@@ -31,6 +31,8 @@ init 2 python:
 
     # Hire Person Requirements
     def mc_hire_person_requirement(person):
+        if person.has_role(casual_hotwife_role) or person.has_role(casual_athlete_role) or person.has_role(casual_FA_role):
+            return False
         if person not in mc.business.get_employee_list() + unique_character_list:
             if mc.business.get_employee_count() >= mc.business.max_employee_count:
                 return "At employee limit."
