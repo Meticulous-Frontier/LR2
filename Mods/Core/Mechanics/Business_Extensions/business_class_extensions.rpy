@@ -72,3 +72,38 @@ init -1 python:
             self.mandatory_crises_list.append(the_crisis)
 
     Business.add_unique_mandatory_crisis = add_unique_mandatory_crisis
+
+    def calculate_strip_club_income(self):
+        income = 0
+        if get_strip_club_foreclosed_stage() >= 5: # The player owns the club
+            for stripper in people_in_role(stripper_role): # More strippers more money, and linked to the difficulty choice made...
+                income += calculate_stripper_profit(stripper)
+                # extra modifiers for later stages (not yet implemented)
+                #    if foreclosed_stage >= 6: # The club have a manager = +10% income
+                #        income += int (income * 0.1)
+                #    if foreclosed_stage >= 7: # The club have waitresses = +5% income
+                #        income += int (income * 0.05)
+
+            # deduce stripper costs
+            for stripper in people_in_role(stripper_role):
+                income -= stripper.stripper_salary
+
+        return income
+
+    Business.calculate_strip_club_income = calculate_strip_club_income
+
+    # extend the default run day function
+    def business_run_day_extended(org_func):
+        def run_day_wrapper(business):
+            # run original function
+            org_func(business)
+            # run extension code
+            strip_club_income = business.calculate_strip_club_income()
+            if strip_club_income != 0:
+                mc.business.funds += strip_club_income
+                mc.business.add_normal_message("The [strip_club.formalName] has made a net profit of $" + str(__builtin__.round(strip_club_income, 1)) + " today!")
+
+        return run_day_wrapper
+
+    # wrap up the run_day function
+    Business.run_day = business_run_day_extended(Business.run_day)

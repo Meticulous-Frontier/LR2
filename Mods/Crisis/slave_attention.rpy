@@ -12,7 +12,7 @@ init 3 python:
     def get_unhappy_slave():
         qualified = []
         for person in known_people_in_the_game([mc]):
-            if slave_role in person.special_role and person.sex_record.get("Last Sex Day", 0) > day + 7:
+            if person.has_role(slave_role) and person.sex_record.get("Last Sex Day", 0) > day + 7:
                 qualified.append(person)
         return get_random_from_list(qualified)
 
@@ -110,7 +110,7 @@ label slave_attention_crisis_action_label:
                     pass
                 "Let her go":
                     mc.name "That's enough for now, you can get dressed."
-                    $ the_person.review_outfit(dialogue = False)
+                    $ the_person.apply_planned_outfit()
                     $ the_person.draw_person(position = "stand3")
                     the_person.char "Thank you Master, for granting your slave this much pleasure."
                     "You just nod, as she quickly scurries out of the room."
@@ -144,7 +144,7 @@ label slave_attention_crisis_action_label:
                             "Without any mercy you decide to fuck her ass hard."
                             call fuck_person(the_person, start_position = doggy_anal, start_object = make_floor(), skip_intro = True, position_locked = True) from _call_slave_attention_crisis_1
                             mc.name "That's enough, now get dressed and get out of here, I will call you when I have need for you."
-                            $ the_person.review_outfit(dialogue = False)
+                            $ the_person.apply_planned_outfit()
                             $ the_person.draw_person(position = "stand3")
                             "She quickly puts on her clothes and bows her head."
                             the_person.char "As you wish, [the_person.mc_title]."
@@ -155,7 +155,7 @@ label slave_attention_crisis_action_label:
 
                         "Send her away":
                             mc.name "That's enough, now get dressed and get out of here, I will call you when I have need for you."
-                            $ the_person.review_outfit(dialogue = False)
+                            $ the_person.apply_planned_outfit()
                             $ the_person.draw_person(position = "stand3")
                             "She quickly puts on her clothes and bows her head."
                             the_person.char "As you wish, [the_person.mc_title]."
@@ -163,7 +163,7 @@ label slave_attention_crisis_action_label:
 
                 "Release her":
                     mc.name "No, my decision is final, you are hereby released from your slave duties."
-                    $ the_person.review_outfit(dialogue = False)
+                    $ the_person.apply_planned_outfit()
                     $ the_person.draw_person(position = "stand3")
                     "She quickly puts on her clothes and bows her head."
                     the_person.char "As you wish..."
@@ -179,6 +179,6 @@ label slave_attention_crisis_action_label:
             $ the_person.change_stats(happiness = -3, obedience = 3)
             the_person.char "Yes Master, please forgive me..."
 
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
     $ renpy.scene("Active")
     return

@@ -27,7 +27,7 @@ init 3:
 
                     viewport:
 
-                        if len(target_wardrobe.get_outfit_list()) > 11:
+                        if __builtin__.len(target_wardrobe.get_outfit_list()) > 11:
                             scrollbars "vertical"
                         xfill True
                         yfill True
@@ -62,7 +62,7 @@ init 3:
                             text "Overwear Deletion" style "serum_text_style"
 
                         viewport:
-                            if len(target_wardrobe.get_overwear_sets_list()) > 11:
+                            if __builtin__.len(target_wardrobe.get_overwear_sets_list()) > 11:
                                 scrollbars "vertical"
                             xfill True
                             yfill True
@@ -96,7 +96,7 @@ init 3:
                             text "Underwear Deletion" style "serum_text_style"
 
                         viewport:
-                            if len(target_wardrobe.get_underwear_sets_list()) > 11:
+                            if __builtin__.len(target_wardrobe.get_underwear_sets_list()) > 11:
                                 scrollbars "vertical"
                             xfill True
                             yfill True

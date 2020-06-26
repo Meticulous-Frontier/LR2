@@ -33,7 +33,7 @@ init 2 python:
         return
     
     def execute_hijack_call(stack):
-        if (len(stack) == 0):
+        if (__builtin__.len(stack) == 0):
             return
 
         # remove first label from stack

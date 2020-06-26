@@ -103,7 +103,7 @@ init -1 python:
                 renpy.call(self.intro,person_one, person_two, the_location, the_object, round)
 
         def call_scene(self, person_one, person_two, the_location, the_object, round):
-            random_scene = renpy.random.randint(0,len(self.scenes)-1)
+            random_scene = renpy.random.randint(0,__builtin__.len(self.scenes)-1)
             if girl_swap_pos:
                 renpy.call(self.scenes[random_scene],person_two, person_one, the_location, the_object, round)
             else:
@@ -317,7 +317,7 @@ init 5 python:
                     option_list.append([threeway.girl_two_final_description, threeway.position_two_tag])
                 elif threeway.position_two_tag == girl_one_choice:
                     option_list.append([threeway.girl_one_final_description, threeway.position_one_tag])
-        if len(option_list) == 0:
+        if __builtin__.len(option_list) == 0:
             renpy.say("", "Something has gone wrong, no available positions")  #Return something default?
         return option_list
 

@@ -175,7 +175,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                  if the_girl.get_opinion_score("being fingered") > 0:
                       "[the_girl.possessive_title] reacts by pushing her hips forward to grind against your fingers."
                       "You use your other hand to hold her hip to keep your groin buried in her sex."
-                      the_girl.char "OH... fuck how do you do that... it feels so good"
+                      the_girl.char "OH... fuck, how do you do that... it feels so good!"
                       $ the_girl.discover_opinion("being fingered")
                       $ the_girl.change_arousal(the_girl.get_opinion_score("being fingered") * 4)
                  else:   ####TODO add doesn't like it dialogue ###

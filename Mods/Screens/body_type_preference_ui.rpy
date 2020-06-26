@@ -11,7 +11,7 @@ init 2 python:
         if persistent.curvy_body > 0:
             list_of_weighted_body_types.append(["curvy_body", persistent.curvy_body])
 
-        if len(list_of_weighted_body_types) == 0:
+        if __builtin__.len(list_of_weighted_body_types) == 0:
             list_of_weighted_body_types.append(["thin_body", 1])
             list_of_weighted_body_types.append(["standard_body", 1])
             list_of_weighted_body_types.append(["curvy_body", 1])
@@ -122,9 +122,9 @@ screen body_type_preference_ui():
                 text_xalign 0.5 
                 xysize (155,60)
                 action [
-                    SetVariable("persistent.thin_body", int(current_thin_body)),
-                    SetVariable("persistent.normal_body",int(current_normal_body)), 
-                    SetVariable("persistent.curvy_body",int(current_curvy_body)),
+                    SetVariable("persistent.thin_body", __builtin__.int(current_thin_body)),
+                    SetVariable("persistent.normal_body", __builtin__.int(current_normal_body)), 
+                    SetVariable("persistent.curvy_body", __builtin__.int(current_curvy_body)),
                     Return
                 ] 
 

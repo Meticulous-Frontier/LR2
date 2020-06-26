@@ -35,6 +35,11 @@ init python: #For now default init. May change later if we know better.
         def quest_init(self):
             renpy.call(self.quest_init_label)
 
+        def quest_completed(self):
+            self.quest_complete = True
+            self.quest_cleanup()
+            return
+
         #################################################
         # Custom Compare Functions For Side_Quest Class #
         #################################################
@@ -61,13 +66,13 @@ init python: #For now default init. May change later if we know better.
             if isinstance(self, other.__class__):
                 return self.quest_name != other.quest_name
             return True
-          
+
 
     class Quest_Tracker(renpy.store.object):
         def __init__(self):
             self.quest_list = []
             self.active_quest = None
-            self.unavailable_persons = [] #List of people that are unable to used for quest purposes. Girls get added to this as quests progress, so we don't give multiple quests to same girl
+            self.unavailable_person_identifiers = [] #List of people that are unable to used for quest purposes. Girls get added to this as quests progress, so we don't give multiple quests to same girl
             self.quest_chance = SIDE_QUEST_INITIAL_CHANCE
 
         def run_day(self): #AT the end of each day.
@@ -97,10 +102,10 @@ init python: #For now default init. May change later if we know better.
                     if quest.start_requirement():
                         able_quest_list.append(quest)
 
-            self.active_quest = get_random_from_list(able_quest_list)                        
+            self.active_quest = get_random_from_list(able_quest_list)
             if not self.active_quest: #No applicable quests available. Reset quest chance.
                 return False
-                
+
             self.active_quest.quest_init()
             self.quest_active = True
             self.quest_start_day = day
@@ -122,6 +127,24 @@ init python: #For now default init. May change later if we know better.
                 return self.active_quest.quest_name
             return ""
 
+        def add_unavailable_person(self, person):
+            # compatibility code for old saves (remove for version 0.30)
+            if hasattr(self, "unavailable_persons"):
+                if not person in self.unavailable_persons:
+                    self.unavailable_persons.append(person)
+                return
+
+            if not person.identifier in self.unavailable_person_identifiers:
+                self.unavailable_person_identifiers.append(person.identifier)
+
+        def is_person_blocked(self, person):
+            # compatibility code for old saves (remove for version 0.30)
+            if hasattr(self, "unavailable_persons"):
+                return not person in self.unavailable_persons
+
+            return person.identifier in self.unavailable_person_identifiers
+
+
         #DEBUG functions
 
         def debug_text_dump(self):  #Use this command in the console to get a dump of quest tracker status.
@@ -136,7 +159,7 @@ init python: #For now default init. May change later if we know better.
             return
 
         def attempt_force_quest(self, quest_name = None, override_active = False):  #Use this command in the console to attempt to for a new quest. optional param to force a specific quest for debug purpuses.
-            if self.active_quest == None or override_action:
+            if self.active_quest == None or override_active:
                 if quest_name == None:
                     return self.start_new_quest()
 
@@ -151,16 +174,23 @@ init python: #For now default init. May change later if we know better.
                             return True
             return "Unable to force quest"
 
+        def purge_active_quest(self):  #Use this to attempt to clean out an active quest in case it gets buggy during reload
+            if self.active_quest:
+                self.active_quest.set_quest_flag(0)
+                self.active_quest.quest_cleanup()
+                self.active_quest = false
+
     def Quest_tracker_init():
         global quest_director
         quest_director = Quest_Tracker()
-
-        quest_director.unavailable_persons = unique_character_list
 
         Quest_tracker_update_quest_list()
         return
 
     def Quest_tracker_update_quest_list():
+        for person in unique_character_list:
+            quest_director.add_unavailable_person(person)
+
         if not "quest_production_line" in globals():
             global quest_production_line
             quest_production_line = Side_Quest(quest_name = "Chemist's Baby Girl",
@@ -196,11 +226,18 @@ init python: #For now default init. May change later if we know better.
                 start_requirement = quest_essential_oils_start_requirement,
                 quest_cleanup = quest_essential_oils_cleanup)
             quest_director.add_new_quest(quest_essential_oils)
+
+        if not "quest_arousal_serum" in globals():
+            global quest_arousal_serum
+            quest_arousal_serum = Side_Quest(quest_name = "Arousal Serum",
+                quest_init_label = "quest_arousal_serum_init_label",
+                quest_tracker = quest_arousal_serum_tracker,
+                start_requirement = quest_arousal_serum_start_requirement,
+                quest_cleanup = quest_arousal_serum_cleanup)
+            quest_director.add_new_quest(quest_arousal_serum)
         return
 
     def Quest_tracker_update():
-        quest_director.unavailable_persons = unique_character_list
-
         Quest_tracker_update_quest_list()
 
         # update existing quests to simplify debugging (only tracker and cleanup)

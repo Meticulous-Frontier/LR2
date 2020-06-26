@@ -118,7 +118,7 @@ label SB_caught_masturbating_crisis_label():
                             $ the_person.change_arousal(10)
                             "It seems that [the_person.possessive_title] is fantasizing about you eating her out!"
                             "You decide that this is an opportunity too good to pass up."
-                            mc.name "I'd be happy to [the_person.title]"
+                            mc.name "I'd be happy to [the_person.title]."
                             $ the_person.draw_person(position = "missionary")
                             "You startle [the_person.possessive_title] and she quickly turns over on her back."
                             the_person.char "[the_person.mc_title]? Oh God, how long have you been here?"
@@ -127,7 +127,7 @@ label SB_caught_masturbating_crisis_label():
                             else:                                              #Otherwise, strip her down.
                                 "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy."
                                 $ the_person.strip_outfit(position = "missionary", exclude_upper = True)
-                                "With her pussy finally exposed you waste no time diving right in"
+                                "With her pussy finally exposed you waste no time diving right in."
                             $ the_person.break_taboo("bare_pussy")
                             $ the_person.break_taboo("licking_pussy")
                             "Cupping her ass with your hands, you circle your tongue all around her wet, inviting cunt."
@@ -141,7 +141,7 @@ label SB_caught_masturbating_crisis_label():
                             "You double your efforts, licking, sucking, and teasing every corner of her pleasing slit."
                             $ the_person.change_arousal(10)
                             "[the_person.possessive_title] begins to orgasm convulsively, and she cries out."
-                            the_person.char "Yes [the_person.mc_title]! Yes! Yes! Oh fuck how do you do that."
+                            the_person.char "Yes [the_person.mc_title]! Yes! Yes! Oh fuck, how do you do that!"
                             $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "missionary")
                             $ the_person.change_happiness(5)
                             $ the_person.change_obedience(5)
@@ -177,7 +177,7 @@ label SB_caught_masturbating_crisis_label():
                             "You back out of the room before she has a chance to recover. You can't believe your good luck, catching an employee masturbating... while thinking of you of all people!"
                             "On your way back to your work, you swing by [the_person.possessive_title]'s desk. You write her a quick note."
                             "Thanks for the show!"
-                            "You finish it with your initials and leave it next to her computer monitor"
+                            "You finish it with your initials and leave it next to her computer monitor."
                             "Half an hour later while you are back into your work, you get a text message from [the_person.possessive_title]."
                             if the_person.sluttiness > 60:
                                 the_person.char "Next time join in!!!"
@@ -208,7 +208,7 @@ label SB_caught_masturbating_crisis_label():
                                 $ the_person.draw_person(position = "walking_away")
                                 "[the_person.possessive_title] storms off. While the situation was awkward, it left a bit of tension in the air..."
                                 $ the_person.change_stats(happiness = -5, obedience = -5, slut_temp = 5)
-                                "You finish up your walk and return back to your previous work,"
+                                "You finish up your walk and return back to your previous work."
                         else: #She's embarrassed
                             "Mortified, [the_person.possessive_title] makes a run for the door."
                             $ the_person.draw_person(position = "walking_away")
@@ -305,7 +305,7 @@ label SB_caught_masturbating_crisis_label():
             "Keep walking":
                 "You decide to give [the_person.possessive_title] some privacy. As quietly as you can, you close the door behind you and continue walking."
 
-        $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
+        $ the_person.apply_planned_outfit()
         $ mc.location.show_background()
     $ the_clothing = None
     $ the_person_two = None

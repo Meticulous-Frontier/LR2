@@ -11,9 +11,8 @@ init 3 python:
             update_cougar_personality(person)
         return
 
-    cougar_personality_action = ActionMod("Cougar Personality", cougar_personality_requirement, "cougar_personality_dummy_label",
+    cougar_personality_action = ActionMod("Cougar Personality", cougar_personality_requirement, "cougar_personality_dummy_label", priority = -10,
         menu_tooltip = "Enable or disable the cougar personality.", category="Personality", on_enabled_changed = change_cougar_personality_enabled)
-
 
 init 1400 python:
     def cougar_titles(person):
@@ -772,7 +771,10 @@ label cougar_cum_vagina(the_person):
                 else:
                     the_person.char "If I become pregnant I can say it's my [so_title]'s. I'm sure he would believe it."
             else:
-                the_person.char "Mmm, your semen is so nice and warm. I wonder how potent it is. You might have gotten me pregnant, you know."
+                if the_person.on_birth_control:
+                    the_person.char "Mmm, your semen feels warm and sticky, good thing I cannot get pregnant, because this might have done it."
+                else:
+                    the_person.char "Mmm, your semen is so nice and warm. I wonder how potent it is. You might have gotten me pregnant, you know."
         else:
             if the_person.relationship != "Single":
                 $ so_title = SO_relationship_to_title(the_person.relationship)
@@ -869,7 +871,7 @@ label cougar_sex_watch(the_person, the_sex_person, the_position):
         $ the_person.draw_person(emotion = "happy")
         $ pronoun = person_body_shame_string(the_sex_person, "slut")
         the_person.char "You can do better [the_person.mc_title], give that little [pronoun] what she needs."
-        "[the_person.possessive_title] watches you eagerly while [the_position.verb]ing [the_sex_person.name]."
+        "[the_person.possessive_title] watches you eagerly while [the_position.verbing] [the_sex_person.name]."
 
     return
 
@@ -909,7 +911,7 @@ label cougar_being_watched(the_person, the_watcher, the_position):
         the_person.char "People say I shouldn't do this, but this young man makes me feel alive."
         $ the_person.change_arousal(1)
         $ the_person.change_slut_temp(1)
-        "[the_person.possessive_title] seems more comfortable [the_position.verb]ing you with [the_watcher.name] around."
+        "[the_person.possessive_title] seems more comfortable [the_position.verbing] you with [the_watcher.name] around."
 
     return
 
@@ -1050,7 +1052,7 @@ label cougar_touching_penis_taboo_break(the_person):
         "She bites her lip playfully."
     else:
         the_person.char "We should stop here... I don't want you to get the wrong idea about me."
-        mc.name "Look at me [the_person.mc_title], I'm rock hard. Nobody would ever know if you gave it a little feel."
+        mc.name "Look at me [the_person.title], I'm rock hard. Nobody would ever know if you gave it a little feel."
         "You see her resolve waver."
         the_person.char "It is very... Big. Just feel it for a moment?"
         mc.name "Just a moment. No longer than you want to."
@@ -1239,7 +1241,6 @@ label cougar_underwear_nudity_taboo_break(the_person, the_clothing):
         the_person.char "If I take off my [the_clothing.display_name] you'll see me in my underwear."
         mc.name "That's the plan, yes."
         the_person.char "I shouldn't be going around half naked for men I barely know. What would people think?"
-        mc.name "Why do you care what other people think? Forget about them and just focus on us."
 
         if the_person.has_taboo(["bare_tits","bare_pussy"]):
             mc.name "Why do you care what other people think? Forget about them and just focus on the moment."

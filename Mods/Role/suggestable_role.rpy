@@ -5,7 +5,7 @@
 init 2 python: # Define actions and requirements for the actual mod here.
 
     def influence_opinion_requirement(person): # Shows only if person has been affected by suggestibility serum.
-        if suggestable_role in person.special_role:
+        if person.has_role(suggestable_role):
             return True
         else:
             return False
@@ -44,7 +44,7 @@ label influence_opinion_label(person): #Input a custom opinion, check if they ha
     python:
         score = person.get_opinion_score(opinion)
         degrees = [-2,-1,0,1,2]
-        ran_num = abs(degrees.index(score) - degrees.index(degree)) # How far is the degree away from current opinion (max 4 steps)
+        ran_num = __builtin__.abs(degrees.index(score) - degrees.index(degree)) # How far is the degree away from current opinion (max 4 steps)
         cur_score = opinion_score_to_string(score)
 
     if score is not 0:

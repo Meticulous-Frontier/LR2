@@ -51,14 +51,14 @@ label dirty_laundry_action_label:
     "You are just drifting off to sleep when you suddenly you remember. You don't have any clean clothes for tomorrow!"
     "You look a the clock. It is already pretty late. You guess that your family is already asleep, so you grab your laundry and take it to the laundry room just wearing your boxers."
 
-    $ ran_num = renpy.random.randint(0, 1)
-    if ran_num == 0:
+    $ ran_num = renpy.random.randint(0, 3)
+    if ran_num < 3:
         call dirty_laundry_wash_your_clothes(the_person) from call_dirty_laundry_wash_your_clothes
     else:
         call dirty_laundry_stuck_in_dryer(the_person) from call_dirty_laundry_stuck_in_dryer
 
     $ renpy.scene("Active")
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
     return
 
 
@@ -141,7 +141,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                         $ the_person.draw_person(emotion="orgasm", position ="missionary")
                         "You double your efforts, licking, sucking, and teasing every corner of her pleasing slit"
                         "[the_person.possessive_title] begins to orgasm convulsively, and she cries out."
-                        the_person.char "Yes [the_person.mc_title]! Yes! Yes! Oh fuck how do you do that"
+                        the_person.char "Yes [the_person.mc_title]! Yes! Yes! Oh fuck, how do you do that!"
                         $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "missionary")
                         $ the_person.change_stats(obedience = 5, happiness = 5, love = 3, slut_temp = 5, slut_core = 2)
                         "[the_person.possessive_title] runs her hands through your hair one last time. She sits up and gives you a kiss, tasting herself on your tongue."

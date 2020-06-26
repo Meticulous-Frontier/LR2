@@ -7,7 +7,7 @@ init 2 python:
         if not mc.business.is_weekend():
             if mc.is_at_work():
                 if time_of_day > 0 and time_of_day < 4: # only during morning afternoon or evening
-                    if len(mc.business.get_requirement_employee_list(slut_required = 20)) >= 3:
+                    if __builtin__.len(mc.business.get_requirement_employee_list(slut_required = 20)) >= 3:
                         return True
         return False
 
@@ -106,11 +106,11 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                     $ scene_manager.clear_scene()
                     $ person_two.increase_opinion_score("threesomes")
                     $ person_two.reset_arousal()
-                    $ person_two.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
+                    $ person_two.apply_planned_outfit()
 
                     $ person_three.increase_opinion_score("threesomes")
                     $ person_three.reset_arousal()
-                    $ person_three.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
+                    $ person_three.apply_planned_outfit()
 
                     $ town_relationships.improve_relationship(person_two, person_three)
 

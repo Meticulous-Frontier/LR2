@@ -32,7 +32,7 @@ init -1 python:
             return
         if not mc.location is lily_bedroom:
             return "Must be in Lily's bedroom"
-        elif len(lily_bedroom.people) > 1:
+        elif __builtin__.len(lily_bedroom.people) > 1:
             return "Must be alone with Lily"
         elif mc.energy > 30:
             return True
@@ -107,7 +107,7 @@ init 1 python:
         description = ""
         for role in the_person.special_role:
             if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role]:
-                if len(description) > 0:
+                if __builtin__.len(description) > 0:
                     description += ", "
                 description += role.role_name
         return description
@@ -115,13 +115,13 @@ init 1 python:
     def SB_fetish_get_employee_percent():
         total_count = 0
         fetish_count = 0
-        if len(mc.business.get_employee_list()) == 0:
+        if __builtin__.len(mc.business.get_employee_list()) == 0:
             return 0
         for person in mc.business.get_employee_list():
             total_count += 1
             if SB_get_fetish_count(person) > 0:
                 fetish_count += 1
-        return int((fetish_count / total_count) * 100)
+        return __builtin__.int((fetish_count / total_count) * 100)
 
 
 #Vaginal Fetish Events#
@@ -202,7 +202,7 @@ label SB_fetish_vaginal_mom_kitchen_label(the_person):
         "[the_person.possessive_title] remains silent. She knows that even while preparing dinner, you may come use her for your pleasure at any time."
 
     $ the_person.event_triggers_dict["LastAnalFetish"] = day
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
     "As [the_person.possessive_title] continues dinner preparation, you take a quick look around. It doesn't look like Lily noticed anything happened between you and [the_person.possessive_title]."
 
     $ the_clothing = None
@@ -279,7 +279,7 @@ label SB_fetish_anal_mom_kitchen_label(the_person):
         "[the_person.possessive_title] remains silent. She knows that even while preparing dinner, you may come use her for your pleasure at any time."
 
     $ the_person.event_triggers_dict["LastAnalFetish"] = day
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
     "As [the_person.possessive_title] continues dinner preparation, you take a quick look around. It doesn't look like Lily noticed anything happened between you and [the_person.possessive_title]."
 
     $ the_clothing = None
@@ -313,5 +313,5 @@ label SB_lily_anal_in_room_label(the_person):
     the_person.char "Yes... Thanks [the_person.mc_title]... Don't be a stranger now!"
     "[the_person.possessive_title] wiggles her ass back and forth a bit, still lying face down on her bed. You politely excuse yourself."
     $ the_person.event_triggers_dict["LastAnalFetish"] = day
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
     return

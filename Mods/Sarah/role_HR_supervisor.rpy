@@ -41,7 +41,7 @@ init 5 python:
         HR_tier_talk = -1 # init at -1 so we do the first collect with 0
         HR_employee_list = []
         # build list of girls that qualify for specified tier and max_tier score
-        while len(HR_employee_list) == 0 and HR_tier_talk < get_HR_director_tag("business_HR_coffee_tier", 0) and HR_tier_talk < max_tier:
+        while __builtin__.len(HR_employee_list) == 0 and HR_tier_talk < get_HR_director_tag("business_HR_coffee_tier", 0) and HR_tier_talk < max_tier:
             HR_tier_talk += 1
             HR_employee_list = get_HR_review_list(the_person, HR_tier_talk)
         return (HR_employee_list, HR_tier_talk)
@@ -222,10 +222,19 @@ init 5 python:
             return True
         return False
 
+    def HR_director_calculate_eff(person):
+        HR_dir_factor = 0
+        if mc.business.hr_director:
+            HR_dir_factor = ((person.charisma * 2 ) + person.hr_skill)   #Charisma + HR skill
+            #TODO make events later on that factor this to be better
+        HR_dir_factor += get_HR_director_tag("business_HR_eff_bonus")
+        mc.business.effectiveness_cap = (100 + HR_dir_factor)   #100% base effectiveness
+        return
+
     def can_appoint_HR_director_requirement():
         if not mc.business.hr_director:
             if HR_director_creation_policy.is_owned():
-                if len(mc.business.hr_team) > 0:
+                if __builtin__.len(mc.business.hr_team) > 0:
                     return True
         return False
 
@@ -293,7 +302,7 @@ init 5 python:
     def calculate_backfire_odds():
         serum_trait = find_in_list(lambda x: x == mind_control_agent, list_of_traits)
         if serum_trait:
-            return int(serum_trait.base_side_effect_chance / serum_trait.mastery_level)
+            return __builtin__.int(serum_trait.base_side_effect_chance / serum_trait.mastery_level)
         return 100
 
     HR_director_coffee_tier_1_action = Action("Add serum to coffee", HR_director_coffee_tier_1_requirement, "HR_director_coffee_tier_1_label",
@@ -419,7 +428,7 @@ label HR_director_first_monday_label(the_person):
     the_person.char "So far, aside from personnel, I've noted a few different areas where I think I can improve the efficiency of the business."
     the_person.char "With your approval, I can go ahead and get those started. Are you okay with that?"
     mc.name "Yes, definitely. Efficiency is always a concern at a small business like this."
-    call HR_director_calculate_eff(the_person) from HR_director_first_monday_1
+    $ HR_director_calculate_eff(the_person)
     the_person.char "Right, aside from that, I have an idea for a new program. Basically, I noted in the dossiers that there are several employees here who either don't enjoy what they are doing, or are unhappy for some other, unknown reason..."
     the_person.char "My proposal is to start a program where, every weekend I'll go through all the latest employee info and compile a list of girls most at risk at quitting."
     the_person.char "We can call one in, and see if we can have a productive discussion on their reservations. Maybe over time we can even change their opinions on work tasks they don't currently enjoy."
@@ -430,7 +439,7 @@ label HR_director_first_monday_label(the_person):
     $ the_person.draw_person(position = "sitting", emotion = "happy")
 
     $ (HR_employee_list, HR_tier_talk) = build_HR_review_list(the_person, 0)
-    if len(HR_employee_list) == 0:
+    if __builtin__.len(HR_employee_list) == 0:
         the_person.char "That sounds great! Alright, I currently have no employees that would benefit from a meeting, perhaps next week."
     else:
         the_person.char "That sounds great! Alright, I actually have a set of possibilities arranged for a meeting today if you would like. Do you want to go over my list of girls?"
@@ -512,13 +521,13 @@ label HR_director_monday_meeting_label(the_person):
                 the_person.char "Ahh, damn. Okay, give me a second and we can get started here."
                 "She reaches down to her backpack and begins to pull out her notes from the previous week."
     the_person.char "Here are my plans for the week. I think I have a few tweaks to efficiency I can make, but overall I wouldn't expect to see a big change company wide."
-    call HR_director_calculate_eff(the_person) from HR_director_monday_meeting_1
+    $ HR_director_calculate_eff(the_person)
     "She hands you a few documents. You check them over."
     mc.name "Looks good. Go ahead and continue with those plans."
     #$ scene_manager.clear_scene()
 
     $ (HR_employee_list, HR_tier_talk) = build_HR_review_list(the_person, get_HR_director_tag("business_HR_coffee_tier", 0))
-    if len(HR_employee_list) == 0:
+    if __builtin__.len(HR_employee_list) == 0:
         the_person.char "Can do! I have currently no girls on my counseling list, perhaps next week."
     else:
         the_person.char "Can do! Did you want to call in a girl for a counseling session this week?"
@@ -550,12 +559,12 @@ label HR_director_monday_meeting_label(the_person):
     the_person.char "Sounds great! I'll see you then!"
 
     $ add_hr_director_monday_meeting_action(the_person)
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
     return
 
 label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     $ (HR_employee_list, HR_tier_talk) = build_HR_review_list(the_person, max_opinion)
-    if len(HR_employee_list) == 0: #No one qualifies!
+    if __builtin__.len(HR_employee_list) == 0: #No one qualifies!
         the_person.char "Actually, thing are running really smoothly right now, I didn't come across any dossiers this past weekend that drew my attention!"
         #TODO add another option here? Offer to bring in any girl?
         return
@@ -873,7 +882,7 @@ label HR_director_manage_gym_membership(the_person):
                     x.change_happiness(3 * x.get_opinion_score("sports"))
                 if x.get_opinion_score("hiking") > 0:
                     x.change_happiness(1 * x.get_opinion_score("sports"))
-            cost = len(mc.business.get_employee_list()) * 5
+            cost = __builtin__.len(mc.business.get_employee_list()) * 5
     elif get_HR_director_tag("business_HR_gym_tier", 0) == 2:
         python:
             for x in mc.business.get_employee_list():
@@ -886,7 +895,7 @@ label HR_director_manage_gym_membership(the_person):
                     x.change_happiness(5 * x.get_opinion_score("sports"))
                 if x.get_opinion_score("hiking") > 0:
                     x.change_happiness(2 * x.get_opinion_score("sports"))
-            cost = len(mc.business.get_employee_list()) * 15
+            cost = __builtin__.len(mc.business.get_employee_list()) * 15
     the_person.char "Just to let you know, I wrote out the check this morning for this week's employee health program."
     $ mc.business.change_funds(-cost)
     return
@@ -909,15 +918,6 @@ label HR_director_coffee_tier_2_label(the_person):
     mc.name "Sounds good."
     the_person.char "Did you need anything else, [the_person.mc_title]?"
     $ set_HR_director_tag("business_HR_coffee_tier", 2)
-    return
-
-label HR_director_calculate_eff(the_person):
-    $ HR_dir_factor = 0
-    if mc.business.hr_director:
-        $ HR_dir_factor = ((the_person.charisma * 2 ) + the_person.hr_skill)   #Charisma + HR skill
-        #TODO make events later on that factor this to be better
-    $ HR_dir_factor += get_HR_director_tag("business_HR_eff_bonus")
-    $ mc.business.effectiveness_cap = (100 + HR_dir_factor)   #100% base effectiveness
     return
 
 label HR_director_gym_membership_tier_1_label(the_person):
@@ -1002,7 +1002,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         $ set_HR_director_unlock("blowjob", True)
         "She cleans herself up and makes herself presentable again."
 
-        $ the_person.review_outfit(dialogue = False)
+        $ the_person.apply_planned_outfit()
         return
 
     if get_HR_director_unlock("titfuck") == False:
@@ -1029,7 +1029,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             the_person.char "Mmm, god that was hot. Let me just enjoy this a minute before we move on with the meeting..."
             "You run your hands through her hair for a bit while she enjoys the warmth of your cum on her skin."
             "Eventually she cleans herself up and makes herself presentable again."
-            $ the_person.review_outfit(dialogue = False)
+            $ the_person.apply_planned_outfit()
             return
 
     if get_HR_director_unlock("missionary on desk") == False:
@@ -1060,7 +1060,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             mc.name "You were right, [the_person.title]. It IS really hot to fuck you on my desk!"
             the_person.char "Ah, yes, I suspected it would be, sir!"
             "Eventually she cleans herself up and makes herself presentable again."
-            $ the_person.review_outfit(dialogue = False)
+            $ the_person.apply_planned_outfit()
             return
 
     if get_HR_director_unlock("bent over desk") == False:
@@ -1097,7 +1097,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                     "[the_person.possessive_title] slowly recovers from using her body for your pleasure."
                     the_person.char "Mmm, happy to be of service, sir. We can do that again next time... if you want!"
                 "Eventually she cleans herself up and makes herself presentable again."
-                $ the_person.review_outfit(dialogue = False)
+                $ the_person.apply_planned_outfit()
                 return
 
 
@@ -1178,7 +1178,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                 "[the_person.title] opens her mouth for a second, ready to protest, but quickly reconsiders."
                 the_person.char "Of course, [the_person.mc_title]. Let's see what is next."
             "Let her clean herself up":
-                $ the_person.review_outfit(dialogue = False)
+                $ the_person.apply_planned_outfit()
                 "[the_person.possessive_title] quickly cleans herself up, ready to continue the meeting."
     else:
         "She quickly starts to get dressed to continue your meeting."
@@ -1198,9 +1198,8 @@ label HR_director_mind_control_label(the_person):
 
 label HR_director_mind_control_attempt_label(the_person):
     $ scene_manager = Scene()
-    $ backfire_odds = 100
     $ HR_employee_list = build_HR_mc_list(the_person)
-    if len(HR_employee_list) == 0: #No one qualifies!
+    if __builtin__.len(HR_employee_list) == 0: #No one qualifies!
         the_person.char "Actually, things are running really smoothly right now, I'm not sure that would be beneficial?"
         return
 

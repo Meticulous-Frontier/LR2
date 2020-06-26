@@ -134,12 +134,12 @@ init -1 python:
             if lower:
                 outfitname += lower[0].name
 
-        if len(outfitname) == 0:
+        if __builtin__.len(outfitname) == 0:
             feet = get_clothing_items(self.feet)
             if feet:
                 outfitname = feet[0].name
 
-        if len(outfitname) == 0:
+        if __builtin__.len(outfitname) == 0:
             return "Naked"
 
         self.update_slut_requirement()

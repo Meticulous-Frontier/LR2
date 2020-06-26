@@ -4,10 +4,10 @@
 init -1 python:
     def get_location_tooltip(location):
         known_people = sorted(known_people_at_location(location), key = lambda x: x.name)
-        if len(known_people) == 0:
+        if __builtin__.len(known_people) == 0:
             return ""
-        tooltip = "You know " + str(len(known_people))
-        if len(known_people) == 1:
+        tooltip = "You know " + str(__builtin__.len(known_people))
+        if __builtin__.len(known_people) == 1:
             tooltip += " person here:\n"
         else:
             tooltip += " people here:\n"
@@ -51,7 +51,7 @@ init 2:
                             action [Function(mc.change_location, place), Return(place)]
                             sensitive place.accessable #TODO: replace once we want limited travel again with: place in mc.location.connections
                             tooltip get_location_tooltip(place)
-                        text (place.formalName + "\n(" + str(len(place.people)) + ")").replace(" ", "\n", 2) + ("\n{color=#FFFF00}Event!{/color}" if get_location_on_enter_events(place) else "") anchor [0.5,0.5] style "map_text_style"
+                        text (place.formalName + "\n(" + str(__builtin__.len(place.people)) + ")").replace(" ", "\n", 2) + ("\n{color=#FFFF00}Event!{/color}" if get_location_on_enter_events(place) else "") anchor [0.5,0.5] style "map_text_style"
                 else:
                     frame:
                         background None
@@ -65,7 +65,7 @@ init 2:
                             action [Function(mc.change_location, place), Return(place)]
                             sensitive True
                             tooltip get_location_tooltip(place)
-                        text (place.formalName + "\n(" + str(len(place.people)) + ")").replace(" ", "\n", 2) + ("\n{color=#FFFF00}Event!{/color}" if get_location_on_enter_events(place) else "") anchor [0.5,0.5] style "map_text_style"
+                        text (place.formalName + "\n(" + str(__builtin__.len(place.people)) + ")").replace(" ", "\n", 2) + ("\n{color=#FFFF00}Event!{/color}" if get_location_on_enter_events(place) else "") anchor [0.5,0.5] style "map_text_style"
 
 
             ##TODO: add a sub map to housing_map_manager() so we can go to people's homes
@@ -87,7 +87,7 @@ init 2:
                     idle "gui/LR2_Hex_Button_Alt_idle.png"
                     focus_mask "gui/LR2_Hex_Button_Alt_idle.png"
                     action Show("housing_map_manager")
-                    sensitive len(mc.known_home_locations) > 0
+                    sensitive __builtin__.len(mc.known_home_locations) > 0
                 text "Visit Someone..." anchor [0.5,0.5] style "map_text_style"
         else:
             frame:
@@ -100,7 +100,7 @@ init 2:
                     auto "gui/LR2_Hex_Button_%s.png"
                     focus_mask "gui/LR2_Hex_Button_idle.png"
                     action Show("housing_map_manager")
-                    sensitive len(mc.known_home_locations) > 0
+                    sensitive __builtin__.len(mc.known_home_locations) > 0
                 text "Visit Someone..." anchor [0.5,0.5] style "map_text_style"
 
         frame:

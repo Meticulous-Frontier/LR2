@@ -45,15 +45,17 @@ init -2 python:
         elif the_person.event_triggers_dict.get("hotwife_blowjob_enable", 0) == 1:
             return True
         else:
-            return "Grab a drink with her first"
+            return "Grab a drink first"
         return False
 
     def casual_hotwife_blowjob_text_requirement(the_person):
         if the_person.event_triggers_dict.get("hotwife_blowjob_text_enable", 0) == 1:
+            if day <= the_person.event_triggers_dict.get("hotwife_blowjob_ask_pictures", 0):
+                return "Wait a few days"
             if time_of_day < 3:
                 return True
             else:
-                return "You should ask her another time"
+                return "Ask her another time"
         return False
 
     def casual_hotwife_dancing_sex_requirement(the_person):
@@ -71,7 +73,7 @@ init -2 python:
         elif the_person.event_triggers_dict.get("hotwife_dancing_enable", 0) == 1:
             return True
         else:
-            return "Grab a drink with her first"
+            return "Grab a drink first"
         return False
 
     def casual_hotwife_sex_invite_requirement(the_person):
@@ -82,7 +84,7 @@ init -2 python:
         elif the_person.effective_sluttiness() < 50:
             return "Requires higher sluttiness"
         elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 4:
-            return "She's already invited you over!"
+            return "Already invited you over!"
         elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 3:
             return True
         return False
@@ -97,7 +99,7 @@ init -2 python:
             if mc.location == the_person.home:
                 return True
             else:
-                return "You can only do this at her place."
+                return "Only at her place."
         return False
 
     def casual_hotwife_ghost_requirement():
@@ -232,7 +234,7 @@ label casual_hotwife_get_a_drink_label(the_person):
                 the_person.char "Just let me know when you have the time... I think we would both really enjoy our time."
                 "[the_person.title] licks her lips, then gets up."
                 $ the_person.draw_person (position = "stand4")
-                the_person.char "See ya later [the_person.mc_title]"
+                the_person.char "See ya later, [the_person.mc_title]."
             elif mc.charisma > 3:
                 the_person.char "Tell you what... I have to get going for now... but next time you see me here..."
                 "She gives you a wink."
@@ -240,16 +242,16 @@ label casual_hotwife_get_a_drink_label(the_person):
                 mc.name "Damn. Sounds good. I'll be sure to look for your soon."
                 "[the_person.title] licks her lips, then gets up."
                 $ the_person.draw_person (position = "stand4")
-                the_person.char "See ya later [the_person.mc_title]"
+                the_person.char "See ya later, [the_person.mc_title]."
                 $ the_person.event_triggers_dict["hotwife_blowjob_enable"] = 1
-                "Sounds like you might get lucky next time you meet up with [the_person.title]"
+                "Sounds like you might get lucky next time you meet up with [the_person.title]."
             else:
                 "Failed Charisma Check."
                 "She looks at you for a second, then hesitates."
                 the_person.char "Soon... anyway..."
                 $ the_person.draw_person (position = "stand4")
                 "[the_person.title] stands up abruptly."
-                the_person.char "Sorry, I gotta get going. See ya later [the_person.mc_title]!"
+                the_person.char "Sorry, I gotta get going. See ya later, [the_person.mc_title]!"
                 "You wave goodbye as she walks off. You should work on your Charisma more and talk to her again sometime..."
         else:
             "[the_person.possessive_title] sighs."
@@ -396,11 +398,11 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         else:
             "Wow... that was hot!"
 
-        if the_person.outfit.has_mouth_cum():
+        if the_person.has_mouth_cum():
             "[the_person.possessive_title] looks up at you. She couldn't quiet swallow all your cum, some of it is slowly dripping down the sides of her mouth."
             the_person.char "Hey! Don't forget to take pictures!"
             "You suddenly remember the phone. You snap a couple pictures of her face with your traces of cum on it."
-        elif the_person.outfit.has_face_cum():
+        elif the_person.has_face_cum():
             "[the_person.possessive_title] looks up at you. Her face is plastered with your sticky seed."
             the_person.char "Hey! Don't forget to take pictures!"
             "You suddenly remember the phone. You snap a couple pictures of her face with your cum covering it."
@@ -415,7 +417,8 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         "You sneak your way out of the bathroom while [the_person.possessive_title] cleans herself up. You hope everything goes well with her tonight!"
         $ the_person.event_triggers_dict["hotwife_blowjob_text_enable"] = 1
         $ the_person.event_triggers_dict["hotwife_progress"] = 2
-        $ the_person.review_outfit(dialogue = False)
+        $ the_person.event_triggers_dict["hotwife_blowjob_ask_pictures"] = day + 1
+        $ the_person.apply_planned_outfit()
     else:   #This is not our first time getting blown#
         mc.name "Hey, you wanna sneak off for a bit?"
         "[the_person.possessive_title] flashes you her beautiful smile."
@@ -457,17 +460,17 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             "You decide to just enjoy her skilled mouth going down on you."
             call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_CSH012
 
-        if the_person.outfit.has_mouth_cum():
+        if the_person.has_mouth_cum():
             "[the_person.possessive_title] looks up at you. She couldn't quiet swallow all your cum, some of it is slowly dripping down the sides of her mouth."
             the_person.char "Hey! Don't forget to take pictures!"
             "You suddenly remember the phone. You snap a couple pictures of her face with your traces of cum on it."
-        elif the_person.outfit.has_face_cum():
+        elif the_person.has_face_cum():
             "[the_person.possessive_title] looks up at you. Her face is plastered with your sticky seed."
             the_person.char "Hey! Don't forget to take pictures!"
             "You suddenly remember the phone. You snap a couple pictures of her face with your cum covering it."
         the_person.char "Mmm, that was great [the_person.mc_title]! I can't wait until I get home tonight... I hope daddy gets the handcuffs out again..."
         "You say goodbye and excuse yourself while she gets herself cleaned up. This arrangement is working out to be very beneficial!"
-        $ the_person.review_outfit(dialogue = False)
+        $ the_person.apply_planned_outfit()
         call advance_time from _call_advance_casual_hotwife_bathroom_blowjob
     return
 
@@ -482,7 +485,7 @@ label casual_hotwife_blowjob_text_label(the_person):
     the_person.char "So I opened up and I let him use my mouth... god I never could have imagined my husband doing that to me could be so hot."
     the_person.char "Now... I'm a good wife... I've always, you know, swallowed for him. But this time..."
     "Her voice trails off a bit as she recalls the details. A smile on her face."
-    the_person.char "I've never, ever had so swallow soooooo much. It was so hot, like a firehose it just kept cumming..."
+    the_person.char "I've never, ever had to swallow soooooo much. It was so hot, like a firehose it just kept cumming..."
     "You shift uncomfortably. This story is starting to turn you on!"
     $ mc.change_arousal (20)
     the_person.char "Haaa... sorry! I probably should have just said that it went well."
@@ -565,16 +568,16 @@ label casual_hotwife_dancing_sex_label(the_person):
         $ the_report = _return
         if the_report.get("guy orgasms", 0) > 0:
             #TODO description for all possible cum locations
-            if the_person.outfit.has_mouth_cum():
+            if the_person.has_mouth_cum():
                 "[the_person.possessive_title] looks up at you. She couldn't quiet swallow all your cum, some of it is slowly dripping down the sides of her mouth."
                 "You grab her phone and snap a couple pictures of her face with your traces of cum on it."
-            elif the_person.outfit.has_face_cum():
+            elif the_person.has_face_cum():
                 "[the_person.possessive_title] looks up at you. Her face is plastered with your sticky seed."
                 "You grab her phone and snap a couple pictures of her face with your cum covering it."
-            elif the_person.outfit.has_tits_cum():
+            elif the_person.has_tits_cum():
                 "[the_person.possessive_title] looks up at you. Her tits are plastered with your sticky seed."
                 "You grab her phone and snap a couple pictures of her tits with your cum covering it."
-            elif the_person.outfit.has_ass_cum():
+            elif the_person.has_ass_cum():
                 "[the_person.possessive_title] looks back at you. Her ass is plastered with your sticky seed."
                 "You grab her phone and snap a couple pictures of her ass with your cum covering it."
             else:       #We assume we finished inside her#
@@ -592,7 +595,7 @@ label casual_hotwife_dancing_sex_label(the_person):
         $ the_person.event_triggers_dict["booty_call"] = True # unlock casual encounters
         "You now have [the_person.title]'s phone number. She may call you from time to time to hookup!"
 
-        $ the_person.review_outfit(dialogue = False)
+        $ the_person.apply_planned_outfit()
 
     else:   #We've done this before
         mc.name "Hey, [the_person.title]. You up for some dancing?"
@@ -634,7 +637,7 @@ label casual_hotwife_dancing_sex_label(the_person):
         the_person.char "Thanks again [the_person.mc_title]. You know where to look for me next time you need some... action."
         "She takes her phone from you and starts going through the pictures you took."
         the_person.char "You'd better get going. I'm going to send these to my husband..."
-        $ the_person.review_outfit(dialogue = False)
+        $ the_person.apply_planned_outfit()
 
     "You grab your clothes and quickly get yourself presentable, before sneaking your way out of the lady's room."
     call advance_time from _call_advance_casual_hotwife_dancing
@@ -791,8 +794,8 @@ init 1301 python:              #Because Vren Init personality functionns at 1300
 
     hotwife_personality = Personality("hotwife", default_prefix = "wild",
     common_likes = ["skirts", "dresses", "the weekend", "the colour red", "makeup", "flirting", "high heels"],
-    common_sexy_likes = ["casual sex", "doggy style sex", "giving blowjobs", "vaginal sex", "public sex", "lingerie", "not wearing underwear", "being submissive", "drinking cum", "cheating on men"],
-    common_dislikes = ["relationships", "pants", "working", "the colour yellow", "conservative outfits", "sports"],
+    common_sexy_likes = ["casual sex", "doggy style sex", "giving blowjobs", "vaginal sex", "public sex", "lingerie", "skimpy outfits", "being submissive", "drinking cum", "cheating on men"],
+    common_dislikes = ["polyamory", "pants", "working", "the colour yellow", "conservative outfits", "sports"],
     common_sexy_dislikes = ["taking control", "giving handjobs", "not wearing anything"],
     titles_function = hotwife_titles, possessive_titles_function = hotwife_possessive_titles, player_titles_function = hotwife_player_titles)
 
@@ -1221,7 +1224,7 @@ label hotwife_hookup_accept(the_person):
         return
     else: #You went in raw
         "You push yourself in as deep as you can go. [the_person.possessive_title] moans as you fill her completely."
-        "With every thrust, her ass ripples pleasantly. You give her cheek and open handed spank and watch as shockwaves expand from the epicenter."
+        "With every thrust, her ass ripples pleasantly. You give her cheek an open handed spank and watch as shockwaves expand from the epicenter."
         "[the_person.title] moans at your rough treatment."
         $ the_person.change_arousal(20) #70 + 8
         if the_person.arousal > 100:
@@ -1467,7 +1470,7 @@ label hotwife_cum_mouth(the_person):
 #         the_person.char "Oh my god, having you watch us do this feels so dirty. I think I like it!"
 #         $ the_person.change_arousal(1)
 #         $ the_person.change_slut_temp(1)
-#         "[the_person.title] seems more comfortable [the_position.verb]ing you with [the_watcher.title] around."
+#         "[the_person.title] seems more comfortable [the_position.verbing] you with [the_watcher.title] around."
 #
 #     return
 

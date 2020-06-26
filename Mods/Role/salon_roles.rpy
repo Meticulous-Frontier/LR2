@@ -50,6 +50,9 @@ init 2 python:
         return False
 
     def ophelia_ex_bf_plan_pics_requirement(person):
+        # prevent conflict with planned dates
+        if mc.business.event_triggers_dict.get("date_scheduled", False) and (day%7 == 1 or day%7 == 4):
+            return False
         if person.location() is mall_salon:
             if ophelia_get_ex_pics_planned() < 2:
                 if ophelia_get_phone_convo_heard() > 0:
@@ -57,6 +60,9 @@ init 2 python:
         return False
 
     def ophelia_make_blowjob_pics_requirement():
+        # prevent conflict with planned dates
+        if mc.business.event_triggers_dict.get("date_scheduled", False) and (day%7 == 1 or day%7 == 4):
+            return False
         if time_of_day == 3:
             return True
         return False
@@ -171,16 +177,16 @@ init 2 python:
 
 label cut_hair_label(the_person):
     python:
-        hair_style_check = the_person.hair_style #If hair_style_check is different than the_person.hair_style it means a "purchase" has been made.
-        hair_color_check = the_person.hair_colour
+        hair_style_check = the_person.hair_style.get_copy()
+        pubes_style_check = the_person.pubes_style.get_copy()
     "You ask [the_person.title] if she could change her hairstyle a bit."
     $ the_person.draw_person()
     the_person.char "Sure, [the_person.mc_title], I don't see why not. Let me get my kit."
 
-    call screen hair_creator(the_person, hair_style_check, hair_color_check)
+    call screen hair_creator(the_person, hair_style_check, pubes_style_check)
 
     $ the_person.draw_person(position = "stand2")
-    if hair_style_check != the_person.hair_style or hair_color_check != the_person.hair_colour: # Anything was changed
+    if hair_style_check != the_person.hair_style or hair_style_check.colour != the_person.hair_style.colour or pubes_style_check != the_person.pubes_style or pubes_style_check.colour != the_person.pubes_style.colour: # Anything was changed
         the_person.char "Better now?"
         $ the_person.draw_person(emotion = "happy")
         mc.name "You look wonderful, [the_person.possessive_title]!"
@@ -836,8 +842,8 @@ label ophelia_is_over_her_ex_label(the_person):
     mc.name "That sounds great. I really appreciate it."
     "From now on, hair cuts and styles are half price. Sounds like there may be more business opportunities with [the_person.title] in the future!"
     python:
-        salon_style_cost = int(30)
-        salon_dye_cost = int(15)
+        salon_style_cost = __builtin__.int(30)
+        salon_dye_cost = __builtin__.int(15)
 
         salon_total_cost = salon_style_cost + salon_dye_cost
         the_person.event_triggers_dict["over_her_ex"] = 1
@@ -877,7 +883,7 @@ label ophelia_talk_about_candace_label(the_person):
     the_person.char "Its okay. So, I guess I can understand why you want to help her, what is the plan?"
     mc.name "Well, right now, [ex_name] is paying her basically nothing. Labor laws would say her pay is illegally low."
     the_person.char "Oh god... [ex_name]... what are you doing?"
-    mc.name "For the last week or so, I've been slowly convincing her that she should quit, and if she does, I'll hire her at my company doing basically the same thing she is doing now, but for a fair wage."
+    mc.name "For the last few weeks, I've been slowly convincing her that she should quit, and if she does, I'll hire her at my company doing basically the same thing she is doing now, but for a fair wage."
     the_person.char "Ok... why are you talking to me about this again? Seems like you've got it all figured out."
     mc.name "[ex_name] has told her that if she quits, he is dumping her. But you and I both know, she isn't smart enough to secure her personal accounts and other things."
     mc.name "Remember when you found his facebook logged on in your laptop? You said, locking down social media accounts is part of breakup 101!"
@@ -938,7 +944,7 @@ label ophelia_choose_service_test_label():
             elif person.sluttiness > 20:
                 if person.obedience > 150:
                     able_person_list.append(person)
-    if len(able_person_list) == 0:
+    if __builtin__.len(able_person_list) == 0:
         "After going through the list, you decide there probably aren't any girls willing to have their pubic hair styled."
         "You should probably work on corrupting some of your employees before you try and send one to [salon_manager.title]."
     #$ able_person_list.insert(0, "Full Body Hairstyle Test")
@@ -991,10 +997,10 @@ label ophelia_choose_service_test_label():
     $ the_person.strip_outfit(exclude_feet = False)
     salon_manager.char "Alright, here's a catalogue with what I can do. Take a look and tell me what you would like!"
     python:
-        hair_style_check = the_person.hair_style #If hair_style_check is different than the_person.hair_style it means a "purchase" has been made.
-        hair_color_check = the_person.hair_colour
+        hair_style_check = the_person.hair_style.get_copy()
+        pubes_style_check = the_person.pubes_style.get_copy()
         salon_manager.event_triggers_dict["offers_full_style"] = True
-    call screen hair_creator(the_person, hair_style_check, hair_color_check)
+    call screen hair_creator(the_person, hair_style_check, pubes_style_check)
     "You stay and observe as [salon_manager.title] does her work. She does an exceptional job."
     "When she finishes, you check out [the_person.title], while she examines herself in the mirror"
 
@@ -1007,6 +1013,7 @@ label ophelia_choose_service_test_label():
     $ scene_manager.update_actor(salon_manager, position = "walking_away")
     "As [salon_manager.possessive_title] goes to the other room to get her card, [the_person.title] gets dressed."
     $ the_person.apply_planned_outfit()
+    $ scene_manager.update_actor(the_person)
     "Once dressed, she turns to you."
     the_person.char "This was great [the_person.mc_title]. Thanks for asking me to do this!"
     $ the_person.change_stats(happiness = 5, obedience = 5)

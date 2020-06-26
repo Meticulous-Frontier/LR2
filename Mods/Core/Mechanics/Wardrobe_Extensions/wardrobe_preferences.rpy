@@ -65,11 +65,11 @@ init 0 python:
 
             if not (slut_score <= sluttiness_limit and slut_score >= sluttiness_min):
                 return False
-            if len(outfit.upper_body + outfit.lower_body + outfit.feet) == 0:
+            if __builtin__.len(outfit.upper_body + outfit.lower_body + outfit.feet) == 0:
                 return False # No clothing at all should not be in person wardrobe by default
-            if self.no_clothes and len(outfit.upper_body + outfit.lower_body + outfit.feet) > (is_overwear and 3 or 5):
+            if self.no_clothes and __builtin__.len(outfit.upper_body + outfit.lower_body + outfit.feet) > (is_overwear and 3 or 5):
                 return False
-            if self.prefer_clothes and len(outfit.upper_body + outfit.lower_body + outfit.feet) < (is_overwear and 2 or 4):
+            if self.prefer_clothes and __builtin__.len(outfit.upper_body + outfit.lower_body + outfit.feet) < (is_overwear and 2 or 4):
                 return False
             if self.exclude_skirts and any(outfit.has_clothing(item) for item in skirts_list):
                 return False
@@ -106,7 +106,7 @@ init 0 python:
 
             if not (underwear.get_underwear_slut_score() <= sluttiness_limit and underwear.get_underwear_slut_score() >= sluttiness_min):
                 return False
-            if (not self.no_underwear and len(underwear.upper_body + underwear.lower_body + underwear.feet) < 1) or (self.no_underwear and len(underwear.upper_body + underwear.lower_body + underwear.feet)) > 1:
+            if (not self.no_underwear and __builtin__.len(underwear.upper_body + underwear.lower_body + underwear.feet) < 1) or (self.no_underwear and __builtin__.len(underwear.upper_body + underwear.lower_body + underwear.feet)) > 1:
                 return False
             if self.lingerie and (any(item.slut_value < 1 for item in underwear.lower_body) or any(item.slut_value < 1 for item in underwear.upper_body) or not underwear.wearing_panties()):
                 return False

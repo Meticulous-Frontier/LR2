@@ -121,7 +121,7 @@ init 2 python:
     def append_and_initialize_action_mods():
         # add action_mod instances to list
         if not ActionMod._instances is None:
-            # renpy.say("", "There are " + str(len(action_mod_list)) + " mods in save game.")
+            # renpy.say("", "There are " + str(__builtin__.len(action_mod_list)) + " mods in save game.")
             for action_mod in sorted(ActionMod._instances, key = lambda x: x.priority):
                 if action_mod not in action_mod_list:
                     action_mod_list.append(action_mod)

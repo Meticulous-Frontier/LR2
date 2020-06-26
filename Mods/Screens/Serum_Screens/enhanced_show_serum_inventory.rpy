@@ -16,7 +16,7 @@ init 2:
                         frame:
                             background "#000080"
                             xsize 390
-                            if len(inventory_names) > 0 and count < len(inventory_names):
+                            if __builtin__.len(inventory_names) > 0 and count < __builtin__.len(inventory_names):
                                 text inventory_names[count] style "serum_text_style_header"
                             else:
                                 text "Serums in Inventory" style "serum_text_style_header"

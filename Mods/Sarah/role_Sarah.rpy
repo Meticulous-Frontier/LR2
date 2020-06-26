@@ -124,6 +124,8 @@ init -1 python:
         return False
 
     def Sarah_catch_stealing_requirement():
+        if strip_club_is_closed(): #Don't run while the strip club is closed
+            return False
         if time_of_day == 3:
             if day%7 == 4:  #friday
                 if mc.is_at_work():
@@ -166,6 +168,8 @@ init -1 python:
         epic_tits_progress = sarah.event_triggers_dict.get("epic_tits_progress", 0)
         if epic_tits_progress < 2 and not epic_tits_progress == -1:  #Don't run until after she has bigger tits of you convinced her not to do it
             return False
+        if strip_club_is_closed(): # Don't run while strip club is closed
+            return False
         if time_of_day > 2:   #Only in the evening when the strippers are at the club
             if sarah.sluttiness > 50:
                 if day%7 == 5:  #Saturday
@@ -177,7 +181,7 @@ init -1 python:
         if time_of_day > 2:
             if day%7 == 5:  #Saturday
                 if mc.is_at_work():
-                    if len(get_Sarah_willing_threesome_list()) >= 3: #at least three choices for who to hook up with.
+                    if __builtin__.len(get_Sarah_willing_threesome_list()) >= 3: #at least three choices for who to hook up with.
                         return True
         return False        #Return false while I write the events
 
@@ -218,6 +222,8 @@ init -1 python:
 
     def Sarah_is_fertile():
         if sarah.event_triggers_dict.get("try_for_baby", 0) != 1:  #Only fertile if actively trying
+            return False
+        if sarah.is_pregnant(): # we don't get fertile when being pregnant
             return False
         if sarah.event_triggers_dict.get("fertile_start_day", -1) == -1:
             return False
@@ -904,7 +910,7 @@ label Sarah_get_drinks_label():
     $ del test_outfit
 
     $ scene_manager.update_actor(the_person, position = "stand4")
-    if (len(the_person.outfit.get_upper_ordered()) > 0 or len(the_person.outfit.get_lower_ordered()) > 0):
+    if (len(the_person.outfit.get_upper_ordered()) > 0 or __builtin__.len(the_person.outfit.get_lower_ordered()) > 0):
         "You look at [the_person.title]. Her clothing is soaked and you can practically see through it. She looks cold."
     else:  #She's... naked?
         "Barely clothed, [the_person.title] is shivering from the cold."
@@ -1213,7 +1219,7 @@ label Sarah_tits_reveal_label():
     the_person.char "Oh god, you are getting me so hot..."
     "Her knees buckle for a second when you start to play with her nipples. You pinch and roll them in your fingers."
     $ the_person.change_arousal(15)
-    the_person.char "Ah! Stop! God that feels amazing. But theres something else I want to try..."
+    the_person.char "Ah! Stop! God that feels amazing. But there's something else I want to try..."
     mc.name "Oh? What is that?"
     the_person.char "Well, I've tried this a couple times before but to be honest my chest was so small I don't think it was very good for the guy but... I want your cock between my tits!"
     mc.name "That sounds hot. Lets do it!"
@@ -1236,9 +1242,7 @@ label Sarah_tits_reveal_label():
     the_person.char "Okay... let me go get cleaned up... then I'll come back and we can start our regular Monday meeting!"
     $ the_person.draw_person(position = "walking_away")
     "She gets up and leaves the room. You smile to yourself, thinking about how good her new tits felt around your cock."
-    $ the_person.reset_arousal()
-    $ the_person.review_outfit(dialogue = False)
-
+    $ the_person.apply_planned_outfit()
     return
 
 label Sarah_stripclub_story_label():
@@ -1776,7 +1780,7 @@ label Sarah_threesome_request_label():
     if the_report.get("girl orgasms", 0) > 0:
         "[the_person.title] takes it easy for a moment, enjoying the afterglow of her orgasm."
     the_person.char "Mmm, that was hot as always."
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
     $ scene_manager.update_actor(the_person, position = "stand3")
     if the_person.has_role(girlfriend_role):
         pass
@@ -2139,7 +2143,7 @@ label Sarah_ask_for_baby_label():
             call Sarah_fertile_period_start_label() from sarah_initial_fertile_period_start_01
             #TODO create mandatory event for starting fertility period. Stores creampies before fertility period. Then second mandatory event at the end of the fertility period determines if pregnant based on # of creampies and RNG
             call fuck_person(the_person, start_position = missionary, start_object = bedroom.get_object_with_name("bed"), skip_intro = False, girl_in_charge = False, position_locked = True) from _sarah_ask_for_baby_01
-            if the_person.outfit.has_creampie_cum():
+            if the_person.has_creampie_cum():
                 the_person.char "Oh my god... we actually did it..."
                 "She grabs an extra pillow and puts it under her butt so her hips are elevated."
                 the_person.char "I'm just going to lay her like this for a bit, you know. Keep that seed nice and deep."
@@ -2195,7 +2199,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
                 "When you come back, [the_person.title] is awake."
                 $ scene_manager.update_actor(the_person, position = "missionary")
                 the_person.char "Good morning! I slept great."
-                $ the_person.review_outfit(dialogue = False)
+                $ the_person.apply_planned_outfit()
                 $ scene_manager.update_actor(the_person, position = "stand3")
                 "You both get ready for the day before heading out."
                 $ scene_manager.clear_scene()
@@ -2242,7 +2246,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         $ the_person.reset_arousal()
         $ mc.arousal = 0
         "You lay in bed together for a little longer, but soon it is time to start the day."
-        $ the_person.review_outfit(dialogue = False)
+        $ the_person.apply_planned_outfit()
         $ scene_manager.update_actor(the_person, position = "stand4")
         "You both get ready for the day."
         the_person.char "Alright, I need to get some things done today. Thanks for letting me spend the night!"
@@ -2303,7 +2307,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         "She walks out, leaving you alone with [the_person.possessive_title]"
         the_person.char "That's certainly one way to start the day... holy hell."
         "You lay in bed together for a little longer, but soon it is time to start the day."
-        $ the_person.review_outfit(dialogue = False)
+        $ the_person.apply_planned_outfit()
         $ scene_manager.update_actor(the_person, position = "stand4")
         "You both get ready for the day."
         the_person.char "Alright, I need to get some things done. Thanks for letting me spend the night!"
@@ -2331,7 +2335,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
             "She rolls over and kisses you, then rests her head on your chest."
 
         "You lay in bed together for a little longer, but soon it is time to start the day."
-        $ the_person.review_outfit(dialogue = False)
+        $ the_person.apply_planned_outfit()
         $ scene_manager.update_actor(the_person, position = "stand4")
         "You both get ready for the day."
         the_person.char "Alright, I need to get some things done today. Thanks for letting me spend the night!"
@@ -2539,7 +2543,7 @@ label Sarah_weekend_surprise_crisis_label():
                     the_person.char "Oh! That sounds great!"
                     call Sarah_weekend_date_grab_drinks_label from sarah_weekend_date_crisis_01
 
-                "Strip Club" if sarah.event_triggers_dict.get("stripclub_progress", 0) >= 1:
+                "Strip Club" if sarah.event_triggers_dict.get("stripclub_progress", 0) >= 1 and not strip_club_is_closed():
                     mc.name "In the mood for a titty bar?"
                     the_person.char "Oh! That sounds like a good evening!"
                     call Sarah_weekend_date_strip_club_label from sarah_weekend_date_crisis_02

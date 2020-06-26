@@ -471,7 +471,7 @@ label increase_slave_submission_label(the_person):
             the_person.char "Thank you Master, for giving me such satisfaction."
         else:
             the_person.char "Thank you Master, for allowing me to satisfy you."
-        $ the_person.review_outfit(dialogue = False)
+        $ the_person.apply_planned_outfit()
     return
 
 label slave_anal_training(the_person):

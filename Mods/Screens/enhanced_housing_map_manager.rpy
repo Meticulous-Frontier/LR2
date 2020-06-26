@@ -22,7 +22,7 @@ init 2:
                         focus_mask "gui/LR2_Hex_Button_idle.png"
                         action [Hide("housing_map_manager"), Return(place), Function(mc.change_location, place)]
                         sensitive place.accessable
-                    text (place.formalName + "\n(" + str(len(place.people)) + ")").replace(" ", "\n", 2) anchor [0.5,0.5] style "map_text_style"
+                    text (place.formalName + "\n(" + str(__builtin__.len(place.people)) + ")").replace(" ", "\n", 2) anchor [0.5,0.5] style "map_text_style"
 
             else:
                 frame:
@@ -36,7 +36,7 @@ init 2:
                         focus_mask "gui/LR2_Hex_Button_Alt_idle.png"
                         action [Hide("housing_map_manager"), Return(place), Function(mc.change_location, place)]
                         sensitive False
-                    text (place.formalName + "\n(" + str(len(place.people)) + ")").replace(" ", "\n", 2) anchor [0.5,0.5] style "map_text_style"
+                    text (place.formalName + "\n(" + str(__builtin__.len(place.people)) + ")").replace(" ", "\n", 2) anchor [0.5,0.5] style "map_text_style"
             $ x_pos += 1
             if x_pos >= max_places_per_row + 0.5:
                 $ x_pos += 0.5

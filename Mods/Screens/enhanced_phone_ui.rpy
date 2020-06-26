@@ -22,7 +22,7 @@ init 2:
                 viewport:
                     mousewheel True
                     draggable True
-                    if len(mc.log_items) > 4:
+                    if __builtin__.len(mc.log_items) > 4:
                         scrollbars "vertical"
                     vbox:
                         for log_item in mc.log_items:

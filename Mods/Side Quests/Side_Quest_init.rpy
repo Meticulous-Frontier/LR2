@@ -1,4 +1,4 @@
-init 5 python:
+init 10 python:  # load quest tracker last on stack (higher init number is later on stack)
     add_label_hijack("normal_start", "activate_side_quest_mod_core")
     add_label_hijack("after_load", "update_side_quest_mod_core")
 

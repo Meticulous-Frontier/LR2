@@ -109,7 +109,7 @@ label SB_working_weekend_crisis_label():
         call SB_working_weekend_crisis_label_high(person_one) from _call_SB_working_weekend_crisis_label_high
 
     $ scene_manager.clear_scene()
-    $ person_one.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
+    $ person_one.apply_planned_outfit()
     $ del person_one
     $ mc.location.show_background()
     return
@@ -184,7 +184,7 @@ label SB_working_weekend_crisis_label_high(person_one):
                 "Eventually, [person_two.possessive_title] gets up."
                 $ scene_manager.update_actor(person_two, position = "stand3", character_placement = character_center)
                 person_two.char "Mmm... wow... I guess I should stop by on the weekend more often..."
-                $ person_two.review_outfit(dialogue = False)
+                $ person_two.apply_planned_outfit()
                 $ scene_manager.update_actor(person_two, position = "walking_away", character_placement = character_left)
                 "[person_two.possessive_title] puts on her clothes and heads for the door."
                 $ scene_manager.remove_actor(person_two)
@@ -194,7 +194,7 @@ label SB_working_weekend_crisis_label_high(person_one):
                     $ person_one.change_slut_temp(5)
                     $ person_one.change_love(5)
                 person_one.char "Holy fuck [person_one.mc_title], that was so hot."
-                $ person_one.review_outfit(dialogue = False)
+                $ person_one.apply_planned_outfit()
                 $ scene_manager.update_actor(person_one, position = "stand3")
                 "She eventually gets up and gets herself dressed again. You say goodbye as she leaves the office."
                

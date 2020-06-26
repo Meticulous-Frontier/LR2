@@ -276,6 +276,7 @@ label casual_athlete_phase_one_label(the_person):
         "As you lift the weight up over the bar and begin to bring it down to your chest, [the_person.title] slowly moves forward, maneuvering her legs until her crotch is right above your face."
         "You breathe deep. There is the normal gym smells of weights, rubber, and sweat, but also a smell that is distinctly, sweetly feminine."
         "You lift your head up for a second, making contact with her crotch with your face. She stifles a groan as you finish up your set."
+        $ the_person.change_max_energy(5)
         $ the_person.change_arousal(20)
         "[the_person.title] backs off and you quickly get up. She puts a hand on your shoulder and whispers in your ear."
         the_person.char "There's a locker room here families can use with a lock on it. Meet me there in three minutes."
@@ -314,7 +315,7 @@ label casual_athlete_phase_one_label(the_person):
         the_person.char "That sounds good. But its not a date, okay? Just need to set boundaries."
         "You agree. You and [the_person.title] take a quick shower, then get ready and leave the gym."
 
-        $ the_person.review_outfit(dialogue = False)
+        $ the_person.apply_planned_outfit()
 
         "You head to a nearby coffee shop. You grab yourself a coffee, letting [the_person.title] pay for her own. You grab a seat at a booth away from any other people."
         $ renpy.show("restaurant", what = restaraunt_background)
@@ -345,6 +346,7 @@ label casual_athlete_phase_one_label(the_person):
         "While doing squats, she gets right behind you, pressing her body against yours as she spots you."
         "You try to be as covert as possible, but a couple of the other guys in the gym shoot you knowing looks as you go about your workout."
         "During the bench press, [the_person.title] stands right above you, her crotch tantalizingly close to your face."
+        $ the_person.change_max_energy(5)
         the_person.char "Wow, what a workout! So... are you gonna go hit the showers now?"
         "It is clear from the way she is asking she is curious if you are gonna follow her to the secluded locker room."
         menu:
@@ -362,7 +364,7 @@ label casual_athlete_phase_one_label(the_person):
                 $ the_person.apply_outfit(Outfit("Nude"), update_taboo = True)
                 $ the_person.draw_person( position = "stand2")
                 "As you enter, you see that [the_person.title] is already naked."
-                the_person.char "[the_person.mc_title], give me that cock! It's been too long since fucked me good!"
+                the_person.char "[the_person.mc_title], give me that cock! It's been too long since you fucked me good!"
                 "You walk over to her and quickly strip. You grab [the_person.title] by that ass and pick her up. You carry her to the wall and pin her up against it."
                 $ the_person.draw_person( position = "against_wall")
                 "[the_person.possessive_title] is grinding her hips up against yours. The sweat from your workouts mingles together as you prepare yourself to enter her."
@@ -388,7 +390,7 @@ label casual_athlete_phase_one_label(the_person):
                 the_person.char "Oh. Okay, I understand. Well, I'll see you around, [the_person.mc_title]!"
                 $ the_person.change_happiness(-3)
 
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
     call advance_time from _call_advance_casual_athlete_workout
     return
 
@@ -429,7 +431,7 @@ label casual_athlete_phase_two_label(the_person):
         "[the_person.title] has a spark in her eyes. Whoever wins, you have a feeling the sex is going to be amazing after the race."
         "You wave goodbye to [the_person.title], wondering what you've gotten yourself in to."
 
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
     call advance_time from _call_advance_casual_athlete_race_challenge
     return
 
@@ -478,6 +480,7 @@ label casual_athlete_race_crisis_label(the_person):
     $ the_person.draw_person(position = "stand4")
     "She stands up and turns to face you."
     the_person.char "Yeah!... I mean, its all for a good cause, right?"
+    $ the_person.change_max_energy(10)
     $ the_person.draw_person(position = "stand4", emotion = "happy")
     "You think you see a little smirk on the corner of her mouth."
     "You both take a few minutes to recover, and soon you are ready to go."
@@ -567,7 +570,7 @@ label casual_athlete_buy_protein_shake_label(the_person):
             mc.name "No problem at all."
             $ renpy.scene("Active")
 
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
     call advance_time from _call_advance_casual_athlete_smoothie
     return
 
@@ -1061,7 +1064,7 @@ label athlete_hookup_accept(the_person):
         return
     else: #You went in raw
         "You push yourself in as deep as you can go. [the_person.possessive_title] moans as you fill her completely."
-        "With every thrust, her ass ripples pleasantly. You give her cheek and open handed spank and watch as shockwaves expand from the epicenter."
+        "With every thrust, her ass ripples pleasantly. You give her cheek an open handed spank and watch as shockwaves expand from the epicenter."
         "[the_person.title] moans at your rough treatment."
         $ the_person.change_arousal(20) #70 + 8
         if the_person.arousal > 100:
@@ -1301,7 +1304,7 @@ label athlete_being_watched(the_person, the_watcher, the_position):
         the_person.char "Oh my god, having you watch us do this feels so dirty. I think I like it!"
         $ the_person.change_arousal(1)
         $ the_person.change_slut_temp(1)
-        "[the_person.title] seems more comfortable [the_position.verb]ing you with [the_watcher.title] around."
+        "[the_person.title] seems more comfortable [the_position.verbing] you with [the_watcher.title] around."
 
     return
 

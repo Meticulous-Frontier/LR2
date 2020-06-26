@@ -78,15 +78,15 @@ init -2 python:
             if not actor_to_remove is None:
                 if reset_actor:
                     # reset actor clothing
-                    actor_to_remove.person.review_outfit(dialogue = False)
+                    actor_to_remove.person.apply_planned_outfit()
                 self.actors.remove(actor_to_remove)
                 self.draw_scene()
 
         def draw_info_ui(self):
             renpy.scene("Active")
-            if len(self.actors) > 1:
+            if __builtin__.len(self.actors) > 1:
                 renpy.show_screen("multi_person_info_ui", self.actors)
-            elif len(self.actors) == 1:
+            elif __builtin__.len(self.actors) == 1:
                 renpy.show_screen("person_info_ui", self.actors[0].person)
 
         def draw_scene(self):

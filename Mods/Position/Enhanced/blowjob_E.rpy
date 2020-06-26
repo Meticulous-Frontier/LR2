@@ -255,7 +255,7 @@ label blowjob_enhanced_kneel_mouth_cum(the_girl):
                     $ blowjob.redraw_scene(the_girl)
                     "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."
 
-                if the_girl.outfit.has_face_cum():
+                if the_girl.has_face_cum():
                     "You take a deep breath to steady yourself once you've finished cumming. [the_girl.title] looks up at you from her knees, face covered in your semen."
                     $ the_girl.call_dialogue("cum_face")
                     if the_girl.has_role(cum_external_role):
@@ -381,7 +381,7 @@ label blowjob_enhanced_kneel_face_cum (the_girl):
             $ the_girl.cum_on_face()
             $ blowjob.redraw_scene(the_girl)
             "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."
-        if the_girl.outfit.has_face_cum():
+        if the_girl.has_face_cum():
             "You take a deep breath to steady yourself once you've finished cumming. [the_girl.title] looks up at you from her knees, face covered in your semen."
             $ the_girl.call_dialogue("cum_face")
             if the_girl.has_role(cum_external_role):

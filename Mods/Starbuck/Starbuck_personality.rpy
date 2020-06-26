@@ -267,7 +267,7 @@ label starbuck_being_watched(the_person, the_watcher, the_position):
         the_person.char "Ah, now this is a party! Maybe when he's done you can tap in and take a turn [the_watcher.name]!"
         the_person.char "Orgy day at Starbuck's Sex Shop... that's actually a pretty good idea!"
         $ the_person.change_stats(arousal = 1, slut_temp = 1)
-        "[the_person.possessive_title] seems more comfortable [the_position.verb]ing you with [the_watcher.name] around."
+        "[the_person.possessive_title] seems more comfortable [the_position.verbing] you with [the_watcher.name] around."
 
     return
 

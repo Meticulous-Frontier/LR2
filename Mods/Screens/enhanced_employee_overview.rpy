@@ -178,11 +178,11 @@ init 2:
                 background "#1a45a1aa"
                 xfill True
                 viewport:
-                    if len(display_list) > 5:
+                    if __builtin__.len(display_list) > 5:
                         scrollbars "vertical"
                     mousewheel True
                     ysize 580
-                    grid grid_count len(display_list) spacing -10 xfill True:
+                    grid grid_count __builtin__.len(display_list) spacing -10 xfill True:
                         for person in sorted(display_list, key = lambda person: getattr(person, renpy.current_screen().scope["sort_employees_by"]), reverse = renpy.current_screen().scope["reverse_sort"]):
                             if person_select:
                                 textbutton "Select" style "textbutton_style" text_style "menu_text_style" action Return(person) xsize 100

@@ -37,7 +37,7 @@ init -1 python:
         return the_final_string
 
     def person_info_ui_format_hearts(value):
-        heart_value = abs(value)
+        heart_value = __builtin__.abs(value)
         if (heart_value / 4) > 10:
             return get_gold_heart(heart_value / 4)
         return get_red_heart(heart_value)
@@ -106,9 +106,8 @@ init 2:
                         xsize 220
                         ysize 100
                         vbox:
-                            for role in person.special_role:
-                                if not role.hidden:
-                                    text "       - " + role.role_name style "menu_text_style" size 14
+                            for role in [x for x in person.special_role if not x.hidden]:
+                                text "       - " + role.role_name style "menu_text_style" size 14
 
                 vbox:
                     if person.arousal > 0:

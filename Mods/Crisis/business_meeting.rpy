@@ -50,7 +50,7 @@ label business_meeting_action_label:
         $ the_person.change_happiness(5)
         "[the_person.title] finishes up her proposal."
 
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
 
     call business_meeting_end(the_person, done) from _call_business_meeting_end_1
 
@@ -69,7 +69,6 @@ label business_meeting_action_label:
     "The changes increased your business effectivity by [ran_num]%%."
 
     $ hr_employee = None
-    $ the_person.reset_arousal()
     $ mc.location.show_background()
     $ renpy.scene("Active")
     return
@@ -175,7 +174,7 @@ label business_meeting_end(the_person, done):
     if not done:
         "You watch her walking away, deciding what to do next."
     else:
-        $ the_person.review_outfit(dialogue = False)
+        $ the_person.apply_planned_outfit()
         "[the_person.possessive_title] puts on her clothes and walks away."
 
     "After contemplating what just happened, you decide what to do next."

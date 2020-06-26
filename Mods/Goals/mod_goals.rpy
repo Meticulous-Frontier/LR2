@@ -39,7 +39,7 @@ init 2 python:
         return False
 
     def HR_interview_difficulty_function(the_goal, the_difficulty):
-        the_goal.arg_dict["required"] = int(1 + (the_difficulty / 5))
+        the_goal.arg_dict["required"] = __builtin__.int(1 + (the_difficulty / 5))
         if the_goal.arg_dict["required"] > 5:
             the_goal.arg_dict["required"]  = 5
 

@@ -68,7 +68,7 @@ init -1 python:
         ensure_opinion_on_sexual_preference(person, "Vaginal", ["missionary style sex", "vaginal sex", "creampies"])
         ensure_opinion_on_sexual_preference(person, "Anal", ["anal sex", "anal creampies", "doggy style sex"])
 
-        # fix opinion contradictions
+        # fix opinion contradictions (one cannot exclude other)
         fix_opinion_contradiction(person, "drinking cum", "giving blowjobs")
         fix_opinion_contradiction(person, "creampies", "bareback sex")
         fix_opinion_contradiction(person, "anal creampies", "bareback sex")
@@ -76,6 +76,11 @@ init -1 python:
         fix_opinion_contradiction(person, "skimpy outfits", "showing her ass")
         fix_opinion_contradiction(person, "skimpy outfits", "high heels")
         fix_opinion_contradiction(person, "masturbating", "being fingered")
+
+        # fix opinion exclusion (one excludes other)
+        fix_opinion_exclusion(person, "lingerie", "not wearing underwear")
+        fix_opinion_exclusion(person, "skimpy outfits", "not wearing anything")
+        fix_opinion_exclusion(person, "being submissive", "taking control")
         return
 
     # when she doesn't like base_topic, she should not like / love related topic (invert likeness of related topic)
@@ -84,6 +89,13 @@ init -1 python:
         if person.get_opinion_score(base_topic) > 0 and person.get_opinion_score(related_topic) < 0:
             person.update_opinion_with_score(related_topic, -person.get_opinion_score(related_topic), add_to_log = False)
         if person.get_opinion_score(base_topic) < 0 and person.get_opinion_score(related_topic) > 0:
+            person.update_opinion_with_score(related_topic, -person.get_opinion_score(related_topic), add_to_log = False)
+        return
+
+    def fix_opinion_exclusion(person, base_topic, related_topic):
+        if person.get_opinion_score(base_topic) > 0 and person.get_opinion_score(related_topic) > 0:
+            person.update_opinion_with_score(related_topic, -person.get_opinion_score(related_topic), add_to_log = False)
+        if person.get_opinion_score(base_topic) < 0 and person.get_opinion_score(related_topic) < 0:
             person.update_opinion_with_score(related_topic, -person.get_opinion_score(related_topic), add_to_log = False)
         return
 
@@ -125,6 +137,8 @@ init -1 python:
     def update_random_person(person):
         # turn cougars on or off
         update_cougar_personality(person)
+        # turn alpha personality on or off
+        update_alpha_personality(person)
         # A person could have dialog even if we don't know her
         if person.possessive_title is None:
             person.set_possessive_title("The unknown woman")
@@ -135,12 +149,12 @@ init -1 python:
             # change personality to cougar if we meet age requirement
             if find_in_list(lambda x: x.effect == "cougar_personality_dummy_label", action_mod_list).enabled:
                 if  person.age > 45 and person not in unique_character_list:
-                    if not person.personality == cougar_personality:
+                    if not person.personality is cougar_personality:
                         person.original_personality = person.personality
                         person.personality = cougar_personality
                         # mc.log_event((person.title or person.name) + "  A:" + str(person.age) + ": " + person.personality.personality_type_prefix, "float_text_grey")
             else:
-                if person.personality == cougar_personality:
+                if person.personality is cougar_personality:
                     if person not in unique_character_list:
                         if not (person.original_personality is None or person.original_personality == cougar_personality):
                             person.personality = person.original_personality
@@ -149,6 +163,27 @@ init -1 python:
                             person.personality = new_personality
                         # mc.log_event((person.title or person.name) + " D:" + str(person.age) + ": " + person.personality.personality_type_prefix, "float_text_grey")
         return
+
+    def update_alpha_personality(person):
+        if "alpha_personality" in globals() and "unique_character_list" in globals():
+            # change personality to alpha if we meet requirements
+            if find_in_list(lambda x: x.effect == "alpha_personality_dummy_label", action_mod_list).enabled:
+                if person.age > 25 and person.charisma >= 5 and person.int >= 4 and person.get_opinion_score("taking control") > 0 and person not in unique_character_list:
+                    if not person.personality is alpha_personality:
+                        person.original_personality = person.personality
+                        person.personality = alpha_personality
+                        # mc.log_event((person.title or person.name) + "  A:" + str(person.age) + ": " + person.personality.personality_type_prefix, "float_text_grey")
+            else:
+                if person.personality is alpha_personality:
+                    if person not in unique_character_list:
+                        if not (person.original_personality is None or person.original_personality == alpha_personality):
+                            person.personality = person.original_personality
+                        else:
+                            new_personality = get_random_from_list(list_of_personalities)
+                            person.personality = new_personality
+                        # mc.log_event((person.title or person.name) + " D:" + str(person.age) + ": " + person.personality.personality_type_prefix, "float_text_grey")
+        return
+
 
     def rebuild_wardrobe(person):
         # skip personalized wardrobes
@@ -162,32 +197,32 @@ init -1 python:
             if not preferences.evaluate_outfit(outfit, 999):
                 continue
             base_wardrobe.add_outfit(outfit.get_copy())
-            if len(base_wardrobe.outfits) > 8:  # quick exit when we have enough
+            if __builtin__.len(base_wardrobe.outfits) > 8:  # quick exit when we have enough
                 break
 
         for underwear in default_wardrobe.underwear_sets:
             if not preferences.evaluate_underwear(underwear, 999):
                 continue
             base_wardrobe.add_underwear_set(underwear.get_copy())
-            if len(base_wardrobe.underwear_sets) > 8:   # quick exit when we have enough
+            if __builtin__.len(base_wardrobe.underwear_sets) > 8:   # quick exit when we have enough
                 break
 
         for overwear in default_wardrobe.overwear_sets:
             if not preferences.evaluate_outfit(overwear, 999):
                 continue
             base_wardrobe.add_overwear_set(overwear.get_copy())
-            if len(base_wardrobe.overwear_sets) > 8:    # quick exit when we have enough
+            if __builtin__.len(base_wardrobe.overwear_sets) > 8:    # quick exit when we have enough
                 break
 
         # ensure we have at least 3 auto generated outfits by removing surplus, but keep the 2 most decent outfits from default wardrobe
-        while len(base_wardrobe.outfits) > 5:
-            base_wardrobe.remove_outfit(sorted(base_wardrobe.outfits, key = lambda x: x.slut_requirement)[renpy.random.randint(2,len(base_wardrobe.outfits)-1)])
+        while __builtin__.len(base_wardrobe.outfits) > 5:
+            base_wardrobe.remove_outfit(sorted(base_wardrobe.outfits, key = lambda x: x.slut_requirement)[renpy.random.randint(2,__builtin__.len(base_wardrobe.outfits)-1)])
 
-        while len(base_wardrobe.underwear_sets) > 5:
-            base_wardrobe.remove_outfit(sorted(base_wardrobe.underwear_sets, key = lambda x: x.slut_requirement)[renpy.random.randint(2,len(base_wardrobe.underwear_sets)-1)])
+        while __builtin__.len(base_wardrobe.underwear_sets) > 5:
+            base_wardrobe.remove_outfit(sorted(base_wardrobe.underwear_sets, key = lambda x: x.slut_requirement)[renpy.random.randint(2,__builtin__.len(base_wardrobe.underwear_sets)-1)])
 
-        while len(base_wardrobe.overwear_sets) > 5:
-            base_wardrobe.remove_outfit(sorted(base_wardrobe.overwear_sets, key = lambda x: x.slut_requirement)[renpy.random.randint(2,len(base_wardrobe.overwear_sets)-1)])
+        while __builtin__.len(base_wardrobe.overwear_sets) > 5:
+            base_wardrobe.remove_outfit(sorted(base_wardrobe.overwear_sets, key = lambda x: x.slut_requirement)[renpy.random.randint(2,__builtin__.len(base_wardrobe.overwear_sets)-1)])
 
         person.wardrobe = base_wardrobe
 
@@ -303,6 +338,9 @@ init -1 python:
 
         if "candace" in globals():
             unique_character_list.append(candace)
+
+        if "ashley" in globals():
+            unique_character_list.append(ashley)
 
         # disable for now, random outfits remove uniqueness of character in story line
         # make sure unique characters have at least six outfits / overwear sets to choose from

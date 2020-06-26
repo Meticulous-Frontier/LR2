@@ -77,14 +77,14 @@ init 1 python:
         return
 
     def add_cum_fetish_role_based_on_cum(person):
-        if person.outfit.has_mouth_cum():
+        if person.has_mouth_cum():
             #You came in her mouth! She now fetishes getting cum inside
             #"Note, cum in mouth detected. Comment this later"
             person.max_opinion_score("drinking cum")
             person.max_opinion_score("creampies")
             if person.add_role(cum_internal_role):
                 add_cum_slut_collar_to_base_outfit(person)
-        if person.outfit.has_face_cum():
+        if person.has_face_cum():
             #You came on her face! Now she fetishes facials and getting cum on her.
             #"Note, cum on face detected. Comment this later"
             person.max_opinion_score("cum facials")
@@ -142,7 +142,7 @@ label SB_fetish_cum_non_employee_label(the_person):
             the_person.char "Really?! I'm so stupid, thinking you would help me out."
             $ the_person.draw_person(position = "walking_away", emotion = "angry")
             "You watch her walk away while you put away your dick. You turn around and go to bed."
-    $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
     $ renpy.scene("Active")
     return       
@@ -213,7 +213,7 @@ label SB_fetish_cum_label(the_person):
         "Refuse":
             the_person.char "I'm sorry to hear that..." #TODO finish this
 
-    $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
     $ renpy.scene("Active")
     return
@@ -322,7 +322,7 @@ label SB_fetish_cum_dosage_label():
             the_person.char "Oh! I'm sorry... I know you work so hard around here. Maybe tomorrow then?"
             "[the_person.possessive_title] quickly sulks off."
     python:
-        the_person.review_outfit(dialogue = False)
+        the_person.apply_planned_outfit()
         renpy.scene("Active")
     return
 
@@ -461,7 +461,7 @@ label SB_fetish_mom_cum_label():
     "You grab some clothes and head for the shower."
 
     python:
-        the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
+        the_person.apply_planned_outfit()
         mc.location.show_background()
         renpy.scene("Active")
     return "Advance Time"
@@ -528,8 +528,8 @@ label SB_fetish_lily_cum_label():
     "[the_person.possessive_title] gets out. You finish up with your shower, balls empty and ready for the day!"
 
     python:
-        the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
-        bedroom.show_background()
+        the_person.apply_planned_outfit()
+        mc.location.show_background()
         renpy.scene("Active")
     return
 
@@ -563,7 +563,7 @@ label SB_fetish_shower_cum_label():
     "[the_person.possessive_title] gets out. You finish up with your shower, balls empty and ready for the day!"
 
     python:
-        the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
+        the_person.apply_planned_outfit()
         mc.location.show_background()
         renpy.scene("Active")
     return
@@ -755,7 +755,7 @@ label SB_fetish_stephanie_cum_label():
                 "You say goodbye, and [the_person.possessive_title] turns and walks out of your office."
                 "Looks like [the_person.title] has a  cum fetish now! But she is also a bimbo."
                 "You are guessing she is probably not particularly fit for her job in research. Maybe you can move her somewhere else in the company?"
-                $ the_person.review_outfit(dialogue = False)
+                $ the_person.apply_planned_outfit()
                 $ renpy.scene("Active")
                 return
         "She gives a deep sigh of relief."
@@ -819,6 +819,6 @@ label SB_fetish_stephanie_cum_label():
         "Looks like [the_person.title] has a cum fetish now!"
 
     $ scene_manager.clear_scene()
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
     $ renpy.scene("Active")
     return

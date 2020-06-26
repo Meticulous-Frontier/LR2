@@ -14,7 +14,7 @@ init 2 python:
 
         for (people,place) in people_to_process: #Figure out if person already has an important role
             disqualifying_role = 0
-            if len(people.special_role) > 0: # Checking for any role since generic_people_role is removed
+            if __builtin__.len(people.special_role) > 0: # Checking for any role since generic_people_role is removed
                 disqualifying_role = 1
             if disqualifying_role == 0:         #Assign new casual sex roles#
                 if people.age < 30:
@@ -104,6 +104,7 @@ init 2 python:
 
     def casual_sex_create_athlete():
         new_athlete = make_person(body_type = "thin_body", age = renpy.random.randint(19,25), personality = athlete_personality, relationship = "Single", force_random = True)
+        new_athlete.max_energy = 120
         assign_casual_athlete_role(new_athlete)
         new_athlete.generate_home()
         gym.add_person(new_athlete)

@@ -133,7 +133,7 @@ label cloning_process(person = the_person): # default to the_person when not pas
                 $ clone_name = str(renpy.input("Name: ", person.name))
                 $ clone_last_name = str(renpy.input("Last name: ", person.last_name))
             "Age":
-                $ clone_age = int(renpy.input("Age: ", person.age))
+                $ clone_age = __builtin__.int(renpy.input("Age: ", person.age))
                 if clone_age < 18:
                     $ clone_age = 18
             "Begin production: {image=gui/heart/Time_Advance.png}\n{color=#ff0000}{size=18}Name: [clone_name] [clone_last_name], Age: [clone_age]{/size}{/color}":

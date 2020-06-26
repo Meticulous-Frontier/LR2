@@ -33,7 +33,7 @@ init 2 python:
         option_list = []
         option_list.append(["Give it to her stealthily" + serum_give_chance_color_wrapper(chances[0]), "stealth"])
         option_list.append(["Demand she takes it" + serum_give_chance_color_wrapper(chances[2]), "demand"])
-        if slave_role in the_person.special_role:
+        if the_person.has_role(slave_role):
             option_list.append(["Order her to take it\n{size=12}{color=#00D000}She is your slave.{/color}{/size}", "slave"])
         elif the_person.is_employee():
             if mandatory_unpaid_serum_testing_policy.is_owned():

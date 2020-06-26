@@ -942,7 +942,7 @@ label sister_ntr_crisis_action_label:
     $ position = None
     $ del man_name
     $ the_person.reset_arousal()
-    $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
     $ renpy.scene("Active")
     return

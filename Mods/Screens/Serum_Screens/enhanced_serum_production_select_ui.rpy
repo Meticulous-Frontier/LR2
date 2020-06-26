@@ -7,7 +7,7 @@ init -1:
                 new_amount = 0
             if new_amount == "-":
                 new_amount = -1
-            store.mc.business.serum_production_array[array_to_change][3] = int(new_amount)
+            store.mc.business.serum_production_array[array_to_change][3] = __builtin__.int(new_amount)
             renpy.restart_interaction()
 
 init 2:
@@ -256,7 +256,7 @@ init 2:
                             xsize 375
                             action SetScreenVariable("line_selected",None)
 
-                        if len(mc.business.serum_designs) == 0:
+                        if __builtin__.len(mc.business.serum_designs) == 0:
                             textbutton "No designs researched! Create and research a design in the R&D department first!":
                                 style "textbutton_style"
                                 text_style "serum_text_style"

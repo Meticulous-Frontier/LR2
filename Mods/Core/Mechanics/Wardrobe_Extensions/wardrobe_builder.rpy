@@ -16,7 +16,7 @@ init 5 python:
     shirts_list.append(business_vest)
 
     # generate a more useable default color palette
-    if len(persistent.colour_palette) == 10:
+    if __builtin__.len(persistent.colour_palette) == 10:
         persistent.colour_palette = [
             [0, .278, .671, .95],  [.392, .584, .929, .95], [.282, .239, .545, .95], [.89, .65, .34, .95], [.96, .77, .19, .95], [.98, .92, .36, .95],
             [.33, .10, .06, .95], [.80, .26, .04, .95], [.843, .039, .325, .95], [.87, .44, .63, .95], [1, .41, .71, .95], [1, .73, .85, .95],
@@ -31,14 +31,14 @@ init 5 python:
     def enhance_existing_wardrobe(person, max_outfits):
         outfit_builder = WardrobeBuilder(person)
 
-        while len(person.wardrobe.outfits) < max_outfits:    # add some generated outfits
-            person.wardrobe.add_outfit(outfit_builder.build_outfit("FullSets", slut_scores[len(person.wardrobe.outfits)]))
+        while __builtin__.len(person.wardrobe.outfits) < max_outfits:    # add some generated outfits
+            person.wardrobe.add_outfit(outfit_builder.build_outfit("FullSets", slut_scores[__builtin__.len(person.wardrobe.outfits)]))
 
-        while len(person.wardrobe.overwear_sets) < max_outfits:    # add some generated outfits
-            person.wardrobe.add_overwear_set(outfit_builder.build_outfit("OverwearSets", slut_scores[len(person.wardrobe.overwear_sets)]))
+        while __builtin__.len(person.wardrobe.overwear_sets) < max_outfits:    # add some generated outfits
+            person.wardrobe.add_overwear_set(outfit_builder.build_outfit("OverwearSets", slut_scores[__builtin__.len(person.wardrobe.overwear_sets)]))
 
-        while len(person.wardrobe.underwear_sets) < max_outfits:    # add some generated outfits
-            person.wardrobe.add_underwear_set(outfit_builder.build_outfit("UnderwearSets", slut_scores[len(person.wardrobe.underwear_sets)]))
+        while __builtin__.len(person.wardrobe.underwear_sets) < max_outfits:    # add some generated outfits
+            person.wardrobe.add_underwear_set(outfit_builder.build_outfit("UnderwearSets", slut_scores[__builtin__.len(person.wardrobe.underwear_sets)]))
 
         return
 
@@ -200,7 +200,7 @@ init 5 python:
 
             # prevent any item from having no colour set
             for cloth in overwear.upper_body + overwear.lower_body + overwear.feet + overwear.accessories:
-                if len(cloth.colour) < 4:
+                if __builtin__.len(cloth.colour) < 4:
                     cloth.colour = [1, 1, 1, .5]    # transparant white is easy to spot for debuggin
 
             return overwear
@@ -301,7 +301,7 @@ init 5 python:
 
         def build_filter_list(self, item_list, points, min_points = 0, filter_list = []):
             items = []
-            while len(items) == 0 and points < 15:  # make sure we got some items to choose from
+            while __builtin__.len(items) == 0 and points < 15:  # make sure we got some items to choose from
                 items = list(filter(lambda x: x.slut_value >= min_points and x.slut_value <= points and x not in filter_list, item_list))
                 points += 1
 

@@ -33,13 +33,16 @@ init 1 python:
         able_person_list = []
         for person in mc.business.production_team:
             if person.age < 25:
-                if person not in quest_director.unavailable_persons:
+                if not quest_director.is_person_blocked(person):
                     if day > person.event_triggers_dict.get("employed_since", 9999) + 7: #Employed for atleast 7 days#
                         able_person_list.append(person)
         return get_random_from_list(able_person_list)
 
     def setup_quest_production_line():
         person = get_quest_production_line_person()
+
+        # lock selected person out of other quests
+        quest_director.add_unavailable_person(person)
 
         # make sure 'selected person' is single and has no kids
         # although the player might have seen other information
@@ -57,61 +60,31 @@ init 1 python:
         quest_production_line.quest_event_dict["starting_pay"]  = quest_production_line.quest_event_dict["target"].salary
         quest_production_line.quest_event_dict["moving_day"] = 9999
         quest_production_line.set_quest_flag(1)
+        quest_production_line_get_target().on_room_enter_event_list.append(quest_production_line_intro)
+        game_hints.append(Hint("Chemist's Baby Girl", "Check production for a disturbance.", "quest_production_line.get_quest_flag() <= 1", "quest_production_line.get_quest_flag() > 1"))
+        game_hints.append(Hint("Chemist's Baby Girl", "Don't forget to meet the Chemist at the Mall in the afternoon.", "quest_production_line.get_quest_flag() == 11", "quest_production_line.get_quest_flag() != 11"))
+        hint_string = "Give " + quest_production_line_get_target().title + " a raise with a positive performance review."
+        game_hints.append(Hint("Chemist's Baby Girl", hint_string, "quest_production_line.get_quest_flag() == 31", "quest_production_line.get_quest_flag() != 31"))
+        hint_string_2 = "Give " + quest_production_line_get_target().title + " help moving. Note, for best possible ending, get her sluttiness above 40!"
+        game_hints.append(Hint("Chemist's Baby Girl", hint_string_2, "quest_production_line.get_quest_flag() == 61", "quest_production_line.get_quest_flag() != 61"))
         return
+
+    def quest_production_line_get_target():
+        return quest_production_line.quest_event_dict.get("target", None)
 
     def quest_production_line_tracker():  #I'm so sorry for anyone who tries to read this function
         the_person = quest_production_line.quest_event_dict.get("target", None)
         if quest_production_line.get_quest_flag() < 100:
-            if the_person == None:          #quest target is fired or otherwise out of the game
-                quest_production_line.quest_complete = True
+            if quest_production_line_get_target() == None:          #quest target is fired or otherwise out of the game
+                quest_production_line.quest_completed()
                 return
-        if quest_production_line.get_quest_flag() <= 1: #Intro
-            if quest_production_line_intro not in the_person.on_room_enter_event_list:
-                the_person.on_room_enter_event_list.append(quest_production_line_intro)
-
-        elif quest_production_line.get_quest_flag() == 11: #Agreed to meet
-            mall.add_action(quest_production_line_coffee)
-            if quest_production_line_coffee_reminder not in mc.business.mandatory_crises_list:
-                mc.business.mandatory_crises_list.append(quest_production_line_coffee_reminder)
-
-        elif quest_production_line.get_quest_flag() == 21: #reminder went off.
-            if time_of_day > 3: #Missed the meeting.
-                remove_mandatory_crisis_list_action("quest_production_line_coffee_reminder_label")
-                mc.business.mandatory_crises_list.append(quest_production_line_coffee_miss)
-                quest_production_line.set_quest_flag(22)
-                mall.remove_action(quest_production_line_coffee)
-
-        elif quest_production_line.get_quest_flag() == 29:  #Bad end
-            quest_production_line.quest_complete = True
-
-        elif quest_production_line.get_quest_flag() == 31: #agreed to give raise.
-            mall.remove_action(quest_production_line_coffee)
-            remove_mandatory_crisis_list_action("quest_production_line_coffee_reminder_label")
+        if quest_production_line.get_quest_flag() == 31: #agreed to give raise.
             if the_person.salary > quest_production_line.quest_event_dict.get("starting_pay", 0): #She has received a raise!
                 quest_production_line.set_quest_flag(41)
                 mc.business.mandatory_crises_list.append(quest_production_line_after_raise_consult)
+                remove_mandatory_crisis_list_action("quest_production_line_raise_miss_label")
             if quest_production_line_raise_miss not in mc.business.mandatory_crises_list:
                 mc.business.mandatory_crises_list.append(quest_production_line_raise_miss)
-
-        elif quest_production_line.get_quest_flag() == 39: #Bad End
-            quest_production_line.quest_complete = True
-
-        elif quest_production_line.get_quest_flag() == 41:
-            remove_mandatory_crisis_list_action("quest_production_line_raise_miss_label")
-            remove_mandatory_crisis_list_action("quest_production_line_after_raise_consult_label")
-            if quest_production_line_after_raise_consult not in mc.business.mandatory_crises_list:
-                mc.business.mandatory_crises_list.append(quest_production_line_after_raise_consult)
-
-        elif quest_production_line.get_quest_flag() == 61:
-            remove_mandatory_crisis_list_action("quest_production_line_after_raise_consult_label")
-            if quest_production_line_help_move not in mc.business.mandatory_crises_list:
-                mc.business.mandatory_crises_list.append(quest_production_line_help_move)
-
-        elif quest_production_line.get_quest_flag() == 69:  #Moderate end. Really you won't help her move?
-            quest_production_line.quest_complete = True
-
-        elif quest_production_line.get_quest_flag() >= 100:  #Good ends
-            quest_production_line.quest_complete = True
         return
 
     def quest_production_line_start_requirement():
@@ -164,7 +137,7 @@ init 1 python:
         return False
 
     def quest_production_line_help_move_requirement():
-        if day == quest_production_line.quest_event_dict.get("moving_day", 0):
+        if day >= quest_production_line.quest_event_dict.get("moving_day", 0):
             if time_of_day == 3:
                 return True
         return False
@@ -222,6 +195,8 @@ label quest_production_line_intro_label(the_person):
     $ del dad_name
     $ quest_production_line.set_quest_flag(11)
     $ quest_production_line.quest_event_dict["initial_meeting_day"] = (day + 1)
+    $ mall.add_action(quest_production_line_coffee)
+    $ mc.business.mandatory_crises_list.append(quest_production_line_coffee_reminder)
     return
 
 label quest_production_line_coffee_reminder_label():
@@ -231,6 +206,7 @@ label quest_production_line_coffee_reminder_label():
     "If you are going to go meet with the chemist, do it after lunch. He should be at the mall."
     $ del dad_name
     $ quest_production_line.set_quest_flag(21)
+    $ mc.business.mandatory_crises_list.append(quest_production_line_coffee_miss)
     return
 
 label quest_production_line_coffee_label():
@@ -262,6 +238,9 @@ label quest_production_line_coffee_label():
     "You get up and leave the coffee shop. So, if you want his help streamlining your production department, you should give [the_person.title] a raise."
     "Next time you see her, maybe you could just give her a performance review? High praise for her performance followed by raise."
     $ quest_production_line.set_quest_flag(31)
+    $ mall.remove_action(quest_production_line_coffee)
+    $ remove_mandatory_crisis_list_action("quest_production_line_coffee_miss_label")
+    $ mc.business.mandatory_crises_list.append(quest_production_line_raise_miss)
     return
 
 label quest_production_line_coffee_miss_label():
@@ -273,6 +252,8 @@ label quest_production_line_coffee_miss_label():
     #TODO lower girl opinions, causing her to probably quit ASAP.
     $ del dad_name
     $ quest_production_line.set_quest_flag(29)
+    $ mall.remove_action(quest_production_line_coffee)
+    $ quest_production_line.quest_completed()
     return
 
 label quest_production_line_raise_miss_label():
@@ -284,6 +265,7 @@ label quest_production_line_raise_miss_label():
     #TODO lower girl opinions, causing her to probably quit ASAP.
     $ del dad_name
     $ quest_production_line.set_quest_flag(39)
+    $ quest_production_line.quest_completed()
     return
 
 label quest_production_line_after_raise_consult_label():
@@ -328,12 +310,14 @@ label quest_production_line_after_raise_consult_label():
             "You might want to prep a serum or two... never know if an opportunity might pop up to have some fun!"
             $ quest_production_line.set_quest_flag(61)
             $ quest_production_line.quest_event_dict["moving_day"] = (day + 1)
+            $ mc.business.mandatory_crises_list.append(quest_production_line_help_move)
         "Too busy":
             mc.name "I'm sorry, I won't be able to help then."
             the_person.char "Damn... okay, I'm sure I'll be able to find someone."
             "You hang up the phone."
             "You already gave her a raise. Besides, you really don't even know her that well. Why would you want to spend all evening help her move?"
             $ quest_production_line.set_quest_flag(69)
+            $ quest_production_line.quest_completed()
     $ del dad_name
     return
 
@@ -356,7 +340,7 @@ label quest_production_line_help_move_label():
         "When she realizes that you are okay with it, she finally says it."
         the_person.char "Daddy, I'm so glad you are here!"
         $ the_person.draw_person(position = "kissing")
-        "She wraps her hands around you and gives you a lingering hug."
+        "She wraps her arms around you and gives you a lingering hug."
         "Eventually, she lets go."
     the_person.char "Okay... let's get to work!"
     $ renpy.scene("Active")
@@ -482,6 +466,7 @@ label quest_production_line_help_move_label():
             the_person.char "Yes Sir!"
             $ quest_production_line.set_quest_flag(102)
             $ the_person.on_room_enter_event_list.append(quest_production_line_daddy_title)
+    $ quest_production_line.quest_completed()
     return
 
 label quest_production_line_daddy_title_label(the_person): #This label is activated if the MC does not gain "daddy" status in the quest but still finished with a good end.

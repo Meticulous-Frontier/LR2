@@ -147,7 +147,6 @@ init -1 python:
         town_relationships.update_relationship(ashley, stephanie, "Sister")
         town_relationships.update_relationship(nora, ashley, "Friend")
         town_relationships.update_relationship(lily, ashley, "Rival")
-        head_researcher.remove_action_by_effect("ashley_hire_directed_label")
         return
 
 #Story labels
@@ -184,7 +183,7 @@ label ashley_intro_label():
             $ the_report = _return
             $scene_manager.update_actor(the_person, position = "stand4")
             if the_report.get("guy orgasms", 0) > 0:
-                mc.name "God your mouth is amazing. If your sister sucks anything like you this will be a no brainer..."
+                mc.name "God your mouth is amazing. If your sister sucks anything like you this will be a no-brainer..."
                 the_person.char "Hah! Well, to be honest, I don't think she really cares for giving blowjobs, but I guess you never know."
     "You pick up her documents and look over them."
     "From her skill set, it is obvious the best choice of department for here would be in production. The only question is, should you hire her or not?"
@@ -232,7 +231,7 @@ label ashley_hire_directed_label(the_person):
         $ the_person.change_happiness(5)
         $ the_person.change_obedience(5)
         the_person.char "Oh! This is great news! I'm sure she'll probably want to get started right away!"
-
+        $ head_researcher.remove_action("ashley_hire_directed_label")
         $ hire_ashley()
 
         "You complete the necessary paperwork and hire [ashley.name], assigning her to the production department."
@@ -269,11 +268,11 @@ label ashley_first_talk_label(the_person):
 
 label ashley_room_excitement_overhear_label(the_person):
     $ the_person.draw_person()
-    "As you step into the production room, you can overhear [the_person.title] talking excitedly to another coworker."
+    "As you step into the production room, you can overhear [the_person.title] talking excitedly to another co-worker."
     the_person.char "I know! I can't wait to go. All of my friend's say that is so much fun..."
     "But as you enter the room, she notices, and immediately stops talking."
     the_person.char "..."
-    "Clearly she has no issue talking to her coworkers... why is she so quiet with you? Maybe you should ask her sister about it."
+    "Clearly she has no issue talking to her co-workers... why is she so quiet with you? Maybe you should ask her sister about it."
     $ stephanie.add_unique_on_talk_event(ashley_ask_sister_about_attitude)
     $ ashley.event_triggers_dict["excitement_overhear"] = True
     return
@@ -317,7 +316,7 @@ label ashley_room_warming_up_label(the_person):
 
 label ashley_room_overhear_classical_label(the_person):
     "As you step into the production room, you can overhear [the_person.title] talking excitedly to another coworker."
-    the_person.char "I know, the city symphony is performing a collection of Johannes Brahm's symphonies. I want to go so bad but I can't find anyone to go with..."
+    the_person.char "I know, the city symphony is performing a collection of Johannes Brahms' symphonies. I want to go so bad but I can't find anyone to go with..."
     "As you enter the room, she looks and stops talking."
     the_person.char "Ahh... hello sir. Having a good day?"
     "Whoa. She actually said hi to you? Maybe she is warming up to you a little bit?"
@@ -329,11 +328,11 @@ label ashley_room_overhear_classical_label(the_person):
     return
 
 label ashley_ask_date_classic_concert_label(the_person):
-    mc.name "So... I couldn't help hearing earlier, you are looking to go to the Brahm Symphony recital, but you don't have anyone to go with?"
+    mc.name "So... I couldn't help hearing earlier, you are looking to go to the Brahms Symphony recital, but you don't have anyone to go with?"
     the_person.char "Ummm yeah, something like that..."
     "She is looking down, avoiding eye contact with you."
     mc.name "That sounds like a great cultural event. I was wondering if you would be willing to let me take you?"
-    "She is caught off gaurd. She wasn't expecting you to ask something like this!"
+    "She is caught off guard. She wasn't expecting you to ask something like this!"
     the_person.char "Oh! I uhh, I'm not sure..."
     if stephanie.love > 30 or stephanie.obedience > 130:
         the_person.char "I suppose... I mean... Steph keeps telling me you are a nice guy..."
@@ -352,10 +351,13 @@ label ashley_ask_date_classic_concert_label(the_person):
 label ashley_classical_concert_date_label():
     #TODO move downtown.
     $ the_person = ashley
-    "It's thursday. "
+    "It's Thursday."
     return
 
 label ashley_porn_video_discover_label():
+    # make sure we are in the bedroom
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
     $ the_person = ashley
     $ the_person.outfit = the_person.wardrobe.get_random_appropriate_underwear(50, sluttiness_min = 20, guarantee_output = True) #Hopefully this gets a slutty underwear set
     $ scene_manager = Scene()
@@ -403,7 +405,7 @@ label ashley_ask_sister_about_porn_video_label(the_person):
     $ scene_manager.add_actor(the_person)
     mc.name "Hello [the_person.title]. I need to talk to you about something... sensitive. Could you please come with me to my office?"
     the_person.char "Of course."
-    #TODO change background to office
+    $ office.show_background()
     "You enter your office an gesture for her to sit down."
     $ scene_manager.update_actor(the_person, position = "sitting")
     if the_person.sluttiness > 50:
@@ -426,7 +428,7 @@ label ashley_ask_sister_about_porn_video_label(the_person):
     mc.name "I want to do something, but I don't know what."
     if the_person.love > 30:
         the_person.char "I don't know either... I guess just... keep being you?"
-        the_person.char "You are a wonderful guy. Just be there for her, okay? You are like the only guy she interacts with anymore."
+        the_person.char "You are a wonderful guy. Just be there for her, okay? You are like the only guy she interacts with any more."
     else:
         the_person.char "I mean, you are like, the only guy she interacts with... at all. She has completely cut herself off from men."
         the_person.char "Maybe you could try like, you know, being there for her? Help her learn that not all men are total assholes?"
@@ -435,6 +437,8 @@ label ashley_ask_sister_about_porn_video_label(the_person):
     "After a few solemn moments, you decide to move on with your day."
     mc.name "That's enough for now I suppose. Let me know if you think of anything."
     the_person.char "Yes sir... and the same for you."
+    "You both walk back to the [mc.location.formalName]."
+    $ mc.location.show_background()
     $ ashley.event_triggers_dict["porn_discussed"] = True
     return
 

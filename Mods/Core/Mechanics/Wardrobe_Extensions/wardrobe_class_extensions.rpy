@@ -227,15 +227,15 @@ init -1 python:
         valid_wardrobe = self.build_valid_uniform_wardrobe(person)
         preferences = WardrobePreference(person)
 
-        # renpy.say("", person.name + " " + person.last_name + " [outfits: " + str(len(valid_wardrobe.outfits)) + " - overwear: " + str(len(valid_wardrobe.overwear_sets)) + " - underwear: " + str(len(valid_wardrobe.underwear_sets)))
+        # renpy.say("", person.name + " " + person.last_name + " [outfits: " + str(__builtin__.len(valid_wardrobe.outfits)) + " - overwear: " + str(__builtin__.len(valid_wardrobe.overwear_sets)) + " - underwear: " + str(__builtin__.len(valid_wardrobe.underwear_sets)))
 
-        if len(valid_wardrobe.outfits) > 0:
+        if __builtin__.len(valid_wardrobe.outfits) > 0:
             #We have some full body outfits we might use. 50/50 to use that or a constructed outfit.
             outfit_choice = renpy.random.randint(0,100)
             chance_to_use_full = 50 #Like normal outfits a uniform hasa 50/50 chance of being a full outfit or an assembled outfit if both are possible.
 
             #If we roll use full or we don't have the parts to make an assembled outfit.
-            if outfit_choice > chance_to_use_full or len(valid_wardrobe.underwear_sets + valid_wardrobe.overwear_sets) == 0:
+            if outfit_choice > chance_to_use_full or __builtin__.len(valid_wardrobe.underwear_sets + valid_wardrobe.overwear_sets) == 0:
                 full_outfit = None
                 count = 0
 
@@ -249,7 +249,7 @@ init -1 python:
                 if full_outfit:
                     return full_outfit
 
-        if len(valid_wardrobe.underwear_sets + valid_wardrobe.overwear_sets) == 0:
+        if __builtin__.len(valid_wardrobe.underwear_sets + valid_wardrobe.overwear_sets) == 0:
             #We have nothing else to make a uniform out of. Return None and let the pick uniform function handle that.
             return get_random_appropriate_outfit_from_wardrobes(valid_wardrobe, person, target_sluttiness, None)
 
@@ -324,15 +324,15 @@ init -1 python:
         minimum_sluttiness = calculate_minimum_sluttiness(person, target_sluttiness)
         preferences = WardrobePreference(person)
 
-        if len(self.outfits) > 0:
+        if __builtin__.len(self.outfits) > 0:
             #We have some full body outfits we might use. 50/50 to use that or a constructed outfit.
             outfit_choice = renpy.random.randint(0,100)
-            chance_to_use_full = (50 / 8.0) * len(self.outfits)   # when 8 outfits chance is 50%.
+            chance_to_use_full = (50 / 8.0) * __builtin__.len(self.outfits)   # when 8 outfits chance is 50%.
             if chance_to_use_full > 70:
                 chance_to_use_full = 70
 
             #If we roll use full or we don't have the parts to make an assembled outfit.
-            if outfit_choice > chance_to_use_full or len(self.underwear_sets + self.overwear_sets) == 0:
+            if outfit_choice > chance_to_use_full or __builtin__.len(self.underwear_sets + self.overwear_sets) == 0:
                 full_outfit = None
                 count = 0
                 while not full_outfit and count < 2:    # Try to find a valid outfit by stretching the sluttiness range, returns none when not successful
@@ -345,7 +345,7 @@ init -1 python:
                 if full_outfit:
                     return full_outfit
 
-        if len(self.underwear_sets + self.overwear_sets) == 0:
+        if __builtin__.len(self.underwear_sets + self.overwear_sets) == 0:
             #We have nothing else to make a outfit out of. Use default builder function.
             return get_random_appropriate_outfit_from_wardrobes(self, person, target_sluttiness, None)
 

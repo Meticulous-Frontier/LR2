@@ -46,7 +46,7 @@ label wardrobe_change_label_enhanced(the_person):
         mc.name "[the_person.title], lets have a talk about what you've been wearing."
         $ renpy.scene("Active")
         call screen outfit_delete_manager(the_person.wardrobe)
-        $ the_person.review_outfit(dialogue = False)
+        $ the_person.apply_planned_outfit()
         $ the_person.draw_person()
 
     elif picked_option == "wear":
@@ -59,6 +59,6 @@ label wardrobe_change_label_enhanced(the_person):
                 "[the_person.title] seems nervous wearing her new outfit in front of you, but quickly warms up to it."
             the_person.char "Is this better?"
         else:
-            $ the_person.review_outfit(dialogue = False)
+            $ the_person.apply_planned_outfit()
         $ the_person.draw_person()
     return

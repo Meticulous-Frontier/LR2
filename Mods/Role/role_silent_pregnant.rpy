@@ -45,7 +45,7 @@ init -1 python:
             the_person.tits = get_larger_tits(the_person.tits) #Her tits start to swell.
             the_person.personal_region_modifiers["breasts"] = the_person.personal_region_modifiers["breasts"] + 0.1
         else:
-            silent_preg_tits_action = Action("Pregnancy Tits Grow", silent_pregnant_tits_requirement, "silent_pregnant_tits_start", args = the_person, requirement_args = the_person)
+            silent_preg_tits_action = Action("Pregnancy Tits Grow", silent_pregnant_tits_requirement, "silent_pregnant_tits_start")
             the_person.on_room_enter_event_list.append(silent_preg_tits_action)
 
         if day > the_person.event_triggers_dict.get("preg_transform_day", 0):
@@ -58,7 +58,7 @@ init -1 python:
             silent_preg_finish_announce_action = Action("Pregnancy Finish Announcement", silent_preg_finish_announcement_requirement, "silent_pregnant_finish_announce", args = the_person, requirement_args = the_person)
             mc.business.mandatory_crises_list.append(silent_preg_finish_announce_action)
         else:
-            silent_preg_transform_action = Action("Pregnancy Transform", silent_pregnant_transform_requirement, "silent_pregnant_transform", args = the_person, requirement_args = the_person)
+            silent_preg_transform_action = Action("Pregnancy Transform", silent_pregnant_transform_requirement, "silent_pregnant_transform")
             the_person.on_room_enter_event_list.append(silent_preg_transform_action) #This event adds an announcement event the next time you enter the same room as the girl.
 
         the_person.add_role(silent_pregnant_role)
@@ -138,7 +138,7 @@ label silent_pregnant_transform_announce(start_day, the_person):
     the_person.char "...but, I'm pregnant!"
     mc.name "Congratulations! You look fantastic. You really are glowing."
     $ the_person.change_happiness(10)
-    if employee_role in the_person.special_role:
+    if the_person.has_role(employee_role):
         the_person.char "Thank you! So obviously, when the baby comes, I'll need some time off work..."
         mc.name "Just let me know when the time comes, if you can. We'll make due without you while you are off."
     the_person.char "Thank you!"
@@ -164,7 +164,7 @@ label silent_pregnant_finish_announce(the_person): #TODO: have more variants for
     "You get a call from [the_person.possessive_title]. You answer it."
     mc.name "Hey [the_person.title], what's up?"
 
-    if employee_role in the_person.special_role:
+    if the_person.has_role(employee_role):
         the_person.char "Hi [the_person.mc_title]. I wanted to let you to know that I won't be at work for a few days."
     else:
         the_person.char "Hi [the_person.mc_title], I have some exciting news."
@@ -203,7 +203,7 @@ init 2 python:
         person.on_talk_event_list.append(silent_tit_shrink_one_announcement_action) #And here is where she tells you about those changes
         person.on_talk_event_list.append(silent_tit_shrink_two_announcement_action)
 
-        if silent_pregnant_role in person.special_role:
+        if person.has_role(silent_pregnant_role):
             person.remove(silent_pregnant_role)
         return
 

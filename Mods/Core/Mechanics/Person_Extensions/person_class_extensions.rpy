@@ -83,17 +83,19 @@ init -1 python:
 
     def get_person_identifier(self):
         if not hasattr(self, "_identifier"):
-            self._identifier = hashlib.md5(self.name + self.last_name + str(self.age)).hexdigest()
+            self._identifier = hashlib.md5(self.name + self.last_name + str(renpy.random.randint(10000, 90000000))).hexdigest()
         return self._identifier
 
-    def set_person_identifier(self, value):
-        self._identifier = value
+    # don't allow set
+    # def set_person_identifier(self, value):
+    #     self._identifier = value
 
-    def del_person_identifier(self):
-        del self._identifier
+    # don't allow delete
+    # def del_person_identifier(self):
+    #     del self._identifier
 
     # add follow_mc attribute to person class (without sub-classing)
-    Person.identifier = property(get_person_identifier, set_person_identifier, del_person_identifier, "Unique identifier for person class.")
+    Person.identifier = property(get_person_identifier, None, None, "Unique identifier for person class.")
 
     def get_person_next_day_outfit(self):
         if not hasattr(self, "_next_day_outfit"):
@@ -126,6 +128,19 @@ init -1 python:
         del self.weight
 
     Person.weight = property(get_person_weight, set_person_weight, del_person_weight, "The weight of the person in KG.")
+
+    def get_person_stripper_salary(self):
+        if not hasattr(self, "_stripper_salary"):
+            self._stripper_salary = 0
+        return self._stripper_salary
+
+    def set_person_stripper_salary(self, value):
+        self._stripper_salary = value
+
+    def del_person_stripper_salary(self):
+        del self._stripper_salary
+
+    Person.stripper_salary = property(get_person_stripper_salary, set_person_stripper_salary, del_person_stripper_salary, "The salary when person is stripping.")
 
     ## MATCH SKIN COLOR
     # Matches skin, body, face and expression images based on input of skin color
@@ -397,8 +412,8 @@ init -1 python:
         the_mother = make_person(last_name = self.last_name, age = age, body_type = body_type, face_style = face_style, tits = tits, height = height,
             hair_colour = hair_colour, skin = self.skin, eyes = eyes, start_home = start_home, force_random = True)
 
-        if the_mother.kids == 0:    # make sure she has at least one child
-            the_mother.kids = 1
+        # set children fixed to one, to prevent circular relative creations (like create mom, has 3 children, so we can start hiring her other daughters)
+        the_mother.kids = 1
 
         if start_home is None:
             the_mother.generate_home()
@@ -406,6 +421,7 @@ init -1 python:
 
         for sister in town_relationships.get_existing_sisters(self): #First find all of the sisters this person has
             town_relationships.update_relationship(the_mother, sister, "Daughter", "Mother") #Set the mother/daughter relationship for the sisters
+            the_mother.kids += 1 # increase child count per sister
 
         town_relationships.update_relationship(self, the_mother, "Mother", "Daughter") #Now set the mother/daughter relationship with person
 
@@ -439,7 +455,7 @@ init -1 python:
             return messages
 
         messages = get_messages(narrator_messages)
-        msg_count = len(messages)
+        msg_count = __builtin__.len(messages)
 
         test_outfit = self.outfit.get_copy()
         removed_something = False
@@ -652,7 +668,7 @@ init -1 python:
     Person.run_move = run_move_enhanced
 
     # extend the default run day function
-    def run_day_extended(org_func):
+    def person_run_day_extended(org_func):
         def run_day_wrapper(person):
             # run original function
             org_func(person)
@@ -663,7 +679,7 @@ init -1 python:
         return run_day_wrapper
 
     # wrap up the run_day function
-    Person.run_day = run_day_extended(Person.run_day)
+    Person.run_day = person_run_day_extended(Person.run_day)
 
     # BUGFIX: Remove suggest effect
     # Sometimes an effect is no longer in bag causing an exception, fix: check if effect exists before trying to remove
@@ -852,14 +868,12 @@ init -1 python:
 
     def review_outfit_enhanced(self, dialogue = True):
         self.outfit.remove_all_cum()
+        self.outfit.update_slut_requirement()
 
         if self.should_wear_uniform():
             self.wear_uniform() # Reset uniform
-        else:
-            self.outfit.update_slut_requirement()
-            # only show review message when parameter is true and she doesn't feel comfortable in her current outfit
-            dialogue = dialogue and self.outfit.slut_requirement > self.sluttiness
-            self.apply_outfit(self.planned_outfit)    # always restore outfit
+        elif self.outfit.slut_requirement > self.sluttiness:
+            self.apply_planned_outfit()
             if dialogue:
                 self.call_dialogue("clothing_review") # must be last call in function
 
@@ -1009,9 +1023,10 @@ init -1 python:
     Person.has_role = has_role
 
     def add_role(self, role):
+        added = False
         if not role in self.special_role:
             self.special_role.append(role)
-            return True
+            added = True
 
         # special situation if she gets girlfriend role, she loses affair role and SO
         if role is girlfriend_role:
@@ -1019,7 +1034,7 @@ init -1 python:
             self.relationship = "Single" #Technically they aren't "single", but the MC has special roles for their girlfriend.
             self.SO_name = None            
 
-        return False
+        return added
     Person.add_role = add_role
     
     def remove_role(self, role):
@@ -1034,13 +1049,15 @@ init -1 python:
 ################################################
 
     def apply_gym_outfit(self):
-        self.apply_outfit(workout_wardrobe.decide_on_outfit2(self))
+        # get personal copy of outfit, so we don't change the gym wardrobe (in any events)
+        self.apply_outfit(workout_wardrobe.decide_on_outfit2(self).get_copy())
         return
 
     Person.apply_gym_outfit = apply_gym_outfit
 
     def apply_university_outfit(self):
-        self.apply_outfit(university_wardrobe.decide_on_outfit2(self))
+        # get personal copy of outfit, so we don't change the university wardrobe (in any events)
+        self.apply_outfit(university_wardrobe.decide_on_outfit2(self).get_copy())
         return
 
     Person.apply_university_outfit = apply_university_outfit
@@ -1076,13 +1093,13 @@ init -1 python:
     def player_willpower():
         mc.power = 0
 
-        mc.power += int(mc.charisma*5) # Positive character modifiers
-        mc.power += int((mc.energy / 20) * 1.5)
+        mc.power += __builtin__.int(mc.charisma*5) # Positive character modifiers
+        mc.power += __builtin__.int((mc.energy / 20) * 1.5)
         return mc.power
 
     # calculates current willpower of a person
     def calculate_willpower(person):
-        willpower = int(person.focus * 10 + person.happiness * 0.2 - person.obedience * 0.1 - person.love * 0.2 - person.suggestibility * 0.5)
+        willpower = __builtin__.int(person.focus * 10 + person.happiness * 0.2 - person.obedience * 0.1 - person.love * 0.2 - person.suggestibility * 0.5)
 
         if willpower < 0:
             willpower = 0
@@ -1173,6 +1190,36 @@ init -1 python:
 
     Person.panties_covered = person_panties_covered
 
+    def person_has_mouth_cum(self):
+        return self.outfit.has_mouth_cum()
+
+    Person.has_mouth_cum = person_has_mouth_cum
+
+    def person_has_tits_cum(self):
+        return self.outfit.has_tits_cum()
+
+    Person.has_tits_cum = person_has_tits_cum
+
+    def person_has_stomach_cum(self):
+        return self.outfit.has_stomach_cum()
+
+    Person.has_stomach_cum = person_has_stomach_cum
+
+    def person_has_face_cum(self):
+        return self.outfit.has_face_cum()
+
+    Person.has_face_cum = person_has_face_cum
+
+    def person_has_ass_cum(self):
+        return self.outfit.has_ass_cum()
+
+    Person.has_ass_cum = person_has_ass_cum
+
+    def person_has_creampie_cum(self):
+        return self.outfit.has_creampie_cum()
+
+    Person.has_creampie_cum =person_has_creampie_cum
+
 ##########################################
 # Unique crisis addition functions       #
 ##########################################
@@ -1180,13 +1227,32 @@ init -1 python:
     def add_unique_on_talk_event(self, the_crisis):
         if the_crisis not in self.on_talk_event_list:
             self.on_talk_event_list.append(the_crisis)
+    Person.add_unique_on_talk_event = add_unique_on_talk_event
 
     def add_unique_on_room_enter_event(self, the_crisis):
         if the_crisis not in self.on_room_enter_event_list:
             self.on_room_enter_event_list.append(the_crisis)
-
-    Person.add_unique_on_talk_event = add_unique_on_talk_event
     Person.add_unique_on_room_enter_event = add_unique_on_room_enter_event
+
+    def remove_on_talk_event(self, the_crisis):
+        if isinstance(the_crisis, basestring):
+            found = find_in_list(lambda x: x.effect == the_crisis, self.on_talk_event_list)
+            if found:
+                self.on_talk_event_list.remove(found)
+
+        if the_crisis in self.on_talk_event_list:
+            self.on_talk_event_list.remove(the_crisis)
+    Person.remove_on_talk_event = remove_on_talk_event
+
+    def remove_on_room_enter_event(self, the_crisis):
+        if isinstance(the_crisis, basestring):
+            found = find_in_list(lambda x: x.effect == the_crisis, self.on_room_enter_event_list)
+            if found:
+                self.on_room_enter_event_list.remove(found)
+
+        if the_crisis in self.on_room_enter_event_list:
+            self.on_room_enter_event_list.remove(the_crisis)
+    Person.remove_on_room_enter_event = remove_on_room_enter_event    
 
 ##########################################
 # Pregnancy Functions                    #
@@ -1231,7 +1297,7 @@ init -1 python:
             return False
         if persistent.pregnancy_pref < 2:
             return False
-        day_difference = abs((day % 30) - self.ideal_fertile_day) # Gets the distance between the current day and the ideal fertile day.
+        day_difference = __builtin__.abs((day % 30) - self.ideal_fertile_day) # Gets the distance between the current day and the ideal fertile day.
         if day_difference > 15:
             day_difference = 30 - day_difference #Wrap around to get correct distance between months.
         if day_difference < 4:
@@ -1239,15 +1305,3 @@ init -1 python:
         return False
 
     Person.is_highly_fertile = is_highly_fertile
-
-    def remove_on_talk_event(self, the_crisis):
-        if the_crisis in self.on_talk_event_list:
-            self.on_talk_event_list.remove(the_crisis)
-
-    Person.remove_on_talk_event = remove_on_talk_event
-
-    def remove_on_room_enter_event(self, the_crisis):
-        if the_crisis in self.on_room_enter_event_list:
-            self.on_room_enter_event_list.remove(the_crisis)
-
-    Person.remove_on_room_enter_event = remove_on_room_enter_event

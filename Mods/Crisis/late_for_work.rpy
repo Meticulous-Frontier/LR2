@@ -238,6 +238,6 @@ label late_for_work_action_label:
         $ mc.business.change_funds(250)
 
     $ renpy.scene("Active")
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
     return

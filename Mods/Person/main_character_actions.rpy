@@ -31,6 +31,10 @@ init 2 python:
 
     # Hire Person Requirements
     def mc_hire_person_requirement(person):
+        if person.has_role(casual_hotwife_role) or person.has_role(casual_athlete_role) or person.has_role(casual_FA_role):
+            return False
+        if person.has_role(stripper_role):
+            return False
         if person not in mc.business.get_employee_list() + unique_character_list:
             if mc.business.get_employee_count() >= mc.business.max_employee_count:
                 return "At employee limit."
@@ -62,7 +66,7 @@ init 2 python:
     def mc_action_pay_to_strip_requirement(person):
         if not person is lily:
             if (person.obedience >= 130 and person.sluttiness >= 15) or (person.sluttiness >= 25 and person.get_opinion_score("not wearing anything") > 0) or person.obedience >= 150 or person.sluttiness >= 50:
-                if len(mc.location.people) > 1:
+                if __builtin__.len(mc.location.people) > 1:
                     return "Must be alone with " + person.title
                 return True
         return False
@@ -120,7 +124,7 @@ label mc_pay_to_strip_label(person):
 
     # reset the person outfit to the one prior to the strip
     python:
-        person.review_outfit(dialogue = False)
+        person.apply_planned_outfit()
         person.draw_person(emotion = "happy")
 
     if person.sluttiness > person.outfit.slut_requirement:
@@ -184,30 +188,24 @@ label mc_hire_person_label(person):
     menu:
         "Research and Development":
             $ mc.business.hire_person(the_person, "Research")
-            $ mc.location.move_person(person, mc.business.r_div)
 
         "Production":
             $ mc.business.hire_person(the_person, "Production")
-            $ mc.location.move_person(person, mc.business.p_div)
 
         "Supply Procurement":
             $ mc.business.hire_person(the_person, "Supply")
-            $ mc.location.move_person(person, mc.business.s_div)
 
         "Marketing":
             $ mc.business.hire_person(the_person, "Marketing")
-            $ mc.location.move_person(person, mc.business.m_div)
 
         "Human Resources":
             $ mc.business.hire_person(the_person, "HR")
-            $ mc.location.move_person(person, mc.business.h_div)
 
         "Back":
             return
 
     $ mc.business.change_funds(- (person.calculate_base_salary() * 10))
-    $ work_station_destination = mc.business.get_employee_workstation(person).formalName
-    "[person.title] heads over to the [work_station_destination]..."
+    "You have hired [person.title], she will start working as soon as possible."
     return
 
 

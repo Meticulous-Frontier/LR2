@@ -20,7 +20,7 @@ init 2:
                     sensitive True
 
                 if mc.business.funds < 0:
-                    textbutton "Company Funds: $" + str(int(mc.business.funds)):
+                    textbutton "Company Funds: $" + str(__builtin__.int(mc.business.funds)):
                         ysize 28
                         text_style "menu_text_style"
                         text_color "#DD0000"
@@ -28,14 +28,14 @@ init 2:
                         action NullAction()
                         sensitive True
                 else:
-                    textbutton "Company Funds: $" + str(int(mc.business.funds)):
+                    textbutton "Company Funds: $" + str(__builtin__.int(mc.business.funds)):
                         ysize 28
                         text_style "menu_text_style"
                         tooltip "The amount of money in your business account. If you are in the negatives for more than three days your loan defaults and the game is over!"
                         action NullAction()
                         sensitive True
 
-                textbutton "Daily Salary Cost: $"+ str(int(mc.business.calculate_salary_cost())):
+                textbutton "Daily Salary Cost: $"+ str(__builtin__.int(mc.business.calculate_salary_cost())):
                     ysize 28
                     text_style "menu_text_style"
                     tooltip "The amount of money spent daily to pay your employees. Employees are not paid on weekends."
@@ -49,7 +49,7 @@ init 2:
                     action NullAction()
                     sensitive True
 
-                textbutton "Current Raw Supplies: " + str(int(mc.business.supply_count)) +"/[mc.business.supply_goal]":
+                textbutton "Current Raw Supplies: " + str(__builtin__.int(mc.business.supply_count)) +"/[mc.business.supply_goal]":
                     ysize 28
                     text_style "menu_text_style"
                     tooltip "Your current and goal amounts of serum supply. Manufacturing serum requires supplies, spend time ordering supplies from your office or hire someone to do it for you. Raise your supply goal from your office if you want to keep more supply stockpiled."
