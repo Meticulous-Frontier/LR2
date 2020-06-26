@@ -1016,7 +1016,7 @@ init -1 python:
     Person.is_employee = is_employee
 
     def has_role(self, role):
-        if isinstance(role, basestring):
+        if isinstance(role, basestring): # Passing a string can account for situations where integration of modular / non- core roles need to be checked. Remember to pass it's supposed Role.name instead of Role
             return not find_in_list(lambda x: x.role_name == role, self.special_role) is None
         else:
             return role in self.special_role
