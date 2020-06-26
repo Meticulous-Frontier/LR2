@@ -1242,9 +1242,7 @@ label Sarah_tits_reveal_label():
     the_person.char "Okay... let me go get cleaned up... then I'll come back and we can start our regular Monday meeting!"
     $ the_person.draw_person(position = "walking_away")
     "She gets up and leaves the room. You smile to yourself, thinking about how good her new tits felt around your cock."
-    $ the_person.reset_arousal()
-    $ the_person.review_outfit(dialogue = False)
-
+    $ the_person.apply_planned_outfit()
     return
 
 label Sarah_stripclub_story_label():
@@ -1782,7 +1780,7 @@ label Sarah_threesome_request_label():
     if the_report.get("girl orgasms", 0) > 0:
         "[the_person.title] takes it easy for a moment, enjoying the afterglow of her orgasm."
     the_person.char "Mmm, that was hot as always."
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
     $ scene_manager.update_actor(the_person, position = "stand3")
     if the_person.has_role(girlfriend_role):
         pass
@@ -2201,7 +2199,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
                 "When you come back, [the_person.title] is awake."
                 $ scene_manager.update_actor(the_person, position = "missionary")
                 the_person.char "Good morning! I slept great."
-                $ the_person.review_outfit(dialogue = False)
+                $ the_person.apply_planned_outfit()
                 $ scene_manager.update_actor(the_person, position = "stand3")
                 "You both get ready for the day before heading out."
                 $ scene_manager.clear_scene()
@@ -2248,7 +2246,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         $ the_person.reset_arousal()
         $ mc.arousal = 0
         "You lay in bed together for a little longer, but soon it is time to start the day."
-        $ the_person.review_outfit(dialogue = False)
+        $ the_person.apply_planned_outfit()
         $ scene_manager.update_actor(the_person, position = "stand4")
         "You both get ready for the day."
         the_person.char "Alright, I need to get some things done today. Thanks for letting me spend the night!"
@@ -2309,7 +2307,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         "She walks out, leaving you alone with [the_person.possessive_title]"
         the_person.char "That's certainly one way to start the day... holy hell."
         "You lay in bed together for a little longer, but soon it is time to start the day."
-        $ the_person.review_outfit(dialogue = False)
+        $ the_person.apply_planned_outfit()
         $ scene_manager.update_actor(the_person, position = "stand4")
         "You both get ready for the day."
         the_person.char "Alright, I need to get some things done. Thanks for letting me spend the night!"
@@ -2337,7 +2335,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
             "She rolls over and kisses you, then rests her head on your chest."
 
         "You lay in bed together for a little longer, but soon it is time to start the day."
-        $ the_person.review_outfit(dialogue = False)
+        $ the_person.apply_planned_outfit()
         $ scene_manager.update_actor(the_person, position = "stand4")
         "You both get ready for the day."
         the_person.char "Alright, I need to get some things done today. Thanks for letting me spend the night!"

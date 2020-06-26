@@ -262,7 +262,7 @@ label starbuck_vaginal_skillup_label(the_person):
                             the_person.char "Thanks for the fuck!"
 
                         "You leave [the_person.possessive_title] to get cleaned up and get back to work."
-                        $ the_person.review_outfit(dialogue = False)
+                        $ the_person.apply_planned_outfit()
 
                     "No thanks":
                         "You thank her for the offer, but decide against it for now."
@@ -311,8 +311,7 @@ label starbuck_anal_skillup_label(the_person):
                             the_person.char "Thanks for the fuck!"
 
                         "You leave [the_person.possessive_title] to get cleaned up and get back to work."
-                        $ the_person.reset_arousal()
-                        $ the_person.review_outfit(dialogue = False)
+                        $ the_person.apply_planned_outfit()
 
                     "No thanks":
                         "You thank her for the offer, but decide against it for now."
@@ -356,8 +355,7 @@ label starbuck_oral_skillup_label(the_person):
                             the_person.char "Thanks for the fuck!"
 
                         "You leave [the_person.possessive_title] to get cleaned up and get back to work."
-                        $ the_person.reset_arousal()
-                        $ the_person.review_outfit(dialogue = False)
+                        $ the_person.apply_planned_outfit()
 
                     "No thanks":
                         "You thank her for the offer, but decide against it for now."
@@ -400,8 +398,7 @@ label starbuck_foreplay_skillup_label(the_person):
                             the_person.char "Thanks for the fuck!"
 
                         "You leave [the_person.possessive_title] to get cleaned up and get back to work."
-                        $ the_person.reset_arousal()
-                        $ the_person.review_outfit(dialogue = False)
+                        $ the_person.apply_planned_outfit()
 
                     "No thanks":
                         "You thank her for the offer, but decide against it for now."
@@ -776,7 +773,7 @@ label starbuck_sex_store_promo_one_label(the_person):
         del SB_advert_one_outfit
         del SB_advert_two_outfit
         del SB_advert_three_outfit
-        the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
+        the_person.apply_planned_outfit()
         mc.location.show_background()
         renpy.scene("Active")
     return #Toy modeling, ends in blowjob
@@ -925,7 +922,7 @@ label starbuck_sex_store_promo_two_label(the_person):
             the_person.char "Thanks for the help [the_person.mc_title], if you find yourself needing anything later... just ask okay?"
             $ the_person.change_stats(love = -5, happiness = -5, slut_core = 5, slut_temp = 5)
 
-    $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
     $ renpy.scene("Active")
     return #Masturbation, ends in sex
@@ -1087,7 +1084,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     the_person.char "I'm gonna go get cleaned up now... Get to work on that video!"
     $ the_person.shop_investment_rate = 4.0
     $ the_person.reset_arousal()
-    $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.apply_planned_outfit()
     "You grab the camera, and start looking at the footage. The first thing you do is copy it on a thumb drive, for you to enjoy at a later date."
     "You head out to start work on the advertisement video."
     $ perk_system.add_stat_perk(Stat_Perk(description = "Increase oral skill after helping Starbuck demonstrate edible panties. + 1 Oral Skill", oral_bonus = 1, bonus_is_temp =False), "Starbuck Oral Bonus")
@@ -1251,8 +1248,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     $ perk_system.add_stat_perk(Stat_Perk(description = "Increase anal skill after helping Starbuck demonstrate double penetration with a dildo. +1 Anal Skill", anal_bonus = 1, bonus_is_temp = False), "Starbuck Anal Bonus")
     "Fucking [the_person.title] anally makes you more confident in your anal skills."
     $ the_person.shop_investment_rate = 5.0
-    $ the_person.reset_arousal()
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
     "You head out to start work on the advertisement video."
 
     return

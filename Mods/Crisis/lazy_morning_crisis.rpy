@@ -59,7 +59,7 @@ label lazy_morning_crisis_action_label:
         mc.name "No! No come on in, you just surprised me when you walked in and I just woke up. I'd love to cuddle up for a bit."
         "[the_person.possessive_title] walks over to your bed. You lift up the covers and she slides in bed next to you."
         $ the_person.draw_person(position = "missionary")
-        "She sighs as she lays on her back. You put your head on her shoulder and wrap one arm benether her head under the pillow and the other scross her stomach."
+        "She sighs as she lays on her back. You put your head on her shoulder and wrap one arm beneath her head under the pillow and the other across her stomach."
         if the_person is mom:
             the_person.char "I remember when it used to be you... climbing in to my bed in the middle of the night, scared from a bad dream."
         elif the_person is lily:
@@ -90,7 +90,7 @@ label lazy_morning_crisis_action_label:
             $ the_person.break_taboo("touching_penis")
         else:
             the_person.char "Having pleasant dreams when I woke you up?"
-            "You feel her hand on your stomach and she starts to move it downwards. When she reachs your underwear, her hand goes between your skin and the band and you gasp when she grasps your cock."
+            "You feel her hand on your stomach and she starts to move it downwards. When she reaches your underwear, her hand goes between your skin and the band and you gasp when she grasps your cock."
         the_person.char "God its so hard..."
         "Her hand stroking your cock feels great, but soon you decide to make the pleasure mutual."
         if the_person.outfit.tits_visible():
@@ -121,8 +121,7 @@ label lazy_morning_crisis_action_label:
         pass
 
     python:
-        the_person.reset_arousal()
-        the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
+        the_person.apply_planned_outfit()
         mc.location.show_background()
         renpy.scene("Active")
     return

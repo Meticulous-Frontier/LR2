@@ -124,7 +124,7 @@ label mc_pay_to_strip_label(person):
 
     # reset the person outfit to the one prior to the strip
     python:
-        person.review_outfit(dialogue = False)
+        person.apply_planned_outfit()
         person.draw_person(emotion = "happy")
 
     if person.sluttiness > person.outfit.slut_requirement:

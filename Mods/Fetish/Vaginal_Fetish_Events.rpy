@@ -277,7 +277,6 @@ label SB_fetish_vaginal_event_label(the_person):
                     "[the_person.possessive_title] seems disappointed she didn't finish."
                     $ the_person.change_love(-2)
                     $ the_person.change_happiness(-5)
-                $ the_person.reset_arousal()
             "Just cuddle":
                 mc.name "Actually, [the_person.title], I'm really worn out. Would you wanna just cuddle for a bit and get some sleep?"
                 "[the_person.possessive_title] is surprised by your answer."
@@ -319,7 +318,6 @@ label SB_fetish_vaginal_event_label(the_person):
                     "[the_person.possessive_title] seems disappointed she didn't finish."
                     $ the_person.change_love(-2)
                     $ the_person.change_happiness(-5)
-                $ the_person.reset_arousal()
             "Just cuddle":
                 mc.name "Actually, [the_person.title], I'm really sorry about this, but I'm really worn out. Would you wanna just cuddle for a bit and get some sleep?"
                 "[the_person.possessive_title] is surprised by your answer, and clearly a little disappointed."
@@ -482,7 +480,7 @@ label SB_cowgirl_wakeup_label(the_person):
     else:
         "[the_person.title] looks at you and winks."
         the_person.char "Anytime [the_person.mc_title]! I'd better go get ready!"
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
     $ the_person.draw_person(position = "stand3")
     "You fall back asleep. When you wake up, [the_person.possessive_title] has left."
     $ renpy.scene("Active")

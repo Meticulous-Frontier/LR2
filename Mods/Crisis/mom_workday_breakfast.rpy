@@ -201,7 +201,7 @@ label mom_breakfast_action_label_medium():
             $ the_person.change_stats(obedience = 5, happiness = 5)
             "When she has finished climaxing, you slowly withdraw your finger and sit back down at the table. You take a quick sip of your coffee."
             "[the_person.title] is just putting her clothing back in place when your sister comes out of her room."
-            $ the_person.review_outfit(dialogue = False)
+            $ the_person.apply_planned_outfit()
             $ scene_manager.draw_scene()
             "She grabs some cereal and sits at the table with you and [the_person.title]"
             $ scene_manager.add_actor(lily, position = "sitting", character_placement = character_left_flipped)
@@ -383,7 +383,7 @@ label mom_commando_day_selfie_label():
     the_person.char "Don't tempt me! See you at home tonight!"
     "You smile and resume your day."
     $ renpy.scene("Active")
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
     return
 
 label mom_breakfast_action_mom_and_lily_label():

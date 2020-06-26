@@ -176,7 +176,7 @@ label strip_club_fire_employee_label(the_person):
             call fuck_person(the_person, private = True)
             $ the_person.clear_situational_slut("seduction_approach")
             $ the_person.clear_situational_obedience("seduction_approach")
-            $ the_person.review_outfit(dialogue = False)
+            $ the_person.apply_planned_outfit()
             $ the_person.change_stats(happiness = -5, obedience = 5, slut_temp = 5)
             mc.name "Okay [the_person.title], I'll keep you around for a little while longer, but you really need to work on your act, I'm not running a charity."
             if the_person.effective_sluttiness() < 50:
@@ -256,7 +256,7 @@ label stripper_performance_review_label(the_person):
                     else:
                         $ the_person.change_stats(happiness = -5, obedience = -2)
                         the_person.char "It's not much of a bonus if you're the only one who gets to cum. Maybe next time a cash bonus would be better, okay?"
-                    $ the_person.review_outfit(dialogue = False)
+                    $ the_person.apply_planned_outfit()
 
         "Punish her for poor performance":
             $ cut_amount = __builtin__.round(the_person.salary * 0.1)
@@ -312,7 +312,7 @@ label stripper_performance_review_label(the_person):
                                     call fuck_person(the_person,private = True)
                                     $ the_person.clear_situational_slut("seduction_approach")
                                     $ the_person.clear_situational_obedience("seduction_approach")
-                                    $ the_person.review_outfit(dialogue = False)
+                                    $ the_person.apply_planned_outfit()
                                     $ the_person.change_stats(happiness = -5, obedience = 10, slut_temp = 5)
                                     mc.name "Okay [the_person.title], I'll keep you around for a little while longer, but you're going need to work on your act, else I might change my mind about keeping you here."
                                     if the_person.effective_sluttiness() < 50:
@@ -360,7 +360,7 @@ label stripper_performance_review_label(the_person):
                         $ the_person.change_stats(happiness = -5, obedience = 3)
                         mc.name "That felt great [the_person.title], I suppose if your performance doesn't improve you'll still be useful as a toy."
                         the_person.char "I... Yes sir, I suppose I would be."
-                    $ the_person.review_outfit(dialogue = False)
+                    $ the_person.apply_planned_outfit()
         "Finish the performance review":
             mc.name "Well, I think you're doing a perfectly adequate job around here [the_person.title]. If you keep up the good work I don't think we will have any issues."
             $ the_person.change_stats(happiness = 2, obedience = 1)

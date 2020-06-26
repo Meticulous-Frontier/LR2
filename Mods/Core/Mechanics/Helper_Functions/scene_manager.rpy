@@ -78,7 +78,7 @@ init -2 python:
             if not actor_to_remove is None:
                 if reset_actor:
                     # reset actor clothing
-                    actor_to_remove.person.review_outfit(dialogue = False)
+                    actor_to_remove.person.apply_planned_outfit()
                 self.actors.remove(actor_to_remove)
                 self.draw_scene()
 

@@ -868,14 +868,12 @@ init -1 python:
 
     def review_outfit_enhanced(self, dialogue = True):
         self.outfit.remove_all_cum()
+        self.outfit.update_slut_requirement()
 
         if self.should_wear_uniform():
             self.wear_uniform() # Reset uniform
-        else:
-            self.outfit.update_slut_requirement()
-            # only show review message when parameter is true and she doesn't feel comfortable in her current outfit
-            dialogue = dialogue and self.outfit.slut_requirement > self.sluttiness
-            self.apply_outfit(self.planned_outfit)    # always restore outfit
+        elif self.outfit.slut_requirement > self.sluttiness:
+            self.apply_planned_outfit()
             if dialogue:
                 self.call_dialogue("clothing_review") # must be last call in function
 

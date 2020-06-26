@@ -2296,9 +2296,9 @@ label mom_ntr_mod_action_label:
     $ del wife_name
     $ finish = None
     $ position = None
-    $ the_person.sluttiness += 5
+    $ the_person.change_stats(slut_temp = 5)
     $ the_person.reset_arousal()
-    $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
     $ renpy.scene("Active")
     return

@@ -58,8 +58,9 @@ label milk_employee_crisis_label():
     mc.name "Hey [the_person.title]. You doing okay in here?"
     if the_person.sluttiness_tier() == 0:  #She's a prude
         the_person.char "Oh! I'm sorry [the_person.mc_title]... I totally forgot I was just sitting here with my tits out..."
-        $ the_person.review_outfit(dialogue = False)
         "She quickly puts her clothes back on."
+        $ the_person.apply_planned_outfit()
+        $ the_person.draw_person(position = "sitting")
         mc.name "That's okay. This isn't medieval times, if you need to pump or whatever you can do it where you need."
         $ the_person.change_stats(happiness = 5, obedience = 3, love = 2)
         the_person.char "I know, I just don't normally do it somewhere quite this public. I'm trying to build up a milk supply, but these stupid pumps are awful."
@@ -161,7 +162,7 @@ label milk_employee_crisis_label():
             "Get back to work":
                 mc.name "I need to get back to work, but I'll take you up on that another time."
     "Once you are finished, you leave [the_person.title] in the breakroom and get back to work."
-    $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
     $ renpy.scene("Active")
     return

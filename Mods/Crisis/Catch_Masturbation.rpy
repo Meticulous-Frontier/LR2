@@ -305,7 +305,7 @@ label SB_caught_masturbating_crisis_label():
             "Keep walking":
                 "You decide to give [the_person.possessive_title] some privacy. As quietly as you can, you close the door behind you and continue walking."
 
-        $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
+        $ the_person.apply_planned_outfit()
         $ mc.location.show_background()
     $ the_clothing = None
     $ the_person_two = None

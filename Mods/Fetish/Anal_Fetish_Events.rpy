@@ -163,7 +163,7 @@ label SB_fetish_anal_label(the_person):
             the_person.char "Oh! I'm sorry... I didn't think about that. Maybe tomorrow then?"
             "[the_person.possessive_title] quickly sulks off."
 
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
     $ renpy.scene("Active")
     return
 
@@ -232,7 +232,7 @@ label SB_fetish_anal_label_non_employee(the_person):
             $ the_person.draw_person(position = "walking_away")
             "[the_person.possessive_title] quickly sulks off."
 
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
     $ renpy.scene("Active")
     return
 
@@ -453,7 +453,7 @@ label SB_fetish_anal_recurring_label():
             the_person.char "Oh! I'm sorry... I know you work so hard around here. Maybe tomorrow then?"
             "[the_person.possessive_title] quickly sulks off."
 
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
     $ renpy.scene("Active")
     return
 
@@ -697,7 +697,6 @@ label SB_mom_anal_pay_label():
             else:
                 the_person.char "Mmm, that was so good, thank you [the_person.mc_title]..."
                 "[the_person.possessive_title] rolls off you and lays down on the bed next to you."
-            $ the_person.reset_arousal()
             "You start to get up to go to your room, but [the_person.possessive_title] calls out to you as you start to get up."
             the_person.char "[the_person.mc_title]? Why don't you just stay in here tonight? [the_person.title] loves you... its okay!"
             "You slip back into bed next to her."
@@ -738,7 +737,6 @@ label SB_mom_anal_pay_label():
                 "[the_person.possessive_title] lays there on the bed, speechless from your anal plundering."
             else:
                 "[the_person.possessive_title] lays there on the bed."
-            $ the_person.reset_arousal()
             mc.name "So... every friday night? I think I could get used to that..."
             "You can see [the_person.possessive_title]'s body quiver slightly at your words."
             mc.name "BUT, I am a man. I may have needs more often then that. Be ready for me with that amazing ass of yours anytime."
@@ -752,9 +750,8 @@ label SB_mom_anal_pay_label():
             "[the_person.possessive_title] nods and turns back to her bills."
             the_person.char "I understand [the_person.mc_title]. Now don't let me keep you, I'm sure you were up to something important."
             $ add_mom_anal_fetish_event() # trigger this event again next week
-            $ the_person.review_outfit(dialogue = False)
 
-    $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
     $ renpy.scene("Active")
     return
@@ -841,7 +838,7 @@ label SB_mom_anal_friday_label():
             the_person.char "I understand [the_person.mc_title]. Now don't let me keep you, I'm sure you were up to something important."
 
     $ add_mom_weekly_anal_action()  # re-add event for next week
-    $ the_person.review_outfit(dialogue = False) #Make sure to reset her outfit so she is dressed properly.
+    $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
     $ renpy.scene("Active")
     return
@@ -961,7 +958,7 @@ label SB_lily_anal_dp_fetish_label():
     # $ perk_system.add_item_perk(item_perk_male_strapon, "Male Strapon")
     $ male_strapon_unlock()  #TODO test this
 
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
     $ renpy.scene("Active")
     return
 
@@ -1022,7 +1019,6 @@ label SB_starbuck_anal_intro():
     $ add_fuck_doll_collar_to_base_outfit(the_person)
     $ the_person.update_sex_skill("Anal", 6)
     "It's pretty clear from her sexual performance and the way she talks to you, that [the_person.title] has developed an anal fetish."
-    $ the_person.reset_arousal()
     "[the_person.title] takes a few minutes to recover. She eventually stands up and turns to you."
     $ the_person.draw_person(position = "stand4")
     the_person.char "Hey so, what you said earlier about, you know, being the man to help me with all these urges I've been dealing with lately... were you being serious?"
@@ -1048,7 +1044,7 @@ label SB_starbuck_anal_intro():
     the_person.char "Well, I'd better get home. Feel free to uh, check in on me whenever you want [the_person.mc_title]!"
     "You say goodbye and head out so she can finish locking up the sex shop."
 
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
     $ renpy.scene("Active")
     return
 
@@ -1418,7 +1414,7 @@ label SB_stephanie_anal_fetish_label():
                 "You say goodbye, and [the_person.possessive_title] turns and walks out of your office, her plug just peaking out between her rosy ass cheeks."
                 "Looks like [the_person.title] has an anal fetish now! But she is also a bimbo."
                 "You are guessing she is probably not particularly fit for her job in research. Maybe you can move her somewhere else in the company?"
-                $ the_person.review_outfit(dialogue = False)
+                $ the_person.apply_planned_outfit()
                 $ renpy.scene("Active")
                 return
         "She gives a deep sigh of relief."
@@ -1502,6 +1498,6 @@ label SB_stephanie_anal_fetish_label():
         "Looks like [the_person.title] has an anal fetish now!"
 
     $ scene_manager.clear_scene()
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
     $ renpy.scene("Active")
     return

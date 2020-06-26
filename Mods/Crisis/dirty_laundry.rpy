@@ -58,7 +58,7 @@ label dirty_laundry_action_label:
         call dirty_laundry_stuck_in_dryer(the_person) from call_dirty_laundry_stuck_in_dryer
 
     $ renpy.scene("Active")
-    $ the_person.review_outfit(dialogue = False)
+    $ the_person.apply_planned_outfit()
     return
 
 
