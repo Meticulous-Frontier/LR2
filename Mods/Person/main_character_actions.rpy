@@ -34,9 +34,10 @@ init 2 python:
 
         excluded_roles = ["casual_hotwife_role", "casual_athlete_role", "casual_FA_role", "stripper_role"]
         for role in excluded_roles:
-            if person.has_role(globals()[role]):
-                return False
-                
+            if role in globals():
+                if person.has_role(globals()[role]):
+                    return False
+
         if person not in mc.business.get_employee_list() + unique_character_list:
             if mc.business.get_employee_count() >= mc.business.max_employee_count:
                 return "At employee limit."
