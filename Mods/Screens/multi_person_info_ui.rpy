@@ -10,7 +10,6 @@ init 2 python:
         tooltip += "Age: " + str(person.age) + "\n"
         tooltip += "Height: " + height_to_string(person.height) + "\n"
         tooltip += "Cup size: " + str(person.tits) + "\n"
-        #don't use this in the screen tooltip, it somehow messes up things badly
         tooltip += "Weight: " + get_person_weight_string(person)
         return tooltip
 
