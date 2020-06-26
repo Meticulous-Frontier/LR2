@@ -98,10 +98,11 @@ init -1 python:
             # run original function
             org_func(business)
             # run extension code
-            strip_club_income = business.calculate_strip_club_income()
-            if strip_club_income != 0:
-                mc.business.funds += strip_club_income
-                mc.business.add_normal_message("The [strip_club.formalName] has made a net profit of $" + str(__builtin__.round(strip_club_income, 1)) + " today!")
+            if "calculate_strip_club_income" in globals(): # Don't run the code if the function or variables we use are not in the global scope.
+                strip_club_income = business.calculate_strip_club_income()
+                if strip_club_income != 0:
+                    mc.business.funds += strip_club_income
+                    mc.business.add_normal_message("The [strip_club.formalName] has made a net profit of $" + str(__builtin__.round(strip_club_income, 1)) + " today!")
 
         return run_day_wrapper
 
