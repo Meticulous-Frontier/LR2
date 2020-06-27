@@ -11,7 +11,7 @@ init 2 python:
         return False
 
     SB_fetish_phone_crisis = ActionMod("Starbuck Phone Message", SB_fetish_phone_requirement ,"SB_fetish_phone_crisis_label",
-        menu_tooltip = "Starbuck has developed an anal fetish and requests your help from time to time.", category = "Starbuck", is_crisis = True, crisis_weight = SB_fetish_phone_crisis_weight)
+        menu_tooltip = "Starbuck has developed an anal fetish and requests your help from time to time.", category = "Mall", is_crisis = True, crisis_weight = SB_fetish_phone_crisis_weight)
 
 label SB_fetish_phone_crisis_label():
     python:

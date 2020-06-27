@@ -85,16 +85,17 @@ init 2 python:
         _instances = set()
 
         # store instances of mod
-        def __init__(self, name, requirement, effect, args = None, requirement_args = None, menu_tooltip = "", initialization = None, category="Misc", enabled = True, allow_disable = True, priority = 10, on_enabled_changed = None, options_menu = None, is_crisis = False, is_morning_crisis = False, crisis_weight = None):
+        def __init__(self, name, requirement, effect, args = None, requirement_args = None, menu_tooltip = "", initialization = None, category="Misc", enabled = True, allow_disable = True, priority = 10, on_enabled_changed = None, options_menu = None, is_crisis = False, is_morning_crisis = False, is_mandatory_crisis = False, crisis_weight = None):
             self.initialization = initialization
             self.enabled = enabled
             self.allow_disable = allow_disable
             self.category = category
             self.on_enabled_changed = on_enabled_changed
             self.options_menu = options_menu
-            self.is_crisis = is_crisis
-            self.is_morning_crisis = is_morning_crisis
-            self.crisis_weight = crisis_weight
+            self.is_crisis = is_crisis                      # chance to trigger during day
+            self.is_morning_crisis = is_morning_crisis      # chance to trigger early morning
+            self.is_mandatory_crisis = is_mandatory_crisis  # only triggered once when requirements are met
+            self.crisis_weight = crisis_weight              # no longer any function, due to round robbin events
 
             Action.__init__(self, name, requirement, effect, args, requirement_args, menu_tooltip, priority)
 
@@ -139,6 +140,9 @@ init 2 python:
                 else:
                     if not action_mod in [c[0] for c in crisis_list]:
                         crisis_list.append([action_mod, action_mod.crisis_weight])
+            elif hasattr(action_mod, "is_mandatory_crisis") and action_mod.is_mandatory_crisis:
+                mc.business.mandatory_crises_list.append(action_mod)
+
 
         # remove not working stuff
         for action_mod in remove_list:
