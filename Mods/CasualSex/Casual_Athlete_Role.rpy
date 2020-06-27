@@ -321,9 +321,9 @@ label casual_athlete_phase_one_label(the_person):
         $ renpy.show("restaurant", what = restaraunt_background)
         $ the_person.draw_person( position = "sitting")
 
-        the_person.char "So... are you interested in a friend's with benefits set up?"
+        the_person.char "So... are you interested in a friends with benefits set up?"
         "You give a quick nod."
-        the_person.char "Okay, so, some ground rules. First off, if either of us start's to catch feelings for the other person, we break it off. I sure as fuck don't have time for that stuff right now..."
+        the_person.char "Okay, so, some ground rules. First off, if either of us starts to catch feelings for the other person, we break it off. I sure as fuck don't have time for that stuff right now..."
         mc.name "I agree. We'll keep it physical. No dates or whatever. Just hit me up when you want to fuck around."
         the_person.char "Right... here, let's exchange numbers. I'll text you and if we're both free, we can screw around, no strings attached."
         "You agree. You and [the_person.title] finish up with your coffees. You both get up to leave."
