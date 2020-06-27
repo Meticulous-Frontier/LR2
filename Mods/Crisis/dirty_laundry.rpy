@@ -330,72 +330,71 @@ label dirty_laundry_wash_your_clothes(the_person):
 label dirty_laundry_stuck_in_dryer(the_person):
     "As you walk into the laundry room, you see [the_person.title] with her head in the dryer."
     $ the_person.draw_person(position = "doggy")
-    "She is muttering to herself how she could be so clumsy and get her hair stuck in there somewhere preventing her from getting out."
+    "She is muttering to herself about how she could have been so clumsy as to get her hair stuck in there; plainly it is preventing her from getting out."
 
     menu:
         "Help her get out":
             mc.name "Hey [the_person.title], what are you doing in there?"
-            the_person.char "Hey [the_person.mc_title], good that you are here, i'm stuck in this infernal machine."
+            the_person.char "Hey [the_person.mc_title], it's good that you're here, I'm stuck in this infernal machine."
             if the_person is mom:
-                mc.name "Don't worry mom, i'll have you out there in a jiffy."
+                mc.name "Don't worry, mom, I'll have you out there in a jiffy."
             elif the_person is lily:
-                mc.name "Don't worry little sis, let me help you."
+                mc.name "Don't worry, little sis, let me help you."
             else:
-                mc.name "No worries [the_person.title], here let me untangle this for you."
+                mc.name "No worries, [the_person.title]. Here, let me untangle this for you."
 
             "You manage to untangle [the_person.possessive_title]'s hair."
-            the_person.char "Thank you [the_person.mc_title], now let met get this done."
+            the_person.char "Thanks, [the_person.mc_title], you're a lifesaver. Don't worry, I can finish the rest of this myself."
             $ the_person.change_stats(love = 2, happiness = 5)
 
         "Masturbate":
             "You don't say anything, but quickly pull out your already hard member."
             "All the while you are masturbating, [the_person.possessive_title] keeps on muttering and wiggling her shapely ass, right in front of you."
-            "After a while you start cumming spraying your load right on her ass."
+            "You soon reach your tipping point and spray your load right onto her ass."
             $ the_person.cum_on_ass()
             $ the_person.draw_person(position="doggy")
-            the_person.char "Hey [the_person.mc_title], is that you? What's going on back there...don't just stand there, get me out of this thing."
-            mc.name "Hi [the_person.title], don't worry, just wait a sec, i'll get some scissors and get you out."
+            the_person.char "Hey [the_person.mc_title], is that you? What's going on back there... don't just stand there, get me out of this thing!"
+            mc.name "Hi [the_person.title], don't worry, just wait a sec, I'll get some scissors and get you out."
             "When you return you carefully manage to untangle her from the machine and she looks at you, running a hand across her bum."
             if the_person.effective_sluttiness() > 40 or the_person.get_opinion_score("being covered in cum") > 0:
                 $ the_person.draw_person(position = "stand4", emotion = "happy")
-                the_person.char "Did you just masturbate and sprayed your cum all over my ass?"
+                the_person.char "Did you just jerk off all over my ass?"
                 if the_person is mom:
-                    the_person.char "So your really like your mommies ass, you little pervert."
+                    the_person.char "So you really like your mommy's ass, you little pervert."
                 elif the_person is lily:
-                    the_person.char "So you enjoy masturbating to your little sisters bottom."
+                    the_person.char "So you enjoy masturbating to your little sister's bottom?"
                 else:
-                    the_person.char "So you really liked masturbating to my wiggling ass."
+                    the_person.char "So you really liked masturbating to my wiggling ass?"
 
-                the_person.char "Why don't you just ask the next time, so I can enjoy it too?"
+                the_person.char "Why don't you just ask next time, so I can enjoy it too?"
                 if the_person.get_opinion_score("drinking cum") > 0:
                     "[the_person.possessive_title] moves her hand to her mouth and licks off your seed from her fingers."
 
-                mc.name "Well, ah, yes, I will, see ya."
+                mc.name "Maybe I will. See ya."
 
                 $ the_person.change_stats(obedience = -2, happiness = 5, slut_temp = 5)
             else:
                 $ the_person.draw_person(position = "stand4", emotion = "angry")
                 if the_person is mom:
-                    the_person.char "Jesus, [the_person.mc_title], why did you cum on my ass, i'm your mother."
+                    the_person.char "Jesus, [the_person.mc_title], did you just cum on my ass? I'm your mother!"
                     "You just stare at her, while [the_person.possessive_title] continues her tirade."
-                    the_person.char "You shouldn't do that, what would your sister say if she saw this."
-                    the_person.char "Now be a good son and behave, don't let me catch you doing this ever again."
+                    the_person.char "You shouldn't do that! What would your sister say if she saw this?"
+                    the_person.char "Now be a good son and behave, and don't {i}ever{/i} let me catch you doing this again."
                 elif the_person is lily:
-                    the_person.char "What the fuck [the_person.mc_title], you bastard, you came on my ass."
+                    the_person.char "What the fuck, [the_person.mc_title]? Why the fuck would you jizz on me like that? You bastard!"
                     "You just stare at her, while [the_person.possessive_title] continues her tirade."
-                    the_person.char "Now I have to wash this too, dammit, don't you ever do this again."
+                    the_person.char "Now I have to wash this too, dammit. Don't you {i}ever{/i} do this again."
                 else:
-                    the_person.char "Dammit [the_person.mc_title], you can't just cum on my ass like that."
+                    the_person.char "Dammit [the_person.mc_title], you can't just cum on my ass like that!"
                     "You just stare at her, while [the_person.possessive_title] continues her tirade."
-                    the_person.char "What would your mom and sister say if they find out about your behavior."
+                    the_person.char "What would your mother and sister say if they find out about your behavior?"
                     the_person.char "Now get out of my way, so I can get out of these clothes."
 
                 $ the_person.change_stats(happiness = -5, slut_temp = 2)
-            
 
         "Fuck her" if not the_person.has_taboo("vaginal_sex") and the_person.effective_sluttiness("bare_pussy") > 40:
             mc.name "Hey [the_person.title], what are you doing in there?"
-            the_person.char "Hey [the_person.mc_title], good that you are here, i've managed to get my hair stuck in this contraption."
+            the_person.char "Hey [the_person.mc_title], it's good that you're here, I've managed to get my hair stuck in this contraption."
             mc.name "Don't worry, I know how to help you."
 
             $ the_item = the_person.outfit.get_lower_top_layer()
@@ -405,7 +404,7 @@ label dirty_laundry_stuck_in_dryer(the_person):
                 "You move your hands along [the_person.possessive_title]'s ass and remove her [the_item.display_name]"
                 $ the_person.draw_animated_removal(the_item, position = "doggy")
 
-            the_person.char "Hey, I don't think taking of my [the_item.display_name], will get me out of here."
+            the_person.char "[the_person.mc_title]? I don't think taking off my [the_item.display_name] will get me out of here."
             mc.name "Trust me [the_person.title], I have a good reason for doing it this way."
             the_person.char "Okay, go ahead, just don't pull too much on my head."
 
@@ -415,22 +414,32 @@ label dirty_laundry_stuck_in_dryer(the_person):
                 $ the_person.strip_outfit(position = "doggy", exclude_upper = True)
 
             "Now that you have clear access, you quickly remove your shorts and position yourself behind [the_person.possessive_title] and push the tip of your cock against her wet slit."
-            the_person.char "WTF!! Are you going to fuck me like this?"
+            the_person.char "What the fuck! You're going to fuck me like {i}this?{/i}"
             mc.name "Yes, and don't pretend that you don't like it, because I know you do."
             call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True, position_locked = True) from _call_fuck_person_dirty_laundry_stuck_in_dryer
             $ the_report = _return
+            "With your activities concluded, you help [the_person.title] out of the dryer onto shaky legs."
             if the_report.get("girl orgasms", 0) > 1:
                 $ the_person.change_stats(happiness = 10, obedience = 5)
-                the_person.char "Oh my god, I came soo much, I didn't think that would be possible in this position."
+                $ the_person.draw_person(position = "stand4", emotion = "orgasm")
+                the_person.char "Oh my god, I came so much... I didn't think that would be possible in this position."
+                $ the_person.draw_person(position = "stand4", emotion = "default")
+                the_person.char "It's still not cool that you took advantage of me like that, even if it was really good."
             elif the_report.get("girl orgasms", 0) > 0:
                 $ the_person.change_stats(happiness = 5, obedience = 3)
-                the_person.char "Oh wow, this really felt good, thank you [the_person.mc_title]."
+                $ the_person.draw_person(position = "stand4", emotion = "orgasm")
+                the_person.char "Oh wow, that really felt good, thank you [the_person.mc_title]."
+                $ the_person.draw_person(position = "stand4", emotion = "default")
+                the_person.char "It's still not cool that you took advantage of me like that, though."
+            else:
+                $ the_person.change_stats(happiness = -5, obedience = -1)
+                $ the_person.draw_person(position = "stand4", emotion = "angry")
+                the_person.char "You take advantage of me like that and don't even get me off? Not cool, [the_person.mc_title], not cool."
 
-            the_person.char "It's not cool, that you took advantage of me like that."
             mc.name "Haven't you noticed?"
             the_person.char "What?"
-            mc.name "You hair came loose after about a minute in, you could have stopped at any point."
-            the_person.char "Oh...well, next time just get me out, and we can do this properly, now move..."
+            mc.name "You hair came loose about a minute in, you could have stopped at any point."
+            the_person.char "Oh... well, next time just get me out, and we can do this properly. Now move..."
 
     "[the_person.possessive_title] quickly grabs her laundry and scoots out of the laundry room."
     return

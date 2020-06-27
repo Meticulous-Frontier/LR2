@@ -806,7 +806,7 @@ init 1301 python:              #Because Vren Init personality functionns at 1300
 label hotwife_greetings(the_person):
     if mc.location == downtown_bar:
         if the_person.love > 50:  #She loves you too much and is going to or already has called things off
-            the_person.char "Oh... hello [the_person.mc_title]"
+            the_person.char "Oh... hello, [the_person.mc_title]."
             $ add_hotwife_ghost_action(the_person)
             return
         if the_person.event_triggers_dict.get("hotwife_progress", 0) >= 2:
@@ -817,12 +817,12 @@ label hotwife_greetings(the_person):
 
     elif the_person.effective_sluttiness() > 60:
         if the_person.obedience > 130:
-            the_person.char "Hello [the_person.mc_title], it's good to see you."
+            the_person.char "Hello, [the_person.mc_title], it's good to see you."
         else:
             the_person.char "Hey there handsome, feeling good?"
     else:
         if the_person.obedience > 130:
-            the_person.char "Hello [the_person.mc_title]."
+            the_person.char "Hello, [the_person.mc_title]."
         else:
             the_person.char "Hey there!"
     return
