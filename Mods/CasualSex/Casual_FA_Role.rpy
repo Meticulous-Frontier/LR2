@@ -573,9 +573,9 @@ label FA_introduction(the_person):
 #
 label FA_greetings(the_person):
     if the_person.event_triggers_dict.get("FA_progress", 0) == 0:
-        the_person.char "Hello again... it was [the_person.mc_title] right? Is there something I can help you with?"
+        the_person.char "Hello again... it was [the_person.mc_title], right? Is there something I can help you with?"
     if the_person.event_triggers_dict.get("FA_progress", 0) == 1:
-        the_person.char "Hello [the_person.mc_title], I was just about to get a drink. How are you?"
+        the_person.char "Hello, [the_person.mc_title], I was just about to get a drink. How are you?"
     if the_person.event_triggers_dict.get("FA_progress", 0) == 2:
         "You can see [the_person.title] blush a bit as you approach her."
         the_person.char "Hey [the_person.mc_title]. Want to chat? I think I need a drink."
@@ -584,7 +584,7 @@ label FA_greetings(the_person):
     if the_person.event_triggers_dict.get("FA_progress", 0) == 4:
         the_person.char "Hey [the_person.mc_title]! Want to grab a drink with me? I don't have any plans for tonight, if you wanted to do something later..."
     if the_person.event_triggers_dict.get("FA_progress", 0) == 5:
-        the_person.char "Hello again [the_person.mc_title]! I can't wait until later..."
+        the_person.char "Hello again, [the_person.mc_title]! I can't wait until later..."
     if the_person.event_triggers_dict.get("FA_progress", 0) == 6:
         the_person.char "Hey [the_person.mc_title]! Just the man I was hoping to see today!"
     if the_person.event_triggers_dict.get("FA_progress", 0) == 7:

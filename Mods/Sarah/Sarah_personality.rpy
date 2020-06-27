@@ -62,7 +62,7 @@ label Sarah_greetings(the_person):
                 the_person.char "Hey there [the_person.mc_title]. I was just thinking about some fun things we could do together..."
         else:
             if the_person.obedience > 130:
-                the_person.char "Hello [the_person.mc_title]"
+                the_person.char "Hello, [the_person.mc_title]."
             else:
                 the_person.char "Hey, how's it going?"
     return
