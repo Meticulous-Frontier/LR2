@@ -659,30 +659,30 @@ init 1301 python:              #Because Vren Init personality functions at 1300
 label athlete_greetings(the_person):
     if mc.location == gym:
         if the_person.love > 50:  #She loves you too much and is going to or already has called things off
-            the_person.char "Oh... hello [the_person.mc_title]"
+            the_person.char "Oh... hello, [the_person.mc_title]."
             $ add_casual_athlete_ghost_action(the_person)
             return
         if the_person.event_triggers_dict.get("athlete_progress", 0) >= 2:
-            the_person.char "Hey there [the_person.mc_title]"
+            the_person.char "Hey there, [the_person.mc_title]."
             "You see [the_person.title] here at the Gym, in her usual spot on the treadmill."
             the_person.char "You want to join me for another workout? I always leave the gym feeling so satisfied when we work out together!"
         else:
             the_person.char "Hey there!"
     elif mc.location == the_person.home:
         if the_person.event_triggers_dict.get("athlete_progress", 0) > 3:
-            the_person.char "Hey there [the_person.mc_title]! I wasn't expecting you! Are you here for some fun?"
+            the_person.char "Hey there, [the_person.mc_title]! I wasn't expecting you! Are you here for some fun?"
             "She looks at you hopefully."
         else:
-            the_person.char "Hey there [the_person.mc_title]. I wasn't expecting you, are you sure you should be here?"
+            the_person.char "Hey there, [the_person.mc_title]. I wasn't expecting you, are you sure you should be here?"
 
     elif the_person.effective_sluttiness() > 60:
         if the_person.obedience > 130:
-            the_person.char "Hello [the_person.mc_title], it's good to see you."
+            the_person.char "Hello, [the_person.mc_title], it's good to see you."
         else:
             the_person.char "Hey there handsome, feeling good?"
     else:
         if the_person.obedience > 130:
-            the_person.char "Hello [the_person.mc_title]."
+            the_person.char "Hello, [the_person.mc_title]."
         else:
             the_person.char "Hey there!"
     return
