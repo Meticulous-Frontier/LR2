@@ -174,7 +174,7 @@ label quest_arousal_serum_receive_drug_label():
     $ mom.draw_person()
     "As you are getting ready for bed, [mom.title] knocks on your door. You open it up."
     mom.char "Hey, you got this in the mail today. At first I thought it was junk, but it has your name on it, so I figured you could figure out what to do with it."
-    "She hands you a small manila envelop."
+    "She hands you a small manila envelope."
     mc.name "Thanks [mom.title]."
     $ mom.draw_person(position = "walking_away")
     "She turns and walks way, closing your door behind her."
@@ -199,7 +199,7 @@ label quest_arousal_serum_arrange_test_label(the_person):
     the_person.char "Oh? Probably. I could use the extra cash. What do you need me to work on?"
     mc.name "I got my hands on a couple of pills that I want to test the effectiveness of."
     the_person.char "Okay. What do they propose to do?"
-    mc.name "They function as some sort of blood flow increaser. Working similar to Viagra, but for females, to increase arousal and libido."
+    mc.name "They function as some sort of blood flow stimulant. Working similar to Viagra, but for females, to increase arousal and libido."
     the_person.char "Huh. Sounds interesting. Okay, I can do that. See you tonight?"
     mc.name "See you then."
     #We add the event here because if it happens to already be evening then the event won't proc if we wait for quest tracker to add it.

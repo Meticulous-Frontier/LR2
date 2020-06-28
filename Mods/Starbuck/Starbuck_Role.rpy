@@ -956,7 +956,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     "[the_person.possessive_title] stands before you almost completely exposed, her incredible body is on full display."
     if starbuck.love > 50:
         the_person.char "Do you think that before we get started, maybe you could just hold me for a little bit?"
-        "You step up to her. Your hands go to her waist an she wraps her arms around you."
+        "You step up to her. Your hands go to her waist and she wraps her arms around you."
         $ the_person.draw_person(position = "kissing")
         the_person.char "Mmm... it feels so good when you hold me."
         "She looks up into your eyes. Your bring your face down to hers and begin to kiss. Her lips open submissively to allow your tongue to invade her mouth."
