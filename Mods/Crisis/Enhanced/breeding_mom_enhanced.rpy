@@ -25,7 +25,7 @@ label breeding_mom_enhanced_label(the_person):
         "Her face is flush and her breathing rapid."
 
     menu:
-        "Fuck her and try to breed her":
+        "Try to breed her":
             "You nod, and the mere the confirmation makes her shiver. She lies down on the bed and holds out her hands for you."
             $ the_person.draw_person(position = "missionary")
             "You strip down and climb on top of her. The tip of your hard cock runs along the entrance of her cunt and finds it dripping wet."
