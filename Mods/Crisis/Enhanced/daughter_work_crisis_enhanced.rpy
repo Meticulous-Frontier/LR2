@@ -35,7 +35,7 @@ label daughter_work_crisis_label_enhanced():
         the_person.char "I wanted to ask you... Well, my daughter just finished school and has been looking for a job." #TOOD: Add other excuses, like 'needs to pay rent somehow' or 'can't keep out of trouble.'
         the_person.char "I was thinking that she might be a good fit for the company. I can tell you she's very smart."
     $ promised_sex = False
-    if the_person.sluttiness > 70:
+    if the_person.effective_sluttiness() > 70:
         "[the_person.title] hands over a printed out resume and leans forward onto your desk, bringing her breasts closer to you."
         the_person.char "If you did hire her, I would be so very thankful. I'm sure we could find some way for me to show you how thankful."
         $ promised_sex = True
@@ -50,7 +50,7 @@ label daughter_work_crisis_label_enhanced():
         "Tell her you aren't hiring":
             "You hand the resume back."
             mc.name "I'm sorry, but I'm not looking to hire anyone right now."
-            if the_person.sluttiness > 50 and not promised_sex:
+            if the_person.effective_sluttiness() > 50 and not promised_sex:
                 the_person.char "Wait, please [the_person.mc_title], at least take a look. Maybe I could... convince you to consider her?"
                 the_person.char "She means the world to me, and I would do anything to give her a better chance. Anything at all."
                 "She puts her arms behind her back and puffs out her chest in a clear attempt to show off her tits."
@@ -138,7 +138,7 @@ label daughter_work_crisis_label_enhanced():
             $ the_person.change_love(-1)
             $ the_person.draw_person(emotion = "sad")
             "[the_person.possessive_title] seems to deflate. She nods sadly."
-            the_person.char "I understand. Thank you for the time."
+            the_person.char "I understand. Thank you for your time."
         else:
             mc.name "I'm sorry but I don't think her skills are where I would need them to be."
             $ the_person.change_obedience(1)
