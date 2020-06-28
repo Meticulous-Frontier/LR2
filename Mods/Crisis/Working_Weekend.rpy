@@ -320,7 +320,7 @@ label SB_working_weekend_crisis_label_low(person_one):
 
         "Stress the importance of work hard, play hard":
             mc.name "Yes, it is true that I work late into the days and even on the weekends, but that doesn't mean that I'm all business."
-            mc.name "It is important though, that when you work heard, you can also play hard."
+            mc.name "It is important though, that when you work hard, you can also play hard."
             "[person_one.possessive_title] nods in agreement."
             mc.name "You are doing a great job for me so far, [person_one.title]. Maybe some time we should play hard together?"
             $ person_one.change_slut_temp(10)
