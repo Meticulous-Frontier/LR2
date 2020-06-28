@@ -283,7 +283,7 @@ label strip_ask_piledriver_DP(the_girl, the_clothing, the_location, the_object):
                 "She grinds her hips back into you and moans ecstatically."
     return
 
-label orgasm_piledriver_DP(the_girl, the_location, the_obejct):
+label orgasm_piledriver_DP(the_girl, the_location, the_object):
     "[the_girl.title] takes a sharp breath in and you feel her legs try and clench together. Her toes curl as you bring her to the brink."
     $ the_girl.call_dialogue("climax_responses_vaginal")
     "You keep fucking [the_girl.possessive_title] through her climax, enjoying her sopping wet cunt while she twitches and moans underneath you."

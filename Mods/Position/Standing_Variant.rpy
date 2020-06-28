@@ -400,7 +400,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                     if the_girl.outfit.tits_available():
                         "You plant a hand on [the_girl.possessive_title]'s nice, soft tits and squeeze. Her pliant flesh melts in your hand, and the heat coming form her skin feels amazing."
                         the_girl.char "Mmm, [the_girl.mc_title]. Your hands feel so good."
-                        "You enjoy teasing her suuple breasts for a few moments. You hold one in place while you fuck her, feeling the weight of it sway with each motion."
+                        "You enjoy teasing her supple breasts for a few moments. You hold one in place while you fuck her, feeling the weight of it sway with each motion."
                         $ the_girl.change_arousal(5)
                     else:
                         $ top_clothing = the_girl.outfit.get_upper_top_layer()
@@ -457,7 +457,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                         the_girl.char "Oh god you are just using me like a cock sleeve and there is nothing I can do. Like I'm just a little slut..."
                     "You push yourself deep inside her and then pause your fucking for a second."
                     mc.name "That's because you are a slut, [the_girl.title]. You are MY slut, to use as I please, no matter what I decide to do to you."
-                    "[the_girl.possessive_title] gasps at your harsh words, but her quivering pussy betrays her excitment at being treated this way."
+                    "[the_girl.possessive_title] gasps at your harsh words, but her quivering pussy betrays her excitement at being treated this way."
                     $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 3)
                     $ the_girl.discover_opinion("being submissive")
                     return
@@ -558,7 +558,7 @@ label outro_SB_facing_wall(the_girl, the_location, the_object):
             if the_girl.get_opinion_score("being covered in cum"):
                 "[the_girl.possessive_title] runs her fingers through your cum on her face a few times. She quickly licks her fingers clean."
                 the_girl.char "Mmm, your hot, sticky seed feels so good all over me..."
-            "You take a deep breath to steady yourself once you've finised orgasming. [the_girl.possessive_title] looks up at you from her knees, face covered in your semen."
+            "You take a deep breath to steady yourself once you've finished orgasming. [the_girl.possessive_title] looks up at you from her knees, face covered in your semen."
             $ the_girl.call_dialogue("cum_face")
 
 
