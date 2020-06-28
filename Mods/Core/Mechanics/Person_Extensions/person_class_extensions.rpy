@@ -1305,3 +1305,16 @@ init -1 python:
         return False
 
     Person.is_highly_fertile = is_highly_fertile
+
+    def effective_fertility_percent(self):
+        if persistent.pregnancy_pref == 2: # On realistic pregnancy a girls chance to become pregnant fluctuates over the month.
+            day_difference = abs((day % 30) - self.ideal_fertile_day) # Gets the distance between the current day and the ideal fertile day.
+            if day_difference > 15:
+                day_difference = 30 - day_difference #Wrap around to get correct distance between months.
+            multiplier = 2 - (float(day_difference)/10.0) # The multiplier is 2 when the day difference is 0, 0.5 when the day difference is 15.
+            modified_fertility = self.fertility_percent * multiplier
+        else:
+            modified_fertility = self.fertility_percent        
+        return modified_fertility
+
+    Person.effective_fertility_percent = effective_fertility_percent
