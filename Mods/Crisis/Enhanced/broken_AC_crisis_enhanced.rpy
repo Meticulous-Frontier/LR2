@@ -112,10 +112,12 @@ label broken_AC_crisis_label_enhanced:
                         "[girl_choice.title] fiddles with some of her clothing, then shrugs meekly."
                         girl_choice.char "I'm not sure I'm comfortable taking any of this off... I'm sure I'll be fine in the heat for a little bit."
 
-                    "The girls laugh and tease each other as they strip down, and they all seem to be more comfortable with the heat once they are less clothed."
-                    "For a while all of the girls work in various states of undress while under your watchful eye."
-                    $ broken_ac_crisis_strip_other_girls(the_person, girl_choice)
-                    "The repair man shows up early, and you lead him directly to the the AC unit. The problem turns out to be a quick fix, and production will be back to a comfortable temperature the next day."
+                    if __builtin__.len(mc.business.production_team) > 2:
+                        "The girls laugh and tease each other as they strip down, and they all seem to be more comfortable with the heat once they are less clothed."
+                        "For a while all of the girls work in various states of undress while under your watchful eye."
+                        $ broken_ac_crisis_strip_other_girls(the_person, girl_choice)
+                        "The repair man shows up early, and you lead him directly to the the AC unit. The problem turns out to be a quick fix, and production will be back to a comfortable temperature the next day."
+                    
                     $ girl_choice = None
                 else:
                     "The other girls exchange glances, and everyone seems decides it's best not to take this too far."
