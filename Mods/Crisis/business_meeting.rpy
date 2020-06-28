@@ -99,7 +99,7 @@ label business_meeting_seduction(the_person):
     if the_person.effective_sluttiness() > 40:
         $ strip_choice = the_person.choose_strip_clothing_item()
         if strip_choice:
-            "After talking for a while she takes off her [strip_choice.name]."
+            "After talking for a while she takes off her [strip_choice.display_name]."
             $ the_person.draw_animated_removal(strip_choice, position="sitting", emotion="default")
             if the_person.outfit.tits_visible():
                 if the_person.has_taboo("bare_tits"):
@@ -111,6 +111,7 @@ label business_meeting_seduction(the_person):
                     $ the_person.break_taboo("underwear_nudity")
 
             the_person.char "This should help you focus, [the_person.mc_title]."
+            $ strip_choice = None
             $ mc.change_arousal(20)
 
         if the_person.effective_sluttiness() > 60:
