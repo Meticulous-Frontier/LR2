@@ -854,7 +854,7 @@ label ophelia_talk_about_candace_label(the_person):
     $ ex_name = ophelia_get_ex_name()
     "You take a deep breath. This is a touchy subject, so you need to approach this carefully."
     mc.name "So, I was wondering if I could talk to you for a few minutes about something."
-    the_person.char "Sure! You know I always have time for you, [the_person.mc_title]"
+    the_person.char "Sure! You know I always have time for you, [the_person.mc_title]."
     mc.name "Right, well, this might be kind of a sore subject, so please just hear me out before you rush to any judgement."
     the_person.char "Ok... I'm listening..."
     mc.name "Ok, well, I found out some things about [ex_name], your ex? And they have me a little bit concerned."
