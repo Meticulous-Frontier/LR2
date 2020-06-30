@@ -66,7 +66,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
                 while strip_choice is not None and not caught:
                     $ the_person.draw_animated_removal(strip_choice)
-                    "You watch as [the_person.possessive_title] take off her [strip_choice.diplay_name]."
+                    "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
                     if renpy.random.randint(0,100) < 10: #you got caught
                         the_person.char "I'll be done in just a second [the_person.mc_title]..."
                         "Her eyes glance at the mirror you're using to watch her. You try to look away, but your eyes meet."
@@ -105,7 +105,7 @@ label mom_outfit_help_crisis_label_enhanced():
         $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
         while strip_choice is not None:
             $ the_person.draw_animated_removal(strip_choice)
-            "You watch as [the_person.possessive_title] take off her [strip_choice.diplay_name]."
+            "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
             $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
         $ strip_choice = None
 
@@ -174,7 +174,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
                 while strip_choice is not None and not caught:
                     $ the_person.draw_animated_removal(strip_choice)
-                    "You watch as [the_person.possessive_title] take off her [strip_choice.diplay_name]."
+                    "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
                     if renpy.random.randint(0,100) < 10: #you got caught
                         the_person.char "I'll be done in just a second [the_person.mc_title]..."
                         "Her eyes glance at the mirror you're using to watch her. You try to look away, but your eyes meet."
@@ -213,7 +213,7 @@ label mom_outfit_help_crisis_label_enhanced():
         $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
         while strip_choice is not None:
             $ the_person.draw_animated_removal(strip_choice)
-            "You watch as [the_person.possessive_title] take off her [strip_choice.diplay_name]."
+            "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
             $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
 
         $ strip_choice = None
@@ -278,7 +278,7 @@ label mom_outfit_help_crisis_label_enhanced():
                             $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
                             while strip_choice is not None and not caught:
                                 $ the_person.draw_animated_removal(strip_choice)
-                                "You watch as [the_person.possessive_title] take off her [strip_choice.diplay_name]."
+                                "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
                                 if renpy.random.randint(0,100) < 10: #you got caught
                                     the_person.char "I'll be done in just a second [the_person.mc_title]..."
                                     "Her eyes glance at the mirror you're using to watch her. You try to look away, but your eyes meet."
@@ -317,7 +317,7 @@ label mom_outfit_help_crisis_label_enhanced():
                     $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
                     while strip_choice is not None:
                         $ the_person.draw_animated_removal(strip_choice)
-                        "You watch as [the_person.possessive_title] take off her [strip_choice.diplay_name]."
+                        "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
                         $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
                     "Once she's stripped naked she grabs another outfit and starts to put it on."
                     $ strip_choice = None
