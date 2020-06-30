@@ -236,10 +236,10 @@ init -1 python:
 
     def create_bimbo():
         # add one bimbo to the game (on start of game)
-        the_person = make_person(age=renpy.random.randint(25, 35), tits="DD", body_type = "standard_body", face_style = "Face_4", skin = "tan",
+        person = make_person(age=renpy.random.randint(25, 35), tits="DD", body_type = "standard_body", face_style = "Face_4", skin = "tan",
             hair_colour = ["platinum blonde", [0.789, 0.746, 0.691,1]], hair_style = messy_hair, eyes = ["light blue", [0.60, 0.75, 0.98, 1.0]], personality = bimbo_personality)
-        the_person.generate_home()
-        the_person.home.add_person(the_person)
+        person.generate_home()
+        person.home.add_person(person)
         return
 
     def create_hooker(add_to_game = True):

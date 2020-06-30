@@ -1,25 +1,25 @@
 # Overrides part of the existing Position class with enhanced versions
 init 5 python:
-    def calculate_position_requirements(self, the_person, ignore_taboo = False):
+    def calculate_position_requirements(self, person, ignore_taboo = False):
         position_taboo = self.associated_taboo
         if ignore_taboo:
             position_taboo = None
 
         final_slut_requirement = self.slut_requirement
         final_slut_cap = self.slut_cap
-        if self.skill_tag == "Anal" and the_person.has_family_taboo():
+        if self.skill_tag == "Anal" and person.has_family_taboo():
             final_slut_requirement -= 5 #It's easier to convince a family member to have anal sex, since it's not "real" incest or something.
             final_slut_cap -= 5
-        elif self.skill_tag == "Vaginal" and the_person.has_family_taboo():
+        elif self.skill_tag == "Vaginal" and person.has_family_taboo():
             final_slut_requirement += 10 #It's harder to convince a family member to have vaginal sex
             final_slut_cap += 10
 
         if self.opinion_tags:
             for opinion_tag in self.opinion_tags:
-                final_slut_cap -= the_person.get_opinion_score(opinion_tag) * 5
-                final_slut_requirement -= the_person.get_opinion_score(opinion_tag) * 5
+                final_slut_cap -= person.get_opinion_score(opinion_tag) * 5
+                final_slut_requirement -= person.get_opinion_score(opinion_tag) * 5
 
-        if the_person.has_taboo(position_taboo):
+        if person.has_taboo(position_taboo):
             final_slut_requirement += 10    # when she has a taboo increase slut requirement
             final_slut_cap += 10
 
@@ -28,14 +28,14 @@ init 5 python:
     Position.calculate_position_requirements = calculate_position_requirements
 
     # include a visual indication
-    def build_position_willingness_string_enhanced(self, the_person, ignore_taboo = False): #NOTE: Returns a list instead of string. If you want it to be a single string then do "".join(position.build_position_willingness_string(the_person))
+    def build_position_willingness_string_enhanced(self, person, ignore_taboo = False): #NOTE: Returns a list instead of string. If you want it to be a single string then do "".join(position.build_position_willingness_string(person))
     #Generates a list of strings for this position that includes a tooltip and coloured willingness for the person given.
 
         willingness_string = ""
         tooltip_string = ""
 
         girl_expected_arousal = str(__builtin__.int(self.girl_arousal * (1 + 0.1 * mc.sex_skills[self.skill_tag]))) #Estimate what they'll gain based on both of your skills to make the predictions as accurate as possible.
-        guy_expected_arousal = str(__builtin__.int(self.guy_arousal * (1 + 0.1 * the_person.sex_skills[self.skill_tag])))
+        guy_expected_arousal = str(__builtin__.int(self.guy_arousal * (1 + 0.1 * person.sex_skills[self.skill_tag])))
 
         energy_string = "   {color=#A3A3FF}" + str(self.guy_energy) + "{/color}/{color=#FF6EC7}" + str(self.girl_energy) + "{/color} {image=energy_token_small}"
         arousal_string =  ", {color=#A3A3FF}" + guy_expected_arousal + "{/color}/{color=#FF6EC7}" + girl_expected_arousal + "{/color} {image=arousal_token_small}"
@@ -46,57 +46,57 @@ init 5 python:
         if ignore_taboo:
             position_taboo = None
 
-        final_slut_requirement, final_slut_cap = self.calculate_position_requirements(the_person, ignore_taboo)
+        final_slut_requirement, final_slut_cap = self.calculate_position_requirements(person, ignore_taboo)
 
         taboo_break_string = ""
-        if the_person.has_taboo(position_taboo):
+        if person.has_taboo(position_taboo):
             taboo_break_string = " {image=taboo_break} "
 
         #NOTE: Removed the (tooltip) and (disabled) tags as they aren't needed in the screen which is their only use case at the moment, but consider adding those back in if being used in the renpy.display_menu
-        if the_person.effective_sluttiness(position_taboo) > final_slut_cap:
-            if the_person.arousal > final_slut_cap:
+        if person.effective_sluttiness(position_taboo) > final_slut_cap:
+            if person.arousal > final_slut_cap:
                 willingness_string = "{color=#6b6b6b}Boring{/color}" #No sluttiness gain AND half arousal gain
                 tooltip_string = " (tooltip) This position is too boring to interest her when she is this horny. No sluttiness increase and her arousal gain is halved."
             else:
                 willingness_string = "{color=#A3A3FF}Comfortable{/color}" #No sluttiness
                 tooltip_string = " (tooltip) This position is too tame for her tastes. No sluttiness increase, but it may still be a good way to get warmed up and ready for other positions."
-        elif the_person.effective_sluttiness(position_taboo) >= final_slut_requirement:
+        elif person.effective_sluttiness(position_taboo) >= final_slut_requirement:
             willingness_string = "{color=#3DFF3D}Exciting{/color}" #Normal sluttiness gain
             tooltip_string = " (tooltip) This position pushes the boundary of what she is comfortable with. Increases temporary sluttiness, which may become permanent over time or with serum application."
-        elif the_person.effective_sluttiness(position_taboo) + the_person.obedience-100 >= final_slut_requirement:
+        elif person.effective_sluttiness(position_taboo) + person.obedience-100 >= final_slut_requirement:
             willingness_string = "{color=#FFFF3D}Likely Willing if Commanded{/color}"
             tooltip_string = " (tooltip) This position is beyond what she would normally consider. She is obedient enough to do it if she is commanded, at the cost of some happiness."
         else:
             willingness_string = "{color=#FF3D3D}Likely Too Slutty{/color}"
             tooltip_string = " (tooltip) This position is so far beyond what she considers appropriate that she would never dream of it."
 
-        if the_person.has_taboo(position_taboo):
-            tooltip_string +=" (tooltip) \nSuccessfully selecting this position will break a taboo, making it easier to convince " + the_person.title + " to do it and similar acts in the future."
+        if person.has_taboo(position_taboo):
+            tooltip_string +=" (tooltip) \nSuccessfully selecting this position will break a taboo, making it easier to convince " + person.title + " to do it and similar acts in the future."
 
-        if not self.check_clothing(the_person):
+        if not self.check_clothing(person):
             disable = True
             willingness_string += "\nObstructed by clothing"
         elif mc.recently_orgasmed and self.requires_hard:
             disable = True
             willingness_string += "\nRecently orgasmed"
-        elif mc.energy < self.guy_energy and the_person.energy < self.girl_energy:
+        elif mc.energy < self.guy_energy and person.energy < self.girl_energy:
             disable = True
             willingness_string += "\nYou're both too tired"
         elif mc.energy < self.guy_energy:
             disable = True
             willingness_string += "\nYou're too tired"
-        elif the_person.energy < self.girl_energy:
+        elif person.energy < self.girl_energy:
             disable = True
             willingness_string += "\nShe's too tired"
 
         change_amount = 0
         if self.opinion_tags:
             for opinion_tag in self.opinion_tags:
-                opinion_topic = the_person.get_opinion_topic(opinion_tag)
+                opinion_topic = person.get_opinion_topic(opinion_tag)
                 if opinion_topic:
-                    # renpy.say("", the_person.name + ": " + opinion_tag + " => " + str(the_person.get_opinion_score(opinion_tag)))
+                    # renpy.say("", person.name + ": " + opinion_tag + " => " + str(person.get_opinion_score(opinion_tag)))
                     if opinion_topic[1]: # only show info when opinion is known
-                        change_amount += the_person.get_opinion_score(opinion_tag) * 3 #Add a bonus or penalty if she likes or dislikes the position.
+                        change_amount += person.get_opinion_score(opinion_tag) * 3 #Add a bonus or penalty if she likes or dislikes the position.
 
         position_opinion = ""
         if change_amount > 0:
@@ -113,7 +113,7 @@ init 5 python:
 
     # try different types of taboo break, the final choice is the break for the actual position broken
     # added an extra check to make sure the label exists, if not the taboo is broken without dialog
-    def call_transition_taboo_break(self, new_position, the_person, the_location, the_object):
+    def call_transition_taboo_break(self, new_position, person, the_location, the_object):
         def get_position_name(position):
             return position.name.lower().replace(" ", "_")
 
@@ -122,18 +122,18 @@ init 5 python:
             #renpy.say("", "Custom taboo break function is: " + transition_scene)
             if renpy.has_label(transition_scene):
                 #renpy.say("", "Calling custom taboo break: " + transition_scene)
-                renpy.call(transition_scene, the_person, the_location, the_object)
+                renpy.call(transition_scene, person, the_location, the_object)
 
             #renpy.say("", "Default taboo break function: " + new_position.taboo_break_description)
             if renpy.has_label(new_position.taboo_break_description):
                 #renpy.say("", "Calling default taboo break: " + new_position.taboo_break_description)
-                renpy.call(self.taboo_break_description, the_person, the_location, the_object)
+                renpy.call(self.taboo_break_description, person, the_location, the_object)
 
         else: # we are calling from the new position (we don't have an old position to start from)
             #renpy.say("", "Default taboo break function: " + self.taboo_break_description)
             if renpy.has_label(self.taboo_break_description):
                 #renpy.say("", "Calling default taboo break: " + self.taboo_break_description)
-                renpy.call(self.taboo_break_description, the_person, the_location, the_object)
+                renpy.call(self.taboo_break_description, person, the_location, the_object)
         return
 
     Position.call_transition_taboo_break = call_transition_taboo_break
