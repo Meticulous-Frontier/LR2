@@ -854,7 +854,7 @@ label ophelia_talk_about_candace_label(the_person):
     $ ex_name = ophelia_get_ex_name()
     "You take a deep breath. This is a touchy subject, so you need to approach this carefully."
     mc.name "So, I was wondering if I could talk to you for a few minutes about something."
-    the_person.char "Sure! You know I always have time for you, [the_person.mc_title]"
+    the_person.char "Sure! You know I always have time for you, [the_person.mc_title]."
     mc.name "Right, well, this might be kind of a sore subject, so please just hear me out before you rush to any judgement."
     the_person.char "Ok... I'm listening..."
     mc.name "Ok, well, I found out some things about [ex_name], your ex? And they have me a little bit concerned."
@@ -866,7 +866,7 @@ label ophelia_talk_about_candace_label(the_person):
     the_person.char "What the fuck? That two timing hussy? What the fuck have you been talking to her for?"
     mc.name "Just hear me out! You know how you said she is, well, dumb as a bag of rocks?"
     the_person.char "Well yeah..."
-    mc.name "Well, it turns out, she pretty much is. At first I thought you were exaggerating. After talking to her, I found out that before she worked for your boyfriend, she used to work and a pharmaceutical company."
+    mc.name "Well, it turns out, she pretty much is. At first I thought you were exaggerating. After talking to her, I found out that before she worked for your boyfriend, she used to work at a pharmaceutical company."
     the_person.char "What? That sounds crazy. How could someone like her work in that field?"
     mc.name "Well, I did some research into the company, and they went out of business about 6 months ago, after multiple lawsuits were filed."
     mc.name "I think maybe there was some kind of accident there, during research? That stunted her intelligence and made her into a bimbo..."
