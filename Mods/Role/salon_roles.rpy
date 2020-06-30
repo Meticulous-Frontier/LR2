@@ -866,7 +866,7 @@ label ophelia_talk_about_candace_label(the_person):
     the_person.char "What the fuck? That two timing hussy? What the fuck have you been talking to her for?"
     mc.name "Just hear me out! You know how you said she is, well, dumb as a bag of rocks?"
     the_person.char "Well yeah..."
-    mc.name "Well, it turns out, she pretty much is. At first I thought you were exaggerating. After talking to her, I found out that before she worked for your boyfriend, she used to work and a pharmaceutical company."
+    mc.name "Well, it turns out, she pretty much is. At first I thought you were exaggerating. After talking to her, I found out that before she worked for your boyfriend, she used to work at a pharmaceutical company."
     the_person.char "What? That sounds crazy. How could someone like her work in that field?"
     mc.name "Well, I did some research into the company, and they went out of business about 6 months ago, after multiple lawsuits were filed."
     mc.name "I think maybe there was some kind of accident there, during research? That stunted her intelligence and made her into a bimbo..."
