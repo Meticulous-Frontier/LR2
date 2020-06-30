@@ -17,7 +17,7 @@ label introvert_dual_penetration_taboo_break(the_person):
             the_person.char "Oh fuck..."
         else:
             the_person.char "Oh my god, you're actually going to do it! Fuck, I hope you even fit!"
-            mc.name "Don't worry, I'll stetch out your ass like I've stretched out all your other holes."
+            mc.name "Don't worry, I'll stretch out your ass like I've stretched out all your other holes."
     return
 
 label relaxed_dual_penetration_taboo_break(the_person):
@@ -40,7 +40,7 @@ label relaxed_dual_penetration_taboo_break(the_person):
             the_person.char "Oh fuck..."
         else:
             the_person.char "Oh my god, you're actually going to do it! Fuck, I hope you even fit!"
-            mc.name "Don't worry, I'll stetch out your ass like I've stretched out all your other holes."
+            mc.name "Don't worry, I'll stretch out your ass like I've stretched out all your other holes."
     return
 
 label reserved_dual_penetration_taboo_break(the_person):
@@ -73,7 +73,7 @@ label reserved_dual_penetration_taboo_break(the_person):
 
 label wild_dual_penetration_taboo_break(the_person):
     if the_person.effective_sluttiness() >= 75:
-        the_person.char "Oh god, it always suprises me how big your cock is! You're going to tear my ass in half with that monster!"
+        the_person.char "Oh god, it always surprises me how big your cock is! You're going to tear my ass in half with that monster!"
         "She seems more turned on by the idea than worried."
         mc.name "Don't worry, you'll be stretched out soon enough."
 
@@ -110,7 +110,7 @@ label lily_dual_penetration_taboo_break(the_person):
         else:
             mc.name "Yeah, why not? I've already fucked all of your other holes, what's special about this one?"
             the_person.char "It's not special, I just thought you'd want to fuck my pussy some more. Didn't you enjoy it last time."
-            mc.nmae "It was great, but I want to experiment a little more. Come on, don't you want to try something new?"
+            mc.name "It was great, but I want to experiment a little more. Come on, don't you want to try something new?"
 
     else:
         the_person.char "Wait, do you want to try anal?"
@@ -119,8 +119,6 @@ label lily_dual_penetration_taboo_break(the_person):
             the_person.char "You're crazy [the_person.mc_title]! We're related, we shouldn't  be fucking!"
             mc.name "It's not like it's real sex. If you want I can go to town on your pussy though, it looks just as tight."
             the_person.char "I guess anal isn't as bad as my own brother fucking my pussy..."
-
-
         else:
             the_person.char "What's wrong with my pussy? Didn't you enjoy it last time?"
             mc.name "It was great, I just want to try something new. Come on, you like experimenting, right?"
@@ -132,8 +130,6 @@ label lily_dual_penetration_taboo_break(the_person):
     the_person.char "With toys a couple of times... Never with a guy."
     mc.name "You'll probably be really tight then. I'll go nice and slow to give you time to stretch out."
     the_person.char "Okay. Thank you [the_person.mc_title]."
-
-
     return
 
 label mom_dual_penetration_taboo_break(the_person):
@@ -146,7 +142,6 @@ label mom_dual_penetration_taboo_break(the_person):
             mc.name "I love you so much [the_person.title], I want to try every way possible to be close to each other."
             the_person.char "I guess it wouldn't really count. It's no different than me using my hand or my breasts, right?"
             mc.name "That's what I'm saying. Have you ever tried this before?"
-
 
         else:
             mc.name "Trust me [the_person.title], we can make it work."
@@ -191,5 +186,5 @@ label mom_dual_penetration_taboo_break(the_person):
         "She shakes her head."
         the_person.char "No. I've thought about it, but I've never been brave enough to try it."
         mc.name "I'll be as gentle as possible then, so you have time to adjust."
-        the_person.char "It feels so naughty to give my anal vaginity to my own son. It's kind of turning me on."
+        the_person.char "It feels so naughty to give my anal virginity to my own son. It's kind of turning me on."
     return
