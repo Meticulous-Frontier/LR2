@@ -48,7 +48,7 @@ label candace_goes_clothes_shopping_label(the_person):
     $ the_person.draw_person(position = "sitting")
     "You step up to [the_person.possessive_title]'s desk. She's been working for you for a week now, so you decide to check up on her."
     mc.name "Hey there, [the_person.title]. How are you settling in?"
-    the_person.char "Oh hey [the_person.mc_title]! Its going pretty good!"
+    the_person.char "Oh hey [the_person.mc_title]! It's going pretty good!"
     mc.name "Everything been working out okay?"
     the_person.char "Yes! It sure has! I have really been enjoying the work here, and the freedom I have now is great!"
     the_person.char "Guess what I did last night?"
@@ -58,7 +58,7 @@ label candace_goes_clothes_shopping_label(the_person):
     mc.name "Oh! That's... great?!?"
     the_person.char "I know! And this time I did it just for fun! I didn't even need the rent discount! I just got my first paycheck. I've been trying to figure out what to do with it."
     mc.name "That's good to hear. And don't worry. It's not a race! You don't have to spend it as it comes in, you can always save some back."
-    the_person.char "Yeah, I suppose. But it feels like, its my first one, right? I should use it for something fun?"
+    the_person.char "Yeah, I suppose. But it feels like, it's my first one, right? I should use it for something fun?"
     mc.name "That's true. Any ideas?"
     the_person.char "Well, I was thinking about going over to the mall. My boyf... I mean, my ex... he purged a lot of my favorite outfits. I was thinking about buying a couple new skirts or something!"
     mc.name "That's actually a really good idea."
@@ -337,7 +337,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
 
         else:
             "You watch as [the_person.title] goes through the lingerie. There is some really sexy stuff here..."
-            "You see as she grabs a couple of things."
+            "You watch as she grabs a couple of things."
             the_person.char "I'm gonna go try these on really quick."
             "She lowers her voice to a hush."
             the_person.char "I'll be looking for your expert opinion, so stay by the door, okay [the_person.mc_title]?"
@@ -350,7 +350,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
             mc.name "Absolutely."
             $ the_person.draw_person()
             the_person.char "What do you think?"
-            "She gives you a quick turn, then bends over the the bench in the dressing room."
+            "She gives you a quick turn, then bends over the bench in the dressing room."
             $ the_person.draw_person(position = "standing_doggy")
             "She wiggles her hips a couple of times."
             the_person.char "Do you think I'll be able to get a man's attention with this?"
@@ -496,6 +496,6 @@ label clothes_shopping_ask_to_add_to_uniform(the_person, the_outfit, preferences
             "Add it to the uniforms\n{color=#ff0000}{size=18}Too slutty!{/size}{/color} (disabled)" if the_outfit.get_full_outfit_slut_score() > slut_limit:
                 pass
             "Don't add to the uniforms":
-                mc.name "I looks great, but I don't think the other girls would wear it as well as you."
+                mc.name "It looks great, but I don't think the other girls would wear it as well as you."
                 "She gives you a little pout, but seems to understand."
     return
