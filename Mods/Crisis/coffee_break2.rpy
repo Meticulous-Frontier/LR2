@@ -90,12 +90,27 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
             $ scene_manager.update_actor(loser, position = "walking_away")
 
             if loser.effective_sluttiness() >= 90 and loser.outfit.vagina_visible():
-                "When [loser.possessive_title] reaches the lobby, where the delivery guy is standing with a big grin on his face."
-                loser.char "I left my purse at my desk. I can go get it... or maybe I could pay another way."
-                $ scene_manager.update_actor(loser, position = "stand3")
-                "[loser.possessive_title] indicates the guy to come forward, she spreads her legs a little to give him a nice view."
-                $ loser.change_stats(slut_temp = 2)
-                "After a while she tells him the food is getting cold. He nods, turns around and as he walks away he says: 'Enjoy your food, slut!'"
+                if persistent.show_ntr:
+                    "When [loser.possessive_title] reaches the lobby she pulls the sweaty guy into an empty office."
+                    loser.char "I left my purse at my desk. I can go get it... or maybe I could pay another way."
+                    $ scene_manager.update_actor(loser, position = "standing_doggy")
+                    "[loser.possessive_title] turns around and presents herself, the sweaty guy quickly drops his pants and pushes his cock against her pussy."
+                    loser.char "Oh, hard already. We must be getting so predictable."
+                    "The delivery man begins thrusting as hard and fast as he can. He seems to be in a hurry to finish and get back to work."
+                    loser.char "Ah yes, fill me up. Fuck me you sweaty pig."
+                    "His face turns bright red as he pushes [loser.possessive_title]'s face into the desk."
+                    loser.char "Oh yes. I'm cumming!"
+                    $ loser.change_stats(slut_temp = 3, slut_core = 3)
+                    "He finishes leaving her quivering against the desk. As he walks away he says: 'Enjoy your food, slut!'"
+                    $ loser.cum_on_ass()
+                    "She gathers her clothes and takes the food back to her colleagues. "
+                else:
+                    "When [loser.possessive_title] reaches the lobby, where the delivery guy is standing with a big grin on his face."
+                    loser.char "I left my purse at my desk. I can go get it... or maybe I could pay another way."
+                    $ scene_manager.update_actor(loser, position = "stand3")
+                    "[loser.possessive_title] indicates the guy to come forward, she spreads her legs a little to give him a nice view."
+                    $ loser.change_stats(slut_temp = 2)
+                    "After a while she tells him the food is getting cold. He nods, turns around and as he walks away he says: 'Enjoy your food, slut!'"
                 $ scene_manager.update_actor(loser, position = "walking_away")
                 if winner_one.effective_sluttiness() > 60 and winner_two.effective_sluttiness() > 60:
                     "You follow [loser.possessive_title] as she takes the delivery to the break room."
@@ -104,13 +119,23 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                     loser.char "Lunch is here!"
                     $ scene_manager.add_actor(winner_one, emotion="happy", character_placement = character_left_flipped)
                     $ scene_manager.add_actor(winner_two, emotion="happy")
-                    "You enter the room and see [winner_one.title] and [winner_two.title] waiting for the food, you motion them to be quiet."
-                    "You slowly walk up behind [loser.title] and quietly start to take your dick out of your pants."
-                    loser.char "Hey girls, the food is here, why are you two acting so funny?"
-                    mc.name "That was quite the show [loser.title]."
-                    $ scene_manager.update_actor(loser, position = "back_peek")
-                    "You put your hands on her hips, her pussy still wet from the excitement a few minutes earlier."
-                    mc.name "I only got to cum on your face, but after this display I definitely need more."
+                    if persistent.show_ntr:
+                        "You enter the room and see [winner_one.title] and [winner_two.title] waiting. They see you enter the room and fall silent."
+                        "You start to walk up behind [loser.title] and quietly start to take your dick out of your pants."
+                        loser.char "Hey, I see the food is here, why are you two acting so funny?"
+                        mc.name "That was quite the show [loser.title]."
+                        $ scene_manager.update_actor(loser, position = "back_peek")
+                        "You put your hands on her hips, her ass still slick with the delivery guy's cum."
+                        mc.name "I only got to cum on your face, it doesn't seem right the delivery guy got more than me."
+                    else:
+                        "You enter the room and see [winner_one.title] and [winner_two.title] waiting for the food, you motion them to be quiet."
+                        "You slowly walk up behind [loser.title] and quietly start to take your dick out of your pants."
+                        loser.char "Hey girls, the food is here, why are you two acting so funny?"
+                        mc.name "That was quite the show [loser.title]."
+                        $ scene_manager.update_actor(loser, position = "back_peek")
+                        "You put your hands on her hips, her pussy still wet from the excitement a few minutes earlier."
+                        mc.name "I only got to cum on your face, but after this display I definitely need more."
+                        
                     loser.char "Hey now, it's not like that, you know you can claim me anytime you want, we were just looking for some free... FUCK"
                     "You grab her hips and ram yourself forward into [loser.possessive_title]'s sopping wet pussy."
                     if winner_one.effective_sluttiness() > 90 and winner_one.outfit.vagina_visible():

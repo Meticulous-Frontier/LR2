@@ -4,6 +4,7 @@
 init -2:
     default persistent.memory_mode = 0 # default is low memory mode
     default persistent.use_free_memory = True   # default is clean memory every day
+    default persistent.show_ntr = False     # default turn of NTR
 
 init 5 python: # add to stack later then other mods
     add_label_hijack("normal_start", "activate_compatibility_fix")
