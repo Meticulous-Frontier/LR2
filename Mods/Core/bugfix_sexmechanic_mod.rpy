@@ -132,15 +132,15 @@ init 5 python:
                 person.add_situational_slut("love_modifier", __builtin__.int(person.love/2), "I really like you, let's see where this goes!")
 
         # Happiness modifiers
-        happiness_effect = __builtin__.round((the_person.happiness - 100)/4.0)
+        happiness_effect = __builtin__.round((person.happiness - 100)/4.0)
         if happiness_effect <= -10:
-            the_person.add_situational_slut("happiness_modifier", happiness_effect, "I'm so unhappy, I just don't want to do anything!")
+            person.add_situational_slut("happiness_modifier", happiness_effect, "I'm so unhappy, I just don't want to do anything!")
         elif happiness_effect <= -5:
-            the_person.add_situational_slut("happiness_modifier", happiness_effect, "I'm just not in the mood right now.")
+            person.add_situational_slut("happiness_modifier", happiness_effect, "I'm just not in the mood right now.")
         elif happiness_effect >= 5:
-            the_person.add_situational_slut("happiness_modifier", happiness_effect, "I'm so happy, I'm up for anything!")
+            person.add_situational_slut("happiness_modifier", happiness_effect, "I'm so happy, I'm up for anything!")
         elif happiness_effect >= 10:
-            the_person.add_situational_slut("happiness_modifier", happiness_effect, "Today's a good day, let's see where this goes!")
+            person.add_situational_slut("happiness_modifier", happiness_effect, "Today's a good day, let's see where this goes!")
         return
 
     def clear_sex_modifiers(person):
