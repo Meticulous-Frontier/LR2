@@ -1,14 +1,14 @@
 init -1 python:
-    def SB_fetish_vaginal_visit_requirement(the_person):
-        if the_person.sex_skills["Vaginal"] >= 6:
+    def SB_fetish_vaginal_visit_requirement(person):
+        if person.sex_skills["Vaginal"] >= 6:
             if not SB_FETISH_EVENT_ACTIVE():
                 return True
             else:
                 return "Someone else is coming over tonight"
         return
 
-    def SB_fetish_vaginal_mom_kitchen_requirement(the_person):
-        if the_person is mom:
+    def SB_fetish_vaginal_mom_kitchen_requirement(person):
+        if person is mom:
             if mc.location == kitchen:
                 if mc.energy > 30:
                     return True
@@ -17,8 +17,8 @@ init -1 python:
             return "You aren't in the kitchen."
         return
 
-    def SB_fetish_anal_mom_kitchen_requirement(the_person):
-        if the_person is mom:
+    def SB_fetish_anal_mom_kitchen_requirement(person):
+        if person is mom:
             if  mc.location == kitchen:
                 if mc.energy > 30:
                     return True
@@ -27,8 +27,8 @@ init -1 python:
             return "You aren't in the kitchen."
         return
 
-    def SB_lily_anal_in_room_requirement(the_person): #She'll only strip if you're in her bedroom and alone.
-        if not the_person is lily:
+    def SB_lily_anal_in_room_requirement(person): #She'll only strip if you're in her bedroom and alone.
+        if not person is lily:
             return
         if not mc.location is lily_bedroom:
             return "Must be in Lily's bedroom"
@@ -39,17 +39,17 @@ init -1 python:
         else:
             return "You are too tired."
 
-    def SB_fetish_anal_staylate_requirement(the_person):
+    def SB_fetish_anal_staylate_requirement(person):
         if mc.is_at_work():
-            if the_person.sex_skills["Anal"] >= 6:
+            if person.sex_skills["Anal"] >= 6:
                 if not SB_FETISH_EVENT_ACTIVE():
                     return True
                 else:
                     return "Someone else is coming over tonight"
         return False
 
-    def SB_fetish_starbuck_anal_swing_demo_requirement(the_person):
-        if the_person is starbuck:
+    def SB_fetish_starbuck_anal_swing_demo_requirement(person):
+        if person is starbuck:
             if mc.location == sex_store:
                 return True
             else:
@@ -58,7 +58,7 @@ init -1 python:
             return False
 
 
-    def SB_fetish_cum_getdosage_requirement(the_person):
+    def SB_fetish_cum_getdosage_requirement(person):
         if mc.energy > 30:
             if time_of_day < 4:
                 return True
@@ -96,16 +96,16 @@ init -1 python:
     #TODO: Add some actions when 'afflicted'
 
 init 1 python:
-    def SB_get_fetish_count(the_person):
+    def SB_get_fetish_count(person):
         fetish_count = 0
-        for role in the_person.special_role:
+        for role in person.special_role:
             if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role]:
                 fetish_count += 1
         return fetish_count
 
-    def SB_get_fetishes_description(the_person):
+    def SB_get_fetishes_description(person):
         description = ""
-        for role in the_person.special_role:
+        for role in person.special_role:
             if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role]:
                 if __builtin__.len(description) > 0:
                     description += ", "

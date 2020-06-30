@@ -1,7 +1,7 @@
 ###Scene Idea: Girl is pumping milk. MC can help or watch
 #
 #   In this scene, player is walking by some kind of private room when he hears moaning coming from inside
-#   After investigating, player finds NPC masterbating
+#   After investigating, player finds NPC masturbating
 #   Player choices include walking away and watching
 #   If watching, NPC has chance to notice PC watching. If slutty, NPC continues, if not, stops and gets angry
 #   If watching, and NPC is slutty, have a chance if we went unnoticed for NPC to call out PC name

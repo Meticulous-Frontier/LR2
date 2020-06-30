@@ -1201,7 +1201,7 @@ label hotwife_hookup_accept(the_person):
                     $ the_person.change_arousal(20) #110 + 8
                     "Her excitement is too much. You bottom out and cum, dumping wave after wave of your semen deep inside of her."
                     the_person.char  "Yes! Fill me with your cum!"
-                    "You feel her pussy spasming around your dick as she also starts to orgasm."
+                    "You feel her pussy convulsing around your dick as she also starts to orgasm."
                     $ the_person.change_slut_temp(1)
                     $ the_person.change_happiness(2)
                     $ the_person.cum_in_vagina()

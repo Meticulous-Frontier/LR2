@@ -285,7 +285,7 @@ label outro_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_locat
             "Your cock explodes in orgasm into her greedy mouth."
             if the_girl_2.has_role(cum_internal_role):
                 "Her pupils dilate as her cum addicted brain registers the presence of your cum in her mouth."
-                "[the_girl_2.possessive_title] is moaning uncontrollably around your spasming cock."
+                "[the_girl_2.possessive_title] is moaning uncontrollably around your twitching cock."
             $ the_girl_2.cum_in_mouth()
 
             $ scene_manager.draw_scene()

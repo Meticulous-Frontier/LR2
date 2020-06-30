@@ -3,79 +3,79 @@ init 5 python:
     add_label_hijack("after_load", "update_goal_mod_core")
 
 init 2 python:
-    def daily_profit_count_function(the_goal, profit):
-        if profit >= the_goal.arg_dict["required"]:
+    def daily_profit_count_function(goal, profit):
+        if profit >= goal.arg_dict["required"]:
             return True
         return False
 
-    def daily_profit_difficulty_function(the_goal, the_difficulty):
-        the_goal.arg_dict["required"]  = 100
-        the_goal.arg_dict["required"]  += (50 * the_difficulty)
-        if the_difficulty > 4:
-            the_goal.arg_dict["required"]  += (100 * the_difficulty)
-        if the_difficulty > 8:
-            the_goal.arg_dict["required"]  += (150 * the_difficulty)
-        if the_goal.arg_dict["required"] > 5000:
-            the_goal.arg_dict["required"]  = 5000
+    def daily_profit_difficulty_function(goal, difficulty):
+        goal.arg_dict["required"]  = 100
+        goal.arg_dict["required"]  += (50 * difficulty)
+        if difficulty > 4:
+            goal.arg_dict["required"]  += (100 * difficulty)
+        if difficulty > 8:
+            goal.arg_dict["required"]  += (150 * difficulty)
+        if goal.arg_dict["required"] > 5000:
+            goal.arg_dict["required"]  = 5000
 
-    def side_money_count_function(the_goal, count):
-        the_goal.arg_dict["count"] += count
-        if the_goal.arg_dict["count"] >= the_goal.arg_dict["required"]:
+    def side_money_count_function(goal, count):
+        goal.arg_dict["count"] += count
+        if goal.arg_dict["count"] >= goal.arg_dict["required"]:
             return True
         return False
 
-    def side_money_difficulty_function(the_goal, the_difficulty):
-        the_goal.arg_dict["required"]  = 100
-        the_goal.arg_dict["required"]  += (50 * the_difficulty)
-        if the_difficulty > 8:
-            the_goal.arg_dict["required"]  += (100 * the_difficulty)
-        if the_goal.arg_dict["required"] > 3000:
-            the_goal.arg_dict["required"]  = 3000
+    def side_money_difficulty_function(goal, difficulty):
+        goal.arg_dict["required"]  = 100
+        goal.arg_dict["required"]  += (50 * difficulty)
+        if difficulty > 8:
+            goal.arg_dict["required"]  += (100 * difficulty)
+        if goal.arg_dict["required"] > 3000:
+            goal.arg_dict["required"]  = 3000
 
-    def HR_interview_count_function(the_goal, the_person):
-        the_goal.arg_dict["count"] += 1
-        if the_goal.arg_dict["count"] >= the_goal.arg_dict["required"]:
+    def HR_interview_count_function(goal, person):
+        goal.arg_dict["count"] += 1
+        if goal.arg_dict["count"] >= goal.arg_dict["required"]:
             return True
         return False
 
-    def HR_interview_difficulty_function(the_goal, the_difficulty):
-        the_goal.arg_dict["required"] = __builtin__.int(1 + (the_difficulty / 5))
-        if the_goal.arg_dict["required"] > 5:
-            the_goal.arg_dict["required"]  = 5
+    def HR_interview_difficulty_function(goal, difficulty):
+        goal.arg_dict["required"] = __builtin__.int(1 + (difficulty / 5))
+        if goal.arg_dict["required"] > 5:
+            goal.arg_dict["required"]  = 5
 
-    def ass_cum_count_function(the_goal, the_person):
-        if not the_person in the_goal.arg_dict["people"]:
-            the_goal.arg_dict["people"].append(the_person)
-            the_goal.arg_dict["count"] += 1
-            if the_goal.arg_dict["count"] >= the_goal.arg_dict["required"]:
+    def ass_cum_count_function(goal, person):
+        if not person in goal.arg_dict["people"]:
+            goal.arg_dict["people"].append(person)
+            goal.arg_dict["count"] += 1
+            if goal.arg_dict["count"] >= goal.arg_dict["required"]:
                 return True
         return False
 
-    def ass_cum_count_difficulty_function(the_goal, the_difficulty):
-        the_goal.arg_dict["required"] += __builtin__.int(the_difficulty/4)
+    def ass_cum_count_difficulty_function(goal, difficulty):
+        goal.arg_dict["required"] += __builtin__.int(difficulty/4)
         return
 
-    def threesome_count_function(the_goal, the_person_one, the_person_two):
-        the_goal.arg_dict["count"] += 1
-        if the_goal.arg_dict["count"] >= the_goal.arg_dict["required"]:
+    def threesome_count_function(goal, person_one, person_two):
+        goal.arg_dict["count"] += 1
+        if goal.arg_dict["count"] >= goal.arg_dict["required"]:
             return True
         return False
 
-    def threesome_difficulty_function(the_goal, the_difficulty): #For now this difficulty does not scale
-        the_goal.arg_dict["required"] = 1
+    def threesome_difficulty_function(goal, difficulty): #For now this difficulty does not scale
+        goal.arg_dict["required"] = 1
         return
 
-    def give_serum_count_function(the_goal, the_person):
-        if the_person in mc.business.get_employee_list() + [mom, lily, aunt, cousin]:
+    def give_serum_count_function(goal, person):
+        if person in mc.business.get_employee_list() + [mom, lily, aunt, cousin]:
             return False
 
-        the_goal.arg_dict["count"] += 1
-        if the_goal.arg_dict["count"] >= the_goal.arg_dict["required"]:
+        goal.arg_dict["count"] += 1
+        if goal.arg_dict["count"] >= goal.arg_dict["required"]:
             return True
         return False
 
-    def give_serum_count_difficulty_function(the_goal, the_difficulty):
-        the_goal.arg_dict["required"] += __builtin__.int(the_difficulty/3)
+    def give_serum_count_difficulty_function(goal, difficulty):
+        goal.arg_dict["required"] += __builtin__.int(difficulty/3)
         return
 
     daily_profit_goal = Goal("Daily Profit", "Profitability is always a concern when running a business. Have your business make at least a certain amount in one day.", "daily_profit", "Business", always_valid_goal_function, daily_profit_count_function,

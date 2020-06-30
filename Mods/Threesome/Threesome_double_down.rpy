@@ -193,14 +193,14 @@ label orgasm_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_loc
         $ the_girl_1.call_dialogue("climax_responses_vaginal")
         the_girl_2.char "Oh god I'm cumming too!"
         "[the_girl_2.title] is grinding your face when she cums, her juices running down the sides of her legs."
-        "[the_girl_2.possessive_title] slams her body down on top of you as she begins to cum at the same time. Her pussy is spasming all around you."
+        "[the_girl_2.possessive_title] slams her body down on top of you as she begins to cum at the same time. Her pussy is convulsing all around you."
         "You just lay back and enjoy yourself as the two girls moan and writhe on top of you."
         return
 
     elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
         "[the_girl_1.title] is moaning loudly now. [the_girl_2.title] is pinching and twisting her nipples, driving her over the edge."
         $ the_girl_1.call_dialogue("climax_responses_vaginal")
-        "She orgasms, per pussy quivering around your cock. You enjoy the sensation of her pussy spasming around you.."
+        "She orgasms, per pussy quivering around your cock. You enjoy the sensation of her pussy convulsing around you.."
         "She takes a moment to recover, but soon [the_girl_1.title] begins to bounce up and down again on top of you.."
         return
 

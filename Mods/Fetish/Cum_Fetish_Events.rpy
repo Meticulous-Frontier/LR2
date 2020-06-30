@@ -404,7 +404,7 @@ label SB_fetish_mom_cum_label():
             mc.name "Fuck, here I come!"
             "[the_person.possessive_title] moans and looks you in the eyes. She pulls off until just the tip of your cock is in her mouth and she begins to stroke you off eagerly."
             "You erupt in orgasm into her greedy mouth. [the_person.possessive_title] is swallowing rapidly as you fill her mouth with your cum."
-            "[the_person.possessive_title] is moaning uncontrollably around your spasming cock."
+            "[the_person.possessive_title] is moaning uncontrollably around your twitching cock."
             $ the_person.cum_in_mouth()
             $ the_person.draw_person(position = "blowjob")
             $ the_person.max_opinion_score("drinking cum")

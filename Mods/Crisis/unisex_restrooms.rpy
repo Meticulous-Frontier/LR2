@@ -49,34 +49,34 @@ init 2 python:
                     return True
         return False
 
-    def gloryhole_get_response(the_person):    #this function creates a weight list of possible outcomes for the glory hole responses.
+    def gloryhole_get_response(person):    #this function creates a weight list of possible outcomes for the glory hole responses.
         gloryhole_list = []
-        if the_person.sluttiness < 20: #They get pissed and refuse to do anything
+        if person.sluttiness < 20: #They get pissed and refuse to do anything
             gloryhole_list.append("Refuse")
         else:
             gloryhole_list.append("Handjob")
             # actions based on sluttiness
-            if the_person.sluttiness > 35:
+            if person.sluttiness > 35:
                 gloryhole_list.append("Blowjob")
-            if the_person.sluttiness > 60:
+            if person.sluttiness > 60:
                 gloryhole_list.append("Vaginal")
                 gloryhole_list.append("JoinMe")
-            if the_person.sluttiness > 85:
+            if person.sluttiness > 85:
                 gloryhole_list.append("Anal")
 
 
         # actions based on fetishes (will always be added regardless of sluttiness)
-        if the_person.has_role(cum_internal_role) or the_person.has_role(cum_external_role):
+        if person.has_role(cum_internal_role) or person.has_role(cum_external_role):
             gloryhole_list.append("Blowjob")
-        if the_person.has_role(vaginal_fetish_role):
+        if person.has_role(vaginal_fetish_role):
             gloryhole_list.append("Vaginal")
-        if the_person.has_role(anal_fetish_role):
+        if person.has_role(anal_fetish_role):
             gloryhole_list.append("Anal")
 
         return get_random_from_list(gloryhole_list)
 
-    def get_anon_person(the_person):        #This function returns an anonymous version of a character.
-        anon_person = the_person.char.copy()
+    def get_anon_person(person):        #This function returns an anonymous version of a character.
+        anon_person = person.char.copy()
         anon_person.name = "?????"
 
         return anon_person
@@ -165,6 +165,8 @@ label unisex_restroom_door_greet_label():   #You have a chance to learn a couple
 
     $ town_relationships.improve_relationship(the_person_one, the_person_two)
     $ del overhear_topic
+    $ del text_one
+    $ del text_two
     $ del the_person_one
     $ del the_person_two
     return
@@ -220,6 +222,8 @@ label unisex_restroom_sexy_overhear_label():
     $ town_relationships.improve_relationship(the_person_one, the_person_two)
     $ del the_person_one
     $ del the_person_two
+    $ del text_one
+    $ del text_two
     $ del anon_char_one
     $ del anon_char_two
     return

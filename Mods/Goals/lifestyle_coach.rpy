@@ -1,12 +1,12 @@
 #This file is for the lifestyle coach. A new minor unique character who can help coach the MC to meet new life goals.
 #Found at the mall. Initially can help MC setup new work and personal goals, after corruption can help setup new sex goals and help meet them.
 init -1 python:
-    def lifestyle_coach_intro_requirement(the_person):
-        if the_person.location() is mall: # only trigger event when Dawn at mall
+    def lifestyle_coach_intro_requirement(person):
+        if person.location() is mall: # only trigger event when Dawn at mall
             return True
         return False
 
-    def lifestyle_coach_review_goals_requirement(the_person):
+    def lifestyle_coach_review_goals_requirement(person):
         if mc.location is mall:
             return True
         else:

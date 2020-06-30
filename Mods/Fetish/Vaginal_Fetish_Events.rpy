@@ -296,7 +296,7 @@ label SB_fetish_vaginal_event_label(the_person):
         $ mc.change_location(bedroom)
         $ mc.location.show_background()
         "Once you close your door, [the_person.possessive_title] quickly turns and embraces you."
-        "You wrap your arms around her and start to makeout."
+        "You wrap your arms around her and start to make out."
         $ the_person.draw_person(position = "kissing")
         "Your hands start exploring her body immediately while you start to kiss. [the_person.possessive_title] breaks off for a second and looks into your eyes."
         the_person.char "Thanks for inviting me over! I've been looking forward to this all day. Did you have anything in particular in mind for tonight?"

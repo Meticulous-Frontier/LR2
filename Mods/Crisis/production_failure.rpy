@@ -10,34 +10,34 @@ init 2 python:
                     return True
         return False
 
-    def production_failure_increase_sluttiness(the_person):
-        for person in the_person.work.people:
+    def production_failure_increase_sluttiness(person):
+        for person in person.work.people:
             person.add_situational_slut("Gassed",25,"The girls become extremely slutty.")
             person.change_slut_temp(3, add_to_log = False)
             person.change_slut_core(3, add_to_log = False)
 
-        mc.log_event("All " + the_person.work.formalName + " staff: +3 sluttiness","float_text_pink")
+        mc.log_event("All " + person.work.formalName + " staff: +3 sluttiness","float_text_pink")
         return
 
-    def production_failure_clear_situational_sluttiness(the_person):
-        for person in the_person.work.people:
+    def production_failure_clear_situational_sluttiness(person):
+        for person in person.work.people:
             person.clear_situational_slut("Gassed")
 
-        the_person.review_outfit()
+        person.review_outfit()
         return
 
-    def production_failure_change_obedience(the_person, amount):
-        for person in mc.business.production_team:
-            person.change_obedience(amount, add_to_log = False)
+    def production_failure_change_obedience(person, amount):
+        for team_member in mc.business.production_team:
+            team_member.change_obedience(amount, add_to_log = False)
 
-        mc.log_event("All " + the_person.work.formalName + " staff: " + str(amount) + " obedience","float_text_pink")
+        mc.log_event("All " + person.work.formalName + " staff: " + str(amount) + " obedience","float_text_pink")
         return
 
-    def production_failure_fix_the_problem(the_person):
-        for person in mc.business.production_team:
-            person.change_stats(happiness = -2, love = 2, add_to_log = False)
+    def production_failure_fix_the_problem(person):
+        for team_member in mc.business.production_team:
+            team_member.change_stats(happiness = -2, love = 2, add_to_log = False)
 
-        mc.log_event("All " + the_person.work.formalName + " staff: +2 love, -2 happiness","float_text_pink")
+        mc.log_event("All " + person.work.formalName + " staff: +2 love, -2 happiness","float_text_pink")
         return
 
     production_failure_action = ActionMod("Production Failure", production_failure_requirement, "production_failure_action_label",

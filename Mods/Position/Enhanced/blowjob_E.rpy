@@ -284,7 +284,7 @@ label blowjob_enhanced_kneel_mouth_cum(the_girl):
             "She keeps blowing you until you tense up and start to pump your load out into her mouth."
             "[the_girl.possessive_title] pulls her head back until just the tip of your cock is in her mouth and she begins to stroke you."
             "You erupt in orgasm into her greedy mouth. Her expert mouth milks you with every spurt."
-            "[the_girl.possessive_title] begins moaning uncontrollably around your spasming cock when her cum addicted brain registers her cum dosage."
+            "[the_girl.possessive_title] begins moaning uncontrollably around your twitching cock when her cum addicted brain registers her cum dosage."
             $ the_girl.cum_in_mouth()
             $ blowjob.redraw_scene(the_girl)
             $ the_girl.change_arousal(10)
@@ -337,7 +337,7 @@ label blowjob_enhanced_kneel_face_cum (the_girl):
             "You go to step back but [the_girl.possessive_title]'s grabs you by the cock with her hand."
             "[the_girl.possessive_title] lets you pull back until just the tip of your cock is in her mouth and she begins to stroke you."
             "You erupt in orgasm into her greedy mouth. Her expert mouth milks you with every spurt."
-            "[the_girl.possessive_title] begins moaning uncontrollably around your spasming cock when her cum addicted brain registers her cum dosage."
+            "[the_girl.possessive_title] begins moaning uncontrollably around your twitching cock when her cum addicted brain registers her cum dosage."
             $ the_girl.cum_in_mouth()
             $ the_girl.change_arousal(10)
             $ the_girl.call_dialogue("cum_mouth")

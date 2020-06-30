@@ -52,10 +52,10 @@ init 2 python:
         return True
 
     def one_on_one_update_supply_skill(person):
-        increase = renpy.random.randint(1,(mc.supply_skill - the_person.supply_skill))
-        the_person.supply_skill += increase
-        mc.log_event(the_person.title + ": +" + str(increase) + " Supply skill", "float_text_grey")
-        increase_job_affection(the_person, "supply work")
+        increase = renpy.random.randint(1,(mc.supply_skill - person.supply_skill))
+        person.supply_skill += increase
+        mc.log_event(person.title + ": +" + str(increase) + " Supply skill", "float_text_grey")
+        increase_job_affection(person, "supply work")
         if perk_system.has_ability_perk("Those Who Can't, Teach"):
             if mc.supply_skill < mc.max_work_skills:
                 mc.supply_skill += 1
