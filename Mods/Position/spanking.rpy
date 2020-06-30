@@ -62,7 +62,7 @@ label intro_spanking(the_girl, the_location, the_object):
         "You don't waste any time and put your hands on her ass, groping her cheeks."
         "You raise one hand and bring it down hard, give her ass a firm spank."
     else:
-        "Let's get these out of the way first."
+        mc.name "Let's get these out of the way first."
         $ the_girl.strip_outfit(exclude_upper = True, position = spanking.position_tag)
         "You put both hands on her ass, groping her cheeks."
         "You raise one hand and bring it down hard, give her ass a firm spank."
@@ -80,7 +80,7 @@ label taboo_break_spanking(the_girl, the_location, the_object):
         "You don't waste any time and put your hands on her ass, groping her cheeks."
         "You raise one hand and bring it down hard, give her ass a firm spank."
     else:
-        "Let's get these out of the way first."
+        mc.name "Let's get these out of the way first."
         $ the_girl.strip_outfit(exclude_upper = True, position = spanking.position_tag)
         "You put both hands on her ass, groping her cheeks."
         "You raise one hand and bring it down hard, give her ass a firm spank."
@@ -181,7 +181,7 @@ label transition_default_spanking(the_girl, the_location, the_object):
         "You don't waste any time and put your hands on her ass, groping her cheeks."
         "You raise one hand and bring it down hard, give her ass a firm spank."
     else:
-        "Let's get these out of the way first."
+        mc.name "Let's get these out of the way first."
         $ the_girl.strip_outfit(exclude_upper = True, position = spanking.position_tag)
         "You put both hands on her ass, groping her cheeks."
         "You raise one hand and bring it down hard, give her ass a firm spank."
