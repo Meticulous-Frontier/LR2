@@ -1,11 +1,11 @@
 ### PERSONALITY CHARACTERISTICS ###
 init 1300:
     python:
-        def candace_titles(the_person):
+        def candace_titles(person):
             return "Candi"
-        def candace_possessive_titles(the_person):
+        def candace_possessive_titles(person):
             return "Your Office Bimbo"
-        def candace_player_titles(the_person):
+        def candace_player_titles(person):
             valid_mc_titles = []
             valid_mc_titles.append(mc.name)
             valid_mc_titles.append("cutie")

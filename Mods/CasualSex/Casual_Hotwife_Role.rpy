@@ -24,33 +24,33 @@
 #     - Sex at her place
 
 init -2 python:
-    def casual_hotwife_get_a_drink_requirement(the_person):  #For now this should always return true. May be other conditions not to in the future#
-        if the_person.event_triggers_dict.get("hotwife_blowjob_text_enable", 0) == 1:
+    def casual_hotwife_get_a_drink_requirement(person):  #For now this should always return true. May be other conditions not to in the future#
+        if person.event_triggers_dict.get("hotwife_blowjob_text_enable", 0) == 1:
             return False
         if mc.location != downtown_bar:
             return "Not in Bar"
         return True
 
-    def casual_hotwife_bathroom_blowjob_requirement(the_person):
-        if the_person.event_triggers_dict.get("hotwife_progress", 0) < 1:
+    def casual_hotwife_bathroom_blowjob_requirement(person):
+        if person.event_triggers_dict.get("hotwife_progress", 0) < 1:
             return False
-        if the_person.event_triggers_dict.get("hotwife_blowjob_text_enable", 0) == 1:
+        if person.event_triggers_dict.get("hotwife_blowjob_text_enable", 0) == 1:
             return False
         if mc.location != downtown_bar:
             return "Not in Bar"
         elif mc.charisma < 4:
             return "Requires higher Charisma"
-        elif the_person.effective_sluttiness() < 25:
+        elif person.effective_sluttiness() < 25:
             return "Requires higher sluttiness"
-        elif the_person.event_triggers_dict.get("hotwife_blowjob_enable", 0) == 1:
+        elif person.event_triggers_dict.get("hotwife_blowjob_enable", 0) == 1:
             return True
         else:
             return "Grab a drink first"
         return False
 
-    def casual_hotwife_blowjob_text_requirement(the_person):
-        if the_person.event_triggers_dict.get("hotwife_blowjob_text_enable", 0) == 1:
-            if day <= the_person.event_triggers_dict.get("hotwife_blowjob_ask_pictures", 0):
+    def casual_hotwife_blowjob_text_requirement(person):
+        if person.event_triggers_dict.get("hotwife_blowjob_text_enable", 0) == 1:
+            if day <= person.event_triggers_dict.get("hotwife_blowjob_ask_pictures", 0):
                 return "Wait a few days"
             if time_of_day < 3:
                 return True
@@ -58,34 +58,34 @@ init -2 python:
                 return "Ask her another time"
         return False
 
-    def casual_hotwife_dancing_sex_requirement(the_person):
-        if the_person.event_triggers_dict.get("hotwife_blowjob_text_enable", 0) == 1:
+    def casual_hotwife_dancing_sex_requirement(person):
+        if person.event_triggers_dict.get("hotwife_blowjob_text_enable", 0) == 1:
             return False
-        if the_person.event_triggers_dict.get("hotwife_progress", 0) < 2:
+        if person.event_triggers_dict.get("hotwife_progress", 0) < 2:
             return False
 
         if mc.location != downtown_bar:
             return "Not in Bar"
         elif mc.charisma < 5:
             return "Requires higher Charisma"
-        elif the_person.effective_sluttiness() < 40:
+        elif person.effective_sluttiness() < 40:
             return "Requires higher sluttiness"
-        elif the_person.event_triggers_dict.get("hotwife_dancing_enable", 0) == 1:
+        elif person.event_triggers_dict.get("hotwife_dancing_enable", 0) == 1:
             return True
         else:
             return "Grab a drink first"
         return False
 
-    def casual_hotwife_sex_invite_requirement(the_person):
-        if the_person.event_triggers_dict.get("hotwife_progress", 0) < 3:
+    def casual_hotwife_sex_invite_requirement(person):
+        if person.event_triggers_dict.get("hotwife_progress", 0) < 3:
             return False
         elif mc.charisma < 6:
             return "Requires higher Charisma"
-        elif the_person.effective_sluttiness() < 50:
+        elif person.effective_sluttiness() < 50:
             return "Requires higher sluttiness"
-        elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 4:
+        elif person.event_triggers_dict.get("hotwife_progress", 0) == 4:
             return "Already invited you over!"
-        elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 3:
+        elif person.event_triggers_dict.get("hotwife_progress", 0) == 3:
             return True
         return False
 
@@ -94,9 +94,9 @@ init -2 python:
             return True
         return False
 
-    def casual_hotwife_home_sex_requirement(the_person):
-        if the_person.event_triggers_dict.get("hotwife_progress", 0) == 5:
-            if mc.location == the_person.home:
+    def casual_hotwife_home_sex_requirement(person):
+        if person.event_triggers_dict.get("hotwife_progress", 0) == 5:
+            if mc.location == person.home:
                 return True
             else:
                 return "Only at her place."
@@ -107,9 +107,9 @@ init -2 python:
             return True
         return False
 
-    def add_hotwife_ghost_action(the_person):
+    def add_hotwife_ghost_action(person):
         remove_mandatory_crisis_list_action("casual_hotwife_ghost_label")
-        casual_hotwife_ghost = Action("Casual hotwife Ghosts you", casual_hotwife_ghost_requirement, "casual_hotwife_ghost_label", args = the_person)
+        casual_hotwife_ghost = Action("Casual hotwife Ghosts you", casual_hotwife_ghost_requirement, "casual_hotwife_ghost_label", args = person)
         mc.business.mandatory_crises_list.append(casual_hotwife_ghost)
         return
 
@@ -146,8 +146,8 @@ init -1 python:
 #*************Mandatory Crisis******************#
 
 init 1 python:
-    def add_hotwife_sex_at_her_place_action(the_person):
-        casual_hotwife_her_place.args = [the_person]    # set the current person as action argument
+    def add_hotwife_sex_at_her_place_action(person):
+        casual_hotwife_her_place.args = [person]    # set the current person as action argument
         mc.business.mandatory_crises_list.append(casual_hotwife_her_place) # TODO Find out if this breaks if two girls hit this stage a the same point in gameplay
         return
 
@@ -771,25 +771,25 @@ init 1301 python:              #Because Vren Init personality functionns at 1300
 
 
 
-    def hotwife_titles(the_person):
+    def hotwife_titles(person):
         valid_titles = []
-        valid_titles.append(the_person.name)
-        if the_person.effective_sluttiness() > 40:
+        valid_titles.append(person.name)
+        if person.effective_sluttiness() > 40:
             valid_titles.append("Slutwife")
             valid_titles.append("Cuckold Wife")
         return valid_titles
 
-    def hotwife_possessive_titles(the_person):
-        valid_possessive_titles = [the_person.title]
+    def hotwife_possessive_titles(person):
+        valid_possessive_titles = [person.title]
 
-        if the_person.effective_sluttiness() > 60:
+        if person.effective_sluttiness() > 60:
             valid_possessive_titles.append("The Slutwife")
             valid_possessive_titles.append("Your Swinging Slut")
 
-        if the_person.effective_sluttiness() > 100:
+        if person.effective_sluttiness() > 100:
             valid_possessive_titles.append("The Bar Cumdump")
         return valid_possessive_titles
-    def hotwife_player_titles(the_person):
+    def hotwife_player_titles(person):
         return mc.name
 
     hotwife_personality = Personality("hotwife", default_prefix = "wild",

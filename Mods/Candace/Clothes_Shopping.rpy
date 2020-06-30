@@ -69,8 +69,7 @@ label candace_goes_clothes_shopping_label(the_person):
     "She thinks about it for a bit."
     the_person.char "That's really tempting... but, you know, back with my... ex... he used to help me pick out stuff to wear. I'm not sure I know what even looks good on me anymore!"
     mc.name "Umm, honestly, with a body like yours, just about anything looks good."
-    $ the_person.change_happiness(2)
-    $ the_person.change_love(2)
+    $ the_person.change_stats(happiness = 2, love = 2)
     the_person.char "Aww, you charmer! I don't know, I just wish I had someone to go with me. A second set of eyes on everything, you know?"
     "Hmm... you COULD volunteer... you've never been clothes shopping with a woman before. All the tropes make it sound so boring. But, with a girl like [the_person.title], how boring could it be?"
     "You ponder it silently for a bit."
@@ -261,8 +260,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                 $ renpy.scene("Active")
                 "She closes the door. Damn, you must have gone a little overboard with that outfit..."
                 the_person.char "I'm going to change back into, you know, DECENT clothes."
-                $ the_person.change_happiness(-5)
-                $ the_person.change_slut_temp(5)
+                $ the_person.change_stats(happiness = -5, slut_temp = 5)
             else:
                 the_person.char "Alright, what do you think?"
                 $ the_person.draw_person(position = "back_peek")
@@ -320,15 +318,13 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                 "Looks great!":
                     mc.name "The color and cut looks great on you!"
                     the_person.char "Aww, thank you! Okay that's enough peaking..."
-                    $ the_person.change_slut_temp(2)
-                    $ the_person.change_happiness(2)
+                    $ the_person.change_stats(slut_temp = 2, happiness = 2)
                     $ count += 1
                     $ the_person.wardrobe.add_outfit(outfits[3])
                 "Not your style":
                     mc.name "Your body looks great, but this particular cut isn't flattering."
                     the_person.char "Yeah I was afraid of that. Thank you for your honesty! Okay that's enough peaking..."
-                    $ the_person.change_slut_temp(2)
-                    $ the_person.change_obedience(2)
+                    $ the_person.change_stats(slut_temp = 2, obedience = 2)
             $ renpy.scene("Active")
             $ the_person.apply_planned_outfit()
             "In another few moments, [the_person.title] emerges from the dressing room."
@@ -376,8 +372,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                                     #TODO chance if there is anyone else at the clothing store to get noticed.
                                     if the_report.get("girl orgasms", 0) > 0:
                                         the_person.char "Oh my god, I can't believe how good that was. I hope no one heard me cumming..."
-                                        $ the_person.change_love(5)
-                                        $ the_person.change_happiness(10)
+                                        $ the_person.change_stats(love = 5, happiness = 10)
                                     "When you finish, you sneak back out of the changing room. You turn and check her out for a moment."
                                     the_person.char "I'll be out in a minute..."
                                     "She closes the door slowly."
@@ -423,8 +418,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                                     $ the_report = _return
                                     if the_report.get("girl orgasms", 0) > 0:
                                         the_person.char "Oh my god, I can't believe how good that was. I hope no one heard me cumming..."
-                                        $ the_person.change_love(5)
-                                        $ the_person.change_happiness(10)
+                                        $ the_person.change_stats(love = 5, happiness = 10)
                                     "When you finish, you sneak back out of the changing room. You turn and check her out for a moment."
                                     #TODO chance if there is anyone else at the clothing store to get noticed.
                                     the_person.char "I'll be out in a minute..."
@@ -455,14 +449,12 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                                 "Too risky\n{color=#ff0000}{size=18}Too aroused to say no{/size}{/color} (disabled)" if mc.arousal > 50:
                                     pass
 
-                    $ the_person.change_slut_temp(2)
-                    $ the_person.change_happiness(2)
+                    $ the_person.change_stats(slut_temp = 2, happiness = 2)
                     $ the_person.wardrobe.add_outfit(outfits[3])
                 "Not your style":
                     mc.name "Your body looks great, but this particular cut isn't flattering."
                     the_person.char "Yeah I was afraid of that. Thank you for your honesty!"
-                    $ the_person.change_slut_temp(2)
-                    $ the_person.change_obedience(2)
+                    $ the_person.change_stats(slut_temp = 2, obedience = 2)
                     "You gawk for another moment, but eventually the door closes and [the_person.title] begins changing back into her normal outfit."
             $ renpy.scene("Active")
             $ the_person.apply_planned_outfit()

@@ -10,7 +10,7 @@
 #  Other notes: She calls it off if she "catches feels" (love > 50). Will start warning player at > 40 love
 
 init -2 python:
-    def casual_athlete_get_to_know_requirement(the_person):
+    def casual_athlete_get_to_know_requirement(person):
         if mc.max_energy >= 110:
             if mc.location == gym:
                 return True
@@ -19,16 +19,16 @@ init -2 python:
         else:
             return "Requires 110 maximum energy"
 
-    def casual_athlete_phase_one_requirement(the_person):
-        if the_person.event_triggers_dict.get("athlete_progress", 0) < 1:
+    def casual_athlete_phase_one_requirement(person):
+        if person.event_triggers_dict.get("athlete_progress", 0) < 1:
             return False
-        if the_person.love > 50:
+        if person.love > 50:
             return "She is uneasy about falling for you."
-        if the_person.event_triggers_dict.get("athlete_workout", 0) < 1:
+        if person.event_triggers_dict.get("athlete_workout", 0) < 1:
             return False
         if time_of_day < 4:
             if mc.max_energy >= 120:
-                if the_person.effective_sluttiness() < 20:
+                if person.effective_sluttiness() < 20:
                     return "Requires 20 Sluttiness"
                 elif mc.location == gym:
                     return True
@@ -38,16 +38,16 @@ init -2 python:
                 return "Requires 120 maximum energy"
         return False
 
-    def casual_athlete_phase_two_requirement(the_person):
-        if the_person.event_triggers_dict.get("athlete_progress", 0) < 2:
+    def casual_athlete_phase_two_requirement(person):
+        if person.event_triggers_dict.get("athlete_progress", 0) < 2:
             return False
-            if the_person.event_triggers_dict.get("athlete_progress", 0) > 3:
+            if person.event_triggers_dict.get("athlete_progress", 0) > 3:
                 return False
-        if the_person.love > 50:
+        if person.love > 50:
             return "She is uneasy about falling for you."
         if time_of_day < 4:
             if mc.max_energy >= 140:
-                if the_person.effective_sluttiness() < 40:
+                if person.effective_sluttiness() < 40:
                     return "Requires 40 Sluttiness"
                 return True
             else:
@@ -60,17 +60,17 @@ init -2 python:
                 return True
         return False
 
-    def casual_athlete_buy_protein_shake_requirement(the_person):
-        if the_person.event_triggers_dict.get("athlete_protein", 0) < 1:
+    def casual_athlete_buy_protein_shake_requirement(person):
+        if person.event_triggers_dict.get("athlete_protein", 0) < 1:
             return False
         if mc.location == gym:
             return True
         else:
             return "You need to be at the Gym"
 
-    def casual_athlete_house_call_requirement(the_person):
-        if the_person.event_triggers_dict.get("athlete_progress", 0) == 4:
-            if mc.location == the_person.home:
+    def casual_athlete_house_call_requirement(person):
+        if person.event_triggers_dict.get("athlete_progress", 0) == 4:
+            if mc.location == person.home:
                 return True
         return False
 
@@ -79,9 +79,9 @@ init -2 python:
             return True
         return False
 
-    def add_casual_athlete_ghost_action(the_person):
+    def add_casual_athlete_ghost_action(person):
         remove_mandatory_crisis_list_action("casual_athlete_ghost_label")
-        casual_athlete_ghost = Action("Casual Athlete Ghosts you", casual_athlete_ghost_requirement, "casual_athlete_ghost_label", args = the_person)
+        casual_athlete_ghost = Action("Casual Athlete Ghosts you", casual_athlete_ghost_requirement, "casual_athlete_ghost_label", args = person)
         mc.business.mandatory_crises_list.append(casual_athlete_ghost)
         return
 
@@ -102,8 +102,8 @@ init -1 python:
 
 #*************Mandatory Crisis******************#
 init 1 python:
-    def add_casual_athlete_race_crisis(the_person):
-        casual_athlete_race_crisis.args = [the_person]    # set the current person as action argument
+    def add_casual_athlete_race_crisis(person):
+        casual_athlete_race_crisis.args = [person]    # set the current person as action argument
         mc.business.mandatory_crises_list.append(casual_athlete_race_crisis) #Add race crisis    TODO Find out if this breaks if two girls hit this stage a the same point in gameplay
         return
 
@@ -622,28 +622,28 @@ label casual_athlete_ghost_label(the_person):
 
 init 1301 python:              #Because Vren Init personality functions at 1300
 
-    def athlete_titles(the_person):
+    def athlete_titles(person):
         valid_titles = []
-        valid_titles.append(the_person.name)
-        if the_person.effective_sluttiness() > 40:
+        valid_titles.append(person.name)
+        if person.effective_sluttiness() > 40:
             valid_titles.append("College Athlete")
             valid_titles.append("Cardio Bunny")
-        if the_person.effective_sluttiness() > 60:
+        if person.effective_sluttiness() > 60:
             valid_titles.append("Slutty Athlete")
         return valid_titles
 
-    def athlete_possessive_titles(the_person):
-        valid_possessive_titles = ["Your gym girl",the_person.title]
+    def athlete_possessive_titles(person):
+        valid_possessive_titles = ["Your gym girl",person.title]
 
-        if the_person.effective_sluttiness() > 60:
+        if person.effective_sluttiness() > 60:
             valid_possessive_titles.append("Your gym slut")
 
-        if the_person.effective_sluttiness() > 80:
+        if person.effective_sluttiness() > 80:
             valid_possessive_titles.append("The gym cumdump")
             valid_possessive_titles.append("The gym bicycle")
         return valid_possessive_titles
 
-    def athlete_player_titles(the_person):
+    def athlete_player_titles(person):
         return mc.name
 
     athlete_personality = Personality("athlete", default_prefix = "introvert",
