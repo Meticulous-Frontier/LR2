@@ -124,6 +124,16 @@ init 5 python:
                 #renpy.say("", "Calling custom taboo break: " + transition_scene)
                 renpy.call(transition_scene, person, the_location, the_object)
 
+            transition_scene = new_position.transition_default
+            for position_tuple in self.transitions:
+                if position_tuple[0] == new_position: ##Does the position match the one we are looking for?
+                    transition_scene = position_tuple[1] ##If so, set it's label as the one we are going to change to.
+
+            #renpy.say("", "Default transition scene is: " + transition_scene)
+            if renpy.has_label(transition_scene):
+                #renpy.say("", "Calling default transition scene: " + transition_scene)
+                renpy.call(transition_scene, person, the_location, the_object)
+
             #renpy.say("", "Default taboo break function: " + new_position.taboo_break_description)
             if renpy.has_label(new_position.taboo_break_description):
                 #renpy.say("", "Calling default taboo break: " + new_position.taboo_break_description)
