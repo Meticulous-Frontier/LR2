@@ -7,7 +7,8 @@ init 2 python:
     relationship_worsen_stats = {
         "Married" : 90,
         "Fiancée" : 65,
-        "Girlfriend": 40
+        "Girlfriend": 40,
+        "Single": 25,
     }
 
     def so_relationship_improve_requirement():
