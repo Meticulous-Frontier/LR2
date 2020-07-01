@@ -1324,7 +1324,7 @@ label HR_director_headhunt_initiate_label(the_person):
                 days_to_find += 1
             if get_HR_director_tag("recruit_slut", None) is not None:
                 days_to_find += 1
-            if get_HR_director_tag("recruit_kids", 0) != 0:
+            if get_HR_director_tag("recruit_kids", None) is not None:
                 days_to_find += 1
             if get_HR_director_tag("recruit_height", None) is not None:
                 days_to_find += 1
