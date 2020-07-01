@@ -1,84 +1,84 @@
 # Contains all of the information related to characters being pregnant.
 init 1 python:
-    def test_silent_pregnancy(the_person, progress_days):
-        silent_become_pregnant(the_person, progress_days)
+    def test_silent_pregnancy(person, progress_days):
+        silent_become_pregnant(person, progress_days)
         return
 
 init -1 python:
     silent_pregnant_role = Role("Pregnant", [], hidden = True)
-    def silent_pregnant_announce_requirement(the_person, start_day):
+    def silent_pregnant_announce_requirement(person, start_day):
         if day >= start_day:
             return True
 
-    def silent_pregnant_transform_requirement(the_person):
-        if day >= the_person.event_triggers_dict.get("preg_transform_day", 0):
+    def silent_pregnant_transform_requirement(person):
+        if day >= person.event_triggers_dict.get("preg_transform_day", 0):
             return True
         return False
 
-    def silent_pregnant_tits_requirement(the_person):
-        if day >= the_person.event_triggers_dict.get("preg_tits_date", 0):
+    def silent_pregnant_tits_requirement(person):
+        if day >= person.event_triggers_dict.get("preg_tits_date", 0):
             return True
 
         return False
 
-    def silent_pregnant_tits_announcement_requirement(the_person):
+    def silent_pregnant_tits_announcement_requirement(person):
         return True
 
-    def silent_become_pregnant(the_person, progress_days): # Called when a girl is knocked up. progress days is how far she is already when this gets called.
-        the_person.event_triggers_dict["preg_accident"] = the_person.on_birth_control # If a girl is on birth control the pregnancy is an accident.
-        the_person.event_triggers_dict["preg_start_date"] = day - progress_days
-        the_person.event_triggers_dict["preg_tits_date"] = (day - progress_days) + 14 + renpy.random.randint(0,5)
-        the_person.event_triggers_dict["preg_transform_day"] = ((day + 30) - progress_days) + renpy.random.randint(0,10)
-        the_person.event_triggers_dict["preg_finish_announce_day"] = ((day + 90) - progress_days) + renpy.random.randint(0,10)
-        the_person.event_triggers_dict["pre_preg_tits"] = the_person.tits
+    def silent_become_pregnant(person, progress_days = 0): # Called when a girl is knocked up. progress days is how far she is already when this gets called.
+        person.event_triggers_dict["preg_accident"] = person.on_birth_control # If a girl is on birth control the pregnancy is an accident.
+        person.event_triggers_dict["preg_start_date"] = day - progress_days
+        person.event_triggers_dict["preg_tits_date"] = (day - progress_days) + 14 + renpy.random.randint(0,5)
+        person.event_triggers_dict["preg_transform_day"] = ((day + 30) - progress_days) + renpy.random.randint(0,10)
+        person.event_triggers_dict["preg_finish_announce_day"] = ((day + 90) - progress_days) + renpy.random.randint(0,10)
+        person.event_triggers_dict["pre_preg_tits"] = person.tits
 
 
         #Add actions based on whether or not we are already passed that date. If so, run applicable transformations.
-        if day > the_person.event_triggers_dict.get("preg_start_date", 0) + 15:
-            the_person.event_triggers_dict["preg_knows"] = True
+        if day > person.event_triggers_dict.get("preg_start_date", 0) + 15:
+            person.event_triggers_dict["preg_knows"] = True
         else:
             silent_preg_announce_action = Action("Pregnancy Announcement", silent_pregnant_announce_requirement, "silent_pregnant_announce", requirement_args = day + renpy.random.randint(12,18))
-            the_person.on_room_enter_event_list.append(silent_preg_announce_action)
+            person.on_room_enter_event_list.append(silent_preg_announce_action)
 
-        if day > the_person.event_triggers_dict.get("preg_tits_date", 0):
-            the_person.event_triggers_dict["preg_knows"] = True
-            the_person.tits = get_larger_tits(the_person.tits) #Her tits start to swell.
-            the_person.personal_region_modifiers["breasts"] = the_person.personal_region_modifiers["breasts"] + 0.1
+        if day > person.event_triggers_dict.get("preg_tits_date", 0):
+            person.event_triggers_dict["preg_knows"] = True
+            person.tits = get_larger_tits(person.tits) #Her tits start to swell.
+            person.personal_region_modifiers["breasts"] = person.personal_region_modifiers["breasts"] + 0.1
         else:
             silent_preg_tits_action = Action("Pregnancy Tits Grow", silent_pregnant_tits_requirement, "silent_pregnant_tits_start")
-            the_person.on_room_enter_event_list.append(silent_preg_tits_action)
+            person.on_room_enter_event_list.append(silent_preg_tits_action)
 
-        if day > the_person.event_triggers_dict.get("preg_transform_day", 0):
-            the_person.event_triggers_dict["pre_preg_body"] = the_person.body_type
-            the_person.body_type = "standard_preg_body"
-            the_person.tits = get_larger_tits(the_person.tits) # Her tits get even larger
-            the_person.personal_region_modifiers["breasts"] = the_person.personal_region_modifiers["breasts"] + 0.1 #As her tits get larger they also become softer, unlike large fake tits. (Although even huge fake tits get softer)
-            the_person.lactation_sources += 1
+        if day > person.event_triggers_dict.get("preg_transform_day", 0):
+            person.event_triggers_dict["pre_preg_body"] = person.body_type
+            person.body_type = "standard_preg_body"
+            person.tits = get_larger_tits(person.tits) # Her tits get even larger
+            person.personal_region_modifiers["breasts"] = person.personal_region_modifiers["breasts"] + 0.1 #As her tits get larger they also become softer, unlike large fake tits. (Although even huge fake tits get softer)
+            person.lactation_sources += 1
 
-            silent_preg_finish_announce_action = Action("Pregnancy Finish Announcement", silent_preg_finish_announcement_requirement, "silent_pregnant_finish_announce", args = the_person, requirement_args = the_person)
+            silent_preg_finish_announce_action = Action("Pregnancy Finish Announcement", silent_preg_finish_announcement_requirement, "silent_pregnant_finish_announce", args = person, requirement_args = person)
             mc.business.mandatory_crises_list.append(silent_preg_finish_announce_action)
         else:
-            silent_preg_transform_action = Action("Pregnancy Transform", silent_pregnant_transform_requirement, "silent_pregnant_transform")
-            the_person.on_room_enter_event_list.append(silent_preg_transform_action) #This event adds an announcement event the next time you enter the same room as the girl.
+            silent_preg_transform_action = Action("Pregnancy Transform", silent_pregnant_transform_requirement, "silent_pregnant_transform", args = person, requirement_args = person)
+            mc.business.mandatory_morning_crises_list.append(silent_preg_transform_action)
 
-        the_person.add_role(silent_pregnant_role)
+        person.add_role(silent_pregnant_role)
 
-    def silent_preg_transform_announce_requirement(the_person):
+    def silent_preg_transform_announce_requirement(person):
         return True
 
-    def silent_preg_finish_announcement_requirement(the_person):
-        if the_person == None:
+    def silent_preg_finish_announcement_requirement(person):
+        if person == None:
             return True
-        if day >= the_person.event_triggers_dict.get("preg_finish_announce_day", 0):
+        if day >= person.event_triggers_dict.get("preg_finish_announce_day", 0):
             return True
         return False
 
-    def silent_preg_finish_requirement(the_person, trigger_day):
+    def silent_preg_finish_requirement(person, trigger_day):
         if day >= trigger_day:
             return True
         return False
 
-    def silent_tit_shrink_requirement(the_person, trigger_day):
+    def silent_tit_shrink_requirement(person, trigger_day):
         if day >= trigger_day:
             return True
         return False
