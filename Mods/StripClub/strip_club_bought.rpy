@@ -123,7 +123,7 @@ label strip_club_evaluate_stripper(the_person):
     else:
         "As the music builds, [the_person.title]'s dance becomes more energetic. She runs her hands over her tight body, accentuating her curves."
     $ the_person.draw_person(position = get_random_from_list(cousin_strip_pose_list), the_animation = blowjob_bob, animation_effect_strength = 1.5)
-    "Her music hits it's crescendo and her dancing does the same. [the_person.title] holds onto the pole in the middle of the stage and spins herself around it."
+    "Her music hits its crescendo and her dancing does the same. [the_person.title] holds onto the pole in the middle of the stage and spins herself around it."
     $ the_person.draw_person(position = "doggy", the_animation = ass_bob, animation_effect_strength = 1.5)
     if the_person.outfit.vagina_visible():
         "As the song comes to an end, the dancer lowers herself to all fours, showing off her ass and pussy."
@@ -132,7 +132,7 @@ label strip_club_evaluate_stripper(the_person):
     $ the_person.draw_person()
     "She stands up and gives you a coy smile, hoping for your final approval."
     $ the_person.draw_person(position = "walking_away")
-    "[the_person.title] stay like that and join me down here, letting you watch her body when she walk back to you and the other girls."
+    "You watch [the_person.title]'s body as she walks offstage to rejoin you and the other girls."
     $ the_person.draw_person(emotion = "happy")
     the_person.char "So [mc.name] what do you think, am I good enough to be one of your girls?"
     "She puts a hand on your shoulder, pressing her bosom against your body..."
