@@ -270,7 +270,7 @@ label starbuck_name_the_new_club_label(the_person):
 
     the_person.char "Just a second, [the_person.mc_title]. What will you call your new strip club?"
 
-    $ name_string = str(renpy.input("New Strip Club Name: ", strip_club_owner + "'s Gentlemens Club"))
+    $ name_string = str(renpy.input("New Strip Club Name: ", strip_club_owner + "'s Gentlemen's Club"))
     $ strip_club.name = name_string
     $ strip_club.formalName = name_string
 
