@@ -62,7 +62,7 @@ init 5 python:
     morning_crisis_chance = morning_crisis_base_chance
 
     # some crisis events should always trigger (not tracked in crisis tracker and always available when is_action_enabled())
-    excluded_crisis_tracker_events = [work_relationship_change_crisis, so_relationship_improve_crisis, so_relationship_worsen_crisis]
+    excluded_crisis_tracker_events = [work_relationship_change_crisis, sister_phone_crisis_action, mom_selfie_crisis, late_for_work_action, unisex_restroom_crisis_action]
 
     mandatory_advance_time = False
 
