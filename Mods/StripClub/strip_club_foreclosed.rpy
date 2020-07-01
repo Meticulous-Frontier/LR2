@@ -238,7 +238,7 @@ label club_foreclosed_strip_label(the_person):
                 $ the_person.apply_planned_outfit()
                 $ the_person.change_slut_temp(10)
                 $ the_person.draw_person(emotion = "happy", position = "stand4")
-                "Thank you for the money, see you!"
+                the_person.char "Thank you for the money, see you!"
                 $ the_person.draw_person(position = "walking_away")
                 "Happily [the_person.title] leaves the room and closes the door behind her."
             elif the_person.effective_sluttiness("bare_tits") <= 40: # She'll show tits and panties.
@@ -280,7 +280,7 @@ label club_foreclosed_strip_label(the_person):
                 $ the_person.apply_planned_outfit()
                 $ the_person.change_slut_temp(10)
                 $ the_person.draw_person(emotion = "happy", position = "stand4")
-                "Thank you for the money, see you !"
+                the_person.char "Thank you for the money, see you!"
                 $ the_person.draw_person(position = "walking_away")
                 "Happily [the_person.title] leaves the room and closes the door behind her."
             else: #She'll get completely naked.
@@ -322,7 +322,7 @@ label club_foreclosed_strip_label(the_person):
                 $ the_person.apply_planned_outfit()
                 $ the_person.change_slut_temp(10)
                 $ the_person.draw_person(emotion = "happy", position = "stand4")
-                "Thank you for the money, see you!"
+                the_person.char "Thank you for the money, see you!"
                 $ the_person.draw_person(position = "walking_away")
                 "Happily [the_person.title] leaves the room and closes the door behind her."
 

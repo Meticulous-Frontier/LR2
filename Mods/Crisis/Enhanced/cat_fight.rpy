@@ -118,7 +118,7 @@ label cat_fight_crisis_enhanced_label():
             winner.char "Hear that? We're going to have to sort this out, right here. Right now."
             "[winner.title] takes a step towards [loser.title], invading her personal space."
             $ scene_manager.update_actor(loser, position = "stand5")
-            loser.char "What, is that suppose to scare me. Back up."
+            loser.char "What, is that supposed to scare me? Back up."
             "[loser.title] plants a hand on [winner.title]'s chest and shoves her backwards. [winner.title] stumbles a step and bumps into a desk behind her."
             $ scene_manager.update_actor(loser, position = "stand4")
             $ scene_manager.update_actor(winner, position = "stand5")
