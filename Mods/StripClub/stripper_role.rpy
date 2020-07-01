@@ -349,7 +349,7 @@ label stripper_performance_review_label(the_person):
                     $ the_person.clear_situational_obedience("seduction_approach")
                     if the_report.get("girl orgasms", 0) > 0: #We made her cum! Congratulations!
                         $ the_person.change_stats(happiness = 5, slut_temp = 2, love = 3)
-                        the_person.char "You just can't resist pleasing me, can you [the_person.mc_title]? I thought I wasn't suppose to cum?"
+                        the_person.char "You just can't resist pleasing me, can you [the_person.mc_title]? I thought I wasn't supposed to cum?"
                         "[the_person.title] seems smug about her orgasmic victory."
                     elif the_report.get("end arousal", 0) >= 80:
                         $ the_person.change_stats(happiness = 5, slut_temp = 5, obedience = 5)
