@@ -455,14 +455,9 @@ init -1 python:
             renpy.call(self.outro,the_person_one, the_person_two, the_location, the_object, round, current_girl)
 
         def call_transition(self,the_position, the_person_one, the_person_two, the_location, the_object, round, current_girl):
-            if the_position is None:
-                transition_scene = self.transition_default #If we don't care what position we started in we can call the transition "in reverse" by setting the position to None and using our own default.
-            else:
-                transition_scene = the_position.transition_default
-                for position_tuple in self.transitions:
-                    if position_tuple[0] == the_position: ##Does the position match the one we are looking for?
-                        transition_scene = position_tuple[1] ##If so, set it's label as the one we are going to change to.
-            renpy.call(transition_scene, the_person, the_location, the_object)
+            transition_scene = self.transition_default
+            if renpy.has_label(transition_scene):
+                renpy.call(transition_scene, the_person_one, the_person_two, the_location, the_object, round, current_girl)
 
         def call_strip(self, the_clothing, the_person_one, the_person_two, the_location, the_object, round, current_girl):
             renpy.call(self.strip_description, the_clothing, the_person_one, the_person_two, the_location, the_object, round, current_girl)
