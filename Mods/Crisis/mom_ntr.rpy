@@ -1361,7 +1361,7 @@ label mom_ntr_mod_action_label:
         while man_name == man_name2: ## Just to make sure that names don't match or it will look stupid
             $ man_name2 = get_random_male_name()
         $ wife_name2 = get_random_name()
-        while wife_name2 == the_person.name or wife_name == wife_name2): ## Just to avoid stupid duplications
+        while wife_name2 == the_person.name or wife_name == wife_name2: ## Just to avoid stupid duplications
             $ wife_name2 = get_random_name()
 
         ## let's create wives names here, just not to insert that in every scene it is required
