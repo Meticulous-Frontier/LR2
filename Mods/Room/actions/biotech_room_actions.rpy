@@ -60,8 +60,8 @@ init 3 python:
             clone_age = person.age
 
         clone = make_person(name = clone_name, last_name = clone_last_name, age = clone_age, body_type = person.body_type, face_style = person.face_style, tits = person.tits, height = person.height, hair_colour = person.hair_colour, hair_style = person.hair_style, skin = person.skin, eyes = person.eyes, job = None,
-            personality = person.personality, custom_font = None, name_color = None, dial_color = None, starting_wardrobe = person.wardrobe, stat_array = None, skill_array = None, sex_array = None,
-            start_sluttiness = person.sluttiness, start_obedience = person.obedience, start_happiness = person.happiness, start_love = person.love, start_home = dungeon, title = "Clone", possessive_title = "Your creation", mc_title = "Creator", relationship = "Single", kids = 0, force_random = True)
+            personality = person.personality, custom_font = None, name_color = None, dial_color = None, starting_wardrobe = person.wardrobe, stat_array = [person.charisma, person.int, person.focus], skill_array = [person.hr_skill, person.market_skill, person.research_skill, person.production_skill, person.supply_skill], sex_array = [person.sex_skills["Foreplay"], person.sex_skills["Oral"], person.sex_skills["Vaginal"], person.sex_skills["Anal"]],
+            start_sluttiness = person.sluttiness, start_obedience = person.obedience - 100, start_happiness = person.happiness, start_love = person.love, start_home = dungeon, title = "Clone", possessive_title = "Your creation", mc_title = "Creator", relationship = "Single", kids = 0, forced_sexy_opinions = [["being submissive", 2 , True]] , force_random = True)
 
         clone.set_schedule([0,1,2,3,4], dungeon)
         clone.add_role(clone_role)
