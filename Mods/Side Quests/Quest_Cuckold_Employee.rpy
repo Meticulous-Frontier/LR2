@@ -515,7 +515,8 @@ label quest_cuckold_employee_breeding_session_label(the_person):
     $ the_report = _return
     if the_report.get("guy orgasms", 0) > 0 and the_person.has_creampie_cum():
         the_person.char "Oh god, every risky load feels even better than the last..."
-        $ the_person.change_stats(love = 10, happiness = 10, obedience = 10)
+        $ the_person.change_love(10, max_modified_to = 80)
+        $ the_person.change_stats(happiness = 10, obedience = 10)
         "You gently rub her stomach."
         mc.name "Your hungry cunt feels like its sucking the cum out of me. It's amazing, honestly."
         mc.name "A little part of me is hoping it doesn't take right away and we have to keep trying for a while."
