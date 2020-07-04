@@ -210,7 +210,7 @@ label ophelia_gets_dumped_label(the_person):
     $ the_person.change_happiness(-50)
     $ the_person.event_triggers_dict["dump_witnessed"] = 1
     $ the_person.event_triggers_dict["dump_day"] = day
-    $ the_person.on_room_enter_event_list.append(ophelia_coworker_conversation_overhear)
+    $ the_person.add_unique_on_room_enter_event(ophelia_coworker_conversation_overhear)
     return
 
 label ophelia_coworker_conversation_overhear_label(the_person):
@@ -231,7 +231,7 @@ label ophelia_coworker_conversation_overhear_label(the_person):
     # Should this just be a python block?
     $ the_person.event_triggers_dict["coworker_overhear"] = 1
     $ mc.business.mandatory_crises_list.append(ophelia_learn_chocolate_love)
-    $ the_person.on_room_enter_event_list.append(ophelia_ex_bf_phone_overhear)
+    $ the_person.add_unique_on_room_enter_event(ophelia_ex_bf_phone_overhear)
     $ del ex_name
     return
 
@@ -477,7 +477,7 @@ label ophelia_make_blowjob_pics_label():
     "You say goodbye and then walk out of the salon. You wonder what her ex will think when he gets those pictures..."
     $ the_person.event_triggers_dict["pics_to_ex_plan_made"] = 3
     $ the_person.event_triggers_dict["pics_to_ex_sent"] = 1
-    $ the_person.on_room_enter_event_list.append(ophelia_blowjob_pics_review)
+    $ the_person.add_unique_on_room_enter_event(ophelia_blowjob_pics_review)
     return
 
 label ophelia_blowjob_pics_review_label(the_person):
@@ -522,7 +522,7 @@ label ophelia_blowjob_pics_review_label(the_person):
     the_person.char "I'd better get back to work."
     $ the_person.event_triggers_dict["pics_to_ex_sent"] = 2
     $ the_person.event_triggers_dict["special_bj_unlock"] = 1
-    $ the_person.on_room_enter_event_list.append(ophelia_revenge_date_plan)
+    $ the_person.add_unique_on_room_enter_event(ophelia_revenge_date_plan)
     $ del ex_name
     return
 
@@ -790,7 +790,7 @@ label ophelia_revenge_date_label():
     "Tonight was a real breakthrough with [the_person.title]. She was a great fuck, hopefully you can get in her pants again soon."
     "The scene at the restaurant was crazy, with that bimbo, [candace.title] and [ex_name]. You'll have to keep an eye out for her. Maybe you'll run into her again?"
     $ the_person.clear_situational_slut("Date")
-    $ the_person.on_room_enter_event_list.append(ophelia_is_over_her_ex)
+    $ the_person.add_unique_on_room_enter_event(ophelia_is_over_her_ex)
     $ the_person.add_unique_on_talk_event(ophelia_revenge_aftermath)
     $ del ex_name
     return

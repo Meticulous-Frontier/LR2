@@ -225,10 +225,10 @@ init 5 python:
                 if crisis:
                     #renpy.notify("Created event: " + crisis[0].name + " for " + people.name)
                     if crisis[2] == "on_talk" and __builtin__.len(person.on_talk_event_list) == 0: # prevent multiple on talk events for person
-                        person.on_talk_event_list.append(Limited_Time_Action(crisis[0], crisis[0].event_duration))
+                        person.add_unique_on_talk_event(Limited_Time_Action(crisis[0], crisis[0].event_duration))
                     elif crisis[2] == "on_enter":
                         if not exists_in_room_enter_list(person, crisis[0].effect): # prevent adding the same event twice
-                            person.on_room_enter_event_list.append(Limited_Time_Action(crisis[0], crisis[0].event_duration))
+                            person.add_unique_on_room_enter_event(Limited_Time_Action(crisis[0], crisis[0].event_duration))
         return
 
     def advance_time_slave_stay_wet(people):

@@ -68,7 +68,7 @@ init 2 python:
         sarah.event_triggers_dict["dating_path"] = False       # False = not started, or doing FWB during story, True = dating her.
         sarah.event_triggers_dict["stripclub_progress"] = 0    # 0 = not complete, 1 = strip club even complete
         sarah.event_triggers_dict["initial_threesome_target"] = None    #this will hold who sarah decides she wants to have a threesome with.
-        sarah.event_triggers_dict["threesome_unlock"] = 0     # 0 = not done, 1 = first threesome after event, 
+        sarah.event_triggers_dict["threesome_unlock"] = 0     # 0 = not done, 1 = first threesome after event,
         sarah.event_triggers_dict["try_for_baby"] = 0         # 0 = not trying, 1 = trying for baby, 2 = knocked up
         sarah.event_triggers_dict["fertile_start_day"] = -1    #-1 means not fertile, otherwise is the day that she tells MC she is fertile. Using math we can determine if she is fertile in the future.
         sarah.event_triggers_dict["fertile_start_creampie_count"] = -1  #Set this to the total number of creampies she has had at the beginning of her fertile period.
@@ -333,7 +333,7 @@ init -1 python:
 
     def add_sarah_arrange_threesome_action(person):
         Sarah_arrange_threesome_action = Action("Sarah_threesome_arrange",Sarah_arrange_threesome_requirement,"Sarah_arrange_threesome_label")
-        person.on_talk_event_list.append(Sarah_arrange_threesome_action)
+        person.add_unique_on_talk_event(Sarah_arrange_threesome_action)
 
     def add_sarah_initial_threesome_action():
         Sarah_initial_threesome_action = Action("Sarah initial threesome",Sarah_initial_threesome_requirement,"Sarah_initial_threesome_label")
@@ -1281,7 +1281,7 @@ label Sarah_stripclub_story_label():
     else:
         "[the_person.possessive_title] leads the way as you leave the lab and head downtown."
         "You pass the bar you usually go to. You wonder what this crazy girl has in mind for tonight."
-    "Soon you walk up to a building and [the_person.title] comes to a stop. The sign out from says [strip_club.name]."
+    "Soon you walk up to a building and [the_person.title] comes to a stop. The sign out from says [strip_club.formalName]."
     "Wow, a strip club? This could be interesting. You decide to tease her."
 
     # if MC has not yet discovered this place, make it visible on the map
@@ -1346,7 +1346,10 @@ label Sarah_stripclub_story_label():
     the_person.char "Team building... right! I can get behind that!"
     mc.name "Ok, I'll be right back."
     $ scene_manager.remove_actor(the_person, reset_actor = False)
-    "You get up and head over to the counter where the owner is."
+    if get_strip_club_foreclosed_stage() < 5:
+        "You get up and head over to the counter where the owner is."
+    else:
+        "You get up and head over to the counter and talk with the manager."
     if cousin.event_triggers_dict["blackmail_level"] >= 2:
         if showgirl is cousin:
             "You arrange two private lap dances. For [the_person.title], you get [cousin.possessive_title], since she enjoyed her so much."
@@ -2861,8 +2864,10 @@ label Sarah_date_ends_at_your_place_label(the_person):
 label Sarah_date_strip_club_private_dance_label(the_person):
     $ showgirl_1 = get_random_from_list([x for x in stripclub_strippers if x not in [cousin]])
     $ showgirl_2 = get_random_from_list([x for x in stripclub_strippers if x not in [showgirl_1, cousin]])
-
-    "You get up and head over to the counter where the owner is."
+    if get_strip_club_foreclosed_stage() < 5:
+        "You get up and head over to the counter where the owner is."
+    else:
+        "You get up and head over to the counter and talk with the manager."
     "You look through the list of girls available for private dances."
     if cousin.event_triggers_dict["blackmail_level"] >= 2:
         "You spot your cousin on the list. You could ask for her to dance for either you or [the_person.possessive_title]..."

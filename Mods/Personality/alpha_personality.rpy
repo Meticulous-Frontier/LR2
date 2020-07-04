@@ -1,4 +1,4 @@
-# Alpha Girl personality definition: Mod by Corrado 
+# Alpha Girl personality definition: Mod by Corrado
 # Dominating personality applied to all girls with following traits:
 # Older than 25, high charisma stat >=5, high intelligence >=4
 # Likes or loves "taking control"
@@ -21,9 +21,9 @@ init 1400 python:
         valid_titles.append("Mrs. " + person.last_name)
         if person.love > 20:
             valid_titles.append(person.name)
-        if person.love > 40:
+        if person.love > 50 and person.has_role(mistress_role):
             valid_titles.append("Milady")
-        if person.sluttiness > 70:
+        if person.sluttiness > 60 and person.has_role(mistress_role):
             valid_titles.append("Mistress")
         if person.sluttiness > 100 and the_person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
             valid_titles.append("Anal Queen")
@@ -31,12 +31,14 @@ init 1400 python:
     def alpha_possessive_titles(person):
         valid_possessive_titles = []
         valid_possessive_titles.append("Mrs. " + person.last_name)
-        if person.love > 20:
-            valid_possessive_titles.append(person.name)
-        if person.sluttiness > 60:
-            valid_possessive_titles.append("Your naughty Mistress")
+        if person.love > 10 and person.has_role(manager_role):
+            valid_possessive_titles.append("Your manager")
+        if person.sluttiness > 60 and person.has_role(manager_role):
+            valid_possessive_titles.append("Your naughty Manager")
+        if person.sluttiness > 60 and person.has_role(mistress_role):
+            valid_possessive_titles.append("Your kinky Mistress")
         if person.sluttiness > 100 and (the_person.get_opinion_score("threesomes") > 0 or the_person.get_opinion_score("other girls") > 0):
-            valid_possessive_titles.append("Your bisex queen")
+            valid_possessive_titles.append("Your bi-sexual queen")
         if person.sluttiness > 100 and the_person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
             valid_possessive_titles.append("Your anal queen")
         return valid_possessive_titles

@@ -1016,8 +1016,10 @@ init -1 python:
     Person.is_employee = is_employee
 
     def has_role(self, role):
-        if isinstance(role, basestring): # Passing a string can account for situations where integration of modular / non- core roles need to be checked. Remember to pass it's supposed Role.name instead of Role
+        if isinstance(role, basestring):
             return not find_in_list(lambda x: x.role_name == role, self.special_role) is None
+        elif isinstance(role, list):
+            return any(x in self.special_role for x in role)
         else:
             return role in self.special_role
     Person.has_role = has_role
@@ -1032,11 +1034,11 @@ init -1 python:
         if role is girlfriend_role:
             self.remove_role(affair_role)
             self.relationship = "Single" #Technically they aren't "single", but the MC has special roles for their girlfriend.
-            self.SO_name = None            
+            self.SO_name = None
 
         return added
     Person.add_role = add_role
-    
+
     def remove_role(self, role):
         if role in self.special_role:
             self.special_role.remove(role)
@@ -1252,7 +1254,7 @@ init -1 python:
 
         if the_crisis in self.on_room_enter_event_list:
             self.on_room_enter_event_list.remove(the_crisis)
-    Person.remove_on_room_enter_event = remove_on_room_enter_event    
+    Person.remove_on_room_enter_event = remove_on_room_enter_event
 
 ##########################################
 # Pregnancy Functions                    #

@@ -64,7 +64,7 @@ init 2 python:
         sex_store.add_object(SB_make_counter())
 
         # Add StarBuck introduction event to sex store
-        starbuck.on_room_enter_event_list.append(starbuck_introduction_event_action)
+        starbuck.add_unique_on_room_enter_event(starbuck_introduction_event_action)
         return
 
     # create mod event to trigger creation

@@ -38,7 +38,7 @@ init -1 python:
             person.event_triggers_dict["preg_knows"] = True
         else:
             silent_preg_announce_action = Action("Pregnancy Announcement", silent_pregnant_announce_requirement, "silent_pregnant_announce", requirement_args = day + renpy.random.randint(12,18))
-            person.on_room_enter_event_list.append(silent_preg_announce_action)
+            person.add_unique_on_room_enter_event(silent_preg_announce_action)
 
         if day > person.event_triggers_dict.get("preg_tits_date", 0):
             person.event_triggers_dict["preg_knows"] = True
@@ -46,7 +46,7 @@ init -1 python:
             person.personal_region_modifiers["breasts"] = person.personal_region_modifiers["breasts"] + 0.1
         else:
             silent_preg_tits_action = Action("Pregnancy Tits Grow", silent_pregnant_tits_requirement, "silent_pregnant_tits_start")
-            person.on_room_enter_event_list.append(silent_preg_tits_action)
+            person.add_unique_on_room_enter_event(silent_preg_tits_action)
 
         if day > person.event_triggers_dict.get("preg_transform_day", 0):
             person.event_triggers_dict["pre_preg_body"] = person.body_type
@@ -97,7 +97,7 @@ init 2 python:
         person.personal_region_modifiers["breasts"] = person.personal_region_modifiers["breasts"] + 0.1 #As her tits get larger they also become softer, unlike large fake tits. (Although even huge fake tits get softer)
 
         silent_pregnant_tits_announce_action = Action("Announce Pregnant Tits", silent_pregnant_tits_announcement_requirement, "silent_pregnant_tits_announce", args = day)
-        person.on_talk_event_list.append(silent_pregnant_tits_announce_action)
+        person.add_unique_on_talk_event(silent_pregnant_tits_announce_action)
         return
 
 label silent_pregnant_tits_start(the_person):
@@ -120,7 +120,7 @@ init 2 python:
         person.lactation_sources += 1
 
         silent_preg_transform_announce_action = Action("Pregnancy Transform Announcement", silent_preg_transform_announce_requirement, "silent_pregnant_transform_announce", args = day)
-        person.on_room_enter_event_list.append(silent_preg_transform_announce_action)
+        person.add_unique_on_room_enter_event(silent_preg_transform_announce_action)
 
         silent_preg_finish_announce_action = Action("Pregnancy Finish Announcement", silent_preg_finish_announcement_requirement, "silent_pregnant_finish_announce", args = person, requirement_args = person)
         mc.business.mandatory_crises_list.append(silent_preg_finish_announce_action)
@@ -200,8 +200,8 @@ init 2 python:
         mc.business.mandatory_morning_crises_list.append(silent_tit_shrink_one) #Events for her breasts to return to their normal size.
         mc.business.mandatory_morning_crises_list.append(silent_tit_shrink_two)
 
-        person.on_talk_event_list.append(silent_tit_shrink_one_announcement_action) #And here is where she tells you about those changes
-        person.on_talk_event_list.append(silent_tit_shrink_two_announcement_action)
+        person.add_unique_on_talk_event(silent_tit_shrink_one_announcement_action) #And here is where she tells you about those changes
+        person.add_unique_on_talk_event(silent_tit_shrink_two_announcement_action)
 
         if person.has_role(silent_pregnant_role):
             person.remove(silent_pregnant_role)

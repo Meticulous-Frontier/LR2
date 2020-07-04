@@ -55,7 +55,7 @@ label salon_manager_greetings(the_person):
         the_person.char "Perfect! All done."
         $ the_person.event_triggers_dict["introduced"] = 1
         $ the_person.event_triggers_dict["day_met"] = day
-        $ the_person.on_room_enter_event_list.append(ophelia_gets_dumped)
+        $ the_person.add_unique_on_room_enter_event(ophelia_gets_dumped)
     else:
         if the_person.love < 0:
             the_person.char "Hi, what can I do for you?"

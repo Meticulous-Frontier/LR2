@@ -86,7 +86,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                         text "Characteristics" style "menu_text_style" size 22
                         $ dict_main_skills = get_main_skills()
                         for skill in dict_main_skills:
-                            text dict_main_skills[skill][0] + "Skill: " + str(getattr(the_person, dict_main_skills[skill][1])) style "menu_text_style"
+                            text dict_main_skills[skill][0] + ": " + str(getattr(the_person, dict_main_skills[skill][1])) style "menu_text_style"
                         text "Love: [the_person.love]" style "menu_text_style"
                         if the_person not in unique_character_list:
                             text "Personality: " + the_person.personality.personality_type_prefix.capitalize() style "menu_text_style"
@@ -99,7 +99,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                         text "Work Skills" style "menu_text_style" size 22
                         $ dict_work_skills = get_work_skills()
                         for skill in dict_work_skills:
-                            text dict_work_skills[skill][0] + " Skill: " + str(getattr(the_person, dict_work_skills[skill][1])) style "menu_text_style"
+                            text dict_work_skills[skill][0] + ": " + str(getattr(the_person, dict_work_skills[skill][1])) style "menu_text_style"
 
                 frame:
                     background "#1a45a1aa"

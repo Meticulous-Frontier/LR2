@@ -36,7 +36,7 @@ init 3 python:
         dawn.add_role(lifestyle_coach_role)
 
         dawn.home.add_person(dawn)
-        dawn.on_room_enter_event_list.append(lifestyle_coach_intro)
+        dawn.add_unique_on_room_enter_event(lifestyle_coach_intro)
         return
 
 label lifestyle_coach_intro_label(the_person):

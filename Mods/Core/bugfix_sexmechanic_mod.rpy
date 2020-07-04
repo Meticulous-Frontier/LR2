@@ -70,13 +70,13 @@ init 5 python:
             if a_person.has_role(girlfriend_role) and the_position.slut_requirement > (a_person.sluttiness/2): #You can get away with stuff half as slutty as she would do
                 caught_cheating_action = Action("Caught cheating action", caught_cheating_requirement, "caught_cheating_label", args = person)
                 if not exists_in_room_enter_list(a_person, "caught_cheating_label"):
-                    a_person.on_room_enter_event_list.append(caught_cheating_action)
+                    a_person.add_unique_on_room_enter_event(caught_cheating_action)
                     renpy.say("",a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
 
             elif a_person.has_role(affair_role) and the_position.slut_requirement > ((a_person.sluttiness*2)/3): #You can get away with stuff two thirds as slutty as what she would do.
                 caught_affair_cheating_action = Action("Caught affair cheating action", caught_affair_cheating_requirement, "caught_affair_cheating_label", args = person)
                 if not exists_in_room_enter_list(a_person, "caught_affair_cheating_label"):
-                    a_person.on_room_enter_event_list.append(caught_affair_cheating_action)
+                    a_person.add_unique_on_room_enter_event(caught_affair_cheating_action)
                     renpy.say("",a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
 
         return get_random_from_list(other_people) #Get a random person from the people in the area, if there are any.

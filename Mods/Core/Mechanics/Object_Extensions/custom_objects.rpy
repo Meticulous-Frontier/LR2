@@ -16,3 +16,7 @@ init -1 python:
     def make_woodhorse():
         the_woodhorse = Object("Wood Horse", ["Horse", "Sit", "Lay"], sluttiness_modifier = 20, obedience_modifier = 30)
         return the_woodhorse
+
+    def make_cage():
+        the_cage = Object("Cage", ["Cage", "Lay", "Low", "Kneel"], sluttiness_modifier = 10, obedience_modifier = 20)
+        return the_cage

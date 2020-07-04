@@ -141,8 +141,12 @@ init 2 python:
                     if not action_mod in [c[0] for c in crisis_list]:
                         crisis_list.append([action_mod, action_mod.crisis_weight])
             elif hasattr(action_mod, "is_mandatory_crisis") and action_mod.is_mandatory_crisis:
-                mc.business.mandatory_crises_list.append(action_mod)
-
+                if hasattr(action_mod, "is_morning_crisis") and action_mod.is_morning_crisis:
+                    if not action_mod in mc.business.mandatory_morning_crises_list:
+                        mc.business.mandatory_morning_crises_list.append(action_mod)
+                else:
+                    if not action_mod in mc.business.mandatory_crises_list:
+                        mc.business.mandatory_crises_list.append(action_mod)
 
         # remove not working stuff
         for action_mod in remove_list:

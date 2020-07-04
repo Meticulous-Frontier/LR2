@@ -113,7 +113,7 @@ init 2 python:
 
         candace.add_role(candace_role)
 
-        candace.on_room_enter_event_list.append(candace_meet_at_office_store)
+        candace.add_unique_on_room_enter_event(candace_meet_at_office_store)
 
         return
 
@@ -463,7 +463,7 @@ label candace_convince_to_quit_label(the_person):
     $ candace.event_triggers_dict["quit_job"] = 1
     # she has quit her job, give her a new wardrobe
     $ rebuild_wardrobe(candace)
-    $ candace.on_talk_event_list.append(candace_goes_clothes_shopping)
+    $ candace.add_unique_on_talk_event(candace_goes_clothes_shopping)
     return "Advance Time"
 #Character variable wrappers
 init 3 python:
@@ -528,6 +528,5 @@ init 3 python:
     def candace_update_action_lists():  #This function is designed to try and bring action lists up to date, from update to update, so we don't have to start a new game every time.
         if candace_get_has_quit_job():
             if not candace_get_has_gone_clothes_shopping():
-                if candace_goes_clothes_shopping not in candace.on_talk_event_list:
-                    candace.on_talk_event_list.append(candace_goes_clothes_shopping)
+                candace.add_unique_on_talk_event(candace_goes_clothes_shopping)
         return

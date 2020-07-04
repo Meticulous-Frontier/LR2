@@ -56,11 +56,11 @@ init 3302 python:
 
     def add_discuss_buying_club_with_starbuck_action():
         discuss_buying_club_with_starbuck_action = Action("Buy the Stripclub", discuss_buying_club_with_starbuck_requirement, "discuss_buying_club_with_starbuck_label")
-        starbuck.on_talk_event_list.append(discuss_buying_club_with_starbuck_action)
+        starbuck.add_unique_on_talk_event(discuss_buying_club_with_starbuck_action)
 
     def add_talk_again_buying_club_starbuck_action():
         talk_again_buying_club_starbuck_action = Action("Buy the Stripclub", discuss_buying_club_with_starbuck_requirement, "talk_again_buying_club_starbuck_label")
-        starbuck.on_talk_event_list.append(talk_again_buying_club_starbuck_action)
+        starbuck.add_unique_on_talk_event(talk_again_buying_club_starbuck_action)
 
 label strip_club_offer_expire_label(): # Event trigger with timer
     if strip_club_buy_days_left() <= 0:

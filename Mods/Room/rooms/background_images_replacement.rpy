@@ -42,6 +42,7 @@ init -1 python:
     standard_gym_shower_backgrounds = room_background_image("Gym_Shower_Background.jpg")
     standard_salon_backgrounds = room_background_image("Salon_Background.jpg")
     standard_home_shower_backgrounds = room_background_image("Home_Shower_Background.jpg")
+    standard_bdsm_room_backgrounds = room_background_image("BDSM_Room_Background.jpg")
 
 label updated_room_background(stack):
     python:

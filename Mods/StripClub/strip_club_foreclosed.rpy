@@ -4,10 +4,8 @@
 #   foreclosed_stage = 2 Think about buying
 #   foreclosed_stage = 3 Buy the club
 #   foreclosed_stage = 4 Stripclub: bought - select old strippers
-#   foreclosed_stage = 5 Stripclub: have strippers
-#   foreclosed_stage = 6 Stripclub: have a manager
-#   foreclosed_stage = 7 Stripclub: have waitresses
-#   foreclosed_stage = 8 Stripclub: have a BDSM room
+#   foreclosed_stage = 5 Stripclub: foreclosed finished
+#   foreclosed_stage = -1 Stripclub new other owner
 
 init 2 python:
     def init_strip_club_mod(action_mod):
@@ -16,6 +14,7 @@ init 2 python:
         mc.business.event_triggers_dict["old_strip_club_owner"] = None
         mc.business.event_triggers_dict["old_strip_club_name"] = None
         mc.business.event_triggers_dict["strip_club_decision_day"] = 0
+        mc.business.event_triggers_dict["strip_club_has_bdsm_room"] = False
         return
 
     def get_strip_club_foreclosed_stage():
@@ -62,12 +61,12 @@ init 2 python:
 
     def add_cousin_talk_about_strip_club_action():
         cousin_talk_about_strip_club_action = Action("Cousin talk about strip club", cousin_talk_about_strip_club_requirement, "cousin_talk_about_strip_club_label")
-        cousin.on_room_enter_event_list.append(cousin_talk_about_strip_club_action)
+        cousin.add_unique_on_room_enter_event(cousin_talk_about_strip_club_action)
         return
 
     def add_starbuck_talk_about_strip_club_action():
         starbuck_talk_about_strip_club_action = Action("Starbuck talk about strip club", starbuck_talk_about_strip_club_requirement, "starbuck_talk_about_strip_club_label")
-        starbuck.on_room_enter_event_list.append(starbuck_talk_about_strip_club_action)
+        starbuck.add_unique_on_room_enter_event(starbuck_talk_about_strip_club_action)
 
     strip_club_foreclosed_mod_action = ActionMod("Strip Club Story Line", strip_club_foreclosed_event_requirement, "club_foreclosed_event_label",
         menu_tooltip = "At a certain point the strip club is closed and you get the chance to buy it.", category = "Misc", 

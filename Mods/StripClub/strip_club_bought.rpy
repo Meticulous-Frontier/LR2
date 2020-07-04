@@ -95,6 +95,7 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
     "As the last one left in the club, you turn off the lights, close the doors, and return home eager for a good night's rest."
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
+    $ add_strip_club_manager_reminder_action()
     call advance_time from _call_advance_time_club_bought_strippers_selection
     # since we are in a talk event with Gabrielle, we need to exit using a jump.
     jump game_loop
@@ -135,10 +136,10 @@ label strip_club_evaluate_stripper(the_person):
     "You watch [the_person.title]'s body as she walks offstage to rejoin you and the other girls."
     $ the_person.draw_person(emotion = "happy")
     the_person.char "So [mc.name] what do you think, am I good enough to be one of your girls?"
-    "She puts a hand on your shoulder, pressing her bosom against your body..."
+    "She puts a hand on your shoulder pressing her bosom against your body..."
     menu:
         "Yes" if mc.business.funds > 500:
-            $ strip_club_hire_stripper(the_person)
+            $ strip_club_hire_stripper(the_person, stripper_role)
             mc.name "Yes, you impressed me! Your salary will be $[the_person.stripper_salary] per day excluding tips, if you agree?"
             $ name_string = mc.business.event_triggers_dict.get("old_strip_club_owner", "that cheap fuck")
             $ ran_num = __builtin__.int(((the_person.stripper_salary / 20) - 1) * 100)

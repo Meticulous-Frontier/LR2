@@ -281,8 +281,8 @@ label unisex_restroom_fantasy_overhear_label():
 
     $ town_relationships.improve_relationship(the_person_one, the_person_two)
     # if we don't have the fantasy actout limited time event for the person, add it to the on_talk_event_list.
-    if discover_identity and not exists_in_room_enter_list(the_person_one, "unisex_restroom_fantasy_actout_label"):
-        $ the_person_one.on_talk_event_list.append(Limited_Time_Action(unisex_restroom_fantasy_actout, 5))
+    if discover_identity:
+        $ the_person_one.add_unique_on_talk_event(Limited_Time_Action(unisex_restroom_fantasy_actout, 5))
     $ del the_person_one
     $ del the_person_two
     $ del anon_char_one
