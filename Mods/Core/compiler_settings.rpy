@@ -13,25 +13,23 @@ init -2 python:
     build.classify("game/customizations/**.**", None)
     build.classify("**.", None)
     build.classify("game/OpenGL/DLLS/gle_**", None)
+    # exclude debug file from build
+    build.classify("game/debug.rpy", None)
     # exclude icon images from build
     build.classify("game/Mods/Core/Images/**.ico", None) 
     build.classify("game/Mods/Core/Images/**.icns", None) 
-    build.classify("game/Mods/Core/Images/**.pdn", None) 
-
-    build.classify("game/wardrobes/Exported_Wardrobe.xml", "all") # make sure exported wardrobe file is included (but not archived)
+    build.classify("game/Mods/Core/Images/**.pdn", None)
 
     build.archive("background_images") #When building all mod background images are placed into an archive.
     build.classify("game/Mods/Room/images/**.jpg", "background_images")
     build.classify("game/Mods/Room/images/**.png", "background_images")
-    build.classify("game/Mods/Tutorial/**.png", "background_images")
-    build.classify("game/images/**.png", "background_images")
-    build.classify("game/images/**.jpg", "background_images")
 
     build.archive("gui")
     build.classify("game/gui/**.png", "gui")
     build.classify("game/Mods/Core/Images/**.png", "gui")
 
     build.archive("wardrobes")
+    build.classify("game/wardrobes/Exported_Wardrobe.xml", "all") # make sure exported wardrobe file is included (but not archived)
     build.classify("game/wardrobes/**.xml", "wardrobes")
     build.classify("game/Mods/Wardrobes/**.xml", "wardrobes")
 
@@ -46,6 +44,12 @@ init -2 python:
     build.classify("game/**.ttf", "fonts")
     build.classify("game/**.otf", "fonts")
 
+    build.archive("tutorial_images")
+    build.classify("game/images/**.png", "tutorial_images")
+    build.classify("game/images/**.jpg", "tutorial_images")
+    build.classify("game/Mods/Tutorial/**.png", "tutorial_images")
+
 init 2 python:
     build.name = "Lab_Rats_2_Mod"
+    build.include_old_themes = False
     config.window_icon = get_file_handle("mod_icon.png")
