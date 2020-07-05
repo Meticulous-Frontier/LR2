@@ -937,7 +937,7 @@ label HR_director_gym_membership_tier_2_label(the_person):
     return
 
 label HR_director_change_relative_recruitment_label(the_person):
-    if get_HR_director_tag("business_HR_relative_recruitment", 2):
+    if get_HR_director_tag("business_HR_relative_recruitment") == 2:
         the_person.char "I see, are you sure you want me to take down the sign in the break room that we are looking for more employees?"
         menu:
             "Take the Sign Down":
@@ -949,7 +949,7 @@ label HR_director_change_relative_recruitment_label(the_person):
                 the_person.char "Oh... sorry I thought you said you wanted to change it. Is there anything else I can do for you?"
         return
     else:
-        the_person.char "I see, are you sure you want me to put the sign in the break room that we are looking for more employees?"
+        the_person.char "I see, are you sure you want me to put up the sign in the break room that we are looking for more employees?"
         menu:
             "Put the Sign Up":
                 the_person.char "Ok, I'll put it up as soon as we are finished here. Is there anything else I can do for you?"
