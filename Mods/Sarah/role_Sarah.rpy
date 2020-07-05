@@ -223,7 +223,7 @@ init -1 python:
     def Sarah_is_fertile():
         if sarah.event_triggers_dict.get("try_for_baby", 0) != 1:  #Only fertile if actively trying
             return False
-        if sarah.is_pregnant(): # we don't get fertile when being pregnant
+        if sarah.knows_pregnant(): # She won't ask to be bred if she already knows she's pregnant
             return False
         if sarah.event_triggers_dict.get("fertile_start_day", -1) == -1:
             return False
@@ -2238,7 +2238,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         $ mc.change_arousal(20) #110
         mc.name "I'm gonna cum!"
         if Sarah_is_fertile():
-            the_person.char "Cum deep! Knock me up with your hot cum [the_person.mc_title]!"
+            the_person.char "Cum deep! Knock me up with your hot cum, [the_person.mc_title]!"
         else:
             the_person.char "Shove it in deep! I want to feel your seed inside me all day long!"
         $ the_person.cum_in_vagina()
@@ -2791,9 +2791,9 @@ label Sarah_date_ends_at_your_place_label(the_person):
     $ mc.location.show_background()
     $ scene_manager.update_actor(the_person, position = "stand2", character_placement = character_right)
     if Sarah_is_fertile():
-        the_person.char "Oh god I can't wait to feel you fill me up again..."
+        the_person.char "Oh god, I can't wait to feel you fill me up again..."
     else:
-        the_person.char "Oh god I can't wait to feel your hands all over me again..."
+        the_person.char "Oh god, I can't wait to feel your hands all over me again..."
     $ scene_manager.add_actor(mom, character_placement = character_left_flipped)
     "[mom.title] pops around the corner when she hears you walking down the hall and unknowingly interrupts."
     mom.char "Ah! It's [the_person.name] again!"
@@ -2824,7 +2824,7 @@ label Sarah_date_ends_at_your_place_label(the_person):
     the_person.char "Well, I think we both know where this is going!"
     $ scene_manager.strip_actor_outfit(the_person, exclude_feet = True)
     if Sarah_is_fertile():
-        the_person.char "Let's go! Ovulating is driving me crazy, I've been day dreaming about your cock fill me with seed all night long!"
+        the_person.char "Let's go! Ovulating is driving me crazy, I've been daydreaming about your cock filling me with seed all night long!"
     else:
         the_person.char "What are you staring at? Let's go! I've been looking forward to this all night!"
     call fuck_person(the_person, skip_intro = False, girl_in_charge = False) from _call_sex_description_date_happy_ending_1
