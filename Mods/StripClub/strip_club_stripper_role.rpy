@@ -322,7 +322,7 @@ label strip_club_fire_employee_label(the_person):
             mc.name "Alright [the_person.title], you've got me interested, try to convince me."
             $ the_person.add_situational_slut("seduction_approach", -5, "I'm just a toy for him.")
             $ the_person.add_situational_obedience("seduction_approach", 25, "I'll do what I need to keep my job!")
-            call fuck_person(the_person, private = True)
+            call fuck_person(the_person, private = True) from _call_fuck_person_strip_club_fire_employee_label
             $ the_person.clear_situational_slut("seduction_approach")
             $ the_person.clear_situational_obedience("seduction_approach")
             $ the_person.apply_planned_outfit()
@@ -392,7 +392,7 @@ label stripper_performance_review_label(the_person):
                     $ the_person.add_situational_slut("seduction_approach", 15, "It's all about me!")
                     $ the_person.add_situational_obedience("seduction_approach", -10, "It's all about me!")
                     the_person.char "Oh [the_person.mc_title], that sounds like a great idea..."
-                    call fuck_person(the_person, private = True)
+                    call fuck_person(the_person, private = True) from _call_fuck_stripper_performance_review_1
                     $ the_report = _return
                     $ the_person.clear_situational_slut("seduction_approach")
                     $ the_person.clear_situational_obedience("seduction_approach")
@@ -458,7 +458,7 @@ label stripper_performance_review_label(the_person):
                                     $ the_person.add_situational_slut("seduction_approach", -5, "I'm just a toy to him.")
                                     $ the_person.add_situational_obedience("seduction_approach", 25, "I'll do what I need to keep my job!")
                                     mc.name "Alright, you've got me interested. Let's see what you can do."
-                                    call fuck_person(the_person,private = True)
+                                    call fuck_person(the_person,private = True) from _call_fuck_stripper_performance_review_2
                                     $ the_person.clear_situational_slut("seduction_approach")
                                     $ the_person.clear_situational_obedience("seduction_approach")
                                     $ the_person.apply_planned_outfit()
@@ -492,7 +492,7 @@ label stripper_performance_review_label(the_person):
                     $ the_person.add_situational_slut("seduction_approach", -5+opinion_modifier, "I'm just being used...")
                     $ the_person.add_situational_obedience("seduction_approach", 15+opinion_modifier, "I'm being punished")
                     the_person.char "I... if you think this is what I need, sir."
-                    call fuck_person(the_person, private = True)
+                    call fuck_person(the_person, private = True) from _call_fuck_person_stripper_performance_review_3
                     $ the_report = _return
                     $ the_person.clear_situational_slut("seduction_approach")
                     $ the_person.clear_situational_obedience("seduction_approach")
