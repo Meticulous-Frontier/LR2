@@ -11,30 +11,30 @@ init 2 python:
         return False
 
     def production_failure_increase_sluttiness(person):
-        for person in person.work.people:
-            person.add_situational_slut("Gassed",25,"The girls become extremely slutty.")
-            person.change_slut_temp(3, add_to_log = False)
-            person.change_slut_core(3, add_to_log = False)
+        for team_member in person.work.people:
+            team_member.add_situational_slut("Gassed",25,"The girls become extremely slutty.")
+            team_member.change_slut_temp(3, add_to_log = False)
+            team_member.change_slut_core(3, add_to_log = False)
 
         mc.log_event("All " + person.work.formalName + " staff: +3 sluttiness","float_text_pink")
         return
 
     def production_failure_clear_situational_sluttiness(person):
-        for person in person.work.people:
-            person.clear_situational_slut("Gassed")
+        for team_member in person.work.people:
+            team_member.clear_situational_slut("Gassed")
 
-        person.review_outfit()
+        person.apply_planned_outfit()
         return
 
     def production_failure_change_obedience(person, amount):
-        for team_member in mc.business.production_team:
+        for team_member in person.work.people:
             team_member.change_obedience(amount, add_to_log = False)
 
         mc.log_event("All " + person.work.formalName + " staff: " + str(amount) + " obedience","float_text_pink")
         return
 
     def production_failure_fix_the_problem(person):
-        for team_member in mc.business.production_team:
+        for team_member in person.work.people:
             team_member.change_stats(happiness = -2, love = 2, add_to_log = False)
 
         mc.log_event("All " + person.work.formalName + " staff: +2 love, -2 happiness","float_text_pink")
@@ -46,7 +46,7 @@ init 2 python:
 
 label production_failure_action_label:
     $ the_person = get_random_from_list(rd_division.people + p_division.people)
-    if the_person is None:
+    if the_person is None or the_person.work is None:
         return
     
     "While monitoring the equipment you notice a problem in the [the_person.work.formalName], it seems a gas mixture is building up."
