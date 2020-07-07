@@ -1261,7 +1261,7 @@ init -1 python:
 ##########################################
 
     def is_pregnant(self):
-        if self.has_role(pregnant_role) or self.has_role(silent_pregnant_role):
+        if self.has_role(pregnant_role):
             return True
         return False
     Person.is_pregnant = is_pregnant

@@ -11,94 +11,115 @@ init 2 python:
     #otherwise she will blame you for her NTR babies
     #should be moved to methods under Person object later
 
-    def cum_in_vagina_ntr(the_person):
-        mc.listener_system.fire_event("sex_cum_vagina", the_person = the_person)
-        if the_person.outfit.can_add_accessory(creampie_cum):
+    def cum_in_vagina_ntr(person):
+        if person.outfit.can_add_accessory(creampie_cum):
             the_cumshot = creampie_cum.get_copy()
             the_cumshot.layer = 0
-            the_person.outfit.add_accessory(the_cumshot)
+            person.outfit.add_accessory(the_cumshot)
 
-        the_person.change_slut_temp(5*the_person.get_opinion_score("creampies"))
-        the_person.change_happiness(5*the_person.get_opinion_score("creampies"))
-        the_person.discover_opinion("creampies")
+        person.change_slut_temp(5*person.get_opinion_score("creampies"))
+        person.change_happiness(5*person.get_opinion_score("creampies"))
+        person.discover_opinion("creampies")
 
-    def cum_in_mouth_ntr(the_person): 
-        mc.listener_system.fire_event("sex_cum_mouth", the_person = the_person)
-        if the_person.outfit.can_add_accessory(mouth_cum):
+        # Pregnancy Check #
+        if persistent.pregnancy_pref > 0 and pregnant_role not in person.special_role:
+            if persistent.pregnancy_pref == 1 and person.on_birth_control: #Establish how likely her birth contorl is to work (if needed, and if present)
+                bc_percent = 100 - person.bc_penalty
+            elif persistent.pregnancy_pref == 2 and person.on_birth_control:
+                bc_percent = 90 - person.bc_penalty
+            else:
+                bc_percent = 0
+
+            preg_chance = renpy.random.randint(0,100)
+            bc_chance = renpy.random.randint(0,100)
+            if persistent.pregnancy_pref == 2: # On realistic pregnancy a girls chance to become pregnant fluctuates over the month.
+                day_difference = abs((day % 30) - person.ideal_fertile_day) # Gets the distance between the current day and the ideal fertile day.
+                if day_difference > 15:
+                    day_difference = 30 - day_difference #Wrap around to get correct distance between months.
+                multiplier = 2 - (float(day_difference)/10.0) # The multiplier is 2 when the day difference is 0, 0.5 when the day difference is 15.
+                modified_fertility = person.fertility_percent * multiplier
+            else:
+                modified_fertility = person.fertility_percent
+
+            if preg_chance < modified_fertility and pregnant_role not in person.special_role: #There's a chance she's pregnant
+                if bc_chance >= bc_percent : # Birth control failed to prevent the pregnancy
+                    become_pregnant(person, mc_father = False) #Function in role_pregnant establishes all of the pregnancy related variables and events.
+
+    def cum_in_mouth_ntr(person): 
+        if person.outfit.can_add_accessory(mouth_cum):
             the_cumshot = mouth_cum.get_copy()
             the_cumshot.layer = 0
-            the_person.outfit.add_accessory(the_cumshot)
+            person.outfit.add_accessory(the_cumshot)
 
-        the_person.change_slut_temp(5*the_person.get_opinion_score("drinking cum"))
-        the_person.change_happiness(5*the_person.get_opinion_score("drinking cum"))
-        the_person.discover_opinion("drinking cum")
+        person.change_slut_temp(5*person.get_opinion_score("drinking cum"))
+        person.change_happiness(5*person.get_opinion_score("drinking cum"))
+        person.discover_opinion("drinking cum")
         
-    def cum_in_ass_ntr(the_person): #not used in mod? maybe it should be!
-        mc.listener_system.fire_event("sex_cum_ass", the_person = the_person)
+    def cum_in_ass_ntr(person): #not used in mod? maybe it should be!
         #TODO: Add an anal specific cumshot once we have renders for it.
-        if the_person.outfit.can_add_accessory(creampie_cum):
+        if person.outfit.can_add_accessory(creampie_cum):
             the_cumshot = creampie_cum.get_copy()
             the_cumshot.layer = 0
-            the_person.outfit.add_accessory(the_cumshot)
-        the_person.change_slut_temp(5*the_person.get_opinion_score("anal creampies"))
-        the_person.change_happiness(5*the_person.get_opinion_score("anal creampies"))
-        the_person.discover_opinion("anal creampies")
+            person.outfit.add_accessory(the_cumshot)
+        person.change_slut_temp(5*person.get_opinion_score("anal creampies"))
+        person.change_happiness(5*person.get_opinion_score("anal creampies"))
+        person.discover_opinion("anal creampies")
 
-    def cum_on_face_ntr(the_person):
-        if the_person.outfit.can_add_accessory(face_cum):
+    def cum_on_face_ntr(person):
+        if person.outfit.can_add_accessory(face_cum):
             the_cumshot = face_cum.get_copy()
             the_cumshot.layer = 0
-            the_person.outfit.add_accessory(the_cumshot)
+            person.outfit.add_accessory(the_cumshot)
 
-        the_person.change_slut_temp(5*the_person.get_opinion_score("cum facials"))
-        the_person.change_happiness(5*the_person.get_opinion_score("cum facials"))
-        the_person.discover_opinion("cum facials")
+        person.change_slut_temp(5*person.get_opinion_score("cum facials"))
+        person.change_happiness(5*person.get_opinion_score("cum facials"))
+        person.discover_opinion("cum facials")
 
-        the_person.change_slut_temp(5*the_person.get_opinion_score("being covered in cum"))
-        the_person.change_happiness(5*the_person.get_opinion_score("being covered in cum"))
-        the_person.discover_opinion("being covered in cum")        
+        person.change_slut_temp(5*person.get_opinion_score("being covered in cum"))
+        person.change_happiness(5*person.get_opinion_score("being covered in cum"))
+        person.discover_opinion("being covered in cum")        
 
-    def cum_on_tits_ntr(the_person):
-        if the_person.outfit.can_add_accessory(tits_cum):
+    def cum_on_tits_ntr(person):
+        if person.outfit.can_add_accessory(tits_cum):
             the_cumshot = tits_cum.get_copy()
-            if the_person.outfit.get_upper_visible():
-                top_layer = the_person.outfit.get_upper_visible()[0].layer #Get the top most pice of clothing and get it's layer.
+            if person.outfit.get_upper_visible():
+                top_layer = person.outfit.get_upper_visible()[0].layer #Get the top most pice of clothing and get it's layer.
             else:
                 top_layer = -1
             the_cumshot.layer = top_layer+1 #The cumshot lives on a layer it hit, above the one it hit. Accessories are drawn first in the hirearchy, so they have to be on a level higehr than what they hit.
-            the_person.outfit.add_accessory(the_cumshot)
+            person.outfit.add_accessory(the_cumshot)
 
-        the_person.change_slut_temp(5*the_person.get_opinion_score("being covered in cum"))
-        the_person.change_happiness(5*the_person.get_opinion_score("being covered in cum"))
-        the_person.discover_opinion("being covered in cum")
+        person.change_slut_temp(5*person.get_opinion_score("being covered in cum"))
+        person.change_happiness(5*person.get_opinion_score("being covered in cum"))
+        person.discover_opinion("being covered in cum")
 
-    def cum_on_stomach_ntr(the_person):
-        if the_person.outfit.can_add_accessory(stomach_cum):
+    def cum_on_stomach_ntr(person):
+        if person.outfit.can_add_accessory(stomach_cum):
             the_cumshot = stomach_cum.get_copy()
-            if the_person.outfit.get_upper_visible():
-                top_layer = the_person.outfit.get_upper_visible()[0].layer #Get the top most pice of clothing and get it's layer.
+            if person.outfit.get_upper_visible():
+                top_layer = person.outfit.get_upper_visible()[0].layer #Get the top most pice of clothing and get it's layer.
             else:
                 top_layer = -1
             the_cumshot.layer = top_layer+1 #The cumshot lives on a layer it hit, above the one it hit. Accessories are drawn first in the hirearchy, so they have to be on a level higehr than what they hit.
-            the_person.outfit.add_accessory(the_cumshot)
+            person.outfit.add_accessory(the_cumshot)
 
-        the_person.change_slut_temp(5*the_person.get_opinion_score("being covered in cum"))
-        the_person.change_happiness(5*the_person.get_opinion_score("being covered in cum"))
-        the_person.discover_opinion("being covered in cum")
+        person.change_slut_temp(5*person.get_opinion_score("being covered in cum"))
+        person.change_happiness(5*person.get_opinion_score("being covered in cum"))
+        person.discover_opinion("being covered in cum")
 
-    def cum_on_ass_ntr(the_person):
-        if the_person.outfit.can_add_accessory(ass_cum):
+    def cum_on_ass_ntr(person):
+        if person.outfit.can_add_accessory(ass_cum):
             the_cumshot = ass_cum.get_copy()
-            if the_person.outfit.get_lower_visible():
-                top_layer = the_person.outfit.get_lower_visible()[0].layer #Get the top most pice of clothing and get it's layer.
+            if person.outfit.get_lower_visible():
+                top_layer = person.outfit.get_lower_visible()[0].layer #Get the top most pice of clothing and get it's layer.
             else:
                 top_layer = -1
             the_cumshot.layer = top_layer+1 #The cumshot lives on a layer it hit, above the one it hit. Accessories are drawn first in the hirearchy, so they have to be on a level higehr than what they hit.
-            the_person.outfit.add_accessory(the_cumshot)
+            person.outfit.add_accessory(the_cumshot)
 
-        the_person.change_slut_temp(5*the_person.get_opinion_score("being covered in cum"))
-        the_person.change_happiness(5*the_person.get_opinion_score("being covered in cum"))
-        the_person.discover_opinion("being covered in cum")
+        person.change_slut_temp(5*person.get_opinion_score("being covered in cum"))
+        person.change_happiness(5*person.get_opinion_score("being covered in cum"))
+        person.discover_opinion("being covered in cum")
 
     def mom_ntr_mod_requirement():
         if mc_asleep() and day % 7 is not 4: # not on Friday nights
@@ -106,13 +127,13 @@ init 2 python:
                 return True
         return False
 
-    def mom_ntr_select_finish(the_person):
+    def mom_ntr_select_finish(person):
         finishes = []
-        if the_person.get_opinion_score("being covered in cum") > 0 or the_person.get_opinion_score("cum facials") > 0 or the_person.get_opinion_score("being submissive") < 0:
+        if person.get_opinion_score("being covered in cum") > 0 or person.get_opinion_score("cum facials") > 0 or person.get_opinion_score("being submissive") < 0:
             finishes.append ("facial")
-        if the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("bareback sex") > 0  or the_person.get_opinion_score("being submissive") < 0:
+        if person.get_opinion_score("creampies") > 0 or person.get_opinion_score("bareback sex") > 0  or person.get_opinion_score("being submissive") < 0:
             finishes.append ("inside")
-        if the_person.get_opinion_score("giving blowjobs") > 0 or the_person.get_opinion_score("drinking cum") > 0  or the_person.get_opinion_score("being submissive") < 0:
+        if person.get_opinion_score("giving blowjobs") > 0 or person.get_opinion_score("drinking cum") > 0  or person.get_opinion_score("being submissive") < 0:
             finishes.append ("drink")
         finishes.append ("usual")
         return get_random_from_list(finishes)
