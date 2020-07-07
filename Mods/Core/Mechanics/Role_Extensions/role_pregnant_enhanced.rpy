@@ -30,6 +30,16 @@ init 2 python:
         mc.business.mandatory_crises_list.append(preg_finish_announce_action)
         return
 
+    def silent_pregnant_finish_announce_person(person):
+        person.event_triggers_dict["preg_old_schedule"] = person.schedule.copy() #Take a shallow copy so we can change their current schedule to nothing
+        person.set_schedule([0,1,2,3,4], person.home)
+
+        target_label = "pregnant_finish" if person.is_mc_father() else "silent_pregnant_finish"
+
+        preg_finish_action = Action("Pregnancy Finish", preg_finish_requirement, "pregnant_finish", args = person, requirement_args = [person, day + renpy.random.randint(4,7)])
+        mc.business.mandatory_morning_crises_list.append(preg_finish_action)
+        return        
+
     def become_pregnant(person, mc_father = True, progress_days = 0): # Called when a girl is knocked up. Establishes all of the necessary bits of info.
         person.event_triggers_dict["preg_accident"] = person.on_birth_control # If a girl is on birth control the pregnancy is an accident.
         person.event_triggers_dict["preg_start_date"] = day
@@ -135,4 +145,20 @@ label silent_pregnant_finish_announce(the_person): #TODO: have more variants for
     mc.name "Okay, I'll talk to you soon then."
     the_person.char "I'll let you know as soon as things are finished. Bye!"
     $ silent_pregnant_finish_announce_person(the_person)
+    return
+
+label silent_pregnant_finish(the_person):
+    $ pregnant_finish_person(the_person)
+
+    "You get a call from [the_person.possessive_title] early in the morning. You answer it."
+    the_person.char "Hey [the_person.mc_title], good news! Two days ago I had a beautiful, healthy baby girl! I'll be coming back to work today." #Obviously they're all girls for extra fun in 18 years.
+    mc.name "That's amazing, but are you sure you don't need more rest?"
+    if the_person.relationship != "Single":
+        $ so_title = SO_relationship_to_title(the_person.relationship)
+        the_person.char "I'll be fine, I'll be leaving her with my [so_title], so I can come back to work sooner."
+    else:
+        the_person.char "I'll be fine. I'm leaving her with my mother for a little while so I can get back to a normal life."
+
+    the_person.char "I just wanted to let you know. I'll talk to you soon."
+    "You say goodbye and [the_person.title] hangs up."
     return
