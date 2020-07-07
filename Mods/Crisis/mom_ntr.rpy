@@ -22,7 +22,7 @@ init 2 python:
         person.discover_opinion("creampies")
 
         # Pregnancy Check #
-        if persistent.pregnancy_pref > 0 and pregnant_role not in person.special_role:
+        if persistent.pregnancy_pref > 0 and not person.is_pregnant():
             if persistent.pregnancy_pref == 1 and person.on_birth_control: #Establish how likely her birth contorl is to work (if needed, and if present)
                 bc_percent = 100 - person.bc_penalty
             elif persistent.pregnancy_pref == 2 and person.on_birth_control:
@@ -41,7 +41,7 @@ init 2 python:
             else:
                 modified_fertility = person.fertility_percent
 
-            if preg_chance < modified_fertility and pregnant_role not in person.special_role: #There's a chance she's pregnant
+            if preg_chance < modified_fertility: #There's a chance she's pregnant
                 if bc_chance >= bc_percent : # Birth control failed to prevent the pregnancy
                     become_pregnant(person, mc_father = False) #Function in role_pregnant establishes all of the pregnancy related variables and events.
 
