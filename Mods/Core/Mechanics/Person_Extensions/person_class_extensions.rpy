@@ -1294,6 +1294,10 @@ init -1 python:
         return -1
     Person.pregnancy_show_day = pregnancy_show_day
 
+    def is_mc_father(self):
+        return self.event_triggers_dict.get("preg_mc_father", True)
+    Person.is_mc_father = is_mc_father
+
     def is_highly_fertile(self):
         if self.is_pregnant():
             return False
