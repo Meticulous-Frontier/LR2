@@ -36,7 +36,7 @@ init 2 python:
 
         target_label = "pregnant_finish" if person.is_mc_father() else "silent_pregnant_finish"
 
-        preg_finish_action = Action("Pregnancy Finish", preg_finish_requirement, "pregnant_finish", args = person, requirement_args = [person, day + renpy.random.randint(4,7)])
+        preg_finish_action = Action("Pregnancy Finish", preg_finish_requirement, target_label, args = person, requirement_args = [person, day + renpy.random.randint(4,7)])
         mc.business.mandatory_morning_crises_list.append(preg_finish_action)
         return        
 
