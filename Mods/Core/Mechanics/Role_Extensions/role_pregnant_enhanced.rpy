@@ -9,7 +9,7 @@ init 2 python:
         target_label = "pregnant_tits_announce" if person.is_mc_father() else "silent_pregnant_tits_announce"
 
         pregnant_tits_announce_action = Action("Announce Pregnant Tits", pregnant_tits_announcement_requirement, target_label, args = day)
-        person.on_talk_event_list.append(pregnant_tits_announce_action)
+        person.add_unique_on_talk_event(pregnant_tits_announce_action)
         return
 
     def silent_pregnant_transform_person(person):
@@ -22,7 +22,7 @@ init 2 python:
         target_label = "pregnant_transform_announce" if person.is_mc_father() else "silent_pregnant_transform_announce"
 
         preg_transform_announce_action = Action("Pregnancy Transform Announcement", preg_transform_announce_requirement, target_label, args = day)
-        person.on_room_enter_event_list.append(preg_transform_announce_action)
+        person.add_unique_on_room_enter_event(preg_transform_announce_action)
 
         target_label = "pregnant_finish_announce" if person.is_mc_father() else "silent_pregnant_finish_announce"
 
@@ -55,7 +55,7 @@ init 2 python:
             target_label = "pregnant_announce" if person.is_mc_father() else "silent_pregnant_announce"
 
             preg_announce_action = Action("Pregnancy Announcement", pregnant_announce_requirement, target_label, requirement_args = day + renpy.random.randint(12,18))
-            person.on_room_enter_event_list.append(preg_announce_action)
+            person.add_unique_on_room_enter_event(preg_announce_action)
 
         if day > person.event_triggers_dict.get("preg_tits_date", 0):
             person.event_triggers_dict["preg_knows"] = True
