@@ -31,6 +31,7 @@ init -1 python:
     config.predict_statements = 32
     config.rollback_length = 16      # limit rollback to reduce object tracking
     config.cache_surfaces = False
+    config.predict_screen_statements = False
     config.predict_screens = False
 
     # for DEBUG only (uncomment when you get a cPickle error)

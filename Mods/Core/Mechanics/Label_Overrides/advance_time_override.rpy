@@ -362,7 +362,7 @@ label advance_time_people_run_day_label():
     if persistent.use_free_memory or persistent.memory_mode < 2 or day%7 == 6:
         $ renpy.free_memory()
     $ gc.collect()
-    # $ renpy.profile_memory(.1, 16384)
+    #$ renpy.profile_memory(.5, 1024)
     $ renpy.block_rollback()
     return
 
