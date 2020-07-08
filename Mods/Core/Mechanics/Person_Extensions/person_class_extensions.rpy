@@ -897,12 +897,13 @@ init -1 python:
         if lighting is None:
             lighting = mc.location.get_lighting_conditions()
 
-        final_image = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
-        renpy.show(self.name + self.last_name,at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=self.name + self.last_name)
-
         if not from_scene:
+            renpy.scene("Active")
             if show_person_info:
                 renpy.show_screen("person_info_ui",self)
+
+        final_image = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
+        renpy.show(self.name + self.last_name,at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=self.name + self.last_name)
 
         if the_animation:
             global person_being_drawn
