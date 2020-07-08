@@ -42,15 +42,15 @@ init 5 python:
         opinion_list.insert(0, "Smalltalk")
         return opinion_list
 
-label small_talk_person_enhanced(person):
+label small_talk_person_enhanced(person, apply_energy_cost = True):
     python:
-        mc.change_energy(-15)
+        if apply_energy_cost:
+            mc.change_energy(-15)
         renpy.say(mc.name, "So [person.title], what's been on your mind recently?")
         person.discover_opinion("small talk")
-        successful_smalltalk = 60 + (person.get_opinion_score("small talk") * 20) + (mc.charisma * 5)
 
     # TODO: Add a chance that she wants to talk about someone she knows.
-    if renpy.random.randint(0,100) < successful_smalltalk:
+    if renpy.random.randint(0,100) < 60 + (person.get_opinion_score("small talk") * 20) + (mc.charisma * 5):
         if person.get_opinion_score("small talk") >= 0:
             $ person.draw_person(emotion = "happy")
             "She seems glad to have a chance to take a break and make small talk with you."

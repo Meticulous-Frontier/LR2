@@ -57,8 +57,6 @@ init 2 python:
                     mi.return_value = item[1]
 
             if isinstance(item,Person): #It's a person. Format it for a person list.
-                renpy.scene("Active") # clear current Active layer and prepare for new menu screen with people.
-
                 mi.title = format_titles(item)
                 mi.return_value = item
 

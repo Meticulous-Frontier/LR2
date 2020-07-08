@@ -897,18 +897,23 @@ init -1 python:
         if lighting is None:
             lighting = mc.location.get_lighting_conditions()
 
-        if the_animation:
-            final_image = self.build_person_animation(the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength)
-        else:
-            final_image = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
+        final_image = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
+        renpy.show(self.name + self.last_name,at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=self.name + self.last_name)
 
-        # if normal draw person call, clear scene
         if not from_scene:
-            renpy.scene("Active")
             if show_person_info:
                 renpy.show_screen("person_info_ui",self)
 
-        renpy.show(self.name + self.last_name,at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=self.name + self.last_name)
+        if the_animation:
+            global person_being_drawn
+            person_being_drawn = self
+
+            global current_draw_number
+            current_draw_number += 1
+
+            global prepared_animation_arguments
+            prepared_animation_arguments = [the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength, show_person_info, current_draw_number] #Effectively these are being stored and passed to draw_person_animation once take_animation_screenshot returns the surface
+            renpy.invoke_in_thread(self.prepare_animation_screenshot_render, position, emotion, special_modifier, lighting, background_fill, current_draw_number) #This thread prepares the render. When it is finished it is caught by the interact_callback function take_animation_screenshot
 
     # replace the default draw_person function of the person class
     Person.draw_person = draw_person_enhanced
@@ -935,25 +940,39 @@ init -1 python:
             the_animation = self.idle_animation
 
         if the_animation:
-            bottom_displayable = self.build_person_animation(the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength = 1.0)
+            # Normally we would display a quick flat version, but we can assume we are already looking at the girl pre-clothing removal.
+            bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill, no_frame = True)) #Get the starting image without the frame
+            self.outfit.remove_clothing(the_clothing) #Remove the clothing
+            top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill, no_frame = True)) #Get the top image without the frame
+
+            x_size, y_size = position_size_dict.get(position)
+            bottom_render = bottom_displayable.render(x_size, y_size, 0, 0)
+            top_render = top_displayable.render(x_size, y_size, 0, 0)
+
+            global current_draw_number
+            current_draw_number += 1
+
+            global prepared_animation_arguments
+            prepared_animation_arguments = [the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength, show_person_info, current_draw_number]
+
+            global person_being_drawn
+            person_being_drawn = self
+            renpy.invoke_in_thread(self.prepare_animation_screenshot_render_multi, position, bottom_render, top_render, current_draw_number)
+
         else:
             bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
-
-        self.outfit.remove_clothing(the_clothing)
-
-        if the_animation:
-            top_displayable = self.build_person_animation(the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength)
-        else:
+            self.outfit.remove_clothing(the_clothing)
             top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
 
-        renpy.scene("Active") # clear layer for new draw action
-        if scene_manager is None:
-            renpy.show_screen("person_info_ui",self)
-        else:   # when we are called from the scene manager we have to draw the other characters
-            scene_manager.draw_scene_without(self)
+            renpy.scene("Active") # clear layer for new draw action
+            if scene_manager is None:
+                renpy.show_screen("person_info_ui",self)
+            else:   # when we are called from the scene manager we have to draw the other characters
+                scene_manager.draw_scene_without(self)
 
-        renpy.show(self.name+self.last_name+"_new", at_list=[character_placement, scale_person(self.height)], layer = "Active", what = top_displayable, tag = self.name + self.last_name +"_new")
-        renpy.show(self.name+self.last_name+"_old", at_list=[character_placement, scale_person(self.height), clothing_fade], layer = "Active", what = bottom_displayable, tag = self.name + self.last_name +"_old")
+            renpy.show(self.name+self.last_name+"_new", at_list=[character_placement, scale_person(self.height)], layer = "Active", what = top_displayable, tag = self.name + self.last_name +"_new")
+            renpy.show(self.name+self.last_name+"_old", at_list=[character_placement, scale_person(self.height), clothing_fade], layer = "Active", what = bottom_displayable, tag = self.name + self.last_name +"_old")
+        return
 
     Person.draw_animated_removal = draw_animated_removal_enhanced
 
