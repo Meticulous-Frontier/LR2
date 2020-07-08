@@ -614,7 +614,7 @@ label condom_ask_enhanced(the_person):
             "Put on a condom":
                 "You pull a condom out of your wallet and tear open the package."
                 "[the_person.title] takes a hold of the condom in your hand."
-                if the_person.is_pregnant() and the_person.knows_pregnant():
+                if the_person.knows_pregnant():
                     the_person.char "I'm already pregnant. It's a bit late for that, isn't it?"
                 elif the_person.on_birth_control:
                     the_person.char "I'm on the pill so we really don't need one of those." # even if she is or not - she'll say it
@@ -649,7 +649,7 @@ label condom_ask_enhanced(the_person):
             the_person.char "That means 'safety first' - always."
             the_person.char "We're going to have to use one of these."
             "She gets out a condom."
-            if the_person.is_pregnant() and the_person.knows_pregnant():
+            if the_person.knows_pregnant():
                 the_person.char "Me being pregnant doesn't change that."
             the_person.char "But don't you worry."
             the_person.char "You're going to feel EVERY thing we do."
@@ -665,7 +665,7 @@ label condom_ask_enhanced(the_person):
         elif the_person.sex_record.get("Vaginal Creampies", 0) < 5 and the_person.sex_record.get("Anal Creampies", 0) < 5:
             the_person.char "Normally we would have to use one of these."
             "She gets out a condom."
-            if the_person.is_pregnant() and the_person.knows_pregnant():
+            if the_person.knows_pregnant():
                 the_person.char "Would you like to fuck this pregnant whore without one?"
             else:
                 the_person.char "But maybe not. What do you think?"
@@ -687,7 +687,7 @@ label condom_ask_enhanced(the_person):
 
         else:
             the_person.char "I know you like to do me bare."
-            if the_person.is_pregnant() and the_person.knows_pregnant():
+            if the_person.knows_pregnant():
                 the_person.char "Would you like to shower my baby with your cum?"
             else:
                 the_person.char "So maybe no condom today?"
@@ -710,7 +710,7 @@ label condom_ask_enhanced(the_person):
     elif the_person.effective_sluttiness() < condom_threshold:
         # they demand you put on a condom.
         #TODO: Make this dialogue personality based
-        if the_person.is_pregnant() and the_person.knows_pregnant():
+        if the_person.knows_pregnant():
             if the_person.get_opinion_score("bareback sex") < 0:
                 the_person.char "You can't get me {i}more{/i} pregnant, but I really don't like bare sex."
             else:
@@ -734,7 +734,7 @@ label condom_ask_enhanced(the_person):
 
     elif the_person.effective_sluttiness() < condom_threshold + 20:
         # They suggest you put on a condom.
-        if the_person.is_pregnant() and the_person.knows_pregnant():
+        if the_person.knows_pregnant():
             if the_person.get_opinion_score("bareback sex") < 0:
                 the_person.char "You can't get me {i}more{/i} pregnant, but I don't like bare sex. I think that you should put on a condom."
             else:
@@ -798,7 +798,7 @@ label condom_ask_enhanced(the_person):
                             the_person.char "Thanks, [the_person.mc_title]."
 
                 elif the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("anal creampies") > 0:
-                    if the_person.is_pregnant() and the_person.knows_pregnant():
+                    if the_person.knows_pregnant():
                         the_person.char "Remember that I'm pregnant, do we really need one of those now?"
                     elif the_person.on_birth_control:
                         the_person.char "I'm on the pill, do we really need one of those?"

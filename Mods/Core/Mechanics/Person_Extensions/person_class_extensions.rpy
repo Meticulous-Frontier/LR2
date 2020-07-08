@@ -1267,7 +1267,9 @@ init -1 python:
     Person.is_pregnant = is_pregnant
 
     def knows_pregnant(self):
-        return self.event_triggers_dict.get("preg_knows", False)
+        if self.is_pregnant():
+            return self.event_triggers_dict.get("preg_knows", False)
+        return False
     Person.knows_pregnant = knows_pregnant
 
     def is_lactating(self):
