@@ -887,6 +887,9 @@ init -1 python:
         if position is None:
             position = self.idle_pose
 
+        if position == "standing_doggy":
+            position = "doggy"
+
         if emotion is None:
             emotion = self.get_emotion()
 
@@ -930,6 +933,9 @@ init -1 python:
         if position is None:
             position = self.idle_pose
 
+        if position == "standing_doggy":
+            position = "doggy"
+
         if emotion is None:
             emotion = self.get_emotion()
 
@@ -943,6 +949,12 @@ init -1 python:
             the_animation = None
         elif the_animation is None:
             the_animation = self.idle_animation
+
+        renpy.scene("Active") # clear layer for new draw action
+        if scene_manager is None:
+            renpy.show_screen("person_info_ui",self)
+        else:   # when we are called from the scene manager we have to draw the other characters
+            scene_manager.draw_scene_without(self)
 
         if the_animation:
             # Normally we would display a quick flat version, but we can assume we are already looking at the girl pre-clothing removal.
@@ -968,12 +980,6 @@ init -1 python:
             bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
             self.outfit.remove_clothing(the_clothing)
             top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
-
-            renpy.scene("Active") # clear layer for new draw action
-            if scene_manager is None:
-                renpy.show_screen("person_info_ui",self)
-            else:   # when we are called from the scene manager we have to draw the other characters
-                scene_manager.draw_scene_without(self)
 
             renpy.show(self.name+self.last_name+"_new", at_list=[character_placement, scale_person(self.height)], layer = "Active", what = top_displayable, tag = self.name + self.last_name +"_new")
             renpy.show(self.name+self.last_name+"_old", at_list=[character_placement, scale_person(self.height), clothing_fade], layer = "Active", what = bottom_displayable, tag = self.name + self.last_name +"_old")
