@@ -35,7 +35,7 @@ init -1 python:
             self.mc_position = []                   #Holds the positions that MC can take during this position
             self.verb = verb #A verb used to describe the position. "Fuck" is default, and mostly used for sex positions or blowjobs etc. Kiss, Fool around, etc. are also possibilities.
             self.verbing = verbing
-            self.current_modifier = None #We will update this if the posisiion has a special modifier that shoudl be applied, like blowjob.
+            self.current_modifier = None #We will update this if the position has a special modifier that should be applied, like blowjob.
             self.p1_transform = p1_transform
             self.p2_transform = p2_transform
             self.p1_z_order = p1_z_order

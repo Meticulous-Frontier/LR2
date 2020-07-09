@@ -423,7 +423,7 @@ init -1 python:
             self.swap_description = swap_description
             self.verb = verb #A verb used to describe the position. "Fuck" is default, and mostly used for sex positions or blowjobs etc. Kiss, Fool around, etc. are also possibilities.
 
-            self.current_modifier = None #We will update this if the posisiion has a special modifier that shoudl be applied, like blowjob.
+            self.current_modifier = None #We will update this if the position has a special modifier that should be applied, like blowjob.
             self.p1_x = p1_x
             self.p1_y = p1_y
             self.p1_zoom = p1_zoom
