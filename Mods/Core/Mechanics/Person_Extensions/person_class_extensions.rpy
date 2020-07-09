@@ -1095,7 +1095,10 @@ init -1 python:
     Person.apply_university_outfit = apply_university_outfit
 
     def apply_planned_outfit(self):
-        self.apply_outfit(self.planned_outfit)
+        if self.should_wear_uniform():
+            self.wear_uniform()
+        else:
+            self.apply_outfit(self.planned_outfit)
         return
 
     Person.apply_planned_outfit = apply_planned_outfit
