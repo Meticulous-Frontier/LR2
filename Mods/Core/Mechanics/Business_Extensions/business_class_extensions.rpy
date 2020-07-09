@@ -69,18 +69,19 @@ init -1 python:
 
     def calculate_strip_club_income(self):
         income = 0
-        if get_strip_club_foreclosed_stage() >= 5: # The player owns the club
-            for person in known_people_in_the_game():
-                if person.has_role([stripper_role, waitress_role, bdsm_performer_role]):
-                    income += calculate_stripper_profit(person)
+        if "get_strip_club_foreclosed_stage" in globals():
+            if get_strip_club_foreclosed_stage() >= 5: # The player owns the club
+                for person in known_people_in_the_game():
+                    if person.has_role([stripper_role, waitress_role, bdsm_performer_role]):
+                        income += calculate_stripper_profit(person)
 
-            if __builtin__.len(people_in_role(manager_role)) > 0 or __builtin__.len(people_in_role(mistress_role)) > 0:
-                income *= 1.1 # +10% income
+                if __builtin__.len(people_in_role(manager_role)) > 0 or __builtin__.len(people_in_role(mistress_role)) > 0:
+                    income *= 1.1 # +10% income
 
-            # deduce stripper costs
-            for person in known_people_in_the_game():
-                if person.has_role([stripper_role, waitress_role, bdsm_performer_role, manager_role, mistress_role]):
-                    income -= person.stripper_salary
+                # deduce stripper costs
+                for person in known_people_in_the_game():
+                    if person.has_role([stripper_role, waitress_role, bdsm_performer_role, manager_role, mistress_role]):
+                        income -= person.stripper_salary
 
         return income
 
