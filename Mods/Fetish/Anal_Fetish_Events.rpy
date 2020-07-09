@@ -132,6 +132,7 @@ label SB_fetish_anal_label(the_person):
             "[the_person.possessive_title] tries to push back against you and begins to beg."
             the_person.char "No! I need you in my ass right now... I need the heat and intensity of you fucking my ass right now!"
             "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]."
+            $ the_person.break_taboo("anal_sex")
             ###Anal Scene, standing variant###
             call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True) from _call_fuck_person_SBA10
             #$ the_person.SB_fetish = "anal sex"
@@ -198,6 +199,7 @@ label SB_fetish_anal_label_non_employee(the_person):
             "[the_person.possessive_title] tries to push back against you and begins to beg."
             the_person.char "No! I need you in my ass right now... I need you to ram your dick inside my slutty ass right now!"
             "You drop your boxers and shove your already hard dick right inside her lubed up back passage, eliciting a satisfied sigh from [the_person.possessive_title]."
+            $ the_person.break_taboo("anal_sex")
 
             call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True) from _call_fuck_person_SB_fetish_anal_label_non_employee
 
@@ -689,6 +691,7 @@ label SB_mom_anal_pay_label():
             $ the_person.draw_person(position = "cowgirl")
             the_person.char "Now, just let [the_person.title] take care of you. I'm gonna stick it into my most intimate hole now..."
             "[the_person.possessive_title] goes slow, but steadily slides down, impaling her sphincter on your throbbing erection. She bottoms out and moans loudly."
+            $ the_person.break_taboo("anal_sex")
             call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_SBA41
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:
@@ -880,10 +883,10 @@ label SB_lily_anal_dp_fetish_label():
         mc.name "Hey... I already kinda have something like that..."
         "She looks at what you've got and her eyes get bright."
         the_person.char "Ah! Bro! Why didn't you tell me you had one of these?"
-        "Starbuck turns to you as you reach a selection of dildos."
+        "[starbuck.possessive_title] turns to you as you reach a selection of dildos."
         the_person.char "Just pretend like we are looking then, that will totally work!"
     else:
-        "Starbuck leads you over to a selection of dildos. They have special straps that go around the man so that they are secured, just below penis, and can be used for double penetration."
+        "[starbuck.possessive_title] leads you over to a selection of dildos. They have special straps that go around the man so that they are secured, just below penis, and can be used for double penetration."
 
     $ the_person.draw_person(position = "stand4")
     the_person.char "Hmm... I don't know, what do you think about this one?"
@@ -924,6 +927,7 @@ label SB_lily_anal_dp_fetish_label():
     the_person.char "Oh! That feels good... but I'm ready for you. Let me have it [the_person.mc_title]!"
     "You use your hand to line yourself cock up with her puckered hole. She reaches down and grabs the dildo and lines it up with her pussy."
     "With one slow, smooth motion, you push your cock past her well lubed sphincter. It goes in with a small pop, and then you continue with a slow thrust until your cock is buried in her ass."
+    $ the_person.break_taboo("anal_sex")
     the_person.char "Fuck! Holy hell... [the_person.mc_title] that is intense! I've never felt... I'm so full!!!"
     "Going tantalizingly slow, you pull yourself mostly out, then back into her buttery smooth back door."
     the_person.char "Okay... Go slow... but I'm ready!"
@@ -1008,6 +1012,7 @@ label SB_starbuck_anal_intro():
     "With her plug still in, you slide your cock up and down a few times between her cheeks. She pushes herself back against you, grinding her hips against yours."
     "Her soft, pliant cheeks feel great pushed up against your hips. You reach down and slowly pull out her plug and set it on the counter."
     "With her hip in one hand and your dick in the other, you line yourself up and slowly push into [the_person.possessive_title]'s tender behind."
+    $ the_person.break_taboo("anal_sex")
     "You lean forward and whisper into her ear."
     mc.name "Hey [the_person.title]. I'm about to fuck your ass now, just the way you like."
     "Her body shudders from your dirty talk. She wiggles her ass back up against you."
@@ -1067,7 +1072,7 @@ label SB_starbuck_anal_swing_demo(the_person):
     the_person.char "That sounds great!"
     $ in_private = True
     #TODO determine if there are people here
-    if __builtin__.len(mc.location.people) >= 2: #If Starbuck is not the only girl
+    if __builtin__.len(mc.location.people) > 1: #If Starbuck is not the only girl
         the_person.char "I've got an idea! I've got a few customers in here... want to do a demonstration for anyone who wants to attend?"
         "You consider her proposition carefully."
         menu:
@@ -1252,9 +1257,11 @@ label SB_stephanie_anal_fetish_label():
                 $ scene_manager.update_actor(the_person, position = "standing_doggy")
                 "[the_person.possessive_title] turns around and bends over. Your hands immediately get to work."
                 $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
-                "She wiggles her ass back and forth in front of you as you pull your dick out."
+                "She wiggles her ass back and forth in front of you as you pull your dick out of your pants."
                 the_person.char "Come on [the_person.mc_title], you know what I need!"
-                call fuck_person(the_person, start_position = SB_anal_standing) from _call_fuck_person_SBA090
+                "Without any hesitation you slide your cock into her tight hole."
+                $ the_person.break_taboo("anal_sex")
+                call fuck_person(the_person, start_position = SB_anal_standing, skip_intro = True, position_locked = True) from _call_fuck_person_SBA090
                 $ the_person.max_opinion_score("anal sex")
                 $ the_person.max_opinion_score("anal creampies")
                 $ the_person.add_role(anal_fetish_role)
@@ -1266,7 +1273,7 @@ label SB_stephanie_anal_fetish_label():
                 the_person.char "Okay... I'm in. I hope you realize the serums also greatly increase libido."
                 mc.name "Don't worry. I have something that can help with that."
                 "You reach inside the bottom drawer of your desk. You pull out a pink glass anal plug and hand it to her. Her eyes are transfixed on the plug."
-                mc.name "If the urgres get crazy strong, and I'm not available to satisfy you, use this."
+                mc.name "If the crazy urges get too strong, and I'm not available to satisfy you, use this."
                 the_person.char "Oh! Okay! I think I'll try it out now..."
                 "You see her reach behind herself and easily slide it in, her body still lubed up from your prior fucking."
                 the_person.char "Ah! Mmm I feel full. That's really nice. Not as good as you, but I guess in a pinch I could use it as a substitute."
@@ -1300,6 +1307,8 @@ label SB_stephanie_anal_fetish_label():
                 $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
                 "She wiggles her ass back and forth in front of you as you pull your dick out."
                 the_person.char "Stick it in [the_person.mc_title]! I want to earn my special present!"
+                "Without any hesitation you slide your cock into her tight hole."
+                $ the_person.break_taboo("anal_sex")
                 call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True, position_locked = True) from _call_fuck_person_SBA091
                 $ the_person.max_opinion_score("anal sex")
                 $ the_person.max_opinion_score("anal creampies")
@@ -1383,8 +1392,10 @@ label SB_stephanie_anal_fetish_label():
                 $ scene_manager.update_actor(the_person, position = "standing_doggy")
                 "[the_person.possessive_title] turns around and bends over. Your hands immediately get to work."
                 $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
-                "She wiggles her ass back and forth in front of you as you pull your dick out."
+                "She wiggles her ass back and forth in front of you as you pull your dick out of your pants."
                 the_person.char "Stick it in [the_person.mc_title]! I want to earn my special present!"
+                "Without any hesitation you slide your cock into her tight hole."
+                $ the_person.break_taboo("anal_sex")
                 call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True, position_locked = True) from _call_fuck_person_SBA092
                 $ the_person.max_opinion_score("anal sex")
                 $ the_person.max_opinion_score("anal creampies")
