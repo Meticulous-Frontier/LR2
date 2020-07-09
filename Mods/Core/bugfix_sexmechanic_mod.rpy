@@ -337,13 +337,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 if position_choice is not None:
                     # We need to make sure we're using an appropriate object
                     $ object_choice = girl_choose_object_enhanced(the_person, position_choice)
-                    if object_choice and not has_taken_control:
-                        # show dialog of girl changing position on her own
-                        if the_person.has_taboo(position_choice.associated_taboo) and not ignore_taboo:
-                            $ position_choice.call_taboo_break(the_person, mc.location, object_choice)
-                            $ the_person.break_taboo(position_choice.associated_taboo)
-                        else:
-                            $ position_choice.call_transition(position_choice, the_person, mc.location, object_choice)
+                    $ round_choice = "Change"
 
             if position_choice is None: #There's no position we can take
                 "[the_person.title] can't think of anything more to do with you."
@@ -363,19 +357,18 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             elif report_log.get("girl orgasms", 0) == 0 and the_person.energy < 15 :
                 the_person.char "That was nice, but I'm tired. We will continue this another time."
                 $ round_choice = "Girl Leave"
-            elif has_taken_control:
-                $ has_taken_control = False
-                $ the_person.call_dialogue("sex_take_control")
-                # show dialog of girl changing position on her own
-                if the_person.has_taboo(position_choice.associated_taboo) and not ignore_taboo:
-                    $ position_choice.call_taboo_break(the_person, mc.location, object_choice)
-                    $ the_person.break_taboo(position_choice.associated_taboo)
-                else:
-                    $ position_choice.call_transition(position_choice, the_person, mc.location, object_choice)
-                $ round_choice = "Continue"
             else:
-                # Don't show control message, it breaks the flow, because it pops up every round.
-                #"[the_person.possessive_title] is in control, and keeps on [position_choice.verbing] you."
+                if has_taken_control:
+                    $ has_taken_control = False
+                    $ the_person.call_dialogue("sex_take_control")
+
+                if round_choice == "Change" and position_choice and object_choice:
+                    # show dialog of girl changing position on her own
+                    if the_person.has_taboo(position_choice.associated_taboo) and not ignore_taboo:
+                        $ position_choice.call_taboo_break(the_person, mc.location, object_choice)
+                        $ the_person.break_taboo(position_choice.associated_taboo)
+                    else:
+                        $ position_choice.call_transition(position_choice, the_person, mc.location, object_choice)
                 $ round_choice = "Continue"
         else:
             # Forced actions (when the guy is in charge) go here and set round_choice.
