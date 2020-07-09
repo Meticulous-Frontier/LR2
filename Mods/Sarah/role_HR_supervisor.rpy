@@ -538,6 +538,7 @@ label HR_director_monday_meeting_label(the_person):
                 call HR_director_personnel_interview_label(the_person, max_opinion = get_HR_director_tag("business_HR_coffee_tier", 0)) from HR_DIR_INTERVIEW_CALL_2
                 if _return:
                     $ set_HR_director_tag("business_HR_meeting_last_day", day)
+                $ scene_manager.update_actor(the_person, position = "sitting")                    
             "Let's not this week":
                 $ del HR_employee_list
 
