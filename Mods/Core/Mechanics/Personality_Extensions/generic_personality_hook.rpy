@@ -365,9 +365,10 @@ init -1 python:
         return
 
     def update_main_character_actions():
-        for action in main_character_actions_list:
-            if action not in mc.main_character_actions:
-                mc.main_character_actions.append(action)
+        if "main_character_actions_list" in globals():
+            for action in main_character_actions_list:
+                if action not in mc.main_character_actions:
+                    mc.main_character_actions.append(action)
         return
 
 
