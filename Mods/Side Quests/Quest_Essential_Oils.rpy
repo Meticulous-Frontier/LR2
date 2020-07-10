@@ -33,7 +33,6 @@ init 1 python:
         quest_essential_oils.quest_event_dict["start_day"] = 9999
         quest_essential_oils.quest_event_dict["research_day"] = 9999
         quest_essential_oils.quest_event_dict["timeout_day"] = 9999
-        quest_essential_oils.quest_event_dict["invoice_day"] = 9999
         quest_essential_oils.set_quest_flag(1)
         quest_essential_oils_get_target().add_unique_on_room_enter_event(quest_essential_oils_intro)
         game_hints.append(Hint("Essential Oils", "There is a strange smell around the office.", "quest_essential_oils.get_quest_flag() <= 1", "quest_essential_oils.get_quest_flag() > 1"))
@@ -81,8 +80,7 @@ init 1 python:
         if mc.business.head_researcher:
             mc.business.head_researcher.remove_on_talk_event(quest_essential_oils_research_start)
             mc.business.head_researcher.remove_on_talk_event(quest_essential_oils_research_end)
-        if quest_essential_oils.quest_completed: # only clear dictionary when quest is complete
-            quest_essential_oils.quest_event_dict.clear()
+        quest_essential_oils.quest_event_dict.clear()
         return
 
     def quest_essential_oils_get_target():
@@ -126,8 +124,13 @@ init 1 python:
                 return True
         return False
 
-    def quest_essential_oils_invoice_requirement():
-        if day > quest_essential_oils.quest_event_dict.get("invoice_day", 0):
+    def add_quest_essential_oils_invoice():
+        quest_essential_oils_invoice = Action("Essential Oil Invoice", quest_essential_oils_invoice_requirement, "quest_essential_oils_invoice_label", requirement_args = day + 5)
+        mc.business.mandatory_crises_list.append(quest_essential_oils_invoice)
+        return
+
+    def quest_essential_oils_invoice_requirement(pay_day):
+        if day > pay_day:
             if time_of_day == 2:
                 if mc.is_at_work():
                     return True
@@ -151,7 +154,6 @@ init 1 python:
     quest_essential_oils_discover_supplier = Action("Find a Supplier", quest_essential_oils_discover_supplier_requirement, "quest_essential_oils_discover_supplier_label")
     quest_essential_oils_decision = Action("Talk to Supplier", quest_essential_oils_decision_requirement, "quest_essential_oils_decision_label")
     quest_essential_oils_abandon = Action("Abandon Quest", quest_essential_oils_abandon_requirement, "quest_essential_oils_abandon_label")
-    quest_essential_oils_invoice = Action("Essential Oil Invoice", quest_essential_oils_invoice_requirement, "quest_essential_oils_invoice_label")
 
 
 #Quest Labels. This is the story you want to tell!
@@ -277,6 +279,7 @@ label quest_essential_oils_decision_label(the_person):
             "[the_person.title] takes your information."
             the_person.char "I'll make sure it gets delivered out to your business right away!"
             $ quest_essential_oils.set_quest_flag(102)
+            $ add_quest_essential_oils_invoice()
         "Too pricey":
             mc.name "Wow... $500? You know what, this was a mistake. I'm sorry to bother you."
             the_person.char "Okay, your loss!"
@@ -286,7 +289,6 @@ label quest_essential_oils_decision_label(the_person):
     $ renpy.scene("Active")
     #$ add_essential_oil_serum_trait()
     $ list_of_traits.append(essential_oil_trait)
-    # remove events / just wait for invoice if applicable
     $ quest_essential_oils_cleanup()
     if mc.business.head_researcher is None:
         # we fired the head researcher, so we don't bother checking in with them.
