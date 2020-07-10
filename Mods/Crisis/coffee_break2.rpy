@@ -78,7 +78,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                     $ scene_manager.update_actor(loser, position = "blowjob")
                     "[loser.possessive_title] gives you a quick blowjob and you splatter your cum all over her face, she smears it around and into her hair for added effect."
                     $ loser.cum_on_face()
-                    $ scene_manager.update_actor(loser, position = "standing")
+                    $ scene_manager.update_actor(loser, position = "stand3")
                     loser.char "Thanks, these delivery boys love it when I do this."
                 "Refuse":
                     loser.char "Aww you're no fun, [loser.mc_title]. If he makes me pay this time it's your fault."
