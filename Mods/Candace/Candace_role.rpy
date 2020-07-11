@@ -152,7 +152,7 @@ label candace_meet_at_office_store_label(the_person):
     $ the_person.event_triggers_dict["met_at_store"] = 1
     # make sure candace is in unique character list (prevent MC hire button)
     if candace not in unique_character_list:
-        unique_character_list.append(candace)
+        $ unique_character_list.append(candace)
     return "Advance Time"
 
 label candace_get_to_know_label(the_person):
