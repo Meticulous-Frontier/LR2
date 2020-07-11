@@ -204,7 +204,7 @@ init python: # This space is reserved for definitions used to simplify the code
             elif person.skin == "black":
                  person.expression_images = Expression("default","black","Face_6")
 
-        elif person.face_style == "Face_7": # Variations of Face Style 6
+        elif person.face_style == "Face_7": # Variations of Face Style 7
             if person.skin == "white":
                  person.expression_images = Expression("default","white","Face_7")
 
@@ -214,7 +214,7 @@ init python: # This space is reserved for definitions used to simplify the code
             elif person.skin == "black":
                  person.expression_images = Expression("default","black","Face_7")
 
-        elif person.face_style == "Face_8": # Variations of Face Style 6
+        elif person.face_style == "Face_8": # Variations of Face Style 8
             if person.skin == "white":
                  person.expression_images = Expression("default","white","Face_8")
 
@@ -224,7 +224,7 @@ init python: # This space is reserved for definitions used to simplify the code
             elif person.skin == "black":
                  person.expression_images = Expression("default","black","Face_8")
 
-        elif person.face_style == "Face_9": # Variations of Face Style 6
+        elif person.face_style == "Face_9": # Variations of Face Style 9
             if person.skin == "white":
                  person.expression_images = Expression("default","white","Face_9")
 
@@ -234,7 +234,7 @@ init python: # This space is reserved for definitions used to simplify the code
             elif person.skin == "black":
                  person.expression_images = Expression("default","black","Face_9")
 
-        elif person.face_style == "Face_11": # Variations of Face Style 6
+        elif person.face_style == "Face_11": # Variations of Face Style 11
             if person.skin == "white":
                  person.expression_images = Expression("default","white","Face_11")
 
@@ -244,7 +244,7 @@ init python: # This space is reserved for definitions used to simplify the code
             elif person.skin == "black":
                  person.expression_images = Expression("default","black","Face_11")
 
-        elif person.face_style == "Face_12": # Variations of Face Style 6
+        elif person.face_style == "Face_12": # Variations of Face Style 12
             if person.skin == "white":
                  person.expression_images = Expression("default","white","Face_12")
 
@@ -254,7 +254,7 @@ init python: # This space is reserved for definitions used to simplify the code
             elif person.skin == "black":
                  person.expression_images = Expression("default","black","Face_12")
 
-        elif person.face_style == "Face_13": # Variations of Face Style 6
+        elif person.face_style == "Face_13": # Variations of Face Style 13
             if person.skin == "white":
                  person.expression_images = Expression("default","white","Face_13")
 
@@ -264,7 +264,7 @@ init python: # This space is reserved for definitions used to simplify the code
             elif person.skin == "black":
                  person.expression_images = Expression("default","black","Face_13")
 
-        elif person.face_style == "Face_14": # Variations of Face Style 6
+        elif person.face_style == "Face_14": # Variations of Face Style 14
             if person.skin == "white":
                  person.expression_images = Expression("default","white","Face_14")
 
