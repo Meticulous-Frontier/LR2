@@ -162,11 +162,9 @@ label strip_club_evaluate_stripper(the_person):
             if the_person == cousin:
                 "Humiliated like never before, [the_person.title] quickly dresses back up and walks out of the club."
                 $ the_person.change_stats(happiness = -10, obedience = 5, love = -10)
-                $ strip_club_fire_stripper(the_person)
-                $ strip_club.move_person(the_person, the_person.home)
             else:
                 "Unable to argue with you, [the_person.title] quickly dresses back up and leaves the club, still in tears."
-                $ strip_club_fire_stripper(the_person)
-                $ strip_club.move_person(the_person, the_person.home)
+            $ strip_club_fire_stripper(the_person)
+            $ strip_club.move_person(the_person, the_person.home)
             $ mc.location.show_background()
     return
