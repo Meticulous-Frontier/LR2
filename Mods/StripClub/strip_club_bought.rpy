@@ -158,7 +158,7 @@ label strip_club_evaluate_stripper(the_person):
             "[the_person.title] was so sure she would get back her job she can't utter a single word."
             "She can't believe your decision, and in a few seconds her face is striped by copious tears."
             $ the_person.apply_outfit(the_person.planned_outfit)
-            $ the_person.draw_person(emotion = "sad", position = "walk_away")
+            $ the_person.draw_person(emotion = "sad", position = "walking_away")
             if the_person == cousin:
                 "Humiliated like never before, [the_person.title] quickly dresses back up and walks out of the club."
                 $ the_person.change_stats(happiness = -10, obedience = 5, love = -10)
