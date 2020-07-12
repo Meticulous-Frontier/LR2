@@ -18,8 +18,8 @@ init 2 python:
         return not get_so_relationship_worsen_person() is None
 
     def so_relationship_quarrel_requirement(person):
-        # set quarrel chance to 20% else too many relationships will be split up by the limited time event selector.
-        if person.relationship != "Single" and renpy.random.randint(0, 100) < 20:
+        # set quarrel chance to 10% else too many relationships will be split up by the limited time event selector.
+        if person.relationship != "Single" and renpy.random.randint(0, 100) < 10:
             if not person.has_role([casual_hotwife_role]): # Hotwife doesn't want to leave her SO
                 return True
         return False
