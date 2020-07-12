@@ -335,7 +335,7 @@ label strip_club_fire_employee_label(the_person):
             return
         "Refuse":
             mc.name "I'm sorry [the_person.title], but sex won't make me change my mind..."
-            $ the_person.draw_person(emotion = "sad", position = "stand1")
+            $ the_person.draw_person(emotion = "sad", position = "stand3")
             the_person.char "Damn... Ok, I will clear out my locker at the end of my shift."
             $ the_person.change_stats(happiness = -10, obedience = -5, love = -5)
             $ strip_club_fire_stripper(the_person)
