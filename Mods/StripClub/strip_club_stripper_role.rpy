@@ -59,11 +59,11 @@ init 5 python:
             person.set_schedule([0, 4], person.home)
             person.set_schedule([1, 2, 3], None)
 
-        if role is stripper_role and person in stripclub_strippers:
+        if person in stripclub_strippers:
             stripclub_strippers.remove(person)
-        if role is bdsm_performer_role and person in stripclub_bdsm_performers:
+        if person in stripclub_bdsm_performers:
             stripclub_bdsm_performers.remove(person)
-        if role is waitress_role and person in stripclub_waitresses:
+        if person in stripclub_waitresses:
             stripclub_waitresses.remove(person)
         return
 
