@@ -11,7 +11,7 @@ init python:
         strip_description = "strip_SB_doggy_anal_dildo_dp", strip_ask_description = "strip_ask_SB_doggy_anal_dildo_dp",
         taboo_break_description = "taboo_break_SB_doggy_anal_dildo_dp",
         orgasm_description = "orgasm_SB_doggy_anal_dildo_dp",
-        verb = "ass fuck",
+        verb = "dp", verbing = "dp-ing",
         opinion_tags = ["doggy style sex", "anal sex", "vaginal sex"], record_class = "Anal Sex",
         associated_taboo = "anal_sex")
 
