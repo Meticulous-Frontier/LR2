@@ -1247,6 +1247,9 @@ label Sarah_tits_reveal_label():
 
 label Sarah_stripclub_story_label():
     $ the_person = sarah
+    $ the_person.planned_outfit = get_sarah_date_outfit_two()
+    $ the_person.apply_planned_outfit()
+
     $ scene_manager = Scene()
     #TODO going out outfit
     "Lost in thought as you get your work done in the silence of the weekend, a sudden voice startles you."
@@ -1399,6 +1402,7 @@ label Sarah_stripclub_story_label():
     "You see [the_person.title] look over at you. You can see her mouth the word 'please'"
     mc.name "That sounds fair."
     "You grab $100 and put it in the tip jar."
+    $ mc.business.change_funds(-100)
     "Before you finish putting the money in the jar, you notice that [the_person.title] has her hands all over her stripper's chest."
     "She seems to be really enjoying the show so far!"
     $ mc.change_arousal(10)
@@ -1424,6 +1428,7 @@ label Sarah_stripclub_story_label():
         "[showgirl_2.title] looks bank and whispers at you."
         showgirl_2.char "Maybe later you can touch me there..."
     "You don't hesitate. You grab $200 and put it in the tip jar."
+    $ mc.business.change_funds(-200)
     "[the_person.title] sees you do it and immediately starts to run her hands along her girl's hips."
     "You do the same. The girl in front of you continues to work her hips back and forth across your erection as you run your hands along her hips."
     "You cup and grab her ass a few times when you have the opportunity. Her hips sway enticingly."
