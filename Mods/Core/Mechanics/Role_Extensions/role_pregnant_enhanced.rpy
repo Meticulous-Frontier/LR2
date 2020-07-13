@@ -38,7 +38,7 @@ init 2 python:
 
         preg_finish_action = Action("Pregnancy Finish", preg_finish_requirement, target_label, args = person, requirement_args = [person, day + renpy.random.randint(4,7)])
         mc.business.mandatory_morning_crises_list.append(preg_finish_action)
-        return        
+        return
 
     def become_pregnant(person, mc_father = True, progress_days = 0): # Called when a girl is knocked up. Establishes all of the necessary bits of info.
         person.event_triggers_dict["preg_accident"] = person.on_birth_control # If a girl is on birth control the pregnancy is an accident.
@@ -54,7 +54,7 @@ init 2 python:
         else:
             target_label = "pregnant_announce" if person.is_mc_father() else "silent_pregnant_announce"
 
-            preg_announce_action = Action("Pregnancy Announcement", pregnant_announce_requirement, target_label, requirement_args = day + renpy.random.randint(12,18))
+            preg_announce_action = Action("Pregnancy Announcement", preg_announce_requirement, target_label, requirement_args = day + renpy.random.randint(12,18))
             person.add_unique_on_room_enter_event(preg_announce_action)
 
         if day > person.event_triggers_dict.get("preg_tits_date", 0):
@@ -106,7 +106,7 @@ label silent_pregnant_tits_announce(start_day, the_person):
 
 label silent_pregnant_transform(the_person): #Changes the person to their pregnant body and stores what their pre-pregnancy body and tits were
     $ silent_pregnant_transform_person(the_person)
-    return    
+    return
 
 label silent_pregnant_transform_announce(start_day, the_person):
     $ the_person.draw_person()
