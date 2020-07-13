@@ -173,7 +173,7 @@ init 5 python:
         if get_HR_director_tag("business_HR_serum_tier", 0) < 4:
             return False
         if get_HR_director_tag("business_HR_meeting_last_day", 0) >= day:
-            return "One meeting per day."
+            return "One meeting per day"
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():
@@ -193,7 +193,7 @@ init 5 python:
         if not get_HR_director_tag("business_HR_meeting_on_demand", False):
             return False
         if get_HR_director_tag("business_HR_meeting_last_day", 0) >= day:
-            return "One meeting per hours"
+            return "One meeting per day"
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():

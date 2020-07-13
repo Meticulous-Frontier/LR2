@@ -1632,17 +1632,17 @@ label starbuck_close_up_label(the_person): #You offer to help her close up. Main
     "You grab two beers from the fridge and pop the caps on both with a bottle open magnet you find stuck to the front of the fridge."
     "[the_person.possessive_title] is in the back, you could probably drop some serum into her beer if you want to."
     menu:
-        "Add some serum to her beer." if mc.inventory.get_any_serum_count() > 0:
+        "Add some serum to her beer" if mc.inventory.get_any_serum_count() > 0:
             call give_serum(the_person) from _call_give_serum_SBS130
             if _return:
                 "You double check to make sure she is still in the back, then add the serum to [the_person.title]'s food."
             else:
                 "You think about adding a dose of serum to [the_person.title]'s beer, but decide against it."
 
-        "Add some serum to her beer.\n{color=#ff0000}{size=18}Requires: Serum{/size}{/color} (disabled)" if mc.inventory.get_any_serum_count() == 0:
+        "Add some serum to her beer\n{color=#ff0000}{size=18}Requires: Serum{/size}{/color} (disabled)" if mc.inventory.get_any_serum_count() == 0:
             pass
 
-        "Leave her beer alone.":
+        "Leave her beer alone":
             "You take a long sip of your drink, waiting until [the_person.title] returns."
     $ the_person.draw_person(position = "stand4")
     "[the_person.possessive_title] returns with several boxes and sets them down, the grabs the beer and takes a sip."
@@ -1657,10 +1657,10 @@ label starbuck_close_up_label(the_person): #You offer to help her close up. Main
         "You say goodbye to [the_person.title] and head out."
         return
     menu: #This menu is just to weed out if we don't want to have fun
-        "Have some fun with her.":
+        "Have some fun with her":
             pass
-        "Some other time.":
-            mc.name "Honestly, I'm pretty tired out. Can I have a raincheck?"
+        "Some other time":
+            mc.name "Honestly, I'm pretty tired out. Can I have a rain check?"
             "You can tell she is a little disappointed, but soon she is stretching and yawning."
             the_person.char "You know what?... I'm pretty tired too. Good night [the_person.mc_title]."
             "She walks you to the door of the business and you walk out together, before going your separate ways."
@@ -1668,7 +1668,7 @@ label starbuck_close_up_label(the_person): #You offer to help her close up. Main
     mc.name "I can definitely think of something."
     the_person.char "Oh yeah? I hope its the same thing I'm thinking..."
     menu:
-        "Just mess around some.":
+        "Just mess around some":
             "You grab [the_person.possessive_title]. She wraps her arms around you."
             $ mc.change_arousal(20)
             call fuck_person(the_person, skip_intro = False, private = True) from _call_fuck_person_SBS131
@@ -1676,7 +1676,7 @@ label starbuck_close_up_label(the_person): #You offer to help her close up. Main
             mc.name "I'm sorry, I can't promise something like that, my business keeps me busy."
             the_person.char "Damn. A girl can dream though."
             $ the_person.change_love(amount = 3, max_modified_to = 30)
-        "Dress up for you." if the_person.shop_investment_rate >= 2.0:
+        "Dress up for you" if the_person.shop_investment_rate >= 2.0:
             call starbuck_replay_dressup_label(the_person) from _call_starbuck_replay_SBS132
         # "Play with a dildo for you." if the_person.shop_investment_rate >= 3.0:   #TODO these options.
         #     pass

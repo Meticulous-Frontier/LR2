@@ -298,8 +298,6 @@ label quest_arousal_serum_test_label():
         the_person.char "Yeah... something like that. Hey I'm wore out. I'll get back to you about it, okay?"
         mc.name "Thanks."
         $ quest_arousal_serum.set_quest_flag(42)
-        $ mc.business.mandatory_crises_list.append(quest_arousal_serum_researched)
-        $ quest_arousal_serum.quest_event_dict["ready_day"] = day + 3
     else:
         $ the_person.draw_person()
         "[the_person.title] slowly gets up."
@@ -322,8 +320,11 @@ label quest_arousal_serum_test_label():
         the_person.char "Yeah... something like that. Hey I'm wore out. I'll get back to you about it, okay?"
         mc.name "Thanks."
         $ quest_arousal_serum.set_quest_flag(41)
-        $ mc.business.mandatory_crises_list.append(quest_arousal_serum_researched)
-        $ quest_arousal_serum.quest_event_dict["ready_day"] = day + 3
+
+    $ mc.business.mandatory_crises_list.append(quest_arousal_serum_researched)
+    $ quest_arousal_serum.quest_event_dict["ready_day"] = day + 3
+    $ quest_arousal_serum.quest_event_dict["expiration_day"] += 3   # extend expiration to allow for research to finish    
+
     "You and [the_person.possessive_title] leave the lab and close up for the day."
     return
 

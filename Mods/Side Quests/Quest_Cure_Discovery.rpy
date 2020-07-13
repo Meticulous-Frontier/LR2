@@ -99,9 +99,11 @@ init 1 python:
         return False
 
     def quest_cure_discovery_patent_kept_requirement():
-        if day >= (quest_cure_discovery.quest_event_dict.get("start_day", 9999) + 1) :
-            if time_of_day > 0:
-                return True
+        if day >= (quest_cure_discovery.quest_event_dict.get("start_day", 9999) + 1):
+            if mc.business.is_open_for_business(): # only during office hours and we are at work (dialog depends on it)
+                if mc.is_at_work():
+                    if time_of_day > 0:
+                        return True
         return False
 
     def quest_cure_discovery_market_missed_requirement():

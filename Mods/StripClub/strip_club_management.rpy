@@ -116,7 +116,7 @@ label strip_club_manager_bdsm_room_suggestion_label(): # (personal contact)
     mc.name "Sure [the_person.title], I'll be right over."
     $ mc.change_location(strip_club)
     $ mc.location.show_background()
-    $ the_person.draw_person(emotion = "happy", position = "stand1")
+    $ the_person.draw_person(emotion = "happy", position = "stand3")
     mc.name "Ok, here I am [the_person.title], how things are going here?"
     the_person.char "That's exactly what I wanna talk to you about, I have an idea to make the business here more profitable."
     mc.name "You have my attention, what do you have in mind?"

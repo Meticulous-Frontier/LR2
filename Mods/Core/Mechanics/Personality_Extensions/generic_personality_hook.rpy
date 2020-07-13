@@ -315,7 +315,7 @@ init -1 python:
         return
 
     def update_lingerie_wardrobe():
-        lingerie_wardrobe = wardrobe_from_xml("Lingerie_Wardrobe")
+        global lingerie_wardrobe
         lingerie_wardrobe = lingerie_wardrobe.merge_wardrobes(wardrobe_from_xml("Lingerie_Extended_Wardrobe"))
         return
 

@@ -150,6 +150,9 @@ label candace_meet_at_office_store_label(the_person):
     "There is something that just doesn't seem right here. You aren't sure what it is exactly, but you feel like you should really get to know [the_person.title] better."
     "If nothing else, maybe you could convince to have a little fun sometime..."
     $ the_person.event_triggers_dict["met_at_store"] = 1
+    # make sure candace is in unique character list (prevent MC hire button)
+    if candace not in unique_character_list:
+        $ unique_character_list.append(candace)
     return "Advance Time"
 
 label candace_get_to_know_label(the_person):

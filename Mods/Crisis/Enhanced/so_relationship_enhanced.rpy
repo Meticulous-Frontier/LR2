@@ -18,9 +18,10 @@ init 2 python:
         return not get_so_relationship_worsen_person() is None
 
     def so_relationship_quarrel_requirement(person):
-        # set quarrel chance to 5% else too many relationships will be split up by the limited time event selector.
-        if person.relationship != "Single" and renpy.random.randint(0, 100) < 5:
-            return True
+        # set quarrel chance to 10% else too many relationships will be split up by the limited time event selector.
+        if person.relationship != "Single" and renpy.random.randint(0, 100) < 10:
+            if not person.has_role([casual_hotwife_role]): # Hotwife doesn't want to leave her SO
+                return True
         return False
 
     relation_ship_quarrel = Action("Girl had a fight with her SO", so_relationship_quarrel_requirement, "so_relationship_quarrel_label", event_duration = 3)
@@ -34,7 +35,7 @@ init 2 python:
         potential_people = []
         for person in known_people_in_the_game(excluded_people = [mc] + unique_character_list):
             if person.title and not person.relationship == "Married" and person.relationship in relationship_worsen_stats and person.love <= relationship_worsen_stats[person.relationship] + (person.get_opinion_score("cheating on men") * 5) :
-                if not person.has_role([girlfriend_role, affair_role]): # when in relationship with MC she will not improve her relationship with her SO
+                if not person.has_role([girlfriend_role, affair_role, casual_athlete_role]): # when in relationship with MC or Casual Athlete she will not improve her relationship with her SO
                     potential_people.append(person)
         return get_random_from_list(potential_people)
 
@@ -42,7 +43,8 @@ init 2 python:
         potential_people = []
         for person in known_people_in_the_game(excluded_people = [mc] + unique_character_list):
             if person.title and not person.relationship == "Single" and person.relationship in relationship_worsen_stats and person.love > relationship_worsen_stats[person.relationship] - (person.get_opinion_score("cheating on men") * 5):
-                potential_people.append(person)
+                if not person.has_role([casual_hotwife_role]): # Hotwife doesn't want to leave her SO
+                    potential_people.append(person)
         return get_random_from_list(potential_people)
 
 label so_relationship_improve_label_enhanced():

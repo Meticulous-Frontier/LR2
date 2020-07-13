@@ -203,6 +203,76 @@ init python: # This space is reserved for definitions used to simplify the code
 
             elif person.skin == "black":
                  person.expression_images = Expression("default","black","Face_6")
+
+        elif person.face_style == "Face_7": # Variations of Face Style 7
+            if person.skin == "white":
+                 person.expression_images = Expression("default","white","Face_7")
+
+            elif person.skin == "tan":
+                 person.expression_images = Expression("default","tan","Face_7")
+
+            elif person.skin == "black":
+                 person.expression_images = Expression("default","black","Face_7")
+
+        elif person.face_style == "Face_8": # Variations of Face Style 8
+            if person.skin == "white":
+                 person.expression_images = Expression("default","white","Face_8")
+
+            elif person.skin == "tan":
+                 person.expression_images = Expression("default","tan","Face_8")
+
+            elif person.skin == "black":
+                 person.expression_images = Expression("default","black","Face_8")
+
+        elif person.face_style == "Face_9": # Variations of Face Style 9
+            if person.skin == "white":
+                 person.expression_images = Expression("default","white","Face_9")
+
+            elif person.skin == "tan":
+                 person.expression_images = Expression("default","tan","Face_9")
+
+            elif person.skin == "black":
+                 person.expression_images = Expression("default","black","Face_9")
+
+        elif person.face_style == "Face_11": # Variations of Face Style 11
+            if person.skin == "white":
+                 person.expression_images = Expression("default","white","Face_11")
+
+            elif person.skin == "tan":
+                 person.expression_images = Expression("default","tan","Face_11")
+
+            elif person.skin == "black":
+                 person.expression_images = Expression("default","black","Face_11")
+
+        elif person.face_style == "Face_12": # Variations of Face Style 12
+            if person.skin == "white":
+                 person.expression_images = Expression("default","white","Face_12")
+
+            elif person.skin == "tan":
+                 person.expression_images = Expression("default","tan","Face_12")
+
+            elif person.skin == "black":
+                 person.expression_images = Expression("default","black","Face_12")
+
+        elif person.face_style == "Face_13": # Variations of Face Style 13
+            if person.skin == "white":
+                 person.expression_images = Expression("default","white","Face_13")
+
+            elif person.skin == "tan":
+                 person.expression_images = Expression("default","tan","Face_13")
+
+            elif person.skin == "black":
+                 person.expression_images = Expression("default","black","Face_13")
+
+        elif person.face_style == "Face_14": # Variations of Face Style 14
+            if person.skin == "white":
+                 person.expression_images = Expression("default","white","Face_14")
+
+            elif person.skin == "tan":
+                 person.expression_images = Expression("default","tan","Face_14")
+
+            elif person.skin == "black":
+                 person.expression_images = Expression("default","black","Face_14")
         person.draw_person() # Always redraw the face_style
 
     def cheat_redraw_breasts(): # Redraws the breasts / tits
@@ -412,10 +482,11 @@ screen cmoc():
                             textbutton "Shaved Side Hair" action [SetField(the_person,"hair_style", shaved_side_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                             textbutton "Twin Ponytails" action [SetField(the_person,"hair_style", twintail), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                             textbutton "Long Hair" action [SetField(the_person,"hair_style", long_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                            textbutton "Bow Hair" action [SetField(the_person,"hair_style", bow_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            # textbutton "Bow Hair" action [SetField(the_person,"hair_style", bow_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                                # disabled due to removal of bow_hair
                             textbutton "Bobbed Hair" action [SetField(the_person,"hair_style", bobbed_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        vbox: # Column 3
                             textbutton "Braided Bun" action [SetField(the_person,"hair_style", braided_bun), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        vbox: # Column 3
                             textbutton "Curly Bun" action [SetField(the_person,"hair_style", curly_bun), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                             textbutton "Windswept Short" action [SetField(the_person,"hair_style", windswept_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                             textbutton "Bowl Hair" action [SetField(the_person,"hair_style", bowl_hair), Function(cheat_redraw_hair)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
@@ -441,10 +512,18 @@ screen cmoc():
                             textbutton "Face Type 1" action [SetField(the_person,"face_style", "Face_1"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                             textbutton "Face Type 2" action [SetField(the_person,"face_style", "Face_2"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                             textbutton "Face Type 3" action [SetField(the_person,"face_style", "Face_3"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
-                        vbox: # Column 2
                             textbutton "Face Type 4" action [SetField(the_person,"face_style", "Face_4"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
                             textbutton "Face Type 5" action [SetField(the_person,"face_style", "Face_5"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        vbox: # Column 2
                             textbutton "Face Type 6" action [SetField(the_person,"face_style", "Face_6"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Face Type 7" action [SetField(the_person,"face_style", "Face_7"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Face Type 8" action [SetField(the_person,"face_style", "Face_8"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Face Type 9" action [SetField(the_person,"face_style", "Face_9"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Face Type 11" action [SetField(the_person,"face_style", "Face_11"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                        vbox: # Column 3
+                            textbutton "Face Type 12" action [SetField(the_person,"face_style", "Face_12"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Face Type 13" action [SetField(the_person,"face_style", "Face_13"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
+                            textbutton "Face Type 14" action [SetField(the_person,"face_style", "Face_14"), Function(cheat_redraw_face, the_person)] style "cheatbutton_style" text_style "textbutton_text_style" xsize 220
 
                 if capp and cappt: # Breast Size Options
                     hbox:

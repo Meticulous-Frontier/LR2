@@ -7,10 +7,36 @@ init -1 python:
             my_location.remove_person(self) # remove person from current location
         if self.home in list_of_places:
             list_of_places.remove(self.home) # remove home location from list_of_places
+        if self.home in mc.known_home_locations: 
+            mc.known_home_locations.remove(self.home) # remove home location from known_home_locations
+
         if "people_to_process" in globals():
             found = find_in_list(lambda x: x[0].name == self.name and x[0].last_name == self.last_name and x[0].age == self.age, people_to_process)
             if found: # remove from processing list
                 people_to_process.remove(found)
+
+        # remove from business teams
+        for team in [mc.business.research_team, mc.business.market_team, mc.business.supply_team, mc.business.production_team, mc.business.hr_team]:
+            if self in team:
+                team.remove(self)
+
+        # remove from business rooms
+        for room in [mc.business.s_div, mc.business.r_div, mc.business.p_div, mc.business.m_div, mc.business.h_div]:
+            if self in room.people:
+                room.people.remove(self)
+
+        # remove from strippers
+        if self in stripclub_strippers:
+            stripclub_strippers.remove(self)
+        
+        # other stripclub teams
+        if "stripclub_bdsm_performers" in globals():
+            for team in [stripclub_strippers, stripclub_bdsm_performers, stripclub_waitresses]:
+                if self in team:
+                    team.remove(self)
+
+        # remove from relationships array
+        town_relationships.remove_all_relationships(self)
 
         self.base_outfit = None
         self.planned_outfit = None
@@ -34,6 +60,10 @@ init -1 python:
         self.suggest_bag.clear()
         self.broken_taboos.clear()
         self.sex_record.clear()
+        self.opinions.clear()
+        self.sexy_opinions.clear()
+        self.broken_taboos.clear()
+        self.schedule.clear()
 
         # clear all references held by person object.
         self.home = None
