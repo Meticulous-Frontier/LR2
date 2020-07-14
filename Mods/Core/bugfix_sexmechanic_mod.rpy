@@ -38,14 +38,26 @@ init 5 python:
         "Anal Sex": "Anal",
     }
 
-
     def girl_choose_position_enhanced(person, ignore_taboo = False):
         position_option_list = []
-        for position in list_of_girl_positions:
+        extra_positions = []
+        # when she enjoys blow jobs, add one to her choices (to prevent always going to blowjob variant)
+        if person.sex_skills["Oral"] >= 5 and person.get_opinion_score("giving blowjobs") > 1 and person.get_opinion_score("being submissive") > 1:
+            extra_positions.append(skull_fuck)
+        elif person.sex_skills["Oral"] > 3 and person.get_opinion_score("giving blowjobs") > 1:
+            extra_positions.append(deepthroat)
+        elif person.sex_skills["Oral"] > 2 and person.get_opinion_score("giving blowjobs") > 0:
+            extra_positions.append(blowjob)
+
+        # when she enjoys tit fucks, add it to her position choices
+        if person.sex_skills["Foreplay"] > 2 and person.get_opinion_score("giving tit fucks") > 1:
+            extra_positions.append(tit_fuck)
+
+        for position in list_of_girl_positions + extra_positions:
             if allow_position(person, position) and mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
                 if position.her_position_willingness_check(person, ignore_taboo = ignore_taboo):
-                    weight = 3 if position.skill_tag == "Foreplay" else 10
-                    position_option_list.append([position, weight])
+                    position_option_list.append([position, person.sex_skills[position.skill_tag]])
+
         return get_random_from_weighted_list(position_option_list)
 
     def girl_choose_object_enhanced(person, position):
@@ -250,35 +262,27 @@ init 5 python:
         return option_list
 
     def build_grouped_sex_position_menu(person, allow_none = True, ignore_taboo = False, prohibit_tags = []):
-        foreplay_positions = []
-        oral_positions = []
-        vaginal_positions = []
-        anal_positions = []
+        positions = {
+            "Foreplay" : ["Pick Foreplay"],
+            "Oral" : ["Pick Oral"],
+            "Vaginal" : ["Pick Vaginal"],
+            "Anal" : ["Pick Anal"]
+        }
 
         for position in sorted(list_of_positions, key = lambda x: x.name):
             if allow_position(person, position) and  mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
                 willingness = position.build_position_willingness_string(person, ignore_taboo = ignore_taboo)
                 if position.skill_tag in prohibit_tags:
                     pass
-                elif position.skill_tag == "Foreplay":
-                    foreplay_positions.append([willingness, position])
-                elif position.skill_tag == "Oral":
-                    oral_positions.append([willingness, position])
-                elif position.skill_tag == "Vaginal":
-                    vaginal_positions.append([willingness, position])
-                elif position.skill_tag == "Anal":
-                    anal_positions.append([willingness, position])
+                else:
+                    positions[position.skill_tag].append([willingness, position])
 
         if allow_none:
-            foreplay_positions.append(["Nothing", "Nothing"])
+            positions["Foreplay"].append(["Nothing", "Nothing"])
 
-        foreplay_positions.insert(0, "Pick Foreplay")
-        oral_positions.insert(0, "Pick Oral")
-        vaginal_positions.insert(0, "Pick Vaginal")
-        anal_positions.insert(0, "Pick Anal")
-        return replace_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions,  prohibit_tags = prohibit_tags)
+        return replace_unique_sex_positions(person, positions["Foreplay"], positions["Oral"], positions["Vaginal"], positions["Anal"], prohibit_tags = prohibit_tags)
 
-    def replace_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions,  prohibit_tags = []): #Use this function to get specific situations to replace or remove positions
+    def replace_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions, prohibit_tags = []): #Use this function to get specific situations to replace or remove positions
         #First, filter out any positions this person doesn't accept
         #TODO move this to allow_position(), this probably very inefficient
         foreplay_positions = filter(person.event_triggers_dict.get("foreplay_position_filter", None),foreplay_positions)
