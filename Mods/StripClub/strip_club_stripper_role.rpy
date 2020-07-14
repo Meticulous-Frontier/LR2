@@ -249,11 +249,12 @@ label strip_club_hire_employee_label(the_person):
         return
 
     if _return is stripper_role:
-        if the_person.effective_sluttiness() > 40 and (the_person.get_opinion_score("showing her ass") > 0 or the_person.get_opinion_score("showing her tits") > 0):
+        if the_person.effective_sluttiness() > 70:
+            the_person.char "I admit, I love turning men on, just making them horny while they ogle my body, mmm... Where should I sign?"
+        elif the_person.effective_sluttiness() > 40 and the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") > 1:
             the_person.char "I admit, I always wanted to do something like that. Seducing men, with my body on full display, mmm... Where should I sign?"
-        elif the_person.effective_sluttiness() > 20 and (the_person.get_opinion_score("showing her ass") > 1 or the_person.get_opinion_score("showing her tits") > 1):
+        elif the_person.effective_sluttiness() > 20 and the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") > 3:
             the_person.char "Maybe, if the money is good enough, I could give it a try..."
-            
             mc.name "Your pay will be $[ran_num] a day. Do you think that will be good enough for you?"
             the_person.char "Really you will pay me that much? Ok, then my answer is yes, I'll work as stripper for you."
         else:
@@ -265,11 +266,15 @@ label strip_club_hire_employee_label(the_person):
 
     elif _return is bdsm_performer_role:
         mc.name "I was thinking you might like to perform in the BDSM room..."
-        if the_person.effective_sluttiness() > 40 and the_person.get_opinion_score("being submissive") > 0 and (the_person.get_opinion_score("showing her ass") > 0 or the_person.get_opinion_score("showing her tits") > 0):
+        if the_person.effective_sluttiness() > 70:
+            the_person.char "That sounds like something interesting... What do you think I should do?"
+            mc.name "You're a beautiful, sexy and attractive girl, you'll be amazing on stage!"
+            the_person.char "You are absolutely right, where should I sign?"
+        if the_person.effective_sluttiness() > 40 and the_person.get_opinion_score("being submissive") + the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") > 1:
             the_person.char "I don't know... I really don't know... What do you think I should do?"
             mc.name "You're a beautiful, sexy and attractive girl, you'll be amazing on stage!"
             the_person.char "Ok, your offer is really tempting, where should I sign?"
-        elif the_person.effective_sluttiness() > 20 and the_person.get_opinion_score("being submissive") > 1 and (the_person.get_opinion_score("showing her ass") > 0 or the_person.get_opinion_score("showing her tits") > 1):
+        elif the_person.effective_sluttiness() > 20 and the_person.get_opinion_score("being submissive") + the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") > 4:
             the_person.char "Maybe, if the money is good enough, I could give it a try..."
             mc.name "Your pay will be $[ran_num] a day, is that good enough for you?"
             the_person.char "Oh! Your offer was tempting, and for that money I don't care being a bit submissive and show some skin. Ok then, my answer is yes."
@@ -282,9 +287,11 @@ label strip_club_hire_employee_label(the_person):
 
     else:
         mc.name "I was thinking you might like to become a waitress..."
-        if the_person.effective_sluttiness() > 20 and (the_person.get_opinion_score("showing her ass") > 0 or the_person.get_opinion_score("showing her tits") > 0):
+        if the_person.effective_sluttiness() > 50:
+            the_person.char "I would love being a waitress, showing some skin, have them groping my ass... Ok, where should I sign?"
+        elif the_person.effective_sluttiness() > 20 and the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") > 0:
             the_person.char "If it's just to be a waitress there, I don't mind showing some skin... Ok, where should I sign?"
-        elif the_person.effective_sluttiness() > 10 and (the_person.get_opinion_score("showing her ass") > 1 or the_person.get_opinion_score("showing her tits") > 1):
+        elif the_person.effective_sluttiness() > 10 and the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") > 2:
             the_person.char "Maybe, if the money is good enough, I could give it a try..."
             $ ran_num = calculate_waitress_salary(the_person)
             mc.name "Your pay will be $[ran_num] a day, not bad for waiting some tables, right?"
