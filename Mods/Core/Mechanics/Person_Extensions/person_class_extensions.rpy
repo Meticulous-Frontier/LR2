@@ -635,8 +635,21 @@ init -1 python:
             elif not location is destination: # only change outfit if we change location
                 self.apply_planned_outfit() #We're at home, so we can get back into our casual outfit.
 
-            # location might change outfit, so moved call to end of this loop
-            location.move_person(self, destination) #Always go where you're scheduled to be.
+            # some girls like to go out at night (bar or stripclub)
+            if time_of_day == 4 and destination is self.home and renpy.random.randint(0, 100) <= 10:
+                party_destinations = [downtown_bar]
+                if "get_strip_club_foreclosed_stage" in globals():
+                    if get_strip_club_foreclosed_stage() < 1 or get_strip_club_foreclosed_stage() >= 5: # only when stripclub is open for business
+                        party_destinations.append(strip_club)
+                    if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
+                        party_destinations.append(bdsm_room)
+                else:
+                    party_destinations.append(strip_club)
+
+                location.move_person(self, get_random_from_list(party_destinations))
+            else:
+                # location might change outfit, so moved call to end of this loop
+                location.move_person(self, destination) #Always go where you're scheduled to be.
 
         else:
             #She finds somewhere to burn some time
