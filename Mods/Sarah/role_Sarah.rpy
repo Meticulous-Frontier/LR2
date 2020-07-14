@@ -1652,6 +1652,8 @@ label Sarah_threesome_request_label():
     $ scene_manager = Scene()
     $ the_person = sarah
     $ gossip_target = get_random_employees(1, exclude_list = [sarah], slut_required = 50)
+    if gossip_target is None:
+        return
 
     "Another Saturday, another extra workday for you. You are hardly surprised when you here [the_person.title]'s familiar voice."
     the_person.char "Hey [the_person.mc_title]. I figured you'd be around here."

@@ -21,6 +21,9 @@ init 2 python:
 
 label business_meeting_action_label:
     $ the_person = get_random_employees(1)
+    if the_person is None:
+        return
+
     $ the_place = mc.business.get_employee_workstation(the_person)
     $ day_part = time_of_day_string()
 

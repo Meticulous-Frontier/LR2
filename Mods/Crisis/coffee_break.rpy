@@ -16,6 +16,8 @@ init 2 python:
 
 label coffee_break_action_label:
     $ (person_one, person_two, person_three) = get_random_employees(3, slut_required = 20)
+    if person_one is None:
+        return
 
     "As you are walking around the office, you see several employees at the coffee machine. They haven't noticed you, but you can hear what they are saying."
     call coffee_break_chit_chat_label(person_one, person_two, person_three) from _call_coffee_break_chit_chat_label_1

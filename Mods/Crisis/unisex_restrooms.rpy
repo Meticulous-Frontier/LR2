@@ -137,6 +137,8 @@ label unisex_restroom_overhear_label():
 label unisex_restroom_door_greet_label():   #You have a chance to learn a couple new opinions
     #TODO change background to restroom
     $ (the_person_one, the_person_two) = get_random_employees(2)
+    if the_person_one is None:
+        return
 
     "During the workday, you get up and head towards the restroom."
     $ scene_manager = Scene()
@@ -173,6 +175,8 @@ label unisex_restroom_door_greet_label():   #You have a chance to learn a couple
 
 label unisex_restroom_sexy_overhear_label():
     $ (the_person_one, the_person_two) = get_random_employees(2)
+    if the_person_one is None:
+        return
 
     $ discover_identity = False
     $ anon_char_one = get_anon_person(the_person_one)
@@ -230,6 +234,9 @@ label unisex_restroom_sexy_overhear_label():
 
 label unisex_restroom_fantasy_overhear_label():
     $ (the_person_one, the_person_two) = get_random_employees(2)
+    if the_person_one is None:
+        return
+
     if the_person_one.sluttiness < 30: #She's not slutty enough for this.
         call unisex_restroom_sexy_overhear_label() from _call_unisex_restroom_fantasy_redirect_1
         return
@@ -370,6 +377,8 @@ label unisex_restroom_gloryhole_option_label():
 
 label unisex_restroom_use_gloryhole_label():
     $ the_person = get_random_employees(1)
+    if the_person is None:
+        return
     "As you are waiting, you hear someone enter the restroom and walk into the stall next to yours."
     "This is crazy. It could be anybody in there! You hear on the other side the toilet flush as the person finishes relieving herself. You take a deep breath, then go for it."
     "You give yourself a couple of strokes to make sure you are good and hard, then stick your cock through the glory hole."

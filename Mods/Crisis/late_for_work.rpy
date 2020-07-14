@@ -16,6 +16,9 @@ init 2 python:
 label late_for_work_action_label:
     #Lets get the girl of interest.
     $ the_person = get_random_employees(1)
+    if the_person is None:
+        return
+
     $ lobby.show_background()
 
     "As you are walking through the main corridor you spot [the_person.possessive_title] rushing through the entrance doors."
