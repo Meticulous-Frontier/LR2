@@ -54,7 +54,7 @@ init 2 python:
         else:
             target_label = "pregnant_announce" if person.is_mc_father() else "silent_pregnant_announce"
 
-            preg_announce_action = Action("Pregnancy Announcement", preg_announce_requirement, target_label, requirement_args = day + renpy.random.randint(12,18))
+            preg_announce_action = Action("Pregnancy Announcement", (preg_announce_requirement if not bugfix_installed else pregnant_announce_requirement), target_label, requirement_args = day + renpy.random.randint(12,18))
             person.add_unique_on_room_enter_event(preg_announce_action)
 
         if day > person.event_triggers_dict.get("preg_tits_date", 0):
@@ -64,7 +64,7 @@ init 2 python:
         else:
             target_label = "pregnant_tits_start" if person.is_mc_father() else "silent_pregnant_tits_start"
 
-            preg_tits_action = Action("Pregnancy Tits Grow", preg_tits_requirement, target_label, args = person, requirement_args = person)
+            preg_tits_action = Action("Pregnancy Tits Grow", (preg_tits_requirement if not bugfix_installed else pregnant_tits_requirement), target_label, args = person, requirement_args = person)
             mc.business.mandatory_morning_crises_list.append(preg_tits_action)
 
         if day > person.event_triggers_dict.get("preg_transform_day", 0):
@@ -81,7 +81,7 @@ init 2 python:
         else:
             target_label = "pregnant_transform" if person.is_mc_father() else "silent_pregnant_transform"
 
-            preg_transform_action = Action("Pregnancy Transform", preg_transform_requirement, target_label, args = person, requirement_args = person)
+            preg_transform_action = Action("Pregnancy Transform", (preg_transform_requirement if not bugfix_installed else pregnant_transform_requirement), target_label, args = person, requirement_args = person)
             mc.business.mandatory_morning_crises_list.append(preg_transform_action) #This event adds an announcement event the next time you enter the same room as the girl.
 
         person.special_role.append(pregnant_role)
