@@ -78,8 +78,8 @@ init 5 python:
         preferences['skimpy outfits']["feet"] = [thigh_highs, fishnets, garter_with_fishnets, pumps, heels, high_heels, thigh_high_boots]
         preferences["skimpy outfits"]["accessories"] = [lace_choker, wide_choker, spiked_choker]
         preferences["conservative outfits"] = {}
-        preferences["conservative outfits"]["upper_body"] = [long_sweater, sleeveless_top, long_tshirt, camisole, long_sleeve_blouse, short_sleeve_blouse, tie_sweater, dress_shirt, sweater_dress]
-        preferences["conservative outfits"]["lower_body"] = [pencil_skirt, skirt, long_skirt, jeans, suitpants]
+        preferences["conservative outfits"]["upper_body"] = [long_sweater, sleeveless_top, long_tshirt, camisole, long_sleeve_blouse, short_sleeve_blouse, tie_sweater, dress_shirt, sweater_dress, bra, bralette, sports_bra]
+        preferences["conservative outfits"]["lower_body"] = [pencil_skirt, skirt, long_skirt, jeans, suitpants, panties, plain_panties, cotton_panties, boy_shorts]
         preferences["conservative outfits"]["feet"] = [sandles, shoes, slips, sneakers, short_socks]
         preferences["conservative outfits"]["accessories"] = [wool_scarf]
         preferences["dresses"] = {}
