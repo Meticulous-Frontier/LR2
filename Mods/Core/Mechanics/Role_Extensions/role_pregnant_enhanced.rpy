@@ -64,7 +64,7 @@ init 2 python:
         else:
             target_label = "pregnant_tits_start" if person.is_mc_father() else "silent_pregnant_tits_start"
 
-            preg_tits_action = Action("Pregnancy Tits Grow", pregnant_tits_requirement, target_label, args = person, requirement_args = person)
+            preg_tits_action = Action("Pregnancy Tits Grow", preg_tits_requirement, target_label, args = person, requirement_args = person)
             mc.business.mandatory_morning_crises_list.append(preg_tits_action)
 
         if day > person.event_triggers_dict.get("preg_transform_day", 0):
@@ -81,7 +81,7 @@ init 2 python:
         else:
             target_label = "pregnant_transform" if person.is_mc_father() else "silent_pregnant_transform"
 
-            preg_transform_action = Action("Pregnancy Transform", pregnant_transform_requirement, target_label, args = person, requirement_args = person)
+            preg_transform_action = Action("Pregnancy Transform", preg_transform_requirement, target_label, args = person, requirement_args = person)
             mc.business.mandatory_morning_crises_list.append(preg_transform_action) #This event adds an announcement event the next time you enter the same room as the girl.
 
         person.special_role.append(pregnant_role)
