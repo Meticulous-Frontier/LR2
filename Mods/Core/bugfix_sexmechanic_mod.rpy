@@ -329,6 +329,8 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
         if girl_in_charge:
             if not position_choice is None and position_choice.skill_tag == "Foreplay" and not mc.recently_orgasmed and not first_round and not position_locked:
                 # girl has got you hard again, now let her pick an actual sex position (clear foreplay position)
+                if not the_person.vagina_visible(): # lets see if she is willing to go further
+                    $ the_person.strip_outfit_to_max_sluttiness()
                 $ position_choice = None
 
             # The girls decisions set round_choice here.
@@ -485,6 +487,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 $ the_person.change_obedience(-3)
                 $ girl_in_charge = True
                 $ finished = False
+                $ stop_stripping = False    # allow her to strip again
                 $ guy_orgasms_before_control = report_log.get("guy orgasms", 0)
                 $ has_taken_control = True #After successful position and object choice she will let you know she wants to keep going.
                 $ position_choice = None #She picks the position now, because she has her own list of possibilities
