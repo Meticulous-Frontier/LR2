@@ -301,6 +301,7 @@ label strip_ask_SB_reverse_cowgirl(the_girl, the_clothing, the_location, the_obj
     return
 
 label transition_missionary_SB_reverse_cowgirl(the_girl, the_location, the_object):
+    $ the_girl.draw_person(position = "missionary")
     "Looking down at [the_girl.possessive_title], you decide it's time to change things up a little bit."
     mc.name "Hey, why don't we change it up a bit, do you wanna be on top for a bit?"
     if the_girl.get_opinion_score("taking control") > 0:
