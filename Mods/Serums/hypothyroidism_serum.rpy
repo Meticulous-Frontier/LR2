@@ -2,7 +2,7 @@
 
 init -1 python:
     def hypothyroidism_serum_on_turn(person, add_to_log):
-        return person.change_weight(amount = .2, chance = 20)
+        return person.change_weight(amount = 0.5, chance = 50)
 
     def add_hypothyroidism_serum():
         hypothyroidism_serum_trait = SerumTraitMod(name = "Hypothyroidism Trait",
