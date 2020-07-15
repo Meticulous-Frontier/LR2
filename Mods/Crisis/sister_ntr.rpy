@@ -11,22 +11,22 @@ init 3 python:
                     return True
         return False
 
-    def select_position(the_person):
+    def select_position(person):
         positions = ["bj"]
-        if the_person.outfit.vagina_available():
+        if person.outfit.vagina_available():
             positions.append ("missionary")
             positions.append ("wall")
-            if the_person.get_opinion_score("anal sex") > 0 or the_person.sluttiness > 70:
+            if person.get_opinion_score("anal sex") > 0 or person.sluttiness > 70:
                 positions.append ("anal")
         return get_random_from_list(positions)
 
-    def sister_ntr_select_finish(the_person):
+    def sister_ntr_select_finish(person):
         finishes = []
-        if the_person.get_opinion_score("being covered in cum") > 0 or the_person.get_opinion_score("cum facials") > 0:
+        if person.get_opinion_score("being covered in cum") > 0 or person.get_opinion_score("cum facials") > 0:
             finishes.append ("facial")
-        if the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("bareback sex") > 0:
+        if person.get_opinion_score("creampies") > 0 or person.get_opinion_score("bareback sex") > 0:
             finishes.append ("inside")
-        if the_person.get_opinion_score("giving blowjobs") > 0 or the_person.get_opinion_score("drinking cum") > 0:
+        if person.get_opinion_score("giving blowjobs") > 0 or person.get_opinion_score("drinking cum") > 0:
             finishes.append ("drink")
         finishes.append ("usual")
         return get_random_from_list(finishes)

@@ -5,14 +5,10 @@ init 5 python:
 
 label family_morning_breakfast_enhanced_label():
     python:
-        mom_slutty = False
-        sis_slutty = False
-        if mom.sluttiness > 40:
-            mom_slutty = True
+        if mom.effective_sluttiness() > 40:
             mom.apply_outfit(mom.wardrobe.get_random_appropriate_underwear(mom.sluttiness, guarantee_output = True))
 
-        if lily.sluttiness > 40:
-            sis_slutty = True
+        if lily.effective_sluttiness() > 40:
             lily.apply_outfit(lily.wardrobe.get_random_appropriate_underwear(lily.sluttiness, guarantee_output = True))
 
         #Make sure we're in our bedroom when the event starts.
@@ -44,7 +40,7 @@ label family_morning_breakfast_enhanced_label():
     $ kitchen.show_background()
     $ scene_manager.add_actor(mom, position = "walking_away", character_placement = character_left_flipped)
 
-    if mom_slutty:
+    if mom.effective_sluttiness() > 40:
         if mom.outfit.vagina_visible():
             "[mom.possessive_title] is in front of the stove naked, humming as she scrambles a pan full of eggs."
         elif mom.outfit.tits_visible():
@@ -61,7 +57,7 @@ label family_morning_breakfast_enhanced_label():
 
     $ scene_manager.add_actor(lily)
 
-    if sis_slutty:
+    if lily.effective_sluttiness() > 40:
         if lily.outfit.vagina_visible():
             "[lily.possessive_title] comes into the room naked. She gives a dramatic yawn before sitting down at the kitchen table."
         elif lily.outfit.tits_visible():
@@ -72,7 +68,7 @@ label family_morning_breakfast_enhanced_label():
         "[lily.possessive_title] comes into the room and gives a dramatic yawn before sitting down at the kitchen table."
     $ scene_manager.update_actor(lily, position = "sitting")
 
-    if mom_slutty and sis_slutty:
+    if mom.effective_sluttiness() > 40 and lily.effective_sluttiness() > 40:
         #You have breakfast with both of them stripped down like it's no big thing.
         lily.char "Hope I'm not too late."
         $ scene_manager.update_actor(mom, position = "walking_away")
@@ -122,7 +118,7 @@ label family_morning_breakfast_enhanced_label():
                     "[mom.possessive_title] gets up and starts to do the dishes."
         "When you're done you help [mom.possessive_title] put the dirty dishes away and get on with your day."
 
-    elif mom_slutty and not sis_slutty:
+    elif mom.effective_sluttiness() > 40 and not lily.effective_sluttiness() > 40:
         #Lily thinks her mom is embarrassing and weird but Mom pulls rank.
         lily.char "Oh my god Mom, what are you wearing?"
         $ scene_manager.update_actor(mom, position = "back_peek")
@@ -185,8 +181,8 @@ label family_morning_breakfast_enhanced_label():
             "When you're done you help [mom.possessive_title] put the dirty dishes away and get on with your day."
 
 
-    elif sis_slutty and not mom_slutty:
-        #MOm thinks lilly is way too underdressed and sends her back to get dressed.
+    elif lily.effective_sluttiness() > 40 and not mom.effective_sluttiness() > 40:
+        # Mom thinks lily is way too underdressed and sends her back to get dressed.
         "Your mother turns around and gasps."
         $ scene_manager.update_actor(mom, position = "stand3", emotion="angry")
         mom.char "[lily.name]! What are you wearing?"
@@ -224,7 +220,7 @@ label family_morning_breakfast_enhanced_label():
         "When you're done you help [mom.possessive_title] put the dirty dishes away and get on with your day."
 
     else:
-        #Neither of them are particularly slutty, so it's just a normal breakfast.
+        # Neither of them are particularly slutty, so it's just a normal breakfast.
         lily.char "So what's the occasion Mom?"
         $ scene_manager.update_actor(mom, position = "stand3")
         "[mom.possessive_title] takes the pan off the stove and scoops the scrambled eggs out equally onto three waiting plates."

@@ -2,12 +2,12 @@
 
 init -1 python:
     def hypothyroidism_serum_on_turn(person, add_to_log):
-        return person.change_weight(amount = .2, chance = 20)
+        return person.change_weight(amount = 0.5, chance = 50)
 
     def add_hypothyroidism_serum():
         hypothyroidism_serum_trait = SerumTraitMod(name = "Hypothyroidism Trait",
             desc = "Increase target subject body mass, by reducing hormones from the thyroid gland slowing down metabolism, thus causing weight gain.",
-            positive_slug = "-$15 Value, 20% Chance/Turn to increase body mass by 200 grams",
+            positive_slug = "-$15 Value, 50% Chance/Turn to increase body mass by 500 grams",
             negative_slug = "+125 Serum Research",
             value_added = -15,
             research_added = 125,

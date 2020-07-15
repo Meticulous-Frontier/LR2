@@ -113,7 +113,7 @@ init 2 python:
 
         candace.add_role(candace_role)
 
-        candace.on_room_enter_event_list.append(candace_meet_at_office_store)
+        candace.add_unique_on_room_enter_event(candace_meet_at_office_store)
 
         return
 
@@ -150,6 +150,9 @@ label candace_meet_at_office_store_label(the_person):
     "There is something that just doesn't seem right here. You aren't sure what it is exactly, but you feel like you should really get to know [the_person.title] better."
     "If nothing else, maybe you could convince to have a little fun sometime..."
     $ the_person.event_triggers_dict["met_at_store"] = 1
+    # make sure candace is in unique character list (prevent MC hire button)
+    if candace not in unique_character_list:
+        $ unique_character_list.append(candace)
     return "Advance Time"
 
 label candace_get_to_know_label(the_person):
@@ -463,7 +466,7 @@ label candace_convince_to_quit_label(the_person):
     $ candace.event_triggers_dict["quit_job"] = 1
     # she has quit her job, give her a new wardrobe
     $ rebuild_wardrobe(candace)
-    $ candace.on_talk_event_list.append(candace_goes_clothes_shopping)
+    $ candace.add_unique_on_talk_event(candace_goes_clothes_shopping)
     return "Advance Time"
 #Character variable wrappers
 init 3 python:
@@ -528,6 +531,5 @@ init 3 python:
     def candace_update_action_lists():  #This function is designed to try and bring action lists up to date, from update to update, so we don't have to start a new game every time.
         if candace_get_has_quit_job():
             if not candace_get_has_gone_clothes_shopping():
-                if candace_goes_clothes_shopping not in candace.on_talk_event_list:
-                    candace.on_talk_event_list.append(candace_goes_clothes_shopping)
+                candace.add_unique_on_talk_event(candace_goes_clothes_shopping)
         return

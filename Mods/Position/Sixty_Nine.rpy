@@ -339,7 +339,7 @@ label outro_SB_sixty_nine(the_girl, the_location, the_object):
                 elif the_girl.has_role(cum_internal_role):
                     "[the_girl.possessive_title] pulls off until just the tip of your cock is in her mouth and she begins to stroke you off eagerly."
                     "You erupt in orgasm into her greedy mouth. Her expert mouth milks you with every spurt."
-                    "[the_girl.possessive_title] begins moaning uncontrollably around your spasming cock when her cum addicted brain registers her cum dosage."
+                    "[the_girl.possessive_title] begins moaning uncontrollably around your twitching cock when her cum addicted brain registers her cum dosage."
                 else:
                     "You feel [the_girl.possessive_title] leave just the tip of you in her mouth. She strokes you with her hand as you start to orgasm."
                     "She moans as you fill up her mouth with your sperm."
@@ -371,7 +371,7 @@ label outro_SB_sixty_nine(the_girl, the_location, the_object):
         if the_girl.has_role(cum_internal_role):
             "[the_girl.possessive_title] pulls off until just the  tip of your cock is in her mouth and she begins to stroke you off eagerly."
             "You erupt in orgasm into her greedy mouth. Her expert mouth milks you with every spurt."
-            "[the_girl.possessive_title] begins moaning uncontrollably around your spasming cock when her cum addicted brain registers her cum dosage."
+            "[the_girl.possessive_title] begins moaning uncontrollably around your twitching cock when her cum addicted brain registers her cum dosage."
         elif the_girl.sex_skills["Oral"] > 5:
             "You feel [the_girl.possessive_title] take you all the way in her mouth as you start to orgasm."
             "You grunt and twitch as you start to empty your balls right into her stomach."

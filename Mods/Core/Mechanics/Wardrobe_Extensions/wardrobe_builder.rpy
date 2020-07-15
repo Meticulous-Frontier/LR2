@@ -66,7 +66,7 @@ init 5 python:
                 outfit.add_accessory(heavy_eye_shadow.get_copy(), get_random_from_list(eye_shadow_colours))
         return
 
-    real_dress_list = [x for x in dress_list if x not in [bath_robe, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, apron]]
+    real_dress_list = [x for x in dress_list if x not in [bath_robe, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, apron, nightgown_dress]]
 
     class WardrobeBuilder():
         default_person = None
@@ -78,8 +78,8 @@ init 5 python:
         preferences['skimpy outfits']["feet"] = [thigh_highs, fishnets, garter_with_fishnets, pumps, heels, high_heels, thigh_high_boots]
         preferences["skimpy outfits"]["accessories"] = [lace_choker, wide_choker, spiked_choker]
         preferences["conservative outfits"] = {}
-        preferences["conservative outfits"]["upper_body"] = [long_sweater, sleeveless_top, long_tshirt, camisole, long_sleeve_blouse, short_sleeve_blouse, tie_sweater, dress_shirt, sweater_dress]
-        preferences["conservative outfits"]["lower_body"] = [pencil_skirt, skirt, long_skirt, jeans, suitpants]
+        preferences["conservative outfits"]["upper_body"] = [long_sweater, sleeveless_top, long_tshirt, camisole, long_sleeve_blouse, short_sleeve_blouse, tie_sweater, dress_shirt, sweater_dress, bra, bralette, sports_bra]
+        preferences["conservative outfits"]["lower_body"] = [pencil_skirt, skirt, long_skirt, jeans, suitpants, panties, plain_panties, cotton_panties, boy_shorts]
         preferences["conservative outfits"]["feet"] = [sandles, shoes, slips, sneakers, short_socks]
         preferences["conservative outfits"]["accessories"] = [wool_scarf]
         preferences["dresses"] = {}
@@ -265,7 +265,7 @@ init 5 python:
         def build_underwear(self, points = 0):
             outfit = Outfit("Underwear")
 
-            color_upper, color_lower, color_feet = self.get_main_color_scheme()
+            color_upper, color_lower, color_feet = self.get_main_color_scheme(match_percent = 80) # underwear mismatch is less likely
 
             # find upper body item
             item = self.get_item_from_list("upper_body", self.build_filter_list(bra_list + [lingerie_one_piece, lacy_one_piece_underwear, bodysuit_underwear], points), points, ["showing her tits", "not wearing underwear"])
@@ -279,7 +279,7 @@ init 5 python:
                 else:
                     item = self.get_item_from_list("lower_body", self.build_filter_list(panties_list, points), points, ["showing her ass", "not wearing underwear"])
                 if item:
-                    outfit.add_lower(item.get_copy(), color_lower)
+                    outfit.add_lower(item.get_copy(), color_lower if item in [cincher, heart_pasties] else color_upper)
 
             if renpy.random.randint(0, 3 if points >= 5 else 1) == 0:
                 if points >= 5:
@@ -314,16 +314,17 @@ init 5 python:
                     outfit.add_accessory(item.get_copy(), item_color)
             return
 
-        def get_main_color_scheme(self):
+        def get_main_color_scheme(self, match_percent = 60):
             primary_color = self.get_color()
             alternate_color = self.get_color()
 
-            col_choice = renpy.random.randint(0, 50)
-            if col_choice < 10:
+            col_choice = renpy.random.randint(0, 100)
+            lower_percent = (100 - match_percent) // 2
+            if col_choice < lower_percent:
                 color_upper = primary_color
                 color_lower = alternate_color
                 color_feet = primary_color
-            elif col_choice >= 10 and col_choice < 40:
+            elif col_choice >= lower_percent and col_choice < match_percent:
                 color_upper = primary_color
                 color_lower = primary_color
                 color_feet = alternate_color

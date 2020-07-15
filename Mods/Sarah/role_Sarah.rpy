@@ -68,7 +68,7 @@ init 2 python:
         sarah.event_triggers_dict["dating_path"] = False       # False = not started, or doing FWB during story, True = dating her.
         sarah.event_triggers_dict["stripclub_progress"] = 0    # 0 = not complete, 1 = strip club even complete
         sarah.event_triggers_dict["initial_threesome_target"] = None    #this will hold who sarah decides she wants to have a threesome with.
-        sarah.event_triggers_dict["threesome_unlock"] = 0     # 0 = not done, 1 = first threesome after event, 
+        sarah.event_triggers_dict["threesome_unlock"] = 0     # 0 = not done, 1 = first threesome after event,
         sarah.event_triggers_dict["try_for_baby"] = 0         # 0 = not trying, 1 = trying for baby, 2 = knocked up
         sarah.event_triggers_dict["fertile_start_day"] = -1    #-1 means not fertile, otherwise is the day that she tells MC she is fertile. Using math we can determine if she is fertile in the future.
         sarah.event_triggers_dict["fertile_start_creampie_count"] = -1  #Set this to the total number of creampies she has had at the beginning of her fertile period.
@@ -223,7 +223,7 @@ init -1 python:
     def Sarah_is_fertile():
         if sarah.event_triggers_dict.get("try_for_baby", 0) != 1:  #Only fertile if actively trying
             return False
-        if sarah.is_pregnant(): # we don't get fertile when being pregnant
+        if sarah.knows_pregnant(): # She won't ask to be bred if she already knows she's pregnant
             return False
         if sarah.event_triggers_dict.get("fertile_start_day", -1) == -1:
             return False
@@ -333,7 +333,7 @@ init -1 python:
 
     def add_sarah_arrange_threesome_action(person):
         Sarah_arrange_threesome_action = Action("Sarah_threesome_arrange",Sarah_arrange_threesome_requirement,"Sarah_arrange_threesome_label")
-        person.on_talk_event_list.append(Sarah_arrange_threesome_action)
+        person.add_unique_on_talk_event(Sarah_arrange_threesome_action)
 
     def add_sarah_initial_threesome_action():
         Sarah_initial_threesome_action = Action("Sarah initial threesome",Sarah_initial_threesome_requirement,"Sarah_initial_threesome_label")
@@ -1247,6 +1247,9 @@ label Sarah_tits_reveal_label():
 
 label Sarah_stripclub_story_label():
     $ the_person = sarah
+    $ the_person.planned_outfit = get_sarah_date_outfit_two()
+    $ the_person.apply_planned_outfit()
+
     $ scene_manager = Scene()
     #TODO going out outfit
     "Lost in thought as you get your work done in the silence of the weekend, a sudden voice startles you."
@@ -1281,7 +1284,7 @@ label Sarah_stripclub_story_label():
     else:
         "[the_person.possessive_title] leads the way as you leave the lab and head downtown."
         "You pass the bar you usually go to. You wonder what this crazy girl has in mind for tonight."
-    "Soon you walk up to a building and [the_person.title] comes to a stop. The sign out from says [strip_club.name]."
+    "Soon you walk up to a building and [the_person.title] comes to a stop. The sign out from says [strip_club.formalName]."
     "Wow, a strip club? This could be interesting. You decide to tease her."
 
     # if MC has not yet discovered this place, make it visible on the map
@@ -1346,8 +1349,11 @@ label Sarah_stripclub_story_label():
     the_person.char "Team building... right! I can get behind that!"
     mc.name "Ok, I'll be right back."
     $ scene_manager.remove_actor(the_person, reset_actor = False)
-    "You get up and head over to the counter where the owner is."
-    if cousin.event_triggers_dict["blackmail_level"] >= 2:
+    if get_strip_club_foreclosed_stage() < 5:
+        "You get up and head over to the counter where the owner is."
+    else:
+        "You get up and head over to the counter and talk with the manager."
+    if cousin.event_triggers_dict["blackmail_level"] >= 2 and cousin.has_role(stripper_role):
         if showgirl is cousin:
             "You arrange two private lap dances. For [the_person.title], you get [cousin.possessive_title], since she enjoyed her so much."
         else:
@@ -1361,7 +1367,7 @@ label Sarah_stripclub_story_label():
     #TODO make a variant on character left that is a close to Sarah so it looks more like an actual lap dance.
     $ showgirl.apply_outfit(stripclub_wardrobe.pick_random_outfit())
     $ scene_manager.add_actor(showgirl, character_placement = character_center_flipped)
-    if cousin.event_triggers_dict["blackmail_level"] >= 2:  #We have blackmailed Gabrielle about stripping already#
+    if cousin.event_triggers_dict["blackmail_level"] >= 2 and cousin.has_role(stripper_role):  #We have blackmailed Gabrielle about stripping already#
         if showgirl is cousin:
             $ showgirl_2 = get_random_from_list([x for x in stripclub_strippers if x != showgirl])
         else:
@@ -1379,7 +1385,7 @@ label Sarah_stripclub_story_label():
         showgirl_2.char "You better..."
         "She stands back up and acts as if nothing happened."
     if showgirl is cousin:
-        "You see [showgirl.title] look over at you, realizing that you are gonna be in the room as she performs for [the_person.title]"
+        "You see [showgirl.title] looking over to you, realizing that you are gonna be in the room as she performs for [the_person.title]"
         "She gives you a quick wink."
     showgirl.char "Alright, lets get the fun started!"
     $ scene_manager.update_actor(showgirl_2, position = "kneeling1")
@@ -1396,6 +1402,7 @@ label Sarah_stripclub_story_label():
     "You see [the_person.title] look over at you. You can see her mouth the word 'please'"
     mc.name "That sounds fair."
     "You grab $100 and put it in the tip jar."
+    $ mc.business.change_funds(-100)
     "Before you finish putting the money in the jar, you notice that [the_person.title] has her hands all over her stripper's chest."
     "She seems to be really enjoying the show so far!"
     $ mc.change_arousal(10)
@@ -1421,6 +1428,7 @@ label Sarah_stripclub_story_label():
         "[showgirl_2.title] looks bank and whispers at you."
         showgirl_2.char "Maybe later you can touch me there..."
     "You don't hesitate. You grab $200 and put it in the tip jar."
+    $ mc.business.change_funds(-200)
     "[the_person.title] sees you do it and immediately starts to run her hands along her girl's hips."
     "You do the same. The girl in front of you continues to work her hips back and forth across your erection as you run your hands along her hips."
     "You cup and grab her ass a few times when you have the opportunity. Her hips sway enticingly."
@@ -1644,6 +1652,8 @@ label Sarah_threesome_request_label():
     $ scene_manager = Scene()
     $ the_person = sarah
     $ gossip_target = get_random_employees(1, exclude_list = [sarah], slut_required = 50)
+    if gossip_target is None:
+        return
 
     "Another Saturday, another extra workday for you. You are hardly surprised when you here [the_person.title]'s familiar voice."
     the_person.char "Hey [the_person.mc_title]. I figured you'd be around here."
@@ -1930,7 +1940,7 @@ label Sarah_arrange_threesome_label(the_person):
         mc.name "There's this girl I've been seeing lately. She is pretty bi-curious, and has never had a threesome before."
         the_person.char "Oh jesus I can tell where this is going already."
         mc.name "Anyway, she's been asking, so I promised her I'd try to arrange something for Saturday. I need you to come over to my place Saturday night."
-        if cousin.event_triggers_dict["blackmail_level"] >= 2:
+        if cousin.event_triggers_dict["blackmail_level"] >= 2 and cousin.has_role([stripper_role, waitress_role, bdsm_performer_role]):
             the_person.char "That's ridiculous. I'm gonna make a ton of money in tips on a Saturday night. You're gonna have to convince me..."
             mc.name "How about I promise not to tell your mom where you make all those tips at? Does that sound good?"
             the_person.char "Look, I need that money. I'm sorry but I can't just give up the most lucrative night of the week."
@@ -2235,7 +2245,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         $ mc.change_arousal(20) #110
         mc.name "I'm gonna cum!"
         if Sarah_is_fertile():
-            the_person.char "Cum deep! Knock me up with your hot cum [the_person.mc_title]!"
+            the_person.char "Cum deep! Knock me up with your hot cum, [the_person.mc_title]!"
         else:
             the_person.char "Shove it in deep! I want to feel your seed inside me all day long!"
         $ the_person.cum_in_vagina()
@@ -2350,7 +2360,7 @@ label watch_strip_show(the_person):  #This scene assumes scene manager is runnin
     "You watch as a girl gets on stage and starts to do her routine."
     $ scene_manager.add_actor(showgirl, character_placement = character_left_flipped)
     if showgirl is cousin:
-        if showgirl.event_triggers_dict.get("blackmail_level",-1) < 2 and not showgirl.event_triggers_dict.get("seen_cousin_stripping",False):
+        if showgirl.event_triggers_dict.get("blackmail_level",-1) < 2 and cousin.has_role(stripper_role) and not showgirl.event_triggers_dict.get("seen_cousin_stripping",False):
             python:
                 blackmail_2_confront_action = Action("Confront her about her stripping", blackmail_2_confront_requirement, "cousin_blackmail_level_2_confront_label",
                     menu_tooltip = "Tell her that you know about her job as a stripper and use it as further leverage.")
@@ -2788,9 +2798,9 @@ label Sarah_date_ends_at_your_place_label(the_person):
     $ mc.location.show_background()
     $ scene_manager.update_actor(the_person, position = "stand2", character_placement = character_right)
     if Sarah_is_fertile():
-        the_person.char "Oh god I can't wait to feel you fill me up again..."
+        the_person.char "Oh god, I can't wait to feel you fill me up again..."
     else:
-        the_person.char "Oh god I can't wait to feel your hands all over me again..."
+        the_person.char "Oh god, I can't wait to feel your hands all over me again..."
     $ scene_manager.add_actor(mom, character_placement = character_left_flipped)
     "[mom.title] pops around the corner when she hears you walking down the hall and unknowingly interrupts."
     mom.char "Ah! It's [the_person.name] again!"
@@ -2821,7 +2831,7 @@ label Sarah_date_ends_at_your_place_label(the_person):
     the_person.char "Well, I think we both know where this is going!"
     $ scene_manager.strip_actor_outfit(the_person, exclude_feet = True)
     if Sarah_is_fertile():
-        the_person.char "Let's go! Ovulating is driving me crazy, I've been day dreaming about your cock fill me with seed all night long!"
+        the_person.char "Let's go! Ovulating is driving me crazy, I've been daydreaming about your cock filling me with seed all night long!"
     else:
         the_person.char "What are you staring at? Let's go! I've been looking forward to this all night!"
     call fuck_person(the_person, skip_intro = False, girl_in_charge = False) from _call_sex_description_date_happy_ending_1
@@ -2861,10 +2871,12 @@ label Sarah_date_ends_at_your_place_label(the_person):
 label Sarah_date_strip_club_private_dance_label(the_person):
     $ showgirl_1 = get_random_from_list([x for x in stripclub_strippers if x not in [cousin]])
     $ showgirl_2 = get_random_from_list([x for x in stripclub_strippers if x not in [showgirl_1, cousin]])
-
-    "You get up and head over to the counter where the owner is."
+    if get_strip_club_foreclosed_stage() < 5:
+        "You get up and head over to the counter where the owner is."
+    else:
+        "You get up and head over to the counter and talk with the manager."
     "You look through the list of girls available for private dances."
-    if cousin.event_triggers_dict["blackmail_level"] >= 2:
+    if cousin.event_triggers_dict["blackmail_level"] >= 2 and cousin.has_role(stripper_role):
         "You spot your cousin on the list. You could ask for her to dance for either you or [the_person.possessive_title]..."
         menu:
             "Dance for [the_person.title]":
@@ -2895,7 +2907,7 @@ label Sarah_date_strip_club_private_dance_label(the_person):
         showgirl_2.char "Wow, you have your slut here, with you, but you want MY tits in your face? You're a sick fuck."
         "She stands back up and winks at you, then acts as if nothing happened."
     if showgirl_1 is cousin:
-        "You see [showgirl.title] looks over at you, realizing that you are gonna be in the room as she performs for [the_person.title]"
+        "You see [showgirl_1.title] looking over to you, realizing that you are gonna be in the room as she performs for [the_person.title]"
         "She gives you a quick wink."
     showgirl_1.char "Alright, lets get the fun started!"
     $ scene_manager.update_actor(showgirl_2, position = "kneeling1")

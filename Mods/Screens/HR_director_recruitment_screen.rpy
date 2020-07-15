@@ -2,7 +2,6 @@ init 2:
 
     screen HR_director_recruitment_screen(hr_director):
         $ slut_modifier = 0 if recruitment_slut_improvement_policy.is_owned() else -20
-        $ kids = renpy.random.randint(1, 5)
 
         add "Paper_Background.png"
         vbox:
@@ -239,20 +238,29 @@ init 2:
                         style "textbutton_no_padding_highlight"
                         text_style "cheat_text_style"
                         xsize 250
-                        if get_HR_director_tag("recruit_kids", 0) != 0:
+                        if not get_HR_director_tag("recruit_kids", None) is None and get_HR_director_tag("recruit_kids", 0) != 0:
                             background "#4f7ad6"
                             hover_background "#4f7ad6"
-                        action [Function(set_HR_director_tag, "recruit_kids", kids),
-                                Function(set_HR_director_tag, "recruit_age", renpy.random.randint(18 + kids * 3, 44))]
+                        action [Function(set_HR_director_tag, "recruit_kids", renpy.random.randint(1,3)),
+                                Function(set_HR_director_tag, "recruit_age", renpy.random.randint(25, 48))]
                     textbutton "No Children":
                         style "textbutton_no_padding_highlight"
                         text_style "cheat_text_style"
                         xsize 250
-                        if get_HR_director_tag("recruit_kids", 0) == 0:
+                        if not get_HR_director_tag("recruit_kids", None) is None and get_HR_director_tag("recruit_kids", 0) == 0:
                             background "#4f7ad6"
                             hover_background "#4f7ad6"
                         action [Function(set_HR_director_tag, "recruit_kids", 0),
-                                Function(set_HR_director_tag, "recruit_age", renpy.random.randint(18, 35))]
+                                Function(set_HR_director_tag, "recruit_age", renpy.random.randint(18, 30))]
+                    textbutton "Not Relevant":
+                        style "textbutton_no_padding_highlight"
+                        text_style "cheat_text_style"
+                        xsize 250
+                        if get_HR_director_tag("recruit_kids", None) is None:
+                            background "#4f7ad6"
+                            hover_background "#4f7ad6"
+                        action [Function(set_HR_director_tag, "recruit_kids", None),
+                                Function(set_HR_director_tag, "recruit_age", None)]
             else:
                 hbox:
                     xalign 0.5

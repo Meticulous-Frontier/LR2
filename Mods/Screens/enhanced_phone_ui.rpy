@@ -4,7 +4,7 @@ init 2:
         default phone_up = False
         default start_phone_pos = 1.4
         default end_phone_pos = 1.4
-        default ui_xsize = 320
+        default ui_xsize = 360
         modal False
         frame:
             background "#1a45a1aa"
@@ -36,7 +36,7 @@ init 2:
                                     background "#33333388"
                                     xsize ui_xsize
                                     padding (0,0)
-                                    text log_item[0] style log_item[1] size 18 xsize ui_xsize first_indent 10 rest_indent 20
+                                    text log_item[0] style log_item[1] size 18 xsize ui_xsize - 20 first_indent 10 rest_indent 20
                                 frame:
                                     background "#ff0000aa"
                                     xsize ui_xsize

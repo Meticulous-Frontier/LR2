@@ -11,7 +11,7 @@ init python:
         strip_description = "strip_SB_doggy_anal_dildo_dp", strip_ask_description = "strip_ask_SB_doggy_anal_dildo_dp",
         taboo_break_description = "taboo_break_SB_doggy_anal_dildo_dp",
         orgasm_description = "orgasm_SB_doggy_anal_dildo_dp",
-        verb = "ass fuck",
+        verb = "dp", verbing = "dp-ing",
         opinion_tags = ["doggy style sex", "anal sex", "vaginal sex"], record_class = "Anal Sex",
         associated_taboo = "anal_sex")
 
@@ -146,7 +146,7 @@ label scene_SB_doggy_anal_dildo_dp_2(the_girl, the_location, the_object):
     "You reach forward and place your hands on [the_girl.possessive_title]'s shoulders. With each thrust you pull her back onto you forcefully, your hips smacking her ass cheeks loudly. She arches her back and lets out a series of satisfied yelps."
     $the_girl.call_dialogue("sex_responses_anal")
     if the_girl.arousal > 130:
-        "[the_girl.possessive_title]'s pussy is now constantly spasming in orgasm. Her juices are running out from around the dildo and down the inside of her legs."
+        "[the_girl.possessive_title]'s pussy is now constantly convulsing in orgasm. Her juices are running out from around the dildo and down the inside of her legs."
         "With every quiver and every spasm, her buttery butthole contracts and squeezes your cock, begging you to cum for her."
     if the_girl.arousal > 80:
         "[the_girl.possessive_title]'s pussy is dripping wet. A damp spot has begun to accumulate below her pussy as a result of your rutting."

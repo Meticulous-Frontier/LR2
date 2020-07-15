@@ -158,7 +158,7 @@ init -1 python:
         FETISH_RESEARCH_FINAL_TIER = 3      #Default = 3
 
         fetish_basic_ther = SerumTraitMod(name = "Initial Fetish Therapy",
-                desc = "Over time, increases general positivity towards basic sexual acts. Increases effectiveness with greater suggestability.",
+                desc = "Over time, increases general positivity towards basic sexual acts. Increases effectiveness with greater suggestibility.",
                 positive_slug = "Slowly increases sexual opinions, Slowly increases Foreplay skill, +$20 Value",
                 negative_slug = "+100 Serum Research, +20 Production Cost",
                 value_added = 20,
@@ -172,8 +172,8 @@ init -1 python:
             )
 
         fetish_exhibition_ther = SerumTraitMod(name = "Exhibitionism Fetish Therapy",
-                desc = "Over time, increases the need to behave in an extravagant way in order to attract attention. Increases effectiveness with greater suggestability",
-                positive_slug = "Slowly increases exhibionistic behaviour, +$20 Value",
+                desc = "Over time, increases the need to behave in an extravagant way in order to attract attention. Increases effectiveness with greater suggestibility",
+                positive_slug = "Slowly increases exhibitionistic behavior, +$20 Value",
                 negative_slug = "+100 Serum Research, +20 Production Cost",
                 value_added = 20,
                 research_added = 100 * FETISH_RESEARCH_PERCENT,
@@ -187,7 +187,7 @@ init -1 python:
             )
 
         fetish_oral_ther = SerumTraitMod(name = "Oral Fetish Therapy",
-                desc = "Over time, increases general positivity towards Oral Sex. Increases effectiveness with greater suggestability",
+                desc = "Over time, increases general positivity towards Oral Sex. Increases effectiveness with greater suggestibility",
                 positive_slug = "Slowly increases oral sexual opinions, Slowly increases Oral skill, +$20 Value",
                 negative_slug = "+200 Serum Research, +20 Production Cost",
                 value_added = 20,
@@ -202,7 +202,7 @@ init -1 python:
             )
 
         fetish_vaginal_ther = SerumTraitMod(name = "Vaginal Fetish Therapy",
-                desc = "Over time, increases general positivity towards Vaginal Sex. Increases effectiveness with greater suggestability. Warning: At high suggestability it may induce a fetish.",
+                desc = "Over time, increases general positivity towards Vaginal Sex. Increases effectiveness with greater suggestibility. Warning: At high suggestibility it may induce a fetish.",
                 positive_slug = "Slowly increases Vaginal sexual opinions, Slowly increases Vaginal skill, +$20 Value",
                 negative_slug = "+200 Serum Research, +20 Production Cost",
                 value_added = 20,
@@ -217,7 +217,7 @@ init -1 python:
             )
 
         fetish_anal_ther = SerumTraitMod(name = "Anal Fetish Therapy",
-                desc = "Over time, increases general positivity towards Anal Sex. Increases effectiveness with greater suggestability. Warning: At high suggestability it may induce a fetish.",
+                desc = "Over time, increases general positivity towards Anal Sex. Increases effectiveness with greater suggestibility. Warning: At high suggestibility it may induce a fetish.",
                 positive_slug = "Slowly increases Anal sexual opinions, Slowly increases Anal skill, +$25 Value",
                 negative_slug = "+200 Serum Research, +20 Production Cost",
                 value_added = 25,
@@ -232,7 +232,7 @@ init -1 python:
             )
 
         fetish_cum_ther = SerumTraitMod(name = "Cum Fetish Therapy",
-                desc = "Over time, increases general positivity towards Cum. Increases effectiveness with greater suggestability. Warning: At high suggestability it may induce a fetish.",
+                desc = "Over time, increases general positivity towards Cum. Increases effectiveness with greater suggestibility. Warning: At high suggestibility it may induce a fetish.",
                 positive_slug = "Slowly increases Cum sexual opinions, +$25 Value",
                 negative_slug = "+200 Serum Research, +20 Production Cost",
                 value_added = 25,

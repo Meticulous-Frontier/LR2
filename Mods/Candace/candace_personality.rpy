@@ -1,11 +1,11 @@
 ### PERSONALITY CHARACTERISTICS ###
 init 1300:
     python:
-        def candace_titles(the_person):
+        def candace_titles(person):
             return "Candi"
-        def candace_possessive_titles(the_person):
+        def candace_possessive_titles(person):
             return "Your Office Bimbo"
-        def candace_player_titles(the_person):
+        def candace_player_titles(person):
             valid_mc_titles = []
             valid_mc_titles.append(mc.name)
             valid_mc_titles.append("cutie")
@@ -244,7 +244,7 @@ label candace_clothing_reject(the_person):
 
 label candace_clothing_review(the_person):
     if the_person.obedience > 130:
-        the_person.char "Hehe, you really made a mess of me. I should go get tidied up, I'm suppose to be a proper lady here!"
+        the_person.char "Hehe, you really made a mess of me. I should go get tidied up, I'm supposed to be a proper lady here!"
     else:
         if the_person.sluttiness > 40:
             "[the_person.title] looks down at herself and giggles."

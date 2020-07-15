@@ -173,7 +173,7 @@ init 5 python:
         if get_HR_director_tag("business_HR_serum_tier", 0) < 4:
             return False
         if get_HR_director_tag("business_HR_meeting_last_day", 0) >= day:
-            return "One meeting per day."
+            return "One meeting per day"
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():
@@ -193,7 +193,7 @@ init 5 python:
         if not get_HR_director_tag("business_HR_meeting_on_demand", False):
             return False
         if get_HR_director_tag("business_HR_meeting_last_day", 0) >= day:
-            return "One meeting per hours"
+            return "One meeting per day"
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():
@@ -538,6 +538,7 @@ label HR_director_monday_meeting_label(the_person):
                 call HR_director_personnel_interview_label(the_person, max_opinion = get_HR_director_tag("business_HR_coffee_tier", 0)) from HR_DIR_INTERVIEW_CALL_2
                 if _return:
                     $ set_HR_director_tag("business_HR_meeting_last_day", day)
+                $ scene_manager.update_actor(the_person, position = "sitting")                    
             "Let's not this week":
                 $ del HR_employee_list
 
@@ -937,7 +938,7 @@ label HR_director_gym_membership_tier_2_label(the_person):
     return
 
 label HR_director_change_relative_recruitment_label(the_person):
-    if get_HR_director_tag("business_HR_relative_recruitment", 2):
+    if get_HR_director_tag("business_HR_relative_recruitment") == 2:
         the_person.char "I see, are you sure you want me to take down the sign in the break room that we are looking for more employees?"
         menu:
             "Take the Sign Down":
@@ -949,7 +950,7 @@ label HR_director_change_relative_recruitment_label(the_person):
                 the_person.char "Oh... sorry I thought you said you wanted to change it. Is there anything else I can do for you?"
         return
     else:
-        the_person.char "I see, are you sure you want me to put the sign in the break room that we are looking for more employees?"
+        the_person.char "I see, are you sure you want me to put up the sign in the break room that we are looking for more employees?"
         menu:
             "Put the Sign Up":
                 the_person.char "Ok, I'll put it up as soon as we are finished here. Is there anything else I can do for you?"
@@ -1324,7 +1325,7 @@ label HR_director_headhunt_initiate_label(the_person):
                 days_to_find += 1
             if get_HR_director_tag("recruit_slut", None) is not None:
                 days_to_find += 1
-            if get_HR_director_tag("recruit_kids", 0) != 0:
+            if get_HR_director_tag("recruit_kids", None) is not None:
                 days_to_find += 1
             if get_HR_director_tag("recruit_height", None) is not None:
                 days_to_find += 1

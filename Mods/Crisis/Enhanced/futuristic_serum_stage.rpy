@@ -1,9 +1,9 @@
 init 5 python:
     config.label_overrides["futuristic_serum_stage_2_label"] = "futuristic_serum_stage_2_enhanced_label"
 
-    def show_satisfying_people_information(the_person):
+    def show_satisfying_people_information(person):
         my_string = "The following people currently satisfy the requirements: "
-        satisfying_list = mc.business.get_requirement_employee_list(core_slut_required = 50, obedience_required = 130, exclude_list = [the_person])
+        satisfying_list = mc.business.get_requirement_employee_list(core_slut_required = 50, obedience_required = 130, exclude_list = [person])
         if satisfying_list:
             for person in satisfying_list:
                 my_string += person.name + " " + person.last_name + ", "

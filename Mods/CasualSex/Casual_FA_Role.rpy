@@ -39,69 +39,69 @@
 
 
 init -2 python: #Requirement Declarations#
-    def casual_FA_get_a_drink_requirement(the_person):  #For now this should always return true. May be other conditions not to in the future#
-        if the_person.event_triggers_dict.get("FA_sex_discussion_text_enable", 0) == 1:
+    def casual_FA_get_a_drink_requirement(person):  #For now this should always return true. May be other conditions not to in the future#
+        if person.event_triggers_dict.get("FA_sex_discussion_text_enable", 0) == 1:
             return False
         if mc.charisma + mc.market_skill < 3:   #Average 1.5 skills
             return "Charisma / Marketing skill too low."
         return True
 
-    def casual_FA_get_out_of_here_requirement(the_person):
-        if the_person.event_triggers_dict.get("FA_progress", 0) == 1:
-            if the_person.event_triggers_dict.get("FA_one_night_avail", 0) == 1:
+    def casual_FA_get_out_of_here_requirement(person):
+        if person.event_triggers_dict.get("FA_progress", 0) == 1:
+            if person.event_triggers_dict.get("FA_one_night_avail", 0) == 1:
                 return True
             if mc.charisma + mc.market_skill < 6:   #Average 3 skills
                 return "Charisma / Marketing skill too low."
-            if the_person.sluttiness < 25:
+            if person.sluttiness < 25:
                 return "Requires more sluttiness"
         return False
 
-    def casual_FA_sex_discussion_requirement(the_person):
-        if the_person.event_triggers_dict.get("FA_sex_discussion_text_enable", 0) == 1:
+    def casual_FA_sex_discussion_requirement(person):
+        if person.event_triggers_dict.get("FA_sex_discussion_text_enable", 0) == 1:
             return True
         return False
 
-    def casual_FA_my_place_requirement(the_person):
-        if the_person.event_triggers_dict.get("FA_progress", 0) == 2:
+    def casual_FA_my_place_requirement(person):
+        if person.event_triggers_dict.get("FA_progress", 0) == 2:
             if mc.charisma + mc.market_skill < 9:   #Average 4.5 skills
                 return "Charisma / Marketing skill too low."
-            if the_person.sluttiness < 40:
+            if person.sluttiness < 40:
                 return "Requires more sluttiness"
             return True
-        if the_person.event_triggers_dict.get("FA_progress", 0) == 3:
+        if person.event_triggers_dict.get("FA_progress", 0) == 3:
             return "She's already coming over tonight!"
-        if the_person.event_triggers_dict.get("FA_visit", 0) == 1:
+        if person.event_triggers_dict.get("FA_visit", 0) == 1:
             return "She's already coming over tonight!"
-        if the_person.event_triggers_dict.get("FA_progress", 0) == 4:
+        if person.event_triggers_dict.get("FA_progress", 0) == 4:
             if mc.charisma + mc.market_skill < 12:
                 return True
         return False
 
-    def casual_FA_crash_pad_requirement(the_person):
+    def casual_FA_crash_pad_requirement(person):
         if time_of_day == 4:
             return True
         return False
 
-    def casual_FA_coming_over_requirement(the_person):
-        if the_person.event_triggers_dict.get("FA_progress", 0) == 4:
+    def casual_FA_coming_over_requirement(person):
+        if person.event_triggers_dict.get("FA_progress", 0) == 4:
             if mc.charisma + mc.market_skill < 12:
                 return False
-            if the_person.sluttiness < 60:
+            if person.sluttiness < 60:
                 return "Requires more sluttiness"
             else:
                 return True
-        if the_person.event_triggers_dict.get("FA_progress", 0) == 5:
+        if person.event_triggers_dict.get("FA_progress", 0) == 5:
             return "She's already coming over tonight!"
-        if the_person.event_triggers_dict.get("FA_progress", 0) == 6:
+        if person.event_triggers_dict.get("FA_progress", 0) == 6:
             return True
-        if the_person.event_triggers_dict.get("FA_progress", 0) == 7:
+        if person.event_triggers_dict.get("FA_progress", 0) == 7:
             return "She's already coming over tonight!"
-        if the_person.event_triggers_dict.get("FA_visit", 0) == 1:
+        if person.event_triggers_dict.get("FA_visit", 0) == 1:
             return "She's already coming over tonight!"
         return False
 
 
-    def casual_FA_sexual_favors_requirement(the_person):
+    def casual_FA_sexual_favors_requirement(person):
         if time_of_day == 4:
             return True
         return False
@@ -525,25 +525,25 @@ label casual_FA_sexual_favors_label(the_person):
 #
 init 1301 python:              #Because Vren Init personality functionns at 1300
 
-    def FA_titles(the_person):
+    def FA_titles(person):
         valid_titles = []
-        valid_titles.append(the_person.name)
+        valid_titles.append(person.name)
 
         valid_titles.append("Flygirl")
-        if the_person.sluttiness > 40:
+        if person.sluttiness > 40:
             valid_titles.append("Skyslut")
-        if the_person.sluttiness > 60:
+        if person.sluttiness > 60:
             valid_titles.append("Cock Pit")
         return valid_titles
 
-    def FA_possessive_titles(the_person):
-        valid_possessive_titles = [the_person.title]
+    def FA_possessive_titles(person):
+        valid_possessive_titles = [person.title]
 
-        if the_person.sluttiness > 60:
+        if person.sluttiness > 60:
             valid_possessive_titles.append("The Skyslut")
 
         return valid_possessive_titles
-    def FA_player_titles(the_person):
+    def FA_player_titles(person):
         return mc.name
     FA_personality = Personality("Stewardess", default_prefix = "wild",
     common_likes = ["traveling"],
@@ -573,9 +573,9 @@ label FA_introduction(the_person):
 #
 label FA_greetings(the_person):
     if the_person.event_triggers_dict.get("FA_progress", 0) == 0:
-        the_person.char "Hello again... it was [the_person.mc_title] right? Is there something I can help you with?"
+        the_person.char "Hello again... it was [the_person.mc_title], right? Is there something I can help you with?"
     if the_person.event_triggers_dict.get("FA_progress", 0) == 1:
-        the_person.char "Hello [the_person.mc_title], I was just about to get a drink. How are you?"
+        the_person.char "Hello, [the_person.mc_title], I was just about to get a drink. How are you?"
     if the_person.event_triggers_dict.get("FA_progress", 0) == 2:
         "You can see [the_person.title] blush a bit as you approach her."
         the_person.char "Hey [the_person.mc_title]. Want to chat? I think I need a drink."
@@ -584,7 +584,7 @@ label FA_greetings(the_person):
     if the_person.event_triggers_dict.get("FA_progress", 0) == 4:
         the_person.char "Hey [the_person.mc_title]! Want to grab a drink with me? I don't have any plans for tonight, if you wanted to do something later..."
     if the_person.event_triggers_dict.get("FA_progress", 0) == 5:
-        the_person.char "Hello again [the_person.mc_title]! I can't wait until later..."
+        the_person.char "Hello again, [the_person.mc_title]! I can't wait until later..."
     if the_person.event_triggers_dict.get("FA_progress", 0) == 6:
         the_person.char "Hey [the_person.mc_title]! Just the man I was hoping to see today!"
     if the_person.event_triggers_dict.get("FA_progress", 0) == 7:

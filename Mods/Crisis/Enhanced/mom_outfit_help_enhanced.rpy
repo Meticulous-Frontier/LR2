@@ -10,14 +10,14 @@ label mom_outfit_help_crisis_label_enhanced():
         the_person.char "[the_person.mc_title], can you help me with something for a moment?"
         "You hear [the_person.possessive_title] call for you from her bedroom."
         menu:
-            "Help [the_person.possessive_title].":
+            "Help [the_person.possessive_title]":
                 mc.name "Sure thing, I'll be right there."
                 $ mom_bedroom.show_background()
                 $ the_person.draw_person()
                 "You step into [the_person.possessive_title]. She's standing at the foot of her bed and laying out a few sets of clothing."
                 mc.name "Hey Mom, what's up?"
 
-            "Say you're busy.":
+            "Say you're busy":
                 mc.name "Sorry [the_person.title], I'm a little busy at the moment."
                 the_person.char "Okay, I'll ask your sister."
                 $ renpy.scene("Active")
@@ -27,11 +27,11 @@ label mom_outfit_help_crisis_label_enhanced():
         $ the_person.draw_person()
         the_person.char "[the_person.mc_title], could you help me with something for a moment?"
         menu:
-            "Help [the_person.possessive_title].":
+            "Help [the_person.possessive_title]":
                 mc.name "Sure thing, what's up?"
                 "[the_person.possessive_title] goes over to her closet and pulls out a few sets of clothing. She starts to lay them out."
 
-            "Say you're busy.":
+            "Say you're busy":
                 mc.name "Sorry Mom, I should really be getting to bed."
                 the_person.char "That's okay [the_person.mc_title], I'll ask your sister then."
                 $ renpy.scene("Active")
@@ -58,7 +58,7 @@ label mom_outfit_help_crisis_label_enhanced():
         $ renpy.scene("Active")
         "You nod and turn your back to [the_person.possessive_title]. You hear her moving behind you as she starts to get undressed."
         menu:
-            "Try and peek.":
+            "Try and peek":
                 # Chance to get spotted. Otherwise you get to watch as she strips clothing off one item at a time until she is naked.
                 $ the_person.draw_person()
                 "You shuffle to the side and manage to get a view of [the_person.possessive_title] using a mirror in the room."
@@ -66,7 +66,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
                 while strip_choice is not None and not caught:
                     $ the_person.draw_animated_removal(strip_choice)
-                    "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
+                    "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
                     if renpy.random.randint(0,100) < 10: #you got caught
                         the_person.char "I'll be done in just a second [the_person.mc_title]..."
                         "Her eyes glance at the mirror you're using to watch her. You try to look away, but your eyes meet."
@@ -95,7 +95,7 @@ label mom_outfit_help_crisis_label_enhanced():
                     "[the_person.possessive_title] finishes stripping down and starts to get dressed in her new outfit. After a few moments she's all put together again."
                     the_person.char "Okay [the_person.mc_title], you can turn around now."
 
-            "Wait until she's done.":
+            "Wait until she's done":
                 "You twiddle your thumbs until [the_person.possessive_title] is finished changing."
                 the_person.char "Okay, all done. You can turn around now."
 
@@ -105,7 +105,7 @@ label mom_outfit_help_crisis_label_enhanced():
         $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
         while strip_choice is not None:
             $ the_person.draw_animated_removal(strip_choice)
-            "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
+            "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
             $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
         $ strip_choice = None
 
@@ -123,13 +123,13 @@ label mom_outfit_help_crisis_label_enhanced():
     the_person.char "Well, what do you think?"
     "You take a moment to think before responding."
     menu:
-        "Say it's too revealing.":
+        "Say it's too revealing":
             mc.name "I don't think it's very appropriate for work Mom. Maybe you should try something a little less... revealing."
             $ the_person.change_slut_temp(-2)
             the_person.char "Maybe you're right. Okay, I'll try something a little more conservative for this next outfit."
             $ second_outfit = the_person.wardrobe.decide_on_outfit(the_person.sluttiness-10, 0) #Note that if we have impossible values for this function it'll keep exanding the threshold until it's possible
 
-        "Say she looks beautiful in it.":
+        "Say she looks beautiful in it":
             mc.name "You look beautiful Mom, I think it would be perfect."
             $ the_person.change_happiness(5)
             $ the_person.change_love(1)
@@ -139,7 +139,7 @@ label mom_outfit_help_crisis_label_enhanced():
             the_person.char "Great! I want to try another outfit before I settle on this one though, if you don't mind."
             $ second_outfit = the_person.wardrobe.decide_on_outfit(the_person.sluttiness, 0)
 
-        "Say it's not revealing enough.":
+        "Say it's not revealing enough":
             mc.name "I don't know Mom, it's a little stuffy, isn't it? Maybe you should pick something that's a little more modern and fun."
             $ the_person.change_slut_temp(1+the_person.get_opinion_score("skimpy uniforms"))
             $ the_person.discover_opinion("skimpy uniforms")
@@ -155,7 +155,7 @@ label mom_outfit_help_crisis_label_enhanced():
 
 
     #Strip choices for the second peek section
-    if the_person.sluttiness + the_person.love < 35 or caught: #She really doesn't want you to see anything
+    if the_person.effective_sluttiness() + the_person.love < 35 or caught: #She really doesn't want you to see anything
         the_person.char "Okay, I just need to get changed again."
         $ renpy.scene("Active")
         "[the_person.possessive_title] shoos you out of the room while she changes into her new outfit."
@@ -166,7 +166,7 @@ label mom_outfit_help_crisis_label_enhanced():
         $ renpy.scene("Active")
         "You turn around to give her some privacy."
         menu:
-            "Try and peek.":
+            "Try and peek":
                 # Chance to get spotted. Otherwise you get to watch as she strips clothing off one item at a time until she is naked.
                 $ the_person.draw_person()
                 "You shuffle to the side and manage to get a view of [the_person.possessive_title] using a mirror in the room."
@@ -174,7 +174,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
                 while strip_choice is not None and not caught:
                     $ the_person.draw_animated_removal(strip_choice)
-                    "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
+                    "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
                     if renpy.random.randint(0,100) < 10: #you got caught
                         the_person.char "I'll be done in just a second [the_person.mc_title]..."
                         "Her eyes glance at the mirror you're using to watch her. You try to look away, but your eyes meet."
@@ -191,10 +191,10 @@ label mom_outfit_help_crisis_label_enhanced():
                         $ caught = True
                     else:
                         menu:
-                            "Keep watching.":
+                            "Keep watching":
                                 $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
 
-                            "Stop peeking.":
+                            "Stop peeking":
                                 "You pull your eyes away from the mirror and do your best not to peek."
                                 $ renpy.scene("Active")
                 $ strip_choice = None
@@ -203,7 +203,7 @@ label mom_outfit_help_crisis_label_enhanced():
                     "[the_person.possessive_title] finishes stripping down and starts to get dressed in her new outfit. After a few moments she's all put together again."
                     the_person.char "Okay [the_person.mc_title], you can turn around now."
 
-            "Wait until she's done.":
+            "Wait until she's done":
                 "You twiddle your thumbs until [the_person.possessive_title] is finished changing."
                 the_person.char "Okay, all done. You can turn around now."
 
@@ -213,7 +213,7 @@ label mom_outfit_help_crisis_label_enhanced():
         $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
         while strip_choice is not None:
             $ the_person.draw_animated_removal(strip_choice)
-            "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
+            "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
             $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
 
         $ strip_choice = None
@@ -228,21 +228,21 @@ label mom_outfit_help_crisis_label_enhanced():
     "She gives you a few turns, letting you get a look at the full outfit."
     $ the_person.draw_person()
     menu:
-        "Suggest the first outfit.":
+        "Suggest the first outfit":
             mc.name "I think you looked best in the first outfit, you should wear that."
             "She smiles and nods."
             $ the_person.change_happiness(5)
             $ the_person.next_day_outfit = first_outfit
             the_person.char "I think you're right, I'll put it away for tomorrow."
 
-        "Suggest the second outfit.":
+        "Suggest the second outfit":
             mc.name "I think this one suits you better, you should wear it tomorrow."
             "She smiles and nods."
             $ the_person.change_happiness(5)
             $ the_person.next_day_outfit = second_outfit
             the_person.char "I think you're right, it does look good on me."
 
-        "Suggest your own outfit.":
+        "Suggest your own outfit":
             mc.name "They both look good, but I think I have another idea for something you could wear..."
             "You go to [the_person.possessive_title]'s closet and start to put together an outfit of your own for her."
             $ renpy.scene("Active")
@@ -260,7 +260,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 "You lay the outfit out for [the_person.possessive_title]. She looks it over and nods."
                 the_person.char "I'll try it on, but I think I like it!"
 
-                if the_person.sluttiness + the_person.love < 35 or caught: #She really doesn't want you to see anything
+                if the_person.effective_sluttiness() + the_person.love < 35 or caught: #She really doesn't want you to see anything
                     $ renpy.scene("Active")
                     "[the_person.possessive_title] shoos you out of the room while she changes into her new outfit."
                     the_person.char "Okay, come back!"
@@ -270,7 +270,7 @@ label mom_outfit_help_crisis_label_enhanced():
                     $ renpy.scene("Active")
                     "You turn around to give her some privacy."
                     menu:
-                        "Try and peek.":
+                        "Try and peek":
                             # Chance to get spotted. Otherwise you get to watch as she strips clothing off one item at a time until she is naked.
                             $ the_person.draw_person()
                             "You shuffle to the side and manage to get a view of [the_person.possessive_title] using a mirror in the room."
@@ -278,7 +278,7 @@ label mom_outfit_help_crisis_label_enhanced():
                             $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
                             while strip_choice is not None and not caught:
                                 $ the_person.draw_animated_removal(strip_choice)
-                                "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
+                                "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
                                 if renpy.random.randint(0,100) < 10: #you got caught
                                     the_person.char "I'll be done in just a second [the_person.mc_title]..."
                                     "Her eyes glance at the mirror you're using to watch her. You try to look away, but your eyes meet."
@@ -295,10 +295,10 @@ label mom_outfit_help_crisis_label_enhanced():
                                     $ caught = True
                                 else:
                                     menu:
-                                        "Keep watching.":
+                                        "Keep watching":
                                             $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
 
-                                        "Stop peeking.":
+                                        "Stop peeking":
                                             "You pull your eyes away from the mirror and do your best not to peek."
                                             $ renpy.scene("Active")
                             $ strip_choice = None
@@ -307,7 +307,7 @@ label mom_outfit_help_crisis_label_enhanced():
                                 "[the_person.possessive_title] finishes stripping down and starts to get dressed in her new outfit. After a few moments she's all put together again."
                                 the_person.char "Okay [the_person.mc_title], you can look."
 
-                        "Wait until she's done.":
+                        "Wait until she's done":
                             "You twiddle your thumbs until [the_person.possessive_title] is finished changing."
                             the_person.char "Okay, all done. You can look."
 
@@ -317,7 +317,7 @@ label mom_outfit_help_crisis_label_enhanced():
                     $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
                     while strip_choice is not None:
                         $ the_person.draw_animated_removal(strip_choice)
-                        "You watch as [the_person.possessive_title] take off her [strip_choice.name]."
+                        "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
                         $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
                     "Once she's stripped naked she grabs another outfit and starts to put it on."
                     $ strip_choice = None

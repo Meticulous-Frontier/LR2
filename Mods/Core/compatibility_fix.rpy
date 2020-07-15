@@ -4,6 +4,7 @@
 init -2:
     default persistent.memory_mode = 0 # default is low memory mode
     default persistent.use_free_memory = True   # default is clean memory every day
+    default persistent.show_ntr = False     # default turn of NTR
 
 init 5 python: # add to stack later then other mods
     add_label_hijack("normal_start", "activate_compatibility_fix")
@@ -30,6 +31,7 @@ init -1 python:
     config.predict_statements = 32
     config.rollback_length = 16      # limit rollback to reduce object tracking
     config.cache_surfaces = False
+    config.predict_screen_statements = False
     config.predict_screens = False
 
     # for DEBUG only (uncomment when you get a cPickle error)

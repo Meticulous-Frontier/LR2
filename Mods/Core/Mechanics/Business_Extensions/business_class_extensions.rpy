@@ -67,26 +67,21 @@ init -1 python:
 
     Business.hire_person = hire_person
 
-    def add_unique_mandatory_crisis(self, the_crisis):
-        if the_crisis not in self.mandatory_crises_list:
-            self.mandatory_crises_list.append(the_crisis)
-
-    Business.add_unique_mandatory_crisis = add_unique_mandatory_crisis
-
     def calculate_strip_club_income(self):
         income = 0
-        if get_strip_club_foreclosed_stage() >= 5: # The player owns the club
-            for stripper in people_in_role(stripper_role): # More strippers more money, and linked to the difficulty choice made...
-                income += calculate_stripper_profit(stripper)
-                # extra modifiers for later stages (not yet implemented)
-                #    if foreclosed_stage >= 6: # The club have a manager = +10% income
-                #        income += int (income * 0.1)
-                #    if foreclosed_stage >= 7: # The club have waitresses = +5% income
-                #        income += int (income * 0.05)
+        if "get_strip_club_foreclosed_stage" in globals():
+            if get_strip_club_foreclosed_stage() >= 5: # The player owns the club
+                for person in known_people_in_the_game():
+                    if person.has_role([stripper_role, waitress_role, bdsm_performer_role]):
+                        income += calculate_stripper_profit(person)
 
-            # deduce stripper costs
-            for stripper in people_in_role(stripper_role):
-                income -= stripper.stripper_salary
+                if __builtin__.len(people_in_role(manager_role)) > 0 or __builtin__.len(people_in_role(mistress_role)) > 0:
+                    income *= 1.1 # +10% income
+
+                # deduce stripper costs
+                for person in known_people_in_the_game():
+                    if person.has_role([stripper_role, waitress_role, bdsm_performer_role, manager_role, mistress_role]):
+                        income -= person.stripper_salary
 
         return income
 

@@ -9,10 +9,10 @@ label ophelia_on_load(stack):
             salon_manager.add_role(salon_manager_role)
             if ophelia_get_ex_pics_sent() == 1:
                 if ophelia_blowjob_pics_review not in salon_manager.on_room_enter_event_list:
-                    salon_manager.on_room_enter_event_list.append(ophelia_blowjob_pics_review)
+                    salon_manager.add_unique_on_room_enter_event(ophelia_blowjob_pics_review)
             if ophelia_get_first_date_finished():
                 if ophelia_is_over_her_ex not in salon_manager.on_room_enter_event_list:
-                    salon_manager.on_room_enter_event_list.append(ophelia_is_over_her_ex)
+                    salon_manager.add_unique_on_room_enter_event(ophelia_is_over_her_ex)
                     candace.event_triggers_dict["day_met"] = day
         #remove these in a future version
         salon_manager.event_triggers_dict["foreplay_position_filter"] = ophelia_foreplay_position_filter
@@ -64,7 +64,7 @@ init 2 python: # Declare variables to use
             ])
 
         salon_manager.add_role(salon_manager_role)
-        salon_manager.on_room_enter_event_list.append(salon_introduction_action)
+        salon_manager.add_unique_on_room_enter_event(salon_introduction_action)
 
         # create home for salon manager
         salon_manager.generate_home()

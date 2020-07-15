@@ -25,7 +25,7 @@ init 1 python:
         quest_cure_discovery.quest_event_dict["market_day"] = 9999
         #TODO add start event
         quest_cure_discovery.set_quest_flag(1)
-        mc.business.add_unique_mandatory_crisis(quest_cure_discovery_intro)
+        mc.business.mandatory_crises_list.append(quest_cure_discovery_intro)
         game_hints.append(Hint("Medical Breakthrough", "Your head researcher has some exciting news.", "quest_cure_discovery.get_quest_flag() <= 1", "quest_cure_discovery.get_quest_flag() > 1"))
         hint_string = "Talk to " + quest_cure_get_market_contact().title + " about selling your medical patent."
         game_hints.append(Hint("Medical Breakthrough", hint_string, "quest_cure_discovery.get_quest_flag() == 21", "quest_cure_discovery.get_quest_flag() != 21"))
@@ -99,9 +99,11 @@ init 1 python:
         return False
 
     def quest_cure_discovery_patent_kept_requirement():
-        if day >= (quest_cure_discovery.quest_event_dict.get("start_day", 9999) + 1) :
-            if time_of_day > 0:
-                return True
+        if day >= (quest_cure_discovery.quest_event_dict.get("start_day", 9999) + 1):
+            if mc.business.is_open_for_business(): # only during office hours and we are at work (dialog depends on it)
+                if mc.is_at_work():
+                    if time_of_day > 0:
+                        return True
         return False
 
     def quest_cure_discovery_market_missed_requirement():
@@ -165,7 +167,7 @@ label quest_cure_discovery_intro_label():
             "As you turn to leave, you can hear her muttering something."
             $ del the_disease
             $ quest_cure_discovery.set_quest_flag(18)
-            $ mc.business.add_unique_mandatory_crisis(quest_cure_discovery_patent_kept)
+            $ mc.business.mandatory_crises_list.append(quest_cure_discovery_patent_kept)
             return
         "Try and sell the patent":
             mc.name "Some cash infusion to the company would be great. That's a great idea, [the_person.title]."
@@ -187,7 +189,7 @@ label quest_cure_discovery_intro_label():
     $ del the_target
     $ quest_cure_discovery.set_quest_flag(21)
     $ quest_cure_get_market_contact().add_unique_on_talk_event(quest_cure_discovery_market_patent)
-    $ mc.business.add_unique_mandatory_crisis(quest_cure_discovery_market_missed)
+    $ mc.business.mandatory_crises_list.append(quest_cure_discovery_market_missed)
     return
 
 label quest_cure_discovery_market_patent_label(the_person):
@@ -214,7 +216,7 @@ label quest_cure_discovery_market_patent_label(the_person):
     $ del the_disease
     $ quest_cure_discovery.set_quest_flag(31)
     $ remove_mandatory_crisis_list_action("quest_cure_discovery_market_missed_label")
-    $ mc.business.add_unique_mandatory_crisis(quest_cure_discovery_patent_sold)
+    $ mc.business.mandatory_crises_list.append(quest_cure_discovery_patent_sold)
     return
 
 label quest_cure_discovery_patent_sold_label():

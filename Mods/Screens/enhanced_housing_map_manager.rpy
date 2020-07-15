@@ -9,13 +9,13 @@ init 2:
         $ max_places_per_row = 5
         $ x_offset_per_place = 0.145
         $ y_offset_per_row = 0.07
-        for place in mc.known_home_locations:
-            if not place == mc.location and not place.hide_in_known_house_map:
+        for place in [x for x in mc.known_home_locations if not x.hide_in_known_house_map]:
+            if not place == mc.location:
                 frame:
                     background None
                     xysize [171,150]
                     anchor [0.0,0.0]
-                    align [0.2+(x_offset_per_place*x_pos),0.4+(y_offset_per_row*y_pos)]
+                    align [0.1 + (x_offset_per_place * x_pos), 0.1 + (y_offset_per_row * y_pos)]
                     imagebutton:
                         anchor [0.5,0.5]
                         auto "gui/LR2_Hex_Button_%s.png"
@@ -29,7 +29,7 @@ init 2:
                     background None
                     xysize [171,150]
                     anchor [0.0,0.0]
-                    align [0.1+(x_offset_per_place*x_pos),0.5+(y_offset_per_row*y_pos)]
+                    align [(0.1 + x_offset_per_place * x_pos), 0.1 + (y_offset_per_row * y_pos)]
                     imagebutton:
                         anchor [0.5,0.5]
                         idle "gui/LR2_Hex_Button_Alt_idle.png"
@@ -39,9 +39,9 @@ init 2:
                     text (place.formalName + "\n(" + str(__builtin__.len(place.people)) + ")").replace(" ", "\n", 2) anchor [0.5,0.5] style "map_text_style"
             $ x_pos += 1
             if x_pos >= max_places_per_row + 0.5:
-                $ x_pos += 0.5
-                $ x_pos += -max_places_per_row
+                $ x_pos = 0
                 $ y_pos += 1
+                $ x_pos += .5 if y_pos % 2 == 1 else 0
 
         frame:
             background None

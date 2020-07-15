@@ -31,6 +31,14 @@ init -1 python:
                 start_sluttiness = start_sluttiness, start_obedience = start_obedience, start_happiness = start_happiness, start_love = start_love, start_home = start_home,
                 title = title, possessive_title = possessive_title, mc_title = mc_title, relationship = relationship, kids = kids, SO_name = SO_name, base_outfit = base_outfit)
 
+        # when not using bugfix, remove the employed_since key from event trigger dictionary (this should only be used for employees)
+        if return_character.event_triggers_dict.get("employed_since", -1) != -1:
+            del return_character.event_triggers_dict["employed_since"]
+
+        update_person_opinions(return_character)
+        update_random_person(return_character)
+
+        # apply forced opinions after we 'update opinions', so we don't override them there
         if forced_opinions and isinstance(forced_opinions, list):
             for opinion in forced_opinions:
                 return_character.opinions[opinion[0]] = [opinion[1], opinion[2]]
@@ -39,12 +47,6 @@ init -1 python:
             for opinion in forced_sexy_opinions:
                 return_character.sexy_opinions[opinion[0]] = [opinion[1], opinion[2]]
 
-        # when not using bugfix, remove the employed_since key from event trigger dictionary (this should only be used for employees)
-        if return_character.event_triggers_dict.get("employed_since", -1) != -1:
-            del return_character.event_triggers_dict["employed_since"]
-
-        update_person_opinions(return_character)
-        update_random_person(return_character)
         if not starting_wardrobe:
             rebuild_wardrobe(return_character)
         update_person_outfit(return_character, -0.2) # choose a less slutty outfit as planned outfit
@@ -234,10 +236,10 @@ init -1 python:
 
     def create_bimbo():
         # add one bimbo to the game (on start of game)
-        the_person = make_person(age=renpy.random.randint(25, 35), tits="DD", body_type = "standard_body", face_style = "Face_4", skin = "tan",
+        person = make_person(age=renpy.random.randint(25, 35), tits="DD", body_type = "standard_body", face_style = "Face_4", skin = "tan",
             hair_colour = ["platinum blonde", [0.789, 0.746, 0.691,1]], hair_style = messy_hair, eyes = ["light blue", [0.60, 0.75, 0.98, 1.0]], personality = bimbo_personality)
-        the_person.generate_home()
-        the_person.home.add_person(the_person)
+        person.generate_home()
+        person.home.add_person(person)
         return
 
     def create_hooker(add_to_game = True):
@@ -313,7 +315,7 @@ init -1 python:
         return
 
     def update_lingerie_wardrobe():
-        lingerie_wardrobe = wardrobe_from_xml("Lingerie_Wardrobe")
+        global lingerie_wardrobe
         lingerie_wardrobe = lingerie_wardrobe.merge_wardrobes(wardrobe_from_xml("Lingerie_Extended_Wardrobe"))
         return
 
@@ -321,7 +323,7 @@ init -1 python:
 
     def create_unique_character_list():
         # use extend when adding a list to another list
-        unique_character_list.extend([mom, lily, aunt, cousin, stephanie, alexia, nora])
+        unique_character_list.extend([mom, lily, aunt, cousin, stephanie, alexia, nora, emily, christina])
 
         # mod unique characters (check for existence first)
         if "salon_manager" in globals():
@@ -363,9 +365,10 @@ init -1 python:
         return
 
     def update_main_character_actions():
-        for action in main_character_actions_list:
-            if action not in mc.main_character_actions:
-                mc.main_character_actions.append(action)
+        if "main_character_actions_list" in globals():
+            for action in main_character_actions_list:
+                if action not in mc.main_character_actions:
+                    mc.main_character_actions.append(action)
         return
 
 

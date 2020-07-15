@@ -4,20 +4,20 @@
 init 2 python:
     config.label_overrides["serum_give_label"] = "serum_give_label_enhanced"
 
-    def serum_give_calculate_chances(the_person):
-        sneak_serum_chance = 70 + (mc.int * 5) - (the_person.focus*5)  #% chance that you will successfully give serum to someone sneakily. Less focused people are easier to fool.
-        ask_serum_chance = 10 * mc.charisma + 5 * the_person.int #The more charismatic you are and the more intellectually curious they are the better the chance of success
-        demand_serum_chance = mc.charisma * (the_person.obedience - 90) #The more charismatic you are and the more obedient they are the more likely this is to succeed.
+    def serum_give_calculate_chances(person):
+        sneak_serum_chance = 70 + (mc.int * 5) - (person.focus*5)  #% chance that you will successfully give serum to someone sneakily. Less focused people are easier to fool.
+        ask_serum_chance = 10 * mc.charisma + 5 * person.int #The more charismatic you are and the more intellectually curious they are the better the chance of success
+        demand_serum_chance = mc.charisma * (person.obedience - 90) #The more charismatic you are and the more obedient they are the more likely this is to succeed.
 
         sneak_serum_chance = 0 if sneak_serum_chance < 0 else 100 if sneak_serum_chance > 100 else sneak_serum_chance
         ask_serum_chance = 0 if ask_serum_chance < 0 else 100 if ask_serum_chance > 100 else ask_serum_chance
 
-        if mc.business.get_employee_title(the_person) == "None":
+        if mc.business.get_employee_title(person) == "None":
             demand_serum_chance += -35 #if she doesn't work for you there is a much lower chance she will listen to your demand (unless you are very charismatic or she is highly obedient.)
 
         demand_serum_chance = 0 if demand_serum_chance < 0 else 100 if demand_serum_chance > 100 else demand_serum_chance
 
-        pay_serum_cost = the_person.salary * 5
+        pay_serum_cost = person.salary * 5
         return [sneak_serum_chance, ask_serum_chance, demand_serum_chance, pay_serum_cost]
 
     def serum_give_chance_color_wrapper(chance):
@@ -29,13 +29,13 @@ init 2 python:
 
         return "\n{size=12}{color=" + color + "}" + str(chance) + "% Success Chance{/color}{/size}"
 
-    def serum_give_build_menu_options(the_person, chances):
+    def serum_give_build_menu_options(person, chances):
         option_list = []
         option_list.append(["Give it to her stealthily" + serum_give_chance_color_wrapper(chances[0]), "stealth"])
         option_list.append(["Demand she takes it" + serum_give_chance_color_wrapper(chances[2]), "demand"])
-        if the_person.has_role(slave_role):
+        if person.has_role(slave_role):
             option_list.append(["Order her to take it\n{size=12}{color=#00D000}She is your slave.{/color}{/size}", "slave"])
-        elif the_person.is_employee():
+        elif person.is_employee():
             if mandatory_unpaid_serum_testing_policy.is_owned():
                 option_list.append(["Ask her to take it\n{size=12}{color=#00D000}Required by Policy{/color}{/size}", "policy"])
             else:

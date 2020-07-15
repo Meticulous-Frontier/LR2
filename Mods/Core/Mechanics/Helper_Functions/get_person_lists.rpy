@@ -56,6 +56,15 @@ init -1 python:
     def get_random_employees(number_of_employees, exclude_list = None, **employee_args):
         result = set([])
         list_of_possible_people = mc.business.get_requirement_employee_list(exclude_list = exclude_list, **employee_args)
+        if len(list_of_possible_people) < number_of_employees:
+            if number_of_employees == 1:
+                return None
+                
+            result.add(None) # build up tuple with correct number of items
+            for i in range(1, number_of_employees):
+                result.add(i)
+            return tuple(result)
+
         for i in range(number_of_employees):
             person = get_random_from_list(list_of_possible_people)
             result.add(person)

@@ -12,7 +12,7 @@ label lady_of_the_night_label_enhanced():
     the_person.char "You're looking a little lonely all by yourself. Are you looking for a friend to keep you warm?"
     "Her tone suggests that her \"friendship\" won't come free."
     menu:
-        "Pay her   -$200":
+        "Pay her\n{color=#ff0000}{size=18}Costs: $200{/size}{/color}" if mc.business.funds >= 200:
             $ the_person.generate_home()
             $ downtown.add_person(the_person) #If you pay her add her to the location so that she is kept track of in the future.
             mc.name "That sounds nice. It's nice to meet you..."
@@ -36,6 +36,9 @@ label lady_of_the_night_label_enhanced():
 
             the_person.char "It's been fun, if you ever see me around maybe we can do this again."
             "She gives you a peck on the cheek, then turns and struts off into the night."
+
+        "Pay her\n{color=#ff0000}{size=18}Requires: $200{/size}{/color} (disabled)" if mc.business.funds < 200:
+            pass
 
         "Say no":
             mc.name "Thanks for the offer, but no thanks."

@@ -40,7 +40,7 @@ init 1 python:
         quest_arousal_serum.quest_event_dict["expiration_day"] = 9999
         quest_arousal_serum.quest_event_dict["ready_day"] = 9999
         quest_arousal_serum.set_quest_flag(1)
-        mc.business.add_unique_mandatory_crisis(quest_arousal_serum_intro)
+        mc.business.mandatory_crises_list.append(quest_arousal_serum_intro)
         game_hints.append(Hint("Arousal Serum", "Wait for the pills to come in.", "quest_arousal_serum.get_quest_flag() == 11", "quest_arousal_serum.get_quest_flag() != 11"))
         game_hints.append(Hint("Arousal Serum", "Talk with your head researcher about testing the pills.", "quest_arousal_serum.get_quest_flag() == 21", "quest_arousal_serum.get_quest_flag() != 21"))
         game_hints.append(Hint("Arousal Serum", "Wait for your head researcher to reverse engineer the pills.", "quest_arousal_serum.get_quest_flag() == 41", "quest_arousal_serum.get_quest_flag() != 41"))
@@ -159,7 +159,7 @@ label quest_arousal_serum_intro_label():
             "You place an order with standard two day shipping."
             $ quest_arousal_serum.set_quest_flag(11)
             $ quest_arousal_serum.quest_event_dict["start_day"] = day
-            $ mc.business.add_unique_mandatory_crisis(quest_arousal_serum_receive_drug)
+            $ mc.business.mandatory_crises_list.append(quest_arousal_serum_receive_drug)
             pass
         "Sounds like bullshit":
             "You decide there is absolutely no way this stuff is legitimate. You close your browser and forget about it."
@@ -174,7 +174,7 @@ label quest_arousal_serum_receive_drug_label():
     $ mom.draw_person()
     "As you are getting ready for bed, [mom.title] knocks on your door. You open it up."
     mom.char "Hey, you got this in the mail today. At first I thought it was junk, but it has your name on it, so I figured you could figure out what to do with it."
-    "She hands you a small manila envelop."
+    "She hands you a small manila envelope."
     mc.name "Thanks [mom.title]."
     $ mom.draw_person(position = "walking_away")
     "She turns and walks way, closing your door behind her."
@@ -190,7 +190,7 @@ label quest_arousal_serum_receive_drug_label():
     $ quest_arousal_serum.quest_event_dict["expiration_day"] = day + 7
     $ quest_arousal_serum.set_quest_flag(21)
     $ mc.business.head_researcher.add_unique_on_talk_event(quest_arousal_serum_arrange_test)
-    $ mc.business.add_unique_mandatory_crisis(quest_arousal_serum_pills_expire)
+    $ mc.business.mandatory_crises_list.append(quest_arousal_serum_pills_expire)
     return
 
 label quest_arousal_serum_arrange_test_label(the_person):
@@ -199,13 +199,13 @@ label quest_arousal_serum_arrange_test_label(the_person):
     the_person.char "Oh? Probably. I could use the extra cash. What do you need me to work on?"
     mc.name "I got my hands on a couple of pills that I want to test the effectiveness of."
     the_person.char "Okay. What do they propose to do?"
-    mc.name "They function as some sort of blood flow increaser. Working similar to Viagra, but for females, to increase arousal and libido."
+    mc.name "They function as some sort of blood flow stimulant. Working similar to Viagra, but for females, to increase arousal and libido."
     the_person.char "Huh. Sounds interesting. Okay, I can do that. See you tonight?"
     mc.name "See you then."
     #We add the event here because if it happens to already be evening then the event won't proc if we wait for quest tracker to add it.
-    $ mc.business.add_unique_mandatory_crisis(quest_arousal_serum_test)
+    $ mc.business.mandatory_crises_list.append(quest_arousal_serum_test)
     $ quest_arousal_serum.set_quest_flag(31)
-    $ mc.business.add_unique_mandatory_crisis(quest_arousal_serum_fire_HR)
+    $ mc.business.mandatory_crises_list.append(quest_arousal_serum_fire_HR)
     $ remove_mandatory_crisis_list_action("quest_arousal_serum_pills_label")
     return
 
@@ -298,8 +298,6 @@ label quest_arousal_serum_test_label():
         the_person.char "Yeah... something like that. Hey I'm wore out. I'll get back to you about it, okay?"
         mc.name "Thanks."
         $ quest_arousal_serum.set_quest_flag(42)
-        $ mc.business.add_unique_mandatory_crisis(quest_arousal_serum_researched)
-        $ quest_arousal_serum.quest_event_dict["ready_day"] = day + 3
     else:
         $ the_person.draw_person()
         "[the_person.title] slowly gets up."
@@ -322,8 +320,11 @@ label quest_arousal_serum_test_label():
         the_person.char "Yeah... something like that. Hey I'm wore out. I'll get back to you about it, okay?"
         mc.name "Thanks."
         $ quest_arousal_serum.set_quest_flag(41)
-        $ mc.business.add_unique_mandatory_crisis(quest_arousal_serum_researched)
-        $ quest_arousal_serum.quest_event_dict["ready_day"] = day + 3
+
+    $ mc.business.mandatory_crises_list.append(quest_arousal_serum_researched)
+    $ quest_arousal_serum.quest_event_dict["ready_day"] = day + 3
+    $ quest_arousal_serum.quest_event_dict["expiration_day"] += 3   # extend expiration to allow for research to finish    
+
     "You and [the_person.possessive_title] leave the lab and close up for the day."
     return
 

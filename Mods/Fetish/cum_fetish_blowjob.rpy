@@ -28,7 +28,7 @@ label intro_SB_cum_fetish_blowjob(the_girl, the_location, the_object):
         "[the_girl.possessive_title] pulls off your condom."
         $ mc.condom = False
     the_girl.char "How about I take care of this for you?"
-    "[the_girl.possessive_title] looks up at your from her knees. She looks you right in the eyes as she leans foward and slides her lips over the tip of your dick."
+    "[the_girl.possessive_title] looks up at your from her knees. She looks you right in the eyes as she leans forward and slides her lips over the tip of your dick."
     $ SB_cum_fetish_blowjob.current_modifier = "blowjob"
     $ SB_cum_fetish_blowjob.redraw_scene(the_girl)
     return
@@ -127,7 +127,7 @@ label outro_SB_cum_fetish_blowjob(the_girl, the_location, the_object):
     if the_girl.has_role(cum_internal_role) or the_girl.get_opinion_score("drinking cum") > the_girl.get_opinion_score("cum facials"):
         "[the_girl.possessive_title] moans and looks you in the eyes. She pulls off until just the  tip of your cock is in her mouth and she begins to stroke out off eagerly."
         "You erupt in orgasm into her greedy mouth. Her pupils dilate as her cum addicted brain registers the presence of your cum in her mouth."
-        "[the_girl.possessive_title] is moaning uncontrollably around your spasming cock."
+        "[the_girl.possessive_title] is moaning uncontrollably around your twitching cock."
         $ the_girl.cum_in_mouth()
         $ SB_cum_fetish_blowjob.redraw_scene(the_girl)
         if the_girl.arousal > 100:

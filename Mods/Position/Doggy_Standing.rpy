@@ -158,7 +158,7 @@ label scene_SB_doggy_standing_2(the_girl, the_location, the_object):
     if the_girl.arousal > 130:
         the_girl.char "Ohhh my god, I already came... and you're still fucking me!"
         "[the_girl.possessive_title]'s legs are shaking. Her orifice clenches and spasms around you."
-        "Her pussy spasming around you feels spectacular."
+        "Her pussy convulsing around you feels spectacular."
         $ mc.change_arousal(5)
     elif the_girl.arousal > 80:
         the_girl.char "Ohhh, [the_girl.mc_title]... You are gonna make me cum so hard..."
@@ -225,7 +225,7 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object):
             if the_girl.get_opinion_score("creampies") > 0:
                 the_girl.char  "Yes! Fill me with your cum!"
             if the_girl.arousal > 110:
-                "You feel her pussy spasming around your dick as she also starts to orgasm."
+                "You feel her pussy convulsing around your dick as she also starts to orgasm."
                 $ the_girl.change_happiness(5)
             $ the_girl.cum_in_vagina()
             $ SB_doggy_standing.redraw_scene(the_girl)

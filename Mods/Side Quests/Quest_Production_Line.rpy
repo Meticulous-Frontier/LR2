@@ -60,7 +60,7 @@ init 1 python:
         quest_production_line.quest_event_dict["starting_pay"]  = quest_production_line.quest_event_dict["target"].salary
         quest_production_line.quest_event_dict["moving_day"] = 9999
         quest_production_line.set_quest_flag(1)
-        quest_production_line_get_target().on_room_enter_event_list.append(quest_production_line_intro)
+        quest_production_line_get_target().add_unique_on_room_enter_event(quest_production_line_intro)
         game_hints.append(Hint("Chemist's Baby Girl", "Check production for a disturbance.", "quest_production_line.get_quest_flag() <= 1", "quest_production_line.get_quest_flag() > 1"))
         game_hints.append(Hint("Chemist's Baby Girl", "Don't forget to meet the Chemist at the Mall in the afternoon.", "quest_production_line.get_quest_flag() == 11", "quest_production_line.get_quest_flag() != 11"))
         hint_string = "Give " + quest_production_line_get_target().title + " a raise with a positive performance review."
@@ -391,7 +391,7 @@ label quest_production_line_help_move_label():
         mc.name "You're welcome [the_person.title]. I'll see you at work?"
         the_person.char "Yes Sir!"
         $ quest_production_line.set_quest_flag(101)
-        $ the_person.on_room_enter_event_list.append(quest_production_line_daddy_title)
+        $ the_person.add_unique_on_room_enter_event(quest_production_line_daddy_title)
     else:
         the_person.char "So... I was wondering something."
         mc.name "What might that be?"
@@ -418,9 +418,9 @@ label quest_production_line_help_move_label():
             the_person.char "I just wanted to take care of him... so... I did! And I don't regret it one bit!"
             mc.name "Just the one time?"
             the_person.char "No... it's... we've been intimate... on multiple occasions."
-            the_person.char "But now, I'm moved out. He has already started spending more time being social. Even been on a couple of dates!"
-            the_person.char "I'm so proud to have him as my dad. But I always knew it wouldn't last forever. We both did."
-            the_person.char "So we decided, together, to stop. Doing sexual things together anyway."
+            the_person.char "But now, I've moved out and he has already started spending more time on social activities. He has even been on a couple of dates!"
+            the_person.char "I'm so proud to have him as my dad. But I always knew it wouldn't last forever, we both did."
+            the_person.char "So we both decided, we should stop doing sexual things with each other."
             "You take a moment to consider this revelation."
             mc.name "That's okay. I totally understand."
             the_person.char "You do?"
@@ -429,7 +429,7 @@ label quest_production_line_help_move_label():
             $ the_person.change_stats(happiness = 20, love = 40, obedience = 40)
             $ the_person.draw_person()
             "She stands up."
-            the_person.char "That feels good... to get off my chest. You know? But still... I had sex with my dad! Multiple times! And liked it!"
+            the_person.char "That feels good... to get off my chest. You know? But still... I had sex with my dad, multiple times! And I liked it."
             mc.name "So?"
             the_person.char "Well... you're kind of my daddy now. Isn't that naughty?"
             mc.name "I suppose..."
@@ -465,7 +465,7 @@ label quest_production_line_help_move_label():
             mc.name "You're welcome [the_person.title]. I'll see you at work?"
             the_person.char "Yes Sir!"
             $ quest_production_line.set_quest_flag(102)
-            $ the_person.on_room_enter_event_list.append(quest_production_line_daddy_title)
+            $ the_person.add_unique_on_room_enter_event(quest_production_line_daddy_title)
     $ quest_production_line.quest_completed()
     return
 

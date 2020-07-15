@@ -35,7 +35,7 @@ init -1 python:
             self.mc_position = []                   #Holds the positions that MC can take during this position
             self.verb = verb #A verb used to describe the position. "Fuck" is default, and mostly used for sex positions or blowjobs etc. Kiss, Fool around, etc. are also possibilities.
             self.verbing = verbing
-            self.current_modifier = None #We will update this if the posisiion has a special modifier that shoudl be applied, like blowjob.
+            self.current_modifier = None #We will update this if the position has a special modifier that should be applied, like blowjob.
             self.p1_transform = p1_transform
             self.p2_transform = p2_transform
             self.p1_z_order = p1_z_order
@@ -328,7 +328,7 @@ init 5 python:
             option_list.append (["Strip " + person_one.title, "strip_one"])
         if not person_two.outfit.full_access():
             option_list.append (["Strip " + person_two.title, "strip_two"])
-        option_list.append (["Finished", "leave"])
+        option_list.append (["Finished", "Leave"])
         return option_list
 
     def update_threesome_action_description(position, girl_swap_pos):
@@ -417,7 +417,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
     else:
         $ mc.listener_system.fire_event("threesome", the_person_one = the_person_one, the_person_two = the_person_two)
         $ active_mc_position = get_mc_active_position(position_choice, round_choice)
-        if active_mc_position == None:
+        if active_mc_position is None:
             "Something broke..."
             $ round_choice = "Leave"
         elif round == 0:
@@ -455,7 +455,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                     $ finished = True
                     "You decide to finish the threesome instead."
 
-                if active_mc_position == None:
+                if not active_mc_position:
                     "Something broke..."
                     $ finished = True
                 else:
@@ -463,7 +463,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
 
             $ start_position = None #Clear start positions/objects so they aren't noticed next round.
             $ start_object = None
-            if position_choice: #If we have both an object and a position we're good to go, otherwise we loop and they have a chance to choose again.
+            if active_mc_position and position_choice: #If we have both an object and a position we're good to go, otherwise we loop and they have a chance to choose again.
                 call threesome_round(the_person_one, the_person_two, position_choice = active_mc_position, object_choice = None, private = private, report_log = report_log) from _call_threesome_round_1
                 $ first_round = False
                 if not active_mc_position.requirement(the_person_one, the_person_two):
@@ -475,7 +475,6 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                     $ position_choice = None
                     $ active_mc_position = None
                 elif not active_mc_position.check_girl_one_energy(the_person_one):
-
                     the_person_one.char "I'm exhausted [the_person_one.mc_title], I can't keep this up..."
                     $ position_choice = None
                     $ active_mc_position = None
@@ -525,9 +524,6 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                 #for now disable stripping
                     #pass
                     #call girl_strip_event(the_person, position_choice, object_choice) from _call_girl_strip_event
-
-
-
 
         elif round_choice == "Strip":
             #currently not implemented

@@ -62,7 +62,11 @@ init 5 python:
     morning_crisis_chance = morning_crisis_base_chance
 
     # some crisis events should always trigger (not tracked in crisis tracker and always available when is_action_enabled())
-    excluded_crisis_tracker_events = [work_relationship_change_crisis, so_relationship_improve_crisis, so_relationship_worsen_crisis]
+    excluded_crisis_tracker_events = [] # Check for the events existance since they can be found outside of the core files
+    excluded_crisis_tracker_events_gc = ["work_relationship_change_crisis", "sister_phone_crisis_action", "mom_selfie_crisis", "late_for_work_action"]
+    for crisis in excluded_crisis_tracker_events_gc:
+        if crisis in globals():
+            excluded_crisis_tracker_events.append(globals()[crisis])
 
     mandatory_advance_time = False
 
@@ -111,7 +115,13 @@ init 5 python:
 
     advance_time_action_list = [advance_time_people_run_turn_action, advance_time_people_run_day_action, advance_time_end_of_day_action, advance_time_next_action, advance_time_mandatory_crisis_action,
         advance_time_random_crisis_action, advance_time_mandatory_morning_crisis_action, advance_time_random_morning_crisis_action, advance_time_daily_serum_dosage_action,
-        advance_time_people_run_move_action, advance_time_bankrupt_check_action, advance_time_stay_wet_action, advance_time_collar_person_action, advance_time_mandatory_vibe_company_action]
+        advance_time_people_run_move_action, advance_time_bankrupt_check_action, advance_time_mandatory_vibe_company_action]
+
+    if "slave_role" in globals():
+        if advance_time_stay_wet_action not in advance_time_action_list:
+            advance_time_action_list.append(advance_time_stay_wet_action)
+        if advance_time_collar_person_action not in advance_time_action_list:
+            advance_time_action_list.append(advance_time_collar_person_action)
 
     # sort list on execution priority
     advance_time_action_list.sort(key = lambda x: x.priority)
@@ -199,7 +209,8 @@ init 5 python:
             person.run_turn()
         mc.business.run_turn()
         mc.run_turn()
-        quest_director.run_turn()
+        if "quest_director" in globals():
+            quest_director.run_turn()
         return
 
     def advance_time_run_day(people):
@@ -208,7 +219,8 @@ init 5 python:
 
         mc.run_day()
         mc.business.run_day()
-        quest_director.run_day()
+        if "quest_director" in globals():
+            quest_director.run_day()
         return
 
     def advance_time_run_move(people):
@@ -225,10 +237,10 @@ init 5 python:
                 if crisis:
                     #renpy.notify("Created event: " + crisis[0].name + " for " + people.name)
                     if crisis[2] == "on_talk" and __builtin__.len(person.on_talk_event_list) == 0: # prevent multiple on talk events for person
-                        person.on_talk_event_list.append(Limited_Time_Action(crisis[0], crisis[0].event_duration))
+                        person.add_unique_on_talk_event(Limited_Time_Action(crisis[0], crisis[0].event_duration))
                     elif crisis[2] == "on_enter":
                         if not exists_in_room_enter_list(person, crisis[0].effect): # prevent adding the same event twice
-                            person.on_room_enter_event_list.append(Limited_Time_Action(crisis[0], crisis[0].event_duration))
+                            person.add_unique_on_room_enter_event(Limited_Time_Action(crisis[0], crisis[0].event_duration))
         return
 
     def advance_time_slave_stay_wet(people):
@@ -362,7 +374,7 @@ label advance_time_people_run_day_label():
     if persistent.use_free_memory or persistent.memory_mode < 2 or day%7 == 6:
         $ renpy.free_memory()
     $ gc.collect()
-    # $ renpy.profile_memory(.1, 16384)
+    #$ renpy.profile_memory(.5, 1024)
     $ renpy.block_rollback()
     return
 
@@ -374,7 +386,8 @@ label advance_time_end_of_day_label():
         mc.business.clear_messages()
         # increase morning crisis chance (once a day)
         morning_crisis_chance += 2
-        perk_system.update()  #TEST to see if this is a good time for this.
+        if "perk_system" in globals():
+            perk_system.update()  #TEST to see if this is a good time for this.
         mc.business.funds_yesterday = mc.business.funds
     return
 

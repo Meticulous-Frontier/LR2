@@ -29,12 +29,12 @@ label enhanced_special_training_crisis_label():
     "You get a text  from [the_person.title]."
     the_person.char "[the_person.mc_title], I've just gotten word about a training seminar going on right now a few blocks away. I would love to take a trip over and see if there is anything I could learn."
     the_person.char "There's a sign up fee of $500. If you can cover that, I'll head over right away."
-    if the_person.sluttiness >= 20:
+    if the_person.effective_sluttiness() >= 20:
         the_person.char "I'll personally repay you for it later..."
     menu:
-        "Send [the_person.title] to the Seminar. -$500" if mc.business.funds >= 500:
+        "Send [the_person.title] to Seminar\n{color=#ff0000}{size=18}Costs: $500{/size}{/color}" if mc.business.funds >= 500:
             "You type up a response."
-            the_person.mc_title "That sounds like a great idea. I'll call and sort out the fee, you start heading over."
+            mc.name "That sounds like a great idea. I'll call and sort out the fee, you start heading over."
             the_person.char "Understood, thank you sir! What would you like me to focus on?"
 
             call screen enhanced_main_choice_display(build_menu_items(build_seminar_improvement_menu(the_person)))
@@ -43,19 +43,22 @@ label enhanced_special_training_crisis_label():
                 $ setattr(the_person, _return, getattr(the_person, _return) + 2) #TODO: Make this line be generic.
                 $ mc.log_event("[the_person.title]: " + "+2 " + get_work_skills()[_return][0], "float_text_grey")
                 "[the_person.title] leaves work for a few hours to attend the training seminar. When she returns she has learned several useful techniques." # NOTE: Make this less generic
-                if the_person.sluttiness >= 20:
+                if the_person.effective_sluttiness() >= 20:
                     # follow up on promise made
                     $ add_return_from_seminar_action(the_person)
 
-        "Tell her to stay at work.":
+        "Send [the_person.title] to Seminar\n{color=#ff0000}{size=18}Requires: $500{/size}{/color} (disabled)" if mc.business.funds < 500:
+            pass
+
+        "Tell her to stay at work":
             "You type up a response."
-            the_person.mc_title "I'm sorry [the_person.title], but there aren't any extra funds in the budget right now."
+            mc.name "I'm sorry [the_person.title], but there aren't any extra funds in the budget right now."
             the_person.char "Noted, maybe some other time then."
 
     return
 
 label return_from_seminar_action_label(the_person):
-    if the_person.sluttiness >= 20:
+    if the_person.effective_sluttiness() >= 20:
         $ the_person.draw_person(position="stand4")
         "[the_person.title] enters your office where you are in your chair, idly tending to your duties."
         the_person.char "There you are, [the_person.mc_title]! I'm back from the seminar and ready to show you the gratitude I promised."
@@ -64,8 +67,8 @@ label return_from_seminar_action_label(the_person):
             $ the_person.draw_animated_removal (the_clothing)
             "Before you have time to reply, [the_person.title] begins stripping off her [the_clothing.display_name] right in front of you."
             the_person.char "I thought it wouldn't hurt to show you a bit of skin, hope you don't mind?"
-            the_person.mc_title "Not at all, I always appreciate a pleasant sight, [the_person.title]."
-        if the_person.sluttiness >= 50:
+            mc.name "Not at all, I always appreciate a pleasant sight, [the_person.title]."
+        if the_person.effective_sluttiness() >= 50:
             $ the_clothing = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
             if the_clothing is not None:
                 "[the_person.possessive_title] isn't impressed by your reaction to her display. Wanting to sweeten the deal for you, she continues on."
@@ -76,7 +79,7 @@ label return_from_seminar_action_label(the_person):
                 "Your dick twitches at the sight of [the_person.title]'s mature body."
             else:
                 "Your dick twitches at the sight of [the_person.title]'s nubile body."
-            if the_person.sluttiness >= 80:
+            if the_person.effective_sluttiness() >= 80:
                 $ the_clothing = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
                 if the_clothing is not None:
                     the_person.char "You know... the seminar really did help me out..."
@@ -86,7 +89,7 @@ label return_from_seminar_action_label(the_person):
                 "You feel like you could explode just from the view of [the_person.title]'s naked body as she stands there, teasing you."
         $ the_clothing = None
 
-    if the_person.sluttiness >= 90 or (the_person.sluttiness >= 60 and the_person.get_opinion_score("being covered in cum")) > 0 or (the_person.sluttiness >= 60 and the_person.get_opinion_score("giving blowjobs") > 0) or (the_person.sluttiness >= 60 and the_person.get_opinion_score("big dicks") > 0):
+    if the_person.effective_sluttiness() >= 60:
         $ the_person.draw_person(emotion="sad")
         "She stops to think for a second, putting on a frown before turning it into a bright, mischievous smile."
         $ the_person.draw_person(emotion="happy")
@@ -96,7 +99,7 @@ label return_from_seminar_action_label(the_person):
         the_person.char "[the_person.mc_title], you have such a nice cock, it'll be perfect inside of my mouth..."
         $ the_person.draw_person(position="blowjob", special_modifier="blowjob")
         "[the_person.title] opens her mouth and begins to vigorously suck on your dick with the full intent of giving you at least $500's worth of suction." #Nice. SUUUCTIIIIOOON
-        the_person.mc_title "I truly appreciate having such gratuitous employees, just keep on going [the_person.title]."
+        mc.name "I truly appreciate having such gratuitous employees, just keep on going [the_person.title]."
         $ the_person.draw_person(position="blowjob")
         "[the_person.title] lets your cock drop out of her mouth as she grabs a hold of it, administrating an enthusiastic handjob as she looks at your eyes with a smile plastered onto her face."
         the_person.char "And I truly appreciate working for such a wonderful man!"
@@ -109,9 +112,9 @@ label return_from_seminar_action_label(the_person):
         the_person.char "Mrmrmm... Mrmmmmm..."
         "[the_person.title] continues to speed up and you begin to feel that it won't be long before you explode."
         if the_person.get_opinion_score("giving blowjobs") > 0:
-            the_person.mc_title "It feels great, [the_person.title]! Get ready for a big one."
+            mc.name "It feels great, [the_person.title]! Get ready for a big one."
 
-        if the_person.get_opinion_score("being covered in cum") > 0 or the_person.get_opinion_score("giving blowjobs") > 0:
+        if the_person.effective_sluttiness() >= 90 and the_person.sex_skills["Oral"] >= 5 and the_person.happiness > 130: # devoted slutty employee with high oral skills
             $ the_person.draw_person(position="kneeling1")
             "Right before you hit your climax she pulls your cock out of her mouth and looks up into your eyes."
             the_person.char "Yes, [the_person.mc_title]! I want to be covered by your sperm! Unleash it onto me, please!"
@@ -126,61 +129,65 @@ label return_from_seminar_action_label(the_person):
             $ the_person.cum_on_tits()
             $ the_person.draw_person(position="kneeling1")
             "She closes her mouth shut to secure the load in her stomach while the excess cum drips down onto her tits, painting them white."
-            the_person.mc_title "There you go, [the_person.title]! That's how a decent [mc.business.name] employee should look like!"
+            mc.name "There you go, [the_person.title]! That's how a decent [mc.business.name] employee should look like!"
             #"The image of [the_person.title] sitting contently in front of with her body sealed in your sperm really fires you up."
             $ the_person.draw_person(position = "stand2", emotion = "happy")
-            "[the_person.title] pushes herself up off the floor then takes in the spectacle of her body. Her eyes trail down her chest as drops of your sperm fall onto the carpet below."
+            "[the_person.title] pushes herself up off the floor while you take in the spectacle of her body. Her eyes trail down her chest as drops of your sperm fall onto the carpet below."
             the_person.char "Really, [the_person.mc_title]? Maybe you would like to have a better look?"
             $ the_person.draw_person(position = "back_peek")
             "[the_person.title] starts to turn around with the intention of striking various poses, allowing you to enjoy the sight of her cum drenched body."
             $ the_person.draw_person(position = "missionary", emotion = "happy")
             "She lies herself back onto the floor before spreading her legs, giving you a perfect view of her now dripping vagina. Her juices flow onto the carpet, mixing itself with yours."
             the_person.char "Do you prefer this view? My pussy is yours to use however you want for the sake of [mc.business.name]." # Should probably include some less NTR- suggestive dialogue depending on preferences etc.
-            "She basks in the pleasurable sensation that announcing her devotion to you and [mc.business.name] is giving her. She then continues her routine of displaying herself from multiple angles."
+            "She basks in the pleasurable sensation of announcing her devotion to you and [mc.business.name]."
             the_person.char "If my pussy is off limits... then how about this."
             $ the_person.draw_person(position = "blowjob", emotion = "happy")
-            "[the_person.title] rolls herself onto her stomach, then gets up on her knees as she opens her mouth, whipping her tongue while reaching down to rub at her clit."
-            the_person.char "I can be on my knees handing out blowjobs to whoever you want..."
-            the_person.char "I'll gladly suck any dick you instruct me to if it helps [mc.business.name] prosper."
+            "[the_person.title] rolls herself onto her stomach, then gets up on her knees as she opens her mouth, licking her lips, while reaching down to rub at her clit."
+            # TODO: for now disable suggestive NTR - we have no option to turn this on / off yet
+            #the_person.char "I can be on my knees handing out blowjobs to whoever you want..."
+            #the_person.char "I'll gladly suck any dick you instruct me to if it helps [mc.business.name] prosper."
             $ the_person.draw_person(position = "standing_doggy", emotion = "happy")
-            "[the_person.title] then rotates her back towards you, reaching up to support herself by resting her arms on the desk as she arches her back forward, pushing her ass in your direction, wiggling it left and right."
+            "[the_person.title] then rotates her back towards you, reaching up to support herself by resting her arms on the desk as she arches her back, pushing her ass in your direction, wiggling it left and right."
             #the_person.char "You should also check up this ass. It is also usable if you would like so."
-            the_person.char "I wouldn't mind if you share this ass of mine with your investors or friends either. I'd actually love that, [the_person.mc_title]!"
+            #the_person.char "I wouldn't mind if you share this ass of mine with your investors or friends either. I'd actually love that, [the_person.mc_title]!"
             $ the_person.draw_person(position = "back_peek", emotion = "happy")
-            "[the_person.title] straightens her back then walks towards the door to that leads out of your office. In the doorway she stops and turns to you."
-            the_person.char "Remember [the_person.mc_title], anything for the company."
+            "[the_person.title] straightens her back then walks towards the door that leads out of your office. In the doorway she stops and turns to you."
+            the_person.char "Remember [the_person.mc_title], I'll do anything for this company."
+            $ the_person.apply_planned_outfit()
+            return
         else:
-            $ ran_num = renpy.random.randint(1,4)
-            if ran_num > 3:
-                $ the_person.cum_on_face()
-                "She pulls your cock out of her mouth then looks intently at your eyes."
-                the_person.char "Yes, [the_person.mc_title]. Shoot it right onto me! Give me one... big... facial."
-            else:
-                if ran_num > 2:
-                    $ the_person.cum_on_stomach()
-                    "She pulls your cock out of her mouth then looks up into your eyes as she leans away from you."
-                    the_person.char "Oh, [the_person.mc_title]. I just applied new makeup. Please, don't ruin it."
+            $ ran_num = renpy.random.randint(1, 2)
+            if ran_num == 1:
+                if the_person.get_opinion_score("drinking cum") > the_person.get_opinion_score("being covered in cum"):
+                    "She withdraws her mouth from your cock, resting it by the tip as she looks into your eyes with her mouth wide open."
+                    $ the_person.cum_in_mouth()
+                    the_person.char "Yes, [the_person.mc_title]! Shoot your load right into my mouth. I love the taste of you."
                 else:
-                    if ran_num > 1:
-                        $ the_person.cum_in_mouth()
-                        "She withdraws her mouth from your cock, resting it by the tip as she looks into your eyes with her mouth wide open."
-                        the_person.char "Yes, [the_person.mc_title]! Shoot your load right into my mouth. I love the taste of you."
-                    else:
-                        $ the_person.cum_on_tits()
-                        "She pulls your cock out of her mouth then looks up into your eyes as she presents her chest to you."
-                        the_person.char "Like my tits, [the_person.mc_title]? They'll look much better covered in your cum..."
+                    "She pulls your cock out of her mouth then looks intently at your eyes."
+                    $ the_person.cum_on_face()
+                    the_person.char "Yes, [the_person.mc_title]. Shoot it right onto me! Give me one... big... facial."
+            else:
+                if the_person.get_opinion_score("giving tit fucks") > the_person.get_opinion_score("being covered in cum"):
+                    "She pulls your cock out of her mouth then looks up into your eyes as she presents her chest to you."
+                    $ the_person.cum_on_tits()
+                    the_person.char "Like my tits, [the_person.mc_title]? They'll look much better covered in your cum..."
+                else:
+                    "She pulls your cock out of her mouth then looks up into your eyes as she leans away from you."
+                    $ the_person.cum_on_stomach()
+                    the_person.char "Oh, [the_person.mc_title]. I just applied new makeup. Please, don't ruin it."
+
             $ the_person.draw_person(position="blowjob")
             "[the_person.title] keeps sitting on her knees while receiving you load."
             the_person.char "Aaaah, it feels great!"
             $ the_person.draw_person(position = "stand3", emotion = "happy")
             "[the_person.title] kisses the tip of your cock before standing up, smiling."
             the_person.char "Thanks, [the_person.mc_title]. That's just what I needed! I hope you found my repayment adequate."
-            the_person.char "Now back to work."
+            mc.name "Very adequate indeed, now back to work."
+
+    if the_person.effective_sluttiness() >= 60:
+        "She leans in, kisses you on the cheek and gives your cock a final squeeze, then leaves the room."
     else:
-        if the_person.sluttiness >= 60:
-            "She leans in and strokes your cock a little, then leaves the room."
-        else:
-            "She gives you a kiss on the cheek before leaving the room."
+        "She gives you a kiss on the cheek before leaving the room."
 
     $ the_person.apply_planned_outfit()
     return

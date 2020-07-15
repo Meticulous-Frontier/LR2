@@ -74,7 +74,7 @@ label scene_breeding_missionary_1(the_girl, the_location, the_object):
                 else:
                     the_person.char "Mmm, you wanna play with my tits? Okay."
                 "She leans forward and you quickly strip her top off."
-                $ the_person.strip_outfit(top_layer_first = True, exclude_lower = True)
+                $ the_person.strip_outfit(top_layer_first = True, exclude_lower = True, position = breeding_missionary.position_tag)
             "You lean down and start to kiss at [the_girl.possessive_title]'s tits. She arches her back, presenting them to your lips."
             if the_girl.get_opinion_score("kissing") > 0:
                 $ the_girl.discover_opinion("kissing")

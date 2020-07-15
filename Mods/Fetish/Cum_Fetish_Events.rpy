@@ -112,6 +112,7 @@ label SB_fetish_cum_non_employee_label(the_person):
             mc.name "Ok, go ahead, but make it quick, I don't want to disturb the neighbors."
             $ mc.change_arousal(20)
             "She quickly takes you in her mouth, slowly making your cock hard as rock."
+            $ the_person.break_taboo("sucking_cock")
             the_person.char "Mmh, I love it when I can feel it grow in my mouth."
             "[the_person.possessive_title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
             call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC10B
@@ -186,6 +187,7 @@ label SB_fetish_cum_label(the_person):
             "[the_person.possessive_title] quickly gets down underneath your desk, before you sit down."
             $ the_person.draw_person(position = "blowjob")
             "She immediately gets to work, pulling your dick out of your pants. You quickly feel the soft, velvet mouth wrapped around you."
+            $ the_person.break_taboo("sucking_cock")
             "[the_person.possessive_title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
             "You should be careful where you cum. It is likely her fetish may develop based on where you cum!"
             ###cum Scene, standing variant###
@@ -385,6 +387,7 @@ label SB_fetish_mom_cum_label():
     "However, as you awaken, the pleasure you are experiencing continues."
     $ the_person.draw_person(position = "blowjob")
     "You look down and discover that [the_person.possessive_title] is between your legs. She has pulled your underwear down and is sucking you off."
+    $ the_person.break_taboo("sucking_cock")
     mc.name "[the_person.title]? What are you..."
     "[the_person.possessive_title] interrupts you."
     the_person.char "Shhh, just lay back. I need your cum right now. I couldn't sleep, I was craving you so bad."
@@ -404,7 +407,7 @@ label SB_fetish_mom_cum_label():
             mc.name "Fuck, here I come!"
             "[the_person.possessive_title] moans and looks you in the eyes. She pulls off until just the tip of your cock is in her mouth and she begins to stroke you off eagerly."
             "You erupt in orgasm into her greedy mouth. [the_person.possessive_title] is swallowing rapidly as you fill her mouth with your cum."
-            "[the_person.possessive_title] is moaning uncontrollably around your spasming cock."
+            "[the_person.possessive_title] is moaning uncontrollably around your twitching cock."
             $ the_person.cum_in_mouth()
             $ the_person.draw_person(position = "blowjob")
             $ the_person.max_opinion_score("drinking cum")
@@ -502,6 +505,7 @@ label SB_fetish_lily_cum_label():
     "You see [the_person.possessive_title] reach down with one hand and start to touch herself. She runs her tongue up and down your shaft a few times."
     the_person.char "It's like I'm thirsty... but no amount of water I drink makes my thirst go away... Only when I think about drinking your sweet cum do I feel any better..."
     "[the_person.possessive_title] opens her mouth and starts to suck you off. You feel her soft, velvet mouth wrapped around you."
+    $ the_person.break_taboo("sucking_cock")
     "[the_person.possessive_title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
     "You should be careful where you cum. It is likely her fetish may develop based on where you cum!"
     call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC40
@@ -628,6 +632,7 @@ label SB_fetish_stephanie_cum_label():
                 "[the_person.possessive_title] gets on her knees and starts to pull down your trousers. It isn't long until she has your dick out and is stroking it eagerly."
                 the_person.char "Come on [the_person.mc_title], you know what I need!"
                 "She enthusiastically opens her mouth and sucks your hard cock into her mouth. She is desperate for your seed!"
+                $ the_person.break_taboo("sucking_cock")
                 "You should consider carefully where you cum, it might change where she prefers to take cum from now on."
                 call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBC060
                 $ add_cum_fetish_role_based_on_cum(the_person)
@@ -664,9 +669,10 @@ label SB_fetish_stephanie_cum_label():
                 the_person.char "Oh! A present! I do love presents! Especially the ones I tend to get when I'm on my knees. I wonder what it could be!"
                 $ scene_manager.update_actor(the_person, position = "blowjob")
                 "[the_person.possessive_title] gets on her knees and skillfully removes your pants and underwear."
-                "She gives your hardon a few eager strokes.."
+                "She gives your hard-on a few eager strokes.."
                 the_person.char "Mmm [the_person.mc_title]! You look so yummy!"
                 "She enthusiastically opens her mouth and sucks your hard cock into her mouth. She is desperate for your seed!"
+                $ the_person.break_taboo("sucking_cock")
                 "You should consider carefully where you cum, it might change where she prefers to take cum from now on."
                 call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBC061
                 $ add_cum_fetish_role_based_on_cum(the_person)
@@ -736,9 +742,10 @@ label SB_fetish_stephanie_cum_label():
                 the_person.char "Oh! A present! I do love presents! Especially the ones I tend to get when I'm on my knees. I wonder what it could be!"
                 $ scene_manager.update_actor(the_person, position = "blowjob")
                 "[the_person.possessive_title] gets on her knees and skillfully removes your pants and underwear."
-                "She gives your hardon a few eager strokes.."
+                "She gives your hard-on a few eager strokes.."
                 the_person.char "Mmm [the_person.mc_title]! You look so yummy!"
                 "She enthusiastically opens her mouth and sucks your hard cock into her mouth. She is desperate for your seed!"
+                $ the_person.break_taboo("sucking_cock")
                 "You should consider carefully where you cum, it might change where she prefers to take cum from now on."
                 call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBC062
                 $ add_cum_fetish_role_based_on_cum(the_person)
@@ -766,6 +773,7 @@ label SB_fetish_stephanie_cum_label():
         mc.name "Oh. Right!"
         "You quickly pull down your zipper. She reaches in your trousers and pulls out your erection."
         "She enthusiastically opens her mouth and sucks your hard cock into her mouth. She is desperate for your seed!"
+        $ the_person.break_taboo("sucking_cock")
         "You should consider carefully where you cum, it might change where she prefers to take cum from now on."
         call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBC063
         $ add_cum_fetish_role_based_on_cum(the_person)
@@ -806,6 +814,7 @@ label SB_fetish_stephanie_cum_label():
         mc.name "Oh. Right!"
         "You quickly pull down your zipper. She reaches in your trousers and pulls out your erection."
         "She enthusiastically opens her mouth and sucks your hard cock into her mouth. She is desperate for your seed!"
+        $ the_person.break_taboo("sucking_cock")
         "You should consider carefully where you cum, it might change where she prefers to take cum from now on."
         call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBC064
         $ add_cum_fetish_role_based_on_cum(the_person)

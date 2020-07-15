@@ -1,21 +1,21 @@
 init 1310 python:
-    def reserved_titles(the_person):
+    def reserved_titles(person):
         valid_titles = []
-        valid_titles.append("Mrs. " + the_person.last_name)
-        valid_titles.append(the_person.name)
-        if the_person.love > 30:
-            valid_titles.append(the_person.name)
-        if the_person.sluttiness > 40:
+        valid_titles.append("Mrs. " + person.last_name)
+        valid_titles.append(person.name)
+        if person.love > 30:
+            valid_titles.append(person.name)
+        if person.sluttiness > 40:
             valid_titles.append("Serene Bitch")
-        if the_person.sluttiness > 60:
+        if person.sluttiness > 60:
             valid_titles.append("Cold Slut")
 
         return valid_titles
 
-    def reserved_player_titles(the_person):
+    def reserved_player_titles(person):
         valid_titles = []
         valid_titles.append("Mr. " + mc.last_name)
-        if the_person.love > 30:
+        if person.love > 30:
             valid_titles.append(mc.name)
         return valid_titles
 

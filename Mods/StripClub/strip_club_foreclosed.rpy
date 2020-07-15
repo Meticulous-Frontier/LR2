@@ -4,21 +4,17 @@
 #   foreclosed_stage = 2 Think about buying
 #   foreclosed_stage = 3 Buy the club
 #   foreclosed_stage = 4 Stripclub: bought - select old strippers
-#   foreclosed_stage = 5 Stripclub: have strippers
-#   foreclosed_stage = 6 Stripclub: have a manager
-#   foreclosed_stage = 7 Stripclub: have waitresses
-#   foreclosed_stage = 8 Stripclub: have a BDSM room
+#   foreclosed_stage = 5 Stripclub: foreclosed finished
+#   foreclosed_stage = -1 Stripclub new other owner
 
-init 3301 python:
-    def init_strip_club_mod():
+init 2 python:
+    def init_strip_club_mod(action_mod):
         mc.business.event_triggers_dict["foreclosed_stage"] = 0
         mc.business.event_triggers_dict["foreclosed_last_action_day"] = 0
         mc.business.event_triggers_dict["old_strip_club_owner"] = None
         mc.business.event_triggers_dict["old_strip_club_name"] = None
         mc.business.event_triggers_dict["strip_club_decision_day"] = 0
-
-        club_foreclosed_crisis = Action("Club Foreclosed Crisis", club_foreclosed_event_requirement, "club_foreclosed_event_label")
-        mc.business.mandatory_crises_list.append(club_foreclosed_crisis)
+        mc.business.event_triggers_dict["strip_club_has_bdsm_room"] = False
         return
 
     def get_strip_club_foreclosed_stage():
@@ -35,7 +31,9 @@ init 3301 python:
     def get_strip_club_foreclosed_last_action_day():
         return mc.business.event_triggers_dict.get("foreclosed_last_action_day", 0)
 
-    def club_foreclosed_event_requirement():
+    def strip_club_foreclosed_event_requirement():
+        if get_strip_club_foreclosed_stage() != 0:
+            return False
         if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 1: # don't start while Sarah epic tits event in progress
             return False
         if mc.business.funds > 60000:
@@ -55,7 +53,7 @@ init 3301 python:
                 return True
         return False
 
-    def club_foreclosed_change_stripper_schedules():
+    def strip_club_foreclosed_change_stripper_schedules():
         for person in stripclub_strippers:
             person.set_schedule([1,2,3], None)
             person.set_schedule([0, 4], person.home)
@@ -63,12 +61,16 @@ init 3301 python:
 
     def add_cousin_talk_about_strip_club_action():
         cousin_talk_about_strip_club_action = Action("Cousin talk about strip club", cousin_talk_about_strip_club_requirement, "cousin_talk_about_strip_club_label")
-        cousin.on_room_enter_event_list.append(cousin_talk_about_strip_club_action)
+        cousin.add_unique_on_room_enter_event(cousin_talk_about_strip_club_action)
         return
 
     def add_starbuck_talk_about_strip_club_action():
         starbuck_talk_about_strip_club_action = Action("Starbuck talk about strip club", starbuck_talk_about_strip_club_requirement, "starbuck_talk_about_strip_club_label")
-        starbuck.on_room_enter_event_list.append(starbuck_talk_about_strip_club_action)
+        starbuck.add_unique_on_room_enter_event(starbuck_talk_about_strip_club_action)
+
+    strip_club_foreclosed_mod_action = ActionMod("Strip Club Story Line", strip_club_foreclosed_event_requirement, "club_foreclosed_event_label",
+        menu_tooltip = "At a certain point the strip club is closed and you get the chance to buy it.", category = "Misc", 
+        initialization = init_strip_club_mod, is_mandatory_crisis = True, crisis_weight = 5)
 
 
 label club_foreclosed_event_label():
@@ -81,7 +83,7 @@ label club_foreclosed_event_label():
         strip_club.formalName = "Foreclosed"
         strip_club.remove_action(strip_club_show_action)
         strip_club.background_image = Image(get_file_handle("Club_Outside_Background.jpg")) # Till the club doesn't open back again this should be the background
-        club_foreclosed_change_stripper_schedules()
+        strip_club_foreclosed_change_stripper_schedules()
         add_cousin_talk_about_strip_club_action()
     
     "While reading a newspaper you find out that your favorite Strip Club is no longer in business."
@@ -100,7 +102,7 @@ label cousin_talk_about_strip_club_label(the_person):
     the_person.char "Actually the business was running very well, but looks like [name_string], the boss there, just disappeared a few days ago with all the Club's money..."
     the_person.char "That fucking asshole didn't even pay me nor the other girls for our last week."
     "She looks and you and suddenly shifts her demeanor."    
-    $ the_person.draw_person(emotion = "happy", position = "flirty")
+    $ the_person.draw_person(emotion = "happy", position = "stand2")
     the_person.char "Oh, speaking about money, can you lend me 300 bucks?"
     the_person.char "I could do a special performance just for you, you know..."
     menu:
@@ -237,7 +239,7 @@ label club_foreclosed_strip_label(the_person):
                 $ the_person.apply_planned_outfit()
                 $ the_person.change_slut_temp(10)
                 $ the_person.draw_person(emotion = "happy", position = "stand4")
-                "Thank you for the money, see you!"
+                the_person.char "Thank you for the money, see you!"
                 $ the_person.draw_person(position = "walking_away")
                 "Happily [the_person.title] leaves the room and closes the door behind her."
             elif the_person.effective_sluttiness("bare_tits") <= 40: # She'll show tits and panties.
@@ -279,7 +281,7 @@ label club_foreclosed_strip_label(the_person):
                 $ the_person.apply_planned_outfit()
                 $ the_person.change_slut_temp(10)
                 $ the_person.draw_person(emotion = "happy", position = "stand4")
-                "Thank you for the money, see you !"
+                the_person.char "Thank you for the money, see you!"
                 $ the_person.draw_person(position = "walking_away")
                 "Happily [the_person.title] leaves the room and closes the door behind her."
             else: #She'll get completely naked.
@@ -321,7 +323,7 @@ label club_foreclosed_strip_label(the_person):
                 $ the_person.apply_planned_outfit()
                 $ the_person.change_slut_temp(10)
                 $ the_person.draw_person(emotion = "happy", position = "stand4")
-                "Thank you for the money, see you!"
+                the_person.char "Thank you for the money, see you!"
                 $ the_person.draw_person(position = "walking_away")
                 "Happily [the_person.title] leaves the room and closes the door behind her."
 

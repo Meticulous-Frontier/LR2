@@ -14,16 +14,16 @@ label change_titles_person_override(the_person):
 
 
 init 2 python:
-    def build_title_selection_menu(the_person):
+    def build_title_selection_menu(person):
         person_titles = []
         mc_titles = []
         person_possessive_titles = []
 
-        for title in get_titles(the_person):
+        for title in get_titles(person):
             person_titles.append([title, title])
-        for title in get_player_titles(the_person):
+        for title in get_player_titles(person):
             mc_titles.append([title, title])
-        for title in get_possessive_titles(the_person):
+        for title in get_possessive_titles(person):
             person_possessive_titles.append([title, title])
 
         person_titles.insert(0, "Their Title")

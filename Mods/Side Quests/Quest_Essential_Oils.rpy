@@ -33,7 +33,6 @@ init 1 python:
         quest_essential_oils.quest_event_dict["start_day"] = 9999
         quest_essential_oils.quest_event_dict["research_day"] = 9999
         quest_essential_oils.quest_event_dict["timeout_day"] = 9999
-        quest_essential_oils.quest_event_dict["invoice_day"] = 9999
         quest_essential_oils.set_quest_flag(1)
         quest_essential_oils_get_target().add_unique_on_room_enter_event(quest_essential_oils_intro)
         game_hints.append(Hint("Essential Oils", "There is a strange smell around the office.", "quest_essential_oils.get_quest_flag() <= 1", "quest_essential_oils.get_quest_flag() > 1"))
@@ -47,20 +46,20 @@ init 1 python:
     def quest_essential_oils_tracker():
         if quest_essential_oils.get_quest_flag() <= 101:    #If head researcher quits or get fired before quest completion then quest fails
             if mc.business.head_researcher == None:
-                quest_essential_oils.quest_complete = True
+                quest_essential_oils.quest_completed()
                 return
 
         if quest_essential_oils.get_quest_flag() <= 1:
             if quest_essential_oils_get_target() == None:
                 the_target = quest_essential_oils_find_employee()
                 if the_target == None:
-                    quest_essential_oils.quest_complete = True
+                    quest_essential_oils.quest_completed()
                     return
                 quest_essential_oils.quest_event_dict["target"] = the_target
             quest_essential_oils_get_target().add_unique_on_room_enter_event(quest_essential_oils_intro)
         elif quest_essential_oils.get_quest_flag() >= 11 and quest_essential_oils.get_quest_flag() <= 31:
             if quest_essential_oils_get_target() == None:#The quest has started but we fired or the target quit.
-                quest_essential_oils.quest_complete = True
+                quest_essential_oils.quest_completed()
         return
 
     def quest_essential_oils_start_requirement():
@@ -81,7 +80,7 @@ init 1 python:
         if mc.business.head_researcher:
             mc.business.head_researcher.remove_on_talk_event(quest_essential_oils_research_start)
             mc.business.head_researcher.remove_on_talk_event(quest_essential_oils_research_end)
-        quest_essential_oils.quest_event_dict.clear()  #TODO this action will clear the invoice day we do this manually after the invoice event instead
+        quest_essential_oils.quest_event_dict.clear()
         return
 
     def quest_essential_oils_get_target():
@@ -125,8 +124,13 @@ init 1 python:
                 return True
         return False
 
-    def quest_essential_oils_invoice_requirement():
-        if day > quest_essential_oils.quest_event_dict.get("invoice_day", 0):
+    def add_quest_essential_oils_invoice():
+        quest_essential_oils_invoice = Action("Essential Oil Invoice", quest_essential_oils_invoice_requirement, "quest_essential_oils_invoice_label", requirement_args = day + 5)
+        mc.business.mandatory_crises_list.append(quest_essential_oils_invoice)
+        return
+
+    def quest_essential_oils_invoice_requirement(pay_day):
+        if day > pay_day:
             if time_of_day == 2:
                 if mc.is_at_work():
                     return True
@@ -150,7 +154,6 @@ init 1 python:
     quest_essential_oils_discover_supplier = Action("Find a Supplier", quest_essential_oils_discover_supplier_requirement, "quest_essential_oils_discover_supplier_label")
     quest_essential_oils_decision = Action("Talk to Supplier", quest_essential_oils_decision_requirement, "quest_essential_oils_decision_label")
     quest_essential_oils_abandon = Action("Abandon Quest", quest_essential_oils_abandon_requirement, "quest_essential_oils_abandon_label")
-    quest_essential_oils_invoice = Action("Essential Oil Invoice", quest_essential_oils_invoice_requirement, "quest_essential_oils_invoice_label")
 
 
 #Quest Labels. This is the story you want to tell!
@@ -191,7 +194,7 @@ label quest_essential_oils_intro_label(the_person):
             $ quest_essential_oils.quest_event_dict["timeout_day"] = day + 7
             $ quest_essential_oils.set_quest_flag(11)
             $ mc.business.head_researcher.add_unique_on_talk_event(quest_essential_oils_research_start)
-            $ mc.business.add_unique_mandatory_crisis(quest_essential_oils_abandon)
+            $ mc.business.mandatory_crises_list.append(quest_essential_oils_abandon)
         "Tell her to knock it off and leave it at home":
             mc.name "Well don't bring them back. This could have triggered an evacuation."
             the_person.char "Oh my... yes sir, I'll leave it at home from now on."
@@ -276,6 +279,7 @@ label quest_essential_oils_decision_label(the_person):
             "[the_person.title] takes your information."
             the_person.char "I'll make sure it gets delivered out to your business right away!"
             $ quest_essential_oils.set_quest_flag(102)
+            $ add_quest_essential_oils_invoice()
         "Too pricey":
             mc.name "Wow... $500? You know what, this was a mistake. I'm sorry to bother you."
             the_person.char "Okay, your loss!"
@@ -285,17 +289,15 @@ label quest_essential_oils_decision_label(the_person):
     $ renpy.scene("Active")
     #$ add_essential_oil_serum_trait()
     $ list_of_traits.append(essential_oil_trait)
-    # remove events / just wait for invoice if applicable
     $ quest_essential_oils_cleanup()
-    if mc.business.head_researcher == None:
-        pass #WE fire the HR, so we don't bother checking in with them.
+    if mc.business.head_researcher is None:
+        # we fired the head researcher, so we don't bother checking in with them.
         return
     "You step away from the kiosk. You give your head researcher a call."
     mc.business.head_researcher.char "Hello?"
     mc.name "Hey, I've procured an order of essential oils. They should be delivered sometime today."
     mc.business.head_researcher.char "Okay. If you want to research a new serum that uses them, let me know, we should be able to start developing one ASAP."
     "You hang up the phone. You now have access to the Essential Oils serum trait. It has a high value, but no positive effects and high chance of a negative side effect."
-    $ quest_essential_oils.quest_event_dict.clear()
     return
 
 label quest_essential_oils_abandon_label():

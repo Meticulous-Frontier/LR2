@@ -210,7 +210,7 @@ label ophelia_gets_dumped_label(the_person):
     $ the_person.change_happiness(-50)
     $ the_person.event_triggers_dict["dump_witnessed"] = 1
     $ the_person.event_triggers_dict["dump_day"] = day
-    $ the_person.on_room_enter_event_list.append(ophelia_coworker_conversation_overhear)
+    $ the_person.add_unique_on_room_enter_event(ophelia_coworker_conversation_overhear)
     return
 
 label ophelia_coworker_conversation_overhear_label(the_person):
@@ -231,7 +231,7 @@ label ophelia_coworker_conversation_overhear_label(the_person):
     # Should this just be a python block?
     $ the_person.event_triggers_dict["coworker_overhear"] = 1
     $ mc.business.mandatory_crises_list.append(ophelia_learn_chocolate_love)
-    $ the_person.on_room_enter_event_list.append(ophelia_ex_bf_phone_overhear)
+    $ the_person.add_unique_on_room_enter_event(ophelia_ex_bf_phone_overhear)
     $ del ex_name
     return
 
@@ -477,7 +477,7 @@ label ophelia_make_blowjob_pics_label():
     "You say goodbye and then walk out of the salon. You wonder what her ex will think when he gets those pictures..."
     $ the_person.event_triggers_dict["pics_to_ex_plan_made"] = 3
     $ the_person.event_triggers_dict["pics_to_ex_sent"] = 1
-    $ the_person.on_room_enter_event_list.append(ophelia_blowjob_pics_review)
+    $ the_person.add_unique_on_room_enter_event(ophelia_blowjob_pics_review)
     return
 
 label ophelia_blowjob_pics_review_label(the_person):
@@ -522,7 +522,7 @@ label ophelia_blowjob_pics_review_label(the_person):
     the_person.char "I'd better get back to work."
     $ the_person.event_triggers_dict["pics_to_ex_sent"] = 2
     $ the_person.event_triggers_dict["special_bj_unlock"] = 1
-    $ the_person.on_room_enter_event_list.append(ophelia_revenge_date_plan)
+    $ the_person.add_unique_on_room_enter_event(ophelia_revenge_date_plan)
     $ del ex_name
     return
 
@@ -790,7 +790,7 @@ label ophelia_revenge_date_label():
     "Tonight was a real breakthrough with [the_person.title]. She was a great fuck, hopefully you can get in her pants again soon."
     "The scene at the restaurant was crazy, with that bimbo, [candace.title] and [ex_name]. You'll have to keep an eye out for her. Maybe you'll run into her again?"
     $ the_person.clear_situational_slut("Date")
-    $ the_person.on_room_enter_event_list.append(ophelia_is_over_her_ex)
+    $ the_person.add_unique_on_room_enter_event(ophelia_is_over_her_ex)
     $ the_person.add_unique_on_talk_event(ophelia_revenge_aftermath)
     $ del ex_name
     return
@@ -854,7 +854,7 @@ label ophelia_talk_about_candace_label(the_person):
     $ ex_name = ophelia_get_ex_name()
     "You take a deep breath. This is a touchy subject, so you need to approach this carefully."
     mc.name "So, I was wondering if I could talk to you for a few minutes about something."
-    the_person.char "Sure! You know I always have time for you, [the_person.mc_title]"
+    the_person.char "Sure! You know I always have time for you, [the_person.mc_title]."
     mc.name "Right, well, this might be kind of a sore subject, so please just hear me out before you rush to any judgement."
     the_person.char "Ok... I'm listening..."
     mc.name "Ok, well, I found out some things about [ex_name], your ex? And they have me a little bit concerned."
@@ -866,7 +866,7 @@ label ophelia_talk_about_candace_label(the_person):
     the_person.char "What the fuck? That two timing hussy? What the fuck have you been talking to her for?"
     mc.name "Just hear me out! You know how you said she is, well, dumb as a bag of rocks?"
     the_person.char "Well yeah..."
-    mc.name "Well, it turns out, she pretty much is. At first I thought you were exaggerating. After talking to her, I found out that before she worked for your boyfriend, she used to work and a pharmaceutical company."
+    mc.name "Well, it turns out, she pretty much is. At first I thought you were exaggerating. After talking to her, I found out that before she worked for your boyfriend, she used to work at a pharmaceutical company."
     the_person.char "What? That sounds crazy. How could someone like her work in that field?"
     mc.name "Well, I did some research into the company, and they went out of business about 6 months ago, after multiple lawsuits were filed."
     mc.name "I think maybe there was some kind of accident there, during research? That stunted her intelligence and made her into a bimbo..."

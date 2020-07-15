@@ -11,7 +11,7 @@ init python:
         strip_description = "strip_SB_reverse_cowgirl", strip_ask_description = "strip_ask_SB_reverse_cowgirl",
         orgasm_description = "orgasm_SB_reverse_cowgirl",
         taboo_break_description = "taboo_break_SB_reverse_cowgirl",
-        verb = "ride", verbing = "riding",
+        verb = "be ridden by", verbing = "being ridden by",
         opinion_tags = ["taking control","vaginal sex"], record_class = "Vaginal Sex",
         associated_taboo = "vaginal_sex")
 
@@ -301,6 +301,7 @@ label strip_ask_SB_reverse_cowgirl(the_girl, the_clothing, the_location, the_obj
     return
 
 label transition_missionary_SB_reverse_cowgirl(the_girl, the_location, the_object):
+    $ the_girl.draw_person(position = "missionary")
     "Looking down at [the_girl.possessive_title], you decide it's time to change things up a little bit."
     mc.name "Hey, why don't we change it up a bit, do you wanna be on top for a bit?"
     if the_girl.get_opinion_score("taking control") > 0:

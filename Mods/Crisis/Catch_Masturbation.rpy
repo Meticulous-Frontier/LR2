@@ -97,7 +97,7 @@ label SB_caught_masturbating_crisis_label():
                 $ success_chance = 5 * (mc.focus + 1)
                 if renpy.random.randint(0,100) < success_chance: #If player does not get caught
                     "[the_person.possessive_title] is breathing heavily. It is clear from how vigorously she is touching herself that she is going to orgasm soon." #TODO finish this
-                    if the_person.sluttiness < 20:   #She's not interested in MC yet...
+                    if the_person.effective_sluttiness() < 20:   #She's not interested in MC yet...
                         $ fantasy_guy = get_random_male_name()
                         "[the_person.possessive_title] seems really into it. Her back is arched as her hand works its magic on her groin."
                         $ the_person.change_arousal(10)
@@ -179,7 +179,7 @@ label SB_caught_masturbating_crisis_label():
                             "Thanks for the show!"
                             "You finish it with your initials and leave it next to her computer monitor."
                             "Half an hour later while you are back into your work, you get a text message from [the_person.possessive_title]."
-                            if the_person.sluttiness > 60:
+                            if the_person.effective_sluttiness() > 60:
                                 the_person.char "Next time join in!!!"
                             else :
                                 the_person.char ";)"
@@ -187,7 +187,7 @@ label SB_caught_masturbating_crisis_label():
                 else: #Player gets caught
                     "Straining to get a better a view, for a brief moment you lose your focus. You accidentally drop a pen you were holding onto and it clatters loudly across the floor."
                     "[the_person.possessive_title] immediately stops and looks back at the source of the noise. She immediately locks eyes with you and the realization that she just got caught masturbating at work sinks in."
-                    if the_person.sluttiness < 20: #She is not slutty. 50/50 she runs out of the room apologizing or gets pissed
+                    if the_person.effective_sluttiness() < 20: #She is not slutty. 50/50 she runs out of the room apologizing or gets pissed
                         $ the_person.draw_person()
                         "[the_person.possessive_title] quickly stands up."
                         if renpy.random.randint(0,100) < 50 : #She's pissed
@@ -217,7 +217,7 @@ label SB_caught_masturbating_crisis_label():
                             $ the_person.change_stats(happiness = -5, obedience = 5, slut_temp = 5)
                             #show screen float_up_screen(["-5 Happiness","+5 Obedience"],["float_text_yellow","float_text_grey","float_text_pink"])    ###OLD code
                             "You finish up your walk and return back to your previous work."
-                    elif the_person.sluttiness < 60:#She is a bit slutty
+                    elif the_person.effective_sluttiness() < 60:#She is a bit slutty
                         "[the_person.possessive_title] is stunned. You can see the conflict in her eyes. She just got caught masturbating at work, by her boss of all people."
                         "Sensing her conflict, you decide to give her a bit of encouragement. You reach down and begin to stroke yourself through your slacks."
                         $ the_person.draw_person(position = "missionary")

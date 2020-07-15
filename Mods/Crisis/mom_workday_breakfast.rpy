@@ -371,14 +371,24 @@ label mom_breakfast_action_label_high():
 
 label mom_commando_day_selfie_label():
     $ the_person = mom
-    $ the_person.strip_outfit(delay = 0, exclude_upper = True)
-    $ the_person.cum_on_ass()
     "You get a notification on your phone from [the_person.title]."
-    the_person.char "Hey, you were right! Going commando really payed off. I was making copies and when I bent over to pick them up from the tray, one of my colleagues noticed..."
-    the_person.char "We snuck off to a janitor closet... he just barely pulled out in time!"
-    $ the_person.draw_person(position = SB_get_random_ass_position())
-    "She sends you a selfie of her ass covered in cum. You quickly text her back."
-    mc.name "Nice! You should leave it right there and walk around the office like that!"
+    if persistent.show_ntr:
+        $ the_person.strip_outfit(delay = 0, exclude_upper = True)
+        $ the_person.cum_on_ass()
+        the_person.char "Hey, you were right! Going commando really payed off. I was making copies and when I bent over to pick them up from the tray, one of my colleagues noticed..."
+        the_person.char "We snuck off to a janitor closet... he just barely pulled out in time!"
+        $ the_person.draw_person(position = SB_get_random_ass_position())
+        "She sends you a selfie of her ass covered in cum. You quickly text her back."
+        mc.name "Nice! You should leave it right there and walk around the office like that!"
+    else:
+        $ the_person.strip_outfit_to_max_sluttiness(delay = 0, temp_sluttiness_boost = 10)
+        the_person.char "Hey [the_person.mc_title], you were right. Going commando really payed off."
+        the_person.char "At lunch I did a full Basic Instinct move on some colleagues sitting across from me at another table, they just couldn't stop ogling me. It turned me on so much..."
+        $ the_person.draw_person(position = "stand2")
+        "She sends you a selfie from a bathroom stall."
+        the_person.char "As a thank you for your suggestion."
+        mc.name "Nice! You should walk around the office like that!"
+
     "A moment later."
     the_person.char "Don't tempt me! See you at home tonight!"
     "You smile and resume your day."

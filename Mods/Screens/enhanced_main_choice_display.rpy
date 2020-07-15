@@ -57,8 +57,6 @@ init 2 python:
                     mi.return_value = item[1]
 
             if isinstance(item,Person): #It's a person. Format it for a person list.
-                renpy.scene("Active") # clear current Active layer and prepare for new menu screen with people.
-
                 mi.title = format_titles(item)
                 mi.return_value = item
 
@@ -114,6 +112,7 @@ init 2 python:
         if not item.display_image:
             item.display_image = Flatten(item.display_func(lighting = mc.location.get_lighting_conditions(), **item.person_preview_args))
 
+        renpy.scene("Active")
         renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="Active", what= item.display_image, tag=item.display_key)
         return
 

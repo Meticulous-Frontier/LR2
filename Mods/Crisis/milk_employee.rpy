@@ -1,7 +1,7 @@
 ###Scene Idea: Girl is pumping milk. MC can help or watch
 #
 #   In this scene, player is walking by some kind of private room when he hears moaning coming from inside
-#   After investigating, player finds NPC masterbating
+#   After investigating, player finds NPC masturbating
 #   Player choices include walking away and watching
 #   If watching, NPC has chance to notice PC watching. If slutty, NPC continues, if not, stops and gets angry
 #   If watching, and NPC is slutty, have a chance if we went unnoticed for NPC to call out PC name
@@ -143,7 +143,7 @@ label milk_employee_crisis_label():
         else:
             the_person.char "Oh my god, yes that's it..."
             "Her other breast lets down. With each squeeze it sprays into the bottle, and in between squeezes her milk still slowly dribbles out."
-            "She holds the bottle carefully, collecting the milk from one size, while you consume the milk from the other. You look up and see her eyes are closed as she enjoys her milking."
+            "She holds the bottle carefully, collecting the milk from one side, while you consume the milk from the other. You look up and see her eyes are closed as she enjoys her milking."
             $ the_person.change_arousal(15)
             $ mc.arousal += 10
         "You enjoy drinking deep from [the_person.possessive_title]'s breast. When her supply is depleted, you sit back up, feeling energized from your fresh serving of milk."
@@ -161,7 +161,7 @@ label milk_employee_crisis_label():
                 call fuck_person(the_person, start_position = cowgirl, start_object = make_desk(), girl_in_charge = True) from _milking_cowgirl_01
             "Get back to work":
                 mc.name "I need to get back to work, but I'll take you up on that another time."
-    "Once you are finished, you leave [the_person.title] in the breakroom and get back to work."
+    "Once you are finished, you leave [the_person.title] in the break room and get back to work."
     $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
     $ renpy.scene("Active")

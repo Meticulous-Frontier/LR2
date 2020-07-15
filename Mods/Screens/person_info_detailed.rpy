@@ -66,14 +66,14 @@ init 2: # Need to allow for None name roles in this screen as well.
                                     if the_person.kids > 0:
                                         text "Kids: [the_person.kids]" style "menu_text_style"
                                     if persistent.pregnancy_pref > 0:
-                                        if the_person.is_pregnant() and the_person.knows_pregnant():
+                                        if the_person.knows_pregnant():
                                             text "Pregnant: Yes" style "menu_text_style"
                                             if day < the_person.pregnancy_show_day():
                                                 text "- Visible Day: " + str(the_person.pregnancy_show_day()) style "menu_text_style"
                                             elif day < the_person.get_due_day():
                                                 text "- Delivery Day: " + str(the_person.get_due_day()) style "menu_text_style"
                                         else:
-                                            text "Fertility: " + str(__builtin__.round(the_person.fertility_percent, 1)) + "%" style "menu_text_style"
+                                            text "Fertility: " + str(__builtin__.round(the_person.effective_fertility_percent(), 1)) + "%" style "menu_text_style"
                                             if persistent.pregnancy_pref == 2:
                                                 text "Monthly Peak Day: " + str(the_person.ideal_fertile_day) style "menu_text_style"
                                                 text "Birth Control: " + ("Yes" if the_person.on_birth_control else "No") style "menu_text_style"
@@ -86,7 +86,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                         text "Characteristics" style "menu_text_style" size 22
                         $ dict_main_skills = get_main_skills()
                         for skill in dict_main_skills:
-                            text dict_main_skills[skill][0] + "Skill: " + str(getattr(the_person, dict_main_skills[skill][1])) style "menu_text_style"
+                            text dict_main_skills[skill][0] + ": " + str(getattr(the_person, dict_main_skills[skill][1])) style "menu_text_style"
                         text "Love: [the_person.love]" style "menu_text_style"
                         if the_person not in unique_character_list:
                             text "Personality: " + the_person.personality.personality_type_prefix.capitalize() style "menu_text_style"
@@ -99,7 +99,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                         text "Work Skills" style "menu_text_style" size 22
                         $ dict_work_skills = get_work_skills()
                         for skill in dict_work_skills:
-                            text dict_work_skills[skill][0] + " Skill: " + str(getattr(the_person, dict_work_skills[skill][1])) style "menu_text_style"
+                            text dict_work_skills[skill][0] + ": " + str(getattr(the_person, dict_work_skills[skill][1])) style "menu_text_style"
 
                 frame:
                     background "#1a45a1aa"

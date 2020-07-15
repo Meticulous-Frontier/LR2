@@ -7,7 +7,8 @@ init 2 python:
     relationship_worsen_stats = {
         "Married" : 90,
         "Fiancée" : 65,
-        "Girlfriend": 40
+        "Girlfriend": 40,
+        "Single": 25,
     }
 
     def so_relationship_improve_requirement():
@@ -15,6 +16,16 @@ init 2 python:
 
     def so_relationship_worsen_requirement():
         return not get_so_relationship_worsen_person() is None
+
+    def so_relationship_quarrel_requirement(person):
+        # set quarrel chance to 10% else too many relationships will be split up by the limited time event selector.
+        if person.relationship != "Single" and renpy.random.randint(0, 100) < 10:
+            if not person.has_role([casual_hotwife_role]): # Hotwife doesn't want to leave her SO
+                return True
+        return False
+
+    relation_ship_quarrel = Action("Girl had a fight with her SO", so_relationship_quarrel_requirement, "so_relationship_quarrel_label", event_duration = 3)
+    limited_time_event_pool.append([relation_ship_quarrel, 1,"on_enter"])
 
     # replace action requirement functions with newly defined functions (cPickle resolver)
     so_relationship_improve_crisis.requirement = so_relationship_improve_requirement
@@ -24,7 +35,7 @@ init 2 python:
         potential_people = []
         for person in known_people_in_the_game(excluded_people = [mc] + unique_character_list):
             if person.title and not person.relationship == "Married" and person.relationship in relationship_worsen_stats and person.love <= relationship_worsen_stats[person.relationship] + (person.get_opinion_score("cheating on men") * 5) :
-                if not any(x in person.special_role for x in [girlfriend_role, affair_role]): # when in relationship with MC she will not improve her relationship with her SO
+                if not person.has_role([girlfriend_role, affair_role, casual_athlete_role]): # when in relationship with MC or Casual Athlete she will not improve her relationship with her SO
                     potential_people.append(person)
         return get_random_from_list(potential_people)
 
@@ -32,7 +43,8 @@ init 2 python:
         potential_people = []
         for person in known_people_in_the_game(excluded_people = [mc] + unique_character_list):
             if person.title and not person.relationship == "Single" and person.relationship in relationship_worsen_stats and person.love > relationship_worsen_stats[person.relationship] - (person.get_opinion_score("cheating on men") * 5):
-                potential_people.append(person)
+                if not person.has_role([casual_hotwife_role]): # Hotwife doesn't want to leave her SO
+                    potential_people.append(person)
         return get_random_from_list(potential_people)
 
 label so_relationship_improve_label_enhanced():
@@ -85,7 +97,7 @@ label so_relationship_improve_label_enhanced():
     return
 
 
-
+# triggered when love for MC grows
 label so_relationship_worsen_label_enhanced():
     $ the_person = get_so_relationship_worsen_person()
     if the_person is None:
@@ -106,4 +118,27 @@ label so_relationship_worsen_label_enhanced():
         "You get a notification on your phone."
         "It looks like [the_person.title] has left her [so_title] and is single now."
 
+    $ the_person.relationship = "Single"
+    $ the_person.SO_name = None        
+    return
+
+# triggered randomly for a person (fight with her SO)
+label so_relationship_quarrel_label(the_person):
+    $ so_title = SO_relationship_to_title(the_person.relationship)
+    if the_person.has_role(affair_role):
+        the_person.char "Hey [the_person.mc_title], it's good to see you. Me and my [so_title], [the_person.SO_name], had a fight and we decided to spit up."
+        the_person.char "We don't have to hide what's going on between us any more."
+        $ the_person.add_role(girlfriend_role)
+        mc.name "That's good news! I'm sure you'll you need some time to process this, but remember, I love you."
+        $ the_person.change_love(5)
+        the_person.char "Thanks, I love you too. Bye."
+
+    else:
+        $ the_person.change_happiness(-20)
+        the_person.char "Hey [the_person.mc_title], it's good to see you. Me and my [so_title], [the_person.SO_name], had a fight and we decided to spit up."
+        mc.name "I'm sorry to hear that, [the_person.title], just take it easy and take your time to process it."
+        the_person.char "Thanks, see you later."
+
+    $ the_person.relationship = "Single"
+    $ the_person.SO_name = None        
     return

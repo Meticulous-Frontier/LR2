@@ -311,7 +311,7 @@ label ashley_room_warming_up_label(the_person):
     the_person.char "Oh... its been good I guess..."
     mc.name "Glad to hear it."
     "Hmm... she is looking for someone to go with her to a classical music concert. Maybe that person could be you?"
-    $ mc.business.add_unique_mandatory_crisis(ashley_porn_video_discover)
+    $ mc.business.mandatory_crises_list.append(ashley_porn_video_discover)
     return
 
 label ashley_room_overhear_classical_label(the_person):

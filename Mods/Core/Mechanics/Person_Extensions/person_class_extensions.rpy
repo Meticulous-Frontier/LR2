@@ -7,10 +7,36 @@ init -1 python:
             my_location.remove_person(self) # remove person from current location
         if self.home in list_of_places:
             list_of_places.remove(self.home) # remove home location from list_of_places
+        if self.home in mc.known_home_locations: 
+            mc.known_home_locations.remove(self.home) # remove home location from known_home_locations
+
         if "people_to_process" in globals():
             found = find_in_list(lambda x: x[0].name == self.name and x[0].last_name == self.last_name and x[0].age == self.age, people_to_process)
             if found: # remove from processing list
                 people_to_process.remove(found)
+
+        # remove from business teams
+        for team in [mc.business.research_team, mc.business.market_team, mc.business.supply_team, mc.business.production_team, mc.business.hr_team]:
+            if self in team:
+                team.remove(self)
+
+        # remove from business rooms
+        for room in [mc.business.s_div, mc.business.r_div, mc.business.p_div, mc.business.m_div, mc.business.h_div]:
+            if self in room.people:
+                room.people.remove(self)
+
+        # remove from strippers
+        if self in stripclub_strippers:
+            stripclub_strippers.remove(self)
+        
+        # other stripclub teams
+        if "stripclub_bdsm_performers" in globals():
+            for team in [stripclub_strippers, stripclub_bdsm_performers, stripclub_waitresses]:
+                if self in team:
+                    team.remove(self)
+
+        # remove from relationships array
+        town_relationships.remove_all_relationships(self)
 
         self.base_outfit = None
         self.planned_outfit = None
@@ -29,10 +55,15 @@ init -1 python:
 
         self.special_role.clear()
         self.on_room_enter_event_list.clear()
+        self.on_talk_event_list.clear()
         self.event_triggers_dict.clear()
         self.suggest_bag.clear()
         self.broken_taboos.clear()
         self.sex_record.clear()
+        self.opinions.clear()
+        self.sexy_opinions.clear()
+        self.broken_taboos.clear()
+        self.schedule.clear()
 
         # clear all references held by person object.
         self.home = None
@@ -53,6 +84,9 @@ init -1 python:
         self.serum_effects = None
         self.idle_animation = None
         self.personal_region_modifiers = None
+        self.on_room_enter_event_list = None
+        self.on_talk_event_list = None
+        self.event_triggers_dict = None
         self.situational_sluttiness = None
         self.situational_obedience = None
         # now let the Garbage Collector do the rest (we are no longer referenced in any objects).
@@ -601,8 +635,21 @@ init -1 python:
             elif not location is destination: # only change outfit if we change location
                 self.apply_planned_outfit() #We're at home, so we can get back into our casual outfit.
 
-            # location might change outfit, so moved call to end of this loop
-            location.move_person(self, destination) #Always go where you're scheduled to be.
+            # some girls like to go out at night (bar or stripclub)
+            if time_of_day == 4 and destination is self.home and renpy.random.randint(0, 100) <= 10:
+                party_destinations = [downtown_bar]
+                if "get_strip_club_foreclosed_stage" in globals():
+                    if get_strip_club_foreclosed_stage() < 1 or get_strip_club_foreclosed_stage() >= 5: # only when stripclub is open for business
+                        party_destinations.append(strip_club)
+                    if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
+                        party_destinations.append(bdsm_room)
+                else:
+                    party_destinations.append(strip_club)
+
+                location.move_person(self, get_random_from_list(party_destinations))
+            else:
+                # location might change outfit, so moved call to end of this loop
+                location.move_person(self, destination) #Always go where you're scheduled to be.
 
         else:
             #She finds somewhere to burn some time
@@ -883,6 +930,9 @@ init -1 python:
         if position is None:
             position = self.idle_pose
 
+        if position == "standing_doggy":
+            position = "doggy"
+
         if emotion is None:
             emotion = self.get_emotion()
 
@@ -897,18 +947,24 @@ init -1 python:
         if lighting is None:
             lighting = mc.location.get_lighting_conditions()
 
-        if the_animation:
-            final_image = self.build_person_animation(the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength)
-        else:
-            final_image = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
-
-        # if normal draw person call, clear scene
         if not from_scene:
             renpy.scene("Active")
             if show_person_info:
                 renpy.show_screen("person_info_ui",self)
 
+        final_image = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
         renpy.show(self.name + self.last_name,at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=self.name + self.last_name)
+
+        if the_animation:
+            global person_being_drawn
+            person_being_drawn = self
+
+            global current_draw_number
+            current_draw_number += 1
+
+            global prepared_animation_arguments
+            prepared_animation_arguments = [the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength, show_person_info, current_draw_number] #Effectively these are being stored and passed to draw_person_animation once take_animation_screenshot returns the surface
+            renpy.invoke_in_thread(self.prepare_animation_screenshot_render, position, emotion, special_modifier, lighting, background_fill, current_draw_number) #This thread prepares the render. When it is finished it is caught by the interact_callback function take_animation_screenshot
 
     # replace the default draw_person function of the person class
     Person.draw_person = draw_person_enhanced
@@ -920,6 +976,9 @@ init -1 python:
         if position is None:
             position = self.idle_pose
 
+        if position == "standing_doggy":
+            position = "doggy"
+
         if emotion is None:
             emotion = self.get_emotion()
 
@@ -934,26 +993,40 @@ init -1 python:
         elif the_animation is None:
             the_animation = self.idle_animation
 
-        if the_animation:
-            bottom_displayable = self.build_person_animation(the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength = 1.0)
-        else:
-            bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
-
-        self.outfit.remove_clothing(the_clothing)
-
-        if the_animation:
-            top_displayable = self.build_person_animation(the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength)
-        else:
-            top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
-
         renpy.scene("Active") # clear layer for new draw action
         if scene_manager is None:
             renpy.show_screen("person_info_ui",self)
         else:   # when we are called from the scene manager we have to draw the other characters
             scene_manager.draw_scene_without(self)
 
-        renpy.show(self.name+self.last_name+"_new", at_list=[character_placement, scale_person(self.height)], layer = "Active", what = top_displayable, tag = self.name + self.last_name +"_new")
-        renpy.show(self.name+self.last_name+"_old", at_list=[character_placement, scale_person(self.height), clothing_fade], layer = "Active", what = bottom_displayable, tag = self.name + self.last_name +"_old")
+        if the_animation:
+            # Normally we would display a quick flat version, but we can assume we are already looking at the girl pre-clothing removal.
+            bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill, no_frame = True)) #Get the starting image without the frame
+            self.outfit.remove_clothing(the_clothing) #Remove the clothing
+            top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill, no_frame = True)) #Get the top image without the frame
+
+            x_size, y_size = position_size_dict.get(position)
+            bottom_render = bottom_displayable.render(x_size, y_size, 0, 0)
+            top_render = top_displayable.render(x_size, y_size, 0, 0)
+
+            global current_draw_number
+            current_draw_number += 1
+
+            global prepared_animation_arguments
+            prepared_animation_arguments = [the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength, show_person_info, current_draw_number]
+
+            global person_being_drawn
+            person_being_drawn = self
+            renpy.invoke_in_thread(self.prepare_animation_screenshot_render_multi, position, bottom_render, top_render, current_draw_number)
+
+        else:
+            bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
+            self.outfit.remove_clothing(the_clothing)
+            top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
+
+            renpy.show(self.name+self.last_name+"_new", at_list=[character_placement, scale_person(self.height)], layer = "Active", what = top_displayable, tag = self.name + self.last_name +"_new")
+            renpy.show(self.name+self.last_name+"_old", at_list=[character_placement, scale_person(self.height), clothing_fade], layer = "Active", what = bottom_displayable, tag = self.name + self.last_name +"_old")
+        return
 
     Person.draw_animated_removal = draw_animated_removal_enhanced
 
@@ -1018,6 +1091,8 @@ init -1 python:
     def has_role(self, role):
         if isinstance(role, basestring):
             return not find_in_list(lambda x: x.role_name == role, self.special_role) is None
+        elif isinstance(role, list):
+            return any(x in self.special_role for x in role)
         else:
             return role in self.special_role
     Person.has_role = has_role
@@ -1032,11 +1107,11 @@ init -1 python:
         if role is girlfriend_role:
             self.remove_role(affair_role)
             self.relationship = "Single" #Technically they aren't "single", but the MC has special roles for their girlfriend.
-            self.SO_name = None            
+            self.SO_name = None
 
         return added
     Person.add_role = add_role
-    
+
     def remove_role(self, role):
         if role in self.special_role:
             self.special_role.remove(role)
@@ -1063,7 +1138,10 @@ init -1 python:
     Person.apply_university_outfit = apply_university_outfit
 
     def apply_planned_outfit(self):
-        self.apply_outfit(self.planned_outfit)
+        if self.should_wear_uniform():
+            self.wear_uniform()
+        else:
+            self.apply_outfit(self.planned_outfit)
         return
 
     Person.apply_planned_outfit = apply_planned_outfit
@@ -1252,20 +1330,22 @@ init -1 python:
 
         if the_crisis in self.on_room_enter_event_list:
             self.on_room_enter_event_list.remove(the_crisis)
-    Person.remove_on_room_enter_event = remove_on_room_enter_event    
+    Person.remove_on_room_enter_event = remove_on_room_enter_event
 
 ##########################################
 # Pregnancy Functions                    #
 ##########################################
 
     def is_pregnant(self):
-        if self.has_role(pregnant_role) or self.has_role(silent_pregnant_role):
+        if self.has_role(pregnant_role):
             return True
         return False
     Person.is_pregnant = is_pregnant
 
     def knows_pregnant(self):
-        return self.event_triggers_dict.get("preg_knows", False)
+        if self.is_pregnant():
+            return self.event_triggers_dict.get("preg_knows", False)
+        return False
     Person.knows_pregnant = knows_pregnant
 
     def is_lactating(self):
@@ -1292,6 +1372,10 @@ init -1 python:
         return -1
     Person.pregnancy_show_day = pregnancy_show_day
 
+    def is_mc_father(self):
+        return self.event_triggers_dict.get("preg_mc_father", True)
+    Person.is_mc_father = is_mc_father
+
     def is_highly_fertile(self):
         if self.is_pregnant():
             return False
@@ -1305,3 +1389,16 @@ init -1 python:
         return False
 
     Person.is_highly_fertile = is_highly_fertile
+
+    def effective_fertility_percent(self):
+        if persistent.pregnancy_pref == 2: # On realistic pregnancy a girls chance to become pregnant fluctuates over the month.
+            day_difference = abs((day % 30) - self.ideal_fertile_day) # Gets the distance between the current day and the ideal fertile day.
+            if day_difference > 15:
+                day_difference = 30 - day_difference #Wrap around to get correct distance between months.
+            multiplier = 2 - (float(day_difference)/10.0) # The multiplier is 2 when the day difference is 0, 0.5 when the day difference is 15.
+            modified_fertility = self.fertility_percent * multiplier
+        else:
+            modified_fertility = self.fertility_percent        
+        return modified_fertility
+
+    Person.effective_fertility_percent = effective_fertility_percent

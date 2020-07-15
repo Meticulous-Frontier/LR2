@@ -39,7 +39,7 @@ init 1 python:
         return
 
     #Returns a string based on the physical appears of the girl's ass
-    #Assume previous sentrance flows something like, "The girls ass is [this return value]"
+    #Assume previous sentence flows something like, "The girls ass is [this return value]"
     def spanking_get_ass_description(the_person):
         if the_person.event_triggers_dict.get("spank_level", 0) < 2:
             return "flawless. It is perky and ready for you to discipline."
@@ -62,8 +62,8 @@ label intro_spanking(the_girl, the_location, the_object):
         "You don't waste any time and put your hands on her ass, groping her cheeks."
         "You raise one hand and bring it down hard, give her ass a firm spank."
     else:
-        "Let's get these out of the way first."
-        $ the_girl.strip_outfit(exclude_upper = True)
+        mc.name "Let's get these out of the way first."
+        $ the_girl.strip_outfit(exclude_upper = True, position = spanking.position_tag)
         "You put both hands on her ass, groping her cheeks."
         "You raise one hand and bring it down hard, give her ass a firm spank."
     $ update_ass_condition(the_girl)
@@ -80,8 +80,8 @@ label taboo_break_spanking(the_girl, the_location, the_object):
         "You don't waste any time and put your hands on her ass, groping her cheeks."
         "You raise one hand and bring it down hard, give her ass a firm spank."
     else:
-        "Let's get these out of the way first."
-        $ the_girl.strip_outfit(exclude_upper = True)
+        mc.name "Let's get these out of the way first."
+        $ the_girl.strip_outfit(exclude_upper = True, position = spanking.position_tag)
         "You put both hands on her ass, groping her cheeks."
         "You raise one hand and bring it down hard, give her ass a firm spank."
     $ update_ass_condition(the_girl)
@@ -181,8 +181,8 @@ label transition_default_spanking(the_girl, the_location, the_object):
         "You don't waste any time and put your hands on her ass, groping her cheeks."
         "You raise one hand and bring it down hard, give her ass a firm spank."
     else:
-        "Let's get these out of the way first."
-        $ the_girl.strip_outfit(exclude_upper = True)
+        mc.name "Let's get these out of the way first."
+        $ the_girl.strip_outfit(exclude_upper = True, position = spanking.position_tag)
         "You put both hands on her ass, groping her cheeks."
         "You raise one hand and bring it down hard, give her ass a firm spank."
     $ update_ass_condition(the_girl)

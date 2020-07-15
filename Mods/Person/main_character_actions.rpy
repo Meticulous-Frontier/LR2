@@ -31,10 +31,13 @@ init 2 python:
 
     # Hire Person Requirements
     def mc_hire_person_requirement(person):
-        if person.has_role(casual_hotwife_role) or person.has_role(casual_athlete_role) or person.has_role(casual_FA_role):
-            return False
-        if person.has_role(stripper_role):
-            return False
+
+        excluded_roles = ["casual_hotwife_role", "casual_athlete_role", "casual_FA_role", "stripper_role", "waitress_role", "bdsm_performer_role", "manager_role", "mistress_role"]
+        for role in excluded_roles:
+            if role in globals():
+                if person.has_role(globals()[role]):
+                    return False
+
         if person not in mc.business.get_employee_list() + unique_character_list:
             if mc.business.get_employee_count() >= mc.business.max_employee_count:
                 return "At employee limit."
@@ -298,7 +301,7 @@ label mc_action_lasik_surgery_label(the_person):
         mc.business.change_funds(-5000)
         the_person.base_outfit.accessories.remove(filter(lambda x : x in [big_glasses, modern_glasses], the_person.base_outfit.accessories)[0])
     $ the_person.draw_person()
-    return    
+    return
 
 # Ask take serum Labels
 label mc_ask_take_serum_label(person):  #TODO possibly temporary addition to the mod. Copies the old mechanics for asking a girl to take a serum.

@@ -99,7 +99,7 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
                 $ the_girl.call_dialogue("cum_vagina")
                 $ the_girl.cum_in_vagina()
                 $ doggy.redraw_scene(the_girl)
-                if the_girl.on_birth_control:
+                if the_girl.on_birth_control or the_girl.knows_pregnant():
                     the_girl.char "Oh wow, there's so much of it..."
                 else:
                     the_girl.char "Oh fuck, what if I get pregnant? Ah..."
