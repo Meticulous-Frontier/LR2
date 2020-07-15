@@ -692,7 +692,7 @@ label casual_hotwife_her_place_label(the_person):
         "You nod at [the_person.SO_name], and he nods back. He goes over to a bedside table and gets out a set of handcuffs."
         "After you fucked her brains out, [the_person.title] lays helpless on the bed as he starts to cuff her hands behind her back."
         "You finished getting dressed and decide to leave them to it, so you quietly excuse yourself from the bedroom."
-    elif if the_report.get("girl orgasms", 0) > 0: #She had one orgasm
+    elif the_report.get("girl orgasms", 0) > 0: #She had one orgasm
         the_person.char "Oh god, I came so hard... That was good [the_person.mc_title]."
         $ the_person.draw_person (position = "missionary")
         "[the_person.possessive_title] rolls over on her back and spreads her legs wide."
