@@ -49,9 +49,24 @@ init 3303 python:
             person.love = 5
         person.change_stats(happiness = 15, obedience = 10, love = 5)
         person.remove_role(stripper_role)
+        person.remove_role(bdsm_performer_role)
+        person.remove_role(waitress_role)
         person.add_role(manager_role)
+        # remove from work rosters
         if person in stripclub_strippers:
             stripclub_strippers.remove(person)
+        if person in stripclub_bdsm_performers:
+            stripclub_bdsm_performers.remove(person)
+        if person in stripclub_waitresses:
+            stripclub_waitresses.remove(person)
+
+        # change to correct schedule
+        if person.is_employee() or person in [lily, mom, aunt]:
+            person.event_triggers_dict["strip_club_shifts"] = 1
+            person.set_schedule([4], strip_club)
+        else:
+            person.event_triggers_dict["strip_club_shifts"] = 2
+            person.set_schedule([3, 4], strip_club)
 
         manager_role_status_acquisition(person)
 
