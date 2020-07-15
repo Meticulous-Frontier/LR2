@@ -18,21 +18,21 @@ init 3303 python:
 
     def has_manager_role_requirement(person):
         if person.has_role(manager_role):
-            if not mc.location is strip_club:
+            if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formalName]"
             return True
         return False
     
     def allow_promote_to_mistress_requirement(person):
         if person.has_role(manager_role) and mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) and not strip_club_get_mistress():
-            if not mc.location is strip_club:
+            if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formalName]"
             return True
         return False
 
     def has_mistress_role_requirement(person):
         if person.has_role(mistress_role):
-            if not mc.location is strip_club:
+            if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formalName]"
             return True
         return False
