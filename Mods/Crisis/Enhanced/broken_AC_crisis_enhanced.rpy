@@ -33,6 +33,11 @@ init 5 python:
                     other_girl.break_taboo("underwear_nudity")
         return
 
+    def broken_AC_crisis_get_watch_list_menu(person):
+        people_list = [x for x in mc.business.production_team if not x is person]
+        people_list.insert(0, "Watch")
+        return people_list
+
 label broken_AC_crisis_label_enhanced:
     $ the_person = broken_AC_crisis_get_sluttiest_person()
     if the_person is None:
