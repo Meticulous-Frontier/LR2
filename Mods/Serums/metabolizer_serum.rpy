@@ -7,7 +7,7 @@ init -1 python:
     def add_anorexia_serum():
         anorexia_serum_trait = SerumTraitMod(name = "Methabolizer Trait",
             desc = "Decrease target subject body mass, using peptide YY3-36 as a serum component that acts on the hypothalamic feeding centers to inhibit hunger and calorie intake.",
-            positive_slug = "-$15 Value, 20% Chance/Turn to reduce body mass by 200 grams",
+            positive_slug = "-$15 Value, 50% Chance/Turn to reduce body mass by 500 grams",
             negative_slug = "+125 Serum Research",
             value_added = -15,
             research_added = 125,
