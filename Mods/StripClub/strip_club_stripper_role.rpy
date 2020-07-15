@@ -115,7 +115,7 @@ init 5 python:
         mc.main_character_actions.append(strip_club_hire_employee_action)
 
     def allow_promote_to_manager_requirement(person):
-        if person.has_role(stripper_role) and not strip_club_get_manager():
+        if person.has_role([stripper_role, waitress_role, bdsm_performer_role]) and not strip_club_get_manager():
             if person.age < 25:
                 return "Requires: Age >= 25"
             if person.int < 4 or person.charisma < 5:
