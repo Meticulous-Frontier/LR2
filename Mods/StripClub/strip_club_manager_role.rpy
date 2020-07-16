@@ -18,22 +18,31 @@ init 3303 python:
 
     def has_manager_role_requirement(person):
         if person.has_role(manager_role):
-            if not mc.location is strip_club:
+            if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formalName]"
             return True
         return False
     
     def allow_promote_to_mistress_requirement(person):
         if person.has_role(manager_role) and mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) and not strip_club_get_mistress():
-            if not mc.location is strip_club:
+            if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formalName]"
             return True
         return False
 
     def has_mistress_role_requirement(person):
         if person.has_role(mistress_role):
-            if not mc.location is strip_club:
+            if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formalName]"
+            return True
+        return False
+
+    def mistress_hunt_for_me_requirement(person):
+        if person.has_role(mistress_role):
+            if not mc.location in [strip_club, bdsm_room]:
+                return "Only in [strip_club.formalName]"
+            if person.core_sluttiness < 80:
+                return "Requires: 80 Core Sluttiness"
             return True
         return False
 
@@ -41,7 +50,7 @@ init 3303 python:
         valid_people_list = []
         for target in known_people_at_location(mc.location, [person]):
             if willing_to_threesome(person, target):
-                valid_people_list.append(person)
+                valid_people_list.append(target)
         return get_random_from_list(valid_people_list)
 
     def promote_strip_club_stripper_to_manager(person):
@@ -49,9 +58,24 @@ init 3303 python:
             person.love = 5
         person.change_stats(happiness = 15, obedience = 10, love = 5)
         person.remove_role(stripper_role)
+        person.remove_role(bdsm_performer_role)
+        person.remove_role(waitress_role)
         person.add_role(manager_role)
+        # remove from work rosters
         if person in stripclub_strippers:
             stripclub_strippers.remove(person)
+        if person in stripclub_bdsm_performers:
+            stripclub_bdsm_performers.remove(person)
+        if person in stripclub_waitresses:
+            stripclub_waitresses.remove(person)
+
+        # change to correct schedule
+        if person.is_employee() or person in [lily, mom, aunt]:
+            person.event_triggers_dict["strip_club_shifts"] = 1
+            person.set_schedule([4], strip_club)
+        else:
+            person.event_triggers_dict["strip_club_shifts"] = 2
+            person.set_schedule([3, 4], strip_club)
 
         manager_role_status_acquisition(person)
 
@@ -74,7 +98,7 @@ init 3303 python:
     manager_role_remove_action = Action("Remove as Manager", has_manager_role_requirement, "manager_role_remove_label", menu_tooltip = "Remove [the_person.title] as strip club manager.")
     promote_to_mistress_action = Action("Promote to Mistress", allow_promote_to_mistress_requirement, "promote_to_mistress_label", menu_tooltip = "Promote [the_person.title] as strip club mistress.")
     mistress_role_remove_action = Action("Remove as Mistress", has_mistress_role_requirement, "mistress_role_remove_label", menu_tooltip = "Remove [the_person.title] as strip club mistress.")
-    mistress_hunt_for_me_action = Action("Hunt for me", has_mistress_role_requirement, "mistress_hunt_for_me_label", menu_tooltip = "Ask her to find you a girl for a threesome.")
+    mistress_hunt_for_me_action = Action("Hunt for me", mistress_hunt_for_me_requirement, "mistress_hunt_for_me_label", menu_tooltip = "Ask her to find you a girl for a threesome.")
 
     manager_role = Role("Manager", [manager_role_remove_action, promote_to_mistress_action], hidden = False)
     mistress_role = Role("Mistress", [mistress_role_remove_action, mistress_hunt_for_me_action], hidden = False)

@@ -46,6 +46,9 @@ init 3 python:
 
 label dirty_laundry_action_label:
     $ the_person = get_random_from_list(people_in_mc_home())
+    if the_person is None:
+        return
+
     $ set_night_outfit(the_person)
 
     "You are just drifting off to sleep when you suddenly you remember. You don't have any clean clothes for tomorrow!"

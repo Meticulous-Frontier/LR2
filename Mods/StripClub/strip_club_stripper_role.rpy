@@ -91,7 +91,7 @@ init 5 python:
 
     def is_strip_club_stripper_requirement(person):
         if get_strip_club_foreclosed_stage() >= 5:
-            if not mc.location is strip_club:
+            if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formalName]"
             if person.has_role([stripper_role, bdsm_performer_role, waitress_role]):
                 return True
@@ -115,12 +115,12 @@ init 5 python:
         mc.main_character_actions.append(strip_club_hire_employee_action)
 
     def allow_promote_to_manager_requirement(person):
-        if person.has_role(stripper_role) and not strip_club_get_manager():
+        if person.has_role([stripper_role, waitress_role, bdsm_performer_role]) and not strip_club_get_manager():
             if person.age < 25:
                 return "Requires: Age >= 25"
             if person.int < 4 or person.charisma < 5:
                 return "Requires: intelligence >=4 and charisma >= 5"
-            if not mc.location is strip_club:
+            if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formalName]"                
             return True
         return False
@@ -144,9 +144,9 @@ init 5 python:
     strip_club_stripper_fire_action = Action("Fire her", is_strip_club_stripper_requirement, "strip_club_fire_employee_label", menu_tooltip = "Fire [the_person.title] from her stripper job in your strip club.")
     strip_club_stripper_performance_review_action = Action("Review her performance", is_strip_club_stripper_requirement, "stripper_performance_review_label", menu_tooltip = "Review [the_person.title]'s performances on stage.")
 
-    bdsm_performer_role = Role("BDSM performer", [strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = False)
+    bdsm_performer_role = Role("BDSM performer", [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = False)
     stripper_role = Role("Stripper", [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = False)
-    waitress_role = Role("Waitress", [strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = False)
+    waitress_role = Role("Waitress", [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = False)
 
 label update_strip_club_show_requirement(stack):
     python:

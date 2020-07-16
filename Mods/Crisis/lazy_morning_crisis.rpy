@@ -20,6 +20,8 @@ init 2 python:
 label lazy_morning_crisis_action_label:
 
     $ the_person = get_random_from_list(people_in_mc_home()) #Checks all the rooms in player's home
+    if the_person is None:
+        return
 
     "Your eyes slowly open when you alarm goes off. It feels like your arms weigh a hundred pounds each when you reach over and turn off your alarm."#TODO change pounds to kilos if metric is active.
     "It's time to get up... but is it really though? It's the weekend. There's probably some things you could get done."

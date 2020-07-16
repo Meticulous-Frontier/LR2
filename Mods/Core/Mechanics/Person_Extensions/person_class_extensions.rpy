@@ -635,8 +635,8 @@ init -1 python:
             elif not location is destination: # only change outfit if we change location
                 self.apply_planned_outfit() #We're at home, so we can get back into our casual outfit.
 
-            # some girls like to go out at night (bar or stripclub)
-            if time_of_day == 4 and destination is self.home and renpy.random.randint(0, 100) <= 10:
+            # some girls like to go out at night (bar or stripclub) - exclude unique characters
+            if time_of_day == 4 and not self in unique_character_list and destination is self.home and renpy.random.randint(0, 100) <= 10:
                 party_destinations = [downtown_bar]
                 if "get_strip_club_foreclosed_stage" in globals():
                     if get_strip_club_foreclosed_stage() < 1 or get_strip_club_foreclosed_stage() >= 5: # only when stripclub is open for business
