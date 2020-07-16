@@ -50,7 +50,7 @@ init 3303 python:
         valid_people_list = []
         for target in known_people_at_location(mc.location, [person]):
             if willing_to_threesome(person, target):
-                valid_people_list.append(person)
+                valid_people_list.append(target)
         return get_random_from_list(valid_people_list)
 
     def promote_strip_club_stripper_to_manager(person):
