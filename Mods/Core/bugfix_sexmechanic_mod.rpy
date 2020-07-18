@@ -592,7 +592,10 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
                 # she is not slutty enough and we have the condom dialog
                 call condom_ask_enhanced(the_person) from _call_condom_ask_bugfix
                 $ willing = _return
-                $ use_condom = mc.condom
+                if willing == 0:
+                    $ ask_for_condom = False # we don't have vag/anal sex so if player tries again, she will ask for condom again
+                else:
+                    $ use_condom = mc.condom
             else:
                 # she is so slutty we are going to fuck her raw (we don't care anymore)
                 if the_position.skill_tag == "Vaginal":
@@ -624,7 +627,7 @@ label condom_ask_enhanced(the_person):
                 menu:
                     "Insist on condom":
                         mc.name "I think a condom is a good idea."
-                        if the_person.get_opinion_score("taking control") > -1:
+                        if the_person.get_opinion_score("taking control") > 0:
                             the_person.char "OK. Let me put this another way."
                             "[the_person.title] grabs the condom and throws it off to the side."
                             the_person.char "Either we fuck and you come inside me or we don't fuck at all."
