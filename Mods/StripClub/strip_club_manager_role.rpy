@@ -27,6 +27,8 @@ init 3303 python:
         if person.has_role(manager_role) and mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) and not strip_club_get_mistress():
             if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formalName]"
+            if day - the_person.event_triggers_dict.get("stripclub_last_promotion_day", -7) < 7:
+                return "Too recently promoted"
             return True
         return False
 
@@ -104,6 +106,7 @@ init 3303 python:
     mistress_role = Role("Mistress", [mistress_role_remove_action, mistress_hunt_for_me_action], hidden = False)
 
 label promote_to_manager_label(the_person):
+    $ the_person.event_triggers_dict["stripclub_last_promotion_day"] = day
     mc.name "[the_person.title], I need to talk with you."
     the_person.char "Sure [the_person.mc_title], something I can help you with?"
     mc.name "May be, ever since I bought this place I never lost money, but I think the business could be better..."
@@ -133,6 +136,7 @@ label manager_role_remove_label(the_person):
     return
 
 label promote_to_mistress_label(the_person):
+    $ the_person.event_triggers_dict["stripclub_last_promotion_day"] = day
     mc.name "[the_person.title], I need to talk with you."
     the_person.char "Sure [the_person.mc_title], something I can help you with?"
     mc.name "I think someone should manage the BDSM room..."

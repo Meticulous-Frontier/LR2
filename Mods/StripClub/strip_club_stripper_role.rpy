@@ -32,6 +32,7 @@ init 5 python:
             person.event_triggers_dict["strip_club_shifts"] = 2
             person.set_schedule([3, 4], work_location)
 
+        person.event_triggers_dict["stripclub_hire_day"] = day
         person.stripper_salary = calculate_stripper_salary(person)
 
         if role is stripper_role and not person in stripclub_strippers:
@@ -110,6 +111,15 @@ init 5 python:
             return "Asked too recently"
         return True
 
+    def strip_club_review_requirement(person):
+        if is_strip_club_stripper_requirement(person):
+            if day - person.event_triggers_dict.get("stripclub_last_promotion_day", -7) < 7:
+                return "Too recently promoted"
+            if day - person.event_triggers_dict.get("day_last_performance_review", -7) < 7:
+                return "Too recently reviewed"
+            return True
+        return False
+
     def add_strip_club_hire_employee_action_to_mc_actions():
         strip_club_hire_employee_action = Action("Employ at [strip_club.formalName]", strip_club_hire_employee_requirement, "strip_club_hire_employee_label", menu_tooltip = "Hire [the_person.title] to work for you in your strip club.")
         mc.main_character_actions.append(strip_club_hire_employee_action)
@@ -121,7 +131,9 @@ init 5 python:
             if person.int < 4 or person.charisma < 5:
                 return "Requires: intelligence >=4 and charisma >= 5"
             if not mc.location in [strip_club, bdsm_room]:
-                return "Only in [strip_club.formalName]"                
+                return "Only in [strip_club.formalName]"
+            if day - the_person.event_triggers_dict.get("stripclub_hire_day", -7) < 7:
+                return "Too recently hired"
             return True
         return False
 
@@ -142,7 +154,7 @@ init 5 python:
     promote_to_manager_action = Action("Appoint as Manager", allow_promote_to_manager_requirement, "promote_to_manager_label", menu_tooltip = "Appoint [the_person.title] as strip club manager.")
 
     strip_club_stripper_fire_action = Action("Fire her", is_strip_club_stripper_requirement, "strip_club_fire_employee_label", menu_tooltip = "Fire [the_person.title] from her stripper job in your strip club.")
-    strip_club_stripper_performance_review_action = Action("Review her performance", is_strip_club_stripper_requirement, "stripper_performance_review_label", menu_tooltip = "Review [the_person.title]'s performances on stage.")
+    strip_club_stripper_performance_review_action = Action("Review her performance", strip_club_review_requirement, "stripper_performance_review_label", menu_tooltip = "Review [the_person.title]'s performances on stage.")
 
     bdsm_performer_role = Role("BDSM performer", [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = False)
     stripper_role = Role("Stripper", [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = False)
