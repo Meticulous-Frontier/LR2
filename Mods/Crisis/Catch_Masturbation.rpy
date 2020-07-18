@@ -70,7 +70,12 @@ label SB_caught_masturbating_crisis_label():
                 mc.name "Wait a second [the_person.title], let me take care of that for you."
                 "You quickly undress and..."               
                 call start_threesome(the_person, the_person_two, start_position = Threesome_sixty_nine, start_object = make_table(), position_locked = True, round = 1) from _call_start_threesome_SB_caught_masturbating_crisis_label
-                "Once you're finished you quickly get dressed and say goodbye to the girls, who seem determined to continue for a while."
+
+                if the_person.energy > 20 and the_person_two.energy > 20:
+                    "Once you're finished you quickly get dressed and say goodbye to the girls, who seem determined to continue for a while."
+                else:
+                    "Once you're finished you quickly get dressed and say goodbye to the girls."
+                    
             "Keep walking":
                 pass
 
