@@ -634,7 +634,7 @@ label condom_ask_enhanced(the_person):
                             menu:
                                 "Fuck her raw":
                                     mc.name "Fine."
-                                    the_person.char "I knew you would make the right choice."
+                                    call fuck_without_condom_taboo_break_response(the_person) from _call_fuck_without_condom_taboo_break_response_1
                                 "Don't":
                                     mc.name "If it's that important to you let's just do something else."
                                     return 0
@@ -642,6 +642,7 @@ label condom_ask_enhanced(the_person):
                             the_person.char "OK."
                             call put_on_condom_routine(the_person) from _call_put_on_condom_routine_8
                     "Fuck her raw":
+                        call fuck_without_condom_taboo_break_response(the_person) from _call_fuck_without_condom_taboo_break_response_2
                         return 1
             "Don't":
                 return 1
@@ -679,12 +680,7 @@ label condom_ask_enhanced(the_person):
 
                 "No condom":
                     mc.name "I like fucking you like nature intended."
-                    if the_person.get_opinion_score("bareback sex") > 0:
-                        the_person.char "Good choice. I hate those things but I have to use them."
-                    if the_person.get_opinion_score("creampies") < 0 or the_person.get_opinion_score("anal creampies") < 0 or not the_person.on_birth_control:
-                        the_person.char "Just make sure to pull out when you cum, okay?"
-                    if not the_person.on_birth_control:
-                        the_person.char "I'm not using any birth control at the moment."
+                    call prostitute_agree_no_condom_taboo_break_response(the_person) from _call_prostitute_agree_no_condom_taboo_break_response_1
 
                 "[the_person.title] smiles at you."
 
@@ -696,12 +692,7 @@ label condom_ask_enhanced(the_person):
                 the_person.char "So maybe no condom today?"
             menu:
                 "Agree no condom":
-                    if the_person.get_opinion_score("bareback sex") > 0:
-                        the_person.char "Good choice. I hate those things but I have to use them."
-                    if the_person.get_opinion_score("creampies") < 0 or the_person.get_opinion_score("anal creampies") < 0 or not the_person.on_birth_control:
-                        the_person.char "Just make sure to pull out when you cum, okay?"
-                    if not the_person.on_birth_control:
-                        the_person.char "I'm not using any birth control at the moment."
+                    call prostitute_agree_no_condom_taboo_break_response(the_person) from _call_prostitute_agree_no_condom_taboo_break_response_2
 
                     "[the_person.title] smiles at you."
                 "Use condom":
@@ -759,15 +750,7 @@ label condom_ask_enhanced(the_person):
 
             "Fuck her raw":
                 mc.name "No way. I want to feel you wrapped around me."
-                if the_person.has_taboo("condomless_sex"):
-                    $ the_person.call_dialogue("condomless_sex_taboo_break")
-                else:
-                    if the_person.get_opinion_score("bareback sex") > 0:
-                        the_person.char "Tell me about it, nothing beats skin on skin."
-                    if the_person.get_opinion_score("creampies") < 0 or not the_person.on_birth_control:
-                        the_person.char "Just make sure to pull out when you cum, okay?"
-                    if not the_person.on_birth_control:
-                        the_person.char "I'm not using any birth control at the moment."
+                call fuck_without_condom_taboo_break_response(the_person) from _call_fuck_without_condom_taboo_break_response_3
 
     else:
         if the_person.get_opinion_score("bareback sex") < 0 or the_person.get_opinion_score("creampies") < 0 or the_person.get_opinion_score("anal creampies") < 0:
@@ -787,7 +770,8 @@ label condom_ask_enhanced(the_person):
                                 menu:
                                     "Fuck her raw":
                                         mc.name "Fine."
-                                        the_person.char "I knew you would make the right choice."
+                                        call fuck_without_condom_taboo_break_response(the_person) from _call_fuck_without_condom_taboo_break_response_4
+
                                     "Don't":
                                         mc.name "If it's that important to you let's just do something else."
                                         return 0
@@ -820,22 +804,42 @@ label condom_ask_enhanced(the_person):
                     call put_on_condom_routine(the_person) from _call_put_on_condom_routine_6
 
             "Fuck her raw":
-                if the_person.has_taboo("condomless_sex"):
-                    $ the_person.call_dialogue("condomless_sex_taboo_break")
-                else:
-                    if the_person.get_opinion_score("bareback sex") > 0:
-                        the_person.char "Tell me about it, nothing beats skin on skin."
-                    else:
-                        the_person.char "I'm not a big fan of bare sex, but if you like it that way."
-                    if the_person.get_opinion_score("creampies") < 0 or the_person.get_opinion_score("anal creampies") < 0 or not the_person.on_birth_control:
-                        the_person.char "Just make sure to pull out when you cum, okay?"
-                    if not the_person.on_birth_control:
-                        the_person.char "I'm not using any birth control at the moment."
+                call fuck_without_condom_taboo_break_response(the_person) from _call_fuck_without_condom_taboo_break_response_5
 
     if not mc.condom:
         $ the_person.break_taboo("condomless_sex")
 
     return 1
+
+label prostitute_agree_no_condom_taboo_break_response(the_person):
+    if the_person.has_taboo("condomless_sex"):
+        $ the_person.call_dialogue("condomless_sex_taboo_break")
+    else:
+        if the_person.get_opinion_score("bareback sex") > 0:
+            the_person.char "Good choice. I hate those things but I usually have to use them."
+        else:
+            the_person.char "Normally I wouldn't do this, I don't like it, but for you, I will make an exception."
+
+        if the_person.get_opinion_score("creampies") < 0 or the_person.get_opinion_score("anal creampies") < 0 or not the_person.on_birth_control:
+            the_person.char "But no cumming inside. I don't like to leak cum all day, agreed?"
+        if not the_person.on_birth_control:
+            the_person.char "I'm not using any contraception at the moment."
+    return
+
+label fuck_without_condom_taboo_break_response(the_person):
+    if the_person.has_taboo("condomless_sex"):
+        $ the_person.call_dialogue("condomless_sex_taboo_break")
+    else:
+        if the_person.get_opinion_score("bareback sex") > 0:
+            the_person.char "Let's agree that nothing beats skin on skin."
+        else:
+            the_person.char "I'm not a big fan of bare sex, but if you like it that way."
+
+        if the_person.get_opinion_score("creampies") < 0 or the_person.get_opinion_score("anal creampies") < 0 or not the_person.on_birth_control:
+            the_person.char "Just make sure to pull out when you cum, okay?"
+        if not the_person.on_birth_control:
+            the_person.char "I'm not using any contraception at the moment."
+    return
 
 label put_on_condom_routine(the_person):
     if the_person.sex_skills["Oral"] > 3 and the_person.get_opinion_score("giving blowjobs") > 1: #Knows what she's doing
