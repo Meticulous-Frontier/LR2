@@ -167,6 +167,10 @@ init 5 python:
             return False
         if mc.business.funds < 5000:
             return "Requires $5000"
+        if not mc.is_at_work():
+            return "Only in the office"
+        if not mc.business.is_open_for_business():
+            return "Only during work hours"
         return True
 
     def HR_director_mind_control_attempt_requirement(the_person):
