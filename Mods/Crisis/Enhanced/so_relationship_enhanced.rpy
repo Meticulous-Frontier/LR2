@@ -18,14 +18,16 @@ init 2 python:
         return not get_so_relationship_worsen_person() is None
 
     def so_relationship_quarrel_requirement(person):
-        # set quarrel chance to 10% else too many relationships will be split up by the limited time event selector.
-        if person.relationship != "Single" and renpy.random.randint(0, 100) < 10:
+        # for people you know, set quarrel chance to 20% else too many relationships will be split up by the limited time event selector.
+        if person.relationship != "Single" and not (person.mc_title == "Stranger" or not person.title) and renpy.random.randint(0, 100) < 20:
             if not person.has_role([casual_hotwife_role]): # Hotwife doesn't want to leave her SO
                 return True
         return False
 
-    relation_ship_quarrel = Action("Girl had a fight with her SO", so_relationship_quarrel_requirement, "so_relationship_quarrel_label", event_duration = 3)
-    limited_time_event_pool.append([relation_ship_quarrel, 1,"on_enter"])
+    # changed to on-talk event, so it won't light up on the house map
+    # she stays mad for two time-slots and if you don't talk to her, she won't break-up
+    relation_ship_quarrel = Action("Girl had a fight with her SO", so_relationship_quarrel_requirement, "so_relationship_quarrel_label", event_duration = 2)
+    limited_time_event_pool.append([relation_ship_quarrel, 1, "on_talk"])
 
     # replace action requirement functions with newly defined functions (cPickle resolver)
     so_relationship_improve_crisis.requirement = so_relationship_improve_requirement
@@ -129,15 +131,12 @@ label so_relationship_quarrel_label(the_person):
         the_person.char "Hey [the_person.mc_title], it's good to see you. Me and my [so_title], [the_person.SO_name], had a fight and we decided to spit up."
         the_person.char "We don't have to hide what's going on between us any more."
         $ the_person.add_role(girlfriend_role)
-        mc.name "That's good news! I'm sure you'll you need some time to process this, but remember, I love you."
+        mc.name "That's good news! So we don't have to sneak around anymore."
         $ the_person.change_love(5)
-        the_person.char "Thanks, I love you too. Bye."
-
     else:
         $ the_person.change_happiness(-20)
         the_person.char "Hey [the_person.mc_title], it's good to see you. Me and my [so_title], [the_person.SO_name], had a fight and we decided to spit up."
         mc.name "I'm sorry to hear that, [the_person.title], just take it easy and take your time to process it."
-        the_person.char "Thanks, see you later."
 
     $ the_person.relationship = "Single"
     $ the_person.SO_name = None        
