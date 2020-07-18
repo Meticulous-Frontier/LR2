@@ -346,7 +346,10 @@ init -1 python:
         age = renpy.random.randint(18, self.age-16)
 
         if renpy.random.randint(0,100) < 60:
-            body_type = self.body_type
+            if self.has_role(pregnant_role):
+                body.type = self.event_triggers_dict.get("pre_preg_body", None)
+            else:
+                body_type = self.body_type
         else:
             body_type = None
 
@@ -361,7 +364,10 @@ init -1 python:
             hair_colour = None
 
         if renpy.random.randint(0,100) < 60: # 60% they share the same breast size
-            tits = self.tits
+            if self.has_role(pregnant_role):
+                tits = self.event_triggers_dict.get("pre_preg_tits", None)
+            else:
+                tits = self.tits
         else:
             tits = None
 
@@ -405,7 +411,10 @@ init -1 python:
         age = renpy.random.randint(self.age + 16, 55)
 
         if renpy.random.randint(0,100) < 60:
-            body_type = self.body_type
+            if self.has_role(pregnant_role):
+                body.type = self.event_triggers_dict.get("pre_preg_body", None)
+            else:
+                body_type = self.body_type
         else:
             body_type = None
 
@@ -420,7 +429,10 @@ init -1 python:
             hair_colour = None
 
         if renpy.random.randint(0,100) < 60: # 60% they share the same breast size
-            tits = self.tits
+            if self.has_role(pregnant_role):
+                tits = self.event_triggers_dict.get("pre_preg_tits", None)
+            else:
+                tits = self.tits
         else:
             tits = None
 
