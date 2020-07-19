@@ -1688,7 +1688,10 @@ label starbuck_close_up_label(the_person): #You offer to help her close up. Main
     "[the_person.title] lets out a big yawn."
     the_person.char "You really wore me out! Good night [the_person.mc_title]."
     "She walks you to the door of the business and you walk out together, before going your separate ways."
-    return
+
+    # time goes forward and exit the talk menu by jumping to game loop
+    call advance_time from _call_advance_time_starbuck_close_up_label
+    jump game_loop
 
 #SBS140
 label starbuck_replay_dressup_label(the_person):
