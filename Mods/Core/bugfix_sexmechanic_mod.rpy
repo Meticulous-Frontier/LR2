@@ -278,7 +278,7 @@ init 5 python:
                     positions[position.skill_tag].append([willingness, position])
 
         # insert unique positions into choices
-        for unique_position in person.event_triggers_dict.get("unique_sex_positions", [])(person, prohibit_tags):
+        for unique_position in person.event_triggers_dict.get("unique_sex_positions", default_unique_sex_positions)(person, prohibit_tags):
             position = unique_position[0]
             if allow_position(person, position) and  mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
                 willingness = position.build_position_willingness_string(person, ignore_taboo = ignore_taboo)
@@ -294,6 +294,9 @@ init 5 python:
             filter(person.event_triggers_dict.get("vaginal_position_filter", None), positions["Vaginal"]),
             filter(person.event_triggers_dict.get("anal_position_filter", None), positions["Anal"])
         ]
+
+    def default_unique_sex_positions(person, prohibit_tags = []):
+        return []
 
 
 label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, self_strip = True, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, asked_for_condom = False, prohibit_tags = []):
