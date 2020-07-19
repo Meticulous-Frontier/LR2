@@ -147,10 +147,12 @@ init 1 python:
             return True
         return False
 
-    def prod_line_target_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions,  prohibit_tags = []):
-        willingness = spanking.build_position_willingness_string(person, ignore_taboo = True)
-        foreplay_positions.insert(1, [willingness, spanking])
-        return [foreplay_positions, oral_positions, vaginal_positions, anal_positions]
+    def prod_line_target_unique_sex_positions(person, prohibit_tags = []):
+        positions = []
+        if "Foreplay" not in prohibit_tags:
+            positions.append([spanking, 1])
+
+        return positions
 
     quest_production_line_intro = Action("Begin Production Quest", quest_production_line_intro_requirement, "quest_production_line_intro_label")
     quest_production_line_coffee_reminder = Action("Meeting Remind", quest_production_line_coffee_reminder_requirement, "quest_production_line_coffee_reminder_label")

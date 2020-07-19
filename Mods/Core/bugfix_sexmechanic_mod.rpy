@@ -277,30 +277,23 @@ init 5 python:
                 else:
                     positions[position.skill_tag].append([willingness, position])
 
+        # insert unique positions into choices
+        for unique_position in person.event_triggers_dict.get("unique_sex_positions", [])(person, prohibit_tags):
+            position = unique_position[0]
+            if allow_position(person, position) and  mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
+                willingness = position.build_position_willingness_string(person, ignore_taboo = ignore_taboo)
+                positions[position.skill_tag].insert(unique_position[1], [willingness, position])
+
         if allow_none:
             positions["Foreplay"].append(["Nothing", "Nothing"])
 
-        return replace_unique_sex_positions(person, positions["Foreplay"], positions["Oral"], positions["Vaginal"], positions["Anal"], prohibit_tags = prohibit_tags)
-
-    def replace_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions, prohibit_tags = []): #Use this function to get specific situations to replace or remove positions
-        #First, filter out any positions this person doesn't accept
-        #TODO move this to allow_position(), this probably very inefficient
-        foreplay_positions = filter(person.event_triggers_dict.get("foreplay_position_filter", None),foreplay_positions)
-        oral_positions = filter(person.event_triggers_dict.get("oral_position_filter", None),oral_positions)
-        vaginal_positions = filter(person.event_triggers_dict.get("vaginal_position_filter", None),vaginal_positions)
-        anal_positions = filter(person.event_triggers_dict.get("anal_position_filter", None),anal_positions)
-
-        #Add unique character specific positions. #TODO tie this some kind of individual person function.
-        # if person == salon_manager:
-        #     if ophelia_get_special_bj_unlocked():
-        #         oral_positions = filter(ophelia_oral_position_filter, oral_positions)
-        #         willingness = Ophelia_blowjob.build_position_willingness_string(person, ignore_taboo = True)
-        #         oral_positions.append([willingness, Ophelia_blowjob])
-        return person.event_triggers_dict.get("unique_sex_positions", default_unique_sex_positions)(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions, prohibit_tags)
-
-    def default_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions, prohibit_tags = []):
-        return [foreplay_positions, oral_positions, vaginal_positions, anal_positions]
-
+        # Return filtered positions
+        return [
+            filter(person.event_triggers_dict.get("foreplay_position_filter", None), positions["Foreplay"]),
+            filter(person.event_triggers_dict.get("oral_position_filter", None), positions["Oral"]),
+            filter(person.event_triggers_dict.get("vaginal_position_filter", None), positions["Vaginal"]),
+            filter(person.event_triggers_dict.get("anal_position_filter", None), positions["Anal"])
+        ]
 
 
 label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, self_strip = True, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, asked_for_condom = False, prohibit_tags = []):

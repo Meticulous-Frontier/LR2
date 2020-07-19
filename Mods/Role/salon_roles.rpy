@@ -1151,10 +1151,9 @@ init 2 python:
             return True
         return False
 
-    def ophelia_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions,  prohibit_tags = []):
+    def ophelia_unique_sex_positions(person, prohibit_tags = []):
+        positions = []
         if ophelia_get_special_bj_unlocked() and "Oral" not in prohibit_tags:
-            willingness = Ophelia_blowjob.build_position_willingness_string(person, ignore_taboo = True)
-            oral_positions.append([willingness, Ophelia_blowjob])
+            positions.append([Ophelia_blowjob, 1])
 
-
-        return [foreplay_positions, oral_positions, vaginal_positions, anal_positions]
+        return positions

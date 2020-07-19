@@ -30,11 +30,12 @@ init 10 python:
         dungeon_completed_action = Action("Dungeon Completed", dungeon_completed_action_requirement, "dungeon_completed_label", requirement_args = day + 7)
         mc.business.mandatory_crises_list.append(dungeon_completed_action)
 
-    def slave_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions, prohibit_tags = []):
-        willingness = spanking.build_position_willingness_string(person, ignore_taboo = True)
-        foreplay_positions.insert(1, [willingness, spanking])
-        return [foreplay_positions, oral_positions, vaginal_positions, anal_positions]
+    def slave_unique_sex_positions(person, prohibit_tags = []):
+        positions = []
+        if "Foreplay" not in prohibit_tags:
+            positions.append([spanking, 1])
 
+        return positions
 
 label dungeon_intro_label():
     "By yourself on the weekend at work, you are taking a moment to relax. Suddenly you are struck by a brilliant idea..."
