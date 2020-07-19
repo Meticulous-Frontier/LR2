@@ -175,6 +175,17 @@ init 5 python:
                     return False
         return True
 
+    def build_position_rejection_string(person, position):
+        result = position.name + "\nHates: "
+        if position.opinion_tags:
+            hates = []
+            for opinion in position.opinion_tags:
+                if person.get_opinion_score(opinion) == -2:
+                    hates.append(opinion)
+            result += " - ".join(hates)
+        result += " (disabled)"
+        return result
+
     def update_person_sex_record(person, report_log):
         types_seen = []
         for position_type in report_log.get("positions_used",[]): #Note: Clears out duplicates
@@ -270,12 +281,13 @@ init 5 python:
         }
 
         for position in sorted(list_of_positions, key = lambda x: x.name):
-            if allow_position(person, position) and  mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
-                willingness = position.build_position_willingness_string(person, ignore_taboo = ignore_taboo)
-                if position.skill_tag in prohibit_tags:
-                    pass
-                else:
-                    positions[position.skill_tag].append([willingness, position])
+            if mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
+                if allow_position(person, position):
+                    willingness = position.build_position_willingness_string(person, ignore_taboo = ignore_taboo)
+                    if not position.skill_tag in prohibit_tags:
+                        positions[position.skill_tag].append([willingness, position])
+                else: # inform user that person hates position
+                    positions[position.skill_tag].append([build_position_rejection_string(person, position), position])
 
         # insert unique positions into choices
         for unique_position in person.event_triggers_dict.get("unique_sex_positions", default_unique_sex_positions)(person, prohibit_tags):
