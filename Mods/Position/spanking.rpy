@@ -22,32 +22,32 @@ init 1 python:
 
             #TODO transitions to standing anal
 
-    def calc_spank_factor(the_person):  #Returns an int that is representative of how much someone likes this round of spanking.
-        factor = 5 + (the_person.get_opinion_score("being submissive") * 2)
-        factor += (- (the_person.event_triggers_dict.get("spank_level", 0)))
+    def calc_spank_factor(person):  #Returns an int that is representative of how much someone likes this round of spanking.
+        factor = 5 + (person.get_opinion_score("being submissive") * 2)
+        factor += (- (person.event_triggers_dict.get("spank_level", 0)))
         return factor
 
-    def update_ass_condition(the_person): #update ass condition everytime spanking is initiated to make sure we describe it correctly.
-        if the_person.event_triggers_dict.get("day_last_spanked", 0) <= day:
-            heal_factor = (day - the_person.event_triggers_dict.get("day_last_spanked", 0)) * 2 #Heal 2 stages per day since last spanking
-            the_person.event_triggers_dict["spank_level"] = __builtin__.max((the_person.event_triggers_dict.get("spank_level", 0) - heal_factor), 0) #heal by 1 per day, minimum of zero
-        the_person.event_triggers_dict["last_day_spanked"] = day
+    def update_ass_condition(person): #update ass condition everytime spanking is initiated to make sure we describe it correctly.
+        if person.event_triggers_dict.get("day_last_spanked", 0) <= day:
+            heal_factor = (day - person.event_triggers_dict.get("day_last_spanked", 0)) * 2 #Heal 2 stages per day since last spanking
+            person.event_triggers_dict["spank_level"] = __builtin__.max((person.event_triggers_dict.get("spank_level", 0) - heal_factor), 0) #heal by 1 per day, minimum of zero
+        person.event_triggers_dict["last_day_spanked"] = day
         return
 
-    def spank_factor_increment(the_person):
-        the_person.event_triggers_dict["spank_level"] = the_person.event_triggers_dict["spank_level"] + 1
+    def spank_factor_increment(person):
+        person.event_triggers_dict["spank_level"] = person.event_triggers_dict["spank_level"] + 1
         return
 
     #Returns a string based on the physical appears of the girl's ass
     #Assume previous sentence flows something like, "The girls ass is [this return value]"
-    def spanking_get_ass_description(the_person):
-        if the_person.event_triggers_dict.get("spank_level", 0) < 2:
+    def spanking_get_ass_description(person):
+        if person.event_triggers_dict.get("spank_level", 0) < 2:
             return "flawless. It is perky and ready for you to discipline."
-        elif the_person.event_triggers_dict.get("spank_level", 0) < 4:
+        elif person.event_triggers_dict.get("spank_level", 0) < 4:
             return "slightly red. There are a few marks, but it still looks ripe for further discipline."
-        elif the_person.event_triggers_dict.get("spank_level", 0) < 6:
+        elif person.event_triggers_dict.get("spank_level", 0) < 6:
             return "red. It looks like she has been disciplined properly."
-        elif the_person.event_triggers_dict.get("spank_level", 0) < 8:
+        elif person.event_triggers_dict.get("spank_level", 0) < 8:
             return "bright red. There are a few small bruises. She has been thoroughly punished."
         else:
             return "bruised. She has been punished nearly to her limit. You might want to stop soon."
