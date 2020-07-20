@@ -170,9 +170,6 @@ label update_strip_club_show_requirement(stack):
         if not "stripclub_waitresses" in globals():
             stripclub_waitresses = []
 
-        # make strip club roaming location for people (why would woman not go into a strip club)
-        strip_club.public = True
-
         execute_hijack_call(stack)
     return
 

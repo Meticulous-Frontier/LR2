@@ -649,14 +649,17 @@ init -1 python:
 
             # some girls like to go out at night (bar or stripclub) - exclude unique characters
             if time_of_day == 4 and not self in unique_character_list and destination is self.home and renpy.random.randint(0, 100) <= 10:
-                party_destinations = [downtown_bar]
-                if "get_strip_club_foreclosed_stage" in globals():
-                    if get_strip_club_foreclosed_stage() < 1 or get_strip_club_foreclosed_stage() >= 5: # only when stripclub is open for business
+                # since downtown is generic there could be other party locations there
+                party_destinations = [downtown_bar, downtown]
+                # after MC buys the stripclub, it is open to public
+                if strip_club.public:
+                    if "get_strip_club_foreclosed_stage" in globals():
+                        if get_strip_club_foreclosed_stage() < 1 or get_strip_club_foreclosed_stage() >= 5: # only when stripclub is open for business
+                            party_destinations.append(strip_club)
+                        if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
+                            party_destinations.append(bdsm_room)
+                    else:
                         party_destinations.append(strip_club)
-                    if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
-                        party_destinations.append(bdsm_room)
-                else:
-                    party_destinations.append(strip_club)
 
                 location.move_person(self, get_random_from_list(party_destinations))
             else:
