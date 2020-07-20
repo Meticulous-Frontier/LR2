@@ -654,10 +654,10 @@ init -1 python:
                 # after MC buys the stripclub, it is open to public
                 if strip_club.public:
                     if "get_strip_club_foreclosed_stage" in globals():
-                        if get_strip_club_foreclosed_stage() < 1 or get_strip_club_foreclosed_stage() >= 5: # only when stripclub is open for business
+                        if not strip_club_is_closed():
                             party_destinations.append(strip_club)
-                        if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
-                            party_destinations.append(bdsm_room)
+                            if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
+                                party_destinations.append(bdsm_room)
                     else:
                         party_destinations.append(strip_club)
 
