@@ -552,10 +552,10 @@ label mom_ntr_mod_action_label:
                                     the_person.char "Y-yes sir. Please, u-use them however you wish."
                                     man_name "Ha! I knew I could fuck the defiance out of your whore mouth. Fuck, I'm close!"
                                     $ cum_on_tits_ntr(the_person) #$ the_person.cum_on_tits()
-                                    $ the_person.draw_person(position = "doggy")
-                                    "[man_name] keeps pumping his hips, groaning as his cum shoots up between them. {the_person.possessive_title] flinches as it splashes off her chin and covers her tits."
+                                    $ the_person.draw_person(position = "blowjob")
+                                    "[man_name] keeps pumping his hips, groaning as his cum shoots up between them. [the_person.possessive_title] flinches as it splashes off her chin and covers her tits."
                                     $ cum_on_stomach_ntr(the_person) #$ the_person.cum_on_stomach()
-                                    $ the_person.draw_person(position = "doggy")
+                                    $ the_person.draw_person(position = "blowjob")
                                     "There's so much it even drips down on her stomach. With a final sated sigh, [man_name] steps back and rreleases her, enjoying the sight of his handiwork."
                                     man_name "There, now isn't it easier when you don't fight, [the_person.name]?"
                                 else:
