@@ -1299,7 +1299,7 @@ label Sarah_stripclub_story_label():
     $ mc.location.show_background()
 
     "You head inside. Your senses are assaulted by everything going on. The loud bass music thumps in your ears. On stage you see a girl shaking her ass for a group of guys."
-    "You check around quickly... looks like [the_person.title] is the only woman in the crowd with you."
+    "You check around quickly... looks like [the_person.title] is one of the few woman in the crowd with you."
     the_person.char "Come on, let's grab a table to the side before we decide what to do first!"
     $ scene_manager.update_actor(the_person, position = "sitting")
     "You sit down across from [the_person.possessive_title] in a booth."
@@ -1320,7 +1320,10 @@ label Sarah_stripclub_story_label():
         "???" "Come on baby, I bet I can pay you better than what this guy is payin' you to be here with him!"
         the_person.char "Yeah right! This guy owns his own pharmaceutical business. Move along now."
     "You get ready to add in to the conversation, but the guy gets the point."
-    "???" "Damn, alright. Enjoy those tits mister, they look fantastic."
+    if sarah.event_triggers_dict.get("epic_tits_progress", 0) >= 2: # only when she got the big boobs
+        "???" "Damn, alright. Enjoy those tits mister, they look fantastic."
+    else:
+        "???" "Damn, alright. Have a nice time mister, she's gorgeous."
     $ the_person.change_happiness(5)
     "The guy wanders off. [the_person.possessive_title] has a smug look on her face."
     the_person.char "Damn right they're fantastic. What do you think, [the_person.mc_title]. Are you gonna enjoy these tits later?"
@@ -1514,7 +1517,7 @@ label Sarah_stripclub_story_label():
     else:
         "She begins to slowly strip her bottom half down in front of you, swaying her hips tantalizingly as she does so."
         $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
-        "Now naked in front of you, you can't tear your eyes away from her base ass, mere inches from your face."
+        "Now naked in front of you, you can't tear your eyes away from her bare ass, mere inches from your face."
     "Her pussy is dripping with excitement. It looks like you could probably make her cum in seconds, she is so turned on."
     the_person.char "Oh god I'm so hot... I can't take it!"
     $ scene_manager.update_actor(the_person, position = "standing_doggy")
