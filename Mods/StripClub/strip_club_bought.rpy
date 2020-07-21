@@ -8,6 +8,10 @@ init 5 python:
         return
 
 label strip_club_bought_strippers_selection_label(the_person): # Talk event
+    python:
+        for person in strip_club.people:
+            if person is not cousin:
+                strip_club.move_person(person, downtown) # Failsafe to remove anyone improperly scheduled to be at the strip club
     $ the_person.draw_person()
     mc.name "Hey [the_person.title], good, you came."
     the_person.char "Yeah, I'm here, now tell me why I'm here."
