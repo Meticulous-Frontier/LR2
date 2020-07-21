@@ -21,3 +21,12 @@ init 2 python:
         return return_list
 
     RelationshipArray.get_existing_sisters = get_existing_sisters
+
+    def get_family_members(self, person):
+        return_list = []
+        for relationship in self.get_relationship_type_list(person):
+            if relationship[1] in ["Mother", "Daughter", "Sister", "Cousin", "Niece", "Aunt", "Grandmother", "Granddaughter"]: #The only people we keep track of as characters are women
+                return_list.append(relationship[0])
+        return return_list
+
+    RelationshipArray.get_family_members = get_family_members
