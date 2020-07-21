@@ -44,7 +44,7 @@ label taboo_break_breeding_missionary(the_girl, the_location, the_object):
     the_person.char "Oh god... are we really doing this? I mean... we've never even had sex before."
     mc.name "Don't worry, we'll have the next 9 months, while your belly swell and your tits get big with milk, to make up for lost time and fuck each other's brains out before the baby gets here."
     $ the_person.change_arousal(10)
-    the_person.char "Oh fuck that sounds amazing. You better "
+    the_person.char "Oh fuck that sounds amazing. You'd better!"
     "She nods meekly and lies down on the [the_object.name], waiting while you climb on top of her."
     if mc.condom:
         the_person.char "Why are you wearing that thing? Let's get that off of you."
@@ -90,7 +90,7 @@ label scene_breeding_missionary_1(the_girl, the_location, the_object):
                 $ del so_title
                 mc.name "Yeah, but I'm putting the baby in you. Not him."
                 $ the_girl.change_arousal(the_girl.get_opinion_score("cheating on men") * 3)
-                the_girl.char "Oh god... yes... yes your are!"
+                the_girl.char "Oh god... yes... yes you are!"
 
         "Talk dirty to her.":
             mc.name "You feel amazing [the_girl.title]. I'm going to fuck you like this every day and fill you with my seed over and over."

@@ -1299,7 +1299,7 @@ label Sarah_stripclub_story_label():
     $ mc.location.show_background()
 
     "You head inside. Your senses are assaulted by everything going on. The loud bass music thumps in your ears. On stage you see a girl shaking her ass for a group of guys."
-    "You check around quickly... looks like [the_person.title] is one of the few woman in the crowd with you."
+    "You check around quickly... looks like [the_person.title] is one of the few women in the crowd with you."
     the_person.char "Come on, let's grab a table to the side before we decide what to do first!"
     $ scene_manager.update_actor(the_person, position = "sitting")
     "You sit down across from [the_person.possessive_title] in a booth."
