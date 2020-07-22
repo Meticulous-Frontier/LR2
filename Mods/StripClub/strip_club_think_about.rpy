@@ -110,7 +110,7 @@ label think_about_buying_strip_club_label(the_person):
     "When you decided to invest in [the_person.title]'s shop, you never imagined it could be so profitable."
     "Besides the economic returns, you built up a very nice relationship with [the_person.title]."
     "Buying this place could be a really good investment, not to mention the 'side bonuses' you could get as the club's owner."
-    mc.name "$50.000 is a lot of money, but I guess it will be worth the effort... the benefits are really tempting..."
+    mc.name "$50,000 is a lot of money, but I guess it will be worth the effort... the benefits are really tempting..."
     mc.name "Okay, maybe I can invest my money in it, but running a place like this for sure will require a lot of time and effort..."
     mc.name "Perhaps I should find some kind of manager, but it need to be someone I could trust..."
     mc.name "I need to think some more about buying this place, but I admit I'm very tempted... I need to talk again with [the_person.title]."
@@ -129,16 +129,16 @@ label discuss_buying_club_with_starbuck_label(the_person): # The event trigger w
     "[the_person.title] takes out her phone, a minute later she is talking with a bank employee and after a few minutes the call ends."
     the_person.char "Everything's set up [the_person.mc_title]! They await your money transfer, after that they'll prepare all the documents for your signature."
     menu:
-        "Buy the club\n{color=#ff0000}{size=18}Costs: $50.000{/size}{/color}" if mc.business.funds > 50000:
+        "Buy the club\n{color=#ff0000}{size=18}Costs: $50,000{/size}{/color}" if mc.business.funds > 50000:
             "You make a call and set up the money transfer from your company's account."
             $ mc.business.change_funds(-50000)
             the_person.char "Congratulations [the_person.mc_title]! You're now the proud owner of a Strip Club... and you already have one loyal customer, business partner."
             call starbuck_celebration_strip_event(the_person) from _call_starbuck_celebration_strip_event_1
             call starbuck_name_the_new_club_label(the_person) from _call_starbuck_name_the_new_club_label_1
-        "Buy the club\n{color=#ff0000}{size=18}Requires: $50.000{/size}{/color} (disabled)" if mc.business.funds <= 50000:
+        "Buy the club\n{color=#ff0000}{size=18}Requires: $50,000{/size}{/color} (disabled)" if mc.business.funds <= 50000:
             pass
         "Change your mind":
-            mc.name "Actually $50.000 is a lot of money, perhaps it's better to a few days so I can think it over..."
+            mc.name "Actually $50,000 is a lot of money, perhaps it's better to a few days so I can think it over..."
             $ the_person.draw_person(position = "stand4")
             the_person.char "I totally understand, [the_person.mc_title]... I think you should take your time."
             #TODO Add offer end
@@ -156,14 +156,14 @@ label talk_again_buying_club_starbuck_label(the_person):
     the_person.char "Hey [the_person.mc_title], did you change your mind about buying the strip club?"
     mc.name "Hi [the_person.title], I've had some time to think about it."
     menu:
-        "Buy the club\n{color=#ff0000}{size=18}Costs: $50.000{/size}{/color}" if mc.business.funds > 50000:
+        "Buy the club\n{color=#ff0000}{size=18}Costs: $50,000{/size}{/color}" if mc.business.funds > 50000:
             "You make a call and set up the money transfer from your company's account."
             $ set_strip_club_foreclosed_stage(4)
             $ mc.business.change_funds(-50000)
             the_person.char "Congratulations [the_person.mc_title]! You're now the proud owner of a Strip Club... and you already have one loyal customer, business partner."
             call starbuck_celebration_strip_event(the_person) from _call_starbuck_celebration_strip_event_2
             call starbuck_name_the_new_club_label(the_person) from _call_starbuck_name_the_new_club_label_2
-        "Buy the club\n{color=#ff0000}{size=18}Requires: $50.000{/size}{/color} (disabled)" if mc.business.funds <= 50000:
+        "Buy the club\n{color=#ff0000}{size=18}Requires: $50,000{/size}{/color} (disabled)" if mc.business.funds <= 50000:
             pass
         "Need more time":
             mc.name "But I'm still not sure, I'm going to think about it a little while longer."
