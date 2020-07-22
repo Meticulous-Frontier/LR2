@@ -279,7 +279,7 @@ label strip_club_hire_employee_label(the_person):
             the_person.char "That sounds like something interesting... What do you think I should do?"
             mc.name "You're a beautiful, sexy and attractive girl, you'll be amazing on stage!"
             the_person.char "You are absolutely right, where should I sign?"
-        if the_person.effective_sluttiness() > 40 and the_person.get_opinion_score("being submissive") + the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") > 1:
+        elif the_person.effective_sluttiness() > 40 and the_person.get_opinion_score("being submissive") + the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") > 1:
             the_person.char "I don't know... I really don't know... What do you think I should do?"
             mc.name "You're a beautiful, sexy and attractive girl, you'll be amazing on stage!"
             the_person.char "Ok, your offer is really tempting, where should I sign?"
