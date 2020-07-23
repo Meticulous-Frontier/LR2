@@ -7,7 +7,7 @@ init -1 python:
             my_location.remove_person(self) # remove person from current location
         if self.home in list_of_places:
             list_of_places.remove(self.home) # remove home location from list_of_places
-        if self.home in mc.known_home_locations: 
+        if self.home in mc.known_home_locations:
             mc.known_home_locations.remove(self.home) # remove home location from known_home_locations
 
         if "people_to_process" in globals():
@@ -28,7 +28,7 @@ init -1 python:
         # remove from strippers
         if self in stripclub_strippers:
             stripclub_strippers.remove(self)
-        
+
         # other stripclub teams
         if "stripclub_bdsm_performers" in globals():
             for team in [stripclub_strippers, stripclub_bdsm_performers, stripclub_waitresses]:
@@ -1413,7 +1413,21 @@ init -1 python:
             multiplier = 2 - (float(day_difference)/10.0) # The multiplier is 2 when the day difference is 0, 0.5 when the day difference is 15.
             modified_fertility = self.fertility_percent * multiplier
         else:
-            modified_fertility = self.fertility_percent        
+            modified_fertility = self.fertility_percent
         return modified_fertility
 
     Person.effective_fertility_percent = effective_fertility_percent
+
+##########################################
+# Position Specific functions            #
+##########################################
+
+    def unlock_spanking(self):
+        self.event_triggers_dict["unlock_spanking"] = True
+        return True
+
+    def can_be_spanked(self):
+        return self.event_triggers_dict.get("unlock_spanking", False)
+
+    Person.unlock_spanking = unlock_spanking
+    Person.can_be_spanked = can_be_spanked
