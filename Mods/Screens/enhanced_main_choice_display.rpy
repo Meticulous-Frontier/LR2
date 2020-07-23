@@ -69,7 +69,8 @@ init 2 python:
                 mi.display_key = item.name + item.last_name
                 mi.display_scale = scale_person(item.height)
                 mi.display_func = item.build_person_displayable
-                renpy.invoke_in_thread(mi.load)
+                if not renpy.mobile: # don't load person on mobile
+                    renpy.invoke_in_thread(mi.load)
 
             if isinstance(item, Action):
                 mi.title = ""
