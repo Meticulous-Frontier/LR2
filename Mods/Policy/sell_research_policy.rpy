@@ -24,9 +24,10 @@ init 1310 python:
                     cash_earned *= 1.0 + ((business.head_researcher.int - 2) * 0.05)
 
                 mc.business.funds += cash_earned
+                return 0
             else:
                 # run original function
-                org_func(business, int, focus, skill)
+                return org_func(business, int, focus, skill)
 
         return research_progress_wrapper
 
