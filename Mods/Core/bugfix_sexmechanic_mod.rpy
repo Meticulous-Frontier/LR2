@@ -308,7 +308,11 @@ init 5 python:
         ]
 
     def default_unique_sex_positions(person, prohibit_tags = []):
-        return []
+        positions = []
+        if "Foreplay" not in prohibit_tags:
+            if person.can_be_spanked():
+                positions.append([spanking, 1])
+        return positions
 
 
 label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, self_strip = True, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, asked_for_condom = False, prohibit_tags = []):
