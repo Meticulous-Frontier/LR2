@@ -112,7 +112,7 @@ init 5 python:
     # Pay to Strip | Allows you to enter the pay_strip label used in certain events if requirements are met.
     pay_to_strip_action = ActionMod("Pay [the_person.title] to strip", mc_action_pay_to_strip_requirement, "mc_pay_to_strip_label", menu_tooltip = "Pay [the_person.title] to give you a strip tease.", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
-    mc_lasik_surgery_action = ActionMod("Pay for LASIK surgery\n{color=#ff0000}{size=18}Costs: $5000{/size}{/color}", mc_action_lasik_surgery_person_requirement, "mc_action_lasik_surgery_label", menu_tooltip = "You don't like her wearing glassing, offer to pay for LASIK surgery.", category = "Generic People Actions")
+    mc_lasik_surgery_action = ActionMod("Pay for LASIK surgery\n{color=#ff0000}{size=18}Costs: $5000{/size}{/color}", mc_action_lasik_surgery_person_requirement, "mc_action_lasik_surgery_label", menu_tooltip = "You don't like her wearing glasses, offer to pay for LASIK surgery.", category = "Generic People Actions")
 
     ask_take_serum = ActionMod("Ask [the_person.title] to test serum", mc_ask_take_serum_requirement, "mc_ask_take_serum_label", menu_tooltip = "Ask [the_person.title] to voluntarily test a serum.", category = "Generic People Actions", initialization = init_action_mod_disabled)
 

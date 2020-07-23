@@ -139,22 +139,22 @@ label late_for_work_action_label:
                 $ the_person.change_stats(obedience = -2, happiness = 2)
 
             "Spank her":
-                mc.name "A naughty employee like you needs punished. But just lecturing you wouldn't do the trick would it?"
+                mc.name "A naughty employee like you needs to be punished. But just lecturing you wouldn't do the trick, would it?"
                 the_person.char "I'm not sure what you're saying..."
-                mc.name "Turn around [the_person.title]. I'm going to give you the spanking you deserve."
+                mc.name "Turn around, [the_person.title]. I'm going to give you the spanking you deserve."
                 if the_person.get_opinion_score("being submissive") > 0:
                     $ the_person.change_stats(arousal = 35, obedience = 5, happiness = 5, slut_temp = 5)
                     the_person.char "Oh god, yes sir anything you say!"
                 else:
                     $ the_person.change_stats(arousal = 25, obedience = 2, happiness = 2, slut_temp = 2)
-                    the_person.char "If you insist, [the_person.mc_title]!"
+                    the_person.char "If you insist, [the_person.mc_title]."
                 call fuck_person(the_person, start_position = spanking, position_locked = True) from _spank_employee_coming_in_late_01
                 if the_person.get_opinion_score("being submissive") > 0:
                     if not the_person.can_be_spanked():
                         $ the_person.unlock_spanking()
-                        the_person.char "Oh god [the_person.mc_title]... that was hot... I'm sorry I'll try not to be late again!"
+                        the_person.char "Oh god, [the_person.mc_title]... that was hot... I'm sorry, I'll try not to be late again!"
                         "She really seemed to enjoy her spanking. Maybe you should work it into your normal foreplay..."
-                mc.name "That's enough for now. Try to be on time from now on, or I'll hae to spank you again."
+                mc.name "That's enough for now. Try to be on time from now on, or I'll have to spank you again."
                 the_person.char "Yes sir!"
 
 
