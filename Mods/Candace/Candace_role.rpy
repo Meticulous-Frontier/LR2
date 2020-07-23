@@ -500,7 +500,7 @@ init 3 python:
         return False
 
     def candace_get_ready_to_quit():
-        if candace.event_triggers_dict.get("relationship_doubt_score", 0) >= 8:
+        if candace.event_triggers_dict.get("relationship_doubt_score", 0) >= 5:
             return True
         return False
 
@@ -515,7 +515,7 @@ init 3 python:
         return candace.event_triggers_dict.get("quit_job", 0)
 
     def candace_can_talk():
-        return candace.event_triggers_dict.get("last_talk_day", 0) + 1 < day
+        return candace.event_triggers_dict.get("last_talk_day", 0) < day
 
     def candace_increase_doubt():
         score = candace.event_triggers_dict.get("relationship_doubt_score", 0)
