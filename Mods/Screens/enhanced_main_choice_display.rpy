@@ -160,7 +160,7 @@ init 2:
                                             style "textbutton_style"
                                             text_style "textbutton_text_style"
                                             text_align (0.5,0.5)
-                                            if item.display_key:
+                                            if not renpy.mobile and item.display_key:
                                                 hovered [Function(show_menu_person, item)]
                                                 unhovered [Function(renpy.scene, "Active")]
                                             action [
