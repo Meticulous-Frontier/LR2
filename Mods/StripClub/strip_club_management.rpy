@@ -72,7 +72,7 @@ init 3304 python:
                     return True
         return False
 
-    strip_club_manager_bdsm_room_build_action = Action("Build a BDSM room\n{color=#ff0000}{size=18}Costs: $10.000{/size}{/color}", strip_club_manager_bdsm_room_build_requirement, "strip_club_manager_bdsm_room_build_label")
+    strip_club_manager_bdsm_room_build_action = Action("Build a BDSM room\n{color=#ff0000}{size=18}Costs: $10,000{/size}{/color}", strip_club_manager_bdsm_room_build_requirement, "strip_club_manager_bdsm_room_build_label")
 
     def strip_club_manager_bdsm_room_built_requirement():
         if day >= (mc.business.event_triggers_dict.get("strip_club_bdsm_decision_day") + 5):
@@ -137,7 +137,7 @@ label strip_club_manager_bdsm_room_suggestion_label(): # (personal contact)
     the_person.char "I made a business prospect for you with costs and revenues, I will send it to your phone."
     mc.name "Thank you [the_person.title], I'll look at it!"
     $ the_person.draw_person(emotion = "happy", position = "stand4")
-    "After you got the documents, even just with a quick glance you notice that the $10.000 investment can be very, very profitable."
+    "After you got the documents, even just with a quick glance you notice that the $10,000 investment could be very, very profitable."
     $ add_strip_club_manager_bdsm_room_reminder_action()
     $ mc.business.event_triggers_dict["strip_club_bdsm_decision_day"] = 0
     $ strip_club.add_action(strip_club_manager_bdsm_room_build_action)
