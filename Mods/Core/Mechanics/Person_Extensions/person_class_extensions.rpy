@@ -1422,8 +1422,12 @@ init -1 python:
 # Position Specific functions            #
 ##########################################
 
-    def unlock_spanking(self):
+    def unlock_spanking(self, add_to_log = True):
+        if self.can_be_spanked():
+            return False
         self.event_triggers_dict["unlock_spanking"] = True
+        if add_to_log:
+            mc.log_event((self.title or self.name) + " can now be spanked during sex.",  "float_text_green")
         return True
 
     def can_be_spanked(self):

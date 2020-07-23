@@ -74,14 +74,22 @@ label scene_SB_doggy_standing_1(the_girl, the_location, the_object):
         "Buried deep inside, you give her ass a smack. Her pussy trembles and caresses you in response."
     menu:
         "Spank her":
+            $ ass_desc = spanking_get_ass_description(the_girl)
+            "You look down at [the_girl.possessive_title]'s ass. It is [ass_desc]"
             "With your erection buried deep inside her, you give her ass a firm spank. Her sexy cheeks quake in response."
+            $ spank_factor_increment(the_girl)
             mc.name "[the_girl.title], your ass looks amazing when I spank it. You are such a slut. I bet you love it don't you?"
             if the_girl.get_opinion_score("being submissive") > 0 or the_girl.obedience > 130:
                 "[the_girl.possessive_title] moans at your words."
                 "You pull her ass cheeks apart. You give her a hard spank with your other hand and enjoy the feeling of her silky cunt."
                 mc.name "Do you let any guy with a hard cock fuck you and spank you like this? Or just me?"
                 "[the_girl.possessive_title] responds quietly."
-                the_girl.char "Just you, [the_girl.mc_title]. I don't know why but it just feels so good... so right when you dominate me..."
+                if the_girl.get_opinion_score("being submissive") > 0 and not the_girl.can_be_spanked():
+                    the_girl.char "Just you! I love it when you get rough with me, and spank me when I've been naughty!"
+                    "She really seemed to enjoy her spanking. Maybe you should work it into your normal foreplay..."
+                    $ the_girl.unlock_spanking()
+                else:
+                    the_girl.char "Just you, [the_girl.mc_title]. I don't know why but it just feels so good... so right when you dominate me..."
                 if the_girl is mom:
                     the_girl.char "It makes [the_girl.title] so happy to serve you like this... To be [the_girl.possessive_title]!"
                 "You give her pussy a few rough thrusts before bottoming out again."

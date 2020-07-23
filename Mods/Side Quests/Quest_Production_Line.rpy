@@ -454,6 +454,7 @@ label quest_production_line_help_move_label():
             the_person.char "Yes Sir!"
             "As you turn from her door, you process all the events of the last few days."
             "One of your employees, recently had an amicable breakup... with her dad? And now she calls you Daddy... And she likes to get spanked."
+            $ the_person.unlock_spanking()
             "While it is unlikely this relationship is going to last, you decide to make sure you have as much fun with it as you can while it lasts."
             $ quest_production_line.set_quest_flag(103)
         else:
@@ -499,6 +500,7 @@ label quest_production_line_daddy_title_label(the_person): #This label is activa
     call fuck_person(the_person, start_position = spanking) from _spank_production_assistant_02
     $ the_person.increase_opinion_score("being submissive")
     the_person.char "Oh god... that was wonderful [the_person.mc_title]."
+    $ the_person.unlock_spanking()
     $ the_person.draw_person()
     return
 
