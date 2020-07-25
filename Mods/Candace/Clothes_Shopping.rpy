@@ -450,7 +450,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                                     pass
 
                     $ the_person.change_stats(slut_temp = 2, happiness = 2)
-                    $ the_person.wardrobe.add_outfit(outfits[3])
+                    $ the_person.wardrobe.add_underwear_set(outfits[3])
                 "Not your style":
                     mc.name "Your body looks great, but this particular cut isn't flattering."
                     the_person.char "Yeah I was afraid of that. Thank you for your honesty!"
