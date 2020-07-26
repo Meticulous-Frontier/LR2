@@ -330,9 +330,6 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
         if unit_test: #unit_test is for debug dialogue
             "No viable path."
 
-    if len(sex_path) > 1:
-        the_person.char "Let's get warmed up a little bit first..."
-
     elif object_choice == None:
         $ object_choice = girl_choose_object_enhanced(the_person, sex_path[0].position)
         $ current_node = sex_path.pop(0)  #Pop the first node in the list of sex path nodes.
@@ -353,6 +350,8 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
             the_person.char "I'm tired. Maybe we will continue this another time."
             $ finished = True
 
+    if len(sex_path) > 1 and not finished:
+        the_person.char "Let's get warmed up a little bit first..."
     #TODO determine condom usage. Can probably just call a method from the sex bugfix file
 
     #We should be able to initiate sex. If we need to, call initial intros and taboo breaks.
@@ -415,6 +414,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
 
 
     #TODO create positive feedback here for accomplishing sex goal
+    #TODO conditions where sex can be continued. E.G. If she got off but leaves mc aroused, she may offer to keep going or relinquish control
 
     python:
         clear_sex_modifiers(the_person)
