@@ -181,7 +181,9 @@ init 2:
             extra_positions = []
             ### Create list of possible positions###
             # when she enjoys blow jobs, add one to her choices (to prevent always going to blowjob variant)
-            if the_person.sex_skills["Oral"] >= 5 and the_person.get_opinion_score("giving blowjobs") > 1 and the_person.get_opinion_score("being submissive") > 1:
+            if the_person.has_role(cum_external_role) or the_person.has_role(cum_internal_role):
+                extra_positions.append(SB_cum_fetish_blowjob)
+            elif the_person.sex_skills["Oral"] >= 5 and the_person.get_opinion_score("giving blowjobs") > 1 and the_person.get_opinion_score("being submissive") > 1:
                 extra_positions.append(skull_fuck)
             elif the_person.sex_skills["Oral"] > 3 and the_person.get_opinion_score("giving blowjobs") > 1:
                 extra_positions.append(deepthroat)
@@ -190,12 +192,16 @@ init 2:
             elif the_goal == "oral creampie" or the_goal == "facial":
                 extra_positions.append(blowjob)
 
+
+
+
             # when she enjoys tit fucks, add it to her position choices
             if the_person.sex_skills["Foreplay"] > 2 and the_person.get_opinion_score("giving tit fucks") > 1 and the_person.has_large_tits():
                 extra_positions.append(tit_fuck)
 
 
             #TODO we also need to check and make sure an object exists for each possible sex position. Figure out how to do this
+            #TODO Add in per character position filters so make sure ALL positions are included
             for position in list_of_girl_positions + extra_positions:
                 if the_goal in position.opinion_tags:
                     if the_person.sluttiness >= position.slut_requirement:

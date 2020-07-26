@@ -55,7 +55,7 @@ init 1 python:
     def add_sb_fetish_mom_cum_event():
         SB_fetish_mom_cum_event = Action("Mom Cum Fetish", SB_fetish_mom_cum_requirement, "SB_fetish_mom_cum_label")
         mc.business.mandatory_crises_list.append(SB_fetish_mom_cum_event)
-    
+
     def add_sb_fetish_lily_cum_event():
         SB_fetish_lily_cum_event = Action("Sister Cum Fetish", SB_fetish_lily_cum_requirement, "SB_fetish_lily_cum_label")
         mc.business.mandatory_crises_list.append(SB_fetish_lily_cum_event)
@@ -106,9 +106,9 @@ label SB_fetish_cum_non_employee_label(the_person):
     "[the_person.possessive_title] takes a step towards you, running a hand down your chest. You guide her outside so she won't wake up your mother or sister."
     the_person.char "Oh [the_person.mc_title], I just keep on thinking about your nice cock and its sweet nectar, you need to help me!"
     "Even before you have time to respond, she drops to her knees and pulls out your flaccid member."
-    $ the_person.draw_person(position = "blowjob") 
+    $ the_person.draw_person(position = "blowjob")
     menu:
-        "Ok, go aHead":
+        "Ok, go ahead":
             mc.name "Ok, go ahead, but make it quick, I don't want to disturb the neighbors."
             $ mc.change_arousal(20)
             "She quickly takes you in her mouth, slowly making your cock hard as rock."
@@ -125,7 +125,7 @@ label SB_fetish_cum_non_employee_label(the_person):
             elif the_person.has_role(cum_internal_role):
                 "Glancing down, you see [the_person.possessive_title] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
                 the_person.char "Mmm... your taste is so unique, I love it!"
-            $ the_person.event_triggers_dict["LastCumFetish"] = day                
+            $ the_person.event_triggers_dict["LastCumFetish"] = day
             "[the_person.possessive_title] stands up."
             $ the_person.draw_person(emotion = "happy")
             the_person.char "Wow, that was amazing, [the_person.mc_title]. I don't know what has been coming over me lately..."
@@ -146,7 +146,7 @@ label SB_fetish_cum_non_employee_label(the_person):
     $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
     $ renpy.scene("Active")
-    return       
+    return
 
 #SBC1
 label SB_fetish_cum_label(the_person):
@@ -200,7 +200,7 @@ label SB_fetish_cum_label(the_person):
             elif the_person.has_role(cum_internal_role):
                 "Glancing down, you see [the_person.possessive_title] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
                 the_person.char "Mmm... it's all inside me now... right where it belongs!"
-            $ the_person.event_triggers_dict["LastCumFetish"] = day                
+            $ the_person.event_triggers_dict["LastCumFetish"] = day
             "[the_person.possessive_title] stands up."
             $ the_person.draw_person()
             the_person.char "Wow, that was amazing, [the_person.mc_title]. I don't know what has been coming over me lately..."
@@ -282,7 +282,7 @@ label SB_fetish_cum_dosage_label():
     if the_person is None:
         return
     $ the_person.event_triggers_dict["LastCumFetish"] = day
-        
+
     "As you finish up with one of your work tasks, you decide to take a quick break."
     "You step into your office and sit down for a minute. You hop on your laptop and start browsing the internet."
     "*KNOCK KNOCK*"
