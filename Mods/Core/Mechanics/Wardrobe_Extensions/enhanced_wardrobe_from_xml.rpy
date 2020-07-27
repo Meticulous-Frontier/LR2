@@ -12,8 +12,7 @@ init 1 python:
 
     def get_xml_files_from_path():
         result = []
-        files = renpy.list_files()
-        for file in files:
+        for file in renpy.list_files():
             if file.endswith(".xml"):
                 base = os.path.basename(file)
                 result.append(os.path.splitext(base)[0])
