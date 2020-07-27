@@ -232,7 +232,7 @@ init -1 python:
             return False
 
         if self.height > upper_limit:
-            self.height == upper_limit
+            self.height = upper_limit
 
         if self.height < lower_limit:
             self.height = lower_limit
