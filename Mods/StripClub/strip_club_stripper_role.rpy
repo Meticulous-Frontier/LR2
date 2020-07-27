@@ -105,7 +105,7 @@ init 5 python:
             return False
         if person.has_role(employee_role) or person in list(set(unique_character_list)-set([cousin, aunt, mom, lily])): # disqualified from action
             return False
-        if __builtin__.len(stripclub_strippers) >= 5 and (not strip_club_get_manager() or __builtin__.len(stripclub_waitresses)) >= 2 and (not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) or __builtin__.len(stripclub_bdsm_performers) >= 5):
+        if __builtin__.len(stripclub_strippers) >= 5 and (not strip_club_get_manager() or __builtin__.len(stripclub_waitresses) >= 2) and (not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) or __builtin__.len(stripclub_bdsm_performers) >= 5):
             return "At maximum Strip Club employees"
         if day < person.event_triggers_dict.get("stripper_ask_hire", 0) + 7:
             return "Asked too recently"
