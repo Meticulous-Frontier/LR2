@@ -52,11 +52,10 @@ init -1 python:
             # run original function
             org_func(room, person, destination)
             # run extension code
-            if os.path.isdir("game/Mods/Wardrobes"): # Don't execute these wardrobe related files if there is no wardrobe folder
-                if not room is destination and destination is gym:  # people change clothes when going to the gym
-                    person.apply_gym_outfit()
-                if not room is destination and destination is university and not person is nora: # people wear university uniform
-                    person.apply_university_outfit()
+            if not room is destination and destination is gym:  # people change clothes when going to the gym
+                person.apply_gym_outfit()
+            if not room is destination and destination is university and not person is nora: # people wear university uniform
+                person.apply_university_outfit()
 
         return move_person_wrapper
 
