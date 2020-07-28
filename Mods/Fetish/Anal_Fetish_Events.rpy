@@ -369,7 +369,7 @@ init 2 python:
             return not get_anal_fetish_non_employee() is None
         return False
 
-    def zz():
+    def get_anal_fetish_employee():
         meets_fetish_list = []
         for person in mc.business.get_employee_list():
             if person.has_role(anal_fetish_role):
