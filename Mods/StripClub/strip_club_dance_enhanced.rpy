@@ -3,6 +3,14 @@
 init 5 python:
     config.label_overrides["stripclub_dance"] = "stripclub_dance_enhanced_label"
 
+    # imported from bugfix (needed when bugfix not installed)
+    def add_cousin_blackmail_2_confront_action():
+        blackmail_2_confront_action = Action("Confront her about her stripping", blackmail_2_confront_requirement, "cousin_blackmail_level_2_confront_label",
+            menu_tooltip = "Tell her that you know about her job as a stripper and use it as further leverage.")
+        cousin_role.actions.append(blackmail_2_confront_action)
+        the_person.event_triggers_dict["seen_cousin_stripping"] = True
+        return
+
     def update_strip_club_rotation():
         rotation = [x.identifier for x in stripclub_strippers]
         renpy.random.shuffle(rotation)

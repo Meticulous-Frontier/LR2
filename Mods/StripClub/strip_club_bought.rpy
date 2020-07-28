@@ -2,6 +2,9 @@
 # You actually buy the stripclub and hire the strippers.
 
 init 5 python:
+    # imported from bugfix
+    cousin_strip_pose_list = ["walking_away","back_peek","standing_doggy","stand2","stand3","stand4","stand5"] #A list to let us randomly get some poses so each dance is a little different.
+
     def strip_club_call_in_all_strippers():
         for stripper in stripclub_strippers:
             stripper.location().move_person(stripper, strip_club)

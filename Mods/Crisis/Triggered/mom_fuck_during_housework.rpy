@@ -10,6 +10,15 @@ init 1 python:
             return False
         return True
 
+    # imported from bugfix (needed when bugfix not installed)
+    def add_mom_outfit_coloured_apron(person):
+        coloured_apron = apron.get_copy()
+        coloured_apron.colour = [0.74,0.33,0.32,1.0]
+        coloured_apron.pattern = "Pattern_1"
+        coloured_apron.colour_pattern = [1.0,0.83,0.90,1.0]
+        person.outfit.add_dress(coloured_apron)
+        return        
+
     mom_fuck_during_housework = Action("Mom being naughty", mom_fuck_during_housework_requirement, "mom_fuck_during_housework_label", event_duration = 5)
     limited_time_event_pool.append([mom_fuck_during_housework,4,"on_enter"])
 
