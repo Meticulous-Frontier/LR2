@@ -1147,7 +1147,7 @@ init -1 python:
     Person.apply_gym_outfit = apply_gym_outfit
 
     def apply_university_outfit(self):
-        if university_wardrobe:        
+        if university_wardrobe:
             # get personal copy of outfit, so we don't change the university wardrobe (in any events)
             self.apply_outfit(university_wardrobe.decide_on_outfit2(self).get_copy())
         return
@@ -1437,3 +1437,23 @@ init -1 python:
 
     Person.unlock_spanking = unlock_spanking
     Person.can_be_spanked = can_be_spanked
+
+
+##########################################
+# Girl in Charge Functions               #
+##########################################
+
+    def set_sex_goal(self, the_goal):
+        self.event_triggers_dict["sex_goal"] = the_goal
+        return
+
+    def get_sex_goal(self):
+        return self.event_triggers_dict.get("sex_goal", None)
+
+    def reset_sex_goal(self):
+        self.event_triggers_dict["sex_goal"] = None
+        return
+
+    Person.set_sex_goal = set_sex_goal
+    Person.get_sex_goal = get_sex_goal
+    Person.reset_sex_goal = reset_sex_goal
