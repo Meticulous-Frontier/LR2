@@ -10,7 +10,7 @@ init -2:
     python:
         list_of_selfish_dom_sex_goals = []
         list_of_selfish_dom_sex_goals.append("get off")
-        list_of_selfish_dom_sex_goals.append("waste cum")
+        #list_of_selfish_dom_sex_goals.append("waste cum")  #Unrealistic until we can control where MC finishes. Thru new sex options?
         #list_of_selfish_dom_sex_goals.append("hate fuck")  #We can't yet reliably path to this. Not enough pathing options
 
         list_of_unselfish_dom_sex_goals = []
@@ -206,7 +206,7 @@ init 2:
                 if the_goal in position.opinion_tags:
                     if the_person.sluttiness >= position.slut_requirement:
                         if not position.skill_tag in prohibit_tags:
-                            position_option_list.append([position, min(20, 100 - abs(the_person.sluttiness - position.slut_requirement))])  #every qualifying position has atleast weight 20, with higher weights if actual sluttiness is close to requirement
+                            position_option_list.append([position, max(20, 100 - abs(the_person.sluttiness - position.slut_requirement))])  #every qualifying position has atleast weight 20, with higher weights if actual sluttiness is close to requirement
 
             if len(position_option_list) == 0: #Somehow no positions available for this requirement.
                 return None
@@ -245,11 +245,11 @@ init 2:
                             if final_node.position.skill_tag == "Vaginal" or final_node.position.skill_tag == "Anal":
                                 if position.skill_tag == "Foreplay" or position.skill_tag == "Oral":
                                     if not position.skill_tag in prohibit_tags:
-                                        second_position_option_list.append([position, min(20, 100 - abs(the_person.sluttiness - position.slut_requirement))])
+                                        second_position_option_list.append([position, max(20, 100 - abs(the_person.sluttiness - position.slut_requirement))])
                             else:
                                 if position.skill_tag == "Foreplay":
                                     if not position.skill_tag in prohibit_tags:
-                                        second_position_option_list.append([position, min(20, 100 - abs(the_person.sluttiness - position.slut_requirement))])
+                                        second_position_option_list.append([position, max(20, 100 - abs(the_person.sluttiness - position.slut_requirement))])
                 if len(second_position_option_list) == 0: #No workable options.
                     return None
                 first_position = get_random_from_weighted_list(second_position_option_list)
@@ -271,11 +271,11 @@ init 2:
                             if final_node.position.skill_tag == "Vaginal" or final_node.position.skill_tag == "Anal":
                                 if position.skill_tag == "Foreplay" or position.skill_tag == "Oral":
                                     if not position.skill_tag in prohibit_tags:
-                                        second_position_option_list.append([position, min(20, 100 - abs(the_person.sluttiness - position.slut_requirement))])
+                                        second_position_option_list.append([position, max(20, 100 - abs(the_person.sluttiness - position.slut_requirement))])
                             else:
                                 if position.skill_tag == "Foreplay":
                                     if not position.skill_tag in prohibit_tags:
-                                        second_position_option_list.append([position, min(20, 100 - abs(the_person.sluttiness - position.slut_requirement))])
+                                        second_position_option_list.append([position, max(20, 100 - abs(the_person.sluttiness - position.slut_requirement))])
                 first_position  = get_random_from_weighted_list(second_position_option_list)
 
                 if first_position.girl_arousal > first_position.guy_arousal: #Choose our exit function based on who the position arouses more
@@ -293,6 +293,23 @@ init 2:
                 sex_path.append(first_node)
                 sex_path.append(final_node)
                 return sex_path
+
+        def sex_can_continue(the_person, the_position = None, the_node = None): #Use this to check and see if girl would be up to continue the current position
+            if the_node != None:
+                the_position = the_node.position
+
+            if the_position != None:
+                if not the_position.check_clothing(the_person):
+                    return False
+                if the_person.energy < the_position.girl_energy * 2:  #Enough for atleast 2 more rounds
+                    return False
+
+                if mc.energy < the_position.guy_energy * 2:
+                    return False
+            elif the_person.energy < 30 or mc.energy < 30:
+                return False
+            return True
+
 
 
 
@@ -360,6 +377,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
         the_person.char "Let's get warmed up a little bit first..."
     #TODO determine condom usage. Can probably just call a method from the sex bugfix file
 
+    $ the_person.set_sex_goal(the_goal)
     #We should be able to initiate sex. If we need to, call initial intros and taboo breaks.
     if not skip_intro and not finished:
         $ the_person.draw_person()
@@ -421,6 +439,56 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
 
     #TODO create positive feedback here for accomplishing sex goal
     #TODO conditions where sex can be continued. E.G. If she got off but leaves mc aroused, she may offer to keep going or relinquish control
+    #First condition, she is obedient. offers to keep going or to let MC take over.
+    if sex_can_continue(the_person, the_node = current_node) and the_person.obedience > 100 and mc.arousal > 50:
+        "As she finishes up, [the_person.title] gives your erection a couple strokes."
+        the_person.char "Actually, do you want me to keep going? Or maybe you should take over..."
+        menu:
+            "Keep going":
+                mc.name 'Keep going, this is hot.'
+                the_person.char "Yes sir!"
+                call get_fucked(the_person, private= private, start_position = current_node.position, start_object = object_choice, skip_intro = True, report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, unit_test = unit_test) from GIC_keeps_going_01
+            "Take over":
+                mc.name "Come here, I'm not done with you yet."
+                call fuck_person(the_person, private = private, ignore_taboo = ignore_taboo, report_log = report_log, prohibit_tags = prohibit_tags) from GIC_guy_takes_over_01
+            "Finish":
+                mc.name "Let's be done for now."
+                the_person.char "Okay."
+    #Second condition, she isn't obedient but atleast likes MC a little bit. She offers to continue
+    elif sex_can_continue(the_person, the_node = current_node) and the_person.love > 0 and mc.arousal > 50:
+        "As she finishes up, [the_person.title] gives your erection a couple strokes."
+        the_person.char "Wow, you are still rock hard. Do you want me to keep going?"
+        menu:
+            "Keep going":
+                mc.name 'Yes, please keep going.'
+                the_person.char "Okay, I can do that!"
+                call get_fucked(the_person, private= private, start_position = current_node.position, start_object = object_choice, skip_intro = True, report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, unit_test = unit_test) from GIC_keeps_going_02
+            "Finish":
+                mc.name "Let's be done for now."
+                the_person.char "Okay."
+
+    #Third condition, she doesn't care for MC. She forces him to beg. She may or may not comply (think Gabrielle)
+    elif sex_can_continue(the_person, the_node = current_node) and mc.arousal > 50:
+        "As she finishes up, [the_person.title] looks at your rock hard cock."
+        the_person.char "Still hard? I bet you want me to keep going, don't you..."
+        "She takes a pause before she continues."
+        the_person.char "If you want me to keep going, you're going to have to beg for it. Want me to?"
+        menu:
+            "Beg her to continue":
+                mc.name "Oh god, please keep going. I'm so close, just a little bit farther!"
+                "She laughs at your plight while she considers what to do."
+                if renpy.random.randint(-150,0) < the_person.love:  #Even at -100 love, she has a 1/3 chance of continueing
+                    the_person.char "Hmm, I guess it's only fair. Maybe I'll even finish again!"
+                    $ the_person.change_stats(obedience = -5, slut_temp = 5)
+                    call get_fucked(the_person, private= private, start_position = current_node.position, start_object = object_choice, skip_intro = True, report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, unit_test = unit_test) from GIC_keeps_going_03
+                else:
+                    the_person.char "Ha! It was worth letting you defile me just to hear you beg. Not a chance!"
+                    "[the_person.possessive_title] gets up, leaving you hanging."
+                    $ the_person.change_stats(obedience = -5, slut_temp = 5)
+            "Finish":
+                mc.name "There's nothing special about you. Let's be done, I can always get a more willing cunt."
+                the_person.char "Whatever [the_person.mc_title], your loss!"
+                $ the_person.change_stats(obedience = 2, love = -5)
 
     python:
         clear_sex_modifiers(the_person)
@@ -444,9 +512,10 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
         update_person_sex_record(the_person, report_log)
         the_goal = None
         sex_path = None
-
+        the_person.reset_sex_goal()
     # We return the report_log so that events can use the results of the encounter to figure out what to do.
     return report_log
+
 
 
 init 1000 python:
@@ -459,5 +528,43 @@ init 1000 python:
             the_person.sluttiness = renpy.random.randint(60,120)
             mc.energy = mc.max_energy
             the_person.energy = the_person.max_energy
+            renpy.call("get_fucked", the_person, start_position = cowgirl, unit_test = True, the_goal = get_random_from_list(list_of_all_dom_sex_goals))
+            unit_test_count += 1
+
+    def GIC_unit_test_2(count = 1):#Count is the number of times we repeat the unit test.
+        unit_test_count = 0
+        while unit_test_count < count:
+            mc.change_location(bedroom)
+            the_person = get_random_from_list(known_people_in_the_game([mc]))
+            the_person.love = -50
+            the_person.sluttiness = renpy.random.randint(60,120)
+            mc.energy = mc.max_energy
+            the_person.energy = the_person.max_energy
             renpy.call("get_fucked", the_person, unit_test = True)
             unit_test_count += 1
+
+#############################################################
+# Generic Outro GIC statement
+# Copy past this into a new sex position outro to give easy access to all possible goals.
+
+# if the_goal == "get off":
+#     pass
+# elif the_goal == "waste cum":
+#     pass
+# elif the_goal == "hate fuck":
+#     pass
+# elif the_goal == "vaginal creampie":
+#     pass
+# elif the_goal == "anal creampie":
+#     pass
+# elif the_goal == "facial":
+#     pass
+# elif the_goal == "body shot":
+#     pass
+# elif the_goal == "get mc off":
+#     pass
+# elif the_goal == "oral creampie":
+#     pass
+# else:
+#     pass
+############################################
