@@ -20,8 +20,15 @@ init 3 python:
         gym.add_action(self)
         return
 
+    def gym_workout_initialization(self):
+        gym.add_action(self)
+        return
+
     train_in_gym_action = ActionMod("Schedule Gym Session {image=gui/heart/Time_Advance.png}", gym_requirement, "select_person_for_gym",
         initialization = gym_initialization, menu_tooltip = "Bring a person to the gym to train their body.", category="Mall")
+
+    train_gym_workout_action = ActionMod("Workout in Gym {image=gui/heart/Time_Advance.png}", gym_requirement, "train_gym_workout",
+        initialization = gym_workout_initialization, menu_tooltip = "You train in the gym yourself.", category="Mall")
 
 label select_person_for_gym():
     call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game([mc]), "Train with", ["Back"])]))
@@ -142,4 +149,49 @@ label train_in_gym(the_person):
     "You pay for the gym session and $ [gym_session_cost] has been deducted from the company's credit card."
 
     $ mc.location.show_background()
+    return
+
+
+label train_gym_workout():
+    menu:
+        "Yoga class" if mc.energy >= 30:
+            "You do some yoga exercises."
+            $ mc.change_energy(-30)
+            if mc.max_energy < 150:
+                $ mc.change_max_energy(2)
+                "You feel a slight improvement from your yoga session."
+
+            if not perk_system.has_stat_perk("Yoga Focus"):
+                "You feel more focussed and less stressed."
+            else:
+                "Doing more yoga helps to maintain your focussed state."
+
+            $ perk_system.add_stat_perk(Stat_Perk(description = "Temporary increase to focus after yoga.", foc_bonus = 2, bonus_is_temp = True, duration = 3), "Yoga Focus")
+
+        "Yoga class\n{color=#ff0000}{size=18}Requires: 30 energy{/size}{/color} (disabled)" if mc.energy < 30:
+            pass
+
+        "Cardio" if mc.energy >= 50:
+            "You do some cardiovascular exercises."
+            $ mc.change_energy(-50)
+            if mc.max_energy < 200:
+                $ mc.change_max_energy(5)
+                "You feel your body strengthen."
+            elif mc.max_energy < 250:
+                $ mc.change_max_energy(2)
+                "You feel a slight improvement from your workout."
+                if mc.max_energy > 250:
+                    $ mc.max_energy = 250
+            else:
+                "You have done as much as you can in the gym to improve your fitness. Workouts will no longer give any measurable gains."
+
+        "Cardio\n{color=#ff0000}{size=18}Requires: 50 energy{/size}{/color} (disabled)" if mc.energy < 50:
+            pass
+
+        "Nothing":
+            return
+
+    $ mc.business.change_funds(-gym_session_cost)
+
+    call advance_time from _call_advance_time_gym_workout
     return
