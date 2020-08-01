@@ -124,7 +124,7 @@ init -1:
             position_option_list = []
             position_option_list.append(kissing, 30 + the_person.get_opinion_score("kissing"))
             position_option_list.append(handjob, 30 + the_person.get_opinion_score("giving handjobs"))
-            # position_option_list.append(drysex_cowgirl, 30 + the_person.get_opinion_score("taking control")) #TODO Drysex isn't finished yet
+            position_option_list.append(drysex_cowgirl, 30 + the_person.get_opinion_score("taking control"))
             return get_random_from_weighted_list(position_option_list)
 
 
@@ -528,7 +528,7 @@ init 1000 python:
             the_person.sluttiness = renpy.random.randint(60,120)
             mc.energy = mc.max_energy
             the_person.energy = the_person.max_energy
-            renpy.call("get_fucked", the_person, start_position = cowgirl, unit_test = True, the_goal = get_random_from_list(list_of_all_dom_sex_goals))
+            renpy.call("get_fucked", the_person, unit_test = True, the_goal = get_random_from_list(list_of_all_dom_sex_goals))
             unit_test_count += 1
 
     def GIC_unit_test_2(count = 1):#Count is the number of times we repeat the unit test.
