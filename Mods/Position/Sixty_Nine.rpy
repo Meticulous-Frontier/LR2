@@ -132,7 +132,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
             "Focus on you":
                 "You pause your licking to talk dirty to her."
                 mc.name "Wow that feels good. Take it deep, slut!"
-                if the_girl.get_opinion_score("taking control") > 0:
+                if the_girl.is_dominant():
                     "[the_girl.possessive_title] pulls off you for a second and chuckles."
                     the_girl.char "[the_girl.mc_title]... I think you've forgotten who is on top!"
                     "[the_girl.possessive_title] pushes her pussy back up against your face and begins to grind herself on your face."
@@ -231,7 +231,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                 mc.name "[the_girl.title]! Holy hell girl that feels so good."
                 "You can feel [the_girl.possessive_title]'s tongue slithering back and forth across the base of your dick."
                 $ mc.change_arousal(5)
-                if the_girl.get_opinion_score("taking control") > 0:
+                if the_girl.is_dominant():
                     "Suddenly, [the_girl.possessive_title] pulls you out of her throat."
                     the_girl.char "Hey now, don't forget about me!"
                     "You open your eyes just in time to see her back her pussy down onto your face as she begins to grind herself on you."

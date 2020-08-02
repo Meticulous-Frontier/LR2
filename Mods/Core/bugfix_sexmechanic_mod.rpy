@@ -639,7 +639,7 @@ label condom_ask_enhanced(the_person):
                 menu:
                     "Insist on condom":
                         mc.name "I think a condom is a good idea."
-                        if the_person.get_opinion_score("taking control") > 0:
+                        if the_person.is_dominant():
                             the_person.char "OK. Let me put this another way."
                             "[the_person.title] grabs the condom and throws it off to the side."
                             the_person.char "Either we fuck and you come inside me or we don't fuck at all."
@@ -769,13 +769,13 @@ label condom_ask_enhanced(the_person):
             the_person.char "I think that we should use a condom."
         menu:
             "Put on a condom":
-                if the_person.get_opinion_score("taking control") > 0 and the_person.get_opinion_score("bareback sex") > 0: # likes it bare and is not a pushover
+                if the_person.is_dominant() and the_person.get_opinion_score("bareback sex") > 0: # likes it bare and is not a pushover
                     "[the_person.title] takes a hold of your hand."
                     the_person.char "You don't really need that, do you?"
                     menu:
                         "Insist on condom":
                             mc.name "I think a condom is a good idea."
-                            if the_person.get_opinion_score("taking control") > 1:
+                            if the_person.is_dominant():
                                 the_person.char "OK. Let me put this another way."
                                 "[the_person.title] grabs the condom and throws it off to the side."
                                 the_person.char "Either you fuck me raw or we don't fuck at all."
@@ -869,7 +869,7 @@ label put_on_condom_routine(the_person):
         "[the_person.title] takes the condom out of your hand."
         "She holds it at the top of your cock with one hand as she strokes further and further with the other hand, rolling the condom down onto it."
     elif the_person.get_opinion_score("bareback sex") < 0: # condoms are good
-        if the_person.get_opinion_score("taking control") > 0:
+        if the_person.is_dominant():
             the_person.char "Good choice."
             "You roll the condom onto your cock as [the_person.title] watches eagerly."
         else:

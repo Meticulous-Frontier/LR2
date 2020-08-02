@@ -204,7 +204,7 @@ label mom_ntr_mod_action_label:
             "Keep looking":
                 "You decide to see what they are up to."
                 "They go on kissing. After a while, [man_name] places his hands on [the_person.possessive_title]'s ass, caressing it."
-                if the_person.sluttiness <= 30 or (the_person.get_opinion_score("taking control") > 0 and the_person.sluttiness <= 45):
+                if the_person.sluttiness <= 30 or (the_person.is_dominant() and the_person.sluttiness <= 45):
                     "[the_person.possessive_title] looks surprised by [man_name]'s actions."
                     the_person.char "No, [man_name]. We work together, we should not cross some lines."
                     the_person.char "It's late. Thanks for the wonderful evening. I'll see you in the office."

@@ -93,7 +93,7 @@ label scene_SB_cum_fetish_blowjob_2(the_girl, the_location, the_object):
         "Turned on by her filthy words, you grab the back of her head with both hands and force your dick right back down her throat."
         "You fuck her face roughly. Her throat makes vulgar suction noises with each thrust, and you can see her throat bulging slightly."
         $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 3)
-    elif the_girl.get_opinion_score("taking control") > 0:
+    elif the_girl.is_dominant():
         "[the_girl.possessive_title] grabs your hands in hers. She holds your hands as she looks up at you, making eye contact."
         "With her hands holding yours, she opens her mouth wide and descends on your cock."
         "She bottoms out and her nose is touching your pubic hair. You are balls deep down her throat."

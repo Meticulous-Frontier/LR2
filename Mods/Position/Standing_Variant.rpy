@@ -381,7 +381,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                 mc.name "Okay, [the_girl.title], lets see what you can do."
                 "Even with just one foot on the floor and the other in the air as you hold it, [the_girl.possessive_title] is able to begin gyrating her hips up against you."
                 "Enjoying her skill, you stand and watch, entranced as [the_girl.possessive_title] stirs her creamy womb with your shaft."
-                if the_girl.get_opinion_score("taking control") > 0:
+                if the_girl.is_dominant():
                     "[the_girl.possessive_title] reaches back with one hand and grabs your hip and shoves you in deep inside her."
                     "She holds it there completely still, but you can still feel her stimulate you by clenching and releasing her pelvic muscles."
                     the_girl.char "[the_girl.mc_title]... You've always been so good to me... Let [the_girl.possessive_title] take care of you this time!"

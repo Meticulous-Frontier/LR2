@@ -109,7 +109,7 @@ label scene_SB_reverse_cowgirl_2(the_girl, the_location, the_object):
         "Admire her":
             mc.name "Damn [the_girl.title], your ass is amazing!"
             "[the_girl.possessive_title] wiggles back and forth a few more times, then looks back at you and smiles."
-            if the_girl.get_opinion_score("taking control") > 0:
+            if the_girl.is_dominant():
                 the_girl.char "Do you like that, [the_girl.mc_title]? Just lay back and let me take care of you..."
                 "You run your hands along your hips while she grinds back against you. Her cunt feels amazing wrapped around you."
                 if the_girl.arousal > 130:
@@ -304,7 +304,7 @@ label transition_missionary_SB_reverse_cowgirl(the_girl, the_location, the_objec
     $ the_girl.draw_person(position = "missionary")
     "Looking down at [the_girl.possessive_title], you decide it's time to change things up a little bit."
     mc.name "Hey, why don't we change it up a bit, do you wanna be on top for a bit?"
-    if the_girl.get_opinion_score("taking control") > 0:
+    if the_girl.is_dominant():
         the_girl.char "Oh! I love being on top. Let's do it!"
         $ the_girl.change_arousal(5)
     else:

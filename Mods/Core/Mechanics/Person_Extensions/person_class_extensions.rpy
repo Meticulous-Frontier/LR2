@@ -1134,6 +1134,15 @@ init -1 python:
         return False
     Person.remove_role = remove_role
 
+    # helper function to determine if person is dominant
+    def is_dominant(self):
+        if self.get_opinion_score("taking control") > 0:
+            return True
+        if self.personality is alpha_personality:
+            return True
+        return False
+
+
 ################################################
 # Outfit functions - wear a specialized outfit #
 ################################################
