@@ -49,7 +49,7 @@ init -1:
     python:
         #List of completion requirements for different possible dom sex positions.
         def dom_requirement_creampie(the_person, the_report):
-            if report_log["guy orgasms"] >= 1and the_person.has_creampie_cum():
+            if report_log["guy orgasms"] >= 1 and the_person.has_creampie_cum():
                 return True
             return False
 

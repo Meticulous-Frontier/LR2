@@ -17,13 +17,14 @@ init 2 python:
         return get_random_from_list(list_of_possible_people)
 
     girlfriend_service = ActionMod("Girlfriend Service", girlfriend_service_requirement, "girlfriend_service_label",
-        menu_tooltip = "Your girlfriend offers sex at work.", category = "Business", is_crisis = True, crisis_weight = girlfriend_service_weight)
+        menu_tooltip = "WIP: Your girlfriend offers sex at work.", category = "Business", is_crisis = True, crisis_weight = girlfriend_service_weight)
 
 label girlfriend_service_label():
     $ the_person = girlfriend_service_get_person()
     if the_person is None:
         return
 
+    "Dev" "This event is a work in progress."
     "As you are getting your work done, your girlfriend, [the_person.title], comes up to you."
     $ the_person.draw_person()
     the_person.char "Hey [the_person.mc_title]. Have a sec?"
