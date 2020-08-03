@@ -17,7 +17,9 @@ init 2 python:
         return get_random_from_list(list_of_possible_people)
 
     girlfriend_service = ActionMod("Girlfriend Service", girlfriend_service_requirement, "girlfriend_service_label",
-        menu_tooltip = "WIP: Your girlfriend offers sex at work.", category = "Business", is_crisis = True, crisis_weight = girlfriend_service_weight)
+        menu_tooltip = "WIP: Your girlfriend offers sex at work.", category = "Business", 
+        initialization = init_action_mod_disabled,
+        is_crisis = True, crisis_weight = girlfriend_service_weight)
 
 label girlfriend_service_label():
     $ the_person = girlfriend_service_get_person()
