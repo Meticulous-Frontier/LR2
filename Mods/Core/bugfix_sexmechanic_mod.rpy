@@ -893,7 +893,7 @@ label watcher_check_enhanced(the_person, the_position, the_object, the_report): 
             $ watcher.draw_person()
             watcher.char "Oh my good, that looks amazing..."
             if can_join_threesome(watcher, the_person, the_position.position_tag):
-                the_person.char "Can I... can I join you? I want some too!"
+                watcher.char "Can I... can I join you? I want some too!"
                 $ ask_for_threesome = True
                 menu:
                     "Let her join":
