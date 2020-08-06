@@ -15,7 +15,7 @@ init:
             orgasm_description = "orgasm_drysex_cowgirl",
             taboo_break_description = "taboo_break_drysex_cowgirl",
             verb = "be ridden by", verbing = "being ridden by",
-            opinion_tags = ["vaginal sex", "taking control", "get mc off", "get off", "waste cum"], record_class = "Vaginal Sex",
+            opinion_tags = ["vaginal sex", "taking control", "get mc off", "get off", "waste cum"],
             default_animation = blowjob_bob,
             associated_taboo = "touching_body")
 

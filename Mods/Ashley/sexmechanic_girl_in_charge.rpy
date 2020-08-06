@@ -316,7 +316,7 @@ init 2:
 
 
 
-label get_fucked(the_person, the_goal = None, sex_path = None, private= True, start_position = None, start_object = None, skip_intro = False, report_log = None, ignore_taboo = False, prohibit_tags = [], unit_test = False):
+label get_fucked(the_person, the_goal = None, sex_path = None, private= True, start_position = None, start_object = None, skip_intro = False, report_log = None, ignore_taboo = False, prohibit_tags = [], unit_test = False, allow_continue = True):
     $ apply_sex_modifiers(the_person) #Apply sex modifiers before choosing goals and positions to avoid choosing positions girl shouldn't accept
     $ finished = False #When True we exit the main loop (or never enter it, if we can't find anything to do)
     $ object_choice = start_object
@@ -440,55 +440,69 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
     #TODO create positive feedback here for accomplishing sex goal
     #TODO conditions where sex can be continued. E.G. If she got off but leaves mc aroused, she may offer to keep going or relinquish control
     #First condition, she is obedient. offers to keep going or to let MC take over.
-    if sex_can_continue(the_person, the_node = current_node) and the_person.obedience > 100 and mc.arousal > 50:
-        "As she finishes up, [the_person.title] gives your erection a couple strokes."
-        the_person.char "Actually, do you want me to keep going? Or maybe you should take over..."
-        menu:
-            "Keep going":
-                mc.name 'Keep going, this is hot.'
-                the_person.char "Yes sir!"
-                call get_fucked(the_person, private= private, start_position = current_node.position, start_object = object_choice, skip_intro = True, report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, unit_test = unit_test) from GIC_keeps_going_01
-            "Take over":
-                mc.name "Come here, I'm not done with you yet."
-                call fuck_person(the_person, private = private, ignore_taboo = ignore_taboo, report_log = report_log, prohibit_tags = prohibit_tags) from GIC_guy_takes_over_01
-            "Finish":
-                mc.name "Let's be done for now."
-                the_person.char "Okay."
-    #Second condition, she isn't obedient but atleast likes MC a little bit. She offers to continue
-    elif sex_can_continue(the_person, the_node = current_node) and the_person.love > 0 and mc.arousal > 50:
-        "As she finishes up, [the_person.title] gives your erection a couple strokes."
-        the_person.char "Wow, you are still rock hard. Do you want me to keep going?"
-        menu:
-            "Keep going":
-                mc.name 'Yes, please keep going.'
-                the_person.char "Okay, I can do that!"
-                call get_fucked(the_person, private= private, start_position = current_node.position, start_object = object_choice, skip_intro = True, report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, unit_test = unit_test) from GIC_keeps_going_02
-            "Finish":
-                mc.name "Let's be done for now."
-                the_person.char "Okay."
 
-    #Third condition, she doesn't care for MC. She forces him to beg. She may or may not comply (think Gabrielle)
-    elif sex_can_continue(the_person, the_node = current_node) and mc.arousal > 50:
-        "As she finishes up, [the_person.title] looks at your rock hard cock."
-        the_person.char "Still hard? I bet you want me to keep going, don't you..."
-        "She takes a pause before she continues."
-        the_person.char "If you want me to keep going, you're going to have to beg for it. Want me to?"
-        menu:
-            "Beg her to continue":
-                mc.name "Oh god, please keep going. I'm so close, just a little bit farther!"
-                "She laughs at your plight while she considers what to do."
-                if renpy.random.randint(-150,0) < the_person.love:  #Even at -100 love, she has a 1/3 chance of continueing
-                    the_person.char "Hmm, I guess it's only fair. Maybe I'll even finish again!"
-                    $ the_person.change_stats(obedience = -5, slut_temp = 5)
-                    call get_fucked(the_person, private= private, start_position = current_node.position, start_object = object_choice, skip_intro = True, report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, unit_test = unit_test) from GIC_keeps_going_03
-                else:
-                    the_person.char "Ha! It was worth letting you defile me just to hear you beg. Not a chance!"
-                    "[the_person.possessive_title] gets up, leaving you hanging."
-                    $ the_person.change_stats(obedience = -5, slut_temp = 5)
-            "Finish":
-                mc.name "There's nothing special about you. Let's be done, I can always get a more willing cunt."
-                the_person.char "Whatever [the_person.mc_title], your loss!"
-                $ the_person.change_stats(obedience = 2, love = -5)
+    if allow_continue: #Allows sex to keep going after girl finishes objectives
+        if sex_can_continue(the_person, the_node = current_node) and the_person.obedience > 100 and mc.arousal > 50:
+            "As she finishes up, [the_person.title] gives your erection a couple strokes."
+            the_person.char "Actually, do you want me to keep going? Or maybe you should take over..."
+            menu:
+                "Keep going":
+                    mc.name 'Keep going, this is hot.'
+                    the_person.char "Yes sir!"
+                    call get_fucked(the_person, private= private, start_position = current_node.position, start_object = object_choice, skip_intro = True, report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, unit_test = unit_test) from GIC_keeps_going_01
+                "Take over":
+                    mc.name "Come here, I'm not done with you yet."
+                    call fuck_person(the_person, private = private, ignore_taboo = ignore_taboo, report_log = report_log, prohibit_tags = prohibit_tags) from GIC_guy_takes_over_01
+                "Finish":
+                    mc.name "Let's be done for now."
+                    the_person.char "Okay."
+        #Second condition, she isn't obedient but atleast likes MC a little bit. She offers to continue
+        elif sex_can_continue(the_person, the_node = current_node) and the_person.love > 0 and mc.arousal > 50:
+            "As she finishes up, [the_person.title] gives your erection a couple strokes."
+            the_person.char "Wow, you are still rock hard. Do you want me to keep going?"
+            menu:
+                "Keep going":
+                    mc.name 'Yes, please keep going.'
+                    the_person.char "Okay, I can do that!"
+                    call get_fucked(the_person, private= private, start_position = current_node.position, start_object = object_choice, skip_intro = True, report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, unit_test = unit_test) from GIC_keeps_going_02
+                "Finish":
+                    mc.name "Let's be done for now."
+                    the_person.char "Okay."
+
+        #Third condition, she doesn't care for MC. She forces him to beg. She may or may not comply (think Gabrielle)
+        elif sex_can_continue(the_person, the_node = current_node) and mc.arousal > 50:
+            "As she finishes up, [the_person.title] looks at your rock hard cock."
+            the_person.char "Still hard? I bet you want me to keep going, don't you..."
+            "She takes a pause before she continues."
+            the_person.char "If you want me to keep going, you're going to have to beg for it. Want me to?"
+            menu:
+                "Beg her to continue":
+                    mc.name "Oh god, please keep going. I'm so close, just a little bit farther!"
+                    "She laughs at your plight while she considers what to do."
+                    if renpy.random.randint(-150,0) < the_person.love:  #Even at -100 love, she has a 1/3 chance of continueing
+                        the_person.char "Hmm, I guess it's only fair. Maybe I'll even finish again!"
+                        $ the_person.change_stats(obedience = -5, slut_temp = 5)
+                        call get_fucked(the_person, private= private, start_position = current_node.position, start_object = object_choice, skip_intro = True, report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, unit_test = unit_test) from GIC_keeps_going_03
+                    else:
+                        the_person.char "Ha! It was worth letting you defile me just to hear you beg. Not a chance!"
+                        "[the_person.possessive_title] gets up, leaving you hanging."
+                        $ the_person.change_stats(obedience = -5, slut_temp = 5)
+                "Finish":
+                    mc.name "There's nothing special about you. Let's be done, I can always get a more willing cunt."
+                    the_person.char "Whatever [the_person.mc_title], your loss!"
+                    $ the_person.change_stats(obedience = 2, love = -5)
+        elif sex_can_continue(the_person) and the_person.love > 50: #She loves you, so she leaves it up to you if you want to keep going.
+            "As she finishes up, [the_person.title] cuddles up beside you."
+            the_person.char "Mmm, thank you. I needed that really bad."
+            "She paues for a moment."
+            the_person.char "Are you good? Or do you want to keep going?"
+            menu:
+                "Take over":
+                    mc.name "Come here, I'm not done with you yet."
+                    call fuck_person(the_person, private = private, ignore_taboo = ignore_taboo, report_log = report_log, prohibit_tags = prohibit_tags) from GIC_guy_takes_over_03
+                "Finish":
+                    mc.name "Let's be done for now."
+                    the_person.char "Okay."
 
     python:
         clear_sex_modifiers(the_person)
