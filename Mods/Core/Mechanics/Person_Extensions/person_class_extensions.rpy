@@ -1141,6 +1141,7 @@ init -1 python:
         if self.personality is alpha_personality:
             return True
         return False
+    Person.is_dominant = is_dominant
 
 
 ################################################
