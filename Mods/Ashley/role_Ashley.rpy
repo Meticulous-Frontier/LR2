@@ -181,6 +181,7 @@ init -1 python:
 
     def hire_ashley():
         mc.business.add_employee_production(ashley)
+        ashley.set_work([1,2,3], mc.business.p_div)  #New in 31.1 #TODO
         town_relationships.update_relationship(ashley, stephanie, "Sister")
         town_relationships.update_relationship(nora, ashley, "Friend")
         town_relationships.update_relationship(lily, ashley, "Rival")
